@@ -1,7 +1,7 @@
 'use client';
 
 import PropTypes from 'prop-types';
-import { useCallback, useLayoutEffect, useMemo, useRef, useState, useEffect } from 'react';
+import { useCallback, useLayoutEffect, useMemo, useRef, useState } from 'react';
 
 import InkeepTrigger from 'components/shared/inkeep-trigger';
 import Link from 'components/shared/link';
@@ -36,150 +36,173 @@ const laneRank = (lane) => {
   return index === -1 ? UNRANKED_PRIORITY : index;
 };
 
-// Fallback reserve for the "More" trigger if it cannot be measured yet.
-const FALLBACK_TOGGLE_WIDTH = 36;
+// Design-fixed control widths: the search field is w-60 (240px) and both the
+// search and Ask AI collapse to a w-9 (36px) icon.
+const SEARCH_WIDTH_FULL = 240;
+const CONTROL_WIDTH_ICON = 36;
+const SEARCH_COLLAPSE_SAVING = SEARCH_WIDTH_FULL - CONTROL_WIDTH_ICON; // exact
+// The Ask AI label width is content-driven; this estimate only shifts the exact
+// width at which that button collapses, never the monotonic ordering below.
+const ASK_COLLAPSE_SAVING = 52;
 
-// Priority-plus overflow: measure each lane's intrinsic width once (re-measured
-// after web fonts load), then on every container resize work out how many lanes
-// fit in the nav's available width and push the rest into the "More" menu, one
-// at a time, lowest priority first.
+// One monotonic degradation chain driven by a SINGLE stable measurement: the
+// header row's content width. That width depends only on the viewport, never on
+// whether the search box, Ask AI, or any lane has collapsed, so there is no
+// feedback loop. Every decision below is a step function of that one shrinking
+// input, which makes degradation strictly monotonic: the search field collapses
+// first, then Ask AI, then lanes move into the "More" menu lowest priority
+// first. Nothing ever pops back inline or oscillates at a boundary.
 //
-// When anything overflows we reserve the measured width of the "More" trigger
-// (plus one list gap) inside the fit check. The trigger is always present, so
-// this is a conservative reserve that makes the very first computed result the
-// final one: overflow converges in a single layout pass with no boundary pop or
-// second-frame drop, since the reserved available width is derived from stable
-// quantities that do not change when lanes are hidden.
-const useLaneOverflow = (navRef, toggleRef, lanes) => {
-  const widthsRef = useRef([]);
-  const gapRef = useRef(0);
-  const toggleWidthRef = useRef(FALLBACK_TOGGLE_WIDTH);
-  const prevWidthRef = useRef(null);
-  const prevVisibleCountRef = useRef(null);
-  const [state, setState] = useState({ isMeasured: false, hiddenIndexes: [] });
+// The lane space at each stage is reconstructed from an invariant base (the
+// lane space when the whole right cluster is collapsed) plus the known savings,
+// so the lane calculation always reflects the right cluster's FINAL collapsed
+// width while it is deciding overflow.
+const useResponsiveDocsHeader = (rowRef, navRef, lanes) => {
+  const metricsRef = useRef({ laneWidths: [], lanesTotal: 0, laneGap: 0, baseCollapsed: 0 });
+  const appliedRef = useRef({ searchCollapsed: false, askCollapsed: false });
+  const [state, setState] = useState({
+    isMeasured: false,
+    searchCollapsed: false,
+    askCollapsed: false,
+    hiddenIndexes: [],
+  });
 
-  // Which lanes overflow, computed purely from the cached intrinsic widths and
-  // the live available width (no layout writes, so resize never thrashes).
-  const computeHidden = useCallback(() => {
-    const nav = navRef.current;
-    const widths = widthsRef.current;
-    if (!nav || widths.length === 0) return [];
+  // Mirror the applied collapse state for the (rare) re-measure path so the
+  // invariant base stays consistent regardless of the live layout.
+  appliedRef.current = {
+    searchCollapsed: state.searchCollapsed,
+    askCollapsed: state.askCollapsed,
+  };
 
-    const available = nav.clientWidth;
-    const gap = gapRef.current;
-    const measure = (indexes) =>
+  const getRowContent = useCallback(() => {
+    const row = rowRef.current;
+    if (!row) return 0;
+    const styles = getComputedStyle(row);
+    return (
+      row.clientWidth -
+      parseFloat(styles.paddingLeft || '0') -
+      parseFloat(styles.paddingRight || '0')
+    );
+  }, [rowRef]);
+
+  const compute = useCallback(() => {
+    const { laneWidths, lanesTotal, laneGap, baseCollapsed } = metricsRef.current;
+    if (laneWidths.length === 0) {
+      return { searchCollapsed: false, askCollapsed: false, hiddenIndexes: [] };
+    }
+    const rowContent = getRowContent();
+
+    // Lane space available at each collapse stage. The "More" trigger sits in
+    // the measured right cluster, so it is already excluded from these figures
+    // (no separate reserve is needed and overflow settles in one pass).
+    const spaceBothCollapsed = rowContent + baseCollapsed;
+    const spaceSearchCollapsed = spaceBothCollapsed - ASK_COLLAPSE_SAVING;
+    const spaceNoneCollapsed = spaceSearchCollapsed - SEARCH_COLLAPSE_SAVING;
+
+    if (lanesTotal <= spaceNoneCollapsed + 0.5) {
+      return { searchCollapsed: false, askCollapsed: false, hiddenIndexes: [] };
+    }
+    if (lanesTotal <= spaceSearchCollapsed + 0.5) {
+      return { searchCollapsed: true, askCollapsed: false, hiddenIndexes: [] };
+    }
+    if (lanesTotal <= spaceBothCollapsed + 0.5) {
+      return { searchCollapsed: true, askCollapsed: true, hiddenIndexes: [] };
+    }
+
+    // Overflow regime: both controls are icons; drop lowest priority first,
+    // breaking ties by dropping the right-most lane.
+    const widthOf = (indexes) =>
       indexes.length === 0
         ? 0
-        : indexes.reduce((sum, index) => sum + widths[index], 0) + gap * (indexes.length - 1);
-
-    const visible = widths.map((_, index) => index);
-    // No overflow needed: everything fits without the "More" trigger.
-    if (measure(visible) <= available + 0.5) return [];
-
-    // Something must move out, so reserve room for the (always-present) trigger
-    // plus a list gap and drop lowest priority first (ties: right-most first).
-    const reserved = available - toggleWidthRef.current - gap;
-    const fits = (indexes) => measure(indexes) <= reserved + 0.5;
-
+        : indexes.reduce((sum, i) => sum + laneWidths[i], 0) + laneGap * (indexes.length - 1);
+    const visible = laneWidths.map((_, i) => i);
     const dropOrder = [...visible].sort((a, b) => {
       const rankDelta = laneRank(lanes[b]) - laneRank(lanes[a]);
       return rankDelta !== 0 ? rankDelta : b - a;
     });
-
     const hidden = new Set();
-    for (const index of dropOrder) {
-      hidden.add(index);
-      if (fits(visible.filter((i) => !hidden.has(i)))) break;
+    for (const i of dropOrder) {
+      hidden.add(i);
+      if (widthOf(visible.filter((x) => !hidden.has(x))) <= spaceBothCollapsed + 0.5) break;
     }
-
-    // Candidate result from intrinsic widths only.
-    const candidateHidden = visible.filter((index) => hidden.has(index));
-
-    // Monotonic degradation: as available width shrinks, never increase the
-    // number of visible lanes (avoids 2->3->2 jumps around breakpoints like
-    // the Search collapse). When width grows again, allow lanes to return.
-    const total = widths.length;
-    const candidateVisible = total - candidateHidden.length;
-    const prevWidth = prevWidthRef.current ?? available;
-    const prevVisible = prevVisibleCountRef.current ?? candidateVisible;
-
-    let appliedHidden = candidateHidden;
-    if (available < prevWidth && candidateVisible > prevVisible) {
-      const applied = new Set(candidateHidden);
-      for (const idx of dropOrder) {
-        if (!applied.has(idx)) applied.add(idx);
-        if (applied.size === total - prevVisible) break;
-      }
-      appliedHidden = Array.from(applied).sort((a, b) => a - b);
-    }
-
-    prevWidthRef.current = available;
-    prevVisibleCountRef.current = total - appliedHidden.length;
-    return appliedHidden;
-  }, [navRef, lanes]);
+    return {
+      searchCollapsed: true,
+      askCollapsed: true,
+      hiddenIndexes: visible.filter((i) => hidden.has(i)),
+    };
+  }, [getRowContent, lanes]);
 
   useLayoutEffect(() => {
+    const row = rowRef.current;
     const nav = navRef.current;
-    if (!nav) return undefined;
+    if (!row || !nav) return undefined;
 
-    // Cache each lane's own width. Hidden lanes report 0 (display: none), so we
-    // keep their last known width rather than overwriting it with a stale zero.
+    // Cache each lane's intrinsic width (hidden lanes report 0, so keep their
+    // last known width) and the invariant collapsed-cluster lane space. The
+    // base adds back the savings for whatever is currently expanded, so it is
+    // the same value no matter which controls happen to be collapsed when it
+    // runs.
     const measure = () => {
       const children = Array.from(nav.children);
-      // Drop any cached widths from a longer previous lane set.
-      widthsRef.current.length = children.length;
-      children.forEach((child, index) => {
+      const widths = metricsRef.current.laneWidths;
+      widths.length = children.length;
+      children.forEach((child, i) => {
         const width = child.getBoundingClientRect().width;
-        if (width > 0) widthsRef.current[index] = width;
+        if (width > 0) widths[i] = width;
       });
       const styles = getComputedStyle(nav);
-      gapRef.current = parseFloat(styles.columnGap || styles.gap || '0') || 0;
-      const toggleWidth = toggleRef.current?.getBoundingClientRect().width;
-      if (toggleWidth > 0) toggleWidthRef.current = toggleWidth;
+      const laneGap = parseFloat(styles.columnGap || styles.gap || '0') || 0;
+      metricsRef.current.laneGap = laneGap;
+      metricsRef.current.lanesTotal =
+        widths.reduce((sum, width) => sum + (width || 0), 0) +
+        laneGap * Math.max(0, widths.length - 1);
+
+      const savingNow =
+        (appliedRef.current.searchCollapsed ? 0 : SEARCH_COLLAPSE_SAVING) +
+        (appliedRef.current.askCollapsed ? 0 : ASK_COLLAPSE_SAVING);
+      metricsRef.current.baseCollapsed = nav.clientWidth + savingNow - getRowContent();
     };
 
     measure();
-    setState({ isMeasured: true, hiddenIndexes: computeHidden() });
+    setState({ isMeasured: true, ...compute() });
 
     let cancelled = false;
     // Fonts can change intrinsic widths; re-measure once they are ready.
     document.fonts?.ready.then(() => {
       if (cancelled) return;
       measure();
-      setState({ isMeasured: true, hiddenIndexes: computeHidden() });
+      setState({ isMeasured: true, ...compute() });
     });
 
-    // Recompute (not re-measure) on resize, coalesced to one frame.
+    // Recompute (not re-measure) on resize of the STABLE row, coalesced to one
+    // animation frame. Observing the row, not the nav, keeps the input free of
+    // feedback from the collapses it drives.
     let frame = null;
     const resizeObserver = new ResizeObserver(() => {
       if (frame) cancelAnimationFrame(frame);
-      frame = requestAnimationFrame(() => {
-        setState({ isMeasured: true, hiddenIndexes: computeHidden() });
-      });
+      frame = requestAnimationFrame(() => setState({ isMeasured: true, ...compute() }));
     });
-    resizeObserver.observe(nav);
+    resizeObserver.observe(row);
 
     return () => {
       cancelled = true;
       if (frame) cancelAnimationFrame(frame);
       resizeObserver.disconnect();
     };
-  }, [navRef, lanes, computeHidden, toggleRef]);
-
-  // Reset monotonic tracking when the lane set itself changes.
-  useEffect(() => {
-    prevWidthRef.current = null;
-    prevVisibleCountRef.current = null;
-  }, [lanes]);
+  }, [rowRef, navRef, lanes, compute, getRowContent]);
 
   return state;
 };
 
 const DocsHeader = ({ customType = null, docPageType = null, basePath, navigation }) => {
   const lanes = useMemo(() => getDocsHeaderLanes(navigation), [navigation]);
+  const rowRef = useRef(null);
   const navRef = useRef(null);
-  const moreToggleRef = useRef(null);
-  const { isMeasured, hiddenIndexes } = useLaneOverflow(navRef, moreToggleRef, lanes);
+  const { isMeasured, searchCollapsed, askCollapsed, hiddenIndexes } = useResponsiveDocsHeader(
+    rowRef,
+    navRef,
+    lanes
+  );
   const overflowLanes = useMemo(
     () => hiddenIndexes.map((index) => lanes[index]).filter(Boolean),
     [hiddenIndexes, lanes]
@@ -193,7 +216,10 @@ const DocsHeader = ({ customType = null, docPageType = null, basePath, navigatio
       )}
     >
       {/* Below lg the shared mobile menu overlays its search + burger on the right. */}
-      <div className="relative z-10 flex h-full w-full items-stretch gap-x-7 px-8 lg:pr-28 md:pl-5 sm:pr-24">
+      <div
+        className="relative z-10 flex h-full w-full items-stretch gap-x-7 px-8 lg:pr-28 md:pl-5 sm:pr-24"
+        ref={rowRef}
+      >
         {/* The 189px lockup and 28px gap align the first lane with the Figma header. */}
         <Link
           className="flex w-[189px] shrink-0 items-center gap-x-3.5 lg:w-auto lg:min-w-0 lg:shrink"
@@ -214,19 +240,7 @@ const DocsHeader = ({ customType = null, docPageType = null, basePath, navigatio
             {customType?.title || 'Docs'}
           </span>
         </Link>
-        <nav className="relative flex min-w-0 flex-1 lg:hidden" aria-label="Docs sections">
-          {/* Edge-fade prototype: a soft right fade suggests additional items are
-              available in the overflow menu without implying scrollability. */}
-          {isMeasured && hiddenIndexes.length > 0 && (
-            <span
-              className={cn(
-                'pointer-events-none absolute inset-y-0 right-0 w-8',
-                'bg-gradient-to-l from-white/100 to-white/0',
-                'dark:from-black-new/100 dark:to-black-new/0'
-              )}
-              aria-hidden
-            />
-          )}
+        <nav className="flex min-w-0 flex-1 lg:hidden" aria-label="Docs sections">
           <DocsNavigation
             className={cn('min-w-0 flex-1 overflow-hidden', !isMeasured && 'invisible')}
             navigation={lanes}
@@ -236,7 +250,12 @@ const DocsHeader = ({ customType = null, docPageType = null, basePath, navigatio
           />
         </nav>
         <div className="flex shrink-0 items-center gap-x-2 lg:hidden">
-          <InkeepTrigger docPageType={docPageType} isDocsHeader />
+          <InkeepTrigger
+            docPageType={docPageType}
+            isDocsHeader
+            isSearchCollapsed={searchCollapsed}
+            isAiCollapsed={askCollapsed}
+          />
           <span className="mx-1 h-5 w-px bg-gray-new-85 dark:bg-gray-new-20" aria-hidden="true" />
           <Link
             className="flex h-9 items-center px-2 text-[15px] leading-none whitespace-nowrap text-gray-new-20 transition-colors duration-200 hover:text-black-new dark:text-gray-new-80 dark:hover:text-white"
@@ -255,11 +274,7 @@ const DocsHeader = ({ customType = null, docPageType = null, basePath, navigatio
             Sign up
           </Link>
           <span className="mx-1 h-5 w-px bg-gray-new-85 dark:bg-gray-new-20" aria-hidden="true" />
-          <DocsHeaderMenu
-            overflowLanes={overflowLanes}
-            basePath={basePath}
-            buttonRef={moreToggleRef}
-          />
+          <DocsHeaderMenu overflowLanes={overflowLanes} basePath={basePath} />
         </div>
       </div>
     </div>

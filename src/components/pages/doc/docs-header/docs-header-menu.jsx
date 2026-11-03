@@ -171,23 +171,12 @@ const ThemeOptions = () => {
   );
 };
 
-const DocsHeaderMenu = ({ className = null, overflowLanes = [], basePath, buttonRef = null }) => {
+const DocsHeaderMenu = ({ className = null, overflowLanes = [], basePath }) => {
   const [isOpen, setIsOpen] = useState(false);
   const menuRef = useRef(null);
   const toggleRef = useRef(null);
   const pathname = usePathname();
   const id = useId();
-
-  // Expose the toggle to the parent so the overflow calculation can reserve its
-  // width, while keeping the internal ref used for focus return on Escape.
-  const setToggleRef = (node) => {
-    toggleRef.current = node;
-    if (typeof buttonRef === 'function') {
-      buttonRef(node);
-    } else if (buttonRef) {
-      buttonRef.current = node;
-    }
-  };
 
   useClickOutside([menuRef], () => setIsOpen(false));
 
@@ -212,7 +201,7 @@ const DocsHeaderMenu = ({ className = null, overflowLanes = [], basePath, button
   return (
     <div className={cn('relative', className)} ref={menuRef}>
       <button
-        ref={setToggleRef}
+        ref={toggleRef}
         className={cn(
           'flex size-9 items-center justify-center rounded-none text-gray-new-20 transition-colors duration-200 hover:bg-gray-new-98',
           'dark:text-gray-new-80 dark:hover:bg-gray-new-10'
@@ -277,7 +266,6 @@ DocsHeaderMenu.propTypes = {
   className: PropTypes.string,
   overflowLanes: PropTypes.array,
   basePath: PropTypes.string.isRequired,
-  buttonRef: PropTypes.oneOfType([PropTypes.func, PropTypes.shape({ current: PropTypes.any })]),
 };
 
 export default DocsHeaderMenu;

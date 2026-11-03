@@ -76,6 +76,12 @@ const Item = ({
 
   const [isActive, setIsActive] = useState(false);
 
+  // Prototype: a lane that overflows into "More" fades out, then drops from
+  // layout, instead of vanishing instantly. `isRemoved` is the post-fade state.
+  // The fade is purely visual (opacity), so it never changes a cached lane width
+  // and never feeds the header's ResizeObserver, which watches the stable row.
+  const [isRemoved, setIsRemoved] = useState(isHidden);
+
   useEffect(() => {
     const isActiveState = isActiveItem(slug, items, subnav, currentSlug);
     setIsActive(isActiveState);
@@ -84,6 +90,22 @@ const Item = ({
       setActiveItems((prev) => [...prev, slug]);
     }
   }, [slug, items, currentSlug, subnav, setActiveItems]);
+
+  useEffect(() => {
+    if (!isHidden) {
+      setIsRemoved(false);
+      return undefined;
+    }
+    const prefersReducedMotion =
+      typeof window !== 'undefined' &&
+      window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (prefersReducedMotion) {
+      setIsRemoved(true);
+      return undefined;
+    }
+    const timer = setTimeout(() => setIsRemoved(true), 220);
+    return () => clearTimeout(timer);
+  }, [isHidden]);
 
   const href = getDocsNavHref(slug, basePath);
 
@@ -95,15 +117,20 @@ const Item = ({
       className={cn(
         'relative hover:z-10',
         subnav && 'group',
+        'motion-safe:transition-opacity motion-safe:duration-200',
+        isHidden ? 'pointer-events-none opacity-0' : 'opacity-100',
         isTutorials &&
           "flex items-center pl-6 before:absolute before:top-1/2 before:left-0 before:h-[18px] before:w-px before:-translate-y-1/2 before:bg-gray-new-90 before:content-[''] dark:before:bg-gray-new-15"
       )}
-      // Overflowed lanes live in the "More" menu instead; removing them from
-      // layout here also drops them from the tab order and the a11y tree, so a
-      // lane is never a focus target in two places at once.
-      style={isHidden ? { display: 'none' } : undefined}
+      // Overflowed lanes live in the "More" menu instead. While a lane fades out
+      // it is hidden from assistive tech and the tab order (below), and once the
+      // fade completes it is removed from layout entirely, so a lane is never a
+      // focus target in two places at once.
+      style={isHidden && isRemoved ? { display: 'none' } : undefined}
+      aria-hidden={isHidden || undefined}
     >
       <LinkTag
+        tabIndex={isHidden ? -1 : undefined}
         className={cn(
           'relative flex h-full items-center gap-1',
           'rounded-sm text-[15px] leading-snug tracking-extra-tight whitespace-nowrap',
