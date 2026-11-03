@@ -9,6 +9,8 @@ summary: >-
   cannot disable it, but paid plan users can. Very large computes remain always
   active and are not eligible for scale to zero.
 enableTableOfContents: true
+redirectFrom:
+  - /docs/introduction/auto-suspend
 updatedOn: '2026-07-31T15:27:48.506Z'
 ---
 

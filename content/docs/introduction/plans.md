@@ -20,6 +20,10 @@ redirectFrom:
   - /docs/reference/billing-sample
   - /docs/introduction/legacy-plans
   - /docs/introduction/extra-usage
+  - /docs/introduction/free-plan
+  - /docs/introduction/limits
+  - /docs/introduction/pricing-estimation-guide
+  - /docs/introduction/billing-sample
 updatedOn: '2026-10-23T18:34:18.407Z'
 ---
 

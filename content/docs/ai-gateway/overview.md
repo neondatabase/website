@@ -6,6 +6,8 @@ summary: >-
   Neon credential gives you access to models across multiple providers. Standard AI
   SDKs work without code changes. Each branch gets its own gateway endpoint.
 enableTableOfContents: true
+redirectFrom:
+  - /docs/ai/ai-gateway
 updatedOn: '2026-10-30T21:10:29.780Z'
 layout: wide
 hideCopyPage: true

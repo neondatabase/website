@@ -16,6 +16,7 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/introduction/restore-window
   - /docs/introduction/history-window
+  - /docs/introduction/history-retention
 updatedOn: '2026-08-24T17:32:35.016Z'
 ---
 
