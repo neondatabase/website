@@ -75,7 +75,7 @@ The MCP spec has come a long way and so has our own MCP offering. We were really
 
 ## So what does stateless actually mean?
 
-With the 2026-07-28 spec, the `initialize` handshake and the `Mcp-Session-Id` header are gone. Instead, every request carries its own protocol version, client info and client capabilities in `_meta`. That means any request can land on any server instance behind a plain round-robin load balancer, which is great news for anyone running an MCP server at scale (like us).
+With the 2026-07-28 spec, the `initialize` handshake and the `Mcp-Session-Id` header are gone. Instead, every request carries its own protocol version, client info and client capabilities in `_meta`. That means any request can land on any server instance behind a plain round-robin load balancer.
 
 Here's what a `tools/list` request against our anonymous docs endpoint looks like now:
 
