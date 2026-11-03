@@ -44,7 +44,7 @@ npx @neon/convex-to-postgres schema > schema.sql
 
 The file is evaluated, so run it where the project's dependencies are already installed. The DDL output goes to stdout, so you can store to a file or pipe straight into psql. Warnings and progress go to stderr.
 
-Or to migrate both your schema and data in one go, use the `convex` CLI to export your deployment. This defaults to `dev`, add `--prod` for production.
+Or, to migrate your schema and data in one go, export your deployment with the `convex` CLI. It exports `dev` by default. Add `--prod`, a `convex export` flag, for production. To export a local deployment, it has to be running (`npx convex dev`), which also runs its crons, so expect a few writes while it's up. The snapshot holds all your data, including Convex Auth password hashes, so keep it out of git.
 
 ```bash filename="Terminal"
 npx convex export --path snapshot.zip
@@ -55,13 +55,41 @@ Then import the snapshot into your Postgres database:
 ```bash filename="Terminal"
 npx @neon/convex-to-postgres import \
     --export snapshot.zip \
-    --apply-schema \
-    --database-url "$DATABASE_URL"
+    --apply-schema
 ```
+
+The tool reads `DATABASE_URL` from the environment, which keeps the URL out of process arguments, so set it in your shell first. Warnings and per-table row counts go to stderr.
 
 This creates the tables (with `--apply-schema`) and then loads in all the data in a single transaction. When the schema has search or vector indexes, it builds them and runs `VACUUM ANALYZE`. Without `--apply-schema`, the tables must already exist.
 
 You can inspect and manually edit the generated schema before applying. See the [`@neon/convex-to-postgres` README](https://github.com/neondatabase/neon-pkgs/tree/main/packages/convex-to-postgres) for more details.
+
+### What the tool changes
+
+- **Names.** Fields and tables become snake_case (`authorId` → `author_id`), so update the code that reads rows. Index names keep the Convex index name (`messages_by_authorId`). Pass the same flags (`--id-strategy`, `--no-snake-case` and so on) to every command.
+- **Ids.** `_id` becomes `id uuid` (`md5(_id)::uuid`). The tool converts every `v.id()` value the same way, including ids nested in arrays, objects and records inside `jsonb`, and each top-level `v.id()` field gets a foreign key. The tool warns about any field it can't convert. With `--id-strategy text`, ids keep their Convex strings, which also keeps them stable for external links.
+- **`_creationTime`** becomes `created_at timestamptz`. A field of your own named `createdAt` collides with it and is renamed `created_at_1`, with a warning. Rename it, for example `ALTER TABLE messages RENAME COLUMN created_at_1 TO created_at_ms;`.
+- **Numbers.** `v.number()` becomes `double precision`, including counters and epoch-millisecond times. Numbers inside `jsonb` keep their float text (`1.0`), so cast with `::numeric::int`. `v.int64()` becomes `bigint`, which reaches the browser as a string unless you add a parser.
+- **Constraints.** Convex indexes aren't unique, so the tool adds no `UNIQUE` constraints. Add them for keys your code kept unique (`ON CONFLICT` needs one). Foreign keys are `DEFERRABLE INITIALLY DEFERRED` with no `ON DELETE` action, so deleting a parent that has children now fails where Convex left dangling references. Add `ON DELETE CASCADE` where your code deleted the children.
+- **Search indexes.** Each `searchIndex` becomes a generated `tsvector` column, such as `title_tsv` for `title`, with a GIN index (`events_title_gin`), which you can query live. `--search-index bm25` builds `lakebase_bm25` indexes instead, for ranked search outside live queries. Neon Realtime can't live-query a table that has one.
+- **Vector indexes.** Each `vectorIndex` becomes a `lakebase_ann` index. Neon Realtime can't live-query a table that has one, so keep embeddings in a table you don't subscribe to.
+- **System tables.** References to `_scheduled_functions` or `_storage` become plain uuid columns. Drop or replace them.
+- **Convex Auth tables** are imported too, including password hashes. See [Migrate Convex Auth](#migrate-convex-auth).
+- **`schema` vs `import`.** `schema` prints the tables only. `import --apply-schema` (or `seed --split`) also builds the search and vector indexes, and their filter indexes, after the data loads.
+
+Search the generated column with `@@` and rank with `ts_rank`, both live:
+
+```sql
+SELECT id, title, ts_rank(title_tsv, websearch_to_tsquery('english', $1)) AS rank
+FROM events
+WHERE title_tsv @@ websearch_to_tsquery('english', $1)
+ORDER BY rank DESC, id
+LIMIT 20
+```
+
+Always pass the text search configuration (`'english'`, unless you passed `--search-language`). The one-argument forms of `websearch_to_tsquery()` and `to_tsquery()` depend on a setting, so they aren't `IMMUTABLE`, and live queries reject them.
+
+### Write the schema yourself
 
 Alternatively, you can write or generate a matching Postgres schema yourself.
 
@@ -75,6 +103,10 @@ export default defineSchema({
   channels: defineTable({
     name: v.string()
   }),
+  channelMembers: defineTable({
+    channel: v.id('channels'),
+    userId: v.string(),
+  }).index('by_channel_user', ['channel', 'userId']),
   messages: defineTable({
     channel: v.id('channels'),
     author: v.string(),
@@ -93,6 +125,13 @@ CREATE TABLE channels (
     name text NOT NULL
 );
 
+CREATE TABLE channel_members (
+    id uuid PRIMARY KEY DEFAULT gen_random_uuid(),
+    created_at timestamptz NOT NULL DEFAULT now(),
+    channel uuid NOT NULL,
+    user_id text NOT NULL
+);
+
 CREATE TABLE messages (
     id uuid PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at timestamptz NOT NULL DEFAULT now(),
@@ -102,15 +141,18 @@ CREATE TABLE messages (
     metadata jsonb NOT NULL
 );
 
+-- Unique, so the membership join returns each message once
+CREATE UNIQUE INDEX channel_members_by_channel_user ON channel_members (channel, user_id);
 CREATE INDEX messages_by_channel ON messages (channel);
 
+ALTER TABLE channel_members ADD CONSTRAINT channel_members_channel_fkey FOREIGN KEY (channel) REFERENCES channels (id) DEFERRABLE INITIALLY DEFERRED;
 ALTER TABLE messages ADD CONSTRAINT messages_channel_fkey FOREIGN KEY (channel) REFERENCES channels (id) DEFERRABLE INITIALLY DEFERRED;
 ```
 
 Or you could define a matching schema using a query builder like [Drizzle](../examples/drizzle):
 
 ```ts filename="backend/schema.ts"
-import { index, jsonb, pgTable, text, timestamp, uuid } from "drizzle-orm/pg-core"
+import { index, jsonb, pgTable, text, timestamp, uniqueIndex, uuid } from "drizzle-orm/pg-core"
 
 export const channels = pgTable(
   'channels', {
@@ -120,13 +162,24 @@ export const channels = pgTable(
   }
 )
 
+export const channelMembers = pgTable(
+  'channel_members', {
+    id: uuid('id').primaryKey().defaultRandom(),
+    channel: uuid('channel').notNull().references(() => channels.id),
+    user_id: text('user_id').notNull(),
+    created_at: timestamp('created_at', { withTimezone: true }).notNull().defaultNow(),
+  },
+  // Unique, so the membership join returns each message once
+  (table) => [uniqueIndex('channel_members_by_channel_user').on(table.channel, table.user_id)]
+)
+
 export const messages = pgTable(
   'messages', {
     id: uuid('id').primaryKey().defaultRandom(),
     channel: uuid('channel').notNull().references(() => channels.id),
     author: text('author').notNull(),
     body: text('body').notNull(),
-    metadata: jsonb('metadata').notNull(), // v.object(...) -> jsonb
+    metadata: jsonb('metadata').$type<{ edited: boolean }>().notNull(), // v.object(...) -> jsonb
     created_at: timestamp('created_at', { withTimezone: true }).notNull().defaultNow(),
   },
   (table) => [index('messages_by_channel').on(table.channel)]
