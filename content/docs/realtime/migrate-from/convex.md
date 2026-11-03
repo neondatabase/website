@@ -748,6 +748,72 @@ See [How optimistic mutations work](../guides/mutations#how-optimistic-mutations
 
 </Steps>
 
+## Migrate Convex Auth
+
+Auth providers that don't depend on Convex, such as Clerk, Auth0 or WorkOS, carry over: verify their JWT in `requireUser`. If you use [Convex Auth](https://labs.convex.dev/auth) (`@convex-dev/auth`), move to Neon's [Managed Better Auth](/docs/auth/overview). Its email and password sign-in replaces Convex Auth's `Password` provider.
+
+### Enable it on your branch
+
+```bash filename="Terminal"
+neon neon-auth enable --branch <branch>
+neon env pull --branch <branch> --service postgres --service realtime --service auth
+echo 'VITE_NEON_AUTH_URL=$NEON_AUTH_BASE_URL' >> .env.local
+```
+
+If you manage the branch with a `neon.ts`, run `neon config add auth` and `neon config apply` instead of `neon neon-auth enable`. `NEON_AUTH_BASE_URL` already ends in `/auth`.
+
+In the browser, create the auth client from that URL:
+
+```ts filename="frontend/auth.ts"
+import { createAuthClient } from "@neon/auth"
+
+export const authClient = createAuthClient(import.meta.env.VITE_NEON_AUTH_URL)
+```
+
+`authClient.getSession()` returns the session, with its JWT in `session.token`. The `authHeaders()` helper in [Subscribe to queries](#subscribe-to-queries) sends it as `Authorization: Bearer <token>` from `fetchSealed()` and `sendMessage()`. On the server, `requireUser` verifies it against your branch's [JWKS](/docs/auth/guides/plugins/jwt#verify-a-token). Pin the algorithm by adding `algorithms: ["EdDSA"]` to that helper's `jwtVerify()` options.
+
+### What happens to your Convex Auth data
+
+- **Tables.** The import copies Convex Auth's tables as ordinary tables: `auth_accounts`, `auth_sessions`, `auth_refresh_tokens` and the rest. `auth_accounts.secret` holds password hashes. Managed Better Auth doesn't use any of them, so drop them once you've connected your users, and treat `snapshot.zip` as a secret.
+- **Passwords don't transfer.** There's no documented way to import Convex Auth's password hashes into Managed Better Auth. Existing users set a new password with a password reset flow, or sign up again.
+- **User ids change.** A migrated `users.id` is `md5(_id)::uuid`, and the session's user id is a new Managed Better Auth id, so the two never match.
+
+### Connect existing users to their data
+
+Pick one:
+
+- **Remap ids by email.** This is simplest when you can create the accounts. Create each account in Managed Better Auth first. Then, in one transaction, rewrite every user id column from the migrated user id to `neon_auth."user".id`, matched by email, and drop the migrated `users` and `auth_*` tables. Keep app tables free of foreign keys into the `neon_auth` schema.
+- **Link on first sign-in.** Keep `users` and add `auth_user_id text UNIQUE`. In `requireUser`, look up the session user by `auth_user_id`. If there's no row, link to the `users` row with the token's `email` only when its `emailVerified` claim is true. Otherwise, create a new user.
+
+<Admonition type="warning" title="Don't link unverified emails">
+By default, Managed Better Auth email and password sign-up doesn't require email verification. If you link accounts by email without checking `emailVerified`, anyone who signs up with a migrated user's address takes over that user's data. Turn on [email verification](/docs/auth/guides/email-verification) before you migrate real users.
+</Admonition>
+
+### Scripts that create or sign in users
+
+Seed and test scripts that call the Managed Better Auth API directly need an `Origin` header that the service trusts. The service trusts any `localhost` origin by default, and you can add others with `neon neon-auth domain add`. Sign-in and sign-up are rate limited, so retry on `429` after the delay in the `x-retry-after` header.
+
+## Pagination
+
+Replace `usePaginatedQuery` with one live query whose `LIMIT` grows. On "load more", fetch a new sealed query with a larger limit, with a `refreshQuery` for that limit. Keep the current sealed query until the new one arrives, rather than resetting it as `Channel` does.
+
+A new sealed query starts with no data, so keep showing the previous rows until its first `data` arrives. Otherwise, the list empties while the next page loads:
+
+```tsx filename="frontend/Messages.tsx"
+// `sealedQuery` and `refreshQuery` are for the current limit
+const { data } = useLiveQuery(sealedQuery, { refreshQuery })
+const [previous, setPrevious] = useState<readonly Message[]>()
+
+useEffect(() => {
+  if (data) setPrevious(data)
+}, [data])
+
+// Keep showing the previous page while the next one loads
+const messages = data ?? previous ?? []
+```
+
+The page needs `ORDER BY … LIMIT`, so each change resends the page (see [Live query limits](#live-query-limits)). For long histories, keep only the newest page live and load older pages with an ordinary request.
+
 ## TanStack DB
 
 [TanStack&nbsp;DB](https://tanstack.com/db/latest/docs/overview) is a reactive client store that you query and write locally. It supports fine-grained reactivity, optimistic mutations and automatic management of optimistic state.
