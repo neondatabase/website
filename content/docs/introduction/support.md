@@ -99,6 +99,7 @@ The **Support center** drawer opens. Under **Which organization needs support?**
 - **Read the docs**: Browse Neon guides, references, and quickstarts.
 - **Contact our support team**: Open a technical support ticket. Available on the **Scale** plan.
 - **Ask a billing question**: Open a billing support ticket about an invoice, charge, refund, or your plan. Available on the **Launch** and **Scale** plans.
+- **Increase your platform limits**: Ask for a higher limit on your organization's resources. See [Request a limit increase](#request-a-limit-increase).
 - **Get help from the community**: Join the [Neon Discord Server](#neon-discord-server).
 
 On the **Free** plan, the support center offers the AI assistant, the docs, and the community. To unlock support tickets, [upgrade to a paid plan](/docs/introduction/manage-billing#change-your-plan).
@@ -124,6 +125,26 @@ On the **Free** plan, the support center offers the AI assistant, the docs, and 
 4. Select **Submit request**.
 
 You can also open a billing support ticket from the **Billing** page. Select **Request billing support** in the page header, or select **View past invoices**, open an invoice's actions menu, and select **Request support** to open the form with that invoice pre-selected. See [Request billing support](/docs/introduction/manage-billing#request-billing-support).
+
+#### Request a limit increase
+
+Some Neon limits are soft limits that guard against runaway usage and costs. If your workload needs more, you can ask Support to raise them for your organization:
+
+| Limit                                        | Learn more                                                                                      |
+| :------------------------------------------- | :---------------------------------------------------------------------------------------------- |
+| Concurrently active computes                 | [Concurrently active compute limit](/docs/reference/glossary#concurrently-active-compute-limit) |
+| AI Gateway tokens per minute and daily spend | [AI Gateway usage limits](/docs/ai-gateway/prepaid-credits#usage-limits)                        |
+| Projects per organization (Scale plan)       | [Projects](/docs/introduction/plans#projects)                                                   |
+| Private Networking endpoints per region      | [Private Networking limits](/docs/guides/neon-private-networking#private-networking-limits)     |
+| Replication slots (`max_replication_slots`)  | [Replication slots](/docs/guides/logical-replication-concepts#replication-slots)                |
+
+To request an increase:
+
+1. In the [support center](#open-the-support-center), select the organization that needs the higher limit.
+2. Select **Increase your platform limits**.
+3. Say which limit you need raised, the value you need, and what your workload is. Support may ask about your use case before approving a request, and may grant a lower value than you asked for.
+
+A limit increase isn't a substitute for a plan upgrade. Plan allowances, such as the maximum compute size, history window, or the number of projects on the Free and Launch plans, change only when you [change your plan](/docs/introduction/manage-billing#change-your-plan). See [Neon plans](/docs/introduction/plans) to compare them.
 
 <Admonition type="tip">
 To ensure you receive responses from our support team, allowlist the `help@databricks.com` email address in your email client. This prevents support responses from being filtered to your spam or junk folder.
