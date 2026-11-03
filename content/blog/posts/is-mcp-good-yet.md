@@ -158,7 +158,7 @@ The Neon MCP server is open source, so if you're curious, you can find the full 
 
 ## Still using our SSE endpoint?
 
-If your MCP config still points at `https://mcp.neon.tech/sse`, you'll need to swap it for `https://mcp.neon.tech/mcp`. We built [add-mcp](https://github.com/neondatabase/add-mcp) for exactly this kind of thing and it can update every agent on your machine in one go:
+If your MCP config still points at `https://mcp.neon.tech/sse`, you'll need to swap it for `https://mcp.neon.tech/mcp`. Update every agent on your machine by running [add-mcp](https://github.com/neondatabase/add-mcp):
 
 ```bash
 npx add-mcp https://mcp.neon.tech/mcp --name Neon -g
