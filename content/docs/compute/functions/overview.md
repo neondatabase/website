@@ -36,7 +36,7 @@ hideCopyPage: true
 
 <a href="/docs/compute/functions/get-started" description="Deploy your first function and call it over HTTP in under 5 minutes." icon="code">Quickstart</a>
 
-<a href="/docs/compute/functions/registry" description="Install reusable functions from the catalog with neon functions new." icon="cli">Function Registry</a>
+<a href="/docs/compute/functions/templates" description="Add a ready-made API, MCP server, AI agent, or bot to your project with one command." icon="cli">Function templates</a>
 
 <a href="/docs/compute/functions/triggers/overview" description="Invoke a function on a cron schedule or an object upload, with no external scheduler." icon="stopwatch">Function Triggers</a>
 
