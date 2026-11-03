@@ -230,6 +230,6 @@ Both use Hono and the MCP TypeScript SDK and come with create, list, update and 
 
 ## So, is MCP good yet?
 
-Not quite, at least according to [ismcpgoodyet.com](https://ismcpgoodyet.com): 64%, with only one of six clients using the new spec by default. But I think the stateless spec fixes the part of MCP that hurt server authors the most and every client that adopts it moves that number up. So check back in a few months; I'd bet the answer looks different by then.
+MCP is clearly winning and the spec keeps getting better. I'd personally say MCP is good once all the popular clients support MCP 2.0 (the 2026-07-28 spec), tool pagination and code mode! I'm tracking spec developments and client support on [ismcpgoodyet.com](https://ismcpgoodyet.com), so check there for more details.
 
-Happy coding!
+Happy tool calling!
