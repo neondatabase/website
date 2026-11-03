@@ -9,7 +9,7 @@ Connect this SvelteKit project to Postgres on Neon. Run each command yourself; I
    `import { defineEnvVars } from '@sveltejs/kit/env'; export const variables = defineEnvVars({ DATABASE_URL: {} });`
 7. Create `src/lib/server/db.ts`, importing `DATABASE_URL` from `$app/env/private` and exporting `sql = neon(DATABASE_URL)`.
 8. Add a page that queries the database. In a new project, use `src/routes/`; in an existing one, use `src/routes/neon/` so you don't replace my pages. Create `+page.server.ts` that imports `sql` from `#lib/server/db.ts` and exports `load: PageServerLoad` (type from `./$types`), which runs `SELECT version()` and returns `{ version }`. Render `data.version` in `+page.svelte` with `let { data } = $props();`.
-9. Prove it works: run `npm run check`, start `npm run dev` in the background, open the page at the URL Vite prints, and show me the Postgres version on it, not just "setup complete."
+9. Prove it works: run `npm run check`, start `npm run dev` in the background with its output in a log file, open the page at the URL it logs (Vite moves to another port when the default is taken), and show me the Postgres version on it, not just "setup complete."
 
 SvelteKit rules:
 

@@ -56,10 +56,10 @@ Install the [Neon CLI](/docs/cli/install), sign in, and create the project:
 ```bash filename="Terminal"
 npm i -g neon@latest
 neon login
-neon projects create --name my-app
+neon projects create --name my-app --region-id aws-us-east-2 --no-secrets
 ```
 
-The project goes in `aws-us-east-2` unless you pass `--region-id`. Pass `--org-id` to choose the organization (find IDs with `neon orgs list`).
+`--region-id` sets the region; pass a different one to pick another of the regions above. `--no-secrets` keeps the connection string out of the output, since the next step pulls it into your env file. Pass `--org-id` to choose the organization (find IDs with `neon orgs list`).
 
 </TabItem>
 
