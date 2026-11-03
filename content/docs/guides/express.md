@@ -179,7 +179,7 @@ app.listen(PORT, () => {
 
 ## Run index.js
 
-Run `node index.js` to view the result on [localhost:4242](localhost:4242) as follows:
+Run `node index.js` to view the result on [localhost:4242](http://localhost:4242) as follows:
 
 ```shell
 { version: 'PostgreSQL 16.0 on x86_64-pc-linux-gnu, compiled by gcc (Debian 10.2.1-6) 10.2.1 20210110, 64-bit' }
