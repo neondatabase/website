@@ -1,4 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
+import Image from 'next/image';
 import PropTypes from 'prop-types';
 
 import CodeIcon from 'components/pages/doc/detail-icon-cards/images/code.inline.svg';
@@ -13,7 +14,7 @@ import {
 const NEON_LOGO = ICONS_CONFIG.neon;
 
 const RegistryLogoImage = ({ className, src, alt, isCard, loading }) => (
-  <img
+  <Image
     className={cn(
       'shrink-0 object-contain',
       isCard ? 'h-7 w-auto max-w-10 object-left' : 'h-8 w-8',
@@ -24,8 +25,6 @@ const RegistryLogoImage = ({ className, src, alt, isCard, loading }) => (
     height={isCard ? 28 : 32}
     alt={alt}
     loading={loading}
-    decoding="async"
-    referrerPolicy="no-referrer"
   />
 );
 
