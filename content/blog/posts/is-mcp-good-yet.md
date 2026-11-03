@@ -46,7 +46,7 @@ However, agents are picking the MCP server anyway! In October, more than a quart
 | MCP server via Claude Desktop                     | 3%    |
 | MCP server via other clients                      | 2%    |
 
-The future is weird.
+This means ChatGPT agents are writing `index.mjs` files, zipping them up (I'm honestly not sure how) and then calling our MCP server to deploy them. The future is weird.
 
 And it's not just function deploys. Here's how our remote MCP server compares to the CLI (this doesn't include our deprecated stdio package):
 
