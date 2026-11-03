@@ -57,7 +57,17 @@ SubItem.propTypes = {
   basePath: PropTypes.string.isRequired,
 };
 
-const Item = ({ nav: title, slug, icon, subnav, items, basePath, activeItems, setActiveItems }) => {
+const Item = ({
+  nav: title,
+  slug,
+  icon,
+  subnav,
+  items,
+  basePath,
+  isHidden = false,
+  activeItems,
+  setActiveItems,
+}) => {
   const LinkTag = slug ? Link : 'button';
   const isTutorials = slug === 'https://neon.com/postgresql/tutorial';
   const isExternalSlug = slug?.startsWith('http');
@@ -88,6 +98,10 @@ const Item = ({ nav: title, slug, icon, subnav, items, basePath, activeItems, se
         isTutorials &&
           "flex items-center pl-6 before:absolute before:top-1/2 before:left-0 before:h-[18px] before:w-px before:-translate-y-1/2 before:bg-gray-new-90 before:content-[''] dark:before:bg-gray-new-15"
       )}
+      // Overflowed lanes live in the "More" menu instead; removing them from
+      // layout here also drops them from the tab order and the a11y tree, so a
+      // lane is never a focus target in two places at once.
+      style={isHidden ? { display: 'none' } : undefined}
     >
       <LinkTag
         className={cn(
@@ -180,6 +194,7 @@ Item.propTypes = {
     })
   ),
   basePath: PropTypes.string.isRequired,
+  isHidden: PropTypes.bool,
   activeItems: PropTypes.arrayOf(PropTypes.string),
   setActiveItems: PropTypes.func.isRequired,
 };

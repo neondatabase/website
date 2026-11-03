@@ -171,7 +171,7 @@ const ThemeOptions = () => {
   );
 };
 
-const DocsHeaderMenu = ({ className = null, lanes = [], basePath, isNavCollapsed = false }) => {
+const DocsHeaderMenu = ({ className = null, overflowLanes = [], basePath }) => {
   const [isOpen, setIsOpen] = useState(false);
   const menuRef = useRef(null);
   const toggleRef = useRef(null);
@@ -224,9 +224,9 @@ const DocsHeaderMenu = ({ className = null, lanes = [], basePath, isNavCollapsed
           )}
           id={id}
         >
-          {isNavCollapsed && lanes.length > 0 && (
+          {overflowLanes.length > 0 && (
             <>
-              {lanes.map(({ nav, slug, subnav }) =>
+              {overflowLanes.map(({ nav, slug, subnav }) =>
                 subnav ? (
                   <LaneGroup key={nav} nav={nav} subnav={subnav} basePath={basePath} />
                 ) : (
@@ -264,9 +264,8 @@ const DocsHeaderMenu = ({ className = null, lanes = [], basePath, isNavCollapsed
 
 DocsHeaderMenu.propTypes = {
   className: PropTypes.string,
-  lanes: PropTypes.array,
+  overflowLanes: PropTypes.array,
   basePath: PropTypes.string.isRequired,
-  isNavCollapsed: PropTypes.bool,
 };
 
 export default DocsHeaderMenu;

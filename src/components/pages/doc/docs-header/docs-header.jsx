@@ -1,7 +1,7 @@
 'use client';
 
 import PropTypes from 'prop-types';
-import { useLayoutEffect, useMemo, useRef, useState } from 'react';
+import { useCallback, useLayoutEffect, useMemo, useRef, useState } from 'react';
 
 import InkeepTrigger from 'components/shared/inkeep-trigger';
 import Link from 'components/shared/link';
@@ -15,35 +15,116 @@ import DocsHeaderMenu from './docs-header-menu';
 import LogoDivider from './images/logo-divider.inline.svg';
 import LogoLightIcon from './images/neon-logo.inline.svg';
 
-// Lanes collapse into the overflow menu whenever they don't fit between the
-// lockup and the right cluster (the spec's "< 1000px" case, and long lane sets
-// such as /postgresql at narrow desktop widths). The list stays mounted but
-// invisible while collapsed so it can be re-measured as the bar widens.
-const useIsNavCollapsed = (navRef, lanes) => {
-  const [state, setState] = useState({ isMeasured: false, isCollapsed: false });
+// Lane overflow priority, highest priority first (kept inline longest). The
+// lowest-priority lanes drop into the "More" menu first. This is intentionally
+// a plain list so the order can be tuned without touching the measuring logic.
+// Lanes not named here are treated as lowest priority and, among themselves,
+// the right-most one drops first.
+const LANE_OVERFLOW_PRIORITY = [
+  'Get started',
+  'Reference',
+  'Concepts',
+  'Products',
+  'Platform',
+  'Resources',
+];
+
+const UNRANKED_PRIORITY = LANE_OVERFLOW_PRIORITY.length + 1;
+
+const laneRank = (lane) => {
+  const index = LANE_OVERFLOW_PRIORITY.indexOf(lane?.nav);
+  return index === -1 ? UNRANKED_PRIORITY : index;
+};
+
+// Priority-plus overflow: measure each lane's intrinsic width once (re-measured
+// after web fonts load), then on every container resize work out how many lanes
+// fit in the nav's available width and push the rest into the "More" menu, one
+// at a time, lowest priority first. The "More" trigger lives outside this
+// container, so its width is already excluded from the available space.
+const useLaneOverflow = (navRef, lanes) => {
+  const widthsRef = useRef([]);
+  const gapRef = useRef(0);
+  const [state, setState] = useState({ isMeasured: false, hiddenIndexes: [] });
+
+  // Which lanes overflow, computed purely from the cached intrinsic widths and
+  // the live available width (no layout writes, so resize never thrashes).
+  const computeHidden = useCallback(() => {
+    const nav = navRef.current;
+    const widths = widthsRef.current;
+    if (!nav || widths.length === 0) return [];
+
+    const available = nav.clientWidth;
+    const gap = gapRef.current;
+    const fits = (indexes) => {
+      if (indexes.length === 0) return true;
+      const total =
+        indexes.reduce((sum, index) => sum + widths[index], 0) + gap * (indexes.length - 1);
+      return total <= available + 0.5;
+    };
+
+    const visible = widths.map((_, index) => index);
+    if (fits(visible)) return [];
+
+    // Drop lowest priority first; break ties by dropping the right-most lane.
+    const dropOrder = [...visible].sort((a, b) => {
+      const rankDelta = laneRank(lanes[b]) - laneRank(lanes[a]);
+      return rankDelta !== 0 ? rankDelta : b - a;
+    });
+
+    const hidden = new Set();
+    for (const index of dropOrder) {
+      hidden.add(index);
+      if (fits(visible.filter((i) => !hidden.has(i)))) break;
+    }
+
+    return visible.filter((index) => hidden.has(index));
+  }, [navRef, lanes]);
 
   useLayoutEffect(() => {
     const nav = navRef.current;
     if (!nav) return undefined;
 
-    // Compare the last lane's edge, not scrollWidth: the lanes' hidden dropdown
-    // panels overflow the list and would count as width.
-    const update = () => {
-      const lastLane = nav.lastElementChild;
-      const isCollapsed =
-        !!lastLane &&
-        lastLane.getBoundingClientRect().right > nav.getBoundingClientRect().right + 1;
-
-      setState({ isMeasured: true, isCollapsed });
+    // Cache each lane's own width. Hidden lanes report 0 (display: none), so we
+    // keep their last known width rather than overwriting it with a stale zero.
+    const measure = () => {
+      const children = Array.from(nav.children);
+      // Drop any cached widths from a longer previous lane set.
+      widthsRef.current.length = children.length;
+      children.forEach((child, index) => {
+        const width = child.getBoundingClientRect().width;
+        if (width > 0) widthsRef.current[index] = width;
+      });
+      const styles = getComputedStyle(nav);
+      gapRef.current = parseFloat(styles.columnGap || styles.gap || '0') || 0;
     };
 
-    update();
-    const resizeObserver = new ResizeObserver(update);
-    resizeObserver.observe(nav);
-    document.fonts?.ready.then(update);
+    measure();
+    setState({ isMeasured: true, hiddenIndexes: computeHidden() });
 
-    return () => resizeObserver.disconnect();
-  }, [navRef, lanes]);
+    let cancelled = false;
+    // Fonts can change intrinsic widths; re-measure once they are ready.
+    document.fonts?.ready.then(() => {
+      if (cancelled) return;
+      measure();
+      setState({ isMeasured: true, hiddenIndexes: computeHidden() });
+    });
+
+    // Recompute (not re-measure) on resize, coalesced to one frame.
+    let frame = null;
+    const resizeObserver = new ResizeObserver(() => {
+      if (frame) cancelAnimationFrame(frame);
+      frame = requestAnimationFrame(() => {
+        setState({ isMeasured: true, hiddenIndexes: computeHidden() });
+      });
+    });
+    resizeObserver.observe(nav);
+
+    return () => {
+      cancelled = true;
+      if (frame) cancelAnimationFrame(frame);
+      resizeObserver.disconnect();
+    };
+  }, [navRef, lanes, computeHidden]);
 
   return state;
 };
@@ -51,7 +132,11 @@ const useIsNavCollapsed = (navRef, lanes) => {
 const DocsHeader = ({ customType = null, docPageType = null, basePath, navigation }) => {
   const lanes = useMemo(() => getDocsHeaderLanes(navigation), [navigation]);
   const navRef = useRef(null);
-  const { isMeasured, isCollapsed } = useIsNavCollapsed(navRef, lanes);
+  const { isMeasured, hiddenIndexes } = useLaneOverflow(navRef, lanes);
+  const overflowLanes = useMemo(
+    () => hiddenIndexes.map((index) => lanes[index]).filter(Boolean),
+    [hiddenIndexes, lanes]
+  );
 
   return (
     <div
@@ -84,15 +169,11 @@ const DocsHeader = ({ customType = null, docPageType = null, basePath, navigatio
         </Link>
         <nav className="flex min-w-0 flex-1 lg:hidden" aria-label="Docs sections">
           <DocsNavigation
-            className={cn(
-              'min-w-0 flex-1',
-              (!isMeasured || isCollapsed) && 'overflow-hidden',
-              isCollapsed && 'invisible'
-            )}
+            className={cn('min-w-0 flex-1 overflow-hidden', !isMeasured && 'invisible')}
             navigation={lanes}
             basePath={basePath}
             ref={navRef}
-            aria-hidden={isCollapsed || undefined}
+            hiddenIndexes={hiddenIndexes}
           />
         </nav>
         <div className="flex shrink-0 items-center gap-x-2 lg:hidden">
@@ -115,7 +196,7 @@ const DocsHeader = ({ customType = null, docPageType = null, basePath, navigatio
             Sign up
           </Link>
           <span className="mx-1 h-5 w-px bg-gray-new-85 dark:bg-gray-new-20" aria-hidden="true" />
-          <DocsHeaderMenu lanes={lanes} basePath={basePath} isNavCollapsed={isCollapsed} />
+          <DocsHeaderMenu overflowLanes={overflowLanes} basePath={basePath} />
         </div>
       </div>
     </div>

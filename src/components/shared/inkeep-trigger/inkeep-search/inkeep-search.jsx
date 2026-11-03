@@ -6,13 +6,17 @@ import DocsHeaderSearchIcon from 'icons/docs/header/search.inline.svg';
 import SearchIcon from 'icons/search.inline.svg';
 import { cn } from 'utils/cn';
 
-// Keep the full 240px field through the 1024px desktop header. On smaller
+// The full 240px field holds through the wide desktop header. As space tightens
+// (<= 1200px) the field is the first thing to give way: it collapses to a
+// 36px icon-only trigger that keeps the same data-test, label, and Cmd+K
+// handler, so nav lanes only start folding into "More" after this. On smaller
 // screens the shared mobile menu renders its own search trigger.
 const DocsHeaderSearch = ({ className = null, handleClick }) => (
   <button
     className={cn(
       'flex h-9 w-60 items-center gap-x-2.5 rounded-none border border-gray-new-85 bg-gray-new-98 pr-2.5 pl-3 text-[#6B6F77] transition-colors duration-200 hover:border-gray-new-70',
       'dark:border-gray-new-20 dark:bg-black-new dark:text-gray-new-60 dark:hover:border-gray-new-30',
+      'max-[1200px]:w-9 max-[1200px]:justify-center max-[1200px]:gap-x-0 max-[1200px]:px-0',
       className
     )}
     data-test="docs-search-trigger"
@@ -25,8 +29,10 @@ const DocsHeaderSearch = ({ className = null, handleClick }) => (
       aria-hidden="true"
       className="shrink-0 dark:[&_[stroke]]:stroke-gray-new-60"
     />
-    <span className="flex-1 text-left text-sm leading-none whitespace-nowrap">Search...</span>
-    <span className="rounded-none border border-gray-new-85 px-[5px] py-px text-xs leading-normal dark:border-gray-new-20">
+    <span className="flex-1 text-left text-sm leading-none whitespace-nowrap max-[1200px]:hidden">
+      Search...
+    </span>
+    <span className="rounded-none border border-gray-new-85 px-[5px] py-px text-xs leading-normal max-[1200px]:hidden dark:border-gray-new-20">
       ⌘K
     </span>
   </button>

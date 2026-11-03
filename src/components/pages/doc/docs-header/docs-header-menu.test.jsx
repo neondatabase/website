@@ -90,22 +90,30 @@ describe('DocsHeaderMenu', () => {
     expect(dark).toHaveFocus();
   });
 
-  it('lists the collapsed lanes before the site links only when the nav is collapsed', () => {
-    const { rerender } = render(<DocsHeaderMenu basePath="/docs/" lanes={LANES} />);
+  it('lists only the overflowed lanes, in order, before the site links', () => {
+    const { rerender } = render(<DocsHeaderMenu basePath="/docs/" />);
     openMenu();
+    // Nothing overflows: no lanes in the menu, only the site links.
     expect(screen.queryByRole('link', { name: 'Get started' })).toBeNull();
     expect(screen.queryByRole('button', { name: 'Products' })).toBeNull();
+    expect(screen.getByRole('link', { name: 'neon.com' })).toBeInTheDocument();
 
-    rerender(<DocsHeaderMenu basePath="/docs/" lanes={LANES} isNavCollapsed />);
-    const lane = screen.getByRole('link', { name: 'Get started' });
+    // A partial overflow mirrors just the lanes that no longer fit inline, so a
+    // lane kept inline is never duplicated in the menu.
+    rerender(<DocsHeaderMenu basePath="/docs/" overflowLanes={[LANES[1]]} />);
+    expect(screen.queryByRole('link', { name: 'Get started' })).toBeNull();
     const group = screen.getByRole('button', { name: 'Products' });
+
+    rerender(<DocsHeaderMenu basePath="/docs/" overflowLanes={LANES} />);
+    const lane = screen.getByRole('link', { name: 'Get started' });
     const neon = screen.getByRole('link', { name: 'neon.com' });
     expect(lane.compareDocumentPosition(neon) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
 
-    fireEvent.click(group);
+    fireEvent.click(screen.getByRole('button', { name: 'Products' }));
     expect(screen.getByRole('link', { name: 'Auth' })).toHaveAttribute(
       'href',
       '/docs/auth/overview'
     );
+    expect(group).toBeInTheDocument();
   });
 });
