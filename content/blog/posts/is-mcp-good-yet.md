@@ -36,7 +36,17 @@ After all the CLI vs. MCP discourse online, lately folks have been sharing how f
 
 And that's even though we recommend the CLI over the MCP server in our own agent skills. The context here is that our CLI works together with `neon.ts`, our infra-as-code config, and it bundles, zips and deploys your [Neon Functions](https://neon.com/docs/compute/functions/overview) with `neon deploy`. The MCP server's `deploy_function` tool only accepts a zip that's already built. So our skills nudge agents toward `neon.ts` and the CLI to make sure function deployments happen properly. We also recommend that everyone using Neon with an agent installs our skills. (By the way, you can install them right now by running `npx neon@latest init` in your project repo 😉)
 
-However, agents are picking the MCP server anyway! In October, more than a quarter of all function deploys came through the MCP server, mostly from Codex and ChatGPT. The future is weird.
+However, agents are picking the MCP server anyway! In October, more than a quarter of all function deploys came through the MCP server:
+
+| Where function deploys came from, October 2026    | Share |
+| ------------------------------------------------- | ----- |
+| Neon CLI (`neon deploy`, `neon functions deploy`) | 72%   |
+| MCP server via Codex                              | 13%   |
+| MCP server via ChatGPT                            | 10%   |
+| MCP server via Claude Desktop                     | 3%    |
+| MCP server via other clients                      | 2%    |
+
+The future is weird.
 
 And it's not just function deploys. Here's how our remote MCP server compares to the CLI (this doesn't include our deprecated stdio package):
 
