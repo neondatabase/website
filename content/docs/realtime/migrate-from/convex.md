@@ -28,6 +28,8 @@ The steps / layers are as follows:
 | 5   | [**Handle writes**](#handle-writes)       | `mutation` + `useMutation` | →   | `pg_current_xact_id()`                                                                               |
 | 6   | [**Optimistic state**](#optimistic-state) | `.withOptimisticUpdate`    | →   | `awaitTxId` (or [TanStack DB](#tanstack-db))                                                         |
 
+Convex Auth, the scheduler, crons, HTTP actions, pagination and search need extra steps. See [Migrate Convex Auth](#migrate-convex-auth), [Pagination](#pagination) and [Map other Convex features](#map-other-convex-features).
+
 <Steps>
 
 ## Migrate your schema
@@ -983,14 +985,29 @@ The sealed query replaces `query` and `queryArgs`. Your server builds it with th
 
 This assumes `@tanstack/convex-db-collection`. If it doesn't install against your `@tanstack/db` version, or your app wraps Convex in its own collection adapter, follow [From the Convex React client](#from-the-convex-react-client) instead.
 
-## Wider platform features
+## Map other Convex features
 
-The Neon Platform supports other Convex features, including:
+| Convex                                     | Neon                                                                                                                                                        | Notes                                                                                                                                           |
+| ------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------- |
+| `ctx.scheduler.runAfter` / `runAt`         | A deadline column on the row, plus a job that applies overdue work                                                                                          | There's no one-off delayed trigger. See [Where background work runs](#where-background-work-runs)                                               |
+| `crons.ts`                                 | A timer in your server process, or a [Neon Function](/docs/compute/functions/overview) with a [schedule trigger](/docs/compute/functions/triggers/schedule) | Schedule triggers take a five-field cron in UTC                                                                                                 |
+| An `action` that streams an LLM reply      | A job that writes the reply into its row as tokens arrive                                                                                                   | Call the model through the [AI Gateway](/docs/ai-gateway/overview). See [Streaming into rows](#streaming-into-rows)                             |
+| `httpAction` / `http.ts`                   | A route on your server                                                                                                                                      | Ids change with the default id strategy, so links, iCal UIDs and webhooks that stored a Convex id see new ones. `--id-strategy text` keeps them |
+| `usePaginatedQuery`                        | A live query with a growing `LIMIT`                                                                                                                         | See [Pagination](#pagination)                                                                                                                   |
+| `withSearchIndex`                          | A `tsvector` column with a GIN index, queried with `@@`                                                                                                     | The tool's default. Tables imported with `--search-index bm25` can't be live-queried                                                            |
+| `.vectorSearch`                            | [`pgvector`](/docs/extensions/pgvector) or [Lakebase Search](/docs/ai/lakebase-search)                                                                      | Keep embeddings in a table you don't subscribe to                                                                                               |
+| `ctx.storage`                              | [Neon Object Storage](/docs/storage/overview)                                                                                                               |                                                                                                                                                 |
+| Seed functions (`npx convex run`)          | A Node script that writes through your database client                                                                                                      | You may not need one if you import your data. Demo users sign up through Managed Better Auth                                                    |
+| Code inside a `query` handler              | SQL in the live query, or code on the client                                                                                                                | Compute what SQL can't from the live rows, for example in a `useMemo`                                                                           |
+| Client-generated user ids, with no sign-in | A signed `httpOnly` cookie that your server mints                                                                                                           | Check it before every seal and write, as you would a JWT                                                                                        |
 
-- **`action` / `internalAction`, the scheduler, and crons** map to [Neon Functions](/docs/compute/functions/overview), with [Function Triggers](/docs/compute/functions/triggers/overview) for scheduled runs and object-storage events.
-- **file storage (`ctx.storage`)** maps to [Neon Object Storage](/docs/storage/overview).
-- **vector search (`.vectorSearch`)** maps to Postgres [`pgvector`](/docs/extensions/pgvector) or [Lakebase Search](/docs/ai/lakebase-search) (the `@neon/convex-to-postgres` tool emits `lakebase_bm25` / `lakebase_ann` DDL for each `searchIndex` / `vectorIndex`).
-- **external LLM calls** map to the [Neon AI Gateway](/docs/ai-gateway/overview)
+### Where background work runs
+
+If your app has a long-running server, such as Hono, TanStack Start or Next.js on Node, run scheduled work, crons and streaming jobs in that process. It's the simplest option, and it shares your code. In-process work isn't durable, because a restart loses in-flight timers. So keep the state in rows, with a deadline column in place of `runAfter`, and have a periodic sweep apply overdue work. Make each transition conditional on the current status, so the timer and the sweep can both run it safely. Use a [Neon Function](/docs/compute/functions/overview) when the work must survive restarts or you have no long-running server.
+
+### Streaming into rows
+
+A Convex action that streams an LLM reply becomes a job that writes the reply into its message row as tokens arrive, for example every 100 ms. Each `UPDATE` commits on its own, so subscribers see the text grow. Select the changing column in the live query, because a subscription only emits when a selected column changes. A `status` column (`streaming`, `done` or `error`) lets the client show progress, and lets a sweep mark rows that a restart left behind.
 
 ## Frequently asked questions
 
