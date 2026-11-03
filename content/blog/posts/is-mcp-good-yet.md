@@ -109,7 +109,7 @@ This is the part I'm most excited about. A lot of remote MCP servers run on serv
 
 That's why it was common practice to pair a serverless MCP server with Redis to keep track of sessions. With HTTP+SSE, the stream stayed open on one function instance while the client's requests could land on any other, so Redis had to get those messages to the instance holding the stream. That's a lot easier to get wrong than plain request/response, and we fixed our share of session bugs over the months of maintaining the Neon MCP server.
 
-With 2026-07-28, every request carries everything the server needs to answer it, so any instance can handle any request and there's nothing to share between them. In fact, retiring SSE already let us delete our Redis session store. Streamable HTTP lets a server skip session ids, so we answer 2025-era clients statelessly too. What the new spec adds is a stateless way to do the things that used to need a held-open stream, like asking the user for input in the middle of a tool call. Once every client is on 2026-07-28, those features work on any serverless function without any state on our side, and we can stop supporting the old `initialize` handshake altogether.
+With 2026-07-28, every request carries everything the server needs to answer it, so any function instance can handle any request and there's no session state to share. That's what makes MCP a great fit for serverless.
 
 ## Is Streamable HTTP going away?
 
