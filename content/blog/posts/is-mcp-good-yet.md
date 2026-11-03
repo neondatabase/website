@@ -175,6 +175,24 @@ npx add-mcp https://mcp.neon.tech/mcp -g
 
 On first use, your agent opens a browser window so you can sign in with OAuth. If you also want our agent skills and a linked Neon project, run `npx neon@latest init` instead. And if you want to use an API key, run the server in read-only mode or scope it to a single project, check out the [config generator](https://neon.com/docs/ai/neon-mcp-server#config-generator) in our docs.
 
+## Every product needs an MCP server
+
+We strongly believe that every product will need an MCP server. People want their agents to work with the services they already use, and MCP is how agents find and call those services today, in ChatGPT and Claude Desktop just as much as in a coding agent.
+
+If you're building on Neon, adding one is pretty easy. A [Neon Function](https://neon.com/docs/compute/functions/overview) can host an MCP server right next to your database, and with the new spec it doesn't need to keep any state between requests. To start a new project from our MCP starter, run:
+
+```bash
+npx neon@latest bootstrap --template mcp
+```
+
+Or, to add an MCP server backed by your Postgres database to an existing project:
+
+```bash
+npx neon@latest functions new mcp-postgres
+```
+
+Both use Hono and the MCP TypeScript SDK and come with create, list, update and delete tools over Lakebase Postgres, so you can swap in your own tables or wrap the REST API you already have. You can find the template and its source on our [function templates page](https://neon.com/functions/templates/mcp-postgres).
+
 ## So, is MCP good yet?
 
 Not quite, at least according to [ismcpgoodyet.com](https://ismcpgoodyet.com): 64%, with only one of six clients using the new spec by default. But I think the stateless spec fixes the part of MCP that hurt server authors the most and every client that adopts it moves that number up. So check back in a few months; I'd bet the answer looks different by then.
