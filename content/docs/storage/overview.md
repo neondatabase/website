@@ -7,6 +7,10 @@ summary: >-
   its own view of storage. Point an S3 SDK at your branch endpoint and
   authenticate with your Neon credential.
 enableTableOfContents: true
+redirectFrom:
+  - /docs/storage/object-storage
+  - /docs/object-storage/overview
+  - /docs/guides/object-storage
 updatedOn: '2026-10-23T14:02:32.319Z'
 layout: wide
 hideCopyPage: true

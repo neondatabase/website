@@ -11,6 +11,7 @@ redirectFrom:
   - /docs/reference/about
   - /docs/api
   - /docs/api/about
+  - /docs/api-reference
 updatedOn: '2026-09-04T22:12:54.000Z'
 ---
 
