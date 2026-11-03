@@ -11,7 +11,6 @@ import LINKS from 'constants/links';
 import SearchIcon from 'icons/search.inline.svg';
 import { cn } from 'utils/cn';
 import {
-  EXAMPLES_REGISTRY_TREE,
   REGISTRY_ALL_FILTER,
   REGISTRY_FIRST_PARTY_CATEGORY,
   filterRegistryTemplates,
@@ -162,8 +161,8 @@ const CatalogClient = ({ templates }) => {
     return (
       <p className="text-base text-gray-new-60">
         The catalog is temporarily unavailable. See the{' '}
-        <a className={INLINE_LINK_CLASS_NAME} href={LINKS.functionsRegistry}>
-          Function Registry docs
+        <a className={INLINE_LINK_CLASS_NAME} href={LINKS.functionsTemplatesDocs}>
+          function templates docs
         </a>{' '}
         or fetch{' '}
         <a className={INLINE_LINK_CLASS_NAME} href="/functions/registry/registry.json">
@@ -227,17 +226,17 @@ const CatalogClient = ({ templates }) => {
           <EmptyState onClear={clearFilters} />
         )}
         <p className="mt-8 text-sm leading-snug text-gray-new-60">
-          Add a template with{' '}
-          <a className={INLINE_LINK_CLASS_NAME} href="/docs/cli/functions#new">
-            neon functions new
+          New to templates? See{' '}
+          <a className={INLINE_LINK_CLASS_NAME} href={LINKS.functionsTemplatesDocs}>
+            how to use them
           </a>
           . If the one you need isn&apos;t here, ask on{' '}
           <a className={INLINE_LINK_CLASS_NAME} href="/discord">
             Discord
           </a>{' '}
-          or open a pull request in{' '}
-          <a className={INLINE_LINK_CLASS_NAME} href={EXAMPLES_REGISTRY_TREE}>
-            neondatabase/examples
+          or{' '}
+          <a className={INLINE_LINK_CLASS_NAME} href={LINKS.functionsRegistry}>
+            publish your own
           </a>
           .
         </p>

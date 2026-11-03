@@ -53,6 +53,7 @@ export default {
   authOverview: '/docs/auth/overview',
   authPage: '/auth',
   functionsOverview: '/docs/compute/functions/overview',
+  functionsTemplatesDocs: '/docs/compute/functions/templates',
   functionsRegistry: '/docs/compute/functions/registry',
   objectStorageOverview: '/docs/storage/overview',
   aiGatewayOverview: '/docs/ai-gateway/overview',
