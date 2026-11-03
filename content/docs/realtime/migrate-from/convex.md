@@ -818,7 +818,7 @@ The page needs `ORDER BY … LIMIT`, so each change resends the page (see [Live 
 
 [TanStack&nbsp;DB](https://tanstack.com/db/latest/docs/overview) is a reactive client store that you query and write locally. It supports fine-grained reactivity, optimistic mutations and automatic management of optimistic state.
 
-The Neon Realtime team develops and maintains TanStack&nbsp;DB. DB has first-class support for [Neon&nbsp;Realtime](https://tanstack.com/db/latest/docs/collections/neon-realtime-collection) and integrations for other systems, including Convex.
+The Neon Realtime team develops and maintains TanStack&nbsp;DB. DB has first-class support for Neon&nbsp;Realtime, through [`@neon/realtime-tanstack`](../sdks/typescript#tanstack-db), and integrations for other systems, including Convex.
 
 You can migrate to using TanStack&nbsp;DB with Realtime [from "standard" Convex](#from-the-convex-react-client), using the React client and / or [from using Convex with DB](#from-convex-with-db).
 
@@ -830,7 +830,7 @@ Install the Realtime collection and TanStack&nbsp;DB's React package:
 npm install @neon/realtime-tanstack @tanstack/react-db
 ```
 
-A collection replaces everything from `<ConvexProvider />` to `.withOptimisticUpdate`. The backend routes and the `frontend/api.ts` helpers stay the same:
+A collection replaces everything from `<ConvexProvider />` to `.withOptimisticUpdate`. The backend routes and the `frontend/api.ts` helpers stay the same, except that the query the collection seals has no `ORDER BY`. TanStack&nbsp;DB orders rows in its local query instead:
 
 | <h4>Convex</h4>                         |     | <h4>TanStack DB</h4>                               |
 | --------------------------------------- | --- | -------------------------------------------------- |
@@ -866,8 +866,8 @@ export async function createMessagesCollection(channelId: string) {
       onInsert: async ({ transaction, collection }) => {
         await Promise.all(
           transaction.mutations.map(async ({ modified }) => {
-            const { txid } = await sendMessage(modified)
-            await collection.utils.awaitTxId(txid, 10_000)
+            const result = await sendMessage(modified)
+            if (result.kind === 'committed') await collection.utils.awaitTxId(result.txid, 10_000)
           })
         )
       }
@@ -878,7 +878,7 @@ export async function createMessagesCollection(channelId: string) {
 export type MessagesCollection = Awaited<ReturnType<typeof createMessagesCollection>>
 ```
 
-TanStack&nbsp;DB applies each insert to the collection immediately, then calls `onInsert`. The handler writes through the same route as before and waits for the txid, so the optimistic row stays until the synced row replaces it. If the handler throws, the insert rolls back. `onUpdate` and `onDelete` work the same way, as the [mutations guide](../guides/mutations#with-tanstack-db-collections) shows.
+TanStack&nbsp;DB applies each insert to the collection immediately, then calls `onInsert`. The handler writes through the same route as before, with the same timeout, and waits for the txid, so the optimistic row stays until the synced row replaces it. If the handler throws, the insert rolls back. `onUpdate` and `onDelete` work the same way, as the [mutations guide](../guides/mutations#with-tanstack-db-collections) shows.
 
 Then swap `useQuery` for TanStack&nbsp;DB's own `useLiveQuery`, imported as `useCollectionQuery` to keep it distinct from the Realtime hook, and write with `insert()`:
 
@@ -923,16 +923,21 @@ import { Messages } from "./Messages"
 
 export function Channel({ channelId, userId }: { channelId: string; userId: string }) {
   const [messagesCollection, setMessagesCollection] = useState<MessagesCollection>()
+  const [error, setError] = useState<Error>()
 
   useEffect(() => {
     let active = true
     setMessagesCollection(undefined) // never show the previous channel's messages in a new channel
-    createMessagesCollection(channelId).then((c) => active && setMessagesCollection(c))
+    setError(undefined)
+    createMessagesCollection(channelId)
+      .then((c) => active && setMessagesCollection(c))
+      .catch((e: Error) => active && setError(e))
     return () => {
       active = false
     }
   }, [channelId])
 
+  if (error) return <p role="alert">Could not load messages: {error.message}</p>
   if (!messagesCollection) return <p>Loading messages</p>
   return <Messages messagesCollection={messagesCollection} channelId={channelId} userId={userId} />
 }
@@ -944,37 +949,39 @@ export function Channel({ channelId, userId }: { channelId: string; userId: stri
 
 If you already use Convex with TanStack&nbsp;DB, migration is simple. Swap out your collections defined with [`convexCollectionOptions`](https://tanstack.com/db/latest/docs/collections/convex-collection), for collections defined with [`realtimeCollectionOptions`](../sdks/typescript#tanstack-db-realtimecollectionoptions):
 
-```ts filename="frontend/collections.ts"
-const client = new ConvexClient(CONVEX_URL) // [!code --]
-const client = createRealtimeClient({ url: NEON_REALTIME_URL, parsers: { ...drizzleParsers } }) // [!code ++]
+```diff filename="frontend/collections.ts"
+- const client = new ConvexClient(CONVEX_URL)
++ const client = createRealtimeClient({ url: NEON_REALTIME_URL, parsers: { ...drizzleParsers } })
 
-export async function createMessagesCollection(channelId: string) {
-  return createCollection(
-    convexCollectionOptions({ // [!code --]
-    realtimeCollectionOptions({ // [!code ++]
-      id: `messages:${channelId}`,
-      client,
-      query: api.messages.list, // [!code --]
-      queryArgs: { channelId }, // [!code --]
-      getKey: (message) => message.clientId, // [!code --]
-      query: await fetchSealed(channelId), // [!code ++]
-      refreshQuery: () => fetchSealed(channelId), // [!code ++]
-      getKey: (message) => message.id, // [!code ++]
-      onInsert: async ({ transaction, collection }) => {
-        await Promise.all(
-          transaction.mutations.map(async ({ modified }) => {
-            await client.mutation(api.messages.send, { channelId, clientId: modified.clientId, body: modified.body }) // [!code --]
-            const { txid } = await sendMessage(modified) // [!code ++]
-            await collection.utils.awaitTxId(txid, 10_000) // [!code ++]
-          })
-        )
-      }
-    })
-  )
-}
+  export async function createMessagesCollection(channelId: string) {
+    return createCollection(
+-     convexCollectionOptions({
++     realtimeCollectionOptions({
+        id: `messages:${channelId}`,
+        client,
+-       query: api.messages.list,
+-       queryArgs: { channelId },
+-       getKey: (message) => message.clientId,
++       query: await fetchSealed(channelId),
++       refreshQuery: () => fetchSealed(channelId),
++       getKey: (message) => message.id,
+        onInsert: async ({ transaction, collection }) => {
+          await Promise.all(
+            transaction.mutations.map(async ({ modified }) => {
+-             await client.mutation(api.messages.send, { channelId, clientId: modified.clientId, body: modified.body })
++             const result = await sendMessage(modified)
++             if (result.kind === 'committed') await collection.utils.awaitTxId(result.txid, 10_000)
+            })
+          )
+        }
+      })
+    )
+  }
 ```
 
-The sealed query replaces `query` and `queryArgs`. Your server builds it with the arguments baked in, as in [Auth](#auth), and `refreshQuery` renews it before it expires. `onInsert` calls your route instead of `client.mutation()`, then waits for the write's txid.
+The sealed query replaces `query` and `queryArgs`. Your server builds it with the arguments baked in, as in [Auth](#auth) but without `ORDER BY`, and `refreshQuery` renews it before it expires. `onInsert` calls your route instead of `client.mutation()`, then waits for the write's txid.
+
+This assumes `@tanstack/convex-db-collection`. If it doesn't install against your `@tanstack/db` version, or your app wraps Convex in its own collection adapter, follow [From the Convex React client](#from-the-convex-react-client) instead.
 
 ## Wider platform features
 
