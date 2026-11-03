@@ -26,7 +26,7 @@ Databases belong to a branch. If you create a child branch, databases from the p
 
 Neon supports creating and managing databases from the Neon Console, CLI, and API, and directly with [SQL](#manage-databases-with-sql).
 
-The role that creates a database is automatically made the owner of that database. The `neon_superuser` role is also granted all privileges on databases created in the Neon Console. For information about this role, see [The neon_superuser role](/docs/manage/roles#the-neonsuperuser-role).
+The role that creates a database is automatically made the owner of that database. The `neon_superuser` role is also granted all privileges on databases created in the Neon Console, CLI, or API. Databases created with SQL don't receive this grant. For information about this role, see [The neon_superuser role](/docs/manage/roles#the-neonsuperuser-role).
 
 ## Create a database
 
@@ -110,7 +110,7 @@ For attribute definitions, find the [Create database](/docs/reference/api/branch
 </Tabs>
 
 <Admonition type="note">
-Some names are not permitted. See [Reserved database names](#reserved-database-names).
+Database names can't exceed 63 bytes, and some names aren't permitted. See [Reserved database names](#reserved-database-names).
 </Admonition>
 
 ## View databases
@@ -189,7 +189,9 @@ For attribute definitions, find the [List databases](/docs/reference/api/branche
 
 ## Update a database
 
-Rename a database with the [Update database](/docs/reference/api/branches/update-project-branch-database) endpoint, or with [SQL](#rename-a-database-with-sql). This example renames `mydb` to `database1`:
+You can rename a database or change its owner with the [Update database](/docs/reference/api/branches/update-project-branch-database) endpoint. You can also rename a database with [SQL](#rename-a-database-with-sql). The Neon CLI doesn't support updating a database.
+
+This example renames `mydb` to `database1`:
 
 ```bash
 curl -X PATCH 'https://console.neon.tech/api/v2/projects/dry-heart-13671059/branches/br-morning-meadow-afu2s1jl/databases/mydb' \
@@ -237,9 +239,23 @@ For attribute definitions, find the [Update database](/docs/reference/api/branch
 
 </details>
 
+To change a database's owner, pass `owner_name`. This example makes `alex` the owner of `database1`:
+
+```bash
+curl -X PATCH 'https://console.neon.tech/api/v2/projects/dry-heart-13671059/branches/br-morning-meadow-afu2s1jl/databases/database1' \
+  -H 'Accept: application/json' \
+  -H "Authorization: Bearer $NEON_API_KEY" \
+  -H 'Content-Type: application/json' \
+  -d '{
+  "database": {
+    "owner_name": "alex"
+  }
+}'
+```
+
 ## Delete a database
 
-Deleting a database is a permanent action. All database objects belonging to the database such as schemas, tables, and roles are also deleted.
+Deleting a database is a permanent action. All objects in the database, such as schemas, tables, and indexes, are also deleted. Roles aren't deleted, because roles belong to the branch, not the database.
 
 <Tabs labels={["Console", "CLI", "API"]}>
 
@@ -312,6 +328,7 @@ For attribute definitions, find the [Delete database](/docs/reference/api/branch
 </TabItem>
 
 </Tabs>
+
 ## Manage databases with SQL
 
 You can create and manage databases in Neon with SQL, as you can with any standalone Postgres installation. To create a database, issue a `CREATE DATABASE` statement from a client such as [psql](/docs/connect/query-with-psql-editor) or from the [Neon SQL Editor](/docs/get-started/query-with-neon-sql-editor).
@@ -322,11 +339,7 @@ CREATE DATABASE testdb;
 
 Most standard [Postgres CREATE DATABASE parameters](https://www.postgresql.org/docs/current/sql-createdatabase.html) are supported with the exception of `TABLESPACE`. This parameter requires access to the local file system, which is not permitted in Neon.
 
-The role that creates a database is the owner of the database.
-
-<Admonition type="note">
-As of Postgres 15, only a database owner has the `CREATE` privilege on a database's `public` schema. For other users, the `CREATE` privilege on the `public` schema must be granted explicitly via a `GRANT CREATE ON SCHEMA public TO <username>;` statement. For more information, see [Public schema privileges](/docs/manage/database-access#public-schema-privileges).
-</Admonition>
+The role that creates a database is the owner of the database. As noted at the top of this page, only the database owner can create objects in the `public` schema on Postgres 15 and later unless you grant `CREATE` to other roles.
 
 For more information about database object privileges in Postgres, see [Privileges](https://www.postgresql.org/docs/current/ddl-priv.html).
 
@@ -369,7 +382,7 @@ The workaround is to introduce a shared group role that both roles belong to. Yo
 In the example below, `current_owner`, `new_owner`, and `table_owners` are placeholder role and group names. Replace them with names from your own environment.
 </Admonition>
 
-1. Connect as the database owner role and run:
+1. Connect as the owner of the database (or another role that can create roles) and run:
 
    ```sql
    -- Create a group role with no login
@@ -385,7 +398,7 @@ In the example below, `current_owner`, `new_owner`, and `table_owners` are place
 
    Replace `current_owner` and `new_owner` with the actual role names.
 
-2. Still connected as `current_owner`, transfer the table to the group:
+2. Connect as `current_owner` and transfer the table to the group:
 
    ```sql
    ALTER TABLE your_table OWNER TO table_owners;
@@ -405,13 +418,14 @@ In the example below, `current_owner`, `new_owner`, and `table_owners` are place
 
    The **Owner** column should now show `new_owner`.
 
-5. Leave the `table_owners` group role in place if you need to transfer other tables later, or drop it when you're done:
+5. Leave the `table_owners` group role in place if you need to transfer other tables later, or drop it when you're done. Revoke its schema privileges first, or `DROP ROLE` fails:
 
    ```sql
+   REVOKE ALL ON SCHEMA public FROM table_owners;
    DROP ROLE table_owners;
    ```
 
-   `DROP ROLE table_owners` works only after that role no longer owns any objects and has no blocking dependencies.
+   `DROP ROLE` also fails if the role still owns objects.
 
 ### Transfer ownership for multiple objects
 
@@ -432,8 +446,6 @@ Then connect as `new_owner` and move those objects from the group to the destina
 ```sql
 REASSIGN OWNED BY table_owners TO new_owner;
 ```
-
-`REASSIGN OWNED` applies within the current database context. Run it in each database where you need to transfer ownership.
 
 <Admonition type="note">
 - `REASSIGN OWNED` runs in the current database context, so run it in each database where you need to transfer ownership.
