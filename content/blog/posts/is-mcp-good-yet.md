@@ -148,8 +148,6 @@ Not many yet. Of the six coding agents I track, Claude Code is the only one that
 
 That's why we couldn't just switch over. Our server has to answer stateless requests and still accept the `initialize` handshake from every client that hasn't moved yet.
 
-By the way, I'm tracking MCP progress in a lot more detail at [ismcpgoodyet.com](https://ismcpgoodyet.com), feature by feature and client by client.
-
 ## What we changed on the Neon MCP server
 
 We moved mcp.neon.tech to `@modelcontextprotocol/server` 2.0 and [`mcp-handler`](https://github.com/vercel/mcp-handler) 2.1, so we now serve 2026-07-28 on `https://mcp.neon.tech/mcp`. Clients that still send `initialize` keep working on the same URL, and we test the 2025-03-26 and 2025-11-25 fallbacks to make sure they stay that way. You don't need to change anything: your OAuth tokens, API keys and grant URLs like `/mcp?projectId=<project-id>&readonly=true` work exactly like before.
