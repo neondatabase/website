@@ -164,7 +164,7 @@ If your MCP config still points at `https://mcp.neon.tech/sse`, you'll need to s
 npx add-mcp https://mcp.neon.tech/mcp --name Neon -g
 ```
 
-**Note:** `--name` has to match the name of your existing entry (`Neon` if you followed our old setup instructions). With a different name, add-mcp adds a second server next to the old one instead of replacing it. Drop `-g` if you want to update a project-level config instead.
+**Note:** Set `--name` to the name of your existing Neon MCP server entry to override it. Drop `-g` to update a project-level config instead.
 
 If your client only supports local stdio servers, you can bridge to Streamable HTTP with [`mcp-remote`](https://www.npmjs.com/package/mcp-remote):
 
