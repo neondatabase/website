@@ -156,9 +156,9 @@ Managed Better Auth does not currently support projects with [IP Allow](/docs/ma
 
 Managed Better Auth is included in all Neon plans based on Monthly Active Users (MAU):
 
-- **Free**: Up to 60,000 MAU
-- **Launch**: Up to 1M MAU
-- **Scale**: Up to 1M MAU
+- **Free**: Up to 60,000 MAU per project
+- **Launch**: Up to 1M MAU per project
+- **Scale**: Up to 1M MAU per project
 
 An MAU (Monthly Active User) is a unique user who authenticates at least once during a monthly billing period. If you need more than 1M MAU, request an increase in the [console feedback form](https://console.neon.tech/app/settings?modal=feedback&modalparams=%22Neon%20auth%20limit%20increase%22).
 
