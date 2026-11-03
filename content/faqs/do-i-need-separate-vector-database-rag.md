@@ -2,7 +2,7 @@
 title: "Do I need a separate vector database for RAG?"
 subtitle: "Usually not. With Lakebase Search on Neon, embeddings, BM25 text, and your app data live in one Postgres database, so retrieval is a SQL query with your tenant and permission filters in the WHERE clause, and there's nothing to sync."
 createdAt: '2026-11-02T00:00:00.000Z'
-updatedOn: '2026-11-02T00:00:00.000Z'
+updatedOn: '2026-11-03T23:21:47.530Z'
 isDraft: false
 previousLink:
   title: 'How do I delete a database in Neon?'
@@ -44,7 +44,7 @@ RAG often needs exact terms too: product codes, error strings, names. [`lakebase
 
 ## The rest of the RAG backend
 
-Embeddings can come from [AI Gateway](/docs/ai-gateway/embeddings), which serves 1024-dimension models such as `qwen3-embedding-0-6b` on an OpenAI-compatible endpoint (paid plans, prepaid credits). Any other provider works too: match the `vector` column to its dimensions. A [Neon Function](/docs/compute/functions/overview) can run ingestion and serve retrieval next to the database, with `DATABASE_URL` and the AI Gateway credentials injected ([environment variables](/docs/compute/functions/environment-variables)). Branches copy the database copy-on-write, so a test branch gets the same chunks and indexes without re-embedding ([branching](/docs/introduction/branching)).
+Embeddings can come from [AI Gateway](/docs/ai-gateway/embeddings), which serves 1024-dimension models such as `qwen3-embedding-0-6b` on an OpenAI-compatible endpoint (prepaid credits). Any other provider works too: match the `vector` column to its dimensions. A [Neon Function](/docs/compute/functions/overview) can run ingestion and serve retrieval next to the database, with `DATABASE_URL` and the AI Gateway credentials injected ([environment variables](/docs/compute/functions/environment-variables)). Branches copy the database copy-on-write, so a test branch gets the same chunks and indexes without re-embedding ([branching](/docs/introduction/branching)).
 
 A separate vector database can still make sense if vectors are your only data and you already run that system. If your app data lives in Postgres, keeping retrieval there removes the sync job and the permission copy.
 

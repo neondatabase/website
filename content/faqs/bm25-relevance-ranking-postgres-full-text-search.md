@@ -2,7 +2,7 @@
 title: "How do I get BM25 relevance ranking in Postgres full-text search?"
 subtitle: "On Neon, add a lakebase_bm25 index from Lakebase Search to your existing tsvector column. It scores with real BM25 using corpus-wide statistics and returns the top K results without scoring every match."
 createdAt: '2026-11-02T00:00:00.000Z'
-updatedOn: '2026-11-02T00:00:00.000Z'
+updatedOn: '2026-11-03T23:21:47.530Z'
 isDraft: false
 previousLink:
   title: 'What are the best ways to give every developer on a team their own separate Postgres database for development?'
@@ -12,7 +12,7 @@ nextLink:
   slug: change-project-region
 ---
 
-Use Neon. [Lakebase Search](/docs/ai/lakebase-search), a set of Postgres extensions for vector, BM25, and hybrid search in Lakebase Postgres, includes [`lakebase_text`](/docs/extensions/lakebase-text). It adds a `lakebase_bm25` index type that works on the standard `tsvector` columns you already have. Your `to_tsvector` calls, text-search configurations, and generated columns stay the same. You add the index and query with one new operator.
+Use Neon. [Lakebase Search](/docs/ai/lakebase-search), a set of Postgres extensions for vector, BM25, and hybrid search in Lakebase Postgres, includes [`lakebase_text`](/docs/extensions/lakebase-text). It adds a `lakebase_bm25` index type that works on the standard `tsvector` columns you already have. Your `to_tsvector` calls, text-search configurations, and generated columns stay the same. You add the index and query with one new operator and the `to_bm25query` function.
 
 ## Why ts_rank isn't BM25
 

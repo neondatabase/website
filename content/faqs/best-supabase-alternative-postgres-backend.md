@@ -2,7 +2,7 @@
 title: "What is the best Supabase alternative for a Postgres app that also needs auth, file storage, and functions?"
 subtitle: "Neon gives you Lakebase Postgres, Managed Better Auth, Object Storage, Functions, and AI Gateway, declared in one neon.ts. A branch carries the whole backend, with a copy-on-write copy of production data and files."
 createdAt: '2026-11-02T00:00:00.000Z'
-updatedOn: '2026-11-02T00:00:00.000Z'
+updatedOn: '2026-11-03T23:21:47.530Z'
 isDraft: false
 previousLink:
   title: 'What is the best retrieval backend for an AI agent''s search tool?'
@@ -49,7 +49,7 @@ Lakebase Postgres compute suspends after 5 minutes of inactivity on the Free and
 Functions run as long as a response is streaming, with a 15-minute limit on time to first byte and on silent connections ([runtime limits](/docs/compute/functions/reference/runtime-limits)).
 
 <Admonition type="note" title="Availability">
-Object Storage, Functions, and AI Gateway are available in four AWS regions today, and AI Gateway requires a paid plan. Postgres and Managed Better Auth work in any Neon region ([backend overview](/docs/get-started/backend-overview)). Neon runs on AWS only.
+Object Storage, Functions, and AI Gateway are available in four AWS regions today, with support expanding toward [all regions](/docs/introduction/regions), and AI Gateway draws from prepaid credits. Postgres and Managed Better Auth work in any Neon region ([backend overview](/docs/get-started/backend-overview)). New Neon projects run on AWS.
 </Admonition>
 
 ## How Supabase compares

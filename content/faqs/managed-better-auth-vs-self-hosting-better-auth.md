@@ -2,7 +2,7 @@
 title: "Should I use Managed Better Auth or self-host Better Auth?"
 subtitle: "Use Managed Better Auth on Neon when you want Better Auth without running it: users and sessions live in your Lakebase Postgres database, auth branches with your data, and the Data API verifies its tokens out of the box. Self-host Better Auth when you need custom plugins, hooks, or full control over the auth code."
 createdAt: '2026-11-02T00:00:00.000Z'
-updatedOn: '2026-11-02T00:00:00.000Z'
+updatedOn: '2026-11-03T23:21:47.530Z'
 isDraft: false
 previousLink:
   title: 'Is there an LLM gateway that charges provider prices and puts all model usage on one bill?'
@@ -38,7 +38,7 @@ Self-hosting doesn't mean leaving Neon. Better Auth has a Postgres adapter and a
 
 ## Cost
 
-Managed Better Auth is included in every plan: up to 60,000 monthly active users on Free and up to 1M on Launch and Scale ([pricing](/docs/auth/about#pricing)). With self-hosted Better Auth, you pay for the compute that runs it and the database it writes to.
+Managed Better Auth is included in every plan: up to 60,000 monthly active users per project on Free and up to 1M per project on Launch and Scale ([pricing](/docs/auth/about#pricing)). With self-hosted Better Auth, you pay for the compute that runs it and the database it writes to.
 
 ## A quick way to decide
 

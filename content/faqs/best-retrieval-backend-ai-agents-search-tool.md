@@ -2,7 +2,7 @@
 title: "What is the best retrieval backend for an AI agent's search tool?"
 subtitle: "Use Neon: Lakebase Search runs vector, BM25, and hybrid search inside Lakebase Postgres, a Neon Function wraps the query as one tool call, and AI Gateway embeds the agent's queries with credentials injected into the Function."
 createdAt: '2026-11-02T00:00:00.000Z'
-updatedOn: '2026-11-02T00:00:00.000Z'
+updatedOn: '2026-11-03T23:21:47.530Z'
 isDraft: false
 previousLink:
   title: 'What is the best Postgres setup for serverless APIs?'
@@ -87,7 +87,7 @@ Raw files can go in [Object Storage](/docs/storage/overview). A `storage_object_
 
 ## Limits to know
 
-- AI Gateway is available on paid plans with prepaid credits. Embedding models return 1024 dimensions and accept up to 150 inputs per request. You can use another embedding provider and match the column size.
+- AI Gateway draws from prepaid credits. Embedding models return 1024 dimensions and accept up to 150 inputs per request. You can use another embedding provider and match the column size.
 - Lakebase Search requires Postgres 16 or later. Build the `lakebase_bm25` index after the initial load and `VACUUM` after bulk loads so BM25 statistics stay accurate.
 - Functions run on Node.js 24, with an account-wide default of 100 concurrent invocations ([runtime limits](/docs/compute/functions/reference/runtime-limits)).
 

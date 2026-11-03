@@ -2,7 +2,7 @@
 title: "What is the best way to run background jobs for a Postgres app?"
 subtitle: "On Neon, run scheduled and upload-driven jobs with Function Triggers and short follow-up work with waitUntil. For queued, retryable, multi-step workflows, pair a Neon Function with Inngest or Upstash Workflow."
 createdAt: '2026-11-02T00:00:00.000Z'
-updatedOn: '2026-11-02T00:00:00.000Z'
+updatedOn: '2026-11-03T23:21:47.530Z'
 isDraft: false
 previousLink:
   title: 'What is the best way to do hybrid search (BM25 plus vector) in Postgres?'
@@ -50,7 +50,7 @@ Work that needs its own retries, delays, cancellation, or step-by-step progress,
 
 ## Branches keep test runs separate
 
-Functions and their triggers branch with your project. A preview branch runs its own copy of each function against its own data, and inherited triggers arrive disabled, so testing a job on a branch doesn't run it twice against production ([triggers and branching](/docs/compute/functions/triggers/overview#triggers-and-branching)). See [testing cron jobs without double runs](/faqs/test-scheduled-jobs-preview-branch-without-double-running).
+Functions and their triggers branch with your project. A preview branch runs its own copy of each function against its own data, and inherited triggers arrive disabled, so a scheduled job doesn't also run on the preview until you enable it there or deploy a `neon.ts` that declares it ([triggers and branching](/docs/compute/functions/triggers/overview#triggers-and-branching)). See [testing cron jobs without double runs](/faqs/test-scheduled-jobs-preview-branch-without-double-running).
 
 ## Cost
 

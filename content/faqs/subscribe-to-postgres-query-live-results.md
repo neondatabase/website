@@ -2,7 +2,7 @@
 title: "How do I subscribe to a Postgres query and get its results live as the data changes?"
 subtitle: "Neon Realtime (public beta) turns any read-only, deterministic SQL query into a live query on Lakebase Postgres. You subscribe to the query once and get the updated result every time a write changes it, with no polling or LISTEN/NOTIFY plumbing."
 createdAt: '2026-11-02T00:00:00.000Z'
-updatedOn: '2026-11-02T00:00:00.000Z'
+updatedOn: '2026-11-03T23:21:47.530Z'
 isDraft: false
 previousLink:
   title: 'How do I store private user files and share them with expiring links?'
@@ -21,7 +21,7 @@ The usual ways to keep a query result fresh each push work back onto your app:
 - **Polling** re-runs the query on a timer. Most runs return nothing new, each one costs a database round trip, and the screen is only as fresh as the interval.
 - **LISTEN/NOTIFY** tells you that something changed, not what your query now returns, so you still refetch. It needs a direct connection, because `LISTEN` doesn't work through the pooler ([connection pooling](/docs/connect/connection-pooling)). Listeners are lost when the compute suspends, so a `LISTEN` feed only works on an always-on compute with scale to zero disabled ([compute lifecycle](/docs/introduction/compute-lifecycle), [LISTEN/NOTIFY on Functions](/docs/compute/functions/websockets)).
 
-With Realtime, the query is the subscription. When a write commits, only the live queries it affects are updated, and the engine sends the delta.
+With Realtime, the query is the subscription. When a write commits, only the live queries it affects are updated, and the engine sends the delta. Queries with `ORDER BY` get the full result instead of a delta.
 
 ## Example: live unread counts
 
@@ -60,7 +60,7 @@ Insert a row from a second terminal and the result prints again. Add `--changes`
 Clients connect to the Live SQL API, which talks to the live query engine over a single connection, so subscribers don't use database connections. The incremental work runs on a replica, so your primary's write latency and throughput aren't affected. Starting a live query can wake a suspended compute, but holding a subscription open doesn't keep it awake ([Realtime FAQ](/docs/realtime/overview#frequently-asked-questions)).
 
 <Admonition type="note" title="Beta scope">
-Realtime is free during the beta. Compute that a live query wakes and outbound data transfer still bill as usual. It's available in AWS us-east-1, us-east-2, eu-central-1, and ap-southeast-1, doesn't support row-level security yet (authorize in your backend before sealing), and isn't available on claimable projects until they're claimed ([what's in the beta](/docs/realtime/overview#frequently-asked-questions)).
+Realtime is free during the beta. Compute that a live query wakes and outbound data transfer still bill as usual. It's available in AWS us-east-1, us-east-2, eu-central-1, and ap-southeast-1, with support expanding toward [all regions](/docs/introduction/regions), doesn't support row-level security yet (authorize in your backend before sealing), and isn't available on claimable projects until they're claimed ([what's in the beta](/docs/realtime/overview#frequently-asked-questions)).
 </Admonition>
 
 <CTA title="Run your first live query" description="Enable Realtime on a branch and subscribe to a query from the terminal in a few minutes." buttonText="Realtime quickstart" buttonUrl="/docs/realtime/quickstart" />

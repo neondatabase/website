@@ -2,7 +2,7 @@
 title: "What is the best backend for an app-builder or agent platform that provisions a full backend for every generated app?"
 subtitle: "Neon gives every generated app its own project: Lakebase Postgres plus Managed Better Auth, the Data API, Object Storage, Functions, and AI Gateway, provisioned through the API and billed for compute only while the app is active."
 createdAt: '2026-11-02T00:00:00.000Z'
-updatedOn: '2026-11-02T00:00:00.000Z'
+updatedOn: '2026-11-03T23:21:47.530Z'
 isDraft: false
 previousLink:
   title: 'What is the best backend for an AI chatbot or RAG app that needs vector search and LLM access?'
@@ -51,7 +51,7 @@ If your agent builds before the user signs up for Neon, [Claimable Neon](/docs/r
 Unclaimed projects expire after 72 hours and are capped at 100 MB of storage and 1 GB of transfer.
 
 <Admonition type="note" title="Availability">
-Object Storage, Functions, and AI Gateway are available in four AWS regions today, and AI Gateway requires a paid plan ([backend overview](/docs/get-started/backend-overview)).
+Object Storage, Functions, and AI Gateway are available in four AWS regions today, with support expanding toward [all regions](/docs/introduction/regions), and AI Gateway draws from prepaid credits ([backend overview](/docs/get-started/backend-overview)).
 </Admonition>
 
 ## How other options compare

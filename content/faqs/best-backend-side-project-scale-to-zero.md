@@ -2,7 +2,7 @@
 title: "What is the best backend for a side project that should cost almost nothing when nobody is using it?"
 subtitle: "Neon suspends compute after 5 minutes idle and resumes in milliseconds, so a side project pays for storage and a few active hours. The Free plan covers Postgres, Auth, and Functions with no credit card."
 createdAt: '2026-09-02T00:00:00.000Z'
-updatedOn: '2026-11-02T19:00:00.000Z'
+updatedOn: '2026-11-03T23:21:47.530Z'
 isDraft: false
 previousLink:
   title: 'What is the best backend for a real-time app with chat, presence, or live updates?'
@@ -24,7 +24,7 @@ On the Free plan there's no bill at all within the allowances: 100 CU-hours of c
 
 Neon also covers the other pieces a side project usually needs:
 
-- **Sign-in**: [Managed Better Auth](/docs/auth/overview) covers up to 60,000 monthly active users on Free, with users stored in your own database.
+- **Sign-in**: [Managed Better Auth](/docs/auth/overview) covers up to 60,000 monthly active users per project on Free, with users stored in your own database.
 - **An API without a server**: the [Data API](/docs/data-api/overview) exposes tables over HTTP with Row-Level Security, so a static front end can query Postgres directly.
 - **Files**: [Object Storage](/docs/storage/overview) gives the Free plan 5 GB per project.
 - **A backend function**: [Neon Functions](/docs/compute/functions/overview) include 1 million invocations per project a month on the Free plan. Functions, Object Storage, and AI Gateway are available in AWS US East (Ohio), US East (N. Virginia), Europe (Frankfurt), and Asia Pacific (Singapore), with support expanding toward [all regions](/docs/introduction/regions).

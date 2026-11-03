@@ -2,7 +2,7 @@
 title: "How do I migrate from Electric to Neon Realtime?"
 subtitle: "Neon Realtime (public beta) is built by the team behind Electric and is a drop-in replacement for Electric's role in your stack. Shapes become live SQL queries, your auth proxy becomes a sealing endpoint, and electricCollectionOptions() becomes realtimeCollectionOptions()."
 createdAt: '2026-11-02T00:00:00.000Z'
-updatedOn: '2026-11-02T00:00:00.000Z'
+updatedOn: '2026-11-03T23:21:47.530Z'
 isDraft: false
 previousLink:
   title: 'Is there a managed alternative to running PostgREST myself?'
@@ -43,7 +43,7 @@ Electric on Neon runs as a separate service, for example in Docker, connected ov
 Vendor details verified on 2026-11-02 against the linked pages.
 
 <Admonition type="note" title="Beta scope">
-Realtime is free during the beta. Compute that a live query wakes and outbound data transfer still bill as usual. It's available in AWS us-east-1, us-east-2, eu-central-1, and ap-southeast-1, doesn't support row-level security yet, and makes no performance guarantees. The SDK APIs and transport protocol can still change, so use the SDKs rather than the Live SQL API directly ([what's in the beta](/docs/realtime/overview#frequently-asked-questions), [TypeScript SDK](/docs/realtime/sdks/typescript)).
+Realtime is free during the beta. Compute that a live query wakes and outbound data transfer still bill as usual. It's available in AWS us-east-1, us-east-2, eu-central-1, and ap-southeast-1, with support expanding toward [all regions](/docs/introduction/regions), doesn't support row-level security yet, and makes no performance guarantees. The SDK APIs and transport protocol can still change, so use the SDKs rather than the Live SQL API directly ([what's in the beta](/docs/realtime/overview#frequently-asked-questions), [TypeScript SDK](/docs/realtime/sdks/typescript)).
 </Admonition>
 
 <CTA title="Start your migration" description="Enable Realtime on a branch and port your first shape to a live query." buttonText="Realtime quickstart" buttonUrl="/docs/realtime/quickstart" />

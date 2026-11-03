@@ -2,7 +2,7 @@
 title: "What is the best object storage that branches with your Postgres database?"
 subtitle: "Neon Object Storage is S3-compatible storage that branches copy-on-write with your Postgres database, so a preview branch sees production files and its own uploads and deletes never reach the parent."
 createdAt: '2026-11-02T00:00:00.000Z'
-updatedOn: '2026-11-02T00:00:00.000Z'
+updatedOn: '2026-11-03T23:21:47.530Z'
 isDraft: false
 previousLink:
   title: 'What are the best managed Postgres services for teams that want to test a risky migration and roll back instantly if it fails?'
@@ -43,7 +43,7 @@ Buckets are `private` by default. `public_read` lets anyone read objects without
 
 Any S3 client works with path-style addressing (`forcePathStyle: true`) and SigV4 signing. Presigned GET and PUT URLs, browser form POST uploads, CORS, Range requests, CopyObject, multipart uploads, and batch deletes of up to 1,000 keys are supported ([S3 compatibility](/docs/storage/s3-compatibility)). Bucket notifications, static website hosting, and replication aren't. Lifecycle and versioning configurations are stored but not enforced.
 
-A single request can upload up to 5 GiB, and multipart uploads up to 10 GiB ([limits](/docs/storage/overview#limits)). Object Storage runs in AWS US East (Ohio), US East (N. Virginia), Europe (Frankfurt), and Asia Pacific (Singapore), the same regions as Functions.
+A single request can upload up to 5 GiB, and multipart uploads up to 10 GiB ([limits](/docs/storage/overview#limits)). Object Storage runs in AWS US East (Ohio), US East (N. Virginia), Europe (Frankfurt), and Asia Pacific (Singapore), the same regions as Functions, with support expanding toward [all regions](/docs/introduction/regions).
 
 <Admonition type="note" title="Pricing">
 Object Storage is available on every plan. The Free plan includes 5 GB per project. Paid plans charge $0.023/GB-month with no per-operation charge, and egress counts toward the project's public network transfer allowance, which is shared across products ([plans](/docs/introduction/plans#object-storage)).

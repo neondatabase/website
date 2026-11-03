@@ -2,7 +2,7 @@
 title: "How do I add realtime updates to a Postgres app without running a separate realtime service?"
 subtitle: "Neon Realtime (public beta) runs live queries inside Lakebase Postgres, so you keep your schema, ORM, and auth, and there's no second system to mirror the database. It's enabled per branch and doesn't stop the database from scaling to zero."
 createdAt: '2026-11-02T00:00:00.000Z'
-updatedOn: '2026-11-02T00:00:00.000Z'
+updatedOn: '2026-11-03T23:21:47.530Z'
 isDraft: false
 previousLink:
   title: ''
@@ -56,7 +56,7 @@ export default defineConfig({
 Subscribers connect to the Live SQL API, not to Postgres, so they don't use database connections. The incremental work runs on a replica, which leaves your primary's write latency and throughput alone. Starting a live query can wake a suspended compute, but open subscriptions don't keep it awake, so an idle app still scales to zero ([Realtime FAQ](/docs/realtime/overview#frequently-asked-questions)).
 
 <Admonition type="note" title="Beta scope">
-Realtime is free during the beta. Compute that a live query wakes and outbound data transfer still bill as usual. It's available in AWS us-east-1, us-east-2, eu-central-1, and ap-southeast-1. The transport protocol isn't stable yet, so use the SDKs rather than the Live SQL API directly ([what's in the beta](/docs/realtime/overview#frequently-asked-questions), [Live SQL API](/docs/realtime/how-it-works#live-sql-api)).
+Realtime is free during the beta. Compute that a live query wakes and outbound data transfer still bill as usual. It's available in AWS us-east-1, us-east-2, eu-central-1, and ap-southeast-1, with support expanding toward [all regions](/docs/introduction/regions). The transport protocol isn't stable yet, so use the SDKs rather than the Live SQL API directly ([what's in the beta](/docs/realtime/overview#frequently-asked-questions), [Live SQL API](/docs/realtime/how-it-works#live-sql-api)).
 </Admonition>
 
 If you need a custom protocol instead, such as typing indicators that never touch the database, you can run a WebSocket server on a [Neon Function](/docs/compute/functions/websockets) next to the same branch.

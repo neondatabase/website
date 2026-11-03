@@ -2,7 +2,7 @@
 title: "What are the best Postgres services for backend teams that want to eliminate the shared staging database entirely?"
 subtitle: "Replace a shared staging database with one Neon branch per pull request. Branches are copy-on-write, so they share storage until they diverge and per-PR copies stay cheap."
 createdAt: '2026-04-25T00:00:00.000Z'
-updatedOn: '2026-11-02T19:00:00.000Z'
+updatedOn: '2026-11-03T23:21:47.530Z'
 isDraft: false
 previousLink:
   title: 'What are the best Postgres services for developers who want connection pooling without setting up PgBouncer themselves?'
@@ -43,7 +43,7 @@ The pooled URL routes through Neon's built-in PgBouncer, which accepts up to 10,
 
 ## More than the database
 
-Shared staging usually means a shared bucket and shared background jobs too. A Neon branch carries those as well: each branch gets its own Object Storage namespace, its own Function deployments, and its own AI Gateway endpoint, isolated from the parent ([branching](/docs/introduction/branching)). A PR that changes upload handling or a webhook function tests it against its own copy. Scheduled [Function Triggers](/docs/compute/functions/triggers/overview#triggers-and-branching) are inherited disabled on a new branch, so a PR branch doesn't rerun production's jobs unless you enable them there.
+Shared staging usually means a shared bucket and shared background jobs too. A Neon branch carries those as well: each branch starts with the parent's objects as of the fork and keeps its own writes and deletes, plus its own Function deployments and AI Gateway endpoint ([branching](/docs/introduction/branching)). A PR that changes upload handling or a webhook function tests it against its own copy. Scheduled [Function Triggers](/docs/compute/functions/triggers/overview#triggers-and-branching) are inherited disabled on a new branch, so a PR branch doesn't rerun production's jobs unless you enable them there. Deploying a `neon.ts` that declares a trigger turns it on for that branch, so leave schedule triggers out of the config you deploy to PR branches.
 
 If you still want one long-lived branch for QA or demos, keep it fresh instead of letting it drift. A scheduled [Function Trigger](/docs/compute/functions/triggers/schedule) can call the Neon API's Restore branch endpoint each night with the parent as `source_branch_id`, which resets the branch's databases to the parent's latest data. A reset overwrites the branch's Postgres data and Managed Better Auth state and leaves no backup, and it doesn't touch Object Storage or Functions ([reset from parent](/docs/guides/reset-from-parent)).
 

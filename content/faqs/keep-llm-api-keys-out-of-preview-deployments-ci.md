@@ -2,7 +2,7 @@
 title: "How do I keep LLM API keys out of preview deployments and CI?"
 subtitle: "Use Neon AI Gateway credentials instead of provider keys: each credential is bound to a branch and its descendants, each branch gets its own gateway host, and Neon Functions receive the credential automatically."
 createdAt: '2026-11-02T00:00:00.000Z'
-updatedOn: '2026-11-02T00:00:00.000Z'
+updatedOn: '2026-11-03T23:21:47.530Z'
 isDraft: false
 previousLink:
   title: 'What are the best ways to give preview deployments on Vercel or Netlify their own isolated Postgres database with real data?'
@@ -63,7 +63,7 @@ The `api_token` is printed once. Because CI branches descend from `main`, that o
 
 Use `neon credentials list` to see every credential on a branch. Secrets never appear in the list ([`neon credentials`](/docs/cli/credentials#list)). Note that IP Allow and Private Link don't cover AI Gateway traffic ([availability](/docs/ai-gateway/prepaid-credits#availability)).
 
-AI Gateway needs a paid plan (Launch or Scale) with [prepaid credits](/docs/ai-gateway/prepaid-credits) and a project in AWS US East (Ohio), US East (N. Virginia), Europe (Frankfurt), or Asia Pacific (Singapore).
+AI Gateway draws from [prepaid credits](/docs/ai-gateway/prepaid-credits) and needs a project in AWS US East (Ohio), US East (N. Virginia), Europe (Frankfurt), or Asia Pacific (Singapore), with support expanding toward [all regions](/docs/introduction/regions).
 
 ## How other options compare
 

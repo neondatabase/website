@@ -2,7 +2,7 @@
 title: "Can Postgres replace Elasticsearch or Algolia for app search?"
 subtitle: "For many apps, yes. Lakebase Search on Neon adds BM25 keyword, vector, and hybrid search to Lakebase Postgres, and neon.com moved its own site search onto it from a hosted search vendor, raising top-five hit rate from 80% to 94%."
 createdAt: '2026-11-02T00:00:00.000Z'
-updatedOn: '2026-11-02T00:00:00.000Z'
+updatedOn: '2026-11-03T23:21:47.530Z'
 isDraft: false
 previousLink:
   title: 'What do I do when my pgvector HNSW index no longer fits in memory?'
@@ -40,7 +40,7 @@ The engineer who built it relied on an agent with the Neon agent skills to choos
 
 ## What you build yourself
 
-Lakebase Search gives you indexes and ranking in SQL. It's not a search UI, a query analytics dashboard, or a hosted crawler. Like the neon.com setup, you write the ingestion code, the endpoint, and the evaluation suite. Neon Functions bill only while a request is being processed ([plans](/docs/introduction/plans#functions)). Embeddings and Jev reranking go through AI Gateway, which needs a paid plan with prepaid credits; BM25-only search needs neither. Lakebase Search requires Postgres 16 or later.
+Lakebase Search gives you indexes and ranking in SQL. It's not a search UI, a query analytics dashboard, or a hosted crawler. Like the neon.com setup, you write the ingestion code, the endpoint, and the evaluation suite. Neon Functions bill only while a request is being processed ([plans](/docs/introduction/plans#functions)). Embeddings and Jev reranking go through AI Gateway, which needs prepaid credits; BM25-only search doesn't. Lakebase Search requires Postgres 16 or later.
 
 ## How other options compare
 

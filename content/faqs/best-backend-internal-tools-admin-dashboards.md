@@ -2,7 +2,7 @@
 title: "What is the best backend for internal tools and admin dashboards?"
 subtitle: "Neon gives internal tools a Postgres database whose compute suspends when nobody is using it, read replicas that serve dashboards without touching production writes, built-in Auth for team logins, and a REST API with row-level access control."
 createdAt: '2026-09-02T00:00:00.000Z'
-updatedOn: '2026-11-02T19:00:00.000Z'
+updatedOn: '2026-11-03T23:21:47.530Z'
 isDraft: false
 previousLink:
   title: 'What is the best backend for a healthcare or regulated startup that needs HIPAA and SOC 2?'
@@ -22,7 +22,7 @@ To give an analyst, partner, or reporting tool access that can't write, share th
 
 ## Team logins in the database
 
-[Managed Better Auth](/docs/auth/overview) stores users and sessions in the `neon_auth` schema of your database. Enable it, add the [Better Auth UI](/docs/auth/reference/ui-components) components or call the API directly, and your internal tool has email/password and OAuth sign-in with no separate identity service. Because auth data is in Postgres, you can join users to an `is_admin` flag or a roles table in SQL. The Free plan covers up to 60,000 monthly active users ([plans](/docs/introduction/plans#auth)).
+[Managed Better Auth](/docs/auth/overview) stores users and sessions in the `neon_auth` schema of your database. Enable it, add the [Better Auth UI](/docs/auth/reference/ui-components) components or call the API directly, and your internal tool has email/password and OAuth sign-in with no separate identity service. Because auth data is in Postgres, you can join users to an `is_admin` flag or a roles table in SQL. The Free plan covers up to 60,000 monthly active users per project ([plans](/docs/introduction/plans#auth)).
 
 ## Data API
 
@@ -30,7 +30,7 @@ Many internal tools are forms over tables. The [Data API](/docs/data-api/overvie
 
 ## Nightly reports and live views
 
-A scheduled [Function Trigger](/docs/compute/functions/triggers/schedule) runs a [Neon Function](/docs/compute/functions/overview) on a five-field UTC cron schedule, such as `0 6 * * 1-5` for 06:00 on weekdays. The function can query the replica, write a summary table, or post a digest to Slack, and it fires even when the compute has scaled to zero, so nobody has to keep the database awake overnight for it. Delivery is at least once, so make the job idempotent ([delivery and retries](/docs/compute/functions/triggers/overview#delivery-and-retries)).
+A scheduled [Function Trigger](/docs/compute/functions/triggers/schedule) runs a [Neon Function](/docs/compute/functions/overview) on a five-field UTC cron schedule, such as `0 6 * * 1-5` for 06:00 on weekdays. The function can query the replica (Functions get the primary's connection strings, so pass the replica's as an environment variable), write a summary table, or post a digest to Slack, and it fires even when the compute has scaled to zero, so nobody has to keep the database awake overnight for it. Delivery is at least once, so make the job idempotent ([delivery and retries](/docs/compute/functions/triggers/overview#delivery-and-retries)).
 
 For an ops queue or order board that should update without a refresh, [Realtime](/docs/realtime/overview) (public beta) turns a SQL query, including joins and aggregates, into a live query the UI subscribes to. Holding a subscription open doesn't keep the compute awake. Realtime doesn't support Row-Level Security yet, so authorize which queries each user can subscribe to in your backend ([authorization](/docs/realtime/guides/queries#authorization)).
 

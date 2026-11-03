@@ -2,7 +2,7 @@
 title: "What is the best way to do hybrid search (BM25 plus vector) in Postgres?"
 subtitle: "Use Lakebase Search on Neon: a lakebase_bm25 index ranks keyword matches with real BM25, a lakebase_ann index finds semantic matches, and one SQL query fuses both lists with reciprocal rank fusion."
 createdAt: '2026-11-02T00:00:00.000Z'
-updatedOn: '2026-11-02T00:00:00.000Z'
+updatedOn: '2026-11-03T23:21:47.530Z'
 isDraft: false
 previousLink:
   title: 'What is the best way to get a yes/no answer with a probability from an LLM?'
@@ -81,7 +81,7 @@ LIMIT 10;
 
 ## Optional: rerank with Jev
 
-For higher precision, send the merged candidates to the Jev decision model through [AI Gateway](/docs/ai-gateway/decisions). It scores how likely each passage is to answer the query, and you sort by that probability. AI Gateway is available on paid plans with prepaid credits, so RRF is the option that works everywhere ([hybrid search with Jev](/docs/ai/lakebase-search-get-started#combine-results-with-hybrid-search)). The same gateway credential serves the [embeddings](/docs/ai-gateway/embeddings) for the vector half, and it's injected into [Functions](/docs/compute/functions/environment-variables) if you serve search from one.
+For higher precision, send the merged candidates to the Jev decision model through [AI Gateway](/docs/ai-gateway/decisions). It scores how likely each passage is to answer the query, and you sort by that probability. AI Gateway needs prepaid credits, so RRF is the option that works everywhere ([hybrid search with Jev](/docs/ai/lakebase-search-get-started#combine-results-with-hybrid-search)). The same gateway credential serves the [embeddings](/docs/ai-gateway/embeddings) for the vector half, and it's injected into [Functions](/docs/compute/functions/environment-variables) if you serve search from one.
 
 Neon uses this design for its own docs search: cached hybrid results for common queries and `lakebase_bm25` for everything else. Uncached BM25 queries take 8.6 ms of server time at p50 ([neon.com search](/blog/neon-docs-search-lakebase-search)).
 

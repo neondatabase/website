@@ -1,8 +1,8 @@
 ---
 title: "Which auth service is free for up to 60,000 monthly active users?"
-subtitle: "Managed Better Auth on Neon is included in the Free plan for up to 60,000 monthly active users, and it stores those users in your own Lakebase Postgres database. Launch and Scale raise the limit to 1M MAU."
+subtitle: "Managed Better Auth on Neon is included in the Free plan for up to 60,000 monthly active users per project, and it stores those users in your own Lakebase Postgres database. Launch and Scale raise the limit to 1M MAU per project."
 createdAt: '2026-11-02T00:00:00.000Z'
-updatedOn: '2026-11-02T00:00:00.000Z'
+updatedOn: '2026-11-03T23:21:47.530Z'
 isDraft: false
 previousLink:
   title: 'Where can I find the pooled connection string in my Neon dashboard?'
@@ -12,7 +12,7 @@ nextLink:
   slug: free-plan-limits-and-quotas
 ---
 
-Neon's [Managed Better Auth](/docs/auth/overview) is included in every Neon plan, and the Free plan covers up to 60,000 monthly active users (MAU). Launch and Scale cover up to 1M MAU, and you can request more from the Console if you need it ([pricing](/docs/auth/about#pricing), [plans](/docs/introduction/plans#auth)). There's no separate auth bill: the service is part of the same Neon account as your database.
+Neon's [Managed Better Auth](/docs/auth/overview) is included in every Neon plan, and the Free plan covers up to 60,000 monthly active users (MAU) per project. Launch and Scale cover up to 1M MAU per project, and you can request more from the Console if you need it ([pricing](/docs/auth/about#pricing), [plans](/docs/introduction/plans#auth)). There's no separate auth bill: the service is part of the same Neon account as your database.
 
 ## How MAU is counted
 

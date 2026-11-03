@@ -2,7 +2,7 @@
 title: "How can an AI agent query a Postgres database over HTTPS without a driver?"
 subtitle: "The Neon Data API exposes your Lakebase Postgres tables as a PostgREST-compatible HTTPS endpoint, so an agent can read and write with fetch or curl while a scoped JWT and Row-Level Security limit what it can touch."
 createdAt: '2026-11-02T00:00:00.000Z'
-updatedOn: '2026-11-02T00:00:00.000Z'
+updatedOn: '2026-11-03T23:21:47.530Z'
 isDraft: false
 previousLink:
   title: 'Which managed Postgres options are affordable for early-stage startups that need a production database but have unpredictable traffic?'
@@ -49,7 +49,7 @@ GRANT SELECT ON posts TO agent_readonly;
 
 Issue the agent a token with `"role": "agent_readonly"` and it can't insert, update, or delete, whatever it tries. RLS policies then narrow which rows it sees, using `auth.user_id()` to read the token's `sub` claim. On tables with RLS enabled, the role also needs a policy before it sees any rows ([access control](/docs/data-api/access-control#understanding-rls-states)).
 
-Tokens can come from [Managed Better Auth](/docs/auth/overview), when an agent acts on behalf of a signed-in user, or from any JWT issuer you register with a JWKS URL ([custom providers](/docs/data-api/custom-authentication-providers)). Managed Better Auth JWTs expire after about 15 minutes, so long-running agents need to refresh them ([get started](/docs/data-api/get-started#testing-with-neon-auth)).
+Tokens can come from [Managed Better Auth](/docs/auth/overview), when an agent acts on behalf of a signed-in user, or from any JWT issuer you register with a JWKS URL ([custom providers](/docs/data-api/custom-authentication-providers)). Managed Better Auth JWTs expire after about 15 minutes, so long-running agents need to refresh them ([get started](/docs/data-api/get-started#testing-with-managed-better-auth)).
 
 ## Give each agent run its own branch
 

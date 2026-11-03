@@ -3,7 +3,7 @@ title: "What are the limits and quotas for Neon's Free plan?"
 subtitle: '100 projects, 10 branches each, 100 CU-hours per project, and 1 GB storage per project.'
 enableTableOfContents: true
 createdAt: '2026-05-18T00:00:00.000Z'
-updatedOn: '2026-10-01T15:44:50.010Z'
+updatedOn: '2026-11-03T23:21:47.530Z'
 isDraft: false
 redirectFrom: []
 previousLink:
@@ -29,7 +29,7 @@ The Neon Free plan costs $0/month and includes 100 projects, 10 branches per pro
 | Public network transfer | 5 GB per project per month                  |
 | Instant restore history | 6 hours, capped at 1 GB of change history   |
 | Manual snapshots        | 1                                           |
-| Managed Better Auth     | Up to 60,000 MAU                            |
+| Managed Better Auth     | Up to 60,000 MAU per project                |
 | Monitoring history      | 1 day                                       |
 | Support                 | Community                                   |
 

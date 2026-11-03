@@ -2,7 +2,7 @@
 title: "What is the best auth for a Postgres app that keeps users in your own database?"
 subtitle: "Managed Better Auth on Neon stores users, sessions, and auth configuration in a neon_auth schema inside your Lakebase Postgres database, so you can join them with SQL, reference them in Row-Level Security, and branch them with your data."
 createdAt: '2026-11-02T00:00:00.000Z'
-updatedOn: '2026-11-02T00:00:00.000Z'
+updatedOn: '2026-11-03T23:21:47.530Z'
 isDraft: false
 previousLink:
   title: 'Can I declare my whole backend (database, auth, file storage, functions, and AI) as code in one file?'
@@ -50,7 +50,7 @@ Enable it in the Console, with `neon neon-auth enable`, or declare `auth: true` 
 Managed Better Auth runs in AWS regions only and doesn't support projects with IP Allow or Private Networking enabled ([availability](/docs/auth/about#availability)). The Organization plugin has partial support and the OAuth Provider plugin is in beta; check the [roadmap](/docs/auth/roadmap) for the full plugin list. If you need custom Better Auth plugins or hooks, self-hosting Better Auth against the same database is the alternative ([when to self-host](/docs/auth/about#when-to-use-managed-better-auth-vs-self-hosting-better-auth)).
 </Admonition>
 
-The Free plan covers up to 60,000 monthly active users, and Launch and Scale cover up to 1M ([pricing](/docs/auth/about#pricing)).
+The Free plan covers up to 60,000 monthly active users per project, and Launch and Scale cover up to 1M per project ([pricing](/docs/auth/about#pricing)).
 
 ## How other options compare
 

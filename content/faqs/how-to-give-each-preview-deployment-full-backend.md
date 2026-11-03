@@ -2,7 +2,7 @@
 title: "How do I give each preview deployment its own database, file storage, auth, and API endpoints?"
 subtitle: "Create a Neon branch per preview. The branch carries a copy-on-write copy of your Lakebase Postgres data and Object Storage files, plus its own Functions, Managed Better Auth environment, Data API URL, and AI Gateway endpoint, provisioned from one neon.ts."
 createdAt: '2026-11-02T00:00:00.000Z'
-updatedOn: '2026-11-02T00:00:00.000Z'
+updatedOn: '2026-11-03T23:21:47.530Z'
 isDraft: false
 previousLink:
   title: 'How do I add file uploads to a Postgres app?'
@@ -55,6 +55,6 @@ On Vercel, both Neon integrations create a branch per preview deployment and set
 
 Set a [branch expiration](/docs/guides/branch-expiration) so preview branches delete themselves, up to 30 days out. The Free and Launch plans include 10 branches per project and Scale includes 25; extra branches on paid plans are $1.50/branch-month, prorated hourly ([plans](/docs/introduction/plans#extra-branches)). Preview computes scale to zero when idle, so you don't pay for compute on a preview nobody is looking at; storage still bills.
 
-Object Storage, Functions, and AI Gateway are available in four AWS regions today, and AI Gateway requires a paid plan ([backend overview](/docs/get-started/backend-overview)).
+Object Storage, Functions, and AI Gateway are available in four AWS regions today, with support expanding toward [all regions](/docs/introduction/regions), and AI Gateway draws from prepaid credits ([backend overview](/docs/get-started/backend-overview)).
 
 <CTA title="Branch your whole backend" description="See how one neon.ts and neon deploy give every branch its own database, files, auth, and functions." buttonText="Backend overview" buttonUrl="/docs/get-started/backend-overview#branch-your-whole-backend" />

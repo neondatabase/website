@@ -2,7 +2,7 @@
 title: "What is Lakebase Postgres, and why does it matter for app developers?"
 subtitle: "Lakebase Postgres is the Postgres database at the center of Neon. It separates compute from storage and treats the write-ahead log as the source of truth, so branches are instant, restores don't depend on database size, and compute autoscales and suspends when idle."
 createdAt: '2026-11-02T00:00:00.000Z'
-updatedOn: '2026-11-02T00:00:00.000Z'
+updatedOn: '2026-11-03T23:21:47.530Z'
 isDraft: false
 previousLink:
   title: 'How do I use Clerk, Auth0, or Firebase tokens with Postgres Row-Level Security?'
@@ -42,6 +42,6 @@ On Neon, branching extends past the database. A branch carries its own [Object S
 
 ## Neon and Databricks
 
-Neon and Databricks run the same database, Lakebase Postgres, on the same infrastructure, with the same core feature set ([Neon and Lakebase](/docs/introduction/neon-and-lakebase)). What surrounds it differs. On Neon it anchors a complete set of cloud backend primitives for developers, startups, and agent platforms. On Databricks it integrates with Unity Catalog, the lakehouse, and the rest of the Data Intelligence Platform. Neon runs on AWS.
+Neon and Databricks run the same database, Lakebase Postgres, on the same infrastructure, with the same core feature set ([Neon and Lakebase](/docs/introduction/neon-and-lakebase)). What surrounds it differs. On Neon it anchors a complete set of cloud backend primitives for developers, startups, and agent platforms. On Databricks it integrates with Unity Catalog, the lakehouse, and the rest of the Data Intelligence Platform. New Neon projects run on AWS.
 
 <CTA title="Start with Lakebase Postgres" description="Create a project, connect your app, and try branching and instant restore." buttonText="Lakebase Postgres docs" buttonUrl="/docs/postgres/overview" />

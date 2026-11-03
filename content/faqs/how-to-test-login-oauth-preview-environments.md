@@ -2,7 +2,7 @@
 title: "How do I test login and OAuth in preview environments?"
 subtitle: "With Managed Better Auth on Neon, every preview branch gets its own auth endpoint with a copy of production users, sessions, and settings, so preview deployments run real sign-up, login, and OAuth flows without touching production accounts."
 createdAt: '2026-11-02T00:00:00.000Z'
-updatedOn: '2026-11-02T00:00:00.000Z'
+updatedOn: '2026-11-03T23:21:47.530Z'
 isDraft: false
 previousLink:
   title: 'How do I test authentication in CI without mocking it?'
@@ -22,7 +22,7 @@ Sessions don't carry over. The session rows are copied, but browser cookies are 
 
 ## With Vercel
 
-Both Neon integrations for Vercel create a branch per Preview Deployment. If Managed Better Auth is enabled on your production branch, it's provisioned on each preview branch automatically, and the deployment receives `NEON_AUTH_BASE_URL` and `VITE_NEON_AUTH_URL` for that branch ([Vercel-Managed Integration](/docs/guides/vercel-managed-integration), [Neon-Managed Integration](/docs/guides/neon-managed-vercel-integration)). Your app reads those variables, so the same code talks to production auth in production and to the preview's auth in a preview. The [Vercel preview guide](/guides/vercel-neon-auth-branching) walks through it end to end.
+The Neon-Managed Integration creates a branch per Preview Deployment, and the Vercel-Managed Integration does when you enable it for Preview. If Managed Better Auth is enabled on your production branch, it's provisioned on each preview branch automatically, and the deployment receives `NEON_AUTH_BASE_URL` and `VITE_NEON_AUTH_URL` for that branch ([Vercel-Managed Integration](/docs/guides/vercel-managed-integration), [Neon-Managed Integration](/docs/guides/neon-managed-vercel-integration)). Your app reads those variables, so the same code talks to production auth in production and to the preview's auth in a preview. The [Vercel preview guide](/guides/vercel-neon-auth-branching) walks through it end to end.
 
 ## With GitHub Actions or another CI
 
@@ -53,6 +53,6 @@ Two URLs matter. The provider's authorized redirect URI is `{NEON_AUTH_BASE_URL}
 Shared Google credentials are for development and testing. Use your own OAuth credentials, a custom SMTP provider, and disable localhost access before launch ([production checklist](/docs/auth/production-checklist)).
 </Admonition>
 
-Managed Better Auth is available in AWS regions and is included on every plan, with up to 60,000 monthly active users on the Free plan ([pricing](/docs/auth/about#pricing)).
+Managed Better Auth is available in AWS regions and is included on every plan, with up to 60,000 monthly active users per project on the Free plan ([pricing](/docs/auth/about#pricing)).
 
 <CTA title="Test real auth in every preview" description="Enable Managed Better Auth on production and let each preview branch get its own auth endpoint." buttonText="Read branching authentication" buttonUrl="/docs/auth/branching-authentication" />

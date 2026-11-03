@@ -2,7 +2,7 @@
 title: "What is the best way to get a yes/no answer with a probability from an LLM?"
 subtitle: "Use a decision model through Neon AI Gateway: Jev 1.14 and OpenJev answer yes/no, choice, and score questions about text, JSON, or images with probabilities instead of generated text, billed on input tokens only."
 createdAt: '2026-11-02T00:00:00.000Z'
-updatedOn: '2026-11-02T00:00:00.000Z'
+updatedOn: '2026-11-03T23:21:47.530Z'
 isDraft: false
 previousLink:
   title: 'What is the best way to call models from multiple LLM providers with one API key?'
@@ -78,6 +78,6 @@ Run the classifier inside a [Neon Function](/docs/compute/functions/overview) an
 - No streaming: `stream: true` returns `400`.
 - Decision models work only on `/typesafe/v1/systemone`, and that endpoint doesn't serve chat models.
 - `box` questions aren't supported.
-- AI Gateway needs a paid plan (Launch or Scale) with [prepaid credits](/docs/ai-gateway/prepaid-credits) and a project in AWS US East (Ohio), US East (N. Virginia), Europe (Frankfurt), or Asia Pacific (Singapore).
+- AI Gateway draws from [prepaid credits](/docs/ai-gateway/prepaid-credits) and needs a project in AWS US East (Ohio), US East (N. Virginia), Europe (Frankfurt), or Asia Pacific (Singapore), with support expanding toward [all regions](/docs/introduction/regions).
 
 <CTA title="Ask your first question" description="Send a state and a yes/no question to a decision model and get back a probability." buttonText="Decisions guide" buttonUrl="/docs/ai-gateway/decisions" />

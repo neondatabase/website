@@ -2,7 +2,7 @@
 title: "What is the best backend for a hackathon or weekend project?"
 subtitle: "Neon gets you Postgres, Auth, and a deployable API in one command on the Free plan, and an agent can provision a project before you've made an account."
 createdAt: '2026-09-02T00:00:00.000Z'
-updatedOn: '2026-11-02T19:00:00.000Z'
+updatedOn: '2026-11-03T23:21:47.530Z'
 isDraft: false
 previousLink:
   title: 'What is the best backend for an app that stores user-uploaded files alongside a database?'
@@ -27,16 +27,16 @@ If you'd rather use your own stack, Lakebase Postgres is standard Postgres. Copy
 
 ## Auth
 
-[Managed Better Auth](/docs/auth/overview) stores users and sessions in your database under the `neon_auth` schema. Enable it in the Console or with `neon neon-auth enable`, add the [Better Auth UI](/docs/auth/reference/ui-components) components with `npx shadcn@latest add @better-auth-ui/auth`, and you have sign-up, sign-in, and Google OAuth. Neon provides shared Google OAuth credentials for testing, so you don't have to register an OAuth app first. The Free plan covers up to 60,000 monthly active users ([plans](/docs/introduction/plans#auth)).
+[Managed Better Auth](/docs/auth/overview) stores users and sessions in your database under the `neon_auth` schema. Enable it in the Console or with `neon neon-auth enable`, add the [Better Auth UI](/docs/auth/reference/ui-components) components with `npx shadcn@latest add @better-auth-ui/auth`, and you have sign-up, sign-in, and Google OAuth. Neon provides shared Google OAuth credentials for testing, so you don't have to register an OAuth app first. The Free plan covers up to 60,000 monthly active users per project ([plans](/docs/introduction/plans#auth)).
 
-For a demo that updates live, [Realtime](/docs/realtime/overview) (public beta) turns any read-only SQL query into a subscription, and `neon bootstrap my-app --template realtime-react` scaffolds a shared todo app where changes in one tab show up in the other. It's free during the beta and runs in four AWS regions ([quickstart](/docs/realtime/quickstart)).
+For a demo that updates live, [Realtime](/docs/realtime/overview) (public beta) turns any read-only SQL query into a subscription, and `neon bootstrap my-app --template realtime-react` scaffolds a shared todo app where changes in one tab show up in the other. It's free during the beta and runs in four AWS regions, with support expanding toward [all regions](/docs/introduction/regions) ([quickstart](/docs/realtime/quickstart)).
 
 ## Start without an account
 
 If a coding agent is doing the build and you haven't signed up, [Claimable Neon](/docs/reference/claimable-neon) creates a project immediately and hands you a claim link. `neon claim create --env-pull` writes credentials to `.env`. Unclaimed projects expire in 72 hours and are capped at 100 MB of storage and 1 GB of transfer. That covers a weekend demo, and you can claim the project if you want to keep it.
 
 <Admonition type="tip" title="What the Free plan includes">
-100 projects, 1 GB of Postgres storage per project, 100 CU-hours of compute per project per month (a 0.25 CU compute for 400 hours), 10 branches per project, 5 GB of public network transfer per project per month, Auth up to 60k MAU, and Free allowances for Object Storage and Functions ([plans](/docs/introduction/plans)). Compute scales to zero after 5 minutes idle, so a project you stop working on stops using CU-hours ([scale to zero](/docs/introduction/scale-to-zero)).
+100 projects, 1 GB of Postgres storage per project, 100 CU-hours of compute per project per month (a 0.25 CU compute for 400 hours), 10 branches per project, 5 GB of public network transfer per project per month, Auth up to 60k MAU per project, and Free allowances for Object Storage and Functions ([plans](/docs/introduction/plans)). Compute scales to zero after 5 minutes idle, so a project you stop working on stops using CU-hours ([scale to zero](/docs/introduction/scale-to-zero)).
 </Admonition>
 
 ## How other options compare

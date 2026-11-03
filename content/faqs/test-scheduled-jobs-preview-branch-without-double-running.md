@@ -1,8 +1,8 @@
 ---
 title: "How do I test cron jobs in staging or a preview environment without running them twice against production?"
-subtitle: "On Neon, a branch inherits its parent's Function Triggers disabled, so nothing fires on the copy until you enable it there, and an enabled trigger on the branch runs against the branch's own data."
+subtitle: "On Neon, a branch inherits its parent's Function Triggers disabled, so nothing fires on the copy until you enable it there or deploy a neon.ts that declares it, and an enabled trigger on the branch runs against the branch's own data."
 createdAt: '2026-11-02T00:00:00.000Z'
-updatedOn: '2026-11-02T00:00:00.000Z'
+updatedOn: '2026-11-03T23:21:47.530Z'
 isDraft: false
 previousLink:
   title: 'How do I test a new embedding model or chunking strategy on production data without affecting production?'
@@ -19,6 +19,7 @@ Use Neon. When you clone an environment that has scheduled jobs, the clone usual
 Triggers follow Neon's branch inheritance:
 
 - **Inherited triggers start disabled.** They appear on the child with `inherited: true`, `enabled: false`, and no next run time. Nothing fires on the branch until you enable it there.
+- **Deploying `neon.ts` enables them.** If you run `neon deploy` on the branch with a `neon.ts` that declares the trigger, the branch's copy is enabled and runs on its schedule ([`neon.ts` reference](/docs/reference/neon-ts#triggers)). Leave schedule triggers out of the config you deploy to test branches, or guard the job.
 - **Editing an inherited trigger makes it branch-local.** The edit creates a copy on the child under the same trigger ID. The parent's trigger is unchanged.
 - **Deleting an inherited trigger on the child removes it only there.** Production keeps running its copy.
 
@@ -39,7 +40,7 @@ Triggers only fire against deployed functions, never your laptop. To iterate on 
 
 ## Make each run safe to repeat
 
-Testing on a branch prevents double runs across environments. Within one environment, deliveries can still repeat: Neon retries failed deliveries for up to 72 hours, and a delivery can happen more than once or out of order ([delivery and retries](/docs/compute/functions/triggers/overview#delivery-and-retries)). Every delivery of the same occurrence carries the same `invocation_id`, so record it as a unique key in the same transaction as the job's database changes, and a repeat becomes a no-op.
+Keeping the branch's triggers disabled prevents double runs across environments. Within one environment, deliveries can still repeat: Neon retries failed deliveries for up to 72 hours, and a delivery can happen more than once or out of order ([delivery and retries](/docs/compute/functions/triggers/overview#delivery-and-retries)). Every delivery of the same occurrence carries the same `invocation_id`, so record it as a unique key in the same transaction as the job's database changes, and a repeat becomes a no-op.
 
 ## Compared with pg_cron
 

@@ -2,7 +2,7 @@
 title: "What is the best way to run code automatically when a file is uploaded?"
 subtitle: "Use a Neon Function Trigger: a storage_object_created trigger invokes your Neon Function with the bucket and key whenever an object lands in Object Storage, with no queue to wire up and nothing polling the bucket."
 createdAt: '2026-11-02T00:00:00.000Z'
-updatedOn: '2026-11-02T00:00:00.000Z'
+updatedOn: '2026-11-03T23:21:47.530Z'
 isDraft: false
 previousLink:
   title: 'How do I rotate my Neon API keys after they''ve been exposed?'
@@ -89,7 +89,7 @@ A few limits to design for:
 
 ## Branches get their own copy
 
-A child branch gets its own view of the bucket, its own Function URL, and an inherited copy of the trigger, which starts disabled. Enable it on the branch to test the pipeline, and test uploads and Postgres writes stay on the child without touching production ([triggers and branching](/docs/compute/functions/triggers/overview#triggers-and-branching)). To iterate without uploading, replay the payload against `neon dev` locally ([test triggers locally](/docs/compute/functions/triggers/overview#test-triggers-locally)).
+A child branch gets its own view of the bucket, its own Function URL, and an inherited copy of the trigger, which starts disabled (deploying a `neon.ts` that declares it turns it on). Enable it on the branch to test the pipeline, and test uploads and Postgres writes stay on the child without touching production ([triggers and branching](/docs/compute/functions/triggers/overview#triggers-and-branching)). To iterate without uploading, replay the payload against `neon dev` locally ([test triggers locally](/docs/compute/functions/triggers/overview#test-triggers-locally)).
 
 Functions bill only while a request is processed, and the Free plan includes 10 active and 400 waiting Capacity-Hours and 1 million invocations per project per month ([plans](/docs/introduction/plans#functions)).
 

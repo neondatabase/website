@@ -2,7 +2,7 @@
 title: "Is there an LLM gateway that charges provider prices and puts all model usage on one bill?"
 subtitle: "Neon AI Gateway charges each model provider's published per-token rate with no markup, and usage for every model draws down one prepaid credit balance on your Neon account, next to your Postgres, Object Storage, and Functions usage."
 createdAt: '2026-11-02T00:00:00.000Z'
-updatedOn: '2026-11-02T00:00:00.000Z'
+updatedOn: '2026-11-03T23:21:47.530Z'
 isDraft: false
 previousLink:
   title: 'How do I build a live dashboard on Postgres without polling the database?'
@@ -22,8 +22,8 @@ Calling labs directly means an account, a key, a payment method, and an invoice 
 
 - **Provider rates**: each request is billed on its token usage at the provider's published rate. Embedding and decision models are billed on input tokens only ([embeddings](/docs/ai-gateway/embeddings#models), [decisions](/docs/ai-gateway/decisions#models)).
 - **Prepaid credits**: 1 credit equals $1 USD. The minimum purchase is $5, and credits are valid for 12 months from purchase ([prepaid credits](/docs/ai-gateway/prepaid-credits#how-credits-and-pricing-work)).
-- **Same rates on both paid plans**: AI Gateway is available on Launch and Scale, with no difference in pricing or model access between the two. Any paid account with credits can call every model in the catalog.
-- **Per-model rates**: the catalog at [`neon.com/models.json`](https://neon.com/models.json) is the machine-readable source of truth. Each entry lists input and output rates per million tokens, and cache rates where the model supports them.
+- **Same rates on Launch and Scale**: pricing and model access don't differ between the two. Every model in the catalog is available once you have prepaid credits.
+- **Per-model rates**: the catalog at [`neon.com/models.json`](https://neon.com/models.json) is the machine-readable source of truth. Each entry lists rates per million tokens: input rates for every model, output rates for chat models, and cache and long-context rates where they apply.
 
 ## Managing the balance
 
@@ -33,11 +33,11 @@ To avoid running dry, turn on **auto-reload**: when the balance drops below a th
 
 ## Limits to plan around
 
-- **Rate limits**: soft limits of 200,000 input and 200,000 output tokens per minute per account, counted separately. Upstream output limits can also return `429` ([rate limits](/docs/ai-gateway/models#rate-limits)).
+- **Rate limits**: soft limits of 200,000 input and 200,000 output tokens per minute by default, counted separately, though this may vary by account. Upstream output limits can also return `429` ([rate limits](/docs/ai-gateway/models#rate-limits)).
 - **Daily spend cap**: an account-level daily cap guards against runaway cost. If you exceed it, every AI Gateway endpoint returns `429` with `REQUEST_LIMIT_EXCEEDED` until it resets ([troubleshooting](/docs/ai-gateway/troubleshooting#429-account-quota-exceeded)).
 - **No Free plan access**: AI Gateway isn't included in the Free plan. If you downgrade, your credits stay on the account and become usable again when you upgrade.
 - **Some accounts can't self-serve**: sales-invoiced, marketplace, trial, sponsored, and shared-token accounts can't buy credits through the Console flow.
-- **Regions**: AWS US East (Ohio), US East (N. Virginia), Europe (Frankfurt), and Asia Pacific (Singapore).
+- **Regions**: AWS US East (Ohio), US East (N. Virginia), Europe (Frankfurt), and Asia Pacific (Singapore), with support expanding toward [all regions](/docs/introduction/regions).
 
 ## Spend next to the rest of your backend
 
@@ -45,7 +45,7 @@ Because the gateway is part of your Neon project, model calls sit beside the res
 
 ## How other options compare
 
-- **OpenRouter**: passes through provider pricing with no markup on inference, but charges a 5.5% fee ($0.80 minimum) when you buy credits, and 5% for crypto payments ([OpenRouter FAQ](https://openrouter.ai/docs/faq)).
+- **OpenRouter**: passes through provider pricing with no markup on inference, but charges a fee when you buy credits: 5.5% on Standard and 8% on Business ([OpenRouter pricing](https://openrouter.ai/pricing)).
 - **Vercel AI Gateway**: no markup and no added fee on tokens, paid with prepaid AI Gateway Credits. Some optional capabilities, such as team-wide zero data retention and custom reporting, add surcharges ([pricing](https://vercel.com/docs/ai-gateway/pricing)).
 
 Vendor details verified on 2026-11-02 against the linked pages.

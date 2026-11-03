@@ -2,7 +2,7 @@
 title: "What is the simplest way to generate embeddings and store them in Postgres?"
 subtitle: "Call Neon AI Gateway's OpenAI-compatible /v1/embeddings endpoint with the same credential you use for chat, write the 1024-dimensional vectors into a vector column in Lakebase Postgres, and index them with lakebase_ann or HNSW."
 createdAt: '2026-11-02T00:00:00.000Z'
-updatedOn: '2026-11-02T00:00:00.000Z'
+updatedOn: '2026-11-03T23:21:47.530Z'
 isDraft: false
 previousLink:
   title: 'What is the simplest Postgres setup for startups?'
@@ -88,7 +88,7 @@ On the Vercel AI SDK, [`@neon/ai-sdk-provider`](https://www.npmjs.com/package/@n
 - **Batch size**: up to 150 inputs per request. Split long documents into chunks first, especially with `bge-large-en`.
 - **No streaming**: a request with `stream: true` returns `400`.
 - **Distance operator**: for the normalized models, cosine and inner product rank results the same way, so cosine (`vector_cosine_ops`, `<=>`) is a safe default ([choosing a distance operator](/docs/ai-gateway/embeddings#choosing-a-distance-operator)).
-- **Plan and region**: AI Gateway needs a paid plan (Launch or Scale) with [prepaid credits](/docs/ai-gateway/prepaid-credits) and a project in AWS US East (Ohio), US East (N. Virginia), Europe (Frankfurt), or Asia Pacific (Singapore).
+- **Credits and region**: AI Gateway draws from [prepaid credits](/docs/ai-gateway/prepaid-credits) and needs a project in AWS US East (Ohio), US East (N. Virginia), Europe (Frankfurt), or Asia Pacific (Singapore), with support expanding toward [all regions](/docs/introduction/regions).
 
 ## Automate it as files arrive
 

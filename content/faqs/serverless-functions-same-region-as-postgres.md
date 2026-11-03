@@ -2,7 +2,7 @@
 title: "Which serverless functions run in the same region as my Postgres database?"
 subtitle: "Neon Functions deploy onto your Lakebase Postgres branch, in the same region as the database, with DATABASE_URL and the credentials for other Neon services injected at runtime."
 createdAt: '2026-11-02T00:00:00.000Z'
-updatedOn: '2026-11-02T00:00:00.000Z'
+updatedOn: '2026-11-03T23:21:47.530Z'
 isDraft: false
 previousLink:
   title: 'Which serverless database services charge per second instead of per month for Postgres?'
@@ -59,7 +59,7 @@ Keep your frontend on Vercel, Netlify, or another host. Neon Functions don't hos
 ## Limits
 
 - JavaScript and TypeScript on Node.js 24 only.
-- Available in AWS US East (Ohio), US East (N. Virginia), Europe (Frankfurt), and Asia Pacific (Singapore). Create the project in one of these regions to use Functions.
+- Available in AWS US East (Ohio), US East (N. Virginia), Europe (Frankfurt), and Asia Pacific (Singapore), with support expanding toward [all regions](/docs/introduction/regions). Create the project in one of these regions to use Functions.
 - Memory is fixed at 2048 MiB, and an account has a default of 100 concurrent invocations.
 - On the Free plan, each project includes 10 active and 400 waiting Capacity-Hours and 1 million invocations per month. You're billed for function compute only while a request is being processed ([plans](/docs/introduction/plans#functions)).
 

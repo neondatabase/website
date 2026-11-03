@@ -2,7 +2,7 @@
 title: "How do I serve an MCP server or API from my own domain without running a reverse proxy?"
 subtitle: "Register the hostname on a Neon Function and add one CNAME record. Neon routes mcp.example.com straight to the Function and provisions its TLS certificate, so there's no proxy layer to deploy."
 createdAt: '2026-11-02T00:00:00.000Z'
-updatedOn: '2026-11-02T00:00:00.000Z'
+updatedOn: '2026-11-03T23:21:47.530Z'
 isDraft: false
 previousLink:
   title: 'How do I create tables in my Neon database using SQL?'
@@ -28,7 +28,7 @@ From the CLI, register the hostname against the Function's slug:
 neon functions domains register mcp.example.com --slug mcp --output json
 ```
 
-The response includes a `cname_target`. You can do the same from the Console (**Settings → Functions → Custom domains**), the SDK (`@neon/sdk` 5.0.0 or later), or the API. If you manage the branch with [`neon.ts`](/docs/reference/neon-ts), declare it on the Function and run `neon deploy`:
+The response includes a `cname_target`. You can do the same from the Console (**Settings → Functions → Custom domains**), the SDK (`@neon/sdk` 5.0.0 or later), or the API. If you manage the branch with [`neon.ts`](/docs/reference/neon-ts), declare it on the Function and run `neon deploy` (a static `customDomains` list applies on the default branch; use `neon.ts`'s `branch()` function for other branches):
 
 ```ts filename="neon.ts"
 functions: {

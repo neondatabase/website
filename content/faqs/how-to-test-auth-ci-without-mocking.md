@@ -2,7 +2,7 @@
 title: "How do I test authentication in CI without mocking it?"
 subtitle: "Create a Neon branch per CI run: with Managed Better Auth, the branch gets its own auth endpoint and a copy of your users, sessions, and settings, so tests sign up and log in against real auth and the branch is deleted afterward."
 createdAt: '2026-11-02T00:00:00.000Z'
-updatedOn: '2026-11-02T00:00:00.000Z'
+updatedOn: '2026-11-03T23:21:47.530Z'
 isDraft: false
 previousLink:
   title: 'How do I let other apps sign in with my app''s accounts?'
@@ -63,6 +63,6 @@ Session cookies are scoped to the production domain, so copied sessions don't lo
 Managed Better Auth runs in AWS regions only and isn't available on projects with IP Allow or Private Networking ([availability](/docs/auth/about#availability)). OAuth providers other than Google need your own credentials registered against each branch's callback URL ([set up OAuth](/docs/auth/guides/setup-oauth)), so email and password flows are the simplest to automate.
 </Admonition>
 
-The Free plan includes 10 branches per project and auth up to 60,000 monthly active users, which covers CI for most small teams ([plans](/docs/introduction/plans)).
+The Free plan includes 10 branches per project and auth up to 60,000 monthly active users per project, which covers CI for most small teams ([plans](/docs/introduction/plans)).
 
 <CTA title="Run real auth in every CI job" description="Create a branch per run with get_auth_url and test against Managed Better Auth." buttonText="Set up GitHub Actions" buttonUrl="/docs/guides/branching-github-actions" />

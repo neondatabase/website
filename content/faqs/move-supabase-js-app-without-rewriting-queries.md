@@ -2,7 +2,7 @@
 title: "How do I move a supabase-js app to another backend without rewriting my queries?"
 subtitle: "On Neon, swap @supabase/supabase-js for the Supabase-compatible client in @neon/neon-js. Your from() queries and most auth calls stay the same, backed by the Data API and Managed Better Auth on Lakebase Postgres."
 createdAt: '2026-11-02T00:00:00.000Z'
-updatedOn: '2026-11-02T00:00:00.000Z'
+updatedOn: '2026-11-03T23:21:47.530Z'
 isDraft: false
 previousLink:
   title: 'How do I migrate from Electric to Neon Realtime?'
@@ -45,7 +45,7 @@ The client takes one base URL, the host and database name from your Neon connect
 ## What doesn't carry over
 
 - **Password users.** Existing password-based accounts can't be migrated, because the password hashing algorithms differ. Users re-register or sign in with OAuth, so plan how rows owned by existing users map to their new accounts. The path fits new projects, early-stage apps, and OAuth-only apps best.
-- **Some auth methods.** Phone sign-in (SMS or WhatsApp), SAML SSO, and Web3 wallet sign-in aren't supported. `updateUser()` doesn't accept `password` or `email`, and email verification needs a UI you build in your app ([API compatibility](/docs/auth/migrate/from-supabase#api-compatibility)).
+- **Some auth methods.** SAML SSO and Web3 wallet sign-in aren't supported, and phone sign-in (SMS or WhatsApp) isn't available through the Supabase-compatible client. Managed Better Auth's [Phone Number plugin](/docs/auth/guides/plugins/phone-number) signs in existing users by SMS through its own client, with codes delivered by your `send.otp` webhook. `updateUser()` doesn't accept `password` or `email`, and email verification needs a UI you build in your app ([API compatibility](/docs/auth/migrate/from-supabase#api-compatibility)).
 - **Storage and realtime calls.** The compatible client covers auth and queries. For files, [Object Storage](/docs/storage/overview) is S3-compatible and branches with your database. For live updates, [Realtime](/docs/realtime/overview) (public beta) streams changes to SQL queries, including joins. Both use their own APIs. See [a Supabase Realtime alternative with live SQL joins](/faqs/supabase-realtime-alternative-live-sql-joins).
 
 ## Why the move is worth it

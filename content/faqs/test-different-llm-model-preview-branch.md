@@ -2,7 +2,7 @@
 title: "How do I test a different LLM model on a preview branch before switching production?"
 subtitle: "Branch your Neon backend, deploy the branch with a different model ID through Neon AI Gateway, and run your evals against a copy-on-write clone of production data. Production keeps its model until you merge the change."
 createdAt: '2026-11-02T00:00:00.000Z'
-updatedOn: '2026-11-02T00:00:00.000Z'
+updatedOn: '2026-11-03T23:21:47.530Z'
 isDraft: false
 previousLink:
   title: 'Is there a Supabase Realtime alternative that supports live queries with joins and aggregates?'
@@ -70,7 +70,7 @@ To keep eval branches from piling up, give new branches a TTL with the `branch` 
 - **Cost**: eval traffic draws down the same prepaid credit balance as production, at each provider's per-token rate. Compare per-model rates in [`neon.com/models.json`](https://neon.com/models.json) before you switch.
 - **Rate limits**: the 200,000 input and output tokens per minute soft limits apply per account, so a large eval run shares headroom with production ([rate limits](/docs/ai-gateway/models#rate-limits)).
 
-AI Gateway needs a paid plan (Launch or Scale) with [prepaid credits](/docs/ai-gateway/prepaid-credits) and a project in AWS US East (Ohio), US East (N. Virginia), Europe (Frankfurt), or Asia Pacific (Singapore).
+AI Gateway draws from [prepaid credits](/docs/ai-gateway/prepaid-credits) and needs a project in AWS US East (Ohio), US East (N. Virginia), Europe (Frankfurt), or Asia Pacific (Singapore), with support expanding toward [all regions](/docs/introduction/regions).
 
 ## Ship the winner
 

@@ -2,7 +2,7 @@
 title: "What is the best backend for a multi-tenant B2B SaaS?"
 subtitle: "Neon supports both shared-schema tenancy with Row-Level Security and a project-per-customer model provisioned by API, with Managed Better Auth organizations, per-tenant subdomains on Functions, per-tenant restore, and compute that scales to zero for idle tenants."
 createdAt: '2026-09-02T00:00:00.000Z'
-updatedOn: '2026-11-02T19:00:00.000Z'
+updatedOn: '2026-11-03T23:21:47.530Z'
 isDraft: false
 previousLink:
   title: 'What is the best backend for teams moving off Firebase who want Postgres?'
@@ -35,7 +35,7 @@ In a project-per-customer model, most projects are quiet at any given moment. Ne
 
 ## The rest of the SaaS stack
 
-- **Organizations and roles**: Managed Better Auth's [Organization plugin](/docs/auth/guides/plugins/organization) (partial support) adds organizations, invitations, and owner, admin, and member roles, stored in `neon_auth` next to your tenant data. Better Auth's Teams feature isn't enabled.
+- **Organizations and roles**: Managed Better Auth's [Organization plugin](/docs/auth/guides/plugins/organization) (partial support, in beta) adds organizations, invitations, and owner, admin, and member roles, stored in `neon_auth` next to your tenant data. Better Auth's Teams feature isn't enabled.
 - **Per-tenant subdomains**: register `acme.example.com` and other customer hostnames as [custom domains](/docs/compute/functions/custom-domains) on a Neon Function, and Neon provisions TLS for each. Inside the function, read the `x-forwarded-host` header to pick the tenant: Neon overwrites any client-supplied value, so it's safe to route on. Each hostname is registered once and attaches to one function on one branch.
 - **Preview environments**: every branch carries its own auth state, so you can test org invites and role changes on a copy of production without touching real customers ([branching authentication](/docs/auth/branching-authentication)).
 - **Long-running work**: webhooks, exports, and agent features run on [Neon Functions](/docs/compute/functions/overview) next to the data.

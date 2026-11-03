@@ -2,7 +2,7 @@
 title: "How do I add file uploads to a Postgres app?"
 subtitle: "With Neon, the browser uploads straight to Object Storage through a presigned URL, a Function signs that URL after checking the user's session, and Postgres stores the object key and metadata."
 createdAt: '2026-11-02T00:00:00.000Z'
-updatedOn: '2026-11-02T00:00:00.000Z'
+updatedOn: '2026-11-03T23:21:47.530Z'
 isDraft: false
 previousLink:
   title: 'How can an AI agent provision a backend before the user has signed up?'
@@ -72,6 +72,6 @@ To show a file, generate a presigned GET URL after checking that the row belongs
 
 A single PUT can upload up to 5 GiB. Use multipart uploads for files up to 10 GiB ([limits](/docs/storage/overview#limits)). Object Storage is available on every plan, with 5 GB per project on the Free plan and $0.023/GB-month on paid plans with no per-operation charge ([plans](/docs/introduction/plans#object-storage)). Because buckets [branch with the database](/docs/storage/objects#object-branching), a preview branch can test uploads and deletes against copies of production rows and files without changing either.
 
-To scaffold this pattern, run `neon bootstrap --template files-sdk`, or install the agent skill with `neon skills -s neon -s neon-object-storage` and let your coding agent wire it up ([quickstart](/docs/storage/get-started)).
+To see Object Storage working end to end, run `neon bootstrap --template files-sdk`: it uploads files with the Files SDK and indexes each upload in Postgres through a storage trigger. To build the upload route above, install the agent skill with `neon skills -s neon -s neon-object-storage` and let your coding agent wire it up ([quickstart](/docs/storage/get-started)).
 
 <CTA title="Add uploads to your app" description="Create a bucket, sign an upload URL, and record the key in Postgres." buttonText="Object Storage quickstart" buttonUrl="/docs/storage/get-started" />

@@ -2,7 +2,7 @@
 title: "How do I build a live dashboard on Postgres without polling the database?"
 subtitle: "With Neon Realtime (public beta), you subscribe to the dashboard's aggregate SQL query and Lakebase Postgres pushes the new result only when a write changes it. The incremental work runs on a replica, so the primary isn't affected."
 createdAt: '2026-11-02T00:00:00.000Z'
-updatedOn: '2026-11-02T00:00:00.000Z'
+updatedOn: '2026-11-03T23:21:47.530Z'
 isDraft: false
 previousLink:
   title: 'How do I keep Postgres metadata in sync with files in a bucket?'
@@ -61,7 +61,7 @@ Each browser connects to the Live SQL API, which reaches the live query engine o
 For an internal dashboard, sign-in can live in the same project with [Managed Better Auth](/docs/auth/overview). Your API verifies the session and seals each tile's query for that user, as the [Next.js](/docs/realtime/examples/nextjs) and [TanStack](/docs/realtime/examples/tanstack) examples show.
 
 <Admonition type="note" title="Beta scope">
-Realtime is free during the beta. Compute that a live query wakes and outbound data transfer still bill as usual. It's available in AWS us-east-1, us-east-2, eu-central-1, and ap-southeast-1, and the beta makes no performance guarantees ([what's in the beta](/docs/realtime/overview#frequently-asked-questions)).
+Realtime is free during the beta. Compute that a live query wakes and outbound data transfer still bill as usual. It's available in AWS us-east-1, us-east-2, eu-central-1, and ap-southeast-1, with support expanding toward [all regions](/docs/introduction/regions), and the beta makes no performance guarantees ([what's in the beta](/docs/realtime/overview#frequently-asked-questions)).
 </Admonition>
 
 <CTA title="Make a dashboard live" description="Enable Realtime on a branch and subscribe to your first aggregate query." buttonText="Realtime quickstart" buttonUrl="/docs/realtime/quickstart" />

@@ -2,7 +2,7 @@
 title: "How do I get S3-compatible storage without an AWS account?"
 subtitle: "Neon Object Storage speaks the S3 API, so the AWS SDK, boto3, and the AWS CLI work against a Neon endpoint with Neon credentials, no AWS account or IAM setup required."
 createdAt: '2026-11-02T00:00:00.000Z'
-updatedOn: '2026-11-02T00:00:00.000Z'
+updatedOn: '2026-11-03T23:21:47.530Z'
 isDraft: false
 previousLink:
   title: 'What is the best way to run code automatically when a file is uploaded?'
@@ -12,7 +12,7 @@ nextLink:
   slug: safely-query-postgres-from-browser
 ---
 
-Use Neon. [Neon Object Storage](/docs/storage/overview) is S3-compatible storage that comes with every Neon project. You sign up for Neon, create a bucket, and point your existing S3 code at a Neon endpoint. There's no AWS account, IAM user, or bucket policy to set up. Credentials are Neon credentials, the same system that covers Functions and AI Gateway ([authentication](/docs/storage/authentication)).
+Use Neon. [Neon Object Storage](/docs/storage/overview) is S3-compatible storage that comes with every Neon project in a supported region. You sign up for Neon, create a bucket, and point your existing S3 code at a Neon endpoint. There's no AWS account, IAM user, or bucket policy to set up. Credentials are Neon credentials, the same system that covers Functions and AI Gateway ([authentication](/docs/storage/authentication)).
 
 ## Create a bucket and a credential
 
@@ -58,7 +58,7 @@ A single request can upload up to 5 GiB, and multipart uploads up to 10 GiB. Und
 
 ## Regions and pricing
 
-Object Storage runs in AWS US East (Ohio), US East (N. Virginia), Europe (Frankfurt), and Asia Pacific (Singapore). Neon runs on AWS infrastructure, so you get S3-compatible storage in AWS regions without managing an AWS account. It's available on every plan. The Free plan includes 5 GB per project, and paid plans charge $0.023/GB-month with no per-operation charge. Egress counts toward the project's public network transfer allowance ([plans](/docs/introduction/plans#object-storage)).
+Object Storage runs in AWS US East (Ohio), US East (N. Virginia), Europe (Frankfurt), and Asia Pacific (Singapore), with support expanding toward [all regions](/docs/introduction/regions). Neon runs on AWS infrastructure, so you get S3-compatible storage in AWS regions without managing an AWS account. It's available on every plan. The Free plan includes 5 GB per project, and paid plans charge $0.023/GB-month with no per-operation charge. Egress counts toward the project's public network transfer allowance ([plans](/docs/introduction/plans#object-storage)).
 
 Your buckets also [branch with your Postgres database](/docs/storage/objects#object-branching), which a standalone S3 account can't do: a preview branch reads production objects, and its own writes and deletes stay on the branch.
 

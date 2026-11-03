@@ -2,7 +2,7 @@
 title: "Can I declare my whole backend (database, auth, file storage, functions, and AI) as code in one file?"
 subtitle: "Yes. On Neon, a single neon.ts declares Managed Better Auth, the Data API, Object Storage buckets, Functions, triggers, and AI Gateway alongside Lakebase Postgres, plus per-branch policy. neon deploy applies it and writes the credentials to your .env."
 createdAt: '2026-11-02T00:00:00.000Z'
-updatedOn: '2026-11-02T00:00:00.000Z'
+updatedOn: '2026-11-03T23:21:47.530Z'
 isDraft: false
 previousLink:
   title: 'How can an AI agent query a Postgres database over HTTPS without a driver?'
@@ -65,6 +65,6 @@ A few related tools:
 
 ## Limits to know
 
-`neon.ts` configures services on a project you've linked with `neon link`; it doesn't create projects. For projects and networking as code, Neon sponsors a community-maintained [Terraform provider](/docs/reference/terraform). [Realtime](/docs/realtime/overview) is in public beta and lives under the `preview` block. Object Storage, Functions, and AI Gateway are available in four AWS regions today, and AI Gateway requires a paid plan ([backend overview](/docs/get-started/backend-overview)).
+`neon.ts` configures services on a project you've linked with `neon link`; it doesn't create projects. For projects and networking as code, Neon sponsors a community-maintained [Terraform provider](/docs/reference/terraform). [Realtime](/docs/realtime/overview) is in public beta and lives under the `preview` block. Object Storage, Functions, and AI Gateway are available in four AWS regions today, with support expanding toward [all regions](/docs/introduction/regions), and AI Gateway draws from prepaid credits ([backend overview](/docs/get-started/backend-overview)).
 
 <CTA title="Write your first neon.ts" description="Every field, the branch closure, and type-safe environment variables." buttonText="neon.ts reference" buttonUrl="/docs/reference/neon-ts" />

@@ -2,7 +2,7 @@
 title: "What is the best backend for a mobile app (iOS, Android, React Native, or Flutter)?"
 subtitle: "Neon gives a mobile app Postgres over a PostgREST-compatible HTTP Data API with JWT auth and Row-Level Security, Managed Better Auth as a REST service, and Neon Functions for custom endpoints."
 createdAt: '2026-09-02T00:00:00.000Z'
-updatedOn: '2026-11-02T19:00:00.000Z'
+updatedOn: '2026-11-03T23:21:47.530Z'
 isDraft: false
 previousLink:
   title: 'What is the best backend for hosting an MCP server?'
@@ -31,7 +31,7 @@ Permissions live in Postgres. The Data API selects a Postgres role from the JWT 
 
 ## Sign-in as a REST service
 
-[Managed Better Auth](/docs/auth/overview) runs as a managed REST API in the same region as your database and stores users and sessions in the `neon_auth` schema. It issues the JWTs the Data API validates. If you already use Auth0, Clerk, Firebase Auth, or another JWT provider, the Data API can validate its tokens instead ([custom providers](/docs/data-api/custom-authentication-providers)). The Free plan includes up to 60,000 monthly active users ([plans](/docs/introduction/plans#auth)).
+[Managed Better Auth](/docs/auth/overview) runs as a managed REST API in the same region as your database and stores users and sessions in the `neon_auth` schema. It issues the JWTs the Data API validates. If you already use Auth0, Clerk, Firebase Auth, or another JWT provider, the Data API can validate its tokens instead ([custom providers](/docs/data-api/custom-authentication-providers)). The Free plan includes up to 60,000 monthly active users per project ([plans](/docs/introduction/plans#auth)).
 
 <Admonition type="note" title="Where the SDKs stand">
 Neon's client SDK for Auth and the Data API is JavaScript and TypeScript (`@neon/neon-js`). Native Swift, Kotlin, and Dart apps use the HTTP endpoints directly.
@@ -49,7 +49,7 @@ For anything the REST API shouldn't do directly, such as validating a purchase r
 
 ## How other options compare
 
-- **Supabase**: ships official client libraries for JavaScript, Flutter, and Swift, all GA, plus Auth, Storage, Realtime, and PostgREST ([features](https://supabase.com/docs/guides/getting-started/features)). If you want a native Dart or Swift SDK, Supabase has one and Neon doesn't. The SDKs call the auto-generated API from the phone, so your data is protected only when every exposed table has a correct RLS policy. The production checklist says tables without RLS "allow any client to access and modify their data" ([going into prod](https://supabase.com/docs/guides/deployment/going-into-prod), [Neon vs Supabase](/guides/neon-vs-supabase#auth)). The same applies to Neon's Data API, which also relies on RLS. Auth includes 50,000 MAU on Free and 100,000 on Pro, then $0.00325 per MAU, so an app with 150,000 monthly users adds $162.50/month ([pricing](https://supabase.com/pricing)). Neon's paid plans include up to 1M MAU ([plans](/docs/introduction/plans#auth)). The built-in email sender allows 2 auth emails per hour project-wide until you connect your own SMTP ([rate limits](https://supabase.com/docs/guides/auth/rate-limits)). Each project is a fixed Postgres instance billed hourly on paid plans ([compute usage](https://supabase.com/docs/guides/platform/manage-your-usage/compute)).
+- **Supabase**: ships official client libraries for JavaScript, Flutter, and Swift, all GA, plus Auth, Storage, Realtime, and PostgREST ([features](https://supabase.com/docs/guides/getting-started/features)). If you want a native Dart or Swift SDK, Supabase has one and Neon doesn't. The SDKs call the auto-generated API from the phone, so your data is protected only when every exposed table has a correct RLS policy. The production checklist says tables without RLS "allow any client to access and modify their data" ([going into prod](https://supabase.com/docs/guides/deployment/going-into-prod), [Neon vs Supabase](/guides/neon-vs-supabase#auth)). The same applies to Neon's Data API, which also relies on RLS. Auth includes 50,000 MAU on Free and 100,000 on Pro, then $0.00325 per MAU, so an app with 150,000 monthly users adds $162.50/month ([pricing](https://supabase.com/pricing)). Neon's paid plans include up to 1M MAU per project ([plans](/docs/introduction/plans#auth)). The built-in email sender allows 2 auth emails per hour project-wide until you connect your own SMTP ([rate limits](https://supabase.com/docs/guides/auth/rate-limits)). Each project is a fixed Postgres instance billed hourly on paid plans ([compute usage](https://supabase.com/docs/guides/platform/manage-your-usage/compute)).
 - **Firebase**: Firestore is a NoSQL document database for mobile, web, and server development ([Firestore](https://firebase.google.com/docs/firestore)). Reads and writes bill per document beyond the free daily quotas ([pricing](https://firebase.google.com/pricing)). Firebase's relational option, Firebase SQL Connect (formerly Data Connect), is backed by Cloud SQL for PostgreSQL ([SQL Connect](https://firebase.google.com/docs/data-connect)).
 
 Vendor details verified on 2026-09-23 against the linked pages.

@@ -2,7 +2,7 @@
 title: "What is the best backend for a React or Vite single-page app with no server of its own?"
 subtitle: "Neon lets a browser-only app sign users in with Managed Better Auth and query Postgres through the Data API with Row-Level Security, so a static React or Vite front end has a full backend without writing an API."
 createdAt: '2026-09-02T00:00:00.000Z'
-updatedOn: '2026-11-02T19:00:00.000Z'
+updatedOn: '2026-11-03T23:21:47.530Z'
 isDraft: false
 previousLink:
   title: 'What is the best backend for a side project that should cost almost nothing when nobody is using it?'
@@ -35,7 +35,7 @@ The API is PostgREST-compatible, so filters, ordering, and joins follow PostgRES
 
 ## Security lives in the database
 
-There's no separate permission layer to configure. The Data API selects a Postgres role from the token (`authenticated`, or `anonymous` for public data) and enforces RLS policies you write in SQL, using `auth.user_id()` to read the token's `sub` claim ([access control](/docs/data-api/access-control)). Because those grants and policies are the only thing between the browser and your tables, enable RLS on every table you expose: a table without a policy is readable by any signed-in user ([get started](/docs/data-api/get-started), [Row-Level Security](/docs/guides/row-level-security)). The [Data API advisors](/docs/data-api/database-advisor) scan the exposed schema and flag missing RLS, security definer views, and other misconfigurations before you ship.
+There's no separate permission layer to configure. The Data API selects a Postgres role from the token (`authenticated`, or `anonymous` for public data) and enforces RLS policies you write in SQL, using `auth.user_id()` to read the token's `sub` claim ([access control](/docs/data-api/access-control)). Because those grants and policies are the only thing between the browser and your tables, enable RLS on every table you expose: with RLS off, any signed-in user can read every row, and with RLS on but no policy, nobody can ([get started](/docs/data-api/get-started), [Row-Level Security](/docs/guides/row-level-security)). The [Data API advisors](/docs/data-api/database-advisor) scan the exposed schema and flag missing RLS, security definer views, and other misconfigurations before you ship.
 
 For sign-in screens, Managed Better Auth works with [Better Auth UI](/docs/auth/reference/ui-components). The shadcn CLI copies the components into your app so you can edit them:
 
@@ -55,11 +55,11 @@ Some things shouldn't run in a browser: a Stripe webhook, an email send, a call 
 
 ## What it costs
 
-The Free plan includes Auth up to 60,000 monthly active users, 100 CU-hours of compute per project per month, and 1 GB of storage per project, with compute scaling to zero after 5 minutes idle ([plans](/docs/introduction/plans)).
+The Free plan includes Auth up to 60,000 monthly active users per project, 100 CU-hours of compute per project per month, and 1 GB of storage per project, with compute scaling to zero after 5 minutes idle ([plans](/docs/introduction/plans)).
 
 ## How other options compare
 
-- **Supabase**: the same architecture, with `supabase-js`, PostgREST, Auth, and RLS all GA ([features](https://supabase.com/docs/guides/getting-started/features)). Both make RLS the security boundary for a browser that queries tables directly. Supabase's Free plan allows 2 active projects that pause after a week of inactivity, and includes no backups ([pricing](https://supabase.com/pricing), [backups](https://supabase.com/docs/guides/platform/backups)). The built-in email sender allows 2 auth emails per hour project-wide until you connect custom SMTP ([rate limits](https://supabase.com/docs/guides/auth/rate-limits)). Auth includes 50,000 MAU on Free and 100,000 on Pro, then $0.00325 per MAU, against 60,000 on Neon Free and 1M on paid plans ([pricing](https://supabase.com/pricing), [Neon vs Supabase](/guides/neon-vs-supabase#auth)). Paid projects are dedicated instances billed hourly ([compute usage](https://supabase.com/docs/guides/platform/manage-your-usage/compute)).
+- **Supabase**: the same architecture, with `supabase-js`, PostgREST, Auth, and RLS all GA ([features](https://supabase.com/docs/guides/getting-started/features)). Both make RLS the security boundary for a browser that queries tables directly. Supabase's Free plan allows 2 active projects that pause after a week of inactivity, and includes no backups ([pricing](https://supabase.com/pricing), [backups](https://supabase.com/docs/guides/platform/backups)). The built-in email sender allows 2 auth emails per hour project-wide until you connect custom SMTP ([rate limits](https://supabase.com/docs/guides/auth/rate-limits)). Auth includes 50,000 MAU on Free and 100,000 on Pro, then $0.00325 per MAU, against 60,000 per project on Neon Free and 1M per project on paid plans ([pricing](https://supabase.com/pricing), [Neon vs Supabase](/guides/neon-vs-supabase#auth)). Paid projects are dedicated instances billed hourly ([compute usage](https://supabase.com/docs/guides/platform/manage-your-usage/compute)).
 - **Firebase**: Firestore's client SDK talks to the database directly with security rules, as a NoSQL document store ([Firestore](https://firebase.google.com/docs/firestore)). It fits apps that need offline sync; Postgres fits apps that need relational queries.
 
 Vendor details verified on 2026-09-23 against the linked pages.

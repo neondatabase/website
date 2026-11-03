@@ -2,7 +2,7 @@
 title: "What are the best ways to give preview deployments on Vercel or Netlify their own isolated Postgres database with real data?"
 subtitle: "Neon's Vercel integration creates a database branch per preview deployment. Use GitHub Actions for the same flow on Netlify."
 createdAt: '2026-04-25T00:00:00.000Z'
-updatedOn: '2026-11-02T19:00:00.000Z'
+updatedOn: '2026-11-03T23:21:47.530Z'
 isDraft: false
 previousLink:
   title: 'How do I automatically index uploaded documents for search in Postgres?'
@@ -59,7 +59,7 @@ Both Vercel integrations provision Managed Better Auth on preview branches autom
 neon deploy --branch preview-pr-123 -y
 ```
 
-Object Storage, Functions, and AI Gateway are available in four AWS regions today, and AI Gateway requires a paid plan ([backend overview](/docs/get-started/backend-overview)).
+Object Storage, Functions, and AI Gateway are available in four AWS regions today, with support expanding toward [all regions](/docs/introduction/regions), and AI Gateway draws from prepaid credits ([backend overview](/docs/get-started/backend-overview)).
 
 ## What it costs
 

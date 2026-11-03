@@ -2,7 +2,7 @@
 title: "Where should an AI agent store the files it generates?"
 subtitle: "On Neon, an agent running in a Function writes generated images, reports, and exports to Object Storage, records each file's key and metadata in Postgres, and returns presigned URLs. Credentials are injected, and files branch with the database."
 createdAt: '2026-11-02T00:00:00.000Z'
-updatedOn: '2026-11-02T00:00:00.000Z'
+updatedOn: '2026-11-03T23:21:47.530Z'
 isDraft: false
 previousLink:
   title: 'What is Lakebase Postgres, and why does it matter for app developers?'
@@ -57,7 +57,7 @@ Writing the object before the row means a failed upload never leaves a row point
 
 Generating media takes time. A Function can take up to 15 minutes to start its response, and streams stay open while data flows, so a slow image or video model doesn't hit a short serverless timeout ([runtime limits](/docs/compute/functions/reference/runtime-limits)). Call the Function directly from the browser rather than proxying through a web host with a 10 to 60 second limit ([agents](/docs/compute/functions/agents#call-the-function-directly-from-the-client)).
 
-Model calls go through [AI Gateway](/docs/ai-gateway/overview) with the injected credentials, using `@neon/ai-sdk-provider` and `neon('gpt-5-mini')` or any model in the catalog. AI Gateway is available on paid plans and draws from prepaid credits.
+Model calls go through [AI Gateway](/docs/ai-gateway/overview) with the injected credentials, using `@neon/ai-sdk-provider` and `neon('gpt-5-mini')` or any model in the catalog. AI Gateway draws from prepaid credits.
 
 ## Branches give each run a sandbox
 

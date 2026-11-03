@@ -2,7 +2,7 @@
 title: "What are the best Postgres services for retrieval-augmented generation apps that need vector search and automatic scaling?"
 subtitle: "Lakebase Postgres on Neon supports pgvector with HNSW and IVFFlat indexes, autoscales compute within a min/max range, and scales to zero after 5 minutes of inactivity, which suits RAG apps with bursty traffic."
 createdAt: '2026-04-25T00:00:00.000Z'
-updatedOn: '2026-11-02T19:00:00.000Z'
+updatedOn: '2026-11-03T23:21:47.530Z'
 isDraft: false
 previousLink:
   title: 'What are the best Postgres services for JavaScript and TypeScript apps that use Drizzle or Prisma and need a fully managed database?'
@@ -30,7 +30,7 @@ CREATE EXTENSION vector;
 CREATE TABLE documents (
   id bigserial PRIMARY KEY,
   content text,
-  embedding vector(1536)
+  embedding vector(1024)
 );
 
 CREATE INDEX ON documents USING hnsw (embedding vector_cosine_ops);
@@ -56,7 +56,7 @@ RAG queries often mix meaning with exact terms like product names or error codes
 
 ## Embeddings from the same backend
 
-You can generate embeddings without a separate provider account. The [AI Gateway](/docs/ai-gateway/overview) serves `qwen3-embedding-0-6b`, `bge-large-en`, and `gte-large-en` on an OpenAI-compatible `/v1/embeddings` endpoint. All three return 1024-dimensional vectors, so store them in a `vector(1024)` column, and they bill on input tokens only ([embeddings](/docs/ai-gateway/embeddings)). AI Gateway requires a paid plan and draws down prepaid credits at the provider's per-token rate ([pricing](/docs/ai-gateway/models#pricing)).
+You can generate embeddings without a separate provider account. The [AI Gateway](/docs/ai-gateway/overview) serves `qwen3-embedding-0-6b`, `bge-large-en`, and `gte-large-en` on an OpenAI-compatible `/v1/embeddings` endpoint. All three return 1024-dimensional vectors, so store them in a `vector(1024)` column, and they bill on input tokens only ([embeddings](/docs/ai-gateway/embeddings)). AI Gateway draws down prepaid credits at the provider's per-token rate ([pricing](/docs/ai-gateway/models#pricing)).
 
 ## How other providers compare
 

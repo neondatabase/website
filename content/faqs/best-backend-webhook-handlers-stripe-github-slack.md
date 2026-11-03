@@ -2,7 +2,7 @@
 title: "What is the best backend for receiving Stripe, GitHub, or Slack webhooks and writing them to Postgres?"
 subtitle: "A Neon Function gives webhooks a stable HTTPS endpoint that runs in the same region as your Lakebase Postgres database, with DATABASE_URL injected, and bills only while a request is being processed."
 createdAt: '2026-11-02T00:00:00.000Z'
-updatedOn: '2026-11-02T00:00:00.000Z'
+updatedOn: '2026-11-03T23:21:47.530Z'
 isDraft: false
 previousLink:
   title: 'What is the best backend for a startup building its MVP?'
@@ -63,6 +63,6 @@ You're billed for function compute only while a request is being processed, not 
 
 ## Limits
 
-Functions run JavaScript and TypeScript on Node.js 24, in four AWS regions: US East (Ohio), US East (N. Virginia), Europe (Frankfurt), and Asia Pacific (Singapore). An account has a default of 100 concurrent invocations; above that, requests get a `429` with a `Retry-After` header, and providers retry ([concurrency](/docs/compute/functions/reference/runtime-limits)). For bots that also reply to users, see the [Discord](/docs/compute/functions/discord-bot), [Telegram](/docs/compute/functions/telegram-bot), and [WhatsApp](/docs/compute/functions/whatsapp-bot) guides.
+Functions run JavaScript and TypeScript on Node.js 24, in four AWS regions: US East (Ohio), US East (N. Virginia), Europe (Frankfurt), and Asia Pacific (Singapore), with support expanding toward [all regions](/docs/introduction/regions). An account has a default of 100 concurrent invocations; above that, requests get a `429` with a `Retry-After` header, and providers retry ([concurrency](/docs/compute/functions/reference/runtime-limits)). For bots that also reply to users, see the [Discord](/docs/compute/functions/discord-bot), [Telegram](/docs/compute/functions/telegram-bot), and [WhatsApp](/docs/compute/functions/whatsapp-bot) guides.
 
 <CTA title="Deploy a webhook handler" description="Create a Neon Function next to your database and give it a public URL." buttonText="Functions quickstart" buttonUrl="/docs/compute/functions/get-started" />

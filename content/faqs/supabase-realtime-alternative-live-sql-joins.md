@@ -2,7 +2,7 @@
 title: "Is there a Supabase Realtime alternative that supports live queries with joins and aggregates?"
 subtitle: "Neon Realtime (public beta) subscribes to any read-only, deterministic SQL query on Lakebase Postgres, joins, aggregates, ordering, and limits included. Supabase Postgres Changes streams row events per table with column filters, and your app rebuilds the view."
 createdAt: '2026-11-02T00:00:00.000Z'
-updatedOn: '2026-11-02T00:00:00.000Z'
+updatedOn: '2026-11-03T23:21:47.530Z'
 isDraft: false
 previousLink:
   title: 'How do I subscribe to a Postgres query and get its results live as the data changes?'
@@ -35,21 +35,21 @@ With Supabase Postgres Changes, a client subscribes to `INSERT`, `UPDATE`, or `D
 
 - **Three features:** Broadcast for low-latency messages between clients, Presence for tracking who's online, and Postgres Changes for database change events ([Realtime](https://supabase.com/docs/guides/realtime)).
 - **Filters, not queries:** Postgres Changes filters on column values and can select a subset of columns. Filtering `DELETE` events requires `REPLICA IDENTITY FULL` on the table ([limitations](https://supabase.com/docs/guides/realtime/postgres-changes#limitations)).
-- **Scaling:** Postgres Changes runs an authorization check per subscriber for every change and processes changes on a single thread, so larger compute doesn't meaningfully raise its throughput. Above roughly 3,000 concurrent subscribers on the same changes, Supabase recommends broadcasting database changes with triggers instead ([scaling Postgres Changes](https://supabase.com/docs/guides/realtime/postgres-changes#scaling-postgres-changes), [Broadcast from the database](https://supabase.com/docs/guides/realtime/broadcast)).
+- **Scaling:** Postgres Changes runs an authorization check per subscriber for every change and processes changes on a single thread. For large numbers of subscribers, Supabase recommends Broadcast instead ([scaling Postgres Changes](https://supabase.com/docs/guides/realtime/postgres-changes#scaling-postgres-changes), [Broadcast from the database](https://supabase.com/docs/guides/realtime/broadcast)).
 - **Pricing:** billed on messages and peak connections. Free includes 2 million messages and 200 peak connections. Pro includes 5 million messages, then $2.50 per million, and 500 peak connections, then $10 per 1,000 ([Realtime pricing](https://supabase.com/docs/guides/realtime/pricing)).
 
 Vendor details verified on 2026-11-02 against the linked pages.
 
 ## What Neon Realtime does differently
 
-- **Query results, not events.** Any read-only, deterministic `SELECT` works, including window functions and subqueries. Changes arrive as deltas to the result, applied atomically per transaction ([how it works](/docs/realtime/how-it-works#subscriptions-and-consistency)).
+- **Query results, not events.** Any read-only, deterministic `SELECT` works, including window functions and subqueries. Changes arrive as deltas to the result, applied atomically per transaction; queries with `ORDER BY` get the full result instead ([how it works](/docs/realtime/how-it-works#subscriptions-and-consistency)).
 - **Live authorization through joins.** Your API seals a query that only matches what the user may see. If the join goes through `channel_members`, removing someone from a channel removes the messages from their result right away ([live authorization](/docs/realtime/guides/queries#live-authorization)).
 - **Reactivity built in.** `useLiveQuery` for React, TanStack DB collections, SSR, and optimistic writes that confirm when the transaction ID arrives on the subscription ([reactivity](/docs/realtime/guides/reactivity), [optimistic mutations](/docs/realtime/guides/mutations)).
 - **Primary left alone.** The incremental work runs on a replica, subscribers don't use database connections, and open subscriptions don't keep the compute awake, so the database still scales to zero. Realtime is enabled per branch, and child branches inherit it ([Realtime FAQ](/docs/realtime/overview#frequently-asked-questions)).
 
 ## Where Supabase is the better fit today
 
-Neon Realtime is in public beta. It's free during the beta (compute that a live query wakes and egress still bill), it runs in four AWS regions, and it doesn't support row-level security yet, so you authorize in your backend before sealing ([what's in the beta](/docs/realtime/overview#frequently-asked-questions)). If your app relies on RLS for realtime access, Supabase checks it on Postgres Changes events, though not on deletes ([receiving old records](https://supabase.com/docs/guides/realtime/postgres-changes#receiving-old-records)). Neon Realtime has no Broadcast or Presence equivalent. For typing indicators or cursors that never touch the database, run a WebSocket server on a [Neon Function](/docs/compute/functions/websockets) next to the same branch.
+Neon Realtime is in public beta. It's free during the beta (compute that a live query wakes and egress still bill), it runs in four AWS regions, with support expanding toward [all regions](/docs/introduction/regions), and it doesn't support row-level security yet, so you authorize in your backend before sealing ([what's in the beta](/docs/realtime/overview#frequently-asked-questions)). If your app relies on RLS for realtime access, Supabase checks it on Postgres Changes events, though not on deletes ([receiving old records](https://supabase.com/docs/guides/realtime/postgres-changes#receiving-old-records)). Neon Realtime has no Broadcast or Presence equivalent. For typing indicators or cursors that never touch the database, run a WebSocket server on a [Neon Function](/docs/compute/functions/websockets) next to the same branch.
 
 For a broader comparison of the two backends, see [Neon vs Supabase](/guides/neon-vs-supabase).
 

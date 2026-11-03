@@ -2,7 +2,7 @@
 title: "How do I show an AI agent's progress live in my app's UI while it works?"
 subtitle: "Store the agent's sessions, messages, and traces in Lakebase Postgres, then subscribe to them with Neon Realtime (public beta) live queries. Every browser and device sees each step as the agent writes it, and the agent itself can run for minutes on a Neon Function."
 createdAt: '2026-11-02T00:00:00.000Z'
-updatedOn: '2026-11-02T00:00:00.000Z'
+updatedOn: '2026-11-03T23:21:47.530Z'
 isDraft: false
 previousLink:
   title: 'Which serverless functions run in the same region as my Postgres database?'
@@ -43,10 +43,10 @@ The write that starts the agent can be optimistic too. The server function inser
 
 ## Where the agent runs
 
-A multi-step agent can outlast a typical serverless timeout. [Neon Functions](/docs/compute/functions/agents) give a handler 15 minutes to start responding and keep a stream open while data flows, run next to your Postgres branch, and get [AI Gateway](/docs/ai-gateway/overview) credentials injected when the gateway is enabled (paid plans). Isolates can be evicted, which is one more reason to keep progress in Postgres rather than memory ([runtime limits](/docs/compute/functions/reference/runtime-limits)). `neon bootstrap --template mastra` scaffolds a Mastra assistant on Functions with Postgres-backed memory ([starter templates](/docs/compute/functions/overview#starter-templates)).
+A multi-step agent can outlast a typical serverless timeout. [Neon Functions](/docs/compute/functions/agents) give a handler 15 minutes to start responding and keep a stream open while data flows, run next to your Postgres branch, and get [AI Gateway](/docs/ai-gateway/overview) credentials injected when the gateway is enabled. Isolates can be evicted, which is one more reason to keep progress in Postgres rather than memory ([runtime limits](/docs/compute/functions/reference/runtime-limits)). `neon bootstrap --template mastra` scaffolds a Mastra assistant on Functions with Postgres-backed memory ([starter templates](/docs/compute/functions/overview#starter-templates)).
 
 <Admonition type="note" title="Beta scope">
-Realtime is free during the beta. Compute that a live query wakes and outbound data transfer still bill as usual. Holding subscriptions open doesn't keep the compute awake. It's available in AWS us-east-1, us-east-2, eu-central-1, and ap-southeast-1, and doesn't support row-level security yet, so scope each query in the handler that seals it ([what's in the beta](/docs/realtime/overview#frequently-asked-questions)).
+Realtime is free during the beta. Compute that a live query wakes and outbound data transfer still bill as usual. Holding subscriptions open doesn't keep the compute awake. It's available in AWS us-east-1, us-east-2, eu-central-1, and ap-southeast-1, with support expanding toward [all regions](/docs/introduction/regions), and doesn't support row-level security yet, so scope each query in the handler that seals it ([what's in the beta](/docs/realtime/overview#frequently-asked-questions)).
 </Admonition>
 
 <CTA title="Sync agents and users" description="Enable Realtime on a branch, then follow the Mastra example to sync agent traces to the browser." buttonText="Realtime quickstart" buttonUrl="/docs/realtime/quickstart" />
