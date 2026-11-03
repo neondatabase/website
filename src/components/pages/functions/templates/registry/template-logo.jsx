@@ -20,21 +20,44 @@ const FunctionRegistryTemplateLogo = ({ template, eager = false, variant = 'card
   const alt = registryLogoAlt(template, { decorative: isCard });
 
   if (isRegistryLogoUrl(template.logo)) {
+    const imgClass = isCard
+      ? 'h-7 w-auto max-w-10 shrink-0 object-contain object-left'
+      : 'h-8 w-8 shrink-0 object-contain';
+    const imgProps = {
+      width: isCard ? 28 : 32,
+      height: isCard ? 28 : 32,
+      loading,
+      decoding: 'async',
+      referrerPolicy: 'no-referrer',
+    };
+
+    if (!isRegistryLogoUrl(template.logoDark)) {
+      return (
+        <img
+          className={cn(imgClass, isCard && 'mb-8')}
+          src={template.logo.trim()}
+          alt={alt}
+          {...imgProps}
+        />
+      );
+    }
+
     return (
-      <img
-        className={
-          isCard
-            ? 'mb-8 h-7 w-auto max-w-10 shrink-0 object-contain object-left'
-            : 'h-8 w-8 shrink-0 object-contain'
-        }
-        src={template.logo.trim()}
-        width={isCard ? 28 : 32}
-        height={isCard ? 28 : 32}
-        alt={alt}
-        loading={loading}
-        decoding="async"
-        referrerPolicy="no-referrer"
-      />
+      <span className={cn('flex shrink-0', isCard && 'mb-8')}>
+        <img
+          className={cn(imgClass, 'dark:hidden')}
+          src={template.logo.trim()}
+          alt={alt}
+          {...imgProps}
+        />
+        <img
+          className={cn(imgClass, 'hidden dark:block')}
+          src={template.logoDark.trim()}
+          alt=""
+          aria-hidden
+          {...imgProps}
+        />
+      </span>
     );
   }
 
@@ -82,6 +105,7 @@ FunctionRegistryTemplateLogo.propTypes = {
   template: PropTypes.shape({
     title: PropTypes.string.isRequired,
     logo: PropTypes.string,
+    logoDark: PropTypes.string,
     provider: PropTypes.string,
   }).isRequired,
   eager: PropTypes.bool,
