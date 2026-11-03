@@ -48,9 +48,7 @@ I think a lot of this comes down to discoverability. A harness puts the tools of
 
 Agent plugins push this even further. We ship a Neon plugin for Cursor, Claude Code and Codex (`npx neon@latest plugins`) that bundles the MCP server with our agent skills. ChatGPT and Claude Desktop connect to Neon through the MCP server, too. In fact, those last two are now our biggest clients: in October, ChatGPT made 24% of all tool calls on mcp.neon.tech and Claude Desktop 22%, ahead of Codex (21%) and Claude Code (13%). Claude Desktop's tool calls alone grew almost 5x since August.
 
-Just a quick disclaimer: we run a pretty busy MCP server, so I'm biased. That said, a lot of the criticism of MCP is fair. The spec is barely two years old and until this summer every remote MCP server had to keep sessions around. So naturally, everyone keeps coming back to the same question: is MCP good yet?
-
-And of course, [there's a website for that](https://ismcpgoodyet.com). It scores which MCP features Codex, Cursor, Claude Code, Grok Build, OpenCode and Factory Droid actually support, and right now the answer is no, at 64%. But the number is moving and I'd argue the biggest step this year is the [2026-07-28 spec](https://blog.modelcontextprotocol.io/posts/2026-07-28/). You can think of it as MCP 2.0; the maintainers call it the largest revision of the protocol since launch. In this post, I want to walk you through how MCP's transports got here, what the new spec changes, which clients already support it and what we changed on our side.
+So MCP is clearly winning, but is it good yet? Let's look at the timeline and where we're at today.
 
 ## How we got here
 
@@ -118,7 +116,7 @@ The transport that's actually on its way out is the original 2024 HTTP+SSE desig
 
 ## Which clients already support it?
 
-Not many yet. Claude Code is the only client on the [ismcpgoodyet.com](https://ismcpgoodyet.com) scoreboard that uses 2026-07-28 by default. Codex and OpenCode support it if you opt in and the rest still use the 2025 handshake:
+Not many yet. Of the six coding agents I track, Claude Code is the only one that uses 2026-07-28 by default. Codex and OpenCode support it if you opt in and the rest still use the 2025 handshake:
 
 | Client        | 2026-07-28 support                                                        |
 | ------------- | ------------------------------------------------------------------------- |
@@ -130,6 +128,8 @@ Not many yet. Claude Code is the only client on the [ismcpgoodyet.com](https://i
 | Factory Droid | Behind a server-side flag that is off                                     |
 
 That's why we couldn't just switch over. Our server has to answer stateless requests and still accept the `initialize` handshake from every client that hasn't moved yet.
+
+By the way, I'm tracking MCP progress in a lot more detail at [ismcpgoodyet.com](https://ismcpgoodyet.com), feature by feature and client by client.
 
 ## What we changed on the Neon MCP server
 
