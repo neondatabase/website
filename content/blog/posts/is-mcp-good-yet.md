@@ -119,7 +119,7 @@ The difference is that Streamable HTTP is now stateless. Each request stands on 
 
 The transport that's actually on its way out is the original 2024 HTTP+SSE design. The offramp runs until roughly July 2027, so we could have kept our SSE endpoints around a while longer. We decided not to.
 
-## Which clients already support it?
+## Which clients already support the stateless spec?
 
 Unfortunately, not many yet. Of the six coding agents I track, Claude Code is the only one that uses 2026-07-28 by default. Codex and OpenCode support it if you opt in and the rest still use the 2025 handshake:
 
