@@ -1,6 +1,6 @@
 ---
 title: 'Is MCP good yet?'
-subtitle: We added support for the stateless 2026-07-28 spec to the Neon MCP server and finally retired our old SSE endpoints
+subtitle: Agents keep picking our MCP server. We share our MCP usage numbers, what the new stateless 2026-07-28 spec changes and why we finally retired our old SSE endpoints.
 description: >-
   Agents keep picking our MCP server over our CLI, even though our own skills recommend the CLI. We share our MCP usage numbers, what the new stateless 2026-07-28 spec changes and why we finally retired our old SSE endpoints.
 date: '2026-11-04T09:00:00'
