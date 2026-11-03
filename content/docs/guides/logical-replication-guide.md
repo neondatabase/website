@@ -14,6 +14,7 @@ redirectFrom:
   - /docs/introduction/logical-replication
   - /docs/guides/logical-replication-prisma-pulse
   - /docs/guides/logical-replication-aurora-to-neon
+  - /docs/guides/sequin
 updatedOn: '2026-10-21T11:04:20.383Z'
 ---
 
@@ -67,7 +68,7 @@ To replicate data from Neon, you must first enable logical replication on your p
 
 <a href="/docs/guides/logical-replication-decodable" title="Decodable" description="Replicate data from Neon with Decodable" icon="decodable"></a>
 
-<a href="/docs/guides/logical-replication-estuary-flow" title="Estuary Flow" description="Replicate data from Neon with Estuary Flow" icon="estuary"></a>
+<a href="/docs/guides/logical-replication-estuary-flow" title="Estuary" description="Replicate data from Neon with Estuary" icon="estuary"></a>
 
 <a href="/docs/guides/logical-replication-fivetran" title="Fivetran" description="Replicate data from Neon with Fivetran" icon="fivetran"></a>
 
@@ -78,8 +79,6 @@ To replicate data from Neon, you must first enable logical replication on your p
 <a href="/docs/guides/logical-replication-neon-to-neon" title="Neon to Neon" description="Replicate data from Neon to Neon" icon="neon"></a>
 
 <a href="/docs/guides/logical-replication-postgres" title="Neon to PostgreSQL" description="Replicate data from Neon to PostgreSQL" icon="postgresql"></a>
-
-<a href="/docs/guides/sequin" title="Sequin" description="Stream data from platforms like Stripe, Linear, and GitHub to Neon" icon="sequin"></a>
 
 <a href="/docs/guides/logical-replication-airbyte-snowflake" title="Snowflake" description="Replicate data from Neon to Snowflake with Airbyte" icon="snowflake"></a>
 

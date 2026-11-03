@@ -12,9 +12,14 @@ summary: >-
   wal_level=logical on all databases in the project and keeps compute
   active while Bemi is connected, which prevents scale-to-zero.
 enableTableOfContents: true
+tag: deprecated
 isDraft: false
 updatedOn: '2026-10-09T10:14:56.146Z'
 ---
+
+<Admonition type="warning" title="Deprecated">
+Bemi has rebranded as [PgStack](https://pgstack.io/), and the Bemi Cloud steps in this guide may no longer work. This guide is no longer maintained. For other ways to replicate or track changes in your Neon database, see [Logical replication guides](/docs/guides/logical-replication-guide).
+</Admonition>
 
 [Bemi](https://bemi.io/) is an open-source solution that plugs into Postgres and ORMs such as Prisma, TypeORM, SQLAlchemy, and Ruby on Rails to track database changes automatically. It unlocks robust context-aware audit trails and time travel querying inside your application.
 
