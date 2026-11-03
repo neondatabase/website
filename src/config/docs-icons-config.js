@@ -251,6 +251,11 @@ const ICONS_CONFIG = {
     lightIconPath: '/images/technology-logos/hono.svg',
     darkIconPath: null,
   },
+  hoop: {
+    name: 'hoop',
+    lightIconPath: '/images/technology-logos/hoop.svg',
+    darkIconPath: '/images/technology-logos/hoop-dark.svg',
+  },
   imagekit: {
     name: 'imagekit',
     lightIconPath: '/images/technology-logos/imagekit.svg',
