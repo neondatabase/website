@@ -150,20 +150,7 @@ That's why we couldn't just switch over. Our server has to answer stateless requ
 
 ## What we changed on the Neon MCP server
 
-We moved mcp.neon.tech to `@modelcontextprotocol/server` 2.0 and [`mcp-handler`](https://github.com/vercel/mcp-handler) 2.1, so we now serve 2026-07-28 on `https://mcp.neon.tech/mcp`. Clients that still send `initialize` keep working on the same URL, and we test the 2025-03-26 and 2025-11-25 fallbacks to make sure they stay that way. You don't need to change anything: your OAuth tokens, API keys and grant URLs like `/mcp?projectId=<project-id>&readonly=true` work exactly like before.
-
-Going stateless also let us delete code. The Redis session store from the SSE days is gone and we now resolve authentication, tool grants and client attribution on every request. And while we were at it, we made cancellation reach the Neon API: if you cancel a tool call or close the request, we abort the Neon API call behind it.
-
-Finally, we retired our SSE endpoints. `/sse`, `/message`, `/api/sse` and `/api/message` now return `410 Gone` with a pointer to the new URL:
-
-```json
-{
-  "error": "transport_gone",
-  "message": "HTTP+SSE was removed. Connect to https://mcp.neon.tech/mcp using Streamable HTTP. Stdio-only clients can bridge it with `npx -y mcp-remote https://mcp.neon.tech/mcp`. See https://neon.com/docs/ai/neon-mcp-server#retired-sse."
-}
-```
-
-The Neon MCP server is open source, so if you're curious, you can find the full change in [neondatabase/mcp-server-neon#320](https://github.com/neondatabase/mcp-server-neon/pull/320).
+The Neon MCP server now supports the 2026-07-28 spec on the same URL as before, `https://mcp.neon.tech/mcp`, and it still works with every client that hasn't moved to the new spec yet. You don't need to change anything: your OAuth sign-in, API keys and config keep working. The only thing we turned off is the old SSE endpoint. If you're curious about the details, the Neon MCP server is open source and the full change is in [neondatabase/mcp-server-neon#320](https://github.com/neondatabase/mcp-server-neon/pull/320).
 
 ## Still using our SSE endpoint?
 
