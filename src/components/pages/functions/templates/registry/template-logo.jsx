@@ -12,6 +12,31 @@ import {
 
 const NEON_LOGO = ICONS_CONFIG.neon;
 
+const RegistryLogoImage = ({ className, src, alt, isCard, loading }) => (
+  <img
+    className={cn(
+      'shrink-0 object-contain',
+      isCard ? 'h-7 w-auto max-w-10 object-left' : 'h-8 w-8',
+      className
+    )}
+    src={src.trim()}
+    width={isCard ? 28 : 32}
+    height={isCard ? 28 : 32}
+    alt={alt}
+    loading={loading}
+    decoding="async"
+    referrerPolicy="no-referrer"
+  />
+);
+
+RegistryLogoImage.propTypes = {
+  className: PropTypes.string,
+  src: PropTypes.string.isRequired,
+  alt: PropTypes.string.isRequired,
+  isCard: PropTypes.bool.isRequired,
+  loading: PropTypes.oneOf(['eager', 'lazy']).isRequired,
+};
+
 const FunctionRegistryTemplateLogo = ({ template, eager = false, variant = 'card' }) => {
   const isCard = variant === 'card';
   const loading = eager ? 'eager' : 'lazy';
@@ -20,42 +45,33 @@ const FunctionRegistryTemplateLogo = ({ template, eager = false, variant = 'card
   const alt = registryLogoAlt(template, { decorative: isCard });
 
   if (isRegistryLogoUrl(template.logo)) {
-    const imgClass = isCard
-      ? 'h-7 w-auto max-w-10 shrink-0 object-contain object-left'
-      : 'h-8 w-8 shrink-0 object-contain';
-    const imgProps = {
-      width: isCard ? 28 : 32,
-      height: isCard ? 28 : 32,
-      loading,
-      decoding: 'async',
-      referrerPolicy: 'no-referrer',
-    };
-
     if (!isRegistryLogoUrl(template.logoDark)) {
       return (
-        <img
-          className={cn(imgClass, isCard && 'mb-8')}
-          src={template.logo.trim()}
+        <RegistryLogoImage
+          className={cn(isCard && 'mb-8')}
+          src={template.logo}
           alt={alt}
-          {...imgProps}
+          isCard={isCard}
+          loading={loading}
         />
       );
     }
 
     return (
       <span className={cn('flex shrink-0', isCard && 'mb-8')}>
-        <img
-          className={cn(imgClass, 'dark:hidden')}
-          src={template.logo.trim()}
+        <RegistryLogoImage
+          className="dark:hidden"
+          src={template.logo}
           alt={alt}
-          {...imgProps}
+          isCard={isCard}
+          loading={loading}
         />
-        <img
-          className={cn(imgClass, 'hidden dark:block')}
-          src={template.logoDark.trim()}
-          alt=""
-          aria-hidden
-          {...imgProps}
+        <RegistryLogoImage
+          className="hidden dark:block"
+          src={template.logoDark}
+          alt={alt}
+          isCard={isCard}
+          loading={loading}
         />
       </span>
     );
