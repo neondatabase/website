@@ -96,7 +96,7 @@ export const renderTemplatesIndexMarkdown = (templates) => {
       '## More',
       '',
       `- [Use function templates](${absoluteUrl(LINKS.functionsTemplatesDocs)}.md)`,
-      `- [Create a Function Registry template](${absoluteUrl(LINKS.functionsRegistry)}.md)`,
+      `- [Contribute a function template](${absoluteUrl(LINKS.functionsRegistry)}.md)`,
       `- [Catalog index (registry.json)](${BASE_URL}/functions/registry/registry.json)`,
       `- [Neon Functions overview](${BASE_URL}/docs/compute/functions/overview.md)`,
     ].join('\n'),
@@ -139,7 +139,7 @@ export const renderTemplateMarkdown = ({ template, previous = null, next = null 
     `- [All templates](${absoluteUrl(LINKS.functionsTemplates)}.md)`,
     `- [Template source](${registryTemplateSourceUrl(template)})`,
     `- [Use function templates](${absoluteUrl(LINKS.functionsTemplatesDocs)}.md)`,
-    `- [Create a Function Registry template](${absoluteUrl(LINKS.functionsRegistry)}.md)`,
+    `- [Contribute a function template](${absoluteUrl(LINKS.functionsRegistry)}.md)`,
   ].filter(Boolean);
 
   return [
