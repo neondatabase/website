@@ -4,6 +4,8 @@ subtitle: 'Get started with Realtime.'
 summary: >-
   Enable Realtime, run your first live SQL queries and build an app with realtime reactivity.
 enableTableOfContents: true
+redirectFrom:
+  - /docs/realtime/get-started
 updatedOn: '2026-10-16T11:18:06.000Z'
 ---
 
