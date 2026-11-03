@@ -10,7 +10,7 @@ summary: >-
 redirectFrom:
   - /guides/neon-mcp-server-github-copilot-vs-code
 enableTableOfContents: true
-updatedOn: '2026-09-11T02:29:56.410Z'
+updatedOn: '2026-11-03T15:02:38.509Z'
 ---
 
 Connect MCP clients to the Neon MCP Server to interact with your Lakebase Postgres databases in natural language.
@@ -49,28 +49,37 @@ This writes the MCP config to your editor. Add `-g` for global (user-level) inst
 
 **add-mcp** is the CLI Neon uses to patch each tool’s MCP config. Use **`npx add-mcp list-agents`** for the live list from your installed version. As of the current [add-mcp](https://github.com/neondatabase/add-mcp) release, **`--agent`** values include:
 
-| Assistant                 | `--agent`            |
-| :------------------------ | :------------------- |
-| Antigravity               | `antigravity`        |
-| Claude Code               | `claude-code`        |
-| Claude Desktop            | `claude-desktop`     |
-| Cline (VS Code extension) | `cline`              |
-| Cline CLI                 | `cline-cli`          |
-| Codex                     | `codex`              |
-| Cursor                    | `cursor`             |
-| fx                        | `fx`                 |
-| Gemini CLI                | `gemini-cli`         |
-| GitHub Copilot CLI        | `github-copilot-cli` |
-| Goose                     | `goose`              |
-| Kilo Code                 | `kilo-code`          |
-| Kimi Code                 | `kimi-code`          |
-| Kiro CLI                  | `kiro-cli`           |
-| MCPorter                  | `mcporter`           |
-| OpenCode                  | `opencode`           |
-| VS Code                   | `vscode`             |
-| Zed                       | `zed`                |
+| Assistant                 | `--agent`            | Setup                                   |
+| :------------------------ | :------------------- | :-------------------------------------- |
+| Antigravity               | `antigravity`        | [Other MCP clients](#other-mcp-clients) |
+| Claude Code               | `claude-code`        | [Claude Code](#claude-code)             |
+| Claude Desktop            | `claude-desktop`     | [Claude Desktop](#claude-desktop)       |
+| Cline (VS Code extension) | `cline`              | [Cline](#cline-vs-code-extension)       |
+| Cline CLI                 | `cline-cli`          | [Other MCP clients](#other-mcp-clients) |
+| Codex                     | `codex`              | [Codex](#codex)                         |
+| Cursor                    | `cursor`             | [Cursor](#cursor)                       |
+| Factory Droid             | `factory-droid`      | [Other MCP clients](#other-mcp-clients) |
+| fx                        | `fx`                 | [fx](#fx)                               |
+| Gemini CLI                | `gemini-cli`         | [Other MCP clients](#other-mcp-clients) |
+| GitHub Copilot CLI        | `github-copilot-cli` | [Other MCP clients](#other-mcp-clients) |
+| Goose                     | `goose`              | [Other MCP clients](#other-mcp-clients) |
+| Grok Build                | `grok-build`         | [Other MCP clients](#other-mcp-clients) |
+| Hermes Agent              | `hermes`             | [Other MCP clients](#other-mcp-clients) |
+| Junie                     | `junie`              | [Other MCP clients](#other-mcp-clients) |
+| Kilo Code                 | `kilo-code`          | [Other MCP clients](#other-mcp-clients) |
+| Kimi Code                 | `kimi-code`          | [Kimi Code](#kimi-code)                 |
+| Kiro CLI                  | `kiro-cli`           | [Kiro](#kiro)                           |
+| Mastra Code               | `mastracode`         | [Other MCP clients](#other-mcp-clients) |
+| MCPorter                  | `mcporter`           | [Other MCP clients](#other-mcp-clients) |
+| OpenCode                  | `opencode`           | [Other MCP clients](#other-mcp-clients) |
+| Pi                        | `pi`                 | [Other MCP clients](#other-mcp-clients) |
+| VS Code                   | `vscode`             | [VS Code](#vs-code-with-github-copilot) |
+| Windsurf                  | `windsurf`           | [Windsurf](#windsurf-codeium)           |
+| Zed                       | `zed`                | [Zed](#zed)                             |
 
-**Aliases:** `cline-vscode` → `cline`, `gemini` → `gemini-cli`, `github-copilot` → `vscode`, `kilo`/`kilocode` → `kilo-code`, `kimi` → `kimi-code`, `kiro` → `kiro-cli`. Config paths differ by agent and by project vs global (`-g`); see the [add-mcp README](https://github.com/neondatabase/add-mcp#supported-agents).
+**Aliases:** `cline-vscode` → `cline`, `droid`/`factory` → `factory-droid`, `gemini` → `gemini-cli`, `github-copilot` → `vscode`, `grok` → `grok-build`, `hermes-agent` → `hermes`, `kilo`/`kilocode` → `kilo-code`, `kimi` → `kimi-code`, `kiro` → `kiro-cli`, `mastra` → `mastracode`, `pi-agent` → `pi`, `codeium`/`cascade` → `windsurf`. Config paths differ by agent and by project vs global (`-g`); see the [add-mcp README](https://github.com/neondatabase/add-mcp#supported-agents).
+
+The **Setup** column links to client-specific instructions where a client needs them. For the rest, `npx add-mcp https://mcp.neon.tech/mcp -a <agent>` is all you need (see [Other MCP clients](#other-mcp-clients)). ChatGPT, Gamut, and Jules aren't configured through add-mcp. Their setup steps are in their own sections below.
 
 ## ChatGPT
 
@@ -246,6 +255,16 @@ For more, see [Get started with Neon MCP server with Claude Desktop](/guides/neo
 </Tabs>
 
 For more, see [Get started with Cline and Neon MCP Server](/guides/cline-mcp-neon).
+
+## Codex
+
+Install the [Neon Codex plugin](/docs/ai/ai-codex-plugin), which bundles the Neon MCP Server with Neon agent skills. To add only the MCP server, run:
+
+```bash
+npx add-mcp https://mcp.neon.tech/mcp -a codex
+```
+
+This adds a `neon` entry to `.codex/config.toml` (add `-g` to write `~/.codex/config.toml` instead). Restart Codex. If Codex doesn't prompt you to sign in, run `codex mcp login neon` and click **Authorize** in the OAuth window. You can also run [`npx neon@latest mcp --agent codex`](/docs/cli/mcp).
 
 ## Cursor
 
@@ -606,8 +625,6 @@ This tool auto-detects supported clients and configures them. Use `-a <agent>` t
 ```
 
 The local stdio package (`@neondatabase/mcp-server-neon`) is deprecated. If your client only supports stdio, use one of the `mcp-remote` configs above. See [Deprecated local stdio](/docs/ai/neon-mcp-server#deprecated-stdio).
-
-For Windows-specific configurations, see [Other MCP clients](/docs/ai/connect-mcp-clients-to-neon#other-mcp-clients).
 
 ## Troubleshooting
 

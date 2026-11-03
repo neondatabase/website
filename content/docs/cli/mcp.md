@@ -8,7 +8,7 @@ summary: >-
   install. It handles the server URL, authentication, and which tools each agent
   gets.
 enableTableOfContents: true
-updatedOn: '2026-11-01T14:46:44.000Z'
+updatedOn: '2026-11-03T15:02:38.509Z'
 ---
 
 The `mcp` command installs the [Neon MCP Server](/docs/ai/neon-mcp-server) into your coding agents by writing their MCP config for you. It points each agent at the hosted server (`https://mcp.neon.tech/mcp`), sets up authentication, and can narrow which tools the agent sees.
@@ -48,7 +48,7 @@ The supported agents are `antigravity`, `cline`, `cline-cli`, `claude-code`, `co
 By default the server exposes every MCP tool. Use these flags to narrow what an agent can do:
 
 - `--read-only` hides the write tools by adding `?readonly=true` to the server URL.
-- `--category <name>` limits tools to one or more categories (repeatable, or comma-separated). Categories are `projects`, `branches`, `endpoints`, `snapshots`, `schema`, `querying`, `neon_auth`, `data_api`, `observability`, `docs`, `functions`, `storage`, and `realtime`.
+- `--category <name>` limits tools to one or more categories (repeatable, or comma-separated). Categories are `projects`, `branches`, `endpoints`, `snapshots`, `schema`, `querying`, `neon_auth`, `data_api`, `observability`, `docs`, `functions`, `storage`, and `realtime`. The flag currently accepts only `projects`, `branches`, `schema`, `querying`, `neon_auth`, `data_api`, `observability`, and `docs`. For the other categories, add `?category=<name>` to the server URL in your agent's config yourself (see [Category filtering](/docs/ai/neon-mcp-server#category-filtering)).
 - `--project-id <id>` pins the tools to a single Neon project with `?projectId=`, and limits a newly minted key to that project.
 
 `--read-only` and `--category` shape the server URL only; they don't change a key's scope, and neither does reusing an already-configured key.
