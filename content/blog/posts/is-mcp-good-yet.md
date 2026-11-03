@@ -28,7 +28,7 @@ seo:
 
 ![Neon blog cover with the headline Is MCP good yet?](https://cdn.neonapi.io/public/images/pages/blog/is-mcp-good-yet/cover.png)
 
-This week, we added support for the new stateless MCP spec (2026-07-28) to the [Neon MCP server](https://neon.com/docs/ai/neon-mcp-server) and finally retired our old Server-Sent Events (SSE) endpoints. I want to use that as an excuse to talk about where MCP is today, because our own numbers tell a pretty different story than the discussion online.
+This week, we added support for the new stateless MCP spec (2026-07-28) to the [Neon MCP server](https://neon.com/docs/ai/neon-mcp-server) and finally retired our old Server-Sent Events (SSE) endpoints. This is a good time to reflect on the state of MCP - is it good yet? And to share some of our usage numbers along the way!
 
 ## MCP is outgrowing our CLI
 
