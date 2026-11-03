@@ -236,7 +236,7 @@ const CatalogClient = ({ templates }) => {
           </a>{' '}
           or{' '}
           <a className={INLINE_LINK_CLASS_NAME} href={LINKS.functionsRegistry}>
-            publish your own
+            contribute one
           </a>
           .
         </p>

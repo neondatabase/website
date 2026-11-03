@@ -263,7 +263,7 @@ const TemplateSidebar = ({ template, installCommand }) => {
             </li>
             <li>
               <Link to={LINKS.functionsRegistry} theme="green">
-                Publish your own template
+                Contribute a template
               </Link>
             </li>
           </ul>
