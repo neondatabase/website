@@ -58,7 +58,7 @@ The support channels you can access differ according to your [Support Plan](#sup
 
 ### Neon Discord Server
 
-All Neon users have access to the [Neon Discord Server](https://neon.com/discord), where you can ask questions or see what others are doing with Neon. You will find Neon users and members of the Neon team actively engaged.
+All Neon users have access to the [Neon Discord Server](https://neon.com/discord), where you can ask questions in the **#support** channel or see what others are doing with Neon. You will find Neon users and members of the Neon team actively engaged.
 
 <Admonition type="important">
 The [Neon Discord Server](https://neon.com/discord) is not an official Neon Support channel.
@@ -70,7 +70,6 @@ Neon AI chat assistance is available to all Neon users. You can access it from t
 
 - **Neon Console**: Open the [support center](#open-the-support-center) and select **Ask the AI assistant**.
 - **Neon documentation**: Select **Ask AI** in the header of the [Neon documentation](/docs) site, or open search with **⌘K** (**Ctrl+K** on Windows and Linux) and ask Neon AI from there.
-- **Discord**: Join the **#gpt-help** channel on the [Neon Discord server](https://neon.com/discord)
 - **Neon CLI**: Run [`neon ask`](/docs/cli/ask) to ask questions about Neon from your terminal
 
 Neon AI chat assistants are updated regularly and built on various sources including the Neon documentation, the Neon website, the Neon API, and Neon GitHub repositories.
