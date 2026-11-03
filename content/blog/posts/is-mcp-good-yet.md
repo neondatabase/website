@@ -109,7 +109,7 @@ This is the part I'm most excited about. A lot of remote MCP servers run on serv
 
 That's why it was common practice to pair a serverless MCP server with Redis to keep track of sessions. With HTTP+SSE, the stream stayed open on one function instance while the client's requests could land on any other, so Redis had to get those messages to the instance holding the stream. That's a lot easier to get wrong than plain request/response, and we fixed our share of session bugs over the months of maintaining the Neon MCP server.
 
-With 2026-07-28, every request carries everything the server needs to answer it, so any function instance can handle any request and there's no session state to share. That's what makes MCP a great fit for serverless.
+With 2026-07-28, any function instance can handle any request and there's no session state to share. That's what makes the latest MCP spec a great fit for serverless and lets you drop the Redis dependency.
 
 ## Is Streamable HTTP going away?
 
