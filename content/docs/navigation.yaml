@@ -1596,9 +1596,6 @@
               items:
                 - title: Airbyte
                   slug: guides/logical-replication-airbyte
-                - title: Bemi
-                  slug: guides/bemi
-                  tag: deprecated
                 - title: ClickHouse
                   slug: guides/logical-replication-clickhouse
                 - title: Confluent

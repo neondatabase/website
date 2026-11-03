@@ -15,6 +15,7 @@ redirectFrom:
   - /docs/guides/logical-replication-prisma-pulse
   - /docs/guides/logical-replication-aurora-to-neon
   - /docs/guides/sequin
+  - /docs/guides/bemi
 updatedOn: '2026-10-21T11:04:20.383Z'
 ---
 
@@ -57,8 +58,6 @@ To replicate data from Neon, you must first enable logical replication on your p
 <TechCards>
 
 <a href="/docs/guides/logical-replication-airbyte" title="Airbyte" description="Replicate data from Neon with Airbyte" icon="airbyte"></a>
-
-<a href="/docs/guides/bemi" title="Bemi" description="Create an automatic audit trail with Bemi" icon="bemi"></a>
 
 <a href="/docs/guides/logical-replication-clickhouse" title="ClickHouse" description="Replicate data from Neon to ClickHouse using ClickPipes" icon="clickhouse"></a>
 
