@@ -150,7 +150,9 @@ That's why we couldn't just switch over. Our server has to answer stateless requ
 
 ## What we changed on the Neon MCP server
 
-The Neon MCP server now supports the 2026-07-28 spec on the same URL as before, `https://mcp.neon.tech/mcp`, and it still works with every client that hasn't moved to the new spec yet. You don't need to change anything: your OAuth sign-in, API keys and config keep working. The only thing we turned off is the old SSE endpoint. If you're curious about the details, the Neon MCP server is open source and the full change is in [neondatabase/mcp-server-neon#320](https://github.com/neondatabase/mcp-server-neon/pull/320).
+The Neon MCP server now supports the 2026-07-28 spec on the same URL as before, `https://mcp.neon.tech/mcp`, and it still works with every client that hasn't moved to the new spec yet. You don't need to change anything: your OAuth sign-in, API keys and config keep working. The only thing we turned off is the old SSE endpoint.
+
+The Neon MCP server is open source, so if you're curious, you can find the full change in [neondatabase/mcp-server-neon#320](https://github.com/neondatabase/mcp-server-neon/pull/320).
 
 ## Still using our SSE endpoint?
 
