@@ -140,8 +140,8 @@ Neon has two kinds of templates:
 
 Use a function template to add a capability to a project you already have. Use a starter app when you're starting from an empty directory.
 
-## Publish your own template
+## Contribute a template
 
-Anyone can propose a template by opening a pull request on `neondatabase/examples`. Neon reviews each one before it's published. See [Create a Function Registry template](/docs/compute/functions/registry).
+Anyone can propose a template by opening a pull request on `neondatabase/examples`. Neon reviews each one before it's published. See [Contribute a function template](/docs/compute/functions/registry).
 
 <NeedHelp/>

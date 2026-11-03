@@ -1,6 +1,6 @@
 ---
-title: Create a Function Registry template
-subtitle: Publish a reusable Neon Function that anyone can add to their project with neon functions new.
+title: Contribute a function template
+subtitle: Share a reusable Neon Function that anyone can add to their project with neon functions new.
 summary: >-
   How to contribute a template to the Neon Function Registry: module format,
   template.json and registry.json fields, layouts, categories, limits, local
