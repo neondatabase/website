@@ -103,8 +103,12 @@ async function markdownRedirectResponse(req, pathname) {
 
 // A 308 to the moved target if one exists, else the agent 404 body. `source`
 // sets X-Content-Source so logs distinguish the agent vs direct `.md` branch.
-async function markdownMovedOr404Response(req, pathname, source) {
+// `track` runs after the redirect check, so a moved page is recorded as a
+// redirect (llm_redirect) rather than a 404, and llm_404 counts only genuine
+// misses.
+async function markdownMovedOr404Response(req, pathname, source, track) {
   const redirect = await markdownRedirectResponse(req, pathname);
+  track?.({ is404: !redirect, isRedirect: Boolean(redirect) });
   if (redirect) return redirect;
 
   return markdownNotFoundResponse(pathname, { source });
@@ -298,11 +302,13 @@ async function handleProxy(req, analytics) {
         }
       }
 
-      analytics.track({ is404: agentHit404, branch: 'agent-fallback' });
-
       if (agentHit404) {
-        return markdownMovedOr404Response(req, pathname, 'agent-404');
+        return markdownMovedOr404Response(req, pathname, 'agent-404', (outcome) =>
+          analytics.track({ ...outcome, branch: 'agent-fallback' })
+        );
       }
+
+      analytics.track({ is404: false, branch: 'agent-fallback' });
     }
 
     // Bare /docs is the docs front page (src/app/(docs)/docs/page.jsx). Agents /
@@ -322,13 +328,13 @@ async function handleProxy(req, analytics) {
             const response = await fetch(markdownUrl);
 
             // Track .md as agent traffic, but only on outcomes handled here
-            // (200/404). A 5xx falls through untracked. Skip agents entirely:
-            // the agent branch above already tracked them, and an agent whose
-            // first fetch threw falls through to here — tracking again would
-            // double-count (a browser only ever reaches this branch).
-            const isMarkdown404 = response.status === 404;
-            if (!isAgent && (response.ok || isMarkdown404)) {
-              analytics.track({ is404: isMarkdown404, branch: 'direct-markdown' });
+            // (200, or a 404 tracked after its redirect check). A 5xx falls through
+            // untracked. Skip agents entirely: the agent branch above already
+            // tracked them, and an agent whose first fetch threw falls through
+            // to here — tracking again would double-count (a browser only ever
+            // reaches this branch).
+            if (!isAgent && response.ok) {
+              analytics.track({ branch: 'direct-markdown' });
             }
 
             if (response.ok) {
@@ -348,7 +354,14 @@ async function handleProxy(req, analytics) {
             }
 
             if (response.status === 404) {
-              return markdownMovedOr404Response(req, pathname, 'md-404');
+              return markdownMovedOr404Response(
+                req,
+                pathname,
+                'md-404',
+                isAgent
+                  ? undefined
+                  : (outcome) => analytics.track({ ...outcome, branch: 'direct-markdown' })
+              );
             }
           } catch (error) {
             console.error('[.md] Error serving markdown', { pathname, error: error.message });

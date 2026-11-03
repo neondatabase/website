@@ -3,7 +3,8 @@ import { isAIAgentRequest } from './ai-agent-detection';
 const BEACON_URL = 'https://neonapi.io/t.js';
 const BEACON_TIMEOUT_MS = 5000;
 
-// Fixed labels for diagnostics only. Keep the existing traffic classifier intact.
+// Fixed labels for diagnostics and the pageview's llm_agent_family. Keep the
+// existing traffic classifier intact.
 function agentFamily(userAgent) {
   const ua = userAgent.toLowerCase();
   const families = [
@@ -24,17 +25,23 @@ function agentFamily(userAgent) {
   return families.find((family) => ua.includes(family)) || 'other';
 }
 
-async function sendPageview(req, context, { is404, branch, debug }) {
+async function sendPageview(req, context, { is404, isRedirect, branch, debug }) {
   const controller = new AbortController();
   const timer = setTimeout(() => controller.abort(), BEACON_TIMEOUT_MS);
   const startedAt = Date.now();
   let result;
 
   try {
-    // Preserve the Zaraz payload and identity cookies; only add the correlation ID.
+    // Preserve the Zaraz payload and identity cookies; only add LLM fields.
     const payload = {
       name: 'Pageview',
-      data: { llm_agent: true, llm_404: is404, llm_request_id: context.request_id },
+      data: {
+        llm_agent: true,
+        llm_404: is404,
+        llm_redirect: isRedirect,
+        llm_request_id: context.request_id,
+        llm_agent_family: context.agent_family,
+      },
       zarazData: {
         c: req.headers.get('cookie') || '',
         l: req.nextUrl?.href ?? req.url,
@@ -101,12 +108,12 @@ export function createLLMAnalytics(req) {
   let beaconBranch = null;
 
   return {
-    track({ is404 = false, branch = 'unspecified' } = {}) {
+    track({ is404 = false, isRedirect = false, branch = 'unspecified' } = {}) {
       // A failed markdown read can fall through into another branch. Never send
       // a second pageview for the same incoming request.
       if (!beacon) {
         beaconBranch = branch;
-        beacon = sendPageview(req, context, { is404, branch, debug });
+        beacon = sendPageview(req, context, { is404, isRedirect, branch, debug });
       }
       return beacon;
     },
