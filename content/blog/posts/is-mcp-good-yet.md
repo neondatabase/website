@@ -113,7 +113,7 @@ curl 'https://mcp.neon.tech/mcp?category=docs' \
 
 You get back `search_docs`, `get_doc` and `send_feedback` without a session id. You might have also noticed the `Mcp-Method` header. Requests now carry `Mcp-Method` and `Mcp-Name` headers, so a gateway or rate limiter can route requests without parsing the JSON body.
 
-The rest of the spec follows the same idea. When a tool needs input from the user mid-call, the server now returns `input_required` and the client retries the call with the answers, so elicitation no longer needs a stream that stays open. List responses like `tools/list` carry `ttlMs` and `cacheScope`, so clients can cache tool catalogs. On the auth side, clients now validate the `iss` parameter (RFC 9207), and Dynamic Client Registration is deprecated in favor of Client ID Metadata Documents. And there's finally a formal deprecation policy: deprecated features keep working for at least twelve months, and HTTP+SSE, Roots, Sampling and Logging are on that clock now.
+The rest of the spec follows the same idea. Elicitation now works with plain retries instead of a stream that stays open, tool lists are cacheable and Dynamic Client Registration is deprecated in favor of Client ID Metadata Documents. The [spec announcement](https://blog.modelcontextprotocol.io/posts/2026-07-28/) has the full list.
 
 Of course, your app can still be stateful. The spec suggests minting a handle from a tool, say a `basket_id`, and letting the model pass it back as an argument on the next call. I personally like that pattern a lot, because the model can see the state it's carrying around.
 
