@@ -83,7 +83,7 @@ sequenceDiagram
 Before starting, make sure you have:
 
 1. **Node.js**: Version 20 or later (v24 recommended). Download from [nodejs.org](https://nodejs.org/).
-2. **Neon account**: Sign up at [console.neon.tech](https://console.neon.tech/signup). This guide calls a model through [AI Gateway](/docs/ai-gateway/overview), which is available on paid plans (Launch and Scale) with prepaid credits.
+2. **Neon account**: Sign up at [console.neon.tech](https://console.neon.tech/signup). This guide calls a model through [AI Gateway](/docs/ai-gateway/overview), which works on any plan with prepaid credits.
 3. **Neon CLI**: Installed globally (`npm i -g neon`) and authenticated (`neon login`). See the [Neon CLI quickstart](/docs/cli/quickstart) for details.
 4. **Inngest account**: Sign up for a free account at [inngest.com](https://www.inngest.com).
    <Admonition type="tip" title="Self-hosting Inngest">

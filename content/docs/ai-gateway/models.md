@@ -21,7 +21,7 @@ Most models are served through Databricks. Jev is the exception: TypeSafe AI, wh
 
 Model availability may vary by region, and the catalog expands over time, so check back for new additions.
 
-> AI Gateway is currently available in AWS US East (Ohio) (`aws-us-east-2`), AWS US East (N. Virginia) (`aws-us-east-1`), AWS Europe (Frankfurt) (`aws-eu-central-1`), and AWS Asia Pacific (Singapore) (`aws-ap-southeast-1`). Create your project in one of these regions to use it. Support is expanding toward [all regions](/docs/introduction/regions). It requires a paid Neon plan. See [Pricing](#pricing) for details.
+> AI Gateway is currently available in AWS US East (Ohio) (`aws-us-east-2`), AWS US East (N. Virginia) (`aws-us-east-1`), AWS Europe (Frankfurt) (`aws-eu-central-1`), and AWS Asia Pacific (Singapore) (`aws-ap-southeast-1`). Create your project in one of these regions to use it. Support is expanding toward [all regions](/docs/introduction/regions). It's available on any Neon plan with prepaid credits. See [Pricing](#pricing) for details.
 
 The full catalog is served as JSON at [`neon.com/models.json`](https://neon.com/models.json), the machine-readable source of truth, and mirrored as the [`neon` provider on models.dev](https://models.dev/providers/neon). Each model lists its `lab`, the organization that made it, and its `provider`, the organization that provides it: Databricks for every model except Jev, which TypeSafe AI hosts. Both field names follow models.dev.
 
@@ -33,7 +33,7 @@ const models = Object.values(catalog.neon.models).filter((model) => model.releas
 
 ## Model access
 
-Neon AI Gateway gives you one credential for both open-weight and foundation models. Any paid project with prepaid credits can use every model in the catalog. The [model catalog](/docs/ai-gateway/overview#available-models) is always the source of truth for what you can call today.
+Neon AI Gateway gives you one credential for both open-weight and foundation models. Any account with prepaid credits can use every model in the catalog, on any plan. The [model catalog](/docs/ai-gateway/overview#available-models) is always the source of truth for what you can call today.
 
 ## Rate limits
 
@@ -56,7 +56,7 @@ A separate account-level daily spend cap also applies and can block AI Gateway r
 
 AI Gateway usage draws down a prepaid credit balance. Here's how pricing works:
 
-- **Paid plans only.** AI Gateway is available on Neon's Launch and Scale plans, with no difference in pricing or model access between the two. Any paid customer with prepaid credits can use every model in the catalog. See [Model access](#model-access) for details.
+- **Any plan.** AI Gateway is available on every Neon plan, including Free, with no difference in pricing or model access between plans. On the Free plan, you add a payment card to buy credits and your organization stays on Free. Any account with prepaid credits can use every model in the catalog. See [Model access](#model-access) for details.
 - **No markup.** Neon charges the same per-token rate as the model provider. Published provider prices are passed on to users with no additional markup.
 - **Prepaid credits.** Inference draws down a prepaid credit balance. 1 credit equals $1 USD, with a $5 minimum purchase, and credits are valid for 12 months from purchase. You buy credits from the **Billing** page in the [Neon Console](https://console.neon.tech/app/billing).
 
@@ -158,7 +158,7 @@ curl "$NEON_AI_GATEWAY_BASE_URL/v1/models" \
 
 The response returns one object per model. Key fields:
 
-- `enabled` is whether the model is currently callable. Any paid account with prepaid credits can call every model in the catalog. See [Model access](#model-access) for details.
+- `enabled` is whether the model is currently callable. Any account with prepaid credits can call every model in the catalog. See [Model access](#model-access) for details.
 - `id`, `name`, and `owned_by` identify the model. Use `id` (or its `databricks-` prefixed form) in the `model` field of a request.
 - `canonical_slug`, `architecture`, and `top_provider` are OpenRouter-compatible descriptive fields.
 - `created` is always `0`, and `pricing`, `per_request_limits`, and `context_length` are currently always `null`. Use the [model catalog](/docs/ai-gateway/overview#available-models) for context windows and model details.

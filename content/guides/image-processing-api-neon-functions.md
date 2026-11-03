@@ -39,7 +39,7 @@ flowchart LR
 Before starting, ensure you have:
 
 1. **Node.js**: Version 20 or later (v24 recommended). Download from [nodejs.org](https://nodejs.org/).
-2. **Neon account on a paid plan**: Sign up at [console.neon.tech](https://console.neon.tech/signup). The captioning endpoint uses the AI Gateway, which requires a paid plan (Launch or Scale) with [prepaid credits](/docs/ai-gateway/prepaid-credits).
+2. **Neon account with AI Gateway credits**: Sign up at [console.neon.tech](https://console.neon.tech/signup). The captioning endpoint uses the AI Gateway, which needs [prepaid credits](/docs/ai-gateway/prepaid-credits). You can buy them on any plan, including Free.
 3. **The Neon CLI**: Installed globally (`npm i -g neon@latest`) and authenticated (`neon login`). See the [Neon CLI Quickstart](/docs/cli/quickstart) for details.
 
 <Steps>

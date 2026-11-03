@@ -15,8 +15,9 @@ credits, how pricing and usage limits work, how to purchase or top up, and how t
 check your balance.
 
 <Admonition type="note">
-The AI Gateway is available on **paid Neon plans only**. It is not included in
-the Free plan. See [Neon plans](/docs/introduction/plans) and
+The AI Gateway is available on **every Neon plan**, including Free. On the Free
+plan, you add a payment card and buy credits without upgrading. Your
+organization stays on the Free plan. See [Neon plans](/docs/introduction/plans) and
 [About billing](/docs/introduction/about-billing).
 </Admonition>
 
@@ -38,7 +39,8 @@ example, a small request might reduce a $25.00 balance to $24.99.
 ## Who can buy credits
 
 - Only **organization admins** can purchase credits.
-- The organization must be billed directly by payment card.
+- The organization must be billed directly by payment card. On the Free plan,
+  add a payment card in **Billing** first. Adding a card doesn't change your plan.
 - Members, editors, and viewers cannot purchase credits.
 - Sales-invoiced, marketplace, trial, sponsored, and shared-token accounts cannot
   purchase credits through this self-service flow. Contact your account team for
@@ -121,7 +123,7 @@ When you exceed a limit, the API returns **HTTP 429**:
 
 ## Model access
 
-A paid account with prepaid credits can use every AI Gateway model.
+Any account with prepaid credits can use every AI Gateway model.
 See [Model access](/docs/ai-gateway/models#model-access) for details.
 
 After you buy credits, locked models unlock once Neon confirms access. If a
@@ -137,9 +139,8 @@ Turn on **auto-reload** to keep your balance from running out. When your balance
 drops below a threshold you set, Neon buys a fixed amount of credits with the
 payment card on file, with no action needed from you.
 
-Only organization admins can set up auto-reload, and the organization must meet
-the same requirements as for [buying credits](#who-can-buy-credits): a paid plan,
-billed directly by payment card.
+Only organization admins can set up auto-reload, and the organization must
+be on a paid plan and billed directly by payment card.
 
 To set up auto-reload:
 
@@ -179,9 +180,9 @@ The AI Gateway is available in AWS US East (Ohio), US East (N. Virginia), Europe
 
 ## If you downgrade to Free
 
-If your organization moves to the Free plan, any AI Gateway credits **remain on
-your account**, but the AI Gateway is **not usable on Free**. Your credits become
-usable again when you upgrade to a paid plan.
+If your organization moves to the Free plan, your AI Gateway credits **remain on
+your account** and you can keep using them, as long as a payment card stays on
+file. Auto-reload turns off when you downgrade.
 
 ## Related
 
@@ -196,7 +197,7 @@ usable again when you upgrade to a paid plan.
 <Faq>
 
 <FaqItem question="Who can use AI Gateway?">
-AI Gateway is available on Neon's paid plans (Launch and Scale). Any paid Neon customer with prepaid credits can use every model in the catalog.
+Any Neon organization with prepaid credits, on any plan, including Free. On the Free plan, add a payment card to buy credits. You don't need to upgrade. Credits give you every model in the catalog.
 </FaqItem>
 
 <FaqItem question="How much do AI Gateway credits cost?">
@@ -216,7 +217,7 @@ Credits are valid for 12 months from the date of purchase.
 </FaqItem>
 
 <FaqItem question="What happens to my credits if I downgrade to Free?">
-Your credits stay on your account, but you can't use AI Gateway while on the Free plan. They become available again if you upgrade to a paid plan.
+Your credits stay on your account, and you can keep using AI Gateway on the Free plan as long as a payment card stays on file. Auto-reload turns off when you downgrade.
 </FaqItem>
 
 <FaqItem question="What are the default usage limits?">

@@ -67,12 +67,12 @@ On your project's **AI Gateway** page, locked models show a padlock, and the **S
 
 | Message                                                 | What to do                                                                                  |
 | ------------------------------------------------------- | ------------------------------------------------------------------------------------------- |
-| **A paid plan is required to use these models**         | Select **Upgrade plan**. The AI Gateway is available on paid plans only.                    |
+| **A paid plan is required to use these models**         | Add a payment card in **Billing**, then buy credits. You don't need to upgrade your plan.                    |
 | **AI Gateway credits are required to use these models** | Select **Add credits**. See [AI Gateway prepaid credits](/docs/ai-gateway/prepaid-credits). |
 | **Your account is restricted from using these models**  | [Contact Support](/docs/introduction/support).                                              |
 | **Some models are not available to your account**       | [Contact Support](/docs/introduction/support).                                              |
 
-After you upgrade or buy credits, models unlock once Neon confirms access. Reload the page if a model still shows as locked.
+After you buy credits, models unlock once Neon confirms access. Reload the page if a model still shows as locked.
 
 ---
 

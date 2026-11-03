@@ -84,7 +84,7 @@ sequenceDiagram
 Before you start, make sure you have:
 
 1. **Node.js**: Version 22 or later (v24 recommended). Download from [nodejs.org](https://nodejs.org/).
-2. **Neon account on a paid plan**: Sign up at [console.neon.tech](https://console.neon.tech/signup). The [Neon AI Gateway](/docs/ai-gateway/overview) is available on the Launch and Scale plans with [prepaid credits](/docs/ai-gateway/prepaid-credits), so the welcome-message step needs a paid plan.
+2. **Neon account with AI Gateway credits**: Sign up at [console.neon.tech](https://console.neon.tech/signup). The [Neon AI Gateway](/docs/ai-gateway/overview) needs [prepaid credits](/docs/ai-gateway/prepaid-credits), which you can buy on any plan, including Free, so the welcome-message step needs credits.
 3. **Neon CLI**: Installed globally (`npm i -g neon@latest`) and authenticated (`neon auth`). See the [Neon CLI Quickstart](/docs/cli/quickstart) for details.
 4. **Upstash account**: Sign up for a free account at [console.upstash.com](https://console.upstash.com).
 
