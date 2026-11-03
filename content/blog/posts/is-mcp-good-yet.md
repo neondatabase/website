@@ -119,7 +119,7 @@ Of course, your app can still be stateful. The spec suggests minting a handle fr
 
 ## Why stateless is great news for serverless MCP servers
 
-This is the part I'm most excited about. A lot of remote MCP servers run on serverless infra like Vercel Functions or [Neon Functions](https://neon.com/docs/compute/functions/overview), and ours runs on Vercel. A serverless function handles a request and the next request can land on a completely different instance. That's perfect for plain request/response, but it's a real problem for a protocol with sessions.
+This is the part I'm most excited about. A lot of remote MCP servers run on serverless infra. A serverless function handles a request and the next request can land on a completely different instance. That's perfect for plain request/response, but it's a real problem for a protocol with sessions.
 
 We learned that the hard way with HTTP+SSE. The SSE stream stayed open on one function instance for up to 800 seconds while the client's POST requests to `/message` could land on any other instance. So we needed Redis to get those messages to the instance holding the stream and to bind each session to the user who opened it, so nobody else could post into it.
 
