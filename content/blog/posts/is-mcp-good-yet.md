@@ -50,15 +50,17 @@ And of course, [there's a website for that](https://ismcpgoodyet.com). It scores
 
 MCP has gone through three designs for remote servers in just two years and we've been along for the ride since the early days.
 
-- **November 2024:** Anthropic open-sources MCP. Servers run locally over stdio or remotely over HTTP+SSE, which uses a long-lived SSE stream for messages from the server and a separate endpoint for the client's POST requests.
+- **November 25, 2024:** Anthropic open-sources MCP. Servers run locally over stdio or remotely over HTTP+SSE, which uses a long-lived SSE stream for messages from the server and a separate endpoint for the client's POST requests.
+- **December 3, 2024:** We publish our first MCP server, [`@neondatabase/mcp-server-neon`](https://www.npmjs.com/package/@neondatabase/mcp-server-neon), as a local stdio server on npm, just eight days after MCP launched.
 - **March 26, 2025:** [Spec 2025-03-26](https://modelcontextprotocol.io/specification/2025-03-26/changelog) replaces HTTP+SSE with Streamable HTTP. Every message becomes a POST to a single endpoint and sessions live in an `Mcp-Session-Id` header.
 - **April 4, 2025:** We [launch our remote MCP server](https://neon.com/blog/announcing-neons-remote-mcp-server) at mcp.neon.tech, on SSE.
 - **December 19, 2025:** The Transport Working Group [publishes its plan](https://blog.modelcontextprotocol.io/posts/2025-12-19-mcp-transport-future/) for a stateless protocol, because sticky sessions and shared session stores were making remote servers hard to scale.
+- **February 16, 2026:** We [remove the local stdio server](https://github.com/neondatabase/mcp-server-neon/pull/198) from the repo and deprecate the npm package in favor of mcp.neon.tech.
 - **May 21, 2026:** The [release candidate](https://blog.modelcontextprotocol.io/posts/2026-07-28-release-candidate/) for 2026-07-28 comes out.
 - **July 28, 2026:** The final spec ships and officially deprecates HTTP+SSE, with a year-long offramp.
 - **November 2, 2026:** We add 2026-07-28 support to mcp.neon.tech and retire our SSE endpoints.
 
-Funny enough, we launched our remote server on SSE nine days after the spec had already replaced it. It took us a while to clean that up, but we got there.
+Looking back, we were really early. Our stdio server shipped just over a week after MCP came out, back when most people ran MCP servers on their own machines. And funny enough, we launched our remote server on SSE nine days after the spec had already replaced it. It took us a while to clean all of that up, but with the stdio package deprecated and the SSE endpoints retired, mcp.neon.tech is now the one Neon MCP server.
 
 ## So what does stateless actually mean?
 
