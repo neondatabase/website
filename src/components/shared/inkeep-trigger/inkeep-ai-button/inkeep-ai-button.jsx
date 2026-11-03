@@ -26,7 +26,9 @@ const InkeepAIButton = ({ className, handleClick, isDocsHeader = false }) => (
       className
     )}
     type="button"
-    aria-label="Open Neon AI"
+    // Docs header can collapse to an icon-only button, so keep an accessible
+    // name that matches the visible "Ask AI" label there.
+    aria-label={isDocsHeader ? 'Ask AI' : 'Open Neon AI'}
     onClick={() => handleClick('AI_CHAT')}
   >
     {isDocsHeader ? (

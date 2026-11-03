@@ -36,14 +36,24 @@ const laneRank = (lane) => {
   return index === -1 ? UNRANKED_PRIORITY : index;
 };
 
+// Fallback reserve for the "More" trigger if it cannot be measured yet.
+const FALLBACK_TOGGLE_WIDTH = 36;
+
 // Priority-plus overflow: measure each lane's intrinsic width once (re-measured
 // after web fonts load), then on every container resize work out how many lanes
 // fit in the nav's available width and push the rest into the "More" menu, one
-// at a time, lowest priority first. The "More" trigger lives outside this
-// container, so its width is already excluded from the available space.
-const useLaneOverflow = (navRef, lanes) => {
+// at a time, lowest priority first.
+//
+// When anything overflows we reserve the measured width of the "More" trigger
+// (plus one list gap) inside the fit check. The trigger is always present, so
+// this is a conservative reserve that makes the very first computed result the
+// final one: overflow converges in a single layout pass with no boundary pop or
+// second-frame drop, since the reserved available width is derived from stable
+// quantities that do not change when lanes are hidden.
+const useLaneOverflow = (navRef, toggleRef, lanes) => {
   const widthsRef = useRef([]);
   const gapRef = useRef(0);
+  const toggleWidthRef = useRef(FALLBACK_TOGGLE_WIDTH);
   const [state, setState] = useState({ isMeasured: false, hiddenIndexes: [] });
 
   // Which lanes overflow, computed purely from the cached intrinsic widths and
@@ -55,17 +65,20 @@ const useLaneOverflow = (navRef, lanes) => {
 
     const available = nav.clientWidth;
     const gap = gapRef.current;
-    const fits = (indexes) => {
-      if (indexes.length === 0) return true;
-      const total =
-        indexes.reduce((sum, index) => sum + widths[index], 0) + gap * (indexes.length - 1);
-      return total <= available + 0.5;
-    };
+    const measure = (indexes) =>
+      indexes.length === 0
+        ? 0
+        : indexes.reduce((sum, index) => sum + widths[index], 0) + gap * (indexes.length - 1);
 
     const visible = widths.map((_, index) => index);
-    if (fits(visible)) return [];
+    // No overflow needed: everything fits without the "More" trigger.
+    if (measure(visible) <= available + 0.5) return [];
 
-    // Drop lowest priority first; break ties by dropping the right-most lane.
+    // Something must move out, so reserve room for the (always-present) trigger
+    // plus a list gap and drop lowest priority first (ties: right-most first).
+    const reserved = available - toggleWidthRef.current - gap;
+    const fits = (indexes) => measure(indexes) <= reserved + 0.5;
+
     const dropOrder = [...visible].sort((a, b) => {
       const rankDelta = laneRank(lanes[b]) - laneRank(lanes[a]);
       return rankDelta !== 0 ? rankDelta : b - a;
@@ -96,6 +109,8 @@ const useLaneOverflow = (navRef, lanes) => {
       });
       const styles = getComputedStyle(nav);
       gapRef.current = parseFloat(styles.columnGap || styles.gap || '0') || 0;
+      const toggleWidth = toggleRef.current?.getBoundingClientRect().width;
+      if (toggleWidth > 0) toggleWidthRef.current = toggleWidth;
     };
 
     measure();
@@ -132,7 +147,8 @@ const useLaneOverflow = (navRef, lanes) => {
 const DocsHeader = ({ customType = null, docPageType = null, basePath, navigation }) => {
   const lanes = useMemo(() => getDocsHeaderLanes(navigation), [navigation]);
   const navRef = useRef(null);
-  const { isMeasured, hiddenIndexes } = useLaneOverflow(navRef, lanes);
+  const moreToggleRef = useRef(null);
+  const { isMeasured, hiddenIndexes } = useLaneOverflow(navRef, moreToggleRef, lanes);
   const overflowLanes = useMemo(
     () => hiddenIndexes.map((index) => lanes[index]).filter(Boolean),
     [hiddenIndexes, lanes]
@@ -196,7 +212,11 @@ const DocsHeader = ({ customType = null, docPageType = null, basePath, navigatio
             Sign up
           </Link>
           <span className="mx-1 h-5 w-px bg-gray-new-85 dark:bg-gray-new-20" aria-hidden="true" />
-          <DocsHeaderMenu overflowLanes={overflowLanes} basePath={basePath} />
+          <DocsHeaderMenu
+            overflowLanes={overflowLanes}
+            basePath={basePath}
+            buttonRef={moreToggleRef}
+          />
         </div>
       </div>
     </div>
