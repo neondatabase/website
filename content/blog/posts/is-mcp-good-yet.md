@@ -94,6 +94,14 @@ The rest of the spec follows the same idea. When a tool needs input from the use
 
 Of course, your app can still be stateful. The spec suggests minting a handle from a tool, say a `basket_id`, and letting the model pass it back as an argument on the next call. I personally like that pattern a lot, because the model can see the state it's carrying around.
 
+## Why stateless is great news for serverless MCP servers
+
+This is the part I'm most excited about. A lot of remote MCP servers run on serverless infra like Vercel Functions or [Neon Functions](https://neon.com/docs/compute/functions/overview), and ours runs on Vercel. A serverless function handles a request and the next request can land on a completely different instance. That's perfect for plain request/response, but it's a real problem for a protocol with sessions.
+
+We learned that the hard way with HTTP+SSE. The SSE stream stayed open on one function instance for up to 800 seconds while the client's POST requests to `/message` could land on any other instance. So we needed Redis to get those messages to the instance holding the stream and to bind each session to the user who opened it, so nobody else could post into it.
+
+With 2026-07-28, every request carries everything the server needs to answer it, so any instance can handle any request and there's nothing to share between them. In fact, retiring SSE already let us delete our Redis session store. Streamable HTTP lets a server skip session ids, so we answer 2025-era clients statelessly too. What the new spec adds is a stateless way to do the things that used to need a held-open stream, like asking the user for input in the middle of a tool call. Once every client is on 2026-07-28, those features work on any serverless function without any state on our side, and we can stop supporting the old `initialize` handshake altogether.
+
 ## Is Streamable HTTP going away?
 
 No, Streamable HTTP is staying. It's still one of the two standard transports next to stdio. The [Transport Working Group](https://blog.modelcontextprotocol.io/posts/2025-12-19-mcp-transport-future/) committed to keeping it that way so every client and server can keep talking to each other out of the box.
@@ -121,7 +129,7 @@ That's why we couldn't just switch over. Our server has to answer stateless requ
 
 We moved mcp.neon.tech to `@modelcontextprotocol/server` 2.0 and [`mcp-handler`](https://github.com/vercel/mcp-handler) 2.1, so we now serve 2026-07-28 on `https://mcp.neon.tech/mcp`. Clients that still send `initialize` keep working on the same URL, and we test the 2025-03-26 and 2025-11-25 fallbacks to make sure they stay that way. You don't need to change anything: your OAuth tokens, API keys and grant URLs like `/mcp?projectId=<project-id>&readonly=true` work exactly like before.
 
-Going stateless also let us delete code. HTTP+SSE needed Redis to bind each session to a server instance and we removed all of that. We now resolve authentication, tool grants and client attribution on every request. And while we were at it, we made cancellation reach the Neon API: if you cancel a tool call or close the request, we abort the Neon API call behind it.
+Going stateless also let us delete code. The Redis session store from the SSE days is gone and we now resolve authentication, tool grants and client attribution on every request. And while we were at it, we made cancellation reach the Neon API: if you cancel a tool call or close the request, we abort the Neon API call behind it.
 
 Finally, we retired our SSE endpoints. `/sse`, `/message`, `/api/sse` and `/api/message` now return `410 Gone` with a pointer to the new URL:
 
