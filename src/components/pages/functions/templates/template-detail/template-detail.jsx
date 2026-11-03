@@ -257,8 +257,13 @@ const TemplateSidebar = ({ template, installCommand }) => {
               </Link>
             </li>
             <li>
+              <Link to={LINKS.functionsTemplatesDocs} theme="green">
+                How to use templates
+              </Link>
+            </li>
+            <li>
               <Link to={LINKS.functionsRegistry} theme="green">
-                Function Registry docs
+                Contribute a template
               </Link>
             </li>
           </ul>

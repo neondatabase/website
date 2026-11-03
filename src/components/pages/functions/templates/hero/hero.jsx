@@ -29,7 +29,7 @@ const Hero = () => (
         <Button
           className={BUTTON_CLASS_NAME}
           theme="outlined-new"
-          to={LINKS.functionsRegistry}
+          to={LINKS.functionsTemplatesDocs}
           tagName="Functions Templates Hero Docs"
         >
           Read the docs
