@@ -31,7 +31,7 @@ Starting a new app? Scaffold one from the Realtime template:
 npx neon@latest bootstrap my-app --template realtime-react
 ```
 
-To enable Realtime on an existing project, select **Postgres database** > **Realtime** in the Neon Console and click **Enable Realtime**, or run [`neon realtime enable`](/docs/cli/realtime#enable) on a linked project:
+Realtime is available on all Neon plans. To enable it on an existing project, select **Postgres database** > **Realtime** in the Neon Console and click **Enable Realtime**, or run [`neon realtime enable`](/docs/cli/realtime#enable) on a linked project:
 
 ```bash filename="Terminal"
 neon realtime enable
@@ -39,7 +39,7 @@ neon realtime enable
 
 <Admonition type="important" title="Before you enable Realtime">
 - Your project must be in a [supported region](#which-regions-is-it-enabled-in).
-- Enabling Realtime turns on [logical replication](/docs/guides/logical-replication-neon) for the whole project. This permanently changes `wal_level` to `logical` and restarts all computes, so active connections are dropped. Disabling Realtime later doesn't turn logical replication off.
+- Enabling Realtime turns on [logical replication](/docs/guides/logical-replication-neon) for the whole project. This permanently changes `wal_level` to `logical` and suspends every compute in the project, on all branches, which drops active connections. Each compute starts again on its next connection. Disabling Realtime later doesn't turn logical replication off.
 </Admonition>
 
 To add Realtime to an app by hand, follow the [Quickstart](/docs/realtime/quickstart). To see how the pieces fit together, read [how it works](/docs/realtime/how-it-works).
@@ -260,7 +260,7 @@ The beta also makes no performance guarantees. We have very ambitious performanc
 
 <FaqItem question="How much does it cost? Is billing enabled?">
 
-Realtime is free to use during the beta. Neon does not charge for the live query engine compute or the Live SQL API service.
+Realtime is available on all Neon plans and is free to use during the beta. Neon does not charge for the live query engine compute or the Live SQL API service.
 
 Using Realtime can still cause usage on your database:
 
