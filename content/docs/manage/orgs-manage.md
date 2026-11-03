@@ -30,6 +30,19 @@ Select a plan for your new organization. Organizations can be free or paid; if y
 
 After confirming, you'll be directed to your new organization's **Projects** page, where you can get started creating projects and inviting [members](/docs/manage/orgs-manage#invite-members).
 
+## Switch organizations
+
+If you belong to more than one organization, use the org switcher to change which one you're working in. The org switcher is the organization name at the top left of the Console, next to the Neon logo.
+
+1. Click the organization name to open the switcher. It lists every organization you belong to, with a check mark next to the active one.
+1. Select the organization you want to work in.
+
+The Console opens that organization's **Projects** page. The sidebar pages (**Projects**, **People**, **Billing**, **Integrations**, and **Settings**) now apply to the organization you selected.
+
+![org switcher in the Neon Console](/docs/manage/orgs_create_button.png)
+
+If someone has shared a project with you through [project sharing](#project-sharing), select **Projects shared with me** in the switcher to see those projects.
+
 ## Invite members
 
 Only Admins can invite new members to the organization. Invitations are issued via email. If a recipient does not have a Neon account, they will receive instructions to create one. Alternatively, you can [auto-provision members by domain](/docs/manage/orgs-add-members-by-domain) so that users with a matching email domain are added automatically when they sign up or log in.

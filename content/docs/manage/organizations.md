@@ -39,6 +39,10 @@ You can also [auto-provision members by email domain](/docs/manage/orgs-add-memb
 
 You can create additional organizations at any time. [See how to create an organization.](/docs/manage/orgs-manage#create-an-organization)
 
+## Switching between organizations
+
+If you belong to more than one organization, use the org switcher at the top left of the Console to change the active organization. [See how to switch organizations.](/docs/manage/orgs-manage#switch-organizations)
+
 ## Limitations
 
 As we continue to refine our organization features, here are some temporary limitations you should be aware of:
