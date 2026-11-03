@@ -152,6 +152,8 @@ That's why we couldn't just switch over. Our server has to answer stateless requ
 
 The Neon MCP server now supports the 2026-07-28 spec on the same URL as before, `https://mcp.neon.tech/mcp`, and it still works with every client that hasn't moved to the new spec yet. You don't need to change anything: your OAuth sign-in, API keys and config keep working. The only thing we turned off is the old SSE endpoint.
 
+Going stateless also meant deleting a lot of code. The change removed about 1,850 more lines than it added, including our 373-line session-binding module and the five test suites around SSE sessions. And I have to say, it felt amazing to take Redis out of the MCP request path. We still use it to coordinate OAuth token refreshes, but no MCP request depends on it anymore.
+
 The Neon MCP server is open source, so if you're curious, you can find the full change in [neondatabase/mcp-server-neon#320](https://github.com/neondatabase/mcp-server-neon/pull/320).
 
 ## Still using our SSE endpoint?
