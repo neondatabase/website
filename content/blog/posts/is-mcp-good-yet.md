@@ -55,6 +55,8 @@ It's also fun to watch the share move whenever a new frontier model comes out:
 
 ![Line chart of the 7-day rolling share of tool calls on mcp.neon.tech from September 13 to November 1, 2026, for ChatGPT plus Codex, Claude Desktop plus Claude Code, Cursor and everyone else. ChatGPT plus Codex starts above 50% and Claude Desktop plus Claude Code around 30%. After Claude Opus 5.5 on September 22 the two lines cross, with Claude clients peaking near 44% around September 29. After GPT-6.1 Sol on September 29 they cross back, and from mid-October ChatGPT plus Codex holds around 46% and Claude clients around 34%. Cursor stays between 7% and 12%.](https://cdn.neonapi.io/public/images/pages/blog/is-mcp-good-yet/mcp-client-share.png)
 
+When Claude Opus 5.5 launched, Claude clients overtook ChatGPT and Codex within days. A week later, GPT-6.1 Sol flipped it right back.
+
 So MCP is clearly winning, but is it good yet? Let's look at the timeline and where we're at today.
 
 ## How we got here
