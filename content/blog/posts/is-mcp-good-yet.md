@@ -83,7 +83,7 @@ MCP has gone through three designs for remote servers in just two years and we'v
 - **July 28, 2026:** The final spec ships and officially deprecates HTTP+SSE, with a year-long offramp.
 - **November 2, 2026:** We add 2026-07-28 support to mcp.neon.tech and retire our SSE endpoints.
 
-Looking back, we were really early. Our stdio server shipped just over a week after MCP came out, back when most people ran MCP servers on their own machines. And funny enough, we launched our remote server on SSE nine days after the spec had already replaced it. It took us a while to clean all of that up, but with the stdio package deprecated and the SSE endpoints retired, mcp.neon.tech is now the one Neon MCP server.
+The MCP spec has come a long way and so has our own MCP offering. We were really early and have closely followed the latest developments across MCP, harness plugins and agent tooling ever since.
 
 ## So what does stateless actually mean?
 
