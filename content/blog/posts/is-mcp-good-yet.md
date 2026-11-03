@@ -166,19 +166,6 @@ npx add-mcp https://mcp.neon.tech/mcp --name Neon -g
 
 **Note:** Set `--name` to the name of your existing Neon MCP server entry to override it. Drop `-g` to update a project-level config instead.
 
-If your client only supports local stdio servers, you can bridge to Streamable HTTP with [`mcp-remote`](https://www.npmjs.com/package/mcp-remote):
-
-```json
-{
-  "mcpServers": {
-    "Neon": {
-      "command": "npx",
-      "args": ["-y", "mcp-remote@latest", "https://mcp.neon.tech/mcp"]
-    }
-  }
-}
-```
-
 ## New to the Neon MCP server?
 
 If you haven't tried the Neon MCP server yet, you can add it to every agent add-mcp detects on your machine with one command:
