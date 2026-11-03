@@ -116,7 +116,7 @@ const DocsHomeComposer = () => {
           type="button"
           onClick={() => copy(activeText)}
           className={cn(
-            'mt-3.5 flex h-9 shrink-0 items-center gap-2.5 rounded-full px-4 text-[15px] leading-none font-medium tracking-normal transition-colors duration-200',
+            'mt-3.5 flex h-9 shrink-0 items-center gap-2.5 rounded-full pr-4 pl-3 text-[15px] leading-none font-medium tracking-normal transition-colors duration-200',
             isCopied
               ? 'bg-black-new text-white dark:bg-white dark:text-black-pure'
               : 'bg-black-new text-white hover:bg-gray-new-20 dark:bg-white dark:text-black-pure dark:hover:bg-gray-new-90'
@@ -129,7 +129,7 @@ const DocsHomeComposer = () => {
           {agent ? (
             <>
               <ProviderMarks className="text-white dark:text-black-pure" />
-              {isCopied ? 'Copied' : 'Copy prompt'}
+              {isCopied ? 'Prompt copied' : 'Copy prompt'}
             </>
           ) : (
             <>
