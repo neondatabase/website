@@ -4,8 +4,14 @@ import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import AgentSetupButton, { BASE_AGENT_PROMPT } from './agent-setup-button';
 
 vi.mock('utils/send-gtag-event', () => ({ default: vi.fn() }));
-vi.mock('icons/docs/sidebar/ai-agent.inline.svg', () => ({
-  default: (props) => <svg {...props} />,
+vi.mock('icons/docs/providers/claude.inline.svg', () => ({
+  default: (props) => <svg data-testid="mark-claude" {...props} />,
+}));
+vi.mock('icons/docs/providers/openai.inline.svg', () => ({
+  default: (props) => <svg data-testid="mark-openai" {...props} />,
+}));
+vi.mock('icons/docs/providers/cursor.inline.svg', () => ({
+  default: (props) => <svg data-testid="mark-cursor" {...props} />,
 }));
 
 describe('AgentSetupButton', () => {
@@ -57,5 +63,13 @@ describe('AgentSetupButton', () => {
       'title',
       'Copy a prompt that sets up Neon in your coding agent'
     );
+  });
+
+  it('shows the Claude, OpenAI, and Cursor marks in place of a single icon', () => {
+    render(<AgentSetupButton />);
+
+    expect(screen.getByTestId('mark-claude')).toBeInTheDocument();
+    expect(screen.getByTestId('mark-openai')).toBeInTheDocument();
+    expect(screen.getByTestId('mark-cursor')).toBeInTheDocument();
   });
 });

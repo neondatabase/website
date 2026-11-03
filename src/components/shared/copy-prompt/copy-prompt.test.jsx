@@ -20,6 +20,15 @@ vi.mock('icons/home/copied.inline.svg', () => ({
   default: (props) => <svg data-testid="copied-icon" {...props} />,
 }));
 vi.mock('images/pages/docs/copy-prompt/pattern.svg', () => ({ default: 'pattern.svg' }));
+vi.mock('icons/docs/providers/claude.inline.svg', () => ({
+  default: (props) => <svg data-testid="mark-claude" {...props} />,
+}));
+vi.mock('icons/docs/providers/openai.inline.svg', () => ({
+  default: (props) => <svg data-testid="mark-openai" {...props} />,
+}));
+vi.mock('icons/docs/providers/cursor.inline.svg', () => ({
+  default: (props) => <svg data-testid="mark-cursor" {...props} />,
+}));
 vi.mock('utils/send-gtag-event', () => ({ default: vi.fn() }));
 
 const setScrollHeight = (value) => {
@@ -129,6 +138,22 @@ describe('CopyPrompt (agent variant)', () => {
 
     expect(screen.getByText('Agent task')).toBeInTheDocument();
     expect(screen.getByText('Run this agent prompt.')).toHaveClass('font-mono');
+  });
+
+  it('shows the provider marks and labels the copy button for assistive tech', () => {
+    setScrollHeight(50);
+
+    render(
+      <CopyPrompt variant="agent" title="Marked task">
+        Copy me.
+      </CopyPrompt>
+    );
+
+    expect(screen.getByTestId('mark-claude')).toBeInTheDocument();
+    expect(screen.getByTestId('mark-openai')).toBeInTheDocument();
+    expect(screen.getByTestId('mark-cursor')).toBeInTheDocument();
+    // The agent-variant copy button now carries an explicit aria-label.
+    expect(screen.getByRole('button', { name: 'Copy prompt' })).toBeInTheDocument();
   });
 });
 

@@ -6,6 +6,8 @@ import { useEffect, useId, useRef, useState } from 'react';
 
 import Button from 'components/shared/button';
 import CheckIcon from 'components/shared/code-block-wrapper/images/check.inline.svg';
+import ProviderMarks from 'components/shared/provider-marks';
+import useCopyPrompt from 'hooks/use-copy-prompt';
 import CopiedIcon from 'icons/home/copied.inline.svg';
 import CopyIcon from 'icons/home/copy.inline.svg';
 import patternSvg from 'images/pages/docs/copy-prompt/pattern.svg';
@@ -37,25 +39,6 @@ const ChevronIcon = (props) => (
   </svg>
 );
 
-// navigator.clipboard first, with a hidden-textarea + execCommand fallback for
-// contexts where the async clipboard API is unavailable (e.g. some iframes).
-function copyWithFallback(text) {
-  if (typeof document === 'undefined') return;
-  const textarea = document.createElement('textarea');
-  textarea.value = text;
-  textarea.setAttribute('readonly', '');
-  textarea.style.position = 'absolute';
-  textarea.style.left = '-9999px';
-  document.body.appendChild(textarea);
-  textarea.select();
-  try {
-    document.execCommand('copy');
-  } catch {
-    // Clipboard not available; nothing more we can do.
-  }
-  document.body.removeChild(textarea);
-}
-
 const CopyPrompt = (props) => {
   const {
     src,
@@ -66,10 +49,9 @@ const CopyPrompt = (props) => {
     variant = 'legacy',
   } = props;
   const [markdown, setMarkdown] = useState('');
-  const [copied, setCopied] = useState(false);
+  const { isCopied: copied, copy } = useCopyPrompt();
 
   const promptRef = useRef(null);
-  const copyTimeoutRef = useRef(null);
   const promptId = useId();
   const [collapsible, setCollapsible] = useState(false);
   const [expanded, setExpanded] = useState(false);
@@ -80,8 +62,6 @@ const CopyPrompt = (props) => {
       .then((res) => res.text())
       .then(setMarkdown);
   }, [src]);
-
-  useEffect(() => () => clearTimeout(copyTimeoutRef.current), []);
 
   // The exact text shown and copied in the agent-prompt layout: inline children
   // when provided, otherwise the markdown fetched from `src`.
@@ -120,12 +100,8 @@ const CopyPrompt = (props) => {
   }, [variant, promptText]);
 
   // ---- Legacy layout with the rounded Copy prompt button. ----
-  const handleCopy = async () => {
-    await navigator.clipboard.writeText(markdown);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 1500);
-    sendGtagEvent('Button Clicked', { text: 'Copy prompt' });
-  };
+  const handleCopy = () =>
+    copy(markdown, () => sendGtagEvent('Button Clicked', { text: 'Copy prompt' }));
 
   if (variant !== 'agent') {
     return (
@@ -156,6 +132,7 @@ const CopyPrompt = (props) => {
           aria-live="polite"
           onClick={handleCopy}
         >
+          <ProviderMarks className="text-white dark:text-black-pure" />
           {copied ? (
             <>
               Copied
@@ -173,25 +150,8 @@ const CopyPrompt = (props) => {
   }
 
   // ---- Agent-prompt layout: explicit opt-in (header strip + collapsible body). ----
-  const handleAgentCopy = async () => {
-    try {
-      if (
-        typeof navigator !== 'undefined' &&
-        navigator.clipboard &&
-        navigator.clipboard.writeText
-      ) {
-        await navigator.clipboard.writeText(promptText);
-      } else {
-        copyWithFallback(promptText);
-      }
-    } catch {
-      copyWithFallback(promptText);
-    }
-    setCopied(true);
-    clearTimeout(copyTimeoutRef.current);
-    copyTimeoutRef.current = setTimeout(() => setCopied(false), 1600);
-    sendGtagEvent('Button Clicked', { text: 'Copy prompt' });
-  };
+  const handleAgentCopy = () =>
+    copy(promptText, () => sendGtagEvent('Button Clicked', { text: 'Copy prompt' }));
 
   const isClamped = collapsible && !expanded;
 
@@ -210,6 +170,7 @@ const CopyPrompt = (props) => {
         <button
           type="button"
           onClick={handleAgentCopy}
+          aria-label={copied ? 'Prompt copied' : buttonText}
           className={cn(
             'inline-flex min-h-9 shrink-0 items-center gap-2 rounded-[2px] px-3.5 font-sans text-sm leading-none font-medium transition-colors',
             'bg-green-44 text-white hover:bg-code-green-1',
@@ -217,6 +178,7 @@ const CopyPrompt = (props) => {
             'focus-visible:ring-2 focus-visible:ring-green-44 focus-visible:ring-offset-2 focus-visible:ring-offset-gray-new-98 focus-visible:outline-none dark:focus-visible:ring-green-52 dark:focus-visible:ring-offset-gray-new-8'
           )}
         >
+          <ProviderMarks className="text-white dark:text-black-pure" />
           {copied ? 'Copied' : buttonText}
           {copied ? <CheckIcon className="size-3.5" /> : <CopyIcon className="size-3.5" />}
         </button>

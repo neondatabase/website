@@ -2,19 +2,21 @@
 
 import { useId, useRef, useState } from 'react';
 
-import useCopyToClipboard from 'hooks/use-copy-to-clipboard';
+import { BASE_AGENT_PROMPT } from 'components/pages/doc/agent-setup-button';
+import ProviderMarks from 'components/shared/provider-marks';
+import useCopyPrompt from 'hooks/use-copy-prompt';
 import CopiedIcon from 'icons/home/copied.inline.svg';
 import CopyIcon from 'icons/home/copy.inline.svg';
 import { cn } from 'utils/cn';
 
 import { strongBorder } from './docs-home-tokens';
 
-// The agent prompt is built from these parts so the copied text and the
-// displayed text (with the URL highlighted) can't drift apart.
+// The copied text is the shared BASE_AGENT_PROMPT constant, never a local
+// rebuild. These parts drive only the display spans (with the URL highlighted);
+// they mirror BASE_AGENT_PROMPT so what you read matches what you copy.
 const AGENT_SETUP_URL = 'https://neon.com/prompts/agent-setup.md';
 const AGENT_PROMPT_LEAD = 'Set me up for Neon. Fetch ';
 const AGENT_PROMPT_TAIL = ' and follow it.';
-const AGENT_PROMPT = `${AGENT_PROMPT_LEAD}${AGENT_SETUP_URL}${AGENT_PROMPT_TAIL}`;
 
 const CLI_LINES = [
   { text: '# Install the Neon CLI (needs Node.js 22.20+)', comment: true },
@@ -32,12 +34,12 @@ const COMPOSER_TABS = [
 // Tabbed setup instructions with a copy control for the active tab.
 const DocsHomeComposer = () => {
   const [tab, setTab] = useState('agent');
-  const { isCopied, handleCopy } = useCopyToClipboard(1400);
+  const { isCopied, copy } = useCopyPrompt(1400);
   const idPrefix = useId();
   const tabRefs = useRef({});
 
   const agent = tab === 'agent';
-  const activeText = agent ? AGENT_PROMPT : CLI_TEXT;
+  const activeText = agent ? BASE_AGENT_PROMPT : CLI_TEXT;
   const tabId = (id) => `${idPrefix}-tab-${id}`;
   const panelId = `${idPrefix}-panel`;
 
@@ -107,23 +109,37 @@ const DocsHomeComposer = () => {
             </button>
           ))}
         </div>
+        {/* On the Agent tab the vendor marks replace the copy icon and the label
+            reads "Copy prompt". The CLI tab copies a shell command (not an agent
+            prompt), so it keeps the plain copy icon and "Copy" with no marks. */}
         <button
           type="button"
-          onClick={() => handleCopy(activeText)}
+          onClick={() => copy(activeText)}
           className={cn(
-            'mt-3.5 flex h-9 shrink-0 items-center gap-2 rounded-full px-4 text-[15px] leading-none font-medium tracking-normal transition-colors duration-200',
+            'mt-3.5 flex h-9 shrink-0 items-center gap-2.5 rounded-full px-4 text-[15px] leading-none font-medium tracking-normal transition-colors duration-200',
             isCopied
               ? 'bg-black-new text-white dark:bg-white dark:text-black-pure'
               : 'bg-black-new text-white hover:bg-gray-new-20 dark:bg-white dark:text-black-pure dark:hover:bg-gray-new-90'
           )}
-          aria-label={isCopied ? 'Copied' : 'Copy'}
+          aria-label={
+            agent ? (isCopied ? 'Prompt copied' : 'Copy prompt') : isCopied ? 'Copied' : 'Copy'
+          }
           aria-live="polite"
         >
-          {isCopied ? 'Copied' : 'Copy'}
-          {isCopied ? (
-            <CopiedIcon className="size-3.5" aria-hidden="true" />
+          {agent ? (
+            <>
+              <ProviderMarks className="text-white dark:text-black-pure" />
+              {isCopied ? 'Copied' : 'Copy prompt'}
+            </>
           ) : (
-            <CopyIcon className="size-3.5" aria-hidden="true" />
+            <>
+              {isCopied ? 'Copied' : 'Copy'}
+              {isCopied ? (
+                <CopiedIcon className="size-3.5" aria-hidden="true" />
+              ) : (
+                <CopyIcon className="size-3.5" aria-hidden="true" />
+              )}
+            </>
           )}
         </button>
       </div>

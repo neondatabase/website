@@ -1,9 +1,9 @@
 'use client';
 
 import PropTypes from 'prop-types';
-import { useEffect, useRef, useState } from 'react';
 
-import RobotIcon from 'icons/docs/sidebar/ai-agent.inline.svg';
+import ProviderMarks from 'components/shared/provider-marks';
+import useCopyPrompt from 'hooks/use-copy-prompt';
 import { cn } from 'utils/cn';
 import sendGtagEvent from 'utils/send-gtag-event';
 
@@ -11,39 +11,6 @@ import sendGtagEvent from 'utils/send-gtag-event';
 // sentence via the `agentPrompt` frontmatter field (threaded in from post.jsx).
 export const BASE_AGENT_PROMPT =
   'Set me up for Neon. Fetch https://neon.com/prompts/agent-setup.md and follow it.';
-
-// "Prompt copied" shows for 1.4s, then the button reverts to its default state.
-const COPIED_RESET_MS = 1400;
-
-// Copy as plain text only. navigator.clipboard.writeText writes a text/plain
-// payload (no text/html), so the prompt pastes as normal body text rather than
-// the styled/monospace markup a DOM-selection copy would carry. The hidden
-// textarea execCommand path is a plain-text fallback for browsers without the
-// async clipboard API.
-async function copyPlainText(text) {
-  if (typeof navigator !== 'undefined' && navigator.clipboard && navigator.clipboard.writeText) {
-    try {
-      await navigator.clipboard.writeText(text);
-      return;
-    } catch {
-      // Fall through to the textarea fallback.
-    }
-  }
-  if (typeof document === 'undefined') return;
-  const textarea = document.createElement('textarea');
-  textarea.value = text;
-  textarea.setAttribute('readonly', '');
-  textarea.style.position = 'absolute';
-  textarea.style.left = '-9999px';
-  document.body.appendChild(textarea);
-  textarea.select();
-  try {
-    document.execCommand('copy');
-  } catch {
-    // Clipboard unavailable; nothing more we can do.
-  }
-  document.body.removeChild(textarea);
-}
 
 const CheckIcon = (props) => (
   <svg
@@ -63,25 +30,19 @@ const CheckIcon = (props) => (
 );
 
 const AgentSetupButton = ({ agentPrompt = null, className = null }) => {
-  const [isCopied, setIsCopied] = useState(false);
-  const resetTimeoutRef = useRef(null);
+  const { isCopied, copy } = useCopyPrompt();
 
   const prompt = agentPrompt ? `${BASE_AGENT_PROMPT} ${agentPrompt}` : BASE_AGENT_PROMPT;
 
-  useEffect(() => () => clearTimeout(resetTimeoutRef.current), []);
-
-  const handleClick = async () => {
-    await copyPlainText(prompt);
-    setIsCopied(true);
-    clearTimeout(resetTimeoutRef.current);
-    resetTimeoutRef.current = setTimeout(() => setIsCopied(false), COPIED_RESET_MS);
-    sendGtagEvent('Action Clicked', { text: 'Agent setup', tag_name: 'DocsAgentSetup' });
-  };
+  const handleClick = () =>
+    copy(prompt, () =>
+      sendGtagEvent('Action Clicked', { text: 'Agent setup', tag_name: 'DocsAgentSetup' })
+    );
 
   return (
     <button
       className={cn(
-        'flex items-center gap-[7px] text-sm leading-none transition-colors duration-[120ms] ease-out',
+        'flex items-center gap-2 text-sm leading-none transition-colors duration-[120ms] ease-out',
         isCopied
           ? 'text-[#157A55] dark:text-green-52'
           : 'text-gray-new-20 hover:text-[#157A55] dark:text-gray-new-94 dark:hover:text-green-52',
@@ -92,12 +53,15 @@ const AgentSetupButton = ({ agentPrompt = null, className = null }) => {
       aria-label={isCopied ? 'Prompt copied' : 'Set up agent'}
       onClick={isCopied ? undefined : handleClick}
     >
-      <span
-        className={cn('flex', isCopied ? 'text-[#157A55] dark:text-green-52' : 'text-green-44')}
-      >
-        {isCopied ? <CheckIcon /> : <RobotIcon width={15} height={15} aria-hidden="true" />}
-      </span>
+      {/* The vendor-mark cluster replaces the robot icon and stays put in the
+          copied state; only the label and the appended check turn green. */}
+      <ProviderMarks />
       {isCopied ? 'Prompt copied' : 'Set up agent'}
+      {isCopied && (
+        <span className="flex text-[#157A55] dark:text-green-52">
+          <CheckIcon />
+        </span>
+      )}
     </button>
   );
 };
