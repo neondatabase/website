@@ -1,7 +1,7 @@
 'use client';
 
 import PropTypes from 'prop-types';
-import { useCallback, useLayoutEffect, useMemo, useRef, useState } from 'react';
+import { useCallback, useLayoutEffect, useMemo, useRef, useState, useEffect } from 'react';
 
 import InkeepTrigger from 'components/shared/inkeep-trigger';
 import Link from 'components/shared/link';
@@ -54,6 +54,8 @@ const useLaneOverflow = (navRef, toggleRef, lanes) => {
   const widthsRef = useRef([]);
   const gapRef = useRef(0);
   const toggleWidthRef = useRef(FALLBACK_TOGGLE_WIDTH);
+  const prevWidthRef = useRef(null);
+  const prevVisibleCountRef = useRef(null);
   const [state, setState] = useState({ isMeasured: false, hiddenIndexes: [] });
 
   // Which lanes overflow, computed purely from the cached intrinsic widths and
@@ -90,7 +92,30 @@ const useLaneOverflow = (navRef, toggleRef, lanes) => {
       if (fits(visible.filter((i) => !hidden.has(i)))) break;
     }
 
-    return visible.filter((index) => hidden.has(index));
+    // Candidate result from intrinsic widths only.
+    const candidateHidden = visible.filter((index) => hidden.has(index));
+
+    // Monotonic degradation: as available width shrinks, never increase the
+    // number of visible lanes (avoids 2->3->2 jumps around breakpoints like
+    // the Search collapse). When width grows again, allow lanes to return.
+    const total = widths.length;
+    const candidateVisible = total - candidateHidden.length;
+    const prevWidth = prevWidthRef.current ?? available;
+    const prevVisible = prevVisibleCountRef.current ?? candidateVisible;
+
+    let appliedHidden = candidateHidden;
+    if (available < prevWidth && candidateVisible > prevVisible) {
+      const applied = new Set(candidateHidden);
+      for (const idx of dropOrder) {
+        if (!applied.has(idx)) applied.add(idx);
+        if (applied.size === total - prevVisible) break;
+      }
+      appliedHidden = Array.from(applied).sort((a, b) => a - b);
+    }
+
+    prevWidthRef.current = available;
+    prevVisibleCountRef.current = total - appliedHidden.length;
+    return appliedHidden;
   }, [navRef, lanes]);
 
   useLayoutEffect(() => {
@@ -139,7 +164,13 @@ const useLaneOverflow = (navRef, toggleRef, lanes) => {
       if (frame) cancelAnimationFrame(frame);
       resizeObserver.disconnect();
     };
-  }, [navRef, lanes, computeHidden]);
+  }, [navRef, lanes, computeHidden, toggleRef]);
+
+  // Reset monotonic tracking when the lane set itself changes.
+  useEffect(() => {
+    prevWidthRef.current = null;
+    prevVisibleCountRef.current = null;
+  }, [lanes]);
 
   return state;
 };
@@ -183,7 +214,19 @@ const DocsHeader = ({ customType = null, docPageType = null, basePath, navigatio
             {customType?.title || 'Docs'}
           </span>
         </Link>
-        <nav className="flex min-w-0 flex-1 lg:hidden" aria-label="Docs sections">
+        <nav className="relative flex min-w-0 flex-1 lg:hidden" aria-label="Docs sections">
+          {/* Edge-fade prototype: a soft right fade suggests additional items are
+              available in the overflow menu without implying scrollability. */}
+          {isMeasured && hiddenIndexes.length > 0 && (
+            <span
+              className={cn(
+                'pointer-events-none absolute inset-y-0 right-0 w-8',
+                'bg-gradient-to-l from-white/100 to-white/0',
+                'dark:from-black-new/100 dark:to-black-new/0'
+              )}
+              aria-hidden
+            />
+          )}
           <DocsNavigation
             className={cn('min-w-0 flex-1 overflow-hidden', !isMeasured && 'invisible')}
             navigation={lanes}
