@@ -103,8 +103,6 @@ curl 'https://mcp.neon.tech/mcp?category=docs' \
 
 You get back `search_docs`, `get_doc` and `send_feedback` without a session id. You might have also noticed the `Mcp-Method` header. Requests now carry `Mcp-Method` and `Mcp-Name` headers, so a gateway or rate limiter can route requests without parsing the JSON body.
 
-Of course, your app can still be stateful. The spec suggests minting a handle from a tool, say a `basket_id`, and letting the model pass it back as an argument on the next call. I personally like that pattern a lot, because the model can see the state it's carrying around.
-
 ## Why stateless is great news for serverless MCP servers
 
 This is the part I'm most excited about. A lot of remote MCP servers run on serverless infra. A serverless function handles a request and the next request can land on a completely different instance. That's perfect for plain request/response, but it's a real problem for a protocol with sessions.
