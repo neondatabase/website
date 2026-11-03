@@ -61,7 +61,7 @@ So MCP is clearly winning, but is it good yet? Let's look at the timeline and wh
 
 ## How we got here
 
-MCP has gone through three designs for remote servers in just two years and we've been along for the ride since the early days.
+MCP has gone through three designs for remote servers in just two years and we've been along for the ride:
 
 - **November 25, 2024:** Anthropic open-sources MCP. Servers run locally over stdio or remotely over HTTP+SSE, which uses a long-lived SSE stream for messages from the server and a separate endpoint for the client's POST requests.
 - **December 3, 2024:** We [publish our first MCP server](https://neon.com/blog/let-claude-manage-your-neon-databases-our-mcp-server-is-here), [`@neondatabase/mcp-server-neon`](https://www.npmjs.com/package/@neondatabase/mcp-server-neon), as a local stdio server on npm, just eight days after MCP launched.
