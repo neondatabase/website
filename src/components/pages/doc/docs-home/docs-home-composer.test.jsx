@@ -4,7 +4,10 @@ import { afterEach, describe, expect, it, vi } from 'vitest';
 
 import DocsHomeComposer from './docs-home-composer';
 
+const sendGtagEvent = vi.fn();
+
 vi.mock('copy-to-clipboard', () => ({ default: vi.fn(() => true) }));
+vi.mock('utils/send-gtag-event', () => ({ default: (...args) => sendGtagEvent(...args) }));
 vi.mock('icons/home/copy.inline.svg', () => ({ default: (props) => <svg {...props} /> }));
 vi.mock('icons/home/copied.inline.svg', () => ({ default: (props) => <svg {...props} /> }));
 
@@ -35,6 +38,10 @@ describe('DocsHomeComposer', () => {
 
     fireEvent.click(screen.getByRole('button', { name: 'Copy' }));
     expect(copyToClipboard).toHaveBeenCalledWith(AGENT_PROMPT);
+    expect(sendGtagEvent).toHaveBeenCalledWith('Action Clicked', {
+      text: 'Agent setup',
+      tag_name: 'DocsHomeComposer',
+    });
   });
 
   it('copies the CLI commands on the CLI tab', () => {
@@ -45,6 +52,10 @@ describe('DocsHomeComposer', () => {
 
     fireEvent.click(screen.getByRole('button', { name: 'Copy' }));
     expect(copyToClipboard).toHaveBeenCalledWith(CLI_TEXT);
+    expect(sendGtagEvent).toHaveBeenCalledWith('Action Clicked', {
+      text: 'CLI setup',
+      tag_name: 'DocsHomeComposer',
+    });
   });
 
   it('moves between tabs with the arrow, Home, and End keys', () => {
