@@ -973,11 +973,13 @@ The deletion recovery period is different from the [history window](/docs/introd
 
 When you recover a deleted project, the following are restored:
 
-- All branches, endpoints, snapshots, and compute configurations
+- All branches, endpoints, snapshots, and compute configurations that existed when you deleted the project
 - Project settings (IP Allow, logical replication, protected branches, scheduled updates)
 - Project collaborators
 - Connection strings
 - Vercel-Managed Neon integration projects are re-imported into Vercel for management and billing
+
+Branches with an [expiration time](/docs/guides/branch-expiration) that passes during the deletion recovery period are permanently deleted and aren't restored.
 
 ### What requires reconfiguration
 
@@ -988,6 +990,11 @@ The following features are **not** recovered and must be manually re-enabled aft
 - **Neon-Managed Vercel integration** (Vercel Connected Accounts)
 - **Vercel-Managed Neon integration** (project reconnection via Storage)
 - **Monitoring integrations** (Datadog, OpenTelemetry, etc.)
+- **Scoped credentials** for Object Storage and the AI Gateway. Deleting a project revokes them, and they stay revoked after recovery. [Create new credentials](/docs/cli/credentials) and update your apps. Neon Functions get a new credential automatically.
+
+### While a project is deleted
+
+You can't connect to a deleted project's databases. Access returns when you recover the project.
 
 ### Costs
 
