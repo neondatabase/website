@@ -145,7 +145,7 @@ Both Convex and Neon Realtime share the approach of defining queries that you ca
 
 Migrating these queries involves porting them from the Convex `query()` DSL to standard SQL queries. You can do this [using raw SQL](../guides/queries#using-raw-sql) or your preferred [ORM or query builder](../guides/queries#using-a-query-builder-or-orm).
 
-For example, a Convex `query` like this (for all the messages in a channel ordered by craeted date):
+For example, a Convex `query` like this (for all the messages in a channel ordered by created date):
 
 ```ts filename="convex/messages.ts"
 export const list = query({
@@ -161,7 +161,18 @@ export const list = query({
 Becomes a raw SQL query like this:
 
 ```ts filename="backend/queries.ts"
-// XXX ...
+import { rawSql } from "@neon/realtime/server"
+
+import type { Message } from "./schema"
+
+export function messagesQuery(channelId: string) {
+  return rawSql<Message>(
+    `SELECT id, channel, author, body, metadata, created_at FROM messages
+     WHERE channel = $1
+     ORDER BY created_at ASC`,
+    [channelId]
+  )
+}
 ```
 
 Or a Drizzle query like this (`db` is set up as in the [Drizzle example](../examples/drizzle)):
