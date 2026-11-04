@@ -28,7 +28,7 @@ The steps / layers are as follows:
 | 5   | [**Handle writes**](#handle-writes)       | `mutation` + `useMutation` | →   | `pg_current_xact_id()`                                                                               |
 | 6   | [**Optimistic state**](#optimistic-state) | `.withOptimisticUpdate`    | →   | `awaitTxId` (or [TanStack DB](#tanstack-db))                                                         |
 
-Convex Auth, the scheduler, crons, HTTP actions, pagination and search need extra steps. See [Migrate auth providers](#migrate-auth-providers), [Pagination](#pagination) and [Map other Convex features](#map-other-convex-features).
+Convex Auth, the scheduler, crons, HTTP actions, pagination and search need extra steps. See [Migrate auth providers](#migrate-auth-providers) and [Map other Convex features](#map-other-convex-features).
 
 <Steps>
 
@@ -46,7 +46,7 @@ npx @neon/convex-to-postgres schema > schema.sql
 
 The file is evaluated, so run it where the project's dependencies are already installed. The DDL output goes to stdout, so you can store to a file or pipe straight into psql. Warnings and progress go to stderr.
 
-Or, to migrate your schema and data in one go, export your deployment with the `convex` CLI. It exports `dev` by default. Add `--prod`, a `convex export` flag, for production. To export a local deployment, it has to be running (`npx convex dev`). The snapshot holds all your data, including Convex Auth password hashes, so keep it out of git.
+Or, to migrate your schema and data in one go, export your deployment with the `convex` CLI. It exports `dev` by default. Add `--prod` for production. The snapshot holds all your data, so keep it out of git.
 
 ```bash filename="Terminal"
 npx convex export --path snapshot.zip
@@ -60,7 +60,7 @@ npx @neon/convex-to-postgres import \
     --apply-schema
 ```
 
-The tool reads `DATABASE_URL` from the environment, so set it in your shell first. Warnings and per-table row counts go to stderr.
+The tool reads `DATABASE_URL` from the environment, so set it in your shell first.
 
 This creates the tables (with `--apply-schema`) and then loads in all the data in a single transaction. When the schema has search or vector indexes, it builds them and runs `VACUUM ANALYZE`. Without `--apply-schema`, the tables must already exist.
 
@@ -69,16 +69,15 @@ You can inspect and manually edit the generated schema before applying. See the 
 <details>
   <summary>What the tool changes</summary>
 
-- **Names.** Fields and tables become snake_case (`authorId` → `author_id`). Index names keep the Convex index name (`messages_by_authorId`). Pass the same flags (`--id-strategy`, `--no-snake-case` and so on) to every command.
+- **Names.** Fields and tables become snake_case (`authorId` → `author_id`). Pass the same flags (`--id-strategy`, `--no-snake-case` and so on) to every command.
 - **Ids.** `_id` becomes `id uuid` (`md5(_id)::uuid`). The tool converts every `v.id()` value the same way, including ids nested in arrays, objects and records inside `jsonb`, and each top-level `v.id()` field gets a foreign key. The tool warns about any field it can't convert. With `--id-strategy text`, ids keep their Convex strings, which also keeps them stable for external links.
-- **`_creationTime`** becomes `created_at timestamptz`. A field of your own named `createdAt` collides with it and is renamed `created_at_1`, with a warning. If you need to, rename it, for example `ALTER TABLE messages RENAME COLUMN created_at_1 TO created_at_ms;`.
-- **Numbers.** `v.number()` becomes `double precision`, including counters and epoch-millisecond times. Numbers inside `jsonb` keep their float text (`1.0`), so cast with `::numeric::int`. `v.int64()` becomes `bigint`, which reaches the browser as a string unless you add a parser.
+- **`_creationTime`** becomes `created_at timestamptz`.
+- **Numbers.** `v.number()` becomes `double precision`, including counters and epoch-millisecond times. `v.int64()` becomes `bigint`, which reaches the browser as a string unless you add a parser.
 - **Constraints.** Convex indexes aren't unique, so the tool doesn't add `UNIQUE` constraints. Add them for keys your code kept unique (`ON CONFLICT` needs one). Foreign keys are `DEFERRABLE INITIALLY DEFERRED` with no `ON DELETE` action, so deleting a parent that has children now fails where Convex left dangling references. Add `ON DELETE CASCADE` where your code deleted the children.
-- **Search indexes.** Each `searchIndex` becomes a generated `tsvector` column, such as `title_tsv` for `title`, with a GIN index (`events_title_gin`), which you can query live. `--search-index bm25` builds `lakebase_bm25` indexes instead, for ranked search outside live queries.
+- **Search indexes.** Each `searchIndex` becomes a generated `tsvector` column, such as `title_tsv` for `title`, with a GIN index (`events_title_gin`). `--search-index bm25` builds `lakebase_bm25` indexes instead.
 - **Vector indexes.** Each `vectorIndex` becomes a `lakebase_ann` index.
 - **System tables.** References to `_scheduled_functions` or `_storage` become plain uuid columns. Drop or replace them.
 - **Convex Auth tables** are imported too, including password hashes. See [Migrate auth providers](#migrate-auth-providers).
-- **`schema` vs `import`.** `schema` prints the tables only. `import --apply-schema` (or `seed --split`) also builds the search and vector indexes, and their filter indexes, after the data loads.
 
 Search the generated column with `@@` and rank with `ts_rank`, both live:
 
@@ -216,7 +215,7 @@ export const list = query({
 })
 ```
 
-Becomes a raw SQL query like this. It also takes the user's id, so it can [authorize in SQL](#auth). With raw SQL there's no Drizzle schema, so declare the row type yourself:
+Becomes a raw SQL query like this, which also takes the user's id to [authorize in SQL](#auth):
 
 ```ts filename="backend/queries.ts"
 import { rawSql } from "@neon/realtime/server"
@@ -303,11 +302,9 @@ export const app = new Hono()
 
     return c.json(sealedQuery)
   })
-
-export type AppType = typeof app
 ```
 
-`requireUser` is the helper from the [queries guide](../guides/queries#exposing-an-endpoint). It verifies the session's token and answers 401 without one. The membership join in `messagesQuery` is the recommended model: because the join is part of the live query, the result stays authorized as memberships change.
+`requireUser` is the helper from the [queries guide](../guides/queries#exposing-an-endpoint), and `realtime` is the server from [Using a query builder or ORM](../guides/queries#using-a-query-builder-or-orm).
 
 The client can subscribe to a sealed query, but it can't read or change it. See [Live authorization](../guides/queries#live-authorization) and [why not row-level security](../guides/queries#why-not-row-level-security) for more details.
 
@@ -331,7 +328,7 @@ root.render(
 )
 ```
 
-You wrap it with `<RealtimeProvider />`:
+You wrap it with `<RealtimeProvider />`, using the `VITE_` variables from the queries guide's [Setup](../guides/queries#setup):
 
 ```tsx filename="frontend/main.tsx"
 import { createRealtimeClient } from "@neon/realtime/client"
@@ -354,28 +351,6 @@ root.render(
 )
 ```
 
-`neon env pull` writes `NEON_REALTIME_URL` for the server. Expose it to Vite under the name the browser code reads:
-
-```bash filename="Terminal"
-echo 'VITE_NEON_REALTIME_URL=$NEON_REALTIME_URL' >> .env.local
-```
-
-The server's `realtime` module, which `server.ts` imports, looks like this:
-
-```ts filename="backend/realtime.ts"
-import { createRealtime } from "@neon/realtime/server"
-import { drizzleAdapter } from "@neon/realtime-drizzle"
-
-export const realtime = createRealtime({
-  secret: process.env.NEON_REALTIME_SECRET!,
-  db: "neondb",
-  adapter: drizzleAdapter(), // leave out with raw SQL
-  debugMode: process.env.NODE_ENV === "development",
-})
-```
-
-`debugMode` puts the database's full error in subscription errors. Plain Node doesn't set `NODE_ENV`, so this stays off unless you set it. Don't use `NODE_ENV !== "production"`: that turns full database errors on wherever `NODE_ENV` is unset. See [Show full database errors](../guides/subscribing#show-full-database-errors).
-
 Then in your React components, switch out `useQuery`:
 
 ```tsx filename="src/Messages.tsx"
@@ -396,16 +371,14 @@ function Messages({ sealedQuery, refreshQuery }) {
 }
 ```
 
-Note that sealed queries expire. `refreshQuery` returns a fresh sealed query for the _same_ query, and the hook renews it before it expires. To switch channels, fetch a new sealed query with a matching `refreshQuery`. A renewal that fails, for example with a 401 after sign-out, keeps retrying, so unmount the components that subscribe when the user signs out. See [Handling errors](../guides/reactivity#handling-errors).
-
-Convex's `useQuery(..., "skip")` has no equivalent: `useLiveQuery` always needs a sealed query. Render the component that calls it only once you have one, as `Channel` does below.
+Note that sealed queries expire. `refreshQuery` returns a fresh sealed query for the _same_ query, and the hook renews it before it expires. To switch channels, fetch a new sealed query with a matching `refreshQuery`.
 
 See the `Channel.tsx` example below and see [`refreshQuery`](../guides/reactivity#refreshquery) and [Changing query parameters](../guides/reactivity#changing-query-parameters) for more details.
 
 <details>
   <summary>frontend/api.ts and frontend/Channel.tsx</summary>
 
-For example, `fetchSealed()` fetches the sealed query from the route in [Auth](#auth). It sends the session's token, and it has a timeout, so a stalled request fails instead of loading forever:
+For example, `fetchSealed()` fetches the sealed query from the route in [Auth](#auth), with the session's token:
 
 ```ts filename="frontend/api.ts"
 import type { SealedLiveQuery } from "@neon/realtime/client"
@@ -426,14 +399,13 @@ export async function fetchSealed(channelId: string): Promise<SealedLiveQuery<Me
     method: 'POST',
     headers: { 'content-type': 'application/json', ...(await authHeaders()) },
     body: JSON.stringify({ channelId }),
-    signal: AbortSignal.timeout(10_000),
   })
   if (!res.ok) throw new Error(`Could not seal the query (${res.status})`)
   return res.json()
 }
 ```
 
-`authClient` is the Managed Better Auth client from [Migrate auth providers](#migrate-auth-providers). With raw SQL, import `Message` from `../backend/queries` instead. `Channel` uses `fetchSealed()` to fetch the sealed query and build its `refreshQuery`, then renders `<Messages>`. It shows an error if the fetch fails. See [Fetch from an API endpoint](../guides/subscribing#fetch-from-an-api-endpoint) and, for the initial server render, [Server-side rendering](../guides/ssr).
+`authClient` is the Managed Better Auth client from [Migrate auth providers](#migrate-auth-providers). With raw SQL, import `Message` from `../backend/queries` instead. `Channel` uses `fetchSealed()` to fetch the sealed query and build its `refreshQuery`, then renders `<Messages>`. See [Fetch from an API endpoint](../guides/subscribing#fetch-from-an-api-endpoint) and, for the initial server render, [Server-side rendering](../guides/ssr).
 
 ```tsx filename="frontend/Channel.tsx"
 import { useCallback, useEffect, useState } from "react"
@@ -500,7 +472,7 @@ export const send = mutation({
 
 Becomes a standard request handler. This can use any web framework or server function.
 
-For example here using Hono, chained onto the same `app` as the live route, so `AppType` covers both:
+For example here using Hono, chained onto the same `app` as the live route:
 
 ```ts filename="backend/server.ts"
 import { and, eq, sql } from "drizzle-orm"
@@ -546,8 +518,6 @@ export const app = new Hono()
     if (!row) throw new HTTPException(403, { message: 'Not a member of this channel' })
     return c.json({ kind: 'committed', txid: row.txid } satisfies MutationResponse)
   })
-
-export type AppType = typeof app
 ```
 
 This returns the `txid` which can then be used to automatically discard optimistic state. `RETURNING` directly from the write avoids an extra round trip.
@@ -562,16 +532,16 @@ WHERE channel_members.channel = $2 AND channel_members.user_id = $4
 RETURNING pg_current_xact_id()::text AS txid
 ```
 
-A write that changes no rows, such as an edit that leaves the text as it was or a delete of a row that's already gone, returns no row and no txid. Respond with `{ kind: "unchanged" }`, and skip `awaitTxId`.
+For edits and deletes that can change no rows, return `{ kind: "unchanged" }` and skip `awaitTxId`, as the [mutations guide](../guides/mutations#returning-the-txid-from-your-backend) shows.
 
-Convex mutations were serializable. In Postgres, put a check and its write in one statement, as the route above does, rather than reading first and writing after. Convex also capped documents at 1 MiB, so add a request body limit, for example with Hono's `bodyLimit` middleware.
+Convex mutations were serializable. In Postgres, put a check and its write in one statement, as the route above does, rather than reading first and writing after.
 
 On the client, a `sendMessage()` helper that calls the route replaces `useMutation`:
 
 <details>
   <summary>frontend/api.ts</summary>
 
-Add `sendMessage()` next to `fetchSealed()`. It sends the same auth header, and it has a timeout too:
+Add `sendMessage()` next to `fetchSealed()`:
 
 ```ts filename="frontend/api.ts"
 import type { MutationResponse } from "../backend/server"
@@ -581,7 +551,6 @@ export async function sendMessage(message: Message): Promise<MutationResponse> {
     method: 'POST',
     headers: { 'content-type': 'application/json', ...(await authHeaders()) },
     body: JSON.stringify({ id: message.id, channelId: message.channel, body: message.body }),
-    signal: AbortSignal.timeout(10_000),
   })
   if (!res.ok) throw new Error(`Could not send the message (${res.status})`)
   return res.json()
@@ -640,7 +609,7 @@ function send(body: string) {
     addOptimistic(message)
     try {
       const result = await sendMessage(message)
-      // Hold the transition until the subscription has caught up past the write: no flicker.
+      // Hold the transition until the stream applies the row: no flicker. Always pass a timeout, or it waits forever.
       if (result.kind === 'committed') await utils.awaitTxId(result.txid, 10_000)
     } catch (e) {
       // The optimistic row drops when the transition ends, so tell the user the send failed
@@ -649,10 +618,6 @@ function send(body: string) {
   })
 }
 ```
-
-`awaitTxId()` resolves once the subscription has applied a state that includes the transaction, whether or not the write changed this query's rows. It keeps waiting through reconnects and renewals, so always pass a timeout.
-
-For an aggregate, such as an unread count, don't apply the optimistic change with `useOptimistic`. React re-applies pending updates to each new snapshot, which counts the change twice until the transition ends. Derive the count from a live list instead.
 
 <details>
   <summary>Full frontend/Messages.tsx</summary>
@@ -698,7 +663,7 @@ export function Messages({ sealedQuery, refreshQuery, channelId, userId }: Props
       addOptimistic(message)
       try {
         const result = await sendMessage(message)
-        // Hold the transition until the subscription has caught up past the write: no flicker.
+        // Hold the transition until the stream applies the row: no flicker. Always pass a timeout, or it waits forever.
         if (result.kind === 'committed') await utils.awaitTxId(result.txid, 10_000)
       } catch (e) {
         // The optimistic row drops when the transition ends, so tell the user the send failed
@@ -744,19 +709,17 @@ See [How optimistic mutations work](../guides/mutations#how-optimistic-mutations
 
 ## Migrate auth providers
 
-You can migrate from `@convex-dev/auth` to any auth provider, such as Clerk, Auth0 or WorkOS by verifying their JWT in `requireUser`.
+You can migrate from `@convex-dev/auth` to any auth provider, such as Clerk, Auth0 or WorkOS, by verifying their JWT in `requireUser`.
 
 Here we show how to migrate to Neon's [Managed Better Auth](/docs/auth/overview) by replacing Convex Auth's `Password` provider with email and password sign-in.
 
 ### Enable it on your branch
 
 ```bash filename="Terminal"
-neon neon-auth enable --branch <branch>
-neon env pull --branch <branch> --service postgres --service realtime --service auth
+neon neon-auth enable
+neon env pull --service postgres --service realtime --service auth
 echo 'VITE_NEON_AUTH_URL=$NEON_AUTH_BASE_URL' >> .env.local
 ```
-
-If you manage the branch with a `neon.ts`, run `neon config add auth` and `neon config apply` instead of `neon neon-auth enable`. `NEON_AUTH_BASE_URL` already ends in `/auth`.
 
 In the browser, create the auth client from that URL:
 
@@ -766,12 +729,12 @@ import { createAuthClient } from "@neon/auth"
 export const authClient = createAuthClient(import.meta.env.VITE_NEON_AUTH_URL)
 ```
 
-`authClient.getSession()` returns the session, with its JWT in `session.token`. The `authHeaders()` helper in [Subscribe to queries](#subscribe-to-queries) sends it as `Authorization: Bearer <token>` from `fetchSealed()` and `sendMessage()`. On the server, `requireUser` verifies it against your branch's [JWKS](/docs/auth/guides/plugins/jwt#verify-a-token). Pin the algorithm by adding `algorithms: ["EdDSA"]` to that helper's `jwtVerify()` options.
+`authHeaders()` in [Subscribe to queries](#subscribe-to-queries) sends the session's JWT, and `requireUser` verifies it against your branch's [JWKS](/docs/auth/guides/plugins/jwt#verify-a-token).
 
 ### What happens to your Convex Auth data
 
-- **Tables.** The import copies Convex Auth's tables as ordinary tables: `auth_accounts`, `auth_sessions`, `auth_refresh_tokens` and the rest. `auth_accounts.secret` holds password hashes. Managed Better Auth doesn't use any of them, so drop them once you've connected your users, and treat `snapshot.zip` as a secret.
-- **Passwords don't transfer.** There's no documented way to import Convex Auth's password hashes into Managed Better Auth. Existing users set a new password with a password reset flow, or sign up again.
+- **Tables.** Pass `--skip-auth-tables` to the import to leave out Convex Auth's tables. It keeps `users`.
+- **Passwords don't transfer.** Existing users set a new password with a password reset flow, or sign up again.
 - **User ids change.** A migrated `users.id` is `md5(_id)::uuid`, and the session's user id is a new Managed Better Auth id, so the two never match.
 
 ### Connect existing users to their data
@@ -784,31 +747,6 @@ Pick one:
 <Admonition type="warning" title="Don't link unverified emails">
 By default, Managed Better Auth email and password sign-up doesn't require email verification. If you link accounts by email without checking `emailVerified`, anyone who signs up with a migrated user's address takes over that user's data. Turn on [email verification](/docs/auth/guides/email-verification) before you migrate real users.
 </Admonition>
-
-### Scripts that create or sign in users
-
-Seed and test scripts that call the Managed Better Auth API directly need an `Origin` header that the service trusts. The service trusts any `localhost` origin by default, and you can add others with `neon neon-auth domain add`. Sign-in and sign-up are rate limited, so retry on `429` after the delay in the `x-retry-after` header.
-
-## Pagination
-
-Replace `usePaginatedQuery` with one live query whose `LIMIT` grows. On "load more", fetch a new sealed query with a larger limit, with a `refreshQuery` for that limit. Keep the current sealed query until the new one arrives, rather than resetting it as `Channel` does.
-
-A new sealed query starts with no data, so keep showing the previous rows until its first `data` arrives. Otherwise, the list empties while the next page loads:
-
-```tsx filename="frontend/Messages.tsx"
-// `sealedQuery` and `refreshQuery` are for the current limit
-const { data } = useLiveQuery(sealedQuery, { refreshQuery })
-const [previous, setPrevious] = useState<readonly Message[]>()
-
-useEffect(() => {
-  if (data) setPrevious(data)
-}, [data])
-
-// Keep showing the previous page while the next one loads
-const messages = data ?? previous ?? []
-```
-
-The page needs `ORDER BY … LIMIT`, so each change resends the page (see [Live query limits](#live-query-limits)). For long histories, keep only the newest page live and load older pages with an ordinary request.
 
 ## TanStack DB
 
@@ -874,7 +812,7 @@ export async function createMessagesCollection(channelId: string) {
 export type MessagesCollection = Awaited<ReturnType<typeof createMessagesCollection>>
 ```
 
-TanStack&nbsp;DB applies each insert to the collection immediately, then calls `onInsert`. The handler writes through the same route as before, with the same timeout, and waits for the txid, so the optimistic row stays until the synced row replaces it. If the handler throws, the insert rolls back. `onUpdate` and `onDelete` work the same way, as the [mutations guide](../guides/mutations#with-tanstack-db-collections) shows.
+TanStack&nbsp;DB applies each insert to the collection immediately, then calls `onInsert`. The handler writes through the same route as before and waits for the txid, so the optimistic row stays until the synced row replaces it. If the handler throws, the insert rolls back. `onUpdate` and `onDelete` work the same way, as the [mutations guide](../guides/mutations#with-tanstack-db-collections) shows.
 
 Then swap `useQuery` for TanStack&nbsp;DB's own `useLiveQuery`, imported as `useCollectionQuery` to keep it distinct from the Realtime hook, and write with `insert()`:
 
@@ -977,31 +915,27 @@ export async function createMessagesCollection(channelId: string) {
 
 The sealed query replaces `query` and `queryArgs`. Your server builds it with the arguments baked in, as in [Auth](#auth) but without `ORDER BY`, and `refreshQuery` renews it before it expires. `onInsert` calls your route instead of `client.mutation()`, then waits for the write's txid.
 
-This assumes `@tanstack/convex-db-collection`. If it doesn't install against your `@tanstack/db` version, or your app wraps Convex in its own collection adapter, follow [From the Convex React client](#from-the-convex-react-client) instead.
-
 ## Map other Convex features
 
-| Convex                                     | Neon                                                                                                                                                        | Notes                                                                                                                                           |
-| ------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------- |
-| `ctx.scheduler.runAfter` / `runAt`         | A deadline column on the row, plus a job that applies overdue work                                                                                          | There's no one-off delayed trigger. See [Where background work runs](#where-background-work-runs)                                               |
-| `crons.ts`                                 | A timer in your server process, or a [Neon Function](/docs/compute/functions/overview) with a [schedule trigger](/docs/compute/functions/triggers/schedule) | Schedule triggers take a five-field cron in UTC                                                                                                 |
-| An `action` that streams an LLM reply      | A job that writes the reply into its row as tokens arrive                                                                                                   | Call the model through the [AI Gateway](/docs/ai-gateway/overview). See [Streaming into rows](#streaming-into-rows)                             |
-| `httpAction` / `http.ts`                   | A route on your server                                                                                                                                      | Ids change with the default id strategy, so links, iCal UIDs and webhooks that stored a Convex id see new ones. `--id-strategy text` keeps them |
-| `usePaginatedQuery`                        | A live query with a growing `LIMIT`                                                                                                                         | See [Pagination](#pagination)                                                                                                                   |
-| `withSearchIndex`                          | A `tsvector` column with a GIN index, queried with `@@`                                                                                                     | The tool's default. Tables imported with `--search-index bm25` can't be live-queried                                                            |
-| `.vectorSearch`                            | [`pgvector`](/docs/extensions/pgvector) or [Lakebase Search](/docs/ai/lakebase-search)                                                                      | Keep embeddings in a table you don't subscribe to                                                                                               |
-| `ctx.storage`                              | [Neon Object Storage](/docs/storage/overview)                                                                                                               |                                                                                                                                                 |
-| Seed functions (`npx convex run`)          | A Node script that writes through your database client                                                                                                      | You may not need one if you import your data. Demo users sign up through Managed Better Auth                                                    |
-| Code inside a `query` handler              | SQL in the live query, or code on the client                                                                                                                | Compute what SQL can't from the live rows, for example in a `useMemo`                                                                           |
-| Client-generated user ids, with no sign-in | A signed `httpOnly` cookie that your server mints                                                                                                           | Check it before every seal and write, as you would a JWT                                                                                        |
+| Convex                                | Neon                                                                                                                                                        | Notes                                                                                                                                          |
+| ------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
+| `ctx.scheduler.runAfter` / `runAt`    | A deadline column on the row, plus a job that applies overdue work                                                                                          | See [Where background work runs](#where-background-work-runs)                                                                                  |
+| `crons.ts`                            | A timer in your server process, or a [Neon Function](/docs/compute/functions/overview) with a [schedule trigger](/docs/compute/functions/triggers/schedule) | Schedule triggers take a five-field cron in UTC                                                                                                |
+| An `action` that streams an LLM reply | A job that writes the reply into its row as tokens arrive                                                                                                   | Call the model through the [AI Gateway](/docs/ai-gateway/overview). See [Streaming into rows](#streaming-into-rows)                            |
+| `httpAction` / `http.ts`              | A route on your server                                                                                                                                      | Ids change with the default id strategy, so external links and webhooks that stored a Convex id stop matching. `--id-strategy text` keeps them |
+| `usePaginatedQuery`                   | A live query with a growing `LIMIT`                                                                                                                         | On "load more", seal the query again with a larger `LIMIT`                                                                                     |
+| `withSearchIndex`                     | A `tsvector` column with a GIN index, queried with `@@`                                                                                                     | The tool's default                                                                                                                             |
+| `.vectorSearch`                       | [`pgvector`](/docs/extensions/pgvector) or [Lakebase Search](/docs/ai/lakebase-search)                                                                      |                                                                                                                                                |
+| `ctx.storage`                         | [Neon Object Storage](/docs/storage/overview)                                                                                                               |                                                                                                                                                |
+| Code inside a `query` handler         | SQL in the live query, or code on the client                                                                                                                | Compute what SQL can't from the live rows, for example in a `useMemo`                                                                          |
 
 ### Where background work runs
 
-If your app has a long-running server, such as Hono, TanStack Start or Next.js on Node, run scheduled work, crons and streaming jobs in that process. It's the simplest option, and it shares your code. In-process work isn't durable, because a restart loses in-flight timers. So keep the state in rows, with a deadline column in place of `runAfter`, and have a periodic sweep apply overdue work. Make each transition conditional on the current status, so the timer and the sweep can both run it safely. Use a [Neon Function](/docs/compute/functions/overview) when the work must survive restarts or you have no long-running server.
+Keep scheduled work in rows, with a deadline column in place of `runAfter`, and have a periodic job apply overdue work. Run that job in your server process if you have a long-running one, or in a [Neon Function](/docs/compute/functions/overview) with a [schedule trigger](/docs/compute/functions/triggers/schedule) when it must survive restarts. Make each transition conditional on the row's current status, so a retry can't apply it twice.
 
 ### Streaming into rows
 
-A Convex action that streams an LLM reply becomes a job that writes the reply into its message row as tokens arrive, for example every 100 ms. Each `UPDATE` commits on its own, so subscribers see the text grow. Select the changing column in the live query, because a subscription only emits when a selected column changes. A `status` column (`streaming`, `done` or `error`) lets the client show progress, and lets a sweep mark rows that a restart left behind.
+The job writes the reply into its message row as tokens arrive, in batches, for example every 100 ms. Each `UPDATE` commits on its own, so subscribers see the text grow. A `status` column (`streaming`, `done` or `error`) lets the client show progress.
 
 ## Frequently asked questions
 
