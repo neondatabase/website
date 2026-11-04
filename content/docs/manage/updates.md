@@ -11,7 +11,7 @@ summary: >-
   to handle the brief disruption.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2026-11-04T20:39:20.591Z'
+updatedOn: '2026-11-04T20:40:59.376Z'
 ---
 
 To keep your Neon [computes](/docs/reference/glossary#compute) and Postgres instances up to date with the latest patches and features, Neon applies updates to your project's computes. We notify you of updates in advance so that you can plan for them if necessary. On Neon's paid plans, you can select an update window (a specific day and hour for updates).
@@ -167,6 +167,10 @@ If a compute regularly scales to zero, it will receive updates when it starts up
 For compute restart instructions, see [Restart a compute](/docs/manage/computes#restart-a-compute).
 
 ## Updating large computes
+
+<Admonition type="note" title="Threshold raised to 16 CU">
+As of early November 2026, computes up to 16 CU receive scheduled updates. Previously, computes configured to scale beyond 8 CU were not updated automatically and needed a manual restart.
+</Admonition>
 
 Fixed-size computes **larger than 16 CU** are not updated automatically (_scheduled updates do not apply_). Computes up to 16 CU, including all autoscaling computes, follow the usual [automatic update rules](#how-often-are-updates-applied) above. To apply updates on a large compute, you'll need to restart it manually. Computes larger than 16 CU don't [scale to zero](/docs/introduction/scale-to-zero), so they won't pick up updates through a stop/start cycle. Plan for manual restarts.
 
