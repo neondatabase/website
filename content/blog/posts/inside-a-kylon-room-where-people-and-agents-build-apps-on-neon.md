@@ -36,6 +36,8 @@ seo:
 
 Teams usually organize rooms around a function, like #sales or #ops. Agents in those rooms connect to tools like Gmail, Slack, HubSpot, and Salesforce, and the apps they build (a CRM, an invoice tracker, a hiring board) belong to the team that asked for them.
 
+**[ADD IMAGE 1]**
+
 ## The stack behind Kylon
 
 <blockquote>
@@ -82,6 +84,8 @@ Agents change apps constantly - the riskiest moment for agent-written code is a 
 <cite><a href="https://www.linkedin.com/in/suanmiao/">Quinn Leng</a>, co-founder at Kylon</cite>
 </blockquote>
 
+**[ADD IMAGE 2]**
+
 ### Postgres as the shared state between people and agents
 
 <EmbedTweet url="https://twitter.com/quinn_leng/status/2110036807148814819?ref_src=twsrc%5Etfw" />
@@ -89,6 +93,8 @@ Agents change apps constantly - the riskiest moment for agent-written code is a 
 Each app's Neon database ([Lakebase Postgres](https://neon.com/lakebase)) is the single source of truth for everyone working on it. A person edits a record in the UI - an agent updates the same table through the App's API - both see the same rows.
 
 Agents read and write through the same API the App's UI uses, and the agent that builds an App also owns its schema and migrations. Record changes can also trigger [Automations](https://kylon.io/product/workflows) (recurring jobs that a room's agent sets up and runs on a schedule or a trigger) so a row written by one agent can kick off the next step of work.
+
+**[ADD IMAGE 3]**
 
 ## Try it
 
