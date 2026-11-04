@@ -2,7 +2,7 @@
 
 > Neon is a complete set of cloud backend primitives built around Lakebase Postgres, for developers, startups, and agent platforms, from Databricks. Services include Lakebase Postgres, Managed Better Auth, a Data API, Functions, Object Storage, and an AI Gateway, on three plans: Free, Launch, and Scale. Lakebase Postgres on Neon includes autoscaling, instant restore, and scale-to-zero, and works with any language, framework, or ORM that supports Postgres. Storage is unlimited on paid plans and grows with your usage. Pay only for what you use on paid plans; no monthly minimum and no per-project fee. The Free plan includes 100 projects, which with usage-based paid plans suits a database per tenant or per agent (see [How much does a database per tenant or per agent cost?](#how-much-does-a-database-per-tenant-or-per-agent-cost-on-neon)). Typical spend is about $15/month on Launch for a small database and $701/month on Scale for a production workload (see [Typical monthly cost](#typical-monthly-cost)).
 
-Last updated: 2026-10-31
+Last updated: 2026-11-04
 
 ## How billing works
 
@@ -42,7 +42,7 @@ Invoices under $0.50 are not collected.
 | Auth (MAU)                       | Up to 60k MAU per project                              | Up to 1M MAU per project                              | Up to 1M MAU per project                                         |
 | Object Storage                   | 5 GB per project included                              | $0.023/GB-month                                       | $0.023/GB-month                                                  |
 | Functions                        | 10 active / 400 waiting Capacity-Hours, 1M invocations per project | Active $0.10, waiting $0.025 per Capacity-Hour; $0.60/M invocations | Active $0.12, waiting $0.03 per Capacity-Hour; $0.60/M invocations |
-| AI Gateway                       | -                                                      | Prepaid credits (no markup) | Prepaid credits (no markup)            |
+| AI Gateway                       | Prepaid credits (no markup), card required             | Prepaid credits (no markup) | Prepaid credits (no markup)            |
 | Realtime (beta)                  | Free during beta                                       | Free during beta                                      | Free during beta                                                 |
 | Monitoring retention             | 1 day                                                  | 3 days                                                | 14 days                                                          |
 | Metrics/logs export              | -                                                      | -                                                     | Yes                                                              |
@@ -57,7 +57,7 @@ Invoices under $0.50 are not collected.
 
 A "-" means the feature is not available on that plan.
 
-All plans include: multi-AZ storage (high availability without standbys), autoscaling and scale to zero, database branching (auth, Object Storage, and Functions branch with the database), read replicas, connection pooling (up to 10,000 pooled connections per compute), Postgres extensions (pgvector, PostGIS, TimescaleDB, and more), Managed Better Auth, a Data API for querying over HTTP, Object Storage, Functions, Realtime (beta), and a full management API and CLI. Neon is ISO 27001 and 27701 certified, SOC 2 audited, and GDPR and CCPA compliant; HIPAA is available on Scale.
+All plans include: multi-AZ storage (high availability without standbys), autoscaling and scale to zero, database branching (auth, Object Storage, and Functions branch with the database), read replicas, connection pooling (up to 10,000 pooled connections per compute), Postgres extensions (pgvector, PostGIS, TimescaleDB, and more), Managed Better Auth, a Data API for querying over HTTP, Object Storage, Functions, AI Gateway (prepaid credits), Realtime (beta), and a full management API and CLI. Neon is ISO 27001 and 27701 certified, SOC 2 audited, and GDPR and CCPA compliant; HIPAA is available on Scale.
 
 ## Table clarifications
 
@@ -131,7 +131,11 @@ Example: 100 tenant databases on Launch, each running at 0.25 CU for about an ho
 
 ### How are the backend services billed?
 
-Object Storage, Functions, and AI Gateway are billed separately from Postgres compute, at the rates in the plan table; AI Gateway is available on Launch and Scale. Managed Better Auth, the Data API, and Realtime have no separate charge: Auth is included up to 60,000 MAU per project on Free and 1M on paid plans; the Data API is included on every plan; Realtime is free during the beta. Queries from the Data API and Realtime run on your database, so the compute (CU-hours) and network transfer they use are billed as usual.
+Object Storage, Functions, and AI Gateway are billed separately from Postgres compute, at the rates in the plan table; AI Gateway is available on every plan, including Free. Managed Better Auth, the Data API, and Realtime have no separate charge: Auth is included up to 60,000 MAU per project on Free and 1M on paid plans; the Data API is included on every plan; Realtime is free during the beta. Queries from the Data API and Realtime run on your database, so the compute (CU-hours) and network transfer they use are billed as usual.
+
+### Can I use AI Gateway on the Free plan?
+
+Yes. Add a card on the **Billing** page in the Neon Console and buy prepaid AI Gateway credits ($5 minimum). Your organization stays on the Free plan, and the rest of your Free plan doesn't change. AI Gateway turns on after your first purchase, once a short account check finishes. Requests draw down your credits at the model provider's list prices, with no markup. See [AI Gateway prepaid credits](https://neon.com/docs/ai-gateway/prepaid-credits.md).
 
 ### Can I set a spending limit?
 
