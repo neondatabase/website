@@ -4,23 +4,9 @@ import { getFunctionRegistryCatalog, registryTemplatePageHref } from 'utils/func
 
 const SHOWCASE_IDS = ['chat-sdk', 'mastra', 'context-dev', 'workos-sync', 'aiinbx'];
 
-// Not in the catalog until neondatabase/examples#321 merges; copied from that PR's registry.json entry.
-const PENDING_TEMPLATES = {
-  'workos-sync': {
-    id: 'workos-sync',
-    provider: 'WorkOS',
-    title: 'Mirror WorkOS data into Postgres',
-    description:
-      'Backfill, tail the Events API, and reconcile drift on a cron, with a WorkOS webhook nudge. Join users, organizations, and memberships in SQL.',
-    categories: ['sync'],
-    logo: 'https://avatars.githubusercontent.com/u/47638084?v=4',
-    website: 'https://workos.com/',
-  },
-};
-
 const pickShowcaseTemplates = (templates) => {
   const byId = new Map(templates.map((template) => [template.id, template]));
-  return SHOWCASE_IDS.map((id) => byId.get(id) ?? PENDING_TEMPLATES[id]).filter(Boolean);
+  return SHOWCASE_IDS.map((id) => byId.get(id)).filter(Boolean);
 };
 
 const FunctionRegistryShowcase = async () => {
