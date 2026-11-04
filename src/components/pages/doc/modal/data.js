@@ -37,10 +37,11 @@ import { BASE_AGENT_PROMPT } from 'components/pages/doc/agent-setup-button';
  * @property {string} title Modal heading and thumbnail accessible label.
  * @property {string} [description] Optional supporting text.
  * @property {ModalTargeting} [targeting] Page targeting rules; omit to show on every page.
- * @property {ModalDestination} destination Thumbnail and CTA destination.
- * @property {string} [copyPrompt] When set, the card renders a copyable code field (with an
- *   icon-only copy control) that copies this plain-text string to the clipboard instead of a
- *   video thumbnail.
+ * @property {ModalDestination} [destination] Thumbnail and CTA destination. Required unless
+ *   `copyPrompt` is set.
+ * @property {string} [copyPrompt] When set, the card renders a single-line prompt field and a
+ *   "Copy prompt" button instead of a video thumbnail and destination link. Copying the prompt
+ *   (button or manual) dismisses the card for good, like closing it.
  */
 
 /**
@@ -55,12 +56,9 @@ const MODALS = [
   {
     id: 'docs-agent-setup',
     title: 'Set up your agent',
+    description: 'It takes about 2 minutes and users who do it get to production 3x faster',
     targeting: { all: true },
     copyPrompt: BASE_AGENT_PROMPT,
-    destination: {
-      label: 'AI tools for agents',
-      url: '/docs/ai/ai-agents-tools',
-    },
   },
 ];
 

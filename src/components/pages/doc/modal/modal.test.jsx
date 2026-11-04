@@ -42,36 +42,76 @@ describe('docs agent-setup modal entry', () => {
     // Guard against a silent undefined === undefined pass if the named export regresses.
     expect(BASE_AGENT_PROMPT).toMatch(/Set me up for Neon/);
     expect(agentSetupModal.copyPrompt).toBe(BASE_AGENT_PROMPT);
-    expect(agentSetupModal.destination.url).toBe('/docs/ai/ai-agents-tools');
+    expect(agentSetupModal.destination).toBeUndefined();
   });
 
-  it('copies the base prompt as plain text and reports the copy analytics event', async () => {
+  it('shows the prompt in a single-line read-only field with a supporting line', async () => {
     render(<Modal {...agentSetupModal} />);
 
-    // The whole field is the copy target; the control is icon-only (aria-label on the field).
-    fireEvent.click(await screen.findByRole('button', { name: 'Copy agent setup prompt' }));
+    const field = await screen.findByRole('textbox', { name: 'Agent setup prompt' });
+    expect(field.tagName).toBe('INPUT');
+    expect(field).toHaveAttribute('readonly');
+    expect(field).toHaveValue(BASE_AGENT_PROMPT);
+    expect(screen.getByText(agentSetupModal.description)).toBeInTheDocument();
+    expect(screen.queryByRole('link')).not.toBeInTheDocument();
+  });
+
+  it('selects the whole prompt when the field is clicked', async () => {
+    render(<Modal {...agentSetupModal} />);
+
+    const field = await screen.findByRole('textbox', { name: 'Agent setup prompt' });
+    fireEvent.click(field);
+
+    expect(field.selectionStart).toBe(0);
+    expect(field.selectionEnd).toBe(BASE_AGENT_PROMPT.length);
+  });
+
+  it('copies the prompt from the button, reports it, and dismisses the card for good', async () => {
+    render(<Modal {...agentSetupModal} />);
+
+    fireEvent.click(await screen.findByRole('button', { name: 'Copy prompt' }));
 
     expect(copyToClipboard).toHaveBeenCalledWith(BASE_AGENT_PROMPT);
     expect(typeof copyToClipboard.mock.calls[0][0]).toBe('string');
     expect(sendGtagEvent).toHaveBeenCalledWith('Action Clicked', {
       text: 'Agent setup',
       tag_name: 'DocsAgentSetupPopup',
+      method: 'button',
     });
-    // Success state swaps the copy icon for the green check icon.
-    expect(await screen.findByTestId('copied-icon')).toBeInTheDocument();
+    expect(JSON.parse(window.localStorage.getItem('closedModals'))).toEqual(['docs-agent-setup']);
+    // The card stays up to show the confirmation before it goes away.
+    expect(await screen.findByRole('button', { name: 'Copied' })).toBeInTheDocument();
   });
 
-  it('links to the agents page and fires the shared modal-link analytics event', async () => {
+  it('reports a manual copy from the field and dismisses the card for good', async () => {
     render(<Modal {...agentSetupModal} />);
 
-    fireEvent.click(
-      await screen.findByRole('link', { name: new RegExp(agentSetupModal.destination.label) })
-    );
+    fireEvent.copy(await screen.findByRole('textbox', { name: 'Agent setup prompt' }));
 
-    expect(sendGtagEvent).toHaveBeenCalledWith('click_docs_modal_link', {
-      modal: 'docs-agent-setup',
-      link: agentSetupModal.destination.label,
-      destination: '/docs/ai/ai-agents-tools',
+    expect(copyToClipboard).not.toHaveBeenCalled();
+    expect(sendGtagEvent).toHaveBeenCalledWith('Action Clicked', {
+      text: 'Agent setup',
+      tag_name: 'DocsAgentSetupPopup',
+      method: 'manual',
     });
+    expect(JSON.parse(window.localStorage.getItem('closedModals'))).toEqual(['docs-agent-setup']);
+  });
+
+  it('records a dismissal in localStorage when closed', async () => {
+    render(<Modal {...agentSetupModal} />);
+
+    fireEvent.click(await screen.findByRole('button', { name: 'Close' }));
+
+    expect(JSON.parse(window.localStorage.getItem('closedModals'))).toEqual(['docs-agent-setup']);
+    expect(sendGtagEvent).not.toHaveBeenCalled();
+  });
+
+  it('stays hidden once dismissed', async () => {
+    window.localStorage.setItem('closedModals', JSON.stringify(['docs-agent-setup']));
+    render(<Modal {...agentSetupModal} />);
+
+    await vi.waitFor(() =>
+      expect(screen.queryByRole('textbox', { name: 'Agent setup prompt' })).not.toBeInTheDocument()
+    );
   });
 });

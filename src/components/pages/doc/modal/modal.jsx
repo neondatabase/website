@@ -35,6 +35,7 @@ const Modal = ({ id, title, description, destination, embedId, copyPrompt }) => 
   const [isMounted, setIsMounted] = useState(false);
   const [isMinimized, setIsMinimized] = useState(false);
   const { isCopied, handleCopy } = useCopyToClipboard(COPIED_RESET_MS);
+  const [isManuallyCopied, setIsManuallyCopied] = useState(false);
 
   useEffect(() => {
     // The copyPrompt card is dismiss-only (no minimize), so it never collapses to the
@@ -43,13 +44,24 @@ const Modal = ({ id, title, description, destination, embedId, copyPrompt }) => 
     setIsMounted(true);
   }, [copyPrompt]);
 
+  useEffect(() => {
+    if (!isManuallyCopied) return undefined;
+    const timeout = setTimeout(() => setIsManuallyCopied(false), COPIED_RESET_MS);
+    return () => clearTimeout(timeout);
+  }, [isManuallyCopied]);
+
   const handleClose = () => {
-    setClosedModals((prevClosedModals) => [...prevClosedModals, id]);
+    setClosedModals((prevClosedModals) =>
+      prevClosedModals.includes(id) ? prevClosedModals : [...prevClosedModals, id]
+    );
   };
 
   const isClosed = closedModals.includes(id);
+  // A copy dismisses the card in localStorage right away, but keeps it on screen until the
+  // "Copied" confirmation resets.
+  const isPromptCopied = isCopied || isManuallyCopied;
   const Icon = icons[id];
-  const isExternalDestination = /^https?:\/\//.test(destination.url);
+  const isExternalDestination = /^https?:\/\//.test(destination?.url);
 
   const handleLinkClick = (linkTitle) => {
     sendGtagEvent('click_docs_modal_link', {
@@ -59,24 +71,33 @@ const Modal = ({ id, title, description, destination, embedId, copyPrompt }) => 
     });
   };
 
-  const handleCopyPrompt = () => {
-    if (isCopied) return;
-    handleCopy(copyPrompt);
-    sendGtagEvent('Action Clicked', { text: 'Agent setup', tag_name: 'DocsAgentSetupPopup' });
+  const trackPromptCopy = (method) => {
+    sendGtagEvent('Action Clicked', {
+      text: 'Agent setup',
+      tag_name: 'DocsAgentSetupPopup',
+      method,
+    });
+    handleClose();
   };
 
-  // The whole terminal block is the copy target; mirror native button key handling.
-  const handleTerminalKeyDown = (event) => {
-    if (event.key === 'Enter' || event.key === ' ') {
-      event.preventDefault();
-      handleCopyPrompt();
-    }
+  const handleCopyPrompt = () => {
+    if (isPromptCopied) return;
+    handleCopy(copyPrompt);
+    trackPromptCopy('button');
   };
+
+  // Fires for any copy out of the field: keyboard shortcut, context menu, or browser menu.
+  const handlePromptFieldCopy = () => {
+    setIsManuallyCopied(true);
+    trackPromptCopy('manual');
+  };
+
+  const selectPromptField = (event) => event.currentTarget.select();
 
   return (
     <LazyMotion features={domAnimation}>
       <AnimatePresence>
-        {isMounted && !isClosed && (
+        {isMounted && (!isClosed || isPromptCopied) && (
           <m.div
             className={cn(
               'fixed right-4 bottom-4 z-100 flex border border-gray-new-80 bg-[#F4F9F7] xs:inset-x-3 xs:bottom-3 xs:w-auto',
@@ -141,16 +162,24 @@ const Modal = ({ id, title, description, destination, embedId, copyPrompt }) => 
               </>
             ) : (
               <>
-                <div className="pr-[70px]">
+                {/* Clears the close button (copyPrompt) or the minimize + close buttons. */}
+                <div className={copyPrompt ? 'pr-8' : 'pr-[70px]'}>
                   {copyPrompt ? (
-                    <div className="flex items-center gap-2">
-                      {Icon && (
-                        <Icon className="size-5 shrink-0 text-green-44 dark:text-green-45" />
+                    <>
+                      <div className="flex items-center gap-2">
+                        {Icon && (
+                          <Icon className="size-5 shrink-0 text-green-44 dark:text-green-45" />
+                        )}
+                        <p className="text-base leading-snug font-medium tracking-extra-tight text-black-new dark:text-white">
+                          {title}
+                        </p>
+                      </div>
+                      {description && (
+                        <p className="mt-1.5 text-sm leading-normal tracking-extra-tight text-gray-new-40 dark:text-gray-new-80">
+                          {description}
+                        </p>
                       )}
-                      <p className="text-base leading-snug font-medium tracking-extra-tight text-black-new dark:text-white">
-                        {title}
-                      </p>
-                    </div>
+                    </>
                   ) : (
                     <>
                       <p className="text-base leading-snug font-medium tracking-extra-tight text-black-new dark:text-white">
@@ -184,58 +213,45 @@ const Modal = ({ id, title, description, destination, embedId, copyPrompt }) => 
                 </button>
                 {copyPrompt ? (
                   <>
-                    {/* The whole code field is the copy affordance. It reuses the site's light
-                        docs code-block tokens (bg-gray-new-98 fill, gray-new-80 border) so it
-                        matches the other code blocks on the page and stays theme-aware.
-                        role="button" (not a real <button>) keeps the block-level content valid. */}
-                    <div
+                    {/* Single-line, read-only field: the prompt scrolls instead of wrapping.
+                        Clicking or focusing it selects the whole prompt for a manual copy. It
+                        reuses the docs code-block tokens (bg-gray-new-98 fill, gray-new-80
+                        border) so it matches the other code blocks and stays theme-aware. */}
+                    <input
                       className={cn(
-                        'group relative mt-[14px] overflow-hidden border bg-gray-new-98 transition-colors duration-200 dark:bg-gray-new-8',
-                        isCopied
-                          ? 'cursor-default border-green-44 dark:border-green-45'
-                          : 'cursor-pointer border-gray-new-80 hover:border-gray-new-70 dark:border-gray-new-20 dark:hover:border-gray-new-30'
+                        'mt-[14px] h-9 w-full truncate border bg-gray-new-98 px-3 font-mono text-xs tracking-extra-tight text-gray-new-30 transition-colors duration-200 outline-none dark:bg-gray-new-8 dark:text-gray-new-90',
+                        isPromptCopied
+                          ? 'border-green-44 dark:border-green-45'
+                          : 'border-gray-new-80 hover:border-gray-new-70 focus:border-gray-new-60 dark:border-gray-new-20 dark:hover:border-gray-new-30 dark:focus:border-gray-new-40'
                       )}
-                      role="button"
-                      tabIndex={0}
-                      aria-label="Copy agent setup prompt"
-                      onClick={handleCopyPrompt}
-                      onKeyDown={handleTerminalKeyDown}
-                    >
-                      {/* Icon-only copy control, pinned to the top-right corner like a docs
-                          code-block copy button. The field content reserves right padding so the
-                          prompt's first line never runs under the icon. */}
-                      <span
+                      type="text"
+                      value={copyPrompt}
+                      aria-label="Agent setup prompt"
+                      spellCheck={false}
+                      readOnly
+                      onFocus={selectPromptField}
+                      onClick={selectPromptField}
+                      onCopy={handlePromptFieldCopy}
+                    />
+                    <div className="mt-[14px] flex justify-end">
+                      <button
                         className={cn(
-                          'absolute top-2 right-2 flex transition-colors duration-200',
-                          isCopied
-                            ? 'text-green-44 dark:text-green-52'
-                            : 'text-gray-new-40 group-hover:text-gray-new-20 dark:text-gray-new-70 dark:group-hover:text-white'
+                          'flex h-8 items-center gap-1.5 px-3.5 text-sm leading-none font-medium tracking-extra-tight transition-colors duration-200',
+                          isPromptCopied
+                            ? 'cursor-default bg-green-44 text-white dark:bg-green-45 dark:text-black-new'
+                            : 'bg-black-new text-white hover:bg-gray-new-20 dark:bg-white dark:text-black-new dark:hover:bg-gray-new-80'
                         )}
-                        aria-hidden="true"
+                        type="button"
+                        onClick={handleCopyPrompt}
                       >
-                        {isCopied ? (
-                          <CopiedIcon className="size-3.5" />
+                        {isPromptCopied ? (
+                          <CopiedIcon className="size-3.5" aria-hidden="true" />
                         ) : (
-                          <CopyIcon className="size-3.5" />
+                          <CopyIcon className="size-3.5" aria-hidden="true" />
                         )}
-                      </span>
-                      <div className="py-2.5 pr-9 pl-3">
-                        <code className="block font-mono text-xs leading-relaxed tracking-extra-tight [overflow-wrap:anywhere] text-gray-new-30 dark:text-gray-new-90">
-                          {copyPrompt}
-                        </code>
-                      </div>
+                        {isPromptCopied ? 'Copied' : 'Copy prompt'}
+                      </button>
                     </div>
-                    <p className="mt-[14px] text-xs leading-relaxed tracking-extra-tight">
-                      <Link
-                        className="text-gray-new-50! underline decoration-gray-new-50/40 underline-offset-2 transition-colors hover:text-black-new! hover:decoration-current dark:text-gray-new-70! dark:hover:text-white!"
-                        to={destination.url}
-                        isExternal={isExternalDestination}
-                        onClick={() => handleLinkClick(destination.label)}
-                      >
-                        {destination.label}
-                        &nbsp;→
-                      </Link>
-                    </p>
                   </>
                 ) : (
                   <>
@@ -300,7 +316,7 @@ Modal.propTypes = {
   destination: PropTypes.shape({
     label: PropTypes.string.isRequired,
     url: PropTypes.string.isRequired,
-  }).isRequired,
+  }),
   embedId: PropTypes.string,
   copyPrompt: PropTypes.string,
 };
