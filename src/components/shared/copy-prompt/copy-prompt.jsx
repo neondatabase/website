@@ -121,10 +121,10 @@ const CopyPrompt = (props) => {
         </div>
         <Button
           className={cn(
-            'relative z-10 inline-flex items-center gap-2 px-6 py-3.5 text-base leading-none font-normal tracking-tight dark:font-medium',
-            copied && 'hover:bg-black-pure dark:hover:bg-white'
+            'relative z-10 inline-flex items-center gap-2 rounded-full px-6 py-3.5 text-base leading-none font-normal tracking-tight dark:font-medium',
+            'bg-black-new text-white hover:bg-gray-new-20',
+            'dark:bg-white dark:text-black-pure dark:hover:bg-gray-new-90'
           )}
-          theme="white-filled-multi"
           aria-label={copied ? 'Prompt copied' : buttonText}
           aria-live="polite"
           onClick={handleCopy}

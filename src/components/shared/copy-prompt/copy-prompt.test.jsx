@@ -179,6 +179,20 @@ describe('CopyPrompt (legacy mode)', () => {
     expect(screen.getByRole('button', { name: /copy prompt/i })).toBeInTheDocument();
   });
 
+  it('renders the dark pill with provider marks and no copy icon', async () => {
+    render(<CopyPrompt src="/prompts/example.md" />);
+
+    await waitFor(() => expect(global.fetch).toHaveBeenCalledWith('/prompts/example.md'));
+
+    const copyButton = screen.getByRole('button', { name: 'Copy prompt' });
+    // Same dark pill as the agent-variant button and the docs-home composer pill.
+    expect(copyButton).toHaveClass('bg-black-new', 'rounded-full', 'dark:bg-white');
+    // The provider marks stand in for the copy affordance; no copy/copied icon.
+    expect(screen.getByTestId('mark-claude')).toBeInTheDocument();
+    expect(screen.queryByTestId('copy-icon')).not.toBeInTheDocument();
+    expect(screen.queryByTestId('copied-icon')).not.toBeInTheDocument();
+  });
+
   it('keeps the legacy layout when title and description are provided', async () => {
     render(
       <CopyPrompt
