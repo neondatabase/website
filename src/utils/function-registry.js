@@ -61,15 +61,6 @@ export const isRegistryLogoUrl = isRegistryHttpsUrl;
 
 export const registryWebsiteUrl = (value) => (isRegistryHttpsUrl(value) ? value.trim() : null);
 
-export const registryWebsiteLinkText = (href, title) => {
-  if (isRegistryHttpsUrl(href)) {
-    const host = new URL(href).hostname.replace(/^www\./i, '');
-    if (host) return host;
-  }
-  if (typeof title === 'string' && title.trim()) return title.trim();
-  return href;
-};
-
 export const isNeonRegistryTemplate = (template) => {
   const provider = typeof template?.provider === 'string' ? template.provider.trim() : '';
   return !provider || provider.toLowerCase() === 'neon';

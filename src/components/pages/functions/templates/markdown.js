@@ -42,7 +42,7 @@ const installCommandFor = (id) => `neon functions new ${id}`;
 const builtByLine = (template) => {
   const provider = escapeText(registryProviderLabel(template) || 'Neon');
   const website = registryWebsiteUrl(template.website);
-  return website ? `${provider} ([website](${website}))` : provider;
+  return website ? `[${provider}](${website})` : provider;
 };
 
 const categoriesLine = (template) =>
