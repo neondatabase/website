@@ -105,6 +105,12 @@ export default {
     pathname: LINKS.objectStorage,
     markdownPath: `${LINKS.objectStorage}.md`,
   },
+  mcpServerStats: {
+    title: 'Neon MCP server usage by client — Neon',
+    description:
+      'The weekly share of Neon MCP server sessions by AI client, including ChatGPT, Claude, Codex, and Cursor.',
+    pathname: LINKS.mcpServerStats,
+  },
   contactSales: {
     title: 'Contact Sales — Neon',
     description: 'Interested in learning more about our plans and pricing? Contact our sales team.',
