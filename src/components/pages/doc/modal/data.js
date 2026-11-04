@@ -67,7 +67,7 @@ const MODALS = [
   {
     id: 'docs-agent-setup',
     title: 'Set up your agent',
-    description: 'It takes about 2 minutes and users who do it get to production 3x faster',
+    description: 'Takes 2 minutes. Users who do it get to production 3x faster.',
     targeting: { all: true },
     copyPrompt: BASE_AGENT_PROMPT,
     experiment: {
