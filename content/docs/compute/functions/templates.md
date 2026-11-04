@@ -55,7 +55,7 @@ From your project directory, run `neon functions new` with the template ID:
 neon functions new image-generation
 ```
 
-The command copies the template into `functions/<slug>/` and declares the function in [`neon.ts`](/docs/reference/neon-ts), creating the file if needed. The slug is the template ID with hyphens removed, so this example creates `functions/imagegeneration/`. Pass `--slug` to choose a different one.
+The command copies the template into `functions/<slug>/` and declares the function in [`neon.ts`](/docs/reference/neon-ts), creating the file if needed. The slug is the template ID with hyphens removed (and cut to 20 characters), so this example creates `functions/imagegeneration/`. Pass `--slug` to choose a different one.
 
 Leave out the ID to pick a template interactively. If a template has several operations, the command asks which ones to include. Pass `-y` to take the recommended ones and install dependencies without prompting. See [`neon functions new`](/docs/cli/functions#new) for all options.
 

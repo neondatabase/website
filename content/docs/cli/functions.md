@@ -8,7 +8,7 @@ summary: >-
 enableTableOfContents: true
 redirectFrom:
   - /docs/cli/function
-updatedOn: '2026-10-26T11:09:41.000Z'
+updatedOn: '2026-11-04T23:33:53.397Z'
 ---
 
 The `functions` command manages [Neon Functions](/docs/compute/functions/overview) on a branch. This is the command reference; for the full deployment workflow, see [Deploy functions](/docs/compute/functions/deploy). To run functions locally, see [`neon dev`](/docs/cli/dev). To add a function from a template, see [Use function templates](/docs/compute/functions/templates).
@@ -23,7 +23,7 @@ Creates a function from a [Function Registry template](/functions/templates). It
 
 <CliOptions command="functions new" />
 
-By default, the slug is the template ID with everything except lowercase letters and digits removed, so `neon functions new context-dev` writes to `functions/contextdev/`.
+By default, the slug is the template ID with everything except lowercase letters and digits removed and cut to 20 characters, so `neon functions new context-dev` writes to `functions/contextdev/`.
 
 A `router` template becomes one function, with a generated `index.ts` that routes each URL path to an operation. A `separate` template declares one function per operation under slugs the template sets, so `--slug` only renames the directory.
 
