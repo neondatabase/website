@@ -11,7 +11,7 @@ summary: >-
   with the -O flag on pg_restore.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-11-04T20:10:08.844Z'
 ---
 
 This topic describes how to export your **Neon** database to a **Postgres-compatible** archive using the Postgres **`pg_dump`** utility. You get a normal custom-format dump (for example `-Fc`) that any Postgres toolchain can consume.
@@ -83,7 +83,7 @@ Install **`pg_dump`** and **`pg_restore`** builds that your **Neon** Postgres ve
    - **`-d`**: Target database [connection string](https://www.postgresql.org/docs/current/libpq-connect.html#LIBPQ-CONNSTRING) (your provider’s URL format and query parameters).
    - **`<dump_file_name>`**: The custom-format archive from **`pg_dump`** (for example **`mydatabase.bak`** from the **`pg_dump`** command in [Export steps on Neon](#export-steps-on-neon)).
 
-If restore fails on ownership or role statements, try adding **`-O`** and consult [Database object ownership considerations](/docs/import/migrate-from-postgres#database-object-ownership-considerations). For more flags (parallel jobs, schema-only, exclusions), see [Advanced pg_dump and pg_restore options](/docs/import/migrate-from-postgres#advanced-pg_dump-and-pg_restore-options).
+If restore fails on ownership or role statements, try adding **`-O`** and consult [Database object ownership considerations](/docs/import/migrate-from-postgres#database-object-ownership-considerations). For more flags (parallel jobs, schema-only, exclusions), see [Advanced pg_dump and pg_restore options](/docs/import/migrate-from-postgres#advanced-pgdump-and-pgrestore-options).
 
 ## Related
 

@@ -6,7 +6,7 @@ summary: >-
   credits, how to set up automatic top-up, how to check your balance, and how
   usage limits and metering affect access.
 enableTableOfContents: true
-updatedOn: '2026-10-29T21:01:06.492Z'
+updatedOn: '2026-11-04T20:10:08.844Z'
 ---
 
 The Neon AI Gateway is billed with **prepaid credits**. You buy credits up front,
@@ -24,10 +24,12 @@ the Free plan. See [Neon plans](/docs/introduction/plans) and
 
 - **1 credit = $1 USD.** Credits are prepaid, purchased before use.
 - **Minimum purchase: $5.**
-- **Minimum balance: $2.**
+- **Minimum balance: $2.** Once your balance drops below $2, new requests return
+  HTTP 429 until you add credits.
 - **Credits expire 12 months after purchase.**
-- Your balance can go **negative**. Usage is metered after a request is served,
-  so a final request can push the balance below zero.
+- Your balance can go **below $2, or negative**. Usage is metered after a
+  request is served, so a long or large request, or several running at once,
+  can take the balance below $2 or below zero before new requests are blocked.
 
 Your balance **draws down as usage is metered**. Each request consumes credits
 based on its token usage, so your balance decreases as you send requests. For
@@ -99,8 +101,9 @@ and abuse:
 
 Short-window rate limits, the daily spend cap, and balance depletion are distinct:
 
-- **Short-window rate limits** are surfaced through `x-ratelimit-*` response
-  headers on each request.
+- **Short-window rate limits** return HTTP 429 with a `Retry-After` header that
+  points to the start of the next minute. `x-ratelimit-*` headers, when present,
+  come from the upstream provider, not from Neon's limits.
 - The **daily spend cap** limits how much you can spend in a single day.
 - **Balance depletion** happens when your prepaid credits run out.
 
@@ -171,7 +174,7 @@ auto-reload back on.
 The AI Gateway is available in AWS US East (Ohio), US East (N. Virginia), Europe (Frankfurt), and Asia Pacific (Singapore) (more [regions](/docs/introduction/regions) to follow).
 
 <Admonition type="note">
-**IP Allow** and **Private Link** do not cover AI Gateway traffic.
+**IP Allow** and **Private Networking** do not cover AI Gateway traffic.
 </Admonition>
 
 ## If you downgrade to Free

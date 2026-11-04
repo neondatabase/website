@@ -10,7 +10,7 @@ summary: >-
 enableTableOfContents: true
 redirectFrom:
   - /docs/manage/backups
-updatedOn: '2026-08-24T17:33:16.332Z'
+updatedOn: '2026-11-04T20:10:08.844Z'
 ---
 
 <InfoBlock>
@@ -32,7 +32,7 @@ Neon supports different backup strategies, which you can use separately or in co
 
 ## Instant restore
 
-With Neon's instant restore capability, also known as point-in-time restore or PITR, you can automatically retain a "history" of changes, ranging from 1 day up to 30 days, depending on your Neon plan. This feature lets you restore your Postgres database and Managed Better Auth data to any specific moment without the need for traditional database backups or separate backup automation. It's ideal if your primary concern is fast recovery after an unexpected event.
+With Neon's instant restore capability, also known as point-in-time restore or PITR, you can automatically retain a "history" of changes: up to 6 hours on the Free plan, 7 days on Launch, or 30 days on Scale ([history window limits](/docs/postgres/backup-restore/history-window#defaults-and-plan-limits)). This feature lets you restore your Postgres database and Managed Better Auth data to any specific moment without the need for traditional database backups or separate backup automation. It's ideal if your primary concern is fast recovery after an unexpected event.
 
 With this strategy, the only required action is setting your desired [history window](/docs/postgres/backup-restore/history-window). Please keep in mind that increasing your history window also increases storage, as changes to your data are retained for a longer period.
 
