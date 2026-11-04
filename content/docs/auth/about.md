@@ -15,6 +15,7 @@ redirectFrom:
   - /docs/neon-auth/concepts/custom-user-data
   - /docs/guides/neon-auth-how-it-works
   - /docs/guides/neon-auth-best-practices
+  - /docs/neon-auth/about
 updatedOn: '2026-10-30T15:07:38.000Z'
 ---
 

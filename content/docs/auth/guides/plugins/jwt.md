@@ -11,6 +11,9 @@ summary: >-
   for session management in browser-based apps, and custom JWT claims are not
   supported.
 enableTableOfContents: true
+redirectFrom:
+  - /docs/auth/guides/jwt
+  - /docs/auth/jwt
 updatedOn: '2026-11-05T01:14:02.509Z'
 ---
 

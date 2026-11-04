@@ -14,6 +14,9 @@ summary: >-
 enableTableOfContents: true
 redirectFrom:
   - /docs/get-started/connection-pooling
+  - /docs/guides/connection-pooling
+  - /docs/introduction/connection-pooling
+  - /docs/manage/connection-pooling
 updatedOn: '2026-10-19T16:37:42.945Z'
 ---
 

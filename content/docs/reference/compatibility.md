@@ -13,6 +13,9 @@ summary: >-
 enableTableOfContents: true
 redirectFrom:
   - /docs/conceptual-guides/compatibility
+  - /docs/postgresql/postgres-compatibility
+  - /docs/introduction/compatibility
+  - /docs/introduction/postgres-compatibility
 updatedOn: '2026-09-17T16:33:54.884Z'
 ---
 

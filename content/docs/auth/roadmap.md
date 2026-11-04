@@ -9,6 +9,8 @@ summary: >-
   yet. Migration guides from Supabase and legacy Stack Auth, plus SDK references
   for the TypeScript client and Next.js server SDK, are also indexed here.
 enableTableOfContents: true
+redirectFrom:
+  - /docs/neon-auth/roadmap
 updatedOn: '2026-09-17T16:33:54.884Z'
 ---
 

@@ -14,6 +14,8 @@ layout: wide
 redirectFrom:
   - /docs/auth/quick-start/nextjs
   - /docs/auth/quick-start/nextjs/
+  - /docs/auth/quick-start
+  - /docs/neon-auth/quick-start
 ---
 
 <AuthAISetupTip />

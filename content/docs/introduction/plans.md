@@ -24,6 +24,7 @@ redirectFrom:
   - /docs/introduction/limits
   - /docs/introduction/pricing-estimation-guide
   - /docs/introduction/billing-sample
+  - /docs/introduction/pricing
 updatedOn: '2026-11-04T20:10:08.844Z'
 ---
 
