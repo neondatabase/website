@@ -165,6 +165,15 @@ We recommend MCP for **development and testing only**, not production environmen
 
 To limit what an agent can do, combine [read-only mode](#read-only-mode), a [Postgres role](#postgres-role) with limited grants, and [category filtering](#category-filtering).
 
+### Check the authorization page
+
+When you connect with OAuth, the authorization page shows where the sign-in returns before you click **Authorize**, for example "Returns to claude.ai". Approve only when that matches the client you're connecting:
+
+- **Returns to an app on this computer:** The sign-in returns to a `localhost` or `127.0.0.1` address. Continue only if you started the sign-in from an app on your computer.
+- **App identity published at a host:** Clients such as Claude, ChatGPT, Codex, VS Code, Zed, GitHub Copilot CLI, and Antigravity identify themselves with a [Client ID Metadata Document](https://modelcontextprotocol.io/specification/2026-07-28/basic/authorization/client-registration), an `https` URL that describes the client. The page names the host that published that document, such as `claude.ai`. This confirms who controls the client ID, not which app is behind it.
+
+Clients that don't support metadata documents register through dynamic client registration and don't show an app identity line. Select **App details** to see the client's website and every registered redirect URI.
+
 ### Allowlist IP addresses
 
 The hosted Neon MCP Server (`mcp.neon.tech`) connects to your Neon databases from the following static IP addresses:
