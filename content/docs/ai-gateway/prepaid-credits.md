@@ -139,8 +139,9 @@ Turn on **auto-reload** to keep your balance from running out. When your balance
 drops below a threshold you set, Neon buys a fixed amount of credits with the
 payment card on file, with no action needed from you.
 
-Only organization admins can set up auto-reload, and the organization must
-be on a paid plan and billed directly by payment card.
+Auto-reload is available on paid plans only. It isn't available on the Free
+plan yet. Only organization admins can set it up, and the organization must be
+billed directly by payment card.
 
 To set up auto-reload:
 
@@ -181,8 +182,8 @@ The AI Gateway is available in AWS US East (Ohio), US East (N. Virginia), Europe
 ## If you downgrade to Free
 
 If your organization moves to the Free plan, your AI Gateway credits **remain on
-your account** and you can keep using them, as long as a payment card stays on
-file. Auto-reload turns off when you downgrade.
+your account** and you can keep using them. Auto-reload turns off when you
+downgrade.
 
 ## Related
 
@@ -209,7 +210,7 @@ Yes, by a small amount. Usage can exceed your remaining balance before it's dete
 </FaqItem>
 
 <FaqItem question="Can I top up credits automatically?">
-Yes. Organization admins can turn on auto-reload from the **AI gateway credits** card on the **Billing** page. When your balance drops below the threshold you set, Neon buys the amount you chose with the payment card on file. See [Automatic top-up](#automatic-top-up).
+Yes, on paid plans. Auto-reload isn't available on the Free plan yet. Organization admins can turn it on from the **AI gateway credits** card on the **Billing** page. When your balance drops below the threshold you set, Neon buys the amount you chose with the payment card on file. See [Automatic top-up](#automatic-top-up).
 </FaqItem>
 
 <FaqItem question="Do credits expire?">
@@ -217,7 +218,7 @@ Credits are valid for 12 months from the date of purchase.
 </FaqItem>
 
 <FaqItem question="What happens to my credits if I downgrade to Free?">
-Your credits stay on your account, and you can keep using AI Gateway on the Free plan as long as a payment card stays on file. Auto-reload turns off when you downgrade.
+Your credits stay on your account, and you can keep using AI Gateway on the Free plan. Auto-reload turns off when you downgrade.
 </FaqItem>
 
 <FaqItem question="What are the default usage limits?">
