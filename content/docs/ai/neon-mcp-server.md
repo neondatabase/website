@@ -167,7 +167,7 @@ To limit what an agent can do, combine [read-only mode](#read-only-mode), a [Pos
 
 ### Check the authorization page
 
-When you connect with OAuth, the authorization page shows where the sign-in returns before you click **Authorize**, for example "Returns to claude.ai". Approve only when that matches the client you're connecting:
+When you connect with OAuth, the authorization page shows where the sign-in returns before you click **Approve**, for example "Returns to claude.ai". Approve only when that matches the client you're connecting:
 
 - **Returns to an app on this computer:** The sign-in returns to a `localhost` or `127.0.0.1` address. Continue only if you started the sign-in from an app on your computer.
 - **App identity published at a host:** Clients such as Claude, ChatGPT, Codex, VS Code, Zed, GitHub Copilot CLI, and Antigravity identify themselves with a [Client ID Metadata Document](https://modelcontextprotocol.io/specification/2026-07-28/basic/authorization/client-registration), an `https` URL that describes the client. The page names the host that published that document, such as `claude.ai`. This confirms who controls the client ID, not which app is behind it.
