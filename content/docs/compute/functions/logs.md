@@ -2,16 +2,16 @@
 title: Neon Functions logs
 subtitle: View, search, and download logs for a deployed function.
 summary: >-
-  View a deployed function's logs in the Neon Console: standard output and
-  standard error from your handler, plus a platform-emitted invoke begin /
+  View a deployed function's logs in the Neon Console: console.* output from
+  your handler and its dependencies, plus a platform-emitted invoke begin /
   invoke end line around each request. Covers the console-method-to-level
   mapping, common log entries that look like a problem but aren't, and
   wiring up application instrumentation like Sentry or OpenTelemetry.
 enableTableOfContents: true
-updatedOn: '2026-09-25T10:38:58.000Z'
+updatedOn: '2026-11-04T16:47:40.419Z'
 ---
 
-Every deployed function streams its logs to the Neon Console: standard output and standard error from your handler, plus a platform-emitted `invoke begin` / `invoke end` line around each request:
+Every deployed function streams its logs to the Neon Console: everything your handler and its dependencies write with `console.log`, `console.info`, `console.warn`, `console.error`, or `console.debug`, plus a platform-emitted `invoke begin` / `invoke end` line around each request:
 
 ```text
 2026-07-09T19:31:43.902476000Z    INFO    invoke end
@@ -27,7 +27,7 @@ Expand a row to see its full context: `timestamp`, `severity`, `entity_type`, `s
 `scope_name` distinguishes platform-emitted lines from your own output:
 
 - `neon.function.request`: the `invoke begin` / `invoke end` line the platform emits around each request.
-- Your own `console.log`/`console.error` output is scoped to the function's app logs, alongside whatever your handler or dependencies print.
+- Your own `console.*` output is scoped to the function's app logs, alongside `console.*` output from your dependencies.
 
 ## Log levels
 
@@ -42,6 +42,8 @@ A function's log level comes from the `console` method used to emit it:
 
 `NOTICE` and `FATAL` also appear as filters in the log viewer but aren't currently emitted by Functions; they're part of the console's shared log-level set.
 
+Only those `console` methods reach your logs. Output written straight to `process.stdout` or `process.stderr`, including from a logger configured to write to a stream, is discarded. Point your logger at `console`, or use a [monitoring SDK](#application-instrumentation).
+
 ## Common log entries
 
 Most of what shows up in your logs is your own `console.log`/`console.error` output. A few entries look like something's wrong when it isn't, or point you somewhere other than the log itself. Here's what to do when you see them.
@@ -52,7 +54,7 @@ Most of what shows up in your logs is your own `console.log`/`console.error` out
 (node:95) Warning: SECURITY WARNING: The SSL modes 'prefer', 'require', and 'verify-ca' are treated as aliases for 'verify-full'.
 ```
 
-It's a `pg` (node-postgres) deprecation warning, not a connection problem: the injected `DATABASE_URL` uses `sslmode=require`, and `pg` warns on that mode regardless of whether anything is wrong. It logs at `ERROR` because Functions maps all `stderr` output to `ERROR`, not because the severity was assessed. If you'd rather not see it, connect with `sslmode=verify-full` explicitly instead of relying on the default.
+It's a `pg` (node-postgres) deprecation warning, not a connection problem: the injected `DATABASE_URL` uses `sslmode=require`, and `pg` warns on that mode regardless of whether anything is wrong. It logs at `ERROR` because Node prints process warnings through `console.error`, not because the severity was assessed. If you'd rather not see it, connect with `sslmode=verify-full` explicitly instead of relying on the default.
 
 **Seeing an `ERROR` `invoke end` with no other detail? It's not your code, don't debug your handler for it.** The platform never puts internal failure detail (no execution node reachable, a launch or scheduler failure) into customer-facing logs, so this line won't tell you more than "the platform failed to complete this request." Retry; if it keeps happening, contact support rather than searching your own code for the cause. (Your own handler returning an error response is a different case and logs as `INFO`, since the platform still successfully invoked your function.)
 

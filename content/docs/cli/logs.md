@@ -10,7 +10,7 @@ summary: >-
   available in AWS US East (Ohio), US East (N. Virginia), Europe (Frankfurt),
   and Asia Pacific (Singapore).
 enableTableOfContents: true
-updatedOn: '2026-10-31T13:11:38.215Z'
+updatedOn: '2026-11-04T16:47:40.419Z'
 ---
 
 The `logs` command reads the logs a branch's services emit. Today that covers Neon Functions and Object Storage; Postgres compute logs are coming. Query records over a time window, filter by source, severity, or OpenTelemetry attribute, and list which fields and values a branch reports so you can build precise filters.
@@ -35,7 +35,7 @@ The structured content filters (`--source`, `--service-name`, `--scope-name`, `-
 
 `--source` accepts `function`, `storage`, and `pg_endpoint`. Only `function` and `storage` return records today; `pg_endpoint` (Postgres compute) is accepted but comes back empty until Postgres logs ship.
 
-Filter by severity with `--severity-text`, which matches the exact, case-sensitive value a record carries (for example `ERROR` or `INFO`, uppercase). Severities vary by source, so a filter can legitimately return nothing: storage logs are S3 access records and are all `INFO`, so `--source storage --severity-text ERROR` matches none. Run `neon logs field-values severity_text` to see the values a branch actually reports before filtering. `--minimum-severity` (match a level and everything above it) is not supported by the branch log backend; use `--severity-text` for an exact match instead.
+Filter by severity with `--severity-text`, which matches the exact, case-sensitive value a record carries (for example `ERROR` or `INFO`, uppercase). Severities vary by source, so a filter can legitimately return nothing. Storage logs take their level from the HTTP status (`WARN` for 4xx, `ERROR` for 5xx, `INFO` otherwise), so `--source storage --severity-text ERROR` returns only server errors. Run `neon logs field-values severity_text` to see the values a branch actually reports before filtering. `--minimum-severity` (match a level and everything above it) is not supported by the branch log backend; use `--severity-text` for an exact match instead.
 
 ```bash
 neon logs query --since 30m
