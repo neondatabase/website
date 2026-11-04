@@ -1,3 +1,22 @@
+- id: 'kylon'
+  title: 'Kylon'
+  isFeatured: false
+  logo:
+    mediaItemUrl: '/images/case-studies/kylon.svg'
+    mediaDetails:
+      width: 117
+      height: 32
+  quote: ''
+  author:
+    name: ''
+    post: ''
+  isInternal: true
+  internalPostSlug: 'inside-a-kylon-room-where-people-and-agents-build-apps-on-neon'
+  externalUrl: ''
+  categories:
+    - slug: 'ai'
+      name: 'AI & Agents'
+
 - id: 'skydive'
   title: 'Skydive'
   isFeatured: false
