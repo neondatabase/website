@@ -25,6 +25,8 @@ seo:
   image: https://cdn.neonapi.io/public/images/pages/blog/inside-a-kylon-room-where-people-and-agents-build-apps-on-neon/social.jpg
 ---
 
+![Inside a Kylon room, where people and agents build apps on Neon](https://cdn.neonapi.io/public/images/pages/blog/inside-a-kylon-room-where-people-and-agents-build-apps-on-neon/cover.jpg)
+
 <blockquote>
 <p>“At Kylon, agents build the tools a team runs on and keep improving them. That means deploying many small databases that the agents manage themselves”</p>
 <cite><a href="https://www.linkedin.com/in/suanmiao/">Quinn Leng</a>, co-founder at Kylon</cite>
