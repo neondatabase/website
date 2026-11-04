@@ -6,15 +6,14 @@ import { PropTypes } from 'prop-types';
 import { useState, useEffect, useRef } from 'react';
 
 import Link from 'components/shared/link';
-import useCopyToClipboard from 'hooks/use-copy-to-clipboard';
+import ProviderMarks from 'components/shared/provider-marks';
+import useCopyPrompt from 'hooks/use-copy-prompt';
 import useLocalStorage from 'hooks/use-local-storage';
 import CloseIcon from 'icons/close-small.inline.svg';
 import SupportIcon from 'icons/docs/modal/support.inline.svg';
 import RobotIcon from 'icons/docs/sidebar/ai-agent.inline.svg';
 // import SlackIcon from 'icons/docs/modal/slack.inline.svg';
 import ExpandIcon from 'icons/expand-icon.inline.svg';
-import CopiedIcon from 'icons/home/copied.inline.svg';
-import CopyIcon from 'icons/home/copy.inline.svg';
 import PlayIcon from 'icons/play.inline.svg';
 import { cn } from 'utils/cn';
 import {
@@ -39,7 +38,7 @@ const Modal = ({ experiment, ...baseProps }) => {
   const [closedModals, setClosedModals] = useLocalStorage('closedModals', []);
   const [isMounted, setIsMounted] = useState(false);
   const [isMinimized, setIsMinimized] = useState(false);
-  const { isCopied, handleCopy } = useCopyToClipboard(COPIED_RESET_MS);
+  const { isCopied, copy } = useCopyPrompt(COPIED_RESET_MS);
   const [isManuallyCopied, setIsManuallyCopied] = useState(false);
   const [variantId, setVariantId] = useState(null);
   const hasTrackedViewRef = useRef(false);
@@ -108,8 +107,7 @@ const Modal = ({ experiment, ...baseProps }) => {
 
   const handleCopyPrompt = () => {
     if (isPromptCopied) return;
-    handleCopy(copyPrompt);
-    trackPromptCopy('button');
+    copy(copyPrompt, () => trackPromptCopy('button'));
   };
 
   // Fires for any copy out of the field: keyboard shortcut, context menu, or browser menu.
@@ -261,22 +259,20 @@ const Modal = ({ experiment, ...baseProps }) => {
                       onCopy={handlePromptFieldCopy}
                     />
                     <div className="mt-[14px] flex justify-end">
+                      {/* Same dark pill and vendor marks as the other agent-prompt copy
+                          controls (CopyPrompt, docs-home composer). */}
                       <button
                         className={cn(
-                          'flex h-8 items-center gap-1.5 px-3.5 text-sm leading-none font-medium tracking-extra-tight transition-colors duration-200',
-                          isPromptCopied
-                            ? 'cursor-default bg-green-44 text-white dark:bg-green-45 dark:text-black-new'
-                            : 'bg-black-new text-white hover:bg-gray-new-20 dark:bg-white dark:text-black-new dark:hover:bg-gray-new-80'
+                          'inline-flex min-h-9 shrink-0 items-center gap-2 rounded-full px-3.5 font-sans text-sm leading-none font-medium transition-colors',
+                          'bg-black-new text-white hover:bg-gray-new-20',
+                          'dark:bg-white dark:text-black-pure dark:hover:bg-gray-new-90',
+                          'focus-visible:ring-2 focus-visible:ring-green-44 focus-visible:ring-offset-2 focus-visible:ring-offset-[#F4F9F7] focus-visible:outline-none dark:focus-visible:ring-green-52 dark:focus-visible:ring-offset-[#101013]'
                         )}
                         type="button"
                         onClick={handleCopyPrompt}
                       >
-                        {isPromptCopied ? (
-                          <CopiedIcon className="size-3.5" aria-hidden="true" />
-                        ) : (
-                          <CopyIcon className="size-3.5" aria-hidden="true" />
-                        )}
-                        {isPromptCopied ? 'Copied' : 'Copy prompt'}
+                        <ProviderMarks className="text-white dark:text-black-pure" />
+                        {isPromptCopied ? 'Prompt copied' : 'Copy prompt'}
                       </button>
                     </div>
                   </>

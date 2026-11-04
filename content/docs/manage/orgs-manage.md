@@ -23,7 +23,6 @@ Organizations managed through the [Vercel-managed integration](/docs/guides/verc
 
 To create a new org, use the **Create organization** button in the profile menu in the top-right of the console.
 
-
 Select a plan for your new organization. Organizations can be free or paid; if you choose a paid plan, you'll enter billing details.
 
 ![create organization with billing](/docs/manage/orgs_create_with_billing.png)
