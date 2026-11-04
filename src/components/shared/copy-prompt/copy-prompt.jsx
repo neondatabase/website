@@ -7,8 +7,6 @@ import { useEffect, useId, useRef, useState } from 'react';
 import Button from 'components/shared/button';
 import ProviderMarks from 'components/shared/provider-marks';
 import useCopyPrompt from 'hooks/use-copy-prompt';
-import CopiedIcon from 'icons/home/copied.inline.svg';
-import CopyIcon from 'icons/home/copy.inline.svg';
 import patternSvg from 'images/pages/docs/copy-prompt/pattern.svg';
 import { cn } from 'utils/cn';
 import getNodeText from 'utils/get-node-text';
@@ -127,22 +125,12 @@ const CopyPrompt = (props) => {
             copied && 'hover:bg-black-pure dark:hover:bg-white'
           )}
           theme="white-filled-multi"
-          aria-label={copied ? 'Copied' : buttonText}
+          aria-label={copied ? 'Prompt copied' : buttonText}
           aria-live="polite"
           onClick={handleCopy}
         >
           <ProviderMarks className="text-white dark:text-black-pure" />
-          {copied ? (
-            <>
-              Copied
-              <CopiedIcon className="size-3.5" aria-hidden="true" />
-            </>
-          ) : (
-            <>
-              {buttonText}
-              <CopyIcon className="size-3.5" aria-hidden="true" />
-            </>
-          )}
+          {copied ? 'Prompt copied' : buttonText}
         </Button>
       </figure>
     );
@@ -171,7 +159,7 @@ const CopyPrompt = (props) => {
           onClick={handleAgentCopy}
           aria-label={copied ? 'Prompt copied' : buttonText}
           className={cn(
-            'inline-flex min-h-9 shrink-0 items-center gap-2 rounded-[2px] px-3.5 font-sans text-sm leading-none font-medium transition-colors',
+            'inline-flex min-h-9 shrink-0 items-center gap-2 rounded-full px-3.5 font-sans text-sm leading-none font-medium transition-colors',
             'bg-black-new text-white hover:bg-gray-new-20',
             'dark:bg-white dark:text-black-pure dark:hover:bg-gray-new-90',
             'focus-visible:ring-2 focus-visible:ring-green-44 focus-visible:ring-offset-2 focus-visible:ring-offset-gray-new-98 focus-visible:outline-none dark:focus-visible:ring-green-52 dark:focus-visible:ring-offset-gray-new-8'

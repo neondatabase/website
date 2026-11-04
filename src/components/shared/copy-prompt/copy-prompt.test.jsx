@@ -195,7 +195,7 @@ describe('CopyPrompt (legacy mode)', () => {
     expect(screen.getByTestId('pattern-image')).toBeInTheDocument();
   });
 
-  it('copies the loaded prompt and replaces the copy icon with the Copied confirmation', async () => {
+  it('copies the loaded prompt and flips to the Prompt copied confirmation', async () => {
     const writeText = vi.fn().mockResolvedValue(undefined);
     Object.defineProperty(navigator, 'clipboard', {
       configurable: true,
@@ -206,9 +206,12 @@ describe('CopyPrompt (legacy mode)', () => {
 
     fireEvent.click(screen.getByRole('button', { name: 'Copy prompt' }));
 
-    await waitFor(() => expect(screen.getByRole('button', { name: 'Copied' })).toBeVisible());
+    await waitFor(() =>
+      expect(screen.getByRole('button', { name: 'Prompt copied' })).toBeVisible()
+    );
     expect(writeText).toHaveBeenCalledWith('# Prompt body');
-    expect(screen.getByTestId('copied-icon')).toBeInTheDocument();
+    // The provider marks stand in for the copy affordance; no copy/copied icon.
+    expect(screen.queryByTestId('copied-icon')).not.toBeInTheDocument();
     expect(screen.queryByTestId('copy-icon')).not.toBeInTheDocument();
   });
 });
