@@ -68,7 +68,7 @@ describe('CopyPrompt (agent variant)', () => {
     fireEvent.click(copyButton);
 
     expect(writeText).toHaveBeenCalledWith('Build me a project.');
-    await waitFor(() => expect(copyButton).toHaveTextContent('Prompt copied'));
+    await waitFor(() => expect(copyButton).toHaveTextContent('Prompt copied!'));
   });
 
   it('does not render an expand control for a short prompt', () => {

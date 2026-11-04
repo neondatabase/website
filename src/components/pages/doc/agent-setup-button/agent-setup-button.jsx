@@ -56,7 +56,7 @@ const AgentSetupButton = ({ agentPrompt = null, className = null }) => {
       {/* The vendor-mark cluster replaces the robot icon and stays put in the
           copied state; only the label and the appended check turn green. */}
       <ProviderMarks />
-      {isCopied ? 'Prompt copied' : 'Set up agent'}
+      {isCopied ? 'Prompt copied!' : 'Set up agent'}
       {isCopied && (
         <span className="flex text-[#157A55] dark:text-green-52">
           <CheckIcon />

@@ -130,7 +130,7 @@ const CopyPrompt = (props) => {
           onClick={handleCopy}
         >
           <ProviderMarks className="text-white dark:text-black-pure" />
-          {copied ? 'Prompt copied' : buttonText}
+          {copied ? 'Prompt copied!' : buttonText}
         </Button>
       </figure>
     );
@@ -166,7 +166,7 @@ const CopyPrompt = (props) => {
           )}
         >
           <ProviderMarks className="text-white dark:text-black-pure" />
-          {copied ? 'Prompt copied' : buttonText}
+          {copied ? 'Prompt copied!' : buttonText}
         </button>
       </div>
 

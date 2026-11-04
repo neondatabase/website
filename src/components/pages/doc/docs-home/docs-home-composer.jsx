@@ -129,7 +129,7 @@ const DocsHomeComposer = () => {
           {agent ? (
             <>
               <ProviderMarks className="text-white dark:text-black-pure" />
-              {isCopied ? 'Prompt copied' : 'Copy prompt'}
+              {isCopied ? 'Prompt copied!' : 'Copy prompt'}
             </>
           ) : (
             <>
