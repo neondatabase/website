@@ -741,7 +741,7 @@ export const authClient = createAuthClient(import.meta.env.VITE_NEON_AUTH_URL)
 
 Pick one:
 
-- **Remap ids by email.** This is simplest when you can create the accounts. Create each account in Managed Better Auth first. Then, in one transaction, rewrite every user id column from the migrated user id to `neon_auth."user".id`, matched by email, and drop the migrated `users` and `auth_*` tables. Keep app tables free of foreign keys into the `neon_auth` schema.
+- **Remap ids by email.** This is simplest when you can create the accounts. Create each account in Managed Better Auth first. Then, in one transaction, rewrite every user id column from the migrated user id to `neon_auth."user".id`, matched by email, and drop the migrated `users` table. Keep app tables free of foreign keys into the `neon_auth` schema.
 - **Link on first sign-in.** Keep `users` and add `auth_user_id text UNIQUE`. In `requireUser`, look up the session user by `auth_user_id`. If there's no row, link to the `users` row with the token's `email` only when its `emailVerified` claim is true. Otherwise, create a new user.
 
 <Admonition type="warning" title="Don't link unverified emails">
