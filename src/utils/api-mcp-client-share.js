@@ -1,10 +1,8 @@
 import { neon } from '@neondatabase/serverless';
 
-// The table holds weekly percentages only, written by a daily job. The role in
-// PUBLIC_STATS_DATABASE_URL can only SELECT this one table.
 export async function getMcpClientShare() {
-  const url = process.env.PUBLIC_STATS_DATABASE_URL;
-  if (!url) throw new Error('PUBLIC_STATS_DATABASE_URL is not set');
+  const url = process.env.STATS_DATABASE_URL;
+  if (!url) throw new Error('STATS_DATABASE_URL is not set');
 
   const sql = neon(url);
   const rows = await sql`
