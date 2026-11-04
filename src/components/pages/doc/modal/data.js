@@ -26,6 +26,16 @@ import { BASE_AGENT_PROMPT } from 'components/pages/doc/agent-setup-button';
  */
 
 /**
+ * A/B test on a modal. Each device is assigned one variant at random and keeps it (see
+ * `utils/experiments`). A variant's fields override the modal's own fields (for example `title`).
+ * Keep `id` and the variant keys stable while the test runs, or devices get reassigned.
+ *
+ * @typedef {Object} ModalExperiment
+ * @property {string} id Unique, stable experiment identifier sent with every experiment event.
+ * @property {Object<string, Object>} variants Variant ID → field overrides. Use `{}` for control.
+ */
+
+/**
  * Docs video modal configuration.
  *
  * Closing a modal stores its `id` in `localStorage`, so the ID must remain unique and stable.
@@ -42,6 +52,7 @@ import { BASE_AGENT_PROMPT } from 'components/pages/doc/agent-setup-button';
  * @property {string} [copyPrompt] When set, the card renders a single-line prompt field and a
  *   "Copy prompt" button instead of a video thumbnail and destination link. Copying the prompt
  *   (button or manual) dismisses the card for good, like closing it.
+ * @property {ModalExperiment} [experiment] Optional A/B test on this modal's fields.
  */
 
 /**
@@ -59,6 +70,14 @@ const MODALS = [
     description: 'It takes about 2 minutes and users who do it get to production 3x faster',
     targeting: { all: true },
     copyPrompt: BASE_AGENT_PROMPT,
+    experiment: {
+      id: 'docs-agent-setup-title',
+      variants: {
+        control: {},
+        'onboard-your-agent': { title: 'Onboard your agent' },
+        'neon-superpowers': { title: 'Give your agent Neon superpowers' },
+      },
+    },
   },
 ];
 

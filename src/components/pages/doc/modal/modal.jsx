@@ -3,7 +3,7 @@
 import { AnimatePresence, LazyMotion, domAnimation, m } from 'framer-motion';
 import Image from 'next/image';
 import { PropTypes } from 'prop-types';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 
 import Link from 'components/shared/link';
 import useCopyToClipboard from 'hooks/use-copy-to-clipboard';
@@ -17,6 +17,11 @@ import CopiedIcon from 'icons/home/copied.inline.svg';
 import CopyIcon from 'icons/home/copy.inline.svg';
 import PlayIcon from 'icons/play.inline.svg';
 import { cn } from 'utils/cn';
+import {
+  getExperimentVariant,
+  trackExperimentSuccess,
+  trackExperimentViewed,
+} from 'utils/experiments';
 import sendGtagEvent from 'utils/send-gtag-event';
 
 const icons = {
@@ -30,19 +35,39 @@ const MOBILE_MEDIA_QUERY = '(max-width: 47.9375rem)';
 // "Prompt copied" confirmation shows for 1.4s, then the button reverts.
 const COPIED_RESET_MS = 1400;
 
-const Modal = ({ id, title, description, destination, embedId, copyPrompt }) => {
+const Modal = ({ experiment, ...baseProps }) => {
   const [closedModals, setClosedModals] = useLocalStorage('closedModals', []);
   const [isMounted, setIsMounted] = useState(false);
   const [isMinimized, setIsMinimized] = useState(false);
   const { isCopied, handleCopy } = useCopyToClipboard(COPIED_RESET_MS);
   const [isManuallyCopied, setIsManuallyCopied] = useState(false);
+  const [variantId, setVariantId] = useState(null);
+  const hasTrackedViewRef = useRef(false);
+
+  // The assigned variant's overrides (e.g. a different title) apply on top of the base config.
+  const { id, title, description, destination, embedId, copyPrompt } = {
+    ...baseProps,
+    ...(variantId ? experiment.variants[variantId] : {}),
+  };
 
   useEffect(() => {
     // The copyPrompt card is dismiss-only (no minimize), so it never collapses to the
     // minimized toast, even on mobile.
     setIsMinimized(!copyPrompt && window.matchMedia(MOBILE_MEDIA_QUERY).matches);
+    // Assign the variant in the same render that first shows the card, so it never flashes the
+    // control content. Nothing renders before mount, so there's no hydration mismatch.
+    if (experiment) {
+      setVariantId(getExperimentVariant(experiment.id, Object.keys(experiment.variants)));
+    }
     setIsMounted(true);
-  }, [copyPrompt]);
+  }, [copyPrompt, experiment]);
+
+  // Fires once, when the entrance animation finishes and the card is actually on screen.
+  const handleShown = () => {
+    if (!experiment || !variantId || hasTrackedViewRef.current) return;
+    hasTrackedViewRef.current = true;
+    trackExperimentViewed(experiment.id, variantId);
+  };
 
   useEffect(() => {
     if (!isManuallyCopied) return undefined;
@@ -77,6 +102,7 @@ const Modal = ({ id, title, description, destination, embedId, copyPrompt }) => 
       tag_name: 'DocsAgentSetupPopup',
       method,
     });
+    if (experiment && variantId) trackExperimentSuccess(experiment.id, variantId, { method });
     handleClose();
   };
 
@@ -112,6 +138,7 @@ const Modal = ({ id, title, description, destination, embedId, copyPrompt }) => 
             initial={{ opacity: 0 }}
             animate={{ opacity: 1, transition: { delay: 3 } }}
             exit={{ opacity: 0, transition: { duration: 0.1 } }}
+            onAnimationComplete={handleShown}
           >
             {isMinimized ? (
               <>
@@ -319,6 +346,10 @@ Modal.propTypes = {
   }),
   embedId: PropTypes.string,
   copyPrompt: PropTypes.string,
+  experiment: PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    variants: PropTypes.objectOf(PropTypes.object).isRequired,
+  }),
 };
 
 export default Modal;

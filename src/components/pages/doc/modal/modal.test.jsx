@@ -106,6 +106,31 @@ describe('docs agent-setup modal entry', () => {
     expect(sendGtagEvent).not.toHaveBeenCalled();
   });
 
+  it('shows the assigned variant title and reports experiment success on copy', async () => {
+    window.localStorage.setItem(
+      'experimentAssignments',
+      JSON.stringify({ [agentSetupModal.experiment.id]: 'neon-superpowers' })
+    );
+    render(<Modal {...agentSetupModal} />);
+
+    expect(await screen.findByText('Give your agent Neon superpowers')).toBeInTheDocument();
+    fireEvent.click(screen.getByRole('button', { name: 'Copy prompt' }));
+
+    expect(sendGtagEvent).toHaveBeenCalledWith('Experiment Success', {
+      experiment_id: 'docs-agent-setup-title',
+      variant_id: 'neon-superpowers',
+      method: 'button',
+    });
+  });
+
+  it('defines a control and the two title variants', () => {
+    expect(agentSetupModal.experiment.variants).toEqual({
+      control: {},
+      'onboard-your-agent': { title: 'Onboard your agent' },
+      'neon-superpowers': { title: 'Give your agent Neon superpowers' },
+    });
+  });
+
   it('stays hidden once dismissed', async () => {
     window.localStorage.setItem('closedModals', JSON.stringify(['docs-agent-setup']));
     render(<Modal {...agentSetupModal} />);
