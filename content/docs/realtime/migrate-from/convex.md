@@ -28,7 +28,7 @@ The steps / layers are as follows:
 | 5   | [**Handle writes**](#handle-writes)       | `mutation` + `useMutation` | →   | `pg_current_xact_id()`                                                                               |
 | 6   | [**Optimistic state**](#optimistic-state) | `.withOptimisticUpdate`    | →   | `awaitTxId` (or [TanStack DB](#tanstack-db))                                                         |
 
-Convex Auth, the scheduler, crons, HTTP actions, pagination and search need extra steps. See [Migrate Convex Auth](#migrate-convex-auth), [Pagination](#pagination) and [Map other Convex features](#map-other-convex-features).
+Convex Auth, the scheduler, crons, HTTP actions, pagination and search need extra steps. See [Migrate auth providers](#migrate-auth-providers), [Pagination](#pagination) and [Map other Convex features](#map-other-convex-features).
 
 <Steps>
 
@@ -46,7 +46,7 @@ npx @neon/convex-to-postgres schema > schema.sql
 
 The file is evaluated, so run it where the project's dependencies are already installed. The DDL output goes to stdout, so you can store to a file or pipe straight into psql. Warnings and progress go to stderr.
 
-Or, to migrate your schema and data in one go, export your deployment with the `convex` CLI. It exports `dev` by default. Add `--prod`, a `convex export` flag, for production. To export a local deployment, it has to be running (`npx convex dev`), which also runs its crons, so expect a few writes while it's up. The snapshot holds all your data, including Convex Auth password hashes, so keep it out of git.
+Or, to migrate your schema and data in one go, export your deployment with the `convex` CLI. It exports `dev` by default. Add `--prod`, a `convex export` flag, for production. To export a local deployment, it has to be running (`npx convex dev`). The snapshot holds all your data, including Convex Auth password hashes, so keep it out of git.
 
 ```bash filename="Terminal"
 npx convex export --path snapshot.zip
@@ -60,23 +60,24 @@ npx @neon/convex-to-postgres import \
     --apply-schema
 ```
 
-The tool reads `DATABASE_URL` from the environment, which keeps the URL out of process arguments, so set it in your shell first. Warnings and per-table row counts go to stderr.
+The tool reads `DATABASE_URL` from the environment, so set it in your shell first. Warnings and per-table row counts go to stderr.
 
 This creates the tables (with `--apply-schema`) and then loads in all the data in a single transaction. When the schema has search or vector indexes, it builds them and runs `VACUUM ANALYZE`. Without `--apply-schema`, the tables must already exist.
 
 You can inspect and manually edit the generated schema before applying. See the [`@neon/convex-to-postgres` README](https://github.com/neondatabase/neon-pkgs/tree/main/packages/convex-to-postgres) for more details.
 
-### What the tool changes
+<details>
+  <summary>What the tool changes</summary>
 
-- **Names.** Fields and tables become snake_case (`authorId` → `author_id`), so update the code that reads rows. Index names keep the Convex index name (`messages_by_authorId`). Pass the same flags (`--id-strategy`, `--no-snake-case` and so on) to every command.
+- **Names.** Fields and tables become snake_case (`authorId` → `author_id`). Index names keep the Convex index name (`messages_by_authorId`). Pass the same flags (`--id-strategy`, `--no-snake-case` and so on) to every command.
 - **Ids.** `_id` becomes `id uuid` (`md5(_id)::uuid`). The tool converts every `v.id()` value the same way, including ids nested in arrays, objects and records inside `jsonb`, and each top-level `v.id()` field gets a foreign key. The tool warns about any field it can't convert. With `--id-strategy text`, ids keep their Convex strings, which also keeps them stable for external links.
-- **`_creationTime`** becomes `created_at timestamptz`. A field of your own named `createdAt` collides with it and is renamed `created_at_1`, with a warning. Rename it, for example `ALTER TABLE messages RENAME COLUMN created_at_1 TO created_at_ms;`.
+- **`_creationTime`** becomes `created_at timestamptz`. A field of your own named `createdAt` collides with it and is renamed `created_at_1`, with a warning. If you need to, rename it, for example `ALTER TABLE messages RENAME COLUMN created_at_1 TO created_at_ms;`.
 - **Numbers.** `v.number()` becomes `double precision`, including counters and epoch-millisecond times. Numbers inside `jsonb` keep their float text (`1.0`), so cast with `::numeric::int`. `v.int64()` becomes `bigint`, which reaches the browser as a string unless you add a parser.
-- **Constraints.** Convex indexes aren't unique, so the tool adds no `UNIQUE` constraints. Add them for keys your code kept unique (`ON CONFLICT` needs one). Foreign keys are `DEFERRABLE INITIALLY DEFERRED` with no `ON DELETE` action, so deleting a parent that has children now fails where Convex left dangling references. Add `ON DELETE CASCADE` where your code deleted the children.
-- **Search indexes.** Each `searchIndex` becomes a generated `tsvector` column, such as `title_tsv` for `title`, with a GIN index (`events_title_gin`), which you can query live. `--search-index bm25` builds `lakebase_bm25` indexes instead, for ranked search outside live queries. Neon Realtime can't live-query a table that has one.
-- **Vector indexes.** Each `vectorIndex` becomes a `lakebase_ann` index. Neon Realtime can't live-query a table that has one, so keep embeddings in a table you don't subscribe to.
+- **Constraints.** Convex indexes aren't unique, so the tool doesn't add `UNIQUE` constraints. Add them for keys your code kept unique (`ON CONFLICT` needs one). Foreign keys are `DEFERRABLE INITIALLY DEFERRED` with no `ON DELETE` action, so deleting a parent that has children now fails where Convex left dangling references. Add `ON DELETE CASCADE` where your code deleted the children.
+- **Search indexes.** Each `searchIndex` becomes a generated `tsvector` column, such as `title_tsv` for `title`, with a GIN index (`events_title_gin`), which you can query live. `--search-index bm25` builds `lakebase_bm25` indexes instead, for ranked search outside live queries.
+- **Vector indexes.** Each `vectorIndex` becomes a `lakebase_ann` index.
 - **System tables.** References to `_scheduled_functions` or `_storage` become plain uuid columns. Drop or replace them.
-- **Convex Auth tables** are imported too, including password hashes. See [Migrate Convex Auth](#migrate-convex-auth).
+- **Convex Auth tables** are imported too, including password hashes. See [Migrate auth providers](#migrate-auth-providers).
 - **`schema` vs `import`.** `schema` prints the tables only. `import --apply-schema` (or `seed --split`) also builds the search and vector indexes, and their filter indexes, after the data loads.
 
 Search the generated column with `@@` and rank with `ts_rank`, both live:
@@ -90,6 +91,8 @@ LIMIT 20
 ```
 
 Always pass the text search configuration (`'english'`, unless you passed `--search-language`). The one-argument forms of `websearch_to_tsquery()` and `to_tsquery()` depend on a setting, so they aren't `IMMUTABLE`, and live queries reject them.
+
+</details>
 
 ### Write the schema yourself
 
@@ -256,19 +259,6 @@ export function messagesQuery(userId: string, channelId: string) {
 }
 ```
 
-### Live query limits
-
-A live query is a single read-only `SELECT`. Joins, subqueries, `GROUP BY` and aggregates work. These don't:
-
-- **Set-returning functions** such as `jsonb_array_elements()` and `unnest()`, anywhere in the query, including `LATERAL` and subqueries. Return the `jsonb` or array and unpack it on the client, or filter with `@>` or `= ANY(...)`.
-- **A query that reads no table**, such as `SELECT 1`.
-- **Functions that aren't `IMMUTABLE`**, such as `now()` and BM25's `<@>`. Pass the value as a parameter instead.
-- **Tables with an extension index**, such as `lakebase_bm25`, `lakebase_ann`, `hnsw` or `bloom`, and columns of an extension type, such as `vector`. Every live query on the table fails. Use a GIN index for live search.
-
-A rejected query fails with a generic error such as `upstream rejected` or `baseline_sync_failed`. Test a query first with `neon realtime subscribe "SELECT …"`, and turn on [`debugMode`](#subscribe-to-queries) to see the reason for a rejection. See [Live query limits](../guides/queries#live-query-limits) in the queries guide for the full list and the alternatives.
-
-With `ORDER BY` or `LIMIT`, a change resends the full result. That's often fine and intended. Realtime is moving more query shapes to incremental updates, which will improve for GA. `data` keeps the query's order.
-
 ## Auth
 
 Convex checks `ctx.auth` inside each function:
@@ -317,7 +307,9 @@ export const app = new Hono()
 export type AppType = typeof app
 ```
 
-`requireUser` is the helper from the [queries guide](../guides/queries#exposing-an-endpoint). It verifies the session's token and answers 401 without one. The membership join in `messagesQuery` is the recommended model: because the join is part of the live query, the result stays authorized as memberships change. The client can subscribe to a sealed query, but it can't read or change it. See [Live authorization](../guides/queries#live-authorization) and [why not row-level security](../guides/queries#why-not-row-level-security) for more details.
+`requireUser` is the helper from the [queries guide](../guides/queries#exposing-an-endpoint). It verifies the session's token and answers 401 without one. The membership join in `messagesQuery` is the recommended model: because the join is part of the live query, the result stays authorized as memberships change.
+
+The client can subscribe to a sealed query, but it can't read or change it. See [Live authorization](../guides/queries#live-authorization) and [why not row-level security](../guides/queries#why-not-row-level-security) for more details.
 
 ## Subscribe to queries
 
@@ -441,7 +433,7 @@ export async function fetchSealed(channelId: string): Promise<SealedLiveQuery<Me
 }
 ```
 
-`authClient` is the Managed Better Auth client from [Migrate Convex Auth](#migrate-convex-auth). With raw SQL, import `Message` from `../backend/queries` instead. `Channel` uses `fetchSealed()` to fetch the sealed query and build its `refreshQuery`, then renders `<Messages>`. It shows an error if the fetch fails. See [Fetch from an API endpoint](../guides/subscribing#fetch-from-an-api-endpoint) and, for the initial server render, [Server-side rendering](../guides/ssr).
+`authClient` is the Managed Better Auth client from [Migrate auth providers](#migrate-auth-providers). With raw SQL, import `Message` from `../backend/queries` instead. `Channel` uses `fetchSealed()` to fetch the sealed query and build its `refreshQuery`, then renders `<Messages>`. It shows an error if the fetch fails. See [Fetch from an API endpoint](../guides/subscribing#fetch-from-an-api-endpoint) and, for the initial server render, [Server-side rendering](../guides/ssr).
 
 ```tsx filename="frontend/Channel.tsx"
 import { useCallback, useEffect, useState } from "react"
@@ -750,9 +742,11 @@ See [How optimistic mutations work](../guides/mutations#how-optimistic-mutations
 
 </Steps>
 
-## Migrate Convex Auth
+## Migrate auth providers
 
-Auth providers that don't depend on Convex, such as Clerk, Auth0 or WorkOS, carry over: verify their JWT in `requireUser`. If you use [Convex Auth](https://labs.convex.dev/auth) (`@convex-dev/auth`), move to Neon's [Managed Better Auth](/docs/auth/overview). Its email and password sign-in replaces Convex Auth's `Password` provider.
+You can migrate from `@convex-dev/auth` to any auth provider, such as Clerk, Auth0 or WorkOS by verifying their JWT in `requireUser`.
+
+Here we show how to migrate to Neon's [Managed Better Auth](/docs/auth/overview) by replacing Convex Auth's `Password` provider with email and password sign-in.
 
 ### Enable it on your branch
 
@@ -951,34 +945,34 @@ export function Channel({ channelId, userId }: { channelId: string; userId: stri
 
 If you already use Convex with TanStack&nbsp;DB, migration is simple. Swap out your collections defined with [`convexCollectionOptions`](https://tanstack.com/db/latest/docs/collections/convex-collection), for collections defined with [`realtimeCollectionOptions`](../sdks/typescript#tanstack-db-realtimecollectionoptions):
 
-```diff filename="frontend/collections.ts"
-- const client = new ConvexClient(CONVEX_URL)
-+ const client = createRealtimeClient({ url: NEON_REALTIME_URL, parsers: { ...drizzleParsers } })
+```ts filename="frontend/collections.ts"
+const client = new ConvexClient(CONVEX_URL) // [!code --]
+const client = createRealtimeClient({ url: NEON_REALTIME_URL, parsers: { ...drizzleParsers } }) // [!code ++]
 
-  export async function createMessagesCollection(channelId: string) {
-    return createCollection(
--     convexCollectionOptions({
-+     realtimeCollectionOptions({
-        id: `messages:${channelId}`,
-        client,
--       query: api.messages.list,
--       queryArgs: { channelId },
--       getKey: (message) => message.clientId,
-+       query: await fetchSealed(channelId),
-+       refreshQuery: () => fetchSealed(channelId),
-+       getKey: (message) => message.id,
-        onInsert: async ({ transaction, collection }) => {
-          await Promise.all(
-            transaction.mutations.map(async ({ modified }) => {
--             await client.mutation(api.messages.send, { channelId, clientId: modified.clientId, body: modified.body })
-+             const result = await sendMessage(modified)
-+             if (result.kind === 'committed') await collection.utils.awaitTxId(result.txid, 10_000)
-            })
-          )
-        }
-      })
-    )
-  }
+export async function createMessagesCollection(channelId: string) {
+  return createCollection(
+    convexCollectionOptions({ // [!code --]
+    realtimeCollectionOptions({ // [!code ++]
+      id: `messages:${channelId}`,
+      client,
+      query: api.messages.list, // [!code --]
+      queryArgs: { channelId }, // [!code --]
+      getKey: (message) => message.clientId, // [!code --]
+      query: await fetchSealed(channelId), // [!code ++]
+      refreshQuery: () => fetchSealed(channelId), // [!code ++]
+      getKey: (message) => message.id, // [!code ++]
+      onInsert: async ({ transaction, collection }) => {
+        await Promise.all(
+          transaction.mutations.map(async ({ modified }) => {
+            await client.mutation(api.messages.send, { channelId, clientId: modified.clientId, body: modified.body }) // [!code --]
+            const result = await sendMessage(modified) // [!code ++]
+            if (result.kind === 'committed') await collection.utils.awaitTxId(result.txid, 10_000) // [!code ++]
+          })
+        )
+      }
+    })
+  )
+}
 ```
 
 The sealed query replaces `query` and `queryArgs`. Your server builds it with the arguments baked in, as in [Auth](#auth) but without `ORDER BY`, and `refreshQuery` renews it before it expires. `onInsert` calls your route instead of `client.mutation()`, then waits for the write's txid.
