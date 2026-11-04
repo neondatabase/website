@@ -226,9 +226,10 @@ const TemplateSidebar = ({ template, installCommand }) => {
         <DetailRow label="Built by">
           <span className="flex items-center gap-3">
             <FunctionRegistryTemplateLogo template={template} eager variant="title" />
-            <span className="flex min-w-0 flex-col gap-0.5">
-              {provider}
-              <FunctionRegistryWebsiteLink className="truncate text-sm" template={template} />
+            <span className="min-w-0 truncate">
+              <FunctionRegistryWebsiteLink template={template}>
+                {provider}
+              </FunctionRegistryWebsiteLink>
             </span>
           </span>
         </DetailRow>
