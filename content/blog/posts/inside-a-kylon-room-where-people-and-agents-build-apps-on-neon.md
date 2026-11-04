@@ -38,9 +38,10 @@ seo:
 
 Teams usually organize rooms around a function, like #sales or #ops. Agents in those rooms connect to tools like Gmail, Slack, HubSpot, and Salesforce, and the apps they build (a CRM, an invoice tracker, a hiring board) belong to the team that asked for them.
 
-![A Kylon agent finds 14 logistics leads and puts them in a new Sales CRM App](https://cdn.neonapi.io/public/images/pages/blog/inside-a-kylon-room-where-people-and-agents-build-apps-on-neon/kylon-blog-image-1.png)
-
-*A Kylon agent finds 14 logistics leads and puts them in a new Sales CRM App*
+<figure>
+<img src="https://cdn.neonapi.io/public/images/pages/blog/inside-a-kylon-room-where-people-and-agents-build-apps-on-neon/kylon-blog-image-1.png" alt="A Kylon agent finds 14 logistics leads and puts them in a new Sales CRM App" />
+<figcaption>A Kylon agent finds 14 logistics leads and puts them in a new Sales CRM App</figcaption>
+</figure>
 
 ## The stack behind Kylon
 
@@ -88,9 +89,10 @@ Agents change apps constantly - the riskiest moment for agent-written code is a 
 <cite><a href="https://www.linkedin.com/in/suanmiao/">Quinn Leng</a>, co-founder at Kylon</cite>
 </blockquote>
 
-![Agents apply fixes to a draft of the app, running on its own Neon branch; a teammate reviews the preview and publishes it when it’s ready](https://cdn.neonapi.io/public/images/pages/blog/inside-a-kylon-room-where-people-and-agents-build-apps-on-neon/kylon-blog-image-2.png)
-
-*Agents apply fixes to a draft of the app, running on its own Neon branch; a teammate reviews the preview and publishes it when it’s ready*
+<figure>
+<img src="https://cdn.neonapi.io/public/images/pages/blog/inside-a-kylon-room-where-people-and-agents-build-apps-on-neon/kylon-blog-image-2.png" alt="Agents apply fixes to a draft of the app, running on its own Neon branch; a teammate reviews the preview and publishes it when it’s ready" />
+<figcaption>Agents apply fixes to a draft of the app, running on its own Neon branch; a teammate reviews the preview and publishes it when it’s ready</figcaption>
+</figure>
 
 ### Postgres as the shared state between people and agents
 
@@ -100,9 +102,10 @@ Each app's Neon database ([Lakebase Postgres](https://neon.com/lakebase)) is the
 
 Agents read and write through the same API the App's UI uses, and the agent that builds an App also owns its schema and migrations. Record changes can also trigger [Automations](https://kylon.io/product/workflows) (recurring jobs that a room's agent sets up and runs on a schedule or a trigger) so a row written by one agent can kick off the next step of work.
 
-![A teammate comments on a CRM row; the agent reads the same row and acts on the comment](https://cdn.neonapi.io/public/images/pages/blog/inside-a-kylon-room-where-people-and-agents-build-apps-on-neon/kylon-blog-image-3.png)
-
-*A teammate comments on a CRM row; the agent reads the same row and acts on the comment*
+<figure>
+<img src="https://cdn.neonapi.io/public/images/pages/blog/inside-a-kylon-room-where-people-and-agents-build-apps-on-neon/kylon-blog-image-3.png" alt="A teammate comments on a CRM row; the agent reads the same row and acts on the comment" />
+<figcaption>A teammate comments on a CRM row; the agent reads the same row and acts on the comment</figcaption>
+</figure>
 
 ## Try it
 
