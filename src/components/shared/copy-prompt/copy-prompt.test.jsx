@@ -13,9 +13,6 @@ vi.mock('components/shared/button', () => ({
 vi.mock('icons/home/copy.inline.svg', () => ({
   default: (props) => <svg data-testid="copy-icon" {...props} />,
 }));
-vi.mock('components/shared/code-block-wrapper/images/check.inline.svg', () => ({
-  default: (props) => <svg data-testid="check-icon" {...props} />,
-}));
 vi.mock('icons/home/copied.inline.svg', () => ({
   default: (props) => <svg data-testid="copied-icon" {...props} />,
 }));
@@ -153,7 +150,12 @@ describe('CopyPrompt (agent variant)', () => {
     expect(screen.getByTestId('mark-openai')).toBeInTheDocument();
     expect(screen.getByTestId('mark-cursor')).toBeInTheDocument();
     // The agent-variant copy button now carries an explicit aria-label.
-    expect(screen.getByRole('button', { name: 'Copy prompt' })).toBeInTheDocument();
+    const copyButton = screen.getByRole('button', { name: 'Copy prompt' });
+    expect(copyButton).toBeInTheDocument();
+    // Dark pill matching the docs-home composer, with the marks standing in for
+    // the copy affordance (no trailing copy icon).
+    expect(copyButton).toHaveClass('bg-black-new', 'dark:bg-white');
+    expect(screen.queryByTestId('copy-icon')).not.toBeInTheDocument();
   });
 });
 

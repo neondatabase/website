@@ -5,7 +5,6 @@ import PropTypes from 'prop-types';
 import { useEffect, useId, useRef, useState } from 'react';
 
 import Button from 'components/shared/button';
-import CheckIcon from 'components/shared/code-block-wrapper/images/check.inline.svg';
 import ProviderMarks from 'components/shared/provider-marks';
 import useCopyPrompt from 'hooks/use-copy-prompt';
 import CopiedIcon from 'icons/home/copied.inline.svg';
@@ -173,14 +172,13 @@ const CopyPrompt = (props) => {
           aria-label={copied ? 'Prompt copied' : buttonText}
           className={cn(
             'inline-flex min-h-9 shrink-0 items-center gap-2 rounded-[2px] px-3.5 font-sans text-sm leading-none font-medium transition-colors',
-            'bg-green-44 text-white hover:bg-code-green-1',
-            'dark:bg-green-52 dark:text-black-pure dark:hover:bg-code-green-2',
+            'bg-black-new text-white hover:bg-gray-new-20',
+            'dark:bg-white dark:text-black-pure dark:hover:bg-gray-new-90',
             'focus-visible:ring-2 focus-visible:ring-green-44 focus-visible:ring-offset-2 focus-visible:ring-offset-gray-new-98 focus-visible:outline-none dark:focus-visible:ring-green-52 dark:focus-visible:ring-offset-gray-new-8'
           )}
         >
           <ProviderMarks className="text-white dark:text-black-pure" />
           {copied ? 'Prompt copied' : buttonText}
-          {copied ? <CheckIcon className="size-3.5" /> : <CopyIcon className="size-3.5" />}
         </button>
       </div>
 
