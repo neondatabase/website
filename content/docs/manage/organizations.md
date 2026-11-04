@@ -19,7 +19,6 @@ In Neon, all projects live within organizations. When you sign up, you automatic
 
 In the Neon Console, the Organizations page gives you a centralized view of all your projects. From there, you can create new projects, manage existing ones, and oversee your members and billing information.
 
-
 ## User roles and permissions
 
 Access works in two layers. An organization role sets a member's baseline access across every project, and per-project permissions grant extra access on individual projects. The two are additive, so a per-project permission can only raise someone's access, never lower it.

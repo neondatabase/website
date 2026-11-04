@@ -7,18 +7,23 @@ import MODALS from './data';
 import Modal from './modal';
 
 const sendGtagEvent = vi.fn();
-const copyToClipboard = vi.fn();
+let writeText;
 
 vi.mock('utils/send-gtag-event', () => ({ default: (...args) => sendGtagEvent(...args) }));
-vi.mock('copy-to-clipboard', () => ({ default: (...args) => copyToClipboard(...args) }));
 vi.mock('icons/docs/sidebar/ai-agent.inline.svg', () => ({
   default: (props) => <svg {...props} />,
 }));
+vi.mock('icons/docs/providers/claude.inline.svg', () => ({
+  default: (props) => <svg data-testid="mark-claude" {...props} />,
+}));
+vi.mock('icons/docs/providers/openai.inline.svg', () => ({
+  default: (props) => <svg data-testid="mark-openai" {...props} />,
+}));
+vi.mock('icons/docs/providers/cursor.inline.svg', () => ({
+  default: (props) => <svg data-testid="mark-cursor" {...props} />,
+}));
 vi.mock('icons/home/copied.inline.svg', () => ({
   default: (props) => <svg data-testid="copied-icon" {...props} />,
-}));
-vi.mock('icons/home/copy.inline.svg', () => ({
-  default: (props) => <svg data-testid="copy-icon" {...props} />,
 }));
 
 const agentSetupModal = MODALS.find((modal) => modal.id === 'docs-agent-setup');
@@ -27,7 +32,8 @@ describe('docs agent-setup modal entry', () => {
   beforeEach(() => {
     window.localStorage.clear();
     sendGtagEvent.mockClear();
-    copyToClipboard.mockClear();
+    writeText = vi.fn().mockResolvedValue(undefined);
+    Object.defineProperty(navigator, 'clipboard', { configurable: true, value: { writeText } });
     // Expanded (not minimized) state so the copy button and link both render.
     vi.spyOn(window, 'matchMedia').mockReturnValue({ matches: false, addEventListener: vi.fn() });
   });
@@ -48,17 +54,21 @@ describe('docs agent-setup modal entry', () => {
   it('copies the base prompt as plain text and reports the copy analytics event', async () => {
     render(<Modal {...agentSetupModal} />);
 
-    // The whole field is the copy target; the control is icon-only (aria-label on the field).
+    // The vendor-mark cluster is the pre-copy affordance on the field.
+    expect(await screen.findByTestId('mark-claude')).toBeInTheDocument();
+
+    // The whole field is the copy target; the control is label-only (aria-label on the field).
     fireEvent.click(await screen.findByRole('button', { name: 'Copy agent setup prompt' }));
 
-    expect(copyToClipboard).toHaveBeenCalledWith(BASE_AGENT_PROMPT);
-    expect(typeof copyToClipboard.mock.calls[0][0]).toBe('string');
+    expect(writeText).toHaveBeenCalledWith(BASE_AGENT_PROMPT);
+    expect(typeof writeText.mock.calls[0][0]).toBe('string');
+    // Success state swaps the marks for the green check icon.
+    expect(await screen.findByTestId('copied-icon')).toBeInTheDocument();
+    // The analytics callback fires after the copy resolves.
     expect(sendGtagEvent).toHaveBeenCalledWith('Action Clicked', {
       text: 'Agent setup',
       tag_name: 'DocsAgentSetupPopup',
     });
-    // Success state swaps the copy icon for the green check icon.
-    expect(await screen.findByTestId('copied-icon')).toBeInTheDocument();
   });
 
   it('links to the agents page and fires the shared modal-link analytics event', async () => {
