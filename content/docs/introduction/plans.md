@@ -24,7 +24,7 @@ redirectFrom:
   - /docs/introduction/limits
   - /docs/introduction/pricing-estimation-guide
   - /docs/introduction/billing-sample
-updatedOn: '2026-10-23T18:34:18.407Z'
+updatedOn: '2026-11-04T20:10:08.844Z'
 ---
 
 Neon offers plans to support you at every stage, from your first prototype to production at scale.
@@ -54,7 +54,7 @@ For AI agent platforms that provision thousands of databases, Neon offers an **A
 | [Monitoring](#monitoring)                             | 1 day                                                              | 3 days                                     | 14 days                                                                                           |
 | [Metrics/logs export](#metricslogs-export)            | Not available                                                      | Not available                              | ✅                                                                                                |
 | [Spending notifications](#spending-notifications)     | Not available                                                      | ✅                                         | ✅                                                                                                |
-| [Instant restore](#instant-restore)                   | Not available                                                      | $0.20/GB-month                             | $0.20/GB-month                                                                                    |
+| [Instant restore](#instant-restore)                   | No charge, up to 6 hours                                           | $0.20/GB-month                             | $0.20/GB-month                                                                                    |
 | [History window](#history-window)                     | 6 hours, up to 1 GB of changes                                     | Up to 7 days                               | Up to 30 days                                                                                     |
 | [Snapshots](#snapshots)                               | 1 manual snapshot                                                  | 100 manual snapshots, $0.09/GB-month       | 100 manual snapshots, $0.09/GB-month                                                              |
 | [Auth](#auth)                                         | Up to 60k MAU/project                                              | Up to 1M MAU/project                       | Up to 1M MAU/project                                                                              |
@@ -119,7 +119,7 @@ Postgres objects (databases, schemas, tables, records, indexes, roles) are creat
 
 You can create [child branches](/docs/reference/glossary#child-branch) for testing, previews, or development.
 
-Included per plan:
+Included per plan, counting the root branch:
 
 - **Free**: 10 branches/project
 - **Launch**: 10 branches/project
