@@ -23,12 +23,25 @@ Organizations managed through the [Vercel-managed integration](/docs/guides/verc
 
 To create a new org, use the **Create organization** button in the profile menu in the top-right of the console.
 
-
 Select a plan for your new organization. Organizations can be free or paid; if you choose a paid plan, you'll enter billing details.
 
 ![create organization with billing](/docs/manage/orgs_create_with_billing.png)
 
 After confirming, you'll be directed to your new organization's **Projects** page, where you can get started creating projects and inviting [members](/docs/manage/orgs-manage#invite-members).
+
+## Switch organizations
+
+If you belong to more than one organization, use the org switcher in the profile menu to change which one you're working in.
+
+1. Click your name in the top-right corner of the Console to open the profile menu.
+1. Under **Organization**, click the name of your current organization. A list of every organization you belong to opens, with a check mark next to the active one.
+1. Select the organization you want to work in. If you belong to many organizations, type in **Search organizations** to filter the list.
+
+The Console opens that organization's projects, and the rest of the Console now applies to the organization you selected.
+
+![org switcher in the Neon Console profile menu](/docs/manage/orgs_switch.png)
+
+If someone has shared a project with you through [project sharing](#project-sharing), select **Projects shared with me** in the switcher to see those projects.
 
 ## Invite members
 

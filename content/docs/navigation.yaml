@@ -1596,8 +1596,6 @@
               items:
                 - title: Airbyte
                   slug: guides/logical-replication-airbyte
-                - title: Bemi
-                  slug: guides/bemi
                 - title: ClickHouse
                   slug: guides/logical-replication-clickhouse
                 - title: Confluent
@@ -1606,7 +1604,7 @@
                   slug: guides/logical-replication-databricks
                 - title: Decodable
                   slug: guides/logical-replication-decodable
-                - title: Estuary Flow
+                - title: Estuary
                   slug: guides/logical-replication-estuary-flow
                 - title: Fivetran
                   slug: guides/logical-replication-fivetran
@@ -1620,8 +1618,6 @@
                   slug: guides/logical-replication-neon-to-neon
                 - title: Postgres
                   slug: guides/logical-replication-postgres
-                - title: Sequin
-                  slug: guides/sequin
                 - title: Snowflake
                   slug: guides/logical-replication-airbyte-snowflake
                 - title: Stacksync

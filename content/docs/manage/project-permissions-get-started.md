@@ -93,7 +93,7 @@ In the Neon Console, open your organization's **People** page and select **Invit
 
 To change someone already in the organization, open the more options menu (⋮) next to their name and choose **Edit member**.
 
-Invited people get an email, and the organization appears in their organization switcher once they accept. For what each role allows, see [Organization roles](/docs/manage/user-permissions#organization-roles).
+Invited people get an email, and the organization appears in their [org switcher](/docs/manage/orgs-manage#switch-organizations) once they accept. For what each role allows, see [Organization roles](/docs/manage/user-permissions#organization-roles).
 
 ![Invite members dialog with a role dropdown for each invitee](/docs/manage/project-permissions-get-started/invite-members.png 'no-border')
 

@@ -61,9 +61,12 @@ Based on the user's choice, run the appropriate installation command:
 1.  Check for a `.env` file at the root of the project. If it does not exist, create it.
 2.  Advise the user to add their Neon database connection string to the `.env` file. Provide the following format and instruct the user to replace the placeholders.
     ```env
-    # Get your connection string from the Neon Console:
-    # Project -> Dashboard -> Connect
-    DATABASE_URL="postgresql://[user]:[password]@[neon_hostname]/[dbname]?sslmode=require&channel_binding=require"
+    # Get both connection strings from the Neon Console: click Connect in the Console nav
+    # Pooled connection for the application (hostname includes -pooler)
+    DATABASE_URL="postgresql://[user]:[password]@[endpoint]-pooler.[region].aws.neon.tech/[dbname]?sslmode=require&channel_binding=require"
+
+    # Direct (unpooled) connection for Drizzle Kit migrations (same hostname without -pooler)
+    DATABASE_URL_UNPOOLED="postgresql://[user]:[password]@[endpoint].[region].aws.neon.tech/[dbname]?sslmode=require&channel_binding=require"
     ```
 
 ### 5. Create Drizzle Configuration
@@ -74,8 +77,8 @@ Create a `drizzle.config.ts` file in the project root. This file is the same for
 import 'dotenv/config';
 import { defineConfig } from "drizzle-kit";
 
-if (!process.env.DATABASE_URL) {
-  throw new Error('DATABASE_URL is not set in .env file');
+if (!process.env.DATABASE_URL_UNPOOLED) {
+  throw new Error('DATABASE_URL_UNPOOLED is not set in .env file');
 }
 
 export default defineConfig({
@@ -83,7 +86,7 @@ export default defineConfig({
   out: "./drizzle",
   dialect: "postgresql",
   dbCredentials: {
-    url: process.env.DATABASE_URL,
+    url: process.env.DATABASE_URL_UNPOOLED,
   }
 });
 ```
@@ -268,7 +271,7 @@ Once the setup is complete:
 Before suggesting code or making edits, ensure:
 - The user's choice of driver adapter is respected throughout the setup.
 - The project's detected package manager is used for all commands.
-- The `drizzle.config.ts` file is correctly configured.
+- The `drizzle.config.ts` file uses `DATABASE_URL_UNPOOLED` (the direct connection), and `src/db.ts` uses `DATABASE_URL` (the pooled connection).
 - The `src/db.ts` file uses the correct Drizzle adapter (`neon-http`, `neon-serverless`, or `node-postgres`) and underlying driver (`@neondatabase/serverless` or `pg`) based on the selection.
 - **If the Neon WebSocket driver is chosen,** ensure `ws` is a dependency and `neonConfig.webSocketConstructor = ws;` is present.
 - **If a connection pool is created (`node-postgres` or WebSocket),** ensure it is exported from `src/db.ts` and the `finally` block in `src/index.ts` correctly closes it.

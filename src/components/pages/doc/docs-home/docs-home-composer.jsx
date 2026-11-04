@@ -8,6 +8,7 @@ import useCopyPrompt from 'hooks/use-copy-prompt';
 import CopiedIcon from 'icons/home/copied.inline.svg';
 import CopyIcon from 'icons/home/copy.inline.svg';
 import { cn } from 'utils/cn';
+import sendGtagEvent from 'utils/send-gtag-event';
 
 import { strongBorder } from './docs-home-tokens';
 
@@ -42,6 +43,16 @@ const DocsHomeComposer = () => {
   const activeText = agent ? BASE_AGENT_PROMPT : CLI_TEXT;
   const tabId = (id) => `${idPrefix}-tab-${id}`;
   const panelId = `${idPrefix}-panel`;
+
+  // The agent tab reuses the 'Agent setup' label sent by the docs title-row
+  // button and the popup, so all agent-prompt copies can be counted together.
+  const handleCopyClick = () => {
+    copy(activeText);
+    sendGtagEvent('Action Clicked', {
+      text: agent ? 'Agent setup' : 'CLI setup',
+      tag_name: 'DocsHomeComposer',
+    });
+  };
 
   // WAI-ARIA tabs keyboard pattern: arrows move between tabs (wrapping),
   // Home/End jump to the first/last, and focus follows the selection.
@@ -114,7 +125,7 @@ const DocsHomeComposer = () => {
             prompt), so it keeps the plain copy icon and "Copy" with no marks. */}
         <button
           type="button"
-          onClick={() => copy(activeText)}
+          onClick={handleCopyClick}
           className={cn(
             'mt-3.5 flex h-9 shrink-0 items-center gap-2.5 rounded-full pr-4 pl-3 text-[15px] leading-none font-medium tracking-normal transition-colors duration-200',
             isCopied

@@ -99,7 +99,7 @@ Or install it from the command line with [`npx neon@latest plugins --agent claud
 
 ### Codex plugin
 
-If you're using OpenAI Codex, install the **Neon** plugin from the [Codex plugin directory](https://developers.openai.com/codex/plugins/) (in the Codex app under **Plugins**, or in the Codex CLI with `/plugins`). It includes the Neon app (MCP), the main Neon skill, and the egress optimizer skill.
+If you're using OpenAI Codex, install the **Neon** plugin from the [Codex plugin directory](https://developers.openai.com/codex/plugins/) (in the Codex app under **Plugins**, or in the Codex CLI with `/plugins`). It includes the Neon app (MCP) and the Neon agent skills.
 
 To install from the command line instead, run [`npx neon@latest plugins --agent codex`](/docs/cli/plugins). See [Codex plugin for Neon](/docs/ai/ai-codex-plugin) for details.
 
