@@ -67,7 +67,8 @@ const MODALS = [
   {
     id: 'docs-agent-setup',
     title: 'Set up your agent',
-    description: 'Takes 2 minutes. Users who do it get to production 3x faster.',
+    description:
+      'Neon users who install MCP and skills get to production 3x faster. It only takes 2 minutes!',
     targeting: { all: true },
     copyPrompt: BASE_AGENT_PROMPT,
     experiment: {
