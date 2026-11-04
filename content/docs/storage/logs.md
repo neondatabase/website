@@ -7,7 +7,7 @@ summary: >-
   levels derived from HTTP status. Covers scope_name values and common
   patterns that look like a problem but aren't.
 enableTableOfContents: true
-updatedOn: '2026-10-21T20:35:39.000Z'
+updatedOn: '2026-11-04T16:47:40.419Z'
 ---
 
 Every S3 request against a bucket streams a log line to the Neon Console. So does any bucket or object change made through the Console or Neon API (creating a bucket, deleting a bucket, deleting an object or prefix):
@@ -27,11 +27,13 @@ body: {
 }
 ```
 
+Two kinds of requests don't appear. S3 requests rejected before they reach your branch aren't logged: an invalid signature, or a credential without access to this branch or without the storage scope the operation needs. Reads through the Console or Neon API, such as downloading an object, aren't logged either; only changes are.
+
 ## View logs
 
 Bucket logs live on the branch's [Monitoring page, in the **Storage** tab](/docs/introduction/monitor-logs). To jump straight to one bucket's logs, open the bucket list, open that bucket's menu, and select **View logs**. Or go to **Monitoring** and open the **Storage** tab to see every bucket's logs together.
 
-Expand a row to see its full context: `timestamp`, `severity`, `entity_type` (`storage`), `scope_name`, and `service_name` (`neon-storage/<bucket>`). The message body carries per-request detail: `operation` (the HTTP method), `object_key`, `http_status`, `bytes`, `duration_ms`, `request_id`, and `remote_ip`. `access_key_id` is included for authenticated requests and omitted entirely for anonymous reads against a `public_read` bucket, which is expected, not a sign of broken auth.
+Expand a row to see its full context: `timestamp`, `severity`, `entity_type` (`storage`), `scope_name`, and `service_name` (`neon-storage/<bucket>`). The message body carries per-request detail: `operation` (the HTTP method), `object_key`, `http_status`, `bytes`, `duration_ms`, `request_id`, and `remote_ip`. The access key ID that made the request isn't shown in the Console or returned by `neon logs`.
 
 `scope_name` identifies what generated the line:
 
