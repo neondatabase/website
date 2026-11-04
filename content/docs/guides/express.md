@@ -145,14 +145,15 @@ app.listen(PORT, () => {
 ```
 
 <Admonition type="note">
-Recent versions of `pg` print a warning that `sslmode=require` will be treated as `verify-full` in a future major version, which has weaker security guarantees than the current behavior. If you see this warning, either add `uselibpqcompat=true` to your connection string to keep the current behavior, or use `sslmode=verify-full` directly. See the [pg-connection-string documentation](https://www.postgresql.org/docs/current/libpq-ssl.html) for details on libpq SSL mode definitions.
+`pg` 8.23 and later print a `SECURITY WARNING` when a connection string uses `sslmode=require`. To keep the current behavior and remove the warning, change `sslmode=require` to `sslmode=verify-full` in your connection string. For SSL mode definitions, see [SSL support](https://www.postgresql.org/docs/current/libpq-ssl.html) in the Postgres documentation.
 </Admonition>
 
 ```javascript
 require('dotenv').config();
 
 const express = require('express');
-const postgres = require('postgres');
+// postgres.js 4 and later is ESM-only; .default returns the postgres function
+const postgres = require('postgres').default;
 
 const app = express();
 const PORT = process.env.PORT || 4242;
