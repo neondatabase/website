@@ -36,7 +36,7 @@ With the registry, your agent starts from a working template and spends its time
 
 ## Templates worth trying
 
-Here is a small collection of some of my favorite templates, built with [Vercel's Chat SDK](https://chat-sdk.dev/), [Mastra](https://mastra.ai/), [Context.dev](https://www.context.dev/), [WorkOS](https://workos.com/) and [AI Inbx](https://aiinbx.com/):
+Here is a small collection of some of my favorite templates, built with [Vercel's Chat SDK](https://chat-sdk.dev/), [Mastra](https://mastra.ai/), [Context.dev](https://www.context.dev/) and [WorkOS](https://workos.com/):
 
 <FunctionRegistryShowcase />
 

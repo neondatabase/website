@@ -2,7 +2,7 @@ import FunctionRegistryTemplateCard from 'components/pages/functions/templates/r
 import LINKS from 'constants/links';
 import { getFunctionRegistryCatalog, registryTemplatePageHref } from 'utils/function-registry';
 
-const SHOWCASE_IDS = ['chat-sdk', 'mastra', 'context-dev', 'workos-sync', 'aiinbx'];
+const SHOWCASE_IDS = ['chat-sdk', 'mastra', 'context-dev', 'workos-sync'];
 
 const pickShowcaseTemplates = (templates) => {
   const byId = new Map(templates.map((template) => [template.id, template]));
