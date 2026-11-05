@@ -1,6 +1,6 @@
 ---
-title: Connect from Drizzle to Neon
-subtitle: Learn how to connect to Neon from Drizzle
+title: Connect Drizzle to Postgres on Neon
+subtitle: Set up Drizzle ORM and Drizzle Kit against a Neon database. Start with your agent; the full walkthrough follows.
 summary: >-
   Drizzle ORM connection guide for Lakebase Postgres on Neon walks through initializing a
   TypeScript/Node.js project with supported drivers: Neon serverless HTTP, Neon
@@ -11,66 +11,63 @@ summary: >-
   environment by selecting a connection string based on NODE_ENV.
 enableTableOfContents: true
 agentPrompt: 'I want to use Drizzle ORM with it.'
-layout: wide
-updatedOn: '2026-11-05T23:06:27.120Z'
+updatedOn: '2026-11-05T23:44:55.916Z'
 ---
 
-Drizzle is a TypeScript ORM with type-safe queries. Set up your agent once, point it at your app, then copy a prompt for whatever you want to build on Neon with Drizzle. Prefer to do it by hand? The [full walkthrough](#full-setup-step-by-step) is further down.
+[comment]: <> (Agent-first quickstart prototype. The agent flow below uses the AgentPromptList and CopyLine components; the walkthrough further down is the existing guide, with its numerals restyled as outlined via a page-scoped wrapper.)
 
-[comment]: <> (Prototype TODO: the Drizzle agent-skill install commands in public/prompts/drizzle-agent-setup.md are release-candidate per orm.drizzle.team/docs/drizzle-kit-skills and should be re-verified against that page before publishing.)
+<div className="not-prose my-8 grid grid-cols-[28px_1fr] gap-x-5 gap-y-8">
 
-<Steps>
+<div className="flex size-7 items-center justify-center rounded-full bg-black-new text-[13px] font-semibold text-white dark:bg-white dark:text-black-pure">1</div>
 
-## Set up your agent for your project
-
-<div className="not-prose grid grid-cols-2 gap-4 lg:grid-cols-1 [&_figure]:my-0!">
-
-<CopyPrompt src="/prompts/neon-setup.md" description="Set up your project for Neon" buttonText="Copy prompt" />
-
-<CopyPrompt src="/prompts/drizzle-agent-setup.md" description="Install the Drizzle agent skill" buttonText="Copy prompt" />
-
+<div>
+<p className="m-0 mb-2 text-xl font-semibold tracking-tight text-black-pure dark:text-white">Give your agent the Neon skill</p>
+<p className="m-0 text-[15px] leading-relaxed text-gray-new-30 dark:text-gray-new-70">One command installs the <code className="rounded-[4px] border border-gray-new-80 bg-gray-new-94 px-1 py-0.5 font-mono text-[13px] dark:border-gray-new-30 dark:bg-gray-new-15">neon-postgres</code> skill for Cursor, Claude Code, Codex, or Windsurf.</p>
+<CopyLine text="npx skills add neondatabase/agent-skills -s neon-postgres -y" />
 </div>
 
-## Tell your agent about your app
+<div className="flex size-7 items-center justify-center rounded-full bg-black-new text-[13px] font-semibold text-white dark:bg-white dark:text-black-pure">2</div>
 
-<div className="not-prose max-w-2xl [&_figure]:my-0!">
-
-<CopyPrompt src="/prompts/drizzle-discovery.md" description="Inspect your app, then wire up Drizzle and the Neon services it needs" buttonText="Copy prompt" />
-
+<div>
+<p className="m-0 mb-2 text-xl font-semibold tracking-tight text-black-pure dark:text-white">Tell it about your project</p>
+<p className="m-0 text-[15px] leading-relaxed text-gray-new-30 dark:text-gray-new-70">The agent inspects the repo, creates or links a Neon project, and wires Drizzle to it.</p>
+<CopyLine multiline text="Set up Drizzle with Neon in this project. Create a Neon project if I don't have one, add the connection string to .env, and configure drizzle.config.ts." src="/prompts/drizzle-discovery.md" />
 </div>
 
-## Do more with Neon
+<div className="flex size-7 items-center justify-center rounded-full bg-black-new text-[13px] font-semibold text-white dark:bg-white dark:text-black-pure">3</div>
 
-<div className="not-prose grid grid-cols-2 gap-4 lg:grid-cols-1 [&_figure]:my-0!">
-
-<div className="flex flex-col gap-4">
-<p className="m-0 text-sm font-semibold tracking-tight text-gray-new-30 dark:text-gray-new-70">Drizzle with Neon</p>
-<CopyPrompt src="/prompts/drizzle-migration.md" description="Generate a Drizzle migration" buttonText="Copy prompt" />
-<CopyPrompt src="/prompts/drizzle-pooled-direct.md" description="Use the right connection URL" buttonText="Copy prompt" />
-<CopyPrompt src="/prompts/drizzle-serverless-http.md" description="Switch to the serverless driver" buttonText="Copy prompt" />
-<CopyPrompt src="/prompts/drizzle-search.md" description="Add Lakebase Search" buttonText="Copy prompt" />
-</div>
-
-<div className="flex flex-col gap-4">
-<p className="m-0 text-sm font-semibold tracking-tight text-gray-new-30 dark:text-gray-new-70">Neon branching</p>
-<CopyPrompt src="/prompts/drizzle-branch-per-pr.md" description="Branch per pull request" buttonText="Copy prompt" />
-<CopyPrompt src="/prompts/drizzle-schema-only-branch.md" description="Schema-only branch" buttonText="Copy prompt" />
-<CopyPrompt src="/prompts/drizzle-reset-from-parent.md" description="Reset from parent" buttonText="Copy prompt" />
-<CopyPrompt src="/prompts/drizzle-instant-restore.md" description="Instant restore" buttonText="Copy prompt" />
+<div>
+<p className="m-0 mb-2 text-xl font-semibold tracking-tight text-black-pure dark:text-white">Keep going</p>
+<p className="m-0 text-[15px] leading-relaxed text-gray-new-30 dark:text-gray-new-70">Each prompt is a complete task. Copy one and paste it into your agent.</p>
+<AgentPromptList
+  items={[
+    { title: 'Generate a migration', text: 'Generate and apply a Drizzle Kit migration from my schema to Neon. Review the SQL before applying.', src: '/prompts/drizzle-migration.md' },
+    { title: 'Pooled vs direct URL', text: 'Use the direct Neon URL for Drizzle Kit migrations and the pooled URL for the app runtime. Update .env and drizzle.config.ts.', src: '/prompts/drizzle-pooled-direct.md' },
+    { title: 'Serverless HTTP driver', text: "Switch this project's Drizzle client to the Neon serverless HTTP driver so it works in edge and serverless runtimes.", src: '/prompts/drizzle-serverless-http.md' },
+    { title: 'Branch per pull request', text: 'Create a Neon branch for this pull request, run my Drizzle migrations against it, and tear it down when the PR closes.', src: '/prompts/drizzle-branch-per-pr.md' },
+    { title: 'Schema-only branch', text: 'Create a schema-only Neon branch so I can test a migration against the real table structure without copying data.', src: '/prompts/drizzle-schema-only-branch.md' },
+    { title: 'Reset from parent', text: 'Reset my development branch from its parent so I can re-run migrations against a clean, parent-aligned state.', src: '/prompts/drizzle-reset-from-parent.md' },
+  ]}
+/>
 </div>
 
 </div>
 
-</Steps>
+<div className="not-prose my-14 flex items-center gap-3.5">
+<span className="h-px flex-1 bg-gray-new-80 dark:bg-gray-new-20" />
+<span className="font-mono text-[11px] font-medium tracking-[0.08em] whitespace-nowrap text-gray-new-50 uppercase dark:text-gray-new-60">Prompts end · Code begins</span>
+<span className="h-px flex-1 bg-gray-new-80 dark:bg-gray-new-20" />
+</div>
+
+<div className="[&_.numbered-step]:before:border [&_.numbered-step]:before:border-gray-new-50 [&_.numbered-step]:before:bg-transparent! [&_.numbered-step]:before:text-gray-new-40! dark:[&_.numbered-step]:before:border-gray-new-30 dark:[&_.numbered-step]:before:bg-transparent! dark:[&_.numbered-step]:before:text-gray-new-70!">
 
 ## Full setup, step by step
+
+The same setup the agent runs, written out. Read it to understand what changed, or follow it yourself.
 
 <Callout title="Realtime with Drizzle">
 See how to subscribe to live SQL queries with [Neon Realtime + Drizzle](/docs/realtime/examples/drizzle)
 </Callout>
-
-<CopyPrompt src="/prompts/drizzle-prompt.md" 
-description="Pre-built prompt for connecting Node/TypeScript applications to Neon using Drizzle ORM."/>
 
 <InfoBlock>
 <DocsList title="What you will learn:">
@@ -459,5 +456,7 @@ Each branch has its own connection string, available in the Neon Console or via 
 - [Deploy a Function](/docs/compute/functions/overview): Run backend compute next to your database, no separate hosting needed
 - [Call an LLM with AI Gateway](/docs/ai-gateway/overview): Access foundation models from Anthropic, OpenAI, Google, and more with one credential
 - [Realtime](/docs/realtime/examples/drizzle): Build realtime Drizzle apps on Neon using your existing schema and queries
+
+</div>
 
 <NeedHelp/>
