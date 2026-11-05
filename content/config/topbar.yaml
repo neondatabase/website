@@ -1,4 +1,4 @@
-text: 'Managed Better Auth is now an OAuth provider, with MCP support'
+text: "How Kylon's agents build on Neon: each workspace is a Neon project, each draft is a branch"
 link:
-  url: 'https://neon.com/blog/managed-better-auth-oauth-provider-mcp'
+  url: 'https://neon.com/blog/inside-a-kylon-room-where-people-and-agents-build-apps-on-neon'
   target: '_blank'
