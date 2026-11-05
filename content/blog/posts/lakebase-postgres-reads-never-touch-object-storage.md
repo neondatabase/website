@@ -143,7 +143,7 @@ This sounds like a lot of work, but it is not so much in practice. Here's data t
 - **p90 stayed under 1 delta per** `GetPage`**.** This means most requests are served straight from an image, with no replay at all
 - **p99 was around 6.** This dropped to that level after we rolled out a change that creates base pages (images) more eagerly. With images closer to the LSNs that reads ask for, fewer reads have a long chain of WAL to replay.
 
-**[ADD IMAGE 2]**
+**[ADD IMAGE 3]**
 
 ## The least frequent path: misses that reach object storage
 
