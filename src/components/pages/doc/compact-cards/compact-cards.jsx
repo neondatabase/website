@@ -234,7 +234,7 @@ const CompactCard = ({
           aria-hidden
         />
         <Link
-          className={cn(sharedClassName, 'pr-[72px]')}
+          className={cn(sharedClassName, 'pr-10')}
           href={href}
           onClick={() => sendGtagEvent('Card Clicked', { text: `Compact card link - ${title}` })}
         >

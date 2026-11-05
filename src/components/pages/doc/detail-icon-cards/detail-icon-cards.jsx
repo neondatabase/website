@@ -340,7 +340,7 @@ const DetailIconCards = ({
                 <span
                   className={cn(
                     'mb-0 flex shrink-0 items-center gap-2.5 text-green-44 dark:text-green-52',
-                    hasCopyPrompt && 'pr-20'
+                    hasCopyPrompt && 'pr-10'
                   )}
                 >
                   <Icon
