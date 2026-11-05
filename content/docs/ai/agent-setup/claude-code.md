@@ -20,7 +20,7 @@ The Neon plugin gives [Claude Code](https://docs.anthropic.com/en/docs/claude-co
 Run:
 
 ```bash
-npx neon@latest plugins --agent claude-code --global
+npx neon@latest plugins --agent claude-code
 ```
 
 This installs the plugin at user level, for all your projects. See [`neon plugins`](/docs/cli/plugins) for all options.

@@ -161,9 +161,9 @@ neon init -y --claimable --agent cursor
 Installing the Neon plugin...
 Installing the Neon plugin for Cursor (1/1)...
 Plugins
-Scope    Plugin         Agent   Status
-project  neon-postgres  cursor  installed
-Installed the Neon plugin (project).
+Scope  Plugin         Agent   Status
+user   neon-postgres  cursor  installed
+Installed the Neon plugin (user).
 Creating a claimable project...
 Project ID            sweet-breeze-12345678
 Branch ID             br-restless-wildflower-a1b2c3d4
