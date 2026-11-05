@@ -74,12 +74,24 @@ You can inspect and manually edit the generated schema before applying. See the 
 - **`_creationTime`** becomes `created_at timestamptz`.
 - **Numbers.** `v.number()` becomes `double precision`, including counters and epoch-millisecond times. `v.int64()` becomes `bigint`, which reaches the browser as a string unless you add a parser.
 - **Constraints.** Convex indexes aren't unique, so the tool doesn't add `UNIQUE` constraints. Add them for keys your code kept unique (`ON CONFLICT` needs one). Foreign keys are `DEFERRABLE INITIALLY DEFERRED` with no `ON DELETE` action, so deleting a parent that has children now fails where Convex left dangling references. Add `ON DELETE CASCADE` where your code deleted the children.
-- **Search indexes.** Each `searchIndex` becomes a generated `tsvector` column, such as `title_tsv` for `title`, with a GIN index (`events_title_gin`). `--search-index bm25` builds `lakebase_bm25` indexes instead.
+- **Search indexes.** Each `searchIndex` becomes a generated `tsvector` column, such as `title_tsv` for `title`, with a Lakebase BM25 index (`events_title_bm25`). `--search-index gin` builds a stock Postgres GIN index (`events_title_gin`) instead, which runs on any Postgres.
 - **Vector indexes.** Each `vectorIndex` becomes a `lakebase_ann` index.
 - **System tables.** References to `_scheduled_functions` or `_storage` become plain uuid columns. Drop or replace them.
-- **Convex Auth tables** are imported too, including password hashes. See [Migrate auth providers](#migrate-auth-providers).
+- **Convex Auth tables** are imported, including password hashes and session tokens, unless you pass `--skip-auth-tables`. See [Migrate auth providers](#migrate-auth-providers).
 
-Search the generated column with `@@` and rank with `ts_rank`, both live:
+Rank the generated column against its BM25 index with `<@>`, live:
+
+```sql
+SELECT id, title,
+  title_tsv <@> to_bm25query(to_tsvector('english', $1), 'events_title_bm25') AS score
+FROM events
+ORDER BY score
+LIMIT 20
+```
+
+`<@>` returns the negated BM25 score, so the best match sorts first. Rows that don't match score `0` and can still come back last, so skip them when you show results.
+
+With `--search-index gin`, filter with `@@` and rank with `ts_rank` instead:
 
 ```sql
 SELECT id, title, ts_rank(title_tsv, websearch_to_tsquery('english', $1)) AS rank
@@ -89,7 +101,7 @@ ORDER BY rank DESC, id
 LIMIT 20
 ```
 
-Always pass the text search configuration (`'english'`, unless you passed `--search-language`). The one-argument forms of `websearch_to_tsquery()` and `to_tsquery()` depend on a setting, so they aren't `IMMUTABLE`, and live queries reject them.
+Always pass the text search configuration (`'english'`, unless you passed `--search-language`). The one-argument forms of `to_tsvector()`, `websearch_to_tsquery()` and `to_tsquery()` depend on a setting, so they aren't `IMMUTABLE`, and live queries reject them.
 
 </details>
 
@@ -924,7 +936,7 @@ The sealed query replaces `query` and `queryArgs`. Your server builds it with th
 | An `action` that streams an LLM reply | A job that writes the reply into its row as tokens arrive                                                                                                   | Call the model through the [AI Gateway](/docs/ai-gateway/overview). See [Streaming into rows](#streaming-into-rows)                            |
 | `httpAction` / `http.ts`              | A route on your server                                                                                                                                      | Ids change with the default id strategy, so external links and webhooks that stored a Convex id stop matching. `--id-strategy text` keeps them |
 | `usePaginatedQuery`                   | A live query with a growing `LIMIT`                                                                                                                         | On "load more", seal the query again with a larger `LIMIT`                                                                                     |
-| `withSearchIndex`                     | A `tsvector` column with a GIN index, queried with `@@`                                                                                                     | The tool's default                                                                                                                             |
+| `withSearchIndex`                     | A `tsvector` column with a [Lakebase Search](/docs/ai/lakebase-search) BM25 index, ranked with `<@>` and `to_bm25query()`                                   | The tool's default                                                                                                                             |
 | `.vectorSearch`                       | [`pgvector`](/docs/extensions/pgvector) or [Lakebase Search](/docs/ai/lakebase-search)                                                                      |                                                                                                                                                |
 | `ctx.storage`                         | [Neon Object Storage](/docs/storage/overview)                                                                                                               |                                                                                                                                                |
 | Code inside a `query` handler         | SQL in the live query, or code on the client                                                                                                                | Compute what SQL can't from the live rows, for example in a `useMemo`                                                                          |
