@@ -15,7 +15,7 @@ categories:
 authors:
   - carlota-soto
 cover:
-  image: https://cdn.neonapi.io/public/images/pages/blog/lakebase-postgres-reads-never-touch-object-storage/cover.jpg
+  image: https://cdn.neonapi.io/public/images/pages/blog/lakebase-postgres-reads-never-touch-object-storage/cover-1.jpg
   alt: Lakebase Postgres is built on object storage, but 99.99999% of reads never touch it
 isFeatured: false
 seo:
@@ -29,7 +29,7 @@ seo:
   ogDescription: >-
     The lakebase architecture prioritizes performance, serving the vast majority
     of page reads from the compute node's local cache
-  image: https://cdn.neonapi.io/public/images/pages/blog/lakebase-postgres-reads-never-touch-object-storage/social.jpg
+  image: https://cdn.neonapi.io/public/images/pages/blog/lakebase-postgres-reads-never-touch-object-storage/social-1.jpg
 ---
 
 <video autoPlay muted loop playsInline width="708" height="487" aria-label="Lakebase Postgres reads">
