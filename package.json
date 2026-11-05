@@ -89,7 +89,7 @@
     "framer-motion": "^12.36.0",
     "fuse.js": "^7.3.0",
     "geist": "^1.5.1",
-    "glob": "^10.5.0",
+    "glob": "^14.0.2",
     "gray-matter": "^4.0.3",
     "hast-util-to-jsx-runtime": "^2.3.6",
     "he": "^1.2.0",
