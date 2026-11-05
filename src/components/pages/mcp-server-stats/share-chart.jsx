@@ -3,7 +3,6 @@
 import {
   Chart as ChartJS,
   CategoryScale,
-  Filler,
   Legend,
   LinearScale,
   LineElement,
@@ -15,7 +14,7 @@ import { Line } from 'react-chartjs-2';
 
 import { formatWeekShort } from './weeks';
 
-ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Filler, Tooltip, Legend);
+ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Tooltip, Legend);
 
 const AXIS_COLOR = '#797d86';
 const GRID_COLOR = 'rgba(255, 255, 255, 0.08)';
@@ -27,12 +26,11 @@ const ShareChart = ({ weeks, series }) => {
       label,
       data: values,
       borderColor: color,
-      backgroundColor: `${color}cc`,
-      borderWidth: 1,
+      backgroundColor: color,
+      borderWidth: 2,
       pointRadius: 0,
-      pointHoverRadius: 3,
-      fill: true,
-      tension: 0.25,
+      pointHoverRadius: 4,
+      tension: 0.3,
     })),
   };
 
@@ -47,12 +45,10 @@ const ShareChart = ({ weeks, series }) => {
         ticks: { color: AXIS_COLOR, maxRotation: 0, autoSkipPadding: 16 },
       },
       y: {
-        stacked: true,
         min: 0,
-        max: 100,
         grid: { color: GRID_COLOR },
         border: { display: false },
-        ticks: { color: AXIS_COLOR, stepSize: 25, callback: (value) => `${value}%` },
+        ticks: { color: AXIS_COLOR, callback: (value) => `${value}%` },
       },
     },
     plugins: {
@@ -75,7 +71,7 @@ const ShareChart = ({ weeks, series }) => {
       <Line
         data={data}
         options={options}
-        aria-label="Weekly share of Neon MCP server sessions by client"
+        aria-label="Weekly share of active Neon MCP server users by client"
         role="img"
       />
     </div>

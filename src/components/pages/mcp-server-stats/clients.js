@@ -1,37 +1,22 @@
-export const CLIENT_LABELS = {
-  chatgpt: 'ChatGPT',
-  'claude-code': 'Claude Code',
-  'claude-desktop': 'Claude Desktop',
-  codex: 'Codex',
-  cursor: 'Cursor',
-  v0: 'v0',
-  perplexity: 'Perplexity',
-  opencode: 'OpenCode',
-  devin: 'Devin',
-  replit: 'Replit',
-  manus: 'Manus',
-  grok: 'Grok',
-  other: 'Other',
+// Products from the same company share a hue.
+export const CLIENTS = {
+  codex: { label: 'Codex', color: '#4C97FF' },
+  chatgpt: { label: 'ChatGPT', color: '#9BC2FF' },
+  'claude-code': { label: 'Claude Code', color: '#F0A04B' },
+  'claude-desktop': { label: 'Claude Desktop', color: '#F5C78E' },
+  cursor: { label: 'Cursor', color: '#B57EDC' },
+  v0: { label: 'v0', color: '#00E599' },
+  replit: { label: 'Replit', color: '#FF6B6B' },
+  opencode: { label: 'OpenCode', color: '#3DD6D0' },
+  'custom-code': { label: 'Custom code', color: '#E5D55B' },
+  other: { label: 'Other', color: '#5E6066' },
 };
 
-// Clients that never reach this share in any week are drawn as part of Other in
-// the chart; the table still lists them.
-export const CHART_MIN_SHARE = 1;
+// Buckets the publisher computes rather than a named product; they rank last.
+export const GROUPED_CLIENTS = new Set(['custom-code', 'other']);
 
-export const CHART_COLORS = [
-  '#00E599',
-  '#4C97FF',
-  '#F0A04B',
-  '#B57EDC',
-  '#FF6B6B',
-  '#3DD6D0',
-  '#E5D55B',
-];
-
-export const OTHER_COLOR = '#5E6066';
-
-export const getClientLabel = (client) => {
-  const label = CLIENT_LABELS[client];
-  if (!label) throw new Error(`No label for MCP client "${client}"`);
-  return label;
+export const getClient = (client) => {
+  const entry = CLIENTS[client];
+  if (!entry) throw new Error(`No label for MCP client "${client}"`);
+  return entry;
 };

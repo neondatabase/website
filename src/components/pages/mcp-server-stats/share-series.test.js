@@ -1,42 +1,55 @@
 import { describe, expect, it } from 'vitest';
 
-import { OTHER_COLOR } from './clients';
-import { buildShareSeries } from './share-series';
+import { buildClientShares, buildToolShares } from './share-series';
 
 const week = (weekStart, shares) =>
-  Object.entries(shares).map(([client, share]) => ({ weekStart, client, share }));
+  Object.entries(shares).map(([key, share]) => ({ weekStart, key, share }));
 
-const rows = [
-  ...week('2026-10-12', { chatgpt: 46, cursor: 32, grok: 0.5, other: 21.5 }),
-  ...week('2026-10-19', { chatgpt: 44, cursor: 33, grok: 0.6, other: 22.4 }),
-  ...week('2026-10-26', { chatgpt: 40, cursor: 35, grok: 0.7, manus: 0, other: 24.3 }),
+const clients = [
+  ...week('2026-10-19', { codex: 24, cursor: 10, replit: 1.2, 'custom-code': 2, other: 5 }),
+  ...week('2026-10-26', { codex: 25.8, cursor: 9.5, replit: 1.4, 'custom-code': 2.4, other: 4.6 }),
 ];
 
-describe('buildShareSeries', () => {
-  it('folds clients that never reach 1% into Other for the chart', () => {
-    const { chartSeries } = buildShareSeries(rows);
-
-    expect(chartSeries.map((series) => series.client)).toEqual(['chatgpt', 'cursor', 'other']);
-    expect(chartSeries.at(-1).data).toEqual([22, 23, 25]);
-  });
-
-  it('ranks clients with a share last week, with the change from the week before', () => {
-    const { latestWeek, previousWeek, latest } = buildShareSeries(rows);
+describe('buildClientShares', () => {
+  it('ranks named clients first and the grouped buckets last', () => {
+    const { latestWeek, ranked } = buildClientShares(clients);
 
     expect(latestWeek).toBe('2026-10-26');
-    expect(previousWeek).toBe('2026-10-19');
-    expect(latest.map(({ client, share, change }) => [client, share, change])).toEqual([
-      ['chatgpt', 40, -4],
-      ['cursor', 35, 2],
-      ['grok', 0.7, 0.1],
-      ['other', 24.3, 1.9],
+    expect(ranked.map(({ key, share, change }) => [key, share, change])).toEqual([
+      ['codex', 25.8, 1.8],
+      ['cursor', 9.5, -0.5],
+      ['replit', 1.4, 0.2],
+      ['other', 4.6, -0.4],
+      ['custom-code', 2.4, 0.4],
     ]);
-    expect(latest.find(({ client }) => client === 'grok').color).toBe(OTHER_COLOR);
+  });
+
+  it('charts named clients that reached the minimum share', () => {
+    const { series } = buildClientShares(clients);
+
+    expect(series.map(({ key, data }) => [key, data])).toEqual([
+      ['codex', [24, 25.8]],
+      ['cursor', [10, 9.5]],
+    ]);
   });
 
   it('rejects a client the page has no label for', () => {
-    expect(() => buildShareSeries(week('2026-10-26', { muse: 100 }))).toThrow(
+    expect(() => buildClientShares(week('2026-10-26', { muse: 6 }))).toThrow(
       'No label for MCP client "muse"'
     );
+  });
+});
+
+describe('buildToolShares', () => {
+  it('lists the most used tools last week with the change from the week before', () => {
+    const tools = [
+      ...week('2026-10-19', { run_sql: 80, create_branch: 22, list_projects: 70 }),
+      ...week('2026-10-26', { run_sql: 81.8, create_branch: 23.6, list_projects: 71.5 }),
+    ];
+
+    expect(buildToolShares(tools, { limit: 2 }).ranked).toEqual([
+      { key: 'run_sql', share: 81.8, change: 1.8 },
+      { key: 'list_projects', share: 71.5, change: 1.5 },
+    ]);
   });
 });

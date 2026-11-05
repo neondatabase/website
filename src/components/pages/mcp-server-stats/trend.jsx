@@ -15,15 +15,15 @@ const Trend = ({ weeks, series }) => (
         className="max-w-206 text-[2.75rem] leading-dense font-normal tracking-tighter text-gray-new-50 xl:text-4xl lg:max-w-3xl lg:text-3xl md:text-[1.75rem]"
         id="mcp-stats-trend-heading"
       >
-        <span className="text-white">Share of sessions by week.</span> Each band is one client,
-        starting the week of {formatWeekShort(weeks[0])}.
+        <span className="text-white">Week by week.</span> Each client&apos;s share of active users
+        since the week of {formatWeekShort(weeks[0])}.
       </h2>
       <div className="mt-16 border border-gray-new-20 bg-[#080808] p-8 lg:mt-12 lg:p-6 md:mt-8 md:p-4">
         <ShareChart weeks={weeks} series={series} />
       </div>
       <p className="mt-6 max-w-[672px] text-sm leading-normal tracking-extra-tight text-gray-new-50">
-        A week runs Monday to Sunday and appears once it is complete. Clients that never reached 1%
-        of a week&apos;s sessions are drawn inside Other.
+        A week runs Monday to Sunday and appears once it is complete. The chart shows clients that
+        reached 5% of active users in at least one week.
       </p>
     </Container>
   </section>

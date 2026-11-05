@@ -1,66 +1,71 @@
-import { CHART_COLORS, CHART_MIN_SHARE, OTHER_COLOR, getClientLabel } from './clients';
+import { GROUPED_CLIENTS, getClient } from './clients';
 
 const round1 = (value) => Math.round(value * 10) / 10;
 
-export function buildShareSeries(rows) {
+// Rows are { weekStart, key, share }, where share is a percent of the week's
+// active users. A user counts under every key they used, so a week can total
+// more than 100.
+function indexWeeks(rows) {
   const weeks = [...new Set(rows.map((row) => row.weekStart))].sort();
-  const byClient = new Map();
-  rows.forEach(({ weekStart, client, share }) => {
-    if (!byClient.has(client)) byClient.set(client, new Map());
-    byClient.get(client).set(weekStart, share);
+  const byKey = new Map();
+  rows.forEach(({ weekStart, key, share }) => {
+    if (!byKey.has(key)) byKey.set(key, new Map());
+    byKey.get(key).set(weekStart, share);
   });
+  const shareOf = (key, week) => byKey.get(key)?.get(week) ?? 0;
+  return { weeks, keys: [...byKey.keys()], shareOf };
+}
 
-  const clients = [...byClient.keys()];
-  const shareOf = (client, week) => byClient.get(client)?.get(week) ?? 0;
+function latestShares({ weeks, keys, shareOf }) {
   const latestWeek = weeks[weeks.length - 1];
   const previousWeek = weeks[weeks.length - 2] ?? null;
+  const latest = keys
+    .filter((key) => shareOf(key, latestWeek) > 0)
+    .map((key) => ({
+      key,
+      share: shareOf(key, latestWeek),
+      change: previousWeek ? round1(shareOf(key, latestWeek) - shareOf(key, previousWeek)) : null,
+    }));
+  return { latestWeek, latest };
+}
 
-  const charted = clients
-    .filter(
-      (client) =>
-        client !== 'other' && weeks.some((week) => shareOf(client, week) >= CHART_MIN_SHARE)
-    )
-    .sort((a, b) => shareOf(b, latestWeek) - shareOf(a, latestWeek));
-  const colorOf = (client) => {
-    const index = charted.indexOf(client);
-    return index === -1 ? OTHER_COLOR : CHART_COLORS[index % CHART_COLORS.length];
-  };
+export function buildClientShares(rows, { chartMinShare = 5 } = {}) {
+  const index = indexWeeks(rows);
+  const { latestWeek, latest } = latestShares(index);
 
-  const chartSeries = charted.map((client) => ({
-    client,
-    label: getClientLabel(client),
-    color: colorOf(client),
-    data: weeks.map((week) => shareOf(client, week)),
-  }));
-  chartSeries.push({
-    client: 'other',
-    label: getClientLabel('other'),
-    color: OTHER_COLOR,
-    data: weeks.map((week) =>
-      round1(
-        clients
-          .filter((client) => !charted.includes(client))
-          .reduce((sum, client) => sum + shareOf(client, week), 0)
-      )
-    ),
-  });
-
-  const latest = clients
-    .filter((client) => client === 'other' || shareOf(client, latestWeek) > 0)
-    .map((client) => ({
-      client,
-      label: getClientLabel(client),
-      color: colorOf(client),
-      share: shareOf(client, latestWeek),
-      change: previousWeek
-        ? round1(shareOf(client, latestWeek) - shareOf(client, previousWeek))
-        : null,
+  const ranked = latest
+    .map((entry) => ({
+      ...entry,
+      ...getClient(entry.key),
+      isGrouped: GROUPED_CLIENTS.has(entry.key),
     }))
     .sort((a, b) => {
-      if (a.client === 'other') return 1;
-      if (b.client === 'other') return -1;
+      const groupedA = GROUPED_CLIENTS.has(a.key);
+      const groupedB = GROUPED_CLIENTS.has(b.key);
+      if (groupedA !== groupedB) return groupedA ? 1 : -1;
       return b.share - a.share;
     });
 
-  return { weeks, latestWeek, previousWeek, chartSeries, latest };
+  const series = index.keys
+    .filter(
+      (key) =>
+        !GROUPED_CLIENTS.has(key) &&
+        index.weeks.some((week) => index.shareOf(key, week) >= chartMinShare)
+    )
+    .sort((a, b) => index.shareOf(b, latestWeek) - index.shareOf(a, latestWeek))
+    .map((key) => ({
+      key,
+      ...getClient(key),
+      data: index.weeks.map((week) => index.shareOf(key, week)),
+    }));
+
+  return { weeks: index.weeks, latestWeek, ranked, series };
+}
+
+export function buildToolShares(rows, { limit = 10 } = {}) {
+  const { latestWeek, latest } = latestShares(indexWeeks(rows));
+  return {
+    latestWeek,
+    ranked: latest.sort((a, b) => b.share - a.share).slice(0, limit),
+  };
 }

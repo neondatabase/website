@@ -1,7 +1,7 @@
 import McpServerStats from 'components/pages/mcp-server-stats/mcp-server-stats';
 import Layout from 'components/shared/layout';
 import SEO_DATA from 'constants/seo-data';
-import { getMcpClientShare } from 'utils/api-mcp-client-share';
+import { getMcpStats } from 'utils/api-mcp-stats';
 import getMetadata from 'utils/get-metadata';
 
 export const metadata = getMetadata(SEO_DATA.mcpServerStats);
@@ -9,11 +9,11 @@ export const metadata = getMetadata(SEO_DATA.mcpServerStats);
 export const revalidate = 3600;
 
 const McpServerStatsPage = async () => {
-  const rows = await getMcpClientShare();
+  const { clients, tools, publishedAt } = await getMcpStats();
 
   return (
     <Layout className="bg-black-pure" isHeaderSticky>
-      <McpServerStats rows={rows} />
+      <McpServerStats clients={clients} tools={tools} publishedAt={publishedAt} />
     </Layout>
   );
 };
