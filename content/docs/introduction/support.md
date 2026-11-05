@@ -99,6 +99,7 @@ The **Support center** drawer opens. Under **Which organization needs support?**
 - **Read the docs**: Browse Neon guides, references, and quickstarts.
 - **Contact our support team**: Open a technical support ticket. Available on the **Scale** plan.
 - **Ask a billing question**: Open a billing support ticket about an invoice, charge, refund, or your plan. Available on the **Launch** and **Scale** plans.
+- **Increase your platform limits**: Ask Support to raise a soft limit, such as AI Gateway usage or concurrently active computes. Available on the **Scale** plan. See [Request a limit increase](#request-a-limit-increase).
 - **Get help from the community**: Join the [Neon Discord Server](#neon-discord-server).
 
 On the **Free** plan, the support center offers the AI assistant, the docs, and the community. To unlock support tickets, [upgrade to a paid plan](/docs/introduction/manage-billing#change-your-plan).
@@ -124,6 +125,32 @@ On the **Free** plan, the support center offers the AI assistant, the docs, and 
 4. Select **Submit request**.
 
 You can also open a billing support ticket from the **Billing** page. Select **Request billing support** in the page header, or select **View past invoices**, open an invoice's actions menu, and select **Request support** to open the form with that invoice pre-selected. See [Request billing support](/docs/introduction/manage-billing#request-billing-support).
+
+#### Request a limit increase
+
+Some Neon limits are soft limits that protect your organization from runaway usage and costs. On the **Scale** plan, you can ask Support to raise these:
+
+| Limit                                        | Learn more                                                                                      |
+| :------------------------------------------- | :---------------------------------------------------------------------------------------------- |
+| AI Gateway tokens per minute and daily spend | [AI Gateway usage limits](/docs/ai-gateway/prepaid-credits#usage-limits)                        |
+| Concurrently active computes                 | [Concurrently active compute limit](/docs/reference/glossary#concurrently-active-compute-limit) |
+| Unarchived branches per project              | [Branch archiving](/docs/guides/branch-archiving)                                               |
+| Projects per organization                    | [Projects](/docs/introduction/plans#projects)                                                   |
+| Private Networking endpoints per region      | [Private Networking limits](/docs/guides/neon-private-networking#private-networking-limits)     |
+
+To request an increase:
+
+1. In the [support center](#open-the-support-center), select the organization that needs the higher limit.
+2. Select **Increase your platform limits**.
+3. Under **How can we help?**, include:
+   - The limit you need raised and the value you need
+   - The project ID, if the limit applies to a project
+   - What your workload does and why it needs the higher limit
+4. Submit the request.
+
+Support reviews each request against your use case and may ask follow-up questions or approve a different value than you asked for. If you're hitting compute or branch limits because you run a database per tenant or per agent, see [Multitenancy with Neon](/docs/guides/multitenancy) first. A different architecture is often a better fit than a higher limit.
+
+A limit increase doesn't change your plan. Plan allowances, such as the maximum compute size or history window, change only when you [change your plan](/docs/introduction/manage-billing#change-your-plan). To ask about Postgres settings, such as `max_replication_slots`, [open a technical support ticket](#open-a-technical-support-ticket-scale-plan) instead.
 
 <Admonition type="tip">
 To ensure you receive responses from our support team, allowlist the `help@databricks.com` email address in your email client. This prevents support responses from being filtered to your spam or junk folder.

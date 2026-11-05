@@ -110,7 +110,7 @@ Included per plan:
 
 - **Free**: 100 projects
 - **Launch**: 100 projects
-- **Scale**: 1,000 projects (soft limit; request more if needed via [support](/docs/introduction/support))
+- **Scale**: 1,000 projects (soft limit; [request more](/docs/introduction/support#request-a-limit-increase) if needed)
 
 ### Branches
 

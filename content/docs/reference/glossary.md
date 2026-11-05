@@ -578,7 +578,7 @@ A Neon feature that lets you compare database schemas between different branches
 
 This limit caps how many computes can run at the same time to prevent resource exhaustion. It protects against accidental surges, such as starting many endpoints at once. The default limit is 20 concurrently active computes.
 
-When you exceed the limit, additional computes beyond the limit will remain suspended and you will see an error when attempting to connect to them. You can suspend other active computes and try again. Alternatively, if you encounter this error often, you can reach out to [Support](/docs/introduction/support) to request a `max_active_endpoints` limit increase.
+When you exceed the limit, additional computes beyond the limit will remain suspended and you will see an error when attempting to connect to them. You can suspend other active computes and try again. Alternatively, if you encounter this error often, Scale plan users can [request a limit increase](/docs/introduction/support#request-a-limit-increase).
 
 ## serverless
 
