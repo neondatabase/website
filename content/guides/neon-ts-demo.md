@@ -42,7 +42,7 @@ Before you begin, make sure you have:
 3. **Neon CLI**: Installed globally (`npm i -g neon@latest`) and authenticated (`neon login`). See the [Neon CLI quickstart](/docs/cli/quickstart) for details.
 
 <Admonition type="note" title="Plan and feature limits">
-Object Storage and Functions are available on any plan, subject to usage limits. The AI Gateway requires a paid plan. The Data API and Managed Better Auth don't support projects with [IP Allow](/docs/manage/projects#configure-ip-allow) or [Private Networking](/docs/guides/neon-private-networking) enabled.
+Object Storage and Functions are available on any plan, subject to usage limits. The AI Gateway works on any plan with [prepaid credits](/docs/ai-gateway/prepaid-credits). The Data API and Managed Better Auth don't support projects with [IP Allow](/docs/manage/projects#configure-ip-allow) or [Private Networking](/docs/guides/neon-private-networking) enabled.
 </Admonition>
 
 <Steps>
