@@ -6,7 +6,7 @@ summary: >-
   the CLI, the Neon API, or neon.ts: a Hono handler for the upload event, the bucket
   and prefix filter, what your function receives, and how to confirm a run in the logs.
 enableTableOfContents: true
-updatedOn: '2026-10-20T18:56:03.438Z'
+updatedOn: '2026-11-04T23:31:56.868Z'
 ---
 
 A `storage_object_created` trigger tells Neon to invoke a deployed [Neon Function](/docs/compute/functions/overview) when an object is created in an [Object Storage](/docs/storage/overview) bucket. Optionally scope it to a key `prefix`, so only uploads under that path fire the function. There's no external event wiring and no compute kept running to watch the bucket.
@@ -179,7 +179,7 @@ Unlike a scheduled trigger, an object-created trigger has no `schedule` or `next
 
 <TabItem>
 
-Declare the trigger in the top-level `triggers` record in [`neon.ts`](/docs/reference/neon-ts#triggers), with `function` pointing at your function's slug, then apply it with `neon deploy`. `bucket` selects the bucket and `prefix` optionally scopes it to keys under that path.
+Declare the trigger in the top-level `triggers` record in [`neon.ts`](/docs/reference/neon-ts#triggers), with `function` pointing at your function's slug, then apply it with `neon deploy`. `bucket` selects the bucket, which must also be declared under `buckets` in the same file, and `prefix` optionally scopes it to keys under that path.
 
 ```ts filename="neon.ts"
 functions: {
@@ -187,6 +187,9 @@ functions: {
     name: "On upload",
     source: "./functions/onupload.ts",
   },
+},
+buckets: {
+  "my-bucket": {},
 },
 triggers: {
   "record-uploads": {
