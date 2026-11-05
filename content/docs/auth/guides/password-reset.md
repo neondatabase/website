@@ -6,9 +6,11 @@ summary: >-
   requires email authentication to be enabled in project Settings. The pre-built
   `<ForgotPasswordForm>` and `<ResetPasswordForm>` components handle the full
   forgot-password flow; reset links expire after 15 minutes, and the SDK
-  `resetPasswordForEmail` method is not yet supported.
+  `resetPasswordForEmail` method is not yet supported. An optional per-branch
+  setting, `revoke_sessions_on_password_reset`, signs the user out of every
+  existing session after a successful reset.
 enableTableOfContents: true
-updatedOn: '2026-10-09T09:36:23.504Z'
+updatedOn: '2026-11-05T12:32:49.453Z'
 ---
 
 Password reset allows users to securely reset forgotten passwords. Managed Better Auth supports password reset via verification links sent to the user's email address.
@@ -74,6 +76,41 @@ The complete password reset flow works as follows:
 ## Reset link expiration
 
 Password reset links expire after **15 minutes**. If a link expires, users need to request a new one.
+
+## Sign users out after a reset
+
+By default, resetting a password doesn't end the user's existing sessions. Turn on **Revoke sessions on password reset** to sign the user out of every existing session when they reset their password. This applies to resets through a reset link and through [Email OTP](/docs/auth/guides/plugins/email-otp#reset-password-with-otp).
+
+<Tabs labels={["Console", "API"]}>
+
+<TabItem>
+
+In your project's **Settings** → **Better Auth** page, turn on **Revoke sessions on password reset**. The switch is shown while **Sign-in with Email** is enabled.
+
+</TabItem>
+
+<TabItem>
+
+Use the [Update email and password configuration](/docs/reference/api/auth/update-neon-auth-email-and-password-config) endpoint. Replace `{project_id}` and `{branch_id}` with your project and branch IDs:
+
+```bash
+curl -X PATCH 'https://console.neon.tech/api/v2/projects/{project_id}/branches/{branch_id}/auth/email_and_password' \
+  -H 'Authorization: Bearer $NEON_API_KEY' \
+  -H 'Content-Type: application/json' \
+  -d '{"revoke_sessions_on_password_reset": true}'
+```
+
+A `GET` request to the same endpoint returns the current value.
+
+</TabItem>
+
+</Tabs>
+
+Consuming the reset link or code, deleting the user's sessions, and saving the new password happen in a single database transaction. If any step fails, the reset returns an error, so a successful reset never leaves an old session valid. A revoked session is rejected on its next request.
+
+The setting is off by default so existing apps don't sign users out unexpectedly. It's configured per branch. A new branch copies its parent's auth configuration when you create it, so turning the setting on for a parent doesn't change branches that already exist.
+
+To sign out other devices when a signed-in user changes their password, pass `revokeOtherSessions: true` to `changePassword()`. See [Revoke other sessions](/docs/auth/guides/user-management#revoke-other-sessions).
 
 ## Next steps
 
