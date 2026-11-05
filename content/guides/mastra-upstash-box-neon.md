@@ -50,7 +50,7 @@ Before you begin, ensure you have the following:
 - **Upstash credentials:** An API key from the [Upstash Console](https://console.upstash.com) for Box.
 
 <Admonition type="note" title="AI model access">
-This guide uses the [Neon AI Gateway](/docs/ai-gateway/overview) to access the AI model, which requires a Launch or Scale plan with [prepaid credits](/docs/ai-gateway/prepaid-credits). If you prefer to use your own model provider, you can bring your own API key (for example, an [Anthropic API key](https://platform.claude.com/settings/keys)) and configure Mastra to use it directly as described in the [Mastra Anthropic provider docs](https://mastra.ai/models/providers/anthropic).
+This guide uses the [Neon AI Gateway](/docs/ai-gateway/overview) to access the AI model, which needs [prepaid credits](/docs/ai-gateway/prepaid-credits). You can buy them on any plan, including Free. If you prefer to use your own model provider, you can bring your own API key (for example, an [Anthropic API key](https://platform.claude.com/settings/keys)) and configure Mastra to use it directly as described in the [Mastra Anthropic provider docs](https://mastra.ai/models/providers/anthropic).
 </Admonition>
 
 <Steps>

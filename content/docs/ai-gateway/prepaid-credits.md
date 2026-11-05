@@ -40,7 +40,7 @@ example, a small request might reduce a $25.00 balance to $24.99.
 
 - Only **organization admins** can purchase credits.
 - The organization must be billed directly by payment card. On the Free plan,
-  add a payment card in **Billing** first. Adding a card doesn't change your plan.
+  add a payment card first. Adding a card doesn't change your plan.
 - Members, editors, and viewers cannot purchase credits.
 - Sales-invoiced, marketplace, trial, sponsored, and shared-token accounts cannot
   purchase credits through this self-service flow. Contact your account team for
@@ -51,7 +51,9 @@ example, a small request might reduce a $25.00 balance to $24.99.
 Buying credits is a Neon Console flow:
 
 1. In the Neon Console, select **Billing**.
-2. Find the **AI gateway credits** card and select **Add credits**.
+2. Find the **AI gateway credits** card and select **Add credits**. On the Free
+   plan with no payment card on file, the card shows **Add a card** instead.
+   Select it, add your card, and then select **Add credits**.
 3. Select a preset amount: **$5**, **$10**, **$25**, **$50**, or **$100**. You can
    also select **Other** to enter a custom amount. The default selection is $25,
    and the minimum purchase is $5.

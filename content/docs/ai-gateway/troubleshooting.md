@@ -67,7 +67,7 @@ On your project's **AI Gateway** page, locked models show a padlock, and the **S
 
 | Message                                                 | What to do                                                                                  |
 | ------------------------------------------------------- | ------------------------------------------------------------------------------------------- |
-| **A paid plan is required to use these models**         | Add a payment card in **Billing**, then buy credits. You don't need to upgrade your plan.                    |
+| **A paid plan is required to use these models**         | On the **Billing** page, select **Add a card** on the **AI gateway credits** card, then buy credits. You don't need to upgrade your plan.                    |
 | **AI Gateway credits are required to use these models** | Select **Add credits**. See [AI Gateway prepaid credits](/docs/ai-gateway/prepaid-credits). |
 | **Your account is restricted from using these models**  | [Contact Support](/docs/introduction/support).                                              |
 | **Some models are not available to your account**       | [Contact Support](/docs/introduction/support).                                              |
