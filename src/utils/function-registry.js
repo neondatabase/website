@@ -103,7 +103,28 @@ const REGISTRY_ID_PATTERN = /^[a-z0-9][a-z0-9-]*$/;
 const GITHUB_HOST = 'github.com';
 const RAW_GITHUB_HOST = 'raw.githubusercontent.com';
 const README_FILE_NAME = 'README.md';
-const README_MAX_LENGTH = 256 * 1024;
+const README_MAX_BYTES = 256 * 1024;
+
+// Stops reading once the body passes maxBytes, so an oversized response without a
+// `content-length` header is never buffered in full.
+const readTextWithin = async (response, maxBytes) => {
+  if (Number(response.headers.get('content-length')) > maxBytes) return null;
+  if (!response.body) return '';
+  const reader = response.body.getReader();
+  const decoder = new TextDecoder();
+  let bytes = 0;
+  let text = '';
+  for (;;) {
+    const { done, value } = await reader.read();
+    if (done) return text + decoder.decode();
+    bytes += value.byteLength;
+    if (bytes > maxBytes) {
+      await reader.cancel();
+      return null;
+    }
+    text += decoder.decode(value, { stream: true });
+  }
+};
 
 const rawGithubUrl = (segments) => `https://${RAW_GITHUB_HOST}/${segments.join('/')}`;
 
@@ -158,15 +179,21 @@ export const getFunctionRegistryTemplateReadme = async (template) => {
       registryFetchInit()
     );
     if (!response.ok) return null;
-    if (Number(response.headers.get('content-length')) > README_MAX_LENGTH) return null;
-    const markdown = (await response.text()).slice(0, README_MAX_LENGTH);
+    const markdown = await readTextWithin(response, README_MAX_BYTES);
+    if (markdown === null) {
+      console.warn(
+        `Function registry: README for "${template.id}" is over ${README_MAX_BYTES / 1024} KB, skipping it.`
+      );
+      return null;
+    }
     if (!markdown.trim()) return null;
     return {
       markdown,
       imageBase: `${rawGithubUrl([owner, repo, ref, ...folder])}/`,
       linkBase: `${githubTreeUrl(location, 'blob')}/`,
     };
-  } catch {
+  } catch (error) {
+    console.error(`Function registry: failed to fetch the README for "${template.id}":`, error);
     return null;
   }
 };

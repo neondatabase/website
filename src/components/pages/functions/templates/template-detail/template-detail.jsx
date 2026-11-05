@@ -296,22 +296,23 @@ const TemplateDetail = async ({ template, previous = null, next = null, readme =
           </Section>
         )}
 
-        {operations.length === 0 && !renderedReadme ? (
-          <Section
-            title="What it does"
-            description={
-              <>
-                This template has a single handler and no named operations, so it&apos;s a starting
-                point for your own code. To try it, {RUN_LOCALLY}
-              </>
-            }
-          />
-        ) : (
-          <Section
-            title="Run it"
-            description={<>Installing a template doesn&apos;t deploy it, so {RUN_LOCALLY}</>}
-          />
-        )}
+        {!renderedReadme &&
+          (operations.length === 0 ? (
+            <Section
+              title="What it does"
+              description={
+                <>
+                  This template has a single handler and no named operations, so it&apos;s a
+                  starting point for your own code. To try it, {RUN_LOCALLY}
+                </>
+              }
+            />
+          ) : (
+            <Section
+              title="Run it"
+              description={<>Installing a template doesn&apos;t deploy it, so {RUN_LOCALLY}</>}
+            />
+          ))}
 
         {environment.length > 0 && !readmeHas('environment') && (
           <Section

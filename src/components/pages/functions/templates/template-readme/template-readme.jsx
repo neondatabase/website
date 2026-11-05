@@ -304,7 +304,8 @@ export const renderReadme = async ({ markdown, imageBase, linkBase, blocks = {} 
       )
     );
     return { content, used };
-  } catch {
+  } catch (error) {
+    console.error(`Function registry: failed to render the README at ${linkBase}:`, error);
     return null;
   }
 };
