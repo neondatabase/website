@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "copybook": {
+      "args": ["--no", "copybook", "mcp"],
+      "command": "npx"
+    }
+  }
+}
