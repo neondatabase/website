@@ -57,10 +57,13 @@ const ShareChart = ({ weeks, series }) => {
         labels: { color: '#c9cbcf', boxWidth: 10, boxHeight: 10, padding: 16 },
       },
       tooltip: {
-        itemSort: (a, b) => b.raw - a.raw,
+        itemSort: (a, b) => (b.raw ?? -1) - (a.raw ?? -1),
         callbacks: {
           title: (items) => `Week of ${items[0].label}`,
-          label: (item) => ` ${item.dataset.label}: ${item.raw.toFixed(1)}%`,
+          label: (item) =>
+            item.raw === null
+              ? ` ${item.dataset.label}: not published`
+              : ` ${item.dataset.label}: ${item.raw.toFixed(1)}%`,
         },
       },
     },
@@ -84,7 +87,7 @@ ShareChart.propTypes = {
     PropTypes.shape({
       label: PropTypes.string.isRequired,
       color: PropTypes.string.isRequired,
-      data: PropTypes.arrayOf(PropTypes.number).isRequired,
+      data: PropTypes.arrayOf(PropTypes.number).isRequired, // null for unpublished weeks
     })
   ).isRequired,
 };

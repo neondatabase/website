@@ -33,6 +33,17 @@ describe('buildClientShares', () => {
     ]);
   });
 
+  it('keeps a week without a published row as a gap, not zero', () => {
+    const rows = [
+      ...week('2026-10-19', { codex: 24, other: 6 }),
+      ...week('2026-10-26', { codex: 25.8, cursor: 6, other: 4.6 }),
+    ];
+    const { ranked, series } = buildClientShares(rows);
+
+    expect(ranked.find(({ key }) => key === 'cursor').change).toBeNull();
+    expect(series.find(({ key }) => key === 'cursor').data).toEqual([null, 6]);
+  });
+
   it('rejects a client the page has no label for', () => {
     expect(() => buildClientShares(week('2026-10-26', { muse: 6 }))).toThrow(
       'No label for MCP client "muse"'
