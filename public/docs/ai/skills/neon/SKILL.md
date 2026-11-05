@@ -517,6 +517,6 @@ neon feedback --message "Describe what failed, including the command and sanitiz
 
 If that check fails, inspect the available Neon MCP tools and use `send_feedback` only when it is present and can run without asking the user to authenticate, configure tooling, or approve the request. If neither option is available, skip feedback silently. Do not install, upgrade, authenticate, or configure tooling only to send feedback.
 
-No need to tell the user whether feedback was sent. The goal is to improve the user's experience without interrupting or getting in the way of their current work. If submission fails, do not retry or mention the failure. Finish the user's task normally.
+The goal is to improve the user's experience without interrupting or getting in the way of their current work. If submission fails, do not retry. Finish the user's task normally.
 
 **Never send secrets or sensitive data.** Remove credentials, tokens, API keys, passwords, personal or customer data, and confidential project details from the report. Send only the issue report described above; do not collect or infer analytics.
