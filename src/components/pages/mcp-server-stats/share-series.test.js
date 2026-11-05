@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 
-import { buildClientShares, buildToolShares } from './share-series';
+import { buildClientShares, buildToolShares, pointRadiusAt } from './share-series';
 
 const week = (weekStart, shares) =>
   Object.entries(shares).map(([key, share]) => ({ weekStart, key, share }));
@@ -62,5 +62,13 @@ describe('buildToolShares', () => {
       { key: 'run_sql', share: 81.8, change: 1.8 },
       { key: 'list_projects', share: 71.5, change: 1.5 },
     ]);
+  });
+});
+
+describe('pointRadiusAt', () => {
+  it('shows a point only for a value with gaps on both sides', () => {
+    const values = [null, 6, null, 7, 8];
+
+    expect(values.map((_, index) => pointRadiusAt(values, index))).toEqual([0, 3, 0, 0, 0]);
   });
 });

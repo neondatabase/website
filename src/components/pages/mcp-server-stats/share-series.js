@@ -70,3 +70,8 @@ export function buildToolShares(rows, { limit = 10 } = {}) {
     ranked: latest.sort((a, b) => b.share - a.share).slice(0, limit),
   };
 }
+
+// Chart.js draws no segment for a value with gaps on both sides, so that value
+// needs a visible point.
+export const pointRadiusAt = (values, index) =>
+  values[index] !== null && values[index - 1] == null && values[index + 1] == null ? 3 : 0;

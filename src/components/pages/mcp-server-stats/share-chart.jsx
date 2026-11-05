@@ -12,6 +12,7 @@ import {
 import PropTypes from 'prop-types';
 import { Line } from 'react-chartjs-2';
 
+import { pointRadiusAt } from './share-series';
 import { formatWeekShort } from './weeks';
 
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Tooltip, Legend);
@@ -28,7 +29,7 @@ const ShareChart = ({ weeks, series }) => {
       borderColor: color,
       backgroundColor: color,
       borderWidth: 2,
-      pointRadius: 0,
+      pointRadius: (context) => pointRadiusAt(values, context.dataIndex),
       pointHoverRadius: 4,
       tension: 0.3,
     })),
