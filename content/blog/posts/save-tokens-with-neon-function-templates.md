@@ -1,6 +1,8 @@
 ---
 title: Save tokens with Neon Function templates
-description: Introducing the Neon Function Registry
+description: >-
+  Introducing the Neon Function Registry. Add a template to your project with
+  one command so your agent starts from working code.
 excerpt: >-
   Agents can already bootstrap a Neon Function on their own, but they spend
   tokens researching best practices first. A template from the Neon Function
