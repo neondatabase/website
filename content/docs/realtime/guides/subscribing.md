@@ -4,7 +4,7 @@ subtitle: 'Subscribe to live queries using the Realtime client.'
 summary: >-
   Subscribe to live queries from trusted backend code or the browser. Fetch sealed queries from your API, handle every callback and renew sealed queries before they expire.
 enableTableOfContents: true
-updatedOn: '2026-10-30T15:07:38.000Z'
+updatedOn: '2026-11-05T20:22:23.610Z'
 ---
 
 Once you've [defined](./queries) and [sealed](./queries#sealing-queries) a query, you can [subscribe&nbsp;to&nbsp;it](#subscribe-to-the-sealed-query) using the [low&#8209;level Realtime&nbsp;client](../sdks/typescript#client-createrealtimeclient).
@@ -262,7 +262,7 @@ subscription.onUpdate((update: RawLiveQueryUpdate<Message>) => {
   for (const change of update.changes) {
     if (change.type === "upsert") {
       rows.set(change.rowId, change.row)
-    } else {
+    } else if (change.type === "remove") {
       rows.delete(change.rowId)
     }
   }
@@ -277,7 +277,7 @@ subscription.onStateChange((state: LiveQueryState) => {
 
 A `rowId` is opaque and scoped to its subscription, and each `rows` update invalidates every earlier one. It isn't a primary key, so don't store it or match it against your own ids. A `rows` update can arrive at any time, for example after a reconnect, and it always replaces the whole result.
 
-Each `changes` update also carries the ids of the Postgres transactions it covers, in `update.batch.txids`. The [mutations guide](./mutations) uses them to confirm optimistic&nbsp;mutations.
+Each `changes` update also carries the ids of the Postgres transactions it covers, in `update.batch.txids`. The [mutations guide](./mutations) uses them to confirm optimistic&nbsp;mutations. With `ORDER BY`, `changes` can also include `move` changes, which carry a `rowId` and the `afterRowId` it now follows (`null` for the first row), and no row.
 
 ## Renew the sealed query
 
