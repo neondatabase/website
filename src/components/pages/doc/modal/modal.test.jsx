@@ -48,7 +48,7 @@ describe('docs agent-setup modal entry', () => {
     // Guard against a silent undefined === undefined pass if the named export regresses.
     expect(BASE_AGENT_PROMPT).toMatch(/Set me up for Neon/);
     expect(agentSetupModal.copyPrompt).toBe(BASE_AGENT_PROMPT);
-    expect(agentSetupModal.destination.url).toBe('/docs/ai/ai-agents-tools');
+    expect(agentSetupModal.destination.url).toBe('/docs/ai/agent-setup');
   });
 
   it('copies the base prompt as plain text and reports the copy analytics event', async () => {
@@ -81,7 +81,7 @@ describe('docs agent-setup modal entry', () => {
     expect(sendGtagEvent).toHaveBeenCalledWith('click_docs_modal_link', {
       modal: 'docs-agent-setup',
       link: agentSetupModal.destination.label,
-      destination: '/docs/ai/ai-agents-tools',
+      destination: '/docs/ai/agent-setup',
     });
   });
 });
