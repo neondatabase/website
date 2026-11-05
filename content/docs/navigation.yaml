@@ -1395,6 +1395,8 @@
                   slug: cli/projects
                 - title: branches
                   slug: cli/branches
+                - title: postgres
+                  slug: cli/postgres
                 - title: databases
                   slug: cli/databases
                 - title: roles
