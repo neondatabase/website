@@ -10,8 +10,65 @@ summary: >-
   guide also shows how to point Drizzle at different Neon branches per
   environment by selecting a connection string based on NODE_ENV.
 enableTableOfContents: true
-updatedOn: '2026-10-08T19:32:04.700Z'
+agentPrompt: 'I want to use Drizzle ORM with it.'
+updatedOn: '2026-11-05T22:22:10.322Z'
 ---
+
+Drizzle is a TypeScript ORM with type-safe queries. Set up your coding agent once, tell it about your app, then use the prompts below to build on Neon with Drizzle. To follow each step by hand instead, the full walkthrough is in the [Full setup, step by step](#full-setup-step-by-step) section below.
+
+[comment]: <> (Prototype TODO: the Drizzle agent-skill install commands in public/prompts/drizzle-agent-setup.md are release-candidate per orm.drizzle.team/docs/drizzle-kit-skills and should be re-verified against that page before publishing.)
+
+<Steps>
+
+## Set up your agent for your project
+
+Copy both prompts into your agent. The first sets it up for Neon; the second installs Drizzle's own agent skill so it follows Drizzle's current guidance.
+
+<div className="not-prose grid grid-cols-2 gap-6 lg:grid-cols-1">
+
+<div className="[&>div]:my-0!">
+<AgentPrompt title="Set up Neon" src="/prompts/neon-setup.md" buttonText="Copy prompt" />
+</div>
+
+<div className="[&>div]:my-0!">
+<AgentPrompt title="Set up Drizzle" src="/prompts/drizzle-agent-setup.md" buttonText="Copy prompt" />
+</div>
+
+</div>
+
+## Tell your agent about your app
+
+Point your agent at this project. It inspects what you have (or asks, if you are starting fresh), wires up Drizzle against Neon Postgres, and recommends which Neon services the app needs.
+
+<AgentPrompt title="Discover and set up" src="/prompts/drizzle-discovery.md" buttonText="Copy prompt" />
+
+## Do more with Neon
+
+Drizzle tasks are on the left, Neon branching workflows on the right. Each prompt is grounded in the Neon docs and the neon-postgres agent skill.
+
+<div className="not-prose grid grid-cols-2 gap-6 lg:grid-cols-1">
+
+<div className="flex flex-col gap-4 [&>div]:my-0!">
+<p className="m-0 text-sm font-medium tracking-tight text-gray-new-20 dark:text-gray-new-80">Drizzle with Neon</p>
+<AgentPrompt title="Generate a migration" src="/prompts/drizzle-migration.md" buttonText="Copy prompt" />
+<AgentPrompt title="Pooled vs direct URL" src="/prompts/drizzle-pooled-direct.md" buttonText="Copy prompt" />
+<AgentPrompt title="Serverless HTTP driver" src="/prompts/drizzle-serverless-http.md" buttonText="Copy prompt" />
+<AgentPrompt title="Add Lakebase Search" src="/prompts/drizzle-search.md" buttonText="Copy prompt" />
+</div>
+
+<div className="flex flex-col gap-4 [&>div]:my-0!">
+<p className="m-0 text-sm font-medium tracking-tight text-gray-new-20 dark:text-gray-new-80">Neon branching</p>
+<AgentPrompt title="Branch per pull request" src="/prompts/drizzle-branch-per-pr.md" buttonText="Copy prompt" />
+<AgentPrompt title="Schema-only branch" src="/prompts/drizzle-schema-only-branch.md" buttonText="Copy prompt" />
+<AgentPrompt title="Reset from parent" src="/prompts/drizzle-reset-from-parent.md" buttonText="Copy prompt" />
+<AgentPrompt title="Instant restore" src="/prompts/drizzle-instant-restore.md" buttonText="Copy prompt" />
+</div>
+
+</div>
+
+</Steps>
+
+## Full setup, step by step
 
 <Callout title="Realtime with Drizzle">
 See how to subscribe to live SQL queries with [Neon Realtime + Drizzle](/docs/realtime/examples/drizzle)
