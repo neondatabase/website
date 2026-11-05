@@ -2,6 +2,11 @@ import PropTypes from 'prop-types';
 
 import FunctionRegistryTemplateLogo from 'components/pages/functions/templates/registry/template-logo';
 import FunctionRegistryWebsiteLink from 'components/pages/functions/templates/registry/website-link';
+import {
+  EnvironmentTable,
+  OperationList,
+} from 'components/pages/functions/templates/template-blocks';
+import { renderReadme } from 'components/pages/functions/templates/template-readme';
 import Container from 'components/shared/container';
 import CopyCommand from 'components/shared/copy-command';
 import Link from 'components/shared/link';
@@ -56,70 +61,6 @@ const RUN_LOCALLY = (
     once it works.
   </>
 );
-
-const Operation = ({ operation, installCommand }) => {
-  const command = operation.id ? `${installCommand} --operation ${operation.id}` : null;
-
-  return (
-    <li className="border-t border-gray-new-20 pt-6">
-      <h3 className="flex flex-wrap items-center gap-x-3 gap-y-2 text-xl leading-snug font-medium tracking-extra-tight">
-        {operation.title}
-        {operation.recommended && (
-          <span className="border border-green-45/40 px-1.5 py-1 font-mono text-[11px] leading-none font-medium tracking-tight text-green-45 uppercase">
-            Recommended
-          </span>
-        )}
-      </h3>
-      <p className="mt-2 text-base leading-normal tracking-extra-tight text-gray-new-60">
-        {operation.description}
-      </p>
-      {isInlineCodeSafe(operation.route) && (
-        <p className="mt-2 font-mono text-sm text-gray-new-80">{operation.route}</p>
-      )}
-      {command && (
-        <CopyCommand className="mt-4" command={command} trackingLabel={`Copy ${command}`} />
-      )}
-    </li>
-  );
-};
-
-Operation.propTypes = {
-  installCommand: PropTypes.string.isRequired,
-  operation: PropTypes.shape({
-    id: PropTypes.string,
-    title: PropTypes.string.isRequired,
-    description: PropTypes.string.isRequired,
-    route: PropTypes.string,
-    recommended: PropTypes.bool,
-  }).isRequired,
-};
-
-const EnvironmentTable = ({ variables }) => (
-  <div className="mt-6 overflow-x-auto border border-gray-new-20">
-    <table className="w-full min-w-80 text-left text-sm">
-      <thead className="bg-gray-new-8 font-mono text-xs tracking-tight text-gray-new-60 uppercase">
-        <tr>
-          <th className="px-4 py-3 font-medium">Variable</th>
-          <th className="px-4 py-3 font-medium">Description</th>
-        </tr>
-      </thead>
-      <tbody>
-        {variables.map(({ name, description }) => (
-          <tr className="border-t border-gray-new-20" key={name}>
-            <td className="px-4 py-3 font-mono text-white">{name}</td>
-            <td className="px-4 py-3 text-gray-new-60">{description}</td>
-          </tr>
-        ))}
-      </tbody>
-    </table>
-  </div>
-);
-
-EnvironmentTable.propTypes = {
-  variables: PropTypes.arrayOf(
-    PropTypes.shape({ name: PropTypes.string.isRequired, description: PropTypes.string })
-  ).isRequired,
-};
 
 const PagerLink = ({ label, title, href, direction }) => {
   const isNext = direction === 'next';
@@ -284,10 +225,23 @@ TemplateSidebar.propTypes = {
   }).isRequired,
 };
 
-const TemplateDetail = ({ template, previous = null, next = null }) => {
+const TemplateDetail = async ({ template, previous = null, next = null, readme = null }) => {
   const operations = template.operations ?? [];
   const environment = (template.environment ?? []).filter((item) => isInlineCodeSafe(item.name));
   const installCommand = `neon functions new ${template.id}`;
+
+  const renderedReadme =
+    readme &&
+    (await renderReadme({
+      ...readme,
+      blocks: {
+        environment: environment.length > 0 && <EnvironmentTable variables={environment} />,
+        operations: operations.length > 0 && (
+          <OperationList operations={operations} installCommand={installCommand} />
+        ),
+      },
+    }));
+  const readmeHas = (block) => Boolean(renderedReadme?.used.has(block));
 
   return (
     <Container
@@ -320,22 +274,29 @@ const TemplateDetail = ({ template, previous = null, next = null }) => {
       </aside>
 
       <article className="col-span-8 row-start-2 max-w-[704px] lg:-mt-14 md:-mt-10">
-        {operations.length > 0 ? (
+        {renderedReadme && (
+          <section className="mt-14 md:mt-10">
+            <h2 className="text-[28px] leading-tight tracking-tighter md:text-2xl">
+              About this template
+            </h2>
+            <div className="mt-6">{renderedReadme.content}</div>
+          </section>
+        )}
+
+        {operations.length > 0 && !readmeHas('operations') && (
           <Section
             title="What this function exposes"
             description="After you deploy, call these paths on the function URL."
           >
-            <ul className="mt-6 flex flex-col gap-6">
-              {operations.map((operation) => (
-                <Operation
-                  key={operation.id || operation.title}
-                  operation={operation}
-                  installCommand={installCommand}
-                />
-              ))}
-            </ul>
+            <OperationList
+              className="mt-6"
+              operations={operations}
+              installCommand={installCommand}
+            />
           </Section>
-        ) : (
+        )}
+
+        {operations.length === 0 && !renderedReadme ? (
           <Section
             title="What it does"
             description={
@@ -345,9 +306,14 @@ const TemplateDetail = ({ template, previous = null, next = null }) => {
               </>
             }
           />
+        ) : (
+          <Section
+            title="Run it"
+            description={<>Installing a template doesn&apos;t deploy it, so {RUN_LOCALLY}</>}
+          />
         )}
 
-        {environment.length > 0 && (
+        {environment.length > 0 && !readmeHas('environment') && (
           <Section
             title="Environment variables"
             description={
@@ -358,15 +324,8 @@ const TemplateDetail = ({ template, previous = null, next = null }) => {
               </>
             }
           >
-            <EnvironmentTable variables={environment} />
+            <EnvironmentTable className="mt-6" variables={environment} />
           </Section>
-        )}
-
-        {operations.length > 0 && (
-          <Section
-            title="Run it"
-            description={<>Installing a template doesn&apos;t deploy it, so {RUN_LOCALLY}</>}
-          />
         )}
 
         <TemplatePager previous={previous} next={next} />
@@ -390,6 +349,11 @@ TemplateDetail.propTypes = {
   template: templateShape.isRequired,
   previous: templateShape,
   next: templateShape,
+  readme: PropTypes.shape({
+    markdown: PropTypes.string.isRequired,
+    imageBase: PropTypes.string.isRequired,
+    linkBase: PropTypes.string.isRequired,
+  }),
 };
 
 export default TemplateDetail;
