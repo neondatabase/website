@@ -96,9 +96,38 @@ Neon computes use these logging settings:
 | `log_error_verbosity`         | `terse`   | Errors and warnings without `DETAIL`, `HINT`, or `CONTEXT` lines.                      |
 | `log_min_error_statement`     | `panic`   | The SQL statement that caused an error isn't included, to keep query data out of logs. |
 
-Statement logging is off. Query text isn't logged (`log_statement` is `none`), slow queries aren't logged (`log_min_duration_statement` is `-1`), and lock waits aren't logged (`log_lock_waits` is `off`). These are superuser-level parameters, so you can't change them with `SET` or `ALTER DATABASE`. To find slow or frequent queries, use [Monitor query performance](/docs/introduction/monitor-query-performance) instead.
+Statement logging is off by default. Query text isn't logged (`log_statement` is `none`), slow queries aren't logged (`log_min_duration_statement` is `-1`), and lock waits aren't logged (`log_lock_waits` is `off`). To find slow or frequent queries without changing log settings, use [Monitor query performance](/docs/introduction/monitor-query-performance).
 
 For the full list of Neon's Postgres settings, see [Postgres parameter settings](/docs/reference/compatibility#postgres-parameter-settings).
+
+### Log slow queries
+
+You can turn on slow-query logging for a compute by setting `log_min_duration_statement` in the compute's `pg_settings` with the [Update compute endpoint](/docs/reference/api/endpoints/update-project-endpoint) API. Postgres then logs every statement that runs longer than the value you set, in milliseconds. The minimum value is `500`. The setting applies without a compute restart.
+
+```bash
+curl --request PATCH \
+     --url https://console.neon.tech/api/v2/projects/<project_id>/endpoints/<endpoint_id> \
+     --header 'accept: application/json' \
+     --header "authorization: Bearer $NEON_API_KEY" \
+     --header 'content-type: application/json' \
+     --data '
+{
+  "endpoint": {
+    "settings": {
+      "pg_settings": {
+        "log_min_duration_statement": "1000"
+      }
+    }
+  }
+}
+'
+```
+
+<Admonition type="warning">
+Slow-query log lines include the full statement text, including any literal values in the query. If your queries contain sensitive data, consider what you send to your observability platform before you turn this on.
+</Admonition>
+
+The other statement logging parameters, such as `log_statement` and `log_lock_waits`, can't be changed. You can't set any of them with `SET` or `ALTER DATABASE`, because they require superuser privileges.
 
 ### Log fields and metadata
 
@@ -120,7 +149,7 @@ Each exported log record also includes these attributes:
 - `region_id`
 - `host`, set to `neon-collector-<project_id>`
 
-Neon filters out some internal storage-layer log lines before export.
+Neon filters out some internal storage-layer log lines before export. Connection logs from Neon's own processes are still included. Neon checks each compute's health by connecting to Postgres about once a minute, and its metrics collectors connect too, so you'll see regular `connection received`, `connection authorized`, and `disconnection` lines from them. These lines have `user=[cloud_admin]`, and most have an `app` value that starts with `compute_ctl` or `neon_compute_sql_exporter`. Lines logged before authentication, such as `connection received`, have an empty `user` field. To hide most of this activity, exclude `user=[cloud_admin]` in your observability platform's log filters.
 
 ### Performance considerations
 
