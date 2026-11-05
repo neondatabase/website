@@ -91,7 +91,7 @@
     "geist": "^1.5.1",
     "glob": "^10.5.0",
     "gray-matter": "^4.0.3",
-    "hast-util-to-jsx-runtime": "^2.3.7",
+    "hast-util-to-jsx-runtime": "^2.3.6",
     "he": "^1.2.0",
     "html-react-parser": "^5.2.17",
     "js-yaml": "^4.3.1",
