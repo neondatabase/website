@@ -146,7 +146,7 @@ A daily spend limit:
 }
 ```
 
-**Fix:** Check the `Retry-After` header. If present, the block is temporary and lifts at that time; retry with exponential backoff. If absent, the block is permanent until resolved; requesting a higher limit requires a paid plan. See [Support](/docs/introduction/support) for your plan's support options and [Rate limits](/docs/ai-gateway/models#rate-limits) for current values.
+**Fix:** Check the `Retry-After` header. If present, the block is temporary and lifts at that time; retry with exponential backoff. If absent, the block is permanent until resolved; on the Scale plan, you can [request a limit increase](/docs/introduction/support#request-a-limit-increase). See [Rate limits](/docs/ai-gateway/models#rate-limits) for current values.
 
 ---
 

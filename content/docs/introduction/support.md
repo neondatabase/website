@@ -99,7 +99,7 @@ The **Support center** drawer opens. Under **Which organization needs support?**
 - **Read the docs**: Browse Neon guides, references, and quickstarts.
 - **Contact our support team**: Open a technical support ticket. Available on the **Scale** plan.
 - **Ask a billing question**: Open a billing support ticket about an invoice, charge, refund, or your plan. Available on the **Launch** and **Scale** plans.
-- **Increase your platform limits**: Ask Support to raise a soft limit, such as AI Gateway usage or concurrently active computes. Available on the **Scale** plan. See [Request a limit increase](#request-a-limit-increase).
+- **Increase your platform limits**: Ask Support to raise AI Gateway, compute, branch, or project limits. Available on the **Scale** plan only. See [Request a limit increase](#request-a-limit-increase).
 - **Get help from the community**: Join the [Neon Discord Server](#neon-discord-server).
 
 On the **Free** plan, the support center offers the AI assistant, the docs, and the community. To unlock support tickets, [upgrade to a paid plan](/docs/introduction/manage-billing#change-your-plan).
@@ -150,7 +150,7 @@ To request an increase:
 
 Support reviews each request against your use case and may ask follow-up questions or approve a different value than you asked for. If you're hitting compute or branch limits because you run a database per tenant or per agent, see [Multitenancy with Neon](/docs/guides/multitenancy) first. A different architecture is often a better fit than a higher limit.
 
-A limit increase doesn't change your plan. Plan allowances, such as the maximum compute size or history window, change only when you [change your plan](/docs/introduction/manage-billing#change-your-plan). To ask about Postgres settings, such as `max_replication_slots`, [open a technical support ticket](#open-a-technical-support-ticket-scale-plan) instead.
+Limit increases aren't available on the Free or Launch plans. To raise these limits, [upgrade to Scale](/docs/introduction/manage-billing#change-your-plan) first. A limit increase doesn't change your plan. Plan allowances, such as the maximum compute size or history window, change only when you [change your plan](/docs/introduction/manage-billing#change-your-plan). To ask about Postgres settings, such as `max_replication_slots`, [open a technical support ticket](#open-a-technical-support-ticket-scale-plan) instead.
 
 <Admonition type="tip">
 To ensure you receive responses from our support team, allowlist the `help@databricks.com` email address in your email client. This prevents support responses from being filtered to your spam or junk folder.
