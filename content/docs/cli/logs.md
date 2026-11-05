@@ -10,7 +10,7 @@ summary: >-
   available in AWS US East (Ohio), US East (N. Virginia), Europe (Frankfurt),
   and Asia Pacific (Singapore).
 enableTableOfContents: true
-updatedOn: '2026-11-04T16:47:40.419Z'
+updatedOn: '2026-11-05T01:16:03.199Z'
 ---
 
 The `logs` command reads the logs a branch's services emit. Today that covers Neon Functions and Object Storage; Postgres compute logs are coming. Query records over a time window, filter by source, severity, or OpenTelemetry attribute, and list which fields and values a branch reports so you can build precise filters.
@@ -45,6 +45,12 @@ Filter function errors on a specific branch:
 
 ```bash
 neon logs query --branch main --source function --severity-text ERROR
+```
+
+Read one function's logs. A function's service name is `neon-function/<slug>`:
+
+```bash
+neon logs query --source function --service-name neon-function/hello
 ```
 
 Use a raw LogQL selection instead of the structured filters:
