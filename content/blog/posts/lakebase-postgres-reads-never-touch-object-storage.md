@@ -15,8 +15,8 @@ categories:
 authors:
   - carlota-soto
 cover:
-  image: null
-  alt: null
+  image: https://cdn.neonapi.io/public/images/pages/blog/lakebase-postgres-reads-never-touch-object-storage/cover.jpg
+  alt: Lakebase Postgres is built on object storage, but 99.99999% of reads never touch it
 isFeatured: false
 seo:
   title: Lakebase Postgres is built on object storage, but 99.99999% of reads never touch it - Neon
@@ -29,10 +29,13 @@ seo:
   ogDescription: >-
     The lakebase architecture prioritizes performance, serving the vast majority
     of page reads from the compute node's local cache
-  image: null
+  image: https://cdn.neonapi.io/public/images/pages/blog/lakebase-postgres-reads-never-touch-object-storage/social.jpg
 ---
 
-**[ADD CLIP 1]**
+<video autoPlay muted loop playsInline width="708" height="487" aria-label="Lakebase Postgres reads">
+<source src="https://cdn.neonapi.io/public/images/pages/blog/lakebase-postgres-reads-never-touch-object-storage/lakebase-reads-clip-1.webm" type="video/webm" />
+<source src="https://cdn.neonapi.io/public/images/pages/blog/lakebase-postgres-reads-never-touch-object-storage/lakebase-reads-clip-1.mp4" type="video/mp4" />
+</video>
 
 The most common argument against running Postgres on object storage goes like this:
 
@@ -128,7 +131,10 @@ To answer `GetPage@LSN`, the pageserver:
 3. Stops at the first image of the page
 4. Replays the collected deltas on top of that image and returns the result
 
-**[ADD CLIP 2]**
+<video autoPlay muted loop playsInline width="708" height="360" aria-label="Rebuilding a page at an LSN">
+<source src="https://cdn.neonapi.io/public/images/pages/blog/lakebase-postgres-reads-never-touch-object-storage/lakebase-reads-clip-2.webm" type="video/webm" />
+<source src="https://cdn.neonapi.io/public/images/pages/blog/lakebase-postgres-reads-never-touch-object-storage/lakebase-reads-clip-2.mp4" type="video/mp4" />
+</video>
 
 The number of deltas applied is the measure of how much work a read takes on the pageserver. With zero deltas, the page comes straight from an image. With many, the pageserver has to replay a long chain of WAL before it can return.
 
