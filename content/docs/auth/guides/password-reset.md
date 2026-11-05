@@ -10,14 +10,14 @@ summary: >-
   setting, `revoke_sessions_on_password_reset`, signs the user out of every
   existing session after a successful reset.
 enableTableOfContents: true
-updatedOn: '2026-11-05T12:32:49.453Z'
+updatedOn: '2026-11-05T12:36:44.389Z'
 ---
 
 Password reset allows users to securely reset forgotten passwords. Managed Better Auth supports password reset via verification links sent to the user's email address.
 
 ## Enable password reset
 
-In your project's **Settings** → **Better Auth** page, ensure **Sign-up with Email** is enabled. Password reset is automatically available when email authentication is enabled.
+In your project's **Settings** → **Better Auth** page, ensure **Sign-in with Email** is enabled. Password reset is automatically available when email authentication is enabled.
 
 ## Using UI components
 
@@ -81,11 +81,23 @@ Password reset links expire after **15 minutes**. If a link expires, users need 
 
 By default, resetting a password doesn't end the user's existing sessions. Turn on **Revoke sessions on password reset** to sign the user out of every existing session when they reset their password. This applies to resets through a reset link and through [Email OTP](/docs/auth/guides/plugins/email-otp#reset-password-with-otp).
 
-<Tabs labels={["Console", "API"]}>
+<Tabs labels={["Console", "CLI", "API"]}>
 
 <TabItem>
 
-In your project's **Settings** → **Better Auth** page, turn on **Revoke sessions on password reset**. The switch is shown while **Sign-in with Email** is enabled.
+In your project's **Settings** → **Better Auth** page, turn on **Revoke sessions on password reset**. The switch appears under **Sign-in with Email** while that switch is on.
+
+</TabItem>
+
+<TabItem>
+
+Turn on the setting using [`neon neon-auth config email-password update`](/docs/cli/neon-auth#config-email-password-update):
+
+```bash
+neon neon-auth config email-password update --revoke-sessions-on-password-reset
+```
+
+`neon neon-auth config email-password get` shows the current value.
 
 </TabItem>
 
