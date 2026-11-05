@@ -7,8 +7,8 @@ summary: >-
   to set up monitoring of CPU, memory, connection counts, replication lag,
   database size, deadlocks, and PgBouncer stats, or to forward Postgres logs for
   error and activity visibility. Postgres log export is in beta.
-  Log transmission counts toward network egress billed after 500 GB per project
-  on paid plans.
+  Log transmission counts toward your plan's public network transfer
+  allowance.
 enableTableOfContents: true
 updatedOn: '2026-10-14T11:21:37.306Z'
 ---
@@ -88,6 +88,16 @@ Additionally, if you are setting up Neon's Datadog integration for a project wit
 ## Example usage in Datadog
 
 Once integrated, you can create custom dashboards in Datadog by querying the metrics sent from Neon. Use Datadog's **Metrics Explorer** to search for metrics like `neon_connection_counts`, `neon_db_total_size`, and `host_cpu_seconds_total`. You can also set alerts based on threshold values for critical metrics.
+
+### Filter by tag
+
+Neon doesn't set the Datadog [unified service tags](https://docs.datadoghq.com/getting_started/tagging/unified_service_tagging/) (`env`, `service`, and `version`) on exported metrics or logs. To filter and group Neon data, use these tags instead:
+
+- `project_id`: the Neon project
+- `endpoint_id`: the compute. Each compute belongs to one branch, so you can use this tag to separate environments that run on different branches, such as production and staging.
+- `compute_role`: whether the compute is a primary (read-write) compute or a read replica
+- `region_id`: the region the project runs in
+- `job`: the metric source (`compute-host-metrics`, `sql-metrics`, or `compute-pgbouncer-metrics`). Metrics only.
 
 ## Import the Neon dashboard
 
@@ -734,7 +744,7 @@ You can export your Postgres logs from your Neon compute to your Datadog account
 Enabling this feature may result in:
 
 - An increase in compute resource usage for log processing
-- Additional network egress for log transmission, which is billed after 500 GB per project on paid plans
+- Additional public network transfer for log transmission, which counts toward your plan's [network transfer allowance](/docs/introduction/network-transfer)
 - Associated costs based on log volume in Datadog
 
 ## Feedback

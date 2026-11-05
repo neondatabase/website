@@ -8,8 +8,8 @@ summary: >-
   metadata. Use this page to identify exact metric identifiers such as
   neon_connection_counts, neon_lfc_hits, and host_cpu_seconds_total when
   building dashboards or alerts. Metrics are not sent while a compute is
-  suspended by Scale to Zero, which can cause gaps; log export may also incur
-  network egress charges when a project on a paid plan exceeds 500 GB.
+  suspended by Scale to Zero, which can cause gaps; log export also counts
+  toward your plan's public network transfer allowance.
 enableTableOfContents: true
 updatedOn: '2026-08-07T13:46:01.605Z'
 ---
@@ -127,7 +127,7 @@ Neon filters out some internal storage-layer log lines before export.
 Enabling log export may result in:
 
 - An increase in compute resource usage for log processing
-- Additional network egress for log transmission, billed when a project on a paid plan exceeds 500 GB
+- Additional public network transfer for log transmission, which counts toward your plan's [network transfer allowance](/docs/introduction/network-transfer)
 - Associated costs based on log volume in your observability platform
 
 <Admonition type="note">
