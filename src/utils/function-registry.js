@@ -9,10 +9,17 @@ export const REGISTRY_PAGE_SIZE = 9;
 
 const REGISTRY_USER_AGENT = { 'User-Agent': 'neon-website-function-registry' };
 
+// Shared by every registry fetch (catalog, template.json, README) so they can be revalidated together.
+export const REGISTRY_CACHE_TAG = 'function-registry';
+
 export const registryFetchInit = () =>
   process.env.NODE_ENV === 'development'
     ? { cache: 'no-store', headers: REGISTRY_USER_AGENT }
-    : { cache: 'force-cache', headers: REGISTRY_USER_AGENT, next: { revalidate: 3600 } };
+    : {
+        cache: 'force-cache',
+        headers: REGISTRY_USER_AGENT,
+        next: { revalidate: 3600, tags: [REGISTRY_CACHE_TAG] },
+      };
 
 const JSON_TYPE = 'application/json; charset=utf-8';
 
