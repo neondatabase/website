@@ -51,7 +51,7 @@ const RobotIcon = (props) => (
   </svg>
 );
 
-// Small copy button with an "Agent prompt" tooltip. Copies `text` as is,
+// Small copy button with a "Copy agent prompt" tooltip. Copies `text` as is,
 // or the prompt file at `src` (fetched on hover or focus so the click can copy
 // right away).
 const PromptCopyButton = ({ src = null, text = null, label, className = null }) => {
@@ -82,7 +82,7 @@ const PromptCopyButton = ({ src = null, text = null, label, className = null }) 
     );
   };
 
-  const tooltip = isCopied ? 'Copied' : 'Agent prompt';
+  const tooltip = isCopied ? 'Copied' : 'Copy agent prompt';
 
   return (
     <button
