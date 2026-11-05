@@ -286,7 +286,8 @@ const DetailIconCards = ({
             className={cn(
               'm-0! flex min-h-[169px] pl-0! before:hidden',
               isLockup && 'min-h-[161px]',
-              hasCopyPrompt && 'relative'
+              hasCopyPrompt && 'relative',
+              appearance === 'home' && 'group/home-card'
             )}
             key={index}
           >
@@ -397,6 +398,11 @@ const DetailIconCards = ({
                   className={cn(
                     'font-sans text-lg leading-snug font-medium',
                     !withNumbers && cardTheme.title,
+                    // On the docs home the title turns green while the card,
+                    // or its copy-prompt button, is hovered or focused.
+                    appearance === 'home' &&
+                      !withNumbers &&
+                      'transition-colors duration-200 group-focus-within/home-card:text-green-44 group-hover/home-card:text-green-44 dark:group-focus-within/home-card:text-green-52 dark:group-hover/home-card:text-green-52',
                     appearance === 'home'
                       ? cn(
                           'text-lg leading-[25px] font-medium',
