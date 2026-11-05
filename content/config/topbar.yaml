@@ -1,4 +1,4 @@
-text: "How Kylon's agents build on Neon: each workspace is a Neon project, each draft is a branch"
+text: 'Lakebase Postgres is built on object storage, but 99.99999% of reads are served from high-performance local caches'
 link:
-  url: 'https://neon.com/blog/inside-a-kylon-room-where-people-and-agents-build-apps-on-neon'
+  url: 'https://neon.com/blog/lakebase-postgres-reads-never-touch-object-storage'
   target: '_blank'
