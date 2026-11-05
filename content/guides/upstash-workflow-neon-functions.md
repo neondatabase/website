@@ -128,11 +128,11 @@ Plugin  neon-postgres
 ✔ Install the Neon plugin into these agents? … yes
 
 Plugins
-Scope    Plugin         Agent        Status
-project  neon-postgres  claude-code  installed
-project  neon-postgres  codex        installed
-project  neon-postgres  cursor       installed
-INFO: Installed the Neon plugin (project).
+Scope  Plugin         Agent        Status
+user   neon-postgres  claude-code  installed
+user   neon-postgres  codex        installed
+user   neon-postgres  cursor       installed
+INFO: Installed the Neon plugin (user).
 ✔ Link this project to a Neon project now? … yes
 INFO: Linking organization MyOrg (org-example-12345678).
 ✔ Which project would you like to link? › ＋ Create new project…

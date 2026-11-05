@@ -23,10 +23,10 @@ In Cursor chat, run:
 /add-plugin neon-postgres
 ```
 
-Or install it from [cursor.com/marketplace/neon](https://cursor.com/marketplace/neon), or from a terminal at user level:
+Or install it from [cursor.com/marketplace/neon](https://cursor.com/marketplace/neon), or from a terminal:
 
 ```bash
-npx neon@latest plugins --agent cursor --global
+npx neon@latest plugins --agent cursor
 ```
 
 When Cursor first uses a Neon MCP tool, follow the prompts to sign in to Neon.

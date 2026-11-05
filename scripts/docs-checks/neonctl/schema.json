@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "neonctlVersion": "8.23.1",
+  "neonctlVersion": "8.23.2",
   "binaries": [
     "neonctl",
     "neon"
@@ -4313,12 +4313,12 @@
         },
         "global": {
           "type": "boolean",
-          "describe": "Install user-level. Default is project",
-          "default": false
+          "default": false,
+          "hidden": true
         },
         "yes": {
           "type": "boolean",
-          "describe": "Skip prompts. Detected agents (project folders, else the host CLI agent). --global uses installed apps, else the host CLI agent",
+          "describe": "Skip prompts. Detected agents (project folders, else the host CLI agent, else installed apps)",
           "default": false,
           "alias": "y"
         }
@@ -4333,15 +4333,11 @@
         },
         {
           "command": "$0 plugins -y",
-          "description": "Detected agents (project folders, else the host CLI agent), skip prompts"
+          "description": "Detected agents (project folders, else the host CLI agent, else installed apps), skip prompts"
         },
         {
           "command": "$0 plugins --agent cursor --agent claude-code",
           "description": "Install into specific agents"
-        },
-        {
-          "command": "$0 plugins --global",
-          "description": "Install user-level"
         }
       ]
     },

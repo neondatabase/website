@@ -4,7 +4,7 @@ subtitle: Install the Neon plugin in the Codex CLI or the Codex app
 summary: >-
   Install the Neon plugin in OpenAI Codex from the plugin directory (`/plugins`
   in the Codex CLI, or Plugins in the Codex app), or run `npx neon@latest
-  plugins --agent codex --global`. The plugin bundles the Neon MCP Server, shown in
+  plugins --agent codex`. The plugin bundles the Neon MCP Server, shown in
   Codex as the Neon app, and Neon's agent skills. Also covers MCP-only setup in
   .codex/config.toml and skills-only setup.
 enableTableOfContents: true
@@ -33,10 +33,10 @@ In the Codex app, open **Plugins**, search for **Neon**, and choose **Add to Cod
 
 <TabItem>
 
-Install the plugin at user level:
+Install the plugin:
 
 ```bash
-npx neon@latest plugins --agent codex --global
+npx neon@latest plugins --agent codex
 ```
 
 </TabItem>

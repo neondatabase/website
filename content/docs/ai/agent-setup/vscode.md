@@ -19,13 +19,13 @@ GitHub Copilot in VS Code gets Neon through the Neon plugin, which bundles Neon'
 
 ## Install the plugin
 
-For VS Code, `neon plugins` installs the plugin at user level only, so pass `--global`:
+Run:
 
 ```bash
-npx neon@latest plugins --agent vscode --global
+npx neon@latest plugins --agent vscode
 ```
 
-The GitHub Copilot CLI uses the same plugin target (`github-copilot`), so `--agent github-copilot-cli --global` installs to the same place.
+The GitHub Copilot CLI uses the same plugin target (`github-copilot`), so `--agent github-copilot-cli` installs to the same place.
 
 [`npx neon@latest init`](/docs/cli/init) sets up VS Code with the skills and MCP Server installed separately (not the plugin) and links a Neon project.
 

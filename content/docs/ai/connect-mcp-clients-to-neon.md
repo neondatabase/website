@@ -232,7 +232,7 @@ See [fx MCP](https://fx.sh/docs/capabilities/mcp) for `/mcp reload`, `/mcp auth`
 Grok Build supports the Neon plugin at user level:
 
 ```bash
-npx neon@latest plugins --agent grok-build --global
+npx neon@latest plugins --agent grok-build
 ```
 
 The plugin includes the Neon skills and the Neon MCP Server. To add only the MCP Server, run `npx add-mcp https://mcp.neon.tech/mcp -a grok-build`. For the Grok Bot chat app, see [Set up Neon in Grok Bot](/docs/ai/agent-setup/grok-bot).
@@ -252,7 +252,7 @@ Install Neon's [agent-skills repository](https://github.com/neondatabase/agent-s
 /plugins install https://github.com/neondatabase/agent-skills
 ```
 
-Plugin changes apply to new sessions, so run `/new` afterward. You can also run `npx neon@latest plugins --agent kimi-code --global`. To add only the MCP Server, run `npx add-mcp https://mcp.neon.tech/mcp -a kimi-code`, start a new session, and click **Authorize** when the OAuth window opens.
+Plugin changes apply to new sessions, so run `/new` afterward. You can also run `npx neon@latest plugins --agent kimi-code`. To add only the MCP Server, run `npx add-mcp https://mcp.neon.tech/mcp -a kimi-code`, start a new session, and click **Authorize** when the OAuth window opens.
 
 ## Kiro
 
