@@ -10,7 +10,7 @@ summary: >-
   and rate-limited (exceeding attempts returns `TOO_MANY_ATTEMPTS`), and
   production deployments require a dedicated SMTP provider.
 enableTableOfContents: true
-updatedOn: '2026-10-09T09:46:45.817Z'
+updatedOn: '2026-11-05T12:32:49.453Z'
 ---
 
 Managed Better Auth is built on [Better Auth](https://www.better-auth.com/) and provides full support for Email OTP plugin APIs through the Neon SDK. You do not need to manually install or configure the Better Auth Email OTP plugin.
@@ -187,6 +187,8 @@ export async function resetPasswordUsingOtp(email: string, otp: string, newPassw
   });
 }
 ```
+
+To sign the user out of every existing session after an OTP reset, turn on [Revoke sessions on password reset](/docs/auth/guides/password-reset#sign-users-out-after-a-reset).
 
 ## Limitations
 
