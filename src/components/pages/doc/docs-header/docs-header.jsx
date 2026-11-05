@@ -44,6 +44,12 @@ const SEARCH_COLLAPSE_SAVING = SEARCH_WIDTH_FULL - CONTROL_WIDTH_ICON; // exact
 // The Ask AI label width is content-driven; this estimate only shifts the exact
 // width at which that button collapses, never the monotonic ordering below.
 const ASK_COLLAPSE_SAVING = 52;
+// The inline "More" lane (its "More" label, caret, and the lane gap before it)
+// lives in the nav, so once any lane overflows the remaining inline lanes have to
+// leave room for it. Like ASK_COLLAPSE_SAVING this is a width estimate: it only
+// shifts the exact width at which the next lane funnels into "More", never the
+// monotonic drop order.
+const OVERFLOW_TRIGGER_WIDTH = 80;
 
 // One monotonic degradation chain driven by a SINGLE stable measurement: the
 // header row's content width. That width depends only on the viewport, never on
@@ -57,7 +63,7 @@ const ASK_COLLAPSE_SAVING = 52;
 // lane space when the whole right cluster is collapsed) plus the known savings,
 // so the lane calculation always reflects the right cluster's FINAL collapsed
 // width while it is deciding overflow.
-const useResponsiveDocsHeader = (rowRef, navRef, lanes) => {
+const useResponsiveDocsHeader = (rowRef, navWrapRef, navRef, lanes) => {
   const metricsRef = useRef({ laneWidths: [], lanesTotal: 0, laneGap: 0, baseCollapsed: 0 });
   const appliedRef = useRef({ searchCollapsed: false, askCollapsed: false });
   // Before the first (synchronous, pre-paint) measurement, render the right
@@ -97,9 +103,10 @@ const useResponsiveDocsHeader = (rowRef, navRef, lanes) => {
     }
     const rowContent = getRowContent();
 
-    // Lane space available at each collapse stage. The "More" trigger sits in
-    // the measured right cluster, so it is already excluded from these figures
-    // (no separate reserve is needed and overflow settles in one pass).
+    // Lane space available at each collapse stage. The inline "More" lane is NOT
+    // part of these figures: it only exists once a lane overflows, so its width
+    // is reserved in the overflow branch below, never while deciding whether
+    // anything overflows at all.
     const spaceBothCollapsed = rowContent + baseCollapsed;
     const spaceSearchCollapsed = spaceBothCollapsed - ASK_COLLAPSE_SAVING;
     const spaceNoneCollapsed = spaceSearchCollapsed - SEARCH_COLLAPSE_SAVING;
@@ -114,8 +121,10 @@ const useResponsiveDocsHeader = (rowRef, navRef, lanes) => {
       return { searchCollapsed: true, askCollapsed: true, hiddenIndexes: [] };
     }
 
-    // Overflow regime: both controls are icons; drop lowest priority first,
-    // breaking ties by dropping the right-most lane.
+    // Overflow regime: both controls are icons and the inline "More" lane is now
+    // present, so the lanes that stay inline must also leave room for it. Drop
+    // lowest priority first, breaking ties by dropping the right-most lane.
+    const spaceWithTrigger = spaceBothCollapsed - OVERFLOW_TRIGGER_WIDTH;
     const widthOf = (indexes) =>
       indexes.length === 0
         ? 0
@@ -128,7 +137,7 @@ const useResponsiveDocsHeader = (rowRef, navRef, lanes) => {
     const hidden = new Set();
     for (const i of dropOrder) {
       hidden.add(i);
-      if (widthOf(visible.filter((x) => !hidden.has(x))) <= spaceBothCollapsed + 0.5) break;
+      if (widthOf(visible.filter((x) => !hidden.has(x))) <= spaceWithTrigger + 0.5) break;
     }
     return {
       searchCollapsed: true,
@@ -140,7 +149,8 @@ const useResponsiveDocsHeader = (rowRef, navRef, lanes) => {
   useLayoutEffect(() => {
     const row = rowRef.current;
     const nav = navRef.current;
-    if (!row || !nav) return undefined;
+    const navWrap = navWrapRef.current;
+    if (!row || !nav || !navWrap) return undefined;
 
     // Cache each lane's intrinsic width (hidden lanes report 0, so keep their
     // last known width) and the invariant collapsed-cluster lane space. The
@@ -165,7 +175,12 @@ const useResponsiveDocsHeader = (rowRef, navRef, lanes) => {
       const savingNow =
         (appliedRef.current.searchCollapsed ? 0 : SEARCH_COLLAPSE_SAVING) +
         (appliedRef.current.askCollapsed ? 0 : ASK_COLLAPSE_SAVING);
-      metricsRef.current.baseCollapsed = nav.clientWidth + savingNow - getRowContent();
+      // navWrap is the flex-1 nav column: its width is the space left for the
+      // lanes (plus the inline "More" lane) after the logo and right cluster, and
+      // it does not depend on whether a lane has collapsed, so it stays a stable
+      // base. The lanes themselves live in `nav` (the inner list), which sizes to
+      // its content so "More" can sit directly after the last visible lane.
+      metricsRef.current.baseCollapsed = navWrap.clientWidth + savingNow - getRowContent();
     };
 
     measure();
@@ -194,7 +209,7 @@ const useResponsiveDocsHeader = (rowRef, navRef, lanes) => {
       if (frame) cancelAnimationFrame(frame);
       resizeObserver.disconnect();
     };
-  }, [rowRef, navRef, lanes, compute, getRowContent]);
+  }, [rowRef, navWrapRef, navRef, lanes, compute, getRowContent]);
 
   return state;
 };
@@ -202,9 +217,11 @@ const useResponsiveDocsHeader = (rowRef, navRef, lanes) => {
 const DocsHeader = ({ customType = null, docPageType = null, basePath, navigation }) => {
   const lanes = useMemo(() => getDocsHeaderLanes(navigation), [navigation]);
   const rowRef = useRef(null);
+  const navWrapRef = useRef(null);
   const navRef = useRef(null);
   const { isMeasured, searchCollapsed, askCollapsed, hiddenIndexes } = useResponsiveDocsHeader(
     rowRef,
+    navWrapRef,
     navRef,
     lanes
   );
@@ -245,14 +262,25 @@ const DocsHeader = ({ customType = null, docPageType = null, basePath, navigatio
             {customType?.title || 'Docs'}
           </span>
         </Link>
-        <nav className="flex min-w-0 flex-1 md:hidden" aria-label="Docs sections">
+        <nav
+          className="flex min-w-0 flex-1 items-stretch gap-x-6 md:hidden"
+          aria-label="Docs sections"
+          ref={navWrapRef}
+        >
           <DocsNavigation
-            className={cn('min-w-0 flex-1 overflow-hidden', !isMeasured && 'invisible')}
+            className={cn('min-w-0 shrink overflow-hidden', !isMeasured && 'invisible')}
             navigation={lanes}
             basePath={basePath}
             ref={navRef}
             hiddenIndexes={hiddenIndexes}
           />
+          {/* Stripe-style overflow: "More" is an inline nav lane that appears only
+              once a lane has overflowed, holding the dropped lanes in priority
+              order. It never renders before measurement, so it cannot flash in at
+              wide widths, and it sits directly after the last visible lane. */}
+          {isMeasured && overflowLanes.length > 0 && (
+            <DocsHeaderMenu overflowLanes={overflowLanes} basePath={basePath} />
+          )}
         </nav>
         <div className="flex shrink-0 items-center gap-x-2 md:hidden">
           <InkeepTrigger
@@ -278,8 +306,6 @@ const DocsHeader = ({ customType = null, docPageType = null, basePath, navigatio
           >
             Sign up
           </Link>
-          <span className="mx-1 h-5 w-px bg-gray-new-85 dark:bg-gray-new-20" aria-hidden="true" />
-          <DocsHeaderMenu overflowLanes={overflowLanes} basePath={basePath} />
         </div>
       </div>
     </div>

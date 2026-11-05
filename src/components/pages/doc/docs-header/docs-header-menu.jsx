@@ -15,7 +15,7 @@ import getDocsNavHref from 'utils/get-docs-nav-href';
 
 import Icon from '../menu/icon';
 
-import MenuIcon from './images/menu.inline.svg';
+import NavLaneChevronIcon from './images/chevron-down.inline.svg';
 
 const THEMES = [
   { value: 'system', label: 'System' },
@@ -199,12 +199,16 @@ const DocsHeaderMenu = ({ className = null, overflowLanes = [], basePath }) => {
   }, [isOpen]);
 
   return (
-    <div className={cn('relative', className)} ref={menuRef}>
+    <li className={cn('relative flex shrink-0 items-stretch', className)} ref={menuRef}>
+      {/* The overflow control is an inline nav lane ("More"), styled and spaced
+          exactly like the dropdown lanes (Products, Reference) beside it, not a
+          right-side hamburger icon. It only renders while a lane has overflowed. */}
       <button
         ref={toggleRef}
         className={cn(
-          'flex size-9 items-center justify-center rounded-none text-gray-new-20 transition-colors duration-200 hover:bg-gray-new-98',
-          'dark:text-gray-new-80 dark:hover:bg-gray-new-10'
+          'relative flex h-full items-center gap-1 rounded-sm text-[15px] leading-snug tracking-extra-tight whitespace-nowrap transition-colors duration-200',
+          'hover:text-black-new dark:hover:text-white',
+          isOpen ? 'text-black-new dark:text-white' : 'text-gray-new-30 dark:text-gray-new-70'
         )}
         type="button"
         aria-label={isOpen ? 'Close menu' : 'More'}
@@ -213,12 +217,19 @@ const DocsHeaderMenu = ({ className = null, overflowLanes = [], basePath }) => {
         data-test="docs-header-menu-toggle"
         onClick={() => setIsOpen(!isOpen)}
       >
-        <MenuIcon className="dark:[&_[stroke]]:stroke-gray-new-70" aria-hidden="true" />
+        More
+        <NavLaneChevronIcon
+          className={cn(
+            'text-gray-new-50 transition-transform duration-200 dark:text-gray-new-70',
+            isOpen && 'rotate-180'
+          )}
+          aria-hidden="true"
+        />
       </button>
       {isOpen && (
         <div
           className={cn(
-            'absolute top-[calc(100%+18px)] right-0 z-10 grid max-h-[calc(100vh-120px)] w-56 gap-y-0.5 overflow-y-auto rounded-md border p-2',
+            'absolute top-[calc(100%+18px)] left-0 z-10 grid max-h-[calc(100vh-120px)] w-56 gap-y-0.5 overflow-y-auto rounded-md border p-2',
             'border-gray-new-85 bg-white shadow-[0_8px_24px_rgba(0,0,0,0.08)]',
             'dark:border-gray-new-20 dark:bg-black-new dark:shadow-[0_8px_24px_rgba(0,0,0,0.5)]'
           )}
@@ -258,7 +269,7 @@ const DocsHeaderMenu = ({ className = null, overflowLanes = [], basePath }) => {
           <ThemeOptions />
         </div>
       )}
-    </div>
+    </li>
   );
 };
 

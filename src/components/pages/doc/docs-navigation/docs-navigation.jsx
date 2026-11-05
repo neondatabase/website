@@ -12,7 +12,7 @@ const DocsNavigation = forwardRef(
     const [activeItems, setActiveItems] = useState([]);
 
     return (
-      <ul className={cn('no-scrollbars flex size-full gap-x-6', className)} ref={ref} {...props}>
+      <ul className={cn('no-scrollbars flex h-full gap-x-6', className)} ref={ref} {...props}>
         {navigation?.map((item, index) => (
           <Item
             key={index}

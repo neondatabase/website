@@ -32,7 +32,7 @@ vi.mock('components/shared/link', () => ({
 vi.mock('../menu/icon', () => ({ default: () => <svg /> }));
 vi.mock('icons/chevron-down.inline.svg', () => ({ default: () => <svg /> }));
 vi.mock('icons/discord.inline.svg', () => ({ default: () => <svg /> }));
-vi.mock('./images/menu.inline.svg', () => ({ default: () => <svg /> }));
+vi.mock('./images/chevron-down.inline.svg', () => ({ default: () => <svg /> }));
 
 const LANES = [
   { nav: 'Get started', slug: '/docs' },
@@ -42,6 +42,13 @@ const LANES = [
   },
 ];
 
+// The overflow control is the inline "More" nav lane: a single toggle labeled
+// "More" when closed and "Close menu" when open. Whether it renders at all is the
+// parent header's job (it only mounts this once a lane has overflowed), which
+// depends on live layout measurement and so is covered by the Playwright tablet
+// spec, not here. These tests cover what the menu itself owns: its trigger, the
+// overflowed lanes it holds, expand-in-place dropdown lanes, Escape focus-return,
+// and the theme radiogroup.
 const openMenu = () => {
   fireEvent.click(screen.getByRole('button', { name: 'More' }));
   return screen.getByRole('button', { name: 'Close menu' });
