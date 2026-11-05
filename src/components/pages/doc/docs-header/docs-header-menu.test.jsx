@@ -1,27 +1,9 @@
-import { fireEvent, render, screen, within } from '@testing-library/react';
+import { fireEvent, render, screen } from '@testing-library/react';
 import { afterEach, describe, expect, it, vi } from 'vitest';
 
 import DocsHeaderMenu from './docs-header-menu';
 
-const { setThemeSpy } = vi.hoisted(() => ({ setThemeSpy: vi.fn() }));
-
 vi.mock('next/navigation', () => ({ usePathname: () => '/docs/auth/overview' }));
-// A stateful stand-in for next-themes, so tabIndex follows the selected theme.
-vi.mock('next-themes', async () => {
-  const { useState } = await import('react');
-  return {
-    useTheme: () => {
-      const [theme, setTheme] = useState('light');
-      return {
-        theme,
-        setTheme: (value) => {
-          setThemeSpy(value);
-          setTheme(value);
-        },
-      };
-    },
-  };
-});
 vi.mock('components/shared/link', () => ({
   default: ({ to, children, tagName: _tagName, isExternal: _isExternal, ...props }) => (
     <a href={to} {...props}>
@@ -29,9 +11,7 @@ vi.mock('components/shared/link', () => ({
     </a>
   ),
 }));
-vi.mock('../menu/icon', () => ({ default: () => <svg /> }));
 vi.mock('icons/chevron-down.inline.svg', () => ({ default: () => <svg /> }));
-vi.mock('icons/discord.inline.svg', () => ({ default: () => <svg /> }));
 vi.mock('./images/chevron-down.inline.svg', () => ({ default: () => <svg /> }));
 
 const LANES = [
@@ -47,8 +27,9 @@ const LANES = [
 // parent header's job (it only mounts this once a lane has overflowed), which
 // depends on live layout measurement and so is covered by the Playwright tablet
 // spec, not here. These tests cover what the menu itself owns: its trigger, the
-// overflowed lanes it holds, expand-in-place dropdown lanes, Escape focus-return,
-// and the theme radiogroup.
+// overflowed lanes it holds, expand-in-place dropdown lanes, and Escape
+// focus-return. The menu holds only overflowed lanes; external links and the
+// theme switch no longer live here.
 const openMenu = () => {
   fireEvent.click(screen.getByRole('button', { name: 'More' }));
   return screen.getByRole('button', { name: 'Close menu' });
@@ -60,67 +41,58 @@ afterEach(() => {
 
 describe('DocsHeaderMenu', () => {
   it('closes on Escape and returns focus to the toggle', () => {
-    render(<DocsHeaderMenu basePath="/docs/" />);
+    render(<DocsHeaderMenu basePath="/docs/" overflowLanes={LANES} />);
     const toggle = openMenu();
-    const firstLink = screen.getByRole('link', { name: 'neon.com' });
-    firstLink.focus();
+    const laneLink = screen.getByRole('link', { name: 'Get started' });
+    laneLink.focus();
 
     fireEvent.keyDown(document, { key: 'Escape' });
 
     expect(toggle).toHaveAttribute('aria-expanded', 'false');
-    expect(screen.queryByRole('link', { name: 'neon.com' })).toBeNull();
+    expect(screen.queryByRole('link', { name: 'Get started' })).toBeNull();
     expect(toggle).toHaveFocus();
   });
 
-  it('makes only the selected theme a Tab stop and moves with the arrow keys', () => {
-    render(<DocsHeaderMenu basePath="/docs/" />);
-    openMenu();
-    const group = screen.getByRole('radiogroup', { name: 'Theme' });
-    const [system, light, dark] = within(group).getAllByRole('radio');
-
-    expect(light).toHaveAttribute('aria-checked', 'true');
-    expect(light).toHaveAttribute('tabindex', '0');
-    expect(system).toHaveAttribute('tabindex', '-1');
-    expect(dark).toHaveAttribute('tabindex', '-1');
-
-    fireEvent.keyDown(light, { key: 'ArrowDown' });
-    expect(setThemeSpy).toHaveBeenLastCalledWith('dark');
-    expect(dark).toHaveFocus();
-    expect(dark).toHaveAttribute('tabindex', '0');
-
-    // Wraps at both ends.
-    fireEvent.keyDown(dark, { key: 'ArrowDown' });
-    expect(setThemeSpy).toHaveBeenLastCalledWith('system');
-    expect(system).toHaveFocus();
-    fireEvent.keyDown(system, { key: 'ArrowUp' });
-    expect(setThemeSpy).toHaveBeenLastCalledWith('dark');
-    expect(dark).toHaveFocus();
-  });
-
-  it('lists only the overflowed lanes, in order, before the site links', () => {
+  it('holds only the overflowed lanes, in order, and nothing else', () => {
     const { rerender } = render(<DocsHeaderMenu basePath="/docs/" />);
     openMenu();
-    // Nothing overflows: no lanes in the menu, only the site links.
+    // Nothing overflows: the panel is open but holds no lanes, and it never
+    // carries the external links or theme switch that used to live here.
     expect(screen.queryByRole('link', { name: 'Get started' })).toBeNull();
     expect(screen.queryByRole('button', { name: 'Products' })).toBeNull();
-    expect(screen.getByRole('link', { name: 'neon.com' })).toBeInTheDocument();
+    expect(screen.queryByRole('link', { name: 'neon.com' })).toBeNull();
+    expect(screen.queryByRole('radiogroup', { name: 'Theme' })).toBeNull();
 
     // A partial overflow mirrors just the lanes that no longer fit inline, so a
     // lane kept inline is never duplicated in the menu.
     rerender(<DocsHeaderMenu basePath="/docs/" overflowLanes={[LANES[1]]} />);
     expect(screen.queryByRole('link', { name: 'Get started' })).toBeNull();
-    const group = screen.getByRole('button', { name: 'Products' });
+    expect(screen.getByRole('button', { name: 'Products' })).toBeInTheDocument();
 
+    // Full overflow: both lanes present, in nav order, and still nothing else.
     rerender(<DocsHeaderMenu basePath="/docs/" overflowLanes={LANES} />);
     const lane = screen.getByRole('link', { name: 'Get started' });
-    const neon = screen.getByRole('link', { name: 'neon.com' });
-    expect(lane.compareDocumentPosition(neon) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
+    const group = screen.getByRole('button', { name: 'Products' });
+    expect(lane.compareDocumentPosition(group) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
+    expect(screen.queryByRole('link', { name: 'neon.com' })).toBeNull();
+    expect(screen.queryByRole('radiogroup', { name: 'Theme' })).toBeNull();
+  });
 
-    fireEvent.click(screen.getByRole('button', { name: 'Products' }));
+  it('expands an overflowed dropdown lane in place with real links', () => {
+    render(<DocsHeaderMenu basePath="/docs/" overflowLanes={LANES} />);
+    openMenu();
+
+    // The dropdown lane is an expand-in-place accordion button, not a hover
+    // flyout: its links are hidden until it is opened.
+    const group = screen.getByRole('button', { name: 'Products' });
+    expect(group).toHaveAttribute('aria-expanded', 'false');
+    expect(screen.queryByRole('link', { name: 'Auth' })).toBeNull();
+
+    fireEvent.click(group);
+    expect(group).toHaveAttribute('aria-expanded', 'true');
     expect(screen.getByRole('link', { name: 'Auth' })).toHaveAttribute(
       'href',
       '/docs/auth/overview'
     );
-    expect(group).toBeInTheDocument();
   });
 });

@@ -1,34 +1,21 @@
 'use client';
 
 import { usePathname } from 'next/navigation';
-import { useTheme } from 'next-themes';
 import PropTypes from 'prop-types';
 import { useEffect, useId, useRef, useState } from 'react';
 
 import Link from 'components/shared/link';
-import LINKS from 'constants/links';
 import useClickOutside from 'hooks/use-click-outside';
 import ChevronIcon from 'icons/chevron-down.inline.svg';
-import DiscordIcon from 'icons/discord.inline.svg';
 import { cn } from 'utils/cn';
 import getDocsNavHref from 'utils/get-docs-nav-href';
 
-import Icon from '../menu/icon';
-
 import NavLaneChevronIcon from './images/chevron-down.inline.svg';
-
-const THEMES = [
-  { value: 'system', label: 'System' },
-  { value: 'light', label: 'Light' },
-  { value: 'dark', label: 'Dark' },
-];
 
 const itemClassName = cn(
   'flex w-full items-center gap-x-2.5 rounded-sm px-2.5 py-2 text-left text-sm leading-tight',
   'text-gray-new-15 transition-colors duration-200 hover:bg-gray-new-98 dark:text-gray-new-90 dark:hover:bg-gray-new-10'
 );
-
-const Divider = () => <span className="mx-0.5 my-1.5 h-px bg-gray-new-90 dark:bg-gray-new-20" />;
 
 const MenuLink = ({ to, children }) => {
   const isExternal = to.startsWith('http');
@@ -105,72 +92,6 @@ LaneGroup.propTypes = {
   basePath: PropTypes.string.isRequired,
 };
 
-const ThemeOptions = () => {
-  const [mounted, setMounted] = useState(false);
-  const { theme, setTheme } = useTheme();
-  const optionRefs = useRef([]);
-
-  useEffect(() => setMounted(true), []);
-
-  // WAI-ARIA radio group: only the checked option is a Tab stop (the first one
-  // before the theme is known), and the arrow keys move and select, wrapping.
-  const selectedIndex = THEMES.findIndex(({ value }) => mounted && theme === value);
-  const tabStopIndex = selectedIndex === -1 ? 0 : selectedIndex;
-
-  const handleKeyDown = (event, index) => {
-    const last = THEMES.length - 1;
-    const previous = index === 0 ? last : index - 1;
-    const next = index === last ? 0 : index + 1;
-    const nextIndex = { ArrowUp: previous, ArrowLeft: previous, ArrowDown: next, ArrowRight: next }[
-      event.key
-    ];
-    if (nextIndex === undefined) return;
-    event.preventDefault();
-    setTheme(THEMES[nextIndex].value);
-    optionRefs.current[nextIndex]?.focus();
-  };
-
-  return (
-    <div className="grid" role="radiogroup" aria-label="Theme">
-      <span className="px-2.5 pt-1.5 pb-0.5 text-xs text-[#6B6F77] dark:text-gray-new-60">
-        Theme
-      </span>
-      {THEMES.map(({ value, label }, index) => {
-        const isSelected = mounted && theme === value;
-
-        return (
-          <button
-            className={cn(
-              'flex items-center gap-x-2.5 rounded-sm px-2.5 py-1.5 text-left text-sm leading-tight transition-colors duration-200 hover:bg-gray-new-98 dark:hover:bg-gray-new-10',
-              isSelected
-                ? 'text-gray-new-15 dark:text-gray-new-90'
-                : 'text-gray-new-40 dark:text-gray-new-60'
-            )}
-            key={value}
-            ref={(node) => {
-              optionRefs.current[index] = node;
-            }}
-            type="button"
-            role="radio"
-            aria-checked={isSelected}
-            tabIndex={index === tabStopIndex ? 0 : -1}
-            onClick={() => setTheme(value)}
-            onKeyDown={(event) => handleKeyDown(event, index)}
-          >
-            <span
-              className={cn(
-                'size-1.5 shrink-0 rounded-full',
-                isSelected && 'bg-black-new dark:bg-white'
-              )}
-            />
-            {label}
-          </button>
-        );
-      })}
-    </div>
-  );
-};
-
 const DocsHeaderMenu = ({ className = null, overflowLanes = [], basePath }) => {
   const [isOpen, setIsOpen] = useState(false);
   const menuRef = useRef(null);
@@ -235,38 +156,19 @@ const DocsHeaderMenu = ({ className = null, overflowLanes = [], basePath }) => {
           )}
           id={id}
         >
-          {overflowLanes.length > 0 && (
-            <>
-              {overflowLanes.map(({ nav, slug, subnav }) =>
-                subnav ? (
-                  <LaneGroup key={nav} nav={nav} subnav={subnav} basePath={basePath} />
-                ) : (
-                  <MenuLink key={nav} to={getDocsNavHref(slug, basePath)}>
-                    {nav}
-                  </MenuLink>
-                )
-              )}
-              <Divider />
-            </>
+          {/* "More" holds only the overflowed nav lanes. Dropdown lanes expand in
+              place as an accordion; plain lanes are a single link. The external
+              links and theme switch live in the mobile drawer and page footer,
+              not here. */}
+          {overflowLanes.map(({ nav, slug, subnav }) =>
+            subnav ? (
+              <LaneGroup key={nav} nav={nav} subnav={subnav} basePath={basePath} />
+            ) : (
+              <MenuLink key={nav} to={getDocsNavHref(slug, basePath)}>
+                {nav}
+              </MenuLink>
+            )
           )}
-          <MenuLink to="/">
-            <Icon title="home" className="size-4 shrink-0" />
-            neon.com
-          </MenuLink>
-          <MenuLink to={LINKS.github}>
-            <Icon title="github" className="size-4 shrink-0" />
-            GitHub
-          </MenuLink>
-          <MenuLink to={LINKS.discord}>
-            <DiscordIcon className="size-4 shrink-0" width={16} height={16} />
-            Discord
-          </MenuLink>
-          <MenuLink to={LINKS.postgresqltutorial}>
-            <Icon title="tutorial" className="size-4 shrink-0 text-primary-2" />
-            Learn PostgreSQL
-          </MenuLink>
-          <Divider />
-          <ThemeOptions />
         </div>
       )}
     </div>
