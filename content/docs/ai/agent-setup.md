@@ -21,25 +21,25 @@ That's all most coding agents need: your agent installs the Neon CLI, signs you 
 
 Use these pages to connect a chat app like ChatGPT or Claude.ai, to run the install yourself, or for MCP-only and API key setup.
 
-<TechCards>
+<CompactCards cols="2">
 
-<a href="/docs/ai/agent-setup/claude-code" title="Claude Code" description="Neon plugin" icon="claude-code"></a>
+<a href="/docs/ai/agent-setup/claude-code" title="Claude Code" icon="claude-code"></a>
 
-<a href="/docs/ai/agent-setup/cursor" title="Cursor" description="Neon plugin" icon="cursor"></a>
+<a href="/docs/ai/agent-setup/cursor" title="Cursor" icon="cursor"></a>
 
-<a href="/docs/ai/agent-setup/codex" title="Codex" description="Neon plugin" icon="codex"></a>
+<a href="/docs/ai/agent-setup/codex" title="Codex" icon="codex"></a>
 
-<a href="/docs/ai/agent-setup/vscode" title="VS Code and GitHub Copilot" description="Neon plugin and Copilot custom agents" icon="copilot"></a>
+<a href="/docs/ai/agent-setup/vscode" title="VS Code and GitHub Copilot" icon="copilot"></a>
 
-<a href="/docs/ai/agent-setup/chatgpt" title="ChatGPT" description="Neon plugin" icon="chatgpt"></a>
+<a href="/docs/ai/agent-setup/chatgpt" title="ChatGPT" icon="chatgpt"></a>
 
-<a href="/docs/ai/agent-setup/claude-ai" title="Claude.ai and Claude Desktop" description="Official Neon connector" icon="claude-code"></a>
+<a href="/docs/ai/agent-setup/claude-ai" title="Claude.ai and Claude Desktop" icon="claude-code"></a>
 
-<a href="/docs/ai/agent-setup/grok-bot" title="Grok Bot" description="Neon plugin" icon="grok-bot"></a>
+<a href="/docs/ai/agent-setup/grok-bot" title="Grok Bot" icon="grok-bot"></a>
 
-<a href="/docs/ai/connect-mcp-clients-to-neon" title="Other agents" description="Windsurf, Cline, Zed, Gemini CLI, and more" icon="mcp"></a>
+<a href="/docs/ai/connect-mcp-clients-to-neon" title="Zed, Devin, Kiro, and more" icon="mcp"></a>
 
-</TechCards>
+</CompactCards>
 
 ## What gets installed
 

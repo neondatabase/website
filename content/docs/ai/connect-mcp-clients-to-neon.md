@@ -1,14 +1,14 @@
 ---
 title: Set up other agents and MCP clients
-subtitle: Install Neon's agent skills and the Neon MCP Server in Windsurf, Cline, Zed, Gemini CLI, Kiro, Kimi Code, and other agents
+subtitle: Install Neon's agent skills and the Neon MCP Server in Devin Desktop, Cline, Zed, Gemini CLI, Kiro, Kimi Code, and other agents
 summary: >-
   Set up Neon in AI agents and MCP clients that don't have their own setup
-  page, including Antigravity, Cline, fx, Gamut, Gemini CLI, Grok Build, Jules,
-  Kimi Code, Kiro, Pi, Windsurf, and Zed. Install agent skills and the hosted
+  page, including Antigravity, Cline, Devin Desktop, fx, Gamut, Gemini CLI,
+  Grok Build, Jules, Kimi Code, Kiro, Pi, and Zed. Install agent skills and the hosted
   Neon MCP Server (https://mcp.neon.tech/mcp) with the Neon CLI or add-mcp, or
   configure the server by hand with OAuth or an API key.
 enableTableOfContents: true
-updatedOn: '2026-11-05T13:53:34.719Z'
+updatedOn: '2026-11-05T18:27:00.401Z'
 ---
 
 This page covers agents and MCP clients that don't have their own setup page. If you use Claude Code, Cursor, Codex, VS Code, Claude.ai, ChatGPT, or Grok Bot, start from [Set up your AI agent](/docs/ai/agent-setup) instead.
@@ -65,7 +65,7 @@ Run `npx add-mcp list-agents` for the live list from your installed version. As 
 | OpenCode                  | `opencode`           | [Any supported agent](#install-for-any-supported-agent)             |
 | Pi                        | `pi`                 | [Pi](#pi)                                                           |
 | VS Code                   | `vscode`             | [VS Code page](/docs/ai/agent-setup/vscode)                         |
-| Windsurf                  | `windsurf`           | [Windsurf](#windsurf-codeium)                                       |
+| Windsurf                  | `windsurf`           | [Devin Desktop](#devin-desktop)                                     |
 | Zed                       | `zed`                | [Zed](#zed)                                                         |
 
 **Aliases:** `cline-vscode` → `cline`, `droid`/`factory` → `factory-droid`, `gemini` → `gemini-cli`, `github-copilot` → `vscode`, `grok` → `grok-build`, `hermes-agent` → `hermes`, `kilo`/`kilocode` → `kilo-code`, `kimi` → `kimi-code`, `kiro` → `kiro-cli`, `mastra` → `mastracode`, `pi-agent` → `pi`, `codeium`/`cascade` → `windsurf`. Config paths differ by agent and by project vs global (`-g`); see the [add-mcp README](https://github.com/neondatabase/add-mcp#supported-agents).
@@ -139,6 +139,17 @@ For the Cline CLI, use `-a cline-cli`. To configure the extension by hand:
 4. Save the file. Cline should reload the configuration automatically. With OAuth, review the requested permissions and click **Authorize** when the browser window opens.
 
 For more, see [Get started with Cline and Neon MCP Server](/guides/cline-mcp-neon).
+
+## Devin Desktop (formerly Windsurf) (#devin-desktop)
+
+Install Neon from the Devin marketplace:
+
+1.  In Devin Desktop, open **Customize**, then **Marketplace**.
+2.  Find **Neon** and install it.
+3.  Click **Connect MCP** and sign in to Neon in the browser. The plugin's status changes to **Enabled**.
+4.  Start a new session so Devin loads the plugin.
+
+The marketplace plugin includes the Neon MCP Server and Neon agent skills.
 
 ## fx
 
@@ -274,38 +285,6 @@ pi install git:github.com/neondatabase/agent-skills
 ```
 
 Pi reads the `skills/` directory directly, so there's no separate sync step. This installs the skills only. To add the Neon MCP Server, run `npx neon@latest mcp --agent pi`.
-
-## Windsurf (Codeium)
-
-For skills plus the MCP Server, use the commands in [Install for any supported agent](#install-for-any-supported-agent). To add only the MCP Server:
-
-```bash
-npx add-mcp https://mcp.neon.tech/mcp -a windsurf
-```
-
-Windsurf only supports user-level MCP config. To configure it by hand:
-
-1.  Open Windsurf and navigate to the Cascade assistant sidebar.
-2.  Click the hammer (MCP) icon, then **Configure**, which opens the "Manage MCPs" configuration file.
-3.  Click "View raw config" to open the raw configuration file.
-4.  Add the Neon server entry within the `mcpServers` object. For OAuth, leave out `headers`. For an API key, replace `<YOUR_NEON_API_KEY>` with your [Neon API key](/docs/manage/api-keys):
-
-    ```json
-    {
-      "mcpServers": {
-        "neon": {
-          "serverUrl": "https://mcp.neon.tech/mcp",
-          "headers": {
-            "Authorization": "Bearer <YOUR_NEON_API_KEY>"
-          }
-        }
-      }
-    }
-    ```
-
-5.  Save the file, then click **Refresh** in the Cascade sidebar next to "available MCP servers". With OAuth, click **Authorize** when the browser window opens.
-
-For more, see [Get started with Windsurf and the Neon MCP Server](/guides/windsurf-mcp-neon).
 
 ## Zed
 
