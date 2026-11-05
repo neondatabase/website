@@ -12,8 +12,12 @@ categories:
 authors:
   - dominik-koch
 draft: true
+cover:
+  image: https://cdn.neonapi.io/public/images/pages/blog/save-tokens-with-neon-function-templates/cover.jpg
+  alt: Save tokens with Neon Function templates
 isFeatured: false
 seo:
+  image: https://cdn.neonapi.io/public/images/pages/blog/save-tokens-with-neon-function-templates/social.jpg
   title: Save tokens with Neon Function templates - Neon
   description: >-
     Introducing the Neon Function Registry. Add a template to your project with
