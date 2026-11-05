@@ -8,7 +8,7 @@ summary: >-
 enableTableOfContents: true
 redirectFrom:
   - /docs/ai/mcp
-updatedOn: '2026-10-15T20:24:27.880Z'
+updatedOn: '2026-11-05T13:53:34.719Z'
 ---
 
 The Neon MCP Server implements the Model Context Protocol (MCP), letting AI assistants interact with your Neon projects on your behalf. Your AI agent can interact with Neon via MCP tools or by running [Neon CLI](/docs/cli) commands directly.
@@ -19,27 +19,13 @@ The Neon MCP Server grants broad database management capabilities. **Always revi
 
 ## Quick setup
 
-Install the Neon MCP server into your coding agents with [`neon mcp`](/docs/cli/mcp):
+To set up the Neon MCP Server in your agent, follow [Set up your AI agent](/docs/ai/agent-setup). For most coding agents, the Neon plugin installs the MCP Server together with Neon's agent skills. To install only the MCP Server, run [`neon mcp`](/docs/cli/mcp):
 
 ```bash
 npx neon@latest mcp
 ```
 
-It prompts for where to write the config, which agents to install into, and how to authenticate, then writes it for you.
-
-For agents that support plugins (such as Cursor, Claude Code, and Codex), [`neon plugins`](/docs/cli/plugins) installs the Neon plugin, which bundles the MCP server and agent skills:
-
-```bash
-npx neon@latest plugins
-```
-
-To set up the MCP server together with agent skills and a linked Neon project, run [`neon init`](/docs/cli/init) in a terminal:
-
-```bash
-npx neon@latest init
-```
-
-For per-client setup instructions, see [Connect MCP clients](/docs/ai/connect-mcp-clients-to-neon).
+It prompts for where to write the config, which agents to install into, and how to authenticate, then writes it for you. For CI or headless agents, run `neon mcp -y --agent <agent> --api-key <key>`. The CLI signs in with that key and mints a new one for the MCP Server. Or use the API key option in the [config generator](#config-generator).
 
 ## Config generator
 
@@ -82,14 +68,7 @@ Add [access control](#access-control) parameters to the `url` as needed.
 
 ## Claude connector
 
-The Neon MCP server is an official Claude connector, so you don't need a custom connector URL. To add it in [Claude.ai](https://claude.ai) or Claude Desktop:
-
-1. Open **Settings** from your profile menu.
-2. Select **Connectors** (sometimes shown under **Customize > Connectors**).
-3. Click **Browse connectors** (top-right of that page), find **Neon**, and add it.
-4. Authorize access to your Neon account.
-
-For other clients, use Quick setup or the config generator above.
+The Neon MCP Server is an official Claude connector for Claude.ai and Claude Desktop. See [Set up Neon in Claude.ai and Claude Desktop](/docs/ai/agent-setup/claude-ai).
 
 ## Access control
 
@@ -247,6 +226,33 @@ If your client still points at `/sse`, change the URL to `https://mcp.neon.tech/
 ```
 
 </Admonition>
+
+## Troubleshooting
+
+### Client still points at the SSE endpoint
+
+The HTTP+SSE endpoints (`https://mcp.neon.tech/sse` and `/message`) are retired and return `410 Gone`. Point your client at `https://mcp.neon.tech/mcp` instead. See [Retired HTTP+SSE transport](#retired-sse).
+
+### Client doesn't support remote servers
+
+If your client only supports local (stdio) servers, bridge to the hosted server with `mcp-remote`. See [Deprecated local stdio](#deprecated-stdio).
+
+### OAuth error: invalid redirect uri
+
+When you use OAuth with the hosted server, you might see this error:
+
+```json
+{"code":"invalid_request","error":"invalid redirect uri"}
+```
+
+This typically means the cached OAuth credentials are stale. To fix it:
+
+1. Remove the MCP authentication cache directory:
+   ```bash
+   rm -rf ~/.mcp-auth
+   ```
+2. Restart your MCP client.
+3. Sign in again when the OAuth flow starts.
 
 ## Resources
 

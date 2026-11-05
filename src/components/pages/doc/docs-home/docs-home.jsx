@@ -106,19 +106,17 @@ const FRAMEWORKS = [
   { name: 'Redwood', icon: 'redwoodsdk', to: '/docs/guides/redwoodsdk' },
 ];
 
-// Cursor, Claude Code, and Codex link to the install section of their own
-// plugin page. GitHub Copilot has no plugin page, so it keeps pointing at its
-// section of the MCP clients page.
-const MCP_HREF = '/docs/ai/connect-mcp-clients-to-neon';
+// Each agent links to the install section of its own setup page.
+const AGENT_SETUP_HREF = '/docs/ai/agent-setup';
 const AGENTS = [
-  { name: 'Cursor', icon: 'cursor', to: '/docs/ai/ai-cursor-plugin#install-the-plugin-in-cursor' },
+  { name: 'Cursor', icon: 'cursor', to: `${AGENT_SETUP_HREF}/cursor#install-the-plugin` },
   {
     name: 'Claude Code',
     icon: 'claude-code',
-    to: '/docs/ai/ai-claude-code-plugin#install-the-plugin-in-claude-code',
+    to: `${AGENT_SETUP_HREF}/claude-code#install-the-plugin`,
   },
-  { name: 'Codex', icon: 'codex', to: '/docs/ai/ai-codex-plugin#install-the-plugin-in-codex' },
-  { name: 'GitHub Copilot', icon: 'copilot', to: `${MCP_HREF}#vs-code-with-github-copilot` },
+  { name: 'Codex', icon: 'codex', to: `${AGENT_SETUP_HREF}/codex#install-the-plugin` },
+  { name: 'GitHub Copilot', icon: 'copilot', to: `${AGENT_SETUP_HREF}/vscode#install-the-plugin` },
 ];
 
 // Longer walkthroughs. `icon` is a real DetailIconCards monochrome icon name.

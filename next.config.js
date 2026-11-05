@@ -2335,7 +2335,7 @@ const defaultConfig = {
       // `/docs/introduction` are absent because they redirect to `/docs` (above).
       {
         source: '/docs/ai',
-        destination: '/docs/ai/ai-agents-tools',
+        destination: '/docs/ai/agent-setup',
         permanent: true,
       },
       {
