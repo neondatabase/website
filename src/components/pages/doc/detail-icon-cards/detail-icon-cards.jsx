@@ -340,7 +340,7 @@ const DetailIconCards = ({
                 <span
                   className={cn(
                     'mb-0 flex shrink-0 items-center gap-2.5 text-green-44 dark:text-green-52',
-                    hasCopyPrompt && 'pr-10'
+                    hasCopyPrompt && 'pr-20'
                   )}
                 >
                   <Icon
@@ -432,7 +432,7 @@ const DetailIconCards = ({
               <PromptCopyButton
                 className={cn(
                   'absolute',
-                  appearance === 'home' && isLockup ? 'top-[13px] right-[15px]' : 'top-3.5 right-4'
+                  appearance === 'home' && isLockup ? 'top-[11px] right-[15px]' : 'top-3 right-4'
                 )}
                 src={copyPromptSrc}
                 text={copyPromptText}

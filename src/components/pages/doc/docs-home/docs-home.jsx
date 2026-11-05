@@ -68,7 +68,7 @@ const FoundationCard = () => (
       className="absolute inset-0"
     />
     <PromptCopyButton
-      className="absolute top-[13px] right-[15px]"
+      className="absolute top-[11px] right-[15px]"
       label={FOUNDATION_CARD.title}
       {...promptProps(FOUNDATION_CARD)}
     />

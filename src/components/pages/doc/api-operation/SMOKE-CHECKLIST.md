@@ -14,12 +14,12 @@ prebuilt by the generator and copyable.
 Each page exercises a distinct shape. Together they cover the behavior surface of
 the read-only page.
 
-| Slug                                                | Why it's in the checklist                                                       |
-| --------------------------------------------------- | ------------------------------------------------------------------------------- |
-| `/docs/reference/api/projects/create-project`       | Rich nested body, grouped section cards, representative example, large response  |
-| `/docs/reference/api/projects/list-projects`        | Query params, no request body, CLI + SDK pills, table output                    |
-| `/docs/reference/api/branches/update-project-branch`| Multi-command CLI snippet (`rename` + `set-expiration`)                          |
-| `/docs/reference/api/users/get-current-user-info`   | Minimal shape: GET, no body, no path params                                     |
+| Slug                                                 | Why it's in the checklist                                                       |
+| ---------------------------------------------------- | ------------------------------------------------------------------------------- |
+| `/docs/reference/api/projects/create-project`        | Rich nested body, grouped section cards, representative example, large response |
+| `/docs/reference/api/projects/list-projects`         | Query params, no request body, CLI + SDK pills, table output                    |
+| `/docs/reference/api/branches/update-project-branch` | Multi-command CLI snippet (`rename` + `set-expiration`)                         |
+| `/docs/reference/api/users/get-current-user-info`    | Minimal shape: GET, no body, no path params                                     |
 
 ## Per-page checks
 
