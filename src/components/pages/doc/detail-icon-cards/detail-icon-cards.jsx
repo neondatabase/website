@@ -5,6 +5,7 @@ import Image from 'next/image';
 import PropTypes from 'prop-types';
 import React from 'react';
 
+import PromptCopyButton from 'components/pages/doc/prompt-copy-button';
 import Link from 'components/shared/link/link';
 import ICONS_CONFIG from 'config/docs-icons-config';
 import СhevronIcon from 'icons/arrow-label.inline.svg';
@@ -250,7 +251,12 @@ const DetailIconCards = ({
           tag,
           tagTheme = 'gray',
           theme: childTheme,
+          copyPromptSrc,
+          copyPromptText,
         } = child.props ?? {};
+        // Optional copy-prompt button in the top-right corner. It sits beside
+        // the card link, not inside it, so it never nests a button in a link.
+        const hasCopyPrompt = !withNumbers && !tag && !!(copyPromptSrc || copyPromptText);
         // The local monochrome map wins, so no existing icon name changes
         // behaviour. A name it does not hold falls back to the shared logo
         // config, the same source `TechCards` and `CompactCards` read.
@@ -279,7 +285,8 @@ const DetailIconCards = ({
           <li
             className={cn(
               'm-0! flex min-h-[169px] pl-0! before:hidden',
-              isLockup && 'min-h-[161px]'
+              isLockup && 'min-h-[161px]',
+              hasCopyPrompt && 'relative'
             )}
             key={index}
           >
@@ -329,7 +336,12 @@ const DetailIconCards = ({
                 // line, in the slot the icon alone otherwise occupies. The
                 // icons are drawn on a 16px grid; keep their stroke at 1.5px
                 // while displaying the product lockup at 24px.
-                <span className="mb-0 flex shrink-0 items-center gap-2.5 text-green-44 dark:text-green-52">
+                <span
+                  className={cn(
+                    'mb-0 flex shrink-0 items-center gap-2.5 text-green-44 dark:text-green-52',
+                    hasCopyPrompt && 'pr-10'
+                  )}
+                >
                   <Icon
                     className={cn(
                       'size-6 shrink-0 [&_*]:[stroke-width:1.5] [&_*]:[stroke-linecap:round] [&_*]:[stroke-linejoin:round] [&_*]:[vector-effect:non-scaling-stroke]',
@@ -410,6 +422,17 @@ const DetailIconCards = ({
                 </p>
               </div>
             </Link>
+            {hasCopyPrompt && (
+              <PromptCopyButton
+                className={cn(
+                  'absolute',
+                  appearance === 'home' && isLockup ? 'top-[13px] right-[15px]' : 'top-3.5 right-4'
+                )}
+                src={copyPromptSrc}
+                text={copyPromptText}
+                label={typeof children === 'string' ? children : String(lockup || href)}
+              />
+            )}
           </li>
         );
       })}

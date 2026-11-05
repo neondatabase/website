@@ -4,144 +4,34 @@ import PropTypes from 'prop-types';
 import { CompactCards } from 'components/pages/doc/compact-cards';
 import DetailIconCards from 'components/pages/doc/detail-icon-cards';
 import DatabaseIcon from 'components/pages/doc/detail-icon-cards/images/database.inline.svg';
+import PromptCopyButton from 'components/pages/doc/prompt-copy-button';
 import Link from 'components/shared/link';
 import { cn } from 'utils/cn';
 
 import DocsHomeComposer from './docs-home-composer';
 import DocsHomeCopyChip from './docs-home-copy-chip';
+import {
+  AGENTS,
+  CAPABILITY_CARDS,
+  FOUNDATION_CARD,
+  FRAMEWORKS,
+  GUIDED_PATHS,
+  HERO_LINKS,
+  promptProps,
+} from './docs-home-links';
 import { mutedText } from './docs-home-tokens';
 
-// Capability cards, in the order of the Figma content container.
 // Dashed underline for the hero links: 2px dashes on a 4px rhythm, offset 1px
 // to match the Figma line. It spans the link, so it follows the text when the
 // font size or fallback font changes.
 const heroLinkUnderline =
   'absolute inset-x-0 bottom-0 h-px text-gray-new-50 [background-image:repeating-linear-gradient(to_right,currentColor_0_2px,transparent_2px_4px)] [background-position:-1px_0]';
 
-const CAPABILITY_CARDS = [
-  {
-    title: 'Add login and users',
-    line: 'Sign-in, sign-up, sessions, and OAuth, stored in your database.',
-    product: 'Managed Better Auth',
-    to: '/docs/auth/overview',
-    icon: 'lock-landscape',
-  },
-  {
-    title: 'Store files and media',
-    line: 'Images, video, and user uploads that branch with your data.',
-    product: 'Neon Object Storage',
-    to: '/docs/storage/overview',
-    icon: 'data',
-  },
-  {
-    title: 'Deploy APIs and agents',
-    line: 'Long-running Node.js for APIs, agents, webhooks, and cron.',
-    product: 'Neon Functions',
-    to: '/docs/compute/functions/overview',
-    icon: 'code',
-  },
-  {
-    title: 'Add live updates',
-    line: 'UIs that update instantly when rows in your database change.',
-    product: 'Neon Realtime',
-    to: '/docs/realtime/overview',
-    icon: 'zap',
-  },
-  {
-    title: 'Add search',
-    line: 'Vector, full-text, and hybrid search, right in Postgres.',
-    product: 'Lakebase Search',
-    to: '/docs/ai/lakebase-search',
-    icon: 'search',
-  },
-  {
-    title: 'Add AI to your app',
-    line: 'Chat, agents, and embeddings. Any model, one key.',
-    product: 'Neon AI Gateway',
-    to: '/docs/ai-gateway/overview',
-    icon: 'sparkle',
-  },
-];
-
-// Framework, language, and ORM quickstarts. This is the full list the original
-// docs front page (the retired content/docs/introduction.md) rendered, in the same order,
-// so the Frameworks section can show it all with CompactCards' `withToggler`
-// (first 12 shown, the rest behind a Show more toggle) instead of a short
-// hardcoded grid plus a navigate-away link. `icon` is the real technology-logo
-// key read by CompactCards (public/images/technology-logos/<icon>.svg); React
-// Router uses the `react` logo, matching the original list.
-const FRAMEWORKS = [
-  { name: 'Next.js', icon: 'next-js', to: '/docs/guides/nextjs' },
-  { name: 'Django', icon: 'django', to: '/docs/guides/django' },
-  { name: 'Drizzle', icon: 'drizzle', to: '/docs/guides/drizzle' },
-  { name: 'React Router', icon: 'react', to: '/docs/guides/react-router' },
-  { name: 'TanStack Start', icon: 'tanstack', to: '/docs/guides/tanstack-start' },
-  { name: 'Express', icon: 'express', to: '/docs/guides/express' },
-  { name: 'NestJS', icon: 'nest-js', to: '/docs/guides/nestjs' },
-  { name: 'Astro', icon: 'astro', to: '/docs/guides/astro' },
-  { name: 'SvelteKit', icon: 'svelte', to: '/docs/guides/sveltekit' },
-  { name: 'Nuxt', icon: 'nuxt', to: '/docs/guides/nuxt' },
-  { name: 'Laravel', icon: 'laravel', to: '/docs/guides/laravel' },
-  { name: 'Rails', icon: 'rails', to: '/docs/guides/ruby-on-rails' },
-  { name: 'Python', icon: 'python', to: '/docs/guides/python' },
-  { name: 'Go', icon: 'go', to: '/docs/guides/go' },
-  { name: 'Java', icon: 'java', to: '/docs/guides/java' },
-  { name: 'Kotlin', icon: 'kotlin', to: '/docs/guides/kotlin' },
-  { name: 'Rust', icon: 'rust', to: '/docs/guides/rust' },
-  { name: '.NET', icon: 'dotnet', to: '/docs/guides/dotnet-npgsql' },
-  { name: 'Elixir', icon: 'elixir', to: '/docs/guides/elixir' },
-  { name: 'Phoenix', icon: 'phoenix', to: '/docs/guides/phoenix' },
-  { name: 'Prisma', icon: 'prisma', to: '/docs/guides/prisma' },
-  { name: 'Kysely', icon: 'kysely', to: '/docs/guides/kysely' },
-  { name: 'Tortoise ORM', icon: 'tortoise-orm', to: '/docs/guides/tortoise-orm' },
-  { name: 'TypeORM', icon: 'typeorm', to: '/docs/guides/typeorm' },
-  { name: 'SQLAlchemy', icon: 'sqlalchemy', to: '/docs/guides/sqlalchemy' },
-  { name: 'Hono', icon: 'hono', to: '/docs/guides/hono' },
-  { name: 'SolidStart', icon: 'solidstart', to: '/docs/guides/solid-start' },
-  { name: 'Reflex', icon: 'reflex', to: '/docs/guides/reflex' },
-  { name: 'JavaScript', icon: 'javascript', to: '/docs/guides/javascript' },
-  { name: 'Symfony', icon: 'symfony', to: '/docs/guides/symfony' },
-  { name: 'Quarkus', icon: 'quarkus', to: '/docs/guides/quarkus-jdbc' },
-  { name: 'Micronaut', icon: 'micronaut', to: '/docs/guides/micronaut-kotlin' },
-  { name: 'Redwood', icon: 'redwoodsdk', to: '/docs/guides/redwoodsdk' },
-];
-
-// Cursor, Claude Code, and Codex link to the install section of their own
-// plugin page. GitHub Copilot has no plugin page, so it keeps pointing at its
-// section of the MCP clients page.
-const MCP_HREF = '/docs/ai/connect-mcp-clients-to-neon';
-const AGENTS = [
-  { name: 'Cursor', icon: 'cursor', to: '/docs/ai/ai-cursor-plugin#install-the-plugin-in-cursor' },
-  {
-    name: 'Claude Code',
-    icon: 'claude-code',
-    to: '/docs/ai/ai-claude-code-plugin#install-the-plugin-in-claude-code',
-  },
-  { name: 'Codex', icon: 'codex', to: '/docs/ai/ai-codex-plugin#install-the-plugin-in-codex' },
-  { name: 'GitHub Copilot', icon: 'copilot', to: `${MCP_HREF}#vs-code-with-github-copilot` },
-];
-
-// Longer walkthroughs. `icon` is a real DetailIconCards monochrome icon name.
-const GUIDED_PATHS = [
-  {
-    title: 'Full backend quickstart',
-    line: 'Next.js on Postgres, Auth, Storage, and AI, to deployed.',
-    to: '/docs/get-started/full-backend-quickstart',
-    icon: 'rocket',
-  },
-  {
-    title: 'Tour the backend',
-    line: 'How the pieces fit on one branch.',
-    to: '/docs/get-started/backend-overview',
-    icon: 'puzzle',
-  },
-  {
-    title: 'Build a reactive app',
-    line: 'Live queries with Realtime.',
-    to: '/docs/realtime/quickstart',
-    icon: 'zap',
-  },
-];
+// Child props that give a docs card a copy-prompt button.
+const copyPromptProps = (item) => {
+  const { src, text } = promptProps(item);
+  return src ? { copyPromptSrc: src } : { copyPromptText: text };
+};
 
 // Section introductions sit beside their content, stacking when the page narrows.
 const Section = ({ heading, description, children }) => (
@@ -173,23 +63,28 @@ const FoundationCard = () => (
     )}
   >
     <NextLink
-      href="/docs/postgres/overview"
-      aria-label="Create a database"
+      href={FOUNDATION_CARD.to}
+      aria-label={FOUNDATION_CARD.title}
       className="absolute inset-0"
+    />
+    <PromptCopyButton
+      className="absolute top-[13px] right-[15px]"
+      label={FOUNDATION_CARD.title}
+      {...promptProps(FOUNDATION_CARD)}
     />
     <div className="flex min-w-0 flex-col gap-8">
       <span className="flex items-center gap-3 text-green-44 dark:text-green-52">
         <DatabaseIcon className="size-6 shrink-0 [&_*]:[stroke-width:1.5] [&_*]:[stroke-linecap:round] [&_*]:[stroke-linejoin:round] [&_*]:[vector-effect:non-scaling-stroke]" />
         <span className="font-mono text-xs leading-4 font-medium tracking-[0.02em] uppercase">
-          Lakebase Postgres
+          {FOUNDATION_CARD.product}
         </span>
       </span>
       <div className="flex flex-col gap-1.5">
         <span className="font-sans text-lg leading-snug font-medium tracking-[-0.02em] text-black-pure dark:text-white">
-          Create a database
+          {FOUNDATION_CARD.title}
         </span>
         <span className="text-[15px] leading-snug text-gray-new-45 dark:text-gray-new-60">
-          Serverless Postgres that branches with your app.
+          {FOUNDATION_CARD.line}
         </span>
       </div>
     </div>
@@ -236,20 +131,23 @@ const DocsHome = () => (
             </p>
           </div>
           <div className="flex flex-wrap items-start gap-x-6 gap-y-2 text-base">
-            <Link
-              to="/docs/get-started/full-backend-quickstart"
-              className="relative text-base leading-8 text-gray-new-45 transition-colors hover:text-gray-new-30 dark:text-gray-new-70 dark:hover:text-white"
-            >
-              Full backend quickstart
-              <span className={heroLinkUnderline} aria-hidden />
-            </Link>
-            <Link
-              to="/docs/connect/connect-hub"
-              className="relative text-base leading-8 text-gray-new-45 transition-colors hover:text-gray-new-30 dark:text-gray-new-70 dark:hover:text-white"
-            >
-              Connect an existing app
-              <span className={heroLinkUnderline} aria-hidden />
-            </Link>
+            {/* Each link has a copy-prompt button that shows on hover or focus. */}
+            {HERO_LINKS.map((item) => (
+              <span key={item.to} className="group/hero-link flex items-center gap-1.5">
+                <Link
+                  to={item.to}
+                  className="relative text-base leading-8 text-gray-new-45 transition-colors hover:text-gray-new-30 dark:text-gray-new-70 dark:hover:text-white"
+                >
+                  {item.title}
+                  <span className={heroLinkUnderline} aria-hidden />
+                </Link>
+                <PromptCopyButton
+                  className="opacity-0 group-focus-within/hero-link:opacity-100 group-hover/hero-link:opacity-100 [@media(hover:none)]:opacity-100"
+                  label={item.title}
+                  {...promptProps(item)}
+                />
+              </span>
+            ))}
           </div>
         </div>
         <DocsHomeComposer />
@@ -281,7 +179,14 @@ const DocsHome = () => (
             appearance="home"
           >
             {CAPABILITY_CARDS.map((c) => (
-              <a key={c.to} href={c.to} description={c.line} icon={c.icon} lockup={c.product}>
+              <a
+                key={c.to}
+                href={c.to}
+                description={c.line}
+                icon={c.icon}
+                lockup={c.product}
+                {...copyPromptProps(c)}
+              >
                 {c.title}
               </a>
             ))}
@@ -300,7 +205,7 @@ const DocsHome = () => (
               collapses the rest behind a Show more / Hide toggle, expanding in
               place instead of linking away. */}
           {FRAMEWORKS.map((f) => (
-            <a key={f.name} href={f.to} title={f.name} icon={f.icon}>
+            <a key={f.name} href={f.to} title={f.name} icon={f.icon} {...copyPromptProps(f)}>
               {f.name}
             </a>
           ))}
@@ -315,7 +220,7 @@ const DocsHome = () => (
         <div className="grid gap-8">
           <CompactCards className="my-0!" cols={2} appearance="home">
             {AGENTS.map((g) => (
-              <a key={g.name} href={g.to} title={g.name} icon={g.icon}>
+              <a key={g.name} href={g.to} title={g.name} icon={g.icon} {...copyPromptProps(g)}>
                 {g.name}
               </a>
             ))}
@@ -342,7 +247,7 @@ const DocsHome = () => (
           appearance="home"
         >
           {GUIDED_PATHS.map((p) => (
-            <a key={p.to} href={p.to} description={p.line} icon={p.icon}>
+            <a key={p.to} href={p.to} description={p.line} icon={p.icon} {...copyPromptProps(p)}>
               {p.title}
             </a>
           ))}
