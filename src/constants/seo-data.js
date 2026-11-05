@@ -106,7 +106,7 @@ export default {
     markdownPath: `${LINKS.objectStorage}.md`,
   },
   mcpServerStats: {
-    title: 'Neon MCP server usage by client — Neon',
+    title: 'Neon MCP leaderboard: which AI agents use Neon',
     description:
       'Which AI clients and tools active users of the Neon MCP server use each week, including Codex, Claude, ChatGPT, and Cursor.',
     pathname: LINKS.mcpServerStats,

@@ -21,11 +21,12 @@ const Hero = ({ publishedAt }) => (
     <Container size="1280">
       <SectionLabel theme="white">MCP server stats</SectionLabel>
       <h1 className="mt-5 max-w-3xl text-[3.75rem] leading-dense font-normal tracking-tighter xl:text-[3.25rem] lg:text-[2.75rem] md:mt-4 md:text-[2rem]">
-        Which agents use the Neon MCP server
+        Neon MCP leaderboard
       </h1>
       <p className="mt-6 max-w-[672px] text-lg leading-normal tracking-extra-tight text-gray-new-60 xl:mt-5 lg:text-base md:mt-4 md:text-[0.9375rem] md:leading-snug">
-        The AI clients people connect to the Neon MCP server and the tools they call, as a share of
-        each week&apos;s active users. Updated {formatUpdated(publishedAt)}.
+        Which AI clients and tools Neon MCP server users call, as a share of each week&apos;s active
+        users. These are Neon&apos;s numbers, not a market share. Updated{' '}
+        {formatUpdated(publishedAt)}.
       </p>
       <div className="mt-9 flex flex-wrap items-center gap-4 xl:mt-8 lg:mt-7 md:mt-6">
         <CopyCommand

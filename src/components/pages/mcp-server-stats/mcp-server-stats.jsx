@@ -28,7 +28,7 @@ const McpServerStats = ({ clients, tools, publishedAt }) => {
       <ShareList
         className="mt-28 xl:mt-24 lg:mt-20 md:mt-14"
         id="mcp-stats-clients-heading"
-        title="Agents, last week."
+        title="Top agents last week."
         description={
           <>
             Share of active users who called tools from each client,{' '}
@@ -41,7 +41,7 @@ const McpServerStats = ({ clients, tools, publishedAt }) => {
       <Trend weeks={clientShares.weeks} series={clientShares.series} />
       <ShareList
         id="mcp-stats-tools-heading"
-        title="What agents do."
+        title="Most used tools."
         description={
           <>Share of active users who called each tool, {formatWeekRange(toolShares.latestWeek)}.</>
         }
