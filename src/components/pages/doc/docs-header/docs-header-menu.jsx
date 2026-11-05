@@ -199,7 +199,7 @@ const DocsHeaderMenu = ({ className = null, overflowLanes = [], basePath }) => {
   }, [isOpen]);
 
   return (
-    <li className={cn('relative flex shrink-0 items-stretch', className)} ref={menuRef}>
+    <div className={cn('relative flex shrink-0 items-stretch', className)} ref={menuRef}>
       {/* The overflow control is an inline nav lane ("More"), styled and spaced
           exactly like the dropdown lanes (Products, Reference) beside it, not a
           right-side hamburger icon. It only renders while a lane has overflowed. */}
@@ -269,7 +269,7 @@ const DocsHeaderMenu = ({ className = null, overflowLanes = [], basePath }) => {
           <ThemeOptions />
         </div>
       )}
-    </li>
+    </div>
   );
 };
 
