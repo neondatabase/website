@@ -693,7 +693,7 @@ Neon exports a comprehensive set of metrics including connection counts, databas
 
 ## Export Postgres logs
 
-You can export your Postgres logs from your Neon compute to your Grafana Cloud stack. These logs provide visibility into database activity, errors, and performance. The logs are automatically sent to Grafana Cloud Loki and can be queried using LogQL.
+You can export your Postgres logs from your Neon compute to your Grafana Cloud stack. These logs provide visibility into database activity, errors, and performance. The logs are automatically sent to Grafana Cloud Loki and can be queried using LogQL. By default, logs include warnings and errors, connections and disconnections, checkpoints, and slow autovacuum runs. Query text and slow queries aren't logged. For the full list of logging settings and log fields, see [Postgres logs](/docs/reference/metrics-logs#postgres-logs) in the Metrics and logs reference.
 
 ### Performance impact
 

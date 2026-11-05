@@ -727,7 +727,7 @@ Neon exports metrics including connection counts, database size, replication del
 
 ## Export Postgres logs to Datadog
 
-You can export your Postgres logs from your Neon compute to your Datadog account. These logs provide visibility into database activity, errors, and performance. For detailed information about log fields and technical considerations, see the [Metrics and logs reference](/docs/reference/metrics-logs).
+You can export your Postgres logs from your Neon compute to your Datadog account. These logs provide visibility into database activity, errors, and performance. By default, logs include warnings and errors, connections and disconnections, checkpoints, and slow autovacuum runs. Query text and slow queries aren't logged. For the full list of logging settings and log fields, see [Postgres logs](/docs/reference/metrics-logs#postgres-logs) in the Metrics and logs reference.
 
 ### Performance impact
 

@@ -79,25 +79,48 @@ In Datadog, metric labels are referred to as `tags.` See [Getting Started with T
 
 ## Postgres logs
 
-Neon can export Postgres logs to observability platforms, providing visibility into database activity, errors, and performance. These logs include:
+Neon can export Postgres logs to observability platforms, providing visibility into database activity, errors, and performance. When log export is enabled, Postgres sends its standard server log output to the integration, so what you receive is controlled by the Postgres [logging parameters](https://www.postgresql.org/docs/current/runtime-config-logging.html).
 
-- Error messages and warnings
-- Connection events
-- System notifications
+### What's logged by default
+
+Neon computes use these logging settings:
+
+| Parameter                     | Value     | What you'll see in exported logs                                                       |
+| ----------------------------- | --------- | -------------------------------------------------------------------------------------- |
+| `log_min_messages`            | `warning` | Warnings, errors, and more severe messages. `NOTICE`, `INFO`, and `DEBUG` aren't sent. |
+| `log_connections`             | `on`      | A line for each new connection. This is often the largest share of log volume.         |
+| `log_disconnections`          | `on`      | A line for each closed connection, including session duration.                         |
+| `log_checkpoints`             | `on`      | A line for each checkpoint, with timing and the number of buffers written.             |
+| `log_autovacuum_min_duration` | `1000`    | Autovacuum and autoanalyze runs that take longer than 1 second.                        |
+| `log_temp_files`              | `1048576` | Temporary files of 1 GB or more, such as large sorts or hashes that spill to disk.     |
+| `log_error_verbosity`         | `terse`   | Errors and warnings without `DETAIL`, `HINT`, or `CONTEXT` lines.                      |
+| `log_min_error_statement`     | `panic`   | The SQL statement that caused an error isn't included, to keep query data out of logs. |
+
+Statement logging is off. Query text isn't logged (`log_statement` is `none`), slow queries aren't logged (`log_min_duration_statement` is `-1`), and lock waits aren't logged (`log_lock_waits` is `off`). These are superuser-level parameters, so you can't change them with `SET` or `ALTER DATABASE`. To find slow or frequent queries, use [Monitor query performance](/docs/introduction/monitor-query-performance) instead.
+
+For the full list of Neon's Postgres settings, see [Postgres parameter settings](/docs/reference/compatibility#postgres-parameter-settings).
 
 ### Log fields and metadata
 
-Logs include the following labels and metadata for filtering and organization:
+Each log message starts with a prefix that Neon sets through `log_line_prefix`. It includes:
 
+- Timestamp, in GMT
+- `sqlstate`: the [SQLSTATE error code](https://www.postgresql.org/docs/current/errcodes-appendix.html), or `00000` for messages that aren't errors
+- `user`: the Postgres role
+- `dboid`: the database OID. To map it to a name, run `SELECT oid, datname FROM pg_database;`.
+- `backend`: the process type, such as `client backend`, `autovacuum worker`, or `checkpointer`
+- `app`: the client's `application_name`
+- Process ID
+
+Each exported log record also includes these attributes:
+
+- Log level (severity)
 - `project_id`
 - `endpoint_id`
-- Timestamp
-- Log level
-- And other standard PostgreSQL log fields
+- `region_id`
+- `host`, set to `neon-collector-<project_id>`
 
-<Admonition type="note">
-During the beta phase, you may see some Neon-specific system logs included. These will be filtered out before general availability (GA).
-</Admonition>
+Neon filters out some internal storage-layer log lines before export.
 
 ### Performance considerations
 
@@ -116,6 +139,8 @@ Additionally, if you are setting up an integration for a project with an inactiv
 ### Technical details
 
 Neon processes logs directly on each compute instance using [rsyslogd](https://www.rsyslog.com/doc/index.html), an industry-standard open source logging utility. This compute-level processing means that log collection contributes to your compute's resource usage.
+
+To keep log export from slowing down your database, the compute buffers log lines while forwarding them. If your observability platform is unreachable for long enough that the buffer fills, some log lines are dropped rather than delaying Postgres.
 
 ## Integration guides
 
