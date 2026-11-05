@@ -19,7 +19,7 @@ Suppose you need to give a partner read-only access to your sales data so they c
 1. **Create a read replica**
 
    <Admonition type="note">
-   The Free plan is limited to a maximum of 3 read replica computes per project.
+   You can add up to 6 read replicas per branch on any plan. The Free plan is also limited to 3 read replica computes per project.
    </Admonition>
 
    Follow these steps to create a read replica for your database branch:
