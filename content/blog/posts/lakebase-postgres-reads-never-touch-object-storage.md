@@ -79,7 +79,7 @@ Put another way:
 - Stateless compute: durable state lives outside the compute node, so compute can [scale to zero](https://neon.com/docs/introduction/scale-to-zero) and start again without moving data
 - One copy for transactions and analytics: once operational data lives in the lake, analytical engines can read the same copy through [LTAP](https://www.databricks.com/blog/lakebase-ltap-rethinking-database-storage)
 
-**[ADD IMAGE 1]**
+![Lakebase architecture showing compute, pageservers, and object storage](https://cdn.neonapi.io/public/images/pages/blog/lakebase-postgres-reads-never-touch-object-storage/neon-diagrams-lakebase-architecture.png)
 
 When you build on object storage, speed is the part you have to design around. To keep Postgres fast on top of it, we designed the storage layer so that object storage never sits in front of a query - reads go through tiers that keep hot data in local caches, on the compute node and on the pageservers, and object storage only backs them.
 
@@ -107,7 +107,7 @@ When Lakebase Postgres needs a page,
 - **On a local miss, it sends** `GetPage@LSN` **to a pageserver:** the request names a page and an LSN, and the pageserver returns the page as it existed at that LSN. In almost every case, the pageserver already has the layers it needs on its own NVMe (that's the ~6 million reads per second we shared earlier)
 - **Only if the pageserver doesn't have those layers locally does it fetch them from object storage.** That's the ~39 requests per second
 
-**[ADD IMAGE 2]**
+![Read paths through the compute cache, pageserver, and object storage](https://cdn.neonapi.io/public/images/pages/blog/lakebase-postgres-reads-never-touch-object-storage/neon-diagram-read-paths.png)
 
 In this design, every tier caches what it fetches from the tier below. A page returned by the pageserver lands in the compute's local cache - layers fetched from object storage land on pageserver NVMe. The cost of a deeper tier is paid once, and the next read of the same data stays local.
 
@@ -143,7 +143,7 @@ This sounds like a lot of work, but it is not so much in practice. Here's data t
 - **p90 stayed under 1 delta per** `GetPage`**.** This means most requests are served straight from an image, with no replay at all
 - **p99 was around 6.** This dropped to that level after we rolled out a change that creates base pages (images) more eagerly. With images closer to the LSNs that reads ask for, fewer reads have a long chain of WAL to replay.
 
-**[ADD IMAGE 3]**
+![90th and 99th percentiles of deltas applied per GetPage read](https://cdn.neonapi.io/public/images/pages/blog/lakebase-postgres-reads-never-touch-object-storage/neon-diagram-deltas-per-getpage-read.png)
 
 ## The least frequent path: misses that reach object storage
 
