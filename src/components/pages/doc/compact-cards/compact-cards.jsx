@@ -6,6 +6,7 @@ import Link from 'next/link';
 import PropTypes from 'prop-types';
 import React, { useState, useEffect } from 'react';
 
+import PromptCopyButton from 'components/pages/doc/prompt-copy-button';
 import ProviderMarks from 'components/shared/provider-marks';
 import ICONS_CONFIG from 'config/docs-icons-config';
 import useCopyPrompt from 'hooks/use-copy-prompt';
@@ -50,7 +51,15 @@ const CompactCards = ({
         {displayedChildren.map((child, index) => {
           if (!child) return null;
 
-          const { title: titleProp, description, icon, promptSrc, href } = child.props;
+          const {
+            title: titleProp,
+            description,
+            icon,
+            promptSrc,
+            href,
+            copyPromptSrc,
+            copyPromptText,
+          } = child.props;
           const title = titleProp || child.props.children;
           const iconConfig = ICONS_CONFIG[icon];
 
@@ -76,6 +85,8 @@ const CompactCards = ({
               darkIconPath={darkIconPath}
               promptSrc={promptSrc}
               href={href}
+              copyPromptSrc={copyPromptSrc}
+              copyPromptText={copyPromptText}
               index={index}
               appearance={appearance}
             />
@@ -117,6 +128,8 @@ const CompactCard = ({
   darkIconPath,
   promptSrc = null,
   href = null,
+  copyPromptSrc = null,
+  copyPromptText = null,
   index,
   appearance = 'default',
 }) => {
@@ -210,6 +223,33 @@ const CompactCard = ({
     );
   }
 
+  // Link card with a separate copy-prompt button that shows on hover or focus.
+  // Unlike `promptSrc`, which turns the whole card into a copy button, the
+  // card still navigates to `href`.
+  if (href && (copyPromptSrc || copyPromptText)) {
+    return (
+      <li className="group/item relative m-0! before:hidden">
+        <span
+          className="pointer-events-none absolute -inset-2 bg-gray-new-98 opacity-0 transition-opacity duration-200 group-focus-within/item:opacity-100 group-hover/item:opacity-100 dark:bg-gray-new-10"
+          aria-hidden
+        />
+        <Link
+          className={cn(sharedClassName, 'pr-10')}
+          href={href}
+          onClick={() => sendGtagEvent('Card Clicked', { text: `Compact card link - ${title}` })}
+        >
+          {innerContent}
+        </Link>
+        <PromptCopyButton
+          className="absolute top-1/2 right-1.5 -translate-y-1/2 opacity-0 group-focus-within/item:opacity-100 group-hover/item:opacity-100 [@media(hover:none)]:opacity-100"
+          src={copyPromptSrc}
+          text={copyPromptText}
+          label={typeof title === 'string' ? title : href}
+        />
+      </li>
+    );
+  }
+
   if (href) {
     return (
       <li className="m-0! before:hidden">
@@ -239,6 +279,8 @@ CompactCard.propTypes = {
   darkIconPath: PropTypes.string,
   promptSrc: PropTypes.string,
   href: PropTypes.string,
+  copyPromptSrc: PropTypes.string,
+  copyPromptText: PropTypes.string,
   index: PropTypes.number.isRequired,
   appearance: PropTypes.oneOf(['default', 'home']),
 };
