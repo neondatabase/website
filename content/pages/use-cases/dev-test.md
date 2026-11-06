@@ -7,8 +7,8 @@ seo:
   title: 'Postgres for Dev and Test: Branches Instead of Copies | Neon'
   description: >-
     Replace always-on dev and staging instances with Neon branches that copy
-    production data in seconds and scale to zero when idle. Teams often cut non-
-    production database costs by 75% or more.
+    production data in seconds and scale to zero when idle. In one example,
+    non-production database costs drop about 80% compared with AWS RDS.
 updatedOn: '2024-08-23T09:00:00.000Z'
 image: '/images/social-previews/use-cases/dev-test.jpg'
 ---
