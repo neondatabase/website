@@ -22,7 +22,7 @@ Before writing code:
 
 1. Inspect my project. If I don't have an app yet, create a Next.js 16 or later app with `npx create-next-app@latest`. If my app isn't Next.js, build the pages in my framework and follow the guide's "What your sign-in and consent pages must do" list.
 2. Check that the Neon CLI is authenticated with `neon me`. If it isn't, run `neon login` and wait for me to finish signing in.
-3. Install the agent skills: `neon skills -s neon -s neon-functions -s neon-auth -y`. Where a skill and the guide differ, follow the guide. In particular, don't declare the function in `neon.ts`.
+3. Install the agent skills: `neon skills -s neon -s neon-functions -s neon-auth -y`. Where a skill and the guide differ, follow the guide.
 4. Run `neon link`, then `neon checkout --create <branch>` before any other Neon command, so all work happens on a development branch, not production.
 5. Ask only what you need: which data and tools the server should expose, which MCP clients I care about, where my app is deployed (it needs a public HTTPS origin), and whether I want the optional MCP Apps widget for ChatGPT.
 6. Propose a concise plan and wait for my confirmation before making significant changes.
@@ -33,7 +33,7 @@ Follow these rules from the guide:
 - Protect every route except `/` and the sign-in and sign-up pages, so the consent page always has a session. Block framing of the auth pages with a `frame-ancestors 'none'` header in `next.config.ts` `headers()`.
 - Take the user ID only from the verified token's `sub`, and filter every query by it. Never take a user ID from tool input.
 - Build a new `McpServer` per request so the tools close over `sub`. Keep the `pg` pool at module scope.
-- `MCP_RESOURCE` must be the function's own `/mcp` URL. Choose the function slug carefully, because it can't change after the first deploy. Deploy once with `neon functions deploy <slug> --src <dir>` to get the URL, then deploy again with the same command plus `--env MCP_RESOURCE=<url>`. Until then, a new function returns `502`, and a function inherited from the parent branch serves the parent's `MCP_RESOURCE`. A redeploy can take a few minutes to serve, so poll the protected resource metadata instead of assuming.
+- `MCP_RESOURCE` must be the function's own `/mcp` URL. Choose the function slug carefully, because it can't change after the first deploy. Deploy once with `neon functions deploy <slug> --src <dir>` to get the URL, then deploy again with the same command plus `--env MCP_RESOURCE=<url>`. Until then, a new function returns `502`, and a function inherited from the parent branch serves the parent's `MCP_RESOURCE`. A redeploy can take a few minutes to serve, so poll the protected resource metadata instead of assuming. The guide keeps the function out of `neon.ts` for this two-step setup. Declaring it in `neon.ts` with `env: { MCP_RESOURCE: process.env.MCP_RESOURCE! }` and deploying with `neon deploy --env .env.local` also works once you know the URL; `neon deploy` and `neon checkout --create` then refuse to run until the value is set.
 - Add my app's origin as a trusted domain, then enable the OAuth server with `neon neon-auth config oauth-server update --enabled` and `--login-page`, `--consent-page`, `--mcp-resource`, and `--mcp-client-id-metadata-documents`.
 - On the sign-in page, resume with `oauth2.continue` only when the URL has `client_id` and `response_type`.
 - On the consent page, read `window.location.search` in an effect, not during render.

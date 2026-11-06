@@ -535,7 +535,7 @@ export default app;
 
 Neon injects `DATABASE_URL`, and `NEON_AUTH_BASE_URL` once Managed Better Auth is on for the branch. You set `MCP_RESOURCE` yourself to the function's `/mcp` URL, which you don't know until the first deploy, so you deploy twice. Until the second deploy, every request returns `502` with `function_load_failed`, because `createMcpAuth` requires an absolute `resource` URL.
 
-The slug (`todos`) can be up to 20 lowercase letters or digits and can't change after the first deploy. The function isn't declared in `neon.ts`, so `neon deploy` leaves it alone. If the branch inherited a `todos` function from its parent, the first deploy updates it, and it serves the parent's `MCP_RESOURCE` until the second deploy.
+The slug (`todos`) can be up to 20 lowercase letters or digits and can't change after the first deploy. The function isn't declared in `neon.ts`, so `neon deploy` leaves it alone. Once you know the URL, you can declare the function in `neon.ts` instead, with `env: { MCP_RESOURCE: process.env.MCP_RESOURCE! }`, and deploy it with `neon deploy --env .env.local`. `neon deploy` and `neon checkout --create` then refuse to run until `MCP_RESOURCE` is set. If the branch inherited a `todos` function from its parent, the first deploy updates it, and it serves the parent's `MCP_RESOURCE` until the second deploy.
 
 Deploy once with [`neon functions deploy`](/docs/cli/functions#deploy) and read the function URL:
 
