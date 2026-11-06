@@ -2,6 +2,12 @@
 title: 'Neon Open Source Program'
 subtitle: Neon commits a minimum of $200,000 a year to cash sponsorships for open source maintainers, paid monthly through GitHub Sponsors.
 enableTableOfContents: true
+seo:
+  title: 'Neon Open Source Program: $200K a Year for Maintainers, Plus Credits'
+  description: >-
+    Neon commits a minimum of $200,000 a year to sponsor open source maintainers
+    through GitHub Sponsors. Supported projects can also get up to $5,000 in
+    Neon credits and up to $5,000 in AI Gateway credits.
 updatedOn: '2026-10-23T17:30:00.000Z'
 image: '/images/social-previews/programs/open-source.jpg'
 ---

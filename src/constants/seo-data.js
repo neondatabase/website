@@ -11,15 +11,15 @@ export default {
     markdownPath: '/index.md',
   },
   about: {
-    title: 'About Us - Neon',
+    title: 'About Neon: The Team Building the Backend for Apps and Agents',
     description:
-      'The Neon team consists of PostgreSQL contributors and technologists on a mission to build the backend for apps and agents, for every developer.',
+      'Neon builds Lakebase Postgres and the backend for apps and agents. The team includes Postgres contributors, and Neon is part of Databricks.',
     pathname: '',
   },
   ai: {
-    title: 'Postgres and backend platform for AI — Neon',
+    title: 'Neon for AI: Postgres, Auth, Functions, and AI Gateway for Agents',
     description:
-      'Build AI agents faster with Neon: serverless Postgres, Auth, Functions, Storage, and an AI Gateway, built for operation by agents.',
+      'Give your agent a full backend in one Neon project: Lakebase Postgres with pgvector, Managed Better Auth, Functions, Object Storage, and AI Gateway. Every operation is callable through the API, CLI, SDK, and MCP server.',
     imagePath: '/images/social-previews/ai.jpg',
     pathname: LINKS.ai,
   },
@@ -38,21 +38,22 @@ export default {
     markdownPath: `${LINKS.lakebase}.md`,
   },
   aboutUs: {
-    title: 'About Us — Neon',
+    title: 'About Neon: The Team Building the Backend for Apps and Agents',
     description:
-      'The Neon team consists of PostgreSQL contributors and technologists on a mission to build the backend for apps and agents, for every developer.',
+      'Neon builds Lakebase Postgres and the backend for apps and agents. The team includes Postgres contributors, and Neon is part of Databricks.',
     pathname: LINKS.aboutUs,
   },
   blog: {
-    title: 'Our Blog — Neon',
+    title: 'Neon Blog: Postgres, Backends for Agents, and Product Updates',
     description:
-      'Learn about Neon and how it can help you build better backends for apps and agents by reading our blog posts.',
+      'Engineering deep dives, product launches, and customer stories from the Neon team, covering Lakebase Postgres, branching, Managed Better Auth, Functions, Object Storage, and AI Gateway.',
     imagePath: '/images/social-previews/blog.jpg',
     pathname: LINKS.blog,
   },
   guides: {
-    title: 'Guides — Neon',
-    description: 'Learn how to use Neon with our guides.',
+    title: 'Neon Guides: Use Neon With Your Framework, ORM, and Tools',
+    description:
+      'Step-by-step guides for building with Neon: connect from frameworks and ORMs, add auth, run migrations, deploy functions, and integrate with third-party services.',
     pathname: LINKS.guides,
   },
   faqs: {
@@ -62,8 +63,9 @@ export default {
     pathname: LINKS.faqs,
   },
   caseStudies: {
-    title: 'Case Studies — Neon',
-    description: 'Discover how other companies are using Neon.',
+    title: 'Neon Case Studies: How Retool, Replit, and Others Build on Postgres',
+    description:
+      'Customer stories from teams running on Neon, from Retool managing 300,000+ Postgres databases with one engineer to Replit provisioning a database for every app its agent builds.',
     pathname: LINKS.caseStudies,
     imagePath: '/images/social-previews/case-studies.jpg',
   },
@@ -74,8 +76,9 @@ export default {
     pathname: LINKS.claimableNeon,
   },
   cli: {
-    title: 'Your Neon workflow lives in the terminal',
-    description: 'The Neon CLI brings the Neon backend platform to your terminal.',
+    title: 'Neon CLI: Manage Postgres, Branches, and Your Backend From the Terminal',
+    description:
+      'Create projects, branch databases, get connection strings, and run neon init to set up your coding agent, all from the terminal. Scriptable for CI and easy for agents to call.',
     pathname: LINKS.cli,
     imagePath: '/images/social-previews/cli.jpg',
   },
@@ -87,8 +90,9 @@ export default {
     markdownPath: `${LINKS.functions}.md`,
   },
   functionsTemplates: {
-    title: 'Function Registry templates — Neon',
-    description: 'Open-source functions you add to a Neon project with one command.',
+    title: 'Neon Function Registry: Templates for Neon Functions',
+    description:
+      "Open-source function templates, built with tools like Vercel's Chat SDK, Mastra, and TanStack AI, that you or your agent add to a Neon project with one command and start from working code.",
     pathname: LINKS.functionsTemplates,
   },
   auth: {
@@ -106,27 +110,29 @@ export default {
     markdownPath: `${LINKS.objectStorage}.md`,
   },
   contactSales: {
-    title: 'Contact Sales — Neon',
-    description: 'Interested in learning more about our plans and pricing? Contact our sales team.',
+    title: 'Contact Neon Sales: Enterprise Plans, Migrations, and Agent Platforms',
+    description:
+      'Talk to the Neon team about enterprise plans, multi-TB migrations, pricing for agent platforms and database fleets, and compliance requirements such as HIPAA.',
     pathname: LINKS.contactSales,
   },
   enterprise: {
-    title: 'Neon for Enterprise - Neon',
+    title: 'Neon for Enterprise: Serverless Postgres With SOC 2, ISO 27001, and HIPAA',
     description:
-      'Switch to Neon for improved scalability, reliability, and engineering efficiency. For developers and AI Agents.',
+      'Run production Postgres on Neon with autoscaling, instant branching, and point-in-time restore, with SOC 2 Type II, ISO 27001, GDPR, and HIPAA compliance. More than 18,000 new Neon databases are created every day.',
     pathname: LINKS.enterprise,
     imagePath: '/images/social-previews/enterprise.jpg',
   },
   migration: {
-    title: 'Postgres Migration — Neon',
-    description: 'Learn how to migrate your Postgres database to Neon.',
+    title: 'Migrate Postgres to Neon: Import Data Assistant, pg_dump, and Logical Replication',
+    description:
+      'Move an existing Postgres database to Neon. The Import Data Assistant checks your version, region, and extensions and copies the data for you. pg_dump and logical replication cover larger moves, with expert help for multi-TB migrations.',
     pathname: LINKS.migration,
     imagePath: '/images/social-previews/migration.jpg',
   },
   useCases: {
-    title: 'Use Cases — Neon',
+    title: 'Neon Use Cases: AI Agents, Database per Tenant, Branching, Dev/Test',
     description:
-      'Explore how teams use Neon to support branching databases, CI pipelines, preview environments, and production workloads.',
+      'How teams use Neon: backends for AI agent platforms, one Postgres database per user or tenant, a branch per pull request and preview, bursty and large production databases, and full-stack apps built by coding agents.',
     pathname: LINKS.useCases,
   },
   partners: {
@@ -154,31 +160,44 @@ export default {
     imagePath: '/images/social-previews/report.jpg',
   },
   variable: {
-    title: 'Dynamically scale your Postgres database — Neon',
+    title: 'Postgres Autoscaling: Compute That Follows Your Traffic | Neon',
     description:
-      'Discover how Neon dynamically scales Postgres compute resources for optimal performance during peak traffic without overpaying.',
+      'Neon autoscales Postgres compute up and down as load changes, within limits you set, and scales to zero when idle. Stop provisioning for peak traffic and resizing instances by hand.',
     imagePath: '/images/social-previews/variable.jpg',
     pathname: LINKS.variableLoad,
   },
   branching: {
-    title: 'Database Branching Workflows - Neon',
+    title: 'Postgres Branching Workflows: Copy a Database in a Second | Neon',
     description:
-      'A new paradigm for managing Postgres. Instantly create, test, preview, and roll back environments with Neon’s powerful database branching.',
+      'Neon branches copy a Postgres database in about a second at any size, without duplicating storage. Give every developer, pull request, preview, and test run its own branch, and restore to any point in time.',
     imagePath: '/images/social-previews/branching.jpg',
     pathname: LINKS.branching,
     type: 'article',
   },
   platforms: {
-    title: 'Embedded Postgres for Platforms - Neon',
-    description: 'Offer Postgres to your users',
+    title: 'Embedded Postgres for Platforms: A Database per User via API | Neon',
+    description:
+      'Give every user, workspace, or generated app its own Postgres database. Neon projects provision in about a second, scale to zero when idle, and are managed through the API with per-project quotas. Retool manages 300,000+ databases this way.',
     pathname: LINKS.platforms,
     type: 'article',
     imagePath: '/images/social-previews/platforms.jpg',
   },
-  security: {
-    title: 'Security — Neon',
+  storage: {
+    title: 'Neon Storage: Bottomless, Copy-on-Write Postgres Storage',
     description:
-      "Discover Neon's security & compliance standards, including SOC 2, GDPR, and HIPAA, with encryption and access controls to protect your data.",
+      'How Neon separates Postgres storage from compute. Data lives in object storage with copy-on-write history, so you pay for what you store, branch multi-TB databases in seconds, and restore to any point.',
+    pathname: LINKS.storage,
+  },
+  faster: {
+    title: 'Faster on Neon: Open Source Demos and Customers Shipping Fast Apps',
+    description:
+      "Fast apps built on Neon: NextFaster's 400 ms initial page load, Retool's 300,000+ databases managed by one engineer, and Magic Circle's 2M+ game sessions, plus a latency calculator for your stack.",
+    pathname: LINKS.faster,
+  },
+  security: {
+    title: 'Neon Security and Compliance: SOC 2 Type II, ISO 27001, GDPR, HIPAA',
+    description:
+      'Neon is SOC 2 Type II, ISO 27001, and ISO 27701 certified and supports GDPR, CCPA, and HIPAA. Review encryption, access controls, sub-processors, and the Trust Center.',
     imagePath: '/images/social-previews/security.jpg',
     pathname: LINKS.security,
   },
@@ -189,14 +208,15 @@ export default {
     pathname: LINKS.startups,
   },
   tools: {
-    title: 'Postgres upgrade and migration tools — Neon',
+    title: 'Postgres Upgrade Assessment and Migration Assistant | Neon',
     description:
-      'Tools to assess major version upgrades, catch compatibility issues, and find the right migration path for your database.',
+      'Plan a Postgres major version upgrade or migration: see what changes between versions, catch compatibility issues before you upgrade, and pick the right migration method for your database.',
     pathname: LINKS.tools,
   },
   autoscalingReport: {
-    title: 'Compute Autoscaling Report',
-    description: 'A deep-dive into the numbers behind Neon Autoscaling.',
+    title: 'Neon Autoscaling Report: 2.4x Less Compute for Production Postgres',
+    description:
+      'What autoscaling does across production databases on Neon: 2.4x less compute and 50% lower cost than provisioning for peak, 4x less compute for read replicas, and 7.5x lower cost for small scale-to-zero workloads.',
     imagePath: '/images/social-previews/compute-autoscaling-report.jpg',
     pathname: LINKS.autoscalingReport,
   },
