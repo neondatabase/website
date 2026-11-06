@@ -44,9 +44,13 @@ const CodeBlock = async ({
   return (
     <CodeBlockWrapper
       className={cn(
-        'rounded-none border border-gray-new-80 dark:border-gray-new-20 [&>pre]:my-0 [&>pre]:rounded-none [&>pre]:bg-white! [&>pre]:py-4 [&>pre]:dark:bg-black-pure!',
+        'rounded-none border border-gray-new-90 bg-gray-new-98 dark:border-gray-new-20 dark:bg-gray-new-8 [&>pre]:my-0 [&>pre]:rounded-none [&>pre]:bg-transparent! [&>pre]:py-4 [&>pre]:pr-11',
         className,
-        { 'code-wrap': meta?.includes('shouldWrap') }
+        {
+          'code-wrap': meta?.includes('shouldWrap'),
+          // Line numbers and diff markers already draw in front of each line.
+          'code-block-prompt': !meta?.includes('showLineNumbers'),
+        }
       )}
       filename={filename}
       language={language}

@@ -33,10 +33,14 @@ export async function generateMetadata({ params }) {
 
 const FunctionTemplatePage = async ({ params }) => {
   const { id } = await params;
-  const page = await getFunctionRegistryTemplatePage(id);
+  const [page, templates] = await Promise.all([
+    getFunctionRegistryTemplatePage(id),
+    getFunctionRegistryCatalog(),
+  ]);
   if (!page) return notFound();
+
   const readme = await getFunctionRegistryTemplateReadme(page.template);
-  return <TemplateDetail {...page} readme={readme} />;
+  return <TemplateDetail template={page.template} templates={templates} readme={readme} />;
 };
 
 export default FunctionTemplatePage;

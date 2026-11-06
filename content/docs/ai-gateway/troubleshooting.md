@@ -65,12 +65,12 @@ The request body does not contain a valid `model` field.
 
 On your project's **AI Gateway** page, locked models show a padlock, and the **Some models are restricted** section lists them grouped by reason. Each reason links to the fix:
 
-| Message                                                 | What to do                                                                                  |
-| ------------------------------------------------------- | ------------------------------------------------------------------------------------------- |
-| **A paid plan is required to use these models**         | On the **Billing** page, select **Add a card** on the **AI gateway credits** card, then buy credits. You don't need to upgrade your plan.                    |
-| **AI Gateway credits are required to use these models** | Select **Add credits**. See [AI Gateway prepaid credits](/docs/ai-gateway/prepaid-credits). |
-| **Your account is restricted from using these models**  | [Contact Support](/docs/introduction/support).                                              |
-| **Some models are not available to your account**       | [Contact Support](/docs/introduction/support).                                              |
+| Message                                                 | What to do                                                                                                                                |
+| ------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
+| **A paid plan is required to use these models**         | On the **Billing** page, select **Add a card** on the **AI gateway credits** card, then buy credits. You don't need to upgrade your plan. |
+| **AI Gateway credits are required to use these models** | Select **Add credits**. See [AI Gateway prepaid credits](/docs/ai-gateway/prepaid-credits).                                               |
+| **Your account is restricted from using these models**  | [Contact Support](/docs/introduction/support).                                                                                            |
+| **Some models are not available to your account**       | [Contact Support](/docs/introduction/support).                                                                                            |
 
 After you buy credits, models unlock once Neon confirms access. Reload the page if a model still shows as locked.
 

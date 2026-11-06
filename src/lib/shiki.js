@@ -165,6 +165,51 @@ const transformerShellPlaceholders = () => ({
   },
 });
 
+// Lines of a shell block that start a command, so the docs can draw a `$`
+// prompt before them. Comments, `\` continuations, indented lines, heredoc
+// bodies and multi-line quoted strings stay unmarked, and so do scripts.
+const HEREDOC_RE = /<<-?\s*['"]?([A-Za-z_][A-Za-z0-9_]*)['"]?/;
+const BLOCK_END_RE = /^(\}|\)|fi\b|done\b|esac\b|else\b|elif\b|then\b|do\b)/;
+// A block that writes its own prompt (`$ ls`, `~/app$ ls`, `root@host:~# ls`)
+// mixes commands with output, so it gets no extra prompts.
+const OWN_PROMPT_RE = /^(\$|\S+[$#%>]) \S/m;
+
+export const getShellPromptLines = (code, lang) => {
+  const lines = new Set();
+  if (!SHELL_LANGS.has(lang) || code.startsWith('#!') || OWN_PROMPT_RE.test(code)) return lines;
+
+  let heredocEnd = null;
+  let continued = false;
+  let inQuote = false;
+
+  code.split('\n').forEach((raw, index) => {
+    const text = raw.trimEnd();
+
+    if (heredocEnd) {
+      if (text.trim() === heredocEnd) heredocEnd = null;
+      return;
+    }
+
+    const isCommand =
+      !continued &&
+      !inQuote &&
+      text !== '' &&
+      !/^\s/.test(text) &&
+      !text.startsWith('#') &&
+      !text.startsWith('$') &&
+      !BLOCK_END_RE.test(text);
+    if (isCommand) lines.add(index + 1);
+
+    continued = text.endsWith('\\');
+    // An odd number of single quotes leaves a string open on the next line.
+    if ((text.replace(/\\'/g, '').match(/'/g) || []).length % 2 === 1) inQuote = !inQuote;
+    const heredoc = text.match(HEREDOC_RE);
+    if (heredoc && !inQuote) heredocEnd = heredoc[1];
+  });
+
+  return lines;
+};
+
 export default async function highlight(code, lang = 'bash', meta = '', theme = customTheme) {
   let language = lang.toLocaleLowerCase();
 
@@ -182,6 +227,7 @@ export default async function highlight(code, lang = 'bash', meta = '', theme = 
   await highlighter.loadLanguage(language);
 
   const collapseRanges = parseCollapseRanges(meta);
+  const promptLines = getShellPromptLines(code, lang.toLocaleLowerCase());
   // Keep collapse={...} out of the "{1,3-5}" highlight parsing below
   const highlightMeta = meta.replace(COLLAPSE_RE, '');
 
@@ -198,6 +244,7 @@ export default async function highlight(code, lang = 'bash', meta = '', theme = 
         },
         line(node, line) {
           node.properties['data-line'] = line;
+          if (promptLines.has(line)) node.properties['data-prompt'] = true;
 
           if (highlightMeta) {
             const highlightedLines = parseHighlightLines(highlightMeta);
