@@ -435,17 +435,6 @@
       "imageGeneration": false
     },
     {
-      "id": "inkling",
-      "owner": "databricks",
-      "entitled": true,
-      "chat": "conforms",
-      "deviations": [],
-      "nativeDialect": "none",
-      "responses": false,
-      "webSearch": false,
-      "imageGeneration": false
-    },
-    {
       "id": "kimi-k3",
       "owner": "moonshot",
       "entitled": true,
