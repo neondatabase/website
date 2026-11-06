@@ -3,15 +3,15 @@ title: JWT
 subtitle: Authenticate using JSON Web Tokens (JWT) for external services
 summary: >-
   Managed Better Auth's JWT plugin lets backend services, CLI tools, and cross-domain API
-  requests retrieve raw JSON Web Tokens via `authClient.token()` or the
-  `set-auth-jwt` response header, rather than relying on HTTP-only session
+  requests retrieve raw JSON Web Tokens via `authClient.getSession()`
+  (`data.session.token`) or the `set-auth-jwt` response header, rather than relying on HTTP-only session
   cookies. Tokens are signed with EdDSA (Ed25519) and expire in 15 minutes;
   verify them using the JWKS endpoint at
   `<YOUR_NEON_AUTH_URL>/.well-known/jwks.json`. This plugin is not a substitute
   for session management in browser-based apps, and custom JWT claims are not
   supported.
 enableTableOfContents: true
-updatedOn: '2026-09-16T15:38:57.808Z'
+updatedOn: '2026-11-05T01:14:02.509Z'
 ---
 
 Managed Better Auth is built on [Better Auth](https://www.better-auth.com/) and provides support for JWT plugin APIs through the Neon SDK. You do not need to manually install or configure the Better Auth JWT plugin.
@@ -32,32 +32,35 @@ Only use JWTs when you specifically need to authorize requests to services that 
 
 - A Neon project with **Auth enabled**.
 
-## Retrieve a Token
+## Retrieve a token
 
 You can retrieve a JWT for the currently signed-in user using the Neon SDK.
 
 ### Using the SDK method
 
-To fetch a raw token string, use the `authClient.token()` method. This is the recommended approach for client applications that need to attach a token to an API request header manually.
+To get a raw token string, call `authClient.getSession()`. The SDK puts the session's JWT in `data.session.token`. This is the recommended approach for client applications that need to attach a token to an API request header manually.
 
 ```ts shouldWrap filename="src/get-token.ts"
 import { authClient } from './auth';
 
 export async function getJwtToken() {
-  const { data, error } = await authClient.token();
+  const { data, error } = await authClient.getSession();
 
   if (error) throw error;
 
-  // The token string (for example, "eyJhbGciOiJFZ...")
-  return data.token;
+  // The JWT string (for example, "eyJhbGciOiJFZ..."), or undefined when no one is signed in
+  return data?.session.token;
 }
 ```
 
-If your app is served from a different origin than your Managed Better Auth URL (for example a Vite or SPA dev server on `localhost` talking to auth on `*.neon.tech`), configure the auth client to send the session cookie on cross-origin requests. Otherwise `authClient.token()` returns `data.token` as `undefined` and calls to your API fail with 401.
+If your app is served from a different origin than your Managed Better Auth URL (for example a Vite or SPA dev server on `localhost` talking to auth on `*.neon.tech`), make sure the auth client sends the session cookie on cross-origin requests, so that `getSession()` can find the session:
 
 ```ts filename="src/auth.ts"
-export const authClient = createAuthClient(NEON_AUTH_URL, {
-  fetchOptions: { credentials: 'include' },
+import { createAuthClient } from '@neon/auth';
+import { BetterAuthReactAdapter } from '@neon/auth/react/adapters';
+
+export const authClient = createAuthClient(import.meta.env.VITE_NEON_AUTH_URL, {
+  adapter: BetterAuthReactAdapter({ fetchOptions: { credentials: 'include' } }),
 });
 ```
 
@@ -142,13 +145,18 @@ The following examples are provided for reference only and are not guaranteed to
    ```ts shouldWrap
    import { jwtVerify, createRemoteJWKSet } from 'jose';
 
-   const NEON_JWKS_URL = `${process.env.NEON_AUTH_BASE_URL}/.well-known/jwks.json`;
+   const NEON_AUTH_BASE_URL = process.env.NEON_AUTH_BASE_URL!;
+   const NEON_JWKS_URL = `${NEON_AUTH_BASE_URL}/.well-known/jwks.json`;
    const JWKS = createRemoteJWKSet(new URL(NEON_JWKS_URL));
+   // Managed Better Auth sets both `iss` and `aud` to the origin of your auth URL
+   const ORIGIN = new URL(NEON_AUTH_BASE_URL).origin;
 
    export async function validateNeonToken(token: string) {
        try {
            const { payload } = await jwtVerify(token, JWKS, {
-               issuer: new URL(process.env.NEON_AUTH_BASE_URL!).origin
+               algorithms: ['EdDSA'],
+               issuer: ORIGIN,
+               audience: ORIGIN,
            });
 
            return payload;
@@ -158,10 +166,12 @@ The following examples are provided for reference only and are not guaranteed to
        }
    }
 
-   validateNeonToken(<YOUR_JWT_TOKEN>).then((payload) => {
-       console.log('Token is valid. Payload:', payload);
-   }).catch(() => {
-       console.log('Token is invalid.');
+   validateNeonToken('<YOUR_JWT_TOKEN>').then((payload) => {
+       if (payload) {
+           console.log('Token is valid. Payload:', payload);
+       } else {
+           console.log('Token is invalid.');
+       }
    });
    ```
 
@@ -327,7 +337,7 @@ The following examples are provided for reference only and are not guaranteed to
 Because Managed Better Auth is a managed service, certain server-side configurations available in the standalone Better Auth library are pre-configured by Neon and cannot be changed:
 
 - **Signing algorithm:** Managed Better Auth uses **EdDSA (Ed25519)** by default for high security and performance. Ensure your verification libraries support this algorithm.
-- **Expiration:** Tokens expire in **15 minutes** (access tokens). You should implement logic to refresh the token using `authClient.token()` when it expires.
+- **Expiration:** Tokens expire in **15 minutes** (access tokens). Call `authClient.getSession()` whenever you need a token. The SDK fetches a new one when the cached token is about to expire.
 - **Custom claims:** Currently, the JWT payload contains the default user information. Custom claims are not supported at this time.
 
 ## Troubleshooting
@@ -336,7 +346,7 @@ Because Managed Better Auth is a managed service, certain server-side configurat
 
 If a token is rejected during verification, check the following:
 
-1. Verify that you are using the correct JWKS endpoint for your Managed Better Auth instance. The issuer of the token must match the origin of your Managed Better Auth URL. (for example, if your Managed Better Auth URL is `https://ep-xx.aws.neon.tech/neondb/auth`, the issuer should be `https://ep-xx.aws.neon.tech`).
+1. Verify that you are using the correct JWKS endpoint for your Managed Better Auth instance. The issuer (`iss`) and audience (`aud`) of the token must both match the origin of your Managed Better Auth URL, not the full URL. For example, if your Managed Better Auth URL is `https://ep-xx.aws.neon.tech/neondb/auth`, both should be `https://ep-xx.aws.neon.tech`.
 2. Confirm that your verification library supports **EdDSA** (Ed25519).
 3. Make sure the token has not expired.
 4. Check that the `kid` in the JWT header matches one of the keys in the JWKS response. If not, fetch the latest keys from the JWKS endpoint.
