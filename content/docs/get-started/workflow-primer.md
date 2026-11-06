@@ -77,22 +77,26 @@ If you're using GitHub Actions for your CI workflows, Neon provides GitHub Actio
 
 <TabItem>
 
-Here is an example of what a create branch action might look like:
+Set the `NEON_API_KEY` repository secret and the `NEON_DATABASE_USER` repository variable (the database role to use). Replace the sample project and parent branch IDs with your own. This example runs manually with `workflow_dispatch`:
 
 ```yaml
 name: Create Neon Branch with GitHub Actions Demo
 run-name: Create a Neon Branch 🚀
+on:
+  workflow_dispatch:
 jobs:
-  Create-Neon-Branch:
-    uses: neondatabase/create-branch-action@v5
-    with:
-      project_id: rapid-haze-373089
-      parent_id: br-long-forest-224191
-      branch_name: from_action_reusable
-      api_key: {{ secrets.NEON_API_KEY }}
-    id: create-branch
-  - run: echo project_id ${{ steps.create-branch.outputs.project_id}}
-  - run: echo branch_id ${{ steps.create-branch.outputs.branch_id}}
+  create-neon-branch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: neondatabase/create-branch-action@v5
+        with:
+          project_id: rapid-haze-373089
+          parent: br-long-forest-224191
+          branch_name: from_action_reusable
+          username: ${{ vars.NEON_DATABASE_USER }}
+          api_key: ${{ secrets.NEON_API_KEY }}
+        id: create-branch
+      - run: echo branch_id ${{ steps.create-branch.outputs.branch_id }}
 ```
 
 </TabItem>
@@ -110,11 +114,13 @@ on:
       - 'production'
 jobs:
   delete-neon-branch:
-    uses: neondatabase/delete-branch-action@v3
-    with:
-      project_id: rapid-haze-373089
-      branch: br-long-forest-224191
-      api_key: { { secrets.NEON_API_KEY } }
+    runs-on: ubuntu-latest
+    steps:
+      - uses: neondatabase/delete-branch-action@v3
+        with:
+          project_id: rapid-haze-373089
+          branch: br-long-forest-224191
+          api_key: ${{ secrets.NEON_API_KEY }}
 ```
 
 </TabItem>
