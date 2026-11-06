@@ -153,13 +153,13 @@ npm run db:push
 
 ## Set the webhook
 
-Your callback URL is the `whatsapp` function's URL with the path `/api/webhook`. `npm run deploy` prints it in the **Function URLs** list, and `neon functions get whatsapp` shows it again at any time in its `URL` field:
+Your callback URL is the `whatsapp` function's URL with the path `/api/webhook`. `npm run deploy` prints it in the **Function URLs** list, and `neon functions get whatsapp` shows it in its `URL` field:
 
 ```text shouldWrap
 https://br-cool-darkness-123456-whatsapp.compute.c-2.us-east-2.aws.neon.tech/api/webhook
 ```
 
-Your URL will differ. Use your own `whatsapp` URL, with the path `/api/webhook`; the host is specific to your branch.
+Your URL will differ. Use your own `whatsapp` URL; the host is specific to your branch.
 
 In the Meta App Dashboard, open **WhatsApp** > **Configuration**. Enter:
 

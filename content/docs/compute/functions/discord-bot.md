@@ -164,13 +164,13 @@ npm run db:push
 
 ## Set the Interactions Endpoint URL
 
-Your interactions endpoint is the `discord` function's URL with the path `/api/interactions`. `npm run deploy` prints it in the **Function URLs** list, and `neon functions get discord` shows it again at any time in its `URL` field:
+Your interactions endpoint is the `discord` function's URL with the path `/api/interactions`. `npm run deploy` prints it in the **Function URLs** list, and `neon functions get discord` shows it in its `URL` field:
 
 ```text shouldWrap
 https://br-cool-darkness-123456-discord.compute.c-2.us-east-2.aws.neon.tech/api/interactions
 ```
 
-Your URL will differ. Use your own `discord` URL, with the path `/api/interactions`; the host is specific to your branch.
+Your URL will differ. Use your own `discord` URL; the host is specific to your branch.
 
 In the Developer Portal, open **General Information**. Paste that URL into **Interactions Endpoint URL** and save.
 
