@@ -164,7 +164,7 @@ npm run db:push
 
 ## Set the Interactions Endpoint URL
 
-Your interactions endpoint is the `discord` function's URL with the path `/api/interactions`. `npm run deploy` prints it in the **Function URLs** list, and `neon functions list` shows it again at any time:
+Your interactions endpoint is the `discord` function's URL with the path `/api/interactions`. `npm run deploy` prints it in the **Function URLs** list, and `neon functions get discord` shows it again at any time in its `URL` field:
 
 ```text shouldWrap
 https://br-cool-darkness-123456-discord.compute.c-2.us-east-2.aws.neon.tech/api/interactions
@@ -176,7 +176,7 @@ In the Developer Portal, open **General Information**. Paste that URL into **Int
 
 Discord immediately POSTs a `PING` (`type: 1`). The handler verifies the signature and returns a `PONG`. If that handshake succeeds, Discord saves the URL (the Developer Portal shows a green success message).
 
-If save fails, retry once. Confirm the public key in `.env.local` matches General Information, you redeployed after editing `.env.local` and the path ends with `/api/interactions`. Then open or curl the function URL (from `neon functions list`, or that URL plus `/api/interactions`). GET returns JSON with these keys:
+If save fails, retry once. Confirm the public key in `.env.local` matches General Information, you redeployed after editing `.env.local` and the path ends with `/api/interactions`. Then open or curl the function URL (from `neon functions get discord`, or that URL plus `/api/interactions`). GET returns JSON with these keys:
 
 ```json
 {

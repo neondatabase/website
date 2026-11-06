@@ -123,7 +123,7 @@ To pull from a different branch, switch with `neon checkout`; it pulls the new b
 
 ## Call another function
 
-Every function on a branch answers at `https://<NEON_BRANCH_ID>-<slug><NEON_FUNCTION_HOST_SUFFIX>`. Neon injects both variables into every deployed function, and `neon env pull` writes them locally, so the same code reaches a sibling function in production and on your machine. `functionBaseUrl` from `@neon/env` 2.0.0 or later builds the URL for you:
+Every function on a branch answers at `https://<NEON_BRANCH_ID>-<slug><NEON_FUNCTION_HOST_SUFFIX>`. Neon injects both variables into every deployed function, and `neon env pull` writes them locally, so the same code reaches a sibling function in production and on your machine. `functionBaseUrl` from `@neon/env` 2.0.0 or later builds the URL for you, without a trailing slash:
 
 ```ts
 import { functionBaseUrl } from '@neon/env';
@@ -132,6 +132,14 @@ const res = await fetch(`${functionBaseUrl('hello')}/greet`);
 ```
 
 Under [`neon dev`](/docs/cli/dev), `functionBaseUrl` returns `http://localhost:<port>` for each function that `neon dev` is serving and the deployed URL for any other slug. It throws a `TypeError` for an invalid slug, and a `PlatformError` when either variable is missing. Locally, run `neon env pull` or `neon dev` to set them.
+
+`functionBaseUrl` reads `process.env` by default. When the two variables come from somewhere else, pass them as the second argument:
+
+```ts
+functionBaseUrl('hello', { NEON_BRANCH_ID: branchId, NEON_FUNCTION_HOST_SUFFIX: hostSuffix });
+```
+
+Browser code can't read these variables. Build the URL on the server with `functionBaseUrl` and pass it to the client.
 
 Neon CLI 9.0.0 and `@neon/env` 2.0.0 replaced the per-function `NEON_FUNCTION_<SLUG>_BASE_URL` variables, which deployed functions never received. If your code reads `env.functions.<slug>.baseUrl`, upgrade to `@neon/env` 2 and call `functionBaseUrl('<slug>')` instead.
 

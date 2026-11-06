@@ -139,7 +139,7 @@ npm run db:push
 
 ## Set the webhook
 
-Telegram sends updates to `/api/webhook`. Your webhook URL is the `telegram` function's URL with the path `/api/webhook`. `npm run deploy` prints it in the **Function URLs** list, and `neon functions list` shows it again at any time. Set `TELEGRAM_WEBHOOK_URL` to it:
+Telegram sends updates to `/api/webhook`. Your webhook URL is the `telegram` function's URL with the path `/api/webhook`. `npm run deploy` prints it in the **Function URLs** list, and `neon functions get telegram` shows it again at any time in its `URL` field. Set `TELEGRAM_WEBHOOK_URL` to it:
 
 ```env filename=".env.local"
 TELEGRAM_WEBHOOK_URL=https://br-cool-darkness-123456-telegram.compute.c-2.us-east-2.aws.neon.tech/api/webhook
