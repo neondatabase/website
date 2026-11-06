@@ -15,20 +15,20 @@ Neon injects connection strings, credentials, and service URLs automatically at 
 
 Each variable is present only when its service is enabled on the branch. `DATABASE_URL` and `DATABASE_URL_UNPOOLED`, for example, are undefined on a functions-only branch with no Postgres database.
 
-| Variable                                     | Service             | Description                                                                                                                                                                          |
-| -------------------------------------------- | ------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `DATABASE_URL`                               | Postgres            | Pooled connection string. Use this for most queries.                                                                                                                                 |
-| `DATABASE_URL_UNPOOLED`                      | Postgres            | Direct connection string. Use for migrations, `LISTEN`/`NOTIFY`, and multi-round-trip transactions.                                                                                  |
-| `NEON_BRANCH`                                | Core                | Branch name (e.g. `main`, `preview/foo`). Present on all branches.                                                                                                                   |
-| `NEON_BRANCH_ID`                             | Core                | Branch ID (e.g. `br-cool-darkness-123456`). Present on all branches.                                                                                                                 |
-| `NEON_FUNCTION_HOST_SUFFIX`                  | Functions           | The part of a function hostname after `<branch-id>-<slug>`, with its leading dot (e.g. `.compute.c-2.us-east-2.aws.neon.tech`). See [Call another function](#call-another-function). |
-| `NEON_AUTH_BASE_URL`                         | Managed Better Auth | Base URL for Managed Better Auth.                                                                                                                                                    |
-| `NEON_AUTH_JWKS_URL`                         | Managed Better Auth | JWKS endpoint for verifying Managed Better Auth JWTs. See [Authentication](/docs/compute/functions/authentication).                                                                  |
-| `NEON_DATA_API_URL`                          | Data API            | Base URL for the Neon Data API (PostgREST). Present when the Data API is provisioned on the branch.                                                                                  |
-| `NEON_AI_GATEWAY_TOKEN`                      | AI Gateway          | Gateway bearer token.                                                                                                                                                                |
-| `NEON_AI_GATEWAY_BASE_URL`                   | AI Gateway          | Gateway host root. Append a dialect route, e.g. `/v1` for Chat Completions or `/openai/v1` for the OpenAI Responses API.                                                             |
-| `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY` | Object Storage      | S3-compatible credentials for the branch's buckets.                                                                                                                                  |
-| `AWS_ENDPOINT_URL_S3`, `AWS_REGION`          | Object Storage      | S3 endpoint and region. The `AWS_*` names mean the AWS SDKs work with no setup.                                                                                                      |
+| Variable                                     | Service             | Description                                                                                                              |
+| -------------------------------------------- | ------------------- | ------------------------------------------------------------------------------------------------------------------------ |
+| `DATABASE_URL`                               | Postgres            | Pooled connection string. Use this for most queries.                                                                     |
+| `DATABASE_URL_UNPOOLED`                      | Postgres            | Direct connection string. Use for migrations, `LISTEN`/`NOTIFY`, and multi-round-trip transactions.                      |
+| `NEON_BRANCH`                                | Core                | Branch name (e.g. `main`, `preview/foo`). Present on all branches.                                                       |
+| `NEON_BRANCH_ID`                             | Core                | Branch ID (e.g. `br-cool-darkness-123456`). Present on all branches.                                                     |
+| `NEON_FUNCTION_HOST_SUFFIX`                  | Functions           | Hostname suffix shared by the branch's functions, e.g. `.compute.c-2.us-east-2.aws.neon.tech`.                           |
+| `NEON_AUTH_BASE_URL`                         | Managed Better Auth | Base URL for Managed Better Auth.                                                                                        |
+| `NEON_AUTH_JWKS_URL`                         | Managed Better Auth | JWKS endpoint for verifying Managed Better Auth JWTs. See [Authentication](/docs/compute/functions/authentication).      |
+| `NEON_DATA_API_URL`                          | Data API            | Base URL for the Neon Data API (PostgREST). Present when the Data API is provisioned on the branch.                      |
+| `NEON_AI_GATEWAY_TOKEN`                      | AI Gateway          | Gateway bearer token.                                                                                                    |
+| `NEON_AI_GATEWAY_BASE_URL`                   | AI Gateway          | Gateway host root. Append a dialect route, e.g. `/v1` for Chat Completions or `/openai/v1` for the OpenAI Responses API. |
+| `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY` | Object Storage      | S3-compatible credentials for the branch's buckets.                                                                      |
+| `AWS_ENDPOINT_URL_S3`, `AWS_REGION`          | Object Storage      | S3 endpoint and region. The `AWS_*` names mean the AWS SDKs work with no setup.                                          |
 
 These variables are branch-scoped: each branch injects its own values. A function deployed to a preview branch connects to that branch's database, not the default branch's.
 
@@ -119,7 +119,7 @@ neon env pull --file .env.preview
 
 To pull from a different branch, switch with `neon checkout`; it pulls the new branch's variables as part of the switch.
 
-`env pull` writes only the Neon-managed variables and preserves every other line in the file. That's the core variables `DATABASE_URL`, `DATABASE_URL_UNPOOLED`, `NEON_BRANCH`, and `NEON_BRANCH_ID`, plus the variables for any service you **declare in `neon.ts`**: the Managed Better Auth URLs, the Neon Data API URL, the AI Gateway credentials (`NEON_AI_GATEWAY_TOKEN`, `NEON_AI_GATEWAY_BASE_URL`), and the Object Storage credentials (`AWS_*`). It also writes `NEON_BRANCH_ID` and `NEON_FUNCTION_HOST_SUFFIX`, the same values Neon injects into deployed functions, so code running locally builds the same function URLs as deployed code. See [Call another function](#call-another-function).
+`env pull` writes only the Neon-managed variables and preserves every other line in the file. That's the core variables `DATABASE_URL`, `DATABASE_URL_UNPOOLED`, `NEON_BRANCH`, and `NEON_BRANCH_ID`, plus the variables for any service you **declare in `neon.ts`**: the Managed Better Auth URLs, the Neon Data API URL, the AI Gateway credentials (`NEON_AI_GATEWAY_TOKEN`, `NEON_AI_GATEWAY_BASE_URL`), and the Object Storage credentials (`AWS_*`). It also writes `NEON_FUNCTION_HOST_SUFFIX`, which together with `NEON_BRANCH_ID` lets code running locally build the same function URLs as deployed code. See [Call another function](#call-another-function).
 
 ## Call another function
 

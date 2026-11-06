@@ -318,7 +318,7 @@ import config from '../../neon';
 export const env = parseEnv(config, 'analyst');
 ```
 
-[`parseEnv`](https://www.npmjs.com/package/@neon/env) validates the injected variables and returns a typed `env` object. Passing the function's slug (`analyst`) adds a typed `env.function` namespace for the variables you declared in `neon.ts`, so `env.function.NEON_API_KEY` is checked at build time instead of failing with a missing variable at runtime.
+[`parseEnv`](https://www.npmjs.com/package/@neon/env) (`@neon/env` 2.0.0 or later) validates the injected variables and returns a typed `env` object. Passing the function's slug (`analyst`) adds a typed `env.function` namespace for the variables you declared in `neon.ts`, so `env.function.NEON_API_KEY` is checked at build time instead of failing with a missing variable at runtime.
 
 Then create `src/lib/neon.ts`:
 

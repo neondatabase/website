@@ -387,7 +387,7 @@ env.realtime.secret;              // NEON_REALTIME_SECRET
 
 Each namespace exists only when its service is declared: `env.auth` when `auth: true`, `env.storage` when you declare `buckets`, and so on. If you access a namespace your config doesn't declare, TypeScript catches it.
 
-`env.branch.id` and `env.branch.functionHostSuffix` are optional, like `env.branch.name`. To require them, select their keys: `parseEnv(config, ['NEON_BRANCH_ID', 'NEON_FUNCTION_HOST_SUFFIX'])`. To call another function, use `functionBaseUrl('<slug>')` from `@neon/env` rather than joining these values yourself. See [Call another function](/docs/compute/functions/environment-variables#call-another-function). `@neon/env` 2.0.0 removed `env.functions` and the `NEON_FUNCTION_<SLUG>_BASE_URL` keys.
+`env.branch.id` and `env.branch.functionHostSuffix` are optional, like `env.branch.name`. To require them, select their keys: `parseEnv(config, ['NEON_BRANCH_ID', 'NEON_FUNCTION_HOST_SUFFIX'])`. To call another function, use `functionBaseUrl('<slug>')` from `@neon/env` rather than joining these values yourself. See [Call another function](/docs/compute/functions/environment-variables#call-another-function). `@neon/env` 2.0.0 removed `env.functions`.
 
 `parseEnv(config, '<slug>')` also returns `env.function`: the scoped env for code running inside that function, exposing the `env` vars declared in its `neon.ts` definition.
 
