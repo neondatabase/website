@@ -938,6 +938,8 @@
               slug: compute/functions/agents
             - title: WebSockets and SSE
               slug: compute/functions/websockets
+            - title: Build an MCP server
+              slug: compute/functions/mcp-server
         - section: Example apps
           items:
             - title: Discord bot

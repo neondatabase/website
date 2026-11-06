@@ -70,6 +70,8 @@ Add [access control](#access-control) parameters to the `url` as needed.
 
 The Neon MCP Server is an official Claude connector for Claude.ai and Claude Desktop. See [Set up Neon in Claude.ai and Claude Desktop](/docs/ai/agent-setup/claude-ai).
 
+This page covers the hosted Neon MCP Server, which manages your Neon resources. To give your own application an MCP server that customers connect to, see [Build an MCP server with Managed Better Auth](/docs/compute/functions/mcp-server).
+
 ## Access control
 
 The Neon MCP Server supports URL parameters to restrict scope and permissions. Append them to the MCP URL (`https://mcp.neon.tech/mcp`).
