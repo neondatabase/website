@@ -64,7 +64,7 @@ hideCopyPage: true
 
 Neon Object Storage is file storage built into your Neon project, reached through an S3-style API. Key capabilities include:
 
-- **Branches with your database.** Each branch has its own view of storage, so you can test uploads and deletes in a preview branch without touching production files.
+- **Branches with your database.** Each branch has its own view of storage, so you can test uploads and deletes in a preview branch without touching production files. [Reset a branch from its parent](/docs/guides/reset-from-parent) to return its storage to the parent's state.
 - **Copy-on-write forking.** Branches inherit the parent's objects at the moment of forking, with no data copied.
 - **S3-style access.** Point the AWS SDKs, boto3, the AWS CLI, or the [Files SDK](https://files-sdk.dev) at your branch endpoint. Neon implements a subset of the S3 API.
 - **One credential system.** The same Neon credential system used by AI Gateway and Functions.
