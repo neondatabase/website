@@ -1,6 +1,6 @@
 ---
 title: Connect from Drizzle to Neon
-subtitle: Learn how to connect to Neon from Drizzle
+subtitle: Set up Drizzle ORM and Drizzle Kit with Neon Postgres.
 summary: >-
   Drizzle ORM connection guide for Lakebase Postgres on Neon walks through initializing a
   TypeScript/Node.js project with supported drivers: Neon serverless HTTP, Neon
@@ -10,33 +10,58 @@ summary: >-
   guide also shows how to point Drizzle at different Neon branches per
   environment by selecting a connection string based on NODE_ENV.
 enableTableOfContents: true
-updatedOn: '2026-10-08T19:32:04.700Z'
+agentPrompt: 'I want to use Drizzle ORM with it.'
+updatedOn: '2026-11-06T15:59:20.867Z'
 ---
 
-<Callout title="Realtime with Drizzle">
-See how to subscribe to live SQL queries with [Neon Realtime + Drizzle](/docs/realtime/examples/drizzle)
-</Callout>
+<div className="not-prose my-8 rounded-[10px] border border-gray-new-90 bg-gray-new-95 px-6 py-7 dark:border-gray-new-15 dark:bg-gray-new-10 [&>h2]:my-0 [&>h2]:mb-7 [&>h2]:mx-auto [&>h2]:w-fit [&>h2]:text-center [&>h2]:text-[28px] [&>h2]:leading-tight [&>h2]:font-medium [&>h2]:tracking-tighter [&>h2]:text-black-pure dark:[&>h2]:text-white [&_h3]:relative [&_h3]:mt-7 [&_h3]:mb-2 [&_h3]:w-fit [&_h3]:text-xl [&_h3]:font-semibold [&_h3]:tracking-tight [&_h3]:text-black-pure [&_h3]:before:absolute [&_h3]:before:-left-11 [&_h3]:before:top-px [&_h3]:before:flex [&_h3]:before:size-7 [&_h3]:before:items-center [&_h3]:before:justify-center [&_h3]:before:rounded-full [&_h3]:before:bg-black-new [&_h3]:before:text-[13px] [&_h3]:before:font-semibold [&_h3]:before:text-white [&_h3]:before:content-[counter(step)] [&_h3]:before:[counter-increment:step] dark:[&_h3]:text-white dark:[&_h3]:before:bg-white dark:[&_h3]:before:text-black-pure">
 
-<CopyPrompt src="/prompts/drizzle-prompt.md" 
-description="Pre-built prompt for connecting Node/TypeScript applications to Neon using Drizzle ORM."/>
+## Build with your agent
 
-<InfoBlock>
-<DocsList title="What you will learn:">
-<p>How to connect from Drizzle using different drivers</p>
-<p>How to configure Drizzle Kit for migrations</p>
-</DocsList>
+<div className="pl-11 [counter-reset:step] [&>h3:first-child]:mt-0!">
 
-<DocsList title="Related resources" theme="docs">
-  <a href="https://orm.drizzle.team/docs/tutorials/drizzle-with-neon">Drizzle with Neon Postgres (Drizzle Docs)</a>
-  <a href="/docs/guides/drizzle-migrations">Schema migration with Drizzle ORM</a>
-  <a href="/docs/guides/nextjs#video-walkthrough">Getting started with Neon (Next.js and Drizzle video)</a>
-</DocsList>
+### Give your agent the skills
 
-</InfoBlock>
+<p className="m-0 mb-1.5 text-[15px] leading-relaxed text-gray-new-30 dark:text-gray-new-70">Set up your agent for Neon</p>
 
-Drizzle is a TypeScript ORM with type-safe queries. This guide shows you how to connect your application to a database on Neon using Drizzle ORM.
+<CopyLine text="Set me up for Neon. Fetch https://neon.com/prompts/agent-setup.md and follow it." />
 
-To connect a TypeScript/Node.js project to Neon using Drizzle ORM, follow these steps:
+<p className="mt-4 mb-1.5 text-[15px] leading-relaxed text-gray-new-30 dark:text-gray-new-70">Add Drizzle skills</p>
+
+<CopyLine text="Add the Drizzle skill to this project. Fetch https://orm.drizzle.team/docs/drizzle-kit-skills and follow it." />
+
+<CollapseFade collapsedHeight={28}>
+
+<p className="mt-3 text-[13px] leading-relaxed text-gray-new-50 dark:text-gray-new-60">The Drizzle skill is maintained by the <a href="https://orm.drizzle.team/docs/drizzle-kit-skills">Drizzle team</a> and currently ships in Drizzle Kit's v1 pre-release (drizzle-kit@rc), so the agent installs it once Drizzle is in your project.</p>
+
+### Set up your project
+
+<p className="m-0 mb-3 text-[15px] leading-relaxed text-gray-new-30 dark:text-gray-new-70">The agent inspects your project, creates a Neon project if you need one, adds the connection string, and configures Drizzle to match.</p>
+
+<CopyLine text="Look at my project (check package.json, any existing schema, and my config), then set up Drizzle against Neon Postgres: create a Neon project if I need one, add the connection string, and configure Drizzle to match what you found." />
+
+### More things to ask for
+
+<AgentPromptList
+items={[
+{ text: 'Generate and apply a Drizzle Kit migration to my Neon database' },
+{ text: 'Use the direct Neon URL for Drizzle Kit migrations and the pooled URL for my app' },
+{ text: 'Switch my Drizzle client to the Neon serverless driver to run on the edge' },
+{ text: 'Add Lakebase Search to my Drizzle schema' },
+{ text: 'Create a Neon branch per PR to test this migration' },
+{ text: 'Test this migration on a schema-only branch first (beta)' },
+]}
+/>
+
+</CollapseFade>
+
+</div>
+
+</div>
+
+<div className="mt-12 [&>h2:first-child]:mt-0! [&_.numbered-step]:before:border [&_.numbered-step]:before:border-gray-new-50 [&_.numbered-step]:before:bg-transparent! [&_.numbered-step]:before:text-gray-new-40! dark:[&_.numbered-step]:before:border-gray-new-30 dark:[&_.numbered-step]:before:bg-transparent! dark:[&_.numbered-step]:before:text-gray-new-70!">
+
+## Full setup, step by step
 
 <Steps>
 
@@ -62,6 +87,14 @@ If you do not have one already, create a Neon project.
 1.  Navigate to the [Projects](https://console.neon.tech/app/projects) page in the Neon Console.
 2.  Click **New Project**.
 3.  Specify your project settings and click **Create Project**.
+
+## Set up your agent (optional)
+
+Optional, but recommended if you use an AI coding agent. This installs the Neon CLI, signs you in, and installs the Neon [agent skills](/docs/ai/agent-skills) and [MCP server](/docs/ai/neon-mcp-server), so your agent can create branches, run migrations, and inspect your database directly. Paste this into your agent:
+
+```text shouldWrap
+Set me up for Neon. Fetch https://neon.com/prompts/agent-setup.md and follow it.
+```
 
 ## Get your connection string
 
@@ -399,6 +432,8 @@ Each branch has its own connection string, available in the Neon Console or via 
 - [Drizzle with Neon Postgres](https://orm.drizzle.team/docs/tutorials/drizzle-with-neon)
 - [Schema migration with Lakebase Postgres and Drizzle ORM](/docs/guides/drizzle-migrations)
 - [Todo App with Neon Postgres and Drizzle ORM](https://orm.drizzle.team/docs/tutorials/drizzle-nextjs-neon)
+- [Getting started with Neon (Next.js and Drizzle video)](/docs/guides/nextjs#video-walkthrough)
+- [Realtime with Drizzle](/docs/realtime/examples/drizzle)
 
 ## Next steps
 
@@ -406,6 +441,7 @@ Each branch has its own connection string, available in the Neon Console or via 
 - [Add Object Storage](/docs/storage/overview): S3-compatible file storage that branches with your database
 - [Deploy a Function](/docs/compute/functions/overview): Run backend compute next to your database, no separate hosting needed
 - [Call an LLM with AI Gateway](/docs/ai-gateway/overview): Access foundation models from Anthropic, OpenAI, Google, and more with one credential
-- [Realtime](/docs/realtime/examples/drizzle): Build realtime Drizzle apps on Neon using your existing schema and queries
+
+</div>
 
 <NeedHelp/>

@@ -3,6 +3,7 @@ import { MDXRemote } from 'next-mdx-remote/rsc';
 import PropTypes from 'prop-types';
 import remarkGfm from 'remark-gfm';
 
+import { AgentPromptList, CopyLine } from 'components/pages/doc/agent-prompt-list';
 import AiGatewayModelIndex from 'components/pages/doc/ai-gateway-model-index';
 import ApiMethodBadge from 'components/pages/doc/api-method-badge';
 import ApiParam from 'components/pages/doc/api-param';
@@ -52,6 +53,7 @@ import AutoscalingChart from 'components/shared/autoscaling-chart';
 import AutoscalingViz from 'components/shared/autoscaling-viz';
 import Button from 'components/shared/button';
 import CodeBlock from 'components/shared/code-block';
+import CollapseFade from 'components/shared/collapse-fade';
 import ComputeCalculator from 'components/shared/compute-calculator';
 import CopyPrompt, { AgentPrompt } from 'components/shared/copy-prompt';
 // import CtaBlock from 'components/shared/cta-block';
@@ -251,6 +253,9 @@ const getComponents = (withoutAnchorHeading, isReleaseNote, isPostgres, isTempla
   MegaLink,
   CopyPrompt,
   AgentPrompt,
+  AgentPromptList,
+  CopyLine,
+  CollapseFade,
   ImageWithCommand,
   McpSetupConfigurator,
   SqlToRestConverter,
