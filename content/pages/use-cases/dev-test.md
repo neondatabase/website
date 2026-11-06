@@ -3,6 +3,12 @@ title: Neon for Development and Testing
 subtitle: Boost developer productivity with Neon—a flexible development sandbox for running non-production workloads.
 summary: Covers the setup of Neon as a flexible development sandbox for running non-production workloads, enabling efficient database branching and streamlined workflows for development and testing environments.
 enableTableOfContents: true
+seo:
+  title: 'Postgres for Dev and Test: Branches Instead of Copies | Neon'
+  description: >-
+    Replace always-on dev and staging instances with Neon branches that copy
+    production data in seconds and scale to zero when idle. In one example,
+    non-production database costs drop about 80% compared with AWS RDS.
 updatedOn: '2024-08-23T09:00:00.000Z'
 image: '/images/social-previews/use-cases/dev-test.jpg'
 ---
