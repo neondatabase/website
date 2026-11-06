@@ -3,7 +3,6 @@
 import { LazyMotion, domAnimation, m, useReducedMotion } from 'framer-motion';
 import PropTypes from 'prop-types';
 import { useEffect, useState } from 'react';
-import useLocation from 'react-use/lib/useLocation';
 
 import { cn } from 'utils/cn';
 
@@ -55,38 +54,38 @@ const Item = ({
   index,
   variant = 'default',
 }) => {
-  const { hash } = useLocation();
   const [isOpen, setIsOpen] = useState(initialState === 'open');
   const shouldReduceMotion = useReducedMotion();
   const styles = variants[variant] ?? variants.default;
 
   const handleOpen = () => {
-    setIsOpen((prev) => {
-      const newState = !prev;
-
-      if (!newState && hash === `#${id}`) {
-        window.history.replaceState(
-          null,
-          '',
-          `${window.location.pathname}${window.location.search}`
-        );
-      }
-
-      return newState;
-    });
-  };
-
-  useEffect(() => {
-    let timeout;
-
-    if (hash === `#${id}`) {
-      timeout = setTimeout(() => {
-        setIsOpen(true);
-      }, 700);
+    if (isOpen && id && window.location.hash === `#${id}`) {
+      window.history.replaceState(null, '', `${window.location.pathname}${window.location.search}`);
     }
 
-    return () => clearTimeout(timeout);
-  }, [id, hash]);
+    setIsOpen(!isOpen);
+  };
+
+  // Listen to hashchange instead of patching history (react-use's useLocation):
+  // Next.js writes history inside useInsertionEffect, where state updates are forbidden.
+  useEffect(() => {
+    if (!id) return undefined;
+
+    let timeout;
+    const openIfTargeted = () => {
+      if (window.location.hash !== `#${id}`) return;
+      clearTimeout(timeout);
+      timeout = setTimeout(() => setIsOpen(true), 700);
+    };
+
+    openIfTargeted();
+    window.addEventListener('hashchange', openIfTargeted);
+
+    return () => {
+      clearTimeout(timeout);
+      window.removeEventListener('hashchange', openIfTargeted);
+    };
+  }, [id]);
 
   return (
     <li

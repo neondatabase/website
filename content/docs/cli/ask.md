@@ -1,7 +1,5 @@
 ---
 title: 'Neon CLI command: ask'
-tag: new
-tagTheme: green
 subtitle: 'Ask the Neon assistant a question from the terminal'
 summary: >-
   The Neon CLI `ask` command sends a question to the Neon assistant and prints
@@ -9,6 +7,7 @@ summary: >-
   login; use `--output json` for machine-readable output when scripting or
   calling it from an agent.
 enableTableOfContents: true
+updatedOn: '2026-11-01T14:46:44.000Z'
 ---
 
 The `ask` command sends a question to the Neon assistant and prints the answer to your terminal: `neon ask --prompt "<question>"`. The assistant answers from Neon's documentation, so keep questions scoped to Neon and Lakebase Postgres rather than general chat. No login is required, and it doesn't touch your projects or account. To find docs pages on a topic, use [`neon docs search`](/docs/cli/docs). To send feedback to the Neon team instead, use [`neon feedback`](/docs/cli/feedback).

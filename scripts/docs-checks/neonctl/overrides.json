@@ -174,38 +174,6 @@
         }
       }
     },
-    "neon-auth": {
-      "commands": {
-        "oauth-provider": {
-          "commands": {
-            "add": {
-              "options": {
-                "provider-id": {
-                  "describe": "OAuth provider ID. Supported values: google, github, vercel",
-                  "choices": ["google", "github", "vercel"]
-                }
-              }
-            },
-            "update": {
-              "options": {
-                "provider-id": {
-                  "describe": "OAuth provider ID. Supported values: google, github, vercel",
-                  "choices": ["google", "github", "vercel"]
-                }
-              }
-            },
-            "delete": {
-              "options": {
-                "provider-id": {
-                  "describe": "OAuth provider ID. Supported values: google, github, vercel",
-                  "choices": ["google", "github", "vercel"]
-                }
-              }
-            }
-          }
-        }
-      }
-    },
     "snapshots": {
       "commands": {
         "schedule": {

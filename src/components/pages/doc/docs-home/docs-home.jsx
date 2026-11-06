@@ -21,42 +21,42 @@ const heroLinkUnderline =
 const CAPABILITY_CARDS = [
   {
     title: 'Add login and users',
-    line: 'Sign-in, sign-up, sessions, OAuth.',
+    line: 'Sign-in, sign-up, sessions, and OAuth, stored in your database.',
     product: 'Managed Better Auth',
     to: '/docs/auth/overview',
     icon: 'lock-landscape',
   },
   {
-    title: 'Store files and uploads',
-    line: 'Images, documents, user uploads.',
+    title: 'Store files and media',
+    line: 'Images, video, and user uploads that branch with your data.',
     product: 'Neon Object Storage',
     to: '/docs/storage/overview',
     icon: 'data',
   },
   {
-    title: 'Run backend code',
-    line: 'Host APIs, agents, webhooks, cron.',
+    title: 'Deploy APIs and agents',
+    line: 'Long-running Node.js for APIs, agents, webhooks, and cron.',
     product: 'Neon Functions',
     to: '/docs/compute/functions/overview',
     icon: 'code',
   },
   {
-    title: 'Make it reactive',
-    line: 'Realtime, reactive data and UIs.',
+    title: 'Add live updates',
+    line: 'UIs that update instantly when rows in your database change.',
     product: 'Neon Realtime',
     to: '/docs/realtime/overview',
     icon: 'zap',
   },
   {
     title: 'Add search',
-    line: 'Vector, full-text, and hybrid search.',
+    line: 'Vector, full-text, and hybrid search, right in Postgres.',
     product: 'Lakebase Search',
     to: '/docs/ai/lakebase-search',
     icon: 'search',
   },
   {
-    title: 'Call any LLM',
-    line: 'One key for every model and embeddings.',
+    title: 'Add AI to your app',
+    line: 'Chat, agents, and embeddings. Any model, one key.',
     product: 'Neon AI Gateway',
     to: '/docs/ai-gateway/overview',
     icon: 'sparkle',
@@ -106,19 +106,17 @@ const FRAMEWORKS = [
   { name: 'Redwood', icon: 'redwoodsdk', to: '/docs/guides/redwoodsdk' },
 ];
 
-// Cursor, Claude Code, and Codex link to the install section of their own
-// plugin page. GitHub Copilot has no plugin page, so it keeps pointing at its
-// section of the MCP clients page.
-const MCP_HREF = '/docs/ai/connect-mcp-clients-to-neon';
+// Each agent links to the install section of its own setup page.
+const AGENT_SETUP_HREF = '/docs/ai/agent-setup';
 const AGENTS = [
-  { name: 'Cursor', icon: 'cursor', to: '/docs/ai/ai-cursor-plugin#install-the-plugin-in-cursor' },
+  { name: 'Cursor', icon: 'cursor', to: `${AGENT_SETUP_HREF}/cursor#install-the-plugin` },
   {
     name: 'Claude Code',
     icon: 'claude-code',
-    to: '/docs/ai/ai-claude-code-plugin#install-the-plugin-in-claude-code',
+    to: `${AGENT_SETUP_HREF}/claude-code#install-the-plugin`,
   },
-  { name: 'Codex', icon: 'codex', to: '/docs/ai/ai-codex-plugin#install-the-plugin-in-codex' },
-  { name: 'GitHub Copilot', icon: 'copilot', to: `${MCP_HREF}#vs-code-with-github-copilot` },
+  { name: 'Codex', icon: 'codex', to: `${AGENT_SETUP_HREF}/codex#install-the-plugin` },
+  { name: 'GitHub Copilot', icon: 'copilot', to: `${AGENT_SETUP_HREF}/vscode#install-the-plugin` },
 ];
 
 // Longer walkthroughs. `icon` is a real DetailIconCards monochrome icon name.
@@ -258,7 +256,7 @@ const DocsHome = () => (
       {/* Start building */}
       <Section
         heading="Start building"
-        description="Every capability runs on the same Postgres branch."
+        description="Add these to your app. Every capability runs on the same Postgres branch."
       >
         <div className="grid gap-5">
           <FoundationCard />

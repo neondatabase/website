@@ -32,7 +32,7 @@ export async function generateMetadata(props) {
   if (!post) return notFound();
 
   const {
-    data: { title, subtitle, canonical },
+    data: { title, subtitle, canonical, createdAt, updatedOn },
   } = post;
 
   const authorID = post.data.author;
@@ -47,6 +47,8 @@ export async function generateMetadata(props) {
     pathname: `${LINKS.guides}/${slug}`,
     rssPathname: null,
     type: 'article',
+    publishedTime: createdAt ?? null,
+    modifiedTime: updatedOn ?? null,
     category: 'Guides',
     authors: [author.name],
     canonical,
@@ -69,10 +71,14 @@ const GuidePost = async (props) => {
     '@context': 'https://schema.org',
     '@type': 'Article',
     headline: data.title,
+    url: `${VERCEL_URL}${LINKS.guides}/${slug}`,
+    ...(data.createdAt && { datePublished: data.createdAt }),
+    ...(data.updatedOn && { dateModified: data.updatedOn }),
     author: {
       '@type': 'Organization',
       name: 'Neon',
     },
+    publisher: { '@type': 'Organization', name: 'Neon' },
   };
 
   return (

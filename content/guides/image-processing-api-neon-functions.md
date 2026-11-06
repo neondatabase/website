@@ -4,6 +4,7 @@ subtitle: 'Learn how to build an image API that resizes, crops, optimizes, analy
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2026-08-24T00:00:00.000Z'
+updatedOn: '2026-10-14T16:22:35.000Z'
 ---
 
 If you're building an application that handles images (profile avatars, product photos, or user uploads), you run into the same set of problems every time. Users upload 12-megapixel photos straight from their phones, and if you serve those files back as-is, pages get slow and bandwidth costs climb. Every image needs resizing for different layouts, cropping to fit, and re-encoding into modern formats like WebP. On top of that, every image needs alt text for accessibility and SEO.
@@ -38,7 +39,7 @@ flowchart LR
 Before starting, ensure you have:
 
 1. **Node.js**: Version 20 or later (v24 recommended). Download from [nodejs.org](https://nodejs.org/).
-2. **Neon account on a paid plan**: Sign up at [console.neon.tech](https://console.neon.tech/signup). The captioning endpoint uses the AI Gateway, which requires a paid plan (Launch or Scale) with [prepaid credits](/docs/ai-gateway/prepaid-credits).
+2. **Neon account with AI Gateway credits**: Sign up at [console.neon.tech](https://console.neon.tech/signup). The captioning endpoint uses the AI Gateway, which needs [prepaid credits](/docs/ai-gateway/prepaid-credits). You can buy them on any plan, including Free.
 3. **The Neon CLI**: Installed globally (`npm i -g neon@latest`) and authenticated (`neon login`). See the [Neon CLI Quickstart](/docs/cli/quickstart) for details.
 
 <Steps>

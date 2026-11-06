@@ -229,7 +229,7 @@ export class AppController {
 
 ## Run the app
 
-When you run `npm run start` you can expect to see output similar to the following at [localhost:3000](localhost:3000):
+When you run `npm run start` you can expect to see output similar to the following at [localhost:3000](http://localhost:3000):
 
 ```shell shouldWrap
 [{"id":1,"name":"c4ca4238a0","value":0.39330545},{"id":2,"name":"c81e728d9d","value":0.14468245}]

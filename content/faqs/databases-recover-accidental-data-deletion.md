@@ -1,10 +1,9 @@
 ---
 title: "Which databases help recover from accidental data deletion?"
-description: "Lakebase Postgres instant restore lets you roll a root branch back to any point in its history window without restoring from a backup."
-date: 2026-04-24
-slug: databases-recover-accidental-data-deletion
-category: FAQ
-status: draft
+subtitle: "Lakebase Postgres instant restore lets you roll a root branch back to any point in its history window without restoring from a backup."
+createdAt: '2026-04-24T00:00:00.000Z'
+updatedOn: '2026-09-23T21:17:23.000Z'
+isDraft: false
 previousLink:
   title: 'What databases help isolate bugs without downtime?'
   slug: databases-isolate-bugs-without-downtime

@@ -6,7 +6,7 @@ summary: >-
   the CLI, the Neon API, or neon.ts: a Hono handler for the upload event, the bucket
   and prefix filter, what your function receives, and how to confirm a run in the logs.
 enableTableOfContents: true
-updatedOn: '2026-09-25T10:09:58.688Z'
+updatedOn: '2026-11-05T01:12:32.486Z'
 ---
 
 A `storage_object_created` trigger tells Neon to invoke a deployed [Neon Function](/docs/compute/functions/overview) when an object is created in an [Object Storage](/docs/storage/overview) bucket. Optionally scope it to a key `prefix`, so only uploads under that path fire the function. There's no external event wiring and no compute kept running to watch the bucket.
@@ -37,7 +37,7 @@ Create a Neon Function that <task>, then trigger it on new uploads with a Functi
 Docs: https://neon.com/docs/compute/functions/triggers/object-storage.md
 
 - Add one unauthenticated POST route (trigger invocations arrive without credentials). Read `data.bucket_name` and `data.object_key` from the JSON body; keep the handler idempotent.
-- If the task uses Postgres, connect with the injected DATABASE_URL.
+- If the task uses Postgres, connect with the injected DATABASE_URL through a module-scope `pg` Pool with `attachDatabasePool` from `@neon/functions`, not `@neondatabase/serverless`.
 - Deploy it, then create a `storage_object_created` trigger via the Console, CLI, API, or `neon.ts` with the bucket name, optionally scoped to a key prefix. Upload an object to confirm a run in the logs.
 - The route and trigger both default to `/`; set `function_path` on both if you want a different path.
 ```
@@ -52,26 +52,30 @@ This [Hono](https://hono.dev) function records each uploaded object. From here y
 
 ```ts
 import { Hono } from 'hono';
-import { neon } from '@neondatabase/serverless';
+import { attachDatabasePool } from '@neon/functions';
+import { Pool } from 'pg';
 
+// Create the pool once at module scope so it's reused across invocations.
+const pool = new Pool({ connectionString: process.env.DATABASE_URL, max: 5 });
+attachDatabasePool(pool);
 const app = new Hono();
-const sql = neon(process.env.DATABASE_URL!);
 
 // This route is public. Neon strips client-set X-Neon-* headers, so the presence of
 // X-Neon-Trigger-Invocation-Id attests the call came from Neon's trigger system.
 app.post('/', async (c) => {
   if (!c.req.header('x-neon-trigger-invocation-id')) {
-    return c.json({ error: 'not a trigger call' }, 403);
+    return c.json({ error: 'not a trigger call' }, 401);
   }
 
   const { data } = await c.req.json<{ data: { bucket_name: string; object_key: string } }>();
   const { bucket_name: bucket, object_key: key } = data;
 
-  await sql`
-    INSERT INTO uploads (bucket, object_key)
-    VALUES (${bucket}, ${key})
-    ON CONFLICT (bucket, object_key) DO NOTHING
-  `;
+  await pool.query(
+    `INSERT INTO uploads (bucket, object_key)
+     VALUES ($1, $2)
+     ON CONFLICT (bucket, object_key) DO NOTHING`,
+    [bucket, key]
+  );
 
   console.log(`object created: ${bucket}/${key}`);
   return c.json({ ok: true, bucket, object_key: key });
@@ -80,7 +84,7 @@ app.post('/', async (c) => {
 export default app;
 ```
 
-`DATABASE_URL` is injected for you. See [Environment variables](/docs/compute/functions/environment-variables). The `ON CONFLICT (bucket, object_key) DO NOTHING` clause makes a redelivered occurrence a no-op.
+`DATABASE_URL` is injected for you. See [Environment variables](/docs/compute/functions/environment-variables). The handler connects through a module-scope `pg` pool, as in [Use a connection pool](/docs/compute/functions/get-started#connect-to-postgres). The `ON CONFLICT (bucket, object_key) DO NOTHING` clause makes a redelivered occurrence a no-op.
 
 Create the table it writes to, in the [Neon SQL Editor](/docs/get-started/query-with-neon-sql-editor) or with [`neon psql`](/docs/cli/psql):
 
@@ -207,10 +211,10 @@ triggers: {
 Upload an object under the bucket and prefix you configured (see [Upload and manage objects](/docs/storage/objects)), then read the function's logs:
 
 ```bash
-neon logs query --source function
+neon logs query --source function --service-name neon-function/onupload
 ```
 
-Your `object created: ...` line appears with the `bucket_name` and `object_key` from the request body. See [Observability](#observability) for why that line matters.
+`--service-name neon-function/<slug>` limits the output to this function. Your `object created: ...` line appears with the `bucket_name` and `object_key` from the request body. See [Observability](#observability) for why that line matters.
 
 To iterate on the handler without uploading objects, replay the payload against `neon dev` locally. See [Test triggers locally](/docs/compute/functions/triggers/overview#test-triggers-locally).
 
@@ -232,14 +236,16 @@ An object-created invocation delivers the same envelope shape as every trigger t
   "data": {
     "bucket_name": "my-bucket",
     "object_key": "uploads/report.csv"
-  }
+  },
+  "previous_attempts": [],
+  "previous_attempts_omitted": 0
 }
 ```
 
 - **`data.bucket_name`**: the bucket the object was created in.
 - **`data.object_key`**: the full key of the created object, including any prefix.
 
-The request carries the same headers as any trigger invocation. For the full envelope, headers, and how to confirm a request came from Neon, see [What your function receives](/docs/compute/functions/triggers/overview#what-your-function-receives) in the overview.
+The request carries the same headers as any trigger invocation. For the full envelope, headers, and how to confirm a request came from Neon, see [What your function receives](/docs/compute/functions/triggers/overview#what-your-function-receives) in the overview. For retries, failure history, and duplicate handling, see [Delivery and retries](/docs/compute/functions/triggers/overview#delivery-and-retries).
 
 ## Trigger config
 
@@ -309,7 +315,7 @@ In the platform logs, an object-created invocation looks like any other HTTP cal
 console.log(`object created: ${bucket}/${key}`);
 ```
 
-Your output appears under the `neon.function.app` scope, in the Console's Functions tab and in `neon logs query --source function` (not the `functions` command group). Standard Node instrumentation such as Sentry or OpenTelemetry also works, and the incoming `traceparent` header ties a run into an existing trace.
+Your output appears under the `neon.function.app` scope, in the Console's Functions tab and in `neon logs query --source function --service-name neon-function/onupload` (not the `functions` command group). Standard Node instrumentation such as Sentry or OpenTelemetry also works, and the incoming `traceparent` header ties a run into an existing trace.
 
 ## Common errors
 

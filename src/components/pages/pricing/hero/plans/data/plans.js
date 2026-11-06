@@ -53,6 +53,14 @@ export default [
             title: 'Functions',
             info: `<p>${functions.free.activeCapacityHours} active capacity-hours per project per month</p><p>${functions.free.waitingCapacityHours} waiting capacity-hours per project per month</p><p>${functions.free.invocations} invocations per project per month</p>`,
           },
+          {
+            title: 'AI Gateway',
+            info: '<p>Add a card and buy prepaid credits. Your plan stays Free.</p><p>Pricing matches model provider list prices (no markup).</p>',
+            moreLink: {
+              text: 'Full list here',
+              href: '/docs/ai-gateway/overview#available-models',
+            },
+          },
           { ...realtimeFeature, info: '<p>Free during beta</p>' },
         ],
       },

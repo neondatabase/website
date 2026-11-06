@@ -58,8 +58,8 @@ const MODALS = [
     targeting: { all: true },
     copyPrompt: BASE_AGENT_PROMPT,
     destination: {
-      label: 'AI tools for agents',
-      url: '/docs/ai/ai-agents-tools',
+      label: 'Set up your AI agent',
+      url: '/docs/ai/agent-setup',
     },
   },
 ];

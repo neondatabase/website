@@ -47,7 +47,8 @@ neon branches list
 ```
 
 The project is created in `aws-us-east-2`. Pass `--region-id` to pick another region, for
-example `neon claim create --region-id aws-eu-central-1`.
+example `neon claim create --region-id aws-eu-central-1`, and `--project-name` to name the
+project. The name stays after the claim.
 
 The CLI writes `DATABASE_URL` (and granted service URLs) to `.env` or `.env.local`. Then
 skip to Claim when the human is ready.
@@ -71,7 +72,8 @@ service, wait until the human is ready, then Claim.
 
 `region_id` is optional and defaults to `aws-us-east-2`. Accepted values: `aws-us-east-1`,
 `aws-us-east-2`, `aws-us-west-2`, `aws-eu-central-1`, `aws-eu-west-2`, `aws-ap-southeast-1`,
-`aws-ap-southeast-2`, `aws-sa-east-1`.
+`aws-ap-southeast-2`, `aws-sa-east-1`. `project_name` is optional too, and the project keeps
+it after the claim.
 
 ```http
 POST https://claimable.neon.tech/v1/agent/identity

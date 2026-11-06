@@ -9,7 +9,7 @@ summary: >-
   runs interactively by default; pass -y for the recommended setup with no prompts,
   or add flags such as --skill, MCP options, or --claimable for the custom setup.
 enableTableOfContents: true
-updatedOn: '2026-10-17T02:29:50.049Z'
+updatedOn: '2026-11-05T13:53:34.719Z'
 redirectFrom:
   - /docs/reference/cli-init
 ---
@@ -74,6 +74,8 @@ When `init` writes a new `neon.ts` for a linked project, it lists next steps und
 
 `--services realtime` declares [Realtime](/docs/realtime/overview) in `neon.ts`. `init` doesn't enable it on the branch: [`neon deploy`](/docs/cli/deploy) does, or you can run [`neon realtime enable`](/docs/cli/realtime#enable). The interactive service picker doesn't list Realtime, so pass `--services realtime` to declare it.
 
+When `neon.ts` declares the [Data API](/docs/data-api/get-started), `init` checks the linked branch's Data API first. If it uses an external identity provider, `init` declares the [external form](/docs/reference/neon-ts#dataapi) (`authProvider: "external"`) instead of `dataApi: true`, so `neon deploy` doesn't enable Managed Better Auth. If `init` can't read the branch, for example without credentials, it declares `dataApi: true` with `auth: true`. It never starts a login to check.
+
 ## Options
 
 <CliOptions command="init" />
@@ -113,12 +115,12 @@ When `-y` can't authenticate, it finishes every step it can and lists what's lef
 
 The files created depend on the flags you pass. Each one is written by the command `init` runs, so see that command's page for details.
 
-| Artifact                                              | Written by                                                                                            | Scope              |
-| ----------------------------------------------------- | ----------------------------------------------------------------------------------------------------- | ------------------ |
-| `.neon` (org, project, and branch context)            | [`neon link`](/docs/cli/link)                                                                         | Project            |
-| `.env` or `.env.local` (`DATABASE_URL` and Neon vars) | [`neon link`](/docs/cli/link)                                                                         | Project            |
-| `neon.ts` (config-as-code policy)                     | [`neon config init`](/docs/cli/config)                                                                | Project            |
-| Agent skills, MCP config, or plugin                   | [`neon skills`](/docs/cli/skills) / [`neon mcp`](/docs/cli/mcp) / [`neon plugins`](/docs/cli/plugins) | Project, per agent |
+| Artifact                                              | Written by                                                                                            | Scope                      |
+| ----------------------------------------------------- | ----------------------------------------------------------------------------------------------------- | -------------------------- |
+| `.neon` (org, project, and branch context)            | [`neon link`](/docs/cli/link)                                                                         | Project                    |
+| `.env` or `.env.local` (`DATABASE_URL` and Neon vars) | [`neon link`](/docs/cli/link)                                                                         | Project                    |
+| `neon.ts` (config-as-code policy)                     | [`neon config init`](/docs/cli/config)                                                                | Project                    |
+| Agent skills, MCP config, or plugin                   | [`neon skills`](/docs/cli/skills) / [`neon mcp`](/docs/cli/mcp) / [`neon plugins`](/docs/cli/plugins) | User or project, per agent |
 
 ## Examples
 
@@ -159,9 +161,9 @@ neon init -y --claimable --agent cursor
 Installing the Neon plugin...
 Installing the Neon plugin for Cursor (1/1)...
 Plugins
-Scope    Plugin         Agent   Status
-project  neon-postgres  cursor  installed
-Installed the Neon plugin (project).
+Scope  Plugin         Agent   Status
+user   neon-postgres  cursor  installed
+Installed the Neon plugin (user).
 Creating a claimable project...
 Project ID            sweet-breeze-12345678
 Branch ID             br-restless-wildflower-a1b2c3d4
@@ -193,4 +195,4 @@ Next:
 
 ## Manual setup
 
-To configure an editor without running `init`, or to register only the Neon MCP server, see [Connect MCP clients to Neon](/docs/ai/connect-mcp-clients-to-neon). To install only agent skills, use [`neon skills`](/docs/cli/skills); to install only the MCP server, use [`neon mcp`](/docs/cli/mcp).
+To configure a specific agent without running `init`, or to register only the Neon MCP Server, see [Set up your AI agent](/docs/ai/agent-setup). To install only agent skills, use [`neon skills`](/docs/cli/skills); to install only the MCP server, use [`neon mcp`](/docs/cli/mcp).

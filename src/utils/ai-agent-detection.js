@@ -92,6 +92,16 @@ const STATIC_DOC_FILES = new Set([
 ]);
 const STATIC_DOC_PREFIXES = ['docs/ai/skills/', 'docs/.well-known/', 'docs/mcp'];
 
+// Function Registry template pages read the live registry, so their markdown comes
+// from route handlers under /md/functions/templates instead of build-time files.
+const FUNCTION_TEMPLATES_PATH = /^functions\/templates(?:\/([a-z0-9][a-z0-9-]*))?$/;
+
+export function getFunctionTemplatesMarkdownPath(normalizedPath) {
+  const match = normalizedPath.match(FUNCTION_TEMPLATES_PATH);
+  if (!match) return null;
+  return match[1] ? `/md/functions/templates/${match[1]}` : '/md/functions/templates';
+}
+
 // Convert URL path to markdown file path
 // Example: /docs/get-started -> /md/docs/get-started.md (maps to public/md/)
 export function getMarkdownPath(pathname) {
@@ -117,6 +127,9 @@ export function getMarkdownPath(pathname) {
 
   if (CUSTOM_MARKDOWN_PATHS[path] || CUSTOM_MARKDOWN_PATHS[normalized])
     return CUSTOM_MARKDOWN_PATHS[path] || CUSTOM_MARKDOWN_PATHS[normalized];
+
+  const functionTemplatesPath = getFunctionTemplatesMarkdownPath(normalized);
+  if (functionTemplatesPath) return functionTemplatesPath;
 
   const matchedRoute = Object.keys(CONTENT_ROUTES).find(
     (route) => normalized === route || path.startsWith(`${route}/`)

@@ -38,7 +38,7 @@ const DocFooter = ({
     >
       {updatedOn && <LastUpdatedDate updatedOn={updatedOn} />}
       {withFeedback && <Feedback slug={slug} />}
-      {gitHubPath && !updatedOn && (
+      {gitHubPath && (
         <Link
           to={`${process.env.NEXT_PUBLIC_GITHUB_PATH}${gitHubPath}`}
           target="_blank"

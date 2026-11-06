@@ -1,10 +1,9 @@
 ---
 title: "Which database providers support pgvector for AI applications and also offer autoscaling for variable AI inference workloads?"
-description: "Lakebase Postgres supports pgvector for similarity search and autoscales compute between a configured min and max. Compute also scales to zero when idle, so spiky AI workloads don't pay for idle compute."
-date: 2026-04-25
-slug: database-providers-pgvector-autoscaling-ai-applications
-category: FAQ
-status: draft
+subtitle: "Lakebase Postgres supports pgvector for similarity search and autoscales compute between a configured min and max. Compute also scales to zero when idle, so spiky AI workloads don't pay for idle compute."
+createdAt: '2026-04-25T00:00:00.000Z'
+updatedOn: '2026-09-23T21:17:23.000Z'
+isDraft: false
 previousLink:
   title: 'How do I create tables in my Neon database using SQL?'
   slug: create-tables-with-sql-neon

@@ -7,7 +7,7 @@ summary: >-
   a five-field UTC cron reference, how to confirm a run in the logs, and the
   common errors.
 enableTableOfContents: true
-updatedOn: '2026-09-25T10:09:58.688Z'
+updatedOn: '2026-11-05T01:12:32.486Z'
 ---
 
 Schedule a function to run recurring work as your own code: a nightly report, a cleanup job, a periodic sync, or a health check. It runs next to your data and fires even when the compute is scaled to zero.
@@ -15,6 +15,8 @@ Schedule a function to run recurring work as your own code: a nightly report, a 
 ![A schedule fires a POST to the uptime function, which reads scheduled_at, fetches a URL, and records the result in Postgres](/docs/compute/functions/triggers/schedule-flow.png 'priority')
 
 This guide creates a scheduled trigger, then covers listing, updating, disabling, and deleting it. For what a trigger is and how it behaves across branches, see the [overview](/docs/compute/functions/triggers/overview). You can manage scheduled triggers from the Neon Console, the [`neon triggers`](/docs/cli/triggers) CLI, the Neon API, or declaratively in [`neon.ts`](/docs/reference/neon-ts); the steps below show each.
+
+For retries, failure history, and duplicate handling, see [Delivery and retries](/docs/compute/functions/triggers/overview#delivery-and-retries).
 
 ## Before you begin
 
@@ -36,7 +38,7 @@ Create a Neon Function that <task>, then schedule it with a Function Trigger.
 Docs: https://neon.com/docs/compute/functions/triggers/schedule.md
 
 - Add one unauthenticated POST route (scheduled invocations arrive without credentials). Read `data.scheduled_at` from the JSON body; keep the handler idempotent.
-- If the task uses Postgres, connect with the injected DATABASE_URL.
+- If the task uses Postgres, connect with the injected DATABASE_URL through a module-scope `pg` Pool with `attachDatabasePool` from `@neon/functions`, not `@neondatabase/serverless`.
 - Deploy it, then create a schedule trigger via the Neon API with a five-field UTC cron. Start at `* * * * *` to confirm a run, then PATCH to the real cadence.
 - The route and trigger both default to `/`; set `function_path` on both if you want a different path.
 ```
@@ -51,16 +53,19 @@ This [Hono](https://hono.dev) function checks a URL and records the result:
 
 ```ts
 import { Hono } from 'hono';
-import { neon } from '@neondatabase/serverless';
+import { attachDatabasePool } from '@neon/functions';
+import { Pool } from 'pg';
 
+// Create the pool once at module scope so it's reused across invocations.
+const pool = new Pool({ connectionString: process.env.DATABASE_URL, max: 5 });
+attachDatabasePool(pool);
 const app = new Hono();
-const sql = neon(process.env.DATABASE_URL!);
 
 // This route is public. Neon strips client-set X-Neon-* headers, so the presence of
 // X-Neon-Trigger-Invocation-Id attests the call came from Neon's trigger system.
 app.post('/', async (c) => {
   if (!c.req.header('x-neon-trigger-invocation-id')) {
-    return c.json({ error: 'not a trigger call' }, 403);
+    return c.json({ error: 'not a trigger call' }, 401);
   }
 
   const { data } = await c.req.json<{ data: { scheduled_at: string } }>();
@@ -70,11 +75,12 @@ app.post('/', async (c) => {
   const res = await fetch('https://example.com', { signal: AbortSignal.timeout(10_000) });
   const latencyMs = Math.round(performance.now() - started);
 
-  await sql`
-    INSERT INTO checks (scheduled_at, status_code, latency_ms)
-    VALUES (${scheduledAt}, ${res.status}, ${latencyMs})
-    ON CONFLICT (scheduled_at) DO NOTHING
-  `;
+  await pool.query(
+    `INSERT INTO checks (scheduled_at, status_code, latency_ms)
+     VALUES ($1, $2, $3)
+     ON CONFLICT (scheduled_at) DO NOTHING`,
+    [scheduledAt, res.status, latencyMs]
+  );
 
   console.log(`check ${scheduledAt}: ${res.status} in ${latencyMs}ms`);
   return c.json({ ok: true, scheduled_at: scheduledAt, status: res.status });
@@ -83,7 +89,7 @@ app.post('/', async (c) => {
 export default app;
 ```
 
-`DATABASE_URL` is injected for you. See [Environment variables](/docs/compute/functions/environment-variables). The `ON CONFLICT (scheduled_at) DO NOTHING` clause makes a redelivered occurrence a no-op.
+`DATABASE_URL` is injected for you. See [Environment variables](/docs/compute/functions/environment-variables). The handler connects through a module-scope `pg` pool, as in [Use a connection pool](/docs/compute/functions/get-started#connect-to-postgres). The `ON CONFLICT (scheduled_at) DO NOTHING` clause makes a redelivered occurrence a no-op.
 
 Create the table it writes to, in the [Neon SQL Editor](/docs/get-started/query-with-neon-sql-editor) or with [`neon psql`](/docs/cli/psql):
 
@@ -203,10 +209,10 @@ triggers: {
 The schedule is every minute, so wait about a minute, then read the function's logs:
 
 ```bash
-neon logs query --source function
+neon logs query --source function --service-name neon-function/uptime
 ```
 
-Your `check ...` line appears with the `scheduled_at` value read from `data`. See [Observability](#observability) for why that line matters.
+`--service-name neon-function/<slug>` limits the output to this function. Your `check ...` line appears with the `scheduled_at` value read from `data`. See [Observability](#observability) for why that line matters.
 
 To iterate on the handler without waiting for the clock, replay the payload against `neon dev` locally. See [Test triggers locally](/docs/compute/functions/triggers/overview#test-triggers-locally).
 
@@ -359,7 +365,7 @@ console.log(`check ${scheduledAt}: ${res.status} in ${latencyMs}ms`);
 Your output appears under the `neon.function.app` scope, in the Console's Functions tab and in:
 
 ```bash
-neon logs query --source function
+neon logs query --source function --service-name neon-function/uptime
 ```
 
 Function logs come from `neon logs query --source function`, not the `functions` command group. Standard Node instrumentation such as Sentry or OpenTelemetry also works, and the incoming `traceparent` header ties a run into an existing trace.

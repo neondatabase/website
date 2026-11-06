@@ -161,27 +161,13 @@ const { data: deployment } = await neon.functions.deploy({
 
 ## Deploy a function from a template
 
-The Neon Function Registry is a catalog of function templates you can add with the Neon CLI (8.11 or later). A [`neon bootstrap`](/docs/compute/functions/overview#starter-templates) template scaffolds a complete app. A registry template adds one function to the project in your current directory. To see what's available, run:
-
-```bash
-neon functions templates list
-```
-
-To add the `basic` template, run it locally, and deploy it:
+A function template adds a ready-made function to your project. Browse the catalog at [neon.com/functions/templates](/functions/templates), then add one with [`neon functions new`](/docs/cli/functions#new):
 
 ```bash
 neon functions new basic   # writes functions/basic/ and declares it in neon.ts
-npm install @neon/config @neon/env
-neon link                  # if the directory isn't linked to a Neon project yet
-neon dev                   # serves the function at http://localhost:8787
-neon deploy
 ```
 
-The function name is the template ID with any hyphens removed, so `neon functions new context-dev` creates a `contextdev` function in `functions/contextdev/`.
-
-`neon functions new` ends with a `Next:` list of the exact commands for that template, including the packages to install. The list may end with `neon config apply`, which does the same thing as `neon deploy`. If a template needs environment variables, such as an API key for a third-party service, it adds their names to `.env.example`. Set the values in `.env.local`, which `neon dev` loads automatically, and deploy with `neon deploy --env .env.local`. Without `--env`, the deploy fails because the variables are undefined.
-
-Templates live in the [`registry/`](https://github.com/neondatabase/examples/tree/main/registry) folder of the `neondatabase/examples` repository. Anyone can propose a new template by opening a pull request. Neon reviews each one before it's published. See the registry's [contributing guide](https://github.com/neondatabase/examples/blob/main/registry/CONTRIBUTING.md). For all command options, see [`neon functions new`](/docs/cli/functions#new).
+From there, it deploys like any other function. Some templates also need services such as AI Gateway or Object Storage enabled first. For the full workflow, see [Use function templates](/docs/compute/functions/templates).
 
 ## Slugs
 

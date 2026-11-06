@@ -338,6 +338,27 @@ const defaultConfig = {
         destination: '/?ref=tbm-p',
         permanent: true,
       },
+      // Function Registry templates moved from docs to the /functions/templates marketing pages
+      {
+        source: '/docs/compute/functions/registry/templates',
+        destination: '/functions/templates',
+        permanent: true,
+      },
+      {
+        source: '/docs/compute/functions/registry/templates/:id',
+        destination: '/functions/templates/:id',
+        permanent: true,
+      },
+      {
+        source: '/docs/compute/functions/registry-templates',
+        destination: '/functions/templates',
+        permanent: true,
+      },
+      {
+        source: '/docs/compute/functions/registry-templates/:id',
+        destination: '/functions/templates/:id',
+        permanent: true,
+      },
       // Branching page redirects — old slugs deleted in PR #4374 (Jan 2026)
       {
         source: '/branching/identifying-use-case',
@@ -2314,7 +2335,7 @@ const defaultConfig = {
       // `/docs/introduction` are absent because they redirect to `/docs` (above).
       {
         source: '/docs/ai',
-        destination: '/docs/ai/ai-agents-tools',
+        destination: '/docs/ai/agent-setup',
         permanent: true,
       },
       {
@@ -2611,6 +2632,57 @@ const defaultConfig = {
       {
         source: '/docs/.well-known/skills/claimable-postgres/:path*',
         destination: '/auth.md',
+        permanent: true,
+      },
+      // Retired skills folded into neon-postgres (branching and egress references).
+      {
+        source: '/docs/ai/skills/neon-postgres-branches/:path*',
+        destination: '/docs/ai/skills/neon-postgres/SKILL.md',
+        permanent: true,
+      },
+      {
+        source: '/.well-known/agent-skills/neon-postgres-branches/:path*',
+        destination: '/docs/ai/skills/neon-postgres/SKILL.md',
+        permanent: true,
+      },
+      {
+        source: '/.well-known/skills/neon-postgres-branches/:path*',
+        destination: '/docs/ai/skills/neon-postgres/SKILL.md',
+        permanent: true,
+      },
+      {
+        source: '/docs/.well-known/agent-skills/neon-postgres-branches/:path*',
+        destination: '/docs/ai/skills/neon-postgres/SKILL.md',
+        permanent: true,
+      },
+      {
+        source: '/docs/.well-known/skills/neon-postgres-branches/:path*',
+        destination: '/docs/ai/skills/neon-postgres/SKILL.md',
+        permanent: true,
+      },
+      {
+        source: '/docs/ai/skills/neon-postgres-egress-optimizer/:path*',
+        destination: '/docs/ai/skills/neon-postgres/SKILL.md',
+        permanent: true,
+      },
+      {
+        source: '/.well-known/agent-skills/neon-postgres-egress-optimizer/:path*',
+        destination: '/docs/ai/skills/neon-postgres/SKILL.md',
+        permanent: true,
+      },
+      {
+        source: '/.well-known/skills/neon-postgres-egress-optimizer/:path*',
+        destination: '/docs/ai/skills/neon-postgres/SKILL.md',
+        permanent: true,
+      },
+      {
+        source: '/docs/.well-known/agent-skills/neon-postgres-egress-optimizer/:path*',
+        destination: '/docs/ai/skills/neon-postgres/SKILL.md',
+        permanent: true,
+      },
+      {
+        source: '/docs/.well-known/skills/neon-postgres-egress-optimizer/:path*',
+        destination: '/docs/ai/skills/neon-postgres/SKILL.md',
         permanent: true,
       },
       {

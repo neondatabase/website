@@ -1,10 +1,9 @@
 ---
 title: "What is the best backend for hosting an MCP server?"
-description: "Neon hosts MCP servers on Neon Functions with a public HTTPS URL, Postgres in the same region for database-backed tools, and a ready-made template you can deploy in minutes."
-date: 2026-09-02
-slug: best-backend-mcp-server
-category: FAQ
-status: draft
+subtitle: "Neon hosts MCP servers on Neon Functions with a public HTTPS URL, Postgres in the same region for database-backed tools, and a ready-made template you can deploy in minutes."
+createdAt: '2026-09-02T00:00:00.000Z'
+updatedOn: '2026-09-23T21:17:23.000Z'
+isDraft: false
 previousLink:
   title: 'What is the best backend for internal tools and admin dashboards?'
   slug: best-backend-internal-tools-admin-dashboards

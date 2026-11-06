@@ -6,6 +6,7 @@ summary: >-
   list, get, create, update, enable, disable, and delete triggers that invoke a
   Neon Function on a cron schedule or when an object is created in Object Storage.
 enableTableOfContents: true
+updatedOn: '2026-10-09T13:08:42.000Z'
 ---
 
 The `triggers` command manages function triggers on a branch. A trigger invokes a [Neon Function](/docs/compute/functions/overview) on a cron schedule (`schedule`), or when an object is created in an [Object Storage](/docs/storage/overview) bucket (`storage_object_created`). Use it to run recurring work like a nightly report or cleanup job, or to process uploads as they land, without a separate scheduler. You deploy the function with [`neon functions deploy`](/docs/cli/functions), then point a trigger at it by slug.

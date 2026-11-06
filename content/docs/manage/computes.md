@@ -8,7 +8,10 @@ summary: >-
   compute endpoints via the Neon Console or API.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2026-10-14T11:24:29.508Z'
+redirectFrom:
+  - /docs/introduction/compute-size
+  - /docs/introduction/compute
+updatedOn: '2026-11-05T15:33:57.188Z'
 ---
 
 A compute is a virtualized service that runs applications. In Neon, a compute runs Postgres.
@@ -54,42 +57,22 @@ Compute details shown on the **Computes** tab include:
 
 <TabItem>
 
-The CLI has no separate compute object; a branch's compute state (`current_state`, `compute_time_seconds`) is shown by [`neon branches list`](/docs/cli/branches#list):
+List the computes in a project with [`neon postgres computes list`](/docs/cli/postgres#computes-list), and pass `--branch` to see one branch's computes:
 
 ```bash
-neon branches list --output json
+neon postgres computes list --branch main
 ```
 
-<details>
-<summary>Show output</summary>
-
-```json
-[
-  {
-    "id": "br-dry-glitter-a1rh0x6q",
-    "project_id": "autumn-lake-30024670",
-    "name": "br-dry-glitter-a1rh0x6q",
-    "current_state": "ready",
-    "logical_size": 29515776,
-    "creation_source": "console",
-    "default": true,
-    "cpu_used_sec": 78,
-    "compute_time_seconds": 78,
-    "active_time_seconds": 312,
-    "written_data_bytes": 107816,
-    "data_transfer_bytes": 0,
-    "created_at": "2023-07-09T17:01:34Z",
-    "updated_at": "2023-07-09T17:15:13Z"
-  }
-]
+```text filename="Output"
+Computes on main
+ID                      Branch ID                  Type        Current State  Autoscaling Limit Min Cu  Autoscaling Limit Max Cu
+ep-cool-king-123456     br-lively-sunset-123456    read_write  active         0.25                      2
 ```
 
-</details>
-
-Or list the project's computes directly through the [`neon api`](/docs/cli/api) passthrough:
+For one compute's host, state, size, and scale-to-zero timeout, use [`neon postgres computes get`](/docs/cli/postgres#computes-get):
 
 ```bash
-neon api /projects/autumn-lake-30024670/endpoints
+neon postgres computes get ep-cool-king-123456
 ```
 
 </TabItem>
@@ -287,11 +270,13 @@ You can edit a compute to change the [compute size](#compute-size-and-autoscalin
 
 <TabItem>
 
-No dedicated command edits a compute, so reach for the [`neon api`](/docs/cli/api) passthrough, which sends the request with your CLI credentials. For example, change the autoscaling range:
+Edit a compute with [`neon postgres computes update`](/docs/cli/postgres#computes-update). For example, set the autoscaling range to 0.5 to 3 CU:
 
-```bash shouldWrap
-neon api /projects/autumn-lake-30024670/endpoints/ep-misty-morning-a1pfa4ez -X PATCH -F endpoint.autoscaling_limit_min_cu=0.5 -F endpoint.autoscaling_limit_max_cu=3
+```bash
+neon postgres computes update ep-misty-morning-a1pfa4ez --cu 0.5-3
 ```
+
+Pass `--suspend-timeout` to change the scale-to-zero timeout. The command waits until the change is applied, then prints the compute.
 
 </TabItem>
 
@@ -542,10 +527,10 @@ You can also restart a compute by letting it suspend: stop activity (stop runnin
 
 <TabItem>
 
-Restart the compute through the [`neon api`](/docs/cli/api) passthrough:
+Restart the compute with [`neon postgres computes restart`](/docs/cli/postgres#computes-restart):
 
 ```bash
-neon api /projects/autumn-lake-30024670/endpoints/ep-misty-morning-a1pfa4ez/restart -X POST
+neon postgres computes restart ep-misty-morning-a1pfa4ez
 ```
 
 </TabItem>
@@ -586,10 +571,10 @@ A branch can have a single read-write compute and multiple read replica computes
 
 <TabItem>
 
-Delete the compute through the [`neon api`](/docs/cli/api) passthrough:
+Delete the compute with [`neon postgres computes delete`](/docs/cli/postgres#computes-delete):
 
 ```bash
-neon api /projects/autumn-lake-30024670/endpoints/ep-misty-morning-a1pfa4ez -X DELETE
+neon postgres computes delete ep-misty-morning-a1pfa4ez
 ```
 
 </TabItem>

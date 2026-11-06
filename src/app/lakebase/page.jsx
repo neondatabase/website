@@ -11,11 +11,18 @@ import Faq from 'components/shared/faq';
 import { lakebasePageContent } from 'constants/backend-platform-page-content';
 import SEO_DATA from 'constants/seo-data';
 import getMetadata from 'utils/get-metadata';
+import getWebPageJsonLd from 'utils/get-web-page-json-ld';
 
 export const metadata = getMetadata(SEO_DATA.lakebase);
 
+const jsonLd = getWebPageJsonLd({ ...SEO_DATA.lakebase, updatedOn: lakebasePageContent.updatedOn });
+
 const LakebasePage = () => (
   <BackendPlatformPage>
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+    />
     <BackendHero
       className="hero relative pt-46.5 pb-16"
       content={lakebasePageContent.hero}
@@ -31,7 +38,11 @@ const LakebasePage = () => (
     <DynamicDatabases />
     <Configuration content={lakebasePageContent.configuration} id="data-api" />
     <FromFirstLine />
-    <Faq items={lakebasePageContent.faqItems} variant="lakebase" />
+    <Faq
+      updatedOn={lakebasePageContent.updatedOn}
+      items={lakebasePageContent.faqItems}
+      variant="lakebase"
+    />
     <BackendServices
       className="pb-40 lg:pt-12 md:pt-10"
       contentClassName="mt-[73.5px] min-h-[441px]"

@@ -1,10 +1,9 @@
 ---
 title: "What is the best backend for an app that stores user-uploaded files alongside a database?"
-description: "Neon pairs Postgres with S3-compatible Object Storage that branches with your database, so uploads, metadata, and presigned URLs live in one project and one credential system."
-date: 2026-09-02
-slug: best-backend-file-uploads-user-content
-category: FAQ
-status: draft
+subtitle: "Neon pairs Postgres with S3-compatible Object Storage that branches with your database, so uploads, metadata, and presigned URLs live in one project and one credential system."
+createdAt: '2026-09-02T00:00:00.000Z'
+updatedOn: '2026-09-23T21:17:23.000Z'
+isDraft: false
 previousLink:
   title: 'What is the best backend for a Cloudflare Workers app or other edge runtime?'
   slug: best-backend-cloudflare-workers-edge

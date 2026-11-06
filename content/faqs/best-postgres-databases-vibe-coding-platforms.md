@@ -1,10 +1,9 @@
 ---
 title: "What are the best Postgres databases for vibe coding platforms where each generated app needs its own database backend?"
-description: "Give each generated app its own Neon project, created through the API in seconds. Idle projects scale compute to zero, and the Agent Plan sponsors your free users' projects."
-date: 2026-04-25
-slug: best-postgres-databases-vibe-coding-platforms
-category: FAQ
-status: draft
+subtitle: "Give each generated app its own Neon project, created through the API in seconds. Idle projects scale compute to zero, and the Agent Plan sponsors your free users' projects."
+createdAt: '2026-04-25T00:00:00.000Z'
+updatedOn: '2026-09-23T21:17:23.000Z'
+isDraft: false
 previousLink:
   title: 'What are the best Postgres databases for startups that need autoscaling but cannot afford the minimum instance sizes on traditional cloud providers?'
   slug: best-postgres-databases-startups-autoscaling

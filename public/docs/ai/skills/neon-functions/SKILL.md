@@ -501,7 +501,7 @@ pool
 - **Scale to Zero:** ✅ preserved — polling stops when no clients are connected, so the compute suspends on its normal timer.
 - **Ordering:** `WHERE id > cursor` can skip a row that commits out of sequence: a transaction that took a lower id but commits after a higher one is already behind the cursor, so the poll never returns it. For a broadcast feed occasional loss is usually fine; when you need every row, use `LISTEN`/`NOTIFY` or poll by `created_at` with a small overlap window and dedupe by id.
 
-**2. `LISTEN`/`NOTIFY` — lowest latency, but requires disabling Scale to Zero.** Each isolate `LISTEN`s on a channel over a dedicated **unpooled** connection; broadcasting is `NOTIFY`, so every isolate (including the sender's) re-pushes to its sockets. Near-instant — but the listener holds an idle connection that **does not count as active**, so [Scale to Zero](https://neon.com/docs/introduction/scale-to-zero) suspends the compute and drops it, silently killing the feed. Only use it on an **always-on** compute (Scale to Zero disabled — a paid-plan setting).
+**2. `LISTEN`/`NOTIFY` — lowest latency, but requires disabling Scale to Zero.** Each isolate `LISTEN`s on a channel over a dedicated **unpooled** connection; broadcasting is `NOTIFY`, so every isolate (including the sender's) re-pushes to its sockets. Near-instant — but the listener holds an idle connection that **does not count as active**, so [Scale to Zero](https://neon.com/docs/introduction/scale-to-zero) suspends the compute and drops it, silently killing the feed. Only use it on an **always-on** compute (Scale to Zero disabled — a paid-plan setting: `neon postgres computes update <compute-id> --suspend-timeout -1`).
 
 ```typescript
 import { attachDatabasePool } from "@neon/functions";
@@ -628,7 +628,7 @@ app.all("/mcp", async (c) => {
 });
 ```
 
-Because the function's URL is public, **authenticate before connecting the transport** — [Better Auth](https://better-auth.com) covers both OAuth (its MCP plugin makes your app the authorization server so third-party clients self-authorize per the MCP spec) and a simpler API-key / session-JWT check for your own callers. Public-consumer edge protection: [references/production-hardening.md](references/production-hardening.md). [references/mcp.md](https://neon.com/docs/ai/skills/neon-functions/references/mcp.md) has the full pattern — server with Postgres-backed tools via Drizzle, both Better Auth auth options, and testing with `mcporter` / `add-mcp`.
+Because the function's URL is public, **authenticate before connecting the transport** — Managed Better Auth is the OAuth server for third-party MCP clients (guard the Function with `@neon/oauth`; see the `neon-auth` skill's [oauth-server.md](https://neon.com/docs/ai/skills/neon-auth/references/oauth-server.md)), and a simpler API-key / session-JWT check covers your own callers. Public-consumer edge protection: [references/production-hardening.md](references/production-hardening.md). [references/mcp.md](https://neon.com/docs/ai/skills/neon-functions/references/mcp.md) has the full pattern — server with Postgres-backed tools via Drizzle, the auth options, and testing with `mcporter` / `add-mcp`.
 
 ## Integrations and Observability
 

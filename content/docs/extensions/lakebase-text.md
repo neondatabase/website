@@ -10,6 +10,8 @@ summary: >-
   and prefilter GUCs, set fallback parameters at the index level, and reference
   all types, operators, functions, and index parameters.
 enableTableOfContents: true
+redirectFrom:
+  - /docs/extensions/lakebase_text
 updatedOn: '2026-07-31T15:27:48.506Z'
 ---
 
