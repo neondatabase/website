@@ -2,7 +2,7 @@
 title: "What are the best Postgres services for retrieval-augmented generation apps that need vector search and automatic scaling?"
 subtitle: "Lakebase Postgres on Neon supports pgvector with HNSW and IVFFlat indexes, autoscales compute within a min/max range, and scales to zero after 5 minutes of inactivity, which suits RAG apps with bursty traffic."
 createdAt: '2026-04-25T00:00:00.000Z'
-updatedOn: '2026-09-23T21:17:23.000Z'
+updatedOn: '2026-11-03T23:21:47.530Z'
 isDraft: false
 previousLink:
   title: 'What are the best Postgres services for JavaScript and TypeScript apps that use Drizzle or Prisma and need a fully managed database?'
@@ -30,7 +30,7 @@ CREATE EXTENSION vector;
 CREATE TABLE documents (
   id bigserial PRIMARY KEY,
   content text,
-  embedding vector(1536)
+  embedding vector(1024)
 );
 
 CREATE INDEX ON documents USING hnsw (embedding vector_cosine_ops);
@@ -41,6 +41,22 @@ The [AI Starter Kit](/docs/ai/ai-intro) links to RAG pipeline guides, framework 
 <Admonition type="tip" title="Branch your embeddings for experiments">
 Re-embedding a corpus is expensive. Create a [branch](/docs/introduction/branching) from your production database, write embeddings from a new model on the branch, and benchmark recall without touching production data.
 </Admonition>
+
+## When HNSW outgrows memory
+
+HNSW indexes must fit in memory and traverse a graph with random I/O, which limits how far they scale. [Lakebase Search](/docs/ai/lakebase-search), a set of Postgres extensions for vector, BM25, and hybrid search in Lakebase Postgres, adds a `lakebase_ann` index that you create on the same pgvector column, with no schema or query changes ([lakebase_vector](/docs/extensions/lakebase-vector)). It uses IVF partitioning with RaBitQ quantization, builds 50 to 100 times faster than HNSW according to the docs, and scales past 1 billion vectors on a single index. Because the index lives in storage rather than compute memory, it survives scale to zero and comes with every branch without a rebuild. It requires Postgres 16 or later.
+
+```sql
+CREATE EXTENSION IF NOT EXISTS lakebase_vector CASCADE;
+
+CREATE INDEX ON documents USING lakebase_ann (embedding vector_cosine_ops);
+```
+
+RAG queries often mix meaning with exact terms like product names or error codes. The companion `lakebase_text` extension adds a `lakebase_bm25` index on a `tsvector` column, and the [get started guide](/docs/ai/lakebase-search-get-started#combine-results-with-hybrid-search) fuses BM25 and vector results in one SQL query with Reciprocal Rank Fusion.
+
+## Embeddings from the same backend
+
+You can generate embeddings without a separate provider account. The [AI Gateway](/docs/ai-gateway/overview) serves `qwen3-embedding-0-6b`, `bge-large-en`, and `gte-large-en` on an OpenAI-compatible `/v1/embeddings` endpoint. All three return 1024-dimensional vectors, so store them in a `vector(1024)` column, and they bill on input tokens only ([embeddings](/docs/ai-gateway/embeddings)). AI Gateway draws down prepaid credits at the provider's per-token rate ([pricing](/docs/ai-gateway/models#pricing)).
 
 ## How other providers compare
 

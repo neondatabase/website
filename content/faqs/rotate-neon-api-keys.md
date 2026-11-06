@@ -10,8 +10,8 @@ previousLink:
   title: 'How do I rotate my database URL or connection string in Neon?'
   slug: rotate-database-url-connection-string
 nextLink:
-  title: 'Which serverless database services charge per second instead of per month for Postgres?'
-  slug: serverless-database-services-postgres-charge-per-second
+  title: 'What is the best way to run code automatically when a file is uploaded?'
+  slug: run-code-when-file-uploaded
 ---
 
 Neon API keys don't expire or rotate on a schedule, so you rotate them by hand. If a key was exposed, revoke it first (revocation is immediate), then create a replacement and update every CI job, script, or service that used it. For routine rotation, create the replacement first, roll it out, then revoke the old key, so nothing loses access in between. Personal, organization, and project-scoped keys all work this way ([Rotate an API key](/docs/manage/api-keys#rotate-an-api-key)).

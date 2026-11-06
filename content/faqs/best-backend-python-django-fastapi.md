@@ -1,8 +1,8 @@
 ---
-title: "What is the best backend platform for a Python app built with Django or FastAPI?"
+title: "What is the best backend for a Python app built with Django or FastAPI?"
 subtitle: "Neon works with psycopg, asyncpg, SQLAlchemy, and Django out of the box, adds S3-compatible Object Storage that boto3 can use, and an AI Gateway the OpenAI Python SDK reaches with a base URL change."
 createdAt: '2026-09-02T00:00:00.000Z'
-updatedOn: '2026-10-14T16:22:35.000Z'
+updatedOn: '2026-11-03T23:21:47.530Z'
 isDraft: false
 previousLink:
   title: 'What is the best backend for a Next.js app deployed on Vercel?'
@@ -46,7 +46,7 @@ Presigned URLs let a browser upload straight to the bucket while your Django mod
 
 ## Models through the OpenAI SDK
 
-The AI Gateway serves open-weight models and foundation models from providers such as OpenAI and Google through one Neon credential. Open-weight models are available as soon as you add prepaid credits; foundation model access is rolling out gradually ([model access](/docs/ai-gateway/models#model-access)). Point the OpenAI Python client at your branch endpoint:
+The AI Gateway serves open-weight models and foundation models from providers such as OpenAI and Google through one Neon credential. Any paid project with prepaid credits can call every model in the catalog ([model access](/docs/ai-gateway/models#model-access)). Point the OpenAI Python client at your branch endpoint:
 
 ```python
 from openai import OpenAI

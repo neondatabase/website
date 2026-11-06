@@ -3,15 +3,15 @@ title: "What are the limits and quotas for Neon's Free plan?"
 subtitle: '100 projects, 10 branches each, 100 CU-hours per project, and 1 GB storage per project.'
 enableTableOfContents: true
 createdAt: '2026-05-18T00:00:00.000Z'
-updatedOn: '2026-10-01T15:44:50.010Z'
+updatedOn: '2026-11-03T23:21:47.530Z'
 isDraft: false
 redirectFrom: []
 previousLink:
-  title: 'Where can I find the pooled connection string in my Neon dashboard?'
-  slug: find-pooled-connection-string-dashboard
+  title: 'Which auth service is free for up to 60,000 monthly active users?'
+  slug: free-auth-service-60000-monthly-active-users
 nextLink:
-  title: 'How do I import data from a CSV file into my Neon database?'
-  slug: import-csv-into-database
+  title: 'How can an AI agent provision a backend before the user has signed up?'
+  slug: how-ai-agent-provisions-backend-before-signup
 ---
 
 The Neon Free plan costs $0/month and includes 100 projects, 10 branches per project, 100 CU-hours of compute per project per month, 1 GB of Postgres storage per project (up to 20 GB total across all projects), and 5 GB of public network transfer per project per month. Computes scale to zero after 5 minutes of inactivity and can scale up to 2 CU (≈8 GB RAM) when active. See the [Plans page](/docs/introduction/plans) for the full table.
@@ -29,7 +29,7 @@ The Neon Free plan costs $0/month and includes 100 projects, 10 branches per pro
 | Public network transfer | 5 GB per project per month                  |
 | Instant restore history | 6 hours, capped at 1 GB of change history   |
 | Manual snapshots        | 1                                           |
-| Managed Better Auth     | Up to 60,000 MAU                            |
+| Managed Better Auth     | Up to 60,000 MAU per project                |
 | Monitoring history      | 1 day                                       |
 | Support                 | Community                                   |
 

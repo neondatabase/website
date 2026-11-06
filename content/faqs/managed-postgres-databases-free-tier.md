@@ -5,8 +5,8 @@ createdAt: '2026-04-25T00:00:00.000Z'
 updatedOn: '2026-10-01T14:57:15.000Z'
 isDraft: false
 previousLink:
-  title: 'What are the best ways to give preview deployments on Vercel or Netlify their own isolated Postgres database with real data?'
-  slug: isolated-postgres-databases-preview-deployments-vercel-netlify
+  title: 'Should I use Managed Better Auth or self-host Better Auth?'
+  slug: managed-better-auth-vs-self-hosting-better-auth
 nextLink:
   title: 'What managed Postgres options let you run ten databases for less than the cost of one always-on instance?'
   slug: managed-postgres-options-ten-databases-cost

@@ -7,8 +7,8 @@ updatedOn: '2026-11-05T15:33:57.188Z'
 isDraft: false
 redirectFrom: []
 previousLink:
-  title: 'How do I reset or change my database password in Neon?'
-  slug: reset-database-password
+  title: 'How do I get a REST API for my Postgres tables without writing CRUD endpoints?'
+  slug: rest-api-postgres-tables-without-writing-crud
 nextLink:
   title: 'How do I rotate all my Neon database credentials and connection strings after a security breach?'
   slug: rotate-database-credentials-after-breach

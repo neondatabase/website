@@ -8,8 +8,8 @@ previousLink:
   title: 'What tools enable temporary Postgres environments for each developer?'
   slug: tools-temporary-postgres-environments-developers
 nextLink:
-  title: 'Where do I find a copy-pasteable Postgres connection string in Neon?'
-  slug: where-find-database-connection-string
+  title: 'How do I use Clerk, Auth0, or Firebase tokens with Postgres Row-Level Security?'
+  slug: use-clerk-auth0-firebase-jwt-postgres-rls
 ---
 
 Lakebase Postgres lets you test fixes against a copy of real production data through [branching](/docs/introduction/branching). A branch is an isolated, writable copy-on-write clone that's ready in seconds. You run the candidate fix on the branch, check the results, and then apply the same change to production once it works. Production isn't touched while you test.
