@@ -11,10 +11,8 @@ summary: >-
   environment by selecting a connection string based on NODE_ENV.
 enableTableOfContents: true
 agentPrompt: 'I want to use Drizzle ORM with it.'
-updatedOn: '2026-11-06T03:31:51.811Z'
+updatedOn: '2026-11-06T03:42:14.652Z'
 ---
-
-[comment]: <> (Agent-first quickstart prototype, 1a tinted-band variant. The agent flow sits in a tinted band; steps 1-3 are markdown headings so they feed the table of contents, with filled-circle numerals drawn by page-scoped CSS. The walkthrough below keeps the existing Steps, with its numerals restyled as outlined.)
 
 <div className="not-prose my-8 rounded-[10px] border border-gray-new-90 bg-gray-new-95 px-6 py-7 dark:border-gray-new-15 dark:bg-gray-new-10 [&>h2]:m-0 [&>h2]:mb-7 [&>h2]:w-fit [&>h2]:text-[28px] [&>h2]:leading-tight [&>h2]:font-medium [&>h2]:tracking-tighter [&>h2]:text-black-pure dark:[&>h2]:text-white [&_h3]:relative [&_h3]:mt-7 [&_h3]:mb-2 [&_h3]:w-fit [&_h3]:text-xl [&_h3]:font-semibold [&_h3]:tracking-tight [&_h3]:text-black-pure [&_h3]:before:absolute [&_h3]:before:-left-11 [&_h3]:before:top-px [&_h3]:before:flex [&_h3]:before:size-7 [&_h3]:before:items-center [&_h3]:before:justify-center [&_h3]:before:rounded-full [&_h3]:before:bg-black-new [&_h3]:before:text-[13px] [&_h3]:before:font-semibold [&_h3]:before:text-white [&_h3]:before:content-[counter(step)] [&_h3]:before:[counter-increment:step] dark:[&_h3]:text-white dark:[&_h3]:before:bg-white dark:[&_h3]:before:text-black-pure">
 
@@ -46,7 +44,7 @@ items={[
 { title: 'Pooled vs direct URL', text: 'Use the direct Neon URL for Drizzle Kit migrations and the pooled URL for the app runtime. Update .env and drizzle.config.ts.', src: '/prompts/drizzle-pooled-direct.md' },
 { title: 'Serverless HTTP driver', text: "Switch this project's Drizzle client to the Neon serverless HTTP driver so it works in edge and serverless runtimes.", src: '/prompts/drizzle-serverless-http.md' },
 { title: 'Branch per pull request', text: 'Create a Neon branch for this pull request, run my Drizzle migrations against it, and tear it down when the PR closes.', src: '/prompts/drizzle-branch-per-pr.md' },
-{ title: 'Schema-only branch', text: 'Create a schema-only Neon branch so I can test a migration against the real table structure without copying data.', src: '/prompts/drizzle-schema-only-branch.md' },
+{ title: 'Schema-only branch (beta)', text: 'Create a schema-only Neon branch so I can test a migration against the real table structure without copying data.', src: '/prompts/drizzle-schema-only-branch.md' },
 { title: 'Reset from parent', text: 'Reset my development branch from its parent so I can re-run migrations against a clean, parent-aligned state.', src: '/prompts/drizzle-reset-from-parent.md' },
 ]}
 />
@@ -429,7 +427,6 @@ Each branch has its own connection string, available in the Neon Console or via 
 - [Add Object Storage](/docs/storage/overview): S3-compatible file storage that branches with your database
 - [Deploy a Function](/docs/compute/functions/overview): Run backend compute next to your database, no separate hosting needed
 - [Call an LLM with AI Gateway](/docs/ai-gateway/overview): Access foundation models from Anthropic, OpenAI, Google, and more with one credential
-- [Realtime](/docs/realtime/examples/drizzle): Build realtime Drizzle apps on Neon using your existing schema and queries
 
 </div>
 
