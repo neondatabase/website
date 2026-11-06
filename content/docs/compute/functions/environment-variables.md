@@ -123,7 +123,7 @@ To pull from a different branch, switch with `neon checkout`; it pulls the new b
 
 ## Call another function
 
-Every function on a branch answers at `https://<NEON_BRANCH_ID>-<slug><NEON_FUNCTION_HOST_SUFFIX>`. Neon injects both variables into every deployed function, and `neon env pull` writes them locally. The same code reaches a sibling function in production and on your machine. `functionBaseUrl` from `@neon/env` 2.0.0 or later builds the URL for you, without a trailing slash:
+Every function on a branch answers at `https://<NEON_BRANCH_ID>-<slug><NEON_FUNCTION_HOST_SUFFIX>`. Neon injects both variables into every deployed function. Locally, `neon env pull` writes them, and `neon dev` sets them for the functions it serves. `functionBaseUrl` from `@neon/env` 2.0.0 or later builds the URL for you, without a trailing slash:
 
 ```ts
 import { functionBaseUrl } from '@neon/env';
@@ -131,7 +131,7 @@ import { functionBaseUrl } from '@neon/env';
 const res = await fetch(`${functionBaseUrl('hello')}/greet`);
 ```
 
-Under [`neon dev`](/docs/cli/dev), `functionBaseUrl` returns `http://localhost:<port>` for each function that `neon dev` is serving and the deployed URL for any other slug. It throws a `TypeError` for an invalid slug, and a `PlatformError` when either variable is missing. Locally, `neon env pull` writes them for any code, and `neon dev` sets them for the functions it serves.
+Under [`neon dev`](/docs/cli/dev), `functionBaseUrl` returns `http://localhost:<port>` for each function that `neon dev` is serving and the deployed URL for any other slug. It throws a `TypeError` for an invalid slug, and a `PlatformError` when either variable is missing.
 
 `functionBaseUrl` reads `process.env` by default. When the two variables come from somewhere else, pass them as the second argument:
 
