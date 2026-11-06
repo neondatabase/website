@@ -205,6 +205,27 @@ endpoints:
     check: live
     generator: src/scripts/generate-llms-index.js
 
+  - id: sitemap-md
+    name: Markdown sitemap
+    description: >-
+      Semantic index of every docs page (/docs/*), modeled on Vercel's: headings
+      and nested lists follow the docs navigation, and each entry carries its
+      Type, Status, Lastmod, Summary, and Section. Built at deploy time from the
+      docs navigation, page frontmatter, the API reference data, and the
+      changelog, so it is only validated live. Lives
+      under /docs/ like llms.txt; /sitemap.md and /.well-known/sitemap.md are
+      rewritten to it.
+    servedPath: /docs/sitemap.md
+    contentType: text/markdown
+    spec:
+      name: sitemap.md
+      url: https://agent-ready.dev/what-is-sitemap-md
+      standard: false
+    validator: sitemap-md
+    check: live
+    routeFile: src/app/(docs)/docs/sitemap.md/route.js
+    generator: src/utils/sitemap-md.js
+
   - id: openapi
     name: OpenAPI document
     description: >-
