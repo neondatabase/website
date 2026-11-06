@@ -9,7 +9,7 @@ excerpt: >-
   sharing insights from our support exchanges to help you understand and avoid
   this issue in your setup. Specifically, our users som...
 date: '2024-01-31T18:32:32'
-updatedOn: '2024-02-29T11:26:30'
+updatedOn: '2026-11-06T12:00:00.000Z'
 category: community
 categories:
   - community
@@ -40,6 +40,10 @@ seo:
 ---
 
 ![Image](https://cdn.neonapi.io/public/images/pages/blog/postgres-support-case-recap/image-22-1024x576-b60587fc.png)
+
+<Admonition type="important" title="Plans have changed since this post">
+This post refers to the Pro plan, which Neon no longer offers. Neon's plans are now Free, Launch, and Scale. For larger computes, Launch supports up to 16 CU and Scale up to 56 CU. See the [plans documentation](/docs/introduction/plans).
+</Admonition>
 
 At Neon Support, we’ve noticed users occasionally encountering connection limit errors while connecting applications to their databases. Today, we’re sharing insights from our support exchanges to help you understand and avoid this issue in your setup.
 

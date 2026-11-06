@@ -132,15 +132,15 @@ By leveraging Neon's shared storage and compute autoscaling, it’s not rare to 
 
 **Equivalent non-prod deployment in Neon:**
 
-- [Scale pricing plan](/pricing): $69 /month
-- Includes 50 GB of storage - 1,000 projects - 500 branches per project
-- Plus 750 compute hours, additional compute hours billed at $0.16 per CU
-- **Neon monthly costs: $338.12**
-  - Compute hours per branch per month: 2 CU \* 4 hours \* 30.4 days/month = 243.2
-  - Total compute hours: 243.2 \* 10 branches = 2432
-  - Cost of additional compute hours: [2432 - 750] \* $0.16 = $269.12 /month
+- [Launch plan](/pricing): usage-based, no monthly minimum, 10 branches per project included
+- Compute billed at $0.106 per CU-hour, storage at $0.35 per GB-month
+- **Neon monthly costs: about $275**
+  - CU-hours per branch per month: 2 CU \* 4 hours \* 30.4 days/month = 243.2
+  - Total CU-hours: 243.2 \* 10 branches = 2,432
+  - Compute costs: 2,432 \* $0.106 = $257.79 /month
+  - Storage costs: 50 GB shared by all branches \* $0.35 GB-month = $17.50 /month, plus storage for data changes on child branches
 
-In this case, migrating non-production environments from AWS RDS to Neon meant 75% cost savings.
+In this case, migrating non-production environments from AWS RDS to Neon meant about 80% cost savings.
 
 <ComputeCalculator
 className="mt-10"

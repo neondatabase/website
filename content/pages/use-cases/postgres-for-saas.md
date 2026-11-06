@@ -159,7 +159,7 @@ Private Link, IP Allow
 
 <DefinitionList bulletType="check">
 Usage-based pricing
-: Start for free, then pay only for what you use. Paid plans start at $5/month minimum. [Review our pricing plans](/pricing).
+: Start for free, then pay only for what you use. Paid plans are usage-based with no monthly minimum. [Review our pricing plans](/pricing).
 
 </DefinitionList>
 
