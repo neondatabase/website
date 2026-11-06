@@ -70,17 +70,17 @@ Most models work with the [Chat completions](/docs/ai-gateway/chat-completions) 
 
 All paths below are appended to your branch's bare AI Gateway host (`NEON_AI_GATEWAY_BASE_URL`).
 
-| Provider                                       | Recommended endpoint     | Notes                                                                                                    |
-| ---------------------------------------------- | ------------------------ | -------------------------------------------------------------------------------------------------------- |
-| OpenAI (most models)                           | `/v1/chat/completions`   | Use `/openai/v1/responses` for Responses API features                                                    |
-| OpenAI (`gpt-5-3-codex`, `gpt-5-5-pro`)        | `/openai/v1/responses`   | These models require the Responses API and don't work with chat/completions                              |
-| Anthropic Claude                               | `/v1/chat/completions`   | Use `/anthropic/v1/messages` with the Anthropic SDK for extended thinking and prompt caching             |
-| Google Gemini                                  | `/v1/chat/completions`   | Use `/gemini/v1beta/models/{model}:generateContent` with the google-genai SDK                            |
-| Google Gemma 3 12B                             | `/v1/chat/completions`   | Chat completions only. Doesn't support the Gemini SDK endpoint                                           |
-| Meta, Zhipu AI, Thinking Machines, Moonshot AI | `/v1/chat/completions`   | Chat completions only                                                                                    |
-| Alibaba (chat models)                          | `/v1/chat/completions`   | Chat completions only                                                                                    |
-| Alibaba, BAAI (embedding models)               | `/v1/embeddings`         | No chat completions. Returns a vector, not text                                                          |
-| TypeSafe AI (decision models)                  | `/typesafe/v1/systemone` | No chat completions. Returns answers to questions, not text. See [Decisions](/docs/ai-gateway/decisions) |
+| Provider                                | Recommended endpoint     | Notes                                                                                                    |
+| --------------------------------------- | ------------------------ | -------------------------------------------------------------------------------------------------------- |
+| OpenAI (most models)                    | `/v1/chat/completions`   | Use `/openai/v1/responses` for Responses API features                                                    |
+| OpenAI (`gpt-5-3-codex`, `gpt-5-5-pro`) | `/openai/v1/responses`   | These models require the Responses API and don't work with chat/completions                              |
+| Anthropic Claude                        | `/v1/chat/completions`   | Use `/anthropic/v1/messages` with the Anthropic SDK for extended thinking and prompt caching             |
+| Google Gemini                           | `/v1/chat/completions`   | Use `/gemini/v1beta/models/{model}:generateContent` with the google-genai SDK                            |
+| Google Gemma 3 12B                      | `/v1/chat/completions`   | Chat completions only. Doesn't support the Gemini SDK endpoint                                           |
+| Meta, Zhipu AI, Moonshot AI             | `/v1/chat/completions`   | Chat completions only                                                                                    |
+| Alibaba (chat models)                   | `/v1/chat/completions`   | Chat completions only                                                                                    |
+| Alibaba, BAAI (embedding models)        | `/v1/embeddings`         | No chat completions. Returns a vector, not text                                                          |
+| TypeSafe AI (decision models)           | `/typesafe/v1/systemone` | No chat completions. Returns answers to questions, not text. See [Decisions](/docs/ai-gateway/decisions) |
 
 <Admonition type="warning" title="Content shape varies by model">
 For most models, `message.content` in a chat completions response is a plain string. For `claude-opus-5-5`, it's an array of typed content blocks once the model reasons (`{ type: 'reasoning', ... }`, `{ type: 'text', text: ... }`); a trivial prompt still returns a string. For `gemini-4-argon`, it's an array of `text` blocks, even for a trivial prompt. A low `max_tokens` value can also cut a response off before the `text` block appears, leaving only a `reasoning` block. Handle both shapes:

@@ -1756,44 +1756,6 @@
           "cache_read": 0.03
         }
       },
-      "inkling": {
-        "id": "inkling",
-        "name": "Inkling",
-        "lab": "thinkingmachines",
-        "provider": "databricks",
-        "family": "ling",
-        "released": true,
-        "attachment": true,
-        "reasoning": true,
-        "reasoning_options": [
-          {
-            "type": "toggle"
-          },
-          {
-            "type": "effort",
-            "values": ["none", "minimal", "low", "medium", "high", "max"]
-          }
-        ],
-        "tool_call": true,
-        "temperature": true,
-        "structured_output": false,
-        "open_weights": true,
-        "release_date": "2026-07-15",
-        "last_updated": "2026-07-15",
-        "modalities": {
-          "input": ["text", "image", "audio"],
-          "output": ["text"]
-        },
-        "limit": {
-          "context": 1048576,
-          "output": 65536
-        },
-        "cost": {
-          "input": 1,
-          "output": 4.05,
-          "cache_read": 0.17
-        }
-      },
       "kimi-k3": {
         "id": "kimi-k3",
         "name": "Kimi K3",
