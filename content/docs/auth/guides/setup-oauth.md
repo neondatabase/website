@@ -13,6 +13,8 @@ summary: >-
   credentials and redirect URIs must be configured per branch; preview
   deployments can use wildcard trusted domain patterns to cover multiple hosts.
 enableTableOfContents: true
+redirectFrom:
+  - /docs/auth/guides/oauth
 updatedOn: '2026-09-17T22:48:53.595Z'
 ---
 

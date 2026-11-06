@@ -9,6 +9,10 @@ summary: >-
 enableTableOfContents: true
 redirectFrom:
   - /docs/postgresql/postgres-version-policy
+  - /docs/introduction/postgres-versions
+  - /docs/postgresql/postgres-version
+  - /docs/postgres/postgres-versions
+  - /docs/postgres/postgres-version-policy
 updatedOn: '2026-10-09T10:14:56.146Z'
 ---
 

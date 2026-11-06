@@ -10,6 +10,7 @@ redirectFrom:
   - /docs/compute/functions/preview-access
   - /docs/functions
   - /docs/functions/overview
+  - /docs/compute/functions
 updatedOn: '2026-11-02T22:41:52.272Z'
 layout: wide
 hideCopyPage: true

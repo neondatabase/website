@@ -10,6 +10,9 @@ summary: >-
 enableTableOfContents: true
 redirectFrom:
   - /docs/reference/pg-extensions
+  - /docs/extensions/pg_extensions
+  - /docs/extensions/overview
+  - /docs/postgresql/extensions
 updatedOn: '2026-11-04T20:10:08.844Z'
 ---
 

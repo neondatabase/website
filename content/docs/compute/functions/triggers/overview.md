@@ -7,6 +7,8 @@ summary: >-
   object-created), what an invocation sends your function, and how triggers behave across
   branches.
 enableTableOfContents: true
+redirectFrom:
+  - /docs/compute/functions/triggers
 updatedOn: '2026-11-05T01:12:32.486Z'
 ---
 

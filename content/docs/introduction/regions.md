@@ -10,6 +10,7 @@ enableTableOfContents: true
 isDraft: false
 redirectFrom:
   - /docs/conceptual-guides/regions
+  - /docs/manage/regions
 updatedOn: '2026-10-14T21:25:07.454Z'
 ---
 

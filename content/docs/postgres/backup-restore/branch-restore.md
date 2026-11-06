@@ -20,6 +20,8 @@ redirectFrom:
   - /docs/guides/branch-restore
   - /docs/guides/instant-restore
   - /docs/introduction/branch-restore
+  - /docs/introduction/restore
+  - /docs/introduction/instant-restore
 updatedOn: '2026-09-25T09:36:22.797Z'
 ---
 

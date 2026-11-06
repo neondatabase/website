@@ -8,6 +8,9 @@ summary: >-
   compute endpoints via the Neon Console or API.
 enableTableOfContents: true
 isDraft: false
+redirectFrom:
+  - /docs/introduction/compute-size
+  - /docs/introduction/compute
 updatedOn: '2026-11-05T15:33:57.188Z'
 ---
 
