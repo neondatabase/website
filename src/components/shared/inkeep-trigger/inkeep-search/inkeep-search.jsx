@@ -6,13 +6,18 @@ import DocsHeaderSearchIcon from 'icons/docs/header/search.inline.svg';
 import SearchIcon from 'icons/search.inline.svg';
 import { cn } from 'utils/cn';
 
-// Keep the full 240px field through the 1024px desktop header. On smaller
-// screens the shared mobile menu renders its own search trigger.
-const DocsHeaderSearch = ({ className = null, handleClick }) => (
+// The full 240px field holds through the wide desktop header. The responsive
+// docs header collapses it to a 36px icon-only trigger (driven by measurement,
+// via the `collapsed` prop) as the first step of degradation, so nav lanes only
+// start folding into "More" after the field has given up its space. The
+// data-test, accessible name, and Cmd+K handler are kept in both states. On
+// smaller screens the shared mobile menu renders its own search trigger.
+const DocsHeaderSearch = ({ className = null, handleClick, collapsed = false }) => (
   <button
     className={cn(
-      'flex h-9 w-60 items-center gap-x-2.5 rounded-none border border-gray-new-85 bg-gray-new-98 pr-2.5 pl-3 text-[#6B6F77] transition-colors duration-200 hover:border-gray-new-70',
+      'flex h-9 items-center rounded-none border border-gray-new-85 bg-gray-new-98 text-[#6B6F77] transition-colors duration-200 hover:border-gray-new-70',
       'dark:border-gray-new-20 dark:bg-black-new dark:text-gray-new-60 dark:hover:border-gray-new-30',
+      collapsed ? 'w-9 justify-center px-0' : 'w-60 gap-x-2.5 pr-2.5 pl-3',
       className
     )}
     data-test="docs-search-trigger"
@@ -25,16 +30,21 @@ const DocsHeaderSearch = ({ className = null, handleClick }) => (
       aria-hidden="true"
       className="shrink-0 dark:[&_[stroke]]:stroke-gray-new-60"
     />
-    <span className="flex-1 text-left text-sm leading-none whitespace-nowrap">Search...</span>
-    <span className="rounded-none border border-gray-new-85 px-[5px] py-px text-xs leading-normal dark:border-gray-new-20">
-      ⌘K
-    </span>
+    {!collapsed && (
+      <>
+        <span className="flex-1 text-left text-sm leading-none whitespace-nowrap">Search...</span>
+        <span className="rounded-none border border-gray-new-85 px-[5px] py-px text-xs leading-normal dark:border-gray-new-20">
+          ⌘K
+        </span>
+      </>
+    )}
   </button>
 );
 
 DocsHeaderSearch.propTypes = {
   className: PropTypes.string,
   handleClick: PropTypes.func.isRequired,
+  collapsed: PropTypes.bool,
 };
 
 const InkeepSearch = ({
@@ -42,8 +52,12 @@ const InkeepSearch = ({
   handleClick,
   isNotFoundPage = false,
   isDocsHeader = false,
+  collapsed = false,
 }) => {
-  if (isDocsHeader) return <DocsHeaderSearch className={className} handleClick={handleClick} />;
+  if (isDocsHeader)
+    return (
+      <DocsHeaderSearch className={className} handleClick={handleClick} collapsed={collapsed} />
+    );
 
   return (
     <div className={cn('relative flex items-center justify-between', className)}>
@@ -90,6 +104,7 @@ InkeepSearch.propTypes = {
   handleClick: PropTypes.func.isRequired,
   isNotFoundPage: PropTypes.bool,
   isDocsHeader: PropTypes.bool,
+  collapsed: PropTypes.bool,
 };
 
 export default InkeepSearch;

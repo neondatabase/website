@@ -1,7 +1,7 @@
 'use client';
 
 import PropTypes from 'prop-types';
-import { useLayoutEffect, useMemo, useRef, useState } from 'react';
+import { useCallback, useLayoutEffect, useMemo, useRef, useState } from 'react';
 
 import InkeepTrigger from 'components/shared/inkeep-trigger';
 import Link from 'components/shared/link';
@@ -15,56 +15,236 @@ import DocsHeaderMenu from './docs-header-menu';
 import LogoDivider from './images/logo-divider.inline.svg';
 import LogoLightIcon from './images/neon-logo.inline.svg';
 
-// Lanes collapse into the overflow menu whenever they don't fit between the
-// lockup and the right cluster (the spec's "< 1000px" case, and long lane sets
-// such as /postgresql at narrow desktop widths). The list stays mounted but
-// invisible while collapsed so it can be re-measured as the bar widens.
-const useIsNavCollapsed = (navRef, lanes) => {
-  const [state, setState] = useState({ isMeasured: false, isCollapsed: false });
+// Lane overflow priority, highest priority first (kept inline longest). The
+// lowest-priority lanes drop into the "More" menu first. This is intentionally
+// a plain list so the order can be tuned without touching the measuring logic.
+// Lanes not named here are treated as lowest priority and, among themselves,
+// the right-most one drops first.
+const LANE_OVERFLOW_PRIORITY = [
+  'Get started',
+  'Reference',
+  'Concepts',
+  'Products',
+  'Platform',
+  'Resources',
+];
+
+const UNRANKED_PRIORITY = LANE_OVERFLOW_PRIORITY.length + 1;
+
+const laneRank = (lane) => {
+  const index = LANE_OVERFLOW_PRIORITY.indexOf(lane?.nav);
+  return index === -1 ? UNRANKED_PRIORITY : index;
+};
+
+// Design-fixed control widths: the search field is w-60 (240px) and both the
+// search and Ask AI collapse to a w-9 (36px) icon.
+const SEARCH_WIDTH_FULL = 240;
+const CONTROL_WIDTH_ICON = 36;
+const SEARCH_COLLAPSE_SAVING = SEARCH_WIDTH_FULL - CONTROL_WIDTH_ICON; // exact
+// The Ask AI label width is content-driven; this estimate only shifts the exact
+// width at which that button collapses, never the monotonic ordering below.
+const ASK_COLLAPSE_SAVING = 52;
+// The inline "More" lane (its "More" label, caret, and the lane gap before it)
+// lives in the nav, so once any lane overflows the remaining inline lanes have to
+// leave room for it. Like ASK_COLLAPSE_SAVING this is a width estimate: it only
+// shifts the exact width at which the next lane funnels into "More", never the
+// monotonic drop order.
+const OVERFLOW_TRIGGER_WIDTH = 80;
+
+// One monotonic degradation chain driven by a SINGLE stable measurement: the
+// header row's content width. That width depends only on the viewport, never on
+// whether the search box, Ask AI, or any lane has collapsed, so there is no
+// feedback loop. Every decision below is a step function of that one shrinking
+// input, which makes degradation strictly monotonic: the search field collapses
+// first, then Ask AI, then lanes move into the "More" menu lowest priority
+// first. Nothing ever pops back inline or oscillates at a boundary.
+//
+// The lane space at each stage is reconstructed from an invariant base (the
+// lane space when the whole right cluster is collapsed) plus the known savings,
+// so the lane calculation always reflects the right cluster's FINAL collapsed
+// width while it is deciding overflow.
+const useResponsiveDocsHeader = (rowRef, navWrapRef, navRef, lanes) => {
+  const metricsRef = useRef({ laneWidths: [], lanesTotal: 0, laneGap: 0, baseCollapsed: 0 });
+  const appliedRef = useRef({ searchCollapsed: false, askCollapsed: false });
+  // Before the first (synchronous, pre-paint) measurement, render the right
+  // cluster in its COLLAPSED state. Collapsed is the safe default because it
+  // never overflows, so the search field and Ask AI can only ever grow once we
+  // know they fit, never flash their wider expanded state and snap narrower.
+  // The nav lanes stay gated invisible-until-measured separately.
+  const [state, setState] = useState({
+    isMeasured: false,
+    searchCollapsed: true,
+    askCollapsed: true,
+    hiddenIndexes: [],
+  });
+
+  // Mirror the applied collapse state for the (rare) re-measure path so the
+  // invariant base stays consistent regardless of the live layout.
+  appliedRef.current = {
+    searchCollapsed: state.searchCollapsed,
+    askCollapsed: state.askCollapsed,
+  };
+
+  const getRowContent = useCallback(() => {
+    const row = rowRef.current;
+    if (!row) return 0;
+    const styles = getComputedStyle(row);
+    return (
+      row.clientWidth -
+      parseFloat(styles.paddingLeft || '0') -
+      parseFloat(styles.paddingRight || '0')
+    );
+  }, [rowRef]);
+
+  const compute = useCallback(() => {
+    const { laneWidths, lanesTotal, laneGap, baseCollapsed } = metricsRef.current;
+    if (laneWidths.length === 0) {
+      return { searchCollapsed: false, askCollapsed: false, hiddenIndexes: [] };
+    }
+    const rowContent = getRowContent();
+
+    // Lane space available at each collapse stage. The inline "More" lane is NOT
+    // part of these figures: it only exists once a lane overflows, so its width
+    // is reserved in the overflow branch below, never while deciding whether
+    // anything overflows at all.
+    const spaceBothCollapsed = rowContent + baseCollapsed;
+    const spaceSearchCollapsed = spaceBothCollapsed - ASK_COLLAPSE_SAVING;
+    const spaceNoneCollapsed = spaceSearchCollapsed - SEARCH_COLLAPSE_SAVING;
+
+    if (lanesTotal <= spaceNoneCollapsed + 0.5) {
+      return { searchCollapsed: false, askCollapsed: false, hiddenIndexes: [] };
+    }
+    if (lanesTotal <= spaceSearchCollapsed + 0.5) {
+      return { searchCollapsed: true, askCollapsed: false, hiddenIndexes: [] };
+    }
+    if (lanesTotal <= spaceBothCollapsed + 0.5) {
+      return { searchCollapsed: true, askCollapsed: true, hiddenIndexes: [] };
+    }
+
+    // Overflow regime: both controls are icons and the inline "More" lane is now
+    // present, so the lanes that stay inline must also leave room for it. Drop
+    // lowest priority first, breaking ties by dropping the right-most lane.
+    const spaceWithTrigger = spaceBothCollapsed - OVERFLOW_TRIGGER_WIDTH;
+    const widthOf = (indexes) =>
+      indexes.length === 0
+        ? 0
+        : indexes.reduce((sum, i) => sum + laneWidths[i], 0) + laneGap * (indexes.length - 1);
+    const visible = laneWidths.map((_, i) => i);
+    const dropOrder = [...visible].sort((a, b) => {
+      const rankDelta = laneRank(lanes[b]) - laneRank(lanes[a]);
+      return rankDelta !== 0 ? rankDelta : b - a;
+    });
+    const hidden = new Set();
+    for (const i of dropOrder) {
+      hidden.add(i);
+      if (widthOf(visible.filter((x) => !hidden.has(x))) <= spaceWithTrigger + 0.5) break;
+    }
+    return {
+      searchCollapsed: true,
+      askCollapsed: true,
+      hiddenIndexes: visible.filter((i) => hidden.has(i)),
+    };
+  }, [getRowContent, lanes]);
 
   useLayoutEffect(() => {
+    const row = rowRef.current;
     const nav = navRef.current;
-    if (!nav) return undefined;
+    const navWrap = navWrapRef.current;
+    if (!row || !nav || !navWrap) return undefined;
 
-    // Compare the last lane's edge, not scrollWidth: the lanes' hidden dropdown
-    // panels overflow the list and would count as width.
-    const update = () => {
-      const lastLane = nav.lastElementChild;
-      const isCollapsed =
-        !!lastLane &&
-        lastLane.getBoundingClientRect().right > nav.getBoundingClientRect().right + 1;
+    // Cache each lane's intrinsic width (hidden lanes report 0, so keep their
+    // last known width) and the invariant collapsed-cluster lane space. The
+    // base adds back the savings for whatever is currently expanded, so it is
+    // the same value no matter which controls happen to be collapsed when it
+    // runs.
+    const measure = () => {
+      const children = Array.from(nav.children);
+      const widths = metricsRef.current.laneWidths;
+      widths.length = children.length;
+      children.forEach((child, i) => {
+        const width = child.getBoundingClientRect().width;
+        if (width > 0) widths[i] = width;
+      });
+      const styles = getComputedStyle(nav);
+      const laneGap = parseFloat(styles.columnGap || styles.gap || '0') || 0;
+      metricsRef.current.laneGap = laneGap;
+      metricsRef.current.lanesTotal =
+        widths.reduce((sum, width) => sum + (width || 0), 0) +
+        laneGap * Math.max(0, widths.length - 1);
 
-      setState({ isMeasured: true, isCollapsed });
+      const savingNow =
+        (appliedRef.current.searchCollapsed ? 0 : SEARCH_COLLAPSE_SAVING) +
+        (appliedRef.current.askCollapsed ? 0 : ASK_COLLAPSE_SAVING);
+      // navWrap is the flex-1 nav column: its width is the space left for the
+      // lanes (plus the inline "More" lane) after the logo and right cluster, and
+      // it does not depend on whether a lane has collapsed, so it stays a stable
+      // base. The lanes themselves live in `nav` (the inner list), which sizes to
+      // its content so "More" can sit directly after the last visible lane.
+      metricsRef.current.baseCollapsed = navWrap.clientWidth + savingNow - getRowContent();
     };
 
-    update();
-    const resizeObserver = new ResizeObserver(update);
-    resizeObserver.observe(nav);
-    document.fonts?.ready.then(update);
+    measure();
+    setState({ isMeasured: true, ...compute() });
 
-    return () => resizeObserver.disconnect();
-  }, [navRef, lanes]);
+    let cancelled = false;
+    // Fonts can change intrinsic widths; re-measure once they are ready.
+    document.fonts?.ready.then(() => {
+      if (cancelled) return;
+      measure();
+      setState({ isMeasured: true, ...compute() });
+    });
+
+    // Recompute (not re-measure) on resize of the STABLE row, coalesced to one
+    // animation frame. Observing the row, not the nav, keeps the input free of
+    // feedback from the collapses it drives.
+    let frame = null;
+    const resizeObserver = new ResizeObserver(() => {
+      if (frame) cancelAnimationFrame(frame);
+      frame = requestAnimationFrame(() => setState({ isMeasured: true, ...compute() }));
+    });
+    resizeObserver.observe(row);
+
+    return () => {
+      cancelled = true;
+      if (frame) cancelAnimationFrame(frame);
+      resizeObserver.disconnect();
+    };
+  }, [rowRef, navWrapRef, navRef, lanes, compute, getRowContent]);
 
   return state;
 };
 
 const DocsHeader = ({ customType = null, docPageType = null, basePath, navigation }) => {
   const lanes = useMemo(() => getDocsHeaderLanes(navigation), [navigation]);
+  const rowRef = useRef(null);
+  const navWrapRef = useRef(null);
   const navRef = useRef(null);
-  const { isMeasured, isCollapsed } = useIsNavCollapsed(navRef, lanes);
+  const { isMeasured, searchCollapsed, askCollapsed, hiddenIndexes } = useResponsiveDocsHeader(
+    rowRef,
+    navWrapRef,
+    navRef,
+    lanes
+  );
+  const overflowLanes = useMemo(
+    () => hiddenIndexes.map((index) => lanes[index]).filter(Boolean),
+    [hiddenIndexes, lanes]
+  );
 
   return (
     <div
       className={cn(
         'relative flex h-full w-full items-center bg-white dark:bg-black-pure',
-        'after:absolute after:right-0 after:bottom-0 after:left-0 after:h-px after:bg-gray-new-90 dark:after:bg-gray-new-20 lg:after:hidden'
+        'after:absolute after:right-0 after:bottom-0 after:left-0 after:h-px after:bg-gray-new-90 dark:after:bg-gray-new-20 md:after:hidden'
       )}
     >
-      {/* Below lg the shared mobile menu overlays its search + burger on the right. */}
-      <div className="relative z-10 flex h-full w-full items-stretch gap-x-7 px-8 lg:pr-28 md:pl-5 sm:pr-24">
+      {/* Below md the shared mobile menu overlays its search + burger on the right. */}
+      <div
+        className="relative z-10 flex h-full w-full items-stretch gap-x-7 px-8 md:pr-28 md:pl-5 sm:pr-24"
+        ref={rowRef}
+      >
         {/* The 189px lockup and 28px gap align the first lane with the Figma header. */}
         <Link
-          className="flex w-[189px] shrink-0 items-center gap-x-3.5 lg:w-auto lg:min-w-0 lg:shrink"
+          className="flex w-[189px] shrink-0 items-center gap-x-3.5 md:w-auto md:min-w-0 md:shrink"
           to={customType?.link || LINKS.docs}
         >
           <LogoLightIcon
@@ -82,21 +262,33 @@ const DocsHeader = ({ customType = null, docPageType = null, basePath, navigatio
             {customType?.title || 'Docs'}
           </span>
         </Link>
-        <nav className="flex min-w-0 flex-1 lg:hidden" aria-label="Docs sections">
+        <nav
+          className="flex min-w-0 flex-1 items-stretch gap-x-6 md:hidden"
+          aria-label="Docs sections"
+          ref={navWrapRef}
+        >
           <DocsNavigation
-            className={cn(
-              'min-w-0 flex-1',
-              (!isMeasured || isCollapsed) && 'overflow-hidden',
-              isCollapsed && 'invisible'
-            )}
+            className={cn('min-w-0 shrink overflow-hidden', !isMeasured && 'invisible')}
             navigation={lanes}
             basePath={basePath}
             ref={navRef}
-            aria-hidden={isCollapsed || undefined}
+            hiddenIndexes={hiddenIndexes}
           />
+          {/* Stripe-style overflow: "More" is an inline nav lane that appears only
+              once a lane has overflowed, holding the dropped lanes in priority
+              order. It never renders before measurement, so it cannot flash in at
+              wide widths, and it sits directly after the last visible lane. */}
+          {isMeasured && overflowLanes.length > 0 && (
+            <DocsHeaderMenu overflowLanes={overflowLanes} basePath={basePath} />
+          )}
         </nav>
-        <div className="flex shrink-0 items-center gap-x-2 lg:hidden">
-          <InkeepTrigger docPageType={docPageType} isDocsHeader />
+        <div className="flex shrink-0 items-center gap-x-2 md:hidden">
+          <InkeepTrigger
+            docPageType={docPageType}
+            isDocsHeader
+            isSearchCollapsed={searchCollapsed}
+            isAiCollapsed={askCollapsed}
+          />
           <span className="mx-1 h-5 w-px bg-gray-new-85 dark:bg-gray-new-20" aria-hidden="true" />
           <Link
             className="flex h-9 items-center px-2 text-[15px] leading-none whitespace-nowrap text-gray-new-20 transition-colors duration-200 hover:text-black-new dark:text-gray-new-80 dark:hover:text-white"
@@ -114,8 +306,6 @@ const DocsHeader = ({ customType = null, docPageType = null, basePath, navigatio
           >
             Sign up
           </Link>
-          <span className="mx-1 h-5 w-px bg-gray-new-85 dark:bg-gray-new-20" aria-hidden="true" />
-          <DocsHeaderMenu lanes={lanes} basePath={basePath} isNavCollapsed={isCollapsed} />
         </div>
       </div>
     </div>

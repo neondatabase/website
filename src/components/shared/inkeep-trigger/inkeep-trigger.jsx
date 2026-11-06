@@ -41,6 +41,8 @@ const InkeepTrigger = ({
   className = null,
   isNotFoundPage = false,
   isDocsHeader = false,
+  isSearchCollapsed = false,
+  isAiCollapsed = false,
   docPageType = null,
 }) => {
   const pathname = usePathname();
@@ -132,12 +134,14 @@ const InkeepTrigger = ({
         handleClick={() => setIsSearchOpen(true)}
         isNotFoundPage={isNotFoundPage}
         isDocsHeader={isDocsHeader}
+        collapsed={isSearchCollapsed}
       />
       {!isNotFoundPage && (
         <InkeepAIButton
           className="shrink-0"
           handleClick={() => setIsChatOpen(true)}
           isDocsHeader={isDocsHeader}
+          collapsed={isAiCollapsed}
         />
       )}
       <SiteSearchModal
@@ -165,6 +169,8 @@ InkeepTrigger.propTypes = {
   topOffset: PropTypes.number,
   isNotFoundPage: PropTypes.bool,
   isDocsHeader: PropTypes.bool,
+  isSearchCollapsed: PropTypes.bool,
+  isAiCollapsed: PropTypes.bool,
   docPageType: PropTypes.string,
 };
 
