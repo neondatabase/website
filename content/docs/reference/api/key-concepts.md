@@ -1,9 +1,11 @@
 ---
 title: Neon API key concepts
+subtitle: Asynchronous operations, rate limits, and pagination.
 summary: >-
   Understand asynchronous operations, rate limits, pagination, and important
   constraints before building automation with the Neon API.
 enableTableOfContents: true
+updatedOn: '2026-09-04T22:12:54.000Z'
 ---
 
 Review these API behavior notes before you build scripts, CI/CD workflows, or control-plane integrations on top of Neon.

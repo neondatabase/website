@@ -1,19 +1,19 @@
 ---
-title: Graph Queries in Postgres
-subtitle: A step-by-step guide describing how to use ltree and pgRouting for analyzing graph data in Postgres
+title: Graph queries in Postgres
+subtitle: Use ltree and pgRouting to analyze graph data in Postgres
 author: vkarpov15
 enableTableOfContents: true
 createdAt: '2025-02-28T13:24:36.612Z'
-updatedOn: '2025-03-01T16:53:32.000Z'
+updatedOn: '2026-09-24T17:56:34.189Z'
 ---
 
-Graph databases are used to store and analyze data that is connected in a network-like structure.
+Graph databases store and analyze data connected in a network-like structure.
 For example, cities connected by roads, people in a social network, or category hierarchies where categories have sub-categories.
 While there are dedicated graph databases, extensions like [ltree](https://www.postgresql.org/docs/current/ltree.html) and [pgRouting](https://pgrouting.org/) add graph functionality to Postgres.
 
 ## Steps
 
-- Enable the `ltree` and `pgrouting` extensions
+- Enable the `ltree`, `postgis`, and `pgrouting` extensions
 - Create a table to store hierarchical data
 - Insert and retrieve hierarchical data
 - Perform hierarchical queries using ltree
@@ -23,15 +23,16 @@ While there are dedicated graph databases, extensions like [ltree](https://www.p
 ## Enable ltree and pgRouting
 
 `ltree` adds a new `LTREE` type to Postgres for storing hierarchies, like categories.
-In Neon, `ltree` is already installed, you just need to enable it using the following command.
+On Neon, `ltree` is available to enable with the following command.
 
 ```sql
 CREATE EXTENSION IF NOT EXISTS ltree;
 ```
 
-`pgrouting` is a separate extension that can be used for routing and shortest path calculations in network data, like finding the shortest path between two cities.
+`pgrouting` is a separate extension for routing and shortest path calculations in network data, like finding the shortest path between two cities. On Neon, `pgrouting` requires the `postgis` extension, so enable `postgis` first ([Supported extensions](/docs/extensions/pg-extensions)).
 
 ```sql
+CREATE EXTENSION IF NOT EXISTS postgis;
 CREATE EXTENSION IF NOT EXISTS pgrouting;
 ```
 
@@ -73,8 +74,8 @@ SELECT * FROM categories WHERE path <@ 'Electronics.Laptops';
 ## Create a table to store network data
 
 With `pgrouting`, you can model roads, social networks, or any graph-like data structure.
-For example, the following table stores a graph of roads that have an associated `cost`.
-Each road has a source and a target, and an associated `cost`.
+For example, the following table stores a graph of roads.
+Each road has a source, a target, and an associated `cost`.
 
 ```sql
 CREATE TABLE roads (
@@ -97,7 +98,7 @@ INSERT INTO roads (source, target, cost) VALUES
   (1, 4, 10.0);
 ```
 
-You can then find the minimal cost path between two nodes using the `pgr_dijkstra()` function, which is an implementation of [Dijkstra's Algorithm](https://en.wikipedia.org/wiki/Dijkstra%27s_algorithm).
+You can then find the minimal cost path between two nodes using the `pgr_dijkstra()` function, which is an implementation of [Dijkstra's algorithm](https://en.wikipedia.org/wiki/Dijkstra%27s_algorithm).
 
 ```sql
 SELECT * FROM pgr_dijkstra(
@@ -106,11 +107,11 @@ SELECT * FROM pgr_dijkstra(
 );
 ```
 
-The above query returns the following, which shows the shortest path from node 1 to node 4 is by visiting each node in order (1, 2, 3, 4) with an aggregate cost of 9.5.
+The above query returns the following, which shows that the shortest path from node 1 to node 4 visits each node in order (1, 2, 3, 4) with an aggregate cost of 9.5. The `-1` edge on the last row marks the end of the path.
 
 | seq | path_seq | node | edge | cost | agg_cost |
 | --- | -------- | ---- | ---- | ---- | -------- |
 | 1   | 1        | 1    | 1    | 4    | 0        |
 | 2   | 2        | 2    | 2    | 3    | 4        |
 | 3   | 3        | 3    | 3    | 2.5  | 7        |
-| 4   | 4        | 4    | 4    | 0    | 9.5      |
+| 4   | 4        | 4    | -1   | 0    | 9.5      |

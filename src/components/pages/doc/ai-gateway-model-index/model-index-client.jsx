@@ -2,8 +2,16 @@
 
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
+import {
+  createParser,
+  parseAsArrayOf,
+  parseAsBoolean,
+  parseAsString,
+  parseAsStringLiteral,
+  useQueryStates,
+} from 'nuqs';
 import PropTypes from 'prop-types';
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { useEffect, useId, useMemo, useRef, useState } from 'react';
 import { SiMeta } from 'react-icons/si';
 
 import StickyTable from 'components/pages/doc/sticky-table';
@@ -15,9 +23,16 @@ import { cn } from 'utils/cn';
 
 import AlibabaIcon from './images/alibaba.inline.svg';
 import AnthropicIcon from './images/anthropic.inline.svg';
+import BaaiIcon from './images/baai.inline.svg';
+import DeepSeekIcon from './images/deepseek.inline.svg';
 import GoogleIcon from './images/google.inline.svg';
+import MoonshotIcon from './images/moonshotai.inline.svg';
 import OpenAIIcon from './images/openai.inline.svg';
-import { PROVIDER_ORDER, providerLabel } from './model-rows';
+import ThinkingMachinesIcon from './images/thinkingmachines.inline.svg';
+import TypeSafeIcon from './images/typesafe.inline.svg';
+import XaiIcon from './images/xai.inline.svg';
+import ZhipuIcon from './images/zhipuai.inline.svg';
+import { LAB_ORDER, MODEL_CATALOG_NOTE, orgLabel } from './model-rows';
 
 const ASIDE_COLLISION_GAP = 24;
 
@@ -25,12 +40,14 @@ const MODEL_TYPES = [
   { key: 'all', label: 'All' },
   { key: 'text', label: 'Text' },
   { key: 'image', label: 'Image' },
+  { key: 'embeddings', label: 'Embeddings' },
+  { key: 'decisions', label: 'Decisions' },
 ];
 
 const COLUMNS = [
   { key: 'name', label: 'Model', sortable: true },
   { key: 'id', label: 'Model ID', sortable: true },
-  { key: 'provider', label: 'Provider', sortable: true },
+  { key: 'lab', label: 'Lab', sortable: true },
   { key: 'inputs', label: 'Inputs', sortable: false },
   { key: 'contextWindow', label: 'Context', sortable: true },
   { key: 'releaseDate', label: 'Released', sortable: true },
@@ -39,7 +56,65 @@ const COLUMNS = [
   { key: 'openWeights', label: 'License', sortable: true },
 ];
 
-const compareRows = (a, b, key) => {
+const parseAsSortKey = parseAsStringLiteral(
+  COLUMNS.filter((column) => column.sortable).map((column) => column.key)
+);
+const parseAsSortDir = parseAsStringLiteral(['asc', 'desc']);
+
+// ?sort=costInput:asc <=> { key: 'costInput', dir: 'asc' }
+const parseAsSort = createParser({
+  parse(query) {
+    const [key = '', dir = ''] = query.split(':');
+    // `provider` was the maker column's sort key before the column was renamed Lab.
+    const sortKey = parseAsSortKey.parse(key === 'provider' ? 'lab' : key);
+    if (sortKey === null) return null;
+    return { key: sortKey, dir: parseAsSortDir.parse(dir) ?? 'asc' };
+  },
+  serialize(value) {
+    return `${value.key}:${value.dir}`;
+  },
+  eq(a, b) {
+    return a.key === b.key && a.dir === b.dir;
+  },
+});
+
+const FILTER_PARSERS = {
+  search: parseAsString.withDefault(''),
+  mode: parseAsStringLiteral(MODEL_TYPES.map((type) => type.key)).withDefault('all'),
+  labs: parseAsArrayOf(parseAsString).withDefault([]),
+  // The lab filter's URL key before it was renamed from `providers`; shared links still filter.
+  legacyProviders: parseAsArrayOf(parseAsString).withDefault([]),
+  openWeightsOnly: parseAsBoolean.withDefault(false),
+  sort: parseAsSort.withDefault({ key: 'releaseDate', dir: 'desc' }),
+};
+
+const FILTER_URL_KEYS = {
+  search: 'q',
+  mode: 'type',
+  legacyProviders: 'providers',
+  openWeightsOnly: 'openWeights',
+};
+
+const DEFAULT_FILTERS = Object.fromEntries(
+  Object.entries(FILTER_PARSERS).map(([key, parser]) => [key, parser.defaultValue])
+);
+
+const VARIANT_STYLES = {
+  docs: {
+    root: 'my-11 w-[min(1380px,calc(100vw-472px))] bg-white dark:bg-black-pure 2xl:w-[calc(100vw-408px)] xl:w-full md:my-8',
+    filters: 'top-[var(--docs-header-height)] bg-white dark:bg-black-pure lg:top-0',
+    table: 'min-w-320!',
+  },
+  landing: {
+    root: 'mt-17.5 w-full bg-black-pure [--docs-header-height:3.75rem] lg:[--docs-header-height:0] md:mt-12',
+    filters: 'top-[var(--docs-header-height)] bg-black-pure',
+    table: 'min-w-330!',
+  },
+};
+
+const compareRows = (a, b, key, direction) => {
+  const directionMultiplier = direction === 'desc' ? -1 : 1;
+
   switch (key) {
     case 'contextWindow':
     case 'costInput':
@@ -49,14 +124,19 @@ const compareRows = (a, b, key) => {
       if (av === undefined && bv === undefined) return 0;
       if (av === undefined) return 1;
       if (bv === undefined) return -1;
-      return av - bv;
+      return (av - bv) * directionMultiplier;
     }
     case 'openWeights':
-      return Number(a.openWeights) - Number(b.openWeights);
-    case 'releaseDate':
-      return (a.releaseDate ?? '').localeCompare(b.releaseDate ?? '');
+      return (Number(a.openWeights) - Number(b.openWeights)) * directionMultiplier;
+    case 'releaseDate': {
+      if (!a.releaseDate && !b.releaseDate) return 0;
+      if (!a.releaseDate) return 1;
+      if (!b.releaseDate) return -1;
+
+      return a.releaseDate.localeCompare(b.releaseDate) * directionMultiplier;
+    }
     default:
-      return String(a[key]).localeCompare(String(b[key]));
+      return String(a[key]).localeCompare(String(b[key])) * directionMultiplier;
   }
 };
 
@@ -77,16 +157,24 @@ SortArrow.propTypes = {
   dir: PropTypes.string.isRequired,
 };
 
-const PROVIDER_ICONS = {
+// Keyed by lab id.
+const ORG_ICONS = {
   alibaba: AlibabaIcon,
   anthropic: AnthropicIcon,
+  baai: BaaiIcon,
+  deepseek: DeepSeekIcon,
   google: GoogleIcon,
-  openai: OpenAIIcon,
   meta: SiMeta,
+  moonshotai: MoonshotIcon,
+  openai: OpenAIIcon,
+  thinkingmachines: ThinkingMachinesIcon,
+  typesafe: TypeSafeIcon,
+  xai: XaiIcon,
+  zhipuai: ZhipuIcon,
 };
 
-const ProviderLogo = ({ provider }) => {
-  const Icon = PROVIDER_ICONS[provider];
+const OrgLogo = ({ id }) => {
+  const Icon = ORG_ICONS[id];
 
   if (!Icon) return null;
 
@@ -97,8 +185,8 @@ const ProviderLogo = ({ provider }) => {
   );
 };
 
-ProviderLogo.propTypes = {
-  provider: PropTypes.string.isRequired,
+OrgLogo.propTypes = {
+  id: PropTypes.string.isRequired,
 };
 
 const CheckMark = () => (
@@ -124,11 +212,13 @@ const ClearIcon = () => (
   </svg>
 );
 
-// Provider filter as a compact multi-select dropdown — stays a single control
-// no matter how many providers the catalog grows to.
-const ProviderMultiSelect = ({ providers, selected, onToggle, onClear }) => {
+// Lab filter as a compact multi-select dropdown — stays a single control
+// no matter how many labs the catalog grows to.
+const LabMultiSelect = ({ labs, selected, onToggle, onClear }) => {
   const [open, setOpen] = useState(false);
   const ref = useRef(null);
+  const buttonRef = useRef(null);
+  const listboxId = useId();
 
   useEffect(() => {
     if (!open) return undefined;
@@ -136,7 +226,10 @@ const ProviderMultiSelect = ({ providers, selected, onToggle, onClear }) => {
       if (ref.current && !ref.current.contains(event.target)) setOpen(false);
     };
     const onKeyDown = (event) => {
-      if (event.key === 'Escape') setOpen(false);
+      if (event.key !== 'Escape') return;
+
+      setOpen(false);
+      buttonRef.current?.focus();
     };
     document.addEventListener('mousedown', onDocMouseDown);
     document.addEventListener('keydown', onKeyDown);
@@ -146,12 +239,20 @@ const ProviderMultiSelect = ({ providers, selected, onToggle, onClear }) => {
     };
   }, [open]);
 
-  const label = selected.size === 0 ? 'All providers' : `Providers (${selected.size})`;
+  const label = selected.size === 0 ? 'All labs' : `Labs (${selected.size})`;
 
   return (
-    <div ref={ref} className="relative">
+    <div
+      ref={ref}
+      className="relative"
+      onBlur={(event) => {
+        if (!event.currentTarget.contains(event.relatedTarget)) setOpen(false);
+      }}
+    >
       <button
+        ref={buttonRef}
         type="button"
+        aria-controls={open ? listboxId : undefined}
         aria-haspopup="listbox"
         aria-expanded={open}
         className={cn(
@@ -181,20 +282,22 @@ const ProviderMultiSelect = ({ providers, selected, onToggle, onClear }) => {
 
       {open && (
         <div
+          id={listboxId}
           role="listbox"
+          aria-label="Model labs"
           aria-multiselectable="true"
           className="absolute left-0 z-20 mt-1 min-w-47.5 border border-gray-new-80 bg-white p-1 shadow-lg dark:border-gray-new-20 dark:bg-gray-new-10"
         >
-          {providers.map((providerId) => {
-            const checked = selected.has(providerId);
+          {labs.map((labId) => {
+            const checked = selected.has(labId);
             return (
               <button
-                key={providerId}
+                key={labId}
                 type="button"
                 role="option"
                 aria-selected={checked}
                 className="flex w-full items-center gap-2 px-2 py-1.5 text-left text-sm text-gray-new-30 transition-colors hover:bg-gray-new-98 dark:text-gray-new-80 dark:hover:bg-gray-new-8"
-                onClick={() => onToggle(providerId)}
+                onClick={() => onToggle(labId)}
               >
                 <span
                   className={cn(
@@ -206,7 +309,7 @@ const ProviderMultiSelect = ({ providers, selected, onToggle, onClear }) => {
                 >
                   {checked && <CheckMark />}
                 </span>
-                {providerLabel(providerId)}
+                {orgLabel(labId)}
               </button>
             );
           })}
@@ -225,8 +328,8 @@ const ProviderMultiSelect = ({ providers, selected, onToggle, onClear }) => {
   );
 };
 
-ProviderMultiSelect.propTypes = {
-  providers: PropTypes.arrayOf(PropTypes.string).isRequired,
+LabMultiSelect.propTypes = {
+  labs: PropTypes.arrayOf(PropTypes.string).isRequired,
   selected: PropTypes.instanceOf(Set).isRequired,
   onToggle: PropTypes.func.isRequired,
   onClear: PropTypes.func.isRequired,
@@ -238,7 +341,7 @@ const CopyableModelId = ({ id }) => {
   return (
     <button
       type="button"
-      className="group/copy inline-flex items-center gap-1.5 rounded text-left transition-colors"
+      className="group/copy inline-flex max-w-full min-w-0 items-center gap-1.5 rounded text-left transition-colors"
       aria-label={isCopied ? 'Copied' : `Copy ${id}`}
       title={isCopied ? 'Copied' : 'Copy model ID'}
       onClick={(event) => {
@@ -246,7 +349,10 @@ const CopyableModelId = ({ id }) => {
         handleCopy(id);
       }}
     >
-      <code className="rounded-sm border border-gray-new-80 bg-gray-new-98 px-1 py-px font-mono text-[.8125rem] leading-none whitespace-nowrap text-gray-new-30 group-hover/copy:text-gray-new-10 dark:border-gray-new-30 dark:bg-black-new dark:text-gray-new-85 dark:group-hover/copy:text-white">
+      <code
+        className="min-w-0 overflow-hidden rounded-sm border border-gray-new-80 bg-gray-new-98 px-1 py-px font-mono text-[.8125rem] leading-none text-ellipsis whitespace-nowrap text-gray-new-30 group-hover/copy:text-gray-new-10 dark:border-gray-new-30 dark:bg-black-new dark:text-gray-new-85 dark:group-hover/copy:text-white"
+        title={id}
+      >
         {id}
       </code>
       {isCopied ? (
@@ -262,68 +368,82 @@ CopyableModelId.propTypes = {
   id: PropTypes.string.isRequired,
 };
 
-const ModelIndexClient = ({ rows }) => {
+const ModelIndexView = ({ rows, variant = 'docs', filters, setFilters }) => {
   const router = useRouter();
   const rootRef = useRef(null);
   const filtersRef = useRef(null);
-  const [mode, setMode] = useState('all');
-  const [search, setSearch] = useState('');
-  const [providerFilter, setProviderFilter] = useState(() => new Set());
-  const [openWeightsOnly, setOpenWeightsOnly] = useState(false);
-  const [sort, setSort] = useState({ key: 'releaseDate', dir: 'desc' });
+  const searchInputRef = useRef(null);
+  const searchId = useId();
   const [filtersHeight, setFiltersHeight] = useState(0);
+  const { search, mode, openWeightsOnly, sort } = filters;
+  const setSearch = (value) => setFilters({ search: value });
+  const setOpenWeightsOnly = (value) => setFilters({ openWeightsOnly: value });
 
-  const providers = useMemo(() => {
-    const present = new Set(rows.map((row) => row.provider));
+  const labs = useMemo(() => {
+    const present = new Set(rows.map((row) => row.lab));
     return [
-      ...PROVIDER_ORDER.filter((p) => present.has(p)),
-      ...[...present].filter((p) => !PROVIDER_ORDER.includes(p)),
+      ...LAB_ORDER.filter((lab) => present.has(lab)),
+      ...[...present].filter((lab) => !LAB_ORDER.includes(lab)),
     ];
   }, [rows]);
+
+  const selectedLabs = filters.labs.length > 0 ? filters.labs : filters.legacyProviders;
+  const labFilter = useMemo(
+    () => new Set(selectedLabs.filter((labId) => labs.includes(labId))),
+    [selectedLabs, labs]
+  );
 
   const visibleRows = useMemo(() => {
     const query = search.trim().toLowerCase();
     let list = rows.filter((row) => {
       if (mode === 'image') return row.isImageCapable;
-      if (mode === 'text') return row.inputs.includes('text');
+      if (mode === 'embeddings') return row.isEmbedding;
+      if (mode === 'decisions') return row.isDecision;
+      if (mode === 'text')
+        return row.inputs.includes('text') && !row.isEmbedding && !row.isDecision;
       return true;
     });
-    if (providerFilter.size > 0) list = list.filter((row) => providerFilter.has(row.provider));
+    if (labFilter.size > 0) list = list.filter((row) => labFilter.has(row.lab));
     if (openWeightsOnly) list = list.filter((row) => row.openWeights);
     if (query) {
       list = list.filter(
         (row) =>
           row.name.toLowerCase().includes(query) ||
           row.id.toLowerCase().includes(query) ||
-          row.providerName.toLowerCase().includes(query)
+          row.labName.toLowerCase().includes(query)
       );
     }
-    const sorted = [...list].sort((a, b) => compareRows(a, b, sort.key));
-    return sort.dir === 'desc' ? sorted.reverse() : sorted;
-  }, [rows, mode, providerFilter, openWeightsOnly, search, sort]);
+    return [...list].sort((a, b) => compareRows(a, b, sort.key, sort.dir));
+  }, [rows, mode, labFilter, openWeightsOnly, search, sort]);
 
   const changeMode = (next) => {
     if (next === mode) return;
-    setMode(next);
+    setFilters({ mode: next });
   };
 
   const onSort = (key) => {
-    setSort((prev) =>
-      prev.key === key ? { key, dir: prev.dir === 'asc' ? 'desc' : 'asc' } : { key, dir: 'asc' }
+    setFilters(
+      sort.key === key
+        ? { sort: { key, dir: sort.dir === 'asc' ? 'desc' : 'asc' } }
+        : { sort: { key, dir: 'asc' } }
     );
   };
 
-  const toggleProvider = (providerId) => {
-    setProviderFilter((prev) => {
-      const next = new Set(prev);
-      if (next.has(providerId)) next.delete(providerId);
-      else next.add(providerId);
-      return next;
-    });
+  const setLabs = (next) => setFilters({ labs: next, legacyProviders: [] });
+
+  const toggleLab = (labId) => {
+    const next = new Set(labFilter);
+    if (next.has(labId)) next.delete(labId);
+    else next.add(labId);
+    setLabs(labs.filter((lab) => next.has(lab)));
   };
 
-  const getModelHref = (modelId) =>
-    `/docs/ai-gateway/models/${encodeURIComponent(modelId)}${mode === 'image' ? '?mode=image' : ''}`;
+  const getModelHref = (modelId) => {
+    const query = mode === 'image' || mode === 'embeddings' ? `?mode=${mode}` : '';
+    return `/docs/ai-gateway/models/${encodeURIComponent(modelId)}${query}`;
+  };
+
+  const variantStyles = VARIANT_STYLES[variant];
 
   useEffect(() => {
     const filters = filtersRef.current;
@@ -340,6 +460,8 @@ const ModelIndexClient = ({ rows }) => {
   }, []);
 
   useEffect(() => {
+    if (variant !== 'docs') return undefined;
+
     const root = rootRef.current;
     const aside = document.querySelector('[data-docs-aside]');
     const stickyContent = aside?.firstElementChild;
@@ -396,29 +518,30 @@ const ModelIndexClient = ({ rows }) => {
       aside.inert = false;
       stickyContent.style.removeProperty('transform');
     };
-  }, []);
+  }, [variant]);
 
   return (
-    <div
-      ref={rootRef}
-      className="not-prose relative z-20 my-11 w-[min(1380px,calc(100vw-472px))] bg-white dark:bg-black-pure 2xl:w-[calc(100vw-408px)] xl:w-full md:my-8"
-    >
+    <div ref={rootRef} className={cn('not-prose relative z-20', variantStyles.root)}>
       <div
         ref={filtersRef}
-        className="sticky top-[var(--docs-header-height)] z-50 mb-0 flex flex-wrap items-center justify-between gap-3 bg-white pt-5 pb-5 dark:bg-black-pure lg:top-0"
+        className={cn(
+          'sticky z-50 mb-0 flex flex-wrap items-center justify-between gap-3 pt-5 pb-5',
+          variantStyles.filters
+        )}
       >
         <div className="flex max-w-full flex-wrap items-center gap-3">
           <div className="relative w-87 max-w-full">
-            <label className="sr-only" htmlFor="ai-gateway-model-search">
+            <label className="sr-only" htmlFor={searchId}>
               Search models
             </label>
             <SearchIcon className="pointer-events-none absolute top-1/2 left-4 size-3.5 -translate-y-1/2 text-gray-new-30 dark:text-gray-new-70" />
             <input
-              id="ai-gateway-model-search"
+              ref={searchInputRef}
+              id={searchId}
               className="h-9 w-full border border-gray-new-80 bg-gray-new-98 pr-10 pl-9 text-[.8125rem] text-black-pure transition-colors outline-none placeholder:text-gray-new-40 hover:border-gray-new-70 focus:border-gray-new-30 dark:border-gray-new-20 dark:bg-black-new dark:text-white dark:placeholder:text-gray-new-60 dark:hover:border-gray-new-30 dark:focus:border-gray-new-60 md:text-base search-cancel:appearance-none"
               type="search"
               value={search}
-              placeholder="Search model, ID, or provider..."
+              placeholder="Search model, ID, or lab..."
               onChange={(event) => setSearch(event.target.value)}
             />
             {search && (
@@ -426,7 +549,10 @@ const ModelIndexClient = ({ rows }) => {
                 type="button"
                 className="absolute top-1/2 right-3 flex size-5 -translate-y-1/2 items-center justify-center text-gray-new-60 transition-colors hover:text-gray-new-40 dark:text-gray-new-70 dark:hover:text-gray-new-80"
                 aria-label="Clear search"
-                onClick={() => setSearch('')}
+                onClick={() => {
+                  setSearch('');
+                  searchInputRef.current?.focus();
+                }}
               >
                 <ClearIcon />
               </button>
@@ -458,11 +584,11 @@ const ModelIndexClient = ({ rows }) => {
         </div>
 
         <div className="flex flex-wrap items-center gap-3">
-          <ProviderMultiSelect
-            providers={providers}
-            selected={providerFilter}
-            onToggle={toggleProvider}
-            onClear={() => setProviderFilter(new Set())}
+          <LabMultiSelect
+            labs={labs}
+            selected={labFilter}
+            onToggle={toggleLab}
+            onClear={() => setLabs([])}
           />
           <label
             className={cn(
@@ -495,7 +621,10 @@ const ModelIndexClient = ({ rows }) => {
       </div>
 
       <StickyTable
-        className="ai-gateway-model-table my-0! w-full min-w-290! table-fixed border-collapse text-[.8125rem]"
+        className={cn(
+          'ai-gateway-model-table my-0! w-full table-fixed border-collapse text-[.8125rem]',
+          variantStyles.table
+        )}
         headerClassName="pointer-events-auto! border-x border-t border-gray-new-80 2xl:px-0! dark:border-gray-new-20"
         headerKey={`${sort.key}:${sort.dir}`}
         interactiveHeader
@@ -503,11 +632,16 @@ const ModelIndexClient = ({ rows }) => {
         stickyTopOffset={filtersHeight}
       >
         <div className="table-wrapper my-0! overflow-x-auto border border-gray-new-80 bg-white dark:border-gray-new-20 dark:bg-black-pure 2xl:mx-0! 2xl:px-0!">
-          <table className="ai-gateway-model-table my-0! w-full min-w-290! table-fixed border-collapse text-[.8125rem]">
+          <table
+            className={cn(
+              'ai-gateway-model-table my-0! w-full table-fixed border-collapse text-[.8125rem]',
+              variantStyles.table
+            )}
+          >
             <colgroup>
-              <col className="w-[19%]" />
-              <col className="w-[21%]" />
-              <col className="w-[10%]" />
+              <col className="w-[18%]" />
+              <col className="w-[20%]" />
+              <col className="w-[12%]" />
               <col className="w-[15%]" />
               <col className="w-[5%]" />
               <col className="w-[8%]" />
@@ -521,12 +655,24 @@ const ModelIndexClient = ({ rows }) => {
                   <th
                     key={column.key}
                     scope="col"
+                    aria-sort={
+                      column.sortable
+                        ? sort.key === column.key
+                          ? sort.dir === 'asc'
+                            ? 'ascending'
+                            : 'descending'
+                          : 'none'
+                        : undefined
+                    }
                     className="px-4! py-3.5! text-left! text-xs font-medium whitespace-nowrap text-gray-new-50 dark:text-gray-new-60"
                   >
                     {column.sortable ? (
                       <button
                         type="button"
                         className="group inline-flex items-center transition-colors hover:text-gray-new-20 dark:hover:text-white"
+                        aria-label={`Sort by ${column.label}${
+                          sort.key === column.key ? `, currently ${sort.dir}ending` : ''
+                        }`}
                         onClick={() => onSort(column.key)}
                       >
                         {column.label}
@@ -563,8 +709,8 @@ const ModelIndexClient = ({ rows }) => {
                     </td>
                     <td className="py-4! pl-4! text-left! text-[.8125rem]! text-gray-new-30 dark:text-gray-new-80">
                       <span className="flex items-center gap-2 whitespace-nowrap">
-                        <ProviderLogo provider={row.provider} />
-                        {row.providerName}
+                        <OrgLogo id={row.lab} />
+                        {row.labName}
                       </span>
                     </td>
                     <td className="py-4! pl-4! text-left! text-[.8125rem]! text-gray-new-40 dark:text-gray-new-60">
@@ -604,15 +750,51 @@ const ModelIndexClient = ({ rows }) => {
       </StickyTable>
 
       <p className="mt-3 text-[.8125rem] text-gray-new-40 dark:text-gray-new-60">
-        Prices are provider list prices per million tokens. Inference is free during the private
-        preview. Click a model for a copy-paste quickstart.
+        {MODEL_CATALOG_NOTE}
+      </p>
+      <p className="sr-only" aria-live="polite">
+        Showing {visibleRows.length} {visibleRows.length === 1 ? 'model' : 'models'}.
       </p>
     </div>
   );
 };
 
-ModelIndexClient.propTypes = {
+const viewPropTypes = {
   rows: PropTypes.arrayOf(PropTypes.object).isRequired,
+  variant: PropTypes.oneOf(['docs', 'landing']),
 };
+
+ModelIndexView.propTypes = {
+  ...viewPropTypes,
+  filters: PropTypes.shape({
+    search: PropTypes.string.isRequired,
+    mode: PropTypes.string.isRequired,
+    labs: PropTypes.arrayOf(PropTypes.string).isRequired,
+    legacyProviders: PropTypes.arrayOf(PropTypes.string).isRequired,
+    openWeightsOnly: PropTypes.bool.isRequired,
+    sort: PropTypes.shape({
+      key: PropTypes.string.isRequired,
+      dir: PropTypes.oneOf(['asc', 'desc']).isRequired,
+    }).isRequired,
+  }).isRequired,
+  setFilters: PropTypes.func.isRequired,
+};
+
+const noop = () => {};
+
+// Static render with default filters, shown until the URL state is available
+// so the table stays in the prerendered HTML.
+export const ModelIndexFallback = (props) => (
+  <ModelIndexView {...props} filters={DEFAULT_FILTERS} setFilters={noop} />
+);
+
+ModelIndexFallback.propTypes = viewPropTypes;
+
+const ModelIndexClient = (props) => {
+  const [filters, setFilters] = useQueryStates(FILTER_PARSERS, { urlKeys: FILTER_URL_KEYS });
+  return <ModelIndexView {...props} filters={filters} setFilters={setFilters} />;
+};
+
+ModelIndexClient.propTypes = viewPropTypes;
 
 export default ModelIndexClient;

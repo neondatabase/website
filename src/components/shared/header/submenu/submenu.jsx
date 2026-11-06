@@ -6,6 +6,7 @@ import MENUS from 'constants/menus.js';
 import { cn } from 'utils/cn';
 
 import MenuBanner from '../menu-banner';
+import MenuFeatureCards from '../menu-feature-cards';
 
 const Submenu = ({
   activeMenuIndex,
@@ -55,9 +56,13 @@ const Submenu = ({
                 className="flex w-full gap-x-40 overflow-hidden pt-7 pb-20 xl:gap-x-8"
                 size="1920"
               >
-                <ul className="flex gap-x-[128px] pl-[195px] xl:gap-x-5 xl:pl-[143px]" role="menu">
-                  {sections.map(({ title, items }, sectionIndex) => (
-                    <li key={sectionIndex} role="none">
+                <ul className="flex gap-x-[128px] pl-[195px] xl:gap-x-14 xl:pl-[143px]" role="menu">
+                  {sections.map(({ title, items, variant }, sectionIndex) => (
+                    <li
+                      key={sectionIndex}
+                      className={cn(variant === 'cards' && 'flex flex-col')}
+                      role="none"
+                    >
                       {title && (
                         <span
                           className="mb-6 block text-[10px] leading-none font-medium tracking-snug text-gray-new-50 uppercase"
@@ -66,33 +71,49 @@ const Submenu = ({
                           {title}
                         </span>
                       )}
-                      <ul
-                        className="flex flex-col gap-y-6"
-                        role="group"
-                        aria-labelledby={
-                          title ? `submenu-${index}-section-${sectionIndex}` : undefined
-                        }
-                      >
-                        {items?.map(({ title, description, to, isExternal }) => (
-                          <li key={title} role="none">
-                            <Link
-                              className={`group ${submenuLinkClassName} -mx-1 -my-3 grid min-w-[224px] gap-y-2 rounded px-1 py-3 text-[13px] leading-tight tracking-snug text-gray-new-40 dark:text-gray-new-60`}
-                              to={to}
-                              isExternal={isExternal}
-                              tagName="Navigation"
-                              tagText={title}
-                              role="menuitem"
-                              tabIndex={isActive ? 0 : -1}
-                              onKeyDown={handleSubmenuNavigation(index)}
-                            >
-                              <span className="text-lg leading-none font-medium text-black-pure transition-colors duration-200 group-hover:text-gray-new-20 dark:text-white dark:group-hover:text-gray-new-80">
-                                {title}
-                              </span>
-                              {description}
-                            </Link>
-                          </li>
-                        ))}
-                      </ul>
+                      {variant === 'cards' ? (
+                        <MenuFeatureCards
+                          className="w-[330px] xl:w-[290px]"
+                          items={items}
+                          withMenuSemantics
+                          ariaLabelledBy={
+                            title ? `submenu-${index}-section-${sectionIndex}` : undefined
+                          }
+                          linkProps={{
+                            className: submenuLinkClassName,
+                            tabIndex: isActive ? 0 : -1,
+                            onKeyDown: handleSubmenuNavigation(index),
+                          }}
+                        />
+                      ) : (
+                        <ul
+                          className="flex flex-col gap-y-6"
+                          role="group"
+                          aria-labelledby={
+                            title ? `submenu-${index}-section-${sectionIndex}` : undefined
+                          }
+                        >
+                          {items?.map(({ title, description, to, isExternal }) => (
+                            <li key={title} role="none">
+                              <Link
+                                className={`group ${submenuLinkClassName} -mx-1 -my-3 grid min-w-[224px] gap-y-2 rounded px-1 py-3 text-[13px] leading-tight tracking-extra-tight text-gray-new-40 dark:text-gray-new-60`}
+                                to={to}
+                                isExternal={isExternal}
+                                tagName="Navigation"
+                                tagText={title}
+                                role="menuitem"
+                                tabIndex={isActive ? 0 : -1}
+                                onKeyDown={handleSubmenuNavigation(index)}
+                              >
+                                <span className="text-lg leading-none font-medium text-black-pure transition-colors duration-200 group-hover:text-gray-new-20 dark:text-white dark:group-hover:text-gray-new-80">
+                                  {title}
+                                </span>
+                                {description}
+                              </Link>
+                            </li>
+                          ))}
+                        </ul>
+                      )}
                     </li>
                   ))}
                 </ul>

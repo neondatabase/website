@@ -176,3 +176,15 @@ export function buildCliCommand(
   if (parts.length <= 2) return `${resolvedBase} ${parts.join(' ')}`;
   return `${resolvedBase} \\\n  ${parts.join(' \\\n  ')}`;
 }
+
+// Presentation order for endpoints across every surface that lists them: the
+// sidebar, the searchable endpoint index, per-tag pages, and the llms/markdown
+// listings. Deprecated ops sink to the bottom; everything else sorts by its
+// human-facing title (summary) A->Z. Single source of truth, imported by
+// scripts/generate-api-ref.mjs, src/utils/api-ref-server.js, and the API
+// reference page route so the surfaces can't drift.
+export function compareOpsForDisplay(a, b) {
+  const dep = (a.deprecated ? 1 : 0) - (b.deprecated ? 1 : 0);
+  if (dep !== 0) return dep;
+  return (a.summary ?? '').localeCompare(b.summary ?? '', 'en');
+}

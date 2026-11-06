@@ -1,15 +1,15 @@
 ---
-title: Building a Job Queue System with Node.js, Bull, and Lakebase Postgres
-subtitle: Learn how to implement a job queue system to handle background tasks efficiently using Node.js, Bull, and Lakebase Postgres
+title: Build a job queue system with Node.js, Bull, and Lakebase Postgres
+subtitle: Learn how to implement a job queue system to handle background tasks using Node.js, Bull, and Lakebase Postgres
 author: bobbyiliev
 enableTableOfContents: true
 createdAt: '2025-03-16T00:00:00.000Z'
-updatedOn: '2026-07-31T19:05:29.503Z'
+updatedOn: '2026-09-24T17:56:34.189Z'
 ---
 
-Job queues are essential components in modern applications. Queues enable you to handle resource-intensive or time-consuming tasks asynchronously. This approach improves application responsiveness by moving heavy processing out of the request-response cycle.
+Job queues let you handle resource-intensive or time-consuming tasks asynchronously. Moving heavy processing out of the request-response cycle keeps your application responsive.
 
-In this guide, we'll walk through building a job queue system using Node.js, Bull (a Redis-backed queue library), and Lakebase Postgres to process jobs efficiently at scale.
+In this guide, we'll walk through building a job queue system using Node.js, Bull (a Redis-backed queue library), and Lakebase Postgres to track job status and results.
 
 ## Prerequisites
 
@@ -18,9 +18,9 @@ To follow the steps in this guide, you will need the following:
 - [Node.js 18](https://nodejs.org/en) or later
 - A [Neon](https://console.neon.tech/signup) account
 - [Redis](https://redis.io/download) installed locally
-- Basic understanding of JavaScript and PostgreSQL
+- Basic understanding of JavaScript and Postgres
 
-## Understanding Job Queues
+## Understanding job queues
 
 Job queues allow applications to offload time-consuming tasks to be processed in the background. Some common use cases include:
 
@@ -38,19 +38,19 @@ Here's how our architecture will work:
 4. Job statuses and results are stored in Lakebase Postgres
 5. The application can check job status and retrieve results
 
-This separation improves system performance, reliability, and scalability. It also allows for better error handling, retry logic, monitoring and even user experience as the application can respond quickly to user requests regardless of the job processing time.
+Separating the work this way gives you a place for error handling, retry logic, and monitoring, and the application can respond to user requests quickly regardless of how long a job takes.
 
 ## Create a Neon project
 
-First, let's set up a new Lakebase Postgres database to store our job metadata.
+First, let's set up a new database on Neon to store our job metadata.
 
 1. Navigate to the [Neon Console](https://console.neon.tech/app/projects) and create a new project.
 
 2. Choose a name for your project, for example "job-queue-system".
 
-3. After creating the project, you'll see the connection details. Save the connection string, you'll need it to connect to your database.
+3. After creating the project, you'll see the connection details. Save the connection string. You'll need it to connect to your database.
 
-4. Using the SQL Editor in the Neon Console or your preferred PostgreSQL client, create the tables for our job queue system:
+4. Using the SQL Editor in the Neon Console or your preferred Postgres client, create the tables for our job queue system:
 
 ```sql
 CREATE TABLE jobs (
@@ -108,7 +108,7 @@ npm install bull pg dotenv express
 These packages provide:
 
 - `bull`: Queue management with Redis
-- `pg`: PostgreSQL client for Node.js
+- `pg`: Postgres client for Node.js
 - `dotenv`: Environment variable management
 - `express`: Web framework to create a simple API for our example
 
@@ -129,7 +129,7 @@ Replace the `DATABASE_URL` with your Neon connection string.
 
 ## Integrate Bull for job processing
 
-Bull is a Node.js library that implements a fast queue system based on Redis.
+Bull is a Node.js library that implements a queue system based on Redis.
 
 If you don't have Redis installed, you can run it using Docker:
 
@@ -161,7 +161,7 @@ module.exports = {
 };
 ```
 
-What the queues represent in this context is a way to group similar jobs together. This file creates three different queues for different types of jobs. In a production application, you might have many more queues for various tasks.
+Each queue groups similar jobs together. This file creates three different queues for different types of jobs. In a production application, you might have many more queues for various tasks.
 
 Now, let's create a utility to add jobs to these queues. Create a file named `src/utils/queueHelper.js`:
 
@@ -253,8 +253,8 @@ module.exports = {
 
 This helper file provides two main functions:
 
-1. `addJob`: Adds a job to a Bull queue and records it in our Lakebase Postgres database
-2. `updateJobStatus`: Updates a job's status in the Lakebase Postgres as it progresses through the queue
+1. `addJob`: Adds a job to a Bull queue and records it in the `jobs` table
+2. `updateJobStatus`: Updates a job's status in the `jobs` table as it progresses through the queue
 
 ## Create the job processor
 
@@ -476,9 +476,9 @@ Each processor function follows a similar pattern:
 
 The core logic of each processor is kept separate from the job queue management, which allows for easier testing, maintenance, and reuse.
 
-## Implement PostgreSQL job tracking
+## Implement Postgres job tracking
 
-With the processors in place, let's create a module to retrieve job information from PostgreSQL. Create a file named `src/utils/jobsRepository.js`:
+With the processors in place, let's create a module to retrieve job information from Postgres. Create a file named `src/utils/jobsRepository.js`:
 
 ```javascript
 // src/utils/jobsRepository.js
@@ -552,7 +552,7 @@ These functions will be used by the API to provide job status and statistics to 
 
 ## Build retry and error handling
 
-Bull provides built-in retry capabilities. Let's set up our worker with proper retry and error handling. Create a file named `src/worker.js`:
+Bull provides built-in retry capabilities. Let's set up our worker with retry and error handling. Create a file named `src/worker.js`:
 
 ```javascript
 // src/worker.js
@@ -796,7 +796,7 @@ This API provides endpoints to:
 3. List jobs by status or queue
 4. Get job statistics
 
-We will later add a Bull Board dashboard to monitor the job queues in real-time and use these endpoints to test our job queue system.
+We will later add a Bull Board dashboard to monitor the job queues in real time and use these endpoints to test our job queue system.
 
 ## Create the main entry point
 
@@ -856,7 +856,7 @@ npm run start:worker
 
 ## Monitor your job queue
 
-To monitor your job queue in real-time, you can use Bull UI tools like [Bull Board](https://github.com/felixmosh/bull-board).
+To monitor your job queue in real time, you can use Bull UI tools like [Bull Board](https://github.com/felixmosh/bull-board).
 
 Install Bull Board:
 
@@ -890,9 +890,9 @@ app.use('/admin/queues', serverAdapter.getRouter());
 
 Now you can access the Bull Board dashboard at `http://localhost:3000/admin/queues`.
 
-## Testing Your Job Queue System
+## Testing your job queue system
 
-Now that you've set up your job queue system, let's test it to ensure everything works correctly. We'll create several test jobs, monitor their progress, and examine the results.
+Now that you've set up your job queue system, let's test it. We'll create several test jobs, monitor their progress, and examine the results.
 
 First, make sure your system is running with both the API server and worker process:
 
@@ -902,7 +902,7 @@ npm start
 
 Using a tool like cURL or Postman, you can send requests to your API to create new jobs:
 
-### 1. Create an Email Job
+### 1. Create an email job
 
 ```bash
 curl -X POST http://localhost:3000/jobs/email \
@@ -923,7 +923,7 @@ You should receive a response like:
 }
 ```
 
-### 2. Create an Image Processing Job
+### 2. Create an image processing job
 
 ```bash
 curl -X POST http://localhost:3000/jobs/image \
@@ -937,7 +937,7 @@ curl -X POST http://localhost:3000/jobs/image \
   }'
 ```
 
-### 3. Create a Data Export Job
+### 3. Create a data export job
 
 ```bash
 curl -X POST http://localhost:3000/jobs/export \
@@ -948,11 +948,11 @@ curl -X POST http://localhost:3000/jobs/export \
   }'
 ```
 
-### Monitor Job Progress
+### Monitor job progress
 
 After creating the jobs, you can monitor their progress in several ways:
 
-#### Check Job Status via API
+#### Check job status via API
 
 Use the job ID returned when you created the job to check its status:
 
@@ -983,7 +983,7 @@ You should see the job details, including its current status (pending, active, c
 }
 ```
 
-#### View Jobs by Status
+#### View jobs by status
 
 To see all jobs with a specific status:
 
@@ -993,7 +993,7 @@ curl http://localhost:3000/jobs/status/completed
 
 This will return a list of all completed jobs. You can also check for "pending", "active", or "failed" jobs.
 
-#### Check Queue Statistics
+#### Check queue statistics
 
 To see statistics about all your queues:
 
@@ -1011,13 +1011,13 @@ This will show you a breakdown of job counts by queue and status:
 ]
 ```
 
-### Bull Board Dashboard
+### Bull Board dashboard
 
 If you've set up Bull Board as described earlier, you can visit `http://localhost:3000/admin/queues` in your browser to see a visual dashboard of all your queues and jobs. This dashboard provides a real-time view of your queues, including active, waiting, and completed jobs.
 
-## Verifying Database Records
+## Verifying database records
 
-To check that the job information is being correctly stored in your Lakebase Postgres database, you can use the Neon SQL Editor or any PostgreSQL client to run queries:
+To check that job information is being stored in your database, use the Neon SQL Editor or any Postgres client to run queries:
 
 ```sql
 SELECT * FROM jobs;
@@ -1039,17 +1039,15 @@ This query will show you the processing time for each completed job in seconds.
 
 ## Conclusion
 
-In this guide, you've built a job queue system using Node.js, Bull, and Lakebase Postgres. This system can handle different types of background tasks, retry failed jobs, and track job status and results in a PostgreSQL database.
-
-The combination of Bull's queue management backed by Redis and Neon's serverless Postgres for persistent job tracking provides a scalable and reliable solution for background processing. It is a great foundation for building more complex job processing systems in your applications.
+You've built a job queue system with Node.js, Bull, and Lakebase Postgres that handles different types of background tasks, retries failed jobs, and tracks job status and results in Postgres.
 
 You can extend this system by adding more specialized queues, extending the monitoring, implementing user notifications, or integrating with other services in your architecture.
 
 ## Additional resources
 
-- [Bull Documentation](https://github.com/OptimalBits/bull/blob/master/REFERENCE.md)
-- [Neon Documentation](/docs)
-- [Node.js PostgreSQL Client (pg)](https://node-postgres.com/)
-- [Redis Documentation](https://redis.io/documentation)
+- [Bull documentation](https://github.com/OptimalBits/bull/blob/master/REFERENCE.md)
+- [Neon documentation](/docs)
+- [Node.js Postgres client (pg)](https://node-postgres.com/)
+- [Redis documentation](https://redis.io/documentation)
 
 <NeedHelp />

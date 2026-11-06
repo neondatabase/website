@@ -16,7 +16,7 @@ const STARTUP = {
 
 const OPENSOURCE = {
   title: 'Apply for the Open Source Program',
-  description: 'Get credits and visibility for open source that helps developers build on Neon',
+  description: 'Get sponsorship for the open source you maintain',
   placeholder: 'Website URL',
   buttonText: 'Apply',
   eventName: 'Open Source Program Application Submitted',

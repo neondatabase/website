@@ -4,4 +4,6 @@ Common uses include testing sign-up and login flows in preview environments, run
 
 These endpoints manage Neon Auth at the branch level: enabling auth, rotating keys, and inspecting configuration. For a full walkthrough of the management API, see [Manage Neon Auth via the API](/docs/auth/guides/manage-auth-api).
 
+You can also manage Neon Auth from the CLI with [`neon neon-auth`](/docs/cli/neon-auth).
+
 For integrating authentication into an application, use the Neon Auth SDKs. See [Neon Auth](/docs/auth/overview) to get started.

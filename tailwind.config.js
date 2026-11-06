@@ -209,9 +209,6 @@ module.exports = {
           'linear-gradient(100deg, rgba(33, 39, 58, 0.80) -6.09%, rgba(24, 25, 27, 0.80) 27.66%)',
         'azure-form-input-3':
           'linear-gradient(276deg, rgba(32, 48, 55, 0.80) 2.61%, rgba(24, 25, 27, 0.80) 32.96%)',
-        'serverless-apps-hero-border':
-          'linear-gradient(27deg, transparent 76%, #1B9A86 90%, #5AADBB),' +
-          'linear-gradient(0deg, rgba(255, 255, 255, 0.10), rgba(255, 255, 255, 0.10))',
         'security-card-bg':
           'radial-gradient(111.21% 103.81% at 1.9% 0%, rgba(19, 20, 21, 0.60) 0%, rgba(19, 20, 21, 0.00) 100%),' +
           'linear-gradient(0deg, #0C0C0D, #0C0C0D)',

@@ -1,10 +1,12 @@
 'use client';
 
+/* eslint-disable @next/next/no-img-element */
 import Image from 'next/image';
 import PropTypes from 'prop-types';
 import React from 'react';
 
 import Link from 'components/shared/link/link';
+import ICONS_CONFIG from 'config/docs-icons-config';
 import СhevronIcon from 'icons/arrow-label.inline.svg';
 import { cn } from 'utils/cn';
 
@@ -89,6 +91,7 @@ import Wallet from './images/wallet.inline.svg';
 import Warning from './images/warning.inline.svg';
 import Wrench from './images/wrench.inline.svg';
 import X from './images/x.inline.svg';
+import Zap from './images/zap.inline.svg';
 
 const icons = {
   'a-chart': AChart,
@@ -168,6 +171,7 @@ const icons = {
   warning: Warning,
   wrench: Wrench,
   x: X,
+  zap: Zap,
 };
 
 // const monochromeIcons = ['github'];
@@ -216,6 +220,7 @@ const DetailIconCards = ({
   forceGreenIcon = false,
   cols = 2,
   theme = 'green-dotted',
+  appearance = 'default',
 }) => {
   const ListComponent = withNumbers ? 'ol' : 'ul';
   const isFlatGroupTheme = theme !== 'green-dotted';
@@ -241,11 +246,23 @@ const DetailIconCards = ({
           description,
           icon,
           target,
+          lockup,
           tag,
           tagTheme = 'gray',
           theme: childTheme,
         } = child.props ?? {};
+        // The local monochrome map wins, so no existing icon name changes
+        // behaviour. A name it does not hold falls back to the shared logo
+        // config, the same source `TechCards` and `CompactCards` read.
         const Icon = icons[icon];
+        const logoIconConfig = Icon ? null : ICONS_CONFIG[icon];
+
+        // Mirrors the `CompactCards` guard: an unknown name warns and drops the
+        // card instead of reaching the render as an undefined element type.
+        if (!withNumbers && !Icon && !logoIconConfig) {
+          console.warn(`Icon "${icon}" not found in ICONS_CONFIG`);
+          return null;
+        }
 
         const cardThemeName = childTheme || (tag && isFlatGroupTheme ? 'grey' : theme);
         const isGhost = !withNumbers && !!tag && cardThemeName === 'green-dotted';
@@ -253,12 +270,24 @@ const DetailIconCards = ({
           ? GHOST_CARD_THEME
           : CARD_THEMES[cardThemeName] || CARD_THEMES['green-dotted'];
 
+        // Lockup variant: the docs home (`appearance="home"`) is the only user of
+        // `lockup`, so it is ignored elsewhere. Every class below is gated on
+        // this flag, so cards without a lockup render exactly as before.
+        const isLockup = appearance === 'home' && !withNumbers && !!lockup && !!Icon;
+
         return (
-          <li className="m-0! flex min-h-[169px] pl-0! before:hidden" key={index}>
+          <li
+            className={cn(
+              'm-0! flex min-h-[169px] pl-0! before:hidden',
+              isLockup && 'min-h-[161px]'
+            )}
+            key={index}
+          >
             <Link
               className={cn(
                 'relative flex w-full flex-col p-5 transition-colors duration-200',
-                cols === 3 && 'p-4 md:p-5',
+                cols === 3 && appearance !== 'home' && 'p-4 md:p-5',
+                appearance === 'home' && (isLockup ? 'p-[15px]' : 'min-h-[173.75px] p-4'),
                 withNumbers &&
                   'bg-[#479A79] text-white hover:bg-[#2F7B5D] dark:bg-[#2F7B5D] dark:hover:bg-[#479A79]',
                 !withNumbers && cardTheme.card
@@ -295,20 +324,73 @@ const DetailIconCards = ({
                   <СhevronIcon className="block h-3.5 w-3 flex-none text-[#FF3621]" />
                   Step {index + 1}
                 </span>
-              ) : (
+              ) : isLockup ? (
+                // Optional product lockup: the icon plus a product name on one
+                // line, in the slot the icon alone otherwise occupies. The
+                // icons are drawn on a 16px grid; keep their stroke at 1.5px
+                // while displaying the product lockup at 24px.
+                <span className="mb-0 flex shrink-0 items-center gap-2.5 text-green-44 dark:text-green-52">
+                  <Icon
+                    className={cn(
+                      'size-6 shrink-0 [&_*]:[stroke-width:1.5] [&_*]:[stroke-linecap:round] [&_*]:[stroke-linejoin:round] [&_*]:[vector-effect:non-scaling-stroke]',
+                      forceGreenIcon && 'text-green-44 dark:text-green-44'
+                    )}
+                  />
+                  <span className="font-mono text-xs leading-snug font-medium tracking-normal uppercase">
+                    {lockup}
+                  </span>
+                </span>
+              ) : Icon ? (
                 <Icon
                   className={cn(
                     'mb-8 size-7',
                     cardTheme.icon,
-                    forceGreenIcon && 'mb-8 size-7 text-green-44 dark:text-green-44'
+                    forceGreenIcon && 'mb-8 size-7 text-green-44 dark:text-green-44',
+                    appearance === 'home' && 'mb-9 size-6 shrink-0 text-green-44 dark:text-green-52'
                   )}
                 />
+              ) : (
+                <span className="mb-8 flex h-7 items-center">
+                  <img
+                    className={cn(
+                      'h-7 w-auto shrink-0',
+                      logoIconConfig.darkIconPath && 'dark:hidden'
+                    )}
+                    src={logoIconConfig.lightIconPath}
+                    width={28}
+                    height={28}
+                    alt={`${icon} logo`}
+                    loading={index > 3 ? 'lazy' : 'eager'}
+                  />
+                  {logoIconConfig.darkIconPath && (
+                    <img
+                      className="hidden h-7 w-auto shrink-0 dark:block"
+                      src={logoIconConfig.darkIconPath}
+                      width={28}
+                      height={28}
+                      alt={`${icon} logo`}
+                      loading={index > 3 ? 'lazy' : 'eager'}
+                    />
+                  )}
+                </span>
               )}
-              <div className="flex flex-col gap-1.5">
+              <div
+                className={cn(
+                  'flex flex-col gap-1.5',
+                  // Home cards pin the text to the bottom, whatever their order.
+                  appearance === 'home' && 'mt-auto'
+                )}
+              >
                 <h3
                   className={cn(
-                    'text-lg leading-snug font-medium tracking-extra-tight',
-                    !withNumbers && cardTheme.title
+                    'font-sans text-lg leading-snug font-medium',
+                    !withNumbers && cardTheme.title,
+                    appearance === 'home'
+                      ? cn(
+                          'text-lg leading-[25px] font-medium',
+                          isLockup ? 'tracking-[-0.02em]' : 'tracking-[-0.04em]'
+                        )
+                      : 'tracking-extra-tight'
                   )}
                 >
                   {children}
@@ -316,8 +398,12 @@ const DetailIconCards = ({
                 <p
                   className={cn(
                     'text-base leading-snug tracking-extra-tight',
-                    cols === 3 && 'text-[0.9375rem] md:text-base/snug',
-                    !withNumbers && cardTheme.description
+                    cols === 3 && appearance !== 'home' && 'text-[0.9375rem] md:text-base/snug',
+                    !withNumbers && cardTheme.description,
+                    appearance === 'home' &&
+                      (isLockup
+                        ? 'min-h-[42px] text-[15px] leading-[21px] text-gray-new-45 dark:text-gray-new-60'
+                        : 'min-h-[45px] text-[15px] leading-[22.5px] text-gray-new-30 dark:text-gray-new-60')
                   )}
                 >
                   {description}
@@ -340,6 +426,7 @@ DetailIconCards.propTypes = {
   cols: PropTypes.oneOf([2, 3, 4]),
   theme: PropTypes.oneOf(['green-flat', 'grey', 'green-dotted']),
   highlightIndex: PropTypes.number,
+  appearance: PropTypes.oneOf(['default', 'home']),
 };
 
 export default DetailIconCards;

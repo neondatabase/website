@@ -1,3 +1,7 @@
+import BACKEND_PRICING from 'constants/backend-pricing';
+
+const { objectStorage, functions } = BACKEND_PRICING;
+
 export default {
   headings: {
     feature: '',
@@ -99,7 +103,7 @@ export default {
         title: 'Database storage',
         subtitle: 'Root and child branches',
       },
-      free: 'Free<span>0.5 GB per Project</span>',
+      free: 'Free<span>1 GB per Project</span>',
       launch: '$0.35 per GB-month',
       scale: '$0.35 per GB-month',
     },
@@ -152,41 +156,94 @@ export default {
       feature: {
         title: 'Managed Better Auth',
       },
-      free: 'Up to 60k MAUs',
+      free: 'Up to 60k MAUs per project',
       launch:
-        "Up to 1M MAUs <span>If you're planning to go beyond that, <a href='/contact-sales'>contact us</a></span>",
+        "Up to 1M MAUs per project <span>If you're planning to go beyond that, <a href='/contact-sales'>contact us</a></span>",
       scale:
-        "Up to 1M MAUs <span>If you're planning to go beyond that, <a href='/contact-sales'>contact us</a></span>",
+        "Up to 1M MAUs per project <span>If you're planning to go beyond that, <a href='/contact-sales'>contact us</a></span>",
     },
     {
       rows: '2',
       feature: {
         title: 'Object Storage',
-        tag: { label: 'Beta', theme: 'orange-muted' },
+        subtitle: 'Stored volume',
       },
-      free: 'No charges applied during beta, with usage limits',
-      launch: 'No charges applied during beta, with usage limits',
-      scale: 'No charges applied during beta, with usage limits',
+      free: `${objectStorage.freeAllowanceGb} GB included`,
+      launch: `$${objectStorage.storageRatePerGbMonth} per GB-month`,
+      scale: `$${objectStorage.storageRatePerGbMonth} per GB-month`,
     },
     {
-      rows: '2',
+      fluid: true,
       feature: {
         title: 'Functions',
-        tag: { label: 'Beta', theme: 'orange-muted' },
+        subtitle: 'Compute and invocations',
       },
-      free: 'No charges applied during beta, with usage limits',
-      launch: 'No charges applied during beta, with usage limits',
-      scale: 'No charges applied during beta, with usage limits',
+      free: {
+        sections: [
+          {
+            title: 'Compute',
+            details: [
+              `${functions.free.activeCapacityHours} active capacity-hours per project`,
+              `${functions.free.waitingCapacityHours} waiting capacity-hours per project`,
+            ],
+          },
+          {
+            title: 'Invocations',
+            details: [`${functions.free.invocations} invocations per project`],
+          },
+        ],
+      },
+      launch: {
+        sections: [
+          {
+            title: 'Compute',
+            details: [
+              `$${functions.launch.activeCapacityHourRate} per active capacity-hour`,
+              `$${functions.launch.waitingCapacityHourRate} per waiting capacity-hour`,
+            ],
+          },
+          {
+            title: 'Invocations',
+            details: [`$${functions.launch.invocationRatePerMillion} per 1M invocations`],
+          },
+        ],
+      },
+      scale: {
+        sections: [
+          {
+            title: 'Compute',
+            details: [
+              `$${functions.scale.activeCapacityHourRate} per active capacity-hour`,
+              `$${functions.scale.waitingCapacityHourRate} per waiting capacity-hour`,
+            ],
+          },
+          {
+            title: 'Invocations',
+            details: [`$${functions.scale.invocationRatePerMillion} per 1M invocations`],
+          },
+        ],
+      },
     },
     {
       rows: '2',
       feature: {
         title: 'AI Gateway',
-        tag: { label: 'Beta', theme: 'orange-muted' },
       },
-      free: false,
-      launch: 'No charges applied during beta. <span>Pricing will match model provider</span>',
-      scale: 'No charges applied during beta. <span>Pricing will match model provider</span>',
+      free: "<a href='/docs/ai-gateway/overview#available-models'>List prices here</a><span>Prepaid credits, card required</span>",
+      launch:
+        "<a href='/docs/ai-gateway/overview#available-models'>List prices here</a><span>Prepaid credits</span>",
+      scale:
+        "<a href='/docs/ai-gateway/overview#available-models'>List prices here</a><span>Prepaid credits</span>",
+    },
+    {
+      rows: '2',
+      feature: {
+        title: 'Realtime',
+        subtitle: 'Beta',
+      },
+      free: 'Free during beta',
+      launch: 'Free during beta<span>Compute and egress billed as usual</span>',
+      scale: 'Free during beta<span>Compute and egress billed as usual</span>',
     },
     {
       rows: '1',
@@ -217,7 +274,7 @@ export default {
         title: 'Public network transfer',
         subtitle: 'Egress',
       },
-      free: '5 GB included',
+      free: '5 GB per project included',
       launch: '500 GB per project included<span>then $0.10/GB</span>',
       scale: '500 GB per project included<span>then $0.10/GB</span>',
     },

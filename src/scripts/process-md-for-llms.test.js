@@ -1,9 +1,15 @@
 import fs from 'fs/promises';
+import os from 'os';
+import path from 'path';
 
+import matter from 'gray-matter';
 import { describe, it, expect, vi } from 'vitest';
+
+import { AGENT_SKILLS_NOTE } from '../constants/agent-directives.js';
 
 import {
   processFile,
+  generateRouteIndex,
   buildNavigationMap,
   buildNavigationFooter,
   buildPageHeader,
@@ -67,7 +73,7 @@ describe('MDX to Markdown Conversion', () => {
 
       // FeatureBeta should be replaced with its content (an Admonition)
       expect(result).toContain('**Note:**');
-      expect(result).toContain('This feature is in Beta');
+      expect(result).toContain('This feature is in beta');
       expect(result).not.toContain('<FeatureBeta');
     });
 
@@ -117,8 +123,9 @@ describe('MDX to Markdown Conversion', () => {
     });
 
     it('should render both AI Gateway model groups with links to accurate quickstarts', async () => {
-      const inputPath = 'content/docs/ai-gateway/models.md';
-      const pageUrl = 'https://neon.com/docs/ai-gateway/models';
+      // The interactive catalog lives on the AI Gateway landing page (overview).
+      const inputPath = 'content/docs/ai-gateway/overview.md';
+      const pageUrl = 'https://neon.com/docs/ai-gateway/overview';
       const projectRoot = process.cwd();
 
       const { content: result } = await processFile(inputPath, pageUrl, projectRoot);
@@ -172,6 +179,33 @@ Be careful with this setting.
       expect(result).not.toContain('<Admonition');
     });
 
+    it('should inline the StatBlock value into its sentence', async () => {
+      const result = await processInlineMdx(`
+<StatBlock value="59%">of companies experienced a critical production failure.</StatBlock>
+`);
+      expect(result).toContain('**59%** of companies experienced a critical production failure.');
+      expect(result).not.toContain('<StatBlock');
+    });
+
+    it('should keep StatBlock children when the value prop is missing', async () => {
+      const result = await processInlineMdx(`
+<StatBlock>of companies experienced a critical production failure.</StatBlock>
+`);
+      expect(result).toContain('of companies experienced a critical production failure.');
+      expect(result).not.toContain('<StatBlock');
+    });
+
+    it('should drop image render flags from the markdown mirror', async () => {
+      const result = await processInlineMdx(`
+![A restored branch](/use-cases/large-databases/restore-branch-diagram.svg 'square priority')
+
+![A real caption survives](/use-cases/large-databases/lakebase-architecture.jpg 'Lakebase architecture')
+`);
+      expect(result).not.toContain('square priority');
+      expect(result).toContain('restore-branch-diagram.svg)');
+      expect(result).toContain('"Lakebase architecture"');
+    });
+
     it('should convert DetailIconCards to bullet list with descriptions', async () => {
       const result = await processInlineMdx(`
 <DetailIconCards>
@@ -203,6 +237,21 @@ More content.
       expect(result).not.toContain('NeedHelp');
     });
 
+    it('should convert AgentPrompt like CopyPrompt (clean View prompt link)', async () => {
+      const result = await processInlineMdx(`
+Some content here.
+
+<AgentPrompt src="/prompts/test.md" title="Set up with your agent" buttonText="Copy prompt" />
+
+More content.
+`);
+      expect(result).toContain('Some content here.');
+      expect(result).toContain('More content.');
+      expect(result).toContain('[View prompt](https://neon.com/prompts/test.md)');
+      expect(result).not.toContain('<AgentPrompt');
+      expect(result).not.toContain('[AgentPrompt]');
+    });
+
     it('should preserve details/summary as HTML', async () => {
       const result = await processInlineMdx(`
 <details>
@@ -232,6 +281,22 @@ Hidden content here.
         '- [Django](https://neon.com/docs/guides/django): Connect a Django application to Neon'
       );
       expect(result).not.toContain('<TechCards');
+    });
+
+    it('should convert DemoCards to a list of demos with links', async () => {
+      const result = await processInlineMdx(`
+<DemoCards>
+<DemoCard title="1 Million Boxes" description="A multiplayer game." stack="Postgres, Realtime" demo="https://one-million-boxes.vercel.app" github="https://github.com/samwillis/one-million-boxes" image="/docs/realtime/examples/one-million-boxes.png" />
+<DemoCard title="Image jobs" description="Live image processing." github="https://github.com/msfstef/neon-realtime-image-jobs" />
+</DemoCards>
+`);
+      expect(result).toContain(
+        '- **1 Million Boxes**: A multiplayer game. Uses Postgres, Realtime. [Live demo](https://one-million-boxes.vercel.app) · [GitHub](https://github.com/samwillis/one-million-boxes)'
+      );
+      expect(result).toContain(
+        '- **Image jobs**: Live image processing. [GitHub](https://github.com/msfstef/neon-realtime-image-jobs)'
+      );
+      expect(result).not.toContain('<DemoCard');
     });
 
     it('should extract InfoBlock children', async () => {
@@ -645,6 +710,61 @@ See [CONN_MAX_AGE](https://example.com).
     });
   });
 
+  // Non-breaking spaces are web typography and should not reach agents
+  describe('Non-breaking spaces', () => {
+    const NBSP = '\u00A0';
+
+    async function processInlineMdx(mdxContent, frontmatter = 'title: Test') {
+      const tempPath = '/tmp/test-nbsp-conversion.md';
+      await fs.writeFile(tempPath, `---\n${frontmatter}\n---\n${mdxContent}`);
+      return (await processFile(tempPath)).content;
+    }
+
+    it('should convert the &nbsp; entity to a regular space', async () => {
+      const result = await processInlineMdx(`
+Share your feedback via the&nbsp;[Neon&nbsp;Console](https://example.com).
+`);
+      expect(result).toContain('via the [Neon Console](https://example.com)');
+      expect(result).not.toContain('&nbsp;');
+      expect(result).not.toContain(NBSP);
+    });
+
+    it('should preserve a literal &nbsp; inside a code fence', async () => {
+      const result = await processInlineMdx(`
+\`\`\`jsx
+<h1>Community Message Board&nbsp;</h1>
+\`\`\`
+`);
+      expect(result).toContain('<h1>Community Message Board&nbsp;</h1>');
+      expect(result).not.toContain(NBSP);
+    });
+
+    it('should preserve a literal &nbsp; inside a code span', async () => {
+      const result = await processInlineMdx(`
+Use \`&nbsp;\` to stop the wrap.
+`);
+      expect(result).toContain('`&nbsp;`');
+      expect(result).not.toContain(NBSP);
+    });
+
+    it('should convert a literal U+00A0 character to a regular space', async () => {
+      const result = await processInlineMdx(`
+Built for apps${NBSP}and${NBSP}agents.
+`);
+      expect(result).toContain('Built for apps and agents.');
+      expect(result).not.toContain(NBSP);
+    });
+
+    it('should convert non-breaking spaces in the subtitle', async () => {
+      const result = await processInlineMdx(
+        'Body text.',
+        `title: Test\nsubtitle: 'Realtime live SQL for apps${NBSP}and${NBSP}agents.'`
+      );
+      expect(result).toContain('Realtime live SQL for apps and agents.');
+      expect(result).not.toContain(NBSP);
+    });
+  });
+
   // Test index pointer
   describe('Index pointer', () => {
     it('should not include index pointer in processFile output (moved to page header)', async () => {
@@ -794,16 +914,16 @@ See [CONN_MAX_AGE](https://example.com).
       const rootDir = process.cwd();
       const navMap = buildNavigationMap(rootDir);
 
-      // extensions/pgvector appears in both AI section and Extensions section;
-      // should prefer Extensions (siblings share extensions/ prefix)
+      // extensions/pgvector appears in both AI section and Postgres extensions section;
+      // should prefer Postgres extensions (siblings share extensions/ prefix)
       const pgvectorEntry = navMap.get('extensions/pgvector');
       expect(pgvectorEntry).toBeDefined();
       expect(pgvectorEntry.breadcrumbs).not.toContain('AI App Starter Kit');
-      expect(pgvectorEntry.sectionName).toBe('Extensions');
+      expect(pgvectorEntry.sectionName).toBe('Postgres extensions');
 
-      // auth/overview appears in "Start with Neon" and the Auth section;
+      // auth/about appears in "Start with Neon" and the Auth section;
       // should prefer Auth section (siblings share auth/ prefix)
-      const authEntry = navMap.get('auth/overview');
+      const authEntry = navMap.get('auth/about');
       expect(authEntry).toBeDefined();
       expect(authEntry.breadcrumbs).not.toContain('Start with Neon');
       expect(authEntry.breadcrumbs).toContain('Auth');
@@ -821,7 +941,7 @@ See [CONN_MAX_AGE](https://example.com).
 
       expect(stripped.trim()).toBe(content);
       expect(stripped).not.toContain('Note for AI assistants');
-      expect(stripped).not.toContain('/api/docs-feedback');
+      expect(stripped).not.toContain('feedback.neon.tech');
     });
 
     it('should strip related docs and feedback footers together', () => {
@@ -847,6 +967,9 @@ See [CONN_MAX_AGE](https://example.com).
   });
 
   describe('Page header', () => {
+    const INDEX_LINE = '> Full Neon documentation index: https://neon.com/docs/llms.txt\n';
+    const SKILLS_LINE = `>\n> ${AGENT_SKILLS_NOTE}\n\n`;
+
     it('should include location and index for pages in nav map', () => {
       const navMap = new Map();
       navMap.set('auth/guides/password-reset', {
@@ -863,15 +986,14 @@ See [CONN_MAX_AGE](https://example.com).
         'docs/auth/guides/password-reset.md'
       );
       expect(header).toBe(
-        '> This page location: Auth > Guides > Password reset\n' +
-          '> Full Neon documentation index: https://neon.com/docs/llms.txt\n\n'
+        '> This page location: Auth > Guides > Password reset\n' + INDEX_LINE + SKILLS_LINE
       );
     });
 
     it('should include index line for pages not in map', () => {
       const navMap = new Map();
       const header = buildPageHeader('nonexistent/page', navMap);
-      expect(header).toBe('> Full Neon documentation index: https://neon.com/docs/llms.txt\n\n');
+      expect(header).toBe(INDEX_LINE + SKILLS_LINE);
     });
 
     it('should include index line for pages with empty breadcrumbs', () => {
@@ -884,24 +1006,63 @@ See [CONN_MAX_AGE](https://example.com).
       });
 
       const header = buildPageHeader('top-level/page', navMap);
-      expect(header).toBe('> Full Neon documentation index: https://neon.com/docs/llms.txt\n\n');
+      expect(header).toBe(INDEX_LINE + SKILLS_LINE);
     });
 
     it('should include index line when navMap is null', () => {
       const header = buildPageHeader('any/page', null);
-      expect(header).toBe('> Full Neon documentation index: https://neon.com/docs/llms.txt\n\n');
+      expect(header).toBe(INDEX_LINE + SKILLS_LINE);
     });
 
     it('should include index line when slug is null', () => {
       const navMap = new Map();
       const header = buildPageHeader(null, navMap);
-      expect(header).toBe('> Full Neon documentation index: https://neon.com/docs/llms.txt\n\n');
+      expect(header).toBe(INDEX_LINE + SKILLS_LINE);
     });
 
-    it('should not include feedback in header (feedback is added at bottom by addNavigationContext)', () => {
+    it('should give changelog markdown the index line only', () => {
       const navMap = new Map();
-      const header = buildPageHeader(null, navMap, 'changelog/2026-01-01.md');
-      expect(header).toBe('> Full Neon documentation index: https://neon.com/docs/llms.txt\n\n');
+      expect(buildPageHeader(null, navMap, 'changelog/2026-01-01.md')).toBe(`${INDEX_LINE}\n`);
+      // The combined changelog page, which aggregates every entry
+      expect(buildPageHeader('changelog', navMap, 'docs/changelog.md')).toBe(`${INDEX_LINE}\n`);
+    });
+
+    it('should skip the skills line and feedback footer on the combined changelog', () => {
+      const withContext = addNavigationContext(
+        '# Changelog\n\nEntries.',
+        'docs/changelog.md',
+        null
+      );
+      expect(withContext).not.toContain('Agent skills');
+      expect(withContext).not.toContain('Note for AI assistants');
+      // Regular docs pages keep the footer
+      expect(addNavigationContext('# Page', 'docs/guides/astro.md', null)).toContain(
+        'Note for AI assistants'
+      );
+    });
+
+    it('should strip a changelog header that has no skills line', () => {
+      const content = '# Release notes\n\nBody text.';
+      const withContext = addNavigationContext(content, 'changelog/2026-01-01.md', new Map());
+      expect(withContext).not.toContain('Agent skills');
+      expect(stripNavigationContext(withContext).trim()).toBe(content);
+    });
+
+    it('should offer a project-level skills install and point to the full setup', () => {
+      const header = buildPageHeader(null, null);
+      expect(header).toContain('> Agent skills: ');
+      expect(header).toContain('Want me to add Neon');
+      expect(header).toContain('`npx neon@latest skills -y`');
+      expect(header).toContain('https://neon.com/prompts/agent-setup.md');
+    });
+
+    it('should strip a header that includes the skills line', () => {
+      const content = '# Test page\n\nBody text.';
+      const withContext = addNavigationContext(content, 'docs/guides/astro.md', new Map());
+      expect(withContext).toContain('> Agent skills: ');
+      const stripped = stripNavigationContext(withContext);
+      expect(stripped.trim()).toBe(content);
+      expect(stripped).not.toContain('Agent skills');
     });
 
     it('should deduplicate consecutive identical ancestors', () => {
@@ -1006,15 +1167,20 @@ See [CONN_MAX_AGE](https://example.com).
         'AgentSkillsTip',
         'MCPTools',
         'LinkAPIKey',
-        'LRNotice',
         'PrivatePreview',
         'PrivatePreviewEnquire',
         'PublicPreview',
-        'LRBeta',
         'MigrationAssistant',
         'NextSteps',
         'NewPricing',
         'AzureRegionsDeprecation',
+        'RealtimeSdkBackend',
+        'RealtimeSdkClient',
+        'RealtimeSdkReact',
+        'RealtimeSdkTanstackDb',
+        'RealtimeSdkDrizzle',
+        'RealtimeSdkDrizzleClient',
+        'RealtimeSdkKysely',
         'CopyPrompt',
         'NeedHelp',
         'Comment',
@@ -1126,5 +1292,65 @@ describe('CLI reference components', () => {
     // Nested subtrees flatten to full invocations
     expect(result).toContain('neon buckets object list');
     expect(result).not.toContain('<CliCommandIndex');
+  });
+});
+
+describe('FAQ markdown', () => {
+  it('adds the last updated date and returns the subtitle as the summary', async () => {
+    const { content, summary } = await processFile(
+      'content/faqs/change-project-region.md',
+      'https://neon.com/faqs/change-project-region',
+      process.cwd()
+    );
+
+    expect(content).toContain(
+      'No. Region is fixed at project creation. Migrate to a new project to change regions.'
+    );
+    expect(content).toContain('Last updated: 2026-09-23');
+    expect(summary).toBe(
+      'No. Region is fixed at project creation. Migrate to a new project to change regions.'
+    );
+  });
+
+  it('adds the last updated date to docs pages but no summary', async () => {
+    const { data } = matter(await fs.readFile('content/docs/guides/prisma.md', 'utf-8'));
+    const { content, summary } = await processFile(
+      'content/docs/guides/prisma.md',
+      'https://neon.com/docs/guides/prisma',
+      process.cwd()
+    );
+
+    expect(content).toContain(
+      `Last updated: ${new Date(data.updatedOn).toISOString().slice(0, 10)}`
+    );
+    expect(summary).toBeNull();
+  });
+
+  it('leaves pages without updatedOn without a last updated line', async () => {
+    const dir = await fs.mkdtemp(path.join(os.tmpdir(), 'no-updated-on-'));
+    const file = path.join(dir, 'page.md');
+    await fs.writeFile(file, '---\ntitle: No date\n---\n\nBody.\n');
+
+    const { content } = await processFile(file, 'https://neon.com/docs/page', dir);
+
+    expect(content).not.toContain('Last updated:');
+  });
+
+  it('lists each page summary in the route index', async () => {
+    const outputDir = await fs.mkdtemp(path.join(os.tmpdir(), 'faqs-index-'));
+    await generateRouteIndex(
+      'faqs',
+      [
+        { title: 'Can I change regions?', url: 'https://neon.com/faqs/a.md', summary: 'No.' },
+        { title: 'No summary', url: 'https://neon.com/faqs/b.md', summary: null },
+      ],
+      outputDir
+    );
+
+    const index = await fs.readFile(path.join(outputDir, 'faqs.md'), 'utf-8');
+    expect(index).toContain('- [Can I change regions?](https://neon.com/faqs/a.md): No.');
+    expect(index).toContain('- [No summary](https://neon.com/faqs/b.md)\n');
+    expect(index).toMatch(/^> Full Neon documentation index: [^\n]*\n>\n> Agent skills: /);
+    await fs.rm(outputDir, { recursive: true, force: true });
   });
 });

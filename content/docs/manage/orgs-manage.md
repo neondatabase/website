@@ -8,7 +8,7 @@ summary: >-
   delete an organization from the UI. Admins control deletions, billing
   changes, and 2FA enforcement.
 enableTableOfContents: true
-updatedOn: '2026-08-04T15:25:12.468Z'
+updatedOn: '2026-11-05T15:33:57.188Z'
 ---
 
 Learn how to manage your organization's projects, invite members, set their access, and oversee billing details. For a breakdown of what each organization role and per-project permission allows, see [User permissions](/docs/manage/user-permissions).
@@ -21,15 +21,27 @@ Organizations managed through the [Vercel-managed integration](/docs/guides/verc
 
 ## Create an organization
 
-To create a new org, use the **Create organization** button in the org switcher in the top navbar.
-
-![create organization button](/docs/manage/orgs_create_button.png)
+To create a new org, use the **Create organization** button in the profile menu in the top-right of the console.
 
 Select a plan for your new organization. Organizations can be free or paid; if you choose a paid plan, you'll enter billing details.
 
 ![create organization with billing](/docs/manage/orgs_create_with_billing.png)
 
 After confirming, you'll be directed to your new organization's **Projects** page, where you can get started creating projects and inviting [members](/docs/manage/orgs-manage#invite-members).
+
+## Switch organizations
+
+If you belong to more than one organization, use the org switcher in the profile menu to change which one you're working in.
+
+1. Click your name in the top-right corner of the Console to open the profile menu.
+1. Under **Organization**, click the name of your current organization. A list of every organization you belong to opens, with a check mark next to the active one.
+1. Select the organization you want to work in. If you belong to many organizations, type in **Search organizations** to filter the list.
+
+The Console opens that organization's projects, and the rest of the Console now applies to the organization you selected.
+
+![org switcher in the Neon Console profile menu](/docs/manage/orgs_switch.png)
+
+If someone has shared a project with you through [project sharing](#project-sharing), select **Projects shared with me** in the switcher to see those projects.
 
 ## Invite members
 
@@ -48,7 +60,7 @@ To invite members:
 If invite emails aren't received, they may be in spam or quarantined. Recipients should check these folders and mark Neon emails as safe.
 </Admonition>
 
-To list members, update roles, or manage invitations programmatically, see [Manage organizations using the Neon API](/docs/manage/orgs-api) (including [List members](/docs/manage/orgs-api#list-members)).
+To list members, update roles, or send invitations from the terminal, use [`neon orgs members`](/docs/cli/orgs#members) and [`neon orgs invitations`](/docs/cli/orgs#invitations). To do it programmatically, see [Manage organizations using the Neon API](/docs/manage/orgs-api) (including [List members](/docs/manage/orgs-api#list-members)).
 
 The **People** page also shows deactivated organization members with a **Deactivated** badge, so admins can review access without opening each member profile.
 
@@ -87,7 +99,7 @@ The **Collaborator** organization role is not the same as a legacy project-shari
 
 ### Project sharing
 
-Project sharing invites an external Neon account by email to a single project, without adding them to your organization. It's still available from a project's **Settings** → **Collaborators** page, and if any project in your organization has collaborators, you'll also see them on the organization's **People** page.
+Project sharing invites an external Neon account by email to a single project, without adding them to your organization. It's still available from a project's **Settings** → **Sharing** page, and if any project in your organization has collaborators, you'll also see them on the organization's **People** page.
 
 Project-sharing collaborators _do not_ have access to the organization itself. They reach their shared projects by selecting **Projects shared with me** in the org switcher. When a project is transferred into an organization, sharing-based access is automatically removed for anyone who is already a member of that organization.
 

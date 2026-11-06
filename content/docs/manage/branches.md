@@ -1,17 +1,19 @@
 ---
 title: Manage branches
 summary: >-
-  Neon branches are copy-on-write clones of a parent branch that isolate schema
-  and data changes without affecting the parent. Each project starts with a root
-  branch; you can create child branches from it or any existing branch. Use this
-  page to create, rename, protect, restore, or delete branches via the Console,
-  CLI, or API. Unused branches accumulate storage costs as they age past the
-  history window.
+  Storage is unlimited on paid plans: there's no hard per-branch size limit
+  and storage grows with your usage, so a branch can grow as large as your data
+  requires. Neon branches are
+  copy-on-write clones of a parent branch that isolate schema and data changes
+  without affecting the parent. Each project starts with a root branch; you can create
+  child branches from it or any existing branch. Use this page to create,
+  rename, protect, restore, or delete branches via the Console, CLI, or API.
+  Unused branches accumulate storage costs as they age past the history window.
 enableTableOfContents: true
 isDraft: false
 redirectFrom:
   - /docs/get-started/get-started-branching
-updatedOn: '2026-08-18T10:29:02.410Z'
+updatedOn: '2026-10-09T15:17:33.920Z'
 ---
 
 Data resides in a branch. Each Neon project is created with a [root branch](#root-branch), which is also designated as your [default branch](#default-branch). Projects created in the Neon Console have a root branch named `production`, while projects created via the API or CLI have a root branch named `main`. You can create child branches from your root branch or from previously created branches. A branch can contain multiple databases and roles. Neon's [plan allowances](/docs/introduction/plans) define the number of branches you can create.
@@ -27,7 +29,7 @@ When working with branches, it is important to remove old and unused branches. B
 
 ## Branch naming requirements
 
-Specifying a branch name is optional. If you don't provide one, the branch name defaults to the automatically generated branch ID with a `br-` prefix (for example, `br-curly-wave-af4i4oeu`).
+Specifying a branch name is optional. If you don't provide one, the branch name defaults to the automatically generated branch ID with a `br-` prefix (for example, `br-curly-wave-123456`).
 
 If you do specify a custom branch name when creating or renaming a branch, it must meet the following requirements:
 
@@ -38,10 +40,14 @@ If you do specify a custom branch name when creating or renaming a branch, it mu
 
 ## Create a branch
 
+<Tabs labels={["Console", "CLI", "API"]}>
+
+<TabItem>
+
 To create a branch:
 
 1. In the Neon Console, select a project.
-2. Select **Branches** under **Project**.
+2. Select **Branches** in the sidebar.
 3. Click **New branch** to open the branch creation dialog.
    ![Create branch dialog](/docs/manage/create_branch.png)
 4. Select a **Parent branch**. This determines the origin of the schema and data for your new branch. By default, your project's default branch (named `main` if the project was created with the CLI or API, or `production` if created in the Console) is selected, but you can choose any existing branch in your project.
@@ -63,12 +69,172 @@ You are presented with the connection details for your new branch and directed t
    When creating a new branch, the branch will have the same Postgres roles and passwords as the parent branch. If you want your branch created with new role passwords, you can enable [branch protection](/docs/guides/protected-branches).
    </Admonition>
 
+</TabItem>
+
+<TabItem>
+
+Create a branch with [`neon branches create`](/docs/cli/branches#create). By default it branches from your project's default branch; pass `--name` to name it:
+
+```bash
+neon branches create --name mybranch
+```
+
+</TabItem>
+
+<TabItem>
+
+Create a branch with the [Create branch](/docs/reference/api/branches/create-project-branch) endpoint. The `branch` attribute specifies the parent; the `endpoints` attribute creates a compute, which is required to connect:
+
+```bash
+curl 'https://console.neon.tech/api/v2/projects/dry-heart-13671059/branches' \
+  -H 'Accept: application/json' \
+  -H "Authorization: Bearer $NEON_API_KEY" \
+  -H 'Content-Type: application/json' \
+  -d '{
+  "endpoints": [
+    {
+      "type": "read_write"
+    }
+  ],
+  "branch": {
+    "parent_id": "br-wispy-dew-591433"
+  }
+}'
+```
+
+<details>
+<summary>Response body</summary>
+
+For attribute definitions, find the [Create branch](/docs/reference/api/branches/create-project-branch) endpoint in the [Neon API Reference](/docs/reference/api). Definitions are provided in the **Responses** section.
+
+```json
+{
+  "branch": {
+    "id": "br-curly-wave-123456",
+    "project_id": "dry-heart-13671059",
+    "parent_id": "br-morning-meadow-123456",
+    "parent_lsn": "0/1FA22C0",
+    "name": "br-curly-wave-123456",
+    "current_state": "init",
+    "pending_state": "ready",
+    "state_changed_at": "2026-08-04T07:13:09Z",
+    "creation_source": "console",
+    "primary": false,
+    "default": false,
+    "protected": false,
+    "cpu_used_sec": 0,
+    "compute_time_seconds": 0,
+    "active_time_seconds": 0,
+    "written_data_bytes": 0,
+    "data_transfer_bytes": 0,
+    "created_at": "2026-08-04T07:13:09Z",
+    "updated_at": "2026-08-04T07:13:09Z",
+    "created_by": {
+      "name": "your@email.com",
+      "image": ""
+    },
+    "init_source": "parent-data"
+  },
+  "endpoints": [
+    {
+      "host": "ep-cool-darkness-123456.c-2.us-west-2.aws.neon.tech",
+      "id": "ep-cool-darkness-123456",
+      "project_id": "dry-heart-13671059",
+      "branch_id": "br-curly-wave-123456",
+      "autoscaling_limit_min_cu": 0.25,
+      "autoscaling_limit_max_cu": 0.25,
+      "region_id": "aws-us-west-2",
+      "type": "read_write",
+      "current_state": "init",
+      "pending_state": "active",
+      "settings": {},
+      "pooler_enabled": false,
+      "pooler_mode": "transaction",
+      "disabled": false,
+      "passwordless_access": true,
+      "creation_source": "console",
+      "created_at": "2026-08-04T07:13:09Z",
+      "updated_at": "2026-08-04T07:13:09Z",
+      "proxy_host": "c-2.us-west-2.aws.neon.tech",
+      "suspend_timeout_seconds": 0,
+      "provisioner": "k8s-neonvm"
+    }
+  ],
+  "operations": [
+    {
+      "id": "8289b00a-4341-48d2-b3f1-d0c8dbb7e806",
+      "project_id": "dry-heart-13671059",
+      "branch_id": "br-curly-wave-123456",
+      "action": "create_branch",
+      "status": "running",
+      "failures_count": 0,
+      "created_at": "2026-08-04T07:13:09Z",
+      "updated_at": "2026-08-04T07:13:09Z",
+      "total_duration_ms": 0
+    },
+    {
+      "id": "a3c9baa4-6732-4774-a141-9d03396babce",
+      "project_id": "dry-heart-13671059",
+      "branch_id": "br-curly-wave-123456",
+      "endpoint_id": "ep-cool-darkness-123456",
+      "action": "start_compute",
+      "status": "scheduling",
+      "failures_count": 0,
+      "created_at": "2026-08-04T07:13:09Z",
+      "updated_at": "2026-08-04T07:13:09Z",
+      "total_duration_ms": 0
+    }
+  ],
+  "roles": [
+    {
+      "branch_id": "br-curly-wave-123456",
+      "name": "alex",
+      "protected": false,
+      "created_at": "2026-08-04T07:07:55Z",
+      "updated_at": "2026-08-04T07:07:55Z"
+    }
+  ],
+  "databases": [
+    {
+      "id": 2886327,
+      "branch_id": "br-curly-wave-123456",
+      "name": "dbname",
+      "owner_name": "alex",
+      "created_at": "2026-08-04T07:07:55Z",
+      "updated_at": "2026-08-04T07:07:55Z"
+    }
+  ],
+  "connection_uris": [
+    {
+      "connection_uri": "postgresql://alex:AbC123dEf@ep-cool-darkness-123456.c-2.us-west-2.aws.neon.tech/dbname?sslmode=require&channel_binding=require",
+      "connection_parameters": {
+        "database": "dbname",
+        "password": "AbC123dEf",
+        "role": "alex",
+        "host": "ep-cool-darkness-123456.c-2.us-west-2.aws.neon.tech",
+        "pooler_host": "ep-cool-darkness-123456-pooler.c-2.us-west-2.aws.neon.tech"
+      }
+    }
+  ]
+}
+```
+
+</details>
+
+</TabItem>
+
+</Tabs>
+
 ## View branches
+
+<Tabs labels={["Console", "CLI", "API"]}>
+
+<TabItem>
 
 To view the branches in a Neon project:
 
 1. In the Neon Console, select a project.
-1. Select **Branches** under **Project** to view all current branches in the project.
+1. Select **Branches** in the sidebar to view all current branches in the project.
 
    ![all branches](/docs/manage/branches_all_list.png)
 
@@ -97,6 +263,107 @@ To view the branches in a Neon project:
    - [Manage databases](/docs/manage/databases)
    - [View branches](#view-branches)
 
+</TabItem>
+
+<TabItem>
+
+List the branches in a project with [`neon branches list`](/docs/cli/branches#list):
+
+```bash
+neon branches list --project-id dry-heart-13671059
+```
+
+```text filename="Output"
+Name                  ID                        Current State  Expires At  Created At
+[default] main        br-morning-meadow-123456  ready          never       2026-08-04T07:07:55Z
+br-curly-wave-123456  br-curly-wave-123456      ready          never       2026-08-04T07:13:09Z
+```
+
+</TabItem>
+
+<TabItem>
+
+List the branches in a project with the [List branches](/docs/reference/api/branches/list-project-branches) endpoint:
+
+```bash
+curl 'https://console.neon.tech/api/v2/projects/dry-heart-13671059/branches' \
+  -H 'accept: application/json' \
+  -H "Authorization: Bearer $NEON_API_KEY"
+```
+
+<details>
+<summary>Response body</summary>
+
+For attribute definitions, find the [List branches](/docs/reference/api/branches/list-project-branches) endpoint in the [Neon API Reference](/docs/reference/api). Definitions are provided in the **Responses** section.
+
+```json
+{
+  "branches": [
+    {
+      "id": "br-curly-wave-123456",
+      "project_id": "dry-heart-13671059",
+      "parent_id": "br-morning-meadow-123456",
+      "parent_lsn": "0/1FA22C0",
+      "parent_timestamp": "2026-08-04T07:08:48Z",
+      "name": "br-curly-wave-123456",
+      "current_state": "ready",
+      "state_changed_at": "2026-08-04T07:13:09Z",
+      "creation_source": "console",
+      "primary": false,
+      "default": false,
+      "protected": false,
+      "cpu_used_sec": 0,
+      "compute_time_seconds": 0,
+      "active_time_seconds": 0,
+      "written_data_bytes": 0,
+      "data_transfer_bytes": 0,
+      "created_at": "2026-08-04T07:13:09Z",
+      "updated_at": "2026-08-04T07:18:15Z",
+      "created_by": {
+        "name": "your@email.com",
+        "image": ""
+      },
+      "init_source": "parent-data"
+    },
+    {
+      "id": "br-morning-meadow-123456",
+      "project_id": "dry-heart-13671059",
+      "name": "main",
+      "current_state": "ready",
+      "state_changed_at": "2026-08-04T07:07:58Z",
+      "logical_size": 30777344,
+      "creation_source": "console",
+      "primary": true,
+      "default": true,
+      "protected": false,
+      "cpu_used_sec": 0,
+      "compute_time_seconds": 0,
+      "active_time_seconds": 0,
+      "written_data_bytes": 0,
+      "data_transfer_bytes": 0,
+      "created_at": "2026-08-04T07:07:55Z",
+      "updated_at": "2026-08-04T07:13:11Z",
+      "created_by": {
+        "name": "your@email.com",
+        "image": ""
+      },
+      "init_source": "parent-data"
+    }
+  ],
+  "annotations": {},
+  "pagination": {
+    "sort_by": "updated_at",
+    "sort_order": "DESC"
+  }
+}
+```
+
+</details>
+
+</TabItem>
+
+</Tabs>
+
 ## Branch archiving
 
 On the Free plan, Neon automatically archives inactive branches to cost-efficient archive storage after a defined threshold. For more, see [Branch archiving](/docs/guides/branch-archiving).
@@ -107,13 +374,48 @@ For branches with predictable lifespans, you can set an expiration date when cre
 
 ## Rename a branch
 
-Neon permits renaming a branch, including your project's default branch. To rename a branch:
+Neon permits renaming a branch, including your project's default branch.
+
+<Tabs labels={["Console", "CLI", "API"]}>
+
+<TabItem>
+
+To rename a branch:
 
 1. In the Neon Console, select a project.
-2. Select **Branches** under **Project** to view the branches for the project.
+2. Select **Branches** in the sidebar to view the branches for the project.
 3. Select a branch from the table.
-4. On the branch overview page, click the **More** drop-down menu and select **Rename**.
+4. On the branch overview page, open the three-dot menu (⋮) and select **Rename**.
 5. Specify a new name for the branch and click **Save**.
+
+</TabItem>
+
+<TabItem>
+
+Rename a branch with [`neon branches rename`](/docs/cli/branches#rename), passing the current name or ID and the new name:
+
+```bash
+neon branches rename br-rough-sky-123456 teambranch
+```
+
+</TabItem>
+
+<TabItem>
+
+Rename a branch with the [Update branch](/docs/reference/api/branches/update-project-branch) endpoint:
+
+```bash
+curl -X 'PATCH' \
+  'https://console.neon.tech/api/v2/projects/dry-heart-13671059/branches/br-rough-sky-123456' \
+  -H 'accept: application/json' \
+  -H "Authorization: Bearer $NEON_API_KEY" \
+  -H 'Content-Type: application/json' \
+  -d '{"branch": {"name": "teambranch"}}'
+```
+
+</TabItem>
+
+</Tabs>
 
 ## Set a branch as default
 
@@ -121,25 +423,87 @@ Each Neon project is created with a default branch (named `main` if the project 
 
 For more information, see [Default branch](#default-branch).
 
+<Tabs labels={["Console", "CLI", "API"]}>
+
+<TabItem>
+
 To set a branch as the default branch:
 
 1. In the Neon Console, select a project.
-2. Select **Branches** under **Project** to view the branches for the project.
+2. Select **Branches** in the sidebar to view the branches for the project.
 3. Select a branch from the table.
-4. On the branch overview page, click the **More** drop-down menu and select **Set as default**.
+4. On the branch overview page, open the three-dot menu (⋮) and select **Set as default**.
 5. In the **Set as default** confirmation dialog, click **Set as default** to confirm your selection.
+
+</TabItem>
+
+<TabItem>
+
+Set the default branch with [`neon branches set-default`](/docs/cli/branches#set-default):
+
+```bash
+neon branches set-default br-curly-wave-123456
+```
+
+</TabItem>
+
+<TabItem>
+
+Set the default branch with the [Set default branch](/docs/reference/api/branches/set-default-project-branch) endpoint:
+
+```bash
+curl -X POST 'https://console.neon.tech/api/v2/projects/dry-heart-13671059/branches/br-curly-wave-123456/set_as_default' \
+  -H 'Accept: application/json' \
+  -H "Authorization: Bearer $NEON_API_KEY"
+```
+
+</TabItem>
+
+</Tabs>
 
 ## Set a branch as protected
 
 This feature is available on all Neon's paid plans, which supports up to five protected branches.
 
+<Tabs labels={["Console", "CLI", "API"]}>
+
+<TabItem>
+
 To set a branch as protected:
 
 1. In the Neon Console, select a project.
-2. Select **Branches** under **Project** to view the branches for the project.
+2. Select **Branches** in the sidebar to view the branches for the project.
 3. Select a branch from the table.
-4. On the branch overview page, click the **More** drop-down menu and select **Set as protected**.
+4. On the branch overview page, open the three-dot menu (⋮) and select **Set as protected**.
 5. In the **Set as protected** confirmation dialog, click **Set as protected** to confirm your selection.
+
+</TabItem>
+
+<TabItem>
+
+No dedicated command sets protection, so use the [`neon api`](/docs/cli/api) passthrough, which sends the request with your CLI credentials:
+
+```bash
+neon api /projects/dry-heart-13671059/branches/br-curly-wave-123456 -X PATCH -F branch.protected=true
+```
+
+</TabItem>
+
+<TabItem>
+
+Mark a branch as protected with the [Update branch](/docs/reference/api/branches/update-project-branch) endpoint:
+
+```bash
+curl -X PATCH 'https://console.neon.tech/api/v2/projects/dry-heart-13671059/branches/br-curly-wave-123456' \
+  -H 'Accept: application/json' \
+  -H "Authorization: Bearer $NEON_API_KEY" \
+  -H 'Content-Type: application/json' \
+  -d '{"branch": {"protected": true}}'
+```
+
+</TabItem>
+
+</Tabs>
 
 For details and configuration instructions, refer to our [Protected branches guide](/docs/guides/protected-branches).
 
@@ -147,38 +511,97 @@ For details and configuration instructions, refer to our [Protected branches gui
 
 To set or update a branch's expiration (auto-deletion TTL):
 
+<Tabs labels={["Console", "CLI", "API"]}>
+
+<TabItem>
+
 1. In the Neon Console, select a project.
-2. Select **Branches** under **Project** to view the branches for the project.
+2. Select **Branches** in the sidebar to view the branches for the project.
 3. Select a branch from the table.
-4. On the branch overview page, click the **Actions** drop-down menu and select **Edit expiration**.
+4. On the branch overview page, open the three-dot menu (⋮) and select **Set expiration**.
 5. Set a new expiration date and time, or toggle off "Automatically delete branch after" to remove expiration.
 6. Click **Save**.
+
+</TabItem>
+
+<TabItem>
+
+Set an expiration with [`neon branches set-expiration`](/docs/cli/branches#set-expiration). Omit `--expires-at` to remove it:
+
+```bash
+neon branches set-expiration br-curly-wave-123456 --expires-at 2025-08-15T18:00:00Z
+```
+
+</TabItem>
+
+<TabItem>
+
+Set an expiration with the [Update branch](/docs/reference/api/branches/update-project-branch) endpoint:
+
+```bash
+curl -X PATCH 'https://console.neon.tech/api/v2/projects/dry-heart-13671059/branches/br-curly-wave-123456' \
+  -H 'Accept: application/json' \
+  -H "Authorization: Bearer $NEON_API_KEY" \
+  -H 'Content-Type: application/json' \
+  -d '{"branch": {"expires_at": "2025-08-15T18:00:00Z"}}'
+```
+
+</TabItem>
+
+</Tabs>
 
 For details and configuration instructions, refer to our [Branch expiration guide](/docs/guides/branch-expiration).
 
 ## Connect to a branch
 
-Connecting to a database in a branch requires connecting via a compute associated with the branch. The following steps describe how to connect using `psql` and a connection string obtained from the Neon Console.
+You connect to a branch through a compute associated with it, using a Postgres connection string that carries your role, the compute hostname (it starts with `ep-`), and the database name. Get the string from the Console, CLI, or API, then connect with any Postgres client. To run queries without a client, use the [Neon SQL Editor](/docs/get-started/query-with-neon-sql-editor).
 
-<Admonition type="tip">
-You can also query the databases in a branch from the Neon SQL Editor. For instructions, see [Query with Neon's SQL Editor](/docs/get-started/query-with-neon-sql-editor).
-</Admonition>
+<Tabs labels={["Console", "CLI", "API"]}>
 
-1. In the Neon Console, select a project.
-2. Find the connection string for your database by clicking the **Connect** button on your **Project Dashboard**. Select the branch, the database, and the role you want to connect with.
-   ![Connection details modal](/docs/connect/connection_details.png)
-3. Copy the connection string. A connection string includes your role name, the compute hostname, and database name.
-4. Connect with `psql` as shown below.
+<TabItem>
 
-   ```bash shouldWrap
-   psql postgresql://[user]:[password]@[neon_hostname]/[dbname]
-   ```
+Click **Connect** in the Console nav, then select the branch, database, and role. Copy the connection string.
 
-   <Admonition type="tip">
-   A compute hostname starts with an `ep-` prefix. You can also find a compute hostname on the **Branches** page in the Neon Console. See [View branches](#view-branches).
-   </Admonition>
+![Connection details modal](/docs/connect/connect_to_branch_modal.png)
 
-   If you want to connect from an application, the **Connect to your database modal**, accessed by clicking **Connect** on the project **Dashboard**, and the [Frameworks](/docs/get-started/frameworks) and [Languages](/docs/get-started/languages) sections in the documentation provide various connection examples.
+</TabItem>
+
+<TabItem>
+
+Connect directly with [`neon psql`](/docs/cli/psql):
+
+```bash
+neon psql br-curly-wave-123456
+```
+
+Or print the connection string to use elsewhere with [`neon connection-string`](/docs/cli/connection-string) (add `--pooled` or `--prisma` as needed):
+
+```bash
+neon connection-string br-curly-wave-123456 --database-name neondb --role-name alex
+```
+
+</TabItem>
+
+<TabItem>
+
+Retrieve the connection string with the [Get connection URI](/docs/reference/api/projects/get-connection-uri) endpoint (`database_name` and `role_name` are required):
+
+```bash shouldWrap
+curl 'https://console.neon.tech/api/v2/projects/dry-heart-13671059/connection_uri?branch_id=br-curly-wave-123456&database_name=neondb&role_name=alex' \
+  -H "Authorization: Bearer $NEON_API_KEY"
+```
+
+</TabItem>
+
+</Tabs>
+
+Then connect with any client, for example `psql`:
+
+```bash shouldWrap
+psql postgresql://[user]:[password]@[neon_hostname]/[dbname]
+```
+
+For application connection examples, see [Frameworks](/docs/get-started/frameworks) and [Languages](/docs/get-started/languages).
 
 ## Reset a branch from parent
 
@@ -200,13 +623,109 @@ You can use the Neon Console, CLI, or API. For more details, see [Instant restor
 
 Deleting a branch is a permanent action. Deleting a branch also deletes the databases and roles that belong to the branch as well as the compute associated with the branch. You cannot delete a branch that has child branches. The child branches must be deleted first.
 
+<Tabs labels={["Console", "CLI", "API"]}>
+
+<TabItem>
+
 To delete a branch:
 
 1. In the Neon Console, select a project.
-2. Select **Branches** under **Project**.
+2. Select **Branches** in the sidebar.
 3. Select a branch from the table.
-4. On the branch overview page, click the **More** drop-down menu and select **Delete**.
+4. On the branch overview page, open the three-dot menu (⋮) and select **Delete**.
 5. On the confirmation dialog, click **Delete**.
+
+</TabItem>
+
+<TabItem>
+
+Delete a branch with [`neon branches delete`](/docs/cli/branches#delete), passing the branch name or ID:
+
+```bash
+neon branches delete br-curly-wave-123456
+```
+
+</TabItem>
+
+<TabItem>
+
+Delete a branch with the [Delete branch](/docs/reference/api/branches/delete-project-branch) endpoint:
+
+```bash
+curl -X 'DELETE' \
+  'https://console.neon.tech/api/v2/projects/dry-heart-13671059/branches/br-curly-wave-123456' \
+  -H 'accept: application/json' \
+  -H "Authorization: Bearer $NEON_API_KEY"
+```
+
+<details>
+<summary>Response body</summary>
+
+For attribute definitions, find the [Delete branches](/docs/reference/api/branches/delete-project-branch) endpoint in the [Neon API Reference](/docs/reference/api). Definitions are provided in the **Responses** section.
+
+```json
+{
+  "branch": {
+    "id": "br-curly-wave-123456",
+    "project_id": "dry-heart-13671059",
+    "parent_id": "br-morning-meadow-123456",
+    "parent_lsn": "0/1FA22C0",
+    "parent_timestamp": "2026-08-04T07:08:48Z",
+    "name": "br-curly-wave-123456",
+    "current_state": "ready",
+    "pending_state": "storage_deleted",
+    "state_changed_at": "2026-08-04T07:13:09Z",
+    "logical_size": 30851072,
+    "creation_source": "console",
+    "primary": false,
+    "default": false,
+    "protected": false,
+    "cpu_used_sec": 0,
+    "compute_time_seconds": 0,
+    "active_time_seconds": 0,
+    "written_data_bytes": 0,
+    "data_transfer_bytes": 0,
+    "created_at": "2026-08-04T07:13:09Z",
+    "updated_at": "2026-08-04T07:21:55Z",
+    "created_by": {
+      "name": "your@email.com",
+      "image": ""
+    },
+    "init_source": "parent-data"
+  },
+  "operations": [
+    {
+      "id": "eb85073d-53fc-4d37-a32a-ca9e9ea1eeb1",
+      "project_id": "dry-heart-13671059",
+      "branch_id": "br-curly-wave-123456",
+      "endpoint_id": "ep-soft-art-123456",
+      "action": "suspend_compute",
+      "status": "running",
+      "failures_count": 0,
+      "created_at": "2026-08-04T07:21:55Z",
+      "updated_at": "2026-08-04T07:21:55Z",
+      "total_duration_ms": 0
+    },
+    {
+      "id": "586af342-1ffe-4e0a-9e11-326db1164ad7",
+      "project_id": "dry-heart-13671059",
+      "branch_id": "br-curly-wave-123456",
+      "action": "delete_timeline",
+      "status": "scheduling",
+      "failures_count": 0,
+      "created_at": "2026-08-04T07:21:55Z",
+      "updated_at": "2026-08-04T07:21:55Z",
+      "total_duration_ms": 0
+    }
+  ]
+}
+```
+
+</details>
+
+</TabItem>
+
+</Tabs>
 
 <Admonition type="tip">
 For temporary branches, consider setting an expiration date when creating them to automate cleanup and reduce manual deletion overhead.
@@ -214,7 +733,7 @@ For temporary branches, consider setting an expiration date when creating them t
 
 ## Check the data size
 
-You can check the logical data size for the databases on a branch by viewing the **Data size** value on the **Branches** page or page in the Neon Console. Alternatively, you can run the following query on your branch from the [Neon SQL Editor](/docs/get-started/query-with-neon-sql-editor) or any SQL client connected to your database:
+You can check the logical data size for the databases on a branch by viewing the **Storage** column on the **Branches** page in the Neon Console. Alternatively, you can run the following query on your branch from the [Neon SQL Editor](/docs/get-started/query-with-neon-sql-editor) or any SQL client connected to your database:
 
 ```sql
 SELECT pg_size_pretty(sum(pg_database_size(datname)))
@@ -225,8 +744,8 @@ The query value may differ slightly from the **Data size** reported in the Neon 
 
 Data size is your logical data size.
 
-<Admonition type="note">
-Paid plans support a logical data size of up to **16 TB per branch**. When a branch reaches this limit, write performance drops, but you can still drop or delete data to reclaim space. To increase this limit, [request a storage increase in the feedback form in console](https://console.neon.tech/app/settings?modal=feedback&modalparams=%22Storage%20limit%20increase%22).
+<Admonition type="note" title="Storage is unlimited on paid plans">
+**Storage is unlimited on paid plans (Launch and Scale): there's no hard per-branch size limit, and your branch storage grows with your usage.** The Free plan is limited to 1 GB per project.
 </Admonition>
 
 ## Branch types
@@ -268,8 +787,8 @@ Neon's protected branches feature implements a series of protections:
 - Protected branches cannot be [reset](/docs/manage/branches#reset-a-branch-from-parent).
 - Projects with protected branches cannot be deleted.
 - Computes associated with a protected branch cannot be deleted.
-- New passwords are automatically generated for Postgres roles on branches created from protected branches. [See below](#new-passwords-generated-for-postgres-roles-on-child-branches).
-- With additional configuration steps, you can apply IP Allow restrictions to protected branches only. See [below](#how-to-apply-ip-restrictions-to-protected-branches).
+- New passwords are automatically generated for Postgres roles on branches created from protected branches. [Learn more](/docs/guides/protected-branches#new-passwords-generated-for-postgres-roles-on-child-branches).
+- With additional configuration steps, you can apply IP Allow restrictions to protected branches only. See [How to apply IP restrictions to protected branches](/docs/guides/protected-branches#how-to-apply-ip-restrictions-to-protected-branches).
 - Protected branches are not [archived](/docs/guides/branch-archiving) due to inactivity.
 
 Typically, a protected status is given to a branch or branches that hold production data or sensitive data. The protected branch feature is only supported on Neon's paid plans. See [Set a branch as protected](#set-a-branch-as-protected).
@@ -284,7 +803,7 @@ See [Schema-only branches](/docs/guides/branching-schema-only).
 
 ### Backup branch
 
-A branch created by an [instant restore](#branch-restore) operation. When you restore a branch from a particular point in time, the current branch is saved as a backup branch. Performing a restore operation on a root branch, creates a backup branch without a parent branch (a root branch). See [Instant restore](/docs/guides/branch-restore).
+A branch created by an [instant restore](/docs/introduction/branch-restore) operation. When you restore a branch from a particular point in time, the current branch is saved as a backup branch. Performing a restore operation on a root branch, creates a backup branch without a parent branch (a root branch). See [Instant restore](/docs/guides/branch-restore).
 
 ### Branch with expiration
 
@@ -292,354 +811,22 @@ A branch with an expiration timestamp is automatically deleted when the expirati
 
 ## Branching with the Neon CLI
 
-The Neon CLI supports creating and managing branches. For instructions, see [Neon CLI commands — branches](/docs/cli/branches). For a Neon CLI branching guide, see [Branching with the Neon CLI](/docs/cli/branches).
+The Neon CLI supports creating and managing branches. See [Neon CLI commands — branches](/docs/cli/branches).
 
 ## Branching with the Neon API
 
-Branch actions performed in the Neon Console can also be performed using the Neon API. The following examples demonstrate how to create, view, and delete branches using the Neon API. For other branch-related API methods, refer to the [Neon API Reference](/docs/reference/api).
+Branch actions performed in the Neon Console can also be performed using the [Neon API](/docs/reference/api). Each operation above includes an example in its **API** tab; see the [Neon API Reference](/docs/reference/api) for complete request and response schemas. A request requires an API key: see [Create an API key](/docs/manage/api-keys#create-an-api-key), where `$NEON_API_KEY` stands in for your key.
 
-<Admonition type="note">
-The API examples that follow may not show all of the user-configurable request body attributes that are available to you. To view all of the attributes for a particular method, refer to the method's request body schema in the [Neon API Reference](/docs/reference/api).
-</Admonition>
-
-The `jq` option specified in each example is an optional third-party tool that formats the `JSON` response, making it easier to read. For information about this utility, see [jq](https://stedolan.github.io/jq/).
-
-### Prerequisites
-
-A Neon API request requires an API key. For information about obtaining an API key, see [Create an API key](/docs/manage/api-keys#create-an-api-key). In the examples shown below, `$NEON_API_KEY` is specified in place of an actual API key, which you must provide when making a Neon API request.
-
-<LinkAPIKey />
 ### Create a branch with the API
 
-The following Neon API method creates a branch. To view the API documentation for this method, refer to the [Neon API Reference](/docs/reference/api/branches/create-project-branch).
-
-```http
-POST /projects/{project_id}/branches
-```
-
-The API method appears as follows when specified in a cURL command. The `endpoints` attribute creates a compute, which is required to connect to the branch. A branch can be created with or without a compute. The `branch` attribute specifies the parent branch.
-
-<Admonition type="note">
-This method does not require a request body. Without a request body, the method creates a branch from the project's default branch, and a compute is not created.
-</Admonition>
-
-```bash
-curl 'https://console.neon.tech/api/v2/projects/dry-heart-13671059/branches' \
-  -H 'Accept: application/json' \
-  -H "Authorization: Bearer $NEON_API_KEY" \
-  -H 'Content-Type: application/json' \
-  -d '{
-  "endpoints": [
-    {
-      "type": "read_write"
-    }
-  ],
-  "branch": {
-    "parent_id": "br-wispy-dew-591433"
-  }
-}' | jq
-```
-
-- The `project_id` for a Neon project is found on the **Settings** page in the Neon Console, or you can find it by listing the projects for your Neon account using the Neon API.
-- The `parent_id` can be obtained by listing the branches for your project. See [List branches](#list-branches-with-the-api). The `<parent_id>` is the `id` of the branch you are branching from. A branch `id` has a `br-` prefix. You can branch from your Neon project's default branch or a previously created branch.
-
-The response body includes information about the branch, the branch's compute, and the `create_branch` and `start_compute` operations that were initiated.
-
-<details>
-<summary>Response body</summary>
-
-For attribute definitions, find the [Create branch](/docs/reference/api/branches/create-project-branch) endpoint in the [Neon API Reference](/docs/reference/api). Definitions are provided in the **Responses** section.
-
-```json
-{
-  "branch": {
-    "id": "br-curly-wave-af4i4oeu",
-    "project_id": "dry-heart-13671059",
-    "parent_id": "br-morning-meadow-afu2s1jl",
-    "parent_lsn": "0/1FA22C0",
-    "name": "br-curly-wave-af4i4oeu",
-    "current_state": "init",
-    "pending_state": "ready",
-    "state_changed_at": "2025-08-04T07:13:09Z",
-    "creation_source": "console",
-    "primary": false,
-    "default": false,
-    "protected": false,
-    "cpu_used_sec": 0,
-    "compute_time_seconds": 0,
-    "active_time_seconds": 0,
-    "written_data_bytes": 0,
-    "data_transfer_bytes": 0,
-    "created_at": "2025-08-04T07:13:09Z",
-    "updated_at": "2025-08-04T07:13:09Z",
-    "created_by": {
-      "name": "your@email.com",
-      "image": ""
-    },
-    "init_source": "parent-data"
-  },
-  "endpoints": [
-    {
-      "host": "ep-cool-darkness-123456.c-2.us-west-2.aws.neon.tech",
-      "id": "ep-cool-darkness-123456",
-      "project_id": "dry-heart-13671059",
-      "branch_id": "br-curly-wave-af4i4oeu",
-      "autoscaling_limit_min_cu": 0.25,
-      "autoscaling_limit_max_cu": 0.25,
-      "region_id": "aws-us-west-2",
-      "type": "read_write",
-      "current_state": "init",
-      "pending_state": "active",
-      "settings": {},
-      "pooler_enabled": false,
-      "pooler_mode": "transaction",
-      "disabled": false,
-      "passwordless_access": true,
-      "creation_source": "console",
-      "created_at": "2025-08-04T07:13:09Z",
-      "updated_at": "2025-08-04T07:13:09Z",
-      "proxy_host": "c-2.us-west-2.aws.neon.tech",
-      "suspend_timeout_seconds": 0,
-      "provisioner": "k8s-neonvm"
-    }
-  ],
-  "operations": [
-    {
-      "id": "8289b00a-4341-48d2-b3f1-d0c8dbb7e806",
-      "project_id": "dry-heart-13671059",
-      "branch_id": "br-curly-wave-af4i4oeu",
-      "action": "create_branch",
-      "status": "running",
-      "failures_count": 0,
-      "created_at": "2025-08-04T07:13:09Z",
-      "updated_at": "2025-08-04T07:13:09Z",
-      "total_duration_ms": 0
-    },
-    {
-      "id": "a3c9baa4-6732-4774-a141-9d03396babce",
-      "project_id": "dry-heart-13671059",
-      "branch_id": "br-curly-wave-af4i4oeu",
-      "endpoint_id": "ep-cool-darkness-123456",
-      "action": "start_compute",
-      "status": "scheduling",
-      "failures_count": 0,
-      "created_at": "2025-08-04T07:13:09Z",
-      "updated_at": "2025-08-04T07:13:09Z",
-      "total_duration_ms": 0
-    }
-  ],
-  "roles": [
-    {
-      "branch_id": "br-curly-wave-af4i4oeu",
-      "name": "alex",
-      "protected": false,
-      "created_at": "2025-08-04T07:07:55Z",
-      "updated_at": "2025-08-04T07:07:55Z"
-    }
-  ],
-  "databases": [
-    {
-      "id": 2886327,
-      "branch_id": "br-curly-wave-af4i4oeu",
-      "name": "dbname",
-      "owner_name": "alex",
-      "created_at": "2025-08-04T07:07:55Z",
-      "updated_at": "2025-08-04T07:07:55Z"
-    }
-  ],
-  "connection_uris": [
-    {
-      "connection_uri": "postgresql://alex:AbC123dEf@ep-cool-darkness-123456.c-2.us-west-2.aws.neon.tech/dbname?sslmode=require&channel_binding=require",
-      "connection_parameters": {
-        "database": "dbname",
-        "password": "AbC123dEf",
-        "role": "alex",
-        "host": "ep-cool-darkness-123456.c-2.us-west-2.aws.neon.tech",
-        "pooler_host": "ep-cool-darkness-123456-pooler.c-2.us-west-2.aws.neon.tech"
-      }
-    }
-  ]
-}
-```
-
-</details>
+See [Create a branch](#create-a-branch) for the Console, CLI, and API options.
 
 ### List branches with the API
 
-The following Neon API method lists branches for the specified project. To view the API documentation for this method, refer to the [Neon API Reference](/docs/reference/api/branches/list-project-branches).
-
-```http
-GET /projects/{project_id}/branches
-```
-
-The API method appears as follows when specified in a cURL command:
-
-```bash
-curl 'https://console.neon.tech/api/v2/projects/dry-heart-13671059/branches' \
-  -H 'accept: application/json' \
-  -H "Authorization: Bearer $NEON_API_KEY" | jq
-```
-
-The `project_id` for a Neon project is found on the **Settings** page in the Neon Console, or you can find it by listing the projects for your Neon account using the Neon API.
-
-The response body lists the project's default branch and any child branches. The name of the default branch in this example is `main`.
-
-<details>
-<summary>Response body</summary>
-
-For attribute definitions, find the [List branches](/docs/reference/api/branches/list-project-branches) endpoint in the [Neon API Reference](/docs/reference/api). Definitions are provided in the **Responses** section.
-
-```json
-{
-  "branches": [
-    {
-      "id": "br-curly-wave-af4i4oeu",
-      "project_id": "dry-heart-13671059",
-      "parent_id": "br-morning-meadow-afu2s1jl",
-      "parent_lsn": "0/1FA22C0",
-      "parent_timestamp": "2025-08-04T07:08:48Z",
-      "name": "br-curly-wave-af4i4oeu",
-      "current_state": "ready",
-      "state_changed_at": "2025-08-04T07:13:09Z",
-      "creation_source": "console",
-      "primary": false,
-      "default": false,
-      "protected": false,
-      "cpu_used_sec": 0,
-      "compute_time_seconds": 0,
-      "active_time_seconds": 0,
-      "written_data_bytes": 0,
-      "data_transfer_bytes": 0,
-      "created_at": "2025-08-04T07:13:09Z",
-      "updated_at": "2025-08-04T07:18:15Z",
-      "created_by": {
-        "name": "your@email.com",
-        "image": ""
-      },
-      "init_source": "parent-data"
-    },
-    {
-      "id": "br-morning-meadow-afu2s1jl",
-      "project_id": "dry-heart-13671059",
-      "name": "main",
-      "current_state": "ready",
-      "state_changed_at": "2025-08-04T07:07:58Z",
-      "logical_size": 30777344,
-      "creation_source": "console",
-      "primary": true,
-      "default": true,
-      "protected": false,
-      "cpu_used_sec": 0,
-      "compute_time_seconds": 0,
-      "active_time_seconds": 0,
-      "written_data_bytes": 0,
-      "data_transfer_bytes": 0,
-      "created_at": "2025-08-04T07:07:55Z",
-      "updated_at": "2025-08-04T07:13:11Z",
-      "created_by": {
-        "name": "your@email.com",
-        "image": ""
-      },
-      "init_source": "parent-data"
-    }
-  ],
-  "annotations": {},
-  "pagination": {
-    "sort_by": "updated_at",
-    "sort_order": "DESC"
-  }
-}
-```
-
-</details>
+See [View branches](#view-branches) for the Console, CLI, and API options.
 
 ### Delete a branch with the API
 
-The following Neon API method deletes the specified branch. To view the API documentation for this method, refer to the [Neon API Reference](/docs/reference/api/branches/delete-project-branch).
-
-```http
-DELETE /projects/{project_id}/branches/{branch_id}
-```
-
-The API method appears as follows when specified in a cURL command:
-
-```bash
-curl -X 'DELETE' \
-  'https://console.neon.tech/api/v2/projects/dry-heart-13671059/branches/br-curly-wave-af4i4oeu' \
-  -H 'accept: application/json' \
-  -H "Authorization: Bearer $NEON_API_KEY" | jq
-```
-
-- The `project_id` for a Neon project is found on the **Settings** page in the Neon Console, or you can find it by listing the projects for your Neon account using the Neon API.
-- The `branch_id` can be found by listing the branches for your project. The `<branch_id>` is the `id` of a branch. A branch `id` has a `br-` prefix. See [List branches](#list-branches-with-the-api).
-
-The response body shows information about the branch being deleted and the `suspend_compute` and `delete_timeline` operations that were initiated.
-
-<details>
-<summary>Response body</summary>
-
-For attribute definitions, find the [Delete branches](/docs/reference/api/branches/delete-project-branch) endpoint in the [Neon API Reference](/docs/reference/api). Definitions are provided in the **Responses** section.
-
-```json
-{
-  "branch": {
-    "id": "br-curly-wave-af4i4oeu",
-    "project_id": "dry-heart-13671059",
-    "parent_id": "br-morning-meadow-afu2s1jl",
-    "parent_lsn": "0/1FA22C0",
-    "parent_timestamp": "2025-08-04T07:08:48Z",
-    "name": "br-curly-wave-af4i4oeu",
-    "current_state": "ready",
-    "pending_state": "storage_deleted",
-    "state_changed_at": "2025-08-04T07:13:09Z",
-    "logical_size": 30851072,
-    "creation_source": "console",
-    "primary": false,
-    "default": false,
-    "protected": false,
-    "cpu_used_sec": 0,
-    "compute_time_seconds": 0,
-    "active_time_seconds": 0,
-    "written_data_bytes": 0,
-    "data_transfer_bytes": 0,
-    "created_at": "2025-08-04T07:13:09Z",
-    "updated_at": "2025-08-04T07:21:55Z",
-    "created_by": {
-      "name": "your@email.com",
-      "image": ""
-    },
-    "init_source": "parent-data"
-  },
-  "operations": [
-    {
-      "id": "eb85073d-53fc-4d37-a32a-ca9e9ea1eeb1",
-      "project_id": "dry-heart-13671059",
-      "branch_id": "br-curly-wave-af4i4oeu",
-      "endpoint_id": "ep-soft-art-af5jvg5j",
-      "action": "suspend_compute",
-      "status": "running",
-      "failures_count": 0,
-      "created_at": "2025-08-04T07:21:55Z",
-      "updated_at": "2025-08-04T07:21:55Z",
-      "total_duration_ms": 0
-    },
-    {
-      "id": "586af342-1ffe-4e0a-9e11-326db1164ad7",
-      "project_id": "dry-heart-13671059",
-      "branch_id": "br-curly-wave-af4i4oeu",
-      "action": "delete_timeline",
-      "status": "scheduling",
-      "failures_count": 0,
-      "created_at": "2025-08-04T07:21:55Z",
-      "updated_at": "2025-08-04T07:21:55Z",
-      "total_duration_ms": 0
-    }
-  ]
-}
-```
-
-</details>
-
-You can verify that a branch is deleted by listing the branches for your project. See [List branches](#list-branches-with-the-api). The deleted branch should no longer be listed.
+See [Delete a branch](#delete-a-branch) for the Console, CLI, and API options.
 
 <NeedHelp/>

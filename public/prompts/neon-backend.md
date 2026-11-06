@@ -1,21 +1,29 @@
-Get this project set up on Neon and build a backend on it. If I haven't told you what to build, ask me before writing app code.
+Get this project set up on Neon so I can build a backend on it. Work through it with the Neon CLI; don't rely on interactive pickers.
 
-First, set up your tooling:
+First, ask me in one message (don't guess or pick a default): which org, an existing project in a supported region (`aws-us-east-2`, `aws-us-east-1`, `aws-eu-central-1`, or `aws-ap-southeast-1`) to reuse or a name to create a new one, and a one-line description of what I'm building. Neon's backend services (Functions, Object Storage, and the AI Gateway) are available in those four regions, on new or existing projects. Support is expanding toward all regions.
 
-1. Run `neon init --agent` in the terminal and help me answer its prompts (which editor, which Neon org, OAuth, and the MCP server).
-2. Install and update the Neon agent skills with `npx skills add neondatabase/agent-skills -y`. This installs all skills (including the Functions, Object Storage, and AI Gateway skills that `neon init` alone doesn't add) and updates any already present to the latest. Do this even if `neon init` ran, since it doesn't refresh existing skills.
+Then set up the tooling and connect:
 
-Then create the project (console, CLI, or MCP) in `aws-us-east-2` (required for the beta services), run `neon link` to bind this directory to it, and manage the whole backend as code in a single `neon.ts`. Neon's backend services (Functions, Object Storage, and the AI Gateway) are new and in beta, and their APIs, packages, and model IDs change often, so your training data is likely outdated or wrong. Prefer the agent skills and the docs linked below over your own memory, and if they disagree, trust the docs.
+1. Install or update the Neon CLI: `npm i -g neon@latest`. The rest uses the `neon` command.
+2. Sign in if needed: check with `neon me`, and run `neon login` if it's not signed in (it opens a browser, so pause and ask me to confirm once I've signed in before continuing).
+3. Install the Neon agent skills: `neon skills -y` (covers Postgres plus the Functions, Object Storage, and AI Gateway skills). Optional: set up the Neon MCP server with `neon mcp -y --oauth --agent <your editor>`.
+4. Connect the project from the answers above:
+   - Reuse an existing one: `neon link --project-id <id>`. This links this directory, pins the default branch, and writes the connection variables (like `DATABASE_URL`) into `.env.local`, or `.env` if it exists.
+   - Or create a new one: `neon link --org-id <org-id> --project-name <name> --region-id aws-us-east-2`. In one step this creates the project, links this directory, pins the default branch, and writes those variables into `.env.local`.
 
-Once you know what I'm building, use only the capabilities that app needs:
+Then build the backend, using only the capabilities the app needs:
 
 - Postgres for anything relational (system of record).
 - Object Storage for files too large for a row. Store the object key on a row, not the bytes.
 - Functions for long-running or streaming work such as an AI call, a background job, or a websocket; a quick query can stay in a normal route handler.
 - AI Gateway for LLM calls through one credential. Check the model catalog for the model and modality you need (text, image, etc.).
-- Auth if the app is multi-user; scope every query to the signed-in user.
+- Managed Better Auth if the app is multi-user; scope every query to the signed-in user.
+- Data API if the app needs a PostgREST-compatible HTTPS interface to Postgres.
+- Realtime for collaboration, multi-user, multi-device, with live SQL and end-to-end type-safe reactivity with live queries and optimistic mutations.
 
-Enable what you need in `neon.ts`, run `neon deploy` to provision everything, then read the injected environment variables. Create your database tables as a separate step (a migration or `run_sql`); `neon deploy` provisions services, not schema. Test changes on a branch (`neon checkout`) so the whole backend (database, buckets, functions) forks together. When done, verify each capability responds.
+Declare what you need in a single `neon.ts` (see the docs below; these APIs, packages, and model IDs change often, so trust the docs over your training data), run `neon deploy` to provision everything, then run `neon env pull` again to pull the new service credentials into `.env.local`. Create your database tables as a separate step (a migration, `neon psql`, or the `run_sql` MCP tool); `neon deploy` provisions services, not schema. To test in isolation, create and switch to a branch in one step with `neon checkout <name> --create`; when a `neon.ts` is present it builds the branch from your policy, so the declared services come up with it (always pass a name, because bare `neon checkout` opens an interactive picker, which this workflow avoids). Then run `neon deploy --update-existing` to reconcile the services on the branch you just created and refresh branch-specific credentials. The database, buckets, and Functions follow the branch together through service-specific lifecycle mechanics.
+
+When done, don't just tell me it works: exercise each capability I enabled (run a query with `neon psql -- -c "..."`, store and retrieve an object, call a function endpoint, make a model request, verify a signed-in user), show me the results, and give me commands I can rerun. Never print connection strings or other secrets back to me. If `neon deploy` stops and asks for `--allow-protected`, `--update-existing`, or `-y`, show me the changes it printed and ask me before re-running with any of them.
 
 Read the current docs for exact package names, config syntax, injected env var names, and model IDs:
 
@@ -24,4 +32,6 @@ Read the current docs for exact package names, config syntax, injected env var n
 - Functions (deploy, connect, injected env vars): https://neon.com/docs/compute/functions/get-started.md
 - Object Storage: https://neon.com/docs/storage/get-started.md
 - AI Gateway models, endpoints, and modality: https://neon.com/docs/ai-gateway/models.md
-- Auth (sign-in flow, JWT, and verifying the caller): https://neon.com/docs/auth/authentication-flow.md
+- Managed Better Auth (sign-in flow, JWT, and verifying the caller): https://neon.com/docs/auth/authentication-flow.md
+- Data API: https://neon.com/docs/data-api/overview.md
+- Realtime (TBC): https://neon.com/docs/realtime/overview.md

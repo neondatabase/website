@@ -187,7 +187,7 @@ After defining RLS policies, the next step is choosing how to run queries that r
 
 ### Frontend: Use the Data API
 
-For frontend applications, use the [Data API](/docs/data-api/get-started#connect-and-query), which provides a REST interface for your database. In this setup, Drizzle is used only to **declare and migrate RLS policies**; query execution is done with a PostgREST-compatible client such as `@neondatabase/neon-js`, `postgrest-js` etc.
+For frontend applications, use the [Data API](/docs/data-api/get-started#connect-and-query), which provides a REST interface for your database. In this setup, Drizzle is used only to **declare and migrate RLS policies**; query execution is done with a PostgREST-compatible client such as `@neon/neon-js`, `postgrest-js` etc.
 
 When requests go through the Data API, your database enforces RLS policies automatically based on the JWT claims included in the request. This means that as long as your frontend includes the appropriate authentication token, users will only be able to access the data they're authorized to see.
 

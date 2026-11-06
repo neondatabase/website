@@ -6,7 +6,12 @@ summary: >-
   timeouts, slug constraints, and the Node.js 24 runtime. Functions are
   long-running but still serverless.
 enableTableOfContents: true
-updatedOn: '2026-07-15T11:08:18.153Z'
+redirectFrom:
+  - /docs/compute/functions/runtime-limits
+  - /docs/compute/functions/limits
+  - /docs/functions/runtime-limits
+  - /docs/functions/limits
+updatedOn: '2026-09-16T15:38:57.808Z'
 ---
 
 Neon Functions run on Node.js 24.
@@ -15,7 +20,7 @@ Neon Functions run on Node.js 24.
 
 Neon Functions are long-running: you can host WebSocket servers, SSE endpoints, and agents that stream over HTTP without hitting a short execution timeout. They're still serverless. The platform shuts a function down when it's idle, with no open connections or pending `waitUntil` work, and can also evict and restart it for operational reasons. Treat eviction like a process restart: clients should reconnect when a connection drops.
 
-When the platform stops a function, it sends `SIGINT`. If the process is still running 5 seconds later, the platform forcibly stops the function. Handle `SIGINT` with `process.on('SIGINT', ...)` to close connections and flush in-flight work within that window. When the process exits, the OS closes its sockets, so dropped connections are usually detected without extra handling.
+When the platform stops a function, it sends `SIGINT`. If the process is still running 5 seconds later, the platform forcibly stops the function. Handle `SIGINT` with `process.on('SIGINT', ...)` to flush in-flight work within that window. You don't need to drain a `pg` pool: when the process exits, the OS closes its sockets and Neon's pooler reclaims those connections, so dropped connections are detected without extra handling.
 
 ## Timeouts
 
@@ -65,7 +70,7 @@ Slugs must match `^[a-z0-9]{1,20}$` and are immutable after the first deployment
 | Isolation         | microVM per isolate                                                                                                                             |
 | Concurrency       | Multiple requests in flight per isolate (interleaved on the event loop), scaling out with additional isolates. See [Concurrency](#concurrency). |
 | Concurrency limit | 100 concurrent invocations per account (default). See [Concurrency](#concurrency).                                                              |
-| Memory            | 2048 MiB (fixed during beta, not configurable)                                                                                                  |
+| Memory            | 2048 MiB (fixed, not configurable)                                                                                                              |
 
 ## Environment variables
 

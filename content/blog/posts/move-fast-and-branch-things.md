@@ -164,4 +164,4 @@ Neon helps to unblock these use cases and empower SaaS builders to take full adv
 
 Neon abstracts away the complexities traditionally associated with database management—such as infrastructure setup, connection pooling, and autoscaling—Neon allows developers and builders to concentrate on what they do best: building innovative and scalable web applications…fast.
 
-To get started with Serverless Postgres, sign up and [try Neon for free](https://console.neon.tech/signup). Follow us on [Twitter/X](https://twitter.com/neondatabase), join us on [Discord](https://neon.tech/discord), and let us know how we can help you build the next generation of applications.
+To get started with Serverless Postgres, sign up and [try Neon for free](https://console.neon.tech/signup). Follow us on [Twitter/X](https://twitter.com/neondatabase), join us on [Discord](https://neon.com/discord), and let us know how we can help you build the next generation of applications.

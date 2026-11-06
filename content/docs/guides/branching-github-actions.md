@@ -34,7 +34,6 @@ The easiest way to get started is with the [Neon GitHub integration](/docs/guide
 4.  Name the secret `NEON_API_KEY` and paste your API key into the value field.
 5.  Click **Add secret**.
 6.  You will also need your Neon **Project ID**, which you can find in the **Settings** page of the Neon console.
-    ![Neon Project ID in the console](/docs/manage/settings_page.png)
 7.  Add the Project ID to your GitHub repository as a **variable**:
     - In your GitHub repository, navigate to **Settings** > **Secrets and variables** > **Actions**.
     - Select **Variables** and click **New repository variable**.

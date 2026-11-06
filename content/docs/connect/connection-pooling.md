@@ -14,7 +14,10 @@ summary: >-
 enableTableOfContents: true
 redirectFrom:
   - /docs/get-started/connection-pooling
-updatedOn: '2026-06-18T20:46:14.637Z'
+  - /docs/guides/connection-pooling
+  - /docs/introduction/connection-pooling
+  - /docs/manage/connection-pooling
+updatedOn: '2026-10-19T16:37:42.945Z'
 ---
 
 Neon uses [PgBouncer](https://www.pgbouncer.org/) to provide connection pooling, enabling up to 10,000 concurrent connections. This guide explains how pooling works, when to use it, and how to avoid common issues.
@@ -73,7 +76,36 @@ You can also view active connections on the [Monitoring page](/docs/introduction
 
 Connection pooling solves the `max_connections` limit by maintaining a pool of reusable connections. Instead of opening a new Postgres connection for each client, PgBouncer routes multiple client connections through a smaller pool of actual Postgres connections.
 
-![Connection](/docs/connect/connection.png)
+```mermaid
+flowchart LR
+  subgraph client["Client application"]
+    c1["user 1"]
+    c2["user 1"]
+    c3["..."]
+    c4["user 2"]
+    c5["user 1"]
+  end
+
+  subgraph pooler["PgBouncer connection pooler"]
+    p1["user1/database1 pool"]
+    p2["user2/database1 pool"]
+    p3["user1/database2 pool"]
+  end
+
+  subgraph postgres["Postgres (max_connections limit)"]
+    d1[("database 1")]
+    d2[("database 2")]
+  end
+
+  c1 --> p1
+  c2 --> p1
+  c3 --> p1
+  c4 --> p2
+  c5 --> p3
+  p1 --> d1
+  p2 --> d1
+  p3 --> d2
+```
 
 _The diagram shows how multiple client connections from different users route through separate PgBouncer pools (one per user/database combination), which share a limited number of actual Postgres connections to access the databases._
 
@@ -189,17 +221,17 @@ postgresql://user1:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbn
 postgresql://user1:AbC123dEf@ep-cool-darkness-123456-pooler.us-east-2.aws.neon.tech/dbname?sslmode=require
 ```
 
-You can copy a pooled connection string from the Neon Console by clicking **Connect** on your Project Dashboard and enabling the **Connection pooling** toggle.
+You can copy a pooled connection string from the Neon Console by clicking **Connect** in the Console nav and enabling the **Connection pooling** toggle.
 
-![Connection Details pooled connection string](/docs/connect/connection_details.png)
+![Connection Details pooled connection string](/docs/connect/connect_to_branch_modal.png)
 
 ### Enable, disable, and find the pooled connection string in the Console
 
 To get the pooled connection string or switch between pooled and direct from the dashboard:
 
 1. Sign in to the [Neon Console](https://console.neon.tech) and select your project.
-2. On the **Project Dashboard**, click **Connect**.
-3. In the **Connect to your database** modal, choose a **Branch**, **Compute**, **Database**, and **Role**.
+2. Click **Connect** in the Console nav.
+3. In the **Connect to your branch** modal, choose a **Branch**, **Compute**, **Database**, and **Role**.
 4. Turn the **Connection pooling** toggle on to get the pooled string, or off to get the direct string, then copy it.
 
 The toggle is on by default for new projects. It doesn't start or stop the pooler at the compute. The pooled endpoint is always available. The toggle just switches the displayed connection string between the pooled hostname (with the `-pooler` suffix) and the direct hostname, so you can pick which one your app uses. To enable pooling in your app, use the pooled string; to disable it, use the direct string.
@@ -216,6 +248,8 @@ The toggle is on by default for new projects. It doesn't start or stop the poole
 | `pg_dump` / `pg_restore`          | Direct          | Uses `SET` statements                     |
 | Logical replication               | Direct          | Requires persistent connection            |
 | Admin tasks                       | Direct          | May need session-level features           |
+
+If you run on a highly elastic platform such as AWS Fargate, Google Cloud Run, or Vercel, see [Serverless connection pooling](/docs/guides/serverless-connection-pooling) for strategies that prevent connection leaks and exhaustion when instances scale out or suspend.
 
 ## Connection pooling in transaction mode
 

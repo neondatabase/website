@@ -8,10 +8,8 @@ summary: >-
   (https://*.preview.vercel.app) in Console > Auth > Configuration > Domains.
   Localhost ports are pre-approved and need no entry.
 enableTableOfContents: true
-updatedOn: '2026-07-15T00:08:00.682Z'
+updatedOn: '2026-11-05T01:14:11.711Z'
 ---
-
-<FeatureBetaProps feature_name="Managed Better Auth" />
 
 Add your application domains to Managed Better Auth's allowlist to enable OAuth and email verification redirects in production.
 
@@ -21,13 +19,50 @@ Managed Better Auth only redirects to domains in your allowlist. This prevents p
 
 Without adding your production domain, OAuth sign-in and verification links will fail when users try to access your application.
 
+The same list decides which `Origin` headers the Auth API accepts, so sign-in and sign-up requests from an origin that isn't on it fail with `INVALID_ORIGIN`. See [Origin errors](/docs/auth/troubleshooting#origin-errors).
+
 ## Add a domain
+
+<Tabs labels={["Console", "CLI", "API"]}>
+
+<TabItem>
 
 1. Go to **Console → Auth → Configuration → Domains**
 2. Enter your domain with protocol: `https://myapp.com`
 3. Click **Add domain**
 
 Repeat for each domain where your app runs.
+
+</TabItem>
+
+<TabItem>
+
+Add a domain with [`neon neon-auth domain add`](/docs/cli/neon-auth#domain-add):
+
+```bash
+neon neon-auth domain add https://myapp.com
+```
+
+Use `neon neon-auth domain list` and `neon neon-auth domain delete` to view and remove entries.
+
+</TabItem>
+
+<TabItem>
+
+Send a `POST` request to the [add trusted domain](/docs/reference/api/auth/add-branch-neon-auth-trusted-domain) endpoint. Replace `{project_id}` and `{branch_id}` with your project and branch IDs.
+
+```bash shouldWrap
+curl -X POST 'https://console.neon.tech/api/v2/projects/{project_id}/branches/{branch_id}/auth/domains' \
+  -H 'Authorization: Bearer $NEON_API_KEY' \
+  -H 'Content-Type: application/json' \
+  -d '{"domain": "https://myapp.com", "auth_provider": "better_auth"}'
+```
+
+Use [`GET`](/docs/reference/api/auth/list-branch-neon-auth-trusted-domains) on the same path to list domains, and [`DELETE`](/docs/reference/api/auth/delete-branch-neon-auth-trusted-domain) to remove them. See [Manage Managed Better Auth via the API](/docs/auth/guides/manage-auth-api#related-auth-endpoints) for the full set of auth endpoints.
+
+</TabItem>
+
+</Tabs>
 
 <Admonition type="note">
 Include the protocol (`https://`) and omit trailing slashes. For example: `https://myapp.com` not `https://myapp.com/`

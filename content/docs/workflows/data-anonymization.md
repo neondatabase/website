@@ -11,10 +11,8 @@ summary: >-
   and the branch is unavailable while anonymization runs.
 redirectFrom:
   - /docs/concepts/anonymized-data
-tag: new
-tagTheme: green
 enableTableOfContents: true
-updatedOn: '2026-08-18T10:29:02.410Z'
+updatedOn: '2026-09-25T09:36:22.797Z'
 ---
 
 <FeatureBeta />
@@ -42,7 +40,7 @@ This feature uses **static masking**, which permanently transforms data in the b
 To create a branch with anonymized data from the Neon Console:
 
 1. Select your project.
-2. Select **Branches** under **Project**.
+2. Select **Branches** in the sidebar.
 3. Click **New branch** to open the branch creation dialog.
    ![Neon Console 'Create new branch' dialog with 'Anonymized data' selected](/docs/workflows/anon-create-a-new-branch.png)
 4. Select a **Parent branch**. This determines the origin of the schema and data for your new branch. By default, your project's default branch (named `main` if the project was created with the CLI or API, or `production` if created in the Console) is selected, but you can choose any existing branch in your project.

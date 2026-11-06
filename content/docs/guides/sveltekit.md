@@ -10,7 +10,7 @@ summary: >-
   function. Requires a DATABASE_URL connection string with sslmode=require and
   channel_binding=require.
 enableTableOfContents: true
-updatedOn: '2026-08-04T05:18:26.469Z'
+updatedOn: '2026-10-08T19:32:04.700Z'
 ---
 
 <CopyPrompt src="/prompts/sveltekit-prompt.md"
@@ -59,7 +59,7 @@ If you do not have one already, create a Neon project. Save your connection deta
 
 ## Store your Neon credentials
 
-Add a `.env` file to your project directory and add your Neon connection string to it. You can find the connection string for your database by clicking the **Connect** button on your **Project Dashboard**. For more information, see [Connect from any application](/docs/connect/connect-from-any-app).
+Add a `.env` file to your project directory and add your Neon connection string to it. You can find the connection string for your database by clicking the **Connect** button in the Console nav. For more information, see [Connect from any application](/docs/connect/connect-from-any-app).
 
 ```shell shouldWrap
 DATABASE_URL="postgresql://<user>:<password>@<endpoint_hostname>.neon.tech:<port>/<dbname>?sslmode=require&channel_binding=require"
@@ -176,7 +176,7 @@ Create a `+page.svelte` file to display the data:
 
 ## Run the app
 
-When you run `npm run dev` you can expect to see the following on [localhost:5173](localhost:5173):
+When you run `npm run dev` you can expect to see the following on [localhost:5173](http://localhost:5173):
 
 ```shell shouldWrap
 Database Version
@@ -191,5 +191,6 @@ PostgreSQL 17.2 on x86_64-pc-linux-gnu, compiled by gcc (Debian 12.2.0-14) 12.2.
 - [Add Object Storage](/docs/storage/overview): S3-compatible file storage that branches with your database
 - [Deploy a Function](/docs/compute/functions/overview): Run backend compute next to your database, no separate hosting needed
 - [Call an LLM with AI Gateway](/docs/ai-gateway/overview): Access foundation models from Anthropic, OpenAI, Google, and more with one credential
+- [Realtime](/docs/realtime/quickstart): Build realtime apps with end-to-end reactivity &raquo;
 
 <NeedHelp/>

@@ -8,7 +8,7 @@ summary: >-
   two connection strings: a pooled URL (`DATABASE_URL`) for application queries
   and a direct URL (`DATABASE_URL_UNPOOLED`) for Prisma CLI commands such as migrations and
   `db push`. Newer Prisma versions configure the direct connection in
-  `prisma.config.ts`; older versions use the `directUrl` property in
+  a Prisma config file (`prisma.config.ts`, or `prisma7.config.ts` in 7.10+); older versions use the `directUrl` property in
   `schema.prisma`.
 enableTableOfContents: true
 redirectFrom:
@@ -16,18 +16,18 @@ redirectFrom:
   - /docs/integrations/prisma
   - /docs/guides/prisma-guide
   - /docs/guides/prisma-migrate
-updatedOn: '2026-08-17T13:35:16.350Z'
+updatedOn: '2026-10-05T14:25:23.981Z'
 ---
 
 <CopyPrompt src="/prompts/prisma-prompt.md" 
 description="Pre-built prompt for connecting Node/TypeScript applications to Neon using Prisma ORM."/>
 
-Prisma is an open-source, next-generation ORM for Node.js and TypeScript. This guide shows you how to connect a Prisma application to Neon using the recommended setup with the Neon serverless driver adapter.
+Prisma is an open-source ORM for Node.js and TypeScript. This guide shows you how to connect a Prisma application to Neon using the recommended setup with the Neon serverless driver adapter.
 
 ## Prerequisites
 
 - A [Neon account and project](/docs/get-started-with-neon/signing-up)
-- Node.js 18+ installed
+- Node.js 20.19+, 22.12+, or 24+ installed (required by Prisma ORM 7)
 - A Node.js or TypeScript project (or create a new one)
 
 ## Setup
@@ -35,9 +35,13 @@ Prisma is an open-source, next-generation ORM for Node.js and TypeScript. This g
 ### Step 1: Install dependencies
 
 ```bash
-npm install @prisma/client @prisma/adapter-neon dotenv
-npm install prisma tsx --save-dev
+npm install @prisma/client@7 @prisma/adapter-neon@7 dotenv
+npm install prisma@7 tsx --save-dev
 ```
+
+<Admonition type="note">
+This guide uses Prisma ORM 7. Install the `prisma` CLI, `@prisma/client`, and `@prisma/adapter-neon` at the same major version (`@7`). The `prisma` package's `latest` npm tag currently points to a Prisma 8 prerelease, so an unpinned `npm install prisma` installs a CLI that doesn't match the rest of this setup. If the Prisma CLI later prints an "Update available" notice for Prisma 8, ignore it for this guide.
+</Admonition>
 
 ### Step 2: Get your connection strings
 
@@ -46,20 +50,20 @@ From your Neon Console, click **Connect** and copy both connection strings:
 - **Pooled connection** (has `-pooler` in the hostname): for your application
 - **Direct (unpooled) connection**: for Prisma CLI commands (migrations, introspection)
 
-![Connection details modal](/docs/connect/connection_details.png)
+![Connection details modal](/docs/connect/connect_to_branch_modal.png)
 
 Add them to your `.env` file:
 
 ```ini shouldWrap
 # Pooled connection for your application
-DATABASE_URL="postgresql://[user]:[password]@[endpoint]-pooler.[region].aws.neon.tech/[dbname]?sslmode=require"
+DATABASE_URL="postgresql://[user]:[password]@[endpoint]-pooler.[region].aws.neon.tech/[dbname]?sslmode=require&channel_binding=require"
 
 # Direct (unpooled) connection for Prisma CLI
-DATABASE_URL_UNPOOLED="postgresql://[user]:[password]@[endpoint].[region].aws.neon.tech/[dbname]?sslmode=require"
+DATABASE_URL_UNPOOLED="postgresql://[user]:[password]@[endpoint].[region].aws.neon.tech/[dbname]?sslmode=require&channel_binding=require"
 ```
 
 <Admonition type="tip">
-The pooled connection has `-pooler` in the hostname. The direct (unpooled) connection does not. Both are available in your Neon Console.
+The pooled connection has `-pooler` in the hostname. The direct (unpooled) connection does not. Both are available in your Neon Console. If you only have the pooled string, remove `-pooler` from the hostname to get the direct one.
 </Admonition>
 
 ### Step 3: Configure your Prisma schema
@@ -85,12 +89,12 @@ model User {
 ```
 
 <Admonition type="note">
-In Prisma 7+, do not include a `url` property in the datasource block. The connection is configured via `prisma.config.ts` and the adapter.
+In Prisma 7+, do not include a `url` property in the datasource block. The connection is configured in the Prisma config file (Step 4) and the adapter.
 </Admonition>
 
-### Step 4: Create prisma.config.ts
+### Step 4: Configure the Prisma CLI connection
 
-Create a `prisma.config.ts` file in your project root. This tells Prisma CLI where to connect for migrations and other commands:
+The Prisma CLI reads its connection from a config file in your project root. If you ran `npx prisma init`, it already created one: `prisma7.config.ts` in Prisma 7.10 and later, or `prisma.config.ts` in earlier 7.x releases. Replace that file's contents with the following. If you don't have a config file yet, create `prisma.config.ts`:
 
 ```typescript
 import 'dotenv/config'
@@ -103,6 +107,10 @@ export default defineConfig({
   },
 })
 ```
+
+<Admonition type="warning">
+Keep only one Prisma config file. If both `prisma7.config.ts` and `prisma.config.ts` exist, the CLI loads `prisma7.config.ts` and ignores the other, so CLI commands can end up on the pooled connection. The first line of `npx prisma db push` output shows which file was loaded (`Loaded Prisma config from ...`).
+</Admonition>
 
 ### Step 5: Create your Prisma Client
 
@@ -181,16 +189,16 @@ npx tsx src/main.ts
 
 ## Why two connection strings?
 
-Neon uses connection pooling to efficiently manage database connections in serverless environments:
+Neon uses connection pooling to manage database connections in serverless environments:
 
-- **Pooled connection (`DATABASE_URL`)**: Your application connects through Neon's connection pooler, which is optimal for serverless functions that create many short-lived connections.
+- **Pooled connection (`DATABASE_URL`)**: Your application connects through Neon's connection pooler, which suits serverless functions that create many short-lived connections.
 - **Direct (unpooled) connection (`DATABASE_URL_UNPOOLED`)**: Prisma CLI commands like `prisma migrate` and `prisma db push` need a direct connection for schema operations.
 
 ## Advanced configuration
 
-### Using a non-public PostgreSQL schema
+### Using a non-public Postgres schema
 
-If you're using a PostgreSQL schema other than `public`, pass a `schema` option when creating the adapter:
+If you're using a Postgres schema other than `public`, pass a `schema` option when creating the adapter:
 
 ```typescript
 const adapter = new PrismaNeon(
@@ -201,11 +209,13 @@ const adapter = new PrismaNeon(
 
 ### Setting the search path for raw SQL queries
 
-For raw SQL queries that reference tables without schema qualification, use PostgreSQL's `options` parameter in your connection string:
+For raw SQL queries that reference tables without schema qualification, use the Postgres `options` parameter in your connection string:
 
 ```text shouldWrap
 postgresql://[user]:[password]@[neon_hostname]/[dbname]?options=-c%20search_path%3Dmyschemaname
 ```
+
+This works only on the direct (unpooled) connection. The pooler rejects `search_path` in startup options, so with the pooled `DATABASE_URL`, use the adapter's `schema` option or schema-qualified table names instead.
 
 ## Troubleshooting
 
@@ -218,7 +228,7 @@ If you see an error like:
 Error: P1001: Can't reach database server at `ep-example-123456.us-east-2.aws.neon.tech`:`5432`
 ```
 
-This usually means the Prisma query engine timed out before Neon activated the compute. Neon computes scale to zero after inactivity and take a few seconds to wake up.
+This usually means the connection timed out before Neon activated the compute. Neon computes scale to zero after inactivity and take a few seconds to wake up.
 
 Add a `connect_timeout` parameter to your connection string:
 
@@ -233,23 +243,24 @@ A value of `0` means no timeout.
 <details>
 <summary>**Connection pool timeouts**</summary>
 
-Prisma maintains its own connection pool. If you're seeing pool-related timeouts, you can configure:
+With the Neon adapter, the connection pool belongs to the Neon serverless driver, not Prisma. In Prisma 7, the `connection_limit` and `pool_timeout` URL parameters have no effect. Pass pool options to the adapter instead:
 
-- `connection_limit`: Number of connections in the pool (default: `num_cpus * 2 + 1`)
-- `pool_timeout`: Seconds to wait for a connection from the pool (default: 10)
-
-```text shouldWrap
-DATABASE_URL="postgresql://...?sslmode=require&connection_limit=20&pool_timeout=15"
+```typescript
+const adapter = new PrismaNeon({
+  connectionString: process.env.DATABASE_URL!,
+  max: 20, // maximum connections in the pool
+  connectionTimeoutMillis: 15_000, // how long to wait for a connection
+})
 ```
 
-See Prisma's [connection management guide](https://www.prisma.io/docs/guides/performance-and-optimization/connection-management) for details.
+See Prisma's [connection pool guide](https://www.prisma.io/docs/orm/v7/prisma-client/setup-and-configuration/databases-connections/connection-pool) for details.
 
 </details>
 
 <details>
 <summary>**Using Prisma 6 or earlier**</summary>
 
-In Prisma 6 and earlier, you configure the connection directly in `schema.prisma` instead of `prisma.config.ts`:
+In Prisma 6 and earlier, you configure the connection directly in `schema.prisma` instead of a Prisma config file:
 
 ```prisma
 datasource db {
@@ -286,7 +297,8 @@ The `directUrl` property is available in Prisma 4.10.0 and higher.
 
 - Import `PrismaClient` from `./generated/prisma` (or your configured `output` path), not from `@prisma/client`. The import path changed in Prisma 7.
 - Do not install `@neondatabase/serverless` or `ws` as separate packages. The `@prisma/adapter-neon` package bundles everything needed for the Neon connection.
-- In Prisma 7+, do not include a `url` property in the `prisma/schema.prisma` datasource block. The connection is configured via `prisma.config.ts` and the adapter.
+- In Prisma 7+, do not include a `url` property in the `prisma/schema.prisma` datasource block. The connection is configured in the Prisma config file and the adapter.
+- `npx prisma init` in Prisma 7.10+ creates `prisma7.config.ts`. Edit that file instead of adding a second `prisma.config.ts`; when both exist, the CLI loads `prisma7.config.ts`.
 - You need both a pooled connection (`DATABASE_URL`) for your application and a direct (unpooled) connection (`DATABASE_URL_UNPOOLED`) for Prisma CLI commands.
 - Call `prisma.$disconnect()` in a `.finally()` block when running standalone scripts. Omitting this can leave connections open.
 

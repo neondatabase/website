@@ -1,3 +1,5 @@
+import { BASE_AGENT_PROMPT } from 'components/pages/doc/agent-setup-button';
+
 /**
  * Link opened when a user clicks the thumbnail or CTA.
  *
@@ -31,28 +33,44 @@
  *
  * @typedef {Object} VideoModalConfig
  * @property {string} id Unique, stable modal identifier.
- * @property {string} embedId YouTube video ID used for the thumbnail.
+ * @property {string} [embedId] YouTube video ID used for the thumbnail.
  * @property {string} title Modal heading and thumbnail accessible label.
  * @property {string} [description] Optional supporting text.
  * @property {ModalTargeting} [targeting] Page targeting rules; omit to show on every page.
  * @property {ModalDestination} destination Thumbnail and CTA destination.
+ * @property {string} [copyPrompt] When set, the card renders a copyable code field (with an
+ *   icon-only copy control) that copies this plain-text string to the clipboard instead of a
+ *   video thumbnail.
  */
 
-/** @type {VideoModalConfig[]} */
+/**
+ * Video modals are temporarily disabled: no videos pop up on doc pages for now.
+ *
+ * The modal capability is fully intact. To re-enable, move the entries below back into the
+ * `MODALS` array (or add new ones).
+ *
+ * @type {VideoModalConfig[]}
+ */
 const MODALS = [
   {
-    id: 'branching-video',
-    embedId: 'UuHnFlg66Io',
-    title: 'Watch: Git for databases',
-    description: 'See how Neon branching works in practice.',
-    targeting: {
-      all: true,
-    },
+    id: 'docs-agent-setup',
+    title: 'Set up your agent',
+    targeting: { all: true },
+    copyPrompt: BASE_AGENT_PROMPT,
     destination: {
-      label: 'Watch the video',
-      url: '/docs/introduction/branching',
+      label: 'Set up your AI agent',
+      url: '/docs/ai/agent-setup',
     },
   },
+];
+
+/**
+ * Disabled modal configurations, kept for easy re-enabling.
+ *
+ * @type {VideoModalConfig[]}
+ */
+// eslint-disable-next-line no-unused-vars
+const DISABLED_MODALS = [
   {
     id: 'serverless-video',
     embedId: 'llSTZMVrbx8',

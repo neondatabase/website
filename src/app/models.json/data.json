@@ -4,29 +4,22 @@
     "name": "Neon",
     "npm": "@ai-sdk/openai-compatible",
     "api": "${NEON_AI_GATEWAY_BASE_URL}/v1",
-    "env": [
-      "NEON_AI_GATEWAY_BASE_URL",
-      "NEON_AI_GATEWAY_TOKEN"
-    ],
+    "env": ["NEON_AI_GATEWAY_BASE_URL", "NEON_AI_GATEWAY_TOKEN"],
     "doc": "https://neon.com/docs/ai-gateway/models",
     "models": {
       "claude-fable-5": {
         "id": "claude-fable-5",
         "name": "Claude Fable 5",
-        "provider": "anthropic",
+        "lab": "anthropic",
+        "provider": "databricks",
         "family": "claude-fable",
+        "released": true,
         "attachment": true,
         "reasoning": true,
         "reasoning_options": [
           {
             "type": "effort",
-            "values": [
-              "low",
-              "medium",
-              "high",
-              "xhigh",
-              "max"
-            ]
+            "values": ["low", "medium", "high", "xhigh", "max"]
           }
         ],
         "tool_call": true,
@@ -37,14 +30,8 @@
         "release_date": "2026-06-09",
         "last_updated": "2026-06-09",
         "modalities": {
-          "input": [
-            "text",
-            "image",
-            "pdf"
-          ],
-          "output": [
-            "text"
-          ]
+          "input": ["text", "image", "pdf"],
+          "output": ["text"]
         },
         "limit": {
           "context": 1000000,
@@ -57,11 +44,50 @@
           "cache_write": 12.5
         }
       },
+      "claude-fable-5-1": {
+        "id": "claude-fable-5-1",
+        "name": "Claude Fable 5.1",
+        "lab": "anthropic",
+        "provider": "databricks",
+        "family": "claude-fable",
+        "released": true,
+        "attachment": true,
+        "reasoning": true,
+        "reasoning_options": [
+          {
+            "type": "effort",
+            "values": ["low", "medium", "high", "xhigh", "max"]
+          }
+        ],
+        "tool_call": true,
+        "temperature": false,
+        "structured_output": false,
+        "open_weights": false,
+        "knowledge": "2026-06",
+        "release_date": "2026-09-01",
+        "last_updated": "2026-09-01",
+        "modalities": {
+          "input": ["text", "image", "pdf"],
+          "output": ["text"]
+        },
+        "limit": {
+          "context": 1000000,
+          "output": 128000
+        },
+        "cost": {
+          "input": 10,
+          "output": 50,
+          "cache_read": 0.25,
+          "cache_write": 12.5
+        }
+      },
       "claude-haiku-4-5": {
         "id": "claude-haiku-4-5",
-        "name": "Claude Haiku 4.5 (latest)",
-        "provider": "anthropic",
+        "name": "Claude Haiku 4.5",
+        "lab": "anthropic",
+        "provider": "databricks",
         "family": "claude-haiku",
+        "released": true,
         "attachment": true,
         "reasoning": true,
         "reasoning_options": [
@@ -82,14 +108,8 @@
         "release_date": "2025-10-15",
         "last_updated": "2025-10-15",
         "modalities": {
-          "input": [
-            "text",
-            "image",
-            "pdf"
-          ],
-          "output": [
-            "text"
-          ]
+          "input": ["text", "image", "pdf"],
+          "output": ["text"]
         },
         "limit": {
           "context": 200000,
@@ -104,9 +124,11 @@
       },
       "claude-opus-4-1": {
         "id": "claude-opus-4-1",
-        "name": "Claude Opus 4.1 (latest)",
-        "provider": "anthropic",
+        "name": "Claude Opus 4.1",
+        "lab": "anthropic",
+        "provider": "databricks",
         "family": "claude-opus",
+        "released": true,
         "attachment": true,
         "reasoning": true,
         "reasoning_options": [
@@ -127,14 +149,8 @@
         "release_date": "2025-08-05",
         "last_updated": "2025-08-05",
         "modalities": {
-          "input": [
-            "text",
-            "image",
-            "pdf"
-          ],
-          "output": [
-            "text"
-          ]
+          "input": ["text", "image", "pdf"],
+          "output": ["text"]
         },
         "limit": {
           "context": 200000,
@@ -149,9 +165,11 @@
       },
       "claude-opus-4-5": {
         "id": "claude-opus-4-5",
-        "name": "Claude Opus 4.5 (latest)",
-        "provider": "anthropic",
+        "name": "Claude Opus 4.5",
+        "lab": "anthropic",
+        "provider": "databricks",
         "family": "claude-opus",
+        "released": true,
         "attachment": true,
         "reasoning": true,
         "reasoning_options": [
@@ -172,14 +190,8 @@
         "release_date": "2025-11-24",
         "last_updated": "2025-11-24",
         "modalities": {
-          "input": [
-            "text",
-            "image",
-            "pdf"
-          ],
-          "output": [
-            "text"
-          ]
+          "input": ["text", "image", "pdf"],
+          "output": ["text"]
         },
         "limit": {
           "context": 200000,
@@ -195,8 +207,10 @@
       "claude-opus-4-6": {
         "id": "claude-opus-4-6",
         "name": "Claude Opus 4.6",
-        "provider": "anthropic",
+        "lab": "anthropic",
+        "provider": "databricks",
         "family": "claude-opus",
+        "released": true,
         "attachment": true,
         "reasoning": true,
         "reasoning_options": [
@@ -217,14 +231,8 @@
         "release_date": "2026-02-05",
         "last_updated": "2026-03-13",
         "modalities": {
-          "input": [
-            "text",
-            "image",
-            "pdf"
-          ],
-          "output": [
-            "text"
-          ]
+          "input": ["text", "image", "pdf"],
+          "output": ["text"]
         },
         "limit": {
           "context": 1000000,
@@ -240,8 +248,10 @@
       "claude-opus-4-7": {
         "id": "claude-opus-4-7",
         "name": "Claude Opus 4.7",
-        "provider": "anthropic",
+        "lab": "anthropic",
+        "provider": "databricks",
         "family": "claude-opus",
+        "released": true,
         "attachment": true,
         "reasoning": true,
         "reasoning_options": [
@@ -250,13 +260,7 @@
           },
           {
             "type": "effort",
-            "values": [
-              "low",
-              "medium",
-              "high",
-              "xhigh",
-              "max"
-            ]
+            "values": ["low", "medium", "high", "xhigh", "max"]
           }
         ],
         "tool_call": true,
@@ -267,14 +271,8 @@
         "release_date": "2026-04-16",
         "last_updated": "2026-04-16",
         "modalities": {
-          "input": [
-            "text",
-            "image",
-            "pdf"
-          ],
-          "output": [
-            "text"
-          ]
+          "input": ["text", "image", "pdf"],
+          "output": ["text"]
         },
         "limit": {
           "context": 1000000,
@@ -290,8 +288,10 @@
       "claude-opus-4-8": {
         "id": "claude-opus-4-8",
         "name": "Claude Opus 4.8",
-        "provider": "anthropic",
+        "lab": "anthropic",
+        "provider": "databricks",
         "family": "claude-opus",
+        "released": true,
         "attachment": true,
         "reasoning": true,
         "reasoning_options": [
@@ -300,13 +300,7 @@
           },
           {
             "type": "effort",
-            "values": [
-              "low",
-              "medium",
-              "high",
-              "xhigh",
-              "max"
-            ]
+            "values": ["low", "medium", "high", "xhigh", "max"]
           }
         ],
         "tool_call": true,
@@ -317,14 +311,8 @@
         "release_date": "2026-05-28",
         "last_updated": "2026-05-28",
         "modalities": {
-          "input": [
-            "text",
-            "image",
-            "pdf"
-          ],
-          "output": [
-            "text"
-          ]
+          "input": ["text", "image", "pdf"],
+          "output": ["text"]
         },
         "limit": {
           "context": 1000000,
@@ -340,8 +328,10 @@
       "claude-opus-5": {
         "id": "claude-opus-5",
         "name": "Claude Opus 5",
-        "provider": "anthropic",
+        "lab": "anthropic",
+        "provider": "databricks",
         "family": "claude-opus",
+        "released": true,
         "attachment": true,
         "reasoning": true,
         "reasoning_options": [
@@ -350,13 +340,7 @@
           },
           {
             "type": "effort",
-            "values": [
-              "low",
-              "medium",
-              "high",
-              "xhigh",
-              "max"
-            ]
+            "values": ["low", "medium", "high", "xhigh", "max"]
           }
         ],
         "tool_call": true,
@@ -367,14 +351,8 @@
         "release_date": "2026-07-24",
         "last_updated": "2026-07-24",
         "modalities": {
-          "input": [
-            "text",
-            "image",
-            "pdf"
-          ],
-          "output": [
-            "text"
-          ]
+          "input": ["text", "image", "pdf"],
+          "output": ["text"]
         },
         "limit": {
           "context": 1000000,
@@ -387,11 +365,50 @@
           "cache_write": 6.25
         }
       },
+      "claude-opus-5-5": {
+        "id": "claude-opus-5-5",
+        "name": "Claude Opus 5.5",
+        "lab": "anthropic",
+        "provider": "databricks",
+        "family": "claude-opus",
+        "released": true,
+        "attachment": true,
+        "reasoning": true,
+        "reasoning_options": [
+          {
+            "type": "effort",
+            "values": ["low", "medium", "high", "xhigh", "max"]
+          }
+        ],
+        "tool_call": true,
+        "temperature": false,
+        "structured_output": false,
+        "open_weights": false,
+        "knowledge": "2026-06",
+        "release_date": "2026-09-22",
+        "last_updated": "2026-09-22",
+        "modalities": {
+          "input": ["text", "image", "pdf"],
+          "output": ["text"]
+        },
+        "limit": {
+          "context": 1000000,
+          "output": 128000
+        },
+        "cost": {
+          "input": 4,
+          "output": 20,
+          "cache_read": 0.2,
+          "cache_write": 5
+        }
+      },
       "claude-sonnet-4-5": {
         "id": "claude-sonnet-4-5",
-        "name": "Claude Sonnet 4.5 (latest)",
-        "provider": "anthropic",
+        "name": "Claude Sonnet 4.5",
+        "lab": "anthropic",
+        "provider": "databricks",
         "family": "claude-sonnet",
+        "released": true,
         "attachment": true,
         "reasoning": true,
         "reasoning_options": [
@@ -412,14 +429,8 @@
         "release_date": "2025-09-29",
         "last_updated": "2025-09-29",
         "modalities": {
-          "input": [
-            "text",
-            "image",
-            "pdf"
-          ],
-          "output": [
-            "text"
-          ]
+          "input": ["text", "image", "pdf"],
+          "output": ["text"]
         },
         "limit": {
           "context": 200000,
@@ -435,8 +446,10 @@
       "claude-sonnet-4-6": {
         "id": "claude-sonnet-4-6",
         "name": "Claude Sonnet 4.6",
-        "provider": "anthropic",
+        "lab": "anthropic",
+        "provider": "databricks",
         "family": "claude-sonnet",
+        "released": true,
         "attachment": true,
         "reasoning": true,
         "reasoning_options": [
@@ -457,14 +470,8 @@
         "release_date": "2026-02-17",
         "last_updated": "2026-03-13",
         "modalities": {
-          "input": [
-            "text",
-            "image",
-            "pdf"
-          ],
-          "output": [
-            "text"
-          ]
+          "input": ["text", "image", "pdf"],
+          "output": ["text"]
         },
         "limit": {
           "context": 1000000,
@@ -480,8 +487,10 @@
       "claude-sonnet-5": {
         "id": "claude-sonnet-5",
         "name": "Claude Sonnet 5",
-        "provider": "anthropic",
+        "lab": "anthropic",
+        "provider": "databricks",
         "family": "claude-sonnet",
+        "released": true,
         "attachment": true,
         "reasoning": true,
         "reasoning_options": [
@@ -490,13 +499,7 @@
           },
           {
             "type": "effort",
-            "values": [
-              "low",
-              "medium",
-              "high",
-              "xhigh",
-              "max"
-            ]
+            "values": ["low", "medium", "high", "xhigh", "max"]
           }
         ],
         "tool_call": true,
@@ -507,14 +510,8 @@
         "release_date": "2026-06-30",
         "last_updated": "2026-06-30",
         "modalities": {
-          "input": [
-            "text",
-            "image",
-            "pdf"
-          ],
-          "output": [
-            "text"
-          ]
+          "input": ["text", "image", "pdf"],
+          "output": ["text"]
         },
         "limit": {
           "context": 1000000,
@@ -530,18 +527,16 @@
       "gpt-oss-120b": {
         "id": "gpt-oss-120b",
         "name": "GPT OSS 120B",
-        "provider": "openai",
+        "lab": "openai",
+        "provider": "databricks",
         "family": "gpt-oss",
+        "released": true,
         "attachment": false,
         "reasoning": true,
         "reasoning_options": [
           {
             "type": "effort",
-            "values": [
-              "low",
-              "medium",
-              "high"
-            ]
+            "values": ["low", "medium", "high"]
           }
         ],
         "tool_call": true,
@@ -551,37 +546,31 @@
         "release_date": "2025-08-05",
         "last_updated": "2025-08-05",
         "modalities": {
-          "input": [
-            "text"
-          ],
-          "output": [
-            "text"
-          ]
+          "input": ["text"],
+          "output": ["text"]
         },
         "limit": {
           "context": 131072,
           "output": 25000
         },
         "cost": {
-          "input": 0.072,
-          "output": 0.28
+          "input": 0.15,
+          "output": 0.6
         }
       },
       "gpt-oss-20b": {
         "id": "gpt-oss-20b",
         "name": "GPT OSS 20B",
-        "provider": "openai",
+        "lab": "openai",
+        "provider": "databricks",
         "family": "gpt-oss",
+        "released": true,
         "attachment": false,
         "reasoning": true,
         "reasoning_options": [
           {
             "type": "effort",
-            "values": [
-              "low",
-              "medium",
-              "high"
-            ]
+            "values": ["low", "medium", "high"]
           }
         ],
         "tool_call": true,
@@ -591,38 +580,31 @@
         "release_date": "2025-08-05",
         "last_updated": "2025-08-05",
         "modalities": {
-          "input": [
-            "text"
-          ],
-          "output": [
-            "text"
-          ]
+          "input": ["text"],
+          "output": ["text"]
         },
         "limit": {
           "context": 131072,
           "output": 25000
         },
         "cost": {
-          "input": 0.05,
-          "output": 0.2
+          "input": 0.07,
+          "output": 0.3
         }
       },
       "gpt-5": {
         "id": "gpt-5",
         "name": "GPT-5",
-        "provider": "openai",
+        "lab": "openai",
+        "provider": "databricks",
         "family": "gpt",
+        "released": true,
         "attachment": true,
         "reasoning": true,
         "reasoning_options": [
           {
             "type": "effort",
-            "values": [
-              "minimal",
-              "low",
-              "medium",
-              "high"
-            ]
+            "values": ["minimal", "low", "medium", "high"]
           }
         ],
         "tool_call": true,
@@ -633,14 +615,8 @@
         "release_date": "2025-08-07",
         "last_updated": "2025-08-07",
         "modalities": {
-          "input": [
-            "text",
-            "image"
-          ],
-          "output": [
-            "text",
-            "image"
-          ]
+          "input": ["text", "image"],
+          "output": ["text", "image"]
         },
         "limit": {
           "context": 400000,
@@ -656,19 +632,16 @@
       "gpt-5-mini": {
         "id": "gpt-5-mini",
         "name": "GPT-5 Mini",
-        "provider": "openai",
+        "lab": "openai",
+        "provider": "databricks",
         "family": "gpt-mini",
+        "released": true,
         "attachment": true,
         "reasoning": true,
         "reasoning_options": [
           {
             "type": "effort",
-            "values": [
-              "minimal",
-              "low",
-              "medium",
-              "high"
-            ]
+            "values": ["minimal", "low", "medium", "high"]
           }
         ],
         "tool_call": true,
@@ -679,14 +652,8 @@
         "release_date": "2025-08-07",
         "last_updated": "2025-08-07",
         "modalities": {
-          "input": [
-            "text",
-            "image"
-          ],
-          "output": [
-            "text",
-            "image"
-          ]
+          "input": ["text", "image"],
+          "output": ["text", "image"]
         },
         "limit": {
           "context": 400000,
@@ -702,19 +669,16 @@
       "gpt-5-nano": {
         "id": "gpt-5-nano",
         "name": "GPT-5 Nano",
-        "provider": "openai",
+        "lab": "openai",
+        "provider": "databricks",
         "family": "gpt-nano",
+        "released": true,
         "attachment": true,
         "reasoning": true,
         "reasoning_options": [
           {
             "type": "effort",
-            "values": [
-              "minimal",
-              "low",
-              "medium",
-              "high"
-            ]
+            "values": ["minimal", "low", "medium", "high"]
           }
         ],
         "tool_call": true,
@@ -725,14 +689,8 @@
         "release_date": "2025-08-07",
         "last_updated": "2025-08-07",
         "modalities": {
-          "input": [
-            "text",
-            "image"
-          ],
-          "output": [
-            "text",
-            "image"
-          ]
+          "input": ["text", "image"],
+          "output": ["text", "image"]
         },
         "limit": {
           "context": 400000,
@@ -742,25 +700,22 @@
         "cost": {
           "input": 0.05,
           "output": 0.4,
-          "cache_read": 0.005
+          "cache_read": 0.01
         }
       },
       "gpt-5-1": {
         "id": "gpt-5-1",
         "name": "GPT-5.1",
-        "provider": "openai",
+        "lab": "openai",
+        "provider": "databricks",
         "family": "gpt",
+        "released": true,
         "attachment": true,
         "reasoning": true,
         "reasoning_options": [
           {
             "type": "effort",
-            "values": [
-              "none",
-              "low",
-              "medium",
-              "high"
-            ]
+            "values": ["none", "low", "medium", "high"]
           }
         ],
         "tool_call": true,
@@ -771,14 +726,8 @@
         "release_date": "2025-11-13",
         "last_updated": "2025-11-13",
         "modalities": {
-          "input": [
-            "text",
-            "image"
-          ],
-          "output": [
-            "text",
-            "image"
-          ]
+          "input": ["text", "image"],
+          "output": ["text", "image"]
         },
         "limit": {
           "context": 400000,
@@ -794,20 +743,16 @@
       "gpt-5-2": {
         "id": "gpt-5-2",
         "name": "GPT-5.2",
-        "provider": "openai",
+        "lab": "openai",
+        "provider": "databricks",
         "family": "gpt",
+        "released": true,
         "attachment": true,
         "reasoning": true,
         "reasoning_options": [
           {
             "type": "effort",
-            "values": [
-              "none",
-              "low",
-              "medium",
-              "high",
-              "xhigh"
-            ]
+            "values": ["none", "low", "medium", "high", "xhigh"]
           }
         ],
         "tool_call": true,
@@ -818,14 +763,8 @@
         "release_date": "2025-12-11",
         "last_updated": "2025-12-11",
         "modalities": {
-          "input": [
-            "text",
-            "image"
-          ],
-          "output": [
-            "text",
-            "image"
-          ]
+          "input": ["text", "image"],
+          "output": ["text", "image"]
         },
         "limit": {
           "context": 400000,
@@ -841,20 +780,16 @@
       "gpt-5-3-codex": {
         "id": "gpt-5-3-codex",
         "name": "GPT-5.3 Codex",
-        "provider": "openai",
+        "lab": "openai",
+        "provider": "databricks",
         "family": "gpt-codex",
+        "released": true,
         "attachment": true,
         "reasoning": true,
         "reasoning_options": [
           {
             "type": "effort",
-            "values": [
-              "none",
-              "low",
-              "medium",
-              "high",
-              "xhigh"
-            ]
+            "values": ["none", "low", "medium", "high", "xhigh"]
           }
         ],
         "tool_call": true,
@@ -865,15 +800,8 @@
         "release_date": "2026-02-05",
         "last_updated": "2026-02-05",
         "modalities": {
-          "input": [
-            "text",
-            "image",
-            "pdf"
-          ],
-          "output": [
-            "text",
-            "image"
-          ]
+          "input": ["text", "image", "pdf"],
+          "output": ["text", "image"]
         },
         "limit": {
           "context": 400000,
@@ -889,20 +817,16 @@
       "gpt-5-4": {
         "id": "gpt-5-4",
         "name": "GPT-5.4",
-        "provider": "openai",
+        "lab": "openai",
+        "provider": "databricks",
         "family": "gpt",
+        "released": true,
         "attachment": true,
         "reasoning": true,
         "reasoning_options": [
           {
             "type": "effort",
-            "values": [
-              "none",
-              "low",
-              "medium",
-              "high",
-              "xhigh"
-            ]
+            "values": ["none", "low", "medium", "high", "xhigh"]
           }
         ],
         "tool_call": true,
@@ -913,15 +837,8 @@
         "release_date": "2026-03-05",
         "last_updated": "2026-03-05",
         "modalities": {
-          "input": [
-            "text",
-            "image",
-            "pdf"
-          ],
-          "output": [
-            "text",
-            "image"
-          ]
+          "input": ["text", "image", "pdf"],
+          "output": ["text", "image"]
         },
         "limit": {
           "context": 1050000,
@@ -952,21 +869,17 @@
       },
       "gpt-5-4-mini": {
         "id": "gpt-5-4-mini",
-        "name": "GPT-5.4 mini",
-        "provider": "openai",
+        "name": "GPT-5.4 Mini",
+        "lab": "openai",
+        "provider": "databricks",
         "family": "gpt-mini",
+        "released": true,
         "attachment": true,
         "reasoning": true,
         "reasoning_options": [
           {
             "type": "effort",
-            "values": [
-              "none",
-              "low",
-              "medium",
-              "high",
-              "xhigh"
-            ]
+            "values": ["none", "low", "medium", "high", "xhigh"]
           }
         ],
         "tool_call": true,
@@ -977,14 +890,8 @@
         "release_date": "2026-03-17",
         "last_updated": "2026-03-17",
         "modalities": {
-          "input": [
-            "text",
-            "image"
-          ],
-          "output": [
-            "text",
-            "image"
-          ]
+          "input": ["text", "image"],
+          "output": ["text", "image"]
         },
         "limit": {
           "context": 400000,
@@ -999,21 +906,17 @@
       },
       "gpt-5-4-nano": {
         "id": "gpt-5-4-nano",
-        "name": "GPT-5.4 nano",
-        "provider": "openai",
+        "name": "GPT-5.4 Nano",
+        "lab": "openai",
+        "provider": "databricks",
         "family": "gpt-nano",
+        "released": true,
         "attachment": true,
         "reasoning": true,
         "reasoning_options": [
           {
             "type": "effort",
-            "values": [
-              "none",
-              "low",
-              "medium",
-              "high",
-              "xhigh"
-            ]
+            "values": ["none", "low", "medium", "high", "xhigh"]
           }
         ],
         "tool_call": true,
@@ -1024,14 +927,8 @@
         "release_date": "2026-03-17",
         "last_updated": "2026-03-17",
         "modalities": {
-          "input": [
-            "text",
-            "image"
-          ],
-          "output": [
-            "text",
-            "image"
-          ]
+          "input": ["text", "image"],
+          "output": ["text", "image"]
         },
         "limit": {
           "context": 400000,
@@ -1047,20 +944,16 @@
       "gpt-5-5": {
         "id": "gpt-5-5",
         "name": "GPT-5.5",
-        "provider": "openai",
+        "lab": "openai",
+        "provider": "databricks",
         "family": "gpt",
+        "released": true,
         "attachment": true,
         "reasoning": true,
         "reasoning_options": [
           {
             "type": "effort",
-            "values": [
-              "none",
-              "low",
-              "medium",
-              "high",
-              "xhigh"
-            ]
+            "values": ["none", "low", "medium", "high", "xhigh"]
           }
         ],
         "tool_call": true,
@@ -1071,15 +964,8 @@
         "release_date": "2026-04-23",
         "last_updated": "2026-04-23",
         "modalities": {
-          "input": [
-            "text",
-            "image",
-            "pdf"
-          ],
-          "output": [
-            "text",
-            "image"
-          ]
+          "input": ["text", "image", "pdf"],
+          "output": ["text", "image"]
         },
         "limit": {
           "context": 1050000,
@@ -1111,18 +997,16 @@
       "gpt-5-5-pro": {
         "id": "gpt-5-5-pro",
         "name": "GPT-5.5 Pro",
-        "provider": "openai",
+        "lab": "openai",
+        "provider": "databricks",
         "family": "gpt-pro",
+        "released": true,
         "attachment": true,
         "reasoning": true,
         "reasoning_options": [
           {
             "type": "effort",
-            "values": [
-              "medium",
-              "high",
-              "xhigh"
-            ]
+            "values": ["medium", "high", "xhigh"]
           }
         ],
         "tool_call": true,
@@ -1133,15 +1017,8 @@
         "release_date": "2026-04-23",
         "last_updated": "2026-04-23",
         "modalities": {
-          "input": [
-            "text",
-            "image",
-            "pdf"
-          ],
-          "output": [
-            "text",
-            "image"
-          ]
+          "input": ["text", "image", "pdf"],
+          "output": ["text", "image"]
         },
         "limit": {
           "context": 1050000,
@@ -1170,21 +1047,16 @@
       "gpt-5-6-luna": {
         "id": "gpt-5-6-luna",
         "name": "GPT-5.6 Luna",
-        "provider": "openai",
+        "lab": "openai",
+        "provider": "databricks",
         "family": "gpt-luna",
+        "released": true,
         "attachment": true,
         "reasoning": true,
         "reasoning_options": [
           {
             "type": "effort",
-            "values": [
-              "none",
-              "low",
-              "medium",
-              "high",
-              "xhigh",
-              "max"
-            ]
+            "values": ["none", "low", "medium", "high", "xhigh", "max"]
           }
         ],
         "tool_call": true,
@@ -1195,15 +1067,8 @@
         "release_date": "2026-07-09",
         "last_updated": "2026-07-09",
         "modalities": {
-          "input": [
-            "text",
-            "image",
-            "pdf"
-          ],
-          "output": [
-            "text",
-            "image"
-          ]
+          "input": ["text", "image", "pdf"],
+          "output": ["text", "image"]
         },
         "limit": {
           "context": 1050000,
@@ -1211,14 +1076,16 @@
           "output": 128000
         },
         "cost": {
-          "input": 1,
-          "output": 6,
-          "cache_read": 0.1,
+          "input": 0.2,
+          "output": 1.2,
+          "cache_read": 0.02,
+          "cache_write": 0.25,
           "tiers": [
             {
-              "input": 2,
-              "output": 9,
-              "cache_read": 0.2,
+              "input": 0.4,
+              "output": 1.8,
+              "cache_read": 0.04,
+              "cache_write": 0.5,
               "tier": {
                 "type": "context",
                 "size": 272000
@@ -1226,30 +1093,26 @@
             }
           ],
           "context_over_200k": {
-            "input": 2,
-            "output": 9,
-            "cache_read": 0.2
+            "input": 0.4,
+            "output": 1.8,
+            "cache_read": 0.04,
+            "cache_write": 0.5
           }
         }
       },
       "gpt-5-6-sol": {
         "id": "gpt-5-6-sol",
         "name": "GPT-5.6 Sol",
-        "provider": "openai",
+        "lab": "openai",
+        "provider": "databricks",
         "family": "gpt-sol",
+        "released": true,
         "attachment": true,
         "reasoning": true,
         "reasoning_options": [
           {
             "type": "effort",
-            "values": [
-              "none",
-              "low",
-              "medium",
-              "high",
-              "xhigh",
-              "max"
-            ]
+            "values": ["none", "low", "medium", "high", "xhigh", "max"]
           }
         ],
         "tool_call": true,
@@ -1260,15 +1123,8 @@
         "release_date": "2026-07-09",
         "last_updated": "2026-07-09",
         "modalities": {
-          "input": [
-            "text",
-            "image",
-            "pdf"
-          ],
-          "output": [
-            "text",
-            "image"
-          ]
+          "input": ["text", "image", "pdf"],
+          "output": ["text", "image"]
         },
         "limit": {
           "context": 1050000,
@@ -1279,11 +1135,13 @@
           "input": 5,
           "output": 30,
           "cache_read": 0.5,
+          "cache_write": 6.25,
           "tiers": [
             {
               "input": 10,
               "output": 45,
               "cache_read": 1,
+              "cache_write": 12.5,
               "tier": {
                 "type": "context",
                 "size": 272000
@@ -1293,28 +1151,24 @@
           "context_over_200k": {
             "input": 10,
             "output": 45,
-            "cache_read": 1
+            "cache_read": 1,
+            "cache_write": 12.5
           }
         }
       },
       "gpt-5-6-terra": {
         "id": "gpt-5-6-terra",
         "name": "GPT-5.6 Terra",
-        "provider": "openai",
+        "lab": "openai",
+        "provider": "databricks",
         "family": "gpt-terra",
+        "released": true,
         "attachment": true,
         "reasoning": true,
         "reasoning_options": [
           {
             "type": "effort",
-            "values": [
-              "none",
-              "low",
-              "medium",
-              "high",
-              "xhigh",
-              "max"
-            ]
+            "values": ["none", "low", "medium", "high", "xhigh", "max"]
           }
         ],
         "tool_call": true,
@@ -1325,15 +1179,8 @@
         "release_date": "2026-07-09",
         "last_updated": "2026-07-09",
         "modalities": {
-          "input": [
-            "text",
-            "image",
-            "pdf"
-          ],
-          "output": [
-            "text",
-            "image"
-          ]
+          "input": ["text", "image", "pdf"],
+          "output": ["text", "image"]
         },
         "limit": {
           "context": 1050000,
@@ -1341,14 +1188,16 @@
           "output": 128000
         },
         "cost": {
-          "input": 2.5,
-          "output": 15,
-          "cache_read": 0.25,
+          "input": 2,
+          "output": 12,
+          "cache_read": 0.2,
+          "cache_write": 2.5,
           "tiers": [
             {
-              "input": 5,
-              "output": 22.5,
-              "cache_read": 0.5,
+              "input": 4,
+              "output": 18,
+              "cache_read": 0.4,
+              "cache_write": 5,
               "tier": {
                 "type": "context",
                 "size": 272000
@@ -1356,27 +1205,82 @@
             }
           ],
           "context_over_200k": {
-            "input": 5,
-            "output": 22.5,
-            "cache_read": 0.5
+            "input": 4,
+            "output": 18,
+            "cache_read": 0.4,
+            "cache_write": 5
           }
         }
       },
-      "gemini-3-flash": {
-        "id": "gemini-3-flash",
-        "name": "Gemini 3 Flash Preview",
-        "provider": "google",
-        "family": "gemini-flash",
+      "gpt-6-astra": {
+        "id": "gpt-6-astra",
+        "name": "GPT-6 Astra",
+        "lab": "openai",
+        "provider": "databricks",
+        "family": "gpt-astra",
+        "released": true,
         "attachment": true,
         "reasoning": true,
         "reasoning_options": [
           {
             "type": "effort",
-            "values": [
-              "low",
-              "medium",
-              "high"
-            ]
+            "values": ["low", "medium", "high", "xhigh", "max"]
+          }
+        ],
+        "tool_call": true,
+        "temperature": false,
+        "structured_output": true,
+        "open_weights": false,
+        "knowledge": "2026-04-30",
+        "release_date": "2026-09-04",
+        "last_updated": "2026-09-04",
+        "modalities": {
+          "input": ["text", "image", "pdf"],
+          "output": ["text", "image"]
+        },
+        "limit": {
+          "context": 1050000,
+          "input": 922000,
+          "output": 128000
+        },
+        "cost": {
+          "input": 10,
+          "output": 50,
+          "cache_read": 1,
+          "cache_write": 12.5,
+          "tiers": [
+            {
+              "input": 20,
+              "output": 75,
+              "cache_read": 2,
+              "cache_write": 25,
+              "tier": {
+                "type": "context",
+                "size": 272000
+              }
+            }
+          ],
+          "context_over_200k": {
+            "input": 20,
+            "output": 75,
+            "cache_read": 2,
+            "cache_write": 25
+          }
+        }
+      },
+      "gemini-3-flash": {
+        "id": "gemini-3-flash",
+        "name": "Gemini 3 Flash",
+        "lab": "google",
+        "provider": "databricks",
+        "family": "gemini-flash",
+        "released": true,
+        "attachment": true,
+        "reasoning": true,
+        "reasoning_options": [
+          {
+            "type": "effort",
+            "values": ["low", "medium", "high"]
           }
         ],
         "tool_call": true,
@@ -1387,16 +1291,8 @@
         "release_date": "2025-12-17",
         "last_updated": "2025-12-17",
         "modalities": {
-          "input": [
-            "text",
-            "image",
-            "video",
-            "audio",
-            "pdf"
-          ],
-          "output": [
-            "text"
-          ]
+          "input": ["text", "image", "video", "audio", "pdf"],
+          "output": ["text"]
         },
         "limit": {
           "context": 1048576,
@@ -1411,19 +1307,17 @@
       },
       "gemini-3-1-flash-lite": {
         "id": "gemini-3-1-flash-lite",
-        "name": "Gemini 3.1 Flash Lite Preview",
-        "provider": "google",
+        "name": "Gemini 3.1 Flash Lite",
+        "lab": "google",
+        "provider": "databricks",
         "family": "gemini-flash-lite",
+        "released": true,
         "attachment": true,
         "reasoning": true,
         "reasoning_options": [
           {
             "type": "effort",
-            "values": [
-              "low",
-              "medium",
-              "high"
-            ]
+            "values": ["low", "medium", "high"]
           }
         ],
         "tool_call": true,
@@ -1434,16 +1328,8 @@
         "release_date": "2026-03-03",
         "last_updated": "2026-03-03",
         "modalities": {
-          "input": [
-            "text",
-            "image",
-            "video",
-            "audio",
-            "pdf"
-          ],
-          "output": [
-            "text"
-          ]
+          "input": ["text", "image", "video", "audio", "pdf"],
+          "output": ["text"]
         },
         "limit": {
           "context": 1048576,
@@ -1458,19 +1344,17 @@
       },
       "gemini-3-1-pro": {
         "id": "gemini-3-1-pro",
-        "name": "Gemini 3.1 Pro Preview Custom Tools",
-        "provider": "google",
+        "name": "Gemini 3.1 Pro",
+        "lab": "google",
+        "provider": "databricks",
         "family": "gemini-pro",
+        "released": true,
         "attachment": true,
         "reasoning": true,
         "reasoning_options": [
           {
             "type": "effort",
-            "values": [
-              "low",
-              "medium",
-              "high"
-            ]
+            "values": ["low", "medium", "high"]
           }
         ],
         "tool_call": true,
@@ -1481,16 +1365,8 @@
         "release_date": "2026-02-19",
         "last_updated": "2026-02-19",
         "modalities": {
-          "input": [
-            "text",
-            "image",
-            "video",
-            "audio",
-            "pdf"
-          ],
-          "output": [
-            "text"
-          ]
+          "input": ["text", "image", "video", "audio", "pdf"],
+          "output": ["text"]
         },
         "limit": {
           "context": 1048576,
@@ -1521,19 +1397,16 @@
       "gemini-3-5-flash": {
         "id": "gemini-3-5-flash",
         "name": "Gemini 3.5 Flash",
-        "provider": "google",
+        "lab": "google",
+        "provider": "databricks",
         "family": "gemini-flash",
+        "released": true,
         "attachment": true,
         "reasoning": true,
         "reasoning_options": [
           {
             "type": "effort",
-            "values": [
-              "minimal",
-              "low",
-              "medium",
-              "high"
-            ]
+            "values": ["minimal", "low", "medium", "high"]
           }
         ],
         "tool_call": true,
@@ -1544,16 +1417,8 @@
         "release_date": "2026-05-19",
         "last_updated": "2026-05-19",
         "modalities": {
-          "input": [
-            "text",
-            "image",
-            "video",
-            "audio",
-            "pdf"
-          ],
-          "output": [
-            "text"
-          ]
+          "input": ["text", "image", "video", "audio", "pdf"],
+          "output": ["text"]
         },
         "limit": {
           "context": 1048576,
@@ -1569,19 +1434,16 @@
       "gemini-3-5-flash-lite": {
         "id": "gemini-3-5-flash-lite",
         "name": "Gemini 3.5 Flash Lite",
-        "provider": "google",
+        "lab": "google",
+        "provider": "databricks",
         "family": "gemini-flash-lite",
+        "released": true,
         "attachment": true,
         "reasoning": true,
         "reasoning_options": [
           {
             "type": "effort",
-            "values": [
-              "minimal",
-              "low",
-              "medium",
-              "high"
-            ]
+            "values": ["minimal", "low", "medium", "high"]
           }
         ],
         "tool_call": true,
@@ -1592,16 +1454,8 @@
         "release_date": "2026-07-21",
         "last_updated": "2026-07-21",
         "modalities": {
-          "input": [
-            "text",
-            "image",
-            "video",
-            "audio",
-            "pdf"
-          ],
-          "output": [
-            "text"
-          ]
+          "input": ["text", "image", "video", "audio", "pdf"],
+          "output": ["text"]
         },
         "limit": {
           "context": 1048576,
@@ -1616,19 +1470,16 @@
       "gemini-3-6-flash": {
         "id": "gemini-3-6-flash",
         "name": "Gemini 3.6 Flash",
-        "provider": "google",
+        "lab": "google",
+        "provider": "databricks",
         "family": "gemini-flash",
+        "released": true,
         "attachment": true,
         "reasoning": true,
         "reasoning_options": [
           {
             "type": "effort",
-            "values": [
-              "minimal",
-              "low",
-              "medium",
-              "high"
-            ]
+            "values": ["minimal", "low", "medium", "high"]
           }
         ],
         "tool_call": true,
@@ -1639,16 +1490,8 @@
         "release_date": "2026-07-21",
         "last_updated": "2026-07-21",
         "modalities": {
-          "input": [
-            "text",
-            "image",
-            "video",
-            "audio",
-            "pdf"
-          ],
-          "output": [
-            "text"
-          ]
+          "input": ["text", "image", "video", "audio", "pdf"],
+          "output": ["text"]
         },
         "limit": {
           "context": 1048576,
@@ -1664,8 +1507,10 @@
       "gemma-3-12b": {
         "id": "gemma-3-12b",
         "name": "Gemma 3 12B",
-        "provider": "google",
+        "lab": "google",
+        "provider": "databricks",
         "family": "gemma",
+        "released": true,
         "attachment": true,
         "reasoning": false,
         "tool_call": true,
@@ -1676,13 +1521,8 @@
         "release_date": "2025-03-13",
         "last_updated": "2025-03-13",
         "modalities": {
-          "input": [
-            "text",
-            "image"
-          ],
-          "output": [
-            "text"
-          ]
+          "input": ["text", "image"],
+          "output": ["text"]
         },
         "limit": {
           "context": 131072,
@@ -1695,9 +1535,11 @@
       },
       "meta-llama-3-1-8b-instruct": {
         "id": "meta-llama-3-1-8b-instruct",
-        "name": "Llama 3.1 8B Instruct",
-        "provider": "meta",
+        "name": "Meta Llama 3.1 8B Instruct",
+        "lab": "meta",
+        "provider": "databricks",
         "family": "llama",
+        "released": true,
         "attachment": false,
         "reasoning": false,
         "tool_call": true,
@@ -1708,12 +1550,8 @@
         "release_date": "2024-07-23",
         "last_updated": "2024-07-23",
         "modalities": {
-          "input": [
-            "text"
-          ],
-          "output": [
-            "text"
-          ]
+          "input": ["text"],
+          "output": ["text"]
         },
         "limit": {
           "context": 131072,
@@ -1726,9 +1564,11 @@
       },
       "llama-4-maverick": {
         "id": "llama-4-maverick",
-        "name": "Llama 4 Maverick 17B Instruct",
-        "provider": "meta",
+        "name": "Llama 4 Maverick",
+        "lab": "meta",
+        "provider": "databricks",
         "family": "llama",
+        "released": true,
         "attachment": true,
         "reasoning": false,
         "tool_call": true,
@@ -1739,13 +1579,8 @@
         "release_date": "2025-04-05",
         "last_updated": "2025-04-05",
         "modalities": {
-          "input": [
-            "text",
-            "image"
-          ],
-          "output": [
-            "text"
-          ]
+          "input": ["text", "image"],
+          "output": ["text"]
         },
         "limit": {
           "context": 1000000,
@@ -1758,9 +1593,11 @@
       },
       "meta-llama-3-3-70b-instruct": {
         "id": "meta-llama-3-3-70b-instruct",
-        "name": "Llama-3.3-70B-Instruct",
-        "provider": "meta",
+        "name": "Meta Llama 3.3 70B Instruct",
+        "lab": "meta",
+        "provider": "databricks",
         "family": "llama",
+        "released": true,
         "attachment": false,
         "reasoning": false,
         "tool_call": true,
@@ -1771,12 +1608,8 @@
         "release_date": "2024-12-06",
         "last_updated": "2024-12-06",
         "modalities": {
-          "input": [
-            "text"
-          ],
-          "output": [
-            "text"
-          ]
+          "input": ["text"],
+          "output": ["text"]
         },
         "limit": {
           "context": 128000,
@@ -1789,9 +1622,11 @@
       },
       "qwen3-next-80b-a3b-instruct": {
         "id": "qwen3-next-80b-a3b-instruct",
-        "name": "Qwen3-Next 80B-A3B Instruct",
-        "provider": "alibaba",
+        "name": "Qwen3 Next Instruct",
+        "lab": "alibaba",
+        "provider": "databricks",
         "family": "qwen",
+        "released": true,
         "attachment": false,
         "reasoning": false,
         "tool_call": true,
@@ -1802,12 +1637,8 @@
         "release_date": "2025-09",
         "last_updated": "2025-09",
         "modalities": {
-          "input": [
-            "text"
-          ],
-          "output": [
-            "text"
-          ]
+          "input": ["text"],
+          "output": ["text"]
         },
         "limit": {
           "context": 131072,
@@ -1820,20 +1651,17 @@
       },
       "qwen35-122b-a10b": {
         "id": "qwen35-122b-a10b",
-        "name": "Qwen3.5 122B-A10B",
-        "provider": "alibaba",
+        "name": "Qwen3.5 122B A10B",
+        "lab": "alibaba",
+        "provider": "databricks",
         "family": "qwen",
+        "released": true,
         "attachment": false,
         "reasoning": true,
         "reasoning_options": [
           {
             "type": "effort",
-            "values": [
-              "none",
-              "low",
-              "medium",
-              "high"
-            ]
+            "values": ["none", "low", "medium", "high"]
           }
         ],
         "tool_call": true,
@@ -1843,12 +1671,8 @@
         "release_date": "2026-02-23",
         "last_updated": "2026-02-23",
         "modalities": {
-          "input": [
-            "text"
-          ],
-          "output": [
-            "text"
-          ]
+          "input": ["text"],
+          "output": ["text"]
         },
         "limit": {
           "context": 262144,
@@ -1861,9 +1685,11 @@
       },
       "glm-5-2": {
         "id": "glm-5-2",
-        "name": "GLM-5.2",
-        "provider": "zhipuai",
+        "name": "GLM 5.2",
+        "lab": "zhipuai",
+        "provider": "databricks",
         "family": "glm",
+        "released": true,
         "attachment": false,
         "reasoning": true,
         "reasoning_options": [
@@ -1872,14 +1698,7 @@
           },
           {
             "type": "effort",
-            "values": [
-              "none",
-              "minimal",
-              "low",
-              "medium",
-              "high",
-              "max"
-            ]
+            "values": ["none", "minimal", "low", "medium", "high", "max"]
           }
         ],
         "tool_call": true,
@@ -1889,12 +1708,8 @@
         "release_date": "2026-06-13",
         "last_updated": "2026-06-13",
         "modalities": {
-          "input": [
-            "text"
-          ],
-          "output": [
-            "text"
-          ]
+          "input": ["text"],
+          "output": ["text"]
         },
         "limit": {
           "context": 1000000,
@@ -1906,55 +1721,48 @@
           "cache_read": 0.26
         }
       },
-      "inkling": {
-        "id": "inkling",
-        "name": "Inkling",
-        "provider": "thinkingmachines",
-        "family": "ling",
+      "glm-5-3-flash": {
+        "id": "glm-5-3-flash",
+        "name": "GLM 5.3 Flash",
+        "lab": "zhipuai",
+        "provider": "databricks",
+        "family": "glm-flash",
+        "released": true,
         "attachment": true,
         "reasoning": true,
         "reasoning_options": [
           {
-            "type": "toggle"
-          },
-          {
             "type": "effort",
-            "values": [
-              "none",
-              "minimal",
-              "low",
-              "medium",
-              "high",
-              "max"
-            ]
+            "values": ["low", "high", "max"]
           }
         ],
         "tool_call": true,
         "temperature": true,
-        "structured_output": false,
+        "structured_output": true,
         "open_weights": true,
-        "release_date": "2026-07-15",
-        "last_updated": "2026-07-15",
+        "release_date": "2026-08-26",
+        "last_updated": "2026-08-26",
         "modalities": {
-          "input": [
-            "text",
-            "image",
-            "audio"
-          ],
-          "output": [
-            "text"
-          ]
+          "input": ["text", "image"],
+          "output": ["text"]
         },
         "limit": {
           "context": 1048576,
-          "output": 65536
+          "output": 131072
+        },
+        "cost": {
+          "input": 0.15,
+          "output": 0.5,
+          "cache_read": 0.03
         }
       },
       "kimi-k3": {
         "id": "kimi-k3",
         "name": "Kimi K3",
-        "provider": "moonshotai",
+        "lab": "moonshotai",
+        "provider": "databricks",
         "family": "kimi-k3",
+        "released": true,
         "attachment": true,
         "reasoning": true,
         "reasoning_options": [
@@ -1963,14 +1771,7 @@
           },
           {
             "type": "effort",
-            "values": [
-              "none",
-              "minimal",
-              "low",
-              "medium",
-              "high",
-              "max"
-            ]
+            "values": ["none", "minimal", "low", "medium", "high", "max"]
           }
         ],
         "tool_call": true,
@@ -1980,14 +1781,8 @@
         "release_date": "2026-07-16",
         "last_updated": "2026-07-16",
         "modalities": {
-          "input": [
-            "text",
-            "image",
-            "video"
-          ],
-          "output": [
-            "text"
-          ]
+          "input": ["text", "image", "video"],
+          "output": ["text"]
         },
         "limit": {
           "context": 1048576,
@@ -1997,6 +1792,631 @@
           "input": 3,
           "output": 15,
           "cache_read": 0.3
+        }
+      },
+      "grok-4-6": {
+        "id": "grok-4-6",
+        "name": "Grok 4.6",
+        "lab": "xai",
+        "provider": "databricks",
+        "family": "grok",
+        "released": true,
+        "attachment": true,
+        "reasoning": true,
+        "reasoning_options": [
+          {
+            "type": "effort",
+            "values": ["low", "medium", "high", "xhigh"]
+          }
+        ],
+        "tool_call": true,
+        "temperature": true,
+        "structured_output": true,
+        "open_weights": false,
+        "knowledge": "2026-02-01",
+        "release_date": "2026-08-12",
+        "last_updated": "2026-08-12",
+        "modalities": {
+          "input": ["text", "image"],
+          "output": ["text"]
+        },
+        "limit": {
+          "context": 500000,
+          "output": 524288
+        },
+        "cost": {
+          "input": 2,
+          "output": 6,
+          "cache_read": 0.5
+        }
+      },
+      "qwen3-embedding-0-6b": {
+        "id": "qwen3-embedding-0-6b",
+        "name": "Qwen3 Embedding 0.6B",
+        "lab": "alibaba",
+        "provider": "databricks",
+        "family": "text-embedding",
+        "released": true,
+        "type": "embedding",
+        "dimensions": 1024,
+        "open_weights": true,
+        "release_date": "2025-06-03",
+        "last_updated": "2026-09-25",
+        "cost": {
+          "input": 0.02
+        }
+      },
+      "gte-large-en": {
+        "id": "gte-large-en",
+        "name": "GTE Large (En)",
+        "lab": "alibaba",
+        "provider": "databricks",
+        "family": "text-embedding",
+        "released": true,
+        "type": "embedding",
+        "dimensions": 1024,
+        "open_weights": true,
+        "release_date": "2023-07-27",
+        "last_updated": "2026-09-25",
+        "cost": {
+          "input": 0.13
+        }
+      },
+      "claude-sonnet-5-5": {
+        "id": "claude-sonnet-5-5",
+        "name": "Claude Sonnet 5.5",
+        "lab": "anthropic",
+        "provider": "databricks",
+        "family": "claude-sonnet",
+        "released": true,
+        "attachment": true,
+        "reasoning": true,
+        "reasoning_options": [
+          {
+            "type": "toggle"
+          },
+          {
+            "type": "effort",
+            "values": ["low", "medium", "high", "xhigh", "max"]
+          }
+        ],
+        "tool_call": true,
+        "temperature": false,
+        "structured_output": true,
+        "open_weights": false,
+        "release_date": "2026-09-28",
+        "last_updated": "2026-09-28",
+        "modalities": {
+          "input": ["text", "image", "pdf"],
+          "output": ["text"]
+        },
+        "limit": {
+          "context": 1000000,
+          "output": 128000
+        },
+        "cost": {
+          "input": 2,
+          "output": 10,
+          "cache_read": 0.2,
+          "cache_write": 2.5
+        }
+      },
+      "claude-haiku-5-5": {
+        "id": "claude-haiku-5-5",
+        "name": "Claude Haiku 5.5",
+        "lab": "anthropic",
+        "provider": "databricks",
+        "family": "claude-haiku",
+        "released": true,
+        "attachment": true,
+        "reasoning": true,
+        "reasoning_options": [
+          {
+            "type": "toggle"
+          },
+          {
+            "type": "budget_tokens",
+            "min": 1024,
+            "max": 63999
+          }
+        ],
+        "tool_call": true,
+        "temperature": false,
+        "structured_output": true,
+        "open_weights": false,
+        "release_date": "2026-10-07",
+        "last_updated": "2026-10-07",
+        "modalities": {
+          "input": ["text", "image", "pdf"],
+          "output": ["text"]
+        },
+        "limit": {
+          "context": 200000,
+          "output": 64000
+        },
+        "cost": {
+          "input": 0.1,
+          "output": 0.5,
+          "cache_read": 0.01,
+          "cache_write": 0.125,
+          "tiers": [
+            {
+              "input": 0.5,
+              "output": 2.5,
+              "cache_read": 0.05,
+              "cache_write": 0.625,
+              "tier": {
+                "type": "context",
+                "size": 100000
+              }
+            }
+          ],
+          "context_over_200k": {
+            "input": 0.5,
+            "output": 2.5,
+            "cache_read": 0.05,
+            "cache_write": 0.625
+          }
+        }
+      },
+      "gemini-3-7-flash": {
+        "id": "gemini-3-7-flash",
+        "name": "Gemini 3.7 Flash",
+        "lab": "google",
+        "provider": "databricks",
+        "family": "gemini-flash",
+        "released": true,
+        "attachment": true,
+        "reasoning": true,
+        "reasoning_options": [
+          {
+            "type": "effort",
+            "values": ["minimal", "low", "medium", "high"]
+          }
+        ],
+        "tool_call": true,
+        "temperature": false,
+        "structured_output": true,
+        "open_weights": false,
+        "release_date": "2026-08-13",
+        "last_updated": "2026-08-13",
+        "modalities": {
+          "input": ["text", "image", "video", "audio", "pdf"],
+          "output": ["text"]
+        },
+        "limit": {
+          "context": 1048576,
+          "output": 65536
+        },
+        "cost": {
+          "input": 1.5,
+          "output": 7.5,
+          "cache_read": 0.15
+        }
+      },
+      "gemini-3-8-flash": {
+        "id": "gemini-3-8-flash",
+        "name": "Gemini 3.8 Flash",
+        "lab": "google",
+        "provider": "databricks",
+        "family": "gemini-flash",
+        "released": true,
+        "attachment": true,
+        "reasoning": true,
+        "reasoning_options": [
+          {
+            "type": "effort",
+            "values": ["minimal", "low", "medium", "high"]
+          }
+        ],
+        "tool_call": true,
+        "temperature": false,
+        "structured_output": true,
+        "open_weights": false,
+        "release_date": "2026-09-02",
+        "last_updated": "2026-09-02",
+        "modalities": {
+          "input": ["text", "image", "video", "audio", "pdf"],
+          "output": ["text"]
+        },
+        "limit": {
+          "context": 1048576,
+          "output": 65536
+        },
+        "cost": {
+          "input": 1.5,
+          "output": 7.5,
+          "cache_read": 0.15
+        }
+      },
+      "gpt-6-sol": {
+        "id": "gpt-6-sol",
+        "name": "GPT-6 Sol",
+        "lab": "openai",
+        "provider": "databricks",
+        "family": "gpt-sol",
+        "released": true,
+        "attachment": true,
+        "reasoning": true,
+        "reasoning_options": [
+          {
+            "type": "effort",
+            "values": ["low", "medium", "high", "xhigh", "max"]
+          }
+        ],
+        "tool_call": true,
+        "temperature": false,
+        "structured_output": true,
+        "open_weights": false,
+        "release_date": "2026-09-22",
+        "last_updated": "2026-09-22",
+        "modalities": {
+          "input": ["text", "image", "pdf"],
+          "output": ["text"]
+        },
+        "limit": {
+          "context": 1050000,
+          "input": 922000,
+          "output": 128000
+        },
+        "cost": {
+          "input": 2,
+          "output": 10,
+          "cache_read": 0.2,
+          "cache_write": 2.5,
+          "tiers": [
+            {
+              "input": 4,
+              "output": 15,
+              "cache_read": 0.4,
+              "cache_write": 5,
+              "tier": {
+                "type": "context",
+                "size": 272000
+              }
+            }
+          ],
+          "context_over_200k": {
+            "input": 4,
+            "output": 15,
+            "cache_read": 0.4,
+            "cache_write": 5
+          }
+        }
+      },
+      "gpt-6-1-sol": {
+        "id": "gpt-6-1-sol",
+        "name": "GPT-6.1 Sol",
+        "lab": "openai",
+        "provider": "databricks",
+        "family": "gpt-sol",
+        "released": true,
+        "attachment": true,
+        "reasoning": true,
+        "reasoning_options": [
+          {
+            "type": "effort",
+            "values": ["low", "medium", "high", "xhigh", "max"]
+          }
+        ],
+        "tool_call": true,
+        "temperature": false,
+        "structured_output": true,
+        "open_weights": false,
+        "release_date": "2026-09-29",
+        "last_updated": "2026-09-29",
+        "modalities": {
+          "input": ["text", "image", "pdf"],
+          "output": ["text"]
+        },
+        "limit": {
+          "context": 1050000,
+          "input": 922000,
+          "output": 128000
+        },
+        "cost": {
+          "input": 2,
+          "output": 10,
+          "cache_read": 0.1,
+          "cache_write": 2.5,
+          "tiers": [
+            {
+              "input": 4,
+              "output": 15,
+              "cache_read": 0.2,
+              "cache_write": 5,
+              "tier": {
+                "type": "context",
+                "size": 272000
+              }
+            }
+          ],
+          "context_over_200k": {
+            "input": 4,
+            "output": 15,
+            "cache_read": 0.2,
+            "cache_write": 5
+          }
+        }
+      },
+      "gpt-6-luna": {
+        "id": "gpt-6-luna",
+        "name": "GPT-6 Luna",
+        "lab": "openai",
+        "provider": "databricks",
+        "family": "gpt-luna",
+        "released": true,
+        "attachment": true,
+        "reasoning": true,
+        "reasoning_options": [
+          {
+            "type": "effort",
+            "values": ["low", "medium", "high", "xhigh", "max"]
+          }
+        ],
+        "tool_call": true,
+        "temperature": false,
+        "structured_output": true,
+        "open_weights": false,
+        "release_date": "2026-09-22",
+        "last_updated": "2026-09-22",
+        "modalities": {
+          "input": ["text", "image", "pdf"],
+          "output": ["text"]
+        },
+        "limit": {
+          "context": 1050000,
+          "input": 922000,
+          "output": 128000
+        },
+        "cost": {
+          "input": 0.1,
+          "output": 0.5,
+          "cache_read": 0.01,
+          "cache_write": 0.125,
+          "tiers": [
+            {
+              "input": 0.2,
+              "output": 0.75,
+              "cache_read": 0.02,
+              "cache_write": 0.25,
+              "tier": {
+                "type": "context",
+                "size": 272000
+              }
+            }
+          ],
+          "context_over_200k": {
+            "input": 0.2,
+            "output": 0.75,
+            "cache_read": 0.02,
+            "cache_write": 0.25
+          }
+        }
+      },
+      "bge-large-en": {
+        "id": "bge-large-en",
+        "name": "BGE Large (En)",
+        "lab": "baai",
+        "provider": "databricks",
+        "family": "text-embedding",
+        "released": true,
+        "type": "embedding",
+        "dimensions": 1024,
+        "open_weights": true,
+        "release_date": "2023-09-12",
+        "last_updated": "2023-09-12",
+        "cost": {
+          "input": 0.1
+        }
+      },
+      "grok-4-7": {
+        "id": "grok-4-7",
+        "name": "Grok 4.7",
+        "lab": "xai",
+        "provider": "databricks",
+        "family": "grok",
+        "released": true,
+        "attachment": false,
+        "reasoning": true,
+        "reasoning_options": [
+          {
+            "type": "effort",
+            "values": ["low", "medium", "high", "xhigh"]
+          }
+        ],
+        "tool_call": true,
+        "temperature": true,
+        "structured_output": true,
+        "open_weights": false,
+        "release_date": "2026-09-28",
+        "last_updated": "2026-09-28",
+        "modalities": {
+          "input": ["text"],
+          "output": ["text"]
+        },
+        "limit": {
+          "context": 500000,
+          "output": 524288
+        },
+        "cost": {
+          "input": 2.5,
+          "output": 7.5,
+          "cache_read": 0.5
+        }
+      },
+      "glm-5-3": {
+        "id": "glm-5-3",
+        "name": "GLM 5.3",
+        "lab": "zhipuai",
+        "provider": "databricks",
+        "family": "glm",
+        "released": true,
+        "attachment": false,
+        "reasoning": true,
+        "reasoning_options": [
+          {
+            "type": "effort",
+            "values": ["low", "high", "max"]
+          }
+        ],
+        "tool_call": true,
+        "temperature": true,
+        "structured_output": true,
+        "open_weights": true,
+        "release_date": "2026-08-28",
+        "last_updated": "2026-08-28",
+        "modalities": {
+          "input": ["text"],
+          "output": ["text"]
+        },
+        "limit": {
+          "context": 1048576,
+          "output": 131072
+        },
+        "cost": {
+          "input": 1.4,
+          "output": 4.4,
+          "cache_read": 0.26
+        }
+      },
+      "deepseek-v4-1-flash": {
+        "id": "deepseek-v4-1-flash",
+        "name": "DeepSeek V4.1 Flash",
+        "lab": "deepseek",
+        "provider": "databricks",
+        "family": "deepseek-flash",
+        "released": true,
+        "attachment": true,
+        "reasoning": true,
+        "tool_call": true,
+        "temperature": true,
+        "structured_output": false,
+        "open_weights": true,
+        "release_date": "2026-09-10",
+        "last_updated": "2026-09-10",
+        "modalities": {
+          "input": ["text", "image"],
+          "output": ["text"]
+        },
+        "limit": {
+          "context": 128000,
+          "output": 8192
+        },
+        "cost": {
+          "input": 0.3,
+          "output": 1.2,
+          "cache_read": 0.03
+        }
+      },
+      "openjev-qwen35-4b": {
+        "id": "openjev-qwen35-4b",
+        "name": "OpenJev (Qwen 3.5 4B)",
+        "lab": "alibaba",
+        "provider": "databricks",
+        "family": "openjev",
+        "released": true,
+        "type": "decision",
+        "open_weights": true,
+        "release_date": "2026-10-01",
+        "last_updated": "2026-10-01",
+        "limit": {
+          "context": 131072
+        },
+        "cost": {
+          "input": 0.042
+        }
+      },
+      "typesafeai-jev-1-14-0": {
+        "id": "typesafeai-jev-1-14-0",
+        "name": "Jev 1.14",
+        "lab": "typesafe",
+        "provider": "typesafe",
+        "family": "jev",
+        "released": true,
+        "type": "decision",
+        "open_weights": false,
+        "release_date": "2026-10-15",
+        "last_updated": "2026-10-15",
+        "limit": {
+          "context": 65536
+        },
+        "cost": {
+          "input": 0.042
+        }
+      },
+      "gemini-4-argon": {
+        "id": "gemini-4-argon",
+        "name": "Gemini 4 Argon",
+        "lab": "google",
+        "provider": "databricks",
+        "family": "gemini",
+        "released": true,
+        "attachment": true,
+        "reasoning": true,
+        "reasoning_options": [
+          {
+            "type": "effort",
+            "values": ["low", "medium", "high"]
+          }
+        ],
+        "tool_call": true,
+        "temperature": false,
+        "structured_output": true,
+        "open_weights": false,
+        "knowledge": "2026-03",
+        "release_date": "2026-10-13",
+        "last_updated": "2026-10-13",
+        "modalities": {
+          "input": ["text", "image", "video", "audio", "pdf"],
+          "output": ["text"]
+        },
+        "limit": {
+          "context": 1048576,
+          "output": 65536
+        },
+        "cost": {
+          "input": 4,
+          "output": 20,
+          "cache_read": 0.2
+        }
+      },
+      "kimi-k3-1-pro": {
+        "id": "kimi-k3-1-pro",
+        "name": "Kimi K3.1 Pro",
+        "lab": "moonshotai",
+        "provider": "databricks",
+        "family": "kimi-k3-1",
+        "released": true,
+        "attachment": true,
+        "reasoning": true,
+        "reasoning_options": [
+          {
+            "type": "toggle"
+          },
+          {
+            "type": "effort",
+            "values": ["none", "minimal", "low", "medium", "high", "max"]
+          }
+        ],
+        "tool_call": true,
+        "temperature": true,
+        "structured_output": true,
+        "open_weights": true,
+        "release_date": "2026-11-04",
+        "last_updated": "2026-11-04",
+        "modalities": {
+          "input": ["text", "image"],
+          "output": ["text"]
+        },
+        "limit": {
+          "context": 1048576,
+          "output": 65536
+        },
+        "cost": {
+          "input": 0,
+          "output": 0,
+          "cache_read": 0
         }
       }
     }

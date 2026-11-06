@@ -6,16 +6,22 @@ import Link from 'components/shared/link';
 import DotsPattern from 'images/dots-pattern.inline.svg';
 import { cn } from 'utils/cn';
 
+import CardAgentsIcon from './card-icons/agents.inline.svg';
+import CardBranchingWorkflowsIcon from './card-icons/branching-workflows.inline.svg';
+import CardBurstyWorkloadsIcon from './card-icons/bursty-workloads.inline.svg';
+import CardFullStackAppsIcon from './card-icons/full-stack-apps.inline.svg';
+import CardLargeDatabasesIcon from './card-icons/large-databases.inline.svg';
+import CardPlatformsIcon from './card-icons/platforms.inline.svg';
 import ApiDrivenIcon from './icons/api-driven.inline.svg';
 import AutomationIcon from './icons/automation.inline.svg';
 import AutoscalingIcon from './icons/autoscaling.inline.svg';
+import BackendIcon from './icons/backend.inline.svg';
 import BranchingIcon from './icons/branching.inline.svg';
 import CiWorkflowsIcon from './icons/ci-workflows.inline.svg';
 import ConnectionPoolingIcon from './icons/connection-pooling.inline.svg';
 import ConnectionsIcon from './icons/connections.inline.svg';
 import CostEfficiencyIcon from './icons/cost-efficiency.inline.svg';
 import DataIsolationIcon from './icons/data-isolation.inline.svg';
-import DatabaseIcon from './icons/database.inline.svg';
 import ElasticScalingIcon from './icons/elastic-scaling.inline.svg';
 import IncognitoIcon from './icons/incognito.inline.svg';
 import InstantProvisioningIcon from './icons/instant-provisioning.inline.svg';
@@ -25,15 +31,31 @@ import SaasAppsIcon from './icons/saas-apps.inline.svg';
 import ScaleFromBottomLeftIcon from './icons/scale-from-bottom-left.inline.svg';
 import ScaleToZeroIcon from './icons/scale-to-zero.inline.svg';
 import SchemaIcon from './icons/schema.inline.svg';
-import SparkleIcon from './icons/sparkle.inline.svg';
 import UsageBasedIcon from './icons/usage-based.inline.svg';
-import WindowCodeIcon from './icons/window-code.inline.svg';
 
-// Map icon names to imported components
-const ICONS = {
+// Two separate families, and they are not interchangeable.
+//
+// CARD_ICONS are drawn on a 24 viewBox and paint with currentColor, so the card
+// can tint them (text-green-52). TAG_ICONS are drawn on a 16 viewBox with a
+// hardcoded off-white fill and render at their intrinsic size inside a tag chip.
+// A few names exist in both families on purpose — a card and a tag can be about
+// the same thing — so keep the maps separate rather than merging them.
+// Keyed by the card it belongs to, so content/data/use-cases.yaml reads the same
+// name in `icon:` as it does in `link:`.
+const CARD_ICONS = {
+  agents: CardAgentsIcon,
+  'branching-workflows': CardBranchingWorkflowsIcon,
+  'bursty-workloads': CardBurstyWorkloadsIcon,
+  'full-stack-apps': CardFullStackAppsIcon,
+  'large-databases': CardLargeDatabasesIcon,
+  platforms: CardPlatformsIcon,
+};
+
+const TAG_ICONS = {
   'api-driven': ApiDrivenIcon,
   automation: AutomationIcon,
   autoscaling: AutoscalingIcon,
+  backend: BackendIcon,
   branching: BranchingIcon,
   'ci-workflows': CiWorkflowsIcon,
   'connection-pooling': ConnectionPoolingIcon,
@@ -41,6 +63,7 @@ const ICONS = {
   'cost-efficiency': CostEfficiencyIcon,
   'data-isolation': DataIsolationIcon,
   'elastic-scaling': ElasticScalingIcon,
+  incognito: IncognitoIcon,
   'instant-provisioning': InstantProvisioningIcon,
   'instant-restores': InstantRestoresIcon,
   'multi-tenancy': MultiTenancyIcon,
@@ -49,10 +72,6 @@ const ICONS = {
   'scale-to-zero': ScaleToZeroIcon,
   schema: SchemaIcon,
   'usage-based': UsageBasedIcon,
-  'window-code': WindowCodeIcon,
-  database: DatabaseIcon,
-  sparkle: SparkleIcon,
-  incognito: IncognitoIcon,
 };
 
 const UseCaseCard = ({
@@ -62,11 +81,12 @@ const UseCaseCard = ({
   description,
   link,
   logo,
+  company,
   testimonial,
   tags,
   index,
 }) => {
-  const IconComponent = icon && ICONS[icon];
+  const IconComponent = icon && CARD_ICONS[icon];
 
   return (
     <article
@@ -134,7 +154,7 @@ const UseCaseCard = ({
         {tags && tags.length > 0 && (
           <ul className="mt-auto flex flex-wrap gap-3.5 md:gap-3">
             {tags.map(({ title: tagTitle, slug: tagSlug }) => {
-              const TagIconComponent = tagSlug && ICONS[tagSlug];
+              const TagIconComponent = tagSlug && TAG_ICONS[tagSlug];
               return (
                 <li
                   className="flex h-[30px] items-center gap-2 rounded-sm bg-gray-new-15/90 px-2 py-1.5 md:h-[26px] md:gap-1.5 md:px-1.5 md:py-[5px]"
@@ -158,7 +178,7 @@ const UseCaseCard = ({
           <Image
             className="max-h-7 w-fit lg:max-h-6 md:max-h-5"
             src={logo.mediaItemUrl}
-            alt={title}
+            alt={company || ''}
             width={logo.mediaDetails.width}
             height={logo.mediaDetails.height}
             priority={index <= 1}
@@ -203,6 +223,7 @@ UseCaseCard.propTypes = {
       height: PropTypes.number.isRequired,
     }).isRequired,
   }),
+  company: PropTypes.string,
   testimonial: PropTypes.shape({
     quote: PropTypes.node.isRequired,
     author: PropTypes.string.isRequired,
@@ -244,6 +265,7 @@ UseCaseCards.propTypes = {
           height: PropTypes.number.isRequired,
         }).isRequired,
       }),
+      company: PropTypes.string,
       testimonial: PropTypes.shape({
         quote: PropTypes.node.isRequired,
         author: PropTypes.string.isRequired,

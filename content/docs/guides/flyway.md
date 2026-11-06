@@ -10,7 +10,7 @@ summary: >-
   migration workflow across multiple Neon branches or environments, see the
   companion guide on multiple database environments.
 enableTableOfContents: true
-updatedOn: '2026-08-18T10:29:02.410Z'
+updatedOn: '2026-09-16T19:45:35.340Z'
 ---
 
 Flyway is a database migration tool that provides version control for databases. It allows developers to manage and track changes to the database schema, ensuring that the database evolves consistently across different environments.
@@ -63,7 +63,7 @@ source ~/.zshrc
 
 ## Retrieve your Neon database connection string
 
-Find your database connection string by clicking the **Connect** button on your **Project Dashboard** to open the **Connect to your database** modal. Select the **Java** option from the **Connection string** drop-down menu.
+Find your database connection string by clicking the **Connect** button in the Console nav to open the **Connect to your branch** modal. Select the **Java** option from the **Connection string** drop-down menu.
 
 Your Java connection string should look something like this:
 

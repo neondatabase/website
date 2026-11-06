@@ -8,7 +8,7 @@ summary: >-
   when authoring cards. TechCards uses kebab-case. DetailIconCards accepts
   camelCase or kebab-case. Also covers SVG file locations.
 enableTableOfContents: true
-updatedOn: '2026-07-17T21:07:05.131Z'
+updatedOn: '2026-10-08T19:01:23.222Z'
 ---
 
 A comprehensive guide to all icon systems used in Neon documentation. This guide helps you understand which icon system to use and how to implement them correctly.
@@ -231,7 +231,6 @@ To test if an icon works:
 <a href="#" title="OAuth" description="Authentication protocol (icon: oauth)" icon="oauth">OAuth</a>
 <a href="#" title="Okta" description="Identity platform (icon: okta)" icon="okta">Okta</a>
 <a href="#" title="Uploadcare" description="File handling service (icon: uploadcare)" icon="uploadcare">Uploadcare</a>
-<a href="#" title="WunderGraph" description="API development platform (icon: wundergraph)" icon="wundergraph">WunderGraph</a>
 </TechCards>
 
 ### DetailIconCards Icons (Feature Icons)
@@ -334,6 +333,7 @@ To test if an icon works:
 <a href="#" title="Wallet" description="Payment and billing (icon: wallet)" icon="wallet">Wallet</a>
 <a href="#" title="Warning" description="Alerts and warnings (icon: warning)" icon="warning">Warning</a>
 <a href="#" title="X" description="Close or cancel (icon: x)" icon="x">X</a>
+<a href="#" title="Zap" description="Realtime and instant operations (icon: zap)" icon="zap">Zap</a>
 </DetailIconCards>
 
 ---

@@ -6,10 +6,10 @@ summary: >-
   for JavaScript, boto3, and the AWS CLI. Not all S3 operations are supported.
   This page lists what works, what returns 501, and known limitations.
 enableTableOfContents: true
-updatedOn: '2026-07-15T17:54:41.160Z'
+redirectFrom:
+  - /docs/storage/s3-api
+updatedOn: '2026-09-16T15:38:57.808Z'
 ---
-
-<FeatureBetaProps feature_name="Neon Object Storage" />
 
 Neon Object Storage is compatible with the S3 API for core operations. It works with the AWS SDK for JavaScript (`@aws-sdk/client-s3`), boto3, the AWS CLI, and other S3-compatible tools. Not all S3 API operations are available.
 
@@ -40,16 +40,17 @@ Configure your S3 client with `forcePathStyle: true` (JavaScript) or `endpoint_u
 
 ### Objects
 
-| Operation                                                       | Notes                                                                                          |
-| --------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- |
-| `GetObject`                                                     | Supports `Range` header for partial reads                                                      |
-| `HeadObject`                                                    | Returns object metadata                                                                        |
-| `PutObject`                                                     | Supports `Content-Type`, `Content-Disposition`, `Cache-Control`, custom `x-amz-meta-*` headers |
-| `DeleteObject`                                                  | Soft-deletes the object on the current branch                                                  |
-| `DeleteObjects`                                                 | Batch delete up to 1,000 keys per request                                                      |
-| `GetObjectAcl`                                                  | Read-only                                                                                      |
-| `GetObjectTagging` / `PutObjectTagging` / `DeleteObjectTagging` | Tag management                                                                                 |
-| `GetObjectAttributes`                                           | Returns ETag, size, and checksum                                                               |
+| Operation                                                       | Notes                                                                                                                                               |
+| --------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `GetObject`                                                     | Supports `Range` header for partial reads, and `response-*` header overrides (e.g. `response-content-disposition`) on signed and presigned requests |
+| `HeadObject`                                                    | Returns object metadata; honors `response-*` overrides on signed requests                                                                           |
+| `CopyObject`                                                    | Server-side copy; `x-amz-copy-source` may be fully URL-encoded                                                                                      |
+| `PutObject`                                                     | Supports `Content-Type`, `Content-Disposition`, `Cache-Control`, custom `x-amz-meta-*` headers                                                      |
+| `DeleteObject`                                                  | Soft-deletes the object on the current branch                                                                                                       |
+| `DeleteObjects`                                                 | Batch delete up to 1,000 keys per request                                                                                                           |
+| `GetObjectAcl`                                                  | Read-only                                                                                                                                           |
+| `GetObjectTagging` / `PutObjectTagging` / `DeleteObjectTagging` | Tag management                                                                                                                                      |
+| `GetObjectAttributes`                                           | Returns ETag, size, and checksum                                                                                                                    |
 
 ### Multipart upload
 
@@ -103,6 +104,7 @@ To set a bucket's access level (`private` or `public_read`), use the [Neon Conso
 
 - **Path-style addressing only.** Virtual-hosted-style requests (`bucket.host/key`) are not supported. Always set `forcePathStyle: true` in the AWS SDK for JavaScript, or use `endpoint_url` in boto3.
 - **SigV4 only.** AWS Signature Version 2 (SigV2) is not supported.
+- **`response-*` overrides are ignored on anonymous requests.** Unsigned requests to public-read objects always return the stored headers, while AWS S3 returns `400 InvalidRequest`. Use a presigned URL to set a download filename or content type.
 - **Lifecycle rules stored but not enforced.** `PutBucketLifecycle` accepts and stores configuration, but expiration and transition rules do not run.
 - **Versioning stored but not enforced.** Versioning configuration is stored and echoed. Objects always return `x-amz-version-id: null`.
 - **No bucket notifications.** SNS/SQS integration is not available.

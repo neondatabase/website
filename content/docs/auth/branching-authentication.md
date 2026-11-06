@@ -10,10 +10,8 @@ summary: >-
   production users. Each branch gets a unique Auth API URL, and sessions and
   tokens do not cross between branches.
 enableTableOfContents: true
-updatedOn: '2026-07-15T00:08:00.682Z'
+updatedOn: '2026-09-16T15:38:57.808Z'
 ---
-
-<FeatureBetaProps feature_name="Managed Better Auth" />
 
 Authentication is often one of the hardest parts of the application stack to test. In traditional architectures, identity data lives in a separate third-party service, while your business data lives in your database. This separation makes it difficult to create realistic staging environments or test changes to permissions without affecting production users.
 
@@ -55,7 +53,7 @@ Production Branch              Preview Branch
 ```
 
 <Admonition type="note">
-Managed Better Auth works with your branch's **default** database (typically `neondb`) and read-write endpoint only. You cannot use Managed Better Auth with other databases in the same branch. This aligns with our recommended pattern of one database per branch.
+Managed Better Auth uses your branch's default database, typically `neondb`, when you don't specify a database. You can select another database in the same branch when you enable Auth through the API by setting `database_name`. Managed Better Auth requires a read-write endpoint.
 </Admonition>
 
 ## Session management details

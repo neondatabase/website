@@ -35,6 +35,7 @@ export const getUseCasesData = () => {
           description: useCase.description,
           link: useCase.link,
           logo: caseStudy.logo,
+          company: caseStudy.title,
           testimonial: {
             quote: formatQuote(caseStudy.quote),
             author: `${caseStudy.author?.name}${caseStudy.author?.post ? ` – ${caseStudy.author.post}` : ''}`,

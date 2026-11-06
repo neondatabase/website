@@ -1,0 +1,171 @@
+# Claimable Neon
+
+You need a Neon project and no human is signed in. Provision now. A human claims it later
+if they want to keep it.
+
+This file is https://neon.com/auth.md.
+
+If `NEON_API_KEY` is set, use that account and stop. If `neon` is on `PATH`, run
+`neon profile list -o json`. A profile whose `account` is not `-` is an account; use it and
+stop. A `DEFAULT` row with `account: "-"` is not an account. Do not run `neon login` on this
+path.
+
+## Provision
+
+Install the CLI, `@neon/config`, and the skills:
+
+```bash
+npm i -g neon@latest
+npm i @neon/config
+neon skills -y -s neon -s neon-postgres
+```
+
+The `neon` skill is the Neon platform skill. `neon-postgres` is for working with Lakebase
+Postgres after claim.
+
+If you cannot run the CLI, or `neon claim --help` does not list `create`, skip to REST.
+
+### neon.ts
+
+Write `neon.ts` and commit it with the app. Declare the services the app needs.
+`neon claim create` reads this file (walks up from the current directory). After claim, the
+same file is how you add Functions, Object Storage, and the AI Gateway.
+https://neon.com/docs/reference/neon-ts.md
+
+```typescript
+import { defineConfig } from "@neon/config/v1";
+
+export default defineConfig({
+  auth: true,
+  dataApi: true,
+});
+```
+
+```bash
+neon claim create
+neon branches list
+```
+
+The project is created in `aws-us-east-2`. Pass `--region-id` to pick another region, for
+example `neon claim create --region-id aws-eu-central-1`, and `--project-name` to name the
+project. The name stays after the claim.
+
+The CLI writes `DATABASE_URL` (and granted service URLs) to `.env` or `.env.local`. Then
+skip to Claim when the human is ready.
+
+### CLI only
+
+If you cannot write `neon.ts`, pass `--service` instead. Drop flags the app does not
+need. Postgres is always included.
+
+```bash
+neon claim create --service data-api --service auth
+```
+
+Same env write as above. Then skip to Claim when the human is ready.
+
+### REST
+
+`source` is your agent name, 1-100 characters. Replace `your-agent`. Request only services
+the app needs. Finish provision with what was granted. If the app still needs a denied
+service, wait until the human is ready, then Claim.
+
+`region_id` is optional and defaults to `aws-us-east-2`. Accepted values: `aws-us-east-1`,
+`aws-us-east-2`, `aws-us-west-2`, `aws-eu-central-1`, `aws-eu-west-2`, `aws-ap-southeast-1`,
+`aws-ap-southeast-2`, `aws-sa-east-1`. `project_name` is optional too, and the project keeps
+it after the claim.
+
+```http
+POST https://claimable.neon.tech/v1/agent/identity
+Content-Type: application/json
+
+{"type":"anonymous","capabilities":["postgres","data_api","auth"],"source":"your-agent"}
+```
+
+Keep:
+
+- `identity_assertion`: the durable secret. Store it like an API key.
+- `project.id`, `project.branch_id`, and `project.expires_at`. The unclaimed project dies at
+  `expires_at` (72 hours today).
+- One row per requested capability. Check `granted` before using a service.
+
+Register returns 201 today. Treat any 2xx as success. Otherwise stop. Do not continue with
+missing fields.
+
+### Access token
+
+The assertion is issued by https://neon.com/claimable. Exchange it for a short-lived bearer
+token. There is no refresh token. Re-exchange the same assertion when the token expires.
+
+```http
+POST https://claimable.neon.tech/v1/oauth2/token
+Content-Type: application/x-www-form-urlencoded
+
+grant_type=urn:ietf:params:oauth:grant-type:jwt-bearer&assertion=<identity_assertion>&resource=https://claimable.neon.tech/
+```
+
+Keep `access_token`. Send it as `Authorization: Bearer <access_token>`.
+
+### Credentials
+
+`project_id` is `project.id` from register.
+
+```http
+GET https://claimable.neon.tech/v1/projects/<project_id>/credentials
+Authorization: Bearer <access_token>
+```
+
+Keep `database_url`. If granted: `services.data_api.url`, `services.auth.base_url`,
+`services.auth.jwks_url`. Use `database_url` with any Postgres client.
+
+## Claim
+
+Do not mint a claim URL until the human is ready to keep the project.
+
+If the CLI created the project:
+
+```bash
+neon claim accept --no-open
+```
+
+Report the printed verification URL. Then run `neon claim status` until it reports
+reconciled.
+
+Otherwise HTTP. `project_id` is `project.id`. The access token is from the token call above.
+
+```http
+POST https://claimable.neon.tech/v1/projects/<project_id>/claim
+Authorization: Bearer <access_token>
+```
+
+Keep `verification_uri_complete`, `user_code`, `expires_in`, and `interval`. Give the human
+`verification_uri_complete`. They sign in to Neon, select a destination organization, and
+accept the transfer.
+
+An unused claim code dies in `expires_in` seconds (900 today). If they have not continued to
+Neon and the code expired, POST this endpoint again. Each POST cancels the previous unused
+code. Re-issue only while `project.expires_at` is still in the future.
+
+Opening `verification_uri_complete` does not freeze access.
+
+Start polling now, every `interval` seconds, with the current `access_token`:
+
+```http
+GET https://claimable.neon.tech/v1/projects/<project_id>/claim
+Authorization: Bearer <access_token>
+```
+
+```json
+{"state":"pending","expires_at":"<iso8601>","reconciled":false}
+```
+
+Stop when `reconciled` is `true`.
+
+If GET returns 401, re-exchange with the same token POST as above and keep polling. When they
+continue to Neon, `DATABASE_URL` is rotated. Do not restore the old `database_url`. If the
+transfer window expires before they accept, POST claim again.
+
+At `reconciled: true`, discard the identity assertion, access tokens, and pre-claim
+`database_url`. They no longer authorize project access. Auth and the Data API stay enabled
+and transfer with the project if they were granted. The human owns the project. You are
+done.

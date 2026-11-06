@@ -17,17 +17,20 @@ export default {
     const url = new URL(request.url);
     if (url.pathname !== "/events") return new Response("ok");
 
+    let timer: ReturnType<typeof setInterval>;
     const stream = new ReadableStream<Uint8Array>({
       start(controller) {
         // An SSE frame is `data: <payload>\n\n`. A line starting with `:` is a
         // comment — used here as a heartbeat to keep the stream from going idle.
         controller.enqueue(encoder.encode("data: hello\n\n"));
-        const timer = setInterval(
+        timer = setInterval(
           () => controller.enqueue(encoder.encode(": ping\n\n")),
           25_000,
         );
-        // cancel() fires when the client disconnects.
-        return () => clearInterval(timer);
+      },
+      // cancel() fires when the client disconnects.
+      cancel() {
+        clearInterval(timer);
       },
     });
 
@@ -42,7 +45,7 @@ export default {
 };
 ```
 
-> `cancel()` is returned from `start()` here for brevity; you can also declare it as a separate `cancel()` method on the stream's underlying source. Either way, use it to drop the client from any broadcast set and clear timers.
+> `cancel()` is a method on the stream's underlying source; it fires when the client disconnects. Use it to drop the client from any broadcast set and clear timers. A cleanup function returned from `start()` is ignored, so it has to be a real `cancel()` method.
 
 ## With Hono
 
@@ -64,7 +67,10 @@ app.get("/events", (c) => {
     },
   });
   return new Response(stream, {
-    headers: { "Content-Type": "text/event-stream", "Cache-Control": "no-cache, no-transform" },
+    headers: {
+      "Content-Type": "text/event-stream",
+      "Cache-Control": "no-cache, no-transform",
+    },
   });
 });
 
@@ -73,19 +79,28 @@ export default app;
 
 ## Push to every client, across isolates
 
-The fan-out rule is identical to WebSockets ([Keeping clients in sync across isolates](../SKILL.md#keeping-clients-in-sync-across-isolates-do-not-skip-this)): each isolate keeps its **own** set of open streams, so broadcasting in-process only reaches the clients on that isolate. Hold a `Set` of stream controllers and pick a strategy there — **poll Postgres** by default (keeps Scale to Zero), or `LISTEN`/`NOTIFY` (shown below) for lowest latency on always-on compute. Keep the source-of-truth state in Postgres — module state doesn't survive eviction.
+If the data is database rows (live dashboards, feeds, chat over stored messages), use Neon Realtime (the `neon-realtime` skill) instead of hand-rolling fan-out. Otherwise, the fan-out rule is identical to WebSockets ([Fan-out across isolates](../SKILL.md#fan-out-across-isolates-do-not-skip-this)): each isolate keeps its **own** set of open streams, so broadcasting in-process only reaches the clients on that isolate. Hold a `Set` of stream controllers and pick a strategy there — **poll Postgres** by default (keeps Scale to Zero), or `LISTEN`/`NOTIFY` (shown below) for lowest latency on always-on compute. Keep the source-of-truth state in Postgres — module state doesn't survive eviction.
 
 ```typescript
+import { attachDatabasePool } from "@neon/functions";
 import { Pool, Client } from "pg";
 
 const encoder = new TextEncoder();
 const clients = new Set<ReadableStreamDefaultController<Uint8Array>>();
 const pool = new Pool({ connectionString: process.env.DATABASE_URL, max: 5 });
+attachDatabasePool(pool);
 const CHANNEL = "events";
 
 // One dedicated DIRECT connection per isolate to receive events (LISTEN needs a
 // real session — use DATABASE_URL_UNPOOLED, not the pooled URL).
-const listener = new Client({ connectionString: process.env.DATABASE_URL_UNPOOLED });
+// Don't call attachDatabasePool here: it would silence the idle drop that killed the feed.
+// The error listener keeps the process alive; reconnect the client on error in production (omitted here).
+const listener = new Client({
+  connectionString: process.env.DATABASE_URL_UNPOOLED,
+});
+listener.on("error", (err) => {
+  console.error(err);
+});
 listener.connect().then(() => listener.query(`LISTEN ${CHANNEL}`));
 listener.on("notification", (msg) => {
   if (!msg.payload) return;
@@ -101,7 +116,10 @@ listener.on("notification", (msg) => {
 
 // Anywhere you mutate state, NOTIFY so every isolate pushes to its own streams.
 function publish(payload: unknown) {
-  return pool.query("SELECT pg_notify($1, $2)", [CHANNEL, JSON.stringify(payload)]);
+  return pool.query("SELECT pg_notify($1, $2)", [
+    CHANNEL,
+    JSON.stringify(payload),
+  ]);
 }
 ```
 
@@ -125,8 +143,10 @@ Send `data:` with no `event:` field to deliver the default `message` event, whic
 
 ```typescript
 const source = new EventSource(`${FUNCTION_URL}/events`); // GET only
-source.onmessage = (e) => console.log("update", e.data);  // default "message" events
-source.onerror = () => {/* EventSource auto-reconnects; nothing to do */};
+source.onmessage = (e) => console.log("update", e.data);
+source.onerror = () => {
+  /* EventSource auto-reconnects; nothing to do */
+};
 // source.close() to stop.
 ```
 
@@ -140,4 +160,4 @@ source.onerror = () => {/* EventSource auto-reconnects; nothing to do */};
 - **CORS.** A SPA hits the function cross-origin, so set `Access-Control-Allow-Origin`. `EventSource` sends no credentials by default, so `*` is fine for public streams.
 - **One-way only.** SSE is server → client. For client → server, the browser makes normal `fetch`/`POST` calls (often to the same function); reach for [WebSockets](../SKILL.md#websocket-servers) only when you need bidirectional, low-latency frames.
 
-Together — a Hono `fetch` SSE endpoint, cross-isolate fan-out, heartbeat, a counter persisted in Postgres, and a client-only TanStack Router SPA consuming it with `EventSource` — these compose into a complete realtime backend on a single function.
+Together — a Hono `fetch` SSE endpoint, cross-isolate fan-out, heartbeat, a counter persisted in Postgres, and a client-only TanStack Router SPA consuming it with `EventSource` — these compose into a complete push backend on a single function, for push that doesn't come from database rows (presence, typing, LLM streams) or where Realtime isn't available. For persisted chat, feeds, and other live UIs over database rows, use Neon Realtime (the `neon-realtime` skill).

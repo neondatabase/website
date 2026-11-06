@@ -11,11 +11,11 @@ summary: >-
   connection string stable, or when you need temporary preview branches from any
   saved version. Snapshot limits and storage pricing vary by plan.
 enableTableOfContents: true
-updatedOn: '2026-08-07T17:19:40.308Z'
+updatedOn: '2026-09-17T16:33:54.884Z'
 ---
 
 <Admonition type="note">
-Please give us [Feedback](https://console.neon.tech/app/projects?modal=feedback) from the Neon Console or by connecting with us on [Discord](https://discord.gg/92vNTzKDGp).
+Please give us [Feedback](https://console.neon.tech/app/projects?modal=feedback) from the Neon Console or by connecting with us on [Discord](https://neon.com/discord).
 
 **Limits and pricing:** The Free plan includes 1 manual snapshot, and paid plans (including the [Agent plan](https://neon.com/use-cases/ai-agents)) include 100 manual snapshots. On paid plans, snapshots created by backup schedules do not count toward this limit. Snapshot storage is billed at $0.09/GB-month. If you need higher limits, please reach out to [Neon support](/docs/introduction/support).
 </Admonition>
@@ -378,23 +378,28 @@ Proper cleanup reduces costs and keeps your project manageable:
 - **Cleanup strategy**: Set `expires_at` on temporary snapshots and preview branches. Delete orphaned branches (for example, `production (old)`) created during restores.
 - **Version metadata**: Keep version metadata separate to preserve audit trail across restores.
 
-## FAQ
+## Frequently asked questions
 
-<DefinitionList>
-Why must I poll operations after restore?
-: With `finalize_restore: true`, Neon moves compute resources to the new state. Until operations complete, connections still point to the old compute.
+<Faq>
 
-What happens to my active branch when I restore?
-: When restoring with `finalize_restore: true`, your current active branch becomes orphaned (disconnected from the compute endpoint) and is renamed with "(old)" appended. This orphaned branch preserves your pre-restore state temporarily, but you should delete it after verifying the restore to avoid storage costs.
+<FaqItem question="Why must I poll operations after restore?">
+With `finalize_restore: true`, Neon moves compute resources to the new state. Until operations complete, connections still point to the old compute.
+</FaqItem>
 
-What if we need multiple preview environments?
-: Restore different snapshots to new branches using `finalize_restore: false`. Each restore creates a new branch with its own connection string.
+<FaqItem question="What happens to my active branch when I restore?">
+When restoring with `finalize_restore: true`, your current active branch becomes orphaned (disconnected from the compute endpoint) and is renamed with "(old)" appended. This orphaned branch preserves your pre-restore state temporarily, but you should delete it after verifying the restore to avoid storage costs.
+</FaqItem>
 
-Why use snapshots instead of branches for versioning?
-: **Snapshots**: Restoring a snapshot onto your active branch (`finalize_restore: true`) replaces the data but keeps the same database connection string. This is ideal for production rollbacks.
-: **Branches**: Creating a new branch always generates a new connection string, which would require reconfiguring your application for every version change. Branches also create dependency chains that can complicate deletion.
+<FaqItem question="What if we need multiple preview environments?">
+Restore different snapshots to new branches using `finalize_restore: false`. Each restore creates a new branch with its own connection string.
+</FaqItem>
 
-</DefinitionList>
+<FaqItem question="Why use snapshots instead of branches for versioning?">
+- **Snapshots**: Restoring a snapshot onto your active branch (`finalize_restore: true`) replaces the data but keeps the same database connection string. This is ideal for production rollbacks.
+- **Branches**: Creating a new branch always generates a new connection string, which would require reconfiguring your application for every version change. Branches also create dependency chains that can complicate deletion.
+</FaqItem>
+
+</Faq>
 
 ## Summary
 

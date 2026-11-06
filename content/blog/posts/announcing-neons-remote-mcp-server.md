@@ -79,4 +79,4 @@ The MCP Server communicates with clients via SSE (Server-sent events), and it ca
 
 ## What’s next?
 
-Our remote MCP Server is just the beginning. As the MCP specification evolves, we’re committed to refining and expanding our offering to provide a reliable experience for developers. By bringing MCP to the cloud, we’re making AI workflows more accessible, scalable, and future-proof. We can’t wait to see what you build with it. Try it out today, and let us know your feedback on [Discord](https://discord.com/invite/92vNTzKDGp)—we’re listening.
+Our remote MCP Server is just the beginning. As the MCP specification evolves, we’re committed to refining and expanding our offering to provide a reliable experience for developers. By bringing MCP to the cloud, we’re making AI workflows more accessible, scalable, and future-proof. We can’t wait to see what you build with it. Try it out today, and let us know your feedback on [Discord](https://neon.com/discord)—we’re listening.

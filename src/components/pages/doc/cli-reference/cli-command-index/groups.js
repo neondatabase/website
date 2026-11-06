@@ -13,7 +13,7 @@ const GROUPS = [
 ];
 
 const GROUP_OF = {
-  auth: 'setup',
+  login: 'setup',
   init: 'setup',
   bootstrap: 'setup',
   link: 'setup',
@@ -48,6 +48,18 @@ const GROUP_OF = {
   profile: 'setup',
   logs: 'debugging',
   open: 'setup',
+  mcp: 'setup',
+  skills: 'setup',
+  plugins: 'setup',
+  claim: 'setup',
+  ask: 'setup',
+  credentials: 'surfaces',
+  triggers: 'surfaces',
+  git: 'setup',
+  feedback: 'setup',
+  realtime: 'surfaces',
+  docs: 'setup',
+  postgres: 'core',
 };
 
 // Commands documented as a section of another command's page instead of a

@@ -10,19 +10,23 @@ summary: >-
   region, migrate to Databricks Lakebase, delete, or export), and how to confirm
   which region a project is in.
 enableTableOfContents: true
+redirectFrom:
+  - /docs/introduction/azure-deprecation
+  - /docs/introduction/azure-regions-deprecation
+updatedOn: '2026-10-17T02:32:04.000Z'
 ---
 
 <Admonition type="warning">
-Neon Azure regions were deprecated on April 7, 2026.
+Neon Azure regions were deprecated on April 7, 2026, and stopped receiving platform updates on October 5, 2026.
 
-We recommend [migrating projects in Azure regions to another region](#what-to-do-next) by **October 5, 2026**.
+[Migrate or delete any projects in Azure regions](#what-to-do-next) immediately.
 </Admonition>
 
-As of April 7, 2026, Neon's Azure regions are deprecated, and you can no longer create new projects in those regions.
+Neon's Azure regions were deprecated on April 7, 2026. New projects can no longer be created in those regions, and as of October 5, 2026, these regions no longer receive Neon platform updates.
 
-After **October 5, 2026**, these regions will not receive Neon feature updates. Also on October 5, projects on Free plans that have been inactive for 90 days or more are subject to deletion.
+Projects still running in Azure regions should be [migrated to another region or deleted](#what-to-do-next) immediately. Projects on Free plans that have been inactive for 90 days or more are subject to deletion.
 
-Users with projects in Neon Azure regions will receive a personalized email about specific projects and next steps. This guide explains what's changing and what to do.
+Users with projects in Neon Azure regions have already received email about specific projects and next steps. This guide explains what's changing and what to do.
 
 ## Affected regions
 
@@ -56,21 +60,27 @@ If none of these fit, [export your data in Postgres-compatible form](/docs/guide
 
 ## Frequently asked questions
 
-### Why are these regions being deprecated?
+<Faq>
+
+<FaqItem question="Why are these regions being deprecated?">
 
 We're focusing our infrastructure investment where our customers want to run Neon. Most Neon projects run in AWS regions, so concentrating there lets us ship features and reliability improvements faster, rather than splitting effort to maintain Azure in parallel. For teams that need Azure, [Databricks Lakebase](/docs/guides/migrate-neon-to-lakebase) runs the same Postgres technology as Neon and supports Azure regions.
 
-### How do I find out which region a project is in?
+</FaqItem>
+
+<FaqItem question="How do I find out which region a project is in?">
 
 You can check from the Console, the CLI, or the API:
 
-- **Console.** Open your project, then check the **Project settings** widget on the project dashboard. The region is shown in the **Region** row.
-- **CLI.** Run `neon projects list`. The `Region Id` column shows each project's region.
+- **Console.** Open your project, then check the **Project** panel on the **Overview** page. The region is shown in the **Region** row.
+- **CLI.** Run `neon projects list`. The `Region ID` column shows each project's region.
 - **API.** Call `GET /projects` and check the `region_id` field on each project.
 
 ![Project settings widget showing the project region](/docs/import/azure-regions-deprecation/project-settings-region.png)
 
-### Which AWS region should I migrate to?
+</FaqItem>
+
+<FaqItem question="Which AWS region should I migrate to?">
 
 To keep latency similar, choose the AWS region closest to your current Azure region. For the deprecated Azure regions, the nearest AWS equivalents are:
 
@@ -82,16 +92,26 @@ To keep latency similar, choose the AWS region closest to your current Azure reg
 
 If your workload has specific latency or data residency requirements, pick the region closest to your users.
 
-### What changes about my project when I migrate to a new region?
+</FaqItem>
+
+<FaqItem question="What changes about my project when I migrate to a new region?">
 
 A region migration creates a **new** Neon project in the target region. The new project gets a new hostname, so you'll need to update connection strings in your application. The new project also has a different project ID. Project-level settings (branches, integrations, autoscaling, IP Allow rules, monitoring) are configured per project. See the [migration guide](/docs/import/migrate-neon-to-another-region) for method-specific steps.
 
-### Should I take a backup before migrating?
+</FaqItem>
+
+<FaqItem question="Should I take a backup before migrating?">
 
 If your migration method uses `pg_dump` and `pg_restore`, the dump itself is a backup. If you're using Postgres logical replication, it's good practice to take a `pg_dump` snapshot of your source database first. See [Backups](/docs/manage/backups).
 
-### How do I contact Neon about my Azure projects?
+</FaqItem>
+
+<FaqItem question="How do I contact Neon about my Azure projects?">
 
 Keep an eye on your inbox for communication from us. If you have specific constraints, such as regulatory requirements or migration dependencies, reply to any migration outreach you receive or contact [Neon Support](https://console.neon.tech/app/projects?modal=support).
+
+</FaqItem>
+
+</Faq>
 
 <NeedHelp/>

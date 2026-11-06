@@ -8,6 +8,20 @@ const SCROLL_FADE_THRESHOLD = 50;
 const fadeTransition = { duration: 0.2 };
 const INTERACTIVE_SELECTOR = 'a[href], button, input, select, textarea, [tabindex]';
 
+const cssLengthToPixels = (value, element) => {
+  const numericValue = Number.parseFloat(value) || 0;
+
+  if (value.endsWith('rem')) {
+    return numericValue * Number.parseFloat(getComputedStyle(document.documentElement).fontSize);
+  }
+
+  if (value.endsWith('em')) {
+    return numericValue * Number.parseFloat(getComputedStyle(element).fontSize);
+  }
+
+  return numericValue;
+};
+
 const getPointerOnlyHeaderHtml = (thead) => {
   const clone = thead.cloneNode(true);
   clone.querySelectorAll(INTERACTIVE_SELECTOR).forEach((element) => {
@@ -74,8 +88,10 @@ const StickyTable = ({
       const tableRect = table.getBoundingClientRect();
       const headerRect = thead.getBoundingClientRect();
       const stickyTop =
-        (parseFloat(getComputedStyle(root).getPropertyValue('--docs-header-height')) || 0) +
-        stickyTopOffset;
+        cssLengthToPixels(
+          getComputedStyle(root).getPropertyValue('--docs-header-height').trim(),
+          root
+        ) + stickyTopOffset;
 
       geometryRef.current = { stickyTop, headerHeight: headerRect.height };
 
@@ -162,12 +178,24 @@ const StickyTable = ({
   return (
     <LazyMotion features={domAnimation}>
       <div
-        className={nativeSticky ? 'sticky-table sticky-table--native' : 'sticky-table'}
+        className={
+          nativeSticky
+            ? 'sticky-table sticky-table--native relative grid [&>.sticky-table-header]:[grid-area:1/1] [&>.table-wrapper]:[grid-area:1/1]'
+            : 'sticky-table relative'
+        }
         ref={rootRef}
       >
         {layout && (
           <div
-            className={['sticky-table-header', headerClassName].filter(Boolean).join(' ')}
+            className={[
+              'sticky-table-header z-40 overflow-hidden bg-white dark:bg-black-pure',
+              nativeSticky
+                ? 'sticky left-auto w-auto self-start'
+                : 'pointer-events-none fixed 2xl:px-4',
+              headerClassName,
+            ]
+              .filter(Boolean)
+              .join(' ')}
             aria-hidden="true"
             onClick={handleHeaderClick}
             onMouseDown={handleHeaderMouseDown}

@@ -8,7 +8,10 @@ import { cn } from 'utils/cn';
 import ArrowIcon from './images/arrow.inline.svg';
 
 const getUrl = (slug, basePath) => {
-  if (slug.startsWith('http')) {
+  // External (http) and site-absolute (`/`-prefixed, e.g. the Get started
+  // lane's `/docs` overview) slugs are already full targets; only relative
+  // slugs hang off basePath.
+  if (slug.startsWith('http') || slug.startsWith('/')) {
     return slug;
   }
   return `${basePath}${slug}`;

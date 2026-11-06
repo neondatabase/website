@@ -35,12 +35,16 @@ const TAG_PREFIX = 'neon@';
 const CLI_SUBDIR = path.join('packages', 'cli');
 const SCHEMA_PATH = path.join(__dirname, 'schema.json');
 
-// When the CLI ships a rename, docs may lag. List preferred names here:
-//   key   = what the schema currently calls it (new primary)
-//   value = what the docs expect (old primary, now an alias in schema)
-// The refresh script will swap these so docs-facing tooling stays stable.
-// Remove an entry once docs are updated to match the CLI's new name.
-const PREFER_ALIAS = {};
+// When the CLI and docs disagree on a command's primary name, list the
+// preferred docs-facing name here:
+//   key   = the command's primary name in the current schema
+//   value = the name the docs lead with (an alias of the key in the schema)
+// The refresh script swaps these so docs-facing tooling stays stable,
+// whichever side did the rename first.
+// Remove an entry once the schema and docs agree on the primary name.
+const PREFER_ALIAS = {
+  auth: 'login', // Docs lead with `neon login`; neonctl still has `auth` primary. Remove when neonctl makes login primary.
+};
 
 // The monorepo publishes releases for many packages, so `/releases/latest`
 // is not necessarily the CLI. List releases and pick the highest-versioned
@@ -55,8 +59,12 @@ function compareSemver(a, b) {
 }
 
 async function latestTag() {
+  // Unauthenticated requests share a 60/hour per-IP quota; send GITHUB_TOKEN
+  // when set to avoid 403s.
+  const headers = { accept: 'application/vnd.github+json' };
+  if (process.env.GITHUB_TOKEN) headers.authorization = `Bearer ${process.env.GITHUB_TOKEN}`;
   const res = await fetch(`https://api.github.com/repos/${REPO}/releases?per_page=100`, {
-    headers: { accept: 'application/vnd.github+json' },
+    headers,
   });
   if (!res.ok) throw new Error(`GitHub API ${res.status} fetching releases`);
   const releases = await res.json();

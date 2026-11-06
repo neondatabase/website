@@ -10,7 +10,7 @@ summary: >-
   interface-based schema definitions, client initialization per driver,
   optional migrations via FileMigrationProvider, and CRUD query examples.
 enableTableOfContents: true
-updatedOn: '2026-07-31T15:27:48.506Z'
+updatedOn: '2026-10-08T19:32:04.700Z'
 ---
 
 <CopyPrompt src="/prompts/kysely-prompt.md" 
@@ -93,8 +93,8 @@ If you do not have one already, create a Neon project.
 
 ## Get your connection string
 
-Find your database connection string by clicking the **Connect** button on your **Project Dashboard** to open the **Connect to your database** modal. Select a branch, a user, and the database you want to connect to. A connection string is constructed for you.
-![Connection details modal](/docs/connect/connection_details.png)
+Find your database connection string by clicking the **Connect** button in the Console nav to open the **Connect to your branch** modal. Select a branch, a user, and the database you want to connect to. A connection string is constructed for you.
+![Connection details modal](/docs/connect/connect_to_branch_modal.png)
 
 Create a `.env` file in your project's root directory and add the connection string to it. Your `.env` file should look like this:
 
@@ -435,3 +435,4 @@ For more advanced use cases, such as complex filters, joins, transactions, and s
 - [Add Object Storage](/docs/storage/overview): S3-compatible file storage that branches with your database
 - [Deploy a Function](/docs/compute/functions/overview): Run backend compute next to your database, no separate hosting needed
 - [Call an LLM with AI Gateway](/docs/ai-gateway/overview): Access foundation models from Anthropic, OpenAI, Google, and more with one credential
+- [Realtime](/docs/realtime/examples/kysely): Build fully-reactive realtime Kysely apps on Neon using your existing schema and queries &raquo;

@@ -103,6 +103,6 @@ Confusing? That’s okay, we’ve got a diagram that should help clear things up
 
 This command is extremely useful for developers playing around with more than one Neon project, or multiple [compute endpoints](https://neon.com/docs/manage/endpoints) inside the same Neon project. Most of us are not keeping track of the URLs or credentials for all the endpoint/databases that we’re connecting to in our development workflow. So, it’s simply much easier to just type `psql -h pg.neon.tech` (or even better, to have a `pgneon` alias in your CLI for this!).
 
-Finally, both the regular Neon Proxy as well as the “Link Proxy” described in this article are [open source](https://github.com/neondatabase/neon/tree/507f1a5bdd4a168e589550e7c1bb5ac6de41643f/proxy). So, feel free to poke around in the codebase and to ask us any questions you might have on its architecture [on our Discord server](https://neon.tech/discord).
+Finally, both the regular Neon Proxy as well as the “Link Proxy” described in this article are [open source](https://github.com/neondatabase/neon/tree/507f1a5bdd4a168e589550e7c1bb5ac6de41643f/proxy). So, feel free to poke around in the codebase and to ask us any questions you might have on its architecture [on our Discord server](https://neon.com/discord).
 
 We’re also hiring—take a look at our [open engineering positions](https://neon.tech/careers) and help us shape the future of AI and Postgres.

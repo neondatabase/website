@@ -8,14 +8,15 @@ import {
   useViewModelInstanceBoolean,
 } from '@rive-app/react-canvas';
 import PropTypes from 'prop-types';
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 
 import useRiveAnimation from 'hooks/use-rive-animation';
 import { cn } from 'utils/cn';
 
 const Animation = ({ className, state = 0 }) => {
+  const previousStateRef = useRef(state);
   const { isReady, animationRef, rive, RiveComponent, isVisible } = useRiveAnimation({
-    src: '/animations/pages/home/autoscaling.riv?202601131',
+    src: '/animations/pages/home/autoscaling.riv?20260806-2',
     fit: Fit.Cover,
     threshold: 0.8,
   });
@@ -37,8 +38,15 @@ const Animation = ({ className, state = 0 }) => {
   }, [isVisible, rive, setIsIntroInstance]);
 
   useEffect(() => {
+    const hasStateChanged = previousStateRef.current !== state;
+
     setStateInstance(state);
-  }, [state, setStateInstance]);
+    previousStateRef.current = state;
+
+    if (hasStateChanged) {
+      rive?.play();
+    }
+  }, [rive, state, setStateInstance]);
 
   return (
     <div className={cn('transition-opacity', isReady ? 'opacity-100' : 'opacity-0')}>

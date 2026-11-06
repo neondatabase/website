@@ -13,12 +13,13 @@ const {
 const SKILLS = [
   {
     name: 'neon-postgres',
+    title: 'Lakebase Postgres',
     description: 'Guides and best practices for Neon.',
     digest: 'sha256:abc123',
   },
   {
-    name: 'claimable-postgres',
-    description: 'Provision instant temporary Postgres databases.',
+    name: 'neon-functions',
+    description: 'Long-running serverless Node.js HTTP functions.',
     digest: 'sha256:def456',
   },
 ];
@@ -44,19 +45,19 @@ describe('buildAgentSkillsIndex', () => {
   it('constructs root-relative urls with root prefix', () => {
     const index = buildAgentSkillsIndex(SKILLS, '/.well-known/agent-skills/');
     expect(index.skills[0].url).toBe('/.well-known/agent-skills/neon-postgres/SKILL.md');
-    expect(index.skills[1].url).toBe('/.well-known/agent-skills/claimable-postgres/SKILL.md');
+    expect(index.skills[1].url).toBe('/.well-known/agent-skills/neon-functions/SKILL.md');
   });
 
   it('constructs /docs/-prefixed urls with docs prefix', () => {
     const index = buildAgentSkillsIndex(SKILLS, '/docs/.well-known/agent-skills/');
     expect(index.skills[0].url).toBe('/docs/.well-known/agent-skills/neon-postgres/SKILL.md');
-    expect(index.skills[1].url).toBe('/docs/.well-known/agent-skills/claimable-postgres/SKILL.md');
+    expect(index.skills[1].url).toBe('/docs/.well-known/agent-skills/neon-functions/SKILL.md');
   });
 
   it('preserves skill ordering from input array', () => {
     const index = buildAgentSkillsIndex(SKILLS, '/.well-known/agent-skills/');
     expect(index.skills[0].name).toBe('neon-postgres');
-    expect(index.skills[1].name).toBe('claimable-postgres');
+    expect(index.skills[1].name).toBe('neon-functions');
   });
 });
 
@@ -100,22 +101,28 @@ describe('buildAiCatalog', () => {
     expect(catalog.host.displayName).toBe('Neon');
   });
 
-  it('leads with the static MCP server entry', () => {
+  it('leads with the static product and docs MCP server entries', () => {
     const catalog = buildAiCatalog(SKILLS);
     expect(catalog.entries[0]).toMatchObject({
       identifier: 'urn:air:neon.com:mcp:neon',
       type: 'application/mcp-server-card+json',
+      url: 'https://neon.com/.well-known/mcp/server-card.json',
+    });
+    expect(catalog.entries[1]).toMatchObject({
+      identifier: 'urn:air:neon.com:mcp:neon-docs',
+      type: 'application/mcp-server-card+json',
+      url: 'https://neon.com/.well-known/mcp/docs-server-card.json',
     });
   });
 
-  it('generates one entry per skill after the MCP entry', () => {
+  it('generates one entry per skill after the MCP entries', () => {
     const catalog = buildAiCatalog(SKILLS);
-    expect(catalog.entries).toHaveLength(SKILLS.length + 1);
+    expect(catalog.entries).toHaveLength(SKILLS.length + 2);
   });
 
   it('derives each skill entry from the skill name and description', () => {
     const catalog = buildAiCatalog(SKILLS);
-    const skillEntries = catalog.entries.slice(1);
+    const skillEntries = catalog.entries.slice(2);
     skillEntries.forEach((entry, i) => {
       expect(entry.identifier).toBe(`urn:air:neon.com:skill:${SKILLS[i].name}`);
       expect(entry.type).toBe('application/agent-skills+md');
@@ -124,6 +131,14 @@ describe('buildAiCatalog', () => {
       );
       expect(entry.description).toBe(SKILLS[i].description);
     });
+  });
+
+  it('gives every entry a displayName, falling back to the skill name', () => {
+    const catalog = buildAiCatalog(SKILLS);
+    expect(catalog.entries[0].displayName).toBe('Neon MCP Server');
+    expect(catalog.entries[1].displayName).toBe('Neon Docs MCP Server');
+    expect(catalog.entries[2].displayName).toBe('Lakebase Postgres');
+    expect(catalog.entries[3].displayName).toBe('neon-functions');
   });
 
   it('every entry has exactly one of url/data (Level 1 conformance)', () => {

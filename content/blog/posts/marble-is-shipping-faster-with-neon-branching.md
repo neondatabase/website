@@ -102,4 +102,4 @@ If you’re building your own project, Marble’s story shows how Neon can help 
 
 ---
 
-_[Join our Discord](https://discord.gg/92vNTzKDGp) to ask us any questions and interact with the Neon community_.
+_[Join our Discord](https://neon.com/discord) to ask us any questions and interact with the Neon community_.

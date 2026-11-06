@@ -10,6 +10,8 @@ import normalizeDocNavigationPath from 'utils/normalize-doc-navigation-path';
 
 import Menu from '../menu';
 
+import syncNavigation from './sync-navigation';
+
 const containsActiveSlug = (menu, slug) => {
   if (menu.slug === slug) return true;
 
@@ -45,22 +47,26 @@ const Sidebar = ({ className = null, navigation, basePath, customType, sdkNaviga
   const navigationSlug = normalizeDocNavigationPath(currentSlug);
   const menu = getActiveMenu(navigation, navigationSlug);
   const navRef = useRef(null);
+  const navigationPath = `${basePath}${navigationSlug}`;
+  const isChangelogIndex = !!currentSlug.match('changelog')?.length;
 
   // Get SDK TOC for current page from pre-loaded data
   const sdkTOC = sdkNavigation?.[currentSlug] || null;
 
   useEffect(() => {
     if (navRef.current) {
-      navRef.current.scrollTop = 0;
+      return syncNavigation(navRef.current, navigationPath);
     }
-  }, [menu]);
+  }, [pathname, navigationPath, menu, sdkTOC, isChangelogIndex]);
 
-  const isChangelogIndex = !!currentSlug.match('changelog')?.length;
   const routePath = `/${currentSlug.replace(/^\/+/, '')}`;
   const isGuidesRoute = /^\/guides(?:\/|$)/.test(routePath);
-  const hasBorder = !isGuidesRoute;
 
-  if (isChangelogIndex) {
+  // Community pages still use the empty sidebar column for their desktop alignment.
+  const isCommunityRoute = /^\/(?:faqs|guides)(?:\/|$)/.test(pathname);
+  const hasBorder = !isGuidesRoute && !isCommunityRoute;
+
+  if (isChangelogIndex || (!menu && !sdkTOC && !isCommunityRoute)) {
     return null;
   }
 
@@ -76,7 +82,7 @@ const Sidebar = ({ className = null, navigation, basePath, customType, sdkNaviga
 
   return (
     <aside className={cn('relative -mt-12', isGuidesRoute && 'xl:hidden', className)}>
-      <div className="sticky top-28">
+      <div className="sticky top-15">
         <div
           className={cn(
             'relative',
@@ -86,7 +92,7 @@ const Sidebar = ({ className = null, navigation, basePath, customType, sdkNaviga
         >
           <nav
             className={cn(
-              'z-10 -mx-1 no-scrollbars h-[calc(100vh-7rem)] overflow-y-scroll pt-11 pr-8 pb-16 pl-1',
+              'z-10 -mx-1 no-scrollbars h-[calc(100vh-3.75rem)] overflow-y-scroll pt-11 pr-8 pb-16 pl-1',
               hasBorder && 'border-r border-gray-new-90 dark:border-gray-new-20'
             )}
             ref={navRef}

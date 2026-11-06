@@ -5,18 +5,21 @@ summary: >-
   Step-by-step migration from Neon Serverless Postgres to Databricks Lakebase
   Postgres using pg_dump and pg_restore, covering the Neon-specific ownership
   and ACL mismatch that requires --no-owner and --no-acl flags during restore.
-  Use this guide when moving a Neon database to Lakebase. Logical replication
-  from Neon to Lakebase is not supported. For pg_restore, use a native Postgres
-  password role because Lakebase OAuth tokens expire approximately every hour.
+  Use this guide when moving a Neon database to Lakebase. For a lower-downtime
+  migration, Lakebase can also subscribe to a Neon publication using logical
+  replication. For pg_restore, use a native Postgres password role because
+  Lakebase OAuth tokens expire approximately every hour.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-10-21T11:04:20.383Z'
 ---
 
 This guide describes how to migrate a **Neon** database to **Databricks Lakebase Postgres** using **`pg_dump`** and **`pg_restore`**.
 
 <Admonition type="note" title="Logical replication">
-Logical replication from Neon to **Lakebase** is not supported. However, you can replicate data from Neon to **Databricks Lakehouse**. See [Replicate data to Databricks with Lakeflow Connect](/docs/guides/logical-replication-databricks).
+If you need to keep downtime low, you can migrate with logical replication instead. Lakebase can subscribe to a publication on your Neon database, copy the existing data, and keep it current until you cut over. See [Replicate data from Neon to Lakebase Postgres on Databricks](/docs/guides/logical-replication-neon-to-lakebase).
+
+To replicate data from Neon to the **Databricks Lakehouse** instead, see [Replicate data to Databricks with Lakeflow Connect](/docs/guides/logical-replication-databricks).
 </Admonition>
 
 ## Prerequisites
@@ -85,6 +88,7 @@ After you have **tested** the Lakebase database (for example with queries and ap
 **Neon**
 
 - [Region migration](/docs/import/region-migration)
+- [Replicate data from Neon to Lakebase Postgres on Databricks](/docs/guides/logical-replication-neon-to-lakebase)
 - [Migrate data from Postgres](/docs/import/migrate-from-postgres)
 
 **Databricks Lakebase**

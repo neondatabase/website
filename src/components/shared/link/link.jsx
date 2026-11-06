@@ -9,6 +9,7 @@ import ExternalIcon from 'icons/external.inline.svg';
 import GlossaryIcon from 'icons/glossary.inline.svg';
 import { cn } from 'utils/cn';
 import getNodeText from 'utils/get-node-text';
+import getNofollowRel from 'utils/get-nofollow-rel';
 import sendGtagEvent from 'utils/send-gtag-event';
 
 const underlineCommonStyles =
@@ -73,6 +74,8 @@ const Link = forwardRef(
       children,
       prefetch = undefined,
       isExternal = false,
+      smoothScroll = false,
+      rel = undefined,
       ...props
     },
     ref
@@ -88,14 +91,42 @@ const Link = forwardRef(
 
     const Icon = icons[icon];
 
-    const handleClick = () => {
-      if (!tagName) return;
-      sendGtagEvent('Link Clicked', {
-        style: theme,
-        text: tagText || getNodeText(children),
-        tag_name: tagName,
-        destination: to,
+    const linkRel =
+      getNofollowRel(to, rel ?? (isExternal ? 'noopener noreferrer' : undefined)) ?? rel;
+
+    const handleClick = (event) => {
+      if (tagName) {
+        sendGtagEvent('Link Clicked', {
+          style: theme,
+          text: tagText || getNodeText(children),
+          tag_name: tagName,
+          destination: to,
+        });
+      }
+
+      if (
+        !smoothScroll ||
+        event.defaultPrevented ||
+        event.button !== 0 ||
+        event.metaKey ||
+        event.ctrlKey ||
+        event.shiftKey ||
+        event.altKey ||
+        !to?.startsWith('#')
+      ) {
+        return;
+      }
+
+      const target = document.getElementById(decodeURIComponent(to.slice(1)));
+
+      if (!target) return;
+
+      event.preventDefault();
+      target.scrollIntoView({
+        behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth',
+        block: 'start',
       });
+      window.history.pushState(null, '', to);
     };
 
     const content = (
@@ -120,7 +151,14 @@ const Link = forwardRef(
     // TODO: remove this when we upgrade to latest version of Next.js
     if (to?.includes('#')) {
       return (
-        <a className={className} href={to} ref={ref} onClick={handleClick} {...props}>
+        <a
+          className={className}
+          href={to}
+          ref={ref}
+          onClick={handleClick}
+          {...props}
+          {...(linkRel && { rel: linkRel })}
+        >
           {content}
         </a>
       );
@@ -133,6 +171,7 @@ const Link = forwardRef(
           href={to}
           ref={ref}
           prefetch={prefetch}
+          rel={rel}
           onClick={handleClick}
           {...props}
         >
@@ -149,6 +188,7 @@ const Link = forwardRef(
         onClick={handleClick}
         {...(isExternal && { target: '_blank', rel: 'noopener noreferrer' })}
         {...props}
+        {...(linkRel && { rel: linkRel })}
       >
         {content}
       </a>
@@ -171,6 +211,8 @@ Link.propTypes = {
   tagName: PropTypes.string,
   tagText: PropTypes.string,
   isExternal: PropTypes.bool,
+  smoothScroll: PropTypes.bool,
+  rel: PropTypes.string,
 };
 
 export default Link;

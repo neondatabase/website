@@ -3,25 +3,26 @@
  * MCP tool-category drift check.
  *
  * The Neon MCP server owns the list of tool categories (`?category=` values).
- * Two places in this repo restate that list for readers, and both silently rot
- * when the server gains or drops a category:
+ * Three places in this repo restate that list for readers, and all three
+ * silently rot when the server gains or drops a category:
  *
  *   1. SCOPE_CATEGORIES in the config generator
  *      (src/components/pages/doc/mcp-setup-configurator/mcp-setup-configurator.jsx)
  *      — a missing entry means the generator emits a `?category=` URL that
  *      quietly disables tools the user never chose to turn off.
  *   2. The "Available tools" table in content/docs/shared-content/mcp-tools.md.
+ *   3. The `--category` sentence in content/docs/cli/mcp.md.
  *
  * The server advertises its own list at
  * https://mcp.neon.tech/.well-known/oauth-authorization-server under
  * `x-neon-scope-categories`, so drift is detectable rather than guessable.
  *
- *   - Offline (default, PR gate): the generator and the docs table must list the
- *     same categories in the same order. Deterministic, no network. This alone
- *     catches the common case where one of the two gets updated and the other
- *     doesn't.
+ *   - Offline (default, PR gate): the generator, the docs table, and the CLI
+ *     list must list the same categories in the same order. Deterministic, no
+ *     network. This alone catches the common case where one of the three gets
+ *     updated and the others don't.
  *   - --live (daily schedule / manual): additionally fetches the well-known
- *     document and requires both local lists to match the server exactly. This
+ *     document and requires every local list to match the server exactly. This
  *     is what catches a category added to the MCP server that nobody mirrored
  *     here at all.
  *
@@ -47,6 +48,7 @@ const CONFIGURATOR_PATH = path.join(
   'src/components/pages/doc/mcp-setup-configurator/mcp-setup-configurator.jsx'
 );
 const DOCS_TABLE_PATH = path.join(ROOT, 'content/docs/shared-content/mcp-tools.md');
+const CLI_MCP_PATH = path.join(ROOT, 'content/docs/cli/mcp.md');
 
 const DEFAULT_SERVER = 'https://mcp.neon.tech';
 const WELL_KNOWN_PATH = '/.well-known/oauth-authorization-server';
@@ -87,6 +89,18 @@ export function parseDocsTableCategories(markdown) {
   }
   if (slugs.length === 0) {
     throw new Error('the "Available tools" table listed no `category` slugs');
+  }
+  return slugs;
+}
+
+export function parseCliMcpCategories(markdown) {
+  const match = markdown.match(/Categories are ([^.]+)\./);
+  if (!match) {
+    throw new Error('could not find a "Categories are ..." sentence');
+  }
+  const slugs = [...match[1].matchAll(/`([^`]+)`/g)].map((entry) => entry[1]);
+  if (slugs.length === 0) {
+    throw new Error('the "Categories are ..." sentence listed no `category` slugs');
   }
   return slugs;
 }
@@ -143,6 +157,7 @@ const REMEDIATION = [
   '    src/components/pages/doc/mcp-setup-configurator/mcp-setup-configurator.jsx',
   '    (each entry also needs a user-facing label and description)',
   '  - docs table: the "Available tools" table in content/docs/shared-content/mcp-tools.md',
+  '  - CLI mcp docs: the "Categories are ..." sentence in content/docs/cli/mcp.md',
   'The server list is authoritative:',
   `  curl -s ${DEFAULT_SERVER}${WELL_KNOWN_PATH} | jq '."${CATEGORIES_FIELD}"'`,
 ].join('\n');
@@ -160,11 +175,13 @@ async function main() {
 
   const configurator = parseConfiguratorCategories(fs.readFileSync(CONFIGURATOR_PATH, 'utf8'));
   const docsTable = parseDocsTableCategories(fs.readFileSync(DOCS_TABLE_PATH, 'utf8'));
+  const cliMcp = parseCliMcpCategories(fs.readFileSync(CLI_MCP_PATH, 'utf8'));
 
-  // Offline, the generator is the reference the docs table is compared against;
-  // live, both are compared against the server, which actually owns the list.
   let reference = { label: 'config generator', categories: configurator };
-  const sources = [{ label: 'docs table', categories: docsTable }];
+  const sources = [
+    { label: 'docs table', categories: docsTable },
+    { label: 'CLI mcp docs', categories: cliMcp },
+  ];
 
   if (live) {
     reference = { label: 'MCP server', categories: await fetchServerCategories(serverBase) };

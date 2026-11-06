@@ -113,7 +113,7 @@ To provide a clear way to verify the setup, create a main application file that 
     ```javascript title="index.js"
     require('dotenv').config();
     const express = require('express');
-    const postgres = require('postgres');
+    const postgres = require('postgres').default; // postgres.js 4+ is ESM-only
 
     const app = express();
     const PORT = process.env.PORT || 3000;

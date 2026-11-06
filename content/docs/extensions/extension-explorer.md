@@ -8,7 +8,7 @@ summary: >-
 enableTableOfContents: true
 redirectFrom:
   - /docs/extensions/extensions-intro
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-09-27T23:19:01.102Z'
 ---
 
 Browse supported Postgres extensions by category.
@@ -21,7 +21,7 @@ Browse supported Postgres extensions by category.
 
 <a href="/docs/extensions/pg_tiktoken" description="Tokenize data in Postgres using the OpenAI tiktoken library" icon="sparkle">pg_tiktoken</a>
 
-<a href="/docs/extensions/pgrag" description="Create end-to-end Retrieval-Augmented Generation (RAG) pipelines" icon="sparkle">pgrag</a>
+<a href="/docs/extensions/lakebase-vector" description="Scalable vector similarity search for RAG and semantic search" icon="sparkle">lakebase_vector</a>
 
 <a href="/docs/extensions/pgvector" description="Store vector embeddings and perform vector similarity search in Postgres" icon="sparkle">pgvector</a>
 
@@ -200,9 +200,9 @@ Browse supported Postgres extensions by category.
 
 <DetailIconCards>
 
-<a href="https://coffeescript.org/" description="Enables writing functions in CoffeeScript, a Javascript dialect with a syntax similar to Ruby" icon="binary-code">plcoffee</a>
+<a href="/docs/extensions/plv8" description="Deprecated on Neon. Was a CoffeeScript procedural language that ships with plv8; use plpgsql or app-side logic instead" icon="binary-code">plcoffee</a>
 
-<a href="https://livescript.net/" description="Enables writing functions in LiveScript, a Javascript dialect that serves as a more powerful successor to CoffeeScript" icon="binary-code">plls</a>
+<a href="/docs/extensions/plv8" description="Deprecated on Neon. Was a LiveScript procedural language that ships with plv8; use plpgsql or app-side logic instead" icon="binary-code">plls</a>
 
 <a href="/docs/extensions/plv8" description="Deprecated on Neon. Was a Postgres procedural language powered by V8 for JavaScript callable from SQL; use plpgsql or app-side logic instead" icon="binary-code">plv8</a>
 
@@ -245,6 +245,8 @@ Browse supported Postgres extensions by category.
 <a href="/docs/extensions/dict_int" description="Provides a text search dictionary template for indexing integer data in Postgres" icon="search">dict_int</a>
 
 <a href="/docs/extensions/fuzzystrmatch" description="Provides several functions to determine similarities and distance between strings in Postgres" icon="search">fuzzystrmatch</a>
+
+<a href="/docs/extensions/lakebase-text" description="BM25 keyword and full-text search for Postgres, compatible with tsvector" icon="search">lakebase_text</a>
 
 <a href="/docs/extensions/pg_trgm" description="Provides functions and operators for determining the similarity of alphanumeric text based on trigram matching, and index operator classes for fast string similarity search" icon="search">pg_trgm</a>
 

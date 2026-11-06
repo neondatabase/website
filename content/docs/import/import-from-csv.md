@@ -8,7 +8,7 @@ summary: >-
   advance with columns that match the CSV header; `\copy` returns the row count
   on success.
 enableTableOfContents: true
-updatedOn: '2026-07-31T15:27:48.506Z'
+updatedOn: '2026-09-16T19:45:35.340Z'
 ---
 
 To import data from a CSV file into your Neon database, create the target table first, then run the psql `\copy` meta-command from a session connected to your database. `\copy` streams the CSV from your local machine over the existing connection, so it works without any special server-side file access. This topic walks through the process with a simple example.
@@ -31,7 +31,7 @@ Connect to the `neondb` database using `psql`. For example:
 psql "<your_neon_database_connection_string>"
 ```
 
-You can find your connection string on your Neon Project Dashboard. Click on the **Connect** button. Use the drop-down menu to copy a full `psql` connection command.
+You can find your connection string by clicking **Connect** in the Console nav. Use the drop-down menu to copy a full `psql` connection command.
 
 <Admonition type="note">
 For more information about connecting to Neon with `psql`, see [Connect with psql](/docs/connect/query-with-psql-editor).

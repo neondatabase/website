@@ -9,7 +9,7 @@ const CTA = () => (
   <section className="cta relative bg-[#151617] safe-paddings">
     <div className="absolute inset-0 z-10 pt-14 pb-9 xl:pt-12 xl:pb-5 lg:pt-9 md:pt-[52px] md:pb-6">
       <Container className="flex h-full flex-col" size="1920">
-        <h2 className="text-[80px] leading-none tracking-tighter xl:text-[64px] lg:text-[44px] md:text-[32px]">
+        <h2 className="text-[5rem] leading-none tracking-tighter 2xl:text-[4.5rem] xl:text-[3.5rem] lg:text-[2.75rem] md:text-[2rem]">
           The world&apos;s most advanced <br /> backend platform.
         </h2>
 
@@ -41,51 +41,48 @@ const CTA = () => (
     </div>
 
     <div className="pointer-events-none relative overflow-hidden">
-      {/*
-        Video optimization parameters:
-          mp4 av1: ffmpeg -i cta-origin.mov -c:v libaom-av1 -crf 25 -b:v 0 -pix_fmt yuv420p10le -vf scale=2880:-2 -cpu-used 0 -tiles 4x2 -row-mt 1 -threads 16 -strict experimental -tag:v av01 -movflags faststart -an cta-av1.mp4
-          mp4: ffmpeg -i cta-origin.mov -c:v libx265 -crf 25 -pix_fmt yuv420p10le -vf scale=2880:-2 -preset veryslow -tag:v hvc1 -movflags faststart -an cta.mp4
-          webm: ffmpeg -i cta-origin.mov -c:v libvpx-vp9 -pix_fmt yuv420p10le -crf 35 -vf scale=2880:-2 -deadline best -an cta.webm
-      */}
+      {/* Footer: 3840×1888, 30 FPS, 26.1 seconds, no audio. AV1 CRF 42 / HEVC CRF 30 / VP9 CRF 40. */}
       <PauseableVideo
-        className="aspect-[1920/944] max-h-[944px] w-full lg:w-[1024px] md:hidden"
+        className="aspect-[1920/944] max-h-[944px] w-full lg:left-1/2 lg:w-[1024px] lg:-translate-x-1/2 md:hidden"
         videoClassName="size-full object-cover"
         width={1920}
         height={944}
       >
         <source
-          src={`${LINKS.cdn}/public/pages/home/cta/cta-av1.mp4?updated=20260113`}
-          type="video/mp4; codecs=av01.0.05M.08,opus"
+          src={`${LINKS.cdn}/public/images/pages/home/cta/cta-new-av1.mp4?updated=20261009`}
+          type='video/mp4; codecs="av01.0.12M.08"'
         />
         <source
-          src={`${LINKS.cdn}/public/pages/home/cta/cta.mp4?updated=20260113`}
-          type="video/mp4"
+          src={`${LINKS.cdn}/public/images/pages/home/cta/cta-new.mp4?updated=20261009`}
+          type='video/mp4; codecs="hvc1"'
         />
         <source
-          src={`${LINKS.cdn}/public/pages/home/cta/cta.webm?updated=20260113`}
+          src={`${LINKS.cdn}/public/images/pages/home/cta/cta-new.webm?updated=20261009`}
           type="video/webm"
         />
       </PauseableVideo>
 
-      {/*
-        Mobile video optimization parameters:
-          mp4 av1: ffmpeg -i cta-mob-origin.mov -c:v libaom-av1 -crf 25 -b:v 0 -pix_fmt yuv420p10le -vf scale=1000:-2 -cpu-used 0 -tiles 4x2 -row-mt 1 -threads 16 -strict experimental -tag:v av01 -movflags faststart -an cta-mob-av1.mp4
-          mp4: ffmpeg -i cta-mob-origin.mov -c:v libx265 -crf 26 -vf scale=1000:-2 -preset veryslow -tag:v hvc1 -movflags faststart -an cta-mob.mp4
-          webm: ffmpeg -i cta-mob-origin.mov -c:v libvpx-vp9 -crf 35 -vf scale=1000:-2 -deadline best -an cta-mob.webm
-      */}
-      <PauseableVideo
-        className="hidden h-[500px] w-full md:block"
-        videoClassName="size-full object-cover"
-        width={767}
-        height={767}
-      >
-        <source
-          src={`${LINKS.cdn}/public/pages/home/cta/cta-mob-av1.mp4`}
-          type="video/mp4; codecs=av01.0.05M.08,opus"
-        />
-        <source src={`${LINKS.cdn}/public/pages/home/cta/cta-mob.mp4`} type="video/mp4" />
-        <source src={`${LINKS.cdn}/public/pages/home/cta/cta-mob.webm`} type="video/webm" />
-      </PauseableVideo>
+      <div className="relative hidden h-170 w-full overflow-hidden bg-[#484848] max-[32rem]:aspect-64/85 max-[32rem]:h-auto md:block xs:aspect-3/5">
+        <PauseableVideo
+          className="absolute top-1/2 left-1/2 aspect-512/680 w-full min-w-128 -translate-x-1/2 -translate-y-1/2 max-[32rem]:min-w-0 xs:aspect-auto xs:min-h-full xs:min-w-[105%]"
+          videoClassName="size-full object-cover"
+          width={512}
+          height={680}
+        >
+          <source
+            src={`${LINKS.cdn}/public/images/pages/home/cta/cta-mob-new-av1.mp4?updated=20261009`}
+            type='video/mp4; codecs="av01.0.08M.08"'
+          />
+          <source
+            src={`${LINKS.cdn}/public/images/pages/home/cta/cta-mob-new.mp4?updated=20261009`}
+            type='video/mp4; codecs="hvc1"'
+          />
+          <source
+            src={`${LINKS.cdn}/public/images/pages/home/cta/cta-mob-new.webm?updated=20261009`}
+            type="video/webm"
+          />
+        </PauseableVideo>
+      </div>
     </div>
   </section>
 );

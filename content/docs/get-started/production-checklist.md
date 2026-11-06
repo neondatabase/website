@@ -11,7 +11,7 @@ summary: >-
 enableTableOfContents: true
 redirectFrom:
   - /docs/get-started-with-neon/production-checklist
-updatedOn: '2026-08-07T13:46:01.605Z'
+updatedOn: '2026-11-05T15:33:57.188Z'
 ---
 
 <CheckList title="Production checklist">
@@ -56,7 +56,7 @@ updatedOn: '2026-08-07T13:46:01.605Z'
   Limit database access to trusted sources using IP Allow to reduce the risk of unauthorized changes.
 </CheckItem>
 <CheckItem title="14. Install pg_stat_statements" href="#install-pgstatstatements">
-  Enable query performance monitoring to track execution times and frequency. This helps you troubleshoot performance issues independently.
+  Query execution times and frequency yourself with SQL or `neon inspect`. The Console's Query performance view works without it.
 </CheckItem>
 <CheckItem title="15. Integrate with your existing observability stack" href="#integrate-with-your-existing-observability-stack">
   Export Neon metrics to Datadog, Grafana, or any OTEL-compatible platform to monitor usage and capacity alongside your existing systems.
@@ -79,8 +79,6 @@ Keep reading: [Neon plans](/docs/introduction/plans)
 ## Choose a region close to your application
 
 Network latency is one of the most common contributors to database response time: even a well-tuned database will feel slow if it's geographically far from your application servers. When creating a Neon project, choose the region that is closest to where your application runs.
-
-![Region selection](/docs/introduction/project_creation_regions.png)
 
 Keep reading: [Neon regions](/docs/introduction/regions)
 
@@ -137,7 +135,7 @@ In a serverless architecture, brief connection interruptions can occur during sc
 
 Our recommended approach:
 
-- Use the Neon API or Console to trigger a compute restart
+- Use the Neon Console, CLI, or API to trigger a compute restart
 - Observe how your application behaves during the restart
 - Confirm that connections are re-established automatically without user-facing errors
 
@@ -148,6 +146,12 @@ curl --request POST \
      --header 'authorization: Bearer $NEON_API_KEY'
 ```
 
+With the Neon CLI:
+
+```bash
+neon postgres computes restart <endpoint_id> --project-id <project_id>
+```
+
 Keep reading:
 
 - [Restart a compute](/docs/manage/computes#restart-a-compute)
@@ -156,15 +160,15 @@ Keep reading:
 
 ## Size the history window for instant restore
 
-**[Instant restore](/docs/introduction/branch-restore)** lets you roll a branch back in time. How far back you can go depends on the **history window** you configure (under **Settings → Instant restore**). On paid plans, the default history window is 1 day, which you can increase up to 30 days.
+**[Instant restore](/docs/postgres/backup-restore/branch-restore)** lets you roll a branch's database timeline back in time. How far back you can go depends on the **history window** you configure (under **Settings → Postgres**). On paid plans, the default history window is 1 day, which you can increase up to 7 days on Launch or 30 days on Scale.
 
 A longer history window gives you more flexibility to recover from bugs discovered later or accidental data loss. However, longer windows retain more change history, which increases **History** usage on your bill. Choose a window that balances recovery needs with predictable storage costs.
 
-Keep reading: [Storage and billing for instant restore](/docs/introduction/history-window#storage-and-billing)
+Keep reading: [Storage and billing for instant restore](/docs/postgres/backup-restore/history-window#storage-and-billing)
 
 ## Consider snapshot schedules
 
-Snapshot schedules provide regular, durable restore points taken daily, weekly, or monthly. While **[instant restore](/docs/introduction/branch-restore)** lets you roll back to any moment still inside your **history window**, snapshots capture stable points in time that you can return to later, ensuring that recovery points exist even if they fall outside your chosen history window.
+Snapshot schedules provide regular, durable restore points taken daily, weekly, or monthly. While **[instant restore](/docs/postgres/backup-restore/branch-restore)** lets you roll back to any moment still inside your **history window**, snapshots capture stable points in time that you can return to later, ensuring that recovery points exist even if they fall outside your chosen history window.
 
 Snapshot schedules are only available on [root branches](/docs/manage/branches#root-branch).
 
@@ -176,7 +180,7 @@ Keep reading: [Snapshot schedules](/docs/guides/backup-restore#create-backup-sch
 
 Don't wait for an incident to learn how restore works. Plan and test your recovery process in advance.
 
-Neon supports multiple restore patterns:
+**Database restore** (Postgres + Managed Better Auth) uses Neon's built-in capabilities:
 
 - [Instant branch restores](/docs/guides/backup-restore#instantly-restore-a-branch), where the existing branch is restored to a previous state
 - [Restore from a snapshot into the same branch](/docs/guides/backup-restore#one-step-restore)
@@ -221,7 +225,7 @@ Keep reading: [IP Allow](/docs/introduction/ip-allow)
 
 ## Install pg_stat_statements
 
-The [pg_stat_statements extension](/docs/extensions/pg_stat_statements) provides query performance monitoring to track execution times and frequency. Since Neon doesn't log queries and has limited visibility into query performance, this extension helps you troubleshoot issues independently.
+The [pg_stat_statements extension](/docs/extensions/pg_stat_statements) tracks how often each query runs and how long it takes. The Console's [Query performance](/docs/introduction/monitor-query-performance) view shows this data without any setup. Install the extension in your database to query the statistics yourself with SQL or to use [`neon inspect`](/docs/cli/inspect):
 
 ```sql
 CREATE EXTENSION IF NOT EXISTS pg_stat_statements;

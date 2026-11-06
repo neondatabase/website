@@ -1,31 +1,33 @@
 ---
 title: Managed Better Auth and Data API SDK
-subtitle: Reference documentation for @neondatabase/neon-js (authentication and Data API database queries)
+subtitle: Reference documentation for @neon/neon-js (authentication and Data API database queries)
 summary: >-
-  The `@neondatabase/neon-js` TypeScript SDK combines Managed Better Auth and the Neon
+  The `@neon/neon-js` TypeScript SDK combines Managed Better Auth and the Neon
   Data API in one client, covering auth methods (email/password, OAuth, OTP,
   password reset) alongside a PostgREST-style query builder (select, insert,
   update, delete, rpc, filters) with automatic JWT forwarding. Choose this page
-  over the standalone `@neondatabase/postgrest-js` or `@neondatabase/auth`
+  over the standalone `@neon/postgrest-js` or `@neon/auth`
   packages when you need the full combined API reference in one place. Three
   adapters are documented: BetterAuthVanillaAdapter (default, Promise-based),
   BetterAuthReactAdapter (React hooks), and SupabaseAuthAdapter
   (Supabase-compatible migration path).
 enableTableOfContents: true
 layout: wide
-updatedOn: '2026-07-15T00:08:00.682Z'
+redirectFrom:
+  - /docs/auth/reference/javascript-sdk
+updatedOn: '2026-08-31T17:42:21.786Z'
 ---
 
-This page documents `@neondatabase/neon-js`, which combines Managed Better Auth and the Data API in a single client. Neon also publishes standalone packages:
+This page documents `@neon/neon-js`, which combines Managed Better Auth and the Data API in a single client. Neon also publishes standalone packages:
 
-- [`@neondatabase/postgrest-js`](/docs/data-api/get-started#any-authentication-provider): Data API with any authentication provider
-- [`@neondatabase/auth`](https://www.npmjs.com/package/@neondatabase/auth): Managed Better Auth without the Data API
+- [`@neon/postgrest-js`](/docs/data-api/get-started#any-authentication-provider): Data API with any authentication provider
+- [`@neon/auth`](https://www.npmjs.com/package/@neon/auth): Managed Better Auth without the Data API
 
 Authentication is provided through an adapter-based architecture, letting you work more easily with your existing code or preferred framework. Available adapters:
 
 - **BetterAuthVanillaAdapter** (default): Promise-based authentication methods like `client.auth.signIn.email()`. Used in all examples on this page.
 - **BetterAuthReactAdapter**: Similar API but with React hooks like `useSession()`. See the [React quickstart](/docs/auth/quick-start/react).
-- **SupabaseAuthAdapter**: Supabase-compatible API for easy migration. See the [migration guide](/docs/auth/migrate/from-supabase).
+- **SupabaseAuthAdapter**: Supabase-compatible API for easy migration, built into `createClient` from `@neon/neon-js/supabase`. See the [migration guide](/docs/auth/migrate/from-supabase).
 
 Database query methods (`client.from()`, `.select()`, etc.) work the same regardless of which adapter you use.
 
@@ -40,7 +42,7 @@ Install the TypeScript SDK in your project using npm, yarn, pnpm, or bun.
 <TwoColumnLayout.Block>
 
 ```bash
-npm install @neondatabase/neon-js
+npm install @neon/neon-js
 ```
 
 </TwoColumnLayout.Block>
@@ -65,14 +67,14 @@ Use this when you only need authentication (no database queries). You get:
 
 The auth methods are identical; only the access path differs. `client.auth.signIn.email()` and `auth.signIn.email()` do the same thing.
 
-For the full client, pass a single HTTPS Neon database URL without credentials or query parameters. The SDK derives the Neon Auth URL and Data API URL automatically. If you already have a Neon Auth URL or Data API URL, use the same URL without the `.neonauth` or `.apirest` hostname label and without the trailing `/auth` or `/rest/v1` path. The cell label (if present), region, and database path stay the same. If you need to override either derived URL, the object form is still supported.
+For the full client, pass a single HTTPS Neon database URL without credentials or query parameters. The SDK derives the Managed Better Auth URL and Data API URL automatically. If you already have a Managed Better Auth URL or Data API URL, use the same URL without the `.neonauth` or `.apirest` hostname label and without the trailing `/auth` or `/rest/v1` path. The cell label (if present), region, and database path stay the same. If you need to override either derived URL, the object form is still supported.
 
 </TwoColumnLayout.Block>
 <TwoColumnLayout.Block>
 <CodeTabs labels={["Full client","Auth-only","With TypeScript types","With a different adapter"]}>
 
 ```typescript
-import { createClient } from '@neondatabase/neon-js';
+import { createClient } from '@neon/neon-js';
 
 // Use your Neon database URL without credentials or query parameters.
 // Example: https://ep-example.c-2.us-east-1.aws.neon.tech/neondb
@@ -80,21 +82,21 @@ const client = createClient(import.meta.env.VITE_NEON_DATABASE_URL);
 ```
 
 ```typescript
-import { createAuthClient } from '@neondatabase/neon-js/auth';
+import { createAuthClient } from '@neon/neon-js/auth';
 
 const auth = createAuthClient(import.meta.env.VITE_NEON_AUTH_URL);
 ```
 
 ```typescript
-import { createClient } from '@neondatabase/neon-js';
+import { createClient } from '@neon/neon-js';
 import type { Database } from './types/database.types';
 
 const client = createClient<Database>(import.meta.env.VITE_NEON_DATABASE_URL);
 ```
 
 ```typescript
-import { createClient } from '@neondatabase/neon-js';
-import { BetterAuthReactAdapter } from '@neondatabase/neon-js/auth/react/adapters';
+import { createClient } from '@neon/neon-js';
+import { BetterAuthReactAdapter } from '@neon/neon-js/auth/react/adapters';
 
 const client = createClient(import.meta.env.VITE_NEON_DATABASE_URL, {
   auth: {
@@ -104,10 +106,6 @@ const client = createClient(import.meta.env.VITE_NEON_DATABASE_URL, {
 ```
 
 </CodeTabs>
-
-<Admonition type="warning" title="Not yet on npm">
-The single-URL form shown above, `createClient(url)`, requires a version of `@neondatabase/neon-js` that has not been published to npm as of this writing. The latest published version, `0.6.2-beta`, only accepts the two-URL object form below. If `npm install @neondatabase/neon-js` installs `0.6.2-beta` or earlier for you, use the object form instead.
-</Admonition>
 
 The object form remains available for custom endpoint layouts or local development setups where the Auth and Data API URLs cannot be derived from the same Neon database URL:
 
@@ -935,7 +933,7 @@ const { data, error } = await client
 <TwoColumnLayout.Block>
 
 Filters rows based on whether a column is null or not null.
-Use `null` to find rows where the column is null, or `'not.null'` to find rows where it's not null.
+Use `.is(column, null)` to find rows where the column is null, or `.not(column, 'is', null)` to find rows where it's not null.
 
 </TwoColumnLayout.Block>
 <TwoColumnLayout.Block>
@@ -946,7 +944,7 @@ const { data, error } = await client.from('todos').select('*').is('deleted_at', 
 ```
 
 ```typescript
-const { data, error } = await client.from('todos').select('*').is('completed_at', 'not.null');
+const { data, error } = await client.from('todos').select('*').not('completed_at', 'is', null);
 ```
 
 </CodeTabs>
@@ -991,10 +989,10 @@ const { data, error } = await client
 </TwoColumnLayout.Block>
 </TwoColumnLayout.Item>
 
-<TwoColumnLayout.Item title="Column value is between two values" method=".range(column, start, end)" id="range">
+<TwoColumnLayout.Item title="Column value is between two values" method=".gte(column, start).lte(column, end)" id="range">
 <TwoColumnLayout.Block>
 
-Range is inclusive (includes both start and end values).
+Use `.gte()` and `.lte()` to include both the start and end values.
 
 </TwoColumnLayout.Block>
 <TwoColumnLayout.Block>
@@ -1003,7 +1001,8 @@ Range is inclusive (includes both start and end values).
 const { data, error } = await client
   .from('todos')
   .select('*')
-  .range('priority', 5, 10)
+  .gte('priority', 5)
+  .lte('priority', 10)
 ```
 
 </TwoColumnLayout.Block>

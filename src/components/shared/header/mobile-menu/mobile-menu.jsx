@@ -13,9 +13,11 @@ import { TopbarContext } from 'contexts/topbar-context';
 import useMobileMenu from 'hooks/use-mobile-menu';
 import ChevronIcon from 'icons/chevron-down-thin.inline.svg';
 import { cn } from 'utils/cn';
+import getDocsNavHref, { getDocsHeaderLanes } from 'utils/get-docs-nav-href';
 
 import Burger from '../burger';
 import MenuBanner from '../menu-banner';
+import MenuFeatureCards from '../menu-feature-cards';
 
 const ANIMATION_DURATION = 0.2;
 
@@ -42,7 +44,7 @@ const MobileMenuItem = ({ text, to, sections, ...otherProps }) => {
         className="relative flex w-full items-center py-7 text-2xl leading-none font-medium tracking-extra-tight sm:py-5 sm:text-xl"
         to={to}
         tagName="Mobile Menu"
-        handleClick={handleMenuItemClick}
+        {...(sections ? { handleClick: handleMenuItemClick } : {})}
         {...otherProps}
       >
         {text}
@@ -59,32 +61,43 @@ const MobileMenuItem = ({ text, to, sections, ...otherProps }) => {
                 transition={{ duration: ANIMATION_DURATION }}
                 className="flex gap-x-3.5 md:flex-col md:gap-y-9"
               >
-                <ul className="grid grid-cols-[224px,224px] gap-x-5 gap-y-9 pt-3 sm:grid-cols-2 xs:grid-cols-1">
-                  {sections.map(({ title, items }, index) => (
-                    <li key={index}>
+                <ul className="grid w-full grid-cols-2 gap-x-8 gap-y-9 pt-3 md:grid-cols-1 sm:grid-cols-2 xs:grid-cols-1">
+                  {sections.map(({ title, items, variant }, index) => (
+                    <li
+                      key={index}
+                      className={cn(variant === 'cards' && 'flex flex-col md:col-span-full')}
+                    >
                       {title && (
                         <h3 className="mb-5 text-[10px] leading-none tracking-snug text-gray-new-50 uppercase">
                           {title}
                         </h3>
                       )}
-                      <ul className="flex flex-col gap-5">
-                        {items.map(({ title, description, to, isExternal }) => (
-                          <li key={title}>
-                            <Link
-                              className="grid gap-y-2 text-[13px] leading-tight tracking-snug text-gray-new-40 dark:text-gray-new-60"
-                              to={to}
-                              isExternal={isExternal}
-                              tagName="MobileMenu"
-                            >
-                              <span className="text-lg leading-none font-medium tracking-extra-tight text-black-pure dark:text-white sm:text-base">
-                                {title}
-                              </span>
+                      {variant === 'cards' ? (
+                        <MenuFeatureCards
+                          items={items}
+                          className="w-full flex-col gap-y-4 md:flex-row md:gap-x-4 sm:max-w-[480px] sm:flex-col sm:gap-y-6"
+                          linkProps={{ tagName: 'MobileMenu' }}
+                        />
+                      ) : (
+                        <ul className="flex flex-col gap-5">
+                          {items.map(({ title, description, to, isExternal }) => (
+                            <li key={title}>
+                              <Link
+                                className="grid gap-y-2 text-[13px] leading-tight tracking-snug text-gray-new-40 dark:text-gray-new-60"
+                                to={to}
+                                isExternal={isExternal}
+                                tagName="MobileMenu"
+                              >
+                                <span className="text-lg leading-none font-medium tracking-extra-tight text-black-pure dark:text-white sm:text-base">
+                                  {title}
+                                </span>
 
-                              {description}
-                            </Link>
-                          </li>
-                        ))}
-                      </ul>
+                                {description}
+                              </Link>
+                            </li>
+                          ))}
+                        </ul>
+                      )}
                     </li>
                   ))}
                 </ul>
@@ -125,9 +138,55 @@ const mobileMenuItems = [
   },
 ];
 
-const MobileMenu = ({ isDocPage = false, docPageType = null }) => {
+// Docs dropdown lanes map onto the menu's sections: each section entry keeps
+// its label, and runs of plain links become an untitled section.
+const getDocsLaneSections = (subnav, basePath) =>
+  subnav.reduce((sections, item) => {
+    const toItem = ({ title, slug }) => ({
+      title,
+      to: getDocsNavHref(slug, basePath),
+      isExternal: slug?.startsWith('http'),
+    });
+
+    if (item.section) {
+      return [...sections, { title: item.title || item.section, items: item.items.map(toItem) }];
+    }
+
+    const last = sections.at(-1);
+    if (last && !last.title) {
+      last.items.push(toItem(item));
+      return sections;
+    }
+
+    return [...sections, { items: [toItem(item)] }];
+  }, []);
+
+// On docs pages the menu carries the docs header: its lanes, then the links
+// from the desktop header's overflow menu.
+const getDocsMobileMenuItems = (navigation, basePath) => [
+  ...getDocsHeaderLanes(navigation).map(({ nav, slug, subnav }) =>
+    subnav
+      ? { text: nav, sections: getDocsLaneSections(subnav, basePath) }
+      : { text: nav, to: getDocsNavHref(slug, basePath) }
+  ),
+  { text: 'neon.com', to: '/' },
+  { text: 'GitHub', to: LINKS.github, target: '_blank', rel: 'noopener noreferrer' },
+  { text: 'Discord', to: LINKS.discord, target: '_blank', rel: 'noopener noreferrer' },
+  { text: 'Learn PostgreSQL', to: LINKS.postgresqltutorial },
+];
+
+const MobileMenu = ({
+  isDocPage = false,
+  docPageType = null,
+  docsNavigation = null,
+  docsBasePath = null,
+}) => {
   const { isMobileMenuOpen, toggleMobileMenu } = useMobileMenu();
   const { hasTopbar } = useContext(TopbarContext);
+  const menuItems =
+    isDocPage && docsNavigation?.length
+      ? getDocsMobileMenuItems(docsNavigation, docsBasePath)
+      : mobileMenuItems;
 
   return (
     <>
@@ -150,7 +209,7 @@ const MobileMenu = ({ isDocPage = false, docPageType = null }) => {
             })}
           >
             <ul className="no-scrollbars flex h-full flex-col overflow-y-auto px-8 pt-1 sm:px-5 sm:pt-3">
-              {mobileMenuItems.map((item, index) => (
+              {menuItems.map((item, index) => (
                 <MobileMenuItem key={index} {...item} />
               ))}
             </ul>
@@ -191,6 +250,8 @@ const MobileMenu = ({ isDocPage = false, docPageType = null }) => {
 MobileMenu.propTypes = {
   isDocPage: PropTypes.bool,
   docPageType: PropTypes.string,
+  docsNavigation: PropTypes.array,
+  docsBasePath: PropTypes.string,
 };
 
 export default MobileMenu;

@@ -2,16 +2,20 @@
 title: Connect from Drizzle to Neon
 subtitle: Learn how to connect to Neon from Drizzle
 summary: >-
-  Drizzle ORM connection guide for Lakebase Postgres walks through initializing a
+  Drizzle ORM connection guide for Lakebase Postgres on Neon walks through initializing a
   TypeScript/Node.js project with supported drivers: Neon serverless HTTP, Neon
   WebSocket, node-postgres, and postgres.js. Use this page when you need
-  type-safe queries plus Drizzle Kit migrations against a Lakebase database and want
+  type-safe queries plus Drizzle Kit migrations against a Lakebase Postgres database on Neon and want
   to pick the right driver for serverless or long-running environments. The
   guide also shows how to point Drizzle at different Neon branches per
   environment by selecting a connection string based on NODE_ENV.
 enableTableOfContents: true
-updatedOn: '2026-08-07T18:39:13.799Z'
+updatedOn: '2026-10-08T19:32:04.700Z'
 ---
+
+<Callout title="Realtime with Drizzle">
+See how to subscribe to live SQL queries with [Neon Realtime + Drizzle](/docs/realtime/examples/drizzle)
+</Callout>
 
 <CopyPrompt src="/prompts/drizzle-prompt.md" 
 description="Pre-built prompt for connecting Node/TypeScript applications to Neon using Drizzle ORM."/>
@@ -30,7 +34,7 @@ description="Pre-built prompt for connecting Node/TypeScript applications to Neo
 
 </InfoBlock>
 
-Drizzle is a modern ORM for TypeScript that provides a simple and type-safe way to interact with your database. This guide demonstrates how to connect your application to a Lakebase Postgres database using Drizzle ORM.
+Drizzle is a TypeScript ORM with type-safe queries. This guide shows you how to connect your application to a database on Neon using Drizzle ORM.
 
 To connect a TypeScript/Node.js project to Neon using Drizzle ORM, follow these steps:
 
@@ -61,27 +65,27 @@ If you do not have one already, create a Neon project.
 
 ## Get your connection string
 
-Find your database connection string by clicking the **Connect** button on your **Project Dashboard** to open the **Connect to your database** modal. Select a branch, a user, and the database you want to connect to. A connection string is constructed for you.
-![Connection details modal](/docs/connect/connection_details.png)
+Find your database connection string by clicking the **Connect** button in the Console nav to open the **Connect to your branch** modal. Select a branch, a user, and the database you want to connect to. A connection string is constructed for you.
+![Connection details modal](/docs/connect/connect_to_branch_modal.png)
 The connection string includes the user name, password, hostname, and database name.
 
 Create a `.env` file in your project's root directory and add the connection string to it. Your `.env` file should look like this:
 
 ```text shouldWrap
 # Pooled connection for your application
-DATABASE_URL="postgresql://[user]:[password]@[endpoint]-pooler.[region].aws.neon.tech/[dbname]?sslmode=require"
+DATABASE_URL="postgresql://[user]:[password]@[endpoint]-pooler.[region].aws.neon.tech/[dbname]?sslmode=require&channel_binding=require"
 
 # Unpooled connection for Drizzle Kit
-DATABASE_URL_UNPOOLED="postgresql://[user]:[password]@[endpoint].[region].aws.neon.tech/[dbname]?sslmode=require"
+DATABASE_URL_UNPOOLED="postgresql://[user]:[password]@[endpoint].[region].aws.neon.tech/[dbname]?sslmode=require&channel_binding=require"
 ```
 
 <Admonition type="note">
-Neon supports both direct and pooled connection strings, which you can find by clicking the **Connect** button on your **Project Dashboard**. A pooled connection string (the hostname includes `-pooler`) routes through a PgBouncer connection pool, which is ideal for your application at runtime. However, using a pooled connection string for migrations can lead to errors. Use a direct (non-pooled) connection when running Drizzle Kit migrations. For more information, see [Connection pooling](/docs/connect/connection-pooling) and [Schema migration with Drizzle ORM](/docs/guides/drizzle-migrations).
+Neon supports both direct and pooled connection strings, which you can find by clicking the **Connect** button in the Console nav. A pooled connection string (the hostname includes `-pooler`) routes through a PgBouncer connection pool, which suits your application at runtime. However, using a pooled connection string for migrations can lead to errors. Use a direct (non-pooled) connection when running Drizzle Kit migrations. If you only have the pooled string, remove `-pooler` from the hostname to get the direct one. For more information, see [Connection pooling](/docs/connect/connection-pooling) and [Schema migration with Drizzle ORM](/docs/guides/drizzle-migrations).
 </Admonition>
 
 ## Install Drizzle and a driver
 
-Install Drizzle ORM, Drizzle Kit for migrations, and your preferred database driver. Choose one of the following drivers based on your application's needs:
+Install Drizzle ORM, Drizzle Kit for migrations, `tsx` to run TypeScript, and a database driver. If you're not sure which driver to use, choose `node-postgres` for a Node.js server or script, and the Neon serverless HTTP driver for serverless and edge functions. For more detail, see [Choosing your connection method](/docs/connect/choose-connection).
 
 <Tabs labels={["Neon Serverless (HTTP)", "Neon WebSocket", "node-postgres", "postgres.js"]}>
 
@@ -91,40 +95,42 @@ Use the Neon serverless HTTP driver for serverless environments (for example, Ve
 
 ```bash
 npm install drizzle-orm @neondatabase/serverless dotenv
-npm install -D drizzle-kit
+npm install -D drizzle-kit tsx
 ```
 
 </TabItem>
 
 <TabItem>
 
-Use the Neon WebSocket driver for long-running applications that require a persistent connection (for example, a standard Node.js server).
+Use the Neon WebSocket driver when you need sessions or interactive transactions in a serverless or edge environment.
 
 ```bash
 npm install drizzle-orm @neondatabase/serverless ws dotenv
-npm install -D drizzle-kit @types/ws
+npm install -D drizzle-kit tsx @types/ws
 ```
 
 </TabItem>
 
 <TabItem>
 
-Use the classic `node-postgres` (`pg`) driver, a widely-used and stable choice for Node.js applications.
+Use the `node-postgres` (`pg`) driver for Node.js servers and scripts that keep a TCP connection pool.
 
 ```bash
 npm install drizzle-orm pg dotenv
-npm install -D drizzle-kit @types/pg
+npm install -D drizzle-kit tsx @types/pg
 ```
+
+`pg` 8.23 and later print a `SECURITY WARNING` when a connection string uses `sslmode=require`. To keep the current behavior and remove the warning, change `sslmode=require` to `sslmode=verify-full` in both connection strings.
 
 </TabItem>
 
 <TabItem>
 
-Use the `postgres.js` driver, a modern and lightweight Postgres client for Node.js.
+Use the `postgres.js` driver, another TCP driver for Node.js servers and scripts.
 
 ```bash
 npm install drizzle-orm postgres dotenv
-npm install -D drizzle-kit
+npm install -D drizzle-kit tsx
 ```
 
 </TabItem>
@@ -295,6 +301,8 @@ Reading config file '/home/user/drizzle/drizzle.config.ts'
 Using 'pg' driver for database querying
 ```
 
+The driver line depends on the driver you installed. With `@neondatabase/serverless`, Drizzle Kit also warns that it can only connect to Neon through a websocket. The migration still applies, so you can ignore that warning.
+
 You can verify that the `demo_users` table has been created in your Neon database by checking the **Tables** section in the Neon Console.
 
 ## Query the database
@@ -398,5 +406,6 @@ Each branch has its own connection string, available in the Neon Console or via 
 - [Add Object Storage](/docs/storage/overview): S3-compatible file storage that branches with your database
 - [Deploy a Function](/docs/compute/functions/overview): Run backend compute next to your database, no separate hosting needed
 - [Call an LLM with AI Gateway](/docs/ai-gateway/overview): Access foundation models from Anthropic, OpenAI, Google, and more with one credential
+- [Realtime](/docs/realtime/examples/drizzle): Build realtime Drizzle apps on Neon using your existing schema and queries
 
 <NeedHelp/>

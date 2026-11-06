@@ -4,7 +4,7 @@ enableTableOfContents: true
 isDraft: false
 redirectFrom:
   - /docs/introduction/extra-usage
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-09-01T21:19:48.000Z'
 summary: >-
   Neon legacy plans (Free, Launch, Scale, Business, and Enterprise) are
   discontinued pricing tiers no longer available to new signups. Existing paid
@@ -250,7 +250,7 @@ This section describes [Storage](#storage), [Archive storage](#archive-storage),
 
 ### Storage
 
-Neon's storage engine is designed to support a serverless architecture and enable features such as [instant restore](/docs/introduction/branch-restore), [time travel](/docs/guides/time-travel-assist), and [branching](/docs/guides/branching-intro). For this reason, storage in Neon differs somewhat from other database services.
+Neon's storage engine is designed to support a serverless architecture and enable features such as [instant restore](/docs/introduction/branch-restore), [time travel](/docs/guides/time-travel-assist), and [branching](/docs/concepts/branch-your-backend). For this reason, storage in Neon differs somewhat from other database services.
 
 In Neon, storage consists of your total **data size** and **history**.
 
@@ -403,7 +403,7 @@ In short, `VACUUM FULL` can help reduce your data size and future storage costs,
 <details>
 <summary>**What is the maximum data size that Neon supports?**</summary>
 
-Each [Neon plan](/docs/introduction/plans) comes with a specific storage allowance. Beyond this allowance on paid plans, extra usage costs apply. Billing-related allowances aside, paid plans support a logical data size of up to 16 TB per branch. When a branch reaches this limit, write performance drops, but you can still drop or delete data to reclaim space. To increase this limit, [request an increase in the feedback form in console](https://console.neon.tech/app/settings?modal=feedback&modalparams=%22Storage%20limit%20increase%22).
+Each [Neon plan](/docs/introduction/plans) comes with a specific storage allowance. Beyond this allowance on paid plans, extra usage costs apply. Billing-related allowances aside, **paid plans have no hard per-branch size limit**; storage grows with your usage.
 
 </details>
 

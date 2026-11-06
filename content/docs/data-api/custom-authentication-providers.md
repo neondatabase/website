@@ -10,7 +10,7 @@ summary: >-
   uses an existing auth provider and you need provider-specific configuration
   details rather than the default Managed Better Auth setup.
 enableTableOfContents: true
-updatedOn: '2026-07-15T00:08:00.682Z'
+updatedOn: '2026-09-30T16:23:41.172Z'
 redirectFrom:
   - /docs/guides/neon-authorize
 ---
@@ -27,6 +27,10 @@ redirectFrom:
 </InfoBlock>
 
 The Data API works with any authentication provider that issues [JSON Web Tokens (JWTs)](https://jwt.io/introduction). While [Managed Better Auth](/docs/auth/overview) provides the simplest setup, you can use existing authentication infrastructure with providers like Auth0, Clerk, AWS Cognito, and others.
+
+<Admonition type="important" title="Secure your data before exposing it">
+The Data API has no permission layer of its own. Every request is authorized entirely by your PostgreSQL `GRANT` statements and [Row-Level Security (RLS)](/docs/guides/row-level-security) policies, so a missing or misconfigured policy can expose a table to anyone with the endpoint URL. Before exposing data, follow [Access control & security](/docs/data-api/access-control) and [Secure your app with RLS](/docs/guides/rls-tutorial), and run the [Data API advisors](/docs/data-api/database-advisor) to catch misconfigurations.
+</Admonition>
 
 ## How it works
 
@@ -69,6 +73,15 @@ The key steps:
 2. Your application passes these JWTs to the Data API in the `Authorization` header.
 3. Neon validates the tokens using your provider's [JWKS (JSON Web Key Set)](https://auth0.com/docs/secure/tokens/json-web-tokens/json-web-key-sets) URL.
 4. The Data API enforces [Row-Level Security policies](/docs/guides/row-level-security) based on the user identity in the JWT.
+
+## Required JWT claims
+
+Neon checks the token's signature against your JWKS URL, but a valid signature is only half the story. The database role the query runs as comes from the token's `role` claim, not from the fact that the token passed validation. This trips up custom providers most often, because they don't add a `role` claim unless you configure them to.
+
+- **`role`**: The Data API reads this claim and switches to the Postgres role it names. To use the default `authenticated` role (the role the [default `GRANT`s](/docs/data-api/access-control#layer-1-table-privileges) target), your provider must issue `"role": "authenticated"`. The role must exist in your database and hold the privileges the request needs. [Neon Auth](/docs/auth/overview) adds this claim for you; a custom provider does not.
+- **`sub`**: Identifies the user for Row-Level Security. See [JWT token missing sub claim](/docs/data-api/troubleshooting#jwt-token-missing-sub-claim).
+
+If a token has no `role` claim, the request runs as the fallback `anonymous` role instead. `anonymous` can enter the schema but has no table grants by default, so the query returns `42501 permission denied for table ...` even when `authenticated` has access. For how these roles are chosen and granted, see [Access control & security](/docs/data-api/access-control#api-roles).
 
 ## Add your authentication provider
 

@@ -11,7 +11,7 @@ summary: >-
   connection pooler) when configuring the Postgres source.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2026-08-18T10:29:02.410Z'
+updatedOn: '2026-10-09T10:14:56.146Z'
 ---
 
 Neon's logical replication feature allows you to replicate data from your Lakebase Postgres database to external destinations.
@@ -39,8 +39,8 @@ Enabling logical replication modifies the Postgres `wal_level` configuration par
 To enable logical replication in Neon:
 
 1. Select your project in the Neon Console.
-2. On the Neon **Dashboard**, select **Settings**.
-3. Select **Logical Replication**.
+2. Select **Settings** in the sidebar.
+3. Select **Postgres**, then **Logical replication**.
 4. Click **Enable** to enable logical replication.
 
 You can verify that logical replication is enabled by running the following query from the [Neon SQL Editor](/docs/get-started/query-with-neon-sql-editor):
@@ -74,7 +74,7 @@ To create a role in the Neon Console:
 
 1. Navigate to the [Neon Console](https://console.neon.tech).
 2. Select a project.
-3. In the sidebar, select your branch from the **BRANCH** selector.
+3. Select your branch from the project/branch menu at the top of the sidebar.
 4. Under **Postgres database**, select **Roles**.
 5. Click **Add Role**.
 6. In the role creation dialog, specify a role name, such as `replication_user`.
@@ -136,7 +136,7 @@ The publication name is customizable. Refer to the [Postgres docs](https://www.p
 1. On the **All Resources** page, click **Create Resource**.
 1. Under **Jump right in, create a resource**, click **Connections**.
 1. Select **Postgres**.
-1. Enter your Neon database connection details. Click **Connect** on your **Project Dashboard**, select the replication role you created earlier (not the default `neondb_owner` role), and click **Copy snippet**. Use a direct connection string; the hostname must not include `-pooler`. Logical replication is not compatible with connection poolers.
+1. Enter your Neon database connection details. Click **Connect** in the Console nav, select the replication role you created earlier (not the default `neondb_owner` role), and click **Copy snippet**. Use a direct connection string; the hostname must not include `-pooler`. Logical replication is not compatible with connection poolers.
 
 1. If you have disabled **Allow traffic via the public internet** under **Networking** in Neon's **Settings**, select **I confirm I have allowlisted these Stacksync IPs on my side** in Stacksync, and copy the IP addresses into your trusted IP addresses in Neon's settings under **Networking**.
 1. In Stacksync, click **Next**.

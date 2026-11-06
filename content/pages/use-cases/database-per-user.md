@@ -83,7 +83,7 @@ From your backend, you can:
 | Configure compute scaling        | `default_endpoint_settings.autoscaling_limit_min_cu / max_cu` | Define min/max compute per pricing tier                           |
 | Configure suspend behavior       | `suspend_timeout_seconds`                                     | Control how aggressively inactive databases scale to zero         |
 | Set consumption limits           | `project.settings.quota`                                      | Enforce compute, storage, write, and data transfer caps           |
-| Monitor fleet usage              | `GET /api/v2/consumption_history/projects`                    | Track usage per project for billing dashboards                    |
+| Monitor fleet usage              | `GET /api/v2/consumption_history/v2/projects`                 | Track usage per project for billing dashboards                    |
 | Adjust limits dynamically        | `PATCH /api/v2/projects/\{id\}`                               | Upgrade/downgrade users without downtime                          |
 | Create branches programmatically | `POST /api/v2/projects/\{id\}/branches`                       | Enable per-user dev environments or safe migrations               |
 

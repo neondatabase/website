@@ -10,27 +10,32 @@ export default {
           items: [
             {
               title: 'Lakebase Postgres',
-              to: LINKS.postgresOverview,
+              to: LINKS.lakebase,
               description: 'Serverless Postgres database',
             },
             {
-              title: 'Auth',
-              to: LINKS.auth,
-              description: 'Authentication built into your database',
-            },
-            {
-              title: 'Functions',
-              to: LINKS.functionsOverview,
-              description: 'Serverless compute next to your data',
-            },
-            {
               title: 'Object Storage',
-              to: LINKS.objectStorageOverview,
+              to: LINKS.objectStorage,
               description: 'S3-compatible storage that branches',
             },
             {
+              title: 'Functions',
+              to: LINKS.functions,
+              description: 'Serverless compute next to your data',
+            },
+            {
+              title: 'Realtime',
+              to: LINKS.realtime,
+              description: 'Live SQL queries and reactive DX',
+            },
+            {
+              title: 'Managed Better Auth',
+              to: LINKS.authPage,
+              description: 'Authentication built into your database',
+            },
+            {
               title: 'AI Gateway',
-              to: LINKS.aiGatewayOverview,
+              to: LINKS.aiGateway,
               description: 'One API for frontier and open-source models',
             },
           ],
@@ -74,39 +79,42 @@ export default {
           title: 'Use cases',
           items: [
             {
-              title: 'Serverless App',
-              to: `${LINKS.useCases}/serverless-apps`,
-              description: 'Autoscale with traffic',
+              title: 'Full-stack apps',
+              to: `${LINKS.useCases}/full-stack-apps`,
+              description: 'Deploy backends via your agent',
             },
             {
-              title: 'Multi-TB',
-              to: `${LINKS.useCases}/multi-tb`,
-              description: 'Scale and restore instantly',
+              title: 'Branching workflows',
+              to: `${LINKS.useCases}/branching-workflows`,
+              description: 'Simplify DB ops to ship faster & safer',
             },
             {
-              title: 'Database per tenant',
-              to: `${LINKS.useCases}/database-per-tenant`,
-              description: 'Data isolation without overhead',
+              title: 'Bursty workloads',
+              to: `${LINKS.useCases}/bursty-workloads`,
+              description: 'Avoid overprovisioning & optimize performance',
+            },
+            {
+              title: 'Large databases',
+              to: `${LINKS.useCases}/large-databases`,
+              description: 'Restore & replicate your DB in seconds',
             },
           ],
         },
         {
-          title: 'Build & operate',
+          title: 'Deploy at scale',
+          variant: 'cards',
           items: [
-            {
-              title: 'Platforms',
-              to: LINKS.platforms,
-              description: 'Offer Postgres for your users',
-            },
-            {
-              title: 'Dev/Tests',
-              to: `${LINKS.useCases}/dev-test`,
-              description: 'Production-like environment',
-            },
             {
               title: 'Agents',
               to: `${LINKS.useCases}/ai-agents`,
-              description: 'Build full-stack AI agents',
+              description: 'Infra for app-generation agents like Replit & v0',
+              graphic: 'agents',
+            },
+            {
+              title: 'Platforms',
+              to: LINKS.platforms,
+              description: 'Deploy isolated backends for your end users',
+              graphic: 'platforms',
             },
           ],
         },

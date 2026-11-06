@@ -11,7 +11,7 @@ summary: >-
   connection string is required for migrations, as pooled connections via
   PgBouncer cause migration errors.
 enableTableOfContents: true
-updatedOn: '2026-08-04T05:18:26.469Z'
+updatedOn: '2026-09-16T19:45:35.340Z'
 ---
 
 [Sequelize](https://sequelize.org/) is a promise-based Node.js ORM that supports multiple relational databases. In this guide, we'll explore how to use `Sequelize` ORM with a Lakebase Postgres database in a JavaScript project.
@@ -34,7 +34,7 @@ To follow along with this guide, you will need:
 
 ### Retrieve your database connection string
 
-You can find the connection string for your database by clicking the **Connect** button on your **Project Dashboard**. It should look similar to this:
+You can find the connection string for your database by clicking the **Connect** button in the Console nav. It should look similar to this:
 
 ```bash
 postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require&channel_binding=require
@@ -43,7 +43,7 @@ postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbna
 Keep your connection string handy for later use.
 
 <Admonition type="note">
-Neon supports both direct and pooled database connection strings. You can find the connection string for your database by clicking the **Connect** button on your **Project Dashboard**. A pooled connection string connects your application to the database via a PgBouncer connection pool, allowing for a higher number of concurrent connections. However, using a pooled connection string for migrations can be prone to errors. For this reason, we recommend using a direct (non-pooled) connection when performing migrations. For more information about direct and pooled connections, see [Connection pooling](/docs/connect/connection-pooling).
+Neon supports both direct and pooled database connection strings. You can find the connection string for your database by clicking the **Connect** button in the Console nav. A pooled connection string connects your application to the database via a PgBouncer connection pool, allowing for a higher number of concurrent connections. However, using a pooled connection string for migrations can be prone to errors. For this reason, we recommend using a direct (non-pooled) connection when performing migrations. For more information about direct and pooled connections, see [Connection pooling](/docs/connect/connection-pooling).
 </Admonition>
 
 ## Setting Up the Node application

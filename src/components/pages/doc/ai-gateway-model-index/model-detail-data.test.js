@@ -7,6 +7,7 @@ describe('getModelDetailPageData', () => {
     const { content, tableOfContents } = getModelDetailPageData({
       id: 'example-model',
       name: 'Example Model',
+      labName: 'Example Lab',
       providerName: 'Example Provider',
       endpoints: ['chat/completions', 'responses'],
       inputsLabel: 'text, image',
@@ -16,7 +17,8 @@ describe('getModelDetailPageData', () => {
       costOutputLabel: '$2',
     });
 
-    expect(content).toContain('## Provider\n\nExample Provider provides Example Model.');
+    expect(content).toContain('## Lab\n\nExample Lab makes Example Model.');
+    expect(content).toContain('## Provider\n\nExample Provider\n');
     expect(content).toContain('## Inputs\n\nText, image');
     expect(content).toContain('## Input /M\n\n$1');
     expect(content).toContain('## Output /M\n\n$2');
@@ -24,12 +26,73 @@ describe('getModelDetailPageData', () => {
       { title: 'About', id: 'about' },
       { title: 'Command', id: 'command' },
       { title: 'Model ID', id: 'model-id' },
+      { title: 'Lab', id: 'lab' },
       { title: 'Provider', id: 'provider' },
       { title: 'Inputs', id: 'inputs' },
       { title: 'Context', id: 'context' },
       { title: 'Released', id: 'released' },
       { title: 'Input /M', id: 'input-m' },
       { title: 'Output /M', id: 'output-m' },
+    ]);
+  });
+
+  // No Inputs, Context, or Output /M — those describe chat completion behavior, not a fixed
+  // vector length, and there is no completion to charge for.
+  it('reports Dimensions instead of the chat-shaped sections for an embedding model', () => {
+    const { content, tableOfContents } = getModelDetailPageData({
+      id: 'qwen3-embedding-0-6b',
+      name: 'Qwen3 Embedding 0.6B',
+      labName: 'Alibaba',
+      providerName: 'Alibaba',
+      endpoints: ['embeddings'],
+      isEmbedding: true,
+      dimensions: 1024,
+      releaseLabel: 'Jun 2025',
+      costInputLabel: '$0.02',
+    });
+
+    expect(content).toContain('## Dimensions\n\n1024');
+    expect(content).not.toContain('## Inputs');
+    expect(content).not.toContain('## Context');
+    expect(content).not.toContain('## Output /M');
+    expect(tableOfContents.map(({ title }) => title)).toEqual([
+      'About',
+      'Command',
+      'Model ID',
+      'Lab',
+      'Provider',
+      'Dimensions',
+      'Released',
+      'Input /M',
+    ]);
+  });
+
+  it('reports identity, context, release and input price for a decision model', () => {
+    const { content, tableOfContents } = getModelDetailPageData({
+      id: 'example-decision',
+      name: 'Example Decision',
+      labName: 'Example',
+      providerName: 'Databricks',
+      endpoints: [],
+      isDecision: true,
+      contextLabel: '131K',
+      releaseLabel: 'Sep 2026',
+      costInputLabel: '$0.10',
+    });
+
+    expect(content).toContain('System One decision model');
+    expect(content).toContain('## Input /M\n\n$0.10');
+    expect(content).not.toContain('## Dimensions');
+    expect(content).toContain('## Context\n\n131K');
+    expect(tableOfContents.map(({ title }) => title)).toEqual([
+      'About',
+      'Command',
+      'Model ID',
+      'Lab',
+      'Provider',
+      'Context',
+      'Released',
+      'Input /M',
     ]);
   });
 });

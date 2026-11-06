@@ -80,4 +80,4 @@ These _mostly_ map to [Neon API](https://neon.com/docs/reference/api-reference) 
 
 ## Try it
 
-We put this project together very quickly following the announcement from Anthropic, so we know there’s a lot to improve. You can check out [our GitHub repository](https://github.com/neondatabase/mcp-server-neon), and give us any feedback on [our Discord server](https://neon.tech/discord)!
+We put this project together very quickly following the announcement from Anthropic, so we know there’s a lot to improve. You can check out [our GitHub repository](https://github.com/neondatabase/mcp-server-neon), and give us any feedback on [our Discord server](https://neon.com/discord)!

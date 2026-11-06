@@ -4,7 +4,7 @@ updatedOn: '2026-05-13T19:04:49.209Z'
 
 # Guides
 
-Welcome to Neon guides! This folder contains the source code of the [Neon guides](/guides/).
+This folder contains the source code of the [Neon guides](/guides/).
 
 ## Basic information
 
@@ -25,7 +25,7 @@ Right now Markdown files accept the following fields:
 5. `isDraft`: flag that says the page is not ready yet. It won't appear in production but will appear in the development mode.
 6. `enableTableOfContents`: flag that turns on the display of the outline for the page. The outline gets built out of second and third-level headings ([`h2`, `h3`]), thus appears as two-level nested max.
 7. `ogImage` - the social preview image of the page.
-8. `excludeFromBlog`: flag that hides the guide from the blog's guides listing and the "All posts" feed. The guide page itself is still published at its `/guides/...` URL — use this for guides that should remain accessible but not be surfaced alongside blog content.
+8. `excludeFromBlog`: flag that hides the guide from the blog's guides listing and the "All posts" feed. The guide page itself is still published at its `/guides/...` URL. Use this for guides that should remain accessible but not be surfaced alongside blog content.
 9. `canonical`: an absolute `http://` or `https://` URL. When set, `<link rel="canonical">` points there instead of the Neon guide URL, and the guide is omitted from the sitemap. Use it when a partner published the same guide and should receive the search ranking. Invalid values fail the build.
 
 > ⚠️ Please note that the project won't build if at least one of the Markdown files is missing a required field.
@@ -240,7 +240,7 @@ curl --request POST \
 
 ## Admonition
 
-To improve the guides readability, one can leverage an Admonition custom component. Just wrap your piece of text with `<Admonition></Admonition>` and pass the type.
+To improve the guides readability, you can use an Admonition custom component. Just wrap your piece of text with `<Admonition></Admonition>` and pass the type.
 
 There are 6 types of Admonition: `note`, `important`, `tip`, `warning`, `info`, `comingSoon`; the default is `note`.
 
