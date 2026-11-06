@@ -3,12 +3,15 @@ name: Copybook
 # Copybook (https://copybook.dev) tracks the prompts the site shows and copies.
 #
 # - `copybook check` fails when the snapshot of a prompt defined in code
-#   (src/constants/agent-prompts.mjs) is stale, or when a prompt in
+#   (src/constants/agent-prompts.mjs) is stale, and warns when a prompt in
 #   public/prompts is deleted or renamed without an alias. Markdown prompts are
 #   their own snapshots, so editing one never needs a snapshot update.
+# - `copybook test` syntax-checks the shell blocks in the prompts the PR changes.
+#   Placeholders for the agent, such as <agent>, count as plain words.
 # - `copybook report` posts, and then updates, one comment with the rendered
-#   before and after of every prompt the PR changes. Forks get the report in the
-#   job summary instead, because their token can't comment.
+#   before and after of every prompt the PR changes, the pages that use it, and
+#   any prompt it removed, with the URL that no longer works. Forks get the
+#   report in the job summary instead, because their token can't comment.
 
 on:
   pull_request:
@@ -76,6 +79,11 @@ jobs:
         env:
           BASE: ${{ github.base_ref != '' && format('origin/{0}', github.base_ref) || 'origin/main' }}
         run: npx --no-install copybook check --base "$BASE"
+
+      - name: Syntax-check shell blocks in changed prompts
+        env:
+          BASE: ${{ github.base_ref != '' && format('origin/{0}', github.base_ref) || 'origin/main' }}
+        run: npx --no-install copybook test --changed --base "$BASE" --tier syntax
 
       - name: Build the report
         if: ${{ !cancelled() && steps.install.outcome == 'success' }}
