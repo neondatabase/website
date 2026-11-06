@@ -20,7 +20,7 @@ const absoluteUrl = (path) => (path.startsWith('/') ? `${BASE_URL}${path}` : pat
 const escapeText = (value) =>
   String(value)
     .replace(/\r?\n|\r/g, ' ')
-    .replace(/([\\`*_[\]<>])/g, '\\$1');
+    .replace(/([\\`*_[\]<>{}])/g, '\\$1');
 
 const escapeTableCell = (value) => escapeText(value).replace(/\|/g, '\\|');
 
@@ -125,10 +125,41 @@ const renderOperation = (operation, installCommand) => {
 
 const RUN_LOCALLY = `run it locally with [\`neon dev\`](${BASE_URL}/docs/cli/dev.md) first, and deploy it to a branch with [\`neon deploy\`](${BASE_URL}/docs/compute/functions/deploy.md) once it works.`;
 
-export const renderTemplateMarkdown = ({ template, previous = null, next = null }) => {
+export const renderTemplateBodyMarkdown = (template, { includeOperations = true } = {}) => {
   const installCommand = installCommandFor(template.id);
   const operations = template.operations ?? [];
   const environment = (template.environment ?? []).filter((item) => isInlineCodeSafe(item.name));
+
+  return [
+    includeOperations &&
+      (operations.length > 0
+        ? [
+            '## What this function exposes',
+            'After you deploy, call these paths on the function URL.',
+            ...operations.map((operation) => renderOperation(operation, installCommand)),
+          ].join('\n\n')
+        : `## What it does\n\nThis template has a single handler and no named operations, so it's a starting point for your own code. To try it, ${RUN_LOCALLY}`),
+    environment.length > 0 &&
+      [
+        '## Environment variables',
+        '',
+        'The CLI declares these variables in `neon.ts` and adds them to `.env.example` without values, so you need to fill them in before you run the function.',
+        '',
+        '| Variable | Description |',
+        '| --- | --- |',
+        ...environment.map(
+          ({ name, description }) => `| \`${name}\` | ${escapeTableCell(description ?? '')} |`
+        ),
+      ].join('\n'),
+    operations.length > 0 &&
+      `## Run it\n\nInstalling a template doesn't deploy it, so ${RUN_LOCALLY}`,
+  ]
+    .filter(Boolean)
+    .join('\n\n');
+};
+
+export const renderTemplateMarkdown = ({ template, previous = null, next = null }) => {
+  const installCommand = installCommandFor(template.id);
   const pagePath = registryTemplatePageHref(template.id);
 
   const related = [
@@ -162,27 +193,7 @@ export const renderTemplateMarkdown = ({ template, previous = null, next = null 
       '',
       `With the Neon CLI 8.11.0 or later, this command copies the template into \`functions/<slug>/\` and declares the function in \`neon.ts\`.`,
     ].join('\n'),
-    operations.length > 0
-      ? [
-          '## What this function exposes',
-          'After you deploy, call these paths on the function URL.',
-          ...operations.map((operation) => renderOperation(operation, installCommand)),
-        ].join('\n\n')
-      : `## What it does\n\nThis template has a single handler and no named operations, so it's a starting point for your own code. To try it, ${RUN_LOCALLY}`,
-    environment.length > 0 &&
-      [
-        '## Environment variables',
-        '',
-        'The CLI declares these variables in `neon.ts` and adds them to `.env.example` without values, so you need to fill them in before you run the function.',
-        '',
-        '| Variable | Description |',
-        '| --- | --- |',
-        ...environment.map(
-          ({ name, description }) => `| \`${name}\` | ${escapeTableCell(description ?? '')} |`
-        ),
-      ].join('\n'),
-    operations.length > 0 &&
-      `## Run it\n\nInstalling a template doesn't deploy it, so ${RUN_LOCALLY}`,
+    renderTemplateBodyMarkdown(template),
     ['## Related', '', ...related].join('\n'),
     feedbackFooter(pagePath),
   ]

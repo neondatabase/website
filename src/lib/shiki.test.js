@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 
-import highlight from './shiki';
+import highlight, { getShellPromptLines } from './shiki';
 
 // The shell-placeholders transformer: `<slug>`-style placeholders must
 // render as a single token instead of being split by the bash grammar's
@@ -51,5 +51,37 @@ describe('highlight collapsible sections', () => {
   it('leaves code without collapse meta unchanged', async () => {
     const html = await highlight(code, 'js', '{2}');
     expect(html).not.toContain('<details');
+  });
+});
+
+describe('shell prompt lines', () => {
+  it('marks command lines only', () => {
+    const code = [
+      '# install',
+      'npm i neonctl',
+      'neon functions new mastra \\',
+      '  --operation chat',
+      '',
+      "cat <<'EOF' > .env",
+      'DATABASE_URL=postgres://x',
+      'EOF',
+      "curl -d '{",
+      '  "a": 1',
+      "}' https://example.com",
+    ].join('\n');
+    expect([...getShellPromptLines(code, 'bash')]).toEqual([2, 3, 6, 9]);
+  });
+
+  it('skips scripts and non-shell languages', () => {
+    expect(getShellPromptLines('#!/bin/bash\necho hi', 'bash').size).toBe(0);
+    expect(getShellPromptLines('SELECT 1;', 'sql').size).toBe(0);
+    expect(getShellPromptLines('~/app$ ls\nfile.txt', 'bash').size).toBe(0);
+    expect(getShellPromptLines('$ ls\nfile.txt', 'bash').size).toBe(0);
+  });
+
+  it('adds data-prompt to highlighted shell lines', async () => {
+    const html = await highlight('npm i neonctl\n# done', 'bash');
+    expect(html).toMatch(/data-line="1" data-prompt/);
+    expect(html).not.toMatch(/data-line="2" data-prompt/);
   });
 });

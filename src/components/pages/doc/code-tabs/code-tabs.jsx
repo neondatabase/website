@@ -27,9 +27,9 @@ const CodeTabs = ({ labels = [], reverse = false, children, bodyClassName = '' }
   };
 
   return (
-    <div className="my-0 max-w-full overflow-hidden border border-gray-new-80 dark:border-gray-new-20 [&_.code-block]:my-0 [&_.code-block]:!border-none">
+    <div className="my-0 max-w-full overflow-hidden border border-gray-new-90 dark:border-gray-new-20 [&_.code-block]:my-0 [&_.code-block]:!border-none">
       {/* Tabs above code block */}
-      <div className="relative no-scrollbars flex min-h-11 w-full flex-nowrap gap-5 overflow-auto bg-gray-new-98 pl-5 after:absolute after:right-0 after:bottom-0 after:left-0 after:h-px after:bg-gray-new-80 dark:bg-gray-new-8 dark:after:bg-gray-new-20">
+      <div className="relative no-scrollbars flex min-h-11 w-full flex-nowrap gap-5 overflow-auto bg-gray-new-98 pl-5 after:absolute after:right-0 after:bottom-0 after:left-0 after:h-px after:bg-gray-new-90 dark:bg-gray-new-8 dark:after:bg-gray-new-20">
         {displayedLabels.map((label, index) => (
           <button
             className={cn(
