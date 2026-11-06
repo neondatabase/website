@@ -1,6 +1,6 @@
 ---
 title: Connect from Drizzle to Neon
-subtitle: Set up Drizzle ORM and Drizzle Kit against a Neon database. Start with your agent; the full walkthrough follows.
+subtitle: Set up Drizzle ORM and Drizzle Kit with Neon Postgres.
 summary: >-
   Drizzle ORM connection guide for Lakebase Postgres on Neon walks through initializing a
   TypeScript/Node.js project with supported drivers: Neon serverless HTTP, Neon
@@ -11,7 +11,7 @@ summary: >-
   environment by selecting a connection string based on NODE_ENV.
 enableTableOfContents: true
 agentPrompt: 'I want to use Drizzle ORM with it.'
-updatedOn: '2026-11-06T03:27:49.214Z'
+updatedOn: '2026-11-06T03:31:51.811Z'
 ---
 
 [comment]: <> (Agent-first quickstart prototype, 1a tinted-band variant. The agent flow sits in a tinted band; steps 1-3 are markdown headings so they feed the table of contents, with filled-circle numerals drawn by page-scoped CSS. The walkthrough below keeps the existing Steps, with its numerals restyled as outlined.)
@@ -28,11 +28,11 @@ updatedOn: '2026-11-06T03:27:49.214Z'
 
 <CopyLine header="Drizzle / drizzle / schema, migrations, renames" text="Add the Drizzle skill to this project. Fetch https://orm.drizzle.team/docs/drizzle-kit-skills and follow it." />
 
-<p className="mt-3 text-[13px] leading-relaxed text-gray-new-50 dark:text-gray-new-60">Paste each into your agent. The Drizzle skill is maintained by the <a href="https://orm.drizzle.team/docs/drizzle-kit-skills">Drizzle team</a> and currently ships in Drizzle Kit's v1 pre-release (drizzle-kit@rc), so the agent installs it once Drizzle is in your project.</p>
+<p className="mt-3 text-[13px] leading-relaxed text-gray-new-50 dark:text-gray-new-60">The Drizzle skill is maintained by the <a href="https://orm.drizzle.team/docs/drizzle-kit-skills">Drizzle team</a> and currently ships in Drizzle Kit's v1 pre-release (drizzle-kit@rc), so the agent installs it once Drizzle is in your project.</p>
 
-### Tell it about your project
+### Point your agent at your project
 
-<p className="m-0 mb-3 text-[15px] leading-relaxed text-gray-new-30 dark:text-gray-new-70">One prompt. The agent inspects your project, creates a Neon project if you need one, adds the connection string, and configures Drizzle to match.</p>
+<p className="m-0 mb-3 text-[15px] leading-relaxed text-gray-new-30 dark:text-gray-new-70">The agent inspects your project, creates a Neon project if you need one, adds the connection string, and configures Drizzle to match.</p>
 
 <CopyLine text="Look at my project (check package.json, any existing schema, and my config), then set up Drizzle against Neon Postgres: create a Neon project if I need one, add the connection string, and configure Drizzle to match what you found." />
 
@@ -58,8 +58,6 @@ items={[
 <div className="mt-12 [&>h2:first-child]:mt-0! [&_.numbered-step]:before:border [&_.numbered-step]:before:border-gray-new-50 [&_.numbered-step]:before:bg-transparent! [&_.numbered-step]:before:text-gray-new-40! dark:[&_.numbered-step]:before:border-gray-new-30 dark:[&_.numbered-step]:before:bg-transparent! dark:[&_.numbered-step]:before:text-gray-new-70!">
 
 ## Full setup, step by step
-
-The same setup the agent runs, written out. Read it to understand what changed, or follow it yourself.
 
 <Steps>
 
