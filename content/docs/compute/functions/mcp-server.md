@@ -54,9 +54,11 @@ The `@neon/auth` client (0.8.0 or later) passes the signed OAuth query for you. 
 
 This guide builds a to-do list with `list_todos`, `add_todo`, and `complete_todo`.
 
-With the optional [MCP Apps section](#render-todos-in-chat-with-mcp-apps-optional), ChatGPT shows the list as a widget in the conversation:
+Asked for your todos, ChatGPT calls `list_todos` and shows the result:
 
-![ChatGPT showing the todo list widget, with completed todos crossed out and a Complete button on each open todo](/docs/compute/functions/mcp-apps-todo-widget.png 'no-border')
+![ChatGPT listing the signed-in user's todos, with completed ones checked](/docs/compute/functions/mcp-todos-chatgpt.png 'no-border')
+
+The optional [MCP Apps section](#render-todos-in-chat-with-mcp-apps-optional) adds an interactive widget.
 
 ## Before you start
 
@@ -891,7 +893,9 @@ server.registerTool(
 );
 ```
 
-Redeploy the function, refresh the ChatGPT connector or start a new chat, then ask it to list todos. Expect the HTML widget plus the short summary.
+Redeploy the function, refresh the ChatGPT connector or start a new chat, then ask it to list todos. Expect the HTML widget plus the short summary:
+
+![ChatGPT showing the todo list widget, with completed todos crossed out and a Complete button on each open todo](/docs/compute/functions/mcp-apps-todo-widget.png 'no-border')
 
 ## Further reading
 
