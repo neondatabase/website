@@ -2,4 +2,6 @@ Neon branches are copy-on-write clones of your database, created from any point 
 
 You cannot delete a project's root branch. You also cannot delete a branch that has children; delete all children first.
 
+You can also manage branches from the CLI with [`neon branches`](/docs/cli/branches).
+
 See [Branching with the Neon API](/docs/guides/branching-neon-api) for end-to-end examples, and [Automate branching with GitHub Actions](/docs/guides/branching-github-actions) for CI/CD workflows using Neon's create, delete, reset, and schema diff actions.

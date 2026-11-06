@@ -1,0 +1,26 @@
+<?xml version="1.0"?><svg viewBox="0 0 364 350" xmlns="http://www.w3.org/2000/svg" data-name="functions-v8" width="364" height="350">
+<defs><linearGradient id="v8fade" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#B4B7BC" stop-opacity="1"></stop><stop offset="1" stop-color="#B4B7BC" stop-opacity="0"></stop></linearGradient></defs>
+<rect x="112" y="1" width="140" height="42" rx="2" fill="none" stroke="#6E727A" stroke-width="1.5"></rect>
+<text x="182" y="27" text-anchor="middle" fill="#71757B" font-family="'Geist Mono', monospace" font-size="14.5" font-weight="500" letter-spacing="-0.3">your app</text>
+<line x1="182" y1="43" x2="182" y2="68" stroke="#6E727A" stroke-width="2"></line>
+<polygon points="182,80 176,68 188,68" fill="#6E727A"></polygon>
+<rect x="1" y="80" width="362" height="100" rx="2" fill="none" stroke="#18936B" stroke-width="1.5"></rect>
+<text x="22" y="122" fill="#16855F" font-family="'Geist Mono', monospace" font-size="18" font-weight="500" letter-spacing="-0.3">{ }  function</text>
+<text x="22" y="150" fill="#5D6168" font-family="'Geist Mono', monospace" font-size="14.5" letter-spacing="-0.2">your code, at an HTTP URL</text>
+<line x1="51" y1="180" x2="51" y2="238" stroke="#6E727A" stroke-width="2"></line>
+<polygon points="51,250 45,238 57,238" fill="#6E727A"></polygon>
+<line x1="163" y1="180" x2="163" y2="238" stroke="#6E727A" stroke-width="2"></line>
+<polygon points="163,250 157,238 169,238" fill="#6E727A"></polygon>
+<line x1="275" y1="180" x2="275" y2="238" stroke="#6E727A" stroke-width="2"></line>
+<polygon points="275,250 269,238 281,238" fill="#6E727A"></polygon>
+<line x1="352" y1="180" x2="352" y2="242" stroke="#B4B7BC" stroke-width="1.5" stroke-dasharray="4 4"></line>
+<rect x="1" y="250" width="100" height="98" rx="2" fill="none" stroke="#6E727A" stroke-width="1.5"></rect>
+<text x="51" y="304" text-anchor="middle" fill="#71757B" font-family="'Geist Mono', monospace" font-size="14.5" font-weight="500" letter-spacing="-0.3">Postgres</text>
+<rect x="113" y="250" width="100" height="98" rx="2" fill="none" stroke="#6E727A" stroke-width="1.5"></rect>
+<text x="163" y="294" text-anchor="middle" fill="#71757B" font-family="'Geist Mono', monospace" font-size="14.5" font-weight="500" letter-spacing="-0.3">Object</text>
+<text x="163" y="314" text-anchor="middle" fill="#71757B" font-family="'Geist Mono', monospace" font-size="14.5" font-weight="500" letter-spacing="-0.3">Storage</text>
+<rect x="225" y="250" width="100" height="98" rx="2" fill="none" stroke="#6E727A" stroke-width="1.5"></rect>
+<text x="275" y="294" text-anchor="middle" fill="#71757B" font-family="'Geist Mono', monospace" font-size="14.5" font-weight="500" letter-spacing="-0.3">AI</text>
+<text x="275" y="314" text-anchor="middle" fill="#71757B" font-family="'Geist Mono', monospace" font-size="14.5" font-weight="500" letter-spacing="-0.3">Gateway</text>
+<path d="M364 250 L 339 250 Q 337 250, 337 252 L 337 346 Q 337 348, 339 348 L 364 348" fill="none" stroke="url(#v8fade)" stroke-width="1.5"></path>
+</svg>

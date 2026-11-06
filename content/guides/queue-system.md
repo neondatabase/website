@@ -1,14 +1,14 @@
 ---
-title: Queue System using SKIP LOCKED in Lakebase Postgres
+title: Queue system using SKIP LOCKED in Lakebase Postgres
 subtitle: A step-by-step guide describing how to structure a tasks table for use as a task queue in Postgres
 author: vkarpov15
 enableTableOfContents: true
 createdAt: '2025-01-10T17:48:36.612Z'
-updatedOn: '2026-07-31T19:05:29.503Z'
+updatedOn: '2026-09-24T17:56:34.189Z'
 ---
 
 The `SKIP LOCKED` clause allows concurrent transactions to skip rows currently locked by other transactions.
-This behavior makes `SKIP LOCKED` ideal for implementing a non-blocking task queue in Postgres.
+That lets you build a non-blocking task queue in Postgres, where multiple workers pull tasks from the same table without waiting on each other.
 
 ## Steps
 
@@ -48,7 +48,7 @@ INSERT INTO tasks (payload) VALUES
   ('{"task": "report", "type": "sales"}');
 ```
 
-You can then verify the rows in the task collection using the following.
+You can then verify the rows in the `tasks` table using the following.
 
 ```sql
 SELECT * FROM tasks;
@@ -56,10 +56,10 @@ SELECT * FROM tasks;
 
 ## Fetch tasks using `SKIP LOCKED`
 
-When implementing a task queue, it is important to ensure that only one worker can run a given task, otherwise you may end up with tasks running multiple times.
-`FOR UPDATE SKIP LOCKED` ensures that only one process retrieves and locks tasks, while others skip over already-locked rows.
+In a task queue, only one worker should run a given task. Otherwise, tasks can run multiple times.
+With `FOR UPDATE SKIP LOCKED`, the first process to reach a row locks it, and other processes skip over already-locked rows.
 
-Here’s a query to fetch and lock a single task.
+Here's a query to fetch and lock a single task.
 
 ```sql
 WITH cte AS (
@@ -108,7 +108,7 @@ WHERE status = 'in_progress'
 ## Optimize with indexing
 
 As the number of tasks grows, queries on tasks can get slow.
-Adding an index on the `status` and `created_at` columns can help ensure consistent performance for the `SKIP LOCKED` query:
+Adding an index on the `status` and `created_at` columns keeps the `SKIP LOCKED` query fast as the table grows:
 
 ```sql
 CREATE INDEX idx_tasks_status_created_at

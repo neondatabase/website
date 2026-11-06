@@ -1,7 +1,30 @@
 import SEO_DATA, { DEFAULT_IMAGE_PATH } from 'constants/seo-data';
+import { getMarkdownPath } from 'utils/ai-agent-detection';
 
 const DEFAULT_TITLE = SEO_DATA.index.title;
 const DEFAULT_DESCRIPTION = SEO_DATA.index.description;
+
+// Public URL of a page's markdown twin, for pages that don't pass markdownPath.
+// getMarkdownPath decides which paths have a twin (the same check the proxy uses
+// to serve it); the homepage's twin is /index.md, every other page's is <path>.md.
+const getDefaultMarkdownPath = (pathname) => {
+  if (!pathname || !getMarkdownPath(pathname)) return null;
+  if (pathname === '/' || pathname === '/home') return '/index.md';
+  return `${pathname.replace(/\/$/, '')}.md`;
+};
+
+const assertAbsoluteHttpUrl = (value, fieldName) => {
+  let parsed;
+  try {
+    parsed = new URL(value);
+  } catch {
+    throw new Error(`${fieldName} must be an absolute HTTP(S) URL, got ${JSON.stringify(value)}`);
+  }
+
+  if (parsed.protocol !== 'http:' && parsed.protocol !== 'https:') {
+    throw new Error(`${fieldName} must be an absolute HTTP(S) URL, got ${JSON.stringify(value)}`);
+  }
+};
 
 export default function getMetadata({
   title,
@@ -13,37 +36,50 @@ export default function getMetadata({
   category = null,
   type = 'website',
   publishedTime = null,
+  modifiedTime = null,
   authors = [],
   imagePath = DEFAULT_IMAGE_PATH,
   isPostgres = false,
   currentSlug = null,
   markdownPath = null,
+  canonical,
 }) {
   const SITE_URL =
     process.env.VERCEL_ENV === 'preview'
       ? `https://${process.env.VERCEL_BRANCH_URL}`
       : process.env.NEXT_PUBLIC_DEFAULT_SITE_URL;
-  const canonicalUrl = SITE_URL + pathname;
+  // Without a leading slash the path glues onto the host (https://neon.comstorage)
+  const normalizedPathname = pathname && !pathname.startsWith('/') ? `/${pathname}` : pathname;
+  const canonicalUrl = SITE_URL + normalizedPathname;
   const imageUrl = imagePath?.startsWith('http') ? imagePath : SITE_URL + imagePath;
 
   const metaImageUrl = imagePath ? imageUrl : `${SITE_URL}${DEFAULT_IMAGE_PATH}`;
   const metaTitle = title || DEFAULT_TITLE;
   const metaDescription = description || DEFAULT_DESCRIPTION;
 
+  const metaMarkdownPath = markdownPath ?? getDefaultMarkdownPath(normalizedPathname);
+
   const siteName = 'Neon';
   const robots = robotsNoindex === 'noindex' ? { index: false } : null;
+
+  let alternateCanonical = isPostgres
+    ? `https://www.postgresql.org/docs/16/${currentSlug}.html`
+    : canonicalUrl;
+
+  if (canonical !== undefined && canonical !== null) {
+    assertAbsoluteHttpUrl(canonical, 'canonical');
+    alternateCanonical = canonical;
+  }
 
   return {
     metadataBase: new URL(SITE_URL),
     title: metaTitle,
     description: metaDescription,
     alternates: {
-      canonical: isPostgres
-        ? `https://www.postgresql.org/docs/16/${currentSlug}.html`
-        : canonicalUrl,
+      canonical: alternateCanonical,
       types: {
         'application/rss+xml': rssPathname ? `${SITE_URL}${rssPathname}` : null,
-        'text/markdown': markdownPath ? `${SITE_URL}${markdownPath}` : null,
+        'text/markdown': metaMarkdownPath ? `${SITE_URL}${metaMarkdownPath}` : null,
       },
     },
     manifest: '/manifest.json',
@@ -72,6 +108,7 @@ export default function getMetadata({
       ],
       type,
       publishedTime,
+      ...(modifiedTime && { modifiedTime }),
       authors,
     },
     category,

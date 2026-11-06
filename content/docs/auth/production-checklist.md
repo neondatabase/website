@@ -10,10 +10,8 @@ summary: >-
   rate-limited and does not support verification links. A custom SMTP provider
   is required for both.
 enableTableOfContents: true
-updatedOn: '2026-07-15T00:08:00.682Z'
+updatedOn: '2026-10-09T09:41:16.035Z'
 ---
-
-<FeatureBetaProps feature_name="Managed Better Auth" />
 
 Complete these steps before taking your application to production with Managed Better Auth.
 
@@ -32,7 +30,7 @@ Complete these steps before taking your application to production with Managed B
 </CheckItem>
 
 <CheckItem title="4. Configure OAuth credentials (if using OAuth)" href="/docs/auth/guides/setup-oauth#production-setup">
-  Set up your own Google and GitHub OAuth apps to replace shared development keys.
+  Set up your own OAuth apps (Google, GitHub, Vercel, Microsoft, or Apple). Google is the only provider with shared development credentials, so replace those with your own before launch.
 </CheckItem>
 
 <CheckItem title="5. Enable email verification (recommended)" href="/docs/auth/guides/email-verification">
@@ -40,7 +38,7 @@ Complete these steps before taking your application to production with Managed B
 </CheckItem>
 
 <CheckItem title="6. Disable localhost access" href="/docs/auth/production-checklist#localhost-access">
-  Disable the "Allow Localhost" setting in your project's **Settings** → **Auth** page. This setting is enabled by default for development but should be disabled in production to improve security.
+  Disable the "Allow Localhost" setting in your project's **Settings** → **Better Auth** page. This setting is enabled by default for development but should be disabled in production to improve security.
 </CheckItem>
 
 </CheckList>
@@ -53,7 +51,11 @@ A custom SMTP provider uses your sender address but still sends Neon's default e
 
 ### Configure custom SMTP
 
-In your project's **Settings** → **Auth** page, configure your email provider:
+<Tabs labels={["Console", "CLI", "API"]}>
+
+<TabItem>
+
+In your project's **Settings** → **Better Auth** page, configure your email provider:
 
 1. Select **Custom SMTP provider**
 2. Enter your SMTP credentials:
@@ -64,6 +66,33 @@ In your project's **Settings** → **Auth** page, configure your email provider:
    - **Sender email**: Email address to send from
    - **Sender name**: Display name for sent emails
 3. Click **Save**
+
+</TabItem>
+
+<TabItem>
+
+Configure a standard SMTP provider with [`neon neon-auth config email-provider update`](/docs/cli/neon-auth#config-email-provider-update):
+
+```bash shouldWrap
+neon neon-auth config email-provider update --type standard --host smtp.example.com --port 587 --username example_username --password AbC123dEf --sender-email noreply@example.com --sender-name "Example App"
+```
+
+</TabItem>
+
+<TabItem>
+
+Update the provider with the [Update email provider configuration](/docs/reference/api/auth/update-neon-auth-email-provider) endpoint. Replace `{project_id}` and `{branch_id}` with your project and branch IDs:
+
+```bash shouldWrap
+curl -X PATCH 'https://console.neon.tech/api/v2/projects/{project_id}/branches/{branch_id}/auth/email_provider' \
+  -H 'Authorization: Bearer $NEON_API_KEY' \
+  -H 'Content-Type: application/json' \
+  -d '{"type": "standard", "host": "smtp.example.com", "port": 587, "username": "example_username", "password": "AbC123dEf", "sender_email": "noreply@example.com", "sender_name": "Example App"}'
+```
+
+</TabItem>
+
+</Tabs>
 
 ### Email provider requirements
 
@@ -81,9 +110,8 @@ Managed Better Auth uses the application name in user-facing auth messages, such
 
 To set a custom application name:
 
-1. Go to **Auth** in your Neon project
-2. Select the **Configuration** tab
-3. In the **Project Info** panel, edit the **Application Name** field
+1. Go to **Settings** → **Better Auth** in your Neon project
+2. In the **Project Info** section, edit the **Application Name** field
 
 Each branch manages its own application name independently, so preview and development branches can use different names than production.
 
@@ -91,13 +119,13 @@ You can also update the application name via the API. See [Update auth configura
 
 ## Localhost access (#localhost-access)
 
-The "Allow Localhost" setting in your project's **Settings** → **Auth** page is enabled by default to allow authentication requests from localhost during development.
+The "Allow Localhost" setting in your project's **Settings** → **Better Auth** page is enabled by default to allow authentication requests from localhost during development.
 
 ### Disable for production
 
 For production environments, disable this setting to improve security:
 
-1. Go to **Settings** → **Auth** in your Neon project
+1. Go to **Settings** → **Better Auth** in your Neon project
 2. Find the **Allow Localhost** toggle
 3. Disable the toggle
 

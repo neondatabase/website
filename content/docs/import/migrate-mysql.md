@@ -6,12 +6,12 @@ summary: >-
   transforming data types. Use this page when moving an existing MySQL database
   to Neon. It covers credentials, connection string setup including the required
   endpoint ID workaround, and running pgloader from the command line or Docker.
-  Neon's Free plan supports up to 0.5 GB; larger databases require a paid plan.
+  Neon's Free plan supports up to 1 GB; larger databases require a paid plan.
 enableTableOfContents: true
 isDraft: false
 redirectFrom:
   - /docs/import/import-from-mysql
-updatedOn: '2026-07-31T15:27:48.506Z'
+updatedOn: '2026-09-29T17:10:40.931Z'
 ---
 
 This topic describes how to migrate your MySQL database to Lakebase Postgres using [pgloader](https://pgloader.readthedocs.io/en/latest/intro.html).
@@ -24,7 +24,7 @@ Before you begin, make sure that you have the following:
 
 - A Neon account and a project. See [Sign up](/docs/get-started/signing-up).
 - A properly named database. For example, if you are migrating a database named `sakila`, you might want to create a database of the same name in Neon. See [Create a database](/docs/manage/databases#create-a-database) for instructions.
-- Neon's Free plan supports 0.5 GB of data. If your data size is more than 0.5 GB, you'll need to upgrade to one of Neon's paid plans. See [Neon plans](/docs/introduction/plans) for more information.
+- Neon's Free plan supports 1 GB of data. If your data size is more than 1 GB, you'll need to upgrade to one of Neon's paid plans. See [Neon plans](/docs/introduction/plans) for more information.
 
 Also, a close review of the [Pgloader MySQL to Postgres Guide](https://pgloader.readthedocs.io/en/latest/ref/mysql.html) guide is recommended before you start. This guide will provide you with a good understanding of `pgloader` capabilities and how to configure your `pgloader` configuration file, if necessary.
 
@@ -45,7 +45,7 @@ Keep your MySQL database connection details handy for later use.
 
 ## Retrieve your Neon database connection string
 
-Log in to the [Neon Console](https://console.neon.tech). Find the connection string for your database by clicking the **Connect** button on your **Project Dashboard**. Make sure the **Connection pooling** toggle is disabled to get a direct connection string.
+Log in to the [Neon Console](https://console.neon.tech). Find the connection string for your database by clicking the **Connect** button in the Console nav. Make sure the **Connection pooling** toggle is disabled to get a direct connection string.
 
 Your connection string should look similar to this:
 

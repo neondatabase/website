@@ -9,7 +9,7 @@ summary: >-
   `POSTGRES_URL` credential storage in `.env.local`, and a working TypeScript
   query to verify the connection.
 enableTableOfContents: true
-updatedOn: '2026-08-04T05:18:26.469Z'
+updatedOn: '2026-09-16T19:45:35.340Z'
 ---
 
 This guide describes how to create a project on Neon and connect to it from a Bun application. Examples are provided for using [Bun's built-in SQL client](https://bun.sh/docs/api/sql) and the [@neondatabase/serverless](/docs/serverless/serverless-driver) driver. Use the client you prefer.
@@ -54,7 +54,7 @@ bun add @neondatabase/serverless
 
 ## Store your Neon credentials
 
-Add a `.env.local` file to your project directory and add your Neon connection details to it. Bun automatically loads variables from `.env`, `.env.local`, and other `.env.*` files. You can find the connection details for your database by clicking the **Connect** button on your **Project Dashboard** to open the **Connect to your database** modal. Select Bun from the **Connection string** dropdown. For more information, see [Connect from any application](/docs/connect/connect-from-any-app).
+Add a `.env.local` file to your project directory and add your Neon connection details to it. Bun automatically loads variables from `.env`, `.env.local`, and other `.env.*` files. You can find the connection details for your database by clicking the **Connect** button in the Console nav to open the **Connect to your branch** modal. Select Bun from the **Connection string** dropdown. For more information, see [Connect from any application](/docs/connect/connect-from-any-app).
 
 ```shell shouldWrap
 POSTGRES_URL='postgresql://[user]:[password]@[neon_hostname]/[dbname]?sslmode=require&channel_binding=require'

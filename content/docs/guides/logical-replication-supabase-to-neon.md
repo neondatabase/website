@@ -12,7 +12,7 @@ summary: >-
   datasets.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2026-07-31T15:27:48.506Z'
+updatedOn: '2026-09-16T19:45:35.340Z'
 ---
 
 This guide describes how to replicate data from Supabase to Neon using native Postgres logical replication with Lakebase Postgres. The steps in this guide follow those described in [Replicate to another Postgres database using Logical Replication](https://supabase.com/docs/guides/database/postgres/setup-replication-external), in the _Supabase documentation_.
@@ -194,7 +194,7 @@ After the replication operation is complete and you have verified that data is b
 2. Wait for any final transactions to be replicated to Neon. Monitor `pg_stat_subscription` in Neon until `received_lsn` and `latest_end_lsn` are close or equal, indicating minimal replication lag.
 3. Update your application's connection string to point to your Neon database.
 
-You can find your Neon database connection details by clicking the **Connect** button on your **Project Dashboard** to open the **Connect to your database** modal. For details, see [Connect from any application](/docs/connect/connect-from-any-app).
+You can find your Neon database connection details by clicking the **Connect** button in the Console nav to open the **Connect to your branch** modal. For details, see [Connect from any application](/docs/connect/connect-from-any-app).
 
 </Steps>
 

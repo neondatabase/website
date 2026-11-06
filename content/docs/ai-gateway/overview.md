@@ -1,23 +1,41 @@
 ---
 title: Neon AI Gateway
-subtitle: One API for frontier and open-source models from OpenAI, Google, and more. Built into your Neon project.
+subtitle: One API for open-weight and foundation models from OpenAI, Google, and more. Built into your Neon project.
 summary: >-
-  Neon AI Gateway is the LLM gateway built into the Neon backend. One
+  Neon AI Gateway is the LLM gateway built into your Neon project. One
   Neon credential gives you access to models across multiple providers. Standard AI
   SDKs work without code changes. Each branch gets its own gateway endpoint.
 enableTableOfContents: true
-updatedOn: '2026-08-06T17:43:14.909Z'
+redirectFrom:
+  - /docs/ai/ai-gateway
+updatedOn: '2026-10-30T21:10:29.780Z'
+layout: wide
+hideCopyPage: true
 ---
 
-## Foundation model access
+<div className="not-prose -mb-4 grid grid-cols-[minmax(0,7fr)_minmax(0,4fr)] items-start gap-16 lg:mb-6 lg:grid-cols-1 lg:gap-10">
 
-Neon AI Gateway serves frontier models like GPT (`gpt-5`) and Gemini (`gemini-3-flash`) alongside open-weight models like Qwen and gpt-oss.
+<div className="[&>div]:my-0!">
+<p className="mt-0 mb-4 max-w-2xl text-base leading-[1.6] tracking-tight text-gray-new-20 [text-wrap:pretty] dark:text-gray-new-80">Add chat, agents, and embeddings to your app through one endpoint and one Neon credential, with models from many providers, scoped to your branch the same way your data is.</p>
+<p className="mt-0 mb-6 max-w-2xl text-sm leading-[1.6] tracking-tight text-gray-new-30 [text-wrap:pretty] dark:text-gray-new-70"><strong className="font-medium text-black-pure dark:text-white">Before you start:</strong> AI Gateway needs <a className="underline underline-offset-2 hover:text-green-45" href="/docs/ai-gateway/prepaid-credits">prepaid credits</a> ($5 minimum), which you can buy on any Neon plan, including Free, and a project in AWS US East (Ohio) (<code>aws-us-east-2</code>), AWS US East (N. Virginia) (<code>aws-us-east-1</code>), AWS Europe (Frankfurt) (<code>aws-eu-central-1</code>), or AWS Asia Pacific (Singapore) (<code>aws-ap-southeast-1</code>). Support is expanding toward <a className="underline underline-offset-2 hover:text-green-45" href="/docs/introduction/regions">all regions</a>.</p>
+<AgentPrompt title="Set up with your agent" src="/prompts/ai-gateway-landing.md" buttonText="Copy prompt" />
+</div>
 
-**See every supported model in the [model catalog](/docs/ai-gateway/models#available-models).**
+<img
+  src="/docs/ai-gateway/hero-ai-gateway.svg"
+  alt="One AI Gateway endpoint for your app reaches many model providers."
+  className="not-prose aspect-[364/350] w-full max-w-[320px] object-contain object-top lg:max-w-[420px]"
+/>
 
-Open-weight models are available to every project right away. Frontier models from OpenAI and Google are rolling out gradually. Don't see them in your project yet? Request early access below.
+</div>
 
-<RequestForm type="backend-platform" title="Request early access to additional foundation models" description="Drop your email and we'll reach out as access opens up." buttonText="Request Early Access" confirmation="You're on the list. We'll be in touch as access opens up." />
+## Available models
+
+Browse the full catalog below. Switch between the **Text**, **Image**, **Embeddings**, and **Decisions** tabs, filter by lab or open weights, sort any column, and click a model for a copy-paste quickstart. Chat and image models get AI SDK, Mastra, Python, TypeScript, and cURL; embedding models get Python, TypeScript, and cURL; System One decision models get AI SDK, TypeScript, Python, and cURL. The endpoint each snippet targets is baked into its base URL: `/v1` for chat completions and embeddings, `/openai/v1` for the Responses API (image generation), `/typesafe/v1/systemone` for decisions.
+
+<AiGatewayModelIndex/>
+
+For full request paths and when to prefer each endpoint, see [Which endpoint to use](/docs/ai-gateway/models#which-endpoint-to-use). For embedding models (dimensions, normalization, and choosing a distance operator), see [Embeddings](/docs/ai-gateway/embeddings). For decision models (question types and answer shapes), see [Decisions](/docs/ai-gateway/decisions).
 
 ## Get started
 
@@ -25,39 +43,17 @@ Open-weight models are available to every project right away. Frontier models fr
 
 <a href="/docs/ai-gateway/get-started" description="Get a credential and make your first inference request in minutes." icon="todo">Quickstart</a>
 
-<a href="/docs/ai-gateway/models" description="Browse the full model catalog and learn how to specify models in requests." icon="database">Models</a>
+<a href="/docs/ai-gateway/models" description="Endpoints, model IDs, rate limits, pricing, and provider terms." icon="database">Model reference</a>
 
 <a href="/docs/ai-gateway/chat-completions" description="Use the OpenAI-compatible endpoint with any model in the catalog." icon="code">Chat completions</a>
+
+<a href="/docs/ai-gateway/embeddings" description="Turn text into vectors for search with the OpenAI-compatible embeddings endpoint." icon="database">Embeddings</a>
+
+<a href="/docs/ai-gateway/decisions" description="Ask yes/no, choice, and score questions about text and get back probabilities." icon="code">Decisions</a>
 
 <a href="/docs/ai-gateway/authentication" description="Understand how Neon credentials work with AI Gateway." icon="lock-landscape">Authentication</a>
 
 </DetailIconCards>
-
-## Overview
-
-Neon AI Gateway is the LLM inference layer built into the Neon backend. It lets you call models from OpenAI, Google, and other providers using your Neon credential, without setting up separate provider accounts. Your existing OpenAI SDK works without code changes. Just point it at your branch endpoint.
-
-> AI Gateway is in beta and available only in **AWS US East (Ohio) (`aws-us-east-2`)**, so create your project there to use it. It requires a paid Neon plan. Inference is free for paid plans during beta. See [Pricing](#pricing) for what to expect when billing begins.
-
-<Admonition type="important">
-Participation in this Beta is subject to our Terms of Service. Access is not available to users, organizations, or entities located in or operating from regions restricted by Anthropic's [Supported Regions Policy](https://www.anthropic.com/supported-countries). This restriction also applies to entities that are majority owned, directly or indirectly, by companies headquartered in unsupported regions.
-</Admonition>
-
-- **One credential for all providers.** A single Neon credential gives you access to models from OpenAI, Google, Meta, Databricks, and Alibaba. No separate provider accounts needed.
-- **Standard SDKs, one URL change.** OpenAI SDK and google-genai both work out of the box.
-- **AI follows your branches.** Each branch has its own gateway endpoint. If you use Neon branches for preview deployments, AI requests from a feature branch are scoped to that branch. It's the same isolation your database already gets.
-- **Streaming support.** Server-sent events work on all endpoints with no extra configuration.
-- **Shorter, OpenRouter-style paths.** Every dialect has a short top-level path: `/v1/chat/completions` for chat completions, and a provider-prefixed path for the native dialects (`/openai/v1/...`, `/anthropic/v1/...`, `/gemini/v1beta/...`). `GET /v1/models` lists the catalog. See [Shorter paths](/docs/ai-gateway/models#shorter-paths).
-
-## Pricing
-
-AI Gateway pricing isn't finalized. Here's what to expect once it moves out of beta:
-
-- **Paid plans only.** AI Gateway will be available on Neon's Launch and Scale plans. There's no difference in AI Gateway pricing or model access between the two plans.
-- **No markup.** Neon charges the same per-token rate as the model provider. Published provider prices are passed on to users with no additional markup.
-- **Free for now.** Inference remains free through the end of the beta. Billing starts when AI Gateway reaches GA.
-
-We'll publish exact per-model rates on the [Neon pricing page](https://neon.com/pricing) and update this page before billing begins.
 
 ## Starter templates
 

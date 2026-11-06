@@ -6,14 +6,18 @@ summary: >-
   by JWT authentication and Row-Level Security. Applications can query tables
   without a connection pool or SQL driver. Use this page to enable the API,
   create an RLS-protected table, and run your first queries via the
-  @neondatabase/neon-js client or direct HTTP requests. The API is enabled per
+  @neon/neon-js client or direct HTTP requests. The API is enabled per
   branch for a single database and does not support projects with IP Allow or
   Private Networking configured.
 enableTableOfContents: true
-updatedOn: '2026-07-15T00:08:00.682Z'
+updatedOn: '2026-10-09T10:18:46.317Z'
 ---
 
 This guide walks you through enabling the Data API, creating a table with RLS, and running your first query.
+
+<Admonition type="important" title="Secure your data before exposing it">
+The Data API has no permission layer of its own. Every request is authorized entirely by your PostgreSQL `GRANT` statements and [Row-Level Security (RLS)](/docs/guides/row-level-security) policies, so a missing or misconfigured policy can expose a table to anyone with the endpoint URL. Before exposing data, follow [Access control & security](/docs/data-api/access-control) and [Secure your app with RLS](/docs/guides/rls-tutorial), and run the [Data API advisors](/docs/data-api/database-advisor) to catch misconfigurations.
+</Admonition>
 
 ## Before you begin
 
@@ -25,12 +29,12 @@ This guide walks you through enabling the Data API, creating a table with RLS, a
 ## Enable the Data API
 
 <Admonition type="tip" title="Enable programmatically">
-You can also enable the Data API using the [Neon API](/docs/data-api/manage#manage-via-the-neon-api) or the [Neon MCP Server](/docs/ai/neon-mcp-server#supported-actions-tools) (`provision_neon_data_api` tool).
+You can also enable the Data API from the terminal with [`neon data-api create`](/docs/cli/data-api#create), declaratively in `neon.ts` with [`neon config add data-api`](/docs/cli/config#add), using the [Neon API](/docs/data-api/manage#manage-via-the-neon-api), or with the [Neon MCP Server](/docs/ai/neon-mcp-server#available-tools) (`provision_neon_data_api` tool).
 </Admonition>
 
 ### 1. Navigate to the Data API page
 
-In the Neon Console, select your project and go to the **Data API** page in the sidebar.
+In the Neon Console, select your project and select **Postgres database** > **Data API**.
 
 ![Data API page with enable button](/docs/data-api/data_api_sidebar.png)
 
@@ -38,7 +42,7 @@ In the Neon Console, select your project and go to the **Data API** page in the 
 
 The Data API uses JWTs for access control. Configure a provider now or later from the **Settings** tab. For public data that doesn't require login, use the [`anonymous` role](/docs/data-api/access-control#2-the-anonymous-role) instead.
 
-- **Managed Better Auth**: Check the **Use Managed Better Auth** checkbox to enable [Managed Better Auth](/docs/auth/overview) as your provider. Managed Better Auth manages sign-up, login, and account access, issuing the JWTs required for API requests.
+- **Managed Better Auth**: Check the **Use Neon Auth** checkbox to enable [Managed Better Auth](/docs/auth/overview) as your provider. Managed Better Auth manages sign-up, login, and account access, issuing the JWTs required for API requests.
 - **Other providers**: Leave the checkbox unchecked and configure your provider (such as Auth0, Clerk, or Firebase Auth) later. See [Custom authentication providers](/docs/data-api/custom-authentication-providers) for setup instructions.
 
 ### 3. Configure schema access (optional)
@@ -207,7 +211,7 @@ The Data API caches your database schema for performance. When you modify your s
 
 **Option 1: Neon Console**
 
-Go to the **Data API** page in the Neon Console and click **Refresh schema cache**.
+Go to **Postgres database** > **Data API** in the Neon Console and click **Refresh schema cache**.
 
 ![Data API refresh schema cache button](/docs/data-api/data_api_schema_refresh.png)
 
@@ -234,18 +238,18 @@ Install a client library and run your first query. Choose the option that matche
 
 <TabItem>
 
-Use [`@neondatabase/neon-js`](https://www.npmjs.com/package/@neondatabase/neon-js) if you're using [Managed Better Auth](/docs/auth/overview). This library handles token management automatically.
+Use [`@neon/neon-js`](https://www.npmjs.com/package/@neon/neon-js) if you're using [Managed Better Auth](/docs/auth/overview). This library handles token management automatically.
 
 **1. Install**
 
 ```bash
-npm install @neondatabase/neon-js
+npm install @neon/neon-js
 ```
 
 **2. Usage**
 
 ```typescript shouldWrap
-import { createClient } from '@neondatabase/neon-js';
+import { createClient } from '@neon/neon-js';
 
 // Initialize with Managed Better Auth
 // Use your Neon database URL without credentials or query parameters.
@@ -262,24 +266,20 @@ const { data, error } = await client
 console.log(data);
 ```
 
-<Admonition type="warning" title="Not yet on npm">
-The single-URL form shown above, `createClient(url)`, requires a version of `@neondatabase/neon-js` that has not been published to npm as of this writing. The latest published version, `0.6.2-beta`, only accepts the two-URL object form. If `npm install @neondatabase/neon-js` installs `0.6.2-beta` or earlier for you, use the [object-form alternative](/docs/reference/javascript-sdk#initializing) in the JavaScript SDK reference instead.
-</Admonition>
-
 <Admonition type="note">
-This client runs in the browser. Environment variable syntax depends on your framework: `import.meta.env.VITE_*` for Vite-based projects (Vite, SvelteKit, Astro), `process.env.NEXT_PUBLIC_*` for Next.js. The `VITE_NEON_DATABASE_URL` value is not your Postgres connection string; use the HTTPS Neon database URL shown in the example above. You can find the matching Data API URL on the **Data API** page in the Neon Console or with `neon data-api get`; to get the single database URL, remove the `.apirest` hostname label and trailing `/rest/v1` path. If you start from a Neon Auth URL instead, remove the `.neonauth` hostname label and trailing `/auth` path. The cell label (if present), region, and database path stay the same.
+This client runs in the browser. Environment variable syntax depends on your framework: `import.meta.env.VITE_*` for Vite-based projects (Vite, SvelteKit, Astro), `process.env.NEXT_PUBLIC_*` for Next.js. The `VITE_NEON_DATABASE_URL` value is not your Postgres connection string; use the HTTPS Neon database URL shown in the example above. You can find the matching Data API URL on the **Data API** page in the Neon Console or with `neon data-api get`; to get the single database URL, remove the `.apirest` hostname label and trailing `/rest/v1` path. If you start from a Managed Better Auth URL instead, remove the `.neonauth` hostname label and trailing `/auth` path. The cell label (if present), region, and database path stay the same.
 </Admonition>
 
 </TabItem>
 
 <TabItem>
 
-Use [`@neondatabase/postgrest-js`](https://www.npmjs.com/package/@neondatabase/postgrest-js) with any authentication provider that issues JWTs, such as [Auth0](https://auth0.com/), [Clerk](https://clerk.com/), or [Firebase Auth](https://firebase.google.com/products/auth).
+Use [`@neon/postgrest-js`](https://www.npmjs.com/package/@neon/postgrest-js) with any authentication provider that issues JWTs, such as [Auth0](https://auth0.com/), [Clerk](https://clerk.com/), or [Firebase Auth](https://firebase.google.com/products/auth).
 
 **1. Install**
 
 ```bash
-npm install @neondatabase/postgrest-js
+npm install @neon/postgrest-js
 ```
 
 **2. Usage**
@@ -287,7 +287,7 @@ npm install @neondatabase/postgrest-js
 Provide a function that retrieves the JWT token from your authentication system. This token is included in each request to enforce RLS policies.
 
 ```typescript shouldWrap
-import { fetchWithToken, NeonPostgrestClient } from '@neondatabase/postgrest-js';
+import { fetchWithToken, NeonPostgrestClient } from '@neon/postgrest-js';
 
 const getTokenFromAuthSystem = async (): Promise<string> => {
   // Retrieve the JWT token from your auth system (e.g., Auth0, Clerk, Firebase)
@@ -327,7 +327,7 @@ Query the Data API directly using any HTTP client. Include the `Authorization` h
 **Where to get the JWT token:**
 
 - **Your auth provider's SDK**: Retrieve the token using your provider's API (for example, `getAccessToken()` in Auth0, `getToken()` in Clerk).
-- **Managed Better Auth**: Retrieve the token using `client.auth.getSession()` from the `@neondatabase/neon-js` library (see [Get current session](/docs/reference/javascript-sdk#auth-getsession)), or use the Auth API reference UI for manual testing (see [Testing with Managed Better Auth](#testing-with-neon-auth) below).
+- **Managed Better Auth**: Retrieve the token using `client.auth.getSession()` from the `@neon/neon-js` library (see [Get current session](/docs/reference/javascript-sdk#auth-getsession)), or use the Auth API reference UI for manual testing (see [Testing with Managed Better Auth](#testing-with-neon-auth) below).
 
 **About the `sub` claim:**
 
@@ -368,7 +368,7 @@ If you're using [Managed Better Auth](/docs/auth/overview) and want to test the 
 
 The Auth API reference UI is an interactive browser-based tool for exploring and testing all Managed Better Auth endpoints. It is powered by [Better Auth's OpenAPI plugin](https://www.better-auth.com/docs/plugins/open-api#usage).
 
-1. **Open the Auth API reference:** Navigate to your Auth URL with `/reference` appended, for example, `https://ep-example.neonauth.us-east-1.aws.neon.tech/neondb/auth/reference`. You can find your **Auth URL** on the **Auth** page, **Configuration** tab in the Neon Console.
+1. **Open the Auth API reference:** Navigate to your Auth URL with `/reference` appended, for example, `https://ep-example.neonauth.us-east-1.aws.neon.tech/neondb/auth/reference`. You can find your **Auth URL** under **Settings** > **Better Auth** > **Project Info** in the Neon Console.
 
 2. **Create a test user:** Use the UI to call `POST /sign-up/email` with a JSON body:
 
@@ -403,7 +403,7 @@ The Auth API reference UI is an interactive browser-based tool for exploring and
 
 <TabItem>
 
-The following steps walk through signing up, obtaining a JWT, and querying the Data API from the terminal. You can find your **Auth URL** on the **Auth** page and your **Data API URL** on the **Data API** page in the Neon Console.
+The following steps walk through signing up, obtaining a JWT, and querying the Data API from the terminal. You can find your **Auth URL** under **Settings** > **Better Auth** > **Project Info** and your **Data API URL** on the **Data API** page in the Neon Console.
 
 **1. Sign up (or sign in)**
 

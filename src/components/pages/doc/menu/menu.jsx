@@ -5,6 +5,8 @@ import { DOCS_BASE_PATH } from 'constants/docs';
 import ArrowBackIcon from 'icons/docs/sidebar/arrow-back.inline.svg';
 import { cn } from 'utils/cn';
 
+import Tag from '../tag';
+
 import Icon from './icon';
 import Item from './item';
 
@@ -21,7 +23,10 @@ const Menu = ({
   <div className="flex w-full flex-col gap-6 lg:px-8 lg:pt-4 md:px-5">
     <Link
       className="flex items-center gap-2.5 rounded-sm text-[15px] leading-snug font-medium tracking-extra-tight"
-      to={`${basePath}${slug}`}
+      // A site-absolute slug (starting with `/`, e.g. the Get started lane's
+      // `/docs` overview) is already a full path; only relative slugs hang off
+      // basePath. Matches how menu/item and mobile-nav resolve their hrefs.
+      to={slug?.startsWith('/') ? slug : `${basePath}${slug}`}
       theme="blue-green"
     >
       {icon && <Icon title={icon} className="size-4.5 shrink-0" />}
@@ -40,6 +45,14 @@ const Menu = ({
               >
                 {item.icon && <Icon title={item.icon} className="size-4.5 shrink-0" />}
                 {item.title || item.section}
+                {item.tag && (
+                  <Tag
+                    className="ml-0.5 inline-flex text-[0.6875rem] font-normal -tracking-tight tabular-nums"
+                    label={item.tag}
+                    size="sm"
+                    theme={item.tagTheme || 'gray'}
+                  />
+                )}
               </SectionLabel>
               <ul className="flex flex-col">
                 {item.items?.map((item, index) => (

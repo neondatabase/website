@@ -6,15 +6,13 @@ summary: >-
   password by clicking a time-limited link sent to their email, with expiration
   configurable from 5 to 1440 minutes. Use this page when you want to add
   passwordless email authentication to a project that already has Managed Better Auth
-  enabled, using either the Neon SDK's `signIn.magicLink()` method or the
-  `magicLink` prop on `NeonAuthUIProvider`. The plugin also supports a webhook
+  enabled, using either the Neon SDK's `signIn.magicLink()` method or Better Auth UI's
+  Magic Link plugin (`magicLinkPlugin()`). The plugin also supports a webhook
   event (`send.magic_link`) to bypass the built-in mailer and deliver links
   through a custom email provider.
 enableTableOfContents: true
-updatedOn: '2026-07-15T00:08:00.682Z'
+updatedOn: '2026-10-09T09:36:23.504Z'
 ---
-
-<FeatureBetaProps feature_name="Managed Better Auth" />
 
 Managed Better Auth is built on [Better Auth](https://www.better-auth.com/) and provides full support for the [Magic Link](https://www.better-auth.com/docs/plugins/magic-link) plugin APIs through the Neon SDK. You do not need to manually install or configure the Better Auth Magic Link plugin.
 
@@ -36,13 +34,11 @@ Magic Link lets users sign in by clicking a link sent to their email. No passwor
 <TabItem>
 
 1. Open the [Neon Console](https://console.neon.tech).
-2. Select your project and go to **Auth** > **Plugins**.
-3. Toggle **Magic Link** on.
+2. Select your project and go to **Settings** > **Better Auth**.
+3. In the **Magic Link** section, toggle **Enable Magic Link** on.
 4. Configure the options:
    - **Link Expiration** (5-1440 minutes, default: 5) controls how long a magic link stays valid.
    - **Allow New User Registration** controls whether magic links can be used to create new accounts. When off, magic links only work for existing users.
-
-![Neon Console Auth Plugins tab with Magic Link settings](/docs/auth/neon_auth_plugins_magic_link.png)
 
 </TabItem>
 
@@ -93,35 +89,30 @@ After calling `signIn.magicLink()`, show the user a "check your email" message. 
 
 ## Use Magic Link with UI components
 
-If you're already using Managed Better Auth UI components, you can enable Magic Link with a single prop instead of building a custom form. Pass the `magicLink` prop to `NeonAuthUIProvider`:
+If you're already using [Better Auth UI](/docs/auth/reference/ui-components), add its Magic Link components and pass the plugin to `AuthProvider` instead of building a custom form:
 
-```tsx shouldWrap filename="app/layout.tsx"
-'use client';
-
-import { authClient } from '@/lib/auth/client';
-import { NeonAuthUIProvider } from '@neondatabase/auth-ui';
-import '@neondatabase/auth-ui/css';
-import './globals.css';
-
-export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
-  return (
-    <html lang="en" suppressHydrationWarning>
-      <body className={'antialiased'}>
-        <NeonAuthUIProvider
-          authClient={authClient}
-          magicLink // [!code ++]
-        >
-          {children}
-        </NeonAuthUIProvider>
-      </body>
-    </html>
-  );
-}
+```bash
+npx shadcn@latest add @better-auth-ui/magic-link
 ```
+
+```tsx shouldWrap filename="components/providers.tsx"
+import { magicLinkPlugin } from '@/lib/auth/magic-link-plugin'; // [!code ++]
+
+<AuthProvider
+  authClient={authClient}
+  navigate={navigate}
+  Link={Link}
+  plugins={[magicLinkPlugin()]} // [!code ++]
+>
+  {children}
+</AuthProvider>
+```
+
+Add the plugin's views to your auth route's paths with `magicLinkPlugin().viewPaths.auth` from `@better-auth-ui/core/plugins/magic-link`. The UI plugin doesn't enable Magic Link on your branch; enable it in Managed Better Auth first.
 
 Users can now sign in with a magic link by selecting the option on the sign-in screen and entering their email.
 
-> If you haven't set up Managed Better Auth UI components yet, see the [UI components reference](/docs/auth/reference/ui-components) for setup, or the [Next.js](/docs/auth/quick-start/nextjs-api-only) or [React](/docs/auth/quick-start/react) quick start for building custom forms instead.
+> If you haven't set up Better Auth UI yet, see the [UI components reference](/docs/auth/reference/ui-components) for setup, or the [Next.js](/docs/auth/quick-start/nextjs-api-only) or [React](/docs/auth/quick-start/react) quick start for building custom forms instead.
 
 ## Webhooks
 

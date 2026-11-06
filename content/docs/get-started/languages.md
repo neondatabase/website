@@ -4,8 +4,8 @@ subtitle: Find detailed instructions for connecting to Neon from various languag
 summary: >-
   Language connection guides for Neon provide step-by-step instructions for
   connecting to a Lakebase Postgres database from .NET (C#), Elixir, Go, Java,
-  JavaScript, Python, and Rust. Use this page to find the correct driver,
-  connection string format, and configuration for your language before
+  Kotlin, JavaScript, Python, and Rust. Use this page to find the correct
+  driver, connection string format, and configuration for your language before
   connecting to Neon for the first time.
 enableTableOfContents: true
 redirectFrom:
@@ -23,6 +23,8 @@ updatedOn: '2026-07-31T15:27:48.506Z'
 <a href="/docs/guides/go" title="Go" description="Connect a Go application to Neon" icon="go"></a>
 
 <a href="/docs/guides/java" title="Java" description="Connect a Java application to Neon" icon="java"></a>
+
+<a href="/docs/guides/kotlin" title="Kotlin" description="Connect a Kotlin application to Neon" icon="kotlin"></a>
 
 <a href="/docs/guides/javascript" title="JavaScript" description="Connect a JavaScript application to Neon" icon="javascript"></a>
 

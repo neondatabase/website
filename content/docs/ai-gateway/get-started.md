@@ -6,26 +6,32 @@ summary: >-
   host, and making your first request to the Neon AI Gateway using the OpenAI
   SDK. No provider API keys required. Authenticate with your Neon credential.
 enableTableOfContents: true
-updatedOn: '2026-07-20T19:53:53.968Z'
+updatedOn: '2026-10-01T22:38:59.908Z'
 ---
 
-<FeatureBetaProps feature_name="Neon AI Gateway" />
-
-To set up Neon AI Gateway with an AI coding assistant, install the Neon Platform (`neon`) and Neon AI Gateway skills:
+To set up Neon AI Gateway with an AI coding assistant, install the Neon Platform (`neon`) and Neon AI Gateway skills with the [Neon CLI](/docs/cli):
 
 ```bash
-npx skills add neondatabase/agent-skills -s neon -s neon-ai-gateway
+neon skills -s neon -s neon-ai-gateway
 ```
+
+Without the Neon CLI, run `npx skills add neondatabase/agent-skills -s neon -s neon-ai-gateway` instead.
 
 <Steps>
 
 ## Get access
 
-You need a project in the AWS us-east-2 region. Foundation model access requires a paid Neon plan, and it's enabled automatically once you're on one, no separate sign-up step needed.
+You need a project in AWS US East (Ohio) (`aws-us-east-2`), AWS US East (N. Virginia) (`aws-us-east-1`), AWS Europe (Frankfurt) (`aws-eu-central-1`), or AWS Asia Pacific (Singapore) (`aws-ap-southeast-1`). Support is expanding toward [all regions](/docs/introduction/regions). Using the AI Gateway requires prepaid credits, which you can buy on any Neon plan, including Free. Credits give you every model in the catalog. See [Model access](/docs/ai-gateway/models#model-access) for details.
 
 ## Create a credential
 
-In the Neon Console, select your branch, click **Credentials** under **APP BACKEND**, then click **Create credential** and check **ai_gateway:invoke**. Copy the credential before closing — it's shown only once.
+With the [Neon CLI](/docs/cli/credentials), run:
+
+```bash
+neon credentials create --scope ai_gateway:invoke
+```
+
+Or, in the Neon Console, click **Connect** at the top of the sidebar and open the **AI Gateway** tab. Click **Reveal credential** to show `NEON_AI_GATEWAY_TOKEN`, or **Copy snippet** to copy it together with `NEON_AI_GATEWAY_BASE_URL`. Use **Rotate credential** to issue a new token.
 
 Or use the API:
 
@@ -37,7 +43,7 @@ curl -X POST "https://console.neon.tech/api/v2/projects/{project_id}/branches/{b
 ```
 
 <Callout title="Using neon.ts?">
-If your project has a `neon.ts` file, declare `preview: { aiGateway: true }` and run `neon deploy`. Credentials are provisioned and pulled into your local `.env` automatically — no manual creation needed. See [Authentication](/docs/ai-gateway/authentication) for details.
+If your project has a `neon.ts` file, run [`neon config add ai-gateway`](/docs/cli/config#add) (or declare `aiGateway: true` yourself) and then `neon deploy`. Credentials are provisioned and pulled into your local `.env` automatically, with no manual creation step. See [Authentication](/docs/ai-gateway/authentication) for details.
 </Callout>
 
 Store the credential as an environment variable:
@@ -48,7 +54,7 @@ export NEON_AI_GATEWAY_TOKEN=nt_live_...
 
 ## Find your branch host
 
-Your branch's AI Gateway host is available in the Neon Console on the AI Gateway page, or via the Neon API. It follows this format:
+Your branch's AI Gateway host is available in the Neon Console from the **Connect** dialog's **AI Gateway** tab, or via the Neon API. It follows this format:
 
 ```
 br-<name>-api.ai.<cell>.<region>.aws.neon.tech

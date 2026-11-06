@@ -1,11 +1,13 @@
 ---
 title: Get started with the Neon API
+subtitle: Create an API key and make your first authenticated request.
 summary: >-
   Create a Neon API key, authenticate with the REST API, and make your first
   request to list projects using curl.
 enableTableOfContents: true
 redirectFrom:
   - /docs/reference/api/getting-started
+updatedOn: '2026-09-04T22:12:54.000Z'
 ---
 
 <CopyPrompt src="/prompts/neon-api-prompt.md" title="AI prompt: Get started with the Neon API" description="Copy into your AI assistant to get an API key and make your first API call."/>

@@ -4,4 +4,6 @@ Manual snapshots can only be created from root branches. Unlike a branch, a snap
 
 Use these endpoints to create snapshots manually, list them, restore from them, or delete them. Scheduled snapshots are managed automatically; you interact with them mainly when restoring.
 
+You can also manage snapshots from the CLI with [`neon snapshots`](/docs/cli/snapshots).
+
 See [Backup and restore](/docs/guides/backup-restore) for pricing and usage details.

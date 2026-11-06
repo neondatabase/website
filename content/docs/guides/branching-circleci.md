@@ -13,7 +13,7 @@ summary: >-
   zero between runs. The orb is community-maintained, not officially supported by
   Neon.
 enableTableOfContents: true
-updatedOn: '2026-08-04T05:05:30.414Z'
+updatedOn: '2026-08-11T18:35:41.335Z'
 tag: community
 tagTheme: gray
 ---
@@ -90,7 +90,7 @@ The job accepts the following parameters:
 
 - `api_key`: (Optional) Environment variable name containing the Neon API key. Defaults to `NEON_API_KEY`. Ensure this variable is set in your CircleCI project settings.
 - `project_id`: (Optional) Environment variable name containing the Neon project ID. Defaults to `NEON_PROJECT_ID`. Ensure this variable is set in your CircleCI project settings.
-- `parent_branch`: (Optional) The branch to fork from. Defaults to your project's default branch (e.g., `production`).
+- `parent_branch`: (Optional) The branch to fork from. Defaults to your project's default branch (named `main` if the project was created with the CLI or API, or `production` if created in the Console).
 - `migrate_command`: The command to prepare the database (e.g., run migrations). This command runs after the branch is ready but before tests start. You can chain multiple commands here if needed (for example, installing dependencies and running migrations).
 - `test_command`: The command to execute your tests. This command runs after the `migrate_command` completes. It should be configured to run your test suite (e.g., unit tests, integration tests, or end-to-end tests with Playwright) against the database using the `DATABASE_URL` environment variable.
 - `role`: (Optional) The role to use for the connection. Defaults to `neondb_owner`.

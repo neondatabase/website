@@ -1,0 +1,4 @@
+interface:
+  display_name: 'Manage Case Studies'
+  short_description: 'Safely add, edit, and remove case studies'
+  default_prompt: 'Use $manage-case-studies to add, edit, or remove a case study safely.'

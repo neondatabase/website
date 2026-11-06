@@ -10,7 +10,7 @@ summary: >-
   the doc AI tools (Cursor and Claude slash commands) for consistency checks,
   redirects, and guided writing.
 enableTableOfContents: true
-updatedOn: '2026-07-31T15:49:10.111Z'
+updatedOn: '2026-09-17T16:33:54.884Z'
 ---
 
 This page covers everything you need to contribute to the Neon documentation, whether you're fixing a typo or writing a full guide.
@@ -60,7 +60,7 @@ To use this feature, open the command palette (⌘ + ⇧ + V on Mac or Ctrl + Sh
 
 After you submit a contribution, the Neon documentation team reviews your changes, provides feedback, and merges the pull request when it's ready.
 
-Please reach out to us on our [Discord Server](https://discord.gg/92vNTzKDGp) if you have any questions or need further assistance.
+Please reach out to us on our [Discord Server](https://neon.com/discord) if you have any questions or need further assistance.
 
 ## Documentation file structure
 

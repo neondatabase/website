@@ -1,18 +1,20 @@
 ---
 title: 'Neon CLI command: config'
-subtitle: 'Manage a branch with a neon.ts policy: init, status, plan, and apply'
+subtitle: 'Manage a branch with a neon.ts policy: init, add, status, plan, and apply'
 summary: >-
   The Neon CLI `neon config` command manages a branch declaratively with a
   neon.ts policy file. Use `neon config init` to scaffold a starter neon.ts
-  and install the config packages, `neon config status` to show the branch's
+  and install the config packages, `neon config add` to declare a service,
+  function, or bucket in an existing neon.ts, `neon config status` to show the branch's
   live Neon state (`neon status --current-branch` prints the pinned branch
   offline for shell prompts), `neon config plan` for a dry run of what an
   apply would change, and `neon config apply` (or its top-level alias
   `neon deploy`) to apply the policy to the branch. Supports --config to
   point at a neon.ts file, --env to load environment variables before
-  evaluating it, and --allow-protected and --update-existing confirmation flags
-  for non-interactive use.
+  evaluating it, and --allow-protected, --update-existing, or -y to answer
+  the apply confirmation prompts in non-interactive use.
 enableTableOfContents: true
+updatedOn: '2026-10-31T11:32:37.000Z'
 ---
 
 The `config` command manages a branch declaratively with a `neon.ts` policy file: scaffold a starter config, inspect the branch's live state, preview what an apply would change, and apply the policy. For the `neon.ts` file format, see the [neon.ts reference](/docs/reference/neon-ts).
@@ -50,7 +52,7 @@ export default defineConfig({
 
 If a `neon.ts`, `neon.mts`, `neon.js`, or `neon.mjs` file already exists, `config init` is idempotent: it leaves that file untouched instead of overwriting hand-written policy.
 
-`config init` runs entirely locally and does not call the Neon API. It detects your package manager (npm, pnpm, yarn, or bun) from how the command was invoked. Pass `--no-install` to skip installation and just print the command to run.
+By default, `config init` runs locally and does not call the Neon API. With `--from-branch`, it reads the branch's live state through the Neon API, so it needs your Neon credentials and a project. It picks your package manager (npm, pnpm, yarn, or bun) from the project's lockfile, or from how the command was invoked if there's no lockfile. Before installing, it makes sure `node_modules/` is listed in your `.gitignore`, appending it if it's missing. Pass `--no-install` to skip installation and just print the command to run.
 
 <CliUsage command="config init" />
 
@@ -59,6 +61,10 @@ If a `neon.ts`, `neon.mts`, `neon.js`, or `neon.mjs` file already exists, `confi
 ```bash
 neon config init
 ```
+
+Pass `--services` to declare services in the file it scaffolds, for example `neon config init --services auth,functions,realtime`. This applies only when creating a new `neon.ts`; to add services to a file that already exists, use [`config add`](#add).
+
+In a linked project, declaring the Data API makes `config init` check the branch's Data API and pick `dataApi: true` or the external form, [as `init` does](/docs/cli/init). If the check fails, it declares `dataApi: true` with `auth: true` and prints a warning.
 
 For non-interactive setup, run it with package installation disabled, then install the printed dependencies yourself (or add them to your lockfile in a separate step):
 
@@ -70,8 +76,111 @@ npm install @neon/config @neon/env
 Use `config init` when you want a trusted starter artifact and package list. Hand-write `neon.ts` instead when you need a different filename/module format or want to avoid modifying files in the current directory.
 
 <Admonition type="tip">
-After running an interactive [`neon link`](/docs/cli/link), the CLI offers to run `config init` as its final step, unless the project already has a `neon.ts` file.
+After running an interactive [`neon link`](/docs/cli/link), the CLI prompts you to run `config init` as its final step, unless the project already has a `neon.ts` file.
 </Admonition>
+
+## neon config add (#add)
+
+Declares a service, function, or bucket in your `neon.ts`, creating the file if there isn't one. Where [`config init`](#init) scaffolds a starter policy and leaves an existing file alone, `config add` edits an existing policy for you, including creating and registering a handler for a function. To declare services while first scaffolding the file, use [`config init --services`](#init) instead.
+
+<CliUsage command="config add" />
+
+<CliSubcommands command="config add" anchorParts="add" />
+
+`config add` runs entirely locally: it edits files, and never authenticates or resolves a project. Provisioning stays a separate [`neon config apply`](#apply) step.
+
+It looks for your config in the project directory: the directory holding the nearest `.neon` file (found by searching up from the current directory), or the current directory when there's no `.neon`. A `neon.ts` in a parent directory no longer applies. When it finds none, it creates `neon.ts` there and installs the `@neon/config` and `@neon/env` packages; pass `--no-install` to print the install command instead. Editing an existing file never installs packages. Pass `--config <path>` to target a specific file; a path that doesn't exist is an error.
+
+It edits the file in place, keeping your comments and formatting. It refuses edits it can't make safely, such as a graduated service still declared under the `preview` block, where it's a deprecated alias, and prints the lines to add by hand instead. Re-adding an already-enabled service exits `0` with "nothing to change"; a duplicate function slug or bucket name exits `1`; a bare `neon config add` exits `1` and lists what you can add.
+
+### neon config add auth (#add-auth)
+
+Enables Managed Better Auth by setting `auth: true`.
+
+<CliUsage command="config add auth" />
+
+<CliOptions command="config add auth" />
+
+```bash
+neon config add auth
+```
+
+### neon config add data-api (#add-data-api)
+
+Enables the Data API by setting `dataApi: true`, and enables Managed Better Auth, which the default provider requires (it flips `auth: false` to `true`). An existing external auth provider is left unchanged.
+
+<CliUsage command="config add data-api" />
+
+<CliOptions command="config add data-api" />
+
+```bash
+neon config add data-api
+```
+
+### neon config add ai-gateway (#add-ai-gateway)
+
+Enables the AI Gateway by setting `aiGateway: true`.
+
+<CliUsage command="config add ai-gateway" />
+
+<CliOptions command="config add ai-gateway" />
+
+```bash
+neon config add ai-gateway
+```
+
+### neon config add realtime (#add-realtime)
+
+Enables [Neon Realtime](/docs/realtime/overview) by setting `preview.realtime: true`. Pass `--allowed-origin` (repeatable) to set the browser origins allowed to connect instead, which writes `preview.realtime: { allowedOrigins: [...] }`. Each origin must be `*` or an `http` or `https` origin with no path, query, or fragment, and the command checks them before editing the file. See [`neon realtime enable`](/docs/cli/realtime#enable) for the full rules.
+
+<CliUsage command="config add realtime" />
+
+<CliOptions command="config add realtime" />
+
+With an existing `neon.ts`, setting an allowed origin updates it in place:
+
+```bash
+neon config add realtime --allowed-origin https://app.example.com
+```
+
+```text
+Updated neon.ts: set preview.realtime to { allowedOrigins: ["https://app.example.com"] }.
+Next: `neon config plan` to preview, `neon config apply` to provision.
+```
+
+### neon config add function (#add-function)
+
+Declares a [Neon Function](/docs/cli/functions) and creates its handler file. The handler defaults to `functions/<slug>.ts` (`.js` for a JavaScript config). A slug is 1 to 20 lowercase letters and digits, with no hyphens. Pass `--name` to set a display name (it defaults to the slug), or `--source` to register an existing handler relative to `neon.ts` without overwriting it. To start from a [Function Registry template](/functions/templates) instead of the starter handler, use [`neon functions new`](/docs/cli/functions#new).
+
+<CliUsage command="config add function" />
+
+<CliOptions command="config add function" />
+
+Adding a function to a directory with no `neon.ts` creates both the config and the handler:
+
+```bash
+neon config add function sendemail
+```
+
+```text
+Created functions/sendemail.ts.
+Created neon.ts: added functions.sendemail.
+Created package.json.
+Installing @neon/config, @neon/env with npm…
+Next: `neon dev` to run it locally, `neon config apply` to deploy.
+```
+
+### neon config add bucket (#add-bucket)
+
+Declares a [Neon Object Storage](/docs/cli/buckets) bucket. Pass `--access public_read` to allow anonymous reads; the default is `private`.
+
+<CliUsage command="config add bucket" />
+
+<CliOptions command="config add bucket" />
+
+```bash
+neon config add bucket assets --access public_read
+```
 
 ## neon config status (#status)
 
@@ -152,8 +261,10 @@ Applies a `neon.ts` policy to the branch.
 
 <CliOptions command="config apply" />
 
-For non-interactive use (scripts, CI, agents), pass `--update-existing` and `--allow-protected` to auto-confirm the corresponding prompts.
+In a terminal, `apply` asks before it overrides branch settings that differ from `neon.ts` or applies to a branch marked protected on Neon. Declining applies nothing.
+
+Without a terminal, there's no prompt. This covers CI, runs with no TTY, and `-o json` or `-o yaml` output. In those cases, `apply` stops before changing anything and names the flag to re-run with. For scripts, CI, and agents, pass `--update-existing` to allow the overrides, `--allow-protected` to allow a protected branch, or `-y` for both:
 
 ```bash
-neon config apply --branch feature/auth --update-existing --allow-protected
+neon config apply --branch feature/auth -y
 ```

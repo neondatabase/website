@@ -2,17 +2,19 @@
 title: Get started with Neon Functions
 subtitle: Deploy your first Neon Function and call it over HTTP.
 summary: >-
-  Deploy your first Neon Function with neon: initialize a project, define
-  the function in neon.ts, develop locally with neon dev, and deploy with
-  neon deploy. The function gets a public HTTPS URL with DATABASE_URL
-  injected from the branch's Postgres database.
+  Deploy your first Neon Function, a long-running serverless function that runs on your Neon
+  branch: initialize a project, define the function in neon.ts, develop locally
+  with neon dev, and deploy with neon deploy. The function gets a public HTTPS
+  URL with DATABASE_URL injected from the branch's Postgres database.
 enableTableOfContents: true
-updatedOn: '2026-08-03T21:34:20.270Z'
+updatedOn: '2026-11-05T01:12:32.486Z'
 ---
 
-<FeatureBetaProps feature_name="Neon Functions" />
+A function takes a request and returns a web response, running on long-lived Node.js compute next to your database. The request can come over HTTP, or from a [Function Trigger](/docs/compute/functions/triggers/overview) on a schedule or object upload.
 
-A function takes a request and returns a web response, running on long-lived Node.js compute next to your database.
+<Callout title="Prefer to start from a working example?">
+Browse the [function templates](/functions/templates) for ready-made APIs, MCP servers, AI agents, and bots, then add one to your project with `neon functions new`. See [Use function templates](/docs/compute/functions/templates). To scaffold a complete app instead, use [`neon bootstrap`](/docs/cli/bootstrap).
+</Callout>
 
 ## Hello world
 
@@ -63,15 +65,17 @@ That's a deployed function in three commands. The rest of this guide builds a mo
 
 ## Prerequisites
 
-- A Neon project in AWS US East (Ohio) (`aws-us-east-2`), the only region where Functions are available during beta.
+- A Neon project in AWS US East (Ohio) (`aws-us-east-2`), AWS US East (N. Virginia) (`aws-us-east-1`), AWS Europe (Frankfurt) (`aws-eu-central-1`), or AWS Asia Pacific (Singapore) (`aws-ap-southeast-1`). Support is expanding toward [all regions](/docs/introduction/regions).
 - The latest `neon`, installed and authenticated. Functions commands are new and change often, so upgrade before you start (`npm install -g neon@latest`).
 - Node.js 20 or later. Deployed functions run on Node.js 24, so use 24 locally for the closest match.
 
-`neon init --preview` is designed to be run by your AI coding assistant. It outputs structured instructions that guide the agent through setup. To install the Neon Platform (`neon`) and Neon Functions skills separately:
+To give your AI coding assistant context for Neon and Functions, install the [agent skills](/docs/ai/agent-skills) with the [Neon CLI](/docs/cli):
 
 ```bash
-npx skills add neondatabase/agent-skills -s neon -s neon-functions
+neon skills -s neon -s neon-functions
 ```
+
+Without the Neon CLI, run `npx skills add neondatabase/agent-skills -s neon -s neon-functions` instead.
 
 ## Set up your project
 
@@ -83,15 +87,15 @@ mkdir my-function && cd my-function
 
 Then link the directory to your Neon project. There are two ways:
 
-**With an AI coding assistant.** Ask it to run `neon init --preview`. The command returns structured JSON instructions for the full setup: MCP server and agent skills, optional template scaffolding, project linking, and env var pull. Sign-in opens a browser window, and the agent pauses while you complete the OAuth step.
+**With an AI coding assistant.** Ask your assistant to set up Neon for the project. Using the skills you installed, it links your project (creating one if you need it) with `neon link` and pulls your environment variables. Sign-in opens a browser window, so complete the OAuth step when prompted.
 
-**By hand.** Run `neon link` and select your project and branch when prompted (or pass `--project-id`). This writes a `.neon` file and pulls the branch's environment variables into a local `.env`.
+**By hand.** Run `neon link` and select your project and branch when prompted (or pass `--project-id`). This writes a `.neon` file and pulls the branch's environment variables into a local `.env` file (or `.env.local` if there's no `.env` yet).
 
 ```bash
 neon link
 ```
 
-To start from a working example instead, run `neon bootstrap`. It scaffolds a starter template and links it. Available templates: Hono API, AI SDK agent, Mastra agent, MCP server, Realtime chat (Next.js + WebSockets), and Realtime counter (TanStack Router + SSE), all on Neon Functions. This guide builds the function by hand.
+To start from a working example instead, run `neon bootstrap`. It scaffolds a starter template, installs dependencies, and links it. Templates include a REST API, GraphQL API, tRPC API, MCP server, realtime chat and counter, AI agents, and Discord, Telegram, and WhatsApp bots. Run `neon bootstrap --list-templates` for the full catalog. This guide builds the function by hand.
 
 ## Define your function
 
@@ -101,26 +105,25 @@ Create `neon.ts` at your project root. It declares your functions and is what `n
 import { defineConfig } from "@neon/config/v1";
 
 export default defineConfig({
-  // preview groups features still in beta: functions, AI Gateway, and object-storage buckets.
-  preview: {
-    functions: {
-      // The key is the function's slug:
-      // a permanent ID used in CLI commands and the URL.
-      hello: {
-        name: "My first function", // display label only
-        source: "./functions/hello.ts", // path to the handler file
-      },
+  functions: {
+    // The key is the function's slug:
+    // a permanent ID used in CLI commands and the URL.
+    hello: {
+      name: "My first function", // display label only
+      source: "./functions/hello.ts", // path to the handler file
     },
   },
 });
 ```
 
-The slug is permanent: it can't be renamed after the first deploy. See the [neon.ts reference](/docs/reference/neon-ts) for all options.
+The slug is permanent: it can't be renamed after the first deploy. It allows only 1 to 20 lowercase letters and digits, so `sendemail` works and `send-email` doesn't. See the [neon.ts reference](/docs/reference/neon-ts) for all options.
+
+As a shortcut, `neon config add function hello` creates this `neon.ts` and a starter `functions/hello.ts` handler for you. See [`neon config add`](/docs/cli/config#add). To start from a ready-made [function template](/functions/templates) instead, see [Use function templates](/docs/compute/functions/templates).
 
 Install dependencies:
 
 ```bash
-npm install @neon/config hono pg
+npm install @neon/config @neon/functions hono pg
 npm install --save-dev @types/pg
 ```
 
@@ -144,10 +147,12 @@ A Hono app exports the object shape, so `export default app` works directly. For
 
 ```ts filename="functions/hello.ts"
 import { Hono } from 'hono';
+import { attachDatabasePool } from '@neon/functions';
 import { Pool } from 'pg';
 
 // Create the pool once at module scope so it's reused across requests.
 const pool = new Pool({ connectionString: process.env.DATABASE_URL, max: 5 });
+attachDatabasePool(pool);
 const app = new Hono();
 
 app.get('/', async (c) => {
@@ -156,17 +161,14 @@ app.get('/', async (c) => {
 });
 
 export default app;
-
-// Optional: drain the pool on shutdown (the platform sends SIGINT).
-process.on('SIGINT', () => {
-  pool.end().then(() => process.exit(0));
-});
 ```
 
 <a id="connect-to-postgres"></a>
 
 <Admonition type="important" title="Use a connection pool, not the serverless driver">
 A function keeps running across requests, so connect to Postgres with a long-lived `pg` `Pool` created once at module scope. Don't use `@neondatabase/serverless` here: it's built for short-lived, edge-style invocations that open a connection per request, which wastes the persistent runtime a function gives you. Use the pooled `DATABASE_URL` for queries; use `DATABASE_URL_UNPOOLED` only where you need a dedicated connection (such as `LISTEN`/`NOTIFY`).
+
+Call `attachDatabasePool(pool)` once after creating the pool (requires `@neon/functions` 0.8.0 or later). When Postgres drops an idle client (scale-to-zero, pooler reclaim, a TCP reset), `pg` emits an `error` on the pool; with no listener attached, that becomes an uncaught exception and the isolate exits. `attachDatabasePool` swallows expected idle disconnects and logs anything unexpected. The pool has already discarded the dead client, so the next query opens a fresh connection. You don't need to drain the pool on shutdown: when the runtime evicts an isolate, Neon's pooler reclaims those connections for you.
 </Admonition>
 
 ## Develop locally
@@ -211,7 +213,7 @@ Once the deployment reaches `completed`, retrieve the invocation URL:
 neon functions get hello
 ```
 
-The `invocation_url` field contains the public URL for your function:
+The `URL` field contains the public URL for your function (`invocation_url` in `--output json`):
 
 ```
 https://<branch_id>-<slug>.compute.<cell>.us-east-2.aws.neon.tech/
@@ -230,5 +232,13 @@ The response is a JSON object with your branch's Postgres version:
 ```
 
 </Steps>
+
+## Next steps
+
+- [Use function templates](/docs/compute/functions/templates): add a ready-made function from the [template catalog](/functions/templates) instead of writing one by hand
+- [Function Triggers](/docs/compute/functions/triggers/overview): invoke a function on a cron schedule or an object upload instead of over HTTP
+- [Deploy and manage](/docs/compute/functions/deploy): the CLI and API for managing deployed functions
+- [Authentication](/docs/compute/functions/authentication): verify callers before a function runs
+- [Custom domains](/docs/compute/functions/custom-domains): serve a function from a domain you own
 
 <NeedHelp/>

@@ -9,6 +9,7 @@ summary: >-
 redirectFrom:
   - /docs/cli/profiles
 enableTableOfContents: true
+updatedOn: '2026-10-19T14:21:42.000Z'
 ---
 
 A profile is a pointer to a credentials file, so one machine can hold logins for several Neon accounts and pick between them per command.
@@ -26,16 +27,15 @@ neon me --profile work
 ```
 
 ```text filename="Output"
-┌────────┬──────────────────┬────────────┬────────────────┐
-│ Login  │ Email            │ Name       │ Projects Limit │
-├────────┼──────────────────┼────────────┼────────────────┤
-│ alex   │ alex@domain.com  │ Alex Lopez │ 0              │
-└────────┴──────────────────┴────────────┴────────────────┘
+Login           alex
+Email           alex@domain.com
+Name            Alex Lopez
+Authentication  OAuth (profile work)
 ```
 
 Naming a profile that doesn't exist is an error, not a silent fall back to `DEFAULT`.
 
-Credentials resolve from `--profile`, then `NEON_PROFILE`, then a profile named `DEFAULT`. Nothing persists between commands, so set `NEON_PROFILE` to avoid repeating the flag. `DEFAULT` is what a plain `neon auth` gives you, with or without profiles.
+Credentials resolve from `--profile`, then `NEON_PROFILE`, then a profile named `DEFAULT`. Nothing persists between commands, so set `NEON_PROFILE` to avoid repeating the flag. `DEFAULT` is what a plain `neon login` gives you, with or without profiles.
 
 Profiles live in `profiles.json` in the config directory, which is `~/.config/neon` by default (`XDG_CONFIG_HOME` moves it) and `--config-dir` overrides per command. That file maps each profile name to the credentials file that holds its token. The CLI manages it for you, so create and remove profiles with the commands below rather than editing it by hand.
 
@@ -61,7 +61,7 @@ Creates a profile. It holds either a browser sign-in or an API key, never both.
 
 Most of the time you create a profile one of two ways: a browser sign-in, or a freshly minted key.
 
-Sign in with the browser, the same as `neon auth --profile work`:
+Sign in with the browser, the same as `neon login --profile work`:
 
 ```bash
 neon profile create work
@@ -89,6 +89,8 @@ neon profile create work --api-key "$KEY"
 
 `create` ignores `NEON_API_KEY`, so exporting that variable doesn't supply the key here. Pass it explicitly with `--api-key`.
 
+By default the credential is saved to a `credentials.json` file. Pass `--keyring` to store it in your operating system's keyring instead. The choice is saved per profile. `neon profile list` shows `keyring` in the `Credentials` column for a keyring profile, and `-o json` includes a `storage` field.
+
 ## neon profile list (#list)
 
 Lists each profile, the account it holds, and where its credentials live. `Active` marks the profile this invocation would use.
@@ -103,18 +105,16 @@ neon profile list
 
 ```text filename="Output"
 Profiles
-┌────────┬─────────┬──────────────────────────────────────┬─────────┬─────────┬──────┬──────────────────────────────────────┐
-│ Active │ Name    │ Account                              │ Auth    │ Scope   │ File │ Credentials                          │
-├────────┼─────────┼──────────────────────────────────────┼─────────┼─────────┼──────┼──────────────────────────────────────┤
-│ *      │ DEFAULT │ 3f8a1c2e-5b7d-4e9a-8c1f-2d6b9e0a4c53 │ oauth   │ -       │ ok   │ ~/.config/neon/credentials.json      │
-├────────┼─────────┼──────────────────────────────────────┼─────────┼─────────┼──────┼──────────────────────────────────────┤
-│        │ work    │ alex@domain.com                      │ oauth   │ -       │ ok   │ ~/.config/neon/credentials.work.json │
-├────────┼─────────┼──────────────────────────────────────┼─────────┼─────────┼──────┼──────────────────────────────────────┤
-│        │ ci      │ alex@domain.com                      │ api key │ account │ ok   │ ~/.config/neon/credentials.ci.json   │
-└────────┴─────────┴──────────────────────────────────────┴─────────┴─────────┴──────┴──────────────────────────────────────┘
+Active  Name     Account                               Auth     Credentials               Scope
+*       DEFAULT  3f8a1c2e-5b7d-4e9a-8c1f-2d6b9e0a4c53  oauth    credentials.json          account
+        work     alex@example.com                      oauth    credentials.work.json     account
+        ci       alex@example.com                      api key  credentials.ci.json       account
+        org      org-example-12345678                  api key  credentials.org.json      org org-example-12345678
+        project  org-example-12345678                  api key  credentials.project.json  project cool-darkness-12345678
+        laptop   alex@example.com                      oauth    keyring                   account
 ```
 
-`Account` is the recorded email label, or the user ID when there's no label, as with a `DEFAULT` profile from a plain `neon auth`. `Auth` shows how the profile authenticates (`oauth` for a browser sign-in, `api key` for a stored key), and `Scope` shows what a minted key is limited to: `account`, `org <org-id>`, or `project <project-id>`. `File` is `ok` when the credentials file is present and readable, and `missing` when it isn't.
+`Account` is the recorded email label, the user ID when there's no label (as with a `DEFAULT` profile from a plain `neon login`), or the organization identifier for an organization- or project-scoped key. `Auth` shows how the profile authenticates (`oauth` for a browser sign-in, `api key` for a stored key). `Credentials` gives the credentials file's name, or `keyring` when the credential is kept in the OS keyring. `Scope` shows what the credential can reach: `account` for a browser sign-in or an account key, or `org <org-id>` or `project <project-id>` for a key limited to that organization or project. Pass `-o json` to also get two more fields: `file`, which reports whether the credential could be read (`ok`, or else `missing`, `invalid`, or `unreadable`), and `storage`, which is `file` or `keyring`.
 
 ## neon profile rotate-key (#rotate-key)
 
@@ -131,7 +131,7 @@ neon profile rotate-key ci
 This works for account-scoped keys, where the profile's own credential can mint the replacement. An organization- or project-scoped key can't rotate itself, since only a personal credential can mint those keys. Re-mint it with a browser sign-in instead, matching the original scope:
 
 ```bash
-neon profile create ci --mint --org-id org-example-12345678 --force
+neon profile create ci --mint --org-id org-example-12345678
 ```
 
 The `rotate-key` error names the exact command to run for the profile's scope.
@@ -167,5 +167,5 @@ The prompt defaults to no, so pressing Enter leaves the profile in place.
 To switch accounts rather than discard one, authenticate again under the same name:
 
 ```bash
-neon auth --profile work
+neon login --profile work
 ```

@@ -1,15 +1,15 @@
 ---
-title: Geospatial Search in Postgres
+title: Geospatial search in Postgres
 subtitle: A step-by-step guide describing how to use PostGIS for geospatial search in Postgres
 author: vkarpov15
 enableTableOfContents: true
 createdAt: '2025-02-16T13:24:36.612Z'
-updatedOn: '2025-02-18T15:01:39.000Z'
+updatedOn: '2026-09-24T17:56:34.189Z'
 ---
 
 Geospatial queries enable you to perform searches on geographical data stored in Postgres.
 With the [PostGIS extension](https://postgis.net/), you can query for which rows are within 10 kilometers of a given point or which rows are within a given geospatial rectangle.
-This makes Postgres a great option for applications involving maps, location-based services, and geographic analysis.
+That makes Postgres a good fit for maps, location-based services, and geographic analysis.
 
 ## Steps
 
@@ -25,7 +25,7 @@ This makes Postgres a great option for applications involving maps, location-bas
 
 Before using geospatial queries, you need to install the [PostGIS extension](https://postgis.net/).
 PostGIS adds geospatial data types like `GEOMETRY` and `GEOGRAPHY`, geospatial query functions like `ST_DWithin` and `ST_MakeEnvelope`, and GiST indexes.
-In Neon, PostGIS is already installed, you just need to enable it using the following command.
+On Neon, PostGIS is available but not enabled by default. Enable it with the following command.
 
 ```sql
 CREATE EXTENSION IF NOT EXISTS postgis;
@@ -97,7 +97,7 @@ WHERE ST_DWithin(
 ### Sort locations by distance using `ST_Distance`
 
 To sort locations based on their proximity to a given point, use `ST_Distance`.
-The following query sorts locations by their distance from Miami, New York is closer.
+The following query sorts locations by their distance from Miami. New York is closer.
 
 ```sql
 SELECT name, ST_Distance(geom, ST_GeomFromText('POINT(-80.1918 25.7617)', 4326)) AS distance
@@ -105,7 +105,7 @@ FROM locations
 ORDER BY distance ASC;
 ```
 
-The following query sorts locations by their distance from Seattle, San Francisco is closer.
+The following query sorts locations by their distance from Seattle. San Francisco is closer.
 
 ```sql
 SELECT name, ST_Distance(geom, ST_GeomFromText('POINT(-122.3321 47.6062)', 4326)) AS distance
@@ -115,9 +115,9 @@ ORDER BY distance ASC;
 
 ### Find locations within a polygon using `ST_MakeEnvelope`
 
-PostGIS provides support for more sophisticated queries than simple distances.
-PostGIS has functions to check if lines and polygons intersect, contain, or touch each other.
-For example, the following query finds all locations within a rectangle longitude -124 to -119 and latitude 36 to 39.
+PostGIS supports more than simple distance queries.
+It has functions to check if lines and polygons intersect, contain, or touch each other.
+For example, the following query finds all locations within a rectangle spanning longitude -124 to -119 and latitude 36 to 39.
 This rectangle roughly covers Northern California, including San Francisco.
 
 ```sql
@@ -132,7 +132,7 @@ Below is what the `ST_MakeEnvelope` rectangle looks like on a map.
 ### Index using GiST indexes
 
 For large datasets, geospatial queries can be slow without an index.
-PostGIS supports the GiST index for efficient geospatial lookups.
+PostGIS supports GiST indexes for geospatial lookups.
 You can create a GiST index on locations' `geom` property using the following command.
 
 ```sql

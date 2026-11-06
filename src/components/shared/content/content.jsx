@@ -23,9 +23,11 @@ import CodeTabs from 'components/pages/doc/code-tabs';
 import CommunityBanner from 'components/pages/doc/community-banner';
 import { CompactCards } from 'components/pages/doc/compact-cards';
 import DefinitionList from 'components/pages/doc/definition-list';
+import DemoCards, { DemoCard } from 'components/pages/doc/demo-cards';
 import DetailIconCards from 'components/pages/doc/detail-icon-cards';
 import DocsLink from 'components/pages/doc/docs-link';
 import DocsList from 'components/pages/doc/docs-list';
+import Faq, { FaqItem } from 'components/pages/doc/faq';
 import IncludeBlock from 'components/pages/doc/include-block';
 import InfoBlock from 'components/pages/doc/info-block';
 import LinkPreview from 'components/pages/doc/link-preview';
@@ -51,20 +53,24 @@ import AutoscalingViz from 'components/shared/autoscaling-viz';
 import Button from 'components/shared/button';
 import CodeBlock from 'components/shared/code-block';
 import ComputeCalculator from 'components/shared/compute-calculator';
-import CopyPrompt from 'components/shared/copy-prompt';
+import CopyPrompt, { AgentPrompt } from 'components/shared/copy-prompt';
 // import CtaBlock from 'components/shared/cta-block';
 import DocCta from 'components/shared/doc-cta';
 import ExternalCode from 'components/shared/external-code';
 import GradientBorder from 'components/shared/gradient-border';
+import ImageWithCommand from 'components/shared/image-with-command';
 import ImageZoom from 'components/shared/image-zoom';
+import InlineSvg from 'components/shared/inline-svg';
 import LatencyCalculator from 'components/shared/latency-calculator';
 import MegaLink from 'components/shared/mega-link';
 import Mermaid from 'components/shared/mermaid';
 import ProgramForm from 'components/shared/program-form';
 import RequestForm from 'components/shared/request-form';
 import SqlToRestConverter from 'components/shared/sql-to-rest-converter';
+import StatBlock from 'components/shared/stat-block';
 import SubprocessorsForm from 'components/shared/subprocessors-form';
 import getCodeProps from 'lib/rehype-code-props';
+import openDetails from 'lib/rehype-open-details';
 import { cn } from 'utils/cn';
 
 import sharedMdxComponents from '../../../../content/docs/shared-content';
@@ -77,6 +83,8 @@ const sharedComponents = Object.keys(sharedMdxComponents).reduce((acc, key) => {
   acc[key] = (props) => IncludeBlock({ url: sharedMdxComponents[key], ...props });
   return acc;
 }, {});
+
+const KNOWN_IMAGE_FLAGS = new Set(['no-border', 'square', 'priority']);
 
 const getHeadingComponent = (heading, withoutAnchorHeading) => {
   if (withoutAnchorHeading) {
@@ -120,25 +128,33 @@ const getComponents = (withoutAnchorHeading, isReleaseNote, isPostgres, isTempla
     const unoptimizedPreserveAlpha =
       typeof src === 'string' && /^\/docs\/.+\.(png|gif)$/i.test(src);
 
+    const flags = typeof title === 'string' ? title.trim().split(/\s+/).filter(Boolean) : [];
+    const hasFlag = (flag) => flags.includes(flag);
+    const isNoBorder = hasFlag('no-border');
+    const isSquare = hasFlag('square');
+
+    const isPriority = hasFlag('priority');
+    const titleAttr = flags.every((flag) => KNOWN_IMAGE_FLAGS.has(flag)) ? undefined : title;
+    const templateRounding = isTemplate && !isSquare && 'rounded-lg';
+
     // No zoom on PostgreSQLTutorial Images
     if (!isPostgres) {
       return (
         <ImageZoom src={src}>
           <Image
-            className={cn(
-              className,
-              { 'no-border': title === 'no-border' },
-              isTemplate && 'rounded-lg'
-            )}
+            className={cn(className, { 'no-border': isNoBorder }, templateRounding)}
             src={src}
             width={704}
             height={447}
             style={{ width: '100%', height: '100%' }}
-            title={title !== 'no-border' ? title : undefined}
+            title={titleAttr}
             unoptimized={unoptimizedPreserveAlpha}
+            priority={isPriority}
             {...rest}
           />
-          {isTemplate && <GradientBorder className="rounded-lg" withBlend />}
+          {isTemplate && (
+            <GradientBorder className={templateRounding || 'rounded-none'} withBlend />
+          )}
         </ImageZoom>
       );
     }
@@ -149,8 +165,7 @@ const getComponents = (withoutAnchorHeading, isReleaseNote, isPostgres, isTempla
         className={cn(
           className,
           {
-            'no-border':
-              title === 'no-border' || src.includes('alignleft') || src.includes('alignright'),
+            'no-border': isNoBorder || src.includes('alignleft') || src.includes('alignright'),
           },
           { 'float-right clear-left p-4 grayscale filter': src.includes('alignright') },
           { 'float-left clear-right p-4 grayscale filter': src.includes('alignleft') }
@@ -159,17 +174,17 @@ const getComponents = (withoutAnchorHeading, isReleaseNote, isPostgres, isTempla
         width={100}
         height={100}
         style={{ width: 'auto', height: 'auto', maxWidth: '128px', maxHeight: '128px' }}
-        title={title !== 'no-border' ? title : undefined}
+        title={titleAttr}
         {...rest}
       />
     ) : (
       <Image
-        className={cn(className, { 'no-border': title === 'no-border' })}
+        className={cn(className, { 'no-border': isNoBorder })}
         src={src}
         width={200}
         height={100}
         style={{ width: 'auto', height: 'auto' }}
-        title={title !== 'no-border' ? title : undefined}
+        title={titleAttr}
         {...rest}
       />
     );
@@ -188,6 +203,10 @@ const getComponents = (withoutAnchorHeading, isReleaseNote, isPostgres, isTempla
   Callout,
   CodeTabs,
   DetailIconCards,
+  DemoCards,
+  DemoCard,
+  Faq,
+  FaqItem,
   TechCards,
   CompactCards,
   Tag,
@@ -228,10 +247,14 @@ const getComponents = (withoutAnchorHeading, isReleaseNote, isPostgres, isTempla
   CliSubcommands,
   CliGlobalOptions,
   ExternalCode: (props) => <ExternalCode {...props} />,
+  InlineSvg,
   MegaLink,
   CopyPrompt,
+  AgentPrompt,
+  ImageWithCommand,
   McpSetupConfigurator,
   SqlToRestConverter,
+  StatBlock,
   AiGatewayModelIndex,
   ...sharedComponents,
 });
@@ -244,6 +267,7 @@ const Content = ({
   isReleaseNote = false,
   isPostgres = false,
   isTemplate = false,
+  expandDetails = false,
 }) => {
   const rootClassName = cn(
     'prose-doc post-content prose dark:prose-invert xs:prose-code:break-words',
@@ -265,7 +289,7 @@ const Content = ({
               // Adds support for GitHub Flavored Markdown
               remarkGfm,
             ],
-            rehypePlugins: [getCodeProps],
+            rehypePlugins: expandDetails ? [getCodeProps, openDetails] : [getCodeProps],
           },
           blockJS: false,
           blockDangerousJS: true,
@@ -282,6 +306,7 @@ Content.propTypes = {
   isReleaseNote: PropTypes.bool,
   isPostgres: PropTypes.bool,
   isTemplate: PropTypes.bool,
+  expandDetails: PropTypes.bool,
 };
 
 export default Content;

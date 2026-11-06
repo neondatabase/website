@@ -19,6 +19,7 @@
  * - Steps -> extracts children
  * - DetailIconCards -> bullet list with links
  * - CompactCards -> bullet list with links or prompt links
+ * - DemoCards -> bullet list of demos with live demo and GitHub links
  * - <a> with href/description -> markdown link
  * - <details>/<summary> -> preserved as HTML
  * - CTA -> blockquote with title, description, command, link
@@ -44,9 +45,10 @@ const jsYaml = require('js-yaml');
 // web page and this llms mirror can never disagree on the generated tables.
 const cliDocs = require('../../scripts/docs-checks/neonctl/generate-docs');
 const cliSchema = require('../../scripts/docs-checks/neonctl/schema.json');
-const aiGatewayCapabilities = require('../app/models/capabilities.json');
-const aiGatewayModelsData = require('../app/models.json/data.json');
-const aiGatewayModelRows = require('../components/pages/doc/ai-gateway-model-index/model-rows');
+const {
+  renderAiGatewayModelIndex,
+} = require('../components/pages/doc/ai-gateway-model-index/model-markdown');
+const { agentHeaderLines } = require('../constants/agent-directives');
 const { isUnusedOrSharedContent } = require('../constants/content');
 
 // AI Gateway model catalog: <AiGatewayModelIndex/> renders an interactive table
@@ -55,74 +57,6 @@ const { isUnusedOrSharedContent } = require('../constants/content');
 // and measured capabilities as the web page. Code examples vary by model, so
 // the index links to the generated model-detail Markdown instead of advertising
 // a generic snippet that may not work for every row.
-
-const MODEL_TABLE_HEADER =
-  '| Model | Model ID | Inputs | Context | Reasoning | Input /M | Output /M | Endpoints | License |\n' +
-  '| --- | --- | --- | --- | --- | --- | --- | --- | --- |';
-
-function renderModelTableRows(rows) {
-  return rows
-    .map((row) =>
-      [
-        `[${row.name}](${BASE_URL}/docs/ai-gateway/models/${encodeURIComponent(row.id)}.md)`,
-        `\`${row.id}\``,
-        row.inputsLabel,
-        row.contextLabel,
-        row.reasoning ? 'Yes' : '—',
-        row.costInputLabel,
-        row.costOutputLabel,
-        row.endpoints.join(' · ') || '—',
-        row.license,
-      ].join(' | ')
-    )
-    .map((line) => `| ${line} |`)
-    .join('\n');
-}
-
-// Per-provider tables under a shared heading depth (e.g. '####').
-function renderProviderTables(rows, headingDepth) {
-  return aiGatewayModelRows
-    .groupByProvider(rows)
-    .map(
-      (group) =>
-        `${headingDepth} ${group.label}\n\n${MODEL_TABLE_HEADER}\n${renderModelTableRows(group.rows)}`
-    )
-    .join('\n\n');
-}
-
-function renderAiGatewayModelIndex() {
-  const rows = aiGatewayModelRows.buildRows(aiGatewayModelsData.neon, aiGatewayCapabilities);
-  const imageRows = rows.filter((row) => row.isImageCapable);
-  const unavailableRows = rows.filter((row) => !row.hasMeasuredCapabilities);
-
-  const sections = [];
-
-  // Text tab - every catalog model.
-  sections.push('### Text models');
-  sections.push(renderProviderTables(rows, '####'));
-  sections.push(
-    'Select a linked model for code examples matched to its measured AI Gateway capabilities.'
-  );
-  if (unavailableRows.length > 0) {
-    sections.push(
-      `Verified code examples are not currently available for: ${unavailableRows
-        .map((row) => `\`${row.id}\``)
-        .join(', ')}.`
-    );
-  }
-
-  // Image tab - image-generation-capable models only.
-  if (imageRows.length > 0) {
-    sections.push('### Image models');
-    sections.push(
-      'These models support image generation through the Responses API (base URL `/openai/v1`):'
-    );
-    sections.push(renderProviderTables(imageRows, '####'));
-    sections.push('Select a linked model for image-generation examples matched to that model.');
-  }
-
-  return sections.join('\n\n');
-}
 
 const TOC_ONLY_PATTERN = /\s*\[toc-only\]\s*$/i;
 
@@ -176,11 +110,9 @@ const SHARED_CONTENT_COMPONENTS = {
   FeatureBeta: 'feature-beta',
   MCPTools: 'mcp-tools',
   LinkAPIKey: 'manage-api-keys',
-  LRNotice: 'lr-notice',
   PrivatePreview: 'private-preview',
   PrivatePreviewEnquire: 'private-preview-enquire',
   PublicPreview: 'public-preview',
-  LRBeta: 'lr-inbound-beta',
   MigrationAssistant: 'migration-assistant',
   NextSteps: 'next-steps',
   NewPricing: 'new-pricing',
@@ -189,6 +121,14 @@ const SHARED_CONTENT_COMPONENTS = {
   NextjsProxyNote: 'nextjs-proxy-note',
   AuthAISetup: 'auth-ai-setup',
   AuthAISetupTip: 'auth-ai-setup-tip',
+  NeonPluginContents: 'neon-plugin-contents',
+  RealtimeSdkBackend: 'realtime-sdk-backend',
+  RealtimeSdkClient: 'realtime-sdk-client',
+  RealtimeSdkReact: 'realtime-sdk-react',
+  RealtimeSdkTanstackDb: 'realtime-sdk-tanstack-db',
+  RealtimeSdkDrizzle: 'realtime-sdk-drizzle',
+  RealtimeSdkDrizzleClient: 'realtime-sdk-drizzle-client',
+  RealtimeSdkKysely: 'realtime-sdk-kysely',
 };
 
 /**
@@ -216,6 +156,7 @@ const IGNORED_COMPONENTS = [
   'ComputeCalculator', // Interactive widget
   'UseCaseContext', // Repetitive boilerplate
   'McpSetupConfigurator', // Interactive MCP setup widget
+  'AutoscalingViz', // Animated autoscaling visualization (figures are in the surrounding prose)
 ];
 
 // ESM modules loaded dynamically
@@ -385,6 +326,18 @@ function normalizeQuotes(text) {
       "'"
     )
     .replace(/[\u201C\u201D\u201E\u201F\u2033\u275D\u275E\uFF02]/g, '"');
+}
+
+/**
+ * Normalize non-breaking spaces to regular spaces
+ *
+ * Markdown parsing already decodes an authored &nbsp; to U+00A0, so matching the
+ * character alone covers prose. A literal &nbsp; only ever survives inside a code
+ * span or fence, where it is source the reader copies and must be left alone.
+ */
+function normalizeNonBreakingSpaces(text) {
+  if (!text) return text;
+  return text.replace(/\u00A0/g, ' ');
 }
 
 /**
@@ -651,6 +604,37 @@ const componentHandlers = {
   },
 
   /**
+   * StatBlock -> the figure inlined as one sentence
+   * <StatBlock value="59%">of companies saw a failure.</StatBlock>
+   * -> **59%** of companies saw a failure.
+   * The value lives in a prop, so without this the mirror would drop the number
+   * and leave the supporting line without its subject.
+   */
+  StatBlock(node) {
+    const value = getAttr(node, 'value');
+    const children = node.children || [];
+    if (!value) return children;
+
+    // Children arrive as a paragraph; splice the value into it so the sentence stays whole.
+    const [first, ...rest] = children;
+    const valueNode = { type: 'strong', children: [{ type: 'text', value }] };
+
+    if (first?.type === 'paragraph') {
+      return [
+        {
+          ...first,
+          children: [valueNode, { type: 'text', value: ' ' }, ...(first.children || [])],
+        },
+        ...rest,
+      ];
+    }
+
+    return [
+      { type: 'paragraph', children: [valueNode, { type: 'text', value: ' ' }, ...children] },
+    ];
+  },
+
+  /**
    * Admonition -> blockquote-style callout
    * <Admonition type="tip">content</Admonition>
    * -> **Tip:** content
@@ -658,10 +642,12 @@ const componentHandlers = {
   Admonition(node) {
     const type = getAttr(node, 'type') || 'note';
     const title = getAttr(node, 'title');
-    // Convert camelCase to Title Case (e.g., comingSoon -> Coming Soon)
+    // Convert camelCase to sentence case (e.g., comingSoon -> Coming soon),
+    // matching how the Admonition component renders the label.
     const typeLabel = type
       .replace(/([A-Z])/g, ' $1') // Add space before capitals
-      .replace(/^./, (s) => s.toUpperCase()) // Capitalize first letter
+      .toLowerCase()
+      .replace(/^./, (s) => s.toUpperCase()) // Capitalize first letter only
       .trim();
     const label = title ? `${typeLabel}: ${title}` : `${typeLabel}:`;
 
@@ -918,6 +904,46 @@ const componentHandlers = {
   },
 
   /**
+   * DemoCards -> bullet list of demos with description, stack and links
+   * <DemoCards><DemoCard title="1 Million Boxes" description="..." stack="Postgres, Realtime" demo="https://..." github="https://..." /></DemoCards>
+   */
+  DemoCards(node) {
+    const cards = findJsxElements(node, 'DemoCard');
+
+    if (cards.length === 0) {
+      return node.children?.length > 0 ? node.children : null;
+    }
+
+    const items = cards
+      .map((card) => {
+        const title = getAttr(card, 'title');
+        if (!title) return null;
+
+        const description = getAttr(card, 'description');
+        const stack = getAttr(card, 'stack');
+        const links = [
+          ['Live demo', getAttr(card, 'demo')],
+          ['GitHub', getAttr(card, 'github')],
+        ].filter(([, url]) => url);
+
+        const children = [{ type: 'strong', children: [{ type: 'text', value: title }] }];
+        if (description) children.push({ type: 'text', value: `: ${description}` });
+        if (stack) children.push({ type: 'text', value: ` Uses ${stack}.` });
+        links.forEach(([label, url], index) => {
+          children.push({ type: 'text', value: index === 0 ? ' ' : ' · ' });
+          children.push({ type: 'link', url, children: [{ type: 'text', value: label }] });
+        });
+
+        return { type: 'listItem', children: [{ type: 'paragraph', children }] };
+      })
+      .filter(Boolean);
+
+    return items.length > 0
+      ? { type: 'list', ordered: false, spread: false, children: items }
+      : null;
+  },
+
+  /**
    * InfoBlock -> container, just extract children
    */
   InfoBlock(node) {
@@ -931,6 +957,30 @@ const componentHandlers = {
    */
   DefinitionList(node) {
     return node.children || null;
+  },
+
+  /**
+   * Faq -> container for FaqItem entries, extract children
+   * <Faq><FaqItem question="...">answer</FaqItem></Faq>
+   */
+  Faq(node) {
+    return node.children || null;
+  },
+
+  /**
+   * FaqItem -> heading (question) + answer content
+   * <FaqItem question="What is a branch?">A branch is a copy-on-write clone.</FaqItem>
+   */
+  FaqItem(node) {
+    const question = getAttr(node, 'question') || '';
+    const result = [];
+    if (question) {
+      result.push({ type: 'heading', depth: 3, children: [{ type: 'text', value: question }] });
+    }
+    if (node.children?.length > 0) {
+      result.push(...node.children);
+    }
+    return result.length > 0 ? result : null;
   },
 
   /**
@@ -1328,6 +1378,20 @@ const componentHandlers = {
   },
 
   /**
+   * InlineSvg -> markdown image, using the title attribute as descriptive alt text
+   * <InlineSvg src="/docs/guides/diagram.svg" title="What the diagram shows" />
+   */
+  InlineSvg(node) {
+    const src = getAttr(node, 'src');
+    if (!src) return null;
+    const title = getAttr(node, 'title') || '';
+    return {
+      type: 'paragraph',
+      children: [{ type: 'image', url: src, alt: title, title: null }],
+    };
+  },
+
+  /**
    * MegaLink -> link card with tag and description
    * <MegaLink tag="Tagline" title="Description text" url="https://..." />
    */
@@ -1593,6 +1657,15 @@ const componentHandlers = {
   },
 
   /**
+   * AgentPrompt -> same as CopyPrompt. The component is just CopyPrompt with
+   * variant="agent" hardcoded, so the markdown export stays identical and in
+   * sync if CopyPrompt changes.
+   */
+  AgentPrompt(node) {
+    return componentHandlers.CopyPrompt.call(this, node);
+  },
+
+  /**
    * RequestForm -> emit actionable text so markdown stays in parity with HTML.
    * Descriptions are rewritten to remove "select below" phrasing (no form exists
    * in markdown) and replaced with links to support and Discord.
@@ -1631,7 +1704,7 @@ const componentHandlers = {
             { type: 'text', value: ' or let us know in the ' },
             {
               type: 'link',
-              url: 'https://discord.gg/92vNTzKDGp',
+              url: 'https://neon.com/discord',
               children: [{ type: 'text', value: 'Neon Discord' }],
             },
             { type: 'text', value: '.' },
@@ -1966,6 +2039,7 @@ function remarkCleanCodeBlocks() {
         node.meta =
           node.meta
             .replace(/\bshouldWrap\b/g, '')
+            .replace(/\bcollapse=\{[^}]*\}/g, '')
             .replace(/\s+/g, ' ')
             .trim() || null;
       }
@@ -1986,6 +2060,7 @@ function remarkCleanCodeBlocks() {
  * Convert relative URLs to absolute URLs
  */
 const BASE_URL = 'https://neon.com';
+const FEEDBACK_URL = 'https://feedback.neon.tech/';
 
 function toAbsoluteUrl(url, pageUrl) {
   if (!url) return url;
@@ -2026,6 +2101,16 @@ function remarkAbsoluteUrls(pageUrl) {
     // Convert images
     visit(tree, 'image', (node) => {
       node.url = toAbsoluteUrl(node.url, pageUrl);
+      // The markdown title slot doubles as a rendering-flag slot ('square',
+      // 'no-border', 'priority'). Those are layout hints for the site, not
+      // information for an agent reading the mirror, so drop them.
+      if (typeof node.title === 'string') {
+        const kept = node.title
+          .trim()
+          .split(/\s+/)
+          .filter((flag) => flag && !IMAGE_RENDER_FLAGS.has(flag));
+        node.title = kept.length ? kept.join(' ') : null;
+      }
     });
     // Strip custom anchor IDs from heading text: "### create (#create)" is
     // an authoring convention for short anchors; the "(#create)" suffix is
@@ -2038,6 +2123,10 @@ function remarkAbsoluteUrls(pageUrl) {
     });
   };
 }
+
+// Rendering flags authors put in an image's markdown title slot. Kept in sync
+// with KNOWN_IMAGE_FLAGS in src/components/shared/content/content.jsx.
+const IMAGE_RENDER_FLAGS = new Set(['no-border', 'square', 'priority']);
 
 /**
  * Calculate page URL from file path
@@ -2235,13 +2324,18 @@ async function processFile(inputPath, pageUrl, rootDir) {
   if (frontmatter.subtitle) {
     output += `${frontmatter.subtitle}\n\n`;
   }
+
+  const relativeInputPath = rootDir
+    ? path.relative(rootDir, inputPath).split(path.sep).join('/')
+    : inputPath.split(path.sep).join('/');
+  const isFaq = relativeInputPath.startsWith('content/faqs/');
+  if (frontmatter.updatedOn) {
+    output += `Last updated: ${new Date(frontmatter.updatedOn).toISOString().slice(0, 10)}\n\n`;
+  }
   output += `${markdown.trim()}\n`;
 
   // docs/changelog.md is a dynamic page in the app router. To provide useful
   // markdown for AI agents, append all dated changelog entries here.
-  const relativeInputPath = rootDir
-    ? path.relative(rootDir, inputPath).split(path.sep).join('/')
-    : inputPath.split(path.sep).join('/');
   if (relativeInputPath === 'content/docs/changelog.md') {
     output += `\n${await buildAggregatedChangelogMarkdown(rootDir)}`;
   }
@@ -2249,7 +2343,14 @@ async function processFile(inputPath, pageUrl, rootDir) {
   // Normalize smart quotes to straight quotes (matches Python behavior)
   output = normalizeQuotes(output);
 
-  return { content: output, title: frontmatter.title || null };
+  // Non-breaking spaces are web typography only, so agents get plain spaces
+  output = normalizeNonBreakingSpaces(output);
+
+  return {
+    content: output,
+    title: frontmatter.title || null,
+    summary: isFaq ? frontmatter.subtitle || null : null,
+  };
 }
 
 /**
@@ -2434,15 +2535,30 @@ function buildNavigationFooter(slug, navMap) {
 }
 
 /**
+ * Changelog markdown: the dated entries under content/changelog/ and the combined
+ * docs/changelog.md that aggregates them. Both skip the agent skills line and the feedback
+ * footer: agents reading release notes rarely need a Neon step, and the entries are
+ * auto-generated, so feedback isn't useful.
+ *
+ * @param {string} [relativePath] - Path relative to content/ (e.g. "changelog/2026-01-01.md")
+ * @returns {boolean}
+ */
+function isChangelogPath(relativePath) {
+  return Boolean(relativePath?.startsWith('changelog/') || relativePath === 'docs/changelog.md');
+}
+
+/**
  * Build the page header block prepended to every generated markdown file.
- * Always includes the documentation index line and feedback instruction (except changelogs).
+ * Always includes the documentation index line. Includes the agent skills line except on
+ * changelog markdown (dated entries and the combined docs/changelog.md).
  * Includes the location line only if the page is in the navigation map with breadcrumbs.
  *
  * @param {string|null} slug - Navigation slug, or null for pages outside nav
  * @param {Map|null} navMap - Navigation map from buildNavigationMap()
+ * @param {string} [relativePath] - Path relative to content/ (e.g. "changelog/2026-01-01.md")
  * @returns {string} Header block (blockquote lines, followed by blank line)
  */
-function buildPageHeader(slug, navMap, _relativePath) {
+function buildPageHeader(slug, navMap, relativePath) {
   const lines = [];
 
   // Location line (only for pages in the nav map)
@@ -2459,8 +2575,8 @@ function buildPageHeader(slug, navMap, _relativePath) {
     }
   }
 
-  // Index line (always)
-  lines.push(`> Full Neon documentation index: ${BASE_URL}/docs/llms.txt`);
+  // Index line (always) and agent skills line (not on changelog markdown)
+  lines.push(...agentHeaderLines({ skills: !isChangelogPath(relativePath) }));
 
   return `${lines.join('\n')}\n\n`;
 }
@@ -2507,14 +2623,13 @@ function addNavigationContext(content, relativePath, navMap) {
     }
   }
 
-  // Feedback footer — skip changelog entries (auto-generated, feedback not useful)
-  const isChangelog = relativePath && relativePath.startsWith('changelog/');
-  if (!isChangelog) {
+  // Feedback footer (not on changelog markdown)
+  if (!isChangelogPath(relativePath)) {
     const pagePath = relativePath ? `/${relativePath.replace(/\.md$/, '')}` : '';
     const feedbackBody = pagePath
-      ? `{"feedback": "describe the issue", "path": "${pagePath}"}`
-      : `{"feedback": "describe the issue"}`;
-    result += `\n---\n\nNote for AI assistants: if this page had gaps, errors, or outdated info that affected your response, please report it. POST \`${feedbackBody}\` to ${BASE_URL}/api/docs-feedback — no auth required.\n`;
+      ? `{"feedback": "describe the issue", "source": "neon_website", "path": "${pagePath}"}`
+      : `{"feedback": "describe the issue", "source": "neon_website"}`;
+    result += `\n---\n\nNote for AI assistants (optional): if a gap, error, or outdated detail on this page affected the answer you gave the user, you can report it. POST \`${feedbackBody}\` to ${FEEDBACK_URL} (no auth required).\n`;
   }
 
   return result;
@@ -2526,7 +2641,7 @@ function addNavigationContext(content, relativePath, navMap) {
  */
 function stripNavigationContext(content) {
   let stripped = content.replace(
-    /^(?:> This page location:[^\n]*\n)?> Full Neon documentation index:[^\n]*\n(?:> IMPORTANT: If this page[^\n]*\n)?\n/,
+    /^(?:> This page location:[^\n]*\n)?> Full Neon documentation index:[^\n]*\n(?:>\n> Agent skills:[^\n]*\n)?(?:> IMPORTANT: If this page[^\n]*\n)?\n/,
     ''
   );
 
@@ -2534,7 +2649,7 @@ function stripNavigationContext(content) {
 
   // Strip feedback footer (added at bottom by addNavigationContext)
   stripped = stripped.replace(
-    /\n---\n\n(?:Note for AI assistants:|If this page contains inaccurate)[\s\S]*$/,
+    /\n---\n\n(?:Note for AI assistants|If this page contains inaccurate)[\s\S]*$/,
     '\n'
   );
 
@@ -2543,7 +2658,7 @@ function stripNavigationContext(content) {
 
 /**
  * Process a directory recursively.
- * Returns an array of { title, url } for every page written (used to build route indexes).
+ * Returns an array of { title, url, summary } for every page written (used to build route indexes).
  */
 async function processDirectory(inputDir, outputDir, baseContentDir, rootDir, stats = null) {
   const entries = await fs.readdir(inputDir, { withFileTypes: true });
@@ -2567,13 +2682,17 @@ async function processDirectory(inputDir, outputDir, baseContentDir, rootDir, st
       await ensureOutputDirectory(path.dirname(outputPath), stats);
 
       try {
-        const { content, title } = await processFile(inputPath, pageUrl, rootDir);
+        const { content, title, summary } = await processFile(inputPath, pageUrl, rootDir);
         const withNav = addNavigationContext(content, relativePath, navigationMap);
         await fs.writeFile(outputPath, withNav);
         stats && (stats.filesWritten += 1);
         logFileProcessed(`✓ ${relativePath}`);
         if (pageUrl) {
-          pages.push({ title: title || path.basename(entry.name, '.md'), url: `${pageUrl}.md` });
+          pages.push({
+            title: title || path.basename(entry.name, '.md'),
+            url: `${pageUrl}.md`,
+            summary,
+          });
         }
       } catch (error) {
         console.error(`✗ ${relativePath}: ${error.message}`);
@@ -2615,13 +2734,15 @@ async function generateRouteIndex(route, pages, outputDir, stats = null) {
   const outputPath = path.join(outputDir, `${route}.md`);
 
   const lines = [
-    `> Full Neon documentation index: ${BASE_URL}/docs/llms.txt`,
+    ...agentHeaderLines(),
     '',
     `# Neon ${label}`,
     '',
     '## All pages',
     '',
-    ...pages.map(({ title, url }) => `- [${title}](${url})`),
+    ...pages.map(
+      ({ title, url, summary }) => `- [${title}](${url})${summary ? `: ${summary}` : ''}`
+    ),
     '',
   ];
 

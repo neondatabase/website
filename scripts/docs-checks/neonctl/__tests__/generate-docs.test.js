@@ -39,8 +39,10 @@ describe('generate-docs rendering', () => {
   });
 
   it('commands with no visible options render nothing', () => {
-    expect(renderOptions(resolveCommand(schema, ['auth']))).toBe('');
-    expect(renderOptionsForPath(schema, ['auth'])).toBe('');
+    // `projects` is a pure command group with no own options (its options live
+    // on the subcommands), so both renderers return empty for it.
+    expect(renderOptions(resolveCommand(schema, ['projects']))).toBe('');
+    expect(renderOptionsForPath(schema, ['projects'])).toBe('');
   });
 
   it('leaf tables include options inherited from parent commands', () => {

@@ -81,7 +81,7 @@ To build an experience where the user can travel across versions, agents need to
 
 ### Additional runtime components should follow the same model
 
-As platforms mature, they ask for more integrated building blocks with the same “invisible by default” behavior [. Agents being able to invisibly add auth to their apps](https://neon.com/blog/databutton-neon-integration) is a perfect example.
+As platforms mature, they ask for more integrated building blocks with the same “invisible by default” behavior [. Agents being able to invisibly add auth to their apps](https://neon.com/blog/riff-neon-integration) is a perfect example.
 
 ## Building Infrastructure That Matches How Agents Work
 

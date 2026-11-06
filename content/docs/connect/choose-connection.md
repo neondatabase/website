@@ -4,13 +4,13 @@ subtitle: Find the right driver and connection type for your deployment platform
 summary: >-
   Decision guide for mapping each deployment environment to the correct Neon
   driver and transport. TCP with pg or postgres.js suits long-lived servers.
-  @neondatabase/serverless over HTTP or WebSocket suits Cloudflare Workers,
-  Netlify, and Deno Deploy. The Data API suits browser apps. Use this page
+  @neondatabase/serverless over HTTP or WebSocket suits Cloudflare Workers and
+  Netlify. The Data API suits browser apps. Use this page
   when choosing between pooled and direct connections, or when debugging
   double-pooling or WebSocket lifecycle errors in serverless request handlers.
   ORM compatibility for Drizzle, Prisma, Kysely, and TypeORM is also covered.
 enableTableOfContents: true
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-09-14T11:31:53.481Z'
 ---
 
 Your connection method depends on where your code runs. Use the table below for a quick lookup, or read the scenario sections for detailed guidance.
@@ -26,8 +26,8 @@ Each scenario is [described in detail](#find-your-scenario) further down the pag
 | [Vercel (Fluid)](#deploying-to-vercel-or-cloudflare-with-platform-pooling)          | `pg` (node-postgres)       | [`@vercel/functions`](https://www.npmjs.com/package/@vercel/functions) | [Vercel guide](/docs/guides/vercel-connection-methods)  |
 | [Cloudflare + Hyperdrive](#deploying-to-vercel-or-cloudflare-with-platform-pooling) | `pg` (node-postgres)       | [Hyperdrive](https://developers.cloudflare.com/hyperdrive/)            | [Hyperdrive guide](/docs/guides/cloudflare-hyperdrive)  |
 | [Cloudflare Workers](#deploying-to-another-serverless-or-edge-platform)             | `@neondatabase/serverless` | N/A                                                                    | [Serverless driver](/docs/serverless/serverless-driver) |
-| [Netlify / Deno Deploy](#deploying-to-another-serverless-or-edge-platform)          | `@neondatabase/serverless` | N/A                                                                    | [Serverless driver](/docs/serverless/serverless-driver) |
-| [Client-side (browser)](#building-a-client-side-app-without-a-backend)              | `@neondatabase/neon-js`    | N/A                                                                    | [Data API](/docs/data-api/overview)                     |
+| [Netlify](#deploying-to-another-serverless-or-edge-platform)                        | `@neondatabase/serverless` | N/A                                                                    | [Serverless driver](/docs/serverless/serverless-driver) |
+| [Client-side (browser)](#building-a-client-side-app-without-a-backend)              | `@neon/neon-js`            | N/A                                                                    | [Data API](/docs/data-api/overview)                     |
 
 ## Find your scenario
 
@@ -45,6 +45,7 @@ Use a standard TCP-based Postgres driver with a [pooled connection](/docs/connec
 | Go                  | [Go](/docs/guides/go)                       |
 | Rust                | [Rust](/docs/guides/rust)                   |
 | Java                | [Java](/docs/guides/java)                   |
+| Kotlin              | [Kotlin](/docs/guides/kotlin)               |
 
 For the full list, see [Language quickstarts](/docs/get-started/languages).
 
@@ -64,17 +65,13 @@ These platforms provide their own connection pooling, which makes standard TCP t
 
 ### Deploying to another serverless or edge platform?
 
-For platforms like Netlify Functions, Deno Deploy, or Cloudflare Workers (without Hyperdrive), use the [Neon serverless driver](/docs/serverless/serverless-driver) (`@neondatabase/serverless`). It connects over HTTP or WebSockets instead of TCP, reducing connection setup latency.
+For platforms like Netlify Functions or Cloudflare Workers (without Hyperdrive), use the [Neon serverless driver](/docs/serverless/serverless-driver) (`@neondatabase/serverless`). It connects over HTTP or WebSockets instead of TCP, reducing connection setup latency.
 
 Choose your transport based on your query pattern: use **HTTP** for single queries and non-interactive transactions, or **WebSocket** for interactive transactions and `node-postgres` compatibility. See [HTTP vs. WebSocket](#http-vs-websocket-serverless-driver) for details.
 
 ### Building a client-side app without a backend?
 
-Use the [Neon Data API](/docs/data-api/overview) via [`@neondatabase/neon-js`](https://www.npmjs.com/package/@neondatabase/neon-js). Browsers cannot open TCP connections to Postgres, so the Data API provides a secure HTTP interface with Row-Level Security support.
-
-<Admonition type="note">
-The Data API is currently in beta.
-</Admonition>
+Use the [Neon Data API](/docs/data-api/overview) via [`@neon/neon-js`](https://www.npmjs.com/package/@neon/neon-js). Browsers cannot open TCP connections to Postgres, so the Data API provides a secure HTTP interface with Row-Level Security support.
 
 See the [JavaScript SDK reference](/docs/reference/javascript-sdk) for full documentation.
 

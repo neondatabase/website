@@ -187,7 +187,7 @@ Rather than bundling these features into a flat monthly fee, we continue to tie 
 
 We built Neon fully serverless because we believe in the power and convenience of this architecture. Our infrastructure is dynamic by design, and we thought our pricing had to reflect that.
 
-With this update, we’ve moved away from fixed quotas and pre-packaged plans toward something more flexible and developer-friendly. Instead of choosing a bundle of resources up front, you can now grow usage organically, with a lower barrier to entry (usage-based with no minimum vs $19).
+With this update, we’ve moved away from fixed quotas and pre-packaged plans toward something more flexible and developer-friendly. Instead of choosing a bundle of resources up front, you can now grow usage organically, with a lower barrier to entry and no monthly minimum.
 
 This makes Neon more accessible at every stage, from hacking on the Free tier to scaling production workloads, with as little friction as possible.
 
@@ -201,4 +201,4 @@ Our new pricing plans are available immediately, but we won’t disrupt your cur
 
 **For paid plan users:<br />** You will not be migrated automatically. You can keep your current plan and rate for now, or switch to one of the new usage-based plans manually from the Neon console at any time (available immediately).
 
-As always, feel free to join us [on Discord](https://discord.gg/92vNTzKDGp) if you have any questions or want to talk to the team directly.
+As always, feel free to join us [on Discord](https://neon.com/discord) if you have any questions or want to talk to the team directly.

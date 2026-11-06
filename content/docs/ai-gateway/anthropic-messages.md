@@ -6,10 +6,8 @@ summary: >-
   Gateway by changing only the base URL. Supports streaming, prompt caching,
   and extended thinking on Claude models.
 enableTableOfContents: true
-updatedOn: '2026-08-06T17:43:14.909Z'
+updatedOn: '2026-10-31T13:11:38.215Z'
 ---
-
-<FeatureBetaProps feature_name="Neon AI Gateway" />
 
 The Anthropic Messages endpoint exposes the [Anthropic Messages API](https://docs.anthropic.com/en/api/messages) through Neon AI Gateway. Use it when you need extended thinking or prompt caching, which require the native Anthropic SDK. For standard completions, the [chat completions](/docs/ai-gateway/chat-completions) endpoint works with all Anthropic models and doesn't require the Anthropic SDK.
 
@@ -34,7 +32,7 @@ NEON_AI_GATEWAY_BASE_URL=https://br-winter-pond-aptw82ef-api.ai.c-2.us-east-2.aw
 
 This endpoint accepts Anthropic models only. See the [AI Gateway catalog](/docs/ai-gateway/models) for the full list. Supported models:
 
-- `claude-opus-5`, `claude-sonnet-5`, `claude-fable-5`
+- `claude-opus-5-5`, `claude-opus-5`, `claude-sonnet-5`, `claude-fable-5`, `claude-fable-5-1`
 - `claude-opus-4-8`, `claude-opus-4-7`, `claude-opus-4-6`, `claude-opus-4-5`, `claude-opus-4-1`
 - `claude-sonnet-4-6`, `claude-sonnet-4-5`
 - `claude-haiku-4-5`
@@ -59,7 +57,9 @@ const message = await client.messages.create({
   messages: [{ role: 'user', content: 'What is Neon?' }],
 });
 
-console.log(message.content[0].text);
+for (const block of message.content) {
+  if (block.type === 'text') console.log(block.text);
+}
 ```
 
 ```python shouldWrap
@@ -151,16 +151,16 @@ print(message.usage)
 The gateway forwards the `thinking` parameter to Anthropic unchanged. Set `budget_tokens` to control how many tokens Claude can use for thinking. `max_tokens` must be greater than `budget_tokens`.
 
 <Admonition type="important">
-The Claude 5 models — `claude-opus-5`, `claude-sonnet-5`, and `claude-fable-5` — do not accept `thinking.type: "enabled"`. They return `400` with:
+`claude-opus-5-5`, `claude-opus-5`, `claude-sonnet-5`, `claude-fable-5`, `claude-fable-5-1`, `claude-opus-4-8`, and `claude-opus-4-7` do not accept `thinking.type: "enabled"`. They return `400` with:
 
 ```
 "thinking.type.enabled" is not supported for this model.
 Use "thinking.type.adaptive" and "output_config.effort" to control thinking.
 ```
 
-Use `thinking: { type: 'adaptive' }` with `output_config: { effort: 'low' | 'medium' | 'high' | 'xhigh' | 'max' }` instead. `claude-fable-5` also rejects `thinking.type: "disabled"` — it always thinks adaptively.
+Use `thinking: { type: 'adaptive' }` with `output_config: { effort: 'low' | 'medium' | 'high' | 'xhigh' | 'max' }` instead. `claude-opus-5-5`, `claude-fable-5`, and `claude-fable-5-1` also reject `thinking.type: "disabled"` — they always think adaptively.
 
-The Claude 4.x models accept the `enabled` + `budget_tokens` form shown below.
+`claude-opus-4-6`, `claude-opus-4-5`, `claude-opus-4-1`, `claude-sonnet-4-6`, `claude-sonnet-4-5`, and `claude-haiku-4-5` accept the `enabled` + `budget_tokens` form shown below.
 </Admonition>
 
 <CodeTabs labels={["TypeScript (Anthropic SDK)", "Python (Anthropic SDK)"]}>
@@ -208,7 +208,7 @@ for block in message.content:
 ## Forwarded headers
 
 The gateway forwards these request headers to the upstream provider:
-`Accept`, `Anthropic-Beta`, `Anthropic-Version`, `Content-Type`, `User-Agent`.
+`Accept`, `Anthropic-Beta`, `Anthropic-Version`, `Content-Type`, `OpenAI-Beta`, `User-Agent`.
 
 All other headers are stripped. The `Authorization` header is replaced with the workspace credential before forwarding. Your `NEON_AI_GATEWAY_TOKEN` is never sent to Anthropic directly.
 

@@ -8,6 +8,7 @@ export default {
     description:
       'The backend for apps and agents. Build with Lakebase Postgres, Auth, Functions, Storage, and an AI Gateway: instant, branchable, serverless.',
     pathname: '',
+    markdownPath: '/index.md',
   },
   about: {
     title: 'About Us - Neon',
@@ -21,6 +22,20 @@ export default {
       'Build AI agents faster with Neon: serverless Postgres, Auth, Functions, Storage, and an AI Gateway, built for operation by agents.',
     imagePath: '/images/social-previews/ai.jpg',
     pathname: LINKS.ai,
+  },
+  aiGateway: {
+    title: 'AI Gateway — One API for frontier models | Neon',
+    description:
+      'Call frontier and open-weight models from your Neon backend with one credential, one bill, and zero markup.',
+    pathname: LINKS.aiGateway,
+    markdownPath: `${LINKS.aiGateway}.md`,
+  },
+  lakebase: {
+    title: 'Lakebase Postgres — Postgres for apps and agents | Neon',
+    description:
+      'Build apps and agents on Lakebase Postgres: standard Postgres with instant branching, point-in-time restore, autoscaling, and scale to zero.',
+    pathname: LINKS.lakebase,
+    markdownPath: `${LINKS.lakebase}.md`,
   },
   aboutUs: {
     title: 'About Us — Neon',
@@ -41,8 +56,9 @@ export default {
     pathname: LINKS.guides,
   },
   faqs: {
-    title: 'FAQs — Neon',
-    description: 'Frequently asked questions about Neon.',
+    title: 'Neon FAQs: Postgres, Auth, Storage, Functions, and AI Gateway',
+    description:
+      'Answers to common questions about building on Neon: Lakebase Postgres, Managed Better Auth, Object Storage, Functions, and AI Gateway, plus pricing, plans, and how Neon compares.',
     pathname: LINKS.faqs,
   },
   caseStudies: {
@@ -51,11 +67,43 @@ export default {
     pathname: LINKS.caseStudies,
     imagePath: '/images/social-previews/case-studies.jpg',
   },
+  claimableNeon: {
+    title: 'Claimable Neon for agents — Neon',
+    description:
+      'Let agents provision a temporary Neon project (Lakebase Postgres, Data API, and Managed Better Auth) before a human creates a Neon account.',
+    pathname: LINKS.claimableNeon,
+  },
   cli: {
     title: 'Your Neon workflow lives in the terminal',
     description: 'The Neon CLI brings the Neon backend platform to your terminal.',
     pathname: LINKS.cli,
     imagePath: '/images/social-previews/cli.jpg',
+  },
+  functions: {
+    title: 'Neon Functions — Long-running serverless functions',
+    description:
+      'Run long-running Node.js functions next to Lakebase Postgres, with branch-aware data and Neon service credentials injected automatically.',
+    pathname: LINKS.functions,
+    markdownPath: `${LINKS.functions}.md`,
+  },
+  functionsTemplates: {
+    title: 'Function Registry templates — Neon',
+    description: 'Open-source functions you add to a Neon project with one command.',
+    pathname: LINKS.functionsTemplates,
+  },
+  auth: {
+    title: 'Neon Auth — Managed Better Auth that branches with your backend',
+    description:
+      'Managed Better Auth built into Neon. Keep users, sessions, and auth configuration in Postgres, and test real login flows in isolated database branches.',
+    pathname: LINKS.authPage,
+    markdownPath: '/md/auth-page.md',
+  },
+  objectStorage: {
+    title: 'Neon Object Storage — S3-compatible storage that branches',
+    description:
+      'S3-compatible object storage built into the Neon backend. Branch files alongside Postgres, use your existing S3 tools, and authenticate with a Neon credential.',
+    pathname: LINKS.objectStorage,
+    markdownPath: `${LINKS.objectStorage}.md`,
   },
   contactSales: {
     title: 'Contact Sales — Neon',
@@ -75,24 +123,11 @@ export default {
     pathname: LINKS.migration,
     imagePath: '/images/social-previews/migration.jpg',
   },
-  multiTB: {
-    title: 'Neon for Multi-TB Migrations - Neon',
-    description: 'Migrating a multi-TB workload? We can help.',
-    pathname: LINKS.multiTB,
-    imagePath: '/images/social-previews/multi-tb.jpg',
-  },
   useCases: {
     title: 'Use Cases — Neon',
     description:
       'Explore how teams use Neon to support branching databases, CI pipelines, preview environments, and production workloads.',
     pathname: LINKS.useCases,
-  },
-  serverlessApps: {
-    title: 'Postgres and backend platform for serverless apps — Neon',
-    description:
-      'Scale your app effortlessly on Neon’s serverless backend: Postgres, Auth, Functions, Storage, and an AI Gateway, with automatic scaling and usage-based pricing.',
-    pathname: `${LINKS.useCases}/serverless-apps`,
-    imagePath: '/images/social-previews/serverless-apps.jpg',
   },
   partners: {
     title: 'Accelerate your business with Neon partnership — Neon',
@@ -101,12 +136,13 @@ export default {
     pathname: LINKS.partners,
   },
   pingThing: {
+    pathname: LINKS.pingThing,
     robotsNoindex: 'noindex',
   },
   pricing: {
-    title: 'Pricing — Neon',
+    title: 'Neon Pricing: Free Plan With 100 Projects, Typical Spend $15/Month',
     description:
-      'Neon brings serverless architecture to Postgres, which allows us to offer you flexible usage and volume-based plans.',
+      "Neon's Free plan is $0 with no credit card: 100 projects, each with 100 CU-hours and 1 GB of storage. Paid plans are usage-based with no monthly minimum and no per-project fee; typical spend is about $15/month for a small database on Launch and $701/month for a production workload on Scale.",
     imagePath: '/images/social-previews/pricing.jpg',
     pathname: LINKS.pricing,
   },
@@ -114,7 +150,7 @@ export default {
     title: 'Impact of Postgres restores survey',
     description:
       'We asked 50 developers managing production Postgres about recovery times and their business impact.',
-    pathname: LINKS.report,
+    pathname: LINKS.restoresSurvey,
     imagePath: '/images/social-previews/report.jpg',
   },
   variable: {
@@ -122,7 +158,7 @@ export default {
     description:
       'Discover how Neon dynamically scales Postgres compute resources for optimal performance during peak traffic without overpaying.',
     imagePath: '/images/social-previews/variable.jpg',
-    pathname: LINKS.variable,
+    pathname: LINKS.variableLoad,
   },
   costFleets: {
     title: 'Neon for platforms: Cost estimator',
@@ -144,6 +180,7 @@ export default {
     description: 'Offer Postgres to your users',
     pathname: LINKS.platforms,
     type: 'article',
+    imagePath: '/images/social-previews/platforms.jpg',
   },
   security: {
     title: 'Security — Neon',
@@ -157,6 +194,12 @@ export default {
     description:
       'Apply to the Databricks Startup Program and get up to $200K in Neon and Databricks credits. For venture-backed companies and startup accelerator programs.',
     pathname: LINKS.startups,
+  },
+  tools: {
+    title: 'Postgres upgrade and migration tools — Neon',
+    description:
+      'Tools to assess major version upgrades, catch compatibility issues, and find the right migration path for your database.',
+    pathname: LINKS.tools,
   },
   autoscalingReport: {
     title: 'Compute Autoscaling Report',

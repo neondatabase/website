@@ -50,12 +50,15 @@ export async function generateMetadata(props) {
 
   return getMetadata({
     title: `${title} - Neon Docs`,
-    description: isChangelog ? 'The latest product updates from Neon' : post.excerpt,
+    description: isChangelog
+      ? 'The latest product updates from Neon'
+      : (post.data.summary ?? post.excerpt),
     imagePath: `${VERCEL_URL}/docs/og?title=${encodedTitle}&category=${encodedCategory}`,
     pathname: `${LINKS.docs}/${currentSlug}`,
     rssPathname: isChangelog ? `${LINKS.changelog}/rss.xml` : null,
     robotsNoindex: post?.data?.noindex ? 'noindex' : null,
     type: 'article',
+    modifiedTime: post?.data?.updatedOn ?? null,
     markdownPath: `/docs/${currentSlug}.md`,
   });
 }
@@ -70,7 +73,6 @@ const DocPost = async (props) => {
   const sidebar = getNavigation();
   const flatSidebar = await getFlatSidebar(sidebar);
 
-  const isDocsIndex = currentSlug === 'introduction';
   const isChangelogIndex = currentSlug === 'changelog' || currentSlug.startsWith('changelog/');
 
   const breadcrumbs = getBreadcrumbs(currentSlug, flatSidebar);
@@ -105,10 +107,13 @@ const DocPost = async (props) => {
     '@context': 'https://schema.org',
     '@type': 'Article',
     headline: data.title,
+    url: `${VERCEL_URL}${LINKS.docs}/${currentSlug}`,
+    ...(data.updatedOn && { dateModified: data.updatedOn }),
     author: {
       '@type': 'Organization',
       name: 'Neon',
     },
+    publisher: { '@type': 'Organization', name: 'Neon' },
   };
 
   return (
@@ -125,7 +130,6 @@ const DocPost = async (props) => {
         currentSlug={currentSlug}
         gitHubPath={gitHubPath}
         tableOfContents={tableOfContents}
-        isDocsIndex={isDocsIndex}
       />
     </>
   );

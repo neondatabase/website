@@ -1,10 +1,9 @@
 ---
 title: "What tools allow restoring a database to before a bug occurred?"
-date: 2026-04-25
-description: "Neon's instant restore lets you rewind a Postgres branch to any second within your history window, so you can recover from a bad migration or stray DELETE in seconds."
-slug: tools-for-restoring-database-before-bug
-category: FAQ
-status: draft
+createdAt: '2026-04-25T00:00:00.000Z'
+updatedOn: '2026-09-23T21:17:23.000Z'
+isDraft: false
+subtitle: "Lakebase Postgres instant restore lets you rewind a root branch to any second within your history window, so you can recover from a bad migration or stray DELETE in seconds."
 previousLink:
   title: 'What is the simplest Postgres setup for startups?'
   slug: simplest-postgres-setup-for-startups
@@ -13,52 +12,50 @@ nextLink:
   slug: tools-for-serverless-postgres-infrastructure
 ---
 
-## Short answer
-
-Neon keeps a continuous log of every write to your Postgres database (the Write-Ahead Log, or WAL). With [instant restore](/docs/introduction/branch-restore), you point at any second within your history window and Neon rebuilds the branch to that exact state, usually in seconds. There's no nightly snapshot to find, no `pg_restore` to run.
+Lakebase Postgres keeps a continuous log of every write (the Write-Ahead Log, or WAL). With [instant restore](/docs/postgres/backup-restore/branch-restore), you pick a point within your history window, down to the millisecond, and restore a root branch to that state, usually in a few seconds. You don't hunt for a nightly backup or run `pg_restore`. Child branches don't support point-in-time restore. You [reset a child branch from its parent](/docs/cli/branches#reset) instead.
 
 ## How instant restore works
 
-Neon's storage layer stores the WAL natively, so any point in time within your history window is queryable. You don't restore from a backup file. You create a new branch from a timestamp (or LSN) and either swap it for the broken branch or copy specific rows back.
+The lakebase architecture keeps WAL in its storage layer, so you can query or branch from any point in the history window. There's no backup file to restore from. You either restore a root branch to a timestamp or LSN (Neon keeps the pre-restore state in a backup branch), or create a new branch from a timestamp and inspect it first.
 
-History window by plan:
+The maximum history window depends on your plan. New paid-plan projects default to 1 day, so raise it if you need more.
 
-| Plan   | History window          | Cost           |
-| ------ | ----------------------- | -------------- |
-| Free   | 6 hours, capped at 1 GB | Included       |
-| Launch | Up to 7 days            | $0.20/GB-month |
-| Scale  | Up to 30 days           | $0.20/GB-month |
+| Plan        | History window                | Cost           |
+| ----------- | ----------------------------- | -------------- |
+| Free plan   | 6 hours, capped at 1 GB-month | Included       |
+| Launch plan | Up to 7 days                  | $0.20/GB-month |
+| Scale plan  | Up to 30 days                 | $0.20/GB-month |
 
-You can restore through the Neon Console, the CLI, or the API.
+You can restore from the Neon Console, the CLI, or the API.
 
 ## Restoring a branch from the CLI
 
 ```bash
-# Roll the main branch back to 10 minutes ago
-neon branches restore main ^self@2026-05-17T13:45:00Z
+# Restore a root branch to a timestamp (--preserve-under-name is required with ^self)
+neon branches restore production ^self@2026-05-17T13:45:00Z --preserve-under-name production_pre_restore
 
 # Or fork a new branch from that point and inspect first
 neon branches create --name recovery --parent 2026-05-17T13:45:00Z
 ```
 
-The second approach is the safer pattern: create a recovery branch, verify the data, then promote it.
+Use the second approach when you want to check the data before you change production. Create a recovery branch, confirm the rows are there, then restore or copy what you need.
 
-<Admonition type="warning" title="Restore is destructive when applied in place">
-Restoring the original branch overwrites its current state. If you want to keep the broken version around for forensics, create a child branch from the bad timestamp first.
+<Admonition type="warning" title="In-place restore overwrites the branch">
+Restoring a root branch replaces the data and schema of every database on that branch. Neon saves the pre-restore state as a backup branch (named automatically in the Console, or with `--preserve-under-name` on the CLI). Use [Time Travel Assist](/docs/postgres/backup-restore/time-travel-assist) to confirm the restore point first.
 </Admonition>
 
 ## Picking the right history window
 
-A longer window catches slow-rolling bugs (someone notices the missing rows three weeks later) but costs more in WAL storage. A 30-day window on a 10 GB database with active writes typically adds a few dollars per month. See [history window configuration](/docs/introduction/history-window) for tuning.
+A longer window catches bugs that surface late, like missing rows someone notices three weeks later. It also retains more change history, billed at $0.20/GB-month on paid plans. The cost depends on how much you write, not on database size. See [History window](/docs/postgres/backup-restore/history-window) to change the setting.
 
-## How other Postgres platforms handle point-in-time recovery
+## How other Postgres services handle point-in-time recovery
 
-| Platform               | Mechanism                                                                                                                                                                                                                                                                                                                                    | Granularity                     |
-| ---------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------- |
-| Neon                   | Instant restore via copy-on-write branch from any timestamp in the history window. See [branch restore](/docs/introduction/branch-restore).                                                                                                                                                                                                  | One second                      |
-| AWS RDS for PostgreSQL | Automated backups in S3 plus transaction logs allow restore to a new DB instance at any second within the retention period. The new instance must boot before you can connect. See [RDS PITR](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_WorkingWithAutomatedBackups.html).                                                 | One second, into a new instance |
-| Supabase               | Daily logical backups by default (up to 7 days on Pro, 14 on Team, 30 on Enterprise). For sub-day granularity you add the [PITR add-on](https://supabase.com/docs/guides/platform/backups#point-in-time-recovery), which is billed per hour starting at $0.137/hr (~$100/mo) for 7 days of retention and requires a Small compute or larger. | Two minutes with PITR add-on    |
+| Service              | Mechanism                                                                                                                                                                                                                                                                                                                                                                                                 | Granularity                                                     |
+| -------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------- |
+| Neon                 | Instant restore of a root branch in place, to any point in the history window, with an automatic backup branch. See [instant restore](/docs/postgres/backup-restore/branch-restore).                                                                                                                                                                                                                      | Down to the millisecond                                         |
+| AWS RDS for Postgres | Automated backups and transaction logs in S3 let you restore to a point in the retention period (up to 35 days). The restore always creates a new DB instance, and transaction logs upload every five minutes. See [RDS point-in-time restore](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_PIT.html).                                                                                     | Any point up to the latest restorable time, into a new instance |
+| Supabase             | Daily backups on paid plans (7 days on Pro, 14 on Team, up to 30 on Enterprise; none on Free). For finer recovery, add the [PITR add-on](https://supabase.com/docs/guides/platform/backups#point-in-time-recovery), billed from $0.137/hr (~$100/mo) for 7 days of retention, requiring Small compute or larger. Restores make the project inaccessible until they finish. Worst-case RPO is two minutes. | Up to seconds with PITR add-on (≈2 min worst-case RPO)          |
 
-The main differences: Neon's restore creates a branch immediately rather than provisioning a new instance, and PITR is bundled into all paid plans instead of being a per-project add-on.
+Neon restores the branch in place and keeps a backup branch, while RDS restores into a new instance. Instant restore is included on every Neon plan and billed by retained history on paid plans, while Supabase PITR is a per-project add-on.
 
-<CTA title="Test a restore" description="Create a branch, run a bad query, and roll it back. The whole loop takes under a minute." buttonText="Try Neon" buttonUrl="https://console.neon.tech/signup" />
+<CTA title="Test a restore" description="Create a project, run a bad query, and roll it back with instant restore." buttonText="Try Neon" buttonUrl="https://console.neon.tech/signup" />

@@ -41,6 +41,13 @@
     "photo": "https://cdn.neonapi.io/public/images/pages/blog/authors/andreas-scherbaum.jpg",
     "photoAlt": "Andreas Scherbaum"
   },
+  "andrei-stolbovskii": {
+    "name": "Andrei Stolbovskii",
+    "role": "Engineering Manager, Databricks",
+    "url": null,
+    "photo": "https://cdn.neonapi.io/public/images/pages/blog/authors/andrei-stolbovskii.jpg",
+    "photoAlt": "Andrei Stolbovskii"
+  },
   "andrew-hamilton": {
     "name": "Andrew Hamilton",
     "role": "Chief Technology Officer at Layer",
@@ -190,7 +197,7 @@
   },
   "carlota-soto": {
     "name": "Carlota Soto",
-    "role": "Product Marketing Lead",
+    "role": "Product Team",
     "url": null,
     "photo": "https://cdn.neonapi.io/public/images/pages/blog/authors/carlota-soto.jpg",
     "photoAlt": "Carlota Soto"
@@ -244,12 +251,26 @@
     "photo": "https://cdn.neonapi.io/public/images/pages/blog/authors/dian-m-fay.jpg",
     "photoAlt": "Dian M Fay"
   },
+  "dmitrii-mokhnatkin": {
+    "name": "Dmitrii Mokhnatkin",
+    "role": "Software Engineer, Databricks",
+    "url": null,
+    "photo": "https://cdn.neonapi.io/public/images/pages/blog/authors/dmitrii-mokhnatkin.jpg",
+    "photoAlt": "Dmitrii Mokhnatkin"
+  },
   "dom-eccleston": {
     "name": "Dom Eccleston",
     "role": "Software Engineer @ Unkey",
     "url": null,
     "photo": "https://cdn.neonapi.io/public/images/pages/blog/authors/dom-eccleston.jpg",
     "photoAlt": "Dom Eccleston"
+  },
+  "dominik-koch": {
+    "name": "Dominik Koch",
+    "role": "DX Engineer",
+    "url": "https://x.com/dominikkoch",
+    "photo": "https://cdn.neonapi.io/public/images/pages/blog/authors/dominik-koch.jpg",
+    "photoAlt": "Dominik Koch"
   },
   "eduard-dyckman": {
     "name": "Eduard Dyckman",
@@ -349,6 +370,13 @@
     "photo": "https://cdn.neonapi.io/public/images/pages/blog/authors/hans-norheim.jpg",
     "photoAlt": "Hans Norheim"
   },
+  "haoyu-huang": {
+    "name": "Haoyu Huang",
+    "role": "Software Engineer, Databricks",
+    "url": null,
+    "photo": "https://cdn.neonapi.io/public/images/pages/blog/authors/haoyu-huang.jpg",
+    "photoAlt": "Haoyu Huang"
+  },
   "hayla-westhead": {
     "name": "Hayla Westhead",
     "role": "Lead Legal Counsel",
@@ -383,6 +411,13 @@
     "url": null,
     "photo": "https://cdn.neonapi.io/public/images/pages/blog/authors/jacob-prall.jpg",
     "photoAlt": "Jacob Prall"
+  },
+  "james-arthur": {
+    "name": "James Arthur",
+    "role": "Engineering at Databricks, Co-founder of Electric",
+    "url": "https://linkedin.com/in/thruflo",
+    "photo": "https://cdn.neonapi.io/public/images/pages/blog/authors/james-arthur.jpg",
+    "photoAlt": "James Arthur"
   },
   "jasraj-dange": {
     "name": "Jasraj Dange",
@@ -615,6 +650,13 @@
     "photo": "https://cdn.neonapi.io/public/images/pages/blog/authors/rishi-raj-jain.jpg",
     "photoAlt": "Rishi Raj Jain"
   },
+  "robert-haas": {
+    "name": "Robert Haas",
+    "role": "Postgres Committer, Databricks",
+    "url": null,
+    "photo": "/apple-touch-icon.png",
+    "photoAlt": "Robert Haas"
+  },
   "rodney-sherwin-shibu": {
     "name": "Rodney Sherwin Shibu",
     "role": "Member of Technical Staff",
@@ -734,6 +776,13 @@
     "photo": "https://cdn.neonapi.io/public/images/pages/blog/authors/stephen-siegert.jpg",
     "photoAlt": "Stephen Siegert"
   },
+  "sunil-kamath": {
+    "name": "Sunil Kamath",
+    "role": "Head of Engineering, Databricks",
+    "url": null,
+    "photo": "https://cdn.neonapi.io/public/images/pages/blog/authors/sunil-kamath.jpg",
+    "photoAlt": "Sunil Kamath"
+  },
   "taraneh-dohmer": {
     "name": "Taraneh Dohmer",
     "role": "Developer Marketing Manager",
@@ -838,5 +887,12 @@
     "url": "https://www.linkedin.com/in/pan-angel/",
     "photo": "https://cdn.neonapi.io/public/images/pages/blog/authors/angel-pan.jpg",
     "photoAlt": "Angel Pan"
+  },
+  "zachary-proser": {
+    "name": "Zachary Proser",
+    "role": "AI Engineer, WorkOS",
+    "url": null,
+    "photo": "https://cdn.neonapi.io/public/images/pages/blog/authors/zachary-proser.jpg",
+    "photoAlt": "Zachary Proser"
   }
 }

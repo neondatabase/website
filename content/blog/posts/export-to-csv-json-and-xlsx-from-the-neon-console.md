@@ -108,4 +108,4 @@ I’ve released this Zip library under the name _littlezipper_: find it [on npm]
 
 I’ve also released the Excel worksheet-writing library that depends on it, and that powers Neon’s Excel downloads: this one is called _xlsxtable_. Again, you’ll find it [on npm](https://www.npmjs.com/package/xlsxtable) and [on GitHub](https://github.com/jawj/xlsxtable).
 
-As ever, if you have any feedback on any of these new features, [please let us know on Discord](https://discord.com/invite/92vNTzKDGp).
+As ever, if you have any feedback on any of these new features, [please let us know on Discord](https://neon.com/discord).

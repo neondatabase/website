@@ -1,7 +1,12 @@
 // AI Agent Detection Utility
 // Detects if a request is coming from an AI agent based on User-Agent header
 
-import { CONTENT_ROUTES, EXCLUDED_ROUTES, EXCLUDED_FILES } from 'constants/content';
+import {
+  CONTENT_ROUTES,
+  EXCLUDED_ROUTES,
+  EXCLUDED_FILES,
+  GENERATED_PAGE_MARKDOWN_PATHS,
+} from 'constants/content';
 
 export function isAIAgentRequest(request) {
   const userAgent = request.headers.get('user-agent') || '';
@@ -34,9 +39,11 @@ export function isAIAgentRequest(request) {
     'curl', // Common CLI HTTP client used to fetch docs as markdown
   ];
 
-  const hasAIAgentUserAgent = aiAgentPatterns.some((pattern) =>
-    userAgent.toLowerCase().includes(pattern)
-  );
+  // User-Agent sniffing only applies when the client doesn't explicitly accept HTML.
+  // Some fetchers (ChatGPT web fetch) reject text/markdown, and search crawlers
+  // (OAI-SearchBot, PerplexityBot) need indexable HTML, not noindex markdown.
+  const hasAIAgentUserAgent =
+    !hasHtml && aiAgentPatterns.some((pattern) => userAgent.toLowerCase().includes(pattern));
 
   return requestsMarkdown || prefersNonHtml || hasAIAgentUserAgent;
 }
@@ -44,7 +51,15 @@ export function isAIAgentRequest(request) {
 // Paths where the generic CONTENT_ROUTES resolver produces the wrong markdown
 // path (or no path at all). Maps directly to the correct static file in public/.
 const CUSTOM_MARKDOWN_PATHS = {
+  ...GENERATED_PAGE_MARKDOWN_PATHS,
+  // /auth.md is the existing Claimable Neon protocol, distinct from the /auth product page.
+  'auth.md': '/auth.md',
   pricing: '/pricing.md', // Hand-written, served from public/pricing.md (no CONTENT_ROUTES entry)
+  // /feedback.md aliases the Send feedback docs page (the agent feedback discovery URL).
+  // Two places enforce this alias — keep in sync:
+  //   1. Here (getMarkdownPath — agent requests, and keeps /feedback.md out of the markdown 404)
+  //   2. next.config.js beforeFiles rewrite: /feedback.md → /md/docs/introduction/feedback.md
+  'feedback.md': '/md/docs/introduction/feedback.md',
   // Docs root aliases to the curated llms.txt rather than a generated page-listing.
   // Three places enforce this alias — keep them in sync if this changes:
   //   1. Here (getMarkdownPath — middleware serving for /docs and /docs.md agent requests)
@@ -77,10 +92,25 @@ const STATIC_DOC_FILES = new Set([
 ]);
 const STATIC_DOC_PREFIXES = ['docs/ai/skills/', 'docs/.well-known/', 'docs/mcp'];
 
+// Function Registry template pages read the live registry, so their markdown comes
+// from route handlers under /md/functions/templates instead of build-time files.
+const FUNCTION_TEMPLATES_PATH = /^functions\/templates(?:\/([a-z0-9][a-z0-9-]*))?$/;
+
+export function getFunctionTemplatesMarkdownPath(normalizedPath) {
+  const match = normalizedPath.match(FUNCTION_TEMPLATES_PATH);
+  if (!match) return null;
+  return match[1] ? `/md/functions/templates/${match[1]}` : '/md/functions/templates';
+}
+
 // Convert URL path to markdown file path
-// Example: /docs/introduction -> /md/docs/introduction.md (maps to public/md/)
+// Example: /docs/get-started -> /md/docs/get-started.md (maps to public/md/)
 export function getMarkdownPath(pathname) {
   const path = pathname.slice(1).replace(/\/$/, ''); // Remove leading and trailing slashes
+
+  // Homepage: '/' and '/home' both render the marketing homepage; serve the
+  // hand-written public/index.md. (getMarkdownPath('/index.md') also lands here
+  // via the CONTENT_ROUTES miss below returning null, so serve it explicitly.)
+  if (path === '' || path === 'home' || path === 'index.md') return '/index.md';
 
   // Early return for excluded routes and files
   const isExcluded =
@@ -97,6 +127,9 @@ export function getMarkdownPath(pathname) {
 
   if (CUSTOM_MARKDOWN_PATHS[path] || CUSTOM_MARKDOWN_PATHS[normalized])
     return CUSTOM_MARKDOWN_PATHS[path] || CUSTOM_MARKDOWN_PATHS[normalized];
+
+  const functionTemplatesPath = getFunctionTemplatesMarkdownPath(normalized);
+  if (functionTemplatesPath) return functionTemplatesPath;
 
   const matchedRoute = Object.keys(CONTENT_ROUTES).find(
     (route) => normalized === route || path.startsWith(`${route}/`)

@@ -15,6 +15,11 @@ updates:
     directory: /
     schedule:
       interval: weekly
+    # The Databricks npm proxy quarantines new package versions for 7 days, so
+    # only propose versions older than that. Otherwise every update PR (and
+    # every rebase, which re-resolves to the newest release) fails `npm ci`.
+    cooldown:
+      default-days: 8
     open-pull-requests-limit: 10
     commit-message:
       prefix: 'chore'

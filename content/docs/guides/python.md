@@ -10,7 +10,7 @@ summary: >-
   the SQLAlchemy or Django guides when you need raw SQL driver code rather than
   an ORM.
 enableTableOfContents: true
-updatedOn: '2026-08-04T08:34:18.168Z'
+updatedOn: '2026-10-09T10:14:56.146Z'
 ---
 
 <CopyPrompt src="/prompts/python-prompt.md" 
@@ -73,7 +73,7 @@ For your Python project, create a project directory, set up a virtual environmen
     </CodeTabs>
 
 3.  Install the required libraries using `pip`.
-    - `psycopg`: The modern, synchronous database adapter for connecting to Postgres (Psycopg 3).
+    - `psycopg`: The modern, synchronous database adapter for connecting to Postgres (Psycopg 3). **Recommended** for new projects.
     - `psycopg2-binary`: An older, widely-used synchronous database adapter.
     - `asyncpg`: The asynchronous database adapter for connecting to Postgres.
     - `python-dotenv`: A helper library to manage environment variables.
@@ -82,15 +82,15 @@ For your Python project, create a project directory, set up a virtual environmen
     pip install "psycopg[binary]" psycopg2-binary asyncpg python-dotenv
     ```
 
-    > Install the library that best fits your project needs. This guide provides examples for all three.
+    > If you're not sure which driver to use, use `psycopg` (v3). It's the actively maintained successor to `psycopg2`. This guide provides examples for all three in case your project already depends on one of the others.
 
 ## Store your Neon connection string
 
 Create a file named `.env` in your project's root directory. This file will securely store your database connection string.
 
-1.  In the [Neon Console](https://console.neon.tech), select your project on the **Dashboard**.
-2.  Click **Connect** on your **Project Dashboard** to open the **Connect to your database** modal.
-    ![Connection modal](/docs/connect/connection_details.png)
+1.  In the [Neon Console](https://console.neon.tech), open your project.
+2.  Click **Connect** in the Console nav to open the **Connect to your branch** modal.
+    ![Connection modal](/docs/connect/connect_to_branch_modal.png)
 3.  Copy the connection string, which includes your password.
 4.  Add the connection string to your `.env` file as shown below.
     ```text

@@ -4,19 +4,19 @@ subtitle: Build your own auth UI using SDK methods
 summary: >-
   Managed Better Auth SDK integration for Next.js App Router using raw API methods. Call
   `createNeonAuth`, `auth.signUp.email()`, `auth.signIn.email()`, and
-  `auth.middleware()` directly from the `@neondatabase/auth` package for full
+  `auth.middleware()` directly from the `@neon/auth` package for full
   control over your auth UI. Use this guide instead of the UI components
   reference when you need custom sign-up and sign-in forms. Requires Next.js
   App Router.
 enableTableOfContents: true
-updatedOn: '2026-07-15T00:08:00.682Z'
+updatedOn: '2026-11-06T11:14:41.532Z'
 layout: wide
 redirectFrom:
   - /docs/auth/quick-start/nextjs
   - /docs/auth/quick-start/nextjs/
+  - /docs/auth/quick-start
+  - /docs/neon-auth/quick-start
 ---
-
-<FeatureBetaProps feature_name="Managed Better Auth" />
 
 <AuthAISetupTip />
 
@@ -29,7 +29,7 @@ This guide shows you how to integrate Managed Better Auth into a [Next.js](https
 
 If you don't have a Neon project yet, create one at [console.neon.tech](https://console.neon.tech).
 
-Go to the **Auth** page in your project dashboard and click **Enable Auth**, then copy your Auth URL from the Configuration tab.
+In the Neon Console, open the **Better Auth** page and click **Enable Auth**, then copy your Auth URL from **Settings** > **Better Auth** > **Project Info**.
 
 **Console path:** Project → Branch → Auth → Configuration
 
@@ -58,7 +58,7 @@ cd my-app
 <TwoColumnLayout.Block>
 
 ```bash filename="Terminal"
-npm install @neondatabase/auth@latest
+npm install @neon/auth@latest
 ```
 
 </TwoColumnLayout.Block>
@@ -103,7 +103,7 @@ The SDK logs structured **`error`** and **`warn`** messages to **`console`** by 
 <TwoColumnLayout.Block>
 
 ```typescript filename="lib/auth/server.ts"
-import { createNeonAuth } from '@neondatabase/auth/next/server';
+import { createNeonAuth } from '@neon/auth/next/server';
 
 export const auth = createNeonAuth({
   baseUrl: process.env.NEON_AUTH_BASE_URL!,
@@ -130,7 +130,7 @@ Create an API route handler that proxies auth requests. All Managed Better Auth 
 ```typescript filename="app/api/auth/[...path]/route.ts"
 import { auth } from '@/lib/auth/server';
 
-export const { GET, POST } = auth.handler();
+export const { GET, POST, PUT, PATCH, DELETE } = auth.handler();
 ```
 
 </TwoColumnLayout.Block>
@@ -185,7 +185,7 @@ The server-side `auth` instance was already created in a previous step. The clie
 ```tsx filename="lib/auth/client.ts"
 'use client';
 
-import { createAuthClient } from '@neondatabase/auth/next';
+import { createAuthClient } from '@neon/auth/next';
 
 export const authClient = createAuthClient();
 ```
@@ -489,6 +489,7 @@ The `auth` instance also includes `.handler()` for API routes and `.middleware()
 - [Auth troubleshooting](/docs/auth/troubleshooting#neon-auth-server-logging-in-the-terminal) — server logging, `NETWORK_*` errors, iframe cookies
 - [Add email verification](/docs/auth/guides/email-verification)
 - [Branching authentication](/docs/auth/branching-authentication)
-- [More example apps](/docs/auth/overview#example-applications) in the **neon-js** `examples/` directory
+- [Getting started with Managed Better Auth and Next.js](/guides/neon-auth-nextjs), a step-by-step tutorial
+- [More example apps](/docs/auth/about#example-applications) in the **neon-js** `examples/` directory
 
 <NeedHelp/>

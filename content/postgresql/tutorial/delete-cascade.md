@@ -40,7 +40,7 @@ CREATE TABLE parent_table(
 CREATE TABLE child_table(
     id SERIAL PRIMARY KEY,
     parent_id INT,
-    FOREIGN_KEY(parent_id)
+    FOREIGN KEY(parent_id)
        REFERENCES parent_table(id)
        ON DELETE CASCADE
 );

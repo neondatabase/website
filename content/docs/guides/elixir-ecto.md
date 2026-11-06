@@ -9,7 +9,7 @@ summary: >-
   Postgrex idle_interval defaults that can prevent Neon's scale-to-zero
   autosuspend from triggering.
 enableTableOfContents: true
-updatedOn: '2026-07-14T19:04:57.024Z'
+updatedOn: '2026-10-09T10:18:46.317Z'
 ---
 
 <CopyPrompt src="/prompts/elixir-ecto-prompt.md" 
@@ -31,13 +31,13 @@ To create the database:
 
 1. Navigate to the [Neon Console](https://console.neon.tech).
 1. Select a project.
-1. Select **Databases**.
+1. Select **Postgres database** > **Databases**.
 1. Select the branch where you want to create the database.
-1. Click **New Database**.
+1. Click **Add database**.
 1. Enter a database name (`friends`), and select a database owner.
 1. Click **Create**.
 
-Find your database connection string by clicking the **Connect** button on your **Project Dashboard** to open the **Connect to your database** modal. Select a branch, a role, and the database you want to connect to. A connection string is constructed for you. Your connection string should look something like this:
+Find your database connection string by clicking the **Connect** button in the Console nav to open the **Connect to your branch** modal. Select a branch, a role, and the database you want to connect to. A connection string is constructed for you. Your connection string should look something like this:
 
 ```bash shouldWrap
 postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-west-2.aws.neon.tech/friends?sslmode=require&channel_binding=require
@@ -188,7 +188,7 @@ You can use the **Tables** feature in the Neon Console to view the table that wa
 
 1. Navigate to the [Neon Console](https://console.neon.tech).
 1. Select a project.
-1. Select **Tables** from the sidebar.
+1. Select **Postgres database** > **Tables** from the sidebar.
 1. Select the Branch, Database (`friends`), and the schema (`public`). You should see the `people` table along with a `schema_migration` table that was created by the migration.
 
 </Steps>

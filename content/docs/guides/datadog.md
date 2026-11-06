@@ -6,11 +6,11 @@ summary: >-
   project computes to Datadog, available on Scale plan projects. Use this page
   to set up monitoring of CPU, memory, connection counts, replication lag,
   database size, deadlocks, and PgBouncer stats, or to forward Postgres logs for
-  error and activity visibility. Postgres log export is a preview feature.
-  Log transmission counts toward network egress billed after 500 GB per project
-  on paid plans.
+  error and activity visibility. Postgres log export is in beta.
+  Log transmission counts toward your plan's public network transfer
+  allowance.
 enableTableOfContents: true
-updatedOn: '2026-08-07T13:46:01.605Z'
+updatedOn: '2026-10-14T11:21:37.306Z'
 ---
 
 <InfoBlock>
@@ -26,11 +26,11 @@ updatedOn: '2026-08-07T13:46:01.605Z'
 </DocsList>
 </InfoBlock>
 
-Available for Scale plan users, the Neon Datadog integration lets you monitor Neon database performance, resource utilization, and system health directly from Datadog's observability platform.
+Available for Scale plan users, the Neon Datadog integration lets you monitor database performance, resource utilization, and system health directly from Datadog's observability platform.
 
 ## How it works
 
-The integration enables secure, reliable export of Neon metrics and Postgres logs to Datadog. By configuring the integration with your Datadog API key, Neon automatically sends data from your project to your selected Datadog site.
+The integration exports Neon metrics and Postgres logs to Datadog. By configuring the integration with your Datadog API key, Neon automatically sends data from your project to your selected Datadog site.
 
 <Admonition type="note">
 Data is sent for all computes in your Neon project. For example, if you have multiple branches, each with an attached compute, both metrics and logs will be collected and sent for each compute.
@@ -38,13 +38,13 @@ Data is sent for all computes in your Neon project. For example, if you have mul
 
 ### Neon metrics
 
-The integration exports [a comprehensive set of metrics](#available-metrics) including:
+The integration exports [a set of metrics](#available-metrics) including:
 
-- **Connection counts** &#8212; Tracks active and idle database connections.
-- **Database size** &#8212; Monitors total size of all databases in bytes.
-- **Replication delay** &#8212; Measures replication lag in bytes and seconds.
-- **Compute metrics** &#8212; Includes CPU and memory usage statistics for your compute.
-- **PgBouncer metrics** &#8212; Tracks connection pooling metrics including client and server connections.
+- **Connection counts**: Tracks active and idle database connections.
+- **Database size**: Monitors total size of all databases in bytes.
+- **Replication delay**: Measures replication lag in bytes and seconds.
+- **Compute metrics**: Includes CPU and memory usage statistics for your compute.
+- **PgBouncer metrics**: Tracks connection pooling metrics including client and server connections.
 
 ### Postgres logs
 
@@ -65,35 +65,43 @@ Before getting started, ensure the following:
 1. In the Neon Console, navigate to the **Integrations** page in your Neon project.
 1. Locate the **Datadog** card and click **Add**.
 1. Enter your **Datadog API key**. You can generate or retrieve [Datadog API Keys](https://app.datadoghq.com/organization-settings/api-keys) from your Datadog organization. For instructions, see [Datadog API and Application Keys](https://docs.datadoghq.com/account_management/api-app-keys/).
-1. Select the Datadog **site** that you used when setting up your Datadog account.
+1. Select the Datadog **site** that you used when setting up your Datadog account. The supported sites are US1 (`datadoghq.com`), US3 (`us3.datadoghq.com`), US5 (`us5.datadoghq.com`), EU1 (`datadoghq.eu`), US1-FED (`ddog-gov.com`), and AP1 (`ap1.datadoghq.com`).
 1. Select what you want to export. You can enable either or both:
    - **Metrics**: System metrics and database statistics (CPU, memory, connections, etc.)
    - **Postgres logs**: Error messages, warnings, connection events, and system notifications
-1. Click **Confirm** to complete the integration.
+1. Click **Save** to complete the integration.
 
 <Admonition type="note">
 You can change these settings later by editing your integration configuration.
 </Admonition>
 
-Optionally, you can import the Neon-provided JSON configuration file into Datadog, which creates a pre-built dashboard from **Neon metrics**, similar to the charts available on our Monitoring page. See [Import Neon dashboard](#import-neon-dashboard).
-
-> We do not yet provide a pre-built dashboard for **Postgres logs**, but it's coming soon.
+Optionally, you can import the Neon-provided JSON configuration file into Datadog, which creates a pre-built dashboard from **Neon metrics** and **Postgres logs**, similar to the charts on the **Monitoring** page. See [Import the Neon dashboard](#import-the-neon-dashboard).
 
 Once the integration is set up, Neon will start sending Neon metrics to Datadog, and you can use these metrics to create custom dashboards and alerts in Datadog.
 
 <Admonition type="note">
-Neon computes only send logs and metrics when they are active. If the [Scale to Zero](/docs/introduction/scale-to-zero) feature is enabled and a compute is suspended due to inactivity, no logs or metrics will be sent during the suspension. This may result in gaps in your Neon logs and metrics in Datadog. If you notice missing data in Datadog, check if your compute is suspended. You can verify a compute's status as `Idle` or `Active` on the **Branches** page in the Neon console, and review **Suspend compute** events on the **System operations** tab of the **Monitoring** page.
+Neon computes only send logs and metrics when they are active. If [scale to zero](/docs/introduction/scale-to-zero) is enabled and a compute is suspended due to inactivity, no logs or metrics will be sent during the suspension. This may result in gaps in your Neon logs and metrics in Datadog. If you notice missing data in Datadog, check if your compute is suspended. You can verify a compute's status as `Idle` or `Active` on the **Branches** page in the Neon Console, and review **Suspend compute** events on the **System operations** tab of the **Monitoring** page.
 
-Additionally, if you are setting up Neon's Datadog integration for a project with an inactive compute, you'll need to activate the compute before it can send metrics and logs to Datadog. To activate it, simply run a query from the [Neon SQL Editor](/docs/get-started/query-with-neon-sql-editor) or any connected client on the branch associated with the compute.
+Additionally, if you are setting up Neon's Datadog integration for a project with an inactive compute, you'll need to activate the compute before it can send metrics and logs to Datadog. To activate it, run a query from the [Neon SQL Editor](/docs/get-started/query-with-neon-sql-editor) or any connected client on the branch associated with the compute.
 </Admonition>
 
 ## Example usage in Datadog
 
 Once integrated, you can create custom dashboards in Datadog by querying the metrics sent from Neon. Use Datadog's **Metrics Explorer** to search for metrics like `neon_connection_counts`, `neon_db_total_size`, and `host_cpu_seconds_total`. You can also set alerts based on threshold values for critical metrics.
 
+### Filter by tag
+
+Neon doesn't set the Datadog [unified service tags](https://docs.datadoghq.com/getting_started/tagging/unified_service_tagging/) (`env`, `service`, and `version`) on exported metrics or logs. To filter and group Neon data, use these tags instead:
+
+- `project_id`: the Neon project
+- `endpoint_id`: the compute. Each compute belongs to one branch, so you can use this tag to separate environments that run on different branches, such as production and staging.
+- `compute_role`: `read_write` for a primary compute, or `read_only` for a read replica
+- `region_id`: the region the project runs in
+- `job`: the metric source (`compute-host-metrics`, `sql-metrics`, or `compute-pgbouncer-metrics`). Metrics only.
+
 ## Import the Neon dashboard
 
-As part of the integration, Neon provides a JSON configuration file that you can import into Datadog to start with a pre-built dashboard based on a subset of Neon metrics.
+As part of the integration, Neon provides a JSON configuration file that you can import into Datadog to start with a pre-built dashboard based on a subset of Neon metrics, plus a Postgres logs stream.
 
 ![neon dashboard in datadog](/docs/guides/neon-dashboard-datadog.png)
 
@@ -649,6 +657,51 @@ If any of the computes in your project are active, you should start seeing data 
         "width": 6,
         "height": 3
       }
+    },
+    {
+      "id": 7813951705806928,
+      "definition": {
+        "title": "Postgres Logs",
+        "title_size": "16",
+        "title_align": "left",
+        "time": {},
+        "requests": [
+          {
+            "response_format": "event_list",
+            "query": {
+              "data_source": "logs_stream",
+              "query_string": "@$endpoint_id @$project_id",
+              "indexes": [],
+              "storage": "hot"
+            },
+            "columns": [
+              {
+                "field": "status_line",
+                "width": "auto"
+              },
+              {
+                "field": "host",
+                "width": "auto"
+              },
+              {
+                "field": "timestamp",
+                "width": "auto"
+              },
+              {
+                "field": "content",
+                "width": "auto"
+              }
+            ]
+          }
+        ],
+        "type": "list_stream"
+      },
+      "layout": {
+        "x": 0,
+        "y": 10,
+        "width": 12,
+        "height": 4
+      }
     }
   ],
   "template_variables": [
@@ -680,22 +733,22 @@ If any of the computes in your project are active, you should start seeing data 
 
 ## Available metrics
 
-Neon exports a comprehensive set of metrics including connection counts, database size, replication delay, compute metrics (CPU and memory usage), and PgBouncer connection pooling metrics (client and server connections). For a complete list of all available metrics with detailed descriptions, see the [Metrics and logs reference](/docs/reference/metrics-logs).
+Neon exports metrics including connection counts, database size, replication delay, compute metrics (CPU and memory usage), and PgBouncer connection pooling metrics (client and server connections). For a complete list of all available metrics with detailed descriptions, see the [Metrics and logs reference](/docs/reference/metrics-logs).
 
 ## Export Postgres logs to Datadog
 
-You can export your Postgres logs from your Neon compute to your Datadog account. These logs provide visibility into database activity, errors, and performance. For detailed information about log fields and technical considerations, see the [Metrics and logs reference](/docs/reference/metrics-logs).
+You can export your Postgres logs from your Neon compute to your Datadog account. These logs provide visibility into database activity, errors, and performance. By default, logs include warnings and errors, connections and disconnections, checkpoints, and slow autovacuum runs. Query text isn't logged, and slow-query logging is off unless you turn it on. For the full list of logging settings and log fields, see [Postgres logs](/docs/reference/metrics-logs#postgres-logs) in the Metrics and logs reference.
 
 ### Performance impact
 
 Enabling this feature may result in:
 
 - An increase in compute resource usage for log processing
-- Additional network egress for log transmission, which is billed after 500 GB per project on paid plans
+- Additional public network transfer for log transmission, which counts toward your plan's [network transfer allowance](/docs/introduction/network-transfer)
 - Associated costs based on log volume in Datadog
 
-## Feedback and future improvements
+## Feedback
 
-We’re always looking to improve! If you have feature requests or feedback, please let us know via the [Feedback form](https://console.neon.tech/app/projects?modal=feedback) in the Neon Console or on our [Discord channel](https://discord.com/channels/1176467419317940276/1176788564890112042).
+If you have feature requests or feedback, let us know through the [Feedback form](https://console.neon.tech/app/projects?modal=feedback) in the Neon Console or on [Discord](https://neon.com/discord).
 
 <NeedHelp/>

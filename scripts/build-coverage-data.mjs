@@ -36,10 +36,20 @@ const SPEC_URL = 'https://neon.com/api_spec/release/v2.json';
 // Pinned input → deterministic output: re-running with unchanged versions
 // produces a zero-diff. Pinning to `main` would let upstream force-pushes
 // or refactors silently break the docs build at CI time.
-// neonctl ships tagged releases; mcp-server-neon does not, so SHA-pin it.
-const NEONCTL_VERSION = 'v2.27.0';
-const MCP_VERSION = 'fac296fe303fc93fec5bd02a2b505ba88e275950';
-const NEONCTL = `https://raw.githubusercontent.com/neondatabase/neonctl/${NEONCTL_VERSION}`;
+//
+// The CLI source now lives in the neon-pkgs monorepo under packages/cli; its
+// releases are tagged `neon@<version>` (the CLI package was renamed from
+// `neonctl` to `neon`, and neondatabase/neonctl is frozen at v2.27.0). This
+// mirrors scripts/docs-checks/neonctl/refresh.js, which pulls the same source
+// for schema.json. Keep this in lockstep with that schema's `neonctlVersion`:
+// the generator's tripwire cross-checks every cli-coverage command against the
+// committed schema, so coverage and schema should track the same CLI release.
+// mcp-server-neon does not tag releases, so SHA-pin it.
+const NEONCTL_VERSION = 'neon@4.3.0';
+const MCP_VERSION = 'cf0e3ee039dcf10c5a3b10a7d7dbfe30b4025a2a';
+const NEONCTL = `https://raw.githubusercontent.com/neondatabase/neon-pkgs/${encodeURIComponent(
+  NEONCTL_VERSION
+)}/packages/cli`;
 const MCP = `https://raw.githubusercontent.com/neondatabase/mcp-server-neon/${MCP_VERSION}`;
 const METHODS = ['get', 'post', 'put', 'patch', 'delete'];
 
@@ -155,6 +165,39 @@ const CLI_MANUAL = {
   deleteProjectVPCEndpoint: {
     cmd: 'neon vpc project remove <vpc_endpoint_id> --project-id <id>',
   },
+  // Data API — several handlers share the same API methods (update reads
+  // current state first; refresh-schema also PATCHes the data-api). Pin each
+  // operation to its canonical command.
+  getProjectBranchDataApi: { cmd: 'neon data-api get' },
+  updateProjectBranchDataApi: { cmd: 'neon data-api update' },
+  // Snapshot schedule get/set are nested under `schedule`; the parser records
+  // only the leaf subcommand name, so pin the full command path.
+  getSnapshotSchedule: { cmd: 'neon snapshots schedule get' },
+  setSnapshotSchedule: { cmd: 'neon snapshots schedule set' },
+  // Email-provider test lives under `neon-auth config email-provider`.
+  sendNeonAuthEmailProviderTest: { cmd: 'neon neon-auth config email-provider test' },
+  // Functions — functions.ts calls friendly wrappers in functions_api.js
+  // (getFunction, createDeployment, ...) rather than the operationId directly,
+  // so the parser can't trace these; pin the spec operationIds to their
+  // canonical commands. `updateProjectBranchFunction` has no CLI equivalent.
+  createProjectBranchFunctionDeployment: { cmd: 'neon functions deploy' },
+  getProjectBranchFunction: { cmd: 'neon functions get' },
+  listProjectBranchFunctions: { cmd: 'neon functions list' },
+  deleteProjectBranchFunction: { cmd: 'neon functions delete' },
+  // Bucket object operations live under the `object` subcommand; the action
+  // heuristic otherwise mismaps them to top-level `neon buckets get/list/delete`.
+  // `presignProjectBranchBucketObject` is intentionally left uncovered: there is
+  // no user-facing presign command (the CLI's `object put`/`get` presign
+  // internally), so mapping it to `object put` would misdescribe the endpoint.
+  listProjectBranchBucketObjects: { cmd: 'neon buckets object list' },
+  getProjectBranchBucketObject: { cmd: 'neon buckets object get' },
+  deleteProjectBranchBucketObject: { cmd: 'neon buckets object delete' },
+  deleteProjectBranchBucketObjectsByPrefix: { cmd: 'neon buckets object delete' },
+  // API-key revoke: the `revoke` handler calls a helper (revokeOrExplain) that
+  // makes the API call, and the CLI parser doesn't trace fn -> fn indirection,
+  // so pin both revoke operations to the command.
+  revokeApiKey: { cmd: 'neon api-keys revoke <id>' },
+  revokeOrgApiKey: { cmd: 'neon api-keys revoke <id>' },
 };
 
 // Maps action word from operationId prefix → subcommand name in neonctl
@@ -174,15 +217,47 @@ function extractTopCommand(src) {
   return src.match(/export const command\s*=\s*['"]([^'"]+)['"]/)?.[1] ?? null;
 }
 
-// Find every named function and the apiClient.X / neonClient.X methods it
-// calls. Result: { fnName: [methodName, ...] }. Walked via the TS AST so
-// braces inside string/regex/template literals don't confuse scope tracking.
+// True if an AST node references the request client: `apiClient` / `neonClient`
+// as a bare identifier, or as the `.apiClient` / `.neonClient` property of
+// something (e.g. `props.apiClient`).
+function refsApiClient(node) {
+  if (ts.isIdentifier(node)) {
+    return node.text === 'apiClient' || node.text === 'neonClient';
+  }
+  if (ts.isPropertyAccessExpression(node) && ts.isIdentifier(node.name)) {
+    return node.name.text === 'apiClient' || node.name.text === 'neonClient';
+  }
+  return false;
+}
+
+// Function-style SDK calls: `createProjectBranchBucket(props.apiClient, {...})`,
+// where the imported operation function takes the client as an argument and the
+// callee identifier IS the operationId. Newer neon-pkgs commands (bucket.ts,
+// functions.ts, ...) use this instead of the older `apiClient.operationId(...)`
+// method style, and the CLI is standardizing on it. Non-operation helpers that
+// also take the client (e.g. presignUpload) are collected here too but dropped
+// by the spec-operationId filter in main().
+function findApiClientFnCalls(node) {
+  const names = [];
+  walk(node, (n) => {
+    if (!ts.isCallExpression(n) || !ts.isIdentifier(n.expression)) return;
+    if (n.arguments.some((arg) => refsApiClient(arg))) names.push(n.expression.text);
+  });
+  return names;
+}
+
+// Find every named function and the API operations it calls, via both the
+// `apiClient.X()` method style and the `X(apiClient, ...)` function style.
+// Result: { fnName: [operationId, ...] }. AST-based so braces inside
+// string/regex/template literals don't confuse scope tracking.
 function extractFnToApiClient(src) {
   const srcFile = parseTs(src);
   const fnToApi = {};
   for (const { name, body } of findNamedFunctions(srcFile)) {
     const methods = findReceiverCalls(body, (id) => id === 'apiClient' || id === 'neonClient');
-    if (methods.length > 0) fnToApi[name] = [...new Set(methods)];
+    const fnCalls = findApiClientFnCalls(body);
+    const all = [...new Set([...methods, ...fnCalls])];
+    if (all.length > 0) fnToApi[name] = all;
   }
   return fnToApi;
 }
@@ -269,10 +344,16 @@ function firstExecutableCall(body) {
   return ts.isCallExpression(node) ? node : null;
 }
 
-async function buildCliCoverage() {
+async function buildCliCoverage(specOpIds) {
   process.stderr.write('Building CLI coverage...\n');
   // operationId → "neon top-cmd sub-cmd [...]"
   const coverage = {};
+  // Case-insensitive spec-op lookup for the gate below. SDK method names differ
+  // in acronym casing from spec operationIds (e.g. `getProjectBranchDataApi` vs
+  // `getProjectBranchDataAPI`), and main()'s final filter already matches
+  // case-insensitively, so the gate must too — otherwise a future acronym-cased
+  // op without a CLI_MANUAL pin would be silently dropped here.
+  const specOpIdsLower = new Set([...specOpIds].map((s) => s.toLowerCase()));
 
   for (const file of NEONCTL_COMMAND_FILES) {
     const src = await fetchText(`${NEONCTL}/src/commands/${file}`);
@@ -293,6 +374,12 @@ async function buildCliCoverage() {
 
     // For each api method found in this file, find its subcommand
     for (const [apiMethod, fns] of Object.entries(apiToFns)) {
+      // Ignore anything that isn't a real spec operation (local helpers, and
+      // friendly wrapper functions like functions_api.js's getFunction) unless
+      // it's explicitly pinned. This keeps wrapper names from tripping the
+      // multi-match guard below; wrapper-backed operations are covered via
+      // CLI_MANUAL keyed by their operationId instead.
+      if (!CLI_MANUAL[apiMethod] && !specOpIdsLower.has(apiMethod.toLowerCase())) continue;
       if (CLI_MANUAL[apiMethod]) {
         const manual = CLI_MANUAL[apiMethod];
         coverage[apiMethod] = manual.commands
@@ -465,7 +552,28 @@ const MCP_COVERAGE_EXCLUDE = new Set([
   'complete_query_tuning',
 ]);
 
-const MCP_TOOLS_ROOT = 'landing/mcp-src/tools';
+// Manual MCP pins: operationId -> tool name, for tools the call-graph tracer
+// can't reach. The logs tools (`query_logs`, `list_log_fields`,
+// `list_log_field_values`) reach the API through a `neon.logs.*` client facade
+// rather than a flat `neonClient.X()` call, so resolveOps finds no operations
+// for them and they never get associated. Pin them to their Management API
+// operations so the logs endpoint pages show the MCP tool. (The CLI side has
+// the analogous CLI_MANUAL.)
+//
+// TODO: replace these pins with a general fix — teach the call-graph tracer the
+// `neon.logs.*` client-facade pattern (map a facade method to its operationId)
+// so the logs tools resolve on their own, and widen `currentTools` (currently a
+// `name:` regex over definitions.ts) so the drift-guard below flags facade-only
+// tools as unclassified instead of silently skipping them. Same class of blind
+// spot the CLI side has for wrapper modules (functions) and helper indirection
+// (api-keys revoke); a shared call-graph resolver would cover both.
+const MCP_MANUAL = {
+  queryProjectBranchLogs: 'query_logs',
+  listProjectBranchLogFields: 'list_log_fields',
+  listProjectBranchLogFieldValues: 'list_log_field_values',
+};
+
+const MCP_TOOLS_ROOT = 'mcp/tools';
 const MCP_GH_RAW = `${MCP}/${MCP_TOOLS_ROOT}`;
 
 async function buildMcpCoverage() {
@@ -554,6 +662,13 @@ async function buildMcpCoverage() {
     coverage[op] = tools[0];
   }
 
+  // Pin tools the tracer can't reach because their handlers hit the API through
+  // a client facade (see MCP_MANUAL). These are dropped by the spec-operationId
+  // filter in main() if the operation isn't real, so a stale pin can't ship.
+  for (const [op, tool] of Object.entries(MCP_MANUAL)) {
+    coverage[op] = tool;
+  }
+
   // Drift check: any upstream tool that is neither classified as a coverage
   // target (appears as a value in `coverage`) nor explicitly excluded
   // (MCP_COVERAGE_EXCLUDE) is a new tool we haven't decided what to do with.
@@ -636,7 +751,7 @@ function parseMcpToolDefs(src) {
     throw new Error(
       `[mcp-tool-defs] ${missing.length}/${Object.keys(tools).length} tools have no parsed description: ${missing.join(', ')}. ` +
         `Upstream definitions.ts likely changed shape. Inspect ` +
-        `${MCP}/landing/mcp-src/tools/definitions.ts and update descRe in parseMcpToolDefs.`
+        `${MCP}/mcp/tools/definitions.ts and update descRe in parseMcpToolDefs.`
     );
   }
 
@@ -748,7 +863,7 @@ function describeZodField(name, initializer) {
 async function buildMcpDefinitions() {
   process.stderr.write('Building MCP tool definitions from GitHub...\n');
 
-  const toolsBase = `${MCP}/landing/mcp-src/tools`;
+  const toolsBase = `${MCP}/mcp/tools`;
   const [defsSrc, schemaSrc] = await Promise.all([
     fetchText(`${toolsBase}/definitions.ts`),
     fetchText(`${toolsBase}/toolsSchema.ts`),
@@ -785,7 +900,7 @@ for (const pathItem of Object.values(specRaw.paths ?? {})) {
 process.stderr.write(`  ${specOpIds.size} operationIds in live spec.\n`);
 
 const [cliCoverageRaw, mcpCoverageRaw, mcpDefinitions] = await Promise.all([
-  buildCliCoverage(),
+  buildCliCoverage(specOpIds),
   buildMcpCoverage(),
   buildMcpDefinitions(),
 ]);

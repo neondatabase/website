@@ -8,7 +8,7 @@ summary: >-
   Deno, and Edge runtimes. Each driver option includes a complete TypeScript
   route handler with Postgres query examples.
 enableTableOfContents: true
-updatedOn: '2026-07-31T15:27:48.506Z'
+updatedOn: '2026-10-08T19:32:04.700Z'
 ---
 
 <CopyPrompt src="/prompts/hono-prompt.md"
@@ -52,7 +52,7 @@ npm install @neondatabase/serverless
 
 ## Store your Neon credentials
 
-Add a `.env` file to your project directory and add your Neon connection string to it. You can find your connection details by clicking **Connect** on the Neon **Project Dashboard**. For more information, see [Connect from any application](/docs/connect/connect-from-any-app).
+Add a `.env` file to your project directory and add your Neon connection string to it. You can find your connection details by clicking **Connect** in the Console nav. For more information, see [Connect from any application](/docs/connect/connect-from-any-app).
 
 ```shell shouldWrap
 DATABASE_URL="postgresql://<user>:<password>@<endpoint_hostname>.neon.tech:<port>/<dbname>?sslmode=require&channel_binding=require"
@@ -163,5 +163,6 @@ Navigate to your application's URL ([localhost:3000](http://localhost:3000)). Yo
 - [Add Object Storage](/docs/storage/overview): S3-compatible file storage that branches with your database
 - [Deploy a Function](/docs/compute/functions/overview): Run backend compute next to your database, no separate hosting needed
 - [Call an LLM with AI Gateway](/docs/ai-gateway/overview): Access foundation models from Anthropic, OpenAI, Google, and more with one credential
+- [Realtime](/docs/realtime/quickstart): Build realtime apps with end-to-end reactivity &raquo;
 
 <NeedHelp/>

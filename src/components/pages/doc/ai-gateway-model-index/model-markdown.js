@@ -1,0 +1,187 @@
+const capabilities = require('../../../../app/models/capabilities.json');
+const modelsData = require('../../../../app/models.json/data.json');
+
+const modelRows = require('./model-rows');
+
+const BASE_URL = 'https://neon.com';
+const MODEL_TABLE_HEADER =
+  '| Model | Model ID | Inputs | Context | Released | Reasoning | Input /M | Output /M | Endpoints | License |\n' +
+  '| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |';
+
+const escapeTableCell = (value) =>
+  String(value)
+    .replace(/\r?\n|\r/g, '<br>')
+    .replace(/\\/g, '\\\\')
+    .replace(/\|/g, '\\|');
+
+const escapeLinkLabel = (value) =>
+  String(value)
+    .replace(/\r?\n|\r/g, ' ')
+    .replace(/\\/g, '\\\\')
+    .replace(/\[/g, '\\[')
+    .replace(/]/g, '\\]')
+    .replace(/\|/g, '\\|');
+
+const renderCodeCell = (value) => {
+  const text = String(value);
+
+  if (!/[|`\r\n]/.test(text)) return `\`${text}\``;
+
+  const escaped = text
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/\|/g, '&#124;')
+    .replace(/`/g, '&#96;')
+    .replace(/\r?\n|\r/g, '&#10;');
+
+  return `<code>${escaped}</code>`;
+};
+
+const renderModelTableRows = (rows) =>
+  rows
+    .map((row) =>
+      [
+        `[${escapeLinkLabel(row.name)}](${BASE_URL}/docs/ai-gateway/models/${encodeURIComponent(
+          row.id
+        )}.md)`,
+        renderCodeCell(row.id),
+        escapeTableCell(row.inputsLabel),
+        escapeTableCell(row.contextLabel),
+        escapeTableCell(row.releaseLabel),
+        row.reasoning ? 'Yes' : '—',
+        escapeTableCell(row.costInputLabel),
+        escapeTableCell(row.costOutputLabel),
+        escapeTableCell(row.endpoints.join(' · ') || '—'),
+        row.openWeights ? 'Open weights' : '—',
+      ].join(' | ')
+    )
+    .map((line) => `| ${line} |`)
+    .join('\n');
+
+const renderLabTables = (rows, headingDepth) =>
+  modelRows
+    .groupByLab(rows)
+    .map(
+      (group) =>
+        `${headingDepth} ${group.label}\n\n${MODEL_TABLE_HEADER}\n${renderModelTableRows(group.rows)}`
+    )
+    .join('\n\n');
+
+const EMBEDDING_TABLE_HEADER =
+  '| Model | Model ID | Lab | Dimensions | Released | Input /M | Endpoints | License |\n' +
+  '| --- | --- | --- | --- | --- | --- | --- | --- |';
+
+const renderEmbeddingTableRows = (rows) =>
+  rows
+    .map((row) =>
+      [
+        `[${escapeLinkLabel(row.name)}](${BASE_URL}/docs/ai-gateway/models/${encodeURIComponent(
+          row.id
+        )}.md)`,
+        renderCodeCell(row.id),
+        escapeTableCell(row.labName),
+        escapeTableCell(row.dimensions),
+        escapeTableCell(row.releaseLabel),
+        escapeTableCell(row.costInputLabel),
+        escapeTableCell(row.endpoints.join(' · ') || '—'),
+        row.openWeights ? 'Open weights' : '—',
+      ].join(' | ')
+    )
+    .map((line) => `| ${line} |`)
+    .join('\n');
+
+const DECISION_TABLE_HEADER =
+  '| Model | Model ID | Lab | Context | Released | Input /M | License |\n' +
+  '| --- | --- | --- | --- | --- | --- | --- |';
+
+const renderDecisionTableRows = (rows) =>
+  rows
+    .map((row) =>
+      [
+        `[${escapeLinkLabel(row.name)}](${BASE_URL}/docs/ai-gateway/models/${encodeURIComponent(
+          row.id
+        )}.md)`,
+        renderCodeCell(row.id),
+        escapeTableCell(row.labName),
+        escapeTableCell(row.contextLabel),
+        escapeTableCell(row.releaseLabel),
+        escapeTableCell(row.costInputLabel),
+        row.openWeights ? 'Open weights' : '—',
+      ].join(' | ')
+    )
+    .map((line) => `| ${line} |`)
+    .join('\n');
+
+const renderAiGatewayModelIndex = (rows = modelRows.buildRows(modelsData.neon, capabilities)) => {
+  const embeddingRows = rows.filter((row) => row.isEmbedding);
+  const decisionRows = rows.filter((row) => row.isDecision);
+  const textRows = rows.filter((row) => row.inputs.includes('text') && !row.isEmbedding);
+  const imageRows = rows.filter((row) => row.isImageCapable);
+  const otherRows = rows.filter(
+    (row) =>
+      !row.inputs.includes('text') && !row.isImageCapable && !row.isEmbedding && !row.isDecision
+  );
+  const unavailableRows = rows.filter((row) => !row.hasMeasuredCapabilities && !row.isDecision);
+  const sections = ['### Text models', renderLabTables(textRows, '####')];
+
+  sections.push(
+    'Select a linked model for code examples matched to its measured AI Gateway capabilities.'
+  );
+
+  if (unavailableRows.length > 0) {
+    sections.push(
+      `Verified code examples are not currently available for: ${unavailableRows
+        .map((row) => renderCodeCell(row.id))
+        .join(', ')}.`
+    );
+  }
+
+  if (imageRows.length > 0) {
+    sections.push('### Image models');
+    sections.push(
+      'These models support image generation through the Responses API (base URL `/openai/v1`):'
+    );
+    sections.push(renderLabTables(imageRows, '####'));
+    sections.push('Select a linked model for image-generation examples matched to that model.');
+  }
+
+  if (otherRows.length > 0) {
+    sections.push('### Other models');
+    sections.push('These models use other input modalities supported by AI Gateway:');
+    sections.push(renderLabTables(otherRows, '####'));
+  }
+
+  if (embeddingRows.length > 0) {
+    sections.push('### Embedding models');
+    sections.push(
+      'These models return a fixed-length vector on `POST /v1/embeddings` rather than generating text — a different endpoint from every model above:'
+    );
+    sections.push(`${EMBEDDING_TABLE_HEADER}\n${renderEmbeddingTableRows(embeddingRows)}`);
+    sections.push('Select a linked model for embeddings-specific code examples.');
+  }
+
+  if (decisionRows.length > 0) {
+    sections.push('### Decision models');
+    sections.push(
+      'These System One models answer questions about a given state with a choice, a probability, or a score rather than generating text:'
+    );
+    sections.push(`${DECISION_TABLE_HEADER}\n${renderDecisionTableRows(decisionRows)}`);
+  }
+
+  sections.push(modelRows.MODEL_CATALOG_NOTE);
+
+  return sections.join('\n\n');
+};
+
+module.exports = {
+  MODEL_TABLE_HEADER,
+  EMBEDDING_TABLE_HEADER,
+  escapeTableCell,
+  escapeLinkLabel,
+  renderCodeCell,
+  renderModelTableRows,
+  renderEmbeddingTableRows,
+  renderLabTables,
+  renderAiGatewayModelIndex,
+};

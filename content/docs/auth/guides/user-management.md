@@ -10,10 +10,8 @@ summary: >-
   which are covered in separate guides. The `revokeOtherSessions` flag in
   `changePassword()` lets you sign out all other devices in the same call.
 enableTableOfContents: true
-updatedOn: '2026-07-15T00:08:00.682Z'
+updatedOn: '2026-11-05T12:32:49.453Z'
 ---
-
-<FeatureBetaProps feature_name="Managed Better Auth" />
 
 Manage user profiles and account settings after users sign in. This guide covers:
 
@@ -64,6 +62,8 @@ Email address changes are not currently supported. To reset a forgotten password
 
 ## Change password
 
+Passwords can be up to 128 characters. Sign-up and sign-in reject longer passwords with a `400` `PASSWORD_TOO_LONG` error.
+
 Change a user's password while they are logged in using `changePassword()`. This requires the current password for security:
 
 ```jsx filename="src/App.jsx"
@@ -100,7 +100,7 @@ const { data, error } = await authClient.changePassword({
 ```
 
 <Admonition type="note">
-If a user forgot their password, use the password reset flow (`requestPasswordReset()` and `resetPassword()`) instead. See [Password Reset](/docs/auth/guides/password-reset).
+If a user forgot their password, use the password reset flow (`requestPasswordReset()` and `resetPassword()`) instead. See [Password Reset](/docs/auth/guides/password-reset). To sign users out of every session after a reset, turn on [Revoke sessions on password reset](/docs/auth/guides/password-reset#sign-users-out-after-a-reset).
 </Admonition>
 
 ## Refresh user data

@@ -11,7 +11,7 @@ summary: >-
   covers project creation, `DATABASE_URL` setup via `dotenv`, and connection
   pool initialization outside route handlers.
 enableTableOfContents: true
-updatedOn: '2026-07-31T15:27:48.506Z'
+updatedOn: '2026-10-08T19:32:04.700Z'
 ---
 
 <CopyPrompt src="/prompts/express-prompt.md"
@@ -21,7 +21,7 @@ This guide describes how to create a Neon project and connect to it from an Expr
 
 ## Choose a driver
 
-- **`@neondatabase/serverless`** connects over HTTP or WebSockets instead of TCP. Use it for serverless and edge platforms without built-in connection pooling (Vercel, Netlify Functions, Deno Deploy, Cloudflare Workers without Hyperdrive).
+- **`@neondatabase/serverless`** connects over HTTP or WebSockets instead of TCP. Use it for serverless and edge platforms without built-in connection pooling (Vercel, Netlify Functions, Cloudflare Workers without Hyperdrive).
 - **`postgres` (postgres.js)** is a fast, full-featured client for both serverless and traditional Node.js server environments.
 - **`pg` (node-postgres)** is the classic, widely-used driver for traditional, long-running Node.js servers. Also the standard choice for [Vercel Fluid compute](https://vercel.com/docs/functions/fluid-compute) and Cloudflare with [Hyperdrive](https://developers.cloudflare.com/hyperdrive/).
 
@@ -68,7 +68,7 @@ If you do not have one already, create a Neon project.
 
 ## Store your Neon credentials
 
-Add a `.env` file to your project directory and add your Neon connection details to it. Find your database connection details by clicking the **Connect** button on your **Project Dashboard** to open the **Connect to your database** modal. Select Node.js from the **Connection string** dropdown. For more information, see [Connect from any application](/docs/connect/connect-from-any-app).
+Add a `.env` file to your project directory and add your Neon connection details to it. Find your database connection details by clicking the **Connect** button in the Console nav to open the **Connect to your branch** modal. Select Node.js from the **Connection string** dropdown. For more information, see [Connect from any application](/docs/connect/connect-from-any-app).
 
 ```shell shouldWrap
 DATABASE_URL="postgresql://<user>:<password>@<endpoint_hostname>.neon.tech:<port>/<dbname>?sslmode=require&channel_binding=require"
@@ -144,11 +144,16 @@ app.listen(PORT, () => {
 });
 ```
 
+<Admonition type="note">
+`pg` 8.23 and later print a `SECURITY WARNING` when a connection string uses `sslmode=require`. To keep the current behavior and remove the warning, change `sslmode=require` to `sslmode=verify-full` in your connection string. For SSL mode definitions, see [SSL support](https://www.postgresql.org/docs/current/libpq-ssl.html) in the Postgres documentation.
+</Admonition>
+
 ```javascript
 require('dotenv').config();
 
 const express = require('express');
-const postgres = require('postgres');
+// postgres.js 4 and later is ESM-only; .default returns the postgres function
+const postgres = require('postgres').default;
 
 const app = express();
 const PORT = process.env.PORT || 4242;
@@ -175,13 +180,18 @@ app.listen(PORT, () => {
 
 ## Run index.js
 
-Run `node index.js` to view the result on [localhost:4242](localhost:4242) as follows:
+Run `node index.js` to view the result on [localhost:4242](http://localhost:4242) as follows:
 
 ```shell
 { version: 'PostgreSQL 16.0 on x86_64-pc-linux-gnu, compiled by gcc (Debian 10.2.1-6) 10.2.1 20210110, 64-bit' }
 ```
 
 </Steps>
+
+## Connection issues
+
+- If you see an `endpoint ID is not specified` error, the TLS client your Postgres driver depends on doesn't support Server Name Indication (SNI), which Neon uses to route connections. For `pg` (node-postgres), this means an outdated `libpq`-compatible TLS stack; upgrading `pg` usually resolves it.
+- If you encounter an `SSL SYSCALL error: EOF detected` (or a similar connection-reset error), this typically happens when an application tries to reuse a connection after the Neon compute has been suspended due to inactivity. This mainly affects long-running servers that keep a connection pool open, like the `pg` example above — closing and recreating idle connections, or reconnecting on error, resolves it.
 
 <details>
 <summary>**Notes for AI-assisted setup**</summary>
@@ -200,5 +210,6 @@ Run `node index.js` to view the result on [localhost:4242](localhost:4242) as fo
 - [Add Object Storage](/docs/storage/overview): S3-compatible file storage that branches with your database
 - [Deploy a Function](/docs/compute/functions/overview): Run backend compute next to your database, no separate hosting needed
 - [Call an LLM with AI Gateway](/docs/ai-gateway/overview): Access foundation models from Anthropic, OpenAI, Google, and more with one credential
+- [Realtime](/docs/realtime/guides/queries): Build realtime apps with end-to-end reactivity &raquo;
 
 <NeedHelp/>

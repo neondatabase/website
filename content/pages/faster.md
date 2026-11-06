@@ -11,7 +11,7 @@ When we say "Ship faster with Postgres" — it's not just about helping you buil
 See for yourself how faster gets shipped with these open source examples.
 
 - [NextFaster](https://next-faster.vercel.app/) - 400ms initial page load and 10ms nth pageloads on this full-stack Next.JS demo backed by Vercel and Neon. [Source](https://github.com/ethanniser/NextFaster) created by [@ethanniser](https://x.com/ethanniser), [RhysSullivan](https://x.com/RhysSullivan)
-- [AI Chatbot](https://chat.vercel.ai) - uses Vercel's AI SDK to provide a fast SOTA chatbot UI template on Vercel and Neon. [Source](https://github.com/vercel/ai-chatbot) created by Vercel Team
+- [Chatbot](https://chatbot.ai-sdk.dev/) - uses Vercel's AI SDK to provide a fast SOTA chatbot UI template on Vercel and Neon. [Source](https://github.com/vercel/chatbot) created by Vercel Team
 - [Book inventory](https://next-books-search.vercel.app/) - full-stack Next.JS template to search/filter/paginate 600,000 books on Vercel and Neon. [Source](https://github.com/vercel-labs/book-inventory) - credit to [@leerob](https://x.com/leeerob)
 - [Vector DB per Tenant](https://db-per-tenant.up.railway.app/) - Fast, secure chat-with-pdf app showing how to provision a dedicated vector database instance for each user on [Railway](https://railway.com) and Neon. [Source](https://github.com/neondatabase/db-per-tenant) created by [Mahmoud](https://x.com/thisismahmoud_)
 
@@ -24,7 +24,7 @@ Some of the incredible businesses delivering better experiences for their custom
 - **[Retool](https://retool.com)** – Manages 300K+ Postgres DBs with one engineer via Neon’s API. [Details](/blog/how-retool-uses-retool-and-the-neon-api-to-manage-300k-postgres-databases)
 - **[Replit](https://replit.com)** – SOTA Text to App Agent helping creators "build an app for that" in minutes, DB included. [Details](/blog/neon-replit-integration)
 - **[White Widget](https://whitewidget.com)** – Scales up to 50M+ users in seconds with autoscaling. [Details](/blog/white-widgets-secret-to-scalable-postgres-neon)
-- **[Invenco](https://invenco.net)** – Handles high-traffic e-commerce spikes without needing to thinking about databases. [Details](/blog/why-invenco-migrated-to-neon)
+- **[Invenco](https://invenco.net)** – Handles high-traffic e-commerce spikes without needing to thinking about databases. [Details](/blog/why-invenco-migrated-from-aurora-serverless-v2-to-neon)
 - **[Branch Insurance](https://ourbranch.com)** – Builds on Serverless Postgres to deliver faster experience out-of-the-box. [Details](/blog/branch-chose-neon-for-its-true-postgres-and-serverless-nature)
 - **[Magic Circle](https://magiccircle.io)** – Handles 2M+ game sessions on Neon. [Details](/blog/how-magic-circle-scaled-up-to-2m-games-with-cloudfare-and-neon)
 - **[Cedalio](https://cedalio.com)** – One-database-per-client model with auto-suspend. [Details](/blog/how-cedalio-uses-neon-for-an-efficient-development-workflow)
@@ -107,7 +107,7 @@ Serverless functions may be executing independently in short-lived environments,
 2. Execute [multiple queries in a single function](/docs/serverless/serverless-driver#issue-multiple-queries-with-the-transaction-function) - so you only pay the connection tax once.
 3. Use an HTTP API via the [Neon Serverless Driver](/docs/serverless/serverless-driver) - To reduce the number of roundtrips required to establish the connection.
    ![Serverless driver round-trips](/faster/postgres-http-roundtrips.jpg)
-   Neon's [serverless driver](/docs/serverless-driver) and proxy have been optimized to reduce the number of roundtrips to the absolute minimum. To read more about how this works, see: [Quicker serverless Postgres connections](/blog/quicker-serverless-postgres)
+   Neon's [serverless driver](/docs/serverless/serverless-driver) and proxy have been optimized to reduce the number of roundtrips to the absolute minimum. To read more about how this works, see: [Quicker serverless Postgres connections](/blog/quicker-serverless-postgres)
 </Admonition>
 
 ### Putting app and database close together

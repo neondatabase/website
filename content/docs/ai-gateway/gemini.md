@@ -6,10 +6,8 @@ summary: >-
   streamGenerateContent APIs through Neon AI Gateway. Use the google-genai SDK
   with a custom base URL.
 enableTableOfContents: true
-updatedOn: '2026-08-07T13:59:02.632Z'
+updatedOn: '2026-10-23T11:00:38.670Z'
 ---
-
-<FeatureBetaProps feature_name="Neon AI Gateway" />
 
 The Gemini endpoint exposes the [Google Gemini API](https://ai.google.dev/api/generate-content) through Neon AI Gateway. Use it when you're already working with the `google-genai` SDK and want to keep your existing code. For most use cases, the [chat completions](/docs/ai-gateway/chat-completions) endpoint is simpler to set up and works with Gemini models via the OpenAI SDK.
 
@@ -36,14 +34,17 @@ NEON_AI_GATEWAY_BASE_URL=https://br-winter-pond-aptw82ef-api.ai.c-2.us-east-2.aw
 
 This endpoint accepts Google models only:
 
-| Model ID                | Notes |
-| ----------------------- | ----- |
-| `gemini-3-6-flash`      |       |
-| `gemini-3-5-flash`      |       |
-| `gemini-3-5-flash-lite` |       |
-| `gemini-3-1-pro`        |       |
-| `gemini-3-1-flash-lite` |       |
-| `gemini-3-flash`        |       |
+| Model ID                | Notes                                                                                                                                                          |
+| ----------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `gemini-4-argon`        | Supports `temperature` and `thinkingConfig.thinkingLevel` on this endpoint, but not on [chat completions](/docs/ai-gateway/chat-completions#switching-models). |
+| `gemini-3-8-flash`      |                                                                                                                                                                |
+| `gemini-3-7-flash`      |                                                                                                                                                                |
+| `gemini-3-6-flash`      |                                                                                                                                                                |
+| `gemini-3-5-flash`      |                                                                                                                                                                |
+| `gemini-3-5-flash-lite` |                                                                                                                                                                |
+| `gemini-3-1-pro`        |                                                                                                                                                                |
+| `gemini-3-1-flash-lite` |                                                                                                                                                                |
+| `gemini-3-flash`        |                                                                                                                                                                |
 
 Sending a non-Google model ID returns `400 model "<model-id>" is not available on the gemini_generate_content endpoint`, naming whichever model you sent. Use the [chat completions endpoint](/docs/ai-gateway/chat-completions) if you want to call Gemini models alongside other providers from the same code.
 

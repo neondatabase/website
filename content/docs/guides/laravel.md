@@ -8,7 +8,7 @@ summary: >-
   that affects older PDO_PGSQL or libpq drivers, with workarounds for passing
   the endpoint ID as a URL option or in the password field.
 enableTableOfContents: true
-updatedOn: '2026-07-31T15:27:48.506Z'
+updatedOn: '2026-09-16T19:45:35.340Z'
 ---
 
 <CopyPrompt src="/prompts/laravel-prompt.md" 
@@ -41,7 +41,7 @@ DB_USERNAME=[user]
 DB_PASSWORD=[password]
 ```
 
-You can find your database connection details by clicking the **Connect** button on your **Project Dashboard**. For more information, see [Connect from any application](/docs/connect/connect-from-any-app).
+You can find your database connection details by clicking the **Connect** button in the Console nav. For more information, see [Connect from any application](/docs/connect/connect-from-any-app).
 
 </Steps>
 

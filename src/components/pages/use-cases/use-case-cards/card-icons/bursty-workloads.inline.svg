@@ -1,0 +1,10 @@
+<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M17 6H7L12 0L17 6Z" fill="currentColor"/>
+  <rect x="11" y="5" width="2" height="4" fill="currentColor"/>
+  <path d="M6 7L6 17L-2.18557e-07 12L6 7Z" fill="currentColor"/>
+  <rect x="5" y="13" width="2" height="4" transform="rotate(-90 5 13)" fill="currentColor"/>
+  <path d="M7 18L17 18L12 24L7 18Z" fill="currentColor"/>
+  <rect x="13" y="19" width="2" height="4" transform="rotate(-180 13 19)" fill="currentColor"/>
+  <path d="M18 17L18 7L24 12L18 17Z" fill="currentColor"/>
+  <rect x="19" y="11" width="2" height="4" transform="rotate(90 19 11)" fill="currentColor"/>
+</svg>

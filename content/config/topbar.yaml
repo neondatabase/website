@@ -1,4 +1,4 @@
-text: 'Electric is joining team Neon at Databricks, bringing PGlite and real-time sync to Neon'
+text: 'Lakebase Postgres is built on object storage, but 99.99999% of reads are served from high-performance local caches'
 link:
-  url: 'https://neon.com/blog/electric-joins-neon'
+  url: 'https://neon.com/blog/lakebase-postgres-reads-never-touch-object-storage'
   target: '_blank'

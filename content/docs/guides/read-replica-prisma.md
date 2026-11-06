@@ -10,7 +10,7 @@ summary: >-
   to be a separate PrismaClient instance with a PrismaNeon adapter. Multiple
   replicas are selected randomly per query.
 enableTableOfContents: true
-updatedOn: '2026-08-07T18:39:13.799Z'
+updatedOn: '2026-10-05T14:25:23.981Z'
 ---
 
 A Neon read replica is an independent read-only compute that performs read operations on the same data as your primary read-write compute, which means adding a read replica to a Neon project requires no additional storage.
@@ -30,13 +30,13 @@ This guide shows how to use Neon read replicas to scale Prisma applications usin
 You can create read replicas for any branch in your Neon project.
 
 <Admonition type="note">
-The Free plan is limited to a maximum of 3 read replica computes per project.
+On paid plans, you can add up to 6 read replicas per branch. The Free plan is limited to 3 read replica computes per project.
 </Admonition>
 
 You can add a read replica by following these steps:
 
-1. In the Neon Console, select **Branches**.
-2. Select the branch where your database resides.
+1. In the Neon Console, select your branch from the project/branch menu at the top of the sidebar.
+2. Under **Postgres database**, select **Computes**.
 3. Click **Add Read Replica**.
 4. On the **Add new compute** dialog, select **Read replica** as the **Compute type**.
 5. Specify the **Compute size settings** options. You can configure a **Fixed Size** compute with a specific amount of RAM (the default) or enable autoscaling by configuring a minimum and maximum compute size. You can also configure the **Scale to zero** setting, which controls whether your read replica compute is automatically suspended due to inactivity after 5 minutes.
@@ -45,7 +45,7 @@ You can add a read replica by following these steps:
    </Admonition>
 6. When you finish making selections, click **Create**.
 
-   Your read replica compute is provisioned and appears on the **Computes** tab of the **Branches** page.
+   Your read replica compute is provisioned and appears on the **Computes** tab under **Postgres database**.
 
 Alternatively, you can create read replicas using the [Neon API](/docs/reference/api/endpoints/create-project-endpoint) or [Neon CLI](/docs/cli/branches#create).
 
@@ -77,7 +77,7 @@ neon branches add-compute mybranch --type read_only
 
 Connecting to a read replica is the same as connecting to any branch in a Neon project, except you connect via a read replica compute instead of your primary read-write compute. The following steps describe how to retrieve the connection string (the URL) for a read replica from the Neon Console.
 
-1. Click the **Connect** button on your **Project Dashboard**. On the **Connect to your database modal**, select the branch, the database, and the role you want to connect with.
+1. Click the **Connect** button in the Console nav. On the **Connect to your branch** modal, select the branch, the database, and the role you want to connect with.
 1. Under **Compute**, select a **Replica** compute.
 1. Select the connection string and copy it. This is the information you need to connect to the read replica from your Prisma Client. The connection string appears similar to the following:
 
@@ -112,7 +112,7 @@ Notice that the `endpoint_id` (`ep-damp-cell-123456`) for the read replica compu
 
    ```javascript
    import 'dotenv/config';
-   import { PrismaClient } from '@prisma/client';
+   import { PrismaClient } from './generated/prisma'; // path set by `output` in your schema.prisma generator
    import { PrismaNeon } from '@prisma/adapter-neon';
    import { readReplicas } from '@prisma/extension-read-replicas';
 

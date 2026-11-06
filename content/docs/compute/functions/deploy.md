@@ -4,12 +4,11 @@ subtitle: CLI and API reference for deploying and managing Neon Functions.
 summary: >-
   Reference for deploying Neon Functions with neon deploy, neon functions
   deploy, or the Neon API, including flags, deployment states, and slug rules.
-  Also covers checking status, listing functions, and deleting them.
+  Also covers deploying a function from a Neon Function Registry template,
+  checking status, listing functions, and deleting them.
 enableTableOfContents: true
-updatedOn: '2026-07-16T00:24:48.901Z'
+updatedOn: '2026-10-24T11:11:10.465Z'
 ---
-
-<FeatureBetaProps feature_name="Neon Functions" />
 
 ## Deploy with `neon.ts`
 
@@ -19,17 +18,20 @@ If your project has a [`neon.ts`](/docs/reference/neon-ts) config, this is the r
 neon deploy
 ```
 
-| Flag                | Default           | Description                                                                                          |
-| ------------------- | ----------------- | ---------------------------------------------------------------------------------------------------- |
-| `--config`          | walks up from cwd | Path to the `neon.ts` policy                                                                         |
-| `--env`             | (none)            | Path to a `.env` file loaded before `neon.ts` is evaluated, so function `env` values resolve from it |
-| `--env-pull`        | `true`            | Pull the branch's env vars into a local `.env` after a successful apply (`--no-env-pull` to skip)    |
-| `--branch`          | linked branch     | Target branch ID or name                                                                             |
-| `--project-id`      | linked project    | Project ID                                                                                           |
-| `--update-existing` | `false`           | Auto-confirm overriding existing remote settings on the branch                                       |
-| `--allow-protected` | `false`           | Auto-confirm applying to a branch marked protected on Neon                                           |
+| Flag                | Default                   | Description                                                                                          |
+| ------------------- | ------------------------- | ---------------------------------------------------------------------------------------------------- |
+| `--config`          | next to `.neon`, else cwd | Path to the `neon.ts` policy                                                                         |
+| `--env`             | (none)                    | Path to a `.env` file loaded before `neon.ts` is evaluated, so function `env` values resolve from it |
+| `--env-pull`        | `true`                    | Pull the branch's env vars into a local `.env` after a successful apply (`--no-env-pull` to skip)    |
+| `--branch`          | linked branch             | Target branch ID or name                                                                             |
+| `--project-id`      | linked project            | Project ID                                                                                           |
+| `--update-existing` | `false`                   | Override branch settings that differ from `neon.ts` without asking                                   |
+| `--allow-protected` | `false`                   | Apply to a branch marked protected on Neon without asking                                            |
+| `--yes`, `-y`       | `false`                   | Answer yes to both confirmations: `--update-existing` and `--allow-protected`                        |
 
-`neon deploy` is an alias for `neon config apply`. To preview what a deploy would change without applying it, run `neon config plan`.
+In a terminal, `neon deploy` asks before it overrides branch settings or applies to a protected branch. In CI, or anywhere without a terminal, it stops and names the flag to pass instead. `neon deploy` is an alias for `neon config apply`. To preview what a deploy would change without applying it, run `neon config plan`.
+
+You can declare scheduled [Function Triggers](/docs/compute/functions/triggers/schedule) and [custom domains](/docs/compute/functions/custom-domains) in the same `neon.ts` config, so they deploy alongside the function.
 
 Note that `--env` here takes a path to a `.env` file. The `--env` flag on `neon functions deploy` below takes `KEY=VALUE` pairs instead.
 
@@ -41,19 +43,20 @@ To deploy one function directly, without a `neon.ts` config:
 neon functions deploy <slug> [--src <dir-or-entry-file>] [--env KEY=VALUE] [--wait]
 ```
 
-The CLI bundles with esbuild, zips the output, and uploads it. The first deploy creates the function; subsequent deploys update it. See the [neon functions reference](/docs/cli/functions) for the full command surface.
+By default, the CLI bundles your source with esbuild, zips the output, and uploads it. Pass `--no-bundle` to skip esbuild and ship a prebuilt source as-is. The first deploy creates the function; subsequent deploys update it. See the [neon functions reference](/docs/cli/functions) for the full command surface.
 
 <Admonition type="note" title="esbuild not found">
 The `neon` CLI ships `esbuild` for most platforms. If bundling fails with an `esbuild not found` error, install it (`npm install -g esbuild`) or set `NEON_ESBUILD_PATH` to an esbuild binary. `NEON_ESBUILD_PATH` is read by the CLI's own bundler, not by `buildFunctionBundle` in [`@neon/config-runtime`](/docs/reference/config-runtime#function-bundling); when calling that package directly, pass a custom `bundleFunction` instead.
 </Admonition>
 
-| Flag              | Default       | Description                                                                                                                                   |
-| ----------------- | ------------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
-| `--src`           | (none)        | Function source: a directory containing `index.ts`, `index.mjs`, or `index.js`, or a path to the entry file                                   |
-| `--env KEY=VALUE` | (none)        | Set an environment variable. Repeatable. Stored with the deployment. Takes `KEY=VALUE` pairs, not a `.env` file path like `neon deploy --env` |
-| `--runtime`       | `nodejs24`    | Function runtime. `nodejs24` is the only valid value                                                                                          |
-| `--branch`        | linked branch | Target branch. Defaults to the branch in `.neon`                                                                                              |
-| `--wait`          | `true`        | Poll until `completed` or `failed`, up to 10 minutes                                                                                          |
+| Flag              | Default       | Description                                                                                                                                                                                              |
+| ----------------- | ------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `--src`           | (none)        | Function source: a directory containing `index.ts`, `index.js`, or `index.mjs` (the first match is the entry), or a path to the entry file                                                               |
+| `--env KEY=VALUE` | (none)        | Set an environment variable. Repeatable. Stored with the deployment. Takes `KEY=VALUE` pairs, not a `.env` file path like `neon deploy --env`                                                            |
+| `--runtime`       | `nodejs24`    | Function runtime. `nodejs24` is the only valid value                                                                                                                                                     |
+| `--branch`        | linked branch | Target branch. Defaults to the branch in `.neon`                                                                                                                                                         |
+| `--wait`          | `true`        | Poll until `completed` or `failed`, up to 10 minutes                                                                                                                                                     |
+| `--no-bundle`     | off (bundles) | Skip esbuild and zip a prebuilt source as-is. The directory root, or the file you point at, must be `index.mjs` or `index.js` (TypeScript can't ship unbundled). Use it when you run your own build step |
 
 **Examples:**
 
@@ -133,7 +136,7 @@ The API returns immediately for code deploys. Poll the get endpoint (see [Check 
 
 ### Deploy with `@neon/sdk`
 
-The beta [`@neon/sdk`](https://www.npmjs.com/package/@neon/sdk) client includes a `neon.functions` namespace for branch-scoped function management:
+The [`@neon/sdk`](https://www.npmjs.com/package/@neon/sdk) client includes a `neon.functions` namespace for branch-scoped function management:
 
 ```ts
 import { createNeonClient } from '@neon/sdk';
@@ -144,7 +147,10 @@ const projectId = process.env.NEON_PROJECT_ID!;
 const branchId = process.env.NEON_BRANCH_ID!;
 const zipBytes = await readFile('function.zip');
 
-const { data: deployment } = await neon.functions.deploy(projectId, branchId, 'hello', {
+const { data: deployment } = await neon.functions.deploy({
+  projectId,
+  branchId,
+  slug: 'hello',
   zip: new File([zipBytes], 'function.zip', { type: 'application/zip' }),
   runtime: 'nodejs24',
   environment: JSON.stringify({ MY_SECRET: 'value' }),
@@ -152,6 +158,16 @@ const { data: deployment } = await neon.functions.deploy(projectId, branchId, 'h
 ```
 
 `neon.functions.deploy` uses the same multipart API fields as the raw endpoint. `list`, `get`, `update`, and `delete` are also available under `neon.functions`.
+
+## Deploy a function from a template
+
+A function template adds a ready-made function to your project. Browse the catalog at [neon.com/functions/templates](/functions/templates), then add one with [`neon functions new`](/docs/cli/functions#new):
+
+```bash
+neon functions new basic   # writes functions/basic/ and declares it in neon.ts
+```
+
+From there, it deploys like any other function. Some templates also need services such as AI Gateway or Object Storage enabled first. For the full workflow, see [Use function templates](/docs/compute/functions/templates).
 
 ## Slugs
 
@@ -187,7 +203,7 @@ GET /projects/{project_id}/branches/{branch_id}/functions/{slug}
 </TabItem>
 </Tabs>
 
-The response includes `invocation_url`, the public URL for your function:
+The output includes the function's public URL (`URL` in the CLI table, `invocation_url` in JSON and the API):
 
 ```
 https://<branch_id>-<slug>.compute.<cell>.us-east-2.aws.neon.tech/

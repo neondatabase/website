@@ -1,8 +1,8 @@
 # Management API samples (`scripts/`)
 
-Small **Node.js + TypeScript** scripts that call Neon’s official **[Management API TypeScript SDK](https://neon.com/docs/reference/typescript-sdk.md)** ([`@neon/sdk`](https://registry.npmjs.org/@neon/sdk)) via **`createNeonClient`**, **no other Neon npm packages**. Sources live in **[`scripts/`](../scripts/)**; **`npm run build`** runs **`tsc`** and emits **`dist/scripts/*.js`** per **[`tsconfig.json`](../scripts/tsconfig.json)**. **`npm run typecheck`** runs **`tsc --noEmit`** (no emit). Scripts **`import "dotenv/config"`** so variables from **`.env`** load automatically; run with **`node dist/scripts/<name>.js`** or **`npm run …`** (each npm script runs **`build`** then **`node dist/scripts/...`**).
+Small **Node.js + TypeScript** scripts that call Neon’s official **[Management API TypeScript SDK](https://neon.com/docs/reference/typescript-sdk.md)** ([`@neon/sdk`](https://registry.npmjs.org/@neon/sdk)) via **`createNeonClient`**. These scripts use **no other Neon npm packages**. Sources live in **[`scripts/`](../scripts/)**; **`npm run build`** runs **`tsc`** and emits **`dist/scripts/*.js`** per **[`tsconfig.json`](../scripts/tsconfig.json)**. **`npm run typecheck`** runs **`tsc --noEmit`** (no emit). Scripts **`import "dotenv/config"`** so variables from **`.env`** load automatically; run with **`node dist/scripts/<name>.js`** or **`npm run …`** (each npm script runs **`build`** then **`node dist/scripts/...`**).
 
-**When we say “Neon TypeScript SDK” here, we mean [`@neon/sdk`](https://registry.npmjs.org/@neon/sdk) and nothing else**, not `@neondatabase/serverless`, `@neondatabase/neon-js`, `@neondatabase/toolkit`, or any other Neon package.
+**When we say “Neon TypeScript SDK” in this samples catalog, we mean [`@neon/sdk`](https://registry.npmjs.org/@neon/sdk) and nothing else**, not `@neondatabase/serverless`, `@neondatabase/neon-js`, `@neondatabase/toolkit`, or any other Neon package. To give agents Management API access without writing tool handlers, use [`@neon/tools`](https://www.npmjs.com/package/@neon/tools) as described in [SDK vs agent tools](../SKILL.md#sdk-vs-agent-tools).
 
 Use these to prototype **per-tenant provisioning**, **fleet branching/snapshot orchestration**, **database versioning** (snapshots + restore), **org transfer** (free ↔ paid org), **consumption** polling, and **Neon Auth management** endpoints, not introductory app connectivity (that is **`neon-postgres`** + app docs).
 
@@ -225,7 +225,7 @@ node --env-file=.env dist/scripts/auth-users.js meta
 
 ## Shared helpers
 
-[`scripts/utils.ts`](../scripts/utils.ts) holds **shared helpers** on top of the same **`@neon/sdk`** surface: a configured client factory (`neonClient` — `throwOnError` + `waitForReadiness`) and default-branch resolution (`getProductionBranchId`). The SDK itself handles **readiness polling**, retries, and typed errors, so the scripts no longer hand-roll an operation poller. There is no second Neon client package.
+[`scripts/utils.ts`](../scripts/utils.ts) holds **shared helpers** on top of the same **`@neon/sdk`** surface: a configured client factory (`neonClient` — `throwOnError` + `waitForReadiness`) and default-branch resolution (`getProductionBranchId`). The SDK itself handles **readiness polling**, retries, and typed errors, so the scripts no longer hand-roll an operation poller. For agent-facing Management API tools, see [SDK vs agent tools](../SKILL.md#sdk-vs-agent-tools).
 
 ---
 

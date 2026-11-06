@@ -1,5 +1,6 @@
 ---
 title: Neon API
+subtitle: Manage Neon projects, branches, and backend services over HTTP.
 summary: >-
   Browse all Neon API endpoints by resource, or get started with authentication
   and your first request.
@@ -10,6 +11,8 @@ redirectFrom:
   - /docs/reference/about
   - /docs/api
   - /docs/api/about
+  - /docs/api-reference
+updatedOn: '2026-09-04T22:12:54.000Z'
 ---
 
 The Neon API lets you manage Neon programmatically. You can create and manage projects, branches, databases, roles, compute endpoints, API keys, and more. Everything you can do in the Neon Console, you can do with the API.

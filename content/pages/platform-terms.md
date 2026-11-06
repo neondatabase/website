@@ -12,7 +12,7 @@ seo:
 ---
 
 
-Last Updated: August 5, 2026
+Last Updated: October 14, 2026
 
 This Product Specific Schedule (Neon) (this "**Schedule**") is entered into as of the Effective Date between Databricks, Inc., the parent company of Neon, LLC ("**Databricks**"), and Customer and governs Customer's use of Databricks' Neon product family of cloud computing platform services, as described in the Documentation (the "**Platform Services**", for purposes of this Schedule). By accessing the Platform Services, Customer agrees to the terms of this Schedule. If you are entering into this Schedule on behalf of a company (such as your employer) or other legal entity, you represent and warrant that you are authorized to bind that entity to this Schedule, in which case "**Customer**" will refer to that entity (otherwise, "Customer" refers to you as an individual).
 
@@ -30,7 +30,8 @@ For clarity, this Schedule does not affect the terms of the Agreement as they re
     5.  **Service Specific Terms.** All references in the Agreement to the Service Specific Terms are hereby deleted.
     6.  **Projects**. All references in the Agreement to "Workspaces" shall be deemed to include any projects created by Customer within the Platform Services.
     7.  **Cardholder Data.** Customer acknowledges and agrees it shall not include in Customer Content any cardholder data as defined under PCI-DSS.
-4.  **SLA**. Notwithstanding anything to the contrary, the Service Level Agreement located at [https://neon.com/neon-business-sla](https://neon.com/neon-business-sla) shall be incorporated into this Schedule by reference and apply exclusively to Customers who have subscribed to the Scale Self Service Plan.
+4.  **Externally-hosted TypeSafe Models.** Customers may choose to instruct Databricks to facilitate Customer's access to and use of models hosted and offered by TypeSafe AI, Inc. ("**Externally-hosted TypeSafe Models**") in connection with the Platform Services. Externally-hosted TypeSafe Models are Non-Databricks Offerings under the Agreement. Customer acknowledges and agrees that its access to and use of Externally-hosted TypeSafe Models, and TypeSafe AI's processing of any data Customer submits to or receives from TypeSafe AI in connection with such access and use, are governed solely by TypeSafe's [terms and conditions](https://typesafe.ai/legal/mca) (including its [data processing addendum](https://typesafe.ai/legal/data-processing)) and [privacy policy](https://typesafe.ai/legal/privacy-policy), and not the Agreement.
+5.  **SLA**. Notwithstanding anything to the contrary, the Service Level Agreement located at [https://neon.com/neon-business-sla](https://neon.com/neon-business-sla) shall be incorporated into this Schedule by reference and apply exclusively to Customers who have subscribed to the Scale Self Service Plan.
 
 **Exhibit A -- Security Measures**
 

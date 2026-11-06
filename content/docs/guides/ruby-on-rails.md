@@ -8,7 +8,7 @@ summary: >-
   page when setting up a new or existing Rails project. A separate
   sibling page covers Rails schema migrations.
 enableTableOfContents: true
-updatedOn: '2026-08-04T05:18:26.469Z'
+updatedOn: '2026-09-16T19:45:35.340Z'
 ---
 
 <CopyPrompt src="/prompts/ruby-on-rails-prompt.md" 
@@ -52,11 +52,11 @@ DATABASE_URL=postgresql://[user]:[password]@[neon_hostname]/
 ```
 
 <Admonition type="note">
-You can find the connection string for your database by clicking the **Connect** button on your **Project Dashboard**. For more information, see [Connect from any application](/docs/connect/connect-from-any-app).
+You can find the connection string for your database by clicking the **Connect** button in the Console nav. For more information, see [Connect from any application](/docs/connect/connect-from-any-app).
 </Admonition>
 
 <Admonition type="important">
-The role you specified in the `DATABASE_URL` must have **CREATEDB** privileges. Roles created in the Neon Console, CLI, or API, including the default role created with a Neon project, are granted membership in the [neon_superuser](/docs/manage/roles#the-neonsuperuser-role) role, which has the `CREATEDB` privilege. Alternatively, you can create roles with SQL to grant specific privileges. See [Manage database access](/docs/manage/database-access).
+The role you specified in the `DATABASE_URL` must have **CREATEDB** privileges. Roles created in the Neon Console or API, including the default role created with a Neon project, are granted membership in the [neon_superuser](/docs/manage/roles#the-neonsuperuser-role) role, which has the `CREATEDB` privilege. Roles created with `neon roles create --access` don't have it. Alternatively, you can create roles with SQL to grant specific privileges. See [Manage database access](/docs/manage/database-access).
 </Admonition>
 
 Create the development database by issuing the following commands from the root of your project directory:

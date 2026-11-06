@@ -148,7 +148,7 @@ Output:
 (1 row)
 ```
 
-To extract the last phone number as a `JSONB` value, you can use the \-\>\> operator:
+To extract the last phone number as a text string, you can use the \-\>\> operator:
 
 ```sql
 SELECT

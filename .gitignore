@@ -74,6 +74,7 @@ public/robots.txt
 public/md
 public/docs/**/llms.txt
 public/docs/llms-full.txt
+public/guides/**/llms.txt
 src/utils/data/github-stars.generated.json
 
 # API ref generator output (never commit — CI regenerates on every deploy)
@@ -103,6 +104,9 @@ package-lock.json
 !public/docs/ai/skills/**/package-lock.json
 .vercel
 .neon
+
+# Isaac Review local tooling state
+.isaac/
 
 # Evals directory (test validation for documentation)
 .evals/

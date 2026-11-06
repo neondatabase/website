@@ -7,10 +7,12 @@ summary: >-
   connection saturation, cache misses, or replication lag, and decide whether
   to scale up or enable pooling. Historical data retention depends on your plan.
 enableTableOfContents: true
-updatedOn: '2026-08-07T13:46:01.605Z'
+updatedOn: '2026-09-25T09:58:44.827Z'
 ---
 
-The **Monitoring** dashboard in the Neon console provides several graphs for monitoring system and database metrics. You can access the **Monitoring** dashboard from the sidebar in the Neon Console. Observable metrics include:
+The **Monitoring** dashboard in the Neon console provides several graphs for monitoring system and database metrics. You can access the **Monitoring** dashboard from the sidebar in the Neon Console.
+
+The Monitoring page is organized into **Postgres**, **Storage**, **Functions**, and **Realtime** tabs. This page describes the **Postgres** tab, which holds the metrics graphs below along with the **Active queries**, **Query performance**, **Data API Advisors**, and **System operations** views. The **Storage**, **Functions**, and **Realtime** tabs show [logs](/docs/introduction/monitor-logs) for Object Storage, Functions, and Realtime.
 
 Your Neon plan defines the range of data you can view.
 
@@ -22,7 +24,7 @@ Your Neon plan defines the range of data you can view.
 
 You can select different periods or a custom period within the permitted range from the menu on the dashboard.
 
-The dashboard displays metrics for the selected **Branch** and **Compute**. Use the drop-down menus to view metrics for a different branch or compute. Use the **Refresh** button to update the displayed metrics.
+The dashboard displays metrics for the selected branch and compute. Choose the branch from the project/branch menu at the top of the sidebar, and use the **Compute** drop-down on the page to switch computes. Use the **Refresh** button to update the displayed metrics.
 
 If your compute was idle or there has not been much activity, graphs may display this message: `There is no data to display at the moment`. In this case, try selecting a different time period or returning later after more usage data has been collected.
 
@@ -201,8 +203,7 @@ The **Replication delay seconds** graph shows the time delay, in seconds, betwee
 
 ![compute cache hit rate graph](/docs/introduction/compute_cache_hit_rate.png)
 
-The **Compute cache hit rate** graph shows the percentage of read requests served from your compute's cache.
-Queries not served from the compute cache retrieve data from storage, which is more costly and can result in slower query performance. To learn more about how Neon caches data, see [Monitoring compute cache usage](/docs/extensions/neon#monitoring-compute-cache-usage).
+The **Compute cache hit rate** graph shows the percentage of read requests served from your [compute cache](/docs/reference/glossary#compute-cache) rather than from storage. Reads served from storage are more costly and can result in slower query performance. To learn more about how Neon caches data, see [Monitoring compute cache usage](/docs/extensions/neon#monitoring-compute-cache-usage).
 
 ## Working set size
 
@@ -215,9 +216,9 @@ The **Working set size** graph visualizes the amount of data accessed (calculate
 - **5m** (5 minutes): This line shows the data accessed in the last 5 minutes.
 - **15m** (15 minutes): Similar to the 5-minute window, this metric tracks the data accessed in the last 15 minutes.
 - **1h** (1 hour): This line represents the data accessed in the last hour.
-- **Compute cache size**: This is the size of your compute cache, which is determined by the size of your compute. Larger computes have larger caches. For cache sizes, see [How to size your compute](/docs/manage/computes#how-to-size-your-compute).
-  For optimal performance the compute cache should be larger than your working set size for a given time interval.
-  If your working set size is larger than the compute cache size it is recommended to increase the maximum size of the compute to improve the cache hit rate and achieve good performance.
+- **Compute cache size**: The size of your compute cache, determined by the size of your compute. Larger computes have larger caches. For cache sizes, see [How to size your compute](/docs/manage/computes#how-to-size-your-compute).
+
+For optimal performance your compute cache should be larger than your working set size for a given time interval. If your working set size is larger than the compute cache size it is recommended to increase the maximum size of the compute to improve the cache hit rate and achieve good performance.
 
 If your workload pattern doesn't change much over time it is recommended to compare the 1h time interval working set size with the compute cache size and make sure that working set size is smaller than the compute cache size.
 

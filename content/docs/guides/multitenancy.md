@@ -13,7 +13,7 @@ summary: >-
 enableTableOfContents: true
 redirectFrom:
   - /docs/guides/database-per-user
-updatedOn: '2026-07-31T15:27:48.506Z'
+updatedOn: '2026-08-27T15:07:41.821Z'
 ---
 
 With its serverless and API-first nature, Neon is an excellent choice for building database-per-user applications (or apps where each user/customer has their own Postgres database). Neon is particularly well-suited for architectures that prioritize maximum database isolation, achieving the equivalent of instance-level isolation.
@@ -70,7 +70,7 @@ Now that we've reviewed your options, let's focus on the design choice we recomm
 
 ![Project per user](/docs/guides/multitenancy/project_per_user.png)
 
-We recommend setting up one project per user, rather than, for example, using a branch per customer. A Neon [project](/docs/manage/overview) serves as the logical equivalent of an "instance" but without the management overhead. Here's why we suggest this design:
+We recommend setting up one project per user, rather than, for example, using a branch per customer. A Neon [project](/docs/concepts/the-object-model) serves as the logical equivalent of an "instance" but without the management overhead. Here's why we suggest this design:
 
 - **Straightforward scalability**  
   Instead of learning how to handle large Postgres databases, this model allows you to simply create a new project when a user joins, something that can be handled automatically via the Neon API. This approach is very cost-effective, as we'll see below. Databases remain small, keeping management at the database level simple.

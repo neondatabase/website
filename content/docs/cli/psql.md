@@ -6,12 +6,14 @@ summary: >-
   against a branch in your Neon project, including pooled connections and
   time-travel support.
 enableTableOfContents: true
-updatedOn: '2026-07-01T13:41:48.668Z'
+updatedOn: '2026-11-05T15:33:57.188Z'
 redirectFrom:
   - /docs/reference/cli-psql
 ---
 
-The `psql` command connects to a database in your Neon project using the `psql` client. It builds a connection string for the specified branch (or the default branch from your [context file](/docs/cli/set-context)) and launches `psql`, equivalent to running [`neon connection-string --psql`](/docs/cli/connection-string) as a dedicated top-level command. Requires neon 2.22.2 or later. Check your version with `neon --version`. If `--project-id` is omitted, the CLI resolves it from your [context file](/docs/cli/set-context), auto-selects when your account has only one project, and prompts otherwise. `--role-name` and `--database-name` are needed only when the branch has more than one role or database.
+The `psql` command connects to a database in your Neon project using the `psql` client. It builds a connection string for the specified branch (or the default branch from your [context file](/docs/cli/link)) and launches `psql`, equivalent to running [`neon connection-string --psql`](/docs/cli/connection-string) as a dedicated top-level command. It's also available as [`neon postgres psql`](/docs/cli/postgres#psql).
+
+If `--project-id` is omitted, the CLI resolves it from your [context file](/docs/cli/link), auto-selects when your account has only one project, and otherwise asks you to pass `--project-id`. `--role-name` and `--database-name` are needed only when the branch has more than one role or database.
 
 ## Usage
 
@@ -35,28 +37,28 @@ Connect to the default branch:
 neon psql
 ```
 
-Connect to a named branch. New Neon projects create a default branch named `production`:
+Connect to a named branch. Projects created with the CLI or API get a default branch named `main`; Console-created projects use `production` (run `neon branches list` if you're unsure):
 
 ```bash
-neon psql production
+neon psql main
 ```
 
 Run a single query:
 
 ```bash
-neon psql production -- -c "SELECT version()"
+neon psql main -- -c "SELECT version()"
 ```
 
 Run an SQL file:
 
 ```bash
-neon psql production -- -f dump.sql
+neon psql main -- -f dump.sql
 ```
 
 Connect to a branch at a specific point in time:
 
 ```bash
-neon psql production@2024-01-01T00:00:00Z
+neon psql main@2024-01-01T00:00:00Z
 ```
 
 Use a pooled connection:

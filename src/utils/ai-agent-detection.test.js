@@ -31,14 +31,32 @@ describe('isAIAgentRequest', () => {
 
     aiAgentPatterns.forEach((pattern) => {
       it(`should detect AI agent with User-Agent containing "${pattern}"`, () => {
-        const req = createMockRequest(`Mozilla/5.0 ${pattern}/1.0`, 'text/html');
+        const req = createMockRequest(`Mozilla/5.0 ${pattern}/1.0`, '*/*');
         expect(isAIAgentRequest(req)).toBe(true);
       });
 
       it(`should detect AI agent with User-Agent containing lowercase "${pattern.toLowerCase()}"`, () => {
-        const req = createMockRequest(`Mozilla/5.0 ${pattern.toLowerCase()}/1.0`, 'text/html');
+        const req = createMockRequest(`Mozilla/5.0 ${pattern.toLowerCase()}/1.0`, '*/*');
         expect(isAIAgentRequest(req)).toBe(true);
       });
+
+      it(`should not detect AI agent with User-Agent containing "${pattern}" when Accept includes text/html`, () => {
+        const req = createMockRequest(
+          `Mozilla/5.0 ${pattern}/1.0`,
+          'text/html,application/xhtml+xml,*/*;q=0.8'
+        );
+        expect(isAIAgentRequest(req)).toBe(false);
+      });
+    });
+
+    it('should detect AI agent with User-Agent and no Accept header', () => {
+      const req = createMockRequest('curl/8.7.1', '');
+      expect(isAIAgentRequest(req)).toBe(true);
+    });
+
+    it('should detect AI agent with User-Agent when Accept includes text/markdown and text/html', () => {
+      const req = createMockRequest('Claude-User/1.0', 'text/markdown, text/html, */*');
+      expect(isAIAgentRequest(req)).toBe(true);
     });
 
     it('should not detect regular browser User-Agent', () => {
@@ -98,9 +116,9 @@ describe('isAIAgentRequest', () => {
       expect(isAIAgentRequest(req)).toBe(true);
     });
 
-    it('should detect AI agent with AI User-Agent even with HTML Accept', () => {
+    it('should NOT detect AI agent with AI User-Agent and HTML Accept', () => {
       const req = createMockRequest('Claude/1.0', 'text/html');
-      expect(isAIAgentRequest(req)).toBe(true);
+      expect(isAIAgentRequest(req)).toBe(false);
     });
   });
 
@@ -141,6 +159,27 @@ describe('isAIAgentRequest', () => {
 
 describe('getMarkdownPath', () => {
   describe('Valid content routes', () => {
+    it.each([
+      ['/functions', '/md/functions.md'],
+      ['/functions.md', '/md/functions.md'],
+      ['/ai-gateway', '/md/ai-gateway.md'],
+      ['/ai-gateway.md', '/md/ai-gateway.md'],
+      ['/object-storage', '/md/object-storage.md'],
+      ['/object-storage.md', '/md/object-storage.md'],
+      ['/auth', '/md/auth-page.md'],
+      ['/auth.md', '/auth.md'],
+      ['/lakebase', '/md/lakebase.md'],
+      ['/lakebase.md', '/md/lakebase.md'],
+    ])('should resolve generated page %s to %s', (pagePath, markdownPath) => {
+      expect(getMarkdownPath(pagePath)).toBe(markdownPath);
+    });
+
+    it('should alias /feedback.md to the Send feedback docs page mirror', () => {
+      expect(getMarkdownPath('/feedback.md')).toBe('/md/docs/introduction/feedback.md');
+      // Bare /feedback is a redirectFrom redirect to the docs page, not a markdown alias.
+      expect(getMarkdownPath('/feedback')).toBeNull();
+    });
+
     it('should convert /docs/introduction to markdown path', () => {
       const result = getMarkdownPath('/docs/introduction');
       expect(result).toBe('/md/docs/introduction.md');
@@ -238,14 +277,13 @@ describe('getMarkdownPath', () => {
       expect(result).toBe('/md/changelog/2026-03-13.md');
     });
 
-    it('should exclude /use-cases/multi-tb', () => {
-      const result = getMarkdownPath('/use-cases/multi-tb');
-      expect(result).toBeNull();
-    });
-
-    it('should exclude /use-cases/serverless-apps', () => {
-      const result = getMarkdownPath('/use-cases/serverless-apps');
-      expect(result).toBeNull();
+    it.each([
+      ['/use-cases/full-stack-apps', '/md/use-cases/full-stack-apps.md'],
+      ['/use-cases/branching-workflows', '/md/use-cases/branching-workflows.md'],
+      ['/use-cases/bursty-workloads', '/md/use-cases/bursty-workloads.md'],
+      ['/use-cases/large-databases', '/md/use-cases/large-databases.md'],
+    ])('should resolve %s to its markdown mirror', (path, expected) => {
+      expect(getMarkdownPath(path)).toBe(expected);
     });
   });
 
@@ -275,14 +313,23 @@ describe('getMarkdownPath', () => {
       expect(result).toBeNull();
     });
 
-    it('should return null for root path /', () => {
-      const result = getMarkdownPath('/');
-      expect(result).toBeNull();
-    });
-
     it('should resolve /pricing to custom markdown path', () => {
       const result = getMarkdownPath('/pricing');
       expect(result).toBe('/pricing.md');
+    });
+  });
+
+  describe('Homepage', () => {
+    it('should resolve the root path / to /index.md', () => {
+      expect(getMarkdownPath('/')).toBe('/index.md');
+    });
+
+    it('should resolve /home to /index.md (same marketing homepage)', () => {
+      expect(getMarkdownPath('/home')).toBe('/index.md');
+    });
+
+    it('should resolve /index.md to itself', () => {
+      expect(getMarkdownPath('/index.md')).toBe('/index.md');
     });
   });
 

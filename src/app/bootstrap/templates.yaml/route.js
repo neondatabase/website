@@ -65,8 +65,8 @@ const FALLBACK_MANIFEST = `templates:
       ref: main
       subdir: with-mcp
   - id: realtime-chat
-    title: "Realtime chat (Next.js, Neon Auth, WebSockets) on Neon Functions"
-    description: "A full-stack realtime chat: a Next.js app with Neon Auth talking over WebSockets to a Hono server on Neon Functions. Messages are stored in Neon Postgres via Drizzle and fanned out to all clients across isolates with Postgres LISTEN/NOTIFY."
+    title: "WebSocket chat"
+    description: "A full-stack chat: a Next.js app with Neon Auth talking over WebSockets to a Hono server on Neon Functions. Messages are stored in Neon Postgres via Drizzle and fanned out to all clients across isolates with Postgres LISTEN/NOTIFY."
     services:
       - Postgres
       - Functions
@@ -75,10 +75,10 @@ const FALLBACK_MANIFEST = `templates:
       owner: neondatabase
       repo: examples
       ref: main
-      subdir: with-realtime-chat
+      subdir: with-websockets-function
   - id: realtime-sse
-    title: "Realtime counter (TanStack Router, SSE) on Neon Functions"
-    description: "A realtime shared counter: a client-only TanStack Router SPA talking over server-sent events to a Hono server on Neon Functions. The count is stored in Neon Postgres via Drizzle and pushed to all clients across isolates with Postgres LISTEN/NOTIFY."
+    title: "SSE counter"
+    description: "A shared counter: a client-only TanStack Router SPA talking over server-sent events to a Hono server on Neon Functions. The count is stored in Neon Postgres via Drizzle and pushed to all clients across isolates with Postgres LISTEN/NOTIFY."
     services:
       - Postgres
       - Functions
@@ -86,7 +86,7 @@ const FALLBACK_MANIFEST = `templates:
       owner: neondatabase
       repo: examples
       ref: main
-      subdir: with-realtime-sse
+      subdir: with-server-sent-events-function
 `;
 
 // Cheap structural guard so a 200 that returns an error page / truncated body

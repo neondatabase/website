@@ -6,7 +6,8 @@ description: >-
   whenever the user is designing an agent/app builder, provisioning a Neon
   project or database per user/app/agent run, managing thousands of tenant
   projects, separating sponsored free users from paid customers, moving projects
-  between orgs, choosing personal vs organization vs project-scoped API keys,
+  between orgs, choosing `@neon/sdk` vs `@neon/tools`, choosing personal vs
+  organization vs project-scoped API keys,
   tracking fleet consumption or Agent Plan costs, creating compound checkpoints
   that combine DB snapshots with source revisions/secrets/deploy metadata, or
   orchestrating snapshot/restore flows for generated apps. Also use it for Neon
@@ -19,11 +20,12 @@ license: Apache-2.0
 
 Companion to `**neon-postgres**` (install that first). This skill covers
 fleet-scale control plane for the Neon Agent Program: dual-org layout, project
-transfer, per-tenant provisioning, compound checkpoints, consumption, and
-commercial terms.
+transfer, per-tenant provisioning, compound checkpoints, consumption, commercial
+terms, and when to give agents Management API access via `@neon/tools`.
 
 For connection strings, drivers, ORMs, branching tutorials, Auth in apps, Data
-API, and MCP, use `**neon-postgres**` and [Neon docs](https://neon.com/docs).
+API, and Neon's hosted MCP, use `**neon-postgres**` and
+[Neon docs](https://neon.com/docs).
 
 ## Scope
 
@@ -31,6 +33,7 @@ Use `**neon-postgres**` for general Neon usage. Use **this skill** when the
 question involves:
 
 - Dual-org economics and API keys (personal, organization, project-scoped)
+- `@neon/sdk` for the control plane vs `@neon/tools` for agent-facing Management API access
 - Project-per-tenant provisioning and transfer
 - Fleet-wide snapshot/restore orchestration and housekeeping
 - Compound checkpoints
@@ -57,6 +60,84 @@ keeps markdown guides beside the runnable examples;
 [MANAGEMENT_API_SAMPLES.md](https://github.com/neondatabase/neon-for-agent-platforms/blob/main/skills/neon-postgres-agent-platforms/references/MANAGEMENT_API_SAMPLES.md)
 is the script catalog and env map. The human **Quick start** is the root
 [README](https://github.com/neondatabase/neon-for-agent-platforms/blob/main/README.md#quick-start).
+
+## SDK vs agent tools
+
+Your control plane should call
+[`@neon/sdk`](https://www.npmjs.com/package/@neon/sdk). The sample scripts in
+this repo do.
+
+The [Neon MCP server](https://github.com/neondatabase/mcp-server-neon) is a
+custom agent-facing layer: MCP tool handlers written over `@neon/sdk`.
+
+Use [`@neon/tools`](https://www.npmjs.com/package/@neon/tools) when you want to
+give agents on your platform direct Neon management access without writing those
+handlers. It publishes generated wrappers for a selected set of SDK methods as
+agent tools, with adapters for MCP, Eve, and Mastra.
+
+These public client methods are not tools: `projects.create`, `branches.create`,
+`operations.waitFor`, `postgres.roles.password`, and `storage.objects.get`. Use
+`projects.createAndConnect` and `branches.createWithCompute` for creates that
+attach compute and return a connection string. Waiting is what the write tools
+already do. Generated schemas are strict: a newly added API field is rejected
+until you upgrade `@neon/tools`, or call `@neon/sdk` directly.
+
+Selectors are SDK paths (`projects.list`). Call `publishedId` for the
+model-facing id (`projects.list` → `list_projects`). `toolIds` lists every
+selector. MCP 2.x uses `@neon/tools/mcp`; MCP 1.x uses `@neon/tools/mcp-v1`.
+
+```ts
+import { McpServer } from "@modelcontextprotocol/server";
+import { createNeonTools } from "@neon/tools";
+import { registerNeonTools } from "@neon/tools/mcp";
+
+const apiKey = process.env.NEON_API_KEY;
+if (!apiKey) throw new Error("NEON_API_KEY is required");
+
+const tools = createNeonTools({
+  apiKey,
+  tools: [
+    "projects.list",
+    "projects.createAndConnect",
+    "branches.createWithCompute",
+  ] as const,
+});
+
+const server = new McpServer({ name: "neon", version: "1.0.0" });
+registerNeonTools(server, tools);
+```
+
+`apiKey` accepts a function so a short-lived token can be refreshed per
+request. A remote MCP server that already authenticated the client can omit
+`apiKey` at construction; `registerNeonTools` then sends `authInfo.token`.
+
+MCP annotations are advisory. Hosts using `@neon/tools/mcp` must read
+`neon/requiresApproval` in MCP `_meta` and enforce their own approval policy
+before execution. The Eve and Mastra adapters map that flag to Eve's
+`approval` hook and Mastra's `requireApproval`. Every non-read operation is
+marked as requiring approval, as are reads that return connection credentials.
+
+Select only the methods each agent needs. For a tenant-scoped agent, inject the
+path `project_id` so the model cannot pick another project on tools that take
+that path parameter:
+
+```ts
+const tools = createNeonTools({
+  apiKey,
+  tools: ["projects.get", "branches.createWithCompute"] as const,
+  inject: {
+    projectId: tenantProjectId,
+    omitFromSchema: true,
+  },
+});
+```
+
+`inject.projectId` fills URL path `project_id` only. It does not hide query or
+body fields with that name, and it does not constrain tools that have no project
+path (for example `projects.list`). Pair it with a **project-scoped API key**
+when the agent must not see the rest of the org.
+
+Full API: [`@neon/tools` README](https://github.com/neondatabase/neon-pkgs/tree/main/packages/tools#readme).
 
 ## Gotchas
 
@@ -314,7 +395,7 @@ and timeline.
 invoices are in the Neon Console under Billing.
 - **Community:** [Neon Discord](https://discord.gg/92vNTzKDGp) ·
 [Docs](https://neon.com/docs) ·
-[API reference](https://api-docs.neon.tech)
+[API reference](https://neon.com/docs/reference/api)
 
 ## Repository samples
 
@@ -332,8 +413,9 @@ Runnable Management API automation from
 - **Doc index:**
 [SCRIPT-OVERVIEW.md](https://github.com/neondatabase/neon-for-agent-platforms/blob/main/skills/neon-postgres-agent-platforms/references/SCRIPT-OVERVIEW.md)
 
-All scripts use `@neon/sdk` only. Shared
+These scripts use `@neon/sdk` only. Shared
 [utils.ts](https://github.com/neondatabase/neon-for-agent-platforms/blob/main/skills/neon-postgres-agent-platforms/scripts/utils.ts)
 builds the client and resolves the default branch; the SDK polls async
-operations (readiness) for you. For SQL access from app code (drivers, pooling, ORMs),
-use `**neon-postgres`**.
+operations (readiness) for you. For agent-facing Management API tools, see
+**SDK vs agent tools** above. For SQL access from app code (drivers, pooling,
+ORMs), use `**neon-postgres`**.

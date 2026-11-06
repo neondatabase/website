@@ -2,10 +2,8 @@ const sharedMdxComponents = {
   // ConponentName: 'shared-content/component-filename'
   NeedHelp: 'shared-content/need-help',
   NewPricing: 'shared-content/new-pricing',
-  LRNotice: 'shared-content/lr-notice',
   PrivatePreview: 'shared-content/private-preview',
   PublicPreview: 'shared-content/public-preview',
-  LRBeta: 'shared-content/lr-inbound-beta',
   FeatureBeta: 'shared-content/feature-beta',
   FeatureBetaProps: 'shared-content/feature-beta-props',
   MigrationAssistant: 'shared-content/migration-assistant',
@@ -18,25 +16,24 @@ const sharedMdxComponents = {
   AgentSkillsTip: 'shared-content/agent-skills-tip',
   AuthAISetup: 'shared-content/auth-ai-setup',
   AuthAISetupTip: 'shared-content/auth-ai-setup-tip',
+  NeonPluginContents: 'shared-content/neon-plugin-contents',
   AzureRegionsDeprecation: 'shared-content/azure-regions-deprecation',
   ConsumptionAccountApiDeprecation: 'shared-content/consumption-account-api-deprecation',
   NextjsProxyNote: 'shared-content/nextjs-proxy-note',
-  // neon-auth-sdk-shared
-  SdkOverview: 'shared-content/neon-auth-sdk-shared/overview',
-  SdkStackApp: 'shared-content/neon-auth-sdk-shared/objects/stack-app',
+  // Realtime SDK reference components
+  RealtimeSdkBackend: 'shared-content/realtime-sdk-backend',
+  RealtimeSdkClient: 'shared-content/realtime-sdk-client',
+  RealtimeSdkReact: 'shared-content/realtime-sdk-react',
+  RealtimeSdkTanstackDb: 'shared-content/realtime-sdk-tanstack-db',
+  RealtimeSdkDrizzle: 'shared-content/realtime-sdk-drizzle',
+  RealtimeSdkDrizzleClient: 'shared-content/realtime-sdk-drizzle-client',
+  RealtimeSdkKysely: 'shared-content/realtime-sdk-kysely',
   // Common Neon Auth content
   GetStarted: 'shared-content/neon-auth-sdk-shared/get-started',
   // Types
   SdkUser: 'shared-content/neon-auth-sdk-shared/types/user',
-  SdkTeam: 'shared-content/neon-auth-sdk-shared/types/team',
-  SdkTeamUser: 'shared-content/neon-auth-sdk-shared/types/team-user',
-  SdkTeamProfile: 'shared-content/neon-auth-sdk-shared/types/team-profile',
   SdkProject: 'shared-content/neon-auth-sdk-shared/types/project',
-  SdkTeamPermission: 'shared-content/neon-auth-sdk-shared/types/team-permission',
-  SdkApiKey: 'shared-content/neon-auth-sdk-shared/types/api-key',
-  SdkContactChannel: 'shared-content/neon-auth-sdk-shared/types/contact-channel',
   // Hooks
-  SdkUseStackApp: 'shared-content/neon-auth-sdk-shared/hooks/use-stack-app',
   SdkUseUser: 'shared-content/neon-auth-sdk-shared/hooks/use-user',
 };
 

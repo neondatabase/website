@@ -2,20 +2,18 @@
 title: Use Managed Better Auth with React (API methods)
 subtitle: Build your own auth UI
 summary: >-
-  Managed Better Auth with React for Vite apps, using the `@neondatabase/neon-js` SDK's
+  Managed Better Auth with React for Vite apps, using the `@neon/neon-js` SDK's
   programmatic API methods (`signUp()`, `signIn.email()`, `getSession()`) instead
   of pre-built UI components. Use this page when you need full control over your
   own auth UI rather than dropping in ready-made components. Registered users are
   automatically synced to the `neon_auth.user` table in your database.
 enableTableOfContents: true
-updatedOn: '2026-07-31T15:27:48.506Z'
+updatedOn: '2026-10-09T10:21:18.858Z'
 layout: wide
 redirectFrom:
   - /docs/auth/quick-start/react-router-components
   - /docs/auth/quick-start/react-router-components/
 ---
-
-<FeatureBetaProps feature_name="Managed Better Auth" />
 
 <AuthAISetupTip />
 
@@ -26,7 +24,7 @@ redirectFrom:
 
 If you don't have a Neon project yet, create one at [console.neon.tech](https://console.neon.tech).
 
-Go to the **Auth** page in your project dashboard and click **Enable Auth**.
+In the Neon Console, open the **Better Auth** page and click **Enable Auth**.
 
 You can then find your Auth **Base URL** on the Configuration tab. Copy this URL - you'll need it in the next step.
 
@@ -63,7 +61,7 @@ The Neon SDK provides authentication methods like `signUp()`, `getSession()`, an
 
 ```bash filename="Terminal"
 cd my-app
-npm install @neondatabase/neon-js@latest
+npm install @neon/neon-js@latest
 ```
 
 </TwoColumnLayout.Block>
@@ -101,7 +99,7 @@ This quick start uses the standalone Auth client. For one `createClient()` insta
 <TwoColumnLayout.Block>
 
 ```javascript filename="src/auth.js"
-import { createAuthClient } from '@neondatabase/neon-js/auth';
+import { createAuthClient } from '@neon/neon-js/auth';
 
 export const authClient = createAuthClient(import.meta.env.VITE_NEON_AUTH_URL);
 ```
@@ -271,6 +269,6 @@ SELECT * FROM neon_auth.user;
 ## Next steps
 
 - [Learn about Managed Better Auth concepts](/docs/auth/overview)
-- [More example apps](/docs/auth/overview#example-applications) in the **neon-js** `examples/` directory
+- [More example apps](/docs/auth/about#example-applications) in the **neon-js** `examples/` directory
 - [Explore the Neon Data API](/docs/data-api/get-started) to build a REST API for your data
 - [View complete SDK reference](/docs/reference/javascript-sdk)

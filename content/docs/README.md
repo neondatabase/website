@@ -1,5 +1,5 @@
 ---
-updatedOn: '2026-08-07T16:05:20.768Z'
+updatedOn: '2026-10-24T21:13:07.960Z'
 ---
 
 # Docs
@@ -263,6 +263,21 @@ You can use fenced code blocks with three backticks (```) on the lines before an
   ```
   ````
 
+- `collapse={X-Y}` - hide lines X to Y (inclusive) behind a clickable "N collapsed lines" row that expands them. Separate several ranges with commas. Collapsed lines are still copied by the copy button and stay in the page HTML.
+
+  Example:
+
+  ````md
+  ```js collapse={1-2, 6}
+  import { neon } from '@neondatabase/serverless';
+  const sql = neon(process.env.DATABASE_URL);
+
+  const rows = await sql`SELECT * FROM todos`;
+  console.log(rows);
+  export default rows;
+  ```
+  ````
+
 ## Code Tabs
 
 To display code tabs, wrap all pieces of code with `<CodeTabs></CodeTabs>` and write labels of code tabs in order:
@@ -343,6 +358,30 @@ The `ExternalCode` component allows embedding code content from external sources
 
 1. Always use raw URLs from the GitHub repository (for example, `https://raw.githubusercontent.com/...`).
 2. Use the `language` prop when the file extension doesn't match the actual content type.
+
+## Inline SVG
+
+The `InlineSvg` component renders an SVG from `public/` directly into the page DOM instead of through an `<img>` tag. Use it for diagrams with interactivity (CSS `:hover` states, SMIL `begin="click"` animations), which browsers ignore inside `<img>`-embedded SVGs. For static SVGs, prefer standard markdown image syntax, which adds zoom support.
+
+### Usage
+
+```markdown
+<InlineSvg src="/docs/guides/my-diagram.svg" title="One-sentence description of the diagram for screen readers" />
+```
+
+### Props
+
+| Prop      | Type   | Default    | Description                                                         |
+| --------- | ------ | ---------- | ------------------------------------------------------------------- |
+| src       | string | (required) | Path to the `.svg` file, relative to `public/`                      |
+| title     | string | (optional) | Accessible label; sets `role="img"` and `aria-label` on the wrapper |
+| className | string | (optional) | Additional CSS classes to apply to the wrapper                      |
+
+### Best Practices
+
+1. Keep SVGs script-free; `<script>` tags and inline event handlers are stripped at render time. Use CSS and SMIL for interactivity.
+2. Use unique element ids inside each SVG (for example, marker ids). Inlined SVGs share the page's id namespace, so two SVGs on one page with the same id will conflict.
+3. Always pass a `title` so the diagram is announced to screen readers.
 
 ## Tabs
 
@@ -573,7 +612,7 @@ Install the required packages for your project.
 <TwoColumnLayout.Block label="Terminal">
 
 ```bash
-npm install @neondatabase/neon-js
+npm install @neon/neon-js
 ```
 
 </TwoColumnLayout.Block>
@@ -719,7 +758,39 @@ If you need an image without border to show an annotated piece of UI, use the `"
 ![lakebase architecture diagram](/docs/conceptual-guides/neon_architecture_2.png 'no-border')
 ```
 
+Pages under `content/pages/` round the corners of every image. If the artwork runs edge to edge and the rounding shaves off something you need to keep, opt that image out with the `"square"` attribute:
+
+```md
+![agent setup in a code editor](/use-cases/full-stack-apps/neon-init.jpg 'square')
+```
+
+Images load lazily by default. For the one image that sits above the fold at the top of a page, add `"priority"` so it loads eagerly instead of waiting:
+
+```md
+![agent setup in a code editor](/use-cases/full-stack-apps/neon-init.jpg 'priority')
+```
+
+Flags can be combined, separated by a space: `'square priority'`. Use `priority` only for a hero image, never for images further down the page.
+
 With this approach, all images on your doc pages will be displayed both on the production and GitHub preview.
+
+### Image with a copyable command
+
+Use `ImageWithCommand` to pair an image with a native text footer and a command readers can copy. Set `width` and `height` to the source image dimensions. The component preserves image zoom and stacks the footer on small screens.
+
+```mdx
+<ImageWithCommand
+  src="/use-cases/full-stack-apps/neon-init-editor.jpg"
+  alt="Setting up Neon in a code editor"
+  width={1416}
+  height={956}
+  description="Try for yourself, start building with Neon now."
+  command="npx neon@latest init"
+  loading="eager"
+/>
+```
+
+The image fields, `description`, and `command` are required. `loading` accepts `lazy` (the default) or `eager`. Use `eager` for an image at the top of the page. The command uses the same `CopyCommand` component as the `QuickPath` setup card. Clicking anywhere on the command strip copies `command` without the displayed `$` prompt.
 
 ## Definition list
 
@@ -780,6 +851,44 @@ Another term for smoke test
 ![Definition list example](images/definition-list-example.jpg)
 
 </details>
+
+## FAQ
+
+Use the `Faq` component with `FaqItem` items to add a frequently-asked-questions section at the end of a page. This is the standard component for FAQs across docs and guides. Prefer it over ad-hoc `### question` headings, bold `**Q:/A:**` text, or `DefinitionList` so every FAQ looks and behaves the same.
+
+The component is built for SEO. It emits `FAQPage` [schema.org](https://schema.org/FAQPage) JSON-LD structured data to help search engines and AI agents parse the questions and answers, and it renders each answer with native `<details>`/`<summary>` so the answer text stays in the DOM even when collapsed, keeping it crawlable and accessible. It also gives every FAQ consistent styling and deep-link anchors.
+
+Add a `## Frequently asked questions` heading above the component so the section shows up in the table of contents, then wrap the questions:
+
+```md
+## Frequently asked questions
+
+<Faq>
+
+<FaqItem question="Why must I poll operations after restore?">
+With `finalize_restore: true`, Neon moves compute resources to the new state. Until operations complete, connections still point to the old compute.
+</FaqItem>
+
+<FaqItem question="What if we need multiple preview environments?">
+Restore different snapshots to new branches. Each restore creates a new branch with its own connection string.
+</FaqItem>
+
+</Faq>
+```
+
+### Props
+
+`FaqItem`:
+
+- `question` (required) — the question text. Rendered as an `<h3>` inside the `<summary>`, and used verbatim as the `name` in the JSON-LD.
+- `id` (optional) — anchor id for the item. Defaults to a slug generated from `question`, so `#your-question-text` deep links work without setting it.
+- `defaultOpen` (optional) — set to `true` to render the item expanded on load.
+
+### Notes
+
+- Answers accept full markdown: paragraphs, lists, tables, links, images, and code. Keep a blank line above and below block content inside `FaqItem` so MDX parses it.
+- Each question becomes an `<h3>` inside the component but does **not** appear in the table of contents (the TOC is built from markdown headings, not rendered JSX). The single `## Frequently asked questions` heading is the TOC entry.
+- Put shared blocks like `<NeedHelp/>` after `</Faq>`, not inside a `FaqItem`.
 
 ## Detail Icon Cards
 

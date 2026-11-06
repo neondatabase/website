@@ -9,7 +9,7 @@ summary: >-
   replication syncs, and to monitor usage via the Console or Consumption API.
   Reduction strategies include scoping SELECT columns, using Neon snapshots,
   adding replication filters, and routing traffic over Private Link.
-updatedOn: '2026-08-07T17:19:40.308Z'
+updatedOn: '2026-11-02T21:58:12.242Z'
 ---
 
 Network transfer is one of the usage metrics that affects your Neon bill. This guide explains what network transfer is, what causes it to increase, how to monitor it, and how to reduce it. For broader cost guidance, see [Cost optimization](/docs/introduction/cost-optimization). For plan allowances and pricing, see [Plans](/docs/introduction/plans).
@@ -21,7 +21,7 @@ Neon measures data sent from your databases through the [Neon proxy](/docs/intro
 There are two types of network transfer:
 
 - **Public network transfer**: Data sent over the public internet. [Logical replication](/docs/guides/logical-replication-neon) to any destination counts as public network transfer.
-  - **Free plan**: 5 GB/month included. Exceeding this suspends your compute until the next billing cycle or you upgrade.
+  - **Free plan**: 5 GB per project per month included. Exceeding this suspends your compute until the next billing cycle or you upgrade.
   - **Launch / Scale plans**: 500 GB per project per month included, then $0.10/GB.
 - **Private network transfer**: Traffic routed over AWS PrivateLink. Available on the Scale plan only. Billed at $0.01/GB, bi-directional. Unlike public network transfer, which only counts outbound data, private network transfer counts traffic in both directions: data sent from your database to clients and data sent from clients to your database.
 
@@ -44,14 +44,14 @@ The following are common causes of increased network transfer in Neon. See [How 
 ## How to monitor network transfer
 
 <Admonition type="important">
-The Billing page only displays network transfer when usage exceeds the included allowance. To track usage before it results in charges, check the usage panel on the Organization or Project dashboard, or use the Consumption API.
+The Billing page only displays network transfer when usage exceeds the included allowance. To track usage before it results in charges, check the usage panel on the organization **Projects** page or the project **Overview** page, or use the Consumption API.
 </Admonition>
 
 Paid plans receive a weekly usage report by email that includes network transfer usage and cost.
 
 ### Console organization page
 
-The usage panel on the organization **Projects** page always displays current network transfer usage across all projects. Individual project dashboards show network transfer for that project.
+The usage panel on the organization **Projects** page always displays current network transfer usage across all projects. Each project's **Overview** page shows network transfer for that project.
 
 ![Organization page usage panel showing network transfer](/docs/introduction/dashboard_org_usage.png)
 
@@ -288,13 +288,19 @@ For broader cost reduction strategies across all billing metrics, see [Cost opti
 
 **Use Private Link for internal traffic.** If your application runs in AWS, [Private Networking](/docs/guides/neon-private-networking) (Scale plan) routes traffic over PrivateLink at $0.01/GB instead of $0.10/GB for public network transfer beyond the included allowance.
 
-### Use the egress optimizer agent skill
+### Use an agent skill to find egress anti-patterns
 
-An [agent skill](https://github.com/neondatabase/agent-skills) is available that guides your AI assistant through diagnosing and fixing application-side query patterns that cause excessive egress. The skill walks through analyzing your codebase for anti-patterns (such as `SELECT *`, missing pagination, high-frequency queries on static data, and application-side aggregation), applying fixes, and verifying with tests. To add it to your AI assistant:
+The `neon-postgres` [agent skill](/docs/ai/agent-skills) includes an egress optimization workflow for your AI assistant. It's a general Postgres skill, so the workflow applies when you ask about high database bills, unexpected network transfer, egress spikes, or query overfetching.
+
+The assistant finds the queries that transfer the most data using `pg_stat_statements` and traces them back to your code. It then fixes the anti-patterns it finds (unused columns such as `SELECT *`, missing pagination, repeated reads of static data, application-side aggregation, and JOIN duplication) and checks that your tests still pass and transfer drops.
+
+`neon-postgres` is part of the default set that `neon skills` installs, so you may already have it. To add just this skill with the [Neon CLI](/docs/cli):
 
 ```bash
-npx skills add neondatabase/agent-skills -s neon-postgres-egress-optimizer
+neon skills -s neon-postgres
 ```
+
+Without the Neon CLI, run `npx skills add neondatabase/agent-skills -s neon-postgres` instead.
 
 <Admonition type="tip">
 Building a platform on Neon? You can cap per-project network transfer with [consumption limits](/docs/guides/consumption-limits).

@@ -2,10 +2,8 @@
   "primary": "neon-postgres",
   "skills": [
     { "name": "neon-postgres", "ref": "main" },
-    { "name": "claimable-postgres", "ref": "main" },
-    { "name": "neon-postgres-egress-optimizer", "ref": "main" },
-    { "name": "neon-postgres-branches", "ref": "main" },
     { "name": "neon", "ref": "main" },
+    { "name": "neon-auth", "ref": "main" },
     {
       "name": "neon-postgres-agent-platforms",
       "ref": "main",
@@ -13,6 +11,7 @@
     },
     { "name": "neon-object-storage", "ref": "main" },
     { "name": "neon-ai-gateway", "ref": "main" },
-    { "name": "neon-functions", "ref": "main" }
+    { "name": "neon-functions", "ref": "main" },
+    { "name": "neon-realtime", "ref": "main" }
   ]
 }

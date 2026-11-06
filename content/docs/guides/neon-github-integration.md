@@ -285,7 +285,7 @@ The sample GitHub Actions workflow provided by the Neon GitHub integration depen
 To view the Neon API key created by the integration:
 
 1. In the [Neon Console](https://console.neon.tech), click your profile at the top right corner of the page.
-2. Select **Account settings**.
+2. Select **Settings** (under **Account**).
 3. Select **API keys**.
 
 The API key created by the integration should be listed with a name similar to the following: **API key for GitHub (cool-darkness-12345678)**. You cannot view the key itself, only the name it was given, the time it was created, and when the key was last used.
@@ -331,7 +331,7 @@ Any GitHub Actions workflows you've added to GitHub repositories that are depend
 To remove the GitHub integration:
 
 1. In the Neon Console, navigate your account Profile.
-2. Select **Account settings**.
+2. Select **Settings** (under **Account**).
 3. Select **Integrations**.
 4. Click **Remove**.
 

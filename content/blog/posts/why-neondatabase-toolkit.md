@@ -102,4 +102,4 @@ Since you can access the underlying `toolkit.apiClient`, you can already perform
 We are iterating quickly on Neon for Agents and we need feedback. If you're building an Agent that interacts with DB's, [let us know here.](https://neon.tech/agent-design-partner)
 </Admonition>
 
-Please file [an issue](https://github.com/neondatabase/toolkit/issues) in the repository, or reach out to us via [Discord](https://discord.gg/92vNTzKDGp) to give us any feedback. We’re especially interested in enabling AI agents with this package, but we know that other use cases will emerge as well, and that’s fine!
+Please file [an issue](https://github.com/neondatabase/toolkit/issues) in the repository, or reach out to us via [Discord](https://neon.com/discord) to give us any feedback. We’re especially interested in enabling AI agents with this package, but we know that other use cases will emerge as well, and that’s fine!

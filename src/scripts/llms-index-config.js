@@ -17,7 +17,23 @@
 
 module.exports = {
   tagline:
-    'Neon is the backend for apps and agents. Services include Neon Postgres, Neon Auth, Data API, Neon Functions, Object Storage, and AI Gateway. Every service is agent-ready: instant, branchable, and serverless. Neon Postgres includes autoscaling, instant restore, and scale-to-zero, and is fully compatible with any language, framework, or ORM that supports Postgres.',
+    'Neon is a complete set of cloud backend primitives built around Lakebase Postgres, for developers, startups, and agent platforms, from Databricks. Services include Lakebase Postgres, Managed Better Auth, Realtime, Data API, Functions, Object Storage, AI Gateway. Lakebase Postgres on Neon includes autoscaling, instant restore, and scale-to-zero, with native branching, realtime and a fully reactive DX and works with any language, framework, or ORM that supports Postgres.',
+
+  getStarted: [
+    '**Get started.** The user needs a Neon account. If they cannot create one right now, [Claimable Neon](https://neon.com/auth.md) provisions a Postgres project without signup, and the user claims it later.',
+    '',
+    'With an account, these commands install the Neon CLI, sign in, and run `neon init`, which installs the agent skills and creates or links a Neon project. Check with the user before running them:',
+    '',
+    '```bash',
+    'npm i -g neon',
+    '# oauth signup - use --help for other auth options',
+    'neon auth',
+    '# in the project folder init Neon',
+    'neon init',
+    '```',
+    '',
+    'To add only the agent skills to this project, offer `npx neon@latest skills -y`.',
+  ].join('\n'),
 
   intro: [
     'Neon docs are available as markdown.',
@@ -25,9 +41,27 @@ module.exports = {
     'This is the primary index. Sections with many pages show key pages and link to full sub-indexes.',
   ].join(' '),
 
-  // Quick-reference links emitted as "## Common Queries" before the section list.
+  // Quick-reference links emitted as "## Common tasks" before the section list.
+  // (Kept as `commonQueries` internally; the generator renders the heading.)
   commonQueries: [
+    {
+      label:
+        'Need a Neon account and the user is not around: provision one now; they claim it later',
+      url: 'https://neon.com/auth.md',
+    },
     { label: 'Pricing and plans', url: 'https://neon.com/pricing.md' },
+    {
+      label: 'Declare a whole backend in one file',
+      url: 'https://neon.com/docs/reference/neon-ts.md',
+    },
+    {
+      label: 'Add users and authentication',
+      url: 'https://neon.com/docs/auth/overview.md',
+    },
+    {
+      label: 'Explore the full platform: functions, object storage, AI Gateway, and more',
+      url: 'https://neon.com/docs/get-started/backend-overview.md',
+    },
     {
       label: 'Choose a connection method (drivers, pooling, serverless)',
       url: 'https://neon.com/docs/connect/choose-connection.md',
@@ -43,6 +77,35 @@ module.exports = {
     {
       label: 'Neon CLI reference (neon commands, options, and usage)',
       url: 'https://neon.com/docs/cli.md',
+    },
+    {
+      label: 'Connect an agent to the Neon MCP server at https://mcp.neon.tech/mcp',
+      url: 'https://neon.com/docs/ai/neon-mcp-server.md',
+    },
+    {
+      label: 'Search and read these docs over MCP at https://neon.com/docs/mcp (no auth)',
+      url: 'https://neon.com/.well-known/mcp/docs-server-card.json',
+    },
+    { label: 'Make a Postgres query live', url: 'https://neon.com/docs/realtime/overview.md' },
+    {
+      label: 'Keep a UI in sync with Postgres',
+      url: 'https://neon.com/docs/realtime/quickstart.md',
+    },
+    {
+      label: 'Add realtime without a second system or a sync engine',
+      url: 'https://neon.com/docs/realtime/overview.md',
+    },
+    {
+      label: 'Replace a polling loop or refetch interval',
+      url: 'https://neon.com/docs/realtime/examples/tanstack.md',
+    },
+    {
+      label: 'Build a fully reactive app on Postgres',
+      url: 'https://neon.com/docs/realtime/examples/nextjs.md',
+    },
+    {
+      label: 'Send feedback to the Neon team (CLI, HTTP, or MCP)',
+      url: 'https://neon.com/feedback.md',
     },
   ],
 
@@ -81,25 +144,86 @@ module.exports = {
     {
       name: 'Connect',
       description: 'Drivers, connection strings, pooling, local dev tooling, and troubleshooting.',
+      subIndex: {
+        outputPath: 'public/docs/connect/llms.txt',
+        url: 'https://neon.com/docs/connect/llms.txt',
+        highlights: [
+          'connect/choose-connection.md',
+          'connect/connect-from-any-app.md',
+          'connect/connection-pooling.md',
+          'serverless/serverless-driver.md',
+          'reference/neon-ts.md',
+          'connect/connection-errors.md',
+        ],
+      },
     },
     {
       name: 'Neon CLI',
       description:
         'Install: `npm i -g neon`. Use this for terminal-first workflows, scripts, and CI/CD automation with `neon`.',
+      subIndex: {
+        outputPath: 'public/docs/cli/llms.txt',
+        url: 'https://neon.com/docs/cli/llms.txt',
+        highlights: [
+          'cli.md',
+          'cli/quickstart.md',
+          'cli/install.md',
+          'cli/init.md',
+          'cli/login.md',
+          'cli/branches.md',
+          'cli/connection-string.md',
+          'cli/deploy.md',
+        ],
+      },
     },
     {
       name: 'AI & Agents',
       description:
         'Agent Skills, MCP integrations, vector search, and tools for building AI-powered applications with Neon.',
+      subIndex: {
+        outputPath: 'public/docs/ai/llms.txt',
+        url: 'https://neon.com/docs/ai/llms.txt',
+        highlights: [
+          'ai/neon-mcp-server.md',
+          'ai/connect-mcp-clients-to-neon.md',
+          'ai/agent-skills.md',
+          'ai/agent-setup.md',
+          'ai/lakebase-search.md',
+          'ai/ai-database-versioning.md',
+        ],
+      },
     },
     {
       name: 'Auth',
       description: 'Managed authentication built on Better Auth that branches with your database.',
       subsectionOrder: ['Quick Start', 'Reference', 'Guides', 'Migrate'],
+      subIndex: {
+        outputPath: 'public/docs/auth/llms.txt',
+        url: 'https://neon.com/docs/auth/llms.txt',
+        highlights: [
+          'auth/overview.md',
+          'auth/quick-start/nextjs-api-only.md',
+          'auth/quick-start/react.md',
+          'auth/guides/setup-oauth.md',
+          'auth/production-checklist.md',
+        ],
+      },
     },
     {
       name: 'Neon Functions',
       description: 'Long-running serverless compute, close to your database.',
+      subIndex: {
+        outputPath: 'public/docs/compute/llms.txt',
+        url: 'https://neon.com/docs/compute/llms.txt',
+        highlights: [
+          'compute/functions/overview.md',
+          'compute/functions/get-started.md',
+          'compute/functions/deploy.md',
+          'compute/functions/environment-variables.md',
+          'compute/functions/triggers/overview.md',
+          'compute/functions/reference/runtime-limits.md',
+        ],
+      },
     },
     {
       name: 'Object Storage',
@@ -108,10 +232,46 @@ module.exports = {
     {
       name: 'AI Gateway',
       description: 'Access frontier and open-source models through a single API.',
+      subIndex: {
+        outputPath: 'public/docs/ai-gateway/llms.txt',
+        url: 'https://neon.com/docs/ai-gateway/llms.txt',
+        highlights: [
+          'ai-gateway/overview.md',
+          'ai-gateway/get-started.md',
+          'ai-gateway/models.md',
+          'ai-gateway/chat-completions.md',
+        ],
+      },
     },
     {
       name: 'Data API',
       description: 'PostgREST-style REST interface for your Neon database.',
+      subIndex: {
+        outputPath: 'public/docs/data-api/llms.txt',
+        url: 'https://neon.com/docs/data-api/llms.txt',
+        highlights: [
+          'data-api/overview.md',
+          'data-api/get-started.md',
+          'data-api/access-control.md',
+          'data-api/sql-to-rest.md',
+        ],
+      },
+    },
+    {
+      name: 'Realtime',
+      description:
+        'Realtime reactivity on standard Postgres. Live SQL API makes any SQL query live (full support for joins, aggregates, ordering, extensions, UDFs). Plus end-to-end reactive DX: live queries and optimistic mutations as type-safe client primitives, on standard Neon Postgres.',
+      subIndex: {
+        outputPath: 'public/docs/realtime/llms.txt',
+        url: 'https://neon.com/docs/realtime/llms.txt',
+        highlights: [
+          'realtime/overview.md',
+          'realtime/quickstart.md',
+          'realtime/how-it-works.md',
+          'realtime/examples/nextjs.md',
+          'realtime/reference/api.md',
+        ],
+      },
     },
     {
       name: 'Branching',
@@ -129,7 +289,7 @@ module.exports = {
           'manage/branches.md',
           'manage/computes.md',
           'manage/organizations.md',
-          'manage/backups.md',
+          'manage/databases.md',
         ],
       },
     },
@@ -179,6 +339,11 @@ module.exports = {
         'API reference, SDKs, Terraform provider, Postgres compatibility, and platform-level tooling.',
       extraEntries: [
         {
+          title: 'Neon API endpoint index',
+          url: 'https://neon.com/docs/reference/api/llms.txt',
+          description: 'Index of every Neon API endpoint, grouped by resource',
+        },
+        {
           title: 'Neon API OpenAPI Spec',
           url: 'https://neon.com/api_spec/release/v2.json',
           description: 'Machine-readable OpenAPI 3.0 specification for the Neon API',
@@ -203,7 +368,7 @@ module.exports = {
     {
       name: 'Security',
       description:
-        'Compliance certifications, acceptable use policies, HIPAA, and security reporting.',
+        'Compliance certifications (SOC 2 Type 1 and Type 2, SOC 3, ISO 27001, ISO 27701, GDPR, CCPA), acceptable use policies, HIPAA, and security reporting.',
     },
     {
       name: 'Extensions',
@@ -236,9 +401,7 @@ module.exports = {
     'auth/legacy/',
     'auth/migrate/from-auth-v0.1',
     'changelog.md',
-    'get-started/platform-private-preview.md',
     'guides/GUIDE_TEMPLATE.md',
-    'introduction.md',
   ],
 
   // Reclassify specific files into a different subsection.
@@ -259,7 +422,20 @@ module.exports = {
   // listing individual files when an entire path subtree should move together.
   reclassifyPrefixes: [
     { pathPrefix: 'cli/', section: 'Neon CLI' },
+    // Fold the hand-written API intro pages (reference/api/*.md) into the main
+    // Reference list instead of a two-item "API" subsection.
+    { pathPrefix: 'reference/api/', section: 'Reference', subsection: null },
     { pathPrefix: 'compute/', section: 'Neon Functions', subsection: null },
+    // `realtime/` already derives to the configured `Realtime` section via
+    // toTitleCase, so these rules exist for its subsections. They're
+    // first-match-wins, so their order carries the grouping: the reference tree
+    // keeps the `Reference` subsection it derives from its own path, the two
+    // entry-point pages stay unsubsectioned, and every other realtime/*.md page
+    // lands under `Guides`.
+    { pathPrefix: 'realtime/reference/', section: 'Realtime' },
+    { pathPrefix: 'realtime/overview.md', section: 'Realtime', subsection: null },
+    { pathPrefix: 'realtime/quickstart.md', section: 'Realtime', subsection: null },
+    { pathPrefix: 'realtime/', section: 'Realtime', subsection: 'Guides' },
     { pathPrefix: 'postgresql/', section: 'PostgreSQL', subsection: 'General' },
     { pathPrefix: 'data-types/', section: 'PostgreSQL', subsection: 'Data Types' },
     { pathPrefix: 'functions/', section: 'PostgreSQL', subsection: 'Functions' },
@@ -278,15 +454,19 @@ module.exports = {
       url: 'https://neon.com/postgresql/tutorial',
       description: 'Comprehensive PostgreSQL tutorial and reference',
     },
+    // Links the /guides.md listing (every guide as .md) so agents can reach the guides.
+    // Not /guides/llms.txt: site search follows every llms.txt linked from this index and
+    // would pull the guides into the docs catalog. A .md link is indexed as one page.
     guides: {
       title: 'Community Guides',
-      url: 'https://neon.com/guides',
+      url: 'https://neon.com/guides.md',
       description: 'Step-by-step tutorials for frameworks and tools',
     },
     faqs: {
       title: 'FAQs',
       url: 'https://neon.com/faqs',
-      description: 'Frequently asked questions about Neon',
+      description:
+        'Short answers about building on Neon: Postgres, Auth, Object Storage, Functions, AI Gateway, pricing, and comparisons',
     },
     'use-cases': null,
     programs: null,
@@ -304,6 +484,42 @@ module.exports = {
       title: 'Blog',
       url: 'https://neon.com/blog.md',
       description: 'Engineering, product, and community posts from the Neon team',
+    },
+    // Public source repos. Each has an AGENTS.md for coding agents.
+    {
+      title: 'neondatabase/website',
+      url: 'https://github.com/neondatabase/website',
+      description: 'Source for neon.com and these docs, with AGENTS.md for coding agents',
+    },
+    {
+      title: 'neondatabase/agent-skills',
+      url: 'https://github.com/neondatabase/agent-skills',
+      description: 'Source for the Neon agent skills, with AGENTS.md for coding agents',
+    },
+    {
+      title: 'neondatabase/mcp-server-neon',
+      url: 'https://github.com/neondatabase/mcp-server-neon',
+      description: 'Source for the Neon MCP server, with AGENTS.md for coding agents',
+    },
+  ],
+
+  // Indexes written at build time that are not linked from public/docs/llms.txt.
+  // Site search ingest walks these URLs; the official docs catalog walk stays on the parent index.
+  unlinkedIndexes: [
+    {
+      route: 'guides',
+      publicPath: 'guides',
+      outputPath: 'public/guides/llms.txt',
+      title: 'Neon Community Guides',
+      intro:
+        'Step-by-step tutorials for frameworks, ORMs, auth providers, and deployment platforms.',
+    },
+    {
+      route: 'docs/changelog',
+      publicPath: 'docs/changelog',
+      outputPath: 'public/docs/changelog/llms.txt',
+      title: 'Neon Changelog',
+      intro: 'Latest updates and releases.',
     },
   ],
 

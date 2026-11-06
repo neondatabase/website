@@ -12,10 +12,12 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/quickstart/hasura
   - /docs/integrations/hasura
-updatedOn: '2026-07-31T15:27:48.506Z'
+updatedOn: '2026-09-16T19:45:35.340Z'
 ---
 
 Hasura Cloud is an open source GraphQL engine that provides a scalable, highly available, globally distributed, secure GraphQL API for your data sources.
+
+This guide covers Hasura v2 on Hasura Cloud. Hasura DDN, Hasura's newer product, uses a different engine and setup, and moving to it is optional. For supported v2 versions and end-of-life dates, see the [Hasura v2 support policy](https://hasura.io/legal/support-policy-hasura-v2).
 
 ## Connecting to a new Neon database
 
@@ -53,7 +55,7 @@ Use the following instructions to connect to an existing Neon database from Hasu
   postgresql://[user]:[password]@[neon_hostname]/[dbname]
   ```
 
-  You can find your database connection string by clicking the **Connect** button on your **Project Dashboard**. For more information, see [Connect from any application](/docs/connect/connect-from-any-app).
+  You can find your database connection string by clicking the **Connect** button in the Console nav. For more information, see [Connect from any application](/docs/connect/connect-from-any-app).
 
 ### Add Neon as a data source
 
@@ -112,5 +114,9 @@ If you rely on Neon's scale to zero feature to minimize database usage, note tha
 - [Event triggers](https://hasura.io/docs/latest/event-triggers/overview/) may periodically poll your Neon database for new events.
 - [Cron triggers](https://hasura.io/docs/latest/scheduled-triggers/create-cron-trigger/) can invoke HTTP endpoints that execute custom business logic involving your Neon database.
 - [Source Health Checks](https://hasura.io/docs/latest/deployment/health-checks/source-health-check/) can keep your Neon compute active if the metadata database resides in Neon.
+
+## Use Neon branches with Hasura
+
+To serve development, testing, and preview environments from one Neon project and one Hasura instance, see [Dynamic routing with Hasura and Neon](/guides/hasura-dynamic-routing-with-neon).
 
 <NeedHelp/>

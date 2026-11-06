@@ -461,7 +461,7 @@ To wrap up, delete the application if it’s no longer needed. To do this, go in
 
 Integrating AWS App Runner and Neon Serverless Postgres is an effective way to deploy a robust, scalable serverless FastAPI service. Neon’s unique autoscaling capabilities ensure that your database resources adapt to your application’s demands without manual intervention. This dynamic scalability is crucial for maintaining optimal performance and cost efficiency during off-peak times and traffic bursts. This is perfect for growing teams that want to increase their development velocity while keeping their architecture flexible.
 
-<br />To get started with incorporating Serverless Postgres into your FastAPI and Python apps, [sign up and try Neon for free](https://console.neon.tech/signup). Follow us on [Twitter](https://twitter.com/neondatabase) and join us in [Discord](https://neon.tech/discord) to share your experiences, suggestions, and challenges.
+<br />To get started with incorporating Serverless Postgres into your FastAPI and Python apps, [sign up and try Neon for free](https://console.neon.tech/signup). Follow us on [Twitter](https://twitter.com/neondatabase) and join us in [Discord](https://neon.com/discord) to share your experiences, suggestions, and challenges.
 
 ## Resources
 

@@ -1,16 +1,15 @@
 'use client';
 
-import { RuntimeLoader } from '@rive-app/react-canvas';
 import { usePathname } from 'next/navigation';
 
-const RIVE_WASM_URL = 'https://unpkg.com/@rive-app/canvas@2.13.4/rive.wasm';
+import { configureRiveRuntime, RIVE_WASM_URL } from 'utils/rive-runtime';
 
-RuntimeLoader.setWasmUrl(RIVE_WASM_URL);
+configureRiveRuntime();
 
 const RiveWasm = () => {
   const pathname = usePathname();
 
-  const pagesWithRiveInHero = [];
+  const pagesWithRiveInHero = ['/functions', '/ai-gateway', '/object-storage', '/auth'];
 
   if (pagesWithRiveInHero.includes(pathname)) {
     return <link rel="preload" href={RIVE_WASM_URL} as="fetch" crossOrigin="anonymous" />;

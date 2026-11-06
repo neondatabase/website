@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 348" font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, sans-serif">
+  <defs>
+    <marker id="ar2" markerWidth="9" markerHeight="9" refX="6.5" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L7,3 L0,6 Z" fill="#9ca3af"/>
+    </marker>
+  </defs>
+
+  <rect x="1" y="1" width="758" height="346" rx="14" fill="#ffffff" stroke="#e5e7eb"/>
+  <text x="24" y="34" font-size="15" font-weight="700" fill="#111827">Two read replica models</text>
+  <line x1="380" y1="54" x2="380" y2="326" stroke="#e5e7eb" stroke-width="1" stroke-dasharray="4 4"/>
+
+  <!-- LEFT: Neon -->
+  <text x="40" y="70" font-size="11" font-weight="700" letter-spacing="0.5" fill="#047857">NEON: SHARED STORAGE</text>
+
+  <rect x="48" y="88" width="92" height="46" rx="9" fill="#ecfdf5" stroke="#10b981"/>
+  <text x="94" y="107" font-size="11" font-weight="600" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#047857" text-anchor="middle">primary</text>
+  <text x="94" y="123" font-size="9.5" fill="#065f46" text-anchor="middle">read-write</text>
+
+  <rect x="152" y="88" width="92" height="46" rx="9" fill="#ffffff" stroke="#10b981" stroke-dasharray="3 3"/>
+  <text x="198" y="107" font-size="11" font-weight="600" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#047857" text-anchor="middle">replica 1</text>
+  <text x="198" y="123" font-size="9.5" fill="#065f46" text-anchor="middle">read-only</text>
+
+  <rect x="256" y="88" width="92" height="46" rx="9" fill="#ffffff" stroke="#10b981" stroke-dasharray="3 3"/>
+  <text x="302" y="107" font-size="11" font-weight="600" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#047857" text-anchor="middle">replica 2</text>
+  <text x="302" y="123" font-size="9.5" fill="#065f46" text-anchor="middle">read-only</text>
+
+  <line x1="94" y1="136" x2="150" y2="196" stroke="#9ca3af" stroke-width="1.5" marker-end="url(#ar2)"/>
+  <line x1="198" y1="136" x2="198" y2="196" stroke="#9ca3af" stroke-width="1.5" marker-end="url(#ar2)"/>
+  <line x1="302" y1="136" x2="246" y2="196" stroke="#9ca3af" stroke-width="1.5" marker-end="url(#ar2)"/>
+
+  <rect x="76" y="202" width="244" height="66" rx="10" fill="#f9fafb" stroke="#d1d5db"/>
+  <text x="198" y="230" font-size="12" font-weight="600" fill="#374151" text-anchor="middle">Shared storage</text>
+  <text x="198" y="250" font-size="10" fill="#6b7280" text-anchor="middle">one copy of the data</text>
+
+  <text x="40" y="300" font-size="11.5" font-weight="600" fill="#374151">Replicas are extra computes, not copies.</text>
+  <text x="40" y="318" font-size="11" fill="#6b7280">Sized independently, no added storage, suspend when idle.</text>
+
+  <!-- RIGHT: Supabase -->
+  <text x="410" y="70" font-size="11" font-weight="700" letter-spacing="0.5" fill="#4338ca">SUPABASE: PHYSICAL REPLICATION</text>
+
+  <rect x="416" y="96" width="140" height="46" rx="9" fill="#eef2ff" stroke="#6366f1"/>
+  <text x="486" y="115" font-size="11" font-weight="600" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#4338ca" text-anchor="middle">primary</text>
+  <text x="486" y="131" font-size="9.5" fill="#4338ca" text-anchor="middle">compute: Large</text>
+
+  <line x1="558" y1="119" x2="592" y2="119" stroke="#9ca3af" stroke-width="1.5" marker-end="url(#ar2)"/>
+  <text x="576" y="106" font-size="9" fill="#6b7280" text-anchor="middle">WAL</text>
+
+  <rect x="596" y="96" width="140" height="46" rx="9" fill="#ffffff" stroke="#6366f1" stroke-dasharray="3 3"/>
+  <text x="666" y="115" font-size="11" font-weight="600" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#4338ca" text-anchor="middle">replica</text>
+  <text x="666" y="131" font-size="9.5" fill="#4338ca" text-anchor="middle">same size: Large</text>
+
+  <line x1="486" y1="144" x2="486" y2="160" stroke="#9ca3af" stroke-width="1.5" marker-end="url(#ar2)"/>
+  <line x1="666" y1="144" x2="666" y2="160" stroke="#9ca3af" stroke-width="1.5" marker-end="url(#ar2)"/>
+
+  <path d="M446,170 L446,200 A40,6 0 0 0 526,200 L526,170 Z" fill="#f9fafb" stroke="#9ca3af"/>
+  <ellipse cx="486" cy="170" rx="40" ry="6" fill="#f3f4f6" stroke="#9ca3af"/>
+  <text x="486" y="192" font-size="10" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#374151" text-anchor="middle">disk</text>
+
+  <path d="M626,170 L626,200 A40,6 0 0 0 706,200 L706,170 Z" fill="#f9fafb" stroke="#9ca3af"/>
+  <ellipse cx="666" cy="170" rx="40" ry="6" fill="#f3f4f6" stroke="#9ca3af"/>
+  <text x="666" y="192" font-size="10" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#374151" text-anchor="middle">disk x1.25</text>
+
+  <text x="410" y="300" font-size="11.5" font-weight="600" fill="#374151">Each replica is a full database.</text>
+  <text x="410" y="318" font-size="11" fill="#6b7280">Billed for compute at the primary's size plus its own disk.</text>
+</svg>

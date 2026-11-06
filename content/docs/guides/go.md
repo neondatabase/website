@@ -11,7 +11,7 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/quickstart/go
   - /docs/integrations/go
-updatedOn: '2026-07-31T15:27:48.506Z'
+updatedOn: '2026-10-09T10:14:56.146Z'
 ---
 
 <CopyPrompt src="/prompts/golang-prompt.md" 
@@ -75,9 +75,9 @@ For your Go project, create a project directory, initialize a Go module, and add
 
 Create a file named `.env` in your project's root directory. This file will securely store your database connection string.
 
-1.  In the [Neon Console](https://console.neon.tech), select your project on the **Dashboard**.
-2.  Click **Connect** on your **Project Dashboard** to open the **Connect to your database** modal.
-    ![Connection modal](/docs/connect/connection_details.png)
+1.  In the [Neon Console](https://console.neon.tech), open your project.
+2.  Click **Connect** in the Console nav to open the **Connect to your branch** modal.
+    ![Connection modal](/docs/connect/connect_to_branch_modal.png)
 3.  Copy the connection string, which includes your password.
 4.  Add the connection string to your `.env` file as shown below.
     ```text
@@ -541,6 +541,11 @@ go run transaction_example.go
 ```
 
 </Steps>
+
+## Connection issues
+
+- If you see an `endpoint ID is not specified` error, the TLS client your Postgres driver depends on doesn't support Server Name Indication (SNI), which Neon uses to route connections. This is uncommon with `pgx/v5`, which uses Go's standard `crypto/tls` package and supports SNI by default, but can occur with an older driver or an outdated TLS implementation.
+- If you encounter an `SSL SYSCALL error: EOF detected` (or a similar connection-reset error), this typically happens when an application tries to reuse a connection after the Neon compute has been suspended due to inactivity. The examples in this guide open a fresh connection with `pgx.Connect` each time they run, so this mainly affects long-running servers that keep a connection or pool open across requests. For production use, consider [pgxpool](https://pkg.go.dev/github.com/jackc/pgx/v5/pgxpool) with health checks, or reconnecting on error.
 
 <details>
 <summary>**Notes for AI-assisted setup**</summary>

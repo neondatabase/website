@@ -12,7 +12,7 @@ summary: >-
   python-dotenv, and avoiding hanging processes by calling
   Tortoise.close_connections() or using run_async().
 enableTableOfContents: true
-updatedOn: '2026-08-07T18:39:13.799Z'
+updatedOn: '2026-09-16T19:45:35.340Z'
 ---
 
 <CopyPrompt src="/prompts/tortoise-orm-prompt.md" 
@@ -71,7 +71,7 @@ pip install "tortoise-orm[asyncpg]" python-dotenv
 
 ## Get your connection string
 
-Find your database connection string by clicking the **Connect** button on your **Project Dashboard** to open the **Connect to your database** modal. Check the **Parameters only** option, which provides the individual components of the connection string that you will use to construct a connection URL.
+Find your database connection string by clicking the **Connect** button in the Console nav to open the **Connect to your branch** modal. Check the **Parameters only** option, which provides the individual components of the connection string that you will use to construct a connection URL.
 ![Connection details modal](/docs/connect/connection_details_parameters_only.png)
 
 Create a `.env` file in your project's root directory and add a `DATABASE_URL` variable with the following format:

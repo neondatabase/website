@@ -10,7 +10,7 @@ Because the runtime is a normal Node process, use the Node SDK `@sentry/node` �
 
 Sentry has distinct signals, and picking the right one is the main instrumentation decision:
 
-1. **Errors** — unhandled route errors and failures your code can't recover from. Each becomes a grouped, alertable *issue*.
+1. **Errors** — unhandled route errors and failures your code can't recover from. Each becomes a grouped, alertable _issue_.
 2. **Logs** — recoverable failures and narrative events (a model attempt failed and the agent moved on, a retry, a fallback). Structured, searchable, linked to the trace — and they don't pollute the issue stream.
 3. **Traces** — the request's span tree: the incoming request, outbound fetches, and (for agents) the full model/tool call hierarchy with token usage.
 
@@ -18,12 +18,12 @@ All three carry the same trace ID, so from an error you can pivot to the logs an
 
 ### Environment variables
 
-| Variable | Purpose |
-| --- | --- |
-| `SENTRY_DSN` | Project DSN; keep it configurable through the deployment environment. |
-| `SENTRY_RELEASE` | Optional release identifier such as a commit SHA — unlocks regression detection. |
+| Variable                    | Purpose                                                                                                                        |
+| --------------------------- | ------------------------------------------------------------------------------------------------------------------------------ |
+| `SENTRY_DSN`                | Project DSN; keep it configurable through the deployment environment.                                                          |
+| `SENTRY_RELEASE`            | Optional release identifier such as a commit SHA — unlocks regression detection.                                               |
 | `SENTRY_TRACES_SAMPLE_RATE` | Trace sample rate, default `1`. Agents are low-throughput and every trace is interesting; lower it for high-volume plain HTTP. |
-| `PRODUCTION_BRANCH` | Your default branch's name, so it reports as environment `production` (see below). |
+| `PRODUCTION_BRANCH`         | Your default branch's name, so it reports as environment `production` (see below).                                             |
 
 ### 1. Initialize before anything else
 
@@ -46,7 +46,8 @@ Sentry.init({
   ],
   release: process.env.SENTRY_RELEASE,
   environment:
-    process.env.NEON_BRANCH && process.env.NEON_BRANCH !== process.env.PRODUCTION_BRANCH
+    process.env.NEON_BRANCH &&
+    process.env.NEON_BRANCH !== process.env.PRODUCTION_BRANCH
       ? process.env.NEON_BRANCH
       : "production",
 });
@@ -61,7 +62,15 @@ export { Sentry };
 // src/index.ts
 import "./instrument"; // MUST be the first import, before the framework/agent
 import { Sentry } from "./instrument";
+import { attachDatabasePool } from "@neon/functions";
 import { Hono } from "hono";
+import { Pool } from "pg";
+
+const pool = new Pool({ connectionString: process.env.DATABASE_URL, max: 5 });
+attachDatabasePool(pool, {
+  onUnexpectedError: (err) => Sentry.captureException(err),
+});
+
 // ... rest of the function
 ```
 
@@ -71,6 +80,7 @@ import { Hono } from "hono";
 - **The two integrations:** `vercelAIIntegration({ force: true })` because `neon deploy` bundles your code, which defeats the integration's module detection; `httpIntegration({ disableIncomingRequestSpans: true })` because the request root span comes from the middleware in step 3 (the runtime's internal server would otherwise add a duplicate with an unhelpful name).
 - **Environment:** `NEON_BRANCH` is injected on every branch — including the default — and holds the branch **name** (e.g. `main`, `preview/add-auth`). Because it's always present, don't use it as a boolean flag; compare it against your default branch's name (passed in as `PRODUCTION_BRANCH`) so the default branch reads as `production` and other branches tag by name. Pass `SENTRY_ENVIRONMENT` explicitly per deploy to override.
 - **Flush on shutdown:** the runtime sends `SIGTERM`/`SIGINT` before evicting an idle isolate; Sentry buffers logs and batches spans, so flush or the tail gets dropped.
+- **Idle `pg` pool errors:** call `attachDatabasePool(pool)` (or pass `onUnexpectedError: (err) => Sentry.captureException(err)` on the first call). Don't `pool.end()` on SIGINT — Neon's pooler reclaims those connections. See [Connecting to Postgres](../SKILL.md#connecting-to-postgres).
 
 ### 2. Provide the DSN as a deploy-time secret
 
@@ -97,7 +107,10 @@ app.use("*", (c, next) =>
         op: "http.server",
         name: `${c.req.method} ${c.req.path}`,
         forceTransaction: true,
-        attributes: { "http.request.method": c.req.method, "url.path": c.req.path },
+        attributes: {
+          "http.request.method": c.req.method,
+          "url.path": c.req.path,
+        },
       },
       async (span) => {
         await next();
@@ -127,7 +140,7 @@ Long-running agent workloads — the case Neon Functions are built for — typic
 Split by whether someone needs to act:
 
 - **`Sentry.captureException` — terminal, needs attention.** The agent exhausted every fallback; an invariant broke. These become issues, group, and alert.
-- **`Sentry.logger.*` — recoverable or narrative.** A model attempt failed and the agent moved on; an input couldn't be fetched; a milestone was reached. Structured log records, searchable by attribute and attached to the request's trace — the story you read *after* an issue fires.
+- **`Sentry.logger.*` — recoverable or narrative.** A model attempt failed and the agent moved on; an input couldn't be fetched; a milestone was reached. Structured log records, searchable by attribute and attached to the request's trace — the story you read _after_ an issue fires.
 
 A representative agent that tries several models in order:
 
@@ -176,7 +189,9 @@ const result = streamText({
   tools,
   experimental_telemetry: { isEnabled: true },
   onError: ({ error }) => {
-    Sentry.captureException(error, { tags: { component: "agent", phase: "chat-stream" } });
+    Sentry.captureException(error, {
+      tags: { component: "agent", phase: "chat-stream" },
+    });
   },
 });
 ```
@@ -194,7 +209,9 @@ const stream = result.textStream
     }),
   )
   .pipeThrough(new TextEncoderStream());
-return new Response(stream, { headers: { "content-type": "text/plain; charset=utf-8" } });
+return new Response(stream, {
+  headers: { "content-type": "text/plain; charset=utf-8" },
+});
 ```
 
 (Once the runtime's `waitUntil` is no longer a preview stub, `waitUntil(Sentry.flush(2000))` is the cleaner way to express this.)

@@ -10,6 +10,8 @@ import { fileURLToPath } from 'node:url';
 
 import { dereference } from '@scalar/openapi-parser';
 
+import { agentHeaderLines } from '../src/constants/agent-directives.js';
+
 import { computeDisplayOrder } from './lib/field-order-config.mjs';
 import { computeFieldGroups } from './lib/field-group-config.mjs';
 import {
@@ -46,7 +48,8 @@ import {
   getRawSchemaAt,
 } from './lib/spec-utils.mjs';
 import { loadTagConfig } from './lib/tag-config.mjs';
-import { buildTs, toSdkMethodName } from '../src/utils/api-ref.mjs';
+import { EXCLUDED_OPERATION_IDS } from './lib/excluded-operations.mjs';
+import { buildTs, toSdkMethodName, compareOpsForDisplay } from '../src/utils/api-ref.mjs';
 
 // Single source of truth for neonctl global flags that should not count as
 // API-specific flag mappings.
@@ -321,12 +324,16 @@ export function toLlmsTxtLine(op) {
   return `${op.method} ${op.path} — ${op.summary} — /docs/reference/api/${op.tag}/${op.id}`;
 }
 
-export function toAgentMarkdown(op) {
+// pageHeader: add the docs index and agent skills lines under the breadcrumb. Per-operation
+// pages turn it on. Per-tag pages reuse this for every operation and carry the header once at
+// the top instead.
+export function toAgentMarkdown(op, { pageHeader = false } = {}) {
   const lines = [];
 
   // Breadcrumb navigation context
   const tagDisplay = op.tagDisplay || op.tag;
   lines.push(`> API Reference / ${tagDisplay} / ${op.summary}`);
+  if (pageHeader) lines.push(...agentHeaderLines());
   lines.push('');
 
   lines.push(`## ${op.method} ${op.path}`);
@@ -461,7 +468,7 @@ function toPerOpMarkdown(op) {
     '---',
     '',
   ].join('\n');
-  return frontmatter + toAgentMarkdown(op);
+  return frontmatter + toAgentMarkdown(op, { pageHeader: true });
 }
 
 // Used only for llms-full.txt — no breadcrumb, H2 heading for easy scanning in a large file.
@@ -650,8 +657,13 @@ export function generateLlmsFull(tagOps) {
 
 // Top-level api.md — served at /docs/reference/api.md via rewrite → /md/docs/reference/api.md
 // Richer than llms.txt: each section links to its per-tag full .md file before listing individual ops.
-function generateApiMd(tagOps) {
+export function generateApiMd(tagOps) {
+  // Docs-style location line: this page is served as /docs/reference/api.md and is included in
+  // the docs llms-full.txt, whose stripNavigationContext() only recognizes this header shape.
   const lines = [
+    '> This page location: API Reference',
+    ...agentHeaderLines(),
+    '',
     '# Neon API Reference',
     '',
     'Base URL: https://console.neon.tech/api/v2',
@@ -711,9 +723,23 @@ export function assertGlobalFlagsCovered(cliSchema, globalFlags = GLOBAL_CLI_FLA
 // Exclusions (skip the warning):
 //   - operation has no positionals AND no non-global flags (nothing to map)
 // Returns an empty array when everything is healthy.
+// Operations that are correctly mapped to a CLI command which shares no
+// flags/positionals with them, so the "no API mappings" heuristic below would
+// false-positive. Each is a verified-correct mapping, not a mis-map:
+//   - listApiKeys: no inputs at all; the `api-keys list` org flag serves the
+//     sibling listOrgApiKeys.
+//   - listSharedProjects: only pagination params (cursor/limit/search), which
+//     the CLI list commands don't surface as flags.
+//   - createApiKey: `--name` corresponds to the `key_name` body field, but the
+//     flag/field name divergence means the heuristic can't auto-detect it.
+// Keep this list tight — it suppresses the warning, so a genuine future mis-map
+// of one of these ops would go unflagged.
+const KNOWN_NO_CLI_MAPPING = new Set(['listApiKeys', 'listSharedProjects', 'createApiKey']);
+
 export function findOpsWithNoApiMappings(allOps) {
   const unmapped = [];
   for (const op of allOps) {
+    if (KNOWN_NO_CLI_MAPPING.has(op.operationId)) continue;
     // Multi-command ops carry inputs per-command; check each independently.
     const commands = op.cli?.commands ?? (op.cli?.command ? [op.cli] : []);
     for (const cmd of commands) {
@@ -749,7 +775,7 @@ export function toNavYaml(allOps) {
     lines.push(`- title: ${JSON.stringify(sectionName)}`);
     lines.push(`  slug: reference/api/${tag}`);
     lines.push('  items:');
-    const sorted = [...ops].sort((a, b) => (a.deprecated ? 1 : 0) - (b.deprecated ? 1 : 0));
+    const sorted = [...ops].sort(compareOpsForDisplay);
     for (const op of sorted) {
       lines.push(`    - title: ${JSON.stringify(op.summary)}`);
       lines.push(`      slug: reference/api/${op.tag}/${op.id}`);
@@ -1298,6 +1324,9 @@ async function main() {
     for (const method of METHODS) {
       const op = pathItem[method];
       if (!op?.operationId) continue;
+      // Temporary manual override (scripts/lib/excluded-operations.mjs): hide
+      // these ops from every generated output. Spec tracking is unaffected.
+      if (EXCLUDED_OPERATION_IDS.has(op.operationId)) continue;
 
       const opData = buildOperationData(
         pathStr,
@@ -1324,6 +1353,11 @@ async function main() {
       opCount++;
     }
   }
+
+  // Alphabetize each tag's operations for every downstream listing (llms.txt,
+  // llms-full.txt, api.md, per-tag markdown). Sidebar order comes from toNavYaml,
+  // which sorts the same way.
+  for (const ops of Object.values(tagOps)) ops.sort(compareOpsForDisplay);
 
   process.stderr.write(`Generated ${opCount} operations.\n`);
 
