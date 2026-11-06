@@ -11,7 +11,7 @@ enableTableOfContents: true
 
 Your customers connect Claude, Cursor, or ChatGPT to an MCP server for your app, sign in with the account they already have, and call tools that read and write only their rows in Lakebase Postgres.
 
-The MCP server runs on Neon Functions. Managed Better Auth is the OAuth 2.1 authorization server. Your app hosts the sign-in and consent pages on a public HTTPS origin, because remote clients can't complete OAuth against `localhost`. This guide builds the pages in Next.js, but any framework works if its pages meet the [page requirements](#what-your-sign-in-and-consent-pages-must-do).
+The MCP server runs on [Neon Functions](/docs/compute/functions/overview). [Managed Better Auth](/docs/auth/overview), with its [OAuth provider plugin](/docs/auth/guides/plugins/oauth-provider), is the OAuth 2.1 authorization server. Your app hosts the sign-in and consent pages on a public HTTPS origin, because remote clients can't complete OAuth against `localhost`. This guide builds the pages in Next.js, but any framework works if its pages meet the [page requirements](#what-your-sign-in-and-consent-pages-must-do).
 
 If you don't need per-user sign-in, start from the `mcp-postgres` [function template](/docs/compute/functions/templates) instead.
 
@@ -41,7 +41,7 @@ With the optional [MCP Apps section](#render-todos-in-chat-with-mcp-apps-optiona
 
 ### What your sign-in and consent pages must do
 
-- Run on a public HTTPS origin that you add as a trusted domain.
+- Run on a public HTTPS origin that you add as a [trusted domain](/docs/auth/guides/configure-domains).
 - On the sign-in page, sign the user in. If the sign-in response doesn't redirect, resume the authorization request with `oauth2.continue({ selected: true })`. Do the same when a signed-in user lands on the page with an OAuth query.
 - On the consent page, require a session. Show the client name, redirect hosts, and the requested `scope` and `resource`, and warn when every redirect URI is loopback. Then call `oauth2.consent({ accept })`.
 - Block framing with a `frame-ancestors 'none'` header.
@@ -52,10 +52,9 @@ The `@neon/auth` client (0.8.0 or later) passes the signed OAuth query for you. 
 
 For this tutorial, you need:
 
-- A Neon project in `aws-us-east-2`, `aws-us-east-1`, `aws-eu-central-1`, or `aws-ap-southeast-1`. Neon Functions runs only in these regions.
-- The Neon CLI, signed in with `neon login`.
-- Node.js 20.19 or later, which the Neon CLI requires.
-- A Next.js 16 or later app. In Next.js 16, route protection lives in `proxy.ts`.
+- A Neon project in AWS US East (Ohio) (`aws-us-east-2`), AWS US East (N. Virginia) (`aws-us-east-1`), AWS Europe (Frankfurt) (`aws-eu-central-1`), or AWS Asia Pacific (Singapore) (`aws-ap-southeast-1`). Support is expanding toward [all regions](/docs/introduction/regions).
+- The [Neon CLI](/docs/cli/install), signed in with `neon login`.
+- A Next.js 16 or later app, or another framework whose pages meet the [page requirements](#what-your-sign-in-and-consent-pages-must-do). In Next.js 16, route protection lives in `proxy.ts`.
 - The Vercel CLI, signed in, if you deploy the app to Vercel as this guide does.
 
 ## Enable Managed Better Auth and wire Next.js
@@ -67,9 +66,9 @@ neon link
 neon checkout --create dev
 ```
 
-`neon link` pins your default branch, so run `neon checkout` before anything else. It pins the development branch for the commands that follow and writes its environment variables to `.env.local`. If the parent branch already runs this tutorial, the new branch inherits its table, function, trusted domain, and OAuth settings.
+[`neon link`](/docs/cli/link) pins your default branch, so run [`neon checkout`](/docs/cli/checkout) before anything else. It pins the development branch for the commands that follow and writes its environment variables to `.env.local`. If the parent branch already runs this tutorial, the new branch inherits its table, function, trusted domain, and OAuth settings.
 
-Create `neon.ts` in your app's root if you don't have one:
+Create [`neon.ts`](/docs/reference/neon-ts) in your app's root if you don't have one:
 
 ```typescript filename="neon.ts"
 import { defineConfig } from "@neon/config/v1";
@@ -138,7 +137,7 @@ export default nextConfig;
 
 ## Create the table
 
-Managed Better Auth stores users in the `neon_auth` schema, so keep app tables like `todos` in `public`. Run this SQL in the SQL Editor or with `psql`:
+Managed Better Auth stores users in the `neon_auth` schema, so keep app tables like `todos` in `public`. Run this SQL in the [SQL Editor](/docs/get-started/query-with-neon-sql-editor) or with `psql`:
 
 ```sql
 CREATE TABLE IF NOT EXISTS todos (
@@ -408,6 +407,8 @@ export default function ConsentPage() {
 
 ## Write the MCP server
 
+Install the function's dependencies. The server uses [`@neon/oauth`](https://github.com/neondatabase/neon-pkgs/tree/main/packages/oauth) 0.3.0 or later (beta) to verify tokens, and the web-standard MCP transport needs `@modelcontextprotocol/sdk` 1.25.0 or later:
+
 ```bash
 npm install @neon/oauth @neon/functions @modelcontextprotocol/sdk hono pg zod
 npm install -D @types/pg
@@ -530,7 +531,7 @@ Neon injects `DATABASE_URL`, and `NEON_AUTH_BASE_URL` once Managed Better Auth i
 
 The slug (`todos`) can be up to 20 lowercase letters or digits and can't change after the first deploy. The function isn't declared in `neon.ts`, so `neon deploy` leaves it alone. If the branch inherited a `todos` function from its parent, the first deploy updates it, and it serves the parent's `MCP_RESOURCE` until the second deploy.
 
-Deploy once and read the function URL:
+Deploy once with [`neon functions deploy`](/docs/cli/functions#deploy) and read the function URL:
 
 ```bash
 neon functions deploy todos --src functions/todos
@@ -545,7 +546,7 @@ neon functions deploy todos \
   --env "MCP_RESOURCE=https://<branch_id>-todos.compute.<cell>.aws.neon.tech/mcp"
 ```
 
-A new deployment can take a few minutes to serve traffic. To confirm the running value, check that `resource` in the protected resource metadata matches `MCP_RESOURCE`:
+A new deployment can take a few minutes to serve traffic. To confirm the running value, check that `resource` in the [protected resource metadata](/docs/auth/guides/plugins/oauth-provider#protect-an-mcp-server) matches `MCP_RESOURCE`:
 
 ```bash shouldWrap
 curl https://<branch_id>-todos.compute.<cell>.aws.neon.tech/.well-known/oauth-protected-resource/mcp
@@ -563,7 +564,7 @@ vercel env add DATABASE_URL production   # only if your app reads todos
 vercel deploy --prod --yes
 ```
 
-Add the Vercel app's origin as a trusted domain, because Managed Better Auth redirects only to trusted origins. If the command reports that the domain already exists, it's already trusted. Then turn on the OAuth server:
+Add the Vercel app's origin as a trusted domain, because Managed Better Auth redirects only to trusted origins. If the command reports that the domain already exists, it's already trusted. Then turn on the OAuth server with [`neon neon-auth config oauth-server`](/docs/cli/neon-auth#config-oauth-server):
 
 ```bash shouldWrap
 neon neon-auth domain add https://<your-app>.vercel.app
@@ -577,14 +578,14 @@ neon neon-auth config oauth-server update --enabled \
 neon neon-auth config oauth-server get
 ```
 
-With Client ID Metadata Documents (CIMD), clients identify themselves, so you don't create a client for each one. CIMD is on by default once you set an MCP resource. If it was turned off earlier, setting `--mcp-resource` doesn't turn it back on, so pass `--mcp-client-id-metadata-documents`. Leave dynamic client registration off unless a client can't use CIMD.
+With [Client ID Metadata Documents](/docs/auth/guides/plugins/oauth-provider#client-id-metadata-documents) (CIMD), clients identify themselves, so you don't create a client for each one. CIMD is on by default once you set an MCP resource. If it was turned off earlier, setting `--mcp-resource` doesn't turn it back on, so pass `--mcp-client-id-metadata-documents`. Leave [dynamic client registration](/docs/auth/guides/plugins/oauth-provider#dynamic-client-registration-legacy) off unless a client can't use CIMD.
 
-Each branch has its own OAuth settings, trusted domains, and MCP resource URL. A new child branch copies them from its parent, and its function keeps the parent's `MCP_RESOURCE`, so both point at the parent's function URL. On a child branch, redeploy the function with that branch's URL in `MCP_RESOURCE` and run `neon neon-auth config oauth-server update --mcp-resource` with the same URL. Custom domains aren't inherited, so on a child branch use that branch's own function URL or a separate hostname.
+Each branch has its own OAuth settings, OAuth clients, trusted domains, and MCP resource URL. A new child branch copies them from its parent, including each client's ID and secret, and its function keeps the parent's `MCP_RESOURCE`, so both point at the parent's function URL. On a child branch, redeploy the function with that branch's URL in `MCP_RESOURCE` and run `neon neon-auth config oauth-server update --mcp-resource` with the same URL. Custom domains aren't inherited, so on a child branch use that branch's own function URL or a separate hostname. Tokens from one branch don't work on another branch's server, because each branch has its own issuer. See [Branching authentication](/docs/auth/branching-authentication).
 
 <details>
 <summary>Optional: test locally over HTTPS</summary>
 
-Use this to test the pages with a local or scripted MCP client. Managed Better Auth sets `__Secure-` session cookies, which scripted clients often omit on plain `http://localhost`. Plain `http://localhost` is a trusted domain by default, but `https://localhost` isn't, so add it:
+Use this to test the pages with a local or scripted MCP client. Managed Better Auth sets `__Secure-` session cookies, which scripted clients often omit on plain `http://localhost`. Plain `http://localhost` is a trusted domain by default, while [localhost access](/docs/auth/guides/configure-domains#localhost-is-pre-configured) is on, but `https://localhost` isn't, so add it:
 
 ```bash shouldWrap
 npm run dev -- --port 3010 --experimental-https
@@ -639,7 +640,7 @@ MCP clients that support [MCP Apps](https://modelcontextprotocol.io/extensions/a
 
 Put the HTML in a TypeScript module so `neon functions deploy` bundles it. A sibling `.html` file read with `readFileSync` isn't included.
 
-```typescript filename="functions/todos/todo-list-ui.ts" collapse={7-112}
+```typescript filename="functions/todos/todo-list-ui.ts" collapse={7-113}
 export const TODO_LIST_UI_URI = "ui://todos/list-v2.html";
 export const TODO_LIST_SKYBRIDGE_URI = `${TODO_LIST_UI_URI}+skybridge`;
 export const MCP_APP_MIME = "text/html;profile=mcp-app";
