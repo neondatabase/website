@@ -11,7 +11,7 @@ summary: >-
   environment by selecting a connection string based on NODE_ENV.
 enableTableOfContents: true
 agentPrompt: 'I want to use Drizzle ORM with it.'
-updatedOn: '2026-11-06T13:46:55.233Z'
+updatedOn: '2026-11-06T14:04:41.417Z'
 ---
 
 <div className="not-prose my-8 rounded-[10px] border border-gray-new-90 bg-gray-new-95 px-6 py-7 dark:border-gray-new-15 dark:bg-gray-new-10 [&>h2]:m-0 [&>h2]:mb-7 [&>h2]:w-fit [&>h2]:text-[28px] [&>h2]:leading-tight [&>h2]:font-medium [&>h2]:tracking-tighter [&>h2]:text-black-pure dark:[&>h2]:text-white [&_h3]:relative [&_h3]:mt-7 [&_h3]:mb-2 [&_h3]:w-fit [&_h3]:text-xl [&_h3]:font-semibold [&_h3]:tracking-tight [&_h3]:text-black-pure [&_h3]:before:absolute [&_h3]:before:-left-11 [&_h3]:before:top-px [&_h3]:before:flex [&_h3]:before:size-7 [&_h3]:before:items-center [&_h3]:before:justify-center [&_h3]:before:rounded-full [&_h3]:before:bg-black-new [&_h3]:before:text-[13px] [&_h3]:before:font-semibold [&_h3]:before:text-white [&_h3]:before:content-[counter(step)] [&_h3]:before:[counter-increment:step] dark:[&_h3]:text-white dark:[&_h3]:before:bg-white dark:[&_h3]:before:text-black-pure">
@@ -80,6 +80,14 @@ If you do not have one already, create a Neon project.
 1.  Navigate to the [Projects](https://console.neon.tech/app/projects) page in the Neon Console.
 2.  Click **New Project**.
 3.  Specify your project settings and click **Create Project**.
+
+## Set up your agent (optional)
+
+Optional, but recommended if you use an AI coding agent. This installs the Neon CLI, signs you in, and installs the Neon [agent skills](/docs/ai/agent-skills) and [MCP server](/docs/ai/neon-mcp-server), so your agent can create branches, run migrations, and inspect your database directly. Paste this into your agent:
+
+```text shouldWrap
+Set me up for Neon. Fetch https://neon.com/prompts/agent-setup.md and follow it.
+```
 
 ## Get your connection string
 
