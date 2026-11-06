@@ -5,7 +5,7 @@ summary: >-
   Solutions for common errors when using Neon AI Gateway, including
   authentication failures, model errors, quota limits, and upstream issues.
 enableTableOfContents: true
-updatedOn: '2026-10-23T11:00:38.670Z'
+updatedOn: '2026-11-04T20:10:08.844Z'
 ---
 
 ## Authentication errors
@@ -67,12 +67,12 @@ On your project's **AI Gateway** page, locked models show a padlock, and the **S
 
 | Message                                                 | What to do                                                                                  |
 | ------------------------------------------------------- | ------------------------------------------------------------------------------------------- |
-| **A paid plan is required to use these models**         | Select **Upgrade plan**. The AI Gateway is available on paid plans only.                    |
+| **A paid plan is required to use these models**         | On the **Billing** page, select **Add a card** on the **AI gateway credits** card, then buy credits. You don't need to upgrade your plan.                    |
 | **AI Gateway credits are required to use these models** | Select **Add credits**. See [AI Gateway prepaid credits](/docs/ai-gateway/prepaid-credits). |
 | **Your account is restricted from using these models**  | [Contact Support](/docs/introduction/support).                                              |
 | **Some models are not available to your account**       | [Contact Support](/docs/introduction/support).                                              |
 
-After you upgrade or buy credits, models unlock once Neon confirms access. Reload the page if a model still shows as locked.
+After you buy credits, models unlock once Neon confirms access. Reload the page if a model still shows as locked.
 
 ---
 
@@ -118,29 +118,48 @@ The request hit the upstream Databricks/provider rate limit.
 
 ### `429`: account quota exceeded
 
-Your account's AI Gateway quota is blocked. This happens when you exceed a token-per-minute (TPM) rate limit or your account's daily spend limit. Both return `REQUEST_LIMIT_EXCEEDED`, and the message names the limit that was hit and how to recover.
+Your account's AI Gateway quota is blocked. This happens when you exceed a token-per-minute (TPM) rate limit or your account's daily spend limit, or when your prepaid credit balance drops below the $2 minimum. All three return `REQUEST_LIMIT_EXCEEDED`, and the message names the limit that was hit and how to recover.
 
 An account-wide TPM limit:
 
 ```json
 {
   "error_code": "REQUEST_LIMIT_EXCEEDED",
-  "message": "ai gateway account token rate limit exceeded (<N> tokens per minute across all models in this region). Retry after the current minute resets, or request a higher limit through Neon support: https://neon.com/docs/introduction/support"
+  "message": "You've exceeded your AI Gateway account input token limit (<N> input tokens per minute across all models). You can retry once the current minute resets, or ask Neon support to raise it (we review all increases to prevent abuse): https://console.neon.tech/app/projects?modal=support"
 }
 ```
 
-A per-model TPM limit names the model instead: `ai gateway account token rate limit exceeded for model "<model-id>" (<N> tokens per minute in this region). Retry after the current minute resets, ...`
+A per-model TPM limit names the model instead. Only the `message` value changes:
+
+```text
+You've exceeded your AI Gateway input token limit for model "<model-id>" (<N> input tokens per minute). You can retry once the current minute resets, or ask Neon support to raise it (we review all increases to prevent abuse): https://console.neon.tech/app/projects?modal=support
+```
+
+Input and output tokens are limited separately. When the output limit is hit, the same messages say `output` instead of `input`.
 
 A daily spend limit:
 
 ```json
 {
   "error_code": "REQUEST_LIMIT_EXCEEDED",
-  "message": "ai gateway account daily spend limit exceeded. Retry after the daily spend limit resets, or request a higher limit through Neon support: https://neon.com/docs/introduction/support"
+  "message": "You've reached your AI Gateway daily spend limit. You can retry after it resets, or ask Neon support to raise it (we review all increases to prevent abuse): https://console.neon.tech/app/projects?modal=support"
 }
 ```
 
-**Fix:** Check the `Retry-After` header. If present, the block is temporary and lifts at that time; retry with exponential backoff. If absent, the block is permanent until resolved; requesting a higher limit requires a paid plan. See [Support](/docs/introduction/support) for your plan's support options and [Rate limits](/docs/ai-gateway/models#rate-limits) for current values.
+A credit balance below the minimum. The response includes a link to add credits:
+
+```json
+{
+  "error_code": "REQUEST_LIMIT_EXCEEDED",
+  "message": "AI Gateway credit balance is below the required minimum. Add credits to continue. <recovery URL>",
+  "unavailable_reason": "credits_required",
+  "recovery_url": "<recovery URL>"
+}
+```
+
+This block has no `Retry-After` header and doesn't clear on its own. [Buy credits](/docs/ai-gateway/prepaid-credits#buy-or-top-up-credits), or turn on [automatic top-up](/docs/ai-gateway/prepaid-credits#automatic-top-up) so it doesn't happen again.
+
+**Fix:** Check the `Retry-After` header. If present, the block is temporary and lifts at that time; retry with exponential backoff. If absent, the block lasts until it's resolved: for a low credit balance, add credits; for a limit, ask Support to raise it. See [Support](/docs/introduction/support) for your plan's support options and [Rate limits](/docs/ai-gateway/models#rate-limits) for current values.
 
 ---
 
@@ -183,7 +202,7 @@ Quota blocks and all upstream (non-2xx) errors use a flat envelope, with the ups
 ```json
 {
   "error_code": "REQUEST_LIMIT_EXCEEDED",
-  "message": "ai gateway account daily spend limit exceeded. Request a higher limit through Neon support: https://neon.com/docs/introduction/support"
+  "message": "You've reached your AI Gateway daily spend limit. You can retry after it resets, or ask Neon support to raise it (we review all increases to prevent abuse): https://console.neon.tech/app/projects?modal=support"
 }
 ```
 

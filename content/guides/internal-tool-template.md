@@ -4,6 +4,7 @@ subtitle: Secure, host, and deploy internal tools in minutes on free plans
 author: sam-harri
 enableTableOfContents: true
 createdAt: '2025-07-08T00:00:00.000Z'
+updatedOn: '2026-09-24T18:22:11.000Z'
 ---
 
 <Admonition type="important" title="This template uses legacy Neon Auth">

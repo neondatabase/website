@@ -4,6 +4,7 @@ subtitle: 'Render sealed queries and initial query results on the server.'
 summary: >-
   Server-render pages that use live queries. Read and seal the same query for each request, send both to the browser, render the initial rows straight away and let the first result bring the page live.
 enableTableOfContents: true
+updatedOn: '2026-10-30T15:07:38.000Z'
 ---
 
 [Server-side rendering (SSR)](https://developer.mozilla.org/en-US/docs/Glossary/SSR) lets a page arrive with its rows already in the HTML, then subscribe to ongoing changes as soon as it hydrates.
@@ -158,12 +159,12 @@ Or with [TanStack Start](../examples/tanstack), [create server functions](https:
 <details>
   <summary>Read the Managed Better Auth session in TanStack Start</summary>
 
-This setup is built on the beta Managed Better Auth server toolkit, `@neondatabase/auth/server`. Swap in the official adapter when it ships.
+This setup is built on the beta Managed Better Auth server toolkit, `@neon/auth/server`. Swap in the official adapter when it ships.
 
 Create the auth server. It reads and sets the session cookies through TanStack&nbsp;Start's request helpers:
 
 ```ts filename="src/backend/auth.ts"
-import { createAuthServer, extractNeonAuthCookies } from "@neondatabase/auth/server"
+import { createAuthServer, extractNeonAuthCookies } from "@neon/auth/server"
 import { getRequest, setCookie } from "@tanstack/react-start/server"
 
 export const authConfig = {
@@ -196,7 +197,7 @@ printf '\nNEON_AUTH_COOKIE_SECRET=%s\n' "$(openssl rand -base64 32)" >> .env.loc
 Mount the Managed Better Auth proxy at `/api/auth`, so the session cookie lives on your app's origin:
 
 ```ts filename="src/routes/api/auth/$.ts"
-import { handleAuthProxyRequest } from "@neondatabase/auth/server"
+import { handleAuthProxyRequest } from "@neon/auth/server"
 import { createFileRoute } from "@tanstack/react-router"
 
 import { authConfig } from "../../../backend/auth"
@@ -240,7 +241,7 @@ export const getSessionUser = createServerFn({ method: "GET" }).handler(async ()
 Point the auth client at the proxy. An empty URL makes it use `/api/auth` on the page's origin:
 
 ```ts filename="src/frontend/auth.ts"
-import { createAuthClient } from "@neondatabase/auth"
+import { createAuthClient } from "@neon/auth"
 
 export const authClient = createAuthClient("") // same origin: /api/auth
 ```

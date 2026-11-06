@@ -1,7 +1,5 @@
 ---
 title: 'Neon CLI command: mcp'
-tag: new
-tagTheme: green
 subtitle: 'Install the Neon MCP Server into your coding agents'
 summary: >-
   The Neon CLI `mcp` command installs the [Neon MCP Server](/docs/ai/neon-mcp-server)
@@ -10,6 +8,7 @@ summary: >-
   install. It handles the server URL, authentication, and which tools each agent
   gets.
 enableTableOfContents: true
+updatedOn: '2026-11-03T15:02:38.509Z'
 ---
 
 The `mcp` command installs the [Neon MCP Server](/docs/ai/neon-mcp-server) into your coding agents by writing their MCP config for you. It points each agent at the hosted server (`https://mcp.neon.tech/mcp`), sets up authentication, and can narrow which tools the agent sees.
@@ -42,14 +41,14 @@ To install without minting a key, pass `--oauth`. This writes the server URL onl
 
 Without `--agent`, the interactive command detects installed agents and lets you pick from them. In non-interactive mode, `-y` installs into every detected agent. Pass `--agent <name>` (repeatable) to name agents explicitly and skip the picker.
 
-The supported agents are `antigravity`, `cline`, `cline-cli`, `claude-code`, `codex`, `cursor`, `gemini-cli`, `goose`, `github-copilot-cli`, `grok-build`, `mcporter`, `opencode`, `vscode`, `windsurf`, and `zed`. A few names also accept aliases (`claude` for `claude-code`, `copilot` for `vscode`, `gemini` for `gemini-cli`). Passing an unknown agent stops the command and prints the current supported list. A supported agent that can't take the chosen config (for example, one with no project-level config file when you pass `--project`) is reported and skipped.
+The supported agents are `antigravity`, `cline`, `cline-cli`, `claude-code`, `codex`, `cursor`, `factory-droid`, `fx`, `gemini-cli`, `goose`, `github-copilot-cli`, `grok-build`, `hermes`, `junie`, `kilo-code`, `kimi-code`, `kiro-cli`, `mcporter`, `opencode`, `pi`, `vscode`, `windsurf`, and `zed`. A few names also accept aliases (`claude` for `claude-code`, `copilot` for `vscode`, `gemini` for `gemini-cli`). Passing an unknown agent stops the command and prints the current supported list. A supported agent that can't take the chosen config (for example, one with no project-level config file when you pass `--project`) is reported and skipped.
 
 ### Scoping the tools
 
 By default the server exposes every MCP tool. Use these flags to narrow what an agent can do:
 
 - `--read-only` hides the write tools by adding `?readonly=true` to the server URL.
-- `--category <name>` limits tools to one or more categories (repeatable, or comma-separated). Categories are `projects`, `branches`, `endpoints`, `snapshots`, `schema`, `querying`, `neon_auth`, `data_api`, `observability`, `docs`, `functions`, `storage`, and `realtime`.
+- `--category <name>` limits tools to one or more categories (repeatable, or comma-separated). Categories are `projects`, `branches`, `endpoints`, `snapshots`, `schema`, `querying`, `neon_auth`, `data_api`, `observability`, `docs`, `functions`, `storage`, and `realtime`. The flag currently accepts only `projects`, `branches`, `schema`, `querying`, `neon_auth`, `data_api`, `observability`, and `docs`. For the other categories, add `?category=<name>` to the server URL in your agent's config yourself (see [Category filtering](/docs/ai/neon-mcp-server#category-filtering)).
 - `--project-id <id>` pins the tools to a single Neon project with `?projectId=`, and limits a newly minted key to that project.
 
 `--read-only` and `--category` shape the server URL only; they don't change a key's scope, and neither does reusing an already-configured key.

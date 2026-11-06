@@ -4,6 +4,7 @@ subtitle: 'Build reactive apps with end-to-end, type-safe live queries and optim
 summary: >-
   Realtime's reactive client primitives bind live SQL queries to your app state, with type-safe useLiveQuery hooks, TanStack DB collections and optimistic mutations on standard Postgres.
 enableTableOfContents: true
+updatedOn: '2026-10-15T14:51:27.000Z'
 ---
 
 A reactive app updates itself when its data changes. Your components declare the data they need, and the system keeps that data in sync, so there's no fetch-and-refresh code to write.

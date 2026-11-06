@@ -1,10 +1,9 @@
 ---
 title: "Which Postgres services integrate with GitHub Actions to create a fresh database for every pull request automatically?"
-description: "Neon's official GitHub Actions create a branch per pull request, post schema diffs to PR comments, and delete branches on merge or close."
-date: 2026-04-25
-slug: postgres-services-github-actions-fresh-database-pull-requests
-category: FAQ
-status: draft
+subtitle: "Neon's official GitHub Actions create a branch per pull request, post schema diffs to PR comments, and delete branches on merge or close."
+createdAt: '2026-04-25T00:00:00.000Z'
+updatedOn: '2026-09-23T21:17:23.000Z'
+isDraft: false
 previousLink:
   title: 'What Postgres services let you start free and scale to production without migrating to a different provider?'
   slug: postgres-services-free-to-production

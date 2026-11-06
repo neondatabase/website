@@ -7,7 +7,7 @@ summary: >-
   repeating `--org-id` on every command, set a persistent org context with
   `set-context`.
 enableTableOfContents: true
-updatedOn: '2026-10-09T15:17:33.920Z'
+updatedOn: '2026-11-05T15:33:57.188Z'
 ---
 
 Neon's CLI provides an expanding set of commands to manage your organizations.
@@ -34,6 +34,27 @@ org-ocean-art-12345678  Example Org  Launch
 ```
 
 See [Orgs - CLI](/docs/cli/orgs) to learn more.
+
+## Manage members and invitations
+
+The `neon orgs members` commands list, inspect, update, and remove the members of an organization, and `neon orgs invitations` lists and sends invitations. Changing a role or removing a member requires an organization Admin. Organization API keys can't send invitations, so use a personal API key.
+
+```bash
+neon orgs members list --org-id org-xxxx-xxxx
+neon orgs invitations create --email dana@example.com --role editor --org-id org-xxxx-xxxx
+```
+
+See [Orgs - CLI](/docs/cli/orgs#members) to learn more.
+
+## Manage spending notifications
+
+The `neon orgs spending-limit` commands get, set, and remove the organization's monthly [spending notification](/docs/introduction/spending-notifications) threshold, in US dollars:
+
+```bash
+neon orgs spending-limit set 500 --org-id org-xxxx-xxxx
+```
+
+See [Orgs - CLI](/docs/cli/orgs#spending-limit) to learn more.
 
 ## Manage projects within an Organization
 

@@ -7,7 +7,7 @@ summary: >-
   a five-field UTC cron reference, how to confirm a run in the logs, and the
   common errors.
 enableTableOfContents: true
-updatedOn: '2026-09-25T10:09:58.688Z'
+updatedOn: '2026-10-20T18:56:03.438Z'
 ---
 
 Schedule a function to run recurring work as your own code: a nightly report, a cleanup job, a periodic sync, or a health check. It runs next to your data and fires even when the compute is scaled to zero.
@@ -15,6 +15,8 @@ Schedule a function to run recurring work as your own code: a nightly report, a 
 ![A schedule fires a POST to the uptime function, which reads scheduled_at, fetches a URL, and records the result in Postgres](/docs/compute/functions/triggers/schedule-flow.png 'priority')
 
 This guide creates a scheduled trigger, then covers listing, updating, disabling, and deleting it. For what a trigger is and how it behaves across branches, see the [overview](/docs/compute/functions/triggers/overview). You can manage scheduled triggers from the Neon Console, the [`neon triggers`](/docs/cli/triggers) CLI, the Neon API, or declaratively in [`neon.ts`](/docs/reference/neon-ts); the steps below show each.
+
+For retries, failure history, and duplicate handling, see [Delivery and retries](/docs/compute/functions/triggers/overview#delivery-and-retries).
 
 ## Before you begin
 

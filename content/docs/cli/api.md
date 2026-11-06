@@ -7,6 +7,7 @@ summary: >-
   with `--method`, build a body from `--field` or `--data`, and add query
   parameters and headers. Run `neon api --list` to browse every endpoint.
 enableTableOfContents: true
+updatedOn: '2026-09-18T04:20:24.000Z'
 ---
 
 The `api` command sends an authenticated request to any [Neon API](/docs/reference/api) route and prints the response. Pass an API path as the first argument. The method defaults to `GET`, or `POST` when you supply a body.

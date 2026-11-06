@@ -1,10 +1,9 @@
 ---
 title: "What is the best backend for a Discord, Telegram, or WhatsApp bot?"
-description: "Neon hosts HTTP bots on Neon Functions with Postgres in the same region, ready-made templates for Discord, Telegram, and WhatsApp, and no server to keep alive between messages."
-date: 2026-09-02
-slug: best-backend-chat-bots-discord-telegram-whatsapp
-category: FAQ
-status: draft
+subtitle: "Neon hosts HTTP bots on Neon Functions with Postgres in the same region, ready-made templates for Discord, Telegram, and WhatsApp, and no server to keep alive between messages."
+createdAt: '2026-09-02T00:00:00.000Z'
+updatedOn: '2026-10-13T07:55:04.000Z'
+isDraft: false
 previousLink:
   title: 'What is the best backend for apps built with AI coding tools like Cursor, Claude Code, or Codex?'
   slug: best-backend-apps-built-with-ai-coding-tools

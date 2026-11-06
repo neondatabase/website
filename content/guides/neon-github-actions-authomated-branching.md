@@ -4,6 +4,7 @@ subtitle: Automate database branching for your application with Neon and GitHub 
 enableTableOfContents: true
 author: dhanush-reddy
 createdAt: '2024-11-29T00:00:00.000Z'
+updatedOn: '2026-09-24T18:22:11.000Z'
 ---
 
 Database changes can be one of the trickiest parts of application development. When multiple developers work on features that require database modifications, they run into problems like conflicting schema changes, difficulty in testing migrations, and the risk of breaking the production database.

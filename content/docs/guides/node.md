@@ -3,7 +3,7 @@ title: Connect a Node.js application to Neon
 subtitle: Set up a Neon project in seconds and connect from a Node.js application
 summary: >-
   Step-by-step connection guide for Node.js, Express, and Next.js apps targeting
-  a Neon serverless Postgres database, with working code for three clients: the
+  a Lakebase Postgres database on Neon, with working code for three clients: the
   Neon serverless driver (@neondatabase/serverless), node-postgres (pg), and
   Postgres.js. Use this page when you need to wire up environment-variable-based
   SSL credentials and pick the right client for your project. Also covers the
@@ -19,7 +19,7 @@ updatedOn: '2026-09-16T19:45:35.340Z'
 <CopyPrompt src="/prompts/javascript-prompt.md" 
 description="Pre-built prompt for connecting Node.js applications to Neon."/>
 
-This guide describes how to create a Neon project and connect to it from a Node.js application. Examples are provided for using the [node-postgres](https://www.npmjs.com/package/pg) and [Postgres.js](https://www.npmjs.com/package/postgres) clients. Use the client you prefer.
+This guide describes how to create a Neon project and connect to it from a Node.js application. Examples are provided for the [Neon serverless driver](/docs/serverless/serverless-driver), [node-postgres](https://www.npmjs.com/package/pg), and [Postgres.js](https://www.npmjs.com/package/postgres). Use the client you prefer.
 
 <Admonition type="note">
 The same configuration steps can be used for Express and Next.js applications.
@@ -37,9 +37,9 @@ If you do not have one already, create a Neon project.
 2. Click **New Project**.
 3. Specify your project settings and click **Create Project**.
 
-## Create a NodeJS project and add dependencies
+## Create a Node.js project and add dependencies
 
-1. Create a NodeJS project and change to the newly created directory.
+1. Create a Node.js project and change to the newly created directory.
 
    ```shell
    mkdir neon-nodejs-example
@@ -67,7 +67,7 @@ If you do not have one already, create a Neon project.
 
 ## Store your Neon credentials
 
-Add a `.env` file to your project directory and add your Neon connection details to it. You can find your Neon database connection details by clicking the **Connect** button in the Console nav to open the **Connect to your branch** modal. Please select Node.js from the **Connection string** dropdown. For more information, see [Connect from any application](/docs/connect/connect-from-any-app).
+Add a `.env` file to your project directory and add your Neon connection details to it. You can find your Neon database connection details by clicking the **Connect** button in the Console nav to open the **Connect to your branch** modal. Select Node.js from the **Connection string** dropdown. If you have a connection string instead (`postgresql://[user]:[password]@[neon_hostname]/[dbname]`), copy its parts into the matching variables. For more information, see [Connect from any application](/docs/connect/connect-from-any-app).
 
 ```shell shouldWrap
 PGHOST='[neon_hostname]'
@@ -78,7 +78,7 @@ ENDPOINT_ID='[endpoint_id]'
 ```
 
 <Admonition type="note">
-A special `ENDPOINT_ID` variable is included in the `.env` file above. This variable can be used with older Postgres clients that do not support Server Name Indication (SNI), which Neon relies on to route incoming connections. If you are using a newer [node-postgres](https://node-postgres.com/) or [postgres.js](https://github.com/porsager/postgres) client, you won't need it. For more information, see [Endpoint ID variable](#endpoint-id-variable).
+A special `ENDPOINT_ID` variable is included in the `.env` file above. This variable can be used with older Postgres clients that do not support Server Name Indication (SNI), which Neon relies on to route incoming connections. Its value is the first part of your `PGHOST` hostname, including `-pooler` if you use a pooled connection (for example, `ep-cool-darkness-123456-pooler`). If you are using a newer [node-postgres](https://node-postgres.com/) or [postgres.js](https://github.com/porsager/postgres) client, you won't need it. For more information, see [Endpoint ID variable](#endpoint-id-variable).
 </Admonition>
 
 <Admonition type="important">
@@ -120,12 +120,10 @@ const { PGHOST, PGDATABASE, PGUSER, PGPASSWORD } = process.env;
 const pool = new Pool({
   host: PGHOST,
   database: PGDATABASE,
-  username: PGUSER,
+  user: PGUSER,
   password: PGPASSWORD,
   port: 5432,
-  ssl: {
-    require: true,
-  },
+  ssl: true,
 });
 
 async function getPgVersion() {
@@ -135,6 +133,7 @@ async function getPgVersion() {
     console.log(result.rows[0]);
   } finally {
     client.release();
+    await pool.end();
   }
 }
 
@@ -144,7 +143,8 @@ getPgVersion();
 ```javascript
 require('dotenv').config();
 
-const postgres = require('postgres');
+// postgres.js 4 and later is ESM-only; .default returns the postgres function
+const postgres = require('postgres').default;
 
 const { PGHOST, PGDATABASE, PGUSER, PGPASSWORD } = process.env;
 
@@ -160,61 +160,7 @@ const sql = postgres({
 async function getPgVersion() {
   const result = await sql`select version()`;
   console.log(result[0]);
-}
-
-getPgVersion();
-```
-
-```javascript
-require('dotenv').config();
-
-const { Pool } = require('pg');
-
-let { PGHOST, PGDATABASE, PGUSER, PGPASSWORD } = process.env;
-
-const pool = new Pool({
-  host: PGHOST,
-  database: PGDATABASE,
-  username: PGUSER,
-  password: PGPASSWORD,
-  port: 5432,
-  ssl: {
-    require: true,
-  },
-});
-
-async function getPgVersion() {
-  const client = await pool.connect();
-  try {
-    const result = await client.query('SELECT version()');
-    console.log(result.rows[0]);
-  } finally {
-    client.release();
-  }
-}
-
-getPgVersion();
-```
-
-```javascript
-require('dotenv').config();
-
-const postgres = require('postgres');
-
-let { PGHOST, PGDATABASE, PGUSER, PGPASSWORD } = process.env;
-
-const sql = postgres({
-  host: PGHOST,
-  database: PGDATABASE,
-  username: PGUSER,
-  password: PGPASSWORD,
-  port: 5432,
-  ssl: 'require',
-});
-
-async function getPgVersion() {
-  const result = await sql`select version()`;
-  console.log(result[0]);
+  await sql.end();
 }
 
 getPgVersion();
@@ -228,7 +174,7 @@ Run `node app.js` to view the result.
 
 ```shell
 {
-  version: 'PostgreSQL 16.0 on x86_64-pc-linux-gnu, compiled by gcc (Debian 10.2.1-6) 10.2.1 20210110, 64-bit'
+  version: 'PostgreSQL 18.6 (ac70818) on aarch64-unknown-linux-gnu, compiled by gcc (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0, 64-bit'
 }
 ```
 
@@ -236,14 +182,14 @@ Run `node app.js` to view the result.
 
 ## Endpoint ID variable
 
-For older clients that do not support Server Name Indication (SNI), the `postgres.js` example below shows how to include the `ENDPOINT_ID` variable in your application's connection configuration. This is a workaround that is not required if you are using a newer [node-postgres](https://node-postgres.com/) or [postgres.js](https://github.com/porsager/postgres) client. For more information about this workaround and when it is required, see [The endpoint ID is not specified](/docs/connect/connection-errors#the-endpoint-id-is-not-specified) in our [connection errors](/docs/connect/connection-errors) documentation.
+For older clients that do not support Server Name Indication (SNI), the `postgres.js` example below shows how to include the `ENDPOINT_ID` variable in your application's connection configuration. This is a workaround that is not required if you are using a newer [node-postgres](https://node-postgres.com/) or [postgres.js](https://github.com/porsager/postgres) client. For more information about this workaround and when it is required, see [The endpoint ID is not specified](/docs/connect/connection-errors#the-endpoint-id-is-not-specified).
 
 ```javascript
 // app.js
 
 require('dotenv').config();
 
-const postgres = require('postgres');
+const postgres = require('postgres').default;
 
 const { PGHOST, PGDATABASE, PGUSER, PGPASSWORD, ENDPOINT_ID } = process.env;
 
@@ -255,13 +201,14 @@ const sql = postgres({
   port: 5432,
   ssl: 'require',
   connection: {
-    options: `project=${ENDPOINT_ID}`,
+    options: `endpoint=${ENDPOINT_ID}`,
   },
 });
 
 async function getPgVersion() {
   const result = await sql`select version()`;
-  console.log(result);
+  console.log(result[0]);
+  await sql.end();
 }
 
 getPgVersion();

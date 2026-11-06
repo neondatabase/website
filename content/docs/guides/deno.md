@@ -10,8 +10,13 @@ summary: >-
   DATABASE_URL setup, the deployctl deploy command, and optional GitHub
   integration for automated deployments.
 enableTableOfContents: true
+tag: deprecated
 updatedOn: '2026-10-01T18:19:15.279Z'
 ---
+
+<Admonition type="warning" title="Deprecated">
+This guide deploys with `deployctl` to Deno Deploy Classic, which shut down in July 2026. Deno has also announced that Deno Deploy will shut down in 2027. The deployment steps no longer work, and this guide is no longer maintained. The local steps, which use the Deno runtime and the Neon serverless driver, still apply. For other deployment options, see [Neon integration guides](/docs/guides/integrations).
+</Admonition>
 
 [Deno Deploy](https://deno.com/deploy) is a scalable serverless platform for running JavaScript, TypeScript, and WebAssembly at the edge, designed by the creators of Deno. It simplifies the deployment process and offers automatic scaling, zero-downtime deployments, and global distribution.
 

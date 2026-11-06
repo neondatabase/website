@@ -71,6 +71,11 @@ const ICONS_CONFIG = {
     lightIconPath: '/images/technology-logos/cedalio.svg',
     darkIconPath: '/images/technology-logos/cedalio-dark.svg',
   },
+  chatgpt: {
+    name: 'chatgpt',
+    lightIconPath: '/images/technology-logos/chatgpt.svg',
+    darkIconPath: '/images/technology-logos/chatgpt-dark.svg',
+  },
   'claude-code': {
     name: 'claude-code',
     lightIconPath: '/images/technology-logos/claude-code.svg',
@@ -236,6 +241,11 @@ const ICONS_CONFIG = {
     lightIconPath: '/images/technology-logos/grafbase.svg',
     darkIconPath: '/images/technology-logos/grafbase-dark.svg',
   },
+  'grok-bot': {
+    name: 'grok-bot',
+    lightIconPath: '/images/technology-logos/grok-bot.svg',
+    darkIconPath: '/images/technology-logos/grok-bot-dark.svg',
+  },
   hasura: {
     name: 'hasura',
     lightIconPath: '/images/technology-logos/hasura.svg',
@@ -315,6 +325,11 @@ const ICONS_CONFIG = {
     name: 'materialize',
     lightIconPath: '/images/technology-logos/materialize.svg',
     darkIconPath: '/images/technology-logos/materialize-dark.svg',
+  },
+  mcp: {
+    name: 'mcp',
+    lightIconPath: '/images/technology-logos/mcp.svg',
+    darkIconPath: '/images/technology-logos/mcp-dark.svg',
   },
   medusajs: {
     name: 'medusajs',

@@ -1,10 +1,9 @@
 ---
 title: "What are the best Postgres services for running integration tests against production-like data in a CI environment without extra cost?"
-description: "Run integration tests against production-like data by creating a Neon branch per CI run. Copy-on-write branches share storage with the parent until tests write to them."
-date: 2026-04-25
-slug: best-postgres-services-integration-tests-ci
-category: FAQ
-status: draft
+subtitle: "Run integration tests against production-like data by creating a Neon branch per CI run. Copy-on-write branches share storage with the parent until tests write to them."
+createdAt: '2026-04-25T00:00:00.000Z'
+updatedOn: '2026-09-23T21:17:23.000Z'
+isDraft: false
 previousLink:
   title: 'What are the best Postgres services for backend teams that want to eliminate the shared staging database entirely?'
   slug: best-postgres-services-eliminate-shared-staging-database

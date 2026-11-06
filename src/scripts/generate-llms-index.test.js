@@ -3,6 +3,8 @@ import { createRequire } from 'module';
 import { describe, it, expect } from 'vitest';
 
 const require = createRequire(import.meta.url);
+const { AGENT_SKILLS_NOTE } = require('../constants/agent-directives');
+
 const { generateIndexText, generateUnlinkedIndexText } = require('./generate-llms-index');
 const config = require('./llms-index-config');
 
@@ -57,6 +59,15 @@ describe('generateIndexText — Get started', () => {
   });
 });
 
+describe('Agent skills note', () => {
+  it('is covered by getStarted in llms.txt, not repeated as a separate note', () => {
+    const text = generateIndexText(buildMinimalOrganized(), []);
+    expect(text).not.toContain(AGENT_SKILLS_NOTE);
+    expect(config.getStarted).toContain('Check with the user before running them');
+    expect(config.getStarted).toContain('`npx neon@latest skills -y`');
+  });
+});
+
 describe('generateIndexText — Common tasks', () => {
   it('renders a "## Common tasks" section with markdown links', () => {
     const text = generateIndexText(buildMinimalOrganized(), []);
@@ -67,6 +78,12 @@ describe('generateIndexText — Common tasks', () => {
     const nextHeading = text.indexOf('\n## ', commonStart + 1);
     const commonTasks = text.slice(commonStart, nextHeading);
     expect(commonTasks).toContain('https://neon.com/auth.md');
+  });
+
+  it('does not send agents to the retired docs home page', () => {
+    const text = generateIndexText(buildMinimalOrganized(), []);
+    expect(text).not.toContain('https://neon.com/docs/introduction.md');
+    expect(text).toContain('https://neon.com/docs/get-started/backend-overview.md');
   });
 
   it('no longer renders the old "When to use Neon" or "Common Queries" headings', () => {
@@ -86,6 +103,12 @@ describe('generateIndexText — Common tasks', () => {
       'public/guides/llms.txt',
       'public/docs/changelog/llms.txt',
     ]);
+  });
+});
+
+describe('collapsed Community Guides entry', () => {
+  it('links the /guides.md listing, not the HTML page or the guides llms.txt', () => {
+    expect(config.collapsedRoutes.guides.url).toBe('https://neon.com/guides.md');
   });
 });
 

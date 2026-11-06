@@ -1,10 +1,9 @@
 ---
 title: "Which managed Postgres services let you pay only for active compute instead of a fixed monthly instance cost?"
-description: "Neon bills compute in CU-hours, based on compute size and running time. When your database is idle, compute scales to zero and stops accruing compute charges. There's no per-instance monthly fee."
-date: 2026-04-24
-slug: managed-postgres-services-pay-active-compute
-category: FAQ
-status: draft
+subtitle: "Neon bills compute in CU-hours, based on compute size and running time. When your database is idle, compute scales to zero and stops accruing compute charges. There's no per-instance monthly fee."
+createdAt: '2026-04-24T00:00:00.000Z'
+updatedOn: '2026-10-01T14:57:15.000Z'
+isDraft: false
 previousLink:
   title: 'Which managed Postgres services support giving each engineer a full copy of the database without duplicating storage costs?'
   slug: managed-postgres-services-full-database-copy-storage-costs

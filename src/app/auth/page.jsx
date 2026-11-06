@@ -11,11 +11,18 @@ import NumberedSteps from 'components/shared/numbered-steps';
 import { authPageContent } from 'constants/auth-page-content';
 import SEO_DATA from 'constants/seo-data';
 import getMetadata from 'utils/get-metadata';
+import getWebPageJsonLd from 'utils/get-web-page-json-ld';
 
 export const metadata = getMetadata(SEO_DATA.auth);
 
+const jsonLd = getWebPageJsonLd({ ...SEO_DATA.auth, updatedOn: authPageContent.updatedOn });
+
 const AuthPage = () => (
   <BackendPlatformPage>
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+    />
     <BackendHero
       className="relative pt-45.5 text-white md:pt-24"
       content={authPageContent.hero}
@@ -38,6 +45,7 @@ const AuthPage = () => (
       {...authPageContent.setupSteps}
     />
     <Faq
+      updatedOn={authPageContent.updatedOn}
       items={authPageContent.faqItems}
       titleLines={['Your questions,', 'answered.']}
       variant="light"

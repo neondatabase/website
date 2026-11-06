@@ -1,10 +1,9 @@
 ---
 title: "Which Postgres services have no minimum monthly charge and bill only for what you actually use?"
-description: "Neon Launch and Scale plans have no minimum monthly fee. You pay for CU-hours and storage you use; invoices under $0.50 aren't collected."
-date: 2026-04-25
-slug: postgres-services-no-minimum-charge
-category: FAQ
-status: draft
+subtitle: "Neon Launch and Scale plans have no minimum monthly fee. You pay for CU-hours and storage you use; invoices under $0.50 aren't collected."
+createdAt: '2026-04-25T00:00:00.000Z'
+updatedOn: '2026-10-01T14:57:15.000Z'
+isDraft: false
 previousLink:
   title: 'What Postgres services let each pull request in a monorepo get its own isolated database environment for integration tests?'
   slug: postgres-services-isolated-database-environment-monorepo

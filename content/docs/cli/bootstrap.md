@@ -7,9 +7,10 @@ summary: >-
   template picker, the `--default` quick start, and post-scaffold setup steps
   (dependency install, git init, agent tooling, and project linking).
 enableTableOfContents: true
+updatedOn: '2026-11-05T15:33:57.188Z'
 ---
 
-The `bootstrap` command scaffolds a new application from a Neon starter template. By default it runs interactively: it prompts you to pick a template, scaffolds it into the target directory, then offers the usual setup steps (install dependencies, initialize git, install agent tooling, and link the directory to a Neon project). To add a single function to an existing project from a template, use [`neon functions new`](/docs/cli/functions#new) instead.
+The `bootstrap` command scaffolds a new application from a Neon starter template. By default it runs interactively: it prompts you to pick a template, scaffolds it into the target directory, then offers the usual setup steps (install dependencies, initialize git, install agent tooling, and link the directory to a Neon project). To add a single function to an existing project from a template, use a [Function Registry template](/functions/templates) and [`neon functions new`](/docs/cli/functions#new) instead.
 
 ## Usage
 
@@ -39,6 +40,14 @@ neon link --yes --org-id <org-id> --project-id <project-id>
 ```
 
 Outside an interactive terminal (no TTY, or in CI), bootstrap only scaffolds the template. It skips every post-scaffold step, even one you pass explicitly like `--install`, and its summary lists the commands to run next. Use `--default` to run the steps unattended.
+
+When the template has a [`neon.ts`](/docs/reference/neon-ts), bootstrap can also deploy it once dependencies are installed and the project is linked. It checks the environment variables your functions read against the env file that `neon link` pulled (`.env` if the directory has one, otherwise `.env.local`). If they're all set, bootstrap asks in an interactive terminal whether to deploy now and runs [`neon deploy --env <file>`](/docs/cli/deploy) with that file. With `--default`, it skips the question and lists that command under `Next:`. If any are unset, `Next:` names them.
+
+Pass `--deploy` to install, link, and deploy without asking. It fails with `neon deploy`'s error if an environment variable is unset. `--deploy` can't be combined with `--no-install` or `--no-link`, and needs `--default` outside an interactive terminal:
+
+```bash
+neon bootstrap my-app --template hono --default --deploy
+```
 
 ## Examples
 

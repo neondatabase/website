@@ -1,10 +1,9 @@
 ---
 title: "What is the best backend for AI agents that stream responses and call tools for minutes at a time?"
-description: "Neon runs agents on Neon Functions with a 15-minute time to first byte, streams that stay open while data flows, an AI Gateway credential injected at deploy, and Postgres next to the code."
-date: 2026-09-02
-slug: best-backend-ai-agents-long-running-streaming
-category: FAQ
-status: draft
+subtitle: "Neon runs agents on Neon Functions with a 15-minute time to first byte, streams that stay open while data flows, an AI Gateway credential injected at deploy, and Postgres next to the code."
+createdAt: '2026-09-02T00:00:00.000Z'
+updatedOn: '2026-10-13T07:55:04.000Z'
+isDraft: false
 previousLink:
   title: 'Which managed Postgres options are affordable for early-stage startups that need a production database but have unpredictable traffic?'
   slug: affordable-managed-postgres-options-startups
@@ -48,7 +47,7 @@ export default defineConfig({
 Inside the handler, `@neon/ai-sdk-provider` reads the injected gateway credentials, so `neon('<model>')` is the only model configuration you write. Tools run inside the function with a `pg` pool pointed at `DATABASE_URL`. [AI agents on Neon Functions](/docs/compute/functions/agents) has the full streaming example with a Postgres-backed tool. To start from a working agent, run `neon bootstrap --template ai-sdk` (image generation with the AI SDK) or `--template mastra` (a Mastra assistant with Postgres-backed memory).
 
 <Admonition type="note" title="Region availability">
-Functions and AI Gateway are available in AWS US East (Ohio), US East (N. Virginia), Europe (Frankfurt), and Asia Pacific (Singapore), with support expanding toward [all regions](/docs/introduction/regions). Functions are available on every plan, with 10 active Capacity-Hours, 400 waiting Capacity-Hours, and 1 million invocations per project a month included on Free; AI Gateway requires a paid plan and bills inference from prepaid credits at provider list prices with no markup ([plans](/docs/introduction/plans#functions)).
+Functions and AI Gateway are available in AWS US East (Ohio), US East (N. Virginia), Europe (Frankfurt), and Asia Pacific (Singapore), with support expanding toward [all regions](/docs/introduction/regions). Functions are available on every plan, with 10 active Capacity-Hours, 400 waiting Capacity-Hours, and 1 million invocations per project a month included on Free; AI Gateway works on any plan and bills inference from prepaid credits at provider list prices with no markup ([plans](/docs/introduction/plans#functions)).
 </Admonition>
 
 ## How other options compare

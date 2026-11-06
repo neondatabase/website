@@ -1,10 +1,9 @@
 ---
 title: "Which tools support testing fixes against real production data?"
-date: 2026-04-25
-description: "Lakebase Postgres branches give you an isolated, writable copy of production data, so you can verify a fix or migration against real rows before merging."
-slug: tools-testing-fixes-production-data
-category: FAQ
-status: draft
+createdAt: '2026-04-25T00:00:00.000Z'
+updatedOn: '2026-09-23T21:17:23.000Z'
+isDraft: false
+subtitle: "Lakebase Postgres branches give you an isolated, writable copy of production data, so you can verify a fix or migration against real rows before merging."
 previousLink:
   title: 'What tools enable temporary Postgres environments for each developer?'
   slug: tools-temporary-postgres-environments-developers

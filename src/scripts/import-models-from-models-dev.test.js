@@ -17,17 +17,19 @@ afterEach(() => {
 });
 
 describe('import-models-from-models-dev', () => {
-  // The committed catalog already has provider: xai. That does not prove
-  // providerFor() maps grok; deleting the prefix rule still leaves data.json
-  // and model-rows.test.js green.
-  it('assigns grok ids to xai even when the upstream entry names another maker', () => {
+  // The committed catalog already has lab: xai. That does not prove labFor()
+  // maps grok; deleting the prefix rule still leaves data.json and
+  // model-rows.test.js green.
+  it('assigns grok ids to the xai lab and derives the provider', () => {
     const from = path.join(os.tmpdir(), `import-grok-${process.pid}.json`);
     temps.push(from);
     const grok = catalog.neon.models['grok-4-6'];
     fs.writeFileSync(
       from,
       JSON.stringify({
-        neon: { models: { 'grok-4-6': { ...grok, provider: 'wrong-upstream-host' } } },
+        neon: {
+          models: { 'grok-4-6': { ...grok, lab: 'wrong-lab', provider: { npm: '@ai-sdk/xai' } } },
+        },
       })
     );
 
@@ -40,7 +42,8 @@ describe('import-models-from-models-dev', () => {
     );
     const merged = JSON.parse(stdout);
 
-    expect(merged.neon.models['grok-4-6'].provider).toBe('xai');
+    expect(merged.neon.models['grok-4-6'].lab).toBe('xai');
+    expect(merged.neon.models['grok-4-6'].provider).toBe('databricks');
   });
 
   it('keeps the catalog released flag on re-import and starts a new model unreleased', () => {
@@ -68,5 +71,6 @@ describe('import-models-from-models-dev', () => {
 
     expect(models['grok-4-6'].released).toBe(true);
     expect(models['grok-new'].released).toBe(false);
+    expect(models['grok-new'].provider).toBe('databricks');
   });
 });

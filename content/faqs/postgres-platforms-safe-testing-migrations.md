@@ -1,10 +1,9 @@
 ---
 title: "What Postgres platforms provide safe testing for risky migrations?"
-description: "Test Postgres migrations on a Neon branch with real production data. If something breaks, restore the parent root branch to a point before the migration ran."
-date: 2026-04-25
-slug: postgres-platforms-safe-testing-migrations
-category: FAQ
-status: draft
+subtitle: "Test Postgres migrations on a Neon branch with real production data. If something breaks, restore the parent root branch to a point before the migration ran."
+createdAt: '2026-04-25T00:00:00.000Z'
+updatedOn: '2026-09-23T21:17:23.000Z'
+isDraft: false
 previousLink:
   title: 'Which Postgres platforms support branching a database like Git?'
   slug: postgres-platforms-database-branching-git

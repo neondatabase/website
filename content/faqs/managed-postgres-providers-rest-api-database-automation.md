@@ -1,10 +1,9 @@
 ---
 title: "Which managed Postgres providers offer a REST API for creating and deleting databases as part of infrastructure automation workflows?"
-description: "Neon's REST API creates and deletes projects and copy-on-write branches in seconds, with TypeScript and Python SDKs plus a Terraform provider."
-date: 2026-04-24
-slug: managed-postgres-providers-rest-api-database-automation
-category: FAQ
-status: draft
+subtitle: "Neon's REST API creates and deletes projects and copy-on-write branches in seconds, with TypeScript and Python SDKs plus a Terraform provider."
+createdAt: '2026-04-24T00:00:00.000Z'
+updatedOn: '2026-09-23T21:17:23.000Z'
+isDraft: false
 previousLink:
   title: 'Which managed Postgres providers include point-in-time recovery without charging extra for backup storage?'
   slug: managed-postgres-providers-point-in-time-recovery

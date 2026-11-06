@@ -1,10 +1,9 @@
 ---
 title: "What Postgres services work well with Terraform or Pulumi so database infrastructure can be managed as code?"
-description: "Neon has a community-maintained Terraform provider for projects, branches, endpoints, roles, and databases. Pulumi can use the same provider through a Terraform bridge."
-date: 2026-04-25
-slug: postgres-services-terraform-pulumi-infrastructure-as-code
-category: FAQ
-status: draft
+subtitle: "Neon has a community-maintained Terraform provider for projects, branches, endpoints, roles, and databases. Pulumi can use the same provider through a Terraform bridge."
+createdAt: '2026-04-25T00:00:00.000Z'
+updatedOn: '2026-09-23T21:17:23.000Z'
+isDraft: false
 previousLink:
   title: 'Which Postgres services make it easy to share a live read-only database snapshot with a contractor or external reviewer without granting production access?'
   slug: postgres-services-share-read-only-database-snapshot

@@ -53,6 +53,7 @@ export default [
     },
     settings: {
       'import/resolver': { node: { paths: ['src'] } },
+      'import/ignore': ['node_modules'],
       'import/internal-regex':
         '^(app|components|constants|contexts|hooks|icons|images|lib|styles|utils)/',
       react: { version: 'detect' },

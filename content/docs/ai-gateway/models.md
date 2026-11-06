@@ -6,24 +6,24 @@ summary: >-
   models, which endpoint to use, shorter and longer request paths, the
   /v1/models API, rate limits, pricing, and provider terms.
 enableTableOfContents: true
-updatedOn: '2026-10-23T19:28:25.610Z'
+updatedOn: '2026-11-04T20:10:08.844Z'
 ---
 
 This page covers how to call models through Neon AI Gateway and the rules that apply. For the full list of models you can call, see the [model catalog](https://neon.com/ai-gateway#models).
 
-<CTA title="See every model on Neon AI Gateway" description="Compare every available model by provider, inputs, context window, and pricing." buttonText="Browse all models" buttonUrl="https://neon.com/ai-gateway#models" />
+<CTA title="See every model on Neon AI Gateway" description="Compare every available model by lab, inputs, context window, and pricing." buttonText="Browse all models" buttonUrl="https://neon.com/ai-gateway#models" />
 
-Neon AI Gateway serves models hosted by Databricks. Use short model IDs in the `model` field, for example `gpt-5-mini` or `gemini-3-flash`. The `databricks-` prefixed form is also accepted. The Neon Console and most examples use the short form.
+Neon AI Gateway serves models from many providers behind one credential. Use short model IDs in the `model` field, for example `gpt-5-mini` or `gemini-3-flash`. The `databricks-` prefixed form is also accepted. The Neon Console and most examples use the short form.
 
 <Admonition type="important">
-Models are hosted by Databricks and served through Neon AI Gateway. By using these models, you are responsible for complying with each provider's applicable terms of use. See [Provider terms](#provider-terms) below.
+Most models are served through Databricks. Jev is the exception: TypeSafe AI, which made it, also hosts it. [Provider terms](#provider-terms) links each provider's terms and notes where hosting differs. Wherever a model is hosted, you're responsible for complying with its provider's terms of use.
 </Admonition>
 
 Model availability may vary by region, and the catalog expands over time, so check back for new additions.
 
-> AI Gateway is currently available in AWS US East (Ohio) (`aws-us-east-2`), AWS US East (N. Virginia) (`aws-us-east-1`), AWS Europe (Frankfurt) (`aws-eu-central-1`), and AWS Asia Pacific (Singapore) (`aws-ap-southeast-1`). Create your project in one of these regions to use it. Support is expanding toward [all regions](/docs/introduction/regions). It requires a paid Neon plan. See [Pricing](#pricing) for details.
+> AI Gateway is currently available in AWS US East (Ohio) (`aws-us-east-2`), AWS US East (N. Virginia) (`aws-us-east-1`), AWS Europe (Frankfurt) (`aws-eu-central-1`), and AWS Asia Pacific (Singapore) (`aws-ap-southeast-1`). Create your project in one of these regions to use it. Support is expanding toward [all regions](/docs/introduction/regions). It's available on any Neon plan with prepaid credits. See [Pricing](#pricing) for details.
 
-The full catalog is served as JSON at [`neon.com/models.json`](https://neon.com/models.json), the machine-readable source of truth, and mirrored as the [`neon` provider on models.dev](https://models.dev/providers/neon).
+The full catalog is served as JSON at [`neon.com/models.json`](https://neon.com/models.json), the machine-readable source of truth, and mirrored as the [`neon` provider on models.dev](https://models.dev/providers/neon). Each model lists its `lab`, the organization that made it, and its `provider`, the organization that provides it: Databricks for every model except Jev, which TypeSafe AI hosts. Both field names follow models.dev.
 
 Every model in the catalog carries a `released` boolean. `false` marks a model listed ahead of its announcement: it stays in `neon.com/models.json` and `neon.com/models`, and an app that shows a model list should leave it out:
 
@@ -33,21 +33,22 @@ const models = Object.values(catalog.neon.models).filter((model) => model.releas
 
 ## Model access
 
-Neon AI Gateway gives you one credential for both open-weight and foundation models. Any paid project with prepaid credits can use every model in the catalog. The [model catalog](/docs/ai-gateway/overview#available-models) is always the source of truth for what you can call today.
+Neon AI Gateway gives you one credential for both open-weight and foundation models. Any account with prepaid credits can use every model in the catalog, on any plan. The [model catalog](/docs/ai-gateway/overview#available-models) is always the source of truth for what you can call today.
 
 ## Rate limits
 
-The following limit applies per account:
+The following limits apply per account. Input and output tokens are limited separately:
 
-| Limit                   | Value   |
-| ----------------------- | ------- |
-| Tokens per minute (TPM) | 200,000 |
+| Limit                          | Value   |
+| ------------------------------ | ------- |
+| Input tokens per minute (TPM)  | 200,000 |
+| Output tokens per minute (TPM) | 200,000 |
 
-If you hit the limit, you'll receive a `429 Too Many Requests` response with a message like `ai gateway per-minute token limit exceeded for model "<model-id>"`. Requests resume when the rate limit window resets.
+If you hit the limit, you'll receive a `429 Too Many Requests` response with a message that starts with `You've exceeded your AI Gateway input token limit for model "<model-id>"`. Requests resume when the rate limit window resets.
 
-The TPM limit is counted against total tokens (input and output combined), not input alone. Upstream output token limits (20,000 OTPM for most models) apply independently, so you can hit a `429` on output tokens without reaching the gateway's TPM limit. See [Databricks Foundation Model API limits](https://docs.databricks.com/aws/en/machine-learning/foundation-model-apis/limits) for details.
+The TPM limit applies to input tokens and output tokens separately. Each direction has its own limit, so using up your output allowance doesn't use up your input allowance. Upstream output token limits (20,000 OTPM for most models) apply independently, so you can hit a `429` on output tokens without reaching the gateway's TPM limit. See [Databricks Foundation Model API limits](https://docs.databricks.com/aws/en/machine-learning/foundation-model-apis/limits) for details.
 
-The 200,000 TPM ceiling is a soft limit. If you need a higher limit, [contact Support](/docs/introduction/support).
+Both 200,000 TPM limits are soft limits. If you need a higher limit, [contact Support](/docs/introduction/support).
 
 A separate account-level daily spend cap also applies and can block AI Gateway requests with a `429` / `REQUEST_LIMIT_EXCEEDED`. It isn't a fixed published number and can vary by account. See [Pricing](#pricing) for details, or [Troubleshooting](/docs/ai-gateway/troubleshooting#429-account-quota-exceeded) if you hit it.
 
@@ -55,13 +56,13 @@ A separate account-level daily spend cap also applies and can block AI Gateway r
 
 AI Gateway usage draws down a prepaid credit balance. Here's how pricing works:
 
-- **Paid plans only.** AI Gateway is available on Neon's Launch and Scale plans, with no difference in pricing or model access between the two. Any paid customer with prepaid credits can use every model in the catalog. See [Model access](#model-access) for details.
+- **Any plan.** AI Gateway is available on every Neon plan, including Free, with no difference in pricing or model access between plans. On the Free plan, you add a payment card to buy credits and your organization stays on Free. Any account with prepaid credits can use every model in the catalog. See [Model access](#model-access) for details.
 - **No markup.** Neon charges the same per-token rate as the model provider. Published provider prices are passed on to users with no additional markup.
 - **Prepaid credits.** Inference draws down a prepaid credit balance. 1 credit equals $1 USD, with a $5 minimum purchase, and credits are valid for 12 months from purchase. You buy credits from the **Billing** page in the [Neon Console](https://console.neon.tech/app/billing).
 
 See the [model catalog](/docs/ai-gateway/overview#available-models) for per-model rates, and [AI Gateway prepaid credits](/docs/ai-gateway/prepaid-credits) for how to buy credits and manage your balance.
 
-Independent of billing, Neon enforces an account-level daily spend cap on AI Gateway usage, separate from the per-minute rate limits above. If your account exceeds it, every AI Gateway endpoint returns `429 Too Many Requests` with error code `REQUEST_LIMIT_EXCEEDED` until the cap resets or the block is lifted. Neon hasn't published a fixed cap value; it isn't a flat number and can vary by account. See [Troubleshooting](/docs/ai-gateway/troubleshooting#429-account-quota-exceeded) if you hit this.
+Independent of billing, Neon enforces an account-level daily spend cap on AI Gateway usage, separate from the per-minute rate limits above. If your account exceeds it, every AI Gateway endpoint returns `429 Too Many Requests` with error code `REQUEST_LIMIT_EXCEEDED` until the cap resets or the block is lifted. The cap is $20 per day by default, but it may vary by account. To have it raised, [contact Support](/docs/introduction/support). See [Troubleshooting](/docs/ai-gateway/troubleshooting#429-account-quota-exceeded) if you hit this.
 
 ## Which endpoint to use
 
@@ -79,10 +80,10 @@ All paths below are appended to your branch's bare AI Gateway host (`NEON_AI_GAT
 | Meta, Zhipu AI, Thinking Machines, Moonshot AI | `/v1/chat/completions`   | Chat completions only                                                                                    |
 | Alibaba (chat models)                          | `/v1/chat/completions`   | Chat completions only                                                                                    |
 | Alibaba, BAAI (embedding models)               | `/v1/embeddings`         | No chat completions. Returns a vector, not text                                                          |
-| TypeSafe (decision models)                     | `/typesafe/v1/systemone` | No chat completions. Returns answers to questions, not text. See [Decisions](/docs/ai-gateway/decisions) |
+| TypeSafe AI (decision models)                  | `/typesafe/v1/systemone` | No chat completions. Returns answers to questions, not text. See [Decisions](/docs/ai-gateway/decisions) |
 
 <Admonition type="warning" title="Content shape varies by model">
-For most models, `message.content` in a chat completions response is a plain string. For `claude-opus-5-5`, it's an array of typed content blocks once the model reasons (`{ type: 'reasoning', ... }`, `{ type: 'text', text: ... }`); a trivial prompt still returns a string. A low `max_tokens` value can also cut a response off before the `text` block appears, leaving only a `reasoning` block. Handle both shapes:
+For most models, `message.content` in a chat completions response is a plain string. For `claude-opus-5-5`, it's an array of typed content blocks once the model reasons (`{ type: 'reasoning', ... }`, `{ type: 'text', text: ... }`); a trivial prompt still returns a string. For `gemini-4-argon`, it's an array of `text` blocks, even for a trivial prompt. A low `max_tokens` value can also cut a response off before the `text` block appears, leaving only a `reasoning` block. Handle both shapes:
 
 ```typescript
 // The OpenAI SDK types content as string | null, so read it as unknown.
@@ -157,7 +158,7 @@ curl "$NEON_AI_GATEWAY_BASE_URL/v1/models" \
 
 The response returns one object per model. Key fields:
 
-- `enabled` is whether the model is currently callable. Any paid account with prepaid credits can call every model in the catalog. See [Model access](#model-access) for details.
+- `enabled` is whether the model is currently callable. Any account with prepaid credits can call every model in the catalog. See [Model access](#model-access) for details.
 - `id`, `name`, and `owned_by` identify the model. Use `id` (or its `databricks-` prefixed form) in the `model` field of a request.
 - `canonical_slug`, `architecture`, and `top_provider` are OpenRouter-compatible descriptive fields.
 - `created` is always `0`, and `pricing`, `per_request_limits`, and `context_length` are currently always `null`. Use the [model catalog](/docs/ai-gateway/overview#available-models) for context windows and model details.
@@ -174,19 +175,22 @@ curl "$NEON_AI_GATEWAY_BASE_URL/v1/models" \
 
 ## Provider terms
 
-Models are hosted by Databricks and served through Neon AI Gateway. You are responsible for complying with each provider's applicable terms of use.
+Review a model's provider terms before you use it. You're responsible for complying with them, including any acceptable-use restrictions and license requirements.
 
-| Provider      | Terms                                                                                                                                                                               |
-| ------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| OpenAI        | [OpenAI Usage Policies](https://openai.com/policies/usage-policies)                                                                                                                 |
-| Google Gemini | [Google Cloud Acceptable Use Policy](https://cloud.google.com/terms/aup) · [Google Generative AI Prohibited Use Policy](https://policies.google.com/terms/generative-ai/use-policy) |
-| Google Gemma  | [Gemma Terms of Use](https://ai.google.dev/gemma/terms) · [Gemma Prohibited Use Policy](https://ai.google.dev/gemma/prohibited_use_policy)                                          |
-| Meta          | Terms differ by Llama version. See the Notes column in the [models catalog](/docs/ai-gateway/overview#available-models).                                                            |
+| Provider          | Terms                                                                                                                                                                                |
+| ----------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| OpenAI            | [OpenAI Usage Policies](https://openai.com/policies/usage-policies)                                                                                                                  |
+| Google Gemini     | [Google Cloud Acceptable Use Policy](https://cloud.google.com/terms/aup) · [Google Generative AI Prohibited Use Policy](https://policies.google.com/terms/generative-ai/use-policy)  |
+| Google Gemma      | [Gemma Terms of Use](https://ai.google.dev/gemma/terms) · [Gemma Prohibited Use Policy](https://ai.google.dev/gemma/prohibited_use_policy)                                           |
+| Meta              | Terms differ by Llama version. See the Notes column in the [models catalog](/docs/ai-gateway/overview#available-models).                                                             |
+| TypeSafe AI (Jev) | [Terms of use](https://typesafe.ai/legal/terms) · [Data processing addendum](https://typesafe.ai/legal/data-processing) · [Privacy policy](https://typesafe.ai/legal/privacy-policy) |
+
+Jev is hosted by TypeSafe AI, Inc. and served through Neon AI Gateway. Neon provides access, authentication, and routing, and TypeSafe AI operates the environment the model runs in. OpenJev, the open-weight decision model, is hosted by Databricks. See [Decisions](/docs/ai-gateway/decisions#models).
 
 <Admonition type="important">
 Use of AI Gateway is subject to our Terms of Service. Access is not available to users, organizations, or entities located in or operating from regions restricted by Anthropic's [Supported Regions Policy](https://www.anthropic.com/supported-countries). This restriction also applies to entities that are majority owned, directly or indirectly, by companies headquartered in unsupported regions.
 </Admonition>
 
-For what Databricks and partner model providers retain, see [Data retention](/docs/ai-gateway/data-retention).
+For what Databricks and model providers retain, see [Data retention](/docs/ai-gateway/data-retention).
 
 <NeedHelp/>

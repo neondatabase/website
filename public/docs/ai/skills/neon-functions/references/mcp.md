@@ -89,43 +89,51 @@ Key points:
 > [!WARNING]
 > A Neon Function has a **public HTTPS URL — anyone can reach it.** An unauthenticated MCP server hands every caller your tools (and the database behind them). Authenticate at the top of the handler before touching the transport, exactly as for [any client-facing function](../SKILL.md#functions-as-an-agent-backend-nextjs-and-similar-frameworks).
 
-[Better Auth](https://better-auth.com) covers both common MCP shapes when you need an OAuth authorization server or API keys. Managed Auth does not. Keep existing app login (Clerk, Managed Auth, or Better Auth) unless the user asked to migrate it. Confirm the **installed** Better Auth version before copying imports: the MCP plugin is moving out of `better-auth/plugins` into `@better-auth/mcp` (`withMcpAuth` → `requireMcpAuth`, `createMcpAuthClient` → `createMcpResourceClient`). Docs: https://better-auth.com/docs/plugins/mcp
+Use **Managed Better Auth (Neon Auth) as the OAuth server** and guard the Function with `@neon/oauth` (0.3.0 or later). MCP clients that support OAuth (Cursor, Claude, ChatGPT) discover the server, sign the user in on a login and consent page you host, and call `/mcp` with an access token. Keep the app's existing login; the OAuth server sits beside it. The full path (CLI setup, clients, pages, verification) is [neon-auth references/oauth-server.md](https://neon.com/docs/ai/skills/neon-auth/references/oauth-server.md).
 
-### Option 1 — OAuth via the Better Auth MCP plugin (best for third-party clients)
+### Option 1 — OAuth via Managed Better Auth (best for third-party clients)
 
-The [MCP plugin](https://better-auth.com/docs/plugins/mcp) makes your **Better Auth app the OAuth authorization server** for MCP, implementing the MCP authorization spec end to end: discovery (`/.well-known/oauth-authorization-server`, `/.well-known/oauth-protected-resource`), dynamic client registration, and the consent/token flow. MCP clients that support OAuth (Cursor, Claude, ChatGPT) then sign the user in and obtain a token with no API key to copy around.
+Configure the server once:
 
-Your Neon Function is the **resource server** — a separate service from the Better Auth app, so it doesn't share a process. Use Better Auth's **remote MCP client** to validate the incoming Bearer token against the auth server's published JWKS, and serve the protected-resource metadata so clients can discover where to authenticate:
+```bash
+neon neon-auth config oauth-server update --enabled \
+  --login-page https://app.example.com/auth/sign-in \
+  --consent-page https://app.example.com/auth/consent \
+  --mcp-resource https://<your-function-url>/mcp
+```
+
+Your Neon Function is the **resource server**. `honoMcp` verifies the token's signature, issuer, and audience, serves the protected-resource metadata, and answers unauthenticated requests with a `401` challenge. It sets `c.get("auth")`, whose `sub` is the user identity. Scope every tool to it:
 
 ```typescript
-// src/index.ts (sketch) — verify the bearer token against your remote Better Auth server.
-// Import path/name depend on your Better Auth version (createMcpAuthClient in better-auth/plugins/mcp/client,
-// or createMcpResourceClient in @better-auth/mcp/client) — check the docs.
-import { createMcpAuthClient } from "better-auth/plugins/mcp/client";
+import { createMcpAuth } from "@neon/oauth/mcp";
+import { honoMcp, type McpAuthVariables } from "@neon/oauth/mcp/hono";
 
-const mcpAuth = createMcpAuthClient({ authURL: process.env.AUTH_URL }); // your Better Auth base URL
+const mcpAuth = createMcpAuth({
+  baseUrl: process.env.NEON_AUTH_BASE_URL!, // the branch's Auth URL
+  resource: process.env.MCP_RESOURCE!, // exactly the --mcp-resource value
+});
+
+const app = new Hono<McpAuthVariables>();
+app.use(honoMcp(mcpAuth, { path: "/mcp" }));
 
 app.all("/mcp", async (c) => {
-  const session = await mcpAuth.verify?.(c.req.raw); // verifies the Bearer token via the remote JWKS
-  if (!session) {
-    // Tell the client where to authenticate (RFC 9728 / MCP spec).
-    return c.json({ error: "unauthorized" }, 401, {
-      "WWW-Authenticate": `Bearer resource_metadata="${process.env.AUTH_URL}/.well-known/oauth-protected-resource"`,
-    });
-  }
-  if (!mcpServer.isConnected()) await mcpServer.connect(transport);
-  return transport.handleRequest(c); // scope tools to session.userId
+  const userId = c.get("auth").sub;
+  // Build a McpServer whose tools close over userId; stateless transport per request.
+  const server = createServer(userId);
+  const transport = new StreamableHTTPTransport({ sessionIdGenerator: undefined });
+  await server.connect(transport);
+  return transport.handleRequest(c);
 });
 ```
 
-Pass `AUTH_URL` (and any signing/JWKS config) to the function via its `env` in `neon.ts` (see [Environment variables](../SKILL.md#environment-variables)). Because the function only verifies tokens against the remote server, the Better Auth instance can live anywhere — typically your Next.js / app host on Vercel.
+A per-request server and transport replace the module-scope server above because tools need the caller's `sub`; keep the `pg` pool at module scope. Pass `NEON_AUTH_BASE_URL` and `MCP_RESOURCE` via the function's `env` in `neon.ts` (see [Environment variables](../SKILL.md#environment-variables)). `/mcp` has no CORS or `OPTIONS` handling from `honoMcp`, so add it for browser-based clients.
 
-### Option 2 — API key or session JWT via self-hosted Better Auth (simplest)
+### Option 2 — API key or session JWT (simplest)
 
-When the callers are your own agents/services or a personal MCP server, you don't need the full OAuth dance. Run Better Auth self-hosted and either:
+When the callers are your own agents/services or a personal MCP server, you don't need the OAuth flow. Either:
 
-- **API keys** — enable Better Auth's [API Key plugin](https://better-auth.com/docs/plugins/api-key), issue a key, and have the function verify the `Authorization: Bearer <key>` (or an `x-api-key` header) on every request; or
-- **Session JWT** — mint a short-lived JWT with Better Auth's `jwt` plugin and verify it in the function against the app's JWKS, the same `jose` pattern used for the [agent backend](../SKILL.md#functions-as-an-agent-backend-nextjs-and-similar-frameworks).
+- **API keys** — issue and store your own keys, and have the function verify the `Authorization: Bearer <key>` (or an `x-api-key` header) on every request; or
+- **Session JWT** — verify a Managed Auth JWT (`NEON_AUTH_JWKS_URL`, issuer from `NEON_AUTH_BASE_URL`) with `jose`, the same pattern used for the [agent backend](../SKILL.md#functions-as-an-agent-backend-nextjs-and-similar-frameworks).
 
 Either way it's one check at the top of the `/mcp` route — reject anything that doesn't carry a valid key/token before connecting the transport:
 
@@ -138,6 +146,7 @@ app.all("/mcp", async (c) => {
   return transport.handleRequest(c);
 });
 ```
+
 
 This keeps the secret server-side, costs nothing to operate, and is trivial to rotate — a solid default until you need third-party clients to self-authorize, at which point reach for Option 1.
 

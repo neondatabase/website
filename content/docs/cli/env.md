@@ -9,6 +9,7 @@ summary: >-
   --branch to pull from a specific branch, and --service to pull only selected
   services.
 enableTableOfContents: true
+updatedOn: '2026-10-15T18:40:34.000Z'
 ---
 
 The `env` command manages a branch's Neon environment variables locally. [`neon link`](/docs/cli/link) and [`neon checkout`](/docs/cli/checkout) pull env variables automatically by default.

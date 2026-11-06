@@ -11,9 +11,14 @@ summary: >-
   GraphQL schema definition, JavaScript resolver files, DATABASE_URL
   environment variable configuration, and local testing with the Grafbase CLI.
 enableTableOfContents: true
+tag: deprecated
 isDraft: false
 updatedOn: '2026-10-09T10:14:56.146Z'
 ---
+
+<Admonition type="warning" title="Deprecated">
+Grafbase was acquired by The Guild in February 2026, and the Grafbase hosted platform has shut down. This guide is no longer maintained, and its steps may no longer work. For other ways to build APIs on Neon, see [Neon integration guides](/docs/guides/integrations).
+</Admonition>
 
 _This guide was contributed by Josep Vidal from Grafbase_
 

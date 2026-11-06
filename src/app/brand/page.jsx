@@ -4,6 +4,7 @@ import Logo from 'components/pages/brand/logo';
 import Logomark from 'components/pages/brand/logomark';
 import Spacing from 'components/pages/brand/spacing';
 import Layout from 'components/shared/layout';
+import LINKS from 'constants/links';
 import getMetadata from 'utils/get-metadata';
 
 const BrandPage = () => (
@@ -19,6 +20,7 @@ const BrandPage = () => (
 export const metadata = getMetadata({
   title: 'Neon Logo + Brand Guidelines',
   description: 'Download the official Neon Logo and Brand Assets.',
+  pathname: LINKS.brand,
 });
 
 export default BrandPage;

@@ -4,7 +4,7 @@ subtitle: Claude commands available when working on Neon docs
 summary: >-
   Claude slash commands in the Neon website repo automate common documentation
   tasks. Includes writing and rewriting pages, quality checks, MDX validation,
-  PR descriptions, changelog generation, and glossary audits. Use this reference
+  PR descriptions, and glossary audits. Use this reference
   to choose the right command for each task. Commands are stored in
   .claude/commands/ and their sub-agents in .claude/agents/.
 enableTableOfContents: true
@@ -41,13 +41,6 @@ Run `/list-doc-tools` in Claude to see the full list with descriptions, or brows
 | -------------------- | ---------------------------------------------------------------------------- |
 | `/update-pr`         | Draft or update a PR title and description from changed files and commits.   |
 | `/add-preview-links` | Add Vercel preview links to a PR description for every changed content file. |
-
-## Changelog and roadmap
-
-| Command             | Description                                                                                                        |
-| ------------------- | ------------------------------------------------------------------------------------------------------------------ |
-| `/create-changelog` | Generate next Friday's changelog draft (or a specific date) with placeholder content and titled dropdown sections. |
-| `/update-roadmap`   | Sync the introduction roadmap with recent changelog entries.                                                       |
 
 ## Reference and navigation
 

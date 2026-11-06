@@ -13,7 +13,7 @@ redirectFrom:
   - /docs/guides/partner-intro
   - /docs/guides/platform-integration-intro
   - /docs/guides/platform-integration-get-started
-updatedOn: '2026-08-25T17:49:33.991Z'
+updatedOn: '2026-10-26T16:14:23.541Z'
 ---
 
 Neon provides multiple options for integrating Postgres into your platform, application, or service. Choose the integration approach that best matches your use case.
@@ -153,6 +153,19 @@ Use OAuth when you're building a tool or service that connects to existing Neon 
 <a href="https://github.com/neondatabase/neon-branches-visualizer" description="See a working OAuth integration example" icon="github">Example OAuth app</a>
 
 </DetailIconCards>
+
+## Built On Databricks partner program
+
+Built-On Neon is part of the [Built On Databricks](https://databrickslabs.github.io/partner-architecture/built-on) partner program. Platforms that use Neon can be validated as Databricks Built-On partners once they meet all program requirements. Validation is nomination-only and is aimed at a small number of large platforms. It's a fit if your platform:
+
+- Uses Neon as the operational database layer of a commercial product, with a dedicated Neon project for each customer, app, or agent
+- Runs a large fleet of tenant databases in production
+- Generates significant revenue on Neon
+- Has, or wants, a joint go-to-market motion with Databricks
+
+If you're interested, first [register as a Databricks partner](https://www.databricks.com/partners/partner-program), then email [partners@databricks.com](mailto:partners@databricks.com) with any questions. If you're still building your integration or running at a smaller scale, start with the integration paths above instead.
+
+Even if you're not pursuing the program, the [Built-On Neon reference architecture](https://databrickslabs.github.io/partner-architecture/built-on/neon) is a useful guide for designing database-per-tenant provisioning, scaling, connectivity, and metering. For requirements and the nomination process, see [Built-On Neon validation](https://databrickslabs.github.io/partner-architecture/built-on/neon/validation).
 
 ## Still not sure?
 

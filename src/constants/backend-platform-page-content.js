@@ -10,6 +10,8 @@ const lakebaseFromFirstLineTitleLines = [
 ];
 
 const functionsPageContent = {
+  // Bump when this page's copy changes; shown on the page and in its Markdown version.
+  updatedOn: '2026-10-13',
   backendServices: {
     title: 'Your functions branch with everything else.',
   },
@@ -153,6 +155,8 @@ const functionsPageContent = {
 };
 
 const aiGatewayPageContent = {
+  // Bump when this page's copy changes; shown on the page and in its Markdown version.
+  updatedOn: '2026-10-14',
   slug: 'ai-gateway',
   pageLabel: 'AI Gateway',
   hero: {
@@ -306,6 +310,8 @@ const aiGatewayPageContent = {
 };
 
 const lakebasePageContent = {
+  // Bump when this page's copy changes; shown on the page and in its Markdown version.
+  updatedOn: '2026-09-16',
   slug: 'lakebase',
   pageLabel: 'Lakebase Postgres',
   hero: {
