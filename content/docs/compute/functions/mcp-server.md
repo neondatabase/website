@@ -52,7 +52,7 @@ The `@neon/auth` client (0.8.0 or later) passes the signed OAuth query for you. 
 
 ## The example
 
-The example is a to-do list with `list_todos`, `add_todo`, and `complete_todo`.
+This guide builds a to-do list with `list_todos`, `add_todo`, and `complete_todo`.
 
 With the optional [MCP Apps section](#render-todos-in-chat-with-mcp-apps-optional), ChatGPT shows the list as a widget in the conversation:
 
@@ -66,9 +66,9 @@ For this guide, you need:
 - The [Neon CLI](/docs/cli/install), signed in with `neon login`.
 - A Next.js 16 or later app, or another framework whose pages meet the [page requirements](#what-your-sign-in-and-consent-pages-must-do). In Next.js 16, route protection lives in `proxy.ts`.
 
-## Enable Managed Better Auth and wire Next.js
+## Set up the project
 
-In your Next.js app's directory, link it to your project and check out a development branch, not production:
+In your app's directory, link it to your project and check out a development branch, not production:
 
 ```bash
 neon link
@@ -87,16 +87,221 @@ export default defineConfig({
 });
 ```
 
-Install the packages, apply `neon.ts`, check that Managed Better Auth is on, and generate a cookie secret:
+Install the config package, apply `neon.ts`, and check that Managed Better Auth is on:
 
 ```bash
-npm install @neon/config @neon/auth@latest
+npm install @neon/config
 neon deploy
 neon neon-auth status
+```
+
+## Create the table
+
+Managed Better Auth stores users in the `neon_auth` schema, so keep app tables like `todos` in `public`. Run this SQL in the [SQL Editor](/docs/get-started/query-with-neon-sql-editor) or with `psql`:
+
+```sql
+CREATE TABLE IF NOT EXISTS todos (
+  id serial PRIMARY KEY,
+  user_id text NOT NULL,
+  text text NOT NULL,
+  done boolean NOT NULL DEFAULT false
+);
+
+CREATE INDEX IF NOT EXISTS todos_user_id_idx ON todos (user_id);
+```
+
+`user_id` stores the access-token `sub`. Use `text` because the ID is a string.
+
+## Write the MCP server
+
+Install the function's dependencies:
+
+```bash
+npm install @neon/oauth @neon/functions @modelcontextprotocol/sdk hono pg zod
+npm install -D @types/pg
+```
+
+The server uses [`@neon/oauth`](https://github.com/neondatabase/neon-pkgs/tree/main/packages/oauth) 0.3.0 or later (beta) to verify tokens, and the web-standard MCP transport needs `@modelcontextprotocol/sdk` 1.25.0 or later.
+
+Each tool filters by the token's `sub`. Build a new `McpServer` per request so the tools close over it, and keep the `pg` pool at module scope. Never take the user ID from tool input.
+
+```typescript filename="functions/todos/index.ts" collapse={14-20,56-71}
+import { Hono } from "hono";
+import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
+import { WebStandardStreamableHTTPServerTransport } from "@modelcontextprotocol/sdk/server/webStandardStreamableHttp.js";
+import { createMcpAuth } from "@neon/oauth/mcp";
+import { honoMcp, type McpAuthVariables } from "@neon/oauth/mcp/hono";
+import { attachDatabasePool } from "@neon/functions";
+import { Pool } from "pg";
+import { z } from "zod";
+
+type Todo = { id: number; text: string; done: boolean };
+
+// Neon injects sslmode=require. Rewrite it to verify-full so node-postgres
+// keeps its current behavior without warnings.
+function databaseUrl() {
+  const url = new URL(process.env.DATABASE_URL!);
+  if (url.searchParams.get("sslmode") === "require") {
+    url.searchParams.set("sslmode", "verify-full");
+  }
+  return url.toString();
+}
+
+const pool = new Pool({ connectionString: databaseUrl(), max: 5 });
+attachDatabasePool(pool);
+
+const mcpAuth = createMcpAuth({
+  baseUrl: process.env.NEON_AUTH_BASE_URL!,
+  resource: process.env.MCP_RESOURCE!,
+});
+
+const asText = (payload: unknown) => ({
+  content: [{ type: "text" as const, text: JSON.stringify(payload) }],
+});
+
+function createServer(userId: string) {
+  const server = new McpServer({ name: "todos", version: "1.0.0" });
+
+  server.registerTool(
+    "list_todos",
+    {
+      title: "List todos",
+      description: "List the signed-in user's todos.",
+      inputSchema: {},
+      // ChatGPT treats tools without readOnlyHint as writes and may block them
+      // until the user allows write tools.
+      annotations: { readOnlyHint: true },
+    },
+    async () => {
+      const { rows } = await pool.query<Todo>(
+        "SELECT id, text, done FROM todos WHERE user_id = $1 ORDER BY id",
+        [userId],
+      );
+      return asText(rows);
+    },
+  );
+
+  server.registerTool(
+    "add_todo",
+    {
+      title: "Add todo",
+      description: "Add a todo for the signed-in user.",
+      inputSchema: { text: z.string().min(1) },
+      annotations: { readOnlyHint: false },
+    },
+    async ({ text }) => {
+      const { rows } = await pool.query<Todo>(
+        "INSERT INTO todos (user_id, text) VALUES ($1, $2) RETURNING id, text, done",
+        [userId, text],
+      );
+      return asText(rows[0]);
+    },
+  );
+
+  server.registerTool(
+    "complete_todo",
+    {
+      title: "Complete todo",
+      description: "Mark one of the signed-in user's todos as done.",
+      inputSchema: { id: z.number().int().positive() },
+      annotations: { readOnlyHint: false },
+    },
+    async ({ id }) => {
+      const { rows } = await pool.query<Todo>(
+        "UPDATE todos SET done = true WHERE id = $1 AND user_id = $2 RETURNING id, text, done",
+        [id, userId],
+      );
+      return asText(rows[0] ?? { error: "not found" });
+    },
+  );
+
+  return server;
+}
+
+const app = new Hono<McpAuthVariables>();
+
+app.use(honoMcp(mcpAuth, { path: "/mcp" }));
+
+app.all("/mcp", async (c) => {
+  const server = createServer(c.get("auth").sub);
+  const transport = new WebStandardStreamableHTTPServerTransport({
+    sessionIdGenerator: undefined,
+  });
+  await server.connect(transport);
+  return transport.handleRequest(c.req.raw);
+});
+
+export default app;
+```
+
+## Deploy the function
+
+Neon injects `DATABASE_URL`, and `NEON_AUTH_BASE_URL` once Managed Better Auth is on for the branch. The function also needs `MCP_RESOURCE`, its own `/mcp` URL. You only get that URL after the first deploy, so you deploy twice. Until the second deploy, every request returns `502` with `function_load_failed`, because `createMcpAuth` requires an absolute `resource` URL.
+
+The slug (`todos`) can be up to 20 lowercase letters or digits and can't change after the first deploy. If the branch inherited a `todos` function from its parent, the first deploy updates it, and it serves the parent's `MCP_RESOURCE` until the second deploy.
+
+Deploy once with [`neon functions deploy`](/docs/cli/functions#deploy) and read the function URL:
+
+```bash
+neon functions deploy todos --src functions/todos
+neon functions get todos
+```
+
+Append `/mcp` to the function URL from the output and deploy again:
+
+```bash shouldWrap
+neon functions deploy todos \
+  --src functions/todos \
+  --env "MCP_RESOURCE=https://<branch_id>-todos.compute.<cell>.aws.neon.tech/mcp"
+```
+
+A new deployment can take a few minutes to serve traffic. To confirm the running value, check that `resource` in the [protected resource metadata](/docs/auth/guides/plugins/oauth-provider#protect-an-mcp-server) matches `MCP_RESOURCE`:
+
+```bash shouldWrap
+curl https://<branch_id>-todos.compute.<cell>.aws.neon.tech/.well-known/oauth-protected-resource/mcp
+```
+
+To serve the function from your own domain instead, see [Use a custom domain](#use-a-custom-domain-optional).
+
+### Manage the function from neon.ts (optional)
+
+The function isn't declared in `neon.ts`, so `neon deploy` doesn't redeploy it. To manage it from `neon.ts` instead, declare it once you know the URL:
+
+```typescript filename="neon.ts"
+import { defineConfig } from "@neon/config/v1";
+
+export default defineConfig({
+  auth: true,
+  functions: {
+    todos: {
+      name: "todos",
+      source: "functions/todos/index.ts",
+      env: { MCP_RESOURCE: process.env.MCP_RESOURCE! },
+    },
+  },
+});
+```
+
+Add `MCP_RESOURCE` to `.env.local`, then deploy with the file:
+
+```bash
+neon deploy --env .env.local
+```
+
+`neon deploy` and `neon checkout --create` then refuse to run until `MCP_RESOURCE` is set.
+
+## Build the sign-in and consent pages (Next.js example)
+
+This section builds the pages in Next.js. On another framework, build pages that meet the [page requirements](#what-your-sign-in-and-consent-pages-must-do) and skip to the next section.
+
+Install the Managed Better Auth SDK and generate a cookie secret:
+
+```bash
+npm install @neon/auth@latest
 openssl rand -base64 32
 ```
 
-`neon deploy` writes `NEON_AUTH_BASE_URL` to `.env.local`. If it's missing, run `neon env pull`. Add the cookie secret next to it:
+The `neon deploy` you ran during setup wrote `NEON_AUTH_BASE_URL` to `.env.local`. If it's missing, run `neon env pull`. Add the cookie secret next to it:
 
 ```env filename=".env.local"
 NEON_AUTH_BASE_URL=https://ep-xxx.neonauth.us-east-2.aws.neon.tech/neondb/auth
@@ -143,25 +348,6 @@ const nextConfig: NextConfig = {
 
 export default nextConfig;
 ```
-
-## Create the table
-
-Managed Better Auth stores users in the `neon_auth` schema, so keep app tables like `todos` in `public`. Run this SQL in the [SQL Editor](/docs/get-started/query-with-neon-sql-editor) or with `psql`:
-
-```sql
-CREATE TABLE IF NOT EXISTS todos (
-  id serial PRIMARY KEY,
-  user_id text NOT NULL,
-  text text NOT NULL,
-  done boolean NOT NULL DEFAULT false
-);
-
-CREATE INDEX IF NOT EXISTS todos_user_id_idx ON todos (user_id);
-```
-
-`user_id` stores the access-token `sub`. Use `text` because the ID is a string.
-
-## Build the sign-in and consent pages (Next.js example)
 
 Add a sign-up page at `/auth/sign-up` so test users can create accounts, like the one in [Use Managed Better Auth with Next.js](/docs/auth/quick-start/nextjs-api-only).
 
@@ -414,185 +600,9 @@ export default function ConsentPage() {
 
 The page reads `window.location.search` inside an effect, not during render. Next.js prerenders client components, and `window` doesn't exist there, so reading it during render fails `next build`.
 
-## Write the MCP server
+## Deploy the app and turn on the OAuth server
 
-Install the function's dependencies:
-
-```bash
-npm install @neon/oauth @neon/functions @modelcontextprotocol/sdk hono pg zod
-npm install -D @types/pg
-```
-
-The server uses [`@neon/oauth`](https://github.com/neondatabase/neon-pkgs/tree/main/packages/oauth) 0.3.0 or later (beta) to verify tokens, and the web-standard MCP transport needs `@modelcontextprotocol/sdk` 1.25.0 or later.
-
-Each tool filters by the token's `sub`. Build a new `McpServer` per request so the tools close over it, and keep the `pg` pool at module scope. Never take the user ID from tool input.
-
-```typescript filename="functions/todos/index.ts" collapse={14-20,56-71}
-import { Hono } from "hono";
-import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
-import { WebStandardStreamableHTTPServerTransport } from "@modelcontextprotocol/sdk/server/webStandardStreamableHttp.js";
-import { createMcpAuth } from "@neon/oauth/mcp";
-import { honoMcp, type McpAuthVariables } from "@neon/oauth/mcp/hono";
-import { attachDatabasePool } from "@neon/functions";
-import { Pool } from "pg";
-import { z } from "zod";
-
-type Todo = { id: number; text: string; done: boolean };
-
-// Neon injects sslmode=require. Rewrite it to verify-full so node-postgres
-// keeps its current behavior without warnings.
-function databaseUrl() {
-  const url = new URL(process.env.DATABASE_URL!);
-  if (url.searchParams.get("sslmode") === "require") {
-    url.searchParams.set("sslmode", "verify-full");
-  }
-  return url.toString();
-}
-
-const pool = new Pool({ connectionString: databaseUrl(), max: 5 });
-attachDatabasePool(pool);
-
-const mcpAuth = createMcpAuth({
-  baseUrl: process.env.NEON_AUTH_BASE_URL!,
-  resource: process.env.MCP_RESOURCE!,
-});
-
-const asText = (payload: unknown) => ({
-  content: [{ type: "text" as const, text: JSON.stringify(payload) }],
-});
-
-function createServer(userId: string) {
-  const server = new McpServer({ name: "todos", version: "1.0.0" });
-
-  server.registerTool(
-    "list_todos",
-    {
-      title: "List todos",
-      description: "List the signed-in user's todos.",
-      inputSchema: {},
-      // ChatGPT treats tools without readOnlyHint as writes and may block them
-      // until the user allows write tools.
-      annotations: { readOnlyHint: true },
-    },
-    async () => {
-      const { rows } = await pool.query<Todo>(
-        "SELECT id, text, done FROM todos WHERE user_id = $1 ORDER BY id",
-        [userId],
-      );
-      return asText(rows);
-    },
-  );
-
-  server.registerTool(
-    "add_todo",
-    {
-      title: "Add todo",
-      description: "Add a todo for the signed-in user.",
-      inputSchema: { text: z.string().min(1) },
-      annotations: { readOnlyHint: false },
-    },
-    async ({ text }) => {
-      const { rows } = await pool.query<Todo>(
-        "INSERT INTO todos (user_id, text) VALUES ($1, $2) RETURNING id, text, done",
-        [userId, text],
-      );
-      return asText(rows[0]);
-    },
-  );
-
-  server.registerTool(
-    "complete_todo",
-    {
-      title: "Complete todo",
-      description: "Mark one of the signed-in user's todos as done.",
-      inputSchema: { id: z.number().int().positive() },
-      annotations: { readOnlyHint: false },
-    },
-    async ({ id }) => {
-      const { rows } = await pool.query<Todo>(
-        "UPDATE todos SET done = true WHERE id = $1 AND user_id = $2 RETURNING id, text, done",
-        [id, userId],
-      );
-      return asText(rows[0] ?? { error: "not found" });
-    },
-  );
-
-  return server;
-}
-
-const app = new Hono<McpAuthVariables>();
-
-app.use(honoMcp(mcpAuth, { path: "/mcp" }));
-
-app.all("/mcp", async (c) => {
-  const server = createServer(c.get("auth").sub);
-  const transport = new WebStandardStreamableHTTPServerTransport({
-    sessionIdGenerator: undefined,
-  });
-  await server.connect(transport);
-  return transport.handleRequest(c.req.raw);
-});
-
-export default app;
-```
-
-## Deploy the function
-
-Neon injects `DATABASE_URL`, and `NEON_AUTH_BASE_URL` once Managed Better Auth is on for the branch. The function also needs `MCP_RESOURCE`, its own `/mcp` URL. You only get that URL after the first deploy, so you deploy twice. Until the second deploy, every request returns `502` with `function_load_failed`, because `createMcpAuth` requires an absolute `resource` URL.
-
-The slug (`todos`) can be up to 20 lowercase letters or digits and can't change after the first deploy. If the branch inherited a `todos` function from its parent, the first deploy updates it, and it serves the parent's `MCP_RESOURCE` until the second deploy.
-
-Deploy once with [`neon functions deploy`](/docs/cli/functions#deploy) and read the function URL:
-
-```bash
-neon functions deploy todos --src functions/todos
-neon functions get todos
-```
-
-Append `/mcp` to the function URL from the output and deploy again:
-
-```bash shouldWrap
-neon functions deploy todos \
-  --src functions/todos \
-  --env "MCP_RESOURCE=https://<branch_id>-todos.compute.<cell>.aws.neon.tech/mcp"
-```
-
-A new deployment can take a few minutes to serve traffic. To confirm the running value, check that `resource` in the [protected resource metadata](/docs/auth/guides/plugins/oauth-provider#protect-an-mcp-server) matches `MCP_RESOURCE`:
-
-```bash shouldWrap
-curl https://<branch_id>-todos.compute.<cell>.aws.neon.tech/.well-known/oauth-protected-resource/mcp
-```
-
-### Manage the function from neon.ts (optional)
-
-The function isn't declared in `neon.ts`, so `neon deploy` doesn't redeploy it. To manage it from `neon.ts` instead, declare it once you know the URL:
-
-```typescript filename="neon.ts"
-import { defineConfig } from "@neon/config/v1";
-
-export default defineConfig({
-  auth: true,
-  functions: {
-    todos: {
-      name: "todos",
-      source: "functions/todos/index.ts",
-      env: { MCP_RESOURCE: process.env.MCP_RESOURCE! },
-    },
-  },
-});
-```
-
-Add `MCP_RESOURCE` to `.env.local`, then deploy with the file:
-
-```bash
-neon deploy --env .env.local
-```
-
-`neon deploy` and `neon checkout --create` then refuse to run until `MCP_RESOURCE` is set.
-
-## Deploy the Next.js app and turn on the OAuth server
-
-Deploy the Next.js app to a public HTTPS origin (this guide uses Vercel), then point Managed Better Auth at it.
+Deploy your app to a public HTTPS origin (this guide uses Vercel), then point Managed Better Auth at it.
 
 ```bash
 vercel link --yes --project app-mcp-tutorial
@@ -627,32 +637,7 @@ neon neon-auth config oauth-server get
 
 With [Client ID Metadata Documents](/docs/auth/guides/plugins/oauth-provider#client-id-metadata-documents) (CIMD), clients identify themselves, so you don't create a client for each one. CIMD is on by default once you set an MCP resource. If it was turned off earlier, setting `--mcp-resource` doesn't turn it back on, so pass `--mcp-client-id-metadata-documents`. Leave [dynamic client registration](/docs/auth/guides/plugins/oauth-provider#dynamic-client-registration-legacy) off unless a client can't use CIMD.
 
-Each branch has its own OAuth settings, OAuth clients, trusted domains, and MCP resource URL. A new child branch copies them from its parent, including each client's ID and secret, and its function keeps the parent's `MCP_RESOURCE`, so both point at the parent's function URL. On a child branch, redeploy the function with that branch's URL in `MCP_RESOURCE` and run `neon neon-auth config oauth-server update --mcp-resource` with the same URL. Custom domains aren't inherited, so on a child branch use that branch's own function URL or a separate hostname. Tokens from one branch don't work on another branch's server, because each branch has its own issuer. See [Branching authentication](/docs/auth/branching-authentication).
-
-<details>
-<summary>Optional: test locally over HTTPS</summary>
-
-Use this to test the pages with a local or scripted MCP client. Managed Better Auth sets `__Secure-` session cookies, which scripted clients often omit on plain `http://localhost`. Plain `http://localhost` is a trusted domain by default, while [localhost access](/docs/auth/guides/configure-domains#localhost-is-pre-configured) is on, but `https://localhost` isn't, so add it:
-
-```bash shouldWrap
-npm run dev -- --port 3010 --experimental-https
-
-neon neon-auth domain add https://localhost:3010
-
-neon neon-auth config oauth-server update --enabled \
-  --login-page https://localhost:3010/auth/sign-in \
-  --consent-page https://localhost:3010/auth/consent \
-  --mcp-resource https://<branch_id>-todos.compute.<cell>.aws.neon.tech/mcp \
-  --mcp-client-id-metadata-documents
-```
-
-Point the OAuth pages back at your Vercel origin before you connect a remote client again.
-
-</details>
-
-### Use a custom domain (optional)
-
-To give customers a URL on your own domain, such as `https://mcp.example.com/mcp`, [register a custom domain](/docs/compute/functions/custom-domains) for the function. Then use the custom URL wherever this guide uses the function URL: `MCP_RESOURCE`, `--mcp-resource`, and the URL customers add to their MCP client. Your code doesn't change. `@neon/oauth` builds the `resource_metadata` URL and the token audience from `MCP_RESOURCE`, not from the request's host.
+Each branch has its own OAuth settings, OAuth clients, trusted domains, and MCP resource URL. A new child branch copies them from its parent, including each client's ID and secret, and its function keeps the parent's `MCP_RESOURCE`, so both point at the parent's function URL. On a child branch, redeploy the function with that branch's URL in `MCP_RESOURCE` and run `neon neon-auth config oauth-server update --mcp-resource` with the same URL. Tokens from one branch don't work on another branch's server, because each branch has its own issuer. See [Branching authentication](/docs/auth/branching-authentication).
 
 ## Verify the server
 
@@ -682,6 +667,30 @@ When you add the server to ChatGPT:
 1. Use the function URL ending in `/mcp`, not the Vercel app URL.
 2. After OAuth, open the connector details and allow write tools, or choose Allow all tools. Without that, reads can work while writes fail with an opaque error such as "Unknown tool."
 3. Refresh the connector or start a new chat after you change tools. ChatGPT caches the tool snapshot.
+
+## Use a custom domain (optional)
+
+To give customers a URL on your own domain, such as `https://mcp.example.com/mcp`, [register a custom domain](/docs/compute/functions/custom-domains) for the function. Then use the custom URL wherever this guide uses the function URL: `MCP_RESOURCE`, `--mcp-resource`, and the URL customers add to their MCP client. Your code doesn't change. `@neon/oauth` builds the `resource_metadata` URL and the token audience from `MCP_RESOURCE`, not from the request's host.
+
+Custom domains aren't inherited, so on a child branch use that branch's own function URL or a separate hostname.
+
+## Test locally over HTTPS (optional)
+
+Use this to test the pages with a local or scripted MCP client. Managed Better Auth sets `__Secure-` session cookies, which scripted clients often omit on plain `http://localhost`. Plain `http://localhost` is a trusted domain by default, while [localhost access](/docs/auth/guides/configure-domains#localhost-is-pre-configured) is on, but `https://localhost` isn't, so add it:
+
+```bash shouldWrap
+npm run dev -- --port 3010 --experimental-https
+
+neon neon-auth domain add https://localhost:3010
+
+neon neon-auth config oauth-server update --enabled \
+  --login-page https://localhost:3010/auth/sign-in \
+  --consent-page https://localhost:3010/auth/consent \
+  --mcp-resource https://<branch_id>-todos.compute.<cell>.aws.neon.tech/mcp \
+  --mcp-client-id-metadata-documents
+```
+
+Point the OAuth pages back at your Vercel origin before you connect a remote client again.
 
 ## Render todos in chat with MCP Apps (optional)
 
