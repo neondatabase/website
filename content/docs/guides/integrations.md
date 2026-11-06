@@ -12,6 +12,9 @@ redirectFrom:
   - /docs/integrations/integrations-list
   - /docs/guides/stepzen
   - /docs/guides/outerbase
+  - /docs/guides/deno
+  - /docs/guides/grafbase
+  - /docs/guides/wundergraph
 updatedOn: '2026-10-21T11:04:20.383Z'
 ---
 
@@ -36,8 +39,6 @@ updatedOn: '2026-10-21T11:04:20.383Z'
 <a href="/docs/guides/cloudflare-pages" title="Cloudflare Pages" description="Use Neon with Cloudflare Pages" icon="cloudflare"></a>
 
 <a href="/docs/guides/cloudflare-workers" title="Cloudflare Workers" description="Use Neon with Cloudflare Workers" icon="cloudflare"></a>
-
-<a href="/docs/guides/deno" title="Deno Deploy" description="Use Neon with Deno Deploy" icon="deno"></a>
 
 <a href="/docs/guides/heroku" title="Heroku" description="Deploy Your App with Neon on Heroku" icon="heroku"></a>
 
@@ -115,13 +116,9 @@ updatedOn: '2026-10-21T11:04:20.383Z'
 
 <a href="/docs/guides/exograph" title="Exograph" description="Use Exograph with Neon" icon="exograph"></a>
 
-<a href="/docs/guides/grafbase" title="Grafbase" description="Use Grafbase Edge Resolvers with Neon" icon="grafbase"></a>
-
 <a href="/docs/guides/hasura" title="Hasura" description="Connect from Hasura Cloud to Neon" icon="hasura"></a>
 
 <a href="/docs/guides/postgrest" title="PostgREST" description="Create a REST API from your Neon database" icon="postgresql"></a>
-
-<a href="/docs/guides/wundergraph" title="Wundergraph" description="Use Wundergraph with Neon" icon="wundergraph"></a>
 
 </TechCards>
 
