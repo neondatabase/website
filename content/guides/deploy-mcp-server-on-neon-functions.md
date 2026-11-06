@@ -20,6 +20,8 @@ Here's what you'll build:
 - A **stable URL on your own domain** with [custom domains for Neon Functions](/docs/compute/functions/custom-domains)
 - **Authentication**, either a shared API key or OAuth 2.1 through the [Managed Better Auth OAuth provider](/docs/auth/guides/plugins/oauth-provider) (beta), so a client can sign the user in through the browser
 
+The contacts table is shared: every caller sees and edits the same contacts, even with OAuth. To give each user their own data, see [Extending this workflow](#extending-this-workflow).
+
 <CopyPrompt
   src="/prompts/deploy-mcp-server-on-neon-functions-prompt.md"
   description="Use this prompt to customize the guide and build it with your AI agent."
@@ -608,7 +610,7 @@ import { config } from './neon'; // [!code ++]
 const env = parseEnv(config, 'mcp'); // [!code ++]
 
 // ...existing code...
-app.all('/mcp', (c) => {
+app.all('/mcp', async (c) => { // [!code ++]
   if (c.req.header('authorization') !== `Bearer ${env.function.MCP_API_KEY}`) { // [!code ++]
     return c.json({ error: 'Unauthorized' }, 401); // [!code ++]
   } // [!code ++]
@@ -623,6 +625,8 @@ Redeploy the function to apply the changes. Run the following command with the `
 ```bash
 neon deploy --env .env.local
 ```
+
+A new deployment can take up to a minute to start serving requests. If the server still accepts requests without the key, wait a moment and try again.
 
 After the deploy, test the server with `mcporter list` using the API key:
 
@@ -955,7 +959,7 @@ curl -s -i https://mcp.example.com/mcp \
 You should see a `WWW-Authenticate` header pointing at the protected resource metadata:
 
 ```text
-www-authenticate: Bearer resource_metadata="https://mcp.example.com/.well-known/oauth-protected-resource/mcp"
+www-authenticate: Bearer error="invalid_token", error_description="Missing Authorization header", resource_metadata="https://mcp.example.com/.well-known/oauth-protected-resource/mcp"
 ```
 
 You can see the metadata yourself:
