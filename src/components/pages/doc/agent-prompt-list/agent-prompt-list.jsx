@@ -102,27 +102,28 @@ IconCopyButton.propTypes = {
   ready: PropTypes.bool,
 };
 
-// A single command or prompt box: visible text on the left, icon-only copy on
-// the right. `src` copies the full prompt file; otherwise the visible text is
-// copied verbatim (used for the one-line setup command).
-const CopyLine = ({ text, src = null, multiline = false }) => {
+// A copyable prompt box: an optional one-line header (owner / skill / scope),
+// the prompt text, and an icon-only copy button. `src` copies the full prompt
+// file; otherwise the visible text is copied verbatim.
+const CopyLine = ({ text, src = null, header = null }) => {
   const { copyText, ready } = usePromptText(src, text);
   return (
     <div
       className={cn(
-        'not-prose my-3 flex gap-3 rounded-md border px-3 py-2.5',
-        'border-gray-new-85 bg-white dark:border-gray-new-20 dark:bg-gray-new-8',
-        multiline ? 'items-start' : 'items-center'
+        'not-prose my-3 flex items-start gap-3 rounded-md border px-3 py-2.5',
+        'border-gray-new-85 bg-white dark:border-gray-new-20 dark:bg-gray-new-8'
       )}
     >
-      <span
-        className={cn(
-          'min-w-0 flex-1 font-mono text-[13px] text-black-pure dark:text-gray-new-94',
-          multiline ? 'leading-[1.55] whitespace-pre-wrap' : 'truncate'
+      <div className="min-w-0 flex-1">
+        {header && (
+          <div className="mb-1.5 text-[12px] leading-snug text-gray-new-50 dark:text-gray-new-60">
+            {header}
+          </div>
         )}
-      >
-        {text}
-      </span>
+        <span className="block font-mono text-[13px] leading-[1.55] break-words whitespace-pre-wrap text-black-pure dark:text-gray-new-94">
+          {text}
+        </span>
+      </div>
       <IconCopyButton getText={() => copyText} ready={ready} label="Copy" />
     </div>
   );
@@ -131,7 +132,7 @@ const CopyLine = ({ text, src = null, multiline = false }) => {
 CopyLine.propTypes = {
   text: PropTypes.string.isRequired,
   src: PropTypes.string,
-  multiline: PropTypes.bool,
+  header: PropTypes.node,
 };
 
 const PromptRow = ({ title, text, src = null }) => {

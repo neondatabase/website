@@ -63,7 +63,6 @@ export const STATIC_MD_PATHS = [
   '/prompts/dotnet-ef-prompt.md',
   '/prompts/dotnet-prompt.md',
   '/prompts/drizzle-branch-per-pr.md',
-  '/prompts/drizzle-discovery.md',
   '/prompts/drizzle-migration.md',
   '/prompts/drizzle-pooled-direct.md',
   '/prompts/drizzle-prompt.md',
