@@ -43,11 +43,9 @@ The agents that support plugins are `claude-code`, `claude-desktop`, `codex`, `c
 
 Agents that share a target collapse into one: Claude Desktop and Claude Code both write to `claude-code`, and VS Code and the GitHub Copilot CLI both write to `github-copilot`.
 
-### Directory vs user-level
+### Install location
 
-By default `plugins` installs into the current project, so the setup travels with the repository. Pass `--global` to install user-level instead, which applies across your projects.
-
-Some agents only support user-level plugins. In a project install, `github-copilot-cli`, `grok-build`, `kimi-code`, and `vscode` need `--global`; without it, the command tells you to pass it.
+`plugins` installs the plugin user-level, so it applies to every project. There's no project-level install. The `--global` flag from earlier versions is still accepted and does the same thing as the default, so existing scripts keep working (Neon CLI 8.23.2 and later).
 
 ## Examples
 
@@ -65,10 +63,10 @@ neon plugins --agent claude-code -y
 
 ```text filename="Output"
 Plugins
-Scope    Plugin         Agent        Status
-project  neon-postgres  claude-code  installed
+Scope  Plugin         Agent        Status
+user   neon-postgres  claude-code  installed
 
-Installed the Neon plugin (project).
+Installed the Neon plugin (user).
 ```
 
 Install into several agents at once:
@@ -83,8 +81,3 @@ Install non-interactively into every detected agent:
 neon plugins -y
 ```
 
-Install user-level so the plugin applies across your projects, including agents that only support user-level plugins:
-
-```bash
-neon plugins --global
-```

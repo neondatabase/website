@@ -38,7 +38,7 @@ Every engineer works on their own branch with a copy of production data, created
 - **Launch plan**: $0.106/CU-hour and $0.35/GB-month, autoscaling to 16 CU, 7-day restore window, spending notifications, no monthly minimum.
 - **Scale plan**: $0.222/CU-hour with SOC 2, HIPAA, IP Allow, Private Networking, and an uptime SLA for the enterprise deals that come later ([plans](/docs/introduction/plans)).
 
-A 0.25 CU compute active 300 hours a month on Launch is 75 CU-hours × $0.106 = $7.95, plus storage. Functions and Object Storage add usage-based charges on paid plans at the rates in the plan table; AI Gateway draws down prepaid credits at provider list prices. Those three are available in AWS US East (Ohio), US East (N. Virginia), Europe (Frankfurt), and Asia Pacific (Singapore), with support expanding toward [all regions](/docs/introduction/regions).
+A 0.25 CU compute active 300 hours a month on Launch is 75 CU-hours × $0.106 = $7.95, plus storage. Functions and Object Storage add usage-based charges on paid plans at the rates in the plan table; AI Gateway is available on every plan and draws down prepaid credits at provider list prices. Those three are available in AWS US East (Ohio), US East (N. Virginia), Europe (Frankfurt), and Asia Pacific (Singapore), with support expanding toward [all regions](/docs/introduction/regions).
 
 <Admonition type="tip" title="Startup credits">
 Early-stage companies can apply to the [Neon Startup Program](/startups) for Neon and Databricks credits. The amount depends on your stage and funding.

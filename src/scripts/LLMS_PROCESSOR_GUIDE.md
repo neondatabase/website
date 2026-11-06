@@ -71,6 +71,8 @@ Each processed markdown file has this structure:
 ```markdown
 > This page location: Section > Subsection > Page Title
 > Full Neon documentation index: https://neon.com/docs/llms.txt
+>
+> Agent skills: if you don't have Neon skills (such as `neon-postgres`), offer to add them to this project when you first need the user to do something in Neon: ... (see `AGENT_SKILLS_NOTE` in `src/constants/agent-directives.js`)
 
 # Title (from frontmatter)
 
@@ -86,7 +88,7 @@ Subtitle (from frontmatter, if present)
 - [Another Sibling](https://neon.com/docs/path/to/other)
 ```
 
-Navigation context is added by `addNavigationContext()`, which calls `buildPageHeader()` and `buildNavigationFooter()`. The **page header** always includes the documentation index URL. For pages in the navigation map, it also includes the page location (breadcrumb trail). The location includes section nodes (non-linkable groupings) that the HTML site's breadcrumbs skip, giving LLMs richer hierarchical context. Consecutive duplicate ancestors are deduplicated, and the trailing page title is omitted when it matches the last breadcrumb (e.g. "Connect to Neon" instead of "Connect to Neon > Connect to Neon"). The **footer** lists sibling pages (current page omitted), with standard URLs (no `.md`). Pages not in `navigation.yaml` get only the index line (no location, no footer).
+Navigation context is added by `addNavigationContext()`, which calls `buildPageHeader()` and `buildNavigationFooter()`. The **page header** always includes the documentation index URL and the agent skills line, both from `agentHeaderLines()` in `src/constants/agent-directives.js`. Changelog markdown (dated entries and the combined `docs/changelog.md`) skips the agent skills line and keeps its index line (and location line, when it has one). The same helper builds the headers of route indexes, the AI Gateway and backend platform pages, and the API reference pages (`scripts/generate-api-ref.mjs`). For pages in the navigation map, the header also includes the page location (breadcrumb trail). The location includes section nodes (non-linkable groupings) that the HTML site's breadcrumbs skip, giving LLMs richer hierarchical context. Consecutive duplicate ancestors are deduplicated, and the trailing page title is omitted when it matches the last breadcrumb (e.g. "Connect to Neon" instead of "Connect to Neon > Connect to Neon"). The **footer** lists sibling pages (current page omitted), with standard URLs (no `.md`). Pages not in `navigation.yaml` get no location line and no sibling footer.
 
 **Cross-references:** Some pages appear in multiple `navigation.yaml` locations (e.g. `extensions/pgvector` is listed under both AI and Extensions). To pick the canonical location, `processNavItems` scores each occurrence by how many siblings share the same slug prefix. For pgvector, the Extensions section siblings all share `extensions/` while the AI section siblings have `ai/`, so Extensions wins. Ties keep the first occurrence.
 

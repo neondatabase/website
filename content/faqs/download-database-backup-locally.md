@@ -3,7 +3,7 @@ title: 'How do I create and download a backup of my Neon database to my local ma
 subtitle: 'Run pg_dump in custom format against a direct connection string and save the archive to disk.'
 enableTableOfContents: true
 createdAt: '2026-05-18T00:00:00.000Z'
-updatedOn: '2026-09-23T21:00:25.204Z'
+updatedOn: '2026-11-04T20:10:08.844Z'
 isDraft: false
 redirectFrom: []
 previousLink:
@@ -61,7 +61,7 @@ A local `pg_dump` backup covers cases that instant restore doesn't:
 </Admonition>
 
 <Admonition type="tip" title="For large databases">
-`pg_dump` can dump tables in parallel with `-j <njobs>`, but only in directory format (`-Fd`), which writes a folder instead of a single file. `pg_restore -j <njobs>` runs a parallel restore from either a custom or directory archive. Set `<njobs>` to the number of available CPUs. Neon also recommends `-Z 1` for compression, since higher levels slow the dump. See [Advanced pg_dump and pg_restore options](/docs/import/migrate-from-postgres#advanced-pg_dump-and-pg_restore-options) and the [pg_dump reference](https://www.postgresql.org/docs/current/app-pgdump.html).
+`pg_dump` can dump tables in parallel with `-j <njobs>`, but only in directory format (`-Fd`), which writes a folder instead of a single file. `pg_restore -j <njobs>` runs a parallel restore from either a custom or directory archive. Set `<njobs>` to the number of available CPUs. Neon also recommends `-Z 1` for compression, since higher levels slow the dump. See [Advanced pg_dump and pg_restore options](/docs/import/migrate-from-postgres#advanced-pgdump-and-pgrestore-options) and the [pg_dump reference](https://www.postgresql.org/docs/current/app-pgdump.html).
 </Admonition>
 
 <CTA title="See all pg_dump options" description="Parallel dumps, ownership handling, large objects, and piping pg_dump to pg_restore for small databases." buttonText="Read the migration guide" buttonUrl="/docs/import/migrate-from-postgres" />

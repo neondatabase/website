@@ -8,6 +8,7 @@ import CodeBlock from 'components/pages/blog-post/code-block';
 import CodeTabs from 'components/pages/blog-post/code-tabs';
 import Content from 'components/pages/blog-post/content';
 import CTA from 'components/pages/blog-post/cta';
+import FunctionRegistryShowcase from 'components/pages/blog-post/function-registry-showcase';
 import Hero from 'components/pages/blog-post/hero';
 import MoreArticles from 'components/pages/blog-post/more-articles';
 import SocialShare from 'components/pages/blog-post/social-share';
@@ -100,6 +101,7 @@ const mdxComponents = {
   CodeTabs,
   CTA,
   EmbedTweet,
+  FunctionRegistryShowcase,
   RequestForm: renderBlogRequestForm,
   TabItem,
   Tabs: renderBlogTabs,

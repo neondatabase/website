@@ -53,7 +53,7 @@ Inside the handler, `@neon/ai-sdk-provider` reads the injected gateway credentia
 - **Progress in the UI**: point Mastra's `PostgresStore` at your database and [Realtime](/docs/realtime/overview) (public beta) syncs agent sessions, memory, and traces to the browser as live queries, so users watch a long run without polling ([Mastra example](/docs/realtime/examples/mastra)).
 
 <Admonition type="note" title="Region availability">
-Functions and AI Gateway are available in AWS US East (Ohio), US East (N. Virginia), Europe (Frankfurt), and Asia Pacific (Singapore), with support expanding toward [all regions](/docs/introduction/regions). Functions are available on every plan, with 10 active Capacity-Hours, 400 waiting Capacity-Hours, and 1 million invocations per project a month included on Free; AI Gateway bills inference from prepaid credits at provider list prices with no markup ([plans](/docs/introduction/plans#functions)).
+Functions and AI Gateway are available in AWS US East (Ohio), US East (N. Virginia), Europe (Frankfurt), and Asia Pacific (Singapore), with support expanding toward [all regions](/docs/introduction/regions). Functions are available on every plan, with 10 active Capacity-Hours, 400 waiting Capacity-Hours, and 1 million invocations per project a month included on Free; AI Gateway works on any plan and bills inference from prepaid credits at provider list prices with no markup ([plans](/docs/introduction/plans#functions)).
 </Admonition>
 
 ## How other options compare

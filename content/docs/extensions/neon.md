@@ -12,12 +12,12 @@ summary: >-
   ANALYZE` with the `FILECACHE` and `PREFETCH` options provides per-query cache
   and prefetch metrics without requiring the extension.
 enableTableOfContents: true
-updatedOn: '2026-09-10T13:38:23.543Z'
+updatedOn: '2026-11-04T20:10:08.844Z'
 ---
 
 The `neon` extension provides functions and views designed to gather Neon-specific metrics.
 
-- [The `neon_stat_file_cache` view](#the-neon_stat_file_cache-view)
+- [The `neon_stat_file_cache` view](#the-neonstatfilecache-view)
 - [Views for Neon internal use](#views-for-neon-internal-use)
 
 ## The neon_stat_file_cache view
@@ -34,7 +34,7 @@ On large fixed-size computes (18 CU and above), Neon sets `shared_buffers` to 75
 
 ## Monitoring compute cache usage
 
-You can monitor compute cache usage by installing the `neon` extension on your database and querying the [neon_stat_file_cache](#the-neon_stat_file_cache-view) view or [using EXPLAIN ANALYZE](#view-lfc-metrics-with-explain-analyze). Additionally, you can monitor the [Compute cache hit rate](/docs/introduction/monitoring-page#compute-cache-hit-rate) graph on the **Monitoring** page in the Neon console, or check it from the terminal with [`neon inspect db lfc-hit-rate`](/docs/cli/inspect#db-lfc-hit-rate) and [`neon inspect db working-set`](/docs/cli/inspect#db-working-set).
+You can monitor compute cache usage by installing the `neon` extension on your database and querying the [neon_stat_file_cache](#the-neonstatfilecache-view) view or [using EXPLAIN ANALYZE](#view-lfc-metrics-with-explain-analyze). Additionally, you can monitor the [Compute cache hit rate](/docs/introduction/monitoring-page#compute-cache-hit-rate) graph on the **Monitoring** page in the Neon console, or check it from the terminal with [`neon inspect db lfc-hit-rate`](/docs/cli/inspect#db-lfc-hit-rate) and [`neon inspect db working-set`](/docs/cli/inspect#db-working-set).
 
 ## neon_stat_file_cache view
 

@@ -10,7 +10,6 @@ summary: >-
   dynamic client registration, managed confidential and public clients, scopes
   and refresh tokens, and how a resource server verifies the issuer, audience,
   and signature of access tokens.
-tag: beta
 enableTableOfContents: true
 updatedOn: '2026-10-30T18:52:42.000Z'
 ---

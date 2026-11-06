@@ -2,15 +2,18 @@
 name: neon-postgres
 description: >-
   Guides and best practices for working with Lakebase Postgres on Neon:
-  connections, pooled vs direct, schema migrations, branching, autoscaling,
+  connections, pooled vs direct, schema migrations, branching (including
+  schema-only, reset-from-parent, and branch-per-PR workflows), autoscaling,
   scale-to-zero, instant restore, read replicas, IP allow lists, logical
-  replication, and Lakebase Search. Use when the work is an existing
-  DATABASE_URL, SQL, schema, inspect, or search. New backends, Auth, files,
-  Functions, and LLM calls go to the parent `neon` skill. Live queries, reactive
-  UIs, and realtime data go to `neon-realtime`. Also use for
-  "@neondatabase/serverless", "@neon/neon-js", "neon inspect db",
-  "semantic search", "vector search", "full-text search", "BM25", or
-  "hybrid search".
+  replication, egress optimization, and Lakebase Search. Use when the work is
+  an existing DATABASE_URL, SQL, schema, inspect, or search. New backends, Auth,
+  files, Functions, and LLM calls go to the parent `neon` skill. Live queries,
+  reactive UIs, and realtime data go to `neon-realtime`. Also use for
+  "@neondatabase/serverless", "@neon/neon-js", "neon inspect db", "neon
+  postgres computes", "Neon branch", "schema-only branch", "reset branch",
+  "branch per PR", high database bills, network transfer or egress, SELECT *
+  optimization, query overfetching, "semantic search", "vector search", "full-text search", "BM25", or "hybrid
+  search".
 metadata:
   parent: neon
   source: https://github.com/neondatabase/agent-skills/tree/main/skills/neon-postgres
@@ -89,17 +92,21 @@ Key points:
 
 Link: https://neon.com/docs/introduction/branching.md
 
-For detailed branch creation workflows (normal vs schema-only branches, reset-from-parent, CLI/MCP selection), use the `neon-postgres-branches` skill. If it isn't installed, fetch it from https://neon.com/docs/ai/skills/neon-postgres-branches/SKILL.md or install it with:
-
-```bash
-neon skills -s neon-postgres-branches -y
-```
+For detailed branch creation workflows (normal vs schema-only branches, reset-from-parent, CLI/MCP selection, and CI/CD patterns), read [Branching workflows](references/branching.md).
 
 ## Migrations
 
 Test a migration on a branch of production, against production-like data, before applying it to production.
 
 Use a **direct (non-pooled)** connection string when you run the migration, not a pooled one. `neon connection-string` returns the direct string by default; make sure the hostname does not include the `-pooler` suffix.
+
+## Egress Optimization
+
+Use this when a user reports high database bills, unexpected network transfer, egress spikes, query overfetching, or wants a cost-efficiency review of database query patterns.
+
+Before editing code, read [Egress optimization](references/egress-optimization.md). Audit all five patterns: unused columns, missing pagination, repeated static reads, application-side aggregation, and JOIN duplication. Do not stop after fixing `SELECT *`.
+
+Work in four steps: diagnose which queries transfer the most data, analyze the code behind them, fix the anti-patterns, then verify that behavior is preserved and transfer drops.
 
 ## Troubleshooting and Neon-Specific Performance
 
@@ -185,9 +192,26 @@ Because `ANALYZE` executes the statement, use it only when execution is safe; do
 
 Use MCP `list_slow_queries` instead of `inspect_database` when the user specifically needs queries ranked by average execution time with a custom threshold and limit. Outside the explicit `EXPLAIN` case above, use `run_sql` only for read-only diagnostic SQL when the predefined checks do not answer the question.
 
+## Computes
+
+Use this when the user wants to resize a compute, change its scale-to-zero timeout, or start, suspend, restart, or delete it.
+
+Manage computes with `neon postgres computes`. `neon pg` and `neon lakebase` are aliases of `neon postgres`.
+
+```bash
+neon postgres computes list                  # --branch <branch> or the branch .neon pins; --all-branches for the project
+neon postgres computes get <compute-id>
+neon postgres computes update <compute-id> --cu 0.25-2 --suspend-timeout 300
+neon postgres computes restart <compute-id>  # also start, suspend, delete
+```
+
+`update` sends only the flags you pass (`--cu`, `--suspend-timeout`, `--name`, `--disabled`) and fails when you pass none. Each change waits until Neon applies it; `update`, `start`, `suspend`, and `restart` then print the compute. With `--no-wait` the command returns once the API accepts the change; find the operation with `neon operations list` and check it with `neon operations get <operation-id>`. Add a compute, such as a read replica, with `neon branches add-compute <branch>`.
+
 ## Autoscaling
 
 Use this when the user needs compute to scale automatically with workload and wants guidance on CU sizing and runtime behavior.
+
+Set a compute's autoscaling range with `neon postgres computes update <compute-id> --cu <min>-<max>` (for example `--cu 0.25-2`), or a fixed size with `--cu 2`.
 
 Link: https://neon.com/docs/introduction/autoscaling.md
 
@@ -197,7 +221,7 @@ Use this when optimizing idle costs and discussing suspend/resume behavior, incl
 
 Key points:
 
-- Idle computes suspend automatically after a default of 5 minutes; the timeout is configurable, and suspension can only be disabled on the Launch and Scale plans.
+- Idle computes suspend automatically after a default of 5 minutes. Change the timeout with `neon postgres computes update <compute-id> --suspend-timeout <seconds>`: `0` uses the plan default and `-1` disables suspension. Free cannot change it, Launch can only enable or disable suspension, and Scale can set any value from 60 to 604800 (one week).
 - First query after suspend typically has a cold-start penalty (around hundreds of ms)
 - Storage remains active while compute is suspended.
 

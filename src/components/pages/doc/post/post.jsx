@@ -244,7 +244,11 @@ const Post = ({
             />
           </article>
         )}
-        <DocFooter slug={currentSlug} gitHubPath={gitHubPath} />
+        <DocFooter
+          slug={currentSlug}
+          gitHubPath={gitHubPath}
+          updatedOn={isFaq || isChangelog ? null : updatedOn}
+        />
 
         {!isChangelog && (
           <NavigationLinks

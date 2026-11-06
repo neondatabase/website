@@ -39,7 +39,7 @@ const faqItems = [
     id: 'does-neon-offer-a-backend',
     initialState: 'open',
     answer: `
-      <p>Alongside <a href="${LINKS.lakebase}">Lakebase Postgres</a>, every Neon project can use <a href="${LINKS.authPage}">Managed Better Auth</a>, the <a href="${LINKS.dataApi}">Data API</a>, <a href="${LINKS.objectStorage}">Object Storage</a>, <a href="${LINKS.functions}">Functions</a>, <a href="${LINKS.aiGateway}">AI Gateway</a>, and <a href="${LINKS.realtime}">Realtime</a> (in beta). Together they form a backend that runs next to your database: Auth, Object Storage, Functions, and AI Gateway branch with it. AI Gateway is available on Launch and Scale; everything else is on every plan, including Free.</p>
+      <p>Alongside <a href="${LINKS.lakebase}">Lakebase Postgres</a>, every Neon project can use <a href="${LINKS.authPage}">Managed Better Auth</a>, the <a href="${LINKS.dataApi}">Data API</a>, <a href="${LINKS.objectStorage}">Object Storage</a>, <a href="${LINKS.functions}">Functions</a>, <a href="${LINKS.aiGateway}">AI Gateway</a>, and <a href="${LINKS.realtime}">Realtime</a> (in beta). Together they form a backend that runs next to your database: Auth, Object Storage, Functions, and AI Gateway branch with it. Every service is available on every plan, including Free. On Free, AI Gateway needs a card and prepaid credits, and your plan stays Free.</p>
     `,
   },
   {
@@ -126,7 +126,7 @@ const faqItems = [
     question: 'Do the backend services use my Free plan CU-hours?',
     id: 'backend-free-plan-cu-hours',
     answer: `
-      <p>CU-hours measure Postgres database compute only. Object Storage and Functions have their own Free plan allowances, Managed Better Auth has its own MAU limit, and AI Gateway is available on paid plans. The Data API and Realtime run queries against your database, so the database compute they use counts toward your CU-hours like any other query.</p>
+      <p>CU-hours measure Postgres database compute only. Object Storage and Functions have their own Free plan allowances, Managed Better Auth has its own MAU limit, and AI Gateway draws down prepaid credits you buy. The Data API and Realtime run queries against your database, so the database compute they use counts toward your CU-hours like any other query.</p>
     `,
   },
   {
@@ -191,7 +191,14 @@ const faqItems = [
       <p><strong>Realtime</strong> is free during the beta. Database compute and network transfer it generates are billed as usual.</p>
       <p><strong>Object Storage</strong> is $0.023 per GB-month of stored volume. There's no per-operation charge. Egress counts toward your public network transfer allowance. The Free plan includes 5 GB of Object Storage per project.</p>
       <p><strong>Functions</strong> are billed for active compute, waiting compute, and invocations at the rates in the plan table. The Free plan includes 10 active capacity-hours, 400 waiting capacity-hours, and 1 million invocations per project per month.</p>
-      <p><strong>AI Gateway</strong> is available on Launch and Scale. Pricing matches the model provider's list prices, with no markup, and draws down prepaid credits. <a href="/docs/ai-gateway/prepaid-credits">Learn how prepaid credits work</a>, or see <a href="/docs/ai-gateway/overview#available-models">per-model rates</a>.</p>
+      <p><strong>AI Gateway</strong> is available on every plan, including Free. Pricing matches the model provider's list prices, with no markup, and draws down prepaid credits. On Free, add a card to buy credits. You don't need to upgrade. <a href="/docs/ai-gateway/prepaid-credits">Learn how prepaid credits work</a>, or see <a href="/docs/ai-gateway/overview#available-models">per-model rates</a>.</p>
+    `,
+  },
+  {
+    question: 'Can I use AI Gateway on the Free plan?',
+    id: 'ai-gateway-free-plan',
+    answer: `
+      <p>Yes. Add a card on the <strong>Billing</strong> page in the Neon Console and buy prepaid AI Gateway credits ($5 minimum). Your organization stays on the Free plan, and the rest of your Free plan doesn't change. AI Gateway turns on after your first purchase, once a short account check finishes. Requests draw down your credits at the model provider's list prices, with no markup. <a href="/docs/ai-gateway/prepaid-credits">Learn how prepaid credits work.</a></p>
     `,
   },
   {

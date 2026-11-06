@@ -51,7 +51,7 @@ To pull all credentials for a branch (including Object Storage, Data API, Auth, 
 neon env pull --branch mybranch --file .env.local
 ```
 
-By default, `neon env pull` writes `DATABASE_URL`, `DATABASE_URL_UNPOOLED`, and `NEON_BRANCH`. With a `neon.ts` file declaring services, it also writes credentials for each service. Use `--service` to pull only specific services:
+By default, `neon env pull` writes `DATABASE_URL`, `DATABASE_URL_UNPOOLED`, `NEON_BRANCH`, `NEON_BRANCH_ID`, and `NEON_FUNCTION_HOST_SUFFIX`. With a `neon.ts` file declaring services, it also writes credentials for each service. Use `--service` to pull only specific services:
 
 ```bash
 neon env pull --service postgres --service object-storage
@@ -84,7 +84,7 @@ Use [`neon env pull`](/docs/cli/env) to write credentials to `.env.local` (or `.
 neon env pull --file .env.local
 ```
 
-This writes `DATABASE_URL`, `DATABASE_URL_UNPOOLED`, `NEON_BRANCH`, and (if you have a `neon.ts` declaring services) credentials for Object Storage (`AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`, `AWS_ENDPOINT_URL_S3`, `AWS_REGION`), Data API, and Auth.
+This writes `DATABASE_URL`, `DATABASE_URL_UNPOOLED`, `NEON_BRANCH`, `NEON_BRANCH_ID`, `NEON_FUNCTION_HOST_SUFFIX`, and (if you have a `neon.ts` declaring services) credentials for Object Storage (`AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`, `AWS_ENDPOINT_URL_S3`, `AWS_REGION`), Data API, and Managed Better Auth.
 
 ### Production and CI
 

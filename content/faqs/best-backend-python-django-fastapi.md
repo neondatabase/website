@@ -57,7 +57,7 @@ client = OpenAI(
 )
 ```
 
-AI Gateway draws down prepaid credits at provider list prices with no markup ([pricing](/docs/ai-gateway/models#pricing)).
+AI Gateway works on any plan and draws down prepaid credits at provider list prices with no markup ([pricing](/docs/ai-gateway/models#pricing)).
 
 <Admonition type="note" title="Functions are JavaScript only for now">
 Neon Functions run JavaScript and TypeScript on Node.js 24 ([overview](/docs/compute/functions/overview)). Host your Python app on Railway, Render, Fly, AWS Lambda, or Vercel and connect it to Neon; the [Railway](/docs/guides/railway) and [Render](/docs/guides/render) guides show the pattern.

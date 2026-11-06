@@ -176,7 +176,7 @@ Create a `+page.svelte` file to display the data:
 
 ## Run the app
 
-When you run `npm run dev` you can expect to see the following on [localhost:5173](localhost:5173):
+When you run `npm run dev` you can expect to see the following on [localhost:5173](http://localhost:5173):
 
 ```shell shouldWrap
 Database Version

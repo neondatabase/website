@@ -14,6 +14,9 @@ summary: >-
 enableTableOfContents: true
 redirectFrom:
   - /docs/get-started/connection-pooling
+  - /docs/guides/connection-pooling
+  - /docs/introduction/connection-pooling
+  - /docs/manage/connection-pooling
 updatedOn: '2026-10-19T16:37:42.945Z'
 ---
 
@@ -245,6 +248,8 @@ The toggle is on by default for new projects. It doesn't start or stop the poole
 | `pg_dump` / `pg_restore`          | Direct          | Uses `SET` statements                     |
 | Logical replication               | Direct          | Requires persistent connection            |
 | Admin tasks                       | Direct          | May need session-level features           |
+
+If you run on a highly elastic platform such as AWS Fargate, Google Cloud Run, or Vercel, see [Serverless connection pooling](/docs/guides/serverless-connection-pooling) for strategies that prevent connection leaks and exhaustion when instances scale out or suspend.
 
 ## Connection pooling in transaction mode
 
