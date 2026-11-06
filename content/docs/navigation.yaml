@@ -1578,6 +1578,8 @@
                   slug: guides/exograph
                 - title: Hasura
                   slug: guides/hasura
+                - title: Hoop
+                  slug: guides/hoop
                 - title: PostgREST
                   slug: guides/postgrest
             - title: Replicate from Neon

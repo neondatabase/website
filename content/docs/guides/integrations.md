@@ -118,6 +118,8 @@ updatedOn: '2026-10-21T11:04:20.383Z'
 
 <a href="/docs/guides/hasura" title="Hasura" description="Connect from Hasura Cloud to Neon" icon="hasura"></a>
 
+<a href="/docs/guides/hoop" title="Hoop" description="Guardrails, data masking and audit for Neon" icon="hoop"></a>
+
 <a href="/docs/guides/postgrest" title="PostgREST" description="Create a REST API from your Neon database" icon="postgresql"></a>
 
 </TechCards>
