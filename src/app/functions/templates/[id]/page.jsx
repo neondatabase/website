@@ -1,5 +1,6 @@
 /* eslint-disable react/prop-types */
 import { notFound } from 'next/navigation';
+import { cache } from 'react';
 
 import TemplateDetail from 'components/pages/functions/templates/template-detail';
 import { getFunctionTemplateInstalls } from 'utils/api-function-template-installs';
@@ -14,6 +15,8 @@ import getMetadata from 'utils/get-metadata';
 export const revalidate = 3600;
 export const dynamicParams = true;
 
+const getTemplatePage = cache(getFunctionRegistryTemplatePage);
+
 export async function generateStaticParams() {
   const templates = await getFunctionRegistryCatalog();
   return templates.map((template) => ({ id: template.id }));
@@ -21,7 +24,7 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({ params }) {
   const { id } = await params;
-  const page = await getFunctionRegistryTemplatePage(id);
+  const page = await getTemplatePage(id);
   if (!page) return notFound();
 
   return getMetadata({
@@ -34,13 +37,21 @@ export async function generateMetadata({ params }) {
 
 const FunctionTemplatePage = async ({ params }) => {
   const { id } = await params;
-  const page = await getFunctionRegistryTemplatePage(id);
+  const page = await getTemplatePage(id);
   if (!page) return notFound();
+
   const [readme, installs] = await Promise.all([
     getFunctionRegistryTemplateReadme(page.template),
     getFunctionTemplateInstalls(page.template.id),
   ]);
-  return <TemplateDetail {...page} readme={readme} installs={installs} />;
+  return (
+    <TemplateDetail
+      template={page.template}
+      templates={page.templates}
+      readme={readme}
+      installs={installs}
+    />
+  );
 };
 
 export default FunctionTemplatePage;

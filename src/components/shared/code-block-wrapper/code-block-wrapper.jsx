@@ -52,9 +52,9 @@ const CodeBlockWrapper = ({
   let copyButtonTopClassName = 'top-4';
 
   if (filename) {
-    copyButtonTopClassName = 'top-[58px]';
+    copyButtonTopClassName = 'top-[60px]';
   } else if (isSingleLineCode) {
-    copyButtonTopClassName = 'top-[min(1rem,calc(50%-.8175rem))]';
+    copyButtonTopClassName = 'top-[min(1rem,calc(50%-.875rem))]';
   }
 
   const handleCopyWithTracking = () => {
@@ -75,7 +75,7 @@ const CodeBlockWrapper = ({
       {...otherProps}
     >
       {filename && (
-        <div className="flex h-11 items-center gap-2 truncate border-b border-gray-new-80 bg-gray-new-98 px-4 text-[13px] leading-none font-medium tracking-tight text-gray-new-40 dark:border-gray-new-20 dark:bg-gray-new-8 dark:text-gray-new-70">
+        <div className="flex h-11 items-center gap-2 truncate border-b border-gray-new-90 bg-gray-new-98 px-4 text-[13px] leading-none font-medium tracking-tight text-gray-new-40 dark:border-gray-new-20 dark:bg-gray-new-8 dark:text-gray-new-70">
           {getLanguageIcon(language)}
           {filename}
         </div>
@@ -84,7 +84,7 @@ const CodeBlockWrapper = ({
 
       <button
         className={cn(
-          'invisible absolute right-4 border border-gray-new-80 bg-white p-1.5 text-gray-new-40 opacity-0 transition-[background-color,opacity,visibility] duration-200 group-hover/code-block:visible group-hover/code-block:opacity-100 hover:bg-gray-new-90 dark:border-gray-new-20 dark:bg-black-pure dark:text-gray-new-60 dark:hover:bg-gray-new-8 lg:visible lg:opacity-100',
+          'absolute right-4 border border-gray-new-90 bg-white p-1.5 text-gray-new-50 transition-colors duration-200 hover:border-gray-new-80 hover:text-gray-new-20 dark:border-gray-new-20 dark:bg-[#09090b] dark:text-gray-new-60 dark:hover:border-gray-new-30 dark:hover:text-white',
           copyButtonTopClassName,
           copyButtonClassName
         )}

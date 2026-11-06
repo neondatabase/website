@@ -27,7 +27,7 @@ const absoluteUrl = (path) => (path.startsWith('/') ? `${BASE_URL}${path}` : pat
 const escapeText = (value) =>
   String(value)
     .replace(/\r?\n|\r/g, ' ')
-    .replace(/([\\`*_[\]<>])/g, '\\$1');
+    .replace(/([\\`*_[\]<>{}])/g, '\\$1');
 
 const escapeTableCell = (value) => escapeText(value).replace(/\|/g, '\\|');
 
