@@ -160,13 +160,6 @@ export default {
     imagePath: '/images/social-previews/variable.jpg',
     pathname: LINKS.variableLoad,
   },
-  costFleets: {
-    title: 'Neon for platforms: Cost estimator',
-    description:
-      'Run thousands of Postgres databases for a fraction of the cost with Neon. Great for building your free tier.',
-    imagePath: '/images/social-previews/cost-fleets.jpg',
-    pathname: LINKS.costFleets,
-  },
   branching: {
     title: 'Database Branching Workflows - Neon',
     description:
