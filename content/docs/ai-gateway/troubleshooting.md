@@ -61,18 +61,21 @@ The request body does not contain a valid `model` field.
 
 **Fix:** Include `"model": "<model-id>"` in the request body.
 
-### Some models are restricted in the Console
+### Locked models in the Console (#some-models-are-restricted-in-the-console)
 
-On your project's **AI Gateway** page, locked models show a padlock, and the **Some models are restricted** section lists them grouped by reason. Each reason links to the fix:
+On your project's **AI Gateway** page, a locked model shows a padlock. Hover over the padlock to see why the model is locked, along with a link to fix it:
 
-| Message                                                 | What to do                                                                                  |
-| ------------------------------------------------------- | ------------------------------------------------------------------------------------------- |
-| **A paid plan is required to use these models**         | On the **Billing** page, select **Add a card** on the **AI gateway credits** card, then buy credits. You don't need to upgrade your plan.                    |
-| **AI Gateway credits are required to use these models** | Select **Add credits**. See [AI Gateway prepaid credits](/docs/ai-gateway/prepaid-credits). |
-| **Your account is restricted from using these models**  | [Contact Support](/docs/introduction/support).                                              |
-| **Some models are not available to your account**       | [Contact Support](/docs/introduction/support).                                              |
+| Tooltip | What to do |
+| --- | --- |
+| **Add a card to buy AI gateway credits for this model.** | Your organization is on the Free plan with no payment card on file. Select **Add a card**, add your card, then buy credits. You don't need to upgrade your plan. See [AI Gateway prepaid credits](/docs/ai-gateway/prepaid-credits#buy-or-top-up-credits). |
+| **AI Gateway credits are required to use this model.** | Select **Buy credits**. See [AI Gateway prepaid credits](/docs/ai-gateway/prepaid-credits). |
+| **A paid plan is required to use this model.** | Your organization can't buy credits on its current plan, for example because it's billed through the Vercel Marketplace. Select **Upgrade plan**. |
+| **Account verification is required to use this model.** | Neon checks your account after your first credit purchase. Wait a few minutes and reload the page. If the tooltip links to **Complete verification** or **Contact support for verification**, follow that link. |
+| **Your account has reached its daily AI Gateway spend limit.** | [Contact Support](/docs/introduction/support) to raise the limit. See [Usage limits](/docs/ai-gateway/prepaid-credits#usage-limits). |
+| **Your account is restricted from using this model.** | [Contact Support](/docs/introduction/support). |
+| **This model is not available to your account.** | [Contact Support](/docs/introduction/support). |
 
-After you buy credits, models unlock once Neon confirms access. Reload the page if a model still shows as locked.
+Only organization admins can add a card or buy credits. After you buy credits, models unlock once Neon confirms access, usually within a few seconds. Reload the page if a model still shows as locked.
 
 ---
 
