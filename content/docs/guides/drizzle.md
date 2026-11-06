@@ -11,10 +11,10 @@ summary: >-
   environment by selecting a connection string based on NODE_ENV.
 enableTableOfContents: true
 agentPrompt: 'I want to use Drizzle ORM with it.'
-updatedOn: '2026-11-06T14:04:41.417Z'
+updatedOn: '2026-11-06T15:06:40.514Z'
 ---
 
-<div className="not-prose my-8 rounded-[10px] border border-gray-new-90 bg-gray-new-95 px-6 py-7 dark:border-gray-new-15 dark:bg-gray-new-10 [&>h2]:m-0 [&>h2]:mb-7 [&>h2]:w-fit [&>h2]:text-[28px] [&>h2]:leading-tight [&>h2]:font-medium [&>h2]:tracking-tighter [&>h2]:text-black-pure dark:[&>h2]:text-white [&_h3]:relative [&_h3]:mt-7 [&_h3]:mb-2 [&_h3]:w-fit [&_h3]:text-xl [&_h3]:font-semibold [&_h3]:tracking-tight [&_h3]:text-black-pure [&_h3]:before:absolute [&_h3]:before:-left-11 [&_h3]:before:top-px [&_h3]:before:flex [&_h3]:before:size-7 [&_h3]:before:items-center [&_h3]:before:justify-center [&_h3]:before:rounded-full [&_h3]:before:bg-black-new [&_h3]:before:text-[13px] [&_h3]:before:font-semibold [&_h3]:before:text-white [&_h3]:before:content-[counter(step)] [&_h3]:before:[counter-increment:step] dark:[&_h3]:text-white dark:[&_h3]:before:bg-white dark:[&_h3]:before:text-black-pure">
+<div className="not-prose my-8 rounded-[10px] border border-gray-new-90 bg-gray-new-95 px-6 py-7 dark:border-gray-new-15 dark:bg-gray-new-10 [&>h2]:my-0 [&>h2]:mb-7 [&>h2]:mx-auto [&>h2]:w-fit [&>h2]:text-center [&>h2]:text-[28px] [&>h2]:leading-tight [&>h2]:font-medium [&>h2]:tracking-tighter [&>h2]:text-black-pure dark:[&>h2]:text-white [&_h3]:relative [&_h3]:mt-7 [&_h3]:mb-2 [&_h3]:w-fit [&_h3]:text-xl [&_h3]:font-semibold [&_h3]:tracking-tight [&_h3]:text-black-pure [&_h3]:before:absolute [&_h3]:before:-left-11 [&_h3]:before:top-px [&_h3]:before:flex [&_h3]:before:size-7 [&_h3]:before:items-center [&_h3]:before:justify-center [&_h3]:before:rounded-full [&_h3]:before:bg-black-new [&_h3]:before:text-[13px] [&_h3]:before:font-semibold [&_h3]:before:text-white [&_h3]:before:content-[counter(step)] [&_h3]:before:[counter-increment:step] dark:[&_h3]:text-white dark:[&_h3]:before:bg-white dark:[&_h3]:before:text-black-pure">
 
 ## Build with your agent
 
@@ -22,13 +22,17 @@ updatedOn: '2026-11-06T14:04:41.417Z'
 
 ### Give your agent the skills
 
-<p className="m-0 mb-3 text-[15px] leading-relaxed text-gray-new-30 dark:text-gray-new-70">Add skills to your project.</p>
+<p className="m-0 mb-1.5 text-[15px] leading-relaxed text-gray-new-30 dark:text-gray-new-70">Set up your agent for Neon</p>
 
 <CopyLine text="Set me up for Neon. Fetch https://neon.com/prompts/agent-setup.md and follow it." />
+
+<p className="mt-4 mb-1.5 text-[15px] leading-relaxed text-gray-new-30 dark:text-gray-new-70">Add Drizzle skills</p>
 
 <CopyLine text="Add the Drizzle skill to this project. Fetch https://orm.drizzle.team/docs/drizzle-kit-skills and follow it." />
 
 <p className="mt-3 text-[13px] leading-relaxed text-gray-new-50 dark:text-gray-new-60">The Drizzle skill is maintained by the <a href="https://orm.drizzle.team/docs/drizzle-kit-skills">Drizzle team</a> and currently ships in Drizzle Kit's v1 pre-release (drizzle-kit@rc), so the agent installs it once Drizzle is in your project.</p>
+
+<CollapseFade>
 
 ### Set up your project
 
@@ -47,6 +51,8 @@ items={[
 { text: 'Use instant restore to recover if a migration breaks' },
 ]}
 />
+
+</CollapseFade>
 
 </div>
 

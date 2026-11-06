@@ -53,6 +53,7 @@ import AutoscalingChart from 'components/shared/autoscaling-chart';
 import AutoscalingViz from 'components/shared/autoscaling-viz';
 import Button from 'components/shared/button';
 import CodeBlock from 'components/shared/code-block';
+import CollapseFade from 'components/shared/collapse-fade';
 import ComputeCalculator from 'components/shared/compute-calculator';
 import CopyPrompt, { AgentPrompt } from 'components/shared/copy-prompt';
 // import CtaBlock from 'components/shared/cta-block';
@@ -254,6 +255,7 @@ const getComponents = (withoutAnchorHeading, isReleaseNote, isPostgres, isTempla
   AgentPrompt,
   AgentPromptList,
   CopyLine,
+  CollapseFade,
   ImageWithCommand,
   McpSetupConfigurator,
   SqlToRestConverter,
