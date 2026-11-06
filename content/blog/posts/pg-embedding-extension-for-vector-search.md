@@ -9,7 +9,7 @@ excerpt: >-
   for 99% accuracy to graph-based approximate nearest neighbor search to your
   Postgres databases. While the pgvector extension with IV...
 date: '2023-07-11T16:34:04'
-updatedOn: '2025-10-14T05:59:27'
+updatedOn: '2026-11-06T12:00:00.000Z'
 category: engineering
 categories:
   - engineering
@@ -42,6 +42,10 @@ seo:
 ---
 
 ![Image](https://cdn.neonapi.io/public/images/pages/blog/pg-embedding-extension-for-vector-search/image-19-1024x576-7a6c632f.png)
+
+<Admonition type="important" title="Use pgvector instead of pg_embedding">
+Neon stopped developing pg_embedding in 2023, and it's no longer one of Neon's [supported extensions](/docs/extensions/pg-extensions). Use [pgvector](/docs/extensions/pgvector) for vector search, or [Lakebase Search](/docs/ai/lakebase-search-get-started), a set of Postgres extensions for vector, BM25, and hybrid search in Lakebase Postgres.
+</Admonition>
 
 <Admonition type="note" title="pgvector">
 Back when we wrote this, we were proud to bring HNSW indexes to Postgres. Since then, pgvector has added support for the HNSW index, and we've chosen to pause the development of pg_embedding and contribute to pgvector instead.<br />We plan on always supporting the latest version of pgvector. For more information, please refer to [pgvector](https://neon.com/docs/extensions/pgvector) docs.
