@@ -1,7 +1,7 @@
 ---
 title: 'Lakebase Postgres storage: Bottomless, branchable'
 subtitle: The storage engine behind Lakebase Postgres. Copy-on-write, usage-based, with zero storage management.
-updatedOn: '2025-06-04T09:00:00.000Z'
+updatedOn: '2026-11-06T23:11:22.000Z'
 ---
 
 <Admonition type="note" title="This page is about database storage">

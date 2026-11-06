@@ -8,7 +8,7 @@ summary: >-
 redirectFrom:
   - /docs/introduction/billing-overview
   - /docs/introduction/how-billing-works
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-11-06T23:11:22.000Z'
 ---
 
 ## Neon plans
