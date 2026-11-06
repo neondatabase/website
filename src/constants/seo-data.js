@@ -63,7 +63,7 @@ export default {
     pathname: LINKS.faqs,
   },
   caseStudies: {
-    title: 'Neon Case Studies: How Retool, Replit, and Others Build on Postgres',
+    title: 'Neon Case Studies: How Retool, Replit, and Others Build on the Neon Backend',
     description:
       'Customer stories from teams running on Neon, from Retool managing 300,000+ Postgres databases with one engineer to Replit provisioning a database for every app its agent builds.',
     pathname: LINKS.caseStudies,
@@ -130,9 +130,9 @@ export default {
     imagePath: '/images/social-previews/migration.jpg',
   },
   useCases: {
-    title: 'Neon Use Cases: AI Agents, Database per Tenant, Branching, Dev/Test',
+    title: 'Neon Use Cases: Full-Stack Apps, Agents, Platforms, Branching, and More',
     description:
-      'How teams use Neon: backends for AI agent platforms, one Postgres database per user or tenant, a branch per pull request and preview, bursty and large production databases, and full-stack apps built by coding agents.',
+      'How teams use Neon: full-stack apps deployed by coding agents, backends for app-generation agents, isolated Postgres for every platform user, a branch per pull request and preview, autoscaling for bursty workloads, and instant restores for multi-TB databases.',
     pathname: LINKS.useCases,
   },
   partners: {
