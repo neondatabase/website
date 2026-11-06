@@ -639,7 +639,20 @@ neon neon-auth config oauth-server get
 
 With [Client ID Metadata Documents](/docs/auth/guides/plugins/oauth-provider#client-id-metadata-documents) (CIMD), clients identify themselves, so you don't create a client for each one. CIMD is on by default once you set an MCP resource. If it was turned off earlier, setting `--mcp-resource` doesn't turn it back on, so pass `--mcp-client-id-metadata-documents`. Leave [dynamic client registration](/docs/auth/guides/plugins/oauth-provider#dynamic-client-registration-legacy) off unless a client can't use CIMD.
 
-Each branch has its own OAuth settings, OAuth clients, trusted domains, and MCP resource URL. A new child branch copies them from its parent, including each client's ID and secret, and its function keeps the parent's `MCP_RESOURCE`, so both point at the parent's function URL. On a child branch, redeploy the function with that branch's URL in `MCP_RESOURCE` and run `neon neon-auth config oauth-server update --mcp-resource` with the same URL. Tokens from one branch don't work on another branch's server, because each branch has its own issuer. See [Branching authentication](/docs/auth/branching-authentication).
+Each branch has its own OAuth settings, OAuth clients, trusted domains, and MCP resource URL. A new child branch copies them from its parent, including each client's ID and secret, and its function keeps the parent's `MCP_RESOURCE`, so both point at the parent's function URL. Tokens from one branch don't work on another branch's server, because each branch has its own issuer. See [Branching authentication](/docs/auth/branching-authentication).
+
+On a child branch, read that branch's function URL, then point both `MCP_RESOURCE` and the OAuth server's MCP resource at it:
+
+```bash shouldWrap
+neon functions get todos
+
+neon functions deploy todos \
+  --src functions/todos \
+  --env "MCP_RESOURCE=https://<child_branch_id>-todos.compute.<cell>.aws.neon.tech/mcp"
+
+neon neon-auth config oauth-server update \
+  --mcp-resource https://<child_branch_id>-todos.compute.<cell>.aws.neon.tech/mcp
+```
 
 ## Verify the server
 
