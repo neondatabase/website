@@ -111,19 +111,25 @@ A typical decoded JWT payload looks like this:
 
 ### Organization claim
 
-When the session has an active organization and the **Organization plugin** is enabled for the project, the JWT includes an `o` claim with the following structure:
+If the user belongs to an [organization](/docs/auth/guides/plugins/organization), the JWT includes an `o` claim describing the session's active organization:
 
 ```json
 {
   "o": {
-    "id": "org-123",
-    "slug": "my-org",
+    "id": "2644b1c7-6d77-46bf-bcf1-832f7616db16",
+    "slug": "example-org",
     "role": "owner"
   }
 }
 ```
 
-The Organization plugin is controlled by a per-project configuration toggle, not a rollout flag. The `role` value is snapshotted from the user's organization membership when the token is issued and does not update in an already-issued token.
+- `id`: the organization ID
+- `slug`: the organization slug
+- `role`: the user's role in the organization, such as `owner`, `admin`, or `member`
+
+The `o` claim is `null` when the session has no active organization or the Organization plugin is disabled for the branch. Creating an organization makes it the active organization for that session. To switch, call `authClient.organization.setActive()`.
+
+The `role` value is read when the token is issued. If a user's role changes, tokens issued afterward include the new role, but an existing token keeps the old role until it expires. Tokens expire after 15 minutes.
 
 ## Verify a token
 
