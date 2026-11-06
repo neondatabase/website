@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "neonctlVersion": "8.23.2",
+  "neonctlVersion": "9.0.0",
   "binaries": [
     "neonctl",
     "neon"
@@ -2033,11 +2033,7 @@
             },
             {
               "command": "$0 env pull -s functions",
-              "description": "Pull NEON_FUNCTION_<SLUG>_BASE_URL for every deployed function"
-            },
-            {
-              "command": "$0 env pull -e NEON_FUNCTION_HELLO_BASE_URL",
-              "description": "Write that function's production invocation URL (no deploy required)"
+              "description": "Pull NEON_BRANCH_ID and NEON_FUNCTION_HOST_SUFFIX, which functionBaseUrl(\"<slug>\") from @neon/env reads"
             }
           ],
           "usage": "$0 env pull [options]"
