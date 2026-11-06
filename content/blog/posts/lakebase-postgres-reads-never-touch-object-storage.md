@@ -17,7 +17,7 @@ authors:
 cover:
   image: https://cdn.neonapi.io/public/images/pages/blog/lakebase-postgres-reads-never-touch-object-storage/cover-1.jpg
   alt: Lakebase Postgres is built on object storage, but 99.99999% of reads never touch it
-isFeatured: false
+isFeatured: true
 seo:
   title: Lakebase Postgres is built on object storage, but 99.99999% of reads never touch it - Neon
   description: >-
