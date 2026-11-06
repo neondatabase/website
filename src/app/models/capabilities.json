@@ -446,6 +446,17 @@
       "imageGeneration": false
     },
     {
+      "id": "kimi-k3-1-pro",
+      "owner": "moonshot",
+      "entitled": true,
+      "chat": "conforms",
+      "deviations": [],
+      "nativeDialect": "none",
+      "responses": false,
+      "webSearch": false,
+      "imageGeneration": false
+    },
+    {
       "id": "llama-4-maverick",
       "owner": "meta",
       "entitled": true,
