@@ -39,27 +39,31 @@ const CheckGlyph = (props) => (
 );
 
 // Resolve the text that gets copied: the full prompt fetched from `src`
-// (a file under public/prompts/), falling back to the visible text when no
-// src is given or the fetch fails. Mirrors how CopyPrompt loads its src.
+// (a file under public/prompts/). Mirrors how CopyPrompt loads its src.
+//
+// Returns `{ copyText, ready }`. With no `src`, the visible text IS the full
+// text, so it is ready immediately. With a `src`, `ready` stays false until
+// the fetch resolves, so the copy control can block until the full prompt is
+// loaded and never copy the truncated display string by racing the fetch.
 const usePromptText = (src, fallback) => {
-  const [text, setText] = useState(fallback || '');
+  const [fetched, setFetched] = useState(null);
   useEffect(() => {
-    if (!src) {
-      setText(fallback || '');
-      return undefined;
-    }
+    if (!src) return undefined;
     let cancelled = false;
+    setFetched(null);
     fetch(src)
       .then((res) => res.text())
       .then((value) => {
-        if (!cancelled) setText(value.trim());
+        if (!cancelled) setFetched(value.trim());
       })
       .catch(() => {});
     return () => {
       cancelled = true;
     };
-  }, [src, fallback]);
-  return text;
+  }, [src]);
+
+  if (!src) return { copyText: fallback, ready: true };
+  return { copyText: fetched ?? fallback, ready: fetched !== null };
 };
 
 const iconButtonClassName = cn(
@@ -69,18 +73,23 @@ const iconButtonClassName = cn(
   'focus-visible:ring-2 focus-visible:ring-green-44 focus-visible:outline-none dark:focus-visible:ring-green-52'
 );
 
-const IconCopyButton = ({ getText, label }) => {
+const IconCopyButton = ({ getText, label, ready = true }) => {
   const { isCopied, copy } = useCopyPrompt();
   return (
     <button
       type="button"
-      title={label}
+      title={ready ? label : 'Loading prompt…'}
       aria-label={isCopied ? 'Copied' : label}
       aria-live="polite"
-      className={iconButtonClassName}
-      onClick={() =>
-        copy(getText(), () => sendGtagEvent('Button Clicked', { text: 'Copy prompt' }))
-      }
+      disabled={!ready}
+      className={cn(
+        iconButtonClassName,
+        !ready && 'cursor-progress opacity-40 hover:bg-transparent'
+      )}
+      onClick={() => {
+        if (!ready) return;
+        copy(getText(), () => sendGtagEvent('Button Clicked', { text: 'Copy prompt' }));
+      }}
     >
       {isCopied ? <CheckGlyph /> : <CopyGlyph />}
     </button>
@@ -90,18 +99,19 @@ const IconCopyButton = ({ getText, label }) => {
 IconCopyButton.propTypes = {
   getText: PropTypes.func.isRequired,
   label: PropTypes.string,
+  ready: PropTypes.bool,
 };
 
 // A single command or prompt box: visible text on the left, icon-only copy on
 // the right. `src` copies the full prompt file; otherwise the visible text is
 // copied verbatim (used for the one-line setup command).
 const CopyLine = ({ text, src = null, multiline = false }) => {
-  const copyText = usePromptText(src, text);
+  const { copyText, ready } = usePromptText(src, text);
   return (
     <div
       className={cn(
         'not-prose my-3 flex gap-3 rounded-md border px-3 py-2.5',
-        'border-gray-new-90 bg-gray-new-98 dark:border-gray-new-20 dark:bg-gray-new-8',
+        'border-gray-new-85 bg-white dark:border-gray-new-20 dark:bg-gray-new-8',
         multiline ? 'items-start' : 'items-center'
       )}
     >
@@ -113,7 +123,7 @@ const CopyLine = ({ text, src = null, multiline = false }) => {
       >
         {text}
       </span>
-      <IconCopyButton getText={() => copyText} label="Copy" />
+      <IconCopyButton getText={() => copyText} ready={ready} label="Copy" />
     </div>
   );
 };
@@ -125,22 +135,24 @@ CopyLine.propTypes = {
 };
 
 const PromptRow = ({ title, text, src = null }) => {
-  const copyText = usePromptText(src, text);
+  const { copyText, ready } = usePromptText(src, text);
   return (
     <div
       className={cn(
-        'grid grid-cols-[150px_1fr_24px] items-center gap-3.5 border-b px-1 py-2.5 last:border-b-0 sm:grid-cols-[1fr_24px] sm:gap-y-1',
-        'border-gray-new-90 hover:bg-gray-new-98 dark:border-gray-new-15 dark:hover:bg-gray-new-8'
+        'grid grid-cols-[180px_1fr_24px] items-center gap-3.5 border-b px-3 py-2.5 last:border-b-0 sm:grid-cols-[1fr_24px] sm:gap-y-1',
+        'border-gray-new-90 hover:bg-gray-new-98 dark:border-gray-new-15 dark:hover:bg-gray-new-10'
       )}
     >
-      <span className="text-sm font-medium text-black dark:text-gray-new-94">{title}</span>
+      <span className="text-sm font-medium text-balance text-black dark:text-gray-new-94">
+        {title}
+      </span>
       <span
         className="truncate font-mono text-[12.5px] text-gray-new-40 dark:text-gray-new-70 sm:col-start-1"
         title={text}
       >
         {text}
       </span>
-      <IconCopyButton getText={() => copyText} label={`Copy prompt: ${title}`} />
+      <IconCopyButton getText={() => copyText} ready={ready} label={`Copy prompt: ${title}`} />
     </div>
   );
 };
@@ -154,7 +166,7 @@ PromptRow.propTypes = {
 // Single-column list of copyable prompts. Each row shows a title and a
 // one-line prompt, with an icon-only button that copies the full prompt.
 const AgentPromptList = ({ items = [] }) => (
-  <div className="not-prose my-5 flex flex-col">
+  <div className="not-prose my-4 flex flex-col overflow-hidden rounded-md border border-gray-new-85 bg-white dark:border-gray-new-20 dark:bg-gray-new-8">
     {items.map((item) => (
       <PromptRow key={item.title} title={item.title} text={item.text} src={item.src} />
     ))}

@@ -11,81 +11,62 @@ summary: >-
   environment by selecting a connection string based on NODE_ENV.
 enableTableOfContents: true
 agentPrompt: 'I want to use Drizzle ORM with it.'
-updatedOn: '2026-11-05T23:44:55.916Z'
+updatedOn: '2026-11-06T03:11:16.669Z'
 ---
 
-[comment]: <> (Agent-first quickstart prototype. The agent flow below uses the AgentPromptList and CopyLine components; the walkthrough further down is the existing guide, with its numerals restyled as outlined via a page-scoped wrapper.)
+[comment]: <> (Agent-first quickstart prototype, 1a tinted-band variant. The agent flow sits in a tinted band; steps 1-3 are markdown headings so they feed the table of contents, with filled-circle numerals drawn by page-scoped CSS. The walkthrough below keeps the existing Steps, with its numerals restyled as outlined.)
 
-<div className="not-prose my-8 grid grid-cols-[28px_1fr] gap-x-5 gap-y-8">
+<div className="not-prose my-8 rounded-[10px] border border-gray-new-90 bg-gray-new-95 px-6 py-7 dark:border-gray-new-15 dark:bg-gray-new-10 [&_h3]:relative [&_h3]:mt-7 [&_h3]:mb-2 [&_h3]:w-fit [&_h3]:text-xl [&_h3]:font-semibold [&_h3]:tracking-tight [&_h3]:text-black-pure [&_h3]:before:absolute [&_h3]:before:-left-11 [&_h3]:before:top-px [&_h3]:before:flex [&_h3]:before:size-7 [&_h3]:before:items-center [&_h3]:before:justify-center [&_h3]:before:rounded-full [&_h3]:before:bg-black-new [&_h3]:before:text-[13px] [&_h3]:before:font-semibold [&_h3]:before:text-white [&_h3]:before:content-[counter(step)] [&_h3]:before:[counter-increment:step] dark:[&_h3]:text-white dark:[&_h3]:before:bg-white dark:[&_h3]:before:text-black-pure">
 
-<div className="flex size-7 items-center justify-center rounded-full bg-black-new text-[13px] font-semibold text-white dark:bg-white dark:text-black-pure">1</div>
+<div className="flex items-center gap-3.5 [&_h2]:m-0 [&_h2]:w-fit [&_h2]:font-mono [&_h2]:text-[11px] [&_h2]:font-medium [&_h2]:uppercase [&_h2]:leading-none [&_h2]:tracking-[0.08em] [&_h2]:text-gray-new-60">
 
-<div>
-<p className="m-0 mb-2 text-xl font-semibold tracking-tight text-black-pure dark:text-white">Give your agent the Neon skill</p>
-<p className="m-0 text-[15px] leading-relaxed text-gray-new-30 dark:text-gray-new-70">One command installs the <code className="rounded-[4px] border border-gray-new-80 bg-gray-new-94 px-1 py-0.5 font-mono text-[13px] dark:border-gray-new-30 dark:bg-gray-new-15">neon-postgres</code> skill for Cursor, Claude Code, Codex, or Windsurf.</p>
+## With your agent
+
+<span className="h-px flex-1 bg-gray-new-85 dark:bg-gray-new-20" />
+<span className="shrink-0 font-mono text-[11px] uppercase tracking-[0.08em] text-gray-new-60">~2 min</span>
+
+</div>
+
+<div className="mt-7 pl-11 [counter-reset:step] [&>h3:first-child]:mt-0!">
+
+### Give your agent the Neon skill
+
+<p className="m-0 mb-3 text-[15px] leading-relaxed text-gray-new-30 dark:text-gray-new-70">One command installs the <code className="rounded-[4px] border border-gray-new-85 bg-white px-1 py-0.5 font-mono text-[13px] dark:border-gray-new-30 dark:bg-gray-new-15">neon-postgres</code> skill for Cursor, Claude Code, Codex, or Windsurf.</p>
+
 <CopyLine text="npx skills add neondatabase/agent-skills -s neon-postgres -y" />
-</div>
 
-<div className="flex size-7 items-center justify-center rounded-full bg-black-new text-[13px] font-semibold text-white dark:bg-white dark:text-black-pure">2</div>
+### Tell it about your project
 
-<div>
-<p className="m-0 mb-2 text-xl font-semibold tracking-tight text-black-pure dark:text-white">Tell it about your project</p>
-<p className="m-0 text-[15px] leading-relaxed text-gray-new-30 dark:text-gray-new-70">The agent inspects the repo, creates or links a Neon project, and wires Drizzle to it.</p>
+<p className="m-0 mb-3 text-[15px] leading-relaxed text-gray-new-30 dark:text-gray-new-70">The agent inspects the repo, creates or links a Neon project, and wires Drizzle to it.</p>
+
 <CopyLine multiline text="Set up Drizzle with Neon in this project. Create a Neon project if I don't have one, add the connection string to .env, and configure drizzle.config.ts." src="/prompts/drizzle-discovery.md" />
-</div>
 
-<div className="flex size-7 items-center justify-center rounded-full bg-black-new text-[13px] font-semibold text-white dark:bg-white dark:text-black-pure">3</div>
+### Keep going
 
-<div>
-<p className="m-0 mb-2 text-xl font-semibold tracking-tight text-black-pure dark:text-white">Keep going</p>
-<p className="m-0 text-[15px] leading-relaxed text-gray-new-30 dark:text-gray-new-70">Each prompt is a complete task. Copy one and paste it into your agent.</p>
+<p className="m-0 mb-3 text-[15px] leading-relaxed text-gray-new-30 dark:text-gray-new-70">Each prompt is a complete task. Copy one and paste it into your agent.</p>
+
 <AgentPromptList
-  items={[
-    { title: 'Generate a migration', text: 'Generate and apply a Drizzle Kit migration from my schema to Neon. Review the SQL before applying.', src: '/prompts/drizzle-migration.md' },
-    { title: 'Pooled vs direct URL', text: 'Use the direct Neon URL for Drizzle Kit migrations and the pooled URL for the app runtime. Update .env and drizzle.config.ts.', src: '/prompts/drizzle-pooled-direct.md' },
-    { title: 'Serverless HTTP driver', text: "Switch this project's Drizzle client to the Neon serverless HTTP driver so it works in edge and serverless runtimes.", src: '/prompts/drizzle-serverless-http.md' },
-    { title: 'Branch per pull request', text: 'Create a Neon branch for this pull request, run my Drizzle migrations against it, and tear it down when the PR closes.', src: '/prompts/drizzle-branch-per-pr.md' },
-    { title: 'Schema-only branch', text: 'Create a schema-only Neon branch so I can test a migration against the real table structure without copying data.', src: '/prompts/drizzle-schema-only-branch.md' },
-    { title: 'Reset from parent', text: 'Reset my development branch from its parent so I can re-run migrations against a clean, parent-aligned state.', src: '/prompts/drizzle-reset-from-parent.md' },
-  ]}
+items={[
+{ title: 'Generate a migration', text: 'Generate and apply a Drizzle Kit migration from my schema to Neon. Review the SQL before applying.', src: '/prompts/drizzle-migration.md' },
+{ title: 'Pooled vs direct URL', text: 'Use the direct Neon URL for Drizzle Kit migrations and the pooled URL for the app runtime. Update .env and drizzle.config.ts.', src: '/prompts/drizzle-pooled-direct.md' },
+{ title: 'Serverless HTTP driver', text: "Switch this project's Drizzle client to the Neon serverless HTTP driver so it works in edge and serverless runtimes.", src: '/prompts/drizzle-serverless-http.md' },
+{ title: 'Branch per pull request', text: 'Create a Neon branch for this pull request, run my Drizzle migrations against it, and tear it down when the PR closes.', src: '/prompts/drizzle-branch-per-pr.md' },
+{ title: 'Schema-only branch', text: 'Create a schema-only Neon branch so I can test a migration against the real table structure without copying data.', src: '/prompts/drizzle-schema-only-branch.md' },
+{ title: 'Reset from parent', text: 'Reset my development branch from its parent so I can re-run migrations against a clean, parent-aligned state.', src: '/prompts/drizzle-reset-from-parent.md' },
+]}
 />
-</div>
 
 </div>
 
-<div className="not-prose my-14 flex items-center gap-3.5">
-<span className="h-px flex-1 bg-gray-new-80 dark:bg-gray-new-20" />
-<span className="font-mono text-[11px] font-medium tracking-[0.08em] whitespace-nowrap text-gray-new-50 uppercase dark:text-gray-new-60">Prompts end · Code begins</span>
-<span className="h-px flex-1 bg-gray-new-80 dark:bg-gray-new-20" />
 </div>
+
+<p className="not-prose mt-12 mb-6 font-mono text-[11px] font-medium tracking-[0.08em] text-gray-new-60 uppercase">By hand</p>
 
 <div className="[&_.numbered-step]:before:border [&_.numbered-step]:before:border-gray-new-50 [&_.numbered-step]:before:bg-transparent! [&_.numbered-step]:before:text-gray-new-40! dark:[&_.numbered-step]:before:border-gray-new-30 dark:[&_.numbered-step]:before:bg-transparent! dark:[&_.numbered-step]:before:text-gray-new-70!">
 
 ## Full setup, step by step
 
 The same setup the agent runs, written out. Read it to understand what changed, or follow it yourself.
-
-<Callout title="Realtime with Drizzle">
-See how to subscribe to live SQL queries with [Neon Realtime + Drizzle](/docs/realtime/examples/drizzle)
-</Callout>
-
-<InfoBlock>
-<DocsList title="What you will learn:">
-<p>How to connect from Drizzle using different drivers</p>
-<p>How to configure Drizzle Kit for migrations</p>
-</DocsList>
-
-<DocsList title="Related resources" theme="docs">
-  <a href="https://orm.drizzle.team/docs/tutorials/drizzle-with-neon">Drizzle with Neon Postgres (Drizzle Docs)</a>
-  <a href="/docs/guides/drizzle-migrations">Schema migration with Drizzle ORM</a>
-  <a href="/docs/guides/nextjs#video-walkthrough">Getting started with Neon (Next.js and Drizzle video)</a>
-</DocsList>
-
-</InfoBlock>
-
-Drizzle is a TypeScript ORM with type-safe queries. This guide shows you how to connect your application to a database on Neon using Drizzle ORM.
-
-To connect a TypeScript/Node.js project to Neon using Drizzle ORM, follow these steps:
 
 <Steps>
 
@@ -448,6 +429,8 @@ Each branch has its own connection string, available in the Neon Console or via 
 - [Drizzle with Neon Postgres](https://orm.drizzle.team/docs/tutorials/drizzle-with-neon)
 - [Schema migration with Lakebase Postgres and Drizzle ORM](/docs/guides/drizzle-migrations)
 - [Todo App with Neon Postgres and Drizzle ORM](https://orm.drizzle.team/docs/tutorials/drizzle-nextjs-neon)
+- [Getting started with Neon (Next.js and Drizzle video)](/docs/guides/nextjs#video-walkthrough)
+- [Realtime with Drizzle](/docs/realtime/examples/drizzle)
 
 ## Next steps
 
