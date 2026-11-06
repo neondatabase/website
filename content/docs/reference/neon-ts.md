@@ -370,6 +370,8 @@ const env = parseEnv(config);
 env.postgres.databaseUrl;         // DATABASE_URL
 env.postgres.databaseUrlUnpooled; // DATABASE_URL_UNPOOLED
 env.branch.name;                  // NEON_BRANCH             (when NEON_BRANCH is set)
+env.branch.id;                    // NEON_BRANCH_ID
+env.branch.functionHostSuffix;    // NEON_FUNCTION_HOST_SUFFIX
 env.auth.baseUrl;                 // NEON_AUTH_BASE_URL       (env.auth when auth: true)
 env.auth.jwksUrl;                 // NEON_AUTH_JWKS_URL
 env.dataApi.url;                  // NEON_DATA_API_URL        (env.dataApi when dataApi enabled)
@@ -381,14 +383,13 @@ env.storage.endpoint;             // AWS_ENDPOINT_URL_S3
 env.storage.region;               // AWS_REGION
 env.realtime.url;                 // NEON_REALTIME_URL        (env.realtime when preview.realtime enabled)
 env.realtime.secret;              // NEON_REALTIME_SECRET
-env.functions?.['<slug>'].baseUrl; // NEON_FUNCTION_<SLUG>_BASE_URL (env.functions when functions declared and their URLs are set)
 ```
 
 Each namespace exists only when its service is declared: `env.auth` when `auth: true`, `env.storage` when you declare `buckets`, and so on. If you access a namespace your config doesn't declare, TypeScript catches it.
 
-`env.functions` (plural) is a map of every declared function's slug to its `baseUrl`, read from `NEON_FUNCTION_<SLUG>_BASE_URL`. `neon env pull`, `neon dev`, and `neon-env run` set those variables, but deployed functions don't receive them, so `env.functions` is present only when every declared function's URL is set. Read it with optional chaining (`env.functions?.hello.baseUrl`). To require a URL, select its key explicitly: `parseEnv(config, ['NEON_FUNCTION_HELLO_BASE_URL'])` throws if it's missing. Requires `@neon/env` 1.6.2 or later; earlier versions throw inside deployed functions when these URLs are unset.
+`env.branch.id` and `env.branch.functionHostSuffix` are optional, like `env.branch.name`. To require them, select their keys: `parseEnv(config, ['NEON_BRANCH_ID', 'NEON_FUNCTION_HOST_SUFFIX'])`. To call another function, use `functionBaseUrl('<slug>')` from `@neon/env` rather than joining these values yourself. See [Call another function](/docs/compute/functions/environment-variables#call-another-function). `@neon/env` 2.0.0 removed `env.functions` and the `NEON_FUNCTION_<SLUG>_BASE_URL` keys.
 
-`env.functions` is distinct from `env.function` (singular), which you get from `parseEnv(config, '<slug>')`: the scoped env for code running inside that function, exposing the `env` vars declared in its `neon.ts` definition.
+`parseEnv(config, '<slug>')` also returns `env.function`: the scoped env for code running inside that function, exposing the `env` vars declared in its `neon.ts` definition.
 
 Pass an array of keys to validate and return only a subset. Useful when a process needs just one or two variables:
 

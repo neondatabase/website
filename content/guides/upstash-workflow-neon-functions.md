@@ -144,7 +144,7 @@ Linked ~/neon-upstash-workflow/.neon:
   projectId: cool-darkness-12345678
   branch:    main
 
-INFO: Pulled 3 Neon variables into ~/neon-upstash-workflow/.env.local: DATABASE_URL, DATABASE_URL_UNPOOLED, NEON_BRANCH
+INFO: Pulled 5 Neon variables into ~/neon-upstash-workflow/.env.local: DATABASE_URL, DATABASE_URL_UNPOOLED, NEON_BRANCH, NEON_BRANCH_ID, NEON_FUNCTION_HOST_SUFFIX
 ✔ Create neon.ts to manage this project's Neon setup as code? … yes
 INFO: Setting up neon.ts…
 ✔ Which Neon services should neon.ts declare? (space to toggle, enter to confirm) › Functions, AI Gateway
@@ -153,7 +153,7 @@ INFO: Created hello.ts — the source of the hello function.
 INFO: Installing @neon/config, @neon/env with npm…
 INFO: Next: edit neon.ts, then run `neon config plan` to preview and `neon config apply`.
 INFO: Refreshing Neon env vars…
-INFO: Pulled 6 Neon variables into ~/neon-upstash-workflow/.env.local: DATABASE_URL, DATABASE_URL_UNPOOLED, NEON_BRANCH, NEON_AI_GATEWAY_TOKEN, NEON_AI_GATEWAY_BASE_URL, NEON_FUNCTION_HELLO_BASE_URL
+INFO: Pulled 7 Neon variables into ~/neon-upstash-workflow/.env.local: DATABASE_URL, DATABASE_URL_UNPOOLED, NEON_BRANCH, NEON_BRANCH_ID, NEON_FUNCTION_HOST_SUFFIX, NEON_AI_GATEWAY_TOKEN, NEON_AI_GATEWAY_BASE_URL
 
 Neon setup complete.
 --------------------
@@ -376,7 +376,7 @@ The Hono app exposes two routes:
 - **`/api/workflow`**: The workflow endpoint that QStash calls once per step. It delegates to the `workflowApp` defined in [`src/workflow.ts`](#define-the-workflow-endpoint).
 - **`/api/signup`**: The trigger route that starts a new workflow run.
 
-The trigger route builds the callback URL it hands to QStash from the incoming request, so it always points at the function that received the signup: your public function URL in production, or `http://localhost:8787` under `neon dev`. The `NEON_FUNCTION_<SLUG>_BASE_URL` variables that `neon env pull` writes to `.env.local` are local-only and aren't injected into a deployed function, so don't read the callback URL from them. The `QSTASH_*` credentials you declare in `neon.ts` are injected into the function's environment at deploy time, and the Upstash SDK reads them automatically.
+The trigger route builds the callback URL it hands to QStash from the incoming request, so it always points at the function that received the signup: your public function URL in production, or `http://localhost:8787` under `neon dev`. The `QSTASH_*` credentials you declare in `neon.ts` are injected into the function's environment at deploy time, and the Upstash SDK reads them automatically.
 
 ## Configure Upstash credentials
 

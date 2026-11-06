@@ -285,12 +285,12 @@ Function URLs
   • api: https://br-cool-forest-a1b2c3d4-api.compute.c-13.us-east-1.aws.neon.tech/
 
 Utilized services: Postgres, Neon Auth, Data API, Object Storage, Functions, AI Gateway
-Pulled 13 Neon variables into .env.local
+Pulled 14 Neon variables into .env.local
   Postgres        DATABASE_URL, DATABASE_URL_UNPOOLED
-  Branch          NEON_BRANCH
+  Branch          NEON_BRANCH, NEON_BRANCH_ID
   Neon Auth       NEON_AUTH_BASE_URL, NEON_AUTH_JWKS_URL
   Data API        NEON_DATA_API_URL
-  Functions       NEON_FUNCTION_API_BASE_URL
+  Functions       NEON_FUNCTION_HOST_SUFFIX
   Object Storage  AWS_ACCESS_KEY_ID*, AWS_SECRET_ACCESS_KEY*, AWS_ENDPOINT_URL_S3, AWS_REGION
   AI Gateway      NEON_AI_GATEWAY_TOKEN*, NEON_AI_GATEWAY_BASE_URL
   * new credential value

@@ -141,9 +141,10 @@ Linked .neon
 Creating neon.ts...
 Installing Neon dependencies with npm...
 Pulling Neon environment variables...
-Pulled 3 Neon variables into .env.local from branch main (br-restless-wildflower-a1b2c3d4)
+Pulled 5 Neon variables into .env.local from branch main (br-restless-wildflower-a1b2c3d4)
   Postgres        DATABASE_URL, DATABASE_URL_UNPOOLED
-  Branch          NEON_BRANCH
+  Branch          NEON_BRANCH, NEON_BRANCH_ID
+  Functions       NEON_FUNCTION_HOST_SUFFIX
 ```
 
 After setup, restart your editor and ask your assistant to "Get started with Neon." The installed [Neon MCP server](/docs/ai/neon-mcp-server) points your assistant to the right docs, so it can connect to your database and use Neon features as you build.
@@ -174,9 +175,10 @@ Granted Capabilities  postgres
 Creating neon.ts...
 Installing Neon dependencies with npm...
 Pulling Neon environment variables...
-Pulled 3 Neon variables into .env.local from branch main (br-restless-wildflower-a1b2c3d4)
+Pulled 5 Neon variables into .env.local from branch main (br-restless-wildflower-a1b2c3d4)
   Postgres        DATABASE_URL, DATABASE_URL_UNPOOLED
-  Branch          NEON_BRANCH
+  Branch          NEON_BRANCH, NEON_BRANCH_ID
+  Functions       NEON_FUNCTION_HOST_SUFFIX
 
 Neon setup complete.
 --------------------

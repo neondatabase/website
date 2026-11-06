@@ -274,7 +274,7 @@ UPSTASH_BOX_SNAPSHOT_ID=your_snapshot_id
 
 Now update the function declaration. `neon link` generated a starter `neon.ts`; update the `functions` block to point to the `analyst.ts` source file you'll create later and inject the secrets from `.env.local`:
 
-```ts filename="neon.ts" {5-19}
+```ts filename="neon.ts" {5-18}
 import { defineConfig } from '@neon/config/v1';
 
 export default defineConfig({
@@ -290,7 +290,6 @@ export default defineConfig({
         UPSTASH_BOX_SNAPSHOT_ID: process.env.UPSTASH_BOX_SNAPSHOT_ID!,
         SLACK_BOT_TOKEN: process.env.SLACK_BOT_TOKEN ?? '',
         SLACK_SIGNING_SECRET: process.env.SLACK_SIGNING_SECRET ?? '',
-        NEON_FUNCTION_ANALYST_BASE_URL: process.env.NEON_FUNCTION_ANALYST_BASE_URL!,
       }
     }
   },
@@ -303,8 +302,6 @@ export default defineConfig({
 ```
 
 The `env` block injects your secrets into the function at deploy time. The two Slack values use `?? ''` because you won't have them until you create the Slack app in a later step. The empty fallback lets this first deploy succeed and gives you the function URL, but the function won't load until both Slack values are set. You'll redeploy with the real values right after.
-
-`NEON_FUNCTION_ANALYST_BASE_URL` is the function's public URL, which `neon link` writes to `.env.local`. Neon doesn't inject it into a deployed function, but `parseEnv(config, 'analyst')` in the next step requires it, so pass it through here.
 
 You also don't list `DATABASE_URL` as Neon injects it automatically, because the function is deployed onto your branch. The per-session branch connection comes from the Neon SDK at runtime instead.
 
