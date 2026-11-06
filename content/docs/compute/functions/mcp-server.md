@@ -15,6 +15,12 @@ The MCP server runs on [Neon Functions](/docs/compute/functions/overview). [Mana
 
 If you don't need per-user sign-in, start from the `mcp-postgres` [function template](/docs/compute/functions/templates) instead.
 
+<CopyPrompt
+  src="/prompts/mcp-server-on-neon-functions-prompt.md"
+  description="Use this prompt to build this with your AI agent."
+  buttonText="Copy prompt"
+/>
+
 ## How it works
 
 ```mermaid
