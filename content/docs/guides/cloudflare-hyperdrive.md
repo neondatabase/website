@@ -12,6 +12,8 @@ summary: >-
   behavior in Hyperdrive local connection strings and how to test with
   wrangler dev --remote.
 enableTableOfContents: true
+redirectFrom:
+  - /docs/guides/hyperdrive
 updatedOn: '2026-10-09T10:14:56.146Z'
 ---
 

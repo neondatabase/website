@@ -11,6 +11,7 @@ summary: >-
 enableTableOfContents: true
 redirectFrom:
   - /docs/introduction/auto-suspend
+  - /docs/introduction/autosuspend
 updatedOn: '2026-11-04T20:10:08.844Z'
 ---
 

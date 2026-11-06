@@ -142,7 +142,7 @@ Supabase accepts much larger files on paid plans, up to 500 GB, for raw video or
 
 | Feature                                                             | Neon                                                                    | Supabase    |
 | :------------------------------------------------------------------ | :---------------------------------------------------------------------- | :---------- |
-| **AI Gateway**<br/>One credential for models from several providers | Yes, on paid plans, billed from prepaid credits at provider list prices | Not offered |
+| **AI Gateway**<br/>One credential for models from several providers | Yes, on every plan, billed from prepaid credits at provider list prices | Not offered |
 | **Gateway per branch**                                              | Each branch has its own endpoint                                        | Not offered |
 | **Vector search**                                                   | `pgvector`                                                              | `pgvector`  |
 

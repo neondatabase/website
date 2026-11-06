@@ -24,6 +24,7 @@ redirectFrom:
   - /docs/introduction/limits
   - /docs/introduction/pricing-estimation-guide
   - /docs/introduction/billing-sample
+  - /docs/introduction/pricing
 updatedOn: '2026-11-04T20:10:08.844Z'
 ---
 
@@ -60,7 +61,7 @@ For AI agent platforms that provision thousands of databases, Neon offers an **A
 | [Auth](#auth)                                         | Up to 60k MAU/project                                              | Up to 1M MAU/project                       | Up to 1M MAU/project                                                                              |
 | [Object Storage](#object-storage)                     | 5 GB/project                                                       | $0.023/GB-month                            | $0.023/GB-month                                                                                   |
 | [Functions](#functions)                               | 10 active / 400 waiting Capacity-Hours, 1M invocations per project | $0.10/$0.025/Capacity-Hour, $0.60/M        | $0.12/$0.03/Capacity-Hour, $0.60/M                                                                |
-| [AI Gateway](#ai-gateway)                             | Not available                                                      | Prepaid credits                            | Prepaid credits                                                                                   |
+| [AI Gateway](#ai-gateway)                             | Prepaid credits                                                    | Prepaid credits                            | Prepaid credits                                                                                   |
 | [Data API](#data-api)                                 | No separate charge                                                 | No separate charge                         | No separate charge                                                                                |
 | [Realtime](#realtime)                                 | Free during beta                                                   | Free during beta                           | Free during beta                                                                                  |
 | [Private network transfer](#private-network-transfer) | Not available                                                      | Not available                              | $0.01/GB                                                                                          |
@@ -379,7 +380,7 @@ See [Neon Functions](/docs/compute/functions/overview) for what's included and c
 
 ### AI Gateway
 
-Neon AI Gateway provides access to open-weight and foundation models from multiple providers through a single Neon credential. It's available on paid plans (Launch and Scale). Any paid customer with prepaid credits can use every model in the catalog; see [Model access](/docs/ai-gateway/models#model-access) for details.
+Neon AI Gateway provides access to open-weight and foundation models from multiple providers through a single Neon credential. It's available on all plans, including Free. On the Free plan, you add a payment card and buy prepaid credits without upgrading. Any account with prepaid credits can use every model in the catalog; see [Model access](/docs/ai-gateway/models#model-access) for details.
 
 Prices match each provider's published list prices, with no additional markup, and draw down a prepaid credit balance you buy from the **Billing** page in the Neon Console.
 

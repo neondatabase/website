@@ -21,7 +21,7 @@ This guide describes how to create a Neon project and connect to it from an Expr
 
 ## Choose a driver
 
-- **`@neondatabase/serverless`** connects over HTTP or WebSockets instead of TCP. Use it for serverless and edge platforms without built-in connection pooling (Vercel, Netlify Functions, Deno Deploy, Cloudflare Workers without Hyperdrive).
+- **`@neondatabase/serverless`** connects over HTTP or WebSockets instead of TCP. Use it for serverless and edge platforms without built-in connection pooling (Vercel, Netlify Functions, Cloudflare Workers without Hyperdrive).
 - **`postgres` (postgres.js)** is a fast, full-featured client for both serverless and traditional Node.js server environments.
 - **`pg` (node-postgres)** is the classic, widely-used driver for traditional, long-running Node.js servers. Also the standard choice for [Vercel Fluid compute](https://vercel.com/docs/functions/fluid-compute) and Cloudflare with [Hyperdrive](https://developers.cloudflare.com/hyperdrive/).
 

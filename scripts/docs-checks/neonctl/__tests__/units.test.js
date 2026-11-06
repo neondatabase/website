@@ -575,6 +575,47 @@ describe('parseCommandFile: curried builderFor(usage) builders', () => {
     expect(nestedRoles.usage).toBe('$0 postgres roles <sub-command> [options]');
     expect(Object.keys(nestedRoles.commands)).toEqual(['list']);
   });
+
+  it('resolves a module mounted with .command(x.command, x.describe, x.builder)', () => {
+    const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'neonctl-units-'));
+    fs.writeFileSync(
+      path.join(dir, 'loki.ts'),
+      `
+      import type yargs from "yargs";
+      export const command = "loki [query]";
+      export const describe = "Call the Loki read API";
+      export const builder = (argv: yargs.Argv) =>
+        argv
+          .usage("$0 logs loki [query] [options]")
+          .positional("query", { describe: "LogQL expression", type: "string" })
+          .options({ since: { describe: "Lookback window", type: "string" } });
+    `
+    );
+    const group = path.join(dir, 'logs.ts');
+    fs.writeFileSync(
+      group,
+      `
+      import type yargs from "yargs";
+      import * as loki from "./loki.js";
+      export const command = "logs";
+      export const describe = "Query branch logs";
+      export const builder = (argv: yargs.Argv) =>
+        argv
+          .usage("$0 logs <sub-command> [options]")
+          .command("fields", "List log fields", (y) => y)
+          .command(loki.command, loki.describe, loki.builder, (args) => loki.handler(args));
+    `
+    );
+    const parsed = parseCommandFile(group, new Map());
+    expect(Object.keys(parsed.commands)).toEqual(['fields', 'loki']);
+    const sub = parsed.commands.loki;
+    expect(sub.describe).toBe('Call the Loki read API');
+    expect(sub.usage).toBe('$0 logs loki [query] [options]');
+    expect(sub.positionals.map((p) => [p.name, p.describe])).toEqual([
+      ['query', 'LogQL expression'],
+    ]);
+    expect(Object.keys(sub.options)).toEqual(['since']);
+  });
 });
 
 describe('parseCommandFile: modules that mount each other', () => {

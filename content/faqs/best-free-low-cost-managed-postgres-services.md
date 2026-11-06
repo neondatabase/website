@@ -5,8 +5,8 @@ createdAt: '2026-04-25T00:00:00.000Z'
 updatedOn: '2026-10-01T14:57:15.000Z'
 isDraft: false
 previousLink:
-  title: 'Which managed Postgres options are affordable for early-stage startups that need a production database but have unpredictable traffic?'
-  slug: affordable-managed-postgres-options-startups
+  title: 'Will an all-in-one backend lock me in?'
+  slug: best-backend-without-vendor-lock-in
 nextLink:
   title: 'What are the best managed Postgres databases for multi-tenant SaaS apps where each customer should have their own isolated database?'
   slug: best-managed-postgres-databases-multi-tenant-saas

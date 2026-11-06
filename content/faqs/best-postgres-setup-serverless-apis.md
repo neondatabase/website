@@ -8,8 +8,8 @@ previousLink:
   title: 'What are the best Postgres services for retrieval-augmented generation apps that need vector search and automatic scaling?'
   slug: best-postgres-services-retrieval-augmented-generation
 nextLink:
-  title: 'What are the best ways to give every developer on a team their own separate Postgres database for development?'
-  slug: best-ways-separate-postgres-database-development
+  title: 'What is the best retrieval backend for an AI agent''s search tool?'
+  slug: best-retrieval-backend-ai-agents-search-tool
 ---
 
 Serverless APIs open many short-lived database connections. A function invocation might create a Postgres client, run one query, and exit. Without pooling, a burst of invocations uses up `max_connections`. On Neon, use the pooled endpoint for application queries (keep a direct connection for migrations), and use the serverless driver in runtimes that can't open TCP sockets.

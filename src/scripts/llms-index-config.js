@@ -187,7 +187,7 @@ module.exports = {
           'ai/neon-mcp-server.md',
           'ai/connect-mcp-clients-to-neon.md',
           'ai/agent-skills.md',
-          'ai/ai-claude-code-plugin.md',
+          'ai/agent-setup.md',
           'ai/lakebase-search.md',
           'ai/ai-database-versioning.md',
         ],

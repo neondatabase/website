@@ -10,6 +10,8 @@ summary: >-
   and rate-limited (exceeding attempts returns `TOO_MANY_ATTEMPTS`), and
   production deployments require a dedicated SMTP provider.
 enableTableOfContents: true
+redirectFrom:
+  - /docs/auth/guides/email-otp
 updatedOn: '2026-11-05T12:32:49.453Z'
 ---
 

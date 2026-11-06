@@ -50,7 +50,7 @@ Before you begin, ensure you have the following:
 - **Upstash credentials:** An API key from the [Upstash Console](https://console.upstash.com) for Box.
 
 <Admonition type="note" title="AI model access">
-This guide uses the [Neon AI Gateway](/docs/ai-gateway/overview) to access the AI model, which requires a Launch or Scale plan with [prepaid credits](/docs/ai-gateway/prepaid-credits). If you prefer to use your own model provider, you can bring your own API key (for example, an [Anthropic API key](https://platform.claude.com/settings/keys)) and configure Mastra to use it directly as described in the [Mastra Anthropic provider docs](https://mastra.ai/models/providers/anthropic).
+This guide uses the [Neon AI Gateway](/docs/ai-gateway/overview) to access the AI model, which needs [prepaid credits](/docs/ai-gateway/prepaid-credits). You can buy them on any plan, including Free. If you prefer to use your own model provider, you can bring your own API key (for example, an [Anthropic API key](https://platform.claude.com/settings/keys)) and configure Mastra to use it directly as described in the [Mastra Anthropic provider docs](https://mastra.ai/models/providers/anthropic).
 </Admonition>
 
 <Steps>
@@ -274,7 +274,7 @@ UPSTASH_BOX_SNAPSHOT_ID=your_snapshot_id
 
 Now update the function declaration. `neon link` generated a starter `neon.ts`; update the `functions` block to point to the `analyst.ts` source file you'll create later and inject the secrets from `.env.local`:
 
-```ts filename="neon.ts" {5-19}
+```ts filename="neon.ts" {5-18}
 import { defineConfig } from '@neon/config/v1';
 
 export default defineConfig({
@@ -290,7 +290,6 @@ export default defineConfig({
         UPSTASH_BOX_SNAPSHOT_ID: process.env.UPSTASH_BOX_SNAPSHOT_ID!,
         SLACK_BOT_TOKEN: process.env.SLACK_BOT_TOKEN ?? '',
         SLACK_SIGNING_SECRET: process.env.SLACK_SIGNING_SECRET ?? '',
-        NEON_FUNCTION_ANALYST_BASE_URL: process.env.NEON_FUNCTION_ANALYST_BASE_URL!,
       }
     }
   },
@@ -303,8 +302,6 @@ export default defineConfig({
 ```
 
 The `env` block injects your secrets into the function at deploy time. The two Slack values use `?? ''` because you won't have them until you create the Slack app in a later step. The empty fallback lets this first deploy succeed and gives you the function URL, but the function won't load until both Slack values are set. You'll redeploy with the real values right after.
-
-`NEON_FUNCTION_ANALYST_BASE_URL` is the function's public URL, which `neon link` writes to `.env.local`. Neon doesn't inject it into a deployed function, but `parseEnv(config, 'analyst')` in the next step requires it, so pass it through here.
 
 You also don't list `DATABASE_URL` as Neon injects it automatically, because the function is deployed onto your branch. The per-session branch connection comes from the Neon SDK at runtime instead.
 
@@ -321,7 +318,7 @@ import config from '../../neon';
 export const env = parseEnv(config, 'analyst');
 ```
 
-[`parseEnv`](https://www.npmjs.com/package/@neon/env) validates the injected variables and returns a typed `env` object. Passing the function's slug (`analyst`) adds a typed `env.function` namespace for the variables you declared in `neon.ts`, so `env.function.NEON_API_KEY` is checked at build time instead of failing with a missing variable at runtime.
+[`parseEnv`](https://www.npmjs.com/package/@neon/env) validates the injected variables and returns a typed `env` object. Passing the function's slug (`analyst`) adds a typed `env.function` namespace for the variables you declared in `neon.ts`, so `env.function.NEON_API_KEY` is checked at build time instead of failing with a missing variable at runtime. This guide needs `@neon/env` 2.0.0 or later.
 
 Then create `src/lib/neon.ts`:
 

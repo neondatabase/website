@@ -17,8 +17,8 @@
     - section: Start with Neon
       icon: start
       items:
-        - title: One-command setup
-          slug: get-started/with-an-agent
+        - title: Set up your AI agent
+          slug: ai/agent-setup
         - title: Full backend quickstart
           slug: get-started/full-backend-quickstart
         - title: Connect your app
@@ -256,10 +256,8 @@
             - title: Connection methods
               slug: connect/choose-connection
               items:
-                - title: Overview
+                - title: Neon MCP Server
                   slug: ai/neon-mcp-server
-                - title: Connect MCP clients
-                  slug: ai/connect-mcp-clients-to-neon
                 - title: Connect from any app
                   slug: connect/connect-from-any-app
                 - title: Neon serverless driver
@@ -1259,68 +1257,65 @@
             - title: Claimable database integration
               slug: workflows/claimable-database-integration
     - title: AI agents on Neon
-      slug: ai/ai-agents-tools
+      slug: ai/agent-setup
       icon: ai-agent
       items:
-        - section: Neon for AI Agents
+        - section: Set up your AI agent
           icon: ai-agent
+          items:
+            - title: Overview
+              slug: ai/agent-setup
+            - title: Claude Code
+              slug: ai/agent-setup/claude-code
+            - title: Cursor
+              slug: ai/agent-setup/cursor
+            - title: Codex
+              slug: ai/agent-setup/codex
+            - title: VS Code and GitHub Copilot
+              slug: ai/agent-setup/vscode
+            - title: Claude.ai and Claude Desktop
+              slug: ai/agent-setup/claude-ai
+            - title: ChatGPT
+              slug: ai/agent-setup/chatgpt
+            - title: Grok Bot
+              slug: ai/agent-setup/grok-bot
+            - title: Other agents
+              slug: ai/connect-mcp-clients-to-neon
+        - section: Reference
+          icon: docs
+          items:
+            - title: Neon MCP Server
+              slug: ai/neon-mcp-server
+            - title: Agent Skills
+              slug: ai/agent-skills
+        - section: Build agents on Neon
+          icon: openai
           items:
             - title: Agent plan
               slug: introduction/agent-plan
             - title: AI Agent integration
               slug: guides/ai-agent-integration
-        - title: AI for Agents
-          icon: ai-agent
-          slug: ai/ai-agents-tools
+            - title: Neon for Agent platforms
+              slug: https://neon.com/use-cases/ai-agents
+            - title: Database versioning
+              slug: ai/ai-database-versioning
+            - title: Neon API Reference
+              slug: reference/api
+            - title: Lakebase Search
+              slug: ai/lakebase-search
+        - section: Agent frameworks
+          icon: frameworks
           items:
-            - title: Overview
-              slug: ai/ai-agents-tools
-            - section: MCP integration
-              icon: api
-              items:
-                - title: Overview
-                  slug: ai/neon-mcp-server
-                - title: Connect MCP clients
-                  slug: ai/connect-mcp-clients-to-neon
-            - section: Agent Skills
-              icon: docs
-              items:
-                - title: Agent Skills
-                  slug: ai/agent-skills
-                - title: Claude Code plugin
-                  slug: ai/ai-claude-code-plugin
-                - title: Codex plugin
-                  slug: ai/ai-codex-plugin
-                - title: Cursor plugin
-                  slug: ai/ai-cursor-plugin
-                - title: Grok Bot plugin
-                  slug: ai/ai-grok-bot-plugin
-                - title: GitHub Copilot agents
-                  slug: ai/ai-github-copilot-agents
-            - section: Build AI agents
-              icon: openai
-              items:
-                - title: Neon for Agent platforms
-                  slug: https://neon.com/use-cases/ai-agents
-                - title: Database versioning
-                  slug: ai/ai-database-versioning
-                - title: Neon API Reference
-                  slug: reference/api
-                - title: Lakebase Search
-                  slug: ai/lakebase-search
-            - section: Agent frameworks
-              icon: frameworks
-              items:
-                - title: AgentStack
-                  slug: https://neon.com/guides/agentstack-neon
-                - title: AutoGen
-                  slug: https://neon.com/guides/autogen-neon
-                - title: Azure AI Agent Service
-                  slug: https://neon.com/guides/azure-ai-agent-service
-                - title: Composio + CrewAI
-                  slug: https://neon.com/guides/composio-crewai-neon
-                - title: LangGraph
-                  slug: https://neon.com/guides/langgraph-neon
+            - title: AgentStack
+              slug: https://neon.com/guides/agentstack-neon
+            - title: AutoGen
+              slug: https://neon.com/guides/autogen-neon
+            - title: Azure AI Agent Service
+              slug: https://neon.com/guides/azure-ai-agent-service
+            - title: Composio + CrewAI
+              slug: https://neon.com/guides/composio-crewai-neon
+            - title: LangGraph
+              slug: https://neon.com/guides/langgraph-neon
 
 - nav: Reference
   title: Reference
@@ -1518,9 +1513,6 @@
                       slug: guides/cloudflare-pages
                     - title: Cloudflare Workers
                       slug: guides/cloudflare-workers
-                - title: Deno
-                  slug: guides/deno
-                  tag: deprecated
                 - title: Heroku
                   slug: guides/heroku
                 - title: Koyeb
@@ -1586,16 +1578,10 @@
                   slug: guides/draxlr
                 - title: Exograph
                   slug: guides/exograph
-                - title: Grafbase
-                  slug: guides/grafbase
-                  tag: deprecated
                 - title: Hasura
                   slug: guides/hasura
                 - title: PostgREST
                   slug: guides/postgrest
-                - title: WunderGraph
-                  slug: guides/wundergraph
-                  tag: deprecated
             - title: Replicate from Neon
               items:
                 - title: Airbyte
@@ -1686,6 +1672,9 @@
                   slug: serverless/serverless-driver
                 - title: Trigger serverless functions with Inngest
                   slug: guides/trigger-serverless-functions
+        - title: Set up your AI agent
+          icon: ai-agent
+          slug: ai/agent-setup
         - title: Local development
           icon: container
           slug: local/neon-local

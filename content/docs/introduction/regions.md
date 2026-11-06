@@ -10,6 +10,7 @@ enableTableOfContents: true
 isDraft: false
 redirectFrom:
   - /docs/conceptual-guides/regions
+  - /docs/manage/regions
 updatedOn: '2026-10-14T21:25:07.454Z'
 ---
 
@@ -47,7 +48,7 @@ You can create a project in any region listed above, but not every backend produ
 | `aws-ap-southeast-2` (Sydney)    |    ✅    |         ✅          |       —        |     —     |     —      |    —     |
 | `aws-sa-east-1` (São Paulo)      |    ✅    |         ✅          |       —        |     —     |     —      |    —     |
 
-The AI Gateway requires a paid plan.
+The AI Gateway is available on any plan with [prepaid credits](/docs/ai-gateway/prepaid-credits).
 
 For the latest details and usage limits, see each product's overview: [Lakebase Postgres](/docs/postgres/overview), [Managed Better Auth](/docs/auth/overview), [Object Storage](/docs/storage/overview), [Functions](/docs/compute/functions/overview), [AI Gateway](/docs/ai-gateway/overview).
 

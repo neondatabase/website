@@ -7,8 +7,8 @@ summary: >-
   Postgres.js, or the Neon serverless driver (@neondatabase/serverless). Each
   driver section includes working CRUD examples covering table creation, insert,
   select, update, and delete. The Neon serverless driver connects over HTTP and
-  suits serverless and edge runtimes. Bun and Deno users are directed to
-  separate guides.
+  suits serverless and edge runtimes. Bun users are directed to a separate
+  guide.
 enableTableOfContents: true
 updatedOn: '2026-10-14T02:43:52.455Z'
 ---
@@ -676,12 +676,9 @@ Explore these guides to integrate popular data tools with Neon:
 - [Call an LLM with AI Gateway](/docs/ai-gateway/overview): Access foundation models from Anthropic, OpenAI, Google, and more with one credential
 - [Add Realtime](/docs/realtime/overview): Make any SQL query live, with end-to-end, type-safe reactivity for apps and agents
 
-## Using Bun or Deno
+## Using Bun
 
-If you are using Bun or Deno, you can also connect to Neon databases using the Neon serverless driver or other Postgres clients. Follow these guides for more information:
-
-- [Connect with Bun](/docs/guides/bun)
-- [Connect with Deno](/docs/guides/deno)
+If you are using Bun, you can also connect to Neon databases using the Neon serverless driver or other Postgres clients. See [Connect with Bun](/docs/guides/bun).
 
 ## Source code
 

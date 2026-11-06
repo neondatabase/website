@@ -1,22 +1,22 @@
 ---
-title: Grok Bot plugin for Neon
+title: Set up Neon in Grok Bot
+subtitle: Add the Neon plugin to Grok Bot to work with projects, branches, and SQL from chat
 summary: >-
-  Connect Neon to Grok Bot so you can create projects, work with branches and
+  Connect Neon to Grok Bot so you can create projects, work with branches, and
   run SQL from chat.
-description: >-
-  Install the Neon plugin in Grok Bot to create projects, work with branches
-  and run SQL from chat.
 enableTableOfContents: true
-updatedOn: '2026-11-01T14:46:44.000Z'
+redirectFrom:
+  - /docs/ai/ai-grok-bot-plugin
+updatedOn: '2026-11-05T13:53:34.719Z'
 ---
 
-The Neon plugin for Grok Bot connects your Neon account. After you authorize it, you can create projects, work with branches and run SQL without leaving Grok Bot.
+The Neon plugin for Grok Bot connects your Neon account. After you authorize it, you can create projects, work with branches, and run SQL without leaving Grok Bot.
 
 ## Install the plugin
 
 [Add the Neon plugin](grokbot://app/v1/plugin/add?id=669) in Grok Bot. The link opens the Neon Postgres plugin page.
 
-If the link does not open Grok Bot, install from the plugins directory:
+If the link doesn't open Grok Bot, install from the plugins directory:
 
 1. Launch Grok Bot.
 2. Select **Plugins** in the sidebar.
@@ -55,16 +55,12 @@ Once it's connected, you can ask a bot to:
 
 ![Grok Bot using the Neon plugin to list organizations](/docs/ai/grok_bot_chat.png 'no-border')
 
-Try one of these:
-
-Create a project and connect your app:
+For example:
 
 ```text
 Create a Neon project for this application and help me connect to it.
 ```
 
-Create a branch for a migration:
+To use Neon from a coding agent instead, see [Set up your AI agent](/docs/ai/agent-setup).
 
-```text
-Create an isolated Neon branch for testing this migration.
-```
+<NeedHelp/>

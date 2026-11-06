@@ -16,6 +16,7 @@ const sharedMdxComponents = {
   AgentSkillsTip: 'shared-content/agent-skills-tip',
   AuthAISetup: 'shared-content/auth-ai-setup',
   AuthAISetupTip: 'shared-content/auth-ai-setup-tip',
+  NeonPluginContents: 'shared-content/neon-plugin-contents',
   AzureRegionsDeprecation: 'shared-content/azure-regions-deprecation',
   ConsumptionAccountApiDeprecation: 'shared-content/consumption-account-api-deprecation',
   NextjsProxyNote: 'shared-content/nextjs-proxy-note',
