@@ -8,7 +8,7 @@ summary: >-
   mapping, common log entries that look like a problem but aren't, and
   wiring up application instrumentation like Sentry or OpenTelemetry.
 enableTableOfContents: true
-updatedOn: '2026-11-04T16:47:40.419Z'
+updatedOn: '2026-11-05T01:16:03.199Z'
 ---
 
 Every deployed function streams its logs to the Neon Console: everything your handler and its dependencies write with `console.log`, `console.info`, `console.warn`, `console.error`, or `console.debug`, plus a platform-emitted `invoke begin` / `invoke end` line around each request:
@@ -91,10 +91,10 @@ attachDatabasePool(pool, {
 
 For details on filtering by level or service name, searching log bodies, live tail, downloading logs, and the 3-day retention window, see [Monitor logs](/docs/introduction/monitor-logs).
 
-You can also read function logs from the terminal with [`neon logs query`](/docs/cli/logs), scoped with `--source function`:
+You can also read function logs from the terminal with [`neon logs query`](/docs/cli/logs). `--source function` returns every function on the branch, and `--service-name neon-function/<slug>` narrows it to one:
 
 ```bash
-neon logs query --source function --since 1h
+neon logs query --source function --service-name neon-function/hello --since 1h
 ```
 
 <NeedHelp/>
