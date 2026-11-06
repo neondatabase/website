@@ -1511,9 +1511,6 @@
                       slug: guides/cloudflare-pages
                     - title: Cloudflare Workers
                       slug: guides/cloudflare-workers
-                - title: Deno
-                  slug: guides/deno
-                  tag: deprecated
                 - title: Heroku
                   slug: guides/heroku
                 - title: Koyeb
@@ -1579,16 +1576,10 @@
                   slug: guides/draxlr
                 - title: Exograph
                   slug: guides/exograph
-                - title: Grafbase
-                  slug: guides/grafbase
-                  tag: deprecated
                 - title: Hasura
                   slug: guides/hasura
                 - title: PostgREST
                   slug: guides/postgrest
-                - title: WunderGraph
-                  slug: guides/wundergraph
-                  tag: deprecated
             - title: Replicate from Neon
               items:
                 - title: Airbyte

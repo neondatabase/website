@@ -33,7 +33,7 @@ When this prompt is triggered, automatically configure the open Nuxt.js project 
 
 1.  **Prompt the user to select a PostgreSQL driver.** The best choice depends on where they deploy:
 
-    -   **`@neondatabase/serverless`:** Connects over HTTP/WebSocket. Best for serverless and edge platforms without their own pooling (Netlify, Deno Deploy, Cloudflare Workers).
+    -   **`@neondatabase/serverless`:** Connects over HTTP/WebSocket. Best for serverless and edge platforms without their own pooling (Netlify, Cloudflare Workers).
     -   **`postgres` (postgres.js) or `pg` (node-postgres):** Standard TCP drivers. Best for long-lived servers (Railway, Render, a VPS, Docker), and for Vercel/Cloudflare with their platform pooling.
 
     Ask the user to choose one and do not proceed until they do. For a full breakdown, point them to https://neon.com/docs/connect/choose-connection.
