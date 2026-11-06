@@ -2312,7 +2312,7 @@
       "openjev-qwen35-4b": {
         "id": "openjev-qwen35-4b",
         "name": "OpenJev (Qwen 3.5 4B)",
-        "lab": "typesafe",
+        "lab": "alibaba",
         "provider": "databricks",
         "family": "openjev",
         "released": true,
@@ -2379,6 +2379,44 @@
           "input": 4,
           "output": 20,
           "cache_read": 0.2
+        }
+      },
+      "kimi-k3-1-pro": {
+        "id": "kimi-k3-1-pro",
+        "name": "Kimi K3.1 Pro",
+        "lab": "moonshotai",
+        "provider": "databricks",
+        "family": "kimi-k3-1",
+        "released": true,
+        "attachment": true,
+        "reasoning": true,
+        "reasoning_options": [
+          {
+            "type": "toggle"
+          },
+          {
+            "type": "effort",
+            "values": ["none", "minimal", "low", "medium", "high", "max"]
+          }
+        ],
+        "tool_call": true,
+        "temperature": true,
+        "structured_output": true,
+        "open_weights": true,
+        "release_date": "2026-11-04",
+        "last_updated": "2026-11-04",
+        "modalities": {
+          "input": ["text", "image"],
+          "output": ["text"]
+        },
+        "limit": {
+          "context": 1048576,
+          "output": 65536
+        },
+        "cost": {
+          "input": 0,
+          "output": 0,
+          "cache_read": 0
         }
       }
     }
