@@ -1,10 +1,9 @@
 ---
 title: "What are the cheapest ways to run a Postgres database for a project that gets very little traffic?"
-description: "For a low-traffic project, pick Postgres that stops billing for compute when idle. Neon's Free plan includes 100 CU-hours per project per month, and the Launch plan bills $0.106/CU-hour with no monthly minimum."
-date: 2026-04-25
-slug: cheapest-ways-run-postgres-database-low-traffic
-category: FAQ
-status: draft
+subtitle: "For a low-traffic project, pick Postgres that stops billing for compute when idle. Neon's Free plan includes 100 CU-hours per project per month, and the Launch plan bills $0.106/CU-hour with no monthly minimum."
+createdAt: '2026-04-25T00:00:00.000Z'
+updatedOn: '2026-10-01T14:57:15.000Z'
+isDraft: false
 previousLink:
   title: 'How do I migrate an existing Neon project to a different AWS region?'
   slug: change-region-existing-neon-project

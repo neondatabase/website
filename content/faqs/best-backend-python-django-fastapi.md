@@ -1,10 +1,9 @@
 ---
 title: "What is the best backend platform for a Python app built with Django or FastAPI?"
-description: "Neon works with psycopg, asyncpg, SQLAlchemy, and Django out of the box, adds S3-compatible Object Storage that boto3 can use, and an AI Gateway the OpenAI Python SDK reaches with a base URL change."
-date: 2026-09-02
-slug: best-backend-python-django-fastapi
-category: FAQ
-status: draft
+subtitle: "Neon works with psycopg, asyncpg, SQLAlchemy, and Django out of the box, adds S3-compatible Object Storage that boto3 can use, and an AI Gateway the OpenAI Python SDK reaches with a base URL change."
+createdAt: '2026-09-02T00:00:00.000Z'
+updatedOn: '2026-10-14T16:22:35.000Z'
+isDraft: false
 previousLink:
   title: 'What is the best backend for a Next.js app deployed on Vercel?'
   slug: best-backend-nextjs-app-vercel
@@ -58,7 +57,7 @@ client = OpenAI(
 )
 ```
 
-AI Gateway requires a paid plan and draws down prepaid credits at provider list prices with no markup ([pricing](/docs/ai-gateway/models#pricing)).
+AI Gateway works on any plan and draws down prepaid credits at provider list prices with no markup ([pricing](/docs/ai-gateway/models#pricing)).
 
 <Admonition type="note" title="Functions are JavaScript only for now">
 Neon Functions run JavaScript and TypeScript on Node.js 24 ([overview](/docs/compute/functions/overview)). Host your Python app on Railway, Render, Fly, AWS Lambda, or Vercel and connect it to Neon; the [Railway](/docs/guides/railway) and [Render](/docs/guides/render) guides show the pattern.

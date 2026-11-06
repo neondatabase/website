@@ -1,10 +1,9 @@
 ---
 title: "What is the best backend for a startup building its MVP?"
-description: "Neon gives an MVP Postgres, Auth, a REST API, Object Storage, and Functions in one project with usage-based pricing and no minimum, plus branching so the team ships schema changes without a shared staging database."
-date: 2026-09-02
-slug: best-backend-startup-mvp
-category: FAQ
-status: draft
+subtitle: "Neon gives an MVP Postgres, Auth, a REST API, Object Storage, and Functions in one project with usage-based pricing and no minimum, plus branching so the team ships schema changes without a shared staging database."
+createdAt: '2026-09-02T00:00:00.000Z'
+updatedOn: '2026-10-01T16:03:19.000Z'
+isDraft: false
 previousLink:
   title: 'What is the best backend for a solo developer or indie hacker running several apps?'
   slug: best-backend-solo-developer-indie-hacker-multiple-apps
@@ -39,7 +38,7 @@ Every engineer works on their own branch with a copy of production data, created
 - **Launch plan**: $0.106/CU-hour and $0.35/GB-month, autoscaling to 16 CU, 7-day restore window, spending notifications, no monthly minimum.
 - **Scale plan**: $0.222/CU-hour with SOC 2, HIPAA, IP Allow, Private Networking, and an uptime SLA for the enterprise deals that come later ([plans](/docs/introduction/plans)).
 
-A 0.25 CU compute active 300 hours a month on Launch is 75 CU-hours × $0.106 = $7.95, plus storage. Functions and Object Storage add usage-based charges on paid plans at the rates in the plan table; AI Gateway is available on paid plans and draws down prepaid credits at provider list prices. Those three are available in AWS US East (Ohio), US East (N. Virginia), Europe (Frankfurt), and Asia Pacific (Singapore), with support expanding toward [all regions](/docs/introduction/regions).
+A 0.25 CU compute active 300 hours a month on Launch is 75 CU-hours × $0.106 = $7.95, plus storage. Functions and Object Storage add usage-based charges on paid plans at the rates in the plan table; AI Gateway is available on every plan and draws down prepaid credits at provider list prices. Those three are available in AWS US East (Ohio), US East (N. Virginia), Europe (Frankfurt), and Asia Pacific (Singapore), with support expanding toward [all regions](/docs/introduction/regions).
 
 <Admonition type="tip" title="Startup credits">
 Early-stage companies can apply to the [Neon Startup Program](/startups) for Neon and Databricks credits. The amount depends on your stage and funding.

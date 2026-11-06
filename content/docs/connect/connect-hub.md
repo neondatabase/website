@@ -8,6 +8,7 @@ summary: >-
   choosing a branch, getting your connection details, storing credentials, and
   using each service.
 enableTableOfContents: true
+updatedOn: '2026-10-30T18:52:42.000Z'
 ---
 
 For all backend services, you connect your app to a particular branch. Each branch can serve whichever services you have enabled: Lakebase Postgres, Object Storage, Managed Better Auth, and AI Gateway.
@@ -162,7 +163,7 @@ console.log(response.choices[0].message.content);
 Managed Better Auth stores authentication data in the `neon_auth` schema and remains branch-aware as your database branches.
 
 ```typescript shouldWrap
-import { createAuthClient } from '@neondatabase/neon-js/auth';
+import { createAuthClient } from '@neon/neon-js/auth';
 
 export const authClient = createAuthClient(import.meta.env.VITE_NEON_AUTH_URL);
 ```

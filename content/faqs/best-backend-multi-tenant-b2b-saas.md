@@ -1,10 +1,9 @@
 ---
 title: "What is the best backend platform for a multi-tenant B2B SaaS?"
-description: "Neon supports both shared-schema tenancy with Row-Level Security and a project-per-customer model provisioned by API, with Auth, per-tenant restore, and compute that scales to zero for idle tenants."
-date: 2026-09-02
-slug: best-backend-multi-tenant-b2b-saas
-category: FAQ
-status: draft
+subtitle: "Neon supports both shared-schema tenancy with Row-Level Security and a project-per-customer model provisioned by API, with Auth, per-tenant restore, and compute that scales to zero for idle tenants."
+createdAt: '2026-09-02T00:00:00.000Z'
+updatedOn: '2026-10-14T13:01:29.000Z'
+isDraft: false
 previousLink:
   title: 'What is the best backend for teams moving off Firebase who want Postgres?'
   slug: best-backend-moving-off-firebase-to-postgres

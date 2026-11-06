@@ -14,30 +14,26 @@ enableTableOfContents: true
 updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
-This guide demonstrates how you could use Time Travel to address a common development scenario: debugging issues following a CI/CD deployment to production.
+This tutorial shows how to use Time Travel to debug a common problem: an issue that appears right after a CI/CD deployment to production.
 
-In this scenario, your team has recently introduced a streamlined checkout process, managed by a `new_checkout_process` feature flag. Soon after this flag was enabled, customer support started receiving complaints related to the new feature. As a developer, you're tasked with investigating the issues to confirm whether they are directly linked to the feature's activation.
+In this scenario, your team has released a streamlined checkout process behind a `new_checkout_process` feature flag. Soon after the flag was turned on, customer support started getting complaints about checkout. You need to confirm whether the complaints line up with the moment the feature was activated.
 
-## Before You Start
+## Before you start
 
-To follow this tutorial, you'll need:
+To follow this tutorial, you need:
 
-- A Neon account. [Sign up here](/docs/get-started/signing-up).
-- A [history window](/docs/introduction/history-window) that covers the timeframe of interest, allowing for effective use of Time Travel.
+- A Neon account. If you don't have one, see [Sign up](/docs/get-started/signing-up).
+- A [history window](/docs/postgres/backup-restore/history-window) that covers the time period you want to query. Time Travel can only query points in time inside your history window.
 
 <Steps>
 
-## Preparing Your Database
+## Prepare your database
 
-To simulate this scenario, create a `feature_flags` table used for controlling new feature availability.
+To simulate this scenario, create a `feature_flags` table that controls which features are available.
 
-1. **Create `project_db` Database:**
+1. In the Neon Console, select your branch, then open **Postgres database** > **SQL Editor**. This tutorial uses the default `neondb` database.
 
-   In the **Neon Console**, create a new database named `project_db`.
-
-2. **Initialize `feature_flags` Table:**
-
-   Execute the following in the **SQL Editor**, with `product_db` selected as the database:
+1. Create the `feature_flags` table:
 
    ```sql
    CREATE TABLE feature_flags (
@@ -46,78 +42,83 @@ To simulate this scenario, create a `feature_flags` table used for controlling n
    );
    ```
 
-3. **Insert Sample Data:**
-
-   Populate the table with an initial feature flag:
+1. Add a feature flag that starts out disabled:
 
    ```sql
    INSERT INTO feature_flags (feature_name, enabled)
    VALUES ('new_checkout_process', FALSE);
    ```
 
-This setup reflects a typical development stage: the feature is integrated and deployment-ready but remains inactive, awaiting activation.
+This mirrors a typical release stage: the feature is deployed, but it stays inactive until the flag is turned on.
 
-## Simulating Feature Flag Activation
+## Enable the feature flag
 
-Now, we'll simulate the process of enabling this feature flag to release the feature.
-
-### Enable the Feature Flag
-
-Execute the following SQL command in the **SQL Editor** to simulate activating the feature by changing the feature flag's status to `TRUE`.
+Run the following statement in the **SQL Editor** to turn on the feature:
 
 ```sql
 UPDATE feature_flags SET enabled = TRUE WHERE feature_name = 'new_checkout_process';
 ```
 
-This action mirrors enabling a new feature in your production environment, typically managed as part of your CI/CD pipeline.
+In production, a step like this usually runs as part of your CI/CD pipeline.
 
-## Determine exactly when the feature was enabled
+## Find when the feature was enabled
 
-Since user complaints started coming in right after the feature was enabled, our first debug step is to confirm the exact moment the `new_checkout_process` feature flag was activated. Assume we've checked the deployment logs or CI/CD pipeline history and found the activation timestamp to be `2025-08-06 at 10:52 PM IST`.
+Because the complaints started right after the release, your first step is to pin down exactly when the `new_checkout_process` flag was turned on. In a real investigation, you'd get this timestamp from your deployment logs or CI/CD pipeline history. In this tutorial, the activation time is `2025-08-06 at 10:52 PM IST`.
 
-For this tutorial, locate the timestamp of the `UPDATE` operation in the **History** tab of the **SQL Editor**:
+To find the timestamp of your own `UPDATE`, select **History** in the left pane of the **SQL Editor**:
 
-![select timestamp](/docs/guides/time_travel_tutorial_activation.png)
+![SQL Editor History pane showing the timestamp of the UPDATE statement](/docs/guides/time_travel_tutorial_activation.png)
 
 <Admonition type="note">
-Timestamps in the Neon Console are shown in your local timezone. The time in this screenshot 
-converts from `2025-08-06 at 10:52:00:00 PM IST` to `2025-08-06 at 5:22:00 PM UTC`.
+The Neon Console shows timestamps in your local time zone. The time in this screenshot, `2025-08-06 at 10:52 PM IST`, is `2025-08-06 at 5:22 PM UTC`.
 </Admonition>
 
-## Verifying Feature Flag Pre-Activation Status
+## Check the flag before activation
 
-Let's confirm that the feature was indeed disabled just before the feature flag's activation.
+Confirm that the feature was disabled just before the flag was turned on.
 
-1. Enable the Time Travel toggle in the **SQL Editor**.
+1. Select the **Time Travel** (🕣) icon in the **SQL Editor** and turn on **Time Travel Enabled**.
 
-1. Enter a time period just before the identified activation timestamp.
+1. In the date and time selector, choose a time just before the activation timestamp. This example uses `2025-08-06 at 10:51 PM IST`, one minute before activation.
 
-   For our purposes, we'll select `2025-08-06 at 10:51:00:00 PM IST`, which is one minute before our activation time.
+1. Run the query:
 
    ```sql
    SELECT * FROM feature_flags WHERE feature_name = 'new_checkout_process';
    ```
 
-   We'll see the feature flag shows as `f` for false, as expected.
+   The flag shows `f` (false), as expected.
 
-   ![check pre-activation](/docs/guides/time_travel_tutorial_before.png)
+   ![Time Travel query showing the flag disabled one minute before activation](/docs/guides/time_travel_tutorial_before.png)
 
-## Analyzing Post-Activation State
+## Check the flag after activation
 
-With the pre-activation state confirmed, now check the feature flag's status immediately after activation.
+Now check the flag's state just after activation.
 
-### Adjust Time Selector to Post-Activation:
+1. In the date and time selector, choose a time just after the activation timestamp. This example uses `2025-08-06 at 10:53 PM IST`, one minute after activation.
 
-Move to a time just after the feature's activation. For example, one minute after the timestamp copied from Step 2, so `2025-08-06 at 10:53:00:00 PM IST`. Re-execute the query.
+1. Run the same query again:
 
-```sql
-SELECT * FROM feature_flags WHERE feature_name = 'new_checkout_process';
-```
+   ```sql
+   SELECT * FROM feature_flags WHERE feature_name = 'new_checkout_process';
+   ```
 
-![check post-activation](/docs/guides/time_travel_tutorial_after.png)
+   The flag now shows `t` (true).
 
-Now, we see the `new_checkout_process` feature flag is `t` for true, confirming that enabling the feature caused the reported issues. With this confirmation we can move on to our follow-up actions: fix the problem, turn off the feature flag, update stakeholders, or engage in a feedback loop with users to refine the feature based on real-world usage.
+   ![Time Travel query showing the flag enabled one minute after activation](/docs/guides/time_travel_tutorial_after.png)
+
+The flag changed state at the same moment the complaints started, which points to the new checkout process as the likely cause. From here, you can turn off the flag, fix the problem, and update stakeholders.
 
 </Steps>
+
+## Use Time Travel from the CLI
+
+You can run the same point-in-time queries without the Console. The Neon CLI returns a connection string for a branch at a specific timestamp (RFC 3339 format), and `--psql` connects you directly:
+
+```bash
+neon connection-string main@2025-08-06T17:21:00Z --psql
+```
+
+Then run the same `SELECT` query. For more options, including connecting at a specific LSN, see [Time Travel](/docs/postgres/backup-restore/time-travel-assist).
 
 <NeedHelp/>

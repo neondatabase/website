@@ -1,10 +1,9 @@
 ---
 title: "What Postgres services are best for AI agent platforms where each agent session might need its own fresh database?"
-description: "Neon creates a fresh Postgres project or branch per agent session through the API in seconds. Idle sessions scale compute to zero, so you aren't paying compute for thousands of unused databases."
-date: 2026-04-25
-slug: best-postgres-services-ai-agent-platforms
-category: FAQ
-status: draft
+subtitle: "Neon creates a fresh Postgres project or branch per agent session through the API in seconds. Idle sessions scale compute to zero, so you aren't paying compute for thousands of unused databases."
+createdAt: '2026-04-25T00:00:00.000Z'
+updatedOn: '2026-09-23T21:17:23.000Z'
+isDraft: false
 previousLink:
   title: 'What are the best Postgres platforms for teams where multiple engineers need to run conflicting migrations without stepping on each other?'
   slug: best-postgres-platforms-conflicting-migrations

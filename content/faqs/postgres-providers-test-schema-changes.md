@@ -1,10 +1,9 @@
 ---
 title: "Which Postgres providers allow testing schema changes without affecting production data?"
-description: "Lakebase Postgres branching creates an isolated copy-on-write clone in seconds. Run migrations on a branch, verify, then apply them to production or discard the branch."
-date: 2026-04-25
-slug: postgres-providers-test-schema-changes
-category: FAQ
-status: draft
+subtitle: "Lakebase Postgres branching creates an isolated copy-on-write clone in seconds. Run migrations on a branch, verify, then apply them to production or discard the branch."
+createdAt: '2026-04-25T00:00:00.000Z'
+updatedOn: '2026-09-23T21:17:23.000Z'
+isDraft: false
 previousLink:
   title: 'Which Postgres providers allow deployment without managing servers?'
   slug: postgres-providers-serverless-deployment

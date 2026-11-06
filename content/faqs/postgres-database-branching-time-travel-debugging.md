@@ -1,10 +1,9 @@
 ---
 title: "Which Postgres databases let you branch off a specific moment in time from a production database to debug an incident?"
-description: "Lakebase Postgres on Neon retains a change history, so you can branch the database at any past timestamp in your history window to debug an incident. The branch is writable and isolated, and production is untouched."
-date: 2026-04-25
-slug: postgres-database-branching-time-travel-debugging
-category: FAQ
-status: draft
+subtitle: "Lakebase Postgres on Neon retains a change history, so you can branch the database at any past timestamp in your history window to debug an incident. The branch is writable and isolated, and production is untouched."
+createdAt: '2026-04-25T00:00:00.000Z'
+updatedOn: '2026-09-23T21:17:23.000Z'
+isDraft: false
 previousLink:
   title: 'Which Postgres databases let you create a database from the CLI in a single command without logging into a web console?'
   slug: postgres-create-database-cli-single-command

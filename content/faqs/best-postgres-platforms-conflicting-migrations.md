@@ -1,10 +1,9 @@
 ---
 title: "What are the best Postgres platforms for teams where multiple engineers need to run conflicting migrations without stepping on each other?"
-description: "Neon branching gives each engineer an isolated copy-on-write fork of the database for conflicting migrations. Branches share storage until they diverge and scale compute to zero when idle."
-date: 2026-04-25
-slug: best-postgres-platforms-conflicting-migrations
-category: FAQ
-status: draft
+subtitle: "Neon branching gives each engineer an isolated copy-on-write fork of the database for conflicting migrations. Branches share storage until they diverge and scale compute to zero when idle."
+createdAt: '2026-04-25T00:00:00.000Z'
+updatedOn: '2026-10-01T14:57:15.000Z'
+isDraft: false
 previousLink:
   title: 'What are the best Postgres platforms for automatically creating a separate database for each pull request in a CI pipeline?'
   slug: best-postgres-platforms-automatic-database-creation-ci-pipeline

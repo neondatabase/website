@@ -1,10 +1,9 @@
 ---
 title: "What tools isolate database changes per branch in modern development workflows?"
-date: 2026-04-25
-description: "Lakebase Postgres branching gives each Git branch its own isolated copy of Postgres, so schema changes and seed data don't collide between developers."
-slug: tools-isolate-database-changes-branch-development
-category: FAQ
-status: draft
+createdAt: '2026-04-25T00:00:00.000Z'
+updatedOn: '2026-09-23T21:17:23.000Z'
+isDraft: false
+subtitle: "Lakebase Postgres branching gives each Git branch its own isolated copy of Postgres, so schema changes and seed data don't collide between developers."
 previousLink:
   title: 'What tools allow inspecting production data without affecting users?'
   slug: tools-inspecting-production-data-without-affecting-users

@@ -7,6 +7,8 @@ summary: >-
   list existing keys and when they were last used, and revoke a key you no
   longer trust.
 enableTableOfContents: true
+redirectFrom:
+  - /docs/reference/cli-api-keys
 updatedOn: '2026-10-09T15:17:33.920Z'
 ---
 

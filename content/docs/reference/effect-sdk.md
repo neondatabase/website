@@ -9,6 +9,7 @@ summary: >-
   rest of your Effect program. Provide the client with layer(config) or
   layerConfig, or create one directly with make(config).
 enableTableOfContents: true
+updatedOn: '2026-10-02T15:24:52.000Z'
 ---
 
 <InfoBlock>

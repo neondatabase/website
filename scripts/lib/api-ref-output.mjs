@@ -9,6 +9,11 @@ import {
 } from 'node:fs';
 import { resolve } from 'node:path';
 
+import { agentHeaderLines } from '../../src/constants/agent-directives.js';
+
+// Header for a whole API reference page: breadcrumb, then the docs index and agent skills lines.
+const pageHeader = (breadcrumb) => `${[`> ${breadcrumb}`, ...agentHeaderLines()].join('\n')}\n\n`;
+
 export function createApiRefPaths(root) {
   const dataRoot = resolve(root, 'src/data/api-ref');
   const markdownRoot = resolve(root, 'public/md/docs/reference/api');
@@ -76,9 +81,11 @@ export function writeTagMarkdownFiles(paths, tagOps, tagDisplay, toAgentMarkdown
     const tagTitle = tagDisplay[tag] || ops[0]?.tagDisplay || tag;
     const introPath = resolve(paths.apiDocsDir, `${tag}.md`);
     const intro = existsSync(introPath) ? readFileSync(introPath, 'utf-8').trim() : null;
-    const header = intro
-      ? `# ${tagTitle}\n\n${intro}\n`
-      : `# ${tagTitle}\n\nNeon Management API — ${tagTitle} endpoints.\n`;
+    const header =
+      pageHeader(`API Reference / ${tagTitle}`) +
+      (intro
+        ? `# ${tagTitle}\n\n${intro}\n`
+        : `# ${tagTitle}\n\nNeon Management API — ${tagTitle} endpoints.\n`);
     writeFileSync(
       resolve(paths.markdownTmp, `${tag}.md`),
       `${header}\n---\n\n${ops.map((op) => toAgentMarkdown(op)).join('\n---\n\n')}`
@@ -93,7 +100,10 @@ export function writeExtraApiDocs(paths, tagOps) {
     if (tagOps[base]) continue;
     const title = base.replace(/-/g, ' ').replace(/\b\w/g, (c) => c.toUpperCase());
     const content = readFileSync(resolve(paths.apiDocsDir, file), 'utf-8').trim();
-    writeFileSync(resolve(paths.markdownTmp, file), `# ${title}\n\n${content}\n`);
+    writeFileSync(
+      resolve(paths.markdownTmp, file),
+      `${pageHeader(`API Reference / ${title}`)}# ${title}\n\n${content}\n`
+    );
     extraDocCount++;
   }
   return extraDocCount;

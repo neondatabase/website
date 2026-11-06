@@ -10,6 +10,7 @@ import MODALS from 'components/pages/doc/modal/data';
 import selectModal from 'components/pages/doc/modal/select-modal';
 import Content from 'components/shared/content';
 import DocFooter from 'components/shared/doc-footer';
+import LastUpdatedDate from 'components/shared/doc-footer/last-updated-date';
 import Link from 'components/shared/link';
 import NavigationLinks from 'components/shared/navigation-links';
 import { DOCS_BASE_PATH } from 'constants/docs';
@@ -65,6 +66,7 @@ const Post = ({
     contentLayout = null,
     hideCopyPage = false,
     agentPrompt = null,
+    updatedOn = null,
   },
   content,
   breadcrumbs,
@@ -186,6 +188,7 @@ const Post = ({
                       {subtitle}
                     </p>
                   )}
+                  {updatedOn && <LastUpdatedDate className="mt-4" updatedOn={updatedOn} />}
                 </div>
               </>
             ) : (
@@ -241,7 +244,11 @@ const Post = ({
             />
           </article>
         )}
-        <DocFooter slug={currentSlug} gitHubPath={gitHubPath} />
+        <DocFooter
+          slug={currentSlug}
+          gitHubPath={gitHubPath}
+          updatedOn={isFaq || isChangelog ? null : updatedOn}
+        />
 
         {!isChangelog && (
           <NavigationLinks
@@ -282,6 +289,7 @@ Post.propTypes = {
     contentLayout: PropTypes.oneOf(['split', null]),
     hideCopyPage: PropTypes.bool,
     agentPrompt: PropTypes.string,
+    updatedOn: PropTypes.string,
   }).isRequired,
   content: PropTypes.string.isRequired,
   breadcrumbs: PropTypes.arrayOf(PropTypes.shape({})),

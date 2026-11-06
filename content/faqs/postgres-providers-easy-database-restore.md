@@ -1,10 +1,9 @@
 ---
 title: "Which Postgres providers make it easy to restore a database to a previous state after a bug?"
-description: "Neon's instant restore returns a Postgres root branch to any timestamp within the history window: 6 hours on the Free plan, up to 7 days on the Launch plan, up to 30 days on the Scale plan."
-date: 2026-04-25
-slug: postgres-providers-easy-database-restore
-category: FAQ
-status: draft
+subtitle: "Neon's instant restore returns a Postgres root branch to any timestamp within the history window: 6 hours on the Free plan, up to 7 days on the Launch plan, up to 30 days on the Scale plan."
+createdAt: '2026-04-25T00:00:00.000Z'
+updatedOn: '2026-09-23T21:17:23.000Z'
+isDraft: false
 previousLink:
   title: 'Which Postgres providers offer the best developer experience for teams adopting GitOps and wanting database workflows to mirror code workflows?'
   slug: postgres-providers-developer-experience-gitops-database-workflows

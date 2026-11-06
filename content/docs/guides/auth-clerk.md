@@ -182,17 +182,18 @@ npx drizzle-kit push:pg
 
 The `user_messages` table will now be visible in the console.
 
-### Add authentication middleware
+### Add the Clerk proxy
 
-The `Clerk` sdk handles user authentication and session management for us. Create a new file `middleware.ts` in the root directory so
-all the app routes are protected by Clerk's authentication:
+The Clerk SDK handles user authentication and session management for us. Create a new file `proxy.ts` in the root directory. Calling `auth.protect()` requires users to sign in before they can reach any app route, and redirects signed-out visitors to the Clerk sign-in page:
 
 ```typescript
-/// middleware.ts
+/// proxy.ts
 
 import { clerkMiddleware } from '@clerk/nextjs/server';
 
-export default clerkMiddleware();
+export default clerkMiddleware(async (auth) => {
+  await auth.protect();
+});
 
 export const config = {
   matcher: [
@@ -204,10 +205,15 @@ export const config = {
 };
 ```
 
+<Admonition type="note">
+Next.js 16 renamed `middleware.ts` to `proxy.ts`. On Next.js 15 or earlier, name the file `middleware.ts`. The code stays the same.
+</Admonition>
+
 Next, we wrap the full application with the `ClerkProvider` component, so all pages have access to the current session and user context. Replace the contents of the `app/layout.tsx` file with the following:
 
 ```tsx
 import type { Metadata } from 'next';
+import { Suspense } from 'react';
 import { Inter } from 'next/font/google';
 import './globals.css';
 import { ClerkProvider, UserButton } from '@clerk/nextjs';
@@ -225,21 +231,25 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <ClerkProvider>
-      <html lang="en">
-        <body className={inter.className}>
-          <div className="bg-white p-4">
-            <UserButton showName={true}></UserButton>
-          </div>
-          {children}
-        </body>
-      </html>
-    </ClerkProvider>
+    <html lang="en">
+      <body className={inter.className}>
+        <Suspense fallback={null}>
+          <ClerkProvider>
+            <div className="bg-white p-4">
+              <UserButton showName={true}></UserButton>
+            </div>
+            {children}
+          </ClerkProvider>
+        </Suspense>
+      </body>
+    </html>
   );
 }
 ```
 
 This also adds a `UserButton` component to the layout, which displays the user's name and avatar when logged in.
+
+New Next.js 16 projects enable `cacheComponents`, which requires anything that reads request data, such as the session cookie, to render inside `<Suspense>`. Without it, `npm run build` fails with a prerendering error.
 
 ### Add interactivity to the application
 
@@ -357,7 +367,7 @@ This will start the Next.js development server. Open your browser and navigate t
 
 In this guide, we walked through setting up a simple Next.js application with user authentication using Clerk and a Lakebase Postgres database. We defined a database schema using Drizzle ORM, generated migrations, and interacted with the database to store and retrieve user data.
 
-Next, we can add more routes and features to the application. The Clerk middleware ensures that only authenticated users can access any app routes, and the `ClerkProvider` component provides the user context to each of them.
+Next, we can add more routes and features to the application. The Clerk proxy ensures that only authenticated users can access any app routes, and the `ClerkProvider` component provides the user context to each of them.
 
 To view and manage the users who authenticated with your application, you can navigate to the [Clerk Dashboard](https://dashboard.clerk.dev/).
 

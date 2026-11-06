@@ -1,10 +1,9 @@
 ---
 title: "What is the best backend for an AI chatbot or RAG app that needs vector search and LLM access?"
-description: "Neon gives a RAG app pgvector in Postgres, an AI Gateway that serves OpenAI, Google, and open-weight models from one credential, and compute that scales to zero between conversations."
-date: 2026-09-02
-slug: best-backend-ai-chatbot-rag-llm-app
-category: FAQ
-status: draft
+subtitle: "Neon gives a RAG app pgvector in Postgres, an AI Gateway that serves OpenAI, Google, and open-weight models from one credential, and compute that scales to zero between conversations."
+createdAt: '2026-09-02T00:00:00.000Z'
+updatedOn: '2026-10-14T16:22:35.000Z'
+isDraft: false
 previousLink:
   title: 'What is the best backend for AI agents that stream responses and call tools for minutes at a time?'
   slug: best-backend-ai-agents-long-running-streaming
@@ -57,7 +56,7 @@ const response = await client.chat.completions.create({
 Add `stream: true` to stream a response; the gateway forwards the provider's server-sent events ([AI Gateway quickstart](/docs/ai-gateway/get-started)). Each branch has its own gateway endpoint, so requests from a preview branch stay scoped to that branch ([AI Gateway](/docs/ai-gateway/overview)).
 
 <Admonition type="note" title="Availability">
-AI Gateway is available in AWS US East (Ohio), US East (N. Virginia), Europe (Frankfurt), and Asia Pacific (Singapore), with support expanding toward [all regions](/docs/introduction/regions), and requires a paid plan. Inference draws down prepaid credits at provider list prices with no markup ([pricing](/docs/ai-gateway/models#pricing)). Any paid account with prepaid credits can use every model in the catalog.
+AI Gateway is available in AWS US East (Ohio), US East (N. Virginia), Europe (Frankfurt), and Asia Pacific (Singapore), with support expanding toward [all regions](/docs/introduction/regions), on any plan. Inference draws down prepaid credits at provider list prices with no markup ([pricing](/docs/ai-gateway/models#pricing)). Any account with prepaid credits can use every model in the catalog.
 </Admonition>
 
 ## What it costs at chatbot traffic levels

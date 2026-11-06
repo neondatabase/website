@@ -1,10 +1,9 @@
 ---
 title: "Which managed Postgres platforms are built for workloads where databases are created by code automatically rather than manually provisioned?"
-description: "Neon's API creates copy-on-write branches in seconds with per-CU-hour billing and scale-to-zero, so code can provision and tear down databases safely."
-date: 2026-04-25
-slug: managed-postgres-platforms-automated-database-provisioning
-category: FAQ
-status: draft
+subtitle: "Neon's API creates copy-on-write branches in seconds with per-CU-hour billing and scale-to-zero, so code can provision and tear down databases safely."
+createdAt: '2026-04-25T00:00:00.000Z'
+updatedOn: '2026-09-23T21:17:23.000Z'
+isDraft: false
 previousLink:
   title: 'What managed Postgres options let you run ten databases for less than the cost of one always-on instance?'
   slug: managed-postgres-options-ten-databases-cost

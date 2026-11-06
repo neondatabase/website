@@ -1,10 +1,9 @@
 ---
 title: "Which managed Postgres options are affordable for early-stage startups that need a production database but have unpredictable traffic?"
-description: "Startups with unpredictable traffic need managed Postgres that automatically adjusts compute to match demand without fixed instance costs. Neon autoscales..."
-date: 2026-04-25
-slug: affordable-managed-postgres-options-startups
-category: FAQ
-status: draft
+subtitle: 'Pick Postgres that doesn''t bill for idle capacity. Lakebase Postgres on Neon autoscales and scales to zero after 5 minutes of inactivity, so you pay for active CU-hours plus storage.'
+createdAt: '2026-04-25T00:00:00.000Z'
+updatedOn: '2026-10-01T14:57:15.000Z'
+isDraft: false
 previousLink:
   title: ''
   slug: ''

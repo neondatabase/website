@@ -12,6 +12,8 @@ summary: >-
   manually because Stripe does not support e-Mandate recurring payments in
   India.
 enableTableOfContents: true
+redirectFrom:
+  - /docs/manage/billing
 updatedOn: '2026-10-27T20:26:38.639Z'
 ---
 
@@ -174,7 +176,7 @@ To upgrade or downgrade your plan:
 1. Select **Billing** from the menu.
 1. Select **Change plan**.
 
-Changing your plan to one with lower usage allowances may affect the performance of your applications. To compare plan allowances, see [Neon plans](/docs/introduction/plans#neon-plans).
+Changing your plan to one with lower usage allowances may affect the performance of your applications. To compare plan allowances, see [Neon plans](/docs/introduction/plans#plan-overview).
 
 If you are downgrading your plan, you will be required to remove any projects, branches, or data that exceed your new plan allowances.
 

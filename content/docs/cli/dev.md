@@ -7,6 +7,7 @@ summary: >-
   (optionally with --port for an explicit port), or omit --source to serve
   every function declared in neon.ts, each on its own dev server.
 enableTableOfContents: true
+updatedOn: '2026-10-15T16:35:46.000Z'
 ---
 
 The `dev` command runs [Neon Functions](/docs/compute/functions/overview) locally with a dev server and hot reload. Serve one function from its entry module, or every function declared in your `neon.ts` policy.

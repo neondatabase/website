@@ -10,6 +10,8 @@ summary: >-
   this page to understand archiving thresholds, blocking conditions, and how to
   monitor archive and unarchive operations via the Console, CLI, or API.
 enableTableOfContents: true
+redirectFrom:
+  - /docs/introduction/branch-archiving
 updatedOn: '2026-10-09T15:17:33.920Z'
 ---
 

@@ -612,7 +612,7 @@ Install the required packages for your project.
 <TwoColumnLayout.Block label="Terminal">
 
 ```bash
-npm install @neondatabase/neon-js
+npm install @neon/neon-js
 ```
 
 </TwoColumnLayout.Block>

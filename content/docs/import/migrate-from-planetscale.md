@@ -14,6 +14,7 @@ summary: >-
   pgloader workaround.
 enableTableOfContents: true
 isDraft: false
+updatedOn: '2026-10-01T14:57:15.000Z'
 ---
 
 This guide provides step-by-step instructions for migrating a PlanetScale MySQL database to Lakebase Postgres using the `pgloader` utility. `pgloader` is an open-source tool that facilitates data migration from various sources to Postgres, including MySQL databases like PlanetScale. It handles schema creation, data type mapping, and data transfer efficiently, making it a popular choice for MySQL to Postgres migrations.

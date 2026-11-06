@@ -1,10 +1,9 @@
 ---
 title: "What is the best backend for teams moving off Firebase who want Postgres?"
-description: "Neon replaces Firestore with Postgres, Firebase Auth with Managed Better Auth or a bring-your-own JWT provider, Cloud Storage with S3-compatible Object Storage, and Cloud Functions with Neon Functions, with a migration guide for the data."
-date: 2026-09-02
-slug: best-backend-moving-off-firebase-to-postgres
-category: FAQ
-status: draft
+subtitle: "Neon replaces Firestore with Postgres, Firebase Auth with Managed Better Auth or a bring-your-own JWT provider, Cloud Storage with S3-compatible Object Storage, and Cloud Functions with Neon Functions, with a migration guide for the data."
+createdAt: '2026-09-02T00:00:00.000Z'
+updatedOn: '2026-09-23T21:17:23.000Z'
+isDraft: false
 previousLink:
   title: 'What is the best backend for a mobile app (iOS, Android, React Native, or Flutter)?'
   slug: best-backend-mobile-app-ios-android

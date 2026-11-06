@@ -6,8 +6,8 @@ summary: >-
   password by clicking a time-limited link sent to their email, with expiration
   configurable from 5 to 1440 minutes. Use this page when you want to add
   passwordless email authentication to a project that already has Managed Better Auth
-  enabled, using either the Neon SDK's `signIn.magicLink()` method or the
-  `magicLink` prop on `NeonAuthUIProvider`. The plugin also supports a webhook
+  enabled, using either the Neon SDK's `signIn.magicLink()` method or Better Auth UI's
+  Magic Link plugin (`magicLinkPlugin()`). The plugin also supports a webhook
   event (`send.magic_link`) to bypass the built-in mailer and deliver links
   through a custom email provider.
 enableTableOfContents: true
@@ -89,35 +89,30 @@ After calling `signIn.magicLink()`, show the user a "check your email" message. 
 
 ## Use Magic Link with UI components
 
-If you're already using Managed Better Auth UI components, you can enable Magic Link with a single prop instead of building a custom form. Pass the `magicLink` prop to `NeonAuthUIProvider`:
+If you're already using [Better Auth UI](/docs/auth/reference/ui-components), add its Magic Link components and pass the plugin to `AuthProvider` instead of building a custom form:
 
-```tsx shouldWrap filename="app/layout.tsx"
-'use client';
-
-import { authClient } from '@/lib/auth/client';
-import { NeonAuthUIProvider } from '@neondatabase/auth-ui';
-import '@neondatabase/auth-ui/css';
-import './globals.css';
-
-export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
-  return (
-    <html lang="en" suppressHydrationWarning>
-      <body className={'antialiased'}>
-        <NeonAuthUIProvider
-          authClient={authClient}
-          magicLink // [!code ++]
-        >
-          {children}
-        </NeonAuthUIProvider>
-      </body>
-    </html>
-  );
-}
+```bash
+npx shadcn@latest add @better-auth-ui/magic-link
 ```
+
+```tsx shouldWrap filename="components/providers.tsx"
+import { magicLinkPlugin } from '@/lib/auth/magic-link-plugin'; // [!code ++]
+
+<AuthProvider
+  authClient={authClient}
+  navigate={navigate}
+  Link={Link}
+  plugins={[magicLinkPlugin()]} // [!code ++]
+>
+  {children}
+</AuthProvider>
+```
+
+Add the plugin's views to your auth route's paths with `magicLinkPlugin().viewPaths.auth` from `@better-auth-ui/core/plugins/magic-link`. The UI plugin doesn't enable Magic Link on your branch; enable it in Managed Better Auth first.
 
 Users can now sign in with a magic link by selecting the option on the sign-in screen and entering their email.
 
-> If you haven't set up Managed Better Auth UI components yet, see the [UI components reference](/docs/auth/reference/ui-components) for setup, or the [Next.js](/docs/auth/quick-start/nextjs-api-only) or [React](/docs/auth/quick-start/react) quick start for building custom forms instead.
+> If you haven't set up Better Auth UI yet, see the [UI components reference](/docs/auth/reference/ui-components) for setup, or the [Next.js](/docs/auth/quick-start/nextjs-api-only) or [React](/docs/auth/quick-start/react) quick start for building custom forms instead.
 
 ## Webhooks
 

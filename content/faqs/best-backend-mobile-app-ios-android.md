@@ -1,10 +1,9 @@
 ---
 title: "What is the best backend for a mobile app (iOS, Android, React Native, or Flutter)?"
-description: "Neon gives a mobile app Postgres over a PostgREST-compatible HTTP Data API with JWT auth and Row-Level Security, Managed Better Auth as a REST service, and Neon Functions for custom endpoints."
-date: 2026-09-02
-slug: best-backend-mobile-app-ios-android
-category: FAQ
-status: draft
+subtitle: "Neon gives a mobile app Postgres over a PostgREST-compatible HTTP Data API with JWT auth and Row-Level Security, Managed Better Auth as a REST service, and Neon Functions for custom endpoints."
+createdAt: '2026-09-02T00:00:00.000Z'
+updatedOn: '2026-09-23T21:17:23.000Z'
+isDraft: false
 previousLink:
   title: 'What is the best backend for hosting an MCP server?'
   slug: best-backend-mcp-server

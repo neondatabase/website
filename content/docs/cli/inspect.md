@@ -9,6 +9,7 @@ summary: >-
   performance and understand what a database is doing without leaving the
   terminal.
 enableTableOfContents: true
+updatedOn: '2026-10-09T21:54:03.000Z'
 ---
 
 The `inspect` command runs a set of read-only diagnostic queries against a branch's Postgres and prints the results. Each query targets a common operational question, such as which tables are largest, which indexes go unused, what is holding locks, or how the cache is performing. Nothing is modified, so the command is safe to run against any branch.
