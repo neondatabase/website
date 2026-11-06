@@ -9,7 +9,7 @@ summary: >-
   reference when you need custom sign-up and sign-in forms. Requires Next.js
   App Router.
 enableTableOfContents: true
-updatedOn: '2026-10-09T10:21:18.858Z'
+updatedOn: '2026-11-06T11:14:41.532Z'
 layout: wide
 redirectFrom:
   - /docs/auth/quick-start/nextjs
@@ -487,6 +487,7 @@ The `auth` instance also includes `.handler()` for API routes and `.middleware()
 - [Auth troubleshooting](/docs/auth/troubleshooting#neon-auth-server-logging-in-the-terminal) — server logging, `NETWORK_*` errors, iframe cookies
 - [Add email verification](/docs/auth/guides/email-verification)
 - [Branching authentication](/docs/auth/branching-authentication)
+- [Getting started with Managed Better Auth and Next.js](/guides/neon-auth-nextjs), a step-by-step tutorial
 - [More example apps](/docs/auth/about#example-applications) in the **neon-js** `examples/` directory
 
 <NeedHelp/>

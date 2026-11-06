@@ -8,7 +8,7 @@ summary: >-
 enableTableOfContents: true
 redirectFrom:
   - /docs/ai/mcp
-updatedOn: '2026-11-05T13:53:34.719Z'
+updatedOn: '2026-11-06T11:14:41.532Z'
 ---
 
 The Neon MCP Server implements the Model Context Protocol (MCP), letting AI assistants interact with your Neon projects on your behalf. Your AI agent can interact with Neon via MCP tools or by running [Neon CLI](/docs/cli) commands directly.
@@ -260,5 +260,8 @@ This typically means the cached OAuth credentials are stale. To fix it:
 - [Neon API Reference](/docs/reference/api)
 - [Neon API Keys](/docs/manage/api-keys#creating-api-keys)
 - [Neon MCP server GitHub](https://github.com/neondatabase/mcp-server-neon)
+- [Get started with Claude Code and Neon MCP Server](/guides/claude-code-mcp-neon)
+- [Get started with Cursor and the Neon MCP Server](/guides/cursor-mcp-neon)
+- [Get started with Claude Desktop and Neon MCP Server](/guides/neon-mcp-server)
 
 <NeedHelp/>

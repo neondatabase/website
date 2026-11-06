@@ -11,7 +11,7 @@ summary: >-
   automatic synchronization of max_connections and related Postgres parameters
   between primary and replica computes.
 enableTableOfContents: true
-updatedOn: '2026-09-25T09:40:59.046Z'
+updatedOn: '2026-11-06T11:14:41.532Z'
 ---
 
 [Read replicas](/docs/introduction/read-replicas) are supported with all Neon plans. On paid plans, you can add up to 6 read replicas per branch. The Free plan is limited to 3 read replica computes per project. This guide steps you through the process of creating and managing read replicas.
@@ -262,5 +262,9 @@ If your read replicas are falling behind, follow these steps to diagnose and res
    <Admonition type="tip">
    When increasing the size of your primary read-write compute, always restart associated read replicas to ensure their configurations remain aligned.
    </Admonition>
+
+## Resources
+
+- [Scale your Next.js application with Drizzle ORM and Lakebase Postgres read replicas](/guides/read-replica-drizzle)
 
 <NeedHelp/>
