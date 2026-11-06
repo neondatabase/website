@@ -374,13 +374,13 @@ Function logs come from `neon logs query --source function`, not the `functions`
 
 The API and CLI reject a bad request with an HTTP status and message:
 
-| Situation                                               | Status | Message                                        |
-| ------------------------------------------------------- | ------ | ---------------------------------------------- |
-| A trigger with that `name` already exists on the branch | `409`  | function trigger name already exists on branch |
-| Invalid cron expression                                 | `400`  | cron: cron value is outside field bounds       |
-| A `timezone` key inside `schedule`                      | `400`  | unexpected field "timezone"                    |
-| A query string in `function_path`                       | `400`  | invalid function trigger path                  |
-| No function with that slug on the branch                | `404`  | target function not visible on branch          |
+| Situation                                               | Status | Message                                                                          |
+| ------------------------------------------------------- | ------ | -------------------------------------------------------------------------------- |
+| A trigger with that `name` already exists on the branch | `409`  | function trigger name already exists on branch                                   |
+| Invalid cron expression                                 | `400`  | invalid function trigger configuration: cron: cron value is outside field bounds |
+| A `timezone` key inside `schedule`                      | `400`  | unexpected field "timezone"                                                      |
+| A query string in `function_path`                       | `400`  | invalid function trigger path                                                    |
+| No function with that slug on the branch                | `404`  | target function not visible on branch                                            |
 
 The request body is strict: any field not in the schema is rejected rather than ignored, so a typo fails loudly. In particular, the function is identified by `function_slug`; there's no `function_id` field.
 
