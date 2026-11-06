@@ -11,41 +11,40 @@ summary: >-
   environment by selecting a connection string based on NODE_ENV.
 enableTableOfContents: true
 agentPrompt: 'I want to use Drizzle ORM with it.'
-updatedOn: '2026-11-06T03:42:14.652Z'
+updatedOn: '2026-11-06T13:46:55.233Z'
 ---
 
 <div className="not-prose my-8 rounded-[10px] border border-gray-new-90 bg-gray-new-95 px-6 py-7 dark:border-gray-new-15 dark:bg-gray-new-10 [&>h2]:m-0 [&>h2]:mb-7 [&>h2]:w-fit [&>h2]:text-[28px] [&>h2]:leading-tight [&>h2]:font-medium [&>h2]:tracking-tighter [&>h2]:text-black-pure dark:[&>h2]:text-white [&_h3]:relative [&_h3]:mt-7 [&_h3]:mb-2 [&_h3]:w-fit [&_h3]:text-xl [&_h3]:font-semibold [&_h3]:tracking-tight [&_h3]:text-black-pure [&_h3]:before:absolute [&_h3]:before:-left-11 [&_h3]:before:top-px [&_h3]:before:flex [&_h3]:before:size-7 [&_h3]:before:items-center [&_h3]:before:justify-center [&_h3]:before:rounded-full [&_h3]:before:bg-black-new [&_h3]:before:text-[13px] [&_h3]:before:font-semibold [&_h3]:before:text-white [&_h3]:before:content-[counter(step)] [&_h3]:before:[counter-increment:step] dark:[&_h3]:text-white dark:[&_h3]:before:bg-white dark:[&_h3]:before:text-black-pure">
 
-## Set up with your agent
+## Build with your agent
 
 <div className="pl-11 [counter-reset:step] [&>h3:first-child]:mt-0!">
 
 ### Give your agent the skills
 
-<CopyLine header="Neon / neon-postgres / projects, branches, connection strings" text="Set me up for Neon. Fetch https://neon.com/prompts/agent-setup.md and follow it." />
+<p className="m-0 mb-3 text-[15px] leading-relaxed text-gray-new-30 dark:text-gray-new-70">Add skills to your project.</p>
 
-<CopyLine header="Drizzle / drizzle / schema, migrations, renames" text="Add the Drizzle skill to this project. Fetch https://orm.drizzle.team/docs/drizzle-kit-skills and follow it." />
+<CopyLine text="Set me up for Neon. Fetch https://neon.com/prompts/agent-setup.md and follow it." />
+
+<CopyLine text="Add the Drizzle skill to this project. Fetch https://orm.drizzle.team/docs/drizzle-kit-skills and follow it." />
 
 <p className="mt-3 text-[13px] leading-relaxed text-gray-new-50 dark:text-gray-new-60">The Drizzle skill is maintained by the <a href="https://orm.drizzle.team/docs/drizzle-kit-skills">Drizzle team</a> and currently ships in Drizzle Kit's v1 pre-release (drizzle-kit@rc), so the agent installs it once Drizzle is in your project.</p>
 
-### Point your agent at your project
+### Set up your project
 
 <p className="m-0 mb-3 text-[15px] leading-relaxed text-gray-new-30 dark:text-gray-new-70">The agent inspects your project, creates a Neon project if you need one, adds the connection string, and configures Drizzle to match.</p>
 
 <CopyLine text="Look at my project (check package.json, any existing schema, and my config), then set up Drizzle against Neon Postgres: create a Neon project if I need one, add the connection string, and configure Drizzle to match what you found." />
 
-### Keep going
-
-<p className="m-0 mb-3 text-[15px] leading-relaxed text-gray-new-30 dark:text-gray-new-70">Each prompt is a complete task. Copy one and paste it into your agent.</p>
+### More things to ask for
 
 <AgentPromptList
 items={[
-{ title: 'Generate a migration', text: 'Generate and apply a Drizzle Kit migration from my schema to Neon. Review the SQL before applying.', src: '/prompts/drizzle-migration.md' },
-{ title: 'Pooled vs direct URL', text: 'Use the direct Neon URL for Drizzle Kit migrations and the pooled URL for the app runtime. Update .env and drizzle.config.ts.', src: '/prompts/drizzle-pooled-direct.md' },
-{ title: 'Serverless HTTP driver', text: "Switch this project's Drizzle client to the Neon serverless HTTP driver so it works in edge and serverless runtimes.", src: '/prompts/drizzle-serverless-http.md' },
-{ title: 'Branch per pull request', text: 'Create a Neon branch for this pull request, run my Drizzle migrations against it, and tear it down when the PR closes.', src: '/prompts/drizzle-branch-per-pr.md' },
-{ title: 'Schema-only branch (beta)', text: 'Create a schema-only Neon branch so I can test a migration against the real table structure without copying data.', src: '/prompts/drizzle-schema-only-branch.md' },
-{ title: 'Reset from parent', text: 'Reset my development branch from its parent so I can re-run migrations against a clean, parent-aligned state.', src: '/prompts/drizzle-reset-from-parent.md' },
+{ text: 'Create a Neon branch for every pull request' },
+{ text: 'Test a migration on a schema-only branch first (beta)' },
+{ text: 'Reset my dev branch from its parent' },
+{ text: 'Switch to the Neon serverless driver so my app runs on the edge' },
+{ text: 'Use instant restore to recover if a migration breaks' },
 ]}
 />
 

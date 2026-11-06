@@ -135,41 +135,33 @@ CopyLine.propTypes = {
   header: PropTypes.node,
 };
 
-const PromptRow = ({ title, text, src = null }) => {
+const PromptRow = ({ text, src = null }) => {
   const { copyText, ready } = usePromptText(src, text);
   return (
     <div
       className={cn(
-        'grid grid-cols-[180px_1fr_24px] items-center gap-3.5 border-b px-3 py-2.5 last:border-b-0 sm:grid-cols-[1fr_24px] sm:gap-y-1',
+        'flex items-center gap-3 border-b px-3 py-2.5 last:border-b-0',
         'border-gray-new-90 hover:bg-gray-new-98 dark:border-gray-new-15 dark:hover:bg-gray-new-10'
       )}
     >
-      <span className="text-sm font-medium text-balance text-black dark:text-gray-new-94">
-        {title}
-      </span>
-      <span
-        className="truncate font-mono text-[12.5px] text-gray-new-40 dark:text-gray-new-70 sm:col-start-1"
-        title={text}
-      >
-        {text}
-      </span>
-      <IconCopyButton getText={() => copyText} ready={ready} label={`Copy prompt: ${title}`} />
+      <span className="min-w-0 flex-1 text-sm text-black dark:text-gray-new-94">{text}</span>
+      <IconCopyButton getText={() => copyText} ready={ready} label={`Copy: ${text}`} />
     </div>
   );
 };
 
 PromptRow.propTypes = {
-  title: PropTypes.string.isRequired,
   text: PropTypes.string.isRequired,
   src: PropTypes.string,
 };
 
-// Single-column list of copyable prompts. Each row shows a title and a
-// one-line prompt, with an icon-only button that copies the full prompt.
+// Single-column awareness list of copyable one-liner prompts, all visible (no
+// collapse). Each row shows one imperative line with an icon-only copy button.
+// With a `src`, the row copies the full prompt file instead of the visible line.
 const AgentPromptList = ({ items = [] }) => (
   <div className="not-prose my-4 flex flex-col overflow-hidden rounded-md border border-gray-new-85 bg-white dark:border-gray-new-20 dark:bg-gray-new-8">
     {items.map((item) => (
-      <PromptRow key={item.title} title={item.title} text={item.text} src={item.src} />
+      <PromptRow key={item.text} text={item.text} src={item.src} />
     ))}
   </div>
 );
@@ -177,7 +169,6 @@ const AgentPromptList = ({ items = [] }) => (
 AgentPromptList.propTypes = {
   items: PropTypes.arrayOf(
     PropTypes.shape({
-      title: PropTypes.string.isRequired,
       text: PropTypes.string.isRequired,
       src: PropTypes.string,
     })
