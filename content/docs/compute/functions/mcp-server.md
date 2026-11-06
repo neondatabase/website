@@ -9,11 +9,11 @@ summary: >-
 enableTableOfContents: true
 ---
 
-Your customers connect Claude, Cursor, or ChatGPT to an MCP server for your app, sign in with the account they already have, and call tools that read and write only their rows in Lakebase Postgres.
+Let your customers use your app from Claude, Cursor, or ChatGPT. They connect to your app's MCP server, sign in with their existing account, and call tools that read and write only their own rows in Lakebase Postgres.
 
 The MCP server runs on [Neon Functions](/docs/compute/functions/overview). [Managed Better Auth](/docs/auth/overview), with its [OAuth provider plugin](/docs/auth/guides/plugins/oauth-provider), is the OAuth 2.1 authorization server. Your app hosts the sign-in and consent pages on a public HTTPS origin, because remote clients can't complete OAuth against `localhost`. This guide builds the pages in Next.js, but any framework works if its pages meet the [page requirements](#what-your-sign-in-and-consent-pages-must-do).
 
-If you don't need per-user sign-in, start from the `mcp-postgres` [function template](/docs/compute/functions/templates) instead.
+If you don't need per-user sign-in, start from the [`mcp-postgres` function template](/functions/templates/mcp-postgres) instead.
 
 <CopyPrompt
   src="/prompts/mcp-server-on-neon-functions-prompt.md"
@@ -39,11 +39,7 @@ sequenceDiagram
   F->>F: Verify the token, query that user's rows
 ```
 
-The example is a to-do list with `list_todos`, `add_todo`, and `complete_todo`.
-
-With the optional [MCP Apps section](#render-todos-in-chat-with-mcp-apps-optional), ChatGPT shows the list as a widget in the conversation:
-
-![ChatGPT showing the todo list widget, with completed todos crossed out and a Complete button on each open todo](/docs/compute/functions/mcp-apps-todo-widget.png 'no-border')
+The MCP client calls your function, which answers `401` and names Managed Better Auth as the authorization server. The client then sends the user through your app's sign-in and consent pages and gets an access token from Managed Better Auth. Every later call carries that token: the function verifies it, reads the user ID from its `sub` claim, and queries only that user's rows.
 
 ### What your sign-in and consent pages must do
 
@@ -54,14 +50,21 @@ With the optional [MCP Apps section](#render-todos-in-chat-with-mcp-apps-optiona
 
 The `@neon/auth` client (0.8.0 or later) passes the signed OAuth query for you. Without it, call the endpoints in [How the pages complete the flow](/docs/auth/guides/plugins/oauth-provider#how-the-pages-complete-the-flow).
 
+## The example
+
+The example is a to-do list with `list_todos`, `add_todo`, and `complete_todo`.
+
+With the optional [MCP Apps section](#render-todos-in-chat-with-mcp-apps-optional), ChatGPT shows the list as a widget in the conversation:
+
+![ChatGPT showing the todo list widget, with completed todos crossed out and a Complete button on each open todo](/docs/compute/functions/mcp-apps-todo-widget.png 'no-border')
+
 ## Before you start
 
-For this tutorial, you need:
+For this guide, you need:
 
 - A Neon project in AWS US East (Ohio) (`aws-us-east-2`), AWS US East (N. Virginia) (`aws-us-east-1`), AWS Europe (Frankfurt) (`aws-eu-central-1`), or AWS Asia Pacific (Singapore) (`aws-ap-southeast-1`). Support is expanding toward [all regions](/docs/introduction/regions).
 - The [Neon CLI](/docs/cli/install), signed in with `neon login`.
 - A Next.js 16 or later app, or another framework whose pages meet the [page requirements](#what-your-sign-in-and-consent-pages-must-do). In Next.js 16, route protection lives in `proxy.ts`.
-- The Vercel CLI, signed in, if you deploy the app to Vercel as this guide does.
 
 ## Enable Managed Better Auth and wire Next.js
 
@@ -72,7 +75,7 @@ neon link
 neon checkout --create dev
 ```
 
-[`neon link`](/docs/cli/link) pins your default branch, so run [`neon checkout`](/docs/cli/checkout) before anything else. It pins the development branch for the commands that follow and writes its environment variables to `.env.local`. If the parent branch already runs this tutorial, the new branch inherits its table, function, trusted domain, and OAuth settings.
+[`neon link`](/docs/cli/link) pins your default branch, so run [`neon checkout`](/docs/cli/checkout) before anything else. It pins the development branch for the commands that follow and writes its environment variables to `.env.local`. If the parent branch already has this guide's setup, the new branch inherits its table, function, trusted domain, and OAuth settings.
 
 Create [`neon.ts`](/docs/reference/neon-ts) in your app's root if you don't have one:
 
@@ -276,9 +279,7 @@ export default function SignInPage() {
 
 ### Consent page
 
-Load the client with `oauth2.publicClient`, show the details listed in the [page requirements](#what-your-sign-in-and-consent-pages-must-do), then call `oauth2.consent({ accept })`.
-
-Read `window.location.search` inside an effect, not during render. Next.js prerenders client components, and `window` doesn't exist there, so reading it during render fails `next build`.
+Load the client with `oauth2.publicClient`, show the details listed in the [page requirements](#what-your-sign-in-and-consent-pages-must-do), then call `oauth2.consent({ accept })`:
 
 ```tsx filename="app/auth/consent/page.tsx" collapse={6-12,20-39,112-125}
 "use client";
@@ -411,14 +412,18 @@ export default function ConsentPage() {
 }
 ```
 
+The page reads `window.location.search` inside an effect, not during render. Next.js prerenders client components, and `window` doesn't exist there, so reading it during render fails `next build`.
+
 ## Write the MCP server
 
-Install the function's dependencies. The server uses [`@neon/oauth`](https://github.com/neondatabase/neon-pkgs/tree/main/packages/oauth) 0.3.0 or later (beta) to verify tokens, and the web-standard MCP transport needs `@modelcontextprotocol/sdk` 1.25.0 or later:
+Install the function's dependencies:
 
 ```bash
 npm install @neon/oauth @neon/functions @modelcontextprotocol/sdk hono pg zod
 npm install -D @types/pg
 ```
+
+The server uses [`@neon/oauth`](https://github.com/neondatabase/neon-pkgs/tree/main/packages/oauth) 0.3.0 or later (beta) to verify tokens, and the web-standard MCP transport needs `@modelcontextprotocol/sdk` 1.25.0 or later.
 
 Each tool filters by the token's `sub`. Build a new `McpServer` per request so the tools close over it, and keep the `pg` pool at module scope. Never take the user ID from tool input.
 
@@ -533,9 +538,9 @@ export default app;
 
 ## Deploy the function
 
-Neon injects `DATABASE_URL`, and `NEON_AUTH_BASE_URL` once Managed Better Auth is on for the branch. You set `MCP_RESOURCE` yourself to the function's `/mcp` URL, which you don't know until the first deploy, so you deploy twice. Until the second deploy, every request returns `502` with `function_load_failed`, because `createMcpAuth` requires an absolute `resource` URL.
+Neon injects `DATABASE_URL`, and `NEON_AUTH_BASE_URL` once Managed Better Auth is on for the branch. The function also needs `MCP_RESOURCE`, its own `/mcp` URL. You only get that URL after the first deploy, so you deploy twice. Until the second deploy, every request returns `502` with `function_load_failed`, because `createMcpAuth` requires an absolute `resource` URL.
 
-The slug (`todos`) can be up to 20 lowercase letters or digits and can't change after the first deploy. The function isn't declared in `neon.ts`, so `neon deploy` leaves it alone. Once you know the URL, you can declare the function in `neon.ts` instead, with `env: { MCP_RESOURCE: process.env.MCP_RESOURCE! }`, and deploy it with `neon deploy --env .env.local`. `neon deploy` and `neon checkout --create` then refuse to run until `MCP_RESOURCE` is set. If the branch inherited a `todos` function from its parent, the first deploy updates it, and it serves the parent's `MCP_RESOURCE` until the second deploy.
+The slug (`todos`) can be up to 20 lowercase letters or digits and can't change after the first deploy. If the branch inherited a `todos` function from its parent, the first deploy updates it, and it serves the parent's `MCP_RESOURCE` until the second deploy.
 
 Deploy once with [`neon functions deploy`](/docs/cli/functions#deploy) and read the function URL:
 
@@ -558,6 +563,33 @@ A new deployment can take a few minutes to serve traffic. To confirm the running
 curl https://<branch_id>-todos.compute.<cell>.aws.neon.tech/.well-known/oauth-protected-resource/mcp
 ```
 
+### Manage the function from neon.ts (optional)
+
+The function isn't declared in `neon.ts`, so `neon deploy` doesn't redeploy it. To manage it from `neon.ts` instead, declare it once you know the URL:
+
+```typescript filename="neon.ts"
+import { defineConfig } from "@neon/config/v1";
+
+export default defineConfig({
+  auth: true,
+  functions: {
+    todos: {
+      name: "todos",
+      source: "functions/todos/index.ts",
+      env: { MCP_RESOURCE: process.env.MCP_RESOURCE! },
+    },
+  },
+});
+```
+
+Add `MCP_RESOURCE` to `.env.local`, then deploy with the file:
+
+```bash
+neon deploy --env .env.local
+```
+
+`neon deploy` and `neon checkout --create` then refuse to run until `MCP_RESOURCE` is set.
+
 ## Deploy the Next.js app and turn on the OAuth server
 
 Deploy the Next.js app to a public HTTPS origin (this guide uses Vercel), then point Managed Better Auth at it.
@@ -569,6 +601,15 @@ vercel env add NEON_AUTH_COOKIE_SECRET production
 vercel env add DATABASE_URL production   # only if your app reads todos
 vercel deploy --prod --yes
 ```
+
+`vercel deploy --prod` prints this deployment's own URL and the project's stable production URL:
+
+```text filename="Output"
+Production  https://<project>-<hash>-<team>.vercel.app
+Aliased     https://<project>.vercel.app
+```
+
+Use the `Aliased` URL (`https://<your-app>.vercel.app`) in the commands below. It stays the same across deploys.
 
 Add the Vercel app's origin as a trusted domain, because Managed Better Auth redirects only to trusted origins. If the command reports that the domain already exists, it's already trusted. Then turn on the OAuth server with [`neon neon-auth config oauth-server`](/docs/cli/neon-auth#config-oauth-server):
 
@@ -628,13 +669,15 @@ To give customers a URL on your own domain, such as `https://mcp.example.com/mcp
    curl -i https://<branch_id>-todos.compute.<cell>.aws.neon.tech/mcp
    ```
 
-4. Create a user on `/auth/sign-up`. Connect ChatGPT (see the [checklist](#chatgpt-checklist)) or another MCP client that supports OAuth and Streamable HTTP to the function's `/mcp` URL. Complete sign-in and consent, then call `list_todos` and `add_todo`.
+4. Create a user on `/auth/sign-up`. Connect ChatGPT (see [Connect ChatGPT](#connect-chatgpt)) or another MCP client that supports OAuth and Streamable HTTP to the function's `/mcp` URL. Complete sign-in and consent, then call `list_todos` and `add_todo`.
 
 5. Test isolation with two users. When user B calls `complete_todo` with the ID of one of user A's todos, the result must be `not found`.
 
 If a step fails, first check that the Neon CLI targets the branch you configured, that `--mcp-resource` matches `MCP_RESOURCE` exactly, and that your app's origin is a trusted domain.
 
-### ChatGPT checklist
+### Connect ChatGPT
+
+When you add the server to ChatGPT:
 
 1. Use the function URL ending in `/mcp`, not the Vercel app URL.
 2. After OAuth, open the connector details and allow write tools, or choose Allow all tools. Without that, reads can work while writes fail with an opaque error such as "Unknown tool."
@@ -644,7 +687,7 @@ If a step fails, first check that the Neon CLI targets the branch you configured
 
 MCP clients that support [MCP Apps](https://modelcontextprotocol.io/extensions/apps/overview), such as ChatGPT, can render HTML for a tool result inside the conversation.
 
-Put the HTML in a TypeScript module so `neon functions deploy` bundles it. A sibling `.html` file read with `readFileSync` isn't included.
+Export the HTML from a TypeScript module, so `neon functions deploy` bundles it. A separate `.html` file read with `readFileSync` isn't bundled.
 
 ```typescript filename="functions/todos/todo-list-ui.ts" collapse={7-113}
 export const TODO_LIST_UI_URI = "ui://todos/list-v2.html";
@@ -764,7 +807,7 @@ export const todoListHtml = `<!doctype html>
 
 The widget loads nothing from other origins. If yours calls an API or loads scripts, styles, or images from another domain, declare those domains in the resource's `_meta.ui.csp` (`connectDomains`, `resourceDomains`). See [OpenAI's CSP guidance](https://developers.openai.com/plugins/build/chatgpt-ui#content-security-policy-csp).
 
-Register the UI as two resources in `functions/todos/index.ts`, because ChatGPT still expects a skybridge variant:
+Register the UI as two resources in `functions/todos/index.ts`: the MCP Apps resource, and a `text/html+skybridge` variant, which ChatGPT still expects for widgets:
 
 ```typescript filename="functions/todos/index.ts" collapse={25-34}
 import {
