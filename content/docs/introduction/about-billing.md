@@ -39,6 +39,6 @@ updatedOn: '2026-06-05T17:20:32.620Z'
 
 <DetailIconCards>
 
-<a href="/enterprise" description="Find out how Enterprises are maximizing engineering efficiency with Neon" icon="handshake">Neon for the Enterprise</a>
+<a href="https://www.databricks.com/product/lakebase" description="Run Lakebase Postgres for enterprise workloads on Databricks" icon="handshake">Lakebase on Databricks</a>
 
 </DetailIconCards>

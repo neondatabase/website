@@ -1,6 +1,5 @@
 export default {
   aboutUs: '/about-us',
-  ai: '/ai',
   aiGateway: '/ai-gateway',
   lakebase: '/lakebase',
   blog: '/blog',
@@ -12,7 +11,6 @@ export default {
   claimableNeon: '/claimable-neon',
   cli: '/cli',
   contactSales: '/contact-sales',
-  enterprise: '/enterprise',
   flow: '/flow',
   functions: '/functions',
   functionsTemplates: '/functions/templates',
@@ -20,7 +18,6 @@ export default {
   guides: '/guides',
   faqs: '/faqs',
   generateTicket: '/generate-ticket',
-  migration: '/migration',
   objectStorage: '/object-storage',
   partners: '/docs/guides/platform-integration-overview',
   postgresqltutorial: '/postgresql/tutorial',

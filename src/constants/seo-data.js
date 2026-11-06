@@ -16,13 +16,6 @@ export default {
       'Neon builds Lakebase Postgres and the backend for apps and agents. The team includes Postgres contributors, and Neon is part of Databricks.',
     pathname: '',
   },
-  ai: {
-    title: 'Neon for AI: Postgres, Auth, Functions, and AI Gateway for Agents',
-    description:
-      'Give your agent a full backend in one Neon project: Lakebase Postgres with pgvector, Managed Better Auth, Functions, Object Storage, and AI Gateway. Every operation is callable through the API, CLI, SDK, and MCP server.',
-    imagePath: '/images/social-previews/ai.jpg',
-    pathname: LINKS.ai,
-  },
   aiGateway: {
     title: 'AI Gateway — One API for frontier models | Neon',
     description:
@@ -115,20 +108,6 @@ export default {
       'Talk to the Neon team about enterprise plans, multi-TB migrations, pricing for agent platforms and database fleets, and compliance requirements such as HIPAA.',
     pathname: LINKS.contactSales,
   },
-  enterprise: {
-    title: 'Neon for Enterprise: Serverless Postgres With SOC 2, ISO 27001, and HIPAA',
-    description:
-      'Run production Postgres on Neon with autoscaling, instant branching, and point-in-time restore, with SOC 2 Type II, ISO 27001, GDPR, and HIPAA compliance. More than 18,000 new Neon databases are created every day.',
-    pathname: LINKS.enterprise,
-    imagePath: '/images/social-previews/enterprise.jpg',
-  },
-  migration: {
-    title: 'Migrate Postgres to Neon: Import Data Assistant, pg_dump, and Logical Replication',
-    description:
-      'Move an existing Postgres database to Neon. The Import Data Assistant checks your version, region, and extensions and copies the data for you. pg_dump and logical replication cover larger moves, with expert help for multi-TB migrations.',
-    pathname: LINKS.migration,
-    imagePath: '/images/social-previews/migration.jpg',
-  },
   useCases: {
     title: 'Neon Use Cases: Full-Stack Apps, Agents, Platforms, Branching, and More',
     description:
@@ -183,9 +162,9 @@ export default {
     imagePath: '/images/social-previews/platforms.jpg',
   },
   storage: {
-    title: 'Neon Storage: Bottomless, Copy-on-Write Postgres Storage',
+    title: 'Lakebase Postgres Storage: Bottomless, Copy-on-Write Database Storage',
     description:
-      'How Neon separates Postgres storage from compute. Data lives in object storage with copy-on-write history, so you pay for what you store, branch multi-TB databases in seconds, and restore to any point.',
+      'How Lakebase Postgres separates database storage from compute. Data lives in cloud object storage with copy-on-write history, so you pay for what you store, branch multi-TB databases in seconds, and restore to any point.',
     pathname: LINKS.storage,
   },
   faster: {
