@@ -790,10 +790,23 @@ function resolveCurriedBuilder(init, consts, usageOverride) {
 // bound to `<parent> <child>` (what postgres.ts's `nested()` passes).
 function parseImportedCommand(callArgs, consts, parentNode) {
   const imports = consts && consts.get(NS_IMPORTS);
-  if (!imports || callArgs.length !== 1) return null;
+  if (!imports || callArgs.length === 0) return null;
   let arg = unwrapExpression(callArgs[0]);
-  if (arg && ts.isCallExpression(arg) && arg.arguments.length === 1) {
-    arg = unwrapExpression(arg.arguments[0]);
+  if (
+    arg &&
+    ts.isPropertyAccessExpression(arg) &&
+    ts.isIdentifier(arg.expression) &&
+    arg.name.text === 'command'
+  ) {
+    // `.command(loki.command, loki.describe, loki.builder, handler)`: the
+    // module's exports passed one by one (logs.ts mounts loki this way). The
+    // module is the same one the bare form names, so parse it the same way.
+    arg = arg.expression;
+  } else {
+    if (callArgs.length !== 1) return null;
+    if (arg && ts.isCallExpression(arg) && arg.arguments.length === 1) {
+      arg = unwrapExpression(arg.arguments[0]);
+    }
   }
   if (!arg || !ts.isIdentifier(arg) || !imports.has(arg.text)) return null;
   const file = imports.get(arg.text);
