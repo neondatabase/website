@@ -7,7 +7,7 @@ excerpt: >-
   tailored for production workloads, offering the best storage value, higher
   resources, migration assistance, and premium technical suppo...
 date: '2024-10-01T15:57:49'
-updatedOn: '2024-10-01T15:57:52'
+updatedOn: '2026-11-02T12:00:00.000Z'
 category: company
 categories:
   - company
@@ -21,19 +21,21 @@ isFeatured: false
 seo:
   title: Thousands of Neon projects now included in your pricing plan - Neon
   description: >-
-    We increased the number of projects included in our paid plans up to
-    thousands, making it affordable to scale database-per-user architectures.
+    Neon's October 2024 paid plan project increase. Plans have changed since; see neon.com/pricing for current plans and project limits.
   keywords: []
   noindex: false
   ogTitle: Thousands of Neon projects now included in your pricing plan - Neon
   ogDescription: >-
-    We increased the number of projects included in our paid plans up to
-    thousands, making it affordable to scale database-per-user architectures.
+    Neon's October 2024 paid plan project increase. Plans have changed since; see neon.com/pricing for current plans and project limits.
   image: >-
     https://cdn.neonapi.io/public/images/pages/blog/thousands-of-neon-projects-now-included-in-your-pricing-plan/social.jpg
 ---
 
 ![Image](https://cdn.neonapi.io/public/images/pages/blog/thousands-of-neon-projects-now-included-in-your-pricing-plan/neon-1000-projects-1-2-1-1024x576-ed02fb4b.jpg)
+
+<Admonition type="important" title="Plans have changed since this post">
+This post describes paid plans Neon offered in October 2024. As of November 2026, Neon's plans are Free, Launch, and Scale. Free and Launch include 100 projects, and Scale includes 1,000. Launch compute is $0.106 per CU-hour, Scale compute is $0.222 per CU-hour, and paid plans have no monthly minimum. See the [pricing page](/pricing) and the [plans documentation](/docs/introduction/plans) for current pricing and limits.
+</Admonition>
 
 **We just increased the number of projects included in all our paid plans: Launch, Scale, and Business. The latter—the Business plan—is a new plan tailored for production workloads, offering the best storage value, higher resources, migration assistance, and premium technical support.** [Check out our pricing page](https://neon.tech/pricing).
 
