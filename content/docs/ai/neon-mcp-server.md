@@ -8,7 +8,7 @@ summary: >-
 enableTableOfContents: true
 redirectFrom:
   - /docs/ai/mcp
-updatedOn: '2026-10-15T20:24:27.880Z'
+updatedOn: '2026-11-06T04:30:42.649Z'
 ---
 
 The Neon MCP Server implements the Model Context Protocol (MCP), letting AI assistants interact with your Neon projects on your behalf. Your AI agent can interact with Neon via MCP tools or by running [Neon CLI](/docs/cli) commands directly.
@@ -90,6 +90,8 @@ The Neon MCP server is an official Claude connector, so you don't need a custom 
 4. Authorize access to your Neon account.
 
 For other clients, use Quick setup or the config generator above.
+
+This page covers the hosted Neon MCP Server, which manages your Neon resources. To give your own application an MCP server that customers connect to, see [Build an MCP server with Managed Better Auth](/docs/compute/functions/mcp-server).
 
 ## Access control
 
