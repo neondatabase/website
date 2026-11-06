@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "neonctlVersion": "9.0.0",
+  "neonctlVersion": "9.1.0",
   "binaries": [
     "neonctl",
     "neon"
@@ -2977,6 +2977,81 @@
           "commands": {},
           "describe": "List the log fields whose values can be discovered on a branch"
         },
+        "loki": {
+          "name": "loki",
+          "aliases": [],
+          "positionals": [
+            {
+              "name": "query",
+              "describe": "LogQL expression. With a label endpoint, an optional stream selector that scopes the labels.",
+              "type": "string"
+            }
+          ],
+          "options": {
+            "branch": {
+              "type": "string",
+              "describe": "Branch ID or name (defaults to the project's default branch)"
+            },
+            "direction": {
+              "type": "string",
+              "describe": "Timestamp order (query_range only): forward (oldest first) or backward (newest first)",
+              "choices": [
+                "forward",
+                "backward"
+              ]
+            },
+            "end": {
+              "type": "string",
+              "describe": "Window end as RFC 3339 or Unix nanoseconds (kept as a string). Defaults to now."
+            },
+            "endpoint": {
+              "type": "string",
+              "describe": "Read endpoint: query_range, labels, or label/<name>/values",
+              "default": "query_range"
+            },
+            "limit": {
+              "type": "number",
+              "describe": "Maximum number of log lines (query_range only); the server enforces its cap"
+            },
+            "project-id": {
+              "type": "string",
+              "describe": "Project ID"
+            },
+            "since": {
+              "type": "string",
+              "describe": "Lookback window as a positive Go duration, e.g. 30m or 24h. Defaults to 1h for queries and 6h for label values. Explicit --start takes precedence."
+            },
+            "start": {
+              "type": "string",
+              "describe": "Window start as RFC 3339 or Unix nanoseconds (kept as a string)"
+            }
+          },
+          "commands": {},
+          "describe": "Call the branch's Loki read API and return its JSON response",
+          "examples": [
+            {
+              "command": "$0 logs loki '{entity_type=\"function\"} |= \"error\"' --since 30m --limit 100",
+              "description": "Query function logs with a bounded time window and line count"
+            },
+            {
+              "command": "$0 logs loki --endpoint labels",
+              "description": "Discover stream labels"
+            },
+            {
+              "command": "$0 logs loki --endpoint label/service_name/values --since 6h",
+              "description": "Discover service names before choosing a selector"
+            },
+            {
+              "command": "$0 logs loki '{entity_type=\"function\"}' --endpoint label/severity_text/values",
+              "description": "List the severities function logs carry"
+            },
+            {
+              "command": "$0 logs loki '{entity_type=\"function\"}' --project-id <id> --branch <id|name> --start 2026-11-01T00:00:00Z --end 2026-11-01T01:00:00Z",
+              "description": "Query an explicit branch and absolute time window"
+            }
+          ],
+          "usage": "$0 logs loki [query] [options]"
+        },
         "query": {
           "name": "query",
           "aliases": [],
@@ -3058,7 +3133,7 @@
             }
           },
           "commands": {},
-          "describe": "Query log records on a branch",
+          "describe": "Query log records with structured filters or LogQL",
           "examples": [
             {
               "command": "$0 logs query --since 1h --logql '{entity_type=\"function\"} |= \"timeout\"'",
@@ -3075,7 +3150,7 @@
           ]
         }
       },
-      "describe": "Query branch logs",
+      "describe": "Query branch logs with structured filters, LogQL, or the Loki API",
       "usage": "$0 logs <sub-command> [options]"
     },
     "mcp": {

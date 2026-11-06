@@ -5,7 +5,7 @@ author: rishi-raj-jain
 excludeFromBlog: true
 enableTableOfContents: true
 createdAt: '2026-07-15T00:00:00.000Z'
-updatedOn: '2026-10-13T19:35:11.209Z'
+updatedOn: '2026-11-06T22:09:40.723Z'
 ---
 
 <Admonition type="note">
@@ -53,7 +53,6 @@ Neon Functions can take up to 15 minutes to send the first byte, and streams sta
 | Database storage       | 1 GB per project, 20 GB in total                                              | 500 MB per project                                                    |
 | Projects               | 100                                                                           | 2 active                                                              |
 | Database compute       | Autoscales up to 2 CU (8 GB RAM), scales to zero after 5 minutes              | Shared CPU with up to 500 MB RAM, paused after 1 week of inactivity   |
-| Log retention          | 3 days for Functions and Object Storage logs                                  | 1 day for API and database logs                                       |
 | Team members           | Unlimited, with Admin, Editor, Viewer, and Collaborator roles                 | Unlimited, with Owner, Admin, and Developer roles                     |
 | History retention      | Restore to any point in the last 6 hours, 1 manual snapshot                   | No backups or point-in-time recovery                                  |
 | Branches               | 10 per project                                                                | Not included                                                          |
@@ -103,15 +102,7 @@ The bigger difference shows up on a low-traffic application: a Neon project neve
 
 A Neon branch shares its parent's data through copy-on-write, and it's ready for a preview deployment, a test run, or an agent experiment right away ([source](/docs/introduction/branching)). On Supabase, branching starts on paid plans at $0.01344 per branch per hour.
 
-### 5. Log retention
-
-|               | Neon Free                                    | Supabase Free                   |
-| :------------ | :------------------------------------------- | :------------------------------ |
-| Log retention | 3 days for Functions and Object Storage logs | 1 day for API and database logs |
-
-Neon keeps logs three times as long, so you can pull a wider window with `neon logs query --since 48h` and filter it by severity or service name ([source](/docs/cli/logs)). The same filters and search are available in the Neon Console.
-
-### 6. History retention
+### 5. History retention
 
 |                       | Neon Free                                                    | Supabase Free                            |
 | :-------------------- | :----------------------------------------------------------- | :--------------------------------------- |
@@ -120,7 +111,7 @@ Neon keeps logs three times as long, so you can pull a wider window with `neon l
 
 On Neon Free, you can rewind your production branch to the moment before a bad migration, or keep a snapshot of a known good state ([source](/docs/introduction/plans#instant-restore)). If you delete a whole project by mistake, you can recover it within 7 days ([source](/docs/manage/projects#recover-a-deleted-project)). On Supabase, backups start on the Pro plan, and point-in-time recovery is a paid add-on.
 
-### 7. Functions
+### 6. Functions
 
 Both free plans include serverless functions: [Neon Functions](/docs/compute/functions/overview) on Neon and Edge Functions on Supabase.
 
@@ -139,7 +130,7 @@ Neon Free includes twice as many invocations in every project, 8 times the memor
 Neon Functions and Object Storage run in four AWS regions today: US East (Ohio), US East (N. Virginia), Europe (Frankfurt), and Asia Pacific (Singapore). Create your project in one of them to use both.
 </Admonition>
 
-### 8. Object storage
+### 7. Object storage
 
 Both free plans include S3-compatible file storage: [Neon Object Storage](/docs/storage/overview) on Neon and Supabase Storage on Supabase.
 
@@ -155,7 +146,7 @@ Both free plans include S3-compatible file storage: [Neon Object Storage](/docs/
 
 Neon Free includes 5 times the storage, and each new project adds another 5 GB. Files can be up to 5 GiB, so videos, datasets, and model outputs fit in one upload, while Supabase Free caps each file at 50 MB. Neon also supports more of the S3 API, so you can limit browser uploads and downloads to your own site with a CORS rule, tag a file (for example `status=pending-review`) without a database write, and read a file's size and ETag in one call ([S3 compatibility](/docs/storage/s3-compatibility)). And Neon branches your files with the database, so a preview branch's rows and files come from the same point in time.
 
-### 9. Managed authentication
+### 8. Managed authentication
 
 Both free plans include managed authentication: [Managed Better Auth](/docs/auth/overview) on Neon and Supabase Auth on Supabase.
 
@@ -167,7 +158,7 @@ Both free plans include managed authentication: [Managed Better Auth](/docs/auth
 
 Neon Free covers 10K more monthly active users. Because auth branches with the database, you can test sign-up, password reset, and OAuth flows on a preview branch without creating test users in production. For multi-tenant apps, the Organization plugin adds organizations, roles, and invitation flows. Neon also includes shared Google OAuth credentials for testing, so Google sign-in works before you register your own OAuth app ([source](/docs/auth/overview)).
 
-### 10. Egress
+### 9. Egress
 
 Egress is the data your project sends out over the internet, like query results, file downloads, and function responses.
 
@@ -179,7 +170,7 @@ Egress is the data your project sends out over the internet, like query results,
 
 On Neon, every project gets its own 5 GB, so a second or third app doesn't eat into the first app's allowance ([source](/docs/introduction/plans#public-network-transfer)). On Supabase, the allowance is split into uncached egress and cached egress (served from the CDN cache), and all of it is shared across the organization.
 
-### 11. Team members
+### 10. Team members
 
 |                                  | Neon Free                                      | Supabase Free               |
 | :------------------------------- | :--------------------------------------------- | :-------------------------- |

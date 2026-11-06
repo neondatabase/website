@@ -8,7 +8,7 @@ summary: >-
   mapping, common log entries that look like a problem but aren't, and
   wiring up application instrumentation like Sentry or OpenTelemetry.
 enableTableOfContents: true
-updatedOn: '2026-11-05T01:16:03.199Z'
+updatedOn: '2026-11-06T22:09:40.723Z'
 ---
 
 Every deployed function streams its logs to the Neon Console: everything your handler and its dependencies write with `console.log`, `console.info`, `console.warn`, `console.error`, or `console.debug`, plus a platform-emitted `invoke begin` / `invoke end` line around each request:
@@ -87,9 +87,9 @@ attachDatabasePool(pool, {
 
 `neon deploy` bundles your code with esbuild, which defeats auto-instrumentation that patches modules at import time. If a library's spans are missing from a deployed function, that's the first thing to check.
 
-## Filter, search, and retention
+## Filter and search
 
-For details on filtering by level or service name, searching log bodies, live tail, downloading logs, and the 3-day retention window, see [Monitor logs](/docs/introduction/monitor-logs).
+For details on filtering by level or service name, searching log bodies, live tail, and downloading logs, see [Monitor logs](/docs/introduction/monitor-logs).
 
 You can also read function logs from the terminal with [`neon logs query`](/docs/cli/logs). `--source function` returns every function on the branch, and `--service-name neon-function/<slug>` narrows it to one:
 
