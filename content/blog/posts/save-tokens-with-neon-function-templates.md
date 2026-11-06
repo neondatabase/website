@@ -17,7 +17,7 @@ draft: false
 cover:
   image: https://cdn.neonapi.io/public/images/pages/blog/save-tokens-with-neon-function-templates/cover.jpg
   alt: Save tokens with Neon Function templates
-isFeatured: false
+isFeatured: true
 seo:
   image: https://cdn.neonapi.io/public/images/pages/blog/save-tokens-with-neon-function-templates/social.jpg
   title: Save tokens with Neon Function templates - Neon
