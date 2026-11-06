@@ -85,16 +85,16 @@ Neon can export Postgres logs to observability platforms, providing visibility i
 
 Neon computes use these logging settings:
 
-| Parameter                     | Value     | What you'll see in exported logs                                                       |
-| ----------------------------- | --------- | -------------------------------------------------------------------------------------- |
-| `log_min_messages`            | `warning` | Warnings, errors, and more severe messages. `NOTICE`, `INFO`, and `DEBUG` aren't sent. |
-| `log_connections`             | `on`      | A line for each new connection. This is often the largest share of log volume.         |
-| `log_disconnections`          | `on`      | A line for each closed connection, including session duration.                         |
-| `log_checkpoints`             | `on`      | A line for each checkpoint, with timing and the number of buffers written.             |
-| `log_autovacuum_min_duration` | `1000`    | Autovacuum and autoanalyze runs that take longer than 1 second.                        |
-| `log_temp_files`              | `1048576` | Temporary files of 1 GB or more, such as large sorts or hashes that spill to disk.     |
-| `log_error_verbosity`         | `terse`   | Errors and warnings without `DETAIL`, `HINT`, or `CONTEXT` lines.                      |
-| `log_min_error_statement`     | `panic`   | The SQL statement that caused an error isn't included, to keep query data out of logs. |
+| Parameter                     | Value     | What you'll see in exported logs                                                                                                                             |
+| ----------------------------- | --------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `log_min_messages`            | `warning` | Warnings, errors, and more severe messages. `NOTICE`, `INFO`, and `DEBUG` aren't sent.                                                                       |
+| `log_connections`             | `on`      | `connection received`, `connection authenticated`, and `connection authorized` lines for each new connection. This is often the largest share of log volume. |
+| `log_disconnections`          | `on`      | A line for each closed connection, including session duration.                                                                                               |
+| `log_checkpoints`             | `on`      | A line for each checkpoint, with timing and the number of buffers written.                                                                                   |
+| `log_autovacuum_min_duration` | `1000`    | Autovacuum and autoanalyze runs that take longer than 1 second.                                                                                              |
+| `log_temp_files`              | `1048576` | Temporary files of 1 GB or more, such as large sorts or hashes that spill to disk.                                                                           |
+| `log_error_verbosity`         | `terse`   | Errors and warnings without `DETAIL`, `HINT`, or `CONTEXT` lines.                                                                                            |
+| `log_min_error_statement`     | `panic`   | The SQL statement that caused an error isn't included, to keep query data out of logs.                                                                       |
 
 Statement logging is off by default. Query text isn't logged (`log_statement` is `none`), slow queries aren't logged (`log_min_duration_statement` is `-1`), and lock waits aren't logged (`log_lock_waits` is `off`). To find slow or frequent queries without changing log settings, use [Monitor query performance](/docs/introduction/monitor-query-performance).
 
@@ -143,13 +143,40 @@ Each log message starts with a prefix that Neon sets through `log_line_prefix`. 
 
 Each exported log record also includes these attributes:
 
-- Log level (severity)
+- Log level (severity). See [Log levels](#log-levels).
 - `project_id`
 - `endpoint_id`
+- `compute_binding_id`: identifies the individual compute instance behind the endpoint
+- `compute_role`: `read_write` or `read_only`
+- `endpoint_type`: `read_write` or `read_only`
 - `region_id`
 - `host`, set to `neon-collector-<project_id>`
+- `service.name`: OpenTelemetry integration only, if you set it in the integration's resource attributes
 
-Neon filters out some internal storage-layer log lines before export. Connection logs from Neon's own processes are still included. Neon checks each compute's health by connecting to Postgres about once a minute, and its metrics collectors connect too, so you'll see regular `connection received`, `connection authorized`, and `disconnection` lines from them. These lines have `user=[cloud_admin]`, and most have an `app` value that starts with `compute_ctl` or `neon_compute_sql_exporter`. Lines logged before authentication, such as `connection received`, have an empty `user` field. To hide most of this activity, exclude `user=[cloud_admin]` in your observability platform's log filters.
+If you connect through a [pooled connection string](/docs/connect/connection-pooling), connection lines show `application_name=pgbouncer`, because PgBouncer opens the connection to Postgres for you. Your client's `application_name` still appears in the `app` field on statement and error lines.
+
+### Log levels
+
+Postgres maps its message levels to syslog severities that don't line up with the level names, so the severity on an exported record often differs from the level in the message text:
+
+| Postgres level (in the message) | Exported severity |
+| ------------------------------- | ----------------- |
+| `LOG`, `INFO`                   | `info`            |
+| `WARNING`                       | `notice`          |
+| `ERROR`                         | `warning`         |
+| `FATAL`                         | `err`             |
+| `PANIC`                         | `crit`            |
+
+To find errors, filter on the message text (for example, `ERROR:`) or on the `sqlstate` field instead of the record severity. `NOTICE` messages aren't exported, because `log_min_messages` is `warning`.
+
+### Internal log lines
+
+Neon filters out some internal storage-layer log lines before export, but you'll still see activity from Neon's own processes:
+
+- **Connection lines.** Neon checks each compute's health by connecting to Postgres about once a minute, and its metrics collectors and other management tasks connect too. On an idle compute, these can make up close to half of all exported lines. The `connection authenticated`, `connection authorized`, and `disconnection` lines have `user=[cloud_admin]`. The `connection received` lines are logged before authentication, so they show `user=[[unknown]]` and `host=127.0.0.1`. To hide this activity, exclude lines with `user=[cloud_admin]` and lines containing `connection received: host=127.0.0.1`.
+- **Storage and replication messages.** Lines tagged `[COMMUNICATOR]` or `[WP]` come from Neon's storage layer and are informational.
+- **Restart messages.** When a compute restarts or reconfigures, you'll see `FATAL: terminating connection due to administrator command` for Neon's background processes, and `LOG` lines about reloading configuration. These are expected.
+- **Internal standby.** A compute can have an internal standby instance that also sends logs. Its records have a `compute_binding_id` ending in `-internal` and a `compute_role` of `read_only`, under the same `endpoint_id`.
 
 ### Performance considerations
 

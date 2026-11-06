@@ -95,7 +95,7 @@ Neon doesn't set the Datadog [unified service tags](https://docs.datadoghq.com/g
 
 - `project_id`: the Neon project
 - `endpoint_id`: the compute. Each compute belongs to one branch, so you can use this tag to separate environments that run on different branches, such as production and staging.
-- `compute_role`: whether the compute is a primary (read-write) compute or a read replica
+- `compute_role`: `read_write` for a primary compute, or `read_only` for a read replica
 - `region_id`: the region the project runs in
 - `job`: the metric source (`compute-host-metrics`, `sql-metrics`, or `compute-pgbouncer-metrics`). Metrics only.
 
