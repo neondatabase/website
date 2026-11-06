@@ -136,4 +136,11 @@ describe('siteSearchUpstreamHeaders', () => {
       });
     }
   });
+
+  it('forwards webmcp and treats any other caller source as website', () => {
+    expect(siteSearchUpstreamHeaders(null, ' WebMCP ')['x-caller-source']).toBe('webmcp');
+    for (const source of [null, undefined, '', 'website', 'mcp', 'cli', 'rest']) {
+      expect(siteSearchUpstreamHeaders(null, source)['x-caller-source']).toBe('website');
+    }
+  });
 });

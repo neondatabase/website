@@ -234,6 +234,7 @@ describe('createNeonTools', () => {
     );
     const [url, init] = fetch.mock.calls[0];
     expect(url).toBe('/api/search');
+    expect(init.headers['x-caller-source']).toBe('webmcp');
     expect(JSON.parse(init.body)).toEqual({ query: 'branching', limit: 3, categories: ['docs'] });
     expect(result).toContain('/docs/introduction/branching');
   });
