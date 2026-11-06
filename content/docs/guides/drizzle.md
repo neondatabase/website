@@ -11,7 +11,7 @@ summary: >-
   environment by selecting a connection string based on NODE_ENV.
 enableTableOfContents: true
 agentPrompt: 'I want to use Drizzle ORM with it.'
-updatedOn: '2026-11-06T15:13:12.621Z'
+updatedOn: '2026-11-06T15:59:20.867Z'
 ---
 
 <div className="not-prose my-8 rounded-[10px] border border-gray-new-90 bg-gray-new-95 px-6 py-7 dark:border-gray-new-15 dark:bg-gray-new-10 [&>h2]:my-0 [&>h2]:mb-7 [&>h2]:mx-auto [&>h2]:w-fit [&>h2]:text-center [&>h2]:text-[28px] [&>h2]:leading-tight [&>h2]:font-medium [&>h2]:tracking-tighter [&>h2]:text-black-pure dark:[&>h2]:text-white [&_h3]:relative [&_h3]:mt-7 [&_h3]:mb-2 [&_h3]:w-fit [&_h3]:text-xl [&_h3]:font-semibold [&_h3]:tracking-tight [&_h3]:text-black-pure [&_h3]:before:absolute [&_h3]:before:-left-11 [&_h3]:before:top-px [&_h3]:before:flex [&_h3]:before:size-7 [&_h3]:before:items-center [&_h3]:before:justify-center [&_h3]:before:rounded-full [&_h3]:before:bg-black-new [&_h3]:before:text-[13px] [&_h3]:before:font-semibold [&_h3]:before:text-white [&_h3]:before:content-[counter(step)] [&_h3]:before:[counter-increment:step] dark:[&_h3]:text-white dark:[&_h3]:before:bg-white dark:[&_h3]:before:text-black-pure">
@@ -44,11 +44,12 @@ updatedOn: '2026-11-06T15:13:12.621Z'
 
 <AgentPromptList
 items={[
-{ text: 'Create a Neon branch for every pull request' },
-{ text: 'Test a migration on a schema-only branch first (beta)' },
-{ text: 'Reset my dev branch from its parent' },
-{ text: 'Switch to the Neon serverless driver so my app runs on the edge' },
-{ text: 'Use instant restore to recover if a migration breaks' },
+{ text: 'Generate and apply a Drizzle Kit migration to my Neon database' },
+{ text: 'Use the direct Neon URL for Drizzle Kit migrations and the pooled URL for my app' },
+{ text: 'Switch my Drizzle client to the Neon serverless driver to run on the edge' },
+{ text: 'Add Lakebase Search to my Drizzle schema' },
+{ text: 'Create a Neon branch per PR to test this migration' },
+{ text: 'Test this migration on a schema-only branch first (beta)' },
 ]}
 />
 
