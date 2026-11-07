@@ -77,16 +77,17 @@ Find your database connection string by clicking the **Connect** button in the C
 ![Connection details modal](/docs/connect/connect_to_branch_modal.png)
 The connection string includes the user name, password, hostname, and database name.
 
-Create a `.env` file in your project's root directory and add the connection string to it. Your `.env` file should look like this:
+Create a `.env` file in your project's root directory. Add the pooled connection string (the hostname includes `-pooler`) as `DATABASE_URL` for your application, and the direct connection string (without `-pooler`) as `DATABASE_URL_UNPOOLED` for Drizzle Kit migrations. To get the direct string, turn off **Connection pooling** in the **Connect to your branch** modal, or remove `-pooler` from the hostname. Your `.env` file should look like this:
 
 ```text shouldWrap
-DATABASE_URL="postgresql://[user]:[password]@[neon_hostname]/[dbname]?sslmode=verify-full&channel_binding=require"
+DATABASE_URL="postgresql://[user]:[password]@[endpoint]-pooler.[region].aws.neon.tech/[dbname]?sslmode=verify-full&channel_binding=require"
+DATABASE_URL_UNPOOLED="postgresql://[user]:[password]@[endpoint].[region].aws.neon.tech/[dbname]?sslmode=verify-full&channel_binding=require"
 ```
 
 The Console's connection string uses `sslmode=require`. `pg` 8.23 and later print a `SECURITY WARNING` for `sslmode=require`, so change it to `sslmode=verify-full`, which keeps the same behavior without the warning.
 
 <Admonition type="note">
-Neon supports both direct and pooled connection strings, which you can find by clicking the **Connect** button in the Console nav. A pooled connection string (the hostname includes `-pooler`) routes through a PgBouncer connection pool, which is ideal for your application at runtime. However, using a pooled connection string for migrations can lead to errors. Use a direct (non-pooled) connection when running Drizzle Kit migrations. For more information, see [Connection pooling](/docs/connect/connection-pooling) and [Schema migration with Drizzle ORM](/docs/guides/drizzle-migrations).
+A pooled connection string routes through a PgBouncer connection pool, which suits your application at runtime. Running migrations through the pooler can lead to errors, so Drizzle Kit uses the direct connection. For more information, see [Connection pooling](/docs/connect/connection-pooling) and [Schema migration with Drizzle ORM](/docs/guides/drizzle-migrations).
 </Admonition>
 
 ## Install dependencies
@@ -104,14 +105,14 @@ better-drizzle 0.3 supports only Drizzle ORM `1.0.0-rc.4` and its `defineRelatio
 
 ## Configure Drizzle Kit
 
-Drizzle Kit uses a configuration file to manage schema and migrations. Create a `drizzle.config.ts` file in your project root:
+Drizzle Kit uses a configuration file to manage schema and migrations. Create a `drizzle.config.ts` file in your project root. It uses the direct connection string, since migrations shouldn't run through the connection pooler:
 
 ```typescript filename="drizzle.config.ts"
 import 'dotenv/config';
 import { defineConfig } from 'drizzle-kit';
 
-if (!process.env.DATABASE_URL) {
-  throw new Error('DATABASE_URL is not set in the .env file');
+if (!process.env.DATABASE_URL_UNPOOLED) {
+  throw new Error('DATABASE_URL_UNPOOLED is not set in the .env file');
 }
 
 export default defineConfig({
@@ -119,7 +120,7 @@ export default defineConfig({
   out: './drizzle',
   dialect: 'postgresql',
   dbCredentials: {
-    url: process.env.DATABASE_URL,
+    url: process.env.DATABASE_URL_UNPOOLED,
   },
 });
 ```
@@ -248,11 +249,13 @@ seed()
   .finally(() => pool.end());
 ```
 
-Run the seed script:
+Run the seed script once:
 
 ```bash
 npx tsx src/seed.ts
 ```
+
+The script upserts users but inserts posts with `createMany`, so running it again adds duplicate posts and changes the query output shown below.
 
 </Steps>
 
