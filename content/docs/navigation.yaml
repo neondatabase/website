@@ -908,6 +908,8 @@
           items:
             - title: 'Convex'
               slug: realtime/migrate-from/convex
+            - title: 'Electric'
+              slug: realtime/migrate-from/electric
         - section: Examples
           items:
             - title: 'Overview'
