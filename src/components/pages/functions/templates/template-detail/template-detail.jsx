@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 
+import FunctionRegistrySourceLabel from 'components/pages/functions/templates/registry/source-label';
 import FunctionRegistryTemplateLogo from 'components/pages/functions/templates/registry/template-logo';
 import FunctionRegistryWebsiteLink from 'components/pages/functions/templates/registry/website-link';
 import {
@@ -14,8 +15,8 @@ import LINKS from 'constants/links';
 import ArrowBackIcon from 'icons/arrow-back.inline.svg';
 import { cn } from 'utils/cn';
 import {
+  hasRegistryEnvironmentRequirements,
   isInlineCodeSafe,
-  isFirstPartyRegistryTemplate,
   registryCategoryLabel,
   registryProviderLabel,
   registryTemplateCategories,
@@ -139,6 +140,7 @@ DetailRow.propTypes = {
 const TemplateSidebar = ({ template, installCommand }) => {
   const provider = registryProviderLabel(template) || 'Neon';
   const categories = registryTemplateCategories(template);
+  const sourceUrl = registryTemplateSourceUrl(template);
 
   return (
     <div className="sticky top-24 flex flex-col gap-6 lg:static">
@@ -149,18 +151,6 @@ const TemplateSidebar = ({ template, installCommand }) => {
           command={installCommand}
           trackingLabel={`Copy ${installCommand}`}
         />
-        <p className="mt-3 text-[13px] leading-snug text-gray-new-50">
-          With the{' '}
-          <Link className={TEXT_LINK_CLASS_NAME} to={LINKS.cliInstall} theme="green">
-            Neon CLI
-          </Link>{' '}
-          8.11.0 or later, this command copies the template into{' '}
-          <Code>functions/&lt;slug&gt;/</Code> and declares the function in{' '}
-          <Link className={TEXT_LINK_CLASS_NAME} to="/docs/reference/neon-ts" theme="green">
-            neon.ts
-          </Link>
-          .
-        </p>
       </div>
 
       <dl>
@@ -192,12 +182,14 @@ const TemplateSidebar = ({ template, installCommand }) => {
         )}
         <DetailRow label="Resources">
           <ul className="flex flex-col gap-2">
-            <li>
-              <Link to={registryTemplateSourceUrl(template)} theme="green" isExternal>
-                Template source
-                <span className="sr-only"> (opens in a new tab)</span>
-              </Link>
-            </li>
+            {sourceUrl && (
+              <li>
+                <Link to={sourceUrl} theme="green" isExternal>
+                  Template source
+                  <span className="sr-only"> (opens in a new tab)</span>
+                </Link>
+              </li>
+            )}
             <li>
               <Link to={LINKS.functionsTemplatesDocs} theme="green">
                 How to use templates
@@ -256,11 +248,7 @@ const TemplateDetail = async ({ template, previous = null, next = null, readme =
           <ArrowBackIcon />
           Function templates
         </Link>
-        {isFirstPartyRegistryTemplate(template) && (
-          <p className="mb-4 font-mono text-xs leading-none font-medium tracking-tight text-green-45 uppercase">
-            First Party
-          </p>
-        )}
+        <FunctionRegistrySourceLabel className="mb-4 block text-xs" template={template} />
         <h1 className="text-5xl leading-dense font-normal tracking-tighter text-balance lg:text-[36px] md:text-[32px]">
           {template.title}
         </h1>
@@ -320,8 +308,11 @@ const TemplateDetail = async ({ template, previous = null, next = null, readme =
             description={
               <>
                 The CLI declares these variables in <Code>neon.ts</Code> and adds them to{' '}
-                <Code>.env.example</Code> without values, so you need to fill them in before you run
-                the function.
+                <Code>.env.example</Code> without values, so you need to fill{' '}
+                {hasRegistryEnvironmentRequirements(environment)
+                  ? 'in the required ones'
+                  : 'them in'}{' '}
+                before you run the function.
               </>
             }
           >
