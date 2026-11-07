@@ -22,8 +22,7 @@ const Trend = ({ weeks, series }) => (
         <ShareChart weeks={weeks} series={series} />
       </div>
       <p className="mt-6 max-w-[672px] text-sm leading-normal tracking-extra-tight text-gray-new-50">
-        A week runs Monday to Sunday and appears once it is complete. The chart shows clients that
-        reached 5% of active users in at least one week.
+        Complete weeks only, showing clients that reached 5% of active users in any week.
       </p>
     </Container>
   </section>

@@ -39,7 +39,7 @@ const McpServerStats = ({ clients, tools, access, publishedAt }) => {
           </>
         }
         rows={clientShares.ranked}
-        footnote="An active user is a Neon account that called at least one tool that week. People use more than one client, so the shares add up to more than 100%. Custom code is scripts that only report their HTTP library, such as Node's undici or Python's httpx. Changes are against the week before."
+        footnote="Accounts that called a tool that week. Shares add up to over 100% because people use several clients. Custom code is scripts that only report an HTTP library. Changes are against the previous week."
       />
       <Trend weeks={clientShares.weeks} series={clientShares.series} />
       <ShareList
