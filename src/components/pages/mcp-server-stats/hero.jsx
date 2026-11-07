@@ -25,8 +25,7 @@ const Hero = ({ publishedAt }) => (
       </h1>
       <p className="mt-6 max-w-[672px] text-lg leading-normal tracking-extra-tight text-gray-new-60 xl:mt-5 lg:text-base md:mt-4 md:text-[0.9375rem] md:leading-snug">
         Which AI clients and tools Neon MCP server users call, as a share of each week&apos;s active
-        users. These are Neon&apos;s numbers, not a market share. Updated{' '}
-        {formatUpdated(publishedAt)}.
+        users. Updated {formatUpdated(publishedAt)}.
       </p>
       <div className="mt-9 flex flex-wrap items-center gap-4 xl:mt-8 lg:mt-7 md:mt-6">
         <CopyCommand
