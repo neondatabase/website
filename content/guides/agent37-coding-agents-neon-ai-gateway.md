@@ -157,10 +157,10 @@ The `gateway()` helper looks up the branch's gateway host once, with `client.aiG
 Creating an agent in `app/api/agents/route.ts` takes three steps: mint the credential, create the Agent37 instance with the token in its `env`, and, for the harnesses that read a config file, write that file and restart once.
 
 ```ts
-import * as neon from '@/lib/neon';
+import * as neonLib from '@/lib/neon';
 
-const { baseUrl } = await neon.gateway();
-const credential = await neon.createCredential(`agent37: ${name}`);
+const { baseUrl } = await neonLib.gateway();
+const credential = await neonLib.createCredential(`agent37: ${name}`);
 
 instance = await post<Instance>('/instances', {
   template: h.template,
@@ -318,7 +318,7 @@ AI Elements then renders each part: `MessageResponse` for markdown text, `Reason
 
 Each card on the agents page can act on that agent's credential alone.
 
-**Revoke** calls `neon.revokeCredential(tokenId)`. The gateway rejects the token from its next request on, so the agent can't call any model, while its instance keeps running. This also holds if the agent copied the token: the gateway rejects it from any caller, including the agent's own shell.
+**Revoke** calls `neonLib.revokeCredential(tokenId)`. The gateway rejects the token from its next request on, so the agent can't call any model, while its instance keeps running. This also holds if the agent copied the token: the gateway rejects it from any caller, including the agent's own shell.
 
 ![A turn on a revoked agent refused right away](/docs/guides/agent37-ai-gateway-revoked-chat.png)
 
@@ -327,10 +327,10 @@ Claude Code retries a rejected token for about three minutes before it gives up 
 **Rotate** gives the agent a new token. The route in `app/api/agents/[id]/rotate/route.ts` rotates a live credential in place (same `token_id`, new token) or creates a new one if the old one is revoked, then restarts the instance with the new token:
 
 ```ts
-import * as neon from '@/lib/neon';
+import * as neonLib from '@/lib/neon';
 
-const meta = (await neon.listCredentials()).get(tokenId);
-const credential = meta && !meta.revoked_at ? await neon.rotateCredential(tokenId) : await neon.createCredential(`agent37: ${agent.name}`);
+const meta = (await neonLib.listCredentials()).get(tokenId);
+const credential = meta && !meta.revoked_at ? await neonLib.rotateCredential(tokenId) : await neonLib.createCredential(`agent37: ${agent.name}`);
 
 await patch(`/instances/${agent.id}`, {
   env: gatewayEnv(harness, credential.token, baseUrl),
