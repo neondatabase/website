@@ -39,6 +39,11 @@ global.fetch = vi.fn(() => Promise.resolve({ ok: true, status: 200 }));
 // Ensure SITE_URL is defined so the error-fallback redirect doesn't throw
 process.env.NEXT_PUBLIC_DEFAULT_SITE_URL = 'https://neon.com';
 
+const beaconPayloads = () =>
+  global.fetch.mock.calls
+    .filter(([url]) => url === 'https://neonapi.io/t.js')
+    .map(([, opts]) => JSON.parse(opts.body).data);
+
 // Now import middleware after all mocks are set up
 let middleware;
 let middlewareConfig;
@@ -312,11 +317,27 @@ describe('Middleware - AI Agent Integration Tests', () => {
       expect(response.url.toString()).toBe('https://neon.com/docs/cli/login.md');
       // Preserve the existing short redirect cache policy.
       expect(response.headers.get('Cache-Control')).toBe('public, max-age=60, s-maxage=300');
-      // The agent hit is still tracked before the redirect returns.
-      expect(global.fetch).toHaveBeenCalledWith(
-        'https://neonapi.io/t.js',
-        expect.objectContaining({ method: 'POST' })
-      );
+      // The agent hit is tracked once, as a redirect rather than a 404.
+      expect(beaconPayloads()).toEqual([
+        expect.objectContaining({ llm_agent: true, llm_404: false, llm_redirect: true }),
+      ]);
+    });
+
+    it('should track an agent .md that 404s with no redirect as a 404', async () => {
+      const req = createMockRequest('/docs/storage/quickstart.md', 'Claude/1.0', '*/*');
+
+      mockFetchByUrl({
+        md: { ok: false, status: 404 },
+        probe: { ok: false, status: 404, headers: new Headers() },
+      });
+
+      const response = await middleware(req);
+
+      expect(response.status).toBe(404);
+      expect(response.headers.get('X-Content-Source')).toBe('agent-404');
+      expect(beaconPayloads()).toEqual([
+        expect.objectContaining({ llm_agent: true, llm_404: true, llm_redirect: false }),
+      ]);
     });
 
     it('should not redirect when the moved page targets an off-origin URL', async () => {
@@ -467,10 +488,9 @@ describe('Middleware - AI Agent Integration Tests', () => {
       expect(response.headers.get('X-Content-Source')).toBe('md-404');
       expect(await response.text()).toContain('/docs/introduction/foobar.md');
       // .md 404s are also tracked as agent traffic.
-      expect(global.fetch).toHaveBeenCalledWith(
-        'https://neonapi.io/t.js',
-        expect.objectContaining({ method: 'POST' })
-      );
+      expect(beaconPayloads()).toEqual([
+        expect.objectContaining({ llm_agent: true, llm_404: true, llm_redirect: false }),
+      ]);
     });
 
     it('should redirect to the target .md when a moved .md page 404s', async () => {
@@ -494,6 +514,10 @@ describe('Middleware - AI Agent Integration Tests', () => {
       });
       expect(response.type).toBe('redirect');
       expect(response.url.toString()).toBe('https://neon.com/docs/cli/login.md');
+      // Tracked once as a redirect, not a 404.
+      expect(beaconPayloads()).toEqual([
+        expect.objectContaining({ llm_agent: true, llm_404: false, llm_redirect: true }),
+      ]);
     });
 
     it('should append .md to a collapsing subpath redirect target', async () => {

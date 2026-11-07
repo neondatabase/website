@@ -39,7 +39,13 @@ describe('LLM analytics delivery', () => {
     expect(options.headers['User-Agent']).toBe('LLMAGENT: ChatGPT-User/1.0 raw-user-agent-secret');
     expect(JSON.parse(options.body)).toEqual({
       name: 'Pageview',
-      data: { llm_agent: true, llm_404: true, llm_request_id: 'fra1::test-request' },
+      data: {
+        llm_agent: true,
+        llm_404: true,
+        llm_redirect: false,
+        llm_request_id: 'fra1::test-request',
+        llm_agent_family: 'chatgpt-user',
+      },
       zarazData: {
         c: 'ajs_anonymous_id=cookie-secret',
         l: 'https://neon.com/docs/introduction?token=query-secret',
