@@ -20,12 +20,12 @@ describe('buildAccessSplit', () => {
       ['OAuth', 82.5],
       ['API key', 18],
     ]);
-    expect(access.map(({ label }) => label)).toEqual([
-      'Full access',
-      'Read-only',
-      'One project',
-      'Limited tool categories',
-      'Pinned Postgres role',
+    expect(access.map(({ label, share }) => [label, share])).toEqual([
+      ['Full access', 92.1],
+      ['Read-only', 6.7],
+      ['One project', 3.6],
+      ['Limited tool categories', 0.8],
+      ['Pinned Postgres role', 0.5],
     ]);
   });
 

@@ -27,7 +27,7 @@ const SplitList = ({ title, rows }) => (
           key={key}
           className="grid grid-cols-[12rem_minmax(0,1fr)_4.5rem] items-center gap-x-4 border-b border-gray-new-15 py-3.5 lg:grid-cols-[10rem_minmax(0,1fr)_4rem]"
         >
-          <span className="truncate text-lg leading-snug tracking-extra-tight text-white lg:text-base">
+          <span className="text-lg leading-snug tracking-extra-tight text-pretty text-white lg:text-base">
             {label}
           </span>
           <span className="h-2 bg-gray-new-10" aria-hidden="true">
