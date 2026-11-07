@@ -309,6 +309,17 @@ app.post('/api/messages', async (c) => {
 
 Return the txid from the write's own `RETURNING`, as a string:
 
+```sql
+INSERT INTO messages (id, channel, author, body, metadata)
+SELECT $1::uuid, channel_members.channel, channel_members.user_id, $3, '{"edited": false}'::jsonb
+FROM channel_members
+WHERE channel_members.channel = $2 AND channel_members.user_id = $4
+RETURNING pg_current_xact_id()::text AS txid
+```
+
+<details>
+  <summary>backend/server.ts with Drizzle</summary>
+
 ```ts filename="backend/server.ts"
 import { and, eq, sql } from "drizzle-orm"
 import { Hono } from "hono"
@@ -354,15 +365,7 @@ export const app = new Hono()
   })
 ```
 
-Or with raw SQL:
-
-```sql
-INSERT INTO messages (id, channel, author, body, metadata)
-SELECT $1::uuid, channel_members.channel, channel_members.user_id, $3, '{"edited": false}'::jsonb
-FROM channel_members
-WHERE channel_members.channel = $2 AND channel_members.user_id = $4
-RETURNING pg_current_xact_id()::text AS txid
-```
+</details>
 
 For edits and deletes that can change no rows, return `{ kind: "unchanged" }` and skip `awaitTxId`, as the [mutations guide](../guides/mutations#returning-the-txid-from-your-backend) shows.
 
@@ -586,11 +589,18 @@ The sealed query replaces `shapeOptions`, and `refreshQuery` renews it before it
 Stop the Electric sync service, or delete your Electric Cloud source, then drop its replication slot and publication:
 
 ```sql
-SELECT pg_drop_replication_slot('electric_slot_default');
-DROP PUBLICATION IF EXISTS electric_publication_default;
-```
+SELECT pg_drop_replication_slot(slot_name)
+FROM pg_replication_slots
+WHERE slot_name LIKE 'electric_slot_%';
 
-`default` is the stream id unless you set one.
+DO $$
+DECLARE pub text;
+BEGIN
+  FOR pub IN SELECT pubname FROM pg_publication WHERE pubname LIKE 'electric_publication_%' LOOP
+    EXECUTE format('DROP PUBLICATION %I', pub);
+  END LOOP;
+END $$;
+```
 
 Then remove the `@electric-sql/*` and `@tanstack/electric-db-collection` packages, the proxy routes and the `ELECTRIC_*` env vars.
 
