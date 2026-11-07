@@ -4,6 +4,7 @@ import CopyCommand from 'components/shared/copy-command';
 import { cn } from 'utils/cn';
 import {
   REGISTRY_ENV_REQUIRED_ON_DEFAULT_BRANCH,
+  hasRegistryEnvironmentRequirements,
   isInlineCodeSafe,
   registryEnvironmentRequiredLabel,
 } from 'utils/function-registry';
@@ -65,30 +66,36 @@ OperationList.propTypes = {
   operations: PropTypes.arrayOf(operationShape).isRequired,
 };
 
-export const EnvironmentTable = ({ className = null, variables }) => (
-  <div className={cn('overflow-x-auto border border-gray-new-20', className)}>
-    <table className="w-full min-w-80 text-left text-sm">
-      <thead className="bg-gray-new-8 font-mono text-xs tracking-tight text-gray-new-60 uppercase">
-        <tr>
-          <th className="px-4 py-3 font-medium">Variable</th>
-          <th className="px-4 py-3 font-medium">Description</th>
-          <th className="px-4 py-3 font-medium">Required</th>
-        </tr>
-      </thead>
-      <tbody>
-        {variables.map(({ name, description, required }) => (
-          <tr className="border-t border-gray-new-20" key={name}>
-            <td className="px-4 py-3 font-mono text-white">{name}</td>
-            <td className="px-4 py-3 text-gray-new-60">{description}</td>
-            <td className="px-4 py-3 whitespace-nowrap text-gray-new-80">
-              {registryEnvironmentRequiredLabel(required)}
-            </td>
+export const EnvironmentTable = ({ className = null, variables }) => {
+  const showRequired = hasRegistryEnvironmentRequirements(variables);
+
+  return (
+    <div className={cn('overflow-x-auto border border-gray-new-20', className)}>
+      <table className="w-full min-w-80 text-left text-sm">
+        <thead className="bg-gray-new-8 font-mono text-xs tracking-tight text-gray-new-60 uppercase">
+          <tr>
+            <th className="px-4 py-3 font-medium">Variable</th>
+            <th className="px-4 py-3 font-medium">Description</th>
+            {showRequired && <th className="px-4 py-3 font-medium">Required</th>}
           </tr>
-        ))}
-      </tbody>
-    </table>
-  </div>
-);
+        </thead>
+        <tbody>
+          {variables.map(({ name, description, required }) => (
+            <tr className="border-t border-gray-new-20" key={name}>
+              <td className="px-4 py-3 font-mono text-white">{name}</td>
+              <td className="px-4 py-3 text-gray-new-60">{description}</td>
+              {showRequired && (
+                <td className="px-4 py-3 whitespace-nowrap text-gray-new-80">
+                  {registryEnvironmentRequiredLabel(required)}
+                </td>
+              )}
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  );
+};
 
 EnvironmentTable.propTypes = {
   className: PropTypes.string,

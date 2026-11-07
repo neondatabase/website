@@ -3,6 +3,7 @@ import {
   REGISTRY_COMMUNITY_CATEGORY,
   REGISTRY_FIRST_PARTY_CATEGORY,
   REGISTRY_PARTNER_CATEGORY,
+  hasRegistryEnvironmentRequirements,
   isInlineCodeSafe,
   registryCategoryIds,
   registryCategoryLabel,
@@ -144,6 +145,7 @@ export const renderTemplateMarkdown = ({ template, previous = null, next = null 
   const installCommand = installCommandFor(template.id);
   const operations = template.operations ?? [];
   const environment = (template.environment ?? []).filter((item) => isInlineCodeSafe(item.name));
+  const showRequired = hasRegistryEnvironmentRequirements(environment);
   const pagePath = registryTemplatePageHref(template.id);
   const sourceUrl = registryTemplateSourceUrl(template);
 
@@ -181,14 +183,15 @@ export const renderTemplateMarkdown = ({ template, previous = null, next = null 
       [
         '## Environment variables',
         '',
-        'The CLI declares these variables in `neon.ts` and adds them to `.env.example` without values, so you need to fill in the required ones before you run the function.',
+        `The CLI declares these variables in \`neon.ts\` and adds them to \`.env.example\` without values, so you need to fill ${showRequired ? 'in the required ones' : 'them in'} before you run the function.`,
         '',
-        '| Variable | Description | Required |',
-        '| --- | --- | --- |',
-        ...environment.map(
-          ({ name, description, required }) =>
-            `| \`${name}\` | ${escapeTableCell(description ?? '')} | ${registryEnvironmentRequiredLabel(required)} |`
-        ),
+        showRequired ? '| Variable | Description | Required |' : '| Variable | Description |',
+        showRequired ? '| --- | --- | --- |' : '| --- | --- |',
+        ...environment.map(({ name, description, required }) => {
+          const cells = [`\`${name}\``, escapeTableCell(description ?? '')];
+          if (showRequired) cells.push(registryEnvironmentRequiredLabel(required));
+          return `| ${cells.join(' | ')} |`;
+        }),
       ].join('\n'),
     operations.length > 0 &&
       `## Run it\n\nInstalling a template doesn't deploy it, so ${RUN_LOCALLY}`,

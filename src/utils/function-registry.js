@@ -441,9 +441,6 @@ export const getFunctionRegistryCatalog = async () => {
 
 export const REGISTRY_ENV_REQUIRED_ON_DEFAULT_BRANCH = 'default-branch';
 
-const registryEnvironmentRequired = (value) =>
-  value === false || value === REGISTRY_ENV_REQUIRED_ON_DEFAULT_BRANCH ? value : true;
-
 const REGISTRY_ENV_REQUIRED_LABELS = new Map([
   [true, 'Yes'],
   [false, 'No'],
@@ -451,7 +448,10 @@ const REGISTRY_ENV_REQUIRED_LABELS = new Map([
 ]);
 
 export const registryEnvironmentRequiredLabel = (value) =>
-  REGISTRY_ENV_REQUIRED_LABELS.get(registryEnvironmentRequired(value));
+  REGISTRY_ENV_REQUIRED_LABELS.get(value) ?? REGISTRY_ENV_REQUIRED_LABELS.get(true);
+
+export const hasRegistryEnvironmentRequirements = (variables) =>
+  variables.some(({ required }) => REGISTRY_ENV_REQUIRED_LABELS.has(required));
 
 const pickTemplateJsonFields = (data) => {
   if (!data || typeof data !== 'object') return {};
@@ -461,11 +461,11 @@ const pickTemplateJsonFields = (data) => {
       .filter(
         (item) => item && typeof item.name === 'string' && typeof item.description === 'string'
       )
-      .map(({ name, description, required }) => ({
-        name,
-        description,
-        required: registryEnvironmentRequired(required),
-      }));
+      .map(({ name, description, required }) =>
+        REGISTRY_ENV_REQUIRED_LABELS.has(required)
+          ? { name, description, required }
+          : { name, description }
+      );
   }
   if (Array.isArray(data.operations)) {
     picked.operations = data.operations.filter(

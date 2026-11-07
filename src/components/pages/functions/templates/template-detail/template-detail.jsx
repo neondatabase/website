@@ -15,6 +15,7 @@ import LINKS from 'constants/links';
 import ArrowBackIcon from 'icons/arrow-back.inline.svg';
 import { cn } from 'utils/cn';
 import {
+  hasRegistryEnvironmentRequirements,
   isInlineCodeSafe,
   registryCategoryLabel,
   registryProviderLabel,
@@ -307,7 +308,10 @@ const TemplateDetail = async ({ template, previous = null, next = null, readme =
             description={
               <>
                 The CLI declares these variables in <Code>neon.ts</Code> and adds them to{' '}
-                <Code>.env.example</Code> without values, so you need to fill in the required ones
+                <Code>.env.example</Code> without values, so you need to fill{' '}
+                {hasRegistryEnvironmentRequirements(environment)
+                  ? 'in the required ones'
+                  : 'them in'}{' '}
                 before you run the function.
               </>
             }
