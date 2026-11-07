@@ -123,7 +123,7 @@ neon projects create --name coding-agents --region-id aws-us-east-2
 
 Copy the project id from the output into `NEON_PROJECT_ID`. AI Gateway is on by default for new projects, and it draws on your organization's prepaid credits. All agents share that balance: once it drops below $2, the gateway answers new requests from every agent with `429` until you add credits.
 
-Finally, create a [project-scoped API key](/docs/manage/api-keys#create-project-scoped-organization-api-keys) for this project and paste it into `NEON_API_KEY`: in your organization's **Settings** > **API keys**, click **Create new** and select **Project-scoped**. The app uses it for one thing: managing the AI Gateway credentials it gives to agents. A project-scoped key can't reach your other projects, and the app never sends it to an agent.
+Finally, create a [project-scoped API key](/docs/manage/api-keys#create-project-scoped-organization-api-keys) for this project and paste it into `NEON_API_KEY`: in your organization's **Settings** > **API keys**, click **Create new** and select **Project-scoped**. The app uses it to manage the AI Gateway credentials it gives to agents. A project-scoped key can't reach your other projects, and the app never sends it to an agent.
 
 ## Understand AI Gateway credentials
 
@@ -147,7 +147,7 @@ export async function createCredential(name: string) {
 
 In the code above:
 
-- `api_token` is shown once. The app writes it straight into the agent's environment and never stores it.
+- `api_token` is shown once (can be later retrieved using `neon credentials reveal`). The app writes it straight into the agent's environment and never stores it.
 - `token_id` isn't a secret. The app keeps it in the agent's Agent37 metadata, which is how it finds the credential again to rotate or revoke it.
 
 The `gateway()` helper looks up the branch's gateway host once, with `client.aiGateway.get()`. Each harness adds the path for its API to that host: `/anthropic`, `/openai/v1`, `/v1`, or `/gemini`.
