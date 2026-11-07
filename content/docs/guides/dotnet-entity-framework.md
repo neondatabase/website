@@ -112,6 +112,8 @@ If you do not have one already, create a Neon project.
    }
    ```
 
+   Npgsql uses this key-value format rather than a `postgresql://` URL. To convert a URL such as `postgresql://alex:AbC123dEf@ep-cool-darkness-123456-pooler.us-east-2.aws.neon.tech/dbname?sslmode=require&channel_binding=require`, use the hostname for `Host`, the path for `Database`, the user and password for `Username` and `Password`, and map `sslmode=require` to `SSL Mode=Require` and `channel_binding=require` to `Channel Binding=Require`.
+
    Keep the existing `Logging` and `AllowedHosts` settings in the file. Don't commit a real password: for local development, you can store the connection string with [user secrets](https://learn.microsoft.com/en-us/aspnet/core/security/app-secrets) instead.
 
 4. Create a Todo controller in `Controllers/TodoController.cs`:
@@ -191,7 +193,7 @@ If you do not have one already, create a Neon project.
 
 ## Run the application
 
-1. Start the application on port 5001:
+1. Start the application on port 5001 (use any free port if 5001 is taken, and change the URLs below to match):
 
    ```bash
    dotnet run --urls http://localhost:5001
