@@ -15,7 +15,7 @@ updatedOn: '2026-09-16T19:45:35.340Z'
 <CopyPrompt src="/prompts/astro-serverless-prompt.md" 
 description="Pre-built prompt for connecting Astro to Neon using the Neon serverless driver"/>
 
-Astro builds fast content sites, powerful web applications, dynamic server APIs, and everything in-between. This guide describes how to create a database on Neon and access it from an Astro site or application.
+Astro is a web framework for content sites, web applications, and server APIs. This guide describes how to create a database on Neon and query it from an Astro site or application at request time.
 
 To create a Neon project and access it from an Astro site or application:
 
@@ -31,7 +31,7 @@ If you do not have one already, create a Neon project. Save your connection deta
 
 ## Create an Astro project and add dependencies
 
-1. Create an Astro project if you do not have one. For instructions, see [Getting Started](https://docs.astro.build/en/getting-started/), in the Astro documentation.
+1. Create an Astro project if you do not have one, for example with `npm create astro@latest`. For instructions, see [Getting Started](https://docs.astro.build/en/getting-started/) in the Astro documentation.
 
 2. Add project dependencies using one of the following commands:
 
@@ -53,16 +53,31 @@ If you do not have one already, create a Neon project. Save your connection deta
 
 ## Enable on-demand rendering
 
-Astro requires an adapter to query databases at request time. Run:
+Astro needs an adapter and server output to query your database at request time. Add the Node adapter:
 
 ```shell
 npx astro add node
 ```
 
-This enables [on-demand rendering](https://docs.astro.build/en/guides/on-demand-rendering/) (also known as server-side rendering or SSR) so your pages can fetch fresh data on each request.
+Then set `output: 'server'` in `astro.config.mjs` so every page and endpoint uses [on-demand rendering](https://docs.astro.build/en/guides/on-demand-rendering/) (also known as server-side rendering or SSR):
+
+```javascript filename="astro.config.mjs"
+// @ts-check
+import { defineConfig } from 'astro/config';
+
+import node from '@astrojs/node';
+
+// https://astro.build/config
+export default defineConfig({
+  output: 'server', // [!code ++]
+  adapter: node({
+    mode: 'standalone',
+  }),
+});
+```
 
 <Admonition type="note">
-This adapter is required for real-time database queries in production. Without it, your database is queried only once at build time, and production will serve static data. Development mode (`npm run dev`) rebuilds pages automatically and does not require the adapter.
+The adapter alone isn't enough. Astro's default output is `static`, so without `output: 'server'`, `npm run build` prerenders your pages and API routes at build time and production serves the build-time results. To render only some routes on demand, keep the default and add `export const prerender = false;` to those pages and endpoints. Development mode (`npm run dev`) renders every request, so you won't see the difference until you build.
 </Admonition>
 
 ## Store your Neon credentials
@@ -70,8 +85,10 @@ This adapter is required for real-time database queries in production. Without i
 Add a `.env` file to your project directory and add your Neon connection string to it. You can find the connection string for your database by clicking the **Connect** button in the Console nav to open the **Connect to your branch** modal. For more information, see [Connect from any application](/docs/connect/connect-from-any-app).
 
 ```shell shouldWrap
-DATABASE_URL="postgresql://<user>:<password>@<endpoint_hostname>.neon.tech:<port>/<dbname>?sslmode=require&channel_binding=require"
+DATABASE_URL="postgresql://[user]:[password]@[neon_hostname]/[dbname]?sslmode=require&channel_binding=require"
 ```
+
+If you use node-postgres, `pg` 8.23 and later print a `SECURITY WARNING` for `sslmode=require`. Change it to `sslmode=verify-full` to keep the same behavior without the warning.
 
 ## Create a database utility
 
@@ -166,18 +183,16 @@ You can also initialize the database connection directly in each `.astro` file, 
 When you run `npm run dev` you can expect to see something like the following when you visit `localhost:4321`:
 
 ```shell shouldWrap
-PostgreSQL 17.7 on aarch64-unknown-linux-gnu, compiled by gcc (Debian 12.2.0-14+deb12u1) 12.2.0, 64-bit
+PostgreSQL 18.6 (ac70818) on aarch64-unknown-linux-gnu, compiled by gcc (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0, 64-bit
 ```
 
 ### Server Endpoints (API Routes)
 
-In your server endpoints (API Routes) in Astro application, import the database client from your utility file:
+In your server endpoints (API routes), import the database client from your utility file. Create `src/pages/api/index.ts`:
 
 <CodeTabs reverse={true} labels={["node-postgres", "postgres.js", "Neon serverless driver"]}>
 
-```javascript
-// File: src/pages/api/index.ts
-
+```typescript filename="src/pages/api/index.ts"
 import { pool } from '../../lib/neon';
 
 export async function GET() {
@@ -193,9 +208,7 @@ export async function GET() {
 }
 ```
 
-```javascript
-// File: src/pages/api/index.ts
-
+```typescript filename="src/pages/api/index.ts"
 import { sql } from '../../lib/neon';
 
 export async function GET() {
@@ -206,9 +219,7 @@ export async function GET() {
 }
 ```
 
-```javascript
-// File: src/pages/api/index.ts
-
+```typescript filename="src/pages/api/index.ts"
 import { sql } from '../../lib/neon';
 
 export async function GET() {
@@ -225,9 +236,11 @@ export async function GET() {
 
 When you run `npm run dev` you can expect to see something like the following when you visit the `localhost:4321/api` route:
 
-```shell shouldWrap
-{ version: 'PostgreSQL 17.7 on aarch64-unknown-linux-gnu, compiled by gcc (Debian 12.2.0-14+deb12u1) 12.2.0, 64-bit' }
+```json shouldWrap
+{"version":"PostgreSQL 18.6 (ac70818) on aarch64-unknown-linux-gnu, compiled by gcc (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0, 64-bit"}
 ```
+
+To run the production build, run `npm run build` and then `node ./dist/server/entry.mjs`. With `output: 'server'`, each request queries your database.
 
 </Steps>
 

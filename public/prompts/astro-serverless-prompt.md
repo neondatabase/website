@@ -33,7 +33,7 @@ Run:
 npx astro add node --yes
 ```
 
-This enables server-side rendering (SSR) so pages can fetch fresh data on each request. Without this, the database will only be queried at build time.
+Then set `output: 'server'` in the `defineConfig({ ... })` call in `astro.config.mjs`. The adapter alone isn't enough: Astro's default output is `static`, so without `output: 'server'` (or `export const prerender = false;` in each page and endpoint), `npm run build` prerenders pages and API routes and the database is queried only at build time.
 
 ---
 
@@ -57,7 +57,7 @@ This centralizes your database configuration following best practices.
 - If it doesn't exist, advise the user to create one and add the following line, replacing the connection string with the one copied from their Neon project,
 
   ```
-  DATABASE_URL="postgresql://<user>:<password>@<hostname>.neon.tech:<port>/<dbname>?sslmode=require&channel_binding=require"
+  DATABASE_URL="postgresql://[user]:[password]@[neon_hostname]/[dbname]?sslmode=require&channel_binding=require"
   ```
 
 - **Do not hardcode** credentials directly in the code.
@@ -118,7 +118,7 @@ You should see the Postgres version returned by your Neon database.
 Before suggesting code or making edits, ensure:
 
 - The `@neondatabase/serverless` package is used exclusively
-- The Node.js adapter is installed (`npx astro add node`)
+- The Node.js adapter is installed (`npx astro add node`) and `astro.config.mjs` sets `output: 'server'`
 - A `src/lib/neon.ts` utility file is created and exports the `sql` function
 - Code imports from the utility file (`import { sql } from '../lib/neon'`), not inline initialization
 - Queries are server-side only (not in client JS or components)
@@ -137,4 +137,4 @@ Before suggesting code or making edits, ensure:
 
 ---
 
-For help finding your connection string, see: [Connect from any application – Neon Docs](https://neon.tech/docs/connect/connect-from-any-application)
+For help finding your connection string, see: [Connect from any application – Neon Docs](https://neon.com/docs/connect/connect-from-any-app)
