@@ -37,8 +37,9 @@ To establish a basic connection from TypeORM to a database on Neon, perform the 
 
 3. Update the TypeORM `DataSource` initialization in your application (`src/data-source.ts` in a project created with `typeorm init`) to the following. Replace the `host`, `port`, `username`, `password`, and `database` options with `url`, and keep your other options, such as `entities` and `migrations`.
 
-   ```typescript {1,6,7}
+   ```typescript {1,7,8}
    import 'dotenv/config';
+   import 'reflect-metadata';
    import { DataSource } from 'typeorm';
 
    export const AppDataSource = new DataSource({
@@ -53,7 +54,7 @@ To establish a basic connection from TypeORM to a database on Neon, perform the 
 
    The `import 'dotenv/config'` line loads `.env` before the `DataSource` reads `process.env.DATABASE_URL`. Without it, `DATABASE_URL` is undefined and TypeORM tries to connect to `localhost`.
 
-4. Create a `.env` file in your project root, add a `DATABASE_URL` variable, and set it to the connection string you copied in the first step:
+4. Create a `.env` file in your project root, add a `DATABASE_URL` variable, and set it to the connection string you copied in the first step. Add `.env` to your `.gitignore` so you don't commit the password.
 
    ```text shouldWrap
    DATABASE_URL="postgresql://[user]:[password]@[neon_hostname]/[dbname]?sslmode=require&channel_binding=require"
