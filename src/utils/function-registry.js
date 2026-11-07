@@ -439,13 +439,33 @@ export const getFunctionRegistryCatalog = async () => {
   }
 };
 
+export const REGISTRY_ENV_REQUIRED_ON_DEFAULT_BRANCH = 'default-branch';
+
+const registryEnvironmentRequired = (value) =>
+  value === false || value === REGISTRY_ENV_REQUIRED_ON_DEFAULT_BRANCH ? value : true;
+
+const REGISTRY_ENV_REQUIRED_LABELS = new Map([
+  [true, 'Yes'],
+  [false, 'No'],
+  [REGISTRY_ENV_REQUIRED_ON_DEFAULT_BRANCH, 'Default branch only'],
+]);
+
+export const registryEnvironmentRequiredLabel = (value) =>
+  REGISTRY_ENV_REQUIRED_LABELS.get(registryEnvironmentRequired(value));
+
 const pickTemplateJsonFields = (data) => {
   if (!data || typeof data !== 'object') return {};
   const picked = {};
   if (Array.isArray(data.environment)) {
-    picked.environment = data.environment.filter(
-      (item) => item && typeof item.name === 'string' && typeof item.description === 'string'
-    );
+    picked.environment = data.environment
+      .filter(
+        (item) => item && typeof item.name === 'string' && typeof item.description === 'string'
+      )
+      .map(({ name, description, required }) => ({
+        name,
+        description,
+        required: registryEnvironmentRequired(required),
+      }));
   }
   if (Array.isArray(data.operations)) {
     picked.operations = data.operations.filter(

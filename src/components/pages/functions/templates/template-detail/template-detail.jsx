@@ -307,8 +307,8 @@ const TemplateDetail = async ({ template, previous = null, next = null, readme =
             description={
               <>
                 The CLI declares these variables in <Code>neon.ts</Code> and adds them to{' '}
-                <Code>.env.example</Code> without values, so you need to fill them in before you run
-                the function.
+                <Code>.env.example</Code> without values, so you need to fill in the required ones
+                before you run the function.
               </>
             }
           >

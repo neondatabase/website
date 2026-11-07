@@ -6,6 +6,7 @@ import {
   isInlineCodeSafe,
   registryCategoryIds,
   registryCategoryLabel,
+  registryEnvironmentRequiredLabel,
   registryProviderLabel,
   registryTemplateCategories,
   registryTemplateFilters,
@@ -180,12 +181,13 @@ export const renderTemplateMarkdown = ({ template, previous = null, next = null 
       [
         '## Environment variables',
         '',
-        'The CLI declares these variables in `neon.ts` and adds them to `.env.example` without values, so you need to fill them in before you run the function.',
+        'The CLI declares these variables in `neon.ts` and adds them to `.env.example` without values, so you need to fill in the required ones before you run the function.',
         '',
-        '| Variable | Description |',
-        '| --- | --- |',
+        '| Variable | Description | Required |',
+        '| --- | --- | --- |',
         ...environment.map(
-          ({ name, description }) => `| \`${name}\` | ${escapeTableCell(description ?? '')} |`
+          ({ name, description, required }) =>
+            `| \`${name}\` | ${escapeTableCell(description ?? '')} | ${registryEnvironmentRequiredLabel(required)} |`
         ),
       ].join('\n'),
     operations.length > 0 &&

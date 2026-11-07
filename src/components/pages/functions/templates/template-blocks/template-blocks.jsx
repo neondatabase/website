@@ -2,7 +2,11 @@ import PropTypes from 'prop-types';
 
 import CopyCommand from 'components/shared/copy-command';
 import { cn } from 'utils/cn';
-import { isInlineCodeSafe } from 'utils/function-registry';
+import {
+  REGISTRY_ENV_REQUIRED_ON_DEFAULT_BRANCH,
+  isInlineCodeSafe,
+  registryEnvironmentRequiredLabel,
+} from 'utils/function-registry';
 
 const Operation = ({ operation, installCommand }) => {
   const command = operation.id ? `${installCommand} --operation ${operation.id}` : null;
@@ -68,13 +72,17 @@ export const EnvironmentTable = ({ className = null, variables }) => (
         <tr>
           <th className="px-4 py-3 font-medium">Variable</th>
           <th className="px-4 py-3 font-medium">Description</th>
+          <th className="px-4 py-3 font-medium">Required</th>
         </tr>
       </thead>
       <tbody>
-        {variables.map(({ name, description }) => (
+        {variables.map(({ name, description, required }) => (
           <tr className="border-t border-gray-new-20" key={name}>
             <td className="px-4 py-3 font-mono text-white">{name}</td>
             <td className="px-4 py-3 text-gray-new-60">{description}</td>
+            <td className="px-4 py-3 whitespace-nowrap text-gray-new-80">
+              {registryEnvironmentRequiredLabel(required)}
+            </td>
           </tr>
         ))}
       </tbody>
@@ -85,6 +93,10 @@ export const EnvironmentTable = ({ className = null, variables }) => (
 EnvironmentTable.propTypes = {
   className: PropTypes.string,
   variables: PropTypes.arrayOf(
-    PropTypes.shape({ name: PropTypes.string.isRequired, description: PropTypes.string })
+    PropTypes.shape({
+      name: PropTypes.string.isRequired,
+      description: PropTypes.string,
+      required: PropTypes.oneOf([true, false, REGISTRY_ENV_REQUIRED_ON_DEFAULT_BRANCH]),
+    })
   ).isRequired,
 };
