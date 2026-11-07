@@ -68,13 +68,6 @@ export default {
       'Let agents provision a temporary Neon project (Lakebase Postgres, Data API, and Managed Better Auth) before a human creates a Neon account.',
     pathname: LINKS.claimableNeon,
   },
-  cli: {
-    title: 'Neon CLI: Manage Postgres, Branches, and Your Backend From the Terminal',
-    description:
-      'Create projects, branch databases, get connection strings, and run neon init to set up your coding agent, all from the terminal. Scriptable for CI and easy for agents to call.',
-    pathname: LINKS.cli,
-    imagePath: '/images/social-previews/cli.jpg',
-  },
   functions: {
     title: 'Neon Functions — Long-running serverless functions',
     description:
@@ -137,13 +130,6 @@ export default {
       'We asked 50 developers managing production Postgres about recovery times and their business impact.',
     pathname: LINKS.restoresSurvey,
     imagePath: '/images/social-previews/report.jpg',
-  },
-  variable: {
-    title: 'Postgres Autoscaling: Compute That Follows Your Traffic | Neon',
-    description:
-      'Neon autoscales Postgres compute up and down as load changes, within limits you set, and scales to zero when idle. Stop provisioning for peak traffic and resizing instances by hand.',
-    imagePath: '/images/social-previews/variable.jpg',
-    pathname: LINKS.variableLoad,
   },
   branching: {
     title: 'Postgres Branching Workflows: Copy a Database in a Second | Neon',

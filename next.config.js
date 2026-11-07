@@ -2797,6 +2797,16 @@ const defaultConfig = {
         permanent: true,
       },
       {
+        source: '/cli',
+        destination: '/docs/cli',
+        permanent: true,
+      },
+      {
+        source: '/variable-load',
+        destination: '/use-cases/bursty-workloads',
+        permanent: true,
+      },
+      {
         source: '/partners',
         destination: 'https://neon.com/docs/guides/platform-integration-overview',
         permanent: true,
