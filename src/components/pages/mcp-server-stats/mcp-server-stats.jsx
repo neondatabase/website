@@ -1,0 +1,91 @@
+import PropTypes from 'prop-types';
+
+import CTANew from 'components/shared/cta-new';
+import LINKS from 'constants/links';
+
+import { buildAccessSplit } from './access';
+import AccessSplit from './access-split';
+import Hero from './hero';
+import HowItWorks from './how-it-works';
+import ShareList from './share-list';
+import { buildClientShares, buildToolShares } from './share-series';
+import Trend from './trend';
+import { formatWeekRange } from './weeks';
+
+const rowsShape = PropTypes.arrayOf(
+  PropTypes.shape({
+    weekStart: PropTypes.string.isRequired,
+    key: PropTypes.string.isRequired,
+    share: PropTypes.number.isRequired,
+  })
+);
+
+const McpServerStats = ({ clients, tools, access, publishedAt }) => {
+  const clientShares = buildClientShares(clients);
+  const toolShares = buildToolShares(tools);
+  const accessSplit = buildAccessSplit(access.rows);
+
+  return (
+    <>
+      <Hero publishedAt={publishedAt} />
+      <ShareList
+        className="mt-28 xl:mt-24 lg:mt-20 md:mt-14"
+        id="mcp-stats-clients-heading"
+        title="Top agents last week."
+        description={
+          <>
+            Share of active users who called tools from each client,{' '}
+            {formatWeekRange(clientShares.latestWeek)}.
+          </>
+        }
+        rows={clientShares.ranked}
+        footnote="Accounts that called a tool that week. Shares add up to over 100% because people use several clients. Custom code is scripts that only report an HTTP library. Changes are against the previous week."
+      />
+      <Trend weeks={clientShares.weeks} series={clientShares.series} />
+      <ShareList
+        id="mcp-stats-tools-heading"
+        title="Most used tools."
+        description={
+          <>Share of active users who called each tool, {formatWeekRange(toolShares.latestWeek)}.</>
+        }
+        rows={toolShares.ranked}
+        isMono
+        footnote="The ten most used tools. Agents call several tools, so the shares add up to more than 100%."
+      />
+      <AccessSplit
+        signIn={accessSplit.signIn}
+        access={accessSplit.access}
+        windowStart={access.windowStart}
+        windowEnd={access.windowEnd}
+      />
+      <HowItWorks />
+      <CTANew
+        label="Get started"
+        title="Connect your agent to Neon"
+        description="Run npx neon@latest mcp to add the Neon MCP server to Claude Code, Cursor, Codex, or another MCP client."
+        buttonText="Read the MCP server docs"
+        buttonUrl={LINKS.mcpServerDocs}
+        copyWrapperClassName="lg:max-w-[720px] md:max-w-none"
+      />
+    </>
+  );
+};
+
+McpServerStats.propTypes = {
+  clients: rowsShape.isRequired,
+  tools: rowsShape.isRequired,
+  access: PropTypes.shape({
+    windowStart: PropTypes.string.isRequired,
+    windowEnd: PropTypes.string.isRequired,
+    rows: PropTypes.arrayOf(
+      PropTypes.shape({
+        dimension: PropTypes.string.isRequired,
+        value: PropTypes.string.isRequired,
+        share: PropTypes.number.isRequired,
+      })
+    ).isRequired,
+  }).isRequired,
+  publishedAt: PropTypes.string.isRequired,
+};
+
+export default McpServerStats;
