@@ -68,14 +68,12 @@ const AccessSplit = ({ signIn, access, windowStart, windowEnd }) => (
         <SplitList title="Access" rows={access} />
       </div>
       <p className="mt-6 max-w-[672px] text-sm leading-normal tracking-extra-tight text-gray-new-50">
-        OAuth means the user signed in through the browser when they added the server. An API key is
-        a personal or org key in the client config. Full access means none of the restrictions
-        listed under it, which you can set in the{' '}
+        Full access means none of the restrictions below, which you set in the{' '}
         <Link className="underline" to={LINKS.mcpServerConfigGenerator} theme="gray-50">
           config generator
         </Link>
-        . Users whose client doesn&apos;t report a setting are left out of that column, and a user
-        counts under every setting they used, so a column can add up to more than 100%.
+        . Clients that don&apos;t report a setting are left out, and a user can count under several
+        settings.
       </p>
     </Container>
   </section>
