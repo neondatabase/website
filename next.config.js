@@ -2782,6 +2782,31 @@ const defaultConfig = {
         permanent: true,
       },
       {
+        source: '/enterprise',
+        destination: 'https://www.databricks.com/product/lakebase',
+        permanent: true,
+      },
+      {
+        source: '/ai',
+        destination: '/docs/ai/agent-setup',
+        permanent: true,
+      },
+      {
+        source: '/migration',
+        destination: '/docs/import/migrate-intro',
+        permanent: true,
+      },
+      {
+        source: '/cli',
+        destination: '/docs/cli',
+        permanent: true,
+      },
+      {
+        source: '/variable-load',
+        destination: '/use-cases/bursty-workloads',
+        permanent: true,
+      },
+      {
         source: '/partners',
         destination: 'https://neon.com/docs/guides/platform-integration-overview',
         permanent: true,
