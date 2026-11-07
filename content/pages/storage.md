@@ -1,11 +1,11 @@
 ---
 title: 'Lakebase Postgres storage: Bottomless, branchable'
 subtitle: The storage engine behind Lakebase Postgres. Copy-on-write, usage-based, with zero storage management.
-updatedOn: '2026-11-06T23:11:22.000Z'
+updatedOn: '2026-11-07T13:45:25.000Z'
 ---
 
 <Admonition type="note" title="This page is about database storage">
-This page explains the storage engine inside Lakebase Postgres, the database in the Neon backend. It isn't about [Neon Object Storage](/object-storage), the S3-compatible product for files, images, and other objects that branch with your database. For the current architecture, see the [Lakebase architecture overview](/docs/introduction/architecture-overview).
+This page explains the storage engine inside Lakebase Postgres, the database in the Neon backend. Do not confuse with [Neon Object Storage](/object-storage), the S3-compatible product for files, images, and other objects that branch with your database. For the current architecture, see the [Lakebase architecture overview](/docs/introduction/architecture-overview).
 </Admonition>
 
 Lakebase Postgres uses a unique storage layer that eliminates capacity planning and enables new workflows. Built on a copy-on-write engine backed by bottomless cloud storage, Neon’s architecture removes the constraints of traditional serverful setups, which require pre-provisioned storage volumes and limit scalability. At the same time, it lays the foundation for core Lakebase Postgres features like [instant branching](/blog/instantly-copy-tb-size-datasets-the-magic-of-copy-on-write) and [point-in-time restores](/blog/recover-large-postgres-databases#neons-instant-point-in-time-recovery).
