@@ -3,7 +3,7 @@ author: rishi-raj-jain
 enableTableOfContents: true
 createdAt: '2026-11-06T00:00:00.000Z'
 title: Build a video clipping app with Agent37 and Neon Object Storage
-subtitle: Use a Neon Function Trigger to wake an Agent37 agent when a video is uploaded to Neon Object Storage, cut clips with ffmpeg, and title them with AI Gateway.
+subtitle: Use a Neon Function Trigger to wake an Agent37 agent when a video is uploaded to Neon Object Storage, cut clips with ffmpeg, and title them with Neon AI Gateway.
 ---
 
 Cutting clips from a video takes a lot of CPU: ffmpeg has to decode the file, pick the moments to cut, and encode new files. In this guide, each user gets an [Agent37](https://www.agent37.com) agent, a computer of their own with ffmpeg installed that only remains awake until the process is complete. The user uploads a video directly to a [Neon Object Storage](/docs/storage/overview) bucket, a [Function Trigger](/docs/compute/functions/triggers/object-storage) on that upload wakes their agent, and the agent puts its clips back in the bucket for the app to serve with presigned URLs. When the agent finishes, [Neon AI Gateway](/docs/ai-gateway/overview) writes a title and caption for each clip from its thumbnail.
@@ -24,7 +24,7 @@ sequenceDiagram
     B->>S: Play clips (presigned URLs)
 ```
 
-You will use Next.js with [shadcn/ui](https://ui.shadcn.com), Neon Object Storage, [Neon Functions](/docs/compute/functions/overview) and Function Triggers, Neon Postgres, Neon AI Gateway, [Agent37's `agent37-hermes` template](https://www.agent37.com/docs/agents-api/urls#what-agent37-hermes-serves), aws4fetch to sign storage requests, and the [Sintel trailer](https://durian.blender.org) (CC BY, Blender Foundation) as a test video.
+You will use Next.js with [shadcn/ui](https://ui.shadcn.com), Neon Object Storage, [Neon Functions](/docs/compute/functions/overview) and Function Triggers, Lakebase Postgres, Neon AI Gateway, [Agent37's `agent37-hermes` template](https://www.agent37.com/docs/agents-api/urls#what-agent37-hermes-serves), aws4fetch to sign storage requests, and the [Sintel trailer](https://durian.blender.org) (CC BY, Blender Foundation) as a test video.
 
 ## Demo
 
@@ -402,7 +402,7 @@ Open [http://127.0.0.1:3000](http://127.0.0.1:3000) and click **Create my agent*
 The repository is ready to deploy to Vercel **once you've added authentication** in front of it. The cookie that identifies a user here is not a login. Use the following steps to deploy:
 
 - Fork [the GitHub repository](https://github.com/rishi-raj-jain/video-clips-neon-object-storage).
-- Add your own authentication, such as [Neon Auth](/docs/auth/overview).
+- Add your own authentication, such as [Managed Better Auth](/docs/auth/overview).
 - Navigate to the Vercel Dashboard and create a **New Project**.
 - Link the new project to your fork.
 - In **Settings**, update the **Environment Variables** to match those in your local `.env` file.
