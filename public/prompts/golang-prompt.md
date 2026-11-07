@@ -45,7 +45,7 @@ When this prompt is triggered, automatically configure the open Go project as fo
 
 Create a new file named `main.go` and populate it with the following Go code. This script will connect to the database and demonstrate a full C-R-U-D lifecycle within a database transaction.
 
-```go title="main.go"
+```go filename="main.go"
 package main
 
 import (
@@ -138,7 +138,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Transaction commit failed: %v\n", err)
 		os.Exit(1)
 	}
-	fmt.Println("Transaction committed successfully.\n")
+	fmt.Println("Transaction committed successfully.")
 }
 ```
 
