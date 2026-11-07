@@ -49,11 +49,11 @@ For your Rust project, use `cargo` to create a new project and add the required 
     cd neon-rust-quickstart
     ```
 
-    This command creates a new directory named `neon-rust-quickstart` containing a `src/main.rs` file for your code and a `Cargo.toml` file for your project's configuration and dependencies.
+    This command creates a new directory named `neon-rust-quickstart` containing a `src/main.rs` file for your code and a `Cargo.toml` file for your project's configuration and dependencies. To set up a project in an existing directory instead, run `cargo init` in that directory.
 
     > Open the directory in your preferred code editor (for example, VS Code, RustRover, etc.) to edit the files.
 
-2.  Add the required crates using `cargo add`. Choose the set of commands for either a synchronous or asynchronous setup.
+2.  Add the required crates using `cargo add`. Choose the synchronous `postgres` crate for scripts and command-line tools, or the asynchronous `tokio-postgres` crate if your application already uses Tokio (for example, a web server built on Axum or Actix). Use the same tab for the code examples that follow.
 
     <CodeTabs labels={["postgres (sync)", "tokio-postgres (async)"]}>
 
