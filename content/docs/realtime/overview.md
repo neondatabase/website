@@ -384,6 +384,8 @@ Neon Realtime is a sync engine that supports [arbitrary live SQL queries](/docs/
 
 Compared with <a className="group inline text-pretty" href="https://www.convex.dev" target="_blank" rel="nofollow noopener noreferrer">Convex<span className="whitespace-nowrap no-underline"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="none" viewBox="0 0 14 14" className="ml-1 inline-block size-3.5 shrink-0 align-[-0.125em]"><path fill="currentColor" d="M0 0h14v14H0z" opacity="0.2"></path><path stroke="currentColor" strokeLinecap="square" d="M9.915 8.885V4.08H5.11M9.625 4.375 4.083 9.917"></path></svg></span></a>, Neon Realtime supports similar [end-to-end reactivity](/docs/realtime/guides/reactivity) but on standard Postgres and with standard web frameworks and build tooling. Realtime also uses delta-sync rather than query-invalidation, which is more efficient over the wire.
 
+See [how to Migrate from Convex](/docs/realtime/migrate-from/convex).
+
 ---
 
 #### Materialize
@@ -402,9 +404,9 @@ Compared with <a className="group inline text-pretty" href="https://materialize.
 
 <FaqItem question="Is Realtime compatible with, or based on, Electric?">
 
-Realtime isn't based on [Electric](/blog/electric-joins-neon), but it **is a drop-in replacement** for Electric's role in your stack. We recommend that teams using Electric migrate to Realtime.
+Realtime is the successor to [Electric](/blog/electric-joins-neon), developed by the Electric team inside Neon. It's a new system rather than a version of the Electric sync engine, but it **is a drop-in replacement** for Electric's role in your stack. We recommend that teams using Electric migrate to Realtime.
 
-Live SQL queries replace shapes. For TanStack DB users, [`realtimeCollectionOptions()`](/docs/realtime/sdks/typescript#tanstack-db-realtimecollectionoptions) replaces `electricCollectionOptions()`.
+Live SQL queries replace shapes. For TanStack DB users, [`realtimeCollectionOptions()`](/docs/realtime/sdks/typescript#tanstack-db-realtimecollectionoptions) replaces `electricCollectionOptions()`. See [how to Migrate from Electric](/docs/realtime/migrate-from/electric).
 
 </FaqItem>
 
