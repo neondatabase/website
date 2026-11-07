@@ -108,7 +108,7 @@ Create a file named `.env` in your project's root directory. This file stores yo
     DATABASE_URL="jdbc:postgresql://[neon_hostname]/[dbname]?user=[user]&password=[password]&sslmode=require&channelBinding=require"
     ```
 
-    > Replace `[user]`, `[password]`, `[neon_hostname]`, and `[dbname]` with your actual database credentials.
+    > Replace `[user]`, `[password]`, `[neon_hostname]`, and `[dbname]` with your actual database credentials. If you start from a `postgresql://` connection string, move the user and password into the `user` and `password` parameters, add the `jdbc:` prefix, and write `channel_binding=require` as `channelBinding=require`.
 
 ## Examples
 
