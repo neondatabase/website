@@ -1,9 +1,9 @@
 ---
 title: 'PostgreSQL 19 Schema Management and Backup'
-page_title: 'PostgreSQL 19 pg_get_*_ddl() Functions and pg_dumpall Improvements'
-page_description: 'Learn how to use PostgreSQL 19 pg_get_database_ddl, pg_get_role_ddl, pg_get_tablespace_ddl functions and pg_dumpall non-text output formats for better schema management and backup workflows.'
+page_title: 'pg_get_*_ddl() and pg_dumpall Formats: Removed From PostgreSQL 19'
+page_description: "PostgreSQL 19 won't ship pg_get_database_ddl(), pg_get_role_ddl(), pg_get_tablespace_ddl(), or the pg_dumpall custom, directory, and tar formats. Both were removed during the beta. See the beta behavior and the workflow to use instead."
 ogImage: ''
-updatedOn: '2026-06-04T14:03:00.799Z'
+updatedOn: '2026-11-07T21:32:00.000Z'
 enableTableOfContents: true
 previousLink:
   title: 'PostgreSQL 19 Query Improvements'
@@ -13,17 +13,22 @@ nextLink:
   slug: 'postgresql-19/monitoring-operations'
 ---
 
-<Admonition type="note" title="PostgreSQL 19 Beta 1 is here">
-[PostgreSQL 19 Beta 1 was released on June 4, 2026](https://www.postgresql.org/about/news/postgresql-19-beta-1-released-3313/), so you can try the new schema tooling for yourself ahead of the final release expected later in 2026. Beta 1 adds `pg_get_database_ddl()`, `pg_get_role_ddl()`, and `pg_get_tablespace_ddl()` for DDL extraction, and lets `pg_dumpall` produce custom, directory, and tar output formats.
+<Admonition type="important" title="These features won't ship in PostgreSQL 19">
+Both features on this page were removed from PostgreSQL 19 during the beta, and neither is in the [PostgreSQL 19 release notes](https://www.postgresql.org/docs/19/release-19.html):
+
+- The custom, directory, and tar output formats for `pg_dumpall` were [reverted on June 18, 2026](https://git.postgresql.org/gitweb/?p=postgresql.git;a=commit;h=7ca548f23a60887541493b2da47f2b2720c35ee3).
+- `pg_get_database_ddl()`, `pg_get_role_ddl()`, and `pg_get_tablespace_ddl()` were [removed in PostgreSQL 19 Beta 4](https://www.postgresql.org/about/news/postgresql-19-beta-4-released-3386/).
+
+To capture cluster-wide DDL in PostgreSQL 19, keep using `pg_dumpall --globals-only` (or `--roles-only`) for roles and tablespaces, and `pg_dump` for each database. The examples below reflect the implementation that was in the PostgreSQL 19 beta and may change if the features land in a future release.
 </Admonition>
 
-**Summary**: PostgreSQL 19 adds `pg_get_database_ddl()`, `pg_get_role_ddl()`, and `pg_get_tablespace_ddl()` functions for programmatic DDL extraction, and extends `pg_dumpall` to support custom, directory, and tar output formats. Together, these features give you better tools for schema management, auditing, and backup workflows.
+**Summary**: The PostgreSQL 19 beta included `pg_get_database_ddl()`, `pg_get_role_ddl()`, and `pg_get_tablespace_ddl()` for programmatic DDL extraction, and custom, directory, and tar output formats for `pg_dumpall`. Both were removed before the final release and won't ship in PostgreSQL 19.
 
-## pg*get*\*\_ddl() Functions
+## `pg_get_*_ddl()` functions (removed)
 
-PostgreSQL has long provided `pg_get_tabledef()` and `pg_get_viewdef()` for extracting DDL of individual objects. But getting the DDL for databases, roles, and tablespaces required parsing `pg_dump` or `pg_dumpall` output, which is fragile and inconvenient.
+PostgreSQL has long provided functions such as `pg_get_viewdef()`, `pg_get_indexdef()`, and `pg_get_functiondef()` for extracting the DDL of individual objects. But getting the DDL for databases, roles, and tablespaces required parsing `pg_dump` or `pg_dumpall` output, which is fragile and inconvenient.
 
-PostgreSQL 19 adds three new functions that return clean, executable DDL directly from SQL.
+The PostgreSQL 19 beta added three functions that returned executable DDL directly from SQL. They were removed in Beta 4.
 
 ### pg_get_database_ddl()
 
@@ -160,11 +165,11 @@ SELECT 'database', 'myapp', ddl
 FROM pg_get_database_ddl('myapp') AS t(ddl);
 ```
 
-## pg_dumpall Non-Text Output Formats
+## pg_dumpall non-text output formats (reverted)
 
 `pg_dumpall` has historically only supported plain text output. If you wanted custom format (for selective restore with `pg_restore`) or directory format (for parallel dump/restore), you had to use `pg_dump` per-database and handle globals separately.
 
-PostgreSQL 19 adds support for custom, directory, and tar output formats to `pg_dumpall`.
+The PostgreSQL 19 beta added custom, directory, and tar output formats to `pg_dumpall`. They were reverted on June 18, 2026, so `pg_dumpall` in PostgreSQL 19 still produces plain text only.
 
 ### Available Formats
 
@@ -218,10 +223,10 @@ pg_restore -j 4 -d postgres cluster_backup_dir
 
 ### Comparison to Previous Workflow
 
-Before PostgreSQL 19, a full cluster backup with selective restore required a multi-step process:
+In every released version of PostgreSQL, including PostgreSQL 19, a full cluster backup with selective restore requires a multi-step process:
 
 ```bash
-# Old approach: dump globals separately, then each database
+# Supported approach: dump globals separately, then each database
 pg_dumpall --globals-only > globals.sql
 pg_dump -Fc myapp > myapp.dump
 pg_dump -Fc analytics > analytics.dump
@@ -231,10 +236,10 @@ psql -f globals.sql
 pg_restore -d myapp myapp.dump
 ```
 
-Now it is a single command:
+With the reverted beta implementation, it was a single command:
 
 ```bash
-# New approach: one command, selective restore built in
+# Beta only: not available in PostgreSQL 19
 pg_dumpall -Fc -f cluster_backup
 pg_restore --globals-only cluster_backup
 pg_restore --dbname=myapp cluster_backup
@@ -242,11 +247,13 @@ pg_restore --dbname=myapp cluster_backup
 
 ## Summary
 
-The `pg_get_*_ddl()` functions and `pg_dumpall` improvements address a gap in PostgreSQL's schema management tooling. DDL extraction no longer requires parsing text output from `pg_dump`. Cluster-wide backups now support the same flexible formats that per-database backups have had for years.
+The `pg_get_*_ddl()` functions and the `pg_dumpall` formats would have filled a gap in PostgreSQL's schema management tooling, but neither ships in PostgreSQL 19. For now, extract role and tablespace DDL with `pg_dumpall --globals-only`, and use `pg_dump` in custom or directory format for each database when you need selective or parallel restore.
 
 ## References
 
-- [Commit `4881981f`: Add infrastructure for pg*get*\*\_ddl functions](https://git.postgresql.org/gitweb/?p=postgresql.git;a=commit;h=4881981f)
+- [Commit `4881981f`: Add infrastructure for `pg_get_*_ddl` functions](https://git.postgresql.org/gitweb/?p=postgresql.git;a=commit;h=4881981f)
 - [Commit `a4f774cf`: Add pg_get_database_ddl() function](https://git.postgresql.org/gitweb/?p=postgresql.git;a=commit;h=a4f774cf)
 - [Commit `763aaa06`: Add non-text output formats to pg_dumpall](https://git.postgresql.org/gitweb/?p=postgresql.git;a=commit;h=763aaa06)
-- [PostgreSQL devel docs: pg_dumpall](https://www.postgresql.org/docs/devel/app-pg-dumpall.html)
+- [Commit `7ca548f2`: Revert non-text output formats for pg_dumpall](https://git.postgresql.org/gitweb/?p=postgresql.git;a=commit;h=7ca548f23a60887541493b2da47f2b2720c35ee3)
+- [PostgreSQL 19 Beta 4 release announcement](https://www.postgresql.org/about/news/postgresql-19-beta-4-released-3386/)
+- [PostgreSQL 19 docs: pg_dumpall](https://www.postgresql.org/docs/19/app-pg-dumpall.html)

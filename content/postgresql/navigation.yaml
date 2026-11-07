@@ -378,7 +378,7 @@
         - slug: postgresql-19/on-conflict-do-select
           title: 'ON CONFLICT DO SELECT: Atomic Get-or-Create'
         - slug: postgresql-19/temporal-data-operations
-          title: 'Temporal Data: UPDATE/DELETE FOR PORTION OF'
+          title: 'Temporal Data: FOR PORTION OF (reverted)'
     - section: Planning & Maintenance
       items:
         - slug: postgresql-19/pg-plan-advice
@@ -398,7 +398,7 @@
     - section: Schema & Operations
       items:
         - slug: postgresql-19/schema-management
-          title: 'Schema Management and Backup'
+          title: 'Schema Management and Backup (removed)'
         - slug: postgresql-19/monitoring-operations
           title: 'Monitoring and Operations'
         - slug: postgresql-19/breaking-changes

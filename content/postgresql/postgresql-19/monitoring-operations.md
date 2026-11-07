@@ -1,9 +1,9 @@
 ---
 title: 'PostgreSQL 19 Monitoring and Operations'
 page_title: 'PostgreSQL 19 Monitoring and Operations Improvements'
-page_description: 'Learn about PostgreSQL 19 monitoring and operational improvements including online data checksums, WAL statistics, vacuum progress tracking, per-process logging, psql enhancements, and 64-bit MultiXactOffset.'
+page_description: 'Learn about PostgreSQL 19 monitoring and operational improvements including WAL statistics, vacuum progress tracking, per-process logging, psql enhancements, and 64-bit MultiXactOffset.'
 ogImage: ''
-updatedOn: '2026-06-04T14:03:00.799Z'
+updatedOn: '2026-11-07T21:32:00.000Z'
 enableTableOfContents: true
 previousLink:
   title: 'PostgreSQL 19 Schema Management'
@@ -13,78 +13,11 @@ nextLink:
   slug: 'postgresql-19/parallel-autovacuum'
 ---
 
-<Admonition type="note" title="PostgreSQL 19 Beta 1 is here">
-[PostgreSQL 19 Beta 1 was released on June 4, 2026](https://www.postgresql.org/about/news/postgresql-19-beta-1-released-3313/), so you can try the new operational features for yourself ahead of the final release expected later in 2026. Beta 1 adds online enabling and disabling of data checksums, a `WAIT FOR` command for read-your-writes on standbys, per-process-type log levels, and 64-bit MultiXact offsets that remove the MultiXact wraparound risk.
+<Admonition type="important" title="Online data checksums won't ship in PostgreSQL 19">
+Online enabling and disabling of data checksums (`pg_enable_data_checksums()` and `pg_disable_data_checksums()`) was [reverted in PostgreSQL 19 Beta 4](https://www.postgresql.org/about/news/postgresql-19-beta-4-released-3386/) and isn't in the [PostgreSQL 19 release notes](https://www.postgresql.org/docs/19/release-19.html). To change the checksum setting on an existing cluster, you still need to shut down the server and run `pg_checksums`. The other features on this page are in the PostgreSQL 19 release notes.
 </Admonition>
 
-**Summary**: PostgreSQL 19 adds online data checksum management, WAL full-page image tracking, vacuum progress details, per-process-type log levels, psql prompt improvements, the new `WAIT FOR LSN` command for read-your-writes on async replicas, dynamic WAL level, and eliminates the MultiXact wraparound risk with a 64-bit offset. These changes give DBAs better visibility into database operations and remove long-standing operational hazards.
-
-## Online Data Checksum Enable/Disable
-
-PostgreSQL 19 lets you enable or disable data checksums on a running cluster. Previously, checksums could only be set during `initdb` or offline using `pg_checksums` with the server shut down. For large databases, this meant hours of downtime or a full re-initdb with data reload.
-
-Two new SQL-callable functions handle this:
-
-### Enabling Checksums
-
-`pg_enable_data_checksums()` kicks off the online conversion. With no arguments it uses sensible defaults; the optional throttling parameters mirror the autovacuum cost model.
-
-```sql
--- Enable checksums with default throttling
-SELECT pg_enable_data_checksums();
-
--- Enable with custom throttling (similar to vacuum cost parameters)
-SELECT pg_enable_data_checksums(
-    cost_delay := 10,   -- milliseconds to sleep between page writes
-    cost_limit := 1000  -- pages to process before sleeping
-);
-```
-
-The function starts a background worker that marks all shared buffers dirty, causing checksums to be written on the next page flush. The cluster transitions through an `inprogress-on` state before checksums are fully active:
-
-```sql
--- Monitor progress
-SHOW data_checksums;
--- Values: 'off' -> 'inprogress-on' -> 'on'
-```
-
-The cluster remains fully accessible throughout the process. Reads and writes continue normally while the background worker processes pages.
-
-### Disabling Checksums
-
-`pg_disable_data_checksums()` is a one-liner. There is no inverse cost model because the operation only needs to flip the control file and stop verifying.
-
-```sql
-SELECT pg_disable_data_checksums();
-```
-
-This transitions through `inprogress-off` before reaching `off`. Disabling is faster since it only needs to update the control file and stop verifying checksums on reads.
-
-### Throttling the IO Impact
-
-The `cost_delay` and `cost_limit` parameters work like vacuum cost-based delay. On busy production systems, increase `cost_delay` to spread the work over a longer period:
-
-```sql
--- Gentle approach for production (takes longer but minimal IO impact)
-SELECT pg_enable_data_checksums(cost_delay := 20, cost_limit := 500);
-
--- Aggressive approach for maintenance windows
-SELECT pg_enable_data_checksums(cost_delay := 0, cost_limit := 10000);
-```
-
-### Why This Matters
-
-Many long-running PostgreSQL clusters were initialized years ago without checksums. Until now, enabling checksums on these clusters required one of:
-
-- Shutting down the server and running `pg_checksums --enable` (hours of downtime for large databases)
-- Performing a full `pg_dump` and `pg_restore` into a new cluster with checksums enabled
-- Living without checksums and risking silent data corruption
-
-With online checksums, you can enable this protection on a running production database with zero downtime.
-
-<Admonition type="note">
-Starting in PostgreSQL 18, `initdb` enables data checksums by default for new clusters. Pass `--no-data-checksums` to opt out. Existing clusters upgrading via `pg_upgrade` retain their previous checksum setting.
-</Admonition>
+**Summary**: PostgreSQL 19 adds WAL full-page image tracking, vacuum progress details, per-process-type log levels, psql prompt improvements, the new `WAIT FOR LSN` command for read-your-writes on async replicas, dynamic WAL level, and eliminates the MultiXact wraparound risk with a 64-bit offset. These changes give DBAs better visibility into database operations and remove long-standing operational hazards.
 
 ## WAL Monitoring: Full-Page Image Tracking
 
@@ -362,7 +295,6 @@ PostgreSQL 19's monitoring and operational improvements give DBAs better tools f
 
 ## References
 
-- [Commit `f19c0ecc`: Online enabling and disabling of data checksums](https://git.postgresql.org/gitweb/?p=postgresql.git;a=commit;h=f19c0ecc)
 - [Commit `f9a09aa2`: Add wal_fpi_bytes to pg_stat_wal](https://git.postgresql.org/gitweb/?p=postgresql.git;a=commit;h=f9a09aa2)
 - [Commit `0d789520`: Add mode and started_by columns to pg_stat_progress_vacuum](https://git.postgresql.org/gitweb/?p=postgresql.git;a=commit;h=0d789520)
 - [Commit `447aae13b`: Add WAIT FOR command for read-your-writes on async replicas](https://git.postgresql.org/gitweb/?p=postgresql.git;a=commitdiff;h=447aae13b)

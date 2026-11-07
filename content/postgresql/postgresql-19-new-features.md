@@ -1,29 +1,29 @@
 ---
 title: 'PostgreSQL 19 New Features'
 page_title: "PostgreSQL 19 New Features: What's New and Why It Matters"
-page_description: 'Explore PostgreSQL 19 new features including SQL/PGQ property graph queries, ON CONFLICT DO SELECT, temporal data operations, pg_plan_advice, REPACK, parallel autovacuum, and more.'
+page_description: 'Explore PostgreSQL 19 new features including REPACK, pg_plan_advice, ON CONFLICT DO SELECT, WAIT FOR LSN for read-your-writes on standbys, parallel autovacuum, logical replication improvements, and more.'
 ogImage: ''
-updatedOn: '2026-06-04T14:03:00.799Z'
+updatedOn: '2026-11-07T21:32:00.000Z'
 enableTableOfContents: true
 nextLink:
   title: 'PostgreSQL 19 SQL/PGQ Graph Queries'
   slug: 'postgresql-19/sql-pgq-graph-queries'
 ---
 
-<Admonition type="note" title="PostgreSQL 19 Beta 1 is here">
-[PostgreSQL 19 Beta 1 was released on June 4, 2026](https://www.postgresql.org/about/news/postgresql-19-beta-1-released-3313/), so you can test the features in this guide for yourself ahead of the final release expected later in 2026. Beta 1 includes SQL/PGQ property graph queries, `ON CONFLICT DO SELECT`, the new `REPACK` command, parallel autovacuum, and native JSON output for `COPY TO`.
+<Admonition type="important" title="Several beta features won't ship in PostgreSQL 19">
+[PostgreSQL 19 RC 1 was released on October 15, 2026](https://www.postgresql.org/about/news/postgresql-19-rc-1-released-3409/), and general availability is planned for November 19, 2026. During the beta, these features were removed and won't ship in PostgreSQL 19: SQL/PGQ property graph queries, `UPDATE/DELETE FOR PORTION OF`, online enabling and disabling of data checksums, the `pg_get_*_ddl()` functions, and the non-text output formats for `pg_dumpall`. They're marked below. See the [PostgreSQL 19 release notes](https://www.postgresql.org/docs/19/release-19.html) for the final feature list.
 </Admonition>
 
-**Summary**: PostgreSQL 19 is a landmark release that brings SQL/PGQ property graph queries, atomic get-or-create with `ON CONFLICT DO SELECT`, temporal data operations, query plan hints, online table repacking, parallel autovacuum, native JSON export, and logical replication improvements. This overview covers the highlights with links to detailed guides.
+**Summary**: PostgreSQL 19 brings online table repacking with `REPACK`, query plan hints with `pg_plan_advice`, atomic get-or-create with `ON CONFLICT DO SELECT`, read-your-writes on standbys with `WAIT FOR LSN`, parallel autovacuum, native JSON export, and logical replication improvements. This overview covers the highlights with links to detailed guides, and marks the beta features that were reverted before the final release.
 
 ## Introduction
 
-PostgreSQL 19 is currently in development, with a feature freeze in April 2026, beta expected in mid-2026, and a final release expected in late 2026. The headline addition is native graph query support via the SQL:2023 standard, alongside a dozen features that address long-standing developer and operator pain points.
+PostgreSQL 19 reached feature freeze in April 2026, shipped its first beta in June 2026, and is planned for general availability on November 19, 2026. Native graph query support (SQL/PGQ) was the planned headline addition, but it was reverted during the beta. The release still includes a dozen features that address long-standing developer and operator pain points.
 
 The release spans six areas:
 
-- **Graph queries**: SQL/PGQ property graph queries on existing tables
-- **DML improvements**: New conflict handling and temporal operations
+- **Graph queries**: SQL/PGQ property graph queries on existing tables (reverted, won't ship in PostgreSQL 19)
+- **DML improvements**: New conflict handling
 - **Query planning**: Official plan hint support via a contrib module
 - **Maintenance**: Online table repacking and parallel autovacuum
 - **Operations**: Better logical replication, JSON export, and monitoring
@@ -69,7 +69,7 @@ The initial implementation covers fixed-depth pattern matching. Variable-length 
 
 ## DML and Query Improvements
 
-PostgreSQL 19 adds several long-requested DML primitives. `ON CONFLICT DO SELECT` finally provides atomic get-or-create semantics, `FOR PORTION OF` completes SQL:2011 temporal modifications, and convenience features like `IGNORE NULLS` reduce verbosity in common query patterns.
+PostgreSQL 19 adds several long-requested DML primitives. `ON CONFLICT DO SELECT` finally provides atomic get-or-create semantics, and convenience features like `IGNORE NULLS` reduce verbosity in common query patterns.
 
 ### [ON CONFLICT DO SELECT](/postgresql/postgresql-19/on-conflict-do-select)
 
@@ -86,7 +86,11 @@ This replaces the common no-op `DO UPDATE SET col = EXCLUDED.col` workaround, wh
 
 ### [Temporal Data Operations: FOR PORTION OF](/postgresql/postgresql-19/temporal-data-operations)
 
-Building on PostgreSQL 18's `WITHOUT OVERLAPS` temporal constraints, PostgreSQL 19 adds `UPDATE ... FOR PORTION OF` and `DELETE ... FOR PORTION OF`. When you modify data within a specific time range, PostgreSQL automatically splits the row to preserve the untouched portions.
+<Admonition type="important" title="FOR PORTION OF has been reverted from PostgreSQL 19">
+Temporal updates and deletes with `FOR PORTION OF` were [reverted on September 15, 2026](https://git.postgresql.org/gitweb/?p=postgresql.git;a=commit;h=a4b26b8f7cd07a3e7f0cba550c30db142329e065) and won't ship in PostgreSQL 19. The example below reflects the beta implementation.
+</Admonition>
+
+Building on PostgreSQL 18's `WITHOUT OVERLAPS` temporal constraints, the PostgreSQL 19 beta added `UPDATE ... FOR PORTION OF` and `DELETE ... FOR PORTION OF`. When you modify data within a specific time range, PostgreSQL automatically splits the row to preserve the untouched portions.
 
 ```sql
 -- Original row: product 1 at $29.99 for all of 2025
@@ -102,7 +106,7 @@ WHERE product_id = 1;
 -- Oct-Dec: $29.99 (preserved automatically)
 ```
 
-This completes PostgreSQL's SQL:2011 temporal feature set, making it suitable for booking systems, employee records, insurance policies, and any data with validity periods.
+This would have completed PostgreSQL's SQL:2011 temporal feature set. The earliest it could return is PostgreSQL 20.
 
 ### [IGNORE NULLS / RESPECT NULLS for Window Functions](/postgresql/postgresql-19/query-improvements)
 
@@ -249,9 +253,13 @@ CREATE PUBLICATION prod_pub FOR ALL TABLES
 
 **Dynamic WAL level**: The `effective_wal_level` parameter adjusts automatically based on whether logical replication slots exist, eliminating the need to manually configure and restart for WAL level changes.
 
-### [pg*get*\*\_ddl() Functions](/postgresql/postgresql-19/schema-management)
+### [`pg_get_*_ddl()` Functions](/postgresql/postgresql-19/schema-management)
 
-Three new functions for programmatic DDL extraction:
+<Admonition type="important" title="Removed from PostgreSQL 19">
+`pg_get_database_ddl()`, `pg_get_role_ddl()`, and `pg_get_tablespace_ddl()` were [removed in PostgreSQL 19 Beta 4](https://www.postgresql.org/about/news/postgresql-19-beta-4-released-3386/) and won't ship in PostgreSQL 19. The example below reflects the beta implementation.
+</Admonition>
+
+The beta added three functions for programmatic DDL extraction:
 
 ```sql
 SELECT * FROM pg_get_database_ddl('mydb');
@@ -261,11 +269,15 @@ SELECT * FROM pg_get_role_ddl('app_user');
 -- CREATE ROLE app_user WITH LOGIN PASSWORD '********' ...
 ```
 
-Also available: `pg_get_tablespace_ddl()`. These provide a cleaner alternative to parsing `pg_dump` output when you need DDL for specific objects.
+The beta also had `pg_get_tablespace_ddl()`. These would have provided a cleaner alternative to parsing `pg_dump` output when you need DDL for specific objects.
 
 ### [pg_dumpall Non-Text Formats](/postgresql/postgresql-19/schema-management)
 
-`pg_dumpall` now supports custom (`-Fc`), directory (`-Fd`), and tar (`-Ft`) output formats:
+<Admonition type="important" title="Reverted from PostgreSQL 19">
+The non-text output formats for `pg_dumpall` were [reverted on June 18, 2026](https://git.postgresql.org/gitweb/?p=postgresql.git;a=commit;h=7ca548f23a60887541493b2da47f2b2720c35ee3). In PostgreSQL 19, `pg_dumpall` still produces plain text only.
+</Admonition>
+
+The beta let `pg_dumpall` write custom (`-Fc`), directory (`-Fd`), and tar (`-Ft`) output formats:
 
 ```bash
 pg_dumpall -Fc -f full-dump
@@ -278,11 +290,15 @@ MultiXactOffset has been widened from 32-bit to 64-bit, eliminating the ~4 billi
 
 ## Monitoring and Operations Improvements
 
-Several long-standing rough edges around observability and runtime configuration get smoothed out. Data checksums can be enabled or disabled on a running cluster, `pg_stat_wal` exposes more detail, and per-process-type logging lets you turn up verbosity for autovacuum or the archiver without flooding the rest of the log.
+Several long-standing rough edges around observability and runtime configuration get smoothed out. `pg_stat_wal` exposes more detail, and per-process-type logging lets you turn up verbosity for autovacuum or the archiver without flooding the rest of the log.
 
 ### [Online Data Checksums](/postgresql/postgresql-19/monitoring-operations)
 
-You can now enable or disable data checksums on a running cluster without downtime:
+<Admonition type="important" title="Reverted from PostgreSQL 19">
+Online enabling and disabling of data checksums was [reverted in PostgreSQL 19 Beta 4](https://www.postgresql.org/about/news/postgresql-19-beta-4-released-3386/) and won't ship in PostgreSQL 19. Changing the checksum setting on an existing cluster still requires shutting down the server and running `pg_checksums`. The example below reflects the beta implementation.
+</Admonition>
+
+The beta let you enable or disable data checksums on a running cluster:
 
 ```sql
 -- Enable checksums online (cluster stays accessible)
@@ -359,4 +375,4 @@ PostgreSQL 19 includes several changes that may affect existing applications. Re
 
 ## Summary
 
-PostgreSQL 19 is one of the most feature-rich releases in recent history. SQL/PGQ brings graph query capabilities that previously required a separate database. `ON CONFLICT DO SELECT` solves a problem that has existed since PostgreSQL 9.5. `FOR PORTION OF` completes the SQL:2011 temporal feature set. `pg_plan_advice` breaks new ground for PostgreSQL by providing official plan hints. `REPACK (CONCURRENTLY)` brings online table maintenance into core. And parallel autovacuum addresses one of the biggest pain points for large database operators.
+PostgreSQL 19 is a substantial release, even after several large features were reverted during the beta. `ON CONFLICT DO SELECT` solves a problem that has existed since PostgreSQL 9.5. `WAIT FOR LSN` brings read-your-writes consistency to standbys. `pg_plan_advice` breaks new ground for PostgreSQL by providing official plan hints. `REPACK (CONCURRENTLY)` brings online table maintenance into core. And parallel autovacuum addresses one of the biggest pain points for large database operators.
