@@ -158,13 +158,13 @@ The index entry in `registry.json` gets one source label that says who wrote the
 | `partner`     | Templates written by a company Neon works with closely, such as Mastra, TanStack, or WorkOS. |
 | `community`   | Templates written by anyone else.                                                            |
 
-`template.json` gets one or more topical labels:
+`template.json` gets at least one topical label. Reuse one from this table where it fits:
 
 | Category            | Use it for                                        |
 | ------------------- | ------------------------------------------------- |
 | `ai`                | Templates that use AI Gateway or an AI framework. |
 | `ai-infrastructure` | Third-party AI data or tooling providers.         |
-| `api`               | HTTP APIs backed by Postgres.                     |
+| `api`               | HTTP APIs, with or without Postgres.              |
 | `auth`              | Authentication or access control.                 |
 | `bots`              | Chat or messaging bots.                           |
 | `mcp`               | Model Context Protocol servers.                   |
