@@ -16,3 +16,12 @@ export const formatWeekRange = (weekStart) => {
     : format(end, { month: 'short', day: 'numeric' });
   return `${formatWeekShort(weekStart)}–${endLabel}`;
 };
+
+export const formatDayRange = (start, end) => {
+  if (start === end) return formatWeekShort(start);
+  const sameMonth = toDate(start).getUTCMonth() === toDate(end).getUTCMonth();
+  const endLabel = sameMonth
+    ? format(toDate(end), { day: 'numeric' })
+    : format(toDate(end), { month: 'short', day: 'numeric' });
+  return `${formatWeekShort(start)}–${endLabel}`;
+};

@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import CTANew from 'components/shared/cta-new';
 import LINKS from 'constants/links';
 
+import { buildAccessSplit } from './access';
+import AccessSplit from './access-split';
 import Hero from './hero';
 import HowItWorks from './how-it-works';
 import ShareList from './share-list';
@@ -18,9 +20,10 @@ const rowsShape = PropTypes.arrayOf(
   })
 );
 
-const McpServerStats = ({ clients, tools, publishedAt }) => {
+const McpServerStats = ({ clients, tools, access, publishedAt }) => {
   const clientShares = buildClientShares(clients);
   const toolShares = buildToolShares(tools);
+  const accessSplit = buildAccessSplit(access.rows);
 
   return (
     <>
@@ -49,6 +52,12 @@ const McpServerStats = ({ clients, tools, publishedAt }) => {
         isMono
         footnote="The ten most used tools. Agents call several tools, so the shares add up to more than 100%."
       />
+      <AccessSplit
+        signIn={accessSplit.signIn}
+        access={accessSplit.access}
+        windowStart={access.windowStart}
+        windowEnd={access.windowEnd}
+      />
       <HowItWorks />
       <CTANew
         label="Get started"
@@ -65,6 +74,17 @@ const McpServerStats = ({ clients, tools, publishedAt }) => {
 McpServerStats.propTypes = {
   clients: rowsShape.isRequired,
   tools: rowsShape.isRequired,
+  access: PropTypes.shape({
+    windowStart: PropTypes.string.isRequired,
+    windowEnd: PropTypes.string.isRequired,
+    rows: PropTypes.arrayOf(
+      PropTypes.shape({
+        dimension: PropTypes.string.isRequired,
+        value: PropTypes.string.isRequired,
+        share: PropTypes.number.isRequired,
+      })
+    ).isRequired,
+  }).isRequired,
   publishedAt: PropTypes.string.isRequired,
 };
 

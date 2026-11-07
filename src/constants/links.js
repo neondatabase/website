@@ -21,6 +21,7 @@ export default {
   faqs: '/faqs',
   generateTicket: '/generate-ticket',
   mcpServerDocs: '/docs/ai/neon-mcp-server',
+  mcpServerConfigGenerator: '/docs/ai/neon-mcp-server#config-generator',
   mcpServerStats: '/mcp-server/stats',
   migration: '/migration',
   objectStorage: '/object-storage',

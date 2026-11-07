@@ -9,11 +9,11 @@ export const metadata = getMetadata(SEO_DATA.mcpServerStats);
 export const revalidate = 3600;
 
 const McpServerStatsPage = async () => {
-  const { clients, tools, publishedAt } = await getMcpStats();
+  const { clients, tools, access, publishedAt } = await getMcpStats();
 
   return (
     <Layout className="bg-black-pure" isHeaderSticky>
-      <McpServerStats clients={clients} tools={tools} publishedAt={publishedAt} />
+      <McpServerStats clients={clients} tools={tools} access={access} publishedAt={publishedAt} />
     </Layout>
   );
 };
