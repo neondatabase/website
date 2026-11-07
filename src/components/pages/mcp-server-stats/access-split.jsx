@@ -60,8 +60,8 @@ const AccessSplit = ({ signIn, access, windowStart, windowEnd }) => (
         className="max-w-206 text-[2.75rem] leading-dense font-normal tracking-tighter text-gray-new-50 xl:text-4xl lg:max-w-3xl lg:text-3xl md:text-[1.75rem]"
         id="mcp-stats-access-heading"
       >
-        <span className="text-white">How agents connect.</span> Share of active users by sign-in and
-        access setting, {formatDayRange(windowStart, windowEnd)}.
+        <span className="text-white">How agents connect.</span> Share of users reporting each
+        setting, {formatDayRange(windowStart, windowEnd)}.
       </h2>
       <div className="mt-16 grid grid-cols-2 gap-x-16 xl:gap-x-10 lg:mt-12 md:mt-8 md:grid-cols-1 md:gap-y-12">
         <SplitList title="Sign-in" rows={signIn} />
@@ -74,7 +74,8 @@ const AccessSplit = ({ signIn, access, windowStart, windowEnd }) => (
         <Link className="underline" to={LINKS.mcpServerConfigGenerator} theme="gray-50">
           config generator
         </Link>
-        . A user counts under every setting they used, so a column can add up to more than 100%.
+        . Users whose client doesn&apos;t report a setting are left out of that column, and a user
+        counts under every setting they used, so a column can add up to more than 100%.
       </p>
     </Container>
   </section>
