@@ -157,6 +157,8 @@ The `gateway()` helper looks up the branch's gateway host once, with `client.aiG
 Creating an agent in `app/api/agents/route.ts` takes three steps: mint the credential, create the Agent37 instance with the token in its `env`, and, for the harnesses that read a config file, write that file and restart once.
 
 ```ts
+import * as neon from '@/lib/neon';
+
 const { baseUrl } = await neon.gateway();
 const credential = await neon.createCredential(`agent37: ${name}`);
 
@@ -325,6 +327,8 @@ Claude Code retries a rejected token for about three minutes before it gives up 
 **Rotate** gives the agent a new token. The route in `app/api/agents/[id]/rotate/route.ts` rotates a live credential in place (same `token_id`, new token) or creates a new one if the old one is revoked, then restarts the instance with the new token:
 
 ```ts
+import * as neon from '@/lib/neon';
+
 const meta = (await neon.listCredentials()).get(tokenId);
 const credential = meta && !meta.revoked_at ? await neon.rotateCredential(tokenId) : await neon.createCredential(`agent37: ${agent.name}`);
 
