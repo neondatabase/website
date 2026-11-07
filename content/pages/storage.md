@@ -1,7 +1,7 @@
 ---
 title: 'Lakebase Postgres storage: Bottomless, branchable'
 subtitle: The storage engine behind Lakebase Postgres. Copy-on-write, usage-based, with zero storage management.
-updatedOn: '2026-11-07T13:45:25.000Z'
+updatedOn: '2026-11-07T13:47:23.000Z'
 ---
 
 <Admonition type="note" title="This page is about database storage">
@@ -24,7 +24,7 @@ The most common examples:
 
 Neon’s architecture separates storage from compute, implementing a multi-tenant cloud service where each layer can scale independently. The Pageserver (running on SSDs) and Safekeepers (which replicate Postgres’ write-ahead log) form a distributed storage system, with durable cloud object storage (e.g., Amazon S3) as the ultimate source of truth. This design decouples performance-critical caching and log replication from long-term storage, enabling both dynamic scaling and built-in fault tolerance.
 
-![Database storage architecture](/pages/storage/schema.jpg)
+![Lakebase architecture overview](/docs/introduction/neon-architecture-overview.png)
 
 Unlike traditional serverful setups, where compute and storage are tightly coupled inside a VM, Neon keeps storage completely independent. A Postgres instance can be paused, scaled, or replicated without moving data. Stateless compute nodes simply reconnect to the storage layer on demand.
 
