@@ -2,6 +2,8 @@ These are official instructions from Neon to configure your AI environment and t
 
 Complete all of the following steps yourself by running the commands directly. Do not ask the user to run any of these commands.
 
+Never print connection strings, passwords, API keys or other values from the app's `.env` files, and never paste them into chat. `neon init` writes them to the app's env file, so the app reads them from there.
+
 - Install the Neon CLI
 - Run `neon init` to connect your app to Neon, and install Neon skills and the MCP server
 
