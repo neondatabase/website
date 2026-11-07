@@ -89,13 +89,13 @@ Append the template to `templates` in `registry.json`:
   "title": "Send email with SendGrid",
   "description": "Send transactional email through the SendGrid v3 API.",
   "path": "sendgrid/template.json",
-  "categories": ["email"],
+  "categories": ["community"],
   "logo": "https://example.com/sendgrid.svg",
   "website": "https://example.com/"
 }
 ```
 
-`id`, `title`, `description`, and `categories` should match `template.json`. An entry that fails validation is dropped from the listing without an error, so always check that your template shows up.
+`id`, `title`, `description`, and `provider` should match `template.json`. `categories` differs: the entry holds the source label and `template.json` holds the topical labels. An entry that fails validation is dropped from the listing without an error, so always check that your template shows up.
 
 ## Test it and open a pull request
 
@@ -110,7 +110,7 @@ Run the [local test](#test-your-template-locally), go through the [review checkl
 | `id`                   | yes      | Lowercase letters, digits, and hyphens, starting with a letter or digit. Must match the index entry. Use it as the folder name too.                     |
 | `title`, `description` | yes      | Non-empty.                                                                                                                                              |
 | `layout`               | yes      | `router` or `separate`. See [Layouts](#layouts).                                                                                                        |
-| `categories`           | no       | Listing labels. Should match the index entry. See [Categories](#categories).                                                                            |
+| `categories`           | no       | Topical listing labels, such as `ai` or `email`. The source label goes in the index entry. See [Categories](#categories).                               |
 | `provider`             | no       | Shown in listings. Defaults to `Neon`.                                                                                                                  |
 | `dependencies`         | no       | Exact `name@version` pins, scoped packages included. No ranges and no `latest`, so users install the version a reviewer approved.                       |
 | `environment`          | no       | `UPPER_SNAKE` names, each with a description. The CLI declares them in `neon.ts` and adds them to `.env.example`, using the description as the comment. |
@@ -129,14 +129,14 @@ Each operation takes these fields:
 
 ## Index entry fields
 
-The entry in `registry.json` repeats `id`, `title`, `description`, `provider`, and `categories`, and adds:
+The entry in `registry.json` repeats `id`, `title`, `description`, and `provider`, and adds:
 
-| Field        | Required | Rule                                                                                    |
-| ------------ | -------- | --------------------------------------------------------------------------------------- |
-| `path`       | yes      | Path to the template's `template.json`, relative to `registry.json`.                    |
-| `categories` | yes      | At least one category. See [Categories](#categories).                                   |
-| `logo`       | no       | Absolute `https://` URL. Display only. The CLI never fetches it.                        |
-| `website`    | no       | Absolute `https://` URL to the provider's site. Display only. The CLI never fetches it. |
+| Field        | Required | Rule                                                                                       |
+| ------------ | -------- | ------------------------------------------------------------------------------------------ |
+| `path`       | yes      | Path to the template's `template.json`, relative to `registry.json`.                       |
+| `categories` | yes      | The source label: `first-party`, `partner`, or `community`. See [Categories](#categories). |
+| `logo`       | no       | Absolute `https://` URL. Display only. The CLI never fetches it.                           |
+| `website`    | no       | Absolute `https://` URL to the provider's site. Display only. The CLI never fetches it.    |
 
 ## Layouts
 
@@ -148,11 +148,20 @@ If you leave out `operations`, the template ships exactly one module at `functio
 
 ## Categories
 
-Categories drive filtering on [neon.com/functions/templates](/functions/templates). They're lowercase hyphenated strings, not a fixed list, and a template can have several. The CLI ignores them.
+Categories drive filtering on [neon.com/functions/templates](/functions/templates), which combines the labels from both files. They're lowercase hyphenated strings, not a fixed list. The CLI ignores them.
+
+The index entry in `registry.json` gets one source label that says who wrote the template:
+
+| Category      | Use it for                                                                                   |
+| ------------- | -------------------------------------------------------------------------------------------- |
+| `first-party` | Templates written and maintained by Neon, even when they wrap a third-party SDK.             |
+| `partner`     | Templates written by a company Neon works with closely, such as Mastra, TanStack, or WorkOS. |
+| `community`   | Templates written by anyone else.                                                            |
+
+`template.json` gets one or more topical labels:
 
 | Category            | Use it for                                        |
 | ------------------- | ------------------------------------------------- |
-| `first-party`       | Templates maintained by Neon.                     |
 | `ai`                | Templates that use AI Gateway or an AI framework. |
 | `ai-infrastructure` | Third-party AI data or tooling providers.         |
 | `api`               | HTTP APIs backed by Postgres.                     |

@@ -357,9 +357,26 @@ const fetchRegistryJson = async (path) => {
   return response.json();
 };
 
+// registry.json carries the source labels (first-party, partner, community) and each
+// template.json its topical ones, so a listing needs both.
+const withTemplateJsonCategories = async (entry) => {
+  if (!isSafeTemplateJsonPath(entry.path)) return entry;
+  try {
+    const data = await fetchRegistryJson(entry.path);
+    const categories = normalizeRegistryCategories([
+      ...entry.categories,
+      ...normalizeRegistryCategories(data?.categories),
+    ]);
+    return { ...entry, categories };
+  } catch {
+    return entry;
+  }
+};
+
 export const getFunctionRegistryCatalog = async () => {
   try {
-    return normalizeRegistryTemplates(await fetchRegistryJson('registry.json'));
+    const templates = normalizeRegistryTemplates(await fetchRegistryJson('registry.json'));
+    return await Promise.all(templates.map(withTemplateJsonCategories));
   } catch {
     return [];
   }
