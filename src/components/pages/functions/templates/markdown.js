@@ -1,13 +1,16 @@
 import LINKS from 'constants/links';
 import {
+  REGISTRY_COMMUNITY_CATEGORY,
+  REGISTRY_FIRST_PARTY_CATEGORY,
+  REGISTRY_PARTNER_CATEGORY,
   isInlineCodeSafe,
-  isFirstPartyRegistryTemplate,
   registryCategoryIds,
   registryCategoryLabel,
   registryProviderLabel,
   registryTemplateCategories,
   registryTemplateFilters,
   registryTemplatePageHref,
+  registryTemplateSource,
   registryTemplateSourceUrl,
   registryWebsiteUrl,
 } from 'utils/function-registry';
@@ -43,6 +46,17 @@ const builtByLine = (template) => {
   const provider = escapeText(registryProviderLabel(template) || 'Neon');
   const website = registryWebsiteUrl(template.website);
   return website ? `[${provider}](${website})` : provider;
+};
+
+const SOURCE_DESCRIPTIONS = {
+  [REGISTRY_FIRST_PARTY_CATEGORY]: 'maintained by Neon',
+  [REGISTRY_PARTNER_CATEGORY]: 'written by a company Neon works with closely',
+  [REGISTRY_COMMUNITY_CATEGORY]: 'written by the community',
+};
+
+const sourceLine = (template) => {
+  const source = registryTemplateSource(template);
+  return source && `- ${registryCategoryLabel(source)}: ${SOURCE_DESCRIPTIONS[source]}`;
 };
 
 const categoriesLine = (template) =>
@@ -130,6 +144,7 @@ export const renderTemplateMarkdown = ({ template, previous = null, next = null 
   const operations = template.operations ?? [];
   const environment = (template.environment ?? []).filter((item) => isInlineCodeSafe(item.name));
   const pagePath = registryTemplatePageHref(template.id);
+  const sourceUrl = registryTemplateSourceUrl(template);
 
   const related = [
     previous &&
@@ -137,7 +152,7 @@ export const renderTemplateMarkdown = ({ template, previous = null, next = null 
     next &&
       `- Next: [${escapeText(next.title)}](${absoluteUrl(registryTemplatePageHref(next.id))}.md)`,
     `- [All templates](${absoluteUrl(LINKS.functionsTemplates)}.md)`,
-    `- [Template source](${registryTemplateSourceUrl(template)})`,
+    sourceUrl && `- [Template source](${sourceUrl})`,
     `- [Use function templates](${absoluteUrl(LINKS.functionsTemplatesDocs)}.md)`,
     `- [Contribute a function template](${absoluteUrl(LINKS.functionsRegistry)}.md)`,
   ].filter(Boolean);
@@ -147,21 +162,13 @@ export const renderTemplateMarkdown = ({ template, previous = null, next = null 
     `# ${escapeText(template.title)}`,
     escapeText(template.description),
     [
-      isFirstPartyRegistryTemplate(template) && '- First Party: maintained by Neon',
+      sourceLine(template),
       `- Built by: ${builtByLine(template)}`,
       categoriesLine(template) && `- Categories: ${categoriesLine(template)}`,
     ]
       .filter(Boolean)
       .join('\n'),
-    [
-      '## Install',
-      '',
-      '```bash',
-      installCommand,
-      '```',
-      '',
-      `With the Neon CLI 8.11.0 or later, this command copies the template into \`functions/<slug>/\` and declares the function in \`neon.ts\`.`,
-    ].join('\n'),
+    ['## Install', '', '```bash', installCommand, '```'].join('\n'),
     operations.length > 0
       ? [
           '## What this function exposes',

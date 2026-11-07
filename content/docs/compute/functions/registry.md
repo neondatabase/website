@@ -6,7 +6,7 @@ summary: >-
   template.json and registry.json fields, layouts, categories, limits, local
   testing with NEON_FUNCTION_REGISTRY_DIR, and the review checklist.
 enableTableOfContents: true
-updatedOn: '2026-10-26T11:09:41.000Z'
+updatedOn: '2026-11-07T22:08:33.797Z'
 ---
 
 The Function Registry is the public catalog behind [`neon functions new`](/docs/cli/functions#new). Each template is a folder in [`registry/`](https://github.com/neondatabase/examples/tree/main/registry) in `neondatabase/examples`. To add one, you open a pull request with the template folder and an index entry. Neon reviews it, and after it merges to `main`, the template shows up in the CLI and on [neon.com/functions/templates](/functions/templates) within about an hour. You don't publish anything yourself.
@@ -158,7 +158,7 @@ The index entry in `registry.json` gets one source label that says who wrote the
 | `partner`     | Templates written by a company Neon works with closely, such as Mastra, TanStack, or WorkOS. |
 | `community`   | Templates written by anyone else.                                                            |
 
-`template.json` gets at least one topical label. Reuse one from this table where it fits:
+Add at least one topical label to `template.json`, even though the schema doesn't require it. Reuse one from this table where it fits:
 
 | Category            | Use it for                                        |
 | ------------------- | ------------------------------------------------- |
@@ -169,7 +169,7 @@ The index entry in `registry.json` gets one source label that says who wrote the
 | `bots`              | Chat or messaging bots.                           |
 | `mcp`               | Model Context Protocol servers.                   |
 
-To add a new category, use it in your entries and add a row to the categories table in the registry [README](https://github.com/neondatabase/examples/blob/main/registry/README.md).
+To add a new topical category, use it in your `template.json` and add a row to the categories table in the registry [README](https://github.com/neondatabase/examples/blob/main/registry/README.md).
 
 ## Limits
 

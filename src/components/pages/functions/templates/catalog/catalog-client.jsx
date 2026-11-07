@@ -2,7 +2,7 @@
 
 import { parseAsInteger, parseAsString, useQueryStates } from 'nuqs';
 import PropTypes from 'prop-types';
-import { useId, useMemo, useRef } from 'react';
+import { useId, useMemo, useRef, useState } from 'react';
 
 import FunctionRegistryTemplateCard from 'components/pages/functions/templates/registry/template-card';
 import Button from 'components/shared/button';
@@ -12,7 +12,7 @@ import SearchIcon from 'icons/search.inline.svg';
 import { cn } from 'utils/cn';
 import {
   REGISTRY_ALL_FILTER,
-  REGISTRY_FIRST_PARTY_CATEGORY,
+  REGISTRY_SOURCE_CATEGORIES,
   filterRegistryTemplates,
   paginateRegistryTemplates,
   registryCategoryIds,
@@ -28,19 +28,22 @@ const catalogParams = {
   page: parseAsInteger.withDefault(1),
 };
 
-const PINNED_FILTERS = new Set([REGISTRY_ALL_FILTER, REGISTRY_FIRST_PARTY_CATEGORY]);
+const PINNED_FILTERS = new Set([REGISTRY_ALL_FILTER, ...REGISTRY_SOURCE_CATEGORIES]);
 
 const INLINE_LINK_CLASS_NAME =
   'text-white underline underline-offset-2 transition-colors hover:text-green-45';
 
-const FilterButton = ({ filter, isActive, onChange }) => (
+const COLLAPSED_CATEGORY_COUNT = 6;
+
+const FilterButton = ({ filter, isActive, onChange, className = null }) => (
   <button
     type="button"
     aria-pressed={isActive}
     className={cn(
       'flex items-center justify-between gap-2.5 py-[7px] text-left font-mono text-sm leading-snug tracking-tight uppercase transition-colors hover:text-white lg:shrink-0 lg:border-b-2 lg:py-[3px] lg:whitespace-nowrap',
       isActive ? 'text-white lg:border-green-45' : 'text-gray-new-60 lg:border-transparent',
-      filter.count === 0 && !isActive && 'text-gray-new-50'
+      filter.count === 0 && !isActive && 'text-gray-new-50',
+      className
     )}
     onClick={() => onChange(filter.id)}
   >
@@ -65,18 +68,28 @@ FilterButton.propTypes = {
   }).isRequired,
   isActive: PropTypes.bool.isRequired,
   onChange: PropTypes.func.isRequired,
+  className: PropTypes.string,
 };
 
 const CategoryFilter = ({ filters, activeFilter, onChange }) => {
+  const [isExpanded, setIsExpanded] = useState(false);
   const pinned = filters.filter((filter) => PINNED_FILTERS.has(filter.id));
   const categories = filters.filter((filter) => !PINNED_FILTERS.has(filter.id));
+  const hiddenCount = Math.max(categories.length - COLLAPSED_CATEGORY_COUNT, 0);
+  const isActiveHidden = categories
+    .slice(COLLAPSED_CATEGORY_COUNT)
+    .some((filter) => filter.id === activeFilter);
+  const showAll = isExpanded || isActiveHidden;
 
-  const renderButtons = (items) =>
-    items.map((filter) => (
+  const renderButtons = (items, { collapsible = false } = {}) =>
+    items.map((filter, index) => (
       <FilterButton
         key={filter.id}
         filter={filter}
         isActive={filter.id === activeFilter}
+        className={
+          collapsible && !showAll && index >= COLLAPSED_CATEGORY_COUNT ? 'hidden lg:flex' : null
+        }
         onChange={onChange}
       />
     ));
@@ -92,7 +105,17 @@ const CategoryFilter = ({ filters, activeFilter, onChange }) => {
           Categories
         </p>
       )}
-      {renderButtons(categories)}
+      {renderButtons(categories, { collapsible: true })}
+      {hiddenCount > 0 && !isActiveHidden && (
+        <button
+          type="button"
+          aria-expanded={isExpanded}
+          className="mt-1 w-fit py-[7px] text-left font-mono text-sm leading-snug tracking-tight text-gray-new-50 uppercase underline-offset-4 transition-colors hover:text-white hover:underline lg:hidden"
+          onClick={() => setIsExpanded((value) => !value)}
+        >
+          {isExpanded ? 'Show less' : `Show ${hiddenCount} more`}
+        </button>
+      )}
     </nav>
   );
 };
