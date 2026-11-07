@@ -8,7 +8,7 @@ summary: >-
   and neon checkout.
 enableTableOfContents: true
 redirectFrom:
-  - /docs/compute/functions/reference/neon-ts/
+  - /docs/compute/functions/reference/neon-ts
 updatedOn: '2026-10-15T16:33:34.223Z'
 ---
 

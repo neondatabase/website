@@ -11,7 +11,7 @@ summary: >-
 enableTableOfContents: true
 redirectFrom:
   - /docs/conceptual-guides/glossary
-  - /docs/cloud/concepts/
+  - /docs/cloud/concepts
 updatedOn: '2026-10-28T11:11:18.780Z'
 ---
 
