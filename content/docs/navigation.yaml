@@ -131,6 +131,28 @@
               slug: guides/typeorm
             - title: Better Drizzle
               slug: guides/better-drizzle
+    - section: Agents
+      items:
+        - title: Agents
+          slug: ai/agent-setup
+          icon: ai-agent
+          items:
+            - title: Claude Code
+              slug: ai/agent-setup/claude-code
+            - title: Claude.ai and Claude Desktop
+              slug: ai/agent-setup/claude-ai
+            - title: VS Code and GitHub Copilot
+              slug: ai/agent-setup/vscode
+            - title: ChatGPT
+              slug: ai/agent-setup/chatgpt
+            - title: Codex
+              slug: ai/agent-setup/codex
+            - title: Cursor
+              slug: ai/agent-setup/cursor
+            - title: Grok Bot
+              slug: ai/agent-setup/grok-bot
+            - title: Other agents
+              slug: ai/connect-mcp-clients-to-neon
     - section: Migrate to Neon
       icon: import
       items:

@@ -27,6 +27,10 @@ List my Neon projects
 
 See [Available tools](/docs/ai/neon-mcp-server#available-tools) for everything the Neon app can do.
 
+## Use Neon with dots
+
+Dots, ChatGPT's always-on agents, use the same plugin settings as your ChatGPT account. After you install the Neon plugin, connect it to a dot from **Customize** → **Plugins** in the dot's profile. See [Getting started with your dot](https://help.openai.com/en/articles/20001530-getting-started-with-your-dot).
+
 To build an app on Neon with OpenAI's coding agent, see [Set up Neon in Codex](/docs/ai/agent-setup/codex).
 
 <NeedHelp/>
