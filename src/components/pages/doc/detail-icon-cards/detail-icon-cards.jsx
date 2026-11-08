@@ -285,7 +285,7 @@ const DetailIconCards = ({
           >
             <Link
               className={cn(
-                'relative flex w-full flex-col p-5 transition-colors duration-200',
+                'group/detail-card relative flex w-full flex-col p-5 transition-colors duration-200',
                 cols === 3 && appearance !== 'home' && 'p-4 md:p-5',
                 appearance === 'home' && (isLockup ? 'p-[15px]' : 'min-h-[173.75px] p-4'),
                 withNumbers &&
@@ -385,6 +385,9 @@ const DetailIconCards = ({
                   className={cn(
                     'font-sans text-lg leading-snug font-medium',
                     !withNumbers && cardTheme.title,
+                    // The title turns green while the card is hovered or focused.
+                    !withNumbers &&
+                      'transition-colors duration-200 group-hover/detail-card:text-green-44 group-focus-visible/detail-card:text-green-44 dark:group-hover/detail-card:text-green-44 dark:group-focus-visible/detail-card:text-green-44',
                     appearance === 'home'
                       ? cn(
                           'text-lg leading-[25px] font-medium',
