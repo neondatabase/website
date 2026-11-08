@@ -1,11 +1,11 @@
 ---
 title: Connect Quarkus (JDBC) to Neon
-subtitle: Learn how to connect to a Neon database from Quarkus using JDBC
+subtitle: Learn how to connect to a Lakebase Postgres database from Quarkus using JDBC
 summary: >-
-  Quarkus JDBC connection to a Neon Postgres database uses the PostgreSQL JDBC driver with Agroal
+  Quarkus JDBC connection to a Lakebase Postgres database uses the PostgreSQL JDBC driver with Agroal
   datasource and RESTEasy Reactive extensions, configured via
   `QUARKUS_DATASOURCE_*` environment variables in a `.env` file. Use this guide
-  when connecting a Java Quarkus app to a Neon Postgres database over JDBC
+  when connecting a Java Quarkus app to a Lakebase Postgres database over JDBC
   rather than a reactive driver. The guide covers Quarkus project scaffolding,
   datasource configuration with SSL required, and a working HTTP endpoint that
   queries the Postgres version.
@@ -14,11 +14,11 @@ updatedOn: '2026-09-16T19:45:35.340Z'
 ---
 
 <CopyPrompt src="/prompts/quarkus-jdbc-prompt.md"
-description="Pre-built prompt for connecting Quarkus applications to Neon using JDBC"/>
+description="Pre-built prompt for connecting Quarkus applications to Lakebase Postgres using JDBC"/>
 
 [Quarkus](https://quarkus.io/) is a Java framework optimized for cloud environments. This guide shows how to connect to Neon from a Quarkus project using the PostgreSQL JDBC driver.
 
-To connect to a Neon database from a Quarkus application using the PostgreSQL JDBC driver:
+To connect to a Lakebase Postgres database from a Quarkus application using the Postgres JDBC driver:
 
 ## Prerequisites
 
