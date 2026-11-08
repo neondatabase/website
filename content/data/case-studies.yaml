@@ -1,3 +1,250 @@
+- id: 'zite'
+  title: 'Zite'
+  isFeatured: false
+  logo:
+    mediaItemUrl: '/images/case-studies/zite.svg'
+    mediaDetails:
+      width: 60
+      height: 32
+  quote: 'We were getting ready to hire dedicated engineers just to manage and scale Zite Database. With Neon, we didn’t need to do that – we were able to give every end user their own database, including on the free plan'
+  author:
+    name: 'Dominic Whyte'
+    post: 'Co-founder at Zite'
+  isInternal: true
+  internalPostSlug: 'how-zite-provisions-isolated-postgres-databases-for-every-user'
+  externalUrl: ''
+  categories:
+    - slug: 'ai'
+      name: 'AI & Agents'
+    - slug: 'platforms'
+      name: 'Platforms'
+  evidence:
+    summary: 'Zite is an AI app builder from the Fillout team that gives every end user their own Neon Postgres database for Zite Database.'
+    useCase: 'platforms'
+    date: '2026-02-06'
+    features:
+      - 'postgres'
+      - 'api'
+      - 'scale-to-zero'
+    claims:
+      - 'Because Neon is usage-based and can scale down databases when they aren’t being used, we’re able to deploy thousands of new databases per day without costs getting out of hand'
+      - 'Some Zite customers were building lightweight apps, while others were sending thousands of requests per second.'
+      - 'Zite uses Neon’s TypeScript API client to provision and manage databases directly from their application code.'
+
+- id: 'nephrocompass'
+  title: 'NephroCompass'
+  isFeatured: false
+  logo:
+    mediaItemUrl: '/images/case-studies/nephrocompass.svg'
+    mediaDetails:
+      width: 177
+      height: 32
+  quote: 'I’ve worked with Postgres, Snowflake, and AWS in my professional environment, but for building a side project, I wanted something easier to set up. It hardly took me 10 minutes to understand how to link Neon with my application and how to make my ML workflows connect to it'
+  author:
+    name: 'Deepti Bahel'
+    post: 'Data Engineer and creator of NephroCompass'
+  isInternal: true
+  internalPostSlug: 'the-transplant-story-that-sparked-a-hackathon-project'
+  externalUrl: ''
+  categories:
+    - slug: 'startups'
+      name: 'Startups'
+  evidence:
+    summary: 'NephroCompass is an open-source kidney disease risk tool built by a data engineer, storing models, predictions, and logs in Neon via the Data API.'
+    useCase: 'full-stack-apps'
+    date: '2025-12-11'
+    features:
+      - 'postgres'
+      - 'data-api'
+    claims:
+      - 'From there, the Data API became the single interface she used for reading and writing data.'
+      - 'Storing every inference the app runs, including the inputs, outputs, and SHAP explanations'
+
+- id: 'dat'
+  title: 'DAT'
+  isFeatured: false
+  logo:
+    mediaItemUrl: '/images/case-studies/dat.svg'
+    mediaDetails:
+      width: 47
+      height: 32
+  quote: 'During the Eid cleanup, we have thousands of workers sending nonstop updates for three straight days. Neon just scales with the load – sometimes the write side, sometimes the read side – and we don’t have to touch a thing'
+  author:
+    name: 'Ahsan Nabi Dar'
+    post: 'CTO and co-founder of DAT'
+  isInternal: true
+  internalPostSlug: 'dat-streams-millions-of-staff-messages-through-neon'
+  externalUrl: ''
+  categories:
+    - slug: 'fast-moving-teams'
+      name: 'Fast-moving teams'
+  evidence:
+    summary: 'DAT is a Pakistan-based startup that manages field staff through messaging apps, running its write-heavy message pipeline on Neon.'
+    useCase: 'bursty-workloads'
+    date: '2025-09-29'
+    features:
+      - 'postgres'
+      - 'read-replicas'
+      - 'autoscaling'
+      - 'scale-to-zero'
+      - 'branching'
+      - 'api'
+    claims:
+      - 'Today, the company powers mission-critical operations for the Lahore Waste Management Company (LWMC), Pakistan’s largest public sector employer with more than 16,000 staff across multiple districts.'
+      - 'Every message in our pipeline triggers four or five jobs, all written into the database. We’re processing around 10 million transactions a month'
+      - 'Since our workload is write-heavy, we use Neon’s primary instance for nonstop ingestion, and then spin up read replicas for dashboards and analytics'
+
+- id: 'databuddy'
+  title: 'Databuddy'
+  isFeatured: false
+  logo:
+    mediaItemUrl: '/images/case-studies/databuddy.svg'
+    mediaDetails:
+      width: 136
+      height: 32
+  quote: 'I was surprised by how fast Neon was. It was faster than my self-hosted setup and Prisma Postgres. This plus the convenience of the Free Plan makes it a no-brainer for building your projects.'
+  author:
+    name: 'Issa Nassar'
+    post: 'founder of Databuddy'
+  isInternal: true
+  internalPostSlug: 'databuddy-is-open-sourcing-privacy-first-analytics-built-on-neon'
+  externalUrl: ''
+  categories:
+    - slug: 'startups'
+      name: 'Startups'
+  evidence:
+    summary: 'Databuddy is an open source, privacy-first web analytics tool that keeps its transactional metadata in Neon and raw events in ClickHouse.'
+    useCase: 'full-stack-apps'
+    date: '2025-08-28'
+    features:
+      - 'postgres'
+      - 'pooling'
+    claims:
+      - 'Neon stores all structured metadata and takes care of the low-latency relational operations.'
+      - 'Incoming events are first verified against Neon to confirm ownership and then passed on to ClickHouse.'
+
+- id: 'anything'
+  title: 'Anything'
+  isFeatured: false
+  logo:
+    mediaItemUrl: '/images/case-studies/anything.svg'
+    mediaDetails:
+      width: 120
+      height: 32
+  quote: 'Neon’s speed of provisioning and serverless scale-to-zero is critical for us. We can serve users iterating on quick ideas efficiently while also supporting them as they scale, without making them think about database setup.'
+  author:
+    name: 'Dhruv Amin'
+    post: 'Co-founder at Anything'
+  isInternal: true
+  internalPostSlug: 'anything-the-new-ai-agent-for-building-mobile-and-web-apps'
+  externalUrl: ''
+  categories:
+    - slug: 'ai'
+      name: 'AI & Agents'
+  evidence:
+    summary: 'Anything, formerly Create.xyz, is an AI agent that builds mobile and web apps from a prompt, and every app runs on Neon.'
+    useCase: 'agents'
+    date: '2025-08-07'
+    features:
+      - 'postgres'
+      - 'auth'
+      - 'scale-to-zero'
+    claims:
+      - 'Every app built with Anything runs on Neon.'
+      - 'It provides the Postgres backend, authentication, and storage that Anything apps rely on – all with a serverless, scale-to-zero architecture that’s perfect for agent-driven development.'
+
+- id: 'rhythmic'
+  title: 'Rhythmic'
+  isFeatured: false
+  logo:
+    mediaItemUrl: '/images/case-studies/rhythmic.svg'
+    mediaDetails:
+      width: 112
+      height: 32
+  quote: 'We needed fast, programmatic provisioning of Postgres on Azure, support for pgvector and RAG, and something that could scale easily across tenants. Neon checked all those boxes'
+  author:
+    name: 'Chris Sims'
+    post: 'CEO and co-founder of Rhythmic'
+  isInternal: true
+  internalPostSlug: 'rhythmic-ai-copilot-azure'
+  externalUrl: ''
+  categories:
+    - slug: 'ai'
+      name: 'AI & Agents'
+  evidence:
+    summary: 'Rhythmic is building an AI copilot for product managers on Neon, using pgvector for RAG and the Neon Azure Native Integration.'
+    useCase: 'full-stack-apps'
+    date: '2025-05-09'
+    features:
+      - 'postgres'
+      - 'pgvector'
+      - 'azure'
+    claims:
+      - 'Rhythmic is starting with a single Neon database and partitioning by tenant, but their long-term plan is to give each customer a dedicated project and database.'
+      - 'Via Neon’s tight integration into Azure, Rhythmic gets unified billing, Microsoft SSO support, and compatibility with Bicep, Terraform, and other tools their enterprise customers expect.'
+
+- id: 'ragrabbit'
+  title: 'RagRabbit'
+  isFeatured: false
+  logo:
+    mediaItemUrl: '/images/case-studies/ragrabbit.svg'
+    mediaDetails:
+      width: 125
+      height: 32
+  quote: 'With Neon, I get pgVector for embeddings, plus all the regular Postgres features like full-text search. It’s a single DB for everything—no need for multiple systems'
+  author:
+    name: 'Marco D’Alia'
+    post: 'Software Architect behind RagRabbit'
+  isInternal: true
+  internalPostSlug: 'ragrabbit-neon'
+  externalUrl: ''
+  categories:
+    - slug: 'ai'
+      name: 'AI & Agents'
+  evidence:
+    summary: 'RagRabbit is an open-source RAG search tool that stores embeddings in Neon Postgres with pgvector and deploys on Vercel.'
+    useCase: 'full-stack-apps'
+    date: '2025-03-17'
+    features:
+      - 'postgres'
+      - 'pgvector'
+      - 'scale-to-zero'
+      - 'vercel-integration'
+    claims:
+      - 'Instead of relying on an external vector DB, these embeddings are stored in Postgres with the pgVector extension.'
+      - 'Choose Vercel, connect to a Neon Postgres database, and you’re set—no separate vector cluster or additional job workers.'
+
+- id: 'zap-xyz'
+  title: 'Zap.xyz'
+  isFeatured: false
+  logo:
+    mediaItemUrl: '/images/case-studies/zap-xyz.svg'
+    mediaDetails:
+      width: 99
+      height: 32
+  quote: 'Inngest + Neon handle the entire change data capture process for us. Setting it up took a fraction of the time compared to AWS'
+  author:
+    name: 'Jacob Devore'
+    post: 'Co-Founder at Zap'
+  isInternal: true
+  internalPostSlug: 'how-zap-xyz-built-a-serverless-cdc-pipeline-with-neon-and-inngest'
+  externalUrl: ''
+  categories:
+    - slug: 'startups'
+      name: 'Startups'
+  evidence:
+    summary: 'Zap.xyz is a crypto sentiment aggregator that ingests messages into Neon and uses Inngest on Neon logical replication for change data capture.'
+    useCase: 'full-stack-apps'
+    date: '2025-02-12'
+    features:
+      - 'postgres'
+      - 'logical-replication'
+      - 'pooling'
+      - 'autoscaling'
+    claims:
+      - 'is a new crypto aggregation platform that processes millions of messages from community channels like Telegram'
+      - 'We spent about 10 hours just trying to build a proof of concept in AWS'
+
 - id: 'kylon'
   title: 'Kylon'
   isFeatured: false
@@ -971,25 +1218,6 @@
       - 'If data becomes corrupted or needs to be reset for any reason, developers can simply reset the branch from the parent development branch. This takes one second.'
       - 'For their enterprise customers, who oftentimes need a dedicated tenant, Neo.Tax creates a separate project for that customer.'
 
-- id: 'vercel'
-  title: 'Vercel'
-  isFeatured: false
-  logo:
-    mediaItemUrl: '/images/case-studies/vercel.svg'
-    mediaDetails:
-      width: 120
-      height: 32
-  quote: 'By partnering with Neon, Vercel&#8217;s frontend platform is now the end-to-end serverless solution for building on the Web, from Next.js all the way to SQL.'
-  author:
-    name: 'Guillermo Rauch'
-    post: 'CEO'
-  isInternal: true
-  internalPostSlug: 'neon-postgres-on-vercel'
-  externalUrl: ''
-  categories:
-    - slug: 'platforms'
-      name: 'Platforms'
-
 - id: 'wordware'
   title: 'Wordware'
   isFeatured: false
@@ -1211,25 +1439,6 @@
     claims:
       - 'When we launched our iOS app in February, we charted on the App Store; Neon’s managed database experience made it effortless to handle this traffic.'
       - 'This tooling, built on Neon’s REST API and the open-source Goose library, allows the team to run schema migrations on an exact copy of their production database without touching their production data.'
-
-- id: 'hasura'
-  title: 'Hasura'
-  isFeatured: false
-  logo:
-    mediaItemUrl: '/images/case-studies/hasura.svg'
-    mediaDetails:
-      width: 108
-      height: 32
-  quote: ''
-  author:
-    name: ''
-    post: ''
-  isInternal: true
-  internalPostSlug: 'neon-hasura-integration'
-  externalUrl: ''
-  categories:
-    - slug: 'platforms'
-      name: 'Platforms'
 
 - id: 'replit'
   title: 'Replit'
@@ -1709,3 +1918,34 @@
     claims:
       - 'When they first built Comigo, the team initially managed their database using Cloud SQL for PostgreSQL.'
       - 'For example, a script can be written to create a fresh branch every night for the staging server, ensuring the development site always has an up-to-date copy of the data.'
+
+- id: 'snaplet'
+  title: 'Snaplet'
+  isFeatured: false
+  logo:
+    mediaItemUrl: '/images/case-studies/snaplet.svg'
+    mediaDetails:
+      width: 114
+      height: 32
+  quote: 'As soon as we found out about Neon’s branching model with copy-on-write, we knew it was exactly what we were looking for'
+  author:
+    name: 'Julien Goux'
+    post: 'Software Engineer at Snaplet'
+  isInternal: true
+  internalPostSlug: 'empowering-developers-with-production-like-snapshots-how-snaplet-uses-neon'
+  externalUrl: ''
+  categories:
+    - slug: 'platforms'
+      name: 'Platforms'
+  evidence:
+    summary: 'Snaplet is a developer tool for production-like test data that powered its Snapshot feature with a Neon project per snapshot and branches per preview database.'
+    useCase: 'platforms'
+    date: '2024-05-20'
+    features:
+      - 'postgres'
+      - 'branching'
+      - 'api'
+    claims:
+      - 'Each Snapshot in Snaplet corresponds to a project in Neon.'
+      - 'When users require a new preview database, Snaplet creates a branch from the main snapshot branch.'
+      - 'This transition to Neon solved the scalability and cost problems they previously faced, enabling them to focus on delivering a superior product to their users.'
