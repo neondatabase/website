@@ -11,18 +11,14 @@ summary: >-
   environment by selecting a connection string based on NODE_ENV.
 enableTableOfContents: true
 agentPrompt: 'I want to use Drizzle ORM with it.'
-updatedOn: '2026-11-06T15:59:20.867Z'
+updatedOn: '2026-11-08T17:19:22.998Z'
 ---
 
-<div className="not-prose my-8 rounded-[10px] border border-gray-new-90 bg-gray-new-95 px-6 py-7 dark:border-gray-new-15 dark:bg-gray-new-10 [&>h2]:my-0 [&>h2]:mb-7 [&>h2]:mx-auto [&>h2]:w-fit [&>h2]:text-center [&>h2]:text-[28px] [&>h2]:leading-tight [&>h2]:font-medium [&>h2]:tracking-tighter [&>h2]:text-black-pure dark:[&>h2]:text-white [&_h3]:relative [&_h3]:mt-7 [&_h3]:mb-2 [&_h3]:w-fit [&_h3]:text-xl [&_h3]:font-semibold [&_h3]:tracking-tight [&_h3]:text-black-pure [&_h3]:before:absolute [&_h3]:before:-left-11 [&_h3]:before:top-px [&_h3]:before:flex [&_h3]:before:size-7 [&_h3]:before:items-center [&_h3]:before:justify-center [&_h3]:before:rounded-full [&_h3]:before:bg-black-new [&_h3]:before:text-[13px] [&_h3]:before:font-semibold [&_h3]:before:text-white [&_h3]:before:content-[counter(step)] [&_h3]:before:[counter-increment:step] dark:[&_h3]:text-white dark:[&_h3]:before:bg-white dark:[&_h3]:before:text-black-pure">
+<div className="not-prose my-8 rounded-[10px] border border-gray-new-90 bg-gray-new-95 px-6 py-7 dark:border-gray-new-15 dark:bg-gray-new-10 [&_h2]:relative [&_h2]:mt-7 [&_h2]:mb-2 [&_h2]:w-fit [&_h2]:text-xl [&_h2]:font-semibold [&_h2]:tracking-tight [&_h2]:text-black-pure [&_h2]:before:absolute [&_h2]:before:-left-11 [&_h2]:before:top-px [&_h2]:before:flex [&_h2]:before:size-7 [&_h2]:before:items-center [&_h2]:before:justify-center [&_h2]:before:rounded-full [&_h2]:before:bg-black-new [&_h2]:before:text-[13px] [&_h2]:before:font-semibold [&_h2]:before:text-white [&_h2]:before:content-[counter(step)] [&_h2]:before:[counter-increment:step] dark:[&_h2]:text-white dark:[&_h2]:before:bg-white dark:[&_h2]:before:text-black-pure">
 
-## Build with your agent
+<div className="pl-11 [counter-reset:step] [&>h2:first-child]:mt-0!">
 
-<div className="pl-11 [counter-reset:step] [&>h3:first-child]:mt-0!">
-
-### Give your agent the skills
-
-<p className="m-0 mb-1.5 text-[15px] leading-relaxed text-gray-new-30 dark:text-gray-new-70">Set up your agent for Neon</p>
+## Set up your agent for Neon
 
 <CopyLine text="Set me up for Neon. Fetch https://neon.com/prompts/agent-setup.md and follow it." />
 
@@ -34,13 +30,13 @@ updatedOn: '2026-11-06T15:59:20.867Z'
 
 <p className="mt-3 text-[13px] leading-relaxed text-gray-new-50 dark:text-gray-new-60">The Drizzle skill is maintained by the <a href="https://orm.drizzle.team/docs/drizzle-kit-skills">Drizzle team</a> and currently ships in Drizzle Kit's v1 pre-release (drizzle-kit@rc), so the agent installs it once Drizzle is in your project.</p>
 
-### Set up your project
+## Set up your project
 
 <p className="m-0 mb-3 text-[15px] leading-relaxed text-gray-new-30 dark:text-gray-new-70">The agent inspects your project, creates a Neon project if you need one, adds the connection string, and configures Drizzle to match.</p>
 
 <CopyLine text="Look at my project (check package.json, any existing schema, and my config), then set up Drizzle against Neon Postgres: create a Neon project if I need one, add the connection string, and configure Drizzle to match what you found." />
 
-### More things to ask for
+## More things to ask for
 
 <AgentPromptList
 items={[
