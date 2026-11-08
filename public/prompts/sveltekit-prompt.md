@@ -53,6 +53,7 @@ Identify the project's package manager (`npm`, `yarn`, `pnpm`, `bun`) and use it
 
     # For pg (node-postgres)
     npm install pg
+    npm install -D @types/pg
     ```
 
 ---
