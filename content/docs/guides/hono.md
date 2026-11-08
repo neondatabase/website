@@ -100,15 +100,12 @@ const pool = new Pool({
 });
 
 app.get('/', async (c) => {
-  const client = await pool.connect();
   try {
-    const { rows } = await client.query('SELECT version()');
+    const { rows } = await pool.query('SELECT version()');
     return c.json({ version: rows[0].version });
   } catch (error) {
     console.error('Database query failed:', error);
     return c.text('Failed to connect to database', 500);
-  } finally {
-    client.release();
   }
 });
 
