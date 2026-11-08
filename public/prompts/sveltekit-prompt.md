@@ -34,7 +34,7 @@ Identify the project's package manager (`npm`, `yarn`, `pnpm`, `bun`) and use it
 
 ### 1. Install Dependencies
 
-1.  **Prompt the user to select a PostgreSQL driver.** Present the following options:
+1.  **Prompt the user to select a Postgres driver.** Present the following options:
 
     -   **`@neondatabase/serverless` (Recommended):** Optimized for serverless and edge functions with HTTP connections. The ideal choice for SvelteKit applications deployed on Vercel, Netlify, or Cloudflare.
     -   **`postgres` (postgres.js):** A fast, full-featured client, excellent for long-running Node.js server environments.
@@ -42,17 +42,18 @@ Identify the project's package manager (`npm`, `yarn`, `pnpm`, `bun`) and use it
 
     Make sure to ask the user to choose one of the above options and do not proceed until they provide their choice. Clearly explain the pros of each option to help them decide.
 
-2.  Based on the user's selection, run the corresponding installation command. Also install `dotenv` for managing environment variables during local development.
+2.  Based on the user's selection, run the corresponding installation command. SvelteKit loads `.env` itself, so `dotenv` isn't needed.
 
     ```bash
     # For @neondatabase/serverless
-    npm install @neondatabase/serverless dotenv
+    npm install @neondatabase/serverless
 
     # For postgres (postgres.js)
-    npm install postgres dotenv
+    npm install postgres
 
     # For pg (node-postgres)
-    npm install pg dotenv
+    npm install pg
+    npm install -D @types/pg
     ```
 
 ---
@@ -62,11 +63,22 @@ Identify the project's package manager (`npm`, `yarn`, `pnpm`, `bun`) and use it
 1.  Check for the presence of a `.env` file at the root of the project. If it doesn't exist, create one.
 2.  Add the following `DATABASE_URL` parameter to the `.env` file and **prompt the user to replace the placeholder value** with their complete connection string from Neon.
 
-    ```dotenv title=".env"
-    DATABASE_URL="postgresql://user:password@endpoint.neon.tech/neondb?sslmode=require&channel_binding=require"
+    ```dotenv filename=".env"
+    DATABASE_URL="postgresql://[user]:[password]@[neon_hostname]/[dbname]?sslmode=require&channel_binding=require"
     ```
 
 3.  Direct the user to find this value in the **Neon Console → Project → Connect**.
+4.  Declare the variable in `src/env.ts` (SvelteKit 3 replaced `$env/static/private` and `$env/dynamic/private` with declared variables imported from `$app/env/private`):
+
+    ```typescript filename="src/env.ts"
+    import { defineEnvVars } from '@sveltejs/kit/env';
+
+    export const variables = defineEnvVars({
+      DATABASE_URL: {
+        description: 'Neon connection string',
+      },
+    });
+    ```
 
 ---
 
@@ -77,31 +89,31 @@ To securely manage the database connection, create a server-only module. This pr
 1.  Create a new file at `src/lib/server/db.ts`.
 2.  **Use the code block that corresponds to the driver selected in Step 1** to populate this file. This module will initialize and export the database client.
 
-    NOTE: You may see a TypeScript error on the `$env/static/private` import. This is expected. SvelteKit will automatically generate the necessary type definitions the next time you run the development server (`npm run dev`) or build your project, which will resolve the error.
+    NOTE: You may see a TypeScript error on the `$app/env/private` import until SvelteKit generates its types. Run `npx svelte-kit sync` (or start the dev server) to generate them.
 
     #### Option A: Using `@neondatabase/serverless`
 
-    ```typescript title="src/lib/server/db.ts"
+    ```typescript filename="src/lib/server/db.ts"
     import { neon } from '@neondatabase/serverless';
-    import { DATABASE_URL } from '$env/static/private';
+    import { DATABASE_URL } from '$app/env/private';
 
     export const sql = neon(DATABASE_URL);
     ```
 
     #### Option B: Using `postgres` (postgres.js)
 
-    ```typescript title="src/lib/server/db.ts"
+    ```typescript filename="src/lib/server/db.ts"
     import postgres from 'postgres';
-    import { DATABASE_URL } from '$env/static/private';
+    import { DATABASE_URL } from '$app/env/private';
 
     export const sql = postgres(DATABASE_URL);
     ```
 
     #### Option C: Using `pg` (node-postgres)
 
-    ```typescript title="src/lib/server/db.ts"
+    ```typescript filename="src/lib/server/db.ts"
     import { Pool } from 'pg';
-    import { DATABASE_URL } from '$env/static/private';
+    import { DATABASE_URL } from '$app/env/private';
 
     export const pool = new Pool({
       connectionString: DATABASE_URL,
@@ -118,7 +130,7 @@ Modify the root route to fetch data from the database on the server and display 
 
     #### Option A & B: For `@neondatabase/serverless` or `postgres`
 
-    ```typescript title="src/routes/+page.server.ts"
+    ```typescript filename="src/routes/+page.server.ts"
     import { sql } from '$lib/server/db';
 
     export async function load() {
@@ -131,7 +143,7 @@ Modify the root route to fetch data from the database on the server and display 
 
     #### Option C: For `pg` (node-postgres)
 
-    ```typescript title="src/routes/+page.server.ts"
+    ```typescript filename="src/routes/+page.server.ts"
     import { pool } from '$lib/server/db';
 
     export async function load() {
@@ -149,9 +161,11 @@ Modify the root route to fetch data from the database on the server and display 
 
 2.  **Create the page component:** Locate or create the file `src/routes/+page.svelte` and replace its contents with the following code. This component is driver-agnostic and will render the data passed from the `load` function.
 
-    ```svelte title="src/routes/+page.svelte"
+    ```svelte filename="src/routes/+page.svelte"
     <script lang="ts">
-      export let data;
+      import type { PageProps } from './$types';
+
+      let { data }: PageProps = $props();
     </script>
 
     <main>
