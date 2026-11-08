@@ -14,7 +14,7 @@ import ChevronRight from 'icons/chevron-right-sm.inline.svg';
 import { cn } from 'utils/cn';
 import sendGtagEvent from 'utils/send-gtag-event';
 
-const CARDS_TO_SHOW = 12;
+const DEFAULT_CARDS_TO_SHOW = 12;
 const GRID_CLASS_NAMES = {
   2: 'grid-cols-2 gap-x-10 gap-y-7 xl:gap-x-6 lg:gap-5 md:grid-cols-1',
   4: 'grid-cols-4 gap-x-10 gap-y-7 xl:gap-x-6 lg:gap-5 md:grid-cols-3 sm:grid-cols-2',
@@ -25,6 +25,7 @@ const CompactCards = ({
   children = null,
   cols = 2,
   withToggler = false,
+  cardsToShow = DEFAULT_CARDS_TO_SHOW,
   appearance = 'default',
 }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -35,7 +36,7 @@ const CompactCards = ({
 
   const childrenArray = React.Children.toArray(children).filter(Boolean);
   const displayedChildren =
-    withToggler && !isOpen ? childrenArray.slice(0, CARDS_TO_SHOW) : childrenArray;
+    withToggler && !isOpen ? childrenArray.slice(0, cardsToShow) : childrenArray;
   const columns = Number(cols);
   const gridClassName =
     appearance === 'home'
@@ -91,8 +92,8 @@ const CompactCards = ({
           <span className="text-sm tracking-extra-tight">
             {isOpen
               ? 'Hide'
-              : childrenArray.length > CARDS_TO_SHOW
-                ? `${childrenArray.length - CARDS_TO_SHOW}+ more`
+              : childrenArray.length > cardsToShow
+                ? `${childrenArray.length - cardsToShow}+ more`
                 : 'Show more'}
           </span>
           <span className="ml-1.5 flex h-auto w-3 shrink-0 items-center justify-center">
@@ -248,6 +249,7 @@ CompactCards.propTypes = {
   children: PropTypes.node,
   cols: PropTypes.oneOfType([PropTypes.oneOf([2, 4]), PropTypes.oneOf(['2', '4'])]),
   withToggler: PropTypes.bool,
+  cardsToShow: PropTypes.number,
   appearance: PropTypes.oneOf(['default', 'home']),
 };
 

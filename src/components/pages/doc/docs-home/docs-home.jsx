@@ -66,7 +66,7 @@ const CAPABILITY_CARDS = [
 // Framework, language, and ORM quickstarts. This is the full list the original
 // docs front page (the retired content/docs/introduction.md) rendered, in the same order,
 // so the Frameworks section can show it all with CompactCards' `withToggler`
-// (first 12 shown, the rest behind a Show more toggle) instead of a short
+// (first 8 shown, the rest behind a Show more toggle) instead of a short
 // hardcoded grid plus a navigate-away link. `icon` is the real technology-logo
 // key read by CompactCards (public/images/technology-logos/<icon>.svg); React
 // Router uses the `react` logo, matching the original list.
@@ -109,7 +109,7 @@ const FRAMEWORKS = [
 // Agents with their own setup page link to it (the plugin install section
 // where there is one). The rest link to their section of the MCP clients page,
 // or to its add-mcp install section when they need no agent-specific steps.
-// Ordered by popularity: CompactCards' `withToggler` shows the first 12 and
+// Ordered by popularity: CompactCards' `withToggler` shows the first 8 and
 // collapses the rest behind a Show more toggle, like the Frameworks section.
 const AGENT_SETUP_HREF = '/docs/ai/agent-setup';
 const MCP_HREF = '/docs/ai/connect-mcp-clients-to-neon';
@@ -314,8 +314,8 @@ const DocsHome = () => (
         heading="Frameworks"
         description="Quickstart guides to connect Neon to your framework."
       >
-        <CompactCards className="my-0!" cols={4} withToggler appearance="home">
-          {/* All frameworks render here; CompactCards shows the first 12 and
+        <CompactCards className="my-0!" cols={4} withToggler cardsToShow={8} appearance="home">
+          {/* All frameworks render here; CompactCards shows the first 8 and
               collapses the rest behind a Show more / Hide toggle, expanding in
               place instead of linking away. */}
           {FRAMEWORKS.map((f) => (
@@ -332,7 +332,7 @@ const DocsHome = () => (
         description="Connect your agent with a plugin, MCP, or skills to create branches, run SQL, and read docs."
       >
         <div className="grid gap-8">
-          <CompactCards className="my-0!" cols={4} withToggler appearance="home">
+          <CompactCards className="my-0!" cols={4} withToggler cardsToShow={8} appearance="home">
             {AGENTS.map((g) => (
               <a key={g.name} href={g.to} title={g.name} icon={g.icon}>
                 {g.name}
