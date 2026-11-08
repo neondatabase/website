@@ -13,7 +13,7 @@ updatedOn: '2026-09-16T19:45:35.340Z'
 ---
 
 <CopyPrompt src="/prompts/phoenix-prompt.md"
-description="Pre-built prompt for connecting Phoenix applications to Neon"/>
+description="Pre-built prompt for connecting Phoenix applications to Lakebase Postgres"/>
 
 This guide describes how to connect Neon in a [Phoenix](https://www.phoenixframework.org) application. [Ecto](https://hexdocs.pm/ecto/3.11.2/Ecto.html) provides an API and abstractions for interacting databases, enabling Elixir developers to query any database using similar constructs.
 
