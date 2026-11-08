@@ -109,7 +109,7 @@ If you use `node-postgres`, `pg` 8.23 and later print a `SECURITY WARNING` for `
 
 ## Install Kysely and a driver
 
-Install the Kysely core package and the necessary driver dependencies. Choose one of the following drivers based on your application's needs:
+Install the Kysely core package and the necessary driver dependencies. Choose one of the following drivers based on your application's needs. For a Node.js script or long-running server, use `node-postgres`.
 
 <Tabs labels={["Neon Serverless (HTTP)", "Neon WebSocket", "node-postgres"]}>
 
