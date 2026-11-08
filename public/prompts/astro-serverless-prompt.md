@@ -33,7 +33,7 @@ Run:
 npx astro add node --yes
 ```
 
-Then set `output: 'server'` in the `defineConfig({ ... })` call in `astro.config.mjs`. The adapter alone isn't enough: Astro's default output is `static`, so without `output: 'server'` (or `export const prerender = false;` in each page and endpoint), `npm run build` prerenders pages and API routes and the database is queried only at build time.
+Then set `output: 'server'` in the `defineConfig({ ... })` call in `astro.config.mjs`, and declare the connection string as a server secret: add `env: { schema: { DATABASE_URL: envField.string({ context: 'server', access: 'secret' }) } }` and import `envField` from `astro/config`. The adapter alone isn't enough: Astro's default output is `static`, so without `output: 'server'` (or `export const prerender = false;` in each page and endpoint), `npm run build` prerenders pages and API routes and the database is queried only at build time.
 
 ---
 
@@ -44,7 +44,9 @@ Create `src/lib/neon.ts` with:
 ```typescript
 import { neon } from '@neondatabase/serverless';
 
-export const sql = neon(import.meta.env.DATABASE_URL);
+import { DATABASE_URL } from 'astro:env/server';
+
+export const sql = neon(DATABASE_URL);
 ```
 
 This centralizes your database configuration following best practices.
@@ -122,7 +124,7 @@ Before suggesting code or making edits, ensure:
 - A `src/lib/neon.ts` utility file is created and exports the `sql` function
 - Code imports from the utility file (`import { sql } from '../lib/neon'`), not inline initialization
 - Queries are server-side only (not in client JS or components)
-- The connection string is loaded from `import.meta.env.DATABASE_URL`
+- The connection string is declared in `astro.config.mjs` as `env.schema.DATABASE_URL = envField.string({ context: 'server', access: 'secret' })` and imported from `astro:env/server`, so it isn't copied into the build output
 - A `.env` file is present or has been created
 - No use of `dotenv` (Astro loads `.env` automatically)
 

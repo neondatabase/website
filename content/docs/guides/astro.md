@@ -63,7 +63,7 @@ Then set `output: 'server'` in `astro.config.mjs` so every page and endpoint use
 
 ```javascript filename="astro.config.mjs"
 // @ts-check
-import { defineConfig } from 'astro/config';
+import { defineConfig, envField } from 'astro/config';
 
 import node from '@astrojs/node';
 
@@ -73,8 +73,15 @@ export default defineConfig({
   adapter: node({
     mode: 'standalone',
   }),
+  env: {
+    schema: {
+      DATABASE_URL: envField.string({ context: 'server', access: 'secret' }),
+    },
+  },
 });
 ```
+
+The `env.schema` entry declares `DATABASE_URL` as a server-only secret. Astro reads secrets from the environment at runtime instead of copying them into the build output, so your password doesn't end up in `dist/`. For more, see [Type-safe environment variables](https://docs.astro.build/en/guides/environment-variables/#type-safe-environment-variables) in the Astro documentation.
 
 <Admonition type="note">
 The adapter alone isn't enough. Astro's default output is `static`, so without `output: 'server'`, `npm run build` prerenders your pages and API routes at build time and production serves the build-time results. To render only some routes on demand, keep the default and add `export const prerender = false;` to those pages and endpoints. Development mode (`npm run dev`) renders every request, so you won't see the difference until you build.
@@ -100,23 +107,26 @@ Create a new file at `src/lib/neon.ts` (or `src/lib/neon.js`) with the following
 
 ```typescript
 import { Pool } from 'pg';
+import { DATABASE_URL } from 'astro:env/server';
 
 export const pool = new Pool({
-  connectionString: import.meta.env.DATABASE_URL,
-  ssl: true
+  connectionString: DATABASE_URL,
+  ssl: true,
 });
 ```
 
 ```typescript
 import postgres from 'postgres';
+import { DATABASE_URL } from 'astro:env/server';
 
-export const sql = postgres(import.meta.env.DATABASE_URL, { ssl: 'require' });
+export const sql = postgres(DATABASE_URL, { ssl: 'require' });
 ```
 
 ```typescript
 import { neon } from '@neondatabase/serverless';
+import { DATABASE_URL } from 'astro:env/server';
 
-export const sql = neon(import.meta.env.DATABASE_URL);
+export const sql = neon(DATABASE_URL);
 ```
 
 </CodeTabs>
@@ -240,7 +250,13 @@ When you run `npm run dev` you can expect to see something like the following wh
 {"version":"PostgreSQL 18.6 (ac70818) on aarch64-unknown-linux-gnu, compiled by gcc (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0, 64-bit"}
 ```
 
-To run the production build, run `npm run build` and then `node ./dist/server/entry.mjs`. With `output: 'server'`, each request queries your database.
+To run the production build, run `npm run build`, then start the server with `DATABASE_URL` set in its environment. For example, load it from your `.env` file with Node's `--env-file` option (Node 20.6 or later):
+
+```shell
+node --env-file=.env ./dist/server/entry.mjs
+```
+
+The server listens on port 4321 by default; set the `PORT` environment variable to change it. With `output: 'server'`, each request queries your database. If `DATABASE_URL` isn't set, Astro fails the request with an `EnvInvalidVariables` error.
 
 </Steps>
 
