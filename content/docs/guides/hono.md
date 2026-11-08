@@ -109,7 +109,9 @@ app.get('/', async (c) => {
   }
 });
 
-serve(app);
+serve(app, (info) => {
+  console.log(`Server is running on http://localhost:${info.port}`);
+});
 ```
 
 ```typescript filename="src/index.ts"
@@ -130,7 +132,9 @@ app.get('/', async (c) => {
   }
 });
 
-serve(app);
+serve(app, (info) => {
+  console.log(`Server is running on http://localhost:${info.port}`);
+});
 ```
 
 ```typescript filename="src/index.ts"
@@ -151,7 +155,9 @@ app.get('/', async (c) => {
   }
 });
 
-serve(app);
+serve(app, (info) => {
+  console.log(`Server is running on http://localhost:${info.port}`);
+});
 ```
 
 </CodeTabs>
