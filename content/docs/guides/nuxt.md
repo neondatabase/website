@@ -174,6 +174,8 @@ export default defineEventHandler(async () => {
 
 </CodeTabs>
 
+To type-check the server code with `npx nuxt typecheck`, install `typescript`, `vue-tsc`, and `@types/node` as dev dependencies (`npm install -D typescript vue-tsc @types/node`).
+
 If you use node-postgres, `pg` 8.23 and later print a `SECURITY WARNING` for `sslmode=require`. Change it to `sslmode=verify-full` in `.env` to keep the same behavior without the warning.
 
 <Admonition type="note">
