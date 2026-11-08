@@ -51,6 +51,10 @@ module.exports = {
     },
     { label: 'Pricing and plans', url: 'https://neon.com/pricing.md' },
     {
+      label: 'Customer case studies by use case, with results quoted from each story',
+      url: 'https://neon.com/case-studies.md',
+    },
+    {
       label: 'Declare a whole backend in one file',
       url: 'https://neon.com/docs/reference/neon-ts.md',
     },
