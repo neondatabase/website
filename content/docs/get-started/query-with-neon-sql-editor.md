@@ -11,7 +11,7 @@ summary: >-
 enableTableOfContents: true
 redirectFrom:
   - /docs/get-started/tutorials
-updatedOn: '2026-11-08T11:07:36.150Z'
+updatedOn: '2026-11-08T12:17:12.216Z'
 ---
 
 The Neon SQL Editor allows you to run queries on your Neon databases directly from the Neon Console. In addition, the editor keeps a query history, permits saving queries, and provides [**Explain**](https://www.postgresql.org/docs/current/sql-explain.html) and [**Analyze**](https://www.postgresql.org/docs/current/using-explain.html#USING-EXPLAIN-ANALYZE) features.
@@ -214,16 +214,16 @@ The Neon SQL Editor offers three AI-driven features:
   ![AI-generated query names](/docs/get-started/query_names.png)
 
 <Admonition type="important">
-To enhance your experience with the Neon SQL Editor's AI features, we share your database schema with the AI agent. No actual data is shared. We currently use AWS Bedrock as our LLM provider, ensuring all requests remain within AWS's secure infrastructure where other Neon resources are also managed.
+To give the AI features context, we share your database schema with the AI agent. No actual data is shared. We currently use Amazon Bedrock as our LLM provider, ensuring all requests remain within AWS's secure infrastructure where other Neon resources are also managed.
 
-_There is a maximum limit of 5 AI requests every 60 seconds._
+_There is a maximum limit of 10 AI requests every 60 seconds._
 </Admonition>
 
 ## Next steps
 
-- **Connect your app:** pick your [framework](/docs/get-started/frameworks), [language](/docs/get-started/languages), or [ORM](/docs/get-started/orms), or start from the [connection hub](/docs/connect/connect-hub).
+- **Connect your app:** pick your [framework](/docs/get-started/frameworks), [language](/docs/get-started/languages), or [ORM](/docs/get-started/orms), or start from [Connect your app](/docs/connect/connect-hub).
 - **Try a branch:** [branching](/docs/introduction/branching) gives you an instant copy of your data and schema to test changes against, without touching your main branch.
 - **Let your agent do it:** [Agent setup](/docs/ai/agent-setup) gives your AI coding agent the Neon tools to create tables, run queries, and manage branches for you.
-- **Build a full backend:** the [full backend quickstart](/docs/get-started/full-backend-quickstart) adds Object Storage and a Neon Function to a Next.js app on top of Postgres.
+- **Build a full backend:** the [full backend quickstart](/docs/get-started/full-backend-quickstart) adds Object Storage and Functions to a Next.js app backed by Lakebase Postgres.
 
 <NeedHelp/>
