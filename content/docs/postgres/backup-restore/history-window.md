@@ -17,6 +17,7 @@ redirectFrom:
   - /docs/introduction/restore-window
   - /docs/introduction/history-window
   - /docs/introduction/history-retention
+  - /docs/manage/history-window
 updatedOn: '2026-08-24T17:32:35.016Z'
 ---
 

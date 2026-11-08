@@ -1,13 +1,18 @@
 import LINKS from 'constants/links';
 import {
+  REGISTRY_COMMUNITY_CATEGORY,
+  REGISTRY_FIRST_PARTY_CATEGORY,
+  REGISTRY_PARTNER_CATEGORY,
+  hasRegistryEnvironmentRequirements,
   isInlineCodeSafe,
-  isFirstPartyRegistryTemplate,
   registryCategoryIds,
   registryCategoryLabel,
+  registryEnvironmentRequiredLabel,
   registryProviderLabel,
   registryTemplateCategories,
   registryTemplateFilters,
   registryTemplatePageHref,
+  registryTemplateSource,
   registryTemplateSourceUrl,
   registryWebsiteUrl,
 } from 'utils/function-registry';
@@ -43,6 +48,17 @@ const builtByLine = (template) => {
   const provider = escapeText(registryProviderLabel(template) || 'Neon');
   const website = registryWebsiteUrl(template.website);
   return website ? `[${provider}](${website})` : provider;
+};
+
+const SOURCE_DESCRIPTIONS = {
+  [REGISTRY_FIRST_PARTY_CATEGORY]: 'maintained by Neon',
+  [REGISTRY_PARTNER_CATEGORY]: 'written by a company Neon works with closely',
+  [REGISTRY_COMMUNITY_CATEGORY]: 'written by the community',
+};
+
+const sourceLine = (template) => {
+  const source = registryTemplateSource(template);
+  return source && `- ${registryCategoryLabel(source)}: ${SOURCE_DESCRIPTIONS[source]}`;
 };
 
 const categoriesLine = (template) =>
@@ -129,7 +145,9 @@ export const renderTemplateMarkdown = ({ template, previous = null, next = null 
   const installCommand = installCommandFor(template.id);
   const operations = template.operations ?? [];
   const environment = (template.environment ?? []).filter((item) => isInlineCodeSafe(item.name));
+  const showRequired = hasRegistryEnvironmentRequirements(environment);
   const pagePath = registryTemplatePageHref(template.id);
+  const sourceUrl = registryTemplateSourceUrl(template);
 
   const related = [
     previous &&
@@ -137,7 +155,7 @@ export const renderTemplateMarkdown = ({ template, previous = null, next = null 
     next &&
       `- Next: [${escapeText(next.title)}](${absoluteUrl(registryTemplatePageHref(next.id))}.md)`,
     `- [All templates](${absoluteUrl(LINKS.functionsTemplates)}.md)`,
-    `- [Template source](${registryTemplateSourceUrl(template)})`,
+    sourceUrl && `- [Template source](${sourceUrl})`,
     `- [Use function templates](${absoluteUrl(LINKS.functionsTemplatesDocs)}.md)`,
     `- [Contribute a function template](${absoluteUrl(LINKS.functionsRegistry)}.md)`,
   ].filter(Boolean);
@@ -147,21 +165,13 @@ export const renderTemplateMarkdown = ({ template, previous = null, next = null 
     `# ${escapeText(template.title)}`,
     escapeText(template.description),
     [
-      isFirstPartyRegistryTemplate(template) && '- First Party: maintained by Neon',
+      sourceLine(template),
       `- Built by: ${builtByLine(template)}`,
       categoriesLine(template) && `- Categories: ${categoriesLine(template)}`,
     ]
       .filter(Boolean)
       .join('\n'),
-    [
-      '## Install',
-      '',
-      '```bash',
-      installCommand,
-      '```',
-      '',
-      `With the Neon CLI 8.11.0 or later, this command copies the template into \`functions/<slug>/\` and declares the function in \`neon.ts\`.`,
-    ].join('\n'),
+    ['## Install', '', '```bash', installCommand, '```'].join('\n'),
     operations.length > 0
       ? [
           '## What this function exposes',
@@ -173,13 +183,15 @@ export const renderTemplateMarkdown = ({ template, previous = null, next = null 
       [
         '## Environment variables',
         '',
-        'The CLI declares these variables in `neon.ts` and adds them to `.env.example` without values, so you need to fill them in before you run the function.',
+        `The CLI declares these variables in \`neon.ts\` and adds them to \`.env.example\` without values, so you need to fill ${showRequired ? 'in the required ones' : 'them in'} before you run the function.`,
         '',
-        '| Variable | Description |',
-        '| --- | --- |',
-        ...environment.map(
-          ({ name, description }) => `| \`${name}\` | ${escapeTableCell(description ?? '')} |`
-        ),
+        showRequired ? '| Variable | Description | Required |' : '| Variable | Description |',
+        showRequired ? '| --- | --- | --- |' : '| --- | --- |',
+        ...environment.map(({ name, description, required }) => {
+          const cells = [`\`${name}\``, escapeTableCell(description ?? '')];
+          if (showRequired) cells.push(registryEnvironmentRequiredLabel(required));
+          return `| ${cells.join(' | ')} |`;
+        }),
       ].join('\n'),
     operations.length > 0 &&
       `## Run it\n\nInstalling a template doesn't deploy it, so ${RUN_LOCALLY}`,

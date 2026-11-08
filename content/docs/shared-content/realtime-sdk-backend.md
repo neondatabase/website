@@ -20,6 +20,7 @@
 | [`SealedLiveQuery`](#backend-sealedlivequery)                         | Interface  | JSON-compatible sealed representation of one exact live query. The query is a short-lived bearer credential. Transport it over HTTPS and do not put it in URLs, logs, or persistent browser storage.                                                                                                                                              |
 | [`TypedRawSqlParameter`](#backend-typedrawsqlparameter)               | Interface  | A raw SQL parameter with an explicit PostgreSQL text encoder and type hint.                                                                                                                                                                                                                                                                       |
 | [`RawSqlParameter`](#backend-rawsqlparameter)                         | Type alias | A JavaScript value accepted as a PostgreSQL text-format parameter.                                                                                                                                                                                                                                                                                |
+| [`RealtimeAdapterSource`](#backend-realtimeadaptersource)             | Type alias | Bounded query-builder family recorded in encrypted capabilities.                                                                                                                                                                                                                                                                                  |
 | [`pgParam`](#backend-pgparam)                                         | Variable   | Helpers for values whose PostgreSQL text encoding or type is ambiguous.                                                                                                                                                                                                                                                                           |
 
 ### createRealtime (#backend-createrealtime)
@@ -239,9 +240,10 @@ Converts an ORM-native query into the prepared live-query representation.
 
 #### Members (#backend-realtimeadapter-members)
 
-| Name      | Type                                  | Description                                                                                                                                                                                      |
-| --------- | ------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `prepare` | `(query: Query) => PreparedLiveQuery` | Convert an adapter-native query into parameterized SQL and text-format parameter values. Adapters may supply PostgreSQL type OID hints; `0` requests inference. The proxy supplies result types. |
+| Name           | Type                                  | Description                                                                                                                                                                                      |
+| -------------- | ------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `querySource?` | `readonly RealtimeAdapterSource`      | Query-builder family used for aggregate Realtime usage metrics. Official adapters set this automatically; custom adapters may omit it.                                                           |
+| `prepare`      | `(query: Query) => PreparedLiveQuery` | Convert an adapter-native query into parameterized SQL and text-format parameter values. Adapters may supply PostgreSQL type OID hints; `0` requests inference. The proxy supplies result types. |
 
 ### RealtimeDirectServer (#backend-realtimedirectserver)
 
@@ -475,6 +477,14 @@ type RawSqlParameter = string | number | boolean | bigint | null | TypedRawSqlPa
 ```
 
 A JavaScript value accepted as a PostgreSQL text-format parameter.
+
+### RealtimeAdapterSource (#backend-realtimeadaptersource)
+
+```ts
+type RealtimeAdapterSource = "drizzle" | "kysely" | "custom"
+```
+
+Bounded query-builder family recorded in encrypted capabilities.
 
 ### pgParam (#backend-pgparam)
 

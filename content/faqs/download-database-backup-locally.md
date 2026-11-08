@@ -7,8 +7,8 @@ updatedOn: '2026-11-04T20:10:08.844Z'
 isDraft: false
 redirectFrom: []
 previousLink:
-  title: 'How do I delete a database in Neon?'
-  slug: delete-database-neon
+  title: 'Do I need a separate vector database for RAG?'
+  slug: do-i-need-separate-vector-database-rag
 nextLink:
   title: 'How do I enable or disable connection pooling for my Neon database?'
   slug: enable-disable-connection-pooling-neon

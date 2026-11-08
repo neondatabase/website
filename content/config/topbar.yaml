@@ -1,4 +1,4 @@
-text: 'Managed Better Auth is now an OAuth provider, with MCP support'
+text: 'Lakebase Postgres is built on object storage, but 99.99999% of reads are served from high-performance local caches'
 link:
-  url: 'https://neon.com/blog/managed-better-auth-oauth-provider-mcp'
+  url: 'https://neon.com/blog/lakebase-postgres-reads-never-touch-object-storage'
   target: '_blank'

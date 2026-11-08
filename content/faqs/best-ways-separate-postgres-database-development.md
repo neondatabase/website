@@ -5,11 +5,11 @@ createdAt: '2026-04-25T00:00:00.000Z'
 updatedOn: '2026-10-01T14:57:15.000Z'
 isDraft: false
 previousLink:
-  title: 'What is the best Postgres setup for serverless APIs?'
-  slug: best-postgres-setup-serverless-apis
+  title: 'What is the best way to run cron jobs and scheduled syncs on a Postgres database that scales to zero?'
+  slug: best-way-run-cron-jobs-postgres-scale-to-zero
 nextLink:
-  title: 'Can I change the region of my existing Neon project after creation?'
-  slug: change-project-region
+  title: 'How do I get BM25 relevance ranking in Postgres full-text search?'
+  slug: bm25-relevance-ranking-postgres-full-text-search
 ---
 
 Give each developer a branch. On Neon, a branch is a copy-on-write clone of its parent: it has the parent's schema and data from the start, and new storage is used only when data changes. You create branches on demand from the Console, CLI, or API, so a team of ten can have ten isolated databases without paying for ten copies of the data.

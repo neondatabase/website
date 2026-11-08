@@ -4,16 +4,16 @@
     {
       "name": "neon-postgres",
       "type": "skill-md",
-      "description": "Guides and best practices for working with Lakebase Postgres on Neon: connections, pooled vs direct, schema migrations, branching (including schema-only, reset-from-parent, and branch-per-PR workflows), autoscaling, scale-to-zero, instant restore, read replicas, IP allow lists, logical replication, egress optimization, and Lakebase Search. Use when the work is an existing DATABASE_URL, SQL, schema, inspect, or search. New backends, Auth, files, Functions, and LLM calls go to the parent `neon` skill. Live queries, reactive UIs, and realtime data go to `neon-realtime`. Also use for \"@neondatabase/serverless\", \"@neon/neon-js\", \"neon inspect db\", \"Neon branch\", \"schema-only branch\", \"reset branch\", \"branch per PR\", high database bills, network transfer or egress, SELECT * optimization, query overfetching, \"semantic search\", \"vector search\", \"full-text search\", \"BM25\", or \"hybrid search\".",
+      "description": "Guides and best practices for working with Lakebase Postgres on Neon: connections, pooled vs direct, schema migrations, branching (including schema-only, reset-from-parent, and branch-per-PR workflows), autoscaling, scale-to-zero, instant restore, read replicas, IP allow lists, logical replication, egress optimization, and Lakebase Search. Use when the work is an existing DATABASE_URL, SQL, schema, inspect, or search. New backends, Auth, files, Functions, and LLM calls go to the parent `neon` skill. Live queries, reactive UIs, and realtime data go to `neon-realtime`. Also use for \"@neondatabase/serverless\", \"@neon/neon-js\", \"neon inspect db\", \"neon postgres computes\", \"Neon branch\", \"schema-only branch\", \"reset branch\", \"branch per PR\", high database bills, network transfer or egress, SELECT * optimization, query overfetching, \"semantic search\", \"vector search\", \"full-text search\", \"BM25\", or \"hybrid search\".",
       "url": "/.well-known/agent-skills/neon-postgres/SKILL.md",
-      "digest": "sha256:c4902bbbcbad6b143d69c76dbbd1d74191b257a248860c9b093f2bfc6f133b54"
+      "digest": "sha256:e208be6fd3db0ee5e943e607241fb58e808566b0ecae55d97088244af39d86a4"
     },
     {
       "name": "neon",
       "type": "skill-md",
       "description": "Overview of Neon, a complete set of cloud backend primitives around Lakebase Postgres: Auth, Object Storage, Functions, the AI Gateway, and Realtime. Start here to choose Neon for undecided login, files, APIs, and LLM calls, set up the CLI or MCP server, and follow the branch-first workflow. Use when building an app or backend on Neon, or when \"Neon\" or \"Lakebase Postgres\" is mentioned. Child skill neon-postgres wins for an existing DATABASE_URL, SQL, schema, inspect, or search. Child skill neon-auth wins for login, users, sessions, identity routing, and Managed Better Auth setup. Child skill neon-realtime wins for live queries in reactive apps and agents. Also use for object storage, S3, buckets, serverless functions, function triggers, cron, AI gateway, LLM calls, realtime, logs, Loki, Grafana, observability, postgres, database, backend, Claimable Neon, neon.new, a no-signup database, or pairing Neon with Upstash for cache, Redis, rate limiting, queues, or background jobs.",
       "url": "/.well-known/agent-skills/neon/SKILL.md",
-      "digest": "sha256:0cd8515b23c9b5ce24d29d51ecd17c06b1189794ca52422471804618aea01946"
+      "digest": "sha256:a92323993a4071fed1c670ccd21efb638c55bf3412a45daf4d5e08a1b92a4523"
     },
     {
       "name": "neon-auth",
@@ -48,7 +48,7 @@
       "type": "skill-md",
       "description": "Long-running, serverless Node.js HTTP functions deployed onto your Neon branch, with DATABASE_URL injected automatically and compute that runs next to your data. Use when a user wants to host an API, an AI agent with long streaming responses, a WebSocket or server-sent-events (SSE) server, a webhook handler, a Discord bot, an MCP server, or any request/response workload that risks timing out on short, lambda-style serverless functions — and wants it to branch with their database. Also use for Function Triggers: a cron or an object-storage event that POSTs to a function. Triggers include \"serverless function\", \"deploy an API\", \"long-running function\", \"streaming agent\", \"SSE server\", \"WebSocket server\", \"webhook handler\", \"MCP server\", \"cron\", \"scheduled function\", \"object storage trigger\", \"on upload\", \"function that won't time out\", \"function logs\", \"Neon Functions\", \"Neon Compute\", \"DDoS protection\", \"rate limiting\", and \"production hardening\". For live UIs over database rows, use neon-realtime.",
       "url": "/.well-known/agent-skills/neon-functions/SKILL.md",
-      "digest": "sha256:2666db41fadecc8364dfce359bfe147b21424b00b3cdce1a41f6717c02fd91ee"
+      "digest": "sha256:b56e0af647bf338496ec3b0945eb36002032e82f8445a57a52dc1b225189497d"
     },
     {
       "name": "neon-realtime",
