@@ -204,7 +204,7 @@ const FoundationCard = () => (
         </span>
       </span>
       <div className="flex flex-col gap-1.5">
-        <span className="font-sans text-lg leading-snug font-medium tracking-[-0.02em] text-black-pure dark:text-white">
+        <span className="font-sans text-lg leading-snug font-medium tracking-[-0.02em] text-black-pure transition-colors duration-200 group-focus-within:text-green-44 group-hover:text-green-44 dark:text-white dark:group-focus-within:text-green-44 dark:group-hover:text-green-44">
           Create a database
         </span>
         <span className="text-[15px] leading-snug text-gray-new-45 dark:text-gray-new-60">
