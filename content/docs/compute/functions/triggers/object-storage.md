@@ -183,7 +183,7 @@ Unlike a scheduled trigger, an object-created trigger has no `schedule` or `next
 
 <TabItem>
 
-Declare the trigger in the top-level `triggers` record in [`neon.ts`](/docs/reference/neon-ts#triggers), with `function` pointing at your function's slug, then apply it with `neon deploy`. `bucket` selects the bucket and `prefix` optionally scopes it to keys under that path.
+Declare the trigger in the top-level `triggers` record in [`neon.ts`](/docs/reference/neon-ts#triggers), with `function` pointing at your function's slug, then apply it with `neon deploy`. `bucket` selects the bucket, which must also be declared under `buckets` in the same file, and `prefix` optionally scopes it to keys under that path.
 
 ```ts filename="neon.ts"
 functions: {
@@ -191,6 +191,9 @@ functions: {
     name: "On upload",
     source: "./functions/onupload.ts",
   },
+},
+buckets: {
+  "my-bucket": {},
 },
 triggers: {
   "record-uploads": {
