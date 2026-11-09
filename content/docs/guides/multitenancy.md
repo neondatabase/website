@@ -16,7 +16,7 @@ redirectFrom:
 updatedOn: '2026-08-27T15:07:41.821Z'
 ---
 
-With its serverless and API-first nature, Neon is an excellent choice for building database-per-user applications (or apps where each user/customer has their own Postgres database). Neon is particularly well-suited for architectures that prioritize maximum database isolation, achieving the equivalent of instance-level isolation.
+Neon's serverless, API-first design suits database-per-user applications, where each user or customer has their own Postgres database. Neon fits architectures that need strong database isolation, with the equivalent of instance-level isolation.
 
 This guide will help you get started with implementing this architecture.
 
@@ -42,7 +42,7 @@ In a database-per-user design, each user's data is fully isolated in its own dat
 
 2. **Handling multiple instances, each hosting a single production database.** In this scenario, each instance scales independently, preventing resource competition between users and minimizing the risk of widespread failures. This is a much simpler design from the perspective of the database layer, but managing hundreds of instances in AWS can get very costly and complex. As the number of instances grows into the thousands, management becomes nearly impossible.
 
-As we'll see later throughout this guide, Neon offers a third alternative by providing a logical equivalent to the instance-per-customer model with near-infinite scalability, without the heavy DevOps overhead. This solution involves creating one Neon project per customer.
+As we'll see later throughout this guide, Neon offers a third alternative by providing a logical equivalent of the instance-per-customer model without the DevOps overhead of managing individual instances. This solution involves creating one Neon project per customer.
 
 ### Schema-per-user
 
@@ -56,7 +56,7 @@ In Neon, we generally don't recommend this approach for SaaS applications, unles
 
 ![Shared schema](/docs/guides/multitenancy/shared_schema.png)
 
-Lastly, Postgres's robustness actually makes it possible to ensure tenant isolation within a shared schema. In this model, all users' data resides within the same tables, with isolation enforced through foreign keys and row-level security.
+Lastly, Postgres can enforce tenant isolation within a shared schema. In this model, all users' data resides within the same tables, with isolation enforced through foreign keys and row-level security.
 
 While this is a common choice (and can be a good starting point if you're just beginning to build your app), we still recommend the project-per-user route if possible. Over time, as your app scales, meeting requirements within a shared schema setup becomes increasingly challenging. Enforcing compliance and managing access restrictions at the schema level grows more complex as you add more users.
 
@@ -73,10 +73,10 @@ Now that we've reviewed your options, let's focus on the design choice we recomm
 We recommend setting up one project per user, rather than, for example, using a branch per customer. A Neon [project](/docs/concepts/the-object-model) serves as the logical equivalent of an "instance" but without the management overhead. Here's why we suggest this design:
 
 - **Straightforward scalability**  
-  Instead of learning how to handle large Postgres databases, this model allows you to simply create a new project when a user joins, something that can be handled automatically via the Neon API. This approach is very cost-effective, as we'll see below. Databases remain small, keeping management at the database level simple.
+  Instead of learning how to handle large Postgres databases, this model allows you to simply create a new project when a user joins, something that can be handled automatically via the Neon API. This approach keeps costs low. Databases remain small, keeping management at the database level simple.
 
 - **Better performance with lower costs**  
-  This design is also highly efficient in terms of compute usage. Each project has its own dedicated compute, which scales up and down independently per customer; a spike in usage for one tenant doesn't affect others, and inactive projects remain practically free.
+  This design also uses compute efficiently. Each project has its own dedicated compute, which scales up and down independently per customer; a spike in usage for one tenant doesn't affect others, and inactive projects remain practically free.
 
 - **Complete data isolation**  
   By creating a dedicated project for each customer, their data remains completely separate from others, ensuring the highest level of security and privacy.
@@ -95,17 +95,17 @@ As you scale, following a project-per-user design means eventually managing thou
   The API allows you to automate every step of project management, including setting resource limits per customer and configuring resources.
 
 - **No infrastructure provisioning**  
-  New Neon projects are ready in milliseconds. You can set things up to create new projects instantly when new customers join, without the need to manually pre-provision instances.
+  New Neon projects are ready within a few seconds. You can set things up to create new projects instantly when new customers join, without the need to manually pre-provision instances.
 
 - **You only pay for active projects**  
   Empty projects are virtually free thanks to Neon's [scale-to-zero](/docs/guides/auto-suspend-guide) feature. If, on a given day, you have a few hundred projects that were only active for a few minutes, that's fine; your bill won't suffer.
 
 - **Subscription plans**  
-  To support this usage pattern, our paid plans include a generous number of projects.
+  The [Launch plan](/docs/introduction/plans) includes 100 projects, and the Scale plan includes 1,000.
 
 ### Dev/test environments
 
-In Neon, [database branching](/docs/introduction/branching) lets you create fast, isolated copies of your data for development and testing. You can use child branches as ephemeral environments that mirror your main testing database but operate independently, without adding to storage costs. This feature is a game-changer for dev/test workflows, as it reduces the complexity of managing multiple test databases while lowering non-prod costs significantly.
+In Neon, [database branching](/docs/introduction/branching) lets you create fast, isolated copies of your data for development and testing. You can use child branches as ephemeral environments that mirror your main testing database but operate independently. Child branches share storage with their parent until data diverges, which keeps non-prod costs down. This reduces the work of managing multiple test databases.
 
 To handle [dev/test](/use-cases/dev-test) in a project-per-user design, consider creating a dedicated Neon project as your non-prod environment. This Neon project can serve as a substitute for the numerous non-prod instances you might maintain in RDS.
 
@@ -113,9 +113,9 @@ The methodology:
 
 - **Within the non-prod project, load your testing data into the production branch.** This production branch will serve as the primary source for all dev/test environments.
 - **Create ephemeral environments via child branches.** For each ephemeral environment, create a child branch from the production branch. These branches are fully isolated in terms of resources and come with an up-to-date copy of your testing dataset.
-- **Automate the process.** Use CI/CD and automations to streamline your workflow. You can reset child branches with one click to keep them in sync with the production branch as needed, maintaining data consistency across your dev/test environments.
+- **Automate the process.** Use CI/CD and automations to streamline your workflow. You can reset child branches to their parent to keep them in sync with the production branch as needed, maintaining data consistency across your dev/test environments.
 
-## Designing a Control Plane
+## Designing a control plane
 
 Once you have everything set up, as your number of projects grows, you might want to create a control plane to stay on top of everything in a centralized manner.
 
@@ -130,7 +130,7 @@ You can set up your catalog database as a separate Neon project. When it's time 
 - Use foreign keys to link tables like `project` and `payment` to `customer`.
 - Choose data types carefully: `citext` for case-insensitive text, `uuid` for unique identifiers to obscure sequence data, and `timestamptz` for tracking real-world time.
 - Track key operational data, like `schema_version`, in the `project` table.
-- Index wisely! While the catalog will likely remain smaller than user databases, it will grow, especially with recurring events like payments, so indexing is crucial for control plane performance at scale.
+- Index carefully. While the catalog will likely remain smaller than user databases, it will grow, especially with recurring events like payments, so indexing is crucial for control plane performance at scale.
 - Start with essential data fields and plan for future extensions as needs evolve.
 - Standard Neon metadata (for example, compute size, branch info) is accessible via the console. Avoid duplicating it in the catalog database unless separate access adds significant complexity.
 
@@ -142,7 +142,7 @@ To effectively scale a multitenant architecture, leveraging automation tools is 
   Neon's [GitHub integration](/docs/guides/neon-github-integration) allows you to automate database branching workflows directly from your repositories. By connecting a Neon project to a GitHub repository, you can set up actions that create or delete database branches in response to pull request events, facilitating isolated testing environments for each feature or bug fix.
 
 - **Vercel Integration**  
-  You can [connect your Vercel projects to Neon](/docs/guides/neon-github-integration), creating database branches for each preview deployment.
+  You can [connect your Vercel projects to Neon](/docs/guides/vercel-overview), creating database branches for each preview deployment.
 
 - **CI/CD pipelines**  
   By combining Neon branching into your CI/CD, you can simplify your dev/test workflows by creating and deleting ephemeral environments automatically as child branches.
@@ -150,7 +150,7 @@ To effectively scale a multitenant architecture, leveraging automation tools is 
 - **Automated backups to your own S3**  
   If you must keep your own data copy, you can [schedule regular backups](/docs/manage/backups-aws-s3-backup-part-2) using tools like `pg_dump` in conjunction with GitHub Actions.
 
-## The Application Layer
+## The application layer
 
 Although the application layer isn't our main focus, a common question developers ask us when approaching a multitenant architecture is: _Do I deploy one application environment per database, or connect all databases to a single application environment?_
 
@@ -175,7 +175,7 @@ Both approaches are viable, each with its own pros and cons.
 
 #### Advice
 
-- **Implement robust authorization**  
+- **Implement authorization checks**  
   Ensure secure access as all users share the same application environment.
 
 - **Define user authentication and data routing**
@@ -204,7 +204,7 @@ In this architecture, each customer has instead a dedicated application environm
 #### Cons of isolated environments
 
 - This design has an obvious tradeoff: it comes with higher complexity of deployment, monitoring, and maintenance.
-- You'll need to think about how to route optimal resource utilization across multiple environments, and how to keep observability on-point to diagnose issues.
+- You'll need to think about how to route optimal resource use across multiple environments, and how to monitor issues across them.
 - Operating separate environments for each customer might also lead to higher costs.
 
 #### Advice
@@ -215,7 +215,7 @@ If you decide to implement isolated environments, here's some advice to consider
 - Similarly as you're doing with Neon projects, take advantage of automation tools to streamline the creation and management of your application environments.
 - Set up proper monitoring to track key metrics across all environments.
 
-## Migrating Schemas
+## Migrating schemas
 
 In a database-per-user design, it is common to have the same schema for all users/databases. Any changes to the user schema will most likely be rolled out to all individual databases simultaneously. In this section, we teach you how to use DrizzleORM, GitHub Actions, the Neon API, and a couple of custom template scripts to manage many databases using the same database schema.
 
@@ -227,7 +227,7 @@ The schema consists of three tables, `users`, `projects` and `tasks`. You can se
 
 ### Workflow using Drizzle ORM and GitHub Actions
 
-#### Creating Neon projects via a CLI script
+#### Creating projects with a CLI script
 
 Our example creates new Neon projects via the command line, using the following script:
 
@@ -269,9 +269,9 @@ if (options.name) {
 }
 ```
 
-This script uses the `commander` library to create a simple command-line interface (CLI) and the Neon Management SDK's `neonApi.projects.create()` method to set up a new project. Ensure that your Neon API key is stored in an environment variable named `NEON_API_KEY`.
+This script uses the `commander` library to create a simple command-line interface (CLI) and the `@neon/sdk` package's `neonApi.projects.create()` method to set up a new project. The script doesn't set an organization, so the project goes to the default organization for your API key. Pass `orgId` to `createNeonClient` to choose one. Ensure that your Neon API key is stored in an environment variable named `NEON_API_KEY`.
 
-To execute the script and create a new Neon project named "ACME Corp" with PostgreSQL version 16 in the aws-us-east-1 region, run:
+To execute the script and create a new Neon project named "ACME Corp" with Postgres version 16 in the aws-us-east-1 region, run:
 
 ```bash
 npm run create -- --name="ACME Corp"
@@ -371,8 +371,7 @@ let secrets = [];
     console.log('\nTo set up GitHub secrets, run the following commands:');
 
     for (const secret of secrets) {
-      console.log(`\nnpx octokit request PUT /repos/${repoOwner}/${repoName}/actions/secrets/${secret.secret_name} \\
-  -H "Accept: application/vnd.github.v3+json" \\
+      console.log(`\ngh api --method PUT /repos/${repoOwner}/${repoName}/actions/secrets/${secret.secret_name} \\
   -f encrypted_value="${secret.encrypted_value}" \\
   -f key_id="${secret.key_id}"`);
     }
@@ -396,18 +395,18 @@ The script uses template files for the Drizzle configuration and GitHub workflow
 // src/templates/drizzle-config.js
 
 export const drizzleConfig = (connectionString, projectName) => {
-  return `import type { Config } from 'drizzle-kit';
+  return `import { defineConfig } from 'drizzle-kit';
 
-export default {
+export default defineConfig({
   schema: './src/db/schema.ts',
   out: './drizzle',
-  driver: 'pg',
+  dialect: 'postgresql',
   dbCredentials: {
-    connectionString: process.env.${projectName.toUpperCase().replace(/\s+/g, '_')}_CONNECTION_STRING || '${connectionString}',
+    url: process.env.${projectName.toUpperCase().replace(/\s+/g, '_')}_CONNECTION_STRING || '${connectionString}',
   },
   verbose: true,
   strict: true,
-} satisfies Config;
+});
 `;
 };
 ```
@@ -434,12 +433,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v7
 
       - name: Setup Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v7
         with:
-          node-version: '18'
+          node-version: '24'
           cache: 'npm'
 
       - name: Install dependencies
@@ -448,35 +447,27 @@ jobs:
       - name: Run migration
         env:
           ${secretName}_CONNECTION_STRING: \${{ secrets.${secretName}_CONNECTION_STRING }}
-        run: npx drizzle-kit push:pg --config=./configs/${configFileName}
+        run: npx drizzle-kit push --force --config=./configs/${configFileName}
 `;
 };
 ```
 
-The encryption utility for GitHub secrets is implemented as follows:
+GitHub requires secret values to be encrypted with libsodium. The encryption utility uses a sealed box from the `libsodium-wrappers` package, so install it first with `npm install libsodium-wrappers`:
 
 ```javascript
 // src/utils/encrypt-secret.js
 
-import { createPublicKey, publicEncrypt } from 'crypto';
-import { Buffer } from 'buffer';
+import sodium from 'libsodium-wrappers';
 
+// GitHub requires secrets to be encrypted with a libsodium sealed box
+// using the repository's public key.
 export const encryptSecret = async (secret, publicKeyString) => {
-  const publicKey = createPublicKey({
-    key: Buffer.from(publicKeyString, 'base64'),
-    format: 'der',
-    type: 'spki',
-  });
+  await sodium.ready;
 
-  const encryptedSecret = publicEncrypt(
-    {
-      key: publicKey,
-      padding: 1, // RSA_PKCS1_PADDING
-    },
-    Buffer.from(secret)
-  );
+  const publicKey = sodium.from_base64(publicKeyString, sodium.base64_variants.ORIGINAL);
+  const encryptedBytes = sodium.crypto_box_seal(secret, publicKey);
 
-  return encryptedSecret.toString('base64');
+  return sodium.to_base64(encryptedBytes, sodium.base64_variants.ORIGINAL);
 };
 ```
 
@@ -497,12 +488,14 @@ This will create:
 Once everything is set up, you can run migrations manually for a specific project using:
 
 ```bash
-npx drizzle-kit push:pg --config=./configs/acme-corp.config.ts
+npx drizzle-kit push --config=./configs/acme-corp.config.ts
 ```
 
 Or, if you've set up the GitHub workflows as described, migrations will automatically run whenever you push changes to the `src/db/schema.ts` file on the main branch.
 
-### S3 Backups
+The workflow runs `drizzle-kit push --force` because a CI runner can't answer the confirmation prompt that `drizzle-kit push` shows before it changes tables. The `--force` flag also approves statements that drop data, so review schema changes before you merge them to `main`.
+
+### S3 backups
 
 In addition to managing schemas, you might want to set up regular backups of your databases. This section explains how to configure AWS IAM roles and policies for GitHub Actions to securely access S3 for backing up your Neon databases.
 
@@ -562,9 +555,9 @@ Now you need to attach the policy to the role. Navigate to **IAM > Access Manage
 You'll need to add the following secrets to your GitHub repository:
 
 - `AWS_ACCOUNT_ID`: Your AWS account ID
-- `IAM_ROLE`: In my case this would be, neon-multiple-db-s3-backups-github-action
+- `IAM_ROLE`: The name of the IAM role, for example `neon-multiple-db-s3-backups-github-action`
 
-### Scheduled pg_dump/restore GitHub Action
+### Scheduled pg_dump GitHub Action
 
 Before diving into the code, here's a look at this example in the Neon console dashboard. There are three databases set up for three fictional customers, all running Postgres 16 and all are deployed to us-east-1. We will be backing up each database into its own folder within an S3 bucket, with different schedules and retention periods. All the code in this example lives [in this repository](https://github.com/neondatabase-labs/neon-multiple-db-s3-backups).
 
@@ -574,7 +567,7 @@ Using the same naming conventions, there are three new files in the `.github/wor
 
 1. `paycorp-payments-prod.yml`
 2. `acme-analytics-prod.yml`
-3. `paycorp-payments-prod.yml`
+3. `fincorp-billing-prod.yml`
 
 All the Actions are technically the same, (besides the name of the file), but there are several areas where they differ.
 
@@ -588,8 +581,7 @@ For example, in the first `.yml` file, the workflow name is `acme-analytics-prod
 
 Here's the full Action, and below the code snippet, we'll explain how it all works.
 
-```yaml
-// .github/workflows/acme-analytics-prod.yml
+```yaml filename=".github/workflows/acme-analytics-prod.yml"
 
 name: acme-analytics-prod
 
@@ -613,17 +605,17 @@ jobs:
       AWS_ACCOUNT_ID: ${{ secrets.AWS_ACCOUNT_ID }}
       S3_BUCKET_NAME: ${{ secrets.S3_BUCKET_NAME }}
       AWS_REGION: 'us-east-1'
-      PG_VERSION: '16'
+      PG_VERSION: '18'
 
     steps:
-      - name: Install PostgreSQL
+      - name: Install Postgres
         run: |
           sudo apt install -y postgresql-common
           yes '' | sudo /usr/share/postgresql-common/pgdg/apt.postgresql.org.sh
           sudo apt install -y postgresql-${{ env.PG_VERSION }}
 
       - name: Configure AWS credentials
-        uses: aws-actions/configure-aws-credentials@v4
+        uses: aws-actions/configure-aws-credentials@v6
         with:
           role-to-assume: arn:aws:iam::${{ env.AWS_ACCOUNT_ID }}:role/${{ env.IAM_ROLE }}
           aws-region: ${{ env.AWS_REGION }}
@@ -646,7 +638,7 @@ jobs:
 
       - name: Run pg_dump
         run: |
-          /usr/lib/postgresql/${{ env.PG_VERSION }}/bin/pg_dump ${{ env.DATABASE_URL }} | gzip > "${{ env.GZIP_NAME }}"
+          /usr/lib/postgresql/${{ env.PG_VERSION }}/bin/pg_dump "$DATABASE_URL" | gzip > "${{ env.GZIP_NAME }}"
 
       - name: Empty bucket of old files
         run: |
@@ -687,18 +679,18 @@ env:
   AWS_ACCOUNT_ID: ${{ secrets.AWS_ACCOUNT_ID }}
   S3_BUCKET_NAME: ${{ secrets.S3_BUCKET_NAME }}
   AWS_REGION: 'us-east-1'
-  PG_VERSION: '16'
+  PG_VERSION: '18'
 ```
 
 - `RETENTION`: This determines how long a backup file should remain in the S3 bucket before it's deleted.
-- `DATABASE_URL`: This is the Lakebase Postgres connection string for the database you're backing up.
+- `DATABASE_URL`: The connection string for the database you're backing up.
 - `IAM_ROLE`: This is the name of the AWS IAM Role.
 - `AWS_ACCOUNT_ID`: This is your AWS Account ID.
 - `S3_BUCKET_NAME`: This is the name of the S3 bucket where all backups are being stored.
 - `AWS_REGION`: This is the region where the S3 bucket is deployed.
-- `PG_VERSION`: This is the version of Postgres to install.
+- `PG_VERSION`: The Postgres major version to install. Use your project's version or a newer one, because `pg_dump` refuses to dump a server that's newer than the client.
 
-#### GitHub Secrets
+#### GitHub secrets
 
 As we mentioned above, several of the above environment variables are defined using secrets. These variables can be added to **Settings > Secrets and variables > Actions**.
 
@@ -713,11 +705,11 @@ This step installs Postgres into the GitHub Action's virtual environment. The ve
 **Install Postgres**
 
 ```yaml
-- name: Install PostgreSQL
-        run: |
-          sudo apt install -y postgresql-common
-          yes '' | sudo /usr/share/postgresql-common/pgdg/apt.postgresql.org.sh
-          sudo apt install -y postgresql-${{ env.PG_VERSION }}
+- name: Install Postgres
+  run: |
+    sudo apt install -y postgresql-common
+    yes '' | sudo /usr/share/postgresql-common/pgdg/apt.postgresql.org.sh
+    sudo apt install -y postgresql-${{ env.PG_VERSION }}
 ```
 
 **Configure AWS credentials**
@@ -726,19 +718,19 @@ This step configures AWS credentials within the GitHub Action virtual environmen
 
 ```yaml
 - name: Configure AWS credentials
-        uses: aws-actions/configure-aws-credentials@v4
-        with:
-          role-to-assume: arn:aws:iam::${{ env.AWS_ACCOUNT_ID }}:role/${{ env.IAM_ROLE }}
-          aws-region: ${{ env.AWS_REGION }}
+  uses: aws-actions/configure-aws-credentials@v6
+  with:
+    role-to-assume: arn:aws:iam::${{ env.AWS_ACCOUNT_ID }}:role/${{ env.IAM_ROLE }}
+    aws-region: ${{ env.AWS_REGION }}
 ```
 
 **Set file, folder and path variables**
 
-In this step I've created three variables that are all output to `GITHUB_ENV`. This allows me to access the values from other steps in the Action.
+This step writes three variables to `GITHUB_ENV`, so later steps can read them.
 
 ```yaml
-     - name: Set file, folder and path variables
-        run: |
+- name: Set file, folder and path variables
+  run: |
           GZIP_NAME="$(date +'%B-%d-%Y@%H:%M:%S').gz"
           FOLDER_NAME="${{ github.workflow }}"
           UPLOAD_PATH="s3://${{ env.S3_BUCKET_NAME }}/${FOLDER_NAME}/${GZIP_NAME}"
@@ -760,8 +752,8 @@ This step creates a new folder (if one doesn't already exist) inside the S3 buck
 
 ## Final remarks
 
-You can create as many of these Actions as you need. Just be careful to double check the `DATABASE_URL` to avoid backing up a database to the wrong folder.
+You can create as many of these Actions as you need. Double-check each `DATABASE_URL` to avoid backing up a database to the wrong folder.
 
 <Admonition type="important">
-GitHub Actions will timeout after ~6 hours. The size of your database and how you've configured it will determine how long the `pg_dump` step takes. If you do experience timeout issues, you can self host [GitHub Action runners](https://docs.github.com/en/actions/hosting-your-own-runners/managing-self-hosted-runners/about-self-hosted-runners). 
+GitHub Actions will timeout after ~6 hours. The size of your database and how you've configured it will determine how long the `pg_dump` step takes. If you do experience timeout issues, you can self-host [GitHub Action runners](https://docs.github.com/en/actions/hosting-your-own-runners/managing-self-hosted-runners/about-self-hosted-runners). 
 </Admonition>
