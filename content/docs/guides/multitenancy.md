@@ -221,7 +221,7 @@ In a database-per-user design, it is common to have the same schema for all user
 
 ### Example app
 
-To walk you through it, we've created example code [in this repository](https://github.com/PaulieScanlon/neon-database-per-tenant-drizzle). The example includes 4 Neon databases, all using Postgres 16 and all deployed to AWS us-east-1.
+To walk you through it, we've created example code [in this repository](https://github.com/PaulieScanlon/neon-database-per-tenant-drizzle). The example includes 4 Neon databases, all deployed to AWS us-east-1. New projects in this guide use Postgres 18.
 
 The schema consists of three tables, `users`, `projects` and `tasks`. You can see the schema here: [schema.ts](https://github.com/PaulieScanlon/neon-database-per-tenant-drizzle/blob/main/src/db/schema.ts), and for good measure, here's the raw SQL equivalent: [schema.sql](https://github.com/PaulieScanlon/neon-database-per-tenant-drizzle/blob/main/schema.sql). This default schema is referenced by each of the `drizzle.config.ts` files that have been created for each customer.
 
@@ -255,7 +255,7 @@ if (options.name) {
     try {
       const project = await neonApi.projects.create({
         name: options.name,
-        pg_version: 16,
+        pg_version: 18,
         region_id: 'aws-us-east-1',
       });
 
@@ -271,7 +271,7 @@ if (options.name) {
 
 This script uses the `commander` library to create a simple command-line interface (CLI) and the `@neon/sdk` package's `neonApi.projects.create()` method to set up a new project. The script doesn't set an organization, so the project goes to the default organization for your API key. Pass `orgId` to `createNeonClient` to choose one. Ensure that your Neon API key is stored in an environment variable named `NEON_API_KEY`.
 
-To execute the script and create a new Neon project named "ACME Corp" with Postgres version 16 in the aws-us-east-1 region, run:
+To execute the script and create a new Neon project named "ACME Corp" with Postgres version 18 in the aws-us-east-1 region, run:
 
 ```bash
 npm run create -- --name="ACME Corp"
@@ -559,7 +559,7 @@ You'll need to add the following secrets to your GitHub repository:
 
 ### Scheduled pg_dump GitHub Action
 
-Before diving into the code, here's a look at this example in the Neon console dashboard. There are three databases set up for three fictional customers, all running Postgres 16 and all are deployed to us-east-1. We will be backing up each database into its own folder within an S3 bucket, with different schedules and retention periods. All the code in this example lives [in this repository](https://github.com/neondatabase-labs/neon-multiple-db-s3-backups).
+Before diving into the code, here's a look at this example in the Neon console dashboard. There are three databases set up for three fictional customers, all deployed to us-east-1. We will be backing up each database into its own folder within an S3 bucket, with different schedules and retention periods. All the code in this example lives [in this repository](https://github.com/neondatabase-labs/neon-multiple-db-s3-backups).
 
 ![S3 backup three databases](/docs/guides/multitenancy/s3_backup_three_databases.png)
 
