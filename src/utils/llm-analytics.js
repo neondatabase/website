@@ -24,6 +24,16 @@ function agentFamily(userAgent) {
   return families.find((family) => ua.includes(family)) || 'other';
 }
 
+// Browser prefetches (Next.js <Link> prefetch, speculation rules, link
+// rel=prefetch) are not reads. Counting them as agent pageviews inflates LLM
+// stats: every human visit to a page that links its own .md would add one.
+export function isPrefetchRequest(req) {
+  const headers = req.headers;
+  if (headers.get('next-router-prefetch')) return true;
+  const purpose = `${headers.get('sec-purpose') || ''} ${headers.get('purpose') || ''}`;
+  return purpose.toLowerCase().includes('prefetch');
+}
+
 async function sendPageview(req, context, { is404, branch, debug }) {
   const controller = new AbortController();
   const timer = setTimeout(() => controller.abort(), BEACON_TIMEOUT_MS);
@@ -99,9 +109,11 @@ export function createLLMAnalytics(req) {
   };
   let beacon = null;
   let beaconBranch = null;
+  const prefetch = isPrefetchRequest(req);
 
   return {
     track({ is404 = false, branch = 'unspecified' } = {}) {
+      if (prefetch) return Promise.resolve({ outcome: 'skipped_prefetch' });
       // A failed markdown read can fall through into another branch. Never send
       // a second pageview for the same incoming request.
       if (!beacon) {

@@ -131,6 +131,9 @@ const Post = ({
           <Link
             className="flex items-center gap-[7px] text-sm leading-none text-gray-new-20 transition-colors duration-[120ms] ease-out hover:text-black-new dark:text-gray-new-94 dark:hover:text-white"
             to={docMarkdownPath}
+            // Don't prefetch: the .md response isn't a renderable route, and each
+            // prefetch was counted as an LLM agent pageview.
+            prefetch={false}
           >
             <MarkdownViewIcon />
             View as Markdown
