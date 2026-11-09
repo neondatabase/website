@@ -1,34 +1,21 @@
 'use client';
 
 import { usePathname } from 'next/navigation';
-import { useTheme } from 'next-themes';
 import PropTypes from 'prop-types';
 import { useEffect, useId, useRef, useState } from 'react';
 
 import Link from 'components/shared/link';
-import LINKS from 'constants/links';
 import useClickOutside from 'hooks/use-click-outside';
 import ChevronIcon from 'icons/chevron-down.inline.svg';
-import DiscordIcon from 'icons/discord.inline.svg';
 import { cn } from 'utils/cn';
 import getDocsNavHref from 'utils/get-docs-nav-href';
 
-import Icon from '../menu/icon';
-
-import MenuIcon from './images/menu.inline.svg';
-
-const THEMES = [
-  { value: 'system', label: 'System' },
-  { value: 'light', label: 'Light' },
-  { value: 'dark', label: 'Dark' },
-];
+import NavLaneChevronIcon from './images/chevron-down.inline.svg';
 
 const itemClassName = cn(
   'flex w-full items-center gap-x-2.5 rounded-sm px-2.5 py-2 text-left text-sm leading-tight',
   'text-gray-new-15 transition-colors duration-200 hover:bg-gray-new-98 dark:text-gray-new-90 dark:hover:bg-gray-new-10'
 );
-
-const Divider = () => <span className="mx-0.5 my-1.5 h-px bg-gray-new-90 dark:bg-gray-new-20" />;
 
 const MenuLink = ({ to, children }) => {
   const isExternal = to.startsWith('http');
@@ -105,73 +92,7 @@ LaneGroup.propTypes = {
   basePath: PropTypes.string.isRequired,
 };
 
-const ThemeOptions = () => {
-  const [mounted, setMounted] = useState(false);
-  const { theme, setTheme } = useTheme();
-  const optionRefs = useRef([]);
-
-  useEffect(() => setMounted(true), []);
-
-  // WAI-ARIA radio group: only the checked option is a Tab stop (the first one
-  // before the theme is known), and the arrow keys move and select, wrapping.
-  const selectedIndex = THEMES.findIndex(({ value }) => mounted && theme === value);
-  const tabStopIndex = selectedIndex === -1 ? 0 : selectedIndex;
-
-  const handleKeyDown = (event, index) => {
-    const last = THEMES.length - 1;
-    const previous = index === 0 ? last : index - 1;
-    const next = index === last ? 0 : index + 1;
-    const nextIndex = { ArrowUp: previous, ArrowLeft: previous, ArrowDown: next, ArrowRight: next }[
-      event.key
-    ];
-    if (nextIndex === undefined) return;
-    event.preventDefault();
-    setTheme(THEMES[nextIndex].value);
-    optionRefs.current[nextIndex]?.focus();
-  };
-
-  return (
-    <div className="grid" role="radiogroup" aria-label="Theme">
-      <span className="px-2.5 pt-1.5 pb-0.5 text-xs text-[#6B6F77] dark:text-gray-new-60">
-        Theme
-      </span>
-      {THEMES.map(({ value, label }, index) => {
-        const isSelected = mounted && theme === value;
-
-        return (
-          <button
-            className={cn(
-              'flex items-center gap-x-2.5 rounded-sm px-2.5 py-1.5 text-left text-sm leading-tight transition-colors duration-200 hover:bg-gray-new-98 dark:hover:bg-gray-new-10',
-              isSelected
-                ? 'text-gray-new-15 dark:text-gray-new-90'
-                : 'text-gray-new-40 dark:text-gray-new-60'
-            )}
-            key={value}
-            ref={(node) => {
-              optionRefs.current[index] = node;
-            }}
-            type="button"
-            role="radio"
-            aria-checked={isSelected}
-            tabIndex={index === tabStopIndex ? 0 : -1}
-            onClick={() => setTheme(value)}
-            onKeyDown={(event) => handleKeyDown(event, index)}
-          >
-            <span
-              className={cn(
-                'size-1.5 shrink-0 rounded-full',
-                isSelected && 'bg-black-new dark:bg-white'
-              )}
-            />
-            {label}
-          </button>
-        );
-      })}
-    </div>
-  );
-};
-
-const DocsHeaderMenu = ({ className = null, lanes = [], basePath, isNavCollapsed = false }) => {
+const DocsHeaderMenu = ({ className = null, overflowLanes = [], basePath }) => {
   const [isOpen, setIsOpen] = useState(false);
   const menuRef = useRef(null);
   const toggleRef = useRef(null);
@@ -199,12 +120,16 @@ const DocsHeaderMenu = ({ className = null, lanes = [], basePath, isNavCollapsed
   }, [isOpen]);
 
   return (
-    <div className={cn('relative', className)} ref={menuRef}>
+    <div className={cn('relative flex shrink-0 items-stretch', className)} ref={menuRef}>
+      {/* The overflow control is an inline nav lane ("More"), styled and spaced
+          exactly like the dropdown lanes (Products, Reference) beside it, not a
+          right-side hamburger icon. It only renders while a lane has overflowed. */}
       <button
         ref={toggleRef}
         className={cn(
-          'flex size-9 items-center justify-center rounded-none text-gray-new-20 transition-colors duration-200 hover:bg-gray-new-98',
-          'dark:text-gray-new-80 dark:hover:bg-gray-new-10'
+          'relative flex h-full items-center gap-1 rounded-sm text-[15px] leading-snug tracking-extra-tight whitespace-nowrap transition-colors duration-200',
+          'hover:text-black-new dark:hover:text-white',
+          isOpen ? 'text-black-new dark:text-white' : 'text-gray-new-30 dark:text-gray-new-70'
         )}
         type="button"
         aria-label={isOpen ? 'Close menu' : 'More'}
@@ -213,49 +138,37 @@ const DocsHeaderMenu = ({ className = null, lanes = [], basePath, isNavCollapsed
         data-test="docs-header-menu-toggle"
         onClick={() => setIsOpen(!isOpen)}
       >
-        <MenuIcon className="dark:[&_[stroke]]:stroke-gray-new-70" aria-hidden="true" />
+        More
+        <NavLaneChevronIcon
+          className={cn(
+            'text-gray-new-50 transition-transform duration-200 dark:text-gray-new-70',
+            isOpen && 'rotate-180'
+          )}
+          aria-hidden="true"
+        />
       </button>
       {isOpen && (
         <div
           className={cn(
-            'absolute top-[calc(100%+18px)] right-0 z-10 grid max-h-[calc(100vh-120px)] w-56 gap-y-0.5 overflow-y-auto rounded-md border p-2',
+            'absolute top-[calc(100%+18px)] left-0 z-10 grid max-h-[calc(100vh-120px)] w-56 gap-y-0.5 overflow-y-auto rounded-md border p-2',
             'border-gray-new-85 bg-white shadow-[0_8px_24px_rgba(0,0,0,0.08)]',
             'dark:border-gray-new-20 dark:bg-black-new dark:shadow-[0_8px_24px_rgba(0,0,0,0.5)]'
           )}
           id={id}
         >
-          {isNavCollapsed && lanes.length > 0 && (
-            <>
-              {lanes.map(({ nav, slug, subnav }) =>
-                subnav ? (
-                  <LaneGroup key={nav} nav={nav} subnav={subnav} basePath={basePath} />
-                ) : (
-                  <MenuLink key={nav} to={getDocsNavHref(slug, basePath)}>
-                    {nav}
-                  </MenuLink>
-                )
-              )}
-              <Divider />
-            </>
+          {/* "More" holds only the overflowed nav lanes. Dropdown lanes expand in
+              place as an accordion; plain lanes are a single link. The external
+              links and theme switch live in the mobile drawer and page footer,
+              not here. */}
+          {overflowLanes.map(({ nav, slug, subnav }) =>
+            subnav ? (
+              <LaneGroup key={nav} nav={nav} subnav={subnav} basePath={basePath} />
+            ) : (
+              <MenuLink key={nav} to={getDocsNavHref(slug, basePath)}>
+                {nav}
+              </MenuLink>
+            )
           )}
-          <MenuLink to="/">
-            <Icon title="home" className="size-4 shrink-0" />
-            neon.com
-          </MenuLink>
-          <MenuLink to={LINKS.github}>
-            <Icon title="github" className="size-4 shrink-0" />
-            GitHub
-          </MenuLink>
-          <MenuLink to={LINKS.discord}>
-            <DiscordIcon className="size-4 shrink-0" width={16} height={16} />
-            Discord
-          </MenuLink>
-          <MenuLink to={LINKS.postgresqltutorial}>
-            <Icon title="tutorial" className="size-4 shrink-0 text-primary-2" />
-            Learn PostgreSQL
-          </MenuLink>
-          <Divider />
-          <ThemeOptions />
         </div>
       )}
     </div>
@@ -264,9 +177,8 @@ const DocsHeaderMenu = ({ className = null, lanes = [], basePath, isNavCollapsed
 
 DocsHeaderMenu.propTypes = {
   className: PropTypes.string,
-  lanes: PropTypes.array,
+  overflowLanes: PropTypes.array,
   basePath: PropTypes.string.isRequired,
-  isNavCollapsed: PropTypes.bool,
 };
 
 export default DocsHeaderMenu;
