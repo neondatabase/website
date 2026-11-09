@@ -18,7 +18,8 @@
 //   - Status: the nav or frontmatter `tag`
 //   - Type: inferred by classifyPage() from the page's path, title, summary, nav
 //     section, whether it has child pages, and whether it uses <Steps>
-// followed by docs pages that aren't in the navigation and the changelog.
+// followed by docs pages that aren't in the navigation. /docs/changelog and
+// everything under it are left out (see EXCLUDED_PATHS).
 //
 // Type is one of PAGE_TYPES, loosely following Diátaxis
 // (https://diataxis.fr), so an agent can pick a page by what it needs:
@@ -34,7 +35,6 @@
 //   - Conceptual: explains what something is and how it works. Overviews,
 //     architecture, "About …" pages, feature landing pages that introduce the
 //     child pages under them, and plans and billing.
-//   - Release notes: changelog entries, one per weekly release.
 //
 // Links point at the Markdown twin whenever getMarkdownPath (the check the proxy
 // uses to serve it) says one exists, and at the HTML page otherwise.
@@ -55,12 +55,9 @@ const SITE_HOSTNAMES = new Set(['neon.com', 'neon.tech', new URL(SITE_URL).hostn
 const API_DATA_DIR = path.join(process.cwd(), 'src/data/api-ref');
 const API_PATH_PREFIX = '/docs/reference/api/';
 
-// H2 labels for docs CONTENT_ROUTES keys. A new route gets a title-cased label
-// from its last segment without an entry here.
-const ROUTE_LABELS = { 'docs/changelog': 'Changelog' };
-
-// Collections whose slugs are dates: listed newest first, grouped by year.
-const DATED_ROUTES = new Set(['docs/changelog']);
+// Paths left out of the sitemap, with everything under them: the changelog page
+// and its weekly entries.
+const EXCLUDED_PATHS = ['/docs/changelog'];
 
 // Deepest heading used for navigation sections. Sections nested below this, or
 // inside a page's children, become plain list labels with their pages indented.
@@ -68,10 +65,9 @@ const MAX_HEADING_DEPTH = 4;
 const MAX_DESCRIPTION_LENGTH = 200;
 const INDENT = '  ';
 
-export const PAGE_TYPES = ['Tutorial', 'How-to', 'Reference', 'Conceptual', 'Release notes'];
+export const PAGE_TYPES = ['Tutorial', 'How-to', 'Reference', 'Conceptual'];
 
 const routeLabel = (route) =>
-  ROUTE_LABELS[route] ||
   route
     .split('/')
     .pop()
@@ -85,6 +81,9 @@ const escapeField = (value) => String(value).replace(/\|/g, '\\|');
 const isPublished = (data) => process.env.NEXT_PUBLIC_VERCEL_ENV !== 'production' || !data?.isDraft;
 
 export const isDocsPath = (pathname) => pathname === '/docs' || pathname.startsWith('/docs/');
+
+export const isExcludedPath = (pathname) =>
+  EXCLUDED_PATHS.some((excluded) => pathname === excluded || pathname.startsWith(`${excluded}/`));
 
 // YYYY-MM-DD from a frontmatter date (ISO string or YAML Date), or ''.
 const toDate = (value) => {
@@ -174,7 +173,6 @@ export function classifyPage({
   hasSteps = false,
   hasChildren = false,
 }) {
-  if (pathname.startsWith('/docs/changelog')) return 'Release notes';
   if (API_OPERATION_PATH_PATTERN.test(pathname)) return 'Reference';
   // The docs home is a landing page, whatever its nav title says.
   if (pathname === '/docs') return 'Conceptual';
@@ -292,7 +290,13 @@ export function navigationToSections(navigation, lookup = () => undefined) {
 
   const addEntry = (section, list, item, trail) => {
     const pathname = navSlugToPathname(item.slug);
-    if (!pathname || !isDocsPath(pathname) || !item.title || section.seen.has(pathname)) {
+    if (
+      !pathname ||
+      !isDocsPath(pathname) ||
+      isExcludedPath(pathname) ||
+      !item.title ||
+      section.seen.has(pathname)
+    ) {
       return null;
     }
     section.seen.add(pathname);
@@ -382,7 +386,7 @@ const HEADER = [
   '',
   '## How to read this file',
   '',
-  '- Headings follow the docs navigation: `##` for top-level areas, `###` for products and areas, `####` for sections. Pages that are not in the navigation and the changelog come last.',
+  '- Headings follow the docs navigation: `##` for top-level areas, `###` for products and areas, `####` for sections. Pages that are not in the navigation come last.',
   '- An indented entry is a child of the entry above it. Entries without a link group the pages indented under them.',
   "- Links point at each page's Markdown version. Drop the `.md` suffix for the HTML page, or request any docs URL with `Accept: text/markdown`.",
   '- Each entry is `[Title](url)` followed by pipe-separated fields:',
@@ -436,15 +440,13 @@ async function getContentPages(route, directory) {
     if (!post || !isPublished(post.data)) continue;
 
     const pathname = `/${route}${slug}`;
-    if (!getMarkdownPath(pathname)) continue;
+    if (isExcludedPath(pathname) || !getMarkdownPath(pathname)) continue;
     const { data, content } = post;
-    // Dated collections (the changelog) are dated by their slug, not their last edit.
-    const date = DATED_ROUTES.has(route) ? toDate(slug.slice(1)) : '';
     pages.set(pathname, {
       title: data.title || slug.split('/').pop(),
       url: pageUrl(pathname),
       description: shortDescription(data.subtitle, data.summary, data.description),
-      lastmod: date || toDate(data.updatedOn),
+      lastmod: toDate(data.updatedOn),
       status: typeof data.tag === 'string' ? data.tag : '',
       hasSteps: /<Steps>/.test(content),
     });
@@ -472,8 +474,10 @@ const toEntry = (pathname, page) => ({
 });
 
 export async function getSitemapSections() {
-  // Only the content collections served under /docs.
-  const docsRoutes = Object.entries(CONTENT_ROUTES).filter(([route]) => isDocsPath(`/${route}`));
+  // Only the content collections served under /docs, minus the excluded ones.
+  const docsRoutes = Object.entries(CONTENT_ROUTES).filter(
+    ([route]) => isDocsPath(`/${route}`) && !isExcludedPath(`/${route}`)
+  );
   const contentByRoute = new Map(
     await Promise.all(
       docsRoutes.map(async ([route, directory]) => [route, await getContentPages(route, directory)])
@@ -501,27 +505,13 @@ export async function getSitemapSections() {
 
   for (const [route, pages] of contentByRoute) {
     if (route === docsRoute) continue;
-    const label = routeLabel(route);
-    const entries = [...pages.entries()].sort(([left], [right]) => left.localeCompare(right));
-
-    if (!DATED_ROUTES.has(route)) {
-      sections.push({
-        title: label,
-        depth: 2,
-        items: entries.map(([pathname, page]) => toEntry(pathname, page)),
-      });
-      continue;
-    }
-
-    // Dated collections: newest first, one H3 per year.
-    sections.push({ title: label, depth: 2, items: [] });
-    const byYear = new Map();
-    for (const [pathname, page] of entries.reverse()) {
-      const year = page.lastmod.slice(0, 4) || 'Undated';
-      if (!byYear.has(year)) byYear.set(year, []);
-      byYear.get(year).push(toEntry(pathname, page));
-    }
-    for (const [year, items] of byYear) sections.push({ title: year, depth: 3, items });
+    sections.push({
+      title: routeLabel(route),
+      depth: 2,
+      items: [...pages.entries()]
+        .sort(([left], [right]) => left.localeCompare(right))
+        .map(([pathname, page]) => toEntry(pathname, page)),
+    });
   }
 
   return sections;

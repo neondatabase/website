@@ -1,12 +1,12 @@
 import { beforeAll, describe, expect, it } from 'vitest';
 
-import { CONTENT_ROUTES } from 'constants/content';
 import { getNavigation } from 'utils/api-docs';
 import {
   PAGE_TYPES,
   classifyPage,
   getSitemapMarkdown,
   isDocsPath,
+  isExcludedPath,
   navigationToSections,
   navSlugToPathname,
   renderSitemapMarkdown,
@@ -29,6 +29,17 @@ describe('shortDescription', () => {
   });
 });
 
+describe('isExcludedPath', () => {
+  it.each([
+    ['/docs/changelog', true],
+    ['/docs/changelog/2026-10-30', true],
+    ['/docs/changelogs', false],
+    ['/docs/introduction/roadmap', false],
+  ])('treats %s as excluded: %s', (pathname, excluded) => {
+    expect(isExcludedPath(pathname)).toBe(excluded);
+  });
+});
+
 describe('navSlugToPathname', () => {
   it.each([
     ['get-started/why-neon', '/docs/get-started/why-neon'],
@@ -44,7 +55,6 @@ describe('navSlugToPathname', () => {
 
 describe('classifyPage', () => {
   it.each([
-    [{ pathname: '/docs/changelog/2026-10-30', title: 'Changelog' }, 'Release notes'],
     [{ pathname: '/docs/reference/api/projects/list-projects', title: 'List' }, 'Reference'],
     [{ pathname: '/docs/auth/quick-start/nextjs', title: 'Next.js quickstart' }, 'Tutorial'],
     [{ pathname: '/docs/manage/part-1', title: 'Part 1 - Create an S3 bucket' }, 'Tutorial'],
@@ -358,10 +368,9 @@ describe('getSitemapMarkdown', () => {
     );
   });
 
-  it('has an H2 section for every docs content route', () => {
-    expect(markdown).toContain('\n## Changelog\n');
-    const docsRoutes = Object.keys(CONTENT_ROUTES).filter((route) => isDocsPath(`/${route}`));
-    expect(markdown.match(/^## /gm).length).toBeGreaterThanOrEqual(docsRoutes.length);
+  it('leaves out /docs/changelog and everything under it', () => {
+    expect(markdown).not.toContain('/docs/changelog');
+    expect(markdown).not.toContain('\n## Changelog\n');
   });
 
   it('links every /docs page in the docs navigation', () => {
@@ -376,7 +385,7 @@ describe('getSitemapMarkdown', () => {
 
     for (const slug of slugs) {
       const pathname = navSlugToPathname(slug);
-      if (!pathname || !isDocsPath(pathname)) continue;
+      if (!pathname || !isDocsPath(pathname) || isExcludedPath(pathname)) continue;
       expect(
         entries.some(({ url }) => new URL(url).pathname.replace(/\.md$/, '') === pathname),
         `navigation slug ${slug} is missing from sitemap.md`
@@ -385,7 +394,7 @@ describe('getSitemapMarkdown', () => {
   });
 
   it('only links absolute /docs URLs', () => {
-    expect(entries.length).toBeGreaterThan(1000);
+    expect(entries.length).toBeGreaterThan(800);
     for (const { url } of entries) {
       expect(url).toMatch(/^https:\/\/neon\.com\/docs[/.]/);
     }
