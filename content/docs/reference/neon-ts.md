@@ -9,7 +9,7 @@ summary: >-
 enableTableOfContents: true
 redirectFrom:
   - /docs/compute/functions/reference/neon-ts
-updatedOn: '2026-10-15T16:33:34.223Z'
+updatedOn: '2026-11-09T17:21:19.806Z'
 ---
 
 `neon.ts` is a TypeScript config file you commit to your repository. It declares which Neon services exist on your project and how each branch is configured.
@@ -346,7 +346,7 @@ When `neon checkout` creates a new branch, the closure runs with `branch.exists 
 
 | Field                                            | Type                        | Description                                                                                                                                                      |
 | ------------------------------------------------ | --------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `parent`                                         | `string`                    | Parent branch name or ID                                                                                                                                         |
+| `parent`                                         | `string`                    | Parent branch name                                                                                                                                               |
 | `protected`                                      | `boolean`                   | Mark the branch as protected                                                                                                                                     |
 | `ttl`                                            | `string \| number`          | Branch lifetime: `"7d"`, `"2h"`, or seconds as a number. Maximum 30 days. Validated at deploy time, not by TypeScript                                            |
 | `postgres.computeSettings.autoscalingLimitMinCu` | `ComputeUnit`               | Minimum compute units. Any size Neon offers: 0.25, 0.5, every integer 1 to 16, and even sizes 18 to 56                                                           |
