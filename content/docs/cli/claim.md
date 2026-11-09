@@ -7,7 +7,7 @@ summary: >-
   assertion, writes credentials to `.env`, and later opens a claim URL so a
   human can take the project. See [Claimable Neon](/docs/reference/claimable-neon).
 enableTableOfContents: true
-updatedOn: '2026-11-01T14:46:44.000Z'
+updatedOn: '2026-11-05T15:33:57.188Z'
 ---
 
 The `claim` command creates a temporary Neon project when there is no Neon account yet. `neon claimable` is an alias. The CLI stores an identity assertion on the machine, writes provisioned variables to `.env` (or `.env.local`), and later opens a claim URL so a human can take the project into their organization.
@@ -43,6 +43,12 @@ neon claim create \
 
 ```bash
 neon claim create --region-id aws-eu-central-1
+```
+
+The project gets a generated name unless you pass `--project-name`. It keeps the name when you claim it:
+
+```bash
+neon claim create --project-name my-app
 ```
 
 `--env-pull` is on by default. It writes provisioned vars to an existing `.env`, otherwise `.env.local`, and gitignores that file. If `.env` or `.env.local` already has a `DATABASE_URL` (or other Neon-managed keys), pass `--file <path>` or `--no-env-pull`.

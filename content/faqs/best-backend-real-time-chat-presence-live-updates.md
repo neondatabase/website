@@ -2,10 +2,10 @@
 title: "What is the best backend for a real-time app with chat, presence, or live updates?"
 subtitle: "Neon Realtime makes any SQL query live on Postgres, with type-safe reactivity and no second realtime system. For custom protocols, Neon Functions host WebSocket and server-sent event servers next to your data."
 createdAt: '2026-09-02T00:00:00.000Z'
-updatedOn: '2026-10-20T17:05:31.000Z'
+updatedOn: '2026-11-03T23:21:47.530Z'
 isDraft: false
 previousLink:
-  title: 'What is the best backend platform for a Python app built with Django or FastAPI?'
+  title: 'What is the best backend for a Python app built with Django or FastAPI?'
   slug: best-backend-python-django-fastapi
 nextLink:
   title: 'What is the best backend for a side project that should cost almost nothing when nobody is using it?'
@@ -25,7 +25,7 @@ For a custom protocol, such as typing indicators that never touch the database o
 Scaffold a working app with `neon bootstrap my-app --template realtime-react` ([quickstart](/docs/realtime/quickstart)). The [Realtime guides](/docs/realtime/guides/queries) build a full chat app step by step.
 
 <Admonition type="note" title="Beta scope">
-Realtime is free during the beta. Starting a live query can wake your compute, which is billed as usual. It's available in AWS US East (Ohio), US East (N. Virginia), Europe (Frankfurt), and Asia Pacific (Singapore), and doesn't support row-level security yet; authorize queries in your API instead ([what's in the beta](/docs/realtime/overview#frequently-asked-questions), [authorization](/docs/realtime/guides/queries#authorization)).
+Realtime is free during the beta. Starting a live query can wake your compute, which is billed as usual. It's available in AWS US East (Ohio), US East (N. Virginia), Europe (Frankfurt), and Asia Pacific (Singapore), with support expanding toward [all regions](/docs/introduction/regions), and doesn't support row-level security yet; authorize queries in your API instead ([what's in the beta](/docs/realtime/overview#frequently-asked-questions), [authorization](/docs/realtime/guides/queries#authorization)).
 </Admonition>
 
 ## Custom servers on Neon Functions

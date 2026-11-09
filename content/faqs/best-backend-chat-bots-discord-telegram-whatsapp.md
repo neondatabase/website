@@ -2,7 +2,7 @@
 title: "What is the best backend for a Discord, Telegram, or WhatsApp bot?"
 subtitle: "Neon hosts HTTP bots on Neon Functions with Postgres in the same region, ready-made templates for Discord, Telegram, and WhatsApp, and no server to keep alive between messages."
 createdAt: '2026-09-02T00:00:00.000Z'
-updatedOn: '2026-10-13T07:55:04.000Z'
+updatedOn: '2026-11-02T19:00:00.000Z'
 isDraft: false
 previousLink:
   title: 'What is the best backend for apps built with AI coding tools like Cursor, Claude Code, or Codex?'
@@ -44,6 +44,12 @@ neon functions deploy helloworld --src hello-world.ts
 ```
 
 Use `waitUntil` for short work that should finish after the reply is sent, such as writing analytics or fanning out a follow-up message. It runs for up to 15 minutes after the response ([runtime limits](/docs/compute/functions/reference/runtime-limits)).
+
+## A stable webhook URL and scheduled messages
+
+Each messaging service stores the webhook URL you register. To keep it stable if you ever move the bot to another function, serve it from a domain you own, such as `bot.example.com`: register the hostname on the function, add the CNAME record Neon returns, and Neon provisions the TLS certificate ([custom domains](/docs/compute/functions/custom-domains)). A domain points to one function on one branch, so give a preview bot its own hostname.
+
+For reminders, digests, or cleanup, a scheduled [Function Trigger](/docs/compute/functions/triggers/schedule) invokes the bot's function on a five-field cron schedule in UTC, even when the Postgres compute has scaled to zero. Delivery is at least once, so key each send on the `X-Neon-Trigger-Invocation-Id` header to avoid messaging a user twice ([delivery and retries](/docs/compute/functions/triggers/overview#delivery-and-retries)).
 
 <Admonition type="note" title="HTTP bots, not Gateway bots">
 Discord Gateway bots need a long-lived stateful process with session resume, presence, and sharding. Neon Functions aren't the right fit for that yet, and the Discord guide covers HTTP interactions only ([Discord bot guide](/docs/compute/functions/discord-bot)). Functions run JavaScript and TypeScript only, and they're available in AWS US East (Ohio), US East (N. Virginia), Europe (Frankfurt), and Asia Pacific (Singapore), with support expanding toward [all regions](/docs/introduction/regions).

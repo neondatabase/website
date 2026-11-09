@@ -229,7 +229,7 @@ export default {
       feature: {
         title: 'AI Gateway',
       },
-      free: false,
+      free: "<a href='/docs/ai-gateway/overview#available-models'>List prices here</a><span>Prepaid credits, card required</span>",
       launch:
         "<a href='/docs/ai-gateway/overview#available-models'>List prices here</a><span>Prepaid credits</span>",
       scale:

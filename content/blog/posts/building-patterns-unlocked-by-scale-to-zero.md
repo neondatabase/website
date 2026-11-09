@@ -7,7 +7,7 @@ excerpt: >-
   for those hours. Lakebase Postgres addresses that waste with autoscaling and
   scale to zero.
 date: '2026-09-01T12:00:00'
-updatedOn: '2026-08-30T13:09:00'
+updatedOn: '2026-11-06T12:00:00.000Z'
 category: product
 categories:
   - product
@@ -33,6 +33,10 @@ seo:
 
 ![A wireframe cube labeled "wake on request" beside a stack of metallic cubes, illustrating compute suspending and restarting on demand](https://cdn.neonapi.io/public/images/pages/blog/building-patterns-unlocked-by-scale-to-zero/cover.jpg)
 
+<Admonition type="important" title="Free plan storage is now 1 GB per project">
+Since this post was published, Free plan storage went from 0.5 GB to [1 GB per project](/blog/neon-free-plan-1-gb-per-project) (up to 20 GB across all projects). See the [plans documentation](/docs/introduction/plans) for current limits.
+</Admonition>
+
 Most hosted Postgres pricing works like this:
 
 - You pick an instance size
@@ -43,9 +47,9 @@ That model creates two kinds of compute waste. First, you're provisioning for pe
 
 [Lakebase Postgres](https://neon.com/docs/postgres/overview) (the Neon database) addresses each compute waste problem separately. [Autoscaling](https://neon.com/docs/introduction/autoscaling) solves the first kind of waste by adjusting compute to the current load in real time; the second kind of waste is solved by [scale to zero](https://neon.com/docs/introduction/scale-to-zero), which suspends compute after a few minutes of inactivity, then restarts it automatically.
 
-The effect this last piece can have, scale to zero, is easy to dismiss if you only picture one busy production database. Your might first think, "my DB is active 24/7 and I wouldn't want it to suspend anyway" - but  if you think twice, surely your deployment includes at least some databases that are idle most of the time (development, staging).
+The effect this last piece can have, scale to zero, is easy to dismiss if you only picture one busy production database. Your might first think, "my DB is active 24/7 and I wouldn't want it to suspend anyway" - but if you think twice, surely your deployment includes at least some databases that are idle most of the time (development, staging).
 
-Perhaps more interestingly, many modern building patterns ask for *thousands* of sporadically-used databases.  Keeping all of them running would make the architecture too expensive to operate. Scale to zero changes that.
+Perhaps more interestingly, many modern building patterns ask for _thousands_ of sporadically-used databases. Keeping all of them running would make the architecture too expensive to operate. Scale to zero changes that.
 
 ## When Postgres scales to zero
 
@@ -91,7 +95,7 @@ Neon is a now complete set of cloud backend primitives. A single [`neon.ts`](htt
 
 ### Deploying hosted databases is as routine as creating a repo
 
-Who keeps count on how many repositories they have? That ubiquity is a consequence of GitHub's tech and pricing.  A repo costs nothing while nobody touches it, so nobody ever made you justify one. A Postgres instance could feel exactly the same - actually, this is what we're aiming for at Neon. That's why our Free Plan carries 100 projects instead of two, and why [we keep raising this limit](https://neon.com/blog/why-so-many-projects-in-the-neon-free-plan). This wouldn't be possible without scale to zero.
+Who keeps count on how many repositories they have? That ubiquity is a consequence of GitHub's tech and pricing. A repo costs nothing while nobody touches it, so nobody ever made you justify one. A Postgres instance could feel exactly the same - actually, this is what we're aiming for at Neon. That's why our Free Plan carries 100 projects instead of two, and why [we keep raising this limit](https://neon.com/blog/why-so-many-projects-in-the-neon-free-plan). This wouldn't be possible without scale to zero.
 
 <blockquote>
 <p>“I'm always surprised by how easy it is to just create a ton of databases”</p>

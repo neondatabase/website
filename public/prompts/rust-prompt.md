@@ -46,7 +46,7 @@ Based on the user's selection, run the appropriate `cargo add` command. **The `p
 - If it doesn't exist, create one and advise the user to add their Neon database connection string to it.
 - Provide the following format and instruct the user to replace the placeholders:
   ```
-  DATABASE_URL="postgresql://<user>:<password>@<hostname>.neon.tech:<port>/<dbname>?sslmode=require"
+  DATABASE_URL="postgresql://[user]:[password]@[neon_hostname]/[dbname]?sslmode=require&channel_binding=require"
   ```
 - Prompt the user to get their connection string from the **Neon Console → Project → Dashboard → Connect**.
 
@@ -61,7 +61,7 @@ Modify the `src/main.rs` file to include code that connects to the database and 
 
 #### Option 1: `postgres` (Synchronous)
 
-```rust title="src/main.rs"
+```rust filename="src/main.rs"
 use dotenvy::dotenv;
 use openssl::ssl::{SslConnector, SslMethod};
 use postgres::Client;
@@ -108,7 +108,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 
     // --- Commit Transaction ---
     transaction.commit()?;
-    println!("Transaction committed successfully.\n");
+    println!("Transaction committed successfully.");
 
     Ok(())
 }
@@ -116,7 +116,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 
 #### Option 2: `tokio-postgres` (Asynchronous)
 
-```rust title="src/main.rs"
+```rust filename="src/main.rs"
 use dotenvy::dotenv;
 use openssl::ssl::{SslConnector, SslMethod};
 use postgres_openssl::MakeTlsConnector;
@@ -169,7 +169,7 @@ async fn main() -> Result<(), Error> {
 
     // --- Commit Transaction ---
     transaction.commit().await?;
-    println!("Transaction committed successfully.\n");
+    println!("Transaction committed successfully.");
 
     Ok(())
 }

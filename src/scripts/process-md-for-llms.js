@@ -121,6 +121,7 @@ const SHARED_CONTENT_COMPONENTS = {
   NextjsProxyNote: 'nextjs-proxy-note',
   AuthAISetup: 'auth-ai-setup',
   AuthAISetupTip: 'auth-ai-setup-tip',
+  NeonPluginContents: 'neon-plugin-contents',
   RealtimeSdkBackend: 'realtime-sdk-backend',
   RealtimeSdkClient: 'realtime-sdk-client',
   RealtimeSdkReact: 'realtime-sdk-react',

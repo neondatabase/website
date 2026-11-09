@@ -6,6 +6,8 @@ summary: >-
   a client, creating a bucket, and uploading and downloading your first file.
   Use the Files SDK or any AWS S3-compatible SDK. Just point it at your branch endpoint.
 enableTableOfContents: true
+redirectFrom:
+  - /docs/storage/quickstart
 updatedOn: '2026-11-04T23:29:42.213Z'
 ---
 

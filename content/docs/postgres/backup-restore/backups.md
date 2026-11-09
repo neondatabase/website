@@ -10,6 +10,8 @@ summary: >-
 enableTableOfContents: true
 redirectFrom:
   - /docs/manage/backups
+  - /docs/introduction/backups
+  - /docs/guides/backups
 updatedOn: '2026-11-04T20:10:08.844Z'
 ---
 

@@ -10,6 +10,9 @@ summary: >-
   can be combined with the IP Allow feature to restrict network access to
   protected branches only. Available on paid plans.
 enableTableOfContents: true
+redirectFrom:
+  - /docs/introduction/branch-protection
+  - /docs/manage/protected-branches
 updatedOn: '2026-10-09T15:17:33.920Z'
 ---
 

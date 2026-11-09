@@ -91,9 +91,10 @@ Linked .neon
   Branch          main
   Org             org-example-12345678
 
-Pulled 3 Neon variables into .env.local
+Pulled 5 Neon variables into .env.local
   Postgres        DATABASE_URL, DATABASE_URL_UNPOOLED
-  Branch          NEON_BRANCH
+  Branch          NEON_BRANCH, NEON_BRANCH_ID
+  Functions       NEON_FUNCTION_HOST_SUFFIX
 ✔ Manage this project's Neon setup as code? Adds a neon.ts you can edit and apply with `neon config apply`. … yes
 ✔ Which Neon services should neon.ts declare? (space to toggle, enter to confirm) › Functions, Object Storage
 Created neon.ts declaring functions, buckets.
@@ -473,10 +474,10 @@ Function URLs
   • pipeline: https://br-xxx.compute.c-6.us-east-2.aws.neon.tech
 
 Utilized services: Postgres, Object Storage, Functions
-Pulled 8 Neon variables into .env.local
+Pulled 9 Neon variables into .env.local
   Postgres        DATABASE_URL, DATABASE_URL_UNPOOLED
-  Branch          NEON_BRANCH
-  Functions       NEON_FUNCTION_PIPELINE_BASE_URL
+  Branch          NEON_BRANCH, NEON_BRANCH_ID
+  Functions       NEON_FUNCTION_HOST_SUFFIX
   Object Storage  AWS_ACCESS_KEY_ID*, AWS_SECRET_ACCESS_KEY*, AWS_ENDPOINT_URL_S3, AWS_REGION
   * new credential value
 ```

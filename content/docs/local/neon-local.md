@@ -9,7 +9,7 @@ summary: >-
   ephemeral branches with PARENT_BRANCH_ID that are deleted when the container
   stops. Both the standard postgres driver and the Neon serverless driver are
   supported through the same Docker configuration.
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-11-06T11:14:41.532Z'
 ---
 
 [Neon Local](https://github.com/neondatabase-labs/neon_local) is a proxy service that creates a local interface to your Neon cloud database. It supports two main use cases:
@@ -219,3 +219,8 @@ This will create a `.neon_local` directory in your project to store metadata. Be
 If using Docker Desktop for Mac, ensure that your VM settings use **gRPC FUSE** instead of **VirtioFS**. There is currently a known bug with VirtioFS that prevents proper branch detection and live updates inside containers.
 
 ![Docker Desktop are set to gRPC FUSE](/docs/local/neon-local-docker-settings.jpg)
+
+## Resources
+
+- [Local development with Neon](/guides/local-development-with-neon)
+- [How to set up Neon Local with Docker Compose and JavaScript Postgres clients](/guides/neon-local-docker-compose-javascript)

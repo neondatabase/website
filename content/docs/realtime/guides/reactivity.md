@@ -4,7 +4,7 @@ subtitle: 'Bind live queries to component and agent state.'
 summary: >-
   Bind live queries to React component state with useLiveQuery, change their parameters and handle errors, or sync a broader live query into a TanStack DB collection and derive instant, local queries from it.
 enableTableOfContents: true
-updatedOn: '2026-10-30T15:07:38.000Z'
+updatedOn: '2026-11-05T01:10:58.303Z'
 ---
 
 Build reactive apps and agents using higher-level reactivity primitives that manage live query [subscriptions](./subscribing) for you.
@@ -300,7 +300,7 @@ The collection starts syncing as soon as a live query using it is mounted. It's 
 
 ### Query the collection
 
-Create the collection once, when the app starts. The collection takes the client directly, but `Channel` still calls `useLiveQuery()`, so keep both views inside `RealtimeProvider`:
+Create the collection once, when the app starts. The collection takes the client directly, so an app that only uses collections doesn't need `RealtimeProvider`. `Channel` still calls `useLiveQuery()`, though, so keep both views inside `RealtimeProvider`:
 
 ```tsx filename="frontend/main.tsx"
 import { StrictMode } from "react"

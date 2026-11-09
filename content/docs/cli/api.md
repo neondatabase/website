@@ -7,6 +7,8 @@ summary: >-
   with `--method`, build a body from `--field` or `--data`, and add query
   parameters and headers. Run `neon api --list` to browse every endpoint.
 enableTableOfContents: true
+redirectFrom:
+  - /docs/reference/cli-api
 updatedOn: '2026-09-18T04:20:24.000Z'
 ---
 

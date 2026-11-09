@@ -7,6 +7,12 @@ summary: >-
   CPU and memory as load changes, and what the numbers look like across every
   production database on Neon.
 enableTableOfContents: true
+seo:
+  title: 'Postgres for Bursty Workloads: Autoscaling That Resizes in Seconds | Neon'
+  description: >-
+    Stop sizing Postgres for peak traffic. Lakebase Postgres resizes compute in
+    seconds while queries keep running. The average production database on Neon
+    adjusts its size about every 81 seconds, and idle compute scales to zero.
 updatedOn: '2026-08-15T15:45:00.000Z'
 image: '/images/social-previews/use-cases/bursty-workloads.jpg'
 ---
@@ -54,7 +60,7 @@ What matters to you is narrower than a sizing strategy: queries stay fast when l
 
 In a conventional Postgres setup, the process and its disk live on the same machine. Changing CPU or memory means moving to a different machine, which is why resizing is disruptive and why nobody does it often.
 
-Lakebase Postgres, the Neon database built on the [lakebase architecture](https://neon.com/docs/introduction/architecture-overview), splits those halves apart. Compute is a stateless Postgres process; storage is a separate distributed engine backed by object storage, and it holds your data independently of any compute. Because the compute doesn't own the data, it can be resized without moving anything. 
+Lakebase Postgres, the Neon database built on the [lakebase architecture](https://neon.com/docs/introduction/architecture-overview), splits those halves apart. Compute is a stateless Postgres process; storage is a separate distributed engine backed by object storage, and it holds your data independently of any compute. Because the compute doesn't own the data, it can be resized without moving anything.
 
 Neon runs an autoscaling algorithm that watches CPU, memory, and cache pressure and adjusts the compute size within the range you set, in both directions, while connections stay open:
 

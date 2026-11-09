@@ -5,6 +5,7 @@ import TemplateDetail from 'components/pages/functions/templates/template-detail
 import {
   getFunctionRegistryCatalog,
   getFunctionRegistryTemplatePage,
+  getFunctionRegistryTemplateReadme,
   registryTemplatePageHref,
 } from 'utils/function-registry';
 import getMetadata from 'utils/get-metadata';
@@ -34,8 +35,8 @@ const FunctionTemplatePage = async ({ params }) => {
   const { id } = await params;
   const page = await getFunctionRegistryTemplatePage(id);
   if (!page) return notFound();
-
-  return <TemplateDetail {...page} />;
+  const readme = await getFunctionRegistryTemplateReadme(page.template);
+  return <TemplateDetail {...page} readme={readme} />;
 };
 
 export default FunctionTemplatePage;
