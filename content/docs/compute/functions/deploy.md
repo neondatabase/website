@@ -111,6 +111,7 @@ const zip = await buildFunctionBundle({
   source: "./functions/hello.ts",
   env: {},
   runtime: "nodejs24",
+  bundler: "esbuild",
 });
 ```
 
