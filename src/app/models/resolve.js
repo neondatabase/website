@@ -32,11 +32,9 @@ const blendedCost = (cost) =>
  * now appears here without anyone remembering to add it.
  *
  * The other six fallbacks were dead. `validateCatalog` (scripts/lib/models-catalog.mjs)
- * requires id, name, provider, family, attachment, reasoning, tool_call, temperature,
+ * requires id, name, lab, provider, family, attachment, reasoning, tool_call, temperature,
  * modalities, limit, open_weights, release_date and last_updated on every PR, so there
- * is no path on which they were reachable. Note `provider ?? caps.owner` was worse than
- * dead: `provider` is the model's maker and `owner` is whoever hosts it, so the fallback
- * would have substituted "databricks" for "thinkingmachines".
+ * is no path on which they were reachable.
  */
 function toModel(id, entry, caps) {
   return {

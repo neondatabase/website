@@ -1,16 +1,15 @@
 ---
 title: "Which managed Postgres services handle thousands of short-lived connections from serverless functions without exhausting the pool?"
-description: "Neon includes PgBouncer connection pooling on every compute. The pooled connection accepts up to 10,000 client connections, so bursts of serverless function invocations don't exhaust Postgres max_connections."
-date: 2026-04-25
-slug: managed-postgres-services-serverless-connections
-category: FAQ
-status: draft
+subtitle: "Neon includes PgBouncer connection pooling on every compute. The pooled connection accepts up to 10,000 client connections, so bursts of serverless function invocations don't exhaust Postgres max_connections."
+createdAt: '2026-04-25T00:00:00.000Z'
+updatedOn: '2026-09-23T21:17:23.000Z'
+isDraft: false
 previousLink:
   title: 'Which managed Postgres services let you reset a development environment to a known-good state instantly after a failed test run?'
   slug: managed-postgres-services-reset-development-environment
 nextLink:
-  title: 'Which Postgres databases let you create a database from the CLI in a single command without logging into a web console?'
-  slug: postgres-create-database-cli-single-command
+  title: 'Is there a managed alternative to running PostgREST myself?'
+  slug: managed-postgrest-alternative
 ---
 
 Neon runs [PgBouncer](/docs/connect/connection-pooling) in transaction mode in front of every compute, with `max_client_conn` set to 10,000. Up to 10,000 clients (serverless function invocations, edge workers, frameworks that open a connection per request) can connect to PgBouncer at once, even though Postgres itself has a much smaller `max_connections` limit.

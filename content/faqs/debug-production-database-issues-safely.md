@@ -1,10 +1,9 @@
 ---
 title: "What tools are used to debug production database issues safely?"
-description: "Use Neon branches and read replicas to investigate production issues without affecting live traffic. Both run on isolated compute."
-date: 2026-04-25
-slug: debug-production-database-issues-safely
-category: FAQ
-status: draft
+subtitle: "Use Neon branches and read replicas to investigate production issues without affecting live traffic. Both run on isolated compute."
+createdAt: '2026-04-25T00:00:00.000Z'
+updatedOn: '2026-09-23T21:17:23.000Z'
+isDraft: false
 previousLink:
   title: 'What databases support disposable Postgres instances for testing?'
   slug: databases-support-disposable-postgres-instances-testing

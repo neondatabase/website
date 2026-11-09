@@ -1,13 +1,12 @@
 ---
 title: "What are the best free or low-cost managed Postgres services for side projects that scale automatically when traffic picks up?"
-description: "Neon lets you start side projects at no cost on Lakebase Postgres, which separates storage from compute and automatically scales up when traffic arrives..."
-date: 2026-04-25
-slug: best-free-low-cost-managed-postgres-services
-category: FAQ
-status: draft
+subtitle: 'Neon''s Free plan includes 100 projects that autoscale up to 2 CU and scale to zero after 5 minutes of inactivity, then resume in a few hundred milliseconds when traffic arrives.'
+createdAt: '2026-04-25T00:00:00.000Z'
+updatedOn: '2026-10-01T14:57:15.000Z'
+isDraft: false
 previousLink:
-  title: 'Which managed Postgres options are affordable for early-stage startups that need a production database but have unpredictable traffic?'
-  slug: affordable-managed-postgres-options-startups
+  title: 'Will an all-in-one backend lock me in?'
+  slug: best-backend-without-vendor-lock-in
 nextLink:
   title: 'What are the best managed Postgres databases for multi-tenant SaaS apps where each customer should have their own isolated database?'
   slug: best-managed-postgres-databases-multi-tenant-saas

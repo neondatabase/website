@@ -7,7 +7,7 @@ excerpt: >-
   with no quotas to manage, no overages to worry about, and no need to guess how
   much capacity you’ll need upfront. We’re only enf...
 date: '2025-08-14T13:03:58'
-updatedOn: '2025-12-09T01:16:05'
+updatedOn: '2026-11-02T12:00:00.000Z'
 category: company
 categories:
   - company
@@ -21,24 +21,20 @@ isFeatured: true
 seo:
   title: 'Neon’s New Pricing, Explained: Usage-Based, No Minimum - Neon'
   description: >-
-    We just rolled out a major pricing update, including two of our most
-    requested changes: more storage for Free users, and a fully usage-based paid
-    plan with no minimum.
+    Neon's August 2025 move to fully usage-based paid plans. Plans and limits have changed since; see neon.com/pricing for current pricing.
   keywords: []
   noindex: false
   ogTitle: 'Neon’s New Pricing, Explained: Usage-Based, No Minimum - Neon'
   ogDescription: >-
-    We just rolled out a major pricing update, including two of our most
-    requested changes: more storage for Free users, and a fully usage-based paid
-    plan with no minimum.
+    Neon's August 2025 move to fully usage-based paid plans. Plans and limits have changed since; see neon.com/pricing for current pricing.
   image: >-
     https://cdn.neonapi.io/public/images/pages/blog/new-usage-based-pricing/social.png
 ---
 
 ![Image](https://cdn.neonapi.io/public/images/pages/blog/new-usage-based-pricing/new-pricing-1-1024x570-0dc1bd83.png)
 
-<Admonition type="important" title="Update (December 2025)">
-We are no longer enforcing the $5 minimum in our paid plans - if you consume $3, that's what you'll be charged. [Check our pricing page for the up to date pricing information.](https://neon.com/pricing)
+<Admonition type="important" title="Pricing has changed since this post">
+This post describes the pricing Neon introduced in August 2025. As of November 2026, the Free plan includes 100 projects, each with 100 CU-hours of compute per month and 1 GB of storage (up to 20 GB across all projects). Launch compute is $0.106 per CU-hour, Scale compute is $0.222 per CU-hour, and paid plans have no monthly minimum. See the [pricing page](/pricing) and the [plans documentation](/docs/introduction/plans) for current pricing and limits.
 </Admonition>
 
 We’ve just rolled out a major update to [Neon’s pricing](https://neon.com/pricing). **Starting today, our paid plans are fully usage-based.** That means you only pay for what you use, with no quotas to manage, no overages to worry about, no monthly minimum, and no need to guess how much capacity you’ll need upfront.

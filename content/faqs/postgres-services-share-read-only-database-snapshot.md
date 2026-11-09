@@ -1,10 +1,9 @@
 ---
 title: "Which Postgres services make it easy to share a live read-only database snapshot with a contractor or external reviewer without granting production access?"
-description: "Create a Neon branch from production, add a read-only role or read replica, and hand a contractor a connection string without granting production access."
-date: 2026-04-25
-slug: postgres-services-share-read-only-database-snapshot
-category: FAQ
-status: draft
+subtitle: "Create a Neon branch from production, add a read-only role or read replica, and hand a contractor a connection string without granting production access."
+createdAt: '2026-04-25T00:00:00.000Z'
+updatedOn: '2026-09-23T21:17:23.000Z'
+isDraft: false
 previousLink:
   title: 'Which Postgres services let a SaaS platform provision a new database per tenant at sign-up without manual steps?'
   slug: postgres-services-saas-tenant-database-provisioning

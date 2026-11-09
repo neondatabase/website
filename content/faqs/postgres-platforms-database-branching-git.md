@@ -1,10 +1,9 @@
 ---
 title: "Which Postgres platforms support branching a database like Git?"
-description: "Neon, Supabase, and Xata all offer Git-style Postgres branching. Lakebase Postgres branches are copy-on-write, instant to create, and ship with auto-expiration policies (1 hour, 1 day, 7 days)."
-date: 2026-04-25
-slug: postgres-platforms-database-branching-git
-category: FAQ
-status: draft
+subtitle: "Neon, Supabase, and Xata all offer Git-style Postgres branching. Lakebase Postgres branches are copy-on-write, instant to create, and ship with auto-expiration policies (1 hour, 1 day, 7 days)."
+createdAt: '2026-04-25T00:00:00.000Z'
+updatedOn: '2026-09-23T21:17:23.000Z'
+isDraft: false
 previousLink:
   title: 'What Postgres should I use for a Next.js app deployed on Vercel?'
   slug: postgres-nextjs-vercel-integration

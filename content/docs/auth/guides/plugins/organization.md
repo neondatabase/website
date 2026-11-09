@@ -38,7 +38,7 @@ Better Auth also has a **Teams** feature (sub-groups within an org); that featur
 
 ## Example application
 
-**[neon-auth-orgs-example](https://github.com/neondatabase/neon-js/tree/main/examples/neon-auth-orgs-example)** is a multi-tenant sample that uses the Organization plugin with **Drizzle** and **`@neondatabase/auth`** (see that folder’s README for **bun** setup from the monorepo root). For other runnable Managed Better Auth apps, see [Example applications](/docs/auth/about#example-applications).
+**[neon-auth-orgs-example](https://github.com/neondatabase/neon-js/tree/main/examples/neon-auth-orgs-example)** is a multi-tenant sample that uses the Organization plugin with **Drizzle** and **`@neon/auth`** (see that folder’s README for **bun** setup from the monorepo root). For other runnable Managed Better Auth apps, see [Example applications](/docs/auth/about#example-applications).
 
 ## Configure the organization plugin
 
@@ -54,7 +54,7 @@ Open your project in the Neon Console, then go to **Settings** > **Better Auth**
 - **Limit:** Maximum total organization memberships (created + joined) per user. Once reached, the user cannot create new organizations. Default: 10.
 - **Membership Limit:** Maximum number of members per organization (default: 100).
 - **Creator role:** Role assigned to the user who creates an organization: **Owner** or **Admin**. Choose Admin if you want the org creator to have fewer privileges than Owner (for example, they cannot delete the org or change the owner).
-- **Send Invitation Email** (toggle): When on, invited users receive an email with an accept link. This requires **Verify email at signup** to be enabled in the Authentication configuration. Accepting the invitation requires the [`AuthView` component](/docs/auth/reference/ui-components#core-components) or a custom route that handles `/auth/accept-invitation?invitationId=<INV_ID>` in your application. When off, no email is sent and you handle invitations in your app (for example, via the [invitation ID](#accept-invitation) or the [user invitation list](#list-user-invitations)).
+- **Send Invitation Email** (toggle): When on, invited users receive an email with an accept link. This requires **Verify email at signup** to be enabled in the Authentication configuration. Accepting the invitation requires Better Auth UI's organization components (`npx shadcn@latest add @better-auth-ui/organization`, with its `accept-invitation` view) or a custom route that handles `/auth/accept-invitation?invitationId=<INV_ID>` in your application. When off, no email is sent and you handle invitations in your app (for example, via the [invitation ID](#accept-invitation) or the [user invitation list](#list-user-invitations)).
 
 </TabItem>
 
@@ -329,7 +329,7 @@ const { data, error } = await authClient.organization.delete({
 Manage invitations to join an organization.
 
 <Admonition type="note" title="Invitation Emails">
-Invitation emails are supported when [**Send Invitation Email**](#configure-the-organization-plugin) is enabled in the organization config. This also requires **Verify email at signup** in the Authentication configuration. Accepting an email invitation requires the [`AuthView` component](/docs/auth/reference/ui-components#core-components) or a custom route handling `/auth/accept-invitation?invitationId=<INV_ID>` in your app.
+Invitation emails are supported when [**Send Invitation Email**](#configure-the-organization-plugin) is enabled in the organization config. This also requires **Verify email at signup** in the Authentication configuration. Accepting an email invitation requires Better Auth UI's organization components (`npx shadcn@latest add @better-auth-ui/organization`, with its `accept-invitation` view) or a custom route handling `/auth/accept-invitation?invitationId=<INV_ID>` in your app.
 
 When the email toggle is off, handle invitations in your app using the [invitation ID](#accept-invitation) or the [user invitation list](#list-user-invitations).
 </Admonition>

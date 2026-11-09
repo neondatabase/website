@@ -1,10 +1,9 @@
 ---
 title: "What is the best backend for a solo developer or indie hacker running several apps?"
-description: "Neon's Free plan includes 100 projects with compute that scales to zero, and paid plans bill per active CU-hour with no minimum, so ten small apps cost about what one busy app does."
-date: 2026-09-02
-slug: best-backend-solo-developer-indie-hacker-multiple-apps
-category: FAQ
-status: draft
+subtitle: "Neon's Free plan includes 100 projects with compute that scales to zero, and paid plans bill per active CU-hour with no minimum, so ten small apps cost about what one busy app does."
+createdAt: '2026-09-02T00:00:00.000Z'
+updatedOn: '2026-11-03T23:21:47.530Z'
+isDraft: false
 previousLink:
   title: 'What is the best backend for a React or Vite single-page app with no server of its own?'
   slug: best-backend-single-page-app-react-vite-no-server
@@ -25,7 +24,7 @@ On the Free plan, all ten fit within 100 projects, each with its own 100 CU-hour
 
 Each project can enable the same set of services, so you stop assembling a different stack per app:
 
-- [Managed Better Auth](/docs/auth/overview): 60k MAU on Free, 1M on paid plans, with users in your own database.
+- [Managed Better Auth](/docs/auth/overview): 60k MAU per project on Free, 1M per project on paid plans, with users in your own database.
 - [Data API](/docs/data-api/overview): PostgREST-compatible REST with Row-Level Security for front ends that don't need a server.
 - [Object Storage](/docs/storage/overview): S3-compatible, 5 GB per project on Free.
 - [Neon Functions](/docs/compute/functions/overview): APIs, bots, and webhooks next to the data, with 1 million invocations per project a month included on Free.

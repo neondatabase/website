@@ -1,7 +1,5 @@
 ---
 title: Connect a Kotlin application to Neon Postgres
-tag: new
-tagTheme: green
 subtitle: Learn how to run SQL queries in Neon from Kotlin using the PostgreSQL JDBC
   driver
 summary: >-
@@ -11,7 +9,7 @@ summary: >-
   and rollback. Also covers dotenv-kotlin for credential management. Focuses on
   raw JDBC without an ORM, unlike Micronaut or Hibernate guides.
 enableTableOfContents: true
-updatedOn: '2026-10-09T10:14:56.146Z'
+updatedOn: '2026-10-31T13:11:38.215Z'
 ---
 
 <CopyPrompt src="/prompts/kotlin-prompt.md"
@@ -24,7 +22,7 @@ You will learn how to set up a project, connect to your database, and perform ba
 ## Prerequisites
 
 - A Neon account. If you do not have one, see [Sign up](https://console.neon.tech/signup).
-- [Java Development Kit (JDK) 17](https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html) or later.
+- [Java Development Kit (JDK)](https://www.oracle.com/java/technologies/downloads/) 21 or later. The project that `gradle init` creates sets a Java 21 toolchain.
 - [Gradle](https://gradle.org/install/) to manage the project and dependencies.
 
 <Steps>
@@ -61,27 +59,25 @@ Create a project using the Gradle `init` command. This sets up a standard Kotlin
 
     > Open this directory in your preferred code editor (for example, VS Code, IntelliJ IDEA).
 
-3.  Add the `postgresql` driver and `dotenv-kotlin` libraries. With a Gradle version catalog (created by `gradle init`), declare the libraries in `gradle/libs.versions.toml`, then reference them from `app/build.gradle.kts`.
+3.  Add the `postgresql` driver and `dotenv-kotlin` libraries. The project uses a Gradle version catalog (`gradle/libs.versions.toml`), so declare the libraries there and reference them from `app/build.gradle.kts`.
 
-    Add the versions and library entries to `gradle/libs.versions.toml`:
+    Add these lines to the existing `[versions]` and `[libraries]` tables in `gradle/libs.versions.toml`. Don't create a second `[versions]` or `[libraries]` table, or Gradle fails with a TOML syntax error:
 
-    ```toml title="gradle/libs.versions.toml"
-    [versions]
-    postgresql = "42.7.7"
+    ```toml filename="gradle/libs.versions.toml"
+    # Add to the [versions] table
+    postgresql = "42.7.14"
     dotenv = "6.5.1"
 
-    [libraries]
+    # Add to the [libraries] table
     postgresql = { module = "org.postgresql:postgresql", version.ref = "postgresql" }
     dotenv = { module = "io.github.cdimascio:dotenv-kotlin", version.ref = "dotenv" }
     ```
 
-    Then add the dependencies in `app/build.gradle.kts` inside the `dependencies` block:
+    Then add these two lines to the `dependencies` block in `app/build.gradle.kts`:
 
-    ```kotlin title="app/build.gradle.kts"
-    dependencies {
-        implementation(libs.postgresql)
-        implementation(libs.dotenv)
-    }
+    ```kotlin filename="app/build.gradle.kts"
+    implementation(libs.postgresql)
+    implementation(libs.dotenv)
     ```
 
     Save both files.
@@ -107,7 +103,7 @@ Create a file named `.env` in the `app` directory. This file will securely store
 4.  Copy the connection string, which includes your password.
 5.  Create a file named `.env` in the `app` directory and add the connection string to it as shown below:
 
-    ```text title="app/.env"
+    ```text filename="app/.env"
     DATABASE_URL="jdbc:postgresql://[neon_hostname]/[dbname]?user=[user]&password=[password]&sslmode=require&channelBinding=require"
     ```
 
@@ -119,9 +115,11 @@ This section provides code examples for performing CRUD operations. Place the ex
 
 You can also clone the complete example project from GitHub: [neon-kotlin-jdbc](https://github.com/aaravmahajanofficial/neon-kotlin-jdbc).
 
-Each example is a package-level function. Select which one to run by uncommenting it in `App.kt`:
+Each example is a package-level function. Replace the contents of `App.kt` with the following code, then uncomment the example you want to run:
 
-```kotlin title="app/src/main/kotlin/com/neon/quickstart/App.kt"
+The template also generates a test in `app/src/test/` for the original `App` class. Delete the `app/src/test` directory so `./gradlew build` still passes after you replace `App.kt`.
+
+```kotlin filename="app/src/main/kotlin/com/neon/quickstart/App.kt"
 package com.neon.quickstart
 
 fun main() {
@@ -147,7 +145,7 @@ On Windows, use `gradlew.bat run`.
 
 Create a file named `CreateTable.kt`. This function connects to your database, creates a table, and inserts data.
 
-```kotlin title="app/src/main/kotlin/com/neon/quickstart/CreateTable.kt"
+```kotlin filename="app/src/main/kotlin/com/neon/quickstart/CreateTable.kt"
 package com.neon.quickstart
 
 import io.github.cdimascio.dotenv.dotenv
@@ -245,7 +243,7 @@ In `App.kt`, ensure only `createTable()` is uncommented, then run:
 
 When the code runs successfully, it produces the following output:
 
-```text title="Output"
+```text filename="Output"
 Connection established
 Finished dropping table (if it existed).
 Finished creating table.
@@ -257,7 +255,7 @@ Inserted 3 rows of data.
 
 Create a file named `ReadData.kt`. This function fetches all rows from the `books` table and prints them.
 
-```kotlin title="app/src/main/kotlin/com/neon/quickstart/ReadData.kt"
+```kotlin filename="app/src/main/kotlin/com/neon/quickstart/ReadData.kt"
 package com.neon.quickstart
 
 import io.github.cdimascio.dotenv.dotenv
@@ -312,7 +310,7 @@ In `App.kt`, uncomment `readData()` (and comment out the other calls), then run:
 
 When the read logic runs, it produces the following output:
 
-```text title="Output"
+```text filename="Output"
 Connection established
 
 --- Book Library ---
@@ -327,7 +325,7 @@ ID: 4, Title: Dune, Author: Frank Herbert, Year: 1965, In Stock: false
 
 Create a file named `UpdateData.kt` to update the stock status of 'Dune' to `true`.
 
-```kotlin title="app/src/main/kotlin/com/neon/quickstart/UpdateData.kt"
+```kotlin filename="app/src/main/kotlin/com/neon/quickstart/UpdateData.kt"
 package com.neon.quickstart
 
 import io.github.cdimascio.dotenv.dotenv
@@ -380,7 +378,7 @@ After running the update, verify the change by switching `App.kt` to call `readD
 
 The updated output will be:
 
-```text title="Output"
+```text filename="Output"
 --- Book Library ---
 ID: 2, Title: The Hobbit, Author: J.R.R. Tolkien, Year: 1937, In Stock: true
 ID: 3, Title: 1984, Author: George Orwell, Year: 1949, In Stock: true
@@ -395,7 +393,7 @@ ID: 4, Title: Dune, Author: Frank Herbert, Year: 1965, In Stock: true
 
 Create a file named `DeleteData.kt` to delete the book '1984' from the table.
 
-```kotlin title="app/src/main/kotlin/com/neon/quickstart/DeleteData.kt"
+```kotlin filename="app/src/main/kotlin/com/neon/quickstart/DeleteData.kt"
 package com.neon.quickstart
 
 import io.github.cdimascio.dotenv.dotenv
@@ -447,7 +445,7 @@ After running the delete, verify the change by switching `App.kt` to call `readD
 
 The final output will be:
 
-```text title="Output"
+```text filename="Output"
 --- Book Library ---
 ID: 2, Title: The Hobbit, Author: J.R.R. Tolkien, Year: 1937, In Stock: true
 ID: 1, Title: The Catcher in the Rye, Author: J.D. Salinger, Year: 1951, In Stock: true
@@ -461,7 +459,7 @@ ID: 4, Title: Dune, Author: Frank Herbert, Year: 1965, In Stock: true
 
 The examples above execute each operation independently. For production code where multiple operations must succeed or fail together, wrap them in a transaction. Set `autoCommit = false` to start a transaction, call `commit()` on success, and `rollback()` in the catch block on failure.
 
-```kotlin title="app/src/main/kotlin/com/neon/quickstart/TransactionExample.kt"
+```kotlin filename="app/src/main/kotlin/com/neon/quickstart/TransactionExample.kt"
 package com.neon.quickstart
 
 import io.github.cdimascio.dotenv.dotenv
@@ -531,7 +529,7 @@ In `App.kt`, uncomment `transactionExample()`, then run:
 
 </details>
 
-## Next steps: Using a framework
+## Next steps with a framework
 
 While this guide demonstrates how to connect to Neon using raw SQL queries, for more advanced and maintainable data interactions in your Kotlin applications, consider using a framework or ORM. Frameworks help you manage schema changes and keep your database structure in sync with your application models.
 
@@ -540,7 +538,7 @@ Explore the following resources to learn how to integrate frameworks with Neon:
 - [Connect a Micronaut Kotlin application to Neon](/docs/guides/micronaut-kotlin)
 - [Database Schema Changes with Hibernate, Spring Boot, and Neon](/guides/spring-boot-hibernate)
 
-## Next steps: Neon backend services
+## Next steps with Neon backend services
 
 - [Add Object Storage](/docs/storage/overview): S3-compatible file storage that branches with your database
 - [Call an LLM with AI Gateway](/docs/ai-gateway/overview): Access foundation models from Anthropic, OpenAI, Google, and more with one credential

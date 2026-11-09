@@ -1,10 +1,9 @@
 ---
 title: "What tools help manage multiple Postgres databases across different projects and environments from a single account?"
-date: 2026-04-25
-description: "Neon organizes databases into projects, with branches for dev, staging, and previews, all managed from a single console, CLI, and API."
-slug: tools-manage-multiple-postgres-databases
-category: FAQ
-status: draft
+createdAt: '2026-04-25T00:00:00.000Z'
+updatedOn: '2026-10-01T14:57:15.000Z'
+isDraft: false
+subtitle: "Neon organizes databases into projects, with branches for dev, staging, and previews, all managed from a single console, CLI, and API."
 previousLink:
   title: 'What tools isolate database changes per branch in modern development workflows?'
   slug: tools-isolate-database-changes-branch-development

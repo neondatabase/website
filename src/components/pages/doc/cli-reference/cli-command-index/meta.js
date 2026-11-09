@@ -80,12 +80,29 @@ const META = {
       'neon branches schema-diff production development',
     ],
   },
+  postgres: {
+    desc: 'Manage computes, databases, and roles, and connect, in one group (alias pg).',
+    examples: [
+      'neon postgres computes list',
+      'neon postgres computes update ep-cool-king-123456 --cu 0.25-2',
+    ],
+  },
   databases: {
     desc: 'Manage databases on a branch.',
     examples: ['neon databases create --name analytics'],
   },
-  roles: { desc: 'Manage Postgres roles.', examples: ['neon roles create --name app_user'] },
-  operations: { desc: 'Inspect async operations.', examples: ['neon operations list'] },
+  roles: {
+    desc: 'Manage Postgres roles, scoped access, and passwords.',
+    examples: [
+      'neon roles create --name app_user',
+      'neon roles create --name reporting --access read_only',
+      'neon roles reset-password app_user',
+    ],
+  },
+  operations: {
+    desc: 'Inspect async operations.',
+    examples: ['neon operations list', 'neon operations get <operation-id>'],
+  },
   'connection-string': {
     desc: 'Print a connection URI for a branch/role/db.',
     examples: ['neon connection-string main', 'neon connection-string main --pooled --prisma'],
@@ -141,7 +158,10 @@ const META = {
       'neon realtime subscribe "SELECT * FROM items"',
     ],
   },
-  orgs: { desc: 'List organizations you belong to.', examples: ['neon orgs list'] },
+  orgs: {
+    desc: 'List organizations, and manage members, invitations, and the spending limit.',
+    examples: ['neon orgs list', 'neon orgs members list', 'neon orgs spending-limit set 500'],
+  },
   'ip-allow': {
     desc: 'Manage the project IP allowlist.',
     examples: ['neon ip-allow add 203.0.113.0/24'],

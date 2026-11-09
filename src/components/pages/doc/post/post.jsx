@@ -10,7 +10,7 @@ import MODALS from 'components/pages/doc/modal/data';
 import selectModal from 'components/pages/doc/modal/select-modal';
 import Content from 'components/shared/content';
 import DocFooter from 'components/shared/doc-footer';
-import Link from 'components/shared/link';
+import LastUpdatedDate from 'components/shared/doc-footer/last-updated-date';
 import NavigationLinks from 'components/shared/navigation-links';
 import { DOCS_BASE_PATH } from 'constants/docs';
 import { cn } from 'utils/cn';
@@ -65,6 +65,7 @@ const Post = ({
     contentLayout = null,
     hideCopyPage = false,
     agentPrompt = null,
+    updatedOn = null,
   },
   content,
   breadcrumbs,
@@ -126,13 +127,15 @@ const Post = ({
       )}
       {docMarkdownPath && (
         <>
-          <Link
+          {/* Plain <a>, not <Link>: the .md isn't a Next.js route, so <Link> only
+              adds a prefetch and an extra RSC fetch on click. */}
+          <a
             className="flex items-center gap-[7px] text-sm leading-none text-gray-new-20 transition-colors duration-[120ms] ease-out hover:text-black-new dark:text-gray-new-94 dark:hover:text-white"
-            to={docMarkdownPath}
+            href={docMarkdownPath}
           >
             <MarkdownViewIcon />
             View as Markdown
-          </Link>
+          </a>
           {actionsDivider}
         </>
       )}
@@ -186,6 +189,7 @@ const Post = ({
                       {subtitle}
                     </p>
                   )}
+                  {updatedOn && <LastUpdatedDate className="mt-4" updatedOn={updatedOn} />}
                 </div>
               </>
             ) : (
@@ -241,7 +245,11 @@ const Post = ({
             />
           </article>
         )}
-        <DocFooter slug={currentSlug} gitHubPath={gitHubPath} />
+        <DocFooter
+          slug={currentSlug}
+          gitHubPath={gitHubPath}
+          updatedOn={isFaq || isChangelog ? null : updatedOn}
+        />
 
         {!isChangelog && (
           <NavigationLinks
@@ -282,6 +290,7 @@ Post.propTypes = {
     contentLayout: PropTypes.oneOf(['split', null]),
     hideCopyPage: PropTypes.bool,
     agentPrompt: PropTypes.string,
+    updatedOn: PropTypes.string,
   }).isRequired,
   content: PropTypes.string.isRequired,
   breadcrumbs: PropTypes.arrayOf(PropTypes.shape({})),

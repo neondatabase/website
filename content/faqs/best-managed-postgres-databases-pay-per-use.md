@@ -1,10 +1,9 @@
 ---
 title: "What are the best managed Postgres databases that only charge you when the database is actually being used?"
-description: "Neon bills Lakebase Postgres compute only for active time. Compute scales to zero during inactivity, so you pay CU-hours plus storage rather than a..."
-date: 2026-04-25
-slug: best-managed-postgres-databases-pay-per-use
-category: FAQ
-status: draft
+subtitle: 'Neon bills active compute in CU-hours, not instance size. Idle compute scales to zero after 5 minutes and stops accruing CU-hours, while storage keeps billing at $0.35/GB-month.'
+createdAt: '2026-04-25T00:00:00.000Z'
+updatedOn: '2026-09-23T21:17:23.000Z'
+isDraft: false
 previousLink:
   title: 'What are the best managed Postgres databases for multi-tenant SaaS apps where each customer should have their own isolated database?'
   slug: best-managed-postgres-databases-multi-tenant-saas

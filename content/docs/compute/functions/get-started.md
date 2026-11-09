@@ -7,10 +7,14 @@ summary: >-
   with neon dev, and deploy with neon deploy. The function gets a public HTTPS
   URL with DATABASE_URL injected from the branch's Postgres database.
 enableTableOfContents: true
-updatedOn: '2026-10-26T11:09:12.958Z'
+updatedOn: '2026-11-05T01:12:32.486Z'
 ---
 
 A function takes a request and returns a web response, running on long-lived Node.js compute next to your database. The request can come over HTTP, or from a [Function Trigger](/docs/compute/functions/triggers/overview) on a schedule or object upload.
+
+<Callout title="Prefer to start from a working example?">
+Browse the [function templates](/functions/templates) for ready-made APIs, MCP servers, AI agents, and bots, then add one to your project with `neon functions new`. See [Use function templates](/docs/compute/functions/templates). To scaffold a complete app instead, use [`neon bootstrap`](/docs/cli/bootstrap).
+</Callout>
 
 ## Hello world
 
@@ -112,9 +116,9 @@ export default defineConfig({
 });
 ```
 
-The slug is permanent: it can't be renamed after the first deploy. See the [neon.ts reference](/docs/reference/neon-ts) for all options.
+The slug is permanent: it can't be renamed after the first deploy. It allows only 1 to 20 lowercase letters and digits, so `sendemail` works and `send-email` doesn't. See the [neon.ts reference](/docs/reference/neon-ts) for all options.
 
-As a shortcut, `neon config add function hello` creates this `neon.ts` and a starter `functions/hello.ts` handler for you. See [`neon config add`](/docs/cli/config#add). To start from a [Function Registry](/docs/compute/functions/registry) template instead, use [`neon functions new`](/docs/cli/functions#new). See [Function Registry templates](/docs/compute/functions/registry/templates) for the current catalog.
+As a shortcut, `neon config add function hello` creates this `neon.ts` and a starter `functions/hello.ts` handler for you. See [`neon config add`](/docs/cli/config#add). To start from a ready-made [function template](/functions/templates) instead, see [Use function templates](/docs/compute/functions/templates).
 
 Install dependencies:
 
@@ -231,7 +235,7 @@ The response is a JSON object with your branch's Postgres version:
 
 ## Next steps
 
-- [Function Registry](/docs/compute/functions/registry): add a reusable function from a template instead of writing one by hand
+- [Use function templates](/docs/compute/functions/templates): add a ready-made function from the [template catalog](/functions/templates) instead of writing one by hand
 - [Function Triggers](/docs/compute/functions/triggers/overview): invoke a function on a cron schedule or an object upload instead of over HTTP
 - [Deploy and manage](/docs/compute/functions/deploy): the CLI and API for managing deployed functions
 - [Authentication](/docs/compute/functions/authentication): verify callers before a function runs

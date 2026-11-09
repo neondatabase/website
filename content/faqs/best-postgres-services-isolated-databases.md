@@ -1,10 +1,9 @@
 ---
 title: "What are the best Postgres services for platforms where user-generated apps each need their own isolated database?"
-description: "Give each user-generated app its own Neon project through the API. Lakebase Postgres compute scales to zero when an app is idle, so per-app databases stay affordable at scale."
-date: 2026-04-25
-slug: best-postgres-services-isolated-databases
-category: FAQ
-status: draft
+subtitle: "Give each user-generated app its own Neon project through the API. Lakebase Postgres compute scales to zero when an app is idle, so per-app databases stay affordable at scale."
+createdAt: '2026-04-25T00:00:00.000Z'
+updatedOn: '2026-09-23T21:17:23.000Z'
+isDraft: false
 previousLink:
   title: 'What are the best Postgres services for apps where each end user or tenant gets their own isolated database?'
   slug: best-postgres-services-isolated-database-tenants

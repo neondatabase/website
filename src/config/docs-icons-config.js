@@ -11,6 +11,11 @@ const ICONS_CONFIG = {
     lightIconPath: '/images/technology-logos/alloydb.svg',
     darkIconPath: null,
   },
+  antigravity: {
+    name: 'antigravity',
+    lightIconPath: '/images/technology-logos/antigravity.svg',
+    darkIconPath: null,
+  },
   astro: {
     name: 'astro',
     lightIconPath: '/images/technology-logos/astro.svg',
@@ -71,10 +76,20 @@ const ICONS_CONFIG = {
     lightIconPath: '/images/technology-logos/cedalio.svg',
     darkIconPath: '/images/technology-logos/cedalio-dark.svg',
   },
+  chatgpt: {
+    name: 'chatgpt',
+    lightIconPath: '/images/technology-logos/chatgpt.svg',
+    darkIconPath: '/images/technology-logos/chatgpt-dark.svg',
+  },
   'claude-code': {
     name: 'claude-code',
     lightIconPath: '/images/technology-logos/claude-code.svg',
     darkIconPath: '/images/technology-logos/claude-code-dark.svg',
+  },
+  claude: {
+    name: 'claude',
+    lightIconPath: '/images/technology-logos/claude.svg',
+    darkIconPath: null,
   },
   clerk: {
     name: 'clerk',
@@ -85,6 +100,11 @@ const ICONS_CONFIG = {
     name: 'clickhouse',
     lightIconPath: '/images/technology-logos/clickhouse.svg',
     darkIconPath: '/images/technology-logos/clickhouse-dark.svg',
+  },
+  cline: {
+    name: 'cline',
+    lightIconPath: '/images/technology-logos/cline.svg',
+    darkIconPath: '/images/technology-logos/cline-dark.svg',
   },
   cloudflare: {
     name: 'cloudflare',
@@ -211,6 +231,11 @@ const ICONS_CONFIG = {
     lightIconPath: '/images/technology-logos/flyway.svg',
     darkIconPath: '/images/technology-logos/flyway-dark.svg',
   },
+  'gemini-cli': {
+    name: 'gemini-cli',
+    lightIconPath: '/images/technology-logos/gemini-cli.svg',
+    darkIconPath: null,
+  },
   github: {
     name: 'github',
     lightIconPath: '/images/technology-logos/github.svg',
@@ -226,6 +251,11 @@ const ICONS_CONFIG = {
     lightIconPath: '/images/technology-logos/google-cloud-sql.svg',
     darkIconPath: null,
   },
+  goose: {
+    name: 'goose',
+    lightIconPath: '/images/technology-logos/goose.svg',
+    darkIconPath: '/images/technology-logos/goose-dark.svg',
+  },
   grafana: {
     name: 'grafana',
     lightIconPath: '/images/technology-logos/grafana.svg',
@@ -235,6 +265,11 @@ const ICONS_CONFIG = {
     name: 'grafbase',
     lightIconPath: '/images/technology-logos/grafbase.svg',
     darkIconPath: '/images/technology-logos/grafbase-dark.svg',
+  },
+  'grok-bot': {
+    name: 'grok-bot',
+    lightIconPath: '/images/technology-logos/grok-bot.svg',
+    darkIconPath: '/images/technology-logos/grok-bot-dark.svg',
   },
   hasura: {
     name: 'hasura',
@@ -271,10 +306,30 @@ const ICONS_CONFIG = {
     lightIconPath: '/images/technology-logos/javascript.svg',
     darkIconPath: null,
   },
+  jules: {
+    name: 'jules',
+    lightIconPath: '/images/technology-logos/jules.svg',
+    darkIconPath: '/images/technology-logos/jules-dark.svg',
+  },
   kafka: {
     name: 'kafka',
     lightIconPath: '/images/technology-logos/kafka.svg',
     darkIconPath: '/images/technology-logos/kafka-dark.svg',
+  },
+  'kilo-code': {
+    name: 'kilo-code',
+    lightIconPath: '/images/technology-logos/kilo-code.svg',
+    darkIconPath: '/images/technology-logos/kilo-code-dark.svg',
+  },
+  kimi: {
+    name: 'kimi',
+    lightIconPath: '/images/technology-logos/kimi.svg',
+    darkIconPath: '/images/technology-logos/kimi-dark.svg',
+  },
+  kiro: {
+    name: 'kiro',
+    lightIconPath: '/images/technology-logos/kiro.svg',
+    darkIconPath: null,
   },
   knex: {
     name: 'knex',
@@ -315,6 +370,11 @@ const ICONS_CONFIG = {
     name: 'materialize',
     lightIconPath: '/images/technology-logos/materialize.svg',
     darkIconPath: '/images/technology-logos/materialize-dark.svg',
+  },
+  mcp: {
+    name: 'mcp',
+    lightIconPath: '/images/technology-logos/mcp.svg',
+    darkIconPath: '/images/technology-logos/mcp-dark.svg',
   },
   medusajs: {
     name: 'medusajs',
@@ -371,6 +431,11 @@ const ICONS_CONFIG = {
     lightIconPath: '/images/technology-logos/okta.svg',
     darkIconPath: '/images/technology-logos/okta-dark.svg',
   },
+  opencode: {
+    name: 'opencode',
+    lightIconPath: '/images/technology-logos/opencode.svg',
+    darkIconPath: '/images/technology-logos/opencode-dark.svg',
+  },
   opentelemetry: {
     name: 'opentelemetry',
     lightIconPath: '/images/technology-logos/opentelemetry.svg',
@@ -385,6 +450,11 @@ const ICONS_CONFIG = {
     name: 'phoenix',
     lightIconPath: '/images/technology-logos/phoenix.svg',
     darkIconPath: null,
+  },
+  pi: {
+    name: 'pi',
+    lightIconPath: '/images/technology-logos/pi.svg',
+    darkIconPath: '/images/technology-logos/pi-dark.svg',
   },
   polyscale: {
     name: 'polyscale',
@@ -541,10 +611,20 @@ const ICONS_CONFIG = {
     lightIconPath: '/images/technology-logos/vue.svg',
     darkIconPath: null,
   },
+  windsurf: {
+    name: 'windsurf',
+    lightIconPath: '/images/technology-logos/windsurf.svg',
+    darkIconPath: '/images/technology-logos/windsurf-dark.svg',
+  },
   wundergraph: {
     name: 'wundergraph',
     lightIconPath: '/images/technology-logos/wundergraph.svg',
     darkIconPath: null,
+  },
+  zed: {
+    name: 'zed',
+    lightIconPath: '/images/technology-logos/zed.svg',
+    darkIconPath: '/images/technology-logos/zed-dark.svg',
   },
 };
 

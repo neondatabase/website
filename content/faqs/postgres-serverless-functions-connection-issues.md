@@ -1,10 +1,9 @@
 ---
 title: "What Postgres works best for serverless functions without connection issues?"
-description: "Neon pairs a managed PgBouncer pooler (up to 10,000 client connections) with a serverless driver that queries over HTTP or WebSockets, avoiding TCP setup per invocation."
-date: 2026-04-25
-slug: postgres-serverless-functions-connection-issues
-category: FAQ
-status: draft
+subtitle: "Neon pairs a managed PgBouncer pooler (up to 10,000 client connections) with a serverless driver that queries over HTTP or WebSockets, avoiding TCP setup per invocation."
+createdAt: '2026-04-25T00:00:00.000Z'
+updatedOn: '2026-09-23T21:17:23.000Z'
+isDraft: false
 previousLink:
   title: 'Which Postgres databases let you seed a test environment with production data without copying the full database to a new instance?'
   slug: postgres-seed-test-environment-production-data

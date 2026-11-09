@@ -58,6 +58,7 @@ export async function generateMetadata(props) {
     rssPathname: isChangelog ? `${LINKS.changelog}/rss.xml` : null,
     robotsNoindex: post?.data?.noindex ? 'noindex' : null,
     type: 'article',
+    modifiedTime: post?.data?.updatedOn ?? null,
     markdownPath: `/docs/${currentSlug}.md`,
   });
 }
@@ -106,10 +107,13 @@ const DocPost = async (props) => {
     '@context': 'https://schema.org',
     '@type': 'Article',
     headline: data.title,
+    url: `${VERCEL_URL}${LINKS.docs}/${currentSlug}`,
+    ...(data.updatedOn && { dateModified: data.updatedOn }),
     author: {
       '@type': 'Organization',
       name: 'Neon',
     },
+    publisher: { '@type': 'Organization', name: 'Neon' },
   };
 
   return (

@@ -11,7 +11,7 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/security/security
   - /docs/security
-updatedOn: '2026-09-16T19:45:35.340Z'
+updatedOn: '2026-11-05T15:33:57.188Z'
 ---
 
 At Neon, security is our highest priority. We are committed to implementing best practices and earning the trust of our users. A key aspect of earning this trust is by ensuring that every touchpoint in our system, from connections, to data storage, to our internal processes, adheres to the highest security standards.
@@ -120,11 +120,11 @@ To avoid leaking secrets, follow these security best practices:
 - Store sensitive information in secret management tools like AWS Secrets Manager or HashiCorp Vault.
 - Regularly rotate database credentials and API keys.
 
-If you have questions about this integration or need help securing your credentials, contact us at `security@neon.tech`.
+If you have questions about this integration or need help securing your credentials, reach out on our [Discord server](/discord) or [submit a support ticket](/docs/introduction/support).
 
 ## Rotate credentials
 
-Rotate your database credentials regularly, and immediately if one is exposed. A Neon connection string is built from a role and its password, so you rotate it by resetting the role's password. See [Reset a password](/docs/manage/roles#reset-a-password) for the Console, API, and SQL methods.
+Rotate your database credentials regularly, and immediately if one is exposed. A Neon connection string is built from a role and its password, so you rotate it by resetting the role's password. See [Reset a password](/docs/manage/roles#reset-a-password) for the Console, CLI, API, and SQL methods.
 
 After you reset a password, the old one stops working on the next connection. Copy the new connection string from the **Connect** modal (**Connect** in the Console nav) and roll it out everywhere it is stored, including deployment platform environment variables, CI/CD secrets, secret managers, and local `.env` files, before clients reconnect.
 
@@ -160,4 +160,4 @@ Neon also has a [public bug bounty program with HackerOne](/docs/security/securi
 
 ## Questions about our security measures?
 
-If you have any questions about our security protocols or would like a deeper dive into any aspect, our team is here to help. You can reach us at [security@neon.tech](mailto:security@neon.tech).
+If you have any questions about our security protocols or would like a deeper dive into any aspect, our team is here to help. Explore our documentation in the [Neon Trust Center](https://trust.neon.com/), or [submit a support ticket](/docs/introduction/support).

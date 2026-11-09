@@ -5,11 +5,11 @@
  * and the llms markdown mirror (src/scripts/process-md-for-llms.js) build rows
  * the same way — the web table and the agent-facing markdown can never disagree.
  *
- * Input is the `neon` provider object from /models.json (models.dev-shaped);
- * each model already carries its underlying maker in `provider`.
+ * Input is the `neon` provider object from /models.json (models.dev-shaped).
+ * Each model carries `lab` (who made it) and `provider` (who serves it).
  */
 
-const PROVIDER_ORDER = [
+const LAB_ORDER = [
   'anthropic',
   'openai',
   'google',
@@ -22,17 +22,23 @@ const PROVIDER_ORDER = [
   'typesafe',
 ];
 
-const PROVIDER_LABELS = {
+// Lab and provider ids share one namespace: most labs also serve their own models.
+const ORG_LABELS = {
   anthropic: 'Anthropic',
   openai: 'OpenAI',
   google: 'Google',
   meta: 'Meta',
   alibaba: 'Alibaba',
   zhipuai: 'Zhipu AI',
+  zhipu: 'Zhipu AI',
   thinkingmachines: 'Thinking Machines',
   moonshotai: 'Moonshot AI',
+  moonshot: 'Moonshot AI',
   xai: 'xAI',
   typesafe: 'TypeSafe AI',
+  deepseek: 'DeepSeek',
+  baai: 'BAAI',
+  databricks: 'Databricks',
 };
 
 const MODEL_CATALOG_NOTE =
@@ -40,7 +46,7 @@ const MODEL_CATALOG_NOTE =
 
 const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
-const providerLabel = (id) => PROVIDER_LABELS[id] || (id ? id[0].toUpperCase() + id.slice(1) : '—');
+const orgLabel = (id) => ORG_LABELS[id] || (id ? id[0].toUpperCase() + id.slice(1) : '—');
 
 // e.g. 200000 -> "200K", 1000000 -> "1M".
 const formatContextWindow = (tokens) => {
@@ -52,11 +58,12 @@ const formatContextWindow = (tokens) => {
   return `${Math.round(tokens / 1000)}K`;
 };
 
-// Price per million tokens: 0.4 -> "$0.40", 15 -> "$15", 0 -> "Free".
+// Price per million tokens: 0.4 -> "$0.40", 15 -> "$15", 0.042 -> "$0.042", 0 -> "Free".
 const formatPrice = (pricePerMillion) => {
   if (pricePerMillion === undefined || pricePerMillion === null) return '—';
   if (pricePerMillion === 0) return 'Free';
   const fixed = pricePerMillion.toFixed(2);
+  if (Number(fixed) !== pricePerMillion) return `$${pricePerMillion}`;
   const trimmed = fixed.endsWith('.00') ? fixed.slice(0, -3) : fixed;
   return `$${trimmed}`;
 };
@@ -107,8 +114,10 @@ const toRow = (model, capability) => {
   return {
     id: model.id,
     name: model.name,
+    lab: model.lab,
+    labName: orgLabel(model.lab),
     provider: model.provider,
-    providerName: providerLabel(model.provider),
+    providerName: orgLabel(model.provider),
     inputs,
     inputsLabel: inputs.length ? inputs.join(', ') : '—',
     contextWindow,
@@ -132,7 +141,7 @@ const toRow = (model, capability) => {
   };
 };
 
-// All rows, sorted by provider order then release date (newest first).
+// All rows, sorted by lab order then release date (newest first).
 const buildRows = (neonProvider, capabilities) => {
   const models = neonProvider?.models ?? {};
   const capabilitiesById = new Map(
@@ -141,8 +150,8 @@ const buildRows = (neonProvider, capabilities) => {
   return Object.values(models)
     .map((model) => toRow(model, capabilitiesById.get(model.id)))
     .sort((a, b) => {
-      const pa = PROVIDER_ORDER.indexOf(a.provider);
-      const pb = PROVIDER_ORDER.indexOf(b.provider);
+      const pa = LAB_ORDER.indexOf(a.lab);
+      const pb = LAB_ORDER.indexOf(b.lab);
       const oa = pa === -1 ? 99 : pa;
       const ob = pb === -1 ? 99 : pb;
       if (oa !== ob) return oa - ob;
@@ -150,30 +159,30 @@ const buildRows = (neonProvider, capabilities) => {
     });
 };
 
-// Rows grouped into ordered provider sections (used by the markdown mirror).
-const groupByProvider = (rows) => {
-  const byProvider = new Map();
+// Rows grouped into ordered lab sections (used by the markdown mirror).
+const groupByLab = (rows) => {
+  const byLab = new Map();
   for (const row of rows) {
-    if (!byProvider.has(row.provider)) byProvider.set(row.provider, []);
-    byProvider.get(row.provider).push(row);
+    if (!byLab.has(row.lab)) byLab.set(row.lab, []);
+    byLab.get(row.lab).push(row);
   }
-  const present = [...byProvider.keys()];
+  const present = [...byLab.keys()];
   const ordered = [
-    ...PROVIDER_ORDER.filter((p) => byProvider.has(p)),
-    ...present.filter((p) => !PROVIDER_ORDER.includes(p)),
+    ...LAB_ORDER.filter((lab) => byLab.has(lab)),
+    ...present.filter((lab) => !LAB_ORDER.includes(lab)),
   ];
-  return ordered.map((providerId) => ({
-    providerId,
-    label: providerLabel(providerId),
-    rows: byProvider.get(providerId),
+  return ordered.map((labId) => ({
+    labId,
+    label: orgLabel(labId),
+    rows: byLab.get(labId),
   }));
 };
 
 module.exports = {
-  PROVIDER_ORDER,
-  PROVIDER_LABELS,
+  LAB_ORDER,
+  ORG_LABELS,
   MODEL_CATALOG_NOTE,
-  providerLabel,
+  orgLabel,
   formatContextWindow,
   formatPrice,
   formatDate,
@@ -183,5 +192,5 @@ module.exports = {
   deriveEndpoints,
   toRow,
   buildRows,
-  groupByProvider,
+  groupByLab,
 };

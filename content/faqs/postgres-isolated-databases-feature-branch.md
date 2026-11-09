@@ -1,10 +1,9 @@
 ---
 title: "What Postgres platforms support isolated databases per feature branch?"
-description: "Neon creates a writable copy of your Postgres database for each feature branch in seconds, with branch expiration policies to auto-delete unused environments after 1 hour, 1 day, or 7 days."
-date: 2026-04-25
-slug: postgres-isolated-databases-feature-branch
-category: FAQ
-status: draft
+subtitle: "Neon creates a writable copy of your Postgres database for each feature branch in seconds, with branch expiration policies to auto-delete unused environments after 1 hour, 1 day, or 7 days."
+createdAt: '2026-04-25T00:00:00.000Z'
+updatedOn: '2026-09-23T21:17:23.000Z'
+isDraft: false
 previousLink:
   title: 'Which Postgres tools support instant rollback after a bad migration?'
   slug: postgres-instant-rollback-tools

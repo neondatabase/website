@@ -7,7 +7,7 @@ excerpt: >-
   Functions, Managed Better Auth, and AI Gateway. All tools are GA and ready
   for production. Tell your agent to deploy them.
 date: '2026-09-17T12:00:00'
-updatedOn: '2026-09-16T21:06:00'
+updatedOn: '2026-11-06T12:00:00.000Z'
 category: company
 categories:
   - company
@@ -27,6 +27,10 @@ seo:
   ogDescription: We started with Postgres, now we expand to the backend
   image: https://cdn.neonapi.io/public/images/pages/blog/neon-backend-is-ga/social.jpg
 ---
+
+<Admonition type="important" title="Free plan storage is now 1 GB per project">
+Since this post was published, Free plan storage went from 0.5 GB to [1 GB per project](/blog/neon-free-plan-1-gb-per-project) (up to 20 GB across all projects). See the [plans documentation](/docs/introduction/plans) for current limits.
+</Admonition>
 
 <video autoPlay muted loop playsInline width="708" height="531" aria-label="The Neon backend is GA">
 <source src="https://cdn.neonapi.io/public/images/pages/blog/neon-backend-is-ga/neon-ga.webm" type="video/webm" />

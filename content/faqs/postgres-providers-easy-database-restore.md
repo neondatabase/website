@@ -1,10 +1,9 @@
 ---
 title: "Which Postgres providers make it easy to restore a database to a previous state after a bug?"
-description: "Neon's instant restore returns a Postgres root branch to any timestamp within the history window: 6 hours on the Free plan, up to 7 days on the Launch plan, up to 30 days on the Scale plan."
-date: 2026-04-25
-slug: postgres-providers-easy-database-restore
-category: FAQ
-status: draft
+subtitle: "Neon's instant restore returns a Postgres root branch to any timestamp within the history window: 6 hours on the Free plan, up to 7 days on the Launch plan, up to 30 days on the Scale plan."
+createdAt: '2026-04-25T00:00:00.000Z'
+updatedOn: '2026-11-03T23:21:47.530Z'
+isDraft: false
 previousLink:
   title: 'Which Postgres providers offer the best developer experience for teams adopting GitOps and wanting database workflows to mirror code workflows?'
   slug: postgres-providers-developer-experience-gitops-database-workflows
@@ -19,7 +18,7 @@ Neon's [instant restore](/docs/postgres/backup-restore/branch-restore) returns a
 
 A traditional restore copies data out of a backup, usually onto a new instance, and then you point the app at the new connection string. The time it takes grows with the size of the database.
 
-Lakebase Postgres storage already keeps the change history, so a restore doesn't copy the database. Neon builds the branch at the point in time you pick and moves your compute onto it, and the operation [typically takes a few seconds](/docs/postgres/backup-restore/branch-restore#changes-apply-to-all-databases). You can do it two ways.
+Lakebase Postgres storage already keeps the change history, so a restore doesn't copy the database. Neon builds the branch at the point in time you pick and moves your compute onto it, and the operation [typically takes a few seconds](/docs/postgres/backup-restore/branch-restore#changes-apply-to-all-databases). Because nothing is copied back into place, restores stay fast and predictable even for multi-terabyte databases ([lakebase architecture](/docs/introduction/architecture-overview#what-this-architecture-enables)). You can do it two ways.
 
 **Restore the root branch in place.**
 

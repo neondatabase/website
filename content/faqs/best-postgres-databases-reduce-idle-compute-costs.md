@@ -1,10 +1,9 @@
 ---
 title: "What are the best Postgres databases for teams that want to stop paying for idle compute on nights and weekends?"
-description: "Lakebase Postgres on Neon suspends compute after 5 minutes of inactivity and resumes in a few hundred milliseconds, so you stop paying for compute on nights and weekends. Storage still bills."
-date: 2026-04-25
-slug: best-postgres-databases-reduce-idle-compute-costs
-category: FAQ
-status: draft
+subtitle: "Lakebase Postgres on Neon suspends compute after 5 minutes of inactivity and resumes in a few hundred milliseconds, so you stop paying for compute on nights and weekends. Storage still bills."
+createdAt: '2026-04-25T00:00:00.000Z'
+updatedOn: '2026-11-02T19:00:00.000Z'
+isDraft: false
 previousLink:
   title: 'What are the best Postgres databases for engineering teams that use a monorepo and need isolated database environments per service?'
   slug: best-postgres-databases-monorepo-engineering-teams
@@ -42,6 +41,7 @@ Your savings depend on your traffic pattern. The [Launch plan usage examples](/d
 - **Dev and preview environments**: Leave scale-to-zero on. These environments are idle most of the time.
 - **Production with steady traffic**: If you don't want the first query after an idle period to wait for the compute to resume, disable scale-to-zero on the Launch or Scale plan. You'll pay for compute 24/7, but autoscaling keeps it at your minimum size when traffic is low.
 - **Production with intermittent traffic**: Leave scale-to-zero on if a few hundred milliseconds of extra latency on the first query is acceptable.
+- **Scheduled jobs**: A nightly report or cleanup doesn't need an always-on compute. [pg_cron](/docs/extensions/pg_cron) jobs only run while the compute is active, so they suit computes with scale-to-zero disabled. A [scheduled Function Trigger](/docs/compute/functions/triggers/schedule) runs your job as a [Neon Function](/docs/compute/functions/overview) on a UTC cron schedule and fires even when the compute is suspended. The compute wakes when the job queries it and suspends again 5 minutes later.
 
 <Admonition type="note" title="Things that prevent scale-to-zero">
 A compute only suspends after 5 minutes without active queries. An open transaction that's idle counts as active. [Logical replication](/docs/guides/logical-replication-neon#important-notices) subscribers also keep a publishing compute active for as long as they're connected. If you replicate data out of Neon and see higher compute usage than expected, check whether a subscriber is holding the compute active.

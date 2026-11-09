@@ -1,14 +1,12 @@
 ---
 title: How to host a Discord bot on Neon Functions
-tag: new
-tagTheme: green
 subtitle: Receive slash commands at a public function URL with no Gateway connection
 summary: >-
   Host a Discord interactions bot on Neon Functions. Receive slash commands over HTTP at a
   public function URL, verify Discord's Ed25519 request signatures, and store data in Postgres
   on the same branch.
 enableTableOfContents: true
-updatedOn: '2026-09-17T21:40:25.774Z'
+updatedOn: '2026-10-31T13:11:38.215Z'
 isDraft: false
 ---
 
@@ -119,7 +117,7 @@ cp .env.example .env.local
 neon link
 ```
 
-Linking merges `DATABASE_URL`, `DATABASE_URL_UNPOOLED`, `NEON_BRANCH`, and `NEON_FUNCTION_DISCORD_BASE_URL` (your function's public URL, ready before you deploy) into `.env.local`, leaving the Discord keys untouched. Uncomment and fill the three required `DISCORD_*` keys:
+Linking merges `DATABASE_URL`, `DATABASE_URL_UNPOOLED`, `NEON_BRANCH`, `NEON_BRANCH_ID`, and `NEON_FUNCTION_HOST_SUFFIX` into `.env.local`, leaving the Discord keys untouched. Uncomment and fill the three required `DISCORD_*` keys:
 
 ```env filename=".env.local"
 # Required. Add real values before deploying; a missing key throws at deploy, an empty one uploads "".
@@ -134,7 +132,8 @@ DISCORD_GUILD_ID=
 NEON_BRANCH=
 DATABASE_URL=
 DATABASE_URL_UNPOOLED=
-NEON_FUNCTION_DISCORD_BASE_URL=
+NEON_BRANCH_ID=
+NEON_FUNCTION_HOST_SUFFIX=
 ```
 
 For this guide, also set `DISCORD_GUILD_ID` to your test server. In Discord, turn on Developer Mode (User Settings → App Settings → Advanced), right-click the server name in the sidebar and click **Copy Server ID**. A guild is a Discord server.
@@ -165,26 +164,26 @@ npm run db:push
 
 ## Set the Interactions Endpoint URL
 
-Your interactions endpoint is `NEON_FUNCTION_DISCORD_BASE_URL` (from `.env.local`) with `/api/interactions` appended:
+Your interactions endpoint is the `discord` function's URL with the path `/api/interactions`. `npm run deploy` prints it in the **Function URLs** list, and `neon functions get discord` shows it in its `URL` field:
 
 ```text shouldWrap
-https://br-cool-darkness-123456-discord.compute.us-east-2.aws.neon.tech/api/interactions
+https://br-cool-darkness-123456-discord.compute.c-2.us-east-2.aws.neon.tech/api/interactions
 ```
 
-Your URL will differ. Use the exact `NEON_FUNCTION_DISCORD_BASE_URL` value from `.env.local`, with `/api/interactions` appended; the host is specific to your branch.
+Your URL will differ. Use your own `discord` URL; the host is specific to your branch.
 
 In the Developer Portal, open **General Information**. Paste that URL into **Interactions Endpoint URL** and save.
 
 Discord immediately POSTs a `PING` (`type: 1`). The handler verifies the signature and returns a `PONG`. If that handshake succeeds, Discord saves the URL (the Developer Portal shows a green success message).
 
-If save fails, retry once. Confirm the public key in `.env.local` matches General Information, you redeployed after editing `.env.local` and the path ends with `/api/interactions`. Then open or curl the function URL (`NEON_FUNCTION_DISCORD_BASE_URL`, or that URL plus `/api/interactions`). GET returns JSON with these keys:
+If save fails, retry once. Confirm the public key in `.env.local` matches General Information, you redeployed after editing `.env.local` and the path ends with `/api/interactions`. Then open or curl the function URL (from `neon functions get discord`, or that URL plus `/api/interactions`). GET returns JSON with these keys:
 
 ```json
 {
   "ok": true,
   "service": "discord-interactions",
   "interactionsPath": "/api/interactions",
-  "interactionsUrl": "https://br-cool-darkness-123456-discord.compute.us-east-2.aws.neon.tech/api/interactions"
+  "interactionsUrl": "https://br-cool-darkness-123456-discord.compute.c-2.us-east-2.aws.neon.tech/api/interactions"
 }
 ```
 

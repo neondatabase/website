@@ -10,7 +10,7 @@ summary: >-
   `histogram` for time-oriented analysis. Only Apache-2 licensed features are
   supported on Neon; compression is not available.
 enableTableOfContents: true
-updatedOn: '2026-09-16T19:45:35.340Z'
+updatedOn: '2026-11-06T11:14:41.532Z'
 ---
 
 `timescaledb` enables the efficient storage and retrieval of time-series data. Time-series data is a sequential collection of observations or measurements recorded over time. For example, IoT devices continuously generate data points with timestamps, representing measurements or events. `timescaledb` is designed to handle large volumes of time-stamped data and provides SQL capabilities on top of a time-oriented data model such as IoT data, sensor readings, financial market data, and other time-series datasets.
@@ -353,3 +353,4 @@ You were able to configure the timescaledb extension in Neon and create a hypert
 
 - [TimescaleDB editions](https://docs.timescale.com/about/latest/timescaledb-editions/)
 - [TimesscaleDB hyperfunctions](https://docs.timescale.com/api/latest/hyperfunctions/)
+- [Timeseries data in Postgres](/guides/timeseries-data)

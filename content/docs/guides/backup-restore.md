@@ -10,6 +10,13 @@ summary: >-
   $0.09/GB-month. Scheduled snapshots do not count toward the manual snapshot
   limit.
 enableTableOfContents: true
+redirectFrom:
+  - /docs/introduction/backup-restore
+  - /docs/manage/backup-restore
+  - /docs/manage/snapshots
+  - /docs/postgres/backup-restore/snapshots
+  - /docs/guides/snapshots
+  - /docs/introduction/snapshots
 updatedOn: '2026-09-11T12:15:20.212Z'
 ---
 

@@ -6,6 +6,8 @@ summary: >-
   for JavaScript, boto3, and the AWS CLI. Not all S3 operations are supported.
   This page lists what works, what returns 501, and known limitations.
 enableTableOfContents: true
+redirectFrom:
+  - /docs/storage/s3-api
 updatedOn: '2026-09-16T15:38:57.808Z'
 ---
 

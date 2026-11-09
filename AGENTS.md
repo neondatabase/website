@@ -126,18 +126,18 @@ Optional guide-only field: `canonical` — an absolute `http://` or `https://` U
 
 Every docs page requires `title`. All other fields are optional.
 
-| Field                   | Description                                                                                                                        |
-| ----------------------- | ---------------------------------------------------------------------------------------------------------------------------------- |
-| `title`                 | Page title. The `h1` is auto-generated from this. Do not add an `h1` in the file. **Required.**                                    |
-| `subtitle`              | Subtitle shown below the title.                                                                                                    |
-| `summary`               | SEO description / meta summary.                                                                                                    |
-| `tag`                   | Badge shown in the nav. Values: `new`, `beta`, `coming soon`, `deprecated`, or custom text. Also add the tag to `navigation.yaml`. |
+| Field                   | Description                                                                                                                                                                                                                                    |
+| ----------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `title`                 | Page title. The `h1` is auto-generated from this. Do not add an `h1` in the file. **Required.**                                                                                                                                                |
+| `subtitle`              | Subtitle shown below the title.                                                                                                                                                                                                                |
+| `summary`               | SEO description / meta summary.                                                                                                                                                                                                                |
+| `tag`                   | Badge shown in the nav. Values: `new`, `beta`, `coming soon`, `deprecated`, or custom text. Also add the tag to `navigation.yaml`.                                                                                                             |
 | `redirectFrom`          | Array of old paths to redirect from. Each path must start with `/` and must not have a trailing slash (the site runs `trailingSlash: false`, so a trailing-slash source is normalized to the slashless path and never matches, returning 404). |
-| `isDraft`               | `true` hides the page from production but keeps it visible in dev.                                                                 |
-| `enableTableOfContents` | `true` shows the h2/h3 outline panel on the right.                                                                                 |
-| `ogImage`               | Social preview image path.                                                                                                         |
-| `updatedOn`             | ISO 8601 timestamp (e.g. `2026-03-14T03:21:15.122Z`). Updated automatically by the pre-commit hook on staged files. Don't set or update manually. |
-| `layout`                | Set to `wide` to hide the right sidebar (use with `TwoColumnLayout` pages).                                                        |
+| `isDraft`               | `true` hides the page from production but keeps it visible in dev.                                                                                                                                                                             |
+| `enableTableOfContents` | `true` shows the h2/h3 outline panel on the right.                                                                                                                                                                                             |
+| `ogImage`               | Social preview image path.                                                                                                                                                                                                                     |
+| `updatedOn`             | ISO 8601 timestamp (e.g. `2026-03-14T03:21:15.122Z`). Updated automatically by the pre-commit hook on staged files. Don't set or update manually.                                                                                              |
+| `layout`                | Set to `wide` to hide the right sidebar (use with `TwoColumnLayout` pages).                                                                                                                                                                    |
 
 The build will fail if any `.md` file in `content/docs/` is missing `title`.
 
@@ -583,20 +583,6 @@ Use `/simple-content` for edits to existing pages, shorter additions, or when yo
 | `/update-pr`         | Draft or update a PR title and description from changed files and commits   |
 | `/add-preview-links` | Add Vercel preview links to a PR description for every changed content file |
 
-### Changelog and roadmap
-
-| Command             | When to use                                                                                        |
-| ------------------- | -------------------------------------------------------------------------------------------------- |
-| `/create-changelog` | Generate next Friday's changelog draft (or a specific date) with placeholder content               |
-| `/post-changelog`   | Post the changelog preview to Lakebase Slack channels for review. Databricks employees only.       |
-| `/update-roadmap`   | Sync the introduction roadmap with recent changelog entries                                        |
-
-### Issue tracking
-
-| Command              | When to use                                                                                                                                                                                                     |
-| -------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `/create-doc-ticket` | Create a JIRA task in the Databricks LKB project, assigned to yourself. Databricks employees only — requires the JIRA MCP. Non-employees should open a GitHub issue at github.com/neondatabase/website instead. |
-
 ### Reference and navigation
 
 | Command                  | When to use                                                                 |
@@ -621,3 +607,13 @@ Use `/simple-content` for edits to existing pages, shorter additions, or when yo
 - Images are optimized via Next.js Image component
 - Accessibility matters — follow WCAG guidelines
 - For writing style and component details, `content/docs/README.md` and `content/docs/community/` are the authoritative sources
+
+<!-- BEGIN:nextjs-agent-rules -->
+
+# This is NOT the Next.js you know
+
+This version has breaking changes — APIs, conventions, and file structure may all differ from your training data. Read the relevant guide in `node_modules/next/dist/docs/` (resolved from this file's directory; in monorepos the `next` package may not be visible from the repo root) before writing any code. Heed deprecation notices.
+
+This block is written and re-added by `next dev` — verify at `node_modules/next/dist/server/lib/generate-agent-files.js`. Removing it from a diff only re-creates the uncommitted change; committing it with your work keeps the tree clean.
+
+<!-- END:nextjs-agent-rules -->
