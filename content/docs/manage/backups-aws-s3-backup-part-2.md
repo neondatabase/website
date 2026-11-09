@@ -9,7 +9,7 @@ summary: >-
   number of days. Set `PG_VERSION` and `AWS_REGION` to target any Postgres
   version or AWS region.
 enableTableOfContents: true
-updatedOn: '2026-08-07T18:39:13.799Z'
+updatedOn: '2026-11-04T20:10:08.844Z'
 ---
 
 This guide shows you how to configure nightly Postgres backups using a scheduled GitHub Action and `pg_dump`.
@@ -227,7 +227,7 @@ This step involves setting three variables that are all output to `GITHUB_ENV`. 
 ```yml
 - name: Set file, folder and path variables
   run: |
-    GZIP_NAME="$(date +'%B-%d-%Y@%H:%M:%S').gz"
+    GZIP_NAME="$(date +'%B-%d-%Y@%H:%M:%S').sql.gz"
     FOLDER_NAME="${{ github.workflow }}"
     UPLOAD_PATH="s3://${{ env.S3_BUCKET_NAME }}/${FOLDER_NAME}/${GZIP_NAME}"
 
@@ -238,7 +238,7 @@ This step involves setting three variables that are all output to `GITHUB_ENV`. 
 
 The three variables are as follows:
 
-1. `GZIP_NAME`: The name of the `.gz` file derived from the date e.g, `February-20-2025@07:53:02.gz`
+1. `GZIP_NAME`: The name of the `.sql.gz` file derived from the date e.g, `February-20-2025@07:53:02.sql.gz`
 2. `FOLDER_NAME`: The folder where the `.gz` files are to be uploaded
 3. `UPLOAD_PATH`: This is the full path that includes the S3 bucket name, folder name and `.gz` file
 
@@ -297,4 +297,11 @@ After committing and pushing the workflow to your GitHub repository, the Action 
 
 ## Restoring from a backup
 
-Restoring a `pg_dump` backup requires downloading the file from S3 and restoring it using `pg_restore`. For instructions, see [Restoring a backup with pg_restore](/docs/manage/backup-pg-dump#restoring-a-backup-with-pgrestore).
+The workflow saves a gzip-compressed plain SQL dump, so restore it with `psql`, not `pg_restore`. Download the file from S3, then pipe it into the target database:
+
+```bash
+aws s3 cp "s3://<bucket>/<folder>/<file>.sql.gz" .
+gunzip -c <file>.sql.gz | psql "<target connection string>"
+```
+
+Restore into a new, empty database, such as one in a new Neon project. To restore with `pg_restore` instead, for example to restore a single table, change the `pg_dump` step to `pg_dump -Fc` and see [Restoring a backup with pg_restore](/docs/manage/backup-pg-dump#restoring-a-backup-with-pgrestore).

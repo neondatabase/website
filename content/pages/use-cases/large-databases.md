@@ -7,6 +7,12 @@ summary: >-
   replicas independent of data size, and what that means for cost and recovery
   confidence on large production databases.
 enableTableOfContents: true
+seo:
+  title: 'Postgres for Large Databases: Restore Multi-TB Postgres in Seconds | Neon'
+  description: >-
+    On Neon, restores, branches, and read replicas take the same time at 1 GB or
+    many TB, because they don't copy data. Recover a multi-TB database in
+    seconds and give staging a full copy of production.
 updatedOn: '2026-08-15T23:20:00.000Z'
 image: '/images/social-previews/use-cases/large-databases.jpg'
 ---
@@ -28,7 +34,7 @@ The recovery numbers on this page come from the [Impact of Postgres restores sur
 
 ## Large databases turn every ops task into a project
 
-Legacy OLTP Postgres is a monolith. The Postgres process and its disk live together, so the only way to get a second environment is to stand up a second machine with a full copy of the data on it. That works when the database is small; at multi-TB scale, it becomes a big project. 
+Legacy OLTP Postgres is a monolith. The Postgres process and its disk live together, so the only way to get a second environment is to stand up a second machine with a full copy of the data on it. That works when the database is small; at multi-TB scale, it becomes a big project.
 
 Restores take hours because snapshot plus WAL replay has to rebuild the whole volume, replicas are expensive because each one carries its own storage. Keeping staging in sync with production gets more and more painful.
 
@@ -37,7 +43,7 @@ Restores take hours because snapshot plus WAL replay has to rebuild the whole vo
   <p style={{ margin: '0.75rem 0 0', fontSize: '1.5rem', lineHeight: 1.35, fontWeight: 500 }}>A multi-TB Postgres shouldn't turn every restore, replica, and staging environment a big DBA event.</p>
 </div>
 
-## Your DB will break. Legacy infra sets your team for failure 
+## Your DB will break. Legacy infra sets your team for failure
 
 Failures on large Postgres databases are not rare events, and recovery is rarely quick.
 
@@ -67,7 +73,7 @@ Lakebase Postgres, built on the [lakebase architecture](https://neon.com/docs/in
 
 ![Lakebase architecture with ephemeral compute on the left reading and writing to durable shared storage on the right](/use-cases/large-databases/lakebase-architecture.jpg)
 
-Since storage is shared and versioned, starting a new compute against an existing version of the data is a trivial operation. Database size stops deciding how long an operation takes - it is not a factor. 
+Since storage is shared and versioned, starting a new compute against an existing version of the data is a trivial operation. Database size stops deciding how long an operation takes - it is not a factor.
 
 - A **restore** is now a branch from a past version of storage
 - A **staging or development environment** is now a branch from the current version
@@ -125,7 +131,7 @@ Because restore, branching, and replicas are cheap and fast, they stop being spe
 
 None of that requires someone to provision storage, wait on a restore, or keep a standby warm. The operational surface area of a large database shrinks to the same tools a small database already uses.
 
-## Your costs shrink too 
+## Your costs shrink too
 
 The Lakebase architecture also changes the bill. On a conventional platform, every environment and every replica multiplies storage. Teams running multi-region production plus development often end up paying for the same terabytes several times over. Storage volumes that grow usually can't shrink, so even when cold data moves out, the volume (and the invoice) stay large. Snapshots become the only realistic backup strategy at that size, and they are both expensive and slow to restore from.
 

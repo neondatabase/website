@@ -15,7 +15,7 @@ authors:
 cover:
   image: 'https://cdn.neonapi.io/public/images/pages/blog/neon-docs-search-lakebase-search/cover.jpg'
   alt: 'Neon Docs search is now built on Neon'
-isFeatured: false
+isFeatured: true
 seo:
   title: 'Neon Docs search is now built on Neon - Neon'
   description: 'The search on neon.com now runs fully on Neon primitives: Lakebase Search, Neon Functions, Neon AI Gateway and Lakebase Postgres'

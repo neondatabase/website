@@ -47,6 +47,7 @@ const GPT = {
 const EMBEDDING = {
   id: 'gte-large-en',
   owned_by: 'alibaba',
+  provider: 'alibaba',
   name: 'GTE Large (En)',
   family: 'text-embedding',
   model_type: 'embedding',
@@ -62,11 +63,13 @@ const EMBEDDING = {
 const DECISION = {
   id: 'example-decision',
   owned_by: 'example',
+  provider: 'databricks',
   name: 'Example Decision',
   family: 'decision',
   model_type: 'language',
   dialects: ['systemone'],
   release_date: '2026-09-01',
+  context_length: 131072,
   architecture: { input_modalities: ['text'], output_modalities: ['text'] },
   pricing: { prompt: '0.0000001', completion: '0' },
   supported_parameters: [],
@@ -74,26 +77,38 @@ const DECISION = {
 };
 
 describe('toCatalogEntry', () => {
-  it('maps a System One decision model to an input-only entry without chat fields', () => {
+  it('names Databricks as the provider of every model except closed-weight TypeSafe AI models', () => {
+    expect(toCatalogEntry(GPT)).toMatchObject({ lab: 'openai', provider: 'databricks' });
+    const jev = { ...GPT, owned_by: 'typesafe' };
+    expect(toCatalogEntry(jev)).toMatchObject({ lab: 'typesafe', provider: 'typesafe' });
+    const openJev = { ...jev, features: { ...GPT.features, open_weights: true } };
+    expect(toCatalogEntry(openJev)).toMatchObject({ lab: 'typesafe', provider: 'databricks' });
+  });
+
+  it('maps a System One decision model to an input-only entry with its context window', () => {
     expect(toCatalogEntry(DECISION)).toEqual({
       id: 'example-decision',
       name: 'Example Decision',
-      provider: 'example',
+      lab: 'example',
+      provider: 'databricks',
       family: 'decision',
       released: true,
       type: 'decision',
       open_weights: true,
       release_date: '2026-09-01',
       last_updated: '2026-09-01',
+      limit: { context: 131072 },
       cost: { input: 0.1 },
     });
+    expect(toCatalogEntry({ ...DECISION, context_length: null })).not.toHaveProperty('limit');
   });
 
   it('maps a listing item to a data.json entry', () => {
     expect(toCatalogEntry(GPT)).toEqual({
       id: 'gpt-5-4',
       name: 'GPT-5.4',
-      provider: 'openai',
+      lab: 'openai',
+      provider: 'databricks',
       family: 'gpt',
       released: true,
       attachment: true,
@@ -167,7 +182,8 @@ describe('buildCatalog', () => {
     expect(out.neon.models['gte-large-en']).toEqual({
       id: 'gte-large-en',
       name: 'GTE Large (En)',
-      provider: 'alibaba',
+      lab: 'alibaba',
+      provider: 'databricks',
       family: 'text-embedding',
       released: true,
       type: 'embedding',

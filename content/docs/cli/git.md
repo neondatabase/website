@@ -77,9 +77,10 @@ neon git sync --no-pull
 
 ```text filename="Output"
 Checked out branch br-billing-a1b2c3d4 on project polished-snowflake-12345678 (org org-example-12345678). Updated /path/to/your/app/.neon.
-Pulled 3 Neon variables into .env.local
+Pulled 5 Neon variables into .env.local
   Postgres        DATABASE_URL, DATABASE_URL_UNPOOLED
-  Branch          NEON_BRANCH
+  Branch          NEON_BRANCH, NEON_BRANCH_ID
+  Functions       NEON_FUNCTION_HOST_SUFFIX
 ```
 
 ## neon git cleanup (#cleanup)

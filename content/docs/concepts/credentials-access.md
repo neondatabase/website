@@ -11,6 +11,7 @@ summary: >-
   any per-project grant. IP Allow and Private Networking gate the Postgres
   endpoint; the other services are gated by their credentials.
 enableTableOfContents: true
+updatedOn: '2026-09-15T20:19:36.000Z'
 ---
 
 Access to your Neon backend runs on a handful of credentials, one for each kind of job: an **API key** manages your setup, a **scoped credential** does your running app's work, a **database connection credential** reaches Postgres, and a **JWT** authorizes end users through the Data API.

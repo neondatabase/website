@@ -4,7 +4,7 @@ subtitle: Move your application from the Vercel Postgres SDK to the Neon serverl
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2024-10-28T00:00:00.000Z'
-updatedAt: '2024-10-28T00:00:00.000Z'
+updatedOn: '2026-10-08T10:40:01.000Z'
 ---
 
 Vercel transitioned all Vercel Postgres stores to Neon's native integration in the [Vercel Marketplace](https://vercel.com/blog/introducing-the-vercel-marketplace). This guide shows how to migrate your code from the Vercel Postgres SDK [(@vercel/postgres)](https://vercel.com/docs/storage/vercel-postgres/sdk) to the [Neon serverless driver](https://github.com/neondatabase/serverless).

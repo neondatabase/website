@@ -1,24 +1,24 @@
 ---
 title: 'How do I reset or change my database password in Neon?'
-subtitle: 'Reset a role password from the Console, the Neon API, or with ALTER ROLE in SQL.'
+subtitle: 'Reset a role password from the Console, the Neon CLI, the Neon API, or with ALTER ROLE in SQL.'
 enableTableOfContents: true
 createdAt: '2026-05-18T00:00:00.000Z'
-updatedOn: '2026-09-23T21:00:25.204Z'
+updatedOn: '2026-11-05T15:33:57.188Z'
 isDraft: false
 redirectFrom: []
 previousLink:
   title: 'How do I rename a database in my Neon project?'
   slug: rename-database-neon-project
 nextLink:
-  title: 'How do I rotate my Neon database connection string for security purposes?'
-  slug: rotate-database-connection-string-security
+  title: 'How do I get a REST API for my Postgres tables without writing CRUD endpoints?'
+  slug: rest-api-postgres-tables-without-writing-crud
 ---
 
-Postgres roles on Neon are branch-scoped, so each branch keeps its own password for a role. You can reset a password from the **Roles** page in the Console, with the Neon API, or by running `ALTER ROLE ... WITH PASSWORD '...'` from any SQL client. The reset takes effect immediately. The old password stops working on the next connection, so copy the updated connection string from the **Connect** modal. There's no Neon CLI command for this ([Reset a password](/docs/manage/roles#reset-a-password)).
+Postgres roles on Neon are branch-scoped, so each branch keeps its own password for a role. You can reset a password from the **Roles** page in the Console, with the Neon CLI or API, or by running `ALTER ROLE ... WITH PASSWORD '...'` from any SQL client. The reset takes effect immediately. The old password stops working on the next connection, so copy the updated connection string from the **Connect** modal. See [Reset a password](/docs/manage/roles#reset-a-password).
 
 ## Reset the password
 
-<Tabs labels={["Console", "API", "SQL"]}>
+<Tabs labels={["Console", "CLI", "API", "SQL"]}>
 
 <TabItem>
 
@@ -29,6 +29,16 @@ Postgres roles on Neon are branch-scoped, so each branch keeps its own password 
 5. Click **Reset**. A modal shows the new generated password. Copy it into your secret manager.
 
 See [Reset a password](/docs/manage/roles#reset-a-password).
+
+</TabItem>
+
+<TabItem>
+
+Reset the password with [`neon roles reset-password`](/docs/cli/roles#reset-password). It prints the new password and waits until the compute applies it:
+
+```bash
+neon roles reset-password alex --branch main
+```
 
 </TabItem>
 
@@ -47,7 +57,7 @@ The response body contains the new password under `role.password`. See the [Rese
 
 <TabItem>
 
-The Console and API always generate a random password. To set a value you choose (for example, one already stored in your secret manager), connect with the [SQL Editor](/docs/get-started/query-with-neon-sql-editor), [psql](/docs/connect/query-with-psql-editor), or any SQL client, and run `ALTER ROLE`.
+The Console, CLI, and API always generate a random password. To set a value you choose (for example, one already stored in your secret manager), connect with the [SQL Editor](/docs/get-started/query-with-neon-sql-editor), [psql](/docs/connect/query-with-psql-editor), or any SQL client, and run `ALTER ROLE`.
 
 ```sql
 ALTER ROLE alex WITH PASSWORD 'new_password';

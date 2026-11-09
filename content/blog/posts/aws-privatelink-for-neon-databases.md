@@ -7,7 +7,7 @@ excerpt: >-
   internet. If your infra is in AWS, this feature makes it much easier to meet
   your security and compliance requirements while enj...
 date: '2025-03-05T00:02:46'
-updatedOn: '2025-08-14T09:27:43'
+updatedOn: '2026-11-06T12:00:00.000Z'
 category: product
 categories:
   - product
@@ -35,6 +35,10 @@ seo:
 ---
 
 ![Image](https://cdn.neonapi.io/public/images/pages/blog/aws-privatelink-for-neon-databases/neon-aws-privatelink-for-neon-databases-1-1024x576-2721599f.jpg)
+
+<Admonition type="important" title="Plans have changed since this post">
+This post refers to the Business and Enterprise plans. Neon's plans are now Free, Launch, and Scale, and Private Networking is available on Scale. See [Private Networking](/docs/guides/neon-private-networking) and the [plans documentation](/docs/introduction/plans).
+</Admonition>
 
 **We just shipped** [Neon Private Networking](https://neon.com/docs/guides/neon-private-networking), **a feature that lets you connect to your Neon database through [AWS PrivateLink](https://aws.amazon.com/privatelink/) with zero exposure to the public internet.** If your infra is in AWS, this feature makes it much easier to meet your security and compliance requirements while enjoying Neon’s developer experience. Private Networking is available in our [Business and Enterprise](https://neon.tech/pricing) plans.
 

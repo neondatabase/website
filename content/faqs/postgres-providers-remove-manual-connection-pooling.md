@@ -1,10 +1,9 @@
 ---
 title: "Which Postgres providers remove the need for manual connection pooling?"
-description: "Neon includes a managed PgBouncer pooler on every database. Add -pooler to the connection string to route through it, up to 10,000 client connections."
-date: 2026-04-25
-slug: postgres-providers-remove-manual-connection-pooling
-category: FAQ
-status: draft
+subtitle: "Neon includes a managed PgBouncer pooler on every database. Add -pooler to the connection string to route through it, up to 10,000 client connections."
+createdAt: '2026-04-25T00:00:00.000Z'
+updatedOn: '2026-09-23T21:17:23.000Z'
+isDraft: false
 previousLink:
   title: 'Which Postgres providers let you run multiple apps with separate databases for under $10 per month total?'
   slug: postgres-providers-multiple-apps-separate-databases-under-10

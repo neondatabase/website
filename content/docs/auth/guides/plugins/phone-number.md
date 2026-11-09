@@ -175,20 +175,20 @@ For a complete working form with resend, error handling, and attempt-budget awar
 
 ## Use Phone Number alongside UI components
 
-Unlike Email OTP, `NeonAuthUIProvider` does not expose a `phoneNumber` prop, and the pre-built `AuthView` does not render a phone sign-in UI. If you're using Managed Better Auth UI components, render your own phone sign-in form next to `AuthView` on the sign-in route:
+If you're using [Better Auth UI](/docs/auth/reference/ui-components), render your own phone sign-in form next to `<Auth>` on the sign-in route:
 
 ```tsx shouldWrap filename="app/auth/[path]/page.tsx"
-import { AuthView } from '@neondatabase/auth-ui';
-import { authViewPaths } from '@neondatabase/auth-ui/server';
+import { viewPaths } from '@better-auth-ui/core';
+import { Auth } from '@/components/auth/auth';
 import { PhoneSignInSection } from './phone-sign-in-section'; // your own component
 
 export default async function AuthPage({ params }: { params: Promise<{ path: string }> }) {
   const { path } = await params;
-  const isSignIn = path === authViewPaths.SIGN_IN;
+  const isSignIn = path === viewPaths.auth.signIn;
 
   return (
     <>
-      <AuthView path={path} />
+      <Auth path={path} />
       {isSignIn && <PhoneSignInSection />}
     </>
   );
@@ -198,7 +198,7 @@ export default async function AuthPage({ params }: { params: Promise<{ path: str
 `PhoneSignInSection` is a component you write that wraps your phone sign-in form. See the [nextjs-phone-login example](https://github.com/neondatabase/neon-js/tree/main/examples/nextjs-phone-login) for a complete implementation.
 
 <Admonition type="info">
-If you haven't set up Managed Better Auth UI components yet, see the [UI components reference](/docs/auth/reference/ui-components) for setup, or the [Next.js](/docs/auth/quick-start/nextjs-api-only) or [React](/docs/auth/quick-start/react) quick start for building custom forms instead.
+If you haven't set up Better Auth UI yet, see the [UI components reference](/docs/auth/reference/ui-components) for setup, or the [Next.js](/docs/auth/quick-start/nextjs-api-only) or [React](/docs/auth/quick-start/react) quick start for building custom forms instead.
 </Admonition>
 
 ## Webhook events

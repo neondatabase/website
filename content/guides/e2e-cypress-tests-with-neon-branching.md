@@ -4,6 +4,7 @@ subtitle: Learn how to use GitHub Actions to create isolated database branches f
 enableTableOfContents: true
 author: dhanush-reddy
 createdAt: '2025-10-17T00:00:00.000Z'
+updatedOn: '2026-09-24T18:22:11.000Z'
 ---
 
 Running end-to-end (E2E) tests gets harder when the database schema changes frequently. Tests that rely on a specific schema can fail or produce inconsistent results when they run against a shared database, and the team ends up waiting on each other.

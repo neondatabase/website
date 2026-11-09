@@ -4,6 +4,7 @@ subtitle: Log every schema change with metadata in your Neon database
 author: sam-harri
 enableTableOfContents: true
 createdAt: '2025-07-15T00:00:00.000Z'
+updatedOn: '2026-09-24T18:22:11.000Z'
 ---
 
 Lakebase Postgres supports event triggers, which run automatically in response to DDL events like `CREATE`, `ALTER`, `DROP`, or any other statement that defines or modifies the structure of the database. On Neon, roles with `neon_superuser` privileges (roles created in the Console, CLI, or API) can create event triggers. See [Manage roles](/docs/manage/roles). In this guide, you'll use event triggers to build a schema audit trail that records who changed the schema of your production database, what changed, and when.

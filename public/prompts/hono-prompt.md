@@ -31,7 +31,7 @@ When this prompt is triggered, automatically configure the open Hono project as 
 
 ### 1. Install Dependencies
 
-1.  **Prompt the user to select a PostgreSQL driver.** Present the following options:
+1.  **Prompt the user to select a Postgres driver.** Present the following options:
 
     -   **`@neondatabase/serverless` (Recommended):** Optimized for serverless functions with HTTP connections. Best choice for Cloudflare Workers, Vercel, etc.
     -   **`postgres` (postgres.js):** A fast, full-featured client, great for Node.js environments.
@@ -62,8 +62,8 @@ When this prompt is triggered, automatically configure the open Hono project as 
 1.  Check for the presence of a `.env` file at the root of the project. If it doesn't exist, create one.
 2.  Add the following `DATABASE_URL` parameter to the `.env` file and **prompt the user to replace the placeholder value** with their complete connection string from Neon.
 
-    ```dotenv title=".env"
-    DATABASE_URL="postgresql://user:password@endpoint.neon.tech/neondb?sslmode=require&channel_binding=require"
+    ```dotenv filename=".env"
+    DATABASE_URL="postgresql://[user]:[password]@[neon_hostname]/[dbname]?sslmode=require&channel_binding=require"
     ```
 
 3.  Direct the user to find this value in the **Neon Console → Project → Connect**.
@@ -80,7 +80,7 @@ To provide a clear way to verify the setup, modify the main application file to 
 
     #### Option A: Using `@neondatabase/serverless`
 
-    ```typescript title="src/index.ts"
+    ```typescript filename="src/index.ts"
     // hono import statements depending on chosen runtime
     import 'dotenv/config'
     import { neon } from '@neondatabase/serverless'
@@ -107,7 +107,7 @@ To provide a clear way to verify the setup, modify the main application file to 
 
     #### Option B: Using `postgres` (postgres.js)
 
-    ```typescript title="src/index.ts"
+    ```typescript filename="src/index.ts"
     // hono import statements depending on chosen runtime
     import 'dotenv/config'
     import postgres from 'postgres'
@@ -134,7 +134,7 @@ To provide a clear way to verify the setup, modify the main application file to 
 
     #### Option C: Using `pg` (node-postgres)
 
-    ```typescript title="src/index.ts"
+    ```typescript filename="src/index.ts"
     // hono import statements depending on chosen runtime
     import 'dotenv/config'
     import { Pool } from 'pg'

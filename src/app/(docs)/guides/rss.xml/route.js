@@ -27,7 +27,7 @@ export async function GET() {
       description: subtitle,
       url,
       date: new Date(createdAt),
-      author,
+      author: author?.name,
       custom_elements: [{ 'content:encoded': excerpt }],
     });
   });

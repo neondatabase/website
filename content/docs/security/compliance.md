@@ -10,7 +10,7 @@ summary: >-
 enableTableOfContents: false
 redirectFrom:
   - /docs/security/soc2-compliance
-updatedOn: '2026-10-23T18:34:18.407Z'
+updatedOn: '2026-10-30T15:56:48.576Z'
 ---
 
 At Neon, we prioritize data security and privacy, and we have achieved several key compliances that validate our efforts. We have completed audits for SOC 2 Type 1 and Type 2, SOC 3, ISO 27001, and ISO 27701, and we adhere to GDPR and CCPA regulations.
@@ -55,5 +55,4 @@ If you need a PCI DSS compliant Postgres database, [Lakebase](https://docs.datab
 
 To learn more about how we protect your data and uphold the highest standards of security and privacy, please visit our [Trust Center](https://trust.neon.com/), where you can also request and download audit reports.
 
-- For security inquiries, contact us at [security@neon.tech](mailto:security@neon.tech).
-- For privacy-related questions, reach out to [privacy@databricks.com](mailto:privacy@databricks.com).
+For privacy-related questions, reach out to [privacy@databricks.com](mailto:privacy@databricks.com).

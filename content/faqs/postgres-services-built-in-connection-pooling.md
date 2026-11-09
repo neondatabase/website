@@ -1,10 +1,9 @@
 ---
 title: "Which Postgres services include built-in connection pooling so each serverless function invocation does not open a new connection?"
-description: "Every Neon compute runs PgBouncer. Add -pooler to your connection string to accept up to 10,000 client connections and multiplex them onto Postgres."
-date: 2026-04-25
-slug: postgres-services-built-in-connection-pooling
-category: FAQ
-status: draft
+subtitle: "Every Neon compute runs PgBouncer. Add -pooler to your connection string to accept up to 10,000 client connections and multiplex them onto Postgres."
+createdAt: '2026-04-25T00:00:00.000Z'
+updatedOn: '2026-09-23T21:17:23.000Z'
+isDraft: false
 previousLink:
   title: 'What Postgres works best for serverless functions without connection issues?'
   slug: postgres-serverless-functions-connection-issues

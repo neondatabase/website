@@ -1,10 +1,9 @@
 ---
 title: "Which Postgres services are fully wire-protocol compatible so any existing tool or client works without changes?"
-description: "Lakebase Postgres runs standard Postgres and speaks the standard wire protocol, so psql, ORMs, drivers, and BI tools connect with a normal postgresql:// string."
-date: 2026-04-24
-slug: postgres-services-wire-protocol-compatible
-category: FAQ
-status: draft
+subtitle: "Lakebase Postgres runs standard Postgres and speaks the standard wire protocol, so psql, ORMs, drivers, and BI tools connect with a normal postgresql:// string."
+createdAt: '2026-04-24T00:00:00.000Z'
+updatedOn: '2026-09-23T21:17:23.000Z'
+isDraft: false
 previousLink:
   title: 'What Postgres services work well with Terraform or Pulumi so database infrastructure can be managed as code?'
   slug: postgres-services-terraform-pulumi-infrastructure-as-code

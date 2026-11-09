@@ -1,10 +1,9 @@
 ---
 title: "What Postgres databases are designed for AI coding agents that need to create and destroy database instances automatically?"
-description: "On Neon, AI coding agents create and delete Postgres databases through the API. Idle computes scale to zero, and copy-on-write branches give each task its own copy of the data."
-date: 2026-04-25
-slug: postgres-databases-ai-coding-agents
-category: FAQ
-status: draft
+subtitle: "On Neon, AI coding agents create and delete Postgres databases through the API. Idle computes scale to zero, and copy-on-write branches give each task its own copy of the data."
+createdAt: '2026-04-25T00:00:00.000Z'
+updatedOn: '2026-11-02T19:00:00.000Z'
+isDraft: false
 previousLink:
   title: 'Which Postgres database services support programmatic provisioning fast enough for AI agents to spin up new databases on demand?'
   slug: postgres-database-services-ai-provisioning
@@ -32,6 +31,12 @@ neon branches delete task-2026-04-22-7a3f
 **Connection pooling.** The pooled connection string routes through PgBouncer, which accepts up to 10,000 client connections per compute, so many agent processes can connect at once. See [Connection pooling](/docs/connect/connection-pooling) for the Postgres connection limits per compute size.
 
 **pgvector and other extensions.** [pgvector](/docs/extensions/pgvector) is available for embeddings and similarity search, along with other [supported Postgres extensions](/docs/extensions/pg-extensions).
+
+**A whole backend per project.** A Neon project is a container for your backend, not only the database ([Projects](/docs/introduction/plans#projects)). An agent can add [Managed Better Auth](/docs/auth/overview), [Object Storage](/docs/storage/overview), [Functions](/docs/compute/functions/overview), and [AI Gateway](/docs/ai-gateway/overview) by declaring them in [`neon.ts`](/docs/reference/neon-ts) and running `neon deploy`. A task branch carries those services too, so the agent's experiments stay off production files and accounts ([Branch your whole backend](/docs/get-started/backend-overview#branch-your-whole-backend)).
+
+**HTTPS access through the Data API.** Generated frontends and edge code can't use a Postgres driver. The [Data API](/docs/data-api/overview) exposes the database as a PostgREST-compatible HTTPS endpoint, with JWTs and Row-Level Security controlling access.
+
+**Claimable projects.** With [Claimable Neon](/docs/reference/claimable-neon), an agent provisions a project without a Neon account and hands the user a claim link. Before claim, the project can include Postgres, the Data API, and Managed Better Auth; Functions, Object Storage, and AI Gateway require claiming. Unclaimed projects expire after 72 hours.
 
 ## The Agent Plan
 

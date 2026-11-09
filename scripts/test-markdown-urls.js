@@ -673,7 +673,8 @@ function buildTests() {
     { spotCheck: (r) => expectBodyContains(r.body, 'neon', true) }
   );
 
-  // Root /llms.txt (rewrite to /docs/llms.txt) must link the agent feedback page.
+  // Root /llms.txt (rewrite to /docs/llms.txt) must link the agent feedback page
+  // and the /guides.md listing of community guides.
   add(
     'LLMs txt',
     '/llms.txt',
@@ -681,8 +682,9 @@ function buildTests() {
     [
       (r) => expectStatus(r.status, 200),
       (r) => expectBodyContains(r.body, 'https://neon.com/feedback.md'),
+      (r) => expectBodyContains(r.body, 'https://neon.com/guides.md'),
     ],
-    { note: 'Common tasks links /feedback.md' }
+    { note: 'Common tasks links /feedback.md; Additional Resources links /guides.md' }
   );
 
   add(

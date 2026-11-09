@@ -338,6 +338,27 @@ const defaultConfig = {
         destination: '/?ref=tbm-p',
         permanent: true,
       },
+      // Function Registry templates moved from docs to the /functions/templates marketing pages
+      {
+        source: '/docs/compute/functions/registry/templates',
+        destination: '/functions/templates',
+        permanent: true,
+      },
+      {
+        source: '/docs/compute/functions/registry/templates/:id',
+        destination: '/functions/templates/:id',
+        permanent: true,
+      },
+      {
+        source: '/docs/compute/functions/registry-templates',
+        destination: '/functions/templates',
+        permanent: true,
+      },
+      {
+        source: '/docs/compute/functions/registry-templates/:id',
+        destination: '/functions/templates/:id',
+        permanent: true,
+      },
       // Branching page redirects — old slugs deleted in PR #4374 (Jan 2026)
       {
         source: '/branching/identifying-use-case',
@@ -2314,7 +2335,7 @@ const defaultConfig = {
       // `/docs/introduction` are absent because they redirect to `/docs` (above).
       {
         source: '/docs/ai',
-        destination: '/docs/ai/ai-agents-tools',
+        destination: '/docs/ai/agent-setup',
         permanent: true,
       },
       {
@@ -2613,6 +2634,57 @@ const defaultConfig = {
         destination: '/auth.md',
         permanent: true,
       },
+      // Retired skills folded into neon-postgres (branching and egress references).
+      {
+        source: '/docs/ai/skills/neon-postgres-branches/:path*',
+        destination: '/docs/ai/skills/neon-postgres/SKILL.md',
+        permanent: true,
+      },
+      {
+        source: '/.well-known/agent-skills/neon-postgres-branches/:path*',
+        destination: '/docs/ai/skills/neon-postgres/SKILL.md',
+        permanent: true,
+      },
+      {
+        source: '/.well-known/skills/neon-postgres-branches/:path*',
+        destination: '/docs/ai/skills/neon-postgres/SKILL.md',
+        permanent: true,
+      },
+      {
+        source: '/docs/.well-known/agent-skills/neon-postgres-branches/:path*',
+        destination: '/docs/ai/skills/neon-postgres/SKILL.md',
+        permanent: true,
+      },
+      {
+        source: '/docs/.well-known/skills/neon-postgres-branches/:path*',
+        destination: '/docs/ai/skills/neon-postgres/SKILL.md',
+        permanent: true,
+      },
+      {
+        source: '/docs/ai/skills/neon-postgres-egress-optimizer/:path*',
+        destination: '/docs/ai/skills/neon-postgres/SKILL.md',
+        permanent: true,
+      },
+      {
+        source: '/.well-known/agent-skills/neon-postgres-egress-optimizer/:path*',
+        destination: '/docs/ai/skills/neon-postgres/SKILL.md',
+        permanent: true,
+      },
+      {
+        source: '/.well-known/skills/neon-postgres-egress-optimizer/:path*',
+        destination: '/docs/ai/skills/neon-postgres/SKILL.md',
+        permanent: true,
+      },
+      {
+        source: '/docs/.well-known/agent-skills/neon-postgres-egress-optimizer/:path*',
+        destination: '/docs/ai/skills/neon-postgres/SKILL.md',
+        permanent: true,
+      },
+      {
+        source: '/docs/.well-known/skills/neon-postgres-egress-optimizer/:path*',
+        destination: '/docs/ai/skills/neon-postgres/SKILL.md',
+        permanent: true,
+      },
       {
         source: '/docs/local/neon-local-vscode',
         destination: '/docs/local/neon-local-connect',
@@ -2707,6 +2779,31 @@ const defaultConfig = {
       {
         source: '/cost-fleets',
         destination: '/',
+        permanent: true,
+      },
+      {
+        source: '/enterprise',
+        destination: 'https://www.databricks.com/product/lakebase',
+        permanent: true,
+      },
+      {
+        source: '/ai',
+        destination: '/docs/ai/agent-setup',
+        permanent: true,
+      },
+      {
+        source: '/migration',
+        destination: '/docs/import/migrate-intro',
+        permanent: true,
+      },
+      {
+        source: '/cli',
+        destination: '/docs/cli',
+        permanent: true,
+      },
+      {
+        source: '/variable-load',
+        destination: '/use-cases/bursty-workloads',
         permanent: true,
       },
       {

@@ -10,6 +10,7 @@ summary: >-
 enableTableOfContents: true
 redirectFrom:
   - /docs/manage/orgs-auto-provision-domain
+updatedOn: '2026-08-07T18:23:48.000Z'
 ---
 
 Organization admins can add verified email domains so that users whose email matches one of those domains are automatically added as members when they sign up or log in. No manual invite is required for those users.
@@ -20,7 +21,7 @@ Only organization admins can add, verify, or remove domains. The **Auto-join by 
 
 - You add a domain (for example, `example.com`) on the organization **People** page under **Auto-join by domain**. The domain is added in a "Pending verification" state and Neon generates a verification code.
 - You add a TXT record at your domain with that exact code. After DNS propagates, you click **Verify** in the Console to confirm you own the domain.
-- When a user signs up or logs in to Neon with an email whose domain matches one of your verified domains (for example, `alex@example.com`), they are automatically added to your organization as an Editor. They do not receive an invite email; they simply see the organization in their org switcher.
+- When a user signs up or logs in to Neon with an email whose domain matches one of your verified domains (for example, `alex@example.com`), they are automatically added to your organization as an Editor. They do not receive an invite email; they simply see the organization in their [org switcher](/docs/manage/orgs-manage#switch-organizations).
 
 An organization can have multiple verified domains. The same domain can also be added to multiple organizations. If a user's email domain matches verified domains in more than one org, they are added to all of those organizations.
 

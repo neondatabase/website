@@ -5,6 +5,7 @@ author: rishi-raj-jain
 excludeFromBlog: true
 enableTableOfContents: true
 createdAt: '2026-10-12T00:00:00.000Z'
+updatedOn: '2026-10-20T15:27:03.000Z'
 ---
 
 Postgres can store images in a `bytea` column, which works well for a few small files like icons. As uploads grow, images make storage, queries, and backups bigger, so most apps keep them in object storage and save only a key in Postgres.
