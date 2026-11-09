@@ -1,5 +1,7 @@
 import { beforeAll, describe, expect, it } from 'vitest';
 
+import { DOCS_DIR_PATH } from 'constants/content';
+import { getPostBySlug, getPostSlugs } from 'utils/api-content';
 import { getNavigation } from 'utils/api-docs';
 import {
   PAGE_TYPES,
@@ -11,6 +13,8 @@ import {
   navSlugToPathname,
   renderSitemapMarkdown,
   shortDescription,
+  typeOverride,
+  withoutRedirectSources,
 } from 'utils/sitemap-md';
 
 describe('shortDescription', () => {
@@ -294,6 +298,119 @@ describe('navigationToSections', () => {
   });
 });
 
+describe('navigationToSections with repeated pages', () => {
+  const navigation = [
+    {
+      nav: 'Build',
+      title: 'Build',
+      subnav: [
+        {
+          title: 'Building on Neon',
+          slug: 'guides/platform',
+          items: [
+            // The landing page again, as its own section's first item.
+            { section: 'Overview', items: [{ title: 'Integrating', slug: 'guides/platform' }] },
+            {
+              section: 'Drivers',
+              items: [
+                {
+                  title: 'Serverless driver',
+                  slug: 'serverless/driver',
+                  items: [{ title: 'Pooling', slug: 'serverless/pooling' }],
+                },
+              ],
+            },
+          ],
+        },
+      ],
+    },
+    {
+      nav: 'Reference',
+      title: 'Reference',
+      items: [
+        {
+          section: 'Libraries',
+          items: [{ title: 'Serverless driver', slug: 'serverless/driver' }],
+        },
+        { title: 'Connect', slug: 'connect/intro', summary: 'Connect to Neon' },
+      ],
+    },
+  ];
+  const sections = navigationToSections(navigation, (pathname) =>
+    pathname === '/docs/connect/intro'
+      ? { description: 'Everything you need to connect.', type: 'Conceptual' }
+      : undefined
+  );
+  const entries = sections.flatMap(({ items }) => {
+    const flat = [];
+    const walk = (nodes) =>
+      nodes.forEach((node) => {
+        if (node.url) flat.push(node);
+        walk(node.children || []);
+      });
+    walk(items);
+    return flat;
+  });
+  const entriesFor = (pathname) =>
+    entries.filter(({ url }) => url === `https://neon.com/docs/${pathname}.md`);
+
+  it('lists a landing page once, not again under its own child heading', () => {
+    expect(entriesFor('guides/platform')).toHaveLength(1);
+    expect(sections.find(({ title }) => title === 'Overview').items).toEqual([]);
+  });
+
+  it('still lists a page under separate top-level areas', () => {
+    expect(entriesFor('serverless/driver')).toHaveLength(2);
+  });
+
+  it('gives a page listed in several places the same type everywhere', () => {
+    // One entry has child pages, the other doesn't; both are typed as the overview.
+    expect(entriesFor('serverless/driver').map(({ type }) => type)).toEqual([
+      'Conceptual',
+      'Conceptual',
+    ]);
+  });
+
+  it('uses the frontmatter type override over the inferred type', () => {
+    expect(entriesFor('connect/intro')[0].type).toBe('Conceptual');
+  });
+
+  it('leaves no classification internals on entries', () => {
+    for (const entry of entries) {
+      expect(entry).not.toHaveProperty('signals');
+      expect(entry).not.toHaveProperty('typeOverride');
+    }
+  });
+});
+
+describe('typeOverride', () => {
+  it('accepts a known type and treats a missing value as no override', () => {
+    expect(typeOverride('Reference', '/docs/a')).toBe('Reference');
+    expect(typeOverride(undefined, '/docs/a')).toBeUndefined();
+  });
+
+  it('fails on an unknown type', () => {
+    expect(() => typeOverride('Guide', '/docs/a')).toThrow(/Invalid docType "Guide" in \/docs\/a/);
+  });
+});
+
+describe('withoutRedirectSources', () => {
+  it("drops pages whose path is another page's redirectFrom", () => {
+    const filtered = withoutRedirectSources(
+      new Map([
+        [
+          'docs/',
+          new Map([
+            ['/docs/get-started/built-to-scale', { redirectFrom: ['/docs/get-started/old'] }],
+            ['/docs/get-started/old', { redirectFrom: [] }],
+          ]),
+        ],
+      ])
+    );
+    expect([...filtered.get('docs/').keys()]).toEqual(['/docs/get-started/built-to-scale']);
+  });
+});
+
 describe('renderSitemapMarkdown', () => {
   const entry = (title, url, fields = {}, children = []) => ({
     title,
@@ -397,6 +514,25 @@ describe('getSitemapMarkdown', () => {
     expect(entries.length).toBeGreaterThan(800);
     for (const { url } of entries) {
       expect(url).toMatch(/^https:\/\/neon\.com\/docs[/.]/);
+    }
+  });
+
+  it("leaves out pages whose path is another page's redirectFrom", async () => {
+    const linked = new Set(entries.map(({ url }) => new URL(url).pathname.replace(/\.md$/, '')));
+    for (const slug of await getPostSlugs(DOCS_DIR_PATH)) {
+      for (const source of getPostBySlug(slug, DOCS_DIR_PATH)?.data.redirectFrom || []) {
+        const pathname = source.replace(/\/+$/, '');
+        expect(linked.has(pathname), `${pathname} redirects but is linked`).toBe(false);
+      }
+    }
+  });
+
+  it('gives each page one type wherever it appears', () => {
+    const types = new Map();
+    for (const { url, fields } of entries) {
+      const type = fields.match(/ \| Type: ([^|]+?)(?: \||$)/)?.[1];
+      expect(types.get(url) ?? type, `${url} has more than one type`).toBe(type);
+      types.set(url, type);
     }
   });
 

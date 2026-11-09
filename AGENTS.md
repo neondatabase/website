@@ -138,6 +138,7 @@ Every docs page requires `title`. All other fields are optional.
 | `ogImage`               | Social preview image path.                                                                                                         |
 | `updatedOn`             | ISO 8601 timestamp (e.g. `2026-03-14T03:21:15.122Z`). Updated automatically by the pre-commit hook on staged files. Don't set or update manually. |
 | `layout`                | Set to `wide` to hide the right sidebar (use with `TwoColumnLayout` pages).                                                        |
+| `docType`               | Overrides the page `Type` in `/docs/sitemap.md`: `Tutorial`, `How-to`, `Reference`, or `Conceptual`. Set it only when the inferred type is wrong. Invalid values fail the build. |
 
 The build will fail if any `.md` file in `content/docs/` is missing `title`.
 

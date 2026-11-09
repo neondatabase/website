@@ -16,10 +16,13 @@
 //   - Summary: page frontmatter (subtitle/summary), or the API operation data
 //   - Lastmod: frontmatter `updatedOn`, stamped by the pre-commit hook
 //   - Status: the nav or frontmatter `tag`
-//   - Type: inferred by classifyPage() from the page's path, title, summary, nav
-//     section, whether it has child pages, and whether it uses <Steps>
+//   - Type: frontmatter `docType` when set, otherwise inferred by classifyPage()
+//     from the page's path, title, summary, nav section, whether it has child
+//     pages, and whether it uses <Steps>. A page listed in several places in the
+//     navigation is classified once, so it has the same type everywhere.
 // followed by docs pages that aren't in the navigation. /docs/changelog and
-// everything under it are left out (see EXCLUDED_PATHS).
+// everything under it are left out (see EXCLUDED_PATHS), and so are pages whose
+// path is another page's `redirectFrom` (superseded copies that 308 elsewhere).
 //
 // Type is one of PAGE_TYPES, loosely following Diátaxis
 // (https://diataxis.fr), so an agent can pick a page by what it needs:
@@ -81,6 +84,8 @@ const escapeField = (value) => String(value).replace(/\|/g, '\\|');
 const isPublished = (data) => process.env.NEXT_PUBLIC_VERCEL_ENV !== 'production' || !data?.isDraft;
 
 export const isDocsPath = (pathname) => pathname === '/docs' || pathname.startsWith('/docs/');
+
+const normalizePathname = (pathname) => pathname.replace(/\/+$/, '') || '/';
 
 export const isExcludedPath = (pathname) =>
   EXCLUDED_PATHS.some((excluded) => pathname === excluded || pathname.startsWith(`${excluded}/`));
@@ -245,19 +250,33 @@ function entryLine({ title, url, type, status, lastmod, description }, depth) {
 // ({ label, children }). Top-level `nav` entries become H2s, `subnav` entries
 // H3s, and `section`s H3/H4s. Nav links outside /docs (guides, the PostgreSQL
 // tutorial) are left out. `lookup(pathname)` returns content metadata for a
-// page ({ description, lastmod, status, hasSteps }), or undefined.
+// page ({ description, lastmod, status, hasSteps, type }), or undefined.
+//
+// A page already listed under a heading or one of its parent headings isn't
+// repeated, so a landing page the navigation lists again as its section's first
+// item ("Overview") appears once.
 export function navigationToSections(navigation, lookup = () => undefined) {
   const sections = [];
+  // Every entry for each pathname, in navigation order, so each page is
+  // classified once (see the end of this function).
+  const entriesByPathname = new Map();
 
-  const addSection = (title, depth) => {
-    const section = { title, depth, items: [], seen: new Set() };
+  const addSection = (title, depth, parent = null) => {
+    const section = { title, depth, items: [], seen: new Set(), parent };
     sections.push(section);
     return section;
   };
 
+  const isSeen = (section, pathname) => {
+    for (let current = section; current; current = current.parent) {
+      if (current.seen.has(pathname)) return true;
+    }
+    return false;
+  };
+
   // `trail` is the full breadcrumb, starting with the top-level nav area. It
   // feeds classifyPage only; the rendered headings and nesting already show it.
-  // The type is set by setType() once the entry's children are known.
+  // The type is set once the whole navigation is walked.
   const makeEntry = (item, pathname, trail) => {
     const meta = lookup(pathname) || getApiOperation(pathname) || {};
     return {
@@ -267,6 +286,7 @@ export function navigationToSections(navigation, lookup = () => undefined) {
       lastmod: meta.lastmod,
       description: meta.description,
       children: [],
+      typeOverride: meta.type,
       signals: {
         pathname,
         title: item.title,
@@ -278,14 +298,9 @@ export function navigationToSections(navigation, lookup = () => undefined) {
   };
 
   // Area and product landing pages count as having children: the section under
-  // them is what they introduce.
-  const setType = (entry, isLanding = false) => {
-    if (!entry) return;
-    entry.type = classifyPage({
-      ...entry.signals,
-      hasChildren: isLanding || hasEntries(entry.children),
-    });
-    delete entry.signals;
+  // them is what they introduce. Called once the entry's children are known.
+  const markChildren = (entry, isLanding = false) => {
+    if (entry) entry.signals.hasChildren = isLanding || hasEntries(entry.children);
   };
 
   const addEntry = (section, list, item, trail) => {
@@ -295,13 +310,15 @@ export function navigationToSections(navigation, lookup = () => undefined) {
       !isDocsPath(pathname) ||
       isExcludedPath(pathname) ||
       !item.title ||
-      section.seen.has(pathname)
+      isSeen(section, pathname)
     ) {
       return null;
     }
     section.seen.add(pathname);
     const entry = makeEntry(item, pathname, trail);
     list.push(entry);
+    if (!entriesByPathname.has(pathname)) entriesByPathname.set(pathname, []);
+    entriesByPathname.get(pathname).push(entry);
     return entry;
   };
 
@@ -311,7 +328,7 @@ export function navigationToSections(navigation, lookup = () => undefined) {
       if (item.section) {
         const nextTrail = [...trail, item.section];
         if (list === section.items && section.depth < MAX_HEADING_DEPTH) {
-          const child = addSection(item.section, section.depth + 1);
+          const child = addSection(item.section, section.depth + 1, section);
           walkItems(item.items, child, child.items, nextTrail);
         } else {
           const label = { label: item.section, children: [] };
@@ -324,7 +341,7 @@ export function navigationToSections(navigation, lookup = () => undefined) {
       const entry = addEntry(section, list, item, trail);
       if (entry) {
         walkItems(item.items, section, entry.children, [...trail, item.title]);
-        setType(entry);
+        markChildren(entry);
       } else if (item.items?.length && item.title && !item.slug) {
         // A grouping item with no page of its own (e.g. "Getting started" under CLI).
         const label = { label: item.title, children: [] };
@@ -339,14 +356,32 @@ export function navigationToSections(navigation, lookup = () => undefined) {
   for (const entry of navigation || []) {
     const area = entry.nav || entry.title;
     const section = addSection(area, 2);
-    setType(addEntry(section, section.items, entry, [area]), true);
+    markChildren(addEntry(section, section.items, entry, [area]), true);
     walkItems(entry.items, section, section.items, [area]);
     for (const sub of entry.subnav || []) {
       // A subnav entry is either a product page with its own sections or a bare section.
       const subTitle = sub.title || sub.section;
-      const subSection = addSection(subTitle, 3);
-      setType(addEntry(subSection, subSection.items, sub, [area]), true);
+      const subSection = addSection(subTitle, 3, section);
+      markChildren(addEntry(subSection, subSection.items, sub, [area]), true);
       walkItems(sub.items, subSection, subSection.items, [area, subTitle]);
+    }
+  }
+
+  // One type per page: the frontmatter override, or classifyPage() on the
+  // page's first navigation entry. The page counts as having children if any of
+  // its entries does.
+  for (const entries of entriesByPathname.values()) {
+    const [first] = entries;
+    const type =
+      first.typeOverride ||
+      classifyPage({
+        ...first.signals,
+        hasChildren: entries.some((entry) => entry.signals.hasChildren),
+      });
+    for (const entry of entries) {
+      entry.type = type;
+      delete entry.signals;
+      delete entry.typeOverride;
     }
   }
 
@@ -432,7 +467,20 @@ export function renderSitemapMarkdown(sections) {
 
 // ── Content collections ─────────────────────────────────────────────────────
 
+// Frontmatter `docType` overrides the inferred type. A value that isn't one of
+// PAGE_TYPES fails the build, so a typo can't silently fall back to inference.
+export function typeOverride(value, pathname) {
+  if (value === undefined || value === null || value === '') return undefined;
+  if (!PAGE_TYPES.includes(value)) {
+    throw new Error(
+      `Invalid docType "${value}" in ${pathname}: expected one of ${PAGE_TYPES.join(', ')}`
+    );
+  }
+  return value;
+}
+
 // Every published page in a CONTENT_ROUTES directory, keyed by public pathname.
+// Each page also carries its `redirectFrom` sources, normalized to pathnames.
 async function getContentPages(route, directory) {
   const pages = new Map();
   for (const slug of await getPostSlugs(directory)) {
@@ -449,9 +497,29 @@ async function getContentPages(route, directory) {
       lastmod: toDate(data.updatedOn),
       status: typeof data.tag === 'string' ? data.tag : '',
       hasSteps: /<Steps>/.test(content),
+      type: typeOverride(data.docType, pathname),
+      redirectFrom: (Array.isArray(data.redirectFrom) ? data.redirectFrom : [])
+        .filter((source) => typeof source === 'string' && source.startsWith('/'))
+        .map(normalizePathname),
     });
   }
   return pages;
+}
+
+// Drop pages whose path another page lists in `redirectFrom`: the HTML URL
+// redirects to that page, so the leftover file is a superseded copy.
+export function withoutRedirectSources(contentByRoute) {
+  const redirectSources = new Set(
+    [...contentByRoute.values()].flatMap((pages) =>
+      [...pages.values()].flatMap((page) => page.redirectFrom || [])
+    )
+  );
+  return new Map(
+    [...contentByRoute].map(([route, pages]) => [
+      route,
+      new Map([...pages].filter(([pathname]) => !redirectSources.has(pathname))),
+    ])
+  );
 }
 
 const collectUrls = (items, urls = new Set()) => {
@@ -462,14 +530,16 @@ const collectUrls = (items, urls = new Set()) => {
   return urls;
 };
 
-const toEntry = (pathname, page) => ({
+const toEntry = (pathname, { type, redirectFrom: _redirectFrom, hasSteps, ...page }) => ({
   ...page,
-  type: classifyPage({
-    pathname,
-    title: page.title,
-    summary: page.description,
-    hasSteps: page.hasSteps,
-  }),
+  type:
+    type ||
+    classifyPage({
+      pathname,
+      title: page.title,
+      summary: page.description,
+      hasSteps,
+    }),
   children: [],
 });
 
@@ -478,9 +548,14 @@ export async function getSitemapSections() {
   const docsRoutes = Object.entries(CONTENT_ROUTES).filter(
     ([route]) => isDocsPath(`/${route}`) && !isExcludedPath(`/${route}`)
   );
-  const contentByRoute = new Map(
-    await Promise.all(
-      docsRoutes.map(async ([route, directory]) => [route, await getContentPages(route, directory)])
+  const contentByRoute = withoutRedirectSources(
+    new Map(
+      await Promise.all(
+        docsRoutes.map(async ([route, directory]) => [
+          route,
+          await getContentPages(route, directory),
+        ])
+      )
     )
   );
   const allContentPages = new Map(

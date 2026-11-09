@@ -210,8 +210,8 @@ endpoints:
     description: >-
       Semantic index of every docs page (/docs/*), modeled on Vercel's: headings
       and nested lists follow the docs navigation, and each entry carries its
-      Type, Status, Lastmod, Summary, and Section. Built at deploy time from the
-      docs navigation, page frontmatter, and the API reference data (/docs/changelog
+      Type, Status, Lastmod, and Summary. Built at deploy time from the docs
+      navigation, page frontmatter, and the API reference data (/docs/changelog
       and its subpaths are left out), so it is only validated live. Lives
       under /docs/ like llms.txt; /sitemap.md and /.well-known/sitemap.md are
       rewritten to it.
