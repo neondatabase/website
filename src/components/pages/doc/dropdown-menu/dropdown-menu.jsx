@@ -217,6 +217,7 @@ const DropdownMenu = ({
           type="button"
           aria-label="Copy page options"
           aria-expanded={isOpen}
+          aria-controls={isOpen ? optionsId : undefined}
           onClick={() => setIsOpen((prev) => !prev)}
         >
           <CopyIcon className="size-[15px] shrink-0" />
@@ -230,7 +231,10 @@ const DropdownMenu = ({
           />
         </button>
         {isOpen && (
-          <div className="absolute top-[calc(100%+10px)] left-0 z-50 w-70 origin-top-left border border-gray-new-90 bg-white focus:outline-none dark:border-gray-new-20 dark:bg-black-new">
+          <div
+            id={optionsId}
+            className="absolute top-[calc(100%+10px)] left-0 z-50 w-70 origin-top-left border border-gray-new-90 bg-white focus:outline-none dark:border-gray-new-20 dark:bg-black-new"
+          >
             {menuItems}
           </div>
         )}
