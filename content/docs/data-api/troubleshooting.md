@@ -9,7 +9,7 @@ summary: >-
   rows, stale schema cache hiding new tables, and OpenAPI spec "Entry not
   found" errors.
 enableTableOfContents: true
-updatedOn: '2026-10-09T09:41:16.035Z'
+updatedOn: '2026-10-29T21:02:34.200Z'
 ---
 
 <InfoBlock>
@@ -52,7 +52,8 @@ curl -X POST "https://console.neon.tech/api/v2/projects/${projectId}/branches/${
   -H "Authorization: Bearer $NEON_API_KEY" \
   -d '{
     "database": {
-      "name": "your_database_name"
+      "name": "your_database_name",
+      "owner_name": "your_role_name"
     }
   }'
 ```

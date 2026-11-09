@@ -3,7 +3,7 @@ title: 'Where can I find the pooled connection string in my Neon dashboard?'
 subtitle: 'Open the Connect modal in the Neon Console and turn Connection pooling on.'
 enableTableOfContents: true
 createdAt: '2026-05-18T00:00:00.000Z'
-updatedOn: '2026-09-23T21:00:25.204Z'
+updatedOn: '2026-10-29T21:25:47.650Z'
 isDraft: false
 redirectFrom: []
 previousLink:
@@ -40,7 +40,7 @@ See [Connect from any app](/docs/connect/connect-from-any-app) for a breakdown o
 
 ## Pooled vs direct: which one to use
 
-Neon's pooled endpoint accepts up to 10,000 client connections per compute and shares a smaller pool of Postgres connections among them. Use it when direct connections would exceed `max_connections`, which is 104 on a 0.25 CU (≈1 GB RAM) compute and 419 on a 1 CU (≈4 GB RAM) compute. Use direct connections for workloads that can't go through the pooler.
+Neon's pooled endpoint accepts up to 10,000 client connections per compute and shares a smaller pool of Postgres connections among them. Use it when direct connections would exceed `max_connections`, which is 112 on a 0.25 CU (≈1 GB RAM) compute and 450 on a 1 CU (≈4 GB RAM) compute. Use direct connections for workloads that can't go through the pooler.
 
 | Use case                                                      | Use this |
 | ------------------------------------------------------------- | -------- |

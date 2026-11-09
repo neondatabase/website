@@ -315,7 +315,7 @@ Like other index types, it’s faster to create an index after loading your init
 
   You can also speed up index creation by increasing the number of parallel workers. The default is `2`.
 
-  The `max_parallel_maintenance_workers` sets the maximum number of parallel workers that can be started by a single utility command such as `CREATE INDEX`. By default, the `max_parallel_maintenance_workers` setting is `2`. For efficient parallel index creation, you can increase this setting. Parallel workers are taken from the pool of processes established by `max_worker_processes` (`10`), limited by `max_parallel_workers` (`8`).
+  The `max_parallel_maintenance_workers` sets the maximum number of parallel workers that can be started by a single utility command such as `CREATE INDEX`. By default, the `max_parallel_maintenance_workers` setting is `2`. For efficient parallel index creation, you can increase this setting. Parallel workers are taken from the pool of processes established by `max_worker_processes` (`13`), limited by `max_parallel_workers` (`8`).
 
   You can increase the `maintenance_work_mem` setting for the current session with a command similar to the following:
 
@@ -443,7 +443,7 @@ Like other index types, it’s faster to create an index after loading your init
 
   You can also speed up index creation by increasing the number of parallel workers. The default is `2`.
 
-  The `max_parallel_maintenance_workers` sets the maximum number of parallel workers that can be started by a single utility command such as `CREATE INDEX`. By default, the `max_parallel_maintenance_workers` setting is `2`. For efficient parallel index creation, you can increase this setting. Parallel workers are taken from the pool of processes established by `max_worker_processes` (`10`), limited by `max_parallel_workers` (`8`).
+  The `max_parallel_maintenance_workers` sets the maximum number of parallel workers that can be started by a single utility command such as `CREATE INDEX`. By default, the `max_parallel_maintenance_workers` setting is `2`. For efficient parallel index creation, you can increase this setting. Parallel workers are taken from the pool of processes established by `max_worker_processes` (`13`), limited by `max_parallel_workers` (`8`).
 
   You can increase the `maintenance_work_mem` setting for the current session with a command similar to the following:
 

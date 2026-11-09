@@ -52,6 +52,7 @@ export const STATIC_MD_PATHS = [
   '/pricing.md',
   '/prompts/agent-setup-landing.md',
   '/prompts/agent-setup.md',
+  '/prompts/agent-skills-setup.md',
   '/prompts/ai-gateway-landing.md',
   '/prompts/astro-serverless-prompt.md',
   '/prompts/auth-landing.md',

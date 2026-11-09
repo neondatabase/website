@@ -21,8 +21,8 @@ updatedOn: '2026-10-21T11:04:20.383Z'
 
 Neon's logical replication feature, available to all Neon users, allows you to replicate data to and from your Lakebase Postgres database:
 
-- Stream data from your Neon database to external destinations, enabling Change Data Capture (CDC) and real-time analytics. External sources might include data warehouses, analytical database services, real-time stream processing systems, messaging and event-streaming platforms, and external Postgres databases, among others. See [Replicate data from Neon](#replicate-data-from-neon).
-- Perform live migrations to Neon from external sources such as AWS RDS and Google Cloud SQL &#8212; or any platform that runs Postgres. See [Replicate data to Neon](#replicate-data-to-neon).
+- Stream data from your Lakebase Postgres database to external destinations, enabling Change Data Capture (CDC) and real-time analytics. External sources might include data warehouses, analytical database services, real-time stream processing systems, messaging and event-streaming platforms, and external Postgres databases, among others. See [Replicate data from Neon](#replicate-data-from-neon).
+- Perform live migrations to Neon from external sources such as AWS RDS and Google Cloud SQL, or from any platform that runs Postgres. See [Replicate data to Neon](#replicate-data-to-neon).
 - Replicate data from one Neon project to another for Neon project, account, Postgres version, or region migration. See [Replicate data from one Neon project to another](/docs/guides/logical-replication-neon-to-neon).
 
 ![Neon logical replication subscribers image](/docs/guides/logical_replication_publishers_subscribers.jpg)
@@ -77,7 +77,7 @@ To replicate data from Neon, you must first enable logical replication on your p
 
 <a href="/docs/guides/logical-replication-neon-to-neon" title="Neon to Neon" description="Replicate data from Neon to Neon" icon="neon"></a>
 
-<a href="/docs/guides/logical-replication-postgres" title="Neon to PostgreSQL" description="Replicate data from Neon to PostgreSQL" icon="postgresql"></a>
+<a href="/docs/guides/logical-replication-postgres" title="Neon to Postgres" description="Replicate data from Neon to Postgres" icon="postgresql"></a>
 
 <a href="/docs/guides/logical-replication-airbyte-snowflake" title="Snowflake" description="Replicate data from Neon to Snowflake with Airbyte" icon="snowflake"></a>
 
@@ -99,7 +99,7 @@ To replicate data from Neon, you must first enable logical replication on your p
 
 <a href="/docs/guides/logical-replication-neon-to-neon" title="Neon to Neon" description="Replicate data from Neon to Neon" icon="neon"></a>
 
-<a href="/docs/guides/logical-replication-postgres-to-neon" title="PostgreSQL to Neon" description="Replicate data from PostgreSQL to Neon" icon="postgresql"></a>
+<a href="/docs/guides/logical-replication-postgres-to-neon" title="Postgres to Neon" description="Replicate data from Postgres to Neon" icon="postgresql"></a>
 
 <a href="/docs/guides/logical-replication-rds-to-neon" title="RDS" description="Replicate data from AWS RDS PostgreSQL to Neon" icon="aws-rds"></a>
 
