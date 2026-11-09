@@ -20,6 +20,13 @@ Neon supports the Postgres extensions shown below. Extension versions may differ
 
 [Explore by category](/docs/extensions/extension-explorer) | [Install an extension](/docs/extensions/pg-extensions#install-an-extension) | [Update an extension](/docs/extensions/pg-extensions#update-an-extension-version) | [Request an extension](/docs/extensions/pg-extensions#request-an-extension)
 
+<Admonition type="note" title="Using extensions with Neon Realtime">
+An extension can be available for normal Postgres queries without every one of
+its functions being suitable for a Realtime live query. See [Realtime extension
+support](/docs/realtime/reference/extensions) for the supported function surface
+and its requirements.
+</Admonition>
+
 <a id="default-extensions/"></a>
 
 <StickyTable className="min-w-208!">

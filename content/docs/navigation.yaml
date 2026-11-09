@@ -932,6 +932,8 @@
           items:
             - title: 'API'
               slug: realtime/reference/api
+            - title: 'Extensions'
+              slug: realtime/reference/extensions
     - title: Functions
       icon: features
       slug: compute/functions/overview
