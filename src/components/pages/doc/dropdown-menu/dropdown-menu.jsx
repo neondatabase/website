@@ -2,7 +2,7 @@
 
 import copyToClipboard from 'copy-to-clipboard';
 import PropTypes from 'prop-types';
-import { useState, useRef, useEffect, useCallback } from 'react';
+import { useState, useRef, useEffect, useCallback, useId } from 'react';
 
 import Link from 'components/shared/link';
 import ChevronDownIcon from 'icons/chevron-down.inline.svg';
@@ -153,6 +153,7 @@ const DropdownMenu = ({
   variant = 'box',
   className,
 }) => {
+  const optionsId = useId();
   const [isOpen, setIsOpen] = useState(false);
   const containerRef = useRef(null);
 
@@ -216,6 +217,7 @@ const DropdownMenu = ({
           type="button"
           aria-label="Copy page options"
           aria-expanded={isOpen}
+          aria-controls={isOpen ? optionsId : undefined}
           onClick={() => setIsOpen((prev) => !prev)}
         >
           <CopyIcon className="size-[15px] shrink-0" />
@@ -229,7 +231,10 @@ const DropdownMenu = ({
           />
         </button>
         {isOpen && (
-          <div className="absolute top-[calc(100%+10px)] left-0 z-50 w-70 origin-top-left border border-gray-new-90 bg-white focus:outline-none dark:border-gray-new-20 dark:bg-black-new">
+          <div
+            id={optionsId}
+            className="absolute top-[calc(100%+10px)] left-0 z-50 w-70 origin-top-left border border-gray-new-90 bg-white focus:outline-none dark:border-gray-new-20 dark:bg-black-new"
+          >
             {menuItems}
           </div>
         )}
@@ -246,6 +251,7 @@ const DropdownMenu = ({
           type="button"
           aria-label="More page actions"
           aria-expanded={isOpen}
+          aria-controls={isOpen ? optionsId : undefined}
           onClick={() => setIsOpen((prev) => !prev)}
         >
           <ChevronDownIcon
@@ -258,7 +264,10 @@ const DropdownMenu = ({
         </button>
       </div>
       {isOpen && (
-        <div className="absolute top-8.25 right-0 z-50 w-65 origin-top-right border border-gray-new-90 bg-white focus:outline-none dark:border-gray-new-20 dark:bg-black-new sm:left-0">
+        <div
+          id={optionsId}
+          className="absolute top-8.25 right-0 z-50 w-65 origin-top-right border border-gray-new-90 bg-white focus:outline-none dark:border-gray-new-20 dark:bg-black-new sm:left-0"
+        >
           {menuItems}
         </div>
       )}

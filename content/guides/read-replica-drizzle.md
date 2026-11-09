@@ -4,7 +4,7 @@ subtitle: Learn how to scale Next.js applications with Drizzle ORM's withReplica
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2024-10-14T00:00:00.000Z'
-updatedOn: '2026-09-24T17:56:34.189Z'
+updatedOn: '2026-10-09T15:55:57.334Z'
 ---
 
 [Neon read replicas](/docs/introduction/read-replicas) are independent read-only computes that read from the same storage as your primary compute. Sending read queries to replicas takes load off the primary compute, which helps read-heavy applications.
@@ -387,7 +387,7 @@ export const db = withReplicas(primaryDb, [read]);
 
 This setup uses Drizzle's [`withReplicas`](https://orm.drizzle.team/docs/read-replicas) function to create a single database client that can handle both primary and read replica connections. It automatically routes read queries to the read replica and write queries to the primary database.
 
-#### Update `.env`
+#### Update `.env` (#update-env-2)
 
 Add the read replica connection string:
 

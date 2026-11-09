@@ -196,7 +196,7 @@ To create a read-write role:
    dbname=> INSERT INTO <table_name> (col1, col2) VALUES (1, 2);
    ```
 
-### SQL statement summary
+### SQL statement summary (#sql-statement-summary-2)
 
 To create the read-write role and user described above, run the following statements from an SQL client:
 
@@ -284,7 +284,7 @@ To get started:
    dbname=>
    ```
 
-### SQL statement summary
+### SQL statement summary (#sql-statement-summary-3)
 
 ```sql
 -- dev_users role

@@ -13,7 +13,7 @@ summary: >-
 enableTableOfContents: true
 redirectFrom:
   - /docs/guides/database-per-user
-updatedOn: '2026-08-27T15:07:41.821Z'
+updatedOn: '2026-10-09T15:55:57.334Z'
 ---
 
 Neon's serverless, API-first design suits database-per-user applications, where each user or customer has their own Postgres database. Neon fits architectures that need strong database isolation, with the equivalent of instance-level isolation.
@@ -207,7 +207,7 @@ In this architecture, each customer has instead a dedicated application environm
 - You'll need to think about how to route optimal resource use across multiple environments, and how to monitor issues across them.
 - Operating separate environments for each customer might also lead to higher costs.
 
-#### Advice
+#### Advice (#advice-2)
 
 If you decide to implement isolated environments, here's some advice to consider:
 
@@ -690,7 +690,7 @@ env:
 - `AWS_REGION`: This is the region where the S3 bucket is deployed.
 - `PG_VERSION`: The Postgres major version to install. Use your project's version or a newer one, because `pg_dump` refuses to dump a server that's newer than the client.
 
-#### GitHub secrets
+#### GitHub secrets (#github-secrets-2)
 
 As we mentioned above, several of the above environment variables are defined using secrets. These variables can be added to **Settings > Secrets and variables > Actions**.
 
