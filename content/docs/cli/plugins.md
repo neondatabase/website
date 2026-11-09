@@ -8,7 +8,7 @@ summary: >-
   no flags for an interactive walkthrough, or pass `--agent` and `-y` to pick
   the agents and skip the prompts.
 enableTableOfContents: true
-updatedOn: '2026-11-01T14:46:44.000Z'
+updatedOn: '2026-11-09T17:20:34.296Z'
 ---
 
 The `plugins` command installs the `neon-postgres` plugin into coding agents that support plugin marketplaces, so tools like Claude Code, Cursor, and Codex know how to work with Neon. The plugin bundles [Neon's agent skills](/docs/ai/agent-skills) and the [Neon MCP Server](/docs/ai/neon-mcp-server) in one package.
@@ -41,7 +41,7 @@ Without `--agent`, the interactive command lists the supported agents, pre-selec
 
 The agents that support plugins are `claude-code`, `claude-desktop`, `codex`, `cursor`, `github-copilot-cli`, `grok-build`, `kimi-code`, and `vscode`. Several also accept aliases: `claude` for `claude-code`, `grok` for `grok-build`, and `copilot`, `github-copilot`, or `vs-code` for `vscode`. Passing an unknown agent stops the command and prints the supported list. An agent with no plugin support is skipped when others can install, or stops the command when it's the only one selected.
 
-Agents that share a target collapse into one: Claude Desktop and Claude Code both write to `claude-code`, and VS Code and the GitHub Copilot CLI both write to `github-copilot`.
+Agents that share a target collapse into one: Claude Desktop and Claude Code both write to `claude-code`.
 
 ### Install location
 
@@ -80,4 +80,3 @@ Install non-interactively into every detected agent:
 ```bash
 neon plugins -y
 ```
-
