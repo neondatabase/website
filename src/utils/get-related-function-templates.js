@@ -3,11 +3,11 @@ import {
   TEMPLATE_CATEGORY_RECOMMENDATIONS,
 } from 'config/function-template-recommendations';
 
-import { REGISTRY_FIRST_PARTY_CATEGORY, registryTemplateCategories } from './function-registry';
+import { REGISTRY_SOURCE_CATEGORIES, registryTemplateCategories } from './function-registry';
 
 const topicCategories = (template) =>
   registryTemplateCategories(template).filter(
-    (category) => category !== REGISTRY_FIRST_PARTY_CATEGORY
+    (category) => !REGISTRY_SOURCE_CATEGORIES.includes(category)
   );
 
 const getCategoryPriorities = (template, categoryOrder) => {
@@ -15,7 +15,7 @@ const getCategoryPriorities = (template, categoryOrder) => {
   topicCategories(template).forEach((category) => {
     const neighbours = Object.hasOwn(categoryOrder, category) ? categoryOrder[category] : [];
     [...neighbours, category].forEach((target, rank) => {
-      if (target !== REGISTRY_FIRST_PARTY_CATEGORY) {
+      if (!REGISTRY_SOURCE_CATEGORIES.includes(target)) {
         priorities.set(target, Math.min(priorities.get(target) ?? Infinity, rank));
       }
     });

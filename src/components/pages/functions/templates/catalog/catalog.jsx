@@ -3,21 +3,22 @@ import { Suspense } from 'react';
 import { getFunctionTemplateInstallTotals } from 'utils/api-function-template-installs';
 import { getFunctionRegistryCatalog } from 'utils/function-registry';
 
-import CatalogClient from './catalog-client';
+import CatalogClient, { CatalogView } from './catalog-client';
 
 const Catalog = async () => {
-  const [templates, installTotals] = await Promise.all([
+  const [catalog, installTotals] = await Promise.all([
     getFunctionRegistryCatalog(),
     getFunctionTemplateInstallTotals(),
   ]);
-  const templatesWithInstalls = templates.map((template) => ({
+  const templates = catalog.map((template) => ({
     ...template,
     installs: installTotals.get(template.id)?.installs ?? null,
   }));
 
   return (
-    <Suspense>
-      <CatalogClient templates={templatesWithInstalls} />
+    // URL filters resolve on the client for this prerendered route.
+    <Suspense fallback={<CatalogView templates={templates} />}>
+      <CatalogClient templates={templates} />
     </Suspense>
   );
 };

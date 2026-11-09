@@ -141,7 +141,7 @@ Field.displayName = 'Field';
 
 Field.propTypes = {
   className: PropTypes.string,
-  theme: PropTypes.oneOf(Object.values(FIELD_TAGS)),
+  theme: PropTypes.oneOf(Object.keys(themes)),
   errorTheme: PropTypes.oneOf(Object.values(errorThemes)),
   name: PropTypes.string.isRequired,
   id: PropTypes.string,

@@ -28,11 +28,12 @@ describe('related function templates', () => {
   });
 
   it('ranks relevant topics using directed priorities across all categories', () => {
-    const current = entry('current', ['first-party', 'api', 'agents']);
+    const current = entry('current', ['partner', 'api', 'agents']);
     const combined = entry('combined', ['email', 'auth']);
     const catalog = [
       current,
-      entry('neon-only', ['first-party']),
+      entry('partner-only', ['partner']),
+      entry('community-only', ['community']),
       entry('unrelated', ['email']),
       entry('same-topic', ['api']),
       entry('workflow', ['workflow']),
@@ -41,7 +42,7 @@ describe('related function templates', () => {
     ];
     const options = {
       manual: {},
-      categoryOrder: { api: ['auth', 'workflow'], agents: ['mcp', 'workflow'] },
+      categoryOrder: { api: ['auth', 'workflow', 'community'], agents: ['mcp', 'workflow'] },
     };
 
     expect(ids(getRelatedFunctionTemplates(current, catalog, options))).toEqual([

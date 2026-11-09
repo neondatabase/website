@@ -5,8 +5,6 @@ export const EXAMPLES_REGISTRY_TREE = 'https://github.com/neondatabase/examples/
 
 export const REGISTRY_TEMPLATE_PAGE_BASE = 'functions/templates';
 
-export const REGISTRY_PAGE_SIZE = 9;
-
 const REGISTRY_USER_AGENT = { 'User-Agent': 'neon-website-function-registry' };
 
 // Shared by every registry fetch (catalog, template.json, README) so they can be revalidated together.
@@ -270,7 +268,7 @@ const REGISTRY_CATEGORY_LABELS = {
 const UPPERCASE_CATEGORY_WORDS = new Set(['ai', 'api', 'cdn', 'cli', 'llm', 'mcp', 'sdk', 'sql']);
 
 export const registryCategoryLabel = (id) => {
-  if (REGISTRY_CATEGORY_LABELS[id]) return REGISTRY_CATEGORY_LABELS[id];
+  if (Object.hasOwn(REGISTRY_CATEGORY_LABELS, id)) return REGISTRY_CATEGORY_LABELS[id];
   const words = id.split('-').filter(Boolean);
   return words
     .map((word, index) => {
@@ -338,31 +336,17 @@ export const registryTemplateFilters = (
 
 export const filterRegistryTemplates = (
   templates,
-  { query = '', filter = REGISTRY_ALL_FILTER } = {}
+  { query = '', filter = REGISTRY_ALL_FILTER, categories = [filter] } = {}
 ) => {
   const q = query.trim().toLowerCase();
+  const categoryIds = categories.filter((id) => id && id !== REGISTRY_ALL_FILTER);
+
   return templates.filter(
     (template) =>
-      matchesRegistryTemplateQuery(template, q) && matchesRegistryTemplateFilter(template, filter)
+      matchesRegistryTemplateQuery(template, q) &&
+      (categoryIds.length === 0 ||
+        registryTemplateCategories(template).some((id) => categoryIds.includes(id)))
   );
-};
-
-export const paginateRegistryTemplates = (
-  templates,
-  { page = 1, pageSize = REGISTRY_PAGE_SIZE } = {}
-) => {
-  const total = templates.length;
-  const size = pageSize > 0 ? pageSize : REGISTRY_PAGE_SIZE;
-  const pageCount = Math.max(1, Math.ceil(total / size) || 1);
-  const currentPage = Math.min(Math.max(Number(page) || 1, 1), pageCount);
-  const start = (currentPage - 1) * size;
-  return {
-    items: templates.slice(start, start + size),
-    total,
-    pageCount,
-    currentPage,
-    pageSize: size,
-  };
 };
 
 export const normalizeRegistryTemplates = (data) => {
@@ -480,9 +464,9 @@ const pickTemplateJsonFields = (data) => {
   return picked;
 };
 
-export const getFunctionRegistryTemplate = async (id) => {
+export const getFunctionRegistryTemplate = async (id, catalog = null) => {
   if (typeof id !== 'string' || !REGISTRY_ID_PATTERN.test(id)) return null;
-  const templates = await getFunctionRegistryCatalog();
+  const templates = catalog ?? (await getFunctionRegistryCatalog());
   const entry = templates.find((template) => template.id === id);
   if (!entry) return null;
 
@@ -506,14 +490,12 @@ export const getFunctionRegistryTemplate = async (id) => {
 // Returns null for an unknown id. Throws when the catalog itself is unreachable,
 // so a transient GitHub failure doesn't get cached as a 404.
 export const getFunctionRegistryTemplatePage = async (id) => {
-  const [template, templates] = await Promise.all([
-    getFunctionRegistryTemplate(id),
-    getFunctionRegistryCatalog(),
-  ]);
+  const templates = await getFunctionRegistryCatalog();
+  const template = await getFunctionRegistryTemplate(id, templates);
   if (!template) {
     if (templates.length === 0) throw new Error('Function Registry catalog is unavailable');
     return null;
   }
   const index = templates.findIndex((item) => item.id === template.id);
-  return { template, previous: templates[index - 1], next: templates[index + 1] };
+  return { template, templates, previous: templates[index - 1], next: templates[index + 1] };
 };
