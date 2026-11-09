@@ -1,14 +1,9 @@
 /**
  * Create a Neon project, then enable Neon Auth on the default branch (Better Auth).
  *
- * Enabling Neon Auth isn't wrapped by an ergonomic namespace yet, so this drops
- * to the raw layer (`raw.createNeonAuth`) and reuses the client's auth via
- * `neon.client`.
- *
  * Prints Neon Auth keys once; store pub_client_key / secret_server_key securely.
  */
 import "dotenv/config";
-import { raw } from "@neon/sdk";
 import { getProductionBranchId, neonClient } from "./utils.js";
 
 const apiKey = process.env.NEON_API_KEY?.trim();
@@ -36,14 +31,11 @@ const { project, connectionString } = await neon.projects.createAndConnect({
 
 const prodBranchId = await getProductionBranchId(neon, project.id);
 
-const { data: neonAuth } = await raw.createNeonAuth({
-  client: neon.client,
-  path: { project_id: project.id, branch_id: prodBranchId },
-  body: {
-    auth_provider: "better_auth",
-    ...(authDb ? { database_name: authDb } : {}),
-  },
-  throwOnError: true,
+const neonAuth = await neon.auth.create({
+  projectId: project.id,
+  branchId: prodBranchId,
+  auth_provider: "better_auth",
+  ...(authDb ? { database_name: authDb } : {}),
 });
 
 console.error(
