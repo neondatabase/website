@@ -1,4 +1,4 @@
-text: 'Neon now has realtime: Live SQL with full reactivity. Try it in Beta today'
+text: 'Lakebase Postgres is built on object storage, but 99.99999% of reads are served from high-performance local caches'
 link:
-  url: 'https://neon.com/blog/neon-now-has-realtime'
+  url: 'https://neon.com/blog/lakebase-postgres-reads-never-touch-object-storage'
   target: '_blank'

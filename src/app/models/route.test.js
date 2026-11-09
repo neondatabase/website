@@ -109,7 +109,13 @@ describe('GET /models', () => {
     const payload = await body(res);
 
     expect(res.status).toBe(400);
-    expect(payload.supported).toEqual(['chat', 'image-generation', 'web-search', 'embeddings']);
+    expect(payload.supported).toEqual([
+      'chat',
+      'image-generation',
+      'web-search',
+      'embeddings',
+      'systemone',
+    ]);
   });
 
   describe('example selection follows measured capability, not model family', () => {
@@ -191,7 +197,7 @@ describe('GET /models', () => {
       const mastra = model.examples.find((e) => e.id === 'mastra');
 
       expect(model.capabilities.chat).toBe('array-content');
-      expect(mastra.dependencies).toContain('@neondatabase/ai-sdk-provider');
+      expect(mastra.dependencies).toContain('@neon/ai-sdk-provider');
       expect(mastra.files[0].content).toContain('model: neon(');
     });
 
@@ -239,10 +245,50 @@ describe('GET /models', () => {
         const mastra = model.examples.find((e) => e.id === 'mastra');
 
         // The tool factory lives in the provider package even though the model is a router string.
-        expect(mastra.dependencies).toContain('@neondatabase/ai-sdk-provider');
+        expect(mastra.dependencies).toContain('@neon/ai-sdk-provider');
         expect(mastra.files[0].content).toContain('model: "neon/gpt-5-nano"');
         expect(mastra.files[0].content).toContain('neon.tools.');
       }
+    });
+  });
+
+  describe('systemone', () => {
+    it.each(['typesafeai-jev-1-14-0', 'openjev-qwen35-4b'])(
+      'serves AI SDK, TypeScript, Python and cURL decision examples for %s',
+      async (id) => {
+        const res = await GET(request(`?model=${id}&use_case=systemone`));
+        const { model } = await body(res);
+
+        expect(model.unsupported).toBeUndefined();
+        expect(model.capabilities.decision).toBe(true);
+        expect(model.examples.map((e) => e.id)).toEqual(['ai-sdk', 'typescript', 'python', 'curl']);
+        for (const example of model.examples) {
+          expect(example.endpoint).toMatch(/^\/typesafe\/v1\/systemone/);
+          expect(example.files[0].content).toContain(id);
+        }
+        const [aiSdk, typescript, python] = model.examples;
+        expect(aiSdk.files[0].content).toContain(`neon.decisionModel("${id}")`);
+        expect(aiSdk.dependencies).toEqual(['ai@7', '@neon/ai-sdk-provider']);
+        expect(typescript.dependencies).toEqual(['@typesafe-ai/sdk']);
+        expect(python.dependencies).toEqual(['typesafe-sdk']);
+      }
+    );
+
+    it('refuses systemone for a chat model', async () => {
+      const res = await GET(request('?model=gpt-5-4-mini&use_case=systemone'));
+      const { model } = await body(res);
+
+      expect(model.examples).toEqual([]);
+      expect(model.unsupported).toMatch(/not a System One decision model/);
+    });
+
+    it('refuses chat for a decision model with a message pointing at the systemone use case', async () => {
+      const res = await GET(request('?model=typesafeai-jev-1-14-0'));
+      const { model } = await body(res);
+
+      expect(model.examples).toEqual([]);
+      expect(model.unsupported).toMatch(/systemone use case/);
+      expect(model.capabilities.chat).toBe('not-served');
     });
   });
 

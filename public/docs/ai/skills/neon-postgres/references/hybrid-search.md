@@ -1,6 +1,6 @@
 # Hybrid Search
 
-Use hybrid search when either semantic similarity or exact vocabulary can identify a relevant document. Lakebase Search does not provide a built-in hybrid function: run vector and BM25 retrieval separately, then combine their results with a fusion strategy suited to the workload.
+Use hybrid search when either semantic similarity or exact vocabulary can identify a relevant document. Run vector and full-text search separately, then combine their results with fusion or reranking.
 
 Lakebase Search requires Postgres 16 or later. Hybrid search uses both extensions:
 
@@ -28,13 +28,140 @@ The 1024-dimensional column is an example. Set it to the output dimension of you
 
 Create and validate each retriever independently before combining them. Follow [Vector search](vector-search.md) and [Full-text search](full-text-search.md) for their indexes, query operators, and tuning.
 
-Reciprocal Rank Fusion (RRF) is the approach in the Lakebase Search get-started guide and a useful default because it combines ranks instead of incomparable raw distances and scores. It is not the only option: weighted rank fusion, normalized score fusion, or a reranker may fit applications with different relevance signals.
+Choose how to order the combined results:
+
+- **Jev reranking:** retrieve vector and full-text search candidates, deduplicate by document ID, score each candidate with Jev, and take the final top results.
+- **Reciprocal Rank Fusion (RRF):** fuse the retrievers' ranks instead of their incomparable vector distances and BM25 scores, with no additional model call.
+
+Jev can score the deduplicated candidate pool directly. RRF is optional when you want to prioritize or trim a larger pool before reranking, or provide a model-free fallback. Measure relevance and added latency on your corpus to choose a path.
+
+## Rerank with Jev
+
+Retrieve up to 40 candidates per retriever and deduplicate with `UNION`. Bind the query embedding as `$1` and the original query text as `$2`:
+
+```sql
+WITH vector_candidates AS (
+  SELECT id
+  FROM documents
+  WHERE embedding IS NOT NULL
+  ORDER BY embedding <=> $1::vector
+  LIMIT 40
+),
+keyword_candidates AS (
+  SELECT id
+  FROM (
+    SELECT
+      id,
+      body_tsv <@> to_bm25query(
+        to_tsvector('english', $2),
+        'documents_body_bm25'::regclass
+      ) AS score
+    FROM documents
+  ) AS keyword_scored
+  WHERE score < 0
+  ORDER BY score, id
+  LIMIT 40
+),
+candidate_ids AS (
+  SELECT id FROM vector_candidates
+  UNION
+  SELECT id FROM keyword_candidates
+)
+SELECT d.id, d.title, d.body
+FROM candidate_ids AS c
+JOIN documents AS d ON d.id = c.id
+ORDER BY d.id;
+```
+
+Apply the same access-control and tenant filters inside both retrievers, before their limits. Take the final top results only after Jev scoring.
+
+Batch yes/no relevance questions with the query shared in `state` and each candidate in its own question's `instructions`. Sort the returned probabilities in descending order; equal probabilities keep the input order.
+
+Use Neon's provider with the Vercel AI SDK. Requirements:
+
+- Install the tested versions: `npm install @neon/ai-sdk-provider@1.1.0 ai@7.0.133`. Decision models require AI SDK 7.0.133+; pin versions and retest upgrades while `experimental_decide` is experimental.
+- Load the same `NEON_AI_GATEWAY_TOKEN` and `NEON_AI_GATEWAY_BASE_URL` used for [embeddings](vector-search.md#prepare-embeddings); the provider handles the endpoint and credentials.
+- The AI Gateway, for both Jev and embeddings, requires a paid Neon plan with prepaid AI Gateway credits. Without them, embed documents and queries with one model from another provider and use [RRF](#rrf-example).
+
+```typescript
+import { neon } from "@neon/ai-sdk-provider";
+import { experimental_decide as decide } from "ai";
+
+type Candidate = { id: string; title: string; body: string };
+
+async function rerankWithJev(
+  queryText: string,
+  candidates: Candidate[], // deduplicated, authorized rows in a stable order
+  limit = 10,
+  batchSize = 80,
+): Promise<Candidate[]> {
+  if (!Number.isInteger(limit) || limit < 1) {
+    throw new Error("limit must be a positive integer");
+  }
+  if (!Number.isInteger(batchSize) || batchSize < 1) {
+    throw new Error("batchSize must be a positive integer");
+  }
+  if (candidates.length === 0) return [];
+
+  const model = neon.decisionModel("typesafeai-jev-1-14-0");
+  const criteria = {
+    true: "The candidate states the specific facts or steps the query asks for.",
+    false:
+      "The candidate only shares keywords or a topic with the query, answers a different question, or lacks the requested information.",
+  };
+  const abortSignal = AbortSignal.timeout(10_000); // whole reranking budget
+  const scored: { doc: Candidate; index: number; probability: number }[] = [];
+  for (let start = 0; start < candidates.length; start += batchSize) {
+    const batch = candidates.slice(start, start + batchSize);
+    const { answers } = await decide({
+      model,
+      state: { query: queryText }, // original text, without embedding instructions
+      questions: Object.fromEntries(
+        batch.map((doc, offset) => [
+          `d${start + offset}`, // response key only; the candidate goes in instructions
+          {
+            type: "boolean" as const,
+            instructions: {
+              question:
+                "Given the search query in state.query, does this candidate passage supply the specific information the user is looking for?",
+              candidate: { title: doc.title, body: doc.body },
+            },
+            criteria,
+          },
+        ]),
+      ),
+      maxRetries: 0, // propagate errors to the caller without retrying
+      abortSignal,
+    });
+    for (const [offset, doc] of batch.entries()) {
+      const index = start + offset;
+      const answer = answers[`d${index}`];
+      if (answer.type !== "boolean") {
+        throw new Error(`Missing relevance probability for d${index}`);
+      }
+      scored.push({ doc, index, probability: answer.probability });
+    }
+  }
+  return scored
+    .sort((a, b) => b.probability - a.probability || a.index - b.index)
+    .slice(0, limit)
+    .map(({ doc }) => doc);
+}
+```
+
+The SDK's `boolean` answer exposes the probability of yes as `answer.probability` (TypeSafe calls it `noul`). This is a probability that the passage answers the query, not a degree of completeness. Calibrate a threshold on judged no-match queries if the application must return "no answer."
+
+`batchSize = 80` matches the maximum candidate pool above. Each request must fit Jev 1.14's 65,536-token context window, including all candidate text and questions; reduce the batch size for longer passages. Tune the shared timeout to the request's latency budget.
+
+The caller can catch reranking errors and use [RRF](#rrf-example) as a fallback.
 
 ## RRF Example
 
-For rank `r` and constant `k`, each retriever contributes `1 / (k + r)`. The documented starting point uses 40 candidates per retriever and `k = 60`; tune both for the corpus and workload.
+Use this query on its own when you want hybrid search without an additional model call.
 
-Embed the query text through the same gateway model used for the stored documents, then bind that vector as `$1`, the original query text as `$2`, and the final result count as `$3`:
+For rank `r` and constant `k`, each retriever contributes `1 / (k + r)`. Start with a target of 40 candidates per retriever and `k = 60`; vector cutoff ties can exceed that target. Tune both for the corpus and workload.
+
+Embed the query text with the same embedding model used for the stored documents, then bind that vector as `$1`, the original query text as `$2`, and the final result count as `$3`:
 
 ```sql
 WITH vector_ranked AS (
@@ -42,6 +169,7 @@ WITH vector_ranked AS (
   FROM (
     SELECT id, embedding <=> $1::vector AS distance
     FROM documents
+    WHERE embedding IS NOT NULL
     ORDER BY distance
     FETCH FIRST 40 ROWS WITH TIES
   ) AS vector_candidates
@@ -84,11 +212,12 @@ Vector retrieval preserves cutoff ties and can exceed 40 candidates. `lakebase_b
 ## Adapt the Hybrid Search
 
 - Retrieve more candidates from each source than the final result count; otherwise one retriever can dominate before fusion has enough overlap. Keep `lakebase_bm25.default_limit` at least as large as the BM25 candidate target.
-- Keep each retriever's operator and index configuration correct independently before tuning RRF.
+- Keep each retriever's operator and index configuration correct independently before tuning fusion or reranking.
 - Tune candidate counts and the RRF constant with judged or behavioral relevance data, plus latency measurements.
+- Compare vector-only, BM25-only, RRF-only, the deduplicated union plus Jev, and optional RRF plus Jev on the same judged queries to isolate each stage's contribution. Measure recall before reranking and nDCG@10 or MRR after it, alongside p95 latency, input-token cost, and fallback rate.
 - Add weights only when product evidence shows one retriever should contribute more. Weight the reciprocal-rank contributions, not the raw vector distance and negative BM25 score.
 - Apply the same access-control and tenant filters to both candidate CTEs. If BM25 filters are strict and cheap, evaluate whether `lakebase_bm25.prefilter` improves the filtered query.
 
-Source: [Lakebase Search get-started guide][lakebase-search-guide].
+Sources: [Lakebase Search get-started guide][lakebase-search-guide] and [TypeSafe reranking cookbook](https://docs.typesafe.ai/cookbooks/rerank_typesafe).
 
 [lakebase-search-guide]: https://neon.com/docs/ai/lakebase-search-get-started#combine-results-with-hybrid-search

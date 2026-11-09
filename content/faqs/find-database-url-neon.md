@@ -7,8 +7,8 @@ updatedOn: '2026-09-23T21:00:25.204Z'
 isDraft: false
 redirectFrom: []
 previousLink:
-  title: 'Where can I find my database connection string in Neon?'
-  slug: find-database-connection-string
+  title: 'Where can I find my database connection string or URL in Neon?'
+  slug: find-database-connection-string-url
 nextLink:
   title: 'Where can I find or generate API keys for Neon?'
   slug: find-or-generate-neon-api-keys

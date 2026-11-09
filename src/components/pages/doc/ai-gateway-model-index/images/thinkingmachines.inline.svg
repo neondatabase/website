@@ -1,0 +1,7 @@
+<svg preserveAspectRatio="none" overflow="visible" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <g clip-path="url(#thinkingmachines-clip)">
+    <path d="M0 0H20V20H0V0Z" fill="#E6E6E6"/>
+    <rect x="3.25" y="3.25" width="13.5" height="13.5" rx="1.75" fill="#2E333A"/>
+  </g>
+  <defs><clipPath id="thinkingmachines-clip"><rect width="20" height="20" rx="4" fill="white"/></clipPath></defs>
+</svg>

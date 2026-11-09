@@ -142,7 +142,7 @@ Supabase accepts much larger files on paid plans, up to 500 GB, for raw video or
 
 | Feature                                                             | Neon                                                                    | Supabase    |
 | :------------------------------------------------------------------ | :---------------------------------------------------------------------- | :---------- |
-| **AI Gateway**<br/>One credential for models from several providers | Yes, on paid plans, billed from prepaid credits at provider list prices | Not offered |
+| **AI Gateway**<br/>One credential for models from several providers | Yes, on every plan, billed from prepaid credits at provider list prices | Not offered |
 | **Gateway per branch**                                              | Each branch has its own endpoint                                        | Not offered |
 | **Vector search**                                                   | `pgvector`                                                              | `pgvector`  |
 
@@ -311,7 +311,9 @@ Neon has SOC 2 Type 1 and Type 2, SOC 3, ISO 27001, ISO 27701, GDPR, and CCPA, p
 
 <FaqItem id="only-on-one-side" question="Does Neon have managed realtime, cron jobs, or queues?">
 
-Not as managed services today. [Functions](/docs/compute/functions/websockets) can host WebSocket and SSE servers for realtime features, and the [`pg_cron`](/docs/extensions/pg_cron) extension schedules jobs inside Postgres, though jobs run only while the compute is active.
+Realtime, yes. [Neon Realtime](/docs/realtime/overview) (beta) makes any read-only SQL query live, including joins, aggregates, and ordering, and works with branching and scale to zero. Supabase Realtime pushes messages and row changes to clients, with subscriptions that filter on column values ([how they compare](/docs/realtime/overview#how-does-neon-realtime-compare-with-alternatives)). For a custom realtime server, [Functions](/docs/compute/functions/websockets) can also host WebSocket and SSE endpoints.
+
+Cron jobs and queues aren't managed services on Neon today. The [`pg_cron`](/docs/extensions/pg_cron) extension schedules jobs inside Postgres, though jobs run only while the compute is active.
 
 </FaqItem>
 

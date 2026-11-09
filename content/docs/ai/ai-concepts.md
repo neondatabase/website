@@ -10,7 +10,7 @@ summary: >-
   generating embeddings with the Neon AI Gateway or OpenAI, storing vectors with
   the pgvector extension, and searching them at scale with Lakebase Search.
 enableTableOfContents: true
-updatedOn: '2026-09-30T00:39:07.369Z'
+updatedOn: '2026-10-23T19:28:25.610Z'
 ---
 
 Embeddings are an essential component in building AI applications. This topic describes embeddings and how they are used, generated, and stored in Postgres.
@@ -71,7 +71,7 @@ The examples below send the same text to each API and get a vector back. Size yo
 
 <TabItem>
 
-The [Neon AI Gateway](/docs/ai-gateway/embeddings) serves embedding models on an OpenAI-compatible endpoint, using the same Neon credential as the rest of your project instead of a separate provider key. Its `qwen3-embedding-0-6b` and `gte-large-en` models return 1024-dimensional vectors.
+The [Neon AI Gateway](/docs/ai-gateway/embeddings) serves embedding models on an OpenAI-compatible endpoint, using the same Neon credential as the rest of your project instead of a separate provider key. Its `qwen3-embedding-0-6b`, `bge-large-en`, and `gte-large-en` models return 1024-dimensional vectors.
 
 ```bash
 curl "$NEON_AI_GATEWAY_BASE_URL/v1/embeddings" \

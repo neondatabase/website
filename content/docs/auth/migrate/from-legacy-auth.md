@@ -5,7 +5,7 @@ summary: >-
   Migration guide for upgrading from legacy Neon Auth (Stack Auth) to Managed
   Better Auth. Replace Stack Auth environment variables with a single
   `NEON_AUTH_BASE_URL` and swap the `@stackframe/stack` SDK for
-  `@neondatabase/auth`. Use this page when moving an existing Next.js or React
+  `@neon/auth`. Use this page when moving an existing Next.js or React
   SPA project off Stack Auth, or when ejecting to a self-managed Stack Auth
   project.
 enableTableOfContents: true
@@ -73,15 +73,20 @@ You replace multiple Stack Auth-specific keys with a single Better Auth URL that
 
 ### Install packages (#nextjs-install-packages)
 
-Uninstall Stack Auth packages and install `@neondatabase/auth`
+Uninstall Stack Auth packages, install `@neon/auth`, and add [Better Auth UI](/docs/auth/reference/ui-components)'s components with the shadcn CLI.
 
 ```bash filename="Terminal"
 npm uninstall @stackframe/stack
-npm install @neondatabase/auth@latest @neondatabase/auth-ui
+npm install @neon/auth@latest
+npx shadcn@latest init
+npx shadcn@latest add @better-auth-ui/auth @better-auth-ui/user-button
+npm i better-auth@~1.7.12
 ```
 
+The last command realigns `better-auth` with the version `@neon/auth` uses, because `shadcn add` installs the npm `latest` tag.
+
 **What changed**  
-Your app now depends on Managed Better Auth's Next.js SDK and UI package instead of the Stack Auth SDK.
+Your app now depends on Managed Better Auth's Next.js SDK instead of the Stack Auth SDK, and the auth UI components are copied into `components/auth/`.
 
 ### Update SDK initialization (#nextjs-sdk-initialization)
 
@@ -99,13 +104,13 @@ export const stackServerApp = new StackServerApp({
 ```tsx
 // ./lib/auth/client.ts
 'use client';
-import { createAuthClient } from '@neondatabase/auth/next';
+import { createAuthClient } from '@neon/auth/next';
 
 // to use in react client components
 export const authClient = createAuthClient();
 
 // ./lib/auth/server.ts
-import { createNeonAuth } from '@neondatabase/auth/next/server';
+import { createNeonAuth } from '@neon/auth/next/server';
 
 // to use in react server components, server actions, and API routes
 export const auth = createNeonAuth({
@@ -136,17 +141,17 @@ export default function SignInPage() {
 ```
 
 ```tsx
-import { AuthView } from '@neondatabase/auth-ui';
+import { Auth } from '@/components/auth/auth';
 
 export default function SignInPage() {
-  return <AuthView pathname="sign-in" />;
+  return <Auth view="signIn" />;
 }
 ```
 
 </CodeTabs>
 
 **What changed**  
-You render Managed Better Auth's `AuthView` client component and tell it which flow to show using the `pathname` prop.
+You render Better Auth UI's `Auth` component and tell it which flow to show with the `view` prop. Also add the shared `app/auth/[path]/page.tsx` route with `<Auth path={path} />`, as in the [UI components reference](/docs/auth/reference/ui-components#nextjs-app-router): the user menu's **Sign Out** and the password reset links open `/auth/*` paths.
 
 #### Sign up page
 
@@ -161,17 +166,17 @@ export default function SignUpPage() {
 ```
 
 ```tsx
-import { AuthView } from '@neondatabase/auth-ui';
+import { Auth } from '@/components/auth/auth';
 
 export default function SignUpPage() {
-  return <AuthView pathname="sign-up" />;
+  return <Auth view="signUp" />;
 }
 ```
 
 </CodeTabs>
 
 **What changed**  
-You swap the dedicated `<SignUp />` component for the same `AuthView` component, configured with the `"sign-up"` pathname.
+You swap the dedicated `<SignUp />` component for the same `Auth` component, configured with the `signUp` view.
 
 #### User button
 
@@ -186,17 +191,17 @@ export function Header() {
 ```
 
 ```tsx
-import { UserButton } from '@neondatabase/auth-ui';
+import { UserButton } from '@/components/auth/user/user-button';
 
 export function Header() {
-  return <UserButton />;
+  return <UserButton hideSettings />;
 }
 ```
 
 </CodeTabs>
 
 **What changed**  
-You keep the same `UserButton` API but import it from the Managed Better Auth UI package and mark the component as client-side.
+You keep a `UserButton`, now the one the shadcn CLI copied into `components/auth/user/`. `hideSettings` drops its link to `/settings/account`; to keep it, add `@better-auth-ui/settings` and a `settings/[path]` route.
 
 ### Replace hooks (#nextjs-replace-hooks)
 
@@ -247,26 +252,39 @@ export default function RootLayout({ children }) {
 ```
 
 ```tsx
+// components/providers.tsx, rendered by app/layout.tsx around {children}
 'use client';
-import { NeonAuthUIProvider } from '@neondatabase/auth-ui';
-import '@neondatabase/auth-ui/css';
+import { getSafeRedirectTo } from '@better-auth-ui/core';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
+import { useState } from 'react';
+import { AuthProvider } from '@/components/auth/auth-provider';
+import { Toaster } from '@/components/ui/sonner';
 import { authClient } from '@/lib/auth/client';
 
-export default function RootLayout({ children }) {
+export function Providers({ children }) {
   const router = useRouter();
+  const [queryClient] = useState(() => new QueryClient());
 
   return (
-    <NeonAuthUIProvider
-      authClient={authClient}
-      navigate={router.push}
-      replace={router.replace}
-      onSessionChange={router.refresh}
-      Link={Link}
-    >
-      {children}
-    </NeonAuthUIProvider>
+    <QueryClientProvider client={queryClient}>
+      <AuthProvider
+        authClient={authClient}
+        emailAndPassword={{ requireEmailVerification: false }} // match your branch's setting
+        navigate={({ to, replace }) => {
+          const path = getSafeRedirectTo(to, window.location.origin);
+          const target = path.startsWith('//') ? '/' : path;
+          if (replace) router.replace(target);
+          else router.push(target);
+        }}
+        Link={Link}
+        redirectTo="/"
+      >
+        {children}
+        <Toaster />
+      </AuthProvider>
+    </QueryClientProvider>
   );
 }
 ```
@@ -274,10 +292,10 @@ export default function RootLayout({ children }) {
 </CodeTabs>
 
 **What changed**  
-You wrap your app in `NeonAuthUIProvider`, pass it the `authClient`, and import the Managed Better Auth UI styles.
+You wrap your app in a TanStack Query provider and Better Auth UI's `AuthProvider`, and pass it the `authClient`. `navigate` validates the `?redirectTo=` target the components pass it after sign-in. There's no stylesheet to import: your Tailwind build compiles the copied components.
 
 <Admonition type="tip" title="Styling options">
-To learn more about applying styles to the Auth UI components, including plain CSS and Tailwind CSS v4 options, see [UI Component Styles](/docs/auth/reference/ui-components#styling).
+To change how the auth UI looks, edit the shadcn/ui theme or the copied components. See [Styling](/docs/auth/reference/ui-components#styling).
 </Admonition>
 
 ### Replace auth handler route
@@ -298,7 +316,7 @@ export default function Handler(props: any) {
 // app/api/auth/[...path]/route.ts
 import { auth } from '@/lib/auth/server';
 
-export const { GET, POST } = auth.handler();
+export const { GET, POST, PUT, PATCH, DELETE } = auth.handler();
 ```
 
 </CodeTabs>
@@ -324,22 +342,29 @@ export default function ProtectedPage() {
 
 ```tsx
 'use client';
-import { SignedIn, RedirectToSignIn } from '@neondatabase/auth-ui';
+import { useSession } from '@better-auth-ui/react';
+import { useRouter } from 'next/navigation';
+import { useEffect } from 'react';
+import { authClient } from '@/lib/auth/client';
 
 export default function ProtectedPage() {
-  return (
-    <SignedIn>
-      <div>Protected content</div>
-      <RedirectToSignIn />
-    </SignedIn>
-  );
+  const router = useRouter();
+  const { data, isFetching } = useSession(authClient);
+  const signedOut = !data && !isFetching;
+
+  useEffect(() => {
+    if (signedOut) router.replace('/auth/sign-in');
+  }, [signedOut, router]);
+
+  if (!data) return null;
+  return <div>Protected content</div>;
 }
 ```
 
 </CodeTabs>
 
 **What changed**  
-You switch from hook-based redirects to declarative UI helpers that show content only when the user is signed in.
+You read the session with `useSession()` and redirect once it has loaded without a user. For page loads, prefer the middleware below, which redirects on the server.
 
 #### Middleware-based protection
 
@@ -351,22 +376,18 @@ import { auth } from '@/lib/auth/server';
 export default auth.middleware({
   // Redirects unauthenticated users to sign-in page
   loginUrl: '/auth/sign-in',
+  // Pages that don't require a session
+  publicRoutes: ['/'],
 });
 
 export const config = {
-  matcher: [
-    // Protected routes requiring authentication
-    '/dashboard/:path*',
-    '/settings/:path*',
-
-    // Do not run the middleware for the static resources
-    '/((?!_next/static|_next/image|favicon.ico).*)',
-  ],
+  // Run on all paths except static files
+  matcher: ['/((?!_next/static|_next/image|favicon.ico).*)'],
 };
 ```
 
 **What changed**  
-You can optionally add middleware to enforce auth at the edge for specific paths.
+You can optionally add middleware to enforce auth at the edge. It protects every matched route except `/api/auth`, Better Auth UI's signed-out views, and the `publicRoutes` you list.
 
 ### Server-side user access
 
@@ -402,15 +423,20 @@ Server components now call `auth.getSession()` and read the user from the return
 
 ### Install packages (#react-install-packages)
 
-Uninstall Stack Auth packages and install `@neondatabase/neon-js`
+Uninstall Stack Auth packages, install `@neon/auth`, and add [Better Auth UI](/docs/auth/reference/ui-components)'s components with the shadcn CLI.
 
 ```bash filename="Terminal"
 npm uninstall @stackframe/stack
-npm install @neondatabase/neon-js@latest @neondatabase/auth-ui
+npm install @neon/auth@latest
+npx shadcn@latest init
+npx shadcn@latest add @better-auth-ui/auth @better-auth-ui/user-button
+npm i better-auth@~1.7.12
 ```
 
+The last command realigns `better-auth` with the version `@neon/auth` uses, because `shadcn add` installs the npm `latest` tag.
+
 **What changed**  
-You use the framework-agnostic Neon JS SDK plus the shared UI package instead of the Stack Auth client SDK.
+You use the Managed Better Auth SDK and Better Auth UI's components instead of the Stack Auth client SDK.
 
 ### Update SDK initialization (#react-sdk-initialization)
 
@@ -430,8 +456,8 @@ export const stackClientApp = new StackClientApp({
 
 ```tsx
 // src/auth.ts
-import { createAuthClient } from '@neondatabase/neon-js/auth';
-import { BetterAuthReactAdapter } from '@neondatabase/neon-js/auth/react/adapters';
+import { createAuthClient } from '@neon/auth';
+import { BetterAuthReactAdapter } from '@neon/auth/react/adapters';
 
 export const authClient = createAuthClient(import.meta.env.VITE_NEON_AUTH_URL, {
   adapter: BetterAuthReactAdapter(),
@@ -446,7 +472,7 @@ You replace the Stack Auth client app with a Managed Better Auth `authClient` wi
 
 ### Replace components (#react-replace-components)
 
-Components are the same as Next.js. Use `<AuthView>`, `<UserButton>`, `<SignedIn>`, and `<SignedOut>` from `@neondatabase/auth-ui`.
+Components are the same as Next.js. Use `<Auth>` and `<UserButton>` from `components/auth/`, and `useSession()` from `@better-auth-ui/react` for signed-in checks.
 
 **What changed**  
 The UI building blocks are shared across frameworks, so you can reuse the same auth components in SPAs.
@@ -498,55 +524,85 @@ function App() {
 ```
 
 ```tsx
-import { NeonAuthUIProvider } from '@neondatabase/auth-ui';
-import '@neondatabase/auth-ui/css';
+import { getSafeRedirectTo } from '@better-auth-ui/core';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { AuthProvider } from '@/components/auth/auth-provider';
+import { Toaster } from '@/components/ui/sonner';
 import { authClient } from './auth';
 
+const queryClient = new QueryClient();
+
 function App() {
-  return <NeonAuthUIProvider authClient={authClient}>{/* Your app */}</NeonAuthUIProvider>;
+  return (
+    <QueryClientProvider client={queryClient}>
+      <AuthProvider
+        authClient={authClient}
+        emailAndPassword={{ requireEmailVerification: false }} // match your branch's setting
+        navigate={({ to }) => {
+          const path = getSafeRedirectTo(to, window.location.origin);
+          window.location.assign(path.startsWith('//') ? '/' : path);
+        }}
+        Link={({ to: _to, ...props }) => <a {...props} />}
+      >
+        {/* Your app */}
+        <Toaster />
+      </AuthProvider>
+    </QueryClientProvider>
+  );
 }
 ```
 
 </CodeTabs>
 
 **What changed**  
-You drop the Stack Auth provider/theme and wrap your app in `NeonAuthUIProvider` with the Managed Better Auth UI styles.
+You drop the Stack Auth provider/theme and wrap your app in a TanStack Query provider and Better Auth UI's `AuthProvider`. `navigate` validates the `?redirectTo=` target the components pass it after sign-in.
 
 <Admonition type="tip" title="Styling options">
-To learn more about applying styles to the Auth UI components, including plain CSS and Tailwind CSS v4 options, see [UI Component Styles](/docs/auth/reference/ui-components#styling).
+To change how the auth UI looks, edit the shadcn/ui theme or the copied components. See [Styling](/docs/auth/reference/ui-components#styling).
 </Admonition>
 
 ### Remove auth handler route
 
-Delete any `StackHandler` routes. Create custom pages for sign-in and sign-up using `<AuthView>`.
+Delete any `StackHandler` routes. Add one route for every auth path, for example `/auth/:path`, that renders `<Auth>`. The user menu's **Sign Out** and the password reset links open `/auth/*` paths.
 
-```tsx filename="src/pages/SignIn.tsx"
-import { AuthView } from '@neondatabase/auth-ui';
+```tsx filename="src/pages/AuthPage.tsx"
+import { useParams } from 'react-router-dom';
+import { Auth } from '@/components/auth/auth';
 
-export default function SignIn() {
-  return <AuthView pathname="sign-in" />;
+export default function AuthPage() {
+  const { path } = useParams();
+  return <Auth path={path} />;
 }
 ```
 
 **What changed**  
-Routing is fully controlled by your SPA, and the `AuthView` component just renders the appropriate view for each path.
+Routing is fully controlled by your SPA, and the `Auth` component renders the view for each path.
 
 ### React Router integration
 
 If you're using React Router, pass navigation helpers to the provider.
 
 ```tsx filename="src/App.tsx (React Router)"
-import { NeonAuthUIProvider } from '@neondatabase/auth-ui';
+import { getSafeRedirectTo } from '@better-auth-ui/core';
 import { useNavigate, Link } from 'react-router-dom';
+import { AuthProvider } from '@/components/auth/auth-provider';
 import { authClient } from './auth';
 
 function App() {
   const navigate = useNavigate();
 
   return (
-    <NeonAuthUIProvider authClient={authClient} navigate={navigate} Link={Link}>
+    <AuthProvider
+      authClient={authClient}
+      emailAndPassword={{ requireEmailVerification: false }} // match your branch's setting
+      navigate={({ to, replace }) => {
+        const path = getSafeRedirectTo(to, window.location.origin);
+        navigate(path.startsWith('//') ? '/' : path, { replace });
+      }}
+      Link={({ href, to: _to, ...props }) => <Link to={href} {...props} />}
+    >
       {/* Your app */}
-    </NeonAuthUIProvider>
+    </AuthProvider>
   );
 }
 ```

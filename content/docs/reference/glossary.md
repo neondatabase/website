@@ -11,8 +11,8 @@ summary: >-
 enableTableOfContents: true
 redirectFrom:
   - /docs/conceptual-guides/glossary
-  - /docs/cloud/concepts/
-updatedOn: '2026-10-08T19:31:34.830Z'
+  - /docs/cloud/concepts
+updatedOn: '2026-10-28T11:11:18.780Z'
 ---
 
 ## access token
@@ -126,7 +126,7 @@ A service that provides virtualized computing resources, equipped with an operat
 
 A [compute endpoint](#compute-endpoint) is the access point for connecting to a Neon compute.
 
-Neon creates a primary read-write compute for the project's default branch. Neon supports both read-write and [read replica](/docs/introduction/read-replicas) computes. A branch can have a single primary (read-write) compute but supports multiple read replica computes. The compute hostname is required to connect to a database from a client or application.
+Neon creates a primary read-write compute for the project's default branch. Neon supports both read-write and [read replica](/docs/introduction/read-replicas) computes. A branch can have a single primary (read-write) compute and multiple read replica computes (up to 6 per branch on paid plans). The compute hostname is required to connect to a database from a client or application.
 
 ## compute cache
 
@@ -345,7 +345,7 @@ An [Organizations](#organization) role in Neon with access to all projects withi
 
 ## Neon
 
-The backend for apps and agents. Includes Lakebase Postgres, Managed Better Auth, Data API, [AI Gateway](/docs/ai-gateway/overview), [Object Storage](/docs/storage/overview), and [Functions](/docs/compute/functions/overview). Lakebase Postgres is serverless, with autoscaling, branching, instant restore, and scale-to-zero. For more information, see [Why Neon?](/docs/introduction).
+The backend for apps and agents. Includes Lakebase Postgres, Managed Better Auth, Data API, [AI Gateway](/docs/ai-gateway/overview), [Object Storage](/docs/storage/overview), and [Functions](/docs/compute/functions/overview). Lakebase Postgres is serverless, with autoscaling, branching, instant restore, and scale-to-zero. For more information, see [Why Neon?](/docs/get-started/why-neon).
 
 ## Neon API
 

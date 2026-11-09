@@ -305,6 +305,59 @@ describe('parseCommandFile: getCliName() in describe templates', () => {
   });
 });
 
+describe('parseCommandFile: array: true options', () => {
+  it('normalizes `array: true` to type "array"', () => {
+    const file = writeTempSource(`
+      import type yargs from "yargs";
+      export const command = "docs";
+      export const describe = "Search the docs";
+      export const builder = (argv: yargs.Argv) =>
+        argv.options({
+          category: { describe: "Category (repeatable)", type: "string", array: true },
+          agent: { describe: "Agent (repeatable)", type: "array" },
+        });
+    `);
+    const parsed = parseCommandFile(file, new Map());
+    expect(parsed.options.category.type).toBe('array');
+    expect(parsed.options.agent.type).toBe('array');
+  });
+});
+
+describe('parseCommandFile: string and number literal consts', () => {
+  it('resolves describes, defaults, and examples held in module-level consts', () => {
+    const file = writeTempSource(`
+      import type yargs from "yargs";
+      const MAX_LIMIT = 40;
+      const DEFAULT_LIMIT = 10;
+      const SEARCH_DESCRIBE = "Search neon.com";
+      export const command = "docs";
+      export const describe = "Search the docs";
+      export const builder = (argv: yargs.Argv) =>
+        argv.command("search <query>", SEARCH_DESCRIBE, (yargs) =>
+          yargs
+            .options({
+              limit: {
+                describe: \`Maximum number of results (1-\${MAX_LIMIT})\`,
+                type: "number",
+                default: DEFAULT_LIMIT,
+              },
+            })
+            .example('$0 docs search "reset a branch"', SEARCH_DESCRIBE),
+        );
+    `);
+    const parsed = parseCommandFile(file, new Map());
+    const search = parsed.commands.search;
+    // Without literal-const pooling the describe is dropped, the default
+    // leaks as the raw identifier (defaultText: "DEFAULT_LIMIT"), and the
+    // example description comes out empty.
+    expect(search.describe).toBe('Search neon.com');
+    expect(search.options.limit.describe).toBe('Maximum number of results (1-40)');
+    expect(search.options.limit.default).toBe(10);
+    expect(search.options.limit.defaultText).toBeUndefined();
+    expect(search.examples[0].description).toBe('Search neon.com');
+  });
+});
+
 describe('enumerateConstEntries', () => {
   it('reads keys and describe from a const object literal', () => {
     const file = writeTempSource(`
@@ -434,5 +487,185 @@ describe('inheritParentOptions', () => {
     expect(leaf.alias).toBe('m');
     expect(leaf.type).toBe('string');
     expect(leaf.default).toBe('gp');
+  });
+});
+
+describe('parseCommandFile: enum-member arrays and template-literal consts', () => {
+  it('resolves choices and describes built from Enum.Member arrays', () => {
+    // neon_auth.ts at neon 8.14.0: arrays of NeonAuthOauthProviderId members,
+    // joined into describes, one of them through a template-literal const.
+    // In source the enum lives in utils/api_enums.ts, which buildSchema pools.
+    const file = writeTempSource(`
+      import type yargs from "yargs";
+      const ProviderId = { Google: "google", Apple: "apple" } as const;
+      const SUPPORTED = [ProviderId.Google, ProviderId.Apple] as const;
+      const NO_SHARED = [ProviderId.Apple] as const;
+      const NOTE = \`\${NO_SHARED.join(" and ")} always need your own credentials\`;
+      export const command = "auth";
+      export const describe = "Manage auth";
+      export const builder = (argv: yargs.Argv) =>
+        argv.command("provider", \`Manage providers (\${SUPPORTED.join(", ")})\`, (yargs) =>
+          yargs.command("add", "Add a provider", (yargs) =>
+            yargs.options({
+              "provider-id": { describe: "Provider ID", type: "string", choices: SUPPORTED },
+              "client-id": { describe: \`Client ID; \${NOTE}.\`, type: "string" },
+            }),
+          ),
+        );
+    `);
+    const parsed = parseCommandFile(file, new Map());
+    const provider = parsed.commands.provider;
+    // Without enum-member resolution all three are dropped silently.
+    expect(provider.describe).toBe('Manage providers (google, apple)');
+    expect(provider.commands.add.options['provider-id'].choices).toEqual(['google', 'apple']);
+    expect(provider.commands.add.options['client-id'].describe).toBe(
+      'Client ID; apple always need your own credentials.'
+    );
+  });
+});
+
+describe('parseCommandFile: curried builderFor(usage) builders', () => {
+  // neon-pkgs #1022 changed databases, roles, psql, connection-string, and
+  // computes to export `builderFor(usage)` so postgres.ts can re-mount them.
+  const ROLES_SOURCE = `
+    import type yargs from "yargs";
+    export const command = "roles";
+    export const aliases = ["role"];
+    export const describe = "Manage roles";
+    export const builderFor = (usage: string) => (argv: yargs.Argv) =>
+      argv
+        .usage(\`$0 \${usage} <sub-command> [options]\`)
+        .options({ "project-id": { describe: "Project ID", type: "string" } })
+        .command("list", "List roles", (yargs) => yargs, () => {});
+    export const builder = builderFor("roles");
+  `;
+
+  it('walks the inner builder with usage bound to the argument', () => {
+    const parsed = parseCommandFile(writeTempSource(ROLES_SOURCE), new Map());
+    expect(parsed.usage).toBe('$0 roles <sub-command> [options]');
+    expect(Object.keys(parsed.options)).toEqual(['project-id']);
+    expect(Object.keys(parsed.commands)).toEqual(['list']);
+  });
+
+  it('resolves a namespace-imported module mounted with .command(nested(x))', () => {
+    const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'neonctl-units-'));
+    fs.writeFileSync(path.join(dir, 'roles.ts'), ROLES_SOURCE);
+    const group = path.join(dir, 'postgres.ts');
+    fs.writeFileSync(
+      group,
+      `
+      import type yargs from "yargs";
+      import * as roles from "./roles.js";
+      const nested = (group) => ({
+        command: group.command,
+        builder: group.builderFor(\`postgres \${group.command.split(" ")[0]}\`),
+      });
+      export const command = "postgres";
+      export const aliases = ["pg"];
+      export const describe = "Manage Postgres";
+      export const builder = (argv: yargs.Argv) =>
+        argv.usage("$0 postgres <sub-command> [options]").command(nested(roles));
+    `
+    );
+    const parsed = parseCommandFile(group, new Map());
+    const nestedRoles = parsed.commands.roles;
+    expect(nestedRoles).toBeDefined();
+    expect(nestedRoles.aliases).toEqual(['role']);
+    expect(nestedRoles.describe).toBe('Manage roles');
+    expect(nestedRoles.usage).toBe('$0 postgres roles <sub-command> [options]');
+    expect(Object.keys(nestedRoles.commands)).toEqual(['list']);
+  });
+
+  it('resolves a module mounted with .command(x.command, x.describe, x.builder)', () => {
+    const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'neonctl-units-'));
+    fs.writeFileSync(
+      path.join(dir, 'loki.ts'),
+      `
+      import type yargs from "yargs";
+      export const command = "loki [query]";
+      export const describe = "Call the Loki read API";
+      export const builder = (argv: yargs.Argv) =>
+        argv
+          .usage("$0 logs loki [query] [options]")
+          .positional("query", { describe: "LogQL expression", type: "string" })
+          .options({ since: { describe: "Lookback window", type: "string" } });
+    `
+    );
+    const group = path.join(dir, 'logs.ts');
+    fs.writeFileSync(
+      group,
+      `
+      import type yargs from "yargs";
+      import * as loki from "./loki.js";
+      export const command = "logs";
+      export const describe = "Query branch logs";
+      export const builder = (argv: yargs.Argv) =>
+        argv
+          .usage("$0 logs <sub-command> [options]")
+          .command("fields", "List log fields", (y) => y)
+          .command(loki.command, loki.describe, loki.builder, (args) => loki.handler(args));
+    `
+    );
+    const parsed = parseCommandFile(group, new Map());
+    expect(Object.keys(parsed.commands)).toEqual(['fields', 'loki']);
+    const sub = parsed.commands.loki;
+    expect(sub.describe).toBe('Call the Loki read API');
+    expect(sub.usage).toBe('$0 logs loki [query] [options]');
+    expect(sub.positionals.map((p) => [p.name, p.describe])).toEqual([
+      ['query', 'LogQL expression'],
+    ]);
+    expect(Object.keys(sub.options)).toEqual(['since']);
+  });
+});
+
+describe('parseCommandFile: modules that mount each other', () => {
+  it('stops instead of recursing forever', () => {
+    const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'neonctl-units-'));
+    const mod = (name, other) => `
+      import type yargs from "yargs";
+      import * as other from "./${other}.js";
+      export const command = "${name}";
+      export const describe = "${name}";
+      export const builder = (argv: yargs.Argv) => argv.command(other);
+    `;
+    fs.writeFileSync(path.join(dir, 'a.ts'), mod('a', 'b'));
+    fs.writeFileSync(path.join(dir, 'b.ts'), mod('b', 'a'));
+    const parsed = parseCommandFile(path.join(dir, 'a.ts'), new Map());
+    expect(Object.keys(parsed.commands)).toEqual(['b']);
+    expect(parsed.commands.b.commands).toEqual({});
+  });
+});
+
+describe('parseCommandFile: shorthand describe from an option factory', () => {
+  it('resolves `{ describe }` bound to the factory argument', () => {
+    const file = writeTempSource(`
+      import type yargs from "yargs";
+      const roleOption = (describe: string) =>
+        ({ role: { describe, type: "string", choices: ["admin", "member"] } }) as const;
+      export const command = "orgs";
+      export const describe = "Manage organizations";
+      export const builder = (argv: yargs.Argv) =>
+        argv.command("update", "Change a role", (yargs) =>
+          yargs.options(roleOption("The new organization role"))
+        );
+    `);
+    const parsed = parseCommandFile(file, new Map());
+    const role = parsed.commands.update.options.role;
+    expect(role.describe).toBe('The new organization role');
+    expect(role.choices).toEqual(['admin', 'member']);
+  });
+
+  it("doesn't take the module's own describe for an unbound shorthand", () => {
+    const file = writeTempSource(`
+      import type yargs from "yargs";
+      export const command = "orgs";
+      export const describe = "Manage organizations";
+      export const builder = (argv: yargs.Argv) =>
+        argv.command("update", "Change a role", (yargs) =>
+          yargs.options({ role: { describe, type: "string" } })
+        );
+    `);
+    const parsed = parseCommandFile(file, new Map());
+    expect(parsed.commands.update.options.role.describe).toBeUndefined();
   });
 });

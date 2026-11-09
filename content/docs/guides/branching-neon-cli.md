@@ -158,8 +158,8 @@ You can also update or remove expiration from existing branches:
 # Update expiration to a new timestamp
 neon branches set-expiration <branch-id> --expires-at "2025-07-20T12:00:00Z" --project-id <project-id>
 
-# Remove expiration from a branch
-neon branches set-expiration <branch-id> --expires-at null --project-id <project-id>
+# Remove expiration from a branch (omit --expires-at)
+neon branches set-expiration <branch-id> --project-id <project-id>
 ```
 
 For details and configuration instructions, refer to our [Branch expiration guide](/docs/guides/branch-expiration).

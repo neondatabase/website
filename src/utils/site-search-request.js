@@ -1,0 +1,145 @@
+export const SEARCH_QUERY_MAX_CHARS = 500;
+
+// `page` and `tutorial` only come from pinned results (site-search-pinned.js).
+const SEARCH_COLLECTIONS = new Set([
+  'docs',
+  'guides',
+  'changelog',
+  'blog',
+  'postgresql',
+  'faqs',
+  'page',
+  'tutorial',
+]);
+
+export const SITE_SEARCH_CATEGORIES = [
+  { id: 'docs', label: 'Docs' },
+  { id: 'api', label: 'API Docs' },
+  { id: 'changelog', label: 'Changelog' },
+  { id: 'blog', label: 'Blog' },
+  { id: 'faqs', label: 'FAQs' },
+  { id: 'guides', label: 'Community Guides' },
+  { id: 'postgresql', label: 'PostgreSQL Tutorial' },
+];
+
+const CATEGORY_IDS = new Set(SITE_SEARCH_CATEGORIES.map((category) => category.id));
+
+export function composeServerTiming(upstream, proxyMs) {
+  const proxy = `proxy;dur=${proxyMs.toFixed(1)}`;
+  if (typeof upstream !== 'string' || upstream.trim() === '') {
+    return proxy;
+  }
+  return `${upstream.trim()}, ${proxy}`;
+}
+
+// neon-agent records each search by caller; the browser's user agent is the one worth recording.
+export function siteSearchUpstreamHeaders(userAgent) {
+  const headers = { 'content-type': 'application/json', 'x-caller-source': 'website' };
+  const trimmed = userAgent?.trim();
+  if (trimmed) headers['x-caller-user-agent'] = trimmed;
+  return headers;
+}
+
+export function parseSiteSearchRequest(body) {
+  if (typeof body !== 'object' || body === null || Array.isArray(body)) {
+    throw new Error('Invalid JSON body');
+  }
+  const keys = Object.keys(body);
+  if (keys.some((key) => key !== 'query' && key !== 'limit' && key !== 'categories')) {
+    throw new Error('Unexpected field');
+  }
+  if (typeof body.query !== 'string') {
+    throw new Error('query is required');
+  }
+  const query = body.query.trim();
+  if (query === '') {
+    throw new Error('query is required');
+  }
+  if (query.length > SEARCH_QUERY_MAX_CHARS) {
+    throw new Error('query is too long');
+  }
+  if (body.limit !== undefined) {
+    if (!Number.isInteger(body.limit) || body.limit < 1 || body.limit > 40) {
+      throw new Error('limit must be an integer from 1 to 40');
+    }
+  }
+  if (body.categories !== undefined) {
+    if (
+      !Array.isArray(body.categories) ||
+      body.categories.length === 0 ||
+      !body.categories.every((category) => CATEGORY_IDS.has(category))
+    ) {
+      throw new Error('categories must list one or more known categories');
+    }
+  }
+  return {
+    query,
+    ...(body.limit === undefined ? {} : { limit: body.limit }),
+    ...(body.categories === undefined ? {} : { categories: [...new Set(body.categories)] }),
+  };
+}
+
+export function hrefFromSearchHit(url) {
+  const parsed = new URL(url);
+  if (
+    parsed.protocol !== 'https:' ||
+    parsed.hostname !== 'neon.com' ||
+    parsed.pathname.startsWith('//')
+  ) {
+    throw new Error(`Search hit is not a neon.com url: ${url}`);
+  }
+  return `${parsed.pathname}${parsed.search}${parsed.hash}`;
+}
+
+const BREADCRUMB_MAX_LABELS = 10;
+
+function isBreadcrumb(value) {
+  return (
+    Array.isArray(value) &&
+    value.length <= BREADCRUMB_MAX_LABELS &&
+    value.every((label) => typeof label === 'string' && label !== '')
+  );
+}
+
+export function parseSiteSearchHits(payload) {
+  if (typeof payload !== 'object' || payload === null || Array.isArray(payload)) {
+    throw new Error('Search failed.');
+  }
+  if (!Array.isArray(payload.hits)) {
+    throw new Error('Search failed.');
+  }
+  return payload.hits.map((hit) => parseSiteSearchHit(hit));
+}
+
+function parseSiteSearchHit(hit) {
+  if (typeof hit !== 'object' || hit === null || Array.isArray(hit)) {
+    throw new Error('Search failed.');
+  }
+  const { url, title, slug, collection, category, breadcrumb, heading, excerpt, score } = hit;
+  if (
+    typeof url !== 'string' ||
+    typeof title !== 'string' ||
+    typeof slug !== 'string' ||
+    !CATEGORY_IDS.has(category) ||
+    !isBreadcrumb(breadcrumb) ||
+    typeof heading !== 'string' ||
+    typeof excerpt !== 'string' ||
+    typeof score !== 'number' ||
+    !Number.isFinite(score) ||
+    !SEARCH_COLLECTIONS.has(collection)
+  ) {
+    throw new Error('Search failed.');
+  }
+  hrefFromSearchHit(url);
+  return {
+    url,
+    title,
+    slug,
+    collection,
+    category,
+    breadcrumb,
+    heading,
+    excerpt,
+    score,
+  };
+}

@@ -7,7 +7,7 @@ excerpt: >-
   the subject, you’ll have come across three little letters: JWT. This whole
   world seems to run on JWTs–so what are they? JWTs, or JS...
 date: '2024-11-29T16:37:34'
-updatedOn: '2025-03-13T01:39:13'
+updatedOn: '2026-11-06T12:00:00.000Z'
 category: community
 categories:
   - community
@@ -32,6 +32,10 @@ seo:
 ---
 
 ![Image](https://cdn.neonapi.io/public/images/pages/blog/wtf-are-jwts/neon-jwt-1-1024x576-0397aca7.jpg)
+
+<Admonition type="important" title="Update: Neon RLS is now part of the Neon Data API">
+We’ve moved the functionality previously known as Neon RLS / Neon Authorize into the Neon Data API. You can [read more about the Data API here](https://neon.com/docs/data-api/get-started) and start using it in your projects today.
+</Admonition>
 
 We recently launched [Neon RLS](https://neon.com/blog/introducing-neon-authorize) to simplify Postgres authorization with row-level security.
 
@@ -119,11 +123,11 @@ So, the entire payload would look like this:
 ```javascript
 {
   "azp": "https://localhost:3000",
-  "exp": 1639398300,             
-  "iat": 1639398272,                  
-  "iss": "https://clean-mayfly-62.clerk.accounts.dev", 
-  "nbf": 1639398220,                  
-  "sid": "sess_2ehYpzsasKNOZrpqPZ9yDWhrYVe",  
+  "exp": 1639398300,
+  "iat": 1639398272,
+  "iss": "https://clean-mayfly-62.clerk.accounts.dev",
+  "nbf": 1639398220,
+  "sid": "sess_2ehYpzsasKNOZrpqPZ9yDWhrYVe",
   "sub": "user_1deJLArSTiWiF1YdsEWysnhJLLY"
   "user_id": "user_abcdef123456789",
   "avatar": "https://example.com/avatar.jpg",
@@ -138,7 +142,7 @@ The signature is what makes JWTs secure. It’s created by taking the encoded he
 
 ```javascript
 HMACSHA256(
-  base64UrlEncode(header) + "." + 
+  base64UrlEncode(header) + "." +
   base64UrlEncode(payload),
   secret
 )

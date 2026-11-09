@@ -650,6 +650,13 @@
     "photo": "https://cdn.neonapi.io/public/images/pages/blog/authors/rishi-raj-jain.jpg",
     "photoAlt": "Rishi Raj Jain"
   },
+  "robert-haas": {
+    "name": "Robert Haas",
+    "role": "Postgres Committer, Databricks",
+    "url": null,
+    "photo": "/apple-touch-icon.png",
+    "photoAlt": "Robert Haas"
+  },
   "rodney-sherwin-shibu": {
     "name": "Rodney Sherwin Shibu",
     "role": "Member of Technical Staff",

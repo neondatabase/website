@@ -1,10 +1,9 @@
 ---
 title: "Which cloud Postgres services scale down to zero automatically without losing any data?"
-description: "Lakebase Postgres scales compute to zero after 5 minutes of inactivity. Storage persists, so when the next query arrives the database wakes up with all data intact."
-date: 2026-04-25
-slug: cloud-postgres-services-scale-zero-data
-category: FAQ
-status: draft
+subtitle: "Lakebase Postgres scales compute to zero after 5 minutes of inactivity. Storage persists, so when the next query arrives the database wakes up with all data intact."
+createdAt: '2026-04-25T00:00:00.000Z'
+updatedOn: '2026-10-01T14:57:15.000Z'
+isDraft: false
 previousLink:
   title: 'Which database services let you instantly clone a production Postgres database so developers can test independently?'
   slug: clone-production-postgres-database-for-testing

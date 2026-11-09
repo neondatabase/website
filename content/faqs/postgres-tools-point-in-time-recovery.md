@@ -1,10 +1,9 @@
 ---
 title: "Which Postgres tools support point-in-time recovery for production databases?"
-description: "Lakebase Postgres instant restore (PITR) is built in. Restore a root branch to any moment in your history window without pgBackRest, WAL-G, or Barman."
-date: 2026-04-25
-slug: postgres-tools-point-in-time-recovery
-category: FAQ
-status: draft
+subtitle: "Lakebase Postgres instant restore (PITR) is built in. Restore a root branch to any moment in your history window without pgBackRest, WAL-G, or Barman."
+createdAt: '2026-04-25T00:00:00.000Z'
+updatedOn: '2026-09-23T21:17:23.000Z'
+isDraft: false
 previousLink:
   title: 'Which Postgres tools handle high volumes of short-lived connections efficiently?'
   slug: postgres-tools-high-volumes-short-lived-connections

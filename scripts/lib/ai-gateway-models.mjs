@@ -43,9 +43,13 @@ function rates(pricing) {
   return out;
 }
 
+// A System One decision model answers questions about a state and generates no text, so it is
+// billed on input only. The gateway lists it with `completion: "0"`.
+const isDecision = (item) => item.dialects?.includes('systemone') === true;
+
 function toCost(item, committedCost = {}) {
   const cost = rates(item.pricing);
-  if (item.model_type === 'embedding') delete cost.output;
+  if (item.model_type === 'embedding' || isDecision(item)) delete cost.output;
   if (committedCost.input_audio != null) cost.input_audio = committedCost.input_audio;
   const overrides = item.pricing.overrides ?? [];
   if (overrides.length) {
@@ -58,11 +62,18 @@ function toCost(item, committedCost = {}) {
   return cost;
 }
 
+// models.dev terms: the lab made the model, the provider serves it. Databricks
+// provides every model on the gateway except TypeSafe AI's own closed-weight Jev,
+// which TypeSafe AI hosts.
+export const providerFor = ({ lab, openWeights }) =>
+  lab === 'typesafe' && !openWeights ? 'typesafe' : 'databricks';
+
 export function toCatalogEntry(item, committedEntry = {}) {
   const entry = {
     id: item.id,
     name: item.name,
-    provider: item.owned_by,
+    lab: item.owned_by,
+    provider: providerFor({ lab: item.owned_by, openWeights: item.features.open_weights }),
     family: item.family,
     // Committed `released: false` holds a model back until it is announced.
     released: committedEntry.released ?? true,
@@ -78,6 +89,18 @@ export function toCatalogEntry(item, committedEntry = {}) {
       open_weights: f.open_weights,
       release_date: item.release_date,
       last_updated: lastUpdated,
+      cost: toCost(item, committedEntry.cost),
+    };
+  }
+
+  if (isDecision(item)) {
+    return {
+      ...entry,
+      type: 'decision',
+      open_weights: f.open_weights,
+      release_date: item.release_date,
+      last_updated: lastUpdated,
+      ...(item.context_length && { limit: { context: item.context_length } }),
       cost: toCost(item, committedEntry.cost),
     };
   }

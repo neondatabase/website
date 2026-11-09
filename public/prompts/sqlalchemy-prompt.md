@@ -34,10 +34,10 @@ This is a mandatory first step.
 Install the required Python packages into the virtual environment.
 
 ```bash
-venv/bin/pip install SQLAlchemy psycopg2-binary python-dotenv
+venv/bin/pip install SQLAlchemy "psycopg[binary]" python-dotenv
 ```
 - **`SQLAlchemy`**: The core SQL toolkit and ORM.
-- **`psycopg2-binary`**: The modern, high-performance PostgreSQL driver for Python.
+- **`psycopg[binary]`**: The psycopg (v3) Postgres driver, the default for `postgresql://` URLs in SQLAlchemy 2.1.
 - **`python-dotenv`**: To load the database connection string from a `.env` file.
 
 ---
@@ -48,7 +48,7 @@ venv/bin/pip install SQLAlchemy psycopg2-binary python-dotenv
 2.  Add the `DATABASE_URL` variable to the `.env` file. **Prompt the user to replace the placeholder value** with their full connection string from the Neon console.
 
     ```dotenv title=".env"
-    DATABASE_URL="postgresql://<user>:<password>@<host>.neon.tech/<dbname>?sslmode=require"
+    DATABASE_URL="postgresql+psycopg://<user>:<password>@<host>.neon.tech/<dbname>?sslmode=require&channel_binding=require"
     ```
 
 3.  Direct the user to find this value in the **Neon Console → Project → Connect**.
@@ -111,7 +111,7 @@ Once the file modifications are complete:
 
 Before suggesting code or making edits, ensure:
 - A Python virtual environment exists and is intended for use.
-- The `SQLAlchemy`, `psycopg2-binary`, and `python-dotenv` packages are installed in the virtual environment.
+- The `SQLAlchemy`, `psycopg[binary]`, and `python-dotenv` packages are installed in the virtual environment, and `DATABASE_URL` uses the `postgresql+psycopg://` scheme.
 - A `.env` file is present or has been created.
 - The example script (`main.py`) correctly loads the `DATABASE_URL` from the environment using `os.getenv()`.
 

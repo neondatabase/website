@@ -1,7 +1,18 @@
-import { registrySourceUrl, resolveRegistryPath } from 'utils/function-registry';
+import {
+  REGISTRY_PUBLIC_PATHS,
+  registryFetchInit,
+  registrySourceUrl,
+  resolveRegistryPath,
+} from 'utils/function-registry';
 
-// Next only accepts a literal here.
+// Next only accepts a literal here. Cache catalog + schemas for an hour.
 export const revalidate = 3600;
+export const fetchCache = 'force-cache';
+export const dynamicParams = false;
+
+export function generateStaticParams() {
+  return REGISTRY_PUBLIC_PATHS.map((path) => ({ path: path.split('/') }));
+}
 
 const notFound = () =>
   new Response('Not found\n', {
@@ -30,10 +41,7 @@ export async function GET(_request, { params }) {
   if (!resolved) return notFound();
 
   try {
-    const response = await fetch(registrySourceUrl(resolved.path), {
-      headers: { 'User-Agent': 'neon-website-function-registry' },
-      next: { revalidate },
-    });
+    const response = await fetch(registrySourceUrl(resolved.path), registryFetchInit());
     if (!response.ok) return unavailable();
     const text = await response.text();
     JSON.parse(text); // reject non-JSON before serving

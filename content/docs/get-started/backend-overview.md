@@ -14,6 +14,7 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/get-started/backend-beta
   - /docs/get-started/platform-private-preview
+updatedOn: '2026-10-30T18:52:42.000Z'
 ---
 
 On Neon, a single [`neon.ts`](/docs/reference/neon-ts) file declares your whole backend: a **Postgres database**, S3-compatible **Object Storage**, long-running **Functions**, an **AI Gateway** for calling LLMs through one credential, managed **Auth**, and the **Data API**. Each capability is a toggle, or on by default for Postgres, plus [`neon deploy`](/docs/cli/deploy), which provisions it and injects standard environment variables into your app. Branch your project and the whole backend follows it through service-specific lifecycle mechanics.
@@ -43,7 +44,7 @@ So when you see a `notes` table, an `attachments` bucket, or a `chat` function b
 The sixth capability is the [Data API](/docs/data-api/overview), which exposes Postgres through a PostgREST-compatible HTTPS endpoint. This example doesn't enable it because the `chat` Function queries Postgres directly.
 
 <Admonition type="info" title="Region and access requirements">
-Object Storage, Functions, and the AI Gateway are currently available in AWS US East (Ohio) (`aws-us-east-2`), AWS US East (N. Virginia) (`aws-us-east-1`), AWS Europe (Frankfurt) (`aws-eu-central-1`), and AWS Asia Pacific (Singapore) (`aws-ap-southeast-1`), on new or existing projects in those regions, so use a project in one of them to try them. Support is expanding toward [all regions](/docs/introduction/regions). Postgres and Managed Better Auth work in any region. Object Storage and Functions are available on any plan, subject to usage limits; the AI Gateway requires a paid plan.
+Object Storage, Functions, and the AI Gateway are currently available in AWS US East (Ohio) (`aws-us-east-2`), AWS US East (N. Virginia) (`aws-us-east-1`), AWS Europe (Frankfurt) (`aws-eu-central-1`), and AWS Asia Pacific (Singapore) (`aws-ap-southeast-1`), on new or existing projects in those regions, so use a project in one of them to try them. Support is expanding toward [all regions](/docs/introduction/regions). Postgres and Managed Better Auth work in any region. Object Storage and Functions are available on any plan, subject to usage limits; the AI Gateway works on any plan with prepaid credits.
 </Admonition>
 
 ## The shape of a Neon backend
@@ -113,8 +114,8 @@ For capabilities declared in `neon.ts`, the setup follows the same three steps: 
 | **Object Storage**      | `buckets: { ... }`   | `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`, `AWS_ENDPOINT_URL_S3`, `AWS_REGION` | `files-sdk` (or any S3 client)                    |
 | **Functions**           | `functions: { ... }` | `DATABASE_URL` and more, inside the function                                      | Hono (any web framework)                          |
 | **AI Gateway**          | `aiGateway: true`    | `NEON_AI_GATEWAY_BASE_URL`, `NEON_AI_GATEWAY_TOKEN`                               | `@neon/ai-sdk-provider`                           |
-| **Managed Better Auth** | `auth: true`         | `NEON_AUTH_BASE_URL`, `NEON_AUTH_JWKS_URL`                                        | `@neondatabase/auth`                              |
-| **Data API**            | `dataApi: true`      | `NEON_DATA_API_URL`                                                               | `@neondatabase/neon-js`                           |
+| **Managed Better Auth** | `auth: true`         | `NEON_AUTH_BASE_URL`, `NEON_AUTH_JWKS_URL`                                        | `@neon/auth`                                      |
+| **Data API**            | `dataApi: true`      | `NEON_DATA_API_URL`                                                               | `@neon/neon-js`                                   |
 
 <Admonition type="note" title="Reading the snippets">
 The `neon.ts` fragments below show only the key being added. `auth`, `dataApi`, and the backend features (`buckets`, `functions`, `aiGateway`) are all top-level keys of `defineConfig({ ... })` (see [neon.ts](/docs/reference/neon-ts#services)). The [complete file](#where-to-build-it) shows the five services this example uses assembled. Credentials are written to `.env` if you have one, otherwise `.env.local`; this page writes `.env` for whichever is yours.
@@ -238,7 +239,7 @@ const result = streamText({
 return result.toTextStreamResponse();
 ```
 
-Output isn't only text. The same credential reaches other modalities through model-specific options; for example, OpenAI models can generate images via the `image_generation` tool on the Responses API. See the [model catalog](/docs/ai-gateway/models) for which models support what.
+Output isn't only text. The same credential reaches other modalities through model-specific options; for example, OpenAI models can generate images via the `image_generation` tool on the Responses API. Set the tool's `model` option to `gpt-image-2`, because the default image model isn't available on AI Gateway. See the [model catalog](/docs/ai-gateway/models) for which models support what.
 
 <Admonition type="note" title="First call after a deploy">
 Right after `neon deploy` on a new branch, the first gateway call can return a `403` (`credential not authorized for this branch`) while the credential propagates. It clears within a few seconds, so retry.

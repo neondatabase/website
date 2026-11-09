@@ -35,6 +35,8 @@ CREATE TABLE documents (
 );
 ```
 
+The AI Gateway is available on paid Neon plans only (Launch and Scale) and draws down prepaid AI Gateway credits. If a model shows `enabled: false` in `GET /v1/models`, the branch's AI Gateway page in the Neon Console lists the reason and the fix. See the `neon-ai-gateway` skill.
+
 Enable the AI Gateway on the branch and get `NEON_AI_GATEWAY_TOKEN` and the bare-host `NEON_AI_GATEWAY_BASE_URL`:
 
 - With `neon.ts`, declare `aiGateway: true`, run `neon deploy`, then run `neon env pull --file .env`.

@@ -4,9 +4,10 @@ subtitle: CLI and API reference for deploying and managing Neon Functions.
 summary: >-
   Reference for deploying Neon Functions with neon deploy, neon functions
   deploy, or the Neon API, including flags, deployment states, and slug rules.
-  Also covers checking status, listing functions, and deleting them.
+  Also covers deploying a function from a Neon Function Registry template,
+  checking status, listing functions, and deleting them.
 enableTableOfContents: true
-updatedOn: '2026-10-14T11:21:37.306Z'
+updatedOn: '2026-11-04T23:32:57.663Z'
 ---
 
 ## Deploy with `neon.ts`
@@ -48,14 +49,14 @@ By default, the CLI bundles your source with esbuild, zips the output, and uploa
 The `neon` CLI ships `esbuild` for most platforms. If bundling fails with an `esbuild not found` error, install it (`npm install -g esbuild`) or set `NEON_ESBUILD_PATH` to an esbuild binary. `NEON_ESBUILD_PATH` is read by the CLI's own bundler, not by `buildFunctionBundle` in [`@neon/config-runtime`](/docs/reference/config-runtime#function-bundling); when calling that package directly, pass a custom `bundleFunction` instead.
 </Admonition>
 
-| Flag              | Default       | Description                                                                                                                                                                                              |
-| ----------------- | ------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `--src`           | (none)        | Function source: a directory containing `index.ts`, `index.js`, or `index.mjs` (the first match is the entry), or a path to the entry file                                                               |
-| `--env KEY=VALUE` | (none)        | Set an environment variable. Repeatable. Stored with the deployment. Takes `KEY=VALUE` pairs, not a `.env` file path like `neon deploy --env`                                                            |
-| `--runtime`       | `nodejs24`    | Function runtime. `nodejs24` is the only valid value                                                                                                                                                     |
-| `--branch`        | linked branch | Target branch. Defaults to the branch in `.neon`                                                                                                                                                         |
-| `--wait`          | `true`        | Poll until `completed` or `failed`, up to 10 minutes                                                                                                                                                     |
-| `--no-bundle`     | off (bundles) | Skip esbuild and zip a prebuilt source as-is. The directory root, or the file you point at, must be `index.mjs` or `index.js` (TypeScript can't ship unbundled). Use it when you run your own build step |
+| Flag              | Default                 | Description                                                                                                                                                                                                                                                                           |
+| ----------------- | ----------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `--src`           | `.` (current directory) | Function source: a directory containing `index.ts`, `index.js`, or `index.mjs` (the first match is the entry), or a path to the entry file. If you omit `--src`, pass at least one other option (`--env`, `--runtime`, or `--no-bundle`). A bare `neon functions deploy <slug>` fails |
+| `--env KEY=VALUE` | (none)                  | Set an environment variable. Repeatable. Stored with the deployment. Takes `KEY=VALUE` pairs, not a `.env` file path like `neon deploy --env`                                                                                                                                         |
+| `--runtime`       | `nodejs24`              | Function runtime. `nodejs24` is the only valid value                                                                                                                                                                                                                                  |
+| `--branch`        | linked branch           | Target branch. Defaults to the branch in `.neon`                                                                                                                                                                                                                                      |
+| `--wait`          | `true`                  | Poll until `completed` or `failed`, up to 10 minutes                                                                                                                                                                                                                                  |
+| `--no-bundle`     | off (bundles)           | Skip esbuild and zip a prebuilt source as-is. The directory root, or the file you point at, must be `index.mjs` or `index.js` (TypeScript can't ship unbundled). Use it when you run your own build step                                                                              |
 
 **Examples:**
 
@@ -157,6 +158,16 @@ const { data: deployment } = await neon.functions.deploy({
 ```
 
 `neon.functions.deploy` uses the same multipart API fields as the raw endpoint. `list`, `get`, `update`, and `delete` are also available under `neon.functions`.
+
+## Deploy a function from a template
+
+A function template adds a ready-made function to your project. Browse the catalog at [neon.com/functions/templates](/functions/templates), then add one with [`neon functions new`](/docs/cli/functions#new):
+
+```bash
+neon functions new basic   # writes functions/basic/ and declares it in neon.ts
+```
+
+From there, it deploys like any other function. Some templates also need services such as AI Gateway or Object Storage enabled first. For the full workflow, see [Use function templates](/docs/compute/functions/templates).
 
 ## Slugs
 

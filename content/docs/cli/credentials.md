@@ -7,6 +7,7 @@ summary: >-
   the credentials on a branch, reveal a credential's secrets, rotate its secrets
   in place, and revoke it.
 enableTableOfContents: true
+updatedOn: '2026-10-21T14:03:15.000Z'
 ---
 
 The `credentials` command manages scoped credentials on a branch. A credential grants an application or agent direct access to a branch's surfaces without an account API key. Each credential carries one or more scopes and, when issued, a pair of secrets: an `api_token` and an `s3_secret_access_key`.
@@ -19,7 +20,7 @@ The available scopes are:
 
 Credentials are branch-scoped. Pass `--project-id` and `--branch` to target a branch, or let the CLI resolve them from your [context file](/docs/cli/link). A credential's `token_id` has the form `nak_live_<hex>` and is stable across a rotation.
 
-<Admonition type="important" title="Secrets are shown only once">
+<Admonition type="important" title="Store secrets when they're issued">
 The `api_token` and `s3_secret_access_key` are returned only when you create or rotate a credential, or when you explicitly run `neon credentials reveal`. Store them securely as soon as they're issued.
 </Admonition>
 

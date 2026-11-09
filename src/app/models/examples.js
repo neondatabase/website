@@ -10,14 +10,18 @@
 // Every branch below keys off a measured value in ./capabilities.json, never off a family name.
 
 const ENV = ['NEON_AI_GATEWAY_BASE_URL', 'NEON_AI_GATEWAY_TOKEN'];
-const AI_SDK_DEPS = ['ai', '@neondatabase/ai-sdk-provider'];
+const AI_SDK_DEPS = ['ai', '@neon/ai-sdk-provider'];
+// experimental_decide needs ai 7.0.133 or later, so pin the major.
+const DECISION_AI_SDK_DEPS = ['ai@7', '@neon/ai-sdk-provider'];
 
 const CHAT_PROMPT = 'Explain Serverless Postgres.';
 const SEARCH_PROMPT = 'What is the latest stable Postgres release?';
 const IMAGE_PROMPT = 'A red apple on a wooden table.';
 const EMBEDDING_INPUT = 'Explain Serverless Postgres.';
+const DECISION_STATE = 'I was charged twice this month.';
+const DECISION_QUESTION = 'Is the user asking about billing?';
 
-export const USE_CASES = ['chat', 'image-generation', 'web-search', 'embeddings'];
+export const USE_CASES = ['chat', 'image-generation', 'web-search', 'embeddings', 'systemone'];
 
 const example = ({
   id,
@@ -54,7 +58,7 @@ const aiSdkChat = (model, responsesOnly) =>
     dependencies: AI_SDK_DEPS,
     endpoint: responsesOnly ? '/openai/v1 (via provider)' : '/v1/chat/completions (via provider)',
     content: `import { generateText } from "ai";
-import { neon } from "@neondatabase/ai-sdk-provider";
+import { neon } from "@neon/ai-sdk-provider";
 
 const { text } = await generateText({
   model: neon("${model}"),
@@ -76,7 +80,7 @@ const mastraChat = (model, needsProvider, responsesOnly) =>
       : undefined,
     content: needsProvider
       ? `import { Agent } from "@mastra/core/agent";
-import { neon } from "@neondatabase/ai-sdk-provider";
+import { neon } from "@neon/ai-sdk-provider";
 
 const agent = new Agent({
   id: "neon-demo",
@@ -281,7 +285,7 @@ const webSearchExamples = (model) => [
     dependencies: AI_SDK_DEPS,
     endpoint: '/openai/v1 (via provider)',
     content: `import { generateText } from "ai";
-import { neon } from "@neondatabase/ai-sdk-provider";
+import { neon } from "@neon/ai-sdk-provider";
 
 const { text, sources } = await generateText({
   model: neon("${model}"),
@@ -302,7 +306,7 @@ console.log(sources.filter((source) => source.sourceType === "url").map((source)
     // own webSearchTool cannot be used here: that one infers the provider from the model id prefix
     // and rejects neon/… with WEB_SEARCH_UNSUPPORTED_PROVIDER.
     content: `import { Agent } from "@mastra/core/agent";
-import { neon } from "@neondatabase/ai-sdk-provider";
+import { neon } from "@neon/ai-sdk-provider";
 
 const agent = new Agent({
   id: "neon-demo",
@@ -437,6 +441,8 @@ print(len(resp.data[0].embedding), resp.usage)
 
 /* ------------------------------------------------------ image generation */
 
+// Always set the image tool's model to gpt-image-2. The OpenAI default (gpt-image-1) is not
+// available on the gateway.
 // A generated image is ~3 MB of base64 and the gateway rejects buffered responses over 655,360
 // bytes, which is why the SDK variants stream and why there is no cURL variant. Mastra is the
 // exception: its agent call returns once, with the base64 whole.
@@ -447,13 +453,16 @@ const imageExamples = (model) => [
     dependencies: AI_SDK_DEPS,
     endpoint: '/openai/v1 (via provider)',
     content: `import { streamText } from "ai";
-import { neon } from "@neondatabase/ai-sdk-provider";
+import { neon } from "@neon/ai-sdk-provider";
 
 const result = streamText({
   model: neon("${model}"),
   prompt: "${IMAGE_PROMPT}",
   tools: {
-    image_generation: neon.tools.imageGeneration({ outputFormat: "jpeg" }),
+    image_generation: neon.tools.imageGeneration({
+      model: "gpt-image-2",
+      outputFormat: "jpeg",
+    }),
   },
 });
 
@@ -471,14 +480,19 @@ console.log(images.length);
     // Mastra returns once with the base64 whole, so it is the one variant that does not iterate a
     // stream. Its tool results carry an envelope the AI SDK does not have, hence payload.*.
     content: `import { Agent } from "@mastra/core/agent";
-import { neon } from "@neondatabase/ai-sdk-provider";
+import { neon } from "@neon/ai-sdk-provider";
 
 const agent = new Agent({
   id: "neon-demo",
   name: "neon-demo",
   instructions: "Generate the image the user asks for.",
   model: "neon/${model}",
-  tools: { image_generation: neon.tools.imageGeneration({ outputFormat: "jpeg" }) },
+  tools: {
+    image_generation: neon.tools.imageGeneration({
+      model: "gpt-image-2",
+      outputFormat: "jpeg",
+    }),
+  },
 });
 
 const { toolResults } = await agent.generate("${IMAGE_PROMPT}");
@@ -501,7 +515,7 @@ const client = new OpenAI({
 const stream = client.responses.stream({
   model: "${model}",
   input: "${IMAGE_PROMPT}",
-  tools: [{ type: "image_generation" }],
+  tools: [{ type: "image_generation", model: "gpt-image-2" }],
 });
 
 const response = await stream.finalResponse();
@@ -528,7 +542,7 @@ client = OpenAI(
 with client.responses.stream(
     model="${model}",
     input="${IMAGE_PROMPT}",
-    tools=[{"type": "image_generation"}],
+    tools=[{"type": "image_generation", "model": "gpt-image-2"}],
 ) as stream:
     for _ in stream:
         pass
@@ -540,6 +554,107 @@ sizes = [
     if item.type == "image_generation_call" and getattr(item, "result", None)
 ]
 print(sizes)
+`,
+  }),
+];
+
+/* ------------------------------------------------------------ systemone */
+
+// System One decision models are served only on /typesafe/v1/systemone. The TypeSafe SDKs take
+// `${NEON_AI_GATEWAY_BASE_URL}/typesafe` and append /v1/systemone themselves.
+const decisionExamples = (model) => [
+  tsExample({
+    id: 'ai-sdk',
+    title: 'AI SDK',
+    dependencies: DECISION_AI_SDK_DEPS,
+    endpoint: '/typesafe/v1/systemone (via provider)',
+    content: `import { experimental_decide as decide } from "ai";
+import { neon } from "@neon/ai-sdk-provider";
+
+const { answers, usage } = await decide({
+  model: neon.decisionModel("${model}"),
+  state: "${DECISION_STATE}",
+  questions: {
+    billing: {
+      type: "boolean",
+      instructions: "${DECISION_QUESTION}",
+      criteria: { true: "Billing related", false: "Not billing" },
+    },
+  },
+});
+console.log(answers, usage);
+`,
+  }),
+  tsExample({
+    id: 'typescript',
+    title: 'TypeScript',
+    dependencies: ['@typesafe-ai/sdk'],
+    endpoint: '/typesafe/v1/systemone',
+    content: `import { noul, TypeSafeClient } from "@typesafe-ai/sdk";
+
+const client = new TypeSafeClient({
+  apiKey: process.env.NEON_AI_GATEWAY_TOKEN,
+  baseURL: \`\${process.env.NEON_AI_GATEWAY_BASE_URL}/typesafe\`,
+  defaultModel: "${model}",
+});
+
+const { answers, usage } = await client.systemOne({
+  state: "${DECISION_STATE}",
+  questions: {
+    billing: noul("${DECISION_QUESTION}", {
+      true: "Billing related",
+      false: "Not billing",
+    }),
+  },
+});
+console.log(answers, usage);
+`,
+  }),
+  example({
+    id: 'python',
+    title: 'Python',
+    language: 'python',
+    dependencies: ['typesafe-sdk'],
+    endpoint: '/typesafe/v1/systemone',
+    path: 'main.py',
+    content: `import os
+from typesafe_sdk import Noul, TypeSafeClient
+
+with TypeSafeClient(
+    api_key=os.environ["NEON_AI_GATEWAY_TOKEN"],
+    base_url=f"{os.environ['NEON_AI_GATEWAY_BASE_URL']}/typesafe",
+    model="${model}",
+) as client:
+    response = client.system_one(
+        state="${DECISION_STATE}",
+        questions={
+            "billing": Noul(
+                instructions="${DECISION_QUESTION}",
+                criteria={"true": "Billing related", "false": "Not billing"},
+            ),
+        },
+    )
+print(response.answers, response.usage)
+`,
+  }),
+  shExample({
+    id: 'curl',
+    title: 'cURL',
+    endpoint: '/typesafe/v1/systemone',
+    content: `curl "\${NEON_AI_GATEWAY_BASE_URL}/typesafe/v1/systemone" \\
+  -H "Authorization: Bearer \${NEON_AI_GATEWAY_TOKEN}" \\
+  -H "Content-Type: application/json" \\
+  -d '{
+    "model": "${model}",
+    "state": "${DECISION_STATE}",
+    "questions": {
+      "billing": {
+        "type": "noul",
+        "instructions": "${DECISION_QUESTION}",
+        "criteria": {"true": "Billing related", "false": "Not billing"}
+      }
+    }
+  }'
 `,
   }),
 ];
@@ -581,6 +696,19 @@ export function buildExamples(modelId, useCase, caps) {
     return caps.embeddings
       ? { examples: embeddingExamples(modelId) }
       : { examples: [], unsupported: `${modelId} is not an embedding model.` };
+  }
+
+  if (useCase === 'systemone') {
+    return caps.decision
+      ? { examples: decisionExamples(modelId) }
+      : { examples: [], unsupported: `${modelId} is not a System One decision model.` };
+  }
+
+  if (caps.decision) {
+    return {
+      examples: [],
+      unsupported: `${modelId} is a System One decision model served only on /typesafe/v1/systemone — see the systemone use case.`,
+    };
   }
 
   // An embedding model has no chat shape to fall back to — POST /v1/embeddings is its only

@@ -36,6 +36,25 @@ describe('getMetadata', () => {
     expect(metadata.openGraph.url).toBe('https://neon.com/guides/sentry-neon-mcp');
   });
 
+  it('adds a missing leading slash instead of gluing the path onto the host', () => {
+    const metadata = getMetadata({ pathname: 'storage' });
+
+    expect(metadata.alternates.canonical).toBe('https://neon.com/storage');
+    expect(metadata.openGraph.url).toBe('https://neon.com/storage');
+  });
+
+  it('gives every SEO_DATA entry a site-relative pathname', () => {
+    // 404 and error only supply <title>
+    const exempt = ['404', 'error'];
+
+    Object.entries(SEO_DATA)
+      .filter(([key, entry]) => !exempt.includes(key) && entry && typeof entry === 'object')
+      .forEach(([key, entry]) => {
+        expect(typeof entry.pathname, key).toBe('string');
+        expect(entry.pathname === '' || entry.pathname.startsWith('/'), key).toBe(true);
+      });
+  });
+
   it.each([
     [SEO_DATA.functions, 'https://neon.com/functions.md'],
     [SEO_DATA.aiGateway, 'https://neon.com/ai-gateway.md'],
@@ -90,6 +109,26 @@ describe('getMetadata', () => {
 
     expect(metadata.alternates.canonical).toBe('https://www.postgresql.org/docs/16/tutorial.html');
     expect(metadata.openGraph.url).toBe('https://neon.com/postgresql/tutorial');
+  });
+
+  it('derives the markdown alternate for pages with a markdown twin', () => {
+    const metadata = getMetadata({ pathname: '/guides/some-guide' });
+
+    expect(metadata.alternates.types['text/markdown']).toBe(
+      'https://neon.com/guides/some-guide.md'
+    );
+  });
+
+  it('prefers an explicit markdownPath over the derived one', () => {
+    const metadata = getMetadata({ pathname: '/auth', markdownPath: '/md/auth-page.md' });
+
+    expect(metadata.alternates.types['text/markdown']).toBe('https://neon.com/md/auth-page.md');
+  });
+
+  it('omits the markdown alternate for pages without a markdown twin', () => {
+    const metadata = getMetadata({ pathname: '/contact-sales' });
+
+    expect(metadata.alternates.types['text/markdown']).toBeNull();
   });
 });
 

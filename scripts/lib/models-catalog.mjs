@@ -46,6 +46,7 @@ const DATE_KEYS = ['release_date', 'last_updated', 'knowledge'];
 const REQUIRED_KEYS = [
   'id',
   'name',
+  'lab',
   'provider',
   'family',
   'released',
@@ -67,6 +68,7 @@ const REQUIRED_KEYS = [
 const EMBEDDING_REQUIRED_KEYS = [
   'id',
   'name',
+  'lab',
   'provider',
   'family',
   'released',
@@ -75,7 +77,13 @@ const EMBEDDING_REQUIRED_KEYS = [
   'release_date',
   'last_updated',
 ];
-const MODEL_TYPES = new Set(['embedding']);
+/**
+ * `type: "decision"` (a System One model: takes a state and questions, returns a choice, a
+ * probability, or a score per question) is likewise its own shape: no chat fields, input-only
+ * billing, and no `dimensions`. It has a context window but no output limit.
+ */
+const DECISION_REQUIRED_KEYS = EMBEDDING_REQUIRED_KEYS.filter((key) => key !== 'dimensions');
+const MODEL_TYPES = new Set(['embedding', 'decision']);
 /**
  * These strings are interpolated into the MDX of each model's detail page, where `{…}` is
  * evaluated as JavaScript at build time and `<…>` as JSX. The build-time refresh takes them from
@@ -203,6 +211,10 @@ export function classifyDrift(website, modelsDev) {
  * `type: "embedding"` swaps the required set entirely (see `EMBEDDING_REQUIRED_KEYS`) — a model
  * on `/v1/embeddings` has no reasoning, tool calls, attachments, or generation limit to report,
  * and `dimensions` (the vector length) is the fact that actually describes it.
+ *
+ * `type: "decision"` (see `DECISION_REQUIRED_KEYS`) is the same idea without `dimensions`: a
+ * decision model generates no text, so it has no chat fields or output limit and is billed on
+ * input only.
  */
 export function validateCatalog(data) {
   const errors = [];
@@ -239,7 +251,13 @@ export function validateCatalog(data) {
       fail(`${at('type')} must be one of ${[...MODEL_TYPES].join(', ')}`);
     }
     const isEmbedding = model.type === 'embedding';
-    for (const field of isEmbedding ? EMBEDDING_REQUIRED_KEYS : REQUIRED_KEYS) {
+    const isDecision = model.type === 'decision';
+    const requiredKeys = isEmbedding
+      ? EMBEDDING_REQUIRED_KEYS
+      : isDecision
+        ? DECISION_REQUIRED_KEYS
+        : REQUIRED_KEYS;
+    for (const field of requiredKeys) {
       if (model[field] === undefined) fail(`${at(field)} is missing`);
     }
     if (
@@ -250,7 +268,7 @@ export function validateCatalog(data) {
         `${at('dimensions')} must be a positive integer, got ${JSON.stringify(model.dimensions)}`
       );
     }
-    for (const field of ['id', 'name', 'provider', 'family']) {
+    for (const field of ['id', 'name', 'lab', 'provider', 'family']) {
       if (
         model[field] !== undefined &&
         (typeof model[field] !== 'string' || model[field].trim() === '')
@@ -296,7 +314,7 @@ export function validateCatalog(data) {
       if (!isPlainObject(model.limit)) {
         fail(`${at('limit')} must be an object`);
       } else {
-        for (const field of REQUIRED_LIMIT_KEYS) {
+        for (const field of model.type === 'decision' ? [] : REQUIRED_LIMIT_KEYS) {
           if (model.limit[field] === undefined) fail(`${at(`limit.${field}`)} is missing`);
         }
         for (const [field, value] of Object.entries(model.limit)) {
@@ -312,10 +330,11 @@ export function validateCatalog(data) {
     }
 
     if (model.cost !== undefined) {
-      // Embedding billing is input-only — there is no completion to charge for, so unlike a
-      // chat model, an embedding model's `cost` block is not missing an `output` rate; it never
-      // had one.
-      errors.push(...costErrors(model.cost, at('cost'), { requireRates: !isEmbedding }));
+      // Embedding and decision billing is input-only — there is no completion to charge for, so
+      // unlike a chat model, their `cost` block is not missing an `output` rate; it never had one.
+      errors.push(
+        ...costErrors(model.cost, at('cost'), { requireRates: !isEmbedding && !isDecision })
+      );
     }
 
     if (model.reasoning_options !== undefined) {

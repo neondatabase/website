@@ -12,7 +12,7 @@ summary: >-
   as temporary tables and the compute cache does not persist across a
   failover.
 enableTableOfContents: true
-updatedOn: '2026-08-07T13:46:01.605Z'
+updatedOn: '2026-10-23T18:34:18.407Z'
 ---
 
 At Neon, our lakebase architecture takes a different approach to high availability. Instead of maintaining idle standby compute replicas, we achieve multi-AZ resilience through our separation of storage and compute.
@@ -115,7 +115,7 @@ Here's a summary of how different types of compute failures are handled and thei
 
 While your application should handle reconnections automatically, session-specific data like temporary tables, prepared statements, and the [compute cache](/docs/reference/glossary#compute-cache), which stores frequently accessed data, will not persist across a failover. As a result, queries may initially run more slowly until the Postgres memory buffers and cache are rebuilt.
 
-For details on uptime and performance guarantees, refer to our available [SLAs](/docs/introduction/support#slas).
+For details on uptime and performance guarantees, refer to the [Neon Service Level Agreement](/docs/legal/sla).
 
 ## Limitations
 

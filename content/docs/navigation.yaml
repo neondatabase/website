@@ -1,8 +1,10 @@
 - nav: Get started
-  slug: introduction
-  title: Neon Docs
+  slug: /docs
+  title: Get started
   icon: home
   items:
+    - title: Overview
+      slug: /docs
     - section: Why Neon?
       icon: info
       items:
@@ -15,8 +17,8 @@
     - section: Start with Neon
       icon: start
       items:
-        - title: One-command setup
-          slug: get-started/with-an-agent
+        - title: Set up your AI agent
+          slug: ai/agent-setup
         - title: Full backend quickstart
           slug: get-started/full-backend-quickstart
         - title: Connect your app
@@ -73,6 +75,8 @@
               slug: guides/sveltekit
             - title: Symfony
               slug: guides/symfony
+            - title: TanStack Start
+              slug: guides/tanstack-start
             - title: Hono
               slug: guides/hono
             - title: RedwoodSDK
@@ -95,8 +99,6 @@
               slug: guides/javascript
             - title: Kotlin
               slug: guides/kotlin
-              tag: new
-              tagTheme: green
             - title: Python
               slug: guides/python
             - title: Rust
@@ -129,6 +131,28 @@
               slug: guides/typeorm
             - title: Better Drizzle
               slug: guides/better-drizzle
+    - section: Agents
+      items:
+        - title: Agents
+          slug: ai/agent-setup
+          icon: ai-agent
+          items:
+            - title: Claude Code
+              slug: ai/agent-setup/claude-code
+            - title: Claude.ai and Claude Desktop
+              slug: ai/agent-setup/claude-ai
+            - title: VS Code and GitHub Copilot
+              slug: ai/agent-setup/vscode
+            - title: ChatGPT
+              slug: ai/agent-setup/chatgpt
+            - title: Codex
+              slug: ai/agent-setup/codex
+            - title: Cursor
+              slug: ai/agent-setup/cursor
+            - title: Grok Bot
+              slug: ai/agent-setup/grok-bot
+            - title: Other agents
+              slug: ai/connect-mcp-clients-to-neon
     - section: Migrate to Neon
       icon: import
       items:
@@ -185,6 +209,8 @@
               slug: guides/logical-replication-postgres-to-neon
             - title: Neon to Neon
               slug: guides/logical-replication-neon-to-neon
+            - title: Lakebase to Neon
+              slug: guides/logical-replication-lakebase-to-neon
             - title: Supabase
               slug: guides/logical-replication-supabase-to-neon
             - title: RDS
@@ -209,6 +235,8 @@
               slug: import/migrate-neon-to-another-region
             - title: Neon to Lakebase
               slug: guides/migrate-neon-to-lakebase
+            - title: Neon to Lakebase (logical replication)
+              slug: guides/logical-replication-neon-to-lakebase
             - title: Postgres-compatible export
               slug: guides/export-neon-postgres-compatible
         - title: CSV
@@ -250,10 +278,8 @@
             - title: Connection methods
               slug: connect/choose-connection
               items:
-                - title: Overview
+                - title: Neon MCP Server
                   slug: ai/neon-mcp-server
-                - title: Connect MCP clients
-                  slug: ai/connect-mcp-clients-to-neon
                 - title: Connect from any app
                   slug: connect/connect-from-any-app
                 - title: Neon serverless driver
@@ -279,6 +305,8 @@
                   slug: connect/connect-securely
                 - title: Connection pooling
                   slug: connect/connection-pooling
+                - title: Serverless connection pooling
+                  slug: guides/serverless-connection-pooling
                 - title: Latency benchmarks
                   slug: guides/benchmarking-latency
             - title: Troubleshooting
@@ -748,6 +776,9 @@
               slug: postgres/backup-restore/branch-restore
             - title: Time Travel
               slug: postgres/backup-restore/time-travel-assist
+              items:
+                - title: Time Travel tutorial
+                  slug: guides/time-travel-tutorial
             - title: History window
               slug: postgres/backup-restore/history-window
             - title: Backup with pg_dump
@@ -816,6 +847,8 @@
                   slug: auth/guides/plugins/jwt
                 - title: Magic Link
                   slug: auth/guides/plugins/magic-link
+                - title: OAuth Provider
+                  slug: auth/guides/plugins/oauth-provider
                 - title: OpenAPI
                   slug: auth/guides/plugins/openapi
                 - title: Organization
@@ -901,11 +934,12 @@
           slug: compute/functions/overview
         - title: Get started
           slug: compute/functions/get-started
+        - title: Use templates
+          slug: compute/functions/templates
         - title: Deploy and manage
           slug: compute/functions/deploy
         - title: Custom domains
           slug: compute/functions/custom-domains
-          tag: beta
         - title: Logs
           slug: compute/functions/logs
         - title: Environment variables
@@ -926,24 +960,22 @@
               slug: compute/functions/agents
             - title: WebSockets and SSE
               slug: compute/functions/websockets
+            - title: Build an MCP server
+              slug: compute/functions/mcp-server
         - section: Example apps
           items:
             - title: Discord bot
               slug: compute/functions/discord-bot
-              tag: new
-              tagTheme: green
             - title: Telegram bot
               slug: compute/functions/telegram-bot
-              tag: new
-              tagTheme: green
             - title: WhatsApp bot
               slug: compute/functions/whatsapp-bot
-              tag: new
-              tagTheme: green
         - section: Reference
           items:
             - title: Runtime limits
               slug: compute/functions/reference/runtime-limits
+            - title: Contribute a template
+              slug: compute/functions/registry
     - title: Object Storage
       icon: import
       slug: storage/overview
@@ -990,12 +1022,14 @@
               slug: ai-gateway/chat-completions
             - title: Embeddings
               slug: ai-gateway/embeddings
+            - title: Decisions
+              slug: ai-gateway/decisions
+              tag: new
+              tagTheme: green
             - title: OpenAI Responses API
               slug: ai-gateway/openai-responses
             - title: Anthropic Messages API
               slug: ai-gateway/anthropic-messages
-              tag: new
-              tagTheme: green
             - title: Gemini API
               slug: ai-gateway/gemini
         - section: Reference
@@ -1032,8 +1066,6 @@
               slug: manage/accounts
             - title: Permissions quickstart
               slug: manage/project-permissions-get-started
-              tag: new
-              tagTheme: green
             - title: User permissions
               slug: manage/user-permissions
             - title: Organizations
@@ -1179,10 +1211,14 @@
           slug: security/compliance
         - title: HIPAA
           slug: security/hipaa
-        - title: Acceptable Use Policy
-          slug: security/acceptable-use-policy
         - title: AI use in Neon
           slug: security/ai-use-in-neon
+        - section: Legal
+          items:
+            - title: Service Level Agreement
+              slug: legal/sla
+            - title: Acceptable Use Policy
+              slug: security/acceptable-use-policy
     - title: Plans & billing
       slug: introduction/about-billing
       icon: billing
@@ -1237,78 +1273,71 @@
           items:
             - title: Claimable Neon
               slug: reference/claimable-neon
-              tag: new
-              tagTheme: green
         - section: Guides
           icon: book
           items:
             - title: Claimable database integration
               slug: workflows/claimable-database-integration
     - title: AI agents on Neon
-      slug: ai/ai-agents-tools
+      slug: ai/agent-setup
       icon: ai-agent
       items:
-        - section: Neon for AI Agents
+        - section: Set up your AI agent
           icon: ai-agent
+          items:
+            - title: Overview
+              slug: ai/agent-setup
+            - title: Claude Code
+              slug: ai/agent-setup/claude-code
+            - title: Cursor
+              slug: ai/agent-setup/cursor
+            - title: Codex
+              slug: ai/agent-setup/codex
+            - title: VS Code and GitHub Copilot
+              slug: ai/agent-setup/vscode
+            - title: Claude.ai and Claude Desktop
+              slug: ai/agent-setup/claude-ai
+            - title: ChatGPT
+              slug: ai/agent-setup/chatgpt
+            - title: Grok Bot
+              slug: ai/agent-setup/grok-bot
+            - title: Other agents
+              slug: ai/connect-mcp-clients-to-neon
+        - section: Reference
+          icon: docs
+          items:
+            - title: Neon MCP Server
+              slug: ai/neon-mcp-server
+            - title: Agent Skills
+              slug: ai/agent-skills
+        - section: Build agents on Neon
+          icon: openai
           items:
             - title: Agent plan
               slug: introduction/agent-plan
             - title: AI Agent integration
               slug: guides/ai-agent-integration
-        - title: AI for Agents
-          icon: ai-agent
-          slug: ai/ai-agents-tools
+            - title: Neon for Agent platforms
+              slug: https://neon.com/use-cases/ai-agents
+            - title: Database versioning
+              slug: ai/ai-database-versioning
+            - title: Neon API Reference
+              slug: reference/api
+            - title: Lakebase Search
+              slug: ai/lakebase-search
+        - section: Agent frameworks
+          icon: frameworks
           items:
-            - title: Overview
-              slug: ai/ai-agents-tools
-            - section: MCP integration
-              icon: api
-              items:
-                - title: Overview
-                  slug: ai/neon-mcp-server
-                - title: Connect MCP clients
-                  slug: ai/connect-mcp-clients-to-neon
-            - section: Agent Skills
-              icon: docs
-              items:
-                - title: Agent Skills
-                  slug: ai/agent-skills
-                - title: Claude Code plugin
-                  slug: ai/ai-claude-code-plugin
-                - title: Codex plugin
-                  slug: ai/ai-codex-plugin
-                - title: Cursor plugin
-                  slug: ai/ai-cursor-plugin
-                - title: Grok Bot plugin
-                  slug: ai/ai-grok-bot-plugin
-                  tag: new
-                  tagTheme: green
-                - title: GitHub Copilot agents
-                  slug: ai/ai-github-copilot-agents
-            - section: Build AI agents
-              icon: openai
-              items:
-                - title: Neon for Agent platforms
-                  slug: https://neon.com/use-cases/ai-agents
-                - title: Database versioning
-                  slug: ai/ai-database-versioning
-                - title: Neon API Reference
-                  slug: reference/api
-                - title: Lakebase Search
-                  slug: ai/lakebase-search
-            - section: Agent frameworks
-              icon: frameworks
-              items:
-                - title: AgentStack
-                  slug: https://neon.com/guides/agentstack-neon
-                - title: AutoGen
-                  slug: https://neon.com/guides/autogen-neon
-                - title: Azure AI Agent Service
-                  slug: https://neon.com/guides/azure-ai-agent-service
-                - title: Composio + CrewAI
-                  slug: https://neon.com/guides/composio-crewai-neon
-                - title: LangGraph
-                  slug: https://neon.com/guides/langgraph-neon
+            - title: AgentStack
+              slug: https://neon.com/guides/agentstack-neon
+            - title: AutoGen
+              slug: https://neon.com/guides/autogen-neon
+            - title: Azure AI Agent Service
+              slug: https://neon.com/guides/azure-ai-agent-service
+            - title: Composio + CrewAI
+              slug: https://neon.com/guides/composio-crewai-neon
+            - title: LangGraph
+              slug: https://neon.com/guides/langgraph-neon
 
 - nav: Reference
   title: Reference
@@ -1337,24 +1366,18 @@
                   slug: cli/init
                 - title: ask
                   slug: cli/ask
+                - title: docs
+                  slug: cli/docs
                   tag: new
                   tagTheme: green
                 - title: mcp
                   slug: cli/mcp
-                  tag: new
-                  tagTheme: green
                 - title: skills
                   slug: cli/skills
-                  tag: new
-                  tagTheme: green
                 - title: plugins
                   slug: cli/plugins
-                  tag: new
-                  tagTheme: green
                 - title: claim
                   slug: cli/claim
-                  tag: new
-                  tagTheme: green
                 - title: bootstrap
                   slug: cli/bootstrap
                 - title: link
@@ -1371,8 +1394,6 @@
                   slug: cli/set-context
                 - title: open
                   slug: cli/open
-                  tag: new
-                  tagTheme: green
                 - title: me
                   slug: cli/me
                 - title: profile
@@ -1393,6 +1414,8 @@
                   slug: cli/projects
                 - title: branches
                   slug: cli/branches
+                - title: postgres
+                  slug: cli/postgres
                 - title: databases
                   slug: cli/databases
                 - title: roles
@@ -1447,8 +1470,6 @@
                   slug: cli/inspect
                 - title: logs
                   slug: cli/logs
-                  tag: new
-                  tagTheme: green
         - section: API
           icon: api
           items:
@@ -1514,8 +1535,6 @@
                       slug: guides/cloudflare-pages
                     - title: Cloudflare Workers
                       slug: guides/cloudflare-workers
-                - title: Deno
-                  slug: guides/deno
                 - title: Heroku
                   slug: guides/heroku
                 - title: Koyeb
@@ -1581,20 +1600,14 @@
                   slug: guides/draxlr
                 - title: Exograph
                   slug: guides/exograph
-                - title: Grafbase
-                  slug: guides/grafbase
                 - title: Hasura
                   slug: guides/hasura
                 - title: PostgREST
                   slug: guides/postgrest
-                - title: WunderGraph
-                  slug: guides/wundergraph
             - title: Replicate from Neon
               items:
                 - title: Airbyte
                   slug: guides/logical-replication-airbyte
-                - title: Bemi
-                  slug: guides/bemi
                 - title: ClickHouse
                   slug: guides/logical-replication-clickhouse
                 - title: Confluent
@@ -1603,7 +1616,7 @@
                   slug: guides/logical-replication-databricks
                 - title: Decodable
                   slug: guides/logical-replication-decodable
-                - title: Estuary Flow
+                - title: Estuary
                   slug: guides/logical-replication-estuary-flow
                 - title: Fivetran
                   slug: guides/logical-replication-fivetran
@@ -1611,12 +1624,12 @@
                   slug: guides/logical-replication-inngest
                 - title: Materialize
                   slug: guides/logical-replication-materialize
+                - title: Neon to Lakebase
+                  slug: guides/logical-replication-neon-to-lakebase
                 - title: Neon to Neon
                   slug: guides/logical-replication-neon-to-neon
                 - title: Postgres
                   slug: guides/logical-replication-postgres
-                - title: Sequin
-                  slug: guides/sequin
                 - title: Snowflake
                   slug: guides/logical-replication-airbyte-snowflake
                 - title: Stacksync
@@ -1629,13 +1642,15 @@
                   slug: guides/logical-replication-rds-to-neon
                 - title: Cloud SQL
                   slug: guides/logical-replication-cloud-sql
+                - title: Lakebase to Neon
+                  slug: guides/logical-replication-lakebase-to-neon
                 - title: Neon to Neon
                   slug: guides/logical-replication-neon-to-neon
                 - title: Postgres
                   slug: guides/logical-replication-postgres-to-neon
-                - title: Replicate from Azure
+                - title: Azure
                   slug: import/migrate-from-azure-postgres
-                - title: Replicate from Supabase
+                - title: Supabase
                   slug: guides/logical-replication-supabase-to-neon
             - title: Schema Migration
               items:
@@ -1679,6 +1694,9 @@
                   slug: serverless/serverless-driver
                 - title: Trigger serverless functions with Inngest
                   slug: guides/trigger-serverless-functions
+        - title: Set up your AI agent
+          icon: ai-agent
+          slug: ai/agent-setup
         - title: Local development
           icon: container
           slug: local/neon-local

@@ -3,7 +3,12 @@ title: TypeScript SDK
 subtitle: Seal queries, subscribe from clients, and sync with frameworks
 summary: Reference for the Realtime TypeScript SDK, covering backend query sealing, low-level client subscriptions, React integration, and TanStack DB adapter.
 enableTableOfContents: true
+updatedOn: '2026-10-23T14:30:57.000Z'
 ---
+
+<Admonition type="important" title="Upgrading to 0.2.0">
+Realtime SDK 0.2.0 uses version 2 of the Realtime protocol. Upgrade `@neon/realtime` and every Realtime adapter you use (`@neon/realtime-react`, `@neon/realtime-tanstack`, `@neon/realtime-drizzle`, `@neon/realtime-kysely`) to 0.2.0 together, since the 0.2.0 adapters require `@neon/realtime` 0.2.0.
+</Admonition>
 
 The Realtime SDK is split into modules:
 
@@ -57,6 +62,24 @@ subscription.onChange(({ data, status }) => render(data, status))
 ```
 
 Pass a `logLevel` to see what the client is doing, as [Log client diagnostics](../guides/subscribing#log-client-diagnostics) shows.
+
+### React Native
+
+The client also runs in React Native apps, with `@neon/realtime` 0.1.2 or later. Import it from `@neon/realtime/client` as usual.
+
+React Native's WebSocket sends an `Origin` header derived from the Realtime endpoint. If your branch restricts Realtime to specific origins, pass a `webSocketFactory` that sends one of the allowed origins:
+
+```ts
+const client = createRealtimeClient({
+  url: realtimeUrl,
+  webSocketFactory: (url, protocols) =>
+    new WebSocket(url, protocols, {
+      headers: { origin: "https://app.example.com" },
+    }),
+})
+```
+
+The third `WebSocket` argument is a React Native extension and isn't available in browsers. An origin allowlist protects browser apps only. A native app can send any origin, so don't rely on it to authenticate native clients.
 
 ### Renewing sealed queries
 

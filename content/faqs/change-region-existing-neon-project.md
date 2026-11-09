@@ -3,7 +3,7 @@ title: 'How do I migrate an existing Neon project to a different AWS region?'
 subtitle: 'Create a new project in the target region, copy data over with pg_dump and pg_restore, then cut over.'
 enableTableOfContents: true
 createdAt: '2026-05-18T00:00:00.000Z'
-updatedOn: '2026-09-29T17:10:40.931Z'
+updatedOn: '2026-11-04T20:10:08.844Z'
 isDraft: false
 redirectFrom: []
 previousLink:
@@ -38,7 +38,7 @@ Use unpooled connection strings for both the dump and the restore. Neon recommen
 pg_dump -Fc -v -d "postgresql://[user]:[password]@[old-host]/[dbname]" -f neon_dump.bak
 ```
 
-For large databases, `-Z 1` gives light compression, and `pg_restore -j <njobs>` restores tables in parallel from a custom-format archive. Parallel dumps (`pg_dump -j`) require the directory format (`-Fd`) instead of `-Fc` ([pg_dump docs](https://www.postgresql.org/docs/current/app-pgdump.html)). See [Advanced pg_dump and pg_restore options](/docs/import/migrate-from-postgres#advanced-pg_dump-and-pg_restore-options).
+For large databases, `-Z 1` gives light compression, and `pg_restore -j <njobs>` restores tables in parallel from a custom-format archive. Parallel dumps (`pg_dump -j`) require the directory format (`-Fd`) instead of `-Fc` ([pg_dump docs](https://www.postgresql.org/docs/current/app-pgdump.html)). See [Advanced pg_dump and pg_restore options](/docs/import/migrate-from-postgres#advanced-pgdump-and-pgrestore-options).
 
 ### 3. Restore into the new project
 

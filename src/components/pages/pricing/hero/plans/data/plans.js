@@ -44,7 +44,7 @@ export default [
       other: {
         title: 'Backend',
         features: [
-          { title: 'Managed Better Auth', info: 'Up to 60k MAUs' },
+          { title: 'Managed Better Auth', info: 'Up to 60k MAUs per project' },
           {
             title: `${objectStorage.freeAllowanceGb} GB of Object Storage`,
             info: '<p>5 GB per project included</p>',
@@ -52,6 +52,14 @@ export default [
           {
             title: 'Functions',
             info: `<p>${functions.free.activeCapacityHours} active capacity-hours per project per month</p><p>${functions.free.waitingCapacityHours} waiting capacity-hours per project per month</p><p>${functions.free.invocations} invocations per project per month</p>`,
+          },
+          {
+            title: 'AI Gateway',
+            info: '<p>Add a card and buy prepaid credits. Your plan stays Free.</p><p>Pricing matches model provider list prices (no markup).</p>',
+            moreLink: {
+              text: 'Full list here',
+              href: '/docs/ai-gateway/overview#available-models',
+            },
           },
           { ...realtimeFeature, info: '<p>Free during beta</p>' },
         ],
@@ -95,7 +103,7 @@ export default [
       other: {
         title: 'Backend',
         features: [
-          { title: 'Managed Better Auth', info: 'Up to 1M MAUs' },
+          { title: 'Managed Better Auth', info: 'Up to 1M MAUs per project' },
           {
             title: 'Object Storage',
             info: `<p>$${objectStorage.storageRatePerGbMonth} per GB-month</p>`,
@@ -154,7 +162,7 @@ export default [
       other: {
         title: 'Backend',
         features: [
-          { title: 'Managed Better Auth', info: 'Up to 1M MAUs' },
+          { title: 'Managed Better Auth', info: 'Up to 1M MAUs per project' },
           {
             title: 'Object Storage',
             info: `<p>$${objectStorage.storageRatePerGbMonth} per GB-month</p>`,

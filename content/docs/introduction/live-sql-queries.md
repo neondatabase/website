@@ -4,6 +4,7 @@ subtitle: 'Subscribe to data in realtime with live SQL queries.'
 summary: >-
   A live SQL query is a query you subscribe to instead of running once. Realtime makes any SQL query live on standard Postgres, including joins, aggregates, functions and extensions.
 enableTableOfContents: true
+updatedOn: '2026-10-15T14:51:27.000Z'
 ---
 
 A live SQL query is a query you subscribe to, instead of running it once. You get the current results straight away, then the changes as writes land, so your app always has the latest answer without polling.

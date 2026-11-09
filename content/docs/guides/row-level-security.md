@@ -8,6 +8,8 @@ summary: >-
   Data API project or using Drizzle ORM's crudPolicy helper to simplify
   per-user access control in a Postgres database.
 enableTableOfContents: true
+redirectFrom:
+  - /docs/guides/neon-rls
 updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 

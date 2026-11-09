@@ -11,7 +11,7 @@ summary: >-
   (generate-upload-sas and save-metadata) in JavaScript (Hono) and Python
   (Flask), and generating read-only SAS tokens for secure file retrieval.
 enableTableOfContents: true
-updatedOn: '2026-09-16T19:45:35.340Z'
+updatedOn: '2026-10-28T11:11:18.780Z'
 ---
 
 [Azure Blob Storage](https://azure.microsoft.com/en-us/services/storage/blobs/) is Microsoft's object storage solution for the cloud. It's optimized for storing massive amounts of unstructured data, such as text or binary data, including images, documents, streaming media, and archive data.
@@ -575,6 +575,6 @@ This pattern effectively separates file storage and delivery concerns (handled b
 
 - [Azure Blob Storage documentation](https://learn.microsoft.com/en-us/azure/storage/blobs/)
 - [Azure Storage Shared Access Signatures (SAS)](https://learn.microsoft.com/en-us/azure/storage/common/storage-sas-overview)
-- [Neon Documentation](/docs/introduction)
+- [Neon Documentation](/docs)
 
 <NeedHelp/>

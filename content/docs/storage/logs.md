@@ -7,9 +7,10 @@ summary: >-
   levels derived from HTTP status. Covers scope_name values and common
   patterns that look like a problem but aren't.
 enableTableOfContents: true
+updatedOn: '2026-11-06T22:09:40.723Z'
 ---
 
-Every S3 request against a bucket streams a log line to the Neon Console, along with a line for any bucket or object change made through the Console or Neon API (creating a bucket, deleting a bucket, deleting an object or prefix):
+Every S3 request against a bucket streams a log line to the Neon Console. So does any bucket or object change made through the Console or Neon API (creating a bucket, deleting a bucket, deleting an object or prefix):
 
 ```text
 service_name:  neon-storage/my-bucket
@@ -26,11 +27,13 @@ body: {
 }
 ```
 
+Two kinds of requests don't appear. S3 requests rejected before they reach your branch aren't logged: an invalid signature, or a credential without access to this branch or without the storage scope the operation needs. Reads through the Console or Neon API, such as downloading an object, aren't logged either; only changes are.
+
 ## View logs
 
 Bucket logs live on the branch's [Monitoring page, in the **Storage** tab](/docs/introduction/monitor-logs). To jump straight to one bucket's logs, open the bucket list, open that bucket's menu, and select **View logs**. Or go to **Monitoring** and open the **Storage** tab to see every bucket's logs together.
 
-Expand a row to see its full context: `timestamp`, `severity`, `entity_type` (`storage`), `scope_name`, and `service_name` (`neon-storage/<bucket>`). The message body carries per-request detail: `operation` (the HTTP method), `object_key`, `http_status`, `bytes`, `duration_ms`, `request_id`, and `remote_ip`. `access_key_id` is included for authenticated requests and omitted entirely for anonymous reads against a `public_read` bucket, which is expected, not a sign of broken auth.
+Expand a row to see its full context: `timestamp`, `severity`, `entity_type` (`storage`), `scope_name`, and `service_name` (`neon-storage/<bucket>`). The message body carries per-request detail: `operation` (the HTTP method), `object_key`, `http_status`, `bytes`, `duration_ms`, `request_id`, and `remote_ip`. The access key ID that made the request isn't shown in the Console or returned by `neon logs`.
 
 `scope_name` identifies what generated the line:
 
@@ -41,29 +44,29 @@ Expand a row to see its full context: `timestamp`, `severity`, `entity_type` (`s
 
 A bucket's log level comes from the HTTP status code of the request, not from anything the client sets:
 
-| Level   | HTTP status                                                |
-| ------- | ---------------------------------------------------------- |
-| `INFO`  | Everything else (successful requests)                      |
-| `WARN`  | 4xx, plus `501 Not Implemented` for unsupported operations |
-| `ERROR` | Other 5xx responses                                        |
+| Level   | HTTP status                                                     |
+| ------- | --------------------------------------------------------------- |
+| `INFO`  | Everything else (successful requests)                           |
+| `WARN`  | 4xx                                                             |
+| `ERROR` | 5xx, including `501 Not Implemented` for unsupported operations |
 
-`DEBUG`, `NOTICE`, and `FATAL` also appear as filters in the log viewer but aren't currently emitted by Object Storage; they're part of the console's shared log-level set.
+`DEBUG`, `NOTICE`, and `FATAL` also appear as filters in the log viewer but aren't currently emitted by Object Storage; they're part of the Neon Console's shared log-level set.
 
 ## Common log entries
 
 Most of what shows up here is routine S3 traffic. A few entries look worse than they are, and one common request type doesn't show up at all.
 
-**Seeing `403` or `404` lines? They're expected client-side errors, not incidents.** Wrong or revoked credentials, a missing scope, or a bucket-scoped credential used from the wrong branch all return a `403` and log at `WARN`, same as any other 4xx. See [Authentication errors](/docs/storage/troubleshooting#authentication-errors) for the specific error codes and fixes.
+`403` and `404` lines are expected client-side errors, not incidents. Wrong or revoked credentials, a missing scope, or a bucket-scoped credential used from the wrong branch all return a `403` and log at `WARN`, same as any other 4xx. See [Authentication errors](/docs/storage/troubleshooting#authentication-errors) for the specific error codes and fixes.
 
-**Seeing `503 SlowDown` logged as `ERROR`? It's a healthy rate limit, not a server failure.** `SlowDown` is a rate-limit signal returned when a request exceeds the per-IP or per-tenant limit; the storage service is otherwise healthy. It logs at `ERROR` only because the level is derived purely from the 5xx status code. Treat it as a signal to back off and retry, not an outage. See [Connection and performance errors](/docs/storage/troubleshooting#connection-and-performance-errors).
+**Seeing `503 SlowDown` logged as `ERROR`? It's a healthy rate limit, not a server failure.** `SlowDown` is a rate-limit signal returned when a request exceeds the per-IP or per-tenant limit; the storage service is otherwise healthy. It logs at `ERROR` only because the level is derived purely from the 5xx status code. Treat it as a signal to back off and retry. See [Connection and performance errors](/docs/storage/troubleshooting#connection-and-performance-errors).
 
-**Calling `ListBuckets` or hitting the bucket list root? You won't find it here.** Bucketless requests are deliberately excluded from the log stream, since there's no single bucket to attribute them to. If you're looking for that traffic, it isn't missing: it was never exported.
+Calls to `ListBuckets` or the bucket list root don't appear here. Bucketless requests are deliberately excluded from the log stream, since there's no single bucket to attribute them to. If you're looking for that traffic, it isn't missing: it was never exported.
 
-**Seeing a `501` for an operation you expected to work? It's an unsupported operation, not a client error, even though it logs at `WARN`.** Calls like `PutBucketAcl`, `PutBucketPolicy`, or `PutBucketNotificationConfiguration` return `501 Not Implemented` because Neon Object Storage doesn't support them, not because you did anything wrong. See [Not supported](/docs/storage/s3-compatibility#not-supported) for the full list.
+**Seeing a `501` for an operation you expected to work? It's an unsupported operation, not a server failure, even though it logs at `ERROR`.** Calls like `PutBucketAcl`, `PutBucketPolicy`, or `PutBucketNotificationConfiguration` return `501 Not Implemented` because Neon Object Storage doesn't support them. See [Not supported](/docs/storage/s3-compatibility#not-supported) for the full list.
 
-## Filter, search, and retention
+## Filter and search
 
-For details on filtering by level or service name, searching log bodies, live tail, downloading logs, and the 3-day retention window, see [Monitor logs](/docs/introduction/monitor-logs).
+For details on filtering by level or service name, searching log bodies, live tail, and downloading logs, see [Monitor logs](/docs/introduction/monitor-logs).
 
 You can also read storage logs from the terminal with [`neon logs query`](/docs/cli/logs), scoped with `--source storage`:
 

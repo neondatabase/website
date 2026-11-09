@@ -69,6 +69,7 @@ To configure Neon Private Networking, perform the following steps:
          - `com.amazonaws.vpce.us-east-1.vpce-svc-040132f4a2dc43d76`
          - `com.amazonaws.vpce.us-east-1.vpce-svc-0492424e0bf471d59`
          - `com.amazonaws.vpce.us-east-1.vpce-svc-074ac4111275eaf07`
+         - `com.amazonaws.vpce.us-east-1.vpce-svc-07e0ce252b3a16acc`
          - `com.amazonaws.vpce.us-east-1.vpce-svc-0824666dc46176a87`
          - `com.amazonaws.vpce.us-east-1.vpce-svc-0adffb07ac0333ac0`
          - `com.amazonaws.vpce.us-east-1.vpce-svc-0b676a43303caf7d8`
@@ -76,10 +77,13 @@ To configure Neon Private Networking, perform the following steps:
          - `com.amazonaws.vpce.us-east-1.vpce-svc-0c4afbefbfdf6b031`
          - `com.amazonaws.vpce.us-east-1.vpce-svc-0d07f7f68c9a99f3b`
          - `com.amazonaws.vpce.us-east-1.vpce-svc-0de57c578b0e614a9`
+         - `com.amazonaws.vpce.us-east-1.vpce-svc-0e018376e3c90bfae`
          - `com.amazonaws.vpce.us-east-1.vpce-svc-0f37140e9710ee3af`
        - **us-east-2**: Create entries, one for each of the following:
          - `com.amazonaws.vpce.us-east-2.vpce-svc-0056bdfba63cc6ea1`
          - `com.amazonaws.vpce.us-east-2.vpce-svc-010736480bcef5824`
+         - `com.amazonaws.vpce.us-east-2.vpce-svc-0125f603817b3d7f7`
+         - `com.amazonaws.vpce.us-east-2.vpce-svc-0234a2d750f731a18`
          - `com.amazonaws.vpce.us-east-2.vpce-svc-0465c21ce8ba95fb2`
          - `com.amazonaws.vpce.us-east-2.vpce-svc-0a59493ecf790eccf`
          - `com.amazonaws.vpce.us-east-2.vpce-svc-0ce57d490de78526a`
@@ -101,6 +105,7 @@ To configure Neon Private Networking, perform the following steps:
          - `com.amazonaws.vpce.us-west-2.vpce-svc-045eebdf710e1066d`
          - `com.amazonaws.vpce.us-west-2.vpce-svc-060e0d5f582365b8e`
          - `com.amazonaws.vpce.us-west-2.vpce-svc-07b750990c172f22f`
+         - `com.amazonaws.vpce.us-west-2.vpce-svc-0a7b662960507808f`
          - `com.amazonaws.vpce.us-west-2.vpce-svc-0ed672a4d41b5e687`
        - **ap-southeast-1**: Create entries, one for each of the following:
          - `com.amazonaws.vpce.ap-southeast-1.vpce-svc-00eb29496a51d8bee`

@@ -4,6 +4,7 @@ subtitle: 'Using Realtime with your Drizzle schema and queries.'
 summary: >-
   Use Drizzle ORM with Neon Realtime: add the Drizzle adapter, seal Drizzle selects with parameters and aliases, decode rows with drizzleParsers and return the txid from Drizzle writes.
 enableTableOfContents: true
+updatedOn: '2026-10-20T14:31:30.000Z'
 ---
 
 This page shows how to build a Realtime app with [Drizzle ORM](https://orm.drizzle.team), using your existing schema, queries, types and writes. You'll learn which Drizzle queries seal unchanged, when a field needs an SQL alias, how live rows keep Drizzle's types in the browser, and how a Drizzle write returns its transaction ID.
@@ -14,6 +15,7 @@ These apps in the `neondatabase/examples` repository use Drizzle:
 - [`realtime/guides-chat-app`](https://github.com/neondatabase/examples/tree/main/realtime/guides-chat-app): the chat app the guides build, with a snake_case schema
 - [`realtime/with-react`](https://github.com/neondatabase/examples/tree/main/realtime/with-react): Hono and React, with a minimal Drizzle setup
 - [`realtime/with-tanstack`](https://github.com/neondatabase/examples/tree/main/realtime/with-tanstack): TanStack&nbsp;Start, with a camelCase schema and an aliased column
+- [`realtime/with-nextjs`](https://github.com/neondatabase/examples/tree/main/realtime/with-nextjs): Next.js and Managed Better Auth, with a per-user snake_case schema
 
 </Admonition>
 
@@ -319,7 +321,7 @@ These Drizzle query shapes don't work as live queries. All but the last fail on 
 - read the [queries guide](../guides/queries)
 - see how the client applies writes optimistically in the [mutations guide](../guides/mutations)
 - look up `drizzleAdapter()` and `drizzleParsers` in the [Drizzle section of the SDK reference](../sdks/typescript#drizzle)
-- see Drizzle in a full-stack app in the [TanStack example](./tanstack)
-- browse the full source of the [chat app](https://github.com/neondatabase/examples/tree/main/realtime/guides-chat-app), [`with-react`](https://github.com/neondatabase/examples/tree/main/realtime/with-react) and [`with-tanstack`](https://github.com/neondatabase/examples/tree/main/realtime/with-tanstack) on GitHub
+- see Drizzle in a full-stack app in the [Next.js](./nextjs) and [TanStack](./tanstack) examples
+- browse the full source of the [chat app](https://github.com/neondatabase/examples/tree/main/realtime/guides-chat-app), [`with-react`](https://github.com/neondatabase/examples/tree/main/realtime/with-react), [`with-tanstack`](https://github.com/neondatabase/examples/tree/main/realtime/with-tanstack) and [`with-nextjs`](https://github.com/neondatabase/examples/tree/main/realtime/with-nextjs) on GitHub
 
 <NeedHelp/>

@@ -1,10 +1,9 @@
 ---
 title: "Which managed Postgres services support giving each engineer a full copy of the database without duplicating storage costs?"
-description: "Neon's branches are copy-on-write clones of your database. Each engineer gets a full copy, and child branches are billed for the changes they write (capped at the logical data size), not for a full duplicate."
-date: 2026-04-25
-slug: managed-postgres-services-full-database-copy-storage-costs
-category: FAQ
-status: draft
+subtitle: "Neon's branches are copy-on-write clones of your database. Each engineer gets a full copy, and child branches are billed for the changes they write (capped at the logical data size), not for a full duplicate."
+createdAt: '2026-04-25T00:00:00.000Z'
+updatedOn: '2026-10-01T14:57:15.000Z'
+isDraft: false
 previousLink:
   title: 'Which managed Postgres services let you spin up a full database copy for each feature branch and delete it when the branch closes?'
   slug: managed-postgres-services-feature-branch-database-copies

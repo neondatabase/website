@@ -3,11 +3,11 @@ title: Embeddings
 subtitle: The OpenAI-compatible embeddings endpoint
 summary: >-
   Neon AI Gateway serves text-embedding models on an OpenAI-compatible
-  /v1/embeddings endpoint. Use short model IDs like qwen3-embedding-0-6b or
-  gte-large-en, both 1024-dimensional, with the same Neon credential you use for
-  chat completions.
+  /v1/embeddings endpoint. Use short model IDs like qwen3-embedding-0-6b,
+  bge-large-en, or gte-large-en, all 1024-dimensional, with the same Neon
+  credential you use for chat completions.
 enableTableOfContents: true
-updatedOn: '2026-10-02T13:49:53.586Z'
+updatedOn: '2026-10-23T19:28:25.610Z'
 ---
 
 Embeddings turn text into vectors that capture meaning, so you can match text by what it means rather than by the exact words. They power semantic search, recommendations, clustering, and retrieval-augmented generation (RAG).
@@ -24,14 +24,15 @@ On the `openai` JavaScript/TypeScript SDK **v6**, pass `encoding_format: "float"
 
 ## Models
 
-Two embedding models are available today. Both return **1024-dimensional** vectors and are billed on **input tokens only**.
+Three embedding models are available today. All return **1024-dimensional** vectors and are billed on **input tokens only**.
 
-| Model ID               | Dimensions | Notes                                                                                                                            |
-| ---------------------- | ---------- | -------------------------------------------------------------------------------------------------------------------------------- |
-| `qwen3-embedding-0-6b` | 1024       | Unit-normalized (L2 norm = 1), so dot product equals cosine similarity. Supports the `dimensions` parameter for shorter vectors. |
-| `gte-large-en`         | 1024       | Not normalized (L2 norm ≈ 24). Use cosine distance, or normalize the vectors yourself. Ignores the `dimensions` parameter.       |
+| Model ID                                                               | Dimensions | Notes                                                                                                                                                      |
+| ---------------------------------------------------------------------- | ---------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [`qwen3-embedding-0-6b`](/docs/ai-gateway/models/qwen3-embedding-0-6b) | 1024       | Unit-normalized (L2 norm = 1), so dot product equals cosine similarity. Supports the `dimensions` parameter for shorter vectors.                           |
+| [`bge-large-en`](/docs/ai-gateway/models/bge-large-en)                 | 1024       | Unit-normalized (L2 norm = 1), so dot product equals cosine similarity. Reads only the first 512 tokens of each input. Ignores the `dimensions` parameter. |
+| [`gte-large-en`](/docs/ai-gateway/models/gte-large-en)                 | 1024       | Not normalized (L2 norm ≈ 24). Use cosine distance, or normalize the vectors yourself. Ignores the `dimensions` parameter.                                 |
 
-Use the short model IDs shown above. The `databricks-` prefixed forms (`databricks-qwen3-embedding-0-6b`, `databricks-gte-large-en`) are also accepted.
+Use the short model IDs shown above. The `databricks-` prefixed forms (`databricks-qwen3-embedding-0-6b`, `databricks-bge-large-en`, `databricks-gte-large-en`) are also accepted. Each model ID links to its catalog page, which lists the input price per million tokens and has copy-paste quickstarts in TypeScript, Python, and cURL.
 
 ## Setup
 
@@ -116,7 +117,7 @@ The response is OpenAI-compatible: a list of embedding objects, one per input, e
 }
 ```
 
-The `model` field reports the resolved, versioned name that served the request (`qwen3-embedding-0-6b-112025` here), which is handy for logging. Keep sending the short model ID (`qwen3-embedding-0-6b` or `gte-large-en`) in your requests.
+The `model` field reports the resolved, versioned name that served the request (`qwen3-embedding-0-6b-112025` here), which is handy for logging. Keep sending the short model ID (`qwen3-embedding-0-6b`, `bge-large-en`, or `gte-large-en`) in your requests.
 
 ## Use with the Vercel AI SDK
 
@@ -139,6 +140,8 @@ Use `embedMany()` to embed a batch in one call. The gateway accepts up to 150 in
 ## Batch input
 
 Pass an array of strings to embed many inputs in one request. The response returns one embedding per input, in the same order, with a matching `index`.
+
+`bge-large-en` embeds only the first 512 tokens of each input and silently drops the rest, with no error (`usage.prompt_tokens` stops at 512). Split longer documents into chunks and send the chunks as a batch.
 
 <CodeTabs labels={["TypeScript (OpenAI SDK)", "Python (OpenAI SDK)"]}>
 
@@ -168,7 +171,7 @@ for item in response.data:
 
 ## Shorter vectors with `dimensions`
 
-`qwen3-embedding-0-6b` supports the `dimensions` parameter to return a shorter, Matryoshka-style vector (for example `dimensions: 256`), which trades some accuracy for smaller storage and faster search. `gte-large-en` ignores this parameter and always returns 1024 dimensions.
+`qwen3-embedding-0-6b` supports the `dimensions` parameter to return a shorter, Matryoshka-style vector (for example `dimensions: 256`), which trades some accuracy for smaller storage and faster search. `bge-large-en` and `gte-large-en` ignore this parameter and always return 1024 dimensions.
 
 ```typescript shouldWrap
 const response = await client.embeddings.create({
@@ -183,9 +186,9 @@ console.log(response.data[0].embedding.length); // 256
 
 ## Choosing a distance operator
 
-The two models differ in how their vectors are scaled, which affects the pgvector operator class you index and query with:
+The models differ in how their vectors are scaled, which affects the pgvector operator class you index and query with:
 
-- **`qwen3-embedding-0-6b`** is unit-normalized (every vector has L2 norm 1), so cosine distance and inner product rank results identically. Cosine (`vector_cosine_ops`, `<=>`) is a safe default.
+- **`qwen3-embedding-0-6b`** and **`bge-large-en`** are unit-normalized (every vector has L2 norm 1), so cosine distance and inner product rank results identically. Cosine (`vector_cosine_ops`, `<=>`) is a safe default.
 - **`gte-large-en`** is not normalized (L2 norm ≈ 24). Use cosine distance (`vector_cosine_ops`, `<=>`), which is scale-invariant, or normalize the vectors before storing them.
 
 For an end-to-end example that stores AI Gateway embeddings in Postgres and searches them, see [Get started with Lakebase Search](/docs/ai/lakebase-search-get-started).

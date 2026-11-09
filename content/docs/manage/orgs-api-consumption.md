@@ -129,18 +129,9 @@ For attribute definitions, find the [Retrieve project consumption metrics](/docs
 
 </details>
 
-### Project-level metrics (for the current billing period)
+### Invoice-aligned metrics
 
-To get basic billing period-based consumption metrics for each project in the organization `org-ocean-art-12345678`, include `org_id` in the `GET /projects` request for consumption metrics:
-
-```bash shouldWrap
-curl --request GET \
-     --url 'https://console.neon.tech/api/v2/projects?org_id=org-ocean-art-12345678' \
-     --header 'accept: application/json' \
-     --header 'authorization: Bearer $ORG_API_KEY'
-```
-
-See more details about using this endpoint on the [Manage billing with consumption limits](/docs/guides/consumption-limits#retrieving-metrics-for-all-projects) page in our Platform integration guide.
+For metrics that match your invoice on usage-based plans (Launch, Scale, Agent, and Enterprise), use `/consumption_history/v2/projects`. See [Query consumption metrics](/docs/guides/consumption-metrics).
 
 ## Metric definitions
 

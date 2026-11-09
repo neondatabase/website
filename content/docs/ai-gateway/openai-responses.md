@@ -6,7 +6,7 @@ summary: >-
   AI Gateway. Required for codex model variants, which do not work with the
   chat completions endpoint.
 enableTableOfContents: true
-updatedOn: '2026-09-16T15:38:57.808Z'
+updatedOn: '2026-10-23T23:49:26.750Z'
 ---
 
 The OpenAI Responses endpoint exposes the [OpenAI Responses API](https://platform.openai.com/docs/api-reference/responses) through Neon AI Gateway. Use it with the OpenAI SDK's `responses.create()` method by changing only the `baseURL`.
@@ -146,9 +146,9 @@ curl -X POST "$NEON_AI_GATEWAY_BASE_URL/openai/v1/responses" \
 
 ## Image generation with Vercel AI SDK
 
-The `@neon/ai-sdk-provider` package re-exports the OpenAI provider's Responses image-generation tool as `neon.tools.imageGeneration()`. Use it with OpenAI-routed models such as `gpt-5-mini`.
+The `@neon/ai-sdk-provider` package re-exports the OpenAI provider's Responses image-generation tool as `neon.tools.imageGeneration()`. Use it with OpenAI-routed models such as `gpt-5-mini`. Set `model` on the tool to `gpt-image-2`, `gpt-image-1.5`, or `gpt-image-1-mini`. `gpt-image-1` is deprecated and not available on AI Gateway. In `@neon/ai-sdk-provider` 1.3.0 and later, the tool sends `gpt-image-2` when you leave out `model`, and throws `UnsupportedFunctionalityError` for `gpt-image-1`.
 
-Use `streamText`, not `generateText`: image results are returned as tool-result parts, and a full base64 image reliably runs into size limits on a non-streaming response.
+Use `streamText`, not `generateText`. A non-streaming response is limited to 655,360 bytes, and most base64 images are larger, so the request fails with `400` and `The response content length cannot be greater than 655360 bytes long`. With the OpenAI SDK, pass `stream: true` to `client.responses.create()`.
 
 ```typescript shouldWrap
 import { neon } from '@neon/ai-sdk-provider';
@@ -159,6 +159,7 @@ const result = streamText({
   messages: [{ role: 'user', content: 'Create a simple Neon database mascot.' }],
   tools: {
     image: neon.tools.imageGeneration({
+      model: 'gpt-image-2',
       outputFormat: 'jpeg',
       size: '1024x1024',
       partialImages: 3,

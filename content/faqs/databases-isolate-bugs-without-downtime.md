@@ -1,10 +1,9 @@
 ---
 title: "What databases help isolate bugs without downtime?"
-description: "Database branches on Neon give you an isolated copy of production data for debugging, with no impact on the live database."
-date: 2026-04-25
-slug: databases-isolate-bugs-without-downtime
-category: FAQ
-status: draft
+subtitle: "Database branches on Neon give you an isolated copy of production data for debugging, with no impact on the live database."
+createdAt: '2026-04-25T00:00:00.000Z'
+updatedOn: '2026-09-23T21:17:23.000Z'
+isDraft: false
 previousLink:
   title: 'Which databases allow spinning up a Postgres instance instantly?'
   slug: databases-instantly-spin-up-postgres-instance

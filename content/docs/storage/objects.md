@@ -6,7 +6,7 @@ summary: >-
   or the AWS CLI. Supports single-part and multipart uploads, range requests,
   batch deletes, and presigned URLs for browser-side access.
 enableTableOfContents: true
-updatedOn: '2026-09-18T17:46:57.332Z'
+updatedOn: '2026-10-23T14:02:32.319Z'
 ---
 
 Objects in Neon Object Storage are files stored inside a bucket. Every object has a key (its path within the bucket), a body, a content type, and optional metadata. Objects branch with your database. Each branch inherits the parent's objects at the moment of forking without copying any data.
@@ -70,7 +70,7 @@ aws s3 cp ./photo.jpg s3://my-bucket/images/photo.jpg \
 
 ## Multipart upload
 
-The maximum object size is currently 5 GiB, whether you upload it in a single request or as a multipart upload. Higher limits are planned: paid plans will follow standard [S3 limits](https://aws.amazon.com/s3/faqs/), with objects up to 5 TB and a 5 GB maximum for a single-request upload, so multipart upload is required for larger objects (AWS recommends it above 100 MB). For large files, the AWS SDK automatically uses multipart upload above a configurable threshold. You can also initiate multipart upload manually for fine-grained control. Multipart upload makes large uploads more reliable because each part is retried independently. For all size and capacity limits, see [Limits](/docs/storage/overview#limits).
+A single-request upload can be up to 5 GiB. With multipart upload, an object can be up to 10 GiB, so use multipart upload for objects larger than 5 GiB (AWS recommends it above 100 MB). Higher limits are planned: paid plans will follow standard [S3 limits](https://aws.amazon.com/s3/faqs/), with objects up to 5 TB. For large files, the AWS SDK automatically uses multipart upload above a configurable threshold. You can also initiate multipart upload manually for fine-grained control. Multipart upload makes large uploads more reliable because each part is retried independently. For all size and capacity limits, see [Limits](/docs/storage/overview#limits).
 
 <CodeTabs labels={["TypeScript", "Python"]}>
 

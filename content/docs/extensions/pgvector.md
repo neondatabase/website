@@ -13,7 +13,7 @@ summary: >-
 enableTableOfContents: true
 redirectFrom:
   - /docs/extensions/pg_embedding
-updatedOn: '2026-09-26T00:49:26.569Z'
+updatedOn: '2026-11-06T11:14:41.532Z'
 ---
 
 The `pgvector` extension enables you to store vector embeddings and perform vector similarity search in Postgres. It's a natural fit for natural language processing applications, including those built on top of OpenAI's GPT models.
@@ -681,6 +681,8 @@ LINE 1: SELECT '[4e38,1]'::vector;
 
 ## Resources
 
-`pgvector` source code: [https://github.com/pgvector/pgvector](https://github.com/pgvector/pgvector)
+- `pgvector` source code: [https://github.com/pgvector/pgvector](https://github.com/pgvector/pgvector)
+- [Vector search in Postgres](/guides/vector-search)
+- [Building semantic search with AI embeddings, Neon, and pgvector](/guides/ai-embeddings-postgres-search)
 
 <NeedHelp/>

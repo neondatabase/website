@@ -7,8 +7,8 @@ summary: >-
   schema and writes a TypeScript definition file with `Database`, `Tables`,
   `TablesInsert`, and `TablesUpdate` interfaces for type-safe Data API access.
   Use this page to add autocomplete, query-result type inference, and
-  compile-time error checking to `@neondatabase/neon-js` or
-  `@neondatabase/postgrest-js` clients. The tool accepts `--db-url`,
+  compile-time error checking to `@neon/neon-js` or
+  `@neon/postgrest-js` clients. The tool accepts `--db-url`,
   `--output`, and `--schema` flags and can run as a package.json script to
   keep generated types in sync after schema changes.
 enableTableOfContents: true
@@ -23,7 +23,7 @@ updatedOn: '2026-09-14T11:31:53.481Z'
   </DocsList>
 </InfoBlock>
 
-The Neon SDK offers a CLI tool that introspects your database schema to generate a TypeScript definition file. This promotes type safety and enhances the developer experience when interacting with your database via the Data API, particularly with PostgREST clients like [`@neondatabase/postgrest-js`](https://www.npmjs.com/package/@neondatabase/postgrest-js) and [`@neondatabase/neon-js`](https://www.npmjs.com/package/@neondatabase/neon-js). Key benefits include:
+The Neon SDK offers a CLI tool that introspects your database schema to generate a TypeScript definition file. This promotes type safety and enhances the developer experience when interacting with your database via the Data API, particularly with PostgREST clients like [`@neon/postgrest-js`](https://www.npmjs.com/package/@neon/postgrest-js) and [`@neon/neon-js`](https://www.npmjs.com/package/@neon/neon-js). Key benefits include:
 
 - **Autocomplete** for table names and columns.
 - **Type inference** for query results.
@@ -31,7 +31,7 @@ The Neon SDK offers a CLI tool that introspects your database schema to generate
 
 ## Generate types
 
-Use `npx` to run the type generator. You must provide your **Direct Connection String** (Postgres URL) so the tool can connect to and inspect your database.
+`@neon/neon-js` doesn't include the type generator, so run it from `@neondatabase/neon-js`, the package's previous name. The generated file works with both packages. Use `npx` to run the type generator. You must provide your **Direct Connection String** (Postgres URL) so the tool can connect to and inspect your database.
 
 ```bash
 npx @neondatabase/neon-js gen-types \
@@ -56,7 +56,7 @@ Once generated, import the `Database` interface and pass it as a generic argumen
 ```typescript
 // Import the generated type
 import type { Database } from '@/types/database';
-import { createClient } from '@neondatabase/neon-js';
+import { createClient } from '@neon/neon-js';
 
 // Pass the generic to the client
 const client = createClient<Database>(process.env.NEON_DATABASE_URL!);
@@ -117,11 +117,11 @@ You can now run `npm run generate-types` whenever you make schema changes (like 
 
 ## Using with the Neon PostgREST Client
 
-If you are using `@neondatabase/postgrest-js` (without Managed Better Auth), the types work exactly the same way:
+If you are using `@neon/postgrest-js` (without Managed Better Auth), the types work exactly the same way:
 
 ```typescript
 import type { Database } from '@/types/database';
-import { NeonPostgrestClient } from '@neondatabase/postgrest-js';
+import { NeonPostgrestClient } from '@neon/postgrest-js';
 
 const client = new NeonPostgrestClient<Database>({
   dataApiUrl: process.env.NEON_DATA_API_URL,

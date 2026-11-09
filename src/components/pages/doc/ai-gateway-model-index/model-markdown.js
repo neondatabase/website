@@ -59,9 +59,9 @@ const renderModelTableRows = (rows) =>
     .map((line) => `| ${line} |`)
     .join('\n');
 
-const renderProviderTables = (rows, headingDepth) =>
+const renderLabTables = (rows, headingDepth) =>
   modelRows
-    .groupByProvider(rows)
+    .groupByLab(rows)
     .map(
       (group) =>
         `${headingDepth} ${group.label}\n\n${MODEL_TABLE_HEADER}\n${renderModelTableRows(group.rows)}`
@@ -69,8 +69,8 @@ const renderProviderTables = (rows, headingDepth) =>
     .join('\n\n');
 
 const EMBEDDING_TABLE_HEADER =
-  '| Model | Model ID | Dimensions | Released | Input /M | Endpoints | License |\n' +
-  '| --- | --- | --- | --- | --- | --- | --- |';
+  '| Model | Model ID | Lab | Dimensions | Released | Input /M | Endpoints | License |\n' +
+  '| --- | --- | --- | --- | --- | --- | --- | --- |';
 
 const renderEmbeddingTableRows = (rows) =>
   rows
@@ -80,6 +80,7 @@ const renderEmbeddingTableRows = (rows) =>
           row.id
         )}.md)`,
         renderCodeCell(row.id),
+        escapeTableCell(row.labName),
         escapeTableCell(row.dimensions),
         escapeTableCell(row.releaseLabel),
         escapeTableCell(row.costInputLabel),
@@ -90,15 +91,39 @@ const renderEmbeddingTableRows = (rows) =>
     .map((line) => `| ${line} |`)
     .join('\n');
 
+const DECISION_TABLE_HEADER =
+  '| Model | Model ID | Lab | Context | Released | Input /M | License |\n' +
+  '| --- | --- | --- | --- | --- | --- | --- |';
+
+const renderDecisionTableRows = (rows) =>
+  rows
+    .map((row) =>
+      [
+        `[${escapeLinkLabel(row.name)}](${BASE_URL}/docs/ai-gateway/models/${encodeURIComponent(
+          row.id
+        )}.md)`,
+        renderCodeCell(row.id),
+        escapeTableCell(row.labName),
+        escapeTableCell(row.contextLabel),
+        escapeTableCell(row.releaseLabel),
+        escapeTableCell(row.costInputLabel),
+        row.openWeights ? 'Open weights' : '—',
+      ].join(' | ')
+    )
+    .map((line) => `| ${line} |`)
+    .join('\n');
+
 const renderAiGatewayModelIndex = (rows = modelRows.buildRows(modelsData.neon, capabilities)) => {
   const embeddingRows = rows.filter((row) => row.isEmbedding);
+  const decisionRows = rows.filter((row) => row.isDecision);
   const textRows = rows.filter((row) => row.inputs.includes('text') && !row.isEmbedding);
   const imageRows = rows.filter((row) => row.isImageCapable);
   const otherRows = rows.filter(
-    (row) => !row.inputs.includes('text') && !row.isImageCapable && !row.isEmbedding
+    (row) =>
+      !row.inputs.includes('text') && !row.isImageCapable && !row.isEmbedding && !row.isDecision
   );
-  const unavailableRows = rows.filter((row) => !row.hasMeasuredCapabilities);
-  const sections = ['### Text models', renderProviderTables(textRows, '####')];
+  const unavailableRows = rows.filter((row) => !row.hasMeasuredCapabilities && !row.isDecision);
+  const sections = ['### Text models', renderLabTables(textRows, '####')];
 
   sections.push(
     'Select a linked model for code examples matched to its measured AI Gateway capabilities.'
@@ -117,14 +142,14 @@ const renderAiGatewayModelIndex = (rows = modelRows.buildRows(modelsData.neon, c
     sections.push(
       'These models support image generation through the Responses API (base URL `/openai/v1`):'
     );
-    sections.push(renderProviderTables(imageRows, '####'));
+    sections.push(renderLabTables(imageRows, '####'));
     sections.push('Select a linked model for image-generation examples matched to that model.');
   }
 
   if (otherRows.length > 0) {
     sections.push('### Other models');
     sections.push('These models use other input modalities supported by AI Gateway:');
-    sections.push(renderProviderTables(otherRows, '####'));
+    sections.push(renderLabTables(otherRows, '####'));
   }
 
   if (embeddingRows.length > 0) {
@@ -134,6 +159,14 @@ const renderAiGatewayModelIndex = (rows = modelRows.buildRows(modelsData.neon, c
     );
     sections.push(`${EMBEDDING_TABLE_HEADER}\n${renderEmbeddingTableRows(embeddingRows)}`);
     sections.push('Select a linked model for embeddings-specific code examples.');
+  }
+
+  if (decisionRows.length > 0) {
+    sections.push('### Decision models');
+    sections.push(
+      'These System One models answer questions about a given state with a choice, a probability, or a score rather than generating text:'
+    );
+    sections.push(`${DECISION_TABLE_HEADER}\n${renderDecisionTableRows(decisionRows)}`);
   }
 
   sections.push(modelRows.MODEL_CATALOG_NOTE);
@@ -149,6 +182,6 @@ module.exports = {
   renderCodeCell,
   renderModelTableRows,
   renderEmbeddingTableRows,
-  renderProviderTables,
+  renderLabTables,
   renderAiGatewayModelIndex,
 };

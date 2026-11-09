@@ -22,7 +22,7 @@ The three terms:
 | the database / Postgres | Lakebase Postgres database (when wordy) | Shorten on repeat, unambiguous references |
 | Lakebase Postgres (in full) | shortened forms | Name the product in full in each self-contained unit: summaries, subtitles, card descriptions, table rows, section ledes. Shorten to "the database" / "Postgres" only on repeat references within continuous body prose, to avoid awkward repetition. |
 | lakebase architecture | the Neon architecture | Lowercase category term |
-| Neon (brand / access path) | | Console, CLI, API, Auth, MCP Server keep "Neon" |
+| Neon (brand / access path) | | Console, CLI, API, MCP Server keep "Neon" |
 | Neon, a set of cloud backend primitives | the Neon platform, Neon is a platform | Neon is part of the Databricks platform |
 
 Canonical line: "Neon is a complete set of cloud backend primitives built around Lakebase Postgres, for developers, startups, and agent platforms, from Databricks."
@@ -69,7 +69,7 @@ The test: after the rename, can a reader following the steps still tell which pr
 
 The rename applies to the database, not to things whose names merely contain it:
 
-- **Neon-owned product names keep "Neon":** Neon serverless driver, Neon Console, Neon CLI, Neon API, Neon Auth, Neon MCP Server, Data API. Never "Lakebase Postgres serverless driver."
+- **Neon-owned product names keep "Neon":** Neon serverless driver, Neon Console, Neon CLI, Neon API, Neon MCP Server, Data API. Never "Lakebase Postgres serverless driver."
 - **Third-party titles, templates, and link text are quoted strings.** Leave them exactly as the third party publishes them.
 - **Cross-page link text must match the target page's actual title.** If the target still reads "Neon Postgres Read Replicas," the link text says that too.
 - **Renaming a heading changes its anchor.** Update every same-page and cross-page `#anchor` that pointed at the old slug.
@@ -110,6 +110,10 @@ When in doubt, use Postgres.
 | connection pooling | | Lowercase. PgBouncer powers this in Neon. |
 | connection string | connection URL, DSN, connection URI | Neon standardizes on "connection string" |
 | compute unit | | Lowercase when written out. Abbreviate as "CU" after first mention. |
+| Postgres storage | storage, database storage (for plan and billing amounts) | Qualify storage next to Object Storage and in plan, limit, and billing text, so "1 GB of storage" can't be read as Object Storage. Bare "storage" is fine on Postgres-only pages, and "database storage" for the storage layer in architecture text stays. |
+| your Lakebase Postgres database | your Lakebase Postgres | You query a database, not the product. |
+| API keys | platform API keys | Matches the Manage API Keys page. |
+| scoped credential | service credential | A branch credential with scopes for Object Storage, AI Gateway, or function invocation (`neon credentials`). |
 | CU | vCPU (as a synonym for CU) | Standard abbreviation for compute unit |
 
 ---
@@ -123,7 +127,7 @@ Named features that are always capitalized regardless of context — these are p
 | Always capitalize | Notes |
 | --- | --- |
 | Neon Console | The web UI |
-| Neon Auth | Not "Neon Authentication" |
+| Managed Better Auth | The auth product. Not "Neon Auth", which now means only the older Stack Auth version ("legacy Neon Auth"). Keep identifiers such as `NEON_AUTH_BASE_URL` and `@neondatabase/auth` as they are. Avoid the possessive: "the Managed Better Auth server SDK", not "Managed Better Auth's server SDK". |
 | Neon CLI | "Neon CLI" in prose; `neonctl` only in code |
 | Neon MCP Server | Full name on first mention; "the MCP Server" after. Never "Neon Postgres MCP Server" — drop "Postgres"; the product name does not contain the database name. |
 | Neon Serverless Driver | The `@neondatabase/serverless` package |
@@ -196,7 +200,7 @@ Always include `?sslmode=require` in examples unless demonstrating a specific no
 ## Capitalization rules
 
 - Capitalize feature names when explicitly referring to the named feature; use lowercase when describing the concept in prose
-- Proper brand names are always capitalized: Neon Console, Neon Auth, Neon CLI, Data API, etc.
+- Proper brand names are always capitalized: Neon Console, Managed Better Auth, Neon CLI, Data API, etc.
 - Generic concepts are always lowercase in prose: compute, branch, project, endpoint, database, table, role
 - Postgres extensions are lowercase: pgvector, pg_stat_statements, postgis
 - "Neon" is always capitalized — never "neon"
