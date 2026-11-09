@@ -5,12 +5,12 @@ summary: >-
   Managed Better Auth password reset sends a verification link to the user's email and
   requires email authentication to be enabled in project Settings. The pre-built
   `<ForgotPasswordForm>` and `<ResetPasswordForm>` components handle the full
-  forgot-password flow; reset links expire after 15 minutes, and the SDK
+  forgot-password flow; reset links expire after 1 hour, and the SDK
   `resetPasswordForEmail` method is not yet supported. An optional per-branch
   setting, `revoke_sessions_on_password_reset`, signs the user out of every
   existing session after a successful reset.
 enableTableOfContents: true
-updatedOn: '2026-11-05T12:39:50.597Z'
+updatedOn: '2026-11-09T17:05:50.058Z'
 ---
 
 Password reset allows users to securely reset forgotten passwords. Managed Better Auth supports password reset via verification links sent to the user's email address.
@@ -75,7 +75,7 @@ The complete password reset flow works as follows:
 
 ## Reset link expiration
 
-Password reset links expire after **15 minutes**. If a link expires, users need to request a new one.
+Password reset links expire after **1 hour**. If a link expires, users need to request a new one.
 
 ## Sign users out after a reset
 
