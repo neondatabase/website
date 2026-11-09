@@ -40,11 +40,11 @@ You can also manage snapshots from the terminal with the Neon CLI. For every sub
 
 ## What you can do
 
-- ✅ Instantly restore a branch
-- ✅ Preview data before restoring
-- ✅ Create snapshots manually
-- ✅ Schedule automated snapshots
-- ✅ Restore from a snapshot
+- Instantly restore a branch
+- Preview data before restoring
+- Create snapshots manually
+- Schedule automated snapshots
+- Restore from a snapshot
 
 ---
 
@@ -76,7 +76,7 @@ You can restore from any time that falls within your project's [history window](
 
 2. **Preview the data**
 
-   To preview the data to make sure you’ve selected the right restore point, you can:
+   To preview the data to make sure you've selected the right restore point, you can:
    - **Browse data** in the **Tables** view to explore a read-only view of the data at the selected point in time
    - **Query data** directly from the restore page to run read-only SQL against the selected restore point
    - **Compare schemas** with the schema diff tool to see how your current schema differs from the one at the selected restore point
@@ -103,7 +103,7 @@ To restore a branch to an earlier point in time, use the syntax `^self` in the `
 neon branches restore development ^self@2025-01-01T00:00:00Z --preserve-under-name development_old
 ```
 
-This command resets the target branch `development` to its state at the start of 2025. The command also preserves the original state of the branch in a backup file called `development_old` using the `preserve-under-name` parameter (mandatory when resetting to self).
+This command resets the target branch `development` to its state at the start of 2025. The timestamp must fall within the branch's [history window](/docs/postgres/backup-restore/history-window), so use a more recent time if your project's history is shorter. The command also preserves the original state of the branch in a backup file called `development_old` using the `preserve-under-name` parameter (mandatory when resetting to self).
 
 For full CLI documentation for `branches restore`, see [branches restore](/docs/cli/branches#restore).
 
@@ -219,7 +219,7 @@ This endpoint takes its parameters in the query string. It has no request body, 
 
 ```bash shouldWrap
 curl -X POST "https://console.neon.tech/api/v2/projects/project_id/branches/branch_id/snapshot?name=my_snapshot&timestamp=2025-07-29T21:00:00Z&expires_at=2027-08-05T22:00:00Z" \
-  -H 'authorization: Bearer $NEON_API_KEY' |jq
+  -H "authorization: Bearer $NEON_API_KEY" |jq
 ```
 
 The parameters used in the example above:
@@ -235,7 +235,7 @@ You can change a snapshot's expiration after it is created using the [Update sna
 ```bash
 curl -X PATCH "https://console.neon.tech/api/v2/projects/project_id/snapshots/snapshot_id" \
   -H "Content-Type: application/json" \
-  -H 'authorization: Bearer $NEON_API_KEY' \
+  -H "authorization: Bearer $NEON_API_KEY" \
   -d '{
     "snapshot": {
       "expires_at": "2026-12-31T00:00:00Z"
@@ -275,7 +275,7 @@ Depending on billing mode and whether sizes have finished calculating, either fi
 
 ## Create backup schedules
 
-Schedule automated snapshots to run at regular intervals (daily, weekly, or monthly) to ensure consistent backups without manual intervention. Backup schedules are configured per branch and only apply to root branches.
+Schedule automated snapshots to run at regular intervals (daily, weekly, or monthly) so you get consistent backups without manual steps. Backup schedules are configured per branch and only apply to root branches.
 
 <Tabs labels={["Console", "CLI", "API"]}>
 
@@ -359,7 +359,7 @@ GET /projects/{project_id}/branches/{branch_id}/backup_schedule
 
 ```bash shouldWrap
 curl 'https://console.neon.tech/api/v2/projects/<project_id>/branches/<branch_id>/backup_schedule' \
-  -H 'Authorization: Bearer $NEON_API_KEY' | jq
+  -H "Authorization: Bearer $NEON_API_KEY" | jq
 ```
 
 **Example response:**
@@ -397,7 +397,7 @@ Although the schema marks `hour` and `day` optional, the server rejects a schedu
 
 ```bash shouldWrap
 curl -X PUT "https://console.neon.tech/api/v2/projects/<project_id>/branches/<branch_id>/backup_schedule" \
-  -H 'Authorization: Bearer $NEON_API_KEY' \
+  -H "Authorization: Bearer $NEON_API_KEY" \
   -H 'Content-Type: application/json' \
   -d '{
     "schedule": [
@@ -467,7 +467,7 @@ To update a backup schedule via API, use the same PUT endpoint and request forma
 
 ```bash shouldWrap
 curl -X PUT "https://console.neon.tech/api/v2/projects/<project_id>/branches/<branch_id>/backup_schedule" \
-  -H 'Authorization: Bearer $NEON_API_KEY' \
+  -H "Authorization: Bearer $NEON_API_KEY" \
   -H 'Content-Type: application/json' \
   -d '{
     "schedule": []
@@ -537,7 +537,7 @@ A one-step restore operation is performed using the [Restore snapshot](/docs/ref
 ```bash
 curl -X POST "https://console.neon.tech/api/v2/projects/project_id/snapshots/snapshot_id/restore" \
   -H "Content-Type: application/json" \
-  -H 'authorization: Bearer $NEON_API_KEY' \
+  -H "authorization: Bearer $NEON_API_KEY" \
   -d '{
     "name": "restored_branch",
     "target_branch_id": "br-twilight-river-31791249",
@@ -547,12 +547,12 @@ curl -X POST "https://console.neon.tech/api/v2/projects/project_id/snapshots/sna
 
 Parameters:
 
-- `name`: (Optional) Name of the new branch with the restored snapshot data. If not provided, a default branch name will be generated. Pass this in the request body; the `name` query parameter is deprecated.
-- `finalize_restore`: Set to `true` to finalize the restore immediately, which is what makes this a one-step restore. Finalizing the restore moves computes from your current branch to the new branch with the restored snapshot data for a seamless restore operation; no need to change the connection details in your application. If the branch being replaced was **protected**, that protection is **moved** to the branch with the restored data (it is not left on both branches). Set it to `false` for a [multi-step restore](#multi-step-restore) instead.
+- `name`: (Optional) Name of the new branch with the restored snapshot data. If not provided, a default branch name will be generated. Pass this in the request body; the `name` query parameter is deprecated. When you set `name`, the branch it replaces takes that name with a numeric suffix, such as `<name> (1)`, instead of `<branch_name> (old)`.
+- `finalize_restore`: Set to `true` to finalize the restore immediately, which is what makes this a one-step restore. Finalizing the restore moves computes from your current branch to the new branch with the restored snapshot data. You don't need to change the connection details in your application. If the branch being replaced was **protected**, that protection is **moved** to the branch with the restored data (it is not left on both branches). Set it to `false` for a [multi-step restore](#multi-step-restore) instead.
 - `target_branch_id`: (Optional but recommended) The ID of the branch you want to replace when finalizing the restore. If omitted, subsequent snapshot restores may target the branch renamed to `<branch_name> (old)` from a previous restore, not your intended production branch.
 
 <Admonition type="note">
-If you plan to apply multiple snapshots in succession, always supply `target_branch_id` to ensure the restore is finalized against the correct branch (typically your current production branch). Without it, a second snapshot may be applied to the previously renamed "(old)" branch.
+If you plan to apply multiple snapshots in succession, always supply `target_branch_id` so the restore finalizes against the correct branch (typically your current production branch). Without it, a second snapshot may be applied to the previously renamed "(old)" branch.
 </Admonition>
 
 **Related API references:**
@@ -634,9 +634,10 @@ Use this option if you need to inspect the restored data before you switch over 
     ```bash
     curl -X POST "https://console.neon.tech/api/v2/projects/project_id/snapshots/snapshot_id/restore" \
     -H "Content-Type: application/json" \
-    -H 'authorization: Bearer $NEON_API_KEY' \
+    -H "authorization: Bearer $NEON_API_KEY" \
     -d '{
        "name": "my_restored_branch",
+       "target_branch_id": "br-twilight-river-31791249",
        "finalize_restore": false
     }' |jq
     ```
@@ -669,7 +670,7 @@ Use this option if you need to inspect the restored data before you switch over 
     curl --request GET \
       --url 'https://console.neon.tech/api/v2/projects/project_id/connection_uri?branch_id=branch_id&database_name=db_name&role_name=role_name&pooled=true' \
       --header 'accept: application/json' \
-      --header 'authorization: Bearer $NEON_API_KEY' |jq
+      --header "authorization: Bearer $NEON_API_KEY" |jq
     ```
 
 3.  **Finalize the restore**
@@ -684,7 +685,7 @@ Use this option if you need to inspect the restored data before you switch over 
     ```bash
     curl -X POST "https://console.neon.tech/api/v2/projects/project_id/branches/branch_id/finalize_restore" \
     -H "Content-Type: application/json" \
-    -H 'authorization: Bearer $NEON_API_KEY' |jq
+    -H "authorization: Bearer $NEON_API_KEY" |jq
     ```
 
     Parameters:
