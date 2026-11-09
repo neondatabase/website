@@ -4,6 +4,7 @@ subtitle: 'Define live SQL queries that you can subscribe to.'
 summary: >-
   Define live queries in your backend with raw SQL or Drizzle, fill in their parameters from the authenticated request, and seal them so clients can subscribe without being able to read or change them.
 enableTableOfContents: true
+updatedOn: '2026-10-30T15:07:38.000Z'
 ---
 
 Realtime works by defining and [subscribing](./subscribing) to live SQL queries. Queries are designed to be [defined&nbsp;securely](#defining-live-queries) in your backend code and [subscribed&#8209;to&nbsp;safely](#exposing-queries) in your frontend.

@@ -15,7 +15,7 @@
 
 ## 📋 Prerequisites
 
-This prompt must be run inside an existing Quarkus project directory. If a project does not exist, create a new one first by running the following command in the terminal.
+This prompt must be run inside an existing Quarkus project directory. The project needs JDK 21 or later. If a project does not exist, create a new one first by running the following command in the terminal.
 
 ```bash
 quarkus create app neon-with-quarkus-reactive \

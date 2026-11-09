@@ -9,6 +9,7 @@ summary: >-
   questions about text, JSON, or images and get back probabilities instead of
   generated text, with the same Neon credential you use for chat completions.
 enableTableOfContents: true
+updatedOn: '2026-10-30T22:52:23.000Z'
 ---
 
 Decision models don't generate text. You send a piece of text or JSON, called the state, and a set of named questions about it. The model answers each one with numbers: the probability of a yes, the option it picked and how sure it is, or where the input falls on a scale you define. Use them to classify, route, or score input without prompting a chat model and parsing its reply. You can also [ask about an image](#ask-about-an-image).

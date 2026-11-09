@@ -66,9 +66,10 @@ describe('Middleware - AI Agent Integration Tests', () => {
     ]),
   });
 
-  it('matches every generated marketing page for content negotiation', () => {
+  it('matches every generated marketing page for content negotiation', async () => {
+    const { GENERATED_PAGE_MARKDOWN_PATHS } = await import('./constants/content');
     expect(middlewareConfig.matcher).toEqual(
-      expect.arrayContaining(['/functions', '/ai-gateway', '/lakebase'])
+      expect.arrayContaining(Object.keys(GENERATED_PAGE_MARKDOWN_PATHS).map((route) => `/${route}`))
     );
   });
 
@@ -114,6 +115,7 @@ describe('Middleware - AI Agent Integration Tests', () => {
       { name: 'Object Storage', path: '/object-storage' },
       { name: 'Auth', path: '/auth' },
       { name: 'Lakebase', path: '/lakebase' },
+      { name: 'Case studies', path: '/case-studies' },
       { name: 'FAQs', path: '/faqs/connect-application-using-connection-string' },
     ];
 

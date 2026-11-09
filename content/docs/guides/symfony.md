@@ -30,15 +30,31 @@ If you do not have one already, create a Neon project. Save your connection deta
 2. Click **New Project**.
 3. Specify your project settings and click **Create Project**.
 
-## Configure the connection
+## Install Doctrine
 
-In your `.env` file, set the `DATABASE_URL` to the Neon project connection string that you copied in the previous step.
+If your Symfony project doesn't use Doctrine yet, install the ORM pack. Your PHP installation also needs the `pdo_pgsql` and `pgsql` extensions. Check for them with `php -m | grep pgsql`.
 
 ```shell
+composer require symfony/orm-pack
+```
+
+## Configure the connection
+
+Symfony reads the default `DATABASE_URL` from `.env`, which points to a local PostgreSQL server. Add the Neon project connection string that you copied in the first step to `.env.local`. Symfony loads that file on top of `.env`, and the default `.gitignore` excludes it, so your password stays out of version control.
+
+```text filename=".env.local" shouldWrap
 DATABASE_URL="postgresql://[user]:[password]@[neon_hostname]/[dbname]?charset=utf8&sslmode=require&channel_binding=require"
 ```
 
 You can find the connection string for your database by clicking the **Connect** button in the Console nav. For more information, see [Connect from any application](/docs/connect/connect-from-any-app).
+
+## Test the connection
+
+Run a query with the Doctrine console command. The output shows the Postgres version of your Neon database.
+
+```shell
+php bin/console dbal:run-sql "SELECT version()"
+```
 
 </Steps>
 

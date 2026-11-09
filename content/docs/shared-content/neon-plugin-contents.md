@@ -1,0 +1,1 @@
+The Neon plugin bundles seven Neon [agent skills](/docs/ai/agent-skills): `neon`, `neon-postgres`, `neon-auth`, `neon-functions`, `neon-object-storage`, `neon-ai-gateway`, and `neon-realtime`. It also includes the [Neon MCP Server](/docs/ai/neon-mcp-server), which your agent signs in to with OAuth the first time it uses it.

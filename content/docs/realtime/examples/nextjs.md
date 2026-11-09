@@ -4,6 +4,7 @@ subtitle: 'Full-stack example app using Realtime with Next.js.'
 summary: >-
   Build a per-user todo app with Next.js, Drizzle and Managed Better Auth on Neon Realtime: read and seal live queries in a Server Component, renew them through a Route Handler, and settle optimistic server action writes by txid.
 enableTableOfContents: true
+updatedOn: '2026-10-30T15:07:38.000Z'
 ---
 
 This example shows how to use Neon Realtime with [Next.js](https://nextjs.org), [Drizzle ORM](https://orm.drizzle.team) and Neon's [Managed Better Auth](/docs/auth/overview), with support for [auth](#authorize-with-the-session), [SSR](#server-side-rendering), [client-side reactivity](#client-side-reactivity) and [optimistic mutations](#optimistic-mutations).
@@ -123,7 +124,7 @@ export type TodoRow = Awaited<ReturnType<typeof todosQuery>>[number]
 
 `TodoRow` is the row type Drizzle infers from the select. The browser imports it as a type only, so no server code reaches it. `userId` always comes from the [server session](#authorize-with-the-session), never from the browser, and this `WHERE` keeps each user's todos separate.
 
-Live rows don't keep the query's `ORDER BY` order, so the browser [sorts them](#apply-writes-optimistically) too.
+Live rows keep the query's `ORDER BY` order. The browser still [sorts them](#apply-writes-optimistically) so optimistic rows, which aren't in the live result yet, land in the right place.
 
 ## Sealing queries
 
@@ -454,8 +455,8 @@ function applyOptimisticAction(todos: readonly OptimisticTodo[], action: Optimis
   }
 }
 
-// The live rows don't follow the query's ORDER BY, so sort here. The server render and hydration run the
-// same sort, so the markup matches.
+// The live rows already follow the query's ORDER BY. Sort here so optimistic rows land in the right place.
+// The server render and hydration run the same sort, so the markup matches.
 // Newest first, optimistic rows included (they carry the browser's created_at until the live row replaces them).
 const newestFirst = (a: OptimisticTodo, b: OptimisticTodo) =>
   b.created_at.getTime() - a.created_at.getTime() || (a.id < b.id ? 1 : a.id > b.id ? -1 : 0)

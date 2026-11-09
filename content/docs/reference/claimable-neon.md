@@ -40,7 +40,7 @@ neon claim create \
   --env-pull
 ```
 
-`neon claim create` uses `aws-us-east-2` unless you pass `--region-id`, for example `--region-id aws-eu-central-1`.
+`neon claim create` uses `aws-us-east-2` unless you pass `--region-id`, for example `--region-id aws-eu-central-1`. Pass `--project-name` to name the project; it keeps the name after the claim.
 
 The CLI saves the project's identity assertion in its secure credential store. Existing commands then use the claimable project automatically:
 
@@ -117,7 +117,7 @@ Content-Type: application/json
 
 `postgres` is always requested. Add `data_api` or `auth` only when the app needs them.
 
-`region_id` is optional. Without it, the project is created in `aws-us-east-2`. Pass any AWS [region](/docs/introduction/regions) that accepts new projects, for example `"region_id": "aws-eu-central-1"`.
+`region_id` is optional. Without it, the project is created in `aws-us-east-2`. Pass any AWS [region](/docs/introduction/regions) that accepts new projects, for example `"region_id": "aws-eu-central-1"`. `project_name` is optional too and stays the project's name after the claim.
 
 The response has this shape:
 

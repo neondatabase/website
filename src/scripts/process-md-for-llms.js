@@ -48,6 +48,7 @@ const cliSchema = require('../../scripts/docs-checks/neonctl/schema.json');
 const {
   renderAiGatewayModelIndex,
 } = require('../components/pages/doc/ai-gateway-model-index/model-markdown');
+const { agentHeaderLines } = require('../constants/agent-directives');
 const { isUnusedOrSharedContent } = require('../constants/content');
 
 // AI Gateway model catalog: <AiGatewayModelIndex/> renders an interactive table
@@ -120,6 +121,7 @@ const SHARED_CONTENT_COMPONENTS = {
   NextjsProxyNote: 'nextjs-proxy-note',
   AuthAISetup: 'auth-ai-setup',
   AuthAISetupTip: 'auth-ai-setup-tip',
+  NeonPluginContents: 'neon-plugin-contents',
   RealtimeSdkBackend: 'realtime-sdk-backend',
   RealtimeSdkClient: 'realtime-sdk-client',
   RealtimeSdkReact: 'realtime-sdk-react',
@@ -599,12 +601,6 @@ const componentHandlers = {
     // The interactive model table degrades to static per-provider tables built
     // from the same /models.json data for agents reading the .md mirror.
     return parseMarkdownToNodes(renderAiGatewayModelIndex());
-  },
-
-  FunctionRegistryCards() {
-    return parseMarkdownToNodes(
-      'Browse [Function Registry templates](/docs/compute/functions/registry/templates). Catalog: [registry.json](https://neon.com/functions/registry/registry.json).'
-    );
   },
 
   /**
@@ -2333,7 +2329,7 @@ async function processFile(inputPath, pageUrl, rootDir) {
     ? path.relative(rootDir, inputPath).split(path.sep).join('/')
     : inputPath.split(path.sep).join('/');
   const isFaq = relativeInputPath.startsWith('content/faqs/');
-  if (isFaq && frontmatter.updatedOn) {
+  if (frontmatter.updatedOn) {
     output += `Last updated: ${new Date(frontmatter.updatedOn).toISOString().slice(0, 10)}\n\n`;
   }
   output += `${markdown.trim()}\n`;
@@ -2539,15 +2535,30 @@ function buildNavigationFooter(slug, navMap) {
 }
 
 /**
+ * Changelog markdown: the dated entries under content/changelog/ and the combined
+ * docs/changelog.md that aggregates them. Both skip the agent skills line and the feedback
+ * footer: agents reading release notes rarely need a Neon step, and the entries are
+ * auto-generated, so feedback isn't useful.
+ *
+ * @param {string} [relativePath] - Path relative to content/ (e.g. "changelog/2026-01-01.md")
+ * @returns {boolean}
+ */
+function isChangelogPath(relativePath) {
+  return Boolean(relativePath?.startsWith('changelog/') || relativePath === 'docs/changelog.md');
+}
+
+/**
  * Build the page header block prepended to every generated markdown file.
- * Always includes the documentation index line and feedback instruction (except changelogs).
+ * Always includes the documentation index line. Includes the agent skills line except on
+ * changelog markdown (dated entries and the combined docs/changelog.md).
  * Includes the location line only if the page is in the navigation map with breadcrumbs.
  *
  * @param {string|null} slug - Navigation slug, or null for pages outside nav
  * @param {Map|null} navMap - Navigation map from buildNavigationMap()
+ * @param {string} [relativePath] - Path relative to content/ (e.g. "changelog/2026-01-01.md")
  * @returns {string} Header block (blockquote lines, followed by blank line)
  */
-function buildPageHeader(slug, navMap, _relativePath) {
+function buildPageHeader(slug, navMap, relativePath) {
   const lines = [];
 
   // Location line (only for pages in the nav map)
@@ -2564,8 +2575,8 @@ function buildPageHeader(slug, navMap, _relativePath) {
     }
   }
 
-  // Index line (always)
-  lines.push(`> Full Neon documentation index: ${BASE_URL}/docs/llms.txt`);
+  // Index line (always) and agent skills line (not on changelog markdown)
+  lines.push(...agentHeaderLines({ skills: !isChangelogPath(relativePath) }));
 
   return `${lines.join('\n')}\n\n`;
 }
@@ -2612,9 +2623,8 @@ function addNavigationContext(content, relativePath, navMap) {
     }
   }
 
-  // Feedback footer — skip changelog entries (auto-generated, feedback not useful)
-  const isChangelog = relativePath && relativePath.startsWith('changelog/');
-  if (!isChangelog) {
+  // Feedback footer (not on changelog markdown)
+  if (!isChangelogPath(relativePath)) {
     const pagePath = relativePath ? `/${relativePath.replace(/\.md$/, '')}` : '';
     const feedbackBody = pagePath
       ? `{"feedback": "describe the issue", "source": "neon_website", "path": "${pagePath}"}`
@@ -2631,7 +2641,7 @@ function addNavigationContext(content, relativePath, navMap) {
  */
 function stripNavigationContext(content) {
   let stripped = content.replace(
-    /^(?:> This page location:[^\n]*\n)?> Full Neon documentation index:[^\n]*\n(?:> IMPORTANT: If this page[^\n]*\n)?\n/,
+    /^(?:> This page location:[^\n]*\n)?> Full Neon documentation index:[^\n]*\n(?:>\n> Agent skills:[^\n]*\n)?(?:> IMPORTANT: If this page[^\n]*\n)?\n/,
     ''
   );
 
@@ -2724,7 +2734,7 @@ async function generateRouteIndex(route, pages, outputDir, stats = null) {
   const outputPath = path.join(outputDir, `${route}.md`);
 
   const lines = [
-    `> Full Neon documentation index: ${BASE_URL}/docs/llms.txt`,
+    ...agentHeaderLines(),
     '',
     `# Neon ${label}`,
     '',

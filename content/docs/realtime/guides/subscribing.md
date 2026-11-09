@@ -4,6 +4,7 @@ subtitle: 'Subscribe to live queries using the Realtime client.'
 summary: >-
   Subscribe to live queries from trusted backend code or the browser. Fetch sealed queries from your API, handle every callback and renew sealed queries before they expire.
 enableTableOfContents: true
+updatedOn: '2026-10-30T15:07:38.000Z'
 ---
 
 Once you've [defined](./queries) and [sealed](./queries#sealing-queries) a query, you can [subscribe&nbsp;to&nbsp;it](#subscribe-to-the-sealed-query) using the [low&#8209;level Realtime&nbsp;client](../sdks/typescript#client-createrealtimeclient).
