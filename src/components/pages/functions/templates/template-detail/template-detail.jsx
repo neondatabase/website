@@ -23,13 +23,11 @@ import {
   registryCategoryLabel,
   registryProviderLabel,
   registryTemplateCategories,
-  registryTemplateSource,
   registryTemplateSourceUrl,
 } from 'utils/function-registry';
 import getRelatedFunctionTemplates from 'utils/get-related-function-templates';
 
 import OpenSource from '../open-source';
-import FunctionRegistrySourceLabel from '../registry/source-label';
 import { templateCardType } from '../registry/template-card';
 import TemplateCopy from '../registry/template-copy';
 import getTemplatePrompt from '../registry/template-prompt';
@@ -52,7 +50,6 @@ const TemplateDetail = async ({ template, templates, readme = null, installs = [
   const operations = template.operations ?? [];
   const environment = (template.environment ?? []).filter((item) => isInlineCodeSafe(item.name));
   const categories = registryTemplateCategories(template);
-  const source = registryTemplateSource(template);
   const sourceUrl = registryTemplateSourceUrl(template);
   const related = getRelatedFunctionTemplates(template, templates);
   const renderedReadme =
@@ -156,16 +153,9 @@ const TemplateDetail = async ({ template, templates, readme = null, installs = [
                 <a
                   key={category}
                   href={`${LINKS.functionsTemplates}?category=${encodeURIComponent(category)}#library`}
-                  className="group border border-gray-new-20 px-2 py-1 font-mono text-xs leading-none tracking-tight text-gray-new-60 uppercase hover:border-gray-new-40 hover:text-white focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary-1"
+                  className="border border-gray-new-20 px-2 py-1 font-mono text-xs leading-none tracking-tight text-gray-new-60 uppercase hover:border-gray-new-40 hover:text-white focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary-1"
                 >
-                  {category === source ? (
-                    <FunctionRegistrySourceLabel
-                      className="group-hover:text-white"
-                      template={template}
-                    />
-                  ) : (
-                    registryCategoryLabel(category)
-                  )}
+                  {registryCategoryLabel(category)}
                 </a>
               ))}
             </nav>

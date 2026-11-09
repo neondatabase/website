@@ -340,13 +340,19 @@ export const filterRegistryTemplates = (
 ) => {
   const q = query.trim().toLowerCase();
   const categoryIds = categories.filter((id) => id && id !== REGISTRY_ALL_FILTER);
+  const selectedSources = categoryIds.filter((id) => REGISTRY_SOURCE_CATEGORIES.includes(id));
+  const selectedTopics = categoryIds.filter((id) => !REGISTRY_SOURCE_CATEGORIES.includes(id));
 
-  return templates.filter(
-    (template) =>
-      matchesRegistryTemplateQuery(template, q) &&
-      (categoryIds.length === 0 ||
-        registryTemplateCategories(template).some((id) => categoryIds.includes(id)))
-  );
+  return templates.filter((template) => {
+    if (!matchesRegistryTemplateQuery(template, q)) return false;
+
+    const templateCategories = registryTemplateCategories(template);
+    return (
+      (selectedSources.length === 0 ||
+        selectedSources.some((id) => templateCategories.includes(id))) &&
+      (selectedTopics.length === 0 || selectedTopics.some((id) => templateCategories.includes(id)))
+    );
+  });
 };
 
 export const normalizeRegistryTemplates = (data) => {

@@ -13,6 +13,7 @@ import SearchClearButton from 'components/shared/search-clear-button';
 import LINKS from 'constants/links';
 import CloseIcon from 'icons/close-small.inline.svg';
 import SearchIcon from 'icons/search.inline.svg';
+import { cn } from 'utils/cn';
 import {
   REGISTRY_ALL_FILTER,
   REGISTRY_SOURCE_CATEGORIES,
@@ -107,6 +108,60 @@ FilterGroup.propTypes = {
   collapsedCount: PropTypes.number,
 };
 
+const FilterPanel = ({ selectedCount, onClear, children, isMobile = false }) => {
+  const panelRef = useRef(null);
+
+  const clearSelection = () => {
+    onClear();
+    panelRef.current?.querySelector('input[type="checkbox"]')?.focus();
+  };
+
+  const selectionBar = selectedCount > 0 && (
+    <div
+      className={cn(
+        'flex flex-wrap items-center justify-between gap-x-2 border-gray-new-20 text-[0.6875rem] leading-snug font-medium tracking-tight uppercase',
+        isMobile ? 'shrink-0 border-t px-5 py-2' : 'border-b pb-2'
+      )}
+    >
+      <p>
+        {selectedCount} {selectedCount === 1 ? 'filter' : 'filters'} selected
+      </p>
+      <button
+        className="inline-flex min-h-9 shrink-0 cursor-pointer items-center gap-1 whitespace-nowrap text-gray-new-60 uppercase transition-colors hover:text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-45"
+        type="button"
+        onClick={clearSelection}
+      >
+        Clear all <CloseIcon className="size-3 shrink-0" aria-hidden />
+      </button>
+    </div>
+  );
+
+  return (
+    <div
+      ref={panelRef}
+      className={cn('flex min-w-0 flex-col', isMobile ? 'min-h-0 flex-1' : 'gap-5')}
+    >
+      {!isMobile && selectionBar}
+      <div
+        className={cn(
+          'flex flex-col gap-6',
+          isMobile && 'min-h-0 flex-1 overflow-y-auto overscroll-contain px-5 pb-8'
+        )}
+      >
+        {children}
+      </div>
+      {isMobile && selectionBar}
+    </div>
+  );
+};
+
+FilterPanel.propTypes = {
+  selectedCount: PropTypes.number.isRequired,
+  onClear: PropTypes.func.isRequired,
+  children: PropTypes.node.isRequired,
+  isMobile: PropTypes.bool,
+};
+
 const MobileFilters = ({ children }) => {
   const [isOpen, setIsOpen] = useState(false);
   const triggerRef = useRef(null);
@@ -143,9 +198,7 @@ const MobileFilters = ({ children }) => {
               <CloseIcon className="size-4" aria-hidden />
             </button>
           </header>
-          <div className="flex min-h-0 flex-1 flex-col gap-6 overflow-y-auto overscroll-contain px-5 pb-8">
-            {children}
-          </div>
+          {children}
         </DialogPanel>
       </Dialog>
     </>
@@ -269,6 +322,8 @@ export const CatalogView = ({
     searchInputRef.current?.focus();
   };
 
+  const clearCategories = () => setParams?.({ category: null });
+
   if (templates.length === 0) {
     return (
       <section className={LIBRARY_CLASS_NAME} aria-label="Function templates">
@@ -290,6 +345,7 @@ export const CatalogView = ({
   }
 
   const hasFilters = sourceIds.length > 0 || topicIds.length > 0;
+  const selectedCount = [...sourceIds, ...topicIds].filter((id) => category.includes(id)).length;
   const filters = (
     <>
       <FilterGroup
@@ -321,7 +377,12 @@ export const CatalogView = ({
               partners, from AI agents and MCP servers to bots, auth, and REST APIs.
             </h2>
           </header>
-          <aside className="col-start-1 row-start-2 flex min-w-0 flex-col gap-7 lg:mb-10 lg:gap-6 md:mb-6">
+          <aside
+            className={cn(
+              'col-start-1 row-start-2 flex min-w-0 flex-col lg:mb-10 md:mb-6',
+              selectedCount > 0 ? 'gap-4' : 'gap-7 lg:gap-6'
+            )}
+          >
             <div className="flex gap-3">
               <div
                 className="relative flex min-w-0 flex-1 items-center gap-2 border border-gray-new-20 bg-black-new px-3 py-1.5 pr-2.5 lg:max-w-[280px] md:max-w-none"
@@ -350,11 +411,19 @@ export const CatalogView = ({
                   />
                 )}
               </div>
-              {hasFilters && <MobileFilters>{filters}</MobileFilters>}
+              {hasFilters && (
+                <MobileFilters>
+                  <FilterPanel isMobile selectedCount={selectedCount} onClear={clearCategories}>
+                    {filters}
+                  </FilterPanel>
+                </MobileFilters>
+              )}
             </div>
             {hasFilters && (
-              <div className="sticky top-24 flex min-w-0 flex-col gap-6 lg:static md:hidden">
-                {filters}
+              <div className="sticky top-24 min-w-0 lg:static md:hidden">
+                <FilterPanel selectedCount={selectedCount} onClear={clearCategories}>
+                  {filters}
+                </FilterPanel>
               </div>
             )}
           </aside>

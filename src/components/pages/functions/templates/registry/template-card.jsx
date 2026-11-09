@@ -18,8 +18,6 @@ import getTemplatePrompt from './template-prompt';
 export const TEMPLATE_CARD_FOCUS_RING =
   'focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#38A57D]';
 
-const SOURCE_BADGE_CLASS_NAME = 'shrink-0 whitespace-nowrap border px-1.5 py-1 text-[11px]';
-
 export const templateCardType = PropTypes.shape({
   id: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
@@ -56,7 +54,7 @@ const CompactTemplateCard = ({ template, href, eager = false }) => (
     >
       <div className="absolute top-4 right-4 z-10 flex items-center gap-3 md:top-5 md:right-5">
         <InstallCount installs={template.installs} />
-        <FunctionRegistrySourceLabel className={SOURCE_BADGE_CLASS_NAME} template={template} />
+        <FunctionRegistrySourceLabel template={template} />
       </div>
       <div className="relative z-10 flex h-full flex-col">
         <FunctionRegistryTemplateLogo template={template} eager={eager} />
@@ -88,7 +86,7 @@ const FunctionRegistryTemplateCard = ({
           <FunctionRegistryTemplateLogo template={template} variant="tile" eager={eager} />
           <div className="flex flex-wrap items-center justify-end gap-x-3 gap-y-1">
             <InstallCount installs={template.installs} />
-            <FunctionRegistrySourceLabel className={SOURCE_BADGE_CLASS_NAME} template={template} />
+            <FunctionRegistrySourceLabel template={template} />
           </div>
         </div>
         <h3 className="m-0 text-2xl leading-[1.2] font-normal tracking-tighter [overflow-wrap:anywhere] text-white xl:text-[1.375rem] lg:text-xl md:text-[1.375rem] sm:text-xl">
