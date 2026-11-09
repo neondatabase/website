@@ -7,9 +7,7 @@ enableTableOfContents: true
 createdAt: '2026-11-09T00:00:00.000Z'
 ---
 
-A lot of Postgres hosts bill for every hour of the month, even the ones when nobody's using your database. Scale to zero and a free tier that doesn't expire are how you stop paying for hours nobody uses.
-
-"Free" can be as generous as 100 databases with no time limit ([yes, really](/pricing)), or as limited as a 30-day trial that needs a credit card.
+A lot of Postgres hosts say they're free, but "free" can mean a lot of things. It can be as generous as 100 databases with no time limit ([yes, really](/pricing)), or as limited as a 30-day trial that needs a credit card.
 
 This guide ranks these hosts by what they actually cost, from the free tier to the first bill.
 
