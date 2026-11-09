@@ -5,13 +5,14 @@ summary: >-
   Organization admins can connect a Neon organization to an identity provider
   over SAML or OIDC, so members sign in with company credentials. SCIM
   provisioning lets the identity provider keep users and groups in sync, map
-  groups to organization roles, and remove people when they leave. Covers setup
-  with Okta, enforcing SSO, IdP-managed membership, and API keys and the Neon CLI
-  under SSO. Requires the Scale plan or higher and a verified email domain.
+  groups to organization roles, and remove people when they leave. Covers SSO
+  setup with Okta and Microsoft Entra ID, SCIM with Okta, enforcing SSO,
+  IdP-managed membership, and API keys and the Neon CLI under SSO. Requires the
+  Scale plan or higher and a verified email domain.
 enableTableOfContents: true
 ---
 
-With Enterprise SSO, members of your Neon organization sign in with their company credentials through your identity provider (IdP), over SAML or OIDC. With SCIM provisioning and IdP-managed membership, your IdP decides who's in the organization and with which role, so when someone leaves your directory, they lose access to Neon too. This page walks through the setup with Okta and SAML.
+With Enterprise SSO, members of your Neon organization sign in with their company credentials through your identity provider (IdP), over SAML or OIDC. With SCIM provisioning and IdP-managed membership, your IdP decides who's in the organization and with which role, so when someone leaves your directory, they lose access to Neon too. This page walks through SSO setup over SAML with Okta and with Microsoft Entra ID. The SCIM provisioning steps are for Okta.
 
 ## Before you start
 
@@ -47,11 +48,7 @@ While membership is managed manually (the default), Neon stores what your IdP se
 
 After opening the email, they sign in again, including at your IdP. If they opened it in a different browser or on another device, or after some time, Neon shows "Your login attempt timed out. Login will start from the beginning." That's expected. The email is already confirmed, and signing in again finishes the setup.
 
-## Set up SSO with Okta (SAML)
-
-<Steps>
-
-## Save a draft connection in Neon
+## Start the connection in Neon
 
 In the Neon Console, open your organization's **Settings** and go to **Enterprise SSO**.
 
@@ -61,6 +58,14 @@ In the Neon Console, open your organization's **Settings** and go to **Enterpris
 4. Click **Save**.
 
 Neon saves a draft. Under **Configure your identity provider**, it shows the values your IdP needs, each with a copy button: the **ACS URL**, the **IdP-initiated ACS URL**, and the **SP Entity ID**.
+
+Keep this page open. Next, set up your IdP with [Okta](#set-up-sso-with-okta-saml) or [Microsoft Entra ID](#set-up-sso-with-microsoft-entra-id-saml).
+
+## Set up SSO with Okta (SAML)
+
+Continue in the Okta Admin Console.
+
+<Steps>
 
 ## Create the SAML app in Okta
 
@@ -111,6 +116,52 @@ Neon reads the entity ID, sign-in URL, and signing certificates from the metadat
 Under **Member sign-in link**, click **Copy sign-in URL**. Open it in a private browser window, sign in through Okta, and check that you land in your organization. If this is your first SSO sign-in, Neon first emails you a link to confirm your account. See [First sign-in](#how-it-works). Then try the app's tile on the Okta dashboard.
 
 Share this link with your members. Your sign-in here also counts toward [enforcing SSO](#enforce-sso).
+
+</Steps>
+
+## Set up SSO with Microsoft Entra ID (SAML)
+
+After you [start the connection in Neon](#start-the-connection-in-neon), continue in the Microsoft Entra admin center.
+
+<Steps>
+
+## Create the enterprise application
+
+Go to **Enterprise applications** > **New application** > **Create your own application**, name the app, and choose **Integrate any other application you don't find in the gallery**. Open the app and go to **Single sign-on** > **SAML**.
+
+## Enter Neon's values
+
+Under **Basic SAML Configuration**, click **Edit** and enter:
+
+| Entra field                                    | Value                                                                                     |
+| ---------------------------------------------- | ----------------------------------------------------------------------------------------- |
+| **Identifier (Entity ID)**                     | Neon's **SP Entity ID**                                                                   |
+| **Reply URL (Assertion Consumer Service URL)** | Add Neon's **IdP-initiated ACS URL** and mark it **Default**, then add Neon's **ACS URL** |
+| **Sign on URL**                                | Leave empty                                                                               |
+
+<Admonition type="important">
+Add both reply URLs. The default one, the **IdP-initiated ACS URL**, handles sign-ins that start in Entra, such as the app's tile in My Apps. Without the **ACS URL**, sign-ins that start from Neon fail.
+</Admonition>
+
+## Check the email claim
+
+Under **Attributes & Claims**, set the source of the **emailaddress** claim to `user.userprincipalname`. Entra's default source, `user.mail`, is often empty for cloud-only users, and Neon can't sign anyone in without an email.
+
+The claim's value must be on one of your [verified domains](#before-you-start). Users whose user principal name ends in `onmicrosoft.com` can't sign in.
+
+## Assign users
+
+Under **Users and groups**, click **Add user/group** and assign the people or groups who should use Neon. Entra blocks users who aren't assigned.
+
+## Connect Neon to the Entra metadata
+
+1. Under **SAML Certificates**, copy the **App Federation Metadata Url**.
+2. In Neon, back in **Enterprise SSO**, set **Configuration source** to **Metadata URL** and paste the URL.
+3. Select **Enable SSO login for this organization** and click **Save**.
+
+## Test the sign-in
+
+Under **Member sign-in link**, click **Copy sign-in URL**, open it in a private browser window, and sign in through Entra. Then try the app's tile in My Apps, or the **Test** button on the app's **Single sign-on** page.
 
 </Steps>
 
@@ -178,7 +229,7 @@ Anyone who can't sign in through your IdP loses access to the organization, incl
 
 To turn it on:
 
-1. Sign in through SSO yourself, with the member sign-in link or the app's tile in your IdP. You must sign in after the connection's most recent save. Any save counts, even a change to **Maximum session age**.
+1. Sign in through SSO yourself with the member sign-in link. The app's tile in your IdP also counts, but only the link checks the **ACS URL**, which members need once SSO is enforced. You must sign in after the connection's most recent save. Any save counts, even a change to **Maximum session age**.
 2. Go to **Settings** > **Enterprise SSO**. Under **Enforcement**, click **Enforce SSO**.
 
 Enforcement starts right away, without a confirmation step. The badge changes to **Enforced**. To turn it off, click **Stop enforcing**.
@@ -235,13 +286,17 @@ When SSO is enforced, access through the Neon API and CLI follows the **Programm
 | Users stay in a staged or out-of-sync state in Okta                                                    | Click **Provision User** on the app's **Assignments** tab.                                                                                                                                |
 | "Your login attempt timed out. Login will start from the beginning."                                   | Sign in again. If you were confirming your email, it's already confirmed.                                                                                                                 |
 | "Complete a test sign-in through this SSO connection before enabling enforcement"                      | Sign in through SSO yourself, with the member sign-in link or the app's tile, then click **Enforce SSO** again. The admin who enforces SSO must sign in after the connection's last save. |
+| "Invalid signature in response from identity provider"                                                 | Neon has an old signing certificate. Re-enter your IdP's metadata URL in **Enterprise SSO** and save.                                                                                     |
+| "Unexpected error when authenticating with identity provider"                                          | A sign-in that started in your IdP went to the **ACS URL**. Use the **IdP-initiated ACS URL** as the Okta **Single sign-on URL**, or as the default reply URL in Entra.                   |
+| The sign-in works, but the person has no access or an empty account                                    | The email claim is missing or empty. In Entra, set the **emailaddress** claim to `user.userprincipalname`. In Okta, name the attribute `email`.                                           |
+| "Page has expired"                                                                                     | Start again from the member sign-in link. Don't refresh your IdP's sign-in page.                                                                                                          |
 | "Higher-tier plans only"                                                                               | Upgrade to the Scale plan or higher.                                                                                                                                                      |
 | **Single sign-on required**                                                                            | Click **Sign in with SSO**. Your session predates enforcement or is older than the maximum session age.                                                                                   |
 | "This organization requires a one-time SSO authorization…"                                             | Authorize the API key for the organization. See [API keys and the Neon CLI](#api-keys-and-the-neon-cli).                                                                                  |
 | "This organization does not allow personal or OAuth tokens…"                                           | The organization allows only organization API keys.                                                                                                                                       |
 | An invite fails with "manual invites are disabled" or "membership is managed by its identity provider" | Add the person in your IdP instead.                                                                                                                                                       |
 
-For any Okta error, check Okta's **Reports** > **System Log** for the reason.
+For any Okta error, check Okta's **Reports** > **System Log** for the reason. In Entra, check the app's **Sign-in logs**.
 
 ## Related
 
