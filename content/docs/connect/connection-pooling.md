@@ -196,7 +196,7 @@ Connection 10,001 → Error: "no more connections allowed (max_client_conn)"
 Using a non-pooled connection string with a 0.25 CU compute (112 max_connections):
 
 ```
-Connection 113 → Error: "FATAL: remaining connection slots are reserved"
+Connection 106 → Error: "FATAL: remaining connection slots are reserved"
 ```
 
 **Solution:**
