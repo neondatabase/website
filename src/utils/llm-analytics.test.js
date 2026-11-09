@@ -1,7 +1,7 @@
 // @vitest-environment node
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 
-import { createLLMAnalytics, isPrefetchRequest, trackLLMPageview } from './llm-analytics';
+import { createLLMAnalytics, isNonReadRequest, trackLLMPageview } from './llm-analytics';
 
 const request = () =>
   new Request('https://neon.com/docs/introduction?token=query-secret', {
@@ -53,23 +53,24 @@ describe('LLM analytics delivery', () => {
 
   it.each([
     ['next-router-prefetch', '1'],
+    ['rsc', '1'],
     ['sec-purpose', 'prefetch'],
     ['sec-purpose', 'prefetch;prerender'],
     ['purpose', 'prefetch'],
-  ])('does not send a pageview for a prefetch (%s: %s)', async (name, value) => {
+  ])('does not send a pageview for a router or prefetch request (%s: %s)', async (name, value) => {
     const req = new Request('https://neon.com/docs/introduction/support.md', {
       headers: { [name]: value },
     });
-    expect(isPrefetchRequest(req)).toBe(true);
+    expect(isNonReadRequest(req)).toBe(true);
     const analytics = createLLMAnalytics(req);
-    await expect(analytics.track()).resolves.toEqual({ outcome: 'skipped_prefetch' });
+    await expect(analytics.track()).resolves.toEqual({ outcome: 'skipped_non_read' });
     expect(analytics.beacon).toBeNull();
     expect(fetch).not.toHaveBeenCalled();
   });
 
   it('still sends a pageview for a normal markdown read', async () => {
     const req = new Request('https://neon.com/docs/introduction/support.md');
-    expect(isPrefetchRequest(req)).toBe(false);
+    expect(isNonReadRequest(req)).toBe(false);
     await trackLLMPageview(req);
     expect(fetch).toHaveBeenCalledTimes(1);
   });
