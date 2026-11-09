@@ -4,6 +4,9 @@ import { fileURLToPath } from 'node:url';
 
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
 
+import { AGENT_SKILLS_NOTE } from '../src/constants/agent-directives.js';
+import { stripNavigationContext } from '../src/scripts/process-md-for-llms.js';
+
 import {
   toSlug,
   toTagSlug,
@@ -19,6 +22,7 @@ import {
   toAgentMarkdown,
   toFullMarkdownEntry,
   generateLlmsFull,
+  generateApiMd,
   toNavYaml,
   stripMarkdownLinks,
   descriptionToHtml,
@@ -867,6 +871,16 @@ describe('toAgentMarkdown', () => {
     expect(md).toMatch(/^> API Reference \/ Project \/ List projects/);
   });
 
+  it('adds the index and agent skills lines under the breadcrumb only with pageHeader', () => {
+    const page = toAgentMarkdown(op, { pageHeader: true });
+    expect(page).toMatch(
+      /^> API Reference \/ Project \/ List projects\n> Full Neon documentation index: https:\/\/neon\.com\/docs\/llms\.txt\n>\n> Agent skills: /
+    );
+    expect(page.split(AGENT_SKILLS_NOTE)).toHaveLength(2);
+    // Per-tag pages reuse toAgentMarkdown for each operation, so the default stays bare.
+    expect(toAgentMarkdown(op)).not.toContain('Agent skills');
+  });
+
   it('includes METHOD path heading', () => {
     expect(toAgentMarkdown(op)).toContain('## GET /projects');
   });
@@ -1018,6 +1032,19 @@ describe('generateLlmsFull', () => {
     expect(md).toContain('# Projects');
     expect(md).toContain('## List projects · GET /projects');
     expect(md).toContain('const { data } = await raw.listProjects({');
+  });
+});
+
+describe('generateApiMd', () => {
+  it('uses a page header the docs llms-full.txt can strip', () => {
+    // api.md is included in the docs llms-full.txt, which strips each page's header with
+    // stripNavigationContext(). A header it doesn't recognize would leave the agent lines in.
+    const md = generateApiMd({});
+    expect(md).toMatch(/^> This page location: API Reference\n> Full Neon documentation index: /);
+    expect(md).toContain(AGENT_SKILLS_NOTE);
+    const stripped = stripNavigationContext(md);
+    expect(stripped.startsWith('# Neon API Reference')).toBe(true);
+    expect(stripped).not.toContain('Agent skills');
   });
 });
 

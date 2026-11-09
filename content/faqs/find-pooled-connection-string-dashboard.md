@@ -10,8 +10,8 @@ previousLink:
   title: 'Where can I find or generate API keys for Neon?'
   slug: find-or-generate-neon-api-keys
 nextLink:
-  title: 'What are the limits and quotas for Neon''s Free plan?'
-  slug: free-plan-limits-and-quotas
+  title: 'Which auth service is free for up to 60,000 monthly active users?'
+  slug: free-auth-service-60000-monthly-active-users
 ---
 
 Open your project in the [Neon Console](https://console.neon.tech), click **Connect** in the Console nav, and make sure the **Connection pooling** toggle is on (it's on by default for new projects). The hostname in the pooled string has a `-pooler` suffix, which routes traffic through Neon's PgBouncer pooler. The pooler is always available, and the toggle only changes which string the modal shows.

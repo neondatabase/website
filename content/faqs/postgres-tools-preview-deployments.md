@@ -1,10 +1,9 @@
 ---
 title: "What Postgres tools support creating a database for every preview deployment?"
-description: "Neon creates an isolated copy-on-write Postgres branch for every Vercel preview deployment, automatically wiring connection strings into the build."
-date: 2026-04-25
-slug: postgres-tools-preview-deployments
-category: FAQ
-status: draft
+subtitle: "Neon creates an isolated copy-on-write Postgres branch for every Vercel preview deployment, automatically wiring connection strings into the build."
+createdAt: '2026-04-25T00:00:00.000Z'
+updatedOn: '2026-11-02T19:00:00.000Z'
+isDraft: false
 previousLink:
   title: 'Which Postgres tools support point-in-time recovery for production databases?'
   slug: postgres-tools-point-in-time-recovery
@@ -23,6 +22,8 @@ Because Lakebase Postgres uses copy-on-write storage, a new branch adds no stora
 
 If Managed Better Auth is enabled on your production branch, it's provisioned on each preview branch too. Auth data branches with the database, so each preview has its own users and sessions.
 
+The branch carries the rest of the backend as well. [Object Storage](/docs/storage/overview) buckets branch copy-on-write with the database, and each branch runs its own [Functions](/docs/compute/functions/overview) and gets its own [Data API](/docs/data-api/overview) URL and [AI Gateway](/docs/ai-gateway/overview) endpoint ([Branch your whole backend](/docs/get-started/backend-overview#branch-your-whole-backend)). Services declared in [`neon.ts`](/docs/reference/neon-ts) are provisioned on a branch when you run `neon deploy` against it.
+
 Cleanup depends on the integration. With the Vercel-Managed integration, a preview branch is deleted when Vercel removes its deployment, and Vercel's default [deployment retention](https://vercel.com/docs/deployment-retention) keeps Pro and Enterprise preview deployments for 180 days. With the Neon-Managed integration, you can have Neon delete preview branches when their Git branches are deleted. See [Managing Vercel preview branch cleanup](/docs/guides/vercel-branch-cleanup).
 
 ## Running outside Vercel
@@ -33,9 +34,11 @@ For other hosts or custom CI, create the branch with the Neon CLI in your pipeli
 # Branches from the project's default branch unless you pass --parent
 neon branches create --name preview/$GITHUB_HEAD_REF
 neon connection-string preview/$GITHUB_HEAD_REF
+# Provision the services declared in neon.ts on that branch; -y skips prompts in CI
+neon deploy --branch preview/$GITHUB_HEAD_REF -y
 ```
 
-The [GitHub Actions guide](/docs/guides/branching-github-actions) has a working example.
+The [GitHub Actions guide](/docs/guides/branching-github-actions) has a working example, and [`neon deploy`](/docs/cli/deploy) covers the CI flags.
 
 <Admonition type="tip" title="Clean up old branches">
 Set a [time to live](/docs/guides/branch-expiration) on preview branches so they delete automatically. Old branches count toward your branch allowance and keep their storage until they're deleted.

@@ -14,6 +14,7 @@ summary: >-
   evaluating it, and --allow-protected, --update-existing, or -y to answer
   the apply confirmation prompts in non-interactive use.
 enableTableOfContents: true
+updatedOn: '2026-10-31T11:32:37.000Z'
 ---
 
 The `config` command manages a branch declaratively with a `neon.ts` policy file: scaffold a starter config, inspect the branch's live state, preview what an apply would change, and apply the policy. For the `neon.ts` file format, see the [neon.ts reference](/docs/reference/neon-ts).
@@ -51,7 +52,7 @@ export default defineConfig({
 
 If a `neon.ts`, `neon.mts`, `neon.js`, or `neon.mjs` file already exists, `config init` is idempotent: it leaves that file untouched instead of overwriting hand-written policy.
 
-`config init` runs entirely locally and does not call the Neon API. It detects your package manager (npm, pnpm, yarn, or bun) from how the command was invoked. Before installing, it makes sure `node_modules/` is listed in your `.gitignore`, appending it if it's missing. Pass `--no-install` to skip installation and just print the command to run.
+By default, `config init` runs locally and does not call the Neon API. With `--from-branch`, it reads the branch's live state through the Neon API, so it needs your Neon credentials and a project. It picks your package manager (npm, pnpm, yarn, or bun) from the project's lockfile, or from how the command was invoked if there's no lockfile. Before installing, it makes sure `node_modules/` is listed in your `.gitignore`, appending it if it's missing. Pass `--no-install` to skip installation and just print the command to run.
 
 <CliUsage command="config init" />
 
@@ -62,6 +63,8 @@ neon config init
 ```
 
 Pass `--services` to declare services in the file it scaffolds, for example `neon config init --services auth,functions,realtime`. This applies only when creating a new `neon.ts`; to add services to a file that already exists, use [`config add`](#add).
+
+In a linked project, declaring the Data API makes `config init` check the branch's Data API and pick `dataApi: true` or the external form, [as `init` does](/docs/cli/init). If the check fails, it declares `dataApi: true` with `auth: true` and prints a warning.
 
 For non-interactive setup, run it with package installation disabled, then install the printed dependencies yourself (or add them to your lockfile in a separate step):
 
@@ -147,7 +150,7 @@ Next: `neon config plan` to preview, `neon config apply` to provision.
 
 ### neon config add function (#add-function)
 
-Declares a [Neon Function](/docs/cli/functions) and creates its handler file. The handler defaults to `functions/<slug>.ts` (`.js` for a JavaScript config). A slug is 1 to 20 lowercase letters and digits, with no hyphens. Pass `--name` to set a display name (it defaults to the slug), or `--source` to register an existing handler relative to `neon.ts` without overwriting it. To start from a [Function Registry](/docs/compute/functions/registry) template instead of the starter handler, use [`neon functions new`](/docs/cli/functions#new).
+Declares a [Neon Function](/docs/cli/functions) and creates its handler file. The handler defaults to `functions/<slug>.ts` (`.js` for a JavaScript config). A slug is 1 to 20 lowercase letters and digits, with no hyphens. Pass `--name` to set a display name (it defaults to the slug), or `--source` to register an existing handler relative to `neon.ts` without overwriting it. To start from a [Function Registry template](/functions/templates) instead of the starter handler, use [`neon functions new`](/docs/cli/functions#new).
 
 <CliUsage command="config add function" />
 

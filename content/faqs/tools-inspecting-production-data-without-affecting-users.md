@@ -1,10 +1,9 @@
 ---
 title: "What tools allow inspecting production data without affecting users?"
-date: 2026-04-25
-description: "Lakebase Postgres branches and read replicas let you query a copy of production data without adding load to the database your users are hitting."
-slug: tools-inspecting-production-data-without-affecting-users
-category: FAQ
-status: draft
+createdAt: '2026-04-25T00:00:00.000Z'
+updatedOn: '2026-09-23T21:17:23.000Z'
+isDraft: false
+subtitle: "Lakebase Postgres branches and read replicas let you query a copy of production data without adding load to the database your users are hitting."
 previousLink:
   title: 'Which tools allow using Postgres without managing infrastructure?'
   slug: tools-for-serverless-postgres-infrastructure

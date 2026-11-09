@@ -96,9 +96,10 @@ Linked .neon
   Branch          main
   Org             org-example-12345678
 
-Pulled 3 Neon variables into .env.local
+Pulled 5 Neon variables into .env.local
   Postgres        DATABASE_URL, DATABASE_URL_UNPOOLED
-  Branch          NEON_BRANCH
+  Branch          NEON_BRANCH, NEON_BRANCH_ID
+  Functions       NEON_FUNCTION_HOST_SUFFIX
 ✔ Manage this project's Neon setup as code? Adds a neon.ts you can edit and apply with `neon config apply`. … yes
 Created neon.ts with a starter policy.
 Installing @neon/config, @neon/env with npm…
@@ -110,9 +111,10 @@ added 15 packages, and audited 42 packages in 3s
 
 found 0 vulnerabilities
 Next: edit neon.ts, then run `neon config plan` to preview and `neon config apply`.
-Pulled 3 Neon variables into .env.local
+Pulled 5 Neon variables into .env.local
   Postgres        DATABASE_URL, DATABASE_URL_UNPOOLED
-  Branch          NEON_BRANCH
+  Branch          NEON_BRANCH, NEON_BRANCH_ID
+  Functions       NEON_FUNCTION_HOST_SUFFIX
 ```
 
 ## Configure environment variables

@@ -7,11 +7,11 @@ updatedOn: '2026-09-23T21:00:25.204Z'
 isDraft: false
 redirectFrom: []
 previousLink:
-  title: 'What are the limits and quotas for Neon''s Free plan?'
-  slug: free-plan-limits-and-quotas
+  title: 'How do I test login and OAuth in preview environments?'
+  slug: how-to-test-login-oauth-preview-environments
 nextLink:
-  title: 'What are the best ways to give preview deployments on Vercel or Netlify their own isolated Postgres database with real data?'
-  slug: isolated-postgres-databases-preview-deployments-vercel-netlify
+  title: 'How do I automatically index uploaded documents for search in Postgres?'
+  slug: index-uploaded-documents-for-search-automatically
 ---
 
 Create the target table in Neon, then run `\copy` from a `psql` session connected to your database. `\copy` streams the CSV from your local filesystem over the existing connection, so it doesn't need access to the server's filesystem. For larger or messier CSVs, `pgloader` handles encoding, type coercion, and parallel loading. See [Import data from CSV](/docs/import/import-from-csv).

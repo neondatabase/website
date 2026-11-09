@@ -15,7 +15,7 @@ const ENV_EXAMPLE = `# Injected by \`neon env pull\` when AI Gateway is enabled 
 #   - \`/v1\`        - unified Chat Completions and \`/v1/embeddings\`
 #   - \`/openai/v1\` - OpenAI Responses API
 #   - \`/typesafe\`  - TypeSafe SDK base URL for System One decisions (\`/typesafe/v1/systemone\`)
-# @neondatabase/ai-sdk-provider and Mastra route requests automatically.
+# @neon/ai-sdk-provider and Mastra route requests automatically.
 
 NEON_AI_GATEWAY_TOKEN=nt_live_...
 NEON_AI_GATEWAY_BASE_URL=https://<branch-id>-api.ai.<cell>.<region>.<cloud>.neon.tech

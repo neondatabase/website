@@ -1,13 +1,11 @@
 ---
 title: How to host a Telegram bot on Neon Functions
-tag: new
-tagTheme: green
 subtitle: Receive Telegram messages, run bot commands and store data in Postgres
 summary: >-
   Host a Telegram bot on Neon Functions. Receive webhook updates, run bot commands, verify the
   webhook secret token, and store data in Postgres on the same branch.
 enableTableOfContents: true
-updatedOn: '2026-09-17T21:40:25.774Z'
+updatedOn: '2026-10-31T13:11:38.215Z'
 isDraft: false
 ---
 
@@ -89,7 +87,7 @@ cp .env.example .env.local
 neon link
 ```
 
-Linking merges `DATABASE_URL`, `DATABASE_URL_UNPOOLED`, `NEON_BRANCH`, and `NEON_FUNCTION_TELEGRAM_BASE_URL` (your function's public URL, ready before you deploy) into `.env.local`, leaving the Telegram keys untouched.
+Linking merges `DATABASE_URL`, `DATABASE_URL_UNPOOLED`, `NEON_BRANCH`, `NEON_BRANCH_ID`, and `NEON_FUNCTION_HOST_SUFFIX` into `.env.local`, leaving the Telegram keys untouched.
 
 Generate a webhook secret:
 
@@ -111,7 +109,8 @@ TELEGRAM_WEBHOOK_URL=
 NEON_BRANCH=
 DATABASE_URL=
 DATABASE_URL_UNPOOLED=
-NEON_FUNCTION_TELEGRAM_BASE_URL=
+NEON_BRANCH_ID=
+NEON_FUNCTION_HOST_SUFFIX=
 ```
 
 The webhook secret can contain 1 to 256 characters from `A-Z`, `a-z`, `0-9`, `_` and `-`. The `openssl` command above produces a valid value.
@@ -140,10 +139,10 @@ npm run db:push
 
 ## Set the webhook
 
-Telegram sends updates to `/api/webhook`. Your webhook URL is `NEON_FUNCTION_TELEGRAM_BASE_URL` (from `.env.local`) with `/api/webhook` appended. Set `TELEGRAM_WEBHOOK_URL` to it:
+Telegram sends updates to `/api/webhook`. Your webhook URL is the `telegram` function's URL with the path `/api/webhook`. `npm run deploy` prints it in the **Function URLs** list, and `neon functions get telegram` shows it in its `URL` field. Set `TELEGRAM_WEBHOOK_URL` to it:
 
 ```env filename=".env.local"
-TELEGRAM_WEBHOOK_URL=https://br-cool-darkness-123456-telegram.compute.us-east-2.aws.neon.tech/api/webhook
+TELEGRAM_WEBHOOK_URL=https://br-cool-darkness-123456-telegram.compute.c-2.us-east-2.aws.neon.tech/api/webhook
 ```
 
 Register that URL and your webhook secret with Telegram:
@@ -165,7 +164,7 @@ Open the webhook URL in a browser to check that the function is available. A GET
   "ok": true,
   "service": "telegram-webhook",
   "webhookPath": "/api/webhook",
-  "webhookUrl": "https://br-cool-darkness-123456-telegram.compute.us-east-2.aws.neon.tech/api/webhook"
+  "webhookUrl": "https://br-cool-darkness-123456-telegram.compute.c-2.us-east-2.aws.neon.tech/api/webhook"
 }
 ```
 
@@ -254,6 +253,7 @@ The template stores Telegram user IDs, display names and usage counts in the `pr
 
 ## Related templates
 
+- [Telegram AI chat bot](/functions/templates/telegram-bot): a [function template](/docs/compute/functions/templates) that adds AI Gateway chat to a Telegram bot.
 - [Discord HTTP bot](https://github.com/neondatabase/examples/tree/main/bots/discord-bot-http)
 - [WhatsApp HTTP bot](https://github.com/neondatabase/examples/tree/main/bots/whatsapp-bot-http)
 

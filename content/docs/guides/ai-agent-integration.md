@@ -11,7 +11,7 @@ summary: >-
   Project transfers require a personal API key.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2026-10-01T15:44:50.010Z'
+updatedOn: '2026-11-04T20:10:08.844Z'
 ---
 
 This guide covers the technical implementation of the Neon agent plan for your platform. You'll learn how to provision databases, implement versioning, manage user upgrades, and monitor usage at scale.
@@ -187,7 +187,7 @@ For detailed information about configuring quotas and what happens when limits a
 Project provisioning is near-instant (typically under 1 second), but consider these timing factors:
 
 1. **Project creation**: Returns immediately with project details
-2. **Compute activation**: First connection may take 1-2 seconds as compute starts
+2. **Compute activation**: First connection after the compute has been idle can take a few hundred milliseconds longer while it wakes
 3. **Subsequent connections**: Near-instant once compute is active
 
 For the best user experience:
@@ -552,7 +552,7 @@ All platform integrations use the Neon API. You can call it directly or use lang
 
 - **Users hit quota limits unexpectedly**: Autoscaling can consume compute time faster than anticipated. Set `autoscaling_limit_max_cu` appropriately for each tier, monitor consumption metrics and alert users at 80% threshold, and consider lowering `suspend_timeout_seconds` for free tier to reduce active time.
 
-- **First database connection is slow**: Compute needs to start from idle state (cold start). This is expected behavior for serverless compute (1-2 seconds on first connection). Set user expectations accordingly. For critical production endpoints, use `suspend_timeout_seconds: -1` to keep compute always on. Subsequent connections are near-instant.
+- **First database connection is slow**: Compute needs to start from idle state (cold start). This is expected behavior for serverless compute: the first connection after the compute has been idle can take a few hundred milliseconds longer while it wakes. Set user expectations accordingly. For critical production endpoints, use `suspend_timeout_seconds: -1` to keep compute always on. Subsequent connections are near-instant.
 
 - **Storage grows larger than expected**: Multiple branches or snapshots accumulate over time. Implement branch cleanup for old development branches, delete snapshots that are no longer needed, and monitor storage metrics to alert users approaching limits.
 

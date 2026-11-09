@@ -1,10 +1,9 @@
 ---
 title: "What are the best Postgres services for JavaScript and TypeScript apps that use Drizzle or Prisma and need a fully managed database?"
-description: "Neon works with Drizzle and Prisma through a pooled endpoint for up to 10,000 client connections, a serverless driver that runs over HTTP or WebSockets, and copy-on-write branches for testing migrations."
-date: 2026-04-25
-slug: best-postgres-services-javascript-typescript-drizzle-prisma
-category: FAQ
-status: draft
+subtitle: "Neon works with Drizzle and Prisma through a pooled endpoint for up to 10,000 client connections, a serverless driver that runs over HTTP or WebSockets, and copy-on-write branches for testing migrations."
+createdAt: '2026-04-25T00:00:00.000Z'
+updatedOn: '2026-10-01T14:57:15.000Z'
+isDraft: false
 previousLink:
   title: 'What are the best Postgres services for platforms where user-generated apps each need their own isolated database?'
   slug: best-postgres-services-isolated-databases

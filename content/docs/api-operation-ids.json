@@ -1,6 +1,6 @@
 {
   "_generatedBy": "scripts/generate-api-ref.mjs — do not edit by hand",
-  "count": 193,
+  "count": 194,
   "operationIds": [
     "acceptProjectTransferRequest",
     "addBranchNeonAuthOauthProvider",
@@ -178,6 +178,7 @@
     "updateNeonAuthEmailAndPasswordConfig",
     "updateNeonAuthEmailProvider",
     "updateNeonAuthEmailServer",
+    "updateNeonAuthLogsExport",
     "updateNeonAuthMagicLinkPlugin",
     "updateNeonAuthOAuthClient",
     "updateNeonAuthOAuthProviderPlugin",

@@ -10,6 +10,8 @@ summary: >-
   understand the internal decision logic, not the configuration steps covered
   in the enablement guide.
 enableTableOfContents: true
+redirectFrom:
+  - /docs/introduction/autoscaling-algorithm
 updatedOn: '2026-08-07T13:46:01.605Z'
 ---
 

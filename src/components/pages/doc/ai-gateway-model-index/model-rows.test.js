@@ -38,9 +38,23 @@ describe('AI Gateway model rows', () => {
   it('labels Grok as xAI and includes the Responses endpoint', () => {
     const row = rows.find(({ id }) => id === 'grok-4-6');
 
-    expect(row.provider).toBe('xai');
-    expect(row.providerName).toBe('xAI');
+    expect(row.lab).toBe('xai');
+    expect(row.labName).toBe('xAI');
     expect(row.endpoints).toEqual(['chat/completions', 'openai/responses']);
+  });
+
+  it('separates the lab that made a model from the provider that serves it', () => {
+    const row = rows.find(({ id }) => id === 'gpt-oss-120b');
+
+    expect(row.labName).toBe('OpenAI');
+    expect(row.providerName).toBe('Databricks');
+  });
+
+  it.each([
+    ['deepseek', 'DeepSeek'],
+    ['baai', 'BAAI'],
+  ])('labels the %s lab as %s', (lab, label) => {
+    expect(rows.find((row) => row.lab === lab).labName).toBe(label);
   });
 
   // Embeddings is a different shape, not a chat model missing capabilities: its chat-shaped
@@ -111,5 +125,12 @@ describe('AI Gateway model rows', () => {
     expect(row.inputs).toEqual([]);
     expect(row.costInputLabel).toBe('$0.10');
     expect(row.costOutputLabel).toBe('—');
+  });
+
+  it('keeps sub-cent digits and reports a decision model context window', () => {
+    const row = rows.find(({ id }) => id === 'typesafeai-jev-1-14-0');
+
+    expect(row.costInputLabel).toBe('$0.042');
+    expect(row.contextLabel).toBe('66K');
   });
 });

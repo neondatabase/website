@@ -18,7 +18,12 @@ description="Pre-built prompt for connecting Quarkus applications to Lakebase Po
 
 [Quarkus](https://quarkus.io/) is a Java framework optimized for cloud environments. This guide shows how to connect to Neon from a Quarkus project using the PostgreSQL JDBC driver.
 
-To connect to a Lakebase Postgres database from a Quarkus application using the Postgres JDBC Driver:
+To connect to a Lakebase Postgres database from a Quarkus application using the Postgres JDBC driver:
+
+## Prerequisites
+
+- [JDK 21](https://www.oracle.com/java/technologies/downloads/) or later. The project that Quarkus creates compiles for Java 21.
+- The [Quarkus CLI](https://quarkus.io/guides/cli-tooling).
 
 <Steps>
 
@@ -47,7 +52,7 @@ You now have a Quarkus project in a folder named `neon-with-quarkus-jdbc` with t
 
 Create a `.env` file in the root of your Quarkus project directory. Configure a JDBC data source using the components of your database connection string and specifying the database kind as shown:
 
-```shell shouldWrap
+```text filename=".env" shouldWrap
 QUARKUS_DATASOURCE_DB_KIND=postgresql
 QUARKUS_DATASOURCE_USERNAME=[user]
 QUARKUS_DATASOURCE_PASSWORD=[password]
@@ -114,7 +119,7 @@ quarkus dev
 Visit [localhost:8080/postgres/version](http://localhost:8080/postgres/version) in your web browser. Your Neon database's Postgres version will be returned. For example:
 
 ```
-PostgreSQL 17.5 (6bc9ef8) on x86_64-pc-linux-gnu, compiled by gcc (Debian 12.2.0-14+deb12u1) 12.2.0, 64-bit
+PostgreSQL 18.6 (ac70818) on aarch64-unknown-linux-gnu, compiled by gcc (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0, 64-bit
 ```
 
 </Steps>

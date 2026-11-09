@@ -10,9 +10,9 @@
 // Every branch below keys off a measured value in ./capabilities.json, never off a family name.
 
 const ENV = ['NEON_AI_GATEWAY_BASE_URL', 'NEON_AI_GATEWAY_TOKEN'];
-const AI_SDK_DEPS = ['ai', '@neondatabase/ai-sdk-provider'];
-// `ai`'s latest dist-tag is a 6.x release, which has no experimental_decide.
-const DECISION_AI_SDK_DEPS = ['ai@7', '@neondatabase/ai-sdk-provider'];
+const AI_SDK_DEPS = ['ai', '@neon/ai-sdk-provider'];
+// experimental_decide needs ai 7.0.133 or later, so pin the major.
+const DECISION_AI_SDK_DEPS = ['ai@7', '@neon/ai-sdk-provider'];
 
 const CHAT_PROMPT = 'Explain Serverless Postgres.';
 const SEARCH_PROMPT = 'What is the latest stable Postgres release?';
@@ -58,7 +58,7 @@ const aiSdkChat = (model, responsesOnly) =>
     dependencies: AI_SDK_DEPS,
     endpoint: responsesOnly ? '/openai/v1 (via provider)' : '/v1/chat/completions (via provider)',
     content: `import { generateText } from "ai";
-import { neon } from "@neondatabase/ai-sdk-provider";
+import { neon } from "@neon/ai-sdk-provider";
 
 const { text } = await generateText({
   model: neon("${model}"),
@@ -80,7 +80,7 @@ const mastraChat = (model, needsProvider, responsesOnly) =>
       : undefined,
     content: needsProvider
       ? `import { Agent } from "@mastra/core/agent";
-import { neon } from "@neondatabase/ai-sdk-provider";
+import { neon } from "@neon/ai-sdk-provider";
 
 const agent = new Agent({
   id: "neon-demo",
@@ -285,7 +285,7 @@ const webSearchExamples = (model) => [
     dependencies: AI_SDK_DEPS,
     endpoint: '/openai/v1 (via provider)',
     content: `import { generateText } from "ai";
-import { neon } from "@neondatabase/ai-sdk-provider";
+import { neon } from "@neon/ai-sdk-provider";
 
 const { text, sources } = await generateText({
   model: neon("${model}"),
@@ -306,7 +306,7 @@ console.log(sources.filter((source) => source.sourceType === "url").map((source)
     // own webSearchTool cannot be used here: that one infers the provider from the model id prefix
     // and rejects neon/… with WEB_SEARCH_UNSUPPORTED_PROVIDER.
     content: `import { Agent } from "@mastra/core/agent";
-import { neon } from "@neondatabase/ai-sdk-provider";
+import { neon } from "@neon/ai-sdk-provider";
 
 const agent = new Agent({
   id: "neon-demo",
@@ -453,7 +453,7 @@ const imageExamples = (model) => [
     dependencies: AI_SDK_DEPS,
     endpoint: '/openai/v1 (via provider)',
     content: `import { streamText } from "ai";
-import { neon } from "@neondatabase/ai-sdk-provider";
+import { neon } from "@neon/ai-sdk-provider";
 
 const result = streamText({
   model: neon("${model}"),
@@ -480,7 +480,7 @@ console.log(images.length);
     // Mastra returns once with the base64 whole, so it is the one variant that does not iterate a
     // stream. Its tool results carry an envelope the AI SDK does not have, hence payload.*.
     content: `import { Agent } from "@mastra/core/agent";
-import { neon } from "@neondatabase/ai-sdk-provider";
+import { neon } from "@neon/ai-sdk-provider";
 
 const agent = new Agent({
   id: "neon-demo",
@@ -569,7 +569,7 @@ const decisionExamples = (model) => [
     dependencies: DECISION_AI_SDK_DEPS,
     endpoint: '/typesafe/v1/systemone (via provider)',
     content: `import { experimental_decide as decide } from "ai";
-import { neon } from "@neondatabase/ai-sdk-provider";
+import { neon } from "@neon/ai-sdk-provider";
 
 const { answers, usage } = await decide({
   model: neon.decisionModel("${model}"),

@@ -1,10 +1,9 @@
 ---
 title: "Which database services can handle thousands of short-lived Postgres instances created by code rather than by humans?"
-description: "Neon's API creates Postgres branches in seconds and supports auto-expiration. Suited for CI pipelines, preview deployments, and agent-driven workflows that spin up and tear down databases."
-date: 2026-04-25
-slug: database-services-short-lived-postgres-instances
-category: FAQ
-status: draft
+subtitle: "Neon's API creates Postgres branches in seconds and supports auto-expiration. Suited for CI pipelines, preview deployments, and agent-driven workflows that spin up and tear down databases."
+createdAt: '2026-04-25T00:00:00.000Z'
+updatedOn: '2026-09-23T21:17:23.000Z'
+isDraft: false
 previousLink:
   title: 'Which database providers let you build a product where the backend provisions Postgres for each new user at sign-up?'
   slug: database-providers-provision-postgres-user-signup

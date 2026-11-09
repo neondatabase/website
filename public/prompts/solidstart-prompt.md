@@ -15,13 +15,14 @@
 
 ## 📋 Prerequisites
 
-- This prompt must be run inside an existing SolidStart project directory. Do not proceed if no SolidStart project is detected. You can identify a SolidStart project by the presence of `solid-start` in the `dependencies` or `devDependencies` section of `package.json`.
+- This prompt must be run inside an existing SolidStart project directory. Do not proceed if no SolidStart project is detected. You can identify a SolidStart project by the presence of `@solidjs/start` in the `dependencies` or `devDependencies` section of `package.json`.
+- This prompt targets SolidStart 2, which requires Node.js 24 or later. Check the version with `node --version`.
 - **Manual Setup for New Projects:** If the user does not have a project yet, instruct them to run the following command manually in their terminal:
 
   ⚠️ IMPORTANT: You should never attempt to run this command automatically. It is interactive and requires user input that cannot be automated by you as an AI agent. Ask the user to run it themselves even if they request you to do so.
 
   ```bash
-  npm init solid@latest my-solidstart-app
+  npm create solid@latest my-solidstart-app -- -s --v2 -t basic --ts
   ```
 
 ---
@@ -63,10 +64,11 @@ Identify the project's package manager (`npm`, `yarn`, `pnpm`, `bun`) and use it
 2.  Add the following `DATABASE_URL` parameter to the `.env` file and **prompt the user to replace the placeholder value** with their complete pooled connection string from Neon.
 
     ```dotenv title=".env"
-    DATABASE_URL="postgresql://<user>:<password>@<endpoint_hostname>-pooler.neon.tech/<dbname>?sslmode=require"
+    DATABASE_URL="postgresql://[user]:[password]@[neon_hostname]/[dbname]?sslmode=require&channel_binding=require"
     ```
 
 3.  Direct the user to find this value in the **Neon Console → Project Dashboard → Connect button**. Make sure to select **Pooled connection** for better performance with serverless applications.
+4.  If the user chose `pg` (node-postgres), change `sslmode=require` to `sslmode=verify-full` in `DATABASE_URL`. `pg` 8.23 and later print a SECURITY WARNING for `sslmode=require`, and `verify-full` keeps the same behavior without the warning.
 
 ---
 
@@ -87,7 +89,7 @@ To demonstrate both server-side rendering and API endpoints, create two separate
 
     const getVersion = query(async () => {
       "use server";
-      const sql = neon(process.env.DATABASE_URL);
+      const sql = neon(process.env.DATABASE_URL!);
       const response = await sql`SELECT version()`;
       const { version } = response[0];
 
@@ -117,7 +119,7 @@ To demonstrate both server-side rendering and API endpoints, create two separate
 
     const getVersion = query(async () => {
       "use server";
-      const sql = postgres(process.env.DATABASE_URL, { ssl: 'require' });
+      const sql = postgres(process.env.DATABASE_URL!, { ssl: 'require' });
       const response = await sql`SELECT version()`;
       return response[0].version;
     }, 'version')
@@ -194,7 +196,7 @@ To demonstrate both server-side rendering and API endpoints, create two separate
     import { json } from '@solidjs/router'
 
     export async function GET() {
-      const sql = postgres(process.env.DATABASE_URL, { ssl: 'require' });
+      const sql = postgres(process.env.DATABASE_URL!, { ssl: 'require' });
       const response = await sql`SELECT version()`;
 
       return json(response[0]);
@@ -209,7 +211,6 @@ To demonstrate both server-side rendering and API endpoints, create two separate
 
     const pool = new Pool({
       connectionString: process.env.DATABASE_URL,
-      ssl: true,
     });
 
     export async function GET() {

@@ -7,7 +7,7 @@ excerpt: >-
   exciting updates are on the way, including deeper integrations with the Azure
   ecosystem. To create your first Neon project on...
 date: '2024-10-07T18:02:14'
-updatedOn: '2024-12-03T21:29:36'
+updatedOn: '2026-11-06T12:00:00.000Z'
 category: company
 categories:
   - company
@@ -20,16 +20,22 @@ cover:
 isFeatured: false
 seo:
   title: First Azure Region Available on Neon (Beta)
-  description: You can now create Neon projects in Azure East US 2
+  description: >-
+    Neon's first Azure region launched in October 2024. Neon Azure regions are now deprecated; see neon.com/docs/import/azure-regions-deprecation.
   keywords: []
   noindex: false
   ogTitle: First Azure Region Available on Neon (Beta)
-  ogDescription: You can now create Neon projects in Azure East US 2
+  ogDescription: >-
+    Neon's first Azure region launched in October 2024. Neon Azure regions are now deprecated; see neon.com/docs/import/azure-regions-deprecation.
   image: >-
     https://cdn.neonapi.io/public/images/pages/blog/first-azure-region-available-in-neon/social.jpg
 ---
 
 ![Image](https://cdn.neonapi.io/public/images/pages/blog/first-azure-region-available-in-neon/neon-azure-1-1024x576-4304f6d7.jpg)
+
+<Admonition type="important" title="Neon Azure regions are deprecated">
+Neon's Azure regions (`azure-eastus2`, `azure-westus3`, `azure-gwc`) were deprecated on April 7, 2026, and you can no longer create new projects in them. Active and paid projects in those regions keep running. See [Azure regions deprecation](/docs/import/azure-regions-deprecation) for your options and [regions](/docs/introduction/regions) for where you can create projects today.
+</Admonition>
 
 <Admonition type="important" title="December 2024 Update">
 There are now more Azure regions available in the Neon console. Plus, Neon is also available in the Azure Marketplace as an Azure Native Integration. Read more [here](https://neon.com/blog/neon-is-now-available-as-an-azure-native-integration).

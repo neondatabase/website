@@ -2,7 +2,6 @@
 
 import PropTypes from 'prop-types';
 
-import Link from 'components/shared/link';
 import Tooltip from 'components/shared/tooltip';
 import ExternalIcon from 'icons/external.inline.svg';
 import { cn } from 'utils/cn';
@@ -26,15 +25,17 @@ const ApiAiContextLink = ({
   tooltipLabelVariant = 'text',
 }) => (
   <span className="inline-flex">
-    <Link
+    {/* Plain <a>, not <Link>: the .md isn't a Next.js route, so <Link> only adds
+        a prefetch and an extra RSC fetch on click. */}
+    <a
       className={LINK_CLASS_NAME}
-      to={to}
+      href={to}
       data-tooltip-id={tooltipId}
       aria-describedby={tooltipId}
     >
       Markdown for AI context
       <ExternalIcon className="size-3" />
-    </Link>
+    </a>
 
     <Tooltip
       id={tooltipId}

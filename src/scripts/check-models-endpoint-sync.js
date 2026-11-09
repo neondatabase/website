@@ -31,6 +31,7 @@ const BASE = baseIndex === -1 ? 'https://neon.com' : args[baseIndex + 1];
 /** Fields both endpoints carry and must agree on. Anything else is shape, not fact. */
 const SHARED_FIELDS = [
   'name',
+  'lab',
   'provider',
   'family',
   'release_date',

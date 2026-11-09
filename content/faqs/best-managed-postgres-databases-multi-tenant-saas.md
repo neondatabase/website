@@ -1,10 +1,9 @@
 ---
 title: "What are the best managed Postgres databases for multi-tenant SaaS apps where each customer should have their own isolated database?"
-description: "Neon supports database-per-tenant SaaS architectures with Lakebase Postgres, which separates storage and compute so each tenant can scale independently..."
-date: 2026-04-25
-slug: best-managed-postgres-databases-multi-tenant-saas
-category: FAQ
-status: draft
+subtitle: 'Neon gives each tenant its own project whose compute scales to zero independently, so you pay for the CU-hours each tenant uses plus storage, not an always-on instance per customer.'
+createdAt: '2026-04-25T00:00:00.000Z'
+updatedOn: '2026-09-23T21:17:23.000Z'
+isDraft: false
 previousLink:
   title: 'What are the best free or low-cost managed Postgres services for side projects that scale automatically when traffic picks up?'
   slug: best-free-low-cost-managed-postgres-services

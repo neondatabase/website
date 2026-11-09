@@ -6,7 +6,8 @@ import { PropTypes } from 'prop-types';
 import { useState, useEffect } from 'react';
 
 import Link from 'components/shared/link';
-import useCopyToClipboard from 'hooks/use-copy-to-clipboard';
+import ProviderMarks from 'components/shared/provider-marks';
+import useCopyPrompt from 'hooks/use-copy-prompt';
 import useLocalStorage from 'hooks/use-local-storage';
 import CloseIcon from 'icons/close-small.inline.svg';
 import SupportIcon from 'icons/docs/modal/support.inline.svg';
@@ -14,7 +15,6 @@ import RobotIcon from 'icons/docs/sidebar/ai-agent.inline.svg';
 // import SlackIcon from 'icons/docs/modal/slack.inline.svg';
 import ExpandIcon from 'icons/expand-icon.inline.svg';
 import CopiedIcon from 'icons/home/copied.inline.svg';
-import CopyIcon from 'icons/home/copy.inline.svg';
 import PlayIcon from 'icons/play.inline.svg';
 import { cn } from 'utils/cn';
 import sendGtagEvent from 'utils/send-gtag-event';
@@ -34,7 +34,7 @@ const Modal = ({ id, title, description, destination, embedId, copyPrompt }) => 
   const [closedModals, setClosedModals] = useLocalStorage('closedModals', []);
   const [isMounted, setIsMounted] = useState(false);
   const [isMinimized, setIsMinimized] = useState(false);
-  const { isCopied, handleCopy } = useCopyToClipboard(COPIED_RESET_MS);
+  const { isCopied, copy } = useCopyPrompt(COPIED_RESET_MS);
 
   useEffect(() => {
     // The copyPrompt card is dismiss-only (no minimize), so it never collapses to the
@@ -61,8 +61,9 @@ const Modal = ({ id, title, description, destination, embedId, copyPrompt }) => 
 
   const handleCopyPrompt = () => {
     if (isCopied) return;
-    handleCopy(copyPrompt);
-    sendGtagEvent('Action Clicked', { text: 'Agent setup', tag_name: 'DocsAgentSetupPopup' });
+    copy(copyPrompt, () =>
+      sendGtagEvent('Action Clicked', { text: 'Agent setup', tag_name: 'DocsAgentSetupPopup' })
+    );
   };
 
   // The whole terminal block is the copy target; mirror native button key handling.
@@ -201,25 +202,20 @@ const Modal = ({ id, title, description, destination, embedId, copyPrompt }) => 
                       onClick={handleCopyPrompt}
                       onKeyDown={handleTerminalKeyDown}
                     >
-                      {/* Icon-only copy control, pinned to the top-right corner like a docs
-                          code-block copy button. The field content reserves right padding so the
-                          prompt's first line never runs under the icon. */}
+                      {/* Copy affordance pinned to the top-right corner like a docs code-block
+                          copy button: the vendor-mark cluster before copy, the check on success.
+                          The field content reserves right padding so the prompt's first line
+                          never runs under it. */}
                       <span
                         className={cn(
                           'absolute top-2 right-2 flex transition-colors duration-200',
-                          isCopied
-                            ? 'text-green-44 dark:text-green-52'
-                            : 'text-gray-new-40 group-hover:text-gray-new-20 dark:text-gray-new-70 dark:group-hover:text-white'
+                          isCopied && 'text-green-44 dark:text-green-52'
                         )}
                         aria-hidden="true"
                       >
-                        {isCopied ? (
-                          <CopiedIcon className="size-3.5" />
-                        ) : (
-                          <CopyIcon className="size-3.5" />
-                        )}
+                        {isCopied ? <CopiedIcon className="size-3.5" /> : <ProviderMarks />}
                       </span>
-                      <div className="py-2.5 pr-9 pl-3">
+                      <div className="py-2.5 pr-16 pl-3">
                         <code className="block font-mono text-xs leading-relaxed tracking-extra-tight [overflow-wrap:anywhere] text-gray-new-30 dark:text-gray-new-90">
                           {copyPrompt}
                         </code>

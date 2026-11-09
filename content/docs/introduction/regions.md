@@ -10,6 +10,7 @@ enableTableOfContents: true
 isDraft: false
 redirectFrom:
   - /docs/conceptual-guides/regions
+  - /docs/manage/regions
 updatedOn: '2026-10-14T21:25:07.454Z'
 ---
 
@@ -47,7 +48,7 @@ You can create a project in any region listed above, but not every backend produ
 | `aws-ap-southeast-2` (Sydney)    |    ✅    |         ✅          |       —        |     —     |     —      |    —     |
 | `aws-sa-east-1` (São Paulo)      |    ✅    |         ✅          |       —        |     —     |     —      |    —     |
 
-The AI Gateway requires a paid plan.
+The AI Gateway is available on any plan with [prepaid credits](/docs/ai-gateway/prepaid-credits).
 
 For the latest details and usage limits, see each product's overview: [Lakebase Postgres](/docs/postgres/overview), [Managed Better Auth](/docs/auth/overview), [Object Storage](/docs/storage/overview), [Functions](/docs/compute/functions/overview), [AI Gateway](/docs/ai-gateway/overview).
 
@@ -88,7 +89,7 @@ Neon connects to external systems (for example, when replicating data into Neon 
 Allow **all** NAT gateway IP addresses listed for your project's region, not just the ones you connect through today, and add the new addresses to your allowlist after Neon expands a region. Expansions are announced in the [changelog](/docs/changelog).
 </Admonition>
 
-_NAT gateway IP lists last updated: October 7, 2026._
+_NAT gateway IP lists last updated: October 28, 2026._
 
 ### AWS NAT Gateway IP Addresses
 

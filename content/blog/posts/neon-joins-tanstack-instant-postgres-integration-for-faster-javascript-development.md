@@ -9,7 +9,7 @@ excerpt: >-
   Vite’s popularity is hard to ignore at this point. It’s everywhere! We believe
   that part of its success is the amazing devel...
 date: '2025-07-02T12:10:31'
-updatedOn: '2025-10-17T17:02:24'
+updatedOn: '2026-11-06T12:00:00.000Z'
 category: postgres
 categories:
   - postgres
@@ -26,23 +26,23 @@ seo:
     Neon Joins TanStack: Instant Postgres Integration for Faster JavaScript
     Development - Neon
   description: >-
-    Neon Launchpad brings instant PostgreSQL to JavaScript developers with
-    seamless integrations for Vite, TanStack, and open-source tools, no sign-up
-    required.
+    Neon Launchpad, now Claimable Neon, brings instant Postgres to Vite, TanStack, and open-source tools. See neon.com/docs/reference/claimable-neon.
   keywords: []
   noindex: false
   ogTitle: >-
     Neon Joins TanStack: Instant Postgres Integration for Faster JavaScript
     Development - Neon
   ogDescription: >-
-    Neon Launchpad brings instant PostgreSQL to JavaScript developers with
-    seamless integrations for Vite, TanStack, and open-source tools, no sign-up
-    required.
+    Neon Launchpad, now Claimable Neon, brings instant Postgres to Vite, TanStack, and open-source tools. See neon.com/docs/reference/claimable-neon.
   image: >-
     https://cdn.neonapi.io/public/images/pages/blog/neon-joins-tanstack-instant-postgres-integration-for-faster-javascript-development/social.png
 ---
 
 ![Post image](https://cdn.neonapi.io/public/images/pages/blog/neon-joins-tanstack-instant-postgres-integration-for-faster-javascript-development/neon-neon-joins-tanstack-1024x576-8d0e16d9.jpg)
+
+<Admonition type="important" title="Launchpad is now Claimable Neon">
+Neon Launchpad has evolved into Claimable Neon. An agent or tool creates a Neon project without an account, uses it right away, and hands the user a claim link to keep it. Claimable projects can also include the Data API and Managed Better Auth. See [Claimable Neon](/claimable-neon) and the [Claimable Neon reference](/docs/reference/claimable-neon) for the current CLI and API.
+</Admonition>
 
 It’s no secret that Neon loves TanStack, and we’re proud to support Tanner and the team as they prepare TanStack Start for its much-anticipated 1.0 launch. Vite’s popularity is hard to ignore at this point. It’s everywhere! We believe that part of its success is the amazing developer experience it offers. So we’ve developed a Create Tanstack integration to help deliver a great developer experience across the entire TanStack ecosystem when using Neon.
 

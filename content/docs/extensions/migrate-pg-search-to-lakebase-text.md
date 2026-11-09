@@ -2,6 +2,7 @@
 title: 'Migrate from pg_search to lakebase_text'
 subtitle: 'Move BM25 full-text search from the deprecated pg_search extension to the lakebase_text extension'
 enableTableOfContents: true
+updatedOn: '2026-09-27T23:23:01.000Z'
 ---
 
 <Admonition type="warning" title="pg_search is deprecated">
