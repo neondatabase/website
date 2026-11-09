@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "neonctlVersion": "9.1.0",
+  "neonctlVersion": "9.3.2",
   "binaries": [
     "neonctl",
     "neon"
@@ -910,7 +910,7 @@
         },
         "env": {
           "type": "string",
-          "describe": "Path to a .env file to load into the environment before evaluating neon.ts so Function env values resolve from it. Existing env vars are not overridden. Function env values that read process.env must be set in this file or the environment. Used when this checkout creates a branch from neon.ts; ignored for an existing branch."
+          "describe": "Path to a .env file to load into the environment before evaluating neon.ts so Function env values resolve from it. Existing env vars are not overridden. Required Function env (declared required: true, or required: \"default-branch\" when deploying the default branch) and values that read process.env must be set in this file or the environment. Used when this checkout creates a branch from neon.ts; ignored for an existing branch."
         },
         "env-pull": {
           "type": "boolean",
@@ -1269,7 +1269,7 @@
             },
             "env": {
               "type": "string",
-              "describe": "Path to a .env file to load into the environment before evaluating neon.ts so Function env values resolve from it. Existing env vars are not overridden. Function env values that read process.env must be set in this file or the environment."
+              "describe": "Path to a .env file to load into the environment before evaluating neon.ts so Function env values resolve from it. Existing env vars are not overridden. Required Function env (declared required: true, or required: \"default-branch\" when deploying the default branch) and values that read process.env must be set in this file or the environment."
             },
             "env-pull": {
               "type": "boolean",
@@ -1328,7 +1328,7 @@
             },
             "env": {
               "type": "string",
-              "describe": "Path to a .env file to load into the environment before evaluating neon.ts so Function env values resolve from it. Existing env vars are not overridden. Function env values that read process.env must be set in this file or the environment."
+              "describe": "Path to a .env file to load into the environment before evaluating neon.ts so Function env values resolve from it. Existing env vars are not overridden. Required Function env (declared required: true, or required: \"default-branch\" when deploying the default branch) and values that read process.env must be set in this file or the environment."
             }
           },
           "commands": {},
@@ -1801,7 +1801,7 @@
         },
         "env": {
           "type": "string",
-          "describe": "Path to a .env file to load into the environment before evaluating neon.ts so Function env values resolve from it. Existing env vars are not overridden. Function env values that read process.env must be set in this file or the environment."
+          "describe": "Path to a .env file to load into the environment before evaluating neon.ts so Function env values resolve from it. Existing env vars are not overridden. Required Function env (declared required: true, or required: \"default-branch\" when deploying the default branch) and values that read process.env must be set in this file or the environment."
         },
         "env-pull": {
           "type": "boolean",
@@ -1834,7 +1834,7 @@
       "options": {
         "env": {
           "type": "string",
-          "describe": "Path to a .env file to load into the environment before evaluating neon.ts so Function env values resolve from it. Existing env vars are not overridden. Function env values that read process.env must be set in this file or the environment."
+          "describe": "Path to a .env file to load into the environment before evaluating neon.ts so Function env values resolve from it. Existing env vars are not overridden. Required Function env (declared required: true, or required: \"default-branch\" when deploying the default branch) and values that read process.env must be set in this file or the environment."
         },
         "port": {
           "type": "number",
@@ -2403,6 +2403,24 @@
       },
       "describe": "Sync the checked-out Neon branch to your git branch (Preview)",
       "usage": "$0 git <sub-command> [options]"
+    },
+    "incidents": {
+      "aliases": [],
+      "positionals": [],
+      "options": {},
+      "commands": {},
+      "describe": "Show open Neon incidents and maintenance",
+      "usage": "$0 incidents",
+      "examples": [
+        {
+          "command": "$0 incidents",
+          "description": "Show open Neon incidents and maintenance"
+        },
+        {
+          "command": "$0 incidents -o json",
+          "description": "Print the full report as JSON"
+        }
+      ]
     },
     "init": {
       "aliases": [],
@@ -5958,7 +5976,7 @@
           "aliases": [],
           "positionals": [
             {
-              "name": "id",
+              "name": "trigger-id",
               "required": true,
               "describe": "Trigger ID",
               "type": "string"
@@ -5973,7 +5991,7 @@
           "aliases": [],
           "positionals": [
             {
-              "name": "id",
+              "name": "trigger-id",
               "required": true,
               "describe": "Trigger ID",
               "type": "string"
@@ -5988,7 +6006,7 @@
           "aliases": [],
           "positionals": [
             {
-              "name": "id",
+              "name": "trigger-id",
               "required": true,
               "describe": "Trigger ID",
               "type": "string"
@@ -6003,7 +6021,7 @@
           "aliases": [],
           "positionals": [
             {
-              "name": "id",
+              "name": "trigger-id",
               "required": true,
               "describe": "Trigger ID",
               "type": "string"
@@ -6026,7 +6044,7 @@
           "aliases": [],
           "positionals": [
             {
-              "name": "id",
+              "name": "trigger-id",
               "required": true,
               "describe": "Trigger ID",
               "type": "string"

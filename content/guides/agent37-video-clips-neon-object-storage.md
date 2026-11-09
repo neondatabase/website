@@ -135,7 +135,7 @@ export default defineConfig({
       name: 'Video clipper',
       source: './functions/clipper.ts',
       env: {
-        AGENT37_API_KEY: process.env.AGENT37_API_KEY!,
+        AGENT37_API_KEY: { value: process.env.AGENT37_API_KEY, required: true },
       },
     },
   },

@@ -7,7 +7,8 @@ summary: >-
   operations, Console API, Console Frontend, account creation, login, and the
   Neon website) and backend services (Data API, Managed Better Auth, Object
   Storage, Functions, and AI Gateway). Check here to confirm whether an outage is regional, and
-  subscribe to alerts via webhook, RSS, Slack, or Microsoft Teams. Routine
+  subscribe to alerts via webhook, RSS, Slack, or Microsoft Teams, or check
+  from the terminal with `neon incidents`. Routine
   maintenance and compute updates are not posted here.
 enableTableOfContents: true
 updatedOn: '2026-10-30T10:54:04.862Z'
@@ -44,6 +45,14 @@ Backend services are listed only for the regions where they're available.
 <Admonition type="note" title="Updates and maintenance notices">
 Neon performs occasional platform maintenance and applies regular updates to your project's computes, but these maintenance activities and updates are not posted to the Neon status page. To stay informed about maintenance operations and updates, watch for notices in the Neon Console and your project settings. See [Maintenance & updates overview](/docs/manage/maintenance-updates-overview) for details.
 </Admonition>
+
+## Check status from the terminal
+
+Run [`neon incidents`](/docs/cli/incidents) to see what the status page reports without opening a browser: the overall status, open incidents, components that aren't operational, and any maintenance posted on the status page. It needs no login or linked project. Add `-o json` to check the status from a script or an agent.
+
+```bash
+neon incidents
+```
 
 ## Subscribe to status updates
 
