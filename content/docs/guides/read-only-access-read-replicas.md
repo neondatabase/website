@@ -19,7 +19,7 @@ Suppose you need to give a partner read-only access to your sales data so they c
 1. **Create a read replica**
 
    <Admonition type="note">
-   On paid plans (Launch and Scale), you can add up to 6 read replicas per branch. The Agent plan allows up to 3, and the Free plan is limited to 3 read replica computes per project.
+   The number of read replicas you can add depends on your plan. See [Read replicas](/docs/introduction/plans#read-replicas) on the plans page.
    </Admonition>
 
    Follow these steps to create a read replica for your database branch:

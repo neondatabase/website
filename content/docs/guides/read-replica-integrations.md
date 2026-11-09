@@ -16,7 +16,7 @@ updatedOn: '2026-08-04T04:41:00.271Z'
 In Neon, a read replica is an independent read-only compute that performs read operations on the same data as your primary read-write compute, which means adding a read replica to a Neon project requires no additional storage.
 
 <Admonition type="note">
-On paid plans, you can add up to 6 read replicas per branch. The Free plan is limited to 3 read replica computes per project.
+The number of read replicas you can add depends on your plan. See [Read replicas](/docs/introduction/plans#read-replicas) on the plans page.
 </Admonition>
 
 A key benefit of read replicas is that you can distribute read requests to one or more read replicas, enabling you to easily scale your applications and achieve higher throughput for both read-write and read-only workloads.

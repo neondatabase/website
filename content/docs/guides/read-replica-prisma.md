@@ -30,7 +30,7 @@ This guide shows how to use Neon read replicas to scale Prisma applications usin
 You can create read replicas for any branch in your Neon project.
 
 <Admonition type="note">
-On paid plans, you can add up to 6 read replicas per branch. The Free plan is limited to 3 read replica computes per project.
+The number of read replicas you can add depends on your plan. See [Read replicas](/docs/introduction/plans#read-replicas) on the plans page.
 </Admonition>
 
 You can add a read replica by following these steps:

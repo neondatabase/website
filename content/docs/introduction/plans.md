@@ -50,6 +50,7 @@ For AI agent platforms that provision thousands of databases, Neon offers an **A
 | [Compute](#compute)                                   | 100 CU-hours/project                                               | $0.106/CU-hour                             | $0.222/CU-hour                                                                                    |
 | [Autoscaling](#autoscaling)                           | Up to 2 CU (8 GB RAM)                                              | Up to 16 CU (64 GB RAM)                    | Up to 16 CU autoscaling, or fixed sizes up to 56 CU (224 GB RAM)                                  |
 | [Scale to zero](#scale-to-zero)                       | After 5 min                                                        | After 5 min, can be disabled               | Configurable (1 minute to always on)                                                              |
+| [Read replicas](#read-replicas) | 3/project | 6/branch | 6/branch |
 | [Storage](#storage)                                   | 1 GB/project, 20 GB account total                                  | $0.35/GB-month                             | $0.35/GB-month                                                                                    |
 | [Public network transfer](#public-network-transfer)   | 5 GB per project included                                          | 500 GB per project included, then $0.10/GB | 500 GB per project included, then $0.10/GB                                                        |
 | [Monitoring](#monitoring)                             | 1 day                                                              | 3 days                                     | 14 days                                                                                           |
@@ -214,6 +215,16 @@ Suspends computes after inactivity.
 - **Free**: 5 min inactivity; cannot disable
 - **Launch**: 5 min inactivity; can disable
 - **Scale**: Fully configurable; 1 minute to always on
+
+### Read replicas
+
+[Read replicas](/docs/introduction/read-replicas) are read-only computes that serve reads from the same storage as your branch's primary compute. Each read replica is billed as compute.
+
+- **Free**: Up to 3 read replica computes per project
+- **Launch**: Up to 6 read replicas per branch
+- **Scale**: Up to 6 read replicas per branch
+
+The [Agent plan](/docs/introduction/agent-plan) allows up to 3 read replicas.
 
 ### Storage
 

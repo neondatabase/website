@@ -14,7 +14,7 @@ enableTableOfContents: true
 updatedOn: '2026-11-06T11:14:41.532Z'
 ---
 
-[Read replicas](/docs/introduction/read-replicas) are supported with all Neon plans. On paid plans, you can add up to 6 read replicas per branch. The Free plan is limited to 3 read replica computes per project. This guide steps you through the process of creating and managing read replicas.
+[Read replicas](/docs/introduction/read-replicas) are supported with all Neon plans. The number of read replicas you can add depends on your plan. See [Read replicas](/docs/introduction/plans#read-replicas) on the plans page. This guide steps you through the process of creating and managing read replicas.
 
 The general purpose of read replicas is to segregate read-only work from your production database operations. This can be applied to different uses cases, such as:
 
@@ -34,7 +34,7 @@ Regardless of the application, the steps for creating, configuring, and connecti
 Creating a read replica involves adding a read replica compute to a branch. You can add a read replica compute to any branch in your Neon project using the Neon Console, [Neon CLI](/docs/cli/branches#create), or [Neon API](/docs/reference/api/endpoints/create-project-endpoint).
 
 <Admonition type="note">
-On paid plans, you can add up to 6 read replicas per branch. The Free plan is limited to 3 read replica computes per project.
+The number of read replicas you can add depends on your plan. See [Read replicas](/docs/introduction/plans#read-replicas) on the plans page.
 </Admonition>
 
 <Tabs labels={["Console", "CLI", "API"]}>
