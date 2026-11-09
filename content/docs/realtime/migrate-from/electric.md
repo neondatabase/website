@@ -602,7 +602,7 @@ BEGIN
 END $$;
 ```
 
-Then remove the `@electric-sql/*` and `@tanstack/electric-db-collection` packages, the proxy routes and the `ELECTRIC_*` env vars.
+Then remove the `@electric-sql/*` and `@tanstack/electric-db-collection` packages, the proxy routes and the `ELECTRIC_*` env vars. If you run an auth proxy like Caddy, you can often remove that too.
 
 <Admonition type="important" title="Learn more about Neon Realtime">
 
