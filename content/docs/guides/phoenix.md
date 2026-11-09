@@ -9,7 +9,7 @@ summary: >-
   creation, DATABASE_URL credential storage, and config updates for dev, test,
   and runtime environments.
 enableTableOfContents: true
-updatedOn: '2026-07-31T15:27:48.506Z'
+updatedOn: '2026-09-16T19:45:35.340Z'
 ---
 
 <CopyPrompt src="/prompts/phoenix-prompt.md"
@@ -17,13 +17,13 @@ description="Pre-built prompt for connecting Phoenix applications to Lakebase Po
 
 This guide describes how to connect Neon in a [Phoenix](https://www.phoenixframework.org) application. [Ecto](https://hexdocs.pm/ecto/3.11.2/Ecto.html) provides an API and abstractions for interacting databases, enabling Elixir developers to query any database using similar constructs.
 
-It is assumed that you have a working installation of [Elixir](https://elixir-lang.org/install.html).
+It is assumed that you have a working installation of [Elixir](https://elixir-lang.org/install.html) 1.15 or later.
 
 <Steps>
 
 ## Create a Neon project
 
-If you do not have one already, create a Neon project. Save your connection details including your password. They are required when defining connection settings.
+If you do not have one already, create a Neon project. Save your connection details, including your password. You need them when you configure the app and start the server.
 
 1. Navigate to the [Projects](https://console.neon.tech/app/projects) page in the Neon Console.
 2. Click **New Project**.
@@ -31,11 +31,13 @@ If you do not have one already, create a Neon project. Save your connection deta
 
 ## Store your Neon credentials
 
-Add a `.env` file to your project directory and add your Neon connection string to it. You can find your connection string by clicking the **Connect** button on your **Project Dashboard** to open the **Connect to your database** modal. For more information, see [Connect from any application](/docs/connect/connect-from-any-app).
+Copy your connection string. You can find it by clicking the **Connect** button in the Console nav to open the **Connect to your branch** modal. For more information, see [Connect from any application](/docs/connect/connect-from-any-app).
 
-```shell shouldWrap
-DATABASE_URL="postgresql://<user>:<password>@<endpoint_hostname>.neon.tech:<port>/<dbname>?sslmode=require&channel_binding=require"
+```text shouldWrap
+postgresql://[user]:[password]@[neon_hostname]/[dbname]?sslmode=require&channel_binding=require
 ```
+
+You pass this value to the app as the `DATABASE_URL` environment variable when you start the server in production.
 
 You will need the connection string details later in the setup.
 
@@ -59,9 +61,9 @@ Update the following configuration files with your database connection details f
 
    ```elixir {2-5,9}
    config :hello, Hello.Repo,
-      username: "neondb_owner",
-      password: "JngqXejzvb93",
-      hostname: "ep-rough-snowflake-a5j76tr5.us-east-2.aws.neon.tech",
+      username: "[user]",
+      password: "[password]",
+      hostname: "[neon_hostname]",
       database: "neondb",
       stacktrace: true,
       show_sensitive_data_on_connection_error: true,
@@ -87,9 +89,9 @@ Update the following configuration files with your database connection details f
 
    ```elixir {2,3,4,8}
    config :hello, Hello.Repo,
-      username: "neondb_owner",
-      password: "JngqXejzvb93",
-      hostname: "ep-rough-snowflake-a5j76tr5.us-east-2.aws.neon.tech",
+      username: "[user]",
+      password: "[password]",
+      hostname: "[neon_hostname]",
       database: "with_phoenix_test#{System.get_env("MIX_TEST_PARTITION")}",
       pool: Ecto.Adapters.SQL.Sandbox,
       pool_size: System.schedulers_online() * 2,
@@ -143,7 +145,7 @@ When you run the following command, you can expect to see the Phoenix applicatio
 PORT=4001 \
 MIX_ENV=prod \
 PHX_HOST=localhost \
-DATABASE_URL="postgresql://...:...@...aws.neon.tech/neondb?sslmode=require&channel_binding=require" \
+DATABASE_URL="postgresql://[user]:[password]@[neon_hostname]/neondb?sslmode=require&channel_binding=require" \
 SECRET_KEY_BASE=".../..." \
 mix phx.server
 ```

@@ -10,7 +10,7 @@ summary: >-
   wal_level=logical for the entire Neon project.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2026-08-18T10:29:02.410Z'
+updatedOn: '2026-10-09T10:14:56.146Z'
 ---
 
 Neon's logical replication feature allows you to replicate data from your Lakebase Postgres database to external destinations.
@@ -48,8 +48,8 @@ To enable logical replication in Neon:
 <TabItem>
 
 1. Select your project in the Neon Console.
-2. On the Neon **Dashboard**, select **Settings**.
-3. Select **Logical Replication**.
+2. Select **Settings** in the sidebar.
+3. Select **Postgres**, then **Logical replication**.
 4. Click **Enable** to enable logical replication.
 
    ![Neon dashboard settings with option to enable logical replication](/docs/guides/neon-console-settings-logical-replication.png)
@@ -101,7 +101,7 @@ To create a role in the Neon Console:
 
 1. Navigate to the [Neon Console](https://console.neon.tech).
 2. Select a project.
-3. In the sidebar, select your branch from the **BRANCH** selector.
+3. Select your branch from the project/branch menu at the top of the sidebar.
 4. Under **Postgres database**, select **Roles**.
 5. Click **Add Role**.
 6. In the role creation dialog, specify a role name (`replication_user`).
@@ -228,7 +228,7 @@ Now that your Neon source database is prepared, you can create the CDC integrati
     ![ClickHouse Cloud create ClickPipe button](/docs/guides/clickhouse_create_clickpipe.png)
 3.  Select the **Neon** tile.
     ![ClickHouse Cloud Neon tile for ClickPipe source selection](/docs/guides/clickhouse_neon_clickpipe_tile.png)
-4.  Enter the connection details for your Neon database. You can find these details by clicking the **Connect** button on your Neon **Project Dashboard**. Toggle **Parameters only** to easily copy individual connection values.
+4.  Enter the connection details for your Neon database. You can find these details by clicking **Connect** in the Console nav. Toggle **Parameters only** to easily copy individual connection values.
     <Admonition type="important">
     Use a **direct connection** to your compute endpoint, not a pooled connection. Logical replication requires a persistent connection and is not compatible with connection poolers. When copying your connection string from Neon, make sure it does not include `-pooler` in the hostname. For more information, see [Connection pooling](/docs/connect/connection-pooling).
     </Admonition>

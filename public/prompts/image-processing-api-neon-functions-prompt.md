@@ -6,7 +6,7 @@ https://neon.com/guides/image-processing-api-neon-functions
 Before writing any code:
 
 1. Inspect my existing project and understand its current structure.
-2. Check if the Neon CLI is authenticated by running `neon me`. If it isn't, run `neon auth` and wait for me to complete sign-in before continuing.
+2. Check if the Neon CLI is authenticated by running `neon me`. If it isn't, run `neon login` and wait for me to complete sign-in before continuing.
 3. Ask me what I want to build and whether I want to follow the example in the guide closely or adapt it to a different use case.
 4. Ask any other questions that would affect the architecture or implementation, such as:
    - What image processing operations do I need?
@@ -25,4 +25,4 @@ Before writing any code:
 
 Prefer the simplest implementation that satisfies my requirements. Don't introduce additional frameworks, services, or abstractions unless they are necessary.
 
-When you need to inspect or query my database, use `neon psql` and pass the correct branch name; run `neon branches list` or ask me if you're not sure which branch to target. Never run destructive commands against my database or storage (`DELETE`, `UPDATE`, `DROP`, `TRUNCATE`, deleting objects, and similar) without showing me the exact command first and getting my explicit approval.
+When you need to inspect or query my database, use `neon psql` and pass the correct branch name; run `neon branches list` or ask me if you're not sure which branch to target. Never run destructive commands against my database or storage (`DELETE`, `UPDATE`, `DROP`, `TRUNCATE`, deleting objects, and similar) without showing me the exact command first and getting my explicit approval. If `neon deploy` stops and asks for `--allow-protected`, `--update-existing`, or `-y`, show me the changes it printed and ask me before re-running with any of them.

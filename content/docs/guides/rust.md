@@ -12,7 +12,7 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/quickstart/rust
   - /docs/integrations/rust
-updatedOn: '2026-08-04T05:18:26.469Z'
+updatedOn: '2026-10-09T10:14:56.146Z'
 ---
 
 <CopyPrompt src="/prompts/rust-prompt.md" 
@@ -24,6 +24,7 @@ This guide describes how to create a project on Neon and connect to it from a Ru
 
 - A Neon account. If you do not have one, see [Sign up](https://console.neon.tech/signup).
 - The Rust toolchain. If you do not have it installed, install it from the [official Rust website](https://www.rust-lang.org/tools/install).
+- OpenSSL. The `openssl` crate links to your system's OpenSSL library. On Debian or Ubuntu, install `pkg-config` and `libssl-dev`. See the [openssl crate documentation](https://docs.rs/openssl/latest/openssl/#automatic) for other platforms.
 
 <Steps>
 
@@ -48,11 +49,11 @@ For your Rust project, use `cargo` to create a new project and add the required 
     cd neon-rust-quickstart
     ```
 
-    This command creates a new directory named `neon-rust-quickstart` containing a `src/main.rs` file for your code and a `Cargo.toml` file for your project's configuration and dependencies.
+    This command creates a new directory named `neon-rust-quickstart` containing a `src/main.rs` file for your code and a `Cargo.toml` file for your project's configuration and dependencies. To set up a project in an existing directory instead, run `cargo init` in that directory.
 
     > Open the directory in your preferred code editor (for example, VS Code, RustRover, etc.) to edit the files.
 
-2.  Add the required crates using `cargo add`. Choose the set of commands for either a synchronous or asynchronous setup.
+2.  Add the required crates using `cargo add`. Choose the synchronous `postgres` crate for scripts and command-line tools, or the asynchronous `tokio-postgres` crate if your application already uses Tokio (for example, a web server built on Axum or Actix). Use the same tab for the code examples that follow.
 
     <CodeTabs labels={["postgres (sync)", "tokio-postgres (async)"]}>
 
@@ -82,7 +83,7 @@ For your Rust project, use `cargo` to create a new project and add the required 
 
     Open your `Cargo.toml` file and add the following `[[bin]]` sections to the end of it:
 
-    ```toml title="Cargo.toml"
+    ```toml filename="Cargo.toml"
     [[bin]]
     name = "create_table"
     path = "src/create_table.rs"
@@ -108,11 +109,11 @@ For your Rust project, use `cargo` to create a new project and add the required 
 
 ## Store your Neon connection string
 
-Create a file named `.env` in your project's root directory. This file will securely store your database connection string.
+Create a file named `.env` in your project's root directory. This file stores your database connection string. Don't commit it to source control.
 
-1.  In the [Neon Console](https://console.neon.tech), select your project on the **Dashboard**.
-2.  Click **Connect** on your **Project Dashboard** to open the **Connect to your database** modal.
-    ![Connection modal](/docs/connect/connection_details.png)
+1.  In the [Neon Console](https://console.neon.tech), open your project.
+2.  Click **Connect** in the Console nav to open the **Connect to your branch** modal.
+    ![Connection modal](/docs/connect/connect_to_branch_modal.png)
 3.  Copy the connection string, which includes your password.
 4.  Add the connection string to your `.env` file as shown below.
     ```text
@@ -122,15 +123,15 @@ Create a file named `.env` in your project's root directory. This file will secu
 
 ## Choosing the right method to execute SQL commands
 
-Before diving into the code examples, it's important to understand how to interact with your Neon database using Rust. The `postgres` and `tokio-postgres` crates provide several methods for executing SQL commands. Choosing the right method depends on your use case:
+The `postgres` and `tokio-postgres` crates provide several methods for executing SQL commands. The right method depends on your use case:
 
-- `client.execute:`
+- `client.execute`:
   Use this for a single DML/DDL statement (`INSERT`, `UPDATE`, `DELETE`) or a fire-and-forget query. It supports parameter placeholders (`$1`, `$2`, etc.) and returns the number of rows affected (`u64`).
 
-- `client.batch_execute:`  
+- `client.batch_execute`:  
   Ideal for running multiple SQL commands in one shot (schema migrations, DDL, seed data). Supply a semicolon-separated SQL string. This method does not support parameters and returns `()` on success.
 
-- `client.query:`  
+- `client.query`:  
   The go-to for any `SELECT` that returns rows. It accepts placeholders and returns a `Vec<Row>`, so you can iterate over rows and extract typed values.
 
 ### Quick comparison
@@ -141,7 +142,7 @@ Before diving into the code examples, it's important to understand how to intera
 | `client.batch_execute` | Multiple statements in one SQL blob <br/>(DDL, migrations, seed data) | No         | `()`                  |
 | `client.query`         | Fetching rows from a `SELECT`                                         | Yes        | `Vec<Row>`            |
 
-Now that you know how to connect to your Neon database and the available methods for executing SQL commands, let's look at some examples of how you can perform basic CRUD operations. You will use all three methods (`execute`, `batch_execute`, and `query`) in the examples to demonstrate their usage.
+The examples below use all three methods (`execute`, `batch_execute`, and `query`).
 
 ## Examples
 
@@ -153,7 +154,7 @@ In your project's `src` directory, create a file named `create_table.rs` and add
 
 <CodeTabs labels={["postgres (sync)", "tokio-postgres (async)"]}>
 
-```rust title="src/create_table.rs"
+```rust filename="src/create_table.rs"
 use dotenvy::dotenv;
 use postgres::Client;
 use openssl::ssl::{SslConnector, SslMethod};
@@ -220,8 +221,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 }
 ```
 
-```rust title="src/create_table.rs"
-use tokio_postgres;
+```rust filename="src/create_table.rs"
 use dotenvy::dotenv;
 use openssl::ssl::{SslConnector, SslMethod};
 use postgres_openssl::MakeTlsConnector;
@@ -319,7 +319,7 @@ cargo run --bin create_table
 
 When the code runs successfully, it produces the following output:
 
-```text title="Output"
+```text filename="Output"
 Connection established
 Finished dropping table (if it existed).
 Finished creating table.
@@ -334,7 +334,7 @@ In your `src` directory, create a file named `read_data.rs`. This script connect
 
 <CodeTabs labels={["postgres (sync)", "tokio-postgres (async)"]}>
 
-```rust title="src/read_data.rs"
+```rust filename="src/read_data.rs"
 use dotenvy::dotenv;
 use postgres::Client;
 use openssl::ssl::{SslConnector, SslMethod};
@@ -369,8 +369,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 }
 ```
 
-```rust title="src/read_data.rs"
-use tokio_postgres;
+```rust filename="src/read_data.rs"
 use dotenvy::dotenv;
 use openssl::ssl::{SslConnector, SslMethod};
 use postgres_openssl::MakeTlsConnector;
@@ -428,7 +427,7 @@ cargo run --bin read_data
 
 When the code runs successfully, it produces the following output:
 
-```text title="Output"
+```text filename="Output"
 Connection established
 
 --- Book Library ---
@@ -445,7 +444,7 @@ In your `src` directory, create a file named `update_data.rs`. This script updat
 
 <CodeTabs labels={["postgres (sync)", "tokio-postgres (async)"]}>
 
-```rust title="src/update_data.rs"
+```rust filename="src/update_data.rs"
 use dotenvy::dotenv;
 use postgres::Client;
 use openssl::ssl::{SslConnector, SslMethod};
@@ -478,8 +477,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 }
 ```
 
-```rust title="src/update_data.rs"
-use tokio_postgres;
+```rust filename="src/update_data.rs"
 use dotenvy::dotenv;
 use openssl::ssl::{SslConnector, SslMethod};
 use postgres_openssl::MakeTlsConnector;
@@ -540,7 +538,7 @@ cargo run --bin read_data
 
 When the code runs successfully, it produces the following output:
 
-```text title="Output"
+```text filename="Output"
 Connection established
 
 --- Book Library ---
@@ -548,10 +546,10 @@ ID: 2, Title: The Hobbit, Author: J.R.R. Tolkien, Year: 1937, In Stock: true
 ID: 3, Title: 1984, Author: George Orwell, Year: 1949, In Stock: true
 ID: 1, Title: The Catcher in the Rye, Author: J.D. Salinger, Year: 1951, In Stock: true
 ID: 4, Title: Dune, Author: Frank Herbert, Year: 1965, In Stock: true
----------------------
+--------------------
 ```
 
-> You can see that the stock status for 'Dune' has been updated to `True`.
+> You can see that the stock status for 'Dune' has been updated to `true`.
 
 ### Delete data
 
@@ -559,7 +557,7 @@ In your `src` directory, create a file named `delete_data.rs`. This script delet
 
 <CodeTabs labels={["postgres (sync)", "tokio-postgres (async)"]}>
 
-```rust title="src/delete_data.rs"
+```rust filename="src/delete_data.rs"
 use dotenvy::dotenv;
 use postgres::Client;
 use openssl::ssl::{SslConnector, SslMethod};
@@ -592,8 +590,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 }
 ```
 
-```rust title="src/delete_data.rs"
-use tokio_postgres;
+```rust filename="src/delete_data.rs"
 use dotenvy::dotenv;
 use openssl::ssl::{SslConnector, SslMethod};
 use postgres_openssl::MakeTlsConnector;
@@ -654,7 +651,7 @@ cargo run --bin read_data
 
 When the code runs successfully, it produces the following output:
 
-```text title="Output"
+```text filename="Output"
 Connection established
 
 --- Book Library ---

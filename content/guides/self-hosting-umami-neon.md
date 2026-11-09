@@ -1,43 +1,42 @@
 ---
 title: Run your own analytics with Umami, Fly.io and Neon
-subtitle: Self host your Umami analytics on Fly.io and powered by Lakebase Postgres
+subtitle: Self-host Umami analytics on Fly.io, backed by Lakebase Postgres
 author: rishi-raj-jain
 enableTableOfContents: true
 createdAt: '2024-06-05T00:00:00.000Z'
-updatedOn: '2026-07-31T19:05:29.503Z'
+updatedOn: '2026-09-24T17:56:34.189Z'
 ---
 
-In this guide, you will learn how to self host your Umami analytics instance on Fly.io and powered by Neon, the AI-native backend platform for apps and agents whose offering spans a Postgres Database, Auth, Storage, Functions, and an AI Gateway. Here you will use its Postgres Database as Umami's data store.
+In this guide, you'll self-host an Umami analytics instance on Fly.io and use Lakebase Postgres on Neon as Umami's data store. Neon is a complete set of cloud backend primitives built around Lakebase Postgres, for developers, startups, and agent platforms, from Databricks.
 
 ## Prerequisites
 
 To follow along and deploy the application in this guide, you will need the following:
 
-- [flyctl](https://fly.io/docs/getting-started/installing-flyctl/) – A command-line utility that lets you work with the Fly.io platform. You will also need [a fly.io account](https://fly.io/docs/hands-on/sign-up/).
-- [A Neon account](https://console.neon.tech/signup) – The self-hosted Umami analytics instance will connect to a Neon serverless Postgres database 🚀
+- [flyctl](https://fly.io/docs/getting-started/installing-flyctl/): a command-line utility for working with Fly.io. You will also need [a fly.io account](https://fly.io/docs/hands-on/sign-up/).
+- [A Neon account](https://console.neon.tech/signup): the self-hosted Umami instance connects to a Postgres database on Neon.
 
 ## Steps
 
 - [What is Umami?](#what-is-umami)
-- [Provisioning a Postgres database using Neon](#provisioning-a-postgres-database-using-neon)
+- [Provision a Postgres database on Neon](#provision-a-postgres-database-on-neon)
 - [Set up an Umami instance for Fly.io](#set-up-an-umami-instance-for-flyio)
-- [Configure Postgres on Neon as serverless database for self-hosted Umami analytics](#configure-postgres-on-neon-as-serverless-database-for-self-hosted-umami-analytics)
+- [Configure the database connection for Umami](#configure-the-database-connection-for-umami)
 - [Deploy to Fly.io](#deploy-to-flyio)
 
 ## What is Umami?
 
 ![Umami Analytics Preview](/guides/images/self-hosting-umami-neon/umami.jpeg)
 
-Umami is a simple, fast, privacy-focused, open-source analytics solution. Umami is a better alternative to Google Analytics because it gives you total control of your data and does not violate the privacy of your users. <sup>[[1](https://umami.is/docs)]</sup>
+Umami is a simple, fast, privacy-focused, open-source web analytics tool. Unlike Google Analytics, it gives you full control of your data and respects your users' privacy. <sup>[[1](https://umami.is/docs)]</sup>
 
-## Provisioning a Postgres Database using Neon
+## Provision a Postgres database on Neon
 
-Using a serverless Postgres database powered by Neon allows you to scale down to zero when the database is not being used, which saves on compute costs.
-.
+Lakebase Postgres [scales compute to zero](/docs/introduction/scale-to-zero) when the database isn't in use, so you don't pay for compute while your analytics sit idle. Storage is still billed.
 
 To get started, go to the [Neon Console](https://console.neon.tech/app/projects) and enter a name for your project.
 
-You will be presented with a dialog that provides a connection string of your database. Enable the **Connection pooling** toggle for a pooled connection string.
+The Console then shows a dialog with your database's connection string. Enable the **Connection pooling** toggle for a pooled connection string.
 
 ![](/guides/images/self-hosting-umami-neon/1689d44f-4c5d-4b2a-8d13-32407f9c8781.png)
 
@@ -49,16 +48,16 @@ postgres://<user>:<password>@<endpoint_hostname>.neon.tech:<port>/<dbname>
 
 - `user` is the database user.
 - `password` is the database user’s password.
-- `endpoint_hostname` is the host with neon.tech as the [top level domain (TLD)](https://www.cloudflare.com/en-gb/learning/dns/top-level-domain/).
+- `endpoint_hostname` is the compute endpoint's hostname, which ends in `neon.tech`.
 - `port` is the Neon port number. The default port number is 5432.
 - `dbname` is the name of the database. “neondb” is the default database created with each Neon project if you don't specify your own database name.
-- `?sslmode=require&channel_binding=require` are optional query parameters that enforce the [SSL](https://www.cloudflare.com/en-gb/learning/ssl/what-is-ssl/) mode and channel binding for better security when connecting to the Postgres instance.
+- `?sslmode=require&channel_binding=require` are optional query parameters that enforce the [SSL](https://www.cloudflare.com/en-gb/learning/ssl/what-is-ssl/) mode and channel binding for better security when connecting to the database.
 
-Please save the connection string somewhere safe. Later, you will use it to configure the `DATABASE_URL` variable.
+Save the connection string somewhere safe. Later, you will use it to configure the `DATABASE_URL` variable.
 
-## Setup Umami analytics instance for Fly.io
+## Set up an Umami instance for Fly.io
 
-To self host your Umami analytics instance, you'll use [Umami's pre-built Docker container for Postgres](https://github.com/umami-software/umami/pkgs/container/umami/157800125?tag=postgresql-latest). This will allow you to self host an Umami analytics instance on Fly.io with a single `fly.toml` file.
+To self-host your Umami analytics instance, you'll use [Umami's pre-built Docker container for Postgres](https://github.com/umami-software/umami/pkgs/container/umami/157800125?tag=postgresql-latest). With it, you can deploy Umami on Fly.io with a single `fly.toml` file.
 
 In your terminal window, execute the following commands to create a new directory and `cd` to it:
 
@@ -106,7 +105,7 @@ kill_timeout = "5s"
     grace_period = "1s"
 ```
 
-In the `build` property named `image`, you will see that it's pointing to the latest Postgres compatible pre-built Docker image of Umami.
+In the `build` property named `image`, you will see that it points to the latest Postgres-compatible pre-built Docker image of Umami.
 
 Next, you need to create an app on Fly.io using the configuration present in `fly.toml` file. In your terminal window, execute the following command to launch a Fly.io app:
 
@@ -139,7 +138,7 @@ Redis:        <none>                 (not requested)
 Opening https://fly.io/cli/launch/641f1a1d67950614e4e92820ba484310 ...
 ```
 
-flyctl will then automatically take you to a web page, which allows you to visually edit the default settings. For example, you can change the app name to `self-host-umami-neon`, and change the region to say `ams`.
+flyctl then opens a web page where you can edit the default settings. For example, you can change the app name to `self-host-umami-neon`, and change the region to say `ams`.
 
 ![Fly.io Deployment Setting](/guides/images/self-hosting-umami-neon/307247099-acca8350-75c8-4007-b486-42c4102dfe40.png)
 
@@ -168,9 +167,9 @@ This deployment will:
  * create 2 "app" machines
 ```
 
-Once the deployment is ready, you are left with just one step &#8212; to set the `DATABASE_URL` environment variable that we obtained in the previous section. We'll do that in the next section.
+Once the deployment is ready, one step is left: setting the `DATABASE_URL` environment variable to the connection string from the previous section.
 
-## Configure Postgres on Neon as serverless database for self-hosted Umami analytics
+## Configure the database connection for Umami
 
 In your Fly.io [Dashboard > Apps](https://fly.io/dashboard), click on your app name, and you will be taken to the overview of your app on Fly.io.
 
@@ -184,9 +183,9 @@ In the modal, set the name of the secret as `DATABASE_URL`, and set the `Secret`
 
 ![](/guides/images/self-hosting-umami-neon/307263972-75bef039-f4d1-4b7d-a66d-dd312290a6d1.png)
 
-With that done, each deployment of your app on Fly.io will have the database URL pointing to the Lakebase Postgres instance. Let's trigger a deploy to see it all in action.
+Each deployment of your app on Fly.io now gets a database URL that points to your database on Neon. Let's trigger a deploy to see it all in action.
 
-## Deploy To Fly.io
+## Deploy to Fly.io
 
 You can now deploy your app to Fly by running the following command:
 
@@ -194,10 +193,10 @@ You can now deploy your app to Fly by running the following command:
 flyctl deploy
 ```
 
-Once deployed, you will be able to log into your self hosted Umami analytics instance with the default credentials, i.e.; **admin** as the username & **umami** as the password. You will then be able to create new websites and analyze the traffic to those sites.
+Once deployed, log in to your Umami instance with the default credentials: **admin** as the username and **umami** as the password. Change the password right away. You can then add websites and analyze their traffic.
 
 ## Summary
 
-In this guide, you learned how to run your own Umami analytics instance for analytics with Fly.io, powered by Neon postgres as your database.
+You now have a self-hosted Umami instance running on Fly.io, with its data stored in Lakebase Postgres on Neon.
 
 <NeedHelp />

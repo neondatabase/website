@@ -1,9 +1,9 @@
 ---
 title: Connect a Java application to Lakebase Postgres
-subtitle: Learn how to run SQL queries in Neon from Java using the PostgreSQL JDBC
+subtitle: Learn how to run SQL queries in Neon from Java using the Postgres JDBC
   driver
 summary: >-
-  Connect a Java application to Lakebase Postgres using the PostgreSQL JDBC driver
+  Connect a Java application to Lakebase Postgres using the Postgres JDBC driver (pgJDBC)
   with Apache Maven. Covers complete CRUD examples including PreparedStatement
   inserts, batch operations, and transaction control with setAutoCommit,
   commit, and rollback. Also covers dotenv-java for credential management.
@@ -12,13 +12,13 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/quickstart/java
   - /docs/integrations/java
-updatedOn: '2026-07-31T15:27:48.506Z'
+updatedOn: '2026-10-09T10:14:56.146Z'
 ---
 
 <CopyPrompt src="/prompts/java-prompt.md" 
 description="Pre-built prompt for connecting Java applications to Neon"/>
 
-This guide describes how to create a Neon project and connect to it from a Java application using **Java Database Connectivity (JDBC)**, the standard API for interacting with relational databases in Lakebase Postgres.
+This guide describes how to create a Neon project and connect to it from a Java application using **Java Database Connectivity (JDBC)**, Java's standard API for relational databases, and the Postgres JDBC driver ([pgJDBC](https://jdbc.postgresql.org)).
 
 You will learn how to set up a project, connect to your database, and perform basic create, read, update, and delete (CRUD) operations.
 
@@ -64,25 +64,23 @@ Create a project using the Maven `archetype:generate` command. This sets up a st
 
     > Open this directory in your preferred code editor (for example, VS Code, IntelliJ IDEA).
 
-3.  Add the `postgresql` driver and `dotenv-java` libraries as dependencies in your `pom.xml` file. There may be other dependencies already present (e.g, `junit`), so ensure you add these within the `<dependencies>` section.
+3.  Add the `postgresql` driver and `dotenv-java` libraries to your `pom.xml` file. The generated `pom.xml` already has a `<dependencies>` section with JUnit dependencies. Add these two `<dependency>` elements inside that existing section. Don't add a second `<dependencies>` section: Maven fails with `Duplicated tag: 'dependencies'`.
 
-    ```xml title="pom.xml"
-    <dependencies>
-      <dependency>
-        <groupId>org.postgresql</groupId>
-        <artifactId>postgresql</artifactId>
-        <version>42.7.3</version>
-      </dependency>
-      <dependency>
-        <groupId>io.github.cdimascio</groupId>
-        <artifactId>dotenv-java</artifactId>
-        <version>3.2.0</version>
-      </dependency>
-    </dependencies>
+    ```xml filename="pom.xml"
+    <dependency>
+      <groupId>org.postgresql</groupId>
+      <artifactId>postgresql</artifactId>
+      <version>42.7.14</version>
+    </dependency>
+    <dependency>
+      <groupId>io.github.cdimascio</groupId>
+      <artifactId>dotenv-java</artifactId>
+      <version>3.2.0</version>
+    </dependency>
     ```
 
     <Admonition type="note" title="Note">
-    Make sure to add this to the `<dependencies>` section. A common mistake is adding it to `<dependencyManagement>`, which only declares a version but doesn't actually include the library in your build.
+    The generated `pom.xml` also has a `<dependencies>` section inside `<dependencyManagement>`. Don't add the libraries there: `<dependencyManagement>` only declares versions and doesn't include the libraries in your build.
     </Admonition>
 
     Save the file.
@@ -97,20 +95,20 @@ Create a project using the Maven `archetype:generate` command. This sets up a st
 
 ## Store your Neon connection string
 
-Create a file named `.env` in your project's root directory. This file will securely store your database connection string.
+Create a file named `.env` in your project's root directory. This file stores your database connection string. Don't commit it to source control.
 
-1.  In the [Neon Console](https://console.neon.tech), select your project on the **Dashboard**.
-2.  Click **Connect** on your **Project Dashboard** to open the **Connect to your database** modal.
+1.  In the [Neon Console](https://console.neon.tech), open your project.
+2.  Click **Connect** in the Console nav to open the **Connect to your branch** modal.
 3.  Select **Java** as your programming language.
     ![Connection modal](/docs/connect/java_connection_details.png)
 4.  Copy the connection string, which includes your password.
 5.  Create a file named `.env` in your project's root directory and add the connection string to it as shown below:
 
-    ```text title=".env"
+    ```text filename=".env"
     DATABASE_URL="jdbc:postgresql://[neon_hostname]/[dbname]?user=[user]&password=[password]&sslmode=require&channelBinding=require"
     ```
 
-    > Replace `[user]`, `[password]`, `[neon_hostname]`, and `[dbname]` with your actual database credentials.
+    > Replace `[user]`, `[password]`, `[neon_hostname]`, and `[dbname]` with your actual database credentials. If you start from a `postgresql://` connection string, move the user and password into the `user` and `password` parameters, add the `jdbc:` prefix, and write `channel_binding=require` as `channelBinding=require`.
 
 ## Examples
 
@@ -120,7 +118,7 @@ This section provides code examples for performing CRUD operations. The examples
 
 Create a file named `CreateTable.java`. This class connects to your database, creates a table, and inserts data.
 
-```java title="src/main/java/com/neon/quickstart/CreateTable.java"
+```java filename="src/main/java/com/neon/quickstart/CreateTable.java"
 package com.neon.quickstart;
 
 import io.github.cdimascio.dotenv.Dotenv;
@@ -210,7 +208,7 @@ mvn exec:java -Dexec.mainClass="com.neon.quickstart.CreateTable"
 
 When the code runs successfully, it produces the following output:
 
-```text title="Output"
+```text filename="Output"
 Connection established
 Finished dropping table (if it existed).
 Finished creating table.
@@ -222,7 +220,7 @@ Inserted 3 rows of data.
 
 Create a file named `ReadData.java`. This class fetches all rows from the `books` table and prints them.
 
-```java title="src/main/java/com/neon/quickstart/ReadData.java"
+```java filename="src/main/java/com/neon/quickstart/ReadData.java"
 package com.neon.quickstart;
 
 import io.github.cdimascio.dotenv.Dotenv;
@@ -268,7 +266,7 @@ mvn exec:java -Dexec.mainClass="com.neon.quickstart.ReadData"
 
 When the read logic runs, it produces the following output:
 
-```text title="Output"
+```text filename="Output"
 Connection established
 
 --- Book Library ---
@@ -281,9 +279,9 @@ ID: 4, Title: Dune, Author: Frank Herbert, Year: 1965, In Stock: false
 
 ### Update data
 
-Create a file named `UpdateData.java` to update the stock status of 'Dune' to `True`.
+Create a file named `UpdateData.java` to update the stock status of 'Dune' to `true`.
 
-```java title="src/main/java/com/neon/quickstart/UpdateData.java"
+```java filename="src/main/java/com/neon/quickstart/UpdateData.java"
 package com.neon.quickstart;
 
 import io.github.cdimascio.dotenv.Dotenv;
@@ -332,7 +330,9 @@ mvn exec:java -Dexec.mainClass="com.neon.quickstart.ReadData"
 
 The updated output will be:
 
-```text title="Output"
+```text filename="Output"
+Connection established
+
 --- Book Library ---
 ID: 2, Title: The Hobbit, Author: J.R.R. Tolkien, Year: 1937, In Stock: true
 ID: 3, Title: 1984, Author: George Orwell, Year: 1949, In Stock: true
@@ -347,7 +347,7 @@ ID: 4, Title: Dune, Author: Frank Herbert, Year: 1965, In Stock: true
 
 Create a file named `DeleteData.java` to delete the book '1984' from the table.
 
-```java title="src/main/java/com/neon/quickstart/DeleteData.java"
+```java filename="src/main/java/com/neon/quickstart/DeleteData.java"
 package com.neon.quickstart;
 
 import io.github.cdimascio.dotenv.Dotenv;
@@ -395,7 +395,9 @@ mvn exec:java -Dexec.mainClass="com.neon.quickstart.ReadData"
 
 The final output will be:
 
-```text title="Output"
+```text filename="Output"
+Connection established
+
 --- Book Library ---
 ID: 2, Title: The Hobbit, Author: J.R.R. Tolkien, Year: 1937, In Stock: true
 ID: 1, Title: The Catcher in the Rye, Author: J.D. Salinger, Year: 1951, In Stock: true
@@ -409,7 +411,7 @@ ID: 4, Title: Dune, Author: Frank Herbert, Year: 1965, In Stock: true
 
 The examples above execute each operation independently. For production code where multiple operations must succeed or fail together, wrap them in a transaction. Use `setAutoCommit(false)` to start a transaction, `commit()` on success, and `rollback()` in the catch block on failure.
 
-```java title="src/main/java/com/neon/quickstart/TransactionExample.java"
+```java filename="src/main/java/com/neon/quickstart/TransactionExample.java"
 package com.neon.quickstart;
 
 import io.github.cdimascio.dotenv.Dotenv;
@@ -479,6 +481,16 @@ Run with:
 mvn exec:java -Dexec.mainClass="com.neon.quickstart.TransactionExample"
 ```
 
+When the code runs successfully, it produces the following output:
+
+```text filename="Output"
+Inserted book.
+Updated stock status.
+Transaction committed successfully.
+```
+
+Run `ReadData` again to see the new row: `Brave New World` by Aldous Huxley, with `In Stock: false`.
+
 </Steps>
 
 <details>
@@ -492,22 +504,22 @@ mvn exec:java -Dexec.mainClass="com.neon.quickstart.TransactionExample"
 
 </details>
 
-## Next steps: Using an ORM or framework
+## Use an ORM or framework
 
-While this guide demonstrates how to connect to Neon using raw SQL queries, for more advanced and maintainable data interactions in your Java applications, consider using an Object-Relational Mapping (ORM) framework. ORMs not only let you work with data as objects but also help manage schema changes through automated migrations keeping your database structure in sync with your application models.
+This guide uses raw SQL through JDBC. An Object-Relational Mapping (ORM) framework such as Hibernate lets you work with rows as Java objects, and migration tools keep your schema in sync with your models.
 
-Explore the following resources to learn how to integrate ORMs with Neon:
+To use an ORM or framework with Neon, see:
 
 - [Database Schema Changes with Hibernate, Spring Boot, and Neon](/guides/spring-boot-hibernate)
 
-## Next steps: Neon backend services
+## Neon backend services
 
 - [Add Object Storage](/docs/storage/overview): S3-compatible file storage that branches with your database
 - [Call an LLM with AI Gateway](/docs/ai-gateway/overview): Access foundation models from Anthropic, OpenAI, Google, and more with one credential
 
 ## Resources
 
-- [PostgreSQL JDBC Driver Documentation](https://jdbc.postgresql.org/documentation/use/)
+- [pgJDBC documentation](https://jdbc.postgresql.org/documentation/use/)
 - [Apache Maven Quickstart](https://maven.apache.org/guides/getting-started/maven-in-five-minutes.html)
 - [Database Migrations in Spring Boot with Flyway and Neon](/guides/spring-boot-flyway)
 

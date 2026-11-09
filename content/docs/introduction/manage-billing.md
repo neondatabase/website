@@ -12,7 +12,9 @@ summary: >-
   manually because Stripe does not support e-Mandate recurring payments in
   India.
 enableTableOfContents: true
-updatedOn: '2026-06-10T15:22:41.769Z'
+redirectFrom:
+  - /docs/manage/billing
+updatedOn: '2026-10-27T20:26:38.639Z'
 ---
 
 <InfoBlock>
@@ -41,7 +43,7 @@ You can view and manage billing from the **Billing** page in the Neon Console.
 To access your **Billing** page:
 
 1. Navigate to the Neon Console.
-1. Select your organization from the breadcrumb menu at the top-left of the console.
+1. Select your organization from the profile menu in the top-right of the console.
 1. Select **Billing** from the menu to view the charges to date.
 
 The **Billing** page has a sidebar with **Billing summary** and **Payment info**. **Billing summary** shows **This month's summary**: your billing period, plan details (including **Change plan**), and **Charges to date**. **Payment info** shows how you pay, your billing email, and company or address details (see [Update your payment method](#update-your-payment-method) and [Update billing details](#update-billing-details-company-and-address)).
@@ -55,7 +57,7 @@ The **Payment info** view explains that **charges are applied to your card on th
 To update your payment method:
 
 1. Navigate to the Neon Console.
-1. Select your organization from the breadcrumb menu at the top-left of the console.
+1. Select your organization from the profile menu in the top-right of the console.
 1. Select **Billing** from the menu.
 1. In the sidebar, select **Payment info**.
 1. In the **Payment method** card, select **Edit**.
@@ -77,7 +79,7 @@ Neon’s billing system uses **Stripe Checkout**, which does not currently suppo
 To update your billing email:
 
 1. Navigate to the Neon Console.
-1. Select your organization from the breadcrumb menu at the top-left of the console.
+1. Select your organization from the profile menu in the top-right of the console.
 1. Select **Billing** from the menu.
 1. In the sidebar, select **Payment info**.
 1. In the **Billing email** card, select **Edit**.
@@ -89,12 +91,16 @@ If you are unable to update your billing email, please [contact support](/docs/i
 To update the company name, address, postal or ZIP code, country, or VAT or tax ID shown on your account:
 
 1. Navigate to the Neon Console.
-1. Select your organization from the breadcrumb menu at the top-left of the console.
+1. Select your organization from the profile menu in the top-right of the console.
 1. Select **Billing** from the menu.
 1. In the sidebar, select **Payment info**.
 1. In the **Billing Info** card, select **Edit**.
 
 If you are unable to update this information, please [contact support](/docs/introduction/support).
+
+<Admonition type="note">
+Updating your billing details (company name, address, or tax or VAT ID) applies to invoices generated after the change. Invoices that were already issued keep the details they had when they were created.
+</Admonition>
 
 ## Invoices
 
@@ -107,7 +113,7 @@ Invoices are charged automatically to your payment method on the first day of th
 To pay an invoice manually:
 
 1. Navigate to the Neon Console.
-1. Select your organization from the breadcrumb menu at the top-left of the console.
+1. Select your organization from the profile menu in the top-right of the console.
 1. Select **Billing** from the menu.
 1. Select **View/Pay invoices**.
 1. On an unpaid invoice, select **Pay invoice** to open its secure payment page and complete the payment.
@@ -121,7 +127,7 @@ To pay an invoice manually:
 To download an invoice:
 
 1. Navigate to the Neon Console.
-1. Select your organization from the breadcrumb menu at the top-left of the console.
+1. Select your organization from the profile menu in the top-right of the console.
 1. Select **Billing** from the menu.
 1. Select **View/Pay invoices**.
 1. Find the invoice you want and open its actions menu, then select **Download**.
@@ -137,7 +143,7 @@ If you have a question or problem with billing or an invoice, you can contact th
 #### From the Billing page header
 
 1. Navigate to the Neon Console.
-1. Select your organization from the breadcrumb menu at the top-left of the console.
+1. Select your organization from the profile menu in the top-right of the console.
 1. Select **Billing** from the menu.
 1. Select **Request billing support**.
 1. In the form, choose the **related invoice** (if you have invoices) and describe how we can help, then submit.
@@ -151,6 +157,12 @@ If you have no invoices yet, **Request billing support** may appear disabled wit
 
 You can still use **Download** from the invoice menu to save a PDF. For other support paths (for example **Launch** plan limits on ticket topics), see [Support](/docs/introduction/support).
 
+#### What billing support can and can't help with
+
+Billing support can help with questions about a specific invoice or charge, refunds and credits, and questions about your plan or subscription.
+
+Updating your billing details applies to new invoices only. Invoices that were already issued keep the company name, address, and tax or VAT ID they had when they were created, and Neon does not reissue or re-address a past invoice. Update your details on the Billing page so your future invoices reflect them.
+
 ## Change your plan
 
 <Admonition type="note" title="Restart required for new limits">
@@ -160,11 +172,11 @@ If you're upgrading your plan, your compute will only pick up the new plan limit
 To upgrade or downgrade your plan:
 
 1. Navigate to the Neon Console.
-1. Select your organization from the breadcrumb menu at the top-left of the console.
+1. Select your organization from the profile menu in the top-right of the console.
 1. Select **Billing** from the menu.
 1. Select **Change plan**.
 
-Changing your plan to one with lower usage allowances may affect the performance of your applications. To compare plan allowances, see [Neon plans](/docs/introduction/plans#neon-plans).
+Changing your plan to one with lower usage allowances may affect the performance of your applications. To compare plan allowances, see [Neon plans](/docs/introduction/plans#plan-overview).
 
 If you are downgrading your plan, you will be required to remove any projects, branches, or data that exceed your new plan allowances.
 

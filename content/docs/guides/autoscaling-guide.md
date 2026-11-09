@@ -9,7 +9,7 @@ summary: >-
   neon_utils extension exposes a num_cpus() function for observing live CPU
   allocation.
 enableTableOfContents: true
-updatedOn: '2026-08-18T10:29:02.410Z'
+updatedOn: '2026-10-09T10:14:56.146Z'
 ---
 
 <InfoBlock>
@@ -36,7 +36,7 @@ You can edit an individual compute to alter the compute configuration, which inc
 
 To edit a compute:
 
-1. In the Neon Console, select your branch from the **BRANCH** selector.
+1. In the Neon Console, select your branch from the project/branch menu at the top of the sidebar.
 1. Under **Postgres database**, select **Computes**.
 1. Identify the compute you want to configure and click **Edit**.
    ![Edit compute menu](/docs/guides/autoscaling_edit.png)
@@ -64,9 +64,9 @@ Changing your autoscaling default settings does not alter the autoscaling config
 
 To configure autoscaling defaults:
 
-1. Navigate to your Project Dashboard and select **Settings** from the sidebar.
-2. Select **Compute**.
-3. Select **Change** to open the **Change default compute settings** modal.
+1. In your project, select **Settings** from the sidebar.
+2. Select **Postgres**.
+3. Under **Compute defaults**, select **Modify defaults** to open the compute settings modal.
 4. Use the slider to specify a minimum and maximum compute size and **Save** your changes.
 
 The next time you create a compute, these settings will be applied to it.
@@ -83,7 +83,7 @@ The following table outlines the initial default autoscaling settings for newly 
 
 ## Monitor autoscaling
 
-From the Neon Console, you can view how your compute and RAM usage have scaled for the past 24 hours. On the **Project Dashboard** page, navigate down the page to the **Monitoring** section.
+From the Neon Console, you can view how your compute and RAM usage have scaled for the past 24 hours. Select **Monitoring** in the sidebar and view the **Metrics** tab.
 
 Some key points about this Autoscaling graph:
 

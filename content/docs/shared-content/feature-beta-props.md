@@ -1,7 +1,7 @@
 ---
-updatedOn: '2025-12-10T22:18:02.772Z'
+updatedOn: '2026-10-14T11:21:37.306Z'
 ---
 
 <Admonition type="note" title="Beta">
-The **{feature_name}** is in Beta. Share your feedback on [Discord](https://discord.gg/92vNTzKDGp) or via the [Neon Console](https://console.neon.tech/app/projects?modal=feedback).
+**{feature_name}** is in beta. Share your feedback on [Discord](https://neon.com/discord) or via the&nbsp;[Neon&nbsp;Console](https://console.neon.tech/app/projects?modal=feedback).
 </Admonition>

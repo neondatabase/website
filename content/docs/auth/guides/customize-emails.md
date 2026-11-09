@@ -11,10 +11,8 @@ summary: >-
   templates are not yet available; webhook-based delivery is the current
   customization path.
 enableTableOfContents: true
-updatedOn: '2026-07-15T00:08:00.682Z'
+updatedOn: '2026-09-16T15:38:57.808Z'
 ---
-
-<FeatureBetaProps feature_name="Managed Better Auth" />
 
 Managed Better Auth sends verification codes, magic links, and password reset emails using its built-in email provider. By default, emails use shared Neon branding and your Neon project name as the main header. To make emails recognizable to users, update the Application Name in your [Auth settings](/docs/auth/production-checklist#application-name) to match your app’s public-facing name.
 

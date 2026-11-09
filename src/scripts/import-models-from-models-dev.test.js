@@ -17,25 +17,60 @@ afterEach(() => {
 });
 
 describe('import-models-from-models-dev', () => {
-  // The committed catalog already has provider: xai. That does not prove
-  // providerFor() maps grok; deleting the prefix rule still leaves data.json
-  // and model-rows.test.js green.
-  it('assigns grok ids to xai even when the upstream entry names another maker', () => {
+  // The committed catalog already has lab: xai. That does not prove labFor()
+  // maps grok; deleting the prefix rule still leaves data.json and
+  // model-rows.test.js green.
+  it('assigns grok ids to the xai lab and derives the provider', () => {
     const from = path.join(os.tmpdir(), `import-grok-${process.pid}.json`);
     temps.push(from);
     const grok = catalog.neon.models['grok-4-6'];
     fs.writeFileSync(
       from,
       JSON.stringify({
-        neon: { models: { 'grok-4-6': { ...grok, provider: 'wrong-upstream-host' } } },
+        neon: {
+          models: { 'grok-4-6': { ...grok, lab: 'wrong-lab', provider: { npm: '@ai-sdk/xai' } } },
+        },
       })
     );
 
-    const stdout = execFileSync(process.execPath, [SCRIPT, '--from', from, '--models', 'grok-4-6', '--stdout'], {
-      encoding: 'utf8',
-    });
+    const stdout = execFileSync(
+      process.execPath,
+      [SCRIPT, '--from', from, '--models', 'grok-4-6', '--stdout'],
+      {
+        encoding: 'utf8',
+      }
+    );
     const merged = JSON.parse(stdout);
 
-    expect(merged.neon.models['grok-4-6'].provider).toBe('xai');
+    expect(merged.neon.models['grok-4-6'].lab).toBe('xai');
+    expect(merged.neon.models['grok-4-6'].provider).toBe('databricks');
+  });
+
+  it('keeps the catalog released flag on re-import and starts a new model unreleased', () => {
+    const from = path.join(os.tmpdir(), `import-released-${process.pid}.json`);
+    temps.push(from);
+    const { released: _released, ...grok } = catalog.neon.models['grok-4-6'];
+    fs.writeFileSync(
+      from,
+      JSON.stringify({
+        neon: {
+          models: {
+            'grok-4-6': { ...grok, released: false },
+            'grok-new': { ...grok, id: 'grok-new', name: 'Grok New' },
+          },
+        },
+      })
+    );
+
+    const stdout = execFileSync(
+      process.execPath,
+      [SCRIPT, '--from', from, '--models', 'grok-4-6,grok-new', '--stdout'],
+      { encoding: 'utf8', stdio: ['ignore', 'pipe', 'ignore'] }
+    );
+    const { models } = JSON.parse(stdout).neon;
+
+    expect(models['grok-4-6'].released).toBe(true);
+    expect(models['grok-new'].released).toBe(false);
+    expect(models['grok-new'].provider).toBe('databricks');
   });
 });

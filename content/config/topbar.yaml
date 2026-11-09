@@ -1,4 +1,4 @@
-text: 'We ran the same workload through 42 models via AI Gateway and compared costs'
+text: 'Lakebase Postgres is built on object storage, but 99.99999% of reads are served from high-performance local caches'
 link:
-  url: 'https://neon.com/blog/comparing-token-economics-across-42-ai-models'
+  url: 'https://neon.com/blog/lakebase-postgres-reads-never-touch-object-storage'
   target: '_blank'

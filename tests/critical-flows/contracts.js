@@ -1,6 +1,6 @@
 const DESTINATIONS = {
   billing: 'https://console.neon.tech/app/billing#plans',
-  docs: '/docs/introduction',
+  docs: '/docs',
   login: 'https://console.neon.tech/login',
   signup: 'https://console.neon.tech/signup',
   startupsApply: 'https://sites.google.com/databricks.com/startup-program-apply',
@@ -139,7 +139,7 @@ const LEAD_FORM_CONTRACTS = [
       message: 'Critical user flow monitoring',
     },
     selects: {
-      companySize: '0_1',
+      companySize: '0-1 Employees',
       reasonForContact: 'Demo/POC',
     },
     expectedEvents: [

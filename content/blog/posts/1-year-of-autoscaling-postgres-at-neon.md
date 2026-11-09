@@ -75,7 +75,7 @@ For more background information, [read our original Scaling Serverless Postgres 
 
 Here’s a quick recap of some challenges we ran into. Many of these engineering challenges warrant an article of their own — and this doesn’t even include the kernel panics or I/O throttling we worked to resolve in our quest for stability!
 
-Let us know through [Discord](https://neon.tech/discord) or [X](https://x.com/neondatabase) if you’d like to hear more about these.
+Let us know through [Discord](https://neon.com/discord) or [X](https://x.com/neondatabase) if you’d like to hear more about these.
 
 ### Cgroup Signals and Memory Scaling
 
@@ -127,7 +127,7 @@ We’re in the process of rolling this out over the next couple of weeks — inc
 
 Building a truly cloud-native serverless Postgres platform is challenging, but we’ve risen to the challenge at Neon. Our engineering team has been hard at work running Postgres at scale and enhancing it with cutting-edge features. Autoscaling – alongside branching, point-in-time restore, and time travel queries – are just the start of the unique features made possible by Neon’s separation of storage and compute.
 
-Are you using Neon’s autoscaling? We’d love your feedback and to hear about what you’re building with Neon. Follow us on [X](https://twitter.com/neondatabase), join us on [Discord](https://neon.tech/discord), and let us know how we can help you build the next generation of applications.
+Are you using Neon’s autoscaling? We’d love your feedback and to hear about what you’re building with Neon. Follow us on [X](https://twitter.com/neondatabase), join us on [Discord](https://neon.com/discord), and let us know how we can help you build the next generation of applications.
 
 ---
 

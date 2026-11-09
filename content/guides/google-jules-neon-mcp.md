@@ -1,32 +1,30 @@
 ---
-title: 'From Prompt to PR: Giving AI agents their own database with Google Jules and Neon'
-subtitle: 'Learn how to use Google Jules and the Neon MCP server to spin up isolated database branches, enabling AI agents to safely build and test full-stack features'
+title: 'From prompt to PR: Giving AI agents their own database with Google Jules and Neon'
+subtitle: 'Use Google Jules and the Neon MCP server to create isolated database branches so AI agents can build and test full-stack features without touching production'
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2026-02-26T00:00:00.000Z'
-updatedOn: '2026-07-15T00:08:00.682Z'
+updatedOn: '2026-09-24T17:56:34.189Z'
 ---
 
-AI coding agents are increasingly capable of implementing multi-step changes across an application. However, full-stack features often require updates to stateful infrastructure such as databases.
-
-Database schema changes introduce additional complexity. Without an isolated environment, agents may rely on assumptions about the schema, require manual local setup, or apply migrations directly to shared environments. These approaches slow development and increase risk.
+AI coding agents can implement multi-step changes across an application, but full-stack features often also require database schema changes. Without an isolated environment, agents may rely on assumptions about the schema, require manual local setup, or apply migrations directly to shared environments. These approaches slow development and increase risk.
 
 A safer approach is to provide an isolated, reproducible database environment where the agent can apply schema changes, run migrations, and validate behavior without affecting staging or production systems.
 
-This guide demonstrates how to create this workflow using [Google Jules](https://jules.google) (Google’s asynchronous coding agent) and the [Neon MCP Server](/docs/ai/neon-mcp-server). The result is an isolated sandbox for each feature, enabling safe, end-to-end implementation and testing.
+This guide demonstrates how to create this workflow using [Google Jules](https://jules.google) (Google’s asynchronous coding agent) and the [Neon MCP server](/docs/ai/neon-mcp-server), with an isolated database branch for each feature.
 
-With Neon’s instant [Database Branching](/branching), Jules can quickly spin up isolated, production-like environments on demand. It can branch databases, run migrations, adjust RLS policies all safely, without ever touching your production data. This means you can hand Jules a feature request, and it will autonomously build, test, and open a PR with zero risk to your live environment.
+With Neon's instant [database branching](/branching), Jules can create isolated, production-like environments on demand. It can branch databases, run migrations, and adjust RLS policies without touching your production data. You hand Jules a feature request, and it builds, tests, and opens a PR while your live database stays untouched.
 
-To demonstrate, we’ll walk through a real example: asking Jules to implement a feature request in an example app that requires updating the database schema. You’ll see how Jules uses the Neon MCP server to create a new database branch and run the necessary migrations.
+This guide walks through a real example: asking Jules to implement a feature request in an example app that requires updating the database schema. You’ll see how Jules uses the Neon MCP server to create a new database branch and run the necessary migrations.
 
 ## Prerequisites
 
-Before you begin, ensure you have the following:
+Before you begin, make sure you have the following:
 
-- **Google Jules account:** An active Google Jules account linked to your GitHub workspace. You can create one at [jules.google](https://jules.google).
-- **Neon account and project:** A Neon account with at least one active project. Sign up for a free [Neon account](https://console.neon.tech/signup) if you don't have one.
-- **Application repository using Neon:** A GitHub repository containing an application that uses your Neon project as its database. This is required because Google Jules integrates with your codebase through GitHub and needs access to your code to implement changes. Jules analyzes the repository and opens Pull requests directly. In this guide, we’ll use an example app called **SnippetHub**, but you can follow along with any of your own Neon-backed projects.
-- **Vercel account (optional):** Required for [automatic preview deployments](#optional-enable-automatic-preview-deployments). This allows you to instantly verify changes end-to-end in a live, production-like environment, providing zero-risk verification of Jules' work before merging.
+- **Google Jules account:** An active Google Jules account linked to your GitHub account. You can create one at [jules.google](https://jules.google).
+- **Neon account and project:** A Neon account with at least one active project. [Sign up](https://console.neon.tech/signup) if you don't have one. The Free plan works for this guide.
+- **Application repository using Neon:** A GitHub repository containing an application that uses your Neon project as its database. Google Jules works on your codebase through GitHub: it analyzes the repository and opens pull requests directly. In this guide, we’ll use an example app called **SnippetHub**, but you can follow along with any of your own Neon-backed projects.
+- **Vercel account (optional):** Required for [automatic preview deployments](#optional-enable-automatic-preview-deployments). Preview deployments let you verify Jules' work end to end in a live, production-like environment before merging.
 
 Use the following example repository if you want to follow along with the SnippetHub app.
 
@@ -36,14 +34,14 @@ Use the following example repository if you want to follow along with the Snippe
 
 <Steps>
 
-## Get your Neon API Key
+## Get your Neon API key
 
-To allow Google Jules to interact with your Neon database, you'll need to generate a Neon API Key.
+To allow Google Jules to interact with your Neon database, you'll need to generate a Neon API key.
 
-1. Navigate to your Neon organization settings and click on the **API Keys** tab.
-2. Click **Create new API Key** and give it a name (e.g., "Google Jules Integration").
+1. In the Neon Console, switch to your organization and go to **Settings** > **API keys**.
+2. Click **Create new** and give the key a name (e.g., "Google Jules Integration").
    ![Create Neon API Key](/docs/manage/org_api_keys.png)
-   > Choose org-wide API keys to ensure Jules can access all projects and branches.
+   > Choose an organization-wide API key so Jules can access all projects and branches.
 3. Copy the generated API key to your clipboard. You'll need this in the next step to connect Jules to the Neon MCP server.
 
 ## Connect Jules to your GitHub repository
@@ -56,31 +54,31 @@ Before Jules can make changes to your codebase, you’ll need to connect it to y
 
 ## Connect Jules to the Neon MCP server
 
-Google Jules operates autonomously in the cloud. To give it the ability to interact with Neon, you need to connect it to the Neon MCP server using the API key you just generated.
+Google Jules runs autonomously in the cloud. To let it interact with Neon, you need to connect it to the Neon MCP server using the API key you just generated.
 
 1. Navigate to **Settings -> MCP** in the Jules dashboard.
 2. Locate **Neon** in the list of available MCP integrations and click **Connect**.
    ![Jules MCP Integrations](/docs/guides/jules-mcp-integrations.png)
-3. Paste your Neon API Key into the configuration field and click **Connect**.
+3. Paste your Neon API key into the configuration field and click **Connect**.
 
-Jules is now connected to the Neon MCP server. This means that whenever you ask Jules to perform database operations, it can use the MCP server to create branches, run migrations, and manage database state without any manual setup on your part.
+Jules is now connected to the Neon MCP server. When you ask Jules to perform database operations, it uses the MCP server to create branches, run migrations, and manage database state without manual setup on your part.
 
 ## (Optional) Enable automatic preview deployments
 
-For a complete end-to-end experience, you can configure Vercel to automatically deploy the changes Jules commits. By combining Vercel with the [Neon Vercel Integration](/docs/guides/vercel-managed-integration), every PR opened by Jules will get a live preview URL backed by its own isolated database branch.
+You can configure Vercel to deploy the changes Jules commits. With the [Neon Vercel integration](/docs/guides/vercel-managed-integration), every PR opened by Jules will get a live preview URL backed by its own isolated database branch.
 
-This allows you to verify Jules' work in a real browser environment testing the full stack from UI to database without touching production data or setting up a local environment.
+You can then test Jules' work in a browser, across the full stack from UI to database, without touching production data or setting up a local environment.
 
 1. **Deploy to Vercel:** Connect your GitHub repository to a new Vercel project.
-2. **Install the Neon Integration:** Go to the [Neon Vercel Integration](https://vercel.com/integrations/neon) page and click **Add Integration**.
-3. **Enable Preview Branching:** During setup, ensure you select **Create a branch for every preview deployment**.
+2. **Install the Neon integration:** Go to the [Neon Vercel integration](https://vercel.com/integrations/neon) page and click **Add Integration**.
+3. **Enable preview branching:** When you connect the database to your Vercel project, open **Advanced Options** > **Deployments Configuration** and enable **Preview**.
 
-   Follow [Neon Vercel Integration](/docs/guides/vercel-managed-integration) for detailed instructions on configuring the integration.
+   See [Neon Vercel integration](/docs/guides/vercel-managed-integration) for detailed instructions on configuring the integration.
    ![Vercel deployment configuration](/docs/guides/vercel_native_deployments_configuration.png)
 
-### Entire workflow in action
+### Workflow overview
 
-After setup is complete, the workflow for implementing a feature with an isolated database branch is as follows:
+After setup is complete, implementing a feature with an isolated database branch works like this:
 
 1. **Request a feature**  
    You describe a new feature to Jules in natural language. For example: “Add a share button that generates a public link.”
@@ -91,7 +89,7 @@ After setup is complete, the workflow for implementing a feature with an isolate
 3. **Implement and validate changes**  
    Code changes and database migrations are applied to the isolated branch and verified.
 
-4. **Open a Pull request**  
+4. **Open a pull request**  
    Jules opens a PR in the GitHub repository with the updated code.
 
 5. **Deploy a preview**  
@@ -104,9 +102,9 @@ After setup is complete, the workflow for implementing a feature with an isolate
 
 Navigate to the Jules dashboard and select your connected repository. In the chat interface, you can now describe the feature you want to implement.
 
-The demo app **SnippetHub** is a simple tool for saving and organizing code snippets. Each snippet includes a title, description, code content, and is tied to a user. Currently, users can create, edit, and delete snippets, but all snippets remain private visible only to their creator.
+The demo app **SnippetHub** is a tool for saving and organizing code snippets. Each snippet has a title, description, and code content, and belongs to a user. Users can create, edit, and delete snippets, but all snippets are private and visible only to their creator.
 
-We now want to add a **"Share Snippet"** feature. This will let users make a snippet public, generating a shareable link that anyone can view without authentication.
+The goal is to add a **"Share Snippet"** feature that lets users make a snippet public with a shareable link anyone can view without authentication.
 
 In the Jules chat interface, provide the following prompt:
 
@@ -118,20 +116,20 @@ Use the Neon project named `code-snippets`. Create and use a separate database b
 
 ![Jules Feature Prompt](/docs/guides/jules-feature-prompt.png)
 
-Click on the Send icon to assign the task to Jules.
+Click the Send icon to assign the task to Jules.
 
 Notice that no implementation details were given in the request. The feature was described at a product level, along with the instruction to use a separate database branch. The project name was provided so Jules knows which Neon project to interact with.
 
 Based on this input, Jules determines the required application and database changes, creates a new Neon branch using the MCP server, and implements the feature end-to-end within an isolated environment.
 
-## Watch Jules work autonomously
+## Watch Jules work
 
-Once dispatched, Jules operates in the background. If you open the Jules execution logs, you can see the tool calls and actions it takes in real-time. Here’s a breakdown of the key steps Jules takes to implement the feature:
+Once dispatched, Jules works in the background. If you open the Jules execution logs, you can see the tool calls and actions it takes in real time. These are the key steps Jules takes to implement the feature:
 
 ![Google Jules execution logs](/docs/guides/jules-execution-logs.png)
 
 1. **Branch creation**  
-   Jules creates a new branch in the Neon database for the `code-snippets` project using the MCP server. This branch is an exact copy of production but is completely isolated, allowing Jules to make any changes without risk.
+   Jules creates a new branch in the Neon database for the `code-snippets` project using the MCP server. This branch is a copy of production that is isolated from it, so Jules' changes don't affect production.
 
 2. **Code analysis**
    Jules analyzes the existing codebase to understand how snippets are currently stored, accessed, and rendered. It identifies the relevant database tables, API routes, and frontend components that will need to be modified.
@@ -140,13 +138,13 @@ Once dispatched, Jules operates in the background. If you open the Jules executi
    Jules generates and applies the necessary database migrations to support the new "Share Snippet" feature.
 
 4. **Implement feature**
-   Jules updates the backend API routes to handle sharing logic, creates new frontend components for the share button and public snippet view, and ensures that the feature is fully functional within the isolated branch.
+   Jules updates the backend API routes to handle sharing logic, creates new frontend components for the share button and public snippet view, and checks that the feature works against the isolated branch.
 
 5. **Testing**
-   Jules runs tests if any and verifies that the feature works as expected against the branched database.
+   Jules runs any existing tests and verifies that the feature works as expected against the branched database.
 
 6. **Open PR**
-   Once implementation and testing are complete, Jules commits the changes and opens a Pull Request in the GitHub repository with a description of the changes made.
+   Once implementation and testing are complete, Jules commits the changes and opens a pull request in the GitHub repository with a description of the changes made.
 
    ![PR opened by Jules](/docs/guides/jules-opened-pr.png)
 
@@ -157,13 +155,13 @@ Once dispatched, Jules operates in the background. If you open the Jules executi
 
 ## Review the PR and preview the changes
 
-If Vercel preview deployments are enabled, the Pull request includes a preview URL. Open this URL to view the changes in a production-like environment. The preview deployment is connected to an isolated database branch, allowing full end-to-end testing without affecting production data.
+If Vercel preview deployments are enabled, the pull request includes a preview URL. Open this URL to view the changes in a production-like environment. The preview deployment is connected to an isolated database branch, so you can test end to end without affecting production data.
 
 You can also review the code changes in the PR.
 
 ### Request updates
 
-If you find any issues or want to request changes, you can simply comment on the PR. Jules will receive the feedback and can make the necessary adjustments autonomously.
+If you find issues or want changes, comment on the PR. Jules picks up the feedback and makes the adjustments.
 
 Example:
 
@@ -171,21 +169,19 @@ Example:
 @jules Please add a confirmation modal before generating the public link.
 ```
 
-Jules will then update the code, run any necessary migrations on the branched database, and update the PR with the new changes. The preview deployment will also automatically update to reflect the latest code.
+Jules will then update the code, run any necessary migrations on the branched database, and update the PR with the new changes. The preview deployment also updates to reflect the latest code.
 
 </Steps>
 
 ## Conclusion
 
-As AI agents transition into fully autonomous software engineers, they require infrastructure that matches their speed and agility.
-
-By combining **Google Jules** with **Neon's branchable database**, you eliminate the friction of stateful AI development. Every feature requested gets a clean, production-like database. Every PR acts as a safe sandbox for testing and iteration. This means you can use AI agents to build complex, data-driven features without worrying about breaking production or managing local environments.
+You connected **Google Jules** to Neon through the MCP server so each feature request gets its own production-like database branch, and each PR gets a preview deployment backed by its own branch. Try it on your own repository with a feature that needs a schema change.
 
 ## Resources
 
-- [Neon Database Branching](/branching)
-- [Google Jules Documentation](https://jules.google/docs/)
-- [Branching Authentication with Managed Better Auth](/docs/auth/branching-authentication)
+- [Neon database branching](/branching)
+- [Google Jules documentation](https://jules.google/docs/)
+- [Branching authentication with Managed Better Auth](/docs/auth/branching-authentication)
 - [Neon MCP Server](/docs/ai/neon-mcp-server)
 - [Integrating Neon with Vercel](/docs/guides/vercel-overview)
 

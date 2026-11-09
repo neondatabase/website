@@ -1,15 +1,15 @@
 ---
-title: Building a JSON API with TypeScript, Postgres, and Azure Functions
-subtitle: Learn how to use TypeScript, Lakebase Postgres Databases, and Azure Functions to build a fast, type-safe API
+title: Build a JSON API with TypeScript, Postgres, and Azure Functions
+subtitle: Learn how to use TypeScript, Lakebase Postgres, and Azure Functions to build a fast, type-safe API
 author: jess-chadwick
 enableTableOfContents: true
 createdAt: '2025-02-01T00:00:00.000Z'
-updatedOn: '2026-07-31T19:05:29.503Z'
+updatedOn: '2026-09-24T17:56:34.189Z'
 ---
 
 In this post I will show you how to build a simple (but realistic) Recipes API using one of my favorite combinations of technologies: TypeScript for type safety, Postgres for database storage, and Azure Functions for serverless hosting.
 
-Using this combination gives a great balance of development experience and deploying your application without having to worry about managing your own infrastructure.
+This combination gives you a good development experience, and you can deploy the application without managing your own infrastructure.
 
 > **Installing tooling**
 >
@@ -20,7 +20,7 @@ Using this combination gives a great balance of development experience and deplo
 
 ### Setting up the project
 
-Because I'm creating an application that will be deployed as an Azure Function, it makes sense to start by using the Azure Functions Core Tools to create a new project
+Because I'm creating an application that will be deployed as an Azure Function, it makes sense to start by using the Azure Functions Core Tools to create a new project,
 since that configuration can get a little overwhelming to write out yourself.
 
 I'll run the following command to create a new project folder and initialize it with everything I need to start building my API:
@@ -40,18 +40,18 @@ func new --name RecipesApi --template "HTTP trigger" --authlevel "anonymous"
 
 With all that completed, I have a new Azure Function project with a single function that will respond to HTTP requests at the `/api/RecipesApi` endpoint.
 
-### Introducing an API Framework
+### Introducing an API framework
 
 Opening up `src/functions/RecipeApi.ts`, I see that it's been implemented using the Azure Functions API.
 This is a great way to get started, but it's a little low-level for my taste, so I'd like to use an API framework to make my life easier.
 
-The first question I have to answer is: which API framework will I use? I'll be honest: for most applications I build, I reach for Express.js.
-It's a mature, flexible, easily extended, and it's got a dirt-simple API which makes it a great choice for long-running servers.
+The first question I have to answer is: which API framework will I use? For most applications I build, I reach for Express.js.
+It's mature, flexible, and easily extended, and it's got a dirt-simple API which makes it a great choice for long-running servers.
 However, serverless functions are stateless and short-lived, making it important for your deployed code to be as small as possible so that it boots up quickly.
-Not to mention, you generally pay for the amount of memory and the time your function is running so it (quite literally!) pays for your code to be small and execute as fast as possible.
+Not to mention, you generally pay for the amount of memory and the time your function is running so it (quite literally) pays for your code to be small and execute as fast as possible.
 So while, yes, _no_ Express.js is not particularly slow or gigantic... but there are better options.
 
-Luckily, the creators of Express.js have created a lightweight alternative called [**Hono**](https://hono.dev/) - a fast, minimalist JavaScript web framework. It's got an API that's very similar to Express.js and (my favorite part), has first-class support for TypeScript, so that makes it the perfect choice for serverless functions.
+Luckily, there's a lightweight alternative called [**Hono**](https://hono.dev/), a fast, minimalist JavaScript web framework. It's got an API that's very similar to Express.js and (my favorite part) has first-class support for TypeScript, so it's a great fit for serverless functions.
 
 I can install Hono into my existing project by running:
 
@@ -80,7 +80,7 @@ export default app;
 ```
 
 > **IMPORTANT:** note that I'm using the route `/api` since this is the
-> prefix that Azure Functions by default for its HTTP-triggered functions.
+> prefix that Azure Functions uses by default for its HTTP-triggered functions.
 
 Then, replace the contents of `src/functions/RecipeApi.ts` with the following:
 
@@ -115,7 +115,7 @@ Recipes API
 
 Now that I've proven the base application is working, I can start building out the API logic.
 
-### Defining Data Models with TypeScript and Zod
+### Defining data models with TypeScript
 
 A little bit about me: I **adore** TypeScript. I adore it so much that I simply _refuse_ to write regular JavaScript anymore.
 
@@ -156,10 +156,10 @@ Just two models: one for recipes and another to describe the ingredients of thos
 I've also defined a `RecipeOverview` type that's a subset of the `Recipe` type, which I can use when I want to display a list of recipes without all the details.
 Simple enough, right? Now let's prep our database to store this data.
 
-### Creating a Postgres Database with Neon
+### Creating a Postgres database with Neon
 
-Postgres is my go-to database for most projects. And using a managed service like [Neon](https://neon.com/) makes it even easier to get up and running Serverless Postgres databases on Azure.
-So, I'm going to head over to my [Neon projects](https://console.neon.tech/app/projects) and create a new project with a Postgres database, then use the following schema to create a table to store my recipes:
+Postgres is my go-to database for most projects. And using a managed service like [Neon](https://neon.com/) makes it even easier to get a serverless Postgres database up and running.
+So, I'm going to head over to my [Neon projects](https://console.neon.tech/app/projects) and create a new project in the [AWS region](/docs/introduction/regions) closest to my Azure Functions deployment (for example, `aws-us-east-1` for Azure `eastus2`), then use the following schema to create a table to store my recipes:
 
 ```sql
 CREATE TABLE recipes (
@@ -179,7 +179,7 @@ CREATE TABLE ingredients (
 );
 ```
 
-Then I'll populate it with some sample data (a delicious chocolate cake recipe!):
+Then I'll populate it with some sample data (a delicious chocolate cake recipe):
 
 ```sql
 WITH inserted_recipe AS (
@@ -209,7 +209,7 @@ FROM (VALUES
 ) AS ingredient_data(name, quantity_amount, quantity_type);
 ```
 
-### Database Interaction
+### Database interaction
 
 Neon databases are serverless, distributed, fully managed, and a whole bunch of other things, but most importantly, they're just Postgres databases.
 So, I can use the `pg` package to interact with my database just like I would with any other Postgres database.
@@ -225,7 +225,7 @@ so I'll also install the types for the `pg` package to give myself a better deve
 npm install @types/pg
 ```
 
-Then, I'll login to the [Neon web console](https://console.neon.tech/) and use the "Connect" button to grab my database connection string.
+Then, I'll log in to the [Neon Console](https://console.neon.tech/) and use the **Connect** button to grab my database connection string.
 I'll paste that connection string into a new setting inside of the `local.settings.json` file in my project, like this:
 
 ```json
@@ -233,7 +233,7 @@ I'll paste that connection string into a new setting inside of the `local.settin
   "IsEncrypted": false,
   "Values": {
     "FUNCTIONS_WORKER_RUNTIME": "node",
-    "DATABASE_URL": "postgresql://recipes_owner:secret_password@jchadwick-pooler.eastus2.azure.neon.tech/recipes?sslmode=require&channel_binding=require",
+    "DATABASE_URL": "postgresql://recipes_owner:secret_password@ep-cool-darkness-123456-pooler.us-east-1.aws.neon.tech/recipes?sslmode=require&channel_binding=require",
     "AzureWebJobsStorage": "UseDevelopmentStorage=true"
   }
 }
@@ -253,7 +253,7 @@ const pool = new Pool({
 export default pool;
 ```
 
-### Querying the Database from an Azure Function
+### Querying the database from an Azure Function
 
 Now that I have my data models and database connection set up, I can start building out the API logic, which is simple enough.
 For that, let's head back to `src/app.ts`.
@@ -503,15 +503,13 @@ These endpoints work fine locally because I've set the `DATABASE_URL` environmen
 however my deployed Function doesn't have this setting.
 
 Luckily, Azure Functions makes it easy to set environment variables for your function app.
-Just run the following command to set the `DATABASE_URL` environment variable to the connection string for my Neon database:
-
-Define an environment variable in the Azure Function App settings to store the database connection string, using this command:
+I'll run the following command to set the `DATABASE_URL` app setting to the connection string for my Neon database:
 
 ```bash
 > az functionapp config appsettings set \
     --name recipes-api-2000 \
     --resource-group recipes-api-rg \
-    --settings DATABASE_URL="postgresql://recipes_owner:9WAzoqh2NvYm@ep-black-bush-a8jqxdjf-pooler.eastus2.azure.neon.tech/recipes?sslmode=require&channel_binding=require"
+    --settings DATABASE_URL="postgresql://recipes_owner:9WAzoqh2NvYm@ep-black-bush-a8jqxdjf-pooler.us-east-1.aws.neon.tech/recipes?sslmode=require&channel_binding=require"
 ```
 
 Now when I hit the `/api/recipes` endpoint, I see the response that I expect:
@@ -525,12 +523,12 @@ Now when I hit the `/api/recipes` endpoint, I see the response that I expect:
 
 And that's it. My Recipes API is deployed and working in the cloud.
 
-### Wrapping Up
+### Wrapping up
 
-The setup I've shown here provides a solid foundation for building a type-safe, scalable JSON API.
-While this is where I'm going to end this post, there is still several things I've had to leave out.
+The setup I've shown here is a starting point for a type-safe JSON API.
+While this is where I'm going to end this post, there are still several things I've had to leave out.
 
-Using what I've already shown in this article you should be able take care of some of these yourself, such as:
+Using what I've already shown in this article you should be able to take care of some of these yourself, such as:
 
 - adding new endpoints to update and delete recipes
 - adding error handling
@@ -540,17 +538,15 @@ Using what I've already shown in this article you should be able take care of so
 Perhaps the biggest thing I've left out is security.  
 If you hadn't noticed, this API is completely open and doesn't require any authentication to access, meaning that anyone can come along and add recipes to the database.
 
-Now, I could have introduced some basic HTTP authentication, but one of Neon's best features is its built-in support for JWT authentication and Row Level Security, so I've decided to create an entirely separate post to cover that.
-Stay tuned for that post!
+Now, I could have introduced some basic HTTP authentication, but Neon supports JWT-based authentication with [Row-Level Security](/docs/guides/row-level-security) through the Data API, so I've decided to cover that in a separate post.
 
-In the meantime, I hope you've found this post helpful and that it inspires you to build your own APIs combining the strengths of TypeScript, Postgres (via Neon), and Azure Functions to create efficient and maintainable backend services that are super easy to develop, deploy, and scale.
-Good luck, and happy coding!
+In the meantime, try adding the update and delete endpoints to the API yourself.
 
-## Additional Resources
+## Additional resources
 
 - [GitHub Repository for this article](https://github.com/jchadwick/neon-azure-api)
-- [Neon Documentation](/docs)
+- [Neon documentation](/docs)
 - [Using Hono with Azure Functions](https://hono.dev/docs/getting-started/azure-functions)
-- [Azure Functions Documentation](https://learn.microsoft.com/en-us/azure/azure-functions/)
+- [Azure Functions documentation](https://learn.microsoft.com/en-us/azure/azure-functions/)
 
 <NeedHelp />

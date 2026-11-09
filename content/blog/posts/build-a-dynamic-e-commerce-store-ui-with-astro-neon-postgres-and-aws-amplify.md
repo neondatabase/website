@@ -568,4 +568,4 @@ The code is now ready to deploy to AWS Amplify. Use the following steps to deplo
 
 In this guide, you learned how to build a dynamic e-commerce store in Astro by using Serverless Postgres Database (powered by Neon) as the data source. Further, you learned how to prepare an Astro server-side rendered application to be deployed to AWS Amplify.
 
-For more, join us on [Discord](https://neon.tech/discord) to share your experiences, suggestions, and challenges.
+For more, join us on [Discord](https://neon.com/discord) to share your experiences, suggestions, and challenges.

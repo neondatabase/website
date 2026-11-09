@@ -6,10 +6,10 @@ summary: >-
   DATABASE_URL in rxconfig.py via python-dotenv, defining sqlmodel ORM models,
   and running Alembic migrations. Use this page when building a Python
   full-stack application with Reflex that needs a serverless Postgres backend,
-  covering virtual environment setup, psycopg2-binary installation, schema
+  covering virtual environment setup, psycopg installation, schema
   migrations, and a working CRUD example.
 enableTableOfContents: true
-updatedOn: '2026-07-31T15:27:48.506Z'
+updatedOn: '2026-09-16T19:45:35.340Z'
 ---
 
 <CopyPrompt src="/prompts/reflex-prompt.md"
@@ -68,10 +68,10 @@ To create a virtual environment, run the following command in your project direc
 
 ### Install the required packages
 
-Install Reflex, `python-dotenv` to manage environment variables, and `psycopg2-binary` to connect to Postgres:
+Install Reflex, `python-dotenv` to manage environment variables, the `db` extra for the database tools that `reflex db` commands use, and `psycopg` to connect to Postgres:
 
 ```bash
-pip install reflex python-dotenv psycopg2-binary
+pip install "reflex[db]" python-dotenv "psycopg[binary]"
 ```
 
 To initialize the Reflex app, run the following command:
@@ -80,19 +80,17 @@ To initialize the Reflex app, run the following command:
 reflex init
 ```
 
-When prompted choose: **A blank Reflex app** (option 1). You should see output similar to the following:
+When prompted, choose **A blank Reflex app** (option 0). Don't choose the AI builder (option 1), which opens a browser window instead. You should see output similar to the following:
 
 ```bash
 $ reflex init
-──────────────────────────────────────────── Initializing with_reflex ─────────────────────────────────────────────
-[07:20:37] Initializing the web directory.                                                             console.py:231
+Info: Initializing the web directory.
 
 Get started with a template:
-(0) Try our free AI builder.
-(1) A blank Reflex app.
-(2) Premade templates built by the Reflex team.
-Which template would you like to use? (0): 1
-[07:20:39] Initializing the app directory.                                                             console.py:231
+(0) A blank Reflex app.
+(1) Try our AI builder.
+Which template would you like to use? (0): 0
+Info: Initializing the app directory.
 Success: Initialized with_reflex using the blank template.
 ```
 
@@ -119,10 +117,10 @@ Now that you have set up a Reflex project, you can configure the connection sett
 Create a `.env` file in the root of your project directory to store your Neon connection string. Add the following line to the `.env` file, replacing the placeholder values with your actual Neon connection details:
 
 ```dotenv title=".env"
-DATABASE_URL="postgresql://<user>:<password>@<endpoint_hostname>.neon.tech:<port>/<dbname>?sslmode=require&channel_binding=require"
+DATABASE_URL="postgresql://[user]:[password]@[neon_hostname]/[dbname]?sslmode=require&channel_binding=require"
 ```
 
-You can find the connection string for your database by clicking the **Connect** button on your **Project Dashboard** in the Neon Console. For more information, see [Connect from any application](/docs/connect/connect-from-any-app).
+You can find the connection string for your database by clicking the **Connect** button in the Console nav. For more information, see [Connect from any application](/docs/connect/connect-from-any-app).
 
 ### Update the rxconfig.py file
 
@@ -130,7 +128,7 @@ You can find the connection string for your database by clicking the **Connect**
 
 2. Update the file to load the environment variables from the `.env` file and set the `db_url` parameter with the `DATABASE_URL` environment variable:
 
-   ```python {1-2,5,13}
+   ```python {1-2,5,14}
    import os
    from dotenv import load_dotenv
    import reflex as rx
@@ -142,6 +140,7 @@ You can find the connection string for your database by clicking the **Connect**
      plugins=[
         rx.plugins.SitemapPlugin(),
         rx.plugins.TailwindV4Plugin(),
+        rx.plugins.RadixThemesPlugin(),
      ],
      db_url=os.environ.get("DATABASE_URL")
    )
@@ -151,21 +150,31 @@ You can find the connection string for your database by clicking the **Connect**
 
    Now, you can run the Reflex app and start building your Python full-stack application with Reflex and Neon.
 
+### Generate the Alembic migration files
+
+Reflex uses [Alembic](https://alembic.sqlalchemy.org/en/latest/) to manage database migrations. Run this command before you add the data model. If you run it after the model exists, it writes the first migration for that model instead, and `makemigrations` has nothing new to add. To generate the Alembic migration files, run the following command in your project directory:
+
+```bash
+reflex db init
+```
+
 ## Creating a data model
 
-To create a data model in Reflex, you can define a Python class that represents the data structure. Reflex uses [sqlmodel](https://sqlmodel.tiangolo.com/) to provide a built-in ORM wrapping [SQLAlchemy](/docs/guides/sqlalchemy).
+To create a data model in Reflex, you can define a Python class that represents the data structure. Define models with [SQLModel](https://sqlmodel.tiangolo.com/), which is built on [SQLAlchemy](/docs/guides/sqlalchemy).
 
 Add the following code to `with_reflex/with_reflex.py` to create a `Customer` model:
 
-```python {7-12}
+```python {8-14}
 """Welcome to Reflex! This file outlines the steps to create a basic app."""
 
 import reflex as rx
 
 from rxconfig import config
+from sqlmodel import Field, SQLModel
 
-class Customer(rx.Model, table=True):
+class Customer(SQLModel, table=True):
     """The customer model."""
+    id: int | None = Field(default=None, primary_key=True)
     name: str
     email: str
     phone: str
@@ -202,15 +211,7 @@ app = rx.App()
 app.add_page(index)
 ```
 
-This code defines a `Customer` model with fields for `name`, `email`, `phone`, and `address`. The `table=True` argument tells Reflex to create a table in the database for this class.
-
-### Generate the Alembic migration files
-
-Reflex uses [Alembic](https://alembic.sqlalchemy.org/en/latest/) to manage database migrations. To generate the Alembic migration files, run the following command in your project directory:
-
-```bash
-reflex db init
-```
+This code defines a `Customer` model with an `id` primary key and fields for `name`, `email`, `phone`, and `address`. The `table=True` argument tells Reflex to create a table in the database for this class. The guide uses SQLModel directly because `rx.Model` is deprecated and will be removed in Reflex 1.0.
 
 ### Create and apply the migration
 
@@ -239,11 +240,13 @@ Update the `with_reflex/with_reflex.py` file to create a simple Customer Data Ap
 
 import reflex as rx
 from rxconfig import config
+from sqlmodel import Field, SQLModel, select
 
 
-class Customer(rx.Model, table=True):
+class Customer(SQLModel, table=True):
     """The customer model."""
 
+    id: int | None = Field(default=None, primary_key=True)
     name: str
     email: str
     phone: str
@@ -259,13 +262,26 @@ class State(rx.State):
     phone: str = ""
     address: str = ""
 
+    # Setters for the form fields
+    def set_name(self, value: str):
+        self.name = value
+
+    def set_email(self, value: str):
+        self.email = value
+
+    def set_phone(self, value: str):
+        self.phone = value
+
+    def set_address(self, value: str):
+        self.address = value
+
     # List of customers
     customers: list[Customer] = []
 
     def load_customers(self):
         """Load all customers from the database."""
         with rx.session() as session:
-            self.customers = session.exec(Customer.select()).all()
+            self.customers = session.exec(select(Customer)).all()
 
     def add_customer(self):
         """Add a new customer to the database."""

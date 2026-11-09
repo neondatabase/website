@@ -1,21 +1,21 @@
 ---
-title: Building a TODO Application with Laravel, Livewire, and Volt
+title: Build a TODO application with Laravel, Livewire, and Volt
 subtitle: Learn how to create a simple TODO app using Laravel, Livewire, Volt, and Laravel Breeze for authentication
 author: bobbyiliev
 enableTableOfContents: true
 createdAt: '2024-06-30T00:00:00.000Z'
-updatedOn: '2026-07-31T19:05:29.503Z'
+updatedOn: '2026-09-24T17:56:34.189Z'
 ---
 
-In this guide, we'll walk through the process of building a TODO application using [Laravel](https://laravel.com/), [Livewire](https://livewire.laravel.com/), and [Volt](https://livewire.laravel.com/docs/volt).
+In this guide, we'll build a TODO application using [Laravel](https://laravel.com/), [Livewire](https://livewire.laravel.com/), and [Volt](https://livewire.laravel.com/docs/volt).
 
 We'll use [Laravel Breeze](https://laravel.com/docs/11.x/starter-kits) for authentication and Lakebase Postgres as our database.
 
-By the end of this tutorial, you'll have a simple yet fully functional TODO application that allows users to create, update, and delete tasks.
+By the end of this tutorial, you'll have a working TODO application that lets users create, update, and delete tasks.
 
 ## Prerequisites
 
-Before we begin, ensure you have the following:
+Before we begin, make sure you have the following:
 
 - PHP 8.1 or higher installed on your system
 - [Composer](https://getcomposer.org/) for managing PHP dependencies
@@ -23,13 +23,13 @@ Before we begin, ensure you have the following:
 - A [Neon](https://console.neon.tech/signup) account for database hosting
 - Basic knowledge of Laravel and Livewire
 
-## Setting up the Project
+## Set up the project
 
 Let's start by creating a new Laravel project and setting up the necessary components for our TODO application.
 
-### Install the Laravel Installer
+### Install the Laravel installer
 
-The Laravel installer is a command-line tool that simplifies the process of creating new Laravel projects. If you don't have it installed, run the following command:
+The Laravel installer is a command-line tool for creating new Laravel projects. If you don't have it installed, run the following command:
 
 ```bash
 composer global require laravel/installer
@@ -43,7 +43,7 @@ laravel --version
 
 This should display the Laravel installer version, confirming that the installation was successful.
 
-### Creating a New Laravel Project
+### Create a new Laravel project
 
 Open your terminal and run the following command to create a new Laravel project using the Laravel installer:
 
@@ -67,9 +67,9 @@ After the project is created, navigate to the project directory:
 cd laravel-todo-volt
 ```
 
-This can also be done directly via `composer` instead of using the Laravel installer, but the Laravel installer provides an interactive setup process that simplifies the initial project setup rather than running multiple commands manually.
+You can also do this with `composer` directly, but the Laravel installer's interactive setup saves you from running multiple commands manually.
 
-### Setting up the Database
+### Set up the database
 
 Update your `.env` file with your Neon database credentials:
 
@@ -92,7 +92,7 @@ php artisan migrate
 
 This will create the necessary tables in your Neon database.
 
-### Compiling Assets
+### Compile assets
 
 Laravel Breeze uses Vite for asset compilation. Run the following commands to install dependencies and compile assets:
 
@@ -103,7 +103,7 @@ npm run dev
 
 Keep the Vite development server running in the background as you continue with the next steps.
 
-## Creating the TODO Model and Migration
+## Create the TODO model and migration
 
 A model in Laravel represents a database table and allows you to interact with the table's data using Eloquent ORM. The migration file defines the structure of the database table and is used to create or modify the table.
 
@@ -177,11 +177,9 @@ Now, run the migrations to create the `todos` table in your Neon database:
 php artisan migrate
 ```
 
-## Creating the Volt Component
+## Create the Volt component
 
-Volt is a new addition to Livewire that allows you to define Livewire components using a class-based API.
-
-This makes it easier to organize and manage your components, especially for larger applications with many components.
+Volt is an addition to Livewire that lets you define Livewire components using a class-based API. It keeps each component's logic and template together, which helps in larger applications with many components.
 
 Let's create a Volt component for our TODO list:
 
@@ -275,9 +273,9 @@ This Volt component combines the component's logic and template in a single file
 - The `action()` defines methods that can be triggered from the template.
 - The template section uses Livewire directives like `wire:submit` and `wire:click` to interact with the component's logic.
 
-This approach allows for a more self-contained component definition, making it easier to understand and maintain your Livewire components rather than having the logic and template in separate files.
+Keeping the logic and template in one file makes each component self-contained and easier to maintain.
 
-## Integrating the TODO List into the Dashboard
+## Add the TODO list to the dashboard
 
 Now that we have the Volt component ready, let's integrate our TODO list into the main dashboard.
 
@@ -305,9 +303,9 @@ Open `resources/views/dashboard.blade.php` and replace its content with:
 
 This integrates our `TodoList` component into the Breeze dashboard by using the `livewire:todolist` directive. When you visit the dashboard, you should see the TODO list component displayed on the page.
 
-As we have used the `auth()->user()` method in the `TodoList` component to fetch the user's todos, each user will see their own list of todos when they visit the dashboard, however we have not yet implemented any authorization to ensure that users can only manage their own todos. We'll cover this in the next section.
+As we have used the `auth()->user()` method in the `TodoList` component to fetch the user's todos, each user will see their own list of todos when they visit the dashboard. However, we haven't yet implemented any authorization to ensure that users can only manage their own todos. We'll cover this in the next section.
 
-## Adding Authorization
+## Add authorization
 
 To ensure users can only manage their own todos, let's implement some basic authorization.
 
@@ -372,9 +370,9 @@ In these updated actions:
 
 This way you can make sure that users can only toggle completion status or delete todos that they own, as defined in the `TodoPolicy`.
 
-## Writing Tests for Your TODO Application with Pest
+## Write tests with Pest
 
-Testing is an important part of the development process. There are a few different ways to write tests in Laravel, including PHPUnit and Pest. Choosing the right testing framework depends on your preference and the requirements of your project.
+You can write tests in Laravel with PHPUnit or Pest. The right choice depends on your preference and the requirements of your project.
 
 In this section, we'll cover writing tests using Pest, a more expressive and minimalistic testing framework for PHP.
 
@@ -384,13 +382,13 @@ Pest provides a [Livewire plugin](https://pestphp.com/docs/plugins#livewire), wh
 composer require pestphp/pest-plugin-livewire --dev
 ```
 
-### Setting Up the Test Environment
+### Set up the test environment
 
 For this example, we will use an in-memory SQLite database for testing. This ensures that tests run quickly and do not affect your production database.
 
-However, to learn more about testing in Laravel along with Neon branding, check out the [Testing Laravel Applications with Neon's Database Branching](/guides/laravel-test-on-branch). This guide will help you set up a separate database branch for testing, allowing you to test your application with real data rather than an in-memory database.
+To test against a Neon database branch instead, see [Testing Laravel Applications with Neon's Database Branching](/guides/laravel-test-on-branch). That guide shows you how to set up a separate database branch for testing, allowing you to test your application with real data rather than an in-memory database.
 
-To get started, ensure your `.env.testing` file is configured to use an in-memory SQLite database for testing:
+To get started, make sure your `.env.testing` file is configured to use an in-memory SQLite database for testing:
 
 ```env
 APP_KEY=base64:kf_your_app_key_here
@@ -400,9 +398,9 @@ DB_DATABASE=:memory:
 
 This will allow us to use the `RefreshDatabase` trait to reset the database before each test, ensuring a clean slate for testing.
 
-> The `RefreshDatabase` trait will clear the database before each test, so make sure to use a separate database for testing to avoid data loss as the database will be reset for each test meaning that any data that you have in the database will be lost.
+> The `RefreshDatabase` trait clears the database before each test. Use a separate database for testing, or you'll lose any data in it.
 
-### Creating and Using a `TodoFactory`
+### Create a `TodoFactory`
 
 Factories in Laravel generate sample data for models, useful for testing and database seeding with realistic data thanks to the Faker library.
 
@@ -453,7 +451,7 @@ class TodoFactory extends Factory
 
 This factory generates random todo items with titles, descriptions, and completion status. We've also defined two states: `completed` and `incomplete` to create todos with specific completion statuses.
 
-### Creating Feature Tests
+### Create feature tests
 
 Let's create a feature test file for our TODO list functionality using the following command:
 
@@ -531,9 +529,9 @@ The `actingAs()` function is used to authenticate the user before interacting wi
 
 The `livewire()` function is used to interact with the Livewire component and make assertions based on the component's state.
 
-### Running the Tests
+### Run the tests
 
-Again, before you run the tests, note that the `RefreshDatabase` trait will clear the database before each test, so make sure to use a separate database for testing to avoid data loss like an in-memory SQLite database or a Neon database branch.
+Again, before you run the tests, note that the `RefreshDatabase` trait will clear the database before each test, so use a separate database for testing, such as an in-memory SQLite database or a Neon database branch.
 
 You can run these tests using the following command:
 
@@ -541,20 +539,11 @@ You can run these tests using the following command:
 php artisan test
 ```
 
-This will execute the tests and provide feedback on the results. Writing tests helps ensure that your application behaves as expected and catches bugs early in the development process.
+This runs the tests and reports the results.
 
 ## Conclusion
 
-In this tutorial, we've built a simple yet functional TODO application using Laravel, Livewire, and Volt. We've covered:
-
-1. Setting up a new Laravel project with Breeze, Livewire, and Volt
-1. Creating a `Todo` model and migration
-1. Implementing a Volt component for managing todos
-1. Integrating the TODO list into the dashboard
-1. Adding basic authorization to ensure users can only manage their own todos
-1. Writing tests for the TODO application using Pest
-
-This application provides a solid foundation for a TODO list, showing the power and simplicity of Laravel, Livewire, and Volt. From here, you could expand the functionality by adding features such as:
+You've built a TODO application with Laravel, Livewire, and Volt, with per-user authorization and Pest tests, backed by a database on Neon. From here, you could add features such as:
 
 - Due dates for todos
 - Categorization or tagging of todos
@@ -562,10 +551,10 @@ This application provides a solid foundation for a TODO list, showing the power 
 - Sharing todos with other users
 - Assigning todos to specific users
 
-## Additional Resources
+## Additional resources
 
 - [Laravel Documentation](https://laravel.com/docs)
-- [Livewire Documentation](https://laravel-livewire.com/docs)
+- [Livewire Documentation](https://livewire.laravel.com/docs)
 - [Laravel Breeze Documentation](https://laravel.com/docs/breeze)
 - [Tailwind CSS Documentation](https://tailwindcss.com/docs)
 - [Neon Documentation](/docs)

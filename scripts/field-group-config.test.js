@@ -35,6 +35,7 @@ const wrapped = () =>
           store_passwords: { type: 'boolean' },
           autoscaling_limit_min_cu: { type: 'number', deprecated: true },
           history_retention_seconds: { type: 'integer' },
+          realtime: obj({ allowed_origins: { type: 'array' } }),
         },
         {
           displayOrder: [
@@ -49,6 +50,7 @@ const wrapped = () =>
             'store_passwords',
             'autoscaling_limit_min_cu',
             'history_retention_seconds',
+            'realtime',
           ],
         }
       ),

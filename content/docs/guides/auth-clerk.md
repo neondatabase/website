@@ -12,7 +12,7 @@ summary: >-
   Drizzle-kit migration commands, ClerkProvider setup, and Next.js server
   actions backed by the Neon serverless driver.
 enableTableOfContents: true
-updatedOn: '2026-08-04T05:18:26.469Z'
+updatedOn: '2026-09-23T21:49:37.670Z'
 ---
 
 <Admonition type="tip" title="Building on Neon?">
@@ -21,8 +21,8 @@ Neon provides [Managed Better Auth](/docs/auth/overview), a managed authenticati
 
 User authentication is a critical requirement for web applications. Modern applications require advanced features like social login and multi-factor authentication besides the regular login flow. Additionally, managing personally identifiable information (PII) requires a secure solution compliant with data protection regulations.
 
-<Admonition type="comingSoon">
-Looking to manage **authorization** along with authentication? [Neon RLS](/docs/guides/neon-authorize) brings JSON Web Token (JWT) authorization directly to Postgres, where you can use Row-level Security (RLS) policies to manage access at the database level.
+<Admonition type="note">
+Looking to manage **authorization** along with authentication? The [Neon Data API](/docs/data-api/custom-authentication-providers) validates Clerk JWTs and enforces Row-Level Security (RLS) policies directly in Postgres, so you can manage access at the database level.
 </Admonition>
 
 [Clerk](https://clerk.com/) is a user authentication and identity management platform that provides these features out of the box. It comes with adapters for popular web frameworks, making it easy to integrate with an application backed by a Lakebase Postgres database.
@@ -78,7 +78,7 @@ Make sure to add an entry for `.env` to your `.gitignore` file, so that it's not
 
 ### Retrieve your Neon database connection string
 
-You can find your database connection string by clicking the **Connect** button on your **Project Dashboard**. It should look similar to this:
+You can find your database connection string by clicking the **Connect** button in the Console nav. It should look similar to this:
 
 ```bash
 postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require&channel_binding=require
@@ -182,17 +182,18 @@ npx drizzle-kit push:pg
 
 The `user_messages` table will now be visible in the console.
 
-### Add authentication middleware
+### Add the Clerk proxy
 
-The `Clerk` sdk handles user authentication and session management for us. Create a new file `middleware.ts` in the root directory so
-all the app routes are protected by Clerk's authentication:
+The Clerk SDK handles user authentication and session management for us. Create a new file `proxy.ts` in the root directory. Calling `auth.protect()` requires users to sign in before they can reach any app route, and redirects signed-out visitors to the Clerk sign-in page:
 
 ```typescript
-/// middleware.ts
+/// proxy.ts
 
 import { clerkMiddleware } from '@clerk/nextjs/server';
 
-export default clerkMiddleware();
+export default clerkMiddleware(async (auth) => {
+  await auth.protect();
+});
 
 export const config = {
   matcher: [
@@ -204,10 +205,15 @@ export const config = {
 };
 ```
 
+<Admonition type="note">
+Next.js 16 renamed `middleware.ts` to `proxy.ts`. On Next.js 15 or earlier, name the file `middleware.ts`. The code stays the same.
+</Admonition>
+
 Next, we wrap the full application with the `ClerkProvider` component, so all pages have access to the current session and user context. Replace the contents of the `app/layout.tsx` file with the following:
 
 ```tsx
 import type { Metadata } from 'next';
+import { Suspense } from 'react';
 import { Inter } from 'next/font/google';
 import './globals.css';
 import { ClerkProvider, UserButton } from '@clerk/nextjs';
@@ -225,21 +231,25 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <ClerkProvider>
-      <html lang="en">
-        <body className={inter.className}>
-          <div className="bg-white p-4">
-            <UserButton showName={true}></UserButton>
-          </div>
-          {children}
-        </body>
-      </html>
-    </ClerkProvider>
+    <html lang="en">
+      <body className={inter.className}>
+        <Suspense fallback={null}>
+          <ClerkProvider>
+            <div className="bg-white p-4">
+              <UserButton showName={true}></UserButton>
+            </div>
+            {children}
+          </ClerkProvider>
+        </Suspense>
+      </body>
+    </html>
   );
 }
 ```
 
 This also adds a `UserButton` component to the layout, which displays the user's name and avatar when logged in.
+
+New Next.js 16 projects enable `cacheComponents`, which requires anything that reads request data, such as the session cookie, to render inside `<Suspense>`. Without it, `npm run build` fails with a prerendering error.
 
 ### Add interactivity to the application
 
@@ -357,7 +367,7 @@ This will start the Next.js development server. Open your browser and navigate t
 
 In this guide, we walked through setting up a simple Next.js application with user authentication using Clerk and a Lakebase Postgres database. We defined a database schema using Drizzle ORM, generated migrations, and interacted with the database to store and retrieve user data.
 
-Next, we can add more routes and features to the application. The Clerk middleware ensures that only authenticated users can access any app routes, and the `ClerkProvider` component provides the user context to each of them.
+Next, we can add more routes and features to the application. The Clerk proxy ensures that only authenticated users can access any app routes, and the `ClerkProvider` component provides the user context to each of them.
 
 To view and manage the users who authenticated with your application, you can navigate to the [Clerk Dashboard](https://dashboard.clerk.dev/).
 

@@ -3,11 +3,12 @@ title: Connect from Better Drizzle to Neon
 subtitle: Learn how to connect to Neon from Better Drizzle
 summary: >-
   Better Drizzle connection guide for Lakebase Postgres walks through setting up
-  better-drizzle with node-postgres driver. Learn how to
-  configure a Better Drizzle client, define schema relations, seed data, run
-  CRUD queries, use plugins, and manage transactions with savepoints.
+  better-drizzle 0.3 with Drizzle ORM 1.0 and the node-postgres driver. Learn
+  how to configure a Better Drizzle client, define relations with
+  defineRelations, seed data, run CRUD queries, use plugins, and manage
+  transactions with savepoints.
 enableTableOfContents: true
-updatedOn: '2026-08-07T18:39:13.799Z'
+updatedOn: '2026-10-08T19:32:04.700Z'
 ---
 
 <InfoBlock>
@@ -36,7 +37,7 @@ better-drizzle wraps your existing Drizzle client and generates one delegate per
 - **Consistent CRUD**: `findMany`, `findFirst`, `findUnique`, `create`, `update`, `delete`, `upsert`, and `upsertMany` on every table
 - **Typed relation loading**: `include` and `select` with full type inference from your Drizzle schema
 - **Nested relation filters**: `some`, `every`, `none`, and `is` for filtering by related rows
-- **Unified pagination**: Offset and cursor pagination returning the same `{ data, pagination }` shape
+- **Pagination with metadata**: Offset (`paginate`) and cursor (`cursor`) pagination, both returning `{ data, pagination }`
 - **Lifecycle hooks**: Cross-cutting concerns like audit trails, tracing, and metrics without sprinkling them through every call
 - **First-class plugins**: Timestamps, soft delete, and custom behavior packaged as reusable plugins
 - **Transactions with savepoints**: Nested transactions, rollback, `afterCommit` callbacks, and automatic retries
@@ -72,18 +73,21 @@ If you do not have one already, create a project.
 
 ## Get your connection string
 
-Find your database connection string by clicking the **Connect** button on your **Project Dashboard** to open the **Connect to your database** modal. Select a branch, a user, and the database you want to connect to. A connection string is constructed for you.
-![Connection details modal](/docs/connect/connection_details.png)
+Find your database connection string by clicking the **Connect** button in the Console nav to open the **Connect to your branch** modal. Select a branch, a user, and the database you want to connect to. A connection string is constructed for you.
+![Connection details modal](/docs/connect/connect_to_branch_modal.png)
 The connection string includes the user name, password, hostname, and database name.
 
-Create a `.env` file in your project's root directory and add the connection string to it. Your `.env` file should look like this:
+Create a `.env` file in your project's root directory. Add the pooled connection string (the hostname includes `-pooler`) as `DATABASE_URL` for your application, and the direct connection string (without `-pooler`) as `DATABASE_URL_UNPOOLED` for Drizzle Kit migrations. To get the direct string, turn off **Connection pooling** in the **Connect to your branch** modal, or remove `-pooler` from the hostname. Your `.env` file should look like this:
 
 ```text shouldWrap
-DATABASE_URL="postgresql://[user]:[password]@[neon_hostname]/[dbname]?sslmode=require&channel_binding=require"
+DATABASE_URL="postgresql://[user]:[password]@[endpoint]-pooler.[region].aws.neon.tech/[dbname]?sslmode=verify-full&channel_binding=require"
+DATABASE_URL_UNPOOLED="postgresql://[user]:[password]@[endpoint].[region].aws.neon.tech/[dbname]?sslmode=verify-full&channel_binding=require"
 ```
 
+The Console's connection string uses `sslmode=require`. `pg` 8.23 and later print a `SECURITY WARNING` for `sslmode=require`, so change it to `sslmode=verify-full`, which keeps the same behavior without the warning.
+
 <Admonition type="note">
-Neon supports both direct and pooled connection strings, which you can find by clicking the **Connect** button on your **Project Dashboard**. A pooled connection string (the hostname includes `-pooler`) routes through a PgBouncer connection pool, which is ideal for your application at runtime. However, using a pooled connection string for migrations can lead to errors. Use a direct (non-pooled) connection when running Drizzle Kit migrations. For more information, see [Connection pooling](/docs/connect/connection-pooling) and [Schema migration with Drizzle ORM](/docs/guides/drizzle-migrations).
+A pooled connection string routes through a PgBouncer connection pool, which suits your application at runtime. Running migrations through the pooler can lead to errors, so Drizzle Kit uses the direct connection. For more information, see [Connection pooling](/docs/connect/connection-pooling) and [Schema migration with Drizzle ORM](/docs/guides/drizzle-migrations).
 </Admonition>
 
 ## Install dependencies
@@ -91,24 +95,24 @@ Neon supports both direct and pooled connection strings, which you can find by c
 Install the dependencies:
 
 ```bash
-npm install better-drizzle pg drizzle-orm
-npm install -D drizzle-kit@0.21.4 @types/pg @types/node dotenv
+npm install better-drizzle drizzle-orm@1.0.0-rc.4 pg dotenv
+npm install -D drizzle-kit@1.0.0-rc.4 tsx @types/pg @types/node
 ```
 
-<Admonition type="note" title="Drizzle Kit Compatibility">
-better-drizzle is compatible with `drizzle-kit@0.21.4` and Drizzle ORM versions up to `^0.30.0`.
+<Admonition type="note" title="Drizzle ORM version">
+better-drizzle 0.3 supports only Drizzle ORM `1.0.0-rc.4` and its `defineRelations` API. Install `drizzle-orm` and `drizzle-kit` with that exact version: a plain `npm install drizzle-orm` resolves to 0.x, and later release candidates aren't supported yet. Projects on Drizzle ORM 0.x need better-drizzle 0.2.x. See [Upgrading](https://better-drizzle.com/docs/guides/upgrading) in the better-drizzle docs.
 </Admonition>
 
 ## Configure Drizzle Kit
 
-Drizzle Kit uses a configuration file to manage schema and migrations. Create a `drizzle.config.ts` file in your project root:
+Drizzle Kit uses a configuration file to manage schema and migrations. Create a `drizzle.config.ts` file in your project root. It uses the direct connection string, since migrations shouldn't run through the connection pooler:
 
 ```typescript filename="drizzle.config.ts"
 import 'dotenv/config';
 import { defineConfig } from 'drizzle-kit';
 
-if (!process.env.DATABASE_URL) {
-  throw new Error('DATABASE_URL is not set in the .env file');
+if (!process.env.DATABASE_URL_UNPOOLED) {
+  throw new Error('DATABASE_URL_UNPOOLED is not set in the .env file');
 }
 
 export default defineConfig({
@@ -116,19 +120,18 @@ export default defineConfig({
   out: './drizzle',
   dialect: 'postgresql',
   dbCredentials: {
-    url: process.env.DATABASE_URL,
+    url: process.env.DATABASE_URL_UNPOOLED,
   },
 });
 ```
 
 ## Define your schema and relations
 
-better-drizzle reads your Drizzle schema (including relations) to generate each table's typed API. The relations you define power `include`, `select`, and nested relation filters.
+better-drizzle reads your Drizzle tables and relations to generate each table's typed API. The relations you define power `include`, `select`, and nested relation filters.
 
-Create a `src/schema.ts` file with two tables: `users` and `posts`. Each user can have many posts, and each post belongs to one user.
+Create a `src/schema.ts` file with two tables: `users` and `posts`.
 
 ```typescript filename="src/schema.ts"
-import { relations } from 'drizzle-orm';
 import { boolean, integer, pgTable, serial, text } from 'drizzle-orm/pg-core';
 
 export const users = pgTable('users', {
@@ -146,41 +149,42 @@ export const posts = pgTable('posts', {
   title: text('title').notNull(),
   published: boolean('published').notNull().default(false),
 });
+```
 
-export const usersRelations = relations(users, ({ many }) => ({
-  posts: many(posts),
+Declare the relations with Drizzle's `defineRelations` in a `src/relations.ts` file. Each user can have many posts, and each post belongs to one user.
+
+```typescript filename="src/relations.ts"
+import { defineRelations } from 'drizzle-orm';
+import * as schema from './schema';
+
+export const relations = defineRelations(schema, (r) => ({
+  users: {
+    posts: r.many.posts(),
+  },
+  posts: {
+    author: r.one.users({
+      from: r.posts.authorId,
+      to: r.users.id,
+    }),
+  },
 }));
-
-export const postsRelations = relations(posts, ({ one }) => ({
-  author: one(users, {
-    fields: [posts.authorId],
-    references: [users.id],
-  }),
-}));
-
-export const schema = {
-  users,
-  usersRelations,
-  posts,
-  postsRelations,
-};
 ```
 
 ## Initialize the Better Drizzle client
 
-Create a standard Drizzle client and wrap it with `better()` to get the Better client. Create a `src/db.ts` file:
+Create a Drizzle client with your relations and wrap it with `better()` to get the Better client. `better()` reads the tables and relations from the Drizzle instance. Create a `src/db.ts` file:
 
 ```typescript filename="src/db.ts"
+import 'dotenv/config';
 import { better } from 'better-drizzle';
 import { drizzle } from 'drizzle-orm/node-postgres';
 import { Pool } from 'pg';
-import { schema } from './schema';
-import 'dotenv/config';
+import { relations } from './relations';
 
-const pool = new Pool({ connectionString: process.env.DATABASE_URL! });
-const db = drizzle(pool, { schema });
+export const pool = new Pool({ connectionString: process.env.DATABASE_URL! });
+const db = drizzle({ client: pool, relations });
 
-export const client = better(db, { schema });
+export const client = better(db);
 ```
 
 ## Generate migrations
@@ -204,7 +208,7 @@ npx drizzle-kit migrate
 Create a `src/seed.ts` file to populate the database with some users and posts:
 
 ```typescript filename="src/seed.ts"
-import { client } from './db';
+import { client, pool } from './db';
 
 async function seed() {
   await client.users.upsertMany({
@@ -229,7 +233,7 @@ async function seed() {
     data: [
       { authorId: alice!.id, title: 'Hello World', published: true },
       { authorId: alice!.id, title: 'better-drizzle is great', published: true },
-      { authorId: alice!.id, title: 'Neon Postgres rocks', published: true },
+      { authorId: alice!.id, title: 'Branching with Neon', published: true },
       { authorId: bob!.id, title: 'Secret draft', published: false },
     ],
   });
@@ -237,14 +241,21 @@ async function seed() {
   console.log('Seeded 3 users and 4 posts.');
 }
 
-seed();
+seed()
+  .catch((error) => {
+    console.error(error);
+    process.exitCode = 1;
+  })
+  .finally(() => pool.end());
 ```
 
-Run the seed script:
+Run the seed script once:
 
 ```bash
 npx tsx src/seed.ts
 ```
+
+The script upserts users but inserts posts with `createMany`, so running it again adds duplicate posts and changes the query output shown below.
 
 </Steps>
 
@@ -252,7 +263,7 @@ npx tsx src/seed.ts
 
 ### Reads with typed relations
 
-Each table gets a delegate (`client.users`, `client.posts`) with methods that are fully typed against your schema.
+Each table gets a delegate (`client.users`, `client.posts`) with methods that are fully typed against your schema. To try the examples in this section, put them in an `async` function in a file such as `src/queries.ts` that imports `client` and `pool` from `./db`, call `pool.end()` when you're done, and run it with `npx tsx src/queries.ts`.
 
 List active users with their three most recent published posts:
 
@@ -289,7 +300,7 @@ The query returns active users with their published posts nested under each user
     "name": "Alice",
     "active": true,
     "posts": [
-      { "id": 3, "title": "Neon Postgres rocks" },
+      { "id": 3, "title": "Branching with Neon" },
       { "id": 2, "title": "better-drizzle is great" },
       { "id": 1, "title": "Hello World" }
     ]
@@ -331,11 +342,11 @@ const posts = await client.posts.findMany({
 });
 ```
 
-> The `author: { is: { active: true } }` filter keeps only posts where the author is active, excluding Bob's posts since he is inactive:
+The `author: { is: { active: true } }` filter keeps only posts where the author is active, so Bob's draft is excluded.
 
 ### Writes with skipDuplicates and upsertMany
 
-Create a new user, skipping if the email already exists
+Create a new user, or skip the insert if the email already exists. `create` returns `null` when it skips:
 
 ```typescript
 const maybeCreated = await client.users.create({
@@ -366,14 +377,12 @@ await client.users.upsertMany({
 });
 ```
 
-### Pagination: one shape for offset and cursor
+### Pagination
+
+Use `paginate` for offset pagination:
 
 ```typescript
-import { PaginationType } from 'better-drizzle';
-
-// Offset pagination
-const page1 = await client.users.paginate({
-  type: PaginationType.Offset,
+const page = await client.users.paginate({
   where: { active: true },
   select: { id: true, name: true },
   orderBy: [{ id: 'desc' }],
@@ -382,30 +391,46 @@ const page1 = await client.users.paginate({
 });
 ```
 
-Both offset and cursor pagination return the same `{ data, pagination }` shape:
+The result includes the rows and the page metadata. With only the seed data loaded (before the write examples above), it looks like this:
 
-```json title="Output"
+```json filename="Output"
 {
   "data": [
     { "id": 3, "name": "Charlie" },
     { "id": 1, "name": "Alice" }
   ],
-  "pagination": { "count": 2, "hasNext": false, "hasPrevious": false }
+  "pagination": {
+    "type": "offset",
+    "page": 1,
+    "perPage": 10,
+    "total": 2,
+    "pageCount": 1,
+    "hasNext": false,
+    "hasPrevious": false
+  }
 }
 ```
 
-Cursor pagination uses the last item's cursor to fetch the next page:
+Use `cursor` for feed-style pagination. Pass the previous page's `nextCursor` as `after` to fetch the next page:
 
 ```typescript
-const page2 = await client.users.paginate({
-  type: PaginationType.Cursor,
+const first = await client.users.cursor({
   where: { active: true },
   select: { id: true, name: true },
-  after: { id: page1.data[page1.data.length - 1]?.id },
-  limit: 10,
   orderBy: [{ id: 'desc' }],
+  limit: 1,
+});
+
+const second = await client.users.cursor({
+  where: { active: true },
+  select: { id: true, name: true },
+  orderBy: [{ id: 'desc' }],
+  limit: 1,
+  after: first.pagination.nextCursor ?? undefined,
 });
 ```
+
+Cursor results return `hasNext`, `hasPrevious`, `nextCursor`, and `previousCursor` in `pagination`. With only the seed data loaded, `first.pagination` is `{ "type": "cursor", "hasNext": true, "hasPrevious": false, "nextCursor": { "id": 3 }, "previousCursor": null }`.
 
 ### Count and exists
 
@@ -421,21 +446,16 @@ const exists = await client.users.exists({
 
 ## Use plugins for cross-cutting behavior
 
-Plugins can manage timestamps, soft deletes, and custom behavior.
+Plugins can manage timestamps, soft deletes, and custom behavior. The timestamps and soft delete plugins ship with `better-drizzle`, so there's nothing extra to install.
 
 ### Timestamps
 
-Auto-manage `createdAt` and `updatedAt` columns on every write:
-
-```bash
-npm install @better-drizzle/timestamps
-```
+Auto-manage `createdAt` and `updatedAt` columns on every write. In `src/db.ts`, import the plugin and pass it to `better()`:
 
 ```typescript filename="src/db.ts"
-import { timestamps } from '@better-drizzle/timestamps';
+import { timestamps } from 'better-drizzle/timestamps';
 
-const client = better(db, {
-  schema,
+export const client = better(db, {
   plugins: [
     timestamps({
       createdAt: 'createdAt',
@@ -446,39 +466,38 @@ const client = better(db, {
 ```
 
 <Admonition type="important" title="Timestamps plugin">
-Use the column names defined in your Drizzle schema rather than the raw PostgreSQL column names. For example, if your schema specifies `createdAt` and `updatedAt`, those are the names you should reference in the plugin configuration - not the database’s `created_at` and `updated_at`.
+Use the property names defined in your Drizzle schema, not the Postgres column names. For example, if your schema defines `createdAt: timestamp('created_at')`, reference `createdAt` in the plugin configuration, not `created_at`.
 </Admonition>
 
-The plugin automatically sets `createdAt` on row creation and updates `updatedAt` on every update. Ensure your schema has the `createdAt` and `updatedAt` columns defined as timestamps. For example:
+The plugin sets `createdAt` and `updatedAt` when a row is created and updates `updatedAt` on every update. Add `createdAt` and `updatedAt` timestamp columns to your schema, then run `npx drizzle-kit generate` and `npx drizzle-kit migrate` again:
 
 ```typescript filename="src/schema.ts"
-import { relations } from "drizzle-orm";
-import { boolean, integer, pgTable, serial, text, timestamp } from "drizzle-orm/pg-core";
+import { boolean, integer, pgTable, serial, text, timestamp } from 'drizzle-orm/pg-core';
 
-export const users = pgTable("users", {
-  id: serial("id").primaryKey(),
-  email: text("email").notNull().unique(),
-  name: text("name").notNull(),
-  active: boolean("active").notNull().default(true),
-  createdAt: timestamp("created_at"), // [!code ++]
-  updatedAt: timestamp("updated_at"), // [!code ++]
+export const users = pgTable('users', {
+  id: serial('id').primaryKey(),
+  email: text('email').notNull().unique(),
+  name: text('name').notNull(),
+  active: boolean('active').notNull().default(true),
+  createdAt: timestamp('created_at'), // [!code ++]
+  updatedAt: timestamp('updated_at'), // [!code ++]
 });
 
-export const posts = pgTable("posts", {
-  id: serial("id").primaryKey(),
-  authorId: integer("author_id")
+export const posts = pgTable('posts', {
+  id: serial('id').primaryKey(),
+  authorId: integer('author_id')
     .notNull()
     .references(() => users.id),
-  title: text("title").notNull(),
-  published: boolean("published").notNull().default(false),
-  createdAt: timestamp("created_at"), // [!code ++]
-  updatedAt: timestamp("updated_at"), // [!code ++]
+  title: text('title').notNull(),
+  published: boolean('published').notNull().default(false),
+  createdAt: timestamp('created_at'), // [!code ++]
+  updatedAt: timestamp('updated_at'), // [!code ++]
 });
 ```
 
 ### Soft delete
 
-To use soft deletes, add a `deletedAt` column to your schema:
+To use soft deletes, add a `deletedAt` column to your schema, then generate and apply a migration:
 
 ```typescript filename="src/schema.ts"
 export const posts = pgTable('posts', {
@@ -492,17 +511,12 @@ export const posts = pgTable('posts', {
 });
 ```
 
-Install and configure the `@better-drizzle/soft-delete` plugin:
-
-```bash
-npm install @better-drizzle/soft-delete
-```
+In `src/db.ts`, import the soft delete plugin and pass it to `better()`:
 
 ```typescript filename="src/db.ts"
-import { softDelete } from '@better-drizzle/soft-delete';
+import { softDelete } from 'better-drizzle/soft-delete';
 
-const client = better(db, {
-  schema,
+export const client = better(db, {
   plugins: [
     softDelete({
       column: 'deletedAt',
@@ -523,11 +537,10 @@ await client.posts.restore({ where: { id: 1 } });
 
 ## Add lifecycle hooks
 
-Observe operations for auditing, metrics, or custom metadata:
+Observe operations for auditing, metrics, or custom metadata. Pass `hooks` to `better()` in `src/db.ts`:
 
-```typescript filename="db.ts"
-const client = better(db, {
-  schema,
+```typescript filename="src/db.ts"
+export const client = better(db, {
   hooks: {
     beforeCreate(ctx) {
       console.log('beforeCreate', ctx.action, ctx.table);
@@ -617,10 +630,6 @@ await client.transaction(
 );
 ```
 
-## Summary
-
-better-drizzle provides a type-safe, boilerplate-free API on top of Drizzle ORM, providing features like auto-pagination, soft deletes, lifecycle hooks, and nested transactions.
-
 ## Other features
 
 To explore more advanced capabilities of better-drizzle, refer to the following topics in the official documentation:
@@ -637,5 +646,6 @@ To explore more advanced capabilities of better-drizzle, refer to the following 
 - [better-drizzle GitHub repository](https://github.com/almeidazs/better-drizzle)
 - [Neon Drizzle setup guide](/docs/guides/drizzle)
 - [Schema migration with Neon and Drizzle](/docs/guides/drizzle-migrations)
+- [Realtime live SQL queries with Drizzle](/docs/realtime/examples/drizzle)
 
 <NeedHelp />

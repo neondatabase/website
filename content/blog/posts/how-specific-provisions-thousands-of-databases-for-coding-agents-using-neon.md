@@ -103,6 +103,6 @@ Specific is in public beta and focused on the self-serve AI engineer experience.
 
 ---
 
-If you’re building an agent platform and need a database layer that provisions on demand, scales to zero, and supports branching across thousands of projects, [start with Neon](https://neon.tech/). If you’d like to share your own story, find us on [Discord](https://neon.tech/discord).
+If you’re building an agent platform and need a database layer that provisions on demand, scales to zero, and supports branching across thousands of projects, [start with Neon](https://neon.tech/). If you’d like to share your own story, find us on [Discord](https://neon.com/discord).
 
 Thank you to Iman Radjavi and the Specific team for sharing how they built this.

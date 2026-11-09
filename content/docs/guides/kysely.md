@@ -10,7 +10,7 @@ summary: >-
   interface-based schema definitions, client initialization per driver,
   optional migrations via FileMigrationProvider, and CRUD query examples.
 enableTableOfContents: true
-updatedOn: '2026-07-31T15:27:48.506Z'
+updatedOn: '2026-10-08T19:32:04.700Z'
 ---
 
 <CopyPrompt src="/prompts/kysely-prompt.md" 
@@ -30,7 +30,7 @@ description="Pre-built prompt for connecting Node/TypeScript applications to Neo
 
 </InfoBlock>
 
-Kysely is a modern, type‑safe SQL query builder for TypeScript. Unlike traditional ORMs, it focuses on providing a flexible and intuitive API for building SQL queries while leveraging TypeScript's type system for safety and autocompletion. This guide walks you through connecting your application to a Lakebase Postgres database using Kysely.
+Kysely is a type-safe SQL query builder for TypeScript. Instead of mapping objects to tables like an ORM, it gives you an API for building SQL queries and uses TypeScript's type system for type checking and autocompletion. This guide walks you through connecting your application to a Lakebase Postgres database using Kysely.
 
 To connect a TypeScript/Node.js project to Neon using Kysely, follow these steps:
 
@@ -60,13 +60,14 @@ npx tsc --init
 
 Configure your `tsconfig.json` for type safety and module resolution. Ensure you have at least the following settings:
 
-```json {4-9}
+```json {4-10}
 {
   "compilerOptions": {
     // ... other settings ...
     "target": "ES2022",
     "module": "NodeNext",
     "moduleResolution": "NodeNext",
+    "types": ["node"],
     "strict": true,
     "allowImportingTsExtensions": true,
     "noEmit": true
@@ -74,7 +75,9 @@ Configure your `tsconfig.json` for type safety and module resolution. Ensure you
 }
 ```
 
-Configure your `package.json` to use ES modules by updating or adding the following line:
+Recent versions of `tsc --init` set `"types": []`, which hides the Node.js types installed by `@types/node`. Set `"types": ["node"]` so names like `process` type-check.
+
+Configure your `package.json` to use ES modules. `npm init -y` writes `"type": "commonjs"`, so change it to:
 
 ```json {3}
 {
@@ -93,18 +96,20 @@ If you do not have one already, create a Neon project.
 
 ## Get your connection string
 
-Find your database connection string by clicking the **Connect** button on your **Project Dashboard** to open the **Connect to your database** modal. Select a branch, a user, and the database you want to connect to. A connection string is constructed for you.
-![Connection details modal](/docs/connect/connection_details.png)
+Find your database connection string by clicking the **Connect** button in the Console nav to open the **Connect to your branch** modal. Select a branch, a user, and the database you want to connect to. A connection string is constructed for you.
+![Connection details modal](/docs/connect/connect_to_branch_modal.png)
 
 Create a `.env` file in your project's root directory and add the connection string to it. Your `.env` file should look like this:
 
 ```text shouldWrap
-DATABASE_URL="postgresql://[user]:[password]@[neon_hostname]/[dbname]?sslmode=require"
+DATABASE_URL="postgresql://[user]:[password]@[neon_hostname]/[dbname]?sslmode=require&channel_binding=require"
 ```
+
+If you use `node-postgres`, `pg` 8.23 and later print a `SECURITY WARNING` for `sslmode=require`. Change it to `sslmode=verify-full` to keep the same behavior without the warning.
 
 ## Install Kysely and a driver
 
-Install the Kysely core package and the necessary driver dependencies. Choose one of the following drivers based on your application's needs:
+Install the Kysely core package and the necessary driver dependencies. Choose one of the following drivers based on your application's needs. For a Node.js script or long-running server, use `node-postgres`.
 
 <Tabs labels={["Neon Serverless (HTTP)", "Neon WebSocket", "node-postgres"]}>
 
@@ -152,7 +157,7 @@ npm install -D @types/pg
 
 Unlike many ORMs, Kysely does not automatically sync your TypeScript types with the database schema. Tables must exist before you query them.
 
-Optionally, you can use Kysely’s migration helpers (`up` and `down`) to apply or revert schema changes. See [Run a Migration](#run-a-migration) below for details.
+To create the table with Kysely's migration helpers (`up` and `down`) instead, skip this step and follow [Run a migration](#run-a-migration-optional) below. Don't do both: the migration fails if the `users` table already exists.
 
 Navigate to the [SQL Editor in the Neon Console](/docs/get-started/query-with-neon-sql-editor) and run the following SQL command to create a `users` table:
 
@@ -165,7 +170,7 @@ CREATE TABLE users (
 );
 ```
 
-## Define the Database Schema
+## Define the database schema
 
 Kysely is TypeScript-first and requires you to define an interface that describes your database structure. This interface tells Kysely which tables and columns exist.
 
@@ -225,7 +230,7 @@ When using WebSockets, use the built-in `PostgresDialect` but pass the Neon `Poo
 
 ```typescript
 import 'dotenv/config';
-import { Kysely, PostgresDialect } from 'kysely';
+import { Kysely, PostgresDialect, type PostgresPool } from 'kysely';
 import { Pool, neonConfig } from '@neondatabase/serverless';
 import ws from 'ws';
 import type { Database } from './types.ts';
@@ -233,11 +238,13 @@ import type { Database } from './types.ts';
 // Configure the WebSocket constructor
 neonConfig.webSocketConstructor = ws;
 
+const pool = new Pool({ connectionString: process.env.DATABASE_URL });
+
 export const db = new Kysely<Database>({
   dialect: new PostgresDialect({
-    pool: new Pool({
-      connectionString: process.env.DATABASE_URL,
-    }),
+    // Neon's Pool type doesn't match Kysely's PostgresPool type exactly,
+    // but the Pool works with PostgresDialect at runtime.
+    pool: pool as unknown as PostgresPool,
   }),
 });
 ```
@@ -267,7 +274,7 @@ export const db = new Kysely<Database>({
 
 </Tabs>
 
-## Run a Migration (optional)
+## Run a migration (optional)
 
 > You can skip this step if you do not intend to use Kysely for migrations.
 
@@ -297,13 +304,13 @@ Kysely manages migrations using TypeScript files. Create a migration to create t
     }
     ```
 
-3.  Create a script to run the migration `src/migrate.ts`.
+3.  Create a script to run the migration, `src/migrate.ts`. In Kysely 0.29 and later, `Migrator` and `FileMigrationProvider` are imported from `kysely/migration`.
 
     ```typescript
     import * as path from 'path';
     import { promises as fs } from 'fs';
     import { fileURLToPath } from 'url';
-    import { Migrator, FileMigrationProvider } from 'kysely';
+    import { Migrator, FileMigrationProvider } from 'kysely/migration';
     import { db } from './db.ts';
 
     const __filename = fileURLToPath(import.meta.url);
@@ -411,15 +418,15 @@ All users: [
   {
     id: 1,
     name: 'Neon User',
-    email: 'user-1765528647146@example.com',
-    created_at: 2025-12-12T08:37:27.456Z
+    email: 'user-1794150348648@example.com',
+    created_at: 2026-11-08T15:05:48.648Z
   }
 ]
 User updated. Rows affected: 1
 User deleted. Rows affected: 1
 ```
 
-For more advanced use cases, such as complex filters, joins, transactions, and subqueries, please refer to the [Kysely documentation](https://kysely.dev/docs/intro).
+For more advanced use cases, such as complex filters, joins, transactions, and subqueries, see the [Kysely documentation](https://kysely.dev/docs/intro).
 
 </Steps>
 
@@ -435,3 +442,4 @@ For more advanced use cases, such as complex filters, joins, transactions, and s
 - [Add Object Storage](/docs/storage/overview): S3-compatible file storage that branches with your database
 - [Deploy a Function](/docs/compute/functions/overview): Run backend compute next to your database, no separate hosting needed
 - [Call an LLM with AI Gateway](/docs/ai-gateway/overview): Access foundation models from Anthropic, OpenAI, Google, and more with one credential
+- [Realtime](/docs/realtime/examples/kysely): Build fully-reactive realtime Kysely apps on Neon using your existing schema and queries &raquo;

@@ -4,12 +4,12 @@ subtitle: Learn how to create a secure CRUD API using Laravel and Laravel Sanctu
 author: bobbyiliev
 enableTableOfContents: true
 createdAt: '2024-07-01T00:00:00.000Z'
-updatedOn: '2026-02-02T06:44:09.000Z'
+updatedOn: '2026-09-24T17:56:34.189Z'
 ---
 
 Laravel is a PHP framework for building web applications and APIs.
 
-In this guide, we'll walk through the process of creating a CRUD (Create, Read, Update, Delete) API using Laravel, and we'll implement authentication using [Laravel Sanctum](https://laravel.com/docs/12.x/sanctum).
+In this guide, we'll create a CRUD (Create, Read, Update, Delete) API using Laravel, and we'll implement authentication using [Laravel Sanctum](https://laravel.com/docs/12.x/sanctum).
 
 By the end of this tutorial, you'll have a fully functional API that allows authenticated users to perform CRUD operations on a resource. We'll use a 'Task' model as our example resource and implement the necessary endpoints to manage tasks.
 
@@ -17,17 +17,17 @@ By the end of this tutorial, you'll have a fully functional API that allows auth
 
 Before we begin, ensure you have the following:
 
-- PHP 8.1 or higher installed on your system
-- A PostgreSQL client and the `php-pgsql` extension enabled in your PHP configuration
+- PHP 8.2 or higher installed on your system (required by current Laravel versions)
+- A Postgres client and the `php-pgsql` extension enabled in your PHP configuration
 - [Composer](https://getcomposer.org/) for managing PHP dependencies
 - A [Neon](https://console.neon.tech/signup) account for database hosting
 - Basic knowledge of Laravel and RESTful API principles
 
-## Setting up the Project
+## Setting up the project
 
 Let's start by creating a new Laravel project and setting up the necessary components.
 
-### Creating a New Laravel Project
+### Creating a new Laravel project
 
 Open your terminal and run the following command to create a new Laravel project:
 
@@ -38,7 +38,7 @@ cd laravel-crud-api
 
 This will create a new Laravel project in a directory named `laravel-crud-api` and install all the necessary dependencies.
 
-### Setting up the Database
+### Setting up the database
 
 Update your `.env` file with your Neon database credentials:
 
@@ -55,7 +55,7 @@ Make sure to replace `your-neon-hostname`, `your_database_name`, `your_username`
 
 ### Installing Laravel Sanctum
 
-Laravel Sanctum provides a featherweight authentication system for SPAs and simple APIs. To install it, all you need to do is use the following command:
+Laravel Sanctum provides a lightweight authentication system for SPAs and simple APIs. To install it, run:
 
 ```bash
 php artisan install:api
@@ -69,7 +69,7 @@ php artisan migrate
 
 This will create the necessary tables for Sanctum to work.
 
-## Creating the Task Model and Migration
+## Creating the Task model and migration
 
 As mentioned earlier, for our CRUD API, we'll use a 'Task' model as our example resource. This model will have fields such as title, description, status, due date, and priority.
 
@@ -97,7 +97,7 @@ public function up()
 }
 ```
 
-We've defined a foreign key `user_id` to associate each task with a user. This allows us to implement user-specific tasks and ensure that each task belongs to a specific user. The `constrained()` method creates a foreign key constraint that references the `id` column of the `users` table. The `onDelete('cascade')` method ensures that when a user is deleted, all associated tasks are also deleted.
+We've defined a foreign key `user_id` to associate each task with a user. This makes every task belong to a specific user. The `constrained()` method creates a foreign key constraint that references the `id` column of the `users` table. The `onDelete('cascade')` method ensures that when a user is deleted, all associated tasks are also deleted.
 
 Run the migration to create the 'tasks' table:
 
@@ -128,13 +128,13 @@ class Task extends Model
 }
 ```
 
-As a reference, the `fillable` property specifies which fields can be mass-assigned when creating or updating a model. This helps protect against mass assignment vulnerabilities and ensures that only the specified fields can be modified.
+As a reference, the `fillable` property specifies which fields can be mass-assigned when creating or updating a model. This protects against mass assignment vulnerabilities, since only the listed fields can be modified this way.
 
-## Implementing API Authentication
+## Implementing API authentication
 
 Before we create our CRUD endpoints, let's set up authentication using Laravel Sanctum. This will allow users to register, log in, and access protected routes in our API.
 
-### Creating the User Registration and Login Controllers
+### Creating the user registration and login controllers
 
 By default, Laravel comes with a few route groups like `web`, `api`, and `auth`. We'll use the `api` group for our API routes which will be protected by Sanctum.
 
@@ -219,7 +219,7 @@ Rundown of the methods in the `AuthController`:
 - `login`: Handles user login. Validates the request data, checks the user credentials, and returns an access token.
 - `logout`: Logs out the authenticated user by deleting the current access token.
 
-### Setting up Authentication Routes
+### Setting up authentication routes
 
 Update `routes/api.php` to include the authentication routes within the `api` route group:
 
@@ -238,11 +238,11 @@ Route::middleware('auth:sanctum')->group(function () {
 });
 ```
 
-The `auth:sanctum` middleware protects the routes by requiring a valid access token. This ensures that only authenticated users can access the protected routes.
+The `auth:sanctum` middleware protects the routes by requiring a valid access token, so only authenticated users can reach them.
 
 The `/register` and `/login` routes are public and do not require authentication. Users can register and log in to obtain an access token.
 
-### Issuing API Tokens
+### Issuing API tokens
 
 To issue API tokens, we need to update the `User` model to use the `HasApiTokens` trait. Laravel ships with a default `User` model located at `app/Models/User.php`.
 
@@ -274,9 +274,9 @@ public function tasks()
 }
 ```
 
-This relationship allows us to retrieve all tasks associated with a user and create new tasks for a user, simplifying the task management process.
+This relationship lets us retrieve a user's tasks and create new tasks for that user.
 
-### Testing the Authentication Endpoints
+### Testing the authentication endpoints
 
 To test the authentication endpoints, you can use a tool like [Postman](https://www.postman.com/) or [Insomnia](https://insomnia.rest/).
 
@@ -347,7 +347,7 @@ Replace `<your_access_token_here>` with the access token you received during log
 
 Stop the server by pressing `CTRL + C` in your terminal.
 
-## Implementing CRUD Operations
+## Implementing CRUD operations
 
 Now that we have authentication set up, let's create our CRUD operations for the Task model.
 
@@ -434,7 +434,7 @@ Rundown of the methods in the `TaskController`:
 - `update`: Updates a task. Validates the request data, updates the task, and returns the updated task as JSON.
 - `destroy`: Deletes a task. Deletes the specified task and returns a 204 No Content response.
 
-### Adding Task Routes
+### Adding task routes
 
 Once we have the `TaskController` set up, let's add the task routes to `routes/api.php` to include the task routes within the authenticated group:
 
@@ -455,7 +455,7 @@ The `Route::apiResource` method automatically generates the necessary routes for
 
 You can use the `php artisan route:list` command to see a list of all registered routes.
 
-## Implementing API Resources
+## Implementing API resources
 
 To provide a consistent and customizable way of transforming our models into JSON responses, let's use Laravel's API Resources.
 
@@ -562,7 +562,7 @@ class TaskController extends Controller
 
 Now, when you fetch tasks, create a new task, or update an existing task, the response will be formatted according to the `TaskResource` class.
 
-## Testing the API Endpoints
+## Testing the API endpoints
 
 To test the new Task API, you can again use `curl` or a tool like Postman or Insomnia.
 
@@ -613,9 +613,9 @@ curl -X GET http://localhost:8000/api/tasks \
 
 This will return a list of tasks in JSON format.
 
-## Adding Pagination
+## Adding pagination
 
-To improve performance and reduce payload size, we can add pagination to the task list. Laravel provides a simple way to paginate query results using the `paginate` method when fetching data. That way the response will include only a subset of tasks per page instead of the entire collection which can be large depending on the number of entries in the database.
+To improve performance and reduce payload size, we can add pagination to the task list. Laravel provides a simple way to paginate query results using the `paginate` method when fetching data. The response then includes one page of tasks instead of the entire collection, which can be large depending on the number of rows in the database.
 
 To do that, update the `index` method in `TaskController` and change the `all` method to `paginate` followed by the number of items per page:
 
@@ -627,15 +627,15 @@ public function index()
 }
 ```
 
-This pagination method will limit the number of tasks returned to 15 per page, significantly reducing the payload size for large datasets.
+This pagination method will limit the number of tasks returned to 15 per page, which keeps the payload small for large datasets.
 
-The response will now include additional pagination metadata such as the total number of items, the number of pages, and links to the next and previous pages, allowing for easy navigation through the entire collection of tasks.
+The response will now include additional pagination metadata such as the total number of items, the number of pages, and links to the next and previous pages, so clients can page through the full list of tasks.
 
-## Implementing Request Classes
+## Implementing request classes
 
-Request classes allow you to encapsulate request validation logic within dedicated classes. This helps keep your controller clean and improves reusability.
+Request classes move validation logic out of your controller and into dedicated classes you can reuse.
 
-To keep our controller clean and improve reusability, let's create dedicated request classes for validation for creating and updating tasks:
+Let's create request classes for creating and updating tasks:
 
 ```bash
 php artisan make:request StoreTaskRequest
@@ -731,13 +731,13 @@ The end-user will still receive the same JSON response, but the validation logic
 
 ## Testing the API
 
-To ensure our API works as expected, Laravel provides a testing suite out of the box.
+Laravel includes a testing suite out of the box.
 
-To learn more about testing in Laravel along with Neon branding, check out the [Testing Laravel Applications with Neon's Database Branching](/guides/laravel-test-on-branch).
+To learn how to run Laravel tests on a Neon branch, see [Testing Laravel applications with Neon's database branching](/guides/laravel-test-on-branch).
 
-## Adding API Documentation
+## Adding API documentation
 
-For better developer experience, it's important to have good API documentation.
+Good API documentation makes your API easier for other developers to use.
 
 You can use a third-party package called [Scribe](https://scribe.knuckles.wtf/) to generate your API documentation.
 
@@ -763,7 +763,7 @@ php artisan scribe:generate
 
 This will create a `public/docs` directory with the generated API documentation. You can access it by visiting `http://localhost:8000/docs`. The generated format will also include Postman collections and OpenAPI specifications.
 
-## Implementing API Versioning
+## Implementing API versioning
 
 As your API evolves, you might need to introduce breaking changes. API versioning allows you to do this without affecting existing clients.
 
@@ -803,11 +803,9 @@ Now, your API endpoints will be prefixed with `/api/v1`. This allows you to intr
 
 Later on, you can create a new version (e.g., `v2`) and update the routes accordingly to maintain backward compatibility.
 
-## Implementing Caching
+## Implementing caching
 
-To improve performance, especially for frequently accessed and rarely changing data, it is a good idea to implement caching for our task list.
-
-This can significantly reduce the response time and server load and reduce the number of database queries putting less pressure on the database.
+For frequently accessed data that rarely changes, such as our task list, caching cuts response time and the number of queries sent to the database.
 
 As an example, let's implement that for the `index` method in `TaskController`:
 
@@ -830,19 +828,13 @@ This caches the task list for one hour. Remember to clear the cache when tasks a
 
 ## Conclusion
 
-In this guide, we've walked through the process of building a simple CRUD API with Laravel, secured with Laravel Sanctum for authentication.
+You built a Laravel CRUD API for tasks on a Neon database, secured with Sanctum tokens, with pagination, request classes, versioning, generated documentation, and caching.
 
-We've covered setting up the project, configuring the database with Neon, and implementing CRUD operations for a Task model. We also added essential features such as API versioning, API documentation, and caching to improve the API's performance, security, and maintainability.
+As next steps, add search, filtering, and sorting, and add rate limiting to protect your API from abuse.
 
-By following these steps, you now have a fully functional API that allows authenticated users to manage tasks effectively. This can be used as the foundation for more complex applications and extended with additional features as needed.
+## Additional resources
 
-As next steps you can think about adding more features to the API, such as search, filtering, sorting, and more advanced authentication and authorization mechanisms.
-
-It is also a good idea to implement throttling to protect your API from abuse and to ensure fair usage.
-
-## Additional Resources
-
-- [Laravel Documentation](https://laravel.com/docs)
-- [Laravel Sanctum Documentation](https://laravel.com/docs/sanctum)
-- [Scribe Documentation](https://scribe.knuckles.wtf/laravel)
-- [Neon Documentation](/docs)
+- [Laravel documentation](https://laravel.com/docs)
+- [Laravel Sanctum documentation](https://laravel.com/docs/sanctum)
+- [Scribe documentation](https://scribe.knuckles.wtf/laravel)
+- [Neon documentation](/docs)

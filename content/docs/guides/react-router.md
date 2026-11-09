@@ -8,7 +8,7 @@ summary: >-
   serverless Postgres backend, with driver options for node-postgres,
   postgres.js, or the Neon serverless driver.
 enableTableOfContents: true
-updatedOn: '2026-08-04T05:18:26.469Z'
+updatedOn: '2026-10-08T19:32:04.700Z'
 ---
 
 [React Router](https://reactrouter.com/home) is a powerful routing library for React that also includes modern, full-stack framework features. This guide explains how to connect a React Router application to Neon using a server-side `loader` function.
@@ -40,6 +40,7 @@ If you do not have one already, create a Neon project. Save your connection deta
 
    ```shell
    npm install pg
+   npm install -D @types/pg
    ```
 
    ```shell
@@ -54,25 +55,29 @@ If you do not have one already, create a Neon project. Save your connection deta
 
 ## Store your Neon credentials
 
-Add a `.env` file to your project's root directory and add your Neon connection string to it. You can find the connection string for your database by clicking the **Connect** button on your **Project Dashboard**. For more information, see [Connect from any application](/docs/connect/connect-from-any-app).
+Add a `.env` file to your project's root directory and add your Neon connection string to it. You can find the connection string for your database by clicking the **Connect** button in the Console nav. For more information, see [Connect from any application](/docs/connect/connect-from-any-app).
 
 ```shell shouldWrap
-DATABASE_URL="postgresql://<user>:<password>@<endpoint_hostname>.neon.tech:<port>/<dbname>?sslmode=require&channel_binding=require"
+DATABASE_URL="postgresql://[user]:[password]@[neon_hostname]/[dbname]?sslmode=require&channel_binding=require"
 ```
+
+<Admonition type="note">
+`pg` 8.23 and later print a `SECURITY WARNING` when a connection string uses `sslmode=require`. If you use node-postgres, change `sslmode=require` to `sslmode=verify-full` to keep the current behavior and remove the warning.
+</Admonition>
 
 ## Configure the Postgres client
 
-With React Router, data fetching is handled in "Route Modules". We will create a new route that connects to Neon in its `loader` function, which runs on the server.
+With React Router, data fetching is handled in route modules. The following steps add a new route that connects to Neon in its `loader` function, which runs on the server.
 
 ### 1. Define the route
 
-First, define a new route in `app/routes.ts`. This tells React Router to render our new component when a user visits the `/version` path.
+First, add a route to `app/routes.ts`. This tells React Router to render the new component when a user visits the `/version` path. Keep your existing `index` route as it is (new projects use `routes/home.tsx`).
 
 ```typescript {5} filename=app/routes.ts
 import { type RouteConfig, route, index } from '@react-router/dev/routes';
 
 export default [
-  index('./home.tsx'),
+  index('routes/home.tsx'),
   route('version', './routes/version.tsx'),
 ] satisfies RouteConfig;
 ```
@@ -87,16 +92,16 @@ Create a new file at `app/routes/version.tsx`. This file will contain both the s
 import { Pool } from 'pg';
 import type { Route } from './+types/version';
 
+const pool = new Pool({ connectionString: process.env.DATABASE_URL });
+
 // The loader function runs on the server
 export async function loader() {
-  const pool = new Pool({ connectionString: process.env.DATABASE_URL });
   const client = await pool.connect();
   try {
     const { rows } = await client.query('SELECT version()');
     return { version: rows[0].version };
   } finally {
     client.release();
-    await pool.end();
   }
 }
 
@@ -115,9 +120,10 @@ export default function Version({ loaderData }: Route.ComponentProps) {
 import postgres from 'postgres';
 import type { Route } from './+types/version';
 
+const sql = postgres(process.env.DATABASE_URL as string);
+
 // The loader function runs on the server
 export async function loader() {
-  const sql = postgres(process.env.DATABASE_URL as string);
   const response = await sql`SELECT version()`;
   return { version: response[0].version };
 }
@@ -179,13 +185,18 @@ Now, navigate to [http://localhost:5173/version](http://localhost:5173/version) 
 
 ```text shouldWrap
 Database Version
-PostgreSQL 17.5 (6bc9ef8) on aarch64-unknown-linux-gnu, compiled by gcc (Debian 12.2.0-14+deb12u1) 12.2.0, 64-bit
+PostgreSQL 18.6 (ac70818) on aarch64-unknown-linux-gnu, compiled by gcc (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0, 64-bit
 ```
+
+<Admonition type="note">
+`npm run dev` loads `.env` automatically. The production server (`npm run build` then `npm start`) does not, so set `DATABASE_URL` in your environment before you start it.
+</Admonition>
 
 </Steps>
 
 ## Next steps
 
 - [Set up Managed Better Auth](/docs/auth/quick-start/react): Add managed authentication that branches with your database
+- [Realtime](/docs/realtime/sdks/typescript#react): Build realtime React apps on Neon with end-to-end reactivity and type-safety &raquo;
 
 <NeedHelp/>

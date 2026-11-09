@@ -10,7 +10,7 @@ summary: >-
   datasource configuration with SSL required, and a working HTTP endpoint that
   queries the Postgres version.
 enableTableOfContents: true
-updatedOn: '2026-07-31T15:27:48.506Z'
+updatedOn: '2026-09-16T19:45:35.340Z'
 ---
 
 <CopyPrompt src="/prompts/quarkus-jdbc-prompt.md"
@@ -18,7 +18,12 @@ description="Pre-built prompt for connecting Quarkus applications to Lakebase Po
 
 [Quarkus](https://quarkus.io/) is a Java framework optimized for cloud environments. This guide shows how to connect to Neon from a Quarkus project using the PostgreSQL JDBC driver.
 
-To connect to a Lakebase Postgres database from a Quarkus application using the Postgres JDBC Driver:
+To connect to a Lakebase Postgres database from a Quarkus application using the Postgres JDBC driver:
+
+## Prerequisites
+
+- [JDK 21](https://www.oracle.com/java/technologies/downloads/) or later. The project that Quarkus creates compiles for Java 21.
+- The [Quarkus CLI](https://quarkus.io/guides/cli-tooling).
 
 <Steps>
 
@@ -47,7 +52,7 @@ You now have a Quarkus project in a folder named `neon-with-quarkus-jdbc` with t
 
 Create a `.env` file in the root of your Quarkus project directory. Configure a JDBC data source using the components of your database connection string and specifying the database kind as shown:
 
-```shell shouldWrap
+```text filename=".env" shouldWrap
 QUARKUS_DATASOURCE_DB_KIND=postgresql
 QUARKUS_DATASOURCE_USERNAME=[user]
 QUARKUS_DATASOURCE_PASSWORD=[password]
@@ -55,7 +60,7 @@ QUARKUS_DATASOURCE_JDBC_URL=jdbc:postgresql://[neon_hostname]/[dbname]?sslmode=r
 ```
 
 <Admonition type="note">
-You can find the connection details for your database by clicking the **Connect** button on your **Project Dashboard**. For more information, see [Connect from any application](/docs/connect/connect-from-any-app).
+You can find the connection details for your database by clicking the **Connect** button in the Console nav. For more information, see [Connect from any application](/docs/connect/connect-from-any-app).
 </Admonition>
 
 ## Use the PostgreSQL JDBC Driver
@@ -114,7 +119,7 @@ quarkus dev
 Visit [localhost:8080/postgres/version](http://localhost:8080/postgres/version) in your web browser. Your Neon database's Postgres version will be returned. For example:
 
 ```
-PostgreSQL 17.5 (6bc9ef8) on x86_64-pc-linux-gnu, compiled by gcc (Debian 12.2.0-14+deb12u1) 12.2.0, 64-bit
+PostgreSQL 18.6 (ac70818) on aarch64-unknown-linux-gnu, compiled by gcc (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0, 64-bit
 ```
 
 </Steps>

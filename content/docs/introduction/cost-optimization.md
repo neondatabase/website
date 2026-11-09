@@ -15,7 +15,7 @@ summary: >-
   $1.50/branch-month over the plan allowance. Paid plans include 500 GB of
   public data transfer per project per month, then $0.10/GB.
 enableTableOfContents: true
-updatedOn: '2026-09-02T21:17:48.434Z'
+updatedOn: '2026-09-29T17:10:40.931Z'
 ---
 
 Managing your Neon costs effectively requires understanding how each billing factor works and implementing strategies to control usage. This guide provides actionable recommendations for optimizing costs across all billing metrics.
@@ -78,7 +78,7 @@ Yes. Any data-modifying operation, including deletes, generates [WAL records](/d
 
 Storage limits depend on your Neon plan:
 
-- **Free plan**: The Free plan includes 0.5 GB of storage per project. If you reach this limit, database operations that would increase storage (inserts, updates, and deletes) will fail until you reduce your storage or [upgrade to a paid plan](/docs/introduction/manage-billing#change-your-plan).
+- **Free plan**: The Free plan includes 1 GB of storage per project. If you reach this limit, database operations that would increase storage (inserts, updates, and deletes) will fail until you reduce your storage or [upgrade to a paid plan](/docs/introduction/manage-billing#change-your-plan).
 - **Paid plans**: Storage is unlimited on Launch and Scale: there's no hard per-branch size limit, your storage grows with your usage, and you pay only for what you use.
 
 </details>
@@ -122,7 +122,7 @@ VACUUM FULL your_table_name;
 However, there are some trade-offs:
 
 - **Table locking.** `VACUUM FULL` locks your table during the operation. If this is your production database, this may not be an option.
-- **Temporary storage spike.** The process creates a new copy of the table, temporarily increasing your storage usage. On the Free plan, this could cause the operation to fail if you hit the 0.5 GB storage limit.
+- **Temporary storage spike.** The process creates a new copy of the table, temporarily increasing your storage usage. On the Free plan, this could cause the operation to fail if you hit the 1 GB storage limit.
 
 In short, `VACUUM FULL` can help reduce your data size and future storage costs, but be aware of the temporary storage spike and table locking during the operation.
 
@@ -144,7 +144,7 @@ In short, `VACUUM FULL` can help reduce your data size and future storage costs,
 <details>
 <summary>**What is the maximum data size that Neon supports?**</summary>
 
-Storage is unlimited on paid plans (Launch and Scale). Neon applies quota-based soft limits to help you avoid unexpected costs; if you approach your quota, writes slow down rather than stop, and you can contact [Neon Support](/docs/introduction/support) to raise it. The Free plan is limited to 0.5 GB per project.
+Storage is unlimited on paid plans (Launch and Scale). Neon applies quota-based soft limits to help you avoid unexpected costs; if you approach your quota, writes slow down rather than stop, and you can contact [Neon Support](/docs/introduction/support) to raise it. The Free plan is limited to 1 GB per project.
 
 </details>
 

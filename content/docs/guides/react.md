@@ -3,21 +3,19 @@ title: Connect a React application to Neon
 subtitle: Set up a Neon project in seconds and connect from a React application
 summary: >-
   React connection hub for Lakebase Postgres, directing developers to server-side
-  integration guides for Next.js, Remix, TanStack Start, and SvelteKit. Use
+  integration guides for Next.js, React Router, Remix, and TanStack Start. Use
   this page when setting up a Lakebase Postgres connection from a React
   meta-framework, since Lakebase Postgres must be accessed server-side in React apps. Neon
   Auth quick starts for Next.js and TanStack Router are also linked here.
 enableTableOfContents: true
-updatedOn: '2026-07-31T15:27:48.506Z'
+updatedOn: '2026-10-08T19:32:04.700Z'
 ---
 
-React by Facebook is an open-source front-end JavaScript library for building user interfaces based on components.
+React is an open-source JavaScript library for building component-based user interfaces.
 
-Lakebase Postgres should be accessed from the server side in React applications. Using the following React meta-frameworks, you can easily configure a server-side connection to a Lakebase Postgres database.
+Connect to Lakebase Postgres from the server side of a React application, never from the browser. The following React frameworks each have a guide for configuring a server-side connection.
 
-## React Meta-Frameworks
-
-Find detailed instructions for connecting to Neon from various React meta-frameworks.
+## React frameworks
 
 <TechCards>
 
@@ -25,15 +23,15 @@ Find detailed instructions for connecting to Neon from various React meta-framew
 
 <a href="/docs/guides/nextjs" title="Next.js" description="Connect a Next.js application to Neon" icon="next-js"></a>
 
-<a href="/docs/guides/remix" title="Remix" description="Connect a Remix application to Neon" icon="remix"></a>
+<a href="/docs/guides/react-router" title="React Router" description="Connect a React Router application to Neon" icon="react"></a>
 
-<a href="/docs/guides/sveltekit" title="Sveltekit" description="Connect a Sveltekit application to Neon" icon="svelte"></a>
+<a href="/docs/guides/remix" title="Remix" description="Connect a Remix application to Neon" icon="remix"></a>
 
 </TechCards>
 
 ## Managed Better Auth
 
-After you connect your database, add managed authentication with [Managed Better Auth](/docs/auth/overview). Quick starts are available for supported React meta-frameworks:
+After you connect your database, add managed authentication with [Managed Better Auth](/docs/auth/overview). Quick starts are available for these React frameworks:
 
 <TechCards>
 
@@ -50,5 +48,6 @@ For React Router, follow the [React Auth quick start](/docs/auth/quick-start/rea
 - [Add Object Storage](/docs/storage/overview): S3-compatible file storage that branches with your database
 - [Deploy a Function](/docs/compute/functions/overview): Run backend compute next to your database, no separate hosting needed
 - [Call an LLM with AI Gateway](/docs/ai-gateway/overview): Access foundation models from Anthropic, OpenAI, Google, and more with one credential
+- [Realtime](/docs/realtime/sdks/typescript#react): Build realtime React apps on Neon with end-to-end reactivity and type safety
 
 <NeedHelp/>

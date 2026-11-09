@@ -7,9 +7,10 @@ summary: >-
   template picker, the `--default` quick start, and post-scaffold setup steps
   (dependency install, git init, agent tooling, and project linking).
 enableTableOfContents: true
+updatedOn: '2026-11-05T15:33:57.188Z'
 ---
 
-The `bootstrap` command scaffolds a new application from a Neon starter template. By default it runs interactively: it prompts you to pick a template, scaffolds it into the target directory, then offers the usual setup steps (install dependencies, initialize git, install agent tooling, and link the directory to a Neon project). Requires neon 2.25.0 or later; check your version with `neon --version`.
+The `bootstrap` command scaffolds a new application from a Neon starter template. By default it runs interactively: it prompts you to pick a template, scaffolds it into the target directory, then offers the usual setup steps (install dependencies, initialize git, install agent tooling, and link the directory to a Neon project). To add a single function to an existing project from a template, use a [Function Registry template](/functions/templates) and [`neon functions new`](/docs/cli/functions#new) instead.
 
 ## Usage
 
@@ -30,7 +31,23 @@ The post-scaffold steps all default to on. In interactive mode, bootstrap asks a
 - `--agent-setup` / `--no-agent-setup`: install agent tooling, either the Neon plugin, or agent skills and the MCP server. Pass `--agent` (alias `-a`, repeatable) to name the agents and skip the picker, for example `neon bootstrap my-app --agent cursor`.
 - `--link` / `--no-link`: run [`neon link`](/docs/cli/link) in the scaffolded directory.
 
-Use `--default` (alias `-y`) for a quick start: it scaffolds the default template (or the one you pass with `--template`), then runs dependency install, git init, agent tooling, and `neon link --yes` without prompting. `link --yes` still asks which project to use unless the directory is already linked.
+Use `--default` (alias `-y`) for a quick start: it scaffolds the default template (or the one you pass with `--template`), then runs git init, agent tooling, dependency install, and `neon link --yes` without prompting.
+
+`link --yes` picks your only organization and project and writes a `.neon` context file. If you have several, the other steps still finish, then the command lists the IDs and exits with an error. Bootstrap doesn't accept `--org-id` or `--project-id`, so link from the new directory:
+
+```bash
+neon link --yes --org-id <org-id> --project-id <project-id>
+```
+
+Outside an interactive terminal (no TTY, or in CI), bootstrap only scaffolds the template. It skips every post-scaffold step, even one you pass explicitly like `--install`, and its summary lists the commands to run next. Use `--default` to run the steps unattended.
+
+When the template has a [`neon.ts`](/docs/reference/neon-ts), bootstrap can also deploy it once dependencies are installed and the project is linked. It checks the environment variables your functions read against the env file that `neon link` pulled (`.env` if the directory has one, otherwise `.env.local`). If they're all set, bootstrap asks in an interactive terminal whether to deploy now and runs [`neon deploy --env <file>`](/docs/cli/deploy) with that file. With `--default`, it skips the question and lists that command under `Next:`. If any are unset, `Next:` names them.
+
+Pass `--deploy` to install, link, and deploy without asking. It fails with `neon deploy`'s error if an environment variable is unset. `--deploy` can't be combined with `--no-install` or `--no-link`, and needs `--default` outside an interactive terminal:
+
+```bash
+neon bootstrap my-app --template hono --default --deploy
+```
 
 ## Examples
 
@@ -40,10 +57,34 @@ Create `./my-app` from an interactively chosen template:
 neon bootstrap my-app
 ```
 
+When the steps finish, bootstrap prints a summary. This run linked a project and skipped agent tooling:
+
+```text
+Project scaffolded.
+-------------------
+
+  Template      REST API
+  Directory     my-app
+  Dependencies  installed with npm
+  Git           initialized
+  Agents        skipped
+  Project       linked
+
+Next:
+  cd my-app
+  See the README to run it.
+```
+
 Scaffold a specific template into the current directory:
 
 ```bash
 neon bootstrap . --template hono
+```
+
+Scaffold the [Realtime](/docs/realtime/overview) React starter, a todo app with live queries and optimistic updates. Its `neon.ts` declares Realtime, so run `neon deploy` in the new directory to enable it:
+
+```bash
+neon bootstrap my-app --template realtime-react
 ```
 
 Quick start: scaffold the default template and run setup without prompting:

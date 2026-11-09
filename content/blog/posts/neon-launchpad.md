@@ -9,7 +9,7 @@ excerpt: >-
   bring their own, or build a full provisioning flow yourself. Beyond just
   provisioning it, your users will need to set up their sche...
 date: '2025-06-06T17:57:34'
-updatedOn: '2025-08-14T09:24:39'
+updatedOn: '2026-11-02T12:00:00.000Z'
 category: product
 categories:
   - product
@@ -23,18 +23,20 @@ isFeatured: true
 seo:
   title: 'Neon Launchpad: A Tool For Instant Postgres, No Login Needed - Neon'
   description: >-
-    Neon Launchpad is a tool that lets you generate a real, hosted Postgres
-    database in seconds (no setup, no login, no config).
+    Neon Launchpad, now Claimable Neon: create a Postgres database without signing up and claim it later. See neon.com/docs/reference/claimable-neon.
   keywords: []
   noindex: false
   ogTitle: 'Neon Launchpad: A Tool For Instant Postgres, No Login Needed - Neon'
   ogDescription: >-
-    Neon Launchpad is a tool that lets you generate a real, hosted Postgres
-    database in seconds (no setup, no login, no config).
+    Neon Launchpad, now Claimable Neon: create a Postgres database without signing up and claim it later. See neon.com/docs/reference/claimable-neon.
   image: 'https://cdn.neonapi.io/public/images/pages/blog/neon-launchpad/social.jpg'
 ---
 
 ![Image](https://cdn.neonapi.io/public/images/pages/blog/neon-launchpad/neon-laucnhpad-1-1024x576-79a0c334.jpg)
+
+<Admonition type="important" title="Launchpad is now Claimable Neon">
+Neon Launchpad has evolved into Claimable Neon. An agent or tool creates a Neon project without an account, uses it right away, and hands the user a claim link to keep it. Claimable projects can also include the Data API and Managed Better Auth. See [Claimable Neon](/claimable-neon) and the [Claimable Neon reference](/docs/reference/claimable-neon) for the current CLI and API.
+</Admonition>
 
 If you’re building a dev tool, template, or platform where users need a database, you’re probably familiar with the pain: you can either ask them to bring their own, or build a full provisioning flow yourself. Beyond just provisioning it, your users will need to set up their schema, configure credentials, and wire up their ORM. It’s a lot of steps that break the flow between having an idea and actually shipping something.
 
@@ -104,7 +106,7 @@ To make Launchpad even more extensible for this kind of projects, we’re open-s
 
 Launchpad is our first step toward making Postgres databases feel truly instant and programmable, but we’re just getting started. We’re already working on features like pushing an existing schema, seeding data, claiming databases from the CLI, and even bootstrapping your preferred Postgres client automatically.
 
-There’s a lot more to come, and we’d love your input! [Try Launchpad today,](https://neon.new/) build something with it, and tell us what you want to see next. You can [open an issue, submit a PR](https://github.com/neondatabase/neondb-cli), or [hang out with us in Discord](https://discord.gg/92vNTzKDGp).
+There’s a lot more to come, and we’d love your input! [Try Launchpad today,](https://neon.new/) build something with it, and tell us what you want to see next. You can [open an issue, submit a PR](https://github.com/neondatabase/neondb-cli), or [hang out with us in Discord](https://neon.com/discord).
 
 <Admonition type="info" title="building a platform or agent?">
 If you’re looking to add Postgres to your tool, we’re here to help. Even small teams today operate fleets of thousands of Neon databases. Let’s explore how Launchpad can power your ideal integration - [get in touch!](https://neon.com/contact-sales)

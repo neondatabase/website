@@ -124,4 +124,4 @@ The challenge with scaling index build such as pgvector’s is that `maintenance
 
 Neon’s autoscaling feature is beneficial for handling the intensive resource demands of index build operations. It allows for dynamic resizing of Postgres instances based on load, optimizing both performance and cost. The ability to scale up for resource-heavy tasks, like creating an HNSW index, and scale down during normal operations ensures that the system remains cost-efficient without compromising on performance.
 
-Autoscaling is available for all Neon databases, [including the Free plan](https://neon.tech/pricing). [Create a Neon account today if you haven’t already](https://console.neon.tech/signup). Join us on [Discord](https://neon.tech/discord), follow us on [X](https://x.com/neondatabase), and let us know what you think.
+Autoscaling is available for all Neon databases, [including the Free plan](https://neon.tech/pricing). [Create a Neon account today if you haven’t already](https://console.neon.tech/signup). Join us on [Discord](https://neon.com/discord), follow us on [X](https://x.com/neondatabase), and let us know what you think.

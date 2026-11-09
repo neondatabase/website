@@ -11,12 +11,12 @@ summary: >-
   Project transfers require a personal API key.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2026-09-02T18:59:27.831Z'
+updatedOn: '2026-11-04T20:10:08.844Z'
 ---
 
 This guide covers the technical implementation of the Neon agent plan for your platform. You'll learn how to provision databases, implement versioning, manage user upgrades, and monitor usage at scale.
 
-<CTA title="Learn from other agent platform builders" description="See how <a href='/blog/the-hidden-ops-layer-of-agent-platforms'>Anything manages per-agent isolation at scale</a>, <a href='/blog/databutton-neon-integration'>Databutton built full-stack AI agents with Postgres and Auth</a>, and <a href='/blog/building-versioning-for-ai-generated-apps'>Dyad implemented database versioning for AI-generated apps</a> using Neon."></CTA>
+<CTA title="Learn from other agent platform builders" description="See how <a href='/blog/the-hidden-ops-layer-of-agent-platforms'>Anything manages per-agent isolation at scale</a>, <a href='/blog/riff-neon-integration'>Riff built full-stack AI agents with Postgres and Auth</a>, and <a href='/blog/building-versioning-for-ai-generated-apps'>Dyad implemented database versioning for AI-generated apps</a> using Neon."></CTA>
 
 <Admonition type="note">
 **Prerequisites:** You must be enrolled in the [Neon Agent Plan](/docs/introduction/agent-plan). If you haven't applied yet, visit [Neon for AI Agent Platforms](https://neon.com/use-cases/ai-agents).
@@ -45,7 +45,7 @@ Keep your API keys secure. You'll use them for all API operations in this guide.
 
 ### Project-per-tenant architecture
 
-This integration uses a **project-per-tenant model**, where each tenant (user, app, or agent) gets its own dedicated Neon [project](/docs/manage/overview) (containing branches, databases, roles, and computes). This provides complete data and resource isolation, makes consumption limits and billing straightforward, and aligns with how the Neon API is designed. For more on this database-per-tenant approach, see [Data Isolation at Scale](https://neon.com/use-cases/database-per-tenant).
+This integration uses a **project-per-tenant model**, where each tenant (user, app, or agent) gets its own dedicated Neon [project](/docs/concepts/the-object-model) (containing branches, databases, roles, computes, and backend services like object storage and functions). This provides complete data and resource isolation, makes consumption limits and billing straightforward, and aligns with how the Neon API is designed. For more on this database-per-tenant approach, see [Data Isolation at Scale](https://neon.com/use-cases/database-per-tenant).
 
 <Admonition type="tip">
 For details about **Agent plan** structure, pricing, and benefits, refer to the [Neon Agent Plan](/docs/introduction/agent-plan) docs.
@@ -104,7 +104,7 @@ For free-tier users, create projects in your Free organization (sponsored by Neo
 | ----------------- | ------------------ | ---------------------------------------- |
 | **Compute**       | 0.25 / 2 CU        | Autoscales from 0.25 to 2 compute units  |
 | **Active time**   | `360000` seconds   | 100 hours of compute activity per month  |
-| **Storage**       | `536870912` bytes  | 512 MB total storage limit               |
+| **Storage**       | `1073741824` bytes | 1 GB total storage limit                 |
 | **Data transfer** | `5368709120` bytes | 5 GB data transfer per project per month |
 
 Example API request:
@@ -122,7 +122,7 @@ curl --request POST \
     "settings": {
       "quota": {
         "active_time_seconds": 360000,
-        "logical_size_bytes": 536870912,
+        "logical_size_bytes": 1073741824,
         "data_transfer_bytes": 5368709120
       }
     },
@@ -141,12 +141,12 @@ For paid users, create projects in your paid organization with higher resource q
 
 #### Example: Pro tier
 
-| Resource          | Pro Tier Quota      | Description                             |
-| ----------------- | ------------------- | --------------------------------------- |
-| **Compute**       | 0.25 / 2 CU         | Autoscales from 0.25 to 2 compute units |
-| **Active time**   | `2700000` seconds   | 750 hours of compute activity per month |
-| **Storage**       | `10737418240` bytes | 10 GB storage limit                     |
-| **Data transfer** | `53687091200` bytes | 50 GB data transfer per month           |
+| Resource             | Pro Tier Quota      | Description                             |
+| -------------------- | ------------------- | --------------------------------------- |
+| **Compute**          | 0.25 / 2 CU         | Autoscales from 0.25 to 2 compute units |
+| **Active time**      | `2700000` seconds   | 750 hours of compute activity per month |
+| **Postgres storage** | `10737418240` bytes | 10 GB Postgres storage limit            |
+| **Data transfer**    | `53687091200` bytes | 50 GB data transfer per month           |
 
 Example API request:
 
@@ -187,7 +187,7 @@ For detailed information about configuring quotas and what happens when limits a
 Project provisioning is near-instant (typically under 1 second), but consider these timing factors:
 
 1. **Project creation**: Returns immediately with project details
-2. **Compute activation**: First connection may take 1-2 seconds as compute starts
+2. **Compute activation**: First connection after the compute has been idle can take a few hundred milliseconds longer while it wakes
 3. **Subsequent connections**: Near-instant once compute is active
 
 For the best user experience:
@@ -315,7 +315,7 @@ curl --request PATCH \
     "settings": {
       "quota": {
         "active_time_seconds": 360000,
-        "logical_size_bytes": 536870912,
+        "logical_size_bytes": 1073741824,
         "data_transfer_bytes": 5368709120
       }
     },
@@ -552,7 +552,7 @@ All platform integrations use the Neon API. You can call it directly or use lang
 
 - **Users hit quota limits unexpectedly**: Autoscaling can consume compute time faster than anticipated. Set `autoscaling_limit_max_cu` appropriately for each tier, monitor consumption metrics and alert users at 80% threshold, and consider lowering `suspend_timeout_seconds` for free tier to reduce active time.
 
-- **First database connection is slow**: Compute needs to start from idle state (cold start). This is expected behavior for serverless compute (1-2 seconds on first connection). Set user expectations accordingly. For critical production endpoints, use `suspend_timeout_seconds: -1` to keep compute always on. Subsequent connections are near-instant.
+- **First database connection is slow**: Compute needs to start from idle state (cold start). This is expected behavior for serverless compute: the first connection after the compute has been idle can take a few hundred milliseconds longer while it wakes. Set user expectations accordingly. For critical production endpoints, use `suspend_timeout_seconds: -1` to keep compute always on. Subsequent connections are near-instant.
 
 - **Storage grows larger than expected**: Multiple branches or snapshots accumulate over time. Implement branch cleanup for old development branches, delete snapshots that are no longer needed, and monitor storage metrics to alert users approaching limits.
 

@@ -59,18 +59,31 @@ function stringLiteralValue(node) {
   return undefined;
 }
 
-function arrayLiteralStrings(node) {
+function arrayLiteralStrings(node, consts) {
   if (!node || !ts.isArrayLiteralExpression(node)) return undefined;
   const out = [];
   for (const el of node.elements) {
-    const v = stringLiteralValue(el);
-    // All-or-nothing: a partially resolved list (e.g. enum member
-    // references) is worse than none — it would validate real values as
-    // invalid choices.
+    const v = stringLiteralValue(el) ?? enumMemberString(el, consts);
+    // All-or-nothing: a partially resolved list (e.g. an enum member whose
+    // enum isn't in `consts`) is worse than none — it would validate real
+    // values as invalid choices.
     if (v === undefined) return undefined;
     out.push(v);
   }
   return out;
+}
+
+// `Enum.Member` where `Enum` is a const object of string literals in
+// `consts`, e.g. `NeonAuthOauthProviderId.Google` from utils/api_enums.ts.
+function enumMemberString(node, consts) {
+  const e = unwrapExpression(node);
+  if (!consts || !e || !ts.isPropertyAccessExpression(e) || !ts.isIdentifier(e.expression)) {
+    return undefined;
+  }
+  const container = unwrapExpression(consts.get(e.expression.text));
+  if (!container || !ts.isObjectLiteralExpression(container)) return undefined;
+  const prop = getProp(container, e.name.text);
+  return prop && ts.isPropertyAssignment(prop) ? stringLiteralValue(prop.initializer) : undefined;
 }
 
 // Grab the property named `name` from an ObjectLiteralExpression.
@@ -104,9 +117,12 @@ function unwrapExpression(node) {
 }
 
 // Builds a map of module-level `const name = { ... }` object literals
-// (so spreads like `.options({ ...settingsFlags })` resolve) and
+// (so spreads like `.options({ ...settingsFlags })` resolve),
 // `const name = [ ... ]` string arrays (so `${REGIONS.join(', ')}`
-// interpolations resolve).
+// interpolations resolve), string/number literals (so a describe or
+// default held in a const, like docs.ts's `SEARCH_DESCRIBE` and
+// `default: DEFAULT_LIMIT`, resolves), and template literals (so a
+// describe can interpolate one, like neon_auth.ts's `OWN_CREDENTIALS_NOTE`).
 function collectModuleConsts(sf) {
   const consts = new Map();
   sf.forEachChild((node) => {
@@ -114,7 +130,14 @@ function collectModuleConsts(sf) {
     for (const decl of node.declarationList.declarations) {
       if (!ts.isIdentifier(decl.name) || !decl.initializer) continue;
       const init = unwrapExpression(decl.initializer);
-      if (init && (ts.isObjectLiteralExpression(init) || ts.isArrayLiteralExpression(init))) {
+      if (
+        init &&
+        (ts.isObjectLiteralExpression(init) ||
+          ts.isArrayLiteralExpression(init) ||
+          ts.isNumericLiteral(init) ||
+          ts.isTemplateExpression(init) ||
+          stringLiteralValue(init) !== undefined)
+      ) {
         consts.set(decl.name.text, init);
       }
     }
@@ -197,8 +220,13 @@ function resolveStringValue(expr, consts) {
   // parameters (`windowOptions(defaultWindow)`) whose value was substituted into
   // `consts` as a string-literal node by resolveOptionsObject.
   if (ts.isIdentifier(e) && consts && consts.has(e.text)) {
-    const bound = stringLiteralValue(consts.get(e.text));
+    const node = consts.get(e.text);
+    const bound = stringLiteralValue(node);
     if (bound !== undefined) return bound;
+    // Number consts interpolated into a describe: `(1-${MAX_LIMIT})`.
+    if (node && ts.isNumericLiteral(node)) return node.text;
+    // A template-literal const interpolated into a describe.
+    if (node && ts.isTemplateExpression(node)) return resolveStringValue(node, consts);
   }
   if (ts.isPropertyAccessExpression(e) && ts.isIdentifier(e.name)) {
     const target = resolveSpecObject(e.expression, consts);
@@ -227,7 +255,7 @@ function resolveStringValue(expr, consts) {
     consts &&
     consts.has(e.expression.expression.text)
   ) {
-    const arr = arrayLiteralStrings(consts.get(e.expression.expression.text));
+    const arr = arrayLiteralStrings(consts.get(e.expression.expression.text), consts);
     const sep = e.arguments.length ? stringLiteralValue(e.arguments[0]) : ',';
     if (arr && sep !== undefined) return arr.join(sep);
     return undefined;
@@ -260,10 +288,16 @@ function resolveStringValue(expr, consts) {
 
 // Resolves a literal default value: string, number, boolean, or array of
 // strings. Non-literal defaults (function calls, env lookups) come back as
-// `{ text }` so doc generation can show the source expression.
-function literalValue(expr) {
+// `{ text }` so doc generation can show the source expression. A bare
+// identifier bound to a literal const (`default: DEFAULT_LIMIT`) resolves
+// through `consts`.
+function literalValue(expr, consts) {
   const e = unwrapExpression(expr);
   if (!e) return undefined;
+  if (ts.isIdentifier(e) && consts && consts.has(e.text)) {
+    const bound = literalValue(consts.get(e.text));
+    if (bound && 'value' in bound) return bound;
+  }
   const s = stringLiteralValue(e);
   if (s !== undefined) return { value: s };
   if (ts.isNumericLiteral(e)) return { value: Number(e.text) };
@@ -321,12 +355,32 @@ function parseOptionSpec(expr, consts) {
   if (booleanProp && booleanProp.initializer.kind === ts.SyntaxKind.TrueKeyword) {
     spec.type = 'boolean';
   }
+  // yargs declares a repeatable option either as `type: 'array'` or as
+  // `type: 'string', array: true`. Normalize the second form so both render as
+  // "array" in the options table.
+  const arrayProp = getProp(obj, 'array');
+  if (arrayProp && arrayProp.initializer.kind === ts.SyntaxKind.TrueKeyword) {
+    spec.type = 'array';
+  }
   // yargs accepts `describe`, `description`, and `desc`; parameters.gen.ts
   // uses `description`.
   for (const key of ['describe', 'description', 'desc']) {
     const descProp = getProp(obj, key);
     if (descProp) {
-      const d = resolveStringValue(descProp.initializer, consts);
+      // A shorthand `{ describe }` (a factory parameter, like orgs.ts's
+      // `roleOption(describe)`) has no initializer; its name is the identifier
+      // to resolve against the bound parameters in `consts`.
+      // Only a bound parameter counts: an unbound shorthand would otherwise
+      // fall through to a same-named module const (every command file exports
+      // `describe`) and silently take the command's describe.
+      const shorthand = ts.isShorthandPropertyAssignment(descProp);
+      const bound = consts && consts.get(BOUND_PARAMS);
+      const valueNode = shorthand
+        ? bound && bound.has(descProp.name.text)
+          ? descProp.name
+          : undefined
+        : descProp.initializer;
+      const d = valueNode ? resolveStringValue(valueNode, consts) : undefined;
       if (d !== undefined) spec.describe = d.trim();
       break;
     }
@@ -337,7 +391,7 @@ function parseOptionSpec(expr, consts) {
   }
   const defaultProp = getProp(obj, 'default');
   if (defaultProp) {
-    const d = literalValue(defaultProp.initializer);
+    const d = literalValue(defaultProp.initializer, consts);
     if (d && 'value' in d) spec.default = d.value;
     else if (d && d.text) spec.defaultText = d.text;
   }
@@ -353,9 +407,9 @@ function parseOptionSpec(expr, consts) {
   const choicesProp = getProp(obj, 'choices');
   if (choicesProp) {
     const init = unwrapExpression(choicesProp.initializer);
-    let arr = arrayLiteralStrings(init);
+    let arr = arrayLiteralStrings(init, consts);
     if (!arr && init && ts.isIdentifier(init) && consts && consts.has(init.text)) {
-      arr = arrayLiteralStrings(consts.get(init.text));
+      arr = arrayLiteralStrings(consts.get(init.text), consts);
     }
     if (arr) spec.choices = arr;
     // Object.values(Enum) — accept anything; we lose choice checking.
@@ -398,11 +452,14 @@ function resolveOptionsObject(expr, consts) {
         // Bind each parameter name to its call-site argument expression so
         // string interpolations inside the returned object resolve.
         const scoped = new Map(consts);
+        const bound = new Set();
         fn.parameters.forEach((param, i) => {
           if (ts.isIdentifier(param.name) && e.arguments[i]) {
             scoped.set(param.name.text, unwrapExpression(e.arguments[i]));
+            bound.add(param.name.text);
           }
         });
+        scoped.set(BOUND_PARAMS, bound);
         return { obj: body, consts: scoped };
       }
     }
@@ -464,6 +521,17 @@ function parseCommandCall(callArgs, consts) {
   if (ts.isStringLiteral(first) || ts.isNoSubstitutionTemplateLiteral(first)) {
     commandString = first.text;
     // Second arg is the description; third is the builder function.
+    describe = resolveStringValue(callArgs[1], consts);
+    builderNode = callArgs[2];
+  } else if (ts.isArrayLiteralExpression(first)) {
+    // Array form: `.command([name, ...aliases], desc, builder, handler)`.
+    // The first element is the command (may carry positionals, e.g.
+    // `'register <domain>'`); the rest are aliases.
+    const arr = arrayLiteralStrings(first);
+    if (arr && arr.length) {
+      commandString = arr[0];
+      aliases = arr.slice(1);
+    }
     describe = resolveStringValue(callArgs[1], consts);
     builderNode = callArgs[2];
   } else if (ts.isObjectLiteralExpression(first)) {
@@ -577,8 +645,28 @@ function walkBuilder(builderNode, node, consts) {
             ]);
             Object.assign(node.options, parseOptionsObject(synth, consts));
           }
+        } else if (method === 'demandOption') {
+          // .demandOption('name' | ['a', 'b']) marks options required. Record the
+          // names; resolveDemandedOptions resolves them against the built tree
+          // (the option may be declared here or on a parent). yargs's optional
+          // boolean second arg toggles the demand, so skip a literal `false`.
+          const toggle = unwrapExpression(e.arguments[1]);
+          const demanded = !toggle || toggle.kind !== ts.SyntaxKind.FalseKeyword;
+          const arg = unwrapExpression(e.arguments[0]);
+          const names = [];
+          const single = stringLiteralValue(arg);
+          if (single) names.push(single);
+          else {
+            const arr = arrayLiteralStrings(arg);
+            if (arr) names.push(...arr);
+          }
+          if (demanded && names.length) {
+            (node._demandOption || (node._demandOption = [])).push(...names);
+          }
         } else if (method === 'command') {
-          const sub = parseCommandCall(e.arguments, consts);
+          const sub =
+            parseCommandCall(e.arguments, consts) ||
+            parseImportedCommand(e.arguments, consts, node);
           if (sub) node.commands[sub.name] = sub;
         } else if (method === 'positional') {
           // .positional('name', { describe, type, choices, demandOption })
@@ -655,7 +743,90 @@ function walkBuilder(builderNode, node, consts) {
   }
 }
 
-function parseCommandFile(srcFile, externalConsts) {
+// Collects `import * as name from './file.js'` namespace imports as
+// name → absolute .ts path, so a builder that mounts another command module
+// (`.command(nested(computes))` in postgres.ts) can be resolved to its file.
+function collectNamespaceImports(sf, srcFile) {
+  const imports = new Map();
+  sf.forEachChild((node) => {
+    if (!ts.isImportDeclaration(node)) return;
+    const spec = stringLiteralValue(node.moduleSpecifier);
+    const bindings = node.importClause && node.importClause.namedBindings;
+    if (!spec || !spec.startsWith('./') || !bindings || !ts.isNamespaceImport(bindings)) return;
+    imports.set(
+      bindings.name.text,
+      path.join(path.dirname(srcFile), spec.replace(/^\.\//, '').replace(/\.js$/, '.ts'))
+    );
+  });
+  return imports;
+}
+
+// Resolves a curried builder: `export const builder = builderFor('roles')`
+// where `builderFor = (usage) => (argv) => argv.usage(`$0 ${usage} ...`)...`.
+// Returns the inner builder with the outer parameter bound to the argument
+// (or to `usageOverride`, used when the module is mounted under a parent
+// group), or undefined when the initializer isn't that shape.
+function resolveCurriedBuilder(init, consts, usageOverride) {
+  const e = unwrapExpression(init);
+  if (!e || !ts.isCallExpression(e) || !ts.isIdentifier(e.expression)) return undefined;
+  const fn = consts.get(e.expression.text);
+  if (!fn || !(ts.isArrowFunction(fn) || ts.isFunctionExpression(fn))) return undefined;
+  const inner = unwrapExpression(fn.body);
+  if (!inner || !(ts.isArrowFunction(inner) || ts.isFunctionExpression(inner))) return undefined;
+  const param = fn.parameters[0];
+  const bound = new Map(consts);
+  const value =
+    usageOverride !== undefined ? usageOverride : resolveStringValue(e.arguments[0], consts);
+  if (param && ts.isIdentifier(param.name) && value !== undefined) {
+    bound.set(param.name.text, ts.factory.createStringLiteral(value));
+  }
+  return { builder: inner, consts: bound };
+}
+
+// `.command(nested(computes))` / `.command(computes)`: a command module
+// imported as a namespace and mounted as a subcommand of a group (postgres.ts
+// re-mounts computes, databases, roles, connection-string, and psql). Parses
+// the imported file as its own command, with its curried builder's usage
+// bound to `<parent> <child>` (what postgres.ts's `nested()` passes).
+function parseImportedCommand(callArgs, consts, parentNode) {
+  const imports = consts && consts.get(NS_IMPORTS);
+  if (!imports || callArgs.length === 0) return null;
+  let arg = unwrapExpression(callArgs[0]);
+  if (
+    arg &&
+    ts.isPropertyAccessExpression(arg) &&
+    ts.isIdentifier(arg.expression) &&
+    arg.name.text === 'command'
+  ) {
+    // `.command(loki.command, loki.describe, loki.builder, handler)`: the
+    // module's exports passed one by one (logs.ts mounts loki this way). The
+    // module is the same one the bare form names, so parse it the same way.
+    arg = arg.expression;
+  } else {
+    if (callArgs.length !== 1) return null;
+    if (arg && ts.isCallExpression(arg) && arg.arguments.length === 1) {
+      arg = unwrapExpression(arg.arguments[0]);
+    }
+  }
+  if (!arg || !ts.isIdentifier(arg) || !imports.has(arg.text)) return null;
+  const file = imports.get(arg.text);
+  // Guard against modules that mount each other (or themselves): yargs would
+  // loop too, so skip the re-mount rather than recursing forever.
+  const mounting = consts.get(MOUNTING) || new Set();
+  if (!fs.existsSync(file) || mounting.has(file)) return null;
+  const parsed = parseCommandFile(file, consts.get(EXTERNAL_CONSTS), {
+    usagePrefix: parentNode.name,
+    mounting,
+  });
+  return parsed.name ? parsed : null;
+}
+
+const NS_IMPORTS = Symbol('namespaceImports');
+const EXTERNAL_CONSTS = Symbol('externalConsts');
+const MOUNTING = Symbol('mountingFiles');
+const BOUND_PARAMS = Symbol('boundFactoryParams');
+
+function parseCommandFile(srcFile, externalConsts, { usagePrefix, mounting } = {}) {
   const sf = readSource(srcFile);
   // File-local consts shadow external ones (parameters.gen.ts). Function
   // consts (builder functions passed by identifier) live in the same map so
@@ -665,6 +836,9 @@ function parseCommandFile(srcFile, externalConsts) {
     ...collectModuleConsts(sf),
     ...collectFunctionConsts(sf),
   ]);
+  consts.set(NS_IMPORTS, collectNamespaceImports(sf, srcFile));
+  consts.set(EXTERNAL_CONSTS, externalConsts);
+  consts.set(MOUNTING, new Set([...(mounting || []), srcFile]));
   const result = {
     name: null,
     aliases: [],
@@ -708,7 +882,12 @@ function parseCommandFile(srcFile, externalConsts) {
       }
     }
   });
-  for (const b of builders) walkBuilder(b, result, consts);
+  for (const b of builders) {
+    const usageOverride = usagePrefix ? `${usagePrefix} ${result.name}` : undefined;
+    const curried = resolveCurriedBuilder(b, consts, usageOverride);
+    if (curried) walkBuilder(curried.builder, result, curried.consts);
+    else walkBuilder(b, result, consts);
+  }
 
   return result;
 }
@@ -886,6 +1065,34 @@ function inheritParentOptions(node, inherited = {}) {
   }
 }
 
+// Turns the `_demandOption` names recorded by walkBuilder into `required` flags.
+// A name demanded on the node that declares the option is required outright; a
+// name declared on a group but demanded by EVERY direct subcommand is required
+// group-wide (vpc_endpoints.ts: `region-id` is on `endpoint`, demanded on each
+// leaf). The renderer shows one shared `required` per inherited option, so a
+// mixed demand (not all subcommands) can only err toward optional.
+function resolveDemandedOptions(node) {
+  const children = Object.values(node.commands || {});
+  const options = node.options || {};
+  for (const name of node._demandOption || []) {
+    if (options[name]) options[name].required = true;
+  }
+  if (children.length > 0) {
+    for (const [name, spec] of Object.entries(options)) {
+      if (spec.required) continue;
+      if (children.every((c) => (c._demandOption || []).includes(name))) {
+        spec.required = true;
+      }
+    }
+  }
+  children.forEach(resolveDemandedOptions);
+}
+
+function stripDemandedOptions(node) {
+  delete node._demandOption;
+  for (const sub of Object.values(node.commands || {})) stripDemandedOptions(sub);
+}
+
 // Deep-merges `overrides.json` (if present) into the schema. Overrides are
 // the escape hatch for terse or missing upstream descriptions — same shape
 // as the schema itself, merged key-by-key with overrides winning.
@@ -933,6 +1140,14 @@ function buildSchema({ src } = {}) {
   if (fs.existsSync(parametersGen)) {
     for (const [k, v] of collectModuleConsts(readSource(parametersGen))) {
       externalConsts.set(k, v);
+    }
+  }
+  // utils/api_enums.ts holds the const-object enums (NeonAuthOauthProviderId)
+  // that command files build choice arrays from.
+  const apiEnums = path.join(src, 'src', 'utils', 'api_enums.ts');
+  if (fs.existsSync(apiEnums)) {
+    for (const [k, v] of collectModuleConsts(readSource(apiEnums))) {
+      if (!externalConsts.has(k)) externalConsts.set(k, v);
     }
   }
   // Pool exported consts across command files so cross-file imports
@@ -985,6 +1200,12 @@ function buildSchema({ src } = {}) {
     },
     src
   );
+  // Resolve `.demandOption(...)` into `required` flags across the full tree
+  // (so group demands reach the declaring ancestor), then drop the transient
+  // field. Before overrides so a hand-written override still wins.
+  const root = { commands: schema.commands };
+  resolveDemandedOptions(root);
+  stripDemandedOptions(root);
   return applyOverrides(schema);
 }
 

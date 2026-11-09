@@ -4,32 +4,30 @@ subtitle: A guide to using pgroll for safe, reversible Postgres migrations
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2025-06-30T00:00:00.000Z'
-updatedOn: '2026-07-31T19:05:29.503Z'
+updatedOn: '2026-09-24T17:56:34.189Z'
 ---
 
-Database schema migrations are a critical but often risky part of application development. Traditional migration tools can lock tables, cause downtime, and make rollbacks difficult, especially for applications that require high availability. [`pgroll`](https://github.com/xataio/pgroll) is an open-source CLI tool that solves this problem for Postgres, enabling zero-downtime, reversible schema changes.
+Traditional migration tools can lock tables, cause downtime, and make rollbacks difficult, which is a problem for applications that need high availability. [`pgroll`](https://github.com/xataio/pgroll) is an open-source CLI tool for zero-downtime, reversible schema changes in Postgres.
 
-This guide will walk you through understanding `pgroll`, and how to use it effectively in your development workflow to ensure safe, continuous database migrations without service interruptions.
+This guide explains how `pgroll` works and how to use it in your development workflow on Neon.
 
 ## What is `pgroll`?
 
-`pgroll` is an open-source command-line tool for Postgres that enables **zero-downtime, reversible schema migrations** by allowing multiple schema versions to coexist during updates, so client applications remain uninterrupted even during breaking changes. It manages complex migrations safely without locking the database and supports instant rollbacks if needed.
+`pgroll` is an open-source command-line tool for Postgres that enables **zero-downtime, reversible schema migrations** by allowing multiple schema versions to coexist during updates, so client applications keep working even during breaking changes. It avoids long-held locks during migrations and supports instant rollbacks.
 
 ### Key features
 
-- **Zero downtime migrations:** `pgroll` employs an expand/contract workflow, ensuring changes are applied without taking your application offline or locking database tables.
-- **Instant, reversible changes:** Active migrations can be instantly rolled back with a single command, providing a critical safety net for production deployments.
-- **Multi-version schema support:** `pgroll` allows old and new versions of your schema to coexist simultaneously. This decouples application and database deployments, as new application versions can use the new schema while legacy versions continue to function on the old one.
-- **Declarative migrations:** You define the _desired end state_ of your schema in simple `yaml` or `json` files. `pgroll` handles the complex, lock-safe SQL execution required to achieve that state.
-- **Automated data backfilling:** When adding constraints like `NOT NULL` to a column with existing data, `pgroll` automates the entire backfilling process in the background without blocking writes.
-
-`pgroll` is the ideal solution for environments with high-availability requirements where schema changes must be deployed frequently and safely.
+- **Zero downtime migrations:** `pgroll` uses an expand/contract workflow to apply changes without taking your application offline or locking database tables.
+- **Instant, reversible changes:** You can roll back an active migration with a single command.
+- **Multi-version schema support:** Old and new versions of your schema coexist. This decouples application and database deployments, as new application versions can use the new schema while legacy versions continue to function on the old one.
+- **Declarative migrations:** You define the _desired end state_ of your schema in simple `yaml` or `json` files. `pgroll` generates and runs the lock-safe SQL to reach that state.
+- **Automated data backfilling:** When adding constraints like `NOT NULL` to a column with existing data, `pgroll` backfills existing rows in the background without blocking writes.
 
 ### Why not traditional migration strategies?
 
-To appreciate `pgroll`'s approach, it helps to understand the trade-offs of conventional migration methods. Schema migrations in Postgres typically follow one of two strategies:
+Schema migrations in Postgres typically follow one of two strategies:
 
-#### Strategy 1: Scheduled downtime (The maintenance window)
+#### Strategy 1: Scheduled downtime (the maintenance window)
 
 This method prioritizes operational simplicity at the cost of service availability. It is only viable for applications where scheduled downtime is acceptable.
 
@@ -40,15 +38,15 @@ This method prioritizes operational simplicity at the cost of service availabili
 3.  **Deploy new code:** Deploy the application version compatible with the new schema.
 4.  **Restore service:** Restart application servers.
 
-**Challenges:**
+**Drawbacks:**
 
 - **Service interruption:** Unacceptable for high-availability systems.
 - **High-risk, high-pressure event:** Any failure during the migration extends the outage.
 - **Difficult rollbacks:** Reverting a failed migration is operationally complex, often requiring a database restore.
 
-#### Strategy 2: Manual Zero-downtime migration (The expand/contract pattern)
+#### Strategy 2: Manual zero-downtime migration (the expand/contract pattern)
 
-This advanced strategy avoids downtime but transfers complexity to the application layer and development teams.
+This strategy avoids downtime but transfers complexity to the application layer and development teams.
 
 **Process:**
 
@@ -57,7 +55,7 @@ This advanced strategy avoids downtime but transfers complexity to the applicati
 3.  **Contract phase:** Once data is migrated and consistent, apply the breaking change (e.g., add a `NOT NULL` constraint).
 4.  **Cleanup:** Deploy a final application version that removes the dual-write logic and run another migration to drop the old column.
 
-**Challenges:**
+**Drawbacks:**
 
 - **Engineering overhead:** This multi-stage process is slow and requires development effort to manage dual-writes, backfills, and feature flags.
 - **Operational complexity:** The process is error-prone and requires coordination across multiple deployments.
@@ -65,17 +63,17 @@ This advanced strategy avoids downtime but transfers complexity to the applicati
 
 ### How `pgroll` solves these problems
 
-`pgroll` transforms the complex, manual migration process into a simple, automated one. It achieves this by codifying the **expand/contract** pattern, allowing you to focus on defining _what_ you want to change, while `pgroll` handles _how_ to apply it safely.
+`pgroll` automates the **expand/contract** pattern, so you focus on defining _what_ you want to change, while `pgroll` handles _how_ to apply it safely.
 
 #### The `pgroll` migration lifecycle
 
-A typical migration with `pgroll` involves a clear, two-phase process that separates database changes from application deployment, ensuring safety and reversibility.
+A typical migration with `pgroll` has two phases that separate database changes from application deployment, so you can roll back at any point before completion.
 
 **Step 1: Define your migration**
 
 You start by creating a declarative migration file in `yaml` or `json` that defines the desired schema changes.
 
-**Step 2: Start the migration (`pgroll start`) - The "Expand" phase**
+**Step 2: Start the migration (`pgroll start`), the "expand" phase**
 
 Running `pgroll start <migration-file>` initiates the migration.
 
@@ -89,14 +87,14 @@ With the new schema available, you can safely deploy your new application.
 - **What you do:** Configure your new application instances to use the new schema version by setting their `search_path` connection parameter. You can get the latest schema name by running `pgroll latest schema`. Learn more about this in the [Connecting your application to the new schema version](#step-5-connecting-your-application-to-the-new-schema-version) section.
 - **The key benefit:** During this phase, both old and new application versions can run concurrently against their respective schema versions, enabling phased rollouts like canary or blue-green deployments.
 
-**Step 4: Complete the migration (`pgroll complete`) - The "Contract" phase**
+**Step 4: Complete the migration (`pgroll complete`), the "contract" phase**
 
 Once your new application is stable and no traffic is hitting instances that use the old schema, you finalize the process.
 
 - **What happens:** Running `pgroll complete` performs the "contract" steps. It removes the old schema version, drops temporary columns and triggers, and makes the schema changes permanent.
-- **The result:** The migration is complete, and the database schema is now in its final, clean state.
+- **The result:** The migration is complete, and the database schema is in its final state.
 
-Optionally, you can also run `pgroll rollback` at any point before completing the migration to revert to the previous schema version. This is a critical safety feature that allows you to quickly undo changes if issues arise during the migration process.
+Optionally, you can also run `pgroll rollback` at any point before completing the migration to revert to the previous schema version. Use it to undo changes if issues come up during the migration.
 
 ![Migration Flow Diagram](https://raw.githubusercontent.com/xataio/pgroll/main/docs/img/schema-changes-flow@2x.png)
 
@@ -106,7 +104,7 @@ Optionally, you can also run `pgroll rollback` at any point before completing th
 
 For each migration, `pgroll` creates a new, versioned schema (e.g., `public_01_initial`, `public_02_add_column`). These schemas do not contain the physical tables themselves but rather [views](/postgresql/postgresql-views) that point to the underlying tables in your main schema (e.g., `public`).
 
-This abstracts the schema's structure. For example, when you rename a column, the new version schema's view presents the column with its new name, while the old version schema's view continues to show the old name. This allows different application versions to interact with the same underlying data through different schema _lenses_, completely unaware of the ongoing migration.
+For example, when you rename a column, the new version schema's view presents the column with its new name, while the old version schema's view continues to show the old name. This allows different application versions to interact with the same underlying data through different schema _lenses_, without knowing a migration is in progress.
 
 ![Multiple schema versions diagram](https://raw.githubusercontent.com/xataio/pgroll/main/docs/img/migration-schemas@2x.png)
 
@@ -114,16 +112,16 @@ This abstracts the schema's structure. For example, when you rename a column, th
 
 ## Getting started
 
-Now that you understand the basics, let's use `pgroll` for schema migrations in a Lakebase Postgres database. This guide will take you through installing and setting up `pgroll`, creating your first migration, and understanding how to manage schema changes safely.
+Next, you'll install `pgroll`, initialize it on a Neon database, and run your first migrations.
 
 ### Prerequisites
 
 - **`pgroll` CLI installed**: Follow the [installation instructions](#step-1-installation) below.
-- **Neon Account and Project**: A Neon account and a project with a running Postgres database. Sign up for a free [Neon account](https://console.neon.tech/signup) if you don't have one.
+- **Neon account and project**: A Neon account and a project with a running Postgres database. Sign up for a free [Neon account](https://console.neon.tech/signup) if you don't have one.
 
 ### Step 1: Installation
 
-You can install `pgroll` using various methods depending on your operating system and preferences. The recommended way is to use the pre-built binaries available for major platforms.
+You can install `pgroll` with Homebrew, from source, or from pre-built binaries for major platforms.
 
 If you are on macOS, you can install `pgroll` using Homebrew:
 
@@ -148,15 +146,17 @@ If you need a pre-compiled binary for your platform, please refer to [`pgroll` i
 pgroll init --postgres-url "postgresql://<user>:<password>@<endpoint_hostname>.neon.tech:<port>/<dbname>?sslmode=require&channel_binding=require"
 ```
 
-> Replace `<user>`, `<password>`, `<endpoint_hostname>`, `<port>`, and `<dbname>` with your Neon database connection details. You can find these in the [Neon Console](https://console.neon.tech) under your project's **Connect** section. Learn more: [Connect from any application](/docs/connect/connect-from-any-app)
+> Replace `<user>`, `<password>`, `<endpoint_hostname>`, `<port>`, and `<dbname>` with your Neon database connection details. You can find these in the [Neon Console](https://console.neon.tech) by clicking **Connect** on your Project Dashboard. Learn more: [Connect from any application](/docs/connect/connect-from-any-app)
+
+> Use a direct (non-pooled) connection string, without `-pooler` in the hostname, when running `pgroll` commands. Neon's pooled connection uses PgBouncer in transaction mode, which doesn't support all the session-level operations that migration tools rely on. See [Connection pooling](/docs/connect/connection-pooling).
 
 ### Step 3: Your first migration
 
 <Admonition type="important" title="Working with an existing database?">
-The following steps start by creating new tables. If you are applying `pgroll` to a database that already contains tables, you must first create a baseline of your existing schema. Please follow the instructions in the **[Onboarding an Existing Database](#onboarding-an-existing-database-baseline)** section.
+The following steps start by creating new tables. If you are applying `pgroll` to a database that already contains tables, you must first create a baseline of your existing schema. Follow the instructions in the **[Onboarding an existing database](#onboarding-an-existing-database-baseline)** section.
 </Admonition>
 
-Migrations in `pgroll` are defined declaratively in `yaml` or `json` files. This means you specify _what_ you want the end state of your schema to be, and `pgroll` handles the complex steps of _how_ to get there safely.
+Migrations in `pgroll` are defined declaratively in `yaml` or `json` files. This means you specify _what_ you want the end state of your schema to be, and `pgroll` handles _how_ to get there.
 
 Let's create a `users` table. Save the following content to a file named `migrations/01_create_users.yaml`:
 
@@ -182,15 +182,15 @@ operations:
 
 #### Understanding the migration syntax
 
-Let's quickly break down the file you just created:
+Here's what the file you just created contains:
 
 - `operations`: This is the top-level key for a list of actions `pgroll` will perform. A single migration file can contain multiple operations.
 - `create_table`: This is a specific `pgroll` operation. It defines a new table and its properties.
 - `columns`: Inside `create_table`, this array defines each column's `name`, `type`, and any constraints like `pk` (primary key), `unique`, or `nullable`.
 
-This declarative approach is what allows `pgroll` to analyze the changes, manage locks intelligently, and perform migrations without downtime. For a complete list of all supported actions, such as `alter_column` or `drop_index`, see the official **[pgroll operations reference](https://pgroll.com/docs/latest/operations)**.
+Because the migration is declarative, `pgroll` can analyze the changes, manage locks, and run the migration without downtime. For a complete list of all supported actions, such as `alter_column` or `drop_index`, see the official **[pgroll operations reference](https://pgroll.com/docs/latest/operations)**.
 
-<Admonition type="note" title="Coming from an ORM or SQL Scripts?">
+<Admonition type="note" title="Coming from an ORM or SQL scripts?">
 You don't always have to write these YAML files by hand. `pgroll` can automatically generate migrations from standard SQL files. We'll cover how to use this feature with tools like Drizzle in the [Generating migrations from ORMs](#generating-migrations-with-orms) section.
 </Admonition>
 
@@ -202,12 +202,12 @@ pgroll start migrations/01_create_users.yaml --postgres-url "postgresql://<user>
 
 ### Step 4: A breaking change (add `NOT NULL` constraint)
 
-Now, let's make the `description` column non-nullable. This is a classic breaking change, as it introduces two immediate challenges that would cause downtime with a traditional migration tool:
+Now, let's make the `description` column non-nullable. This is a classic breaking change, with two problems that would cause downtime with a traditional migration tool:
 
 1.  **Existing data:** The `users` table may already contain rows where `description` is `NULL`, which would violate the new constraint.
 2.  **Live application:** Your running application code is still operating under the assumption that the column is nullable and may attempt to insert `NULL` values, which would result in runtime errors.
 
-This is precisely the type of scenario `pgroll` is designed to handle without disrupting your service. To perform this migration, we will use `pgroll`'s ability to create a new schema version that temporarily allows `NULL` values while we backfill existing data. In this case, we must provide an `up` SQL expression to tell `pgroll` how to backfill any existing `NULL` values and a `down` expression to revert the changes in case of a rollback.
+`pgroll` handles this without disrupting your service. This migration uses `pgroll`'s ability to create a new schema version that temporarily allows `NULL` values while we backfill existing data. In this case, we must provide an `up` SQL expression to tell `pgroll` how to backfill any existing `NULL` values and a `down` expression to revert the changes in case of a rollback.
 
 Create a new migration file named `migrations/02_make_description_not_null.yaml` with the following content:
 
@@ -238,9 +238,9 @@ Your old applications can continue using the previous schema version, while you 
 
 ### Step 5: Connecting your application to the new schema version
 
-The key to a zero-downtime rollout is updating your application to point to the new schema version. This is done by setting the `search_path` for the database connection.
+For a zero-downtime rollout, you update your application to point to the new schema version by setting the `search_path` for the database connection.
 
-First, you can get the name of the latest schema version directly from `pgroll`. This is ideal for use in CI/CD pipelines:
+First, get the name of the latest schema version from `pgroll`. This works well in CI/CD pipelines:
 
 ```bash shouldWrap
 export PGROLL_SCHEMA_VERSION=$(pgroll latest schema --postgres-url "postgresql://<user>:<password>@<endpoint_hostname>.neon.tech:<port>/<dbname>?sslmode=require&channel_binding=require")
@@ -250,17 +250,17 @@ echo $PGROLL_SCHEMA_VERSION
 
 You would then pass this environment variable (`PGROLL_SCHEMA_VERSION`) to your application during deployment.
 
-#### Example: Configuring a TypeScript/Drizzle Application
+#### Example: Configuring a TypeScript/Drizzle application
 
-To connect your application to a new schema version, you must configure your database client to use the correct `search_path`. Since Drizzle ORM does not have a built-in, session-level way to set this, the recommended approach is to wrap your queries within a **transaction**. This ensures the `SET search_path` command is executed for the current session before your application code queries the database.
+To connect your application to a new schema version, you must configure your database client to use the correct `search_path`. Since Drizzle ORM does not have a built-in, session-level way to set this, wrap your queries in a **transaction**, so the `SET search_path` command runs for the current session before your application code queries the database.
 
-<Admonition type="warning" title="Session-Based Connection Required">
+<Admonition type="warning" title="Session-based connection required">
 Setting the `search_path` is a session-level command. This means you must use a database driver that supports persistent, interactive sessions.
 
 For Neon users, the stateless **`drizzle-orm/neon-http` driver is not suitable for this task**. You must use a session-based driver like `postgres-js`, `node-postgres` (`pg`), or the `neon-serverless` driver (which uses WebSockets).
 </Admonition>
 
-Here are examples for three popular drivers. In each case, we assume the schema name (e.g., `public_02_make_description_not_null`) is passed to the application via an environment variable like `PGROLL_SCHEMA_VERSION` as shown above.
+Here are examples for three drivers. In each case, we assume the schema name (e.g., `public_02_make_description_not_null`) is passed to the application via an environment variable like `PGROLL_SCHEMA_VERSION` as shown above.
 
 <CodeTabs reverse={true} labels={["postgres.js", "node-postgres", "Neon serverless driver"]}>
 
@@ -368,9 +368,9 @@ getUsers();
 
 </CodeTabs>
 
-The key pattern in all these examples is wrapping your database calls in a `db.transaction`. This guarantees that the `SET search_path` command and your actual queries are executed within the same database session, ensuring your application interacts with the correct `pgroll` version schema.
+Each example wraps the database calls in a `db.transaction`, so the `SET search_path` command and your queries run in the same database session against the correct `pgroll` version schema.
 
-For examples in other languages and frameworks, please refer to the official `pgroll` documentation on [integrating client applications](https://pgroll.com/docs/latest/guides/clientapps).
+For examples in other languages and frameworks, see the `pgroll` documentation on [integrating client applications](https://pgroll.com/docs/latest/guides/clientapps).
 
 ### Step 6: Complete the migration
 
@@ -384,7 +384,7 @@ pgroll complete --postgres-url "postgresql://<user>:<password>@<endpoint_hostnam
 
 ### Step 7: Rolling back
 
-If you discover an issue after `start` but before `complete`, you can instantly and safely roll back the changes.
+If you discover an issue after `start` but before `complete`, you can roll back the changes.
 
 ```bash shouldWrap
 pgroll rollback --postgres-url "postgresql://<user>:<password>@<endpoint_hostname>.neon.tech:<port>/<dbname>?sslmode=require&channel_binding=require"
@@ -394,13 +394,13 @@ This command removes the new version schema and all temporary structures, revert
 
 ## Integrating `pgroll` into your workflow
 
-`pgroll` is designed to fit into modern development practices, including workflows with ORMs and CI/CD pipelines.
+`pgroll` fits into workflows with ORMs and CI/CD pipelines.
 
 ### Generating migrations with ORMs
 
 You don't need to write `pgroll` migrations by hand. Most ORMs can generate schema changes as raw SQL, which `pgroll` can then convert into its declarative format.
 
-The key command is `pgroll convert`, which reads SQL statements and translates them into `pgroll`'s YAML or JSON format.
+The command for this is `pgroll convert`, which reads SQL statements and translates them into `pgroll`'s YAML or JSON format.
 
 ### Example: Drizzle ORM
 
@@ -422,7 +422,7 @@ A typical workflow with Drizzle ORM and `pgroll` involves the following steps:
     pgroll convert <path-to-your-drizzle-generated.sql> > <path-to-your-new.yaml>
     ```
 
-    **Crucially, review the output YAML.** For any breaking changes, you will likely need to manually provide the correct `up` and `down` SQL expression to handle data backfilling.
+    **Review the output YAML.** For any breaking changes, you will likely need to manually provide the correct `up` and `down` SQL expression to handle data backfilling.
 
     <Admonition type="important" title="Manual review required">
     The `convert` command is a starting point, but you may need to manually edit the output. For complex changes, `pgroll` often creates `TODO` markers for `up`/`down` expressions that it cannot infer automatically. Always review and complete the generated migration file.
@@ -437,10 +437,10 @@ A typical workflow with Drizzle ORM and `pgroll` involves the following steps:
 5.  **Test and deploy your new application:**
     - Fetch the new schema name using `pgroll latest schema`.
     - In your CI/CD pipeline, deploy the new version of your application, configuring it to use the new schema via an environment variable (e.g., `PGROLL_SCHEMA_VERSION`).
-    - This is the ideal stage for phased rollouts (canary, blue-green), as the old application version continues to run unaffected on the previous schema.
+    - This is the stage for phased rollouts (canary, blue-green), as the old application version continues to run unaffected on the previous schema.
 
 6.  **Validate and finalize:**
-    - **If an issue is found,** you can instantly and safely revert the database changes with `pgroll rollback`. This will not affect the running (old) application.
+    - **If an issue is found,** revert the database changes with `pgroll rollback`. This will not affect the running (old) application.
     - **If the new application is stable,** proceed with a full rollout.
 
 7.  **Complete the migration:** Once you are confident that no services are using the old schema, finalize the process by running:
@@ -471,15 +471,15 @@ You should then use a tool like `pg_dump --schema-only` to capture your current 
 
 `pgroll` migrations consist of a list of declarative operations. Below are a few common examples.
 
-<Admonition type="note" title="Refer to the Official Documentation">
-The following examples showcase some of the most common use cases, but `pgroll`'s capabilities are far more extensive. It provides a set of declarative operations for fine-grained schema control, including:
+<Admonition type="note" title="Refer to the pgroll documentation">
+The following examples cover common use cases. `pgroll` has many more declarative operations, including:
 
-- **Table Management:** `create_table`, `drop_table`, and `rename_table`.
-- **Column Manipulation:** `add_column`, `drop_column`, and an `alter_column` operation for changing types, nullability, defaults, and comments.
-- **Indexes and Constraints:** Full lifecycle management for indexes and constraints, including `create_index`, `drop_index`, `create_constraint`, `drop_constraint`, and `rename_constraint`.
-- **Raw SQL Escape Hatch:** An `sql` operation for executing custom DDL or handling advanced scenarios not covered by the declarative operations.
+- **Table management:** `create_table`, `drop_table`, and `rename_table`.
+- **Column manipulation:** `add_column`, `drop_column`, and an `alter_column` operation for changing types, nullability, defaults, and comments.
+- **Indexes and constraints:** Full lifecycle management for indexes and constraints, including `create_index`, `drop_index`, `create_constraint`, `drop_constraint`, and `rename_constraint`.
+- **Raw SQL escape hatch:** An `sql` operation for executing custom DDL or handling advanced scenarios not covered by the declarative operations.
 
-For a complete list of all operations and their detailed parameters, it is highly recommended to consult the official [pgroll Operations Reference](https://pgroll.com/docs/latest/operations).
+For a complete list of all operations and their detailed parameters, see the [pgroll operations reference](https://pgroll.com/docs/latest/operations).
 </Admonition>
 
 #### Create table
@@ -503,7 +503,7 @@ operations:
 
 #### Add column
 
-Creating a new column in an existing table is straightforward with the `add_column` operation. You can specify the column name, type, and any default value.
+To add a column to an existing table, use the `add_column` operation. You can specify the column name, type, and any default value.
 
 ```yaml
 operations:
@@ -528,17 +528,13 @@ operations:
 
 ## Conclusion
 
-`pgroll` provides a practical solution for Postgres schema migrations by using a declarative, multi-version approach. This method automates complex updates, turning them into a safer and more predictable workflow.
-
-The core benefits are the ability to achieve zero-downtime deployments and perform instant rollbacks, which reduces the risk associated with production schema changes. While this requires adapting deployment strategies to manage the `search_path` in client applications, the trade-off results in a more reliable migration process.
-
-For organizations that prioritize high availability and continuous delivery, `pgroll` offers a valuable framework for evolving database schemas safely.
+You ran a create-table migration and a breaking `NOT NULL` change with `pgroll`, pointed an application at the new schema version with `search_path`, and completed or rolled back the migration. The trade-off is that client applications need to manage `search_path` during a rollout. As a next step, try generating a migration from your ORM with `pgroll convert`, and test it on a [Neon branch](/docs/introduction/branching) before running it against production.
 
 ## Resources
 
-- [pgroll GitHub Repository](https://github.com/xataio/pgroll)
-- [pgroll Official Documentation](https://pgroll.com/docs)
+- [pgroll GitHub repository](https://github.com/xataio/pgroll)
+- [pgroll documentation](https://pgroll.com/docs)
 - [Introducing pgroll: zero-downtime, reversible, schema migrations for Postgres](https://pgroll.com/blog/introducing-pgroll-zero-downtime-reversible-schema-migrations-for-postgres)
-- [Postgres Schema Search Path Documentation](https://www.postgresql.org/docs/current/ddl-schemas.html#DDL-SCHEMAS-PATH)
+- [Postgres schema search path documentation](https://www.postgresql.org/docs/current/ddl-schemas.html#DDL-SCHEMAS-PATH)
 
 <NeedHelp/>

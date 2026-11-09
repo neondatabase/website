@@ -4,7 +4,7 @@ subtitle: Using the OpenTelemetry (OTEL) integration in Neon
 author: nagesh-bansal
 enableTableOfContents: true
 createdAt: '2026-06-12T00:00:00.000Z'
-updatedOn: '2026-07-31T19:05:29.503Z'
+updatedOn: '2026-09-24T17:56:34.189Z'
 ---
 
 [SigNoz](https://signoz.io/) is an open source observability platform built on OpenTelemetry that brings logs, metrics, and traces together in one application. [Neon's OpenTelemetry integration](/docs/guides/opentelemetry) sends your project's metrics and Postgres logs to SigNoz, so you can monitor your database alongside the rest of your stack.
@@ -20,9 +20,9 @@ By the end, you'll have Neon metrics and logs flowing into a SigNoz dashboard.
 
 ## Prerequisites
 
-Before you begin, ensure you have the following:
+Before you begin, you'll need:
 
-- **Neon account and project:** If you don't have one, sign up at [Neon](https://console.neon.tech/signup). Your Neon project must be on the **Scale** or **Business** plan to use the OpenTelemetry integration.
+- **Neon account and project:** If you don't have one, sign up at [Neon](https://console.neon.tech/signup). Your Neon project must be on the **Scale plan** to use the OpenTelemetry integration.
 - **SigNoz account:** A [SigNoz Cloud](https://signoz.io/teams/) account. A free trial is sufficient to start. This guide uses SigNoz Cloud; if you run a [self-hosted](https://signoz.io/docs/install/) SigNoz instance, the steps are the same except that you point Neon at your own collector endpoint.
 
 <Steps>
@@ -67,10 +67,10 @@ Use the credentials from SigNoz to configure the integration in your Neon projec
       Enter only the base endpoint URL. Neon automatically appends the signal-specific paths (`/v1/metrics` and `/v1/logs`), so do not add them yourself or you will get `404` errors.
       </Admonition>
     - **Authentication:** Select **API Key**.
-    - **Header name:** Enter `signoz-ingestion-key`.
+    - **Custom header name:** Enter `signoz-ingestion-key`. Neon defaults to `X-API-Key` if you leave it blank, so set it explicitly.
     - **API Key:** Paste the **Ingestion Key** you copied from SigNoz.
-    - **Resource attributes:** Add a `service.name` attribute to identify your data source in SigNoz. For example, set the key to `service.name` and the value to `neon`.
-    - Click **Save**.
+    - **Resource:** Set the `service.name` attribute to identify your logs in SigNoz, for example `neon`. This name labels Postgres logs only. Metrics arrive under the Neon-assigned service names `sql-metrics` and `compute-host-metrics`.
+    - Click **Add**.
 
     <Admonition type="note" title="Data scope">
     The Neon OpenTelemetry integration sends data for all computes in your Neon project. For example, if you have multiple branches, each with an attached compute, metrics and logs will be collected and sent for each one.
@@ -91,7 +91,7 @@ To confirm that your integration is working, check that both logs and metrics ar
 1.  Go to your SigNoz instance and open the **Logs** > **Logs Explorer**.
 2.  Filter by the resource attribute you set earlier, for example `service.name = neon`.
 
-    You should see Postgres logs from your Neon compute streaming into SigNoz. This confirms that the integration is working correctly.
+    You should see Postgres logs from your Neon compute streaming into SigNoz. This confirms the integration is working.
 
     ![Lakebase Postgres logs in the SigNoz Logs Explorer](/docs/guides/signoz-neon-logs.webp)
 
@@ -104,7 +104,7 @@ To confirm that your integration is working, check that both logs and metrics ar
     ![Neon metrics in the SigNoz Metrics Explorer](/docs/guides/signoz-neon-metrics.webp)
 
     <Admonition type="info" title="Compute activity">
-    Neon computes only send logs and metrics when they are active. If you have the [Scale to Zero](/docs/manage/endpoints#scale-to-zero) feature enabled and a compute is suspended due to inactivity, no telemetry data will be sent. If you notice gaps in your data, check your compute's status on the **Branches** page in the Neon console.
+    Neon computes only send logs and metrics when they are active. If you have [scale to zero](/docs/introduction/scale-to-zero) enabled and a compute is suspended due to inactivity, no telemetry data will be sent. If you notice gaps in your data, check your compute's status on the **Branches** page in the Neon console.
     </Admonition>
 
 ## Visualize Neon metrics with dashboards
@@ -132,24 +132,22 @@ Neon exports a range of metrics for your dashboards, including Neon-specific met
 - `host_cpu_seconds_total`: Track the CPU seconds accumulated in different operating modes (user, system, idle, etc.).
 - `host_memory_active_bytes`: Monitor active memory usage on the compute.
 
-For a full list of the metrics you can use in your dashboards, see the [Neon Metrics and Logs Reference](/docs/reference/metrics-logs).
+For a full list of the metrics you can use in your dashboards, see the [Neon metrics and logs reference](/docs/reference/metrics-logs).
 
 </Steps>
 
-With Neon's database metrics and logs flowing into SigNoz alongside your application telemetry, you can correlate database behavior with the rest of your stack. For instance, you can line up a spike in `neon_connection_counts` against error logs from a specific service to quickly identify which application is putting pressure on your database.
+With Neon metrics and logs in SigNoz alongside your application telemetry, you can line up a spike in `neon_connection_counts` against error logs from a specific service to find which application is putting pressure on your database.
 
 ## Summary
 
-You've configured Neon to send metrics and Postgres logs to SigNoz using the OpenTelemetry integration. Your database's metrics and logs now arrive in SigNoz alongside the rest of your application telemetry.
-
-From here, you can build dashboards, set up alerts, and correlate database behavior with the rest of your stack.
+You've configured Neon to send metrics and Postgres logs to SigNoz using the OpenTelemetry integration. From here, you can add more dashboard panels or set up alerts on metrics like `neon_connection_counts`.
 
 ## Resources
 
-- [Neon OpenTelemetry Integration](/docs/guides/opentelemetry)
+- [Neon OpenTelemetry integration](/docs/guides/opentelemetry)
 - [Neon Metrics and logs reference](/docs/reference/metrics-logs)
 - [SigNoz Neon Postgres integration guide](https://signoz.io/docs/integrations/opentelemetry-neondb/)
 - [SigNoz Cloud ingestion overview](https://signoz.io/docs/ingestion/signoz-cloud/overview/)
-- [OpenTelemetry Protocol (OTLP) Specification](https://opentelemetry.io/docs/specs/otlp/)
+- [OpenTelemetry Protocol (OTLP) specification](https://opentelemetry.io/docs/specs/otlp/)
 
 <NeedHelp/>

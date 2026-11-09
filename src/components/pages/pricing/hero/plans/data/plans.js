@@ -3,6 +3,12 @@ import LINKS from 'constants/links';
 
 const { objectStorage, functions } = BACKEND_PRICING;
 
+const realtimeFeature = {
+  title: 'Realtime (Beta)',
+  info: '<p>Free during beta</p><p>Database compute and egress are billed as usual</p>',
+  moreLink: { text: 'Read more', href: LINKS.realtime },
+};
+
 export default [
   {
     planId: 'free',
@@ -25,7 +31,7 @@ export default [
             moreLink: { text: 'Read more', href: '#compute-usage' },
           },
           {
-            title: '0.5 GB of storage per project',
+            title: '1 GB of storage per project',
           },
           {
             title: 'Sizes up to 2 CU (8 GB RAM)',
@@ -38,17 +44,24 @@ export default [
       other: {
         title: 'Backend',
         features: [
-          { title: 'Managed Better Auth', info: 'Up to 60k MAUs' },
+          { title: 'Managed Better Auth', info: 'Up to 60k MAUs per project' },
           {
             title: `${objectStorage.freeAllowanceGb} GB of Object Storage`,
-            tag: { label: 'Beta', theme: 'orange-muted' },
             info: '<p>5 GB per project included</p>',
           },
           {
             title: 'Functions',
-            tag: { label: 'Beta', theme: 'orange-muted' },
-            info: `<p>${functions.free.activeCapacityHours} active capacity-hours per month</p><p>${functions.free.waitingCapacityHours} waiting capacity-hours per month</p><p>${functions.free.invocations} invocations per month</p>`,
+            info: `<p>${functions.free.activeCapacityHours} active capacity-hours per project per month</p><p>${functions.free.waitingCapacityHours} waiting capacity-hours per project per month</p><p>${functions.free.invocations} invocations per project per month</p>`,
           },
+          {
+            title: 'AI Gateway',
+            info: '<p>Add a card and buy prepaid credits. Your plan stays Free.</p><p>Pricing matches model provider list prices (no markup).</p>',
+            moreLink: {
+              text: 'Full list here',
+              href: '/docs/ai-gateway/overview#available-models',
+            },
+          },
+          { ...realtimeFeature, info: '<p>Free during beta</p>' },
         ],
       },
     },
@@ -90,26 +103,24 @@ export default [
       other: {
         title: 'Backend',
         features: [
-          { title: 'Managed Better Auth', info: 'Up to 1M MAUs' },
+          { title: 'Managed Better Auth', info: 'Up to 1M MAUs per project' },
           {
             title: 'Object Storage',
-            tag: { label: 'Beta', theme: 'orange-muted' },
-            info: `<p>$${objectStorage.storageRatePerGbMonth} per GB-month</p><p>No charges applied during beta</p>`,
+            info: `<p>$${objectStorage.storageRatePerGbMonth} per GB-month</p>`,
           },
           {
             title: 'Functions',
-            tag: { label: 'Beta', theme: 'orange-muted' },
-            info: `<p>$${functions.launch.activeCapacityHourRate} per active capacity-hour</p><p>$${functions.launch.waitingCapacityHourRate} per waiting capacity-hour</p><p>$${functions.launch.invocationRatePerMillion} per million invocations</p><p>No charges applied during beta</p>`,
+            info: `<p>$${functions.launch.activeCapacityHourRate} per active capacity-hour</p><p>$${functions.launch.waitingCapacityHourRate} per waiting capacity-hour</p><p>$${functions.launch.invocationRatePerMillion} per million invocations</p>`,
           },
           {
             title: 'AI Gateway',
-            tag: { label: 'Beta', theme: 'orange-muted' },
-            info: 'Pricing matches model provider list prices (no markup)',
+            info: 'Pricing matches model provider list prices (no markup). Billed as prepaid credits.',
             moreLink: {
               text: 'Full list here',
-              href: '/docs/ai-gateway/models#available-models',
+              href: '/docs/ai-gateway/overview#available-models',
             },
           },
+          realtimeFeature,
         ],
       },
     },
@@ -151,26 +162,24 @@ export default [
       other: {
         title: 'Backend',
         features: [
-          { title: 'Managed Better Auth', info: 'Up to 1M MAUs' },
+          { title: 'Managed Better Auth', info: 'Up to 1M MAUs per project' },
           {
             title: 'Object Storage',
-            tag: { label: 'Beta', theme: 'orange-muted' },
-            info: `<p>$${objectStorage.storageRatePerGbMonth} per GB-month</p><p>No charges applied during beta</p>`,
+            info: `<p>$${objectStorage.storageRatePerGbMonth} per GB-month</p>`,
           },
           {
             title: 'Functions',
-            tag: { label: 'Beta', theme: 'orange-muted' },
-            info: `<p>$${functions.scale.activeCapacityHourRate} per active capacity-hour</p><p>$${functions.scale.waitingCapacityHourRate} per waiting capacity-hour</p><p>$${functions.scale.invocationRatePerMillion} per million invocations</p><p>No charges applied during beta</p>`,
+            info: `<p>$${functions.scale.activeCapacityHourRate} per active capacity-hour</p><p>$${functions.scale.waitingCapacityHourRate} per waiting capacity-hour</p><p>$${functions.scale.invocationRatePerMillion} per million invocations</p>`,
           },
           {
             title: 'AI Gateway',
-            tag: { label: 'Beta', theme: 'orange-muted' },
-            info: 'Pricing matches model provider list prices (no markup)',
+            info: 'Pricing matches model provider list prices (no markup). Billed as prepaid credits.',
             moreLink: {
               text: 'Full list here',
-              href: '/docs/ai-gateway/models#available-models',
+              href: '/docs/ai-gateway/overview#available-models',
             },
           },
+          realtimeFeature,
         ],
       },
     },

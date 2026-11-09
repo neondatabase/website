@@ -7,7 +7,7 @@ Before writing code:
 
 1. Inspect my existing project and understand its current structure.
 
-2. Check if the Neon CLI is authenticated by running `neon me`. If it isn't, run `neon auth` and wait for me to complete sign-in before continuing.
+2. Check if the Neon CLI is authenticated by running `neon me`. If it isn't, run `neon login` and wait for me to complete sign-in before continuing.
 
 3. Ask me what bot I want to build, and whether I want to:
    - follow the example in the guide closely,
@@ -42,4 +42,4 @@ Before writing code:
 
 11. If something fails, explain the likely cause and help me troubleshoot it before making unrelated changes.
 
-When you need to inspect or query my database, use `neon psql` and pass the correct branch name; run `neon branches list` or ask me if you're not sure which branch to target. Never run destructive commands against my database or storage (`DELETE`, `UPDATE`, `DROP`, `TRUNCATE`, deleting objects, and similar) without showing me the exact command first and getting my explicit approval.
+When you need to inspect or query my database, use `neon psql` and pass the correct branch name; run `neon branches list` or ask me if you're not sure which branch to target. Never run destructive commands against my database or storage (`DELETE`, `UPDATE`, `DROP`, `TRUNCATE`, deleting objects, and similar) without showing me the exact command first and getting my explicit approval. If `neon deploy` stops and asks for `--allow-protected`, `--update-existing`, or `-y`, show me the changes it printed and ask me before re-running with any of them.

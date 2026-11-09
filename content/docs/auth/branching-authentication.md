@@ -10,10 +10,8 @@ summary: >-
   production users. Each branch gets a unique Auth API URL, and sessions and
   tokens do not cross between branches.
 enableTableOfContents: true
-updatedOn: '2026-08-31T17:42:21.786Z'
+updatedOn: '2026-09-16T15:38:57.808Z'
 ---
-
-<FeatureBetaProps feature_name="Managed Better Auth" />
 
 Authentication is often one of the hardest parts of the application stack to test. In traditional architectures, identity data lives in a separate third-party service, while your business data lives in your database. This separation makes it difficult to create realistic staging environments or test changes to permissions without affecting production users.
 

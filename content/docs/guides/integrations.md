@@ -9,8 +9,14 @@ summary: >-
   specific platform or tool.
 enableTableOfContents: true
 redirectFrom:
-  - /docs/integrations/integrations-list/
-updatedOn: '2026-08-04T08:34:18.168Z'
+  - /docs/integrations
+  - /docs/integrations/integrations-list
+  - /docs/guides/stepzen
+  - /docs/guides/outerbase
+  - /docs/guides/deno
+  - /docs/guides/grafbase
+  - /docs/guides/wundergraph
+updatedOn: '2026-10-21T11:04:20.383Z'
 ---
 
 ## Authentication
@@ -34,8 +40,6 @@ updatedOn: '2026-08-04T08:34:18.168Z'
 <a href="/docs/guides/cloudflare-pages" title="Cloudflare Pages" description="Use Neon with Cloudflare Pages" icon="cloudflare"></a>
 
 <a href="/docs/guides/cloudflare-workers" title="Cloudflare Workers" description="Use Neon with Cloudflare Workers" icon="cloudflare"></a>
-
-<a href="/docs/guides/deno" title="Deno Deploy" description="Use Neon with Deno Deploy" icon="deno"></a>
 
 <a href="/docs/guides/heroku" title="Heroku" description="Deploy Your App with Neon on Heroku" icon="heroku"></a>
 
@@ -113,13 +117,9 @@ updatedOn: '2026-08-04T08:34:18.168Z'
 
 <a href="/docs/guides/exograph" title="Exograph" description="Use Exograph with Neon" icon="exograph"></a>
 
-<a href="/docs/guides/grafbase" title="Grafbase" description="Use Grafbase Edge Resolvers with Neon" icon="grafbase"></a>
-
 <a href="/docs/guides/hasura" title="Hasura" description="Connect from Hasura Cloud to Neon" icon="hasura"></a>
 
 <a href="/docs/guides/postgrest" title="PostgREST" description="Create a REST API from your Neon database" icon="postgresql"></a>
-
-<a href="/docs/guides/wundergraph" title="Wundergraph" description="Use Wundergraph with Neon" icon="wundergraph"></a>
 
 </TechCards>
 
@@ -129,8 +129,6 @@ updatedOn: '2026-08-04T08:34:18.168Z'
 
 <a href="/docs/guides/logical-replication-airbyte" title="Airbyte" description="Replicate data from Neon with Airbyte" icon="airbyte"></a>
 
-<a href="/docs/guides/bemi" title="Bemi" description="Create an automatic audit trail with Bemi" icon="bemi"></a>
-
 <a href="/docs/guides/logical-replication-clickhouse" title="ClickHouse" description="Replicate data from Neon to ClickHouse using ClickPipes" icon="clickhouse"></a>
 
 <a href="/docs/guides/logical-replication-kafka-confluent" title="Confluent (Kafka)" description="Replicate data from Neon with Confluent (Kafka)" icon="confluent"></a>
@@ -139,7 +137,7 @@ updatedOn: '2026-08-04T08:34:18.168Z'
 
 <a href="/docs/guides/logical-replication-decodable" title="Decodable" description="Replicate data from Neon with Decodable" icon="decodable"></a>
 
-<a href="/docs/guides/logical-replication-estuary-flow" title="Estuary Flow" description="Replicate data from Neon with Estuary Flow" icon="estuary"></a>
+<a href="/docs/guides/logical-replication-estuary-flow" title="Estuary" description="Replicate data from Neon with Estuary" icon="estuary"></a>
 
 <a href="/docs/guides/logical-replication-fivetran" title="Fivetran" description="Replicate data from Neon with Fivetran" icon="fivetran"></a>
 
@@ -147,13 +145,11 @@ updatedOn: '2026-08-04T08:34:18.168Z'
 
 <a href="/docs/guides/logical-replication-materialize" title="Materialize" description="Replicate data from Neon to Materialize" icon="materialize"></a>
 
+<a href="/docs/guides/logical-replication-neon-to-lakebase" title="Neon to Lakebase" description="Replicate data from Neon to Lakebase Postgres on Databricks" icon="databricks"></a>
+
 <a href="/docs/guides/logical-replication-neon-to-neon" title="Neon to Neon" description="Replicate data from Neon to Neon" icon="neon"></a>
 
 <a href="/docs/guides/logical-replication-postgres" title="Neon to PostgreSQL" description="Replicate data from Neon to PostgreSQL" icon="postgresql"></a>
-
-<a href="/docs/guides/logical-replication-prisma-pulse" title="Prisma Pulse" description="Stream database changes in real-time with Prisma Pulse" icon="prisma"></a>
-
-<a href="/docs/guides/sequin" title="Sequin" description="Stream changes and rows from your database to anywhere with Sequin" icon="sequin"></a>
 
 <a href="/docs/guides/logical-replication-airbyte-snowflake" title="Snowflake" description="Replicate data from Neon to Snowflake with Airbyte" icon="snowflake"></a>
 
@@ -170,6 +166,8 @@ updatedOn: '2026-08-04T08:34:18.168Z'
 <a href="/docs/guides/logical-replication-rds-to-neon" title="AWS RDS" description="Replicate data from AWS RDS PostgreSQL to Neon" icon="aws-rds"></a>
 
 <a href="/docs/guides/logical-replication-cloud-sql" title="Cloud SQL" description="Replicate data from Cloud SQL to Neon" icon="google-cloud-sql"></a>
+
+<a href="/docs/guides/logical-replication-lakebase-to-neon" title="Lakebase to Neon" description="Replicate data from Lakebase Postgres on Databricks to Neon" icon="databricks"></a>
 
 <a href="/docs/guides/logical-replication-neon-to-neon" title="Neon to Neon" description="Replicate data from Neon to Neon" icon="neon"></a>
 

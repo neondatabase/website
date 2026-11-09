@@ -7,7 +7,7 @@ excerpt: >-
   bring Neon closer into the Azure ecosystem. Today, we’re excited to introduce
   Neon as an Azure Native Integration, allowing deve...
 date: '2024-12-03T17:28:17'
-updatedOn: '2025-01-21T15:37:06'
+updatedOn: '2026-11-06T12:00:00.000Z'
 category: company
 categories:
   - company
@@ -21,19 +21,21 @@ isFeatured: true
 seo:
   title: Neon is Now Available as an Azure Native Integration - Neon
   description: >-
-    We’re excited to introduce Neon as an Azure Native Integration: developers
-    can provision Neon databases directly from the Azure portal.
+    Neon's December 2024 Azure Native Integration launch. Neon Azure regions are now deprecated; see neon.com/docs/import/azure-regions-deprecation.
   keywords: []
   noindex: false
   ogTitle: Neon is Now Available as an Azure Native Integration - Neon
   ogDescription: >-
-    We’re excited to introduce Neon as an Azure Native Integration: developers
-    can provision Neon databases directly from the Azure portal.
+    Neon's December 2024 Azure Native Integration launch. Neon Azure regions are now deprecated; see neon.com/docs/import/azure-regions-deprecation.
   image: >-
     https://cdn.neonapi.io/public/images/pages/blog/neon-is-now-available-as-an-azure-native-integration/social.jpg
 ---
 
 ![Post image](https://cdn.neonapi.io/public/images/pages/blog/neon-is-now-available-as-an-azure-native-integration/neon-azure-1-3-1024x576-d3c56f8d.jpg)
+
+<Admonition type="important" title="Neon Azure regions are deprecated">
+Neon's Azure regions (`azure-eastus2`, `azure-westus3`, `azure-gwc`) were deprecated on April 7, 2026, and you can no longer create new projects in them. Active and paid projects in those regions keep running. See [Azure regions deprecation](/docs/import/azure-regions-deprecation) for your options and [regions](/docs/introduction/regions) for where you can create projects today.
+</Admonition>
 
 Our collaboration with Microsoft continues to grow. [Last August](https://neon.com/blog/neon-is-coming-to-azure), we announced a strategic investment from M12, Microsoft’s venture fund, with a goal to bring Neon closer into the Azure ecosystem. **Today, we’re excited to introduce Neon as an Azure Native Integration, allowing developers to provision databases directly from their Azure portal.**
 

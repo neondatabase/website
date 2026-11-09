@@ -1,10 +1,10 @@
 ---
-title: Automate Preview Deployments with Netlify and Neon Database Branching
+title: Automate preview deployments with Netlify and Neon database branching
 subtitle: Set up automated preview deployments with isolated database branches for every pull request using GitHub Actions, Netlify, and Lakebase Postgres
 author: rishi-raj-jain
 enableTableOfContents: true
 createdAt: '2025-11-25T00:00:00.000Z'
-updatedOn: '2026-07-31T19:05:29.503Z'
+updatedOn: '2026-09-24T17:56:34.189Z'
 ---
 
 ## Introduction
@@ -16,9 +16,9 @@ Before merging changes to a web application, you want to test them in an environ
 - Runs database migrations automatically
 - Cleans up resources when the pull request is closed
 
-By the end of this guide, every pull request in your repository will automatically get its own isolated database and preview URL, making it easy to test changes without affecting your production database.
+By the end of this guide, every pull request in your repository will get its own isolated database branch and preview URL, so you can test changes without touching your production database.
 
-> **Sample Starter**:  
+> **Sample starter**:  
 > You can try out (or fork) this complete starter: [rishi-raj-jain/preview-branches-with-netlify](https://github.com/rishi-raj-jain/preview-branches-with-netlify)
 
 ## Prerequisites
@@ -26,25 +26,25 @@ By the end of this guide, every pull request in your repository will automatical
 Before starting, make sure you have:
 
 - A [GitHub](https://github.com) account
-- A [Neon](https://neon.tech) account with a Postgres database
+- A [Neon](https://console.neon.tech/signup) account with a project
 - A [Netlify](https://netlify.com) account
 - [Node.js](https://nodejs.org) 20.x or later installed locally
 - Basic knowledge of Next.js, Prisma, and Git
 
-## Architecture Overview
+## Architecture overview
 
 The workflow consists of two main GitHub Actions:
 
-1. **Deploy Preview** - Triggered when a PR is opened or updated
+1. **Deploy Preview**: triggered when a PR is opened or updated
    - Creates a new Neon database branch
    - Runs Prisma migrations on the new branch
    - Deploys the application to Netlify with the branch database URL
    - Comments on the PR with links to the preview deployment and database branch
 
-2. **Cleanup Preview** - Triggered when a PR is closed
-   - Deletes the Neon database branch to free up resources
+2. **Cleanup Preview**: triggered when a PR is closed
+   - Deletes the Neon database branch
 
-## Create a New Next.js Project
+## Create a Next.js project
 
 Start by creating a new Next.js project with TypeScript:
 
@@ -57,9 +57,9 @@ When prompted, select the following options:
 
 - Yes, use recommended defaults
 
-## Set Up Prisma
+## Set up Prisma
 
-Install Prisma as a development dependency and initialize it:
+Install Prisma and initialize it:
 
 ```bash
 npm install prisma @prisma/client
@@ -90,7 +90,7 @@ model Element {
 
 > **Note**: We include `rhel-openssl` binary targets for Netlify's build environment.
 
-## Create Database Migrations
+## Create database migrations
 
 Create your first migration:
 
@@ -100,7 +100,7 @@ npx prisma migrate dev --name initial_migration
 
 This creates a migration file in `prisma/migrations/` and applies it to your local database.
 
-## Create a Seed File
+## Create a seed file
 
 Create a seed file at `prisma/seed.ts` to populate your database with initial data:
 
@@ -158,7 +158,7 @@ Update your `package.json` to include the necessary scripts:
 }
 ```
 
-## Create a Prisma Client Instance
+## Create a Prisma client instance
 
 Create a file at `lib/prisma.ts` to instantiate the Prisma client:
 
@@ -182,7 +182,7 @@ export const prisma =
 if (process.env.NODE_ENV !== 'production') globalForPrisma.prisma = prisma;
 ```
 
-## Build a Simple UI
+## Build a simple UI
 
 Update your `app/page.tsx` to display data from the database:
 
@@ -219,11 +219,11 @@ export default async function Home() {
 }
 ```
 
-## Set Up Your Neon Database
+## Set up your Neon database
 
 1. Go to the [Neon Console](https://console.neon.tech)
 2. Create a new project or use an existing one
-3. Copy your connection string from the dashboard
+3. Click **Connect** in the Console nav and copy your connection strings. Use the pooled connection string for `DATABASE_URL` and the direct (unpooled) one for `DIRECT_URL`
 4. Create a `.env` file in your project root:
 
 ```bash
@@ -237,7 +237,7 @@ DIRECT_URL="postgresql://user:password@host/dbname?sslmode=require"
 npm run setup
 ```
 
-## Set Up Netlify
+## Set up Netlify
 
 1. Create a new site on [Netlify](https://app.netlify.com)
 2. Connect it to your GitHub repository
@@ -247,7 +247,7 @@ npm run setup
    - Set **Deploy previews** to **None**
    - Save changes
 
-   > This is important because we'll be using GitHub Actions to trigger preview deployments with the correct database URLs.
+   > GitHub Actions will trigger the preview deployments instead, so each one gets the correct database URL.
 
 4. Add environment variables for **Production only**:
    - Go to **Site configuration** → **Environment variables**
@@ -259,12 +259,12 @@ npm run setup
 
 You'll need the following secrets for [GitHub Actions](https://docs.github.com/en/actions/how-tos/write-workflows/choose-what-workflows-do/use-secrets):
 
-### Of Neon
+### Neon
 
 1. **NEON_API_KEY**:
-   - Go to [Neon Account Settings](https://console.neon.tech/app/settings/api-keys)
-   - Click **Generate new API key**
-   - Copy the key and save it securely
+   - In the Neon Console, go to **Account settings** > **API keys** ([direct link](https://console.neon.tech/app/settings/api-keys))
+   - Create a new API key
+   - Copy the key and save it securely. It's only displayed once.
 
 2. **NEON_PROJECT_ID**:
    - Go to your project in the Neon Console
@@ -272,14 +272,13 @@ You'll need the following secrets for [GitHub Actions](https://docs.github.com/e
    - Copy the **Project ID**
 
 3. **NEON_DATABASE_NAME**:
-   - Usually `neondb` (the default database name)
+   - Usually `neondb`, the default database name
    - You can find it in your connection string or in the Neon Console
 
 4. **NEON_DATABASE_USERNAME**:
-   - Usually the same as your database name (e.g., `neondb`)
-   - You can find it in your connection string
+   - The Postgres role in your connection string (for example, `neondb_owner`)
 
-### Of Netlify
+### Netlify
 
 1. **NETLIFY_AUTH_TOKEN**:
    - Go to [Netlify User Settings](https://app.netlify.com/user/applications#personal-access-tokens)
@@ -291,7 +290,7 @@ You'll need the following secrets for [GitHub Actions](https://docs.github.com/e
    - Navigate to **Site configuration** → **General** → **Site information**
    - Copy the **Site ID**
 
-## Create the GitHub Actions Workflows
+## Create the GitHub Actions workflows
 
 Create a `.github/workflows` directory in your project:
 
@@ -299,7 +298,7 @@ Create a `.github/workflows` directory in your project:
 mkdir -p .github/workflows
 ```
 
-### Deploy Preview Workflow
+### Deploy preview workflow
 
 Create `.github/workflows/deploy-preview.yml`:
 
@@ -384,9 +383,9 @@ jobs:
             | Neon branch 🐘 | https://console.neon.tech/app/projects/${{ env.NEON_PROJECT_ID }}/branches/${{ steps.create-branch.outputs.branch_id }} |
 ```
 
-This workflow automatically creates a new Neon database branch and preview deploy for every pull request. It posts links back to the PR so you can instantly preview your changes live and view the corresponding database branch.
+This workflow creates a Neon database branch and a Netlify preview deploy for every pull request. It then posts links to both on the PR.
 
-### Cleanup Preview Workflow
+### Cleanup preview workflow
 
 Create `.github/workflows/cleanup-preview.yml`:
 
@@ -413,11 +412,11 @@ jobs:
           api_key: ${{ env.NEON_API_KEY }}
 ```
 
-This workflow automatically deletes the preview Neon database branch when a pull request is closed to prevent leftover resources.
+This workflow deletes the preview branch when the pull request is closed, so branches don't pile up in your project.
 
-## Testing This Flow
+## Test the workflow
 
-To see this workflow in action, you can simply open a pull request that edits any file (even just a markdown file) in your repository. The GitHub Actions workflow will automatically:
+To see the workflow in action, open a pull request that edits any file (even a markdown file) in your repository. The GitHub Actions workflow will:
 
 - Create a new Neon database branch for your PR
 - Deploy your app to a Netlify preview URL, connected to the new database branch
@@ -426,11 +425,11 @@ To see this workflow in action, you can simply open a pull request that edits an
 For a real-world example, see this sample PR and its corresponding workflow run:
 
 - **Sample PR**: [rishi-raj-jain/preview-branches-with-netlify#32](https://github.com/rishi-raj-jain/preview-branches-with-netlify/pull/32)
-- **Automated Comment** (with preview and Neon links): [View the GitHub Comment](https://github.com/rishi-raj-jain/preview-branches-with-netlify/pull/32#issuecomment-3575723043)
-- **Branch Deletion Workflow**: https://github.com/rishi-raj-jain/preview-branches-with-netlify/actions/runs/19671544817
+- **Automated comment** (with preview and Neon links): [View the GitHub Comment](https://github.com/rishi-raj-jain/preview-branches-with-netlify/pull/32#issuecomment-3575723043)
+- **Branch deletion workflow**: https://github.com/rishi-raj-jain/preview-branches-with-netlify/actions/runs/19671544817
 
-All that was needed for this sample was a simple file edit in the PR. The workflow then generated a dedicated database branch, deployed a preview on Netlify, and posted the preview/comment automatically.
+The sample PR only edits a file. The workflow created the database branch, deployed the Netlify preview, and posted the comment on its own.
 
 ## Conclusion
 
-You've successfully set up an automated preview deployment workflow that creates isolated database environments for every pull request.
+You've set up a workflow that gives every pull request its own Neon database branch and Netlify preview, and deletes the branch when the PR closes. To go further, see [Automate branching with GitHub Actions](/docs/guides/branching-github-actions).

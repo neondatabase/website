@@ -9,10 +9,10 @@ summary: >-
   ALTER TABLE ... OWNER TO or REASSIGN OWNED.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2026-08-26T13:16:52.511Z'
+updatedOn: '2026-10-03T12:43:38.865Z'
 ---
 
-A database is a container for SQL objects such as schemas, tables, views, functions, and indexes. In the [Neon object hierarchy](/docs/manage/overview), a database exists within a branch of a project. There is a limit of 500 databases per branch.
+A database is a container for SQL objects such as schemas, tables, views, functions, and indexes. In the [Neon object model](/docs/concepts/the-object-model), a database exists within a branch of a project. There is a limit of 500 databases per branch.
 
 If you do not specify your own database name when creating a project, your project's default branch is created with a database called `neondb`, which is owned by your project's default role (see [Manage roles](/docs/manage/roles) for more information). You can create your own databases in a project's default branch or in a child branch.
 
@@ -26,7 +26,7 @@ Databases belong to a branch. If you create a child branch, databases from the p
 
 Neon supports creating and managing databases from the Neon Console, CLI, and API, and directly with [SQL](#manage-databases-with-sql).
 
-The role that creates a database is automatically made the owner of that database. The `neon_superuser` role is also granted all privileges on databases created in the Neon Console. For information about this role, see [The neon_superuser role](/docs/manage/roles#the-neonsuperuser-role).
+The role that creates a database is automatically made the owner of that database. The `neon_superuser` role is also granted all privileges on databases created in the Neon Console, CLI, or API. Databases created with SQL don't receive this grant. For information about this role, see [The neon_superuser role](/docs/manage/roles#the-neonsuperuser-role).
 
 ## Create a database
 
@@ -36,7 +36,7 @@ The role that creates a database is automatically made the owner of that databas
 
 1. Navigate to the [Neon Console](https://console.neon.tech).
 1. Select a project.
-1. In the sidebar, select your branch from the **BRANCH** selector.
+1. Select your branch from the project/branch menu at the top of the sidebar.
 1. Under **Postgres database**, select **Databases**.
 1. Click **Add database**.
 1. Enter a database name, and select a database owner.
@@ -80,23 +80,23 @@ For attribute definitions, find the [Create database](/docs/reference/api/branch
 {
   "database": {
     "id": 2889509,
-    "branch_id": "br-morning-meadow-afu2s1jl",
+    "branch_id": "br-morning-meadow-123456",
     "name": "mydb",
     "owner_name": "casey",
-    "created_at": "2025-08-04T08:14:14Z",
-    "updated_at": "2025-08-04T08:14:14Z"
+    "created_at": "2026-08-04T08:14:14Z",
+    "updated_at": "2026-08-04T08:14:14Z"
   },
   "operations": [
     {
       "id": "b51c8ece-b78e-49f7-8ec1-78b37cbae3c4",
       "project_id": "dry-heart-13671059",
-      "branch_id": "br-morning-meadow-afu2s1jl",
-      "endpoint_id": "ep-holy-heart-afbmgcfx",
+      "branch_id": "br-morning-meadow-123456",
+      "endpoint_id": "ep-holy-heart-123456",
       "action": "apply_config",
       "status": "running",
       "failures_count": 0,
-      "created_at": "2025-08-04T08:14:14Z",
-      "updated_at": "2025-08-04T08:14:14Z",
+      "created_at": "2026-08-04T08:14:14Z",
+      "updated_at": "2026-08-04T08:14:14Z",
       "total_duration_ms": 0
     }
   ]
@@ -110,7 +110,7 @@ For attribute definitions, find the [Create database](/docs/reference/api/branch
 </Tabs>
 
 <Admonition type="note">
-Some names are not permitted. See [Reserved database names](#reserved-database-names).
+Database names can't exceed 63 bytes, and some names aren't permitted. See [Reserved database names](#reserved-database-names).
 </Admonition>
 
 ## View databases
@@ -121,7 +121,7 @@ Some names are not permitted. See [Reserved database names](#reserved-database-n
 
 1. Navigate to the [Neon Console](https://console.neon.tech).
 1. Select a project.
-1. In the sidebar, select your branch from the **BRANCH** selector.
+1. Select your branch from the project/branch menu at the top of the sidebar.
 1. Under **Postgres database**, select **Databases**.
 
 </TabItem>
@@ -135,13 +135,10 @@ neon databases list
 ```
 
 ```text filename="Output"
-┌────────┬────────────┬──────────────────────┐
-│ Name   │ Owner Name │ Created At           │
-├────────┼────────────┼──────────────────────┤
-│ neondb │ casey      │ 2023-06-19T18:27:19Z │
-├────────┼────────────┼──────────────────────┤
-│ mydb   │ casey      │ 2023-06-19T18:27:19Z │
-└────────┴────────────┴──────────────────────┘
+Databases on main
+Name    Owner Name  Created At
+neondb  casey       2026-06-19T18:27:19Z
+mydb    casey       2026-06-19T18:27:19Z
 ```
 
 </TabItem>
@@ -166,19 +163,19 @@ For attribute definitions, find the [List databases](/docs/reference/api/branche
   "databases": [
     {
       "id": 1139149,
-      "branch_id": "br-morning-meadow-afu2s1jl",
+      "branch_id": "br-morning-meadow-123456",
       "name": "neondb",
       "owner_name": "casey",
-      "created_at": "2023-01-04T18:38:23Z",
-      "updated_at": "2023-01-04T18:38:23Z"
+      "created_at": "2026-01-04T18:38:23Z",
+      "updated_at": "2026-01-04T18:38:23Z"
     },
     {
       "id": 1140822,
-      "branch_id": "br-morning-meadow-afu2s1jl",
+      "branch_id": "br-morning-meadow-123456",
       "name": "mydb",
       "owner_name": "casey",
-      "created_at": "2023-01-04T21:17:17Z",
-      "updated_at": "2023-01-04T21:17:17Z"
+      "created_at": "2026-01-04T21:17:17Z",
+      "updated_at": "2026-01-04T21:17:17Z"
     }
   ]
 }
@@ -192,7 +189,9 @@ For attribute definitions, find the [List databases](/docs/reference/api/branche
 
 ## Update a database
 
-Rename a database with the [Update database](/docs/reference/api/branches/update-project-branch-database) endpoint, or with [SQL](#rename-a-database-with-sql). This example renames `mydb` to `database1`:
+You can rename a database or change its owner with the [Update database](/docs/reference/api/branches/update-project-branch-database) endpoint. You can also rename a database with [SQL](#rename-a-database-with-sql). The Neon CLI doesn't support updating a database.
+
+This example renames `mydb` to `database1`:
 
 ```bash
 curl -X PATCH 'https://console.neon.tech/api/v2/projects/dry-heart-13671059/branches/br-morning-meadow-afu2s1jl/databases/mydb' \
@@ -215,23 +214,23 @@ For attribute definitions, find the [Update database](/docs/reference/api/branch
 {
   "database": {
     "id": 2889509,
-    "branch_id": "br-morning-meadow-afu2s1jl",
+    "branch_id": "br-morning-meadow-123456",
     "name": "database1",
     "owner_name": "casey",
-    "created_at": "2025-08-04T08:14:14Z",
-    "updated_at": "2025-08-04T08:14:14Z"
+    "created_at": "2026-08-04T08:14:14Z",
+    "updated_at": "2026-08-04T08:14:14Z"
   },
   "operations": [
     {
       "id": "2f8c0a6a-33b5-4d56-964b-739614b699c0",
       "project_id": "dry-heart-13671059",
-      "branch_id": "br-morning-meadow-afu2s1jl",
-      "endpoint_id": "ep-holy-heart-afbmgcfx",
+      "branch_id": "br-morning-meadow-123456",
+      "endpoint_id": "ep-holy-heart-123456",
       "action": "apply_config",
       "status": "running",
       "failures_count": 0,
-      "created_at": "2025-08-04T08:17:22Z",
-      "updated_at": "2025-08-04T08:17:22Z",
+      "created_at": "2026-08-04T08:17:22Z",
+      "updated_at": "2026-08-04T08:17:22Z",
       "total_duration_ms": 0
     }
   ]
@@ -240,9 +239,23 @@ For attribute definitions, find the [Update database](/docs/reference/api/branch
 
 </details>
 
+To change a database's owner, pass `owner_name`. This example makes `alex` the owner of `database1`:
+
+```bash
+curl -X PATCH 'https://console.neon.tech/api/v2/projects/dry-heart-13671059/branches/br-morning-meadow-afu2s1jl/databases/database1' \
+  -H 'Accept: application/json' \
+  -H "Authorization: Bearer $NEON_API_KEY" \
+  -H 'Content-Type: application/json' \
+  -d '{
+  "database": {
+    "owner_name": "alex"
+  }
+}'
+```
+
 ## Delete a database
 
-Deleting a database is a permanent action. All database objects belonging to the database such as schemas, tables, and roles are also deleted.
+Deleting a database is a permanent action. All objects in the database, such as schemas, tables, and indexes, are also deleted. Roles aren't deleted, because roles belong to the branch, not the database.
 
 <Tabs labels={["Console", "CLI", "API"]}>
 
@@ -250,7 +263,7 @@ Deleting a database is a permanent action. All database objects belonging to the
 
 1. Navigate to the [Neon Console](https://console.neon.tech).
 1. Select a project.
-1. In the sidebar, select your branch from the **BRANCH** selector.
+1. Select your branch from the project/branch menu at the top of the sidebar.
 1. Under **Postgres database**, select **Databases**.
 1. For the database you want to delete, click the delete icon.
 1. In the confirmation dialog, click **Delete**.
@@ -287,23 +300,23 @@ For attribute definitions, find the [Delete database](/docs/reference/api/branch
 {
   "database": {
     "id": 2889509,
-    "branch_id": "br-morning-meadow-afu2s1jl",
+    "branch_id": "br-morning-meadow-123456",
     "name": "database1",
     "owner_name": "casey",
-    "created_at": "2025-08-04T08:14:14Z",
-    "updated_at": "2025-08-04T08:14:14Z"
+    "created_at": "2026-08-04T08:14:14Z",
+    "updated_at": "2026-08-04T08:14:14Z"
   },
   "operations": [
     {
       "id": "4cd4881b-2807-4377-a76d-8e7d39bc5448",
       "project_id": "dry-heart-13671059",
-      "branch_id": "br-morning-meadow-afu2s1jl",
-      "endpoint_id": "ep-holy-heart-afbmgcfx",
+      "branch_id": "br-morning-meadow-123456",
+      "endpoint_id": "ep-holy-heart-123456",
       "action": "apply_config",
       "status": "running",
       "failures_count": 0,
-      "created_at": "2025-08-04T08:19:39Z",
-      "updated_at": "2025-08-04T08:19:39Z",
+      "created_at": "2026-08-04T08:19:39Z",
+      "updated_at": "2026-08-04T08:19:39Z",
       "total_duration_ms": 0
     }
   ]
@@ -315,6 +328,7 @@ For attribute definitions, find the [Delete database](/docs/reference/api/branch
 </TabItem>
 
 </Tabs>
+
 ## Manage databases with SQL
 
 You can create and manage databases in Neon with SQL, as you can with any standalone Postgres installation. To create a database, issue a `CREATE DATABASE` statement from a client such as [psql](/docs/connect/query-with-psql-editor) or from the [Neon SQL Editor](/docs/get-started/query-with-neon-sql-editor).
@@ -325,11 +339,7 @@ CREATE DATABASE testdb;
 
 Most standard [Postgres CREATE DATABASE parameters](https://www.postgresql.org/docs/current/sql-createdatabase.html) are supported with the exception of `TABLESPACE`. This parameter requires access to the local file system, which is not permitted in Neon.
 
-The role that creates a database is the owner of the database.
-
-<Admonition type="note">
-As of Postgres 15, only a database owner has the `CREATE` privilege on a database's `public` schema. For other users, the `CREATE` privilege on the `public` schema must be granted explicitly via a `GRANT CREATE ON SCHEMA public TO <username>;` statement. For more information, see [Public schema privileges](/docs/manage/database-access#public-schema-privileges).
-</Admonition>
+The role that creates a database is the owner of the database. As noted at the top of this page, only the database owner can create objects in the `public` schema on Postgres 15 and later unless you grant `CREATE` to other roles.
 
 For more information about database object privileges in Postgres, see [Privileges](https://www.postgresql.org/docs/current/ddl-priv.html).
 
@@ -372,7 +382,7 @@ The workaround is to introduce a shared group role that both roles belong to. Yo
 In the example below, `current_owner`, `new_owner`, and `table_owners` are placeholder role and group names. Replace them with names from your own environment.
 </Admonition>
 
-1. Connect as the database owner role and run:
+1. Connect as the owner of the database (or another role that can create roles) and run:
 
    ```sql
    -- Create a group role with no login
@@ -388,7 +398,7 @@ In the example below, `current_owner`, `new_owner`, and `table_owners` are place
 
    Replace `current_owner` and `new_owner` with the actual role names.
 
-2. Still connected as `current_owner`, transfer the table to the group:
+2. Connect as `current_owner` and transfer the table to the group:
 
    ```sql
    ALTER TABLE your_table OWNER TO table_owners;
@@ -408,13 +418,14 @@ In the example below, `current_owner`, `new_owner`, and `table_owners` are place
 
    The **Owner** column should now show `new_owner`.
 
-5. Leave the `table_owners` group role in place if you need to transfer other tables later, or drop it when you're done:
+5. Leave the `table_owners` group role in place if you need to transfer other tables later, or drop it when you're done. Revoke its schema privileges first, or `DROP ROLE` fails:
 
    ```sql
+   REVOKE ALL ON SCHEMA public FROM table_owners;
    DROP ROLE table_owners;
    ```
 
-   `DROP ROLE table_owners` works only after that role no longer owns any objects and has no blocking dependencies.
+   `DROP ROLE` also fails if the role still owns objects.
 
 ### Transfer ownership for multiple objects
 
@@ -435,8 +446,6 @@ Then connect as `new_owner` and move those objects from the group to the destina
 ```sql
 REASSIGN OWNED BY table_owners TO new_owner;
 ```
-
-`REASSIGN OWNED` applies within the current database context. Run it in each database where you need to transfer ownership.
 
 <Admonition type="note">
 - `REASSIGN OWNED` runs in the current database context, so run it in each database where you need to transfer ownership.

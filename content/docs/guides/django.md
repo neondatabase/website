@@ -2,7 +2,7 @@
 title: Connect a Django application to Neon
 subtitle: Set up a Neon project in seconds and connect from a Django application
 summary: >-
-  Connecting Django to Neon serverless Lakebase Postgres requires configuring the
+  Connecting Django to Lakebase Postgres on Neon requires configuring the
   `DATABASES` block in `settings.py` with the psycopg3 driver, `sslmode:
   require`, and `CONN_HEALTH_CHECKS: True` to prevent dropped connections when
   the compute scales to zero after 5 minutes of inactivity. Use this page
@@ -12,10 +12,9 @@ summary: >-
   Migrations guide.
 enableTableOfContents: true
 redirectFrom:
-  - /docs/integrations/
-  - /docs/quickstart/django/
-  - /docs/cloud/integrations/django/
-updatedOn: '2026-07-31T15:27:48.506Z'
+  - /docs/quickstart/django
+  - /docs/cloud/integrations/django
+updatedOn: '2026-09-16T19:45:35.340Z'
 ---
 
 <CopyPrompt src="/prompts/django-prompt.md" 
@@ -25,8 +24,8 @@ To connect to Neon from a Django application:
 
 ## Prerequisites
 
-- A [Neon account and project](/docs/get-started-with-neon/signing-up) with connection parameters ready
-- Python 3.8+ installed
+- A [Neon account and project](/docs/get-started/signing-up) with connection parameters ready
+- Python 3.12+ installed (required by Django 6). Django 5.2 LTS supports Python 3.10+.
 - An existing Django project (or create one with `django-admin startproject myproject`)
 
 <Admonition type="important">
@@ -40,16 +39,16 @@ source venv/bin/activate   # macOS / Linux
 
 </Admonition>
 
-## Install the PostgreSQL driver
+## Install the Postgres driver
 
-Install `psycopg` (the modern psycopg3 driver) and `python-dotenv` inside your virtual environment:
+Install `psycopg` (psycopg 3) and `python-dotenv` inside your virtual environment:
 
 ```bash
 pip install "psycopg[binary]" python-dotenv
 ```
 
 <Admonition type="note">
-The docs examples below use `psycopg` (v3). If your project uses the older `psycopg2` driver, see [Connection issues](#connection-issues) for SNI compatibility requirements.
+The examples below use `psycopg` (v3). If your project uses the older `psycopg2` driver, see [Connection issues](#connection-issues) for SNI compatibility requirements.
 </Admonition>
 
 <Steps>
@@ -100,10 +99,10 @@ DATABASES = {
 ```
 
 <Admonition type="note">
-Neon places computes into an idle state and closes connections after 5 minutes of inactivity (see [Compute lifecycle](/docs/introduction/compute-lifecycle/)). To avoid connection errors, you can set the Django [CONN_MAX_AGE](https://docs.djangoproject.com/en/4.1/ref/settings/#std-setting-CONN_MAX_AGE) setting to 0 to close database connections at the end of each request so that your application does not attempt to reuse connections that were closed by Neon. From Django 4.1, you can use a higher `CONN_MAX_AGE` setting in combination with the [CONN_HEALTH_CHECKS](https://docs.djangoproject.com/en/4.1/ref/settings/#conn-health-checks) setting to enable connection reuse while preventing errors that might occur due to closed connections. For more information about these configuration options, see [Connection management](https://docs.djangoproject.com/en/4.1/ref/databases#connection-management), in the _Django documentation_.
+Neon places computes into an idle state and closes connections after 5 minutes of inactivity (see [Compute lifecycle](/docs/introduction/compute-lifecycle/)). To avoid connection errors, you can set the Django [CONN_MAX_AGE](https://docs.djangoproject.com/en/stable/ref/settings/#std-setting-CONN_MAX_AGE) setting to 0 to close database connections at the end of each request so that your application does not attempt to reuse connections that were closed by Neon. From Django 4.1, you can use a higher `CONN_MAX_AGE` setting in combination with the [CONN_HEALTH_CHECKS](https://docs.djangoproject.com/en/stable/ref/settings/#conn-health-checks) setting to enable connection reuse while preventing errors that might occur due to closed connections. For more information about these configuration options, see [Connection management](https://docs.djangoproject.com/en/stable/ref/databases/#connection-management), in the _Django documentation_.
 </Admonition>
 
-You can find all of the connection details listed above by clicking the **Connect** button on your **Project Dashboard** to open the **Connect to your database** modal. For more information, see [Connect from any application](/docs/connect/connect-from-any-app).
+You can find all of the connection details listed above by clicking the **Connect** button in the Console nav to open the **Connect to your branch** modal. For more information, see [Connect from any application](/docs/connect/connect-from-any-app).
 
 Add a `.env` file to your project's root directory with the individual connection parameters (not a single `DATABASE_URL`, since Django's `DATABASES` setting expects separate fields):
 
@@ -115,9 +114,9 @@ PGPASSWORD="<password>"
 PGPORT=5432
 ```
 
-> Replace `<endpoint_hostname>`, `<dbname>`, `<user>`, and `<password>` with your actual database credentials.
+> Replace `<endpoint_hostname>`, `<dbname>`, `<user>`, and `<password>` with your actual database credentials. If you have a connection string (`postgresql://[user]:[password]@[neon_hostname]/[dbname]`), copy its parts into the matching variables. The pooled hostname (with `-pooler`) works with these settings.
 
-For additional information about Django project settings, see [Django Settings: Databases](https://docs.djangoproject.com/en/4.0/ref/settings#databases), in the Django documentation.
+For additional information about Django project settings, see [Django Settings: Databases](https://docs.djangoproject.com/en/stable/ref/settings/#databases), in the Django documentation.
 
 ## Test the connection
 
@@ -156,39 +155,41 @@ Create a simple view to verify the database connection is working.
    python manage.py runserver
    ```
 
-4. Visit `http://localhost:8000` to see the PostgreSQL version from your Neon database.
+4. Visit `http://localhost:8000` to see the Postgres version from your Neon database.
 
 </Steps>
 
 ## Connection issues
 
-- Django uses the `psycopg2` driver as the default adapter for Postgres. If you have an older version of that driver, you may encounter an `Endpoint ID is not specified` error when connecting to Neon. This error occurs if the client library used by your driver does not support the Server Name Indication (SNI) mechanism in TLS, which Neon uses to route incoming connections. The `psycopg2` driver uses the `libpq` client library, which supports SNI as of v14. You can check your `psycopg2` and `libpq` versions by starting a Django shell in your Django project and running the following commands:
+- Django uses `psycopg` (v3) when it's installed and falls back to `psycopg2`. If your project uses an older version of `psycopg2`, you may encounter an `Endpoint ID is not specified` error when connecting to Neon. This error occurs if the client library used by your driver does not support the Server Name Indication (SNI) mechanism in TLS, which Neon uses to route incoming connections. The `psycopg2` driver uses the `libpq` client library, which supports SNI as of v14. You can check your `psycopg2` and `libpq` versions by starting a Django shell in your Django project and running the following commands:
 
   ```bash
   # Start a Django shell
   python3 manage.py shell
+  ```
 
+  ```python
   # Check versions
   import psycopg2
   print("psycopg2 version:", psycopg2.__version__)
   print("libpq version:", psycopg2._psycopg.libpq_version())
   ```
 
-  The version number for `libpq` is presented in a different format, for example, version 14.1 will be shown as 140001. If your `libpq` version is less than version 14, you can either upgrade your `psycopg2` driver to get a newer `libpq` version or use one of the workarounds described in our [Connection errors](/docs/connect/connection-errors#the-endpoint-id-is-not-specified) documentation. Upgrading your `psycopg2` driver may introduce compatibility issues with your Django or Python version, so you should test your application thoroughly.
+  The version number for `libpq` is presented in a different format, for example, version 14.1 will be shown as 140001. If your `libpq` version is less than version 14, you can either upgrade your `psycopg2` driver to get a newer `libpq` version or use one of the workarounds in [Connection errors](/docs/connect/connection-errors#the-endpoint-id-is-not-specified). Upgrading your `psycopg2` driver may introduce compatibility issues with your Django or Python version, so you should test your application thoroughly.
 
 - If you encounter an `SSL SYSCALL error: EOF detected` when connecting to the database, this typically occurs because the application is trying to reuse a connection after the Neon compute has been suspended due to inactivity. To resolve this issue, try one of the following options:
-  - Set your Django [`CONN_MAX_AGE`](https://docs.djangoproject.com/en/5.1/ref/settings/#conn-max-age) setting to a value less than or equal to the scale to zero setting configured for your compute. The default is 5 minutes (300 seconds).
-  - Enable [`CONN_HEALTH_CHECKS`](https://docs.djangoproject.com/en/5.1/ref/settings/#conn-health-checks) by setting it to `true`. This forces a health check to verify that the connection is alive before executing a query.
+  - Set your Django [`CONN_MAX_AGE`](https://docs.djangoproject.com/en/stable/ref/settings/#conn-max-age) setting to a value less than or equal to the scale to zero setting configured for your compute. The default is 5 minutes (300 seconds).
+  - Enable [`CONN_HEALTH_CHECKS`](https://docs.djangoproject.com/en/stable/ref/settings/#conn-health-checks) by setting it to `True`. This forces a health check to verify that the connection is alive before executing a query.
 
   For information configuring Neon's Scale to zero setting, see [Configuring Scale to zero for Neon computes](/docs/guides/scale-to-zero-guide).
 
 ## Schema migration with Django
 
-For schema migration with Django, see our guide:
+For schema migration with Django, see:
 
 <DetailIconCards>
 
-<a href="/docs/guides/django-migrations" description="Schema migration with Lakebase Postgres and Django" icon="app-store" icon="app-store">Django Migrations</a>
+<a href="/docs/guides/django-migrations" description="Schema migration with Lakebase Postgres and Django" icon="app-store">Django Migrations</a>
 
 </DetailIconCards>
 

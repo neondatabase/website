@@ -9,7 +9,7 @@ summary: >-
   `POSTGRES_URL` credential storage in `.env.local`, and a working TypeScript
   query to verify the connection.
 enableTableOfContents: true
-updatedOn: '2026-08-04T05:18:26.469Z'
+updatedOn: '2026-09-16T19:45:35.340Z'
 ---
 
 This guide describes how to create a project on Neon and connect to it from a Bun application. Examples are provided for using [Bun's built-in SQL client](https://bun.sh/docs/api/sql) and the [@neondatabase/serverless](/docs/serverless/serverless-driver) driver. Use the client you prefer.
@@ -54,14 +54,14 @@ bun add @neondatabase/serverless
 
 ## Store your Neon credentials
 
-Add a `.env.local` file to your project directory and add your Neon connection details to it. Bun automatically loads variables from `.env`, `.env.local`, and other `.env.*` files. You can find the connection details for your database by clicking the **Connect** button on your **Project Dashboard** to open the **Connect to your database** modal. Select Bun from the **Connection string** dropdown. For more information, see [Connect from any application](/docs/connect/connect-from-any-app).
+Add a `.env.local` file to your project directory and add your Neon connection details to it. Bun automatically loads variables from `.env`, `.env.local`, and other `.env.*` files. You can find the connection details for your database by clicking the **Connect** button in the Console nav to open the **Connect to your branch** modal. Select Bun from the **Connection string** dropdown. For more information, see [Connect from any application](/docs/connect/connect-from-any-app).
 
 ```shell shouldWrap
 POSTGRES_URL='postgresql://[user]:[password]@[neon_hostname]/[dbname]?sslmode=require&channel_binding=require'
 ```
 
 <Admonition type="note">
-`Bun.sql` uses `POSTGRES_URL` as the default environment variable for the Primary connection URL for Postgres
+`Bun.sql` reads the connection string from `POSTGRES_URL` by default (it also checks `DATABASE_URL`), so you don't need to pass it in code.
 </Admonition>
 
 <Admonition type="important">
@@ -70,7 +70,7 @@ To ensure the security of your data, never expose your Neon credentials directly
 
 ## Configure the Postgres client
 
-Add an `index.ts` file (or `index.js`) to your project directory and add the following code snippet to connect to your Neon database. Choose the configuration that matches your preferred client.
+`bun init` creates an `index.ts` file in your project directory. Replace its contents with the following code to connect to your Neon database. Choose the configuration that matches your preferred client.
 
 <CodeTabs labels={["Bun.sql", "Neon serverless driver"]}>
 
@@ -88,7 +88,7 @@ getPgVersion();
 ```typescript
 import { neon } from '@neondatabase/serverless';
 
-const sql = neon(process.env.POSTGRES_URL);
+const sql = neon(process.env.POSTGRES_URL!);
 
 async function getPgVersion() {
   const result = await sql`SELECT version()`;
@@ -102,12 +102,12 @@ getPgVersion();
 
 ## Run index.ts
 
-Run `bun run index.ts` (or `bun index.js`) to view the result.
+Run `bun run index.ts` to view the result.
 
 ```shell
 $ bun run index.ts
 {
-  version: "PostgreSQL 17.2 on x86_64-pc-linux-gnu, compiled by gcc (Debian 12.2.0-14) 12.2.0, 64-bit",
+  version: "PostgreSQL 18.6 (ac70818) on aarch64-unknown-linux-gnu, compiled by gcc (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0, 64-bit",
 }
 ```
 

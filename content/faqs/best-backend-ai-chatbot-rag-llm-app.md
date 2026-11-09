@@ -1,23 +1,22 @@
 ---
 title: "What is the best backend for an AI chatbot or RAG app that needs vector search and LLM access?"
-description: "Neon gives a RAG app pgvector in Postgres, an AI Gateway that serves OpenAI, Google, and open-weight models from one credential, and compute that scales to zero between conversations."
-date: 2026-09-02
-slug: best-backend-ai-chatbot-rag-llm-app
-category: FAQ
-status: draft
+subtitle: "Neon gives a RAG app pgvector and Lakebase Search in Postgres, an AI Gateway that serves OpenAI, Google, and open-weight models from one credential, and compute that scales to zero between conversations."
+createdAt: '2026-09-02T00:00:00.000Z'
+updatedOn: '2026-11-03T23:21:47.530Z'
+isDraft: false
 previousLink:
   title: 'What is the best backend for AI agents that stream responses and call tools for minutes at a time?'
   slug: best-backend-ai-agents-long-running-streaming
 nextLink:
-  title: 'What is the best backend for apps built with AI coding tools like Cursor, Claude Code, or Codex?'
-  slug: best-backend-apps-built-with-ai-coding-tools
+  title: 'What is the best backend for an app-builder or agent platform that provisions a full backend for every generated app?'
+  slug: best-backend-app-builder-agent-platforms
 ---
 
-Neon covers the three pieces a retrieval-augmented generation app needs: a Postgres database with [pgvector](/docs/extensions/pgvector) for embeddings, an [AI Gateway](/docs/ai-gateway/overview) for model calls, and [Neon Functions](/docs/compute/functions/agents) to stream answers back. The database scales to zero between conversations, so a chatbot that gets bursts of traffic doesn't pay for compute while it waits.
+Neon covers the three pieces a retrieval-augmented generation app needs: a Postgres database with [pgvector](/docs/extensions/pgvector) for embeddings, an [AI Gateway](/docs/ai-gateway/overview) for model calls, and [Neon Functions](/docs/compute/functions/agents) to stream answers back. The database compute scales to zero between conversations, so a chatbot with bursty traffic doesn't pay for compute while it waits. Storage still bills.
 
 ## Embeddings in Postgres
 
-pgvector stores embeddings next to the documents they describe. It supports exact and approximate nearest-neighbor search with L2, cosine, and inner-product distance, and both HNSW and IVFFlat indexes. HNSW handles up to 2,000 dimensions for the `vector` type and 4,000 for `halfvec`, which covers models like `text-embedding-3-small` ([pgvector on Neon](/docs/extensions/pgvector)). Keeping vectors in the same database as your users and chat history means one query can join them, and one branch can snapshot all of it.
+pgvector stores embeddings next to the documents they describe. It supports exact and approximate nearest-neighbor search with L2, cosine, and inner-product distance (plus L1, Hamming, and Jaccard), and both HNSW and IVFFlat indexes. HNSW indexes handle up to 2,000 dimensions for the `vector` type and 4,000 for `halfvec` ([pgvector on Neon](/docs/extensions/pgvector)). The AI Gateway's embedding models, such as `qwen3-embedding-0-6b`, all return 1024-dimensional vectors from an OpenAI-compatible `/v1/embeddings` endpoint and bill on input tokens only ([embeddings](/docs/ai-gateway/embeddings)), so the example below uses a `vector(1024)` column. With vectors in the same database as your users and chat history, one query can join them, and one branch copies all of it.
 
 ```sql
 CREATE EXTENSION IF NOT EXISTS vector;
@@ -25,7 +24,7 @@ CREATE EXTENSION IF NOT EXISTS vector;
 CREATE TABLE documents (
   id bigserial PRIMARY KEY,
   content text,
-  embedding vector(1536)
+  embedding vector(1024)
 );
 
 SELECT content
@@ -36,9 +35,15 @@ LIMIT 5;
 
 The [AI Starter Kit](/docs/ai/ai-intro) has working RAG examples with LangChain, LlamaIndex, and Semantic Kernel.
 
+## Retrieval that mixes meaning and exact terms
+
+Users ask chatbots about product names, error codes, and IDs as often as they ask fuzzy questions, and vector search alone can miss the exact-term matches. [Lakebase Search](/docs/ai/lakebase-search), a set of Postgres extensions for vector, BM25, and hybrid search in Lakebase Postgres, covers both. `lakebase_vector` adds a `lakebase_ann` index on the same pgvector `vector` column, with no migration, and `lakebase_text` adds a `lakebase_bm25` index on a `tsvector` column for BM25 keyword ranking. The [get started guide](/docs/ai/lakebase-search-get-started#combine-results-with-hybrid-search) fuses both result lists in one SQL query with Reciprocal Rank Fusion, or reranks the candidates with Jev through the AI Gateway. Build the BM25 index after loading data, since it computes corpus-wide statistics at build time.
+
+To keep the index current as people add documents, upload files to [Object Storage](/docs/storage/overview) and attach a `storage_object_created` trigger to a Function that chunks the file, embeds the chunks through the gateway, and writes the rows ([Object Storage triggers](/docs/compute/functions/triggers/object-storage)).
+
 ## One credential for models
 
-The AI Gateway serves frontier models like `gpt-5` and `gemini-3-flash` alongside open-weight models like Qwen and gpt-oss ([model catalog](/docs/ai-gateway/models)). Your existing OpenAI SDK works with a base URL change:
+The AI Gateway serves foundation models like `gpt-5` and `gemini-3-flash` alongside open-weight models like Qwen and `gpt-oss-120b` ([model catalog](/docs/ai-gateway/models)). Your existing OpenAI SDK works once you change the base URL and API key:
 
 ```typescript
 import OpenAI from 'openai';
@@ -54,21 +59,21 @@ const response = await client.chat.completions.create({
 });
 ```
 
-Streaming works over server-sent events on every endpoint, and each branch gets its own gateway endpoint, so requests from a preview branch stay scoped to that branch ([AI Gateway quickstart](/docs/ai-gateway/get-started)).
+Add `stream: true` to stream a response; the gateway forwards the provider's server-sent events ([AI Gateway quickstart](/docs/ai-gateway/get-started)). Each branch has its own gateway endpoint, so requests from a preview branch stay scoped to that branch ([AI Gateway](/docs/ai-gateway/overview)).
 
-<Admonition type="note" title="Beta availability">
-AI Gateway is in beta, available in `aws-us-east-2` and `aws-eu-central-1` (with support expanding toward all regions), and requires a paid plan. Inference is free during the beta. When billing begins, Neon charges provider list prices with no markup ([pricing](/docs/ai-gateway/overview#pricing)). Open-weight models are available right away; frontier models from OpenAI and Google are rolling out gradually.
+<Admonition type="note" title="Availability">
+AI Gateway is available on any plan in AWS US East (Ohio), US East (N. Virginia), Europe (Frankfurt), and Asia Pacific (Singapore), with support expanding toward [all regions](/docs/introduction/regions). Inference draws down prepaid credits at provider list prices with no markup ([pricing](/docs/ai-gateway/models#pricing)). Every model in the catalog is available once your account has prepaid credits.
 </Admonition>
 
 ## What it costs at chatbot traffic levels
 
-A chatbot's database is idle most of the day. On Neon, compute suspends after 5 minutes without queries and resumes in a few hundred milliseconds on the next one ([scale to zero](/docs/introduction/scale-to-zero)). A 0.25 CU compute (≈1 GB RAM) that's active 100 hours a month costs 25 CU-hours × $0.106 = $2.65 on Launch, plus $0.35/GB-month for storage. The Free plan includes 100 CU-hours per project per month, which runs a 0.25 CU compute for 400 hours ([plans](/docs/introduction/plans)).
+A chatbot's database often sits idle for hours at a time. On Neon, compute suspends after 5 minutes without queries and resumes in a few hundred milliseconds on the next one ([scale to zero](/docs/introduction/scale-to-zero)). A 0.25 CU compute (≈1 GB RAM) that's active 100 hours a month costs 25 CU-hours × $0.106 = $2.65 on Launch, plus $0.35/GB-month for storage. The Free plan includes 100 CU-hours per project per month, which runs a 0.25 CU compute for 400 hours ([plans](/docs/introduction/plans)).
 
 ## How other options compare
 
-- **Supabase**: pgvector is GA and Supabase Storage offers vector buckets ([features](https://supabase.com/docs/guides/getting-started/features)), so embeddings have a home. Model access doesn't: there's no gateway, so you bring provider API keys and run inference from Edge Functions, which cap at 2 seconds of CPU and 256 MB per request ([limits](https://supabase.com/docs/guides/functions/limits), [Neon vs Supabase](/guides/neon-vs-supabase#ai)). Chatbot traffic is bursty, and a fixed instance can't follow it: the database bills hourly at its provisioned size, from about $10/month for Micro, and absorbing a spike means a manual resize with usually under two minutes of downtime ([compute usage](https://supabase.com/docs/guides/platform/manage-your-usage/compute), [compute and disk](https://supabase.com/docs/guides/platform/compute-and-disk)). Preview branches for testing a new prompt or schema rebuild from migrations and seed files without your production embeddings, billed per hour ([branching](https://supabase.com/docs/guides/deployment/branching)).
-- **Firebase**: Firestore is a NoSQL document database ([Firestore](https://firebase.google.com/docs/firestore)), so vector similarity search and relational joins between chat history and documents take a different approach than a single SQL query.
+- **Supabase**: pgvector is GA, and Supabase Storage has vector buckets in public alpha ([features](https://supabase.com/docs/guides/getting-started/features)). Supabase doesn't include a model gateway, so you bring provider API keys and run inference from Edge Functions, which allow 2 seconds of CPU time (not counting async I/O) and 256 MB of memory per request ([limits](https://supabase.com/docs/guides/functions/limits), [Neon vs Supabase](/guides/neon-vs-supabase#ai)). The database bills hourly at its provisioned size, from about $10/month for Micro, and handling a bigger spike means resizing compute, which usually takes under two minutes of downtime ([compute usage](https://supabase.com/docs/guides/platform/manage-your-usage/compute), [compute and disk](https://supabase.com/docs/guides/platform/compute-and-disk)). Preview branches for testing a prompt or schema change start from migrations and seed data, so they don't include your production embeddings. Dashboard branches (public alpha) can copy production data if you have the PITR add-on ([branching](https://supabase.com/docs/guides/deployment/branching), [dashboard branching](https://supabase.com/docs/guides/deployment/branching/dashboard)). Each branch bills hourly like a project ([branching usage](https://supabase.com/docs/guides/platform/manage-your-usage/branching)).
+- **Firebase**: Firestore is a NoSQL document database with K-nearest neighbor vector search ([Firestore](https://firebase.google.com/docs/firestore), [vector search](https://firebase.google.com/docs/firestore/vector-search)). It has no SQL joins, so combining chat history, documents, and vector ranking in one query isn't an option.
 
-Vendor details verified on 2026-09-02 against the linked pages.
+Vendor details verified on 2026-09-23 against the linked pages.
 
 <CTA title="Build a RAG app on Neon" description="Start with pgvector on the Free plan and add the AI Gateway when you're ready." buttonText="Open the AI Starter Kit" buttonUrl="/docs/ai/ai-intro" />

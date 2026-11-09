@@ -1,24 +1,24 @@
 ---
-title: 'Triaging pull requests with OpenCode and Neon Database Branching'
-subtitle: 'A step‑by‑step guide to using GitHub Actions with OpenCode and Neon’s instant database branching, giving AI agents safe, production‑like environments for testing and validating full‑stack changes.'
+title: 'Triaging pull requests with OpenCode and Neon branching'
+subtitle: 'Use GitHub Actions with OpenCode and Neon’s instant database branching to give AI agents production‑like environments for testing and validating full‑stack changes.'
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2026-03-09T00:00:00.000Z'
-updatedOn: '2026-07-15T00:08:00.682Z'
+updatedOn: '2026-09-24T17:56:34.189Z'
 ---
 
-Coding assistants are rapidly evolving from simple code generators into autonomous collaborators that can implement features and open pull requests directly in your repository. To handle full-stack tasks safely, they need a production-like environment where they can test application code and validate database changes without touching production.
+Coding agents can now implement features and open pull requests directly in your repository. To handle full-stack tasks safely, they need a production-like environment where they can test application code and validate database changes without touching production.
 
-This guide shows how to combine OpenCode’s GitHub Action with Neon’s instant branching to give an AI agent an isolated Postgres branch on demand. With that sandbox in place, the agent can update schema files, generate and run migrations, validate its changes against a real database, and open a Pull Request with the complete implementation.
+This guide shows how to combine OpenCode’s GitHub Action with Neon’s instant branching to give an AI agent an isolated Postgres branch on demand. With that sandbox in place, the agent can update schema files, generate and run migrations, validate its changes against a real database, and open a pull request with the complete implementation.
 
 ## Overview
 
-In this guide, you'll connect GitHub Actions, OpenCode, and Neon Database Branching to create a workflow for AI-driven development. The high-level flow looks like this:
+In this guide, you'll connect GitHub Actions, OpenCode, and Neon branching to create a workflow for AI-driven development. The high-level flow looks like this:
 
 ```mermaid
 flowchart TD
   A["Create a<br/>GitHub Issue"] --> B["Assign issue<br/>to OpenCode"]
-  B --> C["Provision isolated<br/>Neon DB branch"]
+  B --> C["Provision isolated<br/>Neon database branch"]
   C --> D["Write code, run<br/>migrations, and test"]
   D --> E["Open Pull Request<br/>with the solution"]
   E --> F["Optional: Vercel <br/>preview deploy<br/>and branch cleanup"]
@@ -30,11 +30,11 @@ To follow along with this guide, you will need:
 
 - **Neon account and project:** A Neon account with an active project. Sign up for a free [Neon account](https://console.neon.tech/signup) if you don't have one.
 - **OpenCode CLI:** OpenCode CLI installed and configured. You can find installation instructions in the [OpenCode documentation](https://opencode.ai/docs#install).
-- **Application repository on GitHub:** A GitHub repository containing an application that uses your Neon project as its database. In this example, you'll use a simple snippet management tool called SnippetHub built with Next.js and Drizzle ORM. You can follow along with any of your own Neon-backed projects - the focus is on the workflow rather than the specific application.
+- **Application repository on GitHub:** A GitHub repository containing an application that uses your Neon project as its database. In this example, you'll use a simple snippet management tool called SnippetHub built with Next.js and Drizzle ORM. You can follow along with any of your own projects on Neon. The focus is on the workflow, not the specific application.
 
 ## The sample application
 
-To demonstrate this workflow, you'll use an example app called **SnippetHub**. It’s a simple tool for saving and organizing code snippets. Each snippet includes a title, description, code content, and is tied to a user. Currently, users can create, edit, and delete snippets, but all snippets remain private visible only to their creator.
+To demonstrate this workflow, you'll use an example app called **SnippetHub**. It’s a simple tool for saving and organizing code snippets. Each snippet includes a title, description, code content, and is tied to a user. Currently, users can create, edit, and delete snippets, but all snippets remain private, visible only to their creator.
 
 <DetailIconCards>
     <a href="https://github.com/dhanushreddy291/code-snippet" description="Example app repository used in this guide. It’s a simple snippet management tool built with Next.js, Drizzle ORM, and Managed Better Auth." icon="github">Example repository (SnippetHub)</a>
@@ -42,19 +42,19 @@ To demonstrate this workflow, you'll use an example app called **SnippetHub**. I
 
 Now you want to add a **"Share Snippet"** feature. This will let users make a snippet public, generating a shareable link that anyone can view without authentication.
 
-You'll create a GitHub Issue for that feature and ask OpenCode to implement it. In the rest of this guide, you'll set up the automation that gives the agent its own Neon branch, lets it make and validate schema changes safely, and returns the finished work as a Pull Request.
+You'll create a GitHub Issue for that feature and ask OpenCode to implement it. In the rest of this guide, you'll set up the automation that gives the agent its own Neon branch, lets it make and validate schema changes safely, and returns the finished work as a pull request.
 
 Follow these steps to set up that end-to-end workflow in your own repository.
 
 <Steps>
 
-## Set up the Neon GitHub Integration
+## Set up the Neon GitHub integration
 
 <Tabs labels={["Using the Neon GitHub Integration", "Manual configuration"]}>
 
 <TabItem>
 
-To allow your GitHub Action to create and manage Neon branches, you need to connect your Neon project to GitHub. This integration will securely inject the necessary credentials into your GitHub Actions environment.
+To allow your GitHub Action to create and manage Neon branches, you need to connect your Neon project to GitHub. The integration adds the credentials your workflow needs to your repository.
 
 1. In the [Neon Console](https://console.neon.tech), navigate to the **Integrations** page for your project.
 2. Locate the **GitHub** card and click **Add**.
@@ -70,16 +70,16 @@ Once connected, Neon will automatically inject `NEON_API_KEY` into your reposito
 
 <TabItem>
 
-To set up the integration manually follow these steps:
+To set up the integration manually, follow these steps:
 
-1. In your GitHub repository, go to **Settings > Secrets and variables > Actions**. Under **Secrets**, create a new repository secret named `NEON_API_KEY`, and paste in a project-scoped API key from the Neon Console. This secret allows the GitHub Action to authenticate with Neon and manage branches. For setup steps, see [Neon Docs: Create project-scoped API keys](/docs/manage/api-keys#create-project-scoped-organization-api-keys).
-2. In the same GitHub Actions settings page, under **Variables**, create a new repository variable named `NEON_PROJECT_ID`, and set its value to your Neon project ID. You can find the project ID in the Neon Console under **Project settings**.
+1. In your GitHub repository, go to **Settings > Secrets and variables > Actions**. Under **Secrets**, create a new repository secret named `NEON_API_KEY`, and paste in a project-scoped API key from the Neon Console. This secret allows the GitHub Action to authenticate with Neon and manage branches. For setup steps, see [Create project-scoped organization API keys](/docs/manage/api-keys#create-project-scoped-organization-api-keys).
+2. In the same GitHub Actions settings page, under **Variables**, create a new repository variable named `NEON_PROJECT_ID`, and set its value to your Neon project ID. You can copy the project ID from the **General** page of your project's **Settings** in the Neon Console.
 
 </TabItem>
 
 </Tabs>
 
-## Create the OpenCode GitHub Action Workflow
+## Create the OpenCode GitHub Action workflow
 
 Now that your Neon project is connected to GitHub, set up OpenCode's GitHub integration from your local repository by running:
 
@@ -89,7 +89,7 @@ opencode github install
 
 This command opens the GitHub configuration flow in your browser, where you'll be asked to choose the GitHub organization and repositories where you want to install the OpenCode GitHub App.
 
-Next, you will be prompted to chose the model you want to use for your OpenCode GitHub Action. For this example, select `opencode/minimax-m2.5-free`, which is a free, general-purpose model suitable for a wide range of coding tasks. You can always change the model later by updating the workflow file.
+Next, you will be prompted to choose the model you want to use for your OpenCode GitHub Action. For this example, select `opencode/minimax-m2.5-free`, which is a free, general-purpose model suitable for a wide range of coding tasks. You can always change the model later by updating the workflow file.
 
 As part of that setup, OpenCode also creates a basic workflow file at `.github/workflows/opencode.yml`. The generated file does not include the Neon branch creation step, so you will need to modify it to add that in. Update the file with the following content:
 
@@ -151,20 +151,20 @@ jobs:
             5. Verify the complete fix works end to end.
 ```
 
-After updating `.github/workflows/opencode.yml`, commit and push the workflow to your repository. With this in place, the next time you comment on an issue with the trigger phrase, the workflow will execute, giving OpenCode a fully isolated Neon database branch to work with as it implements the requested changes.
+After updating `.github/workflows/opencode.yml`, commit and push the workflow to your repository. With this in place, the next time you comment on an issue with the trigger phrase, the workflow will execute, giving OpenCode an isolated Neon database branch to work with as it implements the requested changes.
 
-**How the Workflow Works**
+**How the workflow works**
 
 The GitHub Action is designed to respond to issue comments that contain specific trigger phrases. Here's a breakdown of the key steps:
 
-1. **The Trigger:** The `if` condition ensures the workflow only runs when an issue comment contains `/oc` or `/opencode`.
-2. **Branch creation:** You'll use Neon's [`create-branch-action`](https://github.com/marketplace/actions/neon-create-branch-github-action) to instantly fork the primary database. Because Neon uses copy-on-write, this takes less than a second and gives the Action a completely isolated database containing production-like data.
-3. **Context Injection:** You'll pass the output of the branch creation (`${{ steps.create_neon_branch.outputs.db_url }}`) into OpenCode's environment as `DATABASE_URL`.
+1. **The trigger:** The `if` condition ensures the workflow only runs when an issue comment contains `/oc` or `/opencode`.
+2. **Branch creation:** You'll use Neon's [`create-branch-action`](https://github.com/marketplace/actions/neon-create-branch-github-action) to branch the production database. Because Neon branches are copy-on-write, this takes about a second and gives the Action an isolated database containing a copy of production data.
+3. **Context injection:** You'll pass the output of the branch creation (`${{ steps.create_neon_branch.outputs.db_url }}`) into OpenCode's environment as `DATABASE_URL`.
 4. **The system prompt:** Using OpenCode's `prompt` parameter, you'll explicitly tell the AI that it has a safe, isolated Postgres database to work with. You set the expectation that it should make any necessary schema changes, generate and run migrations, and validate its code against that database before opening a PR.
 
 ## Testing the workflow
 
-With the workflow merged into your default branch you can now test it out by creating a new GitHub Issue in your repository.
+With the workflow merged into your default branch, you can now test it by creating a new GitHub Issue in your repository.
 
 Navigate to your repository and create a **New Issue** describing the feature you want. For example, title it "Add Share Snippet Feature" and describe it like this:
 
@@ -187,9 +187,9 @@ When you submit the comment, the GitHub Action kicks off. Behind the scenes:
 5. It executes the migration generator (e.g., `npx drizzle-kit generate`) to create the SQL migration file.
 6. It executes the migration commands (using the injected Neon branch URL) to verify the schema changes.
 7. It updates the application code to implement the new feature, including API routes, frontend components, and tests.
-8. Once validated, OpenCode creates a new git branch and opens a Pull Request linking back to the issue.
+8. Once validated, OpenCode creates a new git branch and opens a pull request linking back to the issue.
 
-The result is a fully implemented feature with the necessary database changes, all tested against a real database, and delivered as a PR ready for review.
+The result is a feature implementation with its database changes, tested against a real database and delivered as a PR ready for review.
 
 ![Example PR created by OpenCode with Neon branching](/docs/guides/opencode_pr_example.png)
 
@@ -197,7 +197,7 @@ For example, here is the PR generated by OpenCode for the "Share Snippet" featur
 
 ## Automatically clean up Neon branches
 
-If you want these temporary Neon branches to clean themselves up automatically, `create-branch-action` also supports an `expires_at` input. You can add an expiration time when creating the branch, after which Neon will automatically delete it. This is a great way to ensure that old branches don't accumulate if an issue is abandoned.
+If you want these temporary Neon branches to clean themselves up automatically, `create-branch-action` also supports an `expires_at` input. You can add an expiration time when creating the branch, after which Neon will automatically delete it. That keeps old branches from accumulating if an issue is abandoned.
 
 ```yaml
 - name: Set Neon branch expiration # [!code ++]
@@ -212,43 +212,41 @@ If you want these temporary Neon branches to clean themselves up automatically, 
     expires_at: ${{ env.EXPIRES_AT }} # [!code ++]
 ```
 
-Setting `expires_at` to 48 hours is a good default for ephemeral AI workspaces because it keeps cleanup simple and prevents old branches from accumulating if an issue is abandoned.
+48 hours is a reasonable default for short-lived agent workspaces.
 
 If you need more advanced lifecycle management, use Neon's [`delete-branch-action`](https://github.com/neondatabase/delete-branch-action) in a separate workflow. That approach is useful when cleanup should happen in response to a specific event, such as an issue being closed, a pull request being merged, or another repository-specific automation trigger.
 
-Follow [Automated Database Branching with GitHub Actions](/guides/neon-github-actions-authomated-branching) for an example of how to set up that kind of event-driven cleanup workflow.
+Follow [Automated database branching with GitHub Actions](/guides/neon-github-actions-authomated-branching) for an example of how to set up that kind of event-driven cleanup workflow.
 
 ## (Optional) Enable automatic preview deployments
 
-For a complete end-to-end experience, you can configure Vercel to automatically deploy the Pull Requests that OpenCode creates. By combining Vercel with the [Neon Vercel Integration](/docs/guides/vercel-managed-integration), every PR opened by the agent gets a live preview URL backed by its own isolated Neon database branch.
+You can also configure Vercel to automatically deploy the pull requests that OpenCode creates. With the [Neon Vercel integration](/docs/guides/vercel-managed-integration), every PR opened by the agent gets a live preview URL backed by its own isolated Neon database branch.
 
 This lets you review OpenCode's work in a real browser environment, validating the full stack from UI to database without touching production data or having to reproduce the setup locally.
 
 1. **Deploy to Vercel:** Connect your GitHub repository to a Vercel project.
-2. **Install the Neon Integration:** Go to the [Neon Vercel Integration](https://vercel.com/integrations/neon) page and click **Add Integration**.
-3. **Enable Preview Branching:** During setup, select **Create a branch for every preview deployment** so each PR gets its own isolated database.
+2. **Install the Neon integration:** Open the [Neon integration on the Vercel Marketplace](https://vercel.com/marketplace/neon) and click **Install**.
+3. **Enable preview branching:** When you connect the database to your Vercel project, open **Advanced Options** > **Deployments Configuration** and enable **Preview**, so each PR gets its own isolated database branch.
 
-Follow the [Neon Vercel Integration guide](/docs/guides/vercel-managed-integration) for the full setup instructions.
+Follow the [Neon Vercel integration guide](/docs/guides/vercel-managed-integration) for the full setup instructions.
 ![Vercel deployment configuration](/docs/guides/vercel_native_deployments_configuration.png)
 
 ### Entire workflow in action
 
-After setup is complete, you can trigger OpenCode from a GitHub issue comment and let the workflow provision an isolated Neon branch for that run. OpenCode then implements the requested changes, generates and applies any required migrations, validates the result against the branch, and opens a Pull Request. If you connect the repository to Vercel with the Neon integration enabled, that PR can also get a preview deployment backed by its own separate preview database branch.
+After setup is complete, you can trigger OpenCode from a GitHub issue comment and let the workflow provision an isolated Neon branch for that run. OpenCode then implements the requested changes, generates and applies any required migrations, validates the result against the branch, and opens a pull request. If you connect the repository to Vercel with the Neon integration enabled, that PR can also get a preview deployment backed by its own separate preview database branch.
 
 </Steps>
 
 ## Conclusion
 
-AI coding agents are often constrained by the environments they run in. By combining OpenCode with Neon Database Branching and GitHub Actions, you remove one of the biggest barriers to AI-driven development: safe access to stateful infrastructure.
-
-With a simple GitHub Action, a static CI runner becomes a fully capable, isolated development sandbox. This means you can confidently request complex, database-altering features directly from a GitHub Issue, knowing the AI has everything it needs to iteratively test, validate, and refine its changes without ever putting your production data at risk.
+You set up a GitHub Actions workflow that gives OpenCode its own Neon branch for each issue, so the agent can change the schema, run migrations, and test against real data before opening a pull request, without touching production. As a next step, add the `expires_at` input or a `delete-branch-action` workflow so agent branches clean themselves up.
 
 ## Resources
 
-- [Neon Database Branching](/branching)
-- [Automated Database Branching with GitHub Actions](/guides/neon-github-actions-authomated-branching)
+- [Neon database branching](/branching)
+- [Automated database branching with GitHub Actions](/guides/neon-github-actions-authomated-branching)
 - [Connect OpenCode to GitHub](https://opencode.ai/docs/github/)
 - [Integrating Neon with Vercel](/docs/guides/vercel-overview)
-- [Neon GitHub integration guide](/docs/guides/neon-github-integration).
+- [Neon GitHub integration guide](/docs/guides/neon-github-integration)
 
 <NeedHelp />

@@ -21,6 +21,17 @@ const CONTENT_ROUTES = {
   programs: PROGRAMS_DIR_PATH,
 };
 
+// Marketing pages whose Markdown mirrors are generated from the same structured
+// content as their React views. Keys are public page paths without a leading slash.
+const GENERATED_PAGE_MARKDOWN_PATHS = {
+  functions: '/md/functions.md',
+  'ai-gateway': '/md/ai-gateway.md',
+  'object-storage': '/md/object-storage.md',
+  auth: '/md/auth-page.md',
+  lakebase: '/md/lakebase.md',
+  'case-studies': '/md/case-studies.md',
+};
+
 const EXCLUDED_ROUTES = ['guides', 'faqs', 'branching'];
 
 const EXCLUDED_DIRS = ['shared-content', 'unused'];
@@ -35,6 +46,7 @@ const isUnusedOrSharedContent = (slug) =>
 
 module.exports = {
   CONTENT_ROUTES,
+  GENERATED_PAGE_MARKDOWN_PATHS,
   isUnusedOrSharedContent,
   EXCLUDED_ROUTES,
   EXCLUDED_DIRS,

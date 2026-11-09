@@ -8,20 +8,20 @@ summary: >-
   when you want direct Postgrex access without an ORM; for Ecto-based
   integration see the Elixir Ecto guide.
 enableTableOfContents: true
-updatedOn: '2026-07-31T15:27:48.506Z'
+updatedOn: '2026-10-09T10:14:56.146Z'
 ---
 
 <CopyPrompt src="/prompts/elixir-prompt.md" 
 description="Pre-built prompt for connecting Elixir applications to Neon"/>
 
-This guide describes how to create a Neon project and connect to it from an Elixir application using [Postgrex](https://hex.pm/packages/postgrex), a high-performance, concurrent, and robust PostgreSQL driver for Elixir.
+This guide describes how to create a Neon project and connect to it from an Elixir application using [Postgrex](https://hex.pm/packages/postgrex), a Postgres driver for Elixir.
 
 You'll learn how to connect to your database from an Elixir application, and perform basic Create, Read, Update, and Delete (CRUD) operations.
 
 ## Prerequisites
 
 - A Neon account. If you do not have one, see [Sign up](https://console.neon.tech/signup).
-- Elixir v1.12 or later. If you do not have Elixir installed, see the [official installation guide](https://elixir-lang.org/install.html).
+- Elixir v1.15 or later. If you do not have Elixir installed, see the [official installation guide](https://elixir-lang.org/install.html).
 
 <Steps>
 
@@ -48,12 +48,12 @@ For your Elixir project, create a project directory using `mix` and add the requ
 
     > Open this directory in your preferred code editor (for example, VS Code).
 
-2.  Add `postgrex` as a dependency in your `mix.exs` file. Find the `deps` function and add `{:postgrex, "~> 0.18.0"}`:
+2.  Add `postgrex` as a dependency in your `mix.exs` file. Find the `deps` function and add `{:postgrex, "~> 0.22"}`:
 
-    ```elixir title="mix.exs"
+    ```elixir filename="mix.exs"
     defp deps do
       [
-        {:postgrex, "~> 0.18.0"}
+        {:postgrex, "~> 0.22"}
       ]
     end
     ```
@@ -68,14 +68,14 @@ For your Elixir project, create a project directory using `mix` and add the requ
 
 You'll configure your application to connect to Neon using the `config/config.exs` file. This method securely separates your credentials from your source code.
 
-1.  In the [Neon Console](https://console.neon.tech), select your project on the **Dashboard**.
-2.  Click **Connect** on your **Project Dashboard** to open the **Connect to your database** modal.
+1.  In the [Neon Console](https://console.neon.tech), open your project.
+2.  Click **Connect** in the Console nav to open the **Connect to your branch** modal.
 3.  Select the **Parameters only** tab to view the connection string parameters.
     ![Connection modal](/docs/connect/connection_details_parameters_only.png)
 4.  Copy the connection string parameters (user, password, host, and database name).
-5.  Create / Open the `config/config.exs` file and add a configuration block for your project, replacing the placeholder values with your actual database credentials.
+5.  Create the `config/config.exs` file and add a configuration block for your project, replacing the placeholder values with your actual database credentials.
 
-    ```elixir title="config/config.exs"
+    ```elixir filename="config/config.exs"
     import Config
 
     config :neon_elixir_quickstart,
@@ -97,7 +97,7 @@ This section provides example Elixir scripts that demonstrate how to connect to 
 
 In your project's root directory, create a file named `create_table.exs`. This script connects to your Neon database, creates a `books` table, and inserts sample data.
 
-```elixir title="create_table.exs"
+```elixir filename="create_table.exs"
 defmodule CreateTable do
   def run do
     # Fetch connection config
@@ -179,7 +179,7 @@ mix run create_table.exs
 
 When the code runs successfully, it produces the following output:
 
-```text title="Output"
+```text filename="Output"
 Connection established
 Finished dropping table (if it existed).
 Finished creating table.
@@ -191,7 +191,7 @@ Inserted 3 rows of data.
 
 In your project directory, create a file named `read_data.exs`. This script connects to your Neon database and retrieves all rows from the `books` table.
 
-```elixir title="read_data.exs"
+```elixir filename="read_data.exs"
 defmodule ReadData do
   def run do
     config = Application.get_all_env(:neon_elixir_quickstart)
@@ -234,7 +234,7 @@ mix run read_data.exs
 
 When the code runs successfully, it produces the following output:
 
-```text title="Output"
+```text filename="Output"
 Connection established
 
 --- Book Library ---
@@ -249,7 +249,7 @@ ID: 4, Title: Dune, Author: Frank Herbert, Year: 1965, In Stock: false
 
 In your project directory, create a file named `update_data.exs`. This script connects to your Neon database and updates the stock status of the book 'Dune' to `true`.
 
-```elixir title="update_data.exs"
+```elixir filename="update_data.exs"
 defmodule UpdateData do
   def run do
     config = Application.get_all_env(:neon_elixir_quickstart)
@@ -288,7 +288,7 @@ mix run read_data.exs
 
 When the code runs successfully, it produces the following output:
 
-```text title="Output"
+```text filename="Output"
 Connection established
 
 --- Book Library ---
@@ -305,7 +305,7 @@ ID: 4, Title: Dune, Author: Frank Herbert, Year: 1965, In Stock: true
 
 In your project directory, create a file named `delete_data.exs`. This script connects to your Neon database and deletes the book '1984' from the `books` table.
 
-```elixir title="delete_data.exs"
+```elixir filename="delete_data.exs"
 defmodule DeleteData do
   def run do
     config = Application.get_all_env(:neon_elixir_quickstart)
@@ -344,7 +344,7 @@ mix run read_data.exs
 
 When the code runs successfully, it produces the following output:
 
-```text title="Output"
+```text filename="Output"
 Connection established
 
 --- Book Library ---
@@ -358,7 +358,7 @@ ID: 4, Title: Dune, Author: Frank Herbert, Year: 1965, In Stock: true
 
 </Steps>
 
-## Next steps: Using an ORM or framework
+## Next steps with an ORM or framework
 
 While this guide demonstrates how to connect to Neon using raw SQL queries, for more advanced and maintainable data interactions in your Elixir applications, consider using an Object-Relational Mapping (ORM) framework. ORMs not only let you work with data as objects but also help manage schema changes through automated migrations keeping your database structure in sync with your application models.
 
@@ -366,7 +366,7 @@ Explore the following resources to learn how to integrate ORMs with Neon:
 
 - [Connect an Elixir Ecto application to Neon](/docs/guides/elixir-ecto)
 
-## Next steps: Neon backend services
+## Next steps with Neon backend services
 
 - [Add Object Storage](/docs/storage/overview): S3-compatible file storage that branches with your database
 - [Call an LLM with AI Gateway](/docs/ai-gateway/overview): Access foundation models from Anthropic, OpenAI, Google, and more with one credential

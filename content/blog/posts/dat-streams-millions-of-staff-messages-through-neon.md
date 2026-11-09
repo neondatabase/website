@@ -132,4 +132,4 @@ From a three-person startup to powering mission-critical operations for 16k+ fie
 
 ---
 
-_Thank you so much to Ahsan and DAT for building on Neon and for sharing their story. If you’d also like to be featured,_ [tell us on Discord.](https://discord.gg/92vNTzKDGp)
+_Thank you so much to Ahsan and DAT for building on Neon and for sharing their story. If you’d also like to be featured,_ [tell us on Discord.](https://neon.com/discord)

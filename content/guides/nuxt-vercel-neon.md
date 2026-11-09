@@ -1,22 +1,22 @@
 ---
 title: 'Building a Nuxt.js app with a Vercel and Neon branching workflow'
-subtitle: 'Automate database branching for every preview deployment using the native Neon Vercel Integration'
+subtitle: 'Automate database branching for every preview deployment with the Vercel-Managed Neon integration'
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2025-07-14T00:00:00.000Z'
-updatedOn: '2026-08-07T16:05:20.768Z'
+updatedOn: '2026-09-24T17:56:34.189Z'
 ---
 
-[Nuxt.js](https://nuxt.com) is an open-source, progressive framework built on [Vue.js](https://vuejs.org/) that simplifies web development. It enhances Vue with versatile rendering options, including default [universal rendering (SSR)](https://nuxt.com/docs/guide/concepts/rendering#universal-rendering) for fast initial loads and strong SEO, and [client-side rendering](https://nuxt.com/docs/guide/concepts/rendering#client-side-rendering) for highly interactive applications. Nuxt also supports advanced strategies like [hybrid rendering](https://nuxt.com/docs/guide/concepts/rendering#hybrid-rendering) to mix modes per-route.
+[Nuxt.js](https://nuxt.com) is an open-source framework built on [Vue.js](https://vuejs.org/). It adds rendering options to Vue, including default [universal rendering (SSR)](https://nuxt.com/docs/guide/concepts/rendering#universal-rendering) for fast initial loads and strong SEO, and [client-side rendering](https://nuxt.com/docs/guide/concepts/rendering#client-side-rendering) for highly interactive applications. Nuxt also supports advanced strategies like [hybrid rendering](https://nuxt.com/docs/guide/concepts/rendering#hybrid-rendering) to mix modes per-route.
 
-As your Nuxt application grows, managing database changes for new features can be challenging. How do you test a feature that requires database schema changes without disrupting your live application? This is where the integration between [Vercel](https://vercel.com) and [Neon](https://neon.com) comes in. Vercel is a deployment platform, and Neon is the AI-native backend platform for apps and agents, spanning a Postgres Database, Auth, Storage, Functions, and an AI Gateway. Together, they offer [**database branching**](/branching) for every deployment.
+As your Nuxt application grows, you need a way to test features that change the database schema without touching your live application. The integration between [Vercel](https://vercel.com) and [Neon](https://neon.com) handles this. Vercel is a deployment platform, and Neon is a complete set of cloud backend primitives built around Lakebase Postgres. Together, they give every preview deployment its own [database branch](/branching).
 
-When you enable the integration, every time you push a new feature branch, Vercel automatically creates a preview deployment. Simultaneously, Neon creates an isolated copy of your database just for that branch. This gives you a safe, sandboxed environment to develop and test with realistic data, without any risk to your live application.
+When you enable the integration, every time you push a new feature branch, Vercel automatically creates a preview deployment. Simultaneously, Neon creates an isolated copy of your database just for that branch. You can develop and test with realistic data without touching your live application.
 
 In this guide, you will learn how to:
 
 - Set up a Nuxt.js project and connect it to a GitHub repository.
-- Install and configure the Vercel-managed Neon Integration.
+- Install and configure the Vercel-Managed Neon integration.
 - Define a database schema and manage migrations with Drizzle ORM.
 - Build a full-stack Todo application with Nuxt.js server routes.
 - Test the automated branching workflow: Push a new feature branch and see Vercel and Neon automatically create a sandboxed environment with its own database branch.
@@ -114,11 +114,11 @@ First, create a new Nuxt.js application and push it to a GitHub repository, whic
     git push -u origin main
     ```
 
-To begin, you will set up the Vercel-managed Neon Integration. This first step provisions a Neon database and automatically injects the `DATABASE_URL` environment variable into your Nuxt.js application. This setup covers both local development and Vercel deployments.
+Next, you'll set up the Vercel-Managed Neon integration. This step provisions a database on Neon and automatically injects the `DATABASE_URL` environment variable into your Nuxt.js application. This setup covers both local development and Vercel deployments.
 
 ## Create a Vercel project
 
-1.  Login to [Vercel dashboard](https://vercel.com/dashboard).
+1.  Log in to the [Vercel dashboard](https://vercel.com/dashboard).
 2.  Click on **Add New** and select **Project**.
 3.  Select the GitHub repository you created earlier (`nuxt-neon-vercel-todo`).
 4.  Vercel will automatically detect that this is a Nuxt.js application and configure the build settings accordingly.
@@ -131,7 +131,7 @@ To begin, you will set up the Vercel-managed Neon Integration. This first step p
 Install the Neon integration from the Vercel Marketplace. This process will create a Neon project and link it to your Vercel account.
 
 1.  Navigate to the [Neon integration page on the Vercel Marketplace](https://vercel.com/marketplace/neon) and click **Install**.
-2.  Accept the terms, pick a region & plan, then name your database. (Remember: a "Database" in Vercel is a Project in Neon.)
+2.  Accept the terms, pick a region and plan, then name your database. (Remember: a "Database" in Vercel is a Project in Neon.)
 
 ## Connect the database to your Vercel project
 
@@ -139,7 +139,7 @@ With the integration installed, you need to connect your `nuxt-neon-vercel-todo`
 
 1.  From the **Storage** tab in your Vercel dashboard, select your Neon database.
 2.  Click the **Connect Project** tab and select your `nuxt-neon-vercel-todo` project from the dropdown.
-3.  **Enable Preview Branches:** In the **Deployments Configuration** section, ensure the **Preview** toggle is enabled. This is the key step that instructs Vercel to create a new Neon database branch for every Preview Deployment.
+3.  **Enable Preview Branches:** Under **Advanced Options**, in the **Deployments Configuration** section, make sure the **Preview** toggle is enabled. This step tells Vercel to create a new Neon database branch for every Preview Deployment.
     ![Connect Vercel Project and enable Preview deployments](/docs/guides/nuxt-vercel-neon-connect-project.png)
 4.  Click **Connect**.
 
@@ -149,7 +149,7 @@ Now that your Vercel project is connected to Neon, you can start defining your d
 
 ## Add database schema and migrations
 
-To manage your database schema and migrations, you will use [Drizzle ORM](https://orm.drizzle.team) with the Neon serverless driver. Drizzle ORM provides a type-safe way to define your database schema and run migrations.
+To manage your database schema and migrations, you will use [Drizzle ORM](https://orm.drizzle.team) with the Neon serverless driver. Drizzle ORM gives you type-safe schema definitions and migrations.
 
 1.  Install Drizzle dependencies
 
@@ -209,7 +209,7 @@ To manage your database schema and migrations, you will use [Drizzle ORM](https:
     }
     ```
 
-    > The build script is modified to run `db:migrate` after building the Nuxt application. This ensures that any pending migrations are applied to the database before the application starts.
+    > The build script runs `db:migrate` after building the Nuxt application, so pending migrations are applied to the database before the new deployment goes live.
 
 5.  **Generate the initial migration:**
 
@@ -242,9 +242,9 @@ To manage your database schema and migrations, you will use [Drizzle ORM](https:
 
 ## Build the Todo application
 
-With the database configured, let's build the Todo application. This will include creating server routes for CRUD operations and a simple frontend to interact with the database.
+With the database configured, build the Todo application: server routes for CRUD operations and a frontend that calls them.
 
-    <Admonition type="warning" title="Security Note">
+    <Admonition type="warning" title="Security note">
     The following code is a basic example and does not include authentication or input validation. In a production application, you should implement proper security measures to protect your API endpoints and database.
     </Admonition>
 
@@ -332,7 +332,7 @@ With the database configured, let's build the Todo application. This will includ
 
 3.  **Build the user interface:**
 
-    Replace the content of `app.vue` with the following code to create frontend for the todo app.
+    Replace the content of `app.vue` with the following code to create the frontend for the todo app.
 
     ```vue
     <template>
@@ -457,7 +457,7 @@ With the database configured, let's build the Todo application. This will includ
     </style>
     ```
 
-    The above code creates a simple Todo application. It includes a form to add new todos, a list to display existing todos, and buttons to toggle completion status and remove todos. It uses the API endpoints you created earlier to interact with the database.
+    The code above creates the Todo application. It includes a form to add new todos, a list to display existing todos, and buttons to toggle completion status and remove todos. It uses the API endpoints you created earlier to interact with the database.
 
 4.  **Run the application locally:**
 
@@ -467,7 +467,7 @@ With the database configured, let's build the Todo application. This will includ
     npm run dev
     ```
 
-    Open your browser and navigate to [http://localhost:3000](http://localhost:3000). You should see your Todo application running. You can add, toggle, and remove todos, which will interact with your Neon database.
+    Open your browser and navigate to [http://localhost:3000](http://localhost:3000). You should see your Todo application running. You can add, toggle, and remove todos, which reads and writes your database on Neon.
 
     ![Nuxt Todo Application](/docs/guides/nuxt-todo-app.png)
 
@@ -481,11 +481,11 @@ With the database configured, let's build the Todo application. This will includ
 
 ## The branching workflow in action
 
-To demonstrate the automated branching workflow, you will add a new feature to your Todo application that requires a database schema change. This will show how Vercel and Neon work together to create a safe, isolated environment for testing new features. For this example, you will add a `priority` field to the todos.
+To demonstrate the automated branching workflow, you will add a new feature to your Todo application that requires a database schema change. For this example, you will add a `priority` field to the todos.
 
 1.  **Create a new feature branch in git:**
 
-    Run the following command to create a new branch. This will allow you to work on the new feature without affecting the main branch.
+    Create a new branch so you can work on the feature without affecting `main`:
 
     ```bash
     git checkout -b feature/add-priority
@@ -737,7 +737,7 @@ To demonstrate the automated branching workflow, you will add a new feature to y
 
 7.  **Check the Preview deployment:**
     - **Vercel:** Go to your project in Vercel. You will see a new **Preview deployment** being built for the `feature/add-priority` branch.
-    - **Neon:** Go to your project in the Neon Console and click on the **Branches** tab. You will see a new branch has been automatically created, named something like `preview/feature/add-priority`. This branch is an instant, copy-on-write clone of your main branch.
+    - **Neon:** Go to your project in the Neon Console and click **Branches**. You will see a new branch has been automatically created, named something like `preview/feature/add-priority`. This branch is an instant, copy-on-write clone of your main branch.
 
     When Vercel built the preview deployment, the `npm run build` command ran `db:migrate` against the **new preview database branch**, applying the migration to add the `priority` column. Your preview URL is now running the new feature code against a database with the updated schema, all without touching production.
 
@@ -746,21 +746,21 @@ To demonstrate the automated branching workflow, you will add a new feature to y
 8.  **Merge the pull request:**
 
     On GitHub, create and merge the pull request for your feature branch.
-    Merging to `main` will trigger a new **Production Deployment** in Vercel. The build process will run again, but this time `db:migrate` will run against your main production database, safely applying the new schema change.
+    Merging to `main` will trigger a new **Production Deployment** in Vercel. The build process runs again, and this time `db:migrate` applies the new schema change to your production database branch.
 
 </Steps>
 
 ## Summary
 
-You have successfully configured a Nuxt.js application with a fully automated and safe database branching workflow. For every pull request, Vercel and Neon now work together to create an isolated preview environment, complete with its own copy-on-write database branch.
+You configured a Nuxt.js application so every preview deployment on Vercel gets its own copy-on-write database branch on Neon, with migrations applied during the build.
 
-This workflow allows developers to make and test schema changes with confidence, eliminating a common bottleneck in the development lifecycle and accelerating your team's ability to ship features safely.
+Preview branches stay around after you merge. To delete them automatically, see [Vercel branch cleanup](/docs/guides/vercel-branch-cleanup).
 
 ## Resources
 
-- **Vercel-managed Neon Integration:** [Vercel Marketplace](https://vercel.com/marketplace/neon)
-- **Nuxt.js Documentation:** [nuxt.com](https://nuxt.com)
+- **Vercel-Managed Neon integration:** [Vercel Marketplace](https://vercel.com/marketplace/neon)
+- **Nuxt.js documentation:** [nuxt.com](https://nuxt.com)
 - **Drizzle ORM:** [orm.drizzle.team](https://orm.drizzle.team)
-- **Neon Documentation:** [neon.com/docs](/docs)
+- **Neon documentation:** [neon.com/docs](/docs)
 
 <NeedHelp/>

@@ -672,4 +672,4 @@ The code is now ready to deploy to Vercel. Use the following steps to deploy:
 
 In this guide, you learned how to authenticate users in your Astro application using Lucia Auth and Serverless Postgres Database powered by Neon. Further, you learned how to create protected routes that are forbidden for un-authenticated users.
 
-For more, join us on our [Discord server](https://neon.tech/discord) to share your experiences, suggestions, and challenges.
+For more, join us on our [Discord server](https://neon.com/discord) to share your experiences, suggestions, and challenges.

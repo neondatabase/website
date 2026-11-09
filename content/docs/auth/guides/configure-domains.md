@@ -8,10 +8,8 @@ summary: >-
   (https://*.preview.vercel.app) in Console > Auth > Configuration > Domains.
   Localhost ports are pre-approved and need no entry.
 enableTableOfContents: true
-updatedOn: '2026-08-26T13:16:52.511Z'
+updatedOn: '2026-11-05T01:14:11.711Z'
 ---
-
-<FeatureBetaProps feature_name="Managed Better Auth" />
 
 Add your application domains to Managed Better Auth's allowlist to enable OAuth and email verification redirects in production.
 
@@ -20,6 +18,8 @@ Add your application domains to Managed Better Auth's allowlist to enable OAuth 
 Managed Better Auth only redirects to domains in your allowlist. This prevents phishing attacks and unauthorized redirects by ensuring users are only sent to your legitimate application URLs.
 
 Without adding your production domain, OAuth sign-in and verification links will fail when users try to access your application.
+
+The same list decides which `Origin` headers the Auth API accepts, so sign-in and sign-up requests from an origin that isn't on it fail with `INVALID_ORIGIN`. See [Origin errors](/docs/auth/troubleshooting#origin-errors).
 
 ## Add a domain
 

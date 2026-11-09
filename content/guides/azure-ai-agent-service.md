@@ -1,19 +1,19 @@
 ---
-title: 'Build your first AI Agent for Postgres on Azure'
-subtitle: 'Learn how to build an AI Agent for Postgres using Azure AI Agent Service and Neon'
+title: 'Build your first AI agent for Postgres on Azure'
+subtitle: 'Learn how to build an AI agent for Postgres using Azure AI Agent Service and Neon'
 author: boburmirzo
 enableTableOfContents: true
 createdAt: '2025-04-07T00:00:00.000Z'
-updatedOn: '2026-07-31T19:05:29.503Z'
+updatedOn: '2026-09-24T17:56:34.189Z'
 ---
 
-AI agents are getting a lot of attention lately, but getting started can be confusing. You may have heard about tools like [LangChain/LangGraph](https://python.langchain.com/v0.1/docs/modules/agents/), [Semantic Kernel](https://learn.microsoft.com/en-us/semantic-kernel/overview/), [AutoGen](https://microsoft.github.io/autogen/), or [LlamaIndex](https://docs.llamaindex.ai/en/stable/use_cases/agents/). They do a lot, but sometimes all you need is something simple that works.
+AI agents are getting a lot of attention lately, but getting started can be confusing. You may have heard about tools like [LangChain/LangGraph](https://python.langchain.com/v0.1/docs/modules/agents/), [Semantic Kernel](https://learn.microsoft.com/en-us/semantic-kernel/overview/), [AutoGen](https://microsoft.github.io/autogen/), or [LlamaIndex](https://docs.llamaindex.ai/en/stable/use_cases/agents/). They do a lot, but sometimes you only need something simple.
 
 [**Azure AI Agent Service**](https://learn.microsoft.com/en-us/azure/ai-services/agents/overview) lets you build AI agents that can use your own tools, such as a function to read data from a Postgres database. It's designed to help developers get started fast, without needing to understand chains, graphs, or complex frameworks.
 
 In this tutorial, you’ll learn how to create an AI agent that can answer questions about data in a **Postgres** database using **Azure AI Agent Service**.
 
-## Sample Use Case
+## Sample use case
 
 Imagine you run a SaaS product and track tenant-level usage data for billing (like API calls, storage, user sessions, etc.) in a Postgres table. You want an AI assistant to:
 
@@ -21,52 +21,50 @@ Imagine you run a SaaS product and track tenant-level usage data for billing (li
 - Spot spikes in usage (possible billing anomalies)
 - Explain what happened in natural language
 
-For example, when a user asks questions about their invoice, the AI can query Neon for relevant usage logs, summarize usage patterns, and offer explanations before routing to a human. Or when you open your billing dashboard, the agent proactively explains any spikes or changes:
+For example, when a user asks questions about their invoice, the agent can query your database for relevant usage logs, summarize usage patterns, and offer explanations before routing to a human. Or when you open your billing dashboard, the agent proactively explains any spikes or changes:
 
 > "Your API usage increased by 250% on April 3rd due to increased traffic from users in the EU region."
 
 We’ll build an AI agent that connects to your Postgres database and uses a simple Python function to fetch and analyze the data.
 
-We’ll use [**Neon**](/) for our database. Neon is a complete set of cloud backend primitives for apps and agents, spanning Lakebase Postgres, Auth, Storage, Functions, and an AI Gateway. It’s free to start, scales automatically, and works great for [AI agents](/use-cases/ai-agents) that need to query data on demand without managing infrastructure.
+We’ll use [**Neon**](/) for our database. Neon is a complete set of cloud backend primitives built around Lakebase Postgres, for developers, startups, and agent platforms, from Databricks. It has a Free plan, its compute scales automatically with load, and it suits [AI agents](/use-cases/ai-agents) that query data on demand without you managing database servers.
 
 ### Prerequisites
 
-- An Azure subscription - [Create one for free](https://azure.microsoft.com/free/cognitive-services).
-- Make sure you have the **Azure AI Developer** [RBAC role](https://learn.microsoft.com/en-us/azure/ai-foundry/concepts/rbac-azure-ai-foundry) assigned
-- Install [Python 3.11.x](https://www.python.org/downloads/).
+- An Azure subscription. [Create one for free](https://azure.microsoft.com/free/cognitive-services).
+- A [Neon account](https://console.neon.tech/signup).
+- Make sure you have the **Azure AI Developer** [RBAC role](https://learn.microsoft.com/en-us/azure/ai-foundry/concepts/rbac-azure-ai-foundry) assigned
+- Install [Python 3.11.x](https://www.python.org/downloads/).
 
-## Create a Neon Database on Azure
+## Create a Neon project
 
-Open the [new Neon Resource page](https://portal.azure.com/#view/Azure_Marketplace_Neon/NeonCreateResource.ReactView) on the Azure portal, and it brings up the form to create a Neon Serverless Postgres Resource. Fill out the form with the required fields and deploy it.
+Neon runs on AWS, and new Neon projects can't be created in Azure regions (see [Azure regions deprecation](/docs/import/azure-regions-deprecation)). Your agent runs on Azure and connects to Neon over the public internet, so pick the AWS region closest to your Azure resources.
 
-### Obtain Neon Database Credentials
-
-1. After the resource is created on Azure, go to the Neon Serverless Postgres Organization service and click on the Portal URL. This brings you to the Neon Console
-2. Click “New Project”
-3. Choose an Azure region
-4. Give your project a name (e.g., “Postgres AI Agent”)
-5. Click “Create Project”
-6. Once the project is created successfully, copy the Neon connection string and note it down. You can find the connection details in the Connection Details widget on the Neon Dashboard.
+1. Open the [Neon Console](https://console.neon.tech) and click **New Project**.
+2. Give your project a name (for example, “Postgres AI Agent”).
+3. Choose an AWS region. For an Azure East US 2 deployment, AWS US East (N. Virginia) is the closest.
+4. Click **Create project**.
+5. Click **Connect** to open the **Connect to your branch** modal, then copy the connection string and note it down.
 
 ```bash
     postgresql://[user]:[password]@[neon_hostname]/[dbname]?sslmode=require&channel_binding=require
 ```
 
-## Create an AI Foundry Project on Azure
+## Create an AI Foundry project on Azure
 
 Create a new hub and project in the Azure AI Foundry portal by [following the guide](https://learn.microsoft.com/en-us/azure/ai-services/agents/quickstart?pivots=ai-foundry-portal#create-a-hub-and-project-in-azure-ai-foundry-portal) in the Microsoft docs. You also need to [deploy a model](https://learn.microsoft.com/en-us/azure/ai-services/agents/quickstart?pivots=ai-foundry-portal#deploy-a-model) like GPT-4o.
 
-You only need the **Project connection string** and **Model Deployment Name** from the Azure AI Foundry portal. You can also find your connection string in the **overview** for your project in the [**Azure AI Foundry portal**](https://ai.azure.com/), under **Project details** > **Project connection string**.
+You only need the **Project connection string** and **Model Deployment Name** from the Azure AI Foundry portal. You can also find your connection string in the **overview** for your project in the [**Azure AI Foundry portal**](https://ai.azure.com/), under **Project details** > **Project connection string**.
 
 ![Project connection string in Azure AI Foundry Portal](/docs/guides/azure-ai-agent-service/azure-ai-foundry-find-project-connection-string.png)
 
-Once you have all three values on hand: **Neon connection string**, **Project connection string,** and **Model Deployment Name,** you are ready to set up the Python project to create an Agent.
+Once you have all three values on hand: **Neon connection string**, **Project connection string,** and **Model Deployment Name,** you're ready to set up the Python project to create an agent.
 
-All the code and sample data are available in this [GitHub repository](https://github.com/neondatabase-labs/neon-azure-ai-agent-service-get-started). You can clone or download the project.
+All the code and sample data are available in this [GitHub repository](https://github.com/neondatabase-labs/neon-azure-ai-agent-service-get-started). You can clone or download the project.
 
-## Project Environment Setup
+## Project environment setup
 
-Create a `.env` file with your credentials:
+Create a `.env` file with your credentials:
 
 ```bash
 PROJECT_CONNECTION_STRING="<Your AI Foundry connection string>"
@@ -99,7 +97,7 @@ azure-ai-projects
 azure-identity
 ```
 
-## Load Sample Billing Usage Data
+## Load sample billing usage data
 
 We will use a mock dataset for tenant usage, including computed percent change in API calls and storage usage in GB:
 
@@ -111,7 +109,7 @@ tenant_456	2025-03-31	950	         24.8
 tenant_456	2025-03-30	2200	     26.0
 ```
 
-Run `python load_usage_data.py` [Python script](https://github.com/neondatabase-labs/neon-azure-ai-agent-service-get-started/blob/main/load_usage_data.py) to create and populate the `usage_data` table in your Neon Serverless Postgres instance:
+Run `python load_usage_data.py` [Python script](https://github.com/neondatabase-labs/neon-azure-ai-agent-service-get-started/blob/main/load_usage_data.py) to create and populate the `usage_data` table in your Neon database:
 
 ```python
 # load_usage_data.py file
@@ -198,7 +196,7 @@ with engine.begin() as conn:
 print("✅ usage_data table created and mock data inserted.")
 ```
 
-## Create a Postgres Tool for the Agent
+## Create a Postgres tool for the agent
 
 Next, we configure an AI agent tool to retrieve data from Postgres. The Python script [`billing_agent_tools.py`](https://github.com/neondatabase-labs/neon-azure-ai-agent-service-get-started/blob/main/billing_agent_tools.py) contains:
 
@@ -270,9 +268,9 @@ def billing_anomaly_summary(
 user_functions = [billing_anomaly_summary]
 ```
 
-## Create and Configure the AI Agent
+## Create and configure the AI agent
 
-Now we'll set up the AI agent and integrate it with our Postgres tool using the **Azure AI Agent Service SDK.** The [Python script](https://github.com/neondatabase-labs/neon-azure-ai-agent-service-get-started/blob/main/billing_anomaly_agent.py) does the following:
+Now we'll set up the AI agent and integrate it with our Postgres tool using the **Azure AI Agent Service SDK.** The [Python script](https://github.com/neondatabase-labs/neon-azure-ai-agent-service-get-started/blob/main/billing_anomaly_agent.py) does the following:
 
 - **Creates the agent**
   Instantiates an AI agent using the selected model (`gpt-4o`, for example), adds tool access, and sets instructions that tell the agent how to behave (e.g., “You are a helpful SaaS assistant…”).
@@ -358,7 +356,7 @@ pprint(messages["data"][0]["content"][0]["text"]["value"])
 
 ## Run the agent
 
-To run the agent, run the following command
+To run the agent, run the following command:
 
 ```bash
 python billing_anomaly_agent.py
@@ -395,7 +393,7 @@ After running your agent using the Azure AI Agent SDK, it is saved within your A
   >
   > “Explain recent storage usage changes for tenant_456.”
 
-This is a great way to validate your agent's behavior without writing more code.
+This lets you check your agent's behavior without writing more code.
 
 ## Summary
 
@@ -403,19 +401,17 @@ You’ve now created a working AI agent that talks to your Postgres database, al
 
 - A simple Python function
 - Azure AI Agent Service
-- A Neon Serverless Postgres backend
+- A Postgres database on Neon
 
-This approach is beginner-friendly, lightweight, and practical for real-world use.
-
-Want to go further? You can:
+To go further, you can:
 
 - Add more tools to the agent
 - Integrate with [vector search](/docs/extensions/pgvector) (e.g., detect anomaly reasons from logs using embeddings)
 
 ## Resources
 
-- [Neon on Azure](/docs/manage/azure)
-- [Build AI Agents with Azure AI Agent Service and Neon](/blog/build-ai-agents-with-azure-ai-agent-service-and-neon)
-- [Multi-Agent AI Solution with Neon, LangChain, AutoGen and Azure OpenAI](/blogolution-with-neon-langchain-autogen-and-azure-openai)
+- [Sample code on GitHub](https://github.com/neondatabase-labs/neon-azure-ai-agent-service-get-started)
+- [Azure AI Agent Service overview](https://learn.microsoft.com/en-us/azure/ai-services/agents/overview)
+- [Neon regions](/docs/introduction/regions)
 
 <NeedHelp />

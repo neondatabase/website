@@ -7,13 +7,17 @@ summary: >-
   Covers server-side data loading and API routes using node-postgres,
   postgres.js, or the Neon serverless driver.
 enableTableOfContents: true
-updatedOn: '2026-07-14T19:04:57.024Z'
+updatedOn: '2026-09-16T19:45:35.340Z'
 ---
 
 <CopyPrompt src="/prompts/solidstart-prompt.md"
 description="Pre-built prompt for connecting SolidStart applications to Neon"/>
 
 SolidStart is an open-source meta-framework designed to integrate the components that make up a web application.<sup><a target="_blank" href="https://docs.solidjs.com/solid-start#overview">1</a></sup>. This guide explains how to connect SolidStart with Neon using a secure server-side request.
+
+<Admonition type="note">
+This guide uses SolidStart 2, which requires Node.js 24 or later. Run `node --version` to check your version.
+</Admonition>
 
 To create a Neon project and access it from a SolidStart application:
 
@@ -29,7 +33,12 @@ If you do not have one already, create a Neon project. Save your connection deta
 
 ## Create a SolidStart project and add dependencies
 
-1. Create a SolidStart project if you do not have one. For instructions, see [Quick Start](https://docs.solidjs.com/solid-start/getting-started), in the SolidStart documentation.
+1. Create a SolidStart 2 project if you do not have one. The `-s` and `--v2` flags select SolidStart 2 without prompts. For more options, see the [SolidStart documentation](https://docs.solidjs.com/solid-start).
+
+   ```shell
+   npm create solid@latest my-solidstart-app -- -s --v2 -t basic --ts
+   cd my-solidstart-app
+   ```
 
 2. Add project dependencies using one of the following commands:
 
@@ -37,6 +46,7 @@ If you do not have one already, create a Neon project. Save your connection deta
 
    ```shell
    npm install pg
+   npm install -D @types/pg
    ```
 
    ```shell
@@ -51,34 +61,42 @@ If you do not have one already, create a Neon project. Save your connection deta
 
 ## Store your Neon credentials
 
-Add a `.env` file to your project directory and add your Neon connection string to it. You can find the connection string for your database by clicking the **Connect** button on your **Project Dashboard**. For more information, see [Connect from any application](/docs/connect/connect-from-any-app).
+Add a `.env` file to your project directory and add your Neon connection string to it. You can find the connection string for your database by clicking the **Connect** button in the Console nav. For more information, see [Connect from any application](/docs/connect/connect-from-any-app).
 
 ```shell shouldWrap
-DATABASE_URL="postgresql://<user>:<password>@<endpoint_hostname>.neon.tech:<port>/<dbname>?sslmode=require&channel_binding=require"
+DATABASE_URL="postgresql://[user]:[password]@[neon_hostname]/[dbname]?sslmode=require&channel_binding=require"
 ```
+
+<Admonition type="note">
+`pg` 8.23 and later print a `SECURITY WARNING` when a connection string uses `sslmode=require`. If you use node-postgres, change `sslmode=require` to `sslmode=verify-full` in `DATABASE_URL` to keep the same behavior and remove the warning.
+</Admonition>
 
 ## Configure the Postgres client
 
-There a multiple ways to make server-side requests with SolidStart. See below for the different implementations.
+There are multiple ways to make server-side requests with SolidStart. See below for the different implementations.
 
-### Server-Side Data Loading
+### Server-side data loading
 
-To [load data on the server](https://docs.solidjs.com/solid-start/building-your-application/data-loading#data-loading-always-on-the-server) in SolidStart, add the following code snippet to connect to your Neon database:
+To [load data on the server](https://docs.solidjs.com/solid-start/building-your-application/data-loading#data-loading-always-on-the-server) in SolidStart, add the following code snippet to `src/routes/index.tsx` to connect to your Neon database:
 
 <CodeTabs reverse={true} labels={["node-postgres", "postgres.js", "Neon serverless driver"]}>
 
-```typescript
+```typescript filename="src/routes/index.tsx"
 import pg from 'pg';
 import { createAsync, query } from "@solidjs/router";
 
 const getVersion = query(async () => {
     "use server";
-    const pool = new pg.Pool({
+    const client = new pg.Client({
         connectionString: process.env.DATABASE_URL,
     });
-    const client = await pool.connect();
-    const response = await client.query('SELECT version()');
-    return response.rows[0].version;
+    await client.connect();
+    try {
+      const response = await client.query('SELECT version()');
+      return response.rows[0].version;
+    } finally {
+      await client.end();
+    }
 }, 'version')
 
 export const route = {
@@ -91,13 +109,13 @@ export default function Page() {
 }
 ```
 
-```typescript
+```typescript filename="src/routes/index.tsx"
 import postgres from 'postgres';
 import { createAsync, query } from "@solidjs/router";
 
 const getVersion = query(async () => {
     "use server";
-    const sql = postgres(process.env.DATABASE_URL, { ssl: 'require' });
+    const sql = postgres(process.env.DATABASE_URL!, { ssl: 'require' });
     const response = await sql`SELECT version()`;
     return response[0].version;
 }, 'version')
@@ -112,13 +130,13 @@ export default function Page() {
 }
 ```
 
-```typescript
+```typescript filename="src/routes/index.tsx"
 import { neon } from "@neondatabase/serverless";
 import { createAsync, query } from "@solidjs/router";
 
 const getVersion = query(async () => {
     "use server";
-    const sql = neon(process.env.DATABASE_URL);
+    const sql = neon(process.env.DATABASE_URL!);
     const response = await sql`SELECT version()`;
     const { version } = response[0];
 
@@ -137,21 +155,18 @@ export default function Page() {
 
 </CodeTabs>
 
-### Server Endpoints (API Routes)
+### Server endpoints (API routes)
 
-In your server endpoints (API Routes) in your SolidStart application, use the following code snippet to connect to your Neon database:
+In your server endpoints (API routes) in your SolidStart application, use the following code snippet to connect to your Neon database. Create the file at `src/routes/api/test.ts`:
 
 <CodeTabs reverse={true} labels={["node-postgres", "postgres.js", "Neon serverless driver"]}>
 
-```javascript
-// File: routes/api/test.ts
-
+```typescript filename="src/routes/api/test.ts"
 import { Pool } from 'pg';
 import { json } from '@solidjs/router';
 
 const pool = new Pool({
   connectionString: process.env.DATABASE_URL,
-  ssl: true,
 });
 
 export async function GET() {
@@ -167,25 +182,21 @@ export async function GET() {
 }
 ```
 
-```javascript
-// File: routes/api/test.ts
-
+```typescript filename="src/routes/api/test.ts"
 import postgres from 'postgres';
 import { json } from '@solidjs/router';
 
 export async function GET() {
-  const sql = postgres(process.env.DATABASE_URL, { ssl: 'require' });
+  const sql = postgres(process.env.DATABASE_URL!, { ssl: 'require' });
   const response = await sql`SELECT version()`;
 
   return json(response[0]);
 }
 ```
 
-```javascript
-// File: routes/api/test.ts
-
+```typescript filename="src/routes/api/test.ts"
 import { neon } from '@neondatabase/serverless';
-import { json } from '@solidjs/router'
+import { json } from '@solidjs/router';
 
 export async function GET() {
   const sql = neon(process.env.DATABASE_URL!);
@@ -197,13 +208,23 @@ export async function GET() {
 
 </CodeTabs>
 
+<Admonition type="note">
+If `tsc` or your editor reports `Cannot find name 'process'`, the default template doesn't include Node.js types. Run `npm install -D @types/node` to add them.
+</Admonition>
+
 ## Run the app
 
-When you run `npm run dev` you can expect to see the following on [localhost:3000](localhost:3000):
+When you run `npm run dev` you can expect to see the following on [localhost:3000](http://localhost:3000):
 
 ```shell shouldWrap
-PostgreSQL 16.0 on x86_64-pc-linux-gnu, compiled by gcc (Debian 10.2.1-6) 10.2.1 20210110, 64-bit
+PostgreSQL 18.6 (ac70818) on aarch64-unknown-linux-gnu, compiled by gcc (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0, 64-bit
 ```
+
+The API route returns the same value as JSON at [localhost:3000/api/test](http://localhost:3000/api/test).
+
+<Admonition type="note">
+`npm run dev` loads the `.env` file automatically. The production server does not. To run a production build, set `DATABASE_URL` in your environment, then run `npm run build` and `npm start`. Without the variable, the app fails to connect.
+</Admonition>
 
 </Steps>
 

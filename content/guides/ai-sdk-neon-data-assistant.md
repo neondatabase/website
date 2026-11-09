@@ -1,24 +1,24 @@
 ---
-title: 'Build a Data-Driven AI Assistant on Slack with Vercel AI SDK and Neon Read Replicas'
-subtitle: 'Learn how to build a Slack bot that can safely query your production Postgres database using Neon Read Replicas and the Vercel AI SDK.'
+title: 'Build a data-driven AI assistant on Slack with Vercel AI SDK and Neon read replicas'
+subtitle: 'Learn how to build a Slack bot that can safely query your production Postgres database using Neon read replicas and the Vercel AI SDK.'
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2026-03-31T00:00:00.000Z'
-updatedOn: '2026-04-02T06:05:49.000Z'
+updatedOn: '2026-09-24T17:56:34.189Z'
 ---
 
 In many organizations, critical business data lives in a production Postgres database. Product, sales, and marketing teams rely on this information, but direct access is usually restricted to developers and data engineers with SQL expertise. As a result, non-technical teams often face delays: they must request queries, while engineers spend valuable time answering routine data questions.
 
 An AI assistant in Slack can speed this up by providing instant answers to questions like _"Which regions drove the most sales this week?"_. However, connecting an AI agent directly to a production database introduces risks. Even read-only queries can be resource-intensive and impact performance, and there is always the possibility of unintended write operations.
 
-This guide explains how to build a data driven AI Assistant that avoids these pitfalls. By combining the [**Vercel AI SDK**](https://ai-sdk.dev/), [**Chat SDK**](https://chat-sdk.dev/), and [**Neon Read Replicas**](/docs/introduction/read-replicas), the assistant queries a dedicated read-only replica. This architecture ensures real-time access to business data without slowing down production systems or risking accidental modifications.
+This guide explains how to build a data-driven AI assistant that avoids these pitfalls. By combining the [**Vercel AI SDK**](https://ai-sdk.dev/), [**Chat SDK**](https://chat-sdk.dev/), and [**Neon read replicas**](/docs/introduction/read-replicas), the assistant queries a dedicated read-only replica. It gets current business data without slowing down your primary compute or risking accidental writes.
 
 ## Architecture overview
 
 To build this AI assistant on Slack you will create a Node.js application that integrates the following components:
 
 - **Vercel AI SDK:** Enables the AI agent to generate SQL queries and interpret results. It also allows you to define custom tools that the AI can call, such as executing a query or generating a chart.
-- **Neon Read Replicas:** Serve as the data source for the AI. By connecting to a read replica, you ensure that all AI-generated queries are strictly read-only and do not impact the performance of your primary database.
+- **Neon read replicas:** Serve as the data source for the AI. Because the assistant connects to a read replica, AI-generated queries are read-only and don't compete with your primary compute for resources.
 - **Chat SDK & Hono:** Handle incoming Slack events, manage conversation state, and orchestrate the flow of messages between Slack and the Vercel AI SDK.
 
 ## Prerequisites
@@ -27,28 +27,28 @@ Before you begin, ensure you have the following:
 
 - **Node.js:** Version `20` or later installed on your machine.
 - **Neon account:** A free account at [console.neon.tech](https://console.neon.tech) with a project and a populated table (e.g., `users` or `sales`).
-- **Anthropic API Key:** For the AI agent to generate SQL and interpret results, you need an Anthropic API key. You can obtain one from [platform.claude.com](https://platform.claude.com/).
-- **Slack Workspace:** Permissions to create and install a new Slack App.
+- **Anthropic API key:** For the AI agent to generate SQL and interpret results, you need an Anthropic API key. You can obtain one from [platform.claude.com](https://platform.claude.com/).
+- **Slack workspace:** Permissions to create and install a new Slack App.
 - **ngrok** (or a similar tunneling tool): To test webhooks locally, you will need `ngrok` installed and configured on your machine. See the [ngrok Quickstart](https://ngrok.com/docs/getting-started/) to sign up, install the CLI, and authenticate with your auth token.
 
 <Steps>
 
-## Create a Neon Read Replica
+## Create a read replica
 
 Create a dedicated Neon read replica for your assistant. This keeps AI queries on a read-only compute.
 
 1. Open [Neon Console](https://console.neon.tech) and select your project.
-2. Navigate to the **Branches** tab and select the branch you want to connect to (e.g., `production`).
-3. On your branch click **Add Read Replica**.
+2. Select the branch you want to connect to (e.g., `production`) from the **BRANCH** selector.
+3. Under **Postgres database**, select **Computes**, then click **Add Read Replica**.
    ![Create a read replica](/docs/introduction/create_read_replica.png)
 4. Choose the compute size and create the replica.
 5. Wait for the status to become **Active**.
-6. Click **Connect** on the read replica and copy the connection string.
+6. Click **Connect**. In the **Connect to your branch** modal, select your **Replica** under **Compute** and copy the connection string.
 7. Also, copy the connection string for your primary compute. The Chat SDK uses this to store state, but it won’t be used for AI queries.
 
-Now you have two database URLs: one for the primary compute (with read-write access) and one for the read replica (with strict read-only access). You will use the replica URL in your application to ensure all AI queries are safely isolated.
+Now you have two database URLs: one for the primary compute (with read-write access) and one for the read replica (with strict read-only access). Your application uses the replica URL for all AI queries.
 
-## Start Ngrok
+## Start ngrok
 
 Slack needs a public HTTPS endpoint to deliver event webhooks to your local app. Set up `ngrok` so you can use its URL when creating your Slack App manifest.
 
@@ -121,7 +121,7 @@ You will need to create a Slack App to interact with the Slack API and receive e
    - `request_url` points Slack to your local webhook endpoint exposed through ngrok.
    - `interactivity.request_url` enables interactive payloads (buttons, actions, and some rich responses).
 
-   > Replace `https://<your-ngrok-id>.ngrok.app` with your actual ngrok forwarding URL from [previous step](#start-ngrok).
+   > Replace `https://<your-ngrok-id>.ngrok.app` with your actual ngrok forwarding URL from the [previous step](#start-ngrok).
 
 3. Click **Next** and then **Create** to create your Slack App with the specified configuration.
 
@@ -211,9 +211,9 @@ export const runQueryOnReplica = async (sql: string) => {
 }
 ```
 
-By routing all AI queries through this function via the `REPLICA_DATABASE_URL`, you enforce strict read-only access at the infrastructure level. Even if the AI attempts an `UPDATE` or `DELETE`, the database will outright reject it.
+By routing all AI queries through this function via the `REPLICA_DATABASE_URL`, you enforce read-only access at the infrastructure level. If the AI attempts an `UPDATE` or `DELETE`, the replica rejects it.
 
-### Configure the Vercel AI SDK Tools
+### Configure the Vercel AI SDK tools
 
 Next, you will set up the AI agent with the two tools: one for querying the database and another for generating charts. The agent will use these tools to fulfill user requests in Slack.
 
@@ -313,7 +313,7 @@ ${SCHEMA_CONTEXT}
 `;
 ```
 
-With rich schema context, the AI can jump straight to generating correct SQL instead of using SQL tools to explore the schema first. This leads to faster, more accurate answers.
+With rich schema context, the AI can jump straight to generating correct SQL instead of using SQL tools to explore the schema first.
 
 </Admonition>
 
@@ -420,7 +420,7 @@ You can now test your bot locally. With your ngrok tunnel running and your Hono 
    vercel dev
    ```
 
-   If prompted, configure the Vercel CLI to setup your project. This will start the Hono server locally.
+   If prompted, configure the Vercel CLI to set up your project. This will start the Hono server locally.
 
 2. **Talk to your bot:**
    - Go to your Slack workspace and invite your bot to a channel by typing `/invite @Neon Analytics Bot`.
@@ -431,7 +431,7 @@ You can now test your bot locally. With your ngrok tunnel running and your Hono 
 
      ![Example slack bot interaction](/docs/guides/slack_bot_interaction_example.png)
 
-You have built an AI-powered Slack assistant that can safely run analytical queries against your production data using Neon Read Replicas and the Vercel AI SDK.
+You have built an AI-powered Slack assistant that can safely run analytical queries against your production data using a Neon read replica and the Vercel AI SDK.
 
 ## Deploying to production
 
@@ -455,7 +455,7 @@ As your data model grows, keep the schema context in your system prompt updated.
 
 ## Resources
 
-- [Neon Read Replicas](/docs/introduction/read-replicas)
+- [Neon read replicas](/docs/introduction/read-replicas)
 - [Vercel AI SDK Documentation](https://sdk.vercel.ai/docs)
 - [Chat SDK Documentation](https://chat-sdk.dev/)
 - [Neon Serverless Driver](/docs/serverless/serverless-driver)

@@ -8,6 +8,7 @@ import React from 'react';
 import ICONS_CONFIG from 'config/docs-icons-config';
 import { DOCS_BASE_PATH } from 'constants/docs';
 import { cn } from 'utils/cn';
+import getNofollowRel from 'utils/get-nofollow-rel';
 import sendGtagEvent from 'utils/send-gtag-event';
 
 import TechCardsWrapper from './tech-cards-wrapper';
@@ -23,19 +24,20 @@ const TechCards = ({ children = null, withToggler = false }) => (
       const { lightIconPath, darkIconPath } = iconConfig;
 
       const isExternal = href.startsWith('http') || !href.includes(DOCS_BASE_PATH);
+      const externalRel = isExternal ? 'noopener noreferrer' : undefined;
 
       return (
         <li className="m-0! before:hidden">
           <NextLink
             className={cn(
-              'relative flex h-full flex-col justify-between overflow-hidden border border-gray-new-80 bg-[#E4F1EB]/40 p-5 transition-colors duration-200',
+              'group/tech-card relative flex h-full flex-col justify-between overflow-hidden border border-gray-new-80 bg-[#E4F1EB]/40 p-5 transition-colors duration-200',
               'hover:border-gray-new-70 hover:bg-[#E4F1EB]',
               'dark:border-gray-new-30 dark:bg-gray-new-8 dark:hover:border-gray-new-40 dark:hover:bg-gray-new-10'
             )}
             key={index}
             href={href}
             target={isExternal ? '_blank' : undefined}
-            rel={isExternal ? 'noopener noreferrer' : undefined}
+            rel={getNofollowRel(href, externalRel) ?? externalRel}
             onClick={() => sendGtagEvent('Link Clicked', { text: title, tag_name: 'TechCard' })}
           >
             <div className="relative z-10">
@@ -57,7 +59,7 @@ const TechCards = ({ children = null, withToggler = false }) => (
                   loading={index > 3 ? 'lazy' : 'eager'}
                 />
               )}
-              <h3 className="mt-8 text-lg leading-snug font-medium tracking-extra-tight text-gray-new-8 dark:text-white">
+              <h3 className="mt-8 text-lg leading-snug font-medium tracking-extra-tight text-gray-new-8 transition-colors duration-200 group-hover/tech-card:text-green-44 group-focus-visible/tech-card:text-green-44 dark:text-white dark:group-hover/tech-card:text-green-44 dark:group-focus-visible/tech-card:text-green-44">
                 {title}
               </h3>
               <p className="mt-1.5 text-base leading-snug tracking-extra-tight text-gray-new-50 dark:text-gray-new-60">

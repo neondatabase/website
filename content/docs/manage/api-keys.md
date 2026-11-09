@@ -10,7 +10,7 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/get-started/using-api-keys
   - /docs/get-started/api-keys
-updatedOn: '2026-08-26T13:16:52.511Z'
+updatedOn: '2026-10-09T15:17:33.920Z'
 ---
 
 Most actions performed in the Neon Console can also be performed using the [Neon API](/docs/reference/api). You'll need an API key to validate your requests. Each key is a randomly-generated 64-bit token that you must include when calling Neon API methods. All keys remain valid until deliberately revoked.
@@ -33,7 +33,7 @@ While there is no strict limit on the number of API keys you can create, we reco
 
 You create and manage API keys in the [Neon Console](https://console.neon.tech), and where you go depends on the key type:
 
-- **Personal keys:** open the user menu and select **Account settings** > **API keys**.
+- **Personal keys:** open the profile menu in the top-right and go to **Settings** > **API keys**.
 - **Organization and project-scoped keys:** switch to your organization, then go to **Settings** > **API keys**.
 
 Each page lists your existing keys with their name, ID, and creation details, plus a button to create a new key. You'll need to create your first API key from the Console, where you are already authenticated. You can then use that key to generate new keys from the API.
@@ -66,11 +66,8 @@ neon api-keys create --name development
 
 ```text shouldWrap
 API key
-┌─────────┬─────────────┐
-│ Id      │ Name        │
-├─────────┼─────────────┤
-│ 3225999 │ development │
-└─────────┴─────────────┘
+ID    3225999
+Name  development
 
 napi_examplekey1234567890abcdefghijklmnopqrstuvwxyz
 WARNING: Store this key now: it is not shown again.
@@ -138,11 +135,8 @@ neon api-keys create --name orgkey --org-id org-example-12345678
 
 ```text shouldWrap
 API key
-┌─────────┬────────┐
-│ Id      │ Name   │
-├─────────┼────────┤
-│ 3243302 │ orgkey │
-└─────────┴────────┘
+ID    3243302
+Name  orgkey
 
 napi_examplekey1234567890abcdefghijklmnopqrstuvwxyz
 WARNING: Store this key now: it is not shown again.
@@ -208,15 +202,13 @@ neon api-keys create --name only-this-project --project-id some-project-123
 
 ```text shouldWrap
 API key
-┌─────────┬───────────────────┬───────────────────┐
-│ Id      │ Name              │ Project           │
-├─────────┼───────────────────┼───────────────────┤
-│ 3243162 │ only-this-project │ some-project-123  │
-└─────────┴───────────────────┴───────────────────┘
+ID       3243162
+Name     only-this-project
+Project  some-project-123
 
 napi_examplekey1234567890abcdefghijklmnopqrstuvwxyz
 WARNING: Store this key now: it is not shown again.
-INFO: Limited to some-project-123: it cannot create projects, mint API keys, or read any other project. It can still change and delete everything inside that project.
+Limited to some-project-123: it cannot create projects, mint API keys, or read any other project. It can still change and delete everything inside that project.
 ```
 
 A project-scoped key is owned by the project's organization, not by your account, so it does not appear in `neon api-keys list`. Use `neon api-keys list --org-id <org-id>` to see it, and pass the same `--org-id` to revoke it.
@@ -247,7 +239,7 @@ curl --request POST \
   "id": 1904821,
   "key": "neon_project_key_1234567890abcdef1234567890abcdef",
   "name": "test-project-scope",
-  "created_at": "2024-12-11T21:34:58Z",
+  "created_at": "2026-12-11T21:34:58Z",
   "created_by": "user_01h84bfr2npa81rn8h8jzz8mx4",
   "project_id": "project-id-123"
 }
@@ -291,8 +283,8 @@ For attribute definitions, find the [Retrieve project details](/docs/reference/a
       "provisioner": "k8s-pod",
       "pg_version": 15,
       "locked": false,
-      "created_at": "2023-01-03T18:22:56Z",
-      "updated_at": "2023-01-03T18:22:56Z",
+      "created_at": "2026-01-03T18:22:56Z",
+      "updated_at": "2026-01-03T18:22:56Z",
       "proxy_host": "us-east-2.aws.neon.tech",
       "branch_logical_size_limit": 3072
     }

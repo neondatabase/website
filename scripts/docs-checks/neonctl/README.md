@@ -62,7 +62,10 @@ npm run cli-docs -- refresh
 That downloads the latest release tarball, regenerates `schema.json`,
 prints added/removed commands and options, and runs the test suite. Review
 the diff and commit `schema.json` — pages and the mirror pick it up at the
-next build with no page edits. New top-level commands additionally need a
+next build with no page edits. Finding the latest release calls the GitHub
+API; set `GITHUB_TOKEN` (for example, `GITHUB_TOKEN=$(gh auth token)`) to
+avoid the 60-requests-per-hour anonymous limit. New top-level commands
+additionally need a
 doc page (`content/docs/cli/<name>.md`), a `navigation.yaml` entry, and a
 group mapping in
 `src/components/pages/doc/cli-reference/cli-command-index/groups.js` — all
@@ -148,7 +151,13 @@ The TypeScript source is canonical. CI only reads `schema.json`.
   border-char filter in `extract-examples.js`. (Converted pages avoid this
   by keeping output out of bash fences entirely.)
 - **Enum-reference defaults render as source text** unless patched via
-  `overrides.json`.
+  `overrides.json`. Arrays of enum members (`[Enum.A, Enum.B]`) do resolve
+  in `choices` and `.join()` describes, but only for enums the parser can
+  see: command files and `utils/api_enums.ts`. An enum anywhere else leaves
+  the describe unresolved, and the parser drops it without failing. The
+  "every command and visible option has a describe" coverage test catches
+  that. Nothing checks `choices` the same way: a list that stops resolving
+  drops silently and turns off choice validation for that option.
 - **Factory-built option specs aren't resolved.** An option whose spec is a
   factory call rather than an object literal (e.g. `services: servicesOption({…})`
   in `config init` and `env pull`, where `servicesOption()` lives in the
@@ -160,3 +169,16 @@ The TypeScript source is canonical. CI only reads `schema.json`.
 - **Server-side defaults** (generated branch names, default CU) exist only
   in the control plane; they are documented as verified `defaultText`
   overrides, never inferred.
+- **Re-mounted command modules resolve one convention only.** `postgres.ts`
+  mounts other command files as subcommands (`.command(nested(computes))`), and
+  those files export a curried `builderFor(usage)` with
+  `builder = builderFor('roles')`. The parser resolves a namespace-imported
+  module passed to `.command()`, bare, wrapped in a one-argument helper, or
+  spread into its exports (`.command(loki.command, loki.describe, loki.builder,
+  handler)` in `logs.ts`), and
+  binds the curried builder's parameter to the argument (or to
+  `<parent> <child>` when mounted under a group, matching what `nested()`
+  passes). It doesn't evaluate the helper itself, so a mount that changes the
+  command name, aliases, or describe, or a curried builder with more than one
+  parameter, isn't reflected. Changes to how `nested()` builds the usage
+  string need a matching change in `parseImportedCommand`.

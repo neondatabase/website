@@ -7,7 +7,7 @@ excerpt: >-
   verifying they work correctly before release. Typically, you’re going to need:
   The problem with persistent environments To design...
 date: '2025-01-07T19:59:42'
-updatedOn: '2025-01-21T15:37:44'
+updatedOn: '2026-11-06T12:00:00.000Z'
 category: product
 categories:
   - product
@@ -34,6 +34,10 @@ seo:
 ---
 
 ![Post image](https://cdn.neonapi.io/public/images/pages/blog/postgres-for-ephemeral-environments/neon-ephemeral-environments-1024x576-88bca419.jpg)
+
+<Admonition type="important" title="Plans have changed since this post">
+This post quotes plan details from January 2025. As of November 2026, the Free plan includes 100 projects, each with 100 CU-hours of compute per month and 1 GB of storage (up to 20 GB across all projects). Launch compute is $0.106 per CU-hour, Scale compute is $0.222 per CU-hour, and paid plans have no monthly minimum. See the [pricing page](/pricing) and the [plans documentation](/docs/introduction/plans) for current pricing and limits.
+</Admonition>
 
 When you’re building an application, you have to map out how your code will travel through the entire software lifecycle—from writing new features to verifying they work correctly before release. Typically, you’re going to need:
 
@@ -140,4 +144,4 @@ You can try it for multiple use cases:
 - [Local development](https://neon.tech/guides/local-development-with-neon)
 - [Onboarding new engineers](https://neon.com/blog/how-supergood-unlocked-their-postgres-developer-productivity)
 
-[Neon’s Free Plan](https://console.neon.tech/signup) gives you 10 independent projects with up to 10 branches per project at no cost. Give it a go let us know how it went on [Discord](https://discord.gg/92vNTzKDGp). For larger teams, Neon’s [Scale Plan](https://neon.tech/pricing) ($69/month) will give you thousands of branches at no additional cost, more than enough to cover all your non-prod environments.
+[Neon’s Free Plan](https://console.neon.tech/signup) gives you 10 independent projects with up to 10 branches per project at no cost. Give it a go let us know how it went on [Discord](https://neon.com/discord). For larger teams, Neon’s [Scale Plan](https://neon.tech/pricing) ($69/month) will give you thousands of branches at no additional cost, more than enough to cover all your non-prod environments.

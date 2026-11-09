@@ -2,7 +2,7 @@
 title: Connect a Go application to Lakebase Postgres
 subtitle: Learn how to run SQL queries in Neon from Go using the pgx library
 summary: >-
-  Connecting a Go application to Lakebase Postgres with pgx/v5 requires Go 1.21 or
+  Connecting a Go application to Lakebase Postgres with pgx/v5 requires Go 1.25 or
   later and a DATABASE_URL connection string passed via environment variable.
   Use this page for raw SQL access with parameterized queries, not an ORM: it
   walks through CREATE, SELECT, UPDATE, DELETE, bulk inserts via CopyFrom, and
@@ -11,23 +11,23 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/quickstart/go
   - /docs/integrations/go
-updatedOn: '2026-07-31T15:27:48.506Z'
+updatedOn: '2026-10-09T10:14:56.146Z'
 ---
 
 <CopyPrompt src="/prompts/golang-prompt.md" 
 description="Pre-built prompt for connecting Go applications to Neon"/>
 
-This guide describes how to create a Neon project and connect to it from a Go (Golang) application using [pgx](https://github.com/jackc/pgx), a high-performance and feature-rich PostgreSQL driver for Go.
+This guide describes how to create a Neon project and connect to it from a Go (Golang) application using [pgx](https://github.com/jackc/pgx), a Postgres driver for Go.
 
 You'll learn how to connect to your database from a Go application, and perform basic Create, Read, Update, and Delete (CRUD) operations.
 
 ## Prerequisites
 
 - A Neon account. If you do not have one, see [Sign up](https://console.neon.tech/signup).
-- Go 1.21 or later. If you do not have Go installed, see the [official installation guide](https://go.dev/doc/install).
+- Go 1.25 or later. If you do not have Go installed, see the [official installation guide](https://go.dev/doc/install).
 
 <Admonition type="note">
-The latest version of `pgx/v5` (v5.9.1+) requires Go 1.25. If you are using an older Go version, pin to a compatible release: `go get github.com/jackc/pgx/v5@v5.7.4`.
+`pgx/v5` v5.9.0 and later require Go 1.25. If you can't upgrade Go, pin a release that supports Go 1.21: `go get github.com/jackc/pgx/v5@v5.7.4`.
 </Admonition>
 
 <Steps>
@@ -73,11 +73,11 @@ For your Go project, create a project directory, initialize a Go module, and add
 
 ## Store your Neon connection string
 
-Create a file named `.env` in your project's root directory. This file will securely store your database connection string.
+Create a file named `.env` in your project's root directory. This file stores your database connection string. Don't commit it to source control.
 
-1.  In the [Neon Console](https://console.neon.tech), select your project on the **Dashboard**.
-2.  Click **Connect** on your **Project Dashboard** to open the **Connect to your database** modal.
-    ![Connection modal](/docs/connect/connection_details.png)
+1.  In the [Neon Console](https://console.neon.tech), open your project.
+2.  Click **Connect** in the Console nav to open the **Connect to your branch** modal.
+    ![Connection modal](/docs/connect/connect_to_branch_modal.png)
 3.  Copy the connection string, which includes your password.
 4.  Add the connection string to your `.env` file as shown below.
     ```text
@@ -87,13 +87,15 @@ Create a file named `.env` in your project's root directory. This file will secu
 
 ## Examples
 
-This section provides example Go scripts that demonstrate how to connect to your Neon database and perform basic operations such as [creating a table](#create-a-table-and-insert-data), [reading data](#read-data), [updating data](#update-data), and [deleting data](#deleting-data).
+This section provides example Go scripts that demonstrate how to connect to your Neon database and perform basic operations such as [creating a table](#create-a-table-and-insert-data), [reading data](#read-data), [updating data](#update-data), and [deleting data](#delete-data).
+
+Each script is a standalone program with its own `main` function, so run each one by file name with `go run <file>.go`. Because they share a directory, `go build .` and your editor report `main redeclared`. That's expected for this guide. In a real app, put each program in its own directory under `cmd/`.
 
 ### Create a table and insert data
 
 In your project directory, create a file named `create_table.go`. This script connects to your Neon database, creates a table named `books`, and inserts some sample data into it.
 
-```go title="create_table.go"
+```go filename="create_table.go"
 package main
 
 import (
@@ -205,7 +207,7 @@ go run create_table.go
 
 When the code runs successfully, it produces the following output:
 
-```text title="Output"
+```text filename="Output"
 Connection established
 Finished dropping table (if it existed).
 Finished creating table.
@@ -217,7 +219,7 @@ Inserted 3 rows of data.
 
 In your project directory, create a file named `read_data.go`. This script connects to your Neon database and retrieves all rows from the `books` table.
 
-```go title="read_data.go"
+```go filename="read_data.go"
 package main
 
 import (
@@ -273,7 +275,7 @@ func main() {
 		fmt.Printf("ID: %d, Title: %s, Author: %s, Year: %d, In Stock: %t\n",
 			id, title, author, publicationYear, inStock)
 	}
-	fmt.Println("--------------------\n")
+	fmt.Println("--------------------")
 
 	if err := rows.Err(); err != nil {
 		fmt.Fprintf(os.Stderr, "Error during rows iteration: %v\n", err)
@@ -299,7 +301,7 @@ go run read_data.go
 
 When the code runs successfully, it produces the following output:
 
-```text title="Output"
+```text filename="Output"
 Connection established
 
 --- Book Library ---
@@ -314,7 +316,7 @@ ID: 4, Title: Dune, Author: Frank Herbert, Year: 1965, In Stock: false
 
 In your project directory, create a file named `update_data.go`. This script connects to your Neon database and updates the stock status of the book 'Dune' to `true`.
 
-```go title="update_data.go"
+```go filename="update_data.go"
 package main
 
 import (
@@ -375,7 +377,7 @@ go run read_data.go
 
 When the code runs successfully, it produces the following output:
 
-```text title="Output"
+```text filename="Output"
 Connection established
 
 --- Book Library ---
@@ -392,7 +394,7 @@ ID: 4, Title: Dune, Author: Frank Herbert, Year: 1965, In Stock: true
 
 In your project directory, create a file named `delete_data.go`. This script connects to your Neon database and deletes the book '1984' from the `books` table.
 
-```go title="delete_data.go"
+```go filename="delete_data.go"
 package main
 
 import (
@@ -452,7 +454,7 @@ go run read_data.go
 
 When the code runs successfully, it produces the following output:
 
-```text title="Output"
+```text filename="Output"
 Connection established
 
 --- Book Library ---
@@ -468,7 +470,7 @@ ID: 4, Title: Dune, Author: Frank Herbert, Year: 1965, In Stock: true
 
 The examples above execute each operation independently. For production code where multiple operations must succeed or fail together, wrap them in a transaction. The `defer tx.Rollback(ctx)` pattern ensures the transaction is rolled back if the function exits before committing.
 
-```go title="transaction_example.go"
+```go filename="transaction_example.go"
 package main
 
 import (
@@ -540,6 +542,14 @@ Run with:
 go run transaction_example.go
 ```
 
+When the code runs successfully, it produces the following output:
+
+```text filename="Output"
+Transaction committed successfully.
+```
+
+Run `read_data.go` again to see the new row: `Brave New World` by Aldous Huxley, with `In Stock: false`.
+
 </Steps>
 
 ## Connection issues
@@ -558,15 +568,15 @@ go run transaction_example.go
 
 </details>
 
-## Next steps: Using an ORM or framework
+## Use an ORM
 
-While this guide demonstrates how to connect to Neon using raw SQL queries, for more advanced and maintainable data interactions in your Go applications, consider using an Object-Relational Mapping (ORM) framework. ORMs not only let you work with data as objects but also help manage schema changes through automated migrations keeping your database structure in sync with your application models.
+This guide uses raw SQL. An Object-Relational Mapping (ORM) library lets you work with rows as Go structs and can run migrations that keep your schema in sync with your models.
 
-Explore the following resources to learn how to integrate ORMs with Neon:
+To use an ORM with Neon, see:
 
 - [Connect a Go application to Neon using GORM](/guides/golang-gorm-postgres)
 
-## Next steps: Neon backend services
+## Neon backend services
 
 - [Add Object Storage](/docs/storage/overview): S3-compatible file storage that branches with your database
 - [Call an LLM with AI Gateway](/docs/ai-gateway/overview): Access foundation models from Anthropic, OpenAI, Google, and more with one credential

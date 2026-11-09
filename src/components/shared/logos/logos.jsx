@@ -20,7 +20,6 @@ import CodeInstituteLogo from './images/code-institute.inline.svg';
 import ComigoLogo from './images/comigo.inline.svg';
 import CommureLogo from './images/commure.inline.svg';
 import CursorLogo from './images/cursor.inline.svg';
-import DatabuttonLogo from './images/databutton.inline.svg';
 import DoorDashLogo from './images/door-dash.inline.svg';
 import EncoreLogo from './images/encore.inline.svg';
 import EqtLogo from './images/eqt.inline.svg';
@@ -41,6 +40,7 @@ import OutfrontLogo from './images/outfront7.inline.svg';
 import PepsiLogo from './images/pepsi.inline.svg';
 import ReplitLogo from './images/replit.inline.svg';
 import RetoolLogo from './images/retool.inline.svg';
+import RiffLogo from './images/riff.inline.svg';
 import RubricLogo from './images/rubric.inline.svg';
 import SameLogo from './images/same.inline.svg';
 import SequoiaLogo from './images/sequoia.inline.svg';
@@ -75,7 +75,6 @@ const allLogos = {
   comigo: ComigoLogo,
   commure: CommureLogo,
   cursor: CursorLogo,
-  databutton: DatabuttonLogo,
   doordash: DoorDashLogo,
   encore: EncoreLogo,
   eqt: EqtLogo,
@@ -95,6 +94,7 @@ const allLogos = {
   outfront: OutfrontLogo,
   replit: ReplitLogo,
   retool: RetoolLogo,
+  riff: RiffLogo,
   rubric: RubricLogo,
   same: SameLogo,
   sequoia: SequoiaLogo,

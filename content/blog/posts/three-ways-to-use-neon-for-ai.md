@@ -7,7 +7,7 @@ excerpt: >-
   used in three AI workflows: Vector search with pgvector Many AI applications
   rely on vector embeddings for semantic search,...
 date: '2025-07-29T16:34:01'
-updatedOn: '2025-10-02T00:22:03'
+updatedOn: '2026-11-06T12:00:00.000Z'
 category: product
 categories:
   - product
@@ -32,6 +32,10 @@ seo:
   image: >-
     https://cdn.neonapi.io/public/images/pages/blog/three-ways-to-use-neon-for-ai/social.jpg
 ---
+
+<Admonition type="important" title="Launchpad is now Claimable Neon">
+Neon Launchpad has evolved into Claimable Neon. An agent or tool creates a Neon project without an account, uses it right away, and hands the user a claim link to keep it. Claimable projects can also include the Data API and Managed Better Auth. See [Claimable Neon](/claimable-neon) and the [Claimable Neon reference](/docs/reference/claimable-neon) for the current CLI and API.
+</Admonition>
 
 It’s not only hype: developers are working with AI every day – both using new AI-powered tools and building their own. At Neon, we’re seeing Postgres widely used in three AI workflows:
 
@@ -87,10 +91,10 @@ To get started, explore our [MCP server](https://neon.com/docs/ai/neon-mcp-serve
 
 ## Backend for agents
 
-Whether deploying a new app, testing an idea, or executing user prompts, modern agents need to provision a database at runtime, use it briefly, and discard it. Neon makes this pattern successful with serverless Postgres that can be controlled entirely via API, and it’s already powering agents like Replit, Databutton, [Create.xyz](https://create.xyz), same.new, and many others.
+Whether deploying a new app, testing an idea, or executing user prompts, modern agents need to provision a database at runtime, use it briefly, and discard it. Neon makes this pattern successful with serverless Postgres that can be controlled entirely via API, and it’s already powering agents like Replit, Riff, [Create.xyz](https://create.xyz), same.new, and many others.
 
 <blockquote>
-<p><strong>“Integrating Neon was a no-brainer. It gives every Databutton app a production-grade Postgres database in seconds, with zero overhead” </strong><em>(<a href="https://www.linkedin.com/in/martinsroed/overlay/about-this-profile/">Martin Skow Røed</a>, CTO and co-founder of Databutton)</em></p>
+<p><strong>“Integrating Neon was a no-brainer. It gives every Riff app a production-grade Postgres database in seconds, with zero overhead” </strong><em>(<a href="https://www.linkedin.com/in/martinsroed/overlay/about-this-profile/">Martin Skow Røed</a>, CTO and co-founder of Riff)</em></p>
 </blockquote>
 
 Why does Neon fit so well with agentic workflows?

@@ -3,7 +3,7 @@ title: "Why am I getting 'Error connecting to database: Failed to fetch' in the 
 subtitle: 'Usually a cold-start, an ad-blocker, or an IP Allow misconfiguration. Walk through these in order.'
 enableTableOfContents: true
 createdAt: '2026-05-18T00:00:00.000Z'
-updatedOn: '2026-08-14T02:59:16.781Z'
+updatedOn: '2026-09-23T21:00:25.204Z'
 isDraft: false
 redirectFrom: []
 previousLink:
@@ -14,15 +14,13 @@ nextLink:
   slug: find-connection-details-neon-console
 ---
 
-## Quick answer
-
-`Failed to fetch` on the **Tables** page means the Console's request to your compute didn't complete. The most common causes, in order, are: the compute is starting up after scale to zero, a browser extension is blocking the request, IP Allow is excluding your current IP, or a transient backend error. Refresh, then work through the checks below. See [Error connecting to database: Failed to fetch](/docs/connect/connection-errors#error-connecting-to-database-failed-to-fetch).
+`Failed to fetch` on the **Tables** page means the Console's request to your compute didn't complete. The most common causes, in order, are a compute that's still waking up from scale to zero, a browser extension blocking the request, an IP Allow list that doesn't include your current IP address, a DNS problem, and a transient backend error. Refresh the page first, then work through the checks below. See [Error connecting to database: Failed to fetch](/docs/connect/connection-errors#error-connecting-to-database-failed-to-fetch).
 
 ## Common causes
 
 ### 1. The compute is starting up
 
-If your compute is suspended after scale to zero, the Console wakes it up before it can list tables. Activation usually takes a few hundred milliseconds, but the **Tables** view sometimes times out on the first request. Wait a second or two and click **Refresh**. The second request typically succeeds.
+If your compute was suspended by [scale to zero](/docs/introduction/scale-to-zero), the Console has to wake it before it can list tables. Waking takes a few hundred milliseconds, but the first request can fail before the compute is ready. Wait a second or two and click **Refresh**. The second request usually succeeds.
 
 You can confirm the compute state on the **Branches** page. A suspended compute shows as **Idle**.
 
@@ -33,31 +31,31 @@ See [Couldn't connect to compute node](/docs/connect/connection-errors#couldnt-c
 Ad-blockers, privacy extensions, and corporate browser security tools sometimes block requests to `*.neon.tech`. To rule this out:
 
 - Open the Console in an incognito window with extensions disabled.
-- Or temporarily disable extensions like uBlock Origin, Privacy Badger, or DuckDuckGo Privacy Essentials on `console.neon.tech` and reload.
+- Or temporarily disable extensions like uBlock Origin or Privacy Badger on `console.neon.tech` and reload.
 - Check the browser's developer console (**F12 → Network**) for blocked requests to your compute hostname.
 
-### 3. IP Allow is excluding your browser IP
+### 3. IP Allow is rejecting your IP address
 
-If you've configured an **IP Allow** list (Scale plan) and your current public IP isn't on it, queries from the Tables view get rejected. The Tables page connects from the IP address you're browsing from, not from a Neon server IP. Check **Project Settings → Network security** and add your current IP.
+If you've configured an **IP Allow** list (Scale plan), the Tables view connects from the IP address you're browsing from, not from a Neon server. When that address isn't on the list, the request is rejected. Add your current IP address under your project's **Settings** > **Networking**.
 
-- If you only need IP Allow on protected branches, enable **Restrict IP Access to protected branches only** so Console queries against development branches still work.
+If you only need IP Allow on protected branches, enable **Restrict IP Access to protected branches only** so Console queries against development branches still work.
 
 See [Configure IP Allow](/docs/manage/projects#configure-ip-allow).
 
 ### 4. A DNS resolution issue
 
-Some networks (especially restrictive corporate or ISP DNS) fail to resolve compute hostnames. Test with:
+Some networks, often corporate networks or ISP resolvers, fail to resolve compute hostnames. Test your hostname against Google's public DNS resolver:
 
 ```bash shouldWrap
 nslookup ep-cool-darkness-a1b2c3d4.us-east-2.aws.neon.tech 8.8.8.8
 ```
 
-If lookups against Google DNS succeed but your default resolver fails, switch the network or device to a public resolver. See [DNS resolution issues](/docs/connect/connection-errors#dns-resolution-issues).
+If the lookup succeeds against `8.8.8.8` but fails with your default resolver, switch your network or device to a public resolver. See [DNS resolution issues](/docs/connect/connection-errors#dns-resolution-issues).
 
 ### 5. A transient backend error
 
 If none of the above explain it, check the [Neon status page](https://neonstatus.com/) for ongoing incidents.
 
 <Admonition type="tip" title="Grab the error ID">
-The full error message on the Tables view includes an error ID after the colon. Copy it before refreshing. If you open a support ticket (paid plans) or ask in the [Neon Discord](https://neon.com/discord) (Free plan), that ID helps look up the exact request in the logs.
+The full error message on the Tables view includes an error ID after the colon. Copy it before you refresh. If you ask for help in the [Neon Discord](https://neon.com/discord) or open a support ticket on the Scale plan, include the ID so the request can be found in the logs.
 </Admonition>

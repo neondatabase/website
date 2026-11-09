@@ -8,7 +8,10 @@ summary: >-
   compute endpoints via the Neon Console or API.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2026-08-26T13:16:52.511Z'
+redirectFrom:
+  - /docs/introduction/compute-size
+  - /docs/introduction/compute
+updatedOn: '2026-11-05T15:33:57.188Z'
 ---
 
 A compute is a virtualized service that runs applications. In Neon, a compute runs Postgres.
@@ -38,7 +41,7 @@ A compute is associated with a branch.
 
 <TabItem>
 
-In the Neon Console, select your branch from the **BRANCH** selector, then select **Postgres database** > **Computes**. If the branch has a compute, it is shown on the **Computes** tab of the branch overview.
+In the Neon Console, select your branch from the project/branch menu at the top of the sidebar, then select **Postgres database** > **Computes**. If the branch has a compute, it is shown on the **Computes** tab of the branch overview.
 
 Compute details shown on the **Computes** tab include:
 
@@ -54,42 +57,22 @@ Compute details shown on the **Computes** tab include:
 
 <TabItem>
 
-The CLI has no separate compute object; a branch's compute state (`current_state`, `compute_time_seconds`) is shown by [`neon branches list`](/docs/cli/branches#list):
+List the computes in a project with [`neon postgres computes list`](/docs/cli/postgres#computes-list), and pass `--branch` to see one branch's computes:
 
 ```bash
-neon branches list --output json
+neon postgres computes list --branch main
 ```
 
-<details>
-<summary>Show output</summary>
-
-```json
-[
-  {
-    "id": "br-dry-glitter-a1rh0x6q",
-    "project_id": "autumn-lake-30024670",
-    "name": "br-dry-glitter-a1rh0x6q",
-    "current_state": "ready",
-    "logical_size": 29515776,
-    "creation_source": "console",
-    "default": true,
-    "cpu_used_sec": 78,
-    "compute_time_seconds": 78,
-    "active_time_seconds": 312,
-    "written_data_bytes": 107816,
-    "data_transfer_bytes": 0,
-    "created_at": "2023-07-09T17:01:34Z",
-    "updated_at": "2023-07-09T17:15:13Z"
-  }
-]
+```text filename="Output"
+Computes on main
+ID                      Branch ID                  Type        Current State  Autoscaling Limit Min Cu  Autoscaling Limit Max Cu
+ep-cool-king-123456     br-lively-sunset-123456    read_write  active         0.25                      2
 ```
 
-</details>
-
-Or list the project's computes directly through the [`neon api`](/docs/cli/api) passthrough:
+For one compute's host, state, size, and scale-to-zero timeout, use [`neon postgres computes get`](/docs/cli/postgres#computes-get):
 
 ```bash
-neon api /projects/autumn-lake-30024670/endpoints
+neon postgres computes get ep-cool-king-123456
 ```
 
 </TabItem>
@@ -179,7 +162,7 @@ You can only create a single primary read-write compute for a branch that does n
 
 <TabItem>
 
-1. In the Neon Console, select your branch from the **BRANCH** selector.
+1. In the Neon Console, select your branch from the project/branch menu at the top of the sidebar.
 1. Under **Postgres database**, select **Computes**.
 1. Click **Add a compute** or **Add Read Replica** if you already have a primary read-write compute.
 1. On the **Add new compute** drawer or **Add read replica** drawer, specify your compute settings, and click **Add**. Selecting the **Read replica** compute type creates a [read replica](/docs/introduction/read-replicas).
@@ -275,7 +258,7 @@ You can edit a compute to change the [compute size](#compute-size-and-autoscalin
 
 <TabItem>
 
-1. In the Neon Console, select your branch from the **BRANCH** selector.
+1. In the Neon Console, select your branch from the project/branch menu at the top of the sidebar.
 1. Under **Postgres database**, select **Computes**.
 1. Select **Edit** for the compute you want to edit.
 
@@ -287,11 +270,13 @@ You can edit a compute to change the [compute size](#compute-size-and-autoscalin
 
 <TabItem>
 
-No dedicated command edits a compute, so reach for the [`neon api`](/docs/cli/api) passthrough, which sends the request with your CLI credentials. For example, change the autoscaling range:
+Edit a compute with [`neon postgres computes update`](/docs/cli/postgres#computes-update). For example, set the autoscaling range to 0.5 to 3 CU:
 
-```bash shouldWrap
-neon api /projects/autumn-lake-30024670/endpoints/ep-misty-morning-a1pfa4ez -X PATCH -F endpoint.autoscaling_limit_min_cu=0.5 -F endpoint.autoscaling_limit_max_cu=3
+```bash
+neon postgres computes update ep-misty-morning-a1pfa4ez --cu 0.5-3
 ```
+
+Pass `--suspend-timeout` to change the scale-to-zero timeout. The command waits until the change is applied, then prints the compute.
 
 </TabItem>
 
@@ -419,7 +404,7 @@ _Compute size_ is the number of Compute Units (CUs) assigned to a Neon compute. 
 
 Neon supports fixed-size and autoscaling compute configurations.
 
-- **Fixed size:** Select a fixed compute size ranging from .25 CUs to 56 CUs. A fixed-size compute does not scale to meet workload demand.
+- **Fixed size:** Select a fixed compute size ranging from .25 CUs to 56 CUs. A fixed-size compute does not scale to meet workload demand. Fixed sizes larger than 16 CU are in beta.
 - **Autoscaling:** Specify a minimum and maximum compute size. Neon scales the compute size up and down within the selected compute size boundaries in response to the current load. Currently, the _Autoscaling_ feature supports a range of .25 CU to 16 CU. The maximum permitted autoscaling range is 8 CU, meaning the difference between your maximum and minimum cannot exceed 8 CU. The .25 CU and .5 CU settings are _shared compute_. For information about how Neon implements the _Autoscaling_ feature, see [Autoscaling](/docs/introduction/autoscaling).
 
 <Admonition type="info" title="monitoring autoscaling">
@@ -437,7 +422,11 @@ The Postgres `max_connections` setting defines your compute's maximum simultaneo
 The following table outlines the RAM, compute cache size (75% of RAM), and the `max_connections` limit for each compute size that Neon supports. To understand how `max_connections` is determined for an autoscaling configuration, see [Parameter settings that differ by compute size](/docs/reference/compatibility#parameter-settings-that-differ-by-compute-size).
 
 <Admonition type="note">
-Compute size support differs by [Neon plan](/docs/introduction/plans). Autoscaling is supported up to 16 CU. Neon supports fixed compute sizes (no autoscaling) for computes sizes larger than 16 CU.
+Compute size support differs by [Neon plan](/docs/introduction/plans). Autoscaling is supported up to 16 CU. Neon supports fixed compute sizes (no autoscaling) for compute sizes larger than 16 CU. These larger fixed sizes are in beta.
+</Admonition>
+
+<Admonition type="note" title="Caching on large fixed-size computes">
+On fixed-size computes of 18 CU and above, Neon delivers this cache as Postgres `shared_buffers` set to 75% of RAM and backed by huge pages, and disables the secondary file cache that smaller and autoscaling computes rely on. This keeps hot data in memory rather than on the compute's local disk. Confirm the configuration with `SHOW shared_buffers` and `SHOW huge_pages`, and measure cache efficiency with the [Compute cache hit rate](/docs/introduction/monitoring-page#compute-cache-hit-rate) graph. See [What is the compute cache?](/docs/extensions/neon#what-is-the-compute-cache) for details.
 </Admonition>
 
 | Compute Size (CU) | RAM (GB) | Compute cache size (GB) | max_connections |
@@ -528,7 +517,7 @@ Restarting a compute interrupts any connections currently using the compute. To 
 
 <TabItem>
 
-Use the **Restart compute** option in the Neon Console. Select your branch from the **BRANCH** selector, then select **Postgres database** > **Computes** and choose **Restart compute** from the compute's menu.
+Use the **Restart compute** option in the Neon Console. Select your branch from the project/branch menu at the top of the sidebar, then select **Postgres database** > **Computes** and choose **Restart compute** from the compute's menu.
 
 ![Restart a compute in the console](/docs/manage/restart_compute.png)
 
@@ -538,10 +527,10 @@ You can also restart a compute by letting it suspend: stop activity (stop runnin
 
 <TabItem>
 
-Restart the compute through the [`neon api`](/docs/cli/api) passthrough:
+Restart the compute with [`neon postgres computes restart`](/docs/cli/postgres#computes-restart):
 
 ```bash
-neon api /projects/autumn-lake-30024670/endpoints/ep-misty-morning-a1pfa4ez/restart -X POST
+neon postgres computes restart ep-misty-morning-a1pfa4ez
 ```
 
 </TabItem>
@@ -573,7 +562,7 @@ A branch can have a single read-write compute and multiple read replica computes
 
 <TabItem>
 
-1. In the Neon Console, select your branch from the **BRANCH** selector.
+1. In the Neon Console, select your branch from the project/branch menu at the top of the sidebar.
 1. Under **Postgres database**, select **Computes**.
 1. Click **Edit** for the compute you want to delete.
 1. At the bottom of the **Edit compute** drawer, click **Delete compute**.
@@ -582,10 +571,10 @@ A branch can have a single read-write compute and multiple read replica computes
 
 <TabItem>
 
-Delete the compute through the [`neon api`](/docs/cli/api) passthrough:
+Delete the compute with [`neon postgres computes delete`](/docs/cli/postgres#computes-delete):
 
 ```bash
-neon api /projects/autumn-lake-30024670/endpoints/ep-misty-morning-a1pfa4ez -X DELETE
+neon postgres computes delete ep-misty-morning-a1pfa4ez
 ```
 
 </TabItem>

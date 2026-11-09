@@ -9,7 +9,7 @@ summary: >-
   setup. Neon's copy-on-write branching keeps development changes isolated
   until explicitly promoted.
 enableTableOfContents: true
-updatedOn: '2026-08-18T10:29:02.410Z'
+updatedOn: '2026-09-25T09:36:22.797Z'
 ---
 
 Liquibase is an open-source database-independent library for tracking, managing, and applying database schema changes. To learn more about Liquibase, refer to the [Liquibase documentation](https://docs.liquibase.com/home.html).
@@ -70,7 +70,7 @@ Now, let's prepare a development database in Neon by creating a development bran
 
 To create a branch:
 
-1. In the Neon Console, select **Branches** under **Project**. You will see your `production` branch, where you just created your `blog` database and tables.
+1. In the Neon Console, select **Branches** in the sidebar. You will see your `production` branch, where you just created your `blog` database and tables.
 2. Click **New Branch** to open the branch creation dialog.
 3. Enter a name for the branch. Let's call it `feature/blog-schema`.
 4. Leave `production` selected as the parent branch. This is where you created the `blog` database.
@@ -79,7 +79,7 @@ To create a branch:
 
 ## Retrieve your Neon database connection strings
 
-From the [Neon Console](https://console.neon.tech/app/projects), retrieve connection strings for your target and source databases by clicking the **Connect** button on your **Project Dashboard** to open the **Connect to your database** modal.
+From the [Neon Console](https://console.neon.tech/app/projects), retrieve connection strings for your target and source databases by clicking the **Connect** button in the Console nav to open the **Connect to your branch** modal.
 
 <Admonition type="note">
 The target database is the database on your `feature/blog-schema` branch where you will do your development work. Your source database is where you will apply your schema changes later, once you are satisfied with the changes on your development branch.

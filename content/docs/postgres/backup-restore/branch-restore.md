@@ -20,7 +20,9 @@ redirectFrom:
   - /docs/guides/branch-restore
   - /docs/guides/instant-restore
   - /docs/introduction/branch-restore
-updatedOn: '2026-08-31T19:23:51.024Z'
+  - /docs/introduction/restore
+  - /docs/introduction/instant-restore
+updatedOn: '2026-09-25T09:36:22.797Z'
 ---
 
 <InfoBlock>
@@ -77,7 +79,7 @@ Backup branches created when restoring root branch from another branch cannot be
 
 It is important to understand that whenever you restore a branch, you are performing a _complete_ overwrite of the database timeline, not a merge or refresh. All Postgres data and schema on your branch, along with Managed Better Auth data stored in the `neon_auth` schema, are replaced with the contents from the historical source. There is no way to exclude `neon_auth` from a restore, though the backup branch created by the restore still holds your earlier auth state. All data changes from the selected restore point onwards are excluded from the branch.
 
-Object Storage is not part of the database timeline, so a database restore does not revert its contents. The same is true of Functions.
+Object Storage is not part of the database timeline, so a database restore does not revert its contents. The same is true of Functions. This differs from [Reset from parent](/docs/guides/reset-from-parent), which does reset a branch's Object Storage to the parent's current state.
 
 #### Changes apply to all databases
 
@@ -285,7 +287,7 @@ Backup branches are deletable except in two cases:
 
 To delete a backup branch:
 
-1. Navigate to the **Branches** page (under **Project**).
+1. Navigate to the **Branches** page.
 2. Find the backup branch you want to delete. It will have a name with the following format:
 
    ```

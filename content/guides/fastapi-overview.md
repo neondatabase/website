@@ -1,17 +1,15 @@
 ---
-title: Building a High-Performance API with FastAPI, Pydantic, and Lakebase Postgres
-subtitle: Learn how to create an API for managing a tech conference system using FastAPI, Pydantic for data validation, and Neon's serverless Postgres for data storage
+title: Building a high-performance API with FastAPI, Pydantic, and Lakebase Postgres
+subtitle: Learn how to create an API for managing a tech conference system using FastAPI, Pydantic for data validation, and Lakebase Postgres on Neon for data storage
 author: bobbyiliev
 enableTableOfContents: true
 createdAt: '2024-08-17T00:00:00.000Z'
-updatedOn: '2026-07-31T19:05:29.503Z'
+updatedOn: '2026-09-24T17:56:34.189Z'
 ---
 
-FastAPI is a high-performance Python web framework for building APIs quickly and efficiently.
+FastAPI is a high-performance Python web framework for building APIs. Combined with Pydantic for data validation and Lakebase Postgres on Neon for data storage, you can build an API with little code.
 
-When combined with Pydantic for data validation and Neon's serverless Postgres for data storage, you can create an efficient API with little code.
-
-In this guide, we'll walk through the process of building an API for managing a tech conference system, focusing on best practices and performance optimizations.
+In this guide, we'll build an API for managing a tech conference system, with a focus on best practices and performance.
 
 ## Prerequisites
 
@@ -19,9 +17,9 @@ Before we begin, make sure you have the following:
 
 - Python 3.9 or later installed on your system
 - [pip](https://pip.pypa.io/en/stable/installation/) for managing Python packages
-- A [Neon](https://console.neon.tech/signup) account for serverless Postgres
+- A [Neon](https://console.neon.tech/signup) account
 
-## Setting up the Project
+## Setting up the project
 
 Let's start by creating a new project directory and setting up a virtual environment:
 
@@ -63,7 +61,7 @@ This command installs:
 - FastAPI: Our web framework
 - Uvicorn: An ASGI server to run our FastAPI application
 - SQLAlchemy: An ORM for database interactions
-- psycopg2-binary: PostgreSQL adapter for Python
+- psycopg2-binary: Postgres adapter for Python
 - Pydantic: For data validation and settings management
 - python-dotenv: To load environment variables from a .env file
 
@@ -85,7 +83,7 @@ First, let's set up our database connection. Create a `.env` file in your projec
 DATABASE_URL=postgres://user:password@your-neon-hostname.neon.tech/neondb?sslmode=require&channel_binding=require
 ```
 
-Replace the placeholders with your actual Neon database credentials.
+Replace the placeholders with your Neon connection string, which you can copy by clicking **Connect** on your project dashboard in the Neon Console.
 
 Now, create a `database.py` file to manage the database connection:
 
@@ -123,7 +121,7 @@ This script does the following:
 
 We're now ready to define our database models and API endpoints.
 
-## Defining Models and Schemas
+## Defining models and schemas
 
 Let's start by creating an API for managing a tech conference system. We'll need database models and Pydantic schemas for talks and speakers.
 
@@ -203,11 +201,11 @@ class SpeakerWithTalks(Speaker):
 
 Here we define Pydantic models for creating and returning speaker and talk data.
 
-The `TalkCreate` model includes a `speaker_id` field for associating talks with speakers. The `SpeakerWithTalks` model extends the `Speaker` model to include a list of talks. The `orm_mode = True` configuration enables automatic data conversion between SQLAlchemy models and Pydantic models.
+The `TalkCreate` model includes a `speaker_id` field for associating talks with speakers. The `SpeakerWithTalks` model extends the `Speaker` model to include a list of talks. The `orm_mode = True` configuration lets Pydantic read data directly from SQLAlchemy models. In Pydantic v2, this setting is named `from_attributes = True`.
 
-These models will be used to validate incoming data and serialize outgoing data in our API endpoints instead of manually handling data conversion.
+Our API endpoints use these models to validate incoming data and serialize outgoing data, so you don't have to convert data by hand.
 
-## Creating API Endpoints
+## Creating API endpoints
 
 Now, let's create our FastAPI application with CRUD operations for speakers and talks. Create a `main.py` file:
 
@@ -271,7 +269,7 @@ This code defines endpoints for:
 - Creating and retrieving talks at `/talks/`
 - Retrieving a specific talk at `/talks/{talk_id}`
 
-Each endpoint uses dependency injection to get a database session, ensuring efficient connection management.
+Each endpoint uses dependency injection to get a database session, which is closed when the request finishes.
 
 Pagination is supported for the `read_speakers` and `read_talks` endpoints using the `skip` and `limit` parameters to avoid loading large datasets at once.
 
@@ -287,11 +285,11 @@ This starts the Uvicorn server with hot-reloading enabled for development.
 
 By default, the API will be available on port 8000. You can access the API documentation at `http://127.0.0.1:8000/docs` or `http://127.0.0.1:8000/redoc`.
 
-Your database tables will be created automatically when you run the API for the first time thanks to the `models.Base.metadata.create_all(bind=engine)` line in `main.py`. You can check your database to see the tables using the Neon console.
+Your database tables will be created automatically when you run the API for the first time thanks to the `models.Base.metadata.create_all(bind=engine)` line in `main.py`. You can see the tables in the **Tables** page of the Neon Console.
 
 ## Testing the API
 
-You can test the API using tools like `curl`, `Postman`, or even via the `/docs` endpoint provided by FastAPI directly via your browser.
+You can test the API using tools like `curl`, `Postman`, or the `/docs` endpoint that FastAPI serves in your browser.
 
 Let's test this out using `httpie`, a command-line HTTP client:
 
@@ -340,9 +338,9 @@ Let's test this out using `httpie`, a command-line HTTP client:
 
 You can modify these requests to test other endpoints and functionalities.
 
-## Dockerizing the Application
+## Dockerizing the application
 
-In many cases, you may want to containerize your FastAPI application for deployment. Here's how you can create a Dockerfile for your project:
+To deploy your FastAPI application, you may want to containerize it. Here's how you can create a Dockerfile for your project:
 
 ```Dockerfile
 FROM python:3.12-slim
@@ -374,29 +372,27 @@ docker run -d -p 8000:8000 fastapi-neon-conference-api
 
 This will start the FastAPI application in a Docker container, accessible on port 8000 of your host machine.
 
-You need to make sure that your `.env` file is not included in the Docker image. Instead, you can pass the environment variables as arguments when running the container.
+Make sure your `.env` file isn't included in the Docker image. Instead, you can pass the environment variables as arguments when running the container.
 
-## Performance Considerations
+## Performance considerations
 
-1. **Database Indexing**: We've added indexes to frequently queried fields (`id`, `name`, `title`) in our models. This improves query performance. To learn more about indexing, refer to the [Neon documentation](/docs/postgresql/index-types).
+1. **Database indexing**: We've added indexes to frequently queried fields (`id`, `name`, `title`) in our models. This improves query performance. To learn more about indexing, see [Postgres index types](/docs/postgresql/index-types).
 
 2. **Pagination**: The `read_speakers` and `read_talks` endpoints include `skip` and `limit` parameters for pagination, preventing the retrieval of unnecessarily large datasets.
 
-3. **Dependency Injection**: By using `Depends(get_db)`, we make sure that database connections are properly managed and closed after each request. This prevents connection leaks and improves performance.
+3. **Dependency injection**: With `Depends(get_db)`, each request's database session is closed after the request. This prevents connection leaks.
 
-4. **Pydantic Models**: Using Pydantic for request and response models provides automatic data validation and serialization, reducing the need for manual checks.
+4. **Pydantic models**: Using Pydantic for request and response models provides automatic data validation and serialization, reducing the need for manual checks.
 
-5. **Relationships**: We've used SQLAlchemy relationships to efficiently load related data (speakers and their talks) in a single query.
+5. **Relationships**: We've used SQLAlchemy relationships to load related data (speakers and their talks). By default, SQLAlchemy loads a relationship lazily with a separate query; use `joinedload` or `selectinload` if you need to avoid extra queries.
 
 ## Conclusion
 
-In this guide, we've built a simple API for managing a tech conference system using FastAPI, Pydantic, and Lakebase Postgres.
+You've built a simple API for managing a tech conference system using FastAPI, Pydantic, and Lakebase Postgres on Neon.
 
-This combination provides a very good foundation for building scalable and efficient web services. FastAPI's speed and ease of use, combined with Pydantic's data validation and Neon's serverless Postgres, make for a solid tech stack.
+As a next step, you can extend the API with more features like authentication, authorization, and advanced query capabilities. You can check out the [Implementing secure user authentication in FastAPI using JWT tokens and Lakebase Postgres](/guides/fastapi-jwt) guide for adding JWT-based authentication to your API.
 
-As a next step, you can extend the API with more features like authentication, authorization, and advanced query capabilities. You can check out the [Implementing Secure User Authentication in FastAPI using JWT Tokens and Lakebase Postgres](/guides/fastapi-jwt) guide for adding JWT-based authentication to your API.
-
-## Additional Resources
+## Additional resources
 
 - [FastAPI Documentation](https://fastapi.tiangolo.com/)
 - [Pydantic Documentation](https://docs.pydantic.dev/latest/)

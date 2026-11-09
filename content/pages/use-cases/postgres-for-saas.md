@@ -3,6 +3,12 @@ title: 'Postgres for SaaS'
 subtitle: Build and scale your SaaS faster thanks to autoscaling, database branching, and the serverless operating model.
 summary: Covers the setup of Postgres on Neon for SaaS applications, highlighting features like database branching for testing, autoscaling for resource management, and a serverless model to simplify operations.
 enableTableOfContents: true
+seo:
+  title: 'Postgres for SaaS: Autoscaling, Branching, and Database per Tenant | Neon'
+  description: >-
+    Run your SaaS on Neon's serverless Postgres: autoscaling for uneven load, a
+    branch per pull request for testing, database-per-tenant isolation, and a
+    99.95% SLA, with usage-based pricing and no monthly minimum.
 updatedOn: '2024-08-23T09:00:00.000Z'
 image: '/images/social-previews/use-cases/postgres-for-saas.jpg'
 ---
@@ -46,7 +52,7 @@ author={{
 A branch in Neon is a copy-on-write clone of your database. Branches include both schema and data. Teams use them to create ephemeral environments for development, testing, and preview environments.
 
 - **Branch creation is instant** - Independent of DB size. Storage is not duplicated for each branch.
-- **Branches are cost-efficient** - You can deploy thousands of branches for $19 /month.
+- **Branches are cost-efficient** - Child branches are billed only for the data that changes, capped at your data size, so you can run thousands of branches without duplicating storage costs.
 - **Branch compute can scale to zero when idle** - to further reduce cost.
 
 How branches can be used to increase development velocity:
@@ -159,7 +165,7 @@ Private Link, IP Allow
 
 <DefinitionList bulletType="check">
 Usage-based pricing
-: Start for free, then pay only for what you use. Paid plans start at $5/month minimum. [Review our pricing plans](/pricing).
+: Start for free, then pay only for what you use. Paid plans are usage-based with no monthly minimum. [Review our pricing plans](/pricing).
 
 </DefinitionList>
 

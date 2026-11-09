@@ -7,10 +7,8 @@ summary: >-
   created on your main branch works in all preview branches. No provider
   API keys are required.
 enableTableOfContents: true
-updatedOn: '2026-08-17T23:18:55.558Z'
+updatedOn: '2026-10-09T09:48:21.765Z'
 ---
-
-<FeatureBetaProps feature_name="Neon AI Gateway" />
 
 AI Gateway uses Neon bearer credentials, the same scoped-credential system as [Object Storage](/docs/storage/authentication): one credential API mints branch-scoped tokens that differ by scope (AI Gateway uses `ai_gateway:invoke`). No provider API keys are needed.
 
@@ -18,14 +16,23 @@ AI Gateway uses Neon bearer credentials, the same scoped-credential system as [O
 
 A credential must include the `ai_gateway:invoke` scope.
 
-<Tabs labels={["Console", "API"]}>
+<Tabs labels={["CLI", "Console", "API"]}>
 <TabItem>
 
-In the Neon Console, select your branch and click **Credentials** under **Branch** in the sidebar. Click **Create credential**, give it a name, and check **ai_gateway:invoke**.
+Create a credential with the [Neon CLI](/docs/cli/credentials):
 
-After creation, the credential is shown once. Copy the snippet or click **Download .env** before closing. The snippet includes both gateway env vars (see [Environment variables](#environment-variables) below).
+```bash
+neon credentials create --scope ai_gateway:invoke --name my-app-credential
+```
 
-To view or revoke credentials later, return to the **Credentials** page and use the action menu (⋮) next to the credential.
+The `api_token` is printed once; set it as `NEON_AI_GATEWAY_TOKEN`. Run it in a directory [linked](/docs/cli/link) to your project, or pass `--project-id` and `--branch`.
+
+</TabItem>
+<TabItem>
+
+In the Neon Console, click **Connect** at the top of the sidebar and open the **AI Gateway** tab. The snippet includes both gateway env vars (see [Environment variables](#environment-variables) below). Click **Reveal credential** to show the token, or **Copy snippet** to copy the full `.env`. Use **Rotate credential** to replace the token in place.
+
+The Connect dialog reveals and rotates the current credential. To create a credential with specific scopes, open your project's **Settings** > **Credentials** and select **Create credential**. To list all credentials for the branch or revoke one, use the [Neon CLI](/docs/cli/credentials) or the API (below).
 
 </TabItem>
 <TabItem>
@@ -60,7 +67,7 @@ This populates `NEON_AI_GATEWAY_TOKEN` and `NEON_AI_GATEWAY_BASE_URL` for the cu
 neon config status
 ```
 
-For production deployments, use the [API-based workflow](#creating-a-credential) to create named credentials. `expires_at` is accepted but not currently enforced during the beta. Revoke credentials explicitly instead of relying on expiry.
+For production deployments, use the [API-based workflow](#creating-a-credential) to create named credentials. `expires_at` is accepted but not currently enforced. Revoke credentials explicitly instead of relying on expiry.
 
 ## Using your credential
 
@@ -188,13 +195,19 @@ This design lets you use a single credential across your entire development work
 
 ## Rotating credentials
 
-To rotate a credential: create a new one, update your environment variables, then revoke the old one.
+To rotate a credential in place with the [Neon CLI](/docs/cli/credentials), run `neon credentials rotate <token_id>` (find the id with `neon credentials list`). The `token_id` stays the same and a new `api_token` is minted, so update `NEON_AI_GATEWAY_TOKEN` with it. Otherwise, create a new credential, update your environment variables, then revoke the old one.
 
-To revoke from the Console, open the **Credentials** page and use the action menu (⋮) next to the credential. To revoke via the API:
+The Console's **Connect** dialog can rotate a credential (**AI Gateway** tab > **Rotate credential**) but not revoke one. To revoke, use the [Neon CLI](/docs/cli/credentials) (`neon credentials revoke <token_id>`) or the API:
 
 ```bash shouldWrap
 curl -X DELETE "https://console.neon.tech/api/v2/projects/{project_id}/branches/{branch_id}/credentials/{token_id}" \
   -H "Authorization: Bearer $NEON_API_KEY"
+```
+
+Or with the [Neon CLI](/docs/cli/credentials):
+
+```bash
+neon credentials revoke <token_id>
 ```
 
 <NeedHelp/>

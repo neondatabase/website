@@ -1,15 +1,13 @@
 ---
-title: Implementing Queue Workers and Job Processing in Laravel with Lakebase Postgres
-subtitle: Learn how to implement efficient background processing in Laravel using queue workers and Lakebase Postgres
+title: Implementing queue workers and job processing in Laravel with Lakebase Postgres
+subtitle: Learn how to implement background processing in Laravel using queue workers and Lakebase Postgres
 author: bobbyiliev
 enableTableOfContents: true
 createdAt: '2024-07-14T00:00:00.000Z'
-updatedOn: '2026-07-31T19:05:29.503Z'
+updatedOn: '2026-09-24T17:56:34.189Z'
 ---
 
-Laravel provides a flexible system for handling background processing through queues and scheduling. This allows you to improve your application's performance by offloading time-consuming tasks and automating recurring processes. In this guide, we'll explore how to implement queue workers, job processing, and scheduled tasks in Laravel using Postgres as the queue driver.
-
-By the end of this tutorial, you'll know how to build a system for background processing and task automation, using Laravel queues and the scheduler with Lakebase Postgres.
+Laravel handles background processing through queues and scheduling, so you can move slow tasks out of the request cycle and automate recurring work. In this guide, you'll implement queue workers, job processing, and scheduled tasks in Laravel using Postgres as the queue driver.
 
 ## Prerequisites
 
@@ -20,11 +18,11 @@ Before we begin, ensure you have the following:
 - A [Neon](https://console.neon.tech/signup) account for Postgres database hosting
 - Basic knowledge of Laravel and database operations
 
-## Setting up the Project
+## Setting up the project
 
-Let's start by creating a new Laravel project and setting up the necessary components. We'll use Composer to create a new Laravel project and configure it to use Postgres as the queue driver.
+Start by creating a new Laravel project with Composer and configuring it to use Postgres as the queue driver.
 
-### Creating a New Laravel Project
+### Creating a new Laravel project
 
 Open your terminal and run the following command to create a new Laravel project:
 
@@ -33,7 +31,7 @@ composer create-project laravel/laravel laravel-queue-demo
 cd laravel-queue-demo
 ```
 
-### Setting up the Database
+### Setting up the database
 
 Update your `.env` file with your Lakebase Postgres database credentials:
 
@@ -54,11 +52,11 @@ php artisan migrate
 
 This will create the necessary tables in your Lakebase Postgres database.
 
-## Implementing Laravel Queues with Postgres
+## Implementing Laravel queues with Postgres
 
 Out of the box, Laravel provides a single API for working with queues, allowing you to push jobs onto the queue and process them in the background. We'll configure Laravel to use Postgres as the queue driver and create a sample job to demonstrate the queue processing.
 
-### Configuring the Queue Connection
+### Configuring the queue connection
 
 To configure Laravel to use Postgres as the queue driver, update the `QUEUE_CONNECTION` in the `.env` file:
 
@@ -68,7 +66,7 @@ QUEUE_CONNECTION=database
 
 This tells Laravel to use the database driver for the queue system. Some of the other available drivers are `sync`, `redis`, `beanstalkd`, `sqs`, and `null`.
 
-### Creating the Jobs Table
+### Creating the jobs table
 
 As we're using the database driver for queues, we need to create a table to store the jobs.
 
@@ -89,7 +87,7 @@ The `jobs` table will be created in your Postgres database. It has the following
 - `available_at`: The timestamp when the job is available to be processed.
 - `created_at`: The timestamp when the job was created.
 
-## Creating and Dispatching Jobs
+## Creating and dispatching jobs
 
 Now that we've set up the queue system, let's create a sample job and dispatch it to the queue.
 
@@ -97,7 +95,7 @@ We'll create a job called `GenerateDatabaseReport` that simulates generating a c
 
 Such jobs can be used to perform time-consuming tasks like sending emails, processing images, or interacting with external APIs without blocking the main application.
 
-### Creating a Job
+### Creating a job
 
 Let's start by creating a job called `GenerateDatabaseReport` using the following Artisan command:
 
@@ -160,7 +158,7 @@ When this job is dispatched, Laravel will serialize it and store it in the datab
 
 The `sleep(5)` call is just for demonstration purposes. In a real-world scenario, you'd replace this with actual report processing logic, such as fetching data from the database, generating a report, and storing it in a file or sending it via email.
 
-### Dispatching the Job
+### Dispatching the job
 
 For testing purposes, let's dispatch the `GenerateDatabaseReport` job when a specific route is accessed. This will simulate pushing the job onto the queue for processing, but in a real-world scenario, you'd dispatch jobs from your application logic based on specific events or triggers (e.g., user registration, order completion) or using the Laravel scheduler for recurring tasks like sending daily reports.
 
@@ -187,7 +185,7 @@ SELECT * FROM jobs;
 
 This will show you the job entry in the `jobs` table, which includes the serialized payload, queue name, and other metadata.
 
-## Running Queue Workers
+## Running queue workers
 
 Now that we've dispatched a job to the queue, we need to run a queue worker to process the job. Queue workers listen for new jobs on the queue and execute them in the background.
 
@@ -218,11 +216,11 @@ SELECT * FROM jobs;
 
 This will show you that the job has been removed from the `jobs` table after processing.
 
-## Handling Job Failures and Retries
+## Handling job failures and retries
 
-Laravel provides mechanisms for handling failed jobs and configuring job retries. Let's explore how to configure failed job storage, handle failed jobs, and set up job retries.
+This section covers failed job storage, a `failed` handler, and retry settings.
 
-### Configuring Failed Job Storage
+### Configuring failed job storage
 
 If you don't already have a table for failed jobs in your database, you can use Laravel's Artisan commands to create one. Run the following commands:
 
@@ -233,7 +231,7 @@ php artisan migrate
 
 This will create a `failed_jobs` table in your Postgres database to store information about failed jobs for debugging and analysis. The failed jobs will be stored in this table when a job fails to process and later retried or manually processed as needed.
 
-### Handling Failed Jobs
+### Handling failed jobs
 
 Add a `failed` method to your job class to handle failed jobs:
 
@@ -246,7 +244,7 @@ public function failed(\Throwable $exception)
 
 This method will be called when a job fails to process. You can log the error message or perform additional actions based on the failure, such as sending an email notification or updating a status in the database.
 
-### Configuring Job Retries
+### Configuring job retries
 
 In some cases, you may want to retry a job if it fails to process. Laravel allows you to configure the number of retries and the timeout for a job.
 
@@ -292,11 +290,11 @@ php artisan queue:retry job-id
 
 Replace `job-id` with the ID of the failed job you want to retry. This will requeue the job for processing.
 
-## Implementing Scheduled Jobs
+## Implementing scheduled jobs
 
-Laravel's scheduler allows you to expressively define your command schedule within your Laravel application itself. In Laravel 11, this is done using the `routes/console.php` file, simplifying the process and keeping all routing-related code in one place.
+Laravel's scheduler lets you define your command schedule inside the application. In Laravel 11, schedules go in the `routes/console.php` file.
 
-### Configuring the Scheduler
+### Configuring the scheduler
 
 Let's add a scheduled task that dispatches our `GenerateDatabaseReport` job every hour:
 
@@ -311,7 +309,7 @@ Schedule::job(new GenerateDatabaseReport(1))->hourly();
 
 This will dispatch the `GenerateDatabaseReport` job every hour. You can define more complex schedules using the `Schedule` facade, such as daily, weekly, or custom schedules based on your application's requirements.
 
-### Running the Scheduler
+### Running the scheduler
 
 To run the scheduler, you still need to add the following Cron entry to your server:
 
@@ -321,15 +319,15 @@ To run the scheduler, you still need to add the following Cron entry to your ser
 
 This Cron will call the Laravel command scheduler every minute. Laravel then evaluates your scheduled tasks and runs the tasks that are due.
 
-This approach provides a way to automate recurring tasks in your application, such as sending daily reports, cleaning up temporary files, or updating data from external sources, all without having to manage multiple Cron jobs.
+With this single Cron entry, you can automate recurring tasks such as sending daily reports, cleaning up temporary files, or pulling data from external sources, without managing a separate Cron job for each.
 
-## Additional Queue Processing Techniques
+## Additional queue processing techniques
 
-Laravel offers several handy techniques for working with queues, allowing you to build more complex and efficient job processing systems. Let's explore some of these techniques in detail, focusing on how they work with Postgres as our queue driver.
+The following Laravel queue features also work with Postgres as the queue driver.
 
-### Job Chaining
+### Job chaining
 
-Job chaining is a Laravel feature that lets you specify a sequence of jobs that should be run in order. This is particularly useful when you have a series of related tasks that need to be executed sequentially.
+Job chaining lets you specify a sequence of jobs that run in order, one after another.
 
 Here's how job chaining works:
 
@@ -351,7 +349,7 @@ In this example:
 2. Once `GenerateDatabaseReport` completes successfully, `VerifyDatabaseReport` is automatically dispatched.
 3. After `VerifyDatabaseReport` finishes, `GeneratedDatabaseReport` is dispatched.
 
-If any job in the chain fails, the subsequent jobs won't be executed. This ensures that your entire process maintains integrity.
+If any job in the chain fails, the subsequent jobs don't run.
 
 You can also add delays between chained jobs:
 
@@ -365,7 +363,7 @@ GenerateDatabaseReport::dispatch(1)
 
 This will delay the `GeneratedDatabaseReport` job by 10 minutes after `VerifyDatabaseReport` completes.
 
-### Job Batching
+### Job batching
 
 Job batching allows you to group related jobs together, monitor their execution as a single unit, and perform actions when the entire batch completes. This is useful for processing large datasets or performing complex, multi-step operations.
 
@@ -420,9 +418,9 @@ $batch = Bus::findBatch($batchId);
 $progress = $batch->progress(); // Returns a percentage
 ```
 
-### Rate Limiting
+### Rate limiting
 
-Rate limiting is very helpful for preventing your application from overwhelming external services or your own database. When using Postgres as your queue driver, you can implement rate limiting at the application level. Here's an example of how you might do this:
+Rate limiting keeps your application from overwhelming external services or your own database. When using Postgres as your queue driver, you can implement rate limiting at the application level. Here's an example of how you might do this:
 
 ```php
 use Illuminate\Support\Facades\DB;
@@ -467,7 +465,7 @@ $key = "process-report:{$this->reportId}";
 
 This allows you to have separate rate limits for different reports or different types of jobs.
 
-## Monitoring and Managing Queues
+## Monitoring and managing queues
 
 Laravel provides several Artisan commands for monitoring and managing your queues:
 
@@ -477,13 +475,13 @@ Laravel provides several Artisan commands for monitoring and managing your queue
 - `queue:failed`: List all of the failed jobs
 - `queue:flush`: Delete all of the failed jobs
 
-## Implementing Supervisor for Queue Workers
+## Implementing Supervisor for queue workers
 
-Running queue workers using the `queue:work` command works well for development environments, but it's not suitable for production environments.
+Running `queue:work` by hand works for development. In production, use a process monitor such as [Supervisor](http://supervisord.org/) to restart your queue workers if they exit.
 
-For production environments, use [Supervisor](http://supervisord.org/) to ensure your queue workers are always running.
+A `database` queue worker polls the `jobs` table every few seconds (`--sleep=3` below), so the Neon compute stays active while workers run and won't [scale to zero](/docs/introduction/scale-to-zero).
 
-### Installing and Configuring Supervisor
+### Installing and configuring Supervisor
 
 Install Supervisor:
 
@@ -522,9 +520,9 @@ sudo supervisorctl start laravel-worker:*
 
 ## Conclusion
 
-In this guide, we've explored how to implement queue workers, job processing, and scheduled tasks in Laravel using Postgres as the queue driver. We've covered creating and dispatching jobs, running queue workers, handling job failures and retries, implementing scheduled jobs, and setting up Supervisor for production environments.
+You now have a Laravel application that queues jobs in Lakebase Postgres, processes them with workers managed by Supervisor, retries failures, and dispatches recurring jobs from the scheduler. Next, try job batching or rate limiting with your own workloads.
 
-## Additional Resources
+## Additional resources
 
 - [Laravel Queues Documentation](https://laravel.com/docs/11.x/queues)
 - [Laravel Task Scheduling](https://laravel.com/docs/11.x/scheduling)

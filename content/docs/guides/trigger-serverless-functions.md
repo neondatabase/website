@@ -10,7 +10,7 @@ summary: >-
   installing the Inngest client, writing TypeScript Inngest functions, and
   syncing with the Inngest platform across all three serverless runtimes.
 enableTableOfContents: true
-updatedOn: '2026-08-18T10:29:02.410Z'
+updatedOn: '2026-09-16T20:12:32.981Z'
 ---
 
 Combining your serverless Neon database with [Inngest](https://www.inngest.com/?utm_source=neon&utm_medium=trigger-serverless-functions-guide) enables you to **trigger serverless functions** running on Vercel, AWS, and Cloudflare Worker **based on database changes.**
@@ -65,7 +65,7 @@ VALUES
 
 The Inngest Integration relies on Neon’s Logical Replication feature to get notified upon database changes.
 
-Navigate to your Neon Project using the Neon Console and open the **Settings** > **Logical Replication** page. From here, follow the instructions to enable Logical Replication:
+Navigate to your Neon Project using the Neon Console and open the **Settings** > **Postgres** page. From here, follow the instructions to enable Logical Replication:
 
 ![Neon dashboard settings with option to enable logical replication](/docs/guides/neon-console-settings-logical-replication.png)
 
@@ -81,9 +81,9 @@ The Inngest Integration requires Postgres admin credentials to complete its setu
 
 ![Neon authorization step inside the Inngest integrations page](/docs/guides/inngest-integration-neon-authorize-step.png)
 
-You can find the connection string for your database by clicking the **Connect** button on your **Project Dashboard**.
+You can find the connection string for your database by clicking the **Connect** button in the Console nav.
 
-![Connection modal](/docs/connect/connection_details.png)
+![Connection modal](/docs/connect/connect_to_branch_modal.png)
 
 ## Triggering Serverless functions from database changes
 

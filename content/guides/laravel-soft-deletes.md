@@ -1,43 +1,41 @@
 ---
-title: Implementing Soft Deletes in Laravel and Postgres
-subtitle: Learn how to implement and optimize soft deletes in Laravel for improved data management and integrity.
+title: Implementing soft deletes in Laravel and Postgres
+subtitle: Implement, query, test, and clean up soft-deleted records in Laravel with Postgres
 author: bobbyiliev
 enableTableOfContents: true
 createdAt: '2024-07-20T00:00:00.000Z'
-updatedOn: '2026-07-31T19:05:29.503Z'
+updatedOn: '2026-09-24T17:56:34.189Z'
 ---
 
-Laravel is a PHP framework that offers a lot of features to simplify database operations. One such feature is soft deletes, which allows you to "delete" records without actually removing them from your database.
+Laravel's soft deletes let you "delete" records without removing them from your database. This helps when you need to maintain data integrity, implement data recovery features, or comply with data retention policies.
 
-This approach is particularly useful when you need to maintain data integrity, implement data recovery features, or comply with data retention policies.
-
-In this guide, we'll explore Laravel's soft delete functionality, covering everything to get you started, from setting up soft deletes to performance considerations.
+In this guide, we'll cover Laravel's soft delete functionality, from setup to performance considerations.
 
 ## Prerequisites
 
-Before we dive in, ensure you have:
+Before you start, make sure you have:
 
 - PHP 8.1 or higher installed
 - Laravel 10.x or 11.x set up
-- A [Neon](https://neon.tech) account for Postgres database hosting
+- A [Neon](https://console.neon.tech/signup) account, with your Laravel `.env` pointing at your database on Neon
 - Basic understanding of Laravel and Eloquent ORM
 
-## Understanding Soft Deletes
+## How soft deletes work
 
-When enabling soft deletes, you essentially add a `deleted_at` timestamp to your database records. When a record is "deleted", Laravel sets this timestamp instead of removing the record entirely. This allows you to:
+When you enable soft deletes, you add a `deleted_at` timestamp to your database records. When a record is "deleted", Laravel sets this timestamp instead of removing the record entirely. This allows you to:
 
 1. Recover accidentally deleted data.
 2. Maintain referential integrity.
 3. Implement data archiving strategies.
 4. Comply with data retention policies.
 
-Let's explore how to implement soft deletes in Laravel along with Lakebase Postgres.
+Here's how to implement soft deletes in Laravel with Lakebase Postgres.
 
-## Setting up the Project
+## Setting up the project
 
-Before we go further into implementing soft deletes, let's set up a new Laravel project. If you already have a Laravel project, you can skip this step.
+Start with a new Laravel project. If you already have one, skip this step.
 
-### Creating a New Laravel Project
+### Creating a new Laravel project
 
 Open your terminal and run the following command to create a new Laravel project:
 
@@ -48,13 +46,13 @@ cd soft-deletes
 
 This will create a new Laravel project in a directory named `soft-deletes`. Navigate to the project directory to continue with the setup.
 
-## Implementing Soft Deletes
+## Implementing soft deletes
 
 Implementing soft deletes in Laravel involves two main steps: preparing the database and updating the model.
 
 For this guide, we'll use a `posts` table as an example. You can apply the same steps to any other table in your application.
 
-### Step 1: Creating the Model and Migration
+### Step 1: Creating the model and migration
 
 If you don't already have a model for the table you want to apply soft deletes to, you'll need to create one. Let's start by creating a `Post` model along with a migration file. Laravel provides an Artisan command that can do both in one go:
 
@@ -69,7 +67,7 @@ This command creates two files:
 
 The `-m` flag tells Artisan to create a migration file along with the model.
 
-### Step 2: Updating the Migration
+### Step 2: Updating the migration
 
 Now, let's update the migration file to include the `deleted_at` column required for soft deletes. Open the newly created migration file in the `database/migrations` directory and update the `up` method:
 
@@ -88,7 +86,7 @@ public function up(): void
 
 The `softDeletes()` method adds a nullable `deleted_at` timestamp column to your table which Laravel uses for soft deletes.
 
-### Step 3: Running the Migration
+### Step 3: Running the migration
 
 With our migration file prepared, we can now run it to create the `posts` table in our database:
 
@@ -108,7 +106,7 @@ SELECT * FROM posts;
 +----+-------+---------+------------+------------+------------+
 ```
 
-### Step 4: Updating the Model
+### Step 4: Updating the model
 
 Finally, we need to update our `Post` model to use the `SoftDeletes` trait. Open `app/Models/Post.php` and update it as follows:
 
@@ -132,7 +130,7 @@ By adding the `use SoftDeletes;` line, we're telling Laravel that this model sho
 
 With these steps completed, your `Post` model is now set up to use soft deletes. When you call `$post->delete()`, Laravel will set the `deleted_at` timestamp instead of actually removing the record from the database.
 
-### Adding Soft Deletes to an Existing Table
+### Adding soft deletes to an existing table
 
 If you're adding soft deletes to an existing table, you'll need to create a separate migration to add the `deleted_at` column. You can do this with the command:
 
@@ -153,13 +151,13 @@ public function up(): void
 
 After creating the migration, run `php artisan migrate` to apply the changes to your database.
 
-## Using Soft Deletes
+## Using soft deletes
 
-Now that we've set up soft deletes in our Laravel application, let's explore how to use them in practice. We'll cover basic operations like deleting, restoring, and permanently deleting records, as well as querying with soft deletes.
+With soft deletes set up, this section covers basic operations like deleting, restoring, and permanently deleting records, as well as querying with soft deletes.
 
-### Basic Operations
+### Basic operations
 
-#### Deleting a Record
+#### Deleting a record
 
 To soft-delete a record, you can use the `delete()` method just as you would for a regular delete operation:
 
@@ -175,7 +173,7 @@ When this code runs, several things happen behind the scenes:
 3. The `deleted_at` column is set to the current timestamp.
 4. The model's `deleted_at` attribute is updated in memory.
 
-This approach allows you to maintain the record in the database while marking it as deleted. It's beneficial when you need to keep records for auditing purposes or when you want to implement a "trash" feature in your application.
+The record stays in the database, marked as deleted. This helps when you need to keep records for auditing purposes or when you want to implement a "trash" feature in your application.
 
 If you did not have soft deletes enabled, the `$post->delete()` method would generate the following SQL query:
 
@@ -199,7 +197,7 @@ SELECT * FROM posts WHERE id = 1 AND deleted_at IS NULL;
 
 So, you won't see the soft-deleted record in your query results unless you explicitly ask for it.
 
-#### Restoring a Soft-Deleted Record
+#### Restoring a soft-deleted record
 
 To bring back a soft-deleted record, you use the `restore()` method on the model:
 
@@ -216,7 +214,7 @@ Here's what happens when you run this code:
 
 This process restores the record, making it visible in normal queries again.
 
-#### Permanently Deleting a Record
+#### Permanently deleting a record
 
 If you need to remove a record from the database permanently, use `forceDelete()`:
 
@@ -233,11 +231,11 @@ This method:
 
 Use `forceDelete()` with caution, as it permanently removes data and can't be undone, unless you have a backup strategy in place.
 
-### Querying with Soft Deletes
+### Querying with soft deletes
 
 Soft deletes affect how you query your database. Laravel provides methods to control whether soft-deleted records are included in query results or not.
 
-#### Retrieving Only Non-Deleted Records
+#### Retrieving only non-deleted records
 
 By default, Laravel excludes soft-deleted records from query results:
 
@@ -251,9 +249,9 @@ As we mentioned earlier, Laravel automatically adds a where clause to your query
 SELECT * FROM posts WHERE deleted_at IS NULL
 ```
 
-This ensures that your queries don't return "deleted" records unless you explicitly ask for them.
+Your queries don't return "deleted" records unless you explicitly ask for them.
 
-#### Including Soft-Deleted Records
+#### Including soft-deleted records
 
 To include soft-deleted records in your query, use `withTrashed()`:
 
@@ -267,9 +265,9 @@ This method removes the `WHERE deleted_at IS NULL` clause from the query, allowi
 SELECT * FROM posts;
 ```
 
-So using `withTrashed()` is useful when you need to access soft-deleted records for auditing or recovery purposes.
+Use `withTrashed()` when you need to access soft-deleted records for auditing or recovery purposes.
 
-#### Retrieving Only Soft-Deleted Records
+#### Retrieving only soft-deleted records
 
 In some cases, you may need to retrieve only soft-deleted records. Laravel provides the `onlyTrashed()` method for this purpose:
 
@@ -279,9 +277,9 @@ $deletedPosts = Post::onlyTrashed()->get();
 
 This method adds a `WHERE deleted_at IS NOT NULL` clause to your query, returning only the "deleted" records.
 
-### Using the `DB` Facade
+### Using the `DB` facade
 
-While Eloquent provides a high-level API for working with soft deletes, sometimes you might need to use raw SQL queries or the Query Builder. The `DB` facade in Laravel allows you to work with soft deletes at a lower level, giving you more control over your database operations.
+While Eloquent provides a high-level API for working with soft deletes, sometimes you might need to use raw SQL queries or the Query Builder. The `DB` facade in Laravel lets you work with soft deletes at a lower level.
 
 Here are some examples with explanations:
 
@@ -331,13 +329,13 @@ This operation permanently removes the record from the database, regardless of i
 
 The `DB` facade bypasses Eloquent's model events and global scopes, so you'll need to handle any related logic manually if needed.
 
-## General Best Practices
+## Best practices
 
-When working with soft deletes in Laravel, there are several best practices to consider for optimal performance and data integrity. Here are some recommendations:
+These practices help with performance and data integrity when you use soft deletes in Laravel:
 
-### 1. Regular Cleanup of Old Soft-Deleted Records
+### 1. Clean up old soft-deleted records
 
-One of the main downsides of soft deletes is that records remain in your database even after they're "deleted". This can lead to unnecessary data bloat over time.
+One of the main downsides of soft deletes is that records remain in your database even after they're "deleted". Over time, this adds up.
 
 To prevent your database from growing too large, consider implementing a cleanup routine:
 
@@ -347,7 +345,7 @@ Post::onlyTrashed()
     ->forceDelete();
 ```
 
-This code permanently removes records that have been soft-deleted for more than two years. Here's why this is important:
+This code permanently removes records that have been soft-deleted for more than two years. Cleanup matters because:
 
 - Soft-deleted records still occupy space in your database. Regular cleanup prevents unnecessary database growth.
 - Fewer records generally mean faster queries, even when using `withTrashed()`.
@@ -355,16 +353,16 @@ This code permanently removes records that have been soft-deleted for more than 
 
 You can schedule this command to run regularly using Laravel's task scheduler so that old soft-deleted records are cleaned up automatically.
 
-### 2. Use Soft Deletes Carefully
+### 2. Use soft deletes selectively
 
-While soft deletes are useful, they're not always necessary for every model. You should consider the following factors when deciding whether to use soft deletes:
+Not every model needs soft deletes. Consider these factors:
 
 - Use soft deletes for important data that might need to be restored.
 - If a model has many important relationships, soft deletes can help maintain data integrity.
 - For tables with a very high volume of records, consider the potential performance impact of soft deletes.
 - For data privacy or compliance reasons, permanent deletion might be more appropriate.
 
-### 3. Implement Access Controls
+### 3. Implement access controls
 
 If your application allows users to access soft-deleted records, ensure that unauthorized users can't access them:
 
@@ -380,9 +378,9 @@ public function show(Post $post)
 
 This prevents unauthorized access to soft-deleted records, which could contain sensitive or outdated information. If you need to allow certain users to access soft-deleted records, implement appropriate access controls based on user roles or permissions.
 
-### 4. Be Cautious with Indexing
+### 4. Be cautious with indexing
 
-Regarding indexing the `deleted_at` column, there's debate in the community. Some argue against it because:
+Indexing the `deleted_at` column is a tradeoff:
 
 - Most queries filter for non-deleted records (`WHERE deleted_at IS NULL`), which may not benefit from an index on `deleted_at`.
 - An index on `deleted_at` could potentially slow down write operations.
@@ -394,15 +392,13 @@ Instead, consider your specific use case:
 
 Always measure the performance impact in your specific scenario before deciding on indexing strategy.
 
-For more information about indexes in general, refer to Neon's documentation on [indexes](/docs/postgresql/index-types).
+For more about indexes, see [Postgres index types](/docs/postgresql/index-types).
 
-## Testing Soft Deletes
+## Testing soft deletes
 
-As with anything, testing is important, that way you can make sure your soft delete implementation works correctly. Here's an example test case:
+Laravel provides assertions for testing soft deletes. Here are some common tests to include in your test suite. The examples use `Post::factory()`, so add the `HasFactory` trait to your `Post` model and create a `PostFactory`.
 
-Laravel provides several tools and assertions specifically for testing soft deletes. Let's go over some common tests you might want to include in your test suite.
-
-### Testing Soft Delete Functionality
+### Testing soft delete
 
 Let's start with a test to ensure a post is correctly soft deleted:
 
@@ -430,7 +426,7 @@ This test:
 4. Checks that the post still exists in the database.
 5. Verifies that there's no record with a null `deleted_at` for this post.
 
-### Testing Restore Functionality
+### Testing restore
 
 Next, let's test the restore functionality:
 
@@ -457,9 +453,9 @@ This test:
 3. Checks that the post exists in the database with a null `deleted_at`.
 4. Uses Laravel's `assertNotSoftDeleted` to confirm the post is no longer soft deleted.
 
-### Testing Query Scopes
+### Testing query scopes
 
-It's also important to test that your queries are correctly scoping soft deleted records:
+Test that your queries scope soft-deleted records correctly:
 
 ```php
 public function it_excludes_soft_deleted_posts_from_regular_queries()
@@ -492,7 +488,7 @@ These two tests ensure that:
 1. Regular queries exclude soft deleted records and only return active posts.
 2. Queries using `withTrashed()` include soft deleted records.
 
-### Testing Force Delete
+### Testing force delete
 
 Finally, let's test the force delete functionality:
 
@@ -512,14 +508,12 @@ This test verifies that force deleting a post removes it entirely from the datab
 
 ## Conclusion
 
-Laravel's soft delete feature provides a way to manage data deletion without losing valuable information. By using soft deletes, you can improve your application's data integrity and provide features like data recovery or undo functionality to your users.
+You set up soft deletes on a Laravel model, queried and restored soft-deleted records, and wrote tests for each operation.
 
-Consider the performance implications of soft deletes, especially when working with large datasets. Use Lakebase Postgres's capabilities, such as [indexing](/docs/postgresql/index-types) and [table partitioning](https://www.postgresql.org/docs/current/ddl-partitioning.html), to maintain high performance as your application scales.
+For large tables, use Postgres [indexing](/docs/postgresql/index-types) and [table partitioning](https://www.postgresql.org/docs/current/ddl-partitioning.html) to keep queries fast, and schedule a cleanup job that permanently deletes old soft-deleted records to match your data retention requirements.
 
-When implementing soft deletes, always think about the lifecycle of your data. Plan on implementing policies for permanent deletion of old soft-deleted records to manage database growth optimally and comply with data retention regulations.
+## Additional resources
 
-## Additional Resources
-
-- [Laravel Documentation on Soft Deletes](https://laravel.com/docs/eloquent#soft-deleting)
-- [Neon Documentation](/docs)
-- [Laravel Eloquent Performance Tips](https://laravel.com/docs/eloquent-relationships#eager-loading)
+- [Laravel documentation on soft deletes](https://laravel.com/docs/eloquent#soft-deleting)
+- [Neon documentation](/docs)
+- [Laravel eager loading](https://laravel.com/docs/eloquent-relationships#eager-loading)

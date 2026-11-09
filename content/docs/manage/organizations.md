@@ -10,6 +10,8 @@ summary: >-
   manage protected branches regardless of role, and per-project permissions that
   can raise a member's access but not restrict it.
 enableTableOfContents: true
+redirectFrom:
+  - /docs/manage/orgs
 updatedOn: '2026-08-04T15:25:12.468Z'
 ---
 
@@ -18,8 +20,6 @@ In Neon, all projects live within organizations. When you sign up, you automatic
 ## About Neon Organizations
 
 In the Neon Console, the Organizations page gives you a centralized view of all your projects. From there, you can create new projects, manage existing ones, and oversee your members and billing information.
-
-![organizations projects tab](/docs/manage/org_projects.png)
 
 ## User roles and permissions
 
@@ -39,6 +39,10 @@ You can also [auto-provision members by email domain](/docs/manage/orgs-add-memb
 ## Creating a new organization
 
 You can create additional organizations at any time. [See how to create an organization.](/docs/manage/orgs-manage#create-an-organization)
+
+## Switching between organizations
+
+If you belong to more than one organization, use the org switcher in the profile menu (click your name in the top-right corner of the Console) to change the active organization. [See how to switch organizations.](/docs/manage/orgs-manage#switch-organizations)
 
 ## Limitations
 

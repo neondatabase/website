@@ -10,6 +10,7 @@ summary: >-
 redirectFrom:
   - /docs/introduction/spending-limit
 enableTableOfContents: true
+updatedOn: '2026-11-05T15:33:57.188Z'
 ---
 
 <InfoBlock>
@@ -17,7 +18,7 @@ enableTableOfContents: true
 <p>What spending notifications do</p>
 <p>Who can set them up</p>
 <p>How to enable, edit, and disable notifications in the Console</p>
-<p>How to manage notification thresholds with the Neon Management API</p>
+<p>How to manage notification thresholds with the Neon CLI or Management API</p>
 <p>What happens when the threshold is reached</p>
 </DocsList>
 
@@ -33,7 +34,7 @@ enableTableOfContents: true
 
 Spending notifications help you keep track of your organization's Neon spending. When charges approach the threshold you set, organization admins receive email alerts so they can take action before the bill grows further.
 
-Spending notifications are available on the Launch and Scale plans. You can manage them from the **Billing** page in the Neon Console or with the [Neon Management API](#manage-spending-notifications-with-the-neon-api).
+Spending notifications are available on the Launch and Scale plans. You can manage them from the **Billing** page in the Neon Console, with the [Neon CLI](#manage-spending-notifications-with-the-neon-cli), or with the [Neon Management API](#manage-spending-notifications-with-the-neon-api).
 
 <Admonition type="comingSoon" title="Automatic project suspension">
 Currently, email alerts are the only available action. Automatic project suspension is coming soon: when the threshold is reached, projects' computes will pause until you raise the threshold or the next monthly billing period begins.
@@ -55,7 +56,7 @@ Neon checks your spending every 15 minutes. Once spending crosses a threshold, a
 ## Enable spending notifications
 
 1. Navigate to the [Neon Console](https://console.neon.tech).
-1. Select your organization from the breadcrumb menu at the top-left.
+1. Select your organization from the profile menu in the top-right of the console.
 1. Select **Billing** from the menu.
 1. On the **Spending Notifications** card, select **Enable**.
 1. In the **Enable Spending Notifications** dialog, enter a whole-dollar amount.
@@ -93,6 +94,16 @@ Spending notifications only send alerts; they don't stop usage. If you need Neon
 <Admonition type="note">
 A spending notification threshold applies to the organization's total monthly Neon charges across all projects in that organization. If you belong to multiple organizations, set a separate threshold for each.
 </Admonition>
+
+## Manage spending notifications with the Neon CLI
+
+The [`neon orgs spending-limit`](/docs/cli/orgs#spending-limit) commands read, set, and remove the threshold in US dollars. The CLI converts the amount to cents for you:
+
+```bash
+neon orgs spending-limit get --org-id <org_id>
+neon orgs spending-limit set 500 --org-id <org_id>
+neon orgs spending-limit delete --org-id <org_id>
+```
 
 ## Manage spending notifications with the Neon API
 

@@ -12,7 +12,7 @@ summary: >-
   python-dotenv, and avoiding hanging processes by calling
   Tortoise.close_connections() or using run_async().
 enableTableOfContents: true
-updatedOn: '2026-08-07T18:39:13.799Z'
+updatedOn: '2026-09-16T19:45:35.340Z'
 ---
 
 <CopyPrompt src="/prompts/tortoise-orm-prompt.md" 
@@ -71,7 +71,7 @@ pip install "tortoise-orm[asyncpg]" python-dotenv
 
 ## Get your connection string
 
-Find your database connection string by clicking the **Connect** button on your **Project Dashboard** to open the **Connect to your database** modal. Check the **Parameters only** option, which provides the individual components of the connection string that you will use to construct a connection URL.
+Find your database connection string by clicking the **Connect** button in the Console nav to open the **Connect to your branch** modal. Check the **Parameters only** option, which provides the individual components of the connection string that you will use to construct a connection URL.
 ![Connection details modal](/docs/connect/connection_details_parameters_only.png)
 
 Create a `.env` file in your project's root directory and add a `DATABASE_URL` variable with the following format:
@@ -81,6 +81,8 @@ DATABASE_URL="postgres://[PGUSER]:[PGPASSWORD]@[PGHOST]/[PGDATABASE]?ssl=true"
 ```
 
 > Replace the placeholders `[PGUSER]`, `[PGPASSWORD]`, `[PGHOST]`, and `[PGDATABASE]` with the corresponding values from your Neon connection details. Make sure to include `ssl=true` to ensure a secure connection.
+
+If you copy a full connection string from the Console instead, remove `-pooler` from the host and replace `sslmode=require&channel_binding=require` with `ssl=true`. Tortoise doesn't accept the `sslmode` parameter.
 
 <Admonition type="important">
 Use a direct (non-pooled) connection string when generating schemas or running migrations (for example, with Aerich). Neon's pooled connection uses PgBouncer in transaction mode, which doesn't support all session-level operations that schema changes rely on, so running them over a pooled connection can lead to errors. Make sure the hostname does not include the `-pooler` suffix. See [Connection pooling](/docs/connect/connection-pooling).
@@ -207,8 +209,8 @@ The `in_transaction()` block ensures an all-or-nothing execution. Because the si
 
 - Do not install packages globally. Always use a virtual environment and run commands with `venv/bin/pip` and `venv/bin/python` (or the activated equivalent).
 - Install Tortoise ORM with the `asyncpg` extra: `pip install "tortoise-orm[asyncpg]"`.
-- The connection string protocol must be `postgres://` for Tortoise to utilize the `asyncpg` driver automatically.
-- Always include `ssl=true` in your connection string to ensure a secure connection to Neon.
+- Tortoise picks the `asyncpg` driver from the `postgres://` or `postgresql://` scheme. Use `postgres://` as shown in this guide.
+- Always include `ssl=true` in your connection string to ensure a secure connection to Neon. Don't use `sslmode=require`. The asyncpg backend in Tortoise rejects it with a `TypeError`.
 - Always ensure `await Tortoise.close_connections()` is called during application teardown or use the `tortoise.run_async()` wrapper to prevent hanging python processes.
 - Do not hardcode credentials in initialization scripts. Use environment variables via `python-dotenv` and `os.getenv()`.
 

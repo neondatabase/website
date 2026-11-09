@@ -125,4 +125,4 @@ Connecting to a branch via a read replica is equivalent to doing it via the main
 
 It’s possible to scale Postgres performance horizontally without overpaying. Read replicas are a good idea, they’re just hard to implement well without a serverless architecture – and that’s where Neon has an advantage.
 
-We’re working hard to build read replicas in Neon in a way that are truly usable for performance scaling, as an alternative to provisioning very large CPU/memory in primary instances or implementing very complex table shardings. If you want to try them out, replicas are included in the Neon Launch plan ($19 / month) but [you can also try them for free by requesting a free trial.](https://neon.tech/scale-trial)
+We’re working hard to build read replicas in Neon in a way that are truly usable for performance scaling, as an alternative to provisioning very large CPU/memory in primary instances or implementing very complex table shardings. If you want to try them out, [read replicas](/docs/introduction/read-replicas) are available on all Neon plans, including the Free plan.

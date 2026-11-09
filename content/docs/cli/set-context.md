@@ -11,15 +11,15 @@ summary: >-
   tree to the project root, supports multiple independent named files, and
   persists until reset with `neon set-context` or deleted manually.
 enableTableOfContents: true
-updatedOn: '2026-07-01T13:41:48.668Z'
+updatedOn: '2026-10-09T15:17:33.920Z'
 redirectFrom:
   - /docs/reference/cli-set-context
 ---
 
 The `set-context` command sets a background context for your CLI sessions, so you don't have to specify the project ID in every command. The context is saved to a default `.neon` file in the current directory, or to a [named context file](#using-a-named-context-file) of your choice, and stays in place until you reset it or remove the file.
 
-<Admonition type="tip" title="Prefer link or checkout">
-For most workflows, use [`neon link`](/docs/cli/link) to bind a directory to a project or [`neon checkout`](/docs/cli/checkout) to switch branches. Use `set-context` when you need to set context values directly (for example, in scripts).
+<Admonition type="note" title="Deprecated">
+`set-context` is deprecated in favor of [`neon link`](/docs/cli/link), which writes the same `.neon` context file. It still works but prints a deprecation warning when you run it, and may be removed in a future release. Use `neon link` to set project context; it verifies your inputs and infers your organization. For a write-without-checks behavior like `set-context` (for example, in scripts), use `neon link --no-checks` with `--org-id`, `--project-id`, and `--branch`. To switch branches, use [`neon checkout`](/docs/cli/checkout).
 </Admonition>
 
 <Admonition type="tip" title="How the CLI finds your `.neon` file">
@@ -55,13 +55,9 @@ neon branches list
 ```
 
 ```text filename="Output"
-┌──────────────────────────┬─────────────┬─────────┬──────────────────────┬──────────────────────┐
-│ Id                       │ Name        │ Default │ Created At           │ Updated At           │
-├──────────────────────────┼─────────────┼─────────┼──────────────────────┼──────────────────────┤
-│ br-raspy-meadow-26349337 │ development │ false   │ 2023-11-28T19:19:11Z │ 2023-12-01T00:18:21Z │
-├──────────────────────────┼─────────────┼─────────┼──────────────────────┼──────────────────────┤
-│ br-curly-bar-82389180    │ main        │ true    │ 2023-10-23T12:49:41Z │ 2023-12-01T00:18:21Z │
-└──────────────────────────┴─────────────┴─────────┴──────────────────────┴──────────────────────┘
+Name            ID                      Current State  Expires At  Created At
+development     br-raspy-meadow-123456  ready          never       2026-11-28T19:19:11Z
+[default] main  br-curly-bar-123456     ready          never       2026-10-23T12:49:41Z
 ```
 
 ## Using a named context file (#using-a-named-context-file)
@@ -79,15 +75,10 @@ neon branches list --context-file Documents/MyContext
 ```
 
 ```text filename="Output"
-┌─────────────────────────────┬─────────────┬─────────┬──────────────────────┬──────────────────────┐
-│ Id                          │ Name        │ Default │ Created At           │ Updated At           │
-├─────────────────────────────┼─────────────┼─────────┼──────────────────────┼──────────────────────┤
-│ br-soft-base-86343042       │ development │ false   │ 2023-11-21T18:41:47Z │ 2023-12-01T00:00:14Z │
-├─────────────────────────────┼─────────────┼─────────┼──────────────────────┼──────────────────────┤
-│ br-young-bush-89857627      │ main        │ true    │ 2023-11-21T18:00:10Z │ 2023-12-01T03:33:53Z │
-├─────────────────────────────┼─────────────┼─────────┼──────────────────────┼──────────────────────┤
-│ br-billowing-union-41102466 │ staging     │ false   │ 2023-11-21T18:44:22Z │ 2023-12-01T08:32:40Z │
-└─────────────────────────────┴─────────────┴─────────┴──────────────────────┴──────────────────────┘
+Name            ID                         Current State  Expires At  Created At
+development     br-soft-base-123456        ready          never       2026-11-21T18:41:47Z
+[default] main  br-young-bush-123456       ready          never       2026-11-21T18:00:10Z
+staging         br-billowing-union-123456  ready          never       2026-11-21T18:44:22Z
 ```
 
 <Admonition type="note">

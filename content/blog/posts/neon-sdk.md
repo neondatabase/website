@@ -182,6 +182,6 @@ npx skills add neondatabase/neon-for-agent-platforms
 
 And if you haven't already, take a look at the [Neon Agent Plan](https://neon.com/programs/agents), with dedicated pricing for your agentic or cloud platform building on Neon.
 
-Have feedback or run into something missing? Drop into the [Neon Discord](https://discord.gg/HjupxCjXXp) and let us know.
+Have feedback or run into something missing? Drop into the [Neon Discord](https://neon.com/discord) and let us know.
 
 Happy coding!

@@ -243,7 +243,7 @@ Scale compute up and down based on demand.
 
 ### FeatureBetaProps (with prop)
 
-<FeatureBetaProps feature_name="Autoscaling" />
+<FeatureBetaProps feature_name="Example feature" />
 
 ### EarlyAccessProps (with prop)
 
@@ -261,10 +261,6 @@ Scale compute up and down based on demand.
 
 <LinkAPIKey />
 
-### LRNotice
-
-<LRNotice />
-
 ### PrivatePreview
 
 <PrivatePreview />
@@ -276,10 +272,6 @@ Scale compute up and down based on demand.
 ### PublicPreview
 
 <PublicPreview />
-
-### LRBeta
-
-<LRBeta />
 
 ### MigrationAssistant
 

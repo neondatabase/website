@@ -31,9 +31,9 @@ When this prompt is triggered, automatically configure the open Nuxt.js project 
 
 ### 1. Install Dependencies
 
-1.  **Prompt the user to select a PostgreSQL driver.** The best choice depends on where they deploy:
+1.  **Prompt the user to select a Postgres driver.** The best choice depends on where they deploy:
 
-    -   **`@neondatabase/serverless`:** Connects over HTTP/WebSocket. Best for serverless and edge platforms without their own pooling (Netlify, Deno Deploy, Cloudflare Workers).
+    -   **`@neondatabase/serverless`:** Connects over HTTP/WebSocket. Best for serverless and edge platforms without their own pooling (Netlify, Cloudflare Workers).
     -   **`postgres` (postgres.js) or `pg` (node-postgres):** Standard TCP drivers. Best for long-lived servers (Railway, Render, a VPS, Docker), and for Vercel/Cloudflare with their platform pooling.
 
     Ask the user to choose one and do not proceed until they do. For a full breakdown, point them to https://neon.com/docs/connect/choose-connection.
@@ -58,8 +58,8 @@ When this prompt is triggered, automatically configure the open Nuxt.js project 
 1.  Check for the presence of a `.env` file at the root of the project. If it doesn't exist, create one.
 2.  Add the following `DATABASE_URL` parameter to the `.env` file and **prompt the user to replace the placeholder value** with their complete connection string from Neon.
 
-    ```dotenv title=".env"
-    DATABASE_URL="postgresql://user:password@endpoint.neon.tech/neondb?sslmode=require&channel_binding=require"
+    ```dotenv filename=".env"
+    DATABASE_URL="postgresql://[user]:[password]@[neon_hostname]/[dbname]?sslmode=require&channel_binding=require"
     ```
 
 3.  Direct the user to find this value in the **Neon Console → Project → Connect**, or by running `neon env pull --file .env` from a linked project directory. (`neon env pull` defaults to `.env.local`, but `nuxt dev` only loads `.env`, so pass `--file .env`.)
@@ -77,7 +77,7 @@ To manage the database connection according to Nuxt conventions, create a server
 
     #### Option A: Using `@neondatabase/serverless`
 
-    ```typescript title="server/utils/db.ts"
+    ```typescript filename="server/utils/db.ts"
     import { neon } from '@neondatabase/serverless';
 
     export const sql = neon(process.env.DATABASE_URL!);
@@ -85,7 +85,7 @@ To manage the database connection according to Nuxt conventions, create a server
 
     #### Option B: Using `postgres` (postgres.js)
 
-    ```typescript title="server/utils/db.ts"
+    ```typescript filename="server/utils/db.ts"
     import postgres from 'postgres';
 
     export const sql = postgres(process.env.DATABASE_URL!);
@@ -93,7 +93,7 @@ To manage the database connection according to Nuxt conventions, create a server
 
     #### Option C: Using `pg` (node-postgres)
 
-    ```typescript title="server/utils/db.ts"
+    ```typescript filename="server/utils/db.ts"
     import { Pool } from 'pg';
 
     export const pool = new Pool({
@@ -114,7 +114,7 @@ Implement an API route to fetch data and a page to display it.
 
     ##### Option A & B: For `@neondatabase/serverless` or `postgres`
 
-    ```typescript title="server/api/version.get.ts"
+    ```typescript filename="server/api/version.get.ts"
     import { sql } from '../utils/db';
 
     export default defineEventHandler(async () => {
@@ -125,7 +125,7 @@ Implement an API route to fetch data and a page to display it.
 
     ##### Option C: For `pg` (node-postgres)
 
-    ```typescript title="server/api/version.get.ts"
+    ```typescript filename="server/api/version.get.ts"
     import { pool } from '../utils/db';
 
     export default defineEventHandler(async () => {
@@ -144,7 +144,7 @@ Implement an API route to fetch data and a page to display it.
 Modify the main page to fetch data from the new API route.
 **Replace the contents of `app/app.vue`** with the following code. This component is driver-agnostic.
 
-```vue title="app/app.vue"
+```vue filename="app/app.vue"
 <script setup lang="ts">
 const { data, error } = await useFetch('/api/version');
 </script>

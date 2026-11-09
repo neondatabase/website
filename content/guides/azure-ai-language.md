@@ -1,15 +1,15 @@
 ---
-title: Sentiment Analysis with Azure AI Services and Neon
+title: Sentiment analysis with Azure AI services and Neon
 subtitle: Learn how to analyze customer feedback using Azure AI Language and store results in Lakebase Postgres
 author: bobbyiliev
 enableTableOfContents: true
 createdAt: '2024-11-30T00:00:00.000Z'
-updatedOn: '2026-07-31T19:05:29.503Z'
+updatedOn: '2026-09-24T17:56:34.189Z'
 ---
 
-Analyzing customer sentiment can help you understand your customer satisfaction and identify areas for improvement. The Azure AI Language Services provide tools for sentiment analysis, key phrase extraction, and language detection which can be used to analyze customer feedback and extract valuable insights.
+Sentiment analysis shows how satisfied your customers are and where they're running into problems. Azure AI Language provides sentiment analysis, key phrase extraction, and language detection, which you can run over customer feedback.
 
-In this guide, you'll learn how to use Azure AI Language Services to analyze customer feedback and save the results in Lakebase Postgres. We'll go through setting up your environment, creating a database to store feedback and analysis results, and running the analysis to get useful insights.
+In this guide, you'll use Azure AI Language to analyze customer feedback and save the results in Lakebase Postgres on Neon. You'll set up your environment, create tables for feedback and analysis results, and run the analysis.
 
 ## Prerequisites
 
@@ -18,26 +18,25 @@ In this guide, you'll learn how to use Azure AI Language Services to analyze cus
 - Node.js 18.x or later
 - Basic familiarity with SQL and JavaScript
 
-## Setting Up Your Development Environment
+## Setting up your development environment
 
 If you haven't already, follow these steps to set up your development environment:
 
-### Create a Neon Project
+### Create a Neon project
 
 1. Navigate to the [Neon Console](https://console.neon.tech)
-2. Click "New Project"
-3. Select Azure as your cloud provider
-4. Choose East US 2 as your region
-5. Name your project (e.g., "sentiment-analysis")
-6. Click "Create Project"
+2. Click **New Project**
+3. Name your project (e.g., "sentiment-analysis")
+4. Choose an AWS region close to where you'll create your Azure resources, such as AWS US East (N. Virginia) for Azure East US
+5. Click **Create project**
 
-Save your connection details, you'll need them later to connect to your Neon database.
+Save your connection details. You'll need them later to connect to your database.
 
-### Create Database Schema
+### Create the database schema
 
 Next, you'll set up the database tables to store customer feedback and sentiment analysis results. These tables will hold the feedback text, analysis scores, sentiment labels, key phrases, and timestamps.
 
-Connect to your Neon database and create tables for storing our customer feedback and sentiment analysis results from the Azure AI Language service:
+Connect to your database and create tables for storing customer feedback and sentiment analysis results from the Azure AI Language service:
 
 ```sql
 CREATE TABLE customer_feedback (
@@ -61,23 +60,23 @@ CREATE TABLE sentiment_results (
 
 With the tables created, let's move on to setting up the Azure AI Language service.
 
-### Set Up Azure AI Language
+### Set up Azure AI Language
 
-The [Azure AI Language service](https://learn.microsoft.com/en-us/azure/ai-services/language-service/overview) provides a set of tools for text analytics, including sentiment analysis, key phrase extraction, and language detection. To use the service, you'll need to create a new Language Service resource in your Azure account.
+The [Azure AI Language service](https://learn.microsoft.com/en-us/azure/ai-services/language-service/overview) provides text analytics, including sentiment analysis, key phrase extraction, and language detection. To use the service, you'll need to create a new Language Service resource in your Azure account.
 
 1. Go to the [Azure portal](https://portal.azure.com/)
 1. Search for "Azure AI Services" in the search bar
 1. From the list of services, select "Language Service"
 1. Click the "Create" button to create a new Language Service resource
 1. Select your subscription and resource group
-1. Choose a region (East US 2 for proximity to Neon)
+1. Choose a region close to your Neon project's AWS region (for example, East US for AWS US East (N. Virginia))
 1. Select a pricing tier (Free tier for testing)
 1. Create the resource
 1. Once created, copy the endpoint URL and access key
 
-### Project Setup
+### Project setup
 
-For the sake of this guide, we'll create a Node.js script that analyzes existing feedback stored in the Neon database. In a real-world app, you could integrate this process directly so that whenever a user posts a review, a queued job or a scheduled task automatically analyzes the feedback right away.
+For this guide, you'll create a Node.js script that analyzes existing feedback stored in your database. In a real-world app, you could integrate this process directly so that whenever a user posts a review, a queued job or a scheduled task automatically analyzes the feedback right away.
 
 Let's start by creating a new Node.js project:
 
@@ -95,8 +94,8 @@ npm install @azure/ai-language-text pg dotenv
 
 The packages we're using are:
 
-- `@azure/ai-language-text`: [Azure AI Language client library for JavaScript](https://www.npmjs.com/package/@azure/ai-language-text), this will allow us to interact with the Azure AI Language service to analyze text instead of using the REST API directly.
-- `pg`: A PostgreSQL client for Node.js, this will allow us to connect to the Neon database and store the analysis results.
+- `@azure/ai-language-text`: The [Azure AI Language client library for JavaScript](https://www.npmjs.com/package/@azure/ai-language-text), used to call the Azure AI Language service instead of using the REST API directly.
+- `pg`: A Postgres client for Node.js, used to connect to your database and store the analysis results.
 - `dotenv`: A package for loading environment variables from a `.env` file.
 
 With the packages installed, create a `.env` file in the project root and add your Azure AI Language service key and endpoint, as well as your Neon database connection URL:
@@ -113,11 +112,11 @@ Change the `DATABASE_URL` to match your Neon database connection details. Also, 
 
 With everything set up, let's start implementing the sentiment analysis script. We'll create separate modules for database connection, Azure AI Language client, analysis script, and report generation.
 
-### Database Connection
+### Database connection
 
-In this step, we'll set up a connection to our Lakebase Postgres database using the `pg` package. This connection will allow you to read customer feedback and store sentiment analysis results whenever the analysis script runs.
+In this step, we'll set up a connection to the database using the `pg` package. This connection will allow you to read customer feedback and store sentiment analysis results whenever the analysis script runs.
 
-We'll use a connection pool to manage multiple database connections efficiently, which is especially useful when running scripts that perform multiple queries.
+We'll use a connection pool so the script can reuse connections across its queries.
 
 Create a new file `src/database.js` and add the following code:
 
@@ -135,9 +134,9 @@ module.exports = pool;
 
 The `pool` object will be used to connect to the database and execute queries. We'll get the connection details from the `.env` file using the `dotenv` package.
 
-### Azure AI Language Client
+### Azure AI Language client
 
-Now let's set up the Azure AI Language client to perform our sentiment analysis and extract key phrases from customer feedback stored in our Neon database. Here is where we'll use the `@azure/ai-language-text` package to interact with the Azure AI Language service.
+Now let's set up the Azure AI Language client to run sentiment analysis and extract key phrases from the customer feedback in your database. This is where we'll use the `@azure/ai-language-text` package to interact with the Azure AI Language service.
 
 Create a new file `src/textAnalytics.js` and add the following code:
 
@@ -179,15 +178,15 @@ module.exports = {
 
 A quick overview of what we've done here:
 
-- **Azure Client Setup**: We create a `TextAnalysisClient` using the Azure endpoint and API key from the environment variables. This client handles communication with the Azure AI Language service.
-- **`analyzeSentiment` Function**: Analyzes the sentiment of the provided text and returns the sentiment label (positive, negative, mixed, or neutral), the sentiment score, and the detected language.
-- **`extractKeyPhrases` Function**: Extracts key phrases from the given text, helping identify the main topics or themes.
+- **Azure client setup**: We create a `TextAnalysisClient` using the Azure endpoint and API key from the environment variables. This client handles communication with the Azure AI Language service.
+- **`analyzeSentiment` function**: Analyzes the sentiment of the provided text and returns the sentiment label (positive, negative, mixed, or neutral), the sentiment score, and the detected language.
+- **`extractKeyPhrases` function**: Extracts key phrases from the given text, which identify its main topics.
 
 Now that the Azure AI Language client is ready, let's move on to the main analysis script.
 
-### Main Analysis Script
+### Main analysis script
 
-Now that we have our database connection and Azure AI Language client set up, let's create a script to process customer feedback, analyze it, and store the results in our Neon database.
+With the database connection and Azure AI Language client in place, create a script that processes customer feedback, analyzes it, and stores the results in your database.
 
 Create a new file `src/analyze.js` and add the following code:
 
@@ -243,16 +242,16 @@ module.exports = { processFeedback };
 Here we've implemented the following:
 
 1. We start by fetching the customer feedback that hasn't been analyzed yet. We do this by selecting feedback entries that don't have corresponding sentiment analysis results in the `sentiment_results` table.
-1. Next, for each feedback entry, it uses the `analyzeSentiment` function to get the sentiment and the `extractKeyPhrases` function to identify key phrases. These operations are performed in parallel using `Promise.all` to speed up the process.
+1. Next, for each feedback entry, we use the `analyzeSentiment` function to get the sentiment and the `extractKeyPhrases` function to identify key phrases. These operations are performed in parallel using `Promise.all` to speed up the process.
 1. After that, we insert the sentiment score, sentiment label, key phrases, and detected language into the `sentiment_results` table.
 
-We are also using a database transaction (`BEGIN`, `COMMIT`, and `ROLLBACK`) to ensure data integrity. If an error occurs, changes are rolled back.
+The script runs inside a database transaction (`BEGIN`, `COMMIT`, and `ROLLBACK`), so if an error occurs, the changes are rolled back.
 
-We can use this script and run it periodically or triggered whenever new feedback is received to keep the sentiment analysis up-to-date.
+You can run this script on a schedule or whenever new feedback arrives to keep the sentiment analysis up to date.
 
-### Analysis Reports
+### Analysis reports
 
-With the sentiment analysis results stored in the database, we can generate reports to extract insights from the data. Let's create a module to generate sentiment analysis reports based on the stored results.
+With the sentiment analysis results stored in the database, you can generate reports from them. Let's create a module to generate sentiment analysis reports based on the stored results.
 
 Create a new file `src/reports.js` and add the following code:
 
@@ -299,14 +298,14 @@ module.exports = { generateSentimentReport };
 
 Here we've defined two main functions that generate two main reports:
 
-- **Sentiment Distribution**: This report shows the count and average sentiment score for each sentiment label (positive, negative, mixed, neutral).
-- **Top Negative Topics**: This report lists the most common key phrases in negative feedback, helping identify recurring issues or topics that need attention.
+- **Sentiment distribution**: This report shows the count and average sentiment score for each sentiment label (positive, negative, mixed, neutral).
+- **Top negative topics**: This report lists the most common key phrases in negative feedback, which points to recurring issues.
 
 These reports can be used to track customer sentiment trends, identify common complaints, and prioritize areas for improvement. For example, you can set up alerts like sending an email or a Slack message whenever the sentiment score drops below a certain threshold or when a specific topic is mentioned frequently.
 
-## Running the Analysis
+## Running the analysis
 
-To put it all together, we'll create a script that processes customer feedback, analyzes it using Azure AI Language, and generates reports to summarize the insights.
+To put it all together, create a script that processes customer feedback, analyzes it with Azure AI Language, and generates the reports.
 
 Create a new file `index.js` and add the following code:
 
@@ -332,11 +331,11 @@ async function main() {
 main();
 ```
 
-This script will run the sentiment analysis on the customer feedback stored in the Neon database and generate reports based on the analysis results. You can run this script manually or set up a scheduled job to run it periodically.
+This script runs the sentiment analysis on the customer feedback stored in your database and generates reports based on the analysis results. You can run this script manually or set up a scheduled job to run it periodically.
 
-The script can be extended to include additional reports, alerts, or integrations with other services based on the sentiment analysis results but for now, let's focus on running the analysis.
+You can extend the script with more reports, alerts, or integrations later. For now, focus on running the analysis.
 
-## Testing the Analysis
+## Testing the analysis
 
 As a final step, let's test the sentiment analysis script by adding some sample customer feedback to the database and running the analysis script.
 
@@ -370,7 +369,7 @@ INSERT INTO customer_feedback (customer_id, feedback_text, product_id) VALUES
 ('CUST015', 'The new GraphQL API is amazing! Much more efficient than the REST endpoints. Query performance improved our app''s load time significantly.', 'SAAS-API');
 ```
 
-The feedback entries include a mix of positive, mixed, and negative sentiments, as well as some feedback to test the sentiment analysis and key phrase extraction.
+The feedback entries include a mix of positive, mixed, and negative sentiment, plus longer and more technical entries to exercise key phrase extraction.
 
 After running the SQL script to insert the sample feedback, let's run the sentiment analysis script:
 
@@ -414,11 +413,11 @@ Top Negative Topics: [
 ]
 ```
 
-This output gives you a snapshot of customer sentiment and highlights recurring issues which can help you identify areas for improvement.
+The output gives you a snapshot of customer sentiment and the issues that come up most often.
 
-## Automating the Analysis
+## Automating the analysis
 
-While running the sentiment analysis manually is useful for testing, in a production environment you'll want to automate this process.
+Running the analysis manually works for testing. In production, you'll want to automate it.
 
 One option is to integrate the sentiment analysis code into your application, so it runs whenever new feedback is submitted.
 
@@ -465,13 +464,13 @@ The timer schedule is defined in the `function.json` file as follows:
 }
 ```
 
-This configuration makes sure that the function runs every two hours. You can adjust the schedule as needed using a [cron expression](https://learn.microsoft.com/en-gb/azure/azure-functions/functions-bindings-timer).
+This configuration runs the function every two hours. You can adjust the schedule as needed using a [cron expression](https://learn.microsoft.com/en-gb/azure/azure-functions/functions-bindings-timer).
 
-For more details on connecting Azure Functions to a Postgres database and deploying the function to Azure, see the [Neon documentation](/docs/introduction).
+For more on connecting Azure Functions to Neon, see [Query your Postgres database using Azure Functions](/guides/query-postgres-azure-functions).
 
-## Analyzing Results
+## Analyzing results
 
-Now that you've processed customer feedback and stored the sentiment analysis results, you can run SQL queries to extract insights from the data. Here are some example queries to get you started:
+With the sentiment analysis results stored, you can query them with SQL. Here are two examples:
 
 1. This query shows how sentiment varies over time, giving you a sense of customer satisfaction trends:
 
@@ -502,16 +501,14 @@ Now that you've processed customer feedback and stored the sentiment analysis re
 
 ## Conclusion
 
-In this guide, we covered how to analyze customer feedback using Azure AI Language Services and store the results in a Lakebase Postgres database. This setup is just a starting point. You can expand it by adding real-time triggers, building dashboards, or supporting multiple languages.
+You now have a script that analyzes customer feedback with Azure AI Language and stores the results in Lakebase Postgres. From here, you can add real-time triggers, build dashboards on the results, or support more languages.
 
-The Azure AI Language service also includes SDKs for other languages like [Python](https://learn.microsoft.com/en-us/python/api/overview/azure/ai-textanalytics-readme), [Java](https://learn.microsoft.com/en-us/java/api/overview/azure/ai-textanalytics-readme), and [.NET](https://learn.microsoft.com/en-us/dotnet/api/overview/azure/ai.textanalytics-readme), so you can integrate sentiment analysis into your existing applications.
+Azure AI Language also has SDKs for [Python](https://learn.microsoft.com/en-us/python/api/overview/azure/ai-textanalytics-readme), [Java](https://learn.microsoft.com/en-us/java/api/overview/azure/ai-textanalytics-readme), and [.NET](https://learn.microsoft.com/en-us/dotnet/api/overview/azure/ai.textanalytics-readme), so you can add sentiment analysis to existing applications in those languages.
 
-You can extend this system by adding more analysis, visualizations, or multi-language support based on your needs.
+## Additional resources
 
-## Additional Resources
-
-- [Azure AI Language Documentation](https://learn.microsoft.com/azure/ai-services/language-service/)
-- [Neon Documentation](/docs)
-- [Azure AI Language Client Library](https://learn.microsoft.com/javascript/api/overview/azure/ai-language-text-readme)
+- [Azure AI Language documentation](https://learn.microsoft.com/azure/ai-services/language-service/)
+- [Neon documentation](/docs)
+- [Azure AI Language client library](https://learn.microsoft.com/javascript/api/overview/azure/ai-language-text-readme)
 
 <NeedHelp />

@@ -10,7 +10,7 @@ summary: >-
   system_stats extension required for the System Statistics tab is not
   supported on Neon.
 enableTableOfContents: true
-updatedOn: '2026-08-07T13:46:01.605Z'
+updatedOn: '2026-09-16T20:12:32.981Z'
 ---
 
 pgAdmin is a database management tool for Postgres that supports various database tasks, including monitoring performance metrics.
@@ -36,9 +36,9 @@ Pre-compiled and configured installation packages for pgAdmin 4 are available fo
 
 ## How to connect to your database from pgAdmin
 
-Find the connection string for your database by clicking the **Connect** button on your **Project Dashboard**.
+Find the connection string for your database by clicking the **Connect** button in the Console nav.
 
-![Connection details modal](/docs/connect/connection_details.png)
+![Connection details modal](/docs/connect/connect_to_branch_modal.png)
 
 Enter your connection details as shown [here](/docs/connect/connect-postgres-gui#connect-to-the-database).
 

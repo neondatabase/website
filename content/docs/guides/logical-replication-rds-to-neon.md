@@ -9,7 +9,7 @@ summary: >-
   in the RDS security group, schema preparation, and application cutover.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2026-07-31T15:27:48.506Z'
+updatedOn: '2026-09-16T19:45:35.340Z'
 ---
 
 <MigrationAssistant/>
@@ -184,6 +184,6 @@ SELECT subname, received_lsn, latest_end_lsn, last_msg_receipt_time FROM pg_cata
 
 After the replication operation is complete, you can switch your application over to the destination database by swapping out your AWS RDS source database connection details for your Neon destination database connection details.
 
-You can find your Neon database connection details by clicking the **Connect** button on your **Project Dashboard** to open the **Connect to your database** modal. See [Connect from any application](/docs/connect/connect-from-any-app).
+You can find your Neon database connection details by clicking the **Connect** button in the Console nav to open the **Connect to your branch** modal. See [Connect from any application](/docs/connect/connect-from-any-app).
 
 </Steps>

@@ -7,7 +7,7 @@ excerpt: >-
   using a connection string and a secure password. We understand that having
   multiple layers of security in place is essential t...
 date: '2023-12-19T18:22:07'
-updatedOn: '2024-03-01T14:01:33'
+updatedOn: '2026-11-06T12:00:00.000Z'
 category: community
 categories:
   - community
@@ -36,6 +36,10 @@ seo:
 ---
 
 ![Post image](https://cdn.neonapi.io/public/images/pages/blog/restrict-access-to-your-neon-database-with-ip-allow/neon-ip-allowlist-1024x576-66d4e52a.png)
+
+<Admonition type="important" title="Plans have changed since this post">
+This post refers to the Pro plan, which Neon no longer offers. Neon's plans are now Free, Launch, and Scale. IP Allow is available on the Scale plan. See [IP Allow](/docs/introduction/ip-allow) and the [plans documentation](/docs/introduction/plans).
+</Admonition>
 
 Neon provides you with fully hosted and managed PostgreSQL instances. These instances have advanced [branching](https://neon.com/docs/introduction/branching) and [autoscaling](https://neon.com/docs/introduction/autoscaling) features and are accessible using a [connection string](https://neon.com/docs/connect/connect-from-any-app) and a secure password.
 
@@ -71,4 +75,4 @@ Visit a site such as [ipinfo.io](https://ipinfo.io/) to obtain your public IP ad
 
 ## Conclusion
 
-Now you can restrict access to your Neon database’s branches using the IP Allow feature. You can read more about [IP Allow in the documentation](https://neon.com/docs/manage/projects#configure-ip-allow). Join us on our [Discord server](https://neon.tech/discord) if you’d like to share your feedback and ideas or to hang out.
+Now you can restrict access to your Neon database’s branches using the IP Allow feature. You can read more about [IP Allow in the documentation](https://neon.com/docs/manage/projects#configure-ip-allow). Join us on our [Discord server](https://neon.com/discord) if you’d like to share your feedback and ideas or to hang out.

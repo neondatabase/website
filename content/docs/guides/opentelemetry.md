@@ -12,7 +12,7 @@ summary: >-
   signal-specific paths (/v1/metrics, /v1/logs) and collects data from all
   computes in a project.
 enableTableOfContents: true
-updatedOn: '2026-07-20T22:03:00.289Z'
+updatedOn: '2026-10-23T12:11:49.591Z'
 ---
 
 <FeatureBetaProps feature_name="OpenTelemetry integration" />
@@ -227,7 +227,7 @@ The metric service names are also exposed as the `job` label on each metric.
 Click **Add** to save your configuration and start the data export.
 
 <Admonition type="tip">
-You can edit your integration settings at any time from the **Integrations** page in the Neon Console. This allows you to update your endpoint URL, change authentication credentials, or modify resource attributes without having to delete and recreate the integration.
+You can edit your integration settings at any time from the **Integrations** page in the Neon Console. This allows you to update your endpoint URL, change authentication credentials, or modify resource attributes without having to delete and recreate the integration. If you change the endpoint URL, protocol, or an endpoint override, enter your authentication credentials again. Neon doesn't reuse stored credentials for a new destination.
 </Admonition>
 
 ## Verify your integration is working

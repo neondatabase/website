@@ -32,6 +32,7 @@ const CTANew = ({
   labelIcon = 'arrow',
   buttonText = 'Get started',
   buttonUrl = LINKS.signup,
+  isExternal = false,
   buttonType = null,
 }) => (
   <section className={cn('cta relative bg-[#151617] safe-paddings', className)}>
@@ -61,7 +62,13 @@ const CTANew = ({
             {buttonText}
           </ButtonAiHelper>
         ) : (
-          <Button className="mt-10 lg:mt-8" theme="white-filled" size="new" to={buttonUrl}>
+          <Button
+            className="mt-10 lg:mt-8"
+            theme="white-filled"
+            size="new"
+            to={buttonUrl}
+            isExternal={isExternal}
+          >
             {buttonText}
           </Button>
         )}
@@ -90,6 +97,7 @@ CTANew.propTypes = {
   labelIcon: PropTypes.oneOf(['arrow', 'databricks']),
   buttonText: PropTypes.string,
   buttonUrl: PropTypes.string,
+  isExternal: PropTypes.bool,
   buttonType: PropTypes.oneOf(['aiHelper', null]),
 };
 

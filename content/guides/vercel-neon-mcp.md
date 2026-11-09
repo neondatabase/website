@@ -1,45 +1,43 @@
 ---
-title: 'AI Driven Incident response with Vercel and Neon MCP servers'
-subtitle: 'Use Vercel logs and Neon branching to give AI agents the context to diagnose production errors, validate fixes safely, and remediate issues with confidence.'
+title: 'AI-driven incident response with the Vercel and Neon MCP servers'
+subtitle: 'Use Vercel logs and Neon branching to give AI agents the context to diagnose production errors and validate fixes on an isolated branch before they reach production.'
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2026-03-02T00:00:00.000Z'
-updatedOn: '2026-08-27T22:59:15.528Z'
+updatedOn: '2026-09-24T17:56:34.189Z'
 ---
 
-AI agents are evolving from simple task executors into integral parts of modern development workflows. As their role expands, giving them the right context and safeguards becomes essential especially when they’re trusted to diagnose and debug issues in production environments.
-
-If an agent is tasked with fixing a production bug that requires a database schema change, executing SQL directly against a live database introduces unnecessary risk. To operate effectively in these scenarios, an AI agent needs two things:
+If an agent is tasked with fixing a production bug that requires a database schema change, executing SQL directly against a live database is risky. The agent needs two things:
 
 1. **Context:** Rich telemetry and logs to pinpoint the root cause.
 2. **Safety:** A controlled, production-like sandbox to validate changes before rollout.
 
-This guide demonstrates how to combine the observability of the [Vercel MCP server](https://vercel.com/docs/agent-resources/vercel-mcp) with the stateful isolation of the [Neon MCP server](/docs/ai/neon-mcp-server) using Anthropic's [Claude Code](https://docs.anthropic.com/en/docs/claude-code).
+This guide shows how to combine the observability of the [Vercel MCP server](https://vercel.com/docs/agent-resources/vercel-mcp) with the stateful isolation of the [Neon MCP server](/docs/ai/neon-mcp-server) using Anthropic's [Claude Code](https://docs.anthropic.com/en/docs/claude-code).
 
-With this workflow, Claude code can investigate runtime errors in Vercel, validate database fixes safely on a Neon branch, and then raise a pull request with the required code changes all powered by natural language prompts.
+With this workflow, Claude Code investigates runtime errors in Vercel, validates database fixes on a Neon branch, and then raises a pull request with the required code changes, all from natural language prompts.
 
-### The scenario: "A rushed deployment causing dropped analytics events"
+### The scenario: a rushed deployment drops analytics events
 
-A high-priority marketing campaign is scheduled to launch, and the growth team urgently requires new attribution metrics. To meet the deadline, frontend code introducing the tracking events is expedited and merged into production.
+A high-priority marketing campaign is about to launch, and the growth team needs new attribution metrics. To meet the deadline, the frontend code that adds the tracking events is rushed into production.
 
 Because the schema owner on the data engineering team is unavailable, the pull request is merged without review, and the necessary database migration is skipped.
 
 After deployment to Vercel, the core application continues to function, but the new analytics events fail silently. Since these events are sent via background fetch requests, users see no errors. Behind the scenes, however, Vercel’s serverless functions return `500 Internal Server Error` due to a schema mismatch: the code attempts to insert parameters that the production database does not recognize.
 
-While not a full outage, this issue causes data loss during a critical campaign. Instead of manually inspecting Vercel logs, tracing the Postgres exception, writing a migration, and updating the ORM, we will delegate the investigation to Claude Code. Using the Vercel and Neon MCP servers, Claude Code will be able to troubleshoot the problem and generate a detailed report on the root cause and required fixes.
+It isn't a full outage, but the campaign is losing data. Instead of manually inspecting Vercel logs, tracing the Postgres exception, writing a migration, and updating the ORM, you'll hand the investigation to Claude Code. With the Vercel and Neon MCP servers, Claude Code can troubleshoot the problem and write a report on the root cause and required fixes.
 
 ## Prerequisites
 
-Before you begin, ensure you have the following ready:
+Before you begin, make sure you have the following:
 
-- **Claude Code:** Anthropic's official CLI tool installed. Visit [Claude code docs](https://code.claude.com/docs/en/quickstart#step-1-install-claude-code) for installation instructions.
+- **Claude Code:** Anthropic's CLI tool, installed. See the [Claude Code docs](https://code.claude.com/docs/en/quickstart#step-1-install-claude-code) for installation instructions.
   <Admonition type="tip" title="Using Cursor, VSCode or other agents?">
-  While this guide demonstrates the workflow with Claude Code, the same principles apply to any AI agent capable of integrating with MCP servers and executing tools through natural language prompts. When adding Vercel and Neon MCP servers, you can choose whichever agent best fits your environment.
+  This guide uses Claude Code, but the same workflow works with any AI agent that supports MCP servers. When you add the Vercel and Neon MCP servers, choose the agent you use.
   </Admonition>
 - **Neon account and project:** A Neon account with at least one project. Create one in the [Neon Console](https://console.neon.tech) if needed.
 - **Vercel account and project:** A Vercel account with your application deployed.
 
-In this demo, we use an example project called `ecommerce-web`, which has a production deployment named `ecommerce-web-prod` on Vercel and is connected to a Neon database. Analytics events are recorded in the `analytics_events` table within the Neon database.
+In this demo, we use an example project called `ecommerce-web`, which has a production deployment named `ecommerce-web-prod` on Vercel and is connected to a Neon database. Analytics events are recorded in the `analytics_events` table.
 
 You can follow the guide using your own projects.
 
@@ -47,9 +45,9 @@ You can follow the guide using your own projects.
 
 ## Step 1: Set up the Neon MCP server
 
-The Neon MCP server gives Claude Code tools to work with your Neon database, including creating database branches, running SQL queries, and applying migrations. For this scenario, we will use it to validate database schema changes in an isolated environment.
+The Neon MCP server gives Claude Code tools to work with your Neon database, including creating branches, running SQL queries, and applying migrations. In this scenario, you'll use it to validate database schema changes in an isolated environment.
 
-The simplest way to connect Claude Code to Neon is with the `neon init` command. Run it in a terminal: it installs agent tooling (either the Neon plugin, or [agent skills](https://github.com/neondatabase/agent-skills) and the MCP server) and links a Neon project.
+The simplest way to connect Claude Code to Neon is the [`neon init`](/docs/cli/init) command. Run it in a terminal. It installs agent tooling (either the Neon plugin, or [agent skills](https://github.com/neondatabase/agent-skills) and the MCP server) and links a Neon project.
 
 Run the following in your project directory:
 
@@ -69,13 +67,13 @@ Run the following command:
 npx add-mcp https://mcp.vercel.com
 ```
 
-When prompted, choose Claude Code as the agent. This connects the Vercel MCP server as a context provider, enabling Claude Code to use tools like [`get_runtime_logs`](https://vercel.com/docs/agent-resources/vercel-mcp/tools#get_runtime_logs) to fetch logs directly from your deployments.
+When prompted, choose Claude Code as the agent. This connects the Vercel MCP server so Claude Code can use tools like [`get_runtime_logs`](https://vercel.com/docs/agent-resources/vercel-mcp/tools#get_runtime_logs) to fetch logs directly from your deployments.
 
 ## Step 3: Investigate the incident
 
 We know marketing events are being dropped, but we still need to prove _why_ the failures are happening in production.
 
-Open your terminal and start a Claude code session:
+Open your terminal and start a Claude Code session:
 
 ```bash
 claude
@@ -91,7 +89,7 @@ We are seeing dropped analytics events. Use the Vercel MCP tools to check the pr
 
 In this step, Claude Code calls Vercel MCP tools (specifically [`get_runtime_logs`](https://vercel.com/docs/agent-resources/vercel-mcp/tools#get_runtime_logs)) to retrieve production logs and parse relevant stack traces.
 
-From the logs, it identifies a PostgreSQL error indicating a schema mismatch: the application is trying to write fields that do not exist yet in `analytics_events`.
+From the logs, it identifies a Postgres error indicating a schema mismatch: the application is trying to write fields that do not exist yet in `analytics_events`.
 
 To validate that conclusion, Claude Code then uses Neon MCP tools to inspect the current table schema and confirm which columns are missing.
 
@@ -103,42 +101,36 @@ Now that the root cause is confirmed, the next step is remediation. Applying Dat
 
 Instead, use Neon branching through MCP to create an isolated copy of production, apply the schema fix there, and validate behavior before touching live traffic.
 
-Prompt Claude code with the remediation task:
+Prompt Claude Code with the remediation task:
 
 ```text shouldWrap
 Some steps may have been missed in the rushed deployment. Please run full end-to-end tests using a separate Neon branch and give me a report with the steps and next actions.
 ```
 
-![Claude code terminal session showing a remediation prompt that asks the agent to create an isolated Neon branch, apply the fix, and run full validation.](/docs/guides/claude-code-fix-prompt.png)
+![Claude Code terminal session showing a remediation prompt that asks the agent to create an isolated Neon branch, apply the fix, and run full validation.](/docs/guides/claude-code-fix-prompt.png)
 
-Claude code now executes the workflow end-to-end: it creates a branch from the production database state, applies the required schema updates, and runs tests against that branch.
+Claude Code now runs the workflow end to end: it creates a branch from the production database state, applies the required schema updates, and runs tests against that branch.
 
 If validation fails, it can iterate safely on the branch until the issue is resolved. If validation succeeds, you get evidence that the fix works under production-like conditions without risking live data.
 
-![Claude code output showing successful validation on the Neon branch, including confirmation that the schema update resolves the failing analytics writes.](/docs/guides/claude-code-fix-validation.png)
+![Claude Code output showing successful validation on the Neon branch, including confirmation that the schema update resolves the failing analytics writes.](/docs/guides/claude-code-fix-validation.png)
 
-![Claude code final report summarizing what changed, what was validated, and concrete next actions for safely promoting the fix to production.](/docs/guides/claude-code-fix-report.png)
+![Claude Code final report summarizing what changed, what was validated, and concrete next actions for safely promoting the fix to production.](/docs/guides/claude-code-fix-report.png)
 
 Now that the fix has been validated on the branch, the schema change can be promoted to production through your standard release process.
 
-What we demonstrated here is a focused scenario, but the same pattern applies broadly: use the Vercel MCP Server for observability and root cause analysis, and the Neon MCP Server for safe experimentation before rollout. Together, they let AI agents detect issues and then test and confirm fixes with confidence.
+The same pattern applies beyond this scenario: use the Vercel MCP server for observability and root cause analysis, and the Neon MCP server to test changes on a branch before rollout.
 
 </Steps>
 
 ## Conclusion
 
-By combining Vercel and Neon MCP servers within Claude code, incident response becomes faster and safer for on‑call situations that span both application logic and database state. Vercel MCP provides visibility into runtime behavior, while Neon MCP offers an isolated environment to validate fixes without risking live data.
-
-Although this guide centered on a single high‑priority case, the same workflow extends naturally to recurring error triage, regression checks, and pre‑production validation of complex schema changes.
-
-With stronger orchestration, this workflow can evolve into an AI‑driven incident management loop. Agents continuously cycle through detection, investigation, and remediation across both Vercel and Neon contexts monitoring signals, diagnosing root causes, running safe experiments on Neon branches, validating outcomes, and **proposing controlled fixes with human oversight**.
-
-The key enabler is **isolation with context**. MCP gives agents operational visibility and actionable tools; Neon branching provides production‑like safety for testing. Together, they allow AI agents to move beyond surface‑level alerts into deeper understanding and confident action across the full stack.
+In this guide, Claude Code used the Vercel MCP server to trace dropped analytics events to a missing migration, then used the Neon MCP server to apply and validate the fix on a branch before it reached production. You can apply the same workflow to recurring error triage, regression checks, and pre‑production validation of complex schema changes, with a human reviewing each proposed fix.
 
 ## Resources
 
 - [Model Context Protocol (MCP)](https://modelcontextprotocol.io)
-- [Neon MCP Server Documentation](/docs/ai/neon-mcp-server)
-- [Neon Database Branching](/branching)
-- [Vercel MCP Server Documentation](https://vercel.com/docs/agent-resources/vercel-mcp/tools)
-- [Claude code Documentation](https://docs.anthropic.com/en/docs/claude-code)
+- [Neon MCP server](/docs/ai/neon-mcp-server)
+- [Neon branching](/docs/introduction/branching)
+- [Vercel MCP server tools](https://vercel.com/docs/agent-resources/vercel-mcp/tools)
+- [Claude Code documentation](https://docs.anthropic.com/en/docs/claude-code)

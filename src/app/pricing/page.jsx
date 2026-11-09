@@ -5,9 +5,13 @@ import CTANew from 'components/shared/cta-new';
 import Faq from 'components/shared/faq/faq';
 import Layout from 'components/shared/layout';
 import Logos from 'components/shared/logos';
+import VERCEL_URL from 'constants/base';
 import LINKS from 'constants/links';
 import SEO_DATA from 'constants/seo-data';
 import getMetadata from 'utils/get-metadata';
+import getPricingUpdatedOn from 'utils/get-pricing-updated-on';
+
+const updatedOn = getPricingUpdatedOn();
 
 export const metadata = getMetadata(SEO_DATA.pricing);
 
@@ -31,31 +35,24 @@ const logos = [
 
 const faqItems = [
   {
-    question: 'Does Neon offer a backend now?',
+    question: 'What does Neon include besides Postgres?',
     id: 'does-neon-offer-a-backend',
     initialState: 'open',
     answer: `
-      <p>Yes. Alongside our serverless Postgres database, Neon now offers Managed Better Auth, Object Storage, Functions, and AI Gateway - a full backend suite that runs alongside your database and branches with it.</p>
-    `,
-  },
-  {
-    question: 'What does the beta label imply on Object Storage, Functions, and AI Gateway?',
-    id: 'backend-beta-label',
-    answer: `
-      <p>While these tools are in beta, they're not feature-complete - they're ready to deploy but expect some rough edges, evolving limits, and functionality that's still being built out (for example, monitoring coverage is still expanding, together with region availability). Billing is also paused during the beta phase.</p>
+      <p>Alongside <a href="${LINKS.lakebase}">Lakebase Postgres</a>, every Neon project can use <a href="${LINKS.authPage}">Managed Better Auth</a>, the <a href="${LINKS.dataApi}">Data API</a>, <a href="${LINKS.objectStorage}">Object Storage</a>, <a href="${LINKS.functions}">Functions</a>, <a href="${LINKS.aiGateway}">AI Gateway</a>, and <a href="${LINKS.realtime}">Realtime</a> (in beta). Together they form a backend that runs next to your database: Auth, Object Storage, Functions, and AI Gateway branch with it. Every service is available on every plan, including Free. On Free, AI Gateway needs a card and prepaid credits, and your plan stays Free.</p>
     `,
   },
   {
     question: 'What is a Neon project?',
     id: 'what-is-a-project',
     answer: `
-      <p>A project in Neon is the top-level container for your environment. Each project includes all branches, with your Postgres databases and (if you deploy them) your Object Storage buckets, Functions, Managed Better Auth endpoints, and AI Gateway access.</p>
+      <p>A <a href="${LINKS.docs}/manage/projects">project</a> in Neon is the top-level container for your environment. Each project includes all branches, with your Postgres databases and (if you deploy them) your Object Storage buckets, Functions, Managed Better Auth endpoints, and AI Gateway access.</p>
     `,
   },
   {
     question: 'What is a CU?',
     answer: `
-      <p>A CU (short for Compute Unit) is Neon's way of representing <strong>Postgres database compute size</strong>. Neon databases <a href="${LINKS.autoscaling}">autoscale</a>, and CUs define how much CPU and memory your database is using at any moment - with each CU allocating approximately 1 vCPU and 4 GB of RAM.</p>
+      <p>A CU (short for Compute Unit) is Neon's way of representing <strong>Postgres database compute size</strong>. Neon databases <a href="${LINKS.autoscaling}">autoscale</a>, and CUs define how much CPU and memory your database is using at any moment. Each CU allocates approximately 4 GB of RAM, along with associated CPU.</p>
     `,
   },
   {
@@ -64,11 +61,11 @@ const faqItems = [
     answer: `
       <p>A CU-hour is Neon's unit for measuring <strong>Postgres database compute usage</strong>. Because Neon databases scale to zero and autoscale, you're billed only for the database compute resources you actually use. In other words, your monthly database compute usage depends on:</p>
       <ul>
-        <li>How many compute endpoints are you running</li>
+        <li>How many compute endpoints you're running</li>
         <li>How large your compute endpoints are (in CUs)</li>
         <li>How long they run (in hours)</li>
       </ul>
-      <p>For a single compute, the calculation works similar to this:</p>
+      <p>For a single compute, the calculation works like this:</p>
       <code>Monthly CU-hours = [average CU size] × [number of hours the compute runs in the month]</code>
       <code>Monthly compute cost = [monthly CU-hours] × [CU-hour price]</code>
       <p>The CU-hour price depends on your pricing plan:</p>
@@ -90,25 +87,53 @@ const faqItems = [
       </ul>
       <p>A realistic example for a single project:</p>
       <ul>
-        <li>The database runs at an average of 1 CU for ~3 hours per day. It scales down to zero the rest of the time</li>
-        <li>Over a month, this uses roughly 90 CU-hours, staying within the Free plan limits for that project</li>
+        <li>The database runs at 0.25 CU, the default compute size for Free plan projects, for ~12 hours per day. It scales down to zero the rest of the time</li>
+        <li>Over a month, this uses roughly 90 CU-hours (0.25 CU × 12 hours × 30 days), staying within the Free plan limits for that project</li>
+        <li>At 0.25 CU, 100 CU-hours covers about 400 hours of active compute, more than half the hours in a month</li>
       </ul>
-      <p>This model is designed to make it practical to have many small or intermittent databases (for development, demos, previews, or experiments) without being forced into an upgrade. <a href="${LINKS.blog}/why-so-many-projects-in-the-neon-free-plan">Learn more about our Free Plan philosophy.</a></p>
+      <p>This model is designed to make it practical to have many small or intermittent databases (for development, demos, previews, or experiments) without being forced into an upgrade. <a href="${LINKS.blog}/why-so-many-projects-in-the-neon-free-plan">Learn more about our Free plan philosophy.</a></p>
     `,
   },
   {
-    question:
-      'Is Object Storage, Functions, or AI Gateway usage included in my Free plan CU-hours?',
+    question: 'What happens when I hit Free plan limits?',
+    id: 'free-plan-limits',
+    answer: `
+      <p>The Free plan is permanent, not a trial, and doesn't require a credit card. Most limits are per project, and none of them delete your data:</p>
+      <ul>
+        <li>If a project uses up its 100 CU-hours or 5 GB of network transfer for the month, its compute is suspended until the next billing period</li>
+        <li>If a project exceeds 1 GB of Postgres storage, or your projects exceed 20 GB in total, operations that increase storage fail until you free space</li>
+        <li>Branch creation fails once a project has 10 branches</li>
+      </ul>
+      <p>Upgrading to a paid plan lifts these limits immediately. If you'd rather not upgrade yet and need more room, <a href="${LINKS.contactSales}">reach out to us</a> about credits. We're happy to support developers and startups.</p>
+    `,
+  },
+  {
+    question: 'Can I try Neon without signing up?',
+    id: 'claimable-neon',
+    answer: `
+      <p>Yes. <a href="${LINKS.claimableNeon}">Claimable Neon</a> gives you, or an AI agent working for you, an instant Postgres project with no account and no credit card. Claim it to a Neon account within 72 hours to keep it. Unclaimed projects are capped at 100 MB of storage and 1 GB of network transfer. <a href="${LINKS.docs}/reference/claimable-neon">See the reference.</a></p>
+    `,
+  },
+  {
+    question: 'Does Neon pause Free plan projects when they are inactive?',
+    id: 'free-plan-inactivity',
+    answer: `
+      <p>No. Neon doesn't pause Free projects for inactivity, and there's no restore step. When a database is idle, its compute <a href="${LINKS.docs}/introduction/scale-to-zero">scales to zero</a> after 5 minutes and starts again on the next query, typically within a few hundred milliseconds. Your project, data, and connection string stay the same.</p>
+      <p>Compute is suspended only if a project uses up its monthly 100 CU-hours or 5 GB of network transfer. It resumes at the start of the next billing period, or as soon as you upgrade. If you hit these limits and need more room, <a href="${LINKS.contactSales}">reach out to us</a> about credits. We're happy to support developers and startups.</p>
+    `,
+  },
+  {
+    question: 'Do the backend services use my Free plan CU-hours?',
     id: 'backend-free-plan-cu-hours',
     answer: `
-      <p>No. CU-hours are specific to Postgres database compute. Object Storage, Functions, and AI Gateway will have their own usage limits that will be published before GA. During the beta phase, they are free to use within the guardrails we've set to prevent abuse.</p>
+      <p>CU-hours measure Postgres database compute only. Object Storage and Functions have their own Free plan allowances, Managed Better Auth has its own MAU limit, and AI Gateway draws down prepaid credits you buy. The Data API and Realtime run queries against your database, so the database compute they use counts toward your CU-hours like any other query.</p>
     `,
   },
   {
     question: 'How are the workload cost estimates calculated?',
     id: 'workload-cost-estimates',
     answer: `
-      <p><strong>The typical monthly cost estimates shown in our pricing plans are based on representative database workloads that reflect common usage patterns across different application types. These estimates cover Postgres compute and storage only - they don't factor in Object Storage, Functions, or AI Gateway usage, which are billed separately and currently free of charge during beta.</strong></p>
+      <p><strong>The typical monthly cost estimates shown in our pricing plans are based on representative database workloads that reflect common usage patterns across different application types. These estimates cover Postgres compute and storage only. They don't factor in Object Storage, Functions, or AI Gateway usage, which are billed separately.</strong></p>
       <p>Each estimate combines two components:</p>
       <ul>
         <li><strong>Database compute cost:</strong> Based on the specified CU-hours per month. </li>
@@ -116,30 +141,30 @@ const faqItems = [
       </ul>
       <p>These estimates help you compare typical workloads across plans.</p>
       <p>Here's a detailed breakdown of each of the workload sizes and what they represent:</p>
-      <h3 class="mt-6 text-lg text-white font-semibold">Intermittent Load:</h3>
+      <h3 class="mt-6 text-lg text-white font-semibold">Intermittent load</h3>
       <p>
         140 CU-hours compute, 1 GB-month of storage. Typical of a small database that doesn't need to run 24/7.
         <img class="my-4" src="/images/pricing/140-CU-Hours.webp" />
-        A databse using 140 CU-hours compute per month can scale to zero when idle, and start back up in 350ms when it's needed. When it's running it is set to a minimum size of 0.25 CU but can scale up to 2CU when needed.</p>
-      <h3 class="mt-6 text-lg text-white font-semibold">Low Load:</h3>
+        A database using 140 CU-hours compute per month can scale to zero when idle, and start back up within a few hundred milliseconds when it's needed. When it's running it is set to a minimum size of 0.25 CU but can scale up to 2 CU when needed.</p>
+      <h3 class="mt-6 text-lg text-white font-semibold">Low load</h3>
       <p>
         190 CU-hours compute, 5 GB-month of storage. A small database that <em>does</em> need to run 24/7.
         <img class="my-4" src="/images/pricing/190-CU-Hours.webp" />
-        Once scale to zero is disabled, the minimum CU-hours a database can use in a month is 187.5 <em>(750 hours in a month x 0.25 minimum CU size = 187.5)</em> so this example represents a database that has scale to zero disable but only occasionally needs to scale above the 0.25 minimum size. Good for small production applications and databases that need to be always-on for features like real-time sync.
+        Once scale to zero is disabled, the minimum CU-hours a database can use in a month is about 182.5 <em>(about 730 hours in a month × 0.25 minimum CU size ≈ 182.5)</em>, so this example represents a database that has scale to zero disabled but only occasionally needs to scale above the 0.25 minimum size. Good for small production applications and databases that need to be always-on for features like real-time sync.
       </p>
-      <h3 class="mt-6 text-lg text-white font-semibold">Medium Load:</h3>
+      <h3 class="mt-6 text-lg text-white font-semibold">Medium load</h3>
       <p>
         720 CU-hours compute, 10 GB-month of storage. Representative of a constant-load application database.
         <img class="my-4" src="/images/pricing/720-CU-Hours.webp" />
         As you can see from the autoscaling chart above, 720 CU hours translates to a database that scales between 0.5 and 4 CU based on load. 
       </p>
-      <h3 class="mt-6 text-lg text-white font-semibold">High Load:</h3>
+      <h3 class="mt-6 text-lg text-white font-semibold">High load</h3>
       <p>
         3,000 CU-hours compute, 100 GB-month of storage.
         <img class="my-4" src="/images/pricing/3000-CU-Hours.webp" />
         As an example, a database that is scaling between 3 CU and 7 CU will often use around 3000 CU hours in a month. This level represents production applications with sustained traffic, higher data volumes, and more complex queries requiring consistent compute resources.
       </p>
-      <h3 class="mt-6 text-lg text-white font-semibold">XL Load:</h3>
+      <h3 class="mt-6 text-lg text-white font-semibold">XL load</h3>
       <p>
         6,000 CU-hours compute, 1,000 GB-month of storage.
         <img class="my-4" src="/images/pricing/6000-CU-Hours.webp" />
@@ -157,11 +182,60 @@ const faqItems = [
     `,
   },
   {
-    question: 'How are Object Storage, Functions, and AI Gateway billed?',
+    question: 'How are the backend services billed?',
     id: 'backend-billing',
     answer: `
-      <p>They aren't billed yet. Usage is free of charge for all three during beta, with rate and usage guardrails in place. Public pricing for Object Storage and Functions will be announced before general availability (GA).</p>
-      <p>AI Gateway requires a paid Neon plan (Launch or Scale) to access, and while it's also free of charge during beta, its pricing model is already public - Neon will charge the same per-token rate as the underlying model provider, with zero markup. Exact per-model rates will be published before billing begins.</p>
+      <p>Object Storage, Functions, and AI Gateway are billed separately from Postgres compute (CU-hours). Managed Better Auth, the Data API, and Realtime have no separate charge.</p>
+      <p><strong>Managed Better Auth</strong> is included up to 60,000 MAU per project on Free and 1 million MAU per project on paid plans.</p>
+      <p><strong>The Data API</strong> is included on every plan. The queries it runs use your database compute and count toward network transfer, like any other query.</p>
+      <p><strong>Realtime</strong> is free during the beta. Database compute and network transfer it generates are billed as usual.</p>
+      <p><strong>Object Storage</strong> is $0.023 per GB-month of stored volume. There's no per-operation charge. Egress counts toward your public network transfer allowance. The Free plan includes 5 GB of Object Storage per project.</p>
+      <p><strong>Functions</strong> are billed for active compute, waiting compute, and invocations at the rates in the plan table. The Free plan includes 10 active capacity-hours, 400 waiting capacity-hours, and 1 million invocations per project per month.</p>
+      <p><strong>AI Gateway</strong> is available on every plan, including Free. Pricing matches the model provider's list prices, with no markup, and draws down prepaid credits. On Free, add a card to buy credits. You don't need to upgrade. <a href="/docs/ai-gateway/prepaid-credits">Learn how prepaid credits work</a>, or see <a href="/docs/ai-gateway/overview#available-models">per-model rates</a>.</p>
+    `,
+  },
+  {
+    question: 'Can I use AI Gateway on the Free plan?',
+    id: 'ai-gateway-free-plan',
+    answer: `
+      <p>Yes. Add a card on the <strong>Billing</strong> page in the Neon Console and buy prepaid AI Gateway credits ($5 minimum). Your organization stays on the Free plan, and the rest of your Free plan doesn't change. AI Gateway turns on after your first purchase, once a short account check finishes. Requests draw down your credits at the model provider's list prices, with no markup. <a href="/docs/ai-gateway/prepaid-credits">Learn how prepaid credits work.</a></p>
+    `,
+  },
+  {
+    question: 'How much network transfer (egress) is included?',
+    id: 'egress',
+    answer: `
+      <p>Public network transfer is counted per project, not per account:</p>
+      <ul>
+        <li>Free plan: 5 GB per project per month, across up to 100 projects</li>
+        <li>Launch and Scale: 500 GB per project per month, then $0.10 per GB</li>
+      </ul>
+      <p>Each project's allowance is shared by everything in it: Postgres, Object Storage, and Functions. Eligible startups can apply for up to $100k in credits through the <a href="${LINKS.startups}">Startup Program</a>. <a href="${LINKS.docs}/introduction/network-transfer">Learn how to reduce network transfer.</a></p>
+    `,
+  },
+  {
+    question: 'How do Neon costs scale as I add projects or traffic?',
+    id: 'how-costs-scale',
+    answer: `
+      <p>With usage, not with instance size or project count. There's no per-project or per-database fee: each project pays for the compute it actually runs (CU-hours) and the storage it holds.</p>
+      <ul>
+        <li>Idle databases scale to zero, so you don't pay for compute while they're suspended. Storage is still billed.</li>
+        <li>Autoscaling sizes compute to the load within the limits you set, so you don't pay for peak capacity all month.</li>
+      </ul>
+      <p>This makes Neon cost-efficient for many small databases, such as a database per tenant or per agent, and for intermittent or spiky workloads.</p>
+    `,
+  },
+  {
+    question: 'How much does a database per tenant or per agent cost on Neon?',
+    id: 'database-per-tenant-cost',
+    answer: `
+      <p>Neon's pricing is built for this pattern. Each tenant gets its own project, an isolated Postgres database with its own compute, and there's no per-project or per-database fee:</p>
+      <ul>
+        <li><strong>Free plan:</strong> up to 100 projects at $0, each with its own 100 CU-hours and 1 GB of storage, enough to build and test a database-per-tenant app.</li>
+        <li><strong>Launch and Scale:</strong> you pay only for the compute each tenant actually runs and the storage it holds. Idle tenant databases scale to zero, so inactive tenants don't add compute cost; storage is still billed. Launch includes 100 projects, and Scale includes 1,000, with more on request.</li>
+      </ul>
+      <p>For example, 100 tenant databases on Launch, each running at 0.25 CU for about an hour a day and storing 150 MB, use about 750 CU-hours and 15 GB of storage: roughly $85 a month in total, or about $0.85 per tenant.</p>
+      <p>Platforms that provision databases for their users at scale can apply to the <a href="${LINKS.programsAgents}">Agent Plan</a>. For design guidance, see <a href="${LINKS.docs}/guides/multitenancy">Multitenancy with Neon</a>.</p>
     `,
   },
   {
@@ -172,7 +246,7 @@ const faqItems = [
     `,
   },
   {
-    question: 'Are the Free Plan quotas for database usage included in the paid plans?',
+    question: 'Are the Free plan quotas for database usage included in the paid plans?',
     answer: `
       <p>No. When you're on a paid plan, database usage starts metering from zero for both compute and storage. Free plan quotas don't apply once you upgrade. Instead, you're billed purely based on actual usage, at the rates of your paid plan.</p>
       <p>You should consider a paid plan if:</p>
@@ -180,7 +254,7 @@ const faqItems = [
         <li>You expect higher or more sustained usage than what's included per project on the Free plan</li>
         <li>You care about production guarantees, such as consistent availability, predictable performance, and never having your database paused due to usage limits</li>
       </ul>
-      <p>If your usage fits comfortably within the Free plan and you're not running a production workload, there's no reason to upgrade. The Free plan is designed to be genuinely useful for development and prototyping. <a href="${LINKS.blog}/why-so-many-projects-in-the-neon-free-plan">Learn more about our Free Plan philosophy.</a></p>
+      <p>If your usage fits comfortably within the Free plan and you're not running a production workload, there's no reason to upgrade. The Free plan is designed to be genuinely useful for development and prototyping. <a href="${LINKS.blog}/why-so-many-projects-in-the-neon-free-plan">Learn more about our Free plan philosophy.</a></p>
     `,
   },
   {
@@ -190,7 +264,7 @@ const faqItems = [
       <p>In Neon, you don't provision or manage database storage in advance. It scales automatically and invisibly as your data grows. At the end of each month, you're billed for the database storage actually consumed per project, measured in GB-months.</p>
       <p>Neon bills storage usage using two separate metrics:</p>
       <p><strong>History storage (or instant restore storage)</strong></p>
-      <p><strong>Instant restore</strong> relies on Neon retaining a history of database changes so you can restore a branch to a previous point in time, create branches from past states, run Time Travel queries, and more. How long that history is kept is controlled by the <strong>history window</strong> on <strong>Settings → Instant restore</strong>—see <a href="${LINKS.docs}/introduction/history-window">History window</a> (1 day by default on paid plans).</p>
+      <p><strong>Instant restore</strong> relies on Neon retaining a history of database changes so you can restore a branch to a previous point in time, create branches from past states, run Time Travel queries, and more. How long that history is kept is controlled by the <strong>history window</strong> on <strong>Settings → Instant restore</strong> (1 day by default on paid plans). See <a href="${LINKS.docs}/introduction/history-window">History window</a>.</p>
       <p><strong>History</strong> storage is billed based on the amount of Write-Ahead Log (WAL) retained within that history window, at $0.20 per GB-month on paid plans. This is billed separately from your regular database storage.</p>
       <p>If you don't need deep recovery or long Time Travel, shorten the history window to reduce costs.</p>
       <p><strong>Database storage (root and child branches)</strong></p>
@@ -199,21 +273,21 @@ const faqItems = [
         <li>Root branches are billed based on their actual data size (for example, 5 GB)</li>
         <li>Child branches <em>might</em> be billed based on the minimum of: the accumulated data changes since the branch was created, or the underlying storage footprint, which is zero if the branch is still within the history window used for instant restore (in this case, the child branch effectively shares storage with its parent).</li>
       </ul>
-      <p>The SUM of both components will be billed as your database storage at $0.35 per GB-month.</p>
+      <p>The sum of both components will be billed as your database storage at $0.35 per GB-month.</p>
       <p>What this implies:</p>
       <ul>
         <li>A child branch that has no data changes compared to its parent and is still within the <a href="${LINKS.docs}/introduction/history-window">history window</a> does not incur additional database storage costs.</li>
         <li>As a child branch accumulates changes over time, its storage usage increases.</li>
         <li>If a child branch falls out of the history window, it becomes as expensive as a root branch, since it no longer shares storage with its parent.</li>
       </ul>
-      <p>To keep database storage costs low, child branches are best kept short-lived - for example, by setting <a href="${LINKS.docs}/guides/branch-expiration">expiration times</a>, <a href="${LINKS.docs}/guides/reset-from-parent">resetting them</a> frequently, or deleting branches when they're no longer needed.</p>
+      <p>To keep database storage costs low, keep child branches short-lived: set <a href="${LINKS.docs}/guides/branch-expiration">expiration times</a>, <a href="${LINKS.docs}/guides/reset-from-parent">reset them</a> frequently, or delete branches when they're no longer needed.</p>
     `,
   },
   {
     question: 'How are extra branches billed?',
     id: 'additional-branches-billing',
     answer: `
-      <p>Each Neon plan includes a set number of branches per project at no additional cost (10 branches per project in Launch, 25 branches per project in Scale) but you can create and delete branches freely within your plan's included allowance:</p>
+      <p>Each paid plan includes a set number of branches per project at no additional cost (10 branches per project on Launch, 25 branches per project on Scale). You can create and delete branches freely within that allowance:</p>
       <ul>
         <li>If the total number of concurrent branches in a project exceeds your plan's allowance, the extra branches are billed as branch-months, prorated hourly.</li>
         <li>The price is $1.50 per extra branch-month (≈ $0.002 per hour)</li>
@@ -228,34 +302,80 @@ const faqItems = [
     `,
   },
   {
-    question: 'How is Managed Better Auth billed?',
-    answer: `
-      <p>Neon Managed Better Auth is included at no additional cost for all Neon databases until you reach 1 million monthly active users (MAU). If you surpass that threshold, a member of our team will reach out to discuss pricing.</p>
-      <p>On the Free plan, Managed Better Auth is included for up to 60,000 MAU.</p>
-    `,
-  },
-  {
     question: 'How can I control my Postgres database costs (compute and storage consumption)?',
     answer: `
       <p>Database compute is often the most variable part of a monthly bill. For Neon databases, the most effective way to control compute costs is to configure maximum autoscaling limits and scale-to-zero.</p>
       <p>Autoscaling limits act as a built-in cost ceiling: your database will never scale beyond the limit you set, even during traffic spikes. If you want to prioritize performance over costs in a particular compute endpoint (e.g. production), choose a higher limit. If you want to optimize for cost predictability, set a lower one. <a href="${LINKS.docs}/guides/autoscaling-guide#configure-autoscaling-defaults-for-your-project">Learn how to configure autoscaling limits.</a></p>
-      <p>Another effective way to control database compute costs is to ensure scale to zero is enabled for all non-production branches. When a branch is idle, compute scales down automatically, so you're not charged for unused databases. <a href="${LINKS.docs}/introduction/scale-to-zero">Learn about scale to zero.</a></p>
+      <p>Another effective way to control database compute costs is to ensure scale to zero is enabled for all non-production branches. When a branch is idle, compute scales down automatically, so you don't pay for compute while it's idle. <a href="${LINKS.docs}/introduction/scale-to-zero">Learn about scale to zero.</a></p>
       <p>To manage database storage costs, regularly clean up unused branches, snapshots, and projects, and avoid retaining a large history window for instant restore if your use case does not require it. <a href="${LINKS.docs}/introduction/cost-optimization#storage-root-and-child-branches">Learn more about optimizing storage usage.</a></p>
     `,
   },
   {
-    question: 'Do you offer credit programs for startups?',
+    question: 'Can I set a spending limit?',
+    id: 'spending-limit',
     answer: `
-      <p>Early startups that have received venture funding are eligible to apply to our Startup Program. <a href="${LINKS.startups}">Learn more and apply here.</a></p>
+      <p>Yes, in three ways:</p>
+      <ul>
+        <li><a href="${LINKS.docs}/introduction/spending-notifications">Spending notifications</a> (Launch and Scale) email your organization at 80% and 100% of a monthly dollar threshold you set. They alert you but don't stop usage.</li>
+        <li>Autoscaling limits cap the compute size each database can reach, which puts a ceiling on compute spend.</li>
+        <li><a href="${LINKS.docs}/guides/consumption-limits">Consumption limits</a>, set per project with the Neon API, suspend compute when a project reaches a compute, storage, or data transfer quota.</li>
+      </ul>
+    `,
+  },
+  {
+    question: 'Do you offer credits or programs for startups, agent platforms, or open source?',
+    id: 'programs',
+    answer: `
+      <ul>
+        <li><strong>Startups:</strong> early startups that have received venture funding can apply for up to $100k in credits through the <a href="${LINKS.startups}">Startup Program</a>.</li>
+        <li><strong>Agent platforms:</strong> platforms that provision databases for their users can apply to the <a href="${LINKS.programsAgents}">Agent Plan</a>, with sponsored free-tier infrastructure and up to $25,000 in paid-tier credits.</li>
+        <li><strong>Open source:</strong> the <a href="${LINKS.programs}/open-source">Open Source Program</a> offers monthly sponsorships for maintainers.</li>
+      </ul>
     `,
   },
 ];
 
+const htmlToText = (html) =>
+  html
+    .replace(/<\/(p|li|h3)>/g, '$& ')
+    .replace(/<[^>]+>/g, '')
+    .replace(/\s+/g, ' ')
+    .trim();
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'WebPage',
+      name: SEO_DATA.pricing.title,
+      description: SEO_DATA.pricing.description,
+      url: `${VERCEL_URL}${LINKS.pricing}`,
+      dateModified: updatedOn,
+      publisher: { '@type': 'Organization', name: 'Neon' },
+    },
+    {
+      '@type': 'FAQPage',
+      mainEntity: faqItems.map(({ question, answer }) => ({
+        '@type': 'Question',
+        name: question,
+        acceptedAnswer: { '@type': 'Answer', text: htmlToText(answer) },
+      })),
+    },
+  ],
+};
+
 const PricingPage = () => (
   <Layout>
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+    />
     <Hero />
     <Logos className="mt-[104px] md:mt-20" logos={logos} size="sm" />
-    <Plans className="mt-[200px] scroll-mt-5 px-safe xl:mt-[184px] lg:mt-40 md:mt-[120px]" />
+    <Plans
+      className="mt-[200px] scroll-mt-5 px-safe xl:mt-[184px] lg:mt-40 md:mt-[120px]"
+      updatedOn={updatedOn}
+    />
     <Features />
     <Faq items={faqItems} />
     <CTANew

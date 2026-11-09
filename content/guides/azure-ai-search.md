@@ -1,19 +1,19 @@
 ---
-title: Full-Text Search with Neon and Azure AI Search
+title: Full-text search with Neon and Azure AI Search
 subtitle: Build a hybrid search system for developer resources with Neon and Azure AI Search
 author: bobbyiliev
 enableTableOfContents: true
 createdAt: '2025-01-05T00:00:00.000Z'
-updatedOn: '2025-06-23T15:22:02.000Z'
+updatedOn: '2026-09-24T17:56:34.189Z'
 ---
 
-In this guide you will learn how to implement a hybrid search functionality using Neon and Azure AI Search.
+In this guide you will learn how to implement hybrid search using Neon and Azure AI Search.
 
-For the purpose of this guide, we will create a Node.js application that will allow you to search through your database. We will use the Azure SDK to interact with Azure AI Search. The application itself will represent a developer learning platform, which contains resources such as tutorials, cheat sheets, videos, and interactive code examples.
+We'll create a Node.js application that lets you search through your database. We will use the Azure SDK to interact with Azure AI Search. The application itself will represent a developer learning platform, which contains resources such as tutorials, cheat sheets, videos, and interactive code examples.
 
-We will be using Neon for efficient full-text search and Azure AI Search for the AI-driven capabilities.
+Neon handles full-text search with Postgres, and Azure AI Search provides the AI-driven capabilities.
 
-### What You'll Learn
+### What you'll learn
 
 - Configure Neon for full-text search
 - Set up Azure AI Search and use the Azure SDK
@@ -33,11 +33,11 @@ To follow this guide, ensure you have:
 
 ---
 
-## Step 1: Set Up Neon for Full-Text Search
+## Step 1: Set up Neon for full-text search
 
 Let's start by creating our database schema and configuring Neon for [full-text search](/guides/full-text-search).
 
-We'll create a schema to store and organize developer learning resources. The schema will include tables for technologies and tutorials, which will allow us to have an efficient categorization and search functionalities. We'll also set up a GIN index for full-text search.
+We'll create a schema to store and organize developer learning resources. The schema will include tables for technologies and tutorials, which lets us categorize and search resources efficiently. We'll also set up a GIN index for full-text search.
 
 ```sql
 -- Technologies Table
@@ -67,7 +67,7 @@ CREATE INDEX idx_tutorials_search ON tutorials
 
 With the above schema, we will be able to store technologies and tutorials. The `tags` column will be used for categorization, and the `difficulty_level` column will help users filter resources based on their skill level.
 
-The index here is using the `to_tsvector` function to create a GIN index for efficient full-text search. This index will allow us to search through the `title` and `content` columns of the `tutorials` table. For more information on full-text search in PostgreSQL, check out the [Neon Full-Text Search guide](/guides/full-text-search).
+The index here is using the `to_tsvector` function to create a GIN index for efficient full-text search. This index will allow us to search through the `title` and `content` columns of the `tutorials` table. For more information on full-text search in Postgres, check out the [Neon full-text search guide](/guides/full-text-search).
 
 Next, you can insert developer resources into the `technologies` and `tutorials` tables.
 
@@ -95,9 +95,9 @@ With the database schema set up, let's configure Azure AI Search to index and se
 
 If you haven't already, create an Azure account and enable Azure AI Search. Also, make sure you have the [Azure CLI installed](https://learn.microsoft.com/en-us/cli/azure/install-azure-cli).
 
-### Setting Up Azure AI Search
+### Setting up Azure AI Search
 
-1. Verify your Azure CLI installation and login to your Azure account:
+1. Verify your Azure CLI installation and log in to your Azure account:
 
    ```bash
    az --version
@@ -119,17 +119,17 @@ If you haven't already, create an Azure account and enable Azure AI Search. Also
 
    Alternatively, you can create the search service using the [Azure Portal](https://learn.microsoft.com/en-us/azure/search/search-create-service-portal).
 
-1. To get your service endpoint, you can the Azure portal and [find your search service](https://portal.azure.com/#view/Microsoft_Azure_ProjectOxford/CognitiveServicesHub/%7E/CognitiveSearch).
+1. To get your service endpoint, open the Azure portal and [find your search service](https://portal.azure.com/#view/Microsoft_Azure_ProjectOxford/CognitiveServicesHub/%7E/CognitiveSearch).
    - Under the Overview section, copy the URL and save it for a later step.
    - Also grab the API key of your Azure AI Search service from the Azure Portal. In the 'Settings' > 'Keys' section, copy and save an admin key for full rights to create and delete objects. There are two interchangeable primary and secondary keys. Choose either one.
 
-### Creating an Index
+### Creating an index
 
 In Azure AI Search, an index is your searchable data. It defines the structure of your data and the fields you can search on. You can learn more about [indexing in Azure AI Search](https://learn.microsoft.com/en-us/azure/search/search-what-is-an-index) in the official documentation.
 
 There are a few ways to create an index in Azure AI Search. You can use the Azure Portal, Azure CLI, or the Azure SDK.
 
-For a quick start, you can use the Azure Portal, to create an index schema.
+For a quick start, you can use the Azure Portal to create an index schema.
 
 1. [Find your search service](https://portal.azure.com/#view/Microsoft_Azure_ProjectOxford/CognitiveServicesHub/%7E/CognitiveSearch) and navigate to the "Indexes" section to create a new index:
 
@@ -160,7 +160,7 @@ For a quick start, you can use the Azure Portal, to create an index schema.
 
    We will reference the `developer-index` index in our Node.js application to query the Azure AI Search service so if you choose a different name, make sure to update the application accordingly.
 
-Rather than creating the index manually, you can also use the Azure SDK as well.
+Rather than creating the index manually, you can also use the Azure SDK.
 
 1. First, install the Azure SDK for JavaScript:
 
@@ -243,11 +243,11 @@ You can use the `createSearchIndex` function to create the index schema in Azure
 
 Run the function to create the index schema in Azure AI Search. You can verify the index creation in the Azure Portal under the "Indexes" section of your search service.
 
-### Adding Data to the Index
+### Adding data to the index
 
-As of the time of writing, Azure AI Search does not support direct indexing from PostgreSQL, but to populate your index, you can use the Azure Search REST API to upload data to Azure AI Search or use the Azure SDK as well.
+As of the time of writing, Azure AI Search doesn't support direct indexing from Postgres. To populate your index, you can upload data with the Azure Search REST API or the Azure SDK.
 
-Alternatively, you can export data from PostgreSQL to [Azure Blob Storage](https://learn.microsoft.com/en-us/azure/search/search-blob-storage-integration) and then add the blob storage as a data source to Azure AI Search. This method is useful for large datasets or when you need to sync data periodically.
+Alternatively, you can export data from Postgres to [Azure Blob Storage](https://learn.microsoft.com/en-us/azure/search/search-blob-storage-integration) and then add the blob storage as a data source to Azure AI Search. This method is useful for large datasets or when you need to sync data periodically.
 
 Here's how you can add data to the index using the Azure SDK:
 
@@ -313,19 +313,19 @@ Here's how you can add data to the index using the Azure SDK:
 
 4. After that, you can use the Azure portal or CLI to query the index and verify the data upload.
 
-If you wanted to you could also directly use the REST API itself, you can find more information on the [Azure Search docs](https://learn.microsoft.com/en-us/rest/api/searchservice/create-data-source) about uploading data to Azure AI Search.
+You can also use the REST API directly. See the [Azure Search docs](https://learn.microsoft.com/en-us/rest/api/searchservice/create-data-source) for details on uploading data to Azure AI Search.
 
 Now that you have your data indexed in Azure AI Search, let's move on to building the hybrid search service that combines Neon and Azure AI Search.
 
 Make sure to go over the [data import strategies](https://learn.microsoft.com/en-us/azure/search/search-what-is-data-import) to understand how to import data into Azure AI Search efficiently.
 
-## Step 3: Build the Hybrid Search Service
+## Step 3: Build the hybrid search service
 
 For this demo we will build a Node.js application, but Azure AI Search can be integrated with any programming language or framework.
 
-For Node.js Azure provides an [official SDK](https://www.npmjs.com/package/@azure/search-documents) that you can use to interact with the Azure AI Search service. Besides JavaScript, Azure provides SDKs for different languages like Java, Python, and .NET to interact with the search service.
+For Node.js, Azure provides an [official SDK](https://www.npmjs.com/package/@azure/search-documents) that you can use to interact with the Azure AI Search service. Besides JavaScript, Azure provides SDKs for different languages like Java, Python, and .NET to interact with the search service.
 
-### Project Structure
+### Project structure
 
 First, let's set up a clear project structure that will help us organize our code:
 
@@ -346,7 +346,7 @@ hybrid-search/
 └─ package.json
 ```
 
-### Setting Up Dependencies
+### Setting up dependencies
 
 First, install the required packages:
 
@@ -357,12 +357,12 @@ npm install @azure/search-documents pg express dotenv cors
 We are using the following packages:
 
 - `@azure/search-documents`: Official Azure AI Search client library
-- `pg`: PostgreSQL client for Node.js
+- `pg`: Postgres client for Node.js
 - `express`: Web framework for Node.js
 - `dotenv`: Environment variable loader
 - `cors`: Cross-origin resource sharing middleware
 
-### Database Configuration
+### Database configuration
 
 The database configuration module will handle our connection to Neon:
 
@@ -396,11 +396,11 @@ module.exports = { pool, query };
 
 This configuration:
 
-- Creates a connection pool with optimal settings for a web application
+- Creates a connection pool with settings suited to a web application
 - Implements a helper function for executing queries
 - Handles client release to prevent connection leaks
 
-### Implementing Neon Search Service
+### Implementing the Neon search service
 
 The Neon service which we will create will handle full-text search using Postgres's built-in capabilities:
 
@@ -482,9 +482,9 @@ This implementation includes several features:
 - Uses a [CTE](/postgresql/postgresql-tutorial/postgresql-cte) for better query organization
 - Implements weighted ranking for title and content
 - Supports filtering by difficulty, technology, and tags
-- Handles SQL injection through parameterized queries
+- Prevents SQL injection with parameterized queries
 
-### Implementing Azure AI Search Service
+### Implementing the Azure AI Search service
 
 With the Neon service in place, let's create the Azure service to handle AI-powered search features:
 
@@ -574,7 +574,7 @@ This implementation includes:
 
 For the complete list of search options and features, refer to the [Azure AI Search documentation](https://learn.microsoft.com/en-us/azure/search/search-what-is-azure-search).
 
-### Implementing the Search Routes
+### Implementing the search routes
 
 With both Neon and Azure services ready, let's create the routes module to handle search requests:
 
@@ -643,14 +643,14 @@ router.post('/search', async (req, res) => {
 module.exports = router;
 ```
 
-This implementation includes:
+This implementation:
 
 - Supports different search strategies (hybrid, Neon-only, Azure-only)
 - Includes error handling and validation
 - Provides execution metadata
 - Handles result merging for hybrid searches depending on the search strategy
 
-### Utility Functions
+### Utility functions
 
 With everything in place, let's also create some utility functions to handle common operations:
 
@@ -720,7 +720,7 @@ These utilities handle:
 - Score normalization and weighting
 - Proper sorting of combined results
 
-### Main Application File
+### Main application file
 
 Finally, let's tie everything together in a main application file where we set up our Express server:
 
@@ -762,9 +762,9 @@ This main file:
 - Configures the routes
 - Adds error handling
 
-Each component of this implementation is designed to be maintainable. You can easily extend the search service with additional features like data imports to Azure AI Search from PostgreSQL for example.
+Each component lives in its own module, so you can extend the search service with features such as importing data from Postgres into Azure AI Search.
 
-### Testing the Search Service
+### Testing the search service
 
 Create a `.env` file in the project root with the following environment variables:
 
@@ -774,6 +774,8 @@ AZURE_SEARCH_ENDPOINT=https://<developer-search>.search.windows.net
 AZURE_SEARCH_KEY=your-azure-search-key
 PORT=3000
 ```
+
+Replace the `DATABASE_URL` value with your Neon connection string, which you can find by clicking **Connect** on your project dashboard in the Neon Console.
 
 Start the application by running:
 
@@ -798,12 +800,12 @@ Feel free to customize the search query, filters, and limit to test different sc
 
 In this guide, you learned how to build a hybrid search service using Neon and Azure AI Search.
 
-As a next step, you can check out the [Full-Text Search guide](/guides/full-text-search) to learn more about Neon's capabilities and how to optimize your search queries. You can also explore the [Azure AI Search documentation](https://learn.microsoft.com/en-us/azure/search/search-what-is-azure-search) to discover more advanced features and integrations.
+As a next step, you can check out the [Full-Text Search guide](/guides/full-text-search) to learn more about full-text search in Postgres and how to optimize your search queries. You can also explore the [Azure AI Search documentation](https://learn.microsoft.com/en-us/azure/search/search-what-is-azure-search) to discover more advanced features and integrations.
 
-## Additional Resources
+## Additional resources
 
-- [Azure AI Language Documentation](https://learn.microsoft.com/en-us/azure/search/search-what-is-azure-search)
+- [Azure AI Search documentation](https://learn.microsoft.com/en-us/azure/search/search-what-is-azure-search)
 - [Neon Documentation](/docs)
-- [Azure AI Language Client Library](https://learn.microsoft.com/en-us/javascript/api/overview/azure/search-documents-readme)
+- [Azure AI Search client library for JavaScript](https://learn.microsoft.com/en-us/javascript/api/overview/azure/search-documents-readme)
 
 <NeedHelp />

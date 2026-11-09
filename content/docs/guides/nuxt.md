@@ -9,7 +9,7 @@ summary: >-
   covering CLI setup, driver selection (Neon serverless driver, node-postgres,
   or postgres.js), and reading the connection string in server code.
 enableTableOfContents: true
-updatedOn: '2026-08-11T22:46:22.787Z'
+updatedOn: '2026-10-08T19:32:04.700Z'
 ---
 
 <CopyPrompt src="/prompts/nuxt-neon-prompt.md"
@@ -32,7 +32,7 @@ Create a Neon project with the [Neon CLI](/docs/cli/install) or the Console.
 Install the CLI (`npm i -g neon`), then sign in and create the project:
 
 ```bash filename="Terminal"
-neon auth
+neon login
 neon projects create --name my-app
 ```
 
@@ -78,6 +78,7 @@ You'll link this project and pull its credentials in a later step.
 
    ```shell
    npm install pg
+   npm install -D @types/pg
    ```
 
    </CodeTabs>
@@ -99,8 +100,8 @@ neon env pull --file .env    # writes DATABASE_URL from your default branch into
 
 Notes:
 
-- Not signed in yet? Run `neon auth` first.
-- `neon link` prompts for an org and project. To skip the prompts, pass `--project-id <id>` (find IDs with `neon projects list`).
+- Not signed in yet? Run `neon login` first.
+- `neon link` prompts for an org and project. To skip the prompts, pass `--org-id <id>` and `--project-id <id>` (find IDs with `neon orgs list` and `neon projects list`), plus `--branch <name>` to pin a branch, or `-y` to pin the default branch.
 - For Nuxt, pass in `--file .env` to `neon env pull` as it writes to `.env.local` by default, and `nuxt dev` only reads `.env` by default.
 - Which branch? `neon env pull` uses your project's default branch: `main` for CLI-created projects, `production` for Console-created ones (`neon branches list` shows yours). To use a different branch, run `neon checkout <branch>` first; it re-pins the branch in `.neon` so the next `env pull` reads from it.
 
@@ -108,10 +109,10 @@ Notes:
 
 <TabItem>
 
-Add a `.env` file and paste your connection string, which you can copy from the **Connect** button on your **Project Dashboard**. For more information, see [Connect from any application](/docs/connect/connect-from-any-app).
+Add a `.env` file and paste your connection string, which you can copy from the **Connect** button in the Console nav. For more information, see [Connect from any application](/docs/connect/connect-from-any-app).
 
 ```shell filename=".env" shouldWrap
-DATABASE_URL="postgresql://<user>:<password>@<endpoint_hostname>.neon.tech/<dbname>?sslmode=require&channel_binding=require"
+DATABASE_URL="postgresql://[user]:[password]@[neon_hostname]/[dbname]?sslmode=require&channel_binding=require"
 ```
 
 </TabItem>
@@ -122,7 +123,9 @@ DATABASE_URL="postgresql://<user>:<password>@<endpoint_hostname>.neon.tech/<dbna
 
 The connection string is a server-side secret, so query it from Nitro server code, which reads `process.env.DATABASE_URL` directly (no `runtimeConfig` needed).
 
-This example uses the Neon serverless driver (`@neondatabase/serverless`). Create a server utility that holds the database client:
+Create a server utility that holds the database client. Use the tab for the driver you installed:
+
+<CodeTabs labels={["Neon serverless driver", "postgres.js", "node-postgres"]}>
 
 ```typescript filename="server/utils/db.ts"
 import { neon } from '@neondatabase/serverless';
@@ -130,7 +133,23 @@ import { neon } from '@neondatabase/serverless';
 export const sql = neon(process.env.DATABASE_URL!);
 ```
 
-Then use it in a server API route. Files in `server/utils/` are auto-imported, so `sql` is available without an import:
+```typescript filename="server/utils/db.ts"
+import postgres from 'postgres';
+
+export const sql = postgres(process.env.DATABASE_URL!, { ssl: 'require' });
+```
+
+```typescript filename="server/utils/db.ts"
+import pg from 'pg';
+
+export const pool = new pg.Pool({ connectionString: process.env.DATABASE_URL });
+```
+
+</CodeTabs>
+
+Then use it in a server API route. Files in `server/utils/` are auto-imported, so `sql` (or `pool`) is available without an import:
+
+<CodeTabs labels={["Neon serverless driver", "postgres.js", "node-postgres"]}>
 
 ```typescript filename="server/api/version.get.ts"
 export default defineEventHandler(async () => {
@@ -138,6 +157,26 @@ export default defineEventHandler(async () => {
   return row;
 });
 ```
+
+```typescript filename="server/api/version.get.ts"
+export default defineEventHandler(async () => {
+  const [row] = await sql`SELECT version()`;
+  return row;
+});
+```
+
+```typescript filename="server/api/version.get.ts"
+export default defineEventHandler(async () => {
+  const { rows } = await pool.query('SELECT version()');
+  return rows[0];
+});
+```
+
+</CodeTabs>
+
+To type-check the server code with `npx nuxt typecheck`, install `typescript`, `vue-tsc`, and `@types/node` as dev dependencies (`npm install -D typescript vue-tsc @types/node`).
+
+If you use node-postgres, `pg` 8.23 and later print a `SECURITY WARNING` for `sslmode=require`. Change it to `sslmode=verify-full` in `.env` to keep the same behavior without the warning.
 
 <Admonition type="note">
 Keep the database client in `server/` only. Never import `server/utils/db.ts` from a Vue component or `app/` code; the connection string must stay server-side.
@@ -154,8 +193,10 @@ npm run dev
 Then open `localhost:3000/api/version`. The route returns your Postgres version, confirming the connection:
 
 ```json
-{ "version": "PostgreSQL 18.4 on aarch64-unknown-linux-gnu, compiled by gcc ..." }
+{ "version": "PostgreSQL 18.6 (ac70818) on aarch64-unknown-linux-gnu, compiled by gcc ..." }
 ```
+
+`nuxt dev` loads `.env`, but the production server doesn't. After `npm run build`, start it with the variable in its environment, for example `node --env-file=.env .output/server/index.mjs`.
 
 </Steps>
 
@@ -165,5 +206,6 @@ Then open `localhost:3000/api/version`. The route returns your Postgres version,
 - [Add Object Storage](/docs/storage/overview): S3-compatible file storage that branches with your database
 - [Deploy a Function](/docs/compute/functions/overview): Run backend compute next to your database, no separate hosting needed
 - [Call an LLM with AI Gateway](/docs/ai-gateway/overview): Access foundation models from Anthropic, OpenAI, Google, and more with one credential
+- [Realtime](/docs/realtime/quickstart): Build realtime apps with end-to-end reactivity &raquo;
 
 <NeedHelp/>

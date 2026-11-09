@@ -128,4 +128,4 @@ Taking into account these results, using SQ and the `halfvec` type over `vector`
 
 BQ, on the other hand, didn’t result in a good enough recall with embedding vectors of 1536 dimensions. Further experiments with other embedding models and vector lengths are required before reaching a final conclusion.
 
-What about you? What embedding models are you using? Are you using pgvector 0.7.0 and halfvec? Join us on [Discord](https://neon.tech/discord), follow us on [X](https://x.com/neondatabase), and let us know what you think.
+What about you? What embedding models are you using? Are you using pgvector 0.7.0 and halfvec? Join us on [Discord](https://neon.com/discord), follow us on [X](https://x.com/neondatabase), and let us know what you think.

@@ -4,7 +4,7 @@ import React from 'react';
 import { cn } from 'utils/cn';
 
 const Steps = ({ children }) => {
-  // Split content into steps by h2 headings
+  // Split content into steps by h2 headings or `---` thematic breaks
   const steps = [];
   let currentStep = [];
 
@@ -14,15 +14,21 @@ const Steps = ({ children }) => {
       (typeof child.type === 'string' && child.type === 'h2') ||
       (typeof child.type === 'function' && child.type.displayName === 'h2');
 
-    // Start a new step if the current child is a h2 heading
-    if (isHeading) {
+    // A thematic break starts a step whose content is prose rather than a heading
+    const isDivider = child.type === 'hr';
+
+    // Start a new step if the current child is a h2 heading or a thematic break
+    if (isHeading || isDivider) {
       if (currentStep.length > 0) {
         steps.push(currentStep);
       }
       currentStep = [];
     }
 
-    currentStep.push(child);
+    // The break itself is a delimiter, so it is not rendered
+    if (!isDivider) {
+      currentStep.push(child);
+    }
   });
 
   if (currentStep.length > 0) {

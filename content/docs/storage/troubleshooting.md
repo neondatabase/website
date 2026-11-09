@@ -6,10 +6,8 @@ summary: >-
   failures, access denied errors, SDK configuration issues, and S3
   compatibility limitations.
 enableTableOfContents: true
-updatedOn: '2026-08-21T15:53:18.662Z'
+updatedOn: '2026-10-23T14:02:32.319Z'
 ---
-
-<FeatureBetaProps feature_name="Neon Object Storage" />
 
 Every error described below also appears as a log line in the Console. See [Object storage logs](/docs/storage/logs) for how to view, filter, and search them.
 
@@ -19,13 +17,13 @@ Every error described below also appears as a log line in the Console. See [Obje
 
 The Access Key ID is wrong, missing, or the credential has been revoked.
 
-**Fix:** Check that `AWS_ACCESS_KEY_ID` is set to the `token_id` from the credential response, not `token_id_short`. See [Authentication](/docs/storage/authentication#mapping-to-your-s3-sdk) for the correct field mapping. If you no longer have it, revoke the credential and create a new one.
+**Fix:** Check that `AWS_ACCESS_KEY_ID` is set to the `token_id` from the credential response, not `token_id_short`. See [Authentication](/docs/storage/authentication#mapping-to-your-s3-sdk) for the correct field mapping. If you no longer have it, [list your credentials](/docs/storage/authentication#listing-credentials).
 
 ### `403 SignatureDoesNotMatch`
 
 The Secret Access Key is wrong.
 
-**Fix:** Check that `AWS_SECRET_ACCESS_KEY` is set to the `s3_secret_access_key` field from the credential response. This is the 64-character hex string, not the `api_token`. Both are returned only once at creation. If you no longer have the `s3_secret_access_key`, revoke the credential and create a new one.
+**Fix:** Check that `AWS_SECRET_ACCESS_KEY` is set to the `s3_secret_access_key` field from the credential response. This is the full value, `nsk_live_` followed by 64 hex characters, not the `api_token`. Keep the `nsk_live_` prefix. If you no longer have the `s3_secret_access_key`, [show it again](/docs/storage/authentication#listing-credentials).
 
 ### `403 AccessDenied`: missing scope
 
@@ -110,13 +108,13 @@ See [S3 compatibility](/docs/storage/s3-compatibility#not-supported) for the ful
 
 `PutBucketLifecycle` succeeds and the configuration is stored, but expiration and transition rules do not execute.
 
-**Status:** Lifecycle enforcement isn't available in beta. The API accepts and echoes the configuration so tools that read lifecycle rules will work, but the rules have no effect.
+**Status:** Lifecycle enforcement isn't available yet. The API accepts and echoes the configuration so tools that read lifecycle rules will work, but the rules have no effect.
 
 ### `EntityTooLarge`
 
-The object exceeds the maximum size. During beta, Neon Object Storage allows objects up to 5 GiB. A single-request `PutObject` fails immediately; a multipart upload fails at `CompleteMultipartUpload` once the assembled object would exceed the limit.
+The object exceeds the maximum size. Neon Object Storage allows objects up to 5 GiB in a single request and up to 10 GiB with [multipart upload](/docs/storage/objects#multipart-upload). A single-request `PutObject` over 5 GiB fails immediately; a multipart upload fails at `CompleteMultipartUpload` once the assembled object would exceed 10 GiB.
 
-**Fix:** Split the data across multiple objects, or confirm the upload isn't unexpectedly large. Multipart upload makes large uploads more reliable but doesn't raise the per-object limit. The 5 GiB limit is a beta limit, not a permanent cap; [contact support](/docs/introduction/support) if you need to store larger objects.
+**Fix:** For an object between 5 GiB and 10 GiB, use multipart upload. For anything larger, split the data across multiple objects, or confirm the upload isn't unexpectedly large. [Contact support](/docs/introduction/support) if you need to store larger objects.
 
 ## Connection and performance errors
 

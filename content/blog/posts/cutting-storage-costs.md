@@ -7,7 +7,7 @@ excerpt: >-
   charged at a reduced per-GB rate. If this applies to you, there’s nothing you
   need to do—it all happens automatically. Simply en...
 date: '2024-11-21T00:26:43'
-updatedOn: '2024-11-21T00:26:45'
+updatedOn: '2026-11-06T12:00:00.000Z'
 category: company
 categories:
   - company
@@ -21,19 +21,21 @@ isFeatured: false
 seo:
   title: We’re Cutting Storage Costs (Automatically) - Neon
   description: >-
-    All branches idle for at least one day and older than two weeks will now be
-    charged a reduced per-GB rate, saving users money.
+    Neon's November 2024 reduced rate for inactive branches. Archived branches are now billed at the same rate as active branches; see neon.com/pricing.
   keywords: []
   noindex: false
   ogTitle: We’re Cutting Storage Costs (Automatically) - Neon
   ogDescription: >-
-    All branches idle for at least one day and older than two weeks will now be
-    charged a reduced per-GB rate, saving users money.
+    Neon's November 2024 reduced rate for inactive branches. Archived branches are now billed at the same rate as active branches; see neon.com/pricing.
   image: >-
     https://cdn.neonapi.io/public/images/pages/blog/cutting-storage-costs/social.jpg
 ---
 
 ![Image](https://cdn.neonapi.io/public/images/pages/blog/cutting-storage-costs/neon-cut-cost-1-1-1024x576-6733c820.jpg)
+
+<Admonition type="important" title="Storage pricing has changed since this post">
+Archived branches are now billed at the same rate as active branches. As of November 2026, storage is $0.35 per GB-month on Launch and Scale, and the Free plan includes 100 projects, each with 100 CU-hours of compute per month and 1 GB of storage (up to 20 GB across all projects). See the [pricing page](/pricing) and the [plans documentation](/docs/introduction/plans) for current pricing and limits.
+</Admonition>
 
 **Starting December 1st, many Neon users will see lower storage costs. Inactive branches—those idle for at least a day and older than 2 weeks—will now be charged at a reduced per-GB rate. If this applies to you, there’s nothing you need to do—it all happens automatically. Simply enjoy the savings.**
 
@@ -73,4 +75,4 @@ But this tradeoff is well worth it. By implementing achive storage, we can lower
 
 ## Wrap up
 
-This storage model enables us to pass down storage savings to our customers with minimal consequences. Once again, no action is required from you—you can just enjoy the savings when they come. If you have questions, [ask us in Discord](https://discord.gg/92vNTzKDGp), we’ll be happy to chat.
+This storage model enables us to pass down storage savings to our customers with minimal consequences. Once again, no action is required from you—you can just enjoy the savings when they come. If you have questions, [ask us in Discord](https://neon.com/discord), we’ll be happy to chat.

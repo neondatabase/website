@@ -7,12 +7,14 @@ summary: >-
   with neon dev, and deploy with neon deploy. The function gets a public HTTPS
   URL with DATABASE_URL injected from the branch's Postgres database.
 enableTableOfContents: true
-updatedOn: '2026-09-02T15:10:53.712Z'
+updatedOn: '2026-11-05T01:12:32.486Z'
 ---
 
-<FeatureBetaProps feature_name="Neon Functions" />
+A function takes a request and returns a web response, running on long-lived Node.js compute next to your database. The request can come over HTTP, or from a [Function Trigger](/docs/compute/functions/triggers/overview) on a schedule or object upload.
 
-A function takes a request and returns a web response, running on long-lived Node.js compute next to your database.
+<Callout title="Prefer to start from a working example?">
+Browse the [function templates](/functions/templates) for ready-made APIs, MCP servers, AI agents, and bots, then add one to your project with `neon functions new`. See [Use function templates](/docs/compute/functions/templates). To scaffold a complete app instead, use [`neon bootstrap`](/docs/cli/bootstrap).
+</Callout>
 
 ## Hello world
 
@@ -63,7 +65,7 @@ That's a deployed function in three commands. The rest of this guide builds a mo
 
 ## Prerequisites
 
-- A Neon project in AWS US East (Ohio) (`aws-us-east-2`) or AWS Europe (Frankfurt) (`aws-eu-central-1`). Support is expanding toward all regions.
+- A Neon project in AWS US East (Ohio) (`aws-us-east-2`), AWS US East (N. Virginia) (`aws-us-east-1`), AWS Europe (Frankfurt) (`aws-eu-central-1`), or AWS Asia Pacific (Singapore) (`aws-ap-southeast-1`). Support is expanding toward [all regions](/docs/introduction/regions).
 - The latest `neon`, installed and authenticated. Functions commands are new and change often, so upgrade before you start (`npm install -g neon@latest`).
 - Node.js 20 or later. Deployed functions run on Node.js 24, so use 24 locally for the closest match.
 
@@ -103,21 +105,20 @@ Create `neon.ts` at your project root. It declares your functions and is what `n
 import { defineConfig } from "@neon/config/v1";
 
 export default defineConfig({
-  // preview groups features still in beta: functions, AI Gateway, and object-storage buckets.
-  preview: {
-    functions: {
-      // The key is the function's slug:
-      // a permanent ID used in CLI commands and the URL.
-      hello: {
-        name: "My first function", // display label only
-        source: "./functions/hello.ts", // path to the handler file
-      },
+  functions: {
+    // The key is the function's slug:
+    // a permanent ID used in CLI commands and the URL.
+    hello: {
+      name: "My first function", // display label only
+      source: "./functions/hello.ts", // path to the handler file
     },
   },
 });
 ```
 
-The slug is permanent: it can't be renamed after the first deploy. See the [neon.ts reference](/docs/reference/neon-ts) for all options.
+The slug is permanent: it can't be renamed after the first deploy. It allows only 1 to 20 lowercase letters and digits, so `sendemail` works and `send-email` doesn't. See the [neon.ts reference](/docs/reference/neon-ts) for all options.
+
+As a shortcut, `neon config add function hello` creates this `neon.ts` and a starter `functions/hello.ts` handler for you. See [`neon config add`](/docs/cli/config#add). To start from a ready-made [function template](/functions/templates) instead, see [Use function templates](/docs/compute/functions/templates).
 
 Install dependencies:
 
@@ -212,7 +213,7 @@ Once the deployment reaches `completed`, retrieve the invocation URL:
 neon functions get hello
 ```
 
-The `invocation_url` field contains the public URL for your function:
+The `URL` field contains the public URL for your function (`invocation_url` in `--output json`):
 
 ```
 https://<branch_id>-<slug>.compute.<cell>.us-east-2.aws.neon.tech/
@@ -231,5 +232,13 @@ The response is a JSON object with your branch's Postgres version:
 ```
 
 </Steps>
+
+## Next steps
+
+- [Use function templates](/docs/compute/functions/templates): add a ready-made function from the [template catalog](/functions/templates) instead of writing one by hand
+- [Function Triggers](/docs/compute/functions/triggers/overview): invoke a function on a cron schedule or an object upload instead of over HTTP
+- [Deploy and manage](/docs/compute/functions/deploy): the CLI and API for managing deployed functions
+- [Authentication](/docs/compute/functions/authentication): verify callers before a function runs
+- [Custom domains](/docs/compute/functions/custom-domains): serve a function from a domain you own
 
 <NeedHelp/>

@@ -1,35 +1,35 @@
 ---
-title: Using LISTEN and NOTIFY for Pub/Sub in PostgreSQL
+title: Using LISTEN and NOTIFY for pub/sub in Postgres
 subtitle: A step-by-step guide describing how to use LISTEN and NOTIFY for pub/sub in Postgres
 author: vkarpov15
 enableTableOfContents: true
 createdAt: '2025-03-28T13:24:36.612Z'
-updatedOn: '2026-02-01T17:40:30.000Z'
+updatedOn: '2026-09-24T17:56:34.189Z'
 ---
 
-PostgreSQL has a built-in mechanism for publish/subscribe (Pub/Sub) communication using the `LISTEN` and `NOTIFY` commands.
+Postgres has a built-in mechanism for publish/subscribe (pub/sub) communication using the `LISTEN` and `NOTIFY` commands.
 This allows different sessions to send messages to each other using Postgres, without needing a separate service like Kafka or RabbitMQ.
 
 ## Steps
 
 - Overview
-- Set Up a Listener in Node.js
-- Send a Message using `NOTIFY`
+- Set up a listener in Node.js
+- Send a message using `NOTIFY`
 - Limitations of `LISTEN`/`NOTIFY`
 
 ### Overview
 
-At a high level, the following is how `LISTEN` and `NOTIFY` are used.
+At a high level, here's how `LISTEN` and `NOTIFY` work.
 
 1. A client subscribes to a notification channel using `LISTEN`.
 2. Another client sends a message to that channel using `NOTIFY`.
 3. The subscribed client receives the notification asynchronously.
 
-### Set Up a Listener in Node.js
+### Set up a listener in Node.js
 
-Because of connection pooling, setting up a pub/sub listener in the Neon console is tricky.
-But you can create a Node.js script that listens to notifications on the channel `my_channel` as follows.
-Note that you do **not** need to explicitly create the `my_channel` channel, subscribing to the channel also creates the channel.
+Because of connection pooling, setting up a pub/sub listener in the Neon Console is tricky.
+Instead, you can create a Node.js script that listens to notifications on the channel `my_channel` as follows.
+You do **not** need to explicitly create the `my_channel` channel. Subscribing to the channel creates it.
 
 Create a new directory and initialize a new Node.js project.
 
@@ -62,9 +62,9 @@ async function setupListener() {
 setupListener().catch(console.error);
 ```
 
-Make sure to disable connection pooling in your Neon connection string (make sure your connection string does not include `-pooler`).
+Use a direct (non-pooled) Neon connection string: in the **Connect** modal, turn off the **Connection pooling** toggle so the hostname doesn't include `-pooler`.
 
-![Connection String without Pooler](/docs/connect/connection_details_without_connection_pooling.png)
+![Connection string without pooler](/docs/connect/connection_details_without_connection_pooling.png)
 
 `LISTEN` and `NOTIFY` are session-specific features and are not compatible with Neon connection pooling.
 
@@ -86,17 +86,17 @@ You should see the following output:
 Listening for notifications on my_channel...
 ```
 
-Keep the above script running, you will trigger a notification in the next section.
+Keep the script running. You'll trigger a notification in the next section.
 
-### Send a Message using NOTIFY
+### Send a message using NOTIFY
 
-With the listener now configured, connect to your Neon database using the [Neon SQL Editor](/docs/get-started/query-with-neon-sql-editor) or a client like [psql](/docs/connect/query-with-psql-editor). Then, run the following command to publish a notification to the `my_channel` channel.
+With the listener now configured, connect to your database on Neon using the [Neon SQL Editor](/docs/get-started/query-with-neon-sql-editor) or a client like [psql](/docs/connect/query-with-psql-editor). Then, run the following command to publish a notification to the `my_channel` channel.
 
 ```sql
 NOTIFY my_channel, 'Hello from another session!';
 ```
 
-After running the above, your Node.js script should print out the following output.
+Your Node.js script should print the following output.
 
 ```
 Received notification: Hello from another session!
@@ -108,7 +108,7 @@ You can also use the `pg_notify()` function as follows, which is equivalent to t
 SELECT pg_notify('my_channel', 'Hello from pg_notify!');
 ```
 
-Note that you don't need to explicitly create a channel.
+Again, you don't need to explicitly create a channel.
 
 ### Limitations of LISTEN/NOTIFY
 
@@ -119,9 +119,9 @@ While the memory overhead of `LISTEN` is minimal, `LISTEN` can cause performance
 There is also no way to ensure that a message was delivered to a listener.
 If you need message persistence or guarantees that a message was processed, you should look at dedicated message queues like RabbitMQ or Kafka.
 
-If you are using `LISTEN` and `NOTIFY`, you should disable Neon's [Scale to Zero feature](/docs/introduction/scale-to-zero).
-If Neon scales your compute to 0, [it will terminate all listeners](/docs/reference/compatibility#session-context), which may lead to lost messages when your database reactivates.
+If you are using `LISTEN` and `NOTIFY`, disable [scale to zero](/docs/introduction/scale-to-zero) on your compute, which you can do on any paid plan. On the Free plan, computes always suspend after 5 minutes of inactivity.
+When your compute scales to zero, [it will terminate all listeners](/docs/reference/compatibility#session-context), which may lead to lost messages when your database reactivates.
 
 ## Resources
 
-- [PostgreSQL Documentation on LISTEN and NOTIFY](https://www.postgresql.org/docs/current/sql-listen.html)
+- [Postgres documentation on LISTEN and NOTIFY](https://www.postgresql.org/docs/current/sql-listen.html)

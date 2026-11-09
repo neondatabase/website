@@ -10,7 +10,7 @@ summary: >-
   templates for Cursor and Claude, syntax error fixes, and a Mermaid Live
   Editor validation workflow.
 enableTableOfContents: true
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-09-17T16:33:54.884Z'
 ---
 
 This guide shows Neon documentation writers and contributors how to create visual diagrams using Mermaid, a markdown-like syntax for generating diagrams and flowcharts. Mermaid diagrams are automatically styled with Neon's brand colors and support both light and dark modes.
@@ -613,7 +613,7 @@ For pages with many diagrams:
 
 Need help with Mermaid diagrams?
 
-- **Discord**: Ask in [#docs channel](https://discord.gg/92vNTzKDGp)
+- **Discord**: Ask in [#docs channel](https://neon.com/discord)
 - **GitHub**: Open an issue in the [website repository](https://github.com/neondatabase/website)
 - **AI**: Use Cursor or Claude to help debug syntax errors
 

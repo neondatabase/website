@@ -11,7 +11,7 @@ summary: >-
   @auth/neon-adapter, @neondatabase/serverless, and Resend as the email provider
   for magic link delivery.
 enableTableOfContents: true
-updatedOn: '2026-08-17T18:59:17.453Z'
+updatedOn: '2026-10-28T11:11:18.780Z'
 ---
 
 <Admonition type="important" title="Start here: pick your auth setup">
@@ -74,7 +74,7 @@ touch .env
 
 ### Retrieve your Neon database connection string
 
-You can find your database connection string by clicking the **Connect** button on your **Project Dashboard**. It should look similar to this:
+You can find your database connection string by clicking the **Connect** button in the Console nav. It should look similar to this:
 
 ```bash shouldWrap
 postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require&channel_binding=require
@@ -448,7 +448,7 @@ You can find the source code for the application described in this guide on GitH
 
 For more information about the tools and libraries used in this guide, refer to the following documentation:
 
-- [Neon Documentation](/docs/introduction)
+- [Neon Documentation](/docs)
 - [Auth.js Documentation](https://authjs.dev/)
 - [Next.js Documentation](https://nextjs.org/docs)
 - [Resend Documentation](https://resend.com/docs)
