@@ -14,7 +14,6 @@ import {
   getGuideNavigationItems,
   getNavigationLinks,
 } from 'utils/api-guides';
-import getArticleSchema from 'utils/get-article-schema';
 import getMetadata from 'utils/get-metadata';
 import getTableOfContents from 'utils/get-table-of-contents';
 
@@ -69,15 +68,19 @@ const GuidePost = async (props) => {
   const authorID = data.author;
   const author = getAuthor(authorID);
   const tableOfContents = getTableOfContents(content);
-  const jsonLd = getArticleSchema({
-    title: data.title,
-    description: data.summary || data.subtitle || postBySlug.excerpt,
-    datePublished: data.createdAt,
-    dateModified: data.updatedOn,
-    url: data.canonical || `${VERCEL_URL}${LINKS.guides}/${slug}`,
-    image: `${VERCEL_URL}/api/og?title=${Buffer.from(data.title).toString('base64')}`,
-    authors: [{ '@type': 'Person', name: author.name }],
-  });
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    headline: data.title,
+    url: `${VERCEL_URL}${LINKS.guides}/${slug}`,
+    ...(data.createdAt && { datePublished: data.createdAt }),
+    ...(data.updatedOn && { dateModified: data.updatedOn }),
+    author: {
+      '@type': 'Organization',
+      name: 'Neon',
+    },
+    publisher: { '@type': 'Organization', name: 'Neon' },
+  };
 
   return (
     <>

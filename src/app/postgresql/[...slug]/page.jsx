@@ -8,7 +8,6 @@ import { POSTGRESQL_DIR_PATH, isUnusedOrSharedContent } from 'constants/content'
 import { POSTGRESQL_BASE_PATH } from 'constants/docs';
 import { getPostBySlug } from 'utils/api-content';
 import { getNavigation, getAllPostgresTutorials, getNavigationLinks } from 'utils/api-postgresql';
-import getArticleSchema from 'utils/get-article-schema';
 import { getBreadcrumbs } from 'utils/get-breadcrumbs';
 import { getFlatSidebar } from 'utils/get-flat-sidebar';
 import getMetadata from 'utils/get-metadata';
@@ -74,14 +73,18 @@ const PostgresTutorial = async (props) => {
   const { data, content } = post;
   const tableOfContents = getTableOfContents(content);
 
-  const jsonLd = getArticleSchema({
-    title: data.title || data.page_title,
-    description: data.page_description || data.summary || post.excerpt,
-    datePublished: data.createdAt,
-    dateModified: data.updatedOn,
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    headline: data.title,
     url: `${VERCEL_URL}/postgresql/${currentSlug}`,
-    image: `${VERCEL_URL}/docs/og?title=${Buffer.from(data.title || data.page_title).toString('base64')}`,
-  });
+    ...(data.updatedOn && { dateModified: data.updatedOn }),
+    author: {
+      '@type': 'Organization',
+      name: 'Neon',
+    },
+    publisher: { '@type': 'Organization', name: 'Neon' },
+  };
 
   return (
     <>

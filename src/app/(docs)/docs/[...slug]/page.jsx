@@ -8,7 +8,6 @@ import { DOCS_DIR_PATH, CHANGELOG_DIR_PATH, isUnusedOrSharedContent } from 'cons
 import LINKS from 'constants/links';
 import { getPostBySlug } from 'utils/api-content';
 import { getAllPosts, getAllChangelogs, getNavigationLinks, getNavigation } from 'utils/api-docs';
-import getArticleSchema from 'utils/get-article-schema';
 import { getBreadcrumbs } from 'utils/get-breadcrumbs';
 import { getFlatSidebar } from 'utils/get-flat-sidebar';
 import getMetadata from 'utils/get-metadata';
@@ -105,14 +104,18 @@ const DocPost = async (props) => {
   const { data, content } = post;
   const tableOfContents = getTableOfContents(content);
 
-  const jsonLd = getArticleSchema({
-    title: data.title,
-    description: data.summary || data.subtitle || post.excerpt,
-    datePublished: data.createdAt,
-    dateModified: data.updatedOn,
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    headline: data.title,
     url: `${VERCEL_URL}${LINKS.docs}/${currentSlug}`,
-    image: `${VERCEL_URL}/docs/og?title=${Buffer.from(data.title).toString('base64')}`,
-  });
+    ...(data.updatedOn && { dateModified: data.updatedOn }),
+    author: {
+      '@type': 'Organization',
+      name: 'Neon',
+    },
+    publisher: { '@type': 'Organization', name: 'Neon' },
+  };
 
   return (
     <>
