@@ -1,9 +1,9 @@
 ---
 title: Set up OAuth
-subtitle: Add Google, GitHub, Vercel, Microsoft, or Apple sign-in to your application
+subtitle: Add Google, GitHub, Vercel, Microsoft, Apple, or Discord sign-in to your application
 summary: >-
-  Managed Better Auth OAuth setup adds Google, GitHub, Vercel, Microsoft, and Apple
-  social sign-in to an application using `signIn.social()`, with Google enabled in
+  Managed Better Auth OAuth setup adds Google, GitHub, Vercel, Microsoft, Apple, and
+  Discord social sign-in to an application using `signIn.social()`, with Google enabled in
   development via shared credentials and the other providers requiring custom OAuth
   app credentials.
   For production, register the provider's authorized redirect URI as
@@ -15,10 +15,10 @@ summary: >-
 enableTableOfContents: true
 redirectFrom:
   - /docs/auth/guides/oauth
-updatedOn: '2026-09-17T22:48:53.595Z'
+updatedOn: '2026-11-09T18:18:56.726Z'
 ---
 
-OAuth lets users sign in with their Google, GitHub, Vercel, Microsoft, or Apple account. Managed Better Auth handles the OAuth flow and creates a session after authorization.
+OAuth lets users sign in with their Google, GitHub, Vercel, Microsoft, Apple, or Discord account. Managed Better Auth handles the OAuth flow and creates a session after authorization.
 
 ## Development mode
 
@@ -35,14 +35,14 @@ This is safe for development and testing. An outside website can't use the share
 For production, add your own Google Client ID and secret. See [Production setup](#production-setup).
 
 <Admonition type="note">
-GitHub, Vercel, Microsoft, and Apple OAuth require custom credentials and are not available with shared credentials. See [Production setup](#production-setup) to configure your own OAuth apps.
+GitHub, Vercel, Microsoft, Apple, and Discord OAuth require custom credentials and are not available with shared credentials. See [Production setup](#production-setup) to configure your own OAuth apps.
 </Admonition>
 
 ## Sign in with OAuth
 
-Call `signIn.social()` with your provider (`"google"`, `"github"`, `"vercel"`, `"microsoft"`, or `"apple"`). The SDK sends the user to the provider's sign-in page. After the user authorizes, the provider redirects to Managed Better Auth's OAuth callback route (see [Production setup](#production-setup)), then Managed Better Auth redirects the browser to your **`callbackURL`** (must use a [trusted domain](/docs/auth/guides/configure-domains) in production).
+Call `signIn.social()` with your provider (`"google"`, `"github"`, `"vercel"`, `"microsoft"`, `"apple"`, or `"discord"`). The SDK sends the user to the provider's sign-in page. After the user authorizes, the provider redirects to Managed Better Auth's OAuth callback route (see [Production setup](#production-setup)), then Managed Better Auth redirects the browser to your **`callbackURL`** (must use a [trusted domain](/docs/auth/guides/configure-domains) in production).
 
-<CodeTabs labels={["Google","GitHub","Vercel","Microsoft","Apple"]}>
+<CodeTabs labels={["Google","GitHub","Vercel","Microsoft","Apple","Discord"]}>
 
 ```jsx {6} filename="src/App.jsx"
 import { authClient } from './auth';
@@ -119,6 +119,21 @@ const handleAppleSignIn = async () => {
 };
 ```
 
+```jsx {6} filename="src/App.jsx"
+import { authClient } from './auth';
+
+const handleDiscordSignIn = async () => {
+  try {
+    await authClient.signIn.social({
+      provider: "discord",
+      callbackURL: window.location.origin,
+    });
+  } catch (error) {
+    console.error("Discord sign-in error:", error);
+  }
+};
+```
+
 </CodeTabs>
 
 ## Handle the callback
@@ -144,7 +159,7 @@ Specify different URLs for new users or errors:
 
 ```jsx {3-5} filename="src/App.jsx"
 await authClient.signIn.social({
-  provider: "google", // or "github", "vercel", "microsoft", "apple"
+  provider: "google", // or "github", "vercel", "microsoft", "apple", "discord"
   callbackURL: "/dashboard",
   newUserCallbackURL: "/welcome",
   errorCallbackURL: "/error",
@@ -153,7 +168,7 @@ await authClient.signIn.social({
 
 ## Production setup
 
-For production, configure your own OAuth app credentials. GitHub, Vercel, Microsoft, and Apple OAuth require custom credentials, while Google OAuth works with shared credentials for development but should use custom credentials in production.
+For production, configure your own OAuth app credentials. GitHub, Vercel, Microsoft, Apple, and Discord OAuth require custom credentials, while Google OAuth works with shared credentials for development but should use custom credentials in production.
 
 ### 1. Register redirect URIs with each provider
 
@@ -165,7 +180,7 @@ Managed Better Auth uses [Better Auth](https://www.better-auth.com/) callback ro
 
 Use the **Auth base URL** from the Neon Console for that branch. In your app it is usually the `NEON_AUTH_BASE_URL` or `VITE_NEON_AUTH_URL` value, or the URL you pass to `createAuthClient`. Do not add a trailing slash before `/callback`.
 
-Replace `{provider}` with `google`, `github`, `vercel`, `microsoft`, or `apple`.
+Replace `{provider}` with `google`, `github`, `vercel`, `microsoft`, `apple`, or `discord`.
 
 Example authorized redirect URI for Google:
 
@@ -203,6 +218,10 @@ See [Microsoft setup](#microsoft-setup) for the redirect URI, tenant, and email 
 
 See [Apple setup](#apple-setup). Apple requires an HTTPS redirect URI, so it can't be used with `localhost`.
 
+**Discord**
+
+See [Discord setup](#discord-setup) for the redirect URI and how Discord email verification affects account linking.
+
 ### 2. Add trusted domains for your app
 
 Before testing production OAuth, add every origin you pass as **`callbackURL`** (and related URLs) to Managed Better Auth's allowlist. See [Configure trusted domains](/docs/auth/guides/configure-domains).
@@ -216,6 +235,7 @@ Create OAuth apps with your providers:
 - [Vercel OAuth setup](https://vercel.com/docs/sign-in-with-vercel/manage-from-dashboard#create-an-app)
 - [Microsoft setup](#microsoft-setup)
 - [Apple setup](#apple-setup)
+- [Discord setup](#discord-setup)
 
 Then give the **Client ID** and **Client Secret** to Managed Better Auth for that branch. Apple and Microsoft take a few extra fields, described in their sections below.
 
@@ -261,6 +281,8 @@ curl -X POST 'https://console.neon.tech/api/v2/projects/{project_id}/branches/{b
   -H 'Content-Type: application/json' \
   -d '{"id": "google", "client_id": "<client-id>", "client_secret": "<client-secret>"}'
 ```
+
+For Discord, use the same request with `"id": "discord"`.
 
 Apple and Microsoft accept additional fields. For Apple, `client_secret` is the full contents of the `.p8` file, including the `BEGIN` and `END` lines, with newlines encoded as `\n` in JSON:
 
@@ -387,6 +409,31 @@ Apple requires an HTTPS return URL, so `localhost` URLs aren't accepted.
 Managed Better Auth signs the client secret JWT that Apple expects, using your private key, so you don't generate or rotate a client secret yourself. API responses show a masked fingerprint of the key and never return the key itself.
 
 To rotate the key, create a new key in Apple Developer and update the provider with the new `.p8` contents. The request must include the new key's `apple_key_id` (`--apple-key-id`) in the same request.
+
+## Discord setup
+
+Create an application in the [Discord Developer Portal](https://discord.com/developers/applications) and give its credentials to Managed Better Auth. Neon has no shared Discord credentials, so you always use your own application.
+
+1. Select **New Application**, give it a name, and create it.
+2. Go to **OAuth2**. Copy the **Client ID**, then select **Reset Secret** and copy the **Client Secret**. Discord shows the secret only once.
+3. Under **Redirects**, add **`{NEON_AUTH_BASE_URL}/callback/discord`** and save your changes. For example:
+
+   ```text
+   https://ep-example.neonauth.us-east-2.aws.neon.tech/neondb/auth/callback/discord
+   ```
+
+4. Add the Client ID and Client Secret to the branch with the [API](#3-create-oauth-apps-and-paste-credentials-into-neon), using `"id": "discord"`. The Neon Console and the Neon CLI don't list Discord as a provider yet.
+
+Managed Better Auth requests the `identify` and `email` scopes, so you don't need to configure scopes in Discord.
+
+### Email verification
+
+Managed Better Auth treats a Discord email as verified only when Discord reports it as verified. If the user hasn't verified their email with Discord:
+
+- If a user with the same email already exists (for example, from Google, GitHub, or email and password), Discord sign-in can't link to that user.
+- A new user who signs in with Discord is created with an unverified email.
+
+A Discord account with no email can't sign in. The callback fails with `email_not_found`.
 
 ## Google OAuth branding
 

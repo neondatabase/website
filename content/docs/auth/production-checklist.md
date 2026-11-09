@@ -10,7 +10,7 @@ summary: >-
   rate-limited and does not support verification links. A custom SMTP provider
   is required for both.
 enableTableOfContents: true
-updatedOn: '2026-10-09T09:41:16.035Z'
+updatedOn: '2026-11-09T18:18:56.726Z'
 ---
 
 Complete these steps before taking your application to production with Managed Better Auth.
@@ -30,7 +30,7 @@ Complete these steps before taking your application to production with Managed B
 </CheckItem>
 
 <CheckItem title="4. Configure OAuth credentials (if using OAuth)" href="/docs/auth/guides/setup-oauth#production-setup">
-  Set up your own OAuth apps (Google, GitHub, Vercel, Microsoft, or Apple). Google is the only provider with shared development credentials, so replace those with your own before launch.
+  Set up your own OAuth apps (Google, GitHub, Vercel, Microsoft, Apple, or Discord). Google is the only provider with shared development credentials, so replace those with your own before launch.
 </CheckItem>
 
 <CheckItem title="5. Enable email verification (recommended)" href="/docs/auth/guides/email-verification">

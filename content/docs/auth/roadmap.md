@@ -11,7 +11,7 @@ summary: >-
 enableTableOfContents: true
 redirectFrom:
   - /docs/neon-auth/roadmap
-updatedOn: '2026-09-17T16:33:54.884Z'
+updatedOn: '2026-11-09T18:18:56.726Z'
 ---
 
 Managed Better Auth is in active development. This page shows what's currently supported and what we're working on next.
@@ -53,7 +53,7 @@ Managed Better Auth is built on [Better Auth](https://www.better-auth.com/). Not
 | Plugin                                                                             | Status       |
 | ---------------------------------------------------------------------------------- | ------------ |
 | [Email & password](https://www.better-auth.com/docs/authentication/email-password) | ✅ Supported |
-| Social OAuth (Google, GitHub, Vercel, Microsoft, Apple)                            | ✅ Supported |
+| Social OAuth (Google, GitHub, Vercel, Microsoft, Apple, Discord)                   | ✅ Supported |
 | [Email OTP](/docs/auth/guides/plugins/email-otp)                                   | ✅ Supported |
 | [Admin](/docs/auth/guides/plugins/admin)                                           | ✅ Supported |
 | [Organization](/docs/auth/guides/plugins/organization)                             | ⚠️ Partial   |
