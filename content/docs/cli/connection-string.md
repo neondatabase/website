@@ -25,7 +25,7 @@ To open a `psql` session directly, use the dedicated [`neon psql`](/docs/cli/psq
 
 <CliUsage command="connection-string" />
 
-The `[branch]` is the branch name or ID. If omitted, the default branch is used. To connect to a specific point in the branch's history, use the point-in-time format `branch@timestamp` or `branch@lsn`. If no timestamp or LSN is appended, the current state (HEAD) is used.
+The `[branch]` is the branch name or ID. If omitted, the default branch from your context (or the project's default branch) is used. To connect to a specific point in the branch's history, use the point-in-time format `branch@timestamp` or `branch@lsn`. If no timestamp or LSN is appended, the current state (HEAD) is used.
 
 ## Options
 
