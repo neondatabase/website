@@ -32,7 +32,7 @@ You can instantly create read replicas for any branch in your Neon project and c
 You can create read replicas using the Neon Console, [Neon CLI](/docs/cli), or [Neon API](/docs/reference/api), providing the flexibility required to integrate read replicas into your workflow or CI/CD processes.
 
 <Admonition type="note">
-On the Free plan, you can add up to 3 read replica computes per project. On the Launch and Scale plans, you can add up to 6 read replicas per branch, and the [Agent plan](/docs/introduction/agent-plan) allows up to 3. See [Read replicas](/docs/introduction/plans#read-replicas) on the plans page. If a branch already has more than 6 read replicas, they keep running, but you can't add another until the branch is below the limit.
+You can add up to 6 read replicas per branch on any plan. The Free plan is also limited to 3 read replica computes per project, and the [Agent plan](/docs/introduction/agent-plan) allows up to 3 read replicas. If a branch already has more than 6 read replicas, they keep running, but you can't add another until the branch is below the limit. See [Read replicas](/docs/introduction/plans#read-replicas) on the plans page.
 </Admonition>
 
 <Tabs labels={["Console", "CLI", "API"]}>
