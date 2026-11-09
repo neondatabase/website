@@ -1472,6 +1472,8 @@
                   slug: cli/inspect
                 - title: logs
                   slug: cli/logs
+                - title: incidents
+                  slug: cli/incidents
         - section: API
           icon: api
           items:

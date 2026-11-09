@@ -48,6 +48,8 @@ Before evaluating `neon.ts`, `neon dev` loads your project's `.env` and then `.e
 neon dev --env .env.staging
 ```
 
+If `neon.ts` declares a function variable with `required: true` and it's unset, `neon dev` fails before any function starts. `--source` checks only the function it serves. A variable declared `required: "default-branch"` or `required: false` can be unset, and the function runs without it. See [Function env](/docs/reference/neon-ts#functions).
+
 Local functions inherit every loaded variable, including ones `neon.ts` doesn't declare. A deployed function only gets the variables `neon.ts` declares plus the ones Neon injects, so check that anything your code needs is declared before you deploy. The dev server's startup banner lists which env files it loaded and how many variables each one set.
 
 `neon dev` never writes to these files. To reuse the branch credential behind the AI Gateway and Object Storage, it reads the file [`neon env pull`](/docs/cli/env) writes. Without that file, it resolves the credential again on every start, so run `neon env pull` once if you restart often.

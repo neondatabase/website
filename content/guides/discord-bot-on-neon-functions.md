@@ -30,7 +30,7 @@ Before you begin, make sure you have:
 1. **Node.js**: Version 24. Download from [nodejs.org](https://nodejs.org/en/download/).
 2. **Neon account**: Sign up for a free Neon account at [console.neon.tech](https://console.neon.tech/signup).
 3. **Discord account**: Sign up for a free Discord account at [discord.com](https://discord.com/register).
-4. **Neon CLI**: Installed globally (`npm i -g neon`) and authenticated (`neon login`). See [Neon CLI Quickstart](/docs/cli/quickstart) for more details.
+4. **Neon CLI**: Installed globally (`npm i -g neon@latest`) and authenticated (`neon login`). See [Neon CLI Quickstart](/docs/cli/quickstart) for more details.
 
 <Steps>
 
@@ -206,9 +206,9 @@ export default defineConfig({
       name: "Discord Bot",
       source: "./index.ts",
       env: {
-        DISCORD_APP_ID: process.env.DISCORD_APP_ID!,
-        DISCORD_PUBLIC_KEY: process.env.DISCORD_PUBLIC_KEY!,
-        DISCORD_BOT_TOKEN: process.env.DISCORD_BOT_TOKEN!,
+        DISCORD_APP_ID: { value: process.env.DISCORD_APP_ID, required: true },
+        DISCORD_PUBLIC_KEY: { value: process.env.DISCORD_PUBLIC_KEY, required: true },
+        DISCORD_BOT_TOKEN: { value: process.env.DISCORD_BOT_TOKEN, required: true },
       },
     },
   },

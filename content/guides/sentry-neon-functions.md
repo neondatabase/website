@@ -501,8 +501,8 @@ export const config = defineConfig({
       name: "Sentry-Instrumented API",
       source: "./src/index.ts",
       env: {
-        ...(process.env.SENTRY_DSN ? { SENTRY_DSN: process.env.SENTRY_DSN } : {}),
-        ...(process.env.SENTRY_RELEASE ? { SENTRY_RELEASE: process.env.SENTRY_RELEASE } : {}),
+        SENTRY_DSN: { value: process.env.SENTRY_DSN, required: false, onUndefined: "skip" },
+        SENTRY_RELEASE: { value: process.env.SENTRY_RELEASE, required: false, onUndefined: "skip" },
         SENTRY_TRACES_SAMPLE_RATE: process.env.SENTRY_TRACES_SAMPLE_RATE ?? "1",
         PRODUCTION_BRANCH: process.env.PRODUCTION_BRANCH ?? "main",
       },
@@ -516,7 +516,7 @@ export default config;
 Here's what each property does:
 
 - **`functions.api`** registers `src/index.ts` as a deployable Neon Function named "Sentry-Instrumented API".
-- **`env`** passes the Sentry variables from your `.env.local` file to the function at runtime. The values resolve when `neon deploy` evaluates the config, which keeps secrets out of source control. Neon-injected variables like `NEON_BRANCH` don't need to be declared here; they're injected automatically. `SENTRY_DSN` and `SENTRY_RELEASE` are declared only when they have a value, so leaving one empty skips it instead of failing `parseEnv`.
+- **`env`** passes the Sentry variables from your `.env.local` file to the function at runtime. The values resolve when `neon deploy` evaluates the config, which keeps secrets out of source control. Neon-injected variables like `NEON_BRANCH` don't need to be declared here; they're injected automatically. `SENTRY_DSN` and `SENTRY_RELEASE` are declared `required: false` with `onUndefined: "skip"`, so leaving one empty skips it instead of failing the deploy or `parseEnv`.
 - **`export default config`** exposes the config object so your code can pass it to `parseEnv` for type-safe variable access. Command-line tooling reads the same value from the default export.
 
 Apply the configuration and deploy your function to Neon:
@@ -712,8 +712,8 @@ Finally, enable the AI Gateway and redeploy. Update `neon.ts` to set `aiGateway:
       name: "Sentry-Instrumented API",
       source: "./src/index.ts",
       env: {
-        ...(process.env.SENTRY_DSN ? { SENTRY_DSN: process.env.SENTRY_DSN } : {}),
-        ...(process.env.SENTRY_RELEASE ? { SENTRY_RELEASE: process.env.SENTRY_RELEASE } : {}),
+        SENTRY_DSN: { value: process.env.SENTRY_DSN, required: false, onUndefined: "skip" },
+        SENTRY_RELEASE: { value: process.env.SENTRY_RELEASE, required: false, onUndefined: "skip" },
         SENTRY_TRACES_SAMPLE_RATE: process.env.SENTRY_TRACES_SAMPLE_RATE ?? "1",
         PRODUCTION_BRANCH: process.env.PRODUCTION_BRANCH ?? "main",
         AGENT_MODEL: process.env.AGENT_MODEL ?? "gpt-oss-120b", // [!code ++]

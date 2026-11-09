@@ -123,7 +123,7 @@ functions: {
   "<slug>": {
     name: string,       // display name shown in neon functions list and the console
     source: string,     // path to entry file, relative to neon.ts
-    env?: Record<string, string>,
+    env?: Record<string, string | FunctionEnvVar>,  // literal or declaration; see below
     bundler?: "esbuild" | "none" | ((fn) => Promise<FunctionBundle>),  // default "esbuild"
     dev?: {
       port?: number,    // local port for neon dev; fails if taken; auto-assigned if omitted
@@ -139,7 +139,7 @@ preview: {
     "<slug>": {
       name: string,
       source: string,
-      env?: Record<string, string>,
+      env?: Record<string, string | FunctionEnvVar>,
       bundler?: "esbuild" | "none" | ((fn) => Promise<FunctionBundle>),
       dev?: { port?: number },
       customDomains?: string[],  // hostnames to serve this function; default branch only
@@ -152,23 +152,33 @@ preview: {
 
 Slugs must match `^[a-z0-9]{1,20}$` and are immutable after first deployment. Because slugs can't use separators, use `name` for a human-readable label. For example, `slug: "myrestapi"` with `name: "My REST API"`. See [Deploy and manage functions](/docs/compute/functions/deploy#slugs).
 
-`env` values are resolved at deploy time when `neon deploy` runs. Reading `process.env.X` here captures the value in your shell at deploy time, not at function runtime. Every value must be a defined string, so set each variable before you deploy and mark the read with `!`:
+`env` values are resolved at deploy time when `neon deploy` runs. Reading `process.env.X` here captures the value in your shell at deploy time, not at function runtime. Use `neon deploy --env .env.production` to load a `.env` file before evaluation. For typed access to these variables inside your function at runtime, see [Environment variables](/docs/compute/functions/environment-variables).
+
+Each `env` entry is either a literal string, which is uploaded as is, or a declaration with a `value` and a `required` rule. Declarations need Neon CLI 9.2.0 or later and `@neon/config` 1.13.0 or later (and `@neon/env` 2.1.0 or later to read them with `parseEnv`); older versions reject them with `expected string, received object`:
 
 ```ts
 env: {
-  API_KEY: process.env.API_KEY!,
+  STRIPE_SECRET_KEY: { value: process.env.STRIPE_SECRET_KEY, required: true },
+  SENTRY_DSN: { value: process.env.SENTRY_DSN, required: "default-branch" },
+  ADMIN_TOKEN: { value: process.env.ADMIN_TOKEN, required: false, onUndefined: "skip" },
+  SAMPLE_RATE: { value: process.env.SAMPLE_RATE ?? "1", required: true },
+  LOG_LEVEL: "info",
 }
 ```
 
-Skip empty-string fallbacks like `?? ""`, because deploying an empty value deletes that variable from the live function. If you don't want to set a variable, remove its key from `neon.ts`. For an optional variable, declare it only when it has a value:
+A declaration's value is checked only when `neon deploy`, [`neon dev`](/docs/cli/dev#environment-variables), or `parseEnv` needs it, so importing `neon.ts` from app code or another function never fails on a secret it doesn't hold. An undefined or empty value counts as unset. `required` sets what happens when the value is unset:
 
-```ts
-env: {
-  ...(process.env.SENTRY_RELEASE ? { SENTRY_RELEASE: process.env.SENTRY_RELEASE } : {}),
-}
-```
+| `required`         | Deploying the default branch | Deploying another branch | `neon dev`                       |
+| ------------------ | ---------------------------- | ------------------------ | -------------------------------- |
+| `true`             | Fails before any change      | Fails before any change  | Fails before any function starts |
+| `"default-branch"` | Fails before any change      | Left out                 | Runs without it                  |
+| `false`            | Left out                     | Left out                 | Runs without it                  |
 
-Use `neon deploy --env .env.production` to load a `.env` file before evaluation. Commands that evaluate `neon.ts`, such as `neon deploy` and [`neon dev`](/docs/cli/dev#environment-variables), check that every `env` value is set and report any missing variable by name. For typed access to these variables inside your function at runtime, see [Environment variables](/docs/compute/functions/environment-variables).
+`"default-branch"` means the branch Neon marks as the project's default. It doesn't look at branch names or protection. For a fallback, put it in `value`, as `SAMPLE_RATE` does above.
+
+`onUndefined` sets what "left out" means for `required: false` or `"default-branch"`. The default, `"unset"`, removes the variable from the deployed function (or from the function's environment in `neon dev`), so the deployment matches `neon.ts`. That also removes a value a new branch inherited from its parent. `"skip"` leaves the deployed value as it is. Use it for a value you set outside `neon.ts`, for example with `neon functions deploy <slug> --env KEY=VALUE`. Keys `neon.ts` doesn't declare are left as they are.
+
+A literal `process.env.X!` still works, but it's validated wherever `neon.ts` is evaluated, including app code and each deployed function that calls `parseEnv(config, ...)`. Each of those then needs every function's secrets. A declaration with `required: true` avoids that.
 
 `bundler` controls how `source` becomes the deployed archive. The default, `"esbuild"`, bundles your source (TypeScript is compiled here). Set `"none"` to ship a prebuilt directory or file as-is, in which case the entry must be named `index.mjs` or `index.js`. This is the config form of the CLI's [`--no-bundle`](/docs/compute/functions/deploy#deploy-with-neon-functions-deploy) flag. To use your own build system, set `bundler` to a function that receives the resolved function config and returns the files to deploy (a `FunctionBundle`, a record of path to file contents), so a framework that already emits its own build output can deploy it unchanged.
 
@@ -191,7 +201,7 @@ triggers: {
     bucket?: string,        // storage only: bucket name declared under buckets
     prefix?: string,        // storage only: object-key prefix filter
     functionPath?: string,  // request path sent to the function; default "/"
-    enabled?: boolean,      // default true
+    enabled?: boolean,      // omit to create enabled and leave later changes alone
   },
 },
 ```
@@ -204,9 +214,9 @@ triggers: {
 | `bucket`       | `storage_object_created` | Bucket to watch. The API and CLI call this `storage_object_created.bucket_name`                 |
 | `prefix`       | No                       | Only objects whose key starts with this prefix fire the trigger (`storage_object_created` only) |
 | `functionPath` | No                       | Request path sent to the function. Default `/`                                                  |
-| `enabled`      | No                       | Default `true`                                                                                  |
+| `enabled`      | No                       | Omit to create the trigger enabled and leave later changes alone. Set it to enforce that state  |
 
-Triggers that exist remotely but are omitted from `neon.ts` are left alone. Inherited triggers on a child branch start disabled; deploying a `neon.ts` that declares the same trigger enables the inherited copy. See [Function Triggers overview](/docs/compute/functions/triggers/overview) for branching behavior, delivery payloads, and the Console, CLI, and API alternatives.
+Triggers that exist remotely but are omitted from `neon.ts` are left alone. With Neon CLI 9.3.2 or later and `@neon/config` 1.14.0 or later, when `enabled` is omitted, `neon deploy` creates the trigger enabled and then leaves its state alone, so a trigger you turn off with [`neon triggers disable`](/docs/cli/triggers#disable) stays off. Inherited triggers on a child branch start disabled and stay disabled. Set `enabled: true` or `enabled: false` to have every deploy enforce that state, which also enables an inherited copy on a child branch. Older versions enable a declared trigger on every deploy. See [Function Triggers overview](/docs/compute/functions/triggers/overview) for branching behavior, delivery payloads, and the Console, CLI, and API alternatives.
 
 ### buckets (#buckets)
 

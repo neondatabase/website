@@ -22,7 +22,7 @@ The help you can get depends on your plan:
 
 To open a support ticket, go to the [Neon Console](https://console.neon.tech) and select **Help** > **Get help** from the organization menu in the top right corner. See [Open the support center](#open-the-support-center).
 
-Check the [Neon status page](https://neonstatus.com/) first if you think there's a service disruption.
+Check the [Neon status page](https://neonstatus.com/) first if you think there's a service disruption, or run [`neon incidents`](/docs/cli/incidents) to see the same report in your terminal.
 
 ## Support plans
 
