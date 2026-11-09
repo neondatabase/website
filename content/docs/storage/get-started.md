@@ -8,7 +8,7 @@ summary: >-
 enableTableOfContents: true
 redirectFrom:
   - /docs/storage/quickstart
-updatedOn: '2026-10-09T17:51:53.586Z'
+updatedOn: '2026-11-04T23:29:42.213Z'
 ---
 
 To set up Neon Object Storage with an AI coding assistant, install the Neon Platform (`neon`) and Neon Object Storage skills with the [Neon CLI](/docs/cli):
@@ -27,7 +27,7 @@ To follow this guide, you need:
 
 ## Recommended: enable storage with neon.ts
 
-The recommended way to enable storage and get credentials is via `neon.ts`, Neon's infrastructure-as-code config file. Install the config package, link your local app to the Neon project and branch you want to target, declare buckets under the top-level `buckets` key, then run `neon deploy` to provision them on the linked branch and pull credentials into `.env.local` automatically:
+The recommended way to enable storage and get credentials is via `neon.ts`, Neon's infrastructure-as-code config file. Install the config package, link your local app to the Neon project and branch you want to target, declare buckets under the top-level `buckets` key, then run `neon deploy` to provision them on the linked branch and pull credentials into your env file automatically (an existing `.env`, otherwise `.env.local`):
 
 ```bash
 npm install @neon/config
@@ -49,10 +49,10 @@ export default defineConfig({
 To declare a bucket without editing `neon.ts` by hand, run `neon config add bucket my-bucket` (add `--access public_read` for anonymous reads). See [`neon config add`](/docs/cli/config#add).
 
 ```bash
-neon deploy          # provisions buckets and writes AWS_* vars to .env.local
+neon deploy          # provisions buckets and writes AWS_* vars to .env (or .env.local)
 ```
 
-After deploy, your `.env.local` contains `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`, `AWS_ENDPOINT_URL_S3`, and `AWS_REGION`. Skip to [Configure your client](#configure-your-client) below.
+After deploy, your env file (`.env` if you have one, otherwise `.env.local`) contains `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`, `AWS_ENDPOINT_URL_S3`, and `AWS_REGION`. Skip to [Configure your client](#configure-your-client) below.
 
 Already deployed? Pull the vars again with:
 
