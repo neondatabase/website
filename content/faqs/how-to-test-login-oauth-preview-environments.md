@@ -2,7 +2,7 @@
 title: "How do I test login and OAuth in preview environments?"
 subtitle: "With Managed Better Auth on Neon, every preview branch gets its own auth endpoint with a copy of production users, sessions, and settings, so preview deployments run real sign-up, login, and OAuth flows without touching production accounts."
 createdAt: '2026-11-02T00:00:00.000Z'
-updatedOn: '2026-11-03T23:21:47.530Z'
+updatedOn: '2026-11-09T18:24:22.269Z'
 isDraft: false
 previousLink:
   title: 'How do I test authentication in CI without mocking it?'
@@ -46,7 +46,7 @@ Add the preview URL to the branch's trusted domains with the Neon API ([configur
 Two URLs matter. The provider's authorized redirect URI is `{NEON_AUTH_BASE_URL}/callback/{provider}` for that branch, and the `callbackURL` you pass to `signIn.social()` is where users land afterward, which must be on a trusted domain ([set up OAuth](/docs/auth/guides/setup-oauth)).
 
 - **Google** works on previews without setup: it's enabled by default with Neon's shared development credentials ([shared credentials](/docs/auth/guides/setup-oauth#development-mode)).
-- **GitHub, Vercel, Microsoft, and Apple** need your own OAuth app, and because each branch has its own Auth URL, each branch's callback has to be registered with the provider ([set up OAuth](/docs/auth/guides/setup-oauth)).
+- **GitHub, Vercel, Microsoft, Apple, and Discord** need your own OAuth app, and because each branch has its own Auth URL, each branch's callback has to be registered with the provider ([set up OAuth](/docs/auth/guides/setup-oauth)).
 - **Trusted domains** accept wildcard patterns such as `https://*.my-app-preview.vercel.app`, so one entry covers every preview host under that pattern ([wildcard domains](/docs/auth/guides/configure-domains#wildcard-domains-for-previews)).
 
 <Admonition type="note" title="Before production">
