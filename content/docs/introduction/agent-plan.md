@@ -94,7 +94,7 @@ Agent and Scale are different plans. Enrollment starts from Scale, but after you
 | Autoscaling                    | Up to 16 CU                                                                | Up to 16 CU                                |
 | Branches per project           | Up to 1,000                                                                | Up to 5,000                                |
 | Root branches per project      | 5                                                                          | 25                                         |
-| Read replicas                  | Up to 3                                                                    | Up to 6 per branch                         |
+| Read replicas                  | Up to 3 per project                                                        | Up to 6 per branch                         |
 | Instant restore history window | Up to 7 days                                                               | Up to 30 days                              |
 | Public network transfer        | 100 GB per project included, then $0.10/GB                                 | 500 GB per project included, then $0.10/GB |
 | Automated snapshot schedules   | Available upon request                                                     | Available                                  |

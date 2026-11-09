@@ -220,7 +220,7 @@ Suspends computes after inactivity.
 
 [Read replicas](/docs/introduction/read-replicas) are read-only computes that serve reads from the same storage as your branch's primary compute. Each read replica is billed as compute.
 
-All plans are limited to 6 read replicas per branch. The Free plan is also limited to 3 read replica computes per project, and the [Agent plan](/docs/introduction/agent-plan) allows up to 3 read replicas.
+All plans are limited to 6 read replicas per branch. The Free plan is also limited to 3 read replica computes per project, and the [Agent plan](/docs/introduction/agent-plan) allows up to 3 read replicas per project.
 
 ### Storage
 
