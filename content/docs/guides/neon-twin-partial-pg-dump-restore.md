@@ -1,8 +1,8 @@
 ---
-title: pg_dump / pg_restore — Partial Twin
+title: Partial Twin with pg_dump, pg_restore, and psql
 subtitle: Create a partial Twin of your production database
 summary: >-
-  A GitHub Actions workflow that mirrors a production PostgreSQL schema and a
+  A GitHub Actions workflow that mirrors a production Postgres schema and a
   row-limited data subset into a Neon development database using `pg_dump
   --schema-only`, `psql \copy`, and `pg_restore`. Use this approach when you
   need a lightweight dev environment that reflects production structure without
@@ -51,7 +51,7 @@ on:
 env:
   PROD_DATABASE_URL: ${{ secrets.PROD_DATABASE_URL }} # Production or primary database
   DEV_DATABASE_URL: ${{ secrets.DEV_DATABASE_URL }} # Development database
-  PG_VERSION: '17'
+  PG_VERSION: '18'
 
 jobs:
   dump-and-restore:
@@ -101,19 +101,19 @@ Below is an explanation of each part of the GitHub Action.
 
 ### env
 
-- `PROD_DATABASE_URL`: The PostgreSQL connection string for your production database.
-- `DEV_DATABASE_URL`: The PostgreSQL connection string for your Neon database.
-- `PG_VERSION`: The version of PostgreSQL to install in the Action environment.
+- `PROD_DATABASE_URL`: The Postgres connection string for your production database.
+- `DEV_DATABASE_URL`: The Postgres connection string for your Neon database.
+- `PG_VERSION`: The Postgres major version to install in the Action environment. Use the same major version as your production database, or a newer one. `pg_dump` refuses to dump a server with a newer major version than its own.
 
 ### steps
 
-- `Install PostgreSQL`: Installs the specified version of PostgreSQL into the Action environment from the [Apt](https://wiki.debian.org/Apt) repository.
+- `Install PostgreSQL`: Installs the specified Postgres version into the Action environment from the [Apt](https://wiki.debian.org/Apt) repository.
 - `Set PostgreSQL binary path`: Creates `$POSTGRES` variable for use in subsequent steps.
 - `Dump schema`: Exports the database schema (table structures, indexes, constraints) from the production database into a backup file.
 - `Dump data`: Extracts a subset of data (50 most recent users) from the production database into a CSV file.
 - `Drop tables and schema`: Completely removes the existing schema in the development database and recreates it to ensure a clean state.
-- `Restore schema` : Imports the previously dumped schema into the development database, re-creating table structures and constraints.
-- `Restore data` : Loads the extracted data subset from the CSV file into the corresponding table in the development database.
+- `Restore schema`: Imports the previously dumped schema into the development database, re-creating table structures and constraints.
+- `Restore data`: Loads the extracted data subset from the CSV file into the corresponding table in the development database.
 
 ### pg_dump flags
 
@@ -121,18 +121,17 @@ The table below provides an explanation of each flag used by `pg_dump`.
 
 | Flag          | Meaning                                                                          |
 | ------------- | -------------------------------------------------------------------------------- |
-| -FC           | Dumps the database in a custom format.                                           |
+| -Fc           | Dumps the database in a custom format.                                           |
 | --schema-only | Dumps only the schema (table structures, indexes, constraints) without any data. |
 | -f            | Specifies the output file where the schema dump will be stored.                  |
 
 ### psql flags
 
-The table below provides an explanation of each flag used by `pg_dump`.
+The table below provides an explanation of each flag used by `psql`.
 
-| Flag | Meaning                                    |
-| ---- | ------------------------------------------ |
-| -c   | Executes a single command and then exits.  |
-| -d   | Specifies the database name to connect to. |
+| Flag | Meaning                                   |
+| ---- | ----------------------------------------- |
+| -c   | Executes a single command and then exits. |
 
 ### pg_restore flags
 
@@ -164,7 +163,7 @@ For example, here is an amended example for the **Dump data** step.
     run: |
         $POSTGRES/psql "${{ env.PROD_DATABASE_URL }}" -c "\copy (SELECT * FROM products ORDER BY product_id DESC LIMIT 50) TO '${{ github.workspace }}/products-subset.csv' WITH CSV HEADER"
         $POSTGRES/psql "${{ env.PROD_DATABASE_URL }}" -c "\copy (SELECT * FROM transactions WHERE product_id IN (SELECT product_id FROM products ORDER BY product_id DESC LIMIT 10)) TO '${{ github.workspace }}/transactions-subset.csv' WITH CSV HEADER"
-        $POSTGRES/psql "${{ env.PROD_DATABASE_URL }}" -c "\copy (SELECT * FROM users WHERE user_id IN (SELECT user_id FROM transactions WHERE product_id IN (SELECT product_id FROM products ORDER BY product_id DESC LIMIT 50))) TO '${{ github.workspace }}/users-subset.csv' WITH CSV HEADER"
+        $POSTGRES/psql "${{ env.PROD_DATABASE_URL }}" -c "\copy (SELECT * FROM users WHERE user_id IN (SELECT user_id FROM transactions WHERE product_id IN (SELECT product_id FROM products ORDER BY product_id DESC LIMIT 10))) TO '${{ github.workspace }}/users-subset.csv' WITH CSV HEADER"
 ```
 
 And here is an example for the amended **Restore data** step.
@@ -214,7 +213,7 @@ on:
 
 ### Add Concurrency and Conditions
 
-To prevent conflicts between scheduled runs and runs triggered by a Pull Request, set `cancel-in-progress` to `true` under `concurrency`. Additionally, add an `if` statement to ensure the job only executes when specific conditions are met.
+To prevent conflicts between scheduled runs and runs triggered by a Pull Request, set `cancel-in-progress` to `true` under `concurrency`. Add an `if` statement so the job runs only when specific conditions are met.
 
 ```diff
 
