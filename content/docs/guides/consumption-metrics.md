@@ -6,7 +6,7 @@ summary: >-
   The Neon consumption metrics API (/consumption_history/v2) returns project
   usage metrics for compute, storage, data transfer, extra branches, and
   Functions, plus per-branch metrics. It is available on Launch, Scale, Agent,
-  Business, and Enterprise plans. Use the project endpoint for project totals and
+  and Enterprise plans. Use the project endpoint for project totals and
   invoicing inputs; use the branch endpoint to attribute compute, storage, and
   Functions usage to individual branches, CI environments, or development
   workflows. Granularity options are hourly, daily, and monthly. Calls do not
@@ -22,8 +22,8 @@ Using the Neon API, you can query consumption metrics to track your resource usa
 
 | API                               | Endpoint                           | Description                                                                                | Plan availability                |
 | --------------------------------- | ---------------------------------- | ------------------------------------------------------------------------------------------ | -------------------------------- |
-| **Project metrics (usage-based)** | `/consumption_history/v2/projects` | Returns project metrics for compute, storage, data transfer, extra branches, and Functions | Launch, Scale, Agent, Business, Enterprise |
-| **Branch metrics**                | `/consumption_history/v2/branches` | Returns 10 project metrics broken down by branch, across one or more projects              | Launch, Scale, Agent, Business, Enterprise |
+| **Project metrics (usage-based)** | `/consumption_history/v2/projects` | Returns project metrics for compute, storage, data transfer, extra branches, and Functions | Launch, Scale, Agent, Enterprise |
+| **Branch metrics**                | `/consumption_history/v2/branches` | Returns 10 project metrics broken down by branch, across one or more projects              | Launch, Scale, Agent, Enterprise |
 
 <Admonition type="tip">
 **Which API should I use?**
@@ -235,7 +235,7 @@ The [project metrics endpoint](#request-overview) on this page returns project u
 Common error responses you may encounter:
 
 - **400 Bad Request**: The request is invalid. For example, `from` is before March 1, 2024, or the endpoint doesn't support a metric (such as `extra_branches_month` on the branch endpoint).
-- **403 Forbidden**: This endpoint is not available for your plan. It is only supported with Launch, Scale, Agent, Business, and Enterprise plan accounts.
+- **403 Forbidden**: This endpoint is not available for your plan. It is only supported with Launch, Scale, Agent, and Enterprise plan accounts.
 - **404 Not Found**: Account is not a member of the organization specified by `org_id`.
 - **406 Not Acceptable**: The specified date-time range is outside the boundaries of the specified granularity. Adjust your `from` and `to` values or select a different `granularity`.
 - **429 Too Many Requests**: Too many requests. Wait before retrying.
