@@ -89,7 +89,7 @@ The following example retrieves hourly public and private network transfer for a
 curl --request GET \
   --url 'https://console.neon.tech/api/v2/consumption_history/v2/projects?org_id=$ORG_ID&from=2026-02-01T00:00:00Z&to=2026-02-07T00:00:00Z&granularity=hourly&metrics=public_network_transfer_bytes,private_network_transfer_bytes' \
   --header 'Accept: application/json' \
-  --header 'Authorization: Bearer $NEON_API_KEY'
+  --header "Authorization: Bearer $NEON_API_KEY"
 ```
 
 <details>
@@ -153,7 +153,7 @@ The `data_transfer_bytes` field on the [Get project details](/docs/reference/api
 curl --request GET \
   --url https://console.neon.tech/api/v2/projects/$PROJECT_ID \
   --header 'Accept: application/json' \
-  --header 'Authorization: Bearer $NEON_API_KEY'
+  --header "Authorization: Bearer $NEON_API_KEY"
 ```
 
 The response includes `data_transfer_bytes` in the project object:
@@ -173,7 +173,7 @@ The response includes `data_transfer_bytes` in the project object:
 curl --request GET \
   --url https://console.neon.tech/api/v2/projects/$PROJECT_ID/branches/$BRANCH_ID \
   --header 'Accept: application/json' \
-  --header 'Authorization: Bearer $NEON_API_KEY'
+  --header "Authorization: Bearer $NEON_API_KEY"
 ```
 
 The response includes `data_transfer_bytes` in the branch object:

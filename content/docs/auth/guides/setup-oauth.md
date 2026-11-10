@@ -257,7 +257,7 @@ Send a `POST` request to the [add OAuth provider](/docs/reference/api/auth/add-b
 
 ```bash shouldWrap
 curl -X POST 'https://console.neon.tech/api/v2/projects/{project_id}/branches/{branch_id}/auth/oauth_providers' \
-  -H 'Authorization: Bearer $NEON_API_KEY' \
+  -H "Authorization: Bearer $NEON_API_KEY" \
   -H 'Content-Type: application/json' \
   -d '{"id": "google", "client_id": "<client-id>", "client_secret": "<client-secret>"}'
 ```

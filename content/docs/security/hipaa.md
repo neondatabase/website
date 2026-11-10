@@ -85,7 +85,7 @@ To create a new HIPAA-compliant Neon project via the Neon API, set `audit_log_le
 curl --request POST \
      --url https://console.neon.tech/api/v2/projects \
      --header 'accept: application/json' \
-     --header 'authorization: Bearer $NEON_API_KEY' \
+     --header "authorization: Bearer $NEON_API_KEY" \
      --header 'content-type: application/json' \
      --data '
 {
@@ -105,7 +105,7 @@ To enable HIPAA for an existing project, set `hipaa` to `true` in the `project s
 curl --request PATCH \
      --url https://console.neon.tech/api/v2/projects/YOUR_PROJECT_ID \
      --header 'accept: application/json' \
-     --header 'authorization: Bearer $NEON_API_KEY' \
+     --header "authorization: Bearer $NEON_API_KEY" \
      --header 'content-type: application/json' \
      --data '
 {

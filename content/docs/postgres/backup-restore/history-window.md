@@ -86,7 +86,7 @@ Use the `history_retention_seconds` property in the project settings:
 
 ```bash
 curl -X PATCH 'https://console.neon.tech/api/v2/projects/{project_id}' \
-  -H 'Authorization: Bearer $NEON_API_KEY' \
+  -H "Authorization: Bearer $NEON_API_KEY" \
   -H 'Content-Type: application/json' \
   -d '{
     "project": {

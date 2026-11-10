@@ -543,7 +543,7 @@ Issue a [Restart compute endpoint](/docs/reference/api/endpoints/restart-project
 curl --request POST \
    --url https://console.neon.tech/api/v2/projects/autumn-lake-30024670/endpoints/ep-misty-morning-a1pfa4ez/restart \
    --header 'accept: application/json' \
-   --header 'authorization: Bearer $NEON_API_KEY'
+   --header "authorization: Bearer $NEON_API_KEY"
 ```
 
 <Admonition type="note">

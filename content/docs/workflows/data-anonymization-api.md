@@ -44,7 +44,7 @@ Creates a new branch with anonymized data using PostgreSQL Anonymizer for static
 ```bash
 curl -X POST \
   'https://console.neon.tech/api/v2/projects/{project_id}/branch_anonymized' \
-  -H 'Authorization: Bearer $NEON_API_KEY' \
+  -H "Authorization: Bearer $NEON_API_KEY" \
   -H 'Accept: application/json' \
   -H 'Content-Type: application/json' \
   -d '{
@@ -213,7 +213,7 @@ Retrieves the current status of an anonymized branch, including state and progre
 ```bash
 curl -X GET \
   'https://console.neon.tech/api/v2/projects/{project_id}/branches/{branch_id}/anonymized_status' \
-  -H 'Authorization: Bearer $NEON_API_KEY' \
+  -H "Authorization: Bearer $NEON_API_KEY" \
   -H 'Accept: application/json'
 ```
 
@@ -250,7 +250,7 @@ Starts or restarts the anonymization process for branches in `initialized`, `err
 ```bash
 curl -X POST \
   'https://console.neon.tech/api/v2/projects/{project_id}/branches/{branch_id}/anonymize' \
-  -H 'Authorization: Bearer $NEON_API_KEY' \
+  -H "Authorization: Bearer $NEON_API_KEY" \
   -H 'Accept: application/json'
 ```
 
@@ -285,7 +285,7 @@ Retrieves all masking rules defined for the specified anonymized branch.
 ```bash
 curl -X GET \
   'https://console.neon.tech/api/v2/projects/{project_id}/branches/{branch_id}/masking_rules' \
-  -H 'Authorization: Bearer $NEON_API_KEY' \
+  -H "Authorization: Bearer $NEON_API_KEY" \
   -H 'Accept: application/json'
 ```
 
@@ -334,7 +334,7 @@ The API replaces all masking rules with the provided array. To add a new rule, i
 ```bash
 curl -X PATCH \
   'https://console.neon.tech/api/v2/projects/{project_id}/branches/{branch_id}/masking_rules' \
-  -H 'Authorization: Bearer $NEON_API_KEY' \
+  -H "Authorization: Bearer $NEON_API_KEY" \
   -H 'Accept: application/json' \
   -H 'Content-Type: application/json' \
   -d '{

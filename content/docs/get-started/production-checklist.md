@@ -143,7 +143,7 @@ Our recommended approach:
 curl --request POST \
      --url https://console.neon.tech/api/v2/projects/{project_id}/endpoints/{endpoint_id}/restart \
      --header 'accept: application/json' \
-     --header 'authorization: Bearer $NEON_API_KEY'
+     --header "authorization: Bearer $NEON_API_KEY"
 ```
 
 With the Neon CLI:
