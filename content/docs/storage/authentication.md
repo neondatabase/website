@@ -6,7 +6,7 @@ summary: >-
   Each credential maps to an S3 Access Key ID and Secret Access Key. Credentials
   are scoped to a branch and valid for that branch and all its descendants.
 enableTableOfContents: true
-updatedOn: '2026-10-21T12:36:11.000Z'
+updatedOn: '2026-11-10T18:52:43.837Z'
 ---
 
 Neon Object Storage uses the same scoped-credential system as [AI Gateway](/docs/ai-gateway/authentication): one credential API mints branch-scoped tokens that differ by scope (Object Storage uses `storage:read` and `storage:write`). You create a scoped credential via the Neon API, and it maps directly to the S3 Access Key ID and Secret Access Key your SDK expects. No AWS account or IAM configuration required.
@@ -59,9 +59,7 @@ curl -X POST "https://console.neon.tech/api/v2/projects/{project_id}/branches/{b
 
 The `name` and `expires_at` fields are optional.
 
-<Admonition type="warning">
-`expires_at` is not currently enforced. A credential created with an `expires_at` value in the past still authenticates successfully. Don't rely on it for access control; revoke credentials explicitly instead. See [Revoking credentials](#revoking-credentials).
-</Admonition>
+Set `expires_at` to make a credential stop working at a set time. It must be between 1 minute and 365 days from now. After that time, the credential no longer authenticates. To end access sooner, see [Revoking credentials](#revoking-credentials).
 
 The response includes these fields:
 
@@ -238,11 +236,11 @@ To rotate a credential in place, run `neon credentials rotate <token_id>` or use
 
 ## Common errors
 
-| Error                       | Cause                               | Fix                                                                                                                  |
-| --------------------------- | ----------------------------------- | -------------------------------------------------------------------------------------------------------------------- |
-| `403 InvalidAccessKeyId`    | `token_id` is wrong or revoked      | Check `AWS_ACCESS_KEY_ID` is set correctly. If you rotated the credential, update the value.                         |
-| `403 SignatureDoesNotMatch` | Wrong secret access key             | Check `AWS_SECRET_ACCESS_KEY` is the value from credential creation. If lost, [show it again](#listing-credentials). |
-| `403 AccessDenied`          | Credential lacks the required scope | Recreate with `storage:write` for uploads/deletes                                                                    |
-| `403 AccessDenied`          | Branch not in credential lineage    | Use a credential created on this branch or an ancestor                                                               |
+| Error                       | Cause                                    | Fix                                                                                                                  |
+| --------------------------- | ---------------------------------------- | -------------------------------------------------------------------------------------------------------------------- |
+| `403 InvalidAccessKeyId`    | `token_id` is wrong, revoked, or expired | Check `AWS_ACCESS_KEY_ID` is set correctly. If you rotated the credential, update the value.                         |
+| `403 SignatureDoesNotMatch` | Wrong secret access key                  | Check `AWS_SECRET_ACCESS_KEY` is the value from credential creation. If lost, [show it again](#listing-credentials). |
+| `403 AccessDenied`          | Credential lacks the required scope      | Recreate with `storage:write` for uploads/deletes                                                                    |
+| `403 AccessDenied`          | Branch not in credential lineage         | Use a credential created on this branch or an ancestor                                                               |
 
 <NeedHelp/>
