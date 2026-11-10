@@ -1,6 +1,6 @@
 ---
 title: Run analytics queries with Read Replicas
-subtitle: Leverage read replicas for running data-intensive analytics queries
+subtitle: Use read replicas to run data-intensive analytics queries
 summary: >-
   Neon read replicas provide a dedicated read-only compute that shares the same
   storage as your primary branch, letting you run costly SQL analytics and
@@ -30,12 +30,11 @@ CREATE TABLE sales (
 );
 
 INSERT INTO sales (product_id, sale_amount, sale_date) VALUES
-(1, 20.50, '2022-07-24'),
-(2, 35.99, '2022-08-24'),
-(1, 20.50, '2022-09-24'),
-(3, 15.00, '2023-01-24'),
-(1, 20.50, '2023-04-24');
-...
+(1, 20.50, CURRENT_DATE - INTERVAL '2 years'),
+(2, 35.99, CURRENT_DATE - INTERVAL '8 months'),
+(1, 20.50, CURRENT_DATE - INTERVAL '5 months'),
+(3, 15.00, CURRENT_DATE - INTERVAL '3 months'),
+(1, 20.50, CURRENT_DATE - INTERVAL '1 month');
 ```
 
 You want to find the total sale amount for each product in the past year, but due to the large number of products and sales in your database, you know this is a costly query that could impact performance on your production system.
