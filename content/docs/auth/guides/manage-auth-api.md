@@ -37,7 +37,7 @@ Send a `POST` request to enable Managed Better Auth on a branch:
 
 ```bash
 curl -X POST 'https://console.neon.tech/api/v2/projects/{project_id}/branches/{branch_id}/auth' \
-  -H 'Authorization: Bearer $NEON_API_KEY' \
+  -H "Authorization: Bearer $NEON_API_KEY" \
   -H 'Content-Type: application/json' \
   -d '{"auth_provider": "better_auth"}'
 ```
@@ -86,7 +86,7 @@ Retrieve the current Managed Better Auth configuration for a branch:
 
 ```bash
 curl -X GET 'https://console.neon.tech/api/v2/projects/{project_id}/branches/{branch_id}/auth' \
-  -H 'Authorization: Bearer $NEON_API_KEY'
+  -H "Authorization: Bearer $NEON_API_KEY"
 ```
 
 Response (200 OK):
@@ -111,7 +111,7 @@ Update auth settings for a branch. Currently supports changing the application n
 
 ```bash
 curl -X PATCH 'https://console.neon.tech/api/v2/projects/{project_id}/branches/{branch_id}/auth/config' \
-  -H 'Authorization: Bearer $NEON_API_KEY' \
+  -H "Authorization: Bearer $NEON_API_KEY" \
   -H 'Content-Type: application/json' \
   -d '{"name": "My App"}'
 ```
@@ -136,7 +136,7 @@ Send a `DELETE` request to disable Managed Better Auth on a branch:
 
 ```bash
 curl -X DELETE 'https://console.neon.tech/api/v2/projects/{project_id}/branches/{branch_id}/auth' \
-  -H 'Authorization: Bearer $NEON_API_KEY' \
+  -H "Authorization: Bearer $NEON_API_KEY" \
   -H 'Content-Type: application/json' \
   -d '{"delete_data": true}'
 ```

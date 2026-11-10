@@ -235,7 +235,7 @@ The [Create project](/docs/reference/api/projects/create-project) and [Update pr
 curl -X PATCH \
      https://console.neon.tech/api/v2/projects/falling-salad-31638542 \
      -H 'accept: application/json' \
-     -H 'authorization: Bearer $NEON_API_KEY' \
+     -H "authorization: Bearer $NEON_API_KEY" \
      -H 'content-type: application/json' \
      -d '
 {
@@ -339,7 +339,7 @@ Specify the `ips` option with an empty string. If applicable, also include `"pro
 curl -X PATCH \
      https://console.neon.tech/api/v2/projects/falling-salad-31638542 \
      -H 'accept: application/json' \
-     -H 'authorization: Bearer $NEON_API_KEY' \
+     -H "authorization: Bearer $NEON_API_KEY" \
      -H 'content-type: application/json' \
      -d '
 {

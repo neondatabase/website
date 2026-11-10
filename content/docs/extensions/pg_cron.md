@@ -38,7 +38,7 @@ The `project_id` and `endpoint_id` values can be obtained from the Neon Console 
 curl --request PATCH \
      --url https://console.neon.tech/api/v2/projects/<project_id>/endpoints/<endpoint_id> \
      --header 'accept: application/json' \
-     --header 'authorization: Bearer $NEON_API_KEY$' \
+     --header "authorization: Bearer $NEON_API_KEY" \
      --header 'content-type: application/json' \
      --data '
 {
@@ -59,7 +59,7 @@ After setting `cron.database_name`, you must restart your compute to apply the n
 curl --request POST \
      --url https://console.neon.tech/api/v2/projects/<project_id>/endpoints/<endpoint_id>/restart \
      --header 'accept: application/json' \
-     --header 'authorization: Bearer $NEON_API_KEY'
+     --header "authorization: Bearer $NEON_API_KEY"
 ```
 
 Or restart it with the Neon CLI:

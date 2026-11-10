@@ -50,7 +50,7 @@ Add an external authentication provider by registering a JWKS URL:
 
 ```bash
 curl -X POST 'https://console.neon.tech/api/v2/projects/{project_id}/jwks' \
-  -H 'Authorization: Bearer $NEON_API_KEY' \
+  -H "Authorization: Bearer $NEON_API_KEY" \
   -H 'Content-Type: application/json' \
   -d '{
     "jwks_url": "https://your-provider/.well-known/jwks.json",
@@ -65,14 +65,14 @@ To remove a provider, first list the configured JWKS URLs to find the `jwks_id`:
 
 ```bash
 curl -X GET 'https://console.neon.tech/api/v2/projects/{project_id}/jwks' \
-  -H 'Authorization: Bearer $NEON_API_KEY'
+  -H "Authorization: Bearer $NEON_API_KEY"
 ```
 
 Then delete it:
 
 ```bash
 curl -X DELETE 'https://console.neon.tech/api/v2/projects/{project_id}/jwks/{jwks_id}' \
-  -H 'Authorization: Bearer $NEON_API_KEY'
+  -H "Authorization: Bearer $NEON_API_KEY"
 ```
 
 For the full JWKS specification, see the [Neon API Reference](/docs/reference/api/projects/add-project-jwks).
@@ -184,7 +184,7 @@ Send a POST request to [enable the Data API](/docs/reference/api/dataapi/create-
 
 ```bash
 curl -X POST 'https://console.neon.tech/api/v2/projects/{project_id}/branches/{branch_id}/data-api/{database_name}' \
-  -H 'Authorization: Bearer $NEON_API_KEY' \
+  -H "Authorization: Bearer $NEON_API_KEY" \
   -H 'Content-Type: application/json' \
   -d '{}'
 ```
@@ -218,7 +218,7 @@ Optional fields in the enable request body:
 
 ```bash
 curl -X GET 'https://console.neon.tech/api/v2/projects/{project_id}/branches/{branch_id}/data-api/{database_name}' \
-  -H 'Authorization: Bearer $NEON_API_KEY'
+  -H "Authorization: Bearer $NEON_API_KEY"
 ```
 
 Response (200 OK):
@@ -250,7 +250,7 @@ Send a PATCH request to [update the configuration](/docs/reference/api/dataapi/u
 
 ```bash
 curl -X PATCH 'https://console.neon.tech/api/v2/projects/{project_id}/branches/{branch_id}/data-api/{database_name}' \
-  -H 'Authorization: Bearer $NEON_API_KEY' \
+  -H "Authorization: Bearer $NEON_API_KEY" \
   -H 'Content-Type: application/json' \
   -d '{}'
 ```
@@ -269,7 +269,7 @@ The `settings` object replaces the existing settings entirely. It is not merged.
 
 ```bash
 curl -X DELETE 'https://console.neon.tech/api/v2/projects/{project_id}/branches/{branch_id}/data-api/{database_name}' \
-  -H 'Authorization: Bearer $NEON_API_KEY'
+  -H "Authorization: Bearer $NEON_API_KEY"
 ```
 
 <Admonition type="warning" title="Immediate effect">

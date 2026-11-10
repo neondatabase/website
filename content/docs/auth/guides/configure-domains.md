@@ -53,7 +53,7 @@ Send a `POST` request to the [add trusted domain](/docs/reference/api/auth/add-b
 
 ```bash shouldWrap
 curl -X POST 'https://console.neon.tech/api/v2/projects/{project_id}/branches/{branch_id}/auth/domains' \
-  -H 'Authorization: Bearer $NEON_API_KEY' \
+  -H "Authorization: Bearer $NEON_API_KEY" \
   -H 'Content-Type: application/json' \
   -d '{"domain": "https://myapp.com", "auth_provider": "better_auth"}'
 ```

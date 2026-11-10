@@ -200,7 +200,7 @@ You can view **available** libraries by running [List preloaded libraries](/docs
 curl --request GET \
      --url https://console.neon.tech/api/v2/projects/your_project_id/available_preload_libraries \
      --header 'accept: application/json' \
-     --header 'authorization: Bearer $NEON_API_KEY'
+     --header "authorization: Bearer $NEON_API_KEY"
 ```
 
 The response body lists available libraries and whether the libraries are enabled by default. Response body attributes include:
@@ -308,7 +308,7 @@ You can enable available libraries using the `preloaded_libraries` object in a [
 curl --request PATCH \
     --url https://console.neon.tech/api/v2/projects/<your_project_id> \
     --header 'accept: application/json' \
-    --header 'authorization: Bearer $NEON_API_KEY' \
+    --header "authorization: Bearer $NEON_API_KEY" \
     --header 'content-type: application/json' \
     --data '
 {

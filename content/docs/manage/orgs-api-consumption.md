@@ -25,7 +25,7 @@ Before querying consumption metrics, you'll need the `org_id` values for organiz
 curl --request GET \
      --url 'https://console.neon.tech/api/v2/users/me/organizations' \
      --header 'accept: application/json' \
-     --header 'authorization: Bearer $PERSONAL_API_KEY' | jq
+     --header "authorization: Bearer $PERSONAL_API_KEY" | jq
 ```
 
 The response includes details about each organization, including the `org_id` you'll need for consumption queries:
@@ -65,7 +65,7 @@ Using the endpoint `GET /consumption_history/projects`, let's use the same start
 curl --request GET \
      --url 'https://console.neon.tech/api/v2/consumption_history/projects?limit=10&from=2024-06-30T00%3A00%3A00Z&to=2024-07-02T00%3A00%3A00Z&granularity=hourly&org_id=org-ocean-art-12345678' \
      --header 'accept: application/json' \
-     --header 'authorization: Bearer $ORG_API_KEY'
+     --header "authorization: Bearer $ORG_API_KEY"
 ```
 
 <details>

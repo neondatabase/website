@@ -107,7 +107,7 @@ Use the [Update email and password configuration](/docs/reference/api/auth/updat
 
 ```bash
 curl -X PATCH 'https://console.neon.tech/api/v2/projects/{project_id}/branches/{branch_id}/auth/email_and_password' \
-  -H 'Authorization: Bearer $NEON_API_KEY' \
+  -H "Authorization: Bearer $NEON_API_KEY" \
   -H 'Content-Type: application/json' \
   -d '{"revoke_sessions_on_password_reset": true}'
 ```

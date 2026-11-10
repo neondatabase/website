@@ -68,7 +68,7 @@ You can also configure the plugin via the [Neon API](/docs/reference/api). Use y
 curl -X GET \
   'https://console.neon.tech/api/v2/projects/{project_id}/branches/{branch_id}/auth/plugins' \
   -H 'Accept: application/json' \
-  -H 'Authorization: Bearer $NEON_API_KEY'
+  -H "Authorization: Bearer $NEON_API_KEY"
 ```
 
 Example response (excerpt showing the `organization` object):
@@ -95,7 +95,7 @@ Send only the fields you want to change; all request body fields are optional.
 curl -X PATCH \
   'https://console.neon.tech/api/v2/projects/{project_id}/branches/{branch_id}/auth/plugins/organization' \
   -H 'Accept: application/json' \
-  -H 'Authorization: Bearer $NEON_API_KEY' \
+  -H "Authorization: Bearer $NEON_API_KEY" \
   -H 'Content-Type: application/json' \
   -d '{
     "enabled": true,

@@ -106,7 +106,7 @@ First, create a new database called `people` on the `production` branch and add 
    curl --request POST \
    --url https://console.neon.tech/api/v2/projects/royal-band-06902338/branches/br-bitter-bird-a56n6lh4/databases \
    --header 'accept: application/json' \
-   --header 'authorization: Bearer $NEON_API_KEY' \
+   --header "authorization: Bearer $NEON_API_KEY" \
    --header 'content-type: application/json' \
    --data '{
       "database": {
@@ -122,7 +122,7 @@ First, create a new database called `people` on the `production` branch and add 
    curl --request GET \
      --url 'https://console.neon.tech/api/v2/projects/royal-band-06902338/connection_uri?branch_id=br-bitter-bird-a56n6lh4&database_name=people&role_name=alex' \
      --header 'accept: application/json' \
-     --header 'authorization: Bearer $NEON_API_KEY'
+     --header "authorization: Bearer $NEON_API_KEY"
    ```
 
    The API call will return an connection string similar to this one:
@@ -242,7 +242,7 @@ Using the [Create branch](/docs/reference/api/branches/create-project-branch) AP
 curl --request POST \
 --url https://console.neon.tech/api/v2/projects/royal-band-06902338/branches \
 --header 'accept: application/json' \
---header 'authorization: Bearer $NEON_API_KEY' \
+--header "authorization: Bearer $NEON_API_KEY" \
 --header 'content-type: application/json' \
 --data '{
    "branch": {
@@ -331,7 +331,7 @@ CREATE TABLE address (
    curl --request GET \
      --url 'https://console.neon.tech/api/v2/projects/royal-band-06902338/connection_uri?branch_id=br-mute-dew-a5930esi&database_name=people&role_name=alex' \
      --header 'accept: application/json' \
-     --header 'authorization: Bearer $NEON_API_KEY'
+     --header "authorization: Bearer $NEON_API_KEY"
    ```
 
    The API call will return an connection string similar to this one:
@@ -434,7 +434,7 @@ Compare the schema of the `feature/address` branch to its parent branch using th
 curl --request GET \
      --url 'https://console.neon.tech/api/v2/projects/royal-band-06902338/branches/br-mute-dew-a5930esi/compare_schema?base_branch_id=br-bitter-bird-a56n6lh4&db_name=neondb' \
      --header 'accept: application/json' \
-     --header 'authorization: Bearer $NEON_API_KEY' | jq -r '.diff'
+     --header "authorization: Bearer $NEON_API_KEY" | jq -r '.diff'
 ```
 
 | Parameter          | Description                                                                | Required | Example                   |
