@@ -134,13 +134,13 @@ Limit increase requests are available only to organizations on the **Scale** pla
 
 Some Neon limits are soft limits that protect your organization from runaway usage and costs. Support can raise these:
 
-| Limit                                        | Learn more                                                                                      |
-| :------------------------------------------- | :---------------------------------------------------------------------------------------------- |
-| Projects per organization                    | [Projects](/docs/introduction/plans#projects)                                                   |
-| Unarchived branches per project              | [Branch archiving](/docs/guides/branch-archiving)                                               |
-| AI Gateway tokens per minute and daily spend | [AI Gateway usage limits](/docs/ai-gateway/prepaid-credits#usage-limits)                        |
-| Concurrently active computes                 | [Concurrently active compute limit](/docs/reference/glossary#concurrently-active-compute-limit) |
-| Private Networking endpoints per region      | [Private Networking limits](/docs/guides/neon-private-networking#private-networking-limits)     |
+| Limit                                            | Learn more                                                                                      |
+| :----------------------------------------------- | :---------------------------------------------------------------------------------------------- |
+| Projects per organization                        | [Projects](/docs/introduction/plans#projects)                                                   |
+| Unarchived branches per project                  | [Unarchiving a branch](/docs/guides/branch-archiving#unarchiving-a-branch)                      |
+| AI Gateway tokens per minute and daily spend     | [AI Gateway usage limits](/docs/ai-gateway/prepaid-credits#usage-limits)                        |
+| Concurrently active computes                     | [Concurrently active compute limit](/docs/reference/glossary#concurrently-active-compute-limit) |
+| Private Networking configurations per AWS region | [Private networking limits](/docs/guides/neon-private-networking#private-networking-limits)     |
 
 To request an increase:
 
