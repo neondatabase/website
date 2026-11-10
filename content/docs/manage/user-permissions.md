@@ -115,8 +115,10 @@ To grant one, see [Assign project access](#assign-project-access). The following
 | Change project settings                                                                   |   ❌   |   ✅   |  ✅   |
 | List Object Storage buckets, objects, and credentials                                     |   ✅   |   ✅   |  ✅   |
 | Download objects and create presigned download URLs                                       |   ❌   |   ✅   |  ✅   |
-| Upload or delete objects, and create or delete private buckets                            |   ❌   |   ✅   |  ✅   |
+| Upload or delete objects, create private buckets, and delete buckets                      |   ❌   |   ✅   |  ✅   |
 | Create, reveal, rotate, or revoke Object Storage and AI Gateway credentials               |   ❌   |   ✅   |  ✅   |
+| Deploy, update, or delete Neon Functions and their triggers                               |   ❌   |   ✅   |  ✅   |
+| Enable, disable, or rotate Realtime, and copy its secret                                  |   ❌   |   ✅   |  ✅   |
 | Create a public (`public_read`) Object Storage bucket                                     |   ❌   |   ❌   |  ✅   |
 | Register or delete a Neon Functions custom domain                                         |   ❌   |   ❌   |  ✅   |
 | Manage who can access the project                                                         |   ❌   |   ❌   |  ✅   |
@@ -126,9 +128,9 @@ As a rule, Viewers can see a project's resources, Editors can change them, and A
 
 Making a bucket public or serving a function on a custom domain exposes project data under a public address, so these actions need Admin.
 
-The Object Storage, AI Gateway, and Functions rules above apply to people: Console sessions, personal API keys, and OAuth apps acting for a user. Organization API keys, including project-scoped keys, keep the write access they already have and aren't subject to the Admin checks. A legacy shared-project collaborator can still download objects, but sharing never grants Admin. When a request is denied, the Neon API returns `403` with `OBJECT_DOWNLOAD_ACCESS_DENIED`, `PUBLIC_BUCKET_ADMIN_REQUIRED`, or `CUSTOM_DOMAIN_ADMIN_REQUIRED`.
+The Object Storage, AI Gateway, Functions, and Realtime rules above apply to people: Console sessions, personal API keys, and OAuth apps acting for a user. Organization API keys, including project-scoped keys, keep the write access they already have and aren't subject to the Admin checks. A legacy shared-project collaborator can still download objects, but sharing never grants Admin and doesn't allow Realtime changes. Three of these denials return `403` with an error code: `OBJECT_DOWNLOAD_ACCESS_DENIED`, `PUBLIC_BUCKET_ADMIN_REQUIRED`, and `CUSTOM_DOMAIN_ADMIN_REQUIRED`. Other denied requests return `404`, the same as for a project you can't access.
 
-A credential that someone already copied keeps working after they lose access, until it expires or is rotated or revoked. To limit that window, set `expires_at` when you create a credential. See [Object Storage authentication](/docs/storage/authentication#creating-a-credential).
+A credential that someone already copied keeps working after they lose access, until it expires or is rotated or revoked. To limit that window, set `expires_at` when you create a credential. A presigned URL also keeps working until it expires, for up to 7 days. See [Object Storage authentication](/docs/storage/authentication#creating-a-credential).
 
 Per-project permission support for Managed Better Auth is still being added.
 

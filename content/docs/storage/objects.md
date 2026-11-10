@@ -111,6 +111,8 @@ client.upload_file(
 
 ## Download
 
+In organizations that use [per-project permissions](/docs/manage/user-permissions#per-project-permissions), reading object contents requires the **Editor** role. The Neon Console, CLI, and API check your role on each download or presigned download URL request. S3-compatible SDKs, including the Files SDK, sign requests with a credential, and only Editors and Admins can create or reveal one. Viewers can list buckets and objects but can't read their contents.
+
 <CodeTabs labels={["Files SDK", "neon", "S3 Client", "Python", "AWS CLI"]}>
 
 ```typescript shouldWrap
@@ -338,7 +340,7 @@ curl -X DELETE \
 
 Generate a time-limited URL that allows a browser or unauthenticated client to upload or download a specific object, without exposing your credentials.
 
-In organizations that use [per-project permissions](/docs/manage/user-permissions#per-project-permissions), reading object contents requires the **Editor** role. The Neon Console, CLI, and API check your role on each download or presigned download URL request. S3-compatible SDKs, including the Files SDK, sign requests with a credential, and only Editors and Admins can create or reveal one. Viewers can list buckets and objects but can't read their contents.
+The Files SDK and S3 clients sign presigned URLs locally with their credential, so there's no role check when you create one that way. A presigned URL works until it expires, for up to 7 days, even if the person who created it loses access to the project.
 
 **Presigned GET (download):**
 

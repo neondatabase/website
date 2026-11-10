@@ -57,7 +57,7 @@ curl -X POST "https://console.neon.tech/api/v2/projects/{project_id}/branches/{b
   -d '{"scopes": ["storage:read", "storage:write"], "principal_type": "user", "name": "my-app-credential"}'
 ```
 
-The `name` and `expires_at` fields are optional. Set `expires_at` to an RFC 3339 timestamp between 1 minute and 365 days from now. Values outside that range return `400`. If you leave it out, the credential never expires. After it expires, S3 requests with the credential return `403 AccessDenied`. Rotating a credential keeps its expiry.
+The `name` and `expires_at` fields are optional. Set `expires_at` to an RFC 3339 timestamp between 1 minute and 365 days from now. Values outside that range return `400`. If you leave it out, the credential never expires. After it expires, S3 requests with the credential return `403 InvalidAccessKeyId`. Rotating a credential keeps its expiry. An expired credential can't be shown again or rotated (both return `404`), but you can still revoke it.
 
 The response includes these fields:
 
@@ -234,11 +234,11 @@ To rotate a credential in place, run `neon credentials rotate <token_id>` or use
 
 ## Common errors
 
-| Error                       | Cause                               | Fix                                                                                                                  |
-| --------------------------- | ----------------------------------- | -------------------------------------------------------------------------------------------------------------------- |
-| `403 InvalidAccessKeyId`    | `token_id` is wrong or revoked      | Check `AWS_ACCESS_KEY_ID` is set correctly. If you rotated the credential, update the value.                         |
-| `403 SignatureDoesNotMatch` | Wrong secret access key             | Check `AWS_SECRET_ACCESS_KEY` is the value from credential creation. If lost, [show it again](#listing-credentials). |
-| `403 AccessDenied`          | Credential lacks the required scope | Recreate with `storage:write` for uploads/deletes                                                                    |
-| `403 AccessDenied`          | Branch not in credential lineage    | Use a credential created on this branch or an ancestor                                                               |
+| Error                       | Cause                                    | Fix                                                                                                                           |
+| --------------------------- | ---------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------- |
+| `403 InvalidAccessKeyId`    | `token_id` is wrong, revoked, or expired | Check `AWS_ACCESS_KEY_ID` is set correctly. If you rotated the credential, update the value. If it expired, create a new one. |
+| `403 SignatureDoesNotMatch` | Wrong secret access key                  | Check `AWS_SECRET_ACCESS_KEY` is the value from credential creation. If lost, [show it again](#listing-credentials).          |
+| `403 AccessDenied`          | Credential lacks the required scope      | Recreate with `storage:write` for uploads/deletes                                                                             |
+| `403 AccessDenied`          | Branch not in credential lineage         | Use a credential created on this branch or an ancestor                                                                        |
 
 <NeedHelp/>
