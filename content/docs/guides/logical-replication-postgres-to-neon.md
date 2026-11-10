@@ -16,7 +16,7 @@ isDraft: false
 updatedOn: '2026-09-16T19:45:35.340Z'
 ---
 
-Neon's logical replication feature allows you to replicate data from a local Postgres instance or another Postgres provider to Neon. If you're looking to replicate data from one Lakebase Postgres instance to another, see [Replicate data from one Neon project to another](/docs/guides/logical-replication-neon-to-neon).
+Neon's logical replication feature allows you to replicate data from a local Postgres instance or another Postgres provider to Neon. If you're looking to replicate data from one Neon project to another, see [Replicate data from one Neon project to another](/docs/guides/logical-replication-neon-to-neon).
 
 ## Prerequisites
 
@@ -38,13 +38,13 @@ Neon's logical replication feature allows you to replicate data from a local Pos
 
 This section describes how to prepare your source Postgres database (the publisher) for replicating data to your destination Neon database (the subscriber).
 
-### Enable logical replication in the source Neon project
+### Enable logical replication on the source database
 
 On your source database, enable logical replication. The typical steps for a local Postgres instance are shown below. If you run Postgres on a provider, the steps may differ. Refer to your provider's documentation.
 
 Enabling logical replication requires changing the Postgres `wal_level` configuration parameter from `replica` to `logical`.
 
-1. Locate your `postgresql.conf` file. This is usually found in the PostgreSQL data directory. The data directory path can be identified by running the following query in your PostgreSQL database:
+1. Locate your `postgresql.conf` file. This is usually found in the Postgres data directory. The data directory path can be identified by running the following query in your Postgres database:
 
    ```sql
    SHOW data_directory;
@@ -56,9 +56,9 @@ Enabling logical replication requires changing the Postgres `wal_level` configur
    wal_level = logical
    ```
 
-3. After saving the changes to `postgresql.conf`, you need to reload or restart PostgreSQL for the changes to take effect.
+3. After saving the changes to `postgresql.conf`, restart Postgres for the change to take effect. A reload isn't enough, because `wal_level` only changes on restart.
 
-4. Confirm the change by running the following query in your PostgreSQL database:
+4. Confirm the change by running the following query in your Postgres database:
 
    ```sql
    SHOW wal_level;
@@ -107,11 +107,11 @@ CREATE PUBLICATION my_publication FOR TABLE users, departments;
 Defining specific tables lets you add or remove tables from the publication later, which you cannot do when creating publications with `FOR ALL TABLES`.
 </Admonition>
 
-For syntax details, see [CREATE PUBLICATION](https://www.postgresql.org/docs/current/sql-createpublication.html), in the PostgreSQL documentation.
+For syntax details, see [CREATE PUBLICATION](https://www.postgresql.org/docs/current/sql-createpublication.html) in the Postgres documentation.
 
 ## Prepare your Neon destination database
 
-This section describes how to prepare your destination Lakebase Postgres database (the subscriber) to receive replicated data.
+This section describes how to prepare your destination Neon database (the subscriber) to receive replicated data. You don't need to enable logical replication on the destination project.
 
 ### Prepare your database schema
 
@@ -128,17 +128,19 @@ CREATE TABLE IF NOT EXISTS playing_with_neon(id SERIAL PRIMARY KEY, name TEXT NO
 After creating a publication on the source database, you need to create a subscription on the destination database.
 
 1. Use the [Neon SQL Editor](/docs/get-started/query-with-neon-sql-editor), `psql`, or another SQL client to connect to your destination database.
-2. Create the subscription using the using a `CREATE SUBSCRIPTION` statement.
+2. Create the subscription with a `CREATE SUBSCRIPTION` statement. The source must accept connections from Neon through its network and firewall settings.
 
    ```sql
    CREATE SUBSCRIPTION my_subscription
-   CONNECTION 'host=<host-address-or-ip> port=5432 dbname=postgres user=replication_user password=replication_user_password'
+   CONNECTION 'host=<host-address-or-ip> port=5432 dbname=<database_name> user=replication_user password=replication_user_password'
    PUBLICATION my_publication;
    ```
 
-   - `subscription_name`: A name you chose for the subscription.
-   - `connection_string`: The connection string for the source Postgres database where you defined the publication.
-   - `publication_name`: The name of the publication you created on the source Postgres database.
+   - `my_subscription`: A name you chose for the subscription.
+   - `host=<host-address-or-ip>`: The address of the source Postgres server.
+   - `dbname=<database_name>`: The database on the source that contains the publication. Don't assume it's `postgres`. Use the database where you ran `CREATE PUBLICATION`.
+   - `user` and `password`: The replication role you created earlier.
+   - `my_publication`: The name of the publication you created on the source database.
 
 3. Verify the subscription was created by running the following command:
 
