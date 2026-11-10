@@ -32,14 +32,14 @@ The steps / layers are as follows:
 
 ## Set up Neon Realtime
 
-If your database isn't on Neon yet, [migrate it to Neon](/docs/import/migrate-intro) first. Then [enable Realtime](../quickstart#enable-realtime) on the branch Electric syncs from:
+If your database isn't on Neon yet, [migrate it to Neon](/docs/import/migrate-intro) first. Then [enable Realtime](../quickstart#enable-realtime) on the branch Electric syncs from, so changes keep flowing to both, or on a branch of it to work on a snapshot:
 
 ```bash filename="Terminal"
 neon realtime enable
 ```
 
 <Admonition type="tip" title="Migrate one view at a time">
-Electric and Realtime can run against the same database, so you can move views across one at a time and [remove Electric](#remove-electric) once nothing reads from it.
+Electric and Realtime can run against the same database, so you can move views across one at a time and [remove Electric](#remove-electric) once nothing reads from it. Keep Electric on a direct (unpooled) connection string: `neon link` and `neon env pull` set `DATABASE_URL` to the pooled one.
 </Admonition>
 
 ## Define queries
@@ -96,7 +96,7 @@ export function messagesQuery(userId: string, channelId: string) {
 }
 ```
 
-The client-side sort in your components moves into `ORDER BY`.
+The client-side sort in your components moves into `ORDER BY`. With TanStack&nbsp;DB, you can sort in the client instead, or do both: see [TanStack DB](#tanstack-db).
 
 ## Auth
 
@@ -163,7 +163,9 @@ export const app = new Hono()
   })
 ```
 
-[`requireUser`](../guides/queries#exposing-an-endpoint) is the session check your proxy already runs, and `realtime` is the server from [Using a query builder or ORM](../guides/queries#using-a-query-builder-or-orm). The seal route runs once per subscription and on renewal, not on every request, and the client [connects straight to Realtime](../guides/queries#sealing-queries).
+[`requireUser`](../guides/queries#exposing-an-endpoint) is the session check your proxy already runs, and `realtime` is the server from [Using raw SQL](../guides/queries#using-raw-sql) or [Using a query builder or ORM](../guides/queries#using-a-query-builder-or-orm). The seal route runs once per subscription and on renewal, not on every request, and the client [connects straight to Realtime](../guides/queries#sealing-queries).
+
+You always need a server to seal queries, because sealing needs `NEON_REALTIME_SECRET`. If your app is public and shows every visitor the same data, the seal route can skip the session check. Sealed queries expire, though, so if you cache the route's response, cache it for well under the sealed query's lifetime (its `expiresAt`).
 
 ## Subscribe to queries
 
@@ -190,7 +192,7 @@ function Messages({ channelId }: { channelId: string }) {
 }
 ```
 
-[`useLiveQuery`](../sdks/typescript#react-uselivequery) takes a sealed query that the parent fetches, not a URL:
+[`useLiveQuery`](../sdks/typescript#react-uselivequery) takes a sealed query that the parent fetches, not a URL. So `useShape(params)` becomes two steps: fetch the sealed query for the params, then pass it to `useLiveQuery`, as `Channel` below shows. A `preloadShape()` in a route loader becomes fetching the sealed query in the loader.
 
 ```tsx filename="frontend/Messages.tsx"
 function Messages({ sealedQuery, refreshQuery }) {
@@ -200,7 +202,7 @@ function Messages({ sealedQuery, refreshQuery }) {
 }
 ```
 
-Then wrap your app in [`RealtimeProvider`](../sdks/typescript#react-realtimeprovider), using the `VITE_` variables from the queries guide's [Setup](../guides/queries#setup):
+Then wrap your app in [`RealtimeProvider`](../sdks/typescript#react-realtimeprovider), using the `VITE_` variables from the queries guide's [Setup](../guides/queries#setup). With [TanStack DB](#tanstack-db), skip the provider: you pass the client to each collection instead.
 
 ```tsx filename="frontend/main.tsx"
 import { createRealtimeClient } from "@neon/realtime/client"
@@ -223,7 +225,7 @@ root.render(
 )
 ```
 
-Note that sealed queries expire. `refreshQuery` returns a fresh sealed query for the _same_ query, and the hook renews it before it expires. To switch channels, fetch a new sealed query with a matching `refreshQuery`.
+Unlike a shape, a sealed query expires. `refreshQuery` returns a fresh sealed query for the _same_ query, and the hook renews it before it expires. Without it, the rows go `stale` once the sealed query expires. To switch channels, fetch a new sealed query with a matching `refreshQuery`.
 
 <details>
   <summary>frontend/api.ts and frontend/Channel.tsx</summary>
@@ -285,7 +287,7 @@ export function Channel({ channelId, userId }: { channelId: string; userId: stri
 
 ## Handle writes
 
-If your write route reads a txid in a transaction:
+If your write route reads Electric's `::xid::text` txid in a transaction:
 
 ```ts filename="backend/server.ts"
 import { sql } from "drizzle-orm"
@@ -307,7 +309,7 @@ app.post('/api/messages', async (c) => {
 })
 ```
 
-Return the txid from the write's own `RETURNING`, as a string:
+Return the txid from the write's own `RETURNING`, as a string. Don't parse it to a number:
 
 ```sql
 INSERT INTO messages (id, channel, author, body, metadata)
@@ -316,6 +318,8 @@ FROM channel_members
 WHERE channel_members.channel = $2 AND channel_members.user_id = $4
 RETURNING pg_current_xact_id()::text AS txid
 ```
+
+The insert takes the row's id from the client, as do the [optimistic rows](#optimistic-state) (`crypto.randomUUID()`). If a table's key is `GENERATED ALWAYS AS IDENTITY`, Postgres rejects an id from the insert, so switch it to a client-generated id, such as a `uuid` key.
 
 <details>
   <summary>backend/server.ts with Drizzle</summary>
@@ -582,7 +586,14 @@ export async function createMessagesCollection(channelId: string) { // [!code ++
 }
 ```
 
-The sealed query replaces `shapeOptions`, and `refreshQuery` renews it before it expires. Your server seals it as in [Auth](#auth) but without `ORDER BY`, because TanStack&nbsp;DB orders rows locally. See the [mutations guide](../guides/mutations#with-tanstack-db-collections) for the other handlers.
+The sealed query replaces `shapeOptions`, and `refreshQuery` renews it before it expires. Your server seals it as in [Auth](#auth). See the [mutations guide](../guides/mutations#with-tanstack-db-collections) for the other handlers.
+
+`createMessagesCollection()` is now async, because it fetches the sealed query from your server, and the seal route needs the user's session. If your collections are module-level singletons, create them once the user is signed in instead, for example in an authenticated route's loader.
+
+The sealed query decides which rows sync into the collection. Your TanStack&nbsp;DB live queries decide how components filter, sort and limit them. So you can:
+
+- **Sync without `ORDER BY` or `LIMIT`**, as with a shape, and sort and limit in your live queries. This can perform better, and it suits syncing one normalized collection that different components filter and sort in the client.
+- **Keep `ORDER BY` and `LIMIT`** in the sealed query to sync only the rows you need, such as the newest 500, and sort and limit further in your live queries.
 
 ## Remove Electric
 
@@ -602,7 +613,7 @@ BEGIN
 END $$;
 ```
 
-Then remove the `@electric-sql/*` and `@tanstack/electric-db-collection` packages, the proxy routes and the `ELECTRIC_*` env vars. If you run an auth proxy like Caddy, you can often remove that too.
+Then remove everything in your app that only exists for Electric: the `@electric-sql/*` and `@tanstack/electric-db-collection` packages, the proxy routes, and its env vars, config and scripts. If you run a proxy like Caddy only for Electric, you can often remove that too.
 
 <Admonition type="important" title="Learn more about Neon Realtime">
 
