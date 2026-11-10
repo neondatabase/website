@@ -4,7 +4,7 @@ subtitle: Legacy project consumption API for Scale, Business, and Enterprise pla
 summary: >-
   The legacy Neon consumption API provides the `/consumption_history/projects`
   endpoint that returns active_time_seconds, compute_time_seconds,
-  written_data_bytes, and synthetic_storage_size_bytes for accounts on Scale
+  written_data_bytes, and synthetic_storage_size_bytes (deprecated, always 0) for accounts on Scale
   plans and above (legacy Scale, Business, Enterprise, and usage-based Scale+),
   with history available from March 1, 2024. This endpoint is not available on
   Launch and does not return invoice-aligned metrics on usage-based plans. For
@@ -39,7 +39,7 @@ Both endpoints return metrics that align with legacy billing. Default metrics ar
 | `active_time_seconds`          | Seconds    | Time compute endpoints have been active                                                             |
 | `compute_time_seconds`         | Seconds    | CPU seconds used by compute endpoints (see [Legacy metric definitions](#legacy-metric-definitions)) |
 | `written_data_bytes`           | Bytes      | Total data written to all of a project's branches                                                   |
-| `synthetic_storage_size_bytes` | Bytes      | Storage used (logical data + WAL for all branches)                                                  |
+| `synthetic_storage_size_bytes` | Bytes      | Deprecated, returns 0                                                                               |
 | `data_storage_bytes_hour`      | Bytes-Hour | Storage consumed hourly (optional)                                                                  |
 | `logical_size_bytes`           | Bytes      | Logical size consumed (optional)                                                                    |
 | `logical_size_bytes_hour`      | Bytes-Hour | Logical size consumed hourly (optional)                                                             |
@@ -52,7 +52,7 @@ Both endpoints return metrics that align with legacy billing. Default metrics ar
 GET https://console.neon.tech/api/v2/consumption_history/projects
 ```
 
-Retrieves consumption metrics per project at the chosen granularity. The same **Scale plans and above** access rule applies as for the account endpoint (not available on **Launch**—use [v2 project metrics](/docs/guides/consumption-metrics) instead). Results are ordered by time in ascending order (oldest to newest). History begins at the time of upgrade. Issuing a call to this API does not wake a project's compute endpoint.
+Retrieves consumption metrics per project at the chosen granularity. The same **Scale plans and above** access rule applies as for the account endpoint (not available on **Launch**, use [v2 project metrics](/docs/guides/consumption-metrics) instead). Results are ordered by time in ascending order (oldest to newest). History begins at the time of upgrade. Issuing a call to this API does not wake a project's compute endpoint.
 
 #### Required parameters
 
@@ -64,7 +64,7 @@ Retrieves consumption metrics per project at the chosen granularity. The same **
 
 - **`project_ids`** (array of strings, 0-100 items): Filter to specific project IDs. If omitted, the response contains all projects. Can be an array of parameter values or a comma-separated list in a single parameter value.
 - **`org_id`** (string): Organization for which to return project consumption metrics. If not provided, returns metrics for the authenticated user's projects.
-- **`metrics`** (array of strings): Metrics to include. If omitted, `active_time_seconds`, `compute_time_seconds`, `written_data_bytes`, and `synthetic_storage_size_bytes` are returned. Possible values: `active_time_seconds`, `compute_time_seconds`, `written_data_bytes`, `synthetic_storage_size_bytes`, `data_storage_bytes_hour`, `logical_size_bytes`, `logical_size_bytes_hour`. Can be an array or comma-separated list.
+- **`metrics`** (array of strings): Metrics to include. If omitted, `active_time_seconds`, `compute_time_seconds`, `written_data_bytes`, and `synthetic_storage_size_bytes` are returned. The last one is deprecated and returns 0. Possible values: `active_time_seconds`, `compute_time_seconds`, `written_data_bytes`, `synthetic_storage_size_bytes`, `data_storage_bytes_hour`, `logical_size_bytes`, `logical_size_bytes_hour`. Can be an array or comma-separated list.
 - **`limit`** (integer, 1-100): Number of projects in the response. Default: `10`.
 - **`cursor`** (string): Cursor value from the previous response to get the next batch of projects.
 
@@ -77,25 +77,25 @@ The **`include_v1_metrics`** parameter is deprecated; use **`metrics`** instead.
 - **active_time_seconds**: Seconds. The amount of time the compute endpoints have been active.
 - **compute_time_seconds**: Seconds. The number of CPU seconds used by compute endpoints, including compute endpoints that have been deleted. For example: 1 CPU for 1 second = 1; 2 CPUs for 1 second = 2.
 - **written_data_bytes**: Bytes. The amount of written data for all branches.
-- **synthetic_storage_size_bytes**: Bytes. The space occupied in storage. Synthetic storage size combines the logical data size and Write-Ahead Log (WAL) size for all branches.
+- **synthetic_storage_size_bytes**: Bytes. Deprecated. The API returns 0. Synthetic storage size combined the logical data size and Write-Ahead Log (WAL) size for all branches. Use the [v2 endpoints](/docs/guides/consumption-metrics) for storage.
 
 **Additional metrics** (include via the `metrics` parameter):
 
-- **data_storage_bytes_hour**: Bytes-Hour. The amount of storage consumed hourly.
+- **data_storage_bytes_hour**: Bytes-Hour. Retired. The API returns 0.
 - **logical_size_bytes**: Bytes. The amount of logical size consumed.
 - **logical_size_bytes_hour**: Bytes-Hour. The amount of logical size consumed hourly.
 
 ## Example request and response
 
-Replace `$NEON_API_KEY` with your API key and include `org_id` if needed.
+Replace `$NEON_API_KEY` with your API key and include `org_id` if needed. With `granularity=daily`, the `from` and `to` values must fall within the last 60 days.
 
 ### Project-level
 
 ```bash shouldWrap
 curl --request GET \
-  --url 'https://console.neon.tech/api/v2/consumption_history/projects?from=2024-06-30T00:00:00Z&to=2024-07-02T00:00:00Z&granularity=daily&org_id=org-ocean-art-12345678&limit=10' \
+  --url "https://console.neon.tech/api/v2/consumption_history/projects?from=2026-10-01T00:00:00Z&to=2026-10-06T00:00:00Z&granularity=daily&org_id=org-ocean-art-12345678&limit=10" \
   --header 'accept: application/json' \
-  --header 'authorization: Bearer $NEON_API_KEY'
+  --header "authorization: Bearer $NEON_API_KEY"
 ```
 
 <details>
@@ -119,7 +119,7 @@ curl --request GET \
               "active_time_seconds": 147472,
               "compute_time_seconds": 43222,
               "written_data_bytes": 112730864,
-              "synthetic_storage_size_bytes": 37000959232
+              "synthetic_storage_size_bytes": 0
             },
             {
               "timeframe_start": "2024-07-01T00:00:00Z",
@@ -152,15 +152,15 @@ The following sections cover paging (project endpoint), polling behavior, and ha
 
 ## Pagination
 
-The **project-level** endpoint uses cursor-based pagination. The response includes a `pagination` object with a `cursor` value (the project ID of the last project in the list). To get the next page, send another request with that `cursor` in the query string and the same `from`, `to`, and `granularity` as your first request.
+The **project-level** endpoint uses cursor-based pagination. The response includes a `pagination` object with a `cursor` value. Pass that value as-is; don't build it from project IDs. To get the next page, send another request with that `cursor` in the query string and the same `from`, `to`, and `granularity` as your first request.
 
 Example request for the next page (using the `cursor` from the previous response):
 
 ```bash shouldWrap
 curl --request GET \
-     --url 'https://console.neon.tech/api/v2/consumption_history/projects?cursor=divine-tree-77657175&limit=10&from=2024-06-30T00%3A00%3A00Z&to=2024-07-02T00%3A00%3A00Z&granularity=daily&org_id=org-ocean-art-12345678' \
+     --url "https://console.neon.tech/api/v2/consumption_history/projects?cursor=divine-tree-77657175&limit=10&from=2026-10-01T00%3A00%3A00Z&to=2026-10-06T00%3A00%3A00Z&granularity=daily&org_id=org-ocean-art-12345678" \
      --header 'accept: application/json' \
-     --header 'authorization: Bearer $NEON_API_KEY'
+     --header "authorization: Bearer $NEON_API_KEY"
 ```
 
 In the URL above, the **`cursor`** parameter is `cursor=divine-tree-77657175`. Replace that value with the `cursor` from your previous response's `pagination` object.
@@ -173,13 +173,14 @@ The legacy and usage-based consumption API endpoints share a single rate limiter
 
 Calling the consumption APIs does not wake computes that have been suspended due to inactivity, so polling will not increase your consumption.
 
-The endpoints on this page return **legacy metrics** only; when your organization is eligible (Scale+), you can call them on legacy or usage-based plans, but responses will not match your invoice on a usage-based plan. For metrics that match your invoice—or for **Launch** plans—see [Query consumption metrics](/docs/guides/consumption-metrics).
+The endpoints on this page return **legacy metrics** only; when your organization is eligible (Scale+), you can call them on legacy or usage-based plans, but responses will not match your invoice on a usage-based plan. For metrics that match your invoice, or for **Launch** plans, see [Query consumption metrics](/docs/guides/consumption-metrics).
 
 ## Error responses
 
 Common error responses you may encounter:
 
-- **403 Forbidden**: These endpoints are not available for your plan. The API response states that access is included with **Scale plans and above** (legacy **Scale, Business, and Enterprise**, and usage-based **Scale** and higher—not **Launch**).
+- **400 Bad Request**: The request is invalid. For example, `from` is before March 1, 2024.
+- **403 Forbidden**: These endpoints are not available for your plan. The API response states that access is included with **Scale plans and above** (legacy **Scale, Business, and Enterprise**, and usage-based **Scale** and higher, not **Launch**).
 - **404 Not Found**: Account is not a member of the organization specified by `org_id`.
 - **406 Not Acceptable**: The specified date-time range is outside the boundaries of the specified granularity. Adjust your `from` and `to` values or select a different `granularity`.
 - **429 Too Many Requests**: Too many requests. Wait before retrying.
@@ -188,6 +189,6 @@ Common error responses you may encounter:
 
 The legacy endpoints on this page were designed for Neon's legacy billing plans and do not align with [usage-based plans](/docs/introduction/plans). If you're on a usage-based plan (Launch, Scale, Agent, or Enterprise), use [Query consumption metrics](/docs/guides/consumption-metrics) for metrics that map to your invoice.
 
-**Legacy API:** Uses `synthetic_storage_size_bytes` (logical data + WAL for all branches in one metric).
+**Legacy API:** Reports storage through `synthetic_storage_size_bytes`, which is deprecated and returns 0. Use the v2 storage metrics instead.
 
 **Usage-based API:** Returns separate metrics that match your invoice: `root_branch_bytes_month`, `child_branch_bytes_month`, `instant_restore_bytes_month`, `snapshot_storage_bytes_month`, `public_network_transfer_bytes`, `private_network_transfer_bytes`, `extra_branches_month`, and `compute_unit_seconds`. The legacy APIs do not provide these. Use the [project metrics endpoint](/docs/guides/consumption-metrics#request-overview) in Query consumption metrics to retrieve them.

@@ -10,7 +10,7 @@ summary: >-
   creation. The feature is in private preview and does not support
   transferring projects into Vercel-managed Neon organizations.
 enableTableOfContents: true
-updatedOn: '2026-08-25T16:36:05.871Z'
+updatedOn: '2026-10-09T15:55:57.334Z'
 ---
 
 ## Overview
@@ -106,13 +106,13 @@ Your user will need the connection string from the response (`connection_uri`) t
 
 With your project created, use the Neon [project transfer request API](/docs/reference/api/projects/create-project-transfer-request) to generate a transfer request. You can create this request immediately or at a later time when you're ready to transfer the project. Each transfer request has a configurable expiration period, specified by the `ttl_seconds` parameter.
 
-### API endpoint
+### API endpoint (#api-endpoint-2)
 
 ```http
 POST https://console.neon.tech/api/v2/projects/{project_id}/transfer_requests
 ```
 
-### Example request
+### Example request (#example-request-2)
 
 ```bash
 curl -X POST 'https://console.neon.tech/api/v2/projects/{project_id}/transfer_requests' \
@@ -126,7 +126,7 @@ curl -X POST 'https://console.neon.tech/api/v2/projects/{project_id}/transfer_re
 
 This example sets a one-week expiration (604,800 seconds). The default is 86,400 seconds (24 hours).
 
-### Example response
+### Example response (#example-response-2)
 
 ```json
 {
@@ -190,7 +190,7 @@ When your user clicks the claim URL:
 
 Alternatively, users can accept the transfer request programmatically using the [accept project transfer request API](/docs/reference/api/projects/accept-project-transfer-request).
 
-#### API endpoint
+#### API endpoint (#api-endpoint-3)
 
 ```http
 PUT https://console.neon.tech/api/v2/projects/{project_id}/transfer_requests/{request_id}

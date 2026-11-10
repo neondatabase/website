@@ -13,6 +13,7 @@ import branchableStorageImage from 'images/pages/object-storage/branchable-stora
 import oneCredentialImage from 'images/pages/object-storage/one-credential.jpg';
 import s3CompatibleImage from 'images/pages/object-storage/s3-compatible.jpg';
 import getMetadata from 'utils/get-metadata';
+import getWebPageJsonLd from 'utils/get-web-page-json-ld';
 
 const LOGOS = ['replit', 'outfront', 'doordash', 'bcg', 'pepsi', 'retool', 'meta'];
 
@@ -24,8 +25,17 @@ const ITEM_IMAGES = {
 
 export const metadata = getMetadata(SEO_DATA.objectStorage);
 
+const jsonLd = getWebPageJsonLd({
+  ...SEO_DATA.objectStorage,
+  updatedOn: objectStoragePageContent.updatedOn,
+});
+
 const ObjectStoragePage = () => (
   <BackendPlatformPage>
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+    />
     <BackendHero
       className="relative pt-46.5 text-white md:pt-24"
       content={objectStoragePageContent.hero}
@@ -56,6 +66,7 @@ const ObjectStoragePage = () => (
       figmaNodeId="2070:6690"
     />
     <Faq
+      updatedOn={objectStoragePageContent.updatedOn}
       items={objectStoragePageContent.faqItems}
       titleLines={['Your questions,', 'answered.']}
       variant="light"

@@ -3,7 +3,7 @@ title: 'How do I connect my application to my Neon database using the connection
 subtitle: 'Read DATABASE_URL from your environment and pass it to a Postgres driver.'
 enableTableOfContents: true
 createdAt: '2026-05-18T00:00:00.000Z'
-updatedOn: '2026-09-23T21:00:25.204Z'
+updatedOn: '2026-10-29T21:25:47.650Z'
 isDraft: false
 redirectFrom: []
 previousLink:
@@ -71,7 +71,7 @@ For Prisma, Drizzle, SQLAlchemy, and other ORMs, see the [framework guides](/doc
 Each connection string comes in two forms:
 
 - **Pooled** (hostname has `-pooler`): routes through PgBouncer in transaction mode and accepts up to 10,000 client connections per compute. Use it for serverless functions, web apps, and other high-concurrency clients.
-- **Direct**: connects straight to Postgres. Use it for migrations, `pg_dump`, `LISTEN`/`NOTIFY`, logical replication, and other session-level features. The `max_connections` limit for direct connections depends on compute size, from 104 at 0.25 CU to 4,000 at 9 CU and above.
+- **Direct**: connects straight to Postgres. Use it for migrations, `pg_dump`, `LISTEN`/`NOTIFY`, logical replication, and other session-level features. The `max_connections` limit for direct connections depends on compute size, from 112 at 0.25 CU to 4,000 at 9 CU and above.
 
 The **Connection pooling** toggle in the modal switches between them, and pooled is the default. A common setup is `DATABASE_URL` for the pooled string and a second variable, such as `DIRECT_URL`, for the direct string that migrations use. See [Connection pooling](/docs/connect/connection-pooling) for when to use which.
 

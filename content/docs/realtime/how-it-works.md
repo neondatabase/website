@@ -4,6 +4,7 @@ summary: >-
   How Realtime works and how the layers compose and fit together.
 titleWidth: '530'
 enableTableOfContents: true
+updatedOn: '2026-10-15T14:51:27.000Z'
 ---
 
 Realtime is a live SQL query and sync engine, with (optional) higher-level reactivity primitives for client-side development.

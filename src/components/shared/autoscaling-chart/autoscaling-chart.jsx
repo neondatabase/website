@@ -684,7 +684,7 @@ const AutoscalingChart = ({
         <div className={cn(compact ? 'p-6' : 'p-8')}>
           {/* Header with controls */}
           <div className="mb-4 flex flex-col gap-3">
-            <h1
+            <h3
               className={cn(
                 'text-center font-mono font-medium text-white',
                 compact ? 'text-base' : 'text-xl',
@@ -692,10 +692,11 @@ const AutoscalingChart = ({
               )}
             >
               {displayTitle}
-            </h1>
+            </h3>
             {!autoscalingOnly && showOverprovisionSelector && (
               <div className="flex items-center justify-center gap-2.5">
                 <select
+                  aria-label="Provisioning strategy"
                   value={provisioningStrategy}
                   className="border-gray-700 bg-gray-800 text-gray-200 hover:border-gray-600 hover:bg-gray-700 border px-4 py-2 font-mono text-sm transition-all focus:border-[#73bf69] focus:outline-hidden"
                   onChange={handleProvisioningStrategyChange}

@@ -18,5 +18,5 @@ if (!apiKey || !projectId || !snapshotId || !name) {
 }
 
 const neon = neonClient(apiKey);
-await neon.snapshots.update(projectId, snapshotId, { name });
+await neon.snapshots.update({ projectId, snapshotId, name });
 console.log(JSON.stringify({ ok: true, projectId, snapshotId, name }, null, 2));

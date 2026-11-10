@@ -1,6 +1,6 @@
 ---
 title: Run ad-hoc queries with Read Replicas
-subtitle: Leverage read replicas for running ad-hoc queries
+subtitle: Use read replicas to run ad-hoc queries
 summary: >-
   Neon Read Replicas provide dedicated read-only compute for running ad-hoc
   queries, one-off analytics, and exploratory SQL without loading the primary
@@ -43,7 +43,7 @@ Running ad-hoc queries on a read replica can help you:
 ## Setting up a read replica for ad-hoc queries
 
 <Admonition type="note">
-The Free plan is limited to a maximum of 3 read replica computes per project.
+The number of read replicas you can add depends on your plan. See [Read replicas](/docs/introduction/plans#read-replicas) on the plans page.
 </Admonition>
 
 You can add a read replica compute to any branch in your Neon project by following these steps:
@@ -95,7 +95,7 @@ curl --request POST \
    Your connection string will look something like this:
 
    ```bash
-   postgresql://user:password@ep-read-replica-123456.us-east-2.aws.neon.tech/dbname?sslmode=require&channel_binding=require
+   postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require&channel_binding=require
    ```
 
 ### Running ad-hoc queries
@@ -121,7 +121,7 @@ Here are a few common scenarios where ad-hoc queries on a read replica can be us
 - **Checking queries for write attempts**: Since read replicas are designed for read-only operations, any unintended write actions will result in an error. For example, if someone tries to insert data into the sales table on the read replica, they will get an error message like this:
 
   ```bash
-  ERROR: cannot execute INSERT in a read-only transaction (SQLSTATE 25006)
+  ERROR:  cannot execute INSERT in a read-only transaction
   ```
 
   This ensures that the replica is used solely for reading data, preserving the integrity of your production system.

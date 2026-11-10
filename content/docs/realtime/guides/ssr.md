@@ -4,6 +4,7 @@ subtitle: 'Render sealed queries and initial query results on the server.'
 summary: >-
   Server-render pages that use live queries. Read and seal the same query for each request, send both to the browser, render the initial rows straight away and let the first result bring the page live.
 enableTableOfContents: true
+updatedOn: '2026-10-30T15:07:38.000Z'
 ---
 
 [Server-side rendering (SSR)](https://developer.mozilla.org/en-US/docs/Glossary/SSR) lets a page arrive with its rows already in the HTML, then subscribe to ongoing changes as soon as it hydrates.

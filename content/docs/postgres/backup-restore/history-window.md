@@ -16,6 +16,8 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/introduction/restore-window
   - /docs/introduction/history-window
+  - /docs/introduction/history-retention
+  - /docs/manage/history-window
 updatedOn: '2026-08-24T17:32:35.016Z'
 ---
 
@@ -84,7 +86,7 @@ Use the `history_retention_seconds` property in the project settings:
 
 ```bash
 curl -X PATCH 'https://console.neon.tech/api/v2/projects/{project_id}' \
-  -H 'Authorization: Bearer $NEON_API_KEY' \
+  -H "Authorization: Bearer $NEON_API_KEY" \
   -H 'Content-Type: application/json' \
   -d '{
     "project": {

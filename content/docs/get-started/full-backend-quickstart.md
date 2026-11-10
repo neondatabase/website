@@ -11,6 +11,7 @@ summary: >-
   providers.
 enableTableOfContents: true
 layout: wide
+updatedOn: '2026-10-09T18:09:06.000Z'
 ---
 
 ## Before you start
@@ -22,7 +23,7 @@ npm i -g neon
 ```
 
 <Admonition type="important" title="Create your project in a supported region">
-Object Storage, Functions, and the AI Gateway are currently available in AWS US East (Ohio) (`aws-us-east-2`), AWS US East (N. Virginia) (`aws-us-east-1`), AWS Europe (Frankfurt) (`aws-eu-central-1`), and AWS Asia Pacific (Singapore) (`aws-ap-southeast-1`), on new or existing projects in those regions, so use a project in one of them to follow this guide. Support is expanding toward [all regions](/docs/introduction/regions). Postgres works in any region. Object Storage and Functions work on any plan, subject to usage limits; the AI Gateway requires a paid plan.
+Object Storage, Functions, and the AI Gateway are currently available in AWS US East (Ohio) (`aws-us-east-2`), AWS US East (N. Virginia) (`aws-us-east-1`), AWS Europe (Frankfurt) (`aws-eu-central-1`), and AWS Asia Pacific (Singapore) (`aws-ap-southeast-1`), on new or existing projects in those regions, so use a project in one of them to follow this guide. Support is expanding toward [all regions](/docs/introduction/regions). Postgres works in any region. Object Storage and Functions work on any plan, subject to usage limits; the AI Gateway works on any plan with prepaid credits.
 </Admonition>
 
 <TwoColumnLayout>

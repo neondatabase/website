@@ -10,7 +10,8 @@ redirectFrom:
   - /docs/compute/functions/preview-access
   - /docs/functions
   - /docs/functions/overview
-updatedOn: '2026-10-26T11:09:12.958Z'
+  - /docs/compute/functions
+updatedOn: '2026-11-02T22:41:52.272Z'
 layout: wide
 hideCopyPage: true
 ---
@@ -36,7 +37,7 @@ hideCopyPage: true
 
 <a href="/docs/compute/functions/get-started" description="Deploy your first function and call it over HTTP in under 5 minutes." icon="code">Quickstart</a>
 
-<a href="/docs/compute/functions/registry" description="Install reusable functions from the catalog with neon functions new." icon="cli">Function Registry</a>
+<a href="/docs/compute/functions/templates" description="Add a ready-made API, MCP server, AI agent, or bot to your project with one command." icon="cli">Function templates</a>
 
 <a href="/docs/compute/functions/triggers/overview" description="Invoke a function on a cron schedule or an object upload, with no external scheduler." icon="stopwatch">Function Triggers</a>
 
@@ -124,7 +125,7 @@ Neon Functions do not support hosting websites.
 
 ## Starter templates
 
-Each example is a complete, runnable build. Read the source on GitHub, or scaffold one with `neon bootstrap --template <id>` (it copies the files, links a Neon project, and pulls env vars). You can also browse them at [build-on-neon.vercel.app](https://build-on-neon.vercel.app/). To add one function to an existing project, use the [Function Registry](/docs/compute/functions/registry) (`neon functions new`) instead of bootstrap. See [Function Registry templates](/docs/compute/functions/registry/templates) for what's available.
+Each example is a complete, runnable build. Read the source on GitHub, or scaffold one with `neon bootstrap --template <id>` (it copies the files, links a Neon project, and pulls env vars). You can also browse them at [build-on-neon.vercel.app](https://build-on-neon.vercel.app/). To add one function to an existing project, use a [function template](/docs/compute/functions/templates) instead of bootstrap.
 
 | Example                  | `--template`        | Source                                                                                                                  | Neon services                                   | Stack                 |
 | ------------------------ | ------------------- | ----------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------- | --------------------- |

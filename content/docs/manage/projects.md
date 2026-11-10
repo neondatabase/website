@@ -11,7 +11,7 @@ summary: >-
   delete, via the Console or API. Use it when you need to set project-level
   defaults such as compute autoscaling, history window for instant restore and
   Time Travel, IP Allow rules, logical replication, or project access. Deleted
-  projects can be recovered within a 7-day window using the CLI or API.
+  projects can be recovered within a 7-day window using the Console, CLI, or API.
 redirectFrom:
   - /docs/get-started/projects
 updatedOn: '2026-10-23T14:11:22.712Z'
@@ -235,7 +235,7 @@ The [Create project](/docs/reference/api/projects/create-project) and [Update pr
 curl -X PATCH \
      https://console.neon.tech/api/v2/projects/falling-salad-31638542 \
      -H 'accept: application/json' \
-     -H 'authorization: Bearer $NEON_API_KEY' \
+     -H "authorization: Bearer $NEON_API_KEY" \
      -H 'content-type: application/json' \
      -d '
 {
@@ -339,7 +339,7 @@ Specify the `ips` option with an empty string. If applicable, also include `"pro
 curl -X PATCH \
      https://console.neon.tech/api/v2/projects/falling-salad-31638542 \
      -H 'accept: application/json' \
-     -H 'authorization: Bearer $NEON_API_KEY' \
+     -H "authorization: Bearer $NEON_API_KEY" \
      -H 'content-type: application/json' \
      -d '
 {
@@ -453,7 +453,7 @@ If you are any of Neon's paid plans, deleting all your Neon projects won't stop 
 </Admonition>
 
 <Admonition type="note">
-Deleted projects can be recovered within the deletion recovery period (7 days) via the API or CLI. For details, see [Recover a deleted project](#recover-a-deleted-project).
+Deleted projects can be recovered within the deletion recovery period (7 days) from the Console, CLI, or API. For details, see [Recover a deleted project](#recover-a-deleted-project).
 </Admonition>
 
 ## Manage projects with the Neon API
@@ -973,11 +973,13 @@ The deletion recovery period is different from the [history window](/docs/introd
 
 When you recover a deleted project, the following are restored:
 
-- All branches, endpoints, snapshots, and compute configurations
+- All branches, endpoints, snapshots, and compute configurations that existed when you deleted the project
 - Project settings (IP Allow, logical replication, protected branches, scheduled updates)
 - Project collaborators
 - Connection strings
 - Vercel-Managed Neon integration projects are re-imported into Vercel for management and billing
+
+Branches with an [expiration time](/docs/guides/branch-expiration) that passes during the deletion recovery period are permanently deleted and aren't restored.
 
 ### What requires reconfiguration
 
@@ -988,14 +990,42 @@ The following features are **not** recovered and must be manually re-enabled aft
 - **Neon-Managed Vercel integration** (Vercel Connected Accounts)
 - **Vercel-Managed Neon integration** (project reconnection via Storage)
 - **Monitoring integrations** (Datadog, OpenTelemetry, etc.)
+- **Scoped credentials** for Object Storage and the AI Gateway. Deleting a project revokes them, and they stay revoked after recovery. [Create new credentials](/docs/cli/credentials) and update your apps. Neon Functions get a new credential automatically.
+
+### While a project is deleted
+
+You can't connect to a deleted project's databases. Access returns when you recover the project.
 
 ### Costs
 
 There are no storage costs or recovery fees during the 7-day deletion recovery period.
 
+### Requirements and limitations
+
+- **Permissions:** Recovering a project requires the same access as deleting one: organization Admin, or **Admin** on that project. See [Per-project permissions](/docs/manage/user-permissions#per-project-permissions).
+- **HIPAA projects:** Projects with [HIPAA compliance](/docs/security/hipaa) enabled can't be recovered. Deleting a HIPAA-compliant project is permanent.
+- **Vercel-Managed Neon projects:** Recovery re-imports the project into Vercel, so the Vercel integration for the organization must still exist. If the Neon organization was also deleted (for example, when you remove the database from Vercel Storage), [contact Support](/docs/introduction/support).
+
 ### Recover a project
 
-<Tabs labels={["CLI", "API"]}>
+<Tabs labels={["Console", "CLI", "API"]}>
+
+<TabItem>
+
+When an organization has projects that can be recovered, its **Projects** page shows a banner stating how many projects are set to be permanently deleted. The banner doesn't appear when there's nothing to recover.
+
+To recover a deleted project:
+
+1. Navigate to the [Neon Console](https://console.neon.tech) and open the **Projects** page for the organization the project belonged to.
+2. On the banner that says projects are set to be permanently deleted, select **Manage**.
+3. In the **Recently deleted projects** dialog, find the project. The **Delete forever in** column shows how much time is left to recover it.
+4. Select **Recover**.
+
+The Console opens the recovered project. A **Project recovered** notice on the project dashboard reminds you to review the project's integrations and reconnect any that stopped working. See [What requires reconfiguration](#what-requires-reconfiguration).
+
+If recovery fails, the Console shows an error and you can try again.
+
+</TabItem>
 
 <TabItem>
 

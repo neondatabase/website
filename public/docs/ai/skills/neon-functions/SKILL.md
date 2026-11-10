@@ -147,7 +147,7 @@ neon dev      # serves every function in neon.ts with hot reload; injects DATABA
 neon deploy --env <file>   # preferred full deploy from neon.ts; --env is the file Function env is read from
 ```
 
-Keep `.env` or `.env.local` up to date with every key under `functions.*.env`. `neon env pull` writes Neon-managed vars only; add Function secrets to that file, then pass it as `--env`. `neon deploy --env <file>` loads that file into `process.env` each time, then uploads those values. A missing value is `undefined` and `defineConfig` throws. Omit the key from `neon.ts` if you do not want to write it. Never coerce a missing `process.env` value to an empty string (that uploads `""` and deletes the live key). An empty assignment (`KEY=`) is also `""`. Use `process.env.X!` when TypeScript needs an assertion.
+Keep `.env` or `.env.local` up to date with every key under `functions.*.env`. `neon env pull` writes Neon-managed vars only; add Function secrets to that file, then pass it as `--env`. `neon deploy --env <file>` loads that file into `process.env` each time, then uploads the declared values. Declare each secret as `{ value: process.env.X, required: true }` (see "Your own secrets" below): an unset required value fails `neon deploy` and `neon dev` before anything changes, and never fails an import of `neon.ts`. Never coerce a missing value to `""` (that uploads `""` and deletes the live key); an empty assignment (`KEY=`) counts as unset.
 
 To deploy a single function without applying `neon.ts`: `neon functions deploy <slug> --src src/index.ts` (`--src` takes either the entry file or a directory containing `index.ts`, `index.mjs`, or `index.js`). That command's `--env` is `KEY=VALUE` (repeatable), not a file path. Use it for a targeted env update. Retrieve the public URL with `neon functions get <slug>` (the `invocation_url` field, of the form `https://<branch_id>-<slug>.compute.<cell>.us-east-2.aws.neon.tech`). Manage with `neon functions list|get|delete`.
 
@@ -190,34 +190,77 @@ export default defineConfig({
 
 Neon injects branch-scoped connection strings and service URLs at runtime — you don't declare these or pass them at deploy time:
 
-| Variable                | Notes                                                                                              |
-| ----------------------- | -------------------------------------------------------------------------------------------------- |
-| `NEON_BRANCH`           | The branch **name** (e.g. `main`, `preview/foo`). Injected on every branch, including the default. |
-| `DATABASE_URL`          | Pooled connection string. Use for most queries. Present only if the branch has Postgres.           |
-| `DATABASE_URL_UNPOOLED` | Direct connection. Use for migrations, `LISTEN`/`NOTIFY`, multi-round-trip transactions.           |
-| `NEON_AUTH_BASE_URL`    | Present when Neon Auth is enabled on the branch.                                                   |
-| `NEON_AUTH_JWKS_URL`    | Present when Neon Auth is enabled on the branch. JWKS for verifying Managed Auth JWTs.             |
-| `NEON_DATA_API_URL`     | Present when the Data API is enabled on the branch.                                                |
+| Variable                    | Notes                                                                                                                                                              |
+| --------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `NEON_BRANCH`               | The branch **name** (e.g. `main`, `preview/foo`). Injected on every branch, including the default.                                                                 |
+| `NEON_BRANCH_ID`            | The branch **id** (`br-…`). Injected on every branch.                                                                                                              |
+| `NEON_FUNCTION_HOST_SUFFIX` | The hostname suffix every function on the branch shares (`.compute.c-2.us-east-2.aws.neon.tech`). See [How to get the function URL](#how-to-get-the-function-url). |
+| `DATABASE_URL`              | Pooled connection string. Use for most queries. Present only if the branch has Postgres.                                                                           |
+| `DATABASE_URL_UNPOOLED`     | Direct connection. Use for migrations, `LISTEN`/`NOTIFY`, multi-round-trip transactions.                                                                           |
+| `NEON_AUTH_BASE_URL`        | Present when Neon Auth is enabled on the branch.                                                                                                                   |
+| `NEON_AUTH_JWKS_URL`        | Present when Neon Auth is enabled on the branch. JWKS for verifying Managed Auth JWTs.                                                                             |
+| `NEON_DATA_API_URL`         | Present when the Data API is enabled on the branch.                                                                                                                |
 
 Object storage (`AWS_*`) and AI Gateway (`NEON_AI_GATEWAY_*`) vars are also injected when those services are declared — see the `neon-object-storage` and `neon-ai-gateway` skills.
 
-`neon env pull` / `neon-env run` / `neon dev` emit `NEON_BRANCH` (and the connection strings) into your local dev environment too, so local runs mirror the deployed runtime.
+`neon env pull` / `neon-env run` / `neon dev` emit `NEON_BRANCH`, `NEON_BRANCH_ID`, `NEON_FUNCTION_HOST_SUFFIX` (and the connection strings) into your local dev environment too, so local runs mirror the deployed runtime.
 
-**Your own secrets** are per-deployment. Preferred path: declare them in `neon.ts` and run `neon deploy --env <file>`. `<file>` is the gitignored file env pull already writes (`.env` if that file exists, otherwise `.env.local`). Env pull writes Neon-managed vars only; add Function secrets to that file. All declared Function env keys must be present. Omit a key from `neon.ts` if you do not want to write it. `undefined` means you asked to write the key and the value is missing (`defineConfig` throws). Never coerce a missing `process.env` value to an empty string: that uploads `""` and deletes the live key. An empty assignment in the file (`KEY=`) is also `""`. If TypeScript needs an assertion, use `process.env.X!` and make sure the file has the value:
+**Your own secrets** are per-deployment. Preferred path: declare them in `neon.ts` and run `neon deploy --env <file>`. `<file>` is the gitignored file env pull already writes (`.env` if that file exists, otherwise `.env.local`). Env pull writes Neon-managed vars only; add Function secrets to that file. Declare each one with both `value` and `required` (needs `@neon/config` 1.13.0 and `neon` 9.2.0 or later, and `@neon/env` 2.1.0 or later where the function calls `parseEnv`; older `parseEnv` treats every declared key as required):
 
 ```typescript
 functions: {
   todos: {
     name: "todo api",
     source: "src/index.ts",
-    env: { RESEND_API_KEY: process.env.RESEND_API_KEY! },
+    env: {
+      RESEND_API_KEY: { value: process.env.RESEND_API_KEY, required: true },
+      SENTRY_DSN: { value: process.env.SENTRY_DSN, required: "default-branch" },
+      LOG_LEVEL: "info",
+    },
   },
 }
 ```
 
+| `required` | Unset deploying the default branch | Unset deploying another branch | Unset in `neon dev` | `parseEnv(config, slug).function` |
+| --- | --- | --- | --- | --- |
+| `true` | fails before any change | fails before any change | fails before any function starts | `string` |
+| `"default-branch"` | fails before any change | removed from the deployment | runs without it | `string \| undefined` |
+| `false` | removed from the deployment | removed from the deployment | runs without it | `string \| undefined` |
+
+An undefined or empty value counts as unset; put a fallback in `value` (`process.env.X ?? "1"`). `"default-branch"` is the branch Neon marks as default, not a branch name. Add `onUndefined: "skip"` to a `required: false` or `"default-branch"` variable to keep its deployed value instead of removing it, for a value set with `neon functions deploy --env`. Keys `neon.ts` does not declare are left alone.
+
+Prefer a declaration over a string such as `process.env.X!`. A string is validated wherever `neon.ts` is imported, so a function that calls `parseEnv(config, "<slug>")` fails to load when another function's secret is missing from its runtime. A declaration is checked only when a command needs its value.
+
 `neon functions deploy --env KEY=VALUE` is the manual path (repeatable; `--env KEY=` deletes a key; unmentioned keys carry over). Use it for a targeted env update, not a full `neon.ts` apply.
 
 Load Function secrets into the same file env pull wrote, then `neon deploy --env <file>`. Pull the branch's Neon-managed vars onto disk for local dev with `neon env pull` (`link`/`checkout` do this automatically; pass `--no-env-pull` to skip and use `neon-env run -- <cmd>` for runtime injection). Limits: ≤1,000 vars, ≤64 KiB total, and the `NEON_` prefix is reserved.
+
+## How to get the function URL
+
+A function answers at `https://<NEON_BRANCH_ID>-<slug><NEON_FUNCTION_HOST_SUFFIX>`, for example `https://br-cool-lab-a1b2c3d4-todos.compute.c-2.us-east-2.aws.neon.tech`. Each branch has its own URL.
+
+**From a terminal:** `neon functions get <slug>` prints it as `invocation_url`. `neon deploy` prints it for each function it deploys.
+
+**From code** (another function, a script, or an app after `neon env pull`): call `functionBaseUrl(slug)` from `@neon/env` (2.0.0 or later). It returns the base URL with no trailing slash:
+
+```typescript
+import { functionBaseUrl } from "@neon/env";
+
+const res = await fetch(`${functionBaseUrl("todos")}/api/todos`);
+```
+
+| Where the code runs                        | `functionBaseUrl("todos")` returns                  |
+| ------------------------------------------ | --------------------------------------------------- |
+| A deployed function on the branch          | `https://<branch_id>-todos.compute.…` (runtime env) |
+| An app or script after `neon env pull`     | the same URL, from the pulled env                   |
+| `neon dev`, when it serves `todos`         | `http://localhost:<port>`                           |
+| `neon dev`, when it does not serve `todos` | the deployed URL on the linked branch               |
+
+It reads `process.env` by default. Pass the two variables explicitly when they come from elsewhere: `functionBaseUrl("todos", { NEON_BRANCH_ID, NEON_FUNCTION_HOST_SUFFIX })`. It throws when either variable is missing; run `neon env pull` (or `neon env pull -s functions` for only the branch variables) to fix that locally. The function does not have to be deployed for the URL to resolve, but the request fails until it is.
+
+Browser code has no access to these variables. Build the URL on the server with `functionBaseUrl` and pass it to the client.
+
+Older releases wrote one `NEON_FUNCTION_<SLUG>_BASE_URL` per function and exposed `env.functions.<slug>.baseUrl`. `neon` 9 and `@neon/env` 2 removed both, and `neon env pull` deletes those lines. Replace them with `functionBaseUrl("<slug>")`.
 
 ## Connecting to Postgres
 
@@ -501,7 +544,7 @@ pool
 - **Scale to Zero:** ✅ preserved — polling stops when no clients are connected, so the compute suspends on its normal timer.
 - **Ordering:** `WHERE id > cursor` can skip a row that commits out of sequence: a transaction that took a lower id but commits after a higher one is already behind the cursor, so the poll never returns it. For a broadcast feed occasional loss is usually fine; when you need every row, use `LISTEN`/`NOTIFY` or poll by `created_at` with a small overlap window and dedupe by id.
 
-**2. `LISTEN`/`NOTIFY` — lowest latency, but requires disabling Scale to Zero.** Each isolate `LISTEN`s on a channel over a dedicated **unpooled** connection; broadcasting is `NOTIFY`, so every isolate (including the sender's) re-pushes to its sockets. Near-instant — but the listener holds an idle connection that **does not count as active**, so [Scale to Zero](https://neon.com/docs/introduction/scale-to-zero) suspends the compute and drops it, silently killing the feed. Only use it on an **always-on** compute (Scale to Zero disabled — a paid-plan setting).
+**2. `LISTEN`/`NOTIFY` — lowest latency, but requires disabling Scale to Zero.** Each isolate `LISTEN`s on a channel over a dedicated **unpooled** connection; broadcasting is `NOTIFY`, so every isolate (including the sender's) re-pushes to its sockets. Near-instant — but the listener holds an idle connection that **does not count as active**, so [Scale to Zero](https://neon.com/docs/introduction/scale-to-zero) suspends the compute and drops it, silently killing the feed. Only use it on an **always-on** compute (Scale to Zero disabled — a paid-plan setting: `neon postgres computes update <compute-id> --suspend-timeout -1`).
 
 ```typescript
 import { attachDatabasePool } from "@neon/functions";

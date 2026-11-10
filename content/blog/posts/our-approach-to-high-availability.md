@@ -80,8 +80,6 @@ This is a rarer situation, but the entire VM hosting Postgres might sometimes fa
 
 ![Image](https://cdn.neonapi.io/public/images/pages/blog/our-approach-to-high-availability/ad4nxeoxxae-g0v-ndpbmntbmmh6tmikdbgclzozjtgtjfqs1qivibtjie5uvshu8pykiqqn1igx0ckgh0mtcx1ixicai4uqor3pgtoc6vnslh7dk0v8suxbqlwbjteafifhnm9evrs1d5pgewjjyfczpfp06-d4862ba6.png)
 
-##
-
 ## Why Neon storage is highly available by default
 
 <Admonition type="info" title="The key">

@@ -14,6 +14,7 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/get-started/backend-beta
   - /docs/get-started/platform-private-preview
+updatedOn: '2026-10-30T18:52:42.000Z'
 ---
 
 On Neon, a single [`neon.ts`](/docs/reference/neon-ts) file declares your whole backend: a **Postgres database**, S3-compatible **Object Storage**, long-running **Functions**, an **AI Gateway** for calling LLMs through one credential, managed **Auth**, and the **Data API**. Each capability is a toggle, or on by default for Postgres, plus [`neon deploy`](/docs/cli/deploy), which provisions it and injects standard environment variables into your app. Branch your project and the whole backend follows it through service-specific lifecycle mechanics.
@@ -43,7 +44,7 @@ So when you see a `notes` table, an `attachments` bucket, or a `chat` function b
 The sixth capability is the [Data API](/docs/data-api/overview), which exposes Postgres through a PostgREST-compatible HTTPS endpoint. This example doesn't enable it because the `chat` Function queries Postgres directly.
 
 <Admonition type="info" title="Region and access requirements">
-Object Storage, Functions, and the AI Gateway are currently available in AWS US East (Ohio) (`aws-us-east-2`), AWS US East (N. Virginia) (`aws-us-east-1`), AWS Europe (Frankfurt) (`aws-eu-central-1`), and AWS Asia Pacific (Singapore) (`aws-ap-southeast-1`), on new or existing projects in those regions, so use a project in one of them to try them. Support is expanding toward [all regions](/docs/introduction/regions). Postgres and Managed Better Auth work in any region. Object Storage and Functions are available on any plan, subject to usage limits; the AI Gateway requires a paid plan.
+Object Storage, Functions, and the AI Gateway are currently available in AWS US East (Ohio) (`aws-us-east-2`), AWS US East (N. Virginia) (`aws-us-east-1`), AWS Europe (Frankfurt) (`aws-eu-central-1`), and AWS Asia Pacific (Singapore) (`aws-ap-southeast-1`), on new or existing projects in those regions, so use a project in one of them to try them. Support is expanding toward [all regions](/docs/introduction/regions). Postgres and Managed Better Auth work in any region. Object Storage and Functions are available on any plan, subject to usage limits; the AI Gateway works on any plan with prepaid credits.
 </Admonition>
 
 ## The shape of a Neon backend

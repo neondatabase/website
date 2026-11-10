@@ -2,6 +2,7 @@
 import { notFound } from 'next/navigation';
 
 import Post from 'components/pages/doc/post';
+import JsonLd from 'components/shared/json-ld';
 import VERCEL_URL from 'constants/base';
 import { DOCS_DIR_PATH, CHANGELOG_DIR_PATH, isUnusedOrSharedContent } from 'constants/content';
 import LINKS from 'constants/links';
@@ -58,6 +59,7 @@ export async function generateMetadata(props) {
     rssPathname: isChangelog ? `${LINKS.changelog}/rss.xml` : null,
     robotsNoindex: post?.data?.noindex ? 'noindex' : null,
     type: 'article',
+    modifiedTime: post?.data?.updatedOn ?? null,
     markdownPath: `/docs/${currentSlug}.md`,
   });
 }
@@ -106,18 +108,18 @@ const DocPost = async (props) => {
     '@context': 'https://schema.org',
     '@type': 'Article',
     headline: data.title,
+    url: `${VERCEL_URL}${LINKS.docs}/${currentSlug}`,
+    ...(data.updatedOn && { dateModified: data.updatedOn }),
     author: {
       '@type': 'Organization',
       name: 'Neon',
     },
+    publisher: { '@type': 'Organization', name: 'Neon' },
   };
 
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
+      <JsonLd data={jsonLd} />
       <Post
         content={content}
         data={data}

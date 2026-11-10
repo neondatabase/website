@@ -6,10 +6,11 @@ import Link from 'next/link';
 import PropTypes from 'prop-types';
 import React, { useState, useEffect } from 'react';
 
+import ProviderMarks from 'components/shared/provider-marks';
 import ICONS_CONFIG from 'config/docs-icons-config';
+import useCopyPrompt from 'hooks/use-copy-prompt';
 import CheckIcon from 'icons/check.inline.svg';
 import ChevronRight from 'icons/chevron-right-sm.inline.svg';
-import CopyIcon from 'icons/home/copy.inline.svg';
 import { cn } from 'utils/cn';
 import sendGtagEvent from 'utils/send-gtag-event';
 
@@ -119,7 +120,7 @@ const CompactCard = ({
   index,
   appearance = 'default',
 }) => {
-  const [isCopied, setIsCopied] = useState(false);
+  const { isCopied, copy } = useCopyPrompt();
   const [markdown, setMarkdown] = useState('');
 
   useEffect(() => {
@@ -131,24 +132,16 @@ const CompactCard = ({
     }
   }, [promptSrc]);
 
-  const handleCopy = async (e) => {
+  const handleCopy = (e) => {
     e.preventDefault();
     if (!markdown) return;
-
-    try {
-      await navigator.clipboard.writeText(markdown);
-      setIsCopied(true);
-      setTimeout(() => setIsCopied(false), 2000);
-      sendGtagEvent('Button Clicked', { text: `Copy prompt - ${title}` });
-    } catch (err) {
-      console.error('Failed to copy:', err);
-    }
+    copy(markdown, () => sendGtagEvent('Button Clicked', { text: `Copy prompt - ${title}` }));
   };
 
   const sharedClassName = cn(
     'group/card relative flex min-h-10 w-full items-start gap-3 overflow-hidden text-left transition-colors duration-200',
     'focus:ring-2 focus:ring-green-45 focus:ring-offset-2 focus:outline-hidden dark:focus:ring-offset-gray-new-8',
-    promptSrc && 'pr-7'
+    promptSrc && 'pr-16'
   );
 
   const innerContent = (
@@ -197,15 +190,11 @@ const CompactCard = ({
       {promptSrc && (
         <div
           className={cn(
-            'absolute top-1/2 right-2 -translate-y-1/2 text-gray-new-60 transition-opacity duration-200',
+            'absolute top-1/2 right-2 -translate-y-1/2 transition-opacity duration-200',
             isCopied ? 'opacity-100' : 'opacity-0 group-hover/card:opacity-100'
           )}
         >
-          {isCopied ? (
-            <CheckIcon className="h-3.5 w-3.5 text-green-45" />
-          ) : (
-            <CopyIcon className="h-3.5 w-3.5" />
-          )}
+          {isCopied ? <CheckIcon className="h-3.5 w-3.5 text-green-45" /> : <ProviderMarks />}
         </div>
       )}
     </>
@@ -222,8 +211,16 @@ const CompactCard = ({
   }
 
   if (href) {
+    const isHome = appearance === 'home';
     return (
-      <li className="m-0! before:hidden">
+      <li className={cn('m-0! before:hidden', isHome && 'group/item relative')}>
+        {/* Docs home rows get a soft background while hovered or focused. */}
+        {isHome && (
+          <span
+            className="pointer-events-none absolute -inset-2 bg-gray-new-98 opacity-0 transition-opacity duration-200 group-focus-within/item:opacity-100 group-hover/item:opacity-100 dark:bg-gray-new-10"
+            aria-hidden
+          />
+        )}
         <Link
           className={sharedClassName}
           href={href}

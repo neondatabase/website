@@ -197,7 +197,7 @@ curl -X 'DELETE' \
 - The `project_id` for a Neon project is found on the **Settings** page in the Neon Console, or you can find it by listing the projects for your Neon account using the Neon API.
 - The `branch_id` can be found by listing the branches for your project. The `<branch_id>` is the `id` of a branch. A branch `id` has a `br-` prefix. See [List branches](#list-branches-with-the-api).
 
-The response shows information about the branch being deleted and the `suspend_compute` and `delete_timeline` operations that were initiated.
+The response shows information about the branch being deleted and the `suspend_compute` and `timeline_archive` operations that were initiated.
 
 ```json
 {
@@ -227,7 +227,7 @@ The response shows information about the branch being deleted and the `suspend_c
       "id": "41646f65-c692-4621-9538-32265f74ffe5",
       "project_id": "autumn-disk-484331",
       "branch_id": "br-dawn-scene-747675",
-      "action": "delete_timeline",
+      "action": "timeline_archive",
       "status": "scheduling",
       "failures_count": 0,
       "created_at": "2022-12-06T01:12:10Z",
@@ -259,15 +259,21 @@ To create a schema-only branch using the Neon API, use the [Create branch](/docs
 
 - Your Neon `project_id`
 - The `parent_id`, which is the branch ID of the branch containing the schema you want to copy
+- A read-write endpoint in the `endpoints` array. Neon requires an endpoint for schema-only branches.
 
 ```bash
 curl --request POST \
      --url https://console.neon.tech/api/v2/projects/wispy-salad-58347608/branches \
      --header 'accept: application/json' \
-     --header 'authorization: Bearer $NEON_API_KEY' \
+     --header "authorization: Bearer $NEON_API_KEY" \
      --header 'content-type: application/json' \
      --data '
 {
+  "endpoints": [
+    {
+      "type": "read_write"
+    }
+  ],
   "branch": {
     "parent_id": "br-super-mode-w371g4od",
     "name": "my_schema_only_branch",
@@ -284,7 +290,7 @@ To create a branch with an automatic expiration timestamp using the Neon API, us
 - Your Neon `project_id`
 - The `parent_id`, which is the branch ID of the branch you want to branch from
 - The `expires_at` timestamp in [RFC 3339](https://tools.ietf.org/html/rfc3339#section-5.6) format including a time zone (Z or offset)
-- The expiration must be in the future and no more than 30 days from now
+- The expiration must be in the future and no more than 30 days from now. The timestamp in the example is a placeholder. Replace it with a timestamp that meets this requirement, or the API returns an error.
 
 ```bash
 curl --request POST \
@@ -296,7 +302,7 @@ curl --request POST \
        "branch": {
          "name": "feature-test-branch",
          "parent_id": "br-super-mode-w371g4od",
-         "expires_at": "2024-12-15T18:02:16Z"
+         "expires_at": "2026-11-20T18:02:16Z"
        },
        "endpoints": [
          {
@@ -313,9 +319,9 @@ Example response (partial):
   "branch": {
     "id": "br-feature-67890",
     "name": "feature-test-branch",
-    "expires_at": "2024-12-15T18:02:16Z",
+    "expires_at": "2026-11-20T18:02:16Z",
     "ttl_interval_seconds": 604800,
-    "created_at": "2024-12-08T18:02:16Z"
+    "created_at": "2026-11-13T18:02:16Z"
   }
 }
 ```

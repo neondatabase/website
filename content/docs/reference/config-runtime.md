@@ -8,6 +8,7 @@ summary: >-
   CI step, a deploy script, or another tool that needs to reconcile a branch
   against a neon.ts policy.
 enableTableOfContents: true
+updatedOn: '2026-10-30T19:13:49.000Z'
 ---
 
 `@neon/config-runtime` is the package the [`neon` CLI](/docs/cli/config) itself uses to run a [`neon.ts`](/docs/reference/neon-ts) policy: read a branch's live state, diff a policy against it, apply the result, bundle and deploy Neon Functions, and register their custom domains. Import it directly when you're writing your own CI step or script and the CLI commands (`neon config plan`, `neon deploy`) don't fit. For example, a custom GitHub Actions job that applies a policy to a freshly created preview branch.
@@ -215,7 +216,7 @@ function buildFunctionBundle(fn: ResolvedFunctionConfig): Promise<Uint8Array>;
 
 `buildFunctionBundle` is loaded lazily and only when a deploy actually bundles a function, so a caller that never deploys functions, or that supplies its own `bundleFunction`, never pulls esbuild's native binary into their build. Inject a custom bundler via the `bundleFunction` option on `apply` / `pushConfig` / `createBranch` when your runtime can't ship that binary, for example a single-file packaged CLI, or a restricted CI sandbox.
 
-`ResolvedFunctionConfig` (what your bundler receives) has all deploy defaults already applied: `slug`, `name`, `source` (path to the entry file), `env` (resolved key/value pairs), `runtime`, and an optional `dev` block used only by `neon dev`.
+`ResolvedFunctionConfig` (what your bundler receives) has all deploy defaults already applied: `slug`, `name`, `source` (path to the entry file), `env` (resolved key/value pairs), `runtime`, `bundler` (`"esbuild"`, `"none"`, or a custom bundler function), and an optional `dev` block used only by `neon dev`.
 
 <Admonition type="note">
 The `neon` CLI has its own separate `NEON_ESBUILD_PATH` escape hatch for "esbuild not found" errors (see [Deploy and manage Neon Functions](/docs/compute/functions/deploy#deploy-with-neon-functions-deploy)). That variable is read by the CLI's own bundler, not by `buildFunctionBundle` in this package, so it has no effect when you call `@neon/config-runtime` directly. Pass `bundleFunction` instead.

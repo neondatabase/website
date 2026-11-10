@@ -19,7 +19,7 @@ description="Pre-built prompt for connecting Ruby on Rails to Lakebase Postgres"
 To connect to a Lakebase Postgres database from a Ruby on Rails application:
 
 <Admonition type="note">
-This guide was tested using Ruby v3.4.6 and Rails v8.0.3.
+This guide was tested using Ruby v4.0.9 and Rails v8.1.4.1. Rails 8.1 requires Ruby 3.2 or later.
 </Admonition>
 
 <Steps>
@@ -47,8 +47,15 @@ You now have a Rails project in a folder named `neon-with-rails`.
 
 Create a `.env` file in the root of your Rails project, and add the connection string for your Neon compute. Do not specify a database name after the forward slash in the connection string. Rails will choose the correct database depending on the environment.
 
-```shell shouldWrap
-DATABASE_URL=postgresql://[user]:[password]@[neon_hostname]/
+```text filename=".env" shouldWrap
+DATABASE_URL="postgresql://[user]:[password]@[neon_hostname]/?sslmode=require&channel_binding=require"
+```
+
+Rails doesn't read `.env` files on its own. Add the `dotenv-rails` gem to load the file in the development and test environments:
+
+```shell
+cd neon-with-rails
+bundle add dotenv-rails --group development,test
 ```
 
 <Admonition type="note">
@@ -56,16 +63,12 @@ You can find the connection string for your database by clicking the **Connect**
 </Admonition>
 
 <Admonition type="important">
-The role you specified in the `DATABASE_URL` must have **CREATEDB** privileges. Roles created in the Neon Console, CLI, or API, including the default role created with a Neon project, are granted membership in the [neon_superuser](/docs/manage/roles#the-neonsuperuser-role) role, which has the `CREATEDB` privilege. Alternatively, you can create roles with SQL to grant specific privileges. See [Manage database access](/docs/manage/database-access).
+The role you specified in the `DATABASE_URL` must have **CREATEDB** privileges. Roles created in the Neon Console or API, including the default role created with a Neon project, are granted membership in the [neon_superuser](/docs/manage/roles#the-neonsuperuser-role) role, which has the `CREATEDB` privilege. Roles created with `neon roles create --access` don't have it. Alternatively, you can create roles with SQL to grant specific privileges. See [Manage database access](/docs/manage/database-access).
 </Admonition>
 
-Create the development database by issuing the following commands from the root of your project directory:
+Create the development database by running the following command from the root of your project directory:
 
 ```shell
-# Load the DATABASE_URL into your session
-source .env
-
-# Create the development database
 bin/rails db:create
 ```
 
@@ -74,7 +77,7 @@ bin/rails db:create
 Run the following command to create a controller and view. The controller will query the database version and supply it to the view file to render a web page that displays the PostgreSQL version.
 
 ```shell
-rails g controller home index
+bin/rails generate controller home index
 ```
 
 Replace the controller contents at `app/controllers/home_controller.rb` with:
@@ -89,7 +92,7 @@ end
 
 Replace the contents of the view file at `app/views/home/index.html.erb` with:
 
-```ruby
+```erb
 <% if @version %>
   <p><%= @version %></p>
 <% end %>
@@ -117,7 +120,7 @@ bin/rails server -e development
 Visit [localhost:3000/](http://localhost:3000/) in your web browser. Your Neon database's Postgres version will be displayed. For example:
 
 ```
-PostgreSQL 15.5 on x86_64-pc-linux-gnu, compiled by gcc (Debian 10.2.1-6) 10.2.1 20210110, 64-bit
+PostgreSQL 18.6 (ac70818) on aarch64-unknown-linux-gnu, compiled by gcc (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0, 64-bit
 ```
 
 </Steps>

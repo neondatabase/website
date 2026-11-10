@@ -7,8 +7,9 @@ summary: >-
   Use this feature to refresh a development or staging branch from production
   without creating a backup. Unlike Instant restore, it does not preserve a
   backup and is intended for syncing rather than data recovery. Root branches
-  cannot be reset, and branches with their own children must have those children
-  deleted first.
+  cannot be reset. Branches with children need either their children deleted
+  (Console) or a backup name passed to the CLI or API, which moves the children
+  to the backup branch.
 enableTableOfContents: true
 updatedOn: '2026-09-25T09:58:44.827Z'
 ---
@@ -29,10 +30,12 @@ When you reset a branch to its parent, the data and schema is completely replace
 
 ### Key points
 
-- You can only reset a branch to the latest data from its parent. Point-in-time resets based on timestamp or LSN are possible using [Instant restore](/docs/postgres/backup-restore/branch-restore), a similar feature, with some differences: instant restore leaves a backup branch and is in general is intended more for data recovery than development workflow.
-- This reset is a complete overwrite of the branch's databases, not a refresh or a merge. Any local changes to the branch's Postgres data or Managed Better Auth state are lost during the reset, and there is no way to exclude `neon_auth`. Unlike instant restore, a reset leaves no backup branch, so keep any auth work you want to preserve on its own branch. Object Storage and Functions are not part of the database timeline, so a reset does not affect any local changes you've made to them.
+- You can only reset a branch to the latest data from its parent. Point-in-time resets based on timestamp or LSN are possible using [Instant restore](/docs/postgres/backup-restore/branch-restore), a similar feature, with some differences: instant restore leaves a backup branch and is generally intended for data recovery rather than development workflow.
+- This reset is a complete overwrite of the branch's databases, not a refresh or a merge. Any local changes to the branch's Postgres data or Managed Better Auth state are lost during the reset, and there is no way to exclude `neon_auth`. Unlike instant restore, a reset leaves no backup branch, so keep any auth work you want to preserve on its own branch.
+- Object Storage is reset along with the database. The branch's buckets and objects return to the parent's current state, so any uploads, overwrites, and deletes you made on the branch are discarded. This is different from [Instant restore](/docs/postgres/backup-restore/branch-restore), which leaves Object Storage untouched. Functions are not part of the database timeline, so a reset does not affect them.
 - Existing connections will be temporarily interrupted during the reset. However, your connection details _do not change_. All connections are re-established as soon as the reset is done.
 - Root branches (like your project's `production` branch or schema-only branches) cannot be reset because they have no parent branch to reset to.
+- A branch with children can't be reset until the children are handled. In the Console, delete the children when prompted. The CLI and API return an error unless you pass a backup name with `--preserve-under-name` or `preserve_under_name`. Neon then creates the backup branch under that name and moves the children to it.
 
 ### Branch expiration behavior
 
@@ -42,7 +45,7 @@ For example, if your branch was originally set to expire in 24 hours, resetting 
 
 For more details about branch expiration, see [branch expiration](/docs/guides/branch-expiration).
 
-## How to Reset from parent
+## How to reset from parent
 
 You can reset any branch to its parent using any of our tools.
 
@@ -84,6 +87,12 @@ Example:
 neon branches reset development --parent --project-id noisy-pond-12345678
 ```
 
+Without `--preserve-under-name`, the reset doesn't keep a backup of the branch's current state. To keep one, pass a name for the backup branch. The CLI creates the backup with the current state, and any child branches move to it:
+
+```bash
+neon branches reset development --parent --preserve-under-name development-backup --project-id noisy-pond-12345678
+```
+
 Alternatively, you can set the `project-id` as a background context for your CLI session, letting you perform other actions against that project without having to include the `project-id` in every command. The setting is saved in a `context-file` and remains in place until you set a new context, or you remove the `context-file`.
 
 ```bash
@@ -101,7 +110,7 @@ To reset a branch to its parent using the API, use the [Restore branch](/docs/re
 curl --request POST \
      --url https://console.neon.tech/api/v2/projects/{NEON_PROJECT_ID}/branches/{BRANCH_ID}/restore \
      --header 'accept: application/json' \
-     --header 'authorization: Bearer $NEON_API_KEY' \
+     --header "authorization: Bearer $NEON_API_KEY" \
      --header 'content-type: application/json' \
      --data '
 {
@@ -109,6 +118,8 @@ curl --request POST \
 }
 '
 ```
+
+To keep the current state as a backup branch, add `preserve_under_name` to the request body with the backup name. Without it, the reset doesn't create a backup.
 
 For details, see [Instant restore using the API](/docs/postgres/backup-restore/branch-restore#how-to-use-instant-restore)
 

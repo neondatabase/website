@@ -15,6 +15,7 @@ summary: >-
 enableTableOfContents: true
 redirectFrom:
   - /docs/reference/cli-neon-auth
+updatedOn: '2026-10-30T16:46:22.000Z'
 ---
 
 The `neon-auth` command manages [Managed Better Auth](/docs/auth/overview) on a database branch from the terminal. You can enable or disable Managed Better Auth, configure OAuth providers, trusted domains, email settings, and webhooks, and manage auth users.

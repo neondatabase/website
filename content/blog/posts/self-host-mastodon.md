@@ -317,7 +317,7 @@ If you go to your [Fly.io](https://fly.io/) dashboard, you will see a newly adde
 
 ![Image](https://cdn.neonapi.io/public/images/pages/blog/self-host-mastodon/image-8-1024x576-3d398a64.png)
 
-# Deploying your app
+## Deploying your app
 
 You can now deploy your app to Fly by running the following command:
 
@@ -331,6 +331,6 @@ If you did all of the previous steps correctly, you should have a deployed Masto
 
 You will be able to create an account and new posts after confirming your email.
 
-# Summary & Final thoughts
+## Summary & Final thoughts
 
 In this guide, you learned what Mastodon is and how to deploy an instance while leveraging various tools. If you want to customize it, you will need to clone the [main repository](https://github.com/mastodon/mastodon) and create your own Docker image.

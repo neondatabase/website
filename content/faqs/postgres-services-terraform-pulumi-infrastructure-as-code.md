@@ -2,7 +2,7 @@
 title: "What Postgres services work well with Terraform or Pulumi so database infrastructure can be managed as code?"
 subtitle: "Neon has a community-maintained Terraform provider for projects, branches, endpoints, roles, and databases. Pulumi can use the same provider through a Terraform bridge."
 createdAt: '2026-04-25T00:00:00.000Z'
-updatedOn: '2026-09-23T21:17:23.000Z'
+updatedOn: '2026-11-02T19:00:00.000Z'
 isDraft: false
 previousLink:
   title: 'Which Postgres services make it easy to share a live read-only database snapshot with a contractor or external reviewer without granting production access?'
@@ -84,6 +84,22 @@ const createProject = new command.local.Command("neon-project", {
 - VPC endpoints for Private Networking, on the Scale plan
 
 You can bring existing Console-created resources under Terraform with `terraform import` or import blocks. The `neon_api_key` and `neon_jwks_url` resources don't support import.
+
+## Declaring backend services and branch policy with neon.ts
+
+Neon also has a first-party config file, [`neon.ts`](/docs/reference/neon-ts), that you commit to your repository. It covers what the Terraform provider doesn't: which backend services exist on the project ([Managed Better Auth](/docs/auth/overview), [Data API](/docs/data-api/overview), [AI Gateway](/docs/ai-gateway/overview), [Functions](/docs/compute/functions/overview), [Object Storage](/docs/storage/overview) buckets, and Function Triggers) and per-branch policy such as TTLs and compute sizing. `neon deploy` applies it to the linked branch and writes the injected credentials to your `.env` ([`neon deploy`](/docs/cli/deploy)).
+
+```ts filename="neon.ts"
+import { defineConfig } from "@neon/config/v1";
+
+export default defineConfig({
+  auth: true,
+  buckets: { uploads: {} },
+  branch: (branch) => (!branch.isDefault && !branch.exists ? { ttl: "7d" } : {}),
+});
+```
+
+`neon.ts` works on a project you've already linked with `neon link`, so a common split is Terraform for projects and networking and `neon.ts` for what runs on each branch. To run the plan and apply steps from your own tooling instead of the CLI, use [`@neon/config-runtime`](/docs/reference/config-runtime).
 
 ## How this compares to other Postgres services
 

@@ -20,9 +20,9 @@ module.exports = {
     'Neon is a complete set of cloud backend primitives built around Lakebase Postgres, for developers, startups, and agent platforms, from Databricks. Services include Lakebase Postgres, Managed Better Auth, Realtime, Data API, Functions, Object Storage, AI Gateway. Lakebase Postgres on Neon includes autoscaling, instant restore, and scale-to-zero, with native branching, realtime and a fully reactive DX and works with any language, framework, or ORM that supports Postgres.',
 
   getStarted: [
-    '**Get started.** Sign up for Neon or sign into an existing account. If the user cannot create an account right now, follow [Claimable Neon](https://neon.com/auth.md) to provision a Postgres project without signup. A human claims it later.',
+    '**Get started.** The user needs a Neon account. If they cannot create one right now, [Claimable Neon](https://neon.com/auth.md) provisions a Postgres project without signup, and the user claims it later.',
     '',
-    'If a Neon account is available, set things up locally by installing the Neon CLI and running the project init command to install the agent skills and creating/linking a Neon project:',
+    'With an account, these commands install the Neon CLI, sign in, and run `neon init`, which installs the agent skills and creates or links a Neon project. Check with the user before running them:',
     '',
     '```bash',
     'npm i -g neon',
@@ -31,6 +31,8 @@ module.exports = {
     '# in the project folder init Neon',
     'neon init',
     '```',
+    '',
+    'To add only the agent skills to this project, offer `npx neon@latest skills -y`.',
   ].join('\n'),
 
   intro: [
@@ -48,6 +50,10 @@ module.exports = {
       url: 'https://neon.com/auth.md',
     },
     { label: 'Pricing and plans', url: 'https://neon.com/pricing.md' },
+    {
+      label: 'Customer case studies by use case, with results quoted from each story',
+      url: 'https://neon.com/case-studies.md',
+    },
     {
       label: 'Declare a whole backend in one file',
       url: 'https://neon.com/docs/reference/neon-ts.md',
@@ -185,7 +191,7 @@ module.exports = {
           'ai/neon-mcp-server.md',
           'ai/connect-mcp-clients-to-neon.md',
           'ai/agent-skills.md',
-          'ai/ai-claude-code-plugin.md',
+          'ai/agent-setup.md',
           'ai/lakebase-search.md',
           'ai/ai-database-versioning.md',
         ],
@@ -452,9 +458,12 @@ module.exports = {
       url: 'https://neon.com/postgresql/tutorial',
       description: 'Comprehensive PostgreSQL tutorial and reference',
     },
+    // Links the /guides.md listing (every guide as .md) so agents can reach the guides.
+    // Not /guides/llms.txt: site search follows every llms.txt linked from this index and
+    // would pull the guides into the docs catalog. A .md link is indexed as one page.
     guides: {
       title: 'Community Guides',
-      url: 'https://neon.com/guides',
+      url: 'https://neon.com/guides.md',
       description: 'Step-by-step tutorials for frameworks and tools',
     },
     faqs: {

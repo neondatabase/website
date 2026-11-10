@@ -11,7 +11,7 @@ summary: >-
   Project transfers require a personal API key.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2026-10-01T15:44:50.010Z'
+updatedOn: '2026-11-04T20:10:08.844Z'
 ---
 
 This guide covers the technical implementation of the Neon agent plan for your platform. You'll learn how to provision databases, implement versioning, manage user upgrades, and monitor usage at scale.
@@ -139,7 +139,7 @@ curl --request POST \
 
 For paid users, create projects in your paid organization with higher resource quotas and autoscaling enabled. You can create multiple tiers within your paid organization to match your pricing model.
 
-#### Example: Pro tier
+#### Pro tier
 
 | Resource             | Pro Tier Quota      | Description                             |
 | -------------------- | ------------------- | --------------------------------------- |
@@ -187,7 +187,7 @@ For detailed information about configuring quotas and what happens when limits a
 Project provisioning is near-instant (typically under 1 second), but consider these timing factors:
 
 1. **Project creation**: Returns immediately with project details
-2. **Compute activation**: First connection may take 1-2 seconds as compute starts
+2. **Compute activation**: First connection after the compute has been idle can take a few hundred milliseconds longer while it wakes
 3. **Subsequent connections**: Near-instant once compute is active
 
 For the best user experience:
@@ -214,8 +214,8 @@ curl --request GET \
 
 The connection string format is:
 
-```
-postgres://[role]:[password]@[endpoint]/[database]?sslmode=require
+```text
+postgresql://[user]:[password]@[neon_hostname]/[dbname]?sslmode=require&channel_binding=require
 ```
 
 ### What's created automatically
@@ -242,16 +242,17 @@ Project transfers between the two organizations in your agent plan require a **p
 - Organization API keys only work within a single organization
 - Transfers need to authenticate against both the source and destination organizations
 
-Use your personal API key with the [Transfer project](/docs/reference/api/projects/create-project-transfer-request) API to transfer projects:
+Use your personal API key with the [Transfer projects between organizations](/docs/reference/api/organizations/transfer-projects-from-org-to-org) API to transfer projects. Send the request to the source organization, which is the Free organization in this case:
 
 ```bash
-curl --request PATCH \
-     --url https://console.neon.tech/api/v2/projects/{project_id}/transfer \
+curl --request POST \
+     --url https://console.neon.tech/api/v2/organizations/{free_org_id}/projects/transfer \
      --header 'Accept: application/json' \
      --header "Authorization: Bearer $PERSONAL_API_KEY" \
      --header 'Content-Type: application/json' \
      --data '{
-  "target_org_id": "<paid-org-id>"
+  "project_ids": ["{project_id}"],
+  "destination_org_id": "<paid-org-id>"
 }'
 ```
 
@@ -292,13 +293,14 @@ When a paid user downgrades to your free tier, transfer their project from the p
 
 ```bash
 # Transfer to Free organization (sponsored)
-curl --request PATCH \
-     --url https://console.neon.tech/api/v2/projects/{project_id}/transfer \
+curl --request POST \
+     --url https://console.neon.tech/api/v2/organizations/{paid_org_id}/projects/transfer \
      --header 'Accept: application/json' \
      --header "Authorization: Bearer $PERSONAL_API_KEY" \
      --header 'Content-Type: application/json' \
      --data '{
-  "target_org_id": "<free-org-id>"
+  "project_ids": ["{project_id}"],
+  "destination_org_id": "<free-org-id>"
 }'
 ```
 
@@ -333,7 +335,7 @@ curl --request PATCH \
 
 ## Implementing database versioning
 
-AI agents and codegen platforms need robust database versioning to manage schema evolution and enable undo/redo functionality. Neon provides two complementary approaches:
+AI agents and codegen platforms need database versioning to manage schema evolution and enable undo and redo. Neon provides two complementary approaches:
 
 ### Point-in-time recovery (PITR)
 
@@ -345,7 +347,7 @@ Use PITR for recent history. The [history window](/docs/introduction/history-win
 
 The Free organization provides 1 day of history for **instant restore**, while the Paid organization provides up to 7 days. Factor these limits into your platform's feature offerings and set appropriate user expectations for each tier.
 
-Example creating a branch from 2 hours ago using the [Create branch](/docs/reference/api/branches/create-project-branch) API:
+Example creating a branch from 2 hours ago using the [Create branch](/docs/reference/api/branches/create-project-branch) API. Replace the timestamp with one inside the history window:
 
 ```bash
 curl --request POST \
@@ -357,7 +359,7 @@ curl --request POST \
   "branch": {
     "name": "restored-state",
     "parent_id": "{parent_branch_id}",
-    "parent_timestamp": "2024-11-05T14:00:00Z"
+    "parent_timestamp": "{timestamp_2_hours_ago}"
   }
 }'
 ```
@@ -377,18 +379,26 @@ Use snapshots (branches) for versions you want to keep beyond the [history windo
 **Pricing:** Snapshot storage is billed at $0.09/GB-month.
 </Admonition>
 
-Example creating a snapshot:
+Example creating a snapshot of a branch with the [Create snapshot](/docs/reference/api/snapshots/create-snapshot) API. The API names the snapshot automatically:
 
 ```bash
 curl --request POST \
-     --url https://console.neon.tech/api/v2/projects/{project_id}/branches \
+     --url https://console.neon.tech/api/v2/projects/{project_id}/branches/{branch_id}/snapshot \
+     --header 'Accept: application/json' \
+     --header "Authorization: Bearer $NEON_API_KEY"
+```
+
+To give the snapshot a meaningful name, update it with the [Update snapshot](/docs/reference/api/snapshots/update-snapshot) API. Use the snapshot ID from the response:
+
+```bash
+curl --request PATCH \
+     --url https://console.neon.tech/api/v2/projects/{project_id}/snapshots/{snapshot_id} \
      --header 'Accept: application/json' \
      --header "Authorization: Bearer $NEON_API_KEY" \
      --header 'Content-Type: application/json' \
      --data '{
-  "branch": {
-    "name": "v1.0-stable",
-    "parent_id": "{parent_branch_id}"
+  "snapshot": {
+    "name": "v1.0-stable"
   }
 }'
 ```
@@ -489,7 +499,7 @@ Available metrics:
 - `synthetic_storage_size_bytes`: Total storage used
 
 <Admonition type="tip">
-On usage-based plans (Launch, Scale, Agent, Enterprise), you can also use the v2 endpoints, which return invoice-aligned metrics. The [project metrics endpoint](/docs/reference/api/consumption/get-consumption-history-per-project-v2) (`GET /consumption_history/v2/projects`) returns billing-aligned totals per project. The [branch metrics endpoint](/docs/reference/api/consumption/get-consumption-history-per-branch-v2) (`GET /consumption_history/v2/branches`) breaks those metrics down by branch — useful for attributing usage to individual CI or development branches. See [Query consumption metrics](/docs/guides/consumption-metrics).
+On usage-based plans (Launch, Scale, Agent, Enterprise), you can also use the v2 endpoints, which return invoice-aligned metrics. The [project metrics endpoint](/docs/reference/api/consumption/get-consumption-history-per-project-v2) (`GET /consumption_history/v2/projects`) returns billing-aligned totals per project. The [branch metrics endpoint](/docs/reference/api/consumption/get-consumption-history-per-branch-v2) (`GET /consumption_history/v2/branches`) breaks those metrics down by branch, which helps you attribute usage to individual CI or development branches. See [Query consumption metrics](/docs/guides/consumption-metrics).
 </Admonition>
 
 For complete details on parameters, pagination, response formats, and metric definitions, see [Query consumption metrics](/docs/guides/consumption-metrics).
@@ -552,13 +562,13 @@ All platform integrations use the Neon API. You can call it directly or use lang
 
 - **Users hit quota limits unexpectedly**: Autoscaling can consume compute time faster than anticipated. Set `autoscaling_limit_max_cu` appropriately for each tier, monitor consumption metrics and alert users at 80% threshold, and consider lowering `suspend_timeout_seconds` for free tier to reduce active time.
 
-- **First database connection is slow**: Compute needs to start from idle state (cold start). This is expected behavior for serverless compute (1-2 seconds on first connection). Set user expectations accordingly. For critical production endpoints, use `suspend_timeout_seconds: -1` to keep compute always on. Subsequent connections are near-instant.
+- **First database connection is slow**: Compute needs to start from idle state (cold start). This is expected behavior for serverless compute: the first connection after the compute has been idle can take a few hundred milliseconds longer while it wakes. Set user expectations accordingly. For critical production endpoints, use `suspend_timeout_seconds: -1` to keep compute always on. Subsequent connections are near-instant.
 
 - **Storage grows larger than expected**: Multiple branches or snapshots accumulate over time. Implement branch cleanup for old development branches, delete snapshots that are no longer needed, and monitor storage metrics to alert users approaching limits.
 
 ## Support
 
-As an Neon Agent Plan participant, you have access to:
+As a Neon Agent plan participant, you have access to:
 
 - **Dedicated Slack channel**: Direct access to the Neon team for technical questions
 - **Your Neon representative**: Contact them for rate limit adjustments, limit increases, or custom needs

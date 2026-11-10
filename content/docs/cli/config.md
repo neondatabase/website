@@ -14,6 +14,7 @@ summary: >-
   evaluating it, and --allow-protected, --update-existing, or -y to answer
   the apply confirmation prompts in non-interactive use.
 enableTableOfContents: true
+updatedOn: '2026-10-31T11:32:37.000Z'
 ---
 
 The `config` command manages a branch declaratively with a `neon.ts` policy file: scaffold a starter config, inspect the branch's live state, preview what an apply would change, and apply the policy. For the `neon.ts` file format, see the [neon.ts reference](/docs/reference/neon-ts).
@@ -149,7 +150,7 @@ Next: `neon config plan` to preview, `neon config apply` to provision.
 
 ### neon config add function (#add-function)
 
-Declares a [Neon Function](/docs/cli/functions) and creates its handler file. The handler defaults to `functions/<slug>.ts` (`.js` for a JavaScript config). A slug is 1 to 20 lowercase letters and digits, with no hyphens. Pass `--name` to set a display name (it defaults to the slug), or `--source` to register an existing handler relative to `neon.ts` without overwriting it. To start from a [Function Registry](/docs/compute/functions/registry) template instead of the starter handler, use [`neon functions new`](/docs/cli/functions#new).
+Declares a [Neon Function](/docs/cli/functions) and creates its handler file. The handler defaults to `functions/<slug>.ts` (`.js` for a JavaScript config). A slug is 1 to 20 lowercase letters and digits, with no hyphens. Pass `--name` to set a display name (it defaults to the slug), or `--source` to register an existing handler relative to `neon.ts` without overwriting it. To start from a [Function Registry template](/functions/templates) instead of the starter handler, use [`neon functions new`](/docs/cli/functions#new).
 
 <CliUsage command="config add function" />
 

@@ -10,7 +10,19 @@ enableTableOfContents: true
 updatedOn: '2026-10-28T11:11:18.780Z'
 ---
 
-This page outlines Neon's support plans, available channels, and policies. To learn how to access support, please refer to the [Support channels](#support-channels) section. Identify the channels available to you based on your plan and follow the links to navigate to the relevant information. To share ideas or report a docs gap without opening a support request, see [Send feedback](/docs/introduction/feedback).
+This page covers Neon's support plans, channels, and policies. To share ideas or report a docs gap without opening a support request, see [Send feedback](/docs/introduction/feedback).
+
+## Get help
+
+The help you can get depends on your plan:
+
+- **Free**: Ask questions on the [Neon Discord Server](#neon-discord-server) or use [Neon AI chat assistance](#neon-ai-chat-assistance).
+- **Launch**: Open [support tickets](#support-tickets) for billing questions.
+- **Scale**: Open support tickets for any Neon issue.
+
+To open a support ticket, go to the [Neon Console](https://console.neon.tech) and select **Help** > **Get help** from the organization menu in the top right corner. See [Open the support center](#open-the-support-center).
+
+Check the [Neon status page](https://neonstatus.com/) first if you think there's a service disruption, or run [`neon incidents`](/docs/cli/incidents) to see the same report in your terminal.
 
 ## Support plans
 
@@ -35,19 +47,18 @@ The support channels you can access differ according to your [Support Plan](#sup
 | Support channels                                                              | Community support | Billing support | Standard support |
 | :---------------------------------------------------------------------------- | :---------------: | :-------------: | :--------------: |
 | [Neon Discord Server](#neon-discord-server) (not an official channel)         |      &check;      |     &check;     |     &check;      |
-| [Neon AI Chat Assistance](#neon-ai-chat-assistance) (not an official channel) |      &check;      |     &check;     |     &check;      |
+| [Neon AI chat assistance](#neon-ai-chat-assistance) (not an official channel) |      &check;      |     &check;     |     &check;      |
 | [Support tickets](#support-tickets)                                           |         -         |       \*        |     &check;      |
 | [Slack channel](#slack-channel)                                               |         -         |        -        |       \*\*       |
 | [Dedicated Support Engineer](#dedicated-support-engineer)                     |         -         |        -        |       \*\*       |
 
-<div style={{margin: '-30px 0 30px 0'}}>
-<small><sup>\*</sup> Under **Billing support** (Launch plan), you can only use [support tickets](#support-tickets) for **billing-related** issues. **Scale** plan and higher can use support tickets for **any** Neon issue. On paid plans, **Request billing support** on the [Billing](/docs/introduction/manage-billing#view-the-billing-page) page is the dedicated path for invoice and billing questions.</small><br/>
-<small><sup>\*\*</sup> [Slack channels](#slack-channel) and [Dedicated Support Engineers](#dedicated-support-engineer) are available for an additional fee, and with some Databricks support plans for [higher-volume customers](#higher-volume-customers). [Contact sales](/contact-sales) to learn more.</small>
-</div>
+\* Under **Billing support** (Launch plan), you can only use [support tickets](#support-tickets) for **billing-related** issues. **Scale** plan and higher can use support tickets for **any** Neon issue. On paid plans, **Request billing support** on the [Billing](/docs/introduction/manage-billing#view-the-billing-page) page is the dedicated path for invoice and billing questions.
+
+\*\* [Slack channels](#slack-channel) and [Dedicated Support Engineers](#dedicated-support-engineer) are available for an additional fee, and with some Databricks support plans for [higher-volume customers](#higher-volume-customers). [Contact sales](/contact-sales) to learn more.
 
 ### Neon Discord Server
 
-All Neon users have access to the [Neon Discord Server](https://neon.com/discord), where you can ask questions or see what others are doing with Neon. You will find Neon users and members of the Neon team actively engaged.
+All Neon users have access to the [Neon Discord Server](https://neon.com/discord), where you can ask questions in the **#support** channel or see what others are doing with Neon. You will find Neon users and members of the Neon team actively engaged.
 
 <Admonition type="important">
 The [Neon Discord Server](https://neon.com/discord) is not an official Neon Support channel.
@@ -58,11 +69,10 @@ The [Neon Discord Server](https://neon.com/discord) is not an official Neon Supp
 Neon AI chat assistance is available to all Neon users. You can access it from these locations:
 
 - **Neon Console**: Open the [support center](#open-the-support-center) and select **Ask the AI assistant**.
-- **Neon documentation**: Toggle **Ask Neon AI** on the [Neon documentation](/docs) site
-- **Discord**: Join the **#gpt-help** channel on the [Neon Discord server](https://neon.com/discord)
+- **Neon documentation**: Select **Ask AI** in the header of the [Neon documentation](/docs) site, or open search with **⌘K** (**Ctrl+K** on Windows and Linux) and ask Neon AI from there.
 - **Neon CLI**: Run [`neon ask`](/docs/cli/ask) to ask questions about Neon from your terminal
 
-Neon AI Chat assistants are updated regularly and built on various sources including the Neon documentation, the Neon website, the Neon API, and Neon GitHub repositories.
+Neon AI chat assistants are updated regularly and built on various sources including the Neon documentation, the Neon website, the Neon API, and Neon GitHub repositories.
 
 <Admonition type="important">
 Neon AI chat is not an official Neon Support channel.
@@ -159,12 +169,12 @@ We reserve the right to modify, amend, or update this Support Policy, including 
 
 ## Legacy enterprise support
 
-Customers on a legacy Enterprise plan can view support plan details in the following dropdown.
+Customers on a legacy Enterprise plan can view support plan details in the following dropdown. These terms, including the target response times, apply only to legacy Enterprise contracts. They don't apply to the Free, Launch, or Scale plans.
 
 <details>
 <summary>**Enterprise support (legacy)**</summary>
 
-### General support policy
+### General support policy (#general-support-policy-2)
 
 Neon provides Support for Enterprise plans under the terms of this Support Policy as long as the Customer maintains a current subscription to an Enterprise plan. "Support" means the services described in this Support Policy and does not include one-time services or other services not specified in this Support Policy, such as training, consulting, or custom development.
 
@@ -172,11 +182,11 @@ Unless described otherwise, defined terms mentioned in this policy shall have th
 
 We provide updates regarding any disruption in our Services on our [status page](https://neonstatus.com/). Please check this source first before seeking support.
 
-### Issue resolution
+### Issue resolution (#issue-resolution-2)
 
 Neon will make commercially reasonable efforts to resolve any Issues submitted by Enterprise customers. Such efforts may (at our discretion) include helping with diagnosis, suggesting workarounds, or changing the Product in a new release. An "Issue" is a material and verifiable failure of the Product to conform to its Documentation. Support will not be provided for the following: (1) use of the Products in a manner inconsistent with the applicable Documentation, (2) modifications to the Products not provided by or approved in writing by Neon, (3) use of the Products with third-party software not provided or approved by Neon. The Customer shall not submit Issues arising from any products other than the Products or otherwise use Support for unsupported products; this includes issues caused by third-party integrations.
 
-### Billing issues
+### Billing issues (#billing-issues-2)
 
 If you, the Customer, believe that your invoice or billing receipt is incorrect, we strongly encourage you to contact our Support team rather than filing a dispute with your card provider. Where available in the Neon Console, paid plans can use **Request billing support** on the **Billing** page; see [Request billing support](/docs/introduction/manage-billing#request-billing-support). Should a payment dispute be filed before getting in touch with us, we are limited in terms of the action we can take to resolve the matter. Once a dispute has been made with the card provider, the account associated with it and all deployments under it may be suspended until it has been resolved.
 

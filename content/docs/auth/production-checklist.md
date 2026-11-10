@@ -85,7 +85,7 @@ Update the provider with the [Update email provider configuration](/docs/referen
 
 ```bash shouldWrap
 curl -X PATCH 'https://console.neon.tech/api/v2/projects/{project_id}/branches/{branch_id}/auth/email_provider' \
-  -H 'Authorization: Bearer $NEON_API_KEY' \
+  -H "Authorization: Bearer $NEON_API_KEY" \
   -H 'Content-Type: application/json' \
   -d '{"type": "standard", "host": "smtp.example.com", "port": 587, "username": "example_username", "password": "AbC123dEf", "sender_email": "noreply@example.com", "sender_name": "Example App"}'
 ```

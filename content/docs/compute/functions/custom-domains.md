@@ -7,10 +7,8 @@ summary: >-
 enableTableOfContents: true
 redirectFrom:
   - /docs/guides/custom-domains
-tag: beta
+updatedOn: '2026-11-02T11:41:12.000Z'
 ---
-
-<FeatureBetaProps feature_name="Custom domains for Neon Functions" />
 
 Each Neon Function has a native invocation URL. You can also serve it from a
 domain you own, such as `api.example.com`. Neon routes the custom domain to one
@@ -307,9 +305,9 @@ native Neon hostname, not the custom hostname. To read the hostname the client
 requested, use the `x-forwarded-host` header; Neon overwrites any client-supplied
 value, so it's safe to trust for tenant routing.
 
-When your `neon.ts` declares the function, `neon env pull` writes its native URL
-as `NEON_FUNCTION_<SLUG>_BASE_URL`. Store the custom URL separately in your
-application configuration.
+[`functionBaseUrl('<slug>')`](/docs/compute/functions/environment-variables#call-another-function)
+from `@neon/env` returns the function's native URL, not the custom one. Store
+the custom URL separately in your application configuration.
 
 If a browser calls the custom domain directly, configure
 [CORS and authentication](/docs/compute/functions/authentication) for that

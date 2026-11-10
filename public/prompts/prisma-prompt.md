@@ -28,10 +28,10 @@ Identify the project's package manager (`npm`, `yarn`, `pnpm`, `bun`) and use it
 2.  Install dependencies:
     ```bash
     # Production dependencies
-    npm install @prisma/client @prisma/adapter-neon dotenv
+    npm install @prisma/client@7 @prisma/adapter-neon@7 dotenv
 
     # Development dependencies
-    npm install -D prisma typescript tsx @types/node
+    npm install -D prisma@7 typescript tsx @types/node
     ```
 
 ### 2. Initialize Prisma
@@ -40,7 +40,7 @@ Identify the project's package manager (`npm`, `yarn`, `pnpm`, `bun`) and use it
 npx prisma init
 ```
 
-This creates a `prisma/schema.prisma` file and a `.env` file.
+This creates a `prisma/schema.prisma` file, a `.env` file, and a Prisma config file (`prisma7.config.ts` in Prisma 7.10 and later, `prisma.config.ts` in earlier 7.x releases). Pin all Prisma packages to `@7`: the `prisma` package's `latest` tag points to a Prisma 8 prerelease.
 
 ### 3. Configure Environment Variables
 
@@ -49,20 +49,20 @@ Update the `.env` file with both connection strings from the Neon Console:
 ```env title=".env"
 # Pooled connection for your application (note the -pooler suffix in hostname)
 # Get this from Neon Console -> Connect -> Connection string (pooled)
-DATABASE_URL="postgresql://[user]:[password]@[endpoint]-pooler.[region].aws.neon.tech/[dbname]?sslmode=require"
+DATABASE_URL="postgresql://[user]:[password]@[endpoint]-pooler.[region].aws.neon.tech/[dbname]?sslmode=require&channel_binding=require"
 
 # Direct connection for Prisma CLI (migrations, db push, introspection)
 # Get this from Neon Console -> Connect -> Connection string (direct)
-DATABASE_URL_UNPOOLED="postgresql://[user]:[password]@[endpoint].[region].aws.neon.tech/[dbname]?sslmode=require"
+DATABASE_URL_UNPOOLED="postgresql://[user]:[password]@[endpoint].[region].aws.neon.tech/[dbname]?sslmode=require&channel_binding=require"
 ```
 
-**Important:** The pooled URL has `-pooler` in the hostname. The direct URL does not.
+**Important:** The pooled URL has `-pooler` in the hostname. The direct URL does not. If you only have the pooled string, remove `-pooler` from the hostname to get the direct one.
 
-### 4. Configure prisma.config.ts
+### 4. Configure the Prisma config file
 
-Create a `prisma.config.ts` file in the project root. This is required for Prisma 7+ to configure the CLI:
+Replace the contents of the config file that `prisma init` created (`prisma7.config.ts` or `prisma.config.ts`) with the following. Do not create a second config file: when both exist, the CLI loads `prisma7.config.ts` and ignores `prisma.config.ts`.
 
-```typescript title="prisma.config.ts"
+```typescript title="prisma7.config.ts or prisma.config.ts"
 import 'dotenv/config'
 import { defineConfig, env } from 'prisma/config'
 
@@ -184,7 +184,7 @@ Once the setup is complete:
 Before suggesting code or making edits, ensure:
 - The `package.json` contains `prisma` (dev), `@prisma/client` (prod), `@prisma/adapter-neon` (prod), and `tsx` (dev).
 - The `.env` file has both `DATABASE_URL` (pooled) and `DATABASE_URL_UNPOOLED` (direct (unpooled)).
-- The `prisma.config.ts` file exists and points to `DATABASE_URL_UNPOOLED`.
+- Exactly one Prisma config file (`prisma7.config.ts` or `prisma.config.ts`) exists and points to `DATABASE_URL_UNPOOLED`. `npx prisma db push` output shows `Loaded Prisma config from` that file and the direct (non-`-pooler`) host.
 - The `prisma/schema.prisma` does NOT have a `url` property in the datasource block.
 - The Prisma Client import uses the generated path: `./generated/prisma`.
 - The `PrismaNeon` adapter is instantiated with `{ connectionString: process.env.DATABASE_URL! }`.

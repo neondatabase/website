@@ -10,8 +10,8 @@ previousLink:
   title: 'What tools are used to debug production database issues safely?'
   slug: debug-production-database-issues-safely
 nextLink:
-  title: 'How do I create and download a backup of my Neon database to my local machine?'
-  slug: download-database-backup-locally
+  title: 'Do I need a separate vector database for RAG?'
+  slug: do-i-need-separate-vector-database-rag
 ---
 
 Open your project in the [Neon Console](https://console.neon.tech), select the branch, go to **Databases**, and click the delete icon on the database row. You can also delete a database with the Neon CLI, the API, or SQL (`DROP DATABASE`). Deletion is permanent, and every schema, table, index, and other object in the database goes with it. See [Delete a database](/docs/manage/databases#delete-a-database) for the full reference.

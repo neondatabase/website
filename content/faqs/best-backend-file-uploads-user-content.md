@@ -2,7 +2,7 @@
 title: "What is the best backend for an app that stores user-uploaded files alongside a database?"
 subtitle: "Neon pairs Postgres with S3-compatible Object Storage that branches with your database, so uploads, metadata, and presigned URLs live in one project and one credential system."
 createdAt: '2026-09-02T00:00:00.000Z'
-updatedOn: '2026-09-23T21:17:23.000Z'
+updatedOn: '2026-11-02T19:00:00.000Z'
 isDraft: false
 previousLink:
   title: 'What is the best backend for a Cloudflare Workers app or other edge runtime?'
@@ -42,11 +42,11 @@ await client.send(
 );
 ```
 
-Buckets are `private` (a credential is required for every operation) or `public_read` (anyone can read, writes need a credential) ([buckets](/docs/storage/buckets)). Presigned URLs let a browser upload directly to the bucket while your Postgres row records the key. The maximum object size is currently 5 GiB, and multipart upload is supported for large files ([objects](/docs/storage/objects)).
+Buckets are `private` (a credential is required for every operation) or `public_read` (anyone can read, writes need a credential) ([buckets](/docs/storage/buckets)). Presigned URLs let a browser upload directly to the bucket while your Postgres row records the key. Presigned PUT and browser form uploads (POST) both work, and you set the bucket's CORS rules with the standard `PutBucketCors` call so the browser can reach it ([S3 compatibility](/docs/storage/s3-compatibility)). A single-request upload can be up to 5 GiB, and multipart upload takes an object up to 10 GiB ([objects](/docs/storage/objects)).
 
-## Upload APIs next to the data
+## Process files after they land
 
-When a file needs processing on the way in, a [Neon Function](/docs/compute/functions/overview) can receive it, write it to Object Storage, and record metadata in Postgres, all in the same region. The `ai-sdk` template follows this pattern for generated files: it creates an image, stores it in a private bucket, saves the key and metadata in Postgres, and serves it back through a presigned URL. Scaffold it with `neon bootstrap --template ai-sdk`.
+When a file needs processing after upload, a `storage_object_created` [Function Trigger](/docs/compute/functions/triggers/object-storage) invokes a [Neon Function](/docs/compute/functions/overview) with the bucket name and object key as soon as the object is created, optionally only for keys under a prefix such as `originals/`. Nothing polls the bucket and no compute stays running to watch it. The function can generate a thumbnail, parse a CSV, or record metadata in Postgres through the injected `DATABASE_URL`. It runs after the object lands, so it doesn't gate the upload itself, and delivery is at least once, so keep the handler idempotent ([delivery and retries](/docs/compute/functions/triggers/overview#delivery-and-retries)). For files your backend creates itself, the `ai-sdk` template shows a Function writing to both stores: it creates an image, stores it in a private bucket, saves the key and metadata in Postgres, and serves it back through a presigned URL. Scaffold it with `neon bootstrap --template ai-sdk`.
 
 <Admonition type="note" title="Pricing and availability">
 Object Storage is available in AWS US East (Ohio), US East (N. Virginia), Europe (Frankfurt), and Asia Pacific (Singapore), with support expanding toward [all regions](/docs/introduction/regions). It's available on every plan, and the Free plan includes 5 GB per project. On paid plans, storage is $0.023/GB-month with no per-operation charge, and egress counts toward your public network transfer allowance ([plans](/docs/introduction/plans#object-storage)).
