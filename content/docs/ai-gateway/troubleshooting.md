@@ -65,15 +65,15 @@ The request body does not contain a valid `model` field.
 
 On your project's **AI Gateway** page, a locked model shows a padlock. Hover over the padlock to see why the model is locked, along with a link to fix it:
 
-| Tooltip | What to do |
-| --- | --- |
-| **Add a card to buy AI gateway credits for this model.** | Your organization is on the Free plan with no payment card on file. Select **Add a card**, add your card, then buy credits. You don't need to upgrade your plan. See [AI Gateway prepaid credits](/docs/ai-gateway/prepaid-credits#buy-or-top-up-credits). |
-| **AI Gateway credits are required to use this model.** | Select **Buy credits**. See [AI Gateway prepaid credits](/docs/ai-gateway/prepaid-credits). |
-| **A paid plan is required to use this model.** | Your organization can't buy credits on its current plan, for example because it's billed through the Vercel Marketplace. Select **Upgrade plan**. |
-| **Account verification is required to use this model.** | Neon checks your account after your first credit purchase. Wait a few minutes and reload the page. If the tooltip links to **Complete verification** or **Contact support for verification**, follow that link. |
-| **Your account has reached its daily AI Gateway spend limit.** | [Contact Support](/docs/introduction/support) to raise the limit. See [Usage limits](/docs/ai-gateway/prepaid-credits#usage-limits). |
-| **Your account is restricted from using this model.** | [Contact Support](/docs/introduction/support). |
-| **This model is not available to your account.** | [Contact Support](/docs/introduction/support). |
+| Tooltip                                                        | What to do                                                                                                                                                                                                                                                 |
+| -------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Add a card to buy AI gateway credits for this model.**       | Your organization is on the Free plan with no payment card on file. Select **Add a card**, add your card, then buy credits. You don't need to upgrade your plan. See [AI Gateway prepaid credits](/docs/ai-gateway/prepaid-credits#buy-or-top-up-credits). |
+| **AI Gateway credits are required to use this model.**         | Select **Buy credits**. See [AI Gateway prepaid credits](/docs/ai-gateway/prepaid-credits).                                                                                                                                                                |
+| **A paid plan is required to use this model.**                 | Your organization can't buy credits on its current plan, for example because it's billed through the Vercel Marketplace. Select **Upgrade plan**.                                                                                                          |
+| **Account verification is required to use this model.**        | Neon checks your account after your first credit purchase. Wait a few minutes and reload the page. If the tooltip links to **Complete verification** or **Contact support for verification**, follow that link.                                            |
+| **Your account has reached its daily AI Gateway spend limit.** | [Request a limit increase](/docs/introduction/support#request-a-limit-increase). See [Usage limits](/docs/ai-gateway/prepaid-credits#usage-limits).                                                                                                        |
+| **Your account is restricted from using this model.**          | [Contact Support](/docs/introduction/support).                                                                                                                                                                                                             |
+| **This model is not available to your account.**               | [Contact Support](/docs/introduction/support).                                                                                                                                                                                                             |
 
 Only organization admins can add a card or buy credits. After you buy credits, models unlock once Neon confirms access, usually within a few seconds. Reload the page if a model still shows as locked.
 
@@ -162,7 +162,7 @@ A credit balance below the minimum. The response includes a link to add credits:
 
 This block has no `Retry-After` header and doesn't clear on its own. [Buy credits](/docs/ai-gateway/prepaid-credits#buy-or-top-up-credits), or turn on [automatic top-up](/docs/ai-gateway/prepaid-credits#automatic-top-up) so it doesn't happen again.
 
-**Fix:** Check the `Retry-After` header. If present, the block is temporary and lifts at that time; retry with exponential backoff. If absent, the block lasts until it's resolved: for a low credit balance, add credits; for a limit, Scale plan users can [request a limit increase](/docs/introduction/support#request-a-limit-increase). See [Rate limits](/docs/ai-gateway/models#rate-limits) for current values.
+**Fix:** Check the `Retry-After` header. If present, the block is temporary and lifts at that time; retry with exponential backoff. If absent, the block lasts until it's resolved: for a low credit balance, add credits; for a limit, you can [request a limit increase](/docs/introduction/support#request-a-limit-increase). See [Rate limits](/docs/ai-gateway/models#rate-limits) for current values.
 
 ---
 

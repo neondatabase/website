@@ -334,7 +334,7 @@ The Neon API provides endpoints for managing VPC endpoints and project-level VPC
 
 ## Private networking limits
 
-The Private Networking feature supports a maximum of **20 private networking configurations per AWS region**. Supported AWS regions are listed [above](#create-an-aws-vpc-endpoint). If you need more, Scale plan users can [request a limit increase](/docs/introduction/support#request-a-limit-increase).
+The Private Networking feature supports a maximum of **20 private networking configurations per AWS region**. Supported AWS regions are listed [above](#create-an-aws-vpc-endpoint). If you need more, you can [request a limit increase](/docs/introduction/support#request-a-limit-increase).
 
 ## Limitations
 

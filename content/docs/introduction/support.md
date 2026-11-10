@@ -18,7 +18,7 @@ The help you can get depends on your plan:
 
 - **Free**: Ask questions on the [Neon Discord Server](#neon-discord-server) or use [Neon AI chat assistance](#neon-ai-chat-assistance).
 - **Launch**: Open [support tickets](#support-tickets) for billing questions.
-- **Scale**: Open support tickets for any Neon issue and [request limit increases](#request-a-limit-increase).
+- **Scale**: Open support tickets for any Neon issue.
 
 To open a support ticket, go to the [Neon Console](https://console.neon.tech) and select **Help** > **Get help** from the organization menu in the top right corner. See [Open the support center](#open-the-support-center).
 
@@ -99,7 +99,7 @@ The **Support center** drawer opens. Under **Which organization needs support?**
 - **Read the docs**: Browse Neon guides, references, and quickstarts.
 - **Contact our support team**: Open a technical support ticket. Available on the **Scale** plan.
 - **Ask a billing question**: Open a billing support ticket about an invoice, charge, refund, or your plan. Available on the **Launch** and **Scale** plans.
-- **Increase your platform limits**: Raise project, branch, AI Gateway, and other limits. Available on the **Scale** plan only. See [Request a limit increase](#request-a-limit-increase).
+- **Increase your platform limits**: Raise project, branch, AI Gateway, and other limits. See [Request a limit increase](#request-a-limit-increase).
 - **Get help from the community**: Join the [Neon Discord Server](#neon-discord-server).
 
 On the **Free** plan, the support center offers the AI assistant, the docs, and the community. To unlock support tickets, [upgrade to a paid plan](/docs/introduction/manage-billing#change-your-plan).
@@ -126,11 +126,7 @@ On the **Free** plan, the support center offers the AI assistant, the docs, and 
 
 You can also open a billing support ticket from the **Billing** page. Select **Request billing support** in the page header, or select **View past invoices**, open an invoice's actions menu, and select **Request support** to open the form with that invoice pre-selected. See [Request billing support](/docs/introduction/manage-billing#request-billing-support).
 
-<a id="request-a-limit-increase" aria-hidden="true"></a>
-
-#### Request a limit increase (Scale plan)
-
-Limit increase requests are available only to organizations on the **Scale** plan. The **Increase your platform limits** option doesn't appear in the support center for Free or Launch organizations. To raise these limits on another plan, [upgrade to Scale](/docs/introduction/manage-billing#change-your-plan) first.
+#### Request a limit increase
 
 Some Neon limits are soft limits that protect your organization from runaway usage and costs. Support can raise these:
 
@@ -144,7 +140,7 @@ Some Neon limits are soft limits that protect your organization from runaway usa
 
 To request an increase:
 
-1. In the [support center](#open-the-support-center), select the Scale plan organization that needs the higher limit.
+1. In the [support center](#open-the-support-center), select the organization that needs the higher limit.
 2. Select **Increase your platform limits**.
 3. Under **How can we help?**, include:
    - The limit you need raised and the value you need
