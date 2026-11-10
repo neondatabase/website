@@ -6,7 +6,7 @@ summary: >-
   Vercel-Managed (new users, billing through Vercel), Neon-Managed (existing
   Neon account, billing through Neon), and Manual (custom CI/CD via env vars).
   Both managed integrations create Postgres database branches for Vercel
-  preview deployments and support Managed Better Auth; they differ in branch cleanup
+  preview deployments and support Managed Better Auth (the Vercel-Managed integration also supports Realtime); they differ in branch cleanup
   timing, where Vercel-Managed follows deployment retention policy and
   Neon-Managed triggers on Git branch deletion. Choose this page to select the
   right integration before following the path-specific setup guide.
@@ -37,9 +37,12 @@ Choose the **Neon-Managed Integration** if you already have a Neon account or pr
 | **Billing**                     | Paid **through Vercel**                                                                               | Paid **through Neon**                                                                                        | Paid **through Neon**                           |
 | **Setup method**                | Vercel Marketplace → Native Integrations → "Neon Postgres"                                            | Vercel Marketplace → Connectable Accounts → "Neon"                                                           | Manual env-vars                                 |
 | **Preview Branching**           | Yes                                                                                                   | Yes                                                                                                          | No                                              |
-| **Managed Better Auth support** | Yes, auto-provisioned on preview branches                                                             | Yes, auto-provisioned on preview branches                                                                    | Manual setup required                           |
+| **Managed Better Auth support** | Yes, provisioned on preview branches when enabled on production                                       | Yes, provisioned on preview branches when enabled on production                                              | Manual setup required                           |
+| **Realtime support**            | Yes (beta); turn on when creating the database; preview branches get their own                        | No                                                                                                           | Manual setup required                           |
 | **Branch cleanup**              | Automatic (deployment-based)                                                                          | Automatic (Git-branch-based)                                                                                 | N/A                                             |
 | **Implementation type**         | [Native Integration](https://vercel.com/docs/integrations/install-an-integration/product-integration) | [Connectable Account](https://vercel.com/docs/integrations/install-an-integration/add-a-connectable-account) | N/A                                             |
+
+Neither integration sets environment variables for Object Storage, Functions, AI Gateway, or the Data API. To use those services from a Vercel app, add their variables to your Vercel project yourself.
 
 <Admonition type="note" title="Branch cleanup timing">
 Branch cleanup behavior differs between the two integrations. Vercel-Managed cleanup depends on Vercel's deployment retention policy, which can delay branch deletion by months. Neon-Managed cleanup is triggered by Git branch deletion. See [Managing Vercel preview branch cleanup](/docs/guides/vercel-branch-cleanup) for details, workarounds, and recommendations.
