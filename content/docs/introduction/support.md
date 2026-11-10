@@ -99,7 +99,7 @@ The **Support center** drawer opens. Under **Which organization needs support?**
 - **Read the docs**: Browse Neon guides, references, and quickstarts.
 - **Contact our support team**: Open a technical support ticket. Available on the **Scale** plan.
 - **Ask a billing question**: Open a billing support ticket about an invoice, charge, refund, or your plan. Available on the **Launch** and **Scale** plans.
-- **Increase your platform limits**: Ask Support to raise AI Gateway, compute, branch, or project limits. Available on the **Scale** plan only. See [Request a limit increase](#request-a-limit-increase).
+- **Increase your platform limits**: Raise project, branch, AI Gateway, and other limits. Available on the **Scale** plan only. See [Request a limit increase](#request-a-limit-increase).
 - **Get help from the community**: Join the [Neon Discord Server](#neon-discord-server).
 
 On the **Free** plan, the support center offers the AI assistant, the docs, and the community. To unlock support tickets, [upgrade to a paid plan](/docs/introduction/manage-billing#change-your-plan).
@@ -136,10 +136,10 @@ Some Neon limits are soft limits that protect your organization from runaway usa
 
 | Limit                                        | Learn more                                                                                      |
 | :------------------------------------------- | :---------------------------------------------------------------------------------------------- |
+| Projects per organization                    | [Projects](/docs/introduction/plans#projects)                                                   |
+| Unarchived branches per project              | [Branch archiving](/docs/guides/branch-archiving)                                               |
 | AI Gateway tokens per minute and daily spend | [AI Gateway usage limits](/docs/ai-gateway/prepaid-credits#usage-limits)                        |
 | Concurrently active computes                 | [Concurrently active compute limit](/docs/reference/glossary#concurrently-active-compute-limit) |
-| Unarchived branches per project              | [Branch archiving](/docs/guides/branch-archiving)                                               |
-| Projects per organization                    | [Projects](/docs/introduction/plans#projects)                                                   |
 | Private Networking endpoints per region      | [Private Networking limits](/docs/guides/neon-private-networking#private-networking-limits)     |
 
 To request an increase:
