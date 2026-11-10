@@ -14,7 +14,7 @@ updatedOn: '2026-09-16T19:45:35.340Z'
 
 <MigrationAssistant/>
 
-Neon's logical replication feature allows you to replicate data from Amazon RDS for Postgres to Neon.
+Neon's logical replication feature allows you to replicate data from Amazon RDS for Postgres to Neon using Lakebase Postgres.
 
 ## Prerequisites
 
@@ -113,7 +113,7 @@ For syntax details, see [CREATE PUBLICATION](https://www.postgresql.org/docs/cur
 
 ## Prepare your destination database
 
-This section describes how to prepare your destination Neon database (the subscriber) to receive replicated data from your AWS RDS Postgres instance.
+This section describes how to prepare your destination Lakebase Postgres database (the subscriber) to receive replicated data from your AWS RDS Postgres instance.
 
 ### Prepare your database schema
 
