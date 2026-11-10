@@ -718,6 +718,39 @@ const VALIDATORS = {
     return checks;
   },
 
+  async 'sitemap-md'(payload, entry, sot, { live, liveBody }) {
+    if (!live) {
+      const route = fs.readFileSync(path.join(ROOT, entry.routeFile), 'utf-8');
+      return [
+        route.includes('getSitemapMarkdown')
+          ? ok('route delegates to getSitemapMarkdown', entry.routeFile)
+          : fail('route delegates to getSitemapMarkdown', `${entry.routeFile} does not use it`),
+        equalsCheck('SoT path matches servedPath', sot.SITEMAP_MD.path, entry.servedPath),
+      ];
+    }
+    const body = liveBody || '';
+    const checks = [
+      /^# .+/m.test(body) ? ok('has an H1') : fail('has an H1', 'no "# " heading'),
+      /^## .+/m.test(body) ? ok('has H2 sections') : fail('has H2 sections', 'no "## " heading'),
+      /^- \[[^\]]+\]\(https?:\/\/[^)]+\)/m.test(body)
+        ? ok('has Markdown links')
+        : fail('has Markdown links', 'no "- [Title](url)" list items'),
+    ];
+    for (const alias of sot.SITEMAP_MD.aliases) {
+      try {
+        const served = await fetchServed(alias);
+        checks.push(
+          served.status === 200 && served.body === body
+            ? ok(`alias ${alias} serves the sitemap`)
+            : fail(`alias ${alias} serves the sitemap`, `${served.url} -> ${served.status}`)
+        );
+      } catch (err) {
+        checks.push(fail(`alias ${alias} serves the sitemap`, err.message));
+      }
+    }
+    return checks;
+  },
+
   openapi(payload, entry, sot, { live, liveJson }) {
     if (!live) {
       // Offline: the spec is served via a rewrite; assert the rewrite is declared.
@@ -861,7 +894,7 @@ async function runEntry(entry, sot) {
 
   try {
     const payload = offlinePayload(entry, sot);
-    checks.push(...validator(payload, entry, sot, live));
+    checks.push(...(await validator(payload, entry, sot, live)));
   } catch (err) {
     checks.push(fail('validate', err.message));
   }

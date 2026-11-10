@@ -8,7 +8,8 @@ summary: >-
   and GUI tools such as pgAdmin and DBeaver. Also links to connection pooling,
   SSL/TLS security, and latency and timeout troubleshooting.
 enableTableOfContents: true
-updatedOn: '2026-07-24T15:46:49.998Z'
+docType: Conceptual
+updatedOn: '2026-11-09T16:32:04.936Z'
 ---
 
 This section covers all the ways to connect to your Neon database, from standard Postgres connections to specialized drivers and tools. For framework-specific guides and quick starts, see [Get Started](/docs/get-started/connect-neon).

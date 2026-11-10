@@ -485,6 +485,11 @@ module.exports = {
       sourcePath: 'reference/glossary.md',
     },
     {
+      title: 'Sitemap',
+      url: 'https://neon.com/docs/sitemap.md',
+      description: 'Every docs page as Markdown links, grouped by the docs navigation',
+    },
+    {
       title: 'Blog',
       url: 'https://neon.com/blog.md',
       description: 'Engineering, product, and community posts from the Neon team',

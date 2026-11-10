@@ -612,6 +612,10 @@ describe('Middleware - AI Agent Integration Tests', () => {
       ['/skill.md alias', '/skill.md'],
       ['.well-known agent-skills alias', '/.well-known/agent-skills/neon-postgres/SKILL.md'],
       ['docs .well-known alias', '/docs/.well-known/agent-skills/neon-postgres/SKILL.md'],
+      // Route-handler sitemap and its rewrite-backed aliases: no file in public/.
+      ['Markdown sitemap', '/docs/sitemap.md'],
+      ['root Markdown sitemap alias', '/sitemap.md'],
+      ['.well-known Markdown sitemap alias', '/.well-known/sitemap.md'],
     ])('passes through a %s, tracks the read, no markdown fetch', async (_label, path) => {
       const req = createMockRequest(path, 'Mozilla/5.0', 'text/html');
 

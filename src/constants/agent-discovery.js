@@ -129,6 +129,16 @@ const CLAIMABLE = {
   authMarkdownPath: 'public/auth.md',
 };
 
+// Markdown sitemap (src/app/(docs)/docs/sitemap.md/route.js, built from
+// utils/sitemap-md.js). Lives under /docs/ like /docs/llms.txt; the aliases are
+// the other paths agents probe for it. next.config.js rewrites them to `path`,
+// and the proxy lets all of them through its `.md` 404 check because no file
+// for them exists in public/.
+const SITEMAP_MD = {
+  path: '/docs/sitemap.md',
+  aliases: ['/sitemap.md', '/.well-known/sitemap.md'],
+};
+
 // ── Payload builders ───────────────────────────────────────────────────────
 // Each builder returns the exact JSON body served at the corresponding path.
 // The route handlers are thin wrappers around these so the verifier can assert
@@ -337,6 +347,7 @@ module.exports = {
   NEON_CLI,
   INTEGRATIONS,
   CLAIMABLE,
+  SITEMAP_MD,
   buildMcpServerCard,
   buildMcpWellKnown,
   buildDocsMcpServerCard,
