@@ -73,6 +73,8 @@ aws s3api create-bucket \
 
 </CodeTabs>
 
+Creating a `public_read` bucket requires the project **Admin** role in organizations that use [per-project permissions](/docs/manage/user-permissions#per-project-permissions). Editors can create private buckets.
+
 To create a `public_read` bucket with neon:
 
 ```bash
@@ -92,10 +94,10 @@ Every bucket has an access level that controls who can read objects in it.
 | `private`     | Require a valid credential            | Require a valid credential |
 | `public_read` | Open to anyone (no credential needed) | Require a valid credential |
 
-The default is `private`. Set the access level when creating a bucket via the Neon API, or change it from the **Object storage** tab in the Console.
+The default is `private`. Set the access level when you create the bucket in the Console, with `neon`, or with the Neon API. It can't be changed later. To change it, create a new bucket with the access level you want and copy the objects to it.
 
 <Admonition type="note">
-Access level is set through the Neon Console or API, not through the S3 API. S3 ACL and bucket policy mutation requests (PutBucketAcl, PutBucketPolicy) return `501 Not Implemented`. If you need to change access level on an existing bucket, use the Console or Neon API.
+Access level is set through the Neon Console, `neon`, or the Neon API, not through the S3 API. S3 ACL and bucket policy writes (PutBucketAcl, PutBucketPolicy, PutObjectAcl), and public canned ACLs on CreateBucket or PutObject, return `501 Not Implemented`. A bucket created with an S3 client is always private.
 </Admonition>
 
 **public_read example**

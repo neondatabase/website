@@ -67,7 +67,7 @@ This populates `NEON_AI_GATEWAY_TOKEN` and `NEON_AI_GATEWAY_BASE_URL` for the cu
 neon config status
 ```
 
-For production deployments, use the [API-based workflow](#creating-a-credential) to create named credentials. `expires_at` is accepted but not currently enforced. Revoke credentials explicitly instead of relying on expiry.
+For production deployments, use the [API-based workflow](#creating-a-credential) to create named credentials. To make a credential stop working on a set date, pass `expires_at` (an RFC 3339 timestamp between 1 minute and 365 days from now). After it expires, AI Gateway requests with it return `401`.
 
 ## Using your credential
 
