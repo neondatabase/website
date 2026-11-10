@@ -13,7 +13,7 @@ enableTableOfContents: true
 updatedOn: '2026-10-09T15:17:33.920Z'
 ---
 
-The examples in this guide demonstrate creating, viewing, and deleting branches using the Neon CLI. For other branch-related CLI commands, refer to [Neon CLI commands — branches](/docs/cli/branches). This guide also describes how to use the `--api-key` option to authenticate CLI branching commands from the command line.
+The examples in this guide demonstrate creating, viewing, and deleting branches using the Neon CLI. For other branch-related CLI commands, refer to the [Neon CLI branch commands](/docs/cli/branches). This guide also describes how to use the `--api-key` option to authenticate CLI branching commands from the command line.
 
 The examples show the default `table` output format. The Neon CLI also supports `json` and `yaml` output formats. For example, if you prefer output in `json`, add `--output json` to your Neon CLI command.
 
@@ -50,7 +50,7 @@ postgresql://[user]:[password]@[neon_hostname]/[dbname]
 ```
 
 <Admonition type="tip">
-The Neon CLI provides a `neon connection-string` command you can use to extract a connection uri programmatically. See [Neon CLI commands — connection-string](/docs/cli/connection-string).
+The Neon CLI provides a `neon connection-string` command you can use to extract a connection uri programmatically. See the [connection-string command reference](/docs/cli/connection-string).
 </Admonition>
 
 Pass `--no-secrets` (Neon CLI 4.9.0+) to keep the connection string out of terminal scrollback and CI logs; older versions ignore it and still print it.
@@ -123,7 +123,7 @@ Created At     2026-07-24T20:22:42Z
 
 ## Branching automation with the Neon CLI
 
-The Neon CLI enables easy automation of branching operations for integration into your workflows or toolchains. To authenticate to Neon when running a CLI command, you can use an API key. For information about obtaining an API key, see [Create an API key](/docs/manage/api-keys#create-an-api-key).
+You can script branching operations with the Neon CLI and run them in your workflows or toolchains. To authenticate to Neon when running a CLI command, you can use an API key. For information about obtaining an API key, see [Create an API key](/docs/manage/api-keys#create-an-api-key).
 
 To use an API key, you can store it in an environment variable on your system. This prevents the key from being hardcoded into your automation scripts or exposed in another way. For example, you can add the following line to your shell's profile file (`.bashrc` or `.bash_profile` for bash shell):
 
@@ -135,7 +135,13 @@ After exporting your key, source the profile file (source `~/.bashrc` or source 
 
 You do not need to specify the variable name explicitly when using a Neon CLI command. A Neon CLI command looks for a `NEON_API_KEY` variable setting by default.
 
-This API key configuration ensures that the API key is kept secure while still providing a way to authenticate your CLI commands. Remember, you should handle your API key with the same level of security as your other credentials.
+To pass the key on a single command instead, use the `--api-key` option:
+
+```bash shouldWrap
+neon branches list --project-id <project-id> --api-key "$NEON_API_KEY"
+```
+
+This API key configuration ensures that the API key is kept secure while still providing a way to authenticate your CLI commands. Handle your API key with the same care as your other credentials.
 
 ## Branch expiration
 
@@ -143,7 +149,7 @@ For temporary environments, create branches with `--expires-at` to set a TTL for
 
 ```bash shouldWrap
 # Create a branch that expires at a specific date and time
-neon branches create --project-id <project-id> --name ci-test --parent <parent-branch> --expires-at "2025-07-15T18:02:16Z"
+neon branches create --project-id <project-id> --name ci-test --parent <parent-branch> --expires-at "2026-12-01T18:02:16Z"
 
 # Create a branch that expires in 2 hours (Linux/GNU)
 neon branches create --project-id <project-id> --name ci-test --parent <parent-branch> --expires-at "$(date -u -d '+2 hours' +%Y-%m-%dT%H:%M:%SZ)"
@@ -156,7 +162,7 @@ You can also update or remove expiration from existing branches:
 
 ```bash shouldWrap
 # Update expiration to a new timestamp
-neon branches set-expiration <branch-id> --expires-at "2025-07-20T12:00:00Z" --project-id <project-id>
+neon branches set-expiration <branch-id> --expires-at "2026-12-05T12:00:00Z" --project-id <project-id>
 
 # Remove expiration from a branch (omit --expires-at)
 neon branches set-expiration <branch-id> --project-id <project-id>
@@ -211,7 +217,7 @@ For more details, see [Reset from parent](/docs/guides/reset-from-parent).
 Using the CLI, you can restore a branch to an earlier point in its history or another branch's history using the following command:
 
 ```bash shouldWrap
-neon branches restore <target id|name> <source id|name @ timestamp|lsn>
+neon branches restore <target-id|name> <source>[@(timestamp|lsn)]
 ```
 
 This command restores the branch `production` to an earlier timestamp in its own history, saving to a backup branch called `production_restore_backup_2026-05-06`:
@@ -223,7 +229,7 @@ neon branches restore production ^self@2026-05-06T10:00:00.000Z --preserve-under
 Results of the operation:
 
 ```bash shouldWrap
-Restoring production to production at timestamp 2026-05-06T10:00:00.000Z
+Restoring production to timestamp 2026-05-06T10:00:00.000Z of production
 Restored branch
 ID             br-purple-dust-123456
 Name           production
