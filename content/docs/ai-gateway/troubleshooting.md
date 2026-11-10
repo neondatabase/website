@@ -71,7 +71,7 @@ On your project's **AI Gateway** page, a locked model shows a padlock. Hover ove
 | **AI Gateway credits are required to use this model.**         | Select **Buy credits**. See [AI Gateway prepaid credits](/docs/ai-gateway/prepaid-credits).                                                                                                                                                                |
 | **A paid plan is required to use this model.**                 | Your organization can't buy credits on its current plan, for example because it's billed through the Vercel Marketplace. Select **Upgrade plan**.                                                                                                          |
 | **Account verification is required to use this model.**        | Neon checks your account after your first credit purchase. Wait a few minutes and reload the page. If the tooltip links to **Complete verification** or **Contact support for verification**, follow that link.                                            |
-| **Your account has reached its daily AI Gateway spend limit.** | Scale plan users can [request a limit increase](/docs/introduction/support#request-a-limit-increase). See [Usage limits](/docs/ai-gateway/prepaid-credits#usage-limits).                                                                                   |
+| **Your account has reached its daily AI Gateway spend limit.** | You can request a limit increase. Scale plan users can [request a limit increase](/docs/introduction/support#request-a-limit-increase) from the console. See [Usage limits](/docs/ai-gateway/prepaid-credits#usage-limits).                                |
 | **Your account is restricted from using this model.**          | [Contact Support](/docs/introduction/support).                                                                                                                                                                                                             |
 | **This model is not available to your account.**               | [Contact Support](/docs/introduction/support).                                                                                                                                                                                                             |
 
@@ -162,7 +162,7 @@ A credit balance below the minimum. The response includes a link to add credits:
 
 This block has no `Retry-After` header and doesn't clear on its own. [Buy credits](/docs/ai-gateway/prepaid-credits#buy-or-top-up-credits), or turn on [automatic top-up](/docs/ai-gateway/prepaid-credits#automatic-top-up) so it doesn't happen again.
 
-**Fix:** Check the `Retry-After` header. If present, the block is temporary and lifts at that time; retry with exponential backoff. If absent, the block lasts until it's resolved: for a low credit balance, add credits; for a limit, Scale plan users can [request a limit increase](/docs/introduction/support#request-a-limit-increase). See [Rate limits](/docs/ai-gateway/models#rate-limits) for current values.
+**Fix:** Check the `Retry-After` header. If present, the block is temporary and lifts at that time; retry with exponential backoff. If absent, the block lasts until it's resolved: for a low credit balance, add credits; for a limit, you can request a limit increase. Scale plan users can [request a limit increase](/docs/introduction/support#request-a-limit-increase) from the console. See [Rate limits](/docs/ai-gateway/models#rate-limits) for current values.
 
 ---
 
