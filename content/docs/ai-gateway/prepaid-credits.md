@@ -111,7 +111,7 @@ Short-window rate limits, the daily spend cap, and balance depletion are distinc
 - The **daily spend cap** limits how much you can spend in a single day.
 - **Balance depletion** happens when your prepaid credits run out.
 
-If you're blocked and need a limit raised, you can [request a limit increase](/docs/introduction/support#request-a-limit-increase).
+If you're blocked and need a limit raised, Scale plan users can [request a limit increase](/docs/introduction/support#request-a-limit-increase).
 See [Rate limits](/docs/ai-gateway/models#rate-limits) for details.
 
 When you exceed a limit, the API returns **HTTP 429**:
@@ -224,7 +224,7 @@ Your credits stay on your account, and you can keep using AI Gateway on the Free
 </FaqItem>
 
 <FaqItem question="What are the default usage limits?">
-By default, each account has a soft limit of 200,000 tokens per minute (TPM), applied to input and output tokens separately, and a $20 per day spend cap, though both may vary by account. Both guard against runaway costs. You can [request a limit increase](/docs/introduction/support#request-a-limit-increase) if you're blocked. See [Usage limits](#usage-limits) for details.
+By default, each account has a soft limit of 200,000 tokens per minute (TPM), applied to input and output tokens separately, and a $20 per day spend cap, though both may vary by account. Both guard against runaway costs. Scale plan users can [request a limit increase](/docs/introduction/support#request-a-limit-increase) if you're blocked. See [Usage limits](#usage-limits) for details.
 </FaqItem>
 
 <FaqItem question="What happens if I hit a usage limit?">

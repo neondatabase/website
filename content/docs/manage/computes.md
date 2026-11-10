@@ -658,7 +658,7 @@ To work within the limit:
 - [Delete computes](#delete-a-compute) or branches you no longer use.
 - If you run a database per tenant or per agent, see [Multitenancy with Neon](/docs/guides/multitenancy). A project per tenant spreads computes across projects, and each project has its own limit.
 
-If your workload needs more active computes in one project, you can [request a limit increase](/docs/introduction/support#request-a-limit-increase). For details about the error, see [Connection errors](/docs/connect/connection-errors#you-have-exceeded-the-limit-of-concurrently-active-endpoints).
+If your workload needs more active computes in one project, Scale plan users can [request a limit increase](/docs/introduction/support#request-a-limit-increase). For details about the error, see [Connection errors](/docs/connect/connection-errors#you-have-exceeded-the-limit-of-concurrently-active-endpoints).
 
 ### No space left on device
 

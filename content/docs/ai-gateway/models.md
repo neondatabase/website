@@ -48,7 +48,7 @@ If you hit the limit, you'll receive a `429 Too Many Requests` response with a m
 
 The TPM limit applies to input tokens and output tokens separately. Each direction has its own limit, so using up your output allowance doesn't use up your input allowance. Upstream output token limits (20,000 OTPM for most models) apply independently, so you can hit a `429` on output tokens without reaching the gateway's TPM limit. See [Databricks Foundation Model API limits](https://docs.databricks.com/aws/en/machine-learning/foundation-model-apis/limits) for details.
 
-Both 200,000 TPM limits are soft limits. You can [request a higher limit](/docs/introduction/support#request-a-limit-increase).
+Both 200,000 TPM limits are soft limits. Scale plan users can [request a higher limit](/docs/introduction/support#request-a-limit-increase).
 
 A separate account-level daily spend cap also applies and can block AI Gateway requests with a `429` / `REQUEST_LIMIT_EXCEEDED`. It isn't a fixed published number and can vary by account. See [Pricing](#pricing) for details, or [Troubleshooting](/docs/ai-gateway/troubleshooting#429-account-quota-exceeded) if you hit it.
 
