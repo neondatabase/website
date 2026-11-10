@@ -6,7 +6,7 @@ summary: >-
   Benchmarking latency in Neon's serverless Postgres requires separating cold
   queries (compute wakes from suspension) from hot queries (active instance),
   because standard benchmarking tools conflate the two and produce misleading
-  results. Free-tier databases auto-suspend after 5 minutes of inactivity; paid
+  results. Databases on the Free plan auto-suspend after 5 minutes of inactivity; paid
   plan users can disable auto-suspend to eliminate cold starts. HTTP and
   WebSocket connections have distinct latency profiles, and Neon provides an
   open-source regional latency dashboard for comparing connection methods across
@@ -21,11 +21,11 @@ Benchmarking database query latency is inherently complex, requiring careful con
 
 When benchmarking Neon databases, you'll encounter two distinct types of queries:
 
-- **Cold queries**: Occur when a previously suspended compute resource is activated to process a request. This activation typically adds a few hundred milliseconds of latency. Cold queries are common in development or test environments where databases aren't running continuously.
+- **Cold queries**: Occur when a previously suspended compute resource is activated to process a request. This activation typically adds several hundred milliseconds of latency. Cold queries are common in development or test environments where databases aren't running continuously.
 
 - **Hot queries**: Execute on an already-active database instance, delivering consistent low latency. These represent typical performance in production environments where databases run continuously or remain active most of the time.
 
-Free-tier Neon databases automatically suspend after 5 minutes of inactivity. Paid plans allow you to disable the auto-suspend timeout to eliminate cold starts entirely. The Neon [Scale plan](/docs/introduction/plans) lets you disable or configure the setting, enabling you to customize your testing approach. See [Compute Lifecycle](/docs/introduction/compute-lifecycle) and [Auto-suspend Configuration](/docs/introduction/scale-to-zero) for more details.
+Databases on the Free plan suspend after 5 minutes of inactivity. Paid plans allow you to disable the auto-suspend timeout to eliminate cold starts entirely. The Neon [Scale plan](/docs/introduction/plans) lets you disable or configure the setting, enabling you to customize your testing approach. See [Compute Lifecycle](/docs/introduction/compute-lifecycle) and [Auto-suspend Configuration](/docs/introduction/scale-to-zero) for more details.
 
 ## Benchmarking methodology
 
@@ -61,7 +61,7 @@ Avoid testing across unrealistic distances that don't represent your production 
 
 ## Connection types and their impact
 
-[Neon's serverless driver](/docs/serverless/serverless-driver) supports two connection protocols: HTTP and WebSocket, each with distinctly different performance profiles. While some modern edge platforms now support direct TCP connections, many serverless environments still have limitations around persistent connections or TCP support. Neon's HTTP and WebSocket methods work across all serverless platforms, with each protocol having different latency characteristics and feature trade-offs depending on your query patterns. Understanding these differences is crucial for accurate benchmarking. For a comprehensive comparison, see [Choosing Connection Types](/docs/connect/choose-connection).
+[Neon's serverless driver](/docs/serverless/serverless-driver) supports two connection protocols: HTTP and WebSocket, each with distinctly different performance profiles. While some modern edge platforms now support direct TCP connections, many serverless environments still have limitations around persistent connections or TCP support. Neon's HTTP and WebSocket methods work across all serverless platforms, with each protocol having different latency characteristics and feature trade-offs depending on your query patterns. These differences affect benchmark results, so account for them in your tests. For a comprehensive comparison, see [Choosing Connection Types](/docs/connect/choose-connection).
 
 ### HTTP connections
 
@@ -87,13 +87,13 @@ Avoid testing across unrealistic distances that don't represent your production 
 When comparing HTTP vs WebSocket connections, you'll typically observe different latency patterns:
 
 - **HTTP connections**: Show consistent low latency for individual queries and excel at parallel query execution
-- **WebSocket connections**: Show higher initial connection latency (about 3-5x slower than HTTP) but very low latency for subsequent sequential queries
+- **WebSocket connections**: Show higher initial connection latency than HTTP. After the connection opens, each query takes about as long as an HTTP query in the same region
 
 Consider your query patterns when choosing a connection type:
 
 - For parallel queries or independent operations, HTTP often performs better
 - For sequential queries where each depends on the previous result, WebSockets can be more efficient after the initial connection
-- The break-even point typically occurs around 2-3 sequential queries, though this varies by region and workload
+- Measure your own workload from the region where your app runs. The trade-off depends on region and on how many queries each request makes
 
 The runtime environment (Edge vs traditional serverless) can also impact connection performance characteristics.
 
@@ -133,9 +133,9 @@ The benchmark specifically tracks:
 - Performance differences between HTTP and WebSocket connections
 - Cold vs hot query performance
 
-This data helps you understand expected latencies based on your specific region and connection method. The dashboard is open source and [available on GitHub](https://github.com/neondatabase-labs/latency-benchmarks).
+This data helps you understand expected latencies based on your specific region and connection method. The dashboard is open source and [available on GitHub](https://github.com/neondatabase/latency-benchmarks).
 
-If you encounter unexpected results during your benchmarking, consult the [Connection Troubleshooting](/docs/connect/connect-intro#troubleshoot-connection-issues) documentation to identify potential issues.
+If you encounter unexpected results during your benchmarking, consult the [Connection Troubleshooting](/docs/connect/connect-intro#troubleshooting) documentation to identify potential issues.
 
 ## Conclusion
 
