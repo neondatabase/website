@@ -1,3 +1,4 @@
+const { getRouteLastmod } = require('./src/utils/get-route-lastmod');
 const { guideHasExternalCanonical } = require('./src/utils/guide-has-external-canonical');
 
 module.exports = {
@@ -9,7 +10,7 @@ module.exports = {
 
     return {
       loc: routePath,
-      lastmod: config.autoLastmod ? new Date().toISOString() : undefined,
+      lastmod: getRouteLastmod(routePath),
       changefreq: config.changefreq,
       priority: config.priority,
       alternateRefs: config.alternateRefs ?? [],
