@@ -74,7 +74,6 @@ Changing the history window affects **all branches** in your project.
 1. Select your project.
 2. Go to **Settings** > **Postgres**.
 
-
 3. Under **History window**, use the slider to choose how long to keep change history (used for instant restore, Time Travel, and branching from past states). You can open **history storage** from the description on that page for details.
 4. Click **Save**.
 

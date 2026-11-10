@@ -80,4 +80,3 @@ Install non-interactively into every detected agent:
 ```bash
 neon plugins -y
 ```
-
