@@ -14,8 +14,8 @@ categories:
 authors:
   - carlota-soto
 cover:
-  image: null
-  alt: null
+  image: https://cdn.neonapi.io/public/images/pages/blog/whats-new-with-the-neon-backend/cover.jpg
+  alt: What's new with the Neon backend
 isFeatured: false
 seo:
   title: What's new with the Neon backend - Neon
@@ -28,8 +28,13 @@ seo:
   ogDescription: >-
     A roundup of what we've shipped lately across Lakebase Postgres, Managed
     Better Auth, Functions, Object Storage, AI Gateway, and Realtime
-  image: null
+  image: https://cdn.neonapi.io/public/images/pages/blog/whats-new-with-the-neon-backend/social.jpg
 ---
+
+<video autoPlay muted loop playsInline width="708" height="399" aria-label="Neon backend overview">
+<source src="https://cdn.neonapi.io/public/images/pages/blog/whats-new-with-the-neon-backend/new-updates-overview.webm" type="video/webm" />
+<source src="https://cdn.neonapi.io/public/images/pages/blog/whats-new-with-the-neon-backend/new-updates-overview.mp4" type="video/mp4" />
+</video>
 
 Neon now includes a complete set of backend primitives - the database ([Lakebase Postgres](https://neon.com/lakebase)), [Managed Better Auth](https://neon.com/auth), [Functions](https://neon.com/functions), [Object Storage](https://neon.com/object-storage), [AI Gateway](https://neon.com/ai-gateway), and we just launched [Realtime](https://neon.com/docs/realtime/overview) in beta. We ship updates to all of them every week, which we list in our [changelog](https://neon.com/docs/changelog) - this post rounds up a few of the recent ones worth knowing about.
 
