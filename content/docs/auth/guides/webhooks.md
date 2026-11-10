@@ -455,6 +455,34 @@ Return any 2xx status code. The response body is ignored.
 
 This event is non-blocking. Failures are logged but do not affect the user creation. Return 200 immediately and process the event asynchronously (for example, via a job queue). This prevents timeouts under load.
 
+## Sync users to your own tables
+
+To keep a `public.profiles` table in step with Managed Better Auth users, subscribe to `user.created` and insert a row when the event arrives. Managed Better Auth manages the `neon_auth` schema, so you can read and reference its tables but not add triggers to them or alter them.
+
+```javascript
+// app/webhooks/neon-auth/route.js
+import { sql } from '@/lib/db';
+
+export async function POST(request) {
+  const rawBody = await request.text();
+  const event = await verifyWebhook(rawBody, Object.fromEntries(request.headers));
+
+  if (event.event_type === 'user.created') {
+    await sql`
+      INSERT INTO public.profiles (id, display_name)
+      VALUES (${event.user.id}, ${event.user.name})
+      ON CONFLICT (id) DO NOTHING
+    `;
+  }
+
+  return new Response(null, { status: 200 });
+}
+```
+
+`verifyWebhook` is the function from the [Node.js example](#nodejs-example). The `ON CONFLICT` clause makes retries and duplicate deliveries safe.
+
+`user.created` is non-blocking, so the profile row can appear shortly after sign-up rather than in the same request. If your app needs the row immediately, insert it from the application right after sign-up instead. Webhooks have no update or delete events today, so changes to a user after creation don't reach your table. Deletes can cascade if `profiles.id` references `neon_auth.user ON DELETE CASCADE`.
+
 ## Retry behavior
 
 Because blocking events pause the user's auth flow, retries happen immediately rather than using exponential backoff. The user cannot wait minutes for a retry.

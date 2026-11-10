@@ -231,9 +231,13 @@ See [Managed Better Auth overview](/docs/auth/overview) and [Data API access con
 <details>
 <summary>Show resolution</summary>
 
-**Option 1: Use a profiles table with a trigger**
+<Admonition type="note">
+Managed Better Auth manages the `neon_auth` schema. You can read its tables and reference them in foreign keys, but you can't add triggers to them or alter them.
+</Admonition>
 
-Create a `public.profiles` table with only the user fields your application needs, and populate it via a trigger on `neon_auth.user`:
+**Option 1: Use a profiles table**
+
+Create a `public.profiles` table with only the user fields your application needs, and insert a row for each new user:
 
 ```sql
 CREATE TABLE public.profiles (
@@ -241,39 +245,23 @@ CREATE TABLE public.profiles (
   display_name text,
   PRIMARY KEY (id)
 );
-
-CREATE FUNCTION public.handle_new_user()
-RETURNS trigger
-LANGUAGE plpgsql
-SECURITY DEFINER SET search_path = ''
-AS $$
-BEGIN
-  INSERT INTO public.profiles (id)
-  VALUES (new.id);
-  RETURN new;
-END;
-$$;
-
-CREATE TRIGGER on_auth_user_created
-  AFTER INSERT ON neon_auth.user
-  FOR EACH ROW EXECUTE PROCEDURE public.handle_new_user();
 ```
+
+Insert the row from your application right after a successful sign-up, using the new user's ID:
+
+```sql
+INSERT INTO public.profiles (id, display_name)
+VALUES ($1, $2)
+ON CONFLICT (id) DO NOTHING;
+```
+
+To populate profiles asynchronously instead, subscribe to the `user.created` webhook. See [Sync users to your own tables](/docs/auth/guides/webhooks#sync-users-to-your-own-tables).
 
 Then enable RLS on `public.profiles` and create policies to control access.
 
-**Option 2: Use a security invoker view**
+**Option 2: Query user data from your server**
 
-Create a view with `security_invoker=on` so it respects the querying user's permissions:
-
-```sql
-CREATE VIEW public.members
-  WITH (security_invoker=on)
-AS
-SELECT id, created_at
-FROM neon_auth.user;
-```
-
-Note: For this approach to work, RLS must also be enabled on the `neon_auth.user` table with appropriate policies. Otherwise, the security invoker view still exposes all rows.
+A `security_invoker` view of `neon_auth.user` only protects rows if RLS is enabled on `neon_auth.user`, and you can't enable RLS on `neon_auth` tables. Drop the view and read `neon_auth.user` from your server over a connection that isn't exposed through the Data API. Return only the fields your client needs, or use the profiles table from Option 1 for data that clients read directly.
 
 </details>
 
