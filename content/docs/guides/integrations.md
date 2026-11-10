@@ -22,6 +22,8 @@ updatedOn: '2026-10-21T11:04:20.383Z'
 
 <TechCards>
 
+<a href="/docs/auth/overview" title="Managed Better Auth" description="Add sign-up and sign-in with Neon's managed auth service. Users live in your Postgres database and branch with it" icon="neon"></a>
+
 <a href="/docs/guides/auth-auth0" title="Auth0" description="Authenticate Lakebase Postgres application users with Auth0" icon="auth0"></a>
 
 <a href="/docs/guides/auth-authjs" title="Auth.js" description="Authenticate Lakebase Postgres application users with Auth.js" icon="auth"></a>
@@ -73,6 +75,8 @@ updatedOn: '2026-10-21T11:04:20.383Z'
 ## File & media storage
 
 <TechCards>
+
+<a href="/docs/storage/overview" title="Object Storage" description="Store files and media with Neon's S3-compatible Object Storage, which branches with your database" icon="neon"></a>
 
 <a href="/docs/guides/file-storage" title="File storage" description="Integrate file storage with Neon" icon="database"></a>
 
