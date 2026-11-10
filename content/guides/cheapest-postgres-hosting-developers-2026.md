@@ -34,14 +34,14 @@ The best free plans go further with:
 
 Here's how the free tiers of the six hosts covered in this guide compare:
 
-| Provider                            | Free offer                                                             | How long it lasts                                 | Databases                                      | Credit card                                                 |
-| :---------------------------------- | :--------------------------------------------------------------------- | :------------------------------------------------ | :--------------------------------------------- | :---------------------------------------------------------- |
-| **Neon**                            | Free plan, with 100 CU-hours per project each month                    | Permanent                                         | 100 projects                                   | Not required                                                |
-| **Supabase**                        | Free plan                                                              | Permanent                                         | 2 active projects                              | Not required                                                |
-| **Render Postgres**                 | 1 free database with 256 MB of RAM                                     | 30 days, then deleted after a 14-day grace period | 1 per workspace                                | Not required                                                |
-| **Amazon Aurora PostgreSQL**        | $100 of AWS credits, plus up to $100 more, on the AWS Free plan        | 6 months, or until the credits run out            | 2 clusters, created with express configuration | Not required for most new accounts, but AWS may ask for one |
-| **Google Cloud SQL for PostgreSQL** | A 30-day trial instance, plus $300 of Google Cloud credits for 90 days | 30 days for the trial instance                    | 1 trial instance per project                   | Required for the Google Cloud trial                         |
-| **Amazon RDS for PostgreSQL**       | The same AWS credits, shared with every other AWS service you use      | 6 months, or until the credits run out            | Limited by the credits, from `db.t4g.micro`    | Not required for most new accounts, but AWS may ask for one |
+| Provider                            | Free offer                                                             | How long it lasts                                 | Databases                                      | Free egress                                                            | Credit card                                                 |
+| :---------------------------------- | :--------------------------------------------------------------------- | :------------------------------------------------ | :--------------------------------------------- | :--------------------------------------------------------------------- | :---------------------------------------------------------- |
+| **Neon**                            | Free plan, with 100 CU-hours per project each month                    | Permanent                                         | 100 projects                                   | 5 GB per project                                                       | Not required                                                |
+| **Supabase**                        | Free plan                                                              | Permanent                                         | 2 active projects                              | 5 GB per organization, plus 5 GB for Storage files served from its CDN | Not required                                                |
+| **Render Postgres**                 | 1 free database with 256 MB of RAM                                     | 30 days, then deleted after a 14-day grace period | 1 per workspace                                | 5 GB per workspace                                                     | Not required                                                |
+| **Amazon Aurora PostgreSQL**        | $100 of AWS credits, plus up to $100 more, on the AWS Free plan        | 6 months, or until the credits run out            | 2 clusters, created with express configuration | 100 GB a month, shared across AWS services                             | Not required for most new accounts, but AWS may ask for one |
+| **Google Cloud SQL for PostgreSQL** | A 30-day trial instance, plus $300 of Google Cloud credits for 90 days | 30 days for the trial instance                    | 1 trial instance per project                   | None ($0.19/GiB)                                                       | Required for the Google Cloud trial                         |
+| **Amazon RDS for PostgreSQL**       | The same AWS credits, shared with every other AWS service you use      | 6 months, or until the credits run out            | Limited by the credits, from `db.t4g.micro`    | 100 GB a month, shared across AWS services                             | Not required for most new accounts, but AWS may ask for one |
 
 ## What's the cheapest Postgres hosting for developers?
 
@@ -79,7 +79,7 @@ Looking at <a href="https://www.producthunt.com/products/neon/reviews" target="_
 
 **Watch out for:**
 
-- At 0.25 CU, 100 CU-hours cover about 13 hours awake a day, so an always-on app can't stay on Free. When a Free project uses up its monthly compute, it's suspended until the next month or until you upgrade to usage-based billing (your data is kept)
+- At 0.25 CU, 100 CU-hours cover about 13 hours awake a day (idle time doesn't count, since compute scales to zero), so an always-on app can't stay on Free. When a Free project uses up its monthly compute, it's suspended until the next month or until you upgrade to usage-based billing (your data is kept)
 - Writes that would grow a Free project past its 1 GB storage limit fail until you free space or upgrade
 - Instant restore covers only the last 6 hours on Free, with 1 manual snapshot and no scheduled backups
 - Functions and Object Storage are available in [four AWS regions today](/docs/storage/overview#limits)
@@ -121,6 +121,7 @@ Looking at <a href="https://www.producthunt.com/products/supabase/reviews" targe
 - Neon includes 100 free projects, Supabase includes 2 active ones
 - Neon includes 1 GB of Postgres storage per project, Supabase includes 500 MB
 - Neon includes Auth for 60K monthly active users per project, Supabase includes 50K
+- Neon includes 5 GB of egress per project, Supabase includes 5 GB for the whole organization
 - Both are permanent and don't need a credit card
 
 </details>
@@ -137,7 +138,7 @@ Each workspace gets one free database, with 256 MB of RAM and 1 GB of storage. I
 
 **Strengths:**
 
-- The cheapest paid instance in this list, $6 a month for `Basic-256mb`, plus $0.30/GB-month of storage
+- The cheapest paid instance in this list, $6 a month for `0.1c-256mb`, plus $0.30/GB-month of storage
 - No base fee on the Hobby workspace plan, so you pay only for compute and storage
 - Web services, static sites, and cron jobs on the same platform, so your app and database share one bill
 
@@ -146,7 +147,7 @@ Each workspace gets one free database, with 256 MB of RAM and 1 GB of storage. I
 - The free database expires after 30 days, and Render deletes it, with its data, 14 days later unless you upgrade
 - Only one free database per workspace, with no backups
 - No scale to zero, so a paid instance bills every hour, even when nobody's using it
-- No database branching: preview environments (on the Pro workspace plan and up) create a new, empty database for each pull request instead of a copy of your data
+- No database branching: preview environments (on the Pro workspace plan and up) create an empty database with the same setup for each pull request instead of a copy of your data
 - No built-in auth or realtime, so sign-in and live updates need a separate service or your own code running on a web service
 
 <details>
@@ -284,7 +285,7 @@ Developers already on AWS with a database that's busy all day, who want a flat b
 
 ## What does it actually cost?
 
-Let's walk through three developer-sized workloads with estimated monthly costs after the free credits run out. In all three, the app runs outside the provider's network (for example, on Vercel or Netlify), so the database has to accept connections from the internet.
+Let's walk through three developer-sized workloads with estimated monthly costs after the free credits run out. In all three, the app runs outside the provider's network (for example, on Vercel or Netlify), so the database has to accept connections from the internet. Totals leave out egress, the data your database sends to your app. See each provider's allowance in the [free tier comparison](#what-should-you-look-for-in-a-free-postgres-plan).
 
 ### A Discord bot for a small community
 
@@ -294,7 +295,7 @@ Take a Discord bot with 0.1 GB of data, like user settings, scores, and reminder
 | :---------------------------------- | :----------------------------------- | :----------------------------------------------------------------- | :------------ |
 | **Neon**                            | Free                                 | Scales to zero, wakes in a few hundred milliseconds                | **$0.00**     |
 | **Supabase**                        | Free                                 | Stays online, since the bot is used every day                      | **$0.00**     |
-| **Render Postgres**                 | `Basic-256mb`                        | Runs all month                                                     | **$6.30**     |
+| **Render Postgres**                 | `0.1c-256mb`                         | Runs all month                                                     | **$6.30**     |
 | **Google Cloud SQL for PostgreSQL** | `db-f1-micro`, Enterprise edition    | Runs all month                                                     | **$9.37**     |
 | **Amazon Aurora PostgreSQL**        | Serverless v2, express configuration | Pauses, and the first command after a pause waits about 15 seconds | **$14.61**    |
 | **Amazon RDS for PostgreSQL**       | `db.t4g.micro`, On-Demand            | Runs all month                                                     | **$17.63**    |
@@ -306,7 +307,7 @@ Take a Discord bot with 0.1 GB of data, like user settings, scores, and reminder
 | :---------------------------------- | :----------------------------------- | :------------------------------------------------------- | :--------- |
 | **Neon** (Free)                     | 0.25 CU × 240 h = 60 of 100 CU-hours | 0.1 GB of the 1 GB allowance                             | **$0.00**  |
 | **Supabase** (Free)                 | Included in the Free plan            | 0.1 GB of the 500 MB allowance                           | **$0.00**  |
-| **Render Postgres**                 | $6 `Basic-256mb` instance            | 1 GB × $0.30 = $0.30                                     | **$6.30**  |
+| **Render Postgres**                 | $6 `0.1c-256mb` instance             | 1 GB × $0.30 = $0.30                                     | **$6.30**  |
 | **Google Cloud SQL for PostgreSQL** | 730 h × $0.0105 = $7.67              | 10 GB of SSD × $0.17 = $1.70                             | **$9.37**  |
 | **Amazon Aurora PostgreSQL**        | 0.5 ACU × 240 h × $0.12 = $14.40     | 0.1 GB × $0.10 = $0.01, plus 1M I/O × $0.20/M = $0.20    | **$14.61** |
 | **Amazon RDS for PostgreSQL**       | 730 h × $0.016 = $11.68              | 20 GB × $0.115 = $2.30, plus 730 h × $0.005 IPv4 = $3.65 | **$17.63** |
@@ -317,7 +318,7 @@ Take a Discord bot with 0.1 GB of data, like user settings, scores, and reminder
 - Discord expects a response to a slash command within 3 seconds, so on Aurora the bot has to defer its reply while the database resumes.
 - On Neon, a bot that uses Discord's HTTP interactions endpoint can run as a [Function](/docs/compute/functions/overview) next to its database, within the Free plan's 1M invocations a month, so you don't pay for a separate bot host. Supabase Edge Functions can do the same, within 500K invocations.
 - Aurora can resume above 0.5 ACU, so its compute is a lower bound. An express configuration cluster connects through the internet access gateway, which has no separately published fee. A full configuration cluster with a public IP address adds $3.65 a month.
-- Render's free database covers the first 30 days, then expires, so the bot needs `Basic-256mb` after that.
+- Render's free database covers the first 30 days, then expires, so the bot needs `0.1c-256mb` after that.
 - Cloud SQL excludes internet egress, which bills at $0.19/GiB.
 
 </details>
@@ -334,7 +335,7 @@ The cheapest way to run them on an always-on host is to put all ten in one insta
 | :---------------------------------- | :----------------------------------- | :----------------------- | :----------------------------- |
 | **Neon**                            | Free                                 | **$0.00**                | Not needed                     |
 | **Amazon Aurora PostgreSQL**        | Serverless v2, express configuration | **$1.40**                | **$1.40**                      |
-| **Render Postgres**                 | `Basic-256mb`                        | **$63.00**               | **$7.50**                      |
+| **Render Postgres**                 | `0.1c-256mb`                         | **$63.00**               | **$7.50**                      |
 | **Google Cloud SQL for PostgreSQL** | `db-f1-micro`, Enterprise edition    | **$93.70**               | **$9.37**                      |
 | **Supabase**                        | Pro                                  | **$115.00**              | **$25.00**                     |
 | **Amazon RDS for PostgreSQL**       | `db.t4g.micro`, On-Demand            | **$176.30**              | **$17.63**                     |
@@ -356,6 +357,7 @@ The cheapest way to run them on an always-on host is to put all ten in one insta
 - Supabase Free allows 2 active projects, so ten projects need Pro. The total assumes all ten are in one Pro organization. Keeping 2 in a separate Free organization and 8 on Pro costs $95.00 ($25 Pro + 8 × $10 Micro − $10 credit). In a shared project, all ten apps also share one Auth user pool and one set of Storage buckets.
 - The AWS Free plan allows 2 Aurora clusters, so ten clusters need a Paid plan.
 - Render allows one free database per workspace, and its free database expires after 30 days, so ten projects need paid instances.
+- On Neon, each project includes 5 GB of egress, so ten projects get 50 GB. On Supabase Pro, all ten share the organization's 250 GB, and on Render's Hobby workspace they share 5 GB, then $0.15/GB.
 
 </details>
 
