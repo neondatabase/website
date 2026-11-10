@@ -2,7 +2,7 @@
 title: Replicate data from Amazon RDS Postgres
 subtitle: Learn how to replicate data from Amazon RDS Postgres to Neon
 summary: >-
-  Migrate from Amazon RDS PostgreSQL to Neon with minimal downtime using logical
+  Migrate from Amazon RDS for Postgres to Neon with minimal downtime using logical
   replication. Set rds.logical_replication=1 on RDS, create a publication, then
   create a matching subscription on Neon to stream row-level changes. The guide
   covers enabling WAL logical level on RDS, allowlisting Neon NAT gateway IPs
@@ -14,7 +14,7 @@ updatedOn: '2026-09-16T19:45:35.340Z'
 
 <MigrationAssistant/>
 
-Neon's logical replication feature allows you to replicate data from Amazon RDS PostgreSQL to Neon using Lakebase Postgres.
+Neon's logical replication feature allows you to replicate data from Amazon RDS for Postgres to Neon.
 
 ## Prerequisites
 
@@ -36,11 +36,11 @@ Neon's logical replication feature allows you to replicate data from Amazon RDS 
 
 This section describes how to prepare your source Amazon RDS Postgres instance (the publisher) for replicating data to Neon.
 
-### Enable logical replication in the source Amazon RDS PostgreSQL instance
+### Enable logical replication in the source Amazon RDS for Postgres instance
 
 Enabling logical replication in Postgres requires changing the `wal_level` configuration parameter from `replica` to `logical`. Before you begin, you can check your current setting with the following command:
 
-```bash
+```sql
 SHOW wal_level;
  wal_level
 -----------
@@ -74,14 +74,14 @@ To enable logical replication:
 
 ### Allow connections from Neon
 
-You need to allow inbound connections to your AWS RDS Postgres instance from Neon. You can do this by editing your instance's **CIDR/IP - Inbound** security group, which you can find a link to from your AWS RDS Postgres instance page.
+You need to allow inbound connections to your AWS RDS Postgres instance from Neon. Neon connects over the public internet, so the instance must be publicly accessible. In the instance's **Connectivity & security** settings, confirm that **Publicly accessible** is set to **Yes**. You can do this by editing your instance's **CIDR/IP - Inbound** security group, which you can find a link to from your AWS RDS Postgres instance page.
 
 1. Click on the security group name.
 2. Click on the security group ID.
 3. From the **Actions** menu, select **Edit inbound rules**.
 4. Add rules that allow traffic from each of the IP addresses for your Neon project's region.
 
-   Neon uses 3 to 6 IP addresses per region for outbound communication, corresponding to each availability zone in the region. See [NAT Gateway IP addresses](/docs/introduction/regions#nat-gateway-ip-addresses) for Neon's NAT gateway IP addresses.
+   Neon uses several NAT gateway IP addresses per region, and the number varies by region. Allow all of the addresses for your project's region. See [NAT Gateway IP addresses](/docs/introduction/regions#nat-gateway-ip-addresses) for Neon's NAT gateway IP addresses.
 
 5. When you're finished, click **Save rules**.
 
@@ -109,11 +109,11 @@ CREATE PUBLICATION my_publication FOR TABLE users, departments;
 Defining specific tables lets you add or remove tables from the publication later, which you cannot do when creating publications with `FOR ALL TABLES`.
 </Admonition>
 
-For syntax details, see [CREATE PUBLICATION](https://www.postgresql.org/docs/current/sql-createpublication.html), in the PostgreSQL documentation.
+For syntax details, see [CREATE PUBLICATION](https://www.postgresql.org/docs/current/sql-createpublication.html), in the Postgres documentation.
 
 ## Prepare your destination database
 
-This section describes how to prepare your destination Lakebase Postgres database (the subscriber) to receive replicated data from your AWS RDS Postgres instance.
+This section describes how to prepare your destination Neon database (the subscriber) to receive replicated data from your AWS RDS Postgres instance.
 
 ### Prepare your database schema
 
@@ -130,15 +130,15 @@ CREATE TABLE IF NOT EXISTS playing_with_neon(id SERIAL PRIMARY KEY, name TEXT NO
 After creating a publication on the source database, you need to create a subscription on your Neon destination database.
 
 1. Use the [Neon SQL Editor](/docs/get-started/query-with-neon-sql-editor), `psql`, or another SQL client to connect to your destination database.
-2. Create the subscription using the using a `CREATE SUBSCRIPTION` statement.
+2. Create the subscription using a `CREATE SUBSCRIPTION` statement.
 
    ```sql shouldWrap
-   CREATE SUBSCRIPTION my_subscription CONNECTION 'postgresql://postgres:password@database-1.czmwaio8k05k.us-east-2.rds.amazonaws.com/postgres' PUBLICATION my_publication;
+   CREATE SUBSCRIPTION my_subscription CONNECTION 'postgresql://[user]:[password]@[rds_hostname]:5432/[dbname]' PUBLICATION my_publication;
    ```
 
-   - `subscription_name`: A name you chose for the subscription.
-   - `connection_string`: The connection string for the source AWS RDS Postgres database where you defined the publication.
-   - `publication_name`: The name of the publication you created on the source AWS RDS Postgres database.
+   - `my_subscription`: A name you chose for the subscription.
+   - `postgresql://[user]:[password]@[rds_hostname]:5432/[dbname]`: The connection string for the source RDS database where you defined the publication. Use the database name you published from.
+   - `my_publication`: The name of the publication you created on the source RDS database.
 
 3. Verify the subscription was created by running the following command:
 
@@ -170,7 +170,7 @@ Testing your logical replication setup ensures that data is being replicated cor
 
    count
    -------
-   30
+   20
    (1 row)
    ```
 
