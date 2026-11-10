@@ -2,8 +2,8 @@
 title: Connect a SvelteKit application to Neon
 subtitle: Connect a SvelteKit app to Lakebase Postgres on Neon, develop on a branch, deploy, and add the rest of your backend
 summary: >-
-  Connect a SvelteKit app to Lakebase Postgres on Neon: add Neon's agent skills
-  to the project, create a Neon project (Neon CLI, API, or Console), link it
+  Connect a SvelteKit app to Lakebase Postgres on Neon: optionally add Neon's
+  agent skills, create a Neon project (Neon CLI, API, or Console), link it
   with the Neon CLI to pull DATABASE_URL into .env.local, optionally develop on a
   Neon branch, declare DATABASE_URL in src/env.ts, and query it with
   node-postgres, postgres.js, or the Neon serverless driver from a server-only
@@ -13,10 +13,11 @@ enableTableOfContents: true
 updatedOn: '2026-11-03T20:17:45.483Z'
 ---
 
-<CopyPrompt src="/prompts/sveltekit-prompt.md"
-description="Prompt that sets up Neon for your AI coding agent, then follows this guide to connect your SvelteKit app to Lakebase Postgres on Neon."/>
-
 [SvelteKit](https://svelte.dev/docs/kit) is a full-stack framework for building web apps with Svelte. Learn to connect a SvelteKit app to Postgres on Neon, query it from a server `load` function, develop on a branch, and deploy.
+
+## Have your AI agent follow this guide
+
+<PromptBlock src="/prompts/sveltekit-prompt.md" labels={["Set up your agent for Neon", "Add Svelte skills", "Connect your SvelteKit app"]} />
 
 <Steps>
 
@@ -31,15 +32,15 @@ cd my-app
 
 SvelteKit 3 needs Node.js 22.17 or later. Keep `--no-add-ons`: without it, `sv` asks which add-ons to install. In a non-interactive shell, it then exits without creating the project.
 
-## Set up your AI coding agent (optional)
+## Add Neon's agent skills (optional)
 
-To help your AI coding agent, such as Claude Code, Cursor, or Codex, set up Neon connections, branches, and backend services correctly, add Neon's [agent skills](/docs/ai/agent-skills) to this project. From your project directory, run:
+If your AI coding agent doesn't have Neon's [agent skills](/docs/ai/agent-skills) yet, add them to this project. The prompt above installs them, so skip this step if you used it. From your project directory, run:
 
 ```bash filename="Terminal"
 npx neon@latest skills
 ```
 
-It installs the skills into this project for the agents it finds (Node.js 22.20 or later). To also connect the [Neon MCP Server](/docs/ai/neon-mcp-server), run `npx neon@latest mcp`. To have your agent install the Neon CLI, sign you in, and add the skills and MCP Server for you, paste the [agent setup prompt](https://neon.com/prompts/agent-setup.md) into it instead.
+To also connect the [Neon MCP Server](/docs/ai/neon-mcp-server), run `npx neon@latest mcp`.
 
 ## Create a Neon project
 
