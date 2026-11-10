@@ -13,7 +13,7 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/how-to-guides/connectivity-issues
   - /docs/connect/connectivity-issues
-updatedOn: '2026-09-16T19:45:35.340Z'
+updatedOn: '2026-11-09T17:21:40.335Z'
 ---
 
 This topic describes how to resolve connection errors you may encounter when using Neon. The errors covered include:
@@ -45,7 +45,7 @@ Connection problems are sometimes related to a system issue. To check for system
 With older clients and some native Postgres clients, you may receive the following error when attempting to connect to Neon:
 
 ```txt shouldWrap
-ERROR: The endpoint ID is not specified. Either upgrade the Postgres client library (libpq) for SNI support or pass the endpoint ID (the first part of the domain name) as a parameter: '&options=endpoint%3D'. See [https://neon.com/sni](/sni) for more information.
+ERROR: Endpoint ID is not specified. Either please upgrade the postgres client library (libpq) for SNI support or pass the endpoint ID (first part of the domain name) as a parameter: '?options=endpoint%3D<endpoint-id>'. See more at https://neon.tech/sni
 ```
 
 This error occurs if your client library or application does not support the **Server Name Indication (SNI)** mechanism in TLS.
@@ -209,6 +209,8 @@ unsupported startup parameter: <...>
 ```text
 unsupported startup parameter in options: <...>
 ```
+
+In both variations, the message ends with: `Please use unpooled connection or remove this parameter from the startup package. More details: https://neon.tech/docs/connect/connection-errors#unsupported-startup-parameter`.
 
 The error occurs when using a pooled Neon connection string with startup options that are not supported by PgBouncer. PgBouncer allows only startup parameters it can keep track of in startup packets. These include: `client_encoding`, `datestyle`, `timezone`, `standard_conforming_strings`, and `application_name`. See **track_extra_parameters**, in the [PgBouncer documentation](https://www.pgbouncer.org/config.html#track_extra_parameters). To resolve this error, you can either remove the unsupported parameter from your connection string or use an unpooled Neon connection string. For information about pooled and unpooled connections in Neon, see [Connection pooling](/docs/connect/connection-pooling).
 
