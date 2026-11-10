@@ -4,10 +4,10 @@ subtitle: 'Build full-stack cloud agents using Cloudflare Sandboxes for ephemera
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2026-03-16T00:00:00.000Z'
-updatedOn: '2026-09-24T17:56:34.189Z'
+updatedOn: '2026-10-09T15:55:57.334Z'
 ---
 
-![Cloudflare Sandbox and Neon Branching architecture](/docs/guides/cloudflare_sandbox_neon_branching.png)
+![Cloudflare Sandbox and Neon Branching architecture](/docs/guides/cloudflare_sandbox_neon_branching.jpg)
 
 AI coding assistants are rapidly transitioning to the cloud. Platforms like [Cursor Cloud Agents](https://cursor.com/blog/cloud-agents) and [Claude Code](https://code.claude.com/docs/en/claude-code-on-the-web) let developers offload programming tasks to AI agents running on remote servers. This eliminates the need for local setup and lets multiple agents run in parallel.
 

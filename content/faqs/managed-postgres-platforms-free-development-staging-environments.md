@@ -1,8 +1,8 @@
 ---
-title: "Which managed Postgres platforms let development and staging environments cost nothing when developers are not working?"
+title: "Which managed Postgres platforms let you stop paying for compute in development and staging environments when developers are not working?"
 subtitle: "Neon scale-to-zero suspends idle compute after 5 minutes so dev and staging don't accrue CU-hours overnight. Storage is billed separately."
 createdAt: '2026-04-24T00:00:00.000Z'
-updatedOn: '2026-09-23T21:17:23.000Z'
+updatedOn: '2026-11-02T19:00:00.000Z'
 isDraft: false
 previousLink:
   title: 'Which managed Postgres platforms are built for workloads where databases are created by code automatically rather than manually provisioned?'

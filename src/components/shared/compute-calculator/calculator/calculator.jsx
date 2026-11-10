@@ -1,5 +1,6 @@
 'use client';
 
+import he from 'he';
 import PropTypes from 'prop-types';
 import { useState, useMemo } from 'react';
 
@@ -128,8 +129,9 @@ const Calculator = ({ inputParamsBlock, values, textSize = 'lg' }) => {
                     />
                     <Field
                       className="w-[98px] sm:w-full"
-                      name={title}
-                      labelClassName="hidden"
+                      name={name}
+                      label={he.decode(title.replace(/<[^>]*>/g, ''))}
+                      labelClassName="sr-only"
                       inputClassName="remove-autocomplete-styles m-0! h-8! px-3! border-[1px]! border-gray-new-15! bg-[#0D0E10]! text-base! text-white placeholder:tracking-extra-tight focus:outline-hidden focus:border-white! sm:placeholder:text-sm bg-[center_right_12px]!"
                       tag="select"
                       defaultValue={inputParams[name]}

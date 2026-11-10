@@ -37,7 +37,7 @@ This topic describes how to resolve connection errors you may encounter when usi
 - [DNS resolution issues](#dns-resolution-issues)
 
 <Admonition type="info">
-Connection problems are sometimes related to a system issue. To check for system issues, please refer to the [Neon status page](https://neonstatus.com/).  
+Connection problems are sometimes related to a system issue. To check for system issues, please refer to the [Neon status page](https://neonstatus.com/), or run [`neon incidents`](/docs/cli/incidents) from your terminal.  
 </Admonition>
 
 ## The endpoint ID is not specified

@@ -19,6 +19,7 @@ const MoreArticles = ({ className = null, posts, routeConfig = DEFAULT_BLOG_ROUT
         <BlogPostCard
           key={index}
           {...post}
+          titleTag="h3"
           imageWidth={260}
           imageHeight={146}
           routeConfig={routeConfig}

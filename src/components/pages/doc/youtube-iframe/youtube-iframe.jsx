@@ -9,8 +9,13 @@ const YoutubeIframe = ({
   autoplay = false,
   muted = false,
   controls = true,
+  title = 'YouTube video',
+  start,
 }) => {
-  const params = new URLSearchParams();
+  const embedUrl = new URL(`https://www.youtube.com/embed/${embedId}`);
+  const params = embedUrl.searchParams;
+
+  if (start !== undefined) params.set('start', String(start));
 
   if (autoplay) {
     params.set('autoplay', '1');
@@ -25,9 +30,6 @@ const YoutubeIframe = ({
     params.set('controls', '0');
   }
 
-  const query = params.toString();
-  const src = `https://www.youtube.com/embed/${embedId}${query ? `?${query}` : ''}`;
-
   return (
     <figure
       className={cn(
@@ -40,9 +42,10 @@ const YoutubeIframe = ({
         className="absolute top-0 left-0 my-0! h-full w-full"
         width="796"
         height="447"
-        src={src}
+        src={embedUrl.toString()}
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-        title="Embedded YouTube"
+        title={title}
+        loading={autoplay ? 'eager' : 'lazy'}
         allowFullScreen
       />
     </figure>
@@ -56,6 +59,8 @@ YoutubeIframe.propTypes = {
   autoplay: PropTypes.bool,
   muted: PropTypes.bool,
   controls: PropTypes.bool,
+  title: PropTypes.string,
+  start: PropTypes.number,
 };
 
 export default YoutubeIframe;

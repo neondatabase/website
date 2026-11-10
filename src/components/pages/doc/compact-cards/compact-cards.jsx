@@ -211,8 +211,16 @@ const CompactCard = ({
   }
 
   if (href) {
+    const isHome = appearance === 'home';
     return (
-      <li className="m-0! before:hidden">
+      <li className={cn('m-0! before:hidden', isHome && 'group/item relative')}>
+        {/* Docs home rows get a soft background while hovered or focused. */}
+        {isHome && (
+          <span
+            className="pointer-events-none absolute -inset-2 bg-gray-new-98 opacity-0 transition-opacity duration-200 group-focus-within/item:opacity-100 group-hover/item:opacity-100 dark:bg-gray-new-10"
+            aria-hidden
+          />
+        )}
         <Link
           className={sharedClassName}
           href={href}

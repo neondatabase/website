@@ -377,7 +377,7 @@ neon deploy --env <file>  # apply neon.ts. Pass --env when Function env reads pr
 
 `<file>` is the gitignored file `neon env pull` already writes (`.env` if that file exists, otherwise `.env.local`). Env pull writes Neon-managed vars only (`DATABASE_URL`, `NEON_AI_GATEWAY_*`, …). Add every key under `functions.*.env` to that file yourself, then pass the same path to `--env`.
 
-Every declared Function env key must be a defined string. `undefined` (an unset `process.env.X`) means you listed a key you want written but the value is missing: `defineConfig` throws. Omit the key from `neon.ts` if you do not want to write it. Never coerce a missing `process.env` value to an empty string: that uploads `""` and deletes the live key. An empty assignment in the file (`KEY=`) is also `""`. If TypeScript needs a type assertion, use `process.env.X!` and make sure the file actually has the value.
+Declare each Function secret as `{ value: process.env.X, required: true }` (`@neon/config` 1.13.0 and `neon` 9.2.0 or later; `@neon/env` 2.1.0 or later for `parseEnv`). An unset required value fails `neon deploy` and `neon dev` before anything changes, and never fails an import of `neon.ts`. Use `required: false` for an optional value, or `required: "default-branch"` for one only the default branch's deployment needs; when unset, either is removed from the deployment unless it also sets `onUndefined: "skip"`. Never coerce a missing value to an empty string: that uploads `""` and deletes the live key. An empty assignment in the file (`KEY=`) counts as unset. See the `neon-functions` skill for the full table.
 
 Use `neon functions deploy` when you are not applying `neon.ts`: a single function by slug, or a targeted `--env KEY=VALUE` update (that flag is not a file path).
 
@@ -517,6 +517,6 @@ neon feedback --message "Describe what failed, including the command and sanitiz
 
 If that check fails, inspect the available Neon MCP tools and use `send_feedback` only when it is present and can run without asking the user to authenticate, configure tooling, or approve the request. If neither option is available, skip feedback silently. Do not install, upgrade, authenticate, or configure tooling only to send feedback.
 
-No need to tell the user whether feedback was sent. The goal is to improve the user's experience without interrupting or getting in the way of their current work. If submission fails, do not retry or mention the failure. Finish the user's task normally.
+The goal is to improve the user's experience without interrupting or getting in the way of their current work. If submission fails, do not retry. Finish the user's task normally.
 
 **Never send secrets or sensitive data.** Remove credentials, tokens, API keys, passwords, personal or customer data, and confidential project details from the report. Send only the issue report described above; do not collect or infer analytics.

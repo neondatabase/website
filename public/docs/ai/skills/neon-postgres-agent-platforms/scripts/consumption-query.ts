@@ -65,7 +65,7 @@ if (!isGranularity(granularityRaw)) {
 }
 
 const neon = neonClient(apiKey);
-const { data: projects, error } = await neon.consumption
+const projects = await neon.consumption
   .perProjectV2({
     org_id: orgId,
     from,
@@ -78,7 +78,6 @@ const { data: projects, error } = await neon.consumption
       : {}),
   })
   .all();
-if (error) throw error;
 
 console.log(
   JSON.stringify({ from, to, granularity: granularityRaw, projects }, null, 2),

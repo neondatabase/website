@@ -39,7 +39,7 @@ const faqItems = [
     id: 'does-neon-offer-a-backend',
     initialState: 'open',
     answer: `
-      <p>Alongside <a href="${LINKS.lakebase}">Lakebase Postgres</a>, every Neon project can use <a href="${LINKS.authPage}">Managed Better Auth</a>, the <a href="${LINKS.dataApi}">Data API</a>, <a href="${LINKS.objectStorage}">Object Storage</a>, <a href="${LINKS.functions}">Functions</a>, <a href="${LINKS.aiGateway}">AI Gateway</a>, and <a href="${LINKS.realtime}">Realtime</a> (in beta). Together they form a backend that runs next to your database: Auth, Object Storage, Functions, and AI Gateway branch with it. AI Gateway is available on Launch and Scale; everything else is on every plan, including Free.</p>
+      <p>Alongside <a href="${LINKS.lakebase}">Lakebase Postgres</a>, every Neon project can use <a href="${LINKS.authPage}">Managed Better Auth</a>, the <a href="${LINKS.dataApi}">Data API</a>, <a href="${LINKS.objectStorage}">Object Storage</a>, <a href="${LINKS.functions}">Functions</a>, <a href="${LINKS.aiGateway}">AI Gateway</a>, and <a href="${LINKS.realtime}">Realtime</a> (in beta). Together they form a backend that runs next to your database: Auth, Object Storage, Functions, and AI Gateway branch with it. Every service is available on every plan, including Free. On Free, AI Gateway needs a card and prepaid credits, and your plan stays Free.</p>
     `,
   },
   {
@@ -126,7 +126,7 @@ const faqItems = [
     question: 'Do the backend services use my Free plan CU-hours?',
     id: 'backend-free-plan-cu-hours',
     answer: `
-      <p>CU-hours measure Postgres database compute only. Object Storage and Functions have their own Free plan allowances, Managed Better Auth has its own MAU limit, and AI Gateway is available on paid plans. The Data API and Realtime run queries against your database, so the database compute they use counts toward your CU-hours like any other query.</p>
+      <p>CU-hours measure Postgres database compute only. Object Storage and Functions have their own Free plan allowances, Managed Better Auth has its own MAU limit, and AI Gateway draws down prepaid credits you buy. The Data API and Realtime run queries against your database, so the database compute they use counts toward your CU-hours like any other query.</p>
     `,
   },
   {
@@ -144,30 +144,30 @@ const faqItems = [
       <h3 class="mt-6 text-lg text-white font-semibold">Intermittent load</h3>
       <p>
         140 CU-hours compute, 1 GB-month of storage. Typical of a small database that doesn't need to run 24/7.
-        <img class="my-4" src="/images/pricing/140-CU-Hours.webp" />
+        <img class="my-4" src="/images/pricing/140-CU-Hours.webp" alt="" width="640" height="221" loading="lazy" />
         A database using 140 CU-hours compute per month can scale to zero when idle, and start back up within a few hundred milliseconds when it's needed. When it's running it is set to a minimum size of 0.25 CU but can scale up to 2 CU when needed.</p>
       <h3 class="mt-6 text-lg text-white font-semibold">Low load</h3>
       <p>
         190 CU-hours compute, 5 GB-month of storage. A small database that <em>does</em> need to run 24/7.
-        <img class="my-4" src="/images/pricing/190-CU-Hours.webp" />
+        <img class="my-4" src="/images/pricing/190-CU-Hours.webp" alt="" width="640" height="221" loading="lazy" />
         Once scale to zero is disabled, the minimum CU-hours a database can use in a month is about 182.5 <em>(about 730 hours in a month × 0.25 minimum CU size ≈ 182.5)</em>, so this example represents a database that has scale to zero disabled but only occasionally needs to scale above the 0.25 minimum size. Good for small production applications and databases that need to be always-on for features like real-time sync.
       </p>
       <h3 class="mt-6 text-lg text-white font-semibold">Medium load</h3>
       <p>
         720 CU-hours compute, 10 GB-month of storage. Representative of a constant-load application database.
-        <img class="my-4" src="/images/pricing/720-CU-Hours.webp" />
+        <img class="my-4" src="/images/pricing/720-CU-Hours.webp" alt="" width="640" height="221" loading="lazy" />
         As you can see from the autoscaling chart above, 720 CU hours translates to a database that scales between 0.5 and 4 CU based on load. 
       </p>
       <h3 class="mt-6 text-lg text-white font-semibold">High load</h3>
       <p>
         3,000 CU-hours compute, 100 GB-month of storage.
-        <img class="my-4" src="/images/pricing/3000-CU-Hours.webp" />
+        <img class="my-4" src="/images/pricing/3000-CU-Hours.webp" alt="" width="640" height="221" loading="lazy" />
         As an example, a database that is scaling between 3 CU and 7 CU will often use around 3000 CU hours in a month. This level represents production applications with sustained traffic, higher data volumes, and more complex queries requiring consistent compute resources.
       </p>
       <h3 class="mt-6 text-lg text-white font-semibold">XL load</h3>
       <p>
         6,000 CU-hours compute, 1,000 GB-month of storage.
-        <img class="my-4" src="/images/pricing/6000-CU-Hours.webp" />
+        <img class="my-4" src="/images/pricing/6000-CU-Hours.webp" alt="" width="640" height="221" loading="lazy" />
         A database scaling between 6 and 14 CU can use in the range of 6,000 CU hours in a month. This is representative of large-scale production workloads with high traffic volumes, extensive datasets, and applications requiring significant compute capacity and storage.
       </p>
       
@@ -191,7 +191,14 @@ const faqItems = [
       <p><strong>Realtime</strong> is free during the beta. Database compute and network transfer it generates are billed as usual.</p>
       <p><strong>Object Storage</strong> is $0.023 per GB-month of stored volume. There's no per-operation charge. Egress counts toward your public network transfer allowance. The Free plan includes 5 GB of Object Storage per project.</p>
       <p><strong>Functions</strong> are billed for active compute, waiting compute, and invocations at the rates in the plan table. The Free plan includes 10 active capacity-hours, 400 waiting capacity-hours, and 1 million invocations per project per month.</p>
-      <p><strong>AI Gateway</strong> is available on Launch and Scale. Pricing matches the model provider's list prices, with no markup, and draws down prepaid credits. <a href="/docs/ai-gateway/prepaid-credits">Learn how prepaid credits work</a>, or see <a href="/docs/ai-gateway/overview#available-models">per-model rates</a>.</p>
+      <p><strong>AI Gateway</strong> is available on every plan, including Free. Pricing matches the model provider's list prices, with no markup, and draws down prepaid credits. On Free, add a card to buy credits. You don't need to upgrade. <a href="/docs/ai-gateway/prepaid-credits">Learn how prepaid credits work</a>, or see <a href="/docs/ai-gateway/overview#available-models">per-model rates</a>.</p>
+    `,
+  },
+  {
+    question: 'Can I use AI Gateway on the Free plan?',
+    id: 'ai-gateway-free-plan',
+    answer: `
+      <p>Yes. Add a card on the <strong>Billing</strong> page in the Neon Console and buy prepaid AI Gateway credits ($5 minimum). Your organization stays on the Free plan, and the rest of your Free plan doesn't change. AI Gateway turns on after your first purchase, once a short account check finishes. Requests draw down your credits at the model provider's list prices, with no markup. <a href="/docs/ai-gateway/prepaid-credits">Learn how prepaid credits work.</a></p>
     `,
   },
   {

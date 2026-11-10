@@ -10,7 +10,7 @@ summary: >-
   its 7-day recovery window. Projects created via the CLI default to Postgres
   18; use `--pg-version` to select a different major version.
 enableTableOfContents: true
-updatedOn: '2026-10-09T15:17:33.920Z'
+updatedOn: '2026-10-29T21:08:36.506Z'
 redirectFrom:
   - /docs/reference/cli-projects
   - /docs/cli/project
@@ -61,8 +61,8 @@ neon projects list --recoverable-only
 
 ```text filename="Output"
 Projects
-ID                   Name       Region ID      Created At            Deleted At            Recoverable Until
-crimson-voice-12345  myproject  aws-us-east-2  2026-04-15T11:17:30Z  2026-04-16T14:22:15Z  2026-04-23T14:22:15Z
+ID                   Name       Recoverable Until     Deleted At            Region ID      Created At
+crimson-voice-12345  myproject  2026-04-23T14:22:15Z  2026-04-16T14:22:15Z  aws-us-east-2  2026-04-15T11:17:30Z
 ```
 
 ## neon projects create (#create)

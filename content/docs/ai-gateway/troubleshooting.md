@@ -5,7 +5,7 @@ summary: >-
   Solutions for common errors when using Neon AI Gateway, including
   authentication failures, model errors, quota limits, and upstream issues.
 enableTableOfContents: true
-updatedOn: '2026-10-29T21:01:06.492Z'
+updatedOn: '2026-11-04T20:10:08.844Z'
 ---
 
 ## Authentication errors
@@ -61,18 +61,21 @@ The request body does not contain a valid `model` field.
 
 **Fix:** Include `"model": "<model-id>"` in the request body.
 
-### Some models are restricted in the Console
+### Locked models in the Console (#some-models-are-restricted-in-the-console)
 
-On your project's **AI Gateway** page, locked models show a padlock, and the **Some models are restricted** section lists them grouped by reason. Each reason links to the fix:
+On your project's **AI Gateway** page, a locked model shows a padlock. Hover over the padlock to see why the model is locked, along with a link to fix it:
 
-| Message                                                 | What to do                                                                                  |
-| ------------------------------------------------------- | ------------------------------------------------------------------------------------------- |
-| **A paid plan is required to use these models**         | Select **Upgrade plan**. The AI Gateway is available on paid plans only.                    |
-| **AI Gateway credits are required to use these models** | Select **Add credits**. See [AI Gateway prepaid credits](/docs/ai-gateway/prepaid-credits). |
-| **Your account is restricted from using these models**  | [Contact Support](/docs/introduction/support).                                              |
-| **Some models are not available to your account**       | [Contact Support](/docs/introduction/support).                                              |
+| Tooltip                                                        | What to do                                                                                                                                                                                                                                                 |
+| -------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Add a card to buy AI gateway credits for this model.**       | Your organization is on the Free plan with no payment card on file. Select **Add a card**, add your card, then buy credits. You don't need to upgrade your plan. See [AI Gateway prepaid credits](/docs/ai-gateway/prepaid-credits#buy-or-top-up-credits). |
+| **AI Gateway credits are required to use this model.**         | Select **Buy credits**. See [AI Gateway prepaid credits](/docs/ai-gateway/prepaid-credits).                                                                                                                                                                |
+| **A paid plan is required to use this model.**                 | Your organization can't buy credits on its current plan, for example because it's billed through the Vercel Marketplace. Select **Upgrade plan**.                                                                                                          |
+| **Account verification is required to use this model.**        | Neon checks your account after your first credit purchase. Wait a few minutes and reload the page. If the tooltip links to **Complete verification** or **Contact support for verification**, follow that link.                                            |
+| **Your account has reached its daily AI Gateway spend limit.** | [Contact Support](/docs/introduction/support) to raise the limit. See [Usage limits](/docs/ai-gateway/prepaid-credits#usage-limits).                                                                                                                       |
+| **Your account is restricted from using this model.**          | [Contact Support](/docs/introduction/support).                                                                                                                                                                                                             |
+| **This model is not available to your account.**               | [Contact Support](/docs/introduction/support).                                                                                                                                                                                                             |
 
-After you upgrade or buy credits, models unlock once Neon confirms access. Reload the page if a model still shows as locked.
+Only organization admins can add a card or buy credits. After you buy credits, models unlock once Neon confirms access, usually within a few seconds. Reload the page if a model still shows as locked.
 
 ---
 
@@ -118,7 +121,7 @@ The request hit the upstream Databricks/provider rate limit.
 
 ### `429`: account quota exceeded
 
-Your account's AI Gateway quota is blocked. This happens when you exceed a token-per-minute (TPM) rate limit or your account's daily spend limit. Both return `REQUEST_LIMIT_EXCEEDED`, and the message names the limit that was hit and how to recover.
+Your account's AI Gateway quota is blocked. This happens when you exceed a token-per-minute (TPM) rate limit or your account's daily spend limit, or when your prepaid credit balance drops below the $2 minimum. All three return `REQUEST_LIMIT_EXCEEDED`, and the message names the limit that was hit and how to recover.
 
 An account-wide TPM limit:
 
@@ -146,7 +149,20 @@ A daily spend limit:
 }
 ```
 
-**Fix:** Check the `Retry-After` header. If present, the block is temporary and lifts at that time; retry with exponential backoff. If absent, the block is permanent until resolved; requesting a higher limit requires a paid plan. See [Support](/docs/introduction/support) for your plan's support options and [Rate limits](/docs/ai-gateway/models#rate-limits) for current values.
+A credit balance below the minimum. The response includes a link to add credits:
+
+```json
+{
+  "error_code": "REQUEST_LIMIT_EXCEEDED",
+  "message": "AI Gateway credit balance is below the required minimum. Add credits to continue. <recovery URL>",
+  "unavailable_reason": "credits_required",
+  "recovery_url": "<recovery URL>"
+}
+```
+
+This block has no `Retry-After` header and doesn't clear on its own. [Buy credits](/docs/ai-gateway/prepaid-credits#buy-or-top-up-credits), or turn on [automatic top-up](/docs/ai-gateway/prepaid-credits#automatic-top-up) so it doesn't happen again.
+
+**Fix:** Check the `Retry-After` header. If present, the block is temporary and lifts at that time; retry with exponential backoff. If absent, the block lasts until it's resolved: for a low credit balance, add credits; for a limit, ask Support to raise it. See [Support](/docs/introduction/support) for your plan's support options and [Rate limits](/docs/ai-gateway/models#rate-limits) for current values.
 
 ---
 
@@ -158,8 +174,8 @@ The message identifies the condition:
 
 | Condition               | Message                                                                                                                                                                |
 | ----------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Endpoint disabled       | `ai gateway upstream model endpoint is temporarily disabled. Contact Neon support`                                                                                     |
-| Timeout                 | `ai gateway upstream model timed out. Retry, or reduce the input size`                                                                                                 |
+| Endpoint disabled       | `This model is temporarily disabled. Contact Neon support for help: https://console.neon.tech/app/projects?modal=support`                                              |
+| Timeout                 | `The model took too long to respond. Reduce max_tokens or your input size, or use streaming.`                                                                          |
 | Request too large       | `ai gateway upstream rejected the request: body too large`                                                                                                             |
 | Model unavailable       | `ai gateway upstream model is not available. Contact Neon support`                                                                                                     |
 | Access denied           | `ai gateway upstream denied the request. Contact Neon support`                                                                                                         |
@@ -168,7 +184,7 @@ The message identifies the condition:
 | Invalid request         | `ai gateway upstream model rejected the request: <provider message>` (redacted to `...rejected the request as invalid` when the provider detail can't be shown safely) |
 | Unknown                 | `ai gateway upstream request failed. Contact Neon support if it persists`                                                                                              |
 
-**Fix:** Follow the guidance in the message. Retry transient conditions (timeout, over capacity, upstream internal error) with exponential backoff, respecting any `Retry-After` header. If an error persists, check the [Neon status page](https://neonstatus.com). For paid plan support options, see [Support](/docs/introduction/support).
+**Fix:** Follow the guidance in the message. Retry transient conditions (over capacity, upstream internal error) with exponential backoff, respecting any `Retry-After` header. Don't retry a timeout as is: the gateway sends `X-Should-Retry: false` so the OpenAI and Anthropic SDKs skip their automatic retry, because each retry runs the whole slow generation again. Reduce `max_tokens` or the input size, or use streaming. If an error persists, check the [Neon status page](https://neonstatus.com). For paid plan support options, see [Support](/docs/introduction/support).
 
 ---
 

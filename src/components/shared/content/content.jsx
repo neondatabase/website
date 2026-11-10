@@ -71,6 +71,7 @@ import StatBlock from 'components/shared/stat-block';
 import SubprocessorsForm from 'components/shared/subprocessors-form';
 import getCodeProps from 'lib/rehype-code-props';
 import openDetails from 'lib/rehype-open-details';
+import rehypeTaskListLabels from 'lib/rehype-task-list-labels';
 import { cn } from 'utils/cn';
 
 import sharedMdxComponents from '../../../../content/docs/shared-content';
@@ -289,7 +290,9 @@ const Content = ({
               // Adds support for GitHub Flavored Markdown
               remarkGfm,
             ],
-            rehypePlugins: expandDetails ? [getCodeProps, openDetails] : [getCodeProps],
+            rehypePlugins: expandDetails
+              ? [getCodeProps, rehypeTaskListLabels, openDetails]
+              : [getCodeProps, rehypeTaskListLabels],
           },
           blockJS: false,
           blockDangerousJS: true,

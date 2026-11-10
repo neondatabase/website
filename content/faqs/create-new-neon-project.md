@@ -3,7 +3,7 @@ title: 'How do I create a new project in Neon?'
 subtitle: 'Create one from the Console or the Neon CLI. Each project gets its own Postgres database, branches, and computes.'
 enableTableOfContents: true
 createdAt: '2026-05-18T00:00:00.000Z'
-updatedOn: '2026-09-23T21:00:25.204Z'
+updatedOn: '2026-11-02T19:00:00.000Z'
 isDraft: false
 redirectFrom: []
 previousLink:
@@ -25,7 +25,7 @@ A Neon project is the top-level container for your database environment. Each pr
 1. Sign in to the [Neon Console](https://console.neon.tech).
 2. Click **New Project**.
 3. Enter a **Project name** (up to 64 characters) and choose a **Region**. Pick the AWS region closest to your application.
-4. Under **Services**, **Postgres database** is on by default. Expand it to set the **Postgres version**. Depending on the region, you can also turn on Object Storage, Functions, AI Gateway, and Neon Auth.
+4. Under **Services**, **Postgres database** is on by default. Expand it to set the **Postgres version**. Where the region supports them, you can also turn on **Object storage**, **Functions**, **AI gateway**, and **Neon Auth** (the Console's label for Managed Better Auth).
 5. Click **Create project**.
 
 You'll land on the **Project Dashboard**. Click **Connect** in the Console nav to get a connection string. See [Create a project](/docs/manage/projects#create-a-project).

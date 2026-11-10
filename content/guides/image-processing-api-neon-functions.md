@@ -39,7 +39,7 @@ flowchart LR
 Before starting, ensure you have:
 
 1. **Node.js**: Version 20 or later (v24 recommended). Download from [nodejs.org](https://nodejs.org/).
-2. **Neon account on a paid plan**: Sign up at [console.neon.tech](https://console.neon.tech/signup). The captioning endpoint uses the AI Gateway, which requires a paid plan (Launch or Scale) with [prepaid credits](/docs/ai-gateway/prepaid-credits).
+2. **Neon account with AI Gateway credits**: Sign up at [console.neon.tech](https://console.neon.tech/signup). The captioning endpoint uses the AI Gateway, which needs [prepaid credits](/docs/ai-gateway/prepaid-credits). You can buy them on any plan, including Free.
 3. **The Neon CLI**: Installed globally (`npm i -g neon@latest`) and authenticated (`neon login`). See the [Neon CLI Quickstart](/docs/cli/quickstart) for details.
 
 <Steps>
@@ -87,9 +87,10 @@ Linked .neon
   Branch          main
   Org             org-example-12345678
 
-Pulled 3 Neon variables into .env.local
+Pulled 5 Neon variables into .env.local
   Postgres        DATABASE_URL, DATABASE_URL_UNPOOLED
-  Branch          NEON_BRANCH
+  Branch          NEON_BRANCH, NEON_BRANCH_ID
+  Functions       NEON_FUNCTION_HOST_SUFFIX
 ✔ Manage this project's Neon setup as code? Adds a neon.ts you can edit and apply with `neon config apply`. … yes
 ✔ Which Neon services should neon.ts declare? (space to toggle, enter to confirm) › Functions, AI Gateway
 Created neon.ts declaring functions, ai-gateway.

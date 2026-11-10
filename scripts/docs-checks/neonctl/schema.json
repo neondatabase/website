@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "neonctlVersion": "8.16.1",
+  "neonctlVersion": "9.3.2",
   "binaries": [
     "neonctl",
     "neon"
@@ -271,6 +271,11 @@
           "default": false,
           "alias": "y"
         },
+        "deploy": {
+          "type": "boolean",
+          "describe": "Run `neon deploy` once dependencies are installed and the project is linked, without asking. Fails if neon.ts reads an env var that is not set yet",
+          "default": false
+        },
         "force": {
           "type": "boolean",
           "describe": "Scaffold into the target directory even if it is not empty (colliding files are overwritten).",
@@ -320,6 +325,10 @@
         {
           "command": "$0 bootstrap my-app --default",
           "description": "Skip the pickers; if several orgs or projects exist, link prints IDs and exits"
+        },
+        {
+          "command": "$0 bootstrap my-app --template hono --default --deploy",
+          "description": "Scaffold, install, link, and deploy without prompting"
         },
         {
           "command": "$0 bootstrap --list-templates --output json",
@@ -901,7 +910,7 @@
         },
         "env": {
           "type": "string",
-          "describe": "Path to a .env file to load into the environment before evaluating neon.ts so Function env values resolve from it. Existing env vars are not overridden. Function env values that read process.env must be set in this file or the environment. Used when this checkout creates a branch from neon.ts; ignored for an existing branch."
+          "describe": "Path to a .env file to load into the environment before evaluating neon.ts so Function env values resolve from it. Existing env vars are not overridden. Required Function env (declared required: true, or required: \"default-branch\" when deploying the default branch) and values that read process.env must be set in this file or the environment. Used when this checkout creates a branch from neon.ts; ignored for an existing branch."
         },
         "env-pull": {
           "type": "boolean",
@@ -990,6 +999,10 @@
             "file": {
               "type": "string",
               "describe": "Target dotenv file. Defaults to an existing .env, otherwise .env.local"
+            },
+            "project-name": {
+              "type": "string",
+              "describe": "Name for the new project. The project keeps it when claimed"
             },
             "region-id": {
               "type": "string",
@@ -1256,7 +1269,7 @@
             },
             "env": {
               "type": "string",
-              "describe": "Path to a .env file to load into the environment before evaluating neon.ts so Function env values resolve from it. Existing env vars are not overridden. Function env values that read process.env must be set in this file or the environment."
+              "describe": "Path to a .env file to load into the environment before evaluating neon.ts so Function env values resolve from it. Existing env vars are not overridden. Required Function env (declared required: true, or required: \"default-branch\" when deploying the default branch) and values that read process.env must be set in this file or the environment."
             },
             "env-pull": {
               "type": "boolean",
@@ -1315,7 +1328,7 @@
             },
             "env": {
               "type": "string",
-              "describe": "Path to a .env file to load into the environment before evaluating neon.ts so Function env values resolve from it. Existing env vars are not overridden. Function env values that read process.env must be set in this file or the environment."
+              "describe": "Path to a .env file to load into the environment before evaluating neon.ts so Function env values resolve from it. Existing env vars are not overridden. Required Function env (declared required: true, or required: \"default-branch\" when deploying the default branch) and values that read process.env must be set in this file or the environment."
             }
           },
           "commands": {},
@@ -1788,7 +1801,7 @@
         },
         "env": {
           "type": "string",
-          "describe": "Path to a .env file to load into the environment before evaluating neon.ts so Function env values resolve from it. Existing env vars are not overridden. Function env values that read process.env must be set in this file or the environment."
+          "describe": "Path to a .env file to load into the environment before evaluating neon.ts so Function env values resolve from it. Existing env vars are not overridden. Required Function env (declared required: true, or required: \"default-branch\" when deploying the default branch) and values that read process.env must be set in this file or the environment."
         },
         "env-pull": {
           "type": "boolean",
@@ -1821,7 +1834,7 @@
       "options": {
         "env": {
           "type": "string",
-          "describe": "Path to a .env file to load into the environment before evaluating neon.ts so Function env values resolve from it. Existing env vars are not overridden. Function env values that read process.env must be set in this file or the environment."
+          "describe": "Path to a .env file to load into the environment before evaluating neon.ts so Function env values resolve from it. Existing env vars are not overridden. Required Function env (declared required: true, or required: \"default-branch\" when deploying the default branch) and values that read process.env must be set in this file or the environment."
         },
         "port": {
           "type": "number",
@@ -2020,11 +2033,7 @@
             },
             {
               "command": "$0 env pull -s functions",
-              "description": "Pull NEON_FUNCTION_<SLUG>_BASE_URL for every deployed function"
-            },
-            {
-              "command": "$0 env pull -e NEON_FUNCTION_HELLO_BASE_URL",
-              "description": "Write that function's production invocation URL (no deploy required)"
+              "description": "Pull NEON_BRANCH_ID and NEON_FUNCTION_HOST_SUFFIX, which functionBaseUrl(\"<slug>\") from @neon/env reads"
             }
           ],
           "usage": "$0 env pull [options]"
@@ -2395,6 +2404,24 @@
       "describe": "Sync the checked-out Neon branch to your git branch (Preview)",
       "usage": "$0 git <sub-command> [options]"
     },
+    "incidents": {
+      "aliases": [],
+      "positionals": [],
+      "options": {},
+      "commands": {},
+      "describe": "Show open Neon incidents and maintenance",
+      "usage": "$0 incidents",
+      "examples": [
+        {
+          "command": "$0 incidents",
+          "description": "Show open Neon incidents and maintenance"
+        },
+        {
+          "command": "$0 incidents -o json",
+          "description": "Print the full report as JSON"
+        }
+      ]
+    },
     "init": {
       "aliases": [],
       "positionals": [],
@@ -2484,7 +2511,7 @@
         },
         "project-name": {
           "type": "string",
-          "describe": "Forwarded to link: name for a new project"
+          "describe": "Name for a new project, forwarded to link or to the claimable project"
         },
         "region-id": {
           "type": "string",
@@ -2968,6 +2995,81 @@
           "commands": {},
           "describe": "List the log fields whose values can be discovered on a branch"
         },
+        "loki": {
+          "name": "loki",
+          "aliases": [],
+          "positionals": [
+            {
+              "name": "query",
+              "describe": "LogQL expression. With a label endpoint, an optional stream selector that scopes the labels.",
+              "type": "string"
+            }
+          ],
+          "options": {
+            "branch": {
+              "type": "string",
+              "describe": "Branch ID or name (defaults to the project's default branch)"
+            },
+            "direction": {
+              "type": "string",
+              "describe": "Timestamp order (query_range only): forward (oldest first) or backward (newest first)",
+              "choices": [
+                "forward",
+                "backward"
+              ]
+            },
+            "end": {
+              "type": "string",
+              "describe": "Window end as RFC 3339 or Unix nanoseconds (kept as a string). Defaults to now."
+            },
+            "endpoint": {
+              "type": "string",
+              "describe": "Read endpoint: query_range, labels, or label/<name>/values",
+              "default": "query_range"
+            },
+            "limit": {
+              "type": "number",
+              "describe": "Maximum number of log lines (query_range only); the server enforces its cap"
+            },
+            "project-id": {
+              "type": "string",
+              "describe": "Project ID"
+            },
+            "since": {
+              "type": "string",
+              "describe": "Lookback window as a positive Go duration, e.g. 30m or 24h. Defaults to 1h for queries and 6h for label values. Explicit --start takes precedence."
+            },
+            "start": {
+              "type": "string",
+              "describe": "Window start as RFC 3339 or Unix nanoseconds (kept as a string)"
+            }
+          },
+          "commands": {},
+          "describe": "Call the branch's Loki read API and return its JSON response",
+          "examples": [
+            {
+              "command": "$0 logs loki '{entity_type=\"function\"} |= \"error\"' --since 30m --limit 100",
+              "description": "Query function logs with a bounded time window and line count"
+            },
+            {
+              "command": "$0 logs loki --endpoint labels",
+              "description": "Discover stream labels"
+            },
+            {
+              "command": "$0 logs loki --endpoint label/service_name/values --since 6h",
+              "description": "Discover service names before choosing a selector"
+            },
+            {
+              "command": "$0 logs loki '{entity_type=\"function\"}' --endpoint label/severity_text/values",
+              "description": "List the severities function logs carry"
+            },
+            {
+              "command": "$0 logs loki '{entity_type=\"function\"}' --project-id <id> --branch <id|name> --start 2026-11-01T00:00:00Z --end 2026-11-01T01:00:00Z",
+              "description": "Query an explicit branch and absolute time window"
+            }
+          ],
+          "usage": "$0 logs loki [query] [options]"
+        },
         "query": {
           "name": "query",
           "aliases": [],
@@ -3049,7 +3151,7 @@
             }
           },
           "commands": {},
-          "describe": "Query log records on a branch",
+          "describe": "Query log records with structured filters or LogQL",
           "examples": [
             {
               "command": "$0 logs query --since 1h --logql '{entity_type=\"function\"} |= \"timeout\"'",
@@ -3066,7 +3168,7 @@
           ]
         }
       },
-      "describe": "Query branch logs",
+      "describe": "Query branch logs with structured filters, LogQL, or the Loki API",
       "usage": "$0 logs <sub-command> [options]"
     },
     "mcp": {
@@ -3217,6 +3319,10 @@
                     "require-email-verification": {
                       "type": "boolean",
                       "describe": "Require email verification before users can sign in"
+                    },
+                    "revoke-sessions-on-password-reset": {
+                      "type": "boolean",
+                      "describe": "Revoke all of a user's sessions when their password is reset"
                     },
                     "send-verification-email-on-sign-in": {
                       "type": "boolean",
@@ -4050,6 +4156,19 @@
         }
       },
       "commands": {
+        "get": {
+          "name": "get",
+          "aliases": [],
+          "positionals": [
+            {
+              "name": "id",
+              "required": true
+            }
+          ],
+          "options": {},
+          "commands": {},
+          "describe": "Get an operation"
+        },
         "list": {
           "name": "list",
           "aliases": [],
@@ -4069,6 +4188,74 @@
       "positionals": [],
       "options": {},
       "commands": {
+        "get": {
+          "name": "get",
+          "aliases": [],
+          "positionals": [
+            {
+              "name": "id",
+              "describe": "Organization ID. Defaults to --org-id, the linked organization, or your only one",
+              "type": "string"
+            }
+          ],
+          "options": {
+            "org-id": {
+              "type": "string",
+              "describe": "Organization ID. Defaults to the linked organization, or your only one"
+            }
+          },
+          "commands": {},
+          "describe": "Show an organization"
+        },
+        "invitations": {
+          "name": "invitations",
+          "aliases": [],
+          "positionals": [],
+          "options": {
+            "org-id": {
+              "type": "string",
+              "describe": "Organization ID. Defaults to the linked organization, or your only one"
+            }
+          },
+          "commands": {
+            "create": {
+              "name": "create",
+              "aliases": [],
+              "positionals": [],
+              "options": {
+                "email": {
+                  "type": "array",
+                  "describe": "Email address to invite. Repeat to invite several",
+                  "required": true
+                },
+                "role": {
+                  "type": "string",
+                  "describe": "The organization role every invitee gets",
+                  "required": true,
+                  "choices": [
+                    "admin",
+                    "member",
+                    "editor",
+                    "viewer",
+                    "collaborator"
+                  ]
+                }
+              },
+              "commands": {},
+              "describe": "Invite people by email. Each one is emailed, and anyone with a Neon account joins immediately"
+            },
+            "list": {
+              "name": "list",
+              "aliases": [],
+              "positionals": [],
+              "options": {},
+              "commands": {},
+              "describe": "List invitations"
+            }
+          },
+          "describe": "Manage organization invitations",
+          "usage": "$0 orgs invitations <sub-command> [options]"
+        },
         "list": {
           "name": "list",
           "aliases": [],
@@ -4076,6 +4263,127 @@
           "options": {},
           "commands": {},
           "describe": "List organizations"
+        },
+        "members": {
+          "name": "members",
+          "aliases": [],
+          "positionals": [],
+          "options": {
+            "org-id": {
+              "type": "string",
+              "describe": "Organization ID. Defaults to the linked organization, or your only one"
+            }
+          },
+          "commands": {
+            "get": {
+              "name": "get",
+              "aliases": [],
+              "positionals": [
+                {
+                  "name": "member-id",
+                  "required": true
+                }
+              ],
+              "options": {},
+              "commands": {},
+              "describe": "Show a member"
+            },
+            "list": {
+              "name": "list",
+              "aliases": [],
+              "positionals": [],
+              "options": {},
+              "commands": {},
+              "describe": "List members and their organization role"
+            },
+            "remove": {
+              "name": "remove",
+              "aliases": [],
+              "positionals": [
+                {
+                  "name": "member-id",
+                  "required": true
+                }
+              ],
+              "options": {},
+              "commands": {},
+              "describe": "Remove a member from the organization. Admin only"
+            },
+            "update": {
+              "name": "update",
+              "aliases": [],
+              "positionals": [
+                {
+                  "name": "member-id",
+                  "required": true,
+                  "describe": "Member ID, from `orgs members list`",
+                  "type": "string"
+                }
+              ],
+              "options": {
+                "role": {
+                  "type": "string",
+                  "describe": "The new organization role",
+                  "required": true,
+                  "choices": [
+                    "admin",
+                    "member",
+                    "editor",
+                    "viewer",
+                    "collaborator"
+                  ]
+                }
+              },
+              "commands": {},
+              "describe": "Change a member's organization role. Admin only"
+            }
+          },
+          "describe": "Manage organization members",
+          "usage": "$0 orgs members <sub-command> [options]"
+        },
+        "spending-limit": {
+          "name": "spending-limit",
+          "aliases": [],
+          "positionals": [],
+          "options": {
+            "org-id": {
+              "type": "string",
+              "describe": "Organization ID. Defaults to the linked organization, or your only one"
+            }
+          },
+          "commands": {
+            "delete": {
+              "name": "delete",
+              "aliases": [],
+              "positionals": [],
+              "options": {},
+              "commands": {},
+              "describe": "Remove the monthly spending limit. Admin only"
+            },
+            "get": {
+              "name": "get",
+              "aliases": [],
+              "positionals": [],
+              "options": {},
+              "commands": {},
+              "describe": "Show the monthly spending limit"
+            },
+            "set": {
+              "name": "set",
+              "aliases": [],
+              "positionals": [
+                {
+                  "name": "usd",
+                  "required": true
+                }
+              ],
+              "options": {},
+              "commands": {},
+              "describe": "Set the monthly spending limit. Neon emails at 80% and 100% and keeps computes running. Admin only"
+            }
+          },
+          "describe": "Manage the organization's monthly spending limit (Launch and Scale plans)",
+          "usage": "$0 orgs spending-limit <sub-command> [options]"
         }
       },
       "describe": "Manage organizations",
@@ -4094,12 +4402,12 @@
         },
         "global": {
           "type": "boolean",
-          "describe": "Install user-level. Default is project",
-          "default": false
+          "default": false,
+          "hidden": true
         },
         "yes": {
           "type": "boolean",
-          "describe": "Skip prompts. Detected agents (project folders, else the host CLI agent). --global uses installed apps, else the host CLI agent",
+          "describe": "Skip prompts. Detected agents (project folders, else the host CLI agent, else installed apps)",
           "default": false,
           "alias": "y"
         }
@@ -4114,17 +4422,513 @@
         },
         {
           "command": "$0 plugins -y",
-          "description": "Detected agents (project folders, else the host CLI agent), skip prompts"
+          "description": "Detected agents (project folders, else the host CLI agent, else installed apps), skip prompts"
         },
         {
           "command": "$0 plugins --agent cursor --agent claude-code",
           "description": "Install into specific agents"
-        },
-        {
-          "command": "$0 plugins --global",
-          "description": "Install user-level"
         }
       ]
+    },
+    "postgres": {
+      "aliases": [
+        "pg",
+        "lakebase"
+      ],
+      "positionals": [],
+      "options": {},
+      "commands": {
+        "computes": {
+          "name": "computes",
+          "aliases": [
+            "compute",
+            "endpoints",
+            "endpoint"
+          ],
+          "positionals": [],
+          "options": {
+            "project-id": {
+              "type": "string",
+              "describe": "Project ID"
+            }
+          },
+          "commands": {
+            "delete": {
+              "name": "delete",
+              "aliases": [],
+              "positionals": [
+                {
+                  "name": "id",
+                  "required": true
+                }
+              ],
+              "options": {
+                "wait": {
+                  "type": "boolean",
+                  "describe": "Wait until the change is applied. Use --no-wait to return as soon as the API accepts it",
+                  "default": true
+                }
+              },
+              "commands": {},
+              "describe": "Delete a compute"
+            },
+            "get": {
+              "name": "get",
+              "aliases": [],
+              "positionals": [
+                {
+                  "name": "id",
+                  "required": true
+                }
+              ],
+              "options": {},
+              "commands": {},
+              "describe": "Get a compute"
+            },
+            "list": {
+              "name": "list",
+              "aliases": [],
+              "positionals": [],
+              "options": {
+                "all-branches": {
+                  "type": "boolean",
+                  "describe": "List every compute in the project, ignoring --branch and the branch .neon pins",
+                  "default": false
+                },
+                "branch": {
+                  "type": "string",
+                  "describe": "Branch ID or name"
+                }
+              },
+              "commands": {},
+              "describe": "List computes. Lists the branch's computes when --branch is passed or .neon pins one, otherwise every compute in the project"
+            },
+            "restart": {
+              "name": "restart",
+              "aliases": [],
+              "positionals": [
+                {
+                  "name": "id",
+                  "required": true
+                }
+              ],
+              "options": {
+                "wait": {
+                  "type": "boolean",
+                  "describe": "Wait until the change is applied. Use --no-wait to return as soon as the API accepts it",
+                  "default": true
+                }
+              },
+              "commands": {},
+              "describe": "Restart a compute"
+            },
+            "start": {
+              "name": "start",
+              "aliases": [],
+              "positionals": [
+                {
+                  "name": "id",
+                  "required": true
+                }
+              ],
+              "options": {
+                "wait": {
+                  "type": "boolean",
+                  "describe": "Wait until the change is applied. Use --no-wait to return as soon as the API accepts it",
+                  "default": true
+                }
+              },
+              "commands": {},
+              "describe": "Start a compute"
+            },
+            "suspend": {
+              "name": "suspend",
+              "aliases": [],
+              "positionals": [
+                {
+                  "name": "id",
+                  "required": true
+                }
+              ],
+              "options": {
+                "wait": {
+                  "type": "boolean",
+                  "describe": "Wait until the change is applied. Use --no-wait to return as soon as the API accepts it",
+                  "default": true
+                }
+              },
+              "commands": {},
+              "describe": "Suspend a compute"
+            },
+            "update": {
+              "name": "update",
+              "aliases": [],
+              "positionals": [
+                {
+                  "name": "id",
+                  "required": true
+                }
+              ],
+              "options": {
+                "cu": {
+                  "type": "string",
+                  "describe": "The number of Compute Units. Could be a fixed size (e.g. \"2\") or a range delimited by a dash (e.g. \"0.5-3\")."
+                },
+                "disabled": {
+                  "type": "boolean",
+                  "describe": "Restrict connections to the compute. Disabling schedules a suspend. Use --disabled=false to allow connections again."
+                },
+                "name": {
+                  "type": "string",
+                  "describe": "Name of the compute"
+                },
+                "suspend-timeout": {
+                  "type": "number",
+                  "describe": "Scale-to-zero idle timeout, in seconds, before the compute suspends. `0` uses the plan default; `-1` disables scale-to-zero (never suspends). Minimum is plan-dependent (Scale: 60); maximum 604800 (one week). Free cannot change it; Launch can only enable or disable; Scale can set any value."
+                },
+                "wait": {
+                  "type": "boolean",
+                  "describe": "Wait until the change is applied. Use --no-wait to return as soon as the API accepts it",
+                  "default": true
+                }
+              },
+              "commands": {},
+              "describe": "Update a compute's size, scale-to-zero timeout, name, or connection access"
+            }
+          },
+          "describe": "Manage Postgres computes",
+          "usage": "$0 postgres computes <sub-command> [options]"
+        },
+        "connection-string": {
+          "name": "connection-string",
+          "aliases": [
+            "cs"
+          ],
+          "positionals": [
+            {
+              "name": "branch",
+              "describe": "Branch name or id. Defaults to the default branch if omitted. Can be written in the point-in-time format: \"branch@timestamp\" or \"branch@lsn\"",
+              "type": "string"
+            }
+          ],
+          "options": {
+            "database-name": {
+              "type": "string",
+              "describe": "Database name"
+            },
+            "endpoint-type": {
+              "type": "string",
+              "describe": "Endpoint type"
+            },
+            "extended": {
+              "type": "boolean",
+              "describe": "Show extended information"
+            },
+            "fallback": {
+              "type": "boolean",
+              "describe": "Force the embedded TypeScript psql fallback (for testing)",
+              "default": false,
+              "hidden": true
+            },
+            "pooled": {
+              "type": "boolean",
+              "describe": "Use pooled connection",
+              "default": false
+            },
+            "prisma": {
+              "type": "boolean",
+              "describe": "Use connection string for Prisma setup",
+              "default": false
+            },
+            "project-id": {
+              "type": "string",
+              "describe": "Project ID"
+            },
+            "psql": {
+              "type": "boolean",
+              "describe": "Connect to a database via psql using connection string",
+              "default": false
+            },
+            "role-name": {
+              "type": "string",
+              "describe": "Role name. Defaults to neondb_owner, else the only role besides the Data API and Neon Auth roles"
+            },
+            "ssl": {
+              "type": "string",
+              "describe": "SSL mode",
+              "default": "require",
+              "choices": [
+                "require",
+                "verify-ca",
+                "verify-full",
+                "omit"
+              ]
+            }
+          },
+          "commands": {},
+          "describe": "Get connection string",
+          "examples": [
+            {
+              "command": "$0 cs main",
+              "description": "Get connection string for the main branch"
+            },
+            {
+              "command": "$0 cs main@2024-01-01T00:00:00Z",
+              "description": "Get connection string for the main branch at a specific point in time"
+            },
+            {
+              "command": "$0 cs main@0/234235",
+              "description": "Get connection string for the main branch at a specific LSN"
+            }
+          ],
+          "usage": "$0 postgres connection-string [branch] [options]"
+        },
+        "databases": {
+          "name": "databases",
+          "aliases": [
+            "database",
+            "db"
+          ],
+          "positionals": [],
+          "options": {
+            "branch": {
+              "type": "string",
+              "describe": "Branch ID or name"
+            },
+            "project-id": {
+              "type": "string",
+              "describe": "Project ID"
+            }
+          },
+          "commands": {
+            "create": {
+              "name": "create",
+              "aliases": [],
+              "positionals": [],
+              "options": {
+                "name": {
+                  "type": "string",
+                  "describe": "Database name",
+                  "required": true
+                },
+                "owner-name": {
+                  "type": "string",
+                  "describe": "Owner name"
+                }
+              },
+              "commands": {},
+              "describe": "Create a database"
+            },
+            "delete": {
+              "name": "delete",
+              "aliases": [],
+              "positionals": [
+                {
+                  "name": "database",
+                  "required": true
+                }
+              ],
+              "options": {},
+              "commands": {},
+              "describe": "Delete a database"
+            },
+            "list": {
+              "name": "list",
+              "aliases": [],
+              "positionals": [],
+              "options": {},
+              "commands": {},
+              "describe": "List databases"
+            }
+          },
+          "describe": "Manage databases",
+          "usage": "$0 postgres databases <sub-command> [options]"
+        },
+        "psql": {
+          "name": "psql",
+          "aliases": [],
+          "positionals": [
+            {
+              "name": "branch",
+              "describe": "Branch name or id. Defaults to the default branch if omitted. Can be written in the point-in-time format: \"branch@timestamp\" or \"branch@lsn\"",
+              "type": "string"
+            }
+          ],
+          "options": {
+            "database-name": {
+              "type": "string",
+              "describe": "Database name"
+            },
+            "endpoint-type": {
+              "type": "string",
+              "describe": "Endpoint type"
+            },
+            "fallback": {
+              "type": "boolean",
+              "describe": "Force the embedded TypeScript psql fallback (for testing)",
+              "default": false,
+              "hidden": true
+            },
+            "pooled": {
+              "type": "boolean",
+              "describe": "Use pooled connection",
+              "default": false
+            },
+            "project-id": {
+              "type": "string",
+              "describe": "Project ID"
+            },
+            "role-name": {
+              "type": "string",
+              "describe": "Role name"
+            },
+            "ssl": {
+              "type": "string",
+              "describe": "SSL mode",
+              "default": "require",
+              "choices": [
+                "require",
+                "verify-ca",
+                "verify-full",
+                "omit"
+              ]
+            }
+          },
+          "commands": {},
+          "describe": "Connect to a database via psql",
+          "examples": [
+            {
+              "command": "$0 psql",
+              "description": "Connect to the default branch via psql"
+            },
+            {
+              "command": "$0 psql main",
+              "description": "Connect to the main branch via psql"
+            },
+            {
+              "command": "$0 psql main -- -c \"SELECT 1\"",
+              "description": "Run a single query against the main branch"
+            },
+            {
+              "command": "$0 psql main@2024-01-01T00:00:00Z",
+              "description": "Connect to the main branch at a specific point in time"
+            }
+          ],
+          "usage": "$0 postgres psql [branch] [options] [-- psql-args]"
+        },
+        "roles": {
+          "name": "roles",
+          "aliases": [
+            "role"
+          ],
+          "positionals": [],
+          "options": {
+            "branch": {
+              "type": "string",
+              "describe": "Branch ID or name"
+            },
+            "project-id": {
+              "type": "string",
+              "describe": "Project ID"
+            }
+          },
+          "commands": {
+            "create": {
+              "name": "create",
+              "aliases": [],
+              "positionals": [],
+              "options": {
+                "access": {
+                  "type": "string",
+                  "describe": "admin joins neon_superuser. read_only grants SELECT; read_write adds INSERT, UPDATE, DELETE. Scoped roles are created with SQL as the database owner and cover tables that owner owns, now and later",
+                  "default": "admin",
+                  "choices": [
+                    "admin",
+                    "read_only",
+                    "read_write"
+                  ]
+                },
+                "database": {
+                  "type": "string",
+                  "describe": "Database a read_only or read_write role is scoped to. Defaults to the branch's only database"
+                },
+                "name": {
+                  "type": "string",
+                  "describe": "Role name",
+                  "required": true
+                },
+                "no-login": {
+                  "type": "boolean",
+                  "describe": "Create a passwordless role that cannot login"
+                },
+                "schema": {
+                  "type": "array",
+                  "describe": "Schema a read_only or read_write role can use. Repeat for more. Defaults to public"
+                }
+              },
+              "commands": {},
+              "describe": "Create a role. By default it joins neon_superuser (admin on every database); pass --access read_only or read_write for a scoped role"
+            },
+            "delete": {
+              "name": "delete",
+              "aliases": [],
+              "positionals": [
+                {
+                  "name": "role",
+                  "required": true
+                }
+              ],
+              "options": {},
+              "commands": {},
+              "describe": "Delete a role"
+            },
+            "get": {
+              "name": "get",
+              "aliases": [],
+              "positionals": [
+                {
+                  "name": "role",
+                  "required": true
+                }
+              ],
+              "options": {},
+              "commands": {},
+              "describe": "Get a role"
+            },
+            "list": {
+              "name": "list",
+              "aliases": [],
+              "positionals": [],
+              "options": {},
+              "commands": {},
+              "describe": "List roles"
+            },
+            "reset-password": {
+              "name": "reset-password",
+              "aliases": [],
+              "positionals": [
+                {
+                  "name": "role",
+                  "required": true
+                }
+              ],
+              "options": {
+                "wait": {
+                  "type": "boolean",
+                  "describe": "Wait until the compute applies the new password. Use --no-wait to return as soon as the API accepts the reset",
+                  "default": true
+                }
+              },
+              "commands": {},
+              "describe": "Reset a role's password and print the new one"
+            }
+          },
+          "describe": "Manage roles",
+          "usage": "$0 postgres roles <sub-command> [options]"
+        }
+      },
+      "describe": "Manage Postgres computes, databases, and roles, and connect with psql or a connection string",
+      "usage": "$0 postgres <sub-command> [options]"
     },
     "profile": {
       "aliases": [
@@ -4601,6 +5405,20 @@
           "aliases": [],
           "positionals": [],
           "options": {
+            "access": {
+              "type": "string",
+              "describe": "admin joins neon_superuser. read_only grants SELECT; read_write adds INSERT, UPDATE, DELETE. Scoped roles are created with SQL as the database owner and cover tables that owner owns, now and later",
+              "default": "admin",
+              "choices": [
+                "admin",
+                "read_only",
+                "read_write"
+              ]
+            },
+            "database": {
+              "type": "string",
+              "describe": "Database a read_only or read_write role is scoped to. Defaults to the branch's only database"
+            },
             "name": {
               "type": "string",
               "describe": "Role name",
@@ -4609,10 +5427,14 @@
             "no-login": {
               "type": "boolean",
               "describe": "Create a passwordless role that cannot login"
+            },
+            "schema": {
+              "type": "array",
+              "describe": "Schema a read_only or read_write role can use. Repeat for more. Defaults to public"
             }
           },
           "commands": {},
-          "describe": "Create a role"
+          "describe": "Create a role. By default it joins neon_superuser (admin on every database); pass --access read_only or read_write for a scoped role"
         },
         "delete": {
           "name": "delete",
@@ -4627,6 +5449,19 @@
           "commands": {},
           "describe": "Delete a role"
         },
+        "get": {
+          "name": "get",
+          "aliases": [],
+          "positionals": [
+            {
+              "name": "role",
+              "required": true
+            }
+          ],
+          "options": {},
+          "commands": {},
+          "describe": "Get a role"
+        },
         "list": {
           "name": "list",
           "aliases": [],
@@ -4634,6 +5469,25 @@
           "options": {},
           "commands": {},
           "describe": "List roles"
+        },
+        "reset-password": {
+          "name": "reset-password",
+          "aliases": [],
+          "positionals": [
+            {
+              "name": "role",
+              "required": true
+            }
+          ],
+          "options": {
+            "wait": {
+              "type": "boolean",
+              "describe": "Wait until the compute applies the new password. Use --no-wait to return as soon as the API accepts the reset",
+              "default": true
+            }
+          },
+          "commands": {},
+          "describe": "Reset a role's password and print the new one"
         }
       },
       "describe": "Manage roles",
@@ -5122,7 +5976,7 @@
           "aliases": [],
           "positionals": [
             {
-              "name": "id",
+              "name": "trigger-id",
               "required": true,
               "describe": "Trigger ID",
               "type": "string"
@@ -5137,7 +5991,7 @@
           "aliases": [],
           "positionals": [
             {
-              "name": "id",
+              "name": "trigger-id",
               "required": true,
               "describe": "Trigger ID",
               "type": "string"
@@ -5152,7 +6006,7 @@
           "aliases": [],
           "positionals": [
             {
-              "name": "id",
+              "name": "trigger-id",
               "required": true,
               "describe": "Trigger ID",
               "type": "string"
@@ -5167,7 +6021,7 @@
           "aliases": [],
           "positionals": [
             {
-              "name": "id",
+              "name": "trigger-id",
               "required": true,
               "describe": "Trigger ID",
               "type": "string"
@@ -5190,7 +6044,7 @@
           "aliases": [],
           "positionals": [
             {
-              "name": "id",
+              "name": "trigger-id",
               "required": true,
               "describe": "Trigger ID",
               "type": "string"

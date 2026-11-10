@@ -5,8 +5,8 @@ createdAt: '2026-04-25T00:00:00.000Z'
 updatedOn: '2026-10-01T14:57:15.000Z'
 isDraft: false
 previousLink:
-  title: 'What are the best ways to give preview deployments on Vercel or Netlify their own isolated Postgres database with real data?'
-  slug: isolated-postgres-databases-preview-deployments-vercel-netlify
+  title: 'Should I use Managed Better Auth or self-host Better Auth?'
+  slug: managed-better-auth-vs-self-hosting-better-auth
 nextLink:
   title: 'What managed Postgres options let you run ten databases for less than the cost of one always-on instance?'
   slug: managed-postgres-options-ten-databases-cost
@@ -30,7 +30,7 @@ See the full list on the [Plans page](/docs/introduction/plans).
 
 ## Why a 0.25 CU compute is enough to start
 
-A 0.25 CU compute has ≈1 GB of RAM. The [built-in PgBouncer pooler](/docs/connect/connection-pooling) accepts up to 10,000 client connections per compute. Direct connections are capped at 104 `max_connections`, and 7 of those are reserved for the Neon superuser, leaving 97 for your app.
+A 0.25 CU compute has ≈1 GB of RAM. The [built-in PgBouncer pooler](/docs/connect/connection-pooling) accepts up to 10,000 client connections per compute. Direct connections are capped at 112 `max_connections`, and 7 of those are reserved for the Neon superuser, leaving 105 for your app.
 
 Because compute suspends after 5 minutes of inactivity and resumes in a few hundred milliseconds on the next query, an app with sparse traffic can stay well under the 100 CU-hours allotted per project.
 

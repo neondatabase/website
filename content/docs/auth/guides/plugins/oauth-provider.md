@@ -11,7 +11,7 @@ summary: >-
   and refresh tokens, and how a resource server verifies the issuer, audience,
   and signature of access tokens.
 enableTableOfContents: true
-updatedOn: '2026-10-30T18:52:42.000Z'
+updatedOn: '2026-11-06T04:30:42.649Z'
 ---
 
 Managed Better Auth is built on [Better Auth](https://www.better-auth.com/) and can act as an OAuth 2.1 authorization server for your own apps. With the OAuth provider plugin enabled, Managed Better Auth issues access tokens to OAuth clients on behalf of your signed-in users, and your MCP server or API verifies those tokens.
@@ -134,6 +134,8 @@ An MCP client connects to your MCP server and learns where to authenticate from 
 5. The client exchanges the authorization code (with PKCE) for an access token and calls your MCP server with it.
 
 Your MCP server is responsible for two things: serving its protected resource metadata, and verifying access tokens.
+
+For a full walkthrough that runs the MCP server on a Neon Function with Managed Better Auth, see [Build an MCP server with Managed Better Auth](/docs/compute/functions/mcp-server).
 
 ### Find the issuer
 

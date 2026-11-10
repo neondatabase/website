@@ -3,6 +3,7 @@ import { notFound } from 'next/navigation';
 
 import Post from 'components/pages/doc/post';
 import ProgrammaticCTA from 'components/pages/faqs/programmatic-cta';
+import JsonLd from 'components/shared/json-ld';
 import VERCEL_URL from 'constants/base';
 import { FAQS_DIR_PATH } from 'constants/content';
 import { FAQS_BASE_PATH } from 'constants/faqs';
@@ -80,10 +81,7 @@ const FaqPost = async (props) => {
 
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
+      <JsonLd data={jsonLd} />
       <Post
         content={content}
         data={data}

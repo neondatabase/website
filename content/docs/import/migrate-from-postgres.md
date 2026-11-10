@@ -12,7 +12,7 @@ redirectFrom:
   - /docs/cloud/tutorials
   - /docs/how-to-guides/import-an-existing-database
   - /docs/import/import-from-postgres
-updatedOn: '2026-09-16T19:45:35.340Z'
+updatedOn: '2026-11-04T20:10:08.844Z'
 ---
 
 This topic describes migrating data from one Postgres database to another using the `pg_dump` and `pg_restore`.
@@ -42,7 +42,7 @@ If you are performing this procedure to migrate data from one Neon project to an
   ```
 
 - Consider running a test migration first to ensure your actual migration goes smoothly. See [Run a test migration](#run-a-test-migration).
-- If your database is small, you can pipe `pg_dump` output directly to `pg_restore` to save time. See [Pipe pg_dump to pg_restore](#pipe-pg_dump-to-pg_restore).
+- If your database is small, you can pipe `pg_dump` output directly to `pg_restore` to save time. See [Pipe pg_dump to pg_restore](#pipe-pgdump-to-pgrestore).
 
 ## Export data with pg_dump
 
@@ -59,7 +59,7 @@ The `pg_dump` command above includes these arguments:
 - `-d`: Specifies the source database name or [connection string](https://www.postgresql.org/docs/current/libpq-connect.html#LIBPQ-CONNSTRING).
 - `-f`: The dump file name. It can be any name you choose (`mydumpfile.bak`, for example).
 
-For more command options, see [Advanced pg_dump and pg_restore options](#advanced-pg_dump-and-pg_restore-options).
+For more command options, see [Advanced pg_dump and pg_restore options](#advanced-pgdump-and-pgrestore-options).
 
 ### Export a database as a plain SQL file
 
@@ -91,7 +91,7 @@ The example above includes these arguments:
 - `-d`: Specifies the Neon database to connect to. The value is a Neon database connection string. See [Before you begin](#before-you-begin).
 - `<dump_file_name>` is the name of the dump file you created with `pg_dump`.
 
-For more command options, see [Advanced pg_dump and pg_restore options](#advanced-pg_dump-and-pg_restore-options).
+For more command options, see [Advanced pg_dump and pg_restore options](#advanced-pgdump-and-pgrestore-options).
 
 ## pg_dump and pg_restore example
 

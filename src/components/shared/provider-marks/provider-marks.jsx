@@ -9,10 +9,11 @@ import { cn } from 'utils/cn';
 // so a control explains itself ("paste this into one of these"). Order is fixed:
 // Claude, OpenAI, Cursor.
 //
-// Colors: all three are monochrome `currentColor` marks, so they take the
-// cluster's text color. The default is black on light / white on dark; pass
-// `className` with a different text color when the cluster sits on a surface
-// that inverts (for example a dark pill).
+// Colors: all three marks are monochrome `currentColor` assets, so they take the
+// cluster's text color and stay consistent with each other and with the control's
+// label. The default is black on light / white on dark; pass `className` with a
+// different text color when the cluster sits on a surface that inverts (for
+// example a dark pill, where all three marks render white).
 //
 // The whole control is a single click target, so the cluster is decorative:
 // it is hidden from assistive tech and the control carries its own label.

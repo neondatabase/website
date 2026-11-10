@@ -38,6 +38,7 @@ const SOCIALS = [
   },
   {
     id: 'github',
+    label: 'GitHub',
     to: LINKS.github,
     icon: GitHubIcon,
     hasStars: true,
@@ -58,6 +59,7 @@ const Sidebar = ({ isClient, isDocs, className }) => (
           )}
           key={id}
           to={to}
+          aria-label={label}
           target="_blank"
           rel="noopener noreferrer"
           tagName="Header"
@@ -72,7 +74,7 @@ const Sidebar = ({ isClient, isDocs, className }) => (
           />
           {!isDocs && (
             <span className="text-sm leading-none tracking-extra-tight">
-              {label}
+              {!hasStars && label}
               {hasStars && !isClient && <GitHubStars />}
             </span>
           )}

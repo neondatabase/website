@@ -13,7 +13,7 @@ summary: >-
 enableTableOfContents: true
 redirectFrom:
   - /docs/extensions/pg_embedding
-updatedOn: '2026-09-26T00:49:26.569Z'
+updatedOn: '2026-11-06T11:14:41.532Z'
 ---
 
 The `pgvector` extension enables you to store vector embeddings and perform vector similarity search in Postgres. It's a natural fit for natural language processing applications, including those built on top of OpenAI's GPT models.
@@ -315,7 +315,7 @@ Like other index types, it’s faster to create an index after loading your init
 
   You can also speed up index creation by increasing the number of parallel workers. The default is `2`.
 
-  The `max_parallel_maintenance_workers` sets the maximum number of parallel workers that can be started by a single utility command such as `CREATE INDEX`. By default, the `max_parallel_maintenance_workers` setting is `2`. For efficient parallel index creation, you can increase this setting. Parallel workers are taken from the pool of processes established by `max_worker_processes` (`10`), limited by `max_parallel_workers` (`8`).
+  The `max_parallel_maintenance_workers` sets the maximum number of parallel workers that can be started by a single utility command such as `CREATE INDEX`. By default, the `max_parallel_maintenance_workers` setting is `2`. For efficient parallel index creation, you can increase this setting. Parallel workers are taken from the pool of processes established by `max_worker_processes` (`13`), limited by `max_parallel_workers` (`8`).
 
   You can increase the `maintenance_work_mem` setting for the current session with a command similar to the following:
 
@@ -443,7 +443,7 @@ Like other index types, it’s faster to create an index after loading your init
 
   You can also speed up index creation by increasing the number of parallel workers. The default is `2`.
 
-  The `max_parallel_maintenance_workers` sets the maximum number of parallel workers that can be started by a single utility command such as `CREATE INDEX`. By default, the `max_parallel_maintenance_workers` setting is `2`. For efficient parallel index creation, you can increase this setting. Parallel workers are taken from the pool of processes established by `max_worker_processes` (`10`), limited by `max_parallel_workers` (`8`).
+  The `max_parallel_maintenance_workers` sets the maximum number of parallel workers that can be started by a single utility command such as `CREATE INDEX`. By default, the `max_parallel_maintenance_workers` setting is `2`. For efficient parallel index creation, you can increase this setting. Parallel workers are taken from the pool of processes established by `max_worker_processes` (`13`), limited by `max_parallel_workers` (`8`).
 
   You can increase the `maintenance_work_mem` setting for the current session with a command similar to the following:
 
@@ -455,7 +455,7 @@ Like other index types, it’s faster to create an index after loading your init
 
   For a large number of workers, you may also need to increase the Postgres `max_parallel_workers`, which is `8` by default.
 
-#### Check indexing progress
+#### Check indexing progress (#check-indexing-progress-2)
 
 You can check indexing progress with the following query:
 
@@ -681,6 +681,8 @@ LINE 1: SELECT '[4e38,1]'::vector;
 
 ## Resources
 
-`pgvector` source code: [https://github.com/pgvector/pgvector](https://github.com/pgvector/pgvector)
+- `pgvector` source code: [https://github.com/pgvector/pgvector](https://github.com/pgvector/pgvector)
+- [Vector search in Postgres](/guides/vector-search)
+- [Building semantic search with AI embeddings, Neon, and pgvector](/guides/ai-embeddings-postgres-search)
 
 <NeedHelp/>

@@ -9,6 +9,8 @@ summary: >-
   branches only, leaving other branches unrestricted, and are configured in
   project settings.
 enableTableOfContents: true
+redirectFrom:
+  - /docs/manage/ip-allow
 updatedOn: '2026-10-09T10:01:16.476Z'
 ---
 

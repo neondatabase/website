@@ -12,7 +12,7 @@ summary: >-
   and Hono.js, and requires a direct (non-pooled) connection string for
   migrations.
 enableTableOfContents: true
-updatedOn: '2026-09-16T19:45:35.340Z'
+updatedOn: '2026-10-09T15:55:57.334Z'
 ---
 
 [Drizzle](https://orm.drizzle.team/) is a TypeScript-first ORM that connects to all major databases and works across most Javascript runtimes. It provides a simple way to define database schemas and queries in an SQL-like dialect and tools to generate and run migrations.
@@ -384,7 +384,7 @@ npm run db:generate
 
 This command generates a new migration file in the `drizzle` folder, with the SQL command to add the new column to the `authors` table.
 
-### Run the migration
+### Run the migration (#run-the-migration-2)
 
 Run the migration script using the following command:
 

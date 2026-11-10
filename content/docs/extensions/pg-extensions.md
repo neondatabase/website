@@ -10,7 +10,10 @@ summary: >-
 enableTableOfContents: true
 redirectFrom:
   - /docs/reference/pg-extensions
-updatedOn: '2026-09-30T14:42:50.221Z'
+  - /docs/extensions/pg_extensions
+  - /docs/extensions/overview
+  - /docs/postgresql/extensions
+updatedOn: '2026-11-04T20:10:08.844Z'
 ---
 
 Neon supports the Postgres extensions shown below. Extension versions may differ by Postgres version. A dash (`-`) indicates an extension is not yet supported for that version.
@@ -47,7 +50,7 @@ Neon supports the Postgres extensions shown below. Extension versions may differ
 | [ip4r](https://github.com/RhodiumToad/ip4r)                                                      |    2.4 |    2.4 |    2.4 |    2.4 |    2.4 |                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
 | [isn](https://www.postgresql.org/docs/16/isn.html)                                               |    1.2 |    1.2 |    1.2 |    1.2 |    1.3 |                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
 | [lakebase_text](/docs/extensions/lakebase-text)                                                  |      - |      - |  0.1.3 |  0.1.3 |  0.1.3 | See [Lakebase Search](/docs/ai/lakebase-search).                                                                                                                                                                                                                                                                                                                                                                                                              |
-| [lakebase_tokenizer](/docs/extensions/lakebase-tokenizer)                                        |      - |      - |  0.2.0 |  0.2.0 |  0.2.0 | See [Lakebase Search](/docs/ai/lakebase-search).                                                                                                                                                                                                                                                                                                                                                                                                              |
+| [lakebase_tokenizer](/docs/extensions/lakebase-tokenizer)                                        |      - |      - |  0.2.1 |  0.2.1 |  0.2.1 | See [Lakebase Search](/docs/ai/lakebase-search).                                                                                                                                                                                                                                                                                                                                                                                                              |
 | [lakebase_vector](/docs/extensions/lakebase-vector)                                              |      - |      - |  1.1.2 |  1.1.2 |  1.1.2 | See [Lakebase Search](/docs/ai/lakebase-search).                                                                                                                                                                                                                                                                                                                                                                                                              |
 | [lo](https://www.postgresql.org/docs/16/lo.html)                                                 |    1.1 |    1.1 |    1.1 |    1.1 |    1.2 |                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
 | [ltree](/docs/extensions/ltree)                                                                  |    1.2 |    1.2 |    1.2 |    1.3 |    1.3 |                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
@@ -197,7 +200,7 @@ You can view **available** libraries by running [List preloaded libraries](/docs
 curl --request GET \
      --url https://console.neon.tech/api/v2/projects/your_project_id/available_preload_libraries \
      --header 'accept: application/json' \
-     --header 'authorization: Bearer $NEON_API_KEY'
+     --header "authorization: Bearer $NEON_API_KEY"
 ```
 
 The response body lists available libraries and whether the libraries are enabled by default. Response body attributes include:
@@ -271,6 +274,20 @@ For attribute definitions, find the [List preloaded libraries](/docs/reference/a
       "is_default": false,
       "is_experimental": false,
       "version": "2.5.1"
+    },
+    {
+      "library_name": "lakebase_vector",
+      "description": "High-performance vector index, fully compatible with pgvector.",
+      "is_default": true,
+      "is_experimental": false,
+      "version": "1.0.0-dev"
+    },
+    {
+      "library_name": "lakebase_text",
+      "description": "High-performance BM25 full-text search.",
+      "is_default": true,
+      "is_experimental": false,
+      "version": "0.1.0-dev"
     }
   ]
 }
@@ -291,7 +308,7 @@ You can enable available libraries using the `preloaded_libraries` object in a [
 curl --request PATCH \
     --url https://console.neon.tech/api/v2/projects/<your_project_id> \
     --header 'accept: application/json' \
-    --header 'authorization: Bearer $NEON_API_KEY' \
+    --header "authorization: Bearer $NEON_API_KEY" \
     --header 'content-type: application/json' \
     --data '
 {
@@ -299,7 +316,7 @@ curl --request PATCH \
     "settings": {
       "preload_libraries": {
         "enabled_libraries": [
-          "neon","pg_stat_statements","timescaledb","pg_cron","pg_partman_bgw"
+          "neon","pg_stat_statements","timescaledb","pg_cron","pg_partman_bgw","lakebase_vector","lakebase_text"
         ]
       }
     }
@@ -310,9 +327,10 @@ curl --request PATCH \
 
 When running a `Create project` or `Update project` API call to enable libraries:
 
-- Library names must be quoted, comma-separated, and specified in a single string.
+- Specify library names as an array of quoted strings.
 - Specify all libraries that should be enabled. If a library is not included in the API call, it will not be enabled.
-- The "use_defaults": true`option overrides the`"enabled_libraries"` option, enabling only default libraries
+- Setting `use_defaults` to `true` overrides `enabled_libraries` and enables only the default libraries.
+- Include `lakebase_vector` and `lakebase_text` if you use [Lakebase Search](/docs/ai/lakebase-search). They're enabled by default, but a custom list replaces the defaults, so leaving them out disables them. Queries that use their indexes then fail with an error like `lakebase_vector must be loaded via shared_preload_libraries`.
 - The `neon` and `pg_stat_statements` libraries will remain enabled whether you include them in your API call or not; they're used by a Neon system-managed database.
 - If you do not use one of the libraries enabled by default, you can exclude it from your API call.
 - The `pgrag` libraries (`"rag_bge_small_en_v15,rag_jina_reranker_v1_tiny_en"`) are **deprecated**; leave them out of your API call. For search and RAG, see [Lakebase Search](/docs/ai/lakebase-search).
