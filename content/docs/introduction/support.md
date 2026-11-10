@@ -18,7 +18,7 @@ The help you can get depends on your plan:
 
 - **Free**: Ask questions on the [Neon Discord Server](#neon-discord-server) or use [Neon AI chat assistance](#neon-ai-chat-assistance).
 - **Launch**: Open [support tickets](#support-tickets) for billing questions.
-- **Scale**: Open support tickets for any Neon issue.
+- **Scale**: Open support tickets for any Neon issue and [request limit increases](#request-a-limit-increase).
 
 To open a support ticket, go to the [Neon Console](https://console.neon.tech) and select **Help** > **Get help** from the organization menu in the top right corner. See [Open the support center](#open-the-support-center).
 
@@ -126,9 +126,13 @@ On the **Free** plan, the support center offers the AI assistant, the docs, and 
 
 You can also open a billing support ticket from the **Billing** page. Select **Request billing support** in the page header, or select **View past invoices**, open an invoice's actions menu, and select **Request support** to open the form with that invoice pre-selected. See [Request billing support](/docs/introduction/manage-billing#request-billing-support).
 
-#### Request a limit increase
+<a id="request-a-limit-increase" aria-hidden="true"></a>
 
-Some Neon limits are soft limits that protect your organization from runaway usage and costs. On the **Scale** plan, you can ask Support to raise these:
+#### Request a limit increase (Scale plan)
+
+Limit increase requests are available only to organizations on the **Scale** plan. The **Increase your platform limits** option doesn't appear in the support center for Free or Launch organizations. To raise these limits on another plan, [upgrade to Scale](/docs/introduction/manage-billing#change-your-plan) first.
+
+Some Neon limits are soft limits that protect your organization from runaway usage and costs. Support can raise these:
 
 | Limit                                        | Learn more                                                                                      |
 | :------------------------------------------- | :---------------------------------------------------------------------------------------------- |
@@ -140,7 +144,7 @@ Some Neon limits are soft limits that protect your organization from runaway usa
 
 To request an increase:
 
-1. In the [support center](#open-the-support-center), select the organization that needs the higher limit.
+1. In the [support center](#open-the-support-center), select the Scale plan organization that needs the higher limit.
 2. Select **Increase your platform limits**.
 3. Under **How can we help?**, include:
    - The limit you need raised and the value you need
@@ -150,7 +154,7 @@ To request an increase:
 
 Support reviews each request against your use case and may ask follow-up questions or approve a different value than you asked for. If you're hitting compute or branch limits because you run a database per tenant or per agent, see [Multitenancy with Neon](/docs/guides/multitenancy) first. A different architecture is often a better fit than a higher limit.
 
-Limit increases aren't available on the Free or Launch plans. To raise these limits, [upgrade to Scale](/docs/introduction/manage-billing#change-your-plan) first. A limit increase doesn't change your plan. Plan allowances, such as the maximum compute size or history window, change only when you [change your plan](/docs/introduction/manage-billing#change-your-plan). To ask about Postgres settings, such as `max_replication_slots`, [open a technical support ticket](#open-a-technical-support-ticket-scale-plan) instead.
+A limit increase doesn't change your plan. Plan allowances, such as the maximum compute size or history window, change only when you [change your plan](/docs/introduction/manage-billing#change-your-plan). To ask about Postgres settings, such as `max_replication_slots`, [open a technical support ticket](#open-a-technical-support-ticket-scale-plan) instead.
 
 <Admonition type="tip">
 To ensure you receive responses from our support team, allowlist the `help@databricks.com` email address in your email client. This prevents support responses from being filtered to your spam or junk folder.
