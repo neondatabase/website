@@ -14,7 +14,7 @@ updatedOn: '2026-11-03T20:17:45.483Z'
 ---
 
 <CopyPrompt src="/prompts/sveltekit-prompt.md"
-description="Prompt to connect your SvelteKit app to Lakebase Postgres on Neon: skills, a project, a development branch, and a working query."/>
+description="Prompt that sets up Neon for your AI coding agent, then follows this guide to connect your SvelteKit app to Lakebase Postgres on Neon."/>
 
 [SvelteKit](https://svelte.dev/docs/kit) is a full-stack framework for building web apps with Svelte. Learn to connect a SvelteKit app to Postgres on Neon, query it from a server `load` function, develop on a branch, and deploy.
 
@@ -68,7 +68,7 @@ neon projects create --name my-app --region-id aws-us-east-2 --no-secrets
 Create an [API key](https://console.neon.tech/app/settings/api-keys), export it, then create the project in your organization:
 
 ```bash filename="Terminal"
-export NEON_API_KEY=neon_...
+export NEON_API_KEY=napi_...
 
 curl -X POST https://console.neon.tech/api/v2/projects \
   -H "Authorization: Bearer $NEON_API_KEY" \
@@ -76,7 +76,7 @@ curl -X POST https://console.neon.tech/api/v2/projects \
   -d '{"project": {"name": "my-app", "region_id": "aws-us-east-2", "org_id": "<org-id>"}}'
 ```
 
-The response includes the project's connection string in `connection_uris[0].connection_uri`. See [Create a project](/docs/manage/projects#create-a-project) for the other options.
+The response includes the project's connection string in `connection_uris[0].connection_uri`. See [Create a project with the API](/docs/manage/projects#create-a-project-with-the-api) for the other options.
 
 </TabItem>
 
@@ -90,7 +90,7 @@ Go to the [Projects](https://console.neon.tech/app/projects) page in the Neon Co
 
 ## Connect your app to the project
 
-Get a `DATABASE_URL` into `.env.local`. In development, SvelteKit reads it from there and exposes it through `$app/env/private`.
+Get a `DATABASE_URL` into an env file. In development, SvelteKit reads `.env` and `.env.local` (which overrides `.env`) and exposes declared variables through `$app/env/private`.
 
 <Tabs labels={["Neon CLI", "Without the CLI"]}>
 
@@ -102,9 +102,9 @@ From your app's directory, link it to the Neon project (install the [Neon CLI](/
 neon link
 ```
 
-`neon link` prompts you to pick an organization and a project, or to create a new project. It writes a `.neon` file with the project context, pins a branch (pass `--branch` to choose one), and pulls that branch's `DATABASE_URL` into `.env.local`. It also offers to create a [`neon.ts`](/docs/reference/neon-ts) file; that's optional and covered in [Add more of your backend](#add-more-of-your-backend).
+`neon link` prompts you to pick an organization and a project, or to create a new project. It writes a `.neon` file with the project context, pins a branch (pass `--branch` to choose one), and pulls that branch's `DATABASE_URL` into `.env.local`, or into `.env` if your project already has one. It also offers to create a [`neon.ts`](/docs/reference/neon-ts) file; that's optional and covered in [Add more of your backend](#add-more-of-your-backend).
 
-To skip the prompts, pass `-y` with `--org-id` and `--project-id`. Find IDs with `neon orgs list` and `neon projects list`.
+To skip the prompts, pass `-y` with `--org-id` and `--project-id`, or with `--org-id`, `--project-name`, and `--region-id` to create a project. Find IDs with `neon orgs list` and `neon projects list --org-id <org-id>`.
 
 </TabItem>
 
@@ -122,7 +122,7 @@ The optional development branch step and [Add more of your backend](#add-more-of
 
 </Tabs>
 
-The scaffolded `.gitignore` already excludes `.env.local`, so the connection string stays out of git.
+The scaffolded `.gitignore` already excludes `.env` and `.env.local`, so the connection string stays out of git. Keep `DATABASE_URL` in only one of them: if both have it, `.env.local` wins.
 
 ## Work on a development branch (optional)
 
@@ -132,7 +132,7 @@ If you linked your project's default branch, your app uses the branch where prod
 neon checkout dev --create
 ```
 
-This creates the `dev` branch, pins it in `.neon`, and pulls its `DATABASE_URL` into `.env.local`, so your app now uses the branch. To switch back, run `neon checkout main` (or `production`).
+This creates the `dev` branch, pins it in `.neon`, and pulls its `DATABASE_URL` into the same env file, so your app now uses the branch. To switch back, run `neon checkout main` (or `production`).
 
 ## Install a Postgres driver
 
@@ -155,11 +155,11 @@ npm install @neondatabase/serverless
 
 </CodeTabs>
 
-If you use node-postgres, `pg` 8.23 and later print a `SECURITY WARNING` for `sslmode=require`. Change it to `sslmode=verify-full` in `.env.local` to keep the same behavior without the warning. `neon env pull` and `neon checkout` write `sslmode=require` again, so repeat the change after you run them.
+If you use node-postgres, `pg` 8.23 and later print a `SECURITY WARNING` for `sslmode=require`. Change it to `sslmode=verify-full` in your env file to keep the same behavior without the warning. `neon env pull` and `neon checkout` write `sslmode=require` again, so repeat the change after you run them.
 
 ## Declare the connection string
 
-SvelteKit only exposes environment variables that you declare. Create `src/env.ts` and declare `DATABASE_URL`. Variables are private by default, so SvelteKit keeps this one out of browser code.
+SvelteKit only exposes environment variables that you declare. Create `src/env.ts` and declare `DATABASE_URL`, or add it to `variables` if the file already exists. Variables are private by default, so SvelteKit keeps this one out of browser code. Don't declare it with `public: true` or return it in page data.
 
 ```typescript filename="src/env.ts"
 import { defineEnvVars } from '@sveltejs/kit/env';
@@ -202,7 +202,7 @@ export const sql = neon(DATABASE_URL);
 
 ## Query the database in a load function
 
-Create `src/routes/+page.server.ts`. Its `load` function runs on the server and passes the result to the page. The `#lib` import is a subpath import that new SvelteKit 3 projects define in `package.json`:
+Create `src/routes/+page.server.ts`. In an existing app, use a new route such as `src/routes/neon/` so you don't replace a page. Its `load` function runs on the server and passes the result to the page. The `#lib` import is a subpath import that new SvelteKit 3 projects define in `package.json`:
 
 <CodeTabs reverse={true} labels={["node-postgres", "postgres.js", "Neon serverless driver"]}>
 
@@ -238,7 +238,7 @@ export const load: PageServerLoad = async () => {
 
 </CodeTabs>
 
-Replace `src/routes/+page.svelte` to display it. SvelteKit 3 uses Svelte 5 runes, so read `data` with `$props()` (`export let data` fails with `Cannot use export let in runes mode`):
+Replace `src/routes/+page.svelte` to display it. New SvelteKit 3 projects turn on Svelte 5 runes mode in `vite.config.ts`, so read `data` with `$props()`. `export let data` fails with ``Cannot use `export let` in runes mode — use `$props()` instead``:
 
 ```svelte filename="src/routes/+page.svelte"
 <script lang="ts">
@@ -257,11 +257,14 @@ SvelteKit 2 reads `src/env.ts` and `$app/env/private` only with the experimental
 
 ## Run the app
 
+Check types, then start the dev server:
+
 ```bash filename="Terminal"
+npm run check
 npm run dev
 ```
 
-Open [localhost:5173](http://localhost:5173). The page shows your Postgres version, confirming the connection:
+Open the URL `npm run dev` prints, usually [localhost:5173](http://localhost:5173). Vite picks the next free port if 5173 is taken. The page shows your Postgres version, confirming the connection:
 
 ```text
 Database version
@@ -345,10 +348,10 @@ To skip `neon.ts`, use each service's own CLI commands, such as [`neon buckets c
 : `DATABASE_URL` isn't declared in `src/env.ts`. Declare it as shown in [Declare the connection string](#declare-the-connection-string). In `npm run dev`, the same mistake shows `Internal Error`. With the Neon serverless driver, the terminal also logs `NeonDbError: Wrong URL scheme`.
 
 `NeonDbError: Database connection string provided to neon() is not a valid URL`
-: With the Neon serverless driver, `DATABASE_URL` is declared but empty. Check the value in `.env.local`, or run `neon env pull`.
+: With the Neon serverless driver, `DATABASE_URL` is declared but empty. Check the value in your env file, or run `neon env pull`.
 
 `env_invalid` error for `DATABASE_URL`: `Value is missing`
-: The build or the running app doesn't have `DATABASE_URL` set. Set it in your host or CI environment. Locally, check that `.env.local` has it, or run `neon env pull`.
+: The build or the running app doesn't have `DATABASE_URL` set. Set it in your host or CI environment. Locally, check that your env file has it, or run `neon env pull`.
 
 `Cannot import #lib/server/db.ts into code that runs in the browser, as this could leak sensitive information`
 : A component or other browser code imports the database client. Load data in `+page.server.ts` and pass it to the page as `data`. `npm run build` fails with this error. In `npm run dev`, the server still renders the page, but the browser's request for the module fails with `server_only_import`, and the terminal logs the same error.
