@@ -239,7 +239,7 @@ What changes:
 - Browser sessions from before you enforced SSO keep working for 72 hours. New sessions must use SSO right away. Neon doesn't warn members when the 72 hours are ending, so tell them before you enforce SSO.
 - Personal API keys stop working for the organization at once, with no grace period, until they're authorized. See [API keys and the Neon CLI](#api-keys-and-the-neon-cli).
 - Members without an SSO session see **Single sign-on required** when they open the organization, with a **Sign in with SSO** button.
-- Manual invites are blocked.
+- Manual invites are blocked. To add someone, assign them to the app in your IdP. They join as an Editor at their first SSO sign-in. Your IdP's app assignments decide who can join.
 - The protocol, metadata, and other IdP settings are locked until you stop enforcing. The display name, session age, and programmatic access settings stay editable.
 
 To make members sign in again regularly, set **Maximum session age (hours)** in **Enterprise SSO**. When a member's SSO session is older than that, Neon sends them back through your IdP. Leave it blank for no limit.
@@ -261,7 +261,7 @@ To switch, go to **Settings** > **SCIM provisioning** > **Membership mode** and 
 Switching removes every member your IdP hasn't sent to Neon, including people you invited manually. Push all your users and groups first, and check who would be removed before you confirm.
 </Admonition>
 
-You can switch back to manual at any time. Members who were removed don't come back on their own: invite them again. To stop enforcing SSO, switch back to manual first.
+You can switch back to manual at any time. Members who were removed don't come back on their own. If they're assigned to the app in your IdP, they rejoin as Editors at their next SSO sign-in. To stop enforcing SSO, switch back to manual first. You can invite people again once SSO isn't enforced.
 
 ## API keys and the Neon CLI
 
@@ -294,7 +294,7 @@ When SSO is enforced, access through the Neon API and CLI follows the **Programm
 | **Single sign-on required**                                                                            | Click **Sign in with SSO**. Your session predates enforcement or is older than the maximum session age.                                                                                   |
 | "This organization requires a one-time SSO authorization…"                                             | Authorize the API key for the organization. See [API keys and the Neon CLI](#api-keys-and-the-neon-cli).                                                                                  |
 | "This organization does not allow personal or OAuth tokens…"                                           | The organization allows only organization API keys.                                                                                                                                       |
-| An invite fails with "manual invites are disabled" or "membership is managed by its identity provider" | Add the person in your IdP instead.                                                                                                                                                       |
+| An invite fails with "manual invites are disabled" or "membership is managed by its identity provider" | Assign the person to the app in your IdP. They join when they first sign in through SSO.                                                                                                  |
 
 For any Okta error, check Okta's **Reports** > **System Log** for the reason. In Entra, check the app's **Sign-in logs**.
 
