@@ -28,7 +28,7 @@ redirectFrom:
 </DocsList>
 </InfoBlock>
 
-In this tutorial, you'll clone and modify up a sample React.js note-taking app to demonstrate how Postgres Row-Level Security (RLS) provides an additional security layer beyond application logic. The app integrates with a Neon database via the Neon Data API.
+In this tutorial, you'll clone and modify a sample React.js note-taking app to demonstrate how Postgres Row-Level Security (RLS) provides an additional security layer beyond application logic. The app integrates with a Neon database via the Neon Data API.
 
 For authentication, **Managed Better Auth** issues a unique `userId` in a JSON Web Token (JWT) for each user. This `userId` is passed to Postgres, where RLS policies enforce access control directly at the database level. This setup ensures each user can only interact with their own **notes**, even if application-side logic fails. While this example uses Managed Better Auth, any JWT-issuing provider like Auth0 or Clerk can be used.
 
@@ -44,6 +44,8 @@ To get started, you'll need:
   ```
 
   Follow the instructions in the README to set up Neon Data API with Managed Better Auth, configure environment variables, and run database migrations.
+
+  The migration grants the `authenticated` and `anonymous` roles access to the tables. Without these grants, the Data API returns `permission denied for table notes`.
 
   > This sample app uses Managed Better Auth, so select **Managed Better Auth** when enabling the Data API. If you're using a different auth provider, see [Custom authentication providers](/docs/data-api/custom-authentication-providers).
 
@@ -153,7 +155,7 @@ sql`(select auth.user_id() = owner_id)`
 
 which is a SQL expression that checks if the `owner_id` of a row matches the `auth.user_id()` from the JWT.
 
-This policy ensures that read (`SELECT`) queries only returns rows where the `owner_id` matches the `auth.user_id()` derived from the authenticated user’s JWT. This means that users can only access their own notes. By enforcing this rule at the database level, the RLS policy provides an extra layer of security beyond the application layer.
+This policy ensures that read (`SELECT`) queries only return rows where the `owner_id` matches the `auth.user_id()` derived from the authenticated user's JWT. This means that users can only access their own notes. By enforcing this rule at the database level, the RLS policy provides an extra layer of security beyond the application layer.
 
 ## Remove access control from application code
 
@@ -190,7 +192,7 @@ Check your two open Notes users, reload the page, and see what happens:
 
 ![isolated notes](/docs/guides/data_api_demo_isolated_notes.png)
 
-Nothing happens. RLS is still in place, and isolation is maintained: no data leaks. 💪
+Nothing happens. RLS is still in place, and isolation is maintained: no data leaks.
 
 ## Disable RLS
 
@@ -203,13 +205,13 @@ ALTER TABLE public.paragraphs DISABLE ROW LEVEL SECURITY;
 
 ![data leak](/docs/guides/data_api_demo_data_leak.png)
 
-Bob can see all of Alice's notes and paragraphs within them, including the 'inquisitive cyan' note where her birthday party is planned. Alice now knows about her birthday party. Disabling RLS removed all RLS policies, including the `crudPolicy` on `read` queries that helped enforce data isolation. Birthday surprise is _ruined_.
+Bob can see all of Alice's notes and paragraphs within them, including the 'inquisitive cyan' note where her birthday party is planned. Alice now knows about her birthday party. Disabling RLS turns off enforcement of every policy, including the `crudPolicy` on `read` queries that helped enforce data isolation. The policies stay in the database, but Postgres no longer checks them. Birthday surprise is _ruined_.
 
 ### Re-enable RLS
 
-Now, let's re-enable RLS from Neon:
+Now, let's re-enable RLS from the SQL Editor:
 
-```bash
+```sql shouldWrap
 ALTER TABLE public.notes ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.paragraphs ENABLE ROW LEVEL SECURITY;
 ```
@@ -247,11 +249,11 @@ function useNotes() {
 
 </Steps>
 
-## Appendix: Understanding RLS policies in Drizzle
+## Understanding RLS policies in Drizzle
 
-In this section, we provide an overview of the Row-Level Security (RLS) policies implemented in the Notes application, found in the `schema.ts` file.
+This section gives an overview of the Row-Level Security (RLS) policies implemented in the Notes application, found in the `schema.ts` file.
 
-These policies are written in Drizzle, which now supports defining RLS policies alongside your schema in code. Writing RLS policies can be complex, so we worked with Drizzle to develop the `crudPolicy` function – a wrapper that works with Neon’s predefined roles (`authenticated` and `anonymous`), letting you consolidate all policies that apply to a given role into a single function. See [Row-level Security](https://orm.drizzle.team/docs/rls) in the Drizzle docs for details.
+These policies are written in Drizzle, which now supports defining RLS policies alongside your schema in code. Writing RLS policies can be complex, so we worked with Drizzle to develop the `crudPolicy` function, a wrapper that works with Neon's predefined roles (`authenticated` and `anonymous`), letting you consolidate all policies that apply to a given role into a single function. See [Row-level Security](https://orm.drizzle.team/docs/rls) in the Drizzle docs for details.
 
 For the `notes` table, the `crudPolicy` function defines RLS policies for the `authenticated` role, which is assigned to users who have successfully logged in. The `read` and `modify` parameters use the `authUid` helper function to ensure that users can only read or modify rows where the `ownerId` matches their own `auth.user_id()` from the JWT.
 
@@ -279,7 +281,7 @@ These policies together enforce strict access control at the database level, ens
 
 ### Implementing Share Notes functionality
 
-In the `schema.ts` file, you can find additional RLS policies than defined above, which support the "Share Notes" functionality in the application. This feature allows users to share specific notes with others by setting the `shared` column to `true`. The RLS policies for the `notes` table include a condition that permits read access to notes marked as shared, regardless of ownership. The final RLS policy for the `notes` and `paragraphs` tables looks like this:
+In the `schema.ts` file, you can find more RLS policies than defined above, which support the "Share Notes" functionality in the application. This feature allows users to share specific notes with others by setting the `shared` column to `true`. The RLS policies for the `notes` table include a condition that permits read access to notes marked as shared, regardless of ownership. The final RLS policy for the `notes` and `paragraphs` tables looks like this:
 
 ```typescript shouldWrap
 ...schema definitions...

@@ -103,13 +103,13 @@ Date-time values are automatically rounded according to the specified granularit
 
 ## Example request and response
 
-Replace `$ORG_ID` and `$NEON_API_KEY` with your organization ID and API key, then run the following to retrieve daily metrics for a date range.
+Replace `$ORG_ID` and `$NEON_API_KEY` with your organization ID and API key, then run the following to retrieve daily metrics for a date range. With `granularity=daily`, the `from` and `to` values must fall within the last 60 days.
 
 ```bash shouldWrap
 curl --request GET \
-  --url 'https://console.neon.tech/api/v2/consumption_history/v2/projects?from=2026-02-01T00:00:00Z&to=2026-02-06T00:00:00Z&granularity=daily&org_id=$ORG_ID&metrics=compute_unit_seconds,root_branch_bytes_month,child_branch_bytes_month,instant_restore_bytes_month,snapshot_storage_bytes_month,public_network_transfer_bytes,private_network_transfer_bytes,extra_branches_month,functions_active_capacity_microseconds,functions_waiting_capacity_microseconds,functions_invocations,functions_egress_bytes' \
+  --url "https://console.neon.tech/api/v2/consumption_history/v2/projects?from=2026-10-01T00:00:00Z&to=2026-10-06T00:00:00Z&granularity=daily&org_id=$ORG_ID&metrics=compute_unit_seconds,root_branch_bytes_month,child_branch_bytes_month,instant_restore_bytes_month,snapshot_storage_bytes_month,public_network_transfer_bytes,private_network_transfer_bytes,extra_branches_month,functions_active_capacity_microseconds,functions_waiting_capacity_microseconds,functions_invocations,functions_egress_bytes" \
   --header 'Accept: application/json' \
-  --header 'Authorization: Bearer $NEON_API_KEY' | jq
+  --header "Authorization: Bearer $NEON_API_KEY" | jq
 ```
 
 <Admonition type="note">
@@ -207,15 +207,15 @@ The following sections cover paging through many projects, polling behavior, and
 
 ## Pagination
 
-The project consumption metrics endpoint uses cursor-based pagination. The response includes a `pagination` object with a `cursor` value (the project ID of the last project in the list). To get the next page, send another request with that `cursor` in the query string and the same `from`, `to`, `granularity`, `org_id`, and `metrics` as your first request.
+The project consumption metrics endpoint uses cursor-based pagination. The response includes a `pagination` object with a `cursor` value. Pass that value as-is; don't build it from project IDs. To get the next page, send another request with that `cursor` in the query string and the same `from`, `to`, `granularity`, `org_id`, and `metrics` as your first request.
 
 Example request for the next page (using the `cursor` from the previous response):
 
 ```bash shouldWrap
 curl --request GET \
-     --url 'https://console.neon.tech/api/v2/consumption_history/v2/projects?cursor=divine-tree-77657175&limit=10&from=2024-06-30T00%3A00%3A00Z&to=2024-07-02T00%3A00%3A00Z&granularity=daily&org_id=$ORG_ID&metrics=compute_unit_seconds,root_branch_bytes_month,child_branch_bytes_month,instant_restore_bytes_month,snapshot_storage_bytes_month,public_network_transfer_bytes,private_network_transfer_bytes,extra_branches_month,functions_active_capacity_microseconds,functions_waiting_capacity_microseconds,functions_invocations,functions_egress_bytes' \
+     --url "https://console.neon.tech/api/v2/consumption_history/v2/projects?cursor=divine-tree-77657175&limit=10&from=2026-10-01T00%3A00%3A00Z&to=2026-10-06T00%3A00%3A00Z&granularity=daily&org_id=$ORG_ID&metrics=compute_unit_seconds,root_branch_bytes_month,child_branch_bytes_month,instant_restore_bytes_month,snapshot_storage_bytes_month,public_network_transfer_bytes,private_network_transfer_bytes,extra_branches_month,functions_active_capacity_microseconds,functions_waiting_capacity_microseconds,functions_invocations,functions_egress_bytes" \
      --header 'accept: application/json' \
-     --header 'authorization: Bearer $NEON_API_KEY'
+     --header "authorization: Bearer $NEON_API_KEY"
 ```
 
 In the URL above, the **`cursor`** parameter is `cursor=divine-tree-77657175`. Replace that value with the `cursor` from your previous response's `pagination` object.
@@ -234,6 +234,7 @@ The [project metrics endpoint](#request-overview) on this page returns project u
 
 Common error responses you may encounter:
 
+- **400 Bad Request**: The request is invalid. For example, `from` is before March 1, 2024, or the endpoint doesn't support a metric (such as `extra_branches_month` on the branch endpoint).
 - **403 Forbidden**: This endpoint is not available for your plan. It is only supported with Launch, Scale, Agent, and Enterprise plan accounts.
 - **404 Not Found**: Account is not a member of the organization specified by `org_id`.
 - **406 Not Acceptable**: The specified date-time range is outside the boundaries of the specified granularity. Adjust your `from` and `to` values or select a different `granularity`.
@@ -291,8 +292,8 @@ Ten of the 12 project metrics are available on this endpoint:
 
 ```bash shouldWrap
 curl --request GET \
-  --url 'https://console.neon.tech/api/v2/consumption_history/v2/branches?project_ids=$PROJECT_ID&org_id=$ORG_ID&from=2026-05-01T00:00:00Z&to=2026-05-29T00:00:00Z&granularity=daily&metrics=compute_unit_seconds,root_branch_bytes_month,child_branch_bytes_month' \
-  --header 'Authorization: Bearer $NEON_API_KEY' \
+  --url "https://console.neon.tech/api/v2/consumption_history/v2/branches?project_ids=$PROJECT_ID&org_id=$ORG_ID&from=2026-10-01T00:00:00Z&to=2026-10-06T00:00:00Z&granularity=daily&metrics=compute_unit_seconds,root_branch_bytes_month,child_branch_bytes_month" \
+  --header "Authorization: Bearer $NEON_API_KEY" \
   --header 'Accept: application/json' | jq
 ```
 

@@ -166,9 +166,9 @@ curl --request PATCH \
      --data '
 {
   "endpoint": {
-    "autoscaling_limit_min_cu": 25,
-    "autoscaling_limit_max_cu": 3,
-    "suspend_timeout_seconds": 604800,
+    "autoscaling_limit_min_cu": 0.5,
+    "autoscaling_limit_max_cu": 2,
+    "suspend_timeout_seconds": 300,
     "provisioner": "k8s-neonvm"
   }
 }
@@ -257,7 +257,7 @@ If your read replicas are falling behind, follow these steps to diagnose and res
    - `max_worker_processes`
 
 3. **Restart read-replica computes if configurations are misaligned**  
-   If the configurations are not aligned, restart your read-replica computes to automatically update their settings. For instructions, see [Restart a Compute](/docs/manage/endpoints#restart-a-compute).
+   If the configurations are not aligned, restart your read-replica computes to automatically update their settings. For instructions, see [Restart a compute](/docs/manage/computes#restart-a-compute).
 
    <Admonition type="tip">
    When increasing the size of your primary read-write compute, always restart associated read replicas to ensure their configurations remain aligned.

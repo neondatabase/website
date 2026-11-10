@@ -65,14 +65,14 @@ When you create a branch in Neon, it includes all Postgres databases and roles f
 
 This behavior is designed to prevent the exposure of passwords that could be used to access your protected branch. For example, if you have designated a production branch as protected, the automatic password change for child branches ensures that you can create child branches for development or testing without risking access to data on your production branch.
 
-Please note that resetting or restoring a child branch from a protected parent branch preserves passwords for matching Postgres roles on the child branch. Please refer to the feature notes below for more.
+Resetting or restoring a child branch from a protected parent branch preserves passwords for matching Postgres roles on the child branch. See the feature notes below for details.
 
 <Admonition type="important" title="Feature notes">
-- The "new password" feature for child branches was released on July, 31, 2024. If you have existing CI scripts that create branches from protected branches, please be aware that passwords for matching Postgres roles on those newly created branches will now differ. If you depend on those passwords being the same, you'll need to make adjustments to get the correct connection details for those branches.
+- The "new password" feature for child branches was released on July 31, 2024. If you have existing CI scripts that create branches from protected branches, please be aware that passwords for matching Postgres roles on those newly created branches will now differ. If you depend on those passwords being the same, you'll need to make adjustments to get the correct connection details for those branches.
     - After a branch is created, the up-to-date connection string is returned in the output of the [Create Branch GitHub Action](/docs/guides/branching-github-actions#create-branch-action).
     - The [Reset Branch GitHub Action](/docs/guides/branching-github-actions#reset-from-parent-action) also outputs connection string values, in case you are using this action in your workflows.
     - The Neon CLI supports a [connection-string](/docs/cli/connection-string) command for retrieving a branch's connection string.
-- Prior to September, 6, 2024, resetting or restoring a child branch from a protected parent branch restored passwords for matching Postgres roles on the child branch to those used on the protected parent branch. As of September, 6, 2024, passwords for matching Postgres roles on the child branch are preserved when resetting or restoring a child branch from a protected parent branch.
+- Before September 6, 2024, resetting or restoring a child branch from a protected parent branch restored passwords for matching Postgres roles on the child branch to those used on the protected parent branch. As of September 6, 2024, passwords for matching Postgres roles on the child branch are preserved when resetting or restoring a child branch from a protected parent branch.
 </Admonition>
 
 ## How to apply IP restrictions to protected branches
@@ -108,7 +108,7 @@ neon ip-allow add 203.0.113.0 203.0.113.1
 ID              wispy-haze-123456
 Name            wispy-haze-123456
 IP Addresses    203.0.113.0, 203.0.113.1
-Protected Only  false
+Protected Branches Only  false
 ```
 
 To apply an IP allowlist to protected branches only, you can use the `--protected-only` option:
@@ -127,13 +127,13 @@ neon ip-allow add 203.0.113.1 --protected-only false
 
 <TabItem>
 
-The [Create project](/docs/reference/api/projects/create-project) and [Update project](/docs/reference/api/projects/update-project) methods support **IP Allow** configuration. For example, the following API call configures **IP Allow** for an existing Neon project. Separate multiple entries with commas. Each entry must be quoted. You can set the `"protected_branches_only` option to `true` to apply the allowlist to protected branches only, or `false` to apply it to all branches in your Neon project.
+The [Create project](/docs/reference/api/projects/create-project) and [Update project](/docs/reference/api/projects/update-project) methods support **IP Allow** configuration. For example, the following API call configures **IP Allow** for an existing Neon project. Separate multiple entries with commas. Each entry must be quoted. You can set the `protected_branches_only` option to `true` to apply the allowlist to protected branches only, or `false` to apply it to all branches in your Neon project.
 
 ```bash
 curl -X PATCH \
      https://console.neon.tech/api/v2/projects/falling-salad-31638542 \
      -H 'accept: application/json' \
-     -H 'authorization: Bearer $NEON_API_KEY' \
+     -H "authorization: Bearer $NEON_API_KEY" \
      -H 'content-type: application/json' \
      -d '
 {
