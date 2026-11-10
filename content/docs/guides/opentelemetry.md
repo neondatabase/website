@@ -44,12 +44,12 @@ Data is sent for all computes in your Neon project. For example, if you have mul
 
 ### Neon metrics
 
-The integration exports a comprehensive set of metrics including:
+The integration exports these metrics:
 
-- **Connection counts** &#8212; Tracks active and idle database connections.
-- **Database size** &#8212; Monitors total size of all databases in bytes.
-- **Replication delay** &#8212; Measures replication lag in bytes and seconds.
-- **Compute metrics** &#8212; Includes CPU and memory usage statistics for your compute.
+- **Connection counts**: Tracks active and idle database connections.
+- **Database size**: Monitors total size of all databases in bytes.
+- **Replication delay**: Measures replication lag in bytes and seconds.
+- **Compute metrics**: Includes CPU and memory usage statistics for your compute.
 
 ### Postgres logs
 
@@ -80,8 +80,10 @@ For a cost-effective, open-source monitoring stack, you can set up the complete 
    ```bash
    git clone https://github.com/grafana/docker-otel-lgtm.git
    cd docker-otel-lgtm
-   docker compose up -d
+   ./run-lgtm.sh
    ```
+
+   The script runs the `grafana/otel-lgtm` image with Docker or Podman.
 
 This provides:
 
@@ -112,10 +114,13 @@ If you use New Relic, you'll need to sign up for an account and get your license
 
    <details>
    <summary>Create New Relic license key</summary>
+
    1. Click on your user menu in the bottom left corner.
    2. Select **API Keys** from the menu.
 
-   ![New Relic profile menu showing API Keys option](/docs/guides/new_relic_api_keys.png) 3. Click **Create a key** → choose **Ingest - License**. Copy the key immediately (you can't view it again later).
+   ![New Relic profile menu showing API Keys option](/docs/guides/new_relic_api_keys.png)
+
+   3. Click **Create a key** and choose **Ingest - License**. Copy the key immediately (you can't view it again later).
 
    ![New Relic API Keys page showing license key types](/docs/guides/new_relic_copy_key.png)
 
@@ -238,13 +243,13 @@ Your Neon data should start appearing in your observability platform within a fe
 
 1. **Access Grafana Explore**: Visit `http://localhost:3000` (admin/admin) or your Grafana Cloud Instance and navigate to **Explore**
 
-2. **Check metrics**: Select your **Prometheus** data source and use this query to check if data is flowing::
+2. **Check metrics**: Select your **Prometheus** data source and use this query to check if data is flowing:
 
    ```promql
    neon_connection_counts
    ```
 
-3. **Create dashboards**: You can visualize using [Grafana Drilldown apps](https://grafana.com/docs/grafana/latest/explore/simplified-exploration/) or use the dashboard JSON from [Grafana Cloud Documentation](/docs/guides/grafana-cloud#create-a-monitoring-dashboard)
+3. **Create dashboards**: You can visualize using [Grafana Drilldown apps](https://grafana.com/docs/grafana/latest/explore/simplified-exploration/) or use the dashboard JSON from [Grafana Cloud Documentation](/docs/guides/grafana-cloud#import-the-neon-dashboard)
 
 ### For New Relic users
 
@@ -310,7 +315,7 @@ Additionally, if you are setting up the OpenTelemetry integration for a project 
 
 ## Available metrics
 
-Neon exports a comprehensive set of metrics including system metrics (CPU, RAM), database metrics (connections, rows, deadlocks), and PgBouncer connection pooling metrics (client and server connections).
+Neon exports a set of metrics including system metrics (CPU, RAM), database metrics (connections, rows, deadlocks), and PgBouncer connection pooling metrics (client and server connections).
 
 For a complete list of all metrics and log fields exported by Neon, see the [Metrics and logs reference](/docs/reference/metrics-logs).
 
