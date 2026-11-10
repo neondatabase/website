@@ -57,11 +57,7 @@ curl -X POST "https://console.neon.tech/api/v2/projects/{project_id}/branches/{b
   -d '{"scopes": ["storage:read", "storage:write"], "principal_type": "user", "name": "my-app-credential"}'
 ```
 
-The `name` and `expires_at` fields are optional.
-
-<Admonition type="warning">
-`expires_at` is not currently enforced. A credential created with an `expires_at` value in the past still authenticates successfully. Don't rely on it for access control; revoke credentials explicitly instead. See [Revoking credentials](#revoking-credentials).
-</Admonition>
+The `name` and `expires_at` fields are optional. Set `expires_at` to an RFC 3339 timestamp between 1 minute and 365 days from now. Values outside that range return `400`. If you leave it out, the credential never expires. After it expires, S3 requests with the credential return `403 AccessDenied`. Rotating a credential keeps its expiry.
 
 The response includes these fields:
 

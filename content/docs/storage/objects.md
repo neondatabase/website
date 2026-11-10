@@ -338,6 +338,8 @@ curl -X DELETE \
 
 Generate a time-limited URL that allows a browser or unauthenticated client to upload or download a specific object, without exposing your credentials.
 
+In organizations that use [per-project permissions](/docs/manage/user-permissions#per-project-permissions), downloading objects or creating presigned URLs through the Neon Console or API requires the **Editor** role. Viewers can list buckets and objects but can't read object contents.
+
 **Presigned GET (download):**
 
 <CodeTabs labels={["Files SDK", "S3 Client", "Python"]}>

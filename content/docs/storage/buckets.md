@@ -73,6 +73,8 @@ aws s3api create-bucket \
 
 </CodeTabs>
 
+Creating a `public_read` bucket requires the project **Admin** role in organizations that use [per-project permissions](/docs/manage/user-permissions#per-project-permissions). Editors can create private buckets.
+
 To create a `public_read` bucket with neon:
 
 ```bash
