@@ -15,7 +15,7 @@ isDraft: false
 updatedOn: '2026-09-16T19:45:35.340Z'
 ---
 
-This guide describes how to replicate data from Supabase to Neon using native Postgres logical replication with Lakebase Postgres. The steps in this guide follow those described in [Replicate to another Postgres database using Logical Replication](https://supabase.com/docs/guides/database/postgres/setup-replication-external), in the _Supabase documentation_.
+This guide describes how to replicate data from Supabase to Neon using native Postgres logical replication. The steps in this guide follow those described in [Replicate to another Postgres database using Logical Replication](https://supabase.com/docs/guides/database/postgres/setup-replication-external), in the _Supabase documentation_.
 
 ## Prerequisites
 
@@ -104,11 +104,11 @@ Publications are a fundamental part of logical replication in Postgres. They def
 Defining specific tables lets you add or remove tables from the publication later, which you cannot do when creating publications with `FOR ALL TABLES`.
 </Admonition>
 
-For syntax details, see [CREATE PUBLICATION](https://www.postgresql.org/docs/current/sql-createpublication.html), in the PostgreSQL documentation.
+For syntax details, see [CREATE PUBLICATION](https://www.postgresql.org/docs/current/sql-createpublication.html), in the Postgres documentation.
 
 ## Prepare your Neon destination database
 
-This section describes how to prepare your Lakebase Postgres database (the subscriber) to receive replicated data from your Supabase Postgres instance.
+This section describes how to prepare your Neon database (the subscriber) to receive replicated data from your Supabase Postgres instance.
 
 ### Prepare your database schema
 
@@ -130,13 +130,13 @@ After creating a publication on the source database, you need to create a subscr
 
    ```sql shouldWrap
    CREATE SUBSCRIPTION my_subscription
-   CONNECTION 'postgresql://<supabase_connection_string>'
+   CONNECTION 'postgresql://[user]:[password]@[supabase_hostname]:5432/postgres'
    PUBLICATION my_publication;
    ```
 
    Replace the following placeholders in the statement:
    - `my_subscription`: A name you chose for the subscription.
-   - `postgresql://<supabase_connection_string>`: The **direct connection string** for your Supabase database, obtained with the IPv4 add-on enabled.
+   - `postgresql://[user]:[password]@[supabase_hostname]:5432/postgres`: The **direct connection string** for your Supabase database, obtained with the IPv4 add-on enabled. Replace the bracketed values with the ones from that string.
    - `my_publication`: The name of the publication you created on the Supabase database.
 
 3. Verify that the subscription was created in Neon by running the following query:
