@@ -74,24 +74,25 @@ Choose your preferred observability platform and follow the setup instructions:
 
 For a cost-effective, open-source monitoring stack, you can set up the complete LGTM stack (Loki for logs, Grafana for visualization, Tempo for traces, and Mimir for metrics) with OpenTelemetry integration.
 
+<Admonition type="important" title="Run the collector where Neon can reach it">
+Neon sends telemetry from its own servers, so the OpenTelemetry Collector must be reachable from the internet. A collector at `localhost` on your laptop won't receive any data. Run the stack on a server with a public address (for example, a cloud VM) and open port 4318 (HTTP) or 4317 (gRPC) to Neon, or expose a local collector through a tunnel. To try OpenTelemetry without hosting a collector, use [Grafana Cloud](#grafana-cloud) instead.
+</Admonition>
+
 **Quick setup with Docker:**
 
-1. **Clone and start the stack**:
-   ```bash
-   git clone https://github.com/grafana/docker-otel-lgtm.git
-   cd docker-otel-lgtm
-   ./run-lgtm.sh
-   ```
+On the server, start the `grafana/otel-lgtm` image, which bundles Grafana, the OpenTelemetry Collector, Prometheus/Mimir, Loki, and Tempo:
 
-   The script runs the `grafana/otel-lgtm` image with Docker or Podman.
+```bash
+docker run -p 3000:3000 -p 4317:4317 -p 4318:4318 --rm -ti grafana/otel-lgtm
+```
 
 This provides:
 
-- **Grafana** at http://localhost:3000 (admin/admin)
-- **OpenTelemetry Collector** at http://localhost:4318 (HTTP) and localhost:4317 (gRPC)
+- **Grafana** on port 3000 (sign in with admin/admin)
+- **OpenTelemetry Collector** on port 4318 (HTTP) and port 4317 (gRPC)
 - **Prometheus/Mimir**, **Loki**, and **Tempo** for complete observability
 
-For detailed configuration, see the [docker-otel-lgtm documentation](https://github.com/grafana/docker-otel-lgtm).
+Grafana provides this image for development, demo, and testing environments. Grafana's [docker-otel-lgtm repository](https://github.com/grafana/docker-otel-lgtm) also includes [`run-lgtm.sh`](https://github.com/grafana/docker-otel-lgtm/blob/main/run-lgtm.sh), a launcher script that runs the same image with Docker or Podman and keeps data in local folders between restarts. To use it, clone the repository and run `./run-lgtm.sh` from its root. For Windows, Apple Container, and other options, see the repository's README.
 
 ### Grafana Cloud
 
@@ -155,8 +156,7 @@ You can enable either or both options based on your monitoring needs.
 2. **Enter your Endpoint URL** based on your platform:
 
    **For Grafana OSS (docker-otel-lgtm)**:
-   - `http://localhost:4318` (if running locally)
-   - `http://your-server-ip:4318` (if running on a remote server)
+   - `http://your-server-ip:4318`, where `your-server-ip` is the public address or hostname of the server running the stack. Don't use `localhost`: Neon's servers send the data, so `localhost` doesn't point to your machine.
 
    **For Grafana Cloud**:
    - Use your Grafana Cloud OTLP endpoint (typically `https://otlp-gateway-{region}.grafana.net/otlp`)
