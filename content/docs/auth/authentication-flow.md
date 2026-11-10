@@ -10,7 +10,7 @@ summary: >-
   Security policies via the Data API. All auth state lands directly in your
   Neon database with no sync delay, and each branch holds isolated auth data.
 enableTableOfContents: true
-updatedOn: '2026-09-16T15:38:57.808Z'
+updatedOn: '2026-11-05T01:12:31.897Z'
 ---
 
 This guide explains the authentication flow: how sign-in works from SDK call to session creation.
@@ -50,7 +50,7 @@ const { data, error } = await client.auth.signIn.email({
 });
 ```
 
-The SDK posts to `{NEON_AUTH_URL}/auth/sign-in/email`. The Auth service validates credentials against `neon_auth.account`, creates a session in `neon_auth.session`, and returns the session cookie with user data.
+The SDK posts to `{NEON_AUTH_BASE_URL}/sign-in/email`. The Auth service validates credentials against `neon_auth.account`, creates a session in `neon_auth.session`, and returns the session cookie with user data.
 
 **Response you receive:**
 
@@ -74,18 +74,18 @@ The SDK posts to `{NEON_AUTH_URL}/auth/sign-in/email`. The Auth service validate
 
 ## Session cookie is set
 
-The Auth service sets an HTTP-only cookie (`__Secure-neonauth.session_token`) in your browser. This cookie:
+The Auth service sets an HTTP-only cookie (`__Secure-neon-auth.session_token`) in your browser. This cookie:
 
 - Contains an opaque session token (not a JWT)
 - Is automatically sent with every request to the Auth API
 - Is secure (HTTPS only, HttpOnly, SameSite=None)
 - Is managed entirely by the SDK; you never touch it
 
-**Where to see it:** Open DevTools → Application → Cookies → look for `__Secure-neonauth.session_token`
+**Where to see it:** Open DevTools → Application → Cookies → look for `__Secure-neon-auth.session_token`
 
 ## JWT token is retrieved
 
-The SDK automatically retrieves a JWT token and stores it in `session.access_token`. You don't need to call `/auth/token` separately; the SDK handles this behind the scenes.
+The SDK automatically retrieves a JWT token and stores it in `session.access_token`. You don't need to call the `/token` endpoint separately; the SDK handles this behind the scenes.
 
 **What's in the JWT:**
 
@@ -132,7 +132,7 @@ const { data, error } = await client.auth.signUp.email({
 });
 ```
 
-The SDK posts to `{NEON_AUTH_URL}/auth/sign-up/email`. The Auth service creates a new row in `neon_auth.user`, stores hashed credentials in `neon_auth.account`, and returns user data. If email verification is required, it creates a verification token in `neon_auth.verification` and may delay session creation until verification.
+The SDK posts to `{NEON_AUTH_BASE_URL}/sign-up/email`. The Auth service creates a new row in `neon_auth.user`, stores hashed credentials in `neon_auth.account`, and returns user data. If email verification is required, it creates a verification token in `neon_auth.verification` and may delay session creation until verification.
 
 <Admonition type="note">
 By default, anyone can sign up for your application. To add an additional verification layer, enable email verification (see [Email Verification](/docs/auth/guides/email-verification)). Built-in signup restrictions are coming soon.

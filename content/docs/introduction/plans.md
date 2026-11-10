@@ -24,7 +24,8 @@ redirectFrom:
   - /docs/introduction/limits
   - /docs/introduction/pricing-estimation-guide
   - /docs/introduction/billing-sample
-updatedOn: '2026-10-23T18:34:18.407Z'
+  - /docs/introduction/pricing
+updatedOn: '2026-11-04T20:10:08.844Z'
 ---
 
 Neon offers plans to support you at every stage, from your first prototype to production at scale.
@@ -49,18 +50,19 @@ For AI agent platforms that provision thousands of databases, Neon offers an **A
 | [Compute](#compute)                                   | 100 CU-hours/project                                               | $0.106/CU-hour                             | $0.222/CU-hour                                                                                    |
 | [Autoscaling](#autoscaling)                           | Up to 2 CU (8 GB RAM)                                              | Up to 16 CU (64 GB RAM)                    | Up to 16 CU autoscaling, or fixed sizes up to 56 CU (224 GB RAM)                                  |
 | [Scale to zero](#scale-to-zero)                       | After 5 min                                                        | After 5 min, can be disabled               | Configurable (1 minute to always on)                                                              |
+| [Read replicas](#read-replicas)                       | 3/project                                                          | 6/branch                                   | 6/branch                                                                                          |
 | [Storage](#storage)                                   | 1 GB/project, 20 GB account total                                  | $0.35/GB-month                             | $0.35/GB-month                                                                                    |
 | [Public network transfer](#public-network-transfer)   | 5 GB per project included                                          | 500 GB per project included, then $0.10/GB | 500 GB per project included, then $0.10/GB                                                        |
 | [Monitoring](#monitoring)                             | 1 day                                                              | 3 days                                     | 14 days                                                                                           |
 | [Metrics/logs export](#metricslogs-export)            | Not available                                                      | Not available                              | ✅                                                                                                |
 | [Spending notifications](#spending-notifications)     | Not available                                                      | ✅                                         | ✅                                                                                                |
-| [Instant restore](#instant-restore)                   | Not available                                                      | $0.20/GB-month                             | $0.20/GB-month                                                                                    |
+| [Instant restore](#instant-restore)                   | No charge, up to 6 hours                                           | $0.20/GB-month                             | $0.20/GB-month                                                                                    |
 | [History window](#history-window)                     | 6 hours, up to 1 GB of changes                                     | Up to 7 days                               | Up to 30 days                                                                                     |
 | [Snapshots](#snapshots)                               | 1 manual snapshot                                                  | 100 manual snapshots, $0.09/GB-month       | 100 manual snapshots, $0.09/GB-month                                                              |
 | [Auth](#auth)                                         | Up to 60k MAU/project                                              | Up to 1M MAU/project                       | Up to 1M MAU/project                                                                              |
 | [Object Storage](#object-storage)                     | 5 GB/project                                                       | $0.023/GB-month                            | $0.023/GB-month                                                                                   |
 | [Functions](#functions)                               | 10 active / 400 waiting Capacity-Hours, 1M invocations per project | $0.10/$0.025/Capacity-Hour, $0.60/M        | $0.12/$0.03/Capacity-Hour, $0.60/M                                                                |
-| [AI Gateway](#ai-gateway)                             | Not available                                                      | Prepaid credits                            | Prepaid credits                                                                                   |
+| [AI Gateway](#ai-gateway)                             | Prepaid credits                                                    | Prepaid credits                            | Prepaid credits                                                                                   |
 | [Data API](#data-api)                                 | No separate charge                                                 | No separate charge                         | No separate charge                                                                                |
 | [Realtime](#realtime)                                 | Free during beta                                                   | Free during beta                           | Free during beta                                                                                  |
 | [Private network transfer](#private-network-transfer) | Not available                                                      | Not available                              | $0.01/GB                                                                                          |
@@ -119,7 +121,7 @@ Postgres objects (databases, schemas, tables, records, indexes, roles) are creat
 
 You can create [child branches](/docs/reference/glossary#child-branch) for testing, previews, or development.
 
-Included per plan:
+Included per plan, counting the root branch:
 
 - **Free**: 10 branches/project
 - **Launch**: 10 branches/project
@@ -213,6 +215,12 @@ Suspends computes after inactivity.
 - **Free**: 5 min inactivity; cannot disable
 - **Launch**: 5 min inactivity; can disable
 - **Scale**: Fully configurable; 1 minute to always on
+
+### Read replicas
+
+[Read replicas](/docs/introduction/read-replicas) are read-only computes that serve reads from the same storage as your branch's primary compute. Each read replica is billed as compute.
+
+All plans are limited to 6 read replicas per branch. The Free plan is also limited to 3 read replica computes per project, and the [Agent plan](/docs/introduction/agent-plan) allows up to 3 read replicas per project.
 
 ### Storage
 
@@ -379,7 +387,7 @@ See [Neon Functions](/docs/compute/functions/overview) for what's included and c
 
 ### AI Gateway
 
-Neon AI Gateway provides access to open-weight and foundation models from multiple providers through a single Neon credential. It's available on paid plans (Launch and Scale). Any paid customer with prepaid credits can use every model in the catalog; see [Model access](/docs/ai-gateway/models#model-access) for details.
+Neon AI Gateway provides access to open-weight and foundation models from multiple providers through a single Neon credential. It's available on all plans, including Free. On the Free plan, you add a payment card and buy prepaid credits without upgrading. Any account with prepaid credits can use every model in the catalog; see [Model access](/docs/ai-gateway/models#model-access) for details.
 
 Prices match each provider's published list prices, with no additional markup, and draw down a prepaid credit balance you buy from the **Billing** page in the Neon Console.
 
@@ -654,7 +662,7 @@ For more detailed strategies, see our [Cost optimization](/docs/introduction/cos
 </FaqItem>
 
 <FaqItem question="Do you offer credits for startups?">
-Yes, venture-backed startups may apply for the Neon Startup Program. Learn more: [Startup Program](/startup)
+Yes, venture-backed startups may apply for the Neon Startup Program. Learn more: [Startup Program](/startups)
 </FaqItem>
 
 <FaqItem question="How is storage charged for snapshots?">

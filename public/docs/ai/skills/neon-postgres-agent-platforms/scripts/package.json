@@ -33,7 +33,7 @@
     "auth-users": "npm run build && node dist/scripts/auth-users.js"
   },
   "dependencies": {
-    "@neon/sdk": "^0.2.0",
+    "@neon/sdk": "^7.10.0",
     "dotenv": "^16.5.0"
   },
   "devDependencies": {

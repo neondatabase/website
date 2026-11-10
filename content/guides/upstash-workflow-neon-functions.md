@@ -84,7 +84,7 @@ sequenceDiagram
 Before you start, make sure you have:
 
 1. **Node.js**: Version 22 or later (v24 recommended). Download from [nodejs.org](https://nodejs.org/).
-2. **Neon account on a paid plan**: Sign up at [console.neon.tech](https://console.neon.tech/signup). The [Neon AI Gateway](/docs/ai-gateway/overview) is available on the Launch and Scale plans with [prepaid credits](/docs/ai-gateway/prepaid-credits), so the welcome-message step needs a paid plan.
+2. **Neon account with AI Gateway credits**: Sign up at [console.neon.tech](https://console.neon.tech/signup). The [Neon AI Gateway](/docs/ai-gateway/overview) needs [prepaid credits](/docs/ai-gateway/prepaid-credits), which you can buy on any plan, including Free, so the welcome-message step needs credits.
 3. **Neon CLI**: Installed globally (`npm i -g neon@latest`) and authenticated (`neon auth`). See the [Neon CLI Quickstart](/docs/cli/quickstart) for details.
 4. **Upstash account**: Sign up for a free account at [console.upstash.com](https://console.upstash.com).
 
@@ -128,11 +128,11 @@ Plugin  neon-postgres
 ✔ Install the Neon plugin into these agents? … yes
 
 Plugins
-Scope    Plugin         Agent        Status
-project  neon-postgres  claude-code  installed
-project  neon-postgres  codex        installed
-project  neon-postgres  cursor       installed
-INFO: Installed the Neon plugin (project).
+Scope  Plugin         Agent        Status
+user   neon-postgres  claude-code  installed
+user   neon-postgres  codex        installed
+user   neon-postgres  cursor       installed
+INFO: Installed the Neon plugin (user).
 ✔ Link this project to a Neon project now? … yes
 INFO: Linking organization MyOrg (org-example-12345678).
 ✔ Which project would you like to link? › ＋ Create new project…
@@ -144,7 +144,7 @@ Linked ~/neon-upstash-workflow/.neon:
   projectId: cool-darkness-12345678
   branch:    main
 
-INFO: Pulled 3 Neon variables into ~/neon-upstash-workflow/.env.local: DATABASE_URL, DATABASE_URL_UNPOOLED, NEON_BRANCH
+INFO: Pulled 5 Neon variables into ~/neon-upstash-workflow/.env.local: DATABASE_URL, DATABASE_URL_UNPOOLED, NEON_BRANCH, NEON_BRANCH_ID, NEON_FUNCTION_HOST_SUFFIX
 ✔ Create neon.ts to manage this project's Neon setup as code? … yes
 INFO: Setting up neon.ts…
 ✔ Which Neon services should neon.ts declare? (space to toggle, enter to confirm) › Functions, AI Gateway
@@ -153,7 +153,7 @@ INFO: Created hello.ts — the source of the hello function.
 INFO: Installing @neon/config, @neon/env with npm…
 INFO: Next: edit neon.ts, then run `neon config plan` to preview and `neon config apply`.
 INFO: Refreshing Neon env vars…
-INFO: Pulled 6 Neon variables into ~/neon-upstash-workflow/.env.local: DATABASE_URL, DATABASE_URL_UNPOOLED, NEON_BRANCH, NEON_AI_GATEWAY_TOKEN, NEON_AI_GATEWAY_BASE_URL, NEON_FUNCTION_HELLO_BASE_URL
+INFO: Pulled 7 Neon variables into ~/neon-upstash-workflow/.env.local: DATABASE_URL, DATABASE_URL_UNPOOLED, NEON_BRANCH, NEON_BRANCH_ID, NEON_FUNCTION_HOST_SUFFIX, NEON_AI_GATEWAY_TOKEN, NEON_AI_GATEWAY_BASE_URL
 
 Neon setup complete.
 --------------------
@@ -376,7 +376,7 @@ The Hono app exposes two routes:
 - **`/api/workflow`**: The workflow endpoint that QStash calls once per step. It delegates to the `workflowApp` defined in [`src/workflow.ts`](#define-the-workflow-endpoint).
 - **`/api/signup`**: The trigger route that starts a new workflow run.
 
-The trigger route builds the callback URL it hands to QStash from the incoming request, so it always points at the function that received the signup: your public function URL in production, or `http://localhost:8787` under `neon dev`. The `NEON_FUNCTION_<SLUG>_BASE_URL` variables that `neon env pull` writes to `.env.local` are local-only and aren't injected into a deployed function, so don't read the callback URL from them. The `QSTASH_*` credentials you declare in `neon.ts` are injected into the function's environment at deploy time, and the Upstash SDK reads them automatically.
+The trigger route builds the callback URL it hands to QStash from the incoming request, so it always points at the function that received the signup: your public function URL in production, or `http://localhost:8787` under `neon dev`. The `QSTASH_*` credentials you declare in `neon.ts` are injected into the function's environment at deploy time, and the Upstash SDK reads them automatically.
 
 ## Configure Upstash credentials
 
@@ -408,10 +408,10 @@ export const config = defineConfig({
       name: "Upstash Workflow Endpoint",
       source: "./index.ts",
       env: {
-        QSTASH_URL: process.env.QSTASH_URL!,
-        QSTASH_TOKEN: process.env.QSTASH_TOKEN!,
-        QSTASH_CURRENT_SIGNING_KEY: process.env.QSTASH_CURRENT_SIGNING_KEY!,
-        QSTASH_NEXT_SIGNING_KEY: process.env.QSTASH_NEXT_SIGNING_KEY!,
+        QSTASH_URL: { value: process.env.QSTASH_URL, required: true },
+        QSTASH_TOKEN: { value: process.env.QSTASH_TOKEN, required: true },
+        QSTASH_CURRENT_SIGNING_KEY: { value: process.env.QSTASH_CURRENT_SIGNING_KEY, required: true },
+        QSTASH_NEXT_SIGNING_KEY: { value: process.env.QSTASH_NEXT_SIGNING_KEY, required: true },
       },
     }
   },

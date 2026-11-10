@@ -102,7 +102,7 @@ POST /api/v2/projects/{project_id}/branches/{branch_id}/snapshot
 ```bash
 curl --request POST \
      --url 'https://console.neon.tech/api/v2/projects/{project_id}/branches/{branch_id}/snapshot?name=version-session-1&expires_at=2025-08-13T00:00:00Z' \
-     --header 'authorization: Bearer $NEON_API_KEY'
+     --header "authorization: Bearer $NEON_API_KEY"
 ```
 
 **Response:** The JSON body includes a `snapshot` object. It may include optional **`full_size`** and **`diff_size`** (bytes) for storage size; the same fields appear when you [list](/docs/reference/api/snapshots/list-snapshots) or [update](/docs/reference/api/snapshots/update-snapshot) snapshots. See [Snapshot size fields in API responses](/docs/guides/backup-restore#snapshot-size-fields-in-api-responses).

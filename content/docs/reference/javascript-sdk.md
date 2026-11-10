@@ -13,6 +13,8 @@ summary: >-
   (Supabase-compatible migration path).
 enableTableOfContents: true
 layout: wide
+redirectFrom:
+  - /docs/auth/reference/javascript-sdk
 updatedOn: '2026-08-31T17:42:21.786Z'
 ---
 
@@ -171,7 +173,7 @@ console.log('User created:', result.data.user)
 - Session tokens are cached automatically
 - Authentication state syncs across browser tabs
 
-### Parameters
+### Parameters (#parameters-2)
 
 <details>
 <summary>View parameters</summary>
@@ -214,7 +216,7 @@ Sign in with an OAuth provider like Google, GitHub, etc.
 - User is redirected back after authorization
 - Session is created automatically
 
-### Parameters
+### Parameters (#parameters-3)
 
 <details>
 <summary>View parameters</summary>
@@ -307,7 +309,7 @@ console.log('No active session')
 
 Note: Password updates require password reset flow for security.
 
-### Parameters
+### Parameters (#parameters-4)
 
 <details>
 <summary>View parameters</summary>
@@ -337,7 +339,7 @@ const { data, error } = await client.auth.updateUser({
 Sends an OTP (one-time password) code to the user's email for sign-in.
 The user must then call `signIn.emailOtp()` with the received code.
 
-### Parameters
+### Parameters (#parameters-5)
 
 <details>
 <summary>View parameters</summary>
@@ -373,7 +375,7 @@ console.error('Failed to send OTP:', error.message)
 Signs in a user using an OTP code received via email.
 First call `emailOtp.sendVerificationOtp()` to send the code.
 
-### Parameters
+### Parameters (#parameters-6)
 
 <details>
 <summary>View parameters</summary>
@@ -411,7 +413,7 @@ console.log('Signed in:', data.user.email)
 Verifies a user's email address using an OTP code sent during signup.
 This is typically used after `signUp.email()` when email verification is required.
 
-### Parameters
+### Parameters (#parameters-7)
 
 <details>
 <summary>View parameters</summary>
@@ -449,7 +451,7 @@ console.log('Email verified successfully')
 Checks if an OTP code is valid without completing the verification flow.
 Useful for password reset flows where you need to verify the code before allowing password change.
 
-### Parameters
+### Parameters (#parameters-8)
 
 <details>
 <summary>View parameters</summary>
@@ -486,7 +488,7 @@ console.error('Invalid OTP code')
 
 Sends a verification email to the user. Used for email verification after signup or email change.
 
-### Parameters
+### Parameters (#parameters-9)
 
 <details>
 <summary>View parameters</summary>
@@ -522,7 +524,7 @@ console.error('Failed to send verification email:', error.message)
 Verifies an email address using a token from a verification email link.
 Used for email change verification.
 
-### Parameters
+### Parameters (#parameters-10)
 
 <details>
 <summary>View parameters</summary>
@@ -558,7 +560,7 @@ console.error('Email verification failed:', error.message)
 
 Sends a password reset email to the user. The email contains a link to reset the password.
 
-### Parameters
+### Parameters (#parameters-11)
 
 <details>
 <summary>View parameters</summary>
@@ -677,7 +679,7 @@ const { data, error } = await client
 - Requires filter to specify which rows to delete
 - Authentication token is included automatically
 
-### Parameters
+### Parameters (#parameters-12)
 
 <details>
 <summary>View parameters</summary>

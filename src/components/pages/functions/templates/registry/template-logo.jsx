@@ -1,4 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
+import Image from 'next/image';
 import PropTypes from 'prop-types';
 
 import CodeIcon from 'components/pages/doc/detail-icon-cards/images/code.inline.svg';
@@ -12,6 +13,29 @@ import {
 
 const NEON_LOGO = ICONS_CONFIG.neon;
 
+const RegistryLogoImage = ({ className, src, alt, isCard, loading }) => (
+  <Image
+    className={cn(
+      'shrink-0 object-contain',
+      isCard ? 'h-7 w-auto max-w-10 object-left' : 'h-8 w-8',
+      className
+    )}
+    src={src.trim()}
+    width={isCard ? 28 : 32}
+    height={isCard ? 28 : 32}
+    alt={alt}
+    loading={loading}
+  />
+);
+
+RegistryLogoImage.propTypes = {
+  className: PropTypes.string,
+  src: PropTypes.string.isRequired,
+  alt: PropTypes.string.isRequired,
+  isCard: PropTypes.bool.isRequired,
+  loading: PropTypes.oneOf(['eager', 'lazy']).isRequired,
+};
+
 const FunctionRegistryTemplateLogo = ({ template, eager = false, variant = 'card' }) => {
   const isCard = variant === 'card';
   const loading = eager ? 'eager' : 'lazy';
@@ -20,21 +44,35 @@ const FunctionRegistryTemplateLogo = ({ template, eager = false, variant = 'card
   const alt = registryLogoAlt(template, { decorative: isCard });
 
   if (isRegistryLogoUrl(template.logo)) {
+    if (!isRegistryLogoUrl(template.logoDark)) {
+      return (
+        <RegistryLogoImage
+          className={cn(isCard && 'mb-8')}
+          src={template.logo}
+          alt={alt}
+          isCard={isCard}
+          loading={loading}
+        />
+      );
+    }
+
     return (
-      <img
-        className={
-          isCard
-            ? 'mb-8 h-7 w-auto max-w-10 shrink-0 object-contain object-left'
-            : 'h-8 w-8 shrink-0 object-contain'
-        }
-        src={template.logo.trim()}
-        width={isCard ? 28 : 32}
-        height={isCard ? 28 : 32}
-        alt={alt}
-        loading={loading}
-        decoding="async"
-        referrerPolicy="no-referrer"
-      />
+      <span className={cn('flex shrink-0', isCard && 'mb-8')}>
+        <RegistryLogoImage
+          className="dark:hidden"
+          src={template.logo}
+          alt={alt}
+          isCard={isCard}
+          loading={loading}
+        />
+        <RegistryLogoImage
+          className="hidden dark:block"
+          src={template.logoDark}
+          alt={alt}
+          isCard={isCard}
+          loading={loading}
+        />
+      </span>
     );
   }
 
@@ -82,6 +120,7 @@ FunctionRegistryTemplateLogo.propTypes = {
   template: PropTypes.shape({
     title: PropTypes.string.isRequired,
     logo: PropTypes.string,
+    logoDark: PropTypes.string,
     provider: PropTypes.string,
   }).isRequired,
   eager: PropTypes.bool,

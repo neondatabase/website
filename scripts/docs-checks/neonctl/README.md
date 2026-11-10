@@ -169,3 +169,16 @@ The TypeScript source is canonical. CI only reads `schema.json`.
 - **Server-side defaults** (generated branch names, default CU) exist only
   in the control plane; they are documented as verified `defaultText`
   overrides, never inferred.
+- **Re-mounted command modules resolve one convention only.** `postgres.ts`
+  mounts other command files as subcommands (`.command(nested(computes))`), and
+  those files export a curried `builderFor(usage)` with
+  `builder = builderFor('roles')`. The parser resolves a namespace-imported
+  module passed to `.command()`, bare, wrapped in a one-argument helper, or
+  spread into its exports (`.command(loki.command, loki.describe, loki.builder,
+  handler)` in `logs.ts`), and
+  binds the curried builder's parameter to the argument (or to
+  `<parent> <child>` when mounted under a group, matching what `nested()`
+  passes). It doesn't evaluate the helper itself, so a mount that changes the
+  command name, aliases, or describe, or a curried builder with more than one
+  parameter, isn't reflected. Changes to how `nested()` builds the usage
+  string need a matching change in `parseImportedCommand`.

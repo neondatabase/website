@@ -92,7 +92,94 @@ function validateCategories(categories) {
   return { errors, categorySlugs: slugs };
 }
 
-function validateCaseStudies(caseStudies, categorySlugs) {
+const EVIDENCE_FEATURES = new Set([
+  'postgres',
+  'branching',
+  'autoscaling',
+  'scale-to-zero',
+  'read-replicas',
+  'api',
+  'mcp',
+  'auth',
+  'data-api',
+  'functions',
+  'object-storage',
+  'ai-gateway',
+  'realtime',
+  'pgvector',
+  'logical-replication',
+  'serverless-driver',
+  'pooling',
+  'claimable',
+  'azure',
+  'vercel-integration',
+]);
+
+const BLOG_POSTS_DIR = path.join(process.cwd(), 'content/blog/posts');
+
+// Reduces post Markdown to the text a reader sees, so claims can be stored
+// without link targets or emphasis markers and still be checked word for word.
+function toPlainText(markdown) {
+  return markdown
+    .replace(/!\[[^\]]*\]\([^)]*\)/g, '')
+    .replace(/\[([^\]]*)\]\([^)]*\)/g, '$1')
+    .replace(/<[^>]+>/g, '')
+    .replace(/(\*\*|__|\*|`)/g, '')
+    .replace(/[ \t]+/g, ' ');
+}
+
+function readPostText(slug) {
+  for (const ext of ['.md', '.mdx']) {
+    const file = path.join(BLOG_POSTS_DIR, `${slug}${ext}`);
+    if (fs.existsSync(file)) return toPlainText(fs.readFileSync(file, 'utf8'));
+  }
+  return null;
+}
+
+// Claims are published as customer evidence for agents, so each one must appear
+// word for word in the linked post's text. Paraphrases fail the build.
+function validateEvidence(errors, base, item, useCaseSlugs) {
+  const { evidence } = item;
+  if (!expectObject(errors, base, evidence)) return;
+
+  expectString(errors, `${base}.summary`, evidence.summary);
+  if (expectString(errors, `${base}.useCase`, evidence.useCase)) {
+    if (!useCaseSlugs.has(evidence.useCase)) {
+      pushError(
+        errors,
+        `${base}.useCase`,
+        `unknown use case "${evidence.useCase}" (expected an icon from use-cases.yaml)`
+      );
+    }
+  }
+  if (expectString(errors, `${base}.date`, evidence.date)) {
+    if (!/^\d{4}-\d{2}-\d{2}$/.test(evidence.date)) {
+      pushError(errors, `${base}.date`, 'expected YYYY-MM-DD');
+    }
+  }
+  if (expectArray(errors, `${base}.features`, evidence.features)) {
+    evidence.features.forEach((feature, i) => {
+      if (!EVIDENCE_FEATURES.has(feature)) {
+        pushError(errors, `${base}.features[${i}]`, `unknown feature "${feature}"`);
+      }
+    });
+  }
+  if (!expectArray(errors, `${base}.claims`, evidence.claims)) return;
+
+  const source = item.isInternal ? readPostText(item.internalPostSlug) : null;
+  if (item.isInternal && source === null && evidence.claims.length > 0) {
+    pushError(errors, `${base}.claims`, `post "${item.internalPostSlug}" not found`);
+    return;
+  }
+  evidence.claims.forEach((claim, i) => {
+    if (!expectString(errors, `${base}.claims[${i}]`, claim)) return;
+    if (source !== null && !source.includes(claim)) {
+      pushError(errors, `${base}.claims[${i}]`, 'not found verbatim in the linked post');
+    }
+  });
+}
+
+function validateCaseStudies(caseStudies, categorySlugs, useCaseSlugs = new Set()) {
   const errors = [];
   const ids = new Set();
 
@@ -189,6 +276,10 @@ function validateCaseStudies(caseStudies, categorySlugs) {
       }
     }
 
+    if (item.evidence !== undefined) {
+      validateEvidence(errors, `${base}.evidence`, item, useCaseSlugs);
+    }
+
     if (expectArray(errors, `${base}.categories`, item.categories)) {
       item.categories.forEach((category, catIndex) => {
         const categoryBase = `${base}.categories[${catIndex}]`;
@@ -257,7 +348,14 @@ function validateContentData() {
   const useCases = parseYamlFile(USE_CASES_FILE);
 
   const categoriesResult = validateCategories(categories);
-  const caseStudiesResult = validateCaseStudies(caseStudies, categoriesResult.categorySlugs);
+  const useCaseSlugs = new Set(
+    Array.isArray(useCases) ? useCases.map((useCase) => useCase?.icon).filter(Boolean) : []
+  );
+  const caseStudiesResult = validateCaseStudies(
+    caseStudies,
+    categoriesResult.categorySlugs,
+    useCaseSlugs
+  );
   const useCasesErrors = validateUseCases(useCases, caseStudiesResult.caseStudyIds);
 
   return [...categoriesResult.errors, ...caseStudiesResult.errors, ...useCasesErrors];
@@ -286,5 +384,6 @@ if (require.main === module) {
 }
 
 module.exports = {
+  toPlainText,
   validateContentData,
 };

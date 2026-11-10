@@ -10,6 +10,8 @@ summary: >-
   this page to understand archiving thresholds, blocking conditions, and how to
   monitor archive and unarchive operations via the Console, CLI, or API.
 enableTableOfContents: true
+redirectFrom:
+  - /docs/introduction/branch-archiving
 updatedOn: '2026-10-09T15:17:33.920Z'
 ---
 
@@ -31,7 +33,7 @@ updatedOn: '2026-10-09T15:17:33.920Z'
 To minimize storage costs, Neon automatically archives branches that are:
 
 - Older than **14 days**.
-- Have not been accessed for the past **24 hours**
+- Not accessed in the past **24 hours**
 
 Both conditions must be true for a branch to be archived.
 
@@ -67,7 +69,7 @@ The following actions will automatically unarchive a branch, transferring the br
 - [Creating a role on a branch](/docs/manage/roles#create-a-role)
 - [Creating a database on a branch](/docs/manage/databases#create-a-database)
 - [Reset the branch from its parent](/docs/manage/branches#reset-a-branch-from-parent)
-- [Performing a restore operation on a branch](/docs/guides/branch-restore)
+- [Performing a restore operation on a branch](/docs/postgres/backup-restore/branch-restore)
 - [Setting the branch as protected](/docs/guides/protected-branches)
 - Running [Neon CLI](/docs/cli) commands or [Neon API](/docs/reference/api) calls that access the branch
 
@@ -117,11 +119,11 @@ The Neon CLI [branches list](/docs/cli/branches#list) command shows a branch's `
 - `ready` - the branch is fully operational and ready for querying. Expect normal query response times.
 - `archived` - the branch is stored in cost-effective archive storage. Expect slow query response times.
 
-      ```bash
-      neon branches list --project-id green-hat-46829796
-      Name            ID                       Current State  Expires At  Created At
-      [default] main  br-muddy-firefly-123456  ready          never       2026-10-30T14:59:57Z
-      ```
+```bash
+neon branches list --project-id green-hat-46829796
+Name            ID                       Current State  Expires At  Created At
+[default] main  br-muddy-firefly-123456  ready          never       2026-10-30T14:59:57Z
+```
 
 </TabItem>
 
@@ -132,7 +134,7 @@ The Neon API's [Get branch details](/docs/reference/api/branches/get-project-bra
 curl --request GET \
      --url https://console.neon.tech/api/v2/projects/{project-id}/branches/{branch_id} \
      --header 'accept: application/json' \
-     --header 'authorization: Bearer $NEON_API_KEY'
+     --header "authorization: Bearer $NEON_API_KEY"
 ```
 
 The response includes a `current_state`, a `state_changed_at` timestamp for when the current state began, and a `pending_state` if the branch is currently transitioning between states. State values include:

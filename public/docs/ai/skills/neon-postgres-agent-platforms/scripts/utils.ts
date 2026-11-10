@@ -26,6 +26,6 @@ export async function getProductionBranchId(
   neon: NeonClient<true>,
   projectId: string,
 ): Promise<string> {
-  const branch = await neon.branches.getDefault(projectId);
+  const branch = await neon.branches.getDefault({ projectId });
   return branch.id;
 }

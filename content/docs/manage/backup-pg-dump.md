@@ -5,9 +5,12 @@ summary: >-
   Use pg_dump to back up a Lakebase Postgres database to a local custom-format
   archive, and pg_restore to restore it to any Neon project, including across
   regions. Always use a direct (unpooled) connection string for both
-  operations; pooled connections are not supported and will cause errors.
+  operations; avoid pooled connections.
 enableTableOfContents: true
-updatedOn: '2026-09-16T19:45:35.340Z'
+redirectFrom:
+  - /docs/manage/backups-pg-dump
+  - /docs/guides/backup-pg-dump
+updatedOn: '2026-11-04T20:10:08.844Z'
 ---
 
 This topic describes how to create a backup of your Neon database using the Postgres `pg_dump` utility and how to restore a backup using `pg_restore`.
@@ -84,7 +87,7 @@ Following this procedure will create a database backup locally, where you're run
    - `-d`: Specifies the [connection string](https://www.postgresql.org/docs/current/libpq-connect.html#LIBPQ-CONNSTRING) for your Neon database.
    - `-f <dump_file_name>`: The dump file name. It can be any name you choose (`mydumpfile.bak`, for example).
 
-   For more command options, see [Advanced pg_dump and pg_restore options](/docs/import/migrate-from-postgres#advanced-pg_dump-and-pg_restore-options).
+   For more command options, see [Advanced pg_dump and pg_restore options](/docs/import/migrate-from-postgres#advanced-pgdump-and-pgrestore-options).
 
 For most accidental-delete recoveries you don't need a local file. Neon keeps a change history that supports [instant restore](/docs/introduction/branch-restore) (point-in-time restore) within your project's [history window](/docs/introduction/history-window), which is usually faster. Reach for a local `pg_dump` backup when you need off-platform redundancy, archival beyond your history window, an external copy for compliance, or a copy to move into a different Postgres instance.
 
@@ -123,7 +126,7 @@ This procedure shows how to restore a database using the `pg_restore` utility fr
    - `-d`: Specifies the Neon database to connect to. The value is a Neon database connection string. See [Prerequisites](#prerequisites).
    - `<dump_file_name>` is the name of the dump file you created with `pg_dump`.
 
-   For more command options, see [Advanced pg_dump and pg_restore options](/docs/import/migrate-from-postgres#advanced-pg_dump-and-pg_restore-options).
+   For more command options, see [Advanced pg_dump and pg_restore options](/docs/import/migrate-from-postgres#advanced-pgdump-and-pgrestore-options).
 
 ## `pg_dump` and `pg_restore` example
 

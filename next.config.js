@@ -2,6 +2,7 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
   enabled: process.env.ANALYZE === 'true',
 });
 
+const { SITEMAP_MD } = require('./src/constants/agent-discovery');
 const { CONTENT_ROUTES, GENERATED_PAGE_MARKDOWN_PATHS } = require('./src/constants/content');
 const { getAllPosts, getAllChangelogs } = require('./src/utils/api-docs');
 const generateChangelogPath = require('./src/utils/generate-changelog-path');
@@ -251,6 +252,11 @@ const defaultConfig = {
     }, []);
 
     return [
+      {
+        source: '/docs/guides/cloudflare_sandbox_neon_branching.png',
+        destination: '/docs/guides/cloudflare_sandbox_neon_branching.jpg',
+        permanent: true,
+      },
       {
         source: '/pg-us-conf-raffle',
         destination: '/pg-eu-conf-raffle',
@@ -2335,7 +2341,7 @@ const defaultConfig = {
       // `/docs/introduction` are absent because they redirect to `/docs` (above).
       {
         source: '/docs/ai',
-        destination: '/docs/ai/ai-agents-tools',
+        destination: '/docs/ai/agent-setup',
         permanent: true,
       },
       {
@@ -2782,6 +2788,31 @@ const defaultConfig = {
         permanent: true,
       },
       {
+        source: '/enterprise',
+        destination: 'https://www.databricks.com/product/lakebase',
+        permanent: true,
+      },
+      {
+        source: '/ai',
+        destination: '/docs/ai/agent-setup',
+        permanent: true,
+      },
+      {
+        source: '/migration',
+        destination: '/docs/import/migrate-intro',
+        permanent: true,
+      },
+      {
+        source: '/cli',
+        destination: '/docs/cli',
+        permanent: true,
+      },
+      {
+        source: '/variable-load',
+        destination: '/use-cases/bursty-workloads',
+        permanent: true,
+      },
+      {
         source: '/partners',
         destination: 'https://neon.com/docs/guides/platform-integration-overview',
         permanent: true,
@@ -3050,6 +3081,8 @@ const defaultConfig = {
         // Serve /llms.txt and /llms-full.txt from /docs/ (canonical location is public/docs/)
         { source: '/llms.txt', destination: '/docs/llms.txt' },
         { source: '/llms-full.txt', destination: '/docs/llms-full.txt' },
+        // Serve /sitemap.md and /.well-known/sitemap.md from /docs/sitemap.md (same pattern)
+        ...SITEMAP_MD.aliases.map((source) => ({ source, destination: SITEMAP_MD.path })),
         // Agent skill discovery — wildcard :name handles all skills (agentskills.io 0.2.0 and v0.1.0).
         // /skill.md is a single-entrypoint alias for the primary skill (see config/skills.json).
         // Update the destination here if the primary skill changes.

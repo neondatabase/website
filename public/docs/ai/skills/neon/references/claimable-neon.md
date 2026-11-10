@@ -38,7 +38,7 @@ export default defineConfig({
 neon claim create --service auth --service data-api --env-pull
 ```
 
-The project is created in `aws-us-east-2` unless you pass `--region-id` (for example `neon claim create --region-id aws-eu-central-1`). Pick the region closest to where the app runs. A project's region cannot change after create.
+The project is created in `aws-us-east-2` unless you pass `--region-id` (for example `neon claim create --region-id aws-eu-central-1`). Pick the region closest to where the app runs. A project's region cannot change after create. Pass `--project-name <name>` to name the project; it keeps the name after the claim.
 
 `neon claim create` reads `neon.ts` when it is present. It writes provisioned vars to an existing `.env`, otherwise `.env.local`, and gitignores that file. If `.env` or `.env.local` already has a `DATABASE_URL` (or other Neon-managed keys), pass `--file <path>` or `--no-env-pull`. The identity assertion is the pre-claim credential.
 

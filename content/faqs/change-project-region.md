@@ -7,8 +7,8 @@ updatedOn: '2026-09-23T21:00:25.204Z'
 isDraft: false
 redirectFrom: []
 previousLink:
-  title: 'What are the best ways to give every developer on a team their own separate Postgres database for development?'
-  slug: best-ways-separate-postgres-database-development
+  title: 'How do I get BM25 relevance ranking in Postgres full-text search?'
+  slug: bm25-relevance-ranking-postgres-full-text-search
 nextLink:
   title: 'How do I migrate an existing Neon project to a different AWS region?'
   slug: change-region-existing-neon-project

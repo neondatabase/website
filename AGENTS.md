@@ -136,8 +136,9 @@ Every docs page requires `title`. All other fields are optional.
 | `isDraft`               | `true` hides the page from production but keeps it visible in dev.                                                                                                                                                                             |
 | `enableTableOfContents` | `true` shows the h2/h3 outline panel on the right.                                                                                                                                                                                             |
 | `ogImage`               | Social preview image path.                                                                                                                                                                                                                     |
-| `updatedOn`             | ISO 8601 timestamp (e.g. `2026-03-14T03:21:15.122Z`). Updated automatically by the pre-commit hook on staged files. Don't set or update manually.                                                                                              |
+| `updatedOn`             | ISO 8601 timestamp (e.g. `2026-03-14T03:21:15.122Z`). Added (on new pages) and updated automatically by the pre-commit hook on staged files. Drives the sitemap `<lastmod>`. Don't set or update manually.                                     |
 | `layout`                | Set to `wide` to hide the right sidebar (use with `TwoColumnLayout` pages).                                                                                                                                                                    |
+| `docType`               | Overrides the page `Type` in `/docs/sitemap.md`: `Tutorial`, `How-to`, `Reference`, or `Conceptual`. Set it only when the inferred type is wrong. Invalid values fail the build. |
 
 The build will fail if any `.md` file in `content/docs/` is missing `title`.
 
@@ -602,8 +603,19 @@ Use `/simple-content` for edits to existing pages, shorter additions, or when yo
 - Documentation-heavy site with 1000+ markdown files — search before creating
 - Do not modify `src/` components, CSS, or site structure without explicit instruction; a web team actively maintains the frontend
 - Do not modify `node_modules/` or generated files
+- When you add a route handler (`route.js`) that serves a file like JSON or YAML instead of a page, add its path to the route handler list in `exclude` in `next-sitemap.config.js` so it stays out of sitemap.xml
 - Do not run `npm run fix`, `npm run fix:all`, or `npm run lint:md` during normal workflows. For JS changes, run `npm run fix:js`. Markdown in `content/` is auto-formatted and `updatedOn` is auto-stamped by the pre-commit hook on staged files. No manual step needed at commit time. To manually reformat markdown (prettier only), run `npm run fix:md`.
 - The codebase uses both `pages/` and `app/` directory (migration in progress)
 - Images are optimized via Next.js Image component
 - Accessibility matters — follow WCAG guidelines
 - For writing style and component details, `content/docs/README.md` and `content/docs/community/` are the authoritative sources
+
+<!-- BEGIN:nextjs-agent-rules -->
+
+# This is NOT the Next.js you know
+
+This version has breaking changes — APIs, conventions, and file structure may all differ from your training data. Read the relevant guide in `node_modules/next/dist/docs/` (resolved from this file's directory; in monorepos the `next` package may not be visible from the repo root) before writing any code. Heed deprecation notices.
+
+This block is written and re-added by `next dev` — verify at `node_modules/next/dist/server/lib/generate-agent-files.js`. Removing it from a diff only re-creates the uncommitted change; committing it with your work keeps the tree clean.
+
+<!-- END:nextjs-agent-rules -->

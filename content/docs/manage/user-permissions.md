@@ -143,7 +143,7 @@ Lists the organization members who have access to a project, with each member's 
 curl --request GET \
      --url 'https://console.neon.tech/api/v2/projects/{project_id}/members' \
      --header 'accept: application/json' \
-     --header 'authorization: Bearer $ORG_API_KEY' | jq
+     --header "authorization: Bearer $ORG_API_KEY" | jq
 ```
 
 Example response:
@@ -173,7 +173,7 @@ Grants or updates an organization member's role on a project. Send `viewer`, `ed
 curl --request PUT \
      --url 'https://console.neon.tech/api/v2/projects/{project_id}/members/{member_id}/role' \
      --header 'accept: application/json' \
-     --header 'authorization: Bearer $ORG_API_KEY' \
+     --header "authorization: Bearer $ORG_API_KEY" \
      --header 'content-type: application/json' \
      --data '{"role": "editor"}' | jq
 ```
@@ -201,7 +201,7 @@ Removes a member's explicit role on a project. Their organization role's default
 curl --request DELETE \
      --url 'https://console.neon.tech/api/v2/projects/{project_id}/members/{member_id}/role' \
      --header 'accept: application/json' \
-     --header 'authorization: Bearer $ORG_API_KEY'
+     --header "authorization: Bearer $ORG_API_KEY"
 ```
 
 ## Legacy permissions

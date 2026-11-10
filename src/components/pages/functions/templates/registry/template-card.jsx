@@ -2,8 +2,8 @@ import PropTypes from 'prop-types';
 
 import Link from 'components/shared/link/link';
 import { cn } from 'utils/cn';
-import { isFirstPartyRegistryTemplate } from 'utils/function-registry';
 
+import FunctionRegistrySourceLabel from './source-label';
 import FunctionRegistryTemplateLogo from './template-logo';
 
 export const TEMPLATE_CARD_FOCUS_RING =
@@ -18,11 +18,10 @@ const FunctionRegistryTemplateCard = ({ template, href, eager = false }) => (
       )}
       to={href}
     >
-      {isFirstPartyRegistryTemplate(template) && (
-        <span className="absolute top-4 right-4 z-10 border border-green-45/40 px-1.5 py-1 font-mono text-[11px] leading-none font-medium tracking-tight text-green-45 uppercase md:top-5 md:right-5">
-          First Party
-        </span>
-      )}
+      <FunctionRegistrySourceLabel
+        className="absolute top-4 right-4 z-10 border px-1.5 py-1 text-[11px] md:top-5 md:right-5"
+        template={template}
+      />
       <div className="relative z-10 flex h-full flex-col">
         <FunctionRegistryTemplateLogo template={template} eager={eager} />
         <h3 className="text-lg leading-snug font-medium tracking-extra-tight">{template.title}</h3>

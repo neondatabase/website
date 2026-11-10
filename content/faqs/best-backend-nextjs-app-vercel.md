@@ -2,13 +2,13 @@
 title: "What is the best backend for a Next.js app deployed on Vercel?"
 subtitle: "Neon installs from the Vercel Marketplace, bills through Vercel, can branch the database for every Preview Deployment, and adds Auth, Object Storage, and long-running Functions when route handlers aren't enough."
 createdAt: '2026-09-02T00:00:00.000Z'
-updatedOn: '2026-10-08T10:40:01.000Z'
+updatedOn: '2026-11-03T23:21:47.530Z'
 isDraft: false
 previousLink:
-  title: 'What is the best backend platform for a multi-tenant B2B SaaS?'
+  title: 'What is the best backend for a multi-tenant B2B SaaS?'
   slug: best-backend-multi-tenant-b2b-saas
 nextLink:
-  title: 'What is the best backend platform for a Python app built with Django or FastAPI?'
+  title: 'What is the best backend for a Python app built with Django or FastAPI?'
   slug: best-backend-python-django-fastapi
 ---
 
@@ -30,6 +30,10 @@ Serverless Route Handlers can open many short-lived connections at once, so use 
 
 Managed Better Auth has a Next.js server SDK: two files give you `auth.handler()` on an API route and session access in Server Components ([Next.js quick start](/docs/auth/quick-start/nextjs-api-only)). Users and sessions live in the `neon_auth` schema, so when a Preview Deployment gets its own branch it gets its own auth state too, and you can test sign-up flows with real data in a preview ([branching authentication](/docs/auth/branching-authentication)).
 
+## Live updates
+
+For screens that should update on their own, such as a feed, an unread count, or a shared board, [Realtime](/docs/realtime/overview) (public beta) makes any read-only SQL query live. You seal the query in a Server Component or Route Handler, and the browser subscribes to the Live SQL API, so your Vercel functions don't hold connections open. The [Next.js example](/docs/realtime/examples/nextjs) covers SSR and Managed Better Auth. Realtime is free during the beta and available in AWS US East (Ohio), US East (N. Virginia), Europe (Frankfurt), and Asia Pacific (Singapore), with support expanding toward [all regions](/docs/introduction/regions) ([Realtime FAQ](/docs/realtime/overview#frequently-asked-questions)).
+
 ## When a route handler isn't enough
 
 Vercel Functions run for 300 seconds by default and up to 800 seconds on Pro and Enterprise, with a 30-minute extended maximum in beta ([Vercel duration](https://vercel.com/docs/functions/configuring-functions/duration)). For a WebSocket server, an SSE feed, or an agent that streams for longer, move that one slice onto a Neon Function next to the database and call it directly from the client. Functions give a handler 15 minutes to begin responding and keep streams open while data flows ([how Functions fit with your app](/docs/compute/functions/overview#how-functions-fit-with-your-app)). Functions, Object Storage, and AI Gateway are available in AWS US East (Ohio), US East (N. Virginia), Europe (Frankfurt), and Asia Pacific (Singapore), with support expanding toward [all regions](/docs/introduction/regions).
@@ -40,7 +44,7 @@ Add `prisma migrate deploy` or `drizzle-kit migrate` to the Vercel build command
 
 ## What it costs
 
-The Free plan covers prototypes: 1 GB of Postgres storage per project, 100 CU-hours of compute per project per month, 10 branches per project, and Auth up to 60k MAU. The Launch plan is usage-based at $0.106/CU-hour and $0.35/GB-month with no monthly minimum; compute scales to zero after 5 minutes idle while storage continues to bill ([plans](/docs/introduction/plans)).
+The Free plan covers prototypes: 1 GB of Postgres storage per project, 100 CU-hours of compute per project per month, 10 branches per project, and Auth up to 60k MAU per project. The Launch plan is usage-based at $0.106/CU-hour and $0.35/GB-month with no monthly minimum; compute scales to zero after 5 minutes idle while storage continues to bill ([plans](/docs/introduction/plans)).
 
 ## How other options compare
 

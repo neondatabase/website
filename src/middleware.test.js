@@ -66,9 +66,10 @@ describe('Middleware - AI Agent Integration Tests', () => {
     ]),
   });
 
-  it('matches every generated marketing page for content negotiation', () => {
+  it('matches every generated marketing page for content negotiation', async () => {
+    const { GENERATED_PAGE_MARKDOWN_PATHS } = await import('./constants/content');
     expect(middlewareConfig.matcher).toEqual(
-      expect.arrayContaining(['/functions', '/ai-gateway', '/lakebase'])
+      expect.arrayContaining(Object.keys(GENERATED_PAGE_MARKDOWN_PATHS).map((route) => `/${route}`))
     );
   });
 
@@ -114,6 +115,7 @@ describe('Middleware - AI Agent Integration Tests', () => {
       { name: 'Object Storage', path: '/object-storage' },
       { name: 'Auth', path: '/auth' },
       { name: 'Lakebase', path: '/lakebase' },
+      { name: 'Case studies', path: '/case-studies' },
       { name: 'FAQs', path: '/faqs/connect-application-using-connection-string' },
     ];
 
@@ -610,6 +612,10 @@ describe('Middleware - AI Agent Integration Tests', () => {
       ['/skill.md alias', '/skill.md'],
       ['.well-known agent-skills alias', '/.well-known/agent-skills/neon-postgres/SKILL.md'],
       ['docs .well-known alias', '/docs/.well-known/agent-skills/neon-postgres/SKILL.md'],
+      // Route-handler sitemap and its rewrite-backed aliases: no file in public/.
+      ['Markdown sitemap', '/docs/sitemap.md'],
+      ['root Markdown sitemap alias', '/sitemap.md'],
+      ['.well-known Markdown sitemap alias', '/.well-known/sitemap.md'],
     ])('passes through a %s, tracks the read, no markdown fetch', async (_label, path) => {
       const req = createMockRequest(path, 'Mozilla/5.0', 'text/html');
 

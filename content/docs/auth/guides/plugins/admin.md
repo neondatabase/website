@@ -10,7 +10,7 @@ summary: >-
   Admin operations require an authenticated session with HTTP-only cookies, and
   impersonation sessions are capped at 1 hour.
 enableTableOfContents: true
-updatedOn: '2026-09-16T15:38:57.808Z'
+updatedOn: '2026-10-09T15:55:57.334Z'
 ---
 
 Managed Better Auth is built on [Better Auth](https://www.better-auth.com/) and provides support for Admin plugin APIs through the Neon SDK. You do not need to manually install or configure the Better Auth Admin plugin.
@@ -71,7 +71,7 @@ const { data, error } = await authClient.admin.createUser({
 
 List users with optional search, filtering, sorting, and pagination.
 
-#### Parameters
+#### Parameters (#parameters-2)
 
 <details>
 <summary>View parameters</summary>
@@ -125,7 +125,7 @@ Use the `total`, `limit`, and `offset` values to implement pagination in your ad
 
 Assign roles to control who can call admin operations.
 
-#### Parameters
+#### Parameters (#parameters-3)
 
 <details>
 <summary>View parameters</summary>

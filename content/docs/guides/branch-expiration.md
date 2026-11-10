@@ -156,7 +156,7 @@ neon branches create \
   --project-id <project-id> \
   --name feature-test \
   --parent development \
-  --expires-at "2026-01-29T18:02:16Z"
+  --expires-at "2026-11-25T18:02:16Z"
 
 # Create branch expiring in 2 hours (using dynamic date)
 # Linux/GNU: $(date -u -d '+2 hours' +%Y-%m-%dT%H:%M:%SZ)
@@ -183,7 +183,7 @@ curl --request POST \
        "branch": {
          "name": "feature-test",
          "parent_id": "br-main-12345",
-         "expires_at": "2026-01-29T18:02:16Z"
+         "expires_at": "2026-11-25T18:02:16Z"
        }
      }'
 
@@ -193,9 +193,9 @@ curl --request POST \
     "id": "br-feature-67890",
     "name": "feature-test",
     "parent_id": "br-main-12345",
-    "expires_at": "2026-01-29T18:02:16Z",
+    "expires_at": "2026-11-25T18:02:16Z",
     "ttl_interval_seconds": 86400,
-    "created_at": "2026-01-28T18:02:16Z"
+    "created_at": "2026-11-24T18:02:16Z"
   }
 }
 ```
@@ -227,7 +227,7 @@ curl --request POST \
 # Update expiration to new timestamp
 neon branches set-expiration \
   <branch-id> \
-  --expires-at "2026-01-29T12:00:00Z" \
+  --expires-at "2026-11-25T12:00:00Z" \
   --project-id <project-id>
 
 # Extend expiration by 7 days from now
@@ -257,7 +257,7 @@ curl --request PATCH \
      --header 'Content-Type: application/json' \
      --data '{
        "branch": {
-         "expires_at": "2026-01-29T12:00:00Z"
+         "expires_at": "2026-11-25T12:00:00Z"
        }
      }'
 
@@ -351,9 +351,9 @@ If you reset the branch from its parent, the `expires_at` value is recalculated 
 {
   "branch": {
     "id": "br-feature-67890",
-    "expires_at": "2026-01-29T18:02:16Z",
+    "expires_at": "2026-11-25T18:02:16Z",
     "ttl_interval_seconds": 86400,
-    "created_at": "2026-01-28T18:02:16Z"
+    "created_at": "2026-11-24T18:02:16Z"
   }
 }
 ```

@@ -106,19 +106,38 @@ const FRAMEWORKS = [
   { name: 'Redwood', icon: 'redwoodsdk', to: '/docs/guides/redwoodsdk' },
 ];
 
-// Cursor, Claude Code, and Codex link to the install section of their own
-// plugin page. GitHub Copilot has no plugin page, so it keeps pointing at its
-// section of the MCP clients page.
+// Agents with their own setup page link to it (the plugin install section
+// where there is one). The rest link to their section of the MCP clients page,
+// or to its add-mcp install section when they need no agent-specific steps.
+// Ordered by popularity: CompactCards' `withToggler` shows the first 12 and
+// collapses the rest behind a Show more toggle, like the Frameworks section.
+const AGENT_SETUP_HREF = '/docs/ai/agent-setup';
 const MCP_HREF = '/docs/ai/connect-mcp-clients-to-neon';
+const ANY_AGENT_HREF = `${MCP_HREF}#install-for-any-supported-agent`;
 const AGENTS = [
-  { name: 'Cursor', icon: 'cursor', to: '/docs/ai/ai-cursor-plugin#install-the-plugin-in-cursor' },
   {
     name: 'Claude Code',
     icon: 'claude-code',
-    to: '/docs/ai/ai-claude-code-plugin#install-the-plugin-in-claude-code',
+    to: `${AGENT_SETUP_HREF}/claude-code#install-the-plugin`,
   },
-  { name: 'Codex', icon: 'codex', to: '/docs/ai/ai-codex-plugin#install-the-plugin-in-codex' },
-  { name: 'GitHub Copilot', icon: 'copilot', to: `${MCP_HREF}#vs-code-with-github-copilot` },
+  { name: 'Claude', icon: 'claude', to: `${AGENT_SETUP_HREF}/claude-ai` },
+  { name: 'GitHub Copilot', icon: 'copilot', to: `${AGENT_SETUP_HREF}/vscode#install-the-plugin` },
+  { name: 'ChatGPT', icon: 'chatgpt', to: `${AGENT_SETUP_HREF}/chatgpt` },
+  { name: 'Codex', icon: 'codex', to: `${AGENT_SETUP_HREF}/codex#install-the-plugin` },
+  { name: 'Cursor', icon: 'cursor', to: `${AGENT_SETUP_HREF}/cursor#install-the-plugin` },
+  { name: 'Grok Bot', icon: 'grok-bot', to: `${AGENT_SETUP_HREF}/grok-bot` },
+  { name: 'Antigravity', icon: 'antigravity', to: `${MCP_HREF}#antigravity` },
+  { name: 'OpenCode', icon: 'opencode', to: ANY_AGENT_HREF },
+  { name: 'Pi', icon: 'pi', to: `${MCP_HREF}#pi` },
+  { name: 'Devin Desktop', icon: 'windsurf', to: `${MCP_HREF}#devin-desktop` },
+  { name: 'Zed', icon: 'zed', to: `${MCP_HREF}#zed` },
+  { name: 'Gemini CLI', icon: 'gemini-cli', to: ANY_AGENT_HREF },
+  { name: 'Cline', icon: 'cline', to: `${MCP_HREF}#cline-vs-code-extension` },
+  { name: 'Kiro', icon: 'kiro', to: `${MCP_HREF}#kiro` },
+  { name: 'Goose', icon: 'goose', to: ANY_AGENT_HREF },
+  { name: 'Kimi Code', icon: 'kimi', to: `${MCP_HREF}#kimi-code` },
+  { name: 'Kilo Code', icon: 'kilo-code', to: ANY_AGENT_HREF },
+  { name: 'Jules', icon: 'jules', to: `${MCP_HREF}#jules` },
 ];
 
 // Longer walkthroughs. `icon` is a real DetailIconCards monochrome icon name.
@@ -185,7 +204,7 @@ const FoundationCard = () => (
         </span>
       </span>
       <div className="flex flex-col gap-1.5">
-        <span className="font-sans text-lg leading-snug font-medium tracking-[-0.02em] text-black-pure dark:text-white">
+        <span className="font-sans text-lg leading-snug font-medium tracking-[-0.02em] text-black-pure transition-colors duration-200 group-focus-within:text-green-44 group-hover:text-green-44 dark:text-white dark:group-focus-within:text-green-44 dark:group-hover:text-green-44">
           Create a database
         </span>
         <span className="text-[15px] leading-snug text-gray-new-45 dark:text-gray-new-60">
@@ -307,13 +326,13 @@ const DocsHome = () => (
         </CompactCards>
       </Section>
 
-      {/* Coding agents */}
+      {/* Agents */}
       <Section
-        heading="Coding agents"
-        description="Connect over MCP to create branches, run SQL, and read docs."
+        heading="Agents"
+        description="Connect your agent with a plugin, MCP, or skills to create branches, run SQL, and read docs."
       >
         <div className="grid gap-8">
-          <CompactCards className="my-0!" cols={2} appearance="home">
+          <CompactCards className="my-0!" cols={4} withToggler appearance="home">
             {AGENTS.map((g) => (
               <a key={g.name} href={g.to} title={g.name} icon={g.icon}>
                 {g.name}

@@ -1,3 +1,5 @@
+const { getRouteLastmod } = require('./src/utils/get-route-lastmod');
+
 module.exports = {
   siteUrl: process.env.NEXT_PUBLIC_DEFAULT_SITE_URL || 'https://neon.com',
   exclude: ['/*', '!/postgresql/*'],
@@ -13,7 +15,7 @@ module.exports = {
       loc: path,
       changefreq: config.changefreq,
       priority: config.priority,
-      lastmod: config.autoLastmod ? new Date().toISOString() : undefined,
+      lastmod: getRouteLastmod(path),
     };
   },
 };

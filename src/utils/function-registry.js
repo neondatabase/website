@@ -9,10 +9,17 @@ export const REGISTRY_PAGE_SIZE = 9;
 
 const REGISTRY_USER_AGENT = { 'User-Agent': 'neon-website-function-registry' };
 
+// Shared by every registry fetch (catalog, template.json, README) so they can be revalidated together.
+export const REGISTRY_CACHE_TAG = 'function-registry';
+
 export const registryFetchInit = () =>
   process.env.NODE_ENV === 'development'
     ? { cache: 'no-store', headers: REGISTRY_USER_AGENT }
-    : { cache: 'force-cache', headers: REGISTRY_USER_AGENT, next: { revalidate: 3600 } };
+    : {
+        cache: 'force-cache',
+        headers: REGISTRY_USER_AGENT,
+        next: { revalidate: 3600, tags: [REGISTRY_CACHE_TAG] },
+      };
 
 const JSON_TYPE = 'application/json; charset=utf-8';
 
@@ -41,11 +48,27 @@ export const registryTemplatePageHref = (id) => `/${REGISTRY_TEMPLATE_PAGE_BASE}
 export const isInlineCodeSafe = (value) =>
   typeof value === 'string' && value !== '' && !/[`\r\n]/.test(value);
 
-export const isSafeTemplateJsonPath = (path) => {
-  if (typeof path !== 'string') return false;
-  if (path.includes('..') || path.includes('\\') || path.startsWith('/')) return false;
-  return path.length <= 255 && path.endsWith('/template.json');
+const SAFE_PATH_SEGMENT = /^[A-Za-z0-9._@~+-]+$/;
+
+// Plain relative paths only: no empty, `.`/`..`, encoded, or URL-like segments, so a path
+// resolved against a GitHub base can't escape it.
+const safePathSegments = (path) => {
+  if (typeof path !== 'string' || path === '') return null;
+  const segments = path.split('/');
+  const isSafe = segments.every((s) => s !== '.' && s !== '..' && SAFE_PATH_SEGMENT.test(s));
+  return isSafe ? segments : null;
 };
+
+const TEMPLATE_JSON_FILE_NAME = 'template.json';
+
+const templateJsonPathSegments = (path) => {
+  const segments = safePathSegments(path);
+  return segments && path.length <= 255 && segments.at(-1) === TEMPLATE_JSON_FILE_NAME
+    ? segments
+    : null;
+};
+
+export const isSafeTemplateJsonPath = (path) => (templateJsonPathSegments(path)?.length ?? 0) >= 2;
 
 export const isRegistryHttpsUrl = (value) => {
   if (typeof value !== 'string') return false;
@@ -60,15 +83,6 @@ export const isRegistryHttpsUrl = (value) => {
 export const isRegistryLogoUrl = isRegistryHttpsUrl;
 
 export const registryWebsiteUrl = (value) => (isRegistryHttpsUrl(value) ? value.trim() : null);
-
-export const registryWebsiteLinkText = (href, title) => {
-  if (isRegistryHttpsUrl(href)) {
-    const host = new URL(href).hostname.replace(/^www\./i, '');
-    if (host) return host;
-  }
-  if (typeof title === 'string' && title.trim()) return title.trim();
-  return href;
-};
 
 export const isNeonRegistryTemplate = (template) => {
   const provider = typeof template?.provider === 'string' ? template.provider.trim() : '';
@@ -86,16 +100,126 @@ export const registryLogoAlt = (template, { decorative = false } = {}) => {
   return `${registryProviderLabel(template)} logo`;
 };
 
+const REGISTRY_ID_PATTERN = /^[a-z0-9][a-z0-9-]*$/;
+const GITHUB_HOST = 'github.com';
+const RAW_GITHUB_HOST = 'raw.githubusercontent.com';
+const README_FILE_NAME = 'README.md';
+const README_MAX_BYTES = 256 * 1024;
+
+// Stops reading once the body passes maxBytes, so an oversized response without a
+// `content-length` header is never buffered in full.
+const readTextWithin = async (response, maxBytes) => {
+  if (Number(response.headers.get('content-length')) > maxBytes) return null;
+  if (!response.body) return '';
+  const reader = response.body.getReader();
+  const decoder = new TextDecoder();
+  let bytes = 0;
+  let text = '';
+  for (;;) {
+    const { done, value } = await reader.read();
+    if (done) return text + decoder.decode();
+    bytes += value.byteLength;
+    if (bytes > maxBytes) {
+      await reader.cancel();
+      return null;
+    }
+    text += decoder.decode(value, { stream: true });
+  }
+};
+
+const rawGithubUrl = (segments) => `https://${RAW_GITHUB_HOST}/${segments.join('/')}`;
+
+// github.com blob/raw pages are HTML, so images need the raw file instead.
+export const toRawGithubImageUrl = (url) => {
+  if (url.hostname !== GITHUB_HOST) return url.href;
+  const [owner, repo, kind, ...rest] = url.pathname.split('/').filter(Boolean);
+  if ((kind !== 'blob' && kind !== 'raw') || rest.length < 2) return url.href;
+  return rawGithubUrl([owner, repo, ...rest]);
+};
+
+const isGithubName = (value) => safePathSegments(value)?.length === 1;
+
+const examplesRegistryFolder = (template) => {
+  if (isSafeTemplateJsonPath(template?.path)) return template.path.split('/').slice(0, -1);
+  if (typeof template?.id === 'string' && REGISTRY_ID_PATTERN.test(template.id)) {
+    return [template.id];
+  }
+  return null;
+};
+
+const trimSlashes = (value) => value.replace(/^\/+|\/+$/g, '');
+
+const githubSourceLocation = (github) => {
+  if (!github || typeof github !== 'object') return null;
+  const { owner, repo, ref = 'HEAD', dir = '' } = github;
+  if (!isGithubName(owner) || !isGithubName(repo) || typeof dir !== 'string') return null;
+  const refSegments = safePathSegments(ref);
+  const folder = trimSlashes(dir) ? safePathSegments(trimSlashes(dir)) : [];
+  return refSegments && folder && { owner, repo, ref: refSegments.join('/'), folder };
+};
+
+// Where a template's files live on GitHub: its `source.github` repo or own `owner`/`repo` (and
+// optional `folder`) for external templates, otherwise its folder in the examples registry.
+const registryTemplateLocation = (template) => {
+  if (template?.source != null) {
+    const location = githubSourceLocation(template.source.github);
+    const pathSegments = templateJsonPathSegments(template.path);
+    if (!location || !pathSegments) return null;
+    return { ...location, folder: [...location.folder, ...pathSegments.slice(0, -1)] };
+  }
+  if (isGithubName(template?.owner) && isGithubName(template?.repo)) {
+    const folder = template.folder ? safePathSegments(template.folder) : [];
+    return folder && { owner: template.owner, repo: template.repo, ref: 'HEAD', folder };
+  }
+  const folder = examplesRegistryFolder(template);
+  return (
+    folder && {
+      owner: 'neondatabase',
+      repo: 'examples',
+      ref: 'main',
+      folder: ['registry', ...folder],
+    }
+  );
+};
+
+const githubTreeUrl = ({ owner, repo, ref, folder }, kind = 'tree') =>
+  `https://${GITHUB_HOST}/${[owner, repo, kind, ref, ...folder].join('/')}`;
+
+// Returns the README with bases for its relative images (raw files) and links (github.com),
+// or null when the template has no README or it can't be fetched.
+export const getFunctionRegistryTemplateReadme = async (template) => {
+  const location = registryTemplateLocation(template);
+  if (!location) return null;
+  const { owner, repo, ref, folder } = location;
+  try {
+    const response = await fetch(
+      rawGithubUrl([owner, repo, ref, ...folder, README_FILE_NAME]),
+      registryFetchInit()
+    );
+    if (!response.ok) return null;
+    const markdown = await readTextWithin(response, README_MAX_BYTES);
+    if (markdown === null) {
+      console.warn(
+        `Function registry: README for "${template.id}" is over ${README_MAX_BYTES / 1024} KB, skipping it.`
+      );
+      return null;
+    }
+    if (!markdown.trim()) return null;
+    return {
+      markdown,
+      imageBase: `${rawGithubUrl([owner, repo, ref, ...folder])}/`,
+      linkBase: `${githubTreeUrl(location, 'blob')}/`,
+    };
+  } catch (error) {
+    console.error(`Function registry: failed to fetch the README for "${template.id}":`, error);
+    return null;
+  }
+};
+
 export const registryTemplateSourceUrl = (template) => {
-  const rawPath = typeof template?.path === 'string' ? template.path : '';
-  const folder = rawPath.replace(/\/?template\.json$/i, '').replace(/^\/+|\/+$/g, '');
-  if (folder && !folder.includes('..') && !folder.includes('\\')) {
-    return `${EXAMPLES_REGISTRY_TREE}/${folder}`;
-  }
-  if (typeof template?.id === 'string' && template.id) {
-    return `${EXAMPLES_REGISTRY_TREE}/${template.id}`;
-  }
-  return EXAMPLES_REGISTRY_TREE;
+  const location = registryTemplateLocation(template);
+  if (location) return githubTreeUrl(location);
+  return template?.source == null ? EXAMPLES_REGISTRY_TREE : null;
 };
 
 export const matchesRegistryTemplateQuery = (template, query) => {
@@ -116,15 +240,25 @@ export const matchesRegistryTemplateQuery = (template, query) => {
 export const REGISTRY_ALL_FILTER = 'all';
 
 export const REGISTRY_FIRST_PARTY_CATEGORY = 'first-party';
+export const REGISTRY_PARTNER_CATEGORY = 'partner';
+export const REGISTRY_COMMUNITY_CATEGORY = 'community';
+
+export const REGISTRY_SOURCE_CATEGORIES = [
+  REGISTRY_FIRST_PARTY_CATEGORY,
+  REGISTRY_PARTNER_CATEGORY,
+  REGISTRY_COMMUNITY_CATEGORY,
+];
 
 // Mirrors the `categories` item rules in registry.schema.json.
-const REGISTRY_CATEGORY_PATTERN = /^[a-z0-9][a-z0-9-]*$/;
+const REGISTRY_CATEGORY_PATTERN = REGISTRY_ID_PATTERN;
 const REGISTRY_CATEGORY_MAX_LENGTH = 64;
 const REGISTRY_CATEGORY_MAX_ITEMS = 16;
 
 // Categories are open-ended in the registry; unlisted ids fall back to a humanized label.
 const REGISTRY_CATEGORY_LABELS = {
   [REGISTRY_FIRST_PARTY_CATEGORY]: 'First Party',
+  [REGISTRY_PARTNER_CATEGORY]: 'Partner',
+  [REGISTRY_COMMUNITY_CATEGORY]: 'Community',
   ai: 'AI',
   'ai-infrastructure': 'AI infrastructure',
   api: 'APIs',
@@ -160,8 +294,15 @@ export const normalizeRegistryCategories = (value) => {
 export const registryTemplateCategories = (template) =>
   normalizeRegistryCategories(template?.categories);
 
-export const isFirstPartyRegistryTemplate = (template) =>
-  registryTemplateCategories(template).includes(REGISTRY_FIRST_PARTY_CATEGORY);
+export const registryTemplateSource = (template) => {
+  const categories = registryTemplateCategories(template);
+  return REGISTRY_SOURCE_CATEGORIES.find((id) => categories.includes(id)) ?? null;
+};
+
+const registryCategoryRank = (id) => {
+  const index = REGISTRY_SOURCE_CATEGORIES.indexOf(id);
+  return index === -1 ? REGISTRY_SOURCE_CATEGORIES.length : index;
+};
 
 const matchesRegistryTemplateFilter = (template, filter) => {
   if (!filter || filter === REGISTRY_ALL_FILTER) return true;
@@ -171,18 +312,16 @@ const matchesRegistryTemplateFilter = (template, filter) => {
 const countRegistryTemplates = (templates, filter) =>
   templates.filter((template) => matchesRegistryTemplateFilter(template, filter)).length;
 
-// First party leads, then the most-used categories, ties broken by label.
+// Source labels lead in a fixed order, then the most-used categories, ties broken by label.
 export const registryCategoryIds = (templates) => {
   const ids = new Set(templates.flatMap(registryTemplateCategories));
   const counts = new Map([...ids].map((id) => [id, countRegistryTemplates(templates, id)]));
-  return [...ids].sort((a, b) => {
-    if (a === REGISTRY_FIRST_PARTY_CATEGORY) return -1;
-    if (b === REGISTRY_FIRST_PARTY_CATEGORY) return 1;
-    return (
+  return [...ids].sort(
+    (a, b) =>
+      registryCategoryRank(a) - registryCategoryRank(b) ||
       counts.get(b) - counts.get(a) ||
       registryCategoryLabel(a).localeCompare(registryCategoryLabel(b))
-    );
-  });
+  );
 };
 
 export const registryTemplateFilters = (
@@ -252,21 +391,81 @@ const fetchRegistryJson = async (path) => {
   return response.json();
 };
 
+const TEMPLATE_JSON_MAX_BYTES = 256 * 1024;
+const TEMPLATE_JSON_TIMEOUT_MS = 5000;
+
+const registryTemplateJsonUrl = (template) => {
+  if (template?.source == null) {
+    return isSafeTemplateJsonPath(template?.path) ? registrySourceUrl(template.path) : null;
+  }
+  const location = registryTemplateLocation(template);
+  if (!location || !templateJsonPathSegments(template.path)) return null;
+  const { owner, repo, ref, folder } = location;
+  return rawGithubUrl([owner, repo, ref, ...folder, TEMPLATE_JSON_FILE_NAME]);
+};
+
+const fetchTemplateJson = async (template) => {
+  const url = registryTemplateJsonUrl(template);
+  if (!url) return null;
+  const response = await fetch(url, {
+    ...registryFetchInit(),
+    signal: AbortSignal.timeout(TEMPLATE_JSON_TIMEOUT_MS),
+  });
+  if (!response.ok) return null;
+  const text = await readTextWithin(response, TEMPLATE_JSON_MAX_BYTES);
+  return text === null ? null : JSON.parse(text);
+};
+
+const withTemplateJsonCategories = async (entry) => {
+  try {
+    const data = await fetchTemplateJson(entry);
+    if (!data) return entry;
+    const topicalCategories = normalizeRegistryCategories(data.categories).filter(
+      (id) => !REGISTRY_SOURCE_CATEGORIES.includes(id)
+    );
+    const categories = normalizeRegistryCategories([...entry.categories, ...topicalCategories]);
+    return { ...entry, categories };
+  } catch {
+    return entry;
+  }
+};
+
 export const getFunctionRegistryCatalog = async () => {
   try {
-    return normalizeRegistryTemplates(await fetchRegistryJson('registry.json'));
+    const templates = normalizeRegistryTemplates(await fetchRegistryJson('registry.json'));
+    return await Promise.all(templates.map(withTemplateJsonCategories));
   } catch {
     return [];
   }
 };
 
+export const REGISTRY_ENV_REQUIRED_ON_DEFAULT_BRANCH = 'default-branch';
+
+const REGISTRY_ENV_REQUIRED_LABELS = new Map([
+  [true, 'Yes'],
+  [false, 'No'],
+  [REGISTRY_ENV_REQUIRED_ON_DEFAULT_BRANCH, 'Default branch only'],
+]);
+
+export const registryEnvironmentRequiredLabel = (value) =>
+  REGISTRY_ENV_REQUIRED_LABELS.get(value) ?? REGISTRY_ENV_REQUIRED_LABELS.get(true);
+
+export const hasRegistryEnvironmentRequirements = (variables) =>
+  variables.some(({ required }) => REGISTRY_ENV_REQUIRED_LABELS.has(required));
+
 const pickTemplateJsonFields = (data) => {
   if (!data || typeof data !== 'object') return {};
   const picked = {};
   if (Array.isArray(data.environment)) {
-    picked.environment = data.environment.filter(
-      (item) => item && typeof item.name === 'string' && typeof item.description === 'string'
-    );
+    picked.environment = data.environment
+      .filter(
+        (item) => item && typeof item.name === 'string' && typeof item.description === 'string'
+      )
+      .map(({ name, description, required }) =>
+        REGISTRY_ENV_REQUIRED_LABELS.has(required)
+          ? { name, description, required }
+          : { name, description }
+      );
   }
   if (Array.isArray(data.operations)) {
     picked.operations = data.operations.filter(
@@ -282,18 +481,16 @@ const pickTemplateJsonFields = (data) => {
 };
 
 export const getFunctionRegistryTemplate = async (id) => {
-  if (typeof id !== 'string' || !/^[a-z0-9][a-z0-9-]*$/.test(id)) return null;
+  if (typeof id !== 'string' || !REGISTRY_ID_PATTERN.test(id)) return null;
   const templates = await getFunctionRegistryCatalog();
   const entry = templates.find((template) => template.id === id);
   if (!entry) return null;
 
   let detail = {};
-  if (isSafeTemplateJsonPath(entry.path)) {
-    try {
-      detail = pickTemplateJsonFields(await fetchRegistryJson(entry.path));
-    } catch {
-      detail = {};
-    }
+  try {
+    detail = pickTemplateJsonFields(await fetchTemplateJson(entry));
+  } catch {
+    detail = {};
   }
 
   return {

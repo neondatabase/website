@@ -44,12 +44,12 @@ Data is sent for all computes in your Neon project. For example, if you have mul
 
 ### Neon metrics
 
-The integration exports a comprehensive set of metrics including:
+The integration exports these metrics:
 
-- **Connection counts** &#8212; Tracks active and idle database connections.
-- **Database size** &#8212; Monitors total size of all databases in bytes.
-- **Replication delay** &#8212; Measures replication lag in bytes and seconds.
-- **Compute metrics** &#8212; Includes CPU and memory usage statistics for your compute.
+- **Connection counts**: Tracks active and idle database connections.
+- **Database size**: Monitors total size of all databases in bytes.
+- **Replication delay**: Measures replication lag in bytes and seconds.
+- **Compute metrics**: Includes CPU and memory usage statistics for your compute.
 
 ### Postgres logs
 
@@ -74,22 +74,25 @@ Choose your preferred observability platform and follow the setup instructions:
 
 For a cost-effective, open-source monitoring stack, you can set up the complete LGTM stack (Loki for logs, Grafana for visualization, Tempo for traces, and Mimir for metrics) with OpenTelemetry integration.
 
+<Admonition type="important" title="Run the collector where Neon can reach it">
+Neon sends telemetry from its own servers, so the OpenTelemetry Collector must be reachable from the internet. A collector at `localhost` on your laptop won't receive any data. Run the stack on a server with a public address (for example, a cloud VM) and open port 4318 (HTTP) or 4317 (gRPC) to Neon, or expose a local collector through a tunnel. To try OpenTelemetry without hosting a collector, use [Grafana Cloud](#grafana-cloud) instead.
+</Admonition>
+
 **Quick setup with Docker:**
 
-1. **Clone and start the stack**:
-   ```bash
-   git clone https://github.com/grafana/docker-otel-lgtm.git
-   cd docker-otel-lgtm
-   docker compose up -d
-   ```
+On the server, start the `grafana/otel-lgtm` image, which bundles Grafana, the OpenTelemetry Collector, Prometheus/Mimir, Loki, and Tempo:
+
+```bash
+docker run -p 3000:3000 -p 4317:4317 -p 4318:4318 --rm -ti grafana/otel-lgtm
+```
 
 This provides:
 
-- **Grafana** at http://localhost:3000 (admin/admin)
-- **OpenTelemetry Collector** at http://localhost:4318 (HTTP) and localhost:4317 (gRPC)
+- **Grafana** on port 3000 (sign in with admin/admin)
+- **OpenTelemetry Collector** on port 4318 (HTTP) and port 4317 (gRPC)
 - **Prometheus/Mimir**, **Loki**, and **Tempo** for complete observability
 
-For detailed configuration, see the [docker-otel-lgtm documentation](https://github.com/grafana/docker-otel-lgtm).
+Grafana provides this image for development, demo, and testing environments. Grafana's [docker-otel-lgtm repository](https://github.com/grafana/docker-otel-lgtm) also includes [`run-lgtm.sh`](https://github.com/grafana/docker-otel-lgtm/blob/main/run-lgtm.sh), a launcher script that runs the same image with Docker or Podman and keeps data in local folders between restarts. To use it, clone the repository and run `./run-lgtm.sh` from its root. For Windows, Apple Container, and other options, see the repository's README.
 
 ### Grafana Cloud
 
@@ -112,10 +115,13 @@ If you use New Relic, you'll need to sign up for an account and get your license
 
    <details>
    <summary>Create New Relic license key</summary>
+
    1. Click on your user menu in the bottom left corner.
    2. Select **API Keys** from the menu.
 
-   ![New Relic profile menu showing API Keys option](/docs/guides/new_relic_api_keys.png) 3. Click **Create a key** → choose **Ingest - License**. Copy the key immediately (you can't view it again later).
+   ![New Relic profile menu showing API Keys option](/docs/guides/new_relic_api_keys.png)
+
+   3. Click **Create a key** and choose **Ingest - License**. Copy the key immediately (you can't view it again later).
 
    ![New Relic API Keys page showing license key types](/docs/guides/new_relic_copy_key.png)
 
@@ -150,8 +156,7 @@ You can enable either or both options based on your monitoring needs.
 2. **Enter your Endpoint URL** based on your platform:
 
    **For Grafana OSS (docker-otel-lgtm)**:
-   - `http://localhost:4318` (if running locally)
-   - `http://your-server-ip:4318` (if running on a remote server)
+   - `http://your-server-ip:4318`, where `your-server-ip` is the public address or hostname of the server running the stack. Don't use `localhost`: Neon's servers send the data, so `localhost` doesn't point to your machine.
 
    **For Grafana Cloud**:
    - Use your Grafana Cloud OTLP endpoint (typically `https://otlp-gateway-{region}.grafana.net/otlp`)
@@ -238,13 +243,13 @@ Your Neon data should start appearing in your observability platform within a fe
 
 1. **Access Grafana Explore**: Visit `http://localhost:3000` (admin/admin) or your Grafana Cloud Instance and navigate to **Explore**
 
-2. **Check metrics**: Select your **Prometheus** data source and use this query to check if data is flowing::
+2. **Check metrics**: Select your **Prometheus** data source and use this query to check if data is flowing:
 
    ```promql
    neon_connection_counts
    ```
 
-3. **Create dashboards**: You can visualize using [Grafana Drilldown apps](https://grafana.com/docs/grafana/latest/explore/simplified-exploration/) or use the dashboard JSON from [Grafana Cloud Documentation](/docs/guides/grafana-cloud#create-a-monitoring-dashboard)
+3. **Create dashboards**: You can visualize using [Grafana Drilldown apps](https://grafana.com/docs/grafana/latest/explore/simplified-exploration/) or use the dashboard JSON from [Grafana Cloud Documentation](/docs/guides/grafana-cloud#import-the-neon-dashboard)
 
 ### For New Relic users
 
@@ -310,7 +315,7 @@ Additionally, if you are setting up the OpenTelemetry integration for a project 
 
 ## Available metrics
 
-Neon exports a comprehensive set of metrics including system metrics (CPU, RAM), database metrics (connections, rows, deadlocks), and PgBouncer connection pooling metrics (client and server connections).
+Neon exports a set of metrics including system metrics (CPU, RAM), database metrics (connections, rows, deadlocks), and PgBouncer connection pooling metrics (client and server connections).
 
 For a complete list of all metrics and log fields exported by Neon, see the [Metrics and logs reference](/docs/reference/metrics-logs).
 

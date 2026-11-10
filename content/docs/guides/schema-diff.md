@@ -113,7 +113,7 @@ To compare schemas between two branches, you can cURL command similar to the one
 curl --request GET \
      --url 'https://console.neon.tech/api/v2/projects/wispy-butterfly-25042691/branches/br-rough-boat-a54bs9yb/compare_schema?base_branch_id=br-royal-star-a54kykl2&db_name=neondb' \
      --header 'accept: application/json' \
-     --header 'authorization: Bearer $NEON_API_KEY' | jq -r '.diff'
+     --header "authorization: Bearer $NEON_API_KEY" | jq -r '.diff'
 ```
 
 The `compare_schema` endpoint supports the following parameters:

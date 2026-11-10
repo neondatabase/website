@@ -1,3 +1,224 @@
+- id: 'zite'
+  title: 'Zite'
+  isFeatured: false
+  logo:
+    mediaItemUrl: '/images/case-studies/zite.svg'
+    mediaDetails:
+      width: 60
+      height: 32
+  quote: 'We were getting ready to hire dedicated engineers just to manage and scale Zite Database. With Neon, we didn’t need to do that – we were able to give every end user their own database, including on the free plan'
+  author:
+    name: 'Dominic Whyte'
+    post: 'Co-founder at Zite'
+  isInternal: true
+  internalPostSlug: 'how-zite-provisions-isolated-postgres-databases-for-every-user'
+  externalUrl: ''
+  categories:
+    - slug: 'ai'
+      name: 'AI & Agents'
+    - slug: 'platforms'
+      name: 'Platforms'
+  evidence:
+    summary: 'Zite is an AI app builder from the Fillout team that gives every end user their own Neon Postgres database for Zite Database.'
+    useCase: 'platforms'
+    date: '2026-02-06'
+    features:
+      - 'postgres'
+      - 'api'
+      - 'scale-to-zero'
+    claims:
+      - 'Because Neon is usage-based and can scale down databases when they aren’t being used, we’re able to deploy thousands of new databases per day without costs getting out of hand'
+      - 'Some Zite customers were building lightweight apps, while others were sending thousands of requests per second.'
+      - 'Zite uses Neon’s TypeScript API client to provision and manage databases directly from their application code.'
+
+- id: 'nephrocompass'
+  title: 'NephroCompass'
+  isFeatured: false
+  logo:
+    mediaItemUrl: '/images/case-studies/nephrocompass.svg'
+    mediaDetails:
+      width: 177
+      height: 32
+  quote: 'I’ve worked with Postgres, Snowflake, and AWS in my professional environment, but for building a side project, I wanted something easier to set up. It hardly took me 10 minutes to understand how to link Neon with my application and how to make my ML workflows connect to it'
+  author:
+    name: 'Deepti Bahel'
+    post: 'Data Engineer and creator of NephroCompass'
+  isInternal: true
+  internalPostSlug: 'the-transplant-story-that-sparked-a-hackathon-project'
+  externalUrl: ''
+  categories:
+    - slug: 'startups'
+      name: 'Startups'
+  evidence:
+    summary: 'NephroCompass is an open-source kidney disease risk tool built by a data engineer, storing models, predictions, and logs in Neon via the Data API.'
+    useCase: 'full-stack-apps'
+    date: '2025-12-11'
+    features:
+      - 'postgres'
+      - 'data-api'
+    claims:
+      - 'From there, the Data API became the single interface she used for reading and writing data.'
+      - 'Storing every inference the app runs, including the inputs, outputs, and SHAP explanations'
+
+- id: 'dat'
+  title: 'DAT'
+  isFeatured: false
+  logo:
+    mediaItemUrl: '/images/case-studies/dat.svg'
+    mediaDetails:
+      width: 47
+      height: 32
+  quote: 'During the Eid cleanup, we have thousands of workers sending nonstop updates for three straight days. Neon just scales with the load – sometimes the write side, sometimes the read side – and we don’t have to touch a thing'
+  author:
+    name: 'Ahsan Nabi Dar'
+    post: 'CTO and co-founder of DAT'
+  isInternal: true
+  internalPostSlug: 'dat-streams-millions-of-staff-messages-through-neon'
+  externalUrl: ''
+  categories:
+    - slug: 'fast-moving-teams'
+      name: 'Fast-moving teams'
+  evidence:
+    summary: 'DAT is a Pakistan-based startup that manages field staff through messaging apps, running its write-heavy message pipeline on Neon.'
+    useCase: 'bursty-workloads'
+    date: '2025-09-29'
+    features:
+      - 'postgres'
+      - 'read-replicas'
+      - 'autoscaling'
+      - 'scale-to-zero'
+      - 'branching'
+      - 'api'
+    claims:
+      - 'Today, the company powers mission-critical operations for the Lahore Waste Management Company (LWMC), Pakistan’s largest public sector employer with more than 16,000 staff across multiple districts.'
+      - 'Every message in our pipeline triggers four or five jobs, all written into the database. We’re processing around 10 million transactions a month'
+      - 'Since our workload is write-heavy, we use Neon’s primary instance for nonstop ingestion, and then spin up read replicas for dashboards and analytics'
+
+- id: 'databuddy'
+  title: 'Databuddy'
+  isFeatured: false
+  logo:
+    mediaItemUrl: '/images/case-studies/databuddy.svg'
+    mediaDetails:
+      width: 136
+      height: 32
+  quote: 'I was surprised by how fast Neon was. It was faster than my self-hosted setup and Prisma Postgres. This plus the convenience of the Free Plan makes it a no-brainer for building your projects.'
+  author:
+    name: 'Issa Nassar'
+    post: 'founder of Databuddy'
+  isInternal: true
+  internalPostSlug: 'databuddy-is-open-sourcing-privacy-first-analytics-built-on-neon'
+  externalUrl: ''
+  categories:
+    - slug: 'startups'
+      name: 'Startups'
+  evidence:
+    summary: 'Databuddy is an open source, privacy-first web analytics tool that keeps its transactional metadata in Neon and raw events in ClickHouse.'
+    useCase: 'full-stack-apps'
+    date: '2025-08-28'
+    features:
+      - 'postgres'
+      - 'pooling'
+    claims:
+      - 'Neon stores all structured metadata and takes care of the low-latency relational operations.'
+      - 'Incoming events are first verified against Neon to confirm ownership and then passed on to ClickHouse.'
+
+- id: 'ragrabbit'
+  title: 'RagRabbit'
+  isFeatured: false
+  logo:
+    mediaItemUrl: '/images/case-studies/ragrabbit.svg'
+    mediaDetails:
+      width: 125
+      height: 32
+  quote: 'With Neon, I get pgVector for embeddings, plus all the regular Postgres features like full-text search. It’s a single DB for everything—no need for multiple systems'
+  author:
+    name: 'Marco D’Alia'
+    post: 'Software Architect behind RagRabbit'
+  isInternal: true
+  internalPostSlug: 'ragrabbit-neon'
+  externalUrl: ''
+  categories:
+    - slug: 'ai'
+      name: 'AI & Agents'
+  evidence:
+    summary: 'RagRabbit is an open-source RAG search tool that stores embeddings in Neon Postgres with pgvector and deploys on Vercel.'
+    useCase: 'full-stack-apps'
+    date: '2025-03-17'
+    features:
+      - 'postgres'
+      - 'pgvector'
+      - 'scale-to-zero'
+      - 'vercel-integration'
+    claims:
+      - 'Instead of relying on an external vector DB, these embeddings are stored in Postgres with the pgVector extension.'
+      - 'Choose Vercel, connect to a Neon Postgres database, and you’re set—no separate vector cluster or additional job workers.'
+
+- id: 'zap-xyz'
+  title: 'Zap.xyz'
+  isFeatured: false
+  logo:
+    mediaItemUrl: '/images/case-studies/zap-xyz.svg'
+    mediaDetails:
+      width: 99
+      height: 32
+  quote: 'Inngest + Neon handle the entire change data capture process for us. Setting it up took a fraction of the time compared to AWS'
+  author:
+    name: 'Jacob Devore'
+    post: 'Co-Founder at Zap'
+  isInternal: true
+  internalPostSlug: 'how-zap-xyz-built-a-serverless-cdc-pipeline-with-neon-and-inngest'
+  externalUrl: ''
+  categories:
+    - slug: 'startups'
+      name: 'Startups'
+  evidence:
+    summary: 'Zap.xyz is a crypto sentiment aggregator that ingests messages into Neon and uses Inngest on Neon logical replication for change data capture.'
+    useCase: 'full-stack-apps'
+    date: '2025-02-12'
+    features:
+      - 'postgres'
+      - 'logical-replication'
+      - 'pooling'
+      - 'autoscaling'
+    claims:
+      - 'is a new crypto aggregation platform that processes millions of messages from community channels like Telegram'
+      - 'We spent about 10 hours just trying to build a proof of concept in AWS'
+
+- id: 'kylon'
+  title: 'Kylon'
+  isFeatured: false
+  logo:
+    mediaItemUrl: '/images/case-studies/kylon.svg'
+    mediaDetails:
+      width: 117
+      height: 32
+  quote: 'The draft workflow would have been much harder to build elsewhere: branch, let the agent try it, let a person check it, then publish. Without cheap branches, we''d have had to choose between safety and speed'
+  author:
+    name: 'Quinn Leng'
+    post: 'co-founder at Kylon'
+  isInternal: true
+  internalPostSlug: 'inside-a-kylon-room-where-people-and-agents-build-apps-on-neon'
+  externalUrl: ''
+  categories:
+    - slug: 'ai'
+      name: 'AI & Agents'
+  evidence:
+    summary: 'Kylon is an AI workspace where teams and their agents build apps together, with each app''s data in its own Neon database.'
+    useCase: 'agents'
+    date: '2026-11-04'
+    features:
+      - 'postgres'
+      - 'branching'
+      - 'scale-to-zero'
+      - 'autoscaling'
+      - 'api'
+      - 'mcp'
+    claims:
+      - 'Kylon creates a branch per draft, an in-progress version of an app that an agent or a person opens to make changes, which only goes live when someone publishes it'
+      - 'Each app inside that workspace gets its own isolated Neon database'
+      - 'if an agent makes a mistake on a table, the agent itself can also easily undo it'
+
 - id: 'skydive'
   title: 'Skydive'
   isFeatured: false
@@ -16,6 +237,20 @@
   categories:
     - slug: 'ai'
       name: 'AI & Agents'
+  evidence:
+    summary: 'Skydive lets teams build AI coworkers whose agents deploy their own isolated Neon Postgres backends mid-task through the Neon API.'
+    useCase: 'agents'
+    date: '2026-09-29'
+    features:
+      - 'postgres'
+      - 'api'
+      - 'autoscaling'
+      - 'scale-to-zero'
+      - 'pooling'
+    claims:
+      - 'When a Skydive agent needs a durable state, it deploys an isolated Neon backend mid-task, with no human in the path, and it takes it around a second.'
+      - 'That call hits Skydive’s API, which creates a Neon project with a single main branch on Postgres 18, writes the pooled connection string to the agent’s secret store, and injects it into the sandbox as DATABASE_URL.'
+      - 'Small: 1 GiB storage quota and 0.25 CU (most databases stay here)'
 
 - id: 'lubot'
   title: 'LuBot'
@@ -35,6 +270,21 @@
   categories:
     - slug: 'ai'
       name: 'AI & Agents'
+  evidence:
+    summary: 'LuBot is a chat product for business analytics that uses the Neon API to provision an isolated Postgres database for each paying customer.'
+    useCase: 'platforms'
+    date: '2026-09-14'
+    features:
+      - 'postgres'
+      - 'branching'
+      - 'api'
+      - 'autoscaling'
+      - 'scale-to-zero'
+      - 'pooling'
+    claims:
+      - 'Six days from zero to a working per-user Neon branch on payment.'
+      - 'In LuBot, the most common configuration is a 0.25 CU active floor and a 4 CU burst ceiling.'
+      - 'Each tenant in LuBot has 52 tables across four schemas'
 
 - id: 'commsync'
   title: 'CommSync'
@@ -54,6 +304,16 @@
   categories:
     - slug: 'startups'
       name: 'Startups'
+  evidence:
+    summary: 'CommSync gives business owners one inbox for SMS and email, and runs text, vector, and hybrid search on Neon Postgres with Lakebase Search.'
+    useCase: 'full-stack-apps'
+    date: '2026-07-30'
+    features:
+      - 'postgres'
+    claims:
+      - 'Using Lakebase Search, we clocked around 18.6ms warm, versus around 19.5 seconds on our old cold-start GIN approach.'
+      - 'This knowledge base runs entirely on lakebase_vector: the same 1024-dimension embeddings and cosine-distance operators as the inbox''s semantic search, reused wholesale.'
+      - 'the shared inbox index (hundreds of thousands of message chunks) uses the lakebase_ann index for approximate nearest-neighbor speed'
 
 - id: 'magic-circle'
   title: 'Magic Circle'
@@ -73,6 +333,17 @@
   categories:
     - slug: 'startups'
       name: 'Startups'
+  evidence:
+    summary: 'Magic Circle is a multiplayer game studio on the web and Discord that stores player data in Neon and uses branches to ship daily.'
+    useCase: 'branching-workflows'
+    date: '2024-12-12'
+    features:
+      - 'postgres'
+      - 'branching'
+    claims:
+      - 'Scaling to millions of games with an infra bill below $500'
+      - 'Not only do they iterate multiple times a day, but they also frequently ship entirely new games in under a week.'
+      - 'Each pull request in GitHub automatically triggers the creation of a dedicated Neon branch via a GitHub Action.'
 
 - id: 'create-xyz'
   title: 'Anything'
@@ -92,6 +363,18 @@
   categories:
     - slug: 'ai'
       name: 'AI & Agents'
+  evidence:
+    summary: 'Anything (formerly Create) is an AI app builder that bakes a Neon Postgres database into every generated app and tests schema migrations on branches.'
+    useCase: 'agents'
+    date: '2025-02-12'
+    features:
+      - 'postgres'
+      - 'branching'
+      - 'scale-to-zero'
+      - 'api'
+    claims:
+      - 'Create bakes-in a Postgres database from the start—and that’s where Neon comes in.'
+      - 'the system automatically generates the necessary database migration and applies it to an isolated Neon branch, which acts as a separate environment where the changes can be tested first.'
 
 - id: 'vapi'
   title: 'Vapi'
@@ -111,6 +394,18 @@
   categories:
     - slug: 'ai'
       name: 'AI & Agents'
+  evidence:
+    summary: 'Vapi lets developers build voice AI agents and runs all its business-critical Postgres workloads on Neon to absorb spiky call traffic.'
+    useCase: 'bursty-workloads'
+    date: '2025-02-21'
+    features:
+      - 'postgres'
+      - 'autoscaling'
+      - 'pooling'
+    claims:
+      - 'Neon now powers all of Vapi’s business-critical Postgres workloads.'
+      - 'Vapi migrated from Supabase to Neon for exactly this reason: real-time autoscaling.'
+      - 'Some of Vapi’s customers have a steady flow of interactions, while others trigger massive spikes (like outbound sales campaigns or a rise in customer service requests) that can generate thousands of concurrent calls.'
 
 - id: 'nodecraft'
   title: 'Nodecraft'
@@ -130,6 +425,18 @@
   categories:
     - slug: 'startups'
       name: 'Startups'
+  evidence:
+    summary: 'Nodecraft is a game server hosting service that runs its serverless backend on Cloudflare Workers and Neon, using branches for development and demos.'
+    useCase: 'full-stack-apps'
+    date: '2025-03-20'
+    features:
+      - 'postgres'
+      - 'branching'
+      - 'api'
+    claims:
+      - 'Live demos (e.g. the ones they’re running at GDC) use a dedicated branch that resets every hour, allowing a clean slate for showcasing their platform without hassle.'
+      - 'Every developer gets their own isolated Neon branch to test changes without interfering with production data.'
+      - 'Neon serves as the central database, storing core user data such as game settings and mod configurations.'
 
 - id: 'velocity'
   title: 'Velocity'
@@ -149,6 +456,19 @@
   categories:
     - slug: 'ai'
       name: 'AI & Agents'
+  evidence:
+    summary: 'Velocity builds an AI production engineer for incident response and moved from RDS to Neon for multi-cloud scaling, branching, and pgvector.'
+    useCase: 'full-stack-apps'
+    date: '2025-04-01'
+    features:
+      - 'postgres'
+      - 'branching'
+      - 'autoscaling'
+      - 'pgvector'
+      - 'azure'
+    claims:
+      - 'Switching to Neon’s serverless, multi-cloud architecture solved all of these issues, allowing Velocity to scale effortlessly without having to provision or manage dedicated infrastructure per cloud.'
+      - 'Before running migrations in production, the team creates branches from prod to test the impact and ensure nothing breaks.'
 
 - id: 'endform'
   title: 'Endform'
@@ -168,6 +488,17 @@
   categories:
     - slug: 'startups'
       name: 'Startups'
+  evidence:
+    summary: 'Endform runs large Playwright end-to-end test suites and uses Neon as its backing database, with a Neon branch for every pull request.'
+    useCase: 'branching-workflows'
+    date: '2025-05-15'
+    features:
+      - 'postgres'
+      - 'branching'
+    claims:
+      - 'Every PR gets its own Neon branch, spun up via Alchemy, a new Typescript-native infrastructure-as-code tool that the Endform team is loving.'
+      - 'Customers, organizations, test runs, suite definitions live in Neon.'
+      - 'Branches include data from the parent branch, which helps catch issues that wouldn’t surface in empty test databases (e.g, a missing default on a NOT NULL column, _true story_).'
 
 - id: 'smashsend'
   title: 'SMASHSEND'
@@ -187,6 +518,20 @@
   categories:
     - slug: 'startups'
       name: 'Startups'
+  evidence:
+    summary: 'SMASHSEND is an AI-powered email marketing tool for small businesses that moved its bursty Postgres workload from AWS RDS to Neon.'
+    useCase: 'bursty-workloads'
+    date: '2025-06-03'
+    features:
+      - 'postgres'
+      - 'autoscaling'
+      - 'pooling'
+      - 'branching'
+      - 'vercel-integration'
+    claims:
+      - 'The SMASHSEND team ended up paying $1,000 to $1,500 every month, even when the database was idle most of the time'
+      - 'They followed a straightforward migration plan, and were fully moved over by the end of the afternoon'
+      - 'The moment SMASHSEND switched, their background jobs stopped failing.'
 
 - id: 'dev'
   title: 'DEV'
@@ -213,6 +558,18 @@
   categories:
     - slug: 'fast-moving-teams'
       name: 'Fast-moving teams'
+  evidence:
+    summary: 'DEV runs the dev.to developer community on Neon after migrating off Heroku Postgres, using autoscaling and read replicas for analytics.'
+    useCase: 'large-databases'
+    date: '2025-06-19'
+    features:
+      - 'postgres'
+      - 'autoscaling'
+      - 'read-replicas'
+    claims:
+      - 'Their main database stores most of the platform’s application logic and state – prod was 1.2TB at the moment of migration and it’s growing steadily.'
+      - 'Our Heroku bill was thousands of dollars a month, and we knew this bill was inflated.'
+      - 'They’re connecting tools like Metabase and their in-house workflow automation scripts to these replicas, with plans to do more over time.'
 
 - id: 'riff'
   title: 'Riff'
@@ -232,6 +589,19 @@
   categories:
     - slug: 'ai'
       name: 'AI & Agents'
+  evidence:
+    summary: 'Riff is a vibe coding tool whose AI agent builds full-stack apps, and every new app gets its own Neon Postgres project and auth.'
+    useCase: 'agents'
+    date: '2025-06-19'
+    features:
+      - 'postgres'
+      - 'auth'
+      - 'api'
+      - 'scale-to-zero'
+    claims:
+      - 'Every time someone creates a new Riff app, Neon silently spins up a dedicated Postgres project behind the scenes, complete with its own storage, compute, and connection strings.'
+      - 'If a user wants to take their data with them, Riff can transfer ownership of the Neon project in one API call'
+      - 'Previously, setting up data persistence and authentication meant wiring up third-party tools like Supabase.'
 
 - id: 'traconiq'
   title: 'traconiq'
@@ -251,6 +621,19 @@
   categories:
     - slug: 'fast-moving-teams'
       name: 'Fast-moving teams'
+  evidence:
+    summary: 'traconiq manages logistics vehicle fleets and moved its multi-terabyte telemetry Postgres from Amazon RDS to Neon, using branches and autoscaling.'
+    useCase: 'large-databases'
+    date: '2025-07-01'
+    features:
+      - 'postgres'
+      - 'branching'
+      - 'autoscaling'
+      - 'scale-to-zero'
+    claims:
+      - 'In database-land, this means handling a continuous stream of position and engine data across thousands of vehicles, ingesting hundreds of records per second, and storing several terabytes of Postgres data at any given time.'
+      - 'In RDS, that meant four separate instances, each sized for multi-terabyte storage and high-ingestion traffic.'
+      - 'All production branches run with autoscaling enabled, which allows traconiq to accommodate daytime ingestion spikes of over 100 records per second, and at the same time, scale down automatically during quiet nighttime hours to save compute costs.'
 
 - id: 'vecstore'
   title: 'Vecstore'
@@ -270,6 +653,18 @@
   categories:
     - slug: 'ai'
       name: 'AI & Agents'
+  evidence:
+    summary: 'Vecstore is an AI search API built on Rust that replaced Pinecone and AWS RDS with Neon and pgvector for vectors and relational data.'
+    useCase: 'full-stack-apps'
+    date: '2025-07-17'
+    features:
+      - 'postgres'
+      - 'pgvector'
+      - 'branching'
+      - 'autoscaling'
+    claims:
+      - 'Vectsore operates across four global regions. For each one, they’ve provisioned a separate Neon project (the equivalent of a logical Postgres instance).'
+      - 'In Vecstore’s case, they saw latencies that often hit the 200ms range, since every search required two separate calls – one to RDS and one to Pinecone.'
 
 - id: 'dyad'
   title: 'Dyad'
@@ -289,6 +684,17 @@
   categories:
     - slug: 'ai'
       name: 'AI & Agents'
+  evidence:
+    summary: 'Dyad is a local-first, open-source AI app builder whose Portal template uses Neon Postgres, with branches powering database undo and checkpoints.'
+    useCase: 'agents'
+    date: '2025-08-06'
+    features:
+      - 'postgres'
+      - 'branching'
+      - 'api'
+    claims:
+      - 'Behind the scenes, Dyad uses Neon’s branching and Instant Restore APIs to implement this workflow.'
+      - 'When a user creates or edits an app, Dyad writes those changes to a development branch (a child of the production branch).'
 
 - id: 'xpander-ai'
   title: 'xpander.ai'
@@ -308,6 +714,17 @@
   categories:
     - slug: 'ai'
       name: 'AI & Agents'
+  evidence:
+    summary: 'xpander.ai is a backend for building and running AI agents, and it stores each tenant''s agent memory in a dedicated Neon project.'
+    useCase: 'agents'
+    date: '2025-08-07'
+    features:
+      - 'postgres'
+      - 'api'
+      - 'scale-to-zero'
+    claims:
+      - 'When a new tenant is created, xpander automatically provisions a Neon project for them, complete with agent memory, tool configurations, and session history.'
+      - 'Cost stays low – each project can be assigned a small compute unit, and when idle, they autosuspend automatically.'
 
 - id: 'neptune'
   title: 'Neptune'
@@ -325,6 +742,18 @@
   internalPostSlug: 'neptune-built-a-fast-serverless-backend-with-neon-and-vercel'
   externalUrl: ''
   categories: []
+  evidence:
+    summary: 'Neptune, an AI prenup concierge, runs its Next.js app on Vercel with Neon as the primary database and a branch per feature branch.'
+    useCase: 'branching-workflows'
+    date: '2025-08-13'
+    features:
+      - 'postgres'
+      - 'branching'
+      - 'vercel-integration'
+    claims:
+      - 'The migration from Google Cloud SQL to Neon took maybe an hour total.'
+      - 'Developers at Neptune spin up a dedicated Neon branch for each Git feature branch.'
+      - 'Currently, Neptune uses a Next.js application written in TypeScript, hosted on Vercel, with Neon as the primary database to enable fast development through a branching model for isolated environments.'
 
 - id: 'marble'
   title: 'Marble'
@@ -344,6 +773,17 @@
   categories:
     - slug: 'startups'
       name: 'Startups'
+  evidence:
+    summary: 'Marble is an open-source headless CMS that uses Neon as its main database and branches to test migrations against production data.'
+    useCase: 'branching-workflows'
+    date: '2025-09-15'
+    features:
+      - 'postgres'
+      - 'branching'
+      - 'scale-to-zero'
+    claims:
+      - 'For example, when Marble migrated all users into a new offers model (a change touching every row in the users table), they first ran the migration on a dev branch.'
+      - 'Marble learned this the hard way when an early migration PR impacted their live database.'
 
 - id: 'sharing-excess'
   title: 'Sharing Excess'
@@ -353,14 +793,26 @@
     mediaDetails:
       width: 149
       height: 32
-  quote: ''
+  quote: 'For a small team, branching and scale-to-zero just make our lives markedly easier. We’re able to use real data without risky scripts touching production, and we don’t pay overnight for what we don’t use.'
   author:
-    name: ''
-    post: ''
+    name: 'Ryan McHenry'
+    post: 'Head of Technology, Sharing Excess'
   isInternal: true
   internalPostSlug: 'branching-as-the-environment-how-sharing-excess-ships-faster-on-neon'
   externalUrl: ''
   categories: []
+  evidence:
+    summary: 'Sharing Excess is a nonprofit food-rescue organization whose small engineering team uses Neon branches per environment and scale-to-zero to ship faster.'
+    useCase: 'branching-workflows'
+    date: '2025-10-23'
+    features:
+      - 'postgres'
+      - 'branching'
+      - 'scale-to-zero'
+    claims:
+      - 'Perishable cargo, often in pallets and truckloads, must be split and routed daily across a network of 1,800+ vendors.'
+      - 'GitHub feature → staging → production merges map one-to-one to Neon branches and environments.'
+      - 'Branches reset from production and run through on-demand anonymization for easy access in local development.'
 
 - id: 'axess-intelligence'
   title: 'Axess Intelligence'
@@ -380,6 +832,17 @@
   categories:
     - slug: 'backend'
       name: 'Backend'
+  evidence:
+    summary: 'Axess Intelligence gives GTM teams competitive CRM insights and runs its mobile rewards app on Neon''s Data API with branch-based environments.'
+    useCase: 'full-stack-apps'
+    date: '2025-11-20'
+    features:
+      - 'postgres'
+      - 'data-api'
+      - 'branching'
+    claims:
+      - 'Each Neon branch automatically gets its own Data API URL. The team maintains a production branch, a development branch, and feature-specific branches for testing new ideas.'
+      - 'The Data API replaces hundreds of lines of repetitive CRUD logic.'
 
 - id: 'daisy'
   title: 'Daisy'
@@ -399,6 +862,17 @@
   categories:
     - slug: 'backend'
       name: 'Backend'
+  evidence:
+    summary: 'Daisy is a generative media studio whose main app and mini apps share one Neon database and Neon Auth for a single login.'
+    useCase: 'full-stack-apps'
+    date: '2025-11-18'
+    features:
+      - 'postgres'
+      - 'auth'
+    claims:
+      - 'Every Daisy app uses the same Google login through Neon Auth, ensuring users only sign in once across the entire platform.'
+      - 'Adding a new mini app is as simple as approving it inside Neon Auth’s configuration list.'
+      - 'Daisy maintains a single Neon project where both app data and user identities live.'
 
 - id: 'bitso'
   title: 'Bitso'
@@ -425,6 +899,18 @@
   categories:
     - slug: 'fast-moving-teams'
       name: 'Fast-moving teams'
+  evidence:
+    summary: 'Bitso, a Latin American digital financial services company, pairs Signadot sandboxes with Neon branches so each engineer gets an isolated production-like database.'
+    useCase: 'branching-workflows'
+    date: '2026-01-07'
+    features:
+      - 'postgres'
+      - 'branching'
+      - 'autoscaling'
+      - 'scale-to-zero'
+    claims:
+      - 'runs a large engineering organization with hundreds of developers and microservices, and a mission-critical system that processes millions of transactions'
+      - 'Bitso’s platform is built on hundreds of Java microservices communicating asynchronously through Kafka, making it impossible for a developer to reproduce the entire stack locally.'
 
 - id: 'atoms'
   title: 'Atoms'
@@ -444,6 +930,20 @@
   categories:
     - slug: 'ai'
       name: 'AI & Agents'
+  evidence:
+    summary: 'Atoms is a multi-agent AI app builder that gives every generated app its own Neon project, with auth and scale-to-zero.'
+    useCase: 'agents'
+    date: '2026-01-13'
+    features:
+      - 'postgres'
+      - 'api'
+      - 'auth'
+      - 'scale-to-zero'
+      - 'autoscaling'
+    claims:
+      - 'Every new app created with Atoms receives its own dedicated Neon instance.'
+      - 'They’re part of the Neon Agent Plan, taking advantage of higher resource limits and special pricing to power their projected scale of millions of projects.'
+      - 'This lets Atoms deploy thousands of concurrent apps while aligning infrastructure cost perfectly with real usage.'
 
 - id: 'strapi'
   title: 'Strapi'
@@ -463,6 +963,16 @@
   categories:
     - slug: 'ai'
       name: 'AI & Agents'
+  evidence:
+    summary: 'Strapi built Fimo.ai, an AI-native CMS for live websites, which runs one Neon database per app with dev and prod branches.'
+    useCase: 'agents'
+    date: '2026-01-21'
+    features:
+      - 'postgres'
+      - 'branching'
+    claims:
+      - 'with two branches per app: a dev branch for building and iteration, and a prod branch for live traffic.'
+      - 'Fimo also uses snapshots for promotion and rollbacks'
 
 - id: 'qwikbuild'
   title: 'QwikBuild'
@@ -482,6 +992,19 @@
   categories:
     - slug: 'ai'
       name: 'AI & Agents'
+  evidence:
+    summary: 'QwikBuild is an AI app builder, first launched on WhatsApp, that provisions one isolated Neon project for every generated app.'
+    useCase: 'agents'
+    date: '2026-02-26'
+    features:
+      - 'postgres'
+      - 'api'
+      - 'autoscaling'
+      - 'scale-to-zero'
+      - 'branching'
+    claims:
+      - 'since it first launched, more than 15,000 creators have already used QwikBuild to build websites and apps for their businesses.'
+      - 'Neon is used to provision one isolated Postgres DB for each app'
 
 - id: 'specific-dev'
   title: 'Specific.dev'
@@ -499,6 +1022,19 @@
   internalPostSlug: 'how-specific-provisions-thousands-of-databases-for-coding-agents-using-neon'
   externalUrl: ''
   categories: []
+  evidence:
+    summary: 'Specific is a cloud for coding agents that provisions a Neon database per project through the Neon API, with branches for preview environments.'
+    useCase: 'agents'
+    date: '2026-03-18'
+    features:
+      - 'postgres'
+      - 'api'
+      - 'branching'
+      - 'scale-to-zero'
+    claims:
+      - 'Specific is now managing over 10,000 Neon databases. New projects provision within a second.'
+      - 'Thousands of Neon databases provisioned every month by specific.dev users.'
+      - 'Preview environments for every pull request use Neon branching to give the user full-stack application previews where data reflects what is in production but changes are isolated.'
 
 - id: 'basehub'
   title: 'BaseHub'
@@ -520,6 +1056,20 @@
       name: 'Startups'
     - slug: 'ai'
       name: 'AI & Agents'
+  evidence:
+    summary: 'BaseHub is a headless CMS that moved from Supabase to Neon for autoscaling with variable traffic, plus branching and the serverless driver.'
+    useCase: 'bursty-workloads'
+    date: '2024-09-10'
+    features:
+      - 'postgres'
+      - 'autoscaling'
+      - 'scale-to-zero'
+      - 'branching'
+      - 'serverless-driver'
+    claims:
+      - 'For short periods of time, BaseHub needed more compute—but in Supabase (like in most Postgres databases) there was no compute autoscaling, which forced them to overprovision resources.'
+      - 'BaseHub also uses the Neon serverless driver to connect Cloudflare Workers directly to Neon, which helped them get faster performance across regions.'
+      - 'All changes going to production are first tested on an isolated branch and only applied to production once they’re safe.'
 
 - id: 'retool'
   title: 'Retool'
@@ -546,6 +1096,18 @@
   categories:
     - slug: 'platforms'
       name: 'Platforms'
+  evidence:
+    summary: 'Retool, a tool for building internal apps, powers RetoolDB with one Neon project per end user, managed through the Neon API.'
+    useCase: 'platforms'
+    date: '2024-03-29'
+    features:
+      - 'postgres'
+      - 'api'
+      - 'scale-to-zero'
+    claims:
+      - 'This streamlined architecture enables Retool to manage +300,000 database projects with minimal engineering overhead—the fleet is currently managed by one engineer.'
+      - 'Retool creates one Neon project per every end user, each project with one Postgres database.'
+      - 'When a new Retool user signs up, they’re automatically assigned a pre-created, unclaimed database from a pool of Neon projects.'
 
 - id: 'koyeb'
   title: 'Koyeb'
@@ -584,25 +1146,17 @@
   categories:
     - slug: 'fast-moving-teams'
       name: 'Fast-moving teams'
-
-- id: 'vercel'
-  title: 'Vercel'
-  isFeatured: false
-  logo:
-    mediaItemUrl: '/images/case-studies/vercel.svg'
-    mediaDetails:
-      width: 120
-      height: 32
-  quote: 'By partnering with Neon, Vercel&#8217;s frontend platform is now the end-to-end serverless solution for building on the Web, from Next.js all the way to SQL.'
-  author:
-    name: 'Guillermo Rauch'
-    post: 'CEO'
-  isInternal: true
-  internalPostSlug: 'neon-postgres-on-vercel'
-  externalUrl: ''
-  categories:
-    - slug: 'platforms'
-      name: 'Platforms'
+  evidence:
+    summary: 'Neo.Tax automates tax credit calculations and uses Neon branches for deploy previews, end-to-end testing, and reproducing bugs.'
+    useCase: 'branching-workflows'
+    date: '2024-06-03'
+    features:
+      - 'postgres'
+      - 'branching'
+    claims:
+      - 'then an engineer would have to go into the database, look at all the values, and handwrite them into fixtures for our end-to-end tests… That’s multiple days for every single change'
+      - 'If data becomes corrupted or needs to be reset for any reason, developers can simply reset the branch from the parent development branch. This takes one second.'
+      - 'For their enterprise customers, who oftentimes need a dedicated tenant, Neo.Tax creates a separate project for that customer.'
 
 - id: 'wordware'
   title: 'Wordware'
@@ -622,6 +1176,18 @@
   categories:
     - slug: 'ai'
       name: 'AI & Agents'
+  evidence:
+    summary: 'Wordware is a web IDE for building AI agents with prompts, and uses Neon branches to create preview environments on real data.'
+    useCase: 'branching-workflows'
+    date: '2024-08-19'
+    features:
+      - 'postgres'
+      - 'branching'
+      - 'vercel-integration'
+    claims:
+      - 'This deployment process includes hooking up a new Neon branch for the database, making the environment an exact copy of production.'
+      - 'In Wordware, everything – from Stripe webhooks to just new code that’s being run— gets put on some preview URL using a Neon branch'
+      - 'The compounded value of this feature is “immense”, they said—it enables them to identify and fix problems early, preventing major system outages and reducing the need for emergency fixes.'
 
 - id: 'invenco'
   title: 'Invenco'
@@ -641,6 +1207,21 @@
   categories:
     - slug: 'fast-moving-teams'
       name: 'Fast-moving teams'
+  evidence:
+    summary: 'Invenco is a logistics SaaS company that moved its Lambda-based services from Aurora Serverless v2 to Neon to handle spiky e-commerce traffic.'
+    useCase: 'bursty-workloads'
+    date: '2024-11-05'
+    features:
+      - 'postgres'
+      - 'pooling'
+      - 'autoscaling'
+      - 'scale-to-zero'
+      - 'branching'
+      - 'logical-replication'
+    claims:
+      - 'Invenco reduced database costs by 80%, improved performance, and ensured smooth operations during high-traffic events.'
+      - 'Invenco’s bill with Neon is approximately 1/6 of what they paid with Aurora.'
+      - 'Production databases use autoscaling with minimum limit around 2 CUs and a higher maximum limit to handle traffic spikes.'
 
 - id: 'mindvalley'
   title: 'Mindvalley'
@@ -660,6 +1241,19 @@
   categories:
     - slug: 'fast-moving-teams'
       name: 'Fast-moving teams'
+  evidence:
+    summary: 'Mindvalley, a personal growth platform, uses Neon branches for dev and test previews while production stays on Google CloudSQL.'
+    useCase: 'branching-workflows'
+    date: '2024-10-17'
+    features:
+      - 'postgres'
+      - 'branching'
+      - 'api'
+      - 'pooling'
+    claims:
+      - 'The key feature driving this boost in developer velocity is branching, which allows their developers to spin up new previews in less than a minute.'
+      - 'From this main branch, hundreds of ephemeral environments can be immediately spun up without requiring any additional data syncs.'
+      - 'In a team of 100 developers, using shared database instances for dev/test quickly became a bottleneck, as developers needed to work on different features simultaneously.'
 
 - id: 'opusflow'
   title: 'OpusFlow'
@@ -679,6 +1273,19 @@
   categories:
     - slug: 'fast-moving-teams'
       name: 'Fast-moving teams'
+  evidence:
+    summary: 'OpusFlow is a Dutch ERP tool for solar installers that gives every customer an isolated Postgres database in its own Neon project.'
+    useCase: 'platforms'
+    date: '2024-02-22'
+    features:
+      - 'postgres'
+      - 'branching'
+      - 'autoscaling'
+      - 'scale-to-zero'
+    claims:
+      - 'They implement a single tenancy system: every OpusFlow customer has their own isolated Postgres database living in a separate Neon project.'
+      - 'OpusFlow leverages branching to offer instantaneous point-in-time restores to their customers.'
+      - 'OpusFlow also has dedicated Neon projects for testing and development, where each developer also gets their own branch.'
 
 - id: 'encore'
   title: 'Encore'
@@ -700,6 +1307,18 @@
       name: 'AI & Agents'
     - slug: 'platforms'
       name: 'Platforms'
+  evidence:
+    summary: 'Encore deploys apps to users'' own AWS or GCP accounts and uses Neon branches to power its Preview Environments, with Neon as a catalog option.'
+    useCase: 'branching-workflows'
+    date: '2026-02-25'
+    features:
+      - 'postgres'
+      - 'branching'
+      - 'scale-to-zero'
+    claims:
+      - 'Long before Leap, Encore was already using Neon to power one of the most loved features of the platform – Preview Environments.'
+      - 'At deployment time, developers select infrastructure components from Encore Cloud’s catalog, including Neon as a Postgres database option'
+      - 'Encore developers use them to validate migrations, test API changes against real schema and data, and run full integration tests without impacting live systems.'
 
 - id: '301-pro'
   title: '301.Pro'
@@ -709,16 +1328,26 @@
     mediaDetails:
       width: 36
       height: 32
-  quote: ''
+  quote: 'AWS RDS is overly complex to set up, especially when using fine-grained user permissions. I tried Neon after talking to a few friends who had recommended it and I was able to transition our entire analytics operation from AWS RDS to Neon in about two hours. That tells you how different the UX was and the simplicity of Neon'
   author:
-    name: ''
-    post: ''
+    name: 'Scott Cate'
+    post: 'Founder of 301.Pro'
   isInternal: true
   internalPostSlug: 'building-301-pro-multi-cloud-with-neon-postgres'
   externalUrl: ''
   categories:
     - slug: 'startups'
       name: 'Startups'
+  evidence:
+    summary: '301.Pro is a link shortener with a rules engine that moved its analytics from AWS RDS to Neon across AWS Lambda and Cloudflare Workers.'
+    useCase: 'full-stack-apps'
+    date: '2024-10-31'
+    features:
+      - 'postgres'
+      - 'pooling'
+    claims:
+      - 'I was able to transition our entire analytics operation from AWS RDS to Neon in about two hours.'
+      - 'Both AWS Lambda and Cloudflare can direct connect to the Neon, each with their appropriate credentials.'
 
 - id: '222'
   title: '222'
@@ -738,25 +1367,18 @@
   categories:
     - slug: 'startups'
       name: 'Startups'
-
-- id: 'hasura'
-  title: 'Hasura'
-  isFeatured: false
-  logo:
-    mediaItemUrl: '/images/case-studies/hasura.svg'
-    mediaDetails:
-      width: 108
-      height: 32
-  quote: ''
-  author:
-    name: ''
-    post: ''
-  isInternal: true
-  internalPostSlug: 'neon-hasura-integration'
-  externalUrl: ''
-  categories:
-    - slug: 'platforms'
-      name: 'Platforms'
+  evidence:
+    summary: '222 curates in-person social experiences and relies on Neon autoscaling for evening and weekend traffic peaks, plus branches for migrations.'
+    useCase: 'bursty-workloads'
+    date: '2024-06-25'
+    features:
+      - 'postgres'
+      - 'autoscaling'
+      - 'branching'
+      - 'api'
+    claims:
+      - 'When we launched our iOS app in February, we charted on the App Store; Neon’s managed database experience made it effortless to handle this traffic.'
+      - 'This tooling, built on Neon’s REST API and the open-source Goose library, allows the team to run schema migrations on an exact copy of their production database without touching their production data.'
 
 - id: 'replit'
   title: 'Replit'
@@ -776,6 +1398,17 @@
   categories:
     - slug: 'ai'
       name: 'AI & Agents'
+  evidence:
+    summary: 'Replit is a collaborative cloud IDE that added Postgres databases for its users powered by Neon, relying on fast provisioning and scale-to-zero.'
+    useCase: 'platforms'
+    date: '2023-01-24'
+    features:
+      - 'postgres'
+      - 'api'
+      - 'scale-to-zero'
+    claims:
+      - 'Since Replit has millions of users, adding Postgres support meant managing and scaling potentially millions of databases.'
+      - 'Since some of the apps only have episodic usage they really benefit from the ability of Neon to scale serverless Postgres to 0.'
 
 - id: 'recrowd'
   title: 'Recrowd'
@@ -785,16 +1418,25 @@
     mediaDetails:
       width: 123
       height: 32
-  quote: ''
+  quote: 'Thanks to autoscaling, we no longer have to worry about performance during our openings or wasting time resizing instances'
   author:
-    name: ''
-    post: ''
+    name: 'Pieralberto Colombo'
+    post: 'CTO at Recrowd'
   isInternal: true
   internalPostSlug: 'how-recrowd-uses-neon-autoscaling-to-meet-fluctuating-demand'
   externalUrl: ''
   categories:
     - slug: 'fast-moving-teams'
       name: 'Fast-moving teams'
+  evidence:
+    summary: 'Recrowd is an Italian real estate crowdfunding company that moved from MySQL on Azure to Neon to autoscale through investment-opening traffic peaks.'
+    useCase: 'bursty-workloads'
+    date: '2024-03-01'
+    features:
+      - 'postgres'
+      - 'autoscaling'
+    claims:
+      - 'Right when a new investment project opens, something that typically happens a few times per month, the traffic in Recrowd’s website skyrockets, as thousands of investors request to invest in the new opportunity.'
 
 - id: 'bunnyshell'
   title: 'Bunnyshell'
@@ -804,16 +1446,25 @@
     mediaDetails:
       width: 163
       height: 32
-  quote: ''
+  quote: 'The fact that the Postgres databases are already populated with the data you need for your environment and the near-instant provisioning time made Neon the top choice for short-lived environments, which get created often.'
   author:
-    name: ''
-    post: ''
+    name: 'Sorin Dumitrescu'
+    post: 'VP of Engineering at Bunnyshell'
   isInternal: true
   internalPostSlug: 'neon-bunnyshell-integration'
   externalUrl: ''
   categories:
     - slug: 'platforms'
       name: 'Platforms'
+  evidence:
+    summary: 'Bunnyshell is an environments-as-a-service platform that shipped a Neon connector to provision Postgres for its users'' ephemeral environments.'
+    useCase: 'branching-workflows'
+    date: '2023-03-30'
+    features:
+      - 'postgres'
+      - 'branching'
+    claims:
+      - 'The Bunnyshell team recently shipped a Neon connector enabling users to provision a Neon Postgres instance for all of their environments.'
 
 - id: 'beatgig'
   title: 'BeatGig'
@@ -823,16 +1474,29 @@
     mediaDetails:
       width: 173
       height: 40
-  quote: ''
+  quote: 'One of the big selling points of Neon was creating read replicas in seconds that scale to zero. We frequently spin up dev servers and sandbox environments, so providing easy, read-only access to the team while keeping maintenance low was a big win for us'
   author:
-    name: ''
-    post: ''
+    name: 'Jeremy Berman'
+    post: 'CTO at BeatGig'
   isInternal: true
   internalPostSlug: 'neon-read-replicas-in-the-wild-how-beatgig-uses-them'
   externalUrl: ''
   categories:
     - slug: 'startups'
       name: 'Startups'
+  evidence:
+    summary: 'BeatGig is a talent booking marketplace that runs its databases on Neon and uses read replicas to give its team safe analytics access.'
+    useCase: 'full-stack-apps'
+    date: '2024-10-24'
+    features:
+      - 'postgres'
+      - 'read-replicas'
+      - 'autoscaling'
+      - 'scale-to-zero'
+      - 'pooling'
+    claims:
+      - 'every database BeatGig runs uses autoscaling, and non-prod databases and replicas have autosuspend enabled.'
+      - 'Among all the solutions the team tested—including Supabase, Google Cloud SQL, RDS, and Aurora—Neon stood out for its fast provisioning, query speed, and native connection pooling, which streamlined their workflow.'
 
 - id: 'wundergraph'
   title: 'WunderGraph'
@@ -842,16 +1506,24 @@
     mediaDetails:
       width: 143
       height: 32
-  quote: ''
+  quote: 'We decided to integrate with Neon because it just made sense. We wanted to bring the best DX to our users, and serverless Postgres just fits in our vision for a serverless world.'
   author:
-    name: ''
-    post: ''
+    name: 'Stefan Avram'
+    post: 'Co-Founder & Head of Growth at WunderGraph'
   isInternal: true
   internalPostSlug: 'neon-wundergraph-integration'
   externalUrl: ''
   categories:
     - slug: 'platforms'
       name: 'Platforms'
+  evidence:
+    summary: 'WunderGraph is an open-source Backend for Frontend framework whose managed cloud added a Neon integration that sets the database connection string automatically.'
+    useCase: 'platforms'
+    date: '2023-04-11'
+    features:
+      - 'postgres'
+    claims:
+      - 'The integration syncs your Neon database settings and automatically sets the database connection string.'
 
 - id: 'dispatch'
   title: 'Dispatch'
@@ -861,16 +1533,28 @@
     mediaDetails:
       width: 165
       height: 40
-  quote: ''
+  quote: 'Neon’s branching paradigm has been great for us. It lets us create isolated environments without having to move huge amounts of data around. This has lightened the load on our ops team, now it’s effortless to spin up entire environments.'
   author:
-    name: ''
-    post: ''
+    name: 'Jonathan Reyes'
+    post: 'Principal Engineer at Dispatch'
   isInternal: true
   internalPostSlug: 'how-dispatch-speeds-up-development-with-neon-while-keeping-workloads-on-aurora'
   externalUrl: ''
   categories:
     - slug: 'fast-moving-teams'
       name: 'Fast-moving teams'
+  evidence:
+    summary: 'Dispatch is a last-mile delivery company that keeps production on Aurora and uses Neon branches for ephemeral dev and test environments.'
+    useCase: 'branching-workflows'
+    date: '2024-10-14'
+    features:
+      - 'postgres'
+      - 'branching'
+      - 'read-replicas'
+    claims:
+      - 'They’ve built a custom Neon operator for Kubernetes that automatically creates branches whenever a new ephemeral environment is spun up.'
+      - 'Developers or QA team members can quickly spin up a new environment by running a simple command with their internal tooling.'
+      - 'Now, they create read-only replicas in Neon for specific use cases.'
 
 - id: 'proposales'
   title: 'Proposales'
@@ -880,16 +1564,26 @@
     mediaDetails:
       width: 149
       height: 32
-  quote: ''
+  quote: 'With the Neon branching feature, our developers can change their database to test their features without affecting other team members. Branching allows us to confidently do our database migrations to production.'
   author:
-    name: ''
-    post: ''
+    name: 'Camelia Smeria'
+    post: 'Lead Engineer at Proposales'
   isInternal: true
   internalPostSlug: 'frictionless-development-experience-with-neon-branching'
   externalUrl: ''
   categories:
     - slug: 'fast-moving-teams'
       name: 'Fast-moving teams'
+  evidence:
+    summary: 'Proposales builds proposal tools for hoteliers and uses Neon branches for development and testing while keeping production on RDS.'
+    useCase: 'branching-workflows'
+    date: '2022-12-08'
+    features:
+      - 'postgres'
+      - 'branching'
+    claims:
+      - 'They decided to keep RDS on production but use Neon and its database branching capabilities for development, replacing Postgres with Docker and RDS.'
+      - 'Proposales used RDS for their development environment, but it was an expensive choice.'
 
 - id: 'rubric-labs'
   title: 'Rubric Labs'
@@ -899,16 +1593,27 @@
     mediaDetails:
       width: 130
       height: 32
-  quote: ''
+  quote: 'We love the fact that Neon has branching. We work with a workflow where each developer has a branch with their name, and then we also have a Neon branch associated with a GitHub branch. We love doing that'
   author:
-    name: ''
-    post: ''
+    name: 'Sarim Malik'
+    post: 'CEO at Rubric Labs'
   isInternal: true
   internalPostSlug: 'rubric-labs-can-make-your-ai-dreams-come-true'
   externalUrl: ''
   categories:
     - slug: 'ai'
       name: 'AI & Agents'
+  evidence:
+    summary: 'Rubric Labs is an applied AI lab that uses Neon for internal tools and client projects, with a database branch per developer.'
+    useCase: 'branching-workflows'
+    date: '2024-08-23'
+    features:
+      - 'postgres'
+      - 'branching'
+      - 'pgvector'
+    claims:
+      - 'Rubric Labs uses Neon for both internal and client projects.'
+      - 'This includes GitHub branches for every developer, unique database branches for local and staging, plus their own auth tokens and URLs.'
 
 - id: 'branch'
   title: 'Branch'
@@ -918,16 +1623,29 @@
     mediaDetails:
       width: 91
       height: 32
-  quote: ''
+  quote: 'Using Neon has meant our developers can continue to spend their time on things that meaningfully drive the business forward, instead of babysitting infrastructure.'
   author:
-    name: ''
-    post: ''
+    name: 'Adithya Reddy'
+    post: 'Developer 4 at Branch'
   isInternal: true
   internalPostSlug: 'branch-chose-neon-for-its-true-postgres-and-serverless-nature'
   externalUrl: ''
   categories:
     - slug: 'startups'
       name: 'Startups'
+  evidence:
+    summary: 'Branch is a home and auto insurance company that moved from DynamoDB to Neon for real Postgres that scales to zero, with branches per developer.'
+    useCase: 'bursty-workloads'
+    date: '2024-01-18'
+    features:
+      - 'postgres'
+      - 'branching'
+      - 'scale-to-zero'
+      - 'autoscaling'
+    claims:
+      - 'Each developer at Branch is provided with their own isolated deployment environment using Neon’s database branching, ensuring a streamlined developer workflow.'
+      - 'Zero time spent on database capacity and infrastructure management.'
+      - 'This led them to explore other options, including Aurora Serverless v1 and v2, and other distributed, and MySQL providers, but none met their needs of fast scale-up or scale-down to zero, resulting in a substantial bill for idle instances.'
 
 - id: 'ketteq'
   title: 'ketteQ'
@@ -937,16 +1655,26 @@
     mediaDetails:
       width: 114
       height: 32
-  quote: ''
+  quote: 'Certain clients of ours, with a large user base, need to maintain hundreds of scenarios at any time. Neon capabilities allow us to scale to meet our customers’ needs to be able to maintain and run these scenarios.'
   author:
-    name: ''
-    post: ''
+    name: 'Vasu Narayan'
+    post: 'Senior Vice President of Product at ketteQ'
   isInternal: true
   internalPostSlug: 'database-branching-for-postgres-with-neon'
   externalUrl: ''
   categories:
     - slug: 'fast-moving-teams'
       name: 'Fast-moving teams'
+  evidence:
+    summary: 'ketteQ is a supply chain planning company that creates a Neon branch for each customer scenario so users can model many scenarios at once.'
+    useCase: 'branching-workflows'
+    date: '2022-12-06'
+    features:
+      - 'postgres'
+      - 'branching'
+    claims:
+      - 'With Neon and database branching, ketteQ creates a branch for each user’s scenario to allow its customers to model many different scenarios simultaneously and compare the results of their analysis to find the optimal business outcome.'
+      - 'They can create hundreds of branches to scale to meet the customers’ demands without provisioning additional resources.'
 
 - id: 'topo'
   title: 'Topo'
@@ -966,6 +1694,16 @@
   categories:
     - slug: 'startups'
       name: 'Startups'
+  evidence:
+    summary: 'Topo.io builds an AI sales assistant and moved from Amazon RDS to Neon for per-developer branches, staging, and safer Prisma migrations.'
+    useCase: 'branching-workflows'
+    date: '2024-02-01'
+    features:
+      - 'postgres'
+      - 'branching'
+    claims:
+      - 'After switching to Neon, every developer at Topo.io could get an isolated development environment with up-to-date production data in seconds.'
+      - '“I use Branch Reset at least once a day”, Leo told us.'
 
 - id: 'supergood'
   title: 'Supergood'
@@ -975,16 +1713,29 @@
     mediaDetails:
       width: 141
       height: 32
-  quote: ''
+  quote: 'Neon allows us to develop much faster than we’ve even been used to. In traditional setups, you’re just trying to get the data that is representative of real customers—but now, when we build a feature, we’re actually testing it on real data in a matter of minutes. We can get features shipped way faster'
   author:
-    name: ''
-    post: ''
+    name: 'Alex Klarfeld'
+    post: 'CEO and co-founder of Supergood.ai'
   isInternal: true
   internalPostSlug: 'how-supergood-unlocked-their-postgres-developer-productivity'
   externalUrl: ''
   categories:
     - slug: 'startups'
       name: 'Startups'
+  evidence:
+    summary: 'Supergood monitors third-party API usage and costs, ingesting API metrics into Neon and using a branch per developer, staging, and data science.'
+    useCase: 'branching-workflows'
+    date: '2024-02-20'
+    features:
+      - 'postgres'
+      - 'branching'
+      - 'read-replicas'
+      - 'scale-to-zero'
+    claims:
+      - 'I just spin up a branch of Postgres for them and they can get onboard on the platform in 2 seconds'
+      - '“The Neon bill is lower than I expect it to be every time”, said Alex.'
+      - 'Under the hood, Supergood is powered by Neon as their mission-critical database.'
 
 - id: 'white-widget'
   title: 'White Widget'
@@ -994,16 +1745,29 @@
     mediaDetails:
       width: 144
       height: 32
-  quote: ''
+  quote: 'Neon perfectly meets our needs for a Postgres solution that scales with demand. We can push the boundaries of what’s possible in our projects without compromising efficiency or costs'
   author:
     name: ''
-    post: ''
+    post: 'Technical Director at White Widget'
   isInternal: true
   internalPostSlug: 'white-widgets-secret-to-scalable-postgres-neon'
   externalUrl: ''
   categories:
     - slug: 'fast-moving-teams'
       name: 'Fast-moving teams'
+  evidence:
+    summary: 'White Widget is a software design and engineering agency that uses Neon as the Postgres backend for many client apps, with autoscaling and read replicas.'
+    useCase: 'bursty-workloads'
+    date: '2024-03-21'
+    features:
+      - 'postgres'
+      - 'autoscaling'
+      - 'read-replicas'
+      - 'scale-to-zero'
+    claims:
+      - 'Their apps have reached 50 million users and counting.'
+      - 'Before finding Neon, White Widget relied on managed Postgres instances from GCP’s Cloud SQL, but the rigidity of this service made it hard to automatically scale resources to match varying traffic.'
+      - 'By directing their read queries to read replicas during periods of high traffic, White Widget liberates load in the main compute and ensures optimal performance.'
 
 - id: 'sheperd'
   title: 'Shepherd'
@@ -1013,16 +1777,27 @@
     mediaDetails:
       width: 128
       height: 32
-  quote: ''
+  quote: 'Branching saves us both money and developer time. We no longer have to set up an actual testing database instance and make sure the data is always synced with production. We now spin up an ephemeral branch when we need to and then tear it down via the create/delete Github Actions'
   author:
-    name: ''
-    post: ''
+    name: 'Angelina Quach'
+    post: 'Software Engineer at Shepherd'
   isInternal: true
   internalPostSlug: 'adopting-neon-branching-in-ci-cd-pipelines-a-practical-story-by-shepherd'
   externalUrl: ''
   categories:
     - slug: 'fast-moving-teams'
       name: 'Fast-moving teams'
+  evidence:
+    summary: 'Shepherd is a commercial insurance startup that moved its pricing engine to Neon and creates short-lived branches for every pull request.'
+    useCase: 'branching-workflows'
+    date: '2024-07-11'
+    features:
+      - 'postgres'
+      - 'branching'
+      - 'api'
+    claims:
+      - 'Shepherd creates short-lived testing branches for every PR.'
+      - 'earlier this year Shepherd decided to migrate the database for their pricing engine (called Alchemist) from SQLite to Postgres, looking for a more robust system that could support their growth.'
 
 - id: 'cedalio'
   title: 'Cedalio'
@@ -1032,16 +1807,28 @@
     mediaDetails:
       width: 123
       height: 32
-  quote: ''
+  quote: 'We love Postgres, and for us, being able to use Postgres database branches that can be integrated with our CI/CD pipeline is a killer feature. The ability to spawn databases that can scale down to zero is also incredibly helpful. This model fits well with our one database per customer architecture.'
   author:
-    name: ''
-    post: ''
+    name: 'Guido Marucci'
+    post: 'co-founder at Cedalio'
   isInternal: true
   internalPostSlug: 'how-cedalio-uses-neon-for-an-efficient-development-workflow'
   externalUrl: ''
   categories:
     - slug: 'startups'
       name: 'Startups'
+  evidence:
+    summary: 'Cedalio, an ESG data platform, uses Neon for a database-per-customer design and a branch per pull request that scales to zero.'
+    useCase: 'branching-workflows'
+    date: '2024-05-29'
+    features:
+      - 'postgres'
+      - 'branching'
+      - 'scale-to-zero'
+      - 'api'
+    claims:
+      - 'when a developer creates a PR, GitHub Actions trigger the creation of a new database branch in Neon and deploy a corresponding application instance on Fly.io.'
+      - 'Cedalio can maintain multiple database branches for different PRs without worrying about the bill.'
 
 - id: 'comigo-ai'
   title: 'Comigo.ai'
@@ -1051,13 +1838,23 @@
     mediaDetails:
       width: 103
       height: 32
-  quote: ''
+  quote: 'Neon branching is a big win for us. We can create full data copies at zero cost. For example, we can script a fresh branch every night for our staging server or for each deploy to run integration tests, all without additional costs.'
   author:
-    name: ''
-    post: ''
+    name: 'Paul Dlug'
+    post: 'CTO at Comigo.ai'
   isInternal: true
   internalPostSlug: 'comigo-ai-is-using-neon-to-transform-adhd-support-with-ai'
   externalUrl: ''
   categories:
     - slug: 'ai'
       name: 'AI & Agents'
+  evidence:
+    summary: 'Comigo.ai is an AI companion and coach for people with ADHD that moved from Cloud SQL to Neon and uses branches for staging and CI.'
+    useCase: 'branching-workflows'
+    date: '2024-08-02'
+    features:
+      - 'postgres'
+      - 'branching'
+    claims:
+      - 'When they first built Comigo, the team initially managed their database using Cloud SQL for PostgreSQL.'
+      - 'For example, a script can be written to create a fresh branch every night for the staging server, ensuring the development site always has an up-to-date copy of the data.'

@@ -51,6 +51,10 @@ module.exports = {
     },
     { label: 'Pricing and plans', url: 'https://neon.com/pricing.md' },
     {
+      label: 'Customer case studies by use case, with results quoted from each story',
+      url: 'https://neon.com/case-studies.md',
+    },
+    {
       label: 'Declare a whole backend in one file',
       url: 'https://neon.com/docs/reference/neon-ts.md',
     },
@@ -187,7 +191,7 @@ module.exports = {
           'ai/neon-mcp-server.md',
           'ai/connect-mcp-clients-to-neon.md',
           'ai/agent-skills.md',
-          'ai/ai-claude-code-plugin.md',
+          'ai/agent-setup.md',
           'ai/lakebase-search.md',
           'ai/ai-database-versioning.md',
         ],
@@ -479,6 +483,11 @@ module.exports = {
       title: 'Glossary',
       url: 'https://neon.com/docs/reference/glossary.md',
       sourcePath: 'reference/glossary.md',
+    },
+    {
+      title: 'Sitemap',
+      url: 'https://neon.com/docs/sitemap.md',
+      description: 'Every docs page as Markdown links, grouped by the docs navigation',
     },
     {
       title: 'Blog',
