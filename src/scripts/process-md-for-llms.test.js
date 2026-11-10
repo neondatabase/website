@@ -252,6 +252,30 @@ More content.
       expect(result).not.toContain('[AgentPrompt]');
     });
 
+    it('should embed a PromptBlock prompt file after a lead-in', async () => {
+      const root = await fs.mkdtemp(path.join(os.tmpdir(), 'prompt-block-'));
+      await fs.mkdir(path.join(root, 'public/prompts'), { recursive: true });
+      const prompt = 'Set me up for Neon.\n\n- Fetch the setup prompt.\n\n- Follow this guide.';
+      await fs.writeFile(path.join(root, 'public/prompts/test.md'), `${prompt}\n`);
+
+      const result = await processInlineMdx(
+        `
+Intro.
+
+<PromptBlock src="/prompts/test.md" labels={["Set up your agent"]} />
+
+More content.
+`,
+        'https://neon.com/test',
+        root
+      );
+      expect(result).toContain('If it brought you to this page, you are already following it');
+      expect(result).toContain(`\`\`\`text\n${prompt}\n\`\`\``);
+      expect(result).toContain('More content.');
+      expect(result).not.toContain('PromptBlock');
+      expect(result).not.toContain('Set up your agent');
+    });
+
     it('should preserve details/summary as HTML', async () => {
       const result = await processInlineMdx(`
 <details>
