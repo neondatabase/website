@@ -4,7 +4,7 @@ subtitle: Learn how to replicate data from AlloyDB to Neon
 summary: >-
   Replicate data from Google AlloyDB to Neon using logical replication. Requires
   enabling the AlloyDB `alloydb.logical_decoding` flag, then creating a publication
-  on AlloyDB and a matching subscription on Neon. Covers NAT Gateway IP allowlisting,
+  on AlloyDB and a matching subscription on Lakebase Postgres. Covers NAT Gateway IP allowlisting,
   replication role setup with alloydbsuperuser, and schema transfer via pg_dump and
   psql before starting the subscription.
 enableTableOfContents: true
@@ -125,7 +125,7 @@ For syntax details, see [CREATE PUBLICATION](https://www.postgresql.org/docs/cur
 
 ## Prepare your Neon destination database
 
-This section describes how to prepare your destination Neon database (the subscriber) to receive replicated data from your AlloyDB Postgres instance.
+This section describes how to prepare your destination Lakebase Postgres database (the subscriber) to receive replicated data from your AlloyDB Postgres instance.
 
 ### Prepare your database schema
 
