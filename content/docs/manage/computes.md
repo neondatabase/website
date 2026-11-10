@@ -254,9 +254,12 @@ For attribute definitions, find the [Create compute](/docs/reference/api/endpoin
 
 Each project can have a limited number of computes active at the same time. The default limit is 20 concurrently active computes per project. The limit protects against accidental surges, such as a script that starts many computes at once.
 
-The limit counts computes that are active or starting, including read replicas, on every branch except the project's [default branch](/docs/reference/glossary#default-branch). Computes on the default branch don't count, and neither do suspended computes or computes that are suspending.
+The limit counts computes that are active or starting, including read replicas, on every branch except the project's [default branch](/docs/reference/glossary#default-branch). Computes on the default branch don't count, and neither do suspended computes or computes that are suspending. The limit never blocks a compute on the default branch from starting.
 
-When a project reaches the limit, Neon doesn't start additional computes. Connecting to a suspended compute returns this error:
+When a project reaches the limit, Neon doesn't start additional computes on non-default branches:
+
+- Creating a compute or branch still succeeds, but the new compute stays suspended.
+- Connecting to a suspended compute returns this error:
 
 ```text shouldWrap
 You have exceeded the limit of concurrently active endpoints. Please suspend some endpoints and try again.
