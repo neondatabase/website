@@ -1,11 +1,11 @@
 ---
 title: Integrating Neon with Vercel
-subtitle: Choose the right connection path in seconds
+subtitle: Choose the right connection path
 summary: >-
-  Lakebase Postgres-Vercel integration decision guide covering three connection paths:
+  Decision guide for the Neon-Vercel integrations, covering three connection paths:
   Vercel-Managed (new users, billing through Vercel), Neon-Managed (existing
   Neon account, billing through Neon), and Manual (custom CI/CD via env vars).
-  Both managed integrations auto-provision Lakebase Postgres database branches for Vercel
+  Both managed integrations create Postgres database branches for Vercel
   preview deployments and support Managed Better Auth; they differ in branch cleanup
   timing, where Vercel-Managed follows deployment retention policy and
   Neon-Managed triggers on Git branch deletion. Choose this page to select the
@@ -20,7 +20,7 @@ updatedOn: '2026-10-08T10:34:22.890Z'
 
 ## Overview
 
-This page helps you quickly choose the best Neon–Vercel integration for your project. Whether you're starting fresh or have existing infrastructure, we'll guide you to the right solution.
+This page helps you choose a Neon-Vercel integration for your project. If you're starting fresh or already have a Neon setup, use the steps below to pick a path.
 
 <Admonition type="tip" title="Quick decision guide">
 Choose the **Vercel-Managed Integration** if you're new to Neon and want unified billing through Vercel.
@@ -36,8 +36,8 @@ Choose the **Neon-Managed Integration** if you already have a Neon account or pr
 | **Neon account**                | Created automatically via Vercel                                                                      | Pre-existing Neon account                                                                                    | Pre-existing Neon account                       |
 | **Billing**                     | Paid **through Vercel**                                                                               | Paid **through Neon**                                                                                        | Paid **through Neon**                           |
 | **Setup method**                | Vercel Marketplace → Native Integrations → "Neon Postgres"                                            | Vercel Marketplace → Connectable Accounts → "Neon"                                                           | Manual env-vars                                 |
-| **Preview Branching**           | ✅                                                                                                    | ✅                                                                                                           | ✖️                                              |
-| **Managed Better Auth support** | ✅ Auto-provisioned on preview branches                                                               | ✅ Auto-provisioned on preview branches                                                                      | Manual setup required                           |
+| **Preview Branching**           | Yes                                                                                                   | Yes                                                                                                          | No                                              |
+| **Managed Better Auth support** | Yes, auto-provisioned on preview branches                                                             | Yes, auto-provisioned on preview branches                                                                    | Manual setup required                           |
 | **Branch cleanup**              | Automatic (deployment-based)                                                                          | Automatic (Git-branch-based)                                                                                 | N/A                                             |
 | **Implementation type**         | [Native Integration](https://vercel.com/docs/integrations/install-an-integration/product-integration) | [Connectable Account](https://vercel.com/docs/integrations/install-an-integration/add-a-connectable-account) | N/A                                             |
 
@@ -61,8 +61,8 @@ For automated integrations, follow this simple flow:
 
 **Do you already have a Neon account or project you want to keep using?**
 
-- **✅ Yes** → Use **[Neon-Managed Integration](/docs/guides/neon-managed-vercel-integration)**
-- **❌ No** → Continue below
+- **Yes** → Use **[Neon-Managed Integration](/docs/guides/neon-managed-vercel-integration)**
+- **No** → Continue below
 
 ## Choose your billing preference
 
