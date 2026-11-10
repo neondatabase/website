@@ -202,7 +202,7 @@ export const sql = neon(DATABASE_URL);
 
 ## Query the database in a load function
 
-Create `src/routes/+page.server.ts`. In an existing app, use a new route such as `src/routes/neon/` so you don't replace a page. Its `load` function runs on the server and passes the result to the page. The `#lib` import is a subpath import that new SvelteKit 3 projects define in `package.json`:
+Create `src/routes/+page.server.ts`. If `src/routes/+page.svelte` is still SvelteKit's starter page, replace it. Otherwise, use a new route such as `src/routes/neon/` so you don't replace one of your pages. Its `load` function runs on the server and passes the result to the page. The `#lib` import is a subpath import that new SvelteKit 3 projects define in `package.json`:
 
 <CodeTabs reverse={true} labels={["node-postgres", "postgres.js", "Neon serverless driver"]}>
 
