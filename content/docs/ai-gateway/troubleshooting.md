@@ -5,7 +5,7 @@ summary: >-
   Solutions for common errors when using Neon AI Gateway, including
   authentication failures, model errors, quota limits, and upstream issues.
 enableTableOfContents: true
-updatedOn: '2026-11-04T20:10:08.844Z'
+updatedOn: '2026-11-10T21:40:40.486Z'
 ---
 
 ## Authentication errors
@@ -97,15 +97,13 @@ The `{modelAction}` segment in the Gemini URL path is malformed. It must follow 
 
 ## Workspace resolution errors
 
-### `403` or `400`: `could not resolve workspace from host`
+### `403`: `could not resolve workspace from host`
 
-The request host does not match the expected format or region.
+The request host does not match the expected format.
 
-**Common causes:**
+**Common cause:**
 
-- The host does not end with a trusted suffix (`.neon.tech` in production). Returns 403.
-- The host has no parseable AWS region label. Returns 400.
-- The region in the host has no configured workspace. Returns 404.
+- The host does not end with a trusted suffix (`.neon.tech` in production).
 
 **Fix:** Verify that you are using the correct AI Gateway host from the Neon Console or API. The host format for production is `<branch-id>-api.ai.<cell>.<region>.aws.neon.tech`. Do not construct the host manually.
 
