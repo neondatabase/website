@@ -3,17 +3,16 @@ title: Replicate data from AlloyDB
 subtitle: Learn how to replicate data from AlloyDB to Neon
 summary: >-
   Replicate data from Google AlloyDB to Neon using logical replication. Requires
-  enabling the AlloyDB-specific flags alloydb.enable_pglogical and
-  alloydb.logical_decoding, then creating a publication on AlloyDB and a
-  matching subscription on Lakebase Postgres. Covers NAT Gateway IP allowlisting, replication
-  role setup with alloydbsuperuser, and schema transfer via pg_dump and
-  pg_restore before starting the subscription.
+  enabling the AlloyDB `alloydb.logical_decoding` flag, then creating a publication
+  on AlloyDB and a matching subscription on Neon. Covers NAT Gateway IP allowlisting,
+  replication role setup with alloydbsuperuser, and schema transfer via pg_dump and
+  psql before starting the subscription.
 enableTableOfContents: true
 isDraft: false
 updatedOn: '2026-09-16T19:45:35.340Z'
 ---
 
-This guide describes how to replicate data from AlloyDB Postgres to Neon using native Postgres logical replication. The steps in this guide follow those described in [Set up native PostgreSQL logical replication](https://cloud.google.com/sql/docs/postgres/replication/configure-logical-replication#set-up-native-postgresql-logical-replication), in the _Google AlloyDB documentation_.
+This guide describes how to replicate data from AlloyDB Postgres to Neon using native Postgres logical replication. The publisher steps follow the native Postgres logical replication setup in the [Postgres documentation](https://www.postgresql.org/docs/current/logical-replication-quick-setup.html). For the AlloyDB-specific flags, see the [AlloyDB flags reference](https://docs.cloud.google.com/alloydb/docs/reference/alloydb-flags), in the _Google AlloyDB documentation_.
 
 ## Prerequisites
 
@@ -37,14 +36,14 @@ This section describes how to prepare your source AlloyDB Postgres instance (the
 
 ### Enable logical replication
 
-Your first step is to enable logical replication at the source Postgres instance. In AlloyDB, you can enable logical replication by setting the `alloydb.enable_pglogical` and `alloydb.logical_decoding` flags to `on`. This sets the Postgres `wal_level` parameter to `logical`.
+Your first step is to enable logical replication at the source Postgres instance. In AlloyDB, you can enable logical replication by setting the `alloydb.logical_decoding` flag to `on`. This sets the Postgres `wal_level` parameter to `logical`.
 
 To enable these flags:
 
 1. In the Google Cloud console, navigate to your [AlloyDB Clusters](https://console.cloud.google.com/alloydb/clusters) page.
 2. From the **Actions** menu for your Primary instance, select **Edit**.
 3. Scroll down to the **Advanced Configurations Options** > **Flags** section.
-4. If the flags have not been set on the instance before, click **Add a Database Flag**, and set the value to `on` for the `alloydb.enable_pglogical` and `alloydb.logical_decoding`.
+4. If the flags have not been set on the instance before, click **Add a Database Flag**, and set the value to `on` for the `alloydb.logical_decoding` flag.
 5. Click **Update instance** to save your changes and confirm your selections.
 
 Afterward, you can verify that logical replication is enabled by running `SHOW wal_level;` from **AlloyDB Studio** or your terminal:
@@ -59,7 +58,7 @@ You need to allow connections to your AlloyDB Postgres instance from Neon. To do
 2. Scroll down to the **Instances in your cluster** section.
 3. Click **Edit Primary**.
 4. Select the **Enable public IP** checkbox to allow connections over the public internet.
-5. Under **Authorized external networks**, enter the Neon IP addresses you want to allow. Add an entry for each of the NAT gateway IP addresses associated with your Neon project's region. Neon has 3 to 6 IP addresses per region, corresponding to each availability zone. See [NAT Gateway IP addresses](/docs/introduction/regions#nat-gateway-ip-addresses) for the IP addresses.
+5. Under **Authorized external networks**, enter the Neon IP addresses you want to allow. Add an entry for each of the NAT gateway IP addresses associated with your Neon project's region. The number of addresses varies by region. See [NAT Gateway IP addresses](/docs/introduction/regions#nat-gateway-ip-addresses) for the IP addresses.
 
    <Admonition type="note">
    AlloyDB requires addresses to be specified in CIDR notation. You can do so by appending `/32` to the NAT Gateway IP address; for example: `18.217.181.229/32`
@@ -84,7 +83,7 @@ If you do not use a public IP address, you'll need to configure access via a pri
 
 ### Create a Postgres role for replication
 
-It is recommended that you create a dedicated Postgres role for replicating data from your AlloyDB Postgres instance. The role must have the `REPLICATION` privilege. On your AlloyDB Postgres instance, login in as your `postgres` user or an administrative user you use to create roles and run the following command to create a replication role. You can replace the name `replication_user` with whatever name you want to use.
+It is recommended that you create a dedicated Postgres role for replicating data from your AlloyDB Postgres instance. The role must have the `REPLICATION` privilege. On your AlloyDB Postgres instance, log in as your `postgres` user or an administrative user you use to create roles and run the following command to create a replication role. You can replace the name `replication_user` with whatever name you want to use.
 
 ```sql shouldWrap
 CREATE USER replication_user WITH REPLICATION IN ROLE alloydbsuperuser LOGIN PASSWORD 'replication_user_password';
@@ -122,11 +121,11 @@ CREATE PUBLICATION my_publication FOR TABLE users, departments;
 Defining specific tables lets you add or remove tables from the publication later, which you cannot do when creating publications with `FOR ALL TABLES`.
 </Admonition>
 
-For syntax details, see [CREATE PUBLICATION](https://www.postgresql.org/docs/current/sql-createpublication.html), in the PostgreSQL documentation.
+For syntax details, see [CREATE PUBLICATION](https://www.postgresql.org/docs/current/sql-createpublication.html), in the Postgres documentation.
 
 ## Prepare your Neon destination database
 
-This section describes how to prepare your destination Lakebase Postgres database (the subscriber) to receive replicated data from your AlloyDB Postgres instance.
+This section describes how to prepare your destination Neon database (the subscriber) to receive replicated data from your AlloyDB Postgres instance.
 
 ### Prepare your database schema
 
@@ -145,7 +144,7 @@ CREATE TABLE IF NOT EXISTS playing_with_neon(id SERIAL PRIMARY KEY, name TEXT NO
 
 To dump only the schema from a database, you can run a `pg_dump` command similar to the following to create an `.sql` dump file with the schema only:
 
-```sql
+```bash
 pg_dump --schema-only \
 	--no-privileges \
 	"postgresql://role:password@hostname:5432/dbname" \
@@ -153,7 +152,7 @@ pg_dump --schema-only \
 ```
 
 - With the `--schema-only` option, only object definitions are dumped. Data is excluded.
-- The `--no-privileges` option prevents dumping privileges. Neon may not support the privileges you've defined elsewhere, or if dumping a schema from Neon, there maybe Neon-specific privileges that cannot be restored to another database.
+- The `--no-privileges` option prevents dumping privileges. Neon may not support the privileges you've defined elsewhere, or if dumping a schema from Neon, there might be Neon-specific privileges that cannot be restored to another database.
 
 #### Review and modify the dumped schema
 
@@ -186,13 +185,13 @@ To comment out a single line, you can use `--` at the beginning of the line.
 
 #### Load the schema
 
-After making any necessary modifications to the dump file, load the dumped schema using `pg_restore`.
+After making any necessary modifications to the dump file, load the dumped schema using `psql`.
 
 <Admonition type="tip">
 When you're restoring on Neon, you can input your Neon connection string in place of `postgresql://role:password@hostname:5432/dbname`. You can find your database connection string by clicking the **Connect** button in the Console nav.
 </Admonition>
 
-```sql
+```bash
 psql \
 	"postgresql://role:password@hostname:5432/dbname" \
 	< schema_dump.sql
@@ -208,17 +207,17 @@ After you've loaded the schema, you can view the result with this `psql` command
 
 After creating a publication on the source database, you need to create a subscription on your Neon destination database.
 
-1. Create the subscription using the using a `CREATE SUBSCRIPTION` statement:
+1. Create the subscription using a `CREATE SUBSCRIPTION` statement:
 
    ```sql
    CREATE SUBSCRIPTION my_subscription
-   CONNECTION 'host=<primary-ip> port=5432 dbname=postgres user=replication_user password=replication_user_password'
+   CONNECTION 'host=<primary_ip> port=5432 dbname=postgres user=replication_user password=replication_user_password'
    PUBLICATION my_publication;
    ```
 
-   - `subscription_name`: A name you chose for the subscription.
-   - `connection_string`: The connection string for the source AlloyDB database where you defined the publication. For the `<primary_ip>`, use the IP address of your AlloyDB Postgres instance that you noted earlier, and specify the name and password of your replication role. If you're replicating from a database other than `postgres`, be sure to specify that database name.
-   - `publication_name`: The name of the publication you created on the source Neon database.
+   - `my_subscription`: A name you chose for the subscription.
+   - `CONNECTION` string: The connection string for the source AlloyDB database where you defined the publication. For the `<primary_ip>`, use the IP address of your AlloyDB Postgres instance that you noted earlier, and specify the name and password of your replication role. If you're replicating from a database other than `postgres`, be sure to specify that database name.
+   - `my_publication`: The name of the publication you created on the source AlloyDB database.
 
 2. Verify the subscription was created by running the following command:
 
@@ -246,7 +245,7 @@ Testing your logical replication setup ensures that data is being replicated cor
 
    count
    -------
-   30
+   20
    (1 row)
    ```
 
