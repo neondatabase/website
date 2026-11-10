@@ -338,7 +338,7 @@ curl -X DELETE \
 
 Generate a time-limited URL that allows a browser or unauthenticated client to upload or download a specific object, without exposing your credentials.
 
-In organizations that use [per-project permissions](/docs/manage/user-permissions#per-project-permissions), downloading objects or creating presigned URLs through the Neon Console or API requires the **Editor** role. Viewers can list buckets and objects but can't read object contents.
+In organizations that use [per-project permissions](/docs/manage/user-permissions#per-project-permissions), reading object contents requires the **Editor** role. The Neon Console, CLI, and API check your role on each download or presigned download URL request. S3-compatible SDKs, including the Files SDK, sign requests with a credential, and only Editors and Admins can create or reveal one. Viewers can list buckets and objects but can't read their contents.
 
 **Presigned GET (download):**
 
