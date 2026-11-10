@@ -12,6 +12,10 @@ updatedOn: '2026-10-09T09:48:21.765Z'
 
 AI Gateway uses Neon bearer credentials, the same scoped-credential system as [Object Storage](/docs/storage/authentication): one credential API mints branch-scoped tokens that differ by scope (AI Gateway uses `ai_gateway:invoke`). No provider API keys are needed.
 
+<Admonition type="warning" title="IP Allow and Private Networking don't protect the AI Gateway">
+[IP Allow](/docs/introduction/ip-allow) and [Private Networking](/docs/guides/neon-private-networking) restrict Postgres connections only. The AI Gateway accepts requests from any network that presents a valid credential, so the credential is the only access control. Scope it narrowly and anchor it to the right branch.
+</Admonition>
+
 ## Creating a credential
 
 A credential must include the `ai_gateway:invoke` scope.

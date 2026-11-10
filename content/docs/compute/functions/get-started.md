@@ -171,6 +171,10 @@ A function keeps running across requests, so connect to Postgres with a long-liv
 Call `attachDatabasePool(pool)` once after creating the pool (requires `@neon/functions` 0.8.0 or later). When Postgres drops an idle client (scale-to-zero, pooler reclaim, a TCP reset), `pg` emits an `error` on the pool; with no listener attached, that becomes an uncaught exception and the isolate exits. `attachDatabasePool` swallows expected idle disconnects and logs anything unexpected. The pool has already discarded the dead client, so the next query opens a fresh connection. You don't need to drain the pool on shutdown: when the runtime evicts an isolate, Neon's pooler reclaims those connections for you.
 </Admonition>
 
+<Admonition type="warning" title="IP Allow and Private Networking block database connections from functions">
+On a project with [IP Allow](/docs/introduction/ip-allow) or [Private Networking](/docs/guides/neon-private-networking) enabled, a function can't connect to Postgres through `DATABASE_URL`. Functions don't have a fixed outbound IP range you can add to an allowlist. Neither control restricts who can call your function's URL, so [authenticate incoming requests](/docs/compute/functions/authentication) in your handler. See [IP Allow and other Neon services](/docs/introduction/ip-allow#ip-allow-and-other-neon-services).
+</Admonition>
+
 ## Develop locally
 
 `neon dev` serves all functions declared in `neon.ts` with hot reload. It injects `DATABASE_URL` and other Neon env vars from the linked branch. See [Environment variables](/docs/compute/functions/environment-variables) for the full list and how to pull them into a local `.env` file.

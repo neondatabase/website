@@ -180,7 +180,11 @@ The IP Allow feature provides an added layer of security for your data, restrict
 
 Optionally, you can allow unrestricted access to your project's non-protected branches. For instance, you might want to restrict access to protected branches to a handful of trusted IPs while allowing unrestricted access to your development branches.
 
-By default, Neon allows IP addresses from `0.0.0.0`, which means that Neon accepts connections from any IP address. Once you configure IP Allow by adding IP addresses or ranges, only those IP addresses will be allowed to access Neon.
+By default, Neon allows IP addresses from `0.0.0.0`, which means that Neon accepts connections from any IP address. Once you configure IP Allow by adding IP addresses or ranges, only those IP addresses can connect to your databases.
+
+<Admonition type="warning" title="IP Allow restricts Postgres connections only">
+The Data API, Object Storage, the AI Gateway, and Function URLs still accept requests from any IP address. Realtime, Managed Better Auth, and database connections from Neon Functions stop working while IP Allow is enabled. See [IP Allow and other Neon services](/docs/introduction/ip-allow#ip-allow-and-other-neon-services).
+</Admonition>
 
 <Admonition type="note">
 Neon projects provisioned on AWS support both [IPv4](https://en.wikipedia.org/wiki/Internet_Protocol_version_4) and [IPv6](https://en.wikipedia.org/wiki/IPv6) addresses. Neon project provisioned on Azure currently on support IPv4.
