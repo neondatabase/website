@@ -30,18 +30,23 @@ In Prisma, the read replicas extension, `@prisma/extension-read-replicas`, adds 
 You start by installing the extension:
 
 ```bash
-npm install @prisma/extension-read-replicas
+npm install @prisma/extension-read-replicas @prisma/adapter-neon
 ```
 
-You can then initialize the extension by extending your Prisma Client instance and providing a connection string that points to your read replica in the `url` option of the extension:
+You can then initialize the extension by extending your Prisma Client instance. Prisma 7 requires each client to use a driver adapter. Create a separate client with its own adapter for your read replica, and pass it in the `replicas` option of the extension:
 
 ```javascript
-import { PrismaClient } from '@prisma/client';
+import 'dotenv/config';
+import { PrismaClient } from './generated/prisma'; // path set by `output` in your schema.prisma generator
+import { PrismaNeon } from '@prisma/adapter-neon';
 import { readReplicas } from '@prisma/extension-read-replicas';
 
-const prisma = new PrismaClient().$extends(
+const mainAdapter = new PrismaNeon({ connectionString: process.env.DATABASE_URL });
+const replicaAdapter = new PrismaNeon({ connectionString: process.env.DATABASE_REPLICA_URL });
+
+const prisma = new PrismaClient({ adapter: mainAdapter }).$extends(
   readReplicas({
-    url: process.env.DATABASE_URL_REPLICA,
+    replicas: [new PrismaClient({ adapter: replicaAdapter })],
   })
 );
 
@@ -66,12 +71,12 @@ For more, including configuring multiple read replicas, refer to [Read Replicas]
 
 With Drizzle ORM, you can use the `withReplicas()` function to direct `SELECT` queries to read replicas, and create, delete, and update operations to your primary compute, as shown in the following example:
 
-```javascript
-import { sql } from 'drizzle-orm';
+```typescript
+import { eq } from 'drizzle-orm';
 import { drizzle } from 'drizzle-orm/node-postgres';
 import { boolean, jsonb, pgTable, serial, text, timestamp, withReplicas } from 'drizzle-orm/pg-core';
 const usersTable = pgTable('users', {
-  id: serial('id' as string).primaryKey(),
+  id: serial('id').primaryKey(),
   name: text('name').notNull(),
   verified: boolean('verified').notNull().default(false),
   jsonb: jsonb('jsonb').$type<string[]>(),
@@ -85,7 +90,7 @@ const db = withReplicas(primaryDb, [read1, read2]);
 
 You can then use the `db` instance the same way you do already, and Drizzle will direct requests to read replicas and your primary compute automatically.
 
-```sql
+```typescript
 // Read from either the read1 connection or the read2 connection
 await db.select().from(usersTable)
 
@@ -99,7 +104,7 @@ For more, refer to [Read Replicas](https://orm.drizzle.team/docs/read-replicas) 
 
 ## Laravel
 
-To scale your Laravel application with Neon read replicas, you can configure Laravel’s database settings and use Eloquent ORM to route read operations to replicas and write operations to your primary compute.
+To scale your Laravel application with Neon read replicas, you can configure Laravel's database settings and use Eloquent ORM to route read operations to replicas and write operations to your primary compute.
 
 For example, in your `config/database.php`, you can configure read and write connection settings and then route traffic accordingly.
 
@@ -129,7 +134,7 @@ For example, in your `config/database.php`, you can configure read and write con
 
 ## Django
 
-In Django, you can use the `DATABASES` setting to tell Django about the primary and read replica databases you’ll be using:
+In Django, you can use the `DATABASES` setting to tell Django about the primary and read replica databases you'll be using:
 
 ```python
 DATABASES = {
@@ -167,7 +172,7 @@ class PrimaryReplicaRouter:
         return True
 ```
 
-For more, see [Multiple databases](https://docs.djangoproject.com/en/5.1/topics/db/multi-db/) in the Django documentation.
+For more, see [Multiple databases](https://docs.djangoproject.com/en/stable/topics/db/multi-db/) in the Django documentation.
 
 **Example application**: For a complete setup, refer to this Neon community guide: [Scale your Django application with Neon Postgres Read Replicas](/guides/read-replica-django).
 
