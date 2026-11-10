@@ -250,6 +250,28 @@ For attribute definitions, find the [Create compute](/docs/reference/api/endpoin
 
 </Tabs>
 
+### Concurrently active compute limit
+
+Each project can have a limited number of computes active at the same time. The default limit is 20 concurrently active computes per project. The limit protects against accidental surges, such as a script that starts many computes at once.
+
+The limit counts computes that are active or starting, including read replicas, on every branch except the project's [default branch](/docs/reference/glossary#default-branch). Computes on the default branch don't count, and neither do suspended computes or computes that are suspending.
+
+When a project reaches the limit, Neon doesn't start additional computes. Connecting to a suspended compute returns this error:
+
+```text shouldWrap
+You have exceeded the limit of concurrently active endpoints. Please suspend some endpoints and try again.
+```
+
+The API returns `active endpoints limit exceeded`.
+
+To work within the limit:
+
+- Let idle computes [scale to zero](/docs/introduction/scale-to-zero) so they stop counting toward the limit.
+- [Delete computes](#delete-a-compute) or branches you no longer use.
+- If you run a database per tenant or per agent, see [Multitenancy with Neon](/docs/guides/multitenancy). A project per tenant spreads computes across projects, and each project has its own limit.
+
+If your workload needs more active computes in one project, Scale plan users can [request a limit increase](/docs/introduction/support#request-a-limit-increase). For details about the error, see [Connection errors](/docs/connect/connection-errors#you-have-exceeded-the-limit-of-concurrently-active-endpoints).
+
 ## Edit a compute
 
 You can edit a compute to change the [compute size](#compute-size-and-autoscaling-configuration) or [scale to zero](#scale-to-zero-configuration) configuration.
