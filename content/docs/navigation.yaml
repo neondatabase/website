@@ -1077,6 +1077,8 @@
                   slug: manage/orgs-manage
                 - title: Add members by domain
                   slug: manage/orgs-add-members-by-domain
+                - title: Enterprise SSO and SCIM
+                  slug: manage/orgs-sso
                 - title: Transfer projects
                   slug: manage/orgs-project-transfer
                 - title: Organizations API
