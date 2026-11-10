@@ -116,7 +116,6 @@ GRANT SELECT, INSERT, UPDATE, DELETE ON todos TO authenticated;
 
 Grant the `anonymous` role only the tables it should read, as in the [role-based access](#role-based-access-control) example below.
 
-
 ### Configuration parameters
 
 The `crudPolicy` function from `drizzle-orm/neon` is a high-level helper that declaratively generates Row-Level Security (RLS) policies for your tables. It accepts the following parameters:
