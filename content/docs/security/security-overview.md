@@ -13,7 +13,7 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/security/security
   - /docs/security
-updatedOn: '2026-11-11T13:43:47.449Z'
+updatedOn: '2026-11-11T14:12:13.720Z'
 ---
 
 Neon secures the platform your data runs on. You decide who can reach your account, your projects, and your data. This page walks through the controls you have at each layer and links to the page that sets each one up.
@@ -27,6 +27,23 @@ These protections are always on. You don't configure them.
 - **Encrypted Postgres connections.** Neon rejects Postgres connections that don't use SSL/TLS. To also verify that you're talking to Neon, see [Verify the server when you connect](#verify-the-server-when-you-connect).
 - **Strong role passwords.** Every Postgres role password needs at least 60 bits of entropy. Neon generates passwords like that for roles you create in the Console, CLI, or API, and rejects weaker passwords set with `CREATE ROLE` or `ALTER ROLE`. Neon accepts passwords only in plaintext, so a pre-hashed password can't skip the check.
 - **Secret scanning on GitHub.** Neon is a GitHub secret scanning partner. See [GitHub secret scanning](#github-secret-scanning).
+
+## Security features by plan
+
+Most security controls are available on every plan. Branch protection, network restrictions, and HIPAA support come with paid plans.
+
+| Feature                                                                                                                                                                     | Free | Launch | Scale                   |
+| --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---- | ------ | ----------------------- |
+| TLS on every connection, password strength rules, GitHub secret scanning                                                                                                    | Yes  | Yes    | Yes                     |
+| [2FA and passkeys](/docs/manage/accounts#two-factor-authentication), and [requiring 2FA](/docs/manage/orgs-manage#require-2fa-for-organization-members) for an organization | Yes  | Yes    | Yes                     |
+| [Organization roles and per-project permissions](/docs/manage/user-permissions)                                                                                             | Yes  | Yes    | Yes                     |
+| [Protected branches](/docs/guides/protected-branches)                                                                                                                       | No   | Yes    | Yes                     |
+| [IP Allow](/docs/introduction/ip-allow)                                                                                                                                     | No   | No     | Yes                     |
+| [Private Networking](/docs/guides/neon-private-networking)                                                                                                                  | No   | No     | Yes                     |
+| [HIPAA](/docs/security/hipaa)                                                                                                                                               | No   | No     | Yes, at additional cost |
+| Enterprise SSO and SCIM                                                                                                                                                     | No   | No     | Coming soon             |
+
+For limits, such as how many protected branches each plan allows, see [Plans](/docs/introduction/plans).
 
 ## Secure your account and organization
 
