@@ -13,7 +13,7 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/security/security
   - /docs/security
-updatedOn: '2026-11-11T13:15:40.948Z'
+updatedOn: '2026-11-11T13:23:20.248Z'
 ---
 
 Neon secures the platform your data runs on. You decide who can reach your account, your projects, and your data. This page walks through the controls you have at each layer and links to the page that sets each one up.
@@ -49,7 +49,7 @@ Give each person and agent only the access they need.
 
 An API key manages your Neon setup. Your running app shouldn't hold one. Give each workload its own scoped credential instead, so a leak exposes only what that workload can do. [Credentials and access](/docs/concepts/credentials-access) explains which credential each job needs.
 
-For the services outside Postgres, the credential is the only access control. [IP Allow](#restrict-network-access-to-postgres) and Private Networking don't apply to them.
+For the services outside Postgres, the credential is the only access control. [IP Allow](/docs/introduction/ip-allow#ip-allow-and-other-neon-services) and [Private Networking](/docs/guides/neon-private-networking#private-networking-and-other-neon-services) don't apply to them.
 
 - **Object Storage and the AI Gateway** accept [scoped credentials](/docs/concepts/credentials-access#scoped-credentials) tied to a branch. Grant only the scopes a workload needs, such as `storage:read` without `storage:write`. See [Object Storage authentication](/docs/storage/authentication) and [AI Gateway authentication](/docs/ai-gateway/authentication).
 - **Neon Functions** have public HTTPS URLs. Neon doesn't check who calls a function, so [authenticate callers](/docs/compute/functions/authentication) at the top of your handler.
