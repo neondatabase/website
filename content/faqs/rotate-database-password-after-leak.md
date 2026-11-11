@@ -3,7 +3,7 @@ title: 'How do I rotate my database password in Neon after a security incident?'
 subtitle: 'Reset a role password from the Neon Console, API, or SQL to invalidate the leaked credential.'
 enableTableOfContents: true
 createdAt: '2026-05-18T00:00:00.000Z'
-updatedOn: '2026-11-05T15:33:57.188Z'
+updatedOn: '2026-11-11T13:43:47.449Z'
 isDraft: false
 redirectFrom: []
 previousLink:
@@ -84,7 +84,7 @@ A new password means a new connection string. Any process still using the old `D
 - Long-running workers, cron jobs, and background services
 
 <Admonition type="warning" title="Open sessions survive a reset">
-Postgres checks the password only when a connection opens, so sessions that were already open stay connected after the reset. Every new connection, including reconnects, needs the new password. After a leak, [restart the compute](/docs/manage/computes#restart-a-compute) to close any session opened with the old password.
+Postgres checks the password only when a connection opens, so sessions that were already open stay connected after the reset. Every new connection, including reconnects, needs the new password. After a leak, [restart every compute](/docs/manage/computes#restart-a-compute) on the branch, including read replicas, to close any session opened with the old password.
 </Admonition>
 
 If the leak might have exposed more than one role, see [How do I rotate all my Neon database credentials after a breach?](/faqs/rotate-database-credentials-after-breach).

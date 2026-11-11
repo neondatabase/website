@@ -1205,6 +1205,8 @@
       items:
         - title: Overview
           slug: security/security-overview
+        - title: Security checklist
+          slug: security/security-checklist
         - title: Security reporting
           slug: security/security-reporting
         - title: Compliance
