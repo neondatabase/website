@@ -8,7 +8,7 @@ summary: >-
   delete an organization from the UI. Admins control deletions, billing
   changes, and 2FA enforcement.
 enableTableOfContents: true
-updatedOn: '2026-11-05T15:33:57.188Z'
+updatedOn: '2026-11-11T13:15:40.948Z'
 ---
 
 Learn how to manage your organization's projects, invite members, set their access, and oversee billing details. For a breakdown of what each organization role and per-project permission allows, see [User permissions](/docs/manage/user-permissions).
@@ -84,6 +84,7 @@ Admins can require two-factor authentication (2FA) for everyone in the organizat
 
 - You can only enable this if your own account already has 2FA or a passkey set up.
 - When required 2FA is on, members who don't have 2FA or a passkey enrolled are prompted to set one up when they access the organization.
+- The requirement doesn't apply to requests made with an API key, personal or organization. To control programmatic access, review the organization's API keys. See [Manage API keys](/docs/manage/api-keys).
 
 See [Manage your Neon account](/docs/manage/accounts#two-factor-authentication) for personal 2FA setup steps, or [Passkeys](/docs/manage/accounts#passkeys) for passkey setup steps.
 

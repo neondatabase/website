@@ -11,7 +11,7 @@ summary: >-
 enableTableOfContents: true
 redirectFrom:
   - /docs/get-started-with-neon/production-checklist
-updatedOn: '2026-11-05T15:33:57.188Z'
+updatedOn: '2026-11-11T13:15:40.948Z'
 ---
 
 <CheckList title="Production checklist">
@@ -222,6 +222,8 @@ Neon's IP Allow feature ensures that only trusted IP addresses can connect to yo
 ![IP Allow settings](/docs/get-started/ip_allow_settings.png)
 
 Keep reading: [IP Allow](/docs/introduction/ip-allow)
+
+For the full list of security controls to set up before production, see the [Security checklist](/docs/security/security-checklist).
 
 ## Install pg_stat_statements
 
