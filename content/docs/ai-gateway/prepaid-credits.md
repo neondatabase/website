@@ -177,7 +177,7 @@ auto-reload back on.
 
 The AI Gateway is available in AWS US East (Ohio), US East (N. Virginia), Europe (Frankfurt), and Asia Pacific (Singapore) (more [regions](/docs/introduction/regions) to follow).
 
-[IP Allow](/docs/introduction/ip-allow) and [Private Networking](/docs/guides/neon-private-networking) don't restrict AI Gateway requests. Access is controlled by credentials.
+[IP Allow](/docs/introduction/ip-allow#ip-allow-and-other-neon-services) and [Private Networking](/docs/guides/neon-private-networking#private-networking-and-other-neon-services) don't restrict AI Gateway requests. Access is controlled by credentials.
 
 ## If you downgrade to Free
 

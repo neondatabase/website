@@ -22,7 +22,7 @@ The Data API has no permission layer of its own. Every request is authorized ent
 ## Before you begin
 
 - The Neon Data API is enabled at the **branch** level for a single database. Each branch has its own Data API configuration, so you must select the correct branch before enabling the API.
-- The Data API doesn't support projects with [IP Allow](/docs/introduction/ip-allow) or [Private Networking](/docs/guides/neon-private-networking) enabled, and these controls don't restrict Data API requests. See [IP Allow and other Neon services](/docs/introduction/ip-allow#ip-allow-and-other-neon-services).
+- The Data API doesn't support projects with [IP Allow](/docs/introduction/ip-allow#ip-allow-and-other-neon-services) or [Private Networking](/docs/guides/neon-private-networking#private-networking-and-other-neon-services) enabled, and these controls don't restrict Data API requests.
 
 <Steps>
 

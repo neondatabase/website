@@ -323,7 +323,7 @@ See [product availability](/docs/introduction/regions#product-availability) for 
 </FaqItem>
 
 <FaqItem question="Does Realtime work with IP Allow or Private Networking?">
-No. Realtime doesn't support projects with [IP Allow](/docs/introduction/ip-allow) or [Private Networking](/docs/guides/neon-private-networking) enabled, and subscriptions fail to connect while either is enabled. See [IP Allow and other Neon services](/docs/introduction/ip-allow#ip-allow-and-other-neon-services).
+No. Realtime doesn't support projects with [IP Allow](/docs/introduction/ip-allow#ip-allow-and-other-neon-services) or [Private Networking](/docs/guides/neon-private-networking#private-networking-and-other-neon-services) enabled, and subscriptions fail to connect while either is enabled.
 </FaqItem>
 
 <FaqItem question="Does Realtime support RLS?">
