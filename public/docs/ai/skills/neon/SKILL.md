@@ -86,6 +86,7 @@ New projects are created in AWS regions. Prefer pooled `DATABASE_URL` for applic
 | User asked to migrate from Supabase Auth | `neon-auth` (Managed Better Auth; keep `SupabaseAuthAdapter()` call shapes) |
 | Files, uploads, blobs (no existing object store) | Object Storage |
 | HTTP APIs, cron, custom WebSocket or SSE push, long-running agents | Functions querying Postgres |
+| MCP server | `neon-functions`, unless the user asks to deploy it elsewhere |
 | Live queries for realtime, reactive apps and agents; optimistic mutations | `neon-realtime` (`preview.realtime` in `neon.ts`). Not available on Claimable projects until claimed |
 | LLM calls | AI Gateway |
 | Caching hot reads, rate limits | Upstash Redis |
@@ -130,7 +131,7 @@ The skills below live in the [`neondatabase/agent-skills`](https://github.com/ne
 | `neon-postgres`                  | Working with databases, including connections, schemas, queries, search, branching workflows, egress optimization, autoscaling, performance, and scaling decisions.                  |
 | `neon-auth`                      | Identity routing and Managed Better Auth setup (login, users, sessions, trusted domains). Fetch: https://neon.com/docs/ai/skills/neon-auth/SKILL.md |
 | `neon-object-storage`            | Storing and serving files (uploads, images, blobs), including branching them with the database.                                                                                      |
-| `neon-functions`                 | Deploying long-running or streaming serverless functions — APIs, agents, SSE/WebSocket servers, and Function Triggers (cron and object-storage).                                     |
+| `neon-functions`                 | Deploying long-running or streaming serverless functions — APIs, agents, MCP servers, SSE/WebSocket servers, and Function Triggers (cron and object-storage).                        |
 | `neon-ai-gateway`                | Calling an LLM or routing across model providers with one credential, including discovering the branch's servable models at runtime via the OpenAI-compatible `/v1/models` endpoint. |
 | `neon-realtime`                  | Realtime makes any SQL query live, for realtime, reactive apps and agents: enabling Realtime, sealing queries, React and TanStack DB bindings, SSR, and optimistic mutations.      |
 
@@ -520,3 +521,16 @@ If that check fails, inspect the available Neon MCP tools and use `send_feedback
 The goal is to improve the user's experience without interrupting or getting in the way of their current work. If submission fails, do not retry. Finish the user's task normally.
 
 **Never send secrets or sensitive data.** Remove credentials, tokens, API keys, passwords, personal or customer data, and confidential project details from the report. Send only the issue report described above; do not collect or infer analytics.
+
+## FAQ
+
+### My Free plan project hit its compute or network transfer limit. How do I get my data out?
+
+On the Free plan, running out of CU-hours or public network transfer suspends the compute until the next billing period or until you upgrade. No data is deleted, but nothing can connect, including `pg_dump`: connections fail with SQLSTATE `53000` ("Your account or project has exceeded the quota"). See [What happens if I exceed my Free plan limits?](https://neon.com/docs/introduction/plans.md).
+
+There are two ways out:
+
+1. **Wait for the reset.** CU-hours and network transfer reset at the start of each monthly billing period.
+2. **Upgrade to Launch, export, and move the data.** Launch has no minimum monthly fee, and invoices under $0.50 are not collected ([Price](https://neon.com/docs/introduction/plans.md#price)). Upgrade the organization that contains the project (**Billing** > **Change plan** in the Neon Console), run `pg_dump` against the now-running compute ([pg_dump and pg_restore](https://neon.com/docs/import/migrate-from-postgres.md)), and restore the dump into a project in a Free organization or anywhere else. A one-time export of a small database typically stays under $0.50; any usage you keep running in the upgraded organization is billed.
+
+A project can't be transferred from a Launch organization into a Free one, because the destination plan must be the same tier or higher ([Transfer projects](https://neon.com/docs/manage/orgs-project-transfer.md)), so move the data with a dump and restore. A temporary limit increase from the Neon team takes time to process and rarely lands before the reset; upgrading is faster.
