@@ -11,10 +11,6 @@ updatedOn: '2026-10-21T12:36:11.000Z'
 
 Neon Object Storage uses the same scoped-credential system as [AI Gateway](/docs/ai-gateway/authentication): one credential API mints branch-scoped tokens that differ by scope (Object Storage uses `storage:read` and `storage:write`). You create a scoped credential via the Neon API, and it maps directly to the S3 Access Key ID and Secret Access Key your SDK expects. No AWS account or IAM configuration required.
 
-<Admonition type="warning" title="IP Allow and Private Networking don't protect Object Storage">
-[IP Allow](/docs/introduction/ip-allow) and [Private Networking](/docs/guides/neon-private-networking) restrict Postgres connections only. Object Storage accepts requests from any network that presents a valid credential, so the credential is the only access control. Scope it narrowly and anchor it to the right branch.
-</Admonition>
-
 ## Creating a credential
 
 An object storage credential requires at minimum one of:

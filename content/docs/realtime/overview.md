@@ -39,7 +39,6 @@ neon realtime enable
 
 <Admonition type="important" title="Before you enable Realtime">
 - Your project must be in a [supported region](#which-regions-is-it-enabled-in).
-- Realtime doesn't support projects with [IP Allow](/docs/introduction/ip-allow) or [Private Networking](/docs/guides/neon-private-networking) enabled. If you enable either control on a project that uses Realtime, subscriptions stop working. See [IP Allow and other Neon services](/docs/introduction/ip-allow#ip-allow-and-other-neon-services).
 - Enabling Realtime turns on [logical replication](/docs/guides/logical-replication-neon) for the whole project. This permanently changes `wal_level` to `logical` and suspends every compute in the project, on all branches, which drops active connections. Each compute starts again on its next connection. Disabling Realtime later doesn't turn logical replication off.
 </Admonition>
 
@@ -321,6 +320,10 @@ aws-us-east-2
 
 See [product availability](/docs/introduction/regions#product-availability) for every region.
 
+</FaqItem>
+
+<FaqItem question="Does Realtime work with IP Allow or Private Networking?">
+No. Realtime doesn't support projects with [IP Allow](/docs/introduction/ip-allow) or [Private Networking](/docs/guides/neon-private-networking) enabled, and subscriptions fail to connect while either is enabled. See [IP Allow and other Neon services](/docs/introduction/ip-allow#ip-allow-and-other-neon-services).
 </FaqItem>
 
 <FaqItem question="Does Realtime support RLS?">

@@ -72,6 +72,10 @@ Slugs must match `^[a-z0-9]{1,20}$` and are immutable after the first deployment
 | Concurrency limit | 100 concurrent invocations per account (default). See [Concurrency](#concurrency).                                                              |
 | Memory            | 2048 MiB (fixed, not configurable)                                                                                                              |
 
+## Network controls
+
+On a project with [IP Allow](/docs/introduction/ip-allow) or [Private Networking](/docs/guides/neon-private-networking) enabled, a function can't connect to Postgres through `DATABASE_URL`. Functions don't have a fixed outbound IP range to add to an allowlist. These controls don't restrict requests to function URLs. See [IP Allow and other Neon services](/docs/introduction/ip-allow#ip-allow-and-other-neon-services).
+
 ## Environment variables
 
 See [Environment variables](/docs/compute/functions/environment-variables#constraints) for limits on variable count and total size.

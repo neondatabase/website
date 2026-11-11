@@ -96,10 +96,11 @@ The following limits apply:
 | Object size, [multipart upload](/docs/storage/objects#multipart-upload) (maximum) | 10 GiB                                                              |
 | Free plan object storage                                                          | 5 GB per project ([rates](/docs/introduction/plans#object-storage)) |
 
-Two limits are behavioral rather than fixed numbers:
+Some limits are behavioral rather than fixed numbers:
 
 - **Region**: object storage is available in AWS US East (Ohio) (`aws-us-east-2`), AWS US East (N. Virginia) (`aws-us-east-1`), AWS Europe (Frankfurt) (`aws-eu-central-1`), and AWS Asia Pacific (Singapore) (`aws-ap-southeast-1`). Support is expanding toward all regions.
 - **Rate limiting**: requests may be throttled during heavy use, returning a `503 SlowDown` response. Back off and retry. See [Connection and performance errors](/docs/storage/troubleshooting#connection-and-performance-errors).
+- **Network controls**: [IP Allow](/docs/introduction/ip-allow) and [Private Networking](/docs/guides/neon-private-networking) don't restrict Object Storage requests. Access is controlled by credentials.
 
 To see how much Object Storage your project uses, check the **Object storage** row in the **Project** panel on your branch's **Overview** page. The value covers all branches in the project.
 
