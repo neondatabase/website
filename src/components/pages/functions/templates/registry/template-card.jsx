@@ -26,6 +26,7 @@ export const templateCardType = PropTypes.shape({
   logo: PropTypes.string,
   logoDark: PropTypes.string,
   categories: PropTypes.arrayOf(PropTypes.string),
+  services: PropTypes.arrayOf(PropTypes.string),
   installs: PropTypes.number,
 });
 

@@ -20,6 +20,8 @@ import {
   filterRegistryTemplates,
   registryCategoryIds,
   registryCategoryLabel,
+  registryService,
+  registryServiceIds,
   registryTemplatePageHref,
 } from 'utils/function-registry';
 
@@ -27,6 +29,8 @@ const EMPTY_SELECTION = [];
 const catalogParams = {
   q: parseAsString.withDefault(''),
   category: parseAsArrayOf(parseAsString).withDefault(EMPTY_SELECTION),
+  // Separate from `category`: a service id can match a category id (`auth` is both).
+  service: parseAsArrayOf(parseAsString).withDefault(EMPTY_SELECTION),
 };
 
 const INITIAL_VISIBLE_TEMPLATES = 18;
@@ -37,6 +41,8 @@ const LIBRARY_CLASS_NAME =
 const CONTAINER_CLASS_NAME =
   'mx-auto w-[calc(100%-6rem)] max-w-[84rem] max-[1001px]:w-[calc(100%-4rem)] md:w-[calc(100%-2.5rem)]';
 
+const serviceFilterLabel = (id) => registryService(id).label;
+
 const INLINE_LINK_CLASS_NAME =
   'text-white underline underline-offset-2 transition-colors hover:text-green-45';
 
@@ -46,6 +52,7 @@ const FilterGroup = ({
   selected,
   onToggle,
   collapsedCount = categories.length,
+  getLabel = registryCategoryLabel,
 }) => {
   const [isExpanded, setIsExpanded] = useState(false);
   const optionsId = useId();
@@ -75,7 +82,7 @@ const FilterGroup = ({
               inputClassName="pointer-events-auto cursor-pointer rounded-none before:translate-y-px before:bg-[url('/images/templates/check-dark-mode.svg')] checked:border-green-45! checked:bg-green-45 checked:hover:border-green-45! focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-45 forced-colors:appearance-auto"
               name="category"
               value={`${optionsId}-${id}`}
-              label={registryCategoryLabel(id)}
+              label={getLabel(id)}
               type="checkbox"
               theme="checkbox"
               checked={selected.includes(id)}
@@ -106,6 +113,7 @@ FilterGroup.propTypes = {
   selected: PropTypes.arrayOf(PropTypes.string).isRequired,
   onToggle: PropTypes.func.isRequired,
   collapsedCount: PropTypes.number,
+  getLabel: PropTypes.func,
 };
 
 const FilterPanel = ({ selectedCount, onClear, children, isMobile = false }) => {
@@ -290,6 +298,7 @@ export const CatalogView = ({
   templates,
   q = '',
   category = EMPTY_SELECTION,
+  service = EMPTY_SELECTION,
   setParams = null,
 }) => {
   const searchId = useId();
@@ -304,25 +313,28 @@ export const CatalogView = ({
       ),
     };
   }, [templates]);
+  const serviceIds = useMemo(() => registryServiceIds(templates), [templates]);
   const matchingTemplates = useMemo(
-    () => filterRegistryTemplates(templates, { query: q, categories: category }),
-    [templates, q, category]
+    () => filterRegistryTemplates(templates, { query: q, categories: category, services: service }),
+    [templates, q, category, service]
   );
 
-  const toggleCategory = (id) => {
-    setParams?.(({ category: selected }) => ({
-      category: selected.includes(id)
-        ? selected.filter((value) => value !== id)
-        : [...selected, id],
+  const toggleParam = (key) => (id) => {
+    setParams?.((params) => ({
+      [key]: params[key].includes(id)
+        ? params[key].filter((value) => value !== id)
+        : [...params[key], id],
     }));
   };
+  const toggleCategory = toggleParam('category');
+  const toggleService = toggleParam('service');
 
   const clearFilters = () => {
-    setParams?.({ q: null, category: null });
+    setParams?.({ q: null, category: null, service: null });
     searchInputRef.current?.focus();
   };
 
-  const clearCategories = () => setParams?.({ category: null });
+  const clearCategories = () => setParams?.({ category: null, service: null });
 
   if (templates.length === 0) {
     return (
@@ -344,8 +356,10 @@ export const CatalogView = ({
     );
   }
 
-  const hasFilters = sourceIds.length > 0 || topicIds.length > 0;
-  const selectedCount = [...sourceIds, ...topicIds].filter((id) => category.includes(id)).length;
+  const hasFilters = sourceIds.length > 0 || topicIds.length > 0 || serviceIds.length > 0;
+  const selectedCount =
+    [...sourceIds, ...topicIds].filter((id) => category.includes(id)).length +
+    serviceIds.filter((id) => service.includes(id)).length;
   const filters = (
     <>
       <FilterGroup
@@ -353,6 +367,13 @@ export const CatalogView = ({
         categories={sourceIds}
         selected={category}
         onToggle={toggleCategory}
+      />
+      <FilterGroup
+        title="Neon services"
+        categories={serviceIds}
+        selected={service}
+        getLabel={serviceFilterLabel}
+        onToggle={toggleService}
       />
       <FilterGroup
         title="Categories"
@@ -432,7 +453,7 @@ export const CatalogView = ({
               {getStatusText(matchingTemplates.length)}
             </p>
             <CatalogResults
-              key={JSON.stringify([q, category])}
+              key={JSON.stringify([q, category, service])}
               templates={matchingTemplates}
               onClear={clearFilters}
             />
@@ -447,13 +468,22 @@ CatalogView.propTypes = {
   templates: PropTypes.arrayOf(FunctionRegistryTemplateCard.propTypes.template).isRequired,
   q: PropTypes.string,
   category: PropTypes.arrayOf(PropTypes.string),
+  service: PropTypes.arrayOf(PropTypes.string),
   setParams: PropTypes.func,
 };
 
 const CatalogClient = ({ templates }) => {
-  const [{ q, category }, setParams] = useQueryStates(catalogParams);
+  const [{ q, category, service }, setParams] = useQueryStates(catalogParams);
 
-  return <CatalogView templates={templates} q={q} category={category} setParams={setParams} />;
+  return (
+    <CatalogView
+      templates={templates}
+      q={q}
+      category={category}
+      service={service}
+      setParams={setParams}
+    />
+  );
 };
 
 CatalogClient.propTypes = {

@@ -1,3 +1,5 @@
+import NEON_SERVICES from 'constants/neon-services';
+
 export const REGISTRY_SOURCE_BASE =
   'https://raw.githubusercontent.com/neondatabase/examples/main/registry/';
 
@@ -228,6 +230,7 @@ export const matchesRegistryTemplateQuery = (template, query) => {
     template.description,
     template.provider,
     ...registryTemplateCategories(template).map(registryCategoryLabel),
+    ...registryTemplateServices(template).map((id) => registryService(id).label),
   ]
     .filter(Boolean)
     .join(' ')
@@ -322,6 +325,86 @@ export const registryCategoryIds = (templates) => {
   );
 };
 
+// Every template is a Neon Function, so `functions` says nothing about a template and is dropped.
+export const REGISTRY_IMPLICIT_SERVICE = 'functions';
+const REGISTRY_SERVICE_MAX_ITEMS = 16;
+
+const NEON_SERVICE_BY_ID = new Map(NEON_SERVICES.map((service) => [service.id, service]));
+
+// Services are open-ended too: an id we don't know yet still gets a humanized label, without an
+// icon, description, or link.
+export const registryService = (id) =>
+  NEON_SERVICE_BY_ID.get(id) ?? {
+    id,
+    label: registryCategoryLabel(id),
+    description: null,
+    href: null,
+  };
+
+export const normalizeRegistryServices = (value) => {
+  if (!Array.isArray(value)) return [];
+  const ids = value.filter(
+    (id) =>
+      typeof id === 'string' &&
+      id.length <= REGISTRY_CATEGORY_MAX_LENGTH &&
+      REGISTRY_ID_PATTERN.test(id) &&
+      id !== REGISTRY_IMPLICIT_SERVICE
+  );
+  return [...new Set(ids)].slice(0, REGISTRY_SERVICE_MAX_ITEMS);
+};
+
+export const registryTemplateServices = (template) => normalizeRegistryServices(template?.services);
+
+const registryServiceRank = (id) => {
+  const index = NEON_SERVICES.findIndex((service) => service.id === id);
+  return index === -1 ? NEON_SERVICES.length : index;
+};
+
+// Every known service, even one no template uses yet (it shows the empty state), then any
+// unknown ids from the data. Known ones keep Console order, unknown ones sort by label.
+export const registryServiceIds = (templates) => {
+  const ids = new Set([
+    ...NEON_SERVICES.map(({ id }) => id).filter((id) => id !== REGISTRY_IMPLICIT_SERVICE),
+    ...templates.flatMap(registryTemplateServices),
+  ]);
+  return [...ids].sort(
+    (a, b) =>
+      registryServiceRank(a) - registryServiceRank(b) ||
+      registryService(a).label.localeCompare(registryService(b).label)
+  );
+};
+
+// TODO: temporary prototype data. Picked by hand from each template's description until
+// registry.json / template.json declare `services`; delete this map once they do.
+const TEMPORARY_REGISTRY_SERVICES = {
+  'image-analysis': ['ai-gateway'],
+  'jev-triage': ['ai-gateway'],
+  'mcp-postgres': ['postgres'],
+  'telegram-bot': ['postgres', 'ai-gateway'],
+  'rest-api-postgres': ['postgres'],
+  'image-generation': ['object-storage', 'ai-gateway'],
+  'authenticated-api': ['auth'],
+  'tanstack-ai': ['ai-gateway'],
+  'websocket-live-poll': ['postgres'],
+  'inngest-workflow': ['postgres'],
+  'upstash-workflow': ['postgres'],
+  mastra: ['postgres', 'ai-gateway'],
+  'presigned-uploads': ['object-storage'],
+  'chat-sdk': ['postgres', 'ai-gateway'],
+  'rate-limit-postgres': ['postgres'],
+  'openai-agents': ['ai-gateway'],
+  'workos-sync': ['postgres'],
+  'x402-paid-api': ['postgres'],
+  'openapi-postgres': ['postgres'],
+  'jalco-drop': ['object-storage'],
+  'mcp-use': ['postgres'],
+};
+
+const withTemporaryServices = (entry) =>
+  entry.services.length > 0
+    ? entry
+    : { ...entry, services: normalizeRegistryServices(TEMPORARY_REGISTRY_SERVICES[entry.id]) };
+
 export const registryTemplateFilters = (
   templates,
   categoryIds = registryCategoryIds(templates)
@@ -336,12 +419,13 @@ export const registryTemplateFilters = (
 
 export const filterRegistryTemplates = (
   templates,
-  { query = '', filter = REGISTRY_ALL_FILTER, categories = [filter] } = {}
+  { query = '', filter = REGISTRY_ALL_FILTER, categories = [filter], services = [] } = {}
 ) => {
   const q = query.trim().toLowerCase();
   const categoryIds = categories.filter((id) => id && id !== REGISTRY_ALL_FILTER);
   const selectedSources = categoryIds.filter((id) => REGISTRY_SOURCE_CATEGORIES.includes(id));
   const selectedTopics = categoryIds.filter((id) => !REGISTRY_SOURCE_CATEGORIES.includes(id));
+  const selectedServices = services.filter(Boolean);
 
   return templates.filter((template) => {
     if (!matchesRegistryTemplateQuery(template, q)) return false;
@@ -350,7 +434,11 @@ export const filterRegistryTemplates = (
     return (
       (selectedSources.length === 0 ||
         selectedSources.some((id) => templateCategories.includes(id))) &&
-      (selectedTopics.length === 0 || selectedTopics.some((id) => templateCategories.includes(id)))
+      (selectedTopics.length === 0 ||
+        selectedTopics.some((id) => templateCategories.includes(id))) &&
+      // Unlike the other groups, a template must use every selected service.
+      (selectedServices.length === 0 ||
+        selectedServices.every((id) => registryTemplateServices(template).includes(id)))
     );
   });
 };
@@ -371,6 +459,7 @@ export const normalizeRegistryTemplates = (data) => {
     .map((template) => ({
       ...template,
       categories: normalizeRegistryCategories(template.categories),
+      services: normalizeRegistryServices(template.services),
       website: registryWebsiteUrl(template.website),
     }));
 };
@@ -414,7 +503,11 @@ const withTemplateJsonCategories = async (entry) => {
       (id) => !REGISTRY_SOURCE_CATEGORIES.includes(id)
     );
     const categories = normalizeRegistryCategories([...entry.categories, ...topicalCategories]);
-    return { ...entry, categories };
+    const services = normalizeRegistryServices([
+      ...entry.services,
+      ...normalizeRegistryServices(data.services),
+    ]);
+    return { ...entry, categories, services };
   } catch {
     return entry;
   }
@@ -423,7 +516,8 @@ const withTemplateJsonCategories = async (entry) => {
 export const getFunctionRegistryCatalog = async () => {
   try {
     const templates = normalizeRegistryTemplates(await fetchRegistryJson('registry.json'));
-    return await Promise.all(templates.map(withTemplateJsonCategories));
+    const entries = await Promise.all(templates.map(withTemplateJsonCategories));
+    return entries.map(withTemporaryServices);
   } catch {
     return [];
   }

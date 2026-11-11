@@ -18,16 +18,20 @@ import BookIcon from 'icons/docs/sidebar/book.inline.svg';
 import GitHubIcon from 'icons/docs/sidebar/github.inline.svg';
 import InfoIcon from 'icons/docs/sidebar/info.inline.svg';
 import {
+  REGISTRY_SOURCE_CATEGORIES,
   hasRegistryEnvironmentRequirements,
   isInlineCodeSafe,
   registryCategoryLabel,
   registryProviderLabel,
+  registryService,
   registryTemplateCategories,
+  registryTemplateServices,
   registryTemplateSourceUrl,
 } from 'utils/function-registry';
 import getRelatedFunctionTemplates from 'utils/get-related-function-templates';
 
 import OpenSource from '../open-source';
+import ServiceIcon from '../registry/service-icon';
 import { templateCardType } from '../registry/template-card';
 import TemplateCopy from '../registry/template-copy';
 import getTemplatePrompt from '../registry/template-prompt';
@@ -50,6 +54,24 @@ const TemplateDetail = async ({ template, templates, readme = null, installs = [
   const operations = template.operations ?? [];
   const environment = (template.environment ?? []).filter((item) => isInlineCodeSafe(item.name));
   const categories = registryTemplateCategories(template);
+  const catalogFilterHref = (param, id) =>
+    `${LINKS.functionsTemplates}?${param}=${encodeURIComponent(id)}#library`;
+  const categoryTag = (id) => ({
+    key: `category-${id}`,
+    label: registryCategoryLabel(id),
+    href: catalogFilterHref('category', id),
+  });
+  // Source, then topical categories, then Neon services (marked with their icon).
+  const tags = [
+    ...categories.filter((id) => REGISTRY_SOURCE_CATEGORIES.includes(id)).map(categoryTag),
+    ...categories.filter((id) => !REGISTRY_SOURCE_CATEGORIES.includes(id)).map(categoryTag),
+    ...registryTemplateServices(template).map((id) => ({
+      key: `service-${id}`,
+      label: registryService(id).label,
+      href: catalogFilterHref('service', id),
+      serviceId: id,
+    })),
+  ];
   const sourceUrl = registryTemplateSourceUrl(template);
   const related = getRelatedFunctionTemplates(template, templates);
   const renderedReadme =
@@ -147,15 +169,16 @@ const TemplateDetail = async ({ template, templates, readme = null, installs = [
               declares the function in <code>neon.ts</code>.
             </Tooltip>
           </p>
-          {categories.length > 0 && (
-            <nav aria-label="Template categories" className="mt-5 flex flex-wrap gap-2">
-              {categories.map((category) => (
+          {tags.length > 0 && (
+            <nav aria-label="Template tags" className="mt-5 flex flex-wrap gap-2">
+              {tags.map(({ key, label, href, serviceId }) => (
                 <a
-                  key={category}
-                  href={`${LINKS.functionsTemplates}?category=${encodeURIComponent(category)}#library`}
-                  className="border border-gray-new-20 px-2 py-1 font-mono text-xs leading-none tracking-tight text-gray-new-60 uppercase hover:border-gray-new-40 hover:text-white focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary-1"
+                  key={key}
+                  href={href}
+                  className="inline-flex h-6 items-center gap-1.5 border border-gray-new-20 px-2 font-mono text-xs leading-none tracking-tight text-gray-new-60 uppercase hover:border-gray-new-40 hover:text-white focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary-1"
                 >
-                  {registryCategoryLabel(category)}
+                  {serviceId && <ServiceIcon id={serviceId} className="size-3.5 shrink-0" />}
+                  {label}
                 </a>
               ))}
             </nav>
