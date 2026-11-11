@@ -25,7 +25,7 @@ redirectFrom:
   - /docs/introduction/pricing-estimation-guide
   - /docs/introduction/billing-sample
   - /docs/introduction/pricing
-updatedOn: '2026-11-04T20:10:08.844Z'
+updatedOn: '2026-11-11T21:45:00.000Z'
 ---
 
 Neon offers plans to support you at every stage, from your first prototype to production at scale.
@@ -631,6 +631,10 @@ The Free plan costs $0/month and includes 100 projects, 10 branches per project,
 
 <FaqItem question="What happens if I exceed my Free plan limits?">
 On the Free plan, when you run out of CU-hours or public network transfer, your compute is suspended until the next billing period or until you upgrade. Exceeding the 1 GB per-project storage cap, or the 20 GB total cap across all your projects, causes operations that increase storage (inserts, updates, and deletes) to fail until you free space or upgrade. Branch creation fails once you reach 10 branches per project. None of these limits delete your data.
+</FaqItem>
+
+<FaqItem question="How do I get my data out of a Free plan project that hit its limits?">
+A suspended compute can't accept connections, so `pg_dump` fails until the next billing period. To export sooner, upgrade the organization that contains the project to Launch (**Billing** > **Change plan** in the Neon Console). The compute resumes, so you can export with [pg_dump](/docs/import/migrate-from-postgres) and restore the data wherever you want, including a project in a Free organization. Launch has no minimum monthly fee and invoices under $0.50 are not collected, so a one-time export of a small database typically costs nothing; usage you keep running in the upgraded organization is billed. Projects can't be [transferred](/docs/manage/orgs-project-transfer) from a Launch organization to a Free one, so move the data with a dump and restore.
 </FaqItem>
 
 <FaqItem question="How do I upgrade or downgrade my plan?">
