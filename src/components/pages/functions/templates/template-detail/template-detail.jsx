@@ -7,6 +7,7 @@ import {
   EnvironmentTable,
   OperationList,
 } from 'components/pages/functions/templates/template-blocks';
+import TemplateDownloads from 'components/pages/functions/templates/template-downloads';
 import { renderReadme } from 'components/pages/functions/templates/template-readme';
 import Container from 'components/shared/container';
 import CopyCommand from 'components/shared/copy-command';
@@ -23,7 +24,6 @@ import {
   registryTemplatePageHref,
   registryTemplateSourceUrl,
 } from 'utils/function-registry';
-
 const Section = ({ title, description, children = null }) => (
   <section className="mt-14 md:mt-10">
     <h2 className="text-[28px] leading-tight tracking-tighter md:text-2xl">{title}</h2>
@@ -154,6 +154,7 @@ const TemplateSidebar = ({ template, installCommand }) => {
       </div>
 
       <dl>
+        <TemplateDownloads id={template.id} />
         <DetailRow label="Built by">
           <span className="flex items-center gap-3">
             <FunctionRegistryTemplateLogo template={template} eager variant="title" />

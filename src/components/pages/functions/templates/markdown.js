@@ -16,6 +16,7 @@ import {
   registryTemplateSourceUrl,
   registryWebsiteUrl,
 } from 'utils/function-registry';
+import { formatDownloadsFull, getTemplateDownloads } from 'utils/function-registry-downloads';
 
 const BASE_URL = 'https://neon.com';
 const FEEDBACK_URL = 'https://feedback.neon.tech/';
@@ -64,11 +65,14 @@ const sourceLine = (template) => {
 const categoriesLine = (template) =>
   registryTemplateCategories(template).map(registryCategoryLabel).join(', ');
 
+const downloadsLine = (id) => `- Downloads: ${formatDownloadsFull(getTemplateDownloads(id).total)}`;
+
 const templateFacts = (template) => {
   const categories = categoriesLine(template);
   return [
     `- Built by: ${builtByLine(template)}`,
     categories && `- Categories: ${categories}`,
+    downloadsLine(template.id),
     `- Install: \`${installCommandFor(template.id)}\``,
   ].filter(Boolean);
 };
@@ -168,6 +172,7 @@ export const renderTemplateMarkdown = ({ template, previous = null, next = null 
       sourceLine(template),
       `- Built by: ${builtByLine(template)}`,
       categoriesLine(template) && `- Categories: ${categoriesLine(template)}`,
+      downloadsLine(template.id),
     ]
       .filter(Boolean)
       .join('\n'),
