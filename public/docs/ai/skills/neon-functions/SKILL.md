@@ -661,15 +661,32 @@ Trigger routes must not require a user JWT or `X-Secret`; Neon POSTs to the nati
 
 An [MCP](https://modelcontextprotocol.io) server is a natural Functions workload: a long-running HTTP handler that exposes tools to AI clients (Cursor, Claude, ChatGPT, agents), with those tools reading and writing the branch's Postgres right next to the compute. MCP's **streamable HTTP transport** is a plain `POST`/`GET` on a single endpoint (conventionally `/mcp`), so it maps onto a function's `fetch` handler with no `upgrade` method or extra protocol.
 
-The simplest host is a Hono app using the official [`@modelcontextprotocol/sdk`](https://github.com/modelcontextprotocol/typescript-sdk) plus [`@hono/mcp`](https://github.com/honojs/middleware/tree/main/packages/mcp), which bridges the transport to a route. Build the server, register its tools, and create the transport once at module scope, then hand every `/mcp` request to it:
+The simplest host is a Hono app using the official [`@modelcontextprotocol/sdk`](https://github.com/modelcontextprotocol/typescript-sdk) and its `WebStandardStreamableHTTPServerTransport`. It maps directly to Hono's raw Web Standard request and, from SDK 1.30.0, sends SSE keep-alives every 15 seconds. Build a stateless server and transport per request, while keeping the database pool at module scope. A stateless server answers only POST, so return `405` with `Allow: POST` for GET and DELETE rather than holding an idle SSE stream open:
 
 ```typescript
-const transport = new StreamableHTTPTransport();
-app.all("/mcp", async (c) => {
-  if (!mcpServer.isConnected()) await mcpServer.connect(transport);
-  return transport.handleRequest(c);
+app.on(["GET", "DELETE"], "/mcp", (c) =>
+  c.json(
+    {
+      jsonrpc: "2.0",
+      error: { code: -32000, message: "Method not allowed." },
+      id: null,
+    },
+    405,
+    { Allow: "POST" },
+  ),
+);
+
+app.post("/mcp", async (c) => {
+  const server = createServer();
+  const transport = new WebStandardStreamableHTTPServerTransport({
+    sessionIdGenerator: undefined,
+  });
+  await server.connect(transport);
+  return transport.handleRequest(c.req.raw);
 });
 ```
+
+The official transport enforces the MCP `Accept` headers. Use `@hono/mcp` only as a compatibility fallback for a known client that does not send the required headers. It sends no keep-alives on POST responses, so a slow tool call can hit a client's 30-second connection timeout. The fallback wiring is in [references/mcp.md](https://neon.com/docs/ai/skills/neon-functions/references/mcp.md#fallback-for-non-compliant-clients).
 
 Because the function's URL is public, **authenticate before connecting the transport** — Managed Better Auth is the OAuth server for third-party MCP clients (guard the Function with `@neon/oauth`; see the `neon-auth` skill's [oauth-server.md](https://neon.com/docs/ai/skills/neon-auth/references/oauth-server.md)), and a simpler API-key / session-JWT check covers your own callers. Public-consumer edge protection: [references/production-hardening.md](references/production-hardening.md). [references/mcp.md](https://neon.com/docs/ai/skills/neon-functions/references/mcp.md) has the full pattern — server with Postgres-backed tools via Drizzle, the auth options, and testing with `mcporter` / `add-mcp`.
 
