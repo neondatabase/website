@@ -151,7 +151,7 @@ Beyond the quick starts on this site, the [neondatabase/neon-js](https://github.
 
 Managed Better Auth is currently available for AWS regions only. Azure support is not yet available.
 
-Managed Better Auth doesn't support projects with [IP Allow](/docs/introduction/ip-allow#ip-allow-and-other-neon-services) or [Private Networking](/docs/guides/neon-private-networking#private-networking-and-other-neon-services) enabled. Auth requests fail while either is enabled.
+Managed Better Auth isn't supported on projects with [IP Allow](/docs/introduction/ip-allow#ip-allow-and-other-neon-services) or [Private Networking](/docs/guides/neon-private-networking#private-networking-and-other-neon-services) enabled. These controls don't protect Managed Better Auth, and auth requests fail while either is enabled.
 
 ## Pricing
 

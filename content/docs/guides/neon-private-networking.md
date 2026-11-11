@@ -208,7 +208,7 @@ To configure Neon Private Networking, perform the following steps:
     You can restrict public internet access to your Neon project via the Neon CLI or API.
 
     <Admonition type="warning" title="Blocking public access doesn't protect every Neon service">
-    This step restricts Postgres connections only. The Data API, Object Storage, the AI Gateway, and Function URLs stay reachable from the public internet, and Realtime, Managed Better Auth, and database connections from Neon Functions stop working. See [Private Networking and other Neon services](#private-networking-and-other-neon-services).
+    This step restricts Postgres connections only. It doesn't protect the Data API, Realtime, Managed Better Auth, Object Storage, the AI Gateway, or function URLs. Realtime, Managed Better Auth, and database connections from Neon Functions also stop working. See [Private Networking and other Neon services](#private-networking-and-other-neon-services).
     </Admonition>
 
     <Tabs labels={["CLI", "API"]}>
@@ -338,16 +338,16 @@ The Neon API provides endpoints for managing VPC endpoints and project-level VPC
 
 ## Private Networking and other Neon services
 
-When you [restrict public internet access](#restrict-public-internet-access), only connections that arrive through your VPC endpoint can reach Postgres. This restriction covers Postgres connections only. Before you block public access, check which Neon services your project uses. Some services aren't restricted, so requests from the public internet still reach them. Others stop working once public access is blocked.
+When you [restrict public internet access](#restrict-public-internet-access), only connections that arrive through your VPC endpoint can reach Postgres. This restriction covers Postgres connections only. Before you block public access, check which Neon services your project uses. Blocking public access doesn't protect any other Neon service, so don't rely on it for their security. Some of them also stop working once public access is blocked.
 
-| Service                                                                                              | With public internet access blocked                                                                                           |
-| ---------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------- |
-| Postgres connections, including the [serverless driver](/docs/serverless/serverless-driver)          | Allowed only through your VPC endpoint                                                                                        |
-| [Data API](/docs/data-api/get-started)                                                               | **Not restricted.** Requests from the public internet are still served. The Data API isn't supported with Private Networking. |
-| [Realtime](/docs/realtime/overview)                                                                  | **Stops working.** Subscriptions fail to connect.                                                                             |
-| [Managed Better Auth](/docs/auth/about)                                                              | **Stops working.** Sign-in and other auth requests fail.                                                                      |
-| [Neon Functions](/docs/compute/functions/overview)                                                   | **Database connections fail.** A function can't connect to Postgres through `DATABASE_URL`. Function URLs aren't restricted.  |
-| [Object Storage](/docs/storage/authentication) and the [AI Gateway](/docs/ai-gateway/authentication) | **Not restricted.** Access is controlled by credentials only.                                                                 |
+| Service                                                                                              | With public internet access blocked                                                                                                                   |
+| ---------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Postgres connections, including the [serverless driver](/docs/serverless/serverless-driver)          | Allowed only through your VPC endpoint                                                                                                                |
+| [Data API](/docs/data-api/get-started)                                                               | **Not protected.** Requests from the public internet are still served. The Data API isn't supported with Private Networking.                          |
+| [Realtime](/docs/realtime/overview)                                                                  | **Not protected, and stops working.** Subscriptions fail to connect.                                                                                  |
+| [Managed Better Auth](/docs/auth/about)                                                              | **Not protected, and stops working.** Sign-in and other auth requests fail.                                                                           |
+| [Neon Functions](/docs/compute/functions/overview)                                                   | **Not protected, and database connections fail.** Function URLs are still reachable, but a function can't connect to Postgres through `DATABASE_URL`. |
+| [Object Storage](/docs/storage/authentication) and the [AI Gateway](/docs/ai-gateway/authentication) | **Not protected.** Access is controlled by credentials only.                                                                                          |
 
 If you haven't blocked public internet access, these services connect over the public internet as usual.
 

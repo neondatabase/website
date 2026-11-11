@@ -74,7 +74,7 @@ Slugs must match `^[a-z0-9]{1,20}$` and are immutable after the first deployment
 
 ## Network controls
 
-On a project with [IP Allow](/docs/introduction/ip-allow#ip-allow-and-other-neon-services) or [Private Networking](/docs/guides/neon-private-networking#private-networking-and-other-neon-services) enabled, a function can't connect to Postgres through `DATABASE_URL`. Functions don't have a fixed outbound IP range to add to an allowlist. These controls don't restrict requests to function URLs.
+On a project with [IP Allow](/docs/introduction/ip-allow#ip-allow-and-other-neon-services) or [Private Networking](/docs/guides/neon-private-networking#private-networking-and-other-neon-services) enabled, a function can't connect to Postgres through `DATABASE_URL`. Functions don't have a fixed outbound IP range to add to an allowlist. These controls don't protect function URLs.
 
 ## Environment variables
 

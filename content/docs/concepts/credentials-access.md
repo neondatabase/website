@@ -107,7 +107,7 @@ Connecting to Postgres uses a database connection credential: a Postgres role an
 IP Allow and Private Networking restrict connections to Postgres. The Data API, Object Storage, the AI Gateway, and Function URLs are protected by their credentials instead. Realtime, Managed Better Auth, and database connections from Neon Functions don't work while either control is enabled. See [IP Allow and other Neon services](/docs/introduction/ip-allow#ip-allow-and-other-neon-services) and [Private Networking and other Neon services](/docs/guides/neon-private-networking#private-networking-and-other-neon-services).
 
 <Admonition type="important" title="Network controls don't cover every service">
-IP Allow and Private Networking restrict Postgres connections only. They don't restrict requests to the Data API, Object Storage, the AI Gateway, or Function URLs. For those services the credential is the access control, so scope it and anchor it deliberately.
+IP Allow and Private Networking restrict Postgres connections only. They don't protect the Data API, Realtime, Managed Better Auth, Object Storage, the AI Gateway, or Function URLs. For those services the credential is the access control, so scope it and anchor it deliberately.
 </Admonition>
 
 ## End-user JWTs
