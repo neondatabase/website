@@ -7,6 +7,8 @@ export async function getFunctionTemplateInstalls(templateId) {
     if (process.env.VERCEL) throw new Error('STATS_DATABASE_URL is not set');
     return [];
   }
+  // The driver's parse error repeats the whole connection string, password included.
+  if (!URL.canParse(url)) throw new Error('STATS_DATABASE_URL is not a valid URL');
 
   const sql = neon(url);
   const rows = await sql`
