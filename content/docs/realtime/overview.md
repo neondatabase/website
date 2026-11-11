@@ -322,6 +322,10 @@ See [product availability](/docs/introduction/regions#product-availability) for 
 
 </FaqItem>
 
+<FaqItem question="Does Realtime work with IP Allow or Private Networking?">
+No. Realtime isn't supported on projects with [IP Allow](/docs/introduction/ip-allow#ip-allow-and-other-neon-services) or [Private Networking](/docs/guides/neon-private-networking#private-networking-and-other-neon-services) enabled. These controls don't protect Realtime, and subscriptions fail to connect while either is enabled.
+</FaqItem>
+
 <FaqItem question="Does Realtime support RLS?">
 
 Not yet. Realtime has been architected to support RLS and we aim to add it by GA if priorities allow. However, it's not yet been implemented and isn't the [recommended approach to auth](/docs/realtime/guides/queries#authorization).

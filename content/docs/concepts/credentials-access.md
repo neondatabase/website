@@ -8,8 +8,9 @@ summary: >-
   Postgres; and the Data API takes a JWT that runs each query as a Postgres
   role. Scoped credentials are limited by their scopes and anchored to a branch
   and its descendants. Your access to a project is your organization role plus
-  any per-project grant. IP Allow and Private Networking gate the Postgres
-  endpoint; the other services are gated by their credentials.
+  any per-project grant. IP Allow and Private Networking restrict Postgres
+  connections; the Data API, Object Storage, the AI Gateway, and Function URLs
+  are gated by their credentials.
 enableTableOfContents: true
 updatedOn: '2026-09-15T20:19:36.000Z'
 ---
@@ -30,7 +31,7 @@ Match what you're doing to the credential that does it. Each row has its own sec
 | ----------------------------------------------------------------------------- | ------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Create or manage projects, branches, and settings, or issue other credentials | [API keys](#api-keys)                                               | Personal keys act with your effective access; organization keys cover one organization; project-scoped keys cover one project and can't reach outside it |
 | Have a workload read files or call models                                     | [Scoped credentials](#scoped-credentials)                           | By its scopes, such as `storage:read`, plus a branch anchor that covers the branch and its descendants                                                   |
-| Connect to Postgres                                                           | [Postgres connection credentials](#postgres-connection-credentials) | IP Allow and Private Networking apply here, and only here                                                                                                |
+| Connect to Postgres                                                           | [Postgres connection credentials](#postgres-connection-credentials) | IP Allow and Private Networking apply here                                                                                                               |
 | Authorize an end user through the Data API                                    | [End-user JWTs](#end-user-jwts)                                     | Trust is registered on the project, and `GRANT`s and RLS in your database decide what the query can do                                                   |
 
 ## API keys
@@ -103,10 +104,10 @@ A Neon Function is given a scoped credential for the branch it runs on, so your 
 
 Connecting to Postgres uses a database connection credential: a Postgres role and its password, in the connection string your app or client uses. See [Connect to Neon](/docs/connect/connect-intro).
 
-IP Allow and Private Networking gate the Postgres endpoint, and only the Postgres endpoint. Object Storage, the AI Gateway, and Function URLs are protected by their credentials instead. See [IP Allow](/docs/introduction/ip-allow) and [Private Networking](/docs/guides/neon-private-networking).
+IP Allow and Private Networking restrict connections to Postgres. The Data API, Object Storage, the AI Gateway, and Function URLs are protected by their credentials instead. Realtime, Managed Better Auth, and database connections from Neon Functions don't work while either control is enabled. See [IP Allow and other Neon services](/docs/introduction/ip-allow#ip-allow-and-other-neon-services) and [Private Networking and other Neon services](/docs/guides/neon-private-networking#private-networking-and-other-neon-services).
 
 <Admonition type="important" title="Network controls don't cover every service">
-IP Allow and Private Networking gate the Postgres endpoint. They don't restrict requests to Object Storage, the AI Gateway, or Function URLs. For those services the credential is the access control, so scope it and anchor it deliberately.
+IP Allow and Private Networking restrict Postgres connections only. They don't protect the Data API, Realtime, Managed Better Auth, Object Storage, the AI Gateway, or Function URLs. For those services the credential is the access control, so scope it and anchor it deliberately.
 </Admonition>
 
 ## End-user JWTs
