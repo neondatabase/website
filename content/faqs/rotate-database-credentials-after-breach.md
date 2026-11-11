@@ -3,7 +3,7 @@ title: 'How do I rotate all my Neon database credentials and connection strings 
 subtitle: 'Reset every affected role across every project, update env vars, and revoke API keys.'
 enableTableOfContents: true
 createdAt: '2026-05-18T00:00:00.000Z'
-updatedOn: '2026-11-05T15:33:57.188Z'
+updatedOn: '2026-11-11T13:43:47.449Z'
 isDraft: false
 redirectFrom: []
 previousLink:
@@ -22,7 +22,7 @@ Work through this list for each affected project.
 
 - Identify every Neon project that shared the exposed credential or environment.
 - Reset the password for each Postgres role that can log in, on every branch where it can log in. Start with the default role (often `neondb_owner`) and any role your application servers use.
-- Close sessions that were opened with the old credentials. A reset only blocks new connections, so [restart the compute](/docs/manage/computes#restart-a-compute) to drop existing ones.
+- Close sessions that were opened with the old credentials. A reset only blocks new connections, so [restart every compute](/docs/manage/computes#restart-a-compute) on the branch, including read replicas, to drop existing ones.
 - Copy each new connection string from the **Connect** modal.
 - Update environment variables on every deploy target (Vercel, Render, Fly.io, Railway, AWS), CI system, secret manager, and local `.env` file.
 - Revoke any Neon API keys that may have been exposed and create new ones. See [How do I rotate my Neon API keys?](/faqs/rotate-neon-api-keys).

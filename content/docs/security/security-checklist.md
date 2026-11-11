@@ -10,7 +10,7 @@ summary: >-
   protected branches, keeping production data out of development branches,
   limiting AI agent access, and rotating credentials after a leak.
 enableTableOfContents: true
-updatedOn: '2026-11-11T13:15:40.948Z'
+updatedOn: '2026-11-11T13:43:47.449Z'
 ---
 
 Use this checklist to secure a Neon project before it holds production data. Each item links to a section below, and each section links to the page that sets it up. For an explanation of how these controls fit together, see the [Security overview](/docs/security/security-overview).
@@ -116,6 +116,6 @@ Follow the [MCP security guidance](/docs/ai/neon-mcp-server#mcp-security-guidanc
 
 ## Know how to rotate credentials after a leak
 
-Resetting a password blocks new connections but leaves open sessions connected, so a full rotation also restarts the compute. Read [Rotate after a leak or breach](/docs/security/security-overview#rotate-after-a-leak-or-breach) now, so the steps are ready if you need them.
+Resetting a password blocks new connections but leaves open sessions connected, so a full rotation also restarts every compute on the branch, including read replicas. Read [Rotate after a leak or breach](/docs/security/security-overview#rotate-after-a-leak-or-breach) now, so the steps are ready if you need them.
 
 <NeedHelp/>

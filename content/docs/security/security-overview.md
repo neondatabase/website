@@ -13,7 +13,7 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/security/security
   - /docs/security
-updatedOn: '2026-11-11T13:23:20.248Z'
+updatedOn: '2026-11-11T13:43:47.449Z'
 ---
 
 Neon secures the platform your data runs on. You decide who can reach your account, your projects, and your data. This page walks through the controls you have at each layer and links to the page that sets each one up.
@@ -106,7 +106,7 @@ After you reset a password, new connections with the old password fail. Sessions
 If a credential is exposed, for example through a leaked `.env` file, a compromised deployment target, or a stolen device, rotate every affected credential rather than just one:
 
 1. Reset the password for every role that can log in, starting with the default role (often `neondb_owner`). Roles are branch-scoped, so reset the role on every branch where it can log in.
-2. End the sessions that are already open. A reset only blocks new connections, so [restart the compute](/docs/manage/computes#restart-a-compute) to drop existing ones.
+2. End the sessions that are already open. A reset only blocks new connections, so [restart every compute](/docs/manage/computes#restart-a-compute) on each affected branch, including read replicas. A restart drops every open session on that compute, including pooled connections. Restarting the primary compute doesn't close sessions on a read replica.
 3. Roll the new connection strings out to every secret store, then watch your application logs for `password authentication failed` errors, which flag a location you missed.
 4. Revoke any exposed Neon API keys and create new ones. See [Manage API keys](/docs/manage/api-keys).
 5. Revoke any exposed scoped credentials for Object Storage or the AI Gateway. See [Revoking credentials](/docs/storage/authentication#revoking-credentials).
