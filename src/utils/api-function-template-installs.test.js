@@ -28,11 +28,14 @@ describe('getFunctionTemplateInstalls', () => {
     );
   });
 
-  it('keeps the password out of the error for a malformed connection string', async () => {
-    process.env.STATS_DATABASE_URL = 'postgresql://reader:hunter2@host.invalid:badport/stats';
+  it.each([
+    'postgresql://reader:hunter2@host.invalid:badport/stats',
+    'postgresql://reader:hunter2@host%invalid/stats',
+  ])('keeps the password out of the error for %s', async (connectionString) => {
+    process.env.STATS_DATABASE_URL = connectionString;
 
     const error = await getFunctionTemplateInstalls('basic').catch((e) => e);
-    expect(error.message).toBe('STATS_DATABASE_URL is not a valid URL');
+    expect(error.message).toContain('[STATS_DATABASE_URL]');
     expect(error.message).not.toContain('hunter2');
   });
 });
