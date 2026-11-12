@@ -52,7 +52,7 @@ You can also manage snapshots from the terminal with the Neon CLI. For every sub
 
 Instantly restore your branch to a specific time in its history.
 
-> Instant restore is only supported for root branches. Typically, this is your project's `production` branch. [Learn more](/docs/manage/branches#root-branch).
+> Instant restore works on root branches and child branches. Snapshots and backup schedules are only available on root branches, typically your project's `production` branch. If your production branch is a child branch, see [If your production branch is a child branch](/docs/manage/branches#if-your-production-branch-is-a-child-branch).
 
 <Tabs labels={["Console", "CLI", "API"]}>
 

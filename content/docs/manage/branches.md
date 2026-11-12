@@ -621,7 +621,7 @@ You can use the Neon Console, CLI, or API. For more details, see [Instant restor
 
 ## Delete a branch
 
-Deleting a branch is a permanent action. Deleting a branch also deletes the databases and roles that belong to the branch as well as the compute associated with the branch. You cannot delete a branch that has child branches. The child branches must be deleted first.
+Deleting a branch is a permanent action. Deleting a branch also deletes the databases and roles that belong to the branch as well as the compute associated with the branch. You cannot delete a branch that has child branches. The child branches must be deleted first. You also can't delete the default branch, a [protected branch](#protected-branch), or your project's last remaining [root branch](#root-branch).
 
 <Tabs labels={["Console", "CLI", "API"]}>
 
@@ -754,12 +754,16 @@ Neon has different branch types with different characteristics.
 
 ### Root branch
 
-A root branch is a branch without a parent branch. Each Neon project starts with a root branch (named `production` in the Console, `main` via API/CLI), which cannot be deleted and is set as the [default branch](#default-branch) for the project.
+A root branch is a branch without a parent branch. Each Neon project starts with a root branch (named `production` in the Console, `main` via API/CLI), which is set as the [default branch](#default-branch) for the project.
 
-Neon also supports two other types of root branches that have no parent but _can_ be deleted:
+Neon also supports two other types of root branches:
 
-- [Backup branches](#backup-branch), created by instant restore operations on other root branches.
+- [Backup branches](#backup-branch), created by instant restore operations on root branches.
 - [Schema-only branches](#schema-only-branch).
+
+You can delete a root branch as long as your project has at least one other root branch. You can't delete your project's last remaining root branch. The standard rules also apply: you can't delete the default branch, a protected branch, or a branch that has child branches.
+
+[Snapshots and backup schedules](/docs/guides/backup-restore) are only available on root branches. [Instant restore](/docs/postgres/backup-restore/branch-restore) works on root branches and child branches.
 
 The number of root branches allowed in a project depends on your Neon plan.
 
@@ -768,6 +772,19 @@ The number of root branches allowed in a project depends on your Neon plan.
 | Free   | 3                                 |
 | Launch | 5                                 |
 | Scale  | 25                                |
+
+#### If your production branch is a child branch
+
+Some projects use a child branch as their production branch, for example a `main` branch created from `production` and then set as the default. Snapshots and backup schedules aren't available on a child branch. Instant restore still works on it. Your existing snapshots and schedules on the root branch keep working after you change the default branch.
+
+You can't convert a child branch to a root branch yourself. To get snapshots and backup schedules on your production data, you have these options:
+
+- **Contact [Neon Support](/docs/introduction/support)** to ask about converting the branch to a root branch.
+- **Move your data to a new root branch.** Create a [schema-only branch](/docs/guides/branching-schema-only) from your production branch, which is a root branch with the same schema and no data. Copy the data into it with `pg_dump --data-only` and `psql`, then switch your application to the new branch's connection string and [set it as the default branch](#set-a-branch-as-default). Plan for writes that happen during the copy, and note that the new branch has no history from before the copy. Schema-only branches have a [maximum storage allowance](/docs/guides/branching-schema-only#schema-only-branch-allowances), so this option only works for databases within that size.
+
+<Admonition type="warning">
+Don't use instant restore to copy your child branch's data onto the root branch. Restoring a root branch from another branch makes it a child of that branch, so it loses snapshot and backup schedule eligibility. See [How a restore affects root branches](/docs/postgres/backup-restore/branch-restore#how-a-restore-affects-root-branches).
+</Admonition>
 
 ### Default branch
 
