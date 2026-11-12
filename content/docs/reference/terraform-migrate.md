@@ -11,7 +11,7 @@ summary: >-
   old syntax produces.
 enableTableOfContents: true
 tag: beta
-updatedOn: '2026-11-12T02:16:56.997Z'
+updatedOn: '2026-11-12T06:10:07.463Z'
 ---
 
 `neondatabase/neon` is the official Neon Terraform provider and continues the community provider `kislerdm/neon`. Your projects, branches, computes, roles, and databases stay in place during the migration: the provider upgrades the state written by `kislerdm/neon` v0.18.0 on the first plan, so nothing is imported again or recreated.
@@ -40,6 +40,7 @@ Point `required_providers` at `neondatabase/neon`. The provider is in beta, and 
 terraform {
   required_providers {
     neon = {
+      source  = "kislerdm/neon" # [!code --]
       source  = "neondatabase/neon" # [!code ++]
       version = "0.19.0-beta.0" # [!code ++]
     }
@@ -51,7 +52,7 @@ terraform {
 
 Replace the provider address in the state, then download the new provider:
 
-```bash
+```bash shouldWrap
 terraform state replace-provider registry.terraform.io/kislerdm/neon registry.terraform.io/neondatabase/neon
 terraform init -upgrade
 ```
