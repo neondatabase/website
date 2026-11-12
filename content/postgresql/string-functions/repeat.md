@@ -68,7 +68,7 @@ In this example, the `REPEAT()` function returns a string `"AAA"` that repeats t
 
 ### 2\) Using the REPEAT() function to draw a bar chart
 
-We’ll use the `film` table from the [sample database](../postgresql-getting-started/postgresql-sample-database) for the demonstration:
+We’ll use the `film` table from the [sample database](../postgresql-getting-started/postgresql-sample-database) for the demonstration.
 
 The following example uses the `REPEAT()` function to create a bar chart illustrating the counts of films based on their ratings:
 
