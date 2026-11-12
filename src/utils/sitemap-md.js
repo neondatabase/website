@@ -59,8 +59,9 @@ const API_DATA_DIR = path.join(process.cwd(), 'src/data/api-ref');
 const API_PATH_PREFIX = '/docs/reference/api/';
 
 // Paths left out of the sitemap, with everything under them: the changelog page
-// and its weekly entries.
-const EXCLUDED_PATHS = ['/docs/changelog'];
+// and its weekly entries, and the unlisted TanStack guides referenced from
+// TanStack's agent skills.
+const EXCLUDED_PATHS = ['/docs/changelog', '/docs/tanstack'];
 
 // Deepest heading used for navigation sections. Sections nested below this, or
 // inside a page's children, become plain list labels with their pages indented.
