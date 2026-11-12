@@ -1,4 +1,4 @@
-text: 'Lakebase Postgres is built on object storage, but 99.99999% of reads are served from high-performance local caches'
+text: "See what's recently landed on the Neon backend: Object Storage, Functions, AI Gateway, and more"
 link:
-  url: 'https://neon.com/blog/lakebase-postgres-reads-never-touch-object-storage'
+  url: 'https://neon.com/blog/whats-new-with-the-neon-backend'
   target: '_blank'
