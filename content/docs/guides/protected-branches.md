@@ -20,6 +20,7 @@ Neon's protected branches feature implements a series of protections:
 
 - Protected branches cannot be deleted.
 - Protected branches cannot be [reset](/docs/manage/branches#reset-a-branch-from-parent).
+- Protected branches can be [instantly restored](/docs/postgres/backup-restore/branch-restore) only if you keep a backup of the current state. [See below](#restore-a-protected-branch).
 - Projects with protected branches cannot be deleted.
 - Computes associated with a protected branch cannot be deleted.
 - New passwords are automatically generated for Postgres roles on branches created from protected branches. [See below](#new-passwords-generated-for-postgres-roles-on-child-branches).
@@ -28,8 +29,10 @@ Neon's protected branches feature implements a series of protections:
 
 The protected branches feature is available on Neon [paid plans](/docs/introduction/plans).
 
-- The **Launch** plan supports up to 2 protected branches
-- The **Scale** plan supports up to 5 protected branches
+- The **Launch** plan supports up to 2 protected branches per project
+- The **Scale** plan supports up to 5 protected branches per project
+
+Every protected branch in a project counts toward this limit, including protected backup branches created when you restore a protected branch.
 
 ## Set a branch as protected
 
@@ -43,7 +46,7 @@ To set a branch as protected:
    ![Branch page](/docs/guides/ip_allow_branch_page.png)
 
 3. Select a branch from the table. In this example, we'll configure our default branch (named `main` if the project was created with the CLI or API, or `production` if created in the Console) as a protected branch.
-4. On the branch page, click **Protect**.
+4. On the branch page, click **Protect**. The **Protect** button appears for branches created in the Console. For other branches, open the three-dot menu (⋮) on the branch page and select **Set as protected**.
 
    ![Set as protected](/docs/guides/ip_allow_set_as_protected.png)
 
@@ -165,8 +168,19 @@ This option removes IP restrictions from _all branches_ in your Neon project and
 
 After you've selected the protected branches option, click **Save changes** to apply the new configuration.
 
+## Restore a protected branch
+
+You can't [reset a protected branch from its parent](/docs/manage/branches#reset-a-branch-from-parent), but you can [instantly restore](/docs/postgres/backup-restore/branch-restore) it to an earlier point in its own history or from another branch. The restore must keep a backup of the branch's current state. The Console always creates one. With the CLI or API, pass a backup name (`--preserve-under-name` or `preserve_under_name`), or the restore fails with `cannot restore protected branch without preserving under a new name`.
+
+The backup branch is also protected. Keep in mind:
+
+- It counts toward your plan's protected branch limit. Each restore adds another protected backup branch.
+- You can't delete it until you remove its protection. See [Remove branch protection](#remove-branch-protection).
+
+If you can't protect a branch because you've reached your limit, check the **Branches** page for protected backup branches (named `{branch_name}_old_{head_timestamp}`) that you no longer need.
+
 ## Remove branch protection
 
-Removing a protected branch designation can be performed by selecting **Set as unprotected** from the three-dot menu (⋮) on the branch page.
+To remove protection, select **Set as unprotected** from the three-dot menu (⋮) on the branch page. For branches created in the Console, you can also click **Unprotect** on the branch page. With the API, update the branch with `"protected": false`.
 
 <NeedHelp/>

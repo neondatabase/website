@@ -211,10 +211,10 @@ The [Neon CLI ip-allow command](/docs/cli/ip-allow) supports IP Allow configurat
 
 ```bash
 neon ip-allow add 203.0.113.0 203.0.113.1
-ID              wispy-haze-123456
-Name            wispy-haze-123456
-IP Addresses    203.0.113.0, 203.0.113.1
-Protected Only  false
+ID                       wispy-haze-123456
+Name                     wispy-haze-123456
+IP Addresses             203.0.113.0, 203.0.113.1
+Protected Branches Only  false
 ```
 
 To apply an IP allowlist to protected branches only, you can use the `--protected-only` option:
