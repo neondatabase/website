@@ -70,23 +70,21 @@ In this example, the `REPEAT()` function returns a string `"AAA"` that repeats t
 
 We’ll use the `film` table from the [sample database](../postgresql-getting-started/postgresql-sample-database) for the demonstration. It has the following columns:
 
-```text
-      Column      |            Type
-------------------+-----------------------------
- film_id          | integer
- title            | character varying(255)
- description      | text
- release_year     | year
- language_id      | smallint
- rental_duration  | smallint
- rental_rate      | numeric(4,2)
- length           | smallint
- replacement_cost | numeric(5,2)
- rating           | mpaa_rating
- last_update      | timestamp without time zone
- special_features | text[]
- fulltext         | tsvector
-```
+| Column | Type |
+| --- | --- |
+| `film_id` | `integer` |
+| `title` | `character varying(255)` |
+| `description` | `text` |
+| `release_year` | `year` |
+| `language_id` | `smallint` |
+| `rental_duration` | `smallint` |
+| `rental_rate` | `numeric(4,2)` |
+| `length` | `smallint` |
+| `replacement_cost` | `numeric(5,2)` |
+| `rating` | `mpaa_rating` |
+| `last_update` | `timestamp without time zone` |
+| `special_features` | `text[]` |
+| `fulltext` | `tsvector` |
 
 The following example uses the `REPEAT()` function to create a bar chart illustrating the counts of films based on their ratings:
 
