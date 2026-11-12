@@ -2,6 +2,7 @@
 import { notFound } from 'next/navigation';
 
 import TemplateDetail from 'components/pages/functions/templates/template-detail';
+import { getFunctionTemplateInstalls } from 'utils/api-function-template-installs';
 import {
   getFunctionRegistryCatalog,
   getFunctionRegistryTemplatePage,
@@ -35,8 +36,11 @@ const FunctionTemplatePage = async ({ params }) => {
   const { id } = await params;
   const page = await getFunctionRegistryTemplatePage(id);
   if (!page) return notFound();
-  const readme = await getFunctionRegistryTemplateReadme(page.template);
-  return <TemplateDetail {...page} readme={readme} />;
+  const [readme, installs] = await Promise.all([
+    getFunctionRegistryTemplateReadme(page.template),
+    getFunctionTemplateInstalls(page.template.id),
+  ]);
+  return <TemplateDetail {...page} readme={readme} installs={installs} />;
 };
 
 export default FunctionTemplatePage;

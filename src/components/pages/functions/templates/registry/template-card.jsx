@@ -1,6 +1,11 @@
 import PropTypes from 'prop-types';
 
+import {
+  formatInstallsCompact,
+  formatInstallsWhole,
+} from 'components/pages/functions/templates/weekly-installs/summary';
 import Link from 'components/shared/link/link';
+import DownloadIcon from 'icons/download.inline.svg';
 import { cn } from 'utils/cn';
 
 import FunctionRegistrySourceLabel from './source-label';
@@ -18,10 +23,22 @@ const FunctionRegistryTemplateCard = ({ template, href, eager = false }) => (
       )}
       to={href}
     >
-      <FunctionRegistrySourceLabel
-        className="absolute top-4 right-4 z-10 border px-1.5 py-1 text-[11px] md:top-5 md:right-5"
-        template={template}
-      />
+      <div className="absolute top-4 right-4 z-10 flex items-center gap-3 md:top-5 md:right-5">
+        {template.installs > 0 && (
+          <span
+            className="flex items-center gap-1 font-mono text-xs leading-none tracking-tight text-gray-new-70 tabular-nums"
+            title={`${formatInstallsWhole(template.installs)} installs`}
+          >
+            <DownloadIcon className="size-3 shrink-0" aria-hidden />
+            {formatInstallsCompact(template.installs)}
+            <span className="sr-only"> installs</span>
+          </span>
+        )}
+        <FunctionRegistrySourceLabel
+          className="border px-1.5 py-1 text-[11px]"
+          template={template}
+        />
+      </div>
       <div className="relative z-10 flex h-full flex-col">
         <FunctionRegistryTemplateLogo template={template} eager={eager} />
         <h3 className="text-lg leading-snug font-medium tracking-extra-tight">{template.title}</h3>
@@ -46,6 +63,7 @@ FunctionRegistryTemplateCard.propTypes = {
     provider: PropTypes.string,
     logo: PropTypes.string,
     categories: PropTypes.arrayOf(PropTypes.string),
+    installs: PropTypes.number,
   }).isRequired,
 };
 

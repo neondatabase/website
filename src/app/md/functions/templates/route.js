@@ -1,4 +1,5 @@
 import { renderTemplatesIndexMarkdown } from 'components/pages/functions/templates/markdown';
+import { getFunctionTemplateInstallTotals } from 'utils/api-function-template-installs';
 import { getFunctionRegistryCatalog } from 'utils/function-registry';
 
 import { catalogUnavailableResponse, markdownResponse } from './markdown-response';
@@ -8,7 +9,10 @@ import { catalogUnavailableResponse, markdownResponse } from './markdown-respons
 export const revalidate = 3600;
 
 export async function GET() {
-  const templates = await getFunctionRegistryCatalog();
+  const [templates, installTotals] = await Promise.all([
+    getFunctionRegistryCatalog(),
+    getFunctionTemplateInstallTotals(),
+  ]);
   if (templates.length === 0) return catalogUnavailableResponse('/functions/templates.md');
-  return markdownResponse(renderTemplatesIndexMarkdown(templates));
+  return markdownResponse(renderTemplatesIndexMarkdown(templates, installTotals));
 }

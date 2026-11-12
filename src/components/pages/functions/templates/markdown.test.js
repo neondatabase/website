@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 
-import { renderTemplateMarkdown } from './markdown';
+import { renderTemplateMarkdown, renderTemplatesIndexMarkdown } from './markdown';
 
 const template = {
   id: 'demo',
@@ -145,5 +145,46 @@ describe('function template Markdown', () => {
     expect(markdown).toContain('## What this function exposes');
     expect(markdown).toContain('## Run it');
     expect(markdown).toContain('## Environment variables');
+  });
+});
+
+describe('function template installs in Markdown', () => {
+  it('totals the published weeks on the template page', () => {
+    const markdown = renderTemplateMarkdown({
+      template,
+      installs: [
+        { weekStart: '2026-08-17', installs: 1200 },
+        { weekStart: '2026-08-24', installs: 34 },
+      ],
+    });
+
+    expect(markdown).toContain('- Installs: 1,234 all time, counted since 2026-08-17');
+  });
+
+  it('leaves the line out before the first published week', () => {
+    expect(renderTemplateMarkdown({ template, installs: [] })).not.toContain('Installs:');
+  });
+
+  it('leaves the line out until someone installs the template', () => {
+    const installs = [{ weekStart: '2026-08-17', installs: 0 }];
+    expect(renderTemplateMarkdown({ template, installs })).not.toContain('Installs:');
+  });
+
+  it('lists each template total in the catalog', () => {
+    const totals = new Map([
+      ['demo', { installs: 65, since: '2026-08-17' }],
+      ['unused', { installs: 0, since: '2026-08-17' }],
+    ]);
+    const markdown = renderTemplatesIndexMarkdown(
+      [
+        template,
+        { ...template, id: 'other', title: 'Other function' },
+        { ...template, id: 'unused', title: 'Unused function' },
+      ],
+      totals
+    );
+
+    expect(markdown).toContain('- Installs: 65 all time, counted since 2026-08-17');
+    expect(markdown.match(/Installs:/g)).toHaveLength(1);
   });
 });
