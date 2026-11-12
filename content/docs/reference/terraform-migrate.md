@@ -11,7 +11,7 @@ summary: >-
   old syntax produces.
 enableTableOfContents: true
 tag: beta
-updatedOn: '2026-11-12T06:10:07.463Z'
+updatedOn: '2026-11-12T06:13:30.409Z'
 ---
 
 `neondatabase/neon` is the official Neon Terraform provider and continues the community provider `kislerdm/neon`. Your projects, branches, computes, roles, and databases stay in place during the migration: the provider upgrades the state written by `kislerdm/neon` v0.18.0 on the first plan, so nothing is imported again or recreated.
@@ -27,6 +27,8 @@ The configuration changes, though. The provider moved to the [Terraform Plugin F
   ```bash
   terraform state pull > pre-migration.tfstate
   ```
+
+  The file contains the passwords and connection strings that `kislerdm/neon` stored in the state. Keep it out of version control, and delete it once you no longer need to roll back.
 
 ## Migrate your configuration
 

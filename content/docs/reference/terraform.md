@@ -11,7 +11,7 @@ summary: >-
   migration guide instead.
 enableTableOfContents: true
 tag: beta
-updatedOn: '2026-11-12T02:16:56.931Z'
+updatedOn: '2026-11-12T06:13:30.350Z'
 ---
 
 <Admonition type="note" title="Beta">
@@ -245,7 +245,7 @@ The `archive_file` data source comes from the `hashicorp/archive` provider. Func
 
 ## Import existing resources
 
-Resources you created in the Neon Console, CLI, or API can be brought under Terraform with `import` blocks. Write the `resource` block, add an `import` block with the resource's ID, and run `terraform plan`:
+Resources you created in the Neon Console, CLI, or API can be brought under Terraform with `import` blocks. Write the `resource` block and add an `import` block with the resource's ID:
 
 ```terraform
 import {
@@ -259,7 +259,7 @@ import {
 }
 ```
 
-The plan lists each resource as imported. When it also shows changes, update your configuration until the plan reports no changes. The import ID formats are:
+Run `terraform plan` to review the imports. When the plan also shows changes, update your configuration until it reports only imports, then run `terraform apply` to save the imported resources in the state. The import ID formats are:
 
 | Resource                      | Import ID                                      |
 | ----------------------------- | ---------------------------------------------- |
