@@ -18,12 +18,19 @@ const SERVICE_ICONS = {
   auth: AuthIcon,
 };
 
+// Optical size fixes for icons that look smaller than the rest at the same box size.
+const SERVICE_ICON_SCALE = {
+  auth: 'scale-[1.06]',
+};
+
 // Always pair with the service name: the icons are generic shapes on their own. An unknown
 // service keeps an empty slot of the same size, so names in a list stay aligned.
 const ServiceIcon = ({ id, className = null }) => {
   const Icon = SERVICE_ICONS[id];
   if (!Icon) return <span className={cn('inline-block', className)} aria-hidden="true" />;
-  return <Icon className={className} aria-hidden="true" focusable="false" />;
+  return (
+    <Icon className={cn(className, SERVICE_ICON_SCALE[id])} aria-hidden="true" focusable="false" />
+  );
 };
 
 ServiceIcon.propTypes = {

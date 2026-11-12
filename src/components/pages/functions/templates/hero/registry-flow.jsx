@@ -5,6 +5,9 @@ import { useEffect, useRef } from 'react';
 
 import SparksIcon from 'icons/sparks.inline.svg';
 import { cn } from 'utils/cn';
+import { registryService } from 'utils/function-registry';
+
+import ServiceIcon from '../registry/service-icon';
 
 import {
   AGENT_ACTIONS,
@@ -16,20 +19,27 @@ import {
 
 const classes = {
   stage:
-    'relative isolate aspect-[1344/502] overflow-hidden rounded-none bg-[#151617] text-[#ededed] max-[1101px]:aspect-auto max-[1101px]:h-[41.625rem]',
+    'relative isolate aspect-[1344/502] overflow-hidden rounded-none bg-[#151617] text-[#ededed] max-[1101px]:aspect-auto max-[1101px]:h-[46.625rem]',
   diagram: 'pointer-events-none absolute inset-0',
   registry:
-    'absolute top-1/2 left-[6%] box-border w-[22%] border border-dashed border-[#4b4e50] bg-[#1b1c1e] p-4 opacity-0 [transform:translateY(-50%)] [&_h3]:m-0 [&_h3]:text-[.8125rem] [&_h3]:leading-none [&_h3]:font-normal [&_h3]:tracking-[-.02em] [&_h3]:text-[#94979e] min-[1101px]:max-[1200px]:p-3 max-[1101px]:top-5 max-[1101px]:left-1/2 max-[1101px]:h-[9.375rem] max-[1101px]:w-[calc(100%-3.5rem)] max-[1101px]:max-w-[25rem] max-[1101px]:p-2.5 max-[1101px]:[transform:translateX(-50%)] max-[1101px]:[&_h3]:text-xs',
-  functionList: 'mt-4 flex flex-col gap-2 max-[1101px]:mt-2.5 max-[1101px]:gap-[.3125rem]',
+    'absolute top-1/2 left-[6%] box-border w-[22%] border border-dashed border-[#4b4e50] bg-[#1b1c1e] p-4 opacity-0 [transform:translateY(-50%)] [&_h3]:m-0 [&_h3]:text-[.8125rem] [&_h3]:leading-none [&_h3]:font-normal [&_h3]:tracking-[-.02em] [&_h3]:text-[#94979e] min-[1101px]:max-[1200px]:p-3 max-[1101px]:top-5 max-[1101px]:left-1/2 max-[1101px]:w-[calc(100%-3.5rem)] max-[1101px]:max-w-[25rem] max-[1101px]:p-2.5 max-[1101px]:[transform:translateX(-50%)] max-[1101px]:[&_h3]:text-xs',
+  // Equal-height rows, so a row whose service tags wrap doesn't stand out.
+  functionList: 'mt-3 grid auto-rows-fr gap-2 max-[1101px]:mt-2 max-[1101px]:gap-[.3125rem]',
   functionRow:
-    'relative flex h-[3.25rem] shrink-0 items-center gap-2.5 border border-[#45484a] px-3 opacity-0 [transform:translateY(8px)] min-[1101px]:max-[1200px]:gap-2 min-[1101px]:max-[1200px]:px-[.5625rem] max-[1101px]:h-8 max-[1101px]:gap-2 max-[1101px]:px-2 max-[360px]:gap-1.5 max-[360px]:px-[.4375rem]',
-  sourceIcon:
-    'size-6 shrink-0 [&_svg]:size-full [&_svg]:stroke-current [&_svg]:stroke-[1.35] [&_svg]:[stroke-linejoin:miter] min-[1101px]:max-[1200px]:size-[1.5625rem] max-[1101px]:size-[1.1875rem] max-[360px]:size-[1.125rem]',
+    'relative flex shrink-0 flex-col items-start justify-center gap-2 border border-[#45484a] px-3 py-2.5 opacity-0 [transform:translateY(8px)] min-[1101px]:max-[1200px]:px-[.5625rem] max-[1101px]:gap-1.5 max-[1101px]:px-2 max-[1101px]:py-2 max-[360px]:px-[.4375rem]',
   sourceTitle:
     'text-[.9375rem] leading-[1.15] tracking-[-.025em] min-[1101px]:max-[1200px]:text-sm max-[1101px]:text-sm max-[360px]:text-[.8125rem]',
+  // The Neon services the template uses, as tags in the row's own colour so they follow its state.
+  sourceServices: 'flex flex-wrap items-center gap-1',
+  serviceTag:
+    'inline-flex h-5 items-center gap-1 border border-current/25 px-1.5 font-mono text-[.625rem] leading-none tracking-tight uppercase opacity-80 [&_svg]:size-3 [&_svg]:shrink-0 max-[1101px]:h-[1.125rem] max-[1101px]:px-1 max-[1101px]:text-[.5625rem]',
+  registryTitle: 'flex items-center gap-2',
+  // The Functions mark on a dark tile, quiet against the registry card.
+  registryMark:
+    'flex size-4 shrink-0 items-center justify-center bg-[#2c2f31] text-[#b4b7bc] [&_svg]:size-2.5',
   // Equal free space between the 22% registry and 36% app, each inset by 6%.
   agent:
-    'absolute top-1/2 left-[43%] box-border h-[9.125rem] w-[18%] bg-[#e4f1eb] p-[1.375rem] text-[#151617] opacity-0 [transform:translate(-50%,-50%)] min-[1101px]:max-[1200px]:px-3.5 max-[1101px]:top-[12.625rem] max-[1101px]:left-1/2 max-[1101px]:h-[7.25rem] max-[1101px]:w-[16rem] max-[1101px]:max-w-[calc(100%-4rem)] max-[1101px]:px-4 max-[1101px]:py-3 max-[1101px]:[transform:translateX(-50%)]',
+    'absolute top-1/2 left-[43%] box-border h-[9.125rem] w-[18%] bg-[#e4f1eb] p-[1.375rem] text-[#151617] opacity-0 [transform:translate(-50%,-50%)] min-[1101px]:max-[1200px]:px-3.5 max-[1101px]:top-[17.625rem] max-[1101px]:left-1/2 max-[1101px]:h-[7.25rem] max-[1101px]:w-[16rem] max-[1101px]:max-w-[calc(100%-4rem)] max-[1101px]:px-4 max-[1101px]:py-3 max-[1101px]:[transform:translateX(-50%)]',
   agentHeading: 'flex items-center gap-2 text-base leading-[1.25] tracking-[-.025em]',
   agentMark: 'block size-6 text-[#3e5a4e] max-[1101px]:size-5',
   activity: 'relative mt-2.5 h-[4.125rem] overflow-hidden max-[1101px]:mt-1.5',
@@ -45,7 +55,7 @@ const classes = {
   commandExecutable: 'text-[#151617]',
   commandArgument: 'text-[#151617]/60',
   commandTemplate: 'text-[#2d8665]',
-  app: 'absolute top-1/2 right-[6%] box-border h-[19.5rem] w-[36%] border border-[#4b4e50] bg-black-pure opacity-0 [transform:translateY(-50%)] [&_[data-build]]:opacity-0 [&_[data-build]]:[transform:translateY(4px)] max-[1101px]:top-[21.875rem] max-[1101px]:right-auto max-[1101px]:left-1/2 max-[1101px]:h-[18.375rem] max-[1101px]:w-[calc(100%-2rem)] max-[1101px]:max-w-[27.5rem] max-[1101px]:[transform:translateX(-50%)]',
+  app: 'absolute top-1/2 right-[6%] box-border h-[19.5rem] w-[36%] border border-[#4b4e50] bg-black-pure opacity-0 [transform:translateY(-50%)] [&_[data-build]]:opacity-0 [&_[data-build]]:[transform:translateY(4px)] max-[1101px]:top-[26.875rem] max-[1101px]:right-auto max-[1101px]:left-1/2 max-[1101px]:h-[18.375rem] max-[1101px]:w-[calc(100%-2rem)] max-[1101px]:max-w-[27.5rem] max-[1101px]:[transform:translateX(-50%)]',
   browserChrome:
     'relative flex h-[1.625rem] items-center justify-center border-b border-[#3b3e40] bg-[#1d1f20] text-[.6875rem] leading-none text-[#a8abad]',
   browserDots:
@@ -63,9 +73,7 @@ const classes = {
     'relative min-h-0 min-w-0 border border-[#303335] bg-[#101112] p-2.5 opacity-0 max-[1101px]:p-2 max-[360px]:p-[.4375rem]',
   capabilityContent: 'flex h-full flex-col',
   featureHeader:
-    'mb-2 flex items-center gap-[.4375rem] text-[.8125rem] leading-none [&>span:nth-child(2)]:min-w-0 [&>span:nth-child(2)]:flex-1 [&>span:nth-child(2)]:leading-[1.1] max-[1101px]:mb-1.5 max-[1101px]:text-xs max-[360px]:gap-[.3125rem] max-[360px]:text-[.6875rem]',
-  resultIcon:
-    'size-[1.0625rem] shrink-0 [&_svg]:size-full [&_svg]:stroke-current [&_svg]:stroke-[1.35] [&_svg]:[stroke-linejoin:miter] max-[1101px]:size-[.9375rem] max-[360px]:size-[.8125rem]',
+    'mb-2 flex items-center gap-[.4375rem] text-[.8125rem] leading-none [&>span:first-child]:min-w-0 [&>span:first-child]:flex-1 [&>span:first-child]:leading-[1.1] max-[1101px]:mb-1.5 max-[1101px]:text-xs max-[360px]:gap-[.3125rem] max-[360px]:text-[.6875rem]',
   widgetStatus: 'relative ml-auto size-[.8125rem] shrink-0 max-[360px]:size-[.6875rem]',
   loading:
     'absolute inset-0 size-full text-[#858a8c] opacity-0 [&_circle]:stroke-current [&_circle]:stroke-[1.4] [&_circle]:opacity-25 [&_path]:stroke-current [&_path]:stroke-[1.4]',
@@ -93,28 +101,10 @@ const classes = {
 const PLAYBACK_RATE = 1.2;
 
 const CAPABILITIES = [
-  { id: 'image', title: 'Image generation' },
-  { id: 'postgres', title: 'Postgres API' },
-  { id: 'telegram', title: 'Telegram bot' },
+  { id: 'image', title: 'Image generation', services: ['object-storage', 'ai-gateway'] },
+  { id: 'postgres', title: 'Postgres API', services: ['postgres'] },
+  { id: 'telegram', title: 'Telegram bot', services: ['postgres', 'ai-gateway'] },
 ];
-const CapabilityIcon = ({ kind }) => (
-  <svg viewBox="0 0 32 32" fill="none" aria-hidden="true">
-    {kind === 'image' && (
-      <>
-        <path d="M3 3h26v26H3zM3 25l9-11 6 7 4-5 7 9" />
-        <circle cx="23" cy="9" r="2.5" />
-      </>
-    )}
-    {kind === 'postgres' && (
-      <>
-        <ellipse cx="16" cy="7" rx="12" ry="4" />
-        <path d="M4 7v18c0 5.3 24 5.3 24 0V7M4 16c0 5.3 24 5.3 24 0" />
-      </>
-    )}
-    {kind === 'telegram' && <path d="m3 14 26-11-8 26-7-10-11-5Zm11 5L29 3M14 19l-1 8 5-4" />}
-  </svg>
-);
-CapabilityIcon.propTypes = { kind: PropTypes.oneOf(['image', 'postgres', 'telegram']).isRequired };
 // A generated picture drawn as a dot screen: sky, a mint sun, then hills. Each
 // hill is [x, peak y, slope]; the sun is [x, y, radius]; depth is how far below
 // the ridge the land dots reach full size.
@@ -410,14 +400,24 @@ const RegistryFlow = () => {
           <path data-output-pulse-head className={classes.pulseHead} />
         </svg>
         <div data-registry className={classes.registry} aria-hidden="true">
-          <h3>Function Registry</h3>
+          <h3 className={classes.registryTitle}>
+            <span className={classes.registryMark}>
+              <ServiceIcon id="functions" />
+            </span>
+            Function Registry
+          </h3>
           <div className={classes.functionList}>
-            {CAPABILITIES.map(({ id, title }) => (
+            {CAPABILITIES.map(({ id, title, services }) => (
               <div key={id} data-source={id} className={classes.functionRow}>
-                <span className={classes.sourceIcon}>
-                  <CapabilityIcon kind={id} />
-                </span>
                 <span className={classes.sourceTitle}>{title}</span>
+                <span className={classes.sourceServices}>
+                  {services.map((service) => (
+                    <span key={service} className={classes.serviceTag}>
+                      <ServiceIcon id={service} />
+                      {registryService(service).label}
+                    </span>
+                  ))}
+                </span>
               </div>
             ))}
           </div>
@@ -501,9 +501,6 @@ const RegistryFlow = () => {
                 >
                   <div className={classes.capabilityContent}>
                     <div data-build="image-header" className={classes.featureHeader}>
-                      <span className={classes.resultIcon}>
-                        <CapabilityIcon kind="image" />
-                      </span>
                       <span>Images</span>
                       <WidgetStatus kind="image" />
                     </div>
@@ -518,9 +515,6 @@ const RegistryFlow = () => {
                 >
                   <div className={classes.capabilityContent}>
                     <div data-build="postgres-header" className={classes.featureHeader}>
-                      <span className={classes.resultIcon}>
-                        <CapabilityIcon kind="postgres" />
-                      </span>
                       <span>Postgres API</span>
                       <WidgetStatus kind="postgres" />
                     </div>
@@ -544,9 +538,6 @@ const RegistryFlow = () => {
                 >
                   <div className={classes.capabilityContent}>
                     <div data-build="telegram-header" className={classes.featureHeader}>
-                      <span className={classes.resultIcon}>
-                        <CapabilityIcon kind="telegram" />
-                      </span>
                       <span>Telegram</span>
                       <WidgetStatus kind="telegram" />
                     </div>

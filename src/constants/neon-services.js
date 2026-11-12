@@ -1,17 +1,17 @@
 import LINKS from 'constants/links';
 
-// Neon services in the order the Console lists them, with the Console's names and descriptions,
-// so a service reads the same on the website and in the product.
+// Neon services in the order the Console lists them, named the way the website names them
+// (Lakebase Postgres, AI Gateway, ...), so a service reads the same on every page.
 const NEON_SERVICES = [
   {
     id: 'postgres',
-    label: 'Postgres database',
+    label: 'Lakebase Postgres',
     description: 'Serverless Postgres with branching.',
     href: LINKS.lakebase,
   },
   {
     id: 'object-storage',
-    label: 'Object storage',
+    label: 'Object Storage',
     description: 'Buckets for files and media.',
     href: LINKS.objectStorage,
   },
@@ -23,7 +23,7 @@ const NEON_SERVICES = [
   },
   {
     id: 'ai-gateway',
-    label: 'AI gateway',
+    label: 'AI Gateway',
     description: 'One endpoint for many AI models.',
     href: LINKS.aiGateway,
   },
@@ -35,7 +35,7 @@ const NEON_SERVICES = [
   },
   {
     id: 'auth',
-    label: 'Better Auth',
+    label: 'Managed Better Auth',
     description: 'Ready-to-use authentication for your app.',
     href: LINKS.authPage,
   },

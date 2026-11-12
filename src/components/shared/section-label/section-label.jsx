@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 
 import LabelArrow from 'icons/arrow-label.inline.svg';
 import databricksIcon from 'icons/home/databricks.svg';
-import FunctionsIcon from 'icons/services/functions.inline.svg';
 import { cn } from 'utils/cn';
 
 const themeClassName = {
@@ -15,13 +14,6 @@ const iconMap = {
   arrow: () => (
     <LabelArrow
       className="block h-3.5 w-3 flex-none text-[#FF3621] md:size-2.5"
-      aria-hidden="true"
-      focusable="false"
-    />
-  ),
-  functions: () => (
-    <FunctionsIcon
-      className="block size-4 flex-none text-[#FF3621] sm:size-2.5"
       aria-hidden="true"
       focusable="false"
     />
@@ -44,7 +36,7 @@ const SectionLabel = ({ className, theme = 'black', icon = 'arrow', children }) 
     <div
       className={cn(
         'flex h-3.5 gap-2 md:h-2.5 md:gap-1.5',
-        icon === 'arrow' ? 'items-end' : 'items-center',
+        icon === 'databricks' ? 'items-center' : 'items-end',
         themeClassName[theme],
         className
       )}

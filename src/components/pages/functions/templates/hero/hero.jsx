@@ -13,9 +13,7 @@ const RegistryHero = () => (
     aria-labelledby="function-registry-title"
   >
     <div className="mx-auto w-[calc(100%-6rem)] max-w-[84rem] max-[1200px]:w-[calc(100%-4rem)] max-[768px]:w-[calc(100%-2.5rem)]">
-      <SectionLabel theme="white" icon="functions">
-        Function Registry
-      </SectionLabel>
+      <SectionLabel theme="white">Function Registry</SectionLabel>
       <div className="mt-7 grid grid-cols-[minmax(0,1.35fr)_minmax(0,1fr)] items-start gap-24 max-[1200px]:gap-14 max-[1024px]:grid-cols-1 max-[1024px]:gap-8 max-[768px]:mt-6 max-[768px]:gap-6">
         <h1
           id="function-registry-title"

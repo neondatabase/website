@@ -18,6 +18,7 @@ import BookIcon from 'icons/docs/sidebar/book.inline.svg';
 import GitHubIcon from 'icons/docs/sidebar/github.inline.svg';
 import InfoIcon from 'icons/docs/sidebar/info.inline.svg';
 import {
+  REGISTRY_IMPLICIT_SERVICE,
   REGISTRY_SOURCE_CATEGORIES,
   hasRegistryEnvironmentRequirements,
   isInlineCodeSafe,
@@ -61,10 +62,17 @@ const TemplateDetail = async ({ template, templates, readme = null, installs = [
     label: registryCategoryLabel(id),
     href: catalogFilterHref('category', id),
   });
-  // Source, then topical categories, then Neon services (marked with their icon).
+  // Source, then topical categories, then Neon services (marked with their icon). Every template
+  // is a Neon Function, so Functions leads the services on every page and links to its product page.
   const tags = [
     ...categories.filter((id) => REGISTRY_SOURCE_CATEGORIES.includes(id)).map(categoryTag),
     ...categories.filter((id) => !REGISTRY_SOURCE_CATEGORIES.includes(id)).map(categoryTag),
+    {
+      key: `service-${REGISTRY_IMPLICIT_SERVICE}`,
+      label: registryService(REGISTRY_IMPLICIT_SERVICE).label,
+      href: LINKS.functions,
+      serviceId: REGISTRY_IMPLICIT_SERVICE,
+    },
     ...registryTemplateServices(template).map((id) => ({
       key: `service-${id}`,
       label: registryService(id).label,

@@ -325,7 +325,8 @@ export const registryCategoryIds = (templates) => {
   );
 };
 
-// Every template is a Neon Function, so `functions` says nothing about a template and is dropped.
+// Every template is a Neon Function, so `functions` doesn't tell templates apart: it's dropped from
+// the data and the filter, and the template page shows it as a fixed tag instead.
 export const REGISTRY_IMPLICIT_SERVICE = 'functions';
 const REGISTRY_SERVICE_MAX_ITEMS = 16;
 
