@@ -24,7 +24,11 @@ The provider continues the community provider `kislerdm/neon`, created and maint
 
 ## What you can manage
 
-The provider covers Lakebase Postgres and the other Neon backend primitives. Each resource has a page in the [registry documentation](https://registry.terraform.io/providers/neondatabase/neon/latest/docs) with its arguments, attributes, and import format.
+The provider covers Lakebase Postgres and the other Neon backend primitives. Each resource has a page in the [registry documentation](https://registry.terraform.io/providers/neondatabase/neon/latest/docs) with its arguments, attributes, and import format. The same pages are available as Markdown in the provider repository, under [`docs/resources`](https://github.com/neondatabase/terraform-provider-neon/tree/main/docs/resources), [`docs/data-sources`](https://github.com/neondatabase/terraform-provider-neon/tree/main/docs/data-sources), and [`docs/ephemeral-resources`](https://github.com/neondatabase/terraform-provider-neon/tree/main/docs/ephemeral-resources), which is easier for AI agents to read than the registry site. The repository's `main` branch can describe resources that aren't released yet, so to see the exact schema of the version you installed, run this after `terraform init`:
+
+```bash
+terraform providers schema -json
+```
 
 | Area                  | Resources and data sources                                                                                                                   |
 | --------------------- | -------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -109,7 +113,11 @@ resource "neon_api_key" "ci" {
 
 ## Create a project with a branch, compute, role, and database
 
-The following configuration creates a project, a `dev` branch with its own read-write compute, and a role and database on that branch. Replace the organization ID with your own, which you can find on your organization's **Settings** page in the Neon Console.
+The following configuration creates a project, a `dev` branch with its own read-write compute, and a role and database on that branch. Replace the organization ID with your own. It's on your organization's **Settings** page in the Neon Console, or you can list it with the [Neon CLI](/docs/cli):
+
+```bash
+neon orgs list
+```
 
 ```terraform filename="main.tf"
 resource "neon_project" "app" {
@@ -147,6 +155,10 @@ resource "neon_database" "app" {
   owner_name = neon_role.app.name
 }
 
+output "project_id" {
+  value = neon_project.app.id
+}
+
 output "dev_host" {
   value = neon_endpoint.dev.host
 }
@@ -175,6 +187,16 @@ resource "aws_ssm_parameter" "database_url" {
 ```
 
 The ephemeral resource also returns `uri_pooler`, the [pooled connection](/docs/connect/connection-pooling) string. Use the `neon_role` ephemeral resource when you only need a role's password.
+
+### Get a connection string for local development
+
+Terraform can't print an ephemeral value. An `output` that references `ephemeral.neon_connection_uri.app.uri` fails with `Ephemeral value not allowed`. To put the connection string in a local `.env` file, read it with the [Neon CLI](/docs/cli/connection-string) instead, using the project ID from the Terraform output:
+
+```bash shouldWrap
+echo "DATABASE_URL=$(neon connection-string dev --project-id $(terraform output -raw project_id) --role-name app --database-name app)" >> .env
+```
+
+Add `--pooled` for the pooled connection string. The CLI reads the same `NEON_API_KEY` environment variable as the provider.
 
 ## Add Functions, Object Storage, and the Data API
 
@@ -283,10 +305,45 @@ Some values can't be read back from Neon, so the first apply after an import set
 - **Pin the provider version.** Review the [changelog](https://github.com/neondatabase/terraform-provider-neon/blob/main/CHANGELOG.md) and run `terraform plan` before you change the version. In CI, run `terraform init` without `-upgrade`.
 - **Protect what you can't recreate.** Add [`prevent_destroy`](https://developer.hashicorp.com/terraform/language/meta-arguments/lifecycle#prevent_destroy) to projects and branches that hold production data, and use [protected branches](/docs/guides/protected-branches) on paid plans.
 - **Set `org_id` on every project.** With a personal API key, a project without `org_id` is created in your personal account instead of your organization.
-- **Create the compute before roles and databases.** Neon creates roles and databases through the branch's read-write compute, so add `depends_on = [neon_endpoint.<name>]` to roles on a branch whose compute Terraform also creates. Otherwise the apply fails with `Branch has no read-write compute`.
-- **Ephemeral resources open during plan.** When a run adds a role to an existing project and an ephemeral resource reads that role, the plan fails with `Neon role not found`, because the role doesn't exist yet. Create the role first with `terraform apply -target=neon_role.app`, then apply the rest.
+- **Create the compute before roles and databases.** Neon creates roles and databases through the branch's read-write compute, so add `depends_on = [neon_endpoint.<name>]` to roles on a branch whose compute Terraform also creates. Otherwise the apply can fail because the branch has no read-write compute yet. See [Troubleshooting](#troubleshooting).
+- **Ephemeral resources open during plan.** When a run adds a role to an existing project and an ephemeral resource reads that role, the plan fails with `role not found for branch`, because the role doesn't exist yet. Create the role first with `terraform apply -target=neon_role.app`, then apply the rest.
 - **Replacing a bucket deletes its objects.** Changing `name`, `access_level`, `project_id`, or `branch_id` on `neon_bucket` replaces the bucket, and Neon deletes a bucket together with every object in it, including objects your application uploaded. The plan shows the bucket replacement, but not the objects that go with it.
 - **Some secrets are stored in the state.** The keys of `neon_api_key` and `neon_org_api_key`, and the tokens of `neon_service_credential`, are marked sensitive but stored in the state, so keep the state in an encrypted [backend](https://developer.hashicorp.com/terraform/language/backend) with restricted access.
+
+## Troubleshooting
+
+Each entry starts with the error summary Terraform prints after `Error:`. For errors from the Neon API, the provider adds the HTTP code, a request ID, and the Neon message; include the request ID if you contact support.
+
+<DefinitionList>
+
+`no available releases match the given constraints ~> 0.19`
+: `terraform init` can't find a release because the provider is in beta, and Terraform skips beta releases unless the constraint names one exactly. Set `version = "0.19.0-beta.0"`.
+
+`Unable to Configure Neon Provider` with `authorization key must be provided`
+: The provider found no API key. Export `NEON_API_KEY` in the shell that runs Terraform, or set `api_key` in the `provider` block.
+
+`Neon API key rejected` with `HTTP Code: 401`
+: Neon doesn't accept the key. Check for a typo or a revoked key, and create a new one under [API keys](/docs/manage/api-keys) if needed.
+
+`Neon API key not allowed` with `not allowed for organization API keys`
+: The resource needs a personal API key. This applies to `neon_api_key`, `neon_org_api_key`, `neon_project_permission`, `neon_project_member_role`, `neon_org_member_role`, and the `neon_active_regions` data source. Select a provider configuration that uses a personal key, as shown in [Set up the provider](#set-up-the-provider).
+
+`Neon resource not found` with `no read-write endpoint for branch`
+: A `neon_role` or `neon_database` targets a branch that has no read-write compute. Add a `neon_endpoint` for the branch, and add `depends_on = [neon_endpoint.<name>]` to the role so Terraform creates the compute first.
+
+`Neon resource not found` with `role not found for branch`
+: An ephemeral resource reads a role that the same run creates. Ephemeral resources open during plan, before the role exists. Run `terraform apply -target=neon_role.<name>` first, then run `terraform apply` again.
+
+`Ephemeral value not allowed`
+: An `output` references an ephemeral resource, such as `ephemeral.neon_connection_uri.app.uri`. Terraform never writes ephemeral values to outputs or the state. Pass the value to a write-only argument, or read the connection string with the Neon CLI as shown in [Get a connection string for local development](#get-a-connection-string-for-local-development).
+
+`Invalid Terraform State Branch ID` or another import ID error
+: The `id` in an `import` block is missing a part. Most IDs start with the project ID, for example `<project_id>/<branch_id>` for a branch. See the [import ID formats](#import-existing-resources).
+
+`Unsupported block type`, `Incorrect attribute value type`, or `Unsupported argument` on a `neon_project`
+: The configuration uses `kislerdm/neon` syntax, such as `branch { ... }` blocks or `"yes"` and `"no"` strings. Rewrite it as described in [Migrate from kislerdm/neon](/docs/reference/terraform-migrate#configuration-changes).
+
+</DefinitionList>
 
 ---
 

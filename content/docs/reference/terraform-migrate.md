@@ -59,7 +59,11 @@ terraform state replace-provider registry.terraform.io/kislerdm/neon registry.te
 terraform init -upgrade
 ```
 
-`terraform state replace-provider` lists the resources it moves and asks for confirmation.
+`terraform state replace-provider` lists the resources it moves and asks for confirmation. In CI, or when an AI agent runs the migration, add `-auto-approve` so the command doesn't wait for input:
+
+```bash shouldWrap
+terraform state replace-provider -auto-approve registry.terraform.io/kislerdm/neon registry.terraform.io/neondatabase/neon
+```
 
 ## Update the configuration
 
@@ -79,11 +83,13 @@ After the configuration changes, the plan shows no changes, or only in-place upd
 terraform apply
 ```
 
-The apply writes the state in the new provider's format. After this step, `kislerdm/neon` can no longer read the state; return to `pre-migration.tfstate` if you need to go back.
+Add `-auto-approve` when the apply runs without a person to confirm it. The apply writes the state in the new provider's format. After this step, `kislerdm/neon` can no longer read the state; return to `pre-migration.tfstate` if you need to go back.
 
 </Steps>
 
 ## Configuration changes
+
+Only `neon_project`, `neon_branch`, `neon_endpoint`, `neon_role`, `neon_jwks_url`, and the data sources below need changes. The other v0.18.0 resources, `neon_database`, `neon_api_key`, `neon_org_api_key`, `neon_project_permission`, `neon_branch_backup_schedule`, `neon_vpc_endpoint_assignment`, and `neon_vpc_endpoint_restriction`, keep the same arguments, so you can leave them as they are.
 
 ### neon_project
 
