@@ -289,7 +289,7 @@ See [Spending notifications](/docs/introduction/spending-notifications) for how 
 
 ### Instant restore
 
-Neon stores a change history to support point-in-time restore (instant restore). You can only point-in-time restore from **root branches**, so PITR storage is charged only for root branches. Child branches do not add to this charge.
+Neon stores a change history to support point-in-time restore (instant restore). PITR storage is charged only for **root branches**. Child branches do not add to this charge, even though you can also restore them.
 
 - **Free**: No charge, up to 6 hours, limited to 1 GB of change history per project
 - **Launch**: Up to 7 days, billed at $0.20/GB-month
@@ -600,7 +600,7 @@ Change history is stored as Postgres WAL records.
 </FaqItem>
 
 <FaqItem question="Is instant restore history accumulated at the project or branch level?">
-You can only point-in-time restore from root branches, so only root branches contribute to your billed PITR storage. You set a single **history window** (for example, 7 days or 30 days) for the entire project for **instant restore**. You cannot enable, disable, or configure the history window per branch.
+Only root branches contribute to your billed PITR storage. Child branches can also be restored, but their change history isn't billed. You set a single **history window** (for example, 7 days or 30 days) for the entire project for **instant restore**. You cannot enable, disable, or configure the history window per branch.
 </FaqItem>
 
 <FaqItem question="Can I disable scale-to-zero?">

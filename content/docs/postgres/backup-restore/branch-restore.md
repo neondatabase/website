@@ -3,12 +3,11 @@ title: Instant restore
 subtitle: Learn how to revert changes or recover lost data using Neon's instant restore
   with Time Travel Assist
 summary: >-
-  Instant restore (point-in-time restore, PITR) lets you revert a Neon root
-  branch to any earlier state within your plan's history window using a
-  timestamp or Log Sequence Number (LSN). It overwrites all data and schema on
-  all databases in that branch. Use it to recover from accidental data loss or
-  schema changes on production or main branches; child branches do not support
-  PITR. Before restoring, Time Travel Assist lets you run read-only queries
+  Instant restore (point-in-time restore, PITR) lets you revert a Neon branch
+  to any earlier state within your plan's history window using a timestamp or
+  Log Sequence Number (LSN). It overwrites all data and schema on all
+  databases in that branch. Use it to recover from accidental data loss or
+  schema changes on production, main, or child branches. Before restoring, Time Travel Assist lets you run read-only queries
   against any historical point to confirm the exact restore target. After
   restoring, a backup branch is automatically created so you can roll back if
   needed.
@@ -36,7 +35,7 @@ updatedOn: '2026-09-25T09:36:22.797Z'
 </DocsList>
 </InfoBlock>
 
-With Neon's instant restore capability, also known as point-in-time restore or PITR, you can restore a root branch to an earlier state in its own or another root branch's history. You can only point-in-time restore from root branches; child branches do not support instant restore. You can use Time Travel Assist to connect to a specific point in time still covered by your **history window** setting. See [History window](/docs/postgres/backup-restore/history-window), where you can run read-only queries to pinpoint the exact moment you need to restore to. You can also use Schema Diff to get a side-by-side, GitHub-style visual comparison of your selected branches before restoring.
+With Neon's instant restore capability, also known as point-in-time restore or PITR, you can restore a branch to an earlier state in its own or another branch's history. Instant restore works on root branches and child branches. You can use Time Travel Assist to connect to a specific point in time still covered by your **history window** setting. See [History window](/docs/postgres/backup-restore/history-window), where you can run read-only queries to pinpoint the exact moment you need to restore to. You can also use Schema Diff to get a side-by-side, GitHub-style visual comparison of your selected branches before restoring.
 
 ## How instant restore works
 
@@ -44,11 +43,11 @@ With Neon's instant restore capability, also known as point-in-time restore or P
 
 In the Neon Console, select your branch, then open **Postgres database** > **Backup & Restore** and use **Restore from history** to start this flow.
 
-Instant restore is only supported for root branches. You can revert a root branch to an earlier point in time in its own or another root branch's history, using time and date or Log Sequence Number (LSN). For example, you can revert to a state just before a data loss occurred.
+You can revert a branch to an earlier point in time in its own history, or restore it from another branch's history, using time and date or Log Sequence Number (LSN). For example, you can revert to a state just before a data loss occurred. On the **Backup & Restore** page, the branch you restore from must be a root branch.
 
 ![branch restore to timestamp](/docs/guides/branch-restore_feature.png)
 
-The default **history window** for a Neon project differs by plan. You can revert a root branch to any time within that window using **instant restore**, down to the millisecond. See [History window](/docs/postgres/backup-restore/history-window).
+The default **history window** for a Neon project differs by plan. You can revert a branch to any time within that window using **instant restore**, down to the millisecond. See [History window](/docs/postgres/backup-restore/history-window).
 
 A few key points to keep in mind about the restore operation:
 
@@ -67,10 +66,18 @@ In case you need to rollback a restore, Neon preserves the branch's final state 
 
 You can use this backup to rollback the restore operation if necessary. The backup branches are listed on the **Branches** page in the Neon Console among your other branches.
 
-When you restore a root branch (like `production`), both the restored branch and the backup branch become separate root branches with no parent-child relationship.
+Backup branches follow the standard branch deletion rules. See [Deleting backup branches](#deleting-backup-branches) for details.
 
-<Admonition type="note">
-Backup branches created when restoring root branch from another branch cannot be deleted. See [Deleting backup branches](#deleting-backup-branches) for details.
+#### How a restore affects root branches
+
+A restore can change whether your branch is a [root branch](/docs/manage/branches#root-branch), which matters because [snapshots and backup schedules](/docs/guides/backup-restore) are only available on root branches.
+
+- **Restore a root branch from its own history:** The branch stays a root branch. The backup branch is also a root branch.
+- **Restore a root branch from another branch:** The branch becomes a child of the source branch, so you can no longer create snapshots or backup schedules for it. The backup branch holds the original data and becomes a root branch.
+- **Restore a child branch:** The branch stays a child branch.
+
+<Admonition type="warning">
+Don't restore your production root branch from another branch to move data into it if you rely on snapshots or backup schedules. After the restore, your production branch is no longer a root branch.
 </Admonition>
 
 ![Backup branch created after restore](/docs/guides/branch_restore_backup.png)
@@ -101,9 +108,9 @@ Neon is open source and built in public, so if you are interested in understandi
 Similar to the manual restore operation using the Neon Console and API described [here](/docs/guides/branching-pitr), the Restore operation performs a similar set of actions, but automatically:
 
 1. On initiating a restore action, Neon builds a new point-in-time branch by matching your selected timestamp to the corresponding LSN of the relevant entries in the shared WAL record.
-1. The compute for your initial branch is moved to this new branch so that your connection string remains stable.
-1. We rename your new branch to the exact name as your initial branch, so the effect is seamless; it looks and acts like the same branch.
-1. Your initial branch, which now has no compute attached to it, is renamed to _branch_name_old_head_timestamp_ to keep the pre-restore branch available should you need to roll back. When restoring a root branch, both the new branch and the backup branch become root branches with no parent.
+1. Your branch keeps its branch ID, name, and compute, so your connection string doesn't change. Its data is replaced with the data at the restore point.
+1. The pre-restore state of your branch is preserved in a new backup branch named _branch_name_old_head_timestamp_, so you can roll back if needed.
+1. The restored branch's parent is updated to reflect where its data now comes from. See [How a restore affects root branches](#how-a-restore-affects-root-branches).
 
 </details>
 
@@ -115,7 +122,7 @@ See [Time Travel Assist](/docs/postgres/backup-restore/time-travel-assist) to le
 
 ## How to use instant restore
 
-You can use the Neon Console, CLI, or API to restore root branches. The source branch for a point-in-time restore (the branch whose history you restore from) must also be a root branch.
+You can use the Neon Console, CLI, or API to restore root branches and child branches. On the Console's **Backup & Restore** page, the source branch (the branch whose history you restore from) must be a root branch.
 
 <Tabs labels={["Console", "CLI", "API"]}>
 
@@ -123,9 +130,9 @@ You can use the Neon Console, CLI, or API to restore root branches. The source b
 
 ### Restoring from history
 
-Use the **Restore** page to restore a root branch to an earlier timestamp in its own or another root branch's history.
+Use the **Restore** page to restore a branch to an earlier timestamp in its own or another branch's history.
 
-First, select the **Branch to restore**. This is the target branch for the restore operation (must be a root branch).
+First, select the **Branch to restore**. This is the target branch for the restore operation.
 
 ![branch restore to timestamp](/docs/guides/branch_restore_timestamp.png)
 
@@ -142,7 +149,7 @@ First, select the **Branch to restore**. This is the target branch for the resto
 #### To restore from another branch:
 
 1.  Switch to the **From another branch** tab.
-1.  Select the root branch that you want to restore data from (only root branches support point-in-time restore).
+1.  Select the branch that you want to restore data from. If the branch you're restoring is a root branch, it becomes a child of this source branch. See [How a restore affects root branches](#how-a-restore-affects-root-branches).
 1.  By default, the operation pulls the latest data from the source branch. If you want to pull from an earlier point in time, disable **Restore from latest data (head)**.
 
     The timestamp selector will appear.
@@ -152,16 +159,12 @@ First, select the **Branch to restore**. This is the target branch for the resto
 
 All databases on the selected branch are instantly updated with the data and schema from the chosen point in time. From the **Branches** page, you can now see a backup branch was created with the state of the branch at the restore point in time.
 
-<Admonition type="note">
-Backup branches created when restoring a root branch from another branch cannot be deleted. See [Deleting backup branches](#deleting-backup-branches) for details.
-</Admonition>
-
 ![branch restore backup branch](/docs/guides/branch_restore_backup_file.png)
 
 </TabItem>
 
 <TabItem>
-Using the CLI, you can restore a root branch to an earlier point in its own history or another root branch's history using the following command:
+Using the CLI, you can restore a branch to an earlier point in its own history or another branch's history using the following command:
 
 ```bash shouldWrap
 neon branches restore <target id|name> <source id|name @ timestamp|lsn>
@@ -169,9 +172,9 @@ neon branches restore <target id|name> <source id|name @ timestamp|lsn>
 
 In the `target id|name` field, specify the ID or name of the branch you want to restore. In the `source id|name timestamp|lsn` field, specify the source branch you want to restore from (mandatory), along with the point-in-time identifier (optional), which can be either an RFC 3339-formatted timestamp or the LSN. If you omit the point-in-time identifier, the operation defaults to the latest data (HEAD) for the source branch. Concatenate the source identifier and time identifier with `@`: for example, `development@2023-12-12T12:00:00Z`.
 
-#### Restore a root branch to its own history
+#### Restore a branch to its own history
 
-If you want to restore a root branch to an earlier point in time, use the syntax `^self` in the `<source id|name>` field. For example:
+If you want to restore a branch to an earlier point in time, use the syntax `^self` in the `<source id|name>` field. For example:
 
 ```bash shouldWrap
 neon branches restore development ^self@2024-01-01T00:00:00Z --preserve-under-name development_old
@@ -189,21 +192,21 @@ neon branches restore development ^parent
 
 This command will restore the target branch `development` to the latest data (HEAD) of its parent branch.
 
-#### Restore to another root branch's history
+#### Restore to another branch's history
 
-Here is an example of a command that restores a root branch to an earlier point in time of another root branch's history:
+Here is an example of a command that restores a branch to an earlier point in time of another branch's history:
 
 ```bash shouldWrap
 neon branches restore development production@0/12345
 ```
 
-This command will restore the target branch `development` to an earlier point in time from the source branch `main`, using the LSN `0/12345` to specify the point in time. If you left out the point-in-time identifier, the command would default to the latest data (HEAD) for the source branch `main`.
+This command will restore the target branch `development` to an earlier point in time from the source branch `production`, using the LSN `0/12345` to specify the point in time. If you left out the point-in-time identifier, the command would default to the latest data (HEAD) for the source branch `production`. If `development` is a root branch, it becomes a child of `production`. See [How a restore affects root branches](#how-a-restore-affects-root-branches).
 
 For full CLI documentation for `branches restore`, see [branches restore](/docs/cli/branches#restore).
 </TabItem>
 
 <TabItem>
-To restore a branch using the API, use the endpoint below. For point-in-time restore (when you specify a timestamp or LSN), the source branch must be a root branch.
+To restore a branch using the API, use the endpoint below.
 
 ```bash
 POST /projects/{project_id}/branches/{branch_id_to_restore}/restore
@@ -282,7 +285,7 @@ If you need to revert your changes, use [Instant restore](/docs/postgres/backup-
 
 Backup branches are deletable except in two cases:
 
-- When a root branch is restored from another branch, the backup branch, which is the original root, cannot be deleted.
+- A backup branch that is the project's last remaining root branch cannot be deleted. This can happen when you restore a root branch from a child branch: the backup branch holds the original data and may be the only root branch left.
 - A backup branch cannot be deleted if it has child branches.
 
 To delete a backup branch:
@@ -309,6 +312,6 @@ There are minimal impacts to billing from the instant restore and Time Travel As
 
 ## Limitations
 
-- **Instant restore is only supported for root branches.** You can only point-in-time restore from root branches (like `production` or `main`). Child branches do not support instant restore. When you restore a root branch, both the restored branch and backup branch become separate root branches with no parent-child relationship.
+- **Restoring a root branch from another branch makes it a child branch.** The restored branch can no longer use snapshots or backup schedules. See [How a restore affects root branches](#how-a-restore-affects-root-branches).
 - Deleting backup branches is only supported in certain cases. See [Deleting backup branches](#deleting-backup-branches) for details.
 - Instant restore (PITR) is currently not supported on branches created from a snapshot restore. If you restore a snapshot to create a new branch, you cannot perform point-in-time restore on that branch at this time. Attempting to do so will return an error: `restore from snapshot on target branch is still ongoing`.
