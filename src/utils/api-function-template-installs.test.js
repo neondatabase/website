@@ -1,6 +1,9 @@
 import { afterEach, describe, expect, it } from 'vitest';
 
-import { getFunctionTemplateInstalls } from './api-function-template-installs';
+import {
+  getFunctionTemplateInstallTotals,
+  getFunctionTemplateInstalls,
+} from './api-function-template-installs';
 
 const { STATS_DATABASE_URL, VERCEL } = process.env;
 
@@ -35,6 +38,23 @@ describe('getFunctionTemplateInstalls', () => {
     process.env.STATS_DATABASE_URL = connectionString;
 
     const error = await getFunctionTemplateInstalls('basic').catch((e) => e);
+    expect(error.message).toContain('[STATS_DATABASE_URL]');
+    expect(error.message).not.toContain('hunter2');
+  });
+});
+
+describe('getFunctionTemplateInstallTotals', () => {
+  it('has no totals to show locally without the stats database', async () => {
+    delete process.env.STATS_DATABASE_URL;
+    delete process.env.VERCEL;
+
+    await expect(getFunctionTemplateInstallTotals()).resolves.toEqual(new Map());
+  });
+
+  it('keeps the password out of the error', async () => {
+    process.env.STATS_DATABASE_URL = 'postgresql://reader:hunter2@host.invalid:badport/stats';
+
+    const error = await getFunctionTemplateInstallTotals().catch((e) => e);
     expect(error.message).toContain('[STATS_DATABASE_URL]');
     expect(error.message).not.toContain('hunter2');
   });

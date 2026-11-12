@@ -313,6 +313,7 @@ CatalogClient.propTypes = {
       categories: PropTypes.arrayOf(PropTypes.string),
       logo: PropTypes.string,
       website: PropTypes.string,
+      installs: PropTypes.number,
     })
   ).isRequired,
 };

@@ -1,4 +1,11 @@
-const DAY_MS = 24 * 60 * 60 * 1000;
+import PropTypes from 'prop-types';
+
+export const weeklyInstallRowsPropType = PropTypes.arrayOf(
+  PropTypes.shape({
+    weekStart: PropTypes.string.isRequired,
+    installs: PropTypes.number.isRequired,
+  })
+);
 
 const toDate = (weekStart) => new Date(`${weekStart}T00:00:00Z`);
 
@@ -8,26 +15,29 @@ const formatDay = (date, options = {}) =>
 const compact = new Intl.NumberFormat('en-US', { notation: 'compact', maximumFractionDigits: 1 });
 const whole = new Intl.NumberFormat('en-US');
 
-export const formatWeekRange = (weekStart) => {
-  const start = toDate(weekStart);
-  const end = new Date(start.getTime() + 6 * DAY_MS);
-  const endLabel =
-    start.getUTCMonth() === end.getUTCMonth()
-      ? formatDay(end, { month: undefined })
-      : formatDay(end);
-  return `${formatDay(start)}–${endLabel}`;
-};
+export const formatInstallsCompact = (value) => compact.format(value);
+export const formatInstallsWhole = (value) => whole.format(value);
+
+// Two-digit days keep the hover label the same width in a monospace font as the pointer moves.
+export const formatWeekLabel = (weekStart) =>
+  `Week of ${formatDay(toDate(weekStart), { day: '2-digit', year: 'numeric' })}`;
+
+export const totalWeeklyInstalls = (rows) => rows.reduce((sum, row) => sum + row.installs, 0);
 
 // Rows are every published week for one template, oldest first, zeros included.
 export const summarizeWeeklyInstalls = (rows) => {
-  if (rows.length === 0) return null;
+  const total = totalWeeklyInstalls(rows);
+  if (total === 0) return null;
   const latest = rows[rows.length - 1];
   return {
     latest: whole.format(latest.installs),
-    latestWeek: formatWeekRange(latest.weekStart),
-    total: compact.format(rows.reduce((sum, row) => sum + row.installs, 0)),
-    since: formatDay(toDate(rows[0].weekStart)),
+    total: compact.format(total),
+    since: formatDay(toDate(rows[0].weekStart), { year: 'numeric' }),
     values: rows.map((row) => row.installs),
+    weeks: rows.map((row) => ({
+      installs: whole.format(row.installs),
+      label: formatWeekLabel(row.weekStart),
+    })),
   };
 };
 
@@ -46,5 +56,6 @@ export const sparklinePaths = (values, { width, height, inset }) => {
     line,
     area: `${line} L${lastX.toFixed(1)} ${height} L${inset.toFixed(1)} ${height} Z`,
     last: { x: lastX, y: lastY },
+    points,
   };
 };

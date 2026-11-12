@@ -1,4 +1,5 @@
 import { renderReadmeMarkdown } from 'components/pages/functions/templates/template-readme/readme-markdown';
+import { totalWeeklyInstalls } from 'components/pages/functions/templates/weekly-installs/summary';
 import LINKS from 'constants/links';
 import {
   REGISTRY_COMMUNITY_CATEGORY,
@@ -65,16 +66,24 @@ const sourceLine = (template) => {
 const categoriesLine = (template) =>
   registryTemplateCategories(template).map(registryCategoryLabel).join(', ');
 
-const templateFacts = (template) => {
+const installsLine = (totals) =>
+  totals?.installs > 0 &&
+  `- Installs: ${totals.installs.toLocaleString('en-US')} all time, counted since ${totals.since}`;
+
+const totalInstalls = (rows) =>
+  rows.length > 0 && { installs: totalWeeklyInstalls(rows), since: rows[0].weekStart };
+
+const templateFacts = (template, totals) => {
   const categories = categoriesLine(template);
   return [
     `- Built by: ${builtByLine(template)}`,
     categories && `- Categories: ${categories}`,
+    installsLine(totals),
     `- Install: \`${installCommandFor(template.id)}\``,
   ].filter(Boolean);
 };
 
-export const renderTemplatesIndexMarkdown = (templates) => {
+export const renderTemplatesIndexMarkdown = (templates, installTotals = new Map()) => {
   const categories = registryTemplateFilters(templates, registryCategoryIds(templates)).slice(1);
 
   return [
@@ -105,7 +114,7 @@ export const renderTemplatesIndexMarkdown = (templates) => {
           '',
           escapeText(template.description),
           '',
-          ...templateFacts(template),
+          ...templateFacts(template, installTotals.get(template.id)),
         ].join('\n')
       ),
     ].join('\n\n'),
@@ -163,6 +172,7 @@ export const renderTemplateMarkdown = ({
   previous = null,
   next = null,
   readme = null,
+  installs = [],
 }) => {
   const installCommand = installCommandFor(template.id);
   const operations = template.operations ?? [];
@@ -201,6 +211,7 @@ export const renderTemplateMarkdown = ({
       sourceLine(template),
       `- Built by: ${builtByLine(template)}`,
       categoriesLine(template) && `- Categories: ${categoriesLine(template)}`,
+      installsLine(totalInstalls(installs)),
     ]
       .filter(Boolean)
       .join('\n'),

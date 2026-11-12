@@ -9,6 +9,7 @@ import {
 } from 'components/pages/functions/templates/template-blocks';
 import { renderReadme } from 'components/pages/functions/templates/template-readme';
 import WeeklyInstalls from 'components/pages/functions/templates/weekly-installs';
+import { weeklyInstallRowsPropType } from 'components/pages/functions/templates/weekly-installs/summary';
 import Container from 'components/shared/container';
 import CopyCommand from 'components/shared/copy-command';
 import Link from 'components/shared/link';
@@ -154,9 +155,8 @@ const TemplateSidebar = ({ template, installCommand, installs }) => {
         />
       </div>
 
-      <WeeklyInstalls rows={installs} />
-
       <dl>
+        <WeeklyInstalls rows={installs} />
         <DetailRow label="Built by">
           <span className="flex items-center gap-3">
             <FunctionRegistryTemplateLogo template={template} eager variant="title" />
@@ -212,7 +212,7 @@ const TemplateSidebar = ({ template, installCommand, installs }) => {
 
 TemplateSidebar.propTypes = {
   installCommand: PropTypes.string.isRequired,
-  installs: WeeklyInstalls.propTypes.rows,
+  installs: weeklyInstallRowsPropType,
   template: PropTypes.shape({
     id: PropTypes.string.isRequired,
     provider: PropTypes.string,
@@ -356,7 +356,7 @@ TemplateDetail.propTypes = {
     imageBase: PropTypes.string.isRequired,
     linkBase: PropTypes.string.isRequired,
   }),
-  installs: WeeklyInstalls.propTypes.rows,
+  installs: weeklyInstallRowsPropType,
 };
 
 export default TemplateDetail;

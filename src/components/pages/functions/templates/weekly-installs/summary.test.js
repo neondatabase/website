@@ -1,10 +1,19 @@
 import { describe, expect, it } from 'vitest';
 
-import { formatWeekRange, sparklinePaths, summarizeWeeklyInstalls } from './summary';
+import { formatWeekLabel, sparklinePaths, summarizeWeeklyInstalls } from './summary';
 
 describe('summarizeWeeklyInstalls', () => {
   it('has nothing to show before the first published week', () => {
     expect(summarizeWeeklyInstalls([])).toBeNull();
+  });
+
+  it('has nothing to show until someone installs the template', () => {
+    expect(
+      summarizeWeeklyInstalls([
+        { weekStart: '2026-11-16', installs: 0 },
+        { weekStart: '2026-11-23', installs: 0 },
+      ])
+    ).toBeNull();
   });
 
   it('shows the latest week, and totals every week since the first', () => {
@@ -16,10 +25,14 @@ describe('summarizeWeeklyInstalls', () => {
       ])
     ).toEqual({
       latest: '1',
-      latestWeek: 'Nov 30–Dec 6',
       total: '5',
-      since: 'Nov 16',
+      since: 'Nov 16, 2026',
       values: [0, 4, 1],
+      weeks: [
+        { installs: '0', label: 'Week of Nov 16, 2026' },
+        { installs: '4', label: 'Week of Nov 23, 2026' },
+        { installs: '1', label: 'Week of Nov 30, 2026' },
+      ],
     });
   });
 
@@ -32,9 +45,10 @@ describe('summarizeWeeklyInstalls', () => {
   });
 });
 
-describe('formatWeekRange', () => {
-  it('names the month once when the week stays in it', () => {
-    expect(formatWeekRange('2026-11-16')).toBe('Nov 16–22');
+describe('formatWeekLabel', () => {
+  it('pads single-digit days so every label has the same length', () => {
+    expect(formatWeekLabel('2026-11-02')).toBe('Week of Nov 02, 2026');
+    expect(formatWeekLabel('2026-11-02')).toHaveLength(formatWeekLabel('2026-11-23').length);
   });
 });
 
