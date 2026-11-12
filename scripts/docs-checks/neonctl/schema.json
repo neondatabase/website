@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "neonctlVersion": "9.3.2",
+  "neonctlVersion": "9.4.0",
   "binaries": [
     "neonctl",
     "neon"
@@ -5352,23 +5352,19 @@
             }
           ],
           "options": {
-            "branch": {
-              "type": "string",
-              "describe": "Branch ID or name"
-            },
             "changes": {
               "type": "boolean",
               "describe": "Show raw rows and changes events",
               "default": false
             },
-            "project-id": {
-              "type": "string",
-              "describe": "Project ID"
+            "debug": {
+              "type": "boolean",
+              "describe": "Show full database error details, including SQLSTATE and PostgreSQL's message. Details can name schema objects and row values.",
+              "default": false
             }
           },
           "commands": {},
           "describe": "Subscribe to a live SQL query with Neon Realtime",
-          "usage": "$0 realtime subscribe \"<query>\" [options]",
           "examples": [
             {
               "command": "$0 realtime subscribe \"SELECT * FROM items\"",
@@ -5377,8 +5373,13 @@
             {
               "command": "$0 realtime subscribe --changes \"SELECT * FROM items\"",
               "description": "Print raw rows and changes events"
+            },
+            {
+              "command": "$0 realtime subscribe --debug \"SELECT * FROM items\"",
+              "description": "Show why a query is rejected or fails"
             }
-          ]
+          ],
+          "usage": "$0 realtime subscribe \"<query>\" [options]"
         }
       },
       "describe": "Manage Neon Realtime for a branch",

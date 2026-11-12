@@ -581,6 +581,15 @@ function parseCommandCall(callArgs, consts) {
 // Walks an arrow-function / function builder body, collecting
 // `.options(...)` and `.command(...)` calls into the `node` accumulator.
 function walkBuilder(builderNode, node, consts) {
+  // A builder imported by name from a sibling command file
+  // (`import { builder as subscribeBuilder } from './subscribe.js'` in
+  // realtime.ts) is walked in that file's own scope, so its options, usage,
+  // positionals, and examples come from the source instead of an override.
+  const imported = resolveNamedImportBuilder(builderNode, consts);
+  if (imported) {
+    walkBuilder(imported.builder, node, imported.consts);
+    return;
+  }
   // A builder passed as a bare identifier (`.command('db', 'desc', dbBuilder)`)
   // resolves to its module-level function const, whose body we then walk. Only
   // `inspect db` does this today; the resolution is general.
@@ -761,6 +770,60 @@ function collectNamespaceImports(sf, srcFile) {
   return imports;
 }
 
+// Collects `import { builder as name } from './file.js'` named imports as
+// local name → { file, imported } (absolute .ts path and the exported name),
+// so a builder passed by identifier can be followed into its own file.
+function collectNamedImports(sf, srcFile) {
+  const imports = new Map();
+  sf.forEachChild((node) => {
+    if (!ts.isImportDeclaration(node)) return;
+    const spec = stringLiteralValue(node.moduleSpecifier);
+    const bindings = node.importClause && node.importClause.namedBindings;
+    if (!spec || !spec.startsWith('./') || !bindings || !ts.isNamedImports(bindings)) return;
+    const file = path.join(
+      path.dirname(srcFile),
+      spec.replace(/^\.\//, '').replace(/\.js$/, '.ts')
+    );
+    for (const el of bindings.elements) {
+      imports.set(el.name.text, {
+        file,
+        imported: (el.propertyName || el.name).text,
+      });
+    }
+  });
+  return imports;
+}
+
+// Resolves a builder identifier bound by a named import to the exported
+// builder in the imported file, with that file's consts (and a curried
+// builder unwrapped). Returns null when the identifier isn't a named import
+// from a ./ file, the file is already being mounted, or the export isn't found.
+function resolveNamedImportBuilder(builderNode, consts) {
+  if (!builderNode || !ts.isIdentifier(builderNode) || !consts) return null;
+  const imports = consts.get(NAMED_IMPORTS);
+  const ref = imports && imports.get(builderNode.text);
+  if (!ref) return null;
+  const mounting = consts.get(MOUNTING) || new Set();
+  if (!fs.existsSync(ref.file) || mounting.has(ref.file)) return null;
+  const sf = readSource(ref.file);
+  let init;
+  sf.forEachChild((n) => {
+    if (init || !ts.isVariableStatement(n)) return;
+    for (const decl of n.declarationList.declarations) {
+      if (ts.isIdentifier(decl.name) && decl.name.text === ref.imported && decl.initializer) {
+        init = decl.initializer;
+      }
+    }
+  });
+  if (!init) return null;
+  const fileConsts = buildFileConsts(sf, ref.file, consts.get(EXTERNAL_CONSTS), mounting);
+  const curried = resolveCurriedBuilder(init, fileConsts);
+  if (curried) return curried;
+  const fn = unwrapExpression(init);
+  if (!fn || !(ts.isArrowFunction(fn) || ts.isFunctionExpression(fn))) return null;
+  return { builder: fn, consts: fileConsts };
+}
+
 // Resolves a curried builder: `export const builder = builderFor('roles')`
 // where `builderFor = (usage) => (argv) => argv.usage(`$0 ${usage} ...`)...`.
 // Returns the inner builder with the outer parameter bound to the argument
@@ -822,23 +885,31 @@ function parseImportedCommand(callArgs, consts, parentNode) {
 }
 
 const NS_IMPORTS = Symbol('namespaceImports');
+const NAMED_IMPORTS = Symbol('namedImports');
 const EXTERNAL_CONSTS = Symbol('externalConsts');
 const MOUNTING = Symbol('mountingFiles');
 const BOUND_PARAMS = Symbol('boundFactoryParams');
 
-function parseCommandFile(srcFile, externalConsts, { usagePrefix, mounting } = {}) {
-  const sf = readSource(srcFile);
-  // File-local consts shadow external ones (parameters.gen.ts). Function
-  // consts (builder functions passed by identifier) live in the same map so
-  // walkBuilder can resolve `.command('db', 'desc', dbBuilder)`.
+// The scope a command file's builders resolve against. File-local consts
+// shadow external ones (parameters.gen.ts). Function consts (builder
+// functions passed by identifier) live in the same map so walkBuilder can
+// resolve `.command('db', 'desc', dbBuilder)`.
+function buildFileConsts(sf, srcFile, externalConsts, mounting) {
   const consts = new Map([
     ...(externalConsts || new Map()),
     ...collectModuleConsts(sf),
     ...collectFunctionConsts(sf),
   ]);
   consts.set(NS_IMPORTS, collectNamespaceImports(sf, srcFile));
+  consts.set(NAMED_IMPORTS, collectNamedImports(sf, srcFile));
   consts.set(EXTERNAL_CONSTS, externalConsts);
   consts.set(MOUNTING, new Set([...(mounting || []), srcFile]));
+  return consts;
+}
+
+function parseCommandFile(srcFile, externalConsts, { usagePrefix, mounting } = {}) {
+  const sf = readSource(srcFile);
+  const consts = buildFileConsts(sf, srcFile, externalConsts, mounting);
   const result = {
     name: null,
     aliases: [],

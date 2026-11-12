@@ -466,6 +466,8 @@ export const realtime = createRealtime({
 
 Every query it seals then reports errors with the database's full message, plus its SQLSTATE code in `sqlState` when there is one. It's a backend option because it travels inside each sealed query.
 
+To check a query's full error from the terminal without writing code, run [`neon realtime subscribe --debug`](/docs/cli/realtime#subscribe).
+
 <Admonition type="warning" title="Development only">
 Full error details can expose schema, table and column names to anyone who subscribes, including through any error message your UI shows. Never turn on `debugMode` in production.
 </Admonition>
