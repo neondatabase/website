@@ -6,7 +6,6 @@ page_description: >-
   to repeat a string a specified number of times.
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-string-functions/postgresql-repeat/
-ogImage: 'https://www.mysqltutorial.org//postgresqltutorial/products.svg'
 updatedOn: '2026-06-04T15:04:42.682Z'
 enableTableOfContents: true
 previousLink:
@@ -71,7 +70,6 @@ In this example, the `REPEAT()` function returns a string `"AAA"` that repeats t
 
 We’ll use the `film` table from the [sample database](../postgresql-getting-started/postgresql-sample-database) for the demonstration:
 
-![PostgreSQL REPEAT() Function - Sample Table](https://www.mysqltutorial.org//postgresqltutorial/products.svg)
 The following example uses the `REPEAT()` function to create a bar chart illustrating the counts of films based on their ratings:
 
 ```sql
