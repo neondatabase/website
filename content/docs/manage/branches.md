@@ -777,10 +777,7 @@ The number of root branches allowed in a project depends on your Neon plan.
 
 Some projects use a child branch as their production branch, for example a `main` branch created from `production` and then set as the default. Snapshots and backup schedules aren't available on a child branch. Instant restore still works on it. Your existing snapshots and schedules on the root branch keep working after you change the default branch.
 
-You can't convert a child branch to a root branch yourself. To get snapshots and backup schedules on your production data, you have these options:
-
-- **Contact [Neon Support](/docs/introduction/support)** to ask about converting the branch to a root branch.
-- **Move your data to a new root branch.** Create a [schema-only branch](/docs/guides/branching-schema-only) from your production branch, which is a root branch with the same schema and no data. Copy the data into it with `pg_dump --data-only` and `psql`, then switch your application to the new branch's connection string and [set it as the default branch](#set-a-branch-as-default). Plan for writes that happen during the copy, and note that the new branch has no history from before the copy. Schema-only branches have a [maximum storage allowance](/docs/guides/branching-schema-only#schema-only-branch-allowances), so this option only works for databases within that size.
+You can't convert a child branch to a root branch yourself. To get snapshots and backup schedules on your production data, contact [Neon Support](/docs/introduction/support) to ask about converting the branch to a root branch.
 
 <Admonition type="warning">
 Don't use instant restore to copy your child branch's data onto the root branch. Restoring a root branch from another branch makes it a child of that branch, so it loses snapshot and backup schedule eligibility. See [How a restore affects root branches](/docs/postgres/backup-restore/branch-restore#how-a-restore-affects-root-branches).
