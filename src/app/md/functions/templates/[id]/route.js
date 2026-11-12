@@ -1,5 +1,8 @@
 import { renderTemplateMarkdown } from 'components/pages/functions/templates/markdown';
-import { getFunctionRegistryTemplatePage } from 'utils/function-registry';
+import {
+  getFunctionRegistryTemplatePage,
+  getFunctionRegistryTemplateReadme,
+} from 'utils/function-registry';
 
 import {
   catalogUnavailableResponse,
@@ -23,5 +26,6 @@ export async function GET(_req, { params }) {
   }
 
   if (!page) return templateNotFoundResponse(pathname);
-  return markdownResponse(renderTemplateMarkdown(page));
+  const readme = await getFunctionRegistryTemplateReadme(page.template);
+  return markdownResponse(renderTemplateMarkdown({ ...page, readme }));
 }
