@@ -37,8 +37,6 @@ seo:
   image: https://cdn.neonapi.io/public/images/pages/blog/mubit-neon-ai-gateway/social.png
 ---
 
-## The agent runs on Neon Functions, Lakebase Postgres, and AI Gateway, and hands its routine steps to a small model tuned on its own traffic
-
 [Mubit](https://mubit.ai/) is middleware for AI agents. It sits between your agent and the model with a one-line endpoint change, learns from every call, and moves recurring steps to small models tuned on your own traffic, while the frontier model keeps the hard ones. There's nothing extra to host.
 
 To show how that works with Neon, they built a [template](https://github.com/MubitLabs/mubit-neon-db-agent) for cutting frontier-model token spend - an agent on [Neon Functions](https://neon.com/docs/compute/functions/overview) and [Lakebase Postgres](https://neon.com/docs/introduction/architecture-overview) that sends every model call through Mubit to [Neon AI Gateway](https://neon.com/docs/ai-gateway/overview). The example workload is a data analyst agent that answers business questions over Postgres, but the setup applies to any agent on Neon that calls frontier models through AI Gateway:
