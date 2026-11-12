@@ -616,6 +616,51 @@ describe('parseCommandFile: curried builderFor(usage) builders', () => {
     ]);
     expect(Object.keys(sub.options)).toEqual(['since']);
   });
+
+  it('follows a builder imported by name into its own file', () => {
+    const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'neonctl-units-'));
+    fs.writeFileSync(
+      path.join(dir, 'subscribe.ts'),
+      `
+      import type yargs from "yargs";
+      const LABEL = "Show raw rows and changes events";
+      export const builder = (argv: yargs.Argv) =>
+        argv
+          .usage('$0 realtime subscribe "<query>" [options]')
+          .positional("query", { describe: "SELECT query to subscribe to", type: "string" })
+          .options({
+            changes: { describe: LABEL, type: "boolean", default: false },
+            debug: { describe: "Show full database error details", type: "boolean", default: false },
+          })
+          .example('$0 realtime subscribe "SELECT 1"', "Subscribe");
+    `
+    );
+    const group = path.join(dir, 'realtime.ts');
+    fs.writeFileSync(
+      group,
+      `
+      import type yargs from "yargs";
+      import { builder as subscribeBuilder, handler as subscribeHandler } from "./subscribe.js";
+      export const command = "realtime";
+      export const describe = "Manage Neon Realtime";
+      export const builder = (argv: yargs.Argv) =>
+        argv
+          .usage("$0 realtime <sub-command> [options]")
+          .command("subscribe <query>", "Subscribe to a live query", subscribeBuilder, subscribeHandler);
+    `
+    );
+    const sub = parseCommandFile(group, new Map()).commands.subscribe;
+    expect(sub.describe).toBe('Subscribe to a live query');
+    expect(sub.usage).toBe('$0 realtime subscribe "<query>" [options]');
+    expect(sub.positionals.map((p) => [p.name, p.describe])).toEqual([
+      ['query', 'SELECT query to subscribe to'],
+    ]);
+    expect(Object.keys(sub.options)).toEqual(['changes', 'debug']);
+    expect(sub.options.changes.describe).toBe('Show raw rows and changes events');
+    expect(sub.examples).toEqual([
+      { command: '$0 realtime subscribe "SELECT 1"', description: 'Subscribe' },
+    ]);
+  });
 });
 
 describe('parseCommandFile: modules that mount each other', () => {
