@@ -457,8 +457,6 @@
                           slug: ai/lakebase-search
                         - title: Get started
                           slug: ai/lakebase-search-get-started
-                        - title: Migrate from pg_search
-                          slug: extensions/migrate-pg-search-to-lakebase-text
             - title: Postgres guides
               slug: postgresql/introduction
               icon: book
@@ -1050,8 +1048,6 @@
           slug: ai/lakebase-search
         - title: Get started
           slug: ai/lakebase-search-get-started
-        - title: Migrate from pg_search
-          slug: extensions/migrate-pg-search-to-lakebase-text
 
 - nav: Platform
   title: Platform

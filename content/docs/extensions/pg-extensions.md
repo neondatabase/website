@@ -334,7 +334,7 @@ When running a `Create project` or `Update project` API call to enable libraries
 - The `neon` and `pg_stat_statements` libraries will remain enabled whether you include them in your API call or not; they're used by a Neon system-managed database.
 - If you do not use one of the libraries enabled by default, you can exclude it from your API call.
 - The `pgrag` libraries (`"rag_bge_small_en_v15,rag_jina_reranker_v1_tiny_en"`) are **deprecated**; leave them out of your API call. For search and RAG, see [Lakebase Search](/docs/ai/lakebase-search).
-- The `pg_search` library is **unavailable**. Do not add it. For BM25 full-text search, see [Lakebase Search](/docs/ai/lakebase-search). If you still have `pg_search` indexes, see [Migrate from pg_search to lakebase_text](/docs/extensions/migrate-pg-search-to-lakebase-text).
+- The `pg_search` library is **unavailable**. Do not add it. For BM25 full-text search, see [Lakebase Search](/docs/ai/lakebase-search).
 - The **`plv8`** extension and its companion **`plcoffee`** and **`plls`** extensions are **deprecated**; **`CREATE EXTENSION`** is rejected for each. See [The plv8 extension](/docs/extensions/plv8).
 
 ## Extension notes
