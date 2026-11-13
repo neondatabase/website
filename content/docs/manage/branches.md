@@ -747,7 +747,7 @@ Data size is your logical data size.
 To find what's taking up space and free it, see [Reduce your storage](/docs/introduction/reduce-storage).
 
 <Admonition type="note" title="Storage is unlimited on paid plans">
-**Storage is unlimited on paid plans (Launch and Scale): there's no hard per-branch size limit, and your branch storage grows with your usage.** The Free plan is limited to 1 GB per project.
+**Storage is unlimited on paid plans (Launch and Scale): there's no hard per-branch size limit, and your branch storage grows with your usage.** The Free plan includes 1 GB of Postgres storage per project, and each branch can hold up to 1 GB. See [Reduce your storage](/docs/introduction/reduce-storage) if a branch reaches the limit.
 </Admonition>
 
 ## Branch types

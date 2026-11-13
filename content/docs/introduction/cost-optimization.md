@@ -80,7 +80,7 @@ Yes. Any data-modifying operation, including deletes, generates [WAL records](/d
 
 Storage limits depend on your Neon plan:
 
-- **Free plan**: The Free plan includes 1 GB of storage per project. If a branch reaches this limit, operations that need more space, such as inserts, updates, and index builds, fail with a `could not extend file because project size limit (1024 MB) has been exceeded` error until you reduce your storage or [upgrade to a paid plan](/docs/introduction/manage-billing#change-your-plan). `DELETE`, `TRUNCATE`, `DROP`, and `VACUUM` still work, so you can free space. See [Reduce your storage](/docs/introduction/reduce-storage).
+- **Free plan**: The Free plan includes 1 GB of storage per project, enforced on each branch. If a branch reaches this limit, operations that need more space, such as inserts, updates, and index builds, fail with a `could not extend file because project size limit (1024 MB) has been exceeded` error until you reduce your storage or [upgrade to a paid plan](/docs/introduction/manage-billing#change-your-plan). `DELETE`, `TRUNCATE`, `DROP`, and `VACUUM` still work, so you can free space. See [Reduce your storage](/docs/introduction/reduce-storage).
 - **Paid plans**: Storage is unlimited on Launch and Scale: there's no hard per-branch size limit, your storage grows with your usage, and you pay only for what you use.
 
 </details>

@@ -40,6 +40,12 @@ LIMIT 10;
 
 `total_size` includes the table's indexes and TOAST data. A high `dead_rows` count means the table has space you can reclaim with `VACUUM` or `VACUUM FULL`.
 
+### Branch data size vs. the project storage figure
+
+The 1 GB Free plan limit applies to each branch's data size. The project storage figure in the Console and in storage limit emails is a different number: your root branch's data size plus the data written on each child branch since it was created. It also includes branches you deleted during the current billing period, until the period ends.
+
+Because of this, the Console can show a project over 1 GB, or warn that you've reached your limit, while every branch is under 1 GB and still accepts writes. Writes only fail when the branch you're writing to reaches 1 GB. To check whether you're blocked, check the data size of the branch you're writing to.
+
 ## When a Free plan branch reaches the limit
 
 When a branch on the Free plan reaches 1 GB, statements that need to allocate more space fail with this error:
@@ -132,7 +138,7 @@ Each branch has its own data size, and writes fail when the branch you're writin
 - [Reset it from its parent](/docs/manage/branches#reset-a-branch-from-parent) to discard its changes and return it to the parent's data size.
 - [Delete it](/docs/manage/branches#delete-a-branch) if you no longer need it.
 
-Both work while the branch is at the limit.
+Both work while the branch is at the limit. A deleted branch still counts toward the [project storage figure](#branch-data-size-vs-the-project-storage-figure) in the Console until the current billing period ends.
 
 ## Upgrade if you need more space
 
@@ -142,20 +148,20 @@ If your data is bigger than 1 GB, [upgrade to a paid plan](/docs/introduction/ma
 
 ## What increases and decreases your data size
 
-| Action                                                                     | Effect on data size                                                                                   |
-| -------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- |
-| `INSERT`, `COPY`, `CREATE TABLE AS`                                        | Increases it.                                                                                         |
-| `UPDATE`                                                                   | Increases it. Each update writes a new row version and leaves the old one as a dead row until vacuum. |
-| `CREATE INDEX`                                                             | Increases it by the size of the index.                                                                |
-| `DELETE`                                                                   | No immediate change. The rows become dead rows.                                                       |
-| `VACUUM`                                                                   | Usually no change. Dead row space becomes reusable. Space at the end of a table is returned.          |
-| `VACUUM FULL`                                                              | Decreases it by the amount of dead row space in the table.                                            |
-| `TRUNCATE`                                                                 | Decreases it by the size of the table and its indexes.                                                |
-| `DROP TABLE`, `DROP INDEX`, `DROP DATABASE`                                | Decreases it by the size of the object.                                                               |
-| Create a branch                                                            | The new branch starts at its parent's data size. It doesn't add to the parent's data size.            |
-| Reset a child branch from its parent                                       | The child's data size returns to the parent's.                                                        |
-| Delete a branch                                                            | Removes that branch's data.                                                                           |
-| Shorten the [history window](/docs/postgres/backup-restore/history-window) | No change. History is tracked separately from data size.                                              |
+| Action                                                                     | Effect on data size                                                                                               |
+| -------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------- |
+| `INSERT`, `COPY`, `CREATE TABLE AS`                                        | Increases it.                                                                                                     |
+| `UPDATE`                                                                   | Increases it. Each update writes a new row version and leaves the old one as a dead row until vacuum.             |
+| `CREATE INDEX`                                                             | Increases it by the size of the index.                                                                            |
+| `DELETE`                                                                   | No immediate change. The rows become dead rows.                                                                   |
+| `VACUUM`                                                                   | Usually no change. Dead row space becomes reusable. Space at the end of a table is returned.                      |
+| `VACUUM FULL`                                                              | Decreases it by the amount of dead row space in the table.                                                        |
+| `TRUNCATE`                                                                 | Decreases it by the size of the table and its indexes.                                                            |
+| `DROP TABLE`, `DROP INDEX`, `DROP DATABASE`                                | Decreases it by the size of the object.                                                                           |
+| Create a branch                                                            | The new branch starts at its parent's data size. It doesn't add to the parent's data size.                        |
+| Reset a child branch from its parent                                       | The child's data size returns to the parent's.                                                                    |
+| Delete a branch                                                            | Removes that branch's data. The project storage figure in the Console doesn't drop until the billing period ends. |
+| Shorten the [history window](/docs/postgres/backup-restore/history-window) | No change. History is tracked separately from data size.                                                          |
 
 ## Storage costs on paid plans
 
