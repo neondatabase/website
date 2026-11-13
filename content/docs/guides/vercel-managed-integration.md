@@ -15,7 +15,7 @@ redirectFrom:
   - /docs/guides/vercel-native-integration
   - /docs/guides/vercel-native-integration-previews
 enableTableOfContents: true
-updatedOn: '2026-11-05T20:55:58.596Z'
+updatedOn: '2026-11-13T00:47:46.965Z'
 ---
 
 <InfoBlock>
@@ -172,12 +172,14 @@ Because your database is managed by Vercel, you can only perform these actions *
 - View or modify database configuration via **Storage → Settings → Change Configuration**
 - Monitor usage via **Storage → Usage** (also available in Neon Console)
 - Create additional databases (each becomes a new Neon project)
-- Rename or delete a database (see [Delete the database](#delete-the-database))
+- Delete a database (see [Delete the database](#delete-the-database))
 - Manage members / collaborators (handled through Vercel "Members", not the Neon Console) - (see [FAQ](#frequently-asked-questions) for details)
 - Delete the Neon organization (this happens automatically when you [uninstall the integration](#uninstall-the-integration))
 - Update connection-string environment variables (prefix changes, etc.)
 
 Everything else (querying data, branching, monitoring usage) works exactly the same in the Neon Console.
+
+You can rename a database from either side. Renaming the project in the Neon Console or with the Neon API also renames the database in Vercel, so the names stay in sync.
 
 If you're on Neon's Scale plan, you can open support tickets for any Neon issue directly from the Neon Console. See [Support tickets](/docs/introduction/support#support-tickets) for details.
 
