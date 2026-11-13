@@ -128,16 +128,22 @@ Great, that's the main setup to follow along with the guides. Or for the full bo
 
 ## Defining live queries
 
-Neon Realtime supports any **deterministic SQL query** that is [supported by Postgres](/postgresql/tutorial/select).
+Neon Realtime supports **read-only, deterministic SQL queries** using [Postgres SQL](/postgresql/tutorial/select), with specific [extension contracts](../reference/extensions) for fixed-environment functions and BM25 search.
 
-This includes [where clauses](/postgresql/tutorial/where), [order by](/postgresql/tutorial/order-by) and [limit](/postgresql/tutorial/limit), [joins](/postgresql/tutorial/joins), aggregates, [group by](/postgresql/tutorial/group-by) and distinct, functions (built-in and user-defined), extensions, window functions, [sub-queries](/postgresql/tutorial/subquery), etc.
+This includes [where clauses](/postgresql/tutorial/where), [order by](/postgresql/tutorial/order-by) and [limit](/postgresql/tutorial/limit), [joins](/postgresql/tutorial/joins), aggregates, [group by](/postgresql/tutorial/group-by) and distinct, functions (built-in and user-defined), supported extension functions, window functions, [sub-queries](/postgresql/tutorial/subquery), etc.
 
-The only limitations are that:
+Live queries follow these rules:
 
 1. queries must be **read-only**, i.e.: must not have side effects
-2. any functions used in your queries must be **deterministic**
+2. functions must be **deterministic** under Realtime's fixed execution environment, except for the reviewed BM25 scorer's [stale-score search contract](../reference/extensions#bm25-search)
 
 So, for example, you can't `SELECT` over updated rows and you can't use functions like `now()` or `gen_random_uuid()`.
+
+Installing an extension does not make every function from that extension
+available in a live query. See [Realtime extension support](../reference/extensions)
+for the supported extensions and the requirements for functions such as PostGIS
+transforms, `unaccent()`, trigram similarity, and BM25 search. SQL support is
+checked when a client subscribes; sealing a query alone does not validate it.
 
 ### Table requirements
 

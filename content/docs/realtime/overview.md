@@ -291,7 +291,7 @@ See [Using a query builder or ORM](/docs/realtime/guides/queries#using-a-query-b
 
 Realtime supports any read-only, deterministic SQL query that [Postgres supports](/postgresql/tutorial/select), including joins, aggregates, window functions and [sub-queries](/postgresql/tutorial/subquery).
 
-Queries can't have side effects, and any functions they use must be deterministic, so you can't use `now()` or `gen_random_uuid()`. Complex queries add write-processing latency, especially on larger datasets.
+Queries can't have side effects. Functions generally need deterministic results under Realtime's fixed execution environment, so you can't use `now()` or `gen_random_uuid()`. Specific [extension contracts](/docs/realtime/reference/extensions) allow PostGIS transforms with fixed spatial reference data and BM25 search whose scores and rankings may stay stale. Complex queries add write-processing latency, especially on larger datasets.
 
 See [Defining live queries](/docs/realtime/guides/queries#defining-live-queries) for the details.
 
