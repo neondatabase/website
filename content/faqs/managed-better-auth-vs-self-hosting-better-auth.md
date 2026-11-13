@@ -2,7 +2,7 @@
 title: "Should I use Managed Better Auth or self-host Better Auth?"
 subtitle: "Use Managed Better Auth on Neon when you want Better Auth without running it: users and sessions live in your Lakebase Postgres database, auth branches with your data, and the Data API verifies its tokens out of the box. Self-host Better Auth when you need custom plugins, hooks, or full control over the auth code."
 createdAt: '2026-11-02T00:00:00.000Z'
-updatedOn: '2026-11-03T23:21:47.530Z'
+updatedOn: '2026-11-09T18:24:22.269Z'
 isDraft: false
 previousLink:
   title: 'Is there an LLM gateway that charges provider prices and puts all model usage on one bill?'
@@ -26,7 +26,7 @@ The managed service also adds things a library can't do by itself ([about](/docs
 
 ## What you give up
 
-Managed Better Auth supports a fixed set of Better Auth features. Email and password, social OAuth (Google, GitHub, Vercel, Microsoft, Apple), Email OTP, Magic Link, Admin, JWT, Open API, and Phone Number are supported. The Organization plugin has partial support, the OAuth Provider plugin is in beta, and MFA is coming soon ([roadmap](/docs/auth/roadmap), [plugins](/docs/auth/guides/plugins)). SAML SSO isn't supported ([API compatibility](/docs/auth/migrate/from-supabase#api-compatibility)). You can't add your own Better Auth plugins or custom hooks.
+Managed Better Auth supports a fixed set of Better Auth features. Email and password, social OAuth (Google, GitHub, Vercel, Microsoft, Apple, Discord), Email OTP, Magic Link, Admin, JWT, Open API, and Phone Number are supported. The Organization plugin has partial support, the OAuth Provider plugin is in beta, and MFA is coming soon ([roadmap](/docs/auth/roadmap), [plugins](/docs/auth/guides/plugins)). SAML SSO isn't supported ([API compatibility](/docs/auth/migrate/from-supabase#api-compatibility)). You can't add your own Better Auth plugins or custom hooks.
 
 For customization, the managed service offers [webhooks](/docs/auth/guides/webhooks) instead. Blocking events like `user.before_create`, `send.otp`, and `send.magic_link` let you validate signups or deliver codes through your own channel, and non-blocking events like `user.created` let you sync new users to other systems.
 
