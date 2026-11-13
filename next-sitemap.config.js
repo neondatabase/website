@@ -36,6 +36,9 @@ module.exports = {
     // Legacy docs
     '/docs/auth/legacy/*',
 
+    // Unlisted TanStack guides, referenced from TanStack's agent skills
+    '/docs/tanstack/*',
+
     // Route handlers (route.js) that serve JSON or YAML, not pages. When you add a
     // route handler that returns a file instead of a page, add its path here too.
     '/.well-known/*',

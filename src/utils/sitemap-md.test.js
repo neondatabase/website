@@ -38,6 +38,8 @@ describe('isExcludedPath', () => {
     ['/docs/changelog', true],
     ['/docs/changelog/2026-10-30', true],
     ['/docs/changelogs', false],
+    ['/docs/tanstack/realtime-db', true],
+    ['/docs/guides/tanstack-start', false],
     ['/docs/introduction/roadmap', false],
   ])('treats %s as excluded: %s', (pathname, excluded) => {
     expect(isExcludedPath(pathname)).toBe(excluded);
