@@ -98,5 +98,13 @@
       "title": "GitHub",
       "url": "https://github.com/a-giuliano"
     }
+  },
+  "sedat-anak": {
+    "name": "Sedat Anak",
+    "position": "Founder, Stock Expert AI",
+    "link": {
+      "title": "Stock Expert AI",
+      "url": "https://www.stockexpertai.com/"
+    }
   }
 }
