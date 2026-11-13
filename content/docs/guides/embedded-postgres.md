@@ -160,7 +160,7 @@ curl --request POST \
 }'
 ```
 
-When a quota is reached, the project's computes are automatically suspended until the next billing period or until you adjust the limits.
+When a compute, written data, or data transfer quota is reached, the project's computes are suspended and new connections fail with a quota error. They stay suspended until the next billing period or until you raise the limit. When a branch reaches its `logical_size_bytes` quota, the compute keeps running: reads and deletes still work, but writes that would grow the branch fail. See [Configure consumption limits](/docs/guides/consumption-limits).
 
 For detailed information about configuring limits, see [Configure consumption limits](/docs/guides/consumption-limits).
 
