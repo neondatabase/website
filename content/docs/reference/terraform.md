@@ -11,7 +11,7 @@ summary: >-
   migration guide instead.
 enableTableOfContents: true
 tag: beta
-updatedOn: '2026-11-13T20:28:29.050Z'
+updatedOn: '2026-11-13T20:32:55.831Z'
 ---
 
 <Admonition type="note" title="Beta">
@@ -200,7 +200,7 @@ Terraform can't print an ephemeral value. An `output` that references `ephemeral
 echo "DATABASE_URL=$(neon connection-string dev --project-id $(terraform output -raw project_id) --role-name app --database-name app)" >> .env
 ```
 
-Add `--pooled` for the pooled connection string. The CLI reads the same `NEON_API_KEY` environment variable as the provider.
+The connection string contains the role's password, so keep `.env` out of version control, for example with `echo .env >> .gitignore`. Add `--pooled` for the pooled connection string. The CLI reads the same `NEON_API_KEY` environment variable as the provider.
 
 ## Add Functions, Object Storage, and the Data API
 
