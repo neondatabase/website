@@ -144,5 +144,4 @@ Your search now runs entirely on `lakebase_text`.
 ## Resources
 
 - [The lakebase_text extension](/docs/extensions/lakebase-text)
-- [The pg_search extension](/docs/extensions/pg_search) (deprecated)
 - [Lakebase Search](/docs/ai/lakebase-search)

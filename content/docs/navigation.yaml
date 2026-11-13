@@ -384,10 +384,6 @@
                   slug: extensions/pg_stat_statements
                 - title: pg_repack
                   slug: extensions/pg_repack
-                - title: pg_search
-                  slug: extensions/pg_search
-                  tag: deprecated
-                  tagTheme: gray
                 - title: pg_tiktoken
                   slug: extensions/pg_tiktoken
                 - title: pg_trgm
