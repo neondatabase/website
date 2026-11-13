@@ -248,7 +248,7 @@ Response (200 OK):
 
 The `settings` object reflects the current configuration (see [Advanced settings](#advanced-settings) for field descriptions). The `available_schemas` array lists the schemas in your database that can be exposed via the API.
 
-The `auth_provider` field shows how the Data API verifies tokens: `neon_auth` for Managed Better Auth, or `external` for a [custom provider](/docs/data-api/custom-authentication-providers). For `external`, the response also includes the `jwks_url`, `provider_name`, and `jwt_audience` you set at creation. The field is omitted when no provider was recorded, for example for a Data API created before Neon started recording it, or when the compute is suspended. In that case, check `GET /projects/{project_id}/branches/{branch_id}/auth` instead.
+The `auth_provider` field shows how the Data API verifies tokens: `neon_auth` for Managed Better Auth, or `external` for a [custom provider](/docs/data-api/custom-authentication-providers). For `external`, the response also includes the `jwks_url`, `provider_name`, and `jwt_audience` you set at creation. The field is omitted when no provider was recorded, for example for a Data API created before Neon started recording it, or when the compute is suspended. In that case, check `GET /projects/{project_id}/branches/{branch_id}/auth` for Managed Better Auth, or `GET /projects/{project_id}/jwks` for an external provider.
 
 ### Update configuration
 
