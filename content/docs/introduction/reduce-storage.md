@@ -44,7 +44,7 @@ LIMIT 10;
 
 The 1 GB Free plan limit applies to each branch's data size. The project storage figure in the Console and in storage limit emails is a different number: your root branch's data size plus the data written on each child branch since it was created. It also includes branches you deleted during the current billing period, until the period ends.
 
-Because of this, the Console can show a project over 1 GB, or warn that you've reached your limit, while every branch is under 1 GB and still accepts writes. Writes only fail when the branch you're writing to reaches 1 GB. To check whether you're blocked, check the data size of the branch you're writing to.
+Because of this, the Console can show a project over 1 GB, or warn that you've reached your limit, while every branch is under 1 GB and still accepts writes. You might also get a "You're out of storage" email. Connections and queries keep working, and writes only fail when the branch you're writing to reaches 1 GB. To check whether you're blocked, check the data size of the branch you're writing to.
 
 ## When a Free plan branch reaches the limit
 
