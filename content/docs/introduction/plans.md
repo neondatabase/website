@@ -630,11 +630,11 @@ The Free plan costs $0/month and includes 100 projects, 10 branches per project,
 </FaqItem>
 
 <FaqItem question="What happens if I exceed my Free plan limits?">
-On the Free plan, when you run out of CU-hours or public network transfer, your compute is suspended until the next billing period or until you upgrade. Exceeding the 1 GB per-project storage cap, or the 20 GB total cap across all your projects, causes operations that increase storage (inserts, updates, and deletes) to fail until you upgrade. Branch creation fails once you reach 10 branches per project. None of these limits delete your data.
+On the Free plan, when you run out of CU-hours or public network transfer, your compute is suspended until the next billing period or until you upgrade. Exceeding the 1 GB per-project storage cap, or the 20 GB total cap across all your projects, causes operations that increase storage (inserts, updates, and deletes) to fail until you free space or upgrade. Branch creation fails once you reach 10 branches per project. None of these limits delete your data.
 </FaqItem>
 
 <FaqItem question="How do I restore or export a Free plan project that hit its limits?">
-It depends on which limit you hit. If you hit the storage limit, your compute stays available. You can still query the project or export it with [pg_dump](/docs/import/migrate-from-postgres), but writes fail until you upgrade.
+It depends on which limit you hit. If you hit the storage limit, your compute stays available. You can still query the project or export it with [pg_dump](/docs/import/migrate-from-postgres), but writes fail until you free space or upgrade.
 
 If you ran out of CU-hours or public network transfer, the compute is suspended until the next billing period, and connections, including `pg_dump`, fail with SQLSTATE `53000`. To restore access sooner, upgrade the organization that contains the project to Launch (**Billing** > **Change plan** in the Neon Console). Launch has no minimum monthly fee, so you pay only for what you use. If you want to return to Free later, you can downgrade, and the plan change resets the Free plan's monthly compute and network transfer allowances. If you plan to export your data, do it before you downgrade, because `pg_dump` counts toward network transfer. If you ran out of network transfer, check what's using it so the project doesn't hit the limit again. See [Reduce network transfer costs](/docs/introduction/network-transfer).
 
