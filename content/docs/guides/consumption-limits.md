@@ -110,7 +110,7 @@ These limits are not directly configurable. You can query the limits by running 
 
 _**What happens when a quota is met?**_
 
-When a project-level metric (`active_time_seconds`, `compute_time_seconds`, `written_data_bytes`, or `data_transfer_bytes`) reaches its quota limit, all active computes for that project are automatically suspended. It is important to understand, this suspension is persistent. It works differently than the inactivity-based [scale to zero](/docs/guides/scale-to-zero-guide), where computes restart at the next interaction: this suspend will _not_ restart at the next API call or incoming connection. If you don't take explicit action otherwise, the suspension remains in place until the next billing period starts (`consumption_period_end`).
+When a project-level metric (`active_time_seconds`, `compute_time_seconds`, `written_data_bytes`, or `data_transfer_bytes`) reaches its quota limit, all active computes for that project are automatically suspended. It is important to understand, this suspension is persistent. It works differently than the inactivity-based [scale to zero](/docs/guides/scale-to-zero-guide), where computes restart at the next interaction: this suspend will _not_ restart at the next API call or incoming connection. If you don't take explicit action otherwise, the suspension remains in place until the next billing period starts (`consumption_period_end`). To lift it sooner, raise the quota with a `PATCH` request; the project's computes accept connections again within seconds.
 
 While a project is suspended, connection attempts fail with a quota error, and the endpoint start API call returns `423` with the message `quota exceeded`. See [Querying metrics and quotas](#querying-metrics-and-quotas) to find the reset date, billing period, and other values related to a project's consumption.
 
@@ -126,7 +126,9 @@ The `logical_size_bytes` quota limits the size of each branch. When a branch exc
 - The branch's compute can still start, and reads still work.
 - Other branches in the project aren't affected.
 
-To recover, delete data from the branch until it's below the limit. Neon doesn't reset this quota each billing period.
+To recover, raise the branch's `logical_size_bytes` quota with a `PATCH` request (writes work again within seconds), or delete data until the branch is below the limit. Neon doesn't reset this quota each billing period.
+
+The limit counts every database on the branch, including the default `postgres` database. A new, empty project already uses about 30 MB, so a very small quota can block writes, including `CREATE TABLE`, from the start.
 
 ## Configuring quotas
 
