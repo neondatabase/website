@@ -12,6 +12,7 @@ redirectFrom:
   - /docs/cloud/roadmap
   - /docs/conceptual-guides/roadmap
   - /docs/reference/roadmap
+  - /docs/community/public-preview
 updatedOn: '2026-11-17T23:28:01.910Z'
 ---
 

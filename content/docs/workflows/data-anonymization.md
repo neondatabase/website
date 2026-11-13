@@ -11,6 +11,7 @@ summary: >-
   and the branch is unavailable while anonymization runs.
 redirectFrom:
   - /docs/concepts/anonymized-data
+  - /docs/guides/neosync-anonymize
 enableTableOfContents: true
 updatedOn: '2026-11-10T14:15:46.000Z'
 ---
