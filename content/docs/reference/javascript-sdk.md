@@ -15,6 +15,7 @@ enableTableOfContents: true
 layout: wide
 redirectFrom:
   - /docs/auth/reference/javascript-sdk
+  - /docs/auth/reference/nextjs-client
 updatedOn: '2026-08-31T17:42:21.786Z'
 ---
 

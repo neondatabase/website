@@ -293,6 +293,48 @@ const defaultConfig = {
         destination: '/about-us',
         permanent: true,
       },
+      ...['/plans', '/pricing/plans', '/pro', '/upgrade', '/premium'].map((source) => ({
+        source,
+        destination: '/pricing',
+        permanent: true,
+      })),
+      ...['/developer', '/developers'].map((source) => ({
+        source,
+        destination: '/docs',
+        permanent: true,
+      })),
+      {
+        source: '/api',
+        destination: '/docs/reference/api',
+        permanent: true,
+      },
+      {
+        source: '/agent',
+        destination: '/docs/ai/agent-setup',
+        permanent: true,
+      },
+      // Agents request AGENTS.md the way they request llms.txt.
+      ...['/llms', '/AGENTS.md', '/agents.md'].map((source) => ({
+        source,
+        destination: '/llms.txt',
+        permanent: false,
+      })),
+      {
+        source: '/design',
+        destination: '/brand',
+        permanent: true,
+      },
+      {
+        source: '/docs/sitemap.xml',
+        destination: '/sitemap.xml',
+        permanent: true,
+      },
+      {
+        // The proxy maps /.well-known/agent-skills/<name>/SKILL.md to the vendored skill of the same name; there is no `postgres` skill.
+        source: '/.well-known/agent-skills/postgres/SKILL.md',
+        destination: '/.well-known/agent-skills/neon-postgres/SKILL.md',
+        permanent: true,
+      },
       {
         // Legacy favicon path removed in #4345; redirect stale references to the current icon.
         source: '/favicon/favicon.png',

@@ -7,6 +7,8 @@ summary: >-
   CLI. Enabling HIPAA on a project is irreversible and triggers a compute
   restart. Breach notifications are issued within five business days.
 enableTableOfContents: true
+redirectFrom:
+  - /docs/extensions/pgaudit
 updatedOn: '2026-10-30T18:05:21.319Z'
 ---
 
