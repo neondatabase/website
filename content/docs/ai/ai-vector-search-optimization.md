@@ -15,6 +15,10 @@ enableTableOfContents: true
 updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
+<LakebaseVectorTip />
+
+## Tune pgvector search
+
 This guide covers how to use `pgvector` for vector similarity searches. We'll address the following key questions:
 
 1. How to profile your vector search queries, when using `pgvector`?
