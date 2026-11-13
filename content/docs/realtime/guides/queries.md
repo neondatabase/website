@@ -143,6 +143,8 @@ So, for example, you can't `SELECT` over updated rows and you can't use function
 
 Tables need a [stable replica identity](https://www.postgresql.org/docs/current/sql-altertable.html#SQL-ALTERTABLE-REPLICA-IDENTITY). If your tables have a primary key, they're fine.
 
+Tables can't have [row-level security](/docs/guides/row-level-security) enabled. A live query on a table with RLS is rejected: the subscription moves to `error` with the code `upstream_rejected`. With [debug mode](./subscribing#show-full-database-errors) on, the message says the table has row-level security enabled. Filter rows in the query instead, as shown in [Authorization](#authorization).
+
 <Callout title="Optional: REPLICA IDENTITY FULL">
 Setting `REPLICA IDENTITY FULL` can make live queries marginally faster, at the cost of writing the whole old row to the Postgres WAL on every update and delete. That may save Realtime a lookup when it processes those changes. If latency matters for a write-heavy table, benchmark both settings with your own workload before you switch.
 
