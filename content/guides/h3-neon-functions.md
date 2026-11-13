@@ -42,7 +42,7 @@ Link the directory to your Neon project and branch:
 neon link
 ```
 
-`neon link` writes a `.neon` file and pulls the branch's environment variables, including `DATABASE_URL`, into `.env.local`. That file holds your database password, so add `.env.local` to `.gitignore` before you commit. Deployed functions get `DATABASE_URL` injected automatically, so you don't set it yourself.
+`neon link` writes a `.neon` file and pulls the branch's environment variables, including `DATABASE_URL`, into `.env.local`. That file holds your database password, and `neon link` adds it to `.gitignore` for you. Deployed functions get `DATABASE_URL` injected automatically, so you don't set it yourself.
 
 ## Declare the function in `neon.ts`
 
