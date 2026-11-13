@@ -52,7 +52,7 @@ If the frontmatter includes `redirectFrom`, check that each entry starts and end
 
 ### No em dashes in content
 
-Em dashes are banned in Neon docs (absolute ban; see the canonical style guide, `content/docs/community/style-guide.md`). Scan the file body for em dash characters (—). If found, flag the line numbers:
+No em dashes in Neon docs (see the canonical style guide, `content/docs/community/style-guide.md`). Scan the file body for em dash characters (—). If found, flag the line numbers:
 
 > **Warning:** `[file]` lines [N, N] — em dash found. Rewrite using a comma, parentheses, or a new sentence.
 

@@ -55,7 +55,7 @@ Word choice, sentence construction, grammatical habits.
 
 Formatting, rhythm, visual presentation.
 
-- **Em dashes (absolute ban)**: flag every em dash (—), not just paragraphs with several. Em dashes are banned in Neon docs. Rewrite with commas, colons, periods, or parentheses. **Never introduce a new em dash in a rewrite.** The rule's source of truth is the canonical style guide, `content/docs/community/style-guide.md`.
+- **Em dashes**: flag every em dash (—), not just paragraphs with several. No em dashes; rewrite with a period, comma, colon, or parentheses. **Never introduce a new em dash in a rewrite.** The rule's source of truth is the canonical style guide, `content/docs/community/style-guide.md`.
 - **Bold overuse** — multiple **bolded** terms per paragraph. Bold one or two critical points per section, max. When everything is bold, nothing is.
 - **Inline-header lists** — the "**Label:** Description" pattern repeated vertically. Use real sentences, bullets, or a table instead.
 - **Title case in headings** — "Strategic Partnerships And Key Deliverables". Use sentence case.

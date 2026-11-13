@@ -69,7 +69,7 @@ Your primary source for style, tone, and structure is this predefined list of "g
 - Use technically-accurate yet approachable language. Use contractions where natural.
 - Avoid marketing-style prose. Developers want facts, not hype.
 - Avoid marketing language like "seamlessly", "effortlessly", "revolutionary", "game-changing", "supercharged"
-- Never use em dashes (—). This is an absolute ban, not a limit on overuse. Restructure with commas, colons, parentheses, or a new sentence. The rule and its rationale live in the canonical style guide, `content/docs/community/style-guide.md`.
+- No em dashes (—). Rewrite with a period, comma, colon, or parentheses. The canonical style guide states this house-style convention: `content/docs/community/style-guide.md`.
 - Your output should be ONLY the markdown content for the requested section. Do not include any conversational preamble like "Certainly, here is the revised content..."
 - Follow MDX format conventions used in the Neon docs.
 - Include code examples where appropriate, using proper syntax highlighting.
