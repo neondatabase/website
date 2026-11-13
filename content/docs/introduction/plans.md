@@ -637,6 +637,10 @@ On the Free plan, when you run out of CU-hours or public network transfer, your 
 A suspended compute can't accept connections until the next billing period. To restore it sooner and stay on Free, upgrade the organization that contains the project to Launch, then downgrade it back to Free right away (**Billing** > **Change plan** in the Neon Console). The plan change resets the Free plan allowances, and the project keeps its database. Launch has no minimum monthly fee and invoices under $0.50 are not collected, so the round trip costs nothing. If you ran out of public network transfer, fix what caused it first, or the project hits the limit again. See [Reduce network transfer costs](/docs/introduction/network-transfer).
 </FaqItem>
 
+<FaqItem question="How do I get my data out of a Free plan project that hit its limits?">
+While the compute is suspended, `pg_dump` and other connections fail with SQLSTATE `53000`. Bring the compute back first: upgrade the organization to Launch and downgrade it back to Free right away, as described in the previous answer. Then export with [pg_dump](/docs/import/migrate-from-postgres) and load the data wherever you want. You can't transfer a project from a Launch organization into a Free one, so to move it to another Free organization, load the dump into a new project there.
+</FaqItem>
+
 <FaqItem question="How do I upgrade or downgrade my plan?">
 In the Neon Console, go to **Billing** and select **Change plan**. After an upgrade, a compute picks up the new plan limits (such as maximum compute size) the next time it restarts. Before you downgrade, remove any projects, branches, or data that exceed the new plan's allowances. See [Change your plan](/docs/introduction/manage-billing#change-your-plan).
 </FaqItem>
