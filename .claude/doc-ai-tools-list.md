@@ -27,4 +27,6 @@ When the user asks "what doc AI tools are available" or "what AI tools for docs"
 
 ---
 
+The voice and mechanical rules these tools apply are defined once in the canonical style guide, `content/docs/community/style-guide.md` (published at `/docs/community/style-guide`).
+
 For more detail, see `content/docs/community/ai-tools.md` and the files under `.claude/commands/` or `.claude/agents/`.

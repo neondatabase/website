@@ -1,6 +1,6 @@
 # Documentation Sitemap Guide
 
-This guide is a reference for where information should be placed in the documentation.
+This guide is a reference for where information should be placed in the documentation. For how documentation should read (voice and mechanical rules, including sentence case and the em-dash ban), see the canonical [Style guide](docs/community/style-guide.md).
 Top-level items are categories that enable users to access the information they need at a glance. For example, if users need information about connecting, they can select the **Connect** category. Sidebar items should be sentence-cased. Only capitalize first words. When choosing page names, the title should start with a verb for procedure or task-based content; for example: `Connect with psql`. If the page describes a concept, use a noun or noun-based phrase. For example: `Compute lifecycle`.
 
 To aid navigation, enable the TOC in pages to make it easy for readers to see what a page contains.

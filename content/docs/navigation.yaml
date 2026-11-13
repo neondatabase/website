@@ -1750,6 +1750,8 @@
               slug: community/community-intro
             - title: Docs contribution guide
               slug: community/contribution-guide
+            - title: Style guide
+              slug: community/style-guide
             - title: Using Mermaid diagrams
               slug: community/mermaid-diagrams
             - title: Component guide

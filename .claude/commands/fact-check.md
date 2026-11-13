@@ -5,7 +5,9 @@ description: 'Check docs for facts that contradict the rest of content/docs — 
 Find factual contradictions inside the Neon docs: one page against the rest, or every page
 against each other. Extracts cross-referenceable facts (plan limits, prices, defaults, units,
 product-name casing), finds where pages disagree, adversarially verifies each disagreement, and
-reports confirmed conflicts. It does **not** modify any docs.
+reports confirmed conflicts. It does **not** modify any docs. For the authoritative product-name and
+terminology casing, defer to the canonical style guide (`content/docs/community/style-guide.md`) and
+its terminology data source (`.claude/neon-terminology.md`).
 
 **Arguments:**
 

@@ -2,7 +2,7 @@
 description: 'Edit and improve the intro paragraph of a documentation page'
 ---
 
-Load content style guidelines from Neon documentation standards (reference `/golden-corpus` for examples).
+Load content style guidelines from the canonical Neon style guide at `content/docs/community/style-guide.md` (reference `/golden-corpus` for examples).
 
 **Your task:** Improve the introductory section (first paragraph under H1) of the provided documentation page.
 

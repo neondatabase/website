@@ -298,116 +298,19 @@ To add an image to your Markdown file, add an entry that looks like this:
 
 ## Style Guide
 
-This section covers the style conventions we follow.
+The [Style guide](/docs/community/style-guide) is the single source of truth for voice and mechanical rules. Read it before writing or editing a page. It covers:
 
-### Voice and language
+- **Voice:** plain, developer-first prose. Contractions, second-person "you", active voice, brief sentences (about 25 words), US English, no emojis or exclamation marks, and no filler or hedging.
+- **Mechanical rules:** sentence-case page titles and headings, consistent terminology, the Postgres vs PostgreSQL rule, product-name casing, fake example data only, and connection string format.
 
-The voice in the documentation should sound like one human being explaining something to another, while striking the right balance between being approachable and professional.
+A few rules to know up front:
 
-#### Guidelines
+- **No em dashes (—):** Don't use em dashes anywhere in documentation. This is an absolute ban, not a guideline about overuse. Restructure the sentence instead, using a comma, a colon, parentheses, or a new sentence.
+- **Link instead of repeating text:** Avoid duplicating information from other pages. Link to the source and explain why it matters in context.
+- **Fake user data only:** Use `@example.com` emails, `example_username` or names like Zhang Kai, Alex Lopez, or Dana Smith, `AbC123dEf` for passwords, and `dbname` for database names.
+- **Connection strings:** Use `postgresql://` (not `postgres://`) with the format `postgresql://[user]:[password]@[neon_hostname]/[dbname]`.
 
-1. **Use contractions**:
-   - **Do**: Use contractions like "it's", "don't", "you're" to make the tone more conversational.
-     - _Example_: "It's essential to save your progress."
-   - **Don't**: Overuse contractions, which can compromise clarity.
-
-2. **Simplicity over jargon**:
-   - **Do**: Choose simpler words when possible.
-     - _Example_: "Use the tool," not "Utilize the instrument."
-   - **Don't**: Oversimplify to the point of being inaccurate or leaving out useful context.
-
-3. **Active voice**:
-   - **Do**: Prefer active voice.
-     - _Example_: "The software converts the file."
-   - **Don't**: Over-rely on passive voice.
-     - _Example_: "The file is converted by the software."
-
-4. **Brief sentences**:
-   - **Do**: Keep sentences concise.
-     - _Example_: "Check the settings."
-
-5. **Personalize when relevant**:
-   - **Do**: Use "you" to address the reader.
-     - _Example_: "You can adjust the setting."
-   - **Don't**: Overdo direct addresses. Not every sentence should start with "You".
-
-6. **Consistent terminology**:
-   - **Do**: Stick to one term for one concept.
-     - _Example_: Always use "dashboard". Don't mix that term with "control panel".
-   - **Don't**: Confuse with synonyms.
-     - _Example_: Switching between "log-in", "sign-in", and "access point".
-
-7. **Examples for clarity**:
-   - **Do**: Provide clear examples.
-     - _Example_: "For instance, to upload a file, click on the 'Upload' button."
-
-8. **Use US English**:
-   - **Do**: Adhere to US English spelling and grammar rules.
-
-9. **Avoid emojis and exclamations**:
-   - **Don't**: Use emojis or exclamation marks in the documentation.
-
-### Link instead of repeating text
-
-Avoid repeating or duplicating information from other topics. Instead, link to the original source of information and explain why it is important.
-
-### Capitalization
-
-Use lowercase wherever possible.
-
-For topic titles, use sentence-style capitalization. For example: "Create your first project"
-
-Product names should align with the official names of the products, protocols, etc., maintaining exact capitalization.
-
-#### UI text
-
-When referencing specific user interface text, such as button labels or menu items, use the same capitalization displayed in the user interface wherever possible.
-
-#### Feature names
-
-Generally, feature names should be lowercase.
-
-#### Other terms
-
-Capitalize names of:
-
-- Third-party organizations, software, and products. Kubernetes, Git, and Vercel.
-- Methods or methodologies. Continuous Integration, Continuous Deployment, etc.
-
-Follow the capitalization style used by the authoritative source, which may use non-standard case styles. For example: PostgreSQL, GitHub, npm.
-
-### Fake user information
-
-When including user information in connection details, API calls, or UI instructions, don't use real user information or email addresses.
-
-- Use an email address ending in `@example.com` or `domain.com`.
-- Use strings like `example_username` or one of the following diverse and non-gendered names: Zhang Kai, Alex Lopez, or Dana Smith.
-
-### Connection strings
-
-Connection strings should be defined as follows:
-
-```text
-postgresql://[user]:[password]@[neon_hostname]/[dbname]
-```
-
-If you need to provide a connection string with realistic values, use one of the user names mentioned above, `AbC123dEf` for the password, and `dbname` for the database name:
-
-```text
-postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require&channel_binding=require
-```
-
-### Commands, parameters, values, filenames
-
-Commands, parameters, values, filenames, error messages, connection strings, and other similar items should be enclosed in backticks. For example:
-
-- "Run the `neon projects list` command."
-
-- "Execute `git clone` to clone a Git repository..."
-
-- `git clone` is a command that should be in lowercase, whereas Git is the product and should have a capital G.
-
-- "A connection string has this format: `postgresql://[user]:[password]@[neon_hostname]/[dbname]`"
+See the [Style guide](/docs/community/style-guide) for the full set of rules and examples.
 
 ## Working with doc AI
 
