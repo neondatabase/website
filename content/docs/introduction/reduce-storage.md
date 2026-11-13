@@ -51,19 +51,19 @@ HINT:  This limit is defined externally by the project size limit, and internall
 
 You can still connect, run queries, and run statements that remove data. This table shows what works at the limit:
 
-| Operation                            | Works at the limit? | Notes                                                                                       |
-| ------------------------------------ | ------------------- | ------------------------------------------------------------------------------------------- |
-| `SELECT`                             | Yes                 |                                                                                             |
-| `INSERT`, `UPDATE`                   | No                  | Even an `UPDATE` of a few rows can fail, because Postgres writes a new version of each row. |
-| `CREATE INDEX`                       | No                  |                                                                                             |
-| `CREATE TABLE`                       | Sometimes           | Can fail because it adds rows to the system catalogs.                                       |
-| `DELETE`                             | Yes                 | Doesn't free space on its own. Run `VACUUM` or `VACUUM FULL` afterward.                     |
-| `TRUNCATE`                           | Yes                 | Frees the table's space immediately.                                                        |
-| `DROP TABLE`, `DROP INDEX`           | Yes                 | Frees the space immediately.                                                                |
-| `VACUUM`                             | Yes                 | Makes space from deleted rows reusable.                                                     |
-| `VACUUM FULL`                        | Yes                 | Rewrites the table without dead rows and returns the space.                                 |
-| Reset a child branch from its parent | Yes                 | The child's data size goes back to the parent's.                                            |
-| Delete a branch                      | Yes                 |                                                                                             |
+| Operation                                   | Works at the limit? | Notes                                                                                       |
+| ------------------------------------------- | ------------------- | ------------------------------------------------------------------------------------------- |
+| `SELECT`                                    | Yes                 |                                                                                             |
+| `INSERT`, `UPDATE`                          | No                  | Even an `UPDATE` of a few rows can fail, because Postgres writes a new version of each row. |
+| `CREATE INDEX`, `CREATE DATABASE`           | No                  |                                                                                             |
+| `CREATE TABLE`                              | Sometimes           | Can fail because it adds rows to the system catalogs.                                       |
+| `DELETE`                                    | Yes                 | Doesn't free space on its own. Run `VACUUM` or `VACUUM FULL` afterward.                     |
+| `TRUNCATE`                                  | Yes                 | Frees the table's space immediately.                                                        |
+| `DROP TABLE`, `DROP INDEX`, `DROP DATABASE` | Yes                 | Frees the space immediately.                                                                |
+| `VACUUM`                                    | Yes                 | Makes space from deleted rows reusable.                                                     |
+| `VACUUM FULL`                               | Yes                 | Rewrites the table without dead rows and returns the space.                                 |
+| Reset a child branch from its parent        | Yes                 | The child's data size goes back to the parent's.                                            |
+| Delete a branch                             | Yes                 |                                                                                             |
 
 The limit check uses a size measurement that refreshes periodically, so a branch can go a little over 1 GB before writes start to fail. Once you free space, writes work again right away. You don't need to restart your compute.
 
@@ -151,7 +151,7 @@ If your data is bigger than 1 GB, [upgrade to a paid plan](/docs/introduction/ma
 | `VACUUM`                                                                   | Usually no change. Dead row space becomes reusable. Space at the end of a table is returned.          |
 | `VACUUM FULL`                                                              | Decreases it by the amount of dead row space in the table.                                            |
 | `TRUNCATE`                                                                 | Decreases it by the size of the table and its indexes.                                                |
-| `DROP TABLE`, `DROP INDEX`                                                 | Decreases it by the size of the object.                                                               |
+| `DROP TABLE`, `DROP INDEX`, `DROP DATABASE`                                | Decreases it by the size of the object.                                                               |
 | Create a branch                                                            | The new branch starts at its parent's data size. It doesn't add to the parent's data size.            |
 | Reset a child branch from its parent                                       | The child's data size returns to the parent's.                                                        |
 | Delete a branch                                                            | Removes that branch's data.                                                                           |
