@@ -112,6 +112,10 @@ See [Available tools](#available-tools) for the full category list. To verify wh
 curl "https://mcp.neon.tech/api/list-tools?readonly=true&category=querying"
 ```
 
+### SQL results
+
+`run_sql` and `run_sql_transaction` return up to 100 rows per statement by default. When a result is cut off, the response says how many rows the query returned in total. Set `max_rows` (up to 10,000) to see more. When a query fails, the error includes the Postgres SQLSTATE code, position, detail, and hint, so the assistant can fix the query and try again.
+
 ### Postgres role
 
 By default, SQL tools connect as the database owner. Set `?roleName=<role>` to make every SQL tool log in as that Postgres role instead, so the role's grants decide what the agent can read and change:
