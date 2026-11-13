@@ -1718,6 +1718,13 @@
         - title: Terraform
           slug: reference/terraform
           icon: terraform
+          items:
+            - title: Manage Neon with Terraform
+              slug: reference/terraform
+              tag: beta
+            - title: Migrate from kislerdm/neon
+              slug: reference/terraform-migrate
+              tag: beta
         - title: CI/CD
           icon: workflows
           slug: guides/branching-github-actions
