@@ -17,6 +17,7 @@ import ArrowLeftIcon from 'icons/arrow-left-thin.inline.svg';
 import BookIcon from 'icons/docs/sidebar/book.inline.svg';
 import GitHubIcon from 'icons/docs/sidebar/github.inline.svg';
 import InfoIcon from 'icons/docs/sidebar/info.inline.svg';
+import { cn } from 'utils/cn';
 import {
   REGISTRY_IMPLICIT_SERVICE,
   REGISTRY_SOURCE_CATEGORIES,
@@ -62,15 +63,13 @@ const TemplateDetail = async ({ template, templates, readme = null, installs = [
     label: registryCategoryLabel(id),
     href: catalogFilterHref('category', id),
   });
-  // Source, then topical categories, then Neon services (marked with their icon). Every template
-  // is a Neon Function, so Functions leads the services on every page and links to its product page.
+  // Every template runs on Neon Functions, so Functions is a fixed tag before the other services.
   const tags = [
     ...categories.filter((id) => REGISTRY_SOURCE_CATEGORIES.includes(id)).map(categoryTag),
     ...categories.filter((id) => !REGISTRY_SOURCE_CATEGORIES.includes(id)).map(categoryTag),
     {
       key: `service-${REGISTRY_IMPLICIT_SERVICE}`,
       label: registryService(REGISTRY_IMPLICIT_SERVICE).label,
-      href: LINKS.functions,
       serviceId: REGISTRY_IMPLICIT_SERVICE,
     },
     ...registryTemplateServices(template).map((id) => ({
@@ -179,16 +178,24 @@ const TemplateDetail = async ({ template, templates, readme = null, installs = [
           </p>
           {tags.length > 0 && (
             <nav aria-label="Template tags" className="mt-5 flex flex-wrap gap-2">
-              {tags.map(({ key, label, href, serviceId }) => (
-                <a
-                  key={key}
-                  href={href}
-                  className="inline-flex h-6 items-center gap-1.5 border border-gray-new-20 px-2 font-mono text-xs leading-none tracking-tight text-gray-new-60 uppercase hover:border-gray-new-40 hover:text-white focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary-1"
-                >
-                  {serviceId && <ServiceIcon id={serviceId} className="size-3.5 shrink-0" />}
-                  {label}
-                </a>
-              ))}
+              {tags.map(({ key, label, href, serviceId }) => {
+                const Tag = href ? 'a' : 'span';
+
+                return (
+                  <Tag
+                    key={key}
+                    href={href}
+                    className={cn(
+                      'inline-flex h-6 items-center gap-1.5 border border-gray-new-20 px-2 font-mono text-xs leading-none tracking-tight text-gray-new-60 uppercase',
+                      href &&
+                        'hover:border-gray-new-40 hover:text-white focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary-1'
+                    )}
+                  >
+                    {serviceId && <ServiceIcon id={serviceId} className="size-3.5 shrink-0" />}
+                    {label}
+                  </Tag>
+                );
+              })}
             </nav>
           )}
           <div className="mt-6 flex flex-col gap-1 border-t border-gray-new-20 pt-5 max-[901px]:flex-row max-[901px]:flex-wrap max-[901px]:gap-x-5 max-[901px]:gap-y-2 max-[601px]:mt-5 max-[601px]:gap-x-4 max-[601px]:gap-y-1 max-[601px]:pt-4">
