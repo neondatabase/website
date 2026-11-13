@@ -32,8 +32,6 @@ npm install --save-dev @types/pg
 npm install @neon/config @neon/functions
 ```
 
-This installs the latest h3 v2 (the current release on npm).
-
 ## Link your Neon project
 
 Link the directory to your Neon project and branch:
