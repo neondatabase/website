@@ -248,7 +248,7 @@ Even though child branch storage is capped at your logical data size, it's still
 
 #### Unlimited storage
 
-**Storage is unlimited on paid plans (Launch and Scale): there's no hard per-branch size limit, and your storage grows with your usage.** The Free plan is limited to 1 GB of Postgres storage per project, and to 20 GB in total across all your projects. These two limits are enforced independently: the total Postgres storage across all your Free projects can't exceed 20 GB, even though each project is also individually capped at 1 GB. This limit applies to Postgres storage and is separate from [Object Storage](#object-storage), which has its own Free allowance.
+**Storage is unlimited on paid plans (Launch and Scale): there's no hard per-branch size limit, and your storage grows with your usage.** The Free plan is limited to 1 GB of Postgres storage per project, and to 20 GB in total across all your projects. These two limits are enforced independently: the total Postgres storage across all your Free projects can't exceed 20 GB, even though each project is also individually capped at 1 GB. This limit applies to Postgres storage and is separate from [Object Storage](#object-storage), which has its own Free allowance. If you reach the limit, see [Reduce your storage](/docs/introduction/reduce-storage) to free space.
 
 ### Public network transfer
 

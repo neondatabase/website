@@ -44,6 +44,8 @@ Compute is typically the largest component of your Neon bill. You're charged bas
 
 Storage costs are based on actual data size for root branches and the minimum of accumulated changes or logical data size for child branches, billed in GB-months.
 
+For a step-by-step guide to freeing space, including what to do when a Free plan branch is at its limit, see [Reduce your storage](/docs/introduction/reduce-storage).
+
 **Optimization strategies:**
 
 - **Clean up unused data.** Delete old rows, drop unused tables, and remove test data to reduce your root branch data size. Be aware that delete operations generate WAL records that temporarily add to your [instant restore storage](#instant-restore-storage) until they age out of your history window. For bulk deletions, use `TRUNCATE TABLE` instead of `DELETE` when possible (it generates far less WAL).
@@ -78,7 +80,7 @@ Yes. Any data-modifying operation, including deletes, generates [WAL records](/d
 
 Storage limits depend on your Neon plan:
 
-- **Free plan**: The Free plan includes 1 GB of storage per project. If you reach this limit, database operations that would increase storage (inserts, updates, and deletes) will fail until you reduce your storage or [upgrade to a paid plan](/docs/introduction/manage-billing#change-your-plan).
+- **Free plan**: The Free plan includes 1 GB of storage per project. If a branch reaches this limit, operations that need more space, such as inserts, updates, and index builds, fail with a `could not extend file because project size limit (1024 MB) has been exceeded` error until you reduce your storage or [upgrade to a paid plan](/docs/introduction/manage-billing#change-your-plan). `DELETE`, `TRUNCATE`, `DROP`, and `VACUUM` still work, so you can free space. See [Reduce your storage](/docs/introduction/reduce-storage).
 - **Paid plans**: Storage is unlimited on Launch and Scale: there's no hard per-branch size limit, your storage grows with your usage, and you pay only for what you use.
 
 </details>
@@ -122,7 +124,7 @@ VACUUM FULL your_table_name;
 However, there are some trade-offs:
 
 - **Table locking.** `VACUUM FULL` locks your table during the operation. If this is your production database, this may not be an option.
-- **Temporary storage spike.** The process creates a new copy of the table, temporarily increasing your storage usage. On the Free plan, this could cause the operation to fail if you hit the 1 GB storage limit.
+- **Temporary storage spike.** The process creates a new copy of the table, temporarily increasing your storage usage. `VACUUM FULL` still runs on a Free plan branch that's at the 1 GB limit.
 
 In short, `VACUUM FULL` can help reduce your data size and future storage costs, but be aware of the temporary storage spike and table locking during the operation.
 

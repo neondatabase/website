@@ -744,6 +744,8 @@ The query value may differ slightly from the **Data size** reported in the Neon 
 
 Data size is your logical data size.
 
+To find what's taking up space and free it, see [Reduce your storage](/docs/introduction/reduce-storage).
+
 <Admonition type="note" title="Storage is unlimited on paid plans">
 **Storage is unlimited on paid plans (Launch and Scale): there's no hard per-branch size limit, and your branch storage grows with your usage.** The Free plan is limited to 1 GB per project.
 </Admonition>
