@@ -8,7 +8,7 @@ summary: >-
   from createServerFn, and testing migrations and previews on database branches.
 enableTableOfContents: true
 noindex: true
-updatedOn: '2026-11-13T07:00:38.286Z'
+updatedOn: '2026-11-13T07:16:27.663Z'
 ---
 
 This page connects a [TanStack Start](https://tanstack.com/start) app to Lakebase Postgres on Neon with [Drizzle ORM](https://orm.drizzle.team). All database access stays in [server functions](https://tanstack.com/start/latest/docs/framework/react/guide/server-functions), because TanStack Start route loaders also run in the browser.
@@ -32,7 +32,7 @@ Use the pooled connection string (the hostname includes `-pooler`) for applicati
 ## Install
 
 ```bash filename="Terminal"
-npm install drizzle-orm pg
+npm install drizzle-orm pg zod
 npm install -D drizzle-kit dotenv @types/pg
 ```
 

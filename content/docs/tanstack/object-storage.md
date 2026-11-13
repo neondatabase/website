@@ -9,7 +9,7 @@ summary: >-
   public assets behind a CDN.
 enableTableOfContents: true
 noindex: true
-updatedOn: '2026-11-13T06:34:29.829Z'
+updatedOn: '2026-11-13T07:16:27.663Z'
 ---
 
 [Neon Object Storage](/docs/storage/overview) is S3-compatible file storage that branches with your database: a preview branch gets its own copy of the files and the rows that point at them. Use it for files your app and its users produce, such as uploads, avatars and documents. App assets like JS bundles and images in `public/` belong on your frontend host.
@@ -51,7 +51,7 @@ The AWS SDK reads these from the environment. Keep them server-only.
 ## Sign upload and download URLs
 
 ```bash filename="Terminal"
-npm install @aws-sdk/client-s3 @aws-sdk/s3-request-presigner
+npm install @aws-sdk/client-s3 @aws-sdk/s3-request-presigner zod
 ```
 
 ```ts filename="src/storage.server.ts"

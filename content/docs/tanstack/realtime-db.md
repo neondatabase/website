@@ -9,7 +9,7 @@ summary: >-
   common mistakes.
 enableTableOfContents: true
 noindex: true
-updatedOn: '2026-11-13T07:00:38.286Z'
+updatedOn: '2026-11-13T07:16:27.663Z'
 ---
 
 <FeatureBetaProps feature_name="Realtime" />
@@ -26,7 +26,8 @@ updatedOn: '2026-11-13T07:00:38.286Z'
 ## Install
 
 ```bash filename="Terminal"
-npm install @neon/realtime @neon/realtime-tanstack @tanstack/react-db
+npm install @neon/realtime @neon/realtime-tanstack @tanstack/react-db pg zod
+npm install -D @types/pg
 npm install @tanstack/react-router-with-db # TanStack Start SSR only
 ```
 
@@ -58,7 +59,7 @@ Never give `NEON_REALTIME_SECRET` a `VITE_` prefix. The browser only sees the Re
 
 ## Define and seal the query
 
-The server reads initial rows and writes through a `pg` pool on the pooled connection string (`npm install pg`). See [Serverless driver vs node-postgres for TanStack Start](/docs/tanstack/drivers) for other deploy targets:
+The server reads initial rows and writes through a `pg` pool on the pooled connection string. See [Serverless driver vs node-postgres for TanStack Start](/docs/tanstack/drivers) for other deploy targets:
 
 ```ts filename="src/db.server.ts"
 import { Pool } from 'pg';
