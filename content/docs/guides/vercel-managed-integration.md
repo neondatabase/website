@@ -15,7 +15,7 @@ redirectFrom:
   - /docs/guides/vercel-native-integration
   - /docs/guides/vercel-native-integration-previews
 enableTableOfContents: true
-updatedOn: '2026-10-23T11:16:51.998Z'
+updatedOn: '2026-11-13T00:47:46.965Z'
 ---
 
 <InfoBlock>
@@ -122,6 +122,10 @@ Once enabled, the flow looks like this:
 
     This ensures schema changes in your commits are applied to each preview deployment's database branch.
 
+<Admonition type="note" title="Preview branches count toward your active compute limit">
+Each preview branch gets its own compute, and every running compute counts toward your [concurrently active compute limit](/docs/reference/glossary#concurrently-active-compute-limit). If many preview deployments run at once, computes beyond the limit stay suspended and connections to them fail. Preview computes [scale to zero](/docs/introduction/scale-to-zero) when idle, and [cleaning up stale preview branches](/docs/guides/vercel-branch-cleanup) keeps the count down. If your team regularly runs into the limit, [contact Support](/docs/introduction/support) to request an increase.
+</Admonition>
+
 ### Test the setup
 
 To verify preview branching works:
@@ -168,12 +172,14 @@ Because your database is managed by Vercel, you can only perform these actions *
 - View or modify database configuration via **Storage → Settings → Change Configuration**
 - Monitor usage via **Storage → Usage** (also available in Neon Console)
 - Create additional databases (each becomes a new Neon project)
-- Rename or delete a database (deleting removes the underlying Neon project permanently)
+- Delete a database (see [Delete the database](#delete-the-database))
 - Manage members / collaborators (handled through Vercel "Members", not the Neon Console) - (see [FAQ](#frequently-asked-questions) for details)
-- Delete the Neon organization (only happens automatically if you uninstall the integration)
+- Delete the Neon organization (this happens automatically when you [uninstall the integration](#uninstall-the-integration))
 - Update connection-string environment variables (prefix changes, etc.)
 
 Everything else (querying data, branching, monitoring usage) works exactly the same in the Neon Console.
+
+You can rename a database from either side. Renaming the project in the Neon Console or with the Neon API also renames the database in Vercel, so the names stay in sync.
 
 If you're on Neon's Scale plan, you can open support tickets for any Neon issue directly from the Neon Console. See [Support tickets](/docs/introduction/support#support-tickets) for details.
 
@@ -203,6 +209,17 @@ This eliminates the need to manually reconfigure integrations when reorganizing 
 
 This is separate from Neon's [project transfer](/docs/manage/orgs-project-transfer) feature, which doesn't support Vercel-managed organizations as a source or destination.
 
+### Move a database to a Neon-managed organization
+
+You can't transfer a project out of a Vercel-managed organization, for example to move billing from Vercel to Neon. Instead, create a new project in a Neon-managed organization and migrate your data to it:
+
+1. In the Neon Console, switch to (or [create](/docs/manage/orgs-manage#create-an-organization)) a Neon-managed organization and [create a project](/docs/manage/projects#create-a-project) in the region you want. You can choose the Postgres version here.
+2. Migrate your data from the Vercel-managed project to the new project:
+   - **Dump and restore**: Simplest option, but writes made to the source after you start the dump aren't copied, so plan a short write freeze. See [Migrate data from another Neon project](/docs/import/migrate-from-neon).
+   - **Logical replication**: Keeps the new project in sync while your app still writes to the old one, so you can cut over with minimal downtime. See [Replicate data from one Neon project to another](/docs/guides/logical-replication-neon-to-neon).
+3. Point your app at the new project. In Vercel, [disconnect the project from the database](#disconnect-a-project-from-database), then connect the new Neon project with the [Neon-Managed Integration](/docs/guides/neon-managed-vercel-integration) or a [manual connection](/docs/guides/vercel-manual), and redeploy.
+4. After you confirm the new project works, [delete the old database](#delete-the-database) in Vercel.
+
 ---
 
 ## Common operations
@@ -223,12 +240,13 @@ Changing your plan affects **all databases** in this integration, not just the c
 
 ### Delete the database
 
-Deleting from Vercel permanently removes the Neon project and all data. This cannot be undone.
-To delete:
+Deleting a database in Vercel deletes the underlying Neon project and all of its data. To delete:
 
 1. Vercel Dashboard → Storage → Settings
 2. Select your database
 3. Find Delete Database section and confirm
+
+A deleted project can usually be recovered within 7 days, as long as the Vercel integration for the organization still exists. If the Neon organization was deleted too, recovery requires Support. See [Recover a deleted project](/docs/manage/projects#recover-a-deleted-project).
 
 ### Disconnect a project from database
 
@@ -238,6 +256,14 @@ To disconnect a Vercel project without deleting the database:
 2. Select your project and choose **Remove Project Connection**
 
 This removes database environment variables from your Vercel project but keeps the database intact. Previously created preview branches remain but new ones won't be created.
+
+### Uninstall the integration
+
+<Admonition type="warning" title="Uninstalling deletes your databases">
+Uninstalling the Neon integration from your Vercel team deletes the `Vercel: <team-name>` organization in Neon, including every project and all of its data. To keep your data, [move it to a Neon-managed organization](#move-a-database-to-a-neon-managed-organization) first.
+</Admonition>
+
+If you only want to stop a Vercel project from using a database, [disconnect the project](#disconnect-a-project-from-database) instead. To remove a single database, [delete the database](#delete-the-database). Both leave the integration and your other databases in place.
 
 ### Manage branches created by the integration
 
@@ -267,8 +293,26 @@ Branches you don't delete are eventually [archived](/docs/guides/branch-archivin
 - You cannot use this integration with the **Neon-Managed integration** in the same Vercel project
 - **Neon CLI access**: Requires API key authentication (the `neon login` command won't work since the account is Vercel-managed)
 - Cannot install if you currently use Vercel Postgres (deprecated) - contact Vercel about transitioning
-- **Project transfer**: Neon's [project transfer](/docs/manage/orgs-project-transfer) doesn't work into or out of a Vercel-managed organization. Instead, [transfer the Vercel project to another team](#project-transfers-between-teams).
+- **Project transfer**: Neon's [project transfer](/docs/manage/orgs-project-transfer) doesn't work into or out of a Vercel-managed organization. To move between Vercel teams, [transfer the Vercel project to another team](#project-transfers-between-teams). To move out of Vercel billing, [migrate to a Neon-managed organization](#move-a-database-to-a-neon-managed-organization).
+- **Postgres version**: You can't choose a Postgres version when you create a database from Vercel. New databases use Neon's default version.
 - **Preview deployment environment variables**: Branch-specific connection variables cannot be accessed or viewed in your Vercel project's environment variable settings (they're injected at deployment time only and not stored to avoid manual cleanup when branches are deleted)
+
+## Troubleshooting
+
+### Database environment variables are missing from a deployment
+
+Check how the database is connected under **Storage → `<your database>` → Projects**:
+
+- **Environment not selected**: The integration only sets variables for the environments (Development, Preview, Production) you selected when you [connected the project](#connecting-the-database-to-a-vercel-project).
+- **Custom prefix**: If you set a **Custom Prefix**, the variable names include it (for example, `MYDB_DATABASE_URL` instead of `DATABASE_URL`). Update your code or remove the prefix.
+- **Preview branching off**: Without **Preview** selected under **Create database branch for deployment**, preview deployments use the same database variables as other environments instead of a dedicated branch.
+- **Branch-specific values not visible**: With preview branching on, each preview deployment's branch credentials are injected at deployment time. They don't appear in your Vercel project's environment variable settings. Check the Neon Console **Branches** page to confirm a `preview/<git-branch>` branch was created.
+
+Variables only apply to deployments created after you change the connection, so redeploy after updating it.
+
+### Preview deployments can't connect to the database
+
+If preview deployments start failing to connect while many previews are active, you may have hit the [concurrently active compute limit](/docs/reference/glossary#concurrently-active-compute-limit). See [Preview branches count toward your active compute limit](#enable-automated-preview-branching-recommended).
 
 ## Frequently asked questions
 
