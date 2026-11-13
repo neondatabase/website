@@ -15,7 +15,7 @@ summary: >-
 enableTableOfContents: true
 redirectFrom:
   - /docs/auth/guides/oauth
-updatedOn: '2026-11-09T18:18:56.726Z'
+updatedOn: '2026-11-13T23:21:42.611Z'
 ---
 
 OAuth lets users sign in with their Google, GitHub, Vercel, Microsoft, Apple, or Discord account. Managed Better Auth handles the OAuth flow and creates a session after authorization.
@@ -269,6 +269,8 @@ neon neon-auth oauth-provider add --provider-id apple --oauth-client-id <service
 neon neon-auth oauth-provider add --provider-id microsoft --oauth-client-id <client-id> --oauth-client-secret <client-secret> --microsoft-tenant-id <tenant>
 ```
 
+For Discord, use the same command as Google with `--provider-id discord`.
+
 </TabItem>
 
 <TabItem>
@@ -422,7 +424,7 @@ Create an application in the [Discord Developer Portal](https://discord.com/deve
    https://ep-example.neonauth.us-east-2.aws.neon.tech/neondb/auth/callback/discord
    ```
 
-4. Add the Client ID and Client Secret to the branch with the [API](#3-create-oauth-apps-and-paste-credentials-into-neon), using `"id": "discord"`. The Neon Console and the Neon CLI don't list Discord as a provider yet.
+4. Add the Client ID and Client Secret to the branch, as described in [Create OAuth apps and paste credentials into Neon](#3-create-oauth-apps-and-paste-credentials-into-neon).
 
 Managed Better Auth requests the `identify` and `email` scopes, so you don't need to configure scopes in Discord.
 
