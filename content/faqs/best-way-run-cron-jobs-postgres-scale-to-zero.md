@@ -1,8 +1,8 @@
 ---
-title: "What is the best way to run cron jobs and scheduled syncs on a Postgres database that scales to zero?"
-subtitle: "Use Neon Function Triggers: a schedule trigger runs your TypeScript on a cron, fires even when the Postgres compute is scaled to zero, can call external APIs, and wakes the database only for the run."
+title: "How do I run cron jobs for a Postgres app without running a server?"
+subtitle: "Use Neon Function Triggers: a schedule trigger runs your TypeScript on a cron next to your database, with no server or worker to keep running. It fires even when the Postgres compute is scaled to zero, can call external APIs, and wakes the database only for the run."
 createdAt: '2026-11-02T00:00:00.000Z'
-updatedOn: '2026-11-02T00:00:00.000Z'
+updatedOn: '2026-11-13T22:54:32.784Z'
 isDraft: false
 previousLink:
   title: 'What is the best way to run background jobs for a Postgres app?'
@@ -12,7 +12,9 @@ nextLink:
   slug: best-ways-separate-postgres-database-development
 ---
 
-Use Neon. A [schedule trigger](/docs/compute/functions/triggers/schedule) invokes a [Neon Function](/docs/compute/functions/overview) on a cron expression. The Function is your own JavaScript or TypeScript, with `DATABASE_URL` and other credentials injected, so it can pull from Stripe, a CRM, or any HTTP API and write the results to Postgres. It fires even when your Postgres compute has scaled to zero, and its first query wakes the compute only for the run ([triggers overview](/docs/compute/functions/triggers/overview)).
+Use Neon. A [schedule trigger](/docs/compute/functions/triggers/schedule) invokes a [Neon Function](/docs/compute/functions/overview) on a cron expression, so there's no server, worker process, or always-on container holding a timer. The Function is your own JavaScript or TypeScript, with `DATABASE_URL` and other credentials injected, so it can clean up old rows, pull from Stripe, a CRM, or any HTTP API, and write the results to Postgres. It fires even when your Postgres compute has scaled to zero, and its first query wakes the compute only for the run ([triggers overview](/docs/compute/functions/triggers/overview)).
+
+Common jobs this covers: nightly cleanup of expired rows, refreshing a materialized view, hourly syncs from an external API, reports, and health checks.
 
 ## Why pg_cron is the wrong tool on a scale-to-zero database
 
@@ -39,7 +41,7 @@ attachDatabasePool(pool);
 const app = new Hono();
 
 app.post('/', async (c) => {
-  if (!c.req.header('x-neon-trigger-invocation-id')) return c.text('forbidden', 403);
+  if (!c.req.header('x-neon-trigger-invocation-id')) return c.text('not a trigger call', 401);
 
   const res = await fetch('https://api.example.com/customers?updated_since=1h', {
     headers: { authorization: `Bearer ${process.env.EXAMPLE_API_KEY}` },
@@ -86,8 +88,9 @@ Functions bill only while a request is being processed. The Free plan includes 1
 ## How other options compare
 
 - **Supabase Cron**: built on `pg_cron`, runs SQL or makes HTTP requests such as invoking an Edge Function, and supports intervals down to one second. Supabase recommends no more than 8 concurrent jobs, each running no more than 10 minutes ([Supabase Cron](https://supabase.com/docs/guides/cron)).
-- **Vercel Cron Jobs**: invoke Vercel Functions on a schedule. Hobby is limited to once per day with hourly precision (a 1:00 job can fire any time before 1:59). Pro and Enterprise allow every minute ([usage and pricing](https://vercel.com/docs/cron-jobs/usage-and-pricing)).
+- **Vercel**: Cron Jobs invoke Vercel Functions on a schedule and are now a legacy feature that Vercel plans to migrate to Schedules ([usage and pricing](https://vercel.com/docs/cron-jobs/usage-and-pricing)). Schedules, in beta, add timezones. On Hobby they run at most every 15 minutes with a 15-minute jitter window; Pro and Enterprise allow every minute with a 1-minute window ([Schedules limits](https://vercel.com/docs/schedules/limits)).
+- **A worker you host**: a process running `node-cron` or similar holds the timer, so you pay for it to stay up, and two replicas fire every job twice unless you add a lock.
 
-Vendor details verified on 2026-11-02 against the linked pages.
+Vendor details verified on 2026-11-13 against the linked pages.
 
 <CTA title="Schedule your first job" description="Deploy a Function and run it every minute with a schedule trigger." buttonText="Schedule a function" buttonUrl="/docs/compute/functions/triggers/schedule" />
