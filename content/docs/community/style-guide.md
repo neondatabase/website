@@ -4,11 +4,12 @@ subtitle: The voice and mechanical rules for writing Neon documentation
 summary: >-
   The single source of truth for how Neon documentation reads. Covers the voice
   principles (plain, developer-first, direct) and the mechanical rules
-  (sentence-case titles, an absolute ban on em dashes, consistent terminology,
+  (sentence-case titles, no em dashes, consistent terminology,
   Postgres vs PostgreSQL, product-name casing, fake example data, and connection
   string format). Every other contribution guide, command, and agent references
   this page instead of restating the rules.
 enableTableOfContents: true
+updatedOn: '2026-11-13T22:15:00.528Z'
 ---
 
 This page is the single source of truth for how Neon documentation reads. The contribution guide, the doc AI commands, and the writing agents all point here instead of repeating these rules, so there is one place to read and one place to change.
@@ -36,7 +37,7 @@ These rules are deterministic. The `/validate` and `/review-content` commands ch
 
 ### No em dashes
 
-Do not use em dashes (—) anywhere in documentation. This is an absolute ban, not a guideline about overuse. Restructure the sentence instead: use a comma, a colon, parentheses, or a new sentence. Never introduce a new em dash when rewriting a page.
+No em dashes. Rewrite with a period, comma, colon, or parentheses. This targets the em dash (—) specifically; an en dash (–) for ranges (for example 0–23 or 50–100x) and a hyphen (-) for list bullets and compound words are fine and not affected. It is a house-style convention. Don't introduce a new em dash when rewriting a page.
 
 ### Sentence case for titles and headings
 
@@ -100,7 +101,7 @@ Enclose commands, parameters, values, filenames, error messages, and connection 
 The doc AI commands and agents in this repository treat this page as the source of truth for voice and style:
 
 - `/humanize` and `/review-content` apply these voice principles and flag violations of the mechanical rules.
-- `/validate` and `/review-content` enforce the em-dash ban and other mechanical checks.
+- `/validate` and `/review-content` enforce the no-em-dash rule and other mechanical checks.
 - The writing agents under `.claude/agents/` draft against these rules.
 
 <NeedHelp/>

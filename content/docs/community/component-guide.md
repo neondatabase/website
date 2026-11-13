@@ -8,12 +8,12 @@ summary: >-
   Use this page when choosing between similar components or looking up correct
   prop names and MDX syntax.
 enableTableOfContents: true
-updatedOn: '2026-10-09T15:55:57.334Z'
+updatedOn: '2026-11-13T22:15:00.528Z'
 ---
 
 A practical guide for the most commonly used MDX components in Neon documentation. This guide focuses on components you'll use most frequently when writing documentation.
 
-For the prose voice and mechanical rules (sentence-case headings, terminology, the em-dash ban, and more), see the canonical [Style guide](/docs/community/style-guide). This page covers component syntax only.
+For the prose voice and mechanical rules (sentence-case headings, terminology, no em dashes, and more), see the canonical [Style guide](/docs/community/style-guide). This page covers component syntax only.
 
 <InfoBlock>
 <DocsList title="What you will learn:">

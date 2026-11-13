@@ -10,7 +10,7 @@ summary: >-
   the doc AI tools (Cursor and Claude slash commands) for consistency checks,
   redirects, and guided writing.
 enableTableOfContents: true
-updatedOn: '2026-09-17T16:33:54.884Z'
+updatedOn: '2026-11-13T22:15:00.528Z'
 ---
 
 This page covers everything you need to contribute to the Neon documentation, whether you're fixing a typo or writing a full guide.
@@ -305,7 +305,7 @@ The [Style guide](/docs/community/style-guide) is the single source of truth for
 
 A few rules to know up front:
 
-- **No em dashes (—):** Don't use em dashes anywhere in documentation. This is an absolute ban, not a guideline about overuse. Restructure the sentence instead, using a comma, a colon, parentheses, or a new sentence.
+- **No em dashes (—):** Rewrite with a period, comma, colon, or parentheses. See the [Style guide](/docs/community/style-guide) for the full rule.
 - **Link instead of repeating text:** Avoid duplicating information from other pages. Link to the source and explain why it matters in context.
 - **Fake user data and connection strings:** Use only fake example data (never real user data), and follow the standard connection string format. See the [Style guide](/docs/community/style-guide) for the exact values and format.
 

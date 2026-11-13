@@ -209,7 +209,7 @@ The canonical voice and mechanical rules live in one place: `content/docs/commun
 It covers:
 
 - **Voice:** plain, developer-first prose. Contractions, second-person "you", active voice, brief sentences (about 25 words), US English, no emojis or exclamation marks, no filler or hedging, no AI-tell phrasing.
-- **Mechanical rules:** sentence-case page titles and headings, an absolute ban on em dashes (—), consistent terminology, Postgres vs PostgreSQL, product-name casing (PostgreSQL, GitHub, npm, Vercel), fake example data only, and connection string format (`postgresql://`, not `postgres://`).
+- **Mechanical rules:** sentence-case page titles and headings, no em dashes (—), consistent terminology, Postgres vs PostgreSQL, product-name casing (PostgreSQL, GitHub, npm, Vercel), fake example data only, and connection string format (`postgresql://`, not `postgres://`).
 
 The full terminology system (preferred terms, terms to avoid, product and feature names) lives in `.claude/neon-terminology.md`, which the style guide references as its terminology data source.
 
