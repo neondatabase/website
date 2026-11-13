@@ -314,10 +314,27 @@ export const CatalogView = ({
     };
   }, [templates]);
   const serviceIds = useMemo(() => registryServiceIds(templates), [templates]);
-  const matchingTemplates = useMemo(
-    () => filterRegistryTemplates(templates, { query: q, categories: category, services: service }),
-    [templates, q, category, service]
+  const selectedServices = useMemo(
+    () => serviceIds.filter((id) => service.includes(id)),
+    [serviceIds, service]
   );
+  const matchingTemplates = useMemo(
+    () =>
+      filterRegistryTemplates(templates, {
+        query: q,
+        categories: category,
+        services: selectedServices,
+      }),
+    [templates, q, category, selectedServices]
+  );
+
+  useEffect(() => {
+    if (templates.length > 0 && selectedServices.length < service.length) {
+      setParams?.((params) => ({
+        service: serviceIds.filter((id) => params.service.includes(id)),
+      }));
+    }
+  }, [selectedServices.length, service.length, serviceIds, setParams, templates.length]);
 
   const toggleParam = (key) => (id) => {
     setParams?.((params) => ({
@@ -359,7 +376,7 @@ export const CatalogView = ({
   const hasFilters = sourceIds.length > 0 || topicIds.length > 0 || serviceIds.length > 0;
   const selectedCount =
     [...sourceIds, ...topicIds].filter((id) => category.includes(id)).length +
-    serviceIds.filter((id) => service.includes(id)).length;
+    selectedServices.length;
   const filters = (
     <>
       <FilterGroup
@@ -371,7 +388,7 @@ export const CatalogView = ({
       <FilterGroup
         title="Neon services"
         categories={serviceIds}
-        selected={service}
+        selected={selectedServices}
         getLabel={serviceFilterLabel}
         onToggle={toggleService}
       />
@@ -441,7 +458,7 @@ export const CatalogView = ({
               )}
             </div>
             {hasFilters && (
-              <div className="sticky top-24 min-w-0 lg:static md:hidden">
+              <div className="sticky top-24 -m-1 max-h-[calc(100dvh-7rem)] min-w-0 overflow-y-auto p-1 [scrollbar-color:#494b50_transparent] [scrollbar-width:thin] lg:static lg:m-0 lg:max-h-none lg:overflow-visible lg:p-0 md:hidden">
                 <FilterPanel selectedCount={selectedCount} onClear={clearCategories}>
                   {filters}
                 </FilterPanel>
@@ -453,7 +470,7 @@ export const CatalogView = ({
               {getStatusText(matchingTemplates.length)}
             </p>
             <CatalogResults
-              key={JSON.stringify([q, category, service])}
+              key={JSON.stringify([q, category, selectedServices])}
               templates={matchingTemplates}
               onClear={clearFilters}
             />

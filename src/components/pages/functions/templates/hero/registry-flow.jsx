@@ -19,10 +19,11 @@ import {
 
 const classes = {
   stage:
-    'relative isolate aspect-[1344/502] overflow-hidden rounded-none bg-[#151617] text-[#ededed] max-[1101px]:aspect-auto max-[1101px]:h-[46.625rem]',
-  diagram: 'pointer-events-none absolute inset-0',
+    'relative isolate aspect-[1344/502] overflow-hidden rounded-none bg-[#151617] text-[#ededed] max-[1101px]:aspect-auto',
+  diagram:
+    'pointer-events-none absolute inset-0 max-[1101px]:relative max-[1101px]:flex max-[1101px]:flex-col max-[1101px]:items-center max-[1101px]:gap-8 max-[1101px]:pt-5 max-[1101px]:pb-[1.375rem]',
   registry:
-    'absolute top-1/2 left-[6%] box-border w-[22%] border border-dashed border-[#4b4e50] bg-[#1b1c1e] p-4 opacity-0 [transform:translateY(-50%)] [&_h3]:m-0 [&_h3]:text-[.8125rem] [&_h3]:leading-none [&_h3]:font-normal [&_h3]:tracking-[-.02em] [&_h3]:text-[#94979e] min-[1101px]:max-[1200px]:p-3 max-[1101px]:top-5 max-[1101px]:left-1/2 max-[1101px]:w-[calc(100%-3.5rem)] max-[1101px]:max-w-[25rem] max-[1101px]:p-2.5 max-[1101px]:[transform:translateX(-50%)] max-[1101px]:[&_h3]:text-xs',
+    'absolute top-1/2 left-[6%] box-border w-[22%] border border-dashed border-[#4b4e50] bg-[#1b1c1e] p-4 opacity-0 [transform:translateY(-50%)] [&_h3]:m-0 [&_h3]:text-[.8125rem] [&_h3]:leading-none [&_h3]:font-normal [&_h3]:tracking-[-.02em] [&_h3]:text-[#94979e] min-[1101px]:max-[1200px]:p-3 max-[1101px]:static max-[1101px]:w-[calc(100%-3.5rem)] max-[1101px]:max-w-[25rem] max-[1101px]:p-2.5 max-[1101px]:[transform:none] max-[1101px]:[&_h3]:text-xs',
   // Equal-height rows, so a row whose service tags wrap doesn't stand out.
   functionList: 'mt-3 grid auto-rows-fr gap-2 max-[1101px]:mt-2 max-[1101px]:gap-[.3125rem]',
   functionRow:
@@ -39,7 +40,7 @@ const classes = {
     'flex size-4 shrink-0 items-center justify-center bg-[#2c2f31] text-[#b4b7bc] [&_svg]:size-2.5',
   // Equal free space between the 22% registry and 36% app, each inset by 6%.
   agent:
-    'absolute top-1/2 left-[43%] box-border h-[9.125rem] w-[18%] bg-[#e4f1eb] p-[1.375rem] text-[#151617] opacity-0 [transform:translate(-50%,-50%)] min-[1101px]:max-[1200px]:px-3.5 max-[1101px]:top-[17.625rem] max-[1101px]:left-1/2 max-[1101px]:h-[7.25rem] max-[1101px]:w-[16rem] max-[1101px]:max-w-[calc(100%-4rem)] max-[1101px]:px-4 max-[1101px]:py-3 max-[1101px]:[transform:translateX(-50%)]',
+    'absolute top-1/2 left-[43%] box-border h-[9.125rem] w-[18%] bg-[#e4f1eb] p-[1.375rem] text-[#151617] opacity-0 [transform:translate(-50%,-50%)] min-[1101px]:max-[1200px]:px-3.5 max-[1101px]:static max-[1101px]:h-[7.25rem] max-[1101px]:w-[16rem] max-[1101px]:max-w-[calc(100%-4rem)] max-[1101px]:px-4 max-[1101px]:py-3 max-[1101px]:[transform:none]',
   agentHeading: 'flex items-center gap-2 text-base leading-[1.25] tracking-[-.025em]',
   agentMark: 'block size-6 text-[#3e5a4e] max-[1101px]:size-5',
   activity: 'relative mt-2.5 h-[4.125rem] overflow-hidden max-[1101px]:mt-1.5',
@@ -55,7 +56,7 @@ const classes = {
   commandExecutable: 'text-[#151617]',
   commandArgument: 'text-[#151617]/60',
   commandTemplate: 'text-[#2d8665]',
-  app: 'absolute top-1/2 right-[6%] box-border h-[19.5rem] w-[36%] border border-[#4b4e50] bg-black-pure opacity-0 [transform:translateY(-50%)] [&_[data-build]]:opacity-0 [&_[data-build]]:[transform:translateY(4px)] max-[1101px]:top-[26.875rem] max-[1101px]:right-auto max-[1101px]:left-1/2 max-[1101px]:h-[18.375rem] max-[1101px]:w-[calc(100%-2rem)] max-[1101px]:max-w-[27.5rem] max-[1101px]:[transform:translateX(-50%)]',
+  app: 'absolute top-1/2 right-[6%] box-border h-[19.5rem] w-[36%] border border-[#4b4e50] bg-black-pure opacity-0 [transform:translateY(-50%)] [&_[data-build]]:opacity-0 [&_[data-build]]:[transform:translateY(4px)] max-[1101px]:static max-[1101px]:h-[18.375rem] max-[1101px]:w-[calc(100%-2rem)] max-[1101px]:max-w-[27.5rem] max-[1101px]:[transform:none]',
   browserChrome:
     'relative flex h-[1.625rem] items-center justify-center border-b border-[#3b3e40] bg-[#1d1f20] text-[.6875rem] leading-none text-[#a8abad]',
   browserDots:

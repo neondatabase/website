@@ -448,14 +448,14 @@ export const createFlowTimeline = (root) => {
     '[data-agent]',
     INTRO.agent.start,
     INTRO.agent.duration,
-    vertical ? 'translateX(-50%)' : 'translate(-50%,-50%)',
+    vertical ? 'translate(0)' : 'translate(-50%,-50%)',
     vertical ? '50% 0' : '0 50%'
   );
   enter(
     '[data-app]',
     INTRO.app.start,
     INTRO.app.duration,
-    vertical ? 'translateX(-50%)' : 'translateY(-50%)',
+    vertical ? 'translate(0)' : 'translateY(-50%)',
     vertical ? '50% 0' : '0 50%'
   );
   const head = (x, y) =>
