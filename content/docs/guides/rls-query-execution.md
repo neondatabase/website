@@ -55,7 +55,7 @@ You can execute these commands in the [Neon SQL Editor](/docs/get-started/query-
 Drizzle’s migration system is focused on schema changes and does not currently support role management or permission grants. To configure roles, you’ll need to run SQL commands directly in Postgres or include them in a custom (empty) migration file.
 </Admonition>
 
-For example, the following SQL creates a role named `authenticated_backend` with login privileges and grants it access to the `public` schema and specific table `todos`. Optionally, use the commented sql commands to set default privileges for all present and future tables in the `public` schema.
+For example, the following SQL creates a role named `authenticated_backend` with login privileges and grants it access to the `public` schema. You grant access to the table itself in step 3, after the table exists.
 
 ```sql shouldWrap
 -- Create a custom role to be used by your application backend to connect
@@ -63,24 +63,15 @@ CREATE ROLE authenticated_backend WITH LOGIN PASSWORD 'your_secure_password';
 
 -- Grant schema access
 GRANT USAGE ON SCHEMA public TO authenticated_backend;
-
--- Grant access to specific tables (e.g., todos, users)
-GRANT SELECT, INSERT, UPDATE, DELETE ON TABLE todos TO authenticated_backend;
-
--- Note: Repeat the GRANT statement for any other tables this role needs to access (e.g., users, projects, etc.)
--- GRANT SELECT, UPDATE, INSERT, DELETE ON ALL TABLES IN SCHEMA public TO authenticated_backend;
-
--- Set default privileges for future tables in the schema:
--- ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT SELECT, UPDATE, INSERT, DELETE ON TABLES TO authenticated_backend;
 ```
 
 ### 2. Map the custom role in Drizzle
 
 Once the role exists, map it in your Drizzle schema to apply RLS policies for that specific role.
 
-```typescript {5,19-23}
+```typescript {5,19-23,25-29}
 import { sql } from 'drizzle-orm';
-import { authUid, crudPolicy } from 'drizzle-orm/neon';
+import { authenticatedRole, authUid, crudPolicy } from 'drizzle-orm/neon';
 import { bigint, boolean, pgRole, pgTable, text } from 'drizzle-orm/pg-core';
 
 export const backendRole = pgRole('authenticated_backend').existing();
@@ -96,15 +87,23 @@ export const todos = pgTable(
     isComplete: boolean().notNull().default(false),
   },
   (table) => [
-    // Users: can access and modify their own todos
+    // Backend: connects as authenticated_backend
     crudPolicy({
       role: backendRole,
       read: authUid(table.userId), // Can only read their own todos
       modify: authUid(table.userId), // Can only modify their own todos
     }),
+    // Data API (frontend): requests with a JWT run as the authenticated role
+    crudPolicy({
+      role: authenticatedRole,
+      read: authUid(table.userId),
+      modify: authUid(table.userId),
+    }),
   ]
 );
 ```
+
+The `authenticated` policy is required for the frontend path. Without it, Data API requests return no rows, even with a valid JWT.
 
 Similarly, you can define additional custom roles (e.g., `moderator_backend`, `admin_backend`) with tailored permissions and map them in your Drizzle schema to support more advanced access control.
 
@@ -162,6 +161,27 @@ For example, an admin dashboard might connect using the `admin_backend` role, wh
 
 </details>
 
+### 3. Generate and apply the migration
+
+Generate a migration from your schema and apply it. Use `generate` and `migrate` rather than `drizzle-kit push`. In testing with drizzle-kit 0.31.11, `push` created the policies without their `USING` and `WITH CHECK` expressions, so the policies didn't filter rows. The migration files include the full expressions.
+
+```bash
+npx drizzle-kit generate --dialect postgresql --schema ./src/schema.ts --out ./drizzle
+npx drizzle-kit migrate
+```
+
+After the migration creates the `todos` table, grant the backend role access to it:
+
+```sql shouldWrap
+-- Run after the migration creates the table
+GRANT SELECT, INSERT, UPDATE, DELETE ON TABLE todos TO authenticated_backend;
+
+-- Repeat for any other tables this role needs (e.g., users, projects, etc.)
+-- GRANT SELECT, UPDATE, INSERT, DELETE ON ALL TABLES IN SCHEMA public TO authenticated_backend;
+```
+
+Running this grant before the table exists fails with `relation "todos" does not exist`.
+
 ## Managing connection strings for RLS
 
 When building applications with RLS, a standard architectural pattern is splitting your database connections into two different URLs to limit risk:
@@ -206,6 +226,7 @@ Install the necessary dependencies for either approach:
 
 ```bash
 npm install drizzle-orm @neondatabase/serverless jose
+npm install -D drizzle-kit
 ```
 
 #### Secure Backend RLS Client setup
@@ -217,7 +238,7 @@ When setting up connection pooling over WebSockets or TCP using `@neondatabase/s
 Below is an abstracted function `getAuthenticatedDb` that transparently handles this lifecycle:
 
 <Admonition type="note">
-The `$withAuth` method in Drizzle is deprecated; instead, set JWT claims in the transaction context as shown below.
+This approach sets JWT claims in the transaction context with `set_config`. Drizzle's `$withAuth` method, which exists on the neon-http driver, isn't used here.
 </Admonition>
 
 ```typescript
@@ -261,11 +282,8 @@ export const getAuthenticatedDb = async <T>(
     });
 };
 
-// Example usage
-getAuthenticatedDb('eyJh...', async (tx) => {
-    const todosForUser = await tx.select().from(todos);
-    console.log(todosForUser);
-});
+// Example usage: call this from your request handler with the user's token
+// const todosForUser = await getAuthenticatedDb(token, (tx) => tx.select().from(todos));
 ```
 
 #### Using bypass RLS
