@@ -7,6 +7,10 @@ createdAt: '2025-02-04T13:24:36.612Z'
 updatedOn: '2026-09-30T00:39:07.369Z'
 ---
 
+<LakebaseVectorTip />
+
+## Build vector search with pgvector
+
 Vector search lets you run similarity searches on vectors stored in Postgres.
 With the [pgvector](https://github.com/pgvector/pgvector) extension, you can store and query vector embeddings in Postgres for applications like retrieval-augmented generation (RAG) and semantic search.
 

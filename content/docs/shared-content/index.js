@@ -14,6 +14,7 @@ const sharedMdxComponents = {
   PrivatePreviewEnquire: 'shared-content/private-preview-enquire',
   EarlyAccessProps: 'shared-content/early-access-props',
   AgentSkillsTip: 'shared-content/agent-skills-tip',
+  LakebaseVectorTip: 'shared-content/lakebase-vector-tip',
   AuthAISetup: 'shared-content/auth-ai-setup',
   AuthAISetupTip: 'shared-content/auth-ai-setup-tip',
   NeonPluginContents: 'shared-content/neon-plugin-contents',
