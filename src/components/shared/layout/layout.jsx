@@ -37,7 +37,7 @@ const Layout = ({
     {!isClient && <Topbar />}
     <div
       className={cn(
-        'relative flex flex-col pt-safe',
+        'relative flex flex-col',
         isClient ? 'min-h-screen' : 'min-h-[calc(100vh-36px)]',
         isDocPage && 'lg:pb-12!'
       )}
