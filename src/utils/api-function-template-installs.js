@@ -3,8 +3,9 @@ import { neon } from '@neondatabase/serverless';
 async function queryStats(query) {
   const url = process.env.STATS_DATABASE_URL;
   if (!url) {
-    // Contributors run the site without the stats database; every Vercel environment has it.
-    if (process.env.VERCEL) throw new Error('STATS_DATABASE_URL is not set');
+    if (process.env.VERCEL_ENV === 'production') {
+      throw new Error('STATS_DATABASE_URL is not set');
+    }
     return [];
   }
 
