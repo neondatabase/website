@@ -9,7 +9,7 @@ summary: >-
   common mistakes.
 enableTableOfContents: true
 noindex: true
-updatedOn: '2026-11-12T22:47:20.076Z'
+updatedOn: '2026-11-13T06:34:29.829Z'
 ---
 
 <FeatureBetaProps feature_name="Realtime" />
@@ -75,16 +75,38 @@ export const TODOS_SQL = 'SELECT id, title, completed FROM todos WHERE user_id =
 export const todosQuery = (userId: string) => rawSql<Todo>(TODOS_SQL, [userId]);
 ```
 
+Every server function that reads, seals or writes todos runs `requirePageUser`. It checks the session with `requireUser` and rejects a page that was loaded for a different user, for example after signing in as someone else in another tab:
+
+```ts filename="src/page-user.functions.ts"
+import { createMiddleware } from '@tanstack/react-start';
+import { setResponseStatus } from '@tanstack/react-start/server';
+import { z } from 'zod';
+
+import { requireUser } from './auth.functions';
+
+// Loose, so each server function's own fields reach its validator.
+export const requirePageUser = createMiddleware({ type: 'function' })
+  .middleware([requireUser])
+  .validator(z.looseObject({ userId: z.string() }))
+  .server(({ next, context, data }) => {
+    if (context.user.id !== data.userId) {
+      setResponseStatus(401);
+      throw new Error('UNAUTHENTICATED');
+    }
+    return next({ context: { user: context.user } });
+  });
+```
+
 ```ts filename="src/todos.functions.ts"
 import { createServerFn } from '@tanstack/react-start';
 
-import { requireUser } from './auth.functions';
 import { pool } from './db.server';
+import { requirePageUser } from './page-user.functions';
 import { realtime, todosQuery, TODOS_SQL, type Todo } from './todos.server';
 
 // The page's rows, plus a sealed live query for exactly the same rows.
 export const loadTodos = createServerFn({ method: 'POST' })
-  .middleware([requireUser])
+  .middleware([requirePageUser])
   .handler(async ({ context }) => {
     const [{ rows }, query] = await Promise.all([
       pool.query<Todo>(TODOS_SQL, [context.user.id]),
@@ -95,7 +117,7 @@ export const loadTodos = createServerFn({ method: 'POST' })
 
 // Re-seals the same query before the current one expires.
 export const refreshTodosQuery = createServerFn({ method: 'POST' })
-  .middleware([requireUser])
+  .middleware([requirePageUser])
   .handler(({ context }) => realtime.seal({ query: todosQuery(context.user.id) }));
 ```
 
@@ -104,7 +126,7 @@ export const refreshTodosQuery = createServerFn({ method: 'POST' })
 - `refreshQuery` must seal the same SQL and parameters as the loader.
 - Drizzle and Kysely queries can be sealed directly by passing `drizzleAdapter()` from `@neon/realtime-drizzle` or the Kysely adapter as `adapter` to `createRealtime()`. See [Using a query builder or ORM](/docs/realtime/guides/queries#using-a-query-builder-or-orm).
 
-`requireUser` is session middleware. For Managed Better Auth on TanStack Start, see [Neon Auth with TanStack Start and Router](/docs/tanstack/auth).
+`requireUser` reads the session and puts the signed-in user on `context`. For Managed Better Auth on TanStack Start, see [Neon Auth with TanStack Start and Router](/docs/tanstack/auth).
 
 ## Define the collection
 
@@ -118,6 +140,13 @@ import { collectionOptions } from '@tanstack/react-db';
 import { createTodos, refreshTodosQuery } from './todos.functions';
 import type { Todo } from './todos.server';
 
+// The session is gone or belongs to another user: reload, which drops this
+// page's DbClient and the previous user's rows.
+function leaveIfSignedOut(error: unknown): never {
+  if (error instanceof Error && error.message === 'UNAUTHENTICATED') window.location.assign('/');
+  throw error;
+}
+
 export function todosCollection(userId: string, query: SealedLiveQuery<Todo>) {
   const id = `todos:${userId}`;
   return collectionOptions(id, (db) =>
@@ -128,11 +157,11 @@ export function todosCollection(userId: string, query: SealedLiveQuery<Todo>) {
       getKey: (todo) => todo.id,
       // A collection rebuilt after garbage collection would restart from an expired sealed query.
       gcTime: 0,
-      refreshQuery: () => refreshTodosQuery({ data: { userId } }),
+      refreshQuery: () => refreshTodosQuery({ data: { userId } }).catch(leaveIfSignedOut),
       onInsert: async ({ transaction, collection }) => {
         const { txid } = await createTodos({
           data: { userId, batch: transaction.mutations.map((m) => m.modified) },
-        });
+        }).catch(leaveIfSignedOut);
         if (txid) await collection.utils.awaitTxId(txid, 10_000);
       },
     })
@@ -147,8 +176,16 @@ The adapter syncs eagerly. It has no `syncMode` option. See the [`realtimeCollec
 Each mutation handler sends the whole TanStack DB transaction to one server function. The server function writes it in one SQL statement and returns that statement's Postgres transaction ID, so the handler can wait for the change to arrive on the subscription:
 
 ```ts filename="src/todos.functions.ts"
+import { z } from 'zod';
+
+// Strips unknown keys, so a row's user_id can never come from the browser.
+const newTodosInput = z.object({
+  userId: z.string(),
+  batch: z.array(z.object({ id: z.string().uuid(), title: z.string().min(1), completed: z.boolean() })),
+});
+
 export const createTodos = createServerFn({ method: 'POST' })
-  .middleware([requireUser])
+  .middleware([requirePageUser])
   .validator(newTodosInput)
   .handler(async ({ data: { batch }, context }) => {
     const { rows } = await pool.query<{ txid: string }>(
@@ -179,12 +216,44 @@ import { routerWithDbClient } from '@tanstack/react-router-with-db';
 
 import { routeTree } from './routeTree.gen';
 
+export interface RouterContext {
+  readonly dbClient: DbClient;
+}
+
 export function getRouter() {
   const realtime = createRealtimeClient({ url: import.meta.env.VITE_NEON_REALTIME_URL });
   const dbClient = new DbClient({ realtime });
   const router = createRouter({ routeTree, context: { dbClient } });
   return routerWithDbClient(router, dbClient);
 }
+```
+
+Declare `RouterContext` on the root route, which `routerWithDbClient()` requires, and load the session there. A `_authed` layout route redirects signed-out visitors and passes a non-null `user` to its children, as in [Neon Auth with TanStack Start and Router](/docs/tanstack/auth#read-the-session-in-middleware):
+
+```tsx filename="src/routes/__root.tsx"
+import { createRootRouteWithContext } from '@tanstack/react-router';
+
+import { getSessionUser } from '../auth.functions';
+import type { RouterContext } from '../router';
+
+export const Route = createRootRouteWithContext<RouterContext>()({
+  beforeLoad: async () => ({ user: await getSessionUser() }),
+  headers: () => ({ 'Cache-Control': 'private, no-store', Vary: 'Cookie' }),
+});
+```
+
+```tsx filename="src/routes/_authed.tsx"
+import { createFileRoute, redirect } from '@tanstack/react-router';
+
+export const Route = createFileRoute('/_authed')({
+  beforeLoad: ({ context }) => {
+    if (!context.user) {
+      // An SSR redirect skips the root route's headers.
+      throw redirect({ to: '/sign-in', headers: { 'Cache-Control': 'private, no-store', Vary: 'Cookie' } });
+    }
+    return { user: context.user };
+  },
+});
 ```
 
 Seed the collection in the route loader and query it in the component:
@@ -228,13 +297,14 @@ The server renders the seeded rows without subscribing. `routerWithDbClient()` r
 
 ## Common pitfalls
 
-| Pitfall                                           | Fix                                                                                            |
-| ------------------------------------------------- | ---------------------------------------------------------------------------------------------- |
-| Sealing a query with a user ID from the request   | Seal with the session user from middleware.                                                    |
-| A module-global `DbClient` or collection          | Create the `DbClient` in `getRouter()`, so no collection is shared between users.              |
-| `ORDER BY` in the live query                      | The collection is keyed and unordered. Sort with `orderBy` in `useLiveQuery()`.                |
-| Result column names that differ from the row keys | Realtime matches columns to keys by name. Alias them, for example `created_at AS "createdAt"`. |
-| Treating an `awaitTxId()` timeout as a failure    | The write committed. Show it as saved and let the subscription catch up.                       |
+| Pitfall                                                        | Fix                                                                                                |
+| -------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- |
+| Sealing a query with a user ID from the request                | Seal with the session user from middleware.                                                        |
+| A stale tab writing after another tab signs in as someone else | Pass the page's `userId`, reject a mismatch in `requirePageUser`, and reload on `UNAUTHENTICATED`. |
+| A module-global `DbClient` or collection                       | Create the `DbClient` in `getRouter()`, so no collection is shared between users.                  |
+| `ORDER BY` in the live query                                   | The collection is keyed and unordered. Sort with `orderBy` in `useLiveQuery()`.                    |
+| Result column names that differ from the row keys              | Realtime matches columns to keys by name. Alias them, for example `created_at AS "createdAt"`.     |
+| Treating an `awaitTxId()` timeout as a failure                 | The write committed. Show it as saved and let the subscription catch up.                           |
 
 ## Source code
 

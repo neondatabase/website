@@ -9,7 +9,7 @@ summary: >-
   public assets behind a CDN.
 enableTableOfContents: true
 noindex: true
-updatedOn: '2026-11-12T22:47:20.076Z'
+updatedOn: '2026-11-13T06:34:29.829Z'
 ---
 
 [Neon Object Storage](/docs/storage/overview) is S3-compatible file storage that branches with your database: a preview branch gets its own copy of the files and the rows that point at them. Use it for files your app and its users produce, such as uploads, avatars and documents. App assets like JS bundles and images in `public/` belong on your frontend host.
@@ -57,8 +57,13 @@ npm install @aws-sdk/client-s3 @aws-sdk/s3-request-presigner
 ```ts filename="src/storage.server.ts"
 import { S3Client } from '@aws-sdk/client-s3';
 
-// Neon Object Storage requires path-style addressing.
-export const s3 = new S3Client({ forcePathStyle: true });
+export const s3 = new S3Client({
+  // Neon Object Storage requires path-style addressing.
+  forcePathStyle: true,
+  // Recent SDK versions embed a checksum of the empty body in presigned PUT
+  // URLs, which rejects any upload with real content.
+  requestChecksumCalculation: 'WHEN_REQUIRED',
+});
 export const BUCKET = 'uploads';
 ```
 
