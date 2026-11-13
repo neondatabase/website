@@ -8,7 +8,7 @@ summary: >-
   function middleware, and keep personalized responses out of shared caches.
 enableTableOfContents: true
 noindex: true
-updatedOn: '2026-11-12T22:47:20.076Z'
+updatedOn: '2026-11-13T06:40:29.274Z'
 ---
 
 [Managed Better Auth](/docs/auth/overview) stores users and sessions in your Lakebase Postgres database on Neon, and branches them with the rest of your data. This page covers two setups:
@@ -137,14 +137,17 @@ export const authClient = createAuthClient('');
 
 ```ts filename="src/auth.functions.ts"
 import { createMiddleware, createServerFn } from '@tanstack/react-start';
-import { setResponseHeader } from '@tanstack/react-start/server';
+import { setResponseHeader, setResponseStatus } from '@tanstack/react-start/server';
 
 import { auth } from './auth.server';
 
 // The data boundary: use on every server function that reads or writes private data.
 export const requireUser = createMiddleware({ type: 'function' }).server(async ({ next }) => {
   const { data } = await auth.getSession();
-  if (!data?.user) throw new Error('Unauthorized');
+  if (!data?.user) {
+    setResponseStatus(401);
+    throw new Error('UNAUTHENTICATED');
+  }
   return next({ context: { user: { id: data.user.id } } });
 });
 

@@ -9,7 +9,7 @@ summary: >-
   edge functions use the serverless driver over HTTP or WebSockets.
 enableTableOfContents: true
 noindex: true
-updatedOn: '2026-11-12T22:47:20.076Z'
+updatedOn: '2026-11-13T06:40:29.274Z'
 ---
 
 TanStack Start runs server functions wherever you deploy it, so the Postgres driver follows the deploy target rather than the framework. Keep the driver an existing app already uses.
@@ -42,12 +42,17 @@ export const pool = new Pool({ connectionString: process.env.DATABASE_URL });
 ```ts filename="src/todos.functions.ts"
 import { createServerFn } from '@tanstack/react-start';
 
+import { requireUser } from './auth.functions';
 import { pool } from './db.server';
 
-export const listTodos = createServerFn({ method: 'GET' }).handler(async () => {
-  const { rows } = await pool.query('SELECT id, title FROM todos ORDER BY id');
-  return rows;
-});
+export const listTodos = createServerFn({ method: 'GET' })
+  .middleware([requireUser])
+  .handler(async ({ context }) => {
+    const { rows } = await pool.query('SELECT id, title FROM todos WHERE user_id = $1 ORDER BY id', [
+      context.user.id,
+    ]);
+    return rows;
+  });
 ```
 
 Create the pool once at module scope, not inside the handler. A new pool per request opens a new connection per request.
@@ -74,12 +79,20 @@ The [Neon serverless driver](/docs/serverless/serverless-driver) sends each quer
 import { neon } from '@neondatabase/serverless';
 import { createServerFn } from '@tanstack/react-start';
 
+import { requireUser } from './auth.functions';
+
 const sql = neon(process.env.DATABASE_URL!);
 
-export const listTodos = createServerFn({ method: 'GET' }).handler(
-  () => sql`SELECT id, title FROM todos ORDER BY id`
-);
+export const listTodos = createServerFn({ method: 'GET' })
+  .middleware([requireUser])
+  .handler(
+    ({ context }) => sql`SELECT id, title FROM todos WHERE user_id = ${context.user.id} ORDER BY id`
+  );
 ```
+
+The tagged template sends `context.user.id` as a query parameter, not as SQL text.
+
+Every server function that reads private data needs session middleware such as `requireUser`, because server functions are reachable directly. See [Neon Auth with TanStack Start and Router](/docs/tanstack/auth).
 
 For interactive transactions, use its `Pool` or `Client` over WebSockets, which is API-compatible with `pg`. Open and close it within the request in serverless environments.
 

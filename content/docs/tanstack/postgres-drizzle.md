@@ -8,7 +8,7 @@ summary: >-
   from createServerFn, and testing migrations and previews on database branches.
 enableTableOfContents: true
 noindex: true
-updatedOn: '2026-11-12T22:47:20.076Z'
+updatedOn: '2026-11-13T06:40:29.274Z'
 ---
 
 This page connects a [TanStack Start](https://tanstack.com/start) app to Lakebase Postgres on Neon with [Drizzle ORM](https://orm.drizzle.team). All database access stays in [server functions](https://tanstack.com/start/latest/docs/framework/react/guide/server-functions), because TanStack Start route loaders also run in the browser.
@@ -18,7 +18,7 @@ A TanStack Router single-page app has no server to hold a database connection. F
 ## Get a connection string
 
 - **Existing Neon project:** click **Connect** in the Neon Console and copy the pooled and direct connection strings.
-- **No account yet:** run `npx neon@latest claim create`. It provisions a [Claimable Neon](/docs/reference/claimable-neon) project and writes `DATABASE_URL` and `DATABASE_URL_UNPOOLED` to an existing `.env`, otherwise `.env.local`. Claim the project into a Neon account before it expires.
+- **No account yet:** run `npx neon@latest claim create --file .env.local`. It provisions a [Claimable Neon](/docs/reference/claimable-neon) project and writes `DATABASE_URL` and `DATABASE_URL_UNPOOLED` to `.env.local`. Claim the project into a Neon account before it expires.
 
 ```bash filename=".env.local"
 # Pooled connection for the app
