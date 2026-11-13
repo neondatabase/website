@@ -202,59 +202,16 @@ Tags (`new`, `beta`, etc.) set in frontmatter must also be added to the correspo
 
 ## Writing Style
 
-The voice should sound like one human being explaining something to another — approachable and professional, not stiff or overly formal.
+The canonical voice and mechanical rules live in one place: `content/docs/community/style-guide.md` (published at `/docs/community/style-guide`). Follow it when writing or editing docs. Do not restate these rules here or in other files; point to the style guide instead.
 
-### Voice and language
+It covers:
 
-- **Contractions:** Use them (it's, don't, you're). They make the tone more conversational. Don't overuse to the point of sacrificing clarity.
-- **Active voice:** Prefer it. "The software converts the file" not "The file is converted by the software."
-- **Simple language:** Choose simpler words. "Use the tool" not "Utilize the instrument."
-- **Concise sentences:** Keep them short. Don't pad.
-- **Address the reader:** Use "you" but don't start every sentence with it.
-- **Consistent terminology:** Pick one term per concept and stick to it. Don't mix "dashboard" and "control panel."
-- **US English:** Use US spelling and grammar throughout.
-- **No emojis or exclamation marks** in documentation.
-- **No em dashes (—):** Restructure the sentence instead.
+- **Voice:** plain, developer-first prose. Contractions, second-person "you", active voice, brief sentences (about 25 words), US English, no emojis or exclamation marks, no filler or hedging, no AI-tell phrasing.
+- **Mechanical rules:** sentence-case page titles and headings, no em dashes (—), consistent terminology, Postgres vs PostgreSQL, product-name casing (PostgreSQL, GitHub, npm, Vercel), fake example data only, and connection string format (`postgresql://`, not `postgres://`).
 
-### Capitalization
+The full terminology system (preferred terms, terms to avoid, product and feature names) lives in `.claude/neon-terminology.md`, which the style guide references as its terminology data source.
 
-- Use lowercase wherever possible.
-- Page titles: sentence case ("Create your first project", not "Create Your First Project").
-- Product names: follow official capitalization (PostgreSQL, GitHub, npm, Vercel).
-- UI text: match the interface exactly.
-- Feature names: lowercase by default.
-- Methods/methodologies: capitalize (Continuous Integration, Continuous Deployment).
-
-### Links
-
-Link to the source instead of repeating information. Explain why the linked content matters in context.
-
-### Fake user information
-
-Never use real user data in examples.
-
-- Emails: use `@example.com` or `@domain.com`
-- Usernames: `example_username`, Zhang Kai, Alex Lopez, or Dana Smith
-- Passwords: `AbC123dEf`
-- Database names: `dbname`
-
-### Connection strings
-
-Standard format:
-
-```text
-postgresql://[user]:[password]@[neon_hostname]/[dbname]
-```
-
-Example with realistic values:
-
-```text
-postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require&channel_binding=require
-```
-
-### Commands, parameters, filenames
-
-Enclose in backticks: `neon projects list`, `git clone`, `postgresql://...`
+SEAM (TODO, do not build yet): a future opt-in reviewer slash-command can read the same canonical style guide (`content/docs/community/style-guide.md`) so external contributors without the doc AI tooling get the same voice and mechanical checks. This is a separate, opt-in change; it is intentionally not built here.
 
 ## Code Blocks
 

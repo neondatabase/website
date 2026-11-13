@@ -48,6 +48,8 @@ If a title already exists and is good, keep it. Suggest a replacement only if it
 
 ### 4. Draft the description
 
+Write the title and description in the house voice from the canonical style guide (`content/docs/community/style-guide.md`): plain, direct, sentence case, no em dashes.
+
 Include these sections as applicable:
 
 ```

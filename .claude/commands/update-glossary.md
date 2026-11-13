@@ -24,7 +24,7 @@ Apply these when suggesting or reviewing entries:
 7. **Opening the definition.** Do not repeat the term in the first phrase. Start with the defining content: "Database compute that runs your workloads in Neon," not "A compute is..."
 8. **No circular definitions.** "See X" for an alias is fine; a full entry must add meaning.
 9. **Also see / Related.** Add "Also see [Term](#anchor)." when it helps the reader.
-10. **No em dashes.** Use commas, periods, or rephrase instead.
+10. **No em dashes.** Rewrite with a period, comma, colon, or parentheses. See the canonical style guide, `content/docs/community/style-guide.md`.
 11. **Docs-first.** Only include terms used in the docs. Remove entries for features no longer documented.
 
 ## Mode A: Doc file — find missing terms

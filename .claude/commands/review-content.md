@@ -17,10 +17,13 @@ Review a documentation page against Neon standards and produce a structured find
 
 ## Step 1: Load reference files
 
-Read both of these before doing anything else:
+Read these before doing anything else:
 
+- `content/docs/community/style-guide.md` — the canonical voice and mechanical rules this review enforces (source of truth)
 - `.claude/neon-terminology.md` — terminology rules, preferred terms, words to avoid
-- `AGENTS.md` — writing style, MDX components, frontmatter fields
+- `AGENTS.md` — MDX components and frontmatter fields (its style section points to the canonical style guide)
+
+The checks below are the operational enforcement of the canonical style guide. Where a rule's wording and the style guide differ, the style guide wins.
 
 ---
 
@@ -51,7 +54,7 @@ Flag every em dash (—) in the body text.
 
 **Stray h1 headings**
 
-Flag any line starting with `# ` (single `#`) in the body — the h1 is auto-generated from frontmatter.
+Flag any line starting with a single `#` followed by a space in the body. The h1 is auto-generated from frontmatter.
 
 **Frontmatter**
 

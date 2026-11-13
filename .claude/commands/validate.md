@@ -26,7 +26,7 @@ Read the frontmatter. If `title` is missing, flag it:
 
 ### No h1 heading in the body
 
-Check for any line starting with `# ` (a single `#`) below the frontmatter block. If found, flag it:
+Check for any line starting with a single `#` followed by a space below the frontmatter block. If found, flag it:
 
 > **Error:** `[file]` line [N] — h1 heading found (`# ...`). Remove it. The page title is auto-generated from the `title` frontmatter field.
 
@@ -52,7 +52,7 @@ If the frontmatter includes `redirectFrom`, check that each entry starts and end
 
 ### No em dashes in content
 
-Scan the file body for em dash characters (—). If found, flag the line numbers:
+No em dashes in Neon docs (see the canonical style guide, `content/docs/community/style-guide.md`). Scan the file body for em dash characters (—). If found, flag the line numbers:
 
 > **Warning:** `[file]` lines [N, N] — em dash found. Rewrite using a comma, parentheses, or a new sentence.
 
