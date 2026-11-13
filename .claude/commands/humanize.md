@@ -8,6 +8,8 @@ Transform a documentation page to sound like one human explaining something to a
 
 Pattern taxonomy informed by Wikipedia's "Signs of AI writing" analysis. It goes beyond phrase-swapping: the goal is human, not just clean.
 
+The voice this command applies (contractions, active voice, direct address, concise sentences) and the mechanical rules it enforces are defined in the canonical style guide, `content/docs/community/style-guide.md`. This command is the operational detection-and-rewrite catalog for that voice; the style guide is the source of truth for what the voice is.
+
 ## Usage
 
 ```
@@ -53,7 +55,7 @@ Word choice, sentence construction, grammatical habits.
 
 Formatting, rhythm, visual presentation.
 
-- **Em dash overuse** — multiple em dashes (—) per paragraph, nested asides. Rewrite with commas, colons, periods, or parentheses. **Never introduce a new em dash in a rewrite.**
+- **Em dashes (absolute ban)**: flag every em dash (—), not just paragraphs with several. Em dashes are banned in Neon docs. Rewrite with commas, colons, periods, or parentheses. **Never introduce a new em dash in a rewrite.** The rule's source of truth is the canonical style guide, `content/docs/community/style-guide.md`.
 - **Bold overuse** — multiple **bolded** terms per paragraph. Bold one or two critical points per section, max. When everything is bold, nothing is.
 - **Inline-header lists** — the "**Label:** Description" pattern repeated vertically. Use real sentences, bullets, or a table instead.
 - **Title case in headings** — "Strategic Partnerships And Key Deliverables". Use sentence case.
