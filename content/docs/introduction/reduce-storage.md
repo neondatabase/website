@@ -46,6 +46,8 @@ The 1 GB Free plan limit applies to each branch's data size. The **Limit reached
 
 Because of this, you can see the banner or get the email while every branch is under 1 GB. Connections and queries keep working, and writes only fail when the branch you're writing to reaches 1 GB. To check whether you're blocked, check the data size of the branch you're writing to.
 
+Deleting branches doesn't clear the warning, and running `VACUUM FULL` or deleting data on a child branch adds to it, because those count as data written. The warning clears at the start of your next billing period, or when you upgrade.
+
 ## When a Free plan branch reaches the limit
 
 When a branch on the Free plan reaches 1 GB, statements that need to allocate more space fail with this error:
@@ -75,20 +77,27 @@ The limit check uses a size measurement that refreshes periodically, so a branch
 
 ## Free up space
 
-Pick the approach that fits your data. Steps 1 and 2 free the most space with the least effort.
+Start with the steps that keep your data, and only delete data if you still need more space.
 
 <Steps>
 
-## Remove whole tables or indexes you don't need
+## Check whether you're blocked
 
-If a table holds test data, logs, or anything else you can throw away, empty it or drop it. Both free the space immediately and write very little to your history.
+Check the data size of the branch you're writing to, using the query in [Check your data size](#check-your-data-size). If it's under 1 GB, writes to that branch work, even if the Console shows **Limit reached** or you got a "You're out of storage" email. You don't need to delete anything.
+
+The warning includes data written on child branches during the current billing period, even on branches you've since deleted, so deleting branches doesn't clear it. It clears at the start of your next billing period. See [Storage limit warnings](#storage-limit-warnings).
+
+## Reclaim space without deleting data
+
+If the table size query shows a high `dead_rows` count, the table holds space left behind by earlier updates and deletes. `VACUUM FULL` rewrites the table without that space and keeps all your rows:
 
 ```sql
-TRUNCATE TABLE old_events;   -- keeps the table, removes all rows
-DROP TABLE old_events;       -- removes the table
+VACUUM FULL events;
 ```
 
-Unused indexes can be large too. Dropping one frees its space right away:
+`VACUUM FULL` works on a Free plan branch that's at the limit. While it runs, it locks the table against reads and writes, so run it when your app can tolerate that. If `dead_rows` is near zero, `VACUUM FULL` won't free much.
+
+Indexes are also worth checking. An index you don't use takes up space but doesn't hold any data you'd lose, so dropping it frees space right away:
 
 ```sql
 DROP INDEX idx_events_payload;
@@ -107,38 +116,37 @@ ORDER BY pg_relation_size(indexrelid) DESC;
 
 Neon resets these statistics when your compute [scales to zero](/docs/introduction/scale-to-zero), so an index can show zero scans even if your app uses it. Check your queries before you drop an index, and don't drop indexes that back a primary key or unique constraint unless you mean to remove the constraint.
 
-## Delete rows, then vacuum
+## Clean up branches
 
-If you need to keep some rows, `DELETE` the ones you don't need. `DELETE` works at the limit, but on its own it doesn't reduce your data size. Postgres only marks the deleted rows as dead.
+Each branch has its own data size, and writes fail when the branch you're writing to reaches the limit. If a child branch is full and you don't need the changes on it:
+
+- [Reset it from its parent](/docs/manage/branches#reset-a-branch-from-parent) to discard its changes and return it to the parent's data size.
+- [Delete it](/docs/manage/branches#delete-a-branch) if you no longer need it.
+
+Both work while the branch is at the limit, and neither affects data on other branches.
+
+## Remove data you don't need
+
+If you still need space, remove data you can do without, such as test data, logs, or old events. Emptying or dropping a whole table frees its space immediately and writes very little to your history:
+
+```sql
+TRUNCATE TABLE old_events;   -- keeps the table, removes all rows
+DROP TABLE old_events;       -- removes the table
+```
+
+To keep some rows, `DELETE` the ones you don't need. `DELETE` works at the limit, but on its own it doesn't reduce your data size. Postgres only marks the deleted rows as dead.
 
 ```sql
 DELETE FROM events WHERE created_at < now() - interval '90 days';
 ```
 
-Then run `VACUUM` to make that space reusable. Run it as a separate statement, because `VACUUM` can't run inside a transaction block:
-
-```sql
-VACUUM events;
-```
-
-After `VACUUM`, new rows in that table fill the freed space instead of growing the table. `VACUUM` only shrinks the table file when the freed space is at the end of the table, so your data size may not drop much.
-
-To return the space and shrink the table, run `VACUUM FULL`:
+Then reclaim the space. Run each statement separately, because `VACUUM` can't run inside a transaction block:
 
 ```sql
 VACUUM FULL events;
 ```
 
-`VACUUM FULL` rewrites the table and its indexes into new files without the dead rows, so the data size drops once it finishes. It works on a Free plan branch that's at the limit. While it runs, it locks the table against reads and writes, so run it when your app can tolerate that.
-
-## Clean up branches
-
-Each branch has its own data size, and writes fail when the branch you're writing to reaches the limit. If a child branch is full:
-
-- [Reset it from its parent](/docs/manage/branches#reset-a-branch-from-parent) to discard its changes and return it to the parent's data size.
-- [Delete it](/docs/manage/branches#delete-a-branch) if you no longer need it.
-
-Both work while the branch is at the limit. A deleted branch still counts toward [storage limit warnings](#storage-limit-warnings) until the current billing period ends.
+Plain `VACUUM events;` is faster and doesn't lock the table, but it only makes the space reusable for new rows in that table. It only shrinks the table when the freed space is at the end of the table.
 
 ## Upgrade if you need more space
 
