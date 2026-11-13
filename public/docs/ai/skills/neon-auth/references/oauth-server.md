@@ -2,7 +2,7 @@
 
 Use this page when the request is "let MCP clients sign in my users", "protect my MCP server with OAuth", or "let another app or OAuth client call my API on behalf of my users". Managed Better Auth is the OAuth 2.1 / OIDC authorization server (the OAuth provider plugin, beta, available to all Managed projects). Do not move to self-managed Better Auth for this, and keep the app's existing login method.
 
-"OAuth server" and "OAuth clients" here are not the social providers (Google, GitHub, Apple) of `neon neon-auth oauth-provider`. Those sign users in to Neon Auth. This page makes Neon Auth issue tokens to other apps.
+"OAuth server" and "OAuth clients" here are not the social sign-in providers (`signIn.social`). Those sign users in to Neon Auth. This page makes Neon Auth issue tokens to other apps.
 
 - Docs: https://neon.com/docs/auth/guides/plugins/oauth-provider.md
 - Configuration is per branch: each branch has its own issuer, clients, and settings.
@@ -176,7 +176,7 @@ Report any step you could not run.
 ## Do NOT
 
 - Do not move to self-managed Better Auth or the Better Auth MCP plugin for this. Managed supports it.
-- Do not confuse this with `neon neon-auth oauth-provider` (social login) or Generic OAuth.
+- Do not confuse this with `neon neon-auth oauth-provider` (`signIn.social` providers) or Generic OAuth.
 - Do not call `auth.oauth.resume()`, `getConsentRequest()`, or any resume helper. Use `oauth2.continue`, `oauth2.publicClient`, and `oauth2.consent`.
 - Do not put client secrets, or Neon API keys, in browser or mobile code.
 - Do not skip `iss` and `aud` checks, or trust a user id from tool input instead of `sub`.

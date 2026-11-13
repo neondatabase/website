@@ -20,7 +20,7 @@
       "type": "skill-md",
       "description": "Add authentication to a new app. Use for \"add auth\", \"add login\", Neon Auth (Managed Better Auth), identity routing, sign-up, sign-in, password reset, email OTP, magic links, organizations, phone OTP, OAuth, OAuth server for MCP or third-party OAuth clients, passkeys, MFA, trusted domains, invalid domain, and @neon/auth. No existing identity: default to Managed Better Auth. Keep working Better Auth, Clerk, Supabase Auth, or another IdP. User asked to migrate from Supabase Auth: Managed Better Auth. A required plugin outside Managed support: self-managed Better Auth on a Neon Function or the existing app host. Also use for auth APIs in @neon/neon-js.",
       "url": "/.well-known/agent-skills/neon-auth/SKILL.md",
-      "digest": "sha256:e5239688cf696e976f0d372728cccfadd1fa221a5236160f87612c6eae2ff8e3"
+      "digest": "sha256:945553130c7baa517ac906349dacac6987f70dd2ccce3ce3c84c9c08b0f5db50"
     },
     {
       "name": "neon-postgres-agent-platforms",
