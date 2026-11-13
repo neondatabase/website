@@ -8,7 +8,7 @@ summary: >-
   from createServerFn, and testing migrations and previews on database branches.
 enableTableOfContents: true
 noindex: true
-updatedOn: '2026-11-13T06:47:36.661Z'
+updatedOn: '2026-11-13T07:00:38.286Z'
 ---
 
 This page connects a [TanStack Start](https://tanstack.com/start) app to Lakebase Postgres on Neon with [Drizzle ORM](https://orm.drizzle.team). All database access stays in [server functions](https://tanstack.com/start/latest/docs/framework/react/guide/server-functions), because TanStack Start route loaders also run in the browser.
@@ -127,6 +127,17 @@ export const Route = createFileRoute('/_authed/todos')({
   loader: () => listTodos(),
   component: TodosPage,
 });
+
+function TodosPage() {
+  const todos = Route.useLoaderData();
+  return (
+    <ul>
+      {todos.map((todo) => (
+        <li key={todo.id}>{todo.title}</li>
+      ))}
+    </ul>
+  );
+}
 ```
 
 - Scope every query by the session user, including the `WHERE` clause of updates and deletes. See [Neon Auth with TanStack Start and Router](/docs/tanstack/auth) for `requireUser`.

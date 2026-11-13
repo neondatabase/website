@@ -9,7 +9,7 @@ summary: >-
   common mistakes.
 enableTableOfContents: true
 noindex: true
-updatedOn: '2026-11-13T06:34:29.829Z'
+updatedOn: '2026-11-13T07:00:38.286Z'
 ---
 
 <FeatureBetaProps feature_name="Realtime" />
@@ -57,6 +57,14 @@ echo 'VITE_NEON_REALTIME_URL=$NEON_REALTIME_URL' >> .env.local
 Never give `NEON_REALTIME_SECRET` a `VITE_` prefix. The browser only sees the Realtime URL and sealed queries.
 
 ## Define and seal the query
+
+The server reads initial rows and writes through a `pg` pool on the pooled connection string (`npm install pg`). See [Serverless driver vs node-postgres for TanStack Start](/docs/tanstack/drivers) for other deploy targets:
+
+```ts filename="src/db.server.ts"
+import { Pool } from 'pg';
+
+export const pool = new Pool({ connectionString: process.env.DATABASE_URL });
+```
 
 Define each live query once in server code. Run it for the SSR rows and [seal](/docs/realtime/guides/queries#sealing-queries) it for the browser, so both return the same rows:
 
