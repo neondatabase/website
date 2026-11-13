@@ -307,8 +307,7 @@ A few rules to know up front:
 
 - **No em dashes (—):** Don't use em dashes anywhere in documentation. This is an absolute ban, not a guideline about overuse. Restructure the sentence instead, using a comma, a colon, parentheses, or a new sentence.
 - **Link instead of repeating text:** Avoid duplicating information from other pages. Link to the source and explain why it matters in context.
-- **Fake user data only:** Use `@example.com` emails, `example_username` or names like Zhang Kai, Alex Lopez, or Dana Smith, `AbC123dEf` for passwords, and `dbname` for database names.
-- **Connection strings:** Use `postgresql://` (not `postgres://`) with the format `postgresql://[user]:[password]@[neon_hostname]/[dbname]`.
+- **Fake user data and connection strings:** Use only fake example data (never real user data), and follow the standard connection string format. See the [Style guide](/docs/community/style-guide) for the exact values and format.
 
 See the [Style guide](/docs/community/style-guide) for the full set of rules and examples.
 
