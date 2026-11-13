@@ -141,9 +141,10 @@ Turn on **auto-reload** to keep your balance from running out. When your balance
 drops below a threshold you set, Neon buys a fixed amount of credits with the
 payment card on file, with no action needed from you.
 
-Auto-reload is available on paid plans only. It isn't available on the Free
-plan yet. Only organization admins can set it up, and the organization must be
-billed directly by payment card.
+Auto-reload is available on every plan, including Free. Only organization
+admins can set it up, and the organization must be billed directly by payment
+card. On the Free plan, you also need to buy credits manually at least once
+before you can turn on auto-reload.
 
 To set up auto-reload:
 
@@ -168,8 +169,7 @@ auto-reload, Neon tops it up right away.
 
 Neon turns auto-reload off when it can't complete a top-up, for example when your
 card is declined or a top-up keeps failing. It also turns off if your
-organization no longer qualifies, such as after a downgrade to Free or removing
-your payment card. When this happens, an alert on the **AI gateway credits** card
+organization no longer qualifies, such as after removing your payment card. When this happens, an alert on the **AI gateway credits** card
 and in the **Auto-reload** dialog explains why. To resume, fix the issue and turn
 auto-reload back on.
 
@@ -182,8 +182,8 @@ The AI Gateway is available in AWS US East (Ohio), US East (N. Virginia), Europe
 ## If you downgrade to Free
 
 If your organization moves to the Free plan, your AI Gateway credits **remain on
-your account** and you can keep using them. Auto-reload turns off when you
-downgrade.
+your account** and you can keep using them. Auto-reload stays on as long as
+you keep a payment card on file.
 
 ## Related
 
@@ -210,7 +210,7 @@ Yes, by a small amount. Usage can exceed your remaining balance before it's dete
 </FaqItem>
 
 <FaqItem question="Can I top up credits automatically?">
-Yes, on paid plans. Auto-reload isn't available on the Free plan yet. Organization admins can turn it on from the **AI gateway credits** card on the **Billing** page. When your balance drops below the threshold you set, Neon buys the amount you chose with the payment card on file. See [Automatic top-up](#automatic-top-up).
+Yes, on any plan. On the Free plan, buy credits manually at least once first. Organization admins can turn it on from the **AI gateway credits** card on the **Billing** page. When your balance drops below the threshold you set, Neon buys the amount you chose with the payment card on file. See [Automatic top-up](#automatic-top-up).
 </FaqItem>
 
 <FaqItem question="Do credits expire?">
@@ -218,7 +218,7 @@ Credits are valid for 12 months from the date of purchase.
 </FaqItem>
 
 <FaqItem question="What happens to my credits if I downgrade to Free?">
-Your credits stay on your account, and you can keep using AI Gateway on the Free plan. Auto-reload turns off when you downgrade.
+Your credits stay on your account, and you can keep using AI Gateway on the Free plan. Auto-reload stays on as long as you keep a payment card on file.
 </FaqItem>
 
 <FaqItem question="What are the default usage limits?">
