@@ -716,7 +716,7 @@
                 - title: Neon Twin
                   slug: guides/neon-twin-intro
                   items:
-                    - title: pg_dump / pg_restore — Full Twin
+                    - title: Full Twin
                       slug: guides/neon-twin-full-pg-dump-restore
                     - title: Partial Twin
                       slug: guides/neon-twin-partial-pg-dump-restore
