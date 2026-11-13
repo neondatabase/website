@@ -105,6 +105,8 @@ The request host does not match the expected format.
 
 - The host does not end with a trusted suffix (`.neon.tech` in production).
 
+A mistyped host usually returns `404` with an empty body before the request reaches the gateway, so you might see that instead of this error.
+
 **Fix:** Verify that you are using the correct AI Gateway host from the Neon Console or API. The host format for production is `<branch-id>-api.ai.<cell>.<region>.aws.neon.tech`. Do not construct the host manually.
 
 ---
