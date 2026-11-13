@@ -198,7 +198,7 @@ You can enable either or both options based on your monitoring needs.
    - No authentication required for local docker setup
 
    **For Grafana Cloud**:
-   - Use **Basic** authentication with Base64 encoded `<opentelemetry-instance-id>:<grafana-cloud-token>`
+   - Use **Basic** authentication. Enter your OpenTelemetry instance ID as the username and your Grafana Cloud token as the password. Neon encodes them, so don't Base64-encode them yourself.
    - Get your instance ID and API token from the Grafana Cloud Portal by clicking on the **OpenTelemetry** card
 
    **For New Relic**:
