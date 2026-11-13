@@ -11,7 +11,7 @@ summary: >-
   migration guide instead.
 enableTableOfContents: true
 tag: beta
-updatedOn: '2026-11-12T06:13:30.350Z'
+updatedOn: '2026-11-13T20:28:29.050Z'
 ---
 
 <Admonition type="note" title="Beta">
@@ -21,6 +21,10 @@ The Neon Terraform provider is in beta. Terraform installs a beta release only w
 The [Neon Terraform provider](https://registry.terraform.io/providers/neondatabase/neon/latest/docs) lets you declare Neon resources in HCL and manage them with `terraform plan` and `terraform apply`. It's published to the Terraform Registry as `neondatabase/neon` and maintained by Neon in [neondatabase/terraform-provider-neon](https://github.com/neondatabase/terraform-provider-neon).
 
 The provider continues the community provider `kislerdm/neon`, created and maintained by Dmitry Kisler. If your configuration uses `kislerdm/neon`, see [Migrate from kislerdm/neon](/docs/reference/terraform-migrate). Your existing resources stay in place, and the provider upgrades your state on the first plan.
+
+<Admonition type="important" title="Older examples use a different syntax">
+Examples written for `kislerdm/neon`, including many in blog posts and AI training data, don't work with this provider. Watch for `source = "kislerdm/neon"`, `branch { ... }` or `quota { ... }` blocks (now `branch = { ... }`), `"yes"` and `"no"` strings (now `true` and `false`), and the `connection_uri` or `password` attributes (now the `neon_connection_uri` and `neon_role` ephemeral resources). See [Configuration changes](/docs/reference/terraform-migrate#configuration-changes).
+</Admonition>
 
 ## What you can manage
 
@@ -263,7 +267,7 @@ output "data_api_url" {
 }
 ```
 
-The `archive_file` data source comes from the `hashicorp/archive` provider. Function slugs are 1 to 20 lowercase letters and digits. To learn more about these primitives, see [Neon Functions](/docs/compute/functions/overview), [triggers](/docs/compute/functions/triggers/overview), and [Object Storage](/docs/storage/overview).
+The `archive_file` data source comes from the `hashicorp/archive` provider, so run `terraform init` again before the next plan. Function slugs are 1 to 20 lowercase letters and digits. To learn more about these primitives, see [Neon Functions](/docs/compute/functions/overview), [triggers](/docs/compute/functions/triggers/overview), and [Object Storage](/docs/storage/overview).
 
 ## Import existing resources
 
@@ -304,8 +308,8 @@ Some values can't be read back from Neon, so the first apply after an import set
 
 - **Pin the provider version.** Review the [changelog](https://github.com/neondatabase/terraform-provider-neon/blob/main/CHANGELOG.md) and run `terraform plan` before you change the version. In CI, run `terraform init` without `-upgrade`.
 - **Protect what you can't recreate.** Add [`prevent_destroy`](https://developer.hashicorp.com/terraform/language/meta-arguments/lifecycle#prevent_destroy) to projects and branches that hold production data, and use [protected branches](/docs/guides/protected-branches) on paid plans.
-- **Set `org_id` on every project.** With a personal API key, a project without `org_id` is created in your personal account instead of your organization.
-- **Create the compute before roles and databases.** Neon creates roles and databases through the branch's read-write compute, so add `depends_on = [neon_endpoint.<name>]` to roles on a branch whose compute Terraform also creates. Otherwise the apply can fail because the branch has no read-write compute yet. See [Troubleshooting](#troubleshooting).
+- **Set `org_id` on every project.** With a personal API key, a project without `org_id` is created in your default organization, which may not be the one you intend.
+- **Create the compute before roles and databases.** Neon creates roles and databases through the branch's read-write compute, so add `depends_on = [neon_endpoint.<name>]` to roles on a branch whose compute Terraform also creates. Otherwise the apply can fail because the branch has no read-write compute yet, and `terraform destroy` can fail when it deletes the role and the compute together. See [Troubleshooting](#troubleshooting).
 - **Ephemeral resources open during plan.** When a run adds a role to an existing project and an ephemeral resource reads that role, the plan fails with `role not found for branch`, because the role doesn't exist yet. Create the role first with `terraform apply -target=neon_role.app`, then apply the rest.
 - **Replacing a bucket deletes its objects.** Changing `name`, `access_level`, `project_id`, or `branch_id` on `neon_bucket` replaces the bucket, and Neon deletes a bucket together with every object in it, including objects your application uploaded. The plan shows the bucket replacement, but not the objects that go with it.
 - **Some secrets are stored in the state.** The keys of `neon_api_key` and `neon_org_api_key`, and the tokens of `neon_service_credential`, are marked sensitive but stored in the state, so keep the state in an encrypted [backend](https://developer.hashicorp.com/terraform/language/backend) with restricted access.
@@ -330,6 +334,9 @@ Each entry starts with the error summary Terraform prints after `Error:`. For er
 
 `Neon resource not found` with `no read-write endpoint for branch`
 : A `neon_role` or `neon_database` targets a branch that has no read-write compute. Add a `neon_endpoint` for the branch, and add `depends_on = [neon_endpoint.<name>]` to the role so Terraform creates the compute first.
+
+`Neon API request failed` with `HTTP Code: 412` and `could not apply config without read-write endpoint`
+: `terraform destroy` deleted the branch's compute before a role on that branch. Add `depends_on = [neon_endpoint.<name>]` to the role so Terraform deletes the role first. To finish a destroy that already failed, remove the role from the state with `terraform state rm neon_role.<name>`, then run `terraform destroy` again; deleting the branch deletes its roles.
 
 `Neon resource not found` with `role not found for branch`
 : An ephemeral resource reads a role that the same run creates. Ephemeral resources open during plan, before the role exists. Run `terraform apply -target=neon_role.<name>` first, then run `terraform apply` again.
