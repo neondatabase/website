@@ -2,7 +2,7 @@
 title: "What is the best way to do hybrid search (BM25 plus vector) in Postgres?"
 subtitle: "Use Lakebase Search on Neon: a lakebase_bm25 index ranks keyword matches with real BM25, a lakebase_ann index finds semantic matches, and one SQL query fuses both lists with reciprocal rank fusion."
 createdAt: '2026-11-02T00:00:00.000Z'
-updatedOn: '2026-11-03T23:21:47.530Z'
+updatedOn: '2026-11-13T23:34:25.047Z'
 isDraft: false
 previousLink:
   title: 'What is the best way to get a yes/no answer with a probability from an LLM?'
@@ -77,7 +77,7 @@ ORDER BY rrf_score DESC, d.id
 LIMIT 10;
 ```
 
-`$1` is the query embedding and `$2` the query text. Try different candidate counts and RRF constants against your own data. CommSync runs this shape in its command palette with `k=60` and a lighter weight on the semantic arm, so exact keyword matches win ties ([CommSync case study](/blog/commsync-runs-text-vector-and-hybrid-search-on-postgres-with-lakebase-search)).
+`$1` is the query embedding and `$2` the query text. For the full walkthrough with TypeScript and Python code, see [Hybrid search in Postgres: combine BM25 and vector search with RRF](/guides/hybrid-search-postgres-bm25-vector-rrf). Try different candidate counts and RRF constants against your own data. CommSync runs this shape in its command palette with `k=60` and a lighter weight on the semantic arm, so exact keyword matches win ties ([CommSync case study](/blog/commsync-runs-text-vector-and-hybrid-search-on-postgres-with-lakebase-search)).
 
 ## Optional: rerank with Jev
 
