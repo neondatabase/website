@@ -15,6 +15,10 @@ redirectFrom:
   - /docs/guides/deno
   - /docs/guides/grafbase
   - /docs/guides/wundergraph
+  - /docs/guides/draxlr
+  - /docs/integrations/draxlr
+  - /docs/guides/logical-replication-decodable
+  - /docs/guides/logical-replication-stacksync
 updatedOn: '2026-10-21T11:04:20.383Z'
 ---
 
@@ -116,8 +120,6 @@ updatedOn: '2026-10-21T11:04:20.383Z'
 
 <a href="/docs/guides/cloudflare-hyperdrive" title="Cloudflare Hyperdrive" description="Use Neon with Cloudflare Hyperdrive" icon="cloudflare"></a>
 
-<a href="/docs/guides/draxlr" title="Draxlr" description="Connect Draxlr to Neon" icon="draxlr"></a>
-
 <a href="/docs/guides/exograph" title="Exograph" description="Use Exograph with Neon" icon="exograph"></a>
 
 <a href="/docs/guides/hasura" title="Hasura" description="Connect from Hasura Cloud to Neon" icon="hasura"></a>
@@ -138,8 +140,6 @@ updatedOn: '2026-10-21T11:04:20.383Z'
 
 <a href="/docs/guides/logical-replication-databricks" title="Databricks" description="Replicate data from Neon to Databricks with Lakeflow Connect" icon="databricks"></a>
 
-<a href="/docs/guides/logical-replication-decodable" title="Decodable" description="Replicate data from Neon with Decodable" icon="decodable"></a>
-
 <a href="/docs/guides/logical-replication-estuary-flow" title="Estuary" description="Replicate data from Neon with Estuary" icon="estuary"></a>
 
 <a href="/docs/guides/logical-replication-fivetran" title="Fivetran" description="Replicate data from Neon with Fivetran" icon="fivetran"></a>
@@ -155,8 +155,6 @@ updatedOn: '2026-10-21T11:04:20.383Z'
 <a href="/docs/guides/logical-replication-postgres" title="Neon to Postgres" description="Replicate data from Neon to Postgres" icon="postgresql"></a>
 
 <a href="/docs/guides/logical-replication-airbyte-snowflake" title="Snowflake" description="Replicate data from Neon to Snowflake with Airbyte" icon="snowflake"></a>
-
-<a href="/docs/guides/logical-replication-stacksync" title="Stacksync" description="Replicate data from Neon with Stacksync" icon="stacksync"></a>
 
 </TechCards>
 

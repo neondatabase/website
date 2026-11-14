@@ -1598,8 +1598,6 @@
                   slug: guides/askyourdatabase
                 - title: Cloudflare Hyperdrive
                   slug: guides/cloudflare-hyperdrive
-                - title: Draxlr
-                  slug: guides/draxlr
                 - title: Exograph
                   slug: guides/exograph
                 - title: Hasura
@@ -1616,8 +1614,6 @@
                   slug: guides/logical-replication-kafka-confluent
                 - title: Databricks
                   slug: guides/logical-replication-databricks
-                - title: Decodable
-                  slug: guides/logical-replication-decodable
                 - title: Estuary
                   slug: guides/logical-replication-estuary-flow
                 - title: Fivetran
@@ -1634,8 +1630,6 @@
                   slug: guides/logical-replication-postgres
                 - title: Snowflake
                   slug: guides/logical-replication-airbyte-snowflake
-                - title: Stacksync
-                  slug: guides/logical-replication-stacksync
             - title: Replicate to Neon
               items:
                 - title: AlloyDB
