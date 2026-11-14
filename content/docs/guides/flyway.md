@@ -111,12 +111,12 @@ flyway migrate
 If the command was successful, you’ll see output similar to the following:
 
 ```bash
-Database: jdbc:sqlite:FlywayQuickStartCLI.db (SQLite 3.41)
-Successfully validated 1 migration (execution time 00:00.008s)
-Creating Schema History table: "PUBLIC"."flyway_schema_history"
-Current version of schema "PUBLIC": << Empty Schema >>
-Migrating schema "PUBLIC" to version 1 - Create person table
-Successfully applied 1 migration to schema "PUBLIC" (execution time 00:00.033s)
+Database: jdbc:postgresql://ep-cool-darkness-123456.us-east-2.aws.neon.tech/neondb (PostgreSQL 18.7)
+Successfully validated 1 migration (execution time 00:00.330s)
+Creating Schema History table "public"."flyway_schema_history" ...
+Current version of schema "public": << Empty Schema >>
+Migrating schema "public" to version "1 - Create person table"
+Successfully applied 1 migration to schema "public", now at version v1 (execution time 00:00.745s)
 ```
 
 To verify that the `person` table was created, you can view it on the **Tables** page in the Neon Console. Select **Postgres database** > **Tables** from the sidebar and select your database.
@@ -140,12 +140,11 @@ flyway migrate
 If the command was successful, you’ll see output similar to the following:
 
 ```bash
-Database: jdbc:postgresql://ep-red-credit-85617375.us-east-2.aws.neon.tech/neondb (PostgreSQL 15.4)
-Successfully validated 2 migrations (execution time 00:00.225s)
+Database: jdbc:postgresql://ep-cool-darkness-123456.us-east-2.aws.neon.tech/neondb (PostgreSQL 18.7)
+Successfully validated 2 migrations (execution time 00:00.425s)
 Current version of schema "public": 1
 Migrating schema "public" to version "2 - Add people"
-Successfully applied 1 migration to schema "public", now at version v2 (execution time 00:00.388s)
-A Flyway report has been generated here: /home/alex/flyway-x.y.z/sql/report.html
+Successfully applied 1 migration to schema "public", now at version v2 (execution time 00:00.960s)
 ```
 
 You can verify that the data was added by viewing the table on the **Tables** page in the Neon Console. Select **Postgres database** > **Tables** from the sidebar and select your database.
@@ -156,15 +155,14 @@ When you run the `flyway migrate` command, Flyway registers the schema changes i
 
 ```bash
 flyway info
-Database: jdbc:postgresql://ep-red-credit-85617375.us-east-2.aws.neon.tech/neondb (PostgreSQL 15.4)
+Database: jdbc:postgresql://ep-cool-darkness-123456.us-east-2.aws.neon.tech/neondb (PostgreSQL 18.7)
 Schema version: 2
 +-----------+---------+---------------------+------+---------------------+---------+----------+
 | Category  | Version | Description         | Type | Installed On        | State   | Undoable |
 +-----------+---------+---------------------+------+---------------------+---------+----------+
-| Versioned | 1       | Create person table | SQL  | 2023-10-22 19:00:39 | Success | No       |
-| Versioned | 2       | Add people          | SQL  | 2023-10-22 19:04:42 | Success | No       |
+| Versioned | 1       | Create person table | SQL  | 2026-11-14 16:23:38 | Success | No       |
+| Versioned | 2       | Add people          | SQL  | 2026-11-14 16:24:00 | Success | No       |
 +-----------+---------+---------------------+------+---------------------+---------+----------+
-A Flyway report has been generated here: /home/alex/flyway-x.y.z/sql/report.html
 ```
 
 You can also view the table on the **Tables** page in the Neon Console. Select **Postgres database** > **Tables** from the sidebar and select your database.
@@ -176,5 +174,5 @@ Learn how you can use Flyway with multiple database environments. See [Use Flywa
 ## References
 
 - [Flyway documentation](https://documentation.red-gate.com/fd/flyway-documentation-138346877.html)
-- [Flyway command-line tool](https://documentation.red-gate.com/fd/command-line-184127404.html)
+- [Flyway command-line tool](https://documentation.red-gate.com/fd/command-line-277579359.html)
 - [Flyway command-line quickstart](https://documentation.red-gate.com/fd/quickstart-command-line-184127576.html)
