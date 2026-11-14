@@ -3,6 +3,7 @@ import { neon } from '@neondatabase/serverless';
 async function queryStats(query) {
   const url = process.env.STATS_DATABASE_URL;
   if (!url) {
+    // Only Production requires stats
     if (process.env.VERCEL_ENV === 'production') {
       throw new Error('STATS_DATABASE_URL is not set');
     }

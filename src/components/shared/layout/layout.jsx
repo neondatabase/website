@@ -35,6 +35,7 @@ const Layout = ({
       Skip to main content
     </a>
     {!isClient && <Topbar />}
+    {/* No pt-safe: it misaligns the header and mobile menu (#4208, #6679) */}
     <div
       className={cn(
         'relative flex flex-col',
