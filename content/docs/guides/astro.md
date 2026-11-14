@@ -12,7 +12,7 @@ enableTableOfContents: true
 updatedOn: '2026-10-09T15:55:57.334Z'
 ---
 
-<AgentPrompt title="Set up with your agent" src="/prompts/astro-serverless-prompt.md" buttonText="Copy prompt" />
+<AgentPrompt title="Connect Astro with your agent" src="/prompts/astro-serverless-prompt.md" buttonText="Copy prompt" />
 
 Astro is a web framework for content sites, web applications, and server APIs. This guide describes how to create a database on Neon and query it from an Astro site or application at request time.
 
