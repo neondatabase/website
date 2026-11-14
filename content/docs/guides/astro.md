@@ -12,8 +12,7 @@ enableTableOfContents: true
 updatedOn: '2026-10-09T15:55:57.334Z'
 ---
 
-<CopyPrompt src="/prompts/astro-serverless-prompt.md" 
-description="Pre-built prompt for connecting Astro to Neon using the Neon serverless driver"/>
+<AgentPrompt title="Set up with your agent" src="/prompts/astro-serverless-prompt.md" buttonText="Copy prompt" />
 
 Astro is a web framework for content sites, web applications, and server APIs. This guide describes how to create a database on Neon and query it from an Astro site or application at request time.
 
@@ -95,6 +94,8 @@ Add a `.env` file to your project directory and add your Neon connection string 
 DATABASE_URL="postgresql://[user]:[password]@[neon_hostname]/[dbname]?sslmode=require&channel_binding=require"
 ```
 
+Astro loads `.env` automatically, so you don't need `dotenv`. Don't hardcode the connection string in your code.
+
 If you use node-postgres, `pg` 8.23 and later print a `SECURITY WARNING` for `sslmode=require`. Change it to `sslmode=verify-full` to keep the same behavior without the warning.
 
 ## Create a database utility
@@ -130,6 +131,8 @@ export const sql = neon(DATABASE_URL);
 ```
 
 </CodeTabs>
+
+Import this utility only from server code, such as page frontmatter and API routes. Astro doesn't allow `astro:env/server` imports in client-side scripts, which keeps your connection string out of the browser.
 
 ## Configure the Postgres client
 
