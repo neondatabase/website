@@ -4,13 +4,13 @@ subtitle: Set up a database on Neon and run migrations for your Laravel project
 summary: >-
   Run Laravel schema migrations on Lakebase Postgres using the Eloquent ORM and
   `php artisan migrate`. Covers first-time setup and adding columns via new
-  migration files. Neon requires a direct (non-pooled) connection string for
-  migrations; pooled PgBouncer connections can cause migration errors.
+  migration files. Use a direct (non-pooled) connection string for migrations,
+  because pooled PgBouncer connections can cause migration errors.
 enableTableOfContents: true
 updatedOn: '2026-10-28T11:11:18.780Z'
 ---
 
-[Laravel](https://laravel.com/) is a popular PHP web application framework that provides an expressive and elegant syntax for building web applications. It includes an ORM (Object-Relational Mapping) called Eloquent, which allows you to interact with databases using a fluent API. Laravel also provides a powerful migration system to manage database schema changes over time.
+[Laravel](https://laravel.com/) is a PHP web application framework. It includes an ORM (Object-Relational Mapping) called Eloquent, which lets you interact with databases using a fluent API. Laravel also includes a migration system to manage database schema changes over time.
 
 This guide demonstrates how to use Laravel with the Lakebase Postgres database. We'll create a simple Laravel application and walk through the process of setting up the database, defining models, and generating and running migrations to manage schema changes.
 
@@ -19,7 +19,7 @@ This guide demonstrates how to use Laravel with the Lakebase Postgres database. 
 To follow along with this guide, you will need:
 
 - A Neon account. If you do not have one, sign up at [Neon](https://neon.tech). Your Neon project comes with a ready-to-use Postgres database named `neondb`. We'll use this database in the following examples.
-- [PHP](https://www.php.net/) installed on your local machine. This guide uses PHP 8.1, but you can use any recent version compatible with Laravel.
+- [PHP](https://www.php.net/) 8.3 or later installed on your local machine. Laravel 13 requires PHP 8.3 or later.
 - [Composer](https://getcomposer.org/) installed on your local machine for managing PHP dependencies.
 
 ## Setting up your Neon database
@@ -31,17 +31,17 @@ To follow along with this guide, you will need:
 
 ### Retrieve your Neon database connection string
 
-Find your database connection string by clicking the **Connect** button in the Console nav to open the **Connect to your branch** modal. It should look similar to this:
+Click the **Connect** button in the Console nav to open the **Connect to your branch** modal. The **Connection pooling** toggle is on by default, which shows a pooled connection string. Turn the toggle off to show the direct connection string. It should look similar to this:
 
 ```bash
 postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require&channel_binding=require
 ```
 
-<Admonition type="important" title="Always use a direction connection for migrations">
-Neon supports both direct and pooled database connection strings, which you can find by clicking the **Connect** button in the Console nav to open the **Connect to your branch** modal. A pooled connection string connects your application to the database via a PgBouncer connection pool, allowing for a higher number of concurrent connections. However, using a pooled connection string for migrations can be prone to errors. For this reason, we recommend using a direct (non-pooled) connection when performing migrations. For more information about direct and pooled connections, see [Connection pooling](/docs/connect/connection-pooling).
+<Admonition type="important" title="Use a direct connection for migrations">
+Neon supports both direct and pooled connection strings. A pooled connection string routes your connections through a PgBouncer connection pool, which allows more concurrent connections. Migrations can run into errors through a connection pool, so this guide uses the direct (non-pooled) connection string for all steps. For more information, see [Connection pooling](/docs/connect/connection-pooling).
 </Admonition>
 
-Keep your connection string handy for later use.
+Keep your direct connection string handy for later use.
 
 ## Setting up the Laravel project
 
@@ -55,17 +55,16 @@ composer create-project --prefer-dist laravel/laravel guide-neon-laravel
 
 This command creates a new Laravel project named `guide-neon-laravel` in the current directory.
 
-### Set up the Database configuration
+### Set up the database configuration
 
 Open the `.env` file in the project root directory and update the following database connection variables:
 
 ```bash
 DB_CONNECTION=pgsql
-DB_PORT=5432
-DATABASE_URL=NEON_POSTGRES_CONNECTION_STRING
+DB_URL=NEON_POSTGRES_CONNECTION_STRING
 ```
 
-Replace `NEON_POSTGRES_CONNECTION_STRING` with the connection string you retrieved from the Neon Console earlier. The `DB_CONNECTION` should be set to `pgsql` to indicate that we are using a Postgres database.
+Replace `NEON_POSTGRES_CONNECTION_STRING` with the direct connection string you retrieved from the Neon Console earlier. The `DB_CONNECTION` should be set to `pgsql` to indicate that we are using a Postgres database. Laravel reads the connection string from `DB_URL`. The `.env` file that `composer create-project` generates sets `DB_CONNECTION=sqlite`, so change that value too.
 
 ## Defining data models and running migrations
 
@@ -125,7 +124,7 @@ These commands generate empty migration files in the `database/migrations` direc
 Open the `create_authors_table` migration file and update the `up` method to define the table schema:
 
 ```php
-public function up()
+public function up(): void
 {
     Schema::create('authors', function (Blueprint $table) {
         $table->id();
@@ -139,7 +138,7 @@ public function up()
 Similarly, open the `create_books_table` migration file and update the `up` method:
 
 ```php
-public function up()
+public function up(): void
 {
     Schema::create('books', function (Blueprint $table) {
         $table->id();
@@ -325,10 +324,10 @@ This command generates a new migration file in the `database/migrations` directo
 Open the generated migration file and update the `up` method to add the new `country` column:
 
 ```php
-public function up()
+public function up(): void
 {
     Schema::table('authors', function (Blueprint $table) {
-        $table->string('country')->nullable()->after('bio');
+        $table->string('country')->nullable();
     });
 }
 ```
@@ -351,7 +350,7 @@ Navigate to the url `http://localhost:8000/authors` to view the list of authors.
 
 ## Conclusion
 
-In this guide, we demonstrated how to set up a Laravel project with `Neon` Postgres, define database models using Eloquent, generate migrations, and run them. Laravel's Eloquent ORM and migration system make it easy to interact with the database and manage schema evolution over time.
+In this guide, you set up a Laravel project with a Neon database, defined models with Eloquent, generated migrations, and ran them. Each schema change lives in its own migration file, so the change history stays in your project.
 
 ## Source code
 
