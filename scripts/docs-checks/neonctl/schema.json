@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "neonctlVersion": "9.4.0",
+  "neonctlVersion": "9.5.0",
   "binaries": [
     "neonctl",
     "neon"
@@ -3909,11 +3909,11 @@
                 },
                 "oauth-client-id": {
                   "type": "string",
-                  "describe": "OAuth client ID from your provider app. For apple, the Services ID. Omit to use Neon's shared OAuth app, where one exists; microsoft and apple always need your own credentials."
+                  "describe": "OAuth client ID from your provider app. For apple, the Services ID. Omit to use Neon's shared OAuth app, where one exists; microsoft, apple and discord always need your own credentials."
                 },
                 "oauth-client-secret": {
                   "type": "string",
-                  "describe": "OAuth client secret from your provider app. Omit to use Neon's shared OAuth app, where one exists; microsoft and apple always need your own credentials."
+                  "describe": "OAuth client secret from your provider app. Omit to use Neon's shared OAuth app, where one exists; microsoft, apple and discord always need your own credentials."
                 },
                 "oauth-client-secret-file": {
                   "type": "string",
@@ -3921,14 +3921,15 @@
                 },
                 "provider-id": {
                   "type": "string",
-                  "describe": "OAuth provider ID. Supported values: google, github, vercel, microsoft, apple",
+                  "describe": "OAuth provider ID. Supported values: google, github, vercel, microsoft, apple, discord",
                   "required": true,
                   "choices": [
                     "google",
                     "github",
                     "vercel",
                     "microsoft",
-                    "apple"
+                    "apple",
+                    "discord"
                   ]
                 }
               },
@@ -3942,14 +3943,15 @@
               "options": {
                 "provider-id": {
                   "type": "string",
-                  "describe": "OAuth provider ID. Supported values: google, github, vercel, microsoft, apple",
+                  "describe": "OAuth provider ID. Supported values: google, github, vercel, microsoft, apple, discord",
                   "required": true,
                   "choices": [
                     "google",
                     "github",
                     "vercel",
                     "microsoft",
-                    "apple"
+                    "apple",
+                    "discord"
                   ]
                 }
               },
@@ -3983,11 +3985,11 @@
                 },
                 "oauth-client-id": {
                   "type": "string",
-                  "describe": "OAuth client ID from your provider app. For apple, the Services ID. Omit to use Neon's shared OAuth app, where one exists; microsoft and apple always need your own credentials."
+                  "describe": "OAuth client ID from your provider app. For apple, the Services ID. Omit to use Neon's shared OAuth app, where one exists; microsoft, apple and discord always need your own credentials."
                 },
                 "oauth-client-secret": {
                   "type": "string",
-                  "describe": "OAuth client secret from your provider app. Omit to use Neon's shared OAuth app, where one exists; microsoft and apple always need your own credentials."
+                  "describe": "OAuth client secret from your provider app. Omit to use Neon's shared OAuth app, where one exists; microsoft, apple and discord always need your own credentials."
                 },
                 "oauth-client-secret-file": {
                   "type": "string",
@@ -3995,14 +3997,15 @@
                 },
                 "provider-id": {
                   "type": "string",
-                  "describe": "OAuth provider ID. Supported values: google, github, vercel, microsoft, apple",
+                  "describe": "OAuth provider ID. Supported values: google, github, vercel, microsoft, apple, discord",
                   "required": true,
                   "choices": [
                     "google",
                     "github",
                     "vercel",
                     "microsoft",
-                    "apple"
+                    "apple",
+                    "discord"
                   ]
                 }
               },
@@ -4010,7 +4013,7 @@
               "describe": "Update an OAuth provider"
             }
           },
-          "describe": "Manage social login providers (google, github, vercel, microsoft, apple)",
+          "describe": "Manage social login providers (google, github, vercel, microsoft, apple, discord)",
           "usage": "$0 neon-auth oauth-provider <sub-command> [options]"
         },
         "plugins": {

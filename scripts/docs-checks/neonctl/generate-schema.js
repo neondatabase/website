@@ -73,6 +73,47 @@ function arrayLiteralStrings(node, consts) {
   return out;
 }
 
+// An integer literal argument, including a negative one (`-1` is a prefix
+// unary expression, not a numeric literal, in the TypeScript AST).
+function integerLiteralValue(node) {
+  const e = unwrapExpression(node);
+  if (!e) return undefined;
+  if (ts.isNumericLiteral(e)) return Number(e.text);
+  if (
+    ts.isPrefixUnaryExpression(e) &&
+    e.operator === ts.SyntaxKind.MinusToken &&
+    ts.isNumericLiteral(e.operand)
+  ) {
+    return -Number(e.operand.text);
+  }
+  return undefined;
+}
+
+// A string array an expression evaluates to: a module-level const array, or
+// `.slice(start, end)` of one (so `${NO_SHARED.slice(0, -1).join(", ")}`
+// resolves). Undefined if any step can't be resolved.
+function resolveStringArray(node, consts) {
+  const e = unwrapExpression(node);
+  if (!e) return undefined;
+  if (ts.isIdentifier(e)) {
+    return consts && consts.has(e.text)
+      ? arrayLiteralStrings(consts.get(e.text), consts)
+      : undefined;
+  }
+  if (
+    ts.isCallExpression(e) &&
+    ts.isPropertyAccessExpression(e.expression) &&
+    e.expression.name.text === 'slice'
+  ) {
+    const arr = resolveStringArray(e.expression.expression, consts);
+    if (!arr) return undefined;
+    const args = e.arguments.map(integerLiteralValue);
+    if (args.some((a) => a === undefined)) return undefined;
+    return arr.slice(...args);
+  }
+  return undefined;
+}
+
 // `Enum.Member` where `Enum` is a const object of string literals in
 // `consts`, e.g. `NeonAuthOauthProviderId.Google` from utils/api_enums.ts.
 function enumMemberString(node, consts) {
@@ -246,18 +287,28 @@ function resolveStringValue(expr, consts) {
     return undefined;
   }
   // `CONST_ARRAY.join(', ')` where CONST_ARRAY is a module-level string
-  // array (REGIONS, SUPPORTED_OAUTH_PROVIDERS).
+  // array (REGIONS, SUPPORTED_OAUTH_PROVIDERS), or a `.slice()` of one
+  // (`NO_SHARED.slice(0, -1).join(', ')`, neon_auth.ts at 9.5.0).
   if (
     ts.isCallExpression(e) &&
     ts.isPropertyAccessExpression(e.expression) &&
-    e.expression.name.text === 'join' &&
-    ts.isIdentifier(e.expression.expression) &&
-    consts &&
-    consts.has(e.expression.expression.text)
+    e.expression.name.text === 'join'
   ) {
-    const arr = arrayLiteralStrings(consts.get(e.expression.expression.text), consts);
+    const arr = resolveStringArray(e.expression.expression, consts);
     const sep = e.arguments.length ? stringLiteralValue(e.arguments[0]) : ',';
     if (arr && sep !== undefined) return arr.join(sep);
+    return undefined;
+  }
+  // `CONST_ARRAY.at(-1)`: one element, counting from the end for negatives.
+  if (
+    ts.isCallExpression(e) &&
+    ts.isPropertyAccessExpression(e.expression) &&
+    e.expression.name.text === 'at' &&
+    e.arguments.length === 1
+  ) {
+    const arr = resolveStringArray(e.expression.expression, consts);
+    const index = integerLiteralValue(e.arguments[0]);
+    if (arr && index !== undefined) return arr.at(index);
     return undefined;
   }
   // `getCliName()` resolves to the rendered binary name. The CLI defines it as
