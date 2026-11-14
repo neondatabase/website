@@ -8,6 +8,8 @@ import {
   OperationList,
 } from 'components/pages/functions/templates/template-blocks';
 import { renderReadme } from 'components/pages/functions/templates/template-readme';
+import WeeklyInstalls from 'components/pages/functions/templates/weekly-installs';
+import { weeklyInstallRowsPropType } from 'components/pages/functions/templates/weekly-installs/summary';
 import Container from 'components/shared/container';
 import CopyCommand from 'components/shared/copy-command';
 import Link from 'components/shared/link';
@@ -137,7 +139,7 @@ DetailRow.propTypes = {
   children: PropTypes.node.isRequired,
 };
 
-const TemplateSidebar = ({ template, installCommand }) => {
+const TemplateSidebar = ({ template, installCommand, installs }) => {
   const provider = registryProviderLabel(template) || 'Neon';
   const categories = registryTemplateCategories(template);
   const sourceUrl = registryTemplateSourceUrl(template);
@@ -154,6 +156,7 @@ const TemplateSidebar = ({ template, installCommand }) => {
       </div>
 
       <dl>
+        <WeeklyInstalls rows={installs} />
         <DetailRow label="Built by">
           <span className="flex items-center gap-3">
             <FunctionRegistryTemplateLogo template={template} eager variant="title" />
@@ -209,6 +212,7 @@ const TemplateSidebar = ({ template, installCommand }) => {
 
 TemplateSidebar.propTypes = {
   installCommand: PropTypes.string.isRequired,
+  installs: weeklyInstallRowsPropType,
   template: PropTypes.shape({
     id: PropTypes.string.isRequired,
     provider: PropTypes.string,
@@ -217,7 +221,13 @@ TemplateSidebar.propTypes = {
   }).isRequired,
 };
 
-const TemplateDetail = async ({ template, previous = null, next = null, readme = null }) => {
+const TemplateDetail = async ({
+  template,
+  previous = null,
+  next = null,
+  readme = null,
+  installs,
+}) => {
   const operations = template.operations ?? [];
   const environment = (template.environment ?? []).filter((item) => isInlineCodeSafe(item.name));
   const installCommand = `neon functions new ${template.id}`;
@@ -258,7 +268,7 @@ const TemplateDetail = async ({ template, previous = null, next = null, readme =
       </header>
 
       <aside className="col-span-4 col-start-9 row-span-2 row-start-1 lg:w-full lg:max-w-[704px]">
-        <TemplateSidebar template={template} installCommand={installCommand} />
+        <TemplateSidebar template={template} installCommand={installCommand} installs={installs} />
       </aside>
 
       <article className="col-span-8 row-start-2 max-w-[704px] lg:-mt-14 md:-mt-10">
@@ -346,6 +356,7 @@ TemplateDetail.propTypes = {
     imageBase: PropTypes.string.isRequired,
     linkBase: PropTypes.string.isRequired,
   }),
+  installs: weeklyInstallRowsPropType,
 };
 
 export default TemplateDetail;

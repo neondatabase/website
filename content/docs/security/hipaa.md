@@ -351,9 +351,9 @@ The `pgaudit` extension is preloaded on HIPAA-enabled Neon projects. For extensi
 
 ## Non-HIPAA-compliant features
 
-The following feature is not currently HIPAA-compliant and should not be used in projects containing HIPAA-protected data:
+The following feature isn't HIPAA-compliant yet. Don't use it with PHI in a HIPAA-enabled project:
 
-- [Data API](/docs/data-api/get-started) – Not covered under Neon’s HIPAA compliance.
+- [Data API](/docs/data-api/get-started): not yet covered by Neon's HIPAA compliance.
 
 ## Security incidents
 

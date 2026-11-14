@@ -18,7 +18,7 @@ tag: community
 tagTheme: gray
 ---
 
-The **Neon CircleCI Orb** provisions a real Lakebase Postgres branch per pipeline run (or per parallel node), instead of a generic Postgres-in-Docker service container. That means your CI database behaves like production - same managed Postgres, network, and extensions, so you get fewer "works in CI, breaks in prod" issues.
+The **Neon CircleCI Orb** provisions a real Lakebase Postgres branch per pipeline run (or per parallel node), instead of a generic Postgres-in-Docker service container. That means your CI database behaves like production. It uses the same managed Postgres, network, and extensions, so you get fewer "works in CI, breaks in prod" issues.
 
 Each run gets an isolated, ephemeral branch; you can branch from a pre-migrated parent to skip running migrations from scratch, and the orb handles cleanup and TTL so tests stay deterministic and parallel jobs never share state. This guide covers the `neon/run_tests` job and the `neon/create_branch`, `neon/delete_branch`, and `neon/reset_branch` commands.
 
@@ -90,6 +90,8 @@ The job accepts the following parameters:
 
 - `api_key`: (Optional) Environment variable name containing the Neon API key. Defaults to `NEON_API_KEY`. Ensure this variable is set in your CircleCI project settings.
 - `project_id`: (Optional) Environment variable name containing the Neon project ID. Defaults to `NEON_PROJECT_ID`. Ensure this variable is set in your CircleCI project settings.
+- `executor`: (Optional) The executor for the job. Defaults to `cimg/base:stable`.
+- `resource_class`: (Optional) The CircleCI resource class. Defaults to `small`.
 - `parent_branch`: (Optional) The branch to fork from. Defaults to your project's default branch (named `main` if the project was created with the CLI or API, or `production` if created in the Console).
 - `migrate_command`: The command to prepare the database (e.g., run migrations). This command runs after the branch is ready but before tests start. You can chain multiple commands here if needed (for example, installing dependencies and running migrations).
 - `test_command`: The command to execute your tests. This command runs after the `migrate_command` completes. It should be configured to run your test suite (e.g., unit tests, integration tests, or end-to-end tests with Playwright) against the database using the `DATABASE_URL` environment variable.
@@ -109,13 +111,13 @@ The job accepts the following parameters:
 - `NEON_AUTH_URL`: The Managed Better Auth URL (if `get_auth_url` is `true` and Managed Better Auth is enabled).
 - `NEON_DATA_API_URL`: The Neon Data API URL (if `get_data_api_url` is `true` and Data API is enabled).
 
-An example usage of the `neon/run_tests` job is provided in the [Example: CircleCI configuration](#example-circleci-configuration) section below.
+An example usage of the `neon/run_tests` job is provided in the [CircleCI configuration example](#circleci-configuration-example) section below.
 
 ### How it works
 
 When the `neon/run_tests` job runs, it performs the following steps automatically:
 
-1. **Provision**: Creates a Neon branch from `parent_branch`. The orb auto‑names it as `circle-ci-${CIRCLE_PIPELINE_NUM}-${CIRCLE_NODE_INDEX}` (pipeline run ID + parallel executor index).
+1. **Provision**: Creates a Neon branch from `parent_branch`. The orb auto-names it as `circle-ci-${CIRCLE_PIPELINE_NUM}-${CIRCLE_NODE_INDEX}` (pipeline run ID + parallel executor index).
 2. **Connect**: Exports the connection string as `DATABASE_URL` (and individual PG variables like `PGHOST`, `PGUSER`, `PGPASSWORD`, `PGHOST_POOLED`) to the job environment.
 3. **Prepare**: Runs the `migrate_command` you provided.
 4. **Test**: Runs the `test_command` you provided.
@@ -127,7 +129,7 @@ The `neon/run_tests` job automatically sets the `DATABASE_URL` environment varia
 
 This means that any tool, migration script, or test runner that relies on `DATABASE_URL` can use it directly without extra configuration. For example, a migration command such as `npx drizzle-kit migrate` or a test command like `npm test` can connect to the Neon branch using the provided connection string. Alternatively, you can use the individual connection parameters (`PGHOST`, `PGUSER`, `PGPASSWORD`, etc.) if your tools require them.
 
-### Example: CircleCI configuration
+### CircleCI configuration example
 
 To better understand how to use `neon/run_tests` job, consider the following example CircleCI (`.circleci/config.yml`) configuration:
 
@@ -171,7 +173,7 @@ The Orb provides the following commands for building custom workflows.
 
 ### `neon/create_branch`
 
-Creates a new database branch. This command waits for the branch to be active ("ready") and exports the connection details to the environment.
+Creates a new database branch and exports the connection details to the environment.
 
 | Input              | Type         | Default             | Description                                                                                                                                    |
 | :----------------- | :----------- | :------------------ | :--------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -208,7 +210,7 @@ Deletes a Neon branch. This is typically used in the final step of a job to clea
 | `project_id` | env_var_name | `NEON_PROJECT_ID` | Environment variable name containing the Neon project ID.                                    |
 | `branch_id`  | string       | `$NEON_BRANCH_ID` | The branch ID to delete. If omitted, the command uses `NEON_BRANCH_ID` from `create_branch`. |
 
-If the branch is already gone (for example, expired via TTL), delete returns a safe no-op instead of failing.
+If the branch already expired through its TTL, the Neon API returns HTTP 422 and this command exits with an error. Set `ttl_seconds` to a value longer than your longest job.
 
 ### `neon/reset_branch`
 
@@ -225,7 +227,7 @@ Resets a branch to the latest state of its parent. This is useful for long-lived
 
 Unlike `neon/create_branch`, this command does not export a `DATABASE_URL`. It also does not support options like `role`, `database`, `password`, `schema_only`, `get_auth_url`, or `get_data_api_url`. You must ensure your job has access to the connection details for the target branch (e.g., via CircleCI context or project environment variables).
 
-### Example: Custom job configuration
+### Custom job configuration example
 
 Here is how to compose these commands manually:
 
@@ -254,8 +256,7 @@ jobs:
           name: Run Tests
           command: npm test
 
-      - neon/delete_branch:
-          when: always  # Ensure branch is deleted even if tests fail
+      - neon/delete_branch  # Runs even if the tests fail
 
 workflows:
   main:
@@ -263,11 +264,16 @@ workflows:
       - custom-test
 ```
 
-### Example: Resetting a long-lived branch
+### Resetting a long-lived branch
 
 Instead of creating a new branch every time, you can reset a persistent branch like a staging environment to the latest state of your parent branch.
 
 ```yaml shouldWrap
+version: 2.1
+
+orbs:
+  neon: dhanushreddy291/neon@1.0
+
 jobs:
   reset-staging:
     docker:
@@ -275,8 +281,8 @@ jobs:
     steps:
       - checkout
       - neon/reset_branch:
-          # The ID of your persistent staging branch, stored as an environment variable
-          branch_id: $STAGING_BRANCH_ID
+          # The name or ID of your persistent staging branch
+          branch_id: staging
           # The parent branch to reset from
           parent_branch: production
 
@@ -284,6 +290,11 @@ jobs:
           name: Run Integration Tests
           # Ensure DATABASE_URL is set in your environment (e.g., via CircleCI Project Settings)
           command: npm run test:integration
+
+workflows:
+  reset_workflow:
+    jobs:
+      - reset-staging
 ```
 
 ## Best practices
@@ -296,6 +307,6 @@ To optimize costs don't set the TTL too high for ephemeral branches. For long-li
 
 ### Concurrency
 
-The Neon Orb is designed for concurrency. If you run parallel tests (e.g., CircleCI `parallelism: 4`), the Orb creates a unique branch for every parallel executor. This ensures that tests running at the same time never read or write to the same database, eliminating race conditions and "flaky" tests caused by shared state.
+The Neon Orb is designed for concurrency. If you run parallel tests (e.g., CircleCI `parallelism: 4`), the Orb creates a unique branch for every parallel executor. Tests that run at the same time don't read or write the same database.
 
 The default branch names are generated from `CIRCLE_PIPELINE_NUM` and include a suffix for parallel executors (for example, `1234-1`, `1234-2`). This allows you to identify which branch corresponds to which test executor in your CircleCI dashboard.

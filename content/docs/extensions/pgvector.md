@@ -16,6 +16,10 @@ redirectFrom:
 updatedOn: '2026-11-06T11:14:41.532Z'
 ---
 
+<LakebaseVectorTip />
+
+## pgvector extension
+
 The `pgvector` extension enables you to store vector embeddings and perform vector similarity search in Postgres. It's a natural fit for natural language processing applications, including those built on top of OpenAI's GPT models.
 
 `pgvector` supports:
@@ -27,8 +31,6 @@ The `pgvector` extension enables you to store vector embeddings and perform vect
 - ACID compliance, point-in-time recovery, JOINs, and all other Postgres features
 
 This topic describes how to enable the `pgvector` extension in Neon and how to create, store, and query vectors.
-
-<CTA />
 
 ## Enable the pgvector extension
 

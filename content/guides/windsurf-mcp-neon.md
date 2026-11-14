@@ -34,7 +34,7 @@ Make sure you have:
 You can either watch the video below or follow the steps to set up the Neon MCP server in Windsurf.
 
 <video controls playsInline loop width="800" height="600">
-  <source type="video/mp4" src="https://neondatabase.wpengine.com/wp-content/uploads/2025/04/neon-hosted-mcp-server.mp4"/>
+  <source type="video/mp4" src="https://cdn.neonapi.io/public/videos/pages/blog/announcing-neons-remote-mcp-server/neon-hosted-mcp-server-3572c23e.mp4"/>
 </video>
 
 <Admonition type="note">

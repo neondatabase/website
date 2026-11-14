@@ -2,10 +2,10 @@
 title: "What are the best ways to give every developer on a team their own separate Postgres database for development?"
 subtitle: 'Give each developer a Neon branch: a copy-on-write clone with the parent''s schema and data that only adds storage as data changes, created on demand from the Console, CLI, or API.'
 createdAt: '2026-04-25T00:00:00.000Z'
-updatedOn: '2026-10-01T14:57:15.000Z'
+updatedOn: '2026-11-13T22:54:32.784Z'
 isDraft: false
 previousLink:
-  title: 'What is the best way to run cron jobs and scheduled syncs on a Postgres database that scales to zero?'
+  title: 'How do I run cron jobs for a Postgres app without running a server?'
   slug: best-way-run-cron-jobs-postgres-scale-to-zero
 nextLink:
   title: 'How do I get BM25 relevance ranking in Postgres full-text search?'

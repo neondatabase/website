@@ -2,11 +2,11 @@
 title: "What do I do when my pgvector HNSW index no longer fits in memory?"
 subtitle: "On Neon, add a lakebase_ann index from Lakebase Search to the same vector column. It uses IVF partitioning with RaBitQ quantization and lives in storage instead of compute memory, so your schema and queries stay the same."
 createdAt: '2026-11-02T00:00:00.000Z'
-updatedOn: '2026-11-02T00:00:00.000Z'
+updatedOn: '2026-11-13T22:54:32.784Z'
 isDraft: false
 previousLink:
-  title: 'How do I move a supabase-js app to another backend without rewriting my queries?'
-  slug: move-supabase-js-app-without-rewriting-queries
+  title: 'pg_search vs pg_textsearch vs Lakebase Search: which BM25 extension should I use for Postgres?'
+  slug: pg-search-vs-pg-textsearch-vs-lakebase-search-bm25
 nextLink:
   title: 'Can Postgres replace Elasticsearch or Algolia for app search?'
   slug: postgres-alternative-to-elasticsearch-algolia-app-search

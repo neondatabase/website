@@ -13,10 +13,9 @@ This is the Neon database company's marketing website and documentation hub. It'
 
 ## Tech Stack
 
-- **Framework:** Next.js 14 (React 18, App Router)
+- **Framework:** Next.js 16 (React 19, App Router)
 - **Styling:** Tailwind CSS with custom components
 - **Content:** MDX for documentation (in `content/` directory)
-- **Database:** Prisma (for some features)
 - **Search:** Algolia for documentation search
 - **Animations:** GSAP, Framer Motion, Rive
 - **Code Highlighting:** Shiki
@@ -40,10 +39,9 @@ website/
 │   ├── hooks/           # Custom React hooks
 │   ├── utils/           # Helper functions
 │   └── styles/          # Global CSS
-├── public/              # Static assets
-│   ├── docs/            # Documentation images
-│   └── llms/            # LLM-specific content files
-└── prisma/              # Database schema
+└── public/              # Static assets
+    ├── docs/            # Documentation images
+    └── llms/            # LLM-specific content files
 ```
 
 Multiple team members clone this repo to different local paths. Never hardcode a local path in documentation or scripts.

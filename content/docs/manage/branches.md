@@ -463,7 +463,7 @@ curl -X POST 'https://console.neon.tech/api/v2/projects/dry-heart-13671059/branc
 
 ## Set a branch as protected
 
-This feature is available on all Neon's paid plans, which supports up to five protected branches.
+This feature is available on Neon's paid plans. The number of protected branches you can have per project depends on your plan. See [Protected branches](/docs/guides/protected-branches).
 
 <Tabs labels={["Console", "CLI", "API"]}>
 

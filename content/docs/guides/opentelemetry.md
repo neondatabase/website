@@ -115,12 +115,10 @@ If you use New Relic, you'll need to sign up for an account and get your license
 
    <details>
    <summary>Create New Relic license key</summary>
-
    1. Click on your user menu in the bottom left corner.
    2. Select **API Keys** from the menu.
 
    ![New Relic profile menu showing API Keys option](/docs/guides/new_relic_api_keys.png)
-
    3. Click **Create a key** and choose **Ingest - License**. Copy the key immediately (you can't view it again later).
 
    ![New Relic API Keys page showing license key types](/docs/guides/new_relic_copy_key.png)
@@ -200,7 +198,7 @@ You can enable either or both options based on your monitoring needs.
    - No authentication required for local docker setup
 
    **For Grafana Cloud**:
-   - Use **Basic** authentication with Base64 encoded `<opentelemetry-instance-id>:<grafana-cloud-token>`
+   - Use **Basic** authentication. Enter your OpenTelemetry instance ID as the username and your Grafana Cloud token as the password. Neon encodes them, so don't Base64-encode them yourself.
    - Get your instance ID and API token from the Grafana Cloud Portal by clicking on the **OpenTelemetry** card
 
    **For New Relic**:

@@ -12,7 +12,7 @@ redirectFrom:
   - /docs/cloud/roadmap
   - /docs/conceptual-guides/roadmap
   - /docs/reference/roadmap
-updatedOn: '2026-11-05T13:53:34.719Z'
+updatedOn: '2026-11-09T18:24:22.269Z'
 ---
 
 This roadmap describes what's in flight, what we delivered recently, and what's on the horizon.
@@ -85,7 +85,7 @@ We're also improving and scaling Lakebase Postgres on Neon. Here's what's on the
 - **More coding agents supported by `neon init`**: Factory Droid, fx, Hermes Agent, Junie, Kilo Code, Kimi Code, Kiro CLI, and Pi join more than 20 coding agents you can connect to Neon with one command. [Learn more](/docs/ai/connect-mcp-clients-to-neon#supported-agents-add-mcp).
 - **New Functions templates**: Twenty new Function Registry templates cover AI agents and chat, APIs, workflows, email, uploads, and monitoring, including an MCP server, `openai-agents`, `mastra`, and `x402-paid-api`. They combine Functions with Postgres, AI Gateway, Object Storage, and Managed Better Auth. [Learn more](/functions/templates).
 - **Managed Better Auth general availability**: Managed Better Auth is now generally available. Check the [Managed Better Auth roadmap](/docs/auth/roadmap) for upcoming plugins and features. [Learn more](/docs/auth/overview).
-- **HIPAA support for backend services**: HIPAA compliance now extends to Managed Better Auth, the Data API, Functions, Object Storage, AI Gateway, and Realtime, so you can use them with protected health information in a HIPAA-enabled project. [Learn more](/docs/security/hipaa).
+- **HIPAA support for backend services**: HIPAA compliance now extends to Managed Better Auth, Functions, Object Storage, AI Gateway, and Realtime, so you can use them with protected health information in a HIPAA-enabled project. [Learn more](/docs/security/hipaa).
 - **Set up your coding agent for Neon**: One prompt installs the Neon CLI, signs you in, and adds Neon's agent skills and MCP server. Each backend service overview page also has a prompt that builds a working example in your project. [Learn more](/docs/cli/skills).
 - **Apple and Microsoft sign-in for Managed Better Auth**: Managed Better Auth now supports Apple and Microsoft Entra ID as OAuth providers, alongside Google, GitHub, and Vercel. [Learn more](/docs/auth/guides/setup-oauth).
 - **Tune Lakebase Search indexes**: `lakebase_vector` 1.1.2 adds functions that recommend `lakebase_ann.probes` settings for your index, so you can trade off recall and latency without trial and error. [Learn more](/docs/extensions/lakebase-vector#get-recommended-probes-values).
@@ -218,7 +218,7 @@ We're also improving and scaling Lakebase Postgres on Neon. Here's what's on the
 - **Neon Chat for Visual Studio Code**: This AI-powered assistant lets you chat with the latest Neon documentation without leaving your IDE. You can find it here: [Neon VS Code Extension](https://marketplace.visualstudio.com/items?itemName=buildwithlayer.neon-integration-expert-15j6N).
 - **A GitHub Copilot extension**: This extension provides chat-based access to the latest Neon documentation directly from your repository. You can find it here: [Neon Copilot Extension](https://github.com/marketplace/neon-database)
 - **Schema Diff API**: Neon now supports schema checks in agentic systems and deployment pipelines with the new schema diff API endpoint. Learn more about [Schema Diff](/docs/guides/schema-diff), which is also available via the console and CLI.
-- **Managed Better Auth**: Sync user profiles from your auth provider to your database automatically. Includes OAuth provider management - enable or disable providers (Google, GitHub, Vercel, Microsoft, and Apple). Google can use shared Managed Better Auth credentials for development, and the other providers use custom client credentials. See [Managed Better Auth](/docs/guides/neon-auth) for details.
+- **Managed Better Auth**: Sync user profiles from your auth provider to your database automatically. Includes OAuth provider management - enable or disable providers (Google, GitHub, Vercel, Microsoft, Apple, and Discord). Google can use shared Managed Better Auth credentials for development, and the other providers use custom client credentials. See [Managed Better Auth](/docs/guides/neon-auth) for details.
 - **Postgres 17**: Now the default version for all newly created projects.
 - **Support for [pg_cron](/docs/extensions/pg_cron)**: Schedule and manage periodic jobs directly in your Postgres database with this extension.
 - **Neon on AgentStack**: Integrate Neon with AgentStack to enable AI agents to create ephemeral or long-lived Postgres instances for structured data storage. Explore the [Neon tool](https://github.com/AgentOps-AI/AgentStack/blob/main/agentstack/_tools/neon/__init__.py) in AgentStack's repo.

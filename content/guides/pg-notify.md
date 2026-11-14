@@ -4,10 +4,16 @@ subtitle: A step-by-step guide describing how to implement real-time notificatio
 author: rishi-raj-jain
 enableTableOfContents: true
 createdAt: '2024-07-02T13:24:36.612Z'
-updatedOn: '2026-09-24T17:56:34.189Z'
+updatedOn: '2026-11-07T02:02:14.459Z'
 ---
 
 This step-by-step guide shows how to implement real-time notifications in Postgres on Neon. Real-time notifications let an application react to database changes as they happen. With [pg_notify](https://www.postgresql.org/docs/current/sql-notify.html) and [Postgres triggers](https://www.postgresql.org/docs/current/triggers.html), you can create a webhook-like system to invoke external services on specific database operations.
+
+<Admonition type="tip" title="Neon now has realtime built in">
+
+[Neon Realtime](/docs/realtime/overview) turns any SQL query into a live query that stays up to date as your data changes. It runs directly from Lakebase Postgres, with no second realtime system to run, and it works with scale to zero and branching.
+
+</Admonition>
 
 ## Prerequisites
 

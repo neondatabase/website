@@ -13,7 +13,7 @@ summary: >-
   phone_number.verified, use EdDSA Ed25519 detached JWS signatures for
   verification, and retry blocking events within a global timeout.
 enableTableOfContents: true
-updatedOn: '2026-09-16T15:38:57.808Z'
+updatedOn: '2026-11-09T18:18:56.726Z'
 ---
 
 Managed Better Auth webhooks send HTTP POST requests to your server when authentication events occur.
@@ -233,11 +233,11 @@ The `"sign-in"` link type is sent when a user signs in via the [Magic Link plugi
 
 These events fire only when a new user record is created in the database. They do not fire on subsequent sign-ins, including returning OAuth users.
 
-| Field           | Type   | Description                                                                     |
-| --------------- | ------ | ------------------------------------------------------------------------------- |
-| `auth_provider` | string | `"credential"`, `"google"`, `"github"`, `"vercel"`, `"microsoft"`, or `"apple"` |
-| `ip_address`    | string | Requester's IP address                                                          |
-| `user_agent`    | string | Requester's user agent                                                          |
+| Field           | Type   | Description                                                                                  |
+| --------------- | ------ | -------------------------------------------------------------------------------------------- |
+| `auth_provider` | string | `"credential"`, `"google"`, `"github"`, `"vercel"`, `"microsoft"`, `"apple"`, or `"discord"` |
+| `ip_address`    | string | Requester's IP address                                                                       |
+| `user_agent`    | string | Requester's user agent                                                                       |
 
 If sign-up metadata is present and passes validation, it is included as `event_data.signup_metadata`. To limit payload size and prevent oversized egress, Managed Better Auth only includes `signup_metadata` when it is a plain object, serializes to at most 10 KiB of UTF-8 JSON, and is nested no more than 5 levels deep. Oversized, too-deep, array, or primitive metadata is dropped from the webhook payload.
 
@@ -454,6 +454,34 @@ If your webhook endpoint is unreachable, all signups fail. Monitor your endpoint
 Return any 2xx status code. The response body is ignored.
 
 This event is non-blocking. Failures are logged but do not affect the user creation. Return 200 immediately and process the event asynchronously (for example, via a job queue). This prevents timeouts under load.
+
+## Sync users to your own tables
+
+To keep a `public.profiles` table in step with Managed Better Auth users, subscribe to `user.created` and insert a row when the event arrives. Managed Better Auth manages the `neon_auth` schema, so you can read and reference its tables but not add triggers to them or alter them.
+
+```javascript
+// app/webhooks/neon-auth/route.js
+import { sql } from '@/lib/db';
+
+export async function POST(request) {
+  const rawBody = await request.text();
+  const event = await verifyWebhook(rawBody, Object.fromEntries(request.headers));
+
+  if (event.event_type === 'user.created') {
+    await sql`
+      INSERT INTO public.profiles (id, display_name)
+      VALUES (${event.user.id}, ${event.user.name})
+      ON CONFLICT (id) DO NOTHING
+    `;
+  }
+
+  return new Response(null, { status: 200 });
+}
+```
+
+`verifyWebhook` is the function from the [Node.js example](#nodejs-example). The `ON CONFLICT` clause makes retries and duplicate deliveries safe.
+
+`user.created` is non-blocking, so the profile row can appear shortly after sign-up rather than in the same request. If your app needs the row immediately, insert it from the application right after sign-up instead. Webhooks have no update or delete events today, so changes to a user after creation don't reach your table. Deletes can cascade if `profiles.id` references `neon_auth.user ON DELETE CASCADE`.
 
 ## Retry behavior
 

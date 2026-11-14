@@ -175,7 +175,10 @@ The TypeScript source is canonical. CI only reads `schema.json`.
   `builder = builderFor('roles')`. The parser resolves a namespace-imported
   module passed to `.command()`, bare, wrapped in a one-argument helper, or
   spread into its exports (`.command(loki.command, loki.describe, loki.builder,
-  handler)` in `logs.ts`), and
+  handler)` in `logs.ts`). It also follows a builder imported by name from a
+  sibling file and passed by identifier (`import { builder as subscribeBuilder }
+  from './subscribe.js'` in `realtime.ts`), walking it in that file's scope;
+  only relative `./` imports are followed. It
   binds the curried builder's parameter to the argument (or to
   `<parent> <child>` when mounted under a group, matching what `nested()`
   passes). It doesn't evaluate the helper itself, so a mount that changes the

@@ -406,6 +406,8 @@ module.exports = {
     'auth/migrate/from-auth-v0.1',
     'changelog.md',
     'guides/GUIDE_TEMPLATE.md',
+    // Unlisted TanStack guides, referenced from TanStack's agent skills.
+    'tanstack/',
   ],
 
   // Reclassify specific files into a different subsection.

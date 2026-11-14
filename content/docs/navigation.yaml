@@ -384,10 +384,6 @@
                   slug: extensions/pg_stat_statements
                 - title: pg_repack
                   slug: extensions/pg_repack
-                - title: pg_search
-                  slug: extensions/pg_search
-                  tag: deprecated
-                  tagTheme: gray
                 - title: pg_tiktoken
                   slug: extensions/pg_tiktoken
                 - title: pg_trgm
@@ -461,8 +457,6 @@
                           slug: ai/lakebase-search
                         - title: Get started
                           slug: ai/lakebase-search-get-started
-                        - title: Migrate from pg_search
-                          slug: extensions/migrate-pg-search-to-lakebase-text
             - title: Postgres guides
               slug: postgresql/introduction
               icon: book
@@ -716,9 +710,9 @@
                 - title: Neon Twin
                   slug: guides/neon-twin-intro
                   items:
-                    - title: pg_dump / pg_restore — Full Twin
+                    - title: Full Twin
                       slug: guides/neon-twin-full-pg-dump-restore
-                    - title: pg_dump / pg_restore — Partial Twin
+                    - title: Partial Twin
                       slug: guides/neon-twin-partial-pg-dump-restore
                 - title: Data anonymization
                   slug: workflows/data-anonymization
@@ -904,6 +898,12 @@
               slug: realtime/guides/mutations
             - title: 'Server-side rendering'
               slug: realtime/guides/ssr
+        - section: Migrate from
+          items:
+            - title: 'Convex'
+              slug: realtime/migrate-from/convex
+            - title: 'Electric'
+              slug: realtime/migrate-from/electric
         - section: Examples
           items:
             - title: 'Overview'
@@ -1048,8 +1048,6 @@
           slug: ai/lakebase-search
         - title: Get started
           slug: ai/lakebase-search-get-started
-        - title: Migrate from pg_search
-          slug: extensions/migrate-pg-search-to-lakebase-text
 
 - nav: Platform
   title: Platform
@@ -1712,6 +1710,13 @@
         - title: Terraform
           slug: reference/terraform
           icon: terraform
+          items:
+            - title: Manage Neon with Terraform
+              slug: reference/terraform
+              tag: beta
+            - title: Migrate from kislerdm/neon
+              slug: reference/terraform-migrate
+              tag: beta
         - title: CI/CD
           icon: workflows
           slug: guides/branching-github-actions

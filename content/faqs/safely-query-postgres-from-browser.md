@@ -2,11 +2,11 @@
 title: "How do I safely query Postgres directly from the browser?"
 subtitle: "Use the Neon Data API with Row-Level Security. Postgres GRANTs decide which tables a signed-in user can touch, RLS policies decide which rows, and the Data API Advisors flag tables that are exposed without protection."
 createdAt: '2026-11-02T00:00:00.000Z'
-updatedOn: '2026-11-02T00:00:00.000Z'
+updatedOn: '2026-11-13T22:54:32.784Z'
 isDraft: false
 previousLink:
-  title: 'How do I get S3-compatible storage without an AWS account?'
-  slug: s3-compatible-storage-without-aws-account
+  title: 'Is it safe to connect Claude Code or Cursor to my production database?'
+  slug: safe-connect-claude-code-cursor-production-database
 nextLink:
   title: 'Which serverless database services charge per second instead of per month for Postgres?'
   slug: serverless-database-services-postgres-charge-per-second

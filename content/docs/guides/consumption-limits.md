@@ -5,14 +5,15 @@ summary: >-
   Storage is unlimited on paid plans: there's no hard per-branch size limit
   and storage grows with your usage. The customer-set quotas described here are
   separate, hard limits you choose. Per-project consumption quotas in Neon let
-  you cap active_time_seconds,
-  compute_time_seconds, written_data_bytes, data_transfer_bytes, and
-  logical_size_bytes via the quota object in the Create or Update Project API
-  endpoints. When any quota threshold is met, all active computes for that
-  project are suspended and remain suspended until the next billing period
-  starts, unlike scale-to-zero which restarts on the next connection. Use this
-  page to configure, query, and reset quota limits for multi-tenant billing
-  integrations where different plan tiers need different resource ceilings.
+  you cap active_time_seconds, compute_time_seconds, written_data_bytes, and
+  data_transfer_bytes per project, and cap each branch with logical_size_bytes,
+  using the quota object in the Create or Update Project API endpoints. When a
+  project-level quota is met, all active computes for that project are suspended
+  until the next billing period starts. Unlike scale to zero, they don't restart
+  on the next connection. When a branch reaches its logical_size_bytes quota,
+  writes to that branch fail instead. Use this page to configure, query, and reset
+  quota limits for multi-tenant billing integrations where different plan tiers
+  need different resource ceilings.
 enableTableOfContents: true
 redirectFrom:
   - /docs/guides/partner-billing
@@ -21,9 +22,9 @@ isDraft: false
 updatedOn: '2026-09-02T21:17:48.434Z'
 ---
 
-When setting up your integration's billing solution with Neon, you may want to impose some hard limits on how much storage or compute resources a given project can consume. For example, you may want to cap how much usage your free plan users can consume versus pro or enterprise users. With the Neon API, you can use the `quota` key to set usage limits for a variety of consumption metrics. These limits act as thresholds after which all active computes for a project are [suspended](#suspending-active-computes).
+When setting up your integration's billing solution with Neon, you may want to impose some hard limits on how much storage or compute resources a given project can consume. For example, you may want to cap how much usage your free plan users can consume versus pro or enterprise users. With the Neon API, you can use the `quota` key to set usage limits for a variety of consumption metrics. These limits act as thresholds after which all active computes for a project are [suspended](#suspending-active-computes). The `logical_size_bytes` quota works differently and applies to a single branch. See [Branch size quota](#branch-size-quota).
 
-Consumption limits actively enforce usage caps: when a project hits a quota, Neon suspends its computes. They apply per project and per consumption metric (compute, storage, and data transfer). If you instead want email alerts when your organization's total monthly charges approach a dollar amount, without stopping usage, see [Spending notifications](/docs/introduction/spending-notifications).
+Consumption limits actively enforce usage caps: when a project hits a project-level quota, Neon suspends its computes. They apply per project and per consumption metric (compute, storage, and data transfer). If you instead want email alerts when your organization's total monthly charges approach a dollar amount, without stopping usage, see [Spending notifications](/docs/introduction/spending-notifications).
 
 ## Metrics and quotas
 
@@ -71,9 +72,11 @@ The `quota` object includes an array of parameters used to set threshold limits.
 - `written_data_bytes`: Sets the maximum amount of data in total, measured in bytes, that can be written across all of a project's branches for the month.
 - `data_transfer_bytes`: Sets the maximum amount of egress data, measured in bytes, that can be transferred out of Neon from across all of a project's branches using the proxy.
 
-There is one additional `quota` parameter, `logical_size_bytes`, which applies to individual branches, not to the overall project. You can use `logical_size_bytes` to set the maximum size (measured in bytes) that any one individual branch is allowed to reach. Once this threshold is met, the compute for that particular branch (and _only_ that particular branch) is suspended. Note that this limit is _not_ refreshed once per month: it is a strict size limit that applies for the life of the branch.
+There is one additional `quota` parameter, `logical_size_bytes`, which applies to individual branches, not to the overall project. You can use `logical_size_bytes` to set the maximum size (measured in bytes) that any one individual branch is allowed to reach. Note that this limit is _not_ refreshed once per month: it is a strict size limit that applies for the life of the branch.
 
-These customer-set quotas behave differently from Neon's own platform storage. On paid plans there's no hard per-branch size limit; your storage grows with your usage. A `logical_size_bytes` quota you set yourself is a hard limit and suspends the branch's compute instead.
+The `quota` object replaces all existing quota values on each `PATCH`. Include every quota you want to keep in each update. Any quota you leave out is removed.
+
+These customer-set quotas behave differently from Neon's own platform storage. On paid plans there's no hard per-branch size limit; your storage grows with your usage. A `logical_size_bytes` quota you set yourself is a hard limit on writes, as described in [Branch size quota](#branch-size-quota).
 
 ### Sample quotas
 
@@ -96,7 +99,7 @@ Generally, the most effective quotas for controlling spend per project are those
 
 ### Neon default limits
 
-In addition to the configurable limits that you can set, Neon also sets certain branch size limits by default. You might notice these limits in a [Get Project](#retrieving-details-about-a-project) response:
+In addition to the configurable limits that you can set, Neon also sets certain branch size limits by default. You might notice these limits in a [Get Project](/docs/reference/api/projects/get-project) response:
 
 - `branch_logical_size_limit` (MiB)
 - `branch_logical_size_limit_bytes`(Bytes)
@@ -107,13 +110,25 @@ These limits are not directly configurable. You can query the limits by running 
 
 _**What happens when a quota is met?**_
 
-When any configured metric reaches its quota limit, all active computes for that project are automatically suspended. It is important to understand, this suspension is persistent. It works differently than the inactivity-based [scale to zero](/docs/guides/scale-to-zero-guide), where computes restart at the next interaction: this suspend will _not_ restart at the next API call or incoming connection. If you don't take explicit action otherwise, the suspension remains in place until the next billing period starts (`consumption_period_end`).
+When a project-level metric (`active_time_seconds`, `compute_time_seconds`, `written_data_bytes`, or `data_transfer_bytes`) reaches its quota limit, all active computes for that project are automatically suspended. It is important to understand, this suspension is persistent. It works differently than the inactivity-based [scale to zero](/docs/guides/scale-to-zero-guide), where computes restart at the next interaction: this suspend will _not_ restart at the next API call or incoming connection. If you don't take explicit action otherwise, the suspension remains in place until the next billing period starts (`consumption_period_end`). To lift it sooner, raise the quota with a `PATCH` request; the project's computes accept connections again within seconds.
 
-See [Querying metrics and quotas](#querying-metrics-and-quotas) to find the reset date, billing period, and other values related to a project's consumption.
+While a project is suspended, connection attempts fail with a quota error, and the endpoint start API call returns `423` with the message `quota exceeded`. See [Querying metrics and quotas](#querying-metrics-and-quotas) to find the reset date, billing period, and other values related to a project's consumption.
 
 <Admonition type="note">
 Neon tracks these consumption metrics on a monthly cycle. To track usage on a different cycle or across billing periods, use the [consumption history API](/docs/guides/consumption-metrics) (`/consumption_history/v2/projects`), which returns hourly, daily, or monthly metrics.
 </Admonition>
+
+## Branch size quota
+
+The `logical_size_bytes` quota limits the size of each branch. When a branch exceeds its limit:
+
+- Writes to that branch fail with an error that says the project size limit has been exceeded.
+- The branch's compute can still start, and reads still work.
+- Other branches in the project aren't affected.
+
+To recover, raise the branch's `logical_size_bytes` quota with a `PATCH` request (writes work again within seconds), or delete data until the branch is below the limit. Neon doesn't reset this quota each billing period.
+
+The limit counts every database on the branch, including the default `postgres` database. A new, empty project already uses about 30 MB, so a very small quota can block writes, including `CREATE TABLE`, from the start.
 
 ## Configuring quotas
 
@@ -154,7 +169,7 @@ curl --request POST \
 
 If you need to change the quota limits for an existing project (for example, if a user switches their plan to a higher usage tier), you can reset those limits via `PATCH` request. See [Update a project](/docs/reference/api/projects/update-project) in the Neon API.
 
-Here is a sample `PATCH` that updates both the `active_time_seconds` and `compute_time_seconds` quotas to 30 hours (108,000):
+Here is a sample `PATCH` that updates both the `active_time_seconds` and `compute_time_seconds` quotas to 30 hours (108,000). Because the update replaces the whole `quota` object, add any other quota values you want to keep to the same request:
 
 ```bash {11,12}
 curl --request PATCH \
@@ -178,13 +193,13 @@ curl --request PATCH \
 
 ## Querying metrics and quotas
 
-You can use the Neon API to retrieve consumption metrics for your organization and projects using the [Granular metrics per project](/docs/reference/api/consumption/get-consumption-history-per-project) endpoint, which provides detailed metrics for each project at hourly, daily, or monthly granularity. See [Get granular project-level metrics](/docs/guides/consumption-metrics-legacy#project-level-endpoint) for details.
+You can use the Neon API to retrieve consumption metrics for your organization and projects using the [Retrieve project consumption metrics](/docs/reference/api/consumption/get-consumption-history-per-project-v2) endpoint (`/consumption_history/v2/projects`), which provides detailed metrics for each project at hourly, daily, or monthly granularity. See [Query consumption metrics](/docs/guides/consumption-metrics) for details.
 
 ## Resetting a project after suspend
 
 Projects remain suspended until the next billing period. It is good practice to notify your users when they are close to reaching a limit; if the user is then suspended and loses access to their database, it will not be unexpected. If you have configured no further actions, the user will have to wait until the next billing period starts to resume usage.
 
-Alternatively, you can actively reset a suspended compute by changing the impacted quota to `0`: this effectively removes the limit entirely. You will need to reset this quota at some point if you want to maintain limits.
+Alternatively, you can actively reset a suspended compute by changing the impacted quota to `0`: this effectively removes the limit entirely. Connections work again after the quota is set to `0`. You will need to reset this quota at some point if you want to maintain limits.
 
 ### Using quotas to actively suspend a user
 
@@ -206,6 +221,8 @@ See these sample CURL requests for each method.
 
 <TabItem>
 In this sample, we are setting defaults for all new endpoints created in the project as a whole. The minimum compute size is at **1 CU**, the max size at **3 CU**, and a 10 minute (**600 seconds**) inactivity period before the endpoint is suspended.
+
+The sample doesn't set `org_id`, so the project is created in your personal account. On a Free plan account, the request fails with `computes of this size must have min_cu == max_cu` when the min and max CU values differ. Set the same value for both, or add `org_id` for an organization on a plan that allows autoscaling ranges.
 
 These default values are set in the
 `default_endpoint_settings` object.

@@ -28,10 +28,10 @@ This guide demonstrates how to configure the scale to zero setting for a new pro
 
 Paid plans permit disabling scale to zero. On the Scale plan, you can configure the scale to zero threshold.
 
-| Plan        | Scale to zero after              | Can be disabled? |
-| :---------- | :------------------------------- | :--------------- |
-| Free plan   | 5 minutes                        |                  |
-| Launch plan | 5 minutes                        | &check;          |
+| Plan        | Scale to zero after               | Can be disabled? |
+| :---------- | :-------------------------------- | :--------------- |
+| Free plan   | 5 minutes                         |                  |
+| Launch plan | 5 minutes                         | &check;          |
 | Scale plan  | Configurable (1 minute to 1 week) | &check;          |
 
 <Admonition type="note">
