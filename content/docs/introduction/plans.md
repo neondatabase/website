@@ -248,7 +248,7 @@ Even though child branch storage is capped at your logical data size, it's still
 
 #### Unlimited storage
 
-**Storage is unlimited on paid plans (Launch and Scale): there's no hard per-branch size limit, and your storage grows with your usage.** The Free plan is limited to 1 GB of Postgres storage per project, and to 20 GB in total across all your projects. These two limits are enforced independently: the total Postgres storage across all your Free projects can't exceed 20 GB, even though each project is also individually capped at 1 GB. This limit applies to Postgres storage and is separate from [Object Storage](#object-storage), which has its own Free allowance.
+**Storage is unlimited on paid plans (Launch and Scale): there's no hard per-branch size limit, and your storage grows with your usage.** The Free plan includes 1 GB of Postgres storage per project, up to 20 GB total across all your projects. The 1 GB limit is enforced on each branch: once the databases on a branch reach 1 GB, writes that need more space fail on that branch. Other branches aren't affected. The **Limit reached** banner in the Console and storage limit emails are based on a project total: your root branch's data size plus the data written on each child branch, including branches deleted during the current billing period. You can see these warnings while your branches still accept writes. This limit applies to Postgres storage and is separate from [Object Storage](#object-storage), which has its own Free allowance. If you reach the limit, see [Reduce your storage](/docs/introduction/reduce-storage) to free space.
 
 ### Public network transfer
 
@@ -630,7 +630,7 @@ The Free plan costs $0/month and includes 100 projects, 10 branches per project,
 </FaqItem>
 
 <FaqItem question="What happens if I exceed my Free plan limits?">
-On the Free plan, when you run out of CU-hours or public network transfer, your compute is suspended until the next billing period or until you upgrade. Exceeding the 1 GB per-project storage cap, or the 20 GB total cap across all your projects, causes operations that increase storage (inserts, updates, and deletes) to fail until you free space or upgrade. Branch creation fails once you reach 10 branches per project. None of these limits delete your data.
+On the Free plan, when you run out of CU-hours or public network transfer, your compute is suspended until the next billing period or until you upgrade. When a branch reaches the 1 GB storage limit, operations that need more space on that branch, such as inserts, updates, and index builds, fail until you free space or upgrade. Deletes, `TRUNCATE`, and dropping tables still work, so you can free space. See [Reduce your storage](/docs/introduction/reduce-storage). Branch creation fails once you reach 10 branches per project. None of these limits delete your data.
 </FaqItem>
 
 <FaqItem question="How do I restore or export a Free plan project that hit its limits?">
