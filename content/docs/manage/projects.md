@@ -14,7 +14,7 @@ summary: >-
   projects can be recovered within a 7-day window using the Console, CLI, or API.
 redirectFrom:
   - /docs/get-started/projects
-updatedOn: '2026-10-23T14:11:22.712Z'
+updatedOn: '2026-11-14T19:49:05.289Z'
 ---
 
 In Neon, the project is your main workspace. Within a project, you create branches for different workflows, like environments, features, or previews. Each branch contains its own databases, roles, computes, and replicas. Your [Neon Plan](/docs/introduction/plans) determines how many projects you can create and the resource limits within those projects.
@@ -1012,7 +1012,7 @@ There are no storage costs or recovery fees during the 7-day deletion recovery p
 
 ### Recover a project
 
-<Tabs labels={["Console", "CLI", "API"]}>
+<Tabs labels={["Console", "CLI", "API", "MCP server"]}>
 
 <TabItem>
 
@@ -1093,6 +1093,12 @@ curl -X POST \
 ```
 
 The API returns a `200` status code with the restored project object.
+
+</TabItem>
+
+<TabItem>
+
+With the [Neon MCP Server](/docs/ai/neon-mcp-server), ask your agent to recover the project. The `list_projects` tool takes `recoverable: true` to find projects that can still be recovered, and the `recover_project` tool recovers one by its `project_id`. [Project-scoped mode](/docs/ai/neon-mcp-server#project-scoped-mode) hides project management tools such as `list_projects`, so use an unscoped connection.
 
 </TabItem>
 

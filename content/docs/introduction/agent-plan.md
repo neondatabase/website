@@ -12,7 +12,7 @@ summary: >-
   through the Neon API, with autoscaling, scale-to-zero, branching, and
   point-in-time recovery included.
 enableTableOfContents: true
-updatedOn: '2026-08-25T15:36:44.109Z'
+updatedOn: '2026-11-14T19:49:05.289Z'
 ---
 
 <InfoBlock>
@@ -40,7 +40,7 @@ Agent plan pricing and limits differ from the [Scale plan](/docs/introduction/pl
 The lakebase architecture aligns with how agent platforms operate:
 
 - **Instant provisioning**: Serverless Postgres with separated compute and storage provisions databases in seconds
-- **Autoscaling and scale-to-zero**: Compute scales up and down automatically based on workload, and idle databases cost nothing while remaining instantly accessible
+- **Autoscaling and scale-to-zero**: Compute scales up and down automatically based on workload, and idle databases stop accruing compute charges while remaining instantly accessible
 - **API management**: Every capability, including provisioning, quotas, branching, instant restore, and snapshots, is exposed through the Neon API
 - **Database versioning**: Copy-on-write storage enables instant branching, snapshots, and point-in-time recovery for checkpoints and experimentation
 - **Integrated services**: Neon supports built-in Auth and a PostgREST-compatible Data API for complete, production-ready backends
