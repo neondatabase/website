@@ -1,10 +1,12 @@
 ---
 title: Fork a running app and its database with boxd and Neon branching
 subtitle: Give every fork of a running boxd machine its own Neon branch, and let a coding agent change the schema on it without touching production.
-author: michiel-voortman
+authors:
+  - michiel-voortman
+  - rishi-raj-jain
 enableTableOfContents: true
 createdAt: '2026-11-14T00:00:00.000Z'
-updatedOn: '2026-11-14T04:38:03.892Z'
+updatedOn: '2026-11-14T05:35:20.663Z'
 ---
 
 Giving a coding agent or a pull request its own copy of your app often means rebuilding the app and sharing one database, so a migration on one copy can break the others. With [boxd](https://boxd.sh), you can fork a running machine, disk, memory, and processes included, and [Neon branching](/docs/introduction/branching) gives the fork a copy-on-write copy of your database.

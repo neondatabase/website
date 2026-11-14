@@ -26,7 +26,7 @@ describe('getRouteLastmod', () => {
       .readdirSync('content/guides')
       .filter((file) => file.endsWith('.md'))
       .map((file) => matter(fs.readFileSync(`content/guides/${file}`, 'utf8')).data)
-      .filter((data) => data.author === 'rishi-raj-jain')
+      .filter((data) => [].concat(data.authors ?? data.author ?? []).includes('rishi-raj-jain'))
       .map((data) => new Date(data.updatedOn || data.createdAt).toISOString())
       .sort();
 

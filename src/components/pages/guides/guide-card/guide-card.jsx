@@ -4,9 +4,10 @@ import { PropTypes } from 'prop-types';
 import Link from 'components/shared/link/link';
 import LINKS from 'constants/links';
 import ArrowIcon from 'icons/arrow-right.inline.svg';
+import { cn } from 'utils/cn';
 import getFormattedDate from 'utils/get-formatted-date';
 
-const GuideCard = ({ title, subtitle, author, createdAt, slug }) => {
+const GuideCard = ({ title, subtitle, authors = [], createdAt, slug }) => {
   const formattedDate = getFormattedDate(createdAt);
 
   return (
@@ -21,19 +22,29 @@ const GuideCard = ({ title, subtitle, author, createdAt, slug }) => {
               {subtitle}
             </p>
             <div className="mt-3 flex items-center gap-2 sm:mt-2.5">
-              {author && (
+              {authors.length > 0 && (
                 <div className="flex items-center gap-2">
-                  {author.photo && (
-                    <Image
-                      className="block rounded-full md:h-6 md:w-6 sm:h-5 sm:w-5"
-                      src={author.photo}
-                      alt={author.name}
-                      width={26}
-                      height={26}
-                    />
-                  )}
+                  <div className="flex shrink-0 items-center">
+                    {authors.map(
+                      (author, index) =>
+                        author.photo && (
+                          <Image
+                            key={author.slug}
+                            className={cn(
+                              'block rounded-full md:h-6 md:w-6 sm:h-5 sm:w-5',
+                              authors.length > 1 && 'border-2 border-white dark:border-black-pure',
+                              index > 0 && '-ml-2'
+                            )}
+                            src={author.photo}
+                            alt={author.name}
+                            width={26}
+                            height={26}
+                          />
+                        )
+                    )}
+                  </div>
                   <span className="text-[15px] leading-none tracking-extra-tight text-gray-new-30 dark:text-gray-new-90 md:text-sm">
-                    {author.name}
+                    {authors.map(({ name }) => name).join(', ')}
                   </span>
                 </div>
               )}
@@ -60,16 +71,19 @@ const GuideCard = ({ title, subtitle, author, createdAt, slug }) => {
 GuideCard.propTypes = {
   title: PropTypes.string.isRequired,
   subtitle: PropTypes.string.isRequired,
-  author: PropTypes.shape({
-    name: PropTypes.string.isRequired,
-    position: PropTypes.string,
-    bio: PropTypes.string,
-    link: PropTypes.shape({
-      url: PropTypes.string,
-      title: PropTypes.string,
-    }),
-    photo: PropTypes.string,
-  }).isRequired,
+  authors: PropTypes.arrayOf(
+    PropTypes.shape({
+      slug: PropTypes.string,
+      name: PropTypes.string.isRequired,
+      position: PropTypes.string,
+      bio: PropTypes.string,
+      link: PropTypes.shape({
+        url: PropTypes.string,
+        title: PropTypes.string,
+      }),
+      photo: PropTypes.string,
+    })
+  ),
   createdAt: PropTypes.string.isRequired,
   slug: PropTypes.string.isRequired,
 };

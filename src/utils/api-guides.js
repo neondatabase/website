@@ -15,22 +15,23 @@ const getAuthor = (id) => {
   try {
     const authorsData = getAuthors();
     const authorData = authorsData[id];
-    const authorPhoto = `/guides/authors/${id}.jpg`;
-    const author = {
+
+    if (!authorData) return null;
+
+    return {
       slug: id,
       ...authorData,
-      photo: authorPhoto,
+      photo: `/guides/authors/${id}.jpg`,
     };
-
-    if (author) {
-      return author;
-    }
-
-    throw new Error(`Author with ID '${id}' not found.`);
   } catch (_e) {
     return null;
   }
 };
+
+// A guide names its authors with `author: slug`, `author: [slug, ...]`, or `authors: [slug, ...]`.
+const getGuideAuthorIds = (data) => [].concat(data?.authors ?? data?.author ?? []).filter(Boolean);
+
+const getGuideAuthors = (data) => getGuideAuthorIds(data).map(getAuthor).filter(Boolean);
 
 const getGuideFrontmatter = (slug) => {
   try {
@@ -71,26 +72,17 @@ const getAllGuides = async () => {
 
       const slugWithoutFirstSlash = slug.slice(1);
       const {
-        data: {
-          title,
-          subtitle,
-          createdAt,
-          updatedOn,
-          isDraft,
-          redirectFrom,
-          author,
-          excludeFromBlog,
-        },
+        data: { title, subtitle, createdAt, updatedOn, isDraft, redirectFrom, excludeFromBlog },
         excerpt,
       } = data;
-      const authorData = getAuthor(author);
+      const authors = getGuideAuthors(data.data);
 
       return {
         title,
         subtitle,
         slug: slugWithoutFirstSlash,
         category: 'guides',
-        author: authorData,
+        authors,
         createdAt,
         updatedOn,
         date: createdAt,
@@ -117,4 +109,12 @@ const getNavigationLinks = (slug, posts) => {
   };
 };
 
-export { getAllGuides, getAuthor, getAuthors, getGuideNavigationItems, getNavigationLinks };
+export {
+  getAllGuides,
+  getAuthor,
+  getAuthors,
+  getGuideAuthorIds,
+  getGuideAuthors,
+  getGuideNavigationItems,
+  getNavigationLinks,
+};

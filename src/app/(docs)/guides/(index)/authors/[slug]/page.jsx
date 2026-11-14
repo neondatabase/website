@@ -33,7 +33,9 @@ const GuidesPage = async (props) => {
 
   if (!author) return notFound();
 
-  const posts = (await getAllGuides()).filter((i) => i.author.name === author.name);
+  const posts = (await getAllGuides()).filter((guide) =>
+    guide.authors.some(({ slug }) => slug === params.slug)
+  );
 
   if (!posts || posts.length === 0)
     return <div className="w-full text-center text-lg">No guides yet</div>;

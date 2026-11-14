@@ -74,10 +74,10 @@ const getGuideAuthorDate = (author) => {
       .forEach((file) => {
         const filePath = path.join(GUIDES_DIR_PATH, file);
         const { data } = matter(fs.readFileSync(filePath, 'utf8'));
-        guideAuthorDates.set(
-          data.author,
-          latest([guideAuthorDates.get(data.author), getFileDate(filePath)])
-        );
+        // Same author forms as getGuideAuthorIds in api-guides.js.
+        [].concat(data.authors ?? data.author ?? []).forEach((id) => {
+          guideAuthorDates.set(id, latest([guideAuthorDates.get(id), getFileDate(filePath)]));
+        });
       });
   }
 

@@ -79,7 +79,7 @@ const Post = ({
   gitHubPath,
   markdownPath,
   tableOfContents,
-  author,
+  authors = [],
   aboveContent = null,
   titleLeading = null,
   isFaq = false,
@@ -269,7 +269,7 @@ const Post = ({
           enableTableOfContents={enableTableOfContents}
           tableOfContents={tableOfContents}
           gitHubPath={gitHubPath}
-          author={author}
+          authors={authors}
         />
       )}
       {modal && <Modal {...modal} />}
@@ -312,17 +312,19 @@ Post.propTypes = {
   gitHubPath: PropTypes.string.isRequired,
   markdownPath: PropTypes.string,
   tableOfContents: PropTypes.arrayOf(PropTypes.shape({})),
-  author: PropTypes.shape({
-    slug: PropTypes.string,
-    name: PropTypes.string.isRequired,
-    position: PropTypes.string,
-    bio: PropTypes.string,
-    link: PropTypes.shape({
-      url: PropTypes.string,
-      title: PropTypes.string,
-    }),
-    photo: PropTypes.string,
-  }),
+  authors: PropTypes.arrayOf(
+    PropTypes.shape({
+      slug: PropTypes.string,
+      name: PropTypes.string.isRequired,
+      position: PropTypes.string,
+      bio: PropTypes.string,
+      link: PropTypes.shape({
+        url: PropTypes.string,
+        title: PropTypes.string,
+      }),
+      photo: PropTypes.string,
+    })
+  ),
   aboveContent: PropTypes.node,
   titleLeading: PropTypes.node,
   isFaq: PropTypes.bool,
