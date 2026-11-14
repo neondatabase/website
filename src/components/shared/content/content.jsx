@@ -70,6 +70,7 @@ import SqlToRestConverter from 'components/shared/sql-to-rest-converter';
 import StatBlock from 'components/shared/stat-block';
 import SubprocessorsForm from 'components/shared/subprocessors-form';
 import getCodeProps from 'lib/rehype-code-props';
+import remarkUniqueTabHeadingIds from 'lib/remark-unique-tab-heading-ids';
 import openDetails from 'lib/rehype-open-details';
 import rehypeTaskListLabels from 'lib/rehype-task-list-labels';
 import { cn } from 'utils/cn';
@@ -289,6 +290,8 @@ const Content = ({
             remarkPlugins: [
               // Adds support for GitHub Flavored Markdown
               remarkGfm,
+              // Gives duplicate headings inside <Tabs> panels unique ids
+              remarkUniqueTabHeadingIds,
             ],
             rehypePlugins: expandDetails
               ? [getCodeProps, rehypeTaskListLabels, openDetails]

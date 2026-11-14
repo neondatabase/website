@@ -1,7 +1,7 @@
 'use client';
 
 import PropTypes from 'prop-types';
-import { Children, useContext, useLayoutEffect, useRef } from 'react';
+import { Children, useContext, useEffect, useLayoutEffect, useRef, useState } from 'react';
 
 import { TabsContext } from 'contexts/tabs-context';
 import { cn } from 'utils/cn';
@@ -12,12 +12,63 @@ const Tabs = ({ labels = [], children }) => {
   const containerRef = useRef(null);
   const lastSelectedIndexRef = useRef(0);
   const tabTopBeforeClickRef = useRef(null);
+  const panelRefs = useRef([]);
+  const hashTargetRef = useRef(null);
+  const currentIndexRef = useRef(0);
+  // Panel that holds the URL hash target. It takes priority over the synced tab
+  // until the reader clicks a tab, so following a link to a heading inside an
+  // inactive panel shows that panel without changing the saved tab preference.
+  const [hashPanelIndex, setHashPanelIndex] = useState(null);
 
   const syncedIndex = labels.indexOf(activeTab);
-  const currentIndex = syncedIndex === -1 ? lastSelectedIndexRef.current : syncedIndex;
+  const currentIndex =
+    hashPanelIndex ?? (syncedIndex === -1 ? lastSelectedIndexRef.current : syncedIndex);
+
+  useEffect(() => {
+    const revealHashTarget = () => {
+      const hash = window.location.hash.slice(1);
+      if (!hash) {
+        return;
+      }
+
+      let id = hash;
+      try {
+        id = decodeURIComponent(hash);
+      } catch {
+        // Keep the raw hash if it isn't valid percent-encoding
+      }
+
+      const target = document.getElementById(id);
+      const panelIndex = target
+        ? panelRefs.current.findIndex((panel) => panel?.contains(target))
+        : -1;
+
+      if (panelIndex === -1) {
+        return;
+      }
+
+      // The browser can't scroll to a target in a hidden panel. Scroll to it
+      // once its panel is visible (see the layout effect below).
+      if (panelIndex !== currentIndexRef.current) {
+        hashTargetRef.current = target;
+      }
+      setHashPanelIndex(panelIndex);
+    };
+
+    revealHashTarget();
+    window.addEventListener('hashchange', revealHashTarget);
+
+    return () => window.removeEventListener('hashchange', revealHashTarget);
+  }, []);
 
   useLayoutEffect(() => {
     lastSelectedIndexRef.current = currentIndex;
+    currentIndexRef.current = currentIndex;
+
+    if (hashTargetRef.current) {
+      hashTargetRef.current.scrollIntoView();
+      hashTargetRef.current = null;
+    }
 
     if (tabTopBeforeClickRef.current === null) {
       return undefined;
@@ -45,7 +96,10 @@ const Tabs = ({ labels = [], children }) => {
       return;
     }
 
-    tabTopBeforeClickRef.current = containerRef.current?.getBoundingClientRect().top ?? null;
+    if (index !== currentIndex) {
+      tabTopBeforeClickRef.current = containerRef.current?.getBoundingClientRect().top ?? null;
+    }
+    setHashPanelIndex(null);
     setActiveTab(label);
     sendGtagEvent('Tab Clicked', { tab_label: label, tag_name: 'ContentTab' });
   };
@@ -72,13 +126,17 @@ const Tabs = ({ labels = [], children }) => {
           </button>
         ))}
       </div>
-      {Children.map(children, (child, index) => {
-        if (index !== currentIndex) {
-          return null;
-        }
-
-        return child;
-      })}
+      {/* Inactive panels are hidden with CSS so their content stays in the server-rendered HTML */}
+      {Children.map(children, (child, index) => (
+        <div
+          className={cn(index !== currentIndex && 'hidden')}
+          ref={(element) => {
+            panelRefs.current[index] = element;
+          }}
+        >
+          {child}
+        </div>
+      ))}
     </figure>
   );
 };
