@@ -43,7 +43,7 @@ The choice of which mode to use depends on the specific security requirements of
 
 `channel_binding=require` is a security parameter that ensures the client and server mutually authenticate each other using SCRAM-SHA-256-PLUS. This helps protect against man-in-the-middle attacks, even when using `sslmode=require` alone.
 
-With `sslmode=require`, the connection is encrypted, but the client doesn't check the server's certificate. Channel binding ties your password authentication to that specific TLS connection, so a server in the middle can't relay it. That's why connection strings you copy from the Neon Console include both parameters.
+With `sslmode=require`, the connection is encrypted, but the client doesn't check the server's certificate. Channel binding ties your password authentication to that specific TLS connection, so a server in the middle can't relay it. That's why the connection strings Neon gives you, from the Console, CLI, MCP server, and API, include both parameters.
 
 Channel binding is optional. A connection string without it still connects, encrypted and authenticated with SCRAM-SHA-256. To keep the same protection without channel binding, use `sslmode=verify-full` instead, as described below.
 
