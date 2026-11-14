@@ -42,7 +42,7 @@ Inspect existing identity and the required login features before provisioning. A
 | User asked to migrate from Supabase Auth | Managed Better Auth. [Supabase Auth](#supabase-auth). Moving only Postgres or adding a Function keeps Supabase Auth. |
 | Clerk, Auth.js, Supabase Auth, or another working IdP | Keep it unless the user asks to migrate. |
 
-Google, GitHub, Microsoft, Vercel, and Apple social OAuth are offered on Managed Auth. They are not a reason to leave Managed Auth. Microsoft and Apple need your own credentials: [Apple and Microsoft OAuth](#apple-and-microsoft-oauth). Making Neon Auth the OAuth server for your own MCP server or third-party OAuth clients is supported: [references/oauth-server.md](references/oauth-server.md). Other OAuth providers, generic OAuth, MFA, passkeys, API keys, SSO, custom plugins, hooks, and custom JWT claims are the [plugin matrix](#plugin-support) check.
+Google, GitHub, Microsoft, Vercel, Apple, and Discord social OAuth are offered on Managed Auth. They are not a reason to leave Managed Auth. Microsoft, Apple, and Discord need your own credentials: [Apple, Microsoft, and Discord OAuth](#apple-microsoft-and-discord-oauth). Making Neon Auth the OAuth server for your own MCP server or third-party OAuth clients is supported: [references/oauth-server.md](references/oauth-server.md). Other OAuth providers, generic OAuth, MFA, passkeys, API keys, SSO, custom plugins, hooks, and custom JWT claims are the [plugin matrix](#plugin-support) check.
 
 Before enabling Managed Auth, confirm the project is on AWS and does not use IP Allow or Private Networking. Leave those protections in place.
 
@@ -107,14 +107,14 @@ A required plugin on the self-managed path is verified in that app's Better Auth
 
 ## Plugin support
 
-Checked 2026-10-30 against https://neon.com/docs/auth/guides/plugins.md, https://neon.com/docs/auth/guides/plugins/oauth-provider.md, https://neon.com/docs/auth/roadmap.md, and the `@neon/auth` client plugin list. Re-fetch those pages if this skill may be stale. An unlisted upstream plugin needs a live check; do not treat absence from this table as a dated roadmap item.
+Checked 2026-10-30 against https://neon.com/docs/auth/guides/plugins.md, https://neon.com/docs/auth/guides/plugins/oauth-provider.md, https://neon.com/docs/auth/roadmap.md, and the `@neon/auth` client plugin list. Discord row checked 2026-11-11 against https://neon.com/docs/reference/api/auth/add-branch-neon-auth-oauth-provider.md; Discord: see [Apple, Microsoft, and Discord OAuth](#apple-microsoft-and-discord-oauth). Re-fetch those pages if this skill may be stale. An unlisted upstream plugin needs a live check; do not treat absence from this table as a dated roadmap item.
 
 "Not exposed" means the Managed SDK/UI contract. It is not a claim that every raw server request was tested.
 
 | Feature | Managed Auth | Boundary |
 | --- | --- | --- |
 | Email/password | Supported | `signUp.email`, `signIn.email` |
-| Social OAuth (Google, GitHub, Microsoft, Vercel, Apple) | Supported | `signIn.social`. Shared Google credentials are for development; production and GitHub/Vercel need your own OAuth apps. Microsoft and Apple always need your own ([details](#apple-and-microsoft-oauth)). https://neon.com/docs/auth/guides/setup-oauth.md |
+| Social OAuth (Google, GitHub, Microsoft, Vercel, Apple, Discord) | Supported | `signIn.social`. Shared Google credentials are for development; production and GitHub/Vercel need your own OAuth apps. Microsoft, Apple, and Discord always need your own. Discord: see [details](#apple-microsoft-and-discord-oauth). https://neon.com/docs/auth/guides/setup-oauth.md |
 | Admin | Supported | Admin session required. Plugin customization is on the roadmap. |
 | Email OTP | Supported | Managed delivery. `emailOtp.sendVerificationOtp`, `signIn.emailOtp`. |
 | Magic Link | Supported | Enable on the branch (off by default). `signIn.magicLink`. |
@@ -123,7 +123,7 @@ Checked 2026-10-30 against https://neon.com/docs/auth/guides/plugins.md, https:/
 | Open API | Supported | Server routes `/reference` and `/open-api/generate-schema`. |
 | Phone Number | Supported with constraints | Browser client: existing users link a number, then sign in; no phone-first signup; own SMS webhook; custom UI. Next.js `auth.handler()` forwards the catch-all path, including phone OTP. A missing `auth.phoneNumber` server method is a missing typed helper, not a proxy rejection. https://neon.com/docs/auth/guides/plugins/phone-number.md |
 | MFA / Two-Factor | Roadmap | Unavailable on Managed Auth. If required: [self-managed.md](references/self-managed.md), after confirming the installed Better Auth version. |
-| Passkey, API Key, Generic OAuth, One Tap, Multi Session | Not exposed by Managed SDK/UI | If required: [self-managed.md](references/self-managed.md). Generic OAuth is not Google/GitHub/Microsoft/Vercel/Apple social sign-in. |
+| Passkey, API Key, Generic OAuth, One Tap, Multi Session | Not exposed by Managed SDK/UI | If required: [self-managed.md](references/self-managed.md). Generic OAuth is not Google/GitHub/Microsoft/Vercel/Apple/Discord social sign-in. |
 | OAuth Provider (OAuth server, MCP auth) | Supported (beta) | Neon Auth is the OAuth 2.1 / OIDC server for your MCP server or third-party OAuth clients. You host the login and consent pages; no client credentials grant. See [references/oauth-server.md](references/oauth-server.md). |
 | SSO / SAML | Not listed or exposed | If required: [self-managed.md](references/self-managed.md), after confirming the installed Better Auth version. |
 
@@ -131,13 +131,15 @@ The default Managed client method is `getAnonymousToken()`. That JWT is a Neon a
 
 Trusted domains and webhooks are Neon settings, not installable Better Auth plugins.
 
-## Apple and Microsoft OAuth
+## Apple, Microsoft, and Discord OAuth
 
-Both providers reject shared credentials; add them with your own via `neon neon-auth oauth-provider add|update` (Console and API work too). A multi-line secret goes in a file with `--oauth-client-secret-file`, not inline.
+Apple, Microsoft, and Discord reject shared credentials. Add them with your own via `neon neon-auth oauth-provider add|update` (Console and API work too). A multi-line secret goes in a file with `--oauth-client-secret-file`, not inline.
 
 - **Apple**: `client_id` is the Services ID, `client_secret` is the full `.p8` private key. Also pass `--apple-team-id` and `--apple-key-id` (10 characters). Neon Auth signs the client-secret JWT itself, so there is nothing to rotate. Rotating the key needs the new `--apple-key-id` in the same update. The return URL must be HTTPS (`https://<auth host>/<db>/auth/callback/apple`); Apple rejects localhost, so test through a tunnel or a deployed preview.
 - **Microsoft**: `client_id` and `client_secret` from the Entra app registration. `--microsoft-tenant-id` is optional: `common` (default), `organizations`, `consumers`, a tenant GUID, or a domain. The redirect URI is `<base_url>/callback/microsoft`.
 - **Microsoft email verification**: an email counts as verified only when the ID token carries `xms_edov` = true and `acct` = 0. Add `xms_edov` and `acct` as optional ID-token claims in Entra. Without them, a same-email existing user gets `account_not_linked`, `link-social` fails with `unable_to_link_account`, and new users stay unverified.
+- **Discord**: Always needs your own Discord application `client_id` and `client_secret` (shared is rejected on add and update). Better Auth only; legacy Stack Auth returns 422. Scopes are `identify` and `email`. Redirect URI `<base_url>/callback/discord`. With Neon CLI 9.5.0 or later, add or update it like Microsoft using `--provider-id discord`, `--oauth-client-id`, and `--oauth-client-secret-file` (preferred to keep the secret out of shell history). Delete it with `neon neon-auth oauth-provider delete --provider-id discord`. Older CLIs can use MCP `auth.oauthProviders.add|update|delete` or the API: https://neon.com/docs/reference/api/auth/add-branch-neon-auth-oauth-provider.md
+- **Discord email verification**: an email counts as verified only when Discord's `verified` is the boolean `true`. An unverified Discord email cannot auto-link to an existing same-email user, and a new user from it is stored as unverified. A Discord account with no email fails with `email_not_found`.
 
 ## Trusted domains
 
