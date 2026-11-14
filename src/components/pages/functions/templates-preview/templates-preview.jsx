@@ -42,6 +42,7 @@ const TemplatesPreview = async () => {
         <ul className="mt-12 grid grid-cols-3 gap-5 lg:mt-10 md:grid-cols-2 sm:grid-cols-1">
           {preview.map((template, index) => (
             <FunctionRegistryTemplateCard
+              variant="catalog"
               key={template.id}
               template={template}
               href={registryTemplatePageHref(template.id)}

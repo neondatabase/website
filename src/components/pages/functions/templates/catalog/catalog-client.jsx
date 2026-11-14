@@ -1,162 +1,221 @@
 'use client';
 
-import { Dialog, DialogBackdrop, DialogPanel } from '@headlessui/react';
-import { parseAsInteger, parseAsString, useQueryStates } from 'nuqs';
+import { Dialog, DialogPanel, DialogTitle } from '@headlessui/react';
+import { parseAsArrayOf, parseAsString, useQueryStates } from 'nuqs';
 import PropTypes from 'prop-types';
-import { useId, useMemo, useRef, useState } from 'react';
+import { useEffect, useId, useMemo, useRef, useState } from 'react';
+import { LuListFilter } from 'react-icons/lu';
 
 import FunctionRegistryTemplateCard from 'components/pages/functions/templates/registry/template-card';
 import Button from 'components/shared/button';
+import Field from 'components/shared/field';
 import SearchClearButton from 'components/shared/search-clear-button';
 import LINKS from 'constants/links';
-import FilterIcon from 'icons/filter.inline.svg';
+import CloseIcon from 'icons/close-small.inline.svg';
 import SearchIcon from 'icons/search.inline.svg';
 import { cn } from 'utils/cn';
 import {
   REGISTRY_ALL_FILTER,
   REGISTRY_SOURCE_CATEGORIES,
   filterRegistryTemplates,
-  paginateRegistryTemplates,
   registryCategoryIds,
-  registryTemplateFilters,
+  registryCategoryLabel,
+  registryService,
+  registryServiceIds,
   registryTemplatePageHref,
 } from 'utils/function-registry';
 
-import Pagination from '../pagination';
-
+const EMPTY_SELECTION = [];
 const catalogParams = {
   q: parseAsString.withDefault(''),
-  category: parseAsString.withDefault(REGISTRY_ALL_FILTER),
-  page: parseAsInteger.withDefault(1),
+  category: parseAsArrayOf(parseAsString).withDefault(EMPTY_SELECTION),
+  // Separate from `category`: a service id can match a category id (`auth` is both).
+  service: parseAsArrayOf(parseAsString).withDefault(EMPTY_SELECTION),
 };
 
-const PINNED_FILTERS = new Set([REGISTRY_ALL_FILTER, ...REGISTRY_SOURCE_CATEGORIES]);
+const INITIAL_VISIBLE_TEMPLATES = 18;
+const COLLAPSED_CATEGORY_COUNT = 6;
+
+const LIBRARY_CLASS_NAME =
+  'bg-black-pure pt-20 pb-[4.5rem] font-normal text-pretty text-white md:pt-12 md:pb-14';
+const CONTAINER_CLASS_NAME =
+  'mx-auto w-[calc(100%-6rem)] max-w-[84rem] max-[1001px]:w-[calc(100%-4rem)] md:w-[calc(100%-2.5rem)]';
+
+const serviceFilterLabel = (id) => registryService(id).label;
 
 const INLINE_LINK_CLASS_NAME =
   'text-white underline underline-offset-2 transition-colors hover:text-green-45';
 
-const COLLAPSED_CATEGORY_COUNT = 6;
-
-const FilterButton = ({ filter, isActive, onChange, className = null }) => (
-  <button
-    type="button"
-    aria-pressed={isActive}
-    className={cn(
-      'flex items-center justify-between gap-2.5 py-[7px] text-left font-mono text-sm leading-snug tracking-tight uppercase transition-colors hover:text-white',
-      isActive ? 'text-white' : 'text-gray-new-60',
-      filter.count === 0 && !isActive && 'text-gray-new-50',
-      className
-    )}
-    onClick={() => onChange(filter.id)}
-  >
-    {filter.label}
-    <span
-      className={cn('tabular-nums', isActive ? 'text-green-45' : 'text-gray-new-50')}
-      aria-hidden
-    >
-      {filter.count}
-    </span>
-    <span className="sr-only">
-      , {filter.count} template{filter.count === 1 ? '' : 's'}
-    </span>
-  </button>
-);
-
-FilterButton.propTypes = {
-  filter: PropTypes.shape({
-    id: PropTypes.string.isRequired,
-    label: PropTypes.string.isRequired,
-    count: PropTypes.number.isRequired,
-  }).isRequired,
-  isActive: PropTypes.bool.isRequired,
-  onChange: PropTypes.func.isRequired,
-  className: PropTypes.string,
-};
-
-const CategoryFilter = ({ filters, activeFilter, onChange, className = null }) => {
+const FilterGroup = ({
+  title,
+  categories,
+  selected,
+  onToggle,
+  collapsedCount = categories.length,
+  getLabel = registryCategoryLabel,
+}) => {
   const [isExpanded, setIsExpanded] = useState(false);
-  const pinned = filters.filter((filter) => PINNED_FILTERS.has(filter.id));
-  const categories = filters.filter((filter) => !PINNED_FILTERS.has(filter.id));
-  const hiddenCount = Math.max(categories.length - COLLAPSED_CATEGORY_COUNT, 0);
-  const isActiveHidden = categories
-    .slice(COLLAPSED_CATEGORY_COUNT)
-    .some((filter) => filter.id === activeFilter);
-  const showAll = isExpanded || isActiveHidden;
+  const optionsId = useId();
+  const firstExtraInputRef = useRef(null);
+  const extraCategories = categories.slice(collapsedCount);
+  const hasExtraSelection = extraCategories.some((id) => selected.includes(id));
+  const visibleCategories =
+    isExpanded || hasExtraSelection ? categories : categories.slice(0, collapsedCount);
 
-  const renderButtons = (items, { collapsible = false } = {}) =>
-    items.map((filter, index) => (
-      <FilterButton
-        key={filter.id}
-        filter={filter}
-        isActive={filter.id === activeFilter}
-        className={collapsible && !showAll && index >= COLLAPSED_CATEGORY_COUNT ? 'hidden' : null}
-        onChange={onChange}
-      />
-    ));
+  useEffect(() => {
+    if (isExpanded) firstExtraInputRef.current?.focus();
+  }, [isExpanded]);
 
   return (
-    <nav
-      className={cn('sticky top-24 flex flex-col gap-2', className)}
-      aria-label="Template categories"
-    >
-      {renderButtons(pinned)}
-      {categories.length > 0 && (
-        <p className="mt-6 mb-1 font-mono text-xs leading-none tracking-tight text-gray-new-50 uppercase">
-          Categories
-        </p>
-      )}
-      {renderButtons(categories, { collapsible: true })}
-      {hiddenCount > 0 && !isActiveHidden && (
-        <button
-          type="button"
-          aria-expanded={isExpanded}
-          className="mt-1 w-fit py-[7px] text-left font-mono text-sm leading-snug tracking-tight text-gray-new-50 uppercase underline-offset-4 transition-colors hover:text-white hover:underline"
-          onClick={() => setIsExpanded((value) => !value)}
-        >
-          {isExpanded ? 'Show less' : `Show ${hiddenCount} more`}
-        </button>
-      )}
-    </nav>
+    categories.length > 0 && (
+      <fieldset className="min-w-0">
+        <legend className="mb-2 font-mono text-xs leading-snug tracking-tight text-gray-new-60 uppercase">
+          {title}
+        </legend>
+        <div id={optionsId} className="lg:flex lg:flex-wrap lg:gap-x-5 md:block">
+          {visibleCategories.map((id, index) => (
+            <Field
+              key={id}
+              ref={index === collapsedCount ? firstExtraInputRef : null}
+              className="max-w-full min-w-0"
+              labelClassName="flex min-h-9 w-full items-center py-1 text-sm leading-snug transition-colors [overflow-wrap:anywhere] hover:text-white"
+              inputClassName="pointer-events-auto cursor-pointer rounded-none before:translate-y-px before:bg-[url('/images/templates/check-dark-mode.svg')] checked:border-green-45! checked:bg-green-45 checked:hover:border-green-45! focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-45 forced-colors:appearance-auto"
+              name="category"
+              value={`${optionsId}-${id}`}
+              label={getLabel(id)}
+              type="checkbox"
+              theme="checkbox"
+              checked={selected.includes(id)}
+              onChange={() => onToggle(id)}
+            />
+          ))}
+        </div>
+        {visibleCategories.length < categories.length && (
+          <button
+            className="mt-1 min-h-9 py-1 text-left text-sm leading-snug text-gray-new-60 transition-colors hover:text-white"
+            type="button"
+            aria-controls={optionsId}
+            aria-expanded={false}
+            aria-label="Show more categories"
+            onClick={() => setIsExpanded(true)}
+          >
+            Show more
+          </button>
+        )}
+      </fieldset>
+    )
   );
 };
 
-CategoryFilter.propTypes = {
-  filters: PropTypes.arrayOf(FilterButton.propTypes.filter).isRequired,
-  activeFilter: PropTypes.string.isRequired,
-  onChange: PropTypes.func.isRequired,
-  className: PropTypes.string,
+FilterGroup.propTypes = {
+  title: PropTypes.string.isRequired,
+  categories: PropTypes.arrayOf(PropTypes.string).isRequired,
+  selected: PropTypes.arrayOf(PropTypes.string).isRequired,
+  onToggle: PropTypes.func.isRequired,
+  collapsedCount: PropTypes.number,
+  getLabel: PropTypes.func,
 };
 
-const FilterSheet = ({ onChange, ...props }) => {
+const FilterPanel = ({ selectedCount, onClear, children, isMobile = false }) => {
+  const panelRef = useRef(null);
+
+  const clearSelection = () => {
+    onClear();
+    panelRef.current?.querySelector('input[type="checkbox"]')?.focus();
+  };
+
+  const selectionBar = selectedCount > 0 && (
+    <div
+      className={cn(
+        'flex flex-wrap items-center justify-between gap-x-2 border-gray-new-20 text-[0.6875rem] leading-snug font-medium tracking-tight uppercase',
+        isMobile ? 'shrink-0 border-t px-5 py-2' : 'border-b pb-2'
+      )}
+    >
+      <p>
+        {selectedCount} {selectedCount === 1 ? 'filter' : 'filters'} selected
+      </p>
+      <button
+        className="inline-flex min-h-9 shrink-0 cursor-pointer items-center gap-1 whitespace-nowrap text-gray-new-60 uppercase transition-colors hover:text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-45"
+        type="button"
+        onClick={clearSelection}
+      >
+        Clear all <CloseIcon className="size-3 shrink-0" aria-hidden />
+      </button>
+    </div>
+  );
+
+  return (
+    <div
+      ref={panelRef}
+      className={cn('flex min-w-0 flex-col', isMobile ? 'min-h-0 flex-1' : 'gap-5')}
+    >
+      {!isMobile && selectionBar}
+      <div
+        className={cn(
+          'flex flex-col gap-6',
+          isMobile && 'min-h-0 flex-1 overflow-y-auto overscroll-contain px-5 pb-8'
+        )}
+      >
+        {children}
+      </div>
+      {isMobile && selectionBar}
+    </div>
+  );
+};
+
+FilterPanel.propTypes = {
+  selectedCount: PropTypes.number.isRequired,
+  onClear: PropTypes.func.isRequired,
+  children: PropTypes.node.isRequired,
+  isMobile: PropTypes.bool,
+};
+
+const MobileFilters = ({ children }) => {
   const [isOpen, setIsOpen] = useState(false);
+  const triggerRef = useRef(null);
+
+  const closeFilters = () => {
+    setIsOpen(false);
+    requestAnimationFrame(() => triggerRef.current?.focus({ preventScroll: true }));
+  };
+
   return (
     <>
       <button
+        ref={triggerRef}
+        className="hidden w-9 shrink-0 items-center justify-center border border-gray-new-20 bg-black-new text-gray-new-60 transition-colors hover:text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-45 md:flex"
         type="button"
-        className="hidden shrink-0 items-center gap-2 border border-gray-new-20 bg-black-new px-3 font-mono text-sm tracking-tight text-gray-new-80 uppercase lg:flex"
+        aria-label="Open filters"
+        aria-haspopup="dialog"
+        aria-expanded={isOpen}
         onClick={() => setIsOpen(true)}
       >
-        <FilterIcon className="size-4" aria-hidden />
-        Filter
+        <LuListFilter className="size-4" aria-hidden />
       </button>
-      <Dialog className="relative z-50" open={isOpen} onClose={setIsOpen}>
-        <DialogBackdrop className="fixed inset-0 bg-black-pure/70" />
-        <DialogPanel className="fixed inset-x-0 bottom-0 max-h-[80dvh] overflow-y-auto border-t border-gray-new-20 bg-black-new p-5">
-          <CategoryFilter
-            {...props}
-            className="static"
-            onChange={(id) => {
-              onChange(id);
-              setIsOpen(false);
-            }}
-          />
+      <Dialog open={isOpen} onClose={closeFilters} unmount={false} className="relative z-[100]">
+        <DialogPanel className="fixed inset-0 flex h-dvh flex-col bg-black-pure text-white">
+          <header className="flex shrink-0 items-center justify-between gap-4 px-5 py-4">
+            <DialogTitle className="text-xl font-medium tracking-tight">Choose filters</DialogTitle>
+            <button
+              className="flex size-10 shrink-0 items-center justify-center text-gray-new-60 transition-colors hover:text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-45"
+              type="button"
+              aria-label="Close filters"
+              data-autofocus
+              onClick={closeFilters}
+            >
+              <CloseIcon className="size-4" aria-hidden />
+            </button>
+          </header>
+          {children}
         </DialogPanel>
       </Dialog>
     </>
   );
 };
 
-FilterSheet.propTypes = CategoryFilter.propTypes;
+MobileFilters.propTypes = {
+  children: PropTypes.node.isRequired,
+};
 
 const EmptyState = ({ onClear }) => (
   <div className="flex flex-col items-center py-16">
@@ -176,146 +235,276 @@ EmptyState.propTypes = {
   onClear: PropTypes.func.isRequired,
 };
 
-const getStatusText = ({ total, shown, currentPage, pageCount }) => {
+const getStatusText = (total) => {
   if (total === 0) return 'No templates match those filters.';
-  const pageInfo = pageCount > 1 ? `, page ${currentPage} of ${pageCount}` : '';
-  return `Showing ${shown} of ${total} template${total === 1 ? '' : 's'}${pageInfo}.`;
+  return `${total} matching template${total === 1 ? '' : 's'}.`;
 };
 
-const CatalogClient = ({ templates }) => {
+const CatalogResults = ({ templates, onClear }) => {
+  const [isExpanded, setIsExpanded] = useState(false);
+  const listId = useId();
+  const listRef = useRef(null);
+  const total = templates.length;
+  const shown = isExpanded ? total : Math.min(total, INITIAL_VISIBLE_TEMPLATES);
+
+  useEffect(() => {
+    if (isExpanded) {
+      listRef.current?.children[INITIAL_VISIBLE_TEMPLATES]?.querySelector('a[href]')?.focus();
+    }
+  }, [isExpanded]);
+
+  if (total === 0) return <EmptyState onClear={onClear} />;
+
+  return (
+    <>
+      <ul
+        id={listId}
+        ref={listRef}
+        className="grid grid-cols-3 gap-5 max-[1251px]:grid-cols-2 max-[1251px]:gap-6 lg:grid-cols-3 lg:gap-4 md:grid-cols-1"
+      >
+        {templates.map((template, index) => (
+          <FunctionRegistryTemplateCard
+            key={template.id}
+            variant="catalog"
+            template={template}
+            href={registryTemplatePageHref(template.id)}
+            eager={index < 3}
+            className={index >= shown ? 'hidden' : null}
+          />
+        ))}
+      </ul>
+      {shown < total && (
+        <Button
+          className="mx-auto mt-10 flex w-fit md:mt-6"
+          type="button"
+          theme="outlined"
+          size="sm-new"
+          aria-controls={listId}
+          onClick={() => setIsExpanded(true)}
+        >
+          Show more
+        </Button>
+      )}
+    </>
+  );
+};
+
+CatalogResults.propTypes = {
+  templates: PropTypes.arrayOf(FunctionRegistryTemplateCard.propTypes.template).isRequired,
+  onClear: PropTypes.func.isRequired,
+};
+
+export const CatalogView = ({
+  templates,
+  q = '',
+  category = EMPTY_SELECTION,
+  service = EMPTY_SELECTION,
+  setParams = null,
+}) => {
   const searchId = useId();
   const searchInputRef = useRef(null);
-  const resultsRef = useRef(null);
-  const [{ q, category, page }, setParams] = useQueryStates(catalogParams);
 
-  const categoryIds = useMemo(() => registryCategoryIds(templates), [templates]);
-  const filters = useMemo(
-    () => registryTemplateFilters(filterRegistryTemplates(templates, { query: q }), categoryIds),
-    [templates, q, categoryIds]
-  );
-  const { items, total, pageCount, currentPage } = useMemo(
-    () =>
-      paginateRegistryTemplates(
-        filterRegistryTemplates(templates, { query: q, filter: category }),
-        { page }
+  const { sourceIds, topicIds } = useMemo(() => {
+    const ids = registryCategoryIds(templates);
+    return {
+      sourceIds: REGISTRY_SOURCE_CATEGORIES.filter((id) => ids.includes(id)),
+      topicIds: ids.filter(
+        (id) => id !== REGISTRY_ALL_FILTER && !REGISTRY_SOURCE_CATEGORIES.includes(id)
       ),
-    [templates, q, category, page]
+    };
+  }, [templates]);
+  const serviceIds = useMemo(() => registryServiceIds(templates), [templates]);
+  const selectedServices = useMemo(
+    () => serviceIds.filter((id) => service.includes(id)),
+    [serviceIds, service]
+  );
+  const matchingTemplates = useMemo(
+    () =>
+      filterRegistryTemplates(templates, {
+        query: q,
+        categories: category,
+        services: selectedServices,
+      }),
+    [templates, q, category, selectedServices]
   );
 
-  const setPage = (nextPage) => {
-    setParams({ page: nextPage }, { history: 'push' });
-    resultsRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-  };
+  useEffect(() => {
+    if (templates.length > 0 && selectedServices.length < service.length) {
+      setParams?.((params) => ({
+        service: serviceIds.filter((id) => params.service.includes(id)),
+      }));
+    }
+  }, [selectedServices.length, service.length, serviceIds, setParams, templates.length]);
 
-  const filterProps = {
-    filters,
-    activeFilter: category,
-    onChange: (id) => setParams({ category: id, page: null }),
+  const toggleParam = (key) => (id) => {
+    setParams?.((params) => ({
+      [key]: params[key].includes(id)
+        ? params[key].filter((value) => value !== id)
+        : [...params[key], id],
+    }));
   };
+  const toggleCategory = toggleParam('category');
+  const toggleService = toggleParam('service');
 
   const clearFilters = () => {
-    setParams({ q: null, category: null, page: null });
+    setParams?.({ q: null, category: null, service: null });
     searchInputRef.current?.focus();
   };
 
+  const clearCategories = () => setParams?.({ category: null, service: null });
+
   if (templates.length === 0) {
     return (
-      <p className="text-base text-gray-new-60">
-        The catalog is temporarily unavailable. See the{' '}
-        <a className={INLINE_LINK_CLASS_NAME} href={LINKS.functionsTemplatesDocs}>
-          function templates docs
-        </a>{' '}
-        or fetch{' '}
-        <a className={INLINE_LINK_CLASS_NAME} href="/functions/registry/registry.json">
-          registry.json
-        </a>
-        .
-      </p>
+      <section className={LIBRARY_CLASS_NAME} aria-label="Function templates">
+        <div className={CONTAINER_CLASS_NAME}>
+          <p className="text-base text-gray-new-60">
+            The catalog is temporarily unavailable. See the{' '}
+            <a className={INLINE_LINK_CLASS_NAME} href={LINKS.functionsTemplatesDocs}>
+              function templates docs
+            </a>{' '}
+            or fetch{' '}
+            <a className={INLINE_LINK_CLASS_NAME} href="/functions/registry/registry.json">
+              registry.json
+            </a>
+            .
+          </p>
+        </div>
+      </section>
     );
   }
 
-  return (
-    <div className="flex gap-16 lt:gap-12 lg:flex-col lg:gap-10">
-      <div className="flex w-64 shrink-0 flex-col gap-8 lg:w-full lg:flex-row lg:gap-2">
-        <div
-          className="relative flex items-center gap-2 border border-gray-new-20 bg-black-new px-3 py-1.5 pr-2.5 lg:min-w-0 lg:flex-1"
-          role="search"
-        >
-          <label className="sr-only" htmlFor={searchId}>
-            Search Function Registry templates
-          </label>
-          <SearchIcon className="size-[15px] shrink-0 text-gray-new-60" aria-hidden />
-          <input
-            ref={searchInputRef}
-            id={searchId}
-            className="min-w-0 flex-1 bg-transparent pr-7 text-[15px] leading-snug tracking-tighter text-white placeholder:text-gray-new-60 focus:outline-hidden md:text-base search-cancel:appearance-none"
-            type="search"
-            value={q}
-            placeholder="Search templates..."
-            autoComplete="off"
-            onChange={(event) => setParams({ q: event.target.value, page: null })}
-          />
-          {q && <SearchClearButton onClick={() => setParams({ q: null, page: null })} />}
-        </div>
-        <CategoryFilter {...filterProps} className="lg:hidden" />
-        <FilterSheet {...filterProps} />
-      </div>
+  const hasFilters = sourceIds.length > 0 || topicIds.length > 0 || serviceIds.length > 0;
+  const selectedCount =
+    [...sourceIds, ...topicIds].filter((id) => category.includes(id)).length +
+    selectedServices.length;
+  const filters = (
+    <>
+      <FilterGroup
+        title="Source"
+        categories={sourceIds}
+        selected={category}
+        onToggle={toggleCategory}
+      />
+      <FilterGroup
+        title="Neon services"
+        categories={serviceIds}
+        selected={selectedServices}
+        getLabel={serviceFilterLabel}
+        onToggle={toggleService}
+      />
+      <FilterGroup
+        title="Categories"
+        categories={topicIds}
+        selected={category}
+        onToggle={toggleCategory}
+        collapsedCount={COLLAPSED_CATEGORY_COUNT}
+      />
+    </>
+  );
 
-      <div className="min-w-0 flex-1 scroll-mt-24" ref={resultsRef}>
-        <h2 className="sr-only">Templates</h2>
-        <p className="sr-only" role="status" aria-live="polite" aria-atomic="true">
-          {getStatusText({ total, shown: items.length, currentPage, pageCount })}
-        </p>
-        {items.length > 0 ? (
-          <>
-            <ul className="grid grid-cols-3 gap-5 lt:grid-cols-2 sm:grid-cols-1">
-              {items.map((template, index) => (
-                <FunctionRegistryTemplateCard
-                  key={template.id}
-                  template={template}
-                  href={registryTemplatePageHref(template.id)}
-                  eager={currentPage === 1 && index < 3}
+  return (
+    <section className={LIBRARY_CLASS_NAME} aria-labelledby="registry-library-title">
+      <div className={CONTAINER_CLASS_NAME}>
+        <div className="grid grid-cols-[13rem_minmax(0,1fr)] gap-x-10 max-[1251px]:grid-cols-[11.5rem_minmax(0,1fr)] max-[1251px]:gap-x-[1.875rem] lg:grid-cols-1">
+          <header className="col-span-2 col-start-1 row-start-1 mb-14 min-w-0 lg:col-span-1 md:mb-6">
+            <h2
+              id="registry-library-title"
+              className="m-0 max-w-[60rem] text-5xl leading-dense font-normal tracking-tighter text-pretty text-gray-new-50 2xl:text-[2.75rem] xl:text-[2.25rem] md:text-[1.75rem]"
+            >
+              <span className="text-white">Start from a template.</span> Functions built by Neon and
+              partners, from AI agents and MCP servers to bots, auth, and REST APIs.
+            </h2>
+          </header>
+          <aside
+            className={cn(
+              'col-start-1 row-start-2 flex min-w-0 flex-col lg:mb-10 md:mb-6',
+              selectedCount > 0 ? 'gap-4' : 'gap-7 lg:gap-6'
+            )}
+          >
+            <div className="flex gap-3">
+              <div
+                className="relative flex min-w-0 flex-1 items-center gap-2 border border-gray-new-20 bg-black-new px-3 py-1.5 pr-2.5 lg:max-w-[280px] md:max-w-none"
+                role="search"
+              >
+                <label className="sr-only" htmlFor={searchId}>
+                  Search Function Registry templates
+                </label>
+                <SearchIcon className="size-[15px] shrink-0 text-gray-new-60" aria-hidden />
+                <input
+                  ref={searchInputRef}
+                  id={searchId}
+                  className="min-w-0 flex-1 bg-transparent pr-7 text-[15px] leading-snug tracking-tighter text-white placeholder:text-gray-new-60 focus:outline-hidden md:text-base search-cancel:appearance-none"
+                  type="search"
+                  value={q}
+                  placeholder="Search templates..."
+                  autoComplete="off"
+                  onChange={(event) => setParams?.({ q: event.target.value })}
                 />
-              ))}
-            </ul>
-            <Pagination currentPage={currentPage} pageCount={pageCount} onPageChange={setPage} />
-          </>
-        ) : (
-          <EmptyState onClear={clearFilters} />
-        )}
-        <p className="mt-8 text-sm leading-snug text-gray-new-60">
-          New to templates? See{' '}
-          <a className={INLINE_LINK_CLASS_NAME} href={LINKS.functionsTemplatesDocs}>
-            how to use them
-          </a>
-          . If the one you need isn&apos;t here, ask on{' '}
-          <a className={INLINE_LINK_CLASS_NAME} href="/discord">
-            Discord
-          </a>{' '}
-          or{' '}
-          <a className={INLINE_LINK_CLASS_NAME} href={LINKS.functionsRegistry}>
-            contribute one
-          </a>
-          .
-        </p>
+                {q && (
+                  <SearchClearButton
+                    onClick={() => {
+                      setParams?.({ q: null });
+                      searchInputRef.current?.focus();
+                    }}
+                  />
+                )}
+              </div>
+              {hasFilters && (
+                <MobileFilters>
+                  <FilterPanel isMobile selectedCount={selectedCount} onClear={clearCategories}>
+                    {filters}
+                  </FilterPanel>
+                </MobileFilters>
+              )}
+            </div>
+            {hasFilters && (
+              <div className="sticky top-24 -m-1 max-h-[calc(100dvh-7rem)] min-w-0 overflow-y-auto p-1 [scrollbar-color:#494b50_transparent] [scrollbar-width:thin] lg:static lg:m-0 lg:max-h-none lg:overflow-visible lg:p-0 md:hidden">
+                <FilterPanel selectedCount={selectedCount} onClear={clearCategories}>
+                  {filters}
+                </FilterPanel>
+              </div>
+            )}
+          </aside>
+          <div className="col-start-2 row-start-2 min-w-0 lg:col-start-1 lg:row-start-3">
+            <p className="sr-only" role="status" aria-live="polite" aria-atomic="true">
+              {getStatusText(matchingTemplates.length)}
+            </p>
+            <CatalogResults
+              key={JSON.stringify([q, category, selectedServices])}
+              templates={matchingTemplates}
+              onClear={clearFilters}
+            />
+          </div>
+        </div>
       </div>
-    </div>
+    </section>
+  );
+};
+
+CatalogView.propTypes = {
+  templates: PropTypes.arrayOf(FunctionRegistryTemplateCard.propTypes.template).isRequired,
+  q: PropTypes.string,
+  category: PropTypes.arrayOf(PropTypes.string),
+  service: PropTypes.arrayOf(PropTypes.string),
+  setParams: PropTypes.func,
+};
+
+const CatalogClient = ({ templates }) => {
+  const [{ q, category, service }, setParams] = useQueryStates(catalogParams);
+
+  return (
+    <CatalogView
+      templates={templates}
+      q={q}
+      category={category}
+      service={service}
+      setParams={setParams}
+    />
   );
 };
 
 CatalogClient.propTypes = {
-  templates: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.string.isRequired,
-      title: PropTypes.string.isRequired,
-      description: PropTypes.string.isRequired,
-      provider: PropTypes.string,
-      categories: PropTypes.arrayOf(PropTypes.string),
-      logo: PropTypes.string,
-      website: PropTypes.string,
-      installs: PropTypes.number,
-    })
-  ).isRequired,
+  templates: PropTypes.arrayOf(FunctionRegistryTemplateCard.propTypes.template).isRequired,
 };
 
 export default CatalogClient;

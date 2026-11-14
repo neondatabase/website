@@ -1,6 +1,10 @@
-import { describe, expect, it } from 'vitest';
+import { compileMDX } from 'next-mdx-remote/rsc';
+import { renderToStaticMarkup } from 'react-dom/server';
+import remarkGfm from 'remark-gfm';
+import { afterEach, describe, expect, it } from 'vitest';
 
 import { renderTemplateMarkdown, renderTemplatesIndexMarkdown } from './markdown';
+import getTemplatePrompt from './registry/template-prompt';
 
 const template = {
   id: 'demo',
@@ -186,5 +190,86 @@ describe('function template installs in Markdown', () => {
 
     expect(markdown).toContain('- Installs: 65 all time, counted since 2026-08-17');
     expect(markdown.match(/Installs:/g)).toHaveLength(1);
+  });
+});
+
+describe('registry-backed template content', () => {
+  const template = {
+    id: 'future-template',
+    title: 'A new integration',
+    description: 'A template added to the upstream registry.',
+    provider: 'Example',
+    path: 'partners/future-template/template.json',
+    categories: ['ai'],
+    operations: [
+      {
+        id: 'chat',
+        title: 'Chat',
+        description: 'Stream a reply.',
+        route: '/chat',
+        recommended: true,
+      },
+    ],
+    environment: [{ name: 'EXAMPLE_TOKEN', description: 'The token for this integration.' }],
+  };
+
+  afterEach(() => {
+    delete globalThis.registryMetadataExecuted;
+  });
+
+  it('renders registry operations, complete install commands and environment facts', () => {
+    const markdown = renderTemplateMarkdown({
+      template: {
+        ...template,
+        environment: [{ ...template.environment[0], required: 'default-branch' }],
+      },
+    });
+    expect(markdown).toContain('Chat (recommended)');
+    expect(markdown).toContain('`/chat`');
+    expect(markdown).toContain('`neon functions new future-template --operation chat`');
+    expect(markdown).toContain('`EXAMPLE_TOKEN`');
+    expect(markdown).toContain(template.environment[0].description);
+    expect(markdown).toContain('| Variable | Description | Required |');
+    expect(markdown).toContain('Default branch only');
+  });
+
+  it('treats remote metadata as text when the docs MDX renderer compiles it', async () => {
+    const markdown = renderTemplateMarkdown({
+      template: {
+        ...template,
+        operations: [
+          {
+            ...template.operations[0],
+            description: 'Return <result> and {globalThis.registryMetadataExecuted = true}.',
+          },
+        ],
+        environment: [{ name: 'EXAMPLE_TOKEN', description: 'Accept A | B, with {braces}.' }],
+      },
+    });
+    const { content } = await compileMDX({
+      source: markdown,
+      options: { mdxOptions: { remarkPlugins: [remarkGfm] } },
+    });
+    const html = renderToStaticMarkup(content);
+    expect(globalThis.registryMetadataExecuted).toBeUndefined();
+    expect(html).toContain('&lt;result&gt;');
+    expect(html).toContain('{globalThis.registryMetadataExecuted = true}');
+    expect(html).toContain('Accept A | B, with {braces}.');
+  });
+
+  it('builds a complete prompt with the source folder when it is valid', () => {
+    const externalTemplate = {
+      ...template,
+      path: 'template.json',
+      source: { github: { owner: 'example', repo: 'functions', dir: 'registry/future-template' } },
+    };
+    const prompt = getTemplatePrompt(externalTemplate);
+    expect(prompt).toContain(
+      'https://github.com/example/functions/tree/HEAD/registry/future-template'
+    );
+    expect(prompt).toContain('`neon functions new future-template`');
+    expect(getTemplatePrompt({ ...externalTemplate, path: '../template.json' })).not.toContain(
+      'Read the template metadata and source at'
+    );
   });
 });

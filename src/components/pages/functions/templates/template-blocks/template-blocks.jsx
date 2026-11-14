@@ -1,6 +1,5 @@
 import PropTypes from 'prop-types';
 
-import CopyCommand from 'components/shared/copy-command';
 import { cn } from 'utils/cn';
 import {
   REGISTRY_ENV_REQUIRED_ON_DEFAULT_BRANCH,
@@ -9,8 +8,12 @@ import {
   registryEnvironmentRequiredLabel,
 } from 'utils/function-registry';
 
+import CodeSnippet from '../template-detail/code-snippet';
+
 const Operation = ({ operation, installCommand }) => {
-  const command = operation.id ? `${installCommand} --operation ${operation.id}` : null;
+  const command = isInlineCodeSafe(operation.id)
+    ? `${installCommand} --operation ${operation.id}`
+    : null;
 
   return (
     <li className="border-t border-gray-new-20 pt-6">
@@ -29,7 +32,7 @@ const Operation = ({ operation, installCommand }) => {
         <p className="mt-2 font-mono text-sm text-gray-new-80">{operation.route}</p>
       )}
       {command && (
-        <CopyCommand className="mt-4" command={command} trackingLabel={`Copy ${command}`} />
+        <CodeSnippet className="mt-4" command={command} trackingLabel={`Copy ${command}`} />
       )}
     </li>
   );

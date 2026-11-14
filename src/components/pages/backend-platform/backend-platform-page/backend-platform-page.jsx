@@ -6,9 +6,9 @@ import Layout from 'components/shared/layout';
 import { sharedBackendPlatformContent } from 'constants/backend-platform-page-content';
 import LINKS from 'constants/links';
 
-const { cta } = sharedBackendPlatformContent;
+const { cta: defaultCta } = sharedBackendPlatformContent;
 
-const BackendPlatformPage = ({ children }) => (
+const BackendPlatformPage = ({ children, cta = defaultCta }) => (
   <Layout
     className="bg-black-pure"
     headerClassName="h-15! lg:h-14!"
@@ -30,6 +30,13 @@ const BackendPlatformPage = ({ children }) => (
 
 BackendPlatformPage.propTypes = {
   children: PropTypes.node.isRequired,
+  cta: PropTypes.shape({
+    title: PropTypes.string.isRequired,
+    description: PropTypes.string,
+    label: PropTypes.string,
+    buttonText: PropTypes.string.isRequired,
+    linkKey: PropTypes.string.isRequired,
+  }),
 };
 
 export default BackendPlatformPage;

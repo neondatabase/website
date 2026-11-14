@@ -1,11 +1,11 @@
+import NEON_SERVICES from 'constants/neon-services';
+
 export const REGISTRY_SOURCE_BASE =
   'https://raw.githubusercontent.com/neondatabase/examples/main/registry/';
 
 export const EXAMPLES_REGISTRY_TREE = 'https://github.com/neondatabase/examples/tree/main/registry';
 
 export const REGISTRY_TEMPLATE_PAGE_BASE = 'functions/templates';
-
-export const REGISTRY_PAGE_SIZE = 9;
 
 const REGISTRY_USER_AGENT = { 'User-Agent': 'neon-website-function-registry' };
 
@@ -230,6 +230,7 @@ export const matchesRegistryTemplateQuery = (template, query) => {
     template.description,
     template.provider,
     ...registryTemplateCategories(template).map(registryCategoryLabel),
+    ...registryTemplateServices(template).map((id) => registryService(id).label),
   ]
     .filter(Boolean)
     .join(' ')
@@ -270,7 +271,7 @@ const REGISTRY_CATEGORY_LABELS = {
 const UPPERCASE_CATEGORY_WORDS = new Set(['ai', 'api', 'cdn', 'cli', 'llm', 'mcp', 'sdk', 'sql']);
 
 export const registryCategoryLabel = (id) => {
-  if (REGISTRY_CATEGORY_LABELS[id]) return REGISTRY_CATEGORY_LABELS[id];
+  if (Object.hasOwn(REGISTRY_CATEGORY_LABELS, id)) return REGISTRY_CATEGORY_LABELS[id];
   const words = id.split('-').filter(Boolean);
   return words
     .map((word, index) => {
@@ -324,6 +325,87 @@ export const registryCategoryIds = (templates) => {
   );
 };
 
+// Every template is a Neon Function, so `functions` doesn't tell templates apart: it's dropped from
+// the data and the filter, and the template page shows it as a fixed tag instead.
+export const REGISTRY_IMPLICIT_SERVICE = 'functions';
+const REGISTRY_SERVICE_MAX_ITEMS = 16;
+
+const NEON_SERVICE_BY_ID = new Map(NEON_SERVICES.map((service) => [service.id, service]));
+
+// Services are open-ended too: an id we don't know yet still gets a humanized label, without an
+// icon, description, or link.
+export const registryService = (id) =>
+  NEON_SERVICE_BY_ID.get(id) ?? {
+    id,
+    label: registryCategoryLabel(id),
+    description: null,
+    href: null,
+  };
+
+export const normalizeRegistryServices = (value) => {
+  if (!Array.isArray(value)) return [];
+  const ids = value.filter(
+    (id) =>
+      typeof id === 'string' &&
+      id.length <= REGISTRY_CATEGORY_MAX_LENGTH &&
+      REGISTRY_ID_PATTERN.test(id) &&
+      id !== REGISTRY_IMPLICIT_SERVICE
+  );
+  return [...new Set(ids)].slice(0, REGISTRY_SERVICE_MAX_ITEMS);
+};
+
+export const registryTemplateServices = (template) => normalizeRegistryServices(template?.services);
+
+const registryServiceRank = (id) => {
+  const index = NEON_SERVICES.findIndex((service) => service.id === id);
+  return index === -1 ? NEON_SERVICES.length : index;
+};
+
+// Every known service, even one no template uses yet (it shows the empty state), then any
+// unknown ids from the data. Known ones keep Console order, unknown ones sort by label.
+export const registryServiceIds = (templates) => {
+  const ids = new Set([
+    ...NEON_SERVICES.map(({ id }) => id).filter((id) => id !== REGISTRY_IMPLICIT_SERVICE),
+    ...templates.flatMap(registryTemplateServices),
+  ]);
+  return [...ids].sort(
+    (a, b) =>
+      registryServiceRank(a) - registryServiceRank(b) ||
+      registryService(a).label.localeCompare(registryService(b).label)
+  );
+};
+
+// TODO: temporary prototype data. Picked by hand from each template's description until
+// registry.json / template.json declare `services`; delete this map once they do.
+const TEMPORARY_REGISTRY_SERVICES = {
+  'image-analysis': ['ai-gateway'],
+  'jev-triage': ['ai-gateway'],
+  'mcp-postgres': ['postgres'],
+  'telegram-bot': ['postgres', 'ai-gateway'],
+  'rest-api-postgres': ['postgres'],
+  'image-generation': ['object-storage', 'ai-gateway'],
+  'authenticated-api': ['auth'],
+  'tanstack-ai': ['ai-gateway'],
+  'websocket-live-poll': ['postgres'],
+  'inngest-workflow': ['postgres'],
+  'upstash-workflow': ['postgres'],
+  mastra: ['postgres', 'ai-gateway'],
+  'presigned-uploads': ['object-storage'],
+  'chat-sdk': ['postgres', 'ai-gateway'],
+  'rate-limit-postgres': ['postgres'],
+  'openai-agents': ['ai-gateway'],
+  'workos-sync': ['postgres'],
+  'x402-paid-api': ['postgres'],
+  'openapi-postgres': ['postgres'],
+  'jalco-drop': ['object-storage'],
+  'mcp-use': ['postgres'],
+};
+
+const withTemporaryServices = (entry) =>
+  entry.services.length > 0
+    ? entry
+    : { ...entry, services: normalizeRegistryServices(TEMPORARY_REGISTRY_SERVICES[entry.id]) };
+
 export const registryTemplateFilters = (
   templates,
   categoryIds = registryCategoryIds(templates)
@@ -338,31 +420,28 @@ export const registryTemplateFilters = (
 
 export const filterRegistryTemplates = (
   templates,
-  { query = '', filter = REGISTRY_ALL_FILTER } = {}
+  { query = '', filter = REGISTRY_ALL_FILTER, categories = [filter], services = [] } = {}
 ) => {
   const q = query.trim().toLowerCase();
-  return templates.filter(
-    (template) =>
-      matchesRegistryTemplateQuery(template, q) && matchesRegistryTemplateFilter(template, filter)
-  );
-};
+  const categoryIds = categories.filter((id) => id && id !== REGISTRY_ALL_FILTER);
+  const selectedSources = categoryIds.filter((id) => REGISTRY_SOURCE_CATEGORIES.includes(id));
+  const selectedTopics = categoryIds.filter((id) => !REGISTRY_SOURCE_CATEGORIES.includes(id));
+  const selectedServices = services.filter(Boolean);
 
-export const paginateRegistryTemplates = (
-  templates,
-  { page = 1, pageSize = REGISTRY_PAGE_SIZE } = {}
-) => {
-  const total = templates.length;
-  const size = pageSize > 0 ? pageSize : REGISTRY_PAGE_SIZE;
-  const pageCount = Math.max(1, Math.ceil(total / size) || 1);
-  const currentPage = Math.min(Math.max(Number(page) || 1, 1), pageCount);
-  const start = (currentPage - 1) * size;
-  return {
-    items: templates.slice(start, start + size),
-    total,
-    pageCount,
-    currentPage,
-    pageSize: size,
-  };
+  return templates.filter((template) => {
+    if (!matchesRegistryTemplateQuery(template, q)) return false;
+
+    const templateCategories = registryTemplateCategories(template);
+    return (
+      (selectedSources.length === 0 ||
+        selectedSources.some((id) => templateCategories.includes(id))) &&
+      (selectedTopics.length === 0 ||
+        selectedTopics.some((id) => templateCategories.includes(id))) &&
+      // Unlike the other groups, a template must use every selected service.
+      (selectedServices.length === 0 ||
+        selectedServices.every((id) => registryTemplateServices(template).includes(id)))
+    );
+  });
 };
 
 export const normalizeRegistryTemplates = (data) => {
@@ -381,6 +460,7 @@ export const normalizeRegistryTemplates = (data) => {
     .map((template) => ({
       ...template,
       categories: normalizeRegistryCategories(template.categories),
+      services: normalizeRegistryServices(template.services),
       website: registryWebsiteUrl(template.website),
     }));
 };
@@ -424,7 +504,11 @@ const withTemplateJsonCategories = async (entry) => {
       (id) => !REGISTRY_SOURCE_CATEGORIES.includes(id)
     );
     const categories = normalizeRegistryCategories([...entry.categories, ...topicalCategories]);
-    return { ...entry, categories };
+    const services = normalizeRegistryServices([
+      ...entry.services,
+      ...normalizeRegistryServices(data.services),
+    ]);
+    return { ...entry, categories, services };
   } catch {
     return entry;
   }
@@ -433,7 +517,8 @@ const withTemplateJsonCategories = async (entry) => {
 export const getFunctionRegistryCatalog = async () => {
   try {
     const templates = normalizeRegistryTemplates(await fetchRegistryJson('registry.json'));
-    return await Promise.all(templates.map(withTemplateJsonCategories));
+    const entries = await Promise.all(templates.map(withTemplateJsonCategories));
+    return entries.map(withTemporaryServices);
   } catch {
     return [];
   }
@@ -480,9 +565,9 @@ const pickTemplateJsonFields = (data) => {
   return picked;
 };
 
-export const getFunctionRegistryTemplate = async (id) => {
+export const getFunctionRegistryTemplate = async (id, catalog = null) => {
   if (typeof id !== 'string' || !REGISTRY_ID_PATTERN.test(id)) return null;
-  const templates = await getFunctionRegistryCatalog();
+  const templates = catalog ?? (await getFunctionRegistryCatalog());
   const entry = templates.find((template) => template.id === id);
   if (!entry) return null;
 
@@ -506,14 +591,12 @@ export const getFunctionRegistryTemplate = async (id) => {
 // Returns null for an unknown id. Throws when the catalog itself is unreachable,
 // so a transient GitHub failure doesn't get cached as a 404.
 export const getFunctionRegistryTemplatePage = async (id) => {
-  const [template, templates] = await Promise.all([
-    getFunctionRegistryTemplate(id),
-    getFunctionRegistryCatalog(),
-  ]);
+  const templates = await getFunctionRegistryCatalog();
+  const template = await getFunctionRegistryTemplate(id, templates);
   if (!template) {
     if (templates.length === 0) throw new Error('Function Registry catalog is unavailable');
     return null;
   }
   const index = templates.findIndex((item) => item.id === template.id);
-  return { template, previous: templates[index - 1], next: templates[index + 1] };
+  return { template, templates, previous: templates[index - 1], next: templates[index + 1] };
 };

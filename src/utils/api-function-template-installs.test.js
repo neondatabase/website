@@ -1,30 +1,30 @@
-import { afterEach, describe, expect, it } from 'vitest';
+import { afterEach, describe, expect, it, vi } from 'vitest';
 
 import {
   getFunctionTemplateInstallTotals,
   getFunctionTemplateInstalls,
 } from './api-function-template-installs';
 
-const { STATS_DATABASE_URL, VERCEL } = process.env;
-
 afterEach(() => {
-  process.env.STATS_DATABASE_URL = STATS_DATABASE_URL;
-  process.env.VERCEL = VERCEL;
-  if (STATS_DATABASE_URL === undefined) delete process.env.STATS_DATABASE_URL;
-  if (VERCEL === undefined) delete process.env.VERCEL;
+  vi.unstubAllEnvs();
 });
 
 describe('getFunctionTemplateInstalls', () => {
-  it('has no installs to show locally without the stats database', async () => {
-    delete process.env.STATS_DATABASE_URL;
-    delete process.env.VERCEL;
+  it.each([
+    ['locally', undefined, undefined],
+    ['on Vercel Preview', '1', 'preview'],
+  ])('has no installs to show %s without the stats database', async (_target, vercel, env) => {
+    vi.stubEnv('STATS_DATABASE_URL', undefined);
+    vi.stubEnv('VERCEL', vercel);
+    vi.stubEnv('VERCEL_ENV', env);
 
     await expect(getFunctionTemplateInstalls('basic')).resolves.toEqual([]);
   });
 
-  it('refuses to build on Vercel without the stats database', async () => {
-    delete process.env.STATS_DATABASE_URL;
-    process.env.VERCEL = '1';
+  it('requires the stats database on Vercel Production', async () => {
+    vi.stubEnv('STATS_DATABASE_URL', undefined);
+    vi.stubEnv('VERCEL', '1');
+    vi.stubEnv('VERCEL_ENV', 'production');
 
     await expect(getFunctionTemplateInstalls('basic')).rejects.toThrow(
       'STATS_DATABASE_URL is not set'
@@ -35,7 +35,7 @@ describe('getFunctionTemplateInstalls', () => {
     'postgresql://reader:hunter2@host.invalid:badport/stats',
     'postgresql://reader:hunter2@host%invalid/stats',
   ])('keeps the password out of the error for %s', async (connectionString) => {
-    process.env.STATS_DATABASE_URL = connectionString;
+    vi.stubEnv('STATS_DATABASE_URL', connectionString);
 
     const error = await getFunctionTemplateInstalls('basic').catch((e) => e);
     expect(error.message).toContain('[STATS_DATABASE_URL]');
@@ -44,15 +44,16 @@ describe('getFunctionTemplateInstalls', () => {
 });
 
 describe('getFunctionTemplateInstallTotals', () => {
-  it('has no totals to show locally without the stats database', async () => {
-    delete process.env.STATS_DATABASE_URL;
-    delete process.env.VERCEL;
+  it('has no totals to show on Vercel Preview without the stats database', async () => {
+    vi.stubEnv('STATS_DATABASE_URL', undefined);
+    vi.stubEnv('VERCEL', '1');
+    vi.stubEnv('VERCEL_ENV', 'preview');
 
     await expect(getFunctionTemplateInstallTotals()).resolves.toEqual(new Map());
   });
 
   it('keeps the password out of the error', async () => {
-    process.env.STATS_DATABASE_URL = 'postgresql://reader:hunter2@host.invalid:badport/stats';
+    vi.stubEnv('STATS_DATABASE_URL', 'postgresql://reader:hunter2@host.invalid:badport/stats');
 
     const error = await getFunctionTemplateInstallTotals().catch((e) => e);
     expect(error.message).toContain('[STATS_DATABASE_URL]');

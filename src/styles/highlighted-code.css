@@ -101,6 +101,11 @@
     }
   }
 
+  /* `$` prompt before each shell command line (marked by lib/shiki) */
+  .code-block-prompt code .line[data-prompt]:not(.diff)::before {
+    @apply mr-[2ch] text-gray-new-60 content-['$'] select-none dark:text-gray-new-50;
+  }
+
   code .line::after {
     @apply invisible overflow-hidden text-sm content-["'"];
   }

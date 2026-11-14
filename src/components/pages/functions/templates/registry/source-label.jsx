@@ -9,10 +9,10 @@ import {
   registryTemplateSource,
 } from 'utils/function-registry';
 
-const SOURCE_COLOR_CLASS_NAMES = {
-  [REGISTRY_FIRST_PARTY_CATEGORY]: 'border-green-45/40 text-green-45',
-  [REGISTRY_PARTNER_CATEGORY]: 'border-blue-70/40 text-blue-70',
-  [REGISTRY_COMMUNITY_CATEGORY]: 'border-gray-new-40 text-gray-new-80',
+const SOURCE_MARKER_CLASS_NAMES = {
+  [REGISTRY_FIRST_PARTY_CATEGORY]: 'bg-[#00e599]',
+  [REGISTRY_PARTNER_CATEGORY]: 'bg-blue-70',
+  [REGISTRY_COMMUNITY_CATEGORY]: 'bg-gray-new-80',
 };
 
 const FunctionRegistrySourceLabel = ({ template, className = null }) => {
@@ -22,12 +22,11 @@ const FunctionRegistrySourceLabel = ({ template, className = null }) => {
   return (
     <span
       className={cn(
-        'font-mono font-medium tracking-tight uppercase',
-        SOURCE_COLOR_CLASS_NAMES[source],
-        className,
-        'leading-none'
+        'inline-flex shrink-0 items-center gap-[7px] border border-[#303236] bg-white/[0.03] px-2 py-1 font-mono text-[11px] leading-[14px] font-medium tracking-[0.04em] whitespace-nowrap text-[#e4e5e7] uppercase',
+        className
       )}
     >
+      <span className={cn('size-[5px] shrink-0', SOURCE_MARKER_CLASS_NAMES[source])} aria-hidden />
       {registryCategoryLabel(source)}
     </span>
   );

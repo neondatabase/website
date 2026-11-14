@@ -1,237 +1,86 @@
 import PropTypes from 'prop-types';
 
-import FunctionRegistrySourceLabel from 'components/pages/functions/templates/registry/source-label';
 import FunctionRegistryTemplateLogo from 'components/pages/functions/templates/registry/template-logo';
-import FunctionRegistryWebsiteLink from 'components/pages/functions/templates/registry/website-link';
 import {
   EnvironmentTable,
   OperationList,
 } from 'components/pages/functions/templates/template-blocks';
 import { renderReadme } from 'components/pages/functions/templates/template-readme';
 import WeeklyInstalls from 'components/pages/functions/templates/weekly-installs';
-import { weeklyInstallRowsPropType } from 'components/pages/functions/templates/weekly-installs/summary';
-import Container from 'components/shared/container';
-import CopyCommand from 'components/shared/copy-command';
-import Link from 'components/shared/link';
+import {
+  totalWeeklyInstalls,
+  weeklyInstallRowsPropType,
+} from 'components/pages/functions/templates/weekly-installs/summary';
+import Tooltip from 'components/shared/tooltip';
 import LINKS from 'constants/links';
-import ArrowBackIcon from 'icons/arrow-back.inline.svg';
+import ArrowLeftIcon from 'icons/arrow-left-thin.inline.svg';
+import BookIcon from 'icons/docs/sidebar/book.inline.svg';
+import GitHubIcon from 'icons/docs/sidebar/github.inline.svg';
+import InfoIcon from 'icons/docs/sidebar/info.inline.svg';
 import { cn } from 'utils/cn';
 import {
+  REGISTRY_IMPLICIT_SERVICE,
+  REGISTRY_SOURCE_CATEGORIES,
   hasRegistryEnvironmentRequirements,
   isInlineCodeSafe,
   registryCategoryLabel,
   registryProviderLabel,
+  registryService,
   registryTemplateCategories,
-  registryTemplatePageHref,
+  registryTemplateServices,
   registryTemplateSourceUrl,
 } from 'utils/function-registry';
+import getRelatedFunctionTemplates from 'utils/get-related-function-templates';
 
-const Section = ({ title, description, children = null }) => (
-  <section className="mt-14 md:mt-10">
-    <h2 className="text-[28px] leading-tight tracking-tighter md:text-2xl">{title}</h2>
-    <p className="mt-4 text-base leading-normal tracking-extra-tight text-gray-new-80">
-      {description}
-    </p>
-    {children}
-  </section>
-);
+import OpenSource from '../open-source';
+import ServiceIcon from '../registry/service-icon';
+import { templateCardType } from '../registry/template-card';
+import TemplateCopy from '../registry/template-copy';
+import getTemplatePrompt from '../registry/template-prompt';
+import FunctionRegistryWebsiteLink from '../registry/website-link';
 
-Section.propTypes = {
-  title: PropTypes.string.isRequired,
-  description: PropTypes.node.isRequired,
-  children: PropTypes.node,
-};
+import CodeSnippet from './code-snippet';
+import RelatedTemplates from './related-templates';
+import TemplateOperations from './template-operations';
 
-const Code = ({ children }) => <code className="font-mono text-[0.9375rem]">{children}</code>;
+const SELECTED_INDEX = `${LINKS.functionsTemplates}#library`;
+const CONTRIBUTE_ID = 'contribute';
+const frame =
+  'mx-auto w-[calc(100%-6rem)] max-w-[72rem] max-[1201px]:w-[calc(100%-4rem)] max-[601px]:w-[calc(100%-2.5rem)]';
+const resourceLink =
+  'flex min-h-7 items-center gap-3 text-sm leading-normal text-gray-new-60 hover:text-white focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary-1 max-[901px]:min-h-11 max-[601px]:text-[.8125rem] [&_svg]:size-[1.125rem] [&_svg]:shrink-0';
 
-Code.propTypes = {
-  children: PropTypes.node.isRequired,
-};
-
-// Links inside running text need more than color to stand out (WCAG 1.4.1).
-const TEXT_LINK_CLASS_NAME = 'underline underline-offset-2';
-
-const RUN_LOCALLY = (
-  <>
-    run it locally with{' '}
-    <Link className={TEXT_LINK_CLASS_NAME} to="/docs/cli/dev" theme="green">
-      neon dev
-    </Link>{' '}
-    first, and deploy it to a branch with{' '}
-    <Link className={TEXT_LINK_CLASS_NAME} to="/docs/compute/functions/deploy" theme="green">
-      neon deploy
-    </Link>{' '}
-    once it works.
-  </>
-);
-
-const PagerLink = ({ label, title, href, direction }) => {
-  const isNext = direction === 'next';
-
-  return (
-    <Link
-      className={cn(
-        'group flex min-w-0 items-center gap-6 border border-gray-new-20 py-4 transition-colors duration-200 hover:border-gray-new-40',
-        isNext
-          ? 'col-start-1 justify-between pr-4 pl-5'
-          : 'col-start-2 flex-row-reverse justify-between pr-5 pl-4 sm:col-start-1'
-      )}
-      to={href}
-    >
-      <span className={cn('flex min-w-0 flex-col', !isNext && 'items-end text-right')}>
-        <span className="text-xs leading-normal text-gray-new-50">{label}</span>
-        <span className="w-full truncate text-base leading-normal text-white">{title}</span>
-      </span>
-      <ArrowBackIcon
-        className={cn('shrink-0 text-gray-new-60', isNext && 'rotate-180')}
-        aria-hidden
-      />
-    </Link>
-  );
-};
-
-PagerLink.propTypes = {
-  label: PropTypes.string.isRequired,
-  title: PropTypes.string.isRequired,
-  href: PropTypes.string.isRequired,
-  direction: PropTypes.oneOf(['previous', 'next']).isRequired,
-};
-
-const TemplatePager = ({ previous, next }) => (
-  <nav
-    className="mt-14 grid grid-cols-2 gap-6 border-t border-gray-new-20 pt-8 md:mt-10 sm:grid-cols-1 sm:gap-4"
-    aria-label="Other templates"
-  >
-    {next && (
-      <PagerLink
-        label="Next"
-        title={next.title}
-        href={registryTemplatePageHref(next.id)}
-        direction="next"
-      />
-    )}
-    <PagerLink
-      label="Previous"
-      title={previous ? previous.title : 'All templates'}
-      href={previous ? registryTemplatePageHref(previous.id) : LINKS.functionsTemplates}
-      direction="previous"
-    />
-  </nav>
-);
-
-TemplatePager.propTypes = {
-  previous: PropTypes.shape({ id: PropTypes.string, title: PropTypes.string }),
-  next: PropTypes.shape({ id: PropTypes.string, title: PropTypes.string }),
-};
-
-const DETAIL_LABEL_CLASS_NAME =
-  'font-mono text-xs leading-none font-medium tracking-tight text-gray-new-50 uppercase';
-
-const DetailRow = ({ label, children }) => (
-  <div className="flex flex-col gap-2.5 border-t border-gray-new-20 py-4 last:pb-0">
-    <dt className={DETAIL_LABEL_CLASS_NAME}>{label}</dt>
-    <dd className="text-[15px] leading-snug tracking-extra-tight text-white">{children}</dd>
-  </div>
-);
-
-DetailRow.propTypes = {
-  label: PropTypes.string.isRequired,
-  children: PropTypes.node.isRequired,
-};
-
-const TemplateSidebar = ({ template, installCommand, installs }) => {
-  const provider = registryProviderLabel(template) || 'Neon';
-  const categories = registryTemplateCategories(template);
-  const sourceUrl = registryTemplateSourceUrl(template);
-
-  return (
-    <div className="sticky top-24 flex flex-col gap-6 lg:static">
-      <div className="border border-gray-new-20 bg-[#080808] p-5">
-        <p className={DETAIL_LABEL_CLASS_NAME}>Use this template</p>
-        <CopyCommand
-          className="mt-4 [&>span:nth-of-type(2)]:[overflow-wrap:anywhere] [&>span:nth-of-type(2)]:whitespace-normal"
-          command={installCommand}
-          trackingLabel={`Copy ${installCommand}`}
-        />
-      </div>
-
-      <dl>
-        <WeeklyInstalls rows={installs} />
-        <DetailRow label="Built by">
-          <span className="flex items-center gap-3">
-            <FunctionRegistryTemplateLogo template={template} eager variant="title" />
-            <span className="min-w-0 truncate">
-              <FunctionRegistryWebsiteLink template={template}>
-                {provider}
-              </FunctionRegistryWebsiteLink>
-            </span>
-          </span>
-        </DetailRow>
-        {categories.length > 0 && (
-          <DetailRow label="Categories">
-            <ul className="flex flex-wrap gap-2">
-              {categories.map((id) => (
-                <li key={id}>
-                  <Link
-                    className="block border border-gray-new-20 px-2 py-1 font-mono text-xs leading-none tracking-tight text-gray-new-80 uppercase transition-colors hover:border-gray-new-40 hover:text-white"
-                    to={`${LINKS.functionsTemplates}?category=${id}`}
-                  >
-                    {registryCategoryLabel(id)}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </DetailRow>
-        )}
-        <DetailRow label="Resources">
-          <ul className="flex flex-col gap-2">
-            {sourceUrl && (
-              <li>
-                <Link to={sourceUrl} theme="green" isExternal>
-                  Template source
-                  <span className="sr-only"> (opens in a new tab)</span>
-                </Link>
-              </li>
-            )}
-            <li>
-              <Link to={LINKS.functionsTemplatesDocs} theme="green">
-                How to use templates
-              </Link>
-            </li>
-            <li>
-              <Link to={LINKS.functionsRegistry} theme="green">
-                Contribute a template
-              </Link>
-            </li>
-          </ul>
-        </DetailRow>
-      </dl>
-    </div>
-  );
-};
-
-TemplateSidebar.propTypes = {
-  installCommand: PropTypes.string.isRequired,
-  installs: weeklyInstallRowsPropType,
-  template: PropTypes.shape({
-    id: PropTypes.string.isRequired,
-    provider: PropTypes.string,
-    website: PropTypes.string,
-    categories: PropTypes.arrayOf(PropTypes.string),
-  }).isRequired,
-};
-
-const TemplateDetail = async ({
-  template,
-  previous = null,
-  next = null,
-  readme = null,
-  installs,
-}) => {
+const TemplateDetail = async ({ template, templates, readme = null, installs = [] }) => {
+  const installCommand = `neon functions new ${template.id}`;
+  const cliTooltipId = `registry-cli-${template.id}`;
   const operations = template.operations ?? [];
   const environment = (template.environment ?? []).filter((item) => isInlineCodeSafe(item.name));
-  const installCommand = `neon functions new ${template.id}`;
-
+  const categories = registryTemplateCategories(template);
+  const catalogFilterHref = (param, id) =>
+    `${LINKS.functionsTemplates}?${param}=${encodeURIComponent(id)}#library`;
+  const categoryTag = (id) => ({
+    key: `category-${id}`,
+    label: registryCategoryLabel(id),
+    href: catalogFilterHref('category', id),
+  });
+  // Every template runs on Neon Functions, so Functions is a fixed tag before the other services.
+  const tags = [
+    ...categories.filter((id) => REGISTRY_SOURCE_CATEGORIES.includes(id)).map(categoryTag),
+    ...categories.filter((id) => !REGISTRY_SOURCE_CATEGORIES.includes(id)).map(categoryTag),
+    {
+      key: `service-${REGISTRY_IMPLICIT_SERVICE}`,
+      label: registryService(REGISTRY_IMPLICIT_SERVICE).label,
+      serviceId: REGISTRY_IMPLICIT_SERVICE,
+    },
+    ...registryTemplateServices(template).map((id) => ({
+      key: `service-${id}`,
+      label: registryService(id).label,
+      href: catalogFilterHref('service', id),
+      serviceId: id,
+    })),
+  ];
+  const sourceUrl = registryTemplateSourceUrl(template);
+  const related = getRelatedFunctionTemplates(template, templates);
   const renderedReadme =
     readme &&
     (await renderReadme({
@@ -246,117 +95,208 @@ const TemplateDetail = async ({
   const readmeHas = (block) => Boolean(renderedReadme?.used.has(block));
 
   return (
-    <Container
-      className="grid w-full grid-cols-12 gap-x-8 pt-[88px] pb-[120px] xl:pt-16 xl:pb-24 lg:flex lg:flex-col lg:gap-y-10 lg:pt-11 lg:pb-20 md:pt-8 md:pb-[72px]"
-      size="1280"
-    >
-      <header className="col-span-8 row-start-1 max-w-[704px]">
-        <Link
-          className="mb-8 flex w-fit items-center gap-1 text-sm leading-none tracking-extra-tight text-gray-new-50 transition-colors duration-200 hover:text-white"
-          to={LINKS.functionsTemplates}
-        >
-          <ArrowBackIcon />
-          Function templates
-        </Link>
-        <FunctionRegistrySourceLabel className="mb-4 block text-xs" template={template} />
-        <h1 className="text-5xl leading-dense font-normal tracking-tighter text-balance lg:text-[36px] md:text-[32px]">
-          {template.title}
-        </h1>
-        <p className="mt-5 text-lg leading-normal tracking-extra-tight text-gray-new-60 md:text-base">
-          {template.description}
-        </p>
-      </header>
-
-      <aside className="col-span-4 col-start-9 row-span-2 row-start-1 lg:w-full lg:max-w-[704px]">
-        <TemplateSidebar template={template} installCommand={installCommand} installs={installs} />
-      </aside>
-
-      <article className="col-span-8 row-start-2 max-w-[704px] lg:-mt-14 md:-mt-10">
-        {renderedReadme && (
-          <section className="mt-14 md:mt-10">
-            <h2 className="text-[28px] leading-tight tracking-tighter md:text-2xl">
-              About this template
-            </h2>
-            <div className="mt-6">{renderedReadme.content}</div>
-          </section>
-        )}
-
-        {operations.length > 0 && !readmeHas('operations') && (
-          <Section
-            title="What this function exposes"
-            description="After you deploy, call these paths on the function URL."
+    <div className="bg-black-pure font-sans text-pretty text-white [--section-spacing:6rem] max-[901px]:[--section-spacing:5rem] max-[601px]:[--section-spacing:4rem]">
+      <div
+        className={`${frame} grid grid-cols-[minmax(0,46rem)_minmax(0,22rem)] items-start gap-x-16 pt-[9.125rem] pb-[var(--section-spacing)] max-[1201px]:grid-cols-[minmax(0,1fr)_18rem] max-[1201px]:gap-x-12 max-[901px]:grid-cols-1 max-[901px]:gap-y-8 max-[901px]:pt-[7.5rem] max-[601px]:gap-y-7 max-[601px]:pt-[6.25rem]`}
+      >
+        <header className="col-start-1 row-start-1 min-w-0">
+          <a
+            className="inline-flex items-center gap-2.5 text-[.8125rem] leading-normal text-gray-new-60 hover:text-white focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary-1 max-[601px]:text-xs [&_svg]:h-3 [&_svg]:w-[1.125rem] [&_svg]:shrink-0"
+            href={SELECTED_INDEX}
           >
-            <OperationList
-              className="mt-6"
-              operations={operations}
-              installCommand={installCommand}
-            />
-          </Section>
-        )}
+            <ArrowLeftIcon aria-hidden="true" /> All functions
+          </a>
+          <h1 className="mt-8 min-w-0 text-[3.5rem] leading-[1.1] font-normal tracking-[-.04em] max-[1201px]:text-[3rem] max-[901px]:max-w-[40rem] max-[601px]:mt-7 max-[601px]:text-[2.25rem]">
+            {template.title}
+          </h1>
+          <p className="mt-5 max-w-[42rem] text-lg leading-[1.55] tracking-[-.02em] text-gray-new-80 max-[601px]:mt-4 max-[601px]:text-base max-[601px]:leading-[1.6]">
+            {template.description}
+          </p>
+          <div className="mt-[1.125rem] flex items-center gap-2 text-xs leading-normal text-gray-new-50 max-[601px]:mt-3.5">
+            <span className="inline-flex shrink-0" aria-hidden="true">
+              <FunctionRegistryTemplateLogo template={template} eager variant="tile-sm" />
+            </span>
+            By{' '}
+            <FunctionRegistryWebsiteLink template={template} className="text-xs">
+              {registryProviderLabel(template) || 'Neon'}
+            </FunctionRegistryWebsiteLink>
+          </div>
+        </header>
+        <aside
+          className="sticky top-28 col-start-2 row-span-2 row-start-1 mt-[4.25rem] min-w-0 max-[1201px]:mt-16 max-[901px]:static max-[901px]:col-start-1 max-[901px]:row-span-1 max-[901px]:row-start-2 max-[901px]:mt-0 max-[901px]:max-w-[38rem]"
+          aria-label="Template actions and resources"
+        >
+          <ol
+            className="mb-5 flex list-decimal flex-col gap-2.5 pl-[1.125rem] text-sm leading-normal text-gray-new-80 marker:text-gray-new-50"
+            aria-label="Add this template to your app"
+          >
+            <li>Copy the prompt below.</li>
+            <li>Paste the prompt into your coding agent.</li>
+            <li>Review the changes and test your function.</li>
+          </ol>
+          <TemplateCopy
+            value={getTemplatePrompt(template)}
+            className="w-full rounded-full bg-white px-6 py-3 text-[.9375rem] font-medium tracking-[-0.02em] text-black-pure hover:bg-gray-new-90 max-[768px]:text-sm"
+            label={`Copy agent prompt for ${template.title}`}
+          >
+            Copy prompt
+          </TemplateCopy>
+          <CodeSnippet
+            className="mt-4 max-w-full"
+            command={installCommand}
+            trackingLabel={`Copy registry command - ${template.title}`}
+          />
+          <p className="mt-3 flex flex-wrap items-center gap-x-0.5 text-[.8125rem] leading-normal text-gray-new-50">
+            <span>
+              Requires{' '}
+              <a
+                className="underline decoration-white/40 decoration-dashed underline-offset-[3px] transition-colors duration-200 hover:text-white hover:decoration-white"
+                href={LINKS.cliInstall}
+              >
+                Neon CLI
+              </a>{' '}
+              8.11.0 or later.
+            </span>
+            <button
+              type="button"
+              className="inline-flex size-5 cursor-help items-center justify-center text-gray-new-50 hover:text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-1"
+              aria-label="What this CLI command does"
+              data-tooltip-id={cliTooltipId}
+            >
+              <InfoIcon className="size-3.5" aria-hidden="true" />
+            </button>
+            <Tooltip
+              id={cliTooltipId}
+              place="top"
+              className="is-[.react-tooltip]:bg-gray-new-15! z-20 w-sm! px-4! pt-3! pb-3.5! [&_code]:font-mono [&_code]:text-[.8125rem] [&_code]:text-white"
+              openEvents={{ mouseenter: true, focus: true, click: true }}
+              globalCloseEvents={{ escape: true, clickOutsideAnchor: true }}
+            >
+              This command copies the template into <code>functions/&lt;slug&gt;/</code> and
+              declares the function in <code>neon.ts</code>.
+            </Tooltip>
+          </p>
+          {tags.length > 0 && (
+            <nav aria-label="Template tags" className="mt-5 flex flex-wrap gap-2">
+              {tags.map(({ key, label, href, serviceId }) => {
+                const Tag = href ? 'a' : 'span';
 
-        {!renderedReadme &&
-          (operations.length === 0 ? (
-            <Section
-              title="What it does"
-              description={
-                <>
-                  This template has a single handler and no named operations, so it&apos;s a
-                  starting point for your own code. To try it, {RUN_LOCALLY}
-                </>
-              }
-            />
-          ) : (
-            <Section
-              title="Run it"
-              description={<>Installing a template doesn&apos;t deploy it, so {RUN_LOCALLY}</>}
-            />
-          ))}
-
-        {environment.length > 0 && !readmeHas('environment') && (
-          <Section
-            title="Environment variables"
-            description={
-              <>
-                The CLI declares these variables in <Code>neon.ts</Code> and adds them to{' '}
-                <Code>.env.example</Code> without values, so you need to fill{' '}
+                return (
+                  <Tag
+                    key={key}
+                    href={href}
+                    className={cn(
+                      'inline-flex h-6 items-center gap-1.5 border border-gray-new-20 px-2 font-mono text-xs leading-none tracking-tight text-gray-new-60 uppercase',
+                      href &&
+                        'hover:border-gray-new-40 hover:text-white focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary-1'
+                    )}
+                  >
+                    {serviceId && <ServiceIcon id={serviceId} className="size-3.5 shrink-0" />}
+                    {label}
+                  </Tag>
+                );
+              })}
+            </nav>
+          )}
+          <div className="mt-6 flex flex-col gap-1 border-t border-gray-new-20 pt-5 max-[901px]:flex-row max-[901px]:flex-wrap max-[901px]:gap-x-5 max-[901px]:gap-y-2 max-[601px]:mt-5 max-[601px]:gap-x-4 max-[601px]:gap-y-1 max-[601px]:pt-4">
+            {sourceUrl && (
+              <a className={resourceLink} href={sourceUrl}>
+                <GitHubIcon aria-hidden="true" />
+                Source code
+              </a>
+            )}
+            <a className={resourceLink} href={LINKS.functionsTemplatesDocs}>
+              <BookIcon aria-hidden="true" />
+              How to use templates
+            </a>
+          </div>
+          {totalWeeklyInstalls(installs) > 0 && (
+            <dl className="mt-5">
+              <WeeklyInstalls rows={installs} />
+            </dl>
+          )}
+        </aside>
+        <article
+          className="col-start-1 row-start-2 mt-8 min-w-0 max-[901px]:row-start-3 max-[901px]:mt-0"
+          aria-label={`${template.title} setup and usage`}
+        >
+          {renderedReadme && (
+            <section>
+              <h2 className="text-2xl leading-[1.3] font-normal tracking-tighter">
+                About this template
+              </h2>
+              <div className="mt-6">{renderedReadme.content}</div>
+            </section>
+          )}
+          {operations.length > 0 && !readmeHas('operations') && (
+            <TemplateOperations operations={operations} installCommand={installCommand} />
+          )}
+          {!renderedReadme && (
+            <section className="mt-8">
+              <h2 className="text-2xl leading-[1.3] font-normal tracking-tighter">
+                {operations.length > 0 ? 'Run it' : 'What it does'}
+              </h2>
+              <p className="mt-4 text-base leading-normal tracking-extra-tight text-gray-new-80">
+                {operations.length > 0
+                  ? "Installing a template doesn't deploy it, so "
+                  : "This template has a single handler and no named operations, so it's a starting point for your own code. To try it, "}
+                run it locally with{' '}
+                <a className="underline underline-offset-2" href="/docs/cli/dev">
+                  neon dev
+                </a>{' '}
+                first, and deploy it to a branch with{' '}
+                <a className="underline underline-offset-2" href="/docs/compute/functions/deploy">
+                  neon deploy
+                </a>{' '}
+                once it works.
+              </p>
+            </section>
+          )}
+          {environment.length > 0 && !readmeHas('environment') && (
+            <section className="mt-8">
+              <h2 className="text-2xl leading-[1.3] font-normal tracking-tighter">
+                Environment variables
+              </h2>
+              <p className="mt-4 text-base leading-normal tracking-extra-tight text-gray-new-80">
+                The CLI declares these variables in <code>neon.ts</code> and adds them to{' '}
+                <code>.env.example</code> without values, so you need to fill{' '}
                 {hasRegistryEnvironmentRequirements(environment)
                   ? 'in the required ones'
                   : 'them in'}{' '}
                 before you run the function.
-              </>
-            }
-          >
-            <EnvironmentTable className="mt-6" variables={environment} />
-          </Section>
-        )}
-
-        <TemplatePager previous={previous} next={next} />
-      </article>
-    </Container>
+              </p>
+              <EnvironmentTable className="mt-6" variables={environment} />
+            </section>
+          )}
+        </article>
+      </div>
+      <OpenSource
+        id={CONTRIBUTE_ID}
+        withHowTo={false}
+        withLabel={false}
+        source="Detail"
+        containerClassName={frame}
+      />
+      {related.length > 0 && (
+        <RelatedTemplates
+          templates={related}
+          allTemplatesHref={SELECTED_INDEX}
+          frameClassName={frame}
+        />
+      )}
+    </div>
   );
 };
 
-const templateShape = PropTypes.shape({
-  id: PropTypes.string.isRequired,
-  title: PropTypes.string.isRequired,
-  description: PropTypes.string.isRequired,
-  provider: PropTypes.string,
-  logo: PropTypes.string,
-  website: PropTypes.string,
-  operations: PropTypes.arrayOf(PropTypes.object),
-  environment: PropTypes.arrayOf(PropTypes.object),
-});
-
 TemplateDetail.propTypes = {
-  template: templateShape.isRequired,
-  previous: templateShape,
-  next: templateShape,
+  template: templateCardType.isRequired,
+  templates: PropTypes.arrayOf(templateCardType).isRequired,
+  installs: weeklyInstallRowsPropType,
   readme: PropTypes.shape({
     markdown: PropTypes.string.isRequired,
     imageBase: PropTypes.string.isRequired,
     linkBase: PropTypes.string.isRequired,
   }),
-  installs: weeklyInstallRowsPropType,
 };
 
 export default TemplateDetail;
