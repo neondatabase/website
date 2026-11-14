@@ -17,7 +17,7 @@ redirectFrom:
   - /docs/guides/connection-pooling
   - /docs/introduction/connection-pooling
   - /docs/manage/connection-pooling
-updatedOn: '2026-10-19T16:37:42.945Z'
+updatedOn: '2026-11-14T10:56:58.939Z'
 ---
 
 Neon uses [PgBouncer](https://www.pgbouncer.org/) to provide connection pooling, enabling up to 10,000 concurrent connections. This guide explains how pooling works, when to use it, and how to avoid common issues.
@@ -269,23 +269,37 @@ Neon uses PgBouncer in transaction mode (`pool_mode=transaction`), which means c
 
 The most common issue users encounter is with `SET` statements, particularly `SET search_path`.
 
+PgBouncer doesn't reset a server connection when it returns to the pool in transaction mode. A `SET` changes the setting on the server connection, not on your client, so two things can happen:
+
+- Your next transaction might run on a different server connection that doesn't have the setting.
+- Another client connecting to the same database with the same role might get the connection and inherit your setting. For example, a leftover `search_path` can make that client read from or write to tables in the wrong schema.
+
+PgBouncer does restore each client's own values for a few parameters: `client_encoding`, `DateStyle`, `TimeZone`, `standard_conforming_strings`, `application_name`, `IntervalStyle`, and `default_transaction_read_only`. Other settings, including `search_path`, `statement_timeout`, and `synchronous_commit`, carry over.
+
 **Problem example:**
 
 ```sql
 SET search_path TO myschema;
-SELECT * FROM mytable;  -- Works in this transaction
--- Transaction ends, connection returns to pool
-SELECT * FROM mytable;  -- ERROR: relation "mytable" does not exist
+SELECT * FROM mytable;  -- Works on this server connection
+-- Transaction ends, connection returns to the pool with search_path still set
+SELECT * FROM mytable;  -- Might run on another connection: ERROR: relation "mytable" does not exist
 ```
 
 **Solutions:**
 
-1. **Use a direct connection** when you need persistent session settings
+1. **Use `SET LOCAL` inside a transaction** so the setting reverts when the transaction ends:
+   ```sql
+   BEGIN;
+   SET LOCAL search_path TO myschema, public;
+   SELECT * FROM mytable;
+   COMMIT;
+   ```
 2. **Specify schema explicitly** in your queries: `SELECT * FROM myschema.mytable`
-3. **Set at the role level** (persists across transactions):
+3. **Set at the role level** (applies to new server connections, so pooled connections that are already open keep the old value until they close):
    ```sql
    ALTER ROLE user1 SET search_path TO myschema, public;
    ```
+4. **Use a direct connection** when you need persistent session settings
 
 This issue also affects tools like `pg_dump`, which relies on `SET` statements. Always use direct connections for `pg_dump`.
 
