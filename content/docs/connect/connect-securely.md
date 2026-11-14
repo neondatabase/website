@@ -43,6 +43,18 @@ The choice of which mode to use depends on the specific security requirements of
 
 `channel_binding=require` is a security parameter that ensures the client and server mutually authenticate each other using SCRAM-SHA-256-PLUS. This helps protect against man-in-the-middle attacks, even when using `sslmode=require` alone.
 
+With `sslmode=require`, the connection is encrypted, but the client doesn't check the server's certificate. Channel binding ties your password authentication to that specific TLS connection, so a server in the middle can't relay it. That's why the connection strings Neon gives you, from the Console, CLI, MCP server, and API, include both parameters.
+
+Channel binding is optional. A connection string without it still connects, encrypted and authenticated with SCRAM-SHA-256. To keep the same protection without channel binding, use `sslmode=verify-full` instead, as described below.
+
+Your client library has to support channel binding:
+
+- `psql` and other clients built on libpq, the Postgres client library, need libpq 13 or later. This is the version installed on your machine, not your Neon Postgres version. Older clients fail with an `invalid connection option` error. Run `psql --version` to check.
+- Some tools don't support channel binding and fail when the parameter is present. For example, `pgloader` throws an error, so the [SQLite migration guide](/docs/import/migrate-sqlite) removes it.
+- Some drivers and ORMs reject parameters they don't recognize or use their own names for them. For example, JDBC uses `channelBinding`, and Npgsql uses `Channel Binding=Require`.
+
+If a tool fails with an error that mentions `channel_binding` or an unknown connection option, remove `&channel_binding=require` from the connection string and use `sslmode=verify-full` instead.
+
 The required configuration for your connection depends on the client you are using.
 
 ## Connect from the psql client
