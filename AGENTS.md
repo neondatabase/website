@@ -617,3 +617,10 @@ This version has breaking changes — APIs, conventions, and file structure may 
 This block is written and re-added by `next dev` — verify at `node_modules/next/dist/server/lib/generate-agent-files.js`. Removing it from a diff only re-creates the uncommitted change; committing it with your work keeps the tree clean.
 
 <!-- END:nextjs-agent-rules -->
+
+<!-- copybook:start -->
+
+## Copybook
+
+The code snippets, shell commands, and coding-agent prompts in this product's UI are Copybook definitions, configured in `copybook.config.mjs`. Before changing one, run `npx copybook status --json`. After changing one, run `npx copybook snapshot` and `npx copybook check`, and commit the snapshots with the code. Markdown prompts from the config's `markdown` sources are their own snapshots, so editing one needs no snapshot. The Copybook skill in `.agents/skills/copybook` and the `copybook` MCP server have the details. Docs for agents: https://copybook.dev/llms.txt
+<!-- copybook:end -->

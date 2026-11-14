@@ -112,3 +112,6 @@ package-lock.json
 .evals/
 
 scripts/docs-checks/neonctl/fragments/
+
+# Copybook test and eval results
+.copybook/

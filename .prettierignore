@@ -11,3 +11,6 @@ public/
 # content files
 content/docs/postgresql/query-reference.md
 content/docs/functions/json_extract_path.md
+
+# Copybook snapshots must stay byte-for-byte what `copybook snapshot` wrote.
+copybook/snapshots/
