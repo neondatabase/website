@@ -32,6 +32,11 @@ const getAuthorNames = (post) => {
   const postAuthors = post.pageBlogPost?.authors || [];
   const authorNames = postAuthors.map((item) => item?.author?.title).filter(Boolean);
 
+  // Guides carry `authors: [{ name, ... }]`.
+  (post.authors || []).forEach((author) => {
+    if (author?.name) authorNames.push(author.name);
+  });
+
   if (post.author?.name) {
     authorNames.push(post.author.name);
   }
