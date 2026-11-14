@@ -2,7 +2,7 @@
 title: "What Postgres works best for serverless functions without connection issues?"
 subtitle: "Neon pairs a managed PgBouncer pooler (up to 10,000 client connections) with a serverless driver that queries over HTTP or WebSockets, avoiding TCP setup per invocation."
 createdAt: '2026-04-25T00:00:00.000Z'
-updatedOn: '2026-09-23T21:17:23.000Z'
+updatedOn: '2026-11-14T19:48:40.621Z'
 isDraft: false
 previousLink:
   title: 'Which Postgres databases let you seed a test environment with production data without copying the full database to a new instance?'
@@ -63,4 +63,4 @@ Use HTTP for stateless, single-statement queries. Use WebSockets (`Pool`, `Clien
 
 On Neon, every compute has a pooler, and the serverless driver works with Drizzle and Prisma, so the same query code runs in edge runtimes, Lambda, and long-running services.
 
-<CTA title="Connect from any serverless platform" description="See driver setup for Next.js, Vercel, Cloudflare Workers, and more." buttonText="Read the connection guide" buttonUrl="https://neon.com/docs/connect/choose-connection" />
+<CTA title="Connect from any serverless platform" description="See driver setup for Next.js, Vercel, Cloudflare Workers, and more." buttonText="Read the connection guide" buttonUrl="/docs/connect/choose-connection" />

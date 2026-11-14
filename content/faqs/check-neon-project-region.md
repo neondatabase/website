@@ -3,7 +3,7 @@ title: 'How can I check which region my Neon project is running in?'
 subtitle: 'Check Project Settings, the CLI, or your connection string hostname.'
 enableTableOfContents: true
 createdAt: '2026-05-18T00:00:00.000Z'
-updatedOn: '2026-10-09T15:17:33.920Z'
+updatedOn: '2026-11-14T19:48:40.621Z'
 isDraft: false
 redirectFrom: []
 previousLink:
@@ -81,4 +81,4 @@ curl "https://console.neon.tech/api/v2/projects/$PROJECT_ID" \
 
 The `region_id` field uses the same IDs as the CLI, such as `aws-us-east-2` (or `azure-eastus2` for an existing Azure project). New projects can only be created in AWS regions.
 
-<CTA title="Need a different region?" description="A project's region is fixed. To switch, create a new project in the target region and migrate." buttonText="Migration guide" buttonUrl="https://neon.com/docs/import/region-migration" />
+<CTA title="Need a different region?" description="A project's region is fixed. To switch, create a new project in the target region and migrate." buttonText="Migration guide" buttonUrl="/docs/import/region-migration" />
