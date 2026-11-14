@@ -99,7 +99,7 @@ DATABASE_URL="postgresql://[user]:[password]@[neon_hostname]/[dbname]?sslmode=re
 
 If you use node-postgres, `pg` 8.23 and later print a `SECURITY WARNING` for `sslmode=require`. Change it to `sslmode=verify-full` to keep the same behavior without the warning.
 
-The `channel_binding=require` parameter is optional. If your connection string doesn't include it, you can use the string as is.
+The `channel_binding=require` parameter is optional. If your connection string doesn't include it, you can use the string as is. To learn what it does, see [Channel binding for enhanced security](/docs/connect/connect-securely#channel-binding-for-enhanced-security).
 
 ## Create a database utility
 
