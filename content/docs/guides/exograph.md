@@ -14,7 +14,7 @@ updatedOn: '2026-06-05T17:20:32.620Z'
 
 _This guide was contributed by the Exograph team_
 
-[Exograph](https://exograph.dev) is a new approach to building GraphQL backends. With it, you can effortlessly create flexible, secure, high-performing GraphQL backends in minutes. Powered by a Rust-based runtime, Exograph ensures fast startup times, efficient execution, and minimal memory consumption. Exograph comes equipped with a comprehensive set of tools designed to support every stage of the development lifecycle: from initial development to deployment to ongoing maintenance.
+[Exograph](https://exograph.dev) is a framework for building GraphQL backends. You define your data model in an `.exo` file, and Exograph serves a GraphQL API for it. Its runtime is written in Rust. The CLI covers development, deployment, and schema management.
 
 Exograph supports Postgres for data persistence, which makes it a great fit to use with Neon.
 
@@ -48,24 +48,29 @@ exo schema create | psql <the connection string>
 ## Launch the backend
 
 ```bash
-EXO_POSTGRES_URL=<the connection string> exo dev
+EXO_POSTGRES_URL=<the connection string> exo dev --read-write
 ```
 
-It will print the necessary information for connecting to the backend.
+The `--read-write` flag lets the server run mutations, such as the `createTodo` mutation below. Without it, `exo dev` starts in read-only mode, and mutations fail.
+
+The command prints the information for connecting to the backend.
 
 ```raw
 Starting server in development mode...
-Watching the src directory for changes...
+Watching the current directory for changes...
 
 Verifying new model...
-Started server on 0.0.0.0:9876 in 717.19 ms
+Starting server...
+Started server on localhost:9876 in 995.77 ms
+- GraphQL endpoint hosted at:
+	http://localhost:9876/graphql
+- MCP endpoint hosted at:
+	http://localhost:9876/mcp
 - Playground hosted at:
- http://0.0.0.0:9876/playground
-- Endpoint hosted at:
- http://0.0.0.0:9876/graphql
+	http://localhost:9876/playground
 ```
 
-That's it! You can now open [http://localhost:9876/playground](http://localhost:9876/playground) in your browser to see the GraphQL Playground.
+Open [http://localhost:9876/playground](http://localhost:9876/playground) in your browser to see the GraphQL Playground.
 
 You can create a todo by running the following mutation:
 
