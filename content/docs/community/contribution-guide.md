@@ -2,45 +2,80 @@
 title: Docs contribution guide
 subtitle: Learn how to contribute to the Neon documentation
 summary: >-
-  How to submit edits and new guides to the neondatabase/website repository.
-  Edit files directly on GitHub or fork the repo and open a pull request. The
-  full authoring workflow covers frontmatter fields, navigation.yaml sidebar
-  updates, Markdown syntax, CodeTabs, admonitions, image paths, and style rules
-  for voice, capitalization, connection strings, and fake user data. Also covers
-  the doc AI tools (Cursor and Claude slash commands) for consistency checks,
-  redirects, and guided writing.
+  How to contribute to Neon content in the neondatabase/website repository.
+  Fixes to the Neon docs and PostgreSQL tutorials are welcome. New guides are
+  considered for the community guides section. Function templates and examples
+  are also welcome. Covers how to submit a pull
+  request, add yourself as a guide author, frontmatter, navigation.yaml,
+  Markdown, components, and style rules.
 enableTableOfContents: true
 updatedOn: '2026-09-17T16:33:54.884Z'
 ---
 
-This page covers everything you need to contribute to the Neon documentation, whether you're fixing a typo or writing a full guide.
+Thanks for helping improve Neon content. This page explains ways to contribute, how to submit a contribution, and the Markdown and style conventions we follow.
 
-<Admonition type="note" title="TL;DR: Contributing to the Neon Docs">
-- You can edit files on GitHub via the **Edit this page** link on our documentation pages or by forking the [neondatabase/website](https://github.com/neondatabase/website) repository and submitting a pull request.
-- If you want to contribute a guide, we provide a [template](https://github.com/neondatabase/website/blob/main/content/docs/guides/GUIDE_TEMPLATE.md) to help you get started. See [How to contribute](#how-to-contribute) for details.
-- Reference this contribution guide as needed for Markdown and style guidelines.
-</Admonition>
+## Ways to contribute
 
-## Why should you contribute?
+We welcome contributions of many kinds. Some common ones:
 
-Open-source projects are always evolving. Contributing to documentation is a good starting point for open source beginners, and a way for experienced developers to share knowledge with the community.
+- **Docs and tutorial updates:** Improve existing pages in the [Neon docs](/docs) or [PostgreSQL tutorials](/postgresql), from fixing a typo to clarifying a confusing section.
+- **Community guides:** Share a walkthrough of building something with Neon. New guides are generally considered for the [community guides](#contribute-a-community-guide) section rather than the main documentation.
+- **Function templates:** Add a reusable function to the Neon Function Registry. See [Contribute a function template](/docs/compute/functions/registry).
+- **Examples:** Add a sample app or code example to the [neondatabase/examples](https://github.com/neondatabase/examples) repository.
 
-By contributing to the Neon docs, you're helping us create a stronger learning resource for all developers. Whether you've found a typo, a section that's hard to understand, or a topic that's missing, we'd love to have your contribution.
+Have another idea? Reach out on our [Discord server](https://neon.com/discord).
+
+We appreciate every contribution, but we can't accept all of them. What we publish is at Neon's discretion and depends on factors such as fit with our products and direction, value to Neon users, adoption of the tools covered, and overlap with existing content.
+
+We review every contribution. We may test your instructions and code, ask for revisions, make revisions ourselves, or decide not to merge it. By submitting, you agree that Neon can edit, update, or remove your contribution at any time, including guides published under your name.
 
 ## How to contribute
 
-Documentation source files are located in the [neondatabase/website](https://github.com/neondatabase/website) repository, in the `/content/docs` directory. To contribute, you have two options:
+Docs, tutorials, and guides live in the [neondatabase/website](https://github.com/neondatabase/website) repository: Neon docs in `/content/docs`, PostgreSQL tutorials in `/content/postgresql`, and community guides in `/content/guides`.
 
-1. Edit files directly on GitHub.
-2. Fork the [neondatabase/website](https://github.com/neondatabase/website) repository, create a branch for your changes, and submit a pull request.
+- **Small fixes:** Click **Edit this page** at the bottom of any docs page, make your change on GitHub, and commit it to open a pull request.
 
-If you prefer the first option, which is great for edits and small updates, there is an **Edit this page** link at the bottom of each Neon documentation page.
+  ![GitHub edit this page link](/docs/community/edit_this_page.png)
 
-![GitHub edit this page link](/docs/community/edit_this_page.png)
+- **Larger changes and guides:** Fork the repository, create a branch, and open a pull request. If you're new to this, see the [GitHub Open Source Guide](https://opensource.guide/how-to-contribute/#opening-a-pull-request).
 
-Clicking the link takes you to the Markdown file in GitHub, where you can click the **Edit this page** icon to make a change. When you finish editing, commit your changes to create a pull request.
+## Contribute a community guide
 
-If you would rather fork the [neondatabase/website](https://github.com/neondatabase/website) repository and submit a pull request, but you're not familiar with the process, we suggest going through the [GitHub Open Source Guide](https://opensource.guide/how-to-contribute/#opening-a-pull-request). This guide describes how to fork a repository, create a branch, and submit a pull request. To help you get started, we provide a [GUIDE_TEMPLATE.md](https://github.com/neondatabase/website/blob/main/content/docs/guides/GUIDE_TEMPLATE.md) file, which you can find in the [neondatabase/website](https://github.com/neondatabase/website) repository, under the `/content/docs/guides` directory. After you create a branch, copy the template file and rename it. Don't forget to add your guide to the sidebar. See [Add a new page](#add-a-new-page).
+Each Markdown file in `/content/guides` becomes a page under [neon.com/guides](/guides). Guides don't need a `navigation.yaml` entry.
+
+1. Create a kebab-case file such as `content/guides/my-tool-neon.md`. The file name becomes the URL.
+1. Add frontmatter. Only `title` is required, and the title renders as the page heading, so don't add an `h1`. See the [guides README](https://github.com/neondatabase/website/blob/main/content/guides/README.md#fields) for all fields.
+
+   ```yaml
+   ---
+   title: Build a search API with My Tool and Neon
+   subtitle: Use My Tool to index and query data stored in Neon
+   author: alex-lopez
+   enableTableOfContents: true
+   createdAt: '2026-11-14T00:00:00.000Z'
+   ---
+   ```
+
+1. Put images in `/public/guides/images/<guide-name>/` and reference them as `/guides/images/<guide-name>/image.png`.
+1. Write a self-contained walkthrough with working code, following the [Style guide](#style-guide) below.
+
+### Add yourself as an author
+
+1. Add an entry to `content/guides/authors/data.json`. The key is your author ID, your name in kebab-case. Only `name` is required.
+
+   ```json
+   "alex-lopez": {
+     "name": "Alex Lopez",
+     "position": "Developer Advocate",
+     "bio": "Alex writes about databases and developer tooling.",
+     "link": { "title": "GitHub", "url": "https://github.com/example_username" }
+   }
+   ```
+
+1. Add a square photo named `<your-id>.jpg` to `public/guides/authors/`, for example `alex-lopez.jpg`. It must be a `.jpg` file with that exact name, or it won't display.
+1. Set `author: alex-lopez` in your guide's frontmatter. For multiple authors, use `authors: [alex-lopez, dana-smith]`.
+
+If you've contributed before, reuse your existing ID.
 
 ## Markdown
 
@@ -55,12 +90,6 @@ For advanced formatting and custom components, see the [Component Guide](/docs/c
 At Neon, we use VSCode for writing documentation. VSCode includes a built-in markdown previewer that you can use to view your changes locally.
 
 To use this feature, open the command palette (⌘ + ⇧ + V on Mac or Ctrl + Shift + V on Windows). This opens a preview window for viewing your changes in formatted Markdown.
-
-## Contribution review process
-
-After you submit a contribution, the Neon documentation team reviews your changes, provides feedback, and merges the pull request when it's ready.
-
-Please reach out to us on our [Discord Server](https://neon.com/discord) if you have any questions or need further assistance.
 
 ## Documentation file structure
 
