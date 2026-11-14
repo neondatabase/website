@@ -17,7 +17,7 @@ updatedOn: '2026-11-03T20:17:45.483Z'
 
 ## Have your AI agent follow this guide
 
-<PromptBlock src="/prompts/sveltekit-prompt.md" labels={["Set up your agent for Neon", "Add Svelte skills", "Connect your SvelteKit app"]} />
+<PromptBlock src="/prompts/sveltekit-prompt.md" labels={["Set up your agent for Neon", "Use Svelte's official skills (optional)", "Connect your SvelteKit app"]} />
 
 <Steps>
 
@@ -41,6 +41,8 @@ npx neon@latest skills
 ```
 
 To also connect the [Neon MCP Server](/docs/ai/neon-mcp-server), run `npx neon@latest mcp`.
+
+Svelte publishes its own [agent skills](https://svelte.dev/docs/ai/skills) for writing Svelte code. The prompt above has your agent follow two of them and offer to install them.
 
 ## Create a Neon project
 
