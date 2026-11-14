@@ -100,7 +100,7 @@ Astro loads `.env` automatically, so you don't need `dotenv`. Don't hardcode the
 
 If you use node-postgres, `pg` 8.23 and later print a `SECURITY WARNING` for `sslmode=require`. Change it to `sslmode=verify-full` to keep the same behavior without the warning.
 
-The `channel_binding=require` parameter is optional. If your connection string doesn't include it, you can use the string as is. To learn what it does, see [Channel binding for enhanced security](/docs/connect/connect-securely#channel-binding-for-enhanced-security).
+Neon connection strings include `channel_binding=require`, which protects against man-in-the-middle attacks. To learn more, see [Channel binding for enhanced security](/docs/connect/connect-securely#channel-binding-for-enhanced-security).
 
 ## Create a database utility
 
