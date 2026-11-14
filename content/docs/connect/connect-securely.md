@@ -49,7 +49,7 @@ Channel binding is optional. A connection string without it still connects, encr
 
 Your client library has to support channel binding:
 
-- `psql` and other libpq-based clients support the `channel_binding` parameter from PostgreSQL 13. Older versions fail with an `invalid connection option` error.
+- `psql` and other clients built on libpq, the Postgres client library, need libpq 13 or later. This is the version installed on your machine, not your Neon Postgres version. Older clients fail with an `invalid connection option` error. Run `psql --version` to check.
 - Some tools don't support channel binding and fail when the parameter is present. For example, `pgloader` throws an error, so the [SQLite migration guide](/docs/import/migrate-sqlite) removes it.
 - Some drivers and ORMs reject parameters they don't recognize or use their own names for them. For example, JDBC uses `channelBinding`, and Npgsql uses `Channel Binding=Require`.
 
