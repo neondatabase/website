@@ -8,7 +8,7 @@ summary: >-
   page to switch auth providers, tighten security, or manage the API lifecycle
   programmatically via the Neon REST API.
 enableTableOfContents: true
-updatedOn: '2026-09-30T16:23:41.172Z'
+updatedOn: '2026-10-09T15:55:57.334Z'
 ---
 
 <InfoBlock>
@@ -50,7 +50,7 @@ Add an external authentication provider by registering a JWKS URL:
 
 ```bash
 curl -X POST 'https://console.neon.tech/api/v2/projects/{project_id}/jwks' \
-  -H 'Authorization: Bearer $NEON_API_KEY' \
+  -H "Authorization: Bearer $NEON_API_KEY" \
   -H 'Content-Type: application/json' \
   -d '{
     "jwks_url": "https://your-provider/.well-known/jwks.json",
@@ -65,14 +65,14 @@ To remove a provider, first list the configured JWKS URLs to find the `jwks_id`:
 
 ```bash
 curl -X GET 'https://console.neon.tech/api/v2/projects/{project_id}/jwks' \
-  -H 'Authorization: Bearer $NEON_API_KEY'
+  -H "Authorization: Bearer $NEON_API_KEY"
 ```
 
 Then delete it:
 
 ```bash
 curl -X DELETE 'https://console.neon.tech/api/v2/projects/{project_id}/jwks/{jwks_id}' \
-  -H 'Authorization: Bearer $NEON_API_KEY'
+  -H "Authorization: Bearer $NEON_API_KEY"
 ```
 
 For the full JWKS specification, see the [Neon API Reference](/docs/reference/api/projects/add-project-jwks).
@@ -184,7 +184,7 @@ Send a POST request to [enable the Data API](/docs/reference/api/dataapi/create-
 
 ```bash
 curl -X POST 'https://console.neon.tech/api/v2/projects/{project_id}/branches/{branch_id}/data-api/{database_name}' \
-  -H 'Authorization: Bearer $NEON_API_KEY' \
+  -H "Authorization: Bearer $NEON_API_KEY" \
   -H 'Content-Type: application/json' \
   -d '{}'
 ```
@@ -218,7 +218,7 @@ Optional fields in the enable request body:
 
 ```bash
 curl -X GET 'https://console.neon.tech/api/v2/projects/{project_id}/branches/{branch_id}/data-api/{database_name}' \
-  -H 'Authorization: Bearer $NEON_API_KEY'
+  -H "Authorization: Bearer $NEON_API_KEY"
 ```
 
 Response (200 OK):
@@ -238,11 +238,17 @@ Response (200 OK):
   "available_schemas": [
     "auth",
     "public"
-  ]
+  ],
+  "auth_provider": "external",
+  "provider_name": "clerk",
+  "jwks_url": "https://example.clerk.accounts.dev/.well-known/jwks.json",
+  "jwt_audience": "example-audience"
 }
 ```
 
 The `settings` object reflects the current configuration (see [Advanced settings](#advanced-settings) for field descriptions). The `available_schemas` array lists the schemas in your database that can be exposed via the API.
+
+The `auth_provider` field shows how the Data API verifies tokens: `neon_auth` for Managed Better Auth, or `external` for a [custom provider](/docs/data-api/custom-authentication-providers). For `external`, the response also includes the `jwks_url`, `provider_name`, and `jwt_audience` you set at creation. The field is omitted when no provider was recorded, for example for a Data API created before Neon started recording it, or when the compute is suspended. In that case, check `GET /projects/{project_id}/branches/{branch_id}/auth` for Managed Better Auth, or `GET /projects/{project_id}/jwks` for an external provider.
 
 ### Update configuration
 
@@ -250,7 +256,7 @@ Send a PATCH request to [update the configuration](/docs/reference/api/dataapi/u
 
 ```bash
 curl -X PATCH 'https://console.neon.tech/api/v2/projects/{project_id}/branches/{branch_id}/data-api/{database_name}' \
-  -H 'Authorization: Bearer $NEON_API_KEY' \
+  -H "Authorization: Bearer $NEON_API_KEY" \
   -H 'Content-Type: application/json' \
   -d '{}'
 ```
@@ -269,7 +275,7 @@ The `settings` object replaces the existing settings entirely. It is not merged.
 
 ```bash
 curl -X DELETE 'https://console.neon.tech/api/v2/projects/{project_id}/branches/{branch_id}/data-api/{database_name}' \
-  -H 'Authorization: Bearer $NEON_API_KEY'
+  -H "Authorization: Bearer $NEON_API_KEY"
 ```
 
 <Admonition type="warning" title="Immediate effect">
@@ -290,7 +296,7 @@ Provision the Data API for a database. The `--auth-provider` option accepts `neo
 neon data-api create --database neondb --auth-provider neon_auth
 ```
 
-### Get Data API details
+### Get Data API details (#get-data-api-details-2)
 
 Show the current status and configuration:
 
@@ -298,7 +304,7 @@ Show the current status and configuration:
 neon data-api get --database neondb
 ```
 
-### Update configuration
+### Update configuration (#update-configuration-2)
 
 Update settings using [settings flags](/docs/cli/data-api#settings-flags). By default, flags are merged with the current configuration. Pass `--replace` to overwrite all settings with only the provided flags:
 
@@ -312,7 +318,7 @@ To refresh the schema cache without changing settings:
 neon data-api refresh-schema --database neondb
 ```
 
-### Disable
+### Disable (#disable-2)
 
 Remove the Data API from a database:
 

@@ -1,31 +1,33 @@
 ---
 title: Managed Better Auth and Data API SDK
-subtitle: Reference documentation for @neondatabase/neon-js (authentication and Data API database queries)
+subtitle: Reference documentation for @neon/neon-js (authentication and Data API database queries)
 summary: >-
-  The `@neondatabase/neon-js` TypeScript SDK combines Managed Better Auth and the Neon
+  The `@neon/neon-js` TypeScript SDK combines Managed Better Auth and the Neon
   Data API in one client, covering auth methods (email/password, OAuth, OTP,
   password reset) alongside a PostgREST-style query builder (select, insert,
   update, delete, rpc, filters) with automatic JWT forwarding. Choose this page
-  over the standalone `@neondatabase/postgrest-js` or `@neondatabase/auth`
+  over the standalone `@neon/postgrest-js` or `@neon/auth`
   packages when you need the full combined API reference in one place. Three
   adapters are documented: BetterAuthVanillaAdapter (default, Promise-based),
   BetterAuthReactAdapter (React hooks), and SupabaseAuthAdapter
   (Supabase-compatible migration path).
 enableTableOfContents: true
 layout: wide
+redirectFrom:
+  - /docs/auth/reference/javascript-sdk
 updatedOn: '2026-08-31T17:42:21.786Z'
 ---
 
-This page documents `@neondatabase/neon-js`, which combines Managed Better Auth and the Data API in a single client. Neon also publishes standalone packages:
+This page documents `@neon/neon-js`, which combines Managed Better Auth and the Data API in a single client. Neon also publishes standalone packages:
 
-- [`@neondatabase/postgrest-js`](/docs/data-api/get-started#any-authentication-provider): Data API with any authentication provider
-- [`@neondatabase/auth`](https://www.npmjs.com/package/@neondatabase/auth): Managed Better Auth without the Data API
+- [`@neon/postgrest-js`](/docs/data-api/get-started#any-authentication-provider): Data API with any authentication provider
+- [`@neon/auth`](https://www.npmjs.com/package/@neon/auth): Managed Better Auth without the Data API
 
 Authentication is provided through an adapter-based architecture, letting you work more easily with your existing code or preferred framework. Available adapters:
 
 - **BetterAuthVanillaAdapter** (default): Promise-based authentication methods like `client.auth.signIn.email()`. Used in all examples on this page.
 - **BetterAuthReactAdapter**: Similar API but with React hooks like `useSession()`. See the [React quickstart](/docs/auth/quick-start/react).
-- **SupabaseAuthAdapter**: Supabase-compatible API for easy migration. See the [migration guide](/docs/auth/migrate/from-supabase).
+- **SupabaseAuthAdapter**: Supabase-compatible API for easy migration, built into `createClient` from `@neon/neon-js/supabase`. See the [migration guide](/docs/auth/migrate/from-supabase).
 
 Database query methods (`client.from()`, `.select()`, etc.) work the same regardless of which adapter you use.
 
@@ -40,7 +42,7 @@ Install the TypeScript SDK in your project using npm, yarn, pnpm, or bun.
 <TwoColumnLayout.Block>
 
 ```bash
-npm install @neondatabase/neon-js
+npm install @neon/neon-js
 ```
 
 </TwoColumnLayout.Block>
@@ -72,7 +74,7 @@ For the full client, pass a single HTTPS Neon database URL without credentials o
 <CodeTabs labels={["Full client","Auth-only","With TypeScript types","With a different adapter"]}>
 
 ```typescript
-import { createClient } from '@neondatabase/neon-js';
+import { createClient } from '@neon/neon-js';
 
 // Use your Neon database URL without credentials or query parameters.
 // Example: https://ep-example.c-2.us-east-1.aws.neon.tech/neondb
@@ -80,21 +82,21 @@ const client = createClient(import.meta.env.VITE_NEON_DATABASE_URL);
 ```
 
 ```typescript
-import { createAuthClient } from '@neondatabase/neon-js/auth';
+import { createAuthClient } from '@neon/neon-js/auth';
 
 const auth = createAuthClient(import.meta.env.VITE_NEON_AUTH_URL);
 ```
 
 ```typescript
-import { createClient } from '@neondatabase/neon-js';
+import { createClient } from '@neon/neon-js';
 import type { Database } from './types/database.types';
 
 const client = createClient<Database>(import.meta.env.VITE_NEON_DATABASE_URL);
 ```
 
 ```typescript
-import { createClient } from '@neondatabase/neon-js';
-import { BetterAuthReactAdapter } from '@neondatabase/neon-js/auth/react/adapters';
+import { createClient } from '@neon/neon-js';
+import { BetterAuthReactAdapter } from '@neon/neon-js/auth/react/adapters';
 
 const client = createClient(import.meta.env.VITE_NEON_DATABASE_URL, {
   auth: {
@@ -104,10 +106,6 @@ const client = createClient(import.meta.env.VITE_NEON_DATABASE_URL, {
 ```
 
 </CodeTabs>
-
-<Admonition type="note" title="Version compatibility">
-The single-URL form, `createClient(url)`, requires `@neondatabase/neon-js` 0.7.0-beta or later. With 0.6.2-beta or earlier, use the object form below.
-</Admonition>
 
 The object form remains available for custom endpoint layouts or local development setups where the Auth and Data API URLs cannot be derived from the same Neon database URL:
 
@@ -175,7 +173,7 @@ console.log('User created:', result.data.user)
 - Session tokens are cached automatically
 - Authentication state syncs across browser tabs
 
-### Parameters
+### Parameters (#parameters-2)
 
 <details>
 <summary>View parameters</summary>
@@ -218,7 +216,7 @@ Sign in with an OAuth provider like Google, GitHub, etc.
 - User is redirected back after authorization
 - Session is created automatically
 
-### Parameters
+### Parameters (#parameters-3)
 
 <details>
 <summary>View parameters</summary>
@@ -311,7 +309,7 @@ console.log('No active session')
 
 Note: Password updates require password reset flow for security.
 
-### Parameters
+### Parameters (#parameters-4)
 
 <details>
 <summary>View parameters</summary>
@@ -341,7 +339,7 @@ const { data, error } = await client.auth.updateUser({
 Sends an OTP (one-time password) code to the user's email for sign-in.
 The user must then call `signIn.emailOtp()` with the received code.
 
-### Parameters
+### Parameters (#parameters-5)
 
 <details>
 <summary>View parameters</summary>
@@ -377,7 +375,7 @@ console.error('Failed to send OTP:', error.message)
 Signs in a user using an OTP code received via email.
 First call `emailOtp.sendVerificationOtp()` to send the code.
 
-### Parameters
+### Parameters (#parameters-6)
 
 <details>
 <summary>View parameters</summary>
@@ -415,7 +413,7 @@ console.log('Signed in:', data.user.email)
 Verifies a user's email address using an OTP code sent during signup.
 This is typically used after `signUp.email()` when email verification is required.
 
-### Parameters
+### Parameters (#parameters-7)
 
 <details>
 <summary>View parameters</summary>
@@ -453,7 +451,7 @@ console.log('Email verified successfully')
 Checks if an OTP code is valid without completing the verification flow.
 Useful for password reset flows where you need to verify the code before allowing password change.
 
-### Parameters
+### Parameters (#parameters-8)
 
 <details>
 <summary>View parameters</summary>
@@ -490,7 +488,7 @@ console.error('Invalid OTP code')
 
 Sends a verification email to the user. Used for email verification after signup or email change.
 
-### Parameters
+### Parameters (#parameters-9)
 
 <details>
 <summary>View parameters</summary>
@@ -526,7 +524,7 @@ console.error('Failed to send verification email:', error.message)
 Verifies an email address using a token from a verification email link.
 Used for email change verification.
 
-### Parameters
+### Parameters (#parameters-10)
 
 <details>
 <summary>View parameters</summary>
@@ -562,7 +560,7 @@ console.error('Email verification failed:', error.message)
 
 Sends a password reset email to the user. The email contains a link to reset the password.
 
-### Parameters
+### Parameters (#parameters-11)
 
 <details>
 <summary>View parameters</summary>
@@ -681,7 +679,7 @@ const { data, error } = await client
 - Requires filter to specify which rows to delete
 - Authentication token is included automatically
 
-### Parameters
+### Parameters (#parameters-12)
 
 <details>
 <summary>View parameters</summary>

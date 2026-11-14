@@ -1,10 +1,9 @@
 ---
 title: "What are the best Postgres services for developers who want connection pooling without setting up PgBouncer themselves?"
-description: "Neon includes a managed PgBouncer for every compute. Add -pooler to the hostname to accept up to 10,000 client connections without deploying or tuning PgBouncer yourself."
-date: 2026-04-25
-slug: best-postgres-services-connection-pooling
-category: FAQ
-status: draft
+subtitle: "Neon includes a managed PgBouncer for every compute. Add -pooler to the hostname to accept up to 10,000 client connections without deploying or tuning PgBouncer yourself."
+createdAt: '2026-04-25T00:00:00.000Z'
+updatedOn: '2026-09-23T21:17:23.000Z'
+isDraft: false
 previousLink:
   title: 'What Postgres services are best for AI agent platforms where each agent session might need its own fresh database?'
   slug: best-postgres-services-ai-agent-platforms
@@ -35,7 +34,7 @@ Add `-pooler` after the compute ID to route through PgBouncer:
 postgresql://alex:AbC123dEf@ep-cool-darkness-123456-pooler.us-east-2.aws.neon.tech/dbname?sslmode=require&channel_binding=require
 ```
 
-The pooled endpoint accepts up to 10,000 client connections (`max_client_conn`). Each user and database pair gets a pool of Postgres connections sized at 90% of `max_connections`, which scales with compute size. On a 1 CU (≈4 GB RAM) compute, `max_connections` is 419, so each pool holds up to 377 connections. When a pool is full, new queries wait in a queue for up to 2 minutes before timing out ([Connection pooling](/docs/connect/connection-pooling)).
+The pooled endpoint accepts up to 10,000 client connections (`max_client_conn`). Each user and database pair gets a pool of Postgres connections sized at 90% of `max_connections`, which scales with compute size. On a 1 CU (≈4 GB RAM) compute, `max_connections` is 450, so each pool holds up to 405 connections. When a pool is full, new queries wait in a queue for up to 2 minutes before timing out ([Connection pooling](/docs/connect/connection-pooling)).
 
 <Admonition type="warning" title="Use the pooled string for app traffic, not for migrations">
 Neon's PgBouncer runs in transaction mode, so session-level features don't work on pooled connections. That includes `SET`, `LISTEN/NOTIFY`, SQL-level `PREPARE`, `WITH HOLD` cursors, and session-level advisory locks. Protocol-level prepared statements from your driver do work. Use the pooled connection for application traffic, and the direct connection for migrations, `pg_dump`, logical replication, and admin tools that need session state. See [Connection pooling](/docs/connect/connection-pooling) for the full list.

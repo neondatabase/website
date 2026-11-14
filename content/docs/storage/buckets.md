@@ -6,7 +6,7 @@ summary: >-
   buckets via the Neon Console, the Neon API, or the S3 API. Set the access
   level to private or public_read to control who can read objects.
 enableTableOfContents: true
-updatedOn: '2026-09-16T15:38:57.808Z'
+updatedOn: '2026-09-24T07:04:24.872Z'
 ---
 
 A bucket is a named container for objects in Neon Object Storage. Buckets are scoped to a branch and inherit from parent branches when a new branch is created. No data is copied on fork.
@@ -73,6 +73,8 @@ aws s3api create-bucket \
 
 </CodeTabs>
 
+Creating a `public_read` bucket requires the project **Admin** role in organizations that use [per-project permissions](/docs/manage/user-permissions#per-project-permissions). Editors can create private buckets.
+
 To create a `public_read` bucket with neon:
 
 ```bash
@@ -92,10 +94,10 @@ Every bucket has an access level that controls who can read objects in it.
 | `private`     | Require a valid credential            | Require a valid credential |
 | `public_read` | Open to anyone (no credential needed) | Require a valid credential |
 
-The default is `private`. Set the access level when creating a bucket via the Neon API, or change it from the **Object storage** tab in the Console.
+The default is `private`. Set the access level when you create the bucket in the Console, with `neon`, or with the Neon API. It can't be changed later. To change it, create a new bucket with the access level you want and copy the objects to it.
 
 <Admonition type="note">
-Access level is set through the Neon Console or API, not through the S3 API. S3 ACL and bucket policy mutation requests (PutBucketAcl, PutBucketPolicy) return `501 Not Implemented`. If you need to change access level on an existing bucket, use the Console or Neon API.
+Access level is set through the Neon Console, `neon`, or the Neon API, not through the S3 API. S3 ACL and bucket policy writes (PutBucketAcl, PutBucketPolicy, PutObjectAcl), and public canned ACLs on CreateBucket or PutObject, return `501 Not Implemented`. A bucket created with an S3 client is always private.
 </Admonition>
 
 **public_read example**
@@ -169,6 +171,8 @@ When you create a new branch, it inherits all buckets from its parent, including
 - The parent branch continues to see its own state unchanged.
 
 This makes it safe to test bucket changes in a preview branch without affecting production.
+
+When you [reset a branch from its parent](/docs/guides/reset-from-parent), its buckets and objects reset along with the database. The branch returns to the parent's current state, and any bucket changes you made on it are discarded. A [restore](/docs/postgres/backup-restore/branch-restore) behaves differently: it rolls back Postgres but leaves buckets and objects as they are.
 
 ## Next steps
 

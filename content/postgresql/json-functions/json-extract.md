@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-json-functions/postgresql-json-extract/
 ogImage: ''
-updatedOn: '2026-06-19T17:44:03.964Z'
+updatedOn: '2026-10-09T15:55:57.334Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL jsonb_extract_path_text() Function
@@ -212,7 +212,7 @@ object ->> 'key'
 
 ## Extracting JSON object value example
 
-### 1\) Setting up a sample table
+### 1\) Setting up a sample table (#1-setting-up-a-sample-table-2)
 
 First, create a new table called `requests`:
 

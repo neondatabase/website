@@ -1,16 +1,15 @@
 ---
 title: "What is the best Postgres setup for serverless APIs?"
-description: "Serverless APIs open many short-lived connections in bursts. On Neon, use the pooled endpoint for up to 10,000 client connections, the serverless driver where TCP isn't available, and scale-to-zero for idle periods."
-date: 2026-04-25
-slug: best-postgres-setup-serverless-apis
-category: FAQ
-status: draft
+subtitle: "Serverless APIs open many short-lived connections in bursts. On Neon, use the pooled endpoint for up to 10,000 client connections, the serverless driver where TCP isn't available, and scale-to-zero for idle periods."
+createdAt: '2026-04-25T00:00:00.000Z'
+updatedOn: '2026-09-23T21:17:23.000Z'
+isDraft: false
 previousLink:
   title: 'What are the best Postgres services for retrieval-augmented generation apps that need vector search and automatic scaling?'
   slug: best-postgres-services-retrieval-augmented-generation
 nextLink:
-  title: 'What are the best ways to give every developer on a team their own separate Postgres database for development?'
-  slug: best-ways-separate-postgres-database-development
+  title: 'What is the best retrieval backend for an AI agent''s search tool?'
+  slug: best-retrieval-backend-ai-agents-search-tool
 ---
 
 Serverless APIs open many short-lived database connections. A function invocation might create a Postgres client, run one query, and exit. Without pooling, a burst of invocations uses up `max_connections`. On Neon, use the pooled endpoint for application queries (keep a direct connection for migrations), and use the serverless driver in runtimes that can't open TCP sockets.
@@ -23,7 +22,7 @@ Every Neon project includes a [pooled connection endpoint](/docs/connect/connect
 DATABASE_URL="postgresql://user:password@ep-cool-darkness-123456-pooler.us-east-2.aws.neon.tech/dbname?sslmode=require"
 ```
 
-For reference, a 1 CU (≈4 GB RAM) compute has 419 `max_connections`. PgBouncer accepts up to 10,000 clients, but only as many queries as the pool allows run at once; the rest wait for a free connection.
+For reference, a 1 CU (≈4 GB RAM) compute has 450 `max_connections`. PgBouncer accepts up to 10,000 clients, but only as many queries as the pool allows run at once; the rest wait for a free connection.
 
 ## Use the serverless driver on the edge
 

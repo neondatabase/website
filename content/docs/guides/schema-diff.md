@@ -16,14 +16,14 @@ updatedOn: '2026-07-15T00:58:07.525Z'
 
 Neon's Schema Diff tool lets you compare an SQL script of the schemas for two selected branches in a side-by-side view (or line-by-line on mobile devices).
 
-## How Schema Diff works
+## How schema diff works
 
 Schema Diff is available in the Neon Console for use in two ways:
 
 - Compare a branch's schema to its parent
 - Compare selected branches during an instant restore operation
 
-You can also use the `branches schema-diff` command in the Neon CLI or `compare-schema` endpoint in the Neon API to effect a variety of comparisons.
+You can also use the `branches schema-diff` command in the Neon CLI or `compare_schema` endpoint in the Neon API to effect a variety of comparisons.
 
 ### Compare to parent
 
@@ -31,13 +31,13 @@ In the detailed view for any child branch, you can check the schema differences 
 
 ### Compare to another branch's history
 
-Built into the Time Travel assist editor, you can use Schema Diff to help when restoring branches, letting you compare states of your branch against its own or another branch's history before you complete a [branch restore](/docs/guides/branch-restore) operation.
+Built into the Time Travel assist editor, you can use Schema Diff to help when restoring branches, letting you compare states of your branch against its own or another branch's history before you complete a [branch restore](/docs/postgres/backup-restore/branch-restore) operation.
 
 ### Comparisons using the CLI or API
 
-You can use the Neon CLI to compare a branch to any point in its own or any other branch's history. The `branches schema-diff` command offers full flexibility for any type of schema comparison: between a branch and its parent, a branch and its earlier state, or a branch to the head or prior state of another branch. The Neon API provides a `compare-schema` endpoint that lets you compare schemas between Neon branches programmatically, supporting CI/CD automation and AI agent use cases.
+You can use the Neon CLI to compare a branch to any point in its own or any other branch's history. The `branches schema-diff` command supports any schema comparison: between a branch and its parent, a branch and its earlier state, or a branch to the head or prior state of another branch. The Neon API provides a `compare_schema` endpoint that lets you compare schemas between Neon branches programmatically, supporting CI/CD automation and AI agent use cases.
 
-### Practical Applications
+### Practical applications
 
 - **Pre-Migration Reviews**: Before migrating schemas from a development branch into main, use Schema Diff to ensure only intended schema changes are applied.
 - **Audit Changes**: Historically compare schema changes to understand the evolution of your database structure.
@@ -45,7 +45,7 @@ You can use the Neon CLI to compare a branch to any point in its own or any othe
 - **Automation**: Integrate schema-diff into CI/CD pipelines to automatically compare schemas during deployments.
 - **AI Agents**: Enable AI agents to retrieve schema differences programmatically to support agent-driven database migrations.
 
-## How to Use Schema Diff
+## How to use schema diff
 
 You can launch the Schema Diff viewer from the **Branches** and **Restore** pages in the Neon Console.
 
@@ -57,7 +57,7 @@ Open the detailed view for the child branch whose schema you want to inspect. Op
 
 ### From the Restore page
 
-Just like with [Time Travel Assist](/docs/guides/branch-restore#using-time-travel-assist), your first step is to choose the branch you want to restore, then choose where you want to restore from: **From history** (its own history) or **From another branch** (from another branch's history).
+Just like with [Time Travel Assist](/docs/postgres/backup-restore/branch-restore#time-travel-assist), your first step is to choose the branch you want to restore, then choose where you want to restore from: **From history** (its own history) or **From another branch** (from another branch's history).
 
 Click the **Schema Diff** button, verify that your selections are correct, then click **Compare**.
 
@@ -89,17 +89,17 @@ neon branches schema-diff production development
 You have a few options here:
 
 - Append a timestamp or LSN to compare to a specific point in `development` branch's history.
-- If you are regularly comparing development branches against `production`, include `production` in your `set-context` file. You can then leave out the [base-branch] from the command.
+- If you are regularly comparing development branches against `production`, pin `production` as the context branch with `neon link --branch production`. You can then leave out the [base-branch] from the command.
 - Use aliases to shorten the command.
 - Include `--database` to reduce the diff to a single database. If you don't specify a database, the diff will include all databases on the branch.
 
-Here is the same command using aliases, with `production` included in `set-context`, pointing to an LSN from `development` branch's history, and limiting the diff to the database `people`:
+Here is the same command using aliases, with `production` pinned by `neon link`, pointing to an LSN from `development` branch's history, and limiting the diff to the database `people`:
 
 ```bash
 neon branch sd development@0/123456 --db people
 ```
 
-To find out what other comparisons you can make, see [Neon CLI commands — branches](/docs/cli/branches#schema-diff) for full documentation of the command.
+To find out what other comparisons you can make, see [Neon CLI commands for branches](/docs/cli/branches#schema-diff) for full documentation of the command.
 
 ### Using the Neon API
 
@@ -113,7 +113,7 @@ To compare schemas between two branches, you can cURL command similar to the one
 curl --request GET \
      --url 'https://console.neon.tech/api/v2/projects/wispy-butterfly-25042691/branches/br-rough-boat-a54bs9yb/compare_schema?base_branch_id=br-royal-star-a54kykl2&db_name=neondb' \
      --header 'accept: application/json' \
-     --header 'authorization: Bearer $NEON_API_KEY' | jq -r '.diff'
+     --header "authorization: Bearer $NEON_API_KEY" | jq -r '.diff'
 ```
 
 The `compare_schema` endpoint supports the following parameters:
@@ -122,7 +122,7 @@ The `compare_schema` endpoint supports the following parameters:
 | ------------------ | ----------------------------------------------------------------------------- | -------- | -------------------------- |
 | `<project_id>`     | The ID of your Neon project.                                                  | Yes      | `wispy-butterfly-25042691` |
 | `<branch_id>`      | The ID of the target branch to compare (the branch with the modified schema). | Yes      | `br-rough-boat-a54bs9yb`   |
-| `<base_branch_id>` | The ID of the base branch for comparison.                                     | Yes      | `br-royal-star-a54kykl2`   |
+| `<base_branch_id>` | The ID of the base branch for comparison. If you omit it, the endpoint compares against the parent of the target branch. | No       | `br-royal-star-a54kykl2`   |
 | `<db_name>`        | The name of the database in the target branch.                                | Yes      | `neondb`                   |
 | `lsn`              | The LSN on the target branch for which the schema is retrieved.               | No       | `0/1EC5378`                |
 | `timestamp`        | The point in time on the target branch for which the schema is retrieved.     | No       | `2022-11-30T20:09:48Z`     |
@@ -158,13 +158,13 @@ Here’s an example of the `compare_schema` diff output for the `neondb` databas
 
 In the example above, the `created_at` column was added to the `public.playing_with_neon` table on the target branch.
 
-## Schema Diff GitHub Action
+## Schema diff GitHub Action
 
-Neon supports a [Schema Diff GitHub Action](/docs/guides/branching-github-actions#schema-diff-action) that performs a database schema diff on specified Neon branches for each pull request and writes a comment to the pull request highlighting the schema differences.
+Neon supports a [Schema Diff GitHub Action](https://github.com/neondatabase/schema-diff-action) that performs a database schema diff on specified Neon branches for each pull request and writes a comment to the pull request highlighting the schema differences.
 
 This action supports workflows where schema changes are made on a branch. When you create or update a pull request containing schema changes, the action automatically generates a comment within the pull request. By including the schema diff as part of the comment, reviewers can easily assess the changes directly within the pull request.
 
-To learn more, see the [Schema Diff GitHub Action](/docs/guides/branching-github-actions#schema-diff-action).
+To learn more, see the [Schema Diff GitHub Action](https://github.com/neondatabase/schema-diff-action).
 
 ## Tutorial
 

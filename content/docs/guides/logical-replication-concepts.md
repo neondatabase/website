@@ -1,14 +1,14 @@
 ---
 title: Postgres logical replication concepts
-subtitle: Learn about PostgreSQL logical replication concepts
+subtitle: Learn about Postgres logical replication concepts
 summary: >-
-  PostgreSQL logical replication replicates row-level changes (INSERT, UPDATE,
+  Postgres logical replication replicates row-level changes (INSERT, UPDATE,
   DELETE, TRUNCATE) from a publisher to subscribers using WAL decoding,
   replication slots, and decoder plugins such as pgoutput or wal2json. Read
   this page to understand the publisher-subscriber model, publications,
   subscriptions, and WAL components before setting up replication with Neon.
-  Neon automatically removes inactive replication slots and supports wal2json
-  alongside the standard pgoutput plugin.
+  Neon removes inactive replication slots after approximately 40 hours and
+  supports wal2json alongside the standard pgoutput plugin.
 enableTableOfContents: true
 isDraft: false
 updatedOn: '2026-08-07T18:39:13.799Z'
@@ -33,7 +33,7 @@ The Postgres logical replication architecture is very simple. It uses a _publish
 When replicating data from Neon, enable logical replication on your Neon project. When replicating data to Neon, enable it on the source database instead.
 
 <Admonition type="important">
-Enabling logical replication changes the PostgreSQL `wal_level` setting from `replica` to `logical` for all databases in your Neon project. This allows Postgres to record the row-level WAL detail required for logical decoding. Once changed, it cannot be reverted. Enabling logical replication also restarts all computes, so active connections will be dropped and have to reconnect.
+Enabling logical replication changes the Postgres `wal_level` setting from `replica` to `logical` for all databases in your Neon project. This allows Postgres to record the row-level WAL detail required for logical decoding. Once changed, it cannot be reverted. Enabling logical replication also restarts all computes, so active connections will be dropped and have to reconnect.
 </Admonition>
 
 You can enable logical replication from the Neon Console or via the API. See [Enable logical replication](/docs/guides/logical-replication-neon#enable-logical-replication) for instructions.
@@ -51,7 +51,7 @@ SHOW wal_level;
 
 The Postgres documentation describes a [publication](https://www.postgresql.org/docs/current/logical-replication-publication.html) as a group of tables whose data changes are intended to be replicated through logical replication. It also describes a publication as a set of changes generated from a table or a group of tables. It's indeed both of these things.
 
-A particular table can be included in multiple publications if necessary. Currently, publications can only include tables within a single schema. This is a Postgres limitation.
+A particular table can be included in multiple publications if necessary. A publication can include tables from more than one schema, for example `FOR TABLE users, other.orders`.
 
 Publications can specify the types of changes they replicate, which can include `INSERT`, `UPDATE`, `DELETE`, and `TRUNCATE` operations. By default, publications replicate all of these operation types.
 
@@ -63,7 +63,7 @@ CREATE PUBLICATION users_publication FOR TABLE users;
 
 ## Subscriptions
 
-A subscription represents the downstream side of logical replication. Data is replicated _to_ a subscriber. A subscription- establishes a connection to the publisher and identifies the publication it intends to subscribe to.
+A subscription represents the downstream side of logical replication. Data is replicated _to_ a subscriber. A subscription establishes a connection to the publisher and identifies the publication it intends to subscribe to.
 
 A single subscriber can maintain multiple subscriptions, including multiple subscriptions to the same publisher.
 
@@ -78,7 +78,7 @@ PUBLICATION users_publication;
 A subscription requires a unique name, a database connection string, the name and password of your replication role, and the name of the publication it subscribes to.
 
 <Admonition type="note">
-When the connection string points at a Neon database, use a direct connection, not a pooled one. Logical replication requires a persistent connection and is not compatible with connection poolers, so the hostname must not include the `-pooler` suffix. See [Connection pooling](/docs/connect/connection-pooling).
+When the connection string points at a Neon database, use a direct connection. Don't use the pooled hostname, the one with the `-pooler` suffix, for a subscription. See [Connection pooling](/docs/connect/connection-pooling).
 </Admonition>
 
 ## How does it work under the hood?
@@ -110,14 +110,14 @@ max_replication_slots = 10
 ```
 
 <Admonition type="important">
-To prevent storage bloat, **Neon automatically removes _inactive_ replication slots after a period of time. Please see [Unused replication slots](/docs/guides/logical-replication-neon#unused-replication-slots) to learn more.
+To prevent storage bloat, **Neon automatically removes _inactive_ replication slots after approximately 40 hours. See [Unused replication slots](/docs/guides/logical-replication-neon#unused-replication-slots) to learn more.**
 </Admonition>
 
 ### Decoder plugins
 
 The Postgres replication architecture uses decoder plugins to decode WAL entries into a logical replication stream, making the data understandable for the subscriber. The default decoder plugin for PostgreSQL logical replication is `pgoutput`, and it's included in Postgres by default. You don't need to install it.
 
-Neon, supports an alternative decoder plugin called `wal2json`. This decoder plugin differs from `pgoutput` in that it converts WAL data into `JSON` format, which is useful for integrating Postgres with systems and applications that work with `JSON` data.
+Neon supports an alternative decoder plugin called `wal2json`. This decoder plugin differs from `pgoutput` in that it converts WAL data into `JSON` format, which is useful for integrating Postgres with systems and applications that work with `JSON` data.
 
 To use this decoder plugin, you'll need to create a dedicated replication slot for it, as shown here:
 
@@ -145,8 +145,8 @@ On the subscriber side, WAL receivers receive the replication stream (the decode
 
 ## References
 
-- [Logical replication - PostgreSQL documentation](https://www.postgresql.org/docs/current/logical-replication.html)
-- [Publications - PostgreSQL documentation](https://www.postgresql.org/docs/current/logical-replication-publication.html)
+- [Logical replication - Postgres documentation](https://www.postgresql.org/docs/current/logical-replication.html)
+- [Publications - Postgres documentation](https://www.postgresql.org/docs/current/logical-replication-publication.html)
 - [CREATE PUBLICATION](https://www.postgresql.org/docs/current/sql-createpublication.html)
 - [CREATE SUBSCRIPTION](https://www.postgresql.org/docs/current/sql-createsubscription.html)
 - [wal2json](https://github.com/eulerto/wal2json)

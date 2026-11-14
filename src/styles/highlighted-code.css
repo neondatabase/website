@@ -78,6 +78,29 @@
     @apply mx-4 px-0;
   }
 
+  /* Line ranges hidden with the `collapse={1-5}` code fence meta */
+  pre .collapsed-lines {
+    > summary {
+      @apply cursor-pointer list-none bg-[#EFEFF1] px-4 text-gray-new-50 select-none hover:text-[#131415] dark:bg-[#242427] dark:hover:text-[#F9FAFA];
+
+      &::-webkit-details-marker {
+        @apply hidden;
+      }
+
+      &::before {
+        @apply mr-2 content-['▸'];
+      }
+    }
+
+    &[open] > summary {
+      @apply hidden;
+    }
+
+    > .line {
+      @apply block;
+    }
+  }
+
   code .line::after {
     @apply invisible overflow-hidden text-sm content-["'"];
   }

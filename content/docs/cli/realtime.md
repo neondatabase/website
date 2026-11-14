@@ -7,7 +7,7 @@ summary: >-
   to connect, `disable` to remove it, `rotate-secret` to replace its shared
   secret, and `subscribe` to stream a live SQL query.
 enableTableOfContents: true
-updatedOn: '2026-10-15T21:50:02.535Z'
+updatedOn: '2026-11-05T15:33:57.188Z'
 redirectFrom:
   - /docs/cli/subscribe
 ---
@@ -98,17 +98,19 @@ The CLI resolves the branch's Realtime URL, secret, and database name for you, t
 
 The subscription runs until you press Ctrl+C, or until the server closes it or reports an error.
 
+`--debug` turns on [debug mode](/docs/realtime/guides/subscribing#show-full-database-errors) for the subscription, the same as setting `debugMode` in the SDK. When a query is rejected or fails, you see the database's own error message, with its SQLSTATE code when there is one, instead of a generic message.
+
 ### Output
 
 The default table output is an append-only log, so it doesn't take over your terminal. It opens with a header naming the project, branch, database, mode, and query, then prints:
 
 - The initial result once, as a table.
-- One entry per transaction, labeled with its transaction ID and a `+inserted ~updated -deleted` count, listing each changed row with its change type. A deleted row shows its last known values.
+- One entry per transaction, labeled with its transaction ID and a `+inserted ~updated -deleted` count, listing each changed row with its change type. A deleted row shows its last known values. A row that changes position in an ordered result shows as `↔ move` with its values, and the count ends with `↔` and the number of rows that moved.
 - Connection state changes, such as connecting, live, and stale.
 
 Every entry starts with a UTC timestamp. The server can send a complete `rows` replacement instead of incremental `changes` at any point, and then `realtime subscribe` prints the full result again. Some queries, such as ones with `ORDER BY`, can get a complete replacement for a change.
 
-With `--changes`, it prints the raw events instead: a `rows` event with the complete current result, each row carrying a row ID, followed by `changes` events that list each change's type (`upsert` or `remove`), row ID, and row. A `rows` event replaces the full row set and invalidates earlier row IDs.
+With `--changes`, it prints the raw events instead: a `rows` event with the complete current result, each row carrying a row ID, followed by `changes` events that list each change's type (`upsert`, `remove`, or `move`), row ID, and row. In table output, a `move` also shows `after_row_id`, the ID of the row it now follows, or `(head)` when it moved to the first position. A `rows` event replaces the full row set and invalidates earlier row IDs.
 
 With `--output json`, each event is one JSON object per line. With `--output yaml`, each event is a separate YAML document. Each event has a `type` of `snapshot` (the default mode), or `rows` or `changes` (with `--changes`). Machine-readable output carries only the events: the header and connection states are terminal-only.
 
@@ -200,6 +202,12 @@ remove  1257d5759a0894512f6859dd60b504e69cbf6f8d9d4d977ee9b3b396661928bf
 ```
 
 </details>
+
+Show the database's full error when a query is rejected or fails:
+
+```bash
+neon realtime subscribe --debug "SELECT * FROM items"
+```
 
 Stream events as newline-delimited JSON, for example to pipe into another tool. Each event is a full snapshot of the result:
 

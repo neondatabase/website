@@ -66,9 +66,10 @@ describe('Middleware - AI Agent Integration Tests', () => {
     ]),
   });
 
-  it('matches every generated marketing page for content negotiation', () => {
+  it('matches every generated marketing page for content negotiation', async () => {
+    const { GENERATED_PAGE_MARKDOWN_PATHS } = await import('./constants/content');
     expect(middlewareConfig.matcher).toEqual(
-      expect.arrayContaining(['/functions', '/ai-gateway', '/lakebase'])
+      expect.arrayContaining(Object.keys(GENERATED_PAGE_MARKDOWN_PATHS).map((route) => `/${route}`))
     );
   });
 
@@ -98,7 +99,7 @@ describe('Middleware - AI Agent Integration Tests', () => {
 
   describe('Content routes - AI Agents should get markdown', () => {
     const testCases = [
-      { name: 'Docs', path: '/docs/introduction' },
+      { name: 'Docs', path: '/docs/get-started/full-backend-quickstart' },
       { name: 'PostgreSQL', path: '/postgresql/tutorial' },
       { name: 'Guides', path: '/guides/neon-sst' },
       { name: 'Branching', path: '/branching/introduction' },
@@ -114,6 +115,7 @@ describe('Middleware - AI Agent Integration Tests', () => {
       { name: 'Object Storage', path: '/object-storage' },
       { name: 'Auth', path: '/auth' },
       { name: 'Lakebase', path: '/lakebase' },
+      { name: 'Case studies', path: '/case-studies' },
       { name: 'FAQs', path: '/faqs/connect-application-using-connection-string' },
     ];
 
@@ -197,7 +199,7 @@ describe('Middleware - AI Agent Integration Tests', () => {
       expect(text).toContain('# Neon Postgres');
     });
 
-    it('redirects browsers to /docs/introduction without fetching markdown', async () => {
+    it('passes browsers through to the /docs front page without redirecting', async () => {
       const req = createMockRequest(
         '/docs',
         'Mozilla/5.0 (Windows NT 10.0; Win64; x64)',
@@ -206,8 +208,9 @@ describe('Middleware - AI Agent Integration Tests', () => {
 
       const response = await middleware(req);
 
-      expect(response.type).toBe('redirect');
-      expect(response.url.toString()).toContain('/docs/introduction');
+      expect(response.type).toBe('next');
+      expect(response.headers.get('location')).toBeNull();
+      expect(response.headers.get('X-LLMs-Txt')).toBe('/docs/llms.txt');
       expect(response.headers.get('Vary')).toBe('Accept, User-Agent');
       expect(global.fetch).not.toHaveBeenCalled();
     });
@@ -609,6 +612,10 @@ describe('Middleware - AI Agent Integration Tests', () => {
       ['/skill.md alias', '/skill.md'],
       ['.well-known agent-skills alias', '/.well-known/agent-skills/neon-postgres/SKILL.md'],
       ['docs .well-known alias', '/docs/.well-known/agent-skills/neon-postgres/SKILL.md'],
+      // Route-handler sitemap and its rewrite-backed aliases: no file in public/.
+      ['Markdown sitemap', '/docs/sitemap.md'],
+      ['root Markdown sitemap alias', '/sitemap.md'],
+      ['.well-known Markdown sitemap alias', '/.well-known/sitemap.md'],
     ])('passes through a %s, tracks the read, no markdown fetch', async (_label, path) => {
       const req = createMockRequest(path, 'Mozilla/5.0', 'text/html');
 

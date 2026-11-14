@@ -6,81 +6,61 @@ summary: >-
   requires email authentication to be enabled in project Settings. The pre-built
   `<ForgotPasswordForm>` and `<ResetPasswordForm>` components handle the full
   forgot-password flow; reset links expire after 15 minutes, and the SDK
-  `resetPasswordForEmail` method is not yet supported.
+  `resetPasswordForEmail` method is not yet supported. An optional per-branch
+  setting, `revoke_sessions_on_password_reset`, signs the user out of every
+  existing session after a successful reset.
 enableTableOfContents: true
-updatedOn: '2026-10-09T09:36:23.504Z'
+updatedOn: '2026-11-05T12:39:50.597Z'
 ---
 
 Password reset allows users to securely reset forgotten passwords. Managed Better Auth supports password reset via verification links sent to the user's email address.
 
 ## Enable password reset
 
-In your project's **Settings** → **Better Auth** page, ensure **Sign-up with Email** is enabled. Password reset is automatically available when email authentication is enabled.
+In your project's **Settings** → **Better Auth** page, ensure **Sign-in with Email** is enabled. Password reset is automatically available when email authentication is enabled.
 
 ## Using UI components
 
-The easiest way to add password reset is using the pre-built UI components `<ForgotPasswordForm>` and `<ResetPasswordForm>`.
+With [Better Auth UI](/docs/auth/reference/ui-components), password reset is built in. `npx shadcn@latest add @better-auth-ui/auth` adds the `forgot-password`, `reset-link-sent`, and `reset-password` views, and the sign-in view links to **Forgot password?**.
 
-### 1. Enable forgot password in AuthView (#enable-forgot-password-authview)
+### 1. Route the auth views (#route-auth-views)
 
-If you're using `<AuthView>`, enable the forgot password flow:
+Render `<Auth>` for every auth path, as in the [Next.js App Router example](/docs/auth/reference/ui-components#nextjs-app-router):
 
-```tsx filename="src/App.tsx"
-import { NeonAuthUIProvider, AuthView } from '@neondatabase/auth-ui';
-import { authClient } from './auth';
+```tsx filename="app/auth/[path]/page.tsx"
+import { viewPaths } from '@better-auth-ui/core';
+import { Auth } from '@/components/auth/auth';
 
-export default function App() {
-  return (
-    <NeonAuthUIProvider authClient={authClient}>
-      <AuthView pathname="sign-in" credentials={{ forgotPassword: true }} />
-    </NeonAuthUIProvider>
-  );
+export const dynamicParams = false;
+
+export function generateStaticParams() {
+  return Object.values(viewPaths.auth).map((path) => ({ path }));
+}
+
+export default async function AuthPage({ params }: { params: Promise<{ path: string }> }) {
+  const { path } = await params;
+  return <Auth path={path} />;
 }
 ```
 
-The `<AuthView>` component automatically includes a "Forgot password?" link when `forgotPassword` is enabled.
+`/auth/forgot-password` asks for the email and sends the reset link. The link opens `/auth/reset-password`, where the user sets a new password.
 
-### 2. Use standalone form components (#use-standalone-forms)
+### 2. Render a single view (#render-a-single-view)
 
-For more control, use `<ForgotPasswordForm>` and `<ResetPasswordForm>` separately:
+To place a view somewhere else, pass the view name instead of a path:
 
-```tsx filename="src/App.tsx"
-import { useState } from 'react';
-import { ForgotPasswordForm, ResetPasswordForm } from '@neondatabase/auth-ui';
-import { authClient } from './auth';
+```tsx filename="src/ForgotPasswordPage.tsx"
+import { Auth } from '@/components/auth/auth';
 
-export default function App() {
-  const [step, setStep] = useState<'forgot' | 'reset'>('forgot');
-  const [email, setEmail] = useState('');
-
-  if (step === 'forgot') {
-    return (
-      <ForgotPasswordForm
-        authClient={authClient}
-        redirectTo={`${window.location.origin}/reset-password`}
-        onSuccess={(data) => {
-          setEmail(data.email);
-          setStep('reset');
-        }}
-      />
-    );
-  }
-
-  return (
-    <ResetPasswordForm
-      authClient={authClient}
-      email={email}
-      onSuccess={() => {
-        setStep('forgot');
-        // Redirect to sign-in or show success message
-      }}
-    />
-  );
+export function ForgotPasswordPage() {
+  return <Auth view="forgotPassword" />;
 }
 ```
+
+The copied components (`components/auth/forgot-password.tsx` and `components/auth/reset-password.tsx`) are yours to edit.
 
 <Admonition type="note">
-SDK methods for password reset (`resetPasswordForEmail`) are not fully supported yet. Use the UI components (`<ForgotPasswordForm>` and `<ResetPasswordForm>`) for password reset functionality.
+SDK methods for password reset (`resetPasswordForEmail`) are not fully supported yet. Use the UI components for password reset functionality.
 </Admonition>
 
 ## Password reset flow
@@ -96,6 +76,53 @@ The complete password reset flow works as follows:
 ## Reset link expiration
 
 Password reset links expire after **15 minutes**. If a link expires, users need to request a new one.
+
+## Sign users out after a reset
+
+By default, resetting a password doesn't end the user's existing sessions. Turn on **Revoke sessions on password reset** to sign the user out of every existing session when they reset their password. This applies to resets through a reset link (`/reset-password`) and through [Email OTP](/docs/auth/guides/plugins/email-otp#reset-password-with-otp) (`/email-otp/reset-password`), whether your app calls those endpoints directly or through a proxy.
+
+<Tabs labels={["Console", "CLI", "API"]}>
+
+<TabItem>
+
+In your project's **Settings** → **Better Auth** page, turn on **Revoke sessions on password reset**. The switch appears under **Sign-in with Email** while that switch is on.
+
+</TabItem>
+
+<TabItem>
+
+Turn on the setting using [`neon neon-auth config email-password update`](/docs/cli/neon-auth#config-email-password-update):
+
+```bash
+neon neon-auth config email-password update --revoke-sessions-on-password-reset
+```
+
+`neon neon-auth config email-password get` shows the current value.
+
+</TabItem>
+
+<TabItem>
+
+Use the [Update email and password configuration](/docs/reference/api/auth/update-neon-auth-email-and-password-config) endpoint. Replace `{project_id}` and `{branch_id}` with your project and branch IDs:
+
+```bash
+curl -X PATCH 'https://console.neon.tech/api/v2/projects/{project_id}/branches/{branch_id}/auth/email_and_password' \
+  -H "Authorization: Bearer $NEON_API_KEY" \
+  -H 'Content-Type: application/json' \
+  -d '{"revoke_sessions_on_password_reset": true}'
+```
+
+A `GET` request to the same endpoint returns the current value.
+
+</TabItem>
+
+</Tabs>
+
+Consuming the reset link or code, deleting the user's sessions, and saving the new password happen in a single database transaction. If any step fails, the reset returns an error, so a successful reset never leaves an old session valid. A revoked session is rejected on its next request. Managed Better Auth doesn't use a session cookie cache or secondary session storage, so every session check reads the database.
+
+The setting is off by default so existing apps don't sign users out unexpectedly. It's configured per branch. A new branch copies its parent's auth configuration when you create it, so turning the setting on for a parent doesn't change branches that already exist.
+
+To sign out other devices when a signed-in user changes their password, pass `revokeOtherSessions: true` to `changePassword()`. See [Revoke other sessions](/docs/auth/guides/user-management#revoke-other-sessions).
 
 ## Next steps
 

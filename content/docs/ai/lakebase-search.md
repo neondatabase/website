@@ -8,6 +8,11 @@ summary: >-
   the search types, how the extensions work, the scale-to-zero architecture
   advantages, and where to get started.
 enableTableOfContents: true
+redirectFrom:
+  - /docs/extensions/pg_search
+  - /docs/extensions/migrate-pg-search-to-lakebase-text
+  - /guides/pg-search
+  - /guides/pg-search-vs-tsvector
 updatedOn: '2026-10-23T11:22:59.906Z'
 ---
 
@@ -16,6 +21,8 @@ Lakebase Search is developed by Databricks. These extensions are part of the sha
 </Callout>
 
 Lakebase Search adds vector, keyword, and hybrid search to your Neon project. Install `lakebase_vector` for vector search, `lakebase_text` for BM25 keyword search, and `lakebase_tokenizer` for configurable tokenization.
+
+<AgentPrompt title="Set up with your agent" src="/prompts/lakebase-search-landing.md" buttonText="Copy prompt" />
 
 ## Vector, keyword, and hybrid search
 

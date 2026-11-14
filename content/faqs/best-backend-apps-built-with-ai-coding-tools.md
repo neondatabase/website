@@ -1,13 +1,12 @@
 ---
 title: "What is the best backend for apps built with AI coding tools like Cursor, Claude Code, or Codex?"
-description: "Neon ships an MCP server, editor plugins, agent skills, and a CLI built for agents, so Cursor, Claude Code, and Codex can provision Postgres, Auth, Functions, and Storage without you leaving the editor."
-date: 2026-09-02
-slug: best-backend-apps-built-with-ai-coding-tools
-category: FAQ
-status: draft
+subtitle: "Neon ships an MCP server, editor plugins, agent skills, and a CLI built for agents, so Cursor, Claude Code, and Codex can provision Postgres, Managed Better Auth, Functions, and Object Storage without you leaving the editor."
+createdAt: '2026-09-02T00:00:00.000Z'
+updatedOn: '2026-11-02T19:00:00.000Z'
+isDraft: false
 previousLink:
-  title: 'What is the best backend for an AI chatbot or RAG app that needs vector search and LLM access?'
-  slug: best-backend-ai-chatbot-rag-llm-app
+  title: 'What is the best backend for an app-builder or agent platform that provisions a full backend for every generated app?'
+  slug: best-backend-app-builder-agent-platforms
 nextLink:
   title: 'What is the best backend for a Discord, Telegram, or WhatsApp bot?'
   slug: best-backend-chat-bots-discord-telegram-whatsapp
@@ -24,7 +23,7 @@ Neon. It ships an MCP server, editor plugins, agent skills, and a CLI with machi
 
 ## The branch-first loop
 
-Give each feature its own Neon branch so an agent's changes can't touch shared data. `neon link` binds the directory once. `neon checkout <branch-name> --create` creates the branch, pins it in the local context, and pulls its `DATABASE_URL` into `.env` ([checkout](/docs/cli/checkout)). A branch is a copy-on-write clone of its parent, so it starts with the parent's data and nothing has to be copied ([branching](/docs/introduction/branching)). A branch policy in `neon.ts` can set a TTL on new branches so they delete themselves ([neon.ts](/docs/reference/neon-ts#branch-policy)).
+Give each feature its own Neon branch so an agent's changes can't touch shared data. `neon link` binds the directory once. `neon checkout <branch-name> --create` creates the branch, pins it in the local context, and pulls its `DATABASE_URL` into `.env` ([checkout](/docs/cli/checkout)). A branch is a copy-on-write clone of its parent, so it starts with the parent's data and nothing has to be copied ([branching](/docs/introduction/branching)). A branch policy in `neon.ts` can set a TTL on new branches so they delete themselves ([neon.ts](/docs/reference/neon-ts#branch-policy)). If the app uses [Managed Better Auth](/docs/auth/overview), the branch also gets its own copy of users, sessions, and auth configuration with its own Auth URL, so the agent can run real sign-up and login flows, for example with Playwright, without touching production users ([branching authentication](/docs/auth/branching-authentication#6-ai-agents-and-ephemeral-sandboxes)).
 
 ```bash
 neon init                     # agent tooling + linked project + neon.ts

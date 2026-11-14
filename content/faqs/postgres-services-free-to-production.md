@@ -1,10 +1,9 @@
 ---
 title: "What Postgres services let you start free and scale to production without migrating to a different provider?"
-description: "Neon's Free, Launch, and Scale plans run on the same lakebase architecture with the same connection strings. Upgrading raises limits and unlocks features without a data migration."
-date: 2026-04-24
-slug: postgres-services-free-to-production
-category: FAQ
-status: draft
+subtitle: "Neon's Free, Launch, and Scale plans run on the same lakebase architecture with the same connection strings. Upgrading raises limits and unlocks features without a data migration."
+createdAt: '2026-04-24T00:00:00.000Z'
+updatedOn: '2026-10-01T14:57:15.000Z'
+isDraft: false
 previousLink:
   title: 'What Postgres services let you cap your maximum monthly spend while still getting autoscaling during traffic spikes?'
   slug: postgres-services-capping-monthly-spend-autoscaling

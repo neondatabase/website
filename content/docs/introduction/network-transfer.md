@@ -9,7 +9,7 @@ summary: >-
   replication syncs, and to monitor usage via the Console or Consumption API.
   Reduction strategies include scoping SELECT columns, using Neon snapshots,
   adding replication filters, and routing traffic over Private Link.
-updatedOn: '2026-10-09T10:14:56.146Z'
+updatedOn: '2026-11-02T21:58:12.242Z'
 ---
 
 Network transfer is one of the usage metrics that affects your Neon bill. This guide explains what network transfer is, what causes it to increase, how to monitor it, and how to reduce it. For broader cost guidance, see [Cost optimization](/docs/introduction/cost-optimization). For plan allowances and pricing, see [Plans](/docs/introduction/plans).
@@ -89,7 +89,7 @@ The following example retrieves hourly public and private network transfer for a
 curl --request GET \
   --url 'https://console.neon.tech/api/v2/consumption_history/v2/projects?org_id=$ORG_ID&from=2026-02-01T00:00:00Z&to=2026-02-07T00:00:00Z&granularity=hourly&metrics=public_network_transfer_bytes,private_network_transfer_bytes' \
   --header 'Accept: application/json' \
-  --header 'Authorization: Bearer $NEON_API_KEY'
+  --header "Authorization: Bearer $NEON_API_KEY"
 ```
 
 <details>
@@ -153,7 +153,7 @@ The `data_transfer_bytes` field on the [Get project details](/docs/reference/api
 curl --request GET \
   --url https://console.neon.tech/api/v2/projects/$PROJECT_ID \
   --header 'Accept: application/json' \
-  --header 'Authorization: Bearer $NEON_API_KEY'
+  --header "Authorization: Bearer $NEON_API_KEY"
 ```
 
 The response includes `data_transfer_bytes` in the project object:
@@ -173,7 +173,7 @@ The response includes `data_transfer_bytes` in the project object:
 curl --request GET \
   --url https://console.neon.tech/api/v2/projects/$PROJECT_ID/branches/$BRANCH_ID \
   --header 'Accept: application/json' \
-  --header 'Authorization: Bearer $NEON_API_KEY'
+  --header "Authorization: Bearer $NEON_API_KEY"
 ```
 
 The response includes `data_transfer_bytes` in the branch object:
@@ -288,15 +288,19 @@ For broader cost reduction strategies across all billing metrics, see [Cost opti
 
 **Use Private Link for internal traffic.** If your application runs in AWS, [Private Networking](/docs/guides/neon-private-networking) (Scale plan) routes traffic over PrivateLink at $0.01/GB instead of $0.10/GB for public network transfer beyond the included allowance.
 
-### Use the egress optimizer agent skill
+### Use an agent skill to find egress anti-patterns
 
-An [agent skill](https://github.com/neondatabase/agent-skills) is available that guides your AI assistant through diagnosing and fixing application-side query patterns that cause excessive egress. The skill walks through analyzing your codebase for anti-patterns (such as `SELECT *`, missing pagination, high-frequency queries on static data, and application-side aggregation), applying fixes, and verifying with tests. To add it to your AI assistant with the [Neon CLI](/docs/cli):
+The `neon-postgres` [agent skill](/docs/ai/agent-skills) includes an egress optimization workflow for your AI assistant. It's a general Postgres skill, so the workflow applies when you ask about high database bills, unexpected network transfer, egress spikes, or query overfetching.
+
+The assistant finds the queries that transfer the most data using `pg_stat_statements` and traces them back to your code. It then fixes the anti-patterns it finds (unused columns such as `SELECT *`, missing pagination, repeated reads of static data, application-side aggregation, and JOIN duplication) and checks that your tests still pass and transfer drops.
+
+`neon-postgres` is part of the default set that `neon skills` installs, so you may already have it. To add just this skill with the [Neon CLI](/docs/cli):
 
 ```bash
-neon skills -s neon-postgres-egress-optimizer
+neon skills -s neon-postgres
 ```
 
-Without the Neon CLI, run `npx skills add neondatabase/agent-skills -s neon-postgres-egress-optimizer` instead.
+Without the Neon CLI, run `npx skills add neondatabase/agent-skills -s neon-postgres` instead.
 
 <Admonition type="tip">
 Building a platform on Neon? You can cap per-project network transfer with [consumption limits](/docs/guides/consumption-limits).

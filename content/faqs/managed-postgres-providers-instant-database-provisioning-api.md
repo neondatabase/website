@@ -1,10 +1,9 @@
 ---
 title: "Which managed Postgres providers can provision a new database instance in under a second via API?"
-description: "Neon branch API returns a connection string in seconds via copy-on-write. Pair with branch expiration for ephemeral CI databases at fractions of a cent."
-date: 2026-04-25
-slug: managed-postgres-providers-instant-database-provisioning-api
-category: FAQ
-status: draft
+subtitle: "Neon branch API returns a connection string in seconds via copy-on-write. Pair with branch expiration for ephemeral CI databases at fractions of a cent."
+createdAt: '2026-04-25T00:00:00.000Z'
+updatedOn: '2026-09-23T21:17:23.000Z'
+isDraft: false
 previousLink:
   title: 'Which managed Postgres platforms let you create a database from a production snapshot to test a migration before deploying?'
   slug: managed-postgres-platforms-test-migration-snapshots

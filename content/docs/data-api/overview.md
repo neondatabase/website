@@ -25,9 +25,13 @@ The Neon Data API is the HTTP query service in the Neon backend for apps and age
 The Data API has no permission layer of its own. Every request is authorized entirely by your PostgreSQL `GRANT` statements and [Row-Level Security (RLS)](/docs/guides/row-level-security) policies, so a missing or misconfigured policy can expose a table to anyone with the endpoint URL. Before exposing data, follow [Access control & security](/docs/data-api/access-control) and [Secure your app with RLS](/docs/guides/rls-tutorial), and run the [Data API advisors](/docs/data-api/database-advisor) to catch misconfigurations.
 </Admonition>
 
+<Admonition type="warning" title="Not yet HIPAA-compliant">
+The Data API isn't covered by Neon's [HIPAA compliance](/docs/security/hipaa) yet. Don't use it with protected health information (PHI) in a HIPAA-enabled project.
+</Admonition>
+
 ## PostgREST compatibility
 
-The Neon Data API is fully compatible with [PostgREST](https://postgrest.org/en/stable/). This compatibility allows you to query your database using any standard HTTP client (such as Postman or `cURL`) or integrate easily using client libraries, including [`@neondatabase/neon-js`](https://www.npmjs.com/package/@neondatabase/neon-js) and [`@neondatabase/postgrest-js`](https://www.npmjs.com/package/@neondatabase/postgrest-js).
+The Neon Data API is fully compatible with [PostgREST](https://postgrest.org/en/stable/). This compatibility allows you to query your database using any standard HTTP client (such as Postman or `cURL`) or integrate easily using client libraries, including [`@neon/neon-js`](https://www.npmjs.com/package/@neon/neon-js) and [`@neon/postgrest-js`](https://www.npmjs.com/package/@neon/postgrest-js).
 
 ## Quickstart
 

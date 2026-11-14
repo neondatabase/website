@@ -1,0 +1,42 @@
+import Button from 'components/shared/button';
+import Container from 'components/shared/container';
+import SectionLabel from 'components/shared/section-label';
+import LINKS from 'constants/links';
+
+const BUTTON_CLASS_NAME =
+  'h-11 px-7 text-base font-medium tracking-extra-tight xl:h-9 xl:px-[18px] xl:text-sm';
+
+const Hero = () => (
+  <section className="hero relative mt-40 safe-paddings xl:mt-[144px] lg:mt-20 md:mt-12">
+    <Container size="1280">
+      <SectionLabel theme="white">Function Registry</SectionLabel>
+      <h1 className="mt-5 max-w-3xl text-[3.75rem] leading-dense font-normal tracking-tighter xl:text-[3.25rem] lg:text-[2.75rem] md:mt-4 md:text-[2rem]">
+        Templates for Neon Functions
+      </h1>
+      <p className="mt-6 max-w-[672px] text-lg leading-normal tracking-extra-tight text-gray-new-60 xl:mt-5 lg:text-base md:mt-4 md:text-[0.9375rem] md:leading-snug">
+        Open-source functions you add to a Neon project with one command
+      </p>
+      <div className="mt-9 flex flex-wrap items-center gap-4 xl:mt-8 lg:mt-7 md:mt-6">
+        <Button
+          className={BUTTON_CLASS_NAME}
+          theme="white-filled"
+          to={LINKS.signup}
+          target="_blank"
+          tagName="Functions Templates Hero"
+        >
+          Start building
+        </Button>
+        <Button
+          className={BUTTON_CLASS_NAME}
+          theme="outlined-new"
+          to={LINKS.functionsTemplatesDocs}
+          tagName="Functions Templates Hero Docs"
+        >
+          Read the docs
+        </Button>
+      </div>
+    </Container>
+  </section>
+);
+
+export default Hero;

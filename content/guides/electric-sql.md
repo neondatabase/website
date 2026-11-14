@@ -4,14 +4,16 @@ subtitle: A step-by-step guide to integrating Electric with Lakebase Postgres
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2025-05-28T00:00:00.000Z'
-updatedOn: '2026-09-24T17:56:34.189Z'
+updatedOn: '2026-11-07T02:02:12.717Z'
 ---
 
-This guide demonstrates how to integrate [Electric](https://electric.ax/) with Lakebase Postgres. Electric is a Postgres sync engine that handles partial replication, fan-out, and data delivery to client apps. According to Electric, it can scale to millions of users with low, predictable compute and memory usage.
+<Admonition type="important" title="Superseded by Neon Realtime">
 
-<Admonition type="info" title="Electric has joined Neon">
-Electric, the team behind the Electric sync engine, is [joining Neon at Databricks](/blog/electric-joins-neon). Real-time sync is coming to Neon, with deeper integration already underway. In the meantime, this guide shows how to use Electric with Neon today.
+The Electric team [joined Neon](/blog/electric-joins-neon) and built [Neon Realtime](/docs/realtime/overview) as the successor to Electric, so we recommend Realtime over running Electric on Neon. Live SQL queries are a drop-in replacement for shapes, with a few differences. Read [the launch post](/blog/neon-now-has-realtime) and see [how to Migrate from Electric](/docs/realtime/migrate-from/electric).
+
 </Admonition>
+
+This guide demonstrates how to integrate [Electric](https://electric.ax/) with Lakebase Postgres. Electric is a Postgres sync engine that handles partial replication, fan-out, and data delivery to client apps. According to Electric, it can scale to millions of users with low, predictable compute and memory usage.
 
 Electric is a read-path sync engine: it replicates subsets of your Postgres data to client applications. You define these subsets with [Shapes](https://electric.ax/docs/guides/shapes), which are similar to live queries. Your application's existing API and backend logic still handle writes, so Electric fits alongside your current stack.
 
@@ -292,5 +294,13 @@ You have set up Electric with Lakebase Postgres and built a basic real-time Reac
 - [Electric Quickstart](https://electric.ax/docs/quickstart)
 - [Electric Shapes](https://electric.ax/docs/guides/shapes)
 - [Neon documentation](/docs)
+
+<Admonition type="tip" title="From Electric to Neon Realtime">
+
+Neon now has [realtime live SQL](/docs/realtime/overview#realtime-live-sql) and [end-to-end, type-safe reactivity](/docs/realtime/how-it-works#higher-level-reactive-dx) built-in.
+
+See [how to Migrate from Electric](/docs/realtime/migrate-from/electric) in the [Neon Realtime docs](/docs/realtime/overview).
+
+</Admonition>
 
 <NeedHelp/>

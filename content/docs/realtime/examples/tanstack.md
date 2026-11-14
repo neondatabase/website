@@ -4,6 +4,7 @@ subtitle: 'Full-stack example app using Realtime with TanStack.'
 summary: >-
   Build a per-user todo app with TanStack Start, TanStack DB, Drizzle and Managed Better Auth on Neon Realtime: seal live queries in server functions, seed a Realtime collection in a route loader, and settle optimistic writes by txid.
 enableTableOfContents: true
+updatedOn: '2026-10-15T14:51:27.000Z'
 ---
 
 This example shows how to use Neon Realtime with [TanStack&nbsp;Start](https://tanstack.com/start), [TanStack&nbsp;DB](https://tanstack.com/db), Drizzle and Neon's [Managed Better Auth](/docs/auth/overview), with support for [auth](#authorize-with-the-session), [SSR](#server-side-rendering), [client-side reactivity](#client-side-reactivity) and [optimistic mutations](#optimistic-mutations).

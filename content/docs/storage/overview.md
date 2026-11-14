@@ -7,6 +7,13 @@ summary: >-
   its own view of storage. Point an S3 SDK at your branch endpoint and
   authenticate with your Neon credential.
 enableTableOfContents: true
+redirectFrom:
+  - /docs/storage/object-storage
+  - /docs/object-storage/overview
+  - /docs/guides/object-storage
+  - /docs/object-storage
+  - /docs/introduction/object-storage
+  - /docs/guides/neon-object-storage
 updatedOn: '2026-10-23T14:02:32.319Z'
 layout: wide
 hideCopyPage: true
@@ -15,7 +22,7 @@ hideCopyPage: true
 <div className="not-prose -mb-4 grid grid-cols-[minmax(0,7fr)_minmax(0,4fr)] items-start gap-16 lg:mb-6 lg:grid-cols-1 lg:gap-10">
 
 <div className="[&>div]:my-0!">
-<p className="mt-0 mb-6 max-w-2xl text-base leading-[1.6] tracking-tight text-gray-new-20 [text-wrap:pretty] dark:text-gray-new-80">S3-style object storage that lives in your backend, so your files branch and fork copy-on-write with your data.</p>
+<p className="mt-0 mb-6 max-w-2xl text-base leading-[1.6] tracking-tight text-gray-new-20 [text-wrap:pretty] dark:text-gray-new-80">Store images, video, and user uploads in S3-style object storage that lives in your backend, so your files branch with your data.</p>
 <AgentPrompt title="Set up with your agent" src="/prompts/object-storage-landing.md" buttonText="Copy prompt" />
 </div>
 
@@ -57,7 +64,7 @@ hideCopyPage: true
 
 Neon Object Storage is file storage built into your Neon project, reached through an S3-style API. Key capabilities include:
 
-- **Branches with your database.** Each branch has its own view of storage, so you can test uploads and deletes in a preview branch without touching production files.
+- **Branches with your database.** Each branch has its own view of storage, so you can test uploads and deletes in a preview branch without touching production files. [Reset a branch from its parent](/docs/guides/reset-from-parent) to return its storage to the parent's state.
 - **Copy-on-write forking.** Branches inherit the parent's objects at the moment of forking, with no data copied.
 - **S3-style access.** Point the AWS SDKs, boto3, the AWS CLI, or the [Files SDK](https://files-sdk.dev) at your branch endpoint. Neon implements a subset of the S3 API.
 - **One credential system.** The same Neon credential system used by AI Gateway and Functions.
@@ -89,10 +96,11 @@ The following limits apply:
 | Object size, [multipart upload](/docs/storage/objects#multipart-upload) (maximum) | 10 GiB                                                              |
 | Free plan object storage                                                          | 5 GB per project ([rates](/docs/introduction/plans#object-storage)) |
 
-Two limits are behavioral rather than fixed numbers:
+Some limits are behavioral rather than fixed numbers:
 
 - **Region**: object storage is available in AWS US East (Ohio) (`aws-us-east-2`), AWS US East (N. Virginia) (`aws-us-east-1`), AWS Europe (Frankfurt) (`aws-eu-central-1`), and AWS Asia Pacific (Singapore) (`aws-ap-southeast-1`). Support is expanding toward all regions.
 - **Rate limiting**: requests may be throttled during heavy use, returning a `503 SlowDown` response. Back off and retry. See [Connection and performance errors](/docs/storage/troubleshooting#connection-and-performance-errors).
+- **Network controls**: [IP Allow](/docs/introduction/ip-allow#ip-allow-and-other-neon-services) and [Private Networking](/docs/guides/neon-private-networking#private-networking-and-other-neon-services) don't protect Object Storage requests. Access is controlled by credentials.
 
 To see how much Object Storage your project uses, check the **Object storage** row in the **Project** panel on your branch's **Overview** page. The value covers all branches in the project.
 

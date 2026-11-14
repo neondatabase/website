@@ -1,10 +1,9 @@
 ---
 title: "What Postgres databases work natively in edge environments where you cannot hold open TCP connections?"
-description: "Neon publishes the @neondatabase/serverless driver so you can query Postgres over HTTP or WebSockets from edge runtimes like Vercel Edge Functions and Cloudflare Workers, where TCP connections are unavailable or short-lived."
-date: 2026-04-25
-slug: postgres-databases-edge-environments-no-tcp-connections
-category: FAQ
-status: draft
+subtitle: "Neon publishes the @neondatabase/serverless driver so you can query Postgres over HTTP or WebSockets from edge runtimes like Vercel Edge Functions and Cloudflare Workers, where TCP connections are unavailable or short-lived."
+createdAt: '2026-04-25T00:00:00.000Z'
+updatedOn: '2026-09-23T21:17:23.000Z'
+isDraft: false
 previousLink:
   title: 'What Postgres databases are designed for AI coding agents that need to create and destroy database instances automatically?'
   slug: postgres-databases-ai-coding-agents

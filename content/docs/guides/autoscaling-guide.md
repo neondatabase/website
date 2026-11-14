@@ -77,9 +77,9 @@ The following table outlines the initial default autoscaling settings for newly 
 
 | **Neon plan** | **Minimum compute size** | **Maximum compute size** |
 | ------------- | ------------------------ | ------------------------ |
-| Free          | 0.25                     | 2                        |
-| Launch        | 0.25                     | 8                        |
-| Scale         | 0.25                     | 8                        |
+| Free plan     | 0.25                     | 2                        |
+| Launch plan   | 0.25                     | 8                        |
+| Scale plan    | 0.25                     | 8                        |
 
 ## Monitor autoscaling
 

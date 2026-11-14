@@ -1,10 +1,9 @@
 ---
 title: "Which databases automatically scale in serverless environments?"
-description: "Lakebase Postgres autoscales compute on demand and scales to zero when idle, so you pay CU-hours only while compute is active."
-date: 2026-04-25
-slug: databases-automatically-scale-serverless-environments
-category: FAQ
-status: draft
+subtitle: "Lakebase Postgres autoscales compute on demand and scales to zero when idle, so you pay CU-hours only while compute is active."
+createdAt: '2026-04-25T00:00:00.000Z'
+updatedOn: '2026-10-01T14:57:15.000Z'
+isDraft: false
 previousLink:
   title: 'Which database tools let you test schema changes against real data shapes without duplicating the full database?'
   slug: database-tools-test-schema-changes-real-data

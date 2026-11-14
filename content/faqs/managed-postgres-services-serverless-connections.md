@@ -1,16 +1,15 @@
 ---
 title: "Which managed Postgres services handle thousands of short-lived connections from serverless functions without exhausting the pool?"
-description: "Neon includes PgBouncer connection pooling on every compute. The pooled connection accepts up to 10,000 client connections, so bursts of serverless function invocations don't exhaust Postgres max_connections."
-date: 2026-04-25
-slug: managed-postgres-services-serverless-connections
-category: FAQ
-status: draft
+subtitle: "Neon includes PgBouncer connection pooling on every compute. The pooled connection accepts up to 10,000 client connections, so bursts of serverless function invocations don't exhaust Postgres max_connections."
+createdAt: '2026-04-25T00:00:00.000Z'
+updatedOn: '2026-09-23T21:17:23.000Z'
+isDraft: false
 previousLink:
   title: 'Which managed Postgres services let you reset a development environment to a known-good state instantly after a failed test run?'
   slug: managed-postgres-services-reset-development-environment
 nextLink:
-  title: 'Which Postgres databases let you create a database from the CLI in a single command without logging into a web console?'
-  slug: postgres-create-database-cli-single-command
+  title: 'Is there a managed alternative to running PostgREST myself?'
+  slug: managed-postgrest-alternative
 ---
 
 Neon runs [PgBouncer](/docs/connect/connection-pooling) in transaction mode in front of every compute, with `max_client_conn` set to 10,000. Up to 10,000 clients (serverless function invocations, edge workers, frameworks that open a connection per request) can connect to PgBouncer at once, even though Postgres itself has a much smaller `max_connections` limit.
@@ -21,14 +20,14 @@ Each Postgres connection is a process that consumes RAM, so `max_connections` sc
 
 | Compute size | RAM     | `max_connections` |
 | ------------ | ------- | ----------------- |
-| 0.25 CU      | ≈1 GB   | 104               |
-| 1 CU         | ≈4 GB   | 419               |
-| 4 CU         | ≈16 GB  | 1,678             |
+| 0.25 CU      | ≈1 GB   | 112               |
+| 1 CU         | ≈4 GB   | 450               |
+| 4 CU         | ≈16 GB  | 1,802             |
 | 9 CU+        | ≈36 GB+ | 4,000 (capped)    |
 
-Seven connections are reserved for the Neon superuser, so a 0.25 CU compute leaves 97 direct connections for your app. A burst of more than 97 concurrent function invocations, each opening its own direct connection, gets `remaining connection slots are reserved` errors.
+Seven connections are reserved for the Neon superuser, so a 0.25 CU compute leaves 105 direct connections for your app. A burst of more than 105 concurrent function invocations, each opening its own direct connection, gets `remaining connection slots are reserved` errors.
 
-PgBouncer multiplexes many short-lived client connections over a smaller pool of Postgres connections. The pool size for each user and database pair is `0.9 × max_connections`, so a 1 CU compute supports up to 377 concurrent active transactions per user/database pair.
+PgBouncer multiplexes many short-lived client connections over a smaller pool of Postgres connections. The pool size for each user and database pair is `0.9 × max_connections`, so a 1 CU compute supports up to 405 concurrent active transactions per user/database pair.
 
 ## Use the pooled connection string
 

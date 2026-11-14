@@ -7,11 +7,12 @@ summary: >-
   page when migrating a Neon database to another Postgres provider or
   self-hosted cluster and needing a provider-agnostic dump file. The export
   requires an unpooled connection string; the destination must run the same or a
-  newer Postgres major version, and role ownership mismatches can be resolved
-  with the -O flag on pg_restore.
+  newer Postgres major version. Role ownership mismatches can be resolved with
+  the -O flag on pg_restore, and the -x flag skips the grants that reference
+  Neon's internal roles.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-11-04T20:10:08.844Z'
 ---
 
 This topic describes how to export your **Neon** database to a **Postgres-compatible** archive using the Postgres **`pg_dump`** utility. You get a normal custom-format dump (for example `-Fc`) that any Postgres toolchain can consume.
@@ -56,11 +57,11 @@ A **custom-format** dump (`-Fc`) from Neon is restored with **`pg_restore`**. Us
 
 **Before you run this:** Confirm with **your destination’s documentation** that **`pg_restore`** against a custom-format (**`-Fc`**) archive is supported.
 
-- **Postgres version:** Plan for the destination server to run a Postgres **major version that matches your Neon database or is newer**. Restoring into an **older** major version than the cluster you dumped from often **fails**. If versions differ, follow your provider’s compatibility guidance and test first.
+- **Postgres version:** Plan for the destination server to run a Postgres **major version that matches your Neon database or is newer**. Restoring into an **older** major version than the cluster you dumped from can fail, depending on the features your database uses. If versions differ, follow your provider’s compatibility guidance and test first.
 - **Extensions and settings:** The destination must support the **extensions** and features your Neon database uses, or you adjust before cutover.
 - **Roles:** Source and destination role names often differ. Plan for **`-O` / `--no-owner`** on **`pg_restore`** (see below) so restores do not depend on matching role OIDs.
 
-Install **`pg_dump`** and **`pg_restore`** builds that your **Neon** Postgres version and your **destination** provider support (if the two differ, follow each side’s client guidance; see [pg_restore](https://www.postgresql.org/docs/current/app-pgrestore.html) in the Postgres manual).
+Use a **`pg_dump`** whose major version matches or is newer than your Neon database. `pg_dump` stops with `server version mismatch` when the server runs a newer major version, so pg_dump 17 can't dump a Postgres 18 database. Also make sure your destination provider supports the **`pg_restore`** version you install. If the two sides differ, follow each side’s client guidance (see [pg_restore](https://www.postgresql.org/docs/current/app-pgrestore.html) in the Postgres manual).
 
 1. Create or select a **target database** on your destination as their docs require (**empty** is typical so objects from the dump do not collide with existing schema or data).
 
@@ -83,7 +84,7 @@ Install **`pg_dump`** and **`pg_restore`** builds that your **Neon** Postgres ve
    - **`-d`**: Target database [connection string](https://www.postgresql.org/docs/current/libpq-connect.html#LIBPQ-CONNSTRING) (your provider’s URL format and query parameters).
    - **`<dump_file_name>`**: The custom-format archive from **`pg_dump`** (for example **`mydatabase.bak`** from the **`pg_dump`** command in [Export steps on Neon](#export-steps-on-neon)).
 
-If restore fails on ownership or role statements, try adding **`-O`** and consult [Database object ownership considerations](/docs/import/migrate-from-postgres#database-object-ownership-considerations). For more flags (parallel jobs, schema-only, exclusions), see [Advanced pg_dump and pg_restore options](/docs/import/migrate-from-postgres#advanced-pg_dump-and-pg_restore-options).
+If restore fails on ownership or role statements, add **`-O`** (`--no-owner`) and consult [Database object ownership considerations](/docs/import/migrate-from-postgres#database-object-ownership-considerations). Neon also sets default privileges for its internal roles, `cloud_admin` and `neon_superuser`. If the restore still fails with `role "neon_superuser" does not exist`, add **`-x`** (`--no-privileges`) to skip the grant statements. With `-x`, set privileges on the destination yourself. For more flags (parallel jobs, schema-only, exclusions), see [Advanced pg_dump and pg_restore options](/docs/import/migrate-from-postgres#advanced-pgdump-and-pgrestore-options).
 
 ## Related
 

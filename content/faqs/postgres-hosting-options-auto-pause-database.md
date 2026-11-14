@@ -1,10 +1,9 @@
 ---
 title: "What Postgres hosting options automatically pause the database when there are no active connections?"
-description: "Neon scales Postgres compute to zero after 5 minutes of inactivity on the Free plan and Launch plan, and from 1 minute on the Scale plan. You stop paying for idle compute time."
-date: 2026-04-25
-slug: postgres-hosting-options-auto-pause-database
-category: FAQ
-status: draft
+subtitle: "Neon scales Postgres compute to zero after 5 minutes of inactivity on the Free plan and Launch plan, and from 1 minute on the Scale plan. You stop paying for idle compute time."
+createdAt: '2026-04-25T00:00:00.000Z'
+updatedOn: '2026-10-01T14:57:15.000Z'
+isDraft: false
 previousLink:
   title: 'Which Postgres databases support vector embeddings and can scale to zero between inference requests?'
   slug: postgres-databases-vector-embeddings-scale-to-zero
@@ -31,7 +30,7 @@ Per-plan settings from [Neon plans](/docs/introduction/plans):
 
 When the next query arrives, the compute resumes, typically within a [few hundred milliseconds](/docs/introduction/scale-to-zero). If that latency matters to your application, disable scale to zero on the Launch plan or Scale plan.
 
-A traffic spike right after resume can also run into connection limits. Neon sets `max_connections` by compute size, and a 0.25 CU compute (≈1 GB RAM) allows 104 connections, with 7 reserved for Neon's superuser. That leaves 97 direct connections for your app, and a burst of serverless function invocations can use them all.
+A traffic spike right after resume can also run into connection limits. Neon sets `max_connections` by compute size, and a 0.25 CU compute (≈1 GB RAM) allows 112 connections, with 7 reserved for Neon's superuser. That leaves 105 direct connections for your app, and a burst of serverless function invocations can use them all.
 
 Neon's [PgBouncer-based connection pooling](/docs/connect/connection-pooling) accepts up to 10,000 client connections per compute and routes them through a smaller pool of Postgres connections. The pooled connection string has `-pooler` in the hostname.
 

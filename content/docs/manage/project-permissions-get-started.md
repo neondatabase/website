@@ -1,7 +1,5 @@
 ---
 title: Get started with project permissions
-tag: new
-tagTheme: green
 subtitle: Scope each person and agent to the projects they need, in about five minutes
 summary: >-
   A worked example that takes a four-person team from everyone-sees-everything
@@ -10,6 +8,7 @@ summary: >-
   verify the result on the Project permissions page. Includes the same setup
   through the Neon API for orchestrators and agents.
 enableTableOfContents: true
+updatedOn: '2026-11-01T14:46:44.000Z'
 ---
 
 By default, everyone you invite to your Neon organization can reach every project in it. That's fine until it isn't: a contractor you brought in for one reporting project can open your production database, and an agent you gave a credential to can modify any project instead of the one you meant. Project permissions fix that, so a mistake or a leaked credential affects one project rather than everything you have.
@@ -94,7 +93,7 @@ In the Neon Console, open your organization's **People** page and select **Invit
 
 To change someone already in the organization, open the more options menu (⋮) next to their name and choose **Edit member**.
 
-Invited people get an email, and the organization appears in their organization switcher once they accept. For what each role allows, see [Organization roles](/docs/manage/user-permissions#organization-roles).
+Invited people get an email, and the organization appears in their [org switcher](/docs/manage/orgs-manage#switch-organizations) once they accept. For what each role allows, see [Organization roles](/docs/manage/user-permissions#organization-roles).
 
 ![Invite members dialog with a role dropdown for each invitee](/docs/manage/project-permissions-get-started/invite-members.png 'no-border')
 
@@ -134,7 +133,7 @@ For a definitive answer rather than a visual check, ask the API who can reach a 
 ```bash shouldWrap
 curl --request GET \
      --url 'https://console.neon.tech/api/v2/projects/$PROJECT_ID/members' \
-     --header 'authorization: Bearer $ORG_API_KEY' | jq '.project_members[] | {email, org_role, effective_project_permission, grant_source}'
+     --header "authorization: Bearer $ORG_API_KEY" | jq '.project_members[] | {email, org_role, effective_project_permission, grant_source}'
 ```
 
 Run it against `acme-production` and you should see Alex with `EDITOR` from `org_role_default`. Sam still appears in the list as an organization member, but with `effective_project_permission` of `null` and `grant_source` of `unassigned`, which is how the API reports someone who has no access to the project. `grant_source` tells you whether the access came from someone's organization role or an explicit grant.
@@ -172,7 +171,7 @@ Grant a member Editor on one project:
 ```bash shouldWrap
 curl --request PUT \
      --url 'https://console.neon.tech/api/v2/projects/$PROJECT_ID/members/$MEMBER_ID/role' \
-     --header 'authorization: Bearer $ORG_API_KEY' \
+     --header "authorization: Bearer $ORG_API_KEY" \
      --header 'content-type: application/json' \
      --data '{"role": "editor"}'
 ```

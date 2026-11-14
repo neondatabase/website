@@ -2,6 +2,7 @@
 import { notFound } from 'next/navigation';
 
 import Post from 'components/pages/doc/post';
+import JsonLd from 'components/shared/json-ld';
 import VERCEL_URL from 'constants/base';
 import { POSTGRESQL_DIR_PATH, isUnusedOrSharedContent } from 'constants/content';
 import { POSTGRESQL_BASE_PATH } from 'constants/docs';
@@ -47,6 +48,7 @@ export async function generateMetadata(props) {
     pathname: `/postgresql/${currentSlug}`,
     rssPathname: null,
     type: 'article',
+    modifiedTime: post?.data?.updatedOn ?? null,
   });
 }
 
@@ -75,18 +77,18 @@ const PostgresTutorial = async (props) => {
     '@context': 'https://schema.org',
     '@type': 'Article',
     headline: data.title,
+    url: `${VERCEL_URL}/postgresql/${currentSlug}`,
+    ...(data.updatedOn && { dateModified: data.updatedOn }),
     author: {
       '@type': 'Organization',
       name: 'Neon',
     },
+    publisher: { '@type': 'Organization', name: 'Neon' },
   };
 
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
+      <JsonLd data={jsonLd} />
       <Post
         content={content}
         data={data}

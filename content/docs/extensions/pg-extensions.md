@@ -10,7 +10,10 @@ summary: >-
 enableTableOfContents: true
 redirectFrom:
   - /docs/reference/pg-extensions
-updatedOn: '2026-09-30T14:42:50.221Z'
+  - /docs/extensions/pg_extensions
+  - /docs/extensions/overview
+  - /docs/postgresql/extensions
+updatedOn: '2026-11-04T20:10:08.844Z'
 ---
 
 Neon supports the Postgres extensions shown below. Extension versions may differ by Postgres version. A dash (`-`) indicates an extension is not yet supported for that version.
@@ -47,8 +50,8 @@ Neon supports the Postgres extensions shown below. Extension versions may differ
 | [ip4r](https://github.com/RhodiumToad/ip4r)                                                      |    2.4 |    2.4 |    2.4 |    2.4 |    2.4 |                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
 | [isn](https://www.postgresql.org/docs/16/isn.html)                                               |    1.2 |    1.2 |    1.2 |    1.2 |    1.3 |                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
 | [lakebase_text](/docs/extensions/lakebase-text)                                                  |      - |      - |  0.1.3 |  0.1.3 |  0.1.3 | See [Lakebase Search](/docs/ai/lakebase-search).                                                                                                                                                                                                                                                                                                                                                                                                              |
-| [lakebase_tokenizer](/docs/extensions/lakebase-tokenizer)                                        |      - |      - |  0.2.0 |  0.2.0 |  0.2.0 | See [Lakebase Search](/docs/ai/lakebase-search).                                                                                                                                                                                                                                                                                                                                                                                                              |
-| [lakebase_vector](/docs/extensions/lakebase-vector)                                              |      - |      - |  1.1.1 |  1.1.1 |  1.1.1 | See [Lakebase Search](/docs/ai/lakebase-search).                                                                                                                                                                                                                                                                                                                                                                                                              |
+| [lakebase_tokenizer](/docs/extensions/lakebase-tokenizer)                                        |      - |      - |  0.2.1 |  0.2.1 |  0.2.1 | See [Lakebase Search](/docs/ai/lakebase-search).                                                                                                                                                                                                                                                                                                                                                                                                              |
+| [lakebase_vector](/docs/extensions/lakebase-vector)                                              |      - |      - |  1.1.2 |  1.1.2 |  1.1.2 | See [Lakebase Search](/docs/ai/lakebase-search).                                                                                                                                                                                                                                                                                                                                                                                                              |
 | [lo](https://www.postgresql.org/docs/16/lo.html)                                                 |    1.1 |    1.1 |    1.1 |    1.1 |    1.2 |                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
 | [ltree](/docs/extensions/ltree)                                                                  |    1.2 |    1.2 |    1.2 |    1.3 |    1.3 |                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
 | [moddatetime (spi)](https://www.postgresql.org/docs/current/contrib-spi.html)                    |    1.0 |    1.0 |    1.0 |    1.0 |    1.0 |                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
@@ -79,10 +82,10 @@ Neon supports the Postgres extensions shown below. Extension versions may differ
 | [pgstattuple](/docs/extensions/pgstattuple)                                                      |    1.5 |    1.5 |    1.5 |    1.5 |    1.5 |                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
 | [pgtap](https://pgtap.org/documentation.html)                                                    |  1.3.3 |  1.3.3 |  1.3.3 |  1.3.3 |  1.3.3 |                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
 | [pgvector](/docs/extensions/pgvector)                                                            |  0.8.0 |  0.8.0 |  0.8.0 |  0.8.0 |  0.8.6 | Install with `CREATE EXTENSION vector;`                                                                                                                                                                                                                                                                                                                                                                                                                       |
-| [pg_search](/docs/extensions/pg_search)                                                          |      - |      - |      - |      - |      - | **Unavailable.** For full text search, see [Lakebase Search](/docs/ai/lakebase-search).                                                                                                                                                                                                                                                                                                                                                                       |
+| pg_search                                                                                        |      - |      - |      - |      - |      - | **Unavailable.** For full text search, see [Lakebase Search](/docs/ai/lakebase-search).                                                                                                                                                                                                                                                                                                                                                                       |
 | [pgx_ulid](https://github.com/pksunkara/pgx_ulid)                                                |  0.1.5 |  0.1.5 |  0.1.5 |  0.2.0 |  0.2.2 | Install with `CREATE EXTENSION ulid;` on Postgres 14, 15, 16. Install with `CREATE EXTENSION pgx_ulid;` on Postgres 17 and 18.                                                                                                                                                                                                                                                                                                                                |
-| [plcoffee](https://coffeescript.org/)                                                            | 3.1.10 | 3.1.10 | 3.1.10 |      - |      - | **Deprecated.** Ships with plv8. See [The plv8 extension](/docs/extensions/plv8).                                                                                                                                                                                                                                                                                                                              |
-| [plls](https://livescript.net/)                                                                  | 3.1.10 | 3.1.10 | 3.1.10 |      - |      - | **Deprecated.** Ships with plv8. See [The plv8 extension](/docs/extensions/plv8).                                                                                                                                                                                                                                                                                                                              |
+| [plcoffee](https://coffeescript.org/)                                                            | 3.1.10 | 3.1.10 | 3.1.10 |      - |      - | **Deprecated.** Ships with plv8. See [The plv8 extension](/docs/extensions/plv8).                                                                                                                                                                                                                                                                                                                                                                             |
+| [plls](https://livescript.net/)                                                                  | 3.1.10 | 3.1.10 | 3.1.10 |      - |      - | **Deprecated.** Ships with plv8. See [The plv8 extension](/docs/extensions/plv8).                                                                                                                                                                                                                                                                                                                                                                             |
 | [plpgsql](https://www.postgresql.org/docs/16/plpgsql.html)                                       |    1.0 |    1.0 |    1.0 |    1.0 |    1.0 | Pre-installed with Postgres.                                                                                                                                                                                                                                                                                                                                                                                                                                  |
 | [plpgsql_check](https://pgxn.org/dist/plpgsql_check/)                                            |  2.8.2 |  2.8.2 |  2.8.2 |  2.8.2 |  2.8.2 |                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
 | [plv8](/docs/extensions/plv8)                                                                    | 3.1.10 | 3.1.10 | 3.1.10 |  3.2.3 |      - | **Deprecated.** New installs are blocked for security reasons. See [The plv8 extension](/docs/extensions/plv8).                                                                                                                                                                                                                                                                                                                                               |
@@ -197,7 +200,7 @@ You can view **available** libraries by running [List preloaded libraries](/docs
 curl --request GET \
      --url https://console.neon.tech/api/v2/projects/your_project_id/available_preload_libraries \
      --header 'accept: application/json' \
-     --header 'authorization: Bearer $NEON_API_KEY'
+     --header "authorization: Bearer $NEON_API_KEY"
 ```
 
 The response body lists available libraries and whether the libraries are enabled by default. Response body attributes include:
@@ -260,7 +263,7 @@ For attribute definitions, find the [List preloaded libraries](/docs/reference/a
     },
     {
       "library_name": "pg_search",
-      "description": "Deprecated. Full text search using BM25. Not for new projects; see Neon pg_search extension docs.",
+      "description": "Unavailable. Full text search using BM25. Not for new projects; see Lakebase Search.",
       "is_default": false,
       "is_experimental": false,
       "version": "0.15.12"
@@ -271,6 +274,20 @@ For attribute definitions, find the [List preloaded libraries](/docs/reference/a
       "is_default": false,
       "is_experimental": false,
       "version": "2.5.1"
+    },
+    {
+      "library_name": "lakebase_vector",
+      "description": "High-performance vector index, fully compatible with pgvector.",
+      "is_default": true,
+      "is_experimental": false,
+      "version": "1.0.0-dev"
+    },
+    {
+      "library_name": "lakebase_text",
+      "description": "High-performance BM25 full-text search.",
+      "is_default": true,
+      "is_experimental": false,
+      "version": "0.1.0-dev"
     }
   ]
 }
@@ -291,7 +308,7 @@ You can enable available libraries using the `preloaded_libraries` object in a [
 curl --request PATCH \
     --url https://console.neon.tech/api/v2/projects/<your_project_id> \
     --header 'accept: application/json' \
-    --header 'authorization: Bearer $NEON_API_KEY' \
+    --header "authorization: Bearer $NEON_API_KEY" \
     --header 'content-type: application/json' \
     --data '
 {
@@ -299,7 +316,7 @@ curl --request PATCH \
     "settings": {
       "preload_libraries": {
         "enabled_libraries": [
-          "neon","pg_stat_statements","timescaledb","pg_cron","pg_partman_bgw"
+          "neon","pg_stat_statements","timescaledb","pg_cron","pg_partman_bgw","lakebase_vector","lakebase_text"
         ]
       }
     }
@@ -310,13 +327,14 @@ curl --request PATCH \
 
 When running a `Create project` or `Update project` API call to enable libraries:
 
-- Library names must be quoted, comma-separated, and specified in a single string.
+- Specify library names as an array of quoted strings.
 - Specify all libraries that should be enabled. If a library is not included in the API call, it will not be enabled.
-- The "use_defaults": true`option overrides the`"enabled_libraries"` option, enabling only default libraries
+- Setting `use_defaults` to `true` overrides `enabled_libraries` and enables only the default libraries.
+- Include `lakebase_vector` and `lakebase_text` if you use [Lakebase Search](/docs/ai/lakebase-search). They're enabled by default, but a custom list replaces the defaults, so leaving them out disables them. Queries that use their indexes then fail with an error like `lakebase_vector must be loaded via shared_preload_libraries`.
 - The `neon` and `pg_stat_statements` libraries will remain enabled whether you include them in your API call or not; they're used by a Neon system-managed database.
 - If you do not use one of the libraries enabled by default, you can exclude it from your API call.
 - The `pgrag` libraries (`"rag_bge_small_en_v15,rag_jina_reranker_v1_tiny_en"`) are **deprecated**; leave them out of your API call. For search and RAG, see [Lakebase Search](/docs/ai/lakebase-search).
-- The `pg_search` library is **deprecated**; do not add it for new projects. Existing projects that still preload it should plan migration; see [The pg_search extension](/docs/extensions/pg_search).
+- The `pg_search` library is **unavailable**. Do not add it. For BM25 full-text search, see [Lakebase Search](/docs/ai/lakebase-search).
 - The **`plv8`** extension and its companion **`plcoffee`** and **`plls`** extensions are **deprecated**; **`CREATE EXTENSION`** is rejected for each. See [The plv8 extension](/docs/extensions/plv8).
 
 ## Extension notes

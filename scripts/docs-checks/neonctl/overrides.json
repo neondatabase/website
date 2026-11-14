@@ -32,47 +32,6 @@
         }
       }
     },
-    "realtime": {
-      "commands": {
-        "subscribe": {
-          "_comment": "The static parser finds the subcommand in realtime.ts but cannot follow its imported builder into subscribe.ts. These builder-defined values are verified against subscribe.ts at neon 8.4.4.",
-          "positionals": [
-            {
-              "name": "query",
-              "required": true,
-              "describe": "SELECT query to subscribe to",
-              "type": "string"
-            }
-          ],
-          "options": {
-            "branch": {
-              "type": "string",
-              "describe": "Branch ID or name"
-            },
-            "changes": {
-              "type": "boolean",
-              "describe": "Show raw rows and changes events",
-              "default": false
-            },
-            "project-id": {
-              "type": "string",
-              "describe": "Project ID"
-            }
-          },
-          "usage": "$0 realtime subscribe \"<query>\" [options]",
-          "examples": [
-            {
-              "command": "$0 realtime subscribe \"SELECT * FROM items\"",
-              "description": "Print the initial result followed by a readable transaction log"
-            },
-            {
-              "command": "$0 realtime subscribe --changes \"SELECT * FROM items\"",
-              "description": "Print raw rows and changes events"
-            }
-          ]
-        }
-      }
-    },
     "env": {
       "commands": {
         "pull": {
@@ -169,38 +128,6 @@
           "options": {
             "hipaa": {
               "describe": "Enable HIPAA compliance for the project."
-            }
-          }
-        }
-      }
-    },
-    "neon-auth": {
-      "commands": {
-        "oauth-provider": {
-          "commands": {
-            "add": {
-              "options": {
-                "provider-id": {
-                  "describe": "OAuth provider ID. Supported values: google, github, vercel",
-                  "choices": ["google", "github", "vercel"]
-                }
-              }
-            },
-            "update": {
-              "options": {
-                "provider-id": {
-                  "describe": "OAuth provider ID. Supported values: google, github, vercel",
-                  "choices": ["google", "github", "vercel"]
-                }
-              }
-            },
-            "delete": {
-              "options": {
-                "provider-id": {
-                  "describe": "OAuth provider ID. Supported values: google, github, vercel",
-                  "choices": ["google", "github", "vercel"]
-                }
-              }
             }
           }
         }

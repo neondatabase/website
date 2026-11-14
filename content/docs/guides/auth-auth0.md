@@ -9,7 +9,8 @@ summary: >-
   IDs. Choose this guide when you need social login, multi-factor
   authentication, or Auth0-managed users in a Lakebase database. The tutorial
   covers Auth0 application configuration, callback URLs, session handling with
-  UserProvider, and Next.js server actions for inserting and deleting user data.
+  the Auth0 client and Next.js proxy, and Next.js server actions for inserting
+  and deleting user data.
 enableTableOfContents: true
 updatedOn: '2026-09-16T19:45:35.340Z'
 ---
@@ -61,19 +62,7 @@ Also, add a `.env.local` file to the root of your project, which we'll use to st
 touch .env.local
 ```
 
-<Admonition type="note">
-At the time of this post, the `@auth0/nextjs-auth0` package caused import errors related to one of its dependencies (`oauth4webapi`). To stop Next.js from raising the error, add the following to your `nextjs.config.mjs` file:
-
-```js
-/** @type {import('next').NextConfig} */
-const nextConfig = {
-  experimental: { esmExternals: 'loose' },
-};
-
-export default nextConfig;
-```
-
-</Admonition>
+This guide uses version 4 of `@auth0/nextjs-auth0` and Next.js 16.
 
 Now, we can start building the application.
 
@@ -111,7 +100,7 @@ DATABASE_URL=NEON_DB_CONNECTION_STRING
 ### Configure Auth0 application settings
 
 1. In the `Settings` tab of your Auth0 application, scroll down to the `Application URIs` section.
-2. Set the `Allowed Callback URLs` to `http://localhost:3000/api/auth/callback` for local development.
+2. Set the `Allowed Callback URLs` to `http://localhost:3000/auth/callback` for local development.
 3. Set the `Allowed Logout URLs` to `http://localhost:3000`.
 4. Click `Save Changes` at the bottom of the page.
 
@@ -122,14 +111,14 @@ From the `Settings` tab of your Auth0 application, copy the `Domain` and `Client
 ```bash
 # .env.local
 
-AUTH0_SECRET='random-32-byte-value'
-AUTH0_BASE_URL='http://localhost:3000'
-AUTH0_ISSUER_BASE_URL='https://YOUR_AUTH0_DOMAIN'
+AUTH0_DOMAIN='YOUR_AUTH0_DOMAIN'
 AUTH0_CLIENT_ID='YOUR_AUTH0_CLIENT_ID'
 AUTH0_CLIENT_SECRET='YOUR_AUTH0_CLIENT_SECRET'
+AUTH0_SECRET='random-32-byte-value'
+APP_BASE_URL='http://localhost:3000'
 ```
 
-Replace `YOUR_AUTH0_DOMAIN`, `YOUR_AUTH0_CLIENT_ID` and `YOUR_AUTH0_CLIENT_SECRET` with the actual values from your Auth0 application settings.
+Replace `YOUR_AUTH0_DOMAIN`, `YOUR_AUTH0_CLIENT_ID` and `YOUR_AUTH0_CLIENT_SECRET` with the actual values from your Auth0 application settings. Set `AUTH0_DOMAIN` to the domain only, without `https://` (for example, `dev-abc123.us.auth0.com`).
 
 Run the following command in your terminal to generate a random 32-byte value for the `AUTH0_SECRET` variable:
 
@@ -222,30 +211,51 @@ The `user_messages` table will now be visible in the console.
 
 ### Configure Auth0 authentication
 
-We create a `dynamic route` to handle the Auth0 authentication flow. Create a new file `app/api/auth/[auth0]/route.ts` with the following content:
+First, create an Auth0 client that the rest of the application uses to read sessions. Add the file `lib/auth0.ts` at the project root:
 
 ```typescript
-/// app/api/auth/[auth0]/route.ts
+/// lib/auth0.ts
 
-import { handleAuth, handleLogin } from '@auth0/nextjs-auth0';
+import { Auth0Client } from '@auth0/nextjs-auth0/server';
 
-export default handleAuth({
-  login: handleLogin(),
-});
+export const auth0 = new Auth0Client();
 ```
 
-This sets up the necessary Auth0 authentication routes for the application at the `/api/auth/auth0/*` endpoints - `login`, `logout`, `callback` (to redirect to after a successful login), and `me` (to fetch the user profile).
+The client reads its configuration from the `AUTH0_*` and `APP_BASE_URL` environment variables you set earlier.
 
-Next, we will wrap the application with the `UserProvider` component from `@auth0/nextjs-auth0`, so all pages have access to the current user context. Replace the contents of the `app/layout.tsx` file with the following:
+Next, add a `proxy.ts` file at the project root. The Auth0 SDK uses it to mount the authentication routes at `/auth/login`, `/auth/logout`, `/auth/callback`, and `/auth/profile`, and to keep sessions up to date:
+
+```typescript
+/// proxy.ts
+
+import type { NextRequest } from 'next/server';
+import { auth0 } from './lib/auth0';
+
+export async function proxy(request: NextRequest) {
+  return await auth0.middleware(request);
+}
+
+export const config = {
+  matcher: ['/((?!_next/static|_next/image|favicon.ico|sitemap.xml|robots.txt).*)'],
+};
+```
+
+<Admonition type="note">
+Next.js 16 renamed `middleware.ts` to `proxy.ts`. On Next.js 15 or earlier, name the file `middleware.ts` and export the function as `middleware` instead of `proxy`.
+</Admonition>
+
+You don't need a route file for the authentication endpoints. The proxy handles them.
+
+Now, show the logged-in user's name and a logout link on every page. Replace the contents of the `app/layout.tsx` file with the following:
 
 ```tsx
 /// app/layout.tsx
 
 import type { Metadata } from 'next';
+import { Suspense } from 'react';
 import { Inter } from 'next/font/google';
 import './globals.css';
-import { getSession } from '@auth0/nextjs-auth0';
-import { UserProvider } from '@auth0/nextjs-auth0/client';
+import { auth0 } from '@/lib/auth0';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -255,7 +265,7 @@ export const metadata: Metadata = {
 };
 
 async function UserInfoBar() {
-  const session = await getSession();
+  const session = await auth0.getSession();
   if (!session) {
     return null;
   }
@@ -265,7 +275,7 @@ async function UserInfoBar() {
     <div className="bg-gray-100 px-4 py-2">
       <span className="text-gray-800">
         Welcome, {user.name}!{' '}
-        <a href="/api/auth/logout" className="text-blue-600 hover:underline">
+        <a href="/auth/logout" className="text-blue-600 hover:underline">
           Logout
         </a>
       </span>
@@ -279,17 +289,19 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <UserProvider>
-      <html lang="en">
-        <body className={inter.className}>
+    <html lang="en">
+      <body className={inter.className}>
+        <Suspense fallback={null}>
           <UserInfoBar />
           {children}
-        </body>
-      </html>
-    </UserProvider>
+        </Suspense>
+      </body>
+    </html>
   );
 }
 ```
+
+New Next.js 16 projects enable `cacheComponents`, which requires anything that reads request data, such as the session cookie, to render inside `<Suspense>`. Without it, `npm run build` fails with a prerendering error.
 
 ### Add interactivity to the application
 
@@ -302,14 +314,14 @@ Create a new file at `app/actions.ts` with the following content:
 
 'use server';
 
-import { getSession } from '@auth0/nextjs-auth0/edge';
+import { auth0 } from '@/lib/auth0';
 import { UserMessages } from './db/schema';
 import { db } from './db';
 import { redirect } from 'next/navigation';
 import { eq } from 'drizzle-orm';
 
 export async function createUserMessage(formData: FormData) {
-  const session = await getSession();
+  const session = await auth0.getSession();
   if (!session) throw new Error('User not authenticated');
 
   const message = formData.get('message') as string;
@@ -323,7 +335,7 @@ export async function createUserMessage(formData: FormData) {
 }
 
 export async function deleteUserMessage() {
-  const session = await getSession();
+  const session = await auth0.getSession();
   if (!session) throw new Error('User not authenticated');
 
   await db.delete(UserMessages).where(eq(UserMessages.user_id, session.user.sub));
@@ -340,10 +352,10 @@ Next, we implement a minimal UI to interact with these functions. Replace the co
 
 import { createUserMessage, deleteUserMessage } from './actions';
 import { db } from './db';
-import { getSession } from '@auth0/nextjs-auth0/edge';
+import { auth0 } from '@/lib/auth0';
 
 async function getUserMessage() {
-  const session = await getSession();
+  const session = await auth0.getSession();
   if (!session) return null;
 
   return db.query.UserMessages.findFirst({
@@ -355,7 +367,7 @@ function LoginBox() {
   return (
     <main className="flex min-h-screen flex-col items-center justify-center p-24">
       <a
-        href="/api/auth/login"
+        href="/auth/login"
         className="text-gray-800 rounded-md bg-[#00E699] px-3.5 py-2.5 text-sm font-semibold shadow-sm hover:bg-[#00e5BF] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#00E699]"
       >
         Log in
@@ -365,7 +377,7 @@ function LoginBox() {
 }
 
 export default async function Home() {
-  const session = await getSession();
+  const session = await auth0.getSession();
   const existingMessage = await getUserMessage();
 
   if (!session) {
@@ -418,7 +430,7 @@ export default async function Home() {
 
 This implements a form with a single text field that lets the user input a quote, and submit it, whereby it gets stored in the database, associated with their `Auth0` user ID. If a quote is already stored, it displays the quote and provides a button to delete it.
 
-The `getSession` function from `@auth0/nextjs-auth0/edge` provides the current user's session information, which we use to interact with the database on their behalf. If the user is not authenticated, the page displays a login button instead.
+The `auth0.getSession()` method provides the current user's session information, which we use to interact with the database on their behalf. If the user is not authenticated, the page displays a login button instead.
 
 ## Running the application
 
@@ -436,7 +448,7 @@ Once authenticated, you'll be able to visit the home page, add a quote, and see 
 
 In this guide, we walked through setting up a simple Next.js application with user authentication using Auth0 and a Lakebase Postgres database. We defined a database schema using Drizzle ORM, generated migrations, and interacted with the database to store and retrieve user data.
 
-Next, we can add more routes and features to the application. The `UserProvider` component from `@auth0/nextjs-auth0` provides the user context to each page, allowing you to conditionally render content based on the user's authentication state.
+Next, you can add more routes and features to the application. Call `auth0.getSession()` in any server component, server action, or route handler to check whether the user is logged in and render content conditionally.
 
 To view and manage the users who authenticated with your application, you can navigate to the [Auth0 Dashboard](https://manage.auth0.com/) and click on **User Management > Users** in the sidebar. Here, you can see the list of users who have logged in and perform any necessary actions for those users.
 

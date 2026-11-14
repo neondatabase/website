@@ -9,7 +9,11 @@ summary: >-
 enableTableOfContents: true
 redirectFrom:
   - /docs/postgresql/postgres-version-policy
-updatedOn: '2026-10-09T10:14:56.146Z'
+  - /docs/introduction/postgres-versions
+  - /docs/postgresql/postgres-version
+  - /docs/postgres/postgres-versions
+  - /docs/postgres/postgres-version-policy
+updatedOn: '2026-11-13T02:34:39.065Z'
 ---
 
 This topic outlines [PostgreSQL version support on Neon](#postgresql-version-support-on-neon).
@@ -55,7 +59,7 @@ The first number is the major version. The second is the minor version, which Ne
 
 Your Postgres major version is also displayed in the **Postgres** panel on your project's **Overview** page. With the [Neon CLI](/docs/cli) installed and authenticated, `neon projects get <project_id> --output json` returns the same value in its `pg_version` field.
 
-### Minor releases
+### Minor releases (#minor-releases-2)
 
 In Neon, an instance of Postgres runs on each compute in your Neon project. When the PostgreSQL Global Development Group releases a new minor version, Neon automatically updates your computes to the new minor version. Typically, no user action is required for minor version updates. While we aim to make the new minor version available at the same time as the official PostgreSQL release, these updates may occur a few days later than the official release date.
 
@@ -71,6 +75,7 @@ The table below shows when recent Postgres releases became available on Neon. Ea
 
 | Postgres release date | Versions in the release                                                                                                                                                                                                                                                                   | First available on Neon | Time to availability |
 | --------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------- | -------------------- |
+| 2026-11-12            | [18.7](https://www.postgresql.org/docs/release/18.7/), [17.12](https://www.postgresql.org/docs/release/17.12/), [16.16](https://www.postgresql.org/docs/release/16.16/), [15.20](https://www.postgresql.org/docs/release/15.20/), [14.25](https://www.postgresql.org/docs/release/14.25/) | 2026-11-12              | Under 30 minutes     |
 | 2026-08-13            | [18.6](https://www.postgresql.org/docs/release/18.6/), [17.11](https://www.postgresql.org/docs/release/17.11/), [16.15](https://www.postgresql.org/docs/release/16.15/), [15.19](https://www.postgresql.org/docs/release/15.19/), [14.24](https://www.postgresql.org/docs/release/14.24/) | 2026-08-18              | 5 days               |
 | 2026-05-14            | [18.4](https://www.postgresql.org/docs/release/18.4/), [17.10](https://www.postgresql.org/docs/release/17.10/), [16.14](https://www.postgresql.org/docs/release/16.14/), [15.18](https://www.postgresql.org/docs/release/15.18/), [14.23](https://www.postgresql.org/docs/release/14.23/) | 2026-05-19              | 5 days               |
 | 2026-02-12            | [18.2](https://www.postgresql.org/docs/release/18.2/), [17.8](https://www.postgresql.org/docs/release/17.8/), [16.12](https://www.postgresql.org/docs/release/16.12/), [15.16](https://www.postgresql.org/docs/release/15.16/), [14.21](https://www.postgresql.org/docs/release/14.21/)   | 2026-02-13              | 1 day                |
@@ -78,7 +83,7 @@ The table below shows when recent Postgres releases became available on Neon. Ea
 
 The **First available on Neon** date marks when a release first became available to run, not the point at which every compute is running it; each compute picks it up on the next restart, as described above.
 
-As of August 2026, Neon runs the latest community minor release for every supported major version: 18.6, 17.11, 16.15, 15.19, and 14.24. For the current version list, see [Compatibility](/docs/reference/compatibility).
+As of November 2026, Neon runs the latest community minor release for every supported major version: 18.7, 17.12, 16.16, 15.20, and 14.25. For the current version list, see [Compatibility](/docs/reference/compatibility).
 
 #### Manual actions after minor release upgrades
 

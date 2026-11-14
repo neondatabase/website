@@ -3,6 +3,12 @@ title: 'Postgres for SaaS'
 subtitle: Build and scale your SaaS faster thanks to autoscaling, database branching, and the serverless operating model.
 summary: Covers the setup of Postgres on Neon for SaaS applications, highlighting features like database branching for testing, autoscaling for resource management, and a serverless model to simplify operations.
 enableTableOfContents: true
+seo:
+  title: 'Postgres for SaaS: Autoscaling, Branching, and Database per Tenant | Neon'
+  description: >-
+    Run your SaaS on Neon's serverless Postgres: autoscaling for uneven load, a
+    branch per pull request for testing, database-per-tenant isolation, and a
+    99.95% SLA, with usage-based pricing and no monthly minimum.
 updatedOn: '2024-08-23T09:00:00.000Z'
 image: '/images/social-previews/use-cases/postgres-for-saas.jpg'
 ---
@@ -41,7 +47,7 @@ author={{
 
 ---
 
-### Database branching
+### Database branching (#database-branching-feature)
 
 A branch in Neon is a copy-on-write clone of your database. Branches include both schema and data. Teams use them to create ephemeral environments for development, testing, and preview environments.
 
@@ -68,7 +74,7 @@ Ephemeral Environments for Dev/Test
 
 ---
 
-### Autoscaling
+### Autoscaling (#autoscaling-feature)
 
 Neon dynamically adjusts the amount of resources allocated to your database in response to the current load, eliminating the need for manual intervention.
 
@@ -85,7 +91,7 @@ Performance for high connections
 
 ---
 
-### Serverless
+### Serverless (#serverless-feature)
 
 Neon abstracts away the concept of servers so that you can focus on building your SaaS, not managing your database.
 
@@ -159,7 +165,7 @@ Private Link, IP Allow
 
 <DefinitionList bulletType="check">
 Usage-based pricing
-: Start for free, then pay only for what you use. Paid plans start at $5/month minimum. [Review our pricing plans](/pricing).
+: Start for free, then pay only for what you use. Paid plans are usage-based with no monthly minimum. [Review our pricing plans](/pricing).
 
 </DefinitionList>
 

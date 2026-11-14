@@ -6,7 +6,7 @@ This is a reference for the `useUser` hook in the {sdkName} SDK.
 
 This standalone React hook is an alias for `useStackApp().useUser()`. It only exists for convenience; it does not have any additional functionality.
 
-For more information, see the [documentation for `stackClientApp.useUser()`](/docs/neon-auth/sdk/nextjs/objects/stack-app#stackclientappuseuseroptions).
+For more information, see `stackClientApp.useUser()`.
 
 Returns the current user object, or `null` if not signed in.
 

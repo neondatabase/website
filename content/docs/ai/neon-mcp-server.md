@@ -8,7 +8,7 @@ summary: >-
 enableTableOfContents: true
 redirectFrom:
   - /docs/ai/mcp
-updatedOn: '2026-10-15T20:24:27.880Z'
+updatedOn: '2026-11-06T11:14:41.532Z'
 ---
 
 The Neon MCP Server implements the Model Context Protocol (MCP), letting AI assistants interact with your Neon projects on your behalf. Your AI agent can interact with Neon via MCP tools or by running [Neon CLI](/docs/cli) commands directly.
@@ -19,25 +19,13 @@ The Neon MCP Server grants broad database management capabilities. **Always revi
 
 ## Quick setup
 
-Install the Neon MCP server into your coding agents with [`neon mcp`](/docs/cli/mcp):
+To set up the Neon MCP Server in your agent, follow [Set up your AI agent](/docs/ai/agent-setup). For most coding agents, the Neon plugin installs the MCP Server together with Neon's agent skills. To install only the MCP Server, run [`neon mcp`](/docs/cli/mcp):
 
 ```bash
 npx neon@latest mcp
 ```
 
-It prompts for where to write the config, which agents to install into, and how to authenticate, then writes it for you.
-
-For agents that support plugins (such as Cursor, Claude Code, and Codex), [`neon plugins`](/docs/cli/plugins) installs the Neon plugin, which bundles the MCP server and agent skills:
-
-```bash
-npx neon@latest plugins
-```
-
-To set up the MCP server together with agent skills and a linked Neon project, run [`neon init`](/docs/cli/init) in a terminal:
-
-```bash
-npx neon@latest init
-```
+It prompts for where to write the config, which agents to install into, and how to authenticate, then writes it for you. For CI or headless agents, run `neon mcp -y --agent <agent> --api-key <key>`. The CLI signs in with that key and mints a new one for the MCP Server. Or use the API key option in the [config generator](#config-generator).
 
 ## Config generator
 
@@ -45,16 +33,44 @@ Use the generator to build an MCP config for your editor and auth method, includ
 
 <McpSetupConfigurator />
 
+If you'd rather write the config by hand, most clients accept this format. With OAuth, your client opens a browser to authorize on first use:
+
+<CodeTabs labels={["OAuth", "API key"]}>
+
+```json
+{
+  "mcpServers": {
+    "Neon": {
+      "type": "http",
+      "url": "https://mcp.neon.tech/mcp"
+    }
+  }
+}
+```
+
+```json
+{
+  "mcpServers": {
+    "Neon": {
+      "type": "http",
+      "url": "https://mcp.neon.tech/mcp",
+      "headers": {
+        "Authorization": "Bearer <NEON_API_KEY>"
+      }
+    }
+  }
+}
+```
+
+</CodeTabs>
+
+Add [access control](#access-control) parameters to the `url` as needed.
+
 ## Claude connector
 
-The Neon MCP server is an official Claude connector, so you don't need a custom connector URL. To add it in [Claude.ai](https://claude.ai) or Claude Desktop:
+The Neon MCP Server is an official Claude connector for Claude.ai and Claude Desktop. See [Set up Neon in Claude.ai and Claude Desktop](/docs/ai/agent-setup/claude-ai).
 
-1. Open **Settings** from the profile menu in the top-right of the console.
-2. Select **Connectors** (sometimes shown under **Customize > Connectors**).
-3. Click **Browse connectors** (top-right of that page), find **Neon**, and add it.
-4. Authorize access to your Neon account.
-
-For other clients, use Quick setup or the config generator above.
+This page covers the hosted Neon MCP Server, which manages your Neon resources. To give your own application an MCP server that customers connect to, see [Build an MCP server with Managed Better Auth](/docs/compute/functions/mcp-server).
 
 ## Access control
 
@@ -68,7 +84,7 @@ Append `?readonly=true` to restrict the server to read operations:
 https://mcp.neon.tech/mcp?readonly=true
 ```
 
-`SELECT` queries and schema inspection remain available. Write operations (creating branches, running migrations, modifying auth config) are disabled. `run_sql_transaction` isn't available in read-only mode; use `run_sql` for read queries.
+`SELECT` queries and schema inspection remain available. Write operations (creating branches, running migrations, modifying auth config) are disabled. `run_sql_transaction` and `get_connection_string` aren't available in read-only mode; use `run_sql` for read queries.
 
 With OAuth, you can also choose read-only scope during the authorization flow instead of using the URL parameter.
 
@@ -80,7 +96,7 @@ Scope all operations to a single project:
 https://mcp.neon.tech/mcp?projectId=<your-project-id>
 ```
 
-Cross-project search and navigation are disabled in this mode.
+Cross-project search and navigation are disabled in this mode, and project management tools such as `list_projects` and `create_project` are hidden.
 
 ### Category filtering
 
@@ -95,6 +111,10 @@ See [Available tools](#available-tools) for the full category list. To verify wh
 ```bash
 curl "https://mcp.neon.tech/api/list-tools?readonly=true&category=querying"
 ```
+
+### SQL results
+
+`run_sql` and `run_sql_transaction` return up to 100 rows per statement by default. When a result is cut off, the response says how many rows the query returned in total. Set `max_rows` (up to 10,000) to see more. When a query fails, the error includes the Postgres SQLSTATE code, position, detail, and hint, so the assistant can fix the query and try again.
 
 ### Postgres role
 
@@ -111,7 +131,7 @@ CREATE ROLE app_reader LOGIN PASSWORD '<password>';
 GRANT SELECT ON public.orders TO app_reader;
 ```
 
-Create the role with SQL, as shown above. Roles created in the Neon Console, CLI, or API are members of [`neon_superuser`](/docs/manage/roles#the-neonsuperuser-role), which can read all data, so pinning one of those roles doesn't limit what the agent can read. See [Manage database access](/docs/manage/database-access) for least-privilege role examples.
+Create the role with SQL, as shown above, or create a read-only or read-write role with [`neon roles create --access`](/docs/cli/roles#create). Roles created in the Neon Console or API, and roles created with the CLI or MCP Server without an access level, are members of [`neon_superuser`](/docs/manage/roles#the-neonsuperuser-role), which can read all data, so pinning one of those roles doesn't limit what the agent can read. See [Manage database access](/docs/manage/database-access) for least-privilege role examples.
 
 - `role_name` arguments that name a different role are rejected, and a role that cannot log in fails the call without falling back to the owner.
 - `get_connection_string` is not available on a pinned connection.
@@ -127,6 +147,17 @@ We recommend MCP for **development and testing only**, not production environmen
 - Avoid exposing production or PII data; use anonymized data only
 - Always review and authorize LLM-requested actions before execution
 - Restrict MCP access to trusted users and regularly audit access
+
+To limit what an agent can do, combine [read-only mode](#read-only-mode), a [Postgres role](#postgres-role) with limited grants, and [category filtering](#category-filtering).
+
+### Check the authorization page
+
+When you connect with OAuth, the authorization page shows where the sign-in returns before you click **Approve**, for example "Returns to claude.ai". Approve only when that matches the client you're connecting:
+
+- **Returns to an app on this computer:** The sign-in returns to a `localhost` or `127.0.0.1` address. Continue only if you started the sign-in from an app on your computer.
+- **App identity published at a host:** Clients such as Claude, ChatGPT, Codex, VS Code, Zed, GitHub Copilot CLI, and Antigravity identify themselves with a [Client ID Metadata Document](https://modelcontextprotocol.io/specification/2026-07-28/basic/authorization/client-registration), an `https` URL that describes the client. The page names the host that published that document, such as `claude.ai`. This confirms who controls the client ID, not which app is behind it.
+
+Clients that don't support metadata documents register through dynamic client registration and don't show an app identity line. Select **App details** to see the client's website and every registered redirect URI.
 
 ### Allowlist IP addresses
 
@@ -145,9 +176,7 @@ Pick a check with the `check` parameter (for example `table-sizes` or `unused-in
 
 <MCPTools />
 
-## Troubleshooting
-
-For per-client setup instructions, see [Connect MCP clients](/docs/ai/connect-mcp-clients-to-neon).
+## Legacy transports
 
 ### Deprecated local stdio (#deprecated-stdio)
 
@@ -193,13 +222,52 @@ If your client only supports local stdio servers, put one of these in the client
 
 </Admonition>
 
-### Deprecated HTTP+SSE transport (#retired-sse)
+### Retired HTTP+SSE transport (#retired-sse)
 
 <Admonition type="important">
-The hosted Neon MCP Server uses Streamable HTTP at `https://mcp.neon.tech/mcp`. The older HTTP+SSE endpoint (`https://mcp.neon.tech/sse`) is deprecated and will stop working on or after October 1, 2026. When it is retired it returns `410 Gone`. SSE is not supported with API key authentication.
+The hosted Neon MCP Server uses Streamable HTTP at `https://mcp.neon.tech/mcp`. The older HTTP+SSE endpoints (`https://mcp.neon.tech/sse` and `/message`) are retired and return `410 Gone`.
 
-If your client still points at `/sse`, change the URL to `https://mcp.neon.tech/mcp`.
+If your client still points at `/sse`, change the URL to `https://mcp.neon.tech/mcp`. If your client only supports local stdio servers, bridge to Streamable HTTP with [`mcp-remote`](https://www.npmjs.com/package/mcp-remote):
+
+```json
+{
+  "mcpServers": {
+    "Neon": {
+      "command": "npx",
+      "args": ["-y", "mcp-remote@latest", "https://mcp.neon.tech/mcp"]
+    }
+  }
+}
+```
+
 </Admonition>
+
+## Troubleshooting
+
+### Client still points at the SSE endpoint
+
+The HTTP+SSE endpoints (`https://mcp.neon.tech/sse` and `/message`) are retired and return `410 Gone`. Point your client at `https://mcp.neon.tech/mcp` instead. See [Retired HTTP+SSE transport](#retired-sse).
+
+### Client doesn't support remote servers
+
+If your client only supports local (stdio) servers, bridge to the hosted server with `mcp-remote`. See [Deprecated local stdio](#deprecated-stdio).
+
+### OAuth error: invalid redirect uri
+
+When you use OAuth with the hosted server, you might see this error:
+
+```json
+{"code":"invalid_request","error":"invalid redirect uri"}
+```
+
+This typically means the cached OAuth credentials are stale. To fix it:
+
+1. Remove the MCP authentication cache directory:
+   ```bash
+   rm -rf ~/.mcp-auth
+   ```
+2. Restart your MCP client.
+3. Sign in again when the OAuth flow starts.
 
 ## Resources
 
@@ -207,5 +275,8 @@ If your client still points at `/sse`, change the URL to `https://mcp.neon.tech/
 - [Neon API Reference](/docs/reference/api)
 - [Neon API Keys](/docs/manage/api-keys#creating-api-keys)
 - [Neon MCP server GitHub](https://github.com/neondatabase/mcp-server-neon)
+- [Get started with Claude Code and Neon MCP Server](/guides/claude-code-mcp-neon)
+- [Get started with Cursor and the Neon MCP Server](/guides/cursor-mcp-neon)
+- [Get started with Claude Desktop and Neon MCP Server](/guides/neon-mcp-server)
 
 <NeedHelp/>

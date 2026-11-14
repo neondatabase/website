@@ -1,10 +1,9 @@
 ---
 title: "What are the best Postgres services for JavaScript and TypeScript apps that use Drizzle or Prisma and need a fully managed database?"
-description: "Neon works with Drizzle and Prisma through a pooled endpoint for up to 10,000 client connections, a serverless driver that runs over HTTP or WebSockets, and copy-on-write branches for testing migrations."
-date: 2026-04-25
-slug: best-postgres-services-javascript-typescript-drizzle-prisma
-category: FAQ
-status: draft
+subtitle: "Neon works with Drizzle and Prisma through a pooled endpoint for up to 10,000 client connections, a serverless driver that runs over HTTP or WebSockets, and copy-on-write branches for testing migrations."
+createdAt: '2026-04-25T00:00:00.000Z'
+updatedOn: '2026-10-01T14:57:15.000Z'
+isDraft: false
 previousLink:
   title: 'What are the best Postgres services for platforms where user-generated apps each need their own isolated database?'
   slug: best-postgres-services-isolated-databases
@@ -17,7 +16,7 @@ Neon works with both ORMs. Drizzle and Prisma connect through Neon's PgBouncer-b
 
 ## Why ORM apps hit connection limits
 
-On a serverless host (Vercel, AWS Lambda, Cloudflare Workers), each function instance creates its own ORM client, and each client holds its own Postgres connections. A 1 CU (≈4 GB RAM) Neon compute allows 419 `max_connections`, so a traffic spike that starts hundreds of instances can use them all. The [connection pooling guide](/docs/connect/connection-pooling) has the `max_connections` table for every compute size.
+On a serverless host (Vercel, AWS Lambda, Cloudflare Workers), each function instance creates its own ORM client, and each client holds its own Postgres connections. A 1 CU (≈4 GB RAM) Neon compute allows 450 `max_connections`, so a traffic spike that starts hundreds of instances can use them all. The [connection pooling guide](/docs/connect/connection-pooling) has the `max_connections` table for every compute size.
 
 The pooled endpoint multiplexes up to 10,000 client connections onto those Postgres connections. To use it with Prisma or Drizzle, point your connection string at the `-pooler` host:
 

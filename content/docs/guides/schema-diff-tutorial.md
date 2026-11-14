@@ -27,7 +27,7 @@ To complete this tutorial, you'll need:
 
 <Steps>
 
-## Create the Initial Schema
+## Create the initial schema
 
 First, create a new database called `people` on the `production` branch and add some sample data to it.
 
@@ -64,10 +64,10 @@ First, create a new database called `people` on the `production` branch and add 
    ```
 
    <Admonition type="note">
-   If you have multiple projects, include `--project-id`. Or set the project context so you don't have to specify project id in every command. Example:
+   If you have multiple projects, include `--project-id`. Or link the directory to your project so you don't have to specify the project ID in every command. Example:
 
    ```bash
-   neon set-context --project-id empty-glade-66712572
+   neon link --project-id empty-glade-66712572
    ```
 
    You can find your project ID on the **Settings** page in the Neon Console.
@@ -106,12 +106,12 @@ First, create a new database called `people` on the `production` branch and add 
    curl --request POST \
    --url https://console.neon.tech/api/v2/projects/royal-band-06902338/branches/br-bitter-bird-a56n6lh4/databases \
    --header 'accept: application/json' \
-   --header 'authorization: Bearer $NEON_API_KEY' \
+   --header "authorization: Bearer $NEON_API_KEY" \
    --header 'content-type: application/json' \
    --data '{
       "database": {
          "name": "people",
-         "owner_name": "alex"
+         "owner_name": "neondb_owner"
       }
    }'
    ```
@@ -120,23 +120,23 @@ First, create a new database called `people` on the `production` branch and add 
 
    ```bash
    curl --request GET \
-     --url 'https://console.neon.tech/api/v2/projects/royal-band-06902338/connection_uri?branch_id=br-bitter-bird-a56n6lh4&database_name=people&role_name=alex' \
+     --url 'https://console.neon.tech/api/v2/projects/royal-band-06902338/connection_uri?branch_id=br-bitter-bird-a56n6lh4&database_name=people&role_name=neondb_owner' \
      --header 'accept: application/json' \
-     --header 'authorization: Bearer $NEON_API_KEY'
+     --header "authorization: Bearer $NEON_API_KEY"
    ```
 
    The API call will return an connection string similar to this one:
 
    ```json
    {
-     "uri": "postgresql://alex:*********@ep-green-surf-a5yaumj3-pooler.us-east-2.aws.neon.tech/people?sslmode=require&channel_binding=require"
+     "uri": "postgresql://neondb_owner:*********@ep-green-surf-a5yaumj3-pooler.us-east-2.aws.neon.tech/people?sslmode=require&channel_binding=require"
    }
    ```
 
 3. Connect to the `people` database with `psql`:
 
    ```bash shouldWrap
-   psql 'postgresql://alex:*********@ep-green-surf-a5yaumj3-pooler.us-east-2.aws.neon.tech/people?sslmode=require&channel_binding=require'
+   psql 'postgresql://neondb_owner:*********@ep-green-surf-a5yaumj3-pooler.us-east-2.aws.neon.tech/people?sslmode=require&channel_binding=require'
    ```
 
 4. Create the schema:
@@ -242,7 +242,7 @@ Using the [Create branch](/docs/reference/api/branches/create-project-branch) AP
 curl --request POST \
 --url https://console.neon.tech/api/v2/projects/royal-band-06902338/branches \
 --header 'accept: application/json' \
---header 'authorization: Bearer $NEON_API_KEY' \
+--header "authorization: Bearer $NEON_API_KEY" \
 --header 'content-type: application/json' \
 --data '{
    "branch": {
@@ -299,8 +299,8 @@ CREATE TABLE address (
    Response:
 
    ```bash
-   Connecting to the database; launching psql...
-   psql (16.1, server 16.2)
+   Neon connection: people as neondb_owner on ep-hidden-rain-a5pe72oi.us-east-2.aws.neon.tech; launching psql...
+   psql (18.6, server 18.6)
    SSL connection (protocol: TLSv1.3, cipher: TLS_AES_256_GCM_SHA384, compression: off)
    Type "help" for help.
 
@@ -329,23 +329,23 @@ CREATE TABLE address (
 
    ```bash
    curl --request GET \
-     --url 'https://console.neon.tech/api/v2/projects/royal-band-06902338/connection_uri?branch_id=br-mute-dew-a5930esi&database_name=people&role_name=alex' \
+     --url 'https://console.neon.tech/api/v2/projects/royal-band-06902338/connection_uri?branch_id=br-mute-dew-a5930esi&database_name=people&role_name=neondb_owner' \
      --header 'accept: application/json' \
-     --header 'authorization: Bearer $NEON_API_KEY'
+     --header "authorization: Bearer $NEON_API_KEY"
    ```
 
    The API call will return an connection string similar to this one:
 
    ```json
    {
-     "uri": "postgresql://alex:*********@ep-hidden-sun-a5de9i5h-pooler.us-east-2.aws.neon.tech/people?sslmode=require&channel_binding=require"
+     "uri": "postgresql://neondb_owner:*********@ep-hidden-sun-a5de9i5h-pooler.us-east-2.aws.neon.tech/people?sslmode=require&channel_binding=require"
    }
    ```
 
 1. Connect to the `people` database on the `feature/address` branch with `psql`:
 
    ```bash shouldWrap
-   psql 'postgresql://alex:*********@ep-hidden-sun-a5de9i5h-pooler.us-east-2.aws.neon.tech/people?sslmode=require&channel_binding=require'
+   psql 'postgresql://neondb_owner:*********@ep-hidden-sun-a5de9i5h-pooler.us-east-2.aws.neon.tech/people?sslmode=require&channel_binding=require'
    ```
 
 1. Add a new `address` table.
@@ -432,9 +432,9 @@ Compare the schema of the `feature/address` branch to its parent branch using th
 
 ```bash
 curl --request GET \
-     --url 'https://console.neon.tech/api/v2/projects/royal-band-06902338/branches/br-mute-dew-a5930esi/compare_schema?base_branch_id=br-bitter-bird-a56n6lh4&db_name=neondb' \
+     --url 'https://console.neon.tech/api/v2/projects/royal-band-06902338/branches/br-mute-dew-a5930esi/compare_schema?base_branch_id=br-bitter-bird-a56n6lh4&db_name=people' \
      --header 'accept: application/json' \
-     --header 'authorization: Bearer $NEON_API_KEY' | jq -r '.diff'
+     --header "authorization: Bearer $NEON_API_KEY" | jq -r '.diff'
 ```
 
 | Parameter          | Description                                                                | Required | Example                   |
@@ -458,7 +458,7 @@ The result shows a comparison between the `feature/address` branch and its paren
  SET default_table_access_method = heap;
 
  --
-+-- Name: address; Type: TABLE; Schema: public; Owner: alex
++-- Name: address; Type: TABLE; Schema: public; Owner: neondb_owner
 +--
 +
 +CREATE TABLE public.address (
@@ -471,10 +471,10 @@ The result shows a comparison between the `feature/address` branch and its paren
 +);
 +
 +
-+ALTER TABLE public.address OWNER TO alex;
++ALTER TABLE public.address OWNER TO neondb_owner;
 +
 +--
-+-- Name: address_id_seq; Type: SEQUENCE; Schema: public; Owner: alex
++-- Name: address_id_seq; Type: SEQUENCE; Schema: public; Owner: neondb_owner
 +--
 +
 +CREATE SEQUENCE public.address_id_seq
@@ -486,38 +486,38 @@ The result shows a comparison between the `feature/address` branch and its paren
 +    CACHE 1;
 +
 +
-+ALTER SEQUENCE public.address_id_seq OWNER TO alex;
++ALTER SEQUENCE public.address_id_seq OWNER TO neondb_owner;
 +
 +--
-+-- Name: address_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: alex
++-- Name: address_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: neondb_owner
 +--
 +
 +ALTER SEQUENCE public.address_id_seq OWNED BY public.address.id;
 +
 +
 +--
- -- Name: person; Type: TABLE; Schema: public; Owner: alex
+ -- Name: person; Type: TABLE; Schema: public; Owner: neondb_owner
  --
 
 @@ -56,6 +94,13 @@
 
 
  --
-+-- Name: address id; Type: DEFAULT; Schema: public; Owner: alex
++-- Name: address id; Type: DEFAULT; Schema: public; Owner: neondb_owner
 +--
 +
 +ALTER TABLE ONLY public.address ALTER COLUMN id SET DEFAULT nextval('public.address_id_seq'::regclass);
 +
 +
 +--
- -- Name: person id; Type: DEFAULT; Schema: public; Owner: alex
+ -- Name: person id; Type: DEFAULT; Schema: public; Owner: neondb_owner
  --
 
 @@ -63,6 +108,14 @@
 
 
  --
-+-- Name: address address_pkey; Type: CONSTRAINT; Schema: public; Owner: alex
++-- Name: address address_pkey; Type: CONSTRAINT; Schema: public; Owner: neondb_owner
 +--
 +
 +ALTER TABLE ONLY public.address
@@ -525,14 +525,14 @@ The result shows a comparison between the `feature/address` branch and its paren
 +
 +
 +--
- -- Name: person person_email_key; Type: CONSTRAINT; Schema: public; Owner: alex
+ -- Name: person person_email_key; Type: CONSTRAINT; Schema: public; Owner: neondb_owner
  --
 
 @@ -79,6 +132,14 @@
 
 
  --
-+-- Name: address address_person_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: alex
++-- Name: address address_person_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: neondb_owner
 +--
 +
 +ALTER TABLE ONLY public.address

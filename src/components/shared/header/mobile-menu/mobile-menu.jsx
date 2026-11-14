@@ -13,6 +13,7 @@ import { TopbarContext } from 'contexts/topbar-context';
 import useMobileMenu from 'hooks/use-mobile-menu';
 import ChevronIcon from 'icons/chevron-down-thin.inline.svg';
 import { cn } from 'utils/cn';
+import getDocsNavHref, { getDocsHeaderLanes } from 'utils/get-docs-nav-href';
 
 import Burger from '../burger';
 import MenuBanner from '../menu-banner';
@@ -137,9 +138,55 @@ const mobileMenuItems = [
   },
 ];
 
-const MobileMenu = ({ isDocPage = false, docPageType = null }) => {
+// Docs dropdown lanes map onto the menu's sections: each section entry keeps
+// its label, and runs of plain links become an untitled section.
+const getDocsLaneSections = (subnav, basePath) =>
+  subnav.reduce((sections, item) => {
+    const toItem = ({ title, slug }) => ({
+      title,
+      to: getDocsNavHref(slug, basePath),
+      isExternal: slug?.startsWith('http'),
+    });
+
+    if (item.section) {
+      return [...sections, { title: item.title || item.section, items: item.items.map(toItem) }];
+    }
+
+    const last = sections.at(-1);
+    if (last && !last.title) {
+      last.items.push(toItem(item));
+      return sections;
+    }
+
+    return [...sections, { items: [toItem(item)] }];
+  }, []);
+
+// On docs pages the menu carries the docs header: its lanes, then the links
+// from the desktop header's overflow menu.
+const getDocsMobileMenuItems = (navigation, basePath) => [
+  ...getDocsHeaderLanes(navigation).map(({ nav, slug, subnav }) =>
+    subnav
+      ? { text: nav, sections: getDocsLaneSections(subnav, basePath) }
+      : { text: nav, to: getDocsNavHref(slug, basePath) }
+  ),
+  { text: 'neon.com', to: '/' },
+  { text: 'GitHub', to: LINKS.github, target: '_blank', rel: 'noopener noreferrer' },
+  { text: 'Discord', to: LINKS.discord, target: '_blank', rel: 'noopener noreferrer' },
+  { text: 'Learn PostgreSQL', to: LINKS.postgresqltutorial },
+];
+
+const MobileMenu = ({
+  isDocPage = false,
+  docPageType = null,
+  docsNavigation = null,
+  docsBasePath = null,
+}) => {
   const { isMobileMenuOpen, toggleMobileMenu } = useMobileMenu();
   const { hasTopbar } = useContext(TopbarContext);
+  const menuItems =
+    isDocPage && docsNavigation?.length
+      ? getDocsMobileMenuItems(docsNavigation, docsBasePath)
+      : mobileMenuItems;
 
   return (
     <>
@@ -162,7 +209,7 @@ const MobileMenu = ({ isDocPage = false, docPageType = null }) => {
             })}
           >
             <ul className="no-scrollbars flex h-full flex-col overflow-y-auto px-8 pt-1 sm:px-5 sm:pt-3">
-              {mobileMenuItems.map((item, index) => (
+              {menuItems.map((item, index) => (
                 <MobileMenuItem key={index} {...item} />
               ))}
             </ul>
@@ -203,6 +250,8 @@ const MobileMenu = ({ isDocPage = false, docPageType = null }) => {
 MobileMenu.propTypes = {
   isDocPage: PropTypes.bool,
   docPageType: PropTypes.string,
+  docsNavigation: PropTypes.array,
+  docsBasePath: PropTypes.string,
 };
 
 export default MobileMenu;

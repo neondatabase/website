@@ -9,6 +9,8 @@ summary: >-
   a snapshot into a new or existing branch, and configure an automatic backup
   schedule.
 enableTableOfContents: true
+redirectFrom:
+  - /docs/reference/cli-snapshots
 updatedOn: '2026-09-29T21:04:10.398Z'
 ---
 

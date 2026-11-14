@@ -7,6 +7,7 @@ summary: >-
   (optionally with --port for an explicit port), or omit --source to serve
   every function declared in neon.ts, each on its own dev server.
 enableTableOfContents: true
+updatedOn: '2026-10-15T16:35:46.000Z'
 ---
 
 The `dev` command runs [Neon Functions](/docs/compute/functions/overview) locally with a dev server and hot reload. Serve one function from its entry module, or every function declared in your `neon.ts` policy.
@@ -46,6 +47,8 @@ Before evaluating `neon.ts`, `neon dev` loads your project's `.env` and then `.e
 ```bash
 neon dev --env .env.staging
 ```
+
+If `neon.ts` declares a function variable with `required: true` and it's unset, `neon dev` fails before any function starts. `--source` checks only the function it serves. A variable declared `required: "default-branch"` or `required: false` can be unset, and the function runs without it. See [Function env](/docs/reference/neon-ts#functions).
 
 Local functions inherit every loaded variable, including ones `neon.ts` doesn't declare. A deployed function only gets the variables `neon.ts` declares plus the ones Neon injects, so check that anything your code needs is declared before you deploy. The dev server's startup banner lists which env files it loaded and how many variables each one set.
 

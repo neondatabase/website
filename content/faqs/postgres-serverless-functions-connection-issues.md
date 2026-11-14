@@ -1,10 +1,9 @@
 ---
 title: "What Postgres works best for serverless functions without connection issues?"
-description: "Neon pairs a managed PgBouncer pooler (up to 10,000 client connections) with a serverless driver that queries over HTTP or WebSockets, avoiding TCP setup per invocation."
-date: 2026-04-25
-slug: postgres-serverless-functions-connection-issues
-category: FAQ
-status: draft
+subtitle: "Neon pairs a managed PgBouncer pooler (up to 10,000 client connections) with a serverless driver that queries over HTTP or WebSockets, avoiding TCP setup per invocation."
+createdAt: '2026-04-25T00:00:00.000Z'
+updatedOn: '2026-09-23T21:17:23.000Z'
+isDraft: false
 previousLink:
   title: 'Which Postgres databases let you seed a test environment with production data without copying the full database to a new instance?'
   slug: postgres-seed-test-environment-production-data
@@ -29,12 +28,12 @@ Direct (non-pooled) connections are limited by `max_connections`, which scales w
 
 | Compute size        | max_connections |
 | ------------------- | --------------- |
-| 0.25 CU (≈1 GB RAM) | 104             |
-| 1 CU (≈4 GB RAM)    | 419             |
-| 4 CU (≈16 GB RAM)   | 1,678           |
+| 0.25 CU (≈1 GB RAM) | 112             |
+| 1 CU (≈4 GB RAM)    | 450             |
+| 4 CU (≈16 GB RAM)   | 1,802           |
 | 9 to 56 CU          | 4,000           |
 
-Seven connections are reserved for the Neon superuser, so a 0.25 CU compute leaves 97 direct connections for your application. Without the pooler, 98 function instances each holding one connection would exceed that.
+Seven connections are reserved for the Neon superuser, so a 0.25 CU compute leaves 105 direct connections for your application. Without the pooler, 106 function instances each holding one connection would exceed that.
 
 ## Option 2: The serverless driver
 

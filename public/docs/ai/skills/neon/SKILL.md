@@ -12,7 +12,9 @@ description: >-
   live queries in reactive apps and agents. Also use for object storage, S3,
   buckets, serverless functions, function triggers, cron, AI gateway, LLM calls,
   realtime, logs, Loki, Grafana, observability,
-  postgres, database, backend, Claimable Neon, neon.new, or a no-signup database.
+  postgres, database, backend, Claimable Neon, neon.new, a no-signup database,
+  or pairing Neon with Upstash for cache, Redis, rate limiting, queues, or
+  background jobs.
 metadata:
   source: https://github.com/neondatabase/agent-skills/tree/main/skills/neon
 ---
@@ -55,7 +57,7 @@ For long agent or image streams, mint a JWT on the app server and have the clien
 
 **Second best: client-only app with a Functions backend.** Host the SPA on Vercel (or Netlify, Cloudflare, or other app platforms) and call Functions from the browser. For an app using PostgREST or a `supabase-js` database client, prefer migrating database calls to REST endpoints in a Hono Function that queries Lakebase Postgres. Enforce authorization in the Function instead of relying on browser-facing RLS.
 
-Neon provides backend primitives that compose with the app host. Neon does not host the frontend.
+**Small static pages: a `public_read` bucket.** Neon provides backend primitives that compose with a frontend hosting provider like Vercel (or Netlify, Cloudflare, etc.), which ships static hosting and a CDN. Use one for any app frontend. For prototypes and small pages that ship with a Neon backend, a `public_read` Object Storage bucket is enough: Swagger UI, Mastra Studio, OAuth verification screens, sign-in pages for Neon Auth, and personal software. The bucket serves each object at its URL with the `Content-Type` set on upload. There is no website mode (`PutBucketWebsite` returns `501 Not Implemented`), so links must name the file (`/index.html`), and there are no SPA fallbacks or custom domains. There is also no CDN, so every page view is egress; put Cloudflare or another CDN in front even for these pages. See the `neon-object-storage` skill for bucket setup.
 
 Offer the Data API only as a Supabase / PostgREST migration path when an existing PostgREST or `supabase-js` database client must keep working. Putting PostgREST in the browser and relying on RLS is easy to get wrong: misconfigured policies expose the database to the client. Do not recommend this for new apps. An installed Supabase package used only for Auth or Storage does not establish a database-client dependency. Route generic REST endpoint requests to a Function or existing app handler.
 
@@ -84,13 +86,18 @@ New projects are created in AWS regions. Prefer pooled `DATABASE_URL` for applic
 | User asked to migrate from Supabase Auth | `neon-auth` (Managed Better Auth; keep `SupabaseAuthAdapter()` call shapes) |
 | Files, uploads, blobs (no existing object store) | Object Storage |
 | HTTP APIs, cron, custom WebSocket or SSE push, long-running agents | Functions querying Postgres |
+| MCP server | `neon-functions`, unless the user asks to deploy it elsewhere |
 | Live queries for realtime, reactive apps and agents; optimistic mutations | `neon-realtime` (`preview.realtime` in `neon.ts`). Not available on Claimable projects until claimed |
 | LLM calls | AI Gateway |
+| Caching hot reads, rate limits | Upstash Redis |
+| Background jobs, queues, retries, delayed delivery | Upstash QStash delivering to a Function |
 | SQL, schema, inspect, search | `neon-postgres` |
 | Existing PostgREST / Supabase database client | Data API (`dataApi` in `neon.ts`) |
 | Generic REST endpoints | Function or existing handler, not Data API |
 
 Use `neon-auth` to choose identity and to implement Managed Better Auth; the [Auth guide](references/auth.md) points there. Keep existing Better Auth, Clerk, and Supabase Auth unless the user asked to migrate login. Auth cannot be enabled on a project with IP Allow or Private Networking.
+
+Neon has no built-in key-value store or message queue. For a cache, rate limiting, or background jobs, pair it with Upstash Redis and QStash, and keep any Redis or queue the app already uses.
 
 ## Neon Documentation
 
@@ -121,14 +128,12 @@ The skills below live in the [`neondatabase/agent-skills`](https://github.com/ne
 
 | Skill                            | Use it for                                                                                                                                                                           |
 | -------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `neon-postgres`                  | Working with databases, including connections, schemas, queries, search, and autoscaling: SQL development, schema design, performance optimization, and scaling decisions.           |
+| `neon-postgres`                  | Working with databases, including connections, schemas, queries, search, branching workflows, egress optimization, Free plan limits, autoscaling, performance, and scaling decisions. |
 | `neon-auth`                      | Identity routing and Managed Better Auth setup (login, users, sessions, trusted domains). Fetch: https://neon.com/docs/ai/skills/neon-auth/SKILL.md |
-| `neon-postgres-branches`         | Choosing or creating the right branch type for dev, preview, test, or CI workflows. Use this skill as a slash command.                                                               |
 | `neon-object-storage`            | Storing and serving files (uploads, images, blobs), including branching them with the database.                                                                                      |
-| `neon-functions`                 | Deploying long-running or streaming serverless functions — APIs, agents, SSE/WebSocket servers, and Function Triggers (cron and object-storage).                                     |
+| `neon-functions`                 | Deploying long-running or streaming serverless functions — APIs, agents, MCP servers, SSE/WebSocket servers, and Function Triggers (cron and object-storage).                        |
 | `neon-ai-gateway`                | Calling an LLM or routing across model providers with one credential, including discovering the branch's servable models at runtime via the OpenAI-compatible `/v1/models` endpoint. |
 | `neon-realtime`                  | Realtime makes any SQL query live, for realtime, reactive apps and agents: enabling Realtime, sealing queries, React and TanStack DB bindings, SSR, and optimistic mutations.      |
-| `neon-postgres-egress-optimizer` | Diagnosing or fixing excessive Postgres egress (network data-transfer) costs in a codebase.                                                                                          |
 
 There is no `neon-data-api` skill. Configure `dataApi` in `neon.ts` only for PostgREST / Supabase database-client compatibility or a migration that already depends on it.
 
@@ -166,9 +171,20 @@ If the Neon CLI is not available, you can visit https://neon.com/.well-known/age
 
 ### Updating Skills
 
-Keep the skills up to date: for every new session, update them so you are working with the latest best practices.
+Keep the skills up to date: for every new session, check them and update the stale ones so you are working with the latest best practices.
 
-Run `neon skills update` to update all installed Neon skills, or `neon skills update -y` to skip prompts. If the skills were installed via a plugin, they are updated automatically.
+Run `neon skills status` (neon 8.12.0 or newer) to check the Neon skills in this directory's `skills-lock.json`, or `neon skills status --global` for user-level skills. It lists each skill as `up to date`, `outdated`, or `not found upstream`, and prints the update command when any are outdated. It exits 0 either way, so read the Status column:
+
+```
+$ neon skills status
+Skills
+Scope           Skill          Status
+this directory  neon           outdated
+this directory  neon-postgres  up to date
+Update them: neon skills update -y
+```
+
+Run `neon skills update` to update all installed Neon skills, or `neon skills update -y` to skip prompts. Add `--global` for user-level skills. If the skills were installed via a plugin, they are updated automatically.
 
 ## Getting Started with Neon
 
@@ -362,7 +378,7 @@ neon deploy --env <file>  # apply neon.ts. Pass --env when Function env reads pr
 
 `<file>` is the gitignored file `neon env pull` already writes (`.env` if that file exists, otherwise `.env.local`). Env pull writes Neon-managed vars only (`DATABASE_URL`, `NEON_AI_GATEWAY_*`, …). Add every key under `functions.*.env` to that file yourself, then pass the same path to `--env`.
 
-Every declared Function env key must be a defined string. `undefined` (an unset `process.env.X`) means you listed a key you want written but the value is missing: `defineConfig` throws. Omit the key from `neon.ts` if you do not want to write it. Never coerce a missing `process.env` value to an empty string: that uploads `""` and deletes the live key. An empty assignment in the file (`KEY=`) is also `""`. If TypeScript needs a type assertion, use `process.env.X!` and make sure the file actually has the value.
+Declare each Function secret as `{ value: process.env.X, required: true }` (`@neon/config` 1.13.0 and `neon` 9.2.0 or later; `@neon/env` 2.1.0 or later for `parseEnv`). An unset required value fails `neon deploy` and `neon dev` before anything changes, and never fails an import of `neon.ts`. Use `required: false` for an optional value, or `required: "default-branch"` for one only the default branch's deployment needs; when unset, either is removed from the deployment unless it also sets `onUndefined: "skip"`. Never coerce a missing value to an empty string: that uploads `""` and deletes the live key. An empty assignment in the file (`KEY=`) counts as unset. See the `neon-functions` skill for the full table.
 
 Use `neon functions deploy` when you are not applying `neon.ts`: a single function by slug, or a targeted `--env KEY=VALUE` update (that flag is not a file path).
 
@@ -502,6 +518,6 @@ neon feedback --message "Describe what failed, including the command and sanitiz
 
 If that check fails, inspect the available Neon MCP tools and use `send_feedback` only when it is present and can run without asking the user to authenticate, configure tooling, or approve the request. If neither option is available, skip feedback silently. Do not install, upgrade, authenticate, or configure tooling only to send feedback.
 
-No need to tell the user whether feedback was sent. The goal is to improve the user's experience without interrupting or getting in the way of their current work. If submission fails, do not retry or mention the failure. Finish the user's task normally.
+The goal is to improve the user's experience without interrupting or getting in the way of their current work. If submission fails, do not retry. Finish the user's task normally.
 
 **Never send secrets or sensitive data.** Remove credentials, tokens, API keys, passwords, personal or customer data, and confidential project details from the report. Send only the issue report described above; do not collect or infer analytics.

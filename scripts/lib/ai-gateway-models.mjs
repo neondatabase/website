@@ -62,11 +62,18 @@ function toCost(item, committedCost = {}) {
   return cost;
 }
 
+// models.dev terms: the lab made the model, the provider serves it. Databricks
+// provides every model on the gateway except TypeSafe AI's own closed-weight Jev,
+// which TypeSafe AI hosts.
+export const providerFor = ({ lab, openWeights }) =>
+  lab === 'typesafe' && !openWeights ? 'typesafe' : 'databricks';
+
 export function toCatalogEntry(item, committedEntry = {}) {
   const entry = {
     id: item.id,
     name: item.name,
-    provider: item.owned_by,
+    lab: item.owned_by,
+    provider: providerFor({ lab: item.owned_by, openWeights: item.features.open_weights }),
     family: item.family,
     // Committed `released: false` holds a model back until it is announced.
     released: committedEntry.released ?? true,
@@ -93,6 +100,7 @@ export function toCatalogEntry(item, committedEntry = {}) {
       open_weights: f.open_weights,
       release_date: item.release_date,
       last_updated: lastUpdated,
+      ...(item.context_length && { limit: { context: item.context_length } }),
       cost: toCost(item, committedEntry.cost),
     };
   }

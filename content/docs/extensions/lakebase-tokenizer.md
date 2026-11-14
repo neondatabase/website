@@ -6,6 +6,7 @@ summary: >-
   Chinese, Japanese, and Korean morphological analysis to Postgres full-text
   search, with normalization, custom stop words, synonyms, and English stemming.
 enableTableOfContents: true
+updatedOn: '2026-10-24T10:25:53.000Z'
 ---
 
 The `lakebase_tokenizer` extension adds configurable tokenization to Postgres full-text search, including whole-word processing and morphological analysis for Chinese, Japanese, and Korean (CJK) text. Text-search configurations built with the extension work with `to_tsvector`, the `@@` operator, ranking functions, and GIN indexes. You can also use generated `tsvector` values with [`lakebase_text`](/docs/extensions/lakebase-text) for BM25 ranking.

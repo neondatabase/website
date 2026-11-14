@@ -28,7 +28,6 @@ import DetailIconCards from 'components/pages/doc/detail-icon-cards';
 import DocsLink from 'components/pages/doc/docs-link';
 import DocsList from 'components/pages/doc/docs-list';
 import Faq, { FaqItem } from 'components/pages/doc/faq';
-import FunctionRegistryCards from 'components/pages/doc/function-registry-cards';
 import IncludeBlock from 'components/pages/doc/include-block';
 import InfoBlock from 'components/pages/doc/info-block';
 import LinkPreview from 'components/pages/doc/link-preview';
@@ -72,6 +71,8 @@ import StatBlock from 'components/shared/stat-block';
 import SubprocessorsForm from 'components/shared/subprocessors-form';
 import getCodeProps from 'lib/rehype-code-props';
 import remarkUniqueTabHeadingIds from 'lib/remark-unique-tab-heading-ids';
+import openDetails from 'lib/rehype-open-details';
+import rehypeTaskListLabels from 'lib/rehype-task-list-labels';
 import { cn } from 'utils/cn';
 
 import sharedMdxComponents from '../../../../content/docs/shared-content';
@@ -257,7 +258,6 @@ const getComponents = (withoutAnchorHeading, isReleaseNote, isPostgres, isTempla
   SqlToRestConverter,
   StatBlock,
   AiGatewayModelIndex,
-  FunctionRegistryCards,
   ...sharedComponents,
 });
 
@@ -269,6 +269,7 @@ const Content = ({
   isReleaseNote = false,
   isPostgres = false,
   isTemplate = false,
+  expandDetails = false,
 }) => {
   const rootClassName = cn(
     'prose-doc post-content prose dark:prose-invert xs:prose-code:break-words',
@@ -292,7 +293,9 @@ const Content = ({
               // Gives duplicate headings inside <Tabs> panels unique ids
               remarkUniqueTabHeadingIds,
             ],
-            rehypePlugins: [getCodeProps],
+            rehypePlugins: expandDetails
+              ? [getCodeProps, rehypeTaskListLabels, openDetails]
+              : [getCodeProps, rehypeTaskListLabels],
           },
           blockJS: false,
           blockDangerousJS: true,
@@ -309,6 +312,7 @@ Content.propTypes = {
   isReleaseNote: PropTypes.bool,
   isPostgres: PropTypes.bool,
   isTemplate: PropTypes.bool,
+  expandDetails: PropTypes.bool,
 };
 
 export default Content;

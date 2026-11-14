@@ -11,20 +11,20 @@ summary: >-
   and self-hosted environments such as DigitalOcean, AWS EC2, Render, and
   Fly.io.
 enableTableOfContents: true
-updatedOn: '2026-10-09T10:14:56.146Z'
+updatedOn: '2026-10-28T11:11:18.780Z'
 ---
 
-[Medusa](https://medusajs.com/) is an open-source headless e-commerce platform that provides a flexible backend for building modern e-commerce applications. It uses Postgres as its primary database to store all product, order, and customer data.
+[Medusa](https://medusajs.com/) is an open-source headless e-commerce platform that provides a flexible backend for e-commerce applications. It uses Postgres as its primary database to store all product, order, and customer data.
 
-In this guide, you'll learn how to set up and self-host Medusa using [Neon](https://neon.com) as your Postgres database. Neon is the backend for apps and agents. Lakebase Postgres is serverless, with autoscaling and scale-to-zero, making it an excellent choice for hosting your Medusa backend.
+In this guide, you'll learn how to set up and self-host Medusa using [Neon](https://neon.com) as your Postgres database. Neon is the backend for apps and agents. Lakebase Postgres is serverless, with autoscaling and scale-to-zero, so it suits a Medusa backend.
 
 ## Prerequisites
 
 Before you begin, ensure you have the following:
 
 1.  **Neon Account:** You'll need a Neon account. If you don't have one, sign up [here](https://console.neon.tech/signup).
-2.  **Node.js & package manager:** A Node-compatible runtime (Node.js v20+, Bun, or Deno) and a package manager (`npm`, `yarn`, `pnpm`, or `bun`).
-    > This guide uses Node.js with `npm`, but you can adapt the commands to your preferred runtime and package manager.
+2.  **Node.js & package manager:** Node.js 22.23.4 or later, which the generated Medusa project requires, and a package manager (`npm`, `yarn`, or `pnpm`).
+    > This guide uses Node.js with `npm`, but you can adapt the commands to your preferred package manager.
 
 <Steps>
 
@@ -81,7 +81,7 @@ You should see output similar to the following once the setup is complete:
 
 ```bash shouldWrap
 $ npx create-medusa-app@latest --db-url "YOUR_NEON_CONNECTION_STRING"
-? What's the name of your project? my-medusa-store
+? What's the name of your project? medusa-neon-store
 ? Would you like to install the Next.js Starter Storefront? You can also install it later. Yes
 🚀 Starting project setup, this may take a few minutes.
 ✔ Created project directory
@@ -93,7 +93,7 @@ $ npx create-medusa-app@latest --db-url "YOUR_NEON_CONNECTION_STRING"
 ✔ Project Prepared
 Starting Medusa...
 
-> my-medusa-store@0.0.1 dev
+> medusa-neon-store@0.0.1 dev
 > medusa develop
 
 - Creating server
@@ -107,6 +107,13 @@ After creating the Medusa application, a browser window should open automaticall
 ![Medusa Admin Registration](/docs/guides/medusa-admin-registration.png)
 
 Following successful registration, you will be redirected to the Medusa Admin dashboard where you can manage your store.
+
+If the browser doesn't open, or you prefer the terminal, create the admin user from the backend directory:
+
+```bash
+cd medusa-neon-store/apps/backend
+npx medusa user -e admin@example.com -p AbC123dEf
+```
 
 ## Verify the connection
 
@@ -147,7 +154,7 @@ You can optionally enable IP whitelisting in the Neon Console to restrict databa
 
 ## Resources
 
-- [Neon Documentation](/docs/introduction)
+- [Neon Documentation](/docs)
 - [Medusa Official Documentation](https://docs.medusajs.com/)
 - [Medusa Application Deployment Guide](https://docs.medusajs.com/learn/deployment/general)
 

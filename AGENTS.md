@@ -13,10 +13,9 @@ This is the Neon database company's marketing website and documentation hub. It'
 
 ## Tech Stack
 
-- **Framework:** Next.js 14 (React 18, App Router)
+- **Framework:** Next.js 16 (React 19, App Router)
 - **Styling:** Tailwind CSS with custom components
 - **Content:** MDX for documentation (in `content/` directory)
-- **Database:** Prisma (for some features)
 - **Search:** Algolia for documentation search
 - **Animations:** GSAP, Framer Motion, Rive
 - **Code Highlighting:** Shiki
@@ -40,10 +39,9 @@ website/
 │   ├── hooks/           # Custom React hooks
 │   ├── utils/           # Helper functions
 │   └── styles/          # Global CSS
-├── public/              # Static assets
-│   ├── docs/            # Documentation images
-│   └── llms/            # LLM-specific content files
-└── prisma/              # Database schema
+└── public/              # Static assets
+    ├── docs/            # Documentation images
+    └── llms/            # LLM-specific content files
 ```
 
 Multiple team members clone this repo to different local paths. Never hardcode a local path in documentation or scripts.
@@ -126,18 +124,19 @@ Optional guide-only field: `canonical` — an absolute `http://` or `https://` U
 
 Every docs page requires `title`. All other fields are optional.
 
-| Field                   | Description                                                                                                                        |
-| ----------------------- | ---------------------------------------------------------------------------------------------------------------------------------- |
-| `title`                 | Page title. The `h1` is auto-generated from this. Do not add an `h1` in the file. **Required.**                                    |
-| `subtitle`              | Subtitle shown below the title.                                                                                                    |
-| `summary`               | SEO description / meta summary.                                                                                                    |
-| `tag`                   | Badge shown in the nav. Values: `new`, `beta`, `coming soon`, `deprecated`, or custom text. Also add the tag to `navigation.yaml`. |
+| Field                   | Description                                                                                                                                                                                                                                    |
+| ----------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `title`                 | Page title. The `h1` is auto-generated from this. Do not add an `h1` in the file. **Required.**                                                                                                                                                |
+| `subtitle`              | Subtitle shown below the title.                                                                                                                                                                                                                |
+| `summary`               | SEO description / meta summary.                                                                                                                                                                                                                |
+| `tag`                   | Badge shown in the nav. Values: `new`, `beta`, `coming soon`, `deprecated`, or custom text. Also add the tag to `navigation.yaml`.                                                                                                             |
 | `redirectFrom`          | Array of old paths to redirect from. Each path must start with `/` and must not have a trailing slash (the site runs `trailingSlash: false`, so a trailing-slash source is normalized to the slashless path and never matches, returning 404). |
-| `isDraft`               | `true` hides the page from production but keeps it visible in dev.                                                                 |
-| `enableTableOfContents` | `true` shows the h2/h3 outline panel on the right.                                                                                 |
-| `ogImage`               | Social preview image path.                                                                                                         |
-| `updatedOn`             | ISO 8601 timestamp (e.g. `2026-03-14T03:21:15.122Z`). Updated automatically by the pre-commit hook on staged files. Don't set or update manually. |
-| `layout`                | Set to `wide` to hide the right sidebar (use with `TwoColumnLayout` pages).                                                        |
+| `isDraft`               | `true` hides the page from production but keeps it visible in dev.                                                                                                                                                                             |
+| `enableTableOfContents` | `true` shows the h2/h3 outline panel on the right.                                                                                                                                                                                             |
+| `ogImage`               | Social preview image path.                                                                                                                                                                                                                     |
+| `updatedOn`             | ISO 8601 timestamp (e.g. `2026-03-14T03:21:15.122Z`). Added (on new pages) and updated automatically by the pre-commit hook on staged files. Drives the sitemap `<lastmod>`. Don't set or update manually.                                     |
+| `layout`                | Set to `wide` to hide the right sidebar (use with `TwoColumnLayout` pages).                                                                                                                                                                    |
+| `docType`               | Overrides the page `Type` in `/docs/sitemap.md`: `Tutorial`, `How-to`, `Reference`, or `Conceptual`. Set it only when the inferred type is wrong. Invalid values fail the build. |
 
 The build will fail if any `.md` file in `content/docs/` is missing `title`.
 
@@ -277,6 +276,7 @@ See `content/docs/README.md` for full syntax. Key features:
 
 - `showLineNumbers` — shows line numbers
 - `shouldWrap` — enables line wrapping (use for long commands)
+- `collapse={1-5, 12-14}` — hides line ranges behind a clickable "N collapsed lines" row (use for boilerplate in long examples)
 
 ### Diff notation
 
@@ -582,20 +582,6 @@ Use `/simple-content` for edits to existing pages, shorter additions, or when yo
 | `/update-pr`         | Draft or update a PR title and description from changed files and commits   |
 | `/add-preview-links` | Add Vercel preview links to a PR description for every changed content file |
 
-### Changelog and roadmap
-
-| Command             | When to use                                                                                        |
-| ------------------- | -------------------------------------------------------------------------------------------------- |
-| `/create-changelog` | Generate next Friday's changelog draft (or a specific date) with placeholder content               |
-| `/post-changelog`   | Post the changelog preview to Lakebase Slack channels for review. Databricks employees only.       |
-| `/update-roadmap`   | Sync the introduction roadmap with recent changelog entries                                        |
-
-### Issue tracking
-
-| Command              | When to use                                                                                                                                                                                                     |
-| -------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `/create-doc-ticket` | Create a JIRA task in the Databricks LKB project, assigned to yourself. Databricks employees only — requires the JIRA MCP. Non-employees should open a GitHub issue at github.com/neondatabase/website instead. |
-
 ### Reference and navigation
 
 | Command                  | When to use                                                                 |
@@ -615,8 +601,19 @@ Use `/simple-content` for edits to existing pages, shorter additions, or when yo
 - Documentation-heavy site with 1000+ markdown files — search before creating
 - Do not modify `src/` components, CSS, or site structure without explicit instruction; a web team actively maintains the frontend
 - Do not modify `node_modules/` or generated files
+- When you add a route handler (`route.js`) that serves a file like JSON or YAML instead of a page, add its path to the route handler list in `exclude` in `next-sitemap.config.js` so it stays out of sitemap.xml
 - Do not run `npm run fix`, `npm run fix:all`, or `npm run lint:md` during normal workflows. For JS changes, run `npm run fix:js`. Markdown in `content/` is auto-formatted and `updatedOn` is auto-stamped by the pre-commit hook on staged files. No manual step needed at commit time. To manually reformat markdown (prettier only), run `npm run fix:md`.
 - The codebase uses both `pages/` and `app/` directory (migration in progress)
 - Images are optimized via Next.js Image component
 - Accessibility matters — follow WCAG guidelines
 - For writing style and component details, `content/docs/README.md` and `content/docs/community/` are the authoritative sources
+
+<!-- BEGIN:nextjs-agent-rules -->
+
+# This is NOT the Next.js you know
+
+This version has breaking changes — APIs, conventions, and file structure may all differ from your training data. Read the relevant guide in `node_modules/next/dist/docs/` (resolved from this file's directory; in monorepos the `next` package may not be visible from the repo root) before writing any code. Heed deprecation notices.
+
+This block is written and re-added by `next dev` — verify at `node_modules/next/dist/server/lib/generate-agent-files.js`. Removing it from a diff only re-creates the uncommitted change; committing it with your work keeps the tree clean.
+
+<!-- END:nextjs-agent-rules -->

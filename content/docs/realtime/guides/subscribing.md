@@ -4,6 +4,7 @@ subtitle: 'Subscribe to live queries using the Realtime client.'
 summary: >-
   Subscribe to live queries from trusted backend code or the browser. Fetch sealed queries from your API, handle every callback and renew sealed queries before they expire.
 enableTableOfContents: true
+updatedOn: '2026-11-05T20:22:23.610Z'
 ---
 
 Once you've [defined](./queries) and [sealed](./queries#sealing-queries) a query, you can [subscribe&nbsp;to&nbsp;it](#subscribe-to-the-sealed-query) using the [low&#8209;level Realtime&nbsp;client](../sdks/typescript#client-createrealtimeclient).
@@ -68,7 +69,7 @@ Most queries depend on who's asking and what they're asking for.
 If you've [exposed your sealed query via an API endpoint](./queries#exposing-an-endpoint), you can provide this context via the request data using your standard auth machinery, such as Neon's [Managed Better Auth](/docs/auth/overview):
 
 ```ts filename="frontend/auth.ts"
-import { createAuthClient } from "@neondatabase/auth"
+import { createAuthClient } from "@neon/auth"
 
 export const authClient = createAuthClient(import.meta.env.VITE_NEON_AUTH_URL)
 ```
@@ -261,7 +262,7 @@ subscription.onUpdate((update: RawLiveQueryUpdate<Message>) => {
   for (const change of update.changes) {
     if (change.type === "upsert") {
       rows.set(change.rowId, change.row)
-    } else {
+    } else if (change.type === "remove") {
       rows.delete(change.rowId)
     }
   }
@@ -276,7 +277,7 @@ subscription.onStateChange((state: LiveQueryState) => {
 
 A `rowId` is opaque and scoped to its subscription, and each `rows` update invalidates every earlier one. It isn't a primary key, so don't store it or match it against your own ids. A `rows` update can arrive at any time, for example after a reconnect, and it always replaces the whole result.
 
-Each `changes` update also carries the ids of the Postgres transactions it covers, in `update.batch.txids`. The [mutations guide](./mutations) uses them to confirm optimistic&nbsp;mutations.
+Each `changes` update also carries the ids of the Postgres transactions it covers, in `update.batch.txids`. The [mutations guide](./mutations) uses them to confirm optimistic&nbsp;mutations. With `ORDER BY`, `changes` can also include `move` changes, which carry a `rowId` and the `afterRowId` it now follows (`null` for the first row), and no row.
 
 ## Renew the sealed query
 
@@ -464,6 +465,8 @@ export const realtime = createRealtime({
 ```
 
 Every query it seals then reports errors with the database's full message, plus its SQLSTATE code in `sqlState` when there is one. It's a backend option because it travels inside each sealed query.
+
+To check a query's full error from the terminal without writing code, run [`neon realtime subscribe --debug`](/docs/cli/realtime#subscribe).
 
 <Admonition type="warning" title="Development only">
 Full error details can expose schema, table and column names to anyone who subscribes, including through any error message your UI shows. Never turn on `debugMode` in production.

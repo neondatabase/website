@@ -14,6 +14,7 @@ summary: >-
   restarts all computes in the project.
 enableTableOfContents: true
 isDraft: false
+updatedOn: '2026-10-21T12:30:44.000Z'
 ---
 
 Neon's logical replication feature lets you replicate data from a Neon database to Lakebase Postgres on Databricks. Lakebase subscribes to a publication on your Neon database, copies the existing data, and then applies each insert, update, and delete as it happens. Use it to:
@@ -74,7 +75,7 @@ SHOW wal_level;
 
 ### Create a Postgres role for replication
 
-Create a dedicated Postgres role for Lakebase to connect as. The role must have the `REPLICATION` privilege. Roles created using the Neon CLI, Console, or API are granted membership in the [neon_superuser](/docs/manage/roles#the-neonsuperuser-role) role, which has the required `REPLICATION` privilege. Roles created with SQL don't have this privilege, and it can't be granted. See [Replication roles](/docs/guides/logical-replication-neon#replication-roles).
+Create a dedicated Postgres role for Lakebase to connect as. The role must have the `REPLICATION` privilege. Roles created using the Neon CLI, Console, or API are granted membership in the [neon_superuser](/docs/manage/roles#the-neonsuperuser-role) role, which has the required `REPLICATION` privilege. Roles created with SQL don't have this privilege by default. A role that can grant privileges, such as the project owner, can add it with `ALTER ROLE replication_user REPLICATION`. See [Replication roles](/docs/guides/logical-replication-neon#replication-roles).
 
 <Tabs labels={["CLI", "Console", "API"]}>
 

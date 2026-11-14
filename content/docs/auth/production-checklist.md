@@ -10,7 +10,7 @@ summary: >-
   rate-limited and does not support verification links. A custom SMTP provider
   is required for both.
 enableTableOfContents: true
-updatedOn: '2026-10-09T09:41:16.035Z'
+updatedOn: '2026-11-09T18:18:56.726Z'
 ---
 
 Complete these steps before taking your application to production with Managed Better Auth.
@@ -30,7 +30,7 @@ Complete these steps before taking your application to production with Managed B
 </CheckItem>
 
 <CheckItem title="4. Configure OAuth credentials (if using OAuth)" href="/docs/auth/guides/setup-oauth#production-setup">
-  Set up your own Google and GitHub OAuth apps to replace shared development keys.
+  Set up your own OAuth apps (Google, GitHub, Vercel, Microsoft, Apple, or Discord). Google is the only provider with shared development credentials, so replace those with your own before launch.
 </CheckItem>
 
 <CheckItem title="5. Enable email verification (recommended)" href="/docs/auth/guides/email-verification">
@@ -85,7 +85,7 @@ Update the provider with the [Update email provider configuration](/docs/referen
 
 ```bash shouldWrap
 curl -X PATCH 'https://console.neon.tech/api/v2/projects/{project_id}/branches/{branch_id}/auth/email_provider' \
-  -H 'Authorization: Bearer $NEON_API_KEY' \
+  -H "Authorization: Bearer $NEON_API_KEY" \
   -H 'Content-Type: application/json' \
   -d '{"type": "standard", "host": "smtp.example.com", "port": 587, "username": "example_username", "password": "AbC123dEf", "sender_email": "noreply@example.com", "sender_name": "Example App"}'
 ```

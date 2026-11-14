@@ -10,7 +10,7 @@ summary: >-
   Vercel-Managed Integration users must use an API key because web auth requires
   a Neon-registered account.
 enableTableOfContents: true
-updatedOn: '2026-09-07T21:32:59.304Z'
+updatedOn: '2026-10-27T02:35:14.797Z'
 redirectFrom:
   - /docs/reference/cli-install
 ---
@@ -141,7 +141,7 @@ neon --version
 ```
 
 <Admonition type="note" title="Node.js 20.19.0 is required to upgrade">
-The current CLI requires Node.js 20.19.0 or higher. An existing installation keeps working on your current Node.js version, but upgrading to the latest CLI on an older version (such as Node.js 18) fails. If you're on an older version, [upgrade Node.js](https://nodejs.org/en/download/) before you upgrade the CLI.
+The current CLI requires Node.js 20.19.0 or higher. On an older version (such as Node.js 18), npm only warns about the engine mismatch when you install or upgrade, and then every `neon` command exits with `neon requires Node.js 20.19 or newer` and the version it found. If you're on an older version, [upgrade Node.js](https://nodejs.org/en/download/) before you upgrade the CLI.
 </Admonition>
 
 <Tabs labels={["npm", "Homebrew", "Binary"]}>

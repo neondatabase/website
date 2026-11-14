@@ -39,7 +39,7 @@ fetch sealed queries or close the client when it unmounts.
 ### useLiveQuery (#react-uselivequery)
 
 ```ts
-function useLiveQuery<Row>(query: SealedLiveQuery<Row>, options: UseLiveQueryOptions<Row> = {}): UseLiveQueryResult<Row>
+function useLiveQuery<Row>(query: SealedLiveQuery<Row>, options: UseLiveQueryOptions<NoInferCompat<Row>> = {}): UseLiveQueryResult<Row>
 ```
 
 Subscribe to a sealed query and expose its materialized snapshot to
@@ -58,10 +58,10 @@ utilities.
 
 #### Parameters (#react-uselivequery-parameters)
 
-| Name      | Type                       | Description                                              |
-| --------- | -------------------------- | -------------------------------------------------------- |
-| `query`   | `SealedLiveQuery<Row>`     | Capability obtained from the application backend.        |
-| `options` | `UseLiveQueryOptions<Row>` | Optional preloaded rows and capability-refresh callback. |
+| Name      | Type                                      | Description                                              |
+| --------- | ----------------------------------------- | -------------------------------------------------------- |
+| `query`   | `SealedLiveQuery<Row>`                    | Capability obtained from the application backend.        |
+| `options` | `UseLiveQueryOptions<NoInferCompat<Row>>` | Optional preloaded rows and capability-refresh callback. |
 
 #### Returns (#react-uselivequery-returns)
 
@@ -144,7 +144,7 @@ Options for [`useLiveQuery`](/docs/realtime/sdks/typescript#react-uselivequery).
 
 | Name            | Type                                           | Description                                                                                                                                        |
 | --------------- | ---------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `initialData?`  | `readonly Row[]`                               | Server-rendered or otherwise preloaded rows exposed while connecting.                                                                              |
+| `initialData?`  | `readonly Row[]`                               | Decoded rows exposed immediately, including during server rendering. Restore values changed by transport serialization before passing them here.   |
 | `refreshQuery?` | `readonly () => Promise<SealedLiveQuery<Row>>` | Obtain a replacement capability for the same exact query before expiry. Transient failures are retried while the current capability remains valid. |
 
 ### UseLiveQueryResult (#react-uselivequeryresult)

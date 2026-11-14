@@ -3,7 +3,12 @@ title: TypeScript SDK
 subtitle: Seal queries, subscribe from clients, and sync with frameworks
 summary: Reference for the Realtime TypeScript SDK, covering backend query sealing, low-level client subscriptions, React integration, and TanStack DB adapter.
 enableTableOfContents: true
+updatedOn: '2026-10-23T14:30:57.000Z'
 ---
+
+<Admonition type="important" title="Upgrading to 0.2.0">
+Realtime SDK 0.2.0 uses version 2 of the Realtime protocol. Upgrade `@neon/realtime` and every Realtime adapter you use (`@neon/realtime-react`, `@neon/realtime-tanstack`, `@neon/realtime-drizzle`, `@neon/realtime-kysely`) to 0.2.0 together, since the 0.2.0 adapters require `@neon/realtime` 0.2.0.
+</Admonition>
 
 The Realtime SDK is split into modules:
 

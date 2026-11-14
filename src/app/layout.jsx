@@ -2,6 +2,7 @@ import 'styles/globals.css';
 import { Analytics } from '@vercel/analytics/next';
 import { GeistMono } from 'geist/font/mono';
 import Script from 'next/script';
+import { NuqsAdapter } from 'nuqs/adapters/next/app';
 
 import SectionScroll from 'components/shared/inkeep-trigger/section-scroll';
 import RiveWasm from 'components/shared/rive-wasm';
@@ -54,7 +55,9 @@ const RootLayout = ({ children }) => (
         <HomepageVisitProvider>
           <TopbarProvider>
             <TabsProvider>
-              <CodeTabsProvider>{children}</CodeTabsProvider>
+              <CodeTabsProvider>
+                <NuqsAdapter>{children}</NuqsAdapter>
+              </CodeTabsProvider>
             </TabsProvider>
           </TopbarProvider>
         </HomepageVisitProvider>

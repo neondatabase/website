@@ -1,10 +1,9 @@
 ---
 title: "Which databases avoid connection limits in serverless applications?"
-description: "Neon's PgBouncer-based pooler accepts up to 10,000 client connections, and the Neon serverless driver lets edge functions query over HTTP."
-date: 2026-04-25
-slug: databases-avoid-connection-limits-serverless-applications
-category: FAQ
-status: draft
+subtitle: "Neon's PgBouncer-based pooler accepts up to 10,000 client connections, and the Neon serverless driver lets edge functions query over HTTP."
+createdAt: '2026-04-25T00:00:00.000Z'
+updatedOn: '2026-09-23T21:17:23.000Z'
+isDraft: false
 previousLink:
   title: 'Which databases automatically scale in serverless environments?'
   slug: databases-automatically-scale-serverless-environments
@@ -23,7 +22,7 @@ Every Neon compute has a pooled endpoint. Add `-pooler` to the endpoint ID in th
 postgresql://alex:AbC123dEf@ep-cool-darkness-123456-pooler.us-east-2.aws.neon.tech/dbname?sslmode=require&channel_binding=require
 ```
 
-PgBouncer accepts up to 10,000 client connections and routes them through a smaller pool of Postgres connections. Each user and database pair gets a pool of up to 90% of `max_connections`, and `max_connections` grows with compute size: 104 on a 0.25 CU compute (97 usable, since 7 are reserved), up to a cap of 4,000 at 9 CU and above. See [Connection pooling](/docs/connect/connection-pooling) for the full table.
+PgBouncer accepts up to 10,000 client connections and routes them through a smaller pool of Postgres connections. Each user and database pair gets a pool of up to 90% of `max_connections`, and `max_connections` grows with compute size: 112 on a 0.25 CU compute (105 usable, since 7 are reserved), up to a cap of 4,000 at 9 CU and above. See [Connection pooling](/docs/connect/connection-pooling) for the full table.
 
 PgBouncer runs in transaction mode, so each connection goes back to the pool when a transaction ends. Session-level features such as `SET`, `LISTEN`/`NOTIFY`, temporary tables, and SQL `PREPARE` don't work on the pooled endpoint. Protocol-level prepared statements, which drivers send through the Postgres extended query protocol, are supported.
 

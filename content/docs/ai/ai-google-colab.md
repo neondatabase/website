@@ -10,7 +10,7 @@ summary: >-
   distance operator to run nearest-neighbor queries. A pre-built Colab notebook
   is available for one-click setup.
 enableTableOfContents: true
-updatedOn: '2026-09-16T20:12:32.981Z'
+updatedOn: '2026-10-09T15:55:57.334Z'
 ---
 
 [Google Colab](https://colab.research.google.com/) is a hosted Jupyter Notebook service that requires no setup to use and provides free access to computing resources, including GPUs and TPUs.
@@ -37,7 +37,7 @@ In your browser, navigate to [Google Colab](https://colab.research.google.com/),
 Alternatively, you can open a predefined Google Colab notebook for this guide by clicking the **Open in Colab** button below.
 
 <a target="_blank" href="https://colab.research.google.com/github/neondatabase/neon-google-colab-notebooks/blob/main/neon_pgvector_quickstart.ipynb">
-  <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
+  <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab" width="117" height="20" loading="lazy" />
 </a>
 
 ## Connect to your database

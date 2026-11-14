@@ -10,6 +10,7 @@ summary: >-
   output to one database with `--database`, and target a project with
   `--project-id`.
 enableTableOfContents: true
+updatedOn: '2026-10-09T13:08:42.000Z'
 ---
 
 The `diff` command shows a git-style schema diff between two branches, in the same unified diff format `git diff` produces. The branch under review is the `+++` side; the branch you compare against is the `---` side. Omit the `compare-branch` argument to diff against the reviewed branch's parent, which answers "what did I change since branching?". See [Schema diff](/docs/guides/schema-diff) for more on comparing schemas in Neon.

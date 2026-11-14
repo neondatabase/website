@@ -2,7 +2,7 @@
 title: Next.js Server SDK Reference
 subtitle: Server-side authentication API for Next.js with Managed Better Auth
 summary: >-
-  Managed Better Auth Next.js Server SDK (`@neondatabase/auth/next/server`) provides
+  Managed Better Auth Next.js Server SDK (`@neon/auth/next/server`) provides
   server-side authentication for Next.js apps via React Server Components, API
   routes, middleware, and server actions. Session caching uses a signed HTTP-only
   cookie to reduce Auth Server calls. Use this page to implement or debug
@@ -12,10 +12,10 @@ summary: >-
   structured upstream error codes, and migration from v0.1.
 enableTableOfContents: true
 layout: wide
-updatedOn: '2026-07-15T00:08:00.682Z'
+updatedOn: '2026-10-09T15:55:57.334Z'
 ---
 
-Reference documentation for the Managed Better Auth Next.js server SDK (`@neondatabase/auth/next/server`). This package provides server-side authentication for Next.js applications using React Server Components, API routes, middleware, and server actions.
+Reference documentation for the Managed Better Auth Next.js server SDK (`@neon/auth/next/server`). This package provides server-side authentication for Next.js applications using React Server Components, API routes, middleware, and server actions.
 
 For client-side authentication, see the [Client SDK reference](/docs/reference/javascript-sdk). For UI components, see the [UI Components reference](/docs/auth/reference/ui-components).
 
@@ -30,7 +30,7 @@ Install the Managed Better Auth package in your Next.js project using npm, yarn,
 <TwoColumnLayout.Block>
 
 ```bash
-npm install @neondatabase/auth@latest
+npm install @neon/auth@latest
 ```
 
 </TwoColumnLayout.Block>
@@ -91,7 +91,7 @@ See [Server logging](#server-logging) and [Upstream fetch errors](#upstream-fetc
 
 ```typescript
 // lib/auth/server.ts
-import { createNeonAuth } from '@neondatabase/auth/next/server';
+import { createNeonAuth } from '@neon/auth/next/server';
 
 export const auth = createNeonAuth({
   baseUrl: process.env.NEON_AUTH_BASE_URL!,
@@ -120,7 +120,7 @@ Managed Better Auth emits structured logs from the API proxy, middleware, and Be
 <TwoColumnLayout.Block>
 
 ```typescript
-import { createNeonAuth } from '@neondatabase/auth/next/server';
+import { createNeonAuth } from '@neon/auth/next/server';
 
 export const auth = createNeonAuth({
   baseUrl: process.env.NEON_AUTH_BASE_URL!,
@@ -160,7 +160,7 @@ Create a catch-all route at `app/api/auth/[...path]/route.ts`. This handles all 
 
 ### Returns
 
-Object with `GET` and `POST` Next.js route handlers.
+Object with `GET`, `POST`, `PUT`, `PATCH`, and `DELETE` Next.js route handlers.
 
 </TwoColumnLayout.Block>
 <TwoColumnLayout.Block>
@@ -169,7 +169,7 @@ Object with `GET` and `POST` Next.js route handlers.
 // app/api/auth/[...path]/route.ts
 import { auth } from '@/lib/auth/server';
 
-export const { GET, POST } = auth.handler();
+export const { GET, POST, PUT, PATCH, DELETE } = auth.handler();
 ```
 
 </TwoColumnLayout.Block>
@@ -187,14 +187,17 @@ The middleware automatically:
 - Redirects unauthenticated users to the login page
 - Refreshes session tokens when needed
 
-### Parameters
+### Parameters (#parameters-2)
 
 <details>
 <summary>View parameters</summary>
 
-| Parameter         | Type   | Required | Default         |
-| ----------------- | ------ | -------- | --------------- |
-| <tt>loginUrl</tt> | string |          | `/auth/sign-in` |
+| Parameter             | Type     | Required | Default                                             |
+| --------------------- | -------- | -------- | --------------------------------------------------- |
+| <tt>loginUrl</tt>     | string   |          | `/auth/sign-in`                                     |
+| <tt>publicRoutes</tt> | string[] |          | `/api/auth` and the Better Auth UI signed-out views |
+
+`publicRoutes` adds routes that don't require a session, on top of the defaults. An entry matches the exact path and its subpaths, so `/pricing` also matches `/pricing/enterprise`. `"/"` matches only `/`. An invalid entry throws. `/auth` itself and `/settings/*` stay protected.
 
 </details>
 
@@ -207,7 +210,8 @@ The middleware automatically:
 import { auth } from '@/lib/auth/server';
 
 export default auth.middleware({
-  loginUrl: '/auth/sign-in'
+  loginUrl: '/auth/sign-in',
+  publicRoutes: ['/']
 });
 
 export const config = {
@@ -232,7 +236,7 @@ Retrieves the current session in Server Components, Server Actions, and API Rout
 
 Server Components that use `auth.getSession()` must export `dynamic = 'force-dynamic'` because session data depends on cookies.
 
-### Returns
+### Returns (#returns-2)
 
 | Field   | Type            | Description                                          |
 | ------- | --------------- | ---------------------------------------------------- |
@@ -301,7 +305,7 @@ export async function GET() {
 
 Sign in with email and password. Use in Server Actions for form-based authentication.
 
-### Parameters
+### Parameters (#parameters-3)
 
 <details>
 <summary>View parameters</summary>
@@ -340,7 +344,7 @@ export async function signIn(formData: FormData) {
 
 Sign in with OAuth provider like Google, GitHub, etc.
 
-### Parameters
+### Parameters (#parameters-4)
 
 <details>
 <summary>View parameters</summary>
@@ -370,7 +374,7 @@ const { data, error } = await auth.signIn.social({
 
 Sign in with email OTP (one-time password). First call `emailOtp.sendVerificationOtp()` to send the code.
 
-### Parameters
+### Parameters (#parameters-5)
 
 <details>
 <summary>View parameters</summary>
@@ -400,7 +404,7 @@ const { data, error } = await auth.signIn.emailOtp({
 
 Create a new user account with email and password.
 
-### Parameters
+### Parameters (#parameters-6)
 
 <details>
 <summary>View parameters</summary>
@@ -454,7 +458,7 @@ export async function signOut() {
 
 Update the current user's profile. Password updates require the password reset flow for security.
 
-### Parameters
+### Parameters (#parameters-7)
 
 <details>
 <summary>View parameters</summary>
@@ -484,7 +488,7 @@ const { data, error } = await auth.updateUser({
 
 Change the current user's password.
 
-### Parameters
+### Parameters (#parameters-8)
 
 <details>
 <summary>View parameters</summary>
@@ -516,7 +520,7 @@ const { data, error } = await auth.changePassword({
 
 Send email verification to the current user.
 
-### Parameters
+### Parameters (#parameters-9)
 
 <details>
 <summary>View parameters</summary>
@@ -559,7 +563,7 @@ const { data, error } = await auth.deleteUser();
 
 Send a one-time password via email. Available when Email OTP authentication is enabled.
 
-### Parameters
+### Parameters (#parameters-10)
 
 <details>
 <summary>View parameters</summary>
@@ -587,7 +591,7 @@ const { data, error } = await auth.emailOtp.sendVerificationOtp({
 
 Verify email with OTP code.
 
-### Parameters
+### Parameters (#parameters-11)
 
 <details>
 <summary>View parameters</summary>
@@ -632,7 +636,7 @@ const { data, error } = await auth.listSessions();
 
 Revoke a specific session by ID.
 
-### Parameters
+### Parameters (#parameters-12)
 
 <details>
 <summary>View parameters</summary>
@@ -675,7 +679,7 @@ const { data, error } = await auth.revokeOtherSessions();
 
 Create a new organization. Available when the organizations plugin is enabled.
 
-### Parameters
+### Parameters (#parameters-13)
 
 <details>
 <summary>View parameters</summary>
@@ -720,7 +724,7 @@ const { data, error } = await auth.organization.list();
 
 Invite a member to an organization.
 
-### Parameters
+### Parameters (#parameters-14)
 
 <details>
 <summary>View parameters</summary>
@@ -752,7 +756,7 @@ const { data, error } = await auth.organization.inviteMember({
 
 List all users. Available for users with admin role.
 
-### Parameters
+### Parameters (#parameters-15)
 
 <details>
 <summary>View parameters</summary>
@@ -782,7 +786,7 @@ const { data, error } = await auth.admin.listUsers({
 
 Ban a user. Available for users with admin role.
 
-### Parameters
+### Parameters (#parameters-16)
 
 <details>
 <summary>View parameters</summary>
@@ -812,7 +816,7 @@ const { data, error } = await auth.admin.banUser({
 
 Set a user's role. Available for users with admin role.
 
-### Parameters
+### Parameters (#parameters-17)
 
 <details>
 <summary>View parameters</summary>
@@ -945,7 +949,7 @@ Complete configuration options for `createNeonAuth()`:
 <TwoColumnLayout.Block>
 
 ```typescript
-import { createNeonAuth } from '@neondatabase/auth/next/server';
+import { createNeonAuth } from '@neon/auth/next/server';
 
 export const auth = createNeonAuth({
   baseUrl: process.env.NEON_AUTH_BASE_URL!,

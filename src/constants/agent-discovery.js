@@ -38,18 +38,18 @@ const MCP_SERVER = {
     title: 'Neon',
     description:
       'Official Neon MCP server for managing Neon projects and Lakebase Postgres databases.',
-    version: '1.0.0',
+    version: '2.0.0',
     websiteUrl: 'https://neon.com/docs/ai/neon-mcp-server',
     repositoryUrl: 'https://github.com/neondatabase/mcp-server-neon',
     icons: [
       {
-        src: 'https://neon.com/brand/neon-logo-light-color.svg',
+        src: 'https://neon.com/brand/neon-logomark-light-color.svg',
         mimeType: 'image/svg+xml',
         sizes: ['any'],
         theme: 'light',
       },
       {
-        src: 'https://neon.com/brand/neon-logo-dark-color.svg',
+        src: 'https://neon.com/brand/neon-logomark-dark-color.svg',
         mimeType: 'image/svg+xml',
         sizes: ['any'],
         theme: 'dark',
@@ -127,6 +127,16 @@ const CLAIMABLE = {
   identityEndpoint: 'https://claimable.neon.tech/v1/agent/identity',
   claimEndpoint: 'https://claimable.neon.tech/v1/agent/identity/claim',
   authMarkdownPath: 'public/auth.md',
+};
+
+// Markdown sitemap (src/app/(docs)/docs/sitemap.md/route.js, built from
+// utils/sitemap-md.js). Lives under /docs/ like /docs/llms.txt; the aliases are
+// the other paths agents probe for it. next.config.js rewrites them to `path`,
+// and the proxy lets all of them through its `.md` 404 check because no file
+// for them exists in public/.
+const SITEMAP_MD = {
+  path: '/docs/sitemap.md',
+  aliases: ['/sitemap.md', '/.well-known/sitemap.md'],
 };
 
 // ── Payload builders ───────────────────────────────────────────────────────
@@ -337,6 +347,7 @@ module.exports = {
   NEON_CLI,
   INTEGRATIONS,
   CLAIMABLE,
+  SITEMAP_MD,
   buildMcpServerCard,
   buildMcpWellKnown,
   buildDocsMcpServerCard,

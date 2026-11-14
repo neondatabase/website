@@ -30,7 +30,14 @@ If you do not have one already, create a Neon project. Save your connection deta
 
 ## Create a Hono project and add dependencies
 
-1.  Create a Hono project if you do not have one. For instructions, see [Quick Start](https://hono.dev/docs/getting-started/basic), in the Hono documentation.
+1.  Create a Hono project if you do not have one. This guide uses the Node.js template:
+
+    ```shell
+    npm create hono@latest my-app -- --template nodejs --pm npm --install
+    cd my-app
+    ```
+
+    For other runtimes, see [Quick Start](https://hono.dev/docs/getting-started/basic) in the Hono documentation.
 
 2.  Add project dependencies using one of the following commands:
 
@@ -38,6 +45,7 @@ If you do not have one already, create a Neon project. Save your connection deta
 
 ```shell
 npm install pg
+npm install -D @types/pg
 ```
 
 ```shell
@@ -55,18 +63,32 @@ npm install @neondatabase/serverless
 Add a `.env` file to your project directory and add your Neon connection string to it. You can find your connection details by clicking **Connect** in the Console nav. For more information, see [Connect from any application](/docs/connect/connect-from-any-app).
 
 ```shell shouldWrap
-DATABASE_URL="postgresql://<user>:<password>@<endpoint_hostname>.neon.tech:<port>/<dbname>?sslmode=require&channel_binding=require"
+DATABASE_URL="postgresql://[user]:[password]@[neon_hostname]/[dbname]?sslmode=require&channel_binding=require"
 ```
+
+The Node.js template's `dev` script (`tsx watch src/index.ts`) doesn't load `.env`. Without it, `DATABASE_URL` is undefined and the drivers try to connect to `localhost`. Update the `dev` and `start` scripts in `package.json` to load the file with Node's `--env-file` option:
+
+```json filename="package.json"
+{
+  "scripts": {
+    "dev": "tsx watch --env-file=.env src/index.ts",
+    "build": "tsc",
+    "start": "node --env-file=.env dist/index.js"
+  }
+}
+```
+
+If you use node-postgres, `pg` 8.23 and later print a `SECURITY WARNING` for `sslmode=require`. Change it to `sslmode=verify-full` to keep the same behavior without the warning.
 
 ## Configure the Postgres client
 
-In your Hono application (for example, in `src/index.ts` or a specific route file), import the driver and use it within your route handlers.
+In your Hono application (for example, in `src/index.ts` or a specific route file), create the database client once at module level and use it in your route handlers.
 
-Here's how you can set up a simple route to query the database:
+Here's how you can set up a simple route to query the database. Replace the contents of `src/index.ts`:
 
 <CodeTabs reverse={true} labels={["node-postgres", "postgres.js", "Neon serverless driver"]}>
 
-```typescript
+```typescript filename="src/index.ts"
 import { Pool } from 'pg';
 import { Hono } from 'hono';
 import { serve } from '@hono/node-server';
@@ -78,31 +100,30 @@ const pool = new Pool({
 });
 
 app.get('/', async (c) => {
-  const client = await pool.connect();
   try {
-    const { rows } = await client.query('SELECT version()');
+    const { rows } = await pool.query('SELECT version()');
     return c.json({ version: rows[0].version });
   } catch (error) {
     console.error('Database query failed:', error);
     return c.text('Failed to connect to database', 500);
-  } finally {
-    client.release();
   }
 });
 
-serve(app);
+serve(app, (info) => {
+  console.log(`Server is running on http://localhost:${info.port}`);
+});
 ```
 
-```typescript
+```typescript filename="src/index.ts"
 import { Hono } from 'hono';
 import postgres from 'postgres';
 import { serve } from '@hono/node-server';
 
 const app = new Hono();
+const sql = postgres(process.env.DATABASE_URL!, { ssl: 'require' });
 
 app.get('/', async (c) => {
   try {
-    const sql = postgres(process.env.DATABASE_URL, { ssl: 'require' });
     const response = await sql`SELECT version()`;
     return c.json({ version: response[0].version });
   } catch (error) {
@@ -111,19 +132,21 @@ app.get('/', async (c) => {
   }
 });
 
-serve(app);
+serve(app, (info) => {
+  console.log(`Server is running on http://localhost:${info.port}`);
+});
 ```
 
-```typescript
+```typescript filename="src/index.ts"
 import { Hono } from 'hono';
 import { serve } from '@hono/node-server';
 import { neon } from '@neondatabase/serverless';
 
 const app = new Hono();
+const sql = neon(process.env.DATABASE_URL!);
 
 app.get('/', async (c) => {
   try {
-    const sql = neon(process.env.DATABASE_URL);
     const response = await sql`SELECT version()`;
     return c.json({ version: response[0]?.version });
   } catch (error) {
@@ -132,12 +155,14 @@ app.get('/', async (c) => {
   }
 });
 
-serve(app);
+serve(app, (info) => {
+  console.log(`Server is running on http://localhost:${info.port}`);
+});
 ```
 
 </CodeTabs>
 
-## 5. Run the app
+## Run the app
 
 Start your Hono development server. You can use the following command:
 
@@ -145,15 +170,15 @@ Start your Hono development server. You can use the following command:
 npm run dev
 ```
 
-Navigate to your application's URL ([localhost:3000](http://localhost:3000)). You should see a JSON response with the PostgreSQL version:
+Navigate to your application's URL ([localhost:3000](http://localhost:3000)). You should see a JSON response with the Postgres version:
 
 ```json shouldWrap
 {
-  "version": "PostgreSQL 17.4 on x86_64-pc-linux-gnu, compiled by gcc (Debian 12.2.0-14) 12.2.0, 64-bit"
+  "version": "PostgreSQL 18.6 (ac70818) on aarch64-unknown-linux-gnu, compiled by gcc (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0, 64-bit"
 }
 ```
 
-> The specific version may vary depending on the PostgreSQL version you are using.
+To run a production build, run `npm run build` and then `npm start`.
 
 </Steps>
 

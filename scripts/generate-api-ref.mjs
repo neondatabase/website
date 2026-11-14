@@ -10,6 +10,8 @@ import { fileURLToPath } from 'node:url';
 
 import { dereference } from '@scalar/openapi-parser';
 
+import { agentHeaderLines } from '../src/constants/agent-directives.js';
+
 import { computeDisplayOrder } from './lib/field-order-config.mjs';
 import { computeFieldGroups } from './lib/field-group-config.mjs';
 import {
@@ -322,12 +324,16 @@ export function toLlmsTxtLine(op) {
   return `${op.method} ${op.path} — ${op.summary} — /docs/reference/api/${op.tag}/${op.id}`;
 }
 
-export function toAgentMarkdown(op) {
+// pageHeader: add the docs index and agent skills lines under the breadcrumb. Per-operation
+// pages turn it on. Per-tag pages reuse this for every operation and carry the header once at
+// the top instead.
+export function toAgentMarkdown(op, { pageHeader = false } = {}) {
   const lines = [];
 
   // Breadcrumb navigation context
   const tagDisplay = op.tagDisplay || op.tag;
   lines.push(`> API Reference / ${tagDisplay} / ${op.summary}`);
+  if (pageHeader) lines.push(...agentHeaderLines());
   lines.push('');
 
   lines.push(`## ${op.method} ${op.path}`);
@@ -462,7 +468,7 @@ function toPerOpMarkdown(op) {
     '---',
     '',
   ].join('\n');
-  return frontmatter + toAgentMarkdown(op);
+  return frontmatter + toAgentMarkdown(op, { pageHeader: true });
 }
 
 // Used only for llms-full.txt — no breadcrumb, H2 heading for easy scanning in a large file.
@@ -651,8 +657,13 @@ export function generateLlmsFull(tagOps) {
 
 // Top-level api.md — served at /docs/reference/api.md via rewrite → /md/docs/reference/api.md
 // Richer than llms.txt: each section links to its per-tag full .md file before listing individual ops.
-function generateApiMd(tagOps) {
+export function generateApiMd(tagOps) {
+  // Docs-style location line: this page is served as /docs/reference/api.md and is included in
+  // the docs llms-full.txt, whose stripNavigationContext() only recognizes this header shape.
   const lines = [
+    '> This page location: API Reference',
+    ...agentHeaderLines(),
+    '',
     '# Neon API Reference',
     '',
     'Base URL: https://console.neon.tech/api/v2',

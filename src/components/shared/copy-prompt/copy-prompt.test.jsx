@@ -10,13 +10,22 @@ vi.mock('next/image', () => ({ default: () => <span data-testid="pattern-image" 
 vi.mock('components/shared/button', () => ({
   default: ({ children, ...props }) => <button {...props}>{children}</button>,
 }));
-vi.mock('components/shared/code-block-wrapper/images/copy.inline.svg', () => ({
+vi.mock('icons/home/copy.inline.svg', () => ({
   default: (props) => <svg data-testid="copy-icon" {...props} />,
 }));
-vi.mock('components/shared/code-block-wrapper/images/check.inline.svg', () => ({
-  default: (props) => <svg data-testid="check-icon" {...props} />,
+vi.mock('icons/home/copied.inline.svg', () => ({
+  default: (props) => <svg data-testid="copied-icon" {...props} />,
 }));
 vi.mock('images/pages/docs/copy-prompt/pattern.svg', () => ({ default: 'pattern.svg' }));
+vi.mock('icons/docs/providers/claude.inline.svg', () => ({
+  default: (props) => <svg data-testid="mark-claude" {...props} />,
+}));
+vi.mock('icons/docs/providers/openai.inline.svg', () => ({
+  default: (props) => <svg data-testid="mark-openai" {...props} />,
+}));
+vi.mock('icons/docs/providers/cursor.inline.svg', () => ({
+  default: (props) => <svg data-testid="mark-cursor" {...props} />,
+}));
 vi.mock('utils/send-gtag-event', () => ({ default: vi.fn() }));
 
 const setScrollHeight = (value) => {
@@ -59,7 +68,7 @@ describe('CopyPrompt (agent variant)', () => {
     fireEvent.click(copyButton);
 
     expect(writeText).toHaveBeenCalledWith('Build me a project.');
-    await waitFor(() => expect(copyButton).toHaveTextContent('Copied'));
+    await waitFor(() => expect(copyButton).toHaveTextContent('Prompt copied!'));
   });
 
   it('does not render an expand control for a short prompt', () => {
@@ -127,6 +136,27 @@ describe('CopyPrompt (agent variant)', () => {
     expect(screen.getByText('Agent task')).toBeInTheDocument();
     expect(screen.getByText('Run this agent prompt.')).toHaveClass('font-mono');
   });
+
+  it('shows the provider marks and labels the copy button for assistive tech', () => {
+    setScrollHeight(50);
+
+    render(
+      <CopyPrompt variant="agent" title="Marked task">
+        Copy me.
+      </CopyPrompt>
+    );
+
+    expect(screen.getByTestId('mark-claude')).toBeInTheDocument();
+    expect(screen.getByTestId('mark-openai')).toBeInTheDocument();
+    expect(screen.getByTestId('mark-cursor')).toBeInTheDocument();
+    // The agent-variant copy button now carries an explicit aria-label.
+    const copyButton = screen.getByRole('button', { name: 'Copy prompt' });
+    expect(copyButton).toBeInTheDocument();
+    // Dark pill matching the docs-home composer, with the marks standing in for
+    // the copy affordance (no trailing copy icon).
+    expect(copyButton).toHaveClass('bg-black-new', 'dark:bg-white');
+    expect(screen.queryByTestId('copy-icon')).not.toBeInTheDocument();
+  });
 });
 
 describe('CopyPrompt (legacy mode)', () => {
@@ -149,6 +179,20 @@ describe('CopyPrompt (legacy mode)', () => {
     expect(screen.getByRole('button', { name: /copy prompt/i })).toBeInTheDocument();
   });
 
+  it('renders the dark pill with provider marks and no copy icon', async () => {
+    render(<CopyPrompt src="/prompts/example.md" />);
+
+    await waitFor(() => expect(global.fetch).toHaveBeenCalledWith('/prompts/example.md'));
+
+    const copyButton = screen.getByRole('button', { name: 'Copy prompt' });
+    // Same dark pill as the agent-variant button and the docs-home composer pill.
+    expect(copyButton).toHaveClass('bg-black-new', 'rounded-full', 'dark:bg-white');
+    // The provider marks stand in for the copy affordance; no copy/copied icon.
+    expect(screen.getByTestId('mark-claude')).toBeInTheDocument();
+    expect(screen.queryByTestId('copy-icon')).not.toBeInTheDocument();
+    expect(screen.queryByTestId('copied-icon')).not.toBeInTheDocument();
+  });
+
   it('keeps the legacy layout when title and description are provided', async () => {
     render(
       <CopyPrompt
@@ -163,5 +207,25 @@ describe('CopyPrompt (legacy mode)', () => {
     expect(screen.getByText('Copy into your AI assistant.')).toBeInTheDocument();
     expect(screen.queryByText('AI prompt: Get started with the Neon API')).not.toBeInTheDocument();
     expect(screen.getByTestId('pattern-image')).toBeInTheDocument();
+  });
+
+  it('copies the loaded prompt and flips to the Prompt copied confirmation', async () => {
+    const writeText = vi.fn().mockResolvedValue(undefined);
+    Object.defineProperty(navigator, 'clipboard', {
+      configurable: true,
+      value: { writeText },
+    });
+    render(<CopyPrompt src="/prompts/example.md" />);
+    await waitFor(() => expect(global.fetch).toHaveBeenCalledWith('/prompts/example.md'));
+
+    fireEvent.click(screen.getByRole('button', { name: 'Copy prompt' }));
+
+    await waitFor(() =>
+      expect(screen.getByRole('button', { name: 'Prompt copied' })).toBeVisible()
+    );
+    expect(writeText).toHaveBeenCalledWith('# Prompt body');
+    // The provider marks stand in for the copy affordance; no copy/copied icon.
+    expect(screen.queryByTestId('copied-icon')).not.toBeInTheDocument();
+    expect(screen.queryByTestId('copy-icon')).not.toBeInTheDocument();
   });
 });

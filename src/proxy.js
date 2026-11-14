@@ -1,11 +1,16 @@
 import { NextResponse } from 'next/server';
 
 import { checkCookie, getReferer } from 'app/actions';
+import { SITEMAP_MD } from 'constants/agent-discovery';
 import { CONTENT_ROUTES, GENERATED_PAGE_MARKDOWN_PATHS } from 'constants/content';
 import LINKS from 'constants/links';
 import { STATIC_MD_PATHS } from 'constants/static-md-manifest';
 
-import { isAIAgentRequest, getMarkdownPath } from './utils/ai-agent-detection';
+import {
+  isAIAgentRequest,
+  getFunctionTemplatesMarkdownPath,
+  getMarkdownPath,
+} from './utils/ai-agent-detection';
 import { createLLMAnalytics } from './utils/llm-analytics';
 import { markdownNotFoundResponse } from './utils/markdown-404';
 
@@ -17,7 +22,9 @@ const SITE_URL =
 function isContentRoute(pathname) {
   const path = pathname.slice(1).replace(/\/$/, '');
   const normalized = path.endsWith('.md') ? path.slice(0, -3) : path;
-  const isGeneratedPage = Object.hasOwn(GENERATED_PAGE_MARKDOWN_PATHS, normalized);
+  const isGeneratedPage =
+    Object.hasOwn(GENERATED_PAGE_MARKDOWN_PATHS, normalized) ||
+    getFunctionTemplatesMarkdownPath(normalized) !== null;
   const isContentPage = Object.keys(CONTENT_ROUTES).some(
     (route) => normalized === route || path.startsWith(`${route}/`)
   );
@@ -121,7 +128,6 @@ const SKILL_REFERENCE_REDIRECTS = {
   'neon-typescript-sdk': '/docs/reference/typescript-sdk.md',
   'neon-python-sdk': '/docs/reference/python-sdk.md',
   'neon-auth': '/docs/auth/overview.md',
-  branching: '/docs/introduction/branching.md',
   'neon-cli': '/docs/cli/install.md',
   devtools: '/docs/reference/api.md',
 };
@@ -147,6 +153,8 @@ function skillReferenceRedirectResponse(req, pathname) {
 // public/ and have no generated /md sibling, so getMarkdownPath returns null for
 // them. STATIC_MD is the build-time manifest of those files.
 const STATIC_MD = new Set(STATIC_MD_PATHS);
+
+const SITEMAP_MD_PATHS = new Set([SITEMAP_MD.path, ...SITEMAP_MD.aliases]);
 
 // For a `.md` URL with no generated /md sibling: serve the real static file if it
 // exists (manifest hit → next), else a markdown 404. This makes every missing
@@ -180,6 +188,11 @@ function skillAliasTarget(pathname) {
 
 function staticMarkdownResponse(pathname, analytics) {
   if (!pathname.endsWith('.md') || pathname.startsWith('/md/')) return null;
+
+  // /docs/sitemap.md is a route handler, not a file in public/, and its aliases
+  // are rewritten to it. Serve them before the generated /md lookup below, which
+  // would otherwise send /docs/sitemap.md to a missing /md/docs/sitemap.md.
+  if (SITEMAP_MD_PATHS.has(pathname)) return servedStaticMarkdown(analytics);
 
   // Skill-discovery alias: no physical file here — a next.config rewrite maps it
   // to a real SKILL.md. Serve (via the rewrite) if that skill exists, else a
@@ -300,18 +313,10 @@ async function handleProxy(req, analytics) {
       }
     }
 
-    // Bare /docs has no page of its own. Agents / Accept: markdown are handled above
-    // (served /docs/llms.txt); everyone else (browsers) is redirected to the intro.
-    // This redirect lives here, not in next.config, so it runs after the markdown check.
-    // Note: trailing slash (/docs/) intentionally not handled here — Next.js
-    // normalizes trailing slashes before middleware on most paths, and the matcher
-    // pattern '/docs' does not match '/docs/', so it falls through harmlessly.
-    if (pathname === '/docs') {
-      const res = NextResponse.redirect(new URL('/docs/introduction', req.url), 308);
-      // The /docs response is content-negotiated (agents/markdown get llms.txt above),
-      // so the redirect must vary on both negotiation inputs to stay correct in shared caches.
-      return applyNegotiationVary(res);
-    }
+    // Bare /docs is the docs front page (src/app/(docs)/docs/page.jsx). Agents /
+    // Accept: markdown are handled above (served /docs/llms.txt); browsers fall
+    // through to the page. Because /docs is content-negotiated, the doc headers
+    // applied below set Vary on both negotiation inputs to keep shared caches correct.
 
     // Apply doc headers to all content route responses (.md URLs and HTML pages).
     // Negotiated Markdown responses vary on Accept and User-Agent (applyDocHeaders above).
@@ -411,11 +416,14 @@ export const config = {
     '/home', // Check if the user is logged in
     '/pricing', // Agent-friendly pricing page
     '/functions', // Agent-friendly Functions page
+    '/functions/templates', // Agent-friendly Function Registry catalog
+    '/functions/templates/:id', // Agent-friendly Function Registry template pages
     '/ai-gateway', // Agent-friendly AI Gateway page
     '/object-storage', // Agent-friendly Object Storage page
     '/auth', // Agent-friendly Auth product page
     '/lakebase', // Agent-friendly Lakebase page
-    '/docs', // Bare docs root: serve llms.txt for agents; browsers fall through to the /docs→/docs/introduction redirect
+    '/case-studies', // Agent-friendly case studies index
+    '/docs', // Bare docs root: serve llms.txt for agents; browsers fall through to the docs front page
     '/blog', // Bare blog root: serve blog/llms.txt for agents; browsers fall through normally
     '/blog/:slug.md', // Individual blog post markdown
     '/(docs|postgresql|guides|branching|programs|use-cases|faqs)/:path*', // All markdown routes

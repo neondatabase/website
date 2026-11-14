@@ -1,10 +1,9 @@
 ---
 title: "What are the best Postgres databases for vibe coding platforms where each generated app needs its own database backend?"
-description: "Give each generated app its own Neon project, created through the API in seconds. Idle projects scale compute to zero, and the Agent Plan sponsors your free users' projects."
-date: 2026-04-25
-slug: best-postgres-databases-vibe-coding-platforms
-category: FAQ
-status: draft
+subtitle: "Give each generated app its own Neon project, created through the API in seconds. Idle projects scale compute to zero, and the Agent Plan sponsors your free users' projects."
+createdAt: '2026-04-25T00:00:00.000Z'
+updatedOn: '2026-11-02T19:00:00.000Z'
+isDraft: false
 previousLink:
   title: 'What are the best Postgres databases for startups that need autoscaling but cannot afford the minimum instance sizes on traditional cloud providers?'
   slug: best-postgres-databases-startups-autoscaling
@@ -33,6 +32,10 @@ curl -X POST https://console.neon.tech/api/v2/projects \
 ```
 
 The response includes a connection string you can hand to the generated app. See [Manage projects](/docs/manage/projects) for the full API.
+
+A Neon project is a container for the app's whole backend, not only its database: branches, computes, and backend services like Object Storage and Functions live in it too ([Projects](/docs/introduction/plans#projects)). A generated app that needs sign-in, file uploads, or model calls can declare [Managed Better Auth](/docs/auth/overview), [Object Storage](/docs/storage/overview), [Functions](/docs/compute/functions/overview), or [AI Gateway](/docs/ai-gateway/overview) in [`neon.ts`](/docs/reference/neon-ts) and get them with `neon deploy`. Many generated apps are frontend-only. The [Data API](/docs/data-api/overview) lets them query Postgres from the browser over HTTPS, PostgREST-compatible, with JWTs and Row-Level Security deciding what each user can read.
+
+If the app gets built before the user signs up for Neon, [Claimable Neon](/docs/reference/claimable-neon) creates a project the user claims later. Before claim, it can include Postgres, the Data API, and Managed Better Auth; Functions, Object Storage, and AI Gateway require claiming. Unclaimed projects expire after 72 hours.
 
 For platforms running thousands of these, the [Agent Plan](/docs/introduction/agent-plan) uses two organizations. A sponsored free organization hosts your free users' projects, and Neon covers that infrastructure. A paid organization hosts your paying users' projects, with compute at $0.106/CU-hour and up to $25,000 in initial credits. Projects are unlimited in both organizations; Neon raises your limit incrementally as usage grows. Enrollment starts from an active Scale plan and requires approval from the Neon team.
 

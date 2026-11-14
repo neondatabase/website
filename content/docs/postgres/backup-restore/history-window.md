@@ -16,6 +16,8 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/introduction/restore-window
   - /docs/introduction/history-window
+  - /docs/introduction/history-retention
+  - /docs/manage/history-window
 updatedOn: '2026-08-24T17:32:35.016Z'
 ---
 
@@ -72,7 +74,6 @@ Changing the history window affects **all branches** in your project.
 1. Select your project.
 2. Go to **Settings** > **Postgres**.
 
-
 3. Under **History window**, use the slider to choose how long to keep change history (used for instant restore, Time Travel, and branching from past states). You can open **history storage** from the description on that page for details.
 4. Click **Save**.
 
@@ -84,7 +85,7 @@ Use the `history_retention_seconds` property in the project settings:
 
 ```bash
 curl -X PATCH 'https://console.neon.tech/api/v2/projects/{project_id}' \
-  -H 'Authorization: Bearer $NEON_API_KEY' \
+  -H "Authorization: Bearer $NEON_API_KEY" \
   -H 'Content-Type: application/json' \
   -d '{
     "project": {

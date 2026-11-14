@@ -245,7 +245,7 @@ npm install postgres async-retry dotenv
 
 ```javascript shouldWrap
 require('dotenv').config();
-const postgres = require('postgres');
+const postgres = require('postgres').default; // postgres.js 4+ is ESM-only
 const retry = require('async-retry');
 
 const sql = postgres(process.env.DATABASE_URL, {

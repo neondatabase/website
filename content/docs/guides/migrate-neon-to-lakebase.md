@@ -1,9 +1,8 @@
 ---
 title: Migrate Neon to Lakebase
-subtitle: End-to-end migration from Neon Serverless Postgres to Databricks Lakebase Postgres
+subtitle: End-to-end migration from Neon to Lakebase Postgres on Databricks
 summary: >-
-  Step-by-step migration from Neon Serverless Postgres to Databricks Lakebase
-  Postgres using pg_dump and pg_restore, covering the Neon-specific ownership
+  Step-by-step migration from Neon to Lakebase Postgres on Databricks using pg_dump and pg_restore, covering the Neon-specific ownership
   and ACL mismatch that requires --no-owner and --no-acl flags during restore.
   Use this guide when moving a Neon database to Lakebase. For a lower-downtime
   migration, Lakebase can also subscribe to a Neon publication using logical
@@ -28,6 +27,7 @@ To replicate data from Neon to the **Databricks Lakehouse** instead, see [Replic
 - A Databricks account with permission to create **Lakebase** resources in the target region.
 - **Postgres major versions** aligned when possible between Neon and Lakebase.
 - `pg_dump` and `pg_restore` on a **stable** machine. For install instructions, see [Backups with pg_dump](/docs/manage/backup-pg-dump).
+- A `pg_dump` version that matches or is newer than your Neon Postgres version. New Neon projects run Postgres 18, and `pg_dump` 16 and 17 refuse to dump a Postgres 18 server.
 
 <Admonition type="important">
 Lakebase **OAuth** database tokens expire about every hour ([OAuth token authentication](https://docs.databricks.com/aws/en/oltp/projects/authentication#oauth-token-authentication)), so for **`pg_restore`** use a **native Postgres password role** and the connection string from the **Connect** modal (the URI includes the password).

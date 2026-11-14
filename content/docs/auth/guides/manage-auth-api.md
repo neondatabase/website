@@ -37,7 +37,7 @@ Send a `POST` request to enable Managed Better Auth on a branch:
 
 ```bash
 curl -X POST 'https://console.neon.tech/api/v2/projects/{project_id}/branches/{branch_id}/auth' \
-  -H 'Authorization: Bearer $NEON_API_KEY' \
+  -H "Authorization: Bearer $NEON_API_KEY" \
   -H 'Content-Type: application/json' \
   -d '{"auth_provider": "better_auth"}'
 ```
@@ -86,7 +86,7 @@ Retrieve the current Managed Better Auth configuration for a branch:
 
 ```bash
 curl -X GET 'https://console.neon.tech/api/v2/projects/{project_id}/branches/{branch_id}/auth' \
-  -H 'Authorization: Bearer $NEON_API_KEY'
+  -H "Authorization: Bearer $NEON_API_KEY"
 ```
 
 Response (200 OK):
@@ -111,7 +111,7 @@ Update auth settings for a branch. Currently supports changing the application n
 
 ```bash
 curl -X PATCH 'https://console.neon.tech/api/v2/projects/{project_id}/branches/{branch_id}/auth/config' \
-  -H 'Authorization: Bearer $NEON_API_KEY' \
+  -H "Authorization: Bearer $NEON_API_KEY" \
   -H 'Content-Type: application/json' \
   -d '{"name": "My App"}'
 ```
@@ -136,7 +136,7 @@ Send a `DELETE` request to disable Managed Better Auth on a branch:
 
 ```bash
 curl -X DELETE 'https://console.neon.tech/api/v2/projects/{project_id}/branches/{branch_id}/auth' \
-  -H 'Authorization: Bearer $NEON_API_KEY' \
+  -H "Authorization: Bearer $NEON_API_KEY" \
   -H 'Content-Type: application/json' \
   -d '{"delete_data": true}'
 ```
@@ -173,7 +173,7 @@ The Neon API also provides endpoints for managing auth configuration at the bran
 | `/config`                 | PATCH                    | Update auth configuration (application name)                                                     |
 | `/send_test_email`        | POST                     | Send a test email to verify email configuration                                                  |
 
-For full request/response details on these endpoints, see the [interactive API Reference](/docs/reference/api). For the OAuth provider (beta), see the reference for [retrieving](/docs/reference/api/auth/get-neon-auth-o-auth-provider-plugin) and [updating](/docs/reference/api/auth/update-neon-auth-o-auth-provider-plugin) the plugin configuration, and for [listing](/docs/reference/api/auth/list-neon-auth-o-auth-clients), [creating](/docs/reference/api/auth/create-neon-auth-o-auth-client), [retrieving](/docs/reference/api/auth/get-neon-auth-o-auth-client), [updating](/docs/reference/api/auth/update-neon-auth-o-auth-client), [deleting](/docs/reference/api/auth/delete-neon-auth-o-auth-client), and [rotating the secret of](/docs/reference/api/auth/rotate-neon-auth-o-auth-client-secret) OAuth clients.
+For full request/response details on these endpoints, see the [interactive API Reference](/docs/reference/api). For the OAuth provider, see the reference for [retrieving](/docs/reference/api/auth/get-neon-auth-o-auth-provider-plugin) and [updating](/docs/reference/api/auth/update-neon-auth-o-auth-provider-plugin) the plugin configuration, and for [listing](/docs/reference/api/auth/list-neon-auth-o-auth-clients), [creating](/docs/reference/api/auth/create-neon-auth-o-auth-client), [retrieving](/docs/reference/api/auth/get-neon-auth-o-auth-client), [updating](/docs/reference/api/auth/update-neon-auth-o-auth-client), [deleting](/docs/reference/api/auth/delete-neon-auth-o-auth-client), and [rotating the secret of](/docs/reference/api/auth/rotate-neon-auth-o-auth-client-secret) OAuth clients.
 
 <Admonition type="tip" title="TypeScript SDK">
 You can also manage Managed Better Auth using the [Neon TypeScript SDK](/docs/reference/typescript-sdk).

@@ -4,6 +4,7 @@ subtitle: 'Define live SQL queries that you can subscribe to.'
 summary: >-
   Define live queries in your backend with raw SQL or Drizzle, fill in their parameters from the authenticated request, and seal them so clients can subscribe without being able to read or change them.
 enableTableOfContents: true
+updatedOn: '2026-10-30T15:07:38.000Z'
 ---
 
 Realtime works by defining and [subscribing](./subscribing) to live SQL queries. Queries are designed to be [defined&nbsp;securely](#defining-live-queries) in your backend code and [subscribed&#8209;to&nbsp;safely](#exposing-queries) in your frontend.
@@ -33,7 +34,7 @@ npm install @neon/realtime @neon/realtime-drizzle
 Install the [Managed Better Auth](/docs/auth/overview) client for the frontend:
 
 ```bash filename="Terminal"
-npm install @neondatabase/auth
+npm install @neon/auth
 ```
 
 Add a `neon.ts` file that enables Managed Better Auth and [Realtime](../quickstart#enable-realtime) on your branch:
@@ -141,6 +142,8 @@ So, for example, you can't `SELECT` over updated rows and you can't use function
 ### Table requirements
 
 Tables need a [stable replica identity](https://www.postgresql.org/docs/current/sql-altertable.html#SQL-ALTERTABLE-REPLICA-IDENTITY). If your tables have a primary key, they're fine.
+
+Tables can't have [row-level security](/docs/guides/row-level-security) enabled. A live query on a table with RLS is rejected: the subscription moves to `error` with the code `upstream_rejected`. With [debug mode](./subscribing#show-full-database-errors) on, the message says the table has row-level security enabled. Filter rows in the query instead, as shown in [Authorization](#authorization).
 
 <Callout title="Optional: REPLICA IDENTITY FULL">
 Setting `REPLICA IDENTITY FULL` can make live queries marginally faster, at the cost of writing the whole old row to the Postgres WAL on every update and delete. That may save Realtime a lookup when it processes those changes. If latency matters for a write-heavy table, benchmark both settings with your own workload before you switch.

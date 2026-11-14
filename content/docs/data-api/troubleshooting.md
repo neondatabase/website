@@ -9,7 +9,7 @@ summary: >-
   rows, stale schema cache hiding new tables, and OpenAPI spec "Entry not
   found" errors.
 enableTableOfContents: true
-updatedOn: '2026-10-09T09:41:16.035Z'
+updatedOn: '2026-10-29T21:02:34.200Z'
 ---
 
 <InfoBlock>
@@ -52,7 +52,8 @@ curl -X POST "https://console.neon.tech/api/v2/projects/${projectId}/branches/${
   -H "Authorization: Bearer $NEON_API_KEY" \
   -d '{
     "database": {
-      "name": "your_database_name"
+      "name": "your_database_name",
+      "owner_name": "your_role_name"
     }
   }'
 ```
@@ -61,7 +62,7 @@ curl -X POST "https://console.neon.tech/api/v2/projects/${projectId}/branches/${
 
 If you've configured a **JWT Audience** value in the Data API but your tokens are being rejected, the `aud` claim in your JWT may not match the configured value.
 
-### Fix
+### Fix (#fix-2)
 
 1. Decode your JWT token at [jwt.io](https://jwt.io) to inspect the `aud` claim
 2. Ensure the `aud` value in your token exactly matches what you've configured in the Data API
@@ -108,15 +109,16 @@ For step-by-step instructions, see [Testing with Managed Better Auth](/docs/data
 {"code":"42501","detail":null,"hint":null,"message":"permission denied for table your_table_name"}
 ```
 
-### Why this happens
+### Why this happens (#why-this-happens-2)
 
-The `authenticated` role doesn't have GRANT permissions on the table. This commonly occurs when:
+The role the request runs as doesn't have GRANT permissions on the table. This commonly occurs when:
 
 - The table was created before the Data API was enabled
 - The table was created after enabling the Data API, but default privileges weren't applied
 - You disabled the "Grant public schema access" option when enabling the Data API
+- You're using a custom authentication provider and the token has no `role` claim. The request then runs as the `anonymous` role, which has no table grants by default, so it can't read the table even though `authenticated` can.
 
-### Fix
+### Fix (#fix-3)
 
 Grant the `authenticated` role access to the table:
 
@@ -134,6 +136,8 @@ ALTER DEFAULT PRIVILEGES IN SCHEMA public
 GRANT SELECT, UPDATE, INSERT, DELETE ON TABLES TO authenticated;
 ```
 
+If you use a custom authentication provider, also confirm the token carries a `role` claim that names a granted role. To use the `authenticated` role, issue `"role": "authenticated"`. If the claim names a custom role, see [Custom roles](/docs/data-api/access-control#3-custom-roles) for the grants it needs. See also [Required JWT claims](/docs/data-api/custom-authentication-providers#required-jwt-claims).
+
 ## I can see all rows in my table
 
 If authenticated users can see all rows in a table regardless of ownership, Row-Level Security (RLS) is likely disabled on that table.
@@ -144,7 +148,7 @@ In the Neon Console, go to **Postgres database** > **Data API**. If a table has 
 
 > "table_name has RLS disabled. All authenticated users can view all rows in this table(s)."
 
-### Fix
+### Fix (#fix-4)
 
 1. Click the **Enable RLS** button in the Console, or run:
 
@@ -165,11 +169,11 @@ For more details, see [Row-Level Security](/docs/data-api/access-control#layer-2
 
 If you've enabled RLS but queries return no data, you likely haven't created any policies yet.
 
-### Why this happens
+### Why this happens (#why-this-happens-3)
 
 When RLS is enabled on a table, all access is blocked by default until you create policies that grant access. This is a security feature; it ensures data is protected even if you forget to add policies.
 
-### Fix
+### Fix (#fix-5)
 
 Create policies that define who can access what data. For example:
 
@@ -193,11 +197,11 @@ See [Access control & security](/docs/data-api/access-control) for more examples
 {"message":"Entry 'openapi.json' not found"}
 ```
 
-### Why this happens
+### Why this happens (#why-this-happens-4)
 
 The OpenAPI schema feature is disabled in your Data API configuration.
 
-### Fix
+### Fix (#fix-6)
 
 1. Go to **Postgres database** > **Data API** in the Neon Console
 2. Open the **Settings** tab
@@ -208,7 +212,7 @@ The OpenAPI schema feature is disabled in your Data API configuration.
 
 If you're getting authentication errors when trying to access the OpenAPI spec, remember that it requires a valid JWT token like any other Data API request.
 
-### Fix
+### Fix (#fix-7)
 
 Include the `Authorization` header with a valid JWT:
 
@@ -223,11 +227,11 @@ To get a JWT token for testing, see [Testing with Managed Better Auth](/docs/dat
 
 If you've created a new table but the Data API doesn't recognize it, or the OpenAPI spec doesn't include it, the schema cache may be stale.
 
-### Why this happens
+### Why this happens (#why-this-happens-5)
 
 The Data API caches your database schema for performance. When you create or modify tables, the cache doesn't automatically update.
 
-### Fix
+### Fix (#fix-8)
 
 1. Go to **Postgres database** > **Data API** in the Neon Console
 2. Click the **Refresh schema cache** button
@@ -246,11 +250,11 @@ You'll need to refresh the schema cache whenever you:
 {"message":"JWT token has expired (exp=...)"}
 ```
 
-### Why this happens
+### Why this happens (#why-this-happens-6)
 
 JWT tokens have a limited lifespan (typically around 15 minutes). Once expired, they can no longer be used to authenticate requests.
 
-### Fix
+### Fix (#fix-9)
 
 Sign in again to get a fresh token. If you're using Managed Better Auth, call `POST /sign-in/email` in the Auth API reference UI, then call `GET /get-session` and copy the new JWT from the `Set-Auth-Jwt` response header.
 

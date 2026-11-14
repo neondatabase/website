@@ -1,4 +1,6 @@
 const authPageContent = {
+  // Bump when this page's copy changes; shown on the page and in its Markdown version.
+  updatedOn: '2026-10-14',
   slug: 'auth',
   pageLabel: 'Auth',
   backendServicesTitle: 'Your auth branches with everything else.',

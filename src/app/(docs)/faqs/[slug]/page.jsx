@@ -3,6 +3,7 @@ import { notFound } from 'next/navigation';
 
 import Post from 'components/pages/doc/post';
 import ProgrammaticCTA from 'components/pages/faqs/programmatic-cta';
+import JsonLd from 'components/shared/json-ld';
 import VERCEL_URL from 'constants/base';
 import { FAQS_DIR_PATH } from 'constants/content';
 import { FAQS_BASE_PATH } from 'constants/faqs';
@@ -28,7 +29,7 @@ export async function generateMetadata(props) {
   if (!post) return notFound();
 
   const {
-    data: { title, subtitle },
+    data: { title, subtitle, createdAt, updatedOn },
   } = post;
 
   const encodedTitle = Buffer.from(title).toString('base64');
@@ -41,6 +42,8 @@ export async function generateMetadata(props) {
     rssPathname: null,
     type: 'article',
     category: 'FAQs',
+    publishedTime: createdAt,
+    modifiedTime: updatedOn,
   });
 }
 
@@ -58,20 +61,27 @@ const FaqPost = async (props) => {
   const tableOfContents = getTableOfContents(content);
   const jsonLd = {
     '@context': 'https://schema.org',
-    '@type': 'Article',
-    headline: data.title,
-    author: {
+    '@type': 'FAQPage',
+    url: `${VERCEL_URL}${LINKS.faqs}/${slug}`,
+    datePublished: data.createdAt,
+    dateModified: data.updatedOn,
+    publisher: {
       '@type': 'Organization',
       name: 'Neon',
+    },
+    mainEntity: {
+      '@type': 'Question',
+      name: data.title,
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: data.subtitle,
+      },
     },
   };
 
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
+      <JsonLd data={jsonLd} />
       <Post
         content={content}
         data={data}

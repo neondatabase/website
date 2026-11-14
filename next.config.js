@@ -2,6 +2,7 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
   enabled: process.env.ANALYZE === 'true',
 });
 
+const { SITEMAP_MD } = require('./src/constants/agent-discovery');
 const { CONTENT_ROUTES, GENERATED_PAGE_MARKDOWN_PATHS } = require('./src/constants/content');
 const { getAllPosts, getAllChangelogs } = require('./src/utils/api-docs');
 const generateChangelogPath = require('./src/utils/generate-changelog-path');
@@ -252,6 +253,11 @@ const defaultConfig = {
 
     return [
       {
+        source: '/docs/guides/cloudflare_sandbox_neon_branching.png',
+        destination: '/docs/guides/cloudflare_sandbox_neon_branching.jpg',
+        permanent: true,
+      },
+      {
         source: '/pg-us-conf-raffle',
         destination: '/pg-eu-conf-raffle',
         permanent: true,
@@ -305,7 +311,7 @@ const defaultConfig = {
       },
       {
         source: '/backend',
-        destination: '/docs/introduction#products',
+        destination: '/docs',
         permanent: false,
       },
       {
@@ -336,6 +342,27 @@ const defaultConfig = {
       {
         source: '/burningmonk',
         destination: '/?ref=tbm-p',
+        permanent: true,
+      },
+      // Function Registry templates moved from docs to the /functions/templates marketing pages
+      {
+        source: '/docs/compute/functions/registry/templates',
+        destination: '/functions/templates',
+        permanent: true,
+      },
+      {
+        source: '/docs/compute/functions/registry/templates/:id',
+        destination: '/functions/templates/:id',
+        permanent: true,
+      },
+      {
+        source: '/docs/compute/functions/registry-templates',
+        destination: '/functions/templates',
+        permanent: true,
+      },
+      {
+        source: '/docs/compute/functions/registry-templates/:id',
+        destination: '/functions/templates/:id',
         permanent: true,
       },
       // Branching page redirects — old slugs deleted in PR #4374 (Jan 2026)
@@ -2244,10 +2271,56 @@ const defaultConfig = {
         destination: '/docs/connect/connection-errors',
         permanent: true,
       },
-      // NOTE: bare `/docs` is intentionally NOT redirected here. The middleware
-      // (src/proxy.js) owns it: agents / Accept: markdown get /docs/llms.txt, and
-      // browsers are redirected to /docs/introduction. A next.config redirect would
-      // run before middleware and intercept the markdown case.
+      // NOTE: bare `/docs` is the docs front page (src/app/(docs)/docs/page.jsx) and
+      // is intentionally NOT redirected here. The middleware (src/proxy.js) answers
+      // agents / Accept: markdown with /docs/llms.txt; browsers get the page.
+      // The former docs home moved to `/docs`. Only the exact path redirects:
+      // `/docs/introduction/*` subpages are real pages and keep their URLs.
+      {
+        source: '/docs/introduction',
+        destination: '/docs',
+        permanent: true,
+      },
+      // Its markdown copy goes to the markdown form of the front page (/docs.md,
+      // rewritten to the curated /docs/llms.txt index below). The proxy's
+      // resolveMarkdownRedirect would infer this too, but an explicit rule is
+      // deterministic, unit-tested, and skips its probe fetches.
+      {
+        source: '/docs/introduction.md',
+        destination: '/docs.md',
+        permanent: true,
+      },
+      // The former Get started section landing was folded into the `/docs` home
+      // (the home IS the Get started overview now). Only the exact path
+      // redirects: `/docs/get-started/*` subpages are real pages and keep their
+      // URLs.
+      {
+        source: '/docs/get-started',
+        destination: '/docs',
+        permanent: true,
+      },
+      // Former redirectFrom entries of content/docs/introduction.md, pointed
+      // straight at the new front page so they don't double-hop.
+      {
+        source: '/guides/neon-azure-integration',
+        destination: '/docs',
+        permanent: true,
+      },
+      {
+        source: '/guides/azure-service-connector',
+        destination: '/docs',
+        permanent: true,
+      },
+      {
+        source: '/guides/azure-todo-static-web-app',
+        destination: '/docs',
+        permanent: true,
+      },
+      {
+        source: '/guides/azure-functions-referral-system',
+        destination: '/docs',
+        permanent: true,
+      },
       {
         source: '/docs/postgres',
         destination: '/docs/postgres/index',
@@ -2263,11 +2336,12 @@ const defaultConfig = {
       // Destinations are taken from `content/docs/navigation.yaml`: the section's
       // own landing slug where the nav declares one, otherwise its first child.
       // `/docs/guides` and `/docs/workflows` are deliberately absent: neither has a
-      // single landing page in the nav. `/docs/cli`, `/docs/changelog` and
-      // `/docs/introduction` are absent because they have real root pages.
+      // single landing page in the nav. `/docs/cli` and `/docs/changelog` are
+      // absent because they have real root pages; `/docs/get-started` and
+      // `/docs/introduction` are absent because they redirect to `/docs` (above).
       {
         source: '/docs/ai',
-        destination: '/docs/ai/ai-agents-tools',
+        destination: '/docs/ai/agent-setup',
         permanent: true,
       },
       {
@@ -2308,11 +2382,6 @@ const defaultConfig = {
       {
         source: '/docs/extensions',
         destination: '/docs/extensions/pg-extensions',
-        permanent: true,
-      },
-      {
-        source: '/docs/get-started',
-        destination: '/docs/introduction',
         permanent: true,
       },
       {
@@ -2571,6 +2640,57 @@ const defaultConfig = {
         destination: '/auth.md',
         permanent: true,
       },
+      // Retired skills folded into neon-postgres (branching and egress references).
+      {
+        source: '/docs/ai/skills/neon-postgres-branches/:path*',
+        destination: '/docs/ai/skills/neon-postgres/SKILL.md',
+        permanent: true,
+      },
+      {
+        source: '/.well-known/agent-skills/neon-postgres-branches/:path*',
+        destination: '/docs/ai/skills/neon-postgres/SKILL.md',
+        permanent: true,
+      },
+      {
+        source: '/.well-known/skills/neon-postgres-branches/:path*',
+        destination: '/docs/ai/skills/neon-postgres/SKILL.md',
+        permanent: true,
+      },
+      {
+        source: '/docs/.well-known/agent-skills/neon-postgres-branches/:path*',
+        destination: '/docs/ai/skills/neon-postgres/SKILL.md',
+        permanent: true,
+      },
+      {
+        source: '/docs/.well-known/skills/neon-postgres-branches/:path*',
+        destination: '/docs/ai/skills/neon-postgres/SKILL.md',
+        permanent: true,
+      },
+      {
+        source: '/docs/ai/skills/neon-postgres-egress-optimizer/:path*',
+        destination: '/docs/ai/skills/neon-postgres/SKILL.md',
+        permanent: true,
+      },
+      {
+        source: '/.well-known/agent-skills/neon-postgres-egress-optimizer/:path*',
+        destination: '/docs/ai/skills/neon-postgres/SKILL.md',
+        permanent: true,
+      },
+      {
+        source: '/.well-known/skills/neon-postgres-egress-optimizer/:path*',
+        destination: '/docs/ai/skills/neon-postgres/SKILL.md',
+        permanent: true,
+      },
+      {
+        source: '/docs/.well-known/agent-skills/neon-postgres-egress-optimizer/:path*',
+        destination: '/docs/ai/skills/neon-postgres/SKILL.md',
+        permanent: true,
+      },
+      {
+        source: '/docs/.well-known/skills/neon-postgres-egress-optimizer/:path*',
+        destination: '/docs/ai/skills/neon-postgres/SKILL.md',
+        permanent: true,
+      },
       {
         source: '/docs/local/neon-local-vscode',
         destination: '/docs/local/neon-local-connect',
@@ -2668,6 +2788,31 @@ const defaultConfig = {
         permanent: true,
       },
       {
+        source: '/enterprise',
+        destination: 'https://www.databricks.com/product/lakebase',
+        permanent: true,
+      },
+      {
+        source: '/ai',
+        destination: '/docs/ai/agent-setup',
+        permanent: true,
+      },
+      {
+        source: '/migration',
+        destination: '/docs/import/migrate-intro',
+        permanent: true,
+      },
+      {
+        source: '/cli',
+        destination: '/docs/cli',
+        permanent: true,
+      },
+      {
+        source: '/variable-load',
+        destination: '/use-cases/bursty-workloads',
+        permanent: true,
+      },
+      {
         source: '/partners',
         destination: 'https://neon.com/docs/guides/platform-integration-overview',
         permanent: true,
@@ -2736,73 +2881,73 @@ const defaultConfig = {
       // Deprecated Neon Azure Native ISV docs (EOL); redirect to docs home
       {
         source: '/docs/manage/azure',
-        destination: '/docs/introduction',
+        destination: '/docs',
         permanent: true,
       },
       {
         source: '/docs/import/migrate-from-azure-native',
-        destination: '/docs/introduction',
+        destination: '/docs',
         permanent: true,
       },
       {
         source: '/docs/azure/azure-deploy',
-        destination: '/docs/introduction',
+        destination: '/docs',
         permanent: true,
       },
       {
         source: '/docs/azure/azure-manage',
-        destination: '/docs/introduction',
+        destination: '/docs',
         permanent: true,
       },
       {
         source: '/docs/azure/azure-develop',
-        destination: '/docs/introduction',
+        destination: '/docs',
         permanent: true,
       },
       {
         source: '/docs/introduction/billing-azure-marketplace',
-        destination: '/docs/introduction',
+        destination: '/docs',
         permanent: true,
       },
       {
         source: '/docs/get-started/azure-get-started',
-        destination: '/docs/introduction',
+        destination: '/docs',
         permanent: true,
       },
       // Same deprecated Azure Native ISV slugs as raw `.md` URLs (rewrites otherwise miss file)
       {
         source: '/docs/manage/azure.md',
-        destination: '/docs/introduction',
+        destination: '/docs',
         permanent: true,
       },
       {
         source: '/docs/import/migrate-from-azure-native.md',
-        destination: '/docs/introduction',
+        destination: '/docs',
         permanent: true,
       },
       {
         source: '/docs/azure/azure-deploy.md',
-        destination: '/docs/introduction',
+        destination: '/docs',
         permanent: true,
       },
       {
         source: '/docs/azure/azure-manage.md',
-        destination: '/docs/introduction',
+        destination: '/docs',
         permanent: true,
       },
       {
         source: '/docs/azure/azure-develop.md',
-        destination: '/docs/introduction',
+        destination: '/docs',
         permanent: true,
       },
       {
         source: '/docs/introduction/billing-azure-marketplace.md',
-        destination: '/docs/introduction',
+        destination: '/docs',
         permanent: true,
       },
       {
         source: '/docs/get-started/azure-get-started.md',
-        destination: '/docs/introduction',
+        destination: '/docs',
         permanent: true,
       },
       {
@@ -2936,6 +3081,8 @@ const defaultConfig = {
         // Serve /llms.txt and /llms-full.txt from /docs/ (canonical location is public/docs/)
         { source: '/llms.txt', destination: '/docs/llms.txt' },
         { source: '/llms-full.txt', destination: '/docs/llms-full.txt' },
+        // Serve /sitemap.md and /.well-known/sitemap.md from /docs/sitemap.md (same pattern)
+        ...SITEMAP_MD.aliases.map((source) => ({ source, destination: SITEMAP_MD.path })),
         // Agent skill discovery — wildcard :name handles all skills (agentskills.io 0.2.0 and v0.1.0).
         // /skill.md is a single-entrypoint alias for the primary skill (see config/skills.json).
         // Update the destination here if the primary skill changes.
@@ -2997,7 +3144,7 @@ const defaultConfig = {
         },
         {
           source: '/ai-chat',
-          destination: '/docs/introduction#ai-chat',
+          destination: '/docs',
         },
       ],
     };

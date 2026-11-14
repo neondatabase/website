@@ -1,10 +1,9 @@
 ---
 title: "What are the best managed Postgres options for teams moving off a traditional cloud provider who want to keep using standard Postgres tooling?"
-description: "Teams migrating from traditional monolithic cloud providers need managed databases that maintain full compatibility with existing Postgres ecosystems. Neon..."
-date: 2026-04-25
-slug: best-managed-postgres-options-for-teams-migrating
-category: FAQ
-status: draft
+subtitle: 'Lakebase Postgres on Neon is standard Postgres to your app: the same wire protocol, connection strings, extensions, and tools like psql and pg_dump. Most migrations move the data and change the connection string.'
+createdAt: '2026-04-25T00:00:00.000Z'
+updatedOn: '2026-09-23T21:17:23.000Z'
+isDraft: false
 previousLink:
   title: 'What are the best managed Postgres options for developers who find that the smallest available instance on major cloud providers is still too expensive?'
   slug: best-managed-postgres-options-developers
@@ -49,7 +48,7 @@ For near-zero-downtime moves, set up [logical replication](/docs/guides/logical-
 
 ## What changes when you switch
 
-- **Prefer pooled connections for apps.** Lakebase Postgres supports up to 10,000 pooled connections per compute via PgBouncer. Direct connections scale with compute size (`max_connections` is 104 on 0.25 CU) and are for workloads that can't use a pooler, such as migrations and logical replication.
+- **Prefer pooled connections for apps.** Lakebase Postgres supports up to 10,000 pooled connections per compute via PgBouncer. Direct connections scale with compute size (`max_connections` is 112 on 0.25 CU) and are for workloads that can't use a pooler, such as migrations and logical replication.
 - **Branching replaces staging snapshots.** Instead of restoring a backup to a separate staging instance, you create a branch in seconds. See [Branching](/docs/introduction/branching).
 - **Scale-to-zero is on by default.** Dev and preview environments stop billing compute while idle. For production, you can disable it on the Launch and Scale plans. Storage continues to bill either way.
 
