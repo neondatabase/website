@@ -87,6 +87,8 @@ The `env.schema` entry declares `DATABASE_URL` as a server-only secret. Astro re
 The adapter alone isn't enough. Astro's default output is `static`, so without `output: 'server'`, `npm run build` prerenders your pages and API routes at build time and production serves the build-time results. To render only some routes on demand, keep the default and add `export const prerender = false;` to those pages and endpoints. Development mode (`npm run dev`) renders every request, so you won't see the difference until you build.
 </Admonition>
 
+If your project already deploys with another adapter, such as `@astrojs/vercel` or `@astrojs/netlify`, keep it instead of adding the Node adapter. Set `output: 'server'` and the `env.schema` entry the same way, and add `DATABASE_URL` to your hosting platform's environment variables.
+
 ## Store your Neon credentials
 
 Add a `.env` file to your project directory and add your Neon connection string to it. You can find the connection string for your database by clicking the **Connect** button in the Console nav to open the **Connect to your branch** modal. For more information, see [Connect from any application](/docs/connect/connect-from-any-app).
@@ -96,6 +98,8 @@ DATABASE_URL="postgresql://[user]:[password]@[neon_hostname]/[dbname]?sslmode=re
 ```
 
 If you use node-postgres, `pg` 8.23 and later print a `SECURITY WARNING` for `sslmode=require`. Change it to `sslmode=verify-full` to keep the same behavior without the warning.
+
+The `channel_binding=require` parameter is optional. If your connection string doesn't include it, you can use the string as is.
 
 ## Create a database utility
 
@@ -256,7 +260,7 @@ To run the production build, run `npm run build`, then start the server with `DA
 node --env-file=.env ./dist/server/entry.mjs
 ```
 
-The server listens on port 4321 by default; set the `PORT` environment variable to change it. With `output: 'server'`, each request queries your database. If `DATABASE_URL` isn't set, Astro fails the request with an `EnvInvalidVariables` error.
+The server listens on port 4321 by default; set the `PORT` environment variable to change it. With `output: 'server'`, each request queries your database. If `DATABASE_URL` isn't set, Astro fails the request with an `EnvInvalidVariables` error. This command applies to the Node adapter. With another adapter, build and deploy the way your hosting platform documents.
 
 </Steps>
 
