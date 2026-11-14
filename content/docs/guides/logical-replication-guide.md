@@ -65,8 +65,6 @@ To replicate data from Neon, you must first enable logical replication on your p
 
 <a href="/docs/guides/logical-replication-databricks" title="Databricks" description="Replicate data from Neon to Databricks" icon="databricks"></a>
 
-<a href="/docs/guides/logical-replication-decodable" title="Decodable" description="Replicate data from Neon with Decodable" icon="decodable"></a>
-
 <a href="/docs/guides/logical-replication-estuary-flow" title="Estuary" description="Replicate data from Neon with Estuary" icon="estuary"></a>
 
 <a href="/docs/guides/logical-replication-fivetran" title="Fivetran" description="Replicate data from Neon with Fivetran" icon="fivetran"></a>
