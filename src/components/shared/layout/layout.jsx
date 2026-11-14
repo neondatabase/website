@@ -35,9 +35,10 @@ const Layout = ({
       Skip to main content
     </a>
     {!isClient && <Topbar />}
+    {/* No pt-safe: it misaligns the header and mobile menu (#4208, #6679) */}
     <div
       className={cn(
-        'relative flex flex-col pt-safe',
+        'relative flex flex-col',
         isClient ? 'min-h-screen' : 'min-h-[calc(100vh-36px)]',
         isDocPage && 'lg:pb-12!'
       )}
