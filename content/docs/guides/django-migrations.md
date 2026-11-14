@@ -13,7 +13,7 @@ enableTableOfContents: true
 updatedOn: '2026-10-28T11:11:18.780Z'
 ---
 
-[Django](https://www.djangoproject.com/) is a high-level Python framework to make database-driven web applications. It provides an ORM (Object-Relational Mapping) layer that abstracts database operations, making it easy to interact with databases using Python code. Django also includes a powerful migration system that allows you to define and manage database schema changes over time.
+[Django](https://www.djangoproject.com/) is a high-level Python framework to make database-driven web applications. It provides an ORM (Object-Relational Mapping) layer that abstracts database operations, making it easy to interact with databases using Python code. Django also includes a migration system that allows you to define and manage database schema changes over time.
 
 This guide demonstrates how to use Django with a Lakebase Postgres database. We'll create a simple Django application and walk through the process of setting up the database, defining models, and generating and running migrations to manage schema changes.
 
@@ -22,7 +22,7 @@ This guide demonstrates how to use Django with a Lakebase Postgres database. We'
 To follow along with this guide, you will need:
 
 - A Neon account. If you do not have one, sign up at [Neon](https://neon.tech). Your Neon project comes with a ready-to-use Postgres database named `neondb`. We'll use this database in the following examples.
-- [Python](https://www.python.org/) installed on your local machine. We recommend using a newer version of Python, 3.8 or higher.
+- [Python](https://www.python.org/) 3.12 or later installed on your local machine. Django 6.1 requires Python 3.12 or later.
 
 ## Setting up your Neon database
 
@@ -74,7 +74,7 @@ pip install python-dotenv dj-database-url
 pip freeze > requirements.txt
 ```
 
-We installed Django and the `psycopg2-binary` package to connect to the Lakebase Postgres database. We also added the `python-dotenv` to read environment variables easily, and the `dj-database-url` package to parse the Neon connection string into Django settings. We also saved the installed packages to a `requirements.txt` file so the project can be easily recreated in another environment.
+We installed Django and the `psycopg2-binary` package to connect to the Lakebase Postgres database. We also added `python-dotenv` to read environment variables easily, and the `dj-database-url` package to parse the Neon connection string into Django settings. We also saved the installed packages to a `requirements.txt` file so the project can be easily recreated in another environment.
 
 ### Create a new Django project
 
@@ -88,14 +88,14 @@ This command creates a new Django project named `guide_neon_django` in the curre
 
 ### Set up the Database configuration
 
-Create a `.env` file in the project root directory and add the `DATABASE_URL` environment variable to it. Use the connection string that you obtained from the Neon Console earlier.
+Create a `.env` file in the project root directory (the directory that contains `manage.py`) and add the `DATABASE_URL` environment variable to it. Use the connection string that you obtained from the Neon Console earlier.
 
 ```bash
 # .env
 DATABASE_URL=NEON_POSTGRES_CONNECTION_STRING
 ```
 
-For Django to read the environment variables from the `.env` file, open the `settings.py` file located in the `guide_neon_django` directory and add the following code, updating the `DATABASES` setting:
+For Django to read the environment variables from the `.env` file, open the `settings.py` file located in the `guide_neon_django` directory. Add the following imports, and replace the `DATABASES` setting. `dotenv.load_dotenv()` finds the `.env` file by searching up from `settings.py`, so the file location doesn't depend on the directory you run commands from:
 
 ```python
 # settings.py
@@ -104,7 +104,7 @@ import os
 import dotenv
 import dj_database_url
 
-dotenv.load_dotenv("../.env")
+dotenv.load_dotenv()
 
 DATABASES = {
     "default": dj_database_url.parse(
@@ -256,22 +256,22 @@ We can now create views to display the authors and books in our application. Cre
 ```python
 # catalog/views.py
 
-from django.http import JsonResponse
+from django.http import HttpResponse
 from django.core import serializers
 from .models import Author, Book
 
 def list_authors(request):
     authors = Author.objects.all()
-    data = [serializers.serialize('json', authors)]
-    return JsonResponse(data, safe=False)
+    data = serializers.serialize('json', authors)
+    return HttpResponse(data, content_type='application/json')
 
 def list_books_by_author(request, author_id):
     books = Book.objects.filter(author_id=author_id)
-    data = [serializers.serialize('json', books)]
-    return JsonResponse(data, safe=False)
+    data = serializers.serialize('json', books)
+    return HttpResponse(data, content_type='application/json')
 ```
 
-We defined two views: `list_authors` to list all authors and `list_books_by_author` to list books by a specific author. The views return JSON responses with the serialized data.
+We defined two views: `list_authors` to list all authors and `list_books_by_author` to list books by a specific author. The views return the serialized records as a JSON array of objects.
 
 ### Define URLs for the views
 
@@ -364,7 +364,7 @@ Navigate to the url `http://localhost:8000/catalog/authors` to view the list of 
 
 ## Conclusion
 
-In this guide, we demonstrated how to set up a Django project with Lakebase Postgres, define database models, and generate migrations and run them. Django's ORM and migration system make it easy to interact with the database and manage schema evolution over time.
+In this guide, we set up a Django project with Lakebase Postgres, defined database models, and generated and ran migrations. Django's migration system records each schema change, so you can track how the schema evolves.
 
 ## Source code
 
