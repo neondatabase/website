@@ -5,7 +5,7 @@ summary: >-
   The Neon CLI `neon neon-auth` command manages Managed Better Auth on a database
   branch from the terminal. Use `enable`, `status`, and `disable` to provision,
   inspect, or remove Managed Better Auth, and the `oauth-provider` subcommands to add,
-  update, or delete Google, GitHub, Vercel, Microsoft, and Apple OAuth providers. The `domain`
+  update, or delete Google, GitHub, Vercel, Microsoft, Apple, and Discord OAuth providers. The `domain`
   subcommands manage trusted redirect domains, including `allow-localhost`
   settings for local development. The `config` subcommands cover email and
   password authentication, the email provider, the organization plugin,
@@ -15,7 +15,7 @@ summary: >-
 enableTableOfContents: true
 redirectFrom:
   - /docs/reference/cli-neon-auth
-updatedOn: '2026-10-30T16:46:22.000Z'
+updatedOn: '2026-11-13T23:13:58.678Z'
 ---
 
 The `neon-auth` command manages [Managed Better Auth](/docs/auth/overview) on a database branch from the terminal. You can enable or disable Managed Better Auth, configure OAuth providers, trusted domains, email settings, and webhooks, and manage auth users.
@@ -70,7 +70,7 @@ neon neon-auth disable --delete-data
 
 ## OAuth providers (#oauth-provider)
 
-The `oauth-provider` subcommands manage the OAuth providers (`google`, `github`, `vercel`, `microsoft`, and `apple`) for the branch.
+The `oauth-provider` subcommands manage the OAuth providers (`google`, `github`, `vercel`, `microsoft`, `apple`, and `discord`) for the branch.
 
 <CliSubcommands command="neon-auth oauth-provider" anchorParts="oauth-provider" />
 
