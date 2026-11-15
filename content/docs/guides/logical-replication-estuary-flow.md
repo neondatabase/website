@@ -30,7 +30,7 @@ In this guide, you will learn how to configure a Postgres source connector in Es
 Replication keeps compute active (no [scale to zero](/docs/introduction/scale-to-zero)) while subscribers are connected, which can increase your bill. See [Important notices about logical replication in Neon](/docs/guides/logical-replication-neon#important-notices).
 </Admonition>
 
-## Enable Logical Replication in Neon
+## Enable logical replication in Neon
 
 <Admonition type="important">
 Enabling logical replication modifies the Postgres `wal_level` configuration parameter, changing it from `replica` to `logical` for all databases in your Neon project. Once the `wal_level` setting is changed to `logical`, it cannot be reverted. Enabling logical replication also restarts all computes in your Neon project, meaning active connections will be dropped and have to reconnect.
@@ -52,7 +52,7 @@ SHOW wal_level;
  logical
 ```
 
-## Create a Postgres Role for Replication
+## Create a Postgres role for replication
 
 It is recommended that you create a dedicated Postgres role for replicating data. The role must have the `REPLICATION` privilege. The default Postgres role created with your Neon project and roles created using the Neon Console, CLI, or API are granted membership in the [neon_superuser](/docs/manage/roles#the-neonsuperuser-role) role, which has the required `REPLICATION` privilege.
 
@@ -60,10 +60,10 @@ It is recommended that you create a dedicated Postgres role for replicating data
 
 <TabItem>
 
-The following CLI command creates a role. To view the CLI documentation for this command, see [Neon CLI commands — roles](/docs/reference/api/branches/create-project-branch-role)
+The following CLI command creates a role. Replace `$PROJECT_ID` with your project ID. You can find it with `neon projects list`. To view the CLI documentation for this command, see [Neon CLI commands: roles](/docs/cli/roles)
 
 ```bash
-neon roles create --name cdc_role
+neon roles create --name cdc_role --project-id $PROJECT_ID
 ```
 
 </TabItem>
@@ -104,7 +104,7 @@ curl 'https://console.neon.tech/api/v2/projects/{project_id}/branches/{branch_id
 
 </Tabs>
 
-## Grant Schema Access to Your Postgres Role
+## Grant schema access to your Postgres role
 
 If your replication role does not own the schemas and tables you are replicating from, make sure to grant access. Run these commands for each schema:
 
@@ -116,7 +116,7 @@ ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT SELECT ON TABLES TO cdc_role;
 
 Granting `SELECT ON ALL TABLES IN SCHEMA` instead of naming the specific tables avoids having to add privileges later if you add tables to your publication.
 
-## Create a Publication
+## Create a publication
 
 Create a [publication](https://www.postgresql.org/docs/current/sql-createpublication.html) with the name `estuary_publication`. Include all the tables you would like to ingest into Estuary.
 
@@ -128,13 +128,13 @@ Refer to the [Postgres docs](https://www.postgresql.org/docs/current/sql-alterpu
 
 Upon startup, the Estuary connector for Postgres will automatically create the [replication slot](https://www.postgresql.org/docs/current/logicaldecoding-explanation.html#LOGICALDECODING-REPLICATION-SLOTS) required for ingesting data change events from Postgres. The slot's name will be prefixed with `estuary_`, followed by a unique identifier.
 
-## Allow Inbound Traffic
+## Allow inbound traffic
 
 If you are using Neon's **IP Allow** feature to limit the IP addresses that can connect to Neon, you will need to allow inbound traffic from Estuary's IP addresses.
 Refer to the [Estuary documentation](https://docs.estuary.dev/reference/allow-ip-addresses/#ip-addresses-to-allowlist) for the list of IPs that need to be allowlisted for the Estuary region of your account.
 For information about configuring allowed IPs in Neon, see [Configure IP Allow](/docs/manage/projects#configure-ip-allow).
 
-## Create a Postgres Source Connector in Estuary
+## Create a Postgres source connector in Estuary
 
 1. In the Estuary web UI, select **Sources** from the left navigation bar and click **New Capture**.
 2. In the connector catalog, choose **Neon PostgreSQL** and click **Connect**.
@@ -147,13 +147,13 @@ For information about configuring allowed IPs in Neon, see [Configure IP Allow](
    Your connection string will look like this:
 
    ```bash shouldWrap
-   postgres://cdc_role:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require&channel_binding=require
+   postgresql://cdc_role:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require&channel_binding=require
    ```
 
    ![Creating a Neon capture connector in Estuary](/docs/guides/estuary_flow_create_neon_capture.png)
 
    Enter the details for **your connection string** into the source connector fields. Based on the sample connection string above, the values would be specified as shown below. Your values will differ.
-   - **Name:**: Name of the Capture connector
+   - **Name**: Name of the capture connector
    - **Server Address**: ep-cool-darkness-123456.us-east-2.aws.neon.tech:5432
    - **User**: cdc_role
    - **Password**: Click **Add a new secret...**, then specify a name for that secret and `AbC123dEf` as its value
@@ -168,8 +168,8 @@ For information about configuring allowed IPs in Neon, see [Configure IP Allow](
 
 5. Click **Save and Publish** to provision the connector and kick off the automated backfill process.
 
-## Previewing the Data
+## Preview the data
 
-Once the connector is up and running state, navigate to the Collections page in the Estuary dashboard and click on the collection being filled by your capture.
+Once the connector is up and running, navigate to the Collections page in the Estuary dashboard and click on the collection being filled by your capture.
 
 ![Preview data in Estuary](/docs/guides/estuary_flow_preview_collections.png)
