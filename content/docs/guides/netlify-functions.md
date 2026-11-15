@@ -13,7 +13,7 @@ enableTableOfContents: true
 updatedOn: '2026-10-09T10:14:56.146Z'
 ---
 
-[Netlify Functions](https://www.netlify.com/products/functions/) provide a serverless execution environment for building and deploying backend functionality without managing server infrastructure. It's integrated with Netlify's ecosystem, making it ideal for augmenting web applications with server-side logic, API integrations, and data processing tasks in a scalable way.
+[Netlify Functions](https://www.netlify.com/platform/functions/) provide a serverless execution environment for building and deploying backend functionality without managing server infrastructure. It's integrated with Netlify's ecosystem, making it ideal for augmenting web applications with server-side logic, API integrations, and data processing tasks in a scalable way.
 
 This guide will show you how to connect to a Lakebase Postgres database from your Netlify Functions project. We'll use the [Neon serverless driver](/docs/serverless/serverless-driver) to connect to the database and make queries.
 
@@ -94,7 +94,7 @@ You will be prompted to select a team and site name. Choose a unique name for yo
 
 ```
 ❯ netlify sites:create
-? Team: Ishan Anand’s team
+? Team: Example team
 ? Site name (leave blank for a random name; you can change it later): neon-netlify-example
 
 Site Created
@@ -117,17 +117,16 @@ We'll create a new function to fetch the coffee blends from the database. To set
 ? Select the language of your function JavaScript
 ? Pick a template javascript-hello-world
 ◈ Creating function get_coffee_blends
-◈ Created ./netlify/functions/get_coffee_blends/get_coffee_blends.js
+◈ Created ./netlify/functions/get_coffee_blends/get_coffee_blends.mjs
 
 Function created!
 ```
 
-This command creates a new directory `netlify/functions/get_coffee_blends` with a `get_coffee_blends.js` file inside it. We are using the ES6 `import` syntax to implement the request handler, so we will change the script extension to `.mjs` for the runtime to recognize it.
+This command creates a new directory `netlify/functions/get_coffee_blends` with a `get_coffee_blends.mjs` file inside it. The `.mjs` extension tells the runtime to treat the file as an ES module, so the request handler can use the `import` syntax.
 
 We also install the `Neon serverless` driver as a dependency to connect to the database and fetch the data.
 
 ```bash
-mv netlify/functions/get_coffee_blends/get_coffee_blends.js netlify/functions/get_coffee_blends/get_coffee_blends.mjs
 npm install @neondatabase/serverless
 ```
 
@@ -169,7 +168,7 @@ Create a new file `index.html` at the root of your project with the following co
     <title>Coffee Blends</title>
   </head>
   <body>
-    <h1>My favourite coffee blends</h1>
+    <h1>My favorite coffee blends</h1>
     <ul id="blends"></ul>
     <script>
       (async () => {
@@ -231,8 +230,8 @@ To remove your Neon project, follow the deletion steps in Neon's documentation u
 
 ## Resources
 
-- [Netlify Functions](https://www.netlify.com/products/functions/)
-- [Netlify CLI](https://docs.netlify.com/cli/get-started/)
+- [Netlify Functions](https://www.netlify.com/platform/functions/)
+- [Netlify CLI](https://docs.netlify.com/api-and-cli-guides/cli-guides/get-started-with-cli/)
 - [Neon](https://neon.tech)
 
 <NeedHelp/>
