@@ -120,6 +120,8 @@ Granting `SELECT ON ALL TABLES IN SCHEMA` instead of naming the specific tables 
 
 Create a [publication](https://www.postgresql.org/docs/current/sql-createpublication.html) with the name `estuary_publication`. Include all the tables you would like to ingest into Estuary.
 
+Run this as the database owner, such as `neondb_owner`, not the replication role.
+
 ```sql
 CREATE PUBLICATION estuary_publication FOR TABLE <tbl1, tbl2, tbl3>;
 ```
