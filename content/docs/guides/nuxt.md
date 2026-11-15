@@ -2,20 +2,22 @@
 title: Connect a Nuxt application to Neon
 subtitle: Connect a Nuxt app to Lakebase Postgres on Neon, develop on a branch, deploy, and add the rest of your backend
 summary: >-
-  Connect a Nuxt app to Lakebase Postgres on Neon: add Neon's agent skills to
-  the project, create a Neon project (Neon CLI, API, or Console), link it with
-  the Neon CLI to pull DATABASE_URL into .env, which nuxt dev reads, optionally
-  develop on a Neon branch, and query it with the Neon serverless driver from a
-  Nitro server route that the page fetches with useFetch. Covers Nuxt 4, with a note for Nuxt 3, plus deployment,
+  Connect a Nuxt app to Lakebase Postgres on Neon: optionally add Neon's agent
+  skills, create a Neon project (Neon CLI, API, or Console), link it with the
+  Neon CLI to pull DATABASE_URL into .env, which nuxt dev reads, optionally
+  develop on a Neon branch, and query it with the Neon serverless driver,
+  postgres.js, or node-postgres from a Nitro server route that the page fetches
+  with useFetch. Covers Nuxt 4, with a note for Nuxt 3, plus deployment,
   troubleshooting, and Neon's other backend services from Nuxt.
 enableTableOfContents: true
 updatedOn: '2026-11-04T00:23:33.667Z'
 ---
 
-<CopyPrompt src="/prompts/nuxt-neon-prompt.md"
-description="Prompt to connect your Nuxt app to Lakebase Postgres on Neon: skills, a project, a development branch, and a working query."/>
-
 [Nuxt](https://nuxt.com/) is a full-stack framework for building web apps with Vue. Learn to connect a Nuxt app to Postgres on Neon, query it from a Nitro server route, develop on a branch, and deploy.
+
+## Have your AI agent follow this guide
+
+<PromptBlock src="/prompts/nuxt-neon-prompt.md" labels={["Set up your agent for Neon", "Use Nuxt's docs server (optional)", "Connect your Nuxt app"]} />
 
 <Steps>
 
@@ -28,17 +30,21 @@ npm create nuxt@latest my-app -- --template minimal --packageManager npm --no-gi
 cd my-app
 ```
 
-Nuxt 4 supports Node.js 22.22.3, 24.15, or 26 or later.
+Without a terminal, keep `--template`, `--packageManager`, and `--no-gitInit`: if one is missing, the command exits with code 2 and can leave a partial `my-app`, so delete it before you retry.
 
-## Set up your AI coding agent (optional)
+Nuxt 4 supports Node.js 22.22.3, 24.15, or 26 or later. On another version, npm prints an `EBADENGINE` warning but still installs.
 
-To help your AI coding agent, such as Claude Code, Cursor, or Codex, set up Neon connections, branches, and backend services correctly, add Neon's [agent skills](/docs/ai/agent-skills) to this project. From your project directory, run:
+## Add Neon's agent skills (optional)
+
+If your AI coding agent doesn't have Neon's [agent skills](/docs/ai/agent-skills) yet, add them to this project. The prompt above installs them, so skip this step if you used it. From your project directory, run:
 
 ```bash filename="Terminal"
 npx neon@latest skills
 ```
 
-It installs the skills into this project for the agents it finds (Node.js 22.20 or later). To also connect the [Neon MCP Server](/docs/ai/neon-mcp-server), run `npx neon@latest mcp`. To have your agent install the Neon CLI, sign you in, and add the skills and MCP Server for you, paste the [agent setup prompt](https://neon.com/prompts/agent-setup.md) into it instead.
+To also connect the [Neon MCP Server](/docs/ai/neon-mcp-server), run `npx neon@latest mcp`.
+
+Nuxt runs its own [MCP server](https://nuxt.com/docs/4.x/guide/ai/mcp) for its docs. The prompt above has your agent use it and offer to connect it.
 
 ## Create a Neon project
 
@@ -113,7 +119,7 @@ To skip the prompts, pass `-y` with `--org-id` and `--project-id`. Find IDs with
 Copy the connection string from **Connect** in the Console nav, or from the API response, and add it to a `.env` file in your project directory. For more information, see [Connect from any application](/docs/connect/connect-from-any-app).
 
 ```shell filename=".env" shouldWrap
-DATABASE_URL="postgresql://<user>:<password>@<endpoint_hostname>.neon.tech/<dbname>?sslmode=require&channel_binding=require"
+DATABASE_URL="postgresql://[user]:[password]@[neon_hostname]/[dbname]?sslmode=require&channel_binding=require"
 ```
 
 The optional development branch step and [Add more of your backend](#add-more-of-your-backend) use the Neon CLI. To use them, run `neon link` in this directory.
@@ -134,17 +140,34 @@ neon checkout dev --create
 
 This creates the `dev` branch, pins it in `.neon`, and pulls its `DATABASE_URL` into `.env`, so your app now uses the branch. To switch back, run `neon checkout main` (or `production`).
 
-## Install the Neon serverless driver
+## Install a Postgres driver
 
-```bash filename="Terminal"
+Install one of these drivers. The [Neon serverless driver](/docs/serverless/serverless-driver) queries over HTTP, which suits serverless and edge hosts. On a long-running Node.js server, postgres.js or node-postgres work well too. See [Choosing your connection method](/docs/connect/choose-connection).
+
+<CodeTabs labels={["Neon serverless driver", "postgres.js", "node-postgres"]}>
+
+```bash
 npm install @neondatabase/serverless
 ```
 
-The [Neon serverless driver](/docs/serverless/serverless-driver) queries over HTTP, which suits serverless and edge hosts. On a long-running Node.js server, `pg` or `postgres` work too. See [Choosing your connection method](/docs/connect/choose-connection).
+```bash
+npm install postgres
+```
+
+```bash
+npm install pg
+npm install -D @types/pg
+```
+
+</CodeTabs>
+
+If you use node-postgres, `pg` 8.23 and later print a `SECURITY WARNING` for `sslmode=require`. Change it to `sslmode=verify-full` in `.env` to keep the same behavior without the warning. `neon env pull` and `neon checkout` write `sslmode=require` again, so repeat the change after you run them.
 
 ## Create the database client
 
-Create the client in `server/utils/`, which Nuxt auto-imports into server code:
+Create the client in `server/utils/`, which Nuxt auto-imports into server code. Use the tab for the driver you installed:
+
+<CodeTabs labels={["Neon serverless driver", "postgres.js", "node-postgres"]}>
 
 ```typescript filename="server/utils/db.ts"
 import { neon } from '@neondatabase/serverless';
@@ -152,22 +175,54 @@ import { neon } from '@neondatabase/serverless';
 export const sql = neon(process.env.DATABASE_URL!);
 ```
 
-Read `DATABASE_URL` from `process.env`, not `runtimeConfig`: at runtime, `runtimeConfig` only picks up `NUXT_`-prefixed variables.
+```typescript filename="server/utils/db.ts"
+import postgres from 'postgres';
+
+export const sql = postgres(process.env.DATABASE_URL!);
+```
+
+```typescript filename="server/utils/db.ts"
+import pg from 'pg';
+
+export const pool = new pg.Pool({ connectionString: process.env.DATABASE_URL });
+```
+
+</CodeTabs>
+
+Read `DATABASE_URL` from `process.env`, not `runtimeConfig`: at runtime, `runtimeConfig` only picks up `NUXT_`-prefixed variables. Don't put it in `runtimeConfig.public` or return it from a route.
 
 Code in `app/` also runs in the browser, and Nuxt doesn't stop it from importing `server/utils/`. Import the client only in server code, and fetch data from a server route.
 
 ## Query the database in a server route
 
-Create `server/api/version.get.ts`. `sql` is available without an import:
+Create `server/api/version.get.ts`. `sql` (or `pool`) is available without an import:
+
+<CodeTabs labels={["Neon serverless driver", "postgres.js", "node-postgres"]}>
 
 ```typescript filename="server/api/version.get.ts"
 export default defineEventHandler(async () => {
   const [row] = await sql`SELECT version()`;
-  return { version: row.version as string };
+  return { version: row?.version as string };
 });
 ```
 
-Replace `app/app.vue` to fetch the route and display the result. `useFetch` calls the route on the server during the first render:
+```typescript filename="server/api/version.get.ts"
+export default defineEventHandler(async () => {
+  const [row] = await sql`SELECT version()`;
+  return { version: row?.version as string };
+});
+```
+
+```typescript filename="server/api/version.get.ts"
+export default defineEventHandler(async () => {
+  const { rows } = await pool.query('SELECT version()');
+  return { version: rows[0]?.version as string };
+});
+```
+
+</CodeTabs>
+
+In a new app, replace `app/app.vue` to fetch the route and display the result. If you're adding Neon to an existing app, name the route `server/api/neon-version.get.ts` instead, leave your pages as they are, and open `/api/neon-version` to check it. `useFetch` calls the route on the server during the first render:
 
 ```vue filename="app/app.vue"
 <script setup lang="ts">
@@ -180,6 +235,8 @@ const { data } = await useFetch('/api/version');
 </template>
 ```
 
+To type-check your code with `npx nuxt typecheck`, install `typescript`, `vue-tsc`, and `@types/node` as dev dependencies: `npm install -D typescript vue-tsc @types/node`.
+
 <Admonition type="note" title="Using Nuxt 3?">
 Nuxt 3 has no `app/` directory, so put `app.vue` at the project root. The rest of this guide is the same. To create a Nuxt 3 app, use `-t v3` instead of `--template minimal`. Nuxt 3 needs Node.js 20.19, or 22.12 or later. Nuxt 3 reached [end of life](https://nuxt.com/docs/4.x/community/roadmap) on July 31, 2026.
 </Admonition>
@@ -190,11 +247,11 @@ Nuxt 3 has no `app/` directory, so put `app.vue` at the project root. The rest o
 npm run dev
 ```
 
-Open [localhost:3000](http://localhost:3000). The page shows your Postgres version, confirming the connection:
+Open the URL `npm run dev` prints, usually [localhost:3000](http://localhost:3000). The dev server can listen on IPv6 only (`[::1]`), so use that URL rather than `127.0.0.1`. The page shows your Postgres version, confirming the connection:
 
 ```text
 Database version
-PostgreSQL 18.6 (fd34222) on aarch64-unknown-linux-gnu, compiled by gcc ...
+PostgreSQL 18.7 (a21afb5) on aarch64-unknown-linux-gnu, compiled by gcc ...
 ```
 
 </Steps>
