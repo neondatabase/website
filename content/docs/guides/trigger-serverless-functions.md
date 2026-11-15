@@ -13,7 +13,7 @@ enableTableOfContents: true
 updatedOn: '2026-09-16T20:12:32.981Z'
 ---
 
-Combining your serverless Neon database with [Inngest](https://www.inngest.com/?utm_source=neon&utm_medium=trigger-serverless-functions-guide) enables you to **trigger serverless functions** running on Vercel, AWS, and Cloudflare Worker **based on database changes.**
+Combining your serverless Neon database with [Inngest](https://www.inngest.com/?utm_source=neon&utm_medium=trigger-serverless-functions-guide) enables you to **trigger serverless functions** running on Vercel, AWS, and Cloudflare Workers **based on database changes.**
 
 By enabling your serverless functions to react to database changes, you open the door to many use cases. From onboarding to ETL and AI workflows, the possibilities are endless.
 
@@ -69,6 +69,10 @@ Navigate to your Neon Project using the Neon Console and open the **Settings** >
 
 ![Neon dashboard settings with option to enable logical replication](/docs/guides/neon-console-settings-logical-replication.png)
 
+<Admonition type="warning">
+Enabling logical replication suspends all active computes in the project. You can't turn it off later.
+</Admonition>
+
 ## Configuring the Inngest integration
 
 Your Neon database is now ready to work with Inngest.
@@ -112,6 +116,8 @@ import { Inngest } from 'inngest';
 export const inngest = new Inngest({ id: 'neon-inngest-project' });
 ```
 
+This guide uses version 4 of the Inngest SDK, which `npm i inngest` installs. By default, the SDK runs in cloud mode and needs a signing key. Set the `INNGEST_SIGNING_KEY` environment variable to the signing key from the Inngest dashboard. For local development, set `INNGEST_DEV=1` to use the Inngest Dev Server instead.
+
 ### 2. Listen for new `users` rows
 
 Any change performed on our Neon database will trigger an [Inngest Event](https://www.inngest.com/docs/features/events-triggers?utm_source=neon&utm_medium=trigger-serverless-functions-guide) as follows:
@@ -144,37 +150,42 @@ Any change performed on our Neon database will trigger an [Inngest Event](https:
 
 Inngest enables you to create [Inngest Functions](https://www.inngest.com/docs/features/inngest-functions?utm_source=neon&utm_medium=trigger-serverless-functions-guide) that react to Inngest events (here, database changes).
 
-Let's create an Inngest Function listening for `"db/users.inserted"` events:
+Let's create an Inngest Function listening for `"db/users.inserted"` events. In SDK v4, you pass the triggers in the options object, the first argument of `createFunction`:
 
 ```typescript
 // inngest/functions/new-user.ts
-import { inngest } from '../client'
+import { inngest } from '../client';
 
-export newUser = inngest.createFunction(
-  { id: "new-user" },
-  { event: "db/users.inserted" },
+// Placeholder for your email provider
+declare function sendEmail(args: { template: string; to: string }): Promise<void>;
+
+export const newUser = inngest.createFunction(
+  {
+    id: 'new-user',
+    triggers: [{ event: 'db/users.inserted' }],
+  },
   async ({ event, step }) => {
-    const user = event.data.new
+    const user = event.data.new;
 
-    await step.run("send-welcome-email", async () => {
+    await step.run('send-welcome-email', async () => {
       // Send welcome email
       await sendEmail({
-        template: "welcome",
+        template: 'welcome',
         to: user.email,
       });
     });
 
-    await step.sleep("wait-before-tips", "3d");
+    await step.sleep('wait-before-tips', '3d');
 
-    await step.run("send-new-user-tips-email", async () => {
+    await step.run('send-new-user-tips-email', async () => {
       // Follow up with some helpful tips
       await sendEmail({
-        template: "new-user-tips",
+        template: 'new-user-tips',
         to: user.email,
       });
     });
   }
-)
+);
 ```
 
 ### 3. Exposing your Serverless Functions to Inngest
@@ -187,22 +198,22 @@ To allow Inngest to run your Inngest Functions, add the following Serverless Fun
 // src/app/api/inngest/route.ts
 import { serve } from 'inngest/next';
 import { inngest } from '@lib/inngest/client';
-import newUsers from '@lib/inngest/functions/newUsers'; // Your own functions
+import { newUser } from '@lib/inngest/functions/new-user'; // Your own functions
 
 export const { GET, POST, PUT } = serve({
   client: inngest,
-  functions: [newUsers],
+  functions: [newUser],
 });
 ```
 
 ```typescript
 import { serve } from 'inngest/lambda';
 import { inngest } from './client';
-import newUsers from './functions/newUsers'; // Your own function
+import { newUser } from './functions/new-user'; // Your own function
 
 export const handler = serve({
   client: inngest,
-  functions: [newUsers],
+  functions: [newUser],
 });
 ```
 
@@ -210,12 +221,12 @@ export const handler = serve({
 // /functions/api/inngest.js
 import { serve } from 'inngest/cloudflare';
 import { inngest } from './client';
-import newUsers from './functions/newUsers';
+import { newUser } from './functions/new-user';
 
 export default {
   fetch: serve({
     client: inngest,
-    functions: [newUsers],
+    functions: [newUser],
   }),
 };
 ```
