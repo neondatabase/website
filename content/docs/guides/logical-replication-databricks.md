@@ -149,6 +149,8 @@ Repeat for each table you plan to replicate.
 
 Create a logical replication publication that includes all tables you want to ingest. One publication per database.
 
+Run this as the database owner, such as `neondb_owner`, not the replication role.
+
 ```sql
 -- Option 1: Explicit list
 CREATE PUBLICATION databricks_publication
