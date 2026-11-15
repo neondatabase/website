@@ -201,6 +201,8 @@ Create a Postgres publication that includes the tables you want to replicate. It
 
 To create a publication named `clickpipes_pub` for specific tables, run the following command:
 
+Run this as the database owner, such as `neondb_owner`, not the replication role.
+
 ```sql
 CREATE PUBLICATION clickpipes_pub FOR TABLE tb1, tb2;
 ```
