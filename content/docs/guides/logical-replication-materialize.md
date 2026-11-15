@@ -69,6 +69,8 @@ After logical replication is enabled in Neon, the next step is to create a publi
 
    For specific tables:
 
+   Run this as the database owner, such as `neondb_owner`, not the replication role.
+
    ```sql
    CREATE PUBLICATION mz_source FOR TABLE <tbl1, tbl2, tbl3>;
    ```
