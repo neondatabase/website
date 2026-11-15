@@ -119,6 +119,8 @@ Granting `SELECT ON ALL TABLES IN SCHEMA` instead of naming the specific tables 
 
 Create the Postgres publication. Include all tables you want to replicate as part of the publication:
 
+Run this as the database owner, such as `neondb_owner`, not the replication role.
+
 ```sql
 CREATE PUBLICATION fivetran_pub FOR TABLE <tbl1, tbl2, tbl3>;
 ```
