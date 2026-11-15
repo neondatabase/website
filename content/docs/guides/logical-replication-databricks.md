@@ -8,7 +8,7 @@ summary: >-
   pgoutput plugin. Use this guide for continuous, low-latency ingestion from
   Neon into Unity Catalog, covering publication setup, replication slot
   creation, Unity Catalog connection, and pipeline configuration. The connector
-  requires PostgreSQL 13 or later on the Neon primary; read replicas are not
+  requires Postgres 13 or later on the Neon primary; read replicas are not
   supported.
 enableTableOfContents: true
 isDraft: false
@@ -21,7 +21,7 @@ The PostgreSQL connector for Lakeflow Connect is a managed ingestion connector t
 
 - Connects to PostgreSQL over TLS using a Unity Catalog connection
 - Uses logical replication with the `pgoutput` plugin for change data capture (CDC)
-- Requires PostgreSQL 13+ on the primary instance (not a read replica)
+- Requires Postgres 13+ on the primary instance (not a read replica)
 - Extracts snapshot and change data through an ingestion gateway and loads it into Delta tables via an ingestion pipeline
 
 <Admonition type="important" title="Public Preview">
@@ -49,7 +49,7 @@ You need:
 - **A Databricks workspace** with Unity Catalog enabled, serverless compute available for Lakeflow Spark Declarative Pipelines, and the Lakeflow Connect PostgreSQL connector enabled (Public Preview)
 - **Permissions in Databricks**: `CREATE CONNECTION` on the metastore (if you will create a new Unity Catalog connection); `USE CATALOG` on target and staging catalogs; `USE SCHEMA`, `CREATE TABLE`, and `CREATE VOLUME` on target schemas, or `CREATE SCHEMA` on the catalogs
 - **Network connectivity**: Neon must accept inbound connections from your Databricks workspace (or via VPN/PrivateLink, depending on setup). If you use [IP Allow](/docs/manage/projects#configure-ip-allow) in Neon, add the Databricks egress addresses to your allowlist. See [Subscriber access](/docs/guides/logical-replication-neon#subscriber-access)
-- **PostgreSQL**: Lakebase Postgres running v13 or later with logical replication enabled on the primary. The connector does not support logical replication from a read replica
+- **Postgres**: Lakebase Postgres running v13 or later with logical replication enabled on the primary. The connector does not support logical replication from a read replica
 
 Read the [important notices about logical replication in Neon](/docs/guides/logical-replication-neon#important-notices) before you begin.
 
@@ -90,8 +90,10 @@ Databricks recommends a dedicated database user for ingestion. Create a role in 
 
 <TabItem>
 
+Replace `$PROJECT_ID` with your project ID. You can find it with `neon projects list`.
+
 ```bash
-neon roles create --name databricks_replication
+neon roles create --name databricks_replication --project-id $PROJECT_ID
 ```
 
 </TabItem>
@@ -281,7 +283,7 @@ Replace `workspace` with your Unity Catalog name, `public` with the destination 
 - **Replication slots**: The gateway must run continuously to prevent WAL bloat. Replication slots are not removed when you delete a pipeline; drop them explicitly in Neon.
 - **Replica identity**: Each replicated table must have `REPLICA IDENTITY` set to `DEFAULT` or `FULL` as appropriate.
 - **Scale**: Keep each pipeline to about 250 tables or fewer for best performance; there is no hard row or column limit per table.
-- **Neon compatibility**: The connector supports PostgreSQL 13+ on various managed and self-hosted sources. Neon is a managed Postgres service that exposes a standard primary with logical replication; validate in a non-production environment and coordinate with Databricks Support for mission-critical use.
+- **Neon compatibility**: The connector supports Postgres 13+ on various managed and self-hosted sources. Neon is a managed Postgres service that exposes a standard primary with logical replication; validate in a non-production environment and coordinate with Databricks Support for mission-critical use.
 
 For adding tables, monitoring lag, and cleaning up slots, see Databricks' [Maintain PostgreSQL ingestion pipelines](https://docs.databricks.com/aws/en/ingestion/lakeflow-connect/postgresql-maintenance) documentation and [Logical replication in Neon](/docs/guides/logical-replication-neon).
 
@@ -289,10 +291,10 @@ For adding tables, monitoring lag, and cleaning up slots, see Databricks' [Maint
 
 **Databricks**
 
-- [Configure PostgreSQL for ingestion into Databricks](https://docs.databricks.com/en/ingestion/lakeflow-connect/postgresql/configure-postgresql.html) (Lakeflow Connect)
-- [Ingest data from PostgreSQL](https://docs.databricks.com/en/ingestion/lakeflow-connect/postgresql/ingest-postgresql.html) (Lakeflow Connect PostgreSQL pipeline)
-- [PostgreSQL connector FAQs](https://docs.databricks.com/en/ingestion/lakeflow-connect/postgresql/faq.html)
-- [PostgreSQL connector limitations](https://docs.databricks.com/en/ingestion/lakeflow-connect/postgresql/limitations.html)
+- [Configure PostgreSQL for ingestion into Databricks](https://docs.databricks.com/aws/en/ingestion/lakeflow-connect/postgresql-source-setup) (Lakeflow Connect)
+- [Ingest data from PostgreSQL](https://docs.databricks.com/aws/en/ingestion/lakeflow-connect/postgresql-pipeline) (Lakeflow Connect PostgreSQL pipeline)
+- [PostgreSQL connector FAQs](https://docs.databricks.com/aws/en/ingestion/lakeflow-connect/postgresql-faq)
+- [PostgreSQL connector overview and limitations](https://docs.databricks.com/aws/en/ingestion/lakeflow-connect/postgresql)
 
 **Neon**
 
