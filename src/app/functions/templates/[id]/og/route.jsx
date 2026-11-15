@@ -117,7 +117,7 @@ export async function GET(request, { params }) {
               marginTop: 4,
             }}
           >
-            / Function templates
+            / Function Templates
           </div>
         </div>
 
