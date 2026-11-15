@@ -12,12 +12,19 @@ describe('toPromptGroups', () => {
     ]);
   });
 
-  // Labels pair with groups by position, so a blank line added to or removed from
-  // the prompt would silently shift the labels.
-  it('has one SvelteKit guide label per prompt group', () => {
-    const guide = fs.readFileSync('content/docs/guides/sveltekit.md', 'utf8');
-    const labels = guide.match(/<PromptBlock[^>]*labels=\{\[([^\]]*)\]\}/)[1].match(/"[^"]*"/g);
-    const prompt = fs.readFileSync('public/prompts/sveltekit-prompt.md', 'utf8');
+  // Labels pair with groups by position, so a blank line added to or removed from a
+  // prompt would silently shift the labels. Check every guide that uses PromptBlock.
+  const usages = fs
+    .readdirSync('content/docs/guides')
+    .filter((file) => file.endsWith('.md'))
+    .flatMap((file) => {
+      const guide = fs.readFileSync(`content/docs/guides/${file}`, 'utf8');
+      const match = guide.match(/<PromptBlock\s+src="([^"]+)"[^>]*labels=\{\[([^\]]*)\]\}/);
+      return match ? [{ file, src: match[1], labels: match[2].match(/"[^"]*"/g) }] : [];
+    });
+
+  it.each(usages)('$file has one label per prompt group', ({ src, labels }) => {
+    const prompt = fs.readFileSync(`public${src}`, 'utf8');
     expect(labels).toHaveLength(toPromptGroups(prompt).length);
   });
 });
