@@ -15,7 +15,7 @@ updatedOn: '2026-09-16T19:45:35.340Z'
 [ImageKit.io](https://imagekit.io/) is a cloud-based image and video optimization and delivery platform. It provides real-time manipulation, storage, and delivery via a global CDN, simplifying media management for web and mobile applications.
 
 <Callout title="Neon now offers native storage">
-Neon Object Storage is S3-compatible object storage built into the Neon backend. Object storage branches with your database: each branch gets its own isolated namespace, so you can test file uploads in preview branches without touching production. No separate cloud account needed. Use any S3-compatible SDK with your existing Neon credential.
+Neon Object Storage is S3-compatible object storage built into your Neon project. Files branch with your database, so you can test uploads in a preview branch without touching production files. No separate cloud account needed. Point an S3 SDK at your branch endpoint with your Neon credential.
 
 For more information, see [Neon Object Storage](/docs/storage/overview).
 </Callout>
@@ -75,8 +75,7 @@ This requires two backend endpoints:
 
 <TabItem>
 
-We'll use [Hono](https://hono.dev/) for the server, [`imagekit
-`](https://www.npmjs.com/package/imagekit) for ImageKit interaction, and [`@neondatabase/serverless`](https://www.npmjs.com/package/@neondatabase/serverless) for Neon.
+We'll use [Hono](https://hono.dev/) for the server, [`imagekit`](https://www.npmjs.com/package/imagekit) for ImageKit interaction, and [`@neondatabase/serverless`](https://www.npmjs.com/package/@neondatabase/serverless) for Neon.
 
 First, install the necessary dependencies:
 
@@ -205,14 +204,12 @@ import os
 import psycopg2
 from dotenv import load_dotenv
 from flask import Flask, jsonify, request
-from imagekitio.client import ImageKit
+from imagekitio import ImageKit
 
 load_dotenv()
 
 imagekit = ImageKit(
-    public_key=os.getenv("IMAGEKIT_PUBLIC_KEY"),
     private_key=os.getenv("IMAGEKIT_PRIVATE_KEY"),
-    url_endpoint=os.getenv("IMAGEKIT_URL_ENDPOINT"),
 )
 
 app = Flask(__name__)
@@ -238,7 +235,7 @@ def generate_auth_params_route():
             return jsonify({"success": False, "error": "Unauthorized"}), 401
 
         # Generate token, expire timestamp, and signature
-        auth_params = imagekit.get_authentication_parameters()
+        auth_params = imagekit.helper.get_authentication_parameters()
         return jsonify(
             {
                 "success": True,
@@ -309,10 +306,10 @@ if __name__ == "__main__":
 
 **Explanation**
 
-1.  **Setup:** Initializes the Flask web framework (`app`), the PostgreSQL client function (`get_db_connection`) for Lakebase Postgres, and the ImageKit Python SDK (`imagekit`) using environment variables.
+1.  **Setup:** Initializes the Flask web framework (`app`), the Postgres client function (`get_db_connection`) for Lakebase Postgres, and the ImageKit Python SDK (`imagekit`) using environment variables.
 2.  **Authentication:** Includes a placeholder `get_authenticated_user_id` function. **Replace this with your actual user authentication logic.**
 3.  **API endpoints:**
-    - **`/generate-auth-params` (GET):** Uses the ImageKit SDK's `get_authentication_parameters()` method to create `token`, `expire`, and `signature`. These are returned to the client, usually as JSON.
+    - **`/generate-auth-params` (GET):** Uses the ImageKit SDK's `helper.get_authentication_parameters()` method to create `token`, `expire`, and `signature`. These are returned to the client, usually as JSON.
     - **`/save-metadata` (POST):** Called by the client _after_ it has successfully uploaded a file directly to ImageKit. The client provides the metadata returned by ImageKit. The backend validates the required fields and inserts the data along with the `userId` into the `imagekit_files` table in Lakebase Postgres using `psycopg2`.
 4.  **Database Connection:** The example shows creating a new connection per request. In production, use a global connection pool for better performance.
 
