@@ -78,6 +78,10 @@ ALTER DEFAULT PRIVILEGES IN SCHEMA api GRANT SELECT ON TABLES TO anonymous;
 While this example uses SERIAL for simplicity, consider using UUID as a primary key in production systems, especially in distributed environments, when exposing identifiers in URLs, or when avoiding predictable sequences is important.
 </Admonition>
 
+<Admonition type="note">
+This guide creates an `anonymous` role in the database. The managed Neon Data API creates its own `anonymous` role, so enabling it fails with `anonymous role already exists` on a database that has this role. If you plan to use the Data API, use a separate database for this guide.
+</Admonition>
+
 ## Copy your database connection string
 
 Retrieve an unpooled database connection string. We recommend a direct connection for PostgREST.
