@@ -62,10 +62,10 @@ It's recommended that you create a dedicated Postgres role for replicating data.
 
 <TabItem>
 
-The following CLI command creates a role. To view the CLI documentation for this command, see [Neon CLI commands — roles](/docs/reference/api/branches/create-project-branch-role)
+The following CLI command creates a role. Replace `$PROJECT_ID` with your project ID. You can find it with `neon projects list`. To view the CLI documentation for this command, see [Neon CLI commands: roles](/docs/cli/roles)
 
 ```bash
-neon roles create --name replication_user
+neon roles create --name replication_user --project-id $PROJECT_ID
 ```
 
 </TabItem>
