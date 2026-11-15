@@ -32,6 +32,13 @@ const defaultConfig = {
       './public/images/og-image/logo.png',
       './public/images/og-image/docs-background.jpg',
     ],
+    '/functions/templates/[id]/og': [
+      './src/fonts/geist-mono/GeistMono-Regular.ttf',
+      './src/fonts/inter/Inter-Regular.ttf',
+      './public/images/og-image/logo.png',
+      './public/images/og-image/docs-background.jpg',
+      './public/images/technology-logos/neon-dark.svg',
+    ],
     // The blog `.md` route handler reads the blog snapshot from disk at request
     // time (unlike the blog pages, which are statically generated at build).
     // Its read path is dynamic (process.cwd() + join), so nft can't detect the
