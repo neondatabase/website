@@ -1306,7 +1306,10 @@ describe('FAQ markdown', () => {
     expect(content).toContain(
       'No. Region is fixed at project creation. Migrate to a new project to change regions.'
     );
-    expect(content).toContain('Last updated: 2026-09-23');
+    // Read the FAQ's own date, so editing the FAQ (which restamps updatedOn) doesn't break the test.
+    const { data } = matter(await fs.readFile('content/faqs/change-project-region.md', 'utf8'));
+    const updated = new Date(data.updatedOn).toISOString().slice(0, 10);
+    expect(content).toContain(`Last updated: ${updated}`);
     expect(summary).toBe(
       'No. Region is fixed at project creation. Migrate to a new project to change regions.'
     );
