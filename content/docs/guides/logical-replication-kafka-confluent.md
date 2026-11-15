@@ -73,6 +73,8 @@ In this example, we'll create a publication for a `users` table in the `public` 
 
 2. Create a publication for the `users` table:
 
+   Run this as the database owner, such as `neondb_owner`, not the replication role.
+
    ```sql
    CREATE PUBLICATION users_publication FOR TABLE users;
    ```
