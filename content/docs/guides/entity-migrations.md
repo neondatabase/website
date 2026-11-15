@@ -7,22 +7,21 @@ summary: >-
   dotnet-ef commands to create and evolve tables in a database. Use this
   guide when you need to connect an EF Core application to Neon and generate or
   apply migrations, including incremental schema changes such as adding a
-  column. Migrations must use a direct (non-pooled) Neon connection string;
-  PgBouncer pooled strings are not supported for dotnet-ef operations.
+  column. Use a direct (non-pooled) Neon connection string for migrations.
 enableTableOfContents: true
 updatedOn: '2026-10-28T11:11:18.780Z'
 ---
 
-[Entity Framework](https://learn.microsoft.com/en-us/ef/) is a popular Object-Relational Mapping (ORM) framework for .NET applications. It simplifies database access by allowing developers to work with domain-specific objects and properties without focusing on the underlying database tables and columns. Entity Framework also provides a powerful migration system that enables you to define and manage database schema changes over time.
+[Entity Framework](https://learn.microsoft.com/en-us/ef/) is an Object-Relational Mapping (ORM) framework for .NET applications. It lets you work with domain-specific objects and properties without focusing on the underlying database tables and columns. Entity Framework also includes a migration system that lets you define and manage database schema changes over time.
 
-This guide demonstrates how to use Entity Framework with the Lakebase Postgres database. We'll create a simple .NET application and walk through the process of setting up the database, defining models, and generating and running migrations to manage schema changes.
+This guide shows how to use Entity Framework with the Lakebase Postgres database. You'll create a small .NET web application, set up the database, define models, and generate and run migrations to manage schema changes.
 
 ## Prerequisites
 
 To follow along with this guide, you will need:
 
 - A Neon account. If you do not have one, sign up at [Neon](https://neon.tech). Your Neon project comes with a ready-to-use Postgres database named `neondb`. We'll use this database in the following examples.
-- A recent version of the [.NET SDK](https://dotnet.microsoft.com/en-us/download/dotnet) installed on your local machine. This guide uses .NET 8.0, which is the current Long-Term Support (LTS) version.
+- The [.NET 10 SDK](https://dotnet.microsoft.com/en-us/download/dotnet) installed on your local machine. .NET 10 is the current Long-Term Support (LTS) release. This guide was tested with .NET SDK 10.0.403.
 
 ## Setting up your Neon database
 
@@ -33,7 +32,7 @@ To follow along with this guide, you will need:
 
 ### Retrieve your Neon database connection string
 
-Find your database connection string by clicking the **Connect** button in the Console nav to open the **Connect to your branch** modal. It should appear similar to the following:
+Click the **Connect** button in the Console nav to open the **Connect to your branch** modal. The **Connection pooling** toggle is on by default, which shows a pooled connection string. Turn the toggle off to show the direct connection string. It should look similar to the following:
 
 ```bash
 postgresql://username:password@hostname/dbname?sslmode=require&channel_binding=require
@@ -45,41 +44,40 @@ The Postgres client library we use in this guide requires the connection string 
 Host=hostname;Port=5432;Database=dbname;Username=username;Password=password;SSLMode=Require
 ```
 
-Construct the connection string in this format using the correct values for your Neon connection URI. Keep it handy for later use.
+Construct the connection string in this format using the values from your direct connection string. Keep it handy for later use.
 
-<Admonition type="note">
-Neon supports both direct and pooled database connection strings, which you can find by clicking the **Connect** button in the Console nav to open the **Connect to your branch** modal. A pooled connection string connects your application to the database via a PgBouncer connection pool, allowing for a higher number of concurrent connections. However, using a pooled connection string for migrations can be prone to errors. For this reason, we recommend using a direct (non-pooled) connection when performing migrations. For more information about direct and pooled connections, see [Connection pooling](/docs/connect/connection-pooling).
+<Admonition type="important" title="Use a direct connection for migrations">
+Neon supports both direct and pooled connection strings. A pooled connection string routes your connections through a PgBouncer connection pool, which allows more concurrent connections. Migrations can run into errors through a connection pool, so this guide uses the direct (non-pooled) connection string for all steps. For more information, see [Connection pooling](/docs/connect/connection-pooling).
 </Admonition>
 
 ## Setting up the Entity Framework project
 
 ### Create a new .NET project
 
-Open your terminal and run the following command to create a new .NET console application:
+Open your terminal and run the following commands to create a new ASP.NET Core web project. The `web` template includes the web SDK that the API endpoints in this guide need:
 
 ```bash
-dotnet new console -o guide-neon-entityframework
+dotnet new web -o guide-neon-entityframework
 cd guide-neon-entityframework
 ```
 
 ### Install dependencies
 
-Run the following commands to install the necessary NuGet packages:
+Run the following commands to install the NuGet packages. The versions are pinned to EF Core 10 to match the .NET 10 SDK. Without the pins, the latest EF Core 11 packages require .NET 11 and won't restore:
 
 ```bash
-dotnet add package Microsoft.EntityFrameworkCore
-dotnet add package Microsoft.EntityFrameworkCore.Design
-dotnet add Microsoft.AspNetCore.App
-dotnet add package Npgsql.EntityFrameworkCore.PostgreSQL
+dotnet add package Microsoft.EntityFrameworkCore --version 10.0.15
+dotnet add package Microsoft.EntityFrameworkCore.Design --version 10.0.15
+dotnet add package Npgsql.EntityFrameworkCore.PostgreSQL --version 10.0.3
 dotnet add package dotenv.net
 ```
 
-These packages include the Entity Framework Core libraries, the design-time components for migrations, and the Npgsql provider for PostgreSQL.
+These packages include the Entity Framework Core libraries, the design-time components for migrations, and the Npgsql provider for Postgres.
 
-We will also need the `EF Core` tools to generate and run migrations. Install the `dotnet-ef` tool globally:
+You also need the `dotnet-ef` tool to generate and run migrations. Install the version that matches your EF Core packages:
 
 ```bash
-dotnet tool install --global dotnet-ef
+dotnet tool install --global dotnet-ef --version 10.0.15
 ```
 
 ### Set up the database configuration
@@ -98,13 +96,11 @@ Replace `NEON_POSTGRES_CONNECTION_STRING` with the **formatted** connection stri
 
 Create a new file named `Models.cs` in the project directory and define the data models for your application:
 
-```csharp
-# Models.cs
-
+```csharp filename="Models.cs"
 using System;
 using Microsoft.EntityFrameworkCore;
 
-namespace NeonEFMigrations
+namespace GuideNeonEF
 {
     public class Author
     {
@@ -125,15 +121,12 @@ namespace NeonEFMigrations
 }
 ```
 
-This code defines two entities: `Author` and `Book`. The `Author` entity represents an author with properties for name, bio, and created timestamp. The `Book` entity represents a book with properties for title, author (as a foreign key to the `Author` entity), and created timestamp.
+This code defines two entities: `Author` and `Book`. The `Author` entity has properties for name, bio, and created timestamp. The `Book` entity has properties for title, author (a foreign key to the `Author` entity), and created timestamp.
 
 Also, create a new file named `ApplicationDbContext.cs` in the project directory and add the following code:
 
-```csharp
-# ApplicationDbContext.cs
-
+```csharp filename="ApplicationDbContext.cs"
 using Microsoft.EntityFrameworkCore;
-using GuideNeonEF.Models;
 using dotenv.net;
 
 namespace GuideNeonEF
@@ -166,17 +159,14 @@ namespace GuideNeonEF
 }
 ```
 
-The `ApplicationDbContext` class derives from `DbContext` and represents the database context. It includes the method where we configure the database connection and seed the database at initialization. We also set default values for the `CreatedAt` properties of the `Author` and `Book` entities.
+The `ApplicationDbContext` class derives from `DbContext` and represents the database context. It loads the connection string from the `.env` file, and it seeds the database when the model is built. It also sets default values for the `CreatedAt` properties of the `Author` and `Book` entities.
 
 ### Add seeding script
 
-To seed the database with some initial data, create another script named `ModelBuilderExtensions.cs` in the project directory and add the following code:
+To seed the database with some initial data, create another file named `ModelBuilderExtensions.cs` in the project directory and add the following code:
 
-```csharp
-# ModelBuilderExtensions.cs
-
+```csharp filename="ModelBuilderExtensions.cs"
 using Microsoft.EntityFrameworkCore;
-using GuideNeonEF.Models;
 
 namespace GuideNeonEF
 {
@@ -186,9 +176,9 @@ namespace GuideNeonEF
         {
             var authors = new[]
             {
-                new Author { Id = 1, Name = "J.R.R. Tolkien", Bio = "The creator of Middle-earth and author of The Lord of the Rings.", Country = "United Kingdom"},
-                new Author { Id = 2, Name = "George R.R. Martin", Bio = "The author of the epic fantasy series A Song of Ice and Fire.", Country = "United States"},
-                new Author { Id = 3, Name = "J.K. Rowling", Bio = "The creator of the Harry Potter series.", Country = "United Kingdom"}
+                new Author { Id = 1, Name = "J.R.R. Tolkien", Bio = "The creator of Middle-earth and author of The Lord of the Rings." },
+                new Author { Id = 2, Name = "George R.R. Martin", Bio = "The author of the epic fantasy series A Song of Ice and Fire." },
+                new Author { Id = 3, Name = "J.K. Rowling", Bio = "The creator of the Harry Potter series." }
             };
             modelBuilder.Entity<Author>().HasData(authors);
 
@@ -208,7 +198,7 @@ namespace GuideNeonEF
 }
 ```
 
-This code defines a static method `Seed` that populates the database with some initial authors and books. Entity framework will include this data when generating database migrations.
+This code defines a static method `Seed` that adds some initial authors and books. EF Core includes this data in the generated migrations.
 
 ### Generate migration files
 
@@ -218,7 +208,7 @@ To generate migration files based on the defined models, run the following comma
 dotnet ef migrations add InitialCreate
 ```
 
-This command detects the new `Author` and `Book` entities and generates migration files in the `Migrations` directory to create the corresponding tables in the database.
+This command detects the `Author` and `Book` entities and generates migration files in the `Migrations` directory to create the corresponding tables in the database.
 
 ### Apply the migration
 
@@ -228,7 +218,7 @@ To apply the migration and create the tables in the Lakebase Postgres database, 
 dotnet ef database update
 ```
 
-This command executes the migration file and creates the necessary tables in the database. It will also seed the database with the initial data defined in the `Seed` method.
+This command runs the migration file, creates the tables, and inserts the seed data defined in the `Seed` method.
 
 ## Creating the web application
 
@@ -236,12 +226,8 @@ This command executes the migration file and creates the necessary tables in the
 
 The project directory has a `Program.cs` file that contains the application entry point. Replace the contents of this file with the following code:
 
-```csharp
-# Program.cs
-
+```csharp filename="Program.cs"
 using Microsoft.EntityFrameworkCore;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.Extensions.DependencyInjection;
 using GuideNeonEF;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -258,34 +244,32 @@ app.MapGet("/books/{authorId}", async (int authorId, ApplicationDbContext db) =>
 app.Run();
 ```
 
-This code sets up a simple web application with two endpoints: `/authors` and `/books/[authorId]`. The `/authors` endpoint returns a list of all authors, while the `/books/[authorId]` endpoint returns a list of books written by the author with the specified ID.
+This code sets up a simple web application with two endpoints: `/authors` and `/books/[authorId]`. The `/authors` endpoint returns a list of all authors, and the `/books/[authorId]` endpoint returns the books written by the author with the specified ID.
 
 ### Test the application
 
-To test the application, run the following command:
+To start the application, run the following command:
 
 ```bash
 dotnet run
 ```
 
-This will start a local web server at `http://localhost:5000`. Navigate to these endpoints in your browser to view the seeded data.
+The terminal prints the address the server listens on, for example `http://localhost:5086`. The port can change between runs, so use the address from your terminal. Open these endpoints in your browser, or use `curl` with your address:
 
 ```bash
-curl http://localhost:5000/authors
-curl http://localhost:5000/books/1
+curl http://localhost:5086/authors
+curl http://localhost:5086/books/1
 ```
 
 ## Applying schema changes
 
-We'll see how to handle schema changes by adding a new property `Country` to the `Author` entity to store the author's country of origin.
+You'll add a new property `Country` to the `Author` entity to store the author's country of origin.
 
 ### Update the data model
 
 Open the `Models.cs` file and add a new property to the `Author` entity:
 
-```csharp
-# Models.cs
-
+```csharp filename="Models.cs"
 public class Author
 {
     public int Id { get; set; }
@@ -296,39 +280,28 @@ public class Author
 }
 ```
 
-Also, update the seed data entries for the `Author` model to include the `Country` property:
+Also, update the seed data entries for the `Author` model in `ModelBuilderExtensions.cs` to include the `Country` property. The rest of the `Seed` method stays the same:
 
-```csharp
-# ModelBuilderExtensions.cs
-
-namespace GuideNeonEF
+```csharp filename="ModelBuilderExtensions.cs"
+var authors = new[]
 {
-    public static class ModelBuilderExtensions
-    {
-        public static void Seed(this ModelBuilder modelBuilder)
-        {
-            var authors = new[]
-            {
-                new Author { Id = 1, Name = "J.R.R. Tolkien", Bio = "The creator of Middle-earth and author of The Lord of the Rings.", Country = "United Kingdom" },
-                new Author { Id = 2, Name = "George R.R. Martin", Bio = "The author of the epic fantasy series A Song of Ice and Fire.", Country = "United States" },
-                new Author { Id = 3, Name = "J.K. Rowling", Bio = "The creator of the Harry Potter series.", Country = "United Kingdom" }
-            };
-            modelBuilder.Entity<Author>().HasData(authors);
-            ...
-        }
-    }
-}
+    new Author { Id = 1, Name = "J.R.R. Tolkien", Bio = "The creator of Middle-earth and author of The Lord of the Rings.", Country = "United Kingdom" },
+    new Author { Id = 2, Name = "George R.R. Martin", Bio = "The author of the epic fantasy series A Song of Ice and Fire.", Country = "United States" },
+    new Author { Id = 3, Name = "J.K. Rowling", Bio = "The creator of the Harry Potter series.", Country = "United Kingdom" }
+};
 ```
 
 ### Generate and run the migration
 
-To generate a new migration file for the above schema change, run the following command in the terminal:
+To generate a new migration file for the schema change, run the following command in the terminal:
 
 ```bash
 dotnet ef migrations add AddCountryToAuthor
 ```
 
-This command detects the updated `Author` entity and generates a new migration file to add the new column to the corresponding table in the database. It will also include upserting the seed data with the new property added.
+This command detects the new `Country` property and generates a migration that adds the column to the `Authors` table. It also updates the seeded author rows with their country values. The column is non-nullable with an empty string default, so rows that existed before the migration get an empty string until you update them.
+
+EF Core prints a warning that the migration "may result in the loss of data." This warning refers to the `Down` method, which drops the column if you roll back. The `Up` method doesn't remove data.
 
 Now, to apply the migration, run the following command:
 
@@ -344,11 +317,13 @@ Run the application again:
 dotnet run
 ```
 
-Now, if you navigate to the `/authors` endpoint, you should see the new `Country` property included in the response.
+Now, if you open the `/authors` endpoint, the response includes the `Country` property:
 
 ```bash
-curl http://localhost:5000/authors
+curl http://localhost:5086/authors
 ```
+
+Use the address that `dotnet run` prints if it differs from `http://localhost:5086`.
 
 ## Source code
 
@@ -360,7 +335,7 @@ You can find the source code for the application described in this guide on GitH
 
 ## Conclusion
 
-In this guide, we demonstrated how to set up an Entity Framework project with Lakebase Postgres, define data models, generate migrations, and run them. Entity Framework's migration system make it easy to interact with the database and manage schema evolution over time.
+In this guide, you set up an Entity Framework project with a Neon database, defined data models, generated migrations, and applied them. Each schema change lives in its own migration file, so the change history stays in your project.
 
 ## Resources
 
