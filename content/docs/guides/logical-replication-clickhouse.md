@@ -555,4 +555,3 @@ Terraform will create the ClickHouse Cloud service and set up the ClickPipe to r
 - [ClickHouse Terraform provider documentation](https://registry.terraform.io/providers/ClickHouse/clickhouse/latest/docs)
 
 <NeedHelp/>
-```
