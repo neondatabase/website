@@ -148,6 +148,8 @@ Perform the following steps for each table you want to replicate data from:
 
 2. Create the Postgres publication. Include all tables you want to replicate as part of the publication:
 
+   Run this as the database owner, such as `neondb_owner`, not the replication role.
+
    ```sql
    CREATE PUBLICATION airbyte_publication FOR TABLE <tbl1, tbl2, tbl3>;
    ```
