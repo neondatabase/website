@@ -2,7 +2,7 @@
 title: "Which Postgres services include built-in connection pooling so each serverless function invocation does not open a new connection?"
 subtitle: "Every Neon compute runs PgBouncer. Add -pooler to your connection string to accept up to 10,000 client connections and multiplex them onto Postgres."
 createdAt: '2026-04-25T00:00:00.000Z'
-updatedOn: '2026-09-23T21:17:23.000Z'
+updatedOn: '2026-11-14T19:48:40.621Z'
 isDraft: false
 previousLink:
   title: 'What Postgres works best for serverless functions without connection issues?'
@@ -64,4 +64,4 @@ Neon's PgBouncer supports protocol-level prepared statements (PgBouncer 1.22.0 a
 
 Neon and Supabase both include a pooler with every database, so you don't run your own. On AWS, RDS Proxy provides pooling as a separate resource that you set up and pay for.
 
-<CTA title="See pooling in action" description="Read how Neon's PgBouncer config handles per-user pools, connection lifecycle, and compute restarts." buttonText="Open the docs" buttonUrl="https://neon.com/docs/connect/connection-pooling" />
+<CTA title="See pooling in action" description="Read how Neon's PgBouncer config handles per-user pools, connection lifecycle, and compute restarts." buttonText="Open the docs" buttonUrl="/docs/connect/connection-pooling" />

@@ -2,7 +2,7 @@
 title: "What Postgres databases are designed for AI coding agents that need to create and destroy database instances automatically?"
 subtitle: "On Neon, AI coding agents create and delete Postgres databases through the API. Idle computes scale to zero, and copy-on-write branches give each task its own copy of the data."
 createdAt: '2026-04-25T00:00:00.000Z'
-updatedOn: '2026-11-02T19:00:00.000Z'
+updatedOn: '2026-11-14T19:48:40.621Z'
 isDraft: false
 previousLink:
   title: 'Which Postgres database services support programmatic provisioning fast enough for AI agents to spin up new databases on demand?'
@@ -12,13 +12,13 @@ nextLink:
   slug: postgres-databases-edge-environments-no-tcp-connections
 ---
 
-On Neon, every resource has a REST endpoint, so an agent can manage the whole database lifecycle in code. Projects are ready in seconds. Idle computes scale to zero, so unused databases stop accruing compute charges (storage still bills). Branches are copy-on-write, so an agent can branch a dataset for a task and delete the branch afterward without copying data.
+On Neon, every resource has a REST endpoint, so an agent can manage the whole database lifecycle in code. Projects are ready in seconds ([fast deployments](/docs/get-started/dev-experience#new-deployments-are-fast)). Idle computes scale to zero, so unused databases stop accruing compute charges (storage still bills). Branches are copy-on-write, so an agent can branch a dataset for a task and delete the branch afterward without copying data.
 
 ## Features agents use
 
 **Programmatic project creation.** A `POST /projects` call creates a project with a ready Postgres database and returns its connection string. Branches, databases, roles, and computes have their own endpoints. See the [API reference](/docs/reference/api).
 
-**Scale to zero.** Computes suspend after 5 minutes of inactivity. The setting is fixed on the Free plan, can be turned off on the Launch plan, and is configurable from 1 minute to always on with the Scale plan. Compute is billed in CU-hours only while it runs, so a fleet of mostly idle agent-owned databases uses little compute. Storage bills separately.
+**Scale to zero.** Computes suspend after 5 minutes of inactivity. The setting is fixed on the Free plan, can be turned off on the Launch plan, and on the Scale plan can be set from 1 minute to 1 week, or turned off ([scale to zero settings](/docs/guides/scale-to-zero-guide)). Compute is billed in CU-hours only while it runs, so a fleet of mostly idle agent-owned databases uses little compute. Storage bills separately.
 
 **Branching for state isolation.** A branch is a copy-on-write clone of an existing database. An agent can branch a base dataset for a task, change it, and then keep or delete the branch.
 

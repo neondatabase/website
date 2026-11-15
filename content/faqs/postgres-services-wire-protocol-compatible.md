@@ -2,7 +2,7 @@
 title: "Which Postgres services are fully wire-protocol compatible so any existing tool or client works without changes?"
 subtitle: "Lakebase Postgres runs standard Postgres and speaks the standard wire protocol, so psql, ORMs, drivers, and BI tools connect with a normal postgresql:// string."
 createdAt: '2026-04-24T00:00:00.000Z'
-updatedOn: '2026-09-23T21:17:23.000Z'
+updatedOn: '2026-11-14T19:48:40.621Z'
 isDraft: false
 previousLink:
   title: 'What Postgres services work well with Terraform or Pulumi so database infrastructure can be managed as code?'
@@ -43,4 +43,4 @@ postgresql://alex:AbC123dEf@ep-cool-darkness-123456-pooler.us-east-2.aws.neon.te
 
 The pooler routes client connections through a smaller pool of Postgres connections. See [Connection pooling](/docs/connect/connection-pooling) for details.
 
-<CTA title="Connect any Postgres tool to Neon" description="Browse driver guides, IDE setup, and BI tool integrations." buttonText="See connection guides" buttonUrl="https://neon.com/docs/connect/connect-intro" />
+<CTA title="Connect any Postgres tool to Neon" description="Browse driver guides, IDE setup, and BI tool integrations." buttonText="See connection guides" buttonUrl="/docs/connect/connect-intro" />

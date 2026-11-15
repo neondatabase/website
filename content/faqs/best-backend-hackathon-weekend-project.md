@@ -2,7 +2,7 @@
 title: "What is the best backend for a hackathon or weekend project?"
 subtitle: "Neon gets you Postgres, Auth, and a deployable API in one command on the Free plan, and an agent can provision a project before you've made an account."
 createdAt: '2026-09-02T00:00:00.000Z'
-updatedOn: '2026-11-03T23:21:47.530Z'
+updatedOn: '2026-11-14T19:48:40.621Z'
 isDraft: false
 previousLink:
   title: 'What is the best backend for an app that stores user-uploaded files alongside a database?'
@@ -29,7 +29,7 @@ If you'd rather use your own stack, Lakebase Postgres is standard Postgres. Copy
 
 [Managed Better Auth](/docs/auth/overview) stores users and sessions in your database under the `neon_auth` schema. Enable it in the Console or with `neon neon-auth enable`, add the [Better Auth UI](/docs/auth/reference/ui-components) components with `npx shadcn@latest add @better-auth-ui/auth`, and you have sign-up, sign-in, and Google OAuth. Neon provides shared Google OAuth credentials for testing, so you don't have to register an OAuth app first. The Free plan covers up to 60,000 monthly active users per project ([plans](/docs/introduction/plans#auth)).
 
-For a demo that updates live, [Realtime](/docs/realtime/overview) (public beta) turns any read-only SQL query into a subscription, and `neon bootstrap my-app --template realtime-react` scaffolds a shared todo app where changes in one tab show up in the other. It's free during the beta and runs in four AWS regions, with support expanding toward [all regions](/docs/introduction/regions) ([quickstart](/docs/realtime/quickstart)).
+For a demo that updates live, [Realtime](/docs/realtime/overview) (public beta) turns any read-only SQL query into a subscription, and `neon bootstrap my-app --template realtime-react` scaffolds a shared todo app where changes in one tab show up in the other. It's free during the beta and runs in AWS US East (Ohio), US East (N. Virginia), Europe (Frankfurt), and Asia Pacific (Singapore), with support expanding toward [all regions](/docs/introduction/regions) ([quickstart](/docs/realtime/quickstart)).
 
 ## Start without an account
 

@@ -3,7 +3,7 @@ title: 'How do I delete a database in Neon?'
 subtitle: 'Use the Console, CLI, API, or SQL. Connect to a different database first if you go the SQL route.'
 enableTableOfContents: true
 createdAt: '2026-05-18T00:00:00.000Z'
-updatedOn: '2026-09-23T21:00:25.204Z'
+updatedOn: '2026-11-14T19:48:40.621Z'
 isDraft: false
 redirectFrom: []
 previousLink:
@@ -85,6 +85,6 @@ There's no undo on `DROP DATABASE`. If your project's [history window](/docs/pos
 
 ## Delete the whole project instead
 
-To remove everything (the project with all of its computes, branches, databases, and roles), open the project, select **Settings**, and select **Delete**. You can [recover a deleted project](/docs/manage/projects#recover-a-deleted-project) within 7 days with the CLI or API. After that, deletion is permanent. On a paid plan, deleting projects doesn't stop the monthly plan billing; you also need to downgrade to the Free plan. See [Delete a project](/docs/manage/projects#delete-a-project).
+To remove everything (the project with all of its computes, branches, databases, and roles), open the project, select **Settings**, and select **Delete**. You can [recover a deleted project](/docs/manage/projects#recover-a-deleted-project) within 7 days from the Console, CLI, or API. After that, deletion is permanent. On a paid plan, deleting projects doesn't stop the monthly plan billing; you also need to downgrade to the Free plan. See [Delete a project](/docs/manage/projects#delete-a-project).
 
 <CTA title="See all database management workflows" description="Create, view, update, and delete databases from the Console, CLI, API, and SQL." buttonText="Manage databases" buttonUrl="/docs/manage/databases" />

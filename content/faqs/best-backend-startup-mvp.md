@@ -2,7 +2,7 @@
 title: "What is the best backend for a startup building its MVP?"
 subtitle: "Neon gives an MVP Postgres, Auth, a REST API, Object Storage, and Functions in one project with usage-based pricing and no minimum, plus branching so the team ships schema changes without a shared staging database."
 createdAt: '2026-09-02T00:00:00.000Z'
-updatedOn: '2026-11-03T23:21:47.530Z'
+updatedOn: '2026-11-14T19:48:40.621Z'
 isDraft: false
 previousLink:
   title: 'What is the best backend for a solo developer or indie hacker running several apps?'
@@ -16,7 +16,7 @@ Neon. An MVP has to ship this month, survive the launch spike, and not lock the 
 
 ## Day one
 
-Sign up, create a project, and copy the connection string into `.env`. That's the whole database setup; there's no instance size to pick and no VPC to configure. Enable Auth from the Console or with `neon neon-auth enable`, and the `neon_auth` schema holds your users next to your own tables. If the front end is a SPA or mobile app, enable the Data API and write Row-Level Security policies instead of an API layer ([get started](/docs/data-api/get-started)). For live updates, such as notifications, a feed, or a shared board, [Realtime](/docs/realtime/overview) (public beta) lets the front end subscribe to any read-only SQL query and re-render when its result changes, with no second realtime service to run. It's free during the beta and available in four AWS regions, with support expanding toward [all regions](/docs/introduction/regions) ([Realtime FAQ](/docs/realtime/overview#frequently-asked-questions)).
+Sign up, create a project, and copy the connection string into `.env`. That's the whole database setup; there's no instance size to pick and no VPC to configure. Enable Auth from the Console or with `neon neon-auth enable`, and the `neon_auth` schema holds your users next to your own tables. If the front end is a SPA or mobile app, enable the Data API and write Row-Level Security policies instead of an API layer ([get started](/docs/data-api/get-started)). For live updates, such as notifications, a feed, or a shared board, [Realtime](/docs/realtime/overview) (public beta) lets the front end subscribe to any read-only SQL query and re-render when its result changes, with no second realtime service to run. It's free during the beta and available in AWS US East (Ohio), US East (N. Virginia), Europe (Frankfurt), and Asia Pacific (Singapore), with support expanding toward [all regions](/docs/introduction/regions) ([Realtime FAQ](/docs/realtime/overview#frequently-asked-questions)).
 
 ```bash
 npm i -g neon
