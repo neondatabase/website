@@ -24,7 +24,7 @@ In this guide, you will learn how to stream data from your Lakebase Postgres dat
 
 - A [Materialize account](https://materialize.com/register/).
 - A [Neon account](https://console.neon.tech/).
-- Optionally, you can install the [psql](https://www.postgresql.org/docs/current/logical-replication.html) command line utility for running commands in both Neon and Materialize. Alternatively, you can run commands from the [Neon SQL Editor](/docs/get-started/query-with-neon-sql-editor) and Materialize **SQL Shell**, which require no installation or setup.
+- Optionally, you can install the [psql](https://www.postgresql.org/docs/current/app-psql.html) command line utility for running commands in both Neon and Materialize. Alternatively, you can run commands from the [Neon SQL Editor](/docs/get-started/query-with-neon-sql-editor) and Materialize **SQL Shell**, which require no installation or setup.
 - Read the [important notices about logical replication in Neon](/docs/guides/logical-replication-neon#important-notices) before you begin.
 
 <Admonition type="important" title="Compute and billing">
@@ -34,7 +34,7 @@ Replication keeps compute active (no [scale to zero](/docs/introduction/scale-to
 ## Enable logical replication
 
 <Admonition type="important">
-Enabling logical replication modifies the PostgreSQL `wal_level` configuration parameter, changing it from `replica` to `logical` for all databases in your Neon project. Once the `wal_level` setting is changed to `logical`, it cannot be reverted. Enabling logical replication also restarts all computes in your Neon project, meaning that active connections will be dropped and have to reconnect.
+Enabling logical replication modifies the Postgres `wal_level` configuration parameter, changing it from `replica` to `logical` for all databases in your Neon project. Once the `wal_level` setting is changed to `logical`, it cannot be reverted. Enabling logical replication also restarts all computes in your Neon project, meaning that active connections will be dropped and have to reconnect.
 </Admonition>
 
 To enable logical replication in Neon:
@@ -85,7 +85,7 @@ It is recommended that you create a dedicated Postgres role for replicating data
 
 <TabItem>
 
-The following CLI command creates a role. To view the CLI documentation for this command, see [Neon CLI commands — roles](/docs/reference/api/branches/create-project-branch-role)
+The following CLI command creates a role. Replace `$PROJECT_ID` with your project ID. You can find it with `neon projects list`. To view the CLI documentation for this command, see [Neon CLI commands: roles](/docs/cli/roles)
 
 ```bash
 neon roles create --name replication_user
@@ -157,7 +157,7 @@ If you use Neon's **IP Allow** feature to limit IP addresses that can connect to
 
 In Materialize, a [cluster](https://materialize.com/docs/get-started/key-concepts/#clusters) is an isolated environment, similar to a virtual warehouse in Snowflake. When you create a cluster, you choose the size of its compute resource allocation based on the work you need the cluster to do, whether ingesting data from a source, computing always-up-to-date query results, serving results to clients, or a combination.
 
-In this case, you’ll create 1 new cluster containing 1 medium replica for ingesting source data from your Lakebase Postgres database.
+In this case, you'll create 1 new cluster containing 1 medium replica for ingesting source data from your Lakebase Postgres database.
 
 From a `psql` client connected to Materialize or from the Materialize **SQL Shell**, run the `CREATE CLUSTER` command to create the new cluster:
 
@@ -169,7 +169,7 @@ Materialize recommends starting with a medium [size](https://materialize.com/doc
 
 ## Start ingesting data
 
-Now that you’ve configured your database network and created an ingestion cluster, you can connect Materialize to your Lakebase Postgres database and start ingesting data.
+Now that you've configured your database network and created an ingestion cluster, you can connect Materialize to your Lakebase Postgres database and start ingesting data.
 
 1. From a `psql` client connected to Materialize or from the Materialize **SQL Shell**, use the [CREATE SECRET](https://materialize.com/docs/sql/create-secret/) command to securely store the password for the Postgres role you created earlier:
 
@@ -224,9 +224,9 @@ Now that you’ve configured your database network and created an ingestion clus
 
 ## Check the ingestion status
 
-Before Materialize starts consuming a replication stream, it takes a snapshot of the tables in your publication. Until this snapshot is complete, Materialize won’t have the same view of your data as your Postgres database.
+Before Materialize starts consuming a replication stream, it takes a snapshot of the tables in your publication. Until this snapshot is complete, Materialize won't have the same view of your data as your Postgres database.
 
-In this step, you’ll verify that the source is running and then check the status of the snapshotting process.
+In this step, you'll verify that the source is running and then check the status of the snapshotting process.
 
 1.  From a `psql` client connected to Materialize or from the Materialize **SQL Shell**, use the [mz_source_statuses](https://materialize.com/docs/sql/system-catalog/mz_internal/#mz_source_statuses) table to check the overall status of your source:
 
@@ -249,7 +249,7 @@ In this step, you’ll verify that the source is running and then check the stat
             ON mz_source_statuses.id = sources.referenced_object_id;
             ```
 
-        For each subsource, make sure the status is running. If you see stalled or failed, there’s likely a configuration issue for you to fix. Check the error field for details and fix the issue before moving on. If the status of any subsource is starting for more than a few minutes, contact [Materialize support](https://materialize.com/docs/support/).
+        For each subsource, make sure the status is running. If you see stalled or failed, there's likely a configuration issue for you to fix. Check the error field for details and fix the issue before moving on. If the status of any subsource is starting for more than a few minutes, contact [Materialize support](https://materialize.com/docs/support/).
 
 2.  Once the source is running, use the [mz_source_statistics](https://materialize.com/docs/sql/system-catalog/mz_internal/#mz_source_statistics) table to check the status of the initial snapshot:
 
@@ -277,7 +277,7 @@ In this step, you’ll verify that the source is running and then check the stat
         (1 row)
         ```
 
-    Once `snapshot_commited` is `t`, move on to the next step. Snapshotting can take between a few minutes to several hours, depending on the size of your dataset and the size of the cluster replica you chose for your `ingest_postgres` cluster.
+    Once `snapshot_committed` is `t`, move on to the next step. Snapshotting can take from a few minutes to several hours, depending on the size of your dataset and the size of the cluster replica you chose for your `ingest_postgres` cluster.
 
 ## Right-size the cluster
 
