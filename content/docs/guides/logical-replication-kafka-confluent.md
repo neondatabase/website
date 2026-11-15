@@ -38,7 +38,7 @@ Replication keeps compute active (no [scale to zero](/docs/introduction/scale-to
 ## Enable logical replication in Neon
 
 <Admonition type="important">
-Enabling logical replication modifies the PostgreSQL `wal_level` configuration parameter, changing it from `replica` to `logical` for all databases in your Neon project. Once the `wal_level` setting is changed to `logical`, it cannot be reverted. Enabling logical replication also restarts all computes in your Neon project, which means that active connections will be dropped and have to reconnect.
+Enabling logical replication modifies the Postgres `wal_level` configuration parameter, changing it from `replica` to `logical` for all databases in your Neon project. Once the `wal_level` setting is changed to `logical`, it cannot be reverted. Enabling logical replication also restarts all computes in your Neon project, which means that active connections will be dropped and have to reconnect.
 </Admonition>
 
 To enable logical replication in Neon:
@@ -87,10 +87,10 @@ It is recommended that you create a dedicated Postgres role for replicating data
 
 <TabItem>
 
-The following CLI command creates a role. To view the CLI documentation for this command, see [Neon CLI commands — roles](/docs/reference/api/branches/create-project-branch-role)
+The following CLI command creates a role. Replace `$PROJECT_ID` with your project ID. You can find it with `neon projects list`. To view the CLI documentation for this command, see [Neon CLI commands: roles](/docs/cli/roles)
 
 ```bash
-neon roles create --name replication_user
+neon roles create --name replication_user --project-id $PROJECT_ID
 ```
 
 </TabItem>
@@ -177,7 +177,7 @@ To set up a Postgres CDC source connector for Confluent Cloud:
 
 4. On the **Add Postgres CDC Source connector** page:
    - Select the type of access you want to grant the connector. For the purpose of this guide, we'll select **Global access**, but if you are configuring a production pipeline, Confluent recommends **Granular access**.
-   - Click the **Generate API key & download** button to generate an API key and secret that your connector can use to communicate with your Kafka cluster. Your applications will need this API key and secret to make requests to your Kafka cluster. Store the API key and secret somewhere safe. This is the only time you’ll see the secret.
+   - Click the **Generate API key & download** button to generate an API key and secret that your connector can use to communicate with your Kafka cluster. Your applications will need this API key and secret to make requests to your Kafka cluster. Store the API key and secret somewhere safe. This is the only time you'll see the secret.
 
    Click **Continue**.
 
@@ -198,10 +198,10 @@ To set up a Postgres CDC source connector for Confluent Cloud:
    - **Database name**: `dbname`
    - **Database server name**: `neon_server` (This is a user-specified value that will represent the logical name of your Postgres server. Confluent uses this name as a namespace in all Kafka topic and schema names. It is also used for Avro schema namespaces if the Avro data format is used. The Kafka topic will be created with the prefix `database.server.name`. Only alphanumeric characters, underscores, hyphens, and dots are allowed.)
    - **SSL mode**: `require`
-   - **Database hostname** `ep-cool-darkness-123456.us-east-2.aws.neon.tech` (this example shows the portion of a Neon connection string forms the database hostname)
+   - **Database hostname**: `ep-cool-darkness-123456.us-east-2.aws.neon.tech` (the host portion of your Neon connection string)
    - **Database port**: `5432` (Neon uses port `5432`)
    - **Database username**: `alex`
-   - **Database Password** `AbC123dEf`
+   - **Database Password**: `AbC123dEf`
 
    - If you use Neon's **IP Allow** feature to limit IP addresses that can connect to Neon, you will need to add the Confluent cluster static IP addresses to your allowlist. For information about configuring allowed IPs in Neon, see [Configure IP Allow](/docs/manage/projects#configure-ip-allow). If you do not use Neon's **IP Allow** feature, you can skip this step.
 
@@ -240,7 +240,7 @@ To set up a Postgres CDC source connector for Confluent Cloud:
      "database.server.name": "neon_server",
      "database.sslmode": "require",
      "publication.name": "users_publication",
-     "publication.autocreate.mode": "all_tables",
+     "publication.autocreate.mode": "disabled",
      "snapshot.mode": "initial",
      "tombstones.on.delete": "true",
      "plugin.name": "pgoutput",
@@ -271,7 +271,7 @@ To set up a Postgres CDC source connector for Confluent Cloud:
 
 To verify that events are now being published to a Kafka stream in Confluent:
 
-1. Insert a row into your `users` table from the Neon SQL Editor or a `psql` client connect to your Neon database. For example:
+1. Insert a row into your `users` table from the Neon SQL Editor, or connect to your Neon database with a `psql` client. For example:
 
    ```sql
    -- Insert a new user
