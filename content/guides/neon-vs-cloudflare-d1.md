@@ -14,7 +14,12 @@ Features and prices in this guide were checked against the Neon and Cloudflare d
 
 Neon and Cloudflare D1 are both serverless SQL databases that you don't have to size, and both stop charging for compute when nobody is querying them. The difference is what's underneath. D1 runs SQLite's SQL semantics on Cloudflare's network, is designed to be queried from Workers, and caps each database at 10 GB.
 
-Neon runs [Lakebase Postgres](/docs/introduction/architecture-overview). It's still Postgres, so your drivers, ORMs, and migration tools work unchanged, but it's built on a lakebase, a new category of database architecture. Compute and storage are separate: computes are ephemeral and hold no data, and storage is versioned, copy-on-write, and built on the Postgres write-ahead log (WAL) and object storage. That's what lets a Neon database autoscale, scale to zero, branch at any size in about a second, and restore to any point in its history. Neon then adds the rest of a backend around it, with auth, file storage, functions, and realtime, all of which branch with your data. Neon is part of Databricks, and the same database runs on Databricks as Lakebase, for agent platforms that run it by the thousands and for Fortune 500 companies.
+Neon runs [Lakebase Postgres](/docs/introduction/architecture-overview), which gives you two advantages over D1:
+
+- **It's Postgres.** Postgres has been the most admired and most desired database in the Stack Overflow Developer Survey <a href="https://survey.stackoverflow.co/2025/technology" target="_blank" rel="nofollow noopener noreferrer">every year since 2023</a>. Your drivers, ORMs, migration tools, and extensions work unchanged, and so do your coding agents, which already know Postgres well.
+- **It's Postgres on a lakebase architecture.** Compute and storage are separate: computes are ephemeral and hold no data, and storage is versioned and built on the Postgres write-ahead log (WAL) and object storage. That lets a Neon database autoscale, scale to zero, branch at any size in about a second, and restore to any point in its history.
+
+Around the database, Neon adds the rest of a backend, with auth, file storage, functions, and realtime, all of which branch with your data. Neon is part of Databricks, and the same database runs there as Lakebase, used by agent platforms that run thousands of databases and by Fortune 500 companies.
 
 This guide compares the two for a developer starting a project and for a team running one in production, shows what each costs in four scenarios, and recommends one for each type of project.
 
