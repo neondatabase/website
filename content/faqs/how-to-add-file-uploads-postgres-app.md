@@ -2,11 +2,11 @@
 title: "How do I add file uploads to a Postgres app?"
 subtitle: "With Neon, the browser uploads straight to Object Storage through a presigned URL, a Function signs that URL after checking the user's session, and Postgres stores the object key and metadata."
 createdAt: '2026-11-02T00:00:00.000Z'
-updatedOn: '2026-11-03T23:21:47.530Z'
+updatedOn: '2026-11-15T14:59:27.573Z'
 isDraft: false
 previousLink:
-  title: 'How can an AI agent provision a backend before the user has signed up?'
-  slug: how-ai-agent-provisions-backend-before-signup
+  title: 'How many free projects do Neon and Supabase include, and is it enough for a database per preview or per agent?'
+  slug: how-many-free-projects-neon-vs-supabase
 nextLink:
   title: 'How do I give each preview deployment its own database, file storage, auth, and API endpoints?'
   slug: how-to-give-each-preview-deployment-full-backend
