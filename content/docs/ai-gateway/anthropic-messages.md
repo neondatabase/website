@@ -6,7 +6,7 @@ summary: >-
   Gateway by changing only the base URL. Supports streaming, prompt caching,
   and extended thinking on Claude models.
 enableTableOfContents: true
-updatedOn: '2026-10-31T13:11:38.215Z'
+updatedOn: '2026-11-10T18:56:17.167Z'
 ---
 
 The Anthropic Messages endpoint exposes the [Anthropic Messages API](https://docs.anthropic.com/en/api/messages) through Neon AI Gateway. Use it when you need extended thinking or prompt caching, which require the native Anthropic SDK. For standard completions, the [chat completions](/docs/ai-gateway/chat-completions) endpoint works with all Anthropic models and doesn't require the Anthropic SDK.
@@ -32,10 +32,10 @@ NEON_AI_GATEWAY_BASE_URL=https://br-winter-pond-aptw82ef-api.ai.c-2.us-east-2.aw
 
 This endpoint accepts Anthropic models only. See the [AI Gateway catalog](/docs/ai-gateway/models) for the full list. Supported models:
 
-- `claude-opus-5-5`, `claude-opus-5`, `claude-sonnet-5`, `claude-fable-5`, `claude-fable-5-1`
+- `claude-opus-5-5`, `claude-opus-5`, `claude-sonnet-5-5`, `claude-sonnet-5`, `claude-fable-5`, `claude-fable-5-1`
 - `claude-opus-4-8`, `claude-opus-4-7`, `claude-opus-4-6`, `claude-opus-4-5`, `claude-opus-4-1`
 - `claude-sonnet-4-6`, `claude-sonnet-4-5`
-- `claude-haiku-4-5`
+- `claude-haiku-5-5`, `claude-haiku-4-5`
 
 Sending a non-Anthropic model ID returns `400 model "<model-id>" is not available on the anthropic_messages endpoint`, naming whichever model you sent. Use the [chat completions endpoint](/docs/ai-gateway/chat-completions) if you need to call multiple providers from the same code.
 
