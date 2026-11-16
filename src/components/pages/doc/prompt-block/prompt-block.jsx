@@ -10,11 +10,11 @@ import toPromptGroups from './prompt-groups';
 // A prompt file from public/prompts/, read on the server and shown as one
 // white box per group (blank lines in the file separate groups), an optional grey
 // label above each box, and one button that copies the file as written. A prompt
-// that runs past the first line of its second group starts collapsed.
+// with more than one group starts collapsed after the second group's label.
 const PromptBlock = async ({ src, labels = [] }) => {
   const prompt = (await fs.readFile(path.join(process.cwd(), 'public', src), 'utf8')).trim();
   const groups = toPromptGroups(prompt);
-  const collapsible = groups.length > 2 || (groups.length === 2 && groups[1].length > 1);
+  const collapsible = groups.length > 1;
 
   return (
     <div className="not-prose my-8 rounded-[10px] border border-gray-new-90 bg-gray-new-95 p-4 dark:border-gray-new-15 dark:bg-gray-new-10">
@@ -27,7 +27,10 @@ const PromptBlock = async ({ src, labels = [] }) => {
               </p>
               {index === 0 && <PromptBlockCopyButton text={prompt} />}
             </div>
-            <div className="flex flex-col gap-1.5 rounded-md border border-gray-new-85 bg-white px-3 py-2.5 dark:border-gray-new-20 dark:bg-gray-new-8">
+            <div
+              data-prompt-box
+              className="flex flex-col gap-1.5 rounded-md border border-gray-new-85 bg-white px-3 py-2.5 dark:border-gray-new-20 dark:bg-gray-new-8"
+            >
               {lines.map((line, lineIndex) => (
                 <span
                   key={lineIndex}

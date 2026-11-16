@@ -22,8 +22,8 @@ const ChevronIcon = (props) => (
   </svg>
 );
 
-// Shows the first prompt group and the first line of the second, under a short fade,
-// with a button to show the rest. The collapsed state is CSS on data-collapsed, so
+// Shows the first prompt group and the label of the second, under a short fade, with
+// a button to show the rest. The collapsed state is CSS on data-collapsed, so
 // the server renders it and the page doesn't shift on load.
 const PromptBlockCollapse = ({ collapsible, children }) => {
   const contentId = useId();
@@ -38,7 +38,7 @@ const PromptBlockCollapse = ({ collapsible, children }) => {
         className={cn(
           'relative',
           '[&[data-collapsed]_[data-prompt-group]:nth-child(n+3)]:hidden',
-          '[&[data-collapsed]_[data-prompt-group]:nth-child(2)_[data-prompt-line]:nth-child(n+2)]:hidden'
+          '[&[data-collapsed]_[data-prompt-group]:nth-child(2)_[data-prompt-box]]:hidden'
         )}
       >
         {children}
