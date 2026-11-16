@@ -252,7 +252,7 @@ describe('Middleware - AI Agent Integration Tests', () => {
     });
   });
 
-  describe('Images and guide author pages', () => {
+  describe('Static files and guide author pages', () => {
     it.each([
       '/docs/get-started/sql_editor.png',
       '/docs/get-started/sql_editor%2Epng',
@@ -267,6 +267,18 @@ describe('Middleware - AI Agent Integration Tests', () => {
         expect(global.fetch).not.toHaveBeenCalled();
       }
     );
+
+    it.each([
+      '/docs/guides/n8n-ai-gateway/chat-with-pdfs.json',
+      '/guides/examples/workflow%2Ejson',
+    ])('passes %s through for JSON clients', async (pathname) => {
+      const response = await middleware(
+        createMockRequest(pathname, 'Mozilla/5.0', 'application/json')
+      );
+
+      expect(response.type).toBe('next');
+      expect(global.fetch).not.toHaveBeenCalled();
+    });
 
     it.each(['.md', '%2Emd'])(
       'serves a Markdown 404 for an author URL ending in %s',

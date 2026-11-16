@@ -278,9 +278,12 @@ async function handleProxy(req, analytics) {
       return /[a-z0-9._~-]/i.test(character) ? character : encoded;
     });
     const isImage = IMAGE_EXTENSION.test(normalizedFilename) || pathname === '/docs/og';
+    const isJsonFile =
+      /\.json$/i.test(normalizedFilename) &&
+      (pathname.startsWith('/docs/') || pathname.startsWith('/guides/'));
     const isGuideAuthorPage =
       GUIDE_AUTHOR_PATH.test(pathname) && !normalizedFilename.endsWith('.md');
-    if (isAgent && !isImage && !isGuideAuthorPage) {
+    if (isAgent && !isImage && !isJsonFile && !isGuideAuthorPage) {
       let agentHit404 = false;
       const markdownPath = getMarkdownPath(pathname);
 
