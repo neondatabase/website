@@ -118,7 +118,7 @@ To grant one, see [Assign project access](#assign-project-access). The following
 | Upload or delete objects, create private buckets, and delete buckets                      |   ❌   |   ✅   |  ✅   |
 | Create, reveal, rotate, or revoke Object Storage and AI Gateway credentials               |   ❌   |   ✅   |  ✅   |
 | Deploy, update, or delete Neon Functions and their triggers                               |   ❌   |   ✅   |  ✅   |
-| Enable, disable, or rotate [Realtime](/docs/realtime/overview), and copy its secret                                  |   ❌   |   ✅   |  ✅   |
+| Enable, disable, or rotate [Realtime](/docs/realtime/overview), and copy its secret       |   ❌   |   ✅   |  ✅   |
 | Create a public (`public_read`) Object Storage bucket                                     |   ❌   |   ❌   |  ✅   |
 | Register or delete a Neon Functions custom domain                                         |   ❌   |   ❌   |  ✅   |
 | Manage who can access the project                                                         |   ❌   |   ❌   |  ✅   |
