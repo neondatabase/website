@@ -12,7 +12,7 @@ redirectFrom:
   - /docs/cloud/roadmap
   - /docs/conceptual-guides/roadmap
   - /docs/reference/roadmap
-updatedOn: '2026-11-09T18:24:22.269Z'
+updatedOn: '2026-11-16T16:40:36.956Z'
 ---
 
 This roadmap describes what's in flight, what we delivered recently, and what's on the horizon.
@@ -99,7 +99,7 @@ We're also improving and scaling Lakebase Postgres on Neon. Here's what's on the
 - **Sync Stripe data to Neon in real time**: Stripe Data Pipeline can now stream your Stripe data into a Neon database and keep it in sync, so you can join payments and subscriptions with your app data without webhook handlers. [Read the blog post](/blog/stripe-data-pipeline-realtime-sync-to-postgres).
 - **CJK full-text search in Lakebase Search**: The `lakebase_tokenizer` extension now splits Chinese, Japanese, and Korean text into search terms, so you can run keyword and BM25 search over CJK content. [Learn more](/docs/extensions/lakebase-tokenizer#cjk-text).
 - **New AI Gateway models**: Eleven new models from Anthropic, OpenAI, Google, xAI, and open-weight providers joined the AI Gateway catalog, including `claude-sonnet-5-5` and `gpt-6-sol`. [Learn more](/docs/ai-gateway/overview#available-models).
-- **All AI Gateway models with prepaid credits**: Paid plan users with prepaid credits can now call every model in the AI Gateway catalog, including frontier models from OpenAI, Anthropic, and Google, without requesting access. [Learn more](/docs/ai-gateway/models#available-models).
+- **All AI Gateway models with prepaid credits**: Paid plan users with prepaid credits can now call most models in the AI Gateway catalog, including frontier models from OpenAI, Anthropic, and Google, without requesting access. [Learn more](/docs/ai-gateway/models#available-models).
 - **Send feedback from the CLI and MCP server**: Send feedback to Neon with `neon feedback` in the Neon CLI or the `send_feedback` tool in the Neon MCP server. Only your message is sent, with no account or project details. [Learn more](/docs/introduction/feedback).
 - **Enable backend services at project creation**: Turn on Object Storage, Functions, AI Gateway, and Auth alongside Postgres when you create a project, so it comes up with your whole stack ready. [Learn more](/docs/manage/projects#create-a-project).
 - **More storage on the Free plan**: The Neon Free plan now includes 1 GB of database storage per project, up from 0.5 GB, applied automatically to existing projects. [Learn more](/docs/introduction/plans).
