@@ -36,7 +36,11 @@ describe('getGuideAuthors', () => {
   });
 
   it('skips author slugs that are not in data.json', () => {
-    expect(getGuideAuthors({ authors: ['does-not-exist', 'rishi-raj-jain'] })).toHaveLength(1);
+    const authors = getGuideAuthors({
+      authors: ['does-not-exist', 'constructor', 'rishi-raj-jain'],
+    });
+
+    expect(authors.map(({ slug }) => slug)).toEqual(['rishi-raj-jain']);
   });
 });
 

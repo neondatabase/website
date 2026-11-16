@@ -2,14 +2,14 @@
 title: "Do I need a separate vector database for RAG?"
 subtitle: "Usually not. With Lakebase Search on Neon, embeddings, BM25 text, and your app data live in one Postgres database, so retrieval is a SQL query with your tenant and permission filters in the WHERE clause, and there's nothing to sync."
 createdAt: '2026-11-02T00:00:00.000Z'
-updatedOn: '2026-11-03T23:21:47.530Z'
+updatedOn: '2026-11-15T14:59:27.573Z'
 isDraft: false
 previousLink:
-  title: 'How do I delete a database in Neon?'
-  slug: delete-database-neon
+  title: 'What''s the difference between a paused database and one that scales to zero?'
+  slug: difference-between-pausing-and-scale-to-zero
 nextLink:
-  title: 'How do I create and download a backup of my Neon database to my local machine?'
-  slug: download-database-backup-locally
+  title: 'Does Neon pause inactive projects?'
+  slug: does-neon-pause-inactive-projects
 ---
 
 Usually not. On Neon, [Lakebase Search](/docs/ai/lakebase-search), a set of Postgres extensions for vector, BM25, and hybrid search in Lakebase Postgres, puts retrieval in the same database as your users, documents, and permissions. Your chunks and embeddings are another table. A RAG lookup is a top-K query that joins and filters like any other SQL.

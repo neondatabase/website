@@ -2,7 +2,7 @@
 title: "How do I run cron jobs for a Postgres app without running a server?"
 subtitle: "Use Neon Function Triggers: a schedule trigger runs your TypeScript on a cron next to your database, with no server or worker to keep running. It fires even when the Postgres compute is scaled to zero, can call external APIs, and wakes the database only for the run."
 createdAt: '2026-11-02T00:00:00.000Z'
-updatedOn: '2026-11-13T22:54:32.784Z'
+updatedOn: '2026-11-14T19:48:40.621Z'
 isDraft: false
 previousLink:
   title: 'What is the best way to run background jobs for a Postgres app?'
@@ -18,7 +18,7 @@ Common jobs this covers: nightly cleanup of expired rows, refreshing a materiali
 
 ## Why pg_cron is the wrong tool on a scale-to-zero database
 
-[`pg_cron`](/docs/extensions/pg_cron) schedules SQL inside Postgres, so it only runs while the compute is active. On a compute that scales to zero after 5 minutes of inactivity, jobs scheduled for the idle hours don't run ([scale to zero](/docs/introduction/scale-to-zero)). `pg_cron` also can't call external APIs. Neon's own docs say to consider Function Triggers first and keep `pg_cron` for in-database maintenance on an always-on compute.
+[`pg_cron`](/docs/extensions/pg_cron) schedules SQL inside Postgres, so it only runs while the compute is active. On a compute that scales to zero after 5 minutes of inactivity, jobs scheduled for the idle hours don't run ([scale to zero](/docs/introduction/scale-to-zero)). `pg_cron` also can't call external APIs. For scheduled work, Function Triggers are usually the better choice, and `pg_cron` suits in-database maintenance on a compute that stays active ([pg_cron](/docs/extensions/pg_cron)).
 
 |                        | `pg_cron`                  | Function Triggers                     |
 | ---------------------- | -------------------------- | ------------------------------------- |

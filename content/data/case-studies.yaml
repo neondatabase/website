@@ -1,3 +1,24 @@
+- id: 'ideavo'
+  title: 'Ideavo'
+  isFeatured: false
+  logo:
+    mediaItemUrl: '/images/case-studies/ideavo.svg'
+    mediaDetails:
+      width: 116
+      height: 32
+  quote: ''
+  author:
+    name: ''
+    post: ''
+  isInternal: true
+  internalPostSlug: 'the-agent-builds-the-app-the-user-claims-the-database-how-ideavo-does-it'
+  externalUrl: ''
+  categories:
+    - slug: 'ai'
+      name: 'AI & Agents'
+    - slug: 'platforms'
+      name: 'Platforms'
+
 - id: 'zite'
   title: 'Zite'
   isFeatured: false

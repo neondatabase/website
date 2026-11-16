@@ -90,6 +90,7 @@ To configure Neon Private Networking, perform the following steps:
          - `com.amazonaws.vpce.us-east-2.vpce-svc-0d421498ff01becac`
          - `com.amazonaws.vpce.us-east-2.vpce-svc-0fcb5fccfc8573aa3`
        - **eu-central-1**: Create entries, one for each of the following:
+         - `com.amazonaws.vpce.eu-central-1.vpce-svc-0165f3a480927c9a0`
          - `com.amazonaws.vpce.eu-central-1.vpce-svc-0260f9dcc9bf59e3e`
          - `com.amazonaws.vpce.eu-central-1.vpce-svc-04bac3120b20929cd`
          - `com.amazonaws.vpce.eu-central-1.vpce-svc-05554c35009a5eccb`
@@ -97,8 +98,10 @@ To configure Neon Private Networking, perform the following steps:
          - `com.amazonaws.vpce.eu-central-1.vpce-svc-05a252e6836f01cfd`
          - `com.amazonaws.vpce.eu-central-1.vpce-svc-05a5b03b56954593a`
          - `com.amazonaws.vpce.eu-central-1.vpce-svc-07617c7fc17794cc7`
+         - `com.amazonaws.vpce.eu-central-1.vpce-svc-0efb85c929a6ee91f`
          - `com.amazonaws.vpce.eu-central-1.vpce-svc-0fef417ecf84ed325`
        - **eu-west-2**: Create entries, one for each of the following:
+         - `com.amazonaws.vpce.eu-west-2.vpce-svc-028d190998ab34913`
          - `com.amazonaws.vpce.eu-west-2.vpce-svc-0375428488d22c05b`
          - `com.amazonaws.vpce.eu-west-2.vpce-svc-0c6fedbe99fced2cd`
        - **us-west-2**: Create entries, one for each of the following:
@@ -112,8 +115,10 @@ To configure Neon Private Networking, perform the following steps:
          - `com.amazonaws.vpce.ap-southeast-1.vpce-svc-01c64edf7fe936ac7`
          - `com.amazonaws.vpce.ap-southeast-1.vpce-svc-028cc7060eb23ff43`
          - `com.amazonaws.vpce.ap-southeast-1.vpce-svc-07c68d307f9f05687`
-       - **ap-southeast-2**:
+         - `com.amazonaws.vpce.ap-southeast-1.vpce-svc-0d858726de58b2185`
+       - **ap-southeast-2**: Create entries, one for each of the following:
          - `com.amazonaws.vpce.ap-southeast-2.vpce-svc-031161490f5647f32`
+         - `com.amazonaws.vpce.ap-southeast-2.vpce-svc-07d11c1bc6234e6e4`
        - **sa-east-1**: Create entries, one for each of the following:
          - `com.amazonaws.vpce.sa-east-1.vpce-svc-03cf6c871b7ae95e8`
          - `com.amazonaws.vpce.sa-east-1.vpce-svc-061204a851dbd1a47`

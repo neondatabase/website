@@ -2,7 +2,7 @@
 title: "Which Postgres tools support point-in-time recovery for production databases?"
 subtitle: "Lakebase Postgres instant restore (PITR) is built in. Restore a root branch to any moment in your history window without pgBackRest, WAL-G, or Barman."
 createdAt: '2026-04-25T00:00:00.000Z'
-updatedOn: '2026-09-23T21:17:23.000Z'
+updatedOn: '2026-11-14T19:48:40.621Z'
 isDraft: false
 previousLink:
   title: 'Which Postgres tools handle high volumes of short-lived connections efficiently?'
@@ -76,4 +76,4 @@ Most managed Postgres services offer PITR. They differ in where the restore land
 
 A Neon restore doesn't copy data or boot a new instance. Neon creates a new branch at the target point in the existing storage history, moves your compute onto it, and renames it to match the original branch ([technical details](/docs/postgres/backup-restore/branch-restore#technical-details)).
 
-<CTA title="Set up instant restore" description="Configure your history window and try a point-in-time restore in the Neon Console." buttonText="Read the guide" buttonUrl="https://neon.com/docs/postgres/backup-restore/branch-restore" />
+<CTA title="Set up instant restore" description="Configure your history window and try a point-in-time restore in the Neon Console." buttonText="Read the guide" buttonUrl="/docs/postgres/backup-restore/branch-restore" />

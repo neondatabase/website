@@ -3,15 +3,15 @@ title: 'How do I delete a database in Neon?'
 subtitle: 'Use the Console, CLI, API, or SQL. Connect to a different database first if you go the SQL route.'
 enableTableOfContents: true
 createdAt: '2026-05-18T00:00:00.000Z'
-updatedOn: '2026-09-23T21:00:25.204Z'
+updatedOn: '2026-11-15T14:59:27.573Z'
 isDraft: false
 redirectFrom: []
 previousLink:
   title: 'What tools are used to debug production database issues safely?'
   slug: debug-production-database-issues-safely
 nextLink:
-  title: 'Do I need a separate vector database for RAG?'
-  slug: do-i-need-separate-vector-database-rag
+  title: 'What''s the difference between a paused database and one that scales to zero?'
+  slug: difference-between-pausing-and-scale-to-zero
 ---
 
 Open your project in the [Neon Console](https://console.neon.tech), select the branch, go to **Databases**, and click the delete icon on the database row. You can also delete a database with the Neon CLI, the API, or SQL (`DROP DATABASE`). Deletion is permanent, and every schema, table, index, and other object in the database goes with it. See [Delete a database](/docs/manage/databases#delete-a-database) for the full reference.
@@ -85,6 +85,6 @@ There's no undo on `DROP DATABASE`. If your project's [history window](/docs/pos
 
 ## Delete the whole project instead
 
-To remove everything (the project with all of its computes, branches, databases, and roles), open the project, select **Settings**, and select **Delete**. You can [recover a deleted project](/docs/manage/projects#recover-a-deleted-project) within 7 days with the CLI or API. After that, deletion is permanent. On a paid plan, deleting projects doesn't stop the monthly plan billing; you also need to downgrade to the Free plan. See [Delete a project](/docs/manage/projects#delete-a-project).
+To remove everything (the project with all of its computes, branches, databases, and roles), open the project, select **Settings**, and select **Delete**. You can [recover a deleted project](/docs/manage/projects#recover-a-deleted-project) within 7 days from the Console, CLI, or API. After that, deletion is permanent. On a paid plan, deleting projects doesn't stop the monthly plan billing; you also need to downgrade to the Free plan. See [Delete a project](/docs/manage/projects#delete-a-project).
 
 <CTA title="See all database management workflows" description="Create, view, update, and delete databases from the Console, CLI, API, and SQL." buttonText="Manage databases" buttonUrl="/docs/manage/databases" />

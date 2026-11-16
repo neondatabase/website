@@ -11,7 +11,7 @@ summary: >-
   (Console) or a backup name passed to the CLI or API, which moves the children
   to the backup branch.
 enableTableOfContents: true
-updatedOn: '2026-09-25T09:58:44.827Z'
+updatedOn: '2026-11-14T19:49:05.289Z'
 ---
 
 Neon's **Reset from parent** feature lets you instantly reset all databases on a branch to the latest schema and data from its parent branch, helping you recover from issues, start on new feature development, or keep the different branches in your environment in sync.
@@ -35,7 +35,7 @@ When you reset a branch to its parent, the data and schema is completely replace
 - Object Storage is reset along with the database. The branch's buckets and objects return to the parent's current state, so any uploads, overwrites, and deletes you made on the branch are discarded. This is different from [Instant restore](/docs/postgres/backup-restore/branch-restore), which leaves Object Storage untouched. Functions are not part of the database timeline, so a reset does not affect them.
 - Existing connections will be temporarily interrupted during the reset. However, your connection details _do not change_. All connections are re-established as soon as the reset is done.
 - Root branches (like your project's `production` branch or schema-only branches) cannot be reset because they have no parent branch to reset to.
-- A branch with children can't be reset until the children are handled. In the Console, delete the children when prompted. The CLI and API return an error unless you pass a backup name with `--preserve-under-name` or `preserve_under_name`. Neon then creates the backup branch under that name and moves the children to it.
+- A branch with children can't be reset until the children are handled. In the Console, delete the children when prompted. The CLI and API return an error unless you pass a backup name with `--preserve-under-name` or `preserve_under_name`. Neon then creates the backup branch under that name and moves the children to it. The backup branch has no compute, so `neon connection-string` fails on it until you add one with `neon branches add-compute`.
 
 ### Branch expiration behavior
 
@@ -154,3 +154,4 @@ This ensures staging accurately reflects the current production database state f
 ## Limitations
 
 - **Reset from parent is unavailable for up to 24 hours after a parent is restored from a snapshot.** If a parent branch is restored from a snapshot, its child branches cannot be reset from that parent for up to 24 hours. If you need to update a child branch during this period, consider using [Instant restore](/docs/postgres/backup-restore/branch-restore) to restore the child branch from the parent directly.
+- **Errors when a reset is blocked.** With the CLI, resetting a root branch returns `Branch has no parent`. With the CLI or API, resetting a branch that has children without a backup name returns `Branch has children, preserve_under_name is required`; pass `--preserve-under-name` (CLI) or `preserve_under_name` (API) to keep the old branch under a new name.

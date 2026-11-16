@@ -293,12 +293,13 @@ The code above implements a simple fact-checking agent using Google ADK, leverag
 
 ## URL structure
 
-The gateway uses the model ID and action directly in the URL path. The `google-genai` SDK constructs this automatically from the base URL and model parameter:
+The gateway uses the model ID and action directly in the URL path. The `google-genai` SDK constructs this from the base URL, API version, and model parameter:
 
 ```
-base_url: https://<branch-host>/gemini
-model:    gemini-3-flash
-action:   generateContent or streamGenerateContent
+base_url:    https://<branch-host>/gemini
+api_version: v1beta
+model:       gemini-3-flash
+action:      generateContent or streamGenerateContent
 
 → https://<branch-host>/gemini/v1beta/models/gemini-3-flash:generateContent
 → https://<branch-host>/gemini/v1beta/models/gemini-3-flash:streamGenerateContent

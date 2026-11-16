@@ -2,7 +2,7 @@
 title: "Which Postgres services integrate with GitHub Actions to create a fresh database for every pull request automatically?"
 subtitle: "Neon's official GitHub Actions create a branch per pull request, post schema diffs to PR comments, and delete branches on merge or close."
 createdAt: '2026-04-25T00:00:00.000Z'
-updatedOn: '2026-11-02T19:00:00.000Z'
+updatedOn: '2026-11-14T19:48:40.621Z'
 isDraft: false
 previousLink:
   title: 'What Postgres services let you start free and scale to production without migrating to a different provider?'
@@ -87,4 +87,4 @@ The Free and Launch plans include 10 branches per project, and the Scale plan in
 - **AWS Aurora** supports [database cloning](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Aurora.Managing.Clone.html) with copy-on-write storage, so a clone can start from production data. AWS doesn't publish a GitHub Action for per-PR clones, so you script it with the AWS CLI or SDK. Each clone is a new cluster with its own DB instances to pay for.
 - **AWS RDS for Postgres** doesn't have copy-on-write clones. The usual approach is restoring a snapshot to a new instance for each environment, and each restored instance bills at its full instance-hour rate.
 
-<CTA title="Set up branch-per-PR" description="See ready-to-use starter repos for Vercel, Cloudflare Pages, and Fly.io preview deployments." buttonText="Open the guide" buttonUrl="https://neon.com/docs/guides/branching-github-actions" />
+<CTA title="Set up branch-per-PR" description="See ready-to-use starter repos for Vercel, Cloudflare Pages, and Fly.io preview deployments." buttonText="Open the guide" buttonUrl="/docs/guides/branching-github-actions" />
