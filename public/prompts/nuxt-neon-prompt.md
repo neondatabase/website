@@ -1,4 +1,4 @@
-Set me up for Neon on Nuxt.
+Connect my Nuxt app to Neon.
 
 - Fetch https://neon.com/prompts/agent-setup.md and follow it.
 
