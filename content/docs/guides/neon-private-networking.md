@@ -114,6 +114,7 @@ To configure Neon Private Networking, perform the following steps:
          - `com.amazonaws.vpce.ap-southeast-1.vpce-svc-01c64edf7fe936ac7`
          - `com.amazonaws.vpce.ap-southeast-1.vpce-svc-028cc7060eb23ff43`
          - `com.amazonaws.vpce.ap-southeast-1.vpce-svc-07c68d307f9f05687`
+         - `com.amazonaws.vpce.ap-southeast-1.vpce-svc-0d858726de58b2185`
        - **ap-southeast-2**:
          - `com.amazonaws.vpce.ap-southeast-2.vpce-svc-031161490f5647f32`
        - **sa-east-1**: Create entries, one for each of the following:
