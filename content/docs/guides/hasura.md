@@ -15,7 +15,7 @@ redirectFrom:
 updatedOn: '2026-09-16T19:45:35.340Z'
 ---
 
-Hasura Cloud is an open source GraphQL engine that provides a scalable, highly available, globally distributed, secure GraphQL API for your data sources.
+Hasura Cloud is a hosted service for the open source Hasura GraphQL Engine. It provides a scalable, highly available, globally distributed, secure GraphQL API for your data sources.
 
 This guide covers Hasura v2 on Hasura Cloud. Hasura DDN, Hasura's newer product, uses a different engine and setup, and moving to it is optional. For supported v2 versions and end-of-life dates, see the [Hasura v2 support policy](https://hasura.io/legal/support-policy-hasura-v2).
 
@@ -103,11 +103,11 @@ If you are migrating from Hasura with Heroku Postgres to Neon, refer to the [Imp
 
 ## Maximum connections configuration
 
-In Neon, the maximum number of concurrent connections is defined according to the size of your compute. For example, a 0.25 CU compute in Neon supports 112 connections. The connection limit is higher with larger compute sizes (see [How to size your compute](/docs/manage/computes#how-to-size-your-compute)). You can also enable connection pooling in Neon to support up to 10,000 concurrent connections. However, it is important to note that Hasura has a `HASURA_GRAPHQL_PG_CONNECTIONS` setting that limits Postgres connections to `50` by default. If you start encountering errors related to "max connections", try increasing the value of this setting as a first step, staying within the connection limit for your Neon compute. For information about the Hasura connection limit setting, refer to the [Hasura Postgres configuration documentation](https://hasura.io/docs/latest/deployment/performance-tuning/#postgres-configuration).
+In Neon, the maximum number of concurrent connections is defined according to the size of your compute. For example, a 0.25 CU compute in Neon supports 112 connections. The connection limit is higher with larger compute sizes (see [How to size your compute](/docs/manage/computes#how-to-size-your-compute)). You can also enable connection pooling in Neon to support up to 10,000 concurrent connections. However, Hasura also limits how many connections it opens to each data source, and those connections count against your Neon compute's limit. If you see "too many connections" or "max connections" errors, reduce the pool size for the data source in Hasura or use a larger compute. If requests stall while they wait for a connection, raise the pool size, and stay within the connection limit for your Neon compute. The `HASURA_GRAPHQL_PG_CONNECTIONS` environment variable applies only to the metadata database in Hasura v2.0.0 and later. For details, see the [Hasura flags reference](https://hasura.io/docs/latest/deployment/graphql-engine-flags/reference/).
 
 ## Scale to zero considerations
 
-Neon suspends a compute after five minutes (300 seconds) of inactivity. This behavior can be adjusted on Neon's paid plans. For more information, refer to [Configuring Scale to zero for Neon computes](/docs/guides/scale-to-zero-guide).
+Neon suspends a compute after five minutes (300 seconds) of inactivity. On the Launch plan, you can turn scale to zero off. On the Scale plan, you can change the timeout. For more information, refer to [Configuring Scale to zero for Neon computes](/docs/guides/scale-to-zero-guide).
 
 If you rely on Neon's scale to zero feature to minimize database usage, note that certain Hasura configuration options can keep your Neon compute in an active state:
 
