@@ -18,7 +18,7 @@ updatedOn: '2026-10-28T11:11:18.780Z'
 [Backblaze B2 Cloud Storage](https://www.backblaze.com/cloud-storage) is an S3-compatible object storage service known for its affordability and ease of use. It's suitable for storing large amounts of unstructured data like backups, archives, images, videos, and application assets.
 
 <Callout title="Neon now offers native storage">
-Neon Object Storage is S3-compatible object storage built into the Neon backend. Object storage branches with your database: each branch gets its own isolated namespace, so you can test file uploads in preview branches without touching production. No separate cloud account needed. Use any S3-compatible SDK with your existing Neon credential.
+Neon Object Storage is S3-compatible object storage built into your Neon project. Files branch with your database, so you can test uploads in a preview branch without touching production files. No separate cloud account needed. Point an S3 SDK at your branch endpoint with your Neon credential.
 
 For more information, see [Neon Object Storage](/docs/storage/overview).
 </Callout>
@@ -145,6 +145,8 @@ const region = endpointUrl.hostname.split('.')[1];
 const s3 = new S3Client({
   endpoint: B2_ENDPOINT,
   region: region,
+  // Stops the SDK from adding a checksum of an empty body to presigned URLs.
+  requestChecksumCalculation: 'WHEN_REQUIRED',
   credentials: {
     accessKeyId: process.env.B2_APPLICATION_KEY_ID,
     secretAccessKey: process.env.B2_APPLICATION_KEY,
@@ -329,8 +331,8 @@ def save_b2_metadata_route():
         data = request.get_json()
         object_key = data.get("objectKey")
         public_file_url = data.get("publicFileUrl")
-        if not object_key or not public_file_url:
-            raise ValueError("objectKey and publicFileUrl required in JSON body")
+        if not object_key:
+            raise ValueError("objectKey required in JSON body")
 
         conn = get_db_connection()
         cursor = conn.cursor()
@@ -365,8 +367,8 @@ if __name__ == "__main__":
 2.  **Authentication:** Placeholder `get_authenticated_user_id` needs replacing.
 3.  **Upload endpoints:**
     - **`/presign-b2-upload`:** Generates `object_key` and optional `public_file_url`. Uses `boto3`'s `generate_presigned_url` for `'put_object'` to get a temporary upload URL.
-    - **`/save-b2-metadata`:** Called after client upload. Saves `object_key`, `public_file_url` (can be `None`), and `userId` to the `b2_files` table. Includes basic error handling for duplicates.
-4.  In production, use a global PostgreSQL connection pool.
+    - **`/save-b2-metadata`:** Called after client upload. Saves `object_key`, `public_file_url` (can be `None`), and `userId` to the `b2_files` table. Returns an error response if the insert fails, for example, for a duplicate `object_key`.
+4.  In production, use a global Postgres connection pool.
 
 </TabItem>
 
