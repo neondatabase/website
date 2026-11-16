@@ -19,6 +19,9 @@ const SITE_URL =
     ? `https://${process.env.VERCEL_BRANCH_URL}`
     : process.env.NEXT_PUBLIC_DEFAULT_SITE_URL;
 
+const IMAGE_EXTENSION = /\.(?:avif|gif|ico|jpe?g|png|svg|webp)$/i;
+const GUIDE_AUTHOR_PATH = /^\/guides\/authors\/[^/]+$/;
+
 function isContentRoute(pathname) {
   const path = pathname.slice(1).replace(/\/$/, '');
   const normalized = path.endsWith('.md') ? path.slice(0, -3) : path;
@@ -268,7 +271,16 @@ async function handleProxy(req, analytics) {
     if (staticMd) return staticMd;
 
     const isAgent = isAIAgentRequest(req);
-    if (isAgent) {
+    // Normalize unreserved characters for extension matching and forward the original URL.
+    const filename = pathname.slice(pathname.lastIndexOf('/') + 1);
+    const normalizedFilename = filename.replace(/%([0-9a-f]{2})/gi, (encoded, hex) => {
+      const character = String.fromCharCode(Number.parseInt(hex, 16));
+      return /[a-z0-9._~-]/i.test(character) ? character : encoded;
+    });
+    const isImage = IMAGE_EXTENSION.test(normalizedFilename) || pathname === '/docs/og';
+    const isGuideAuthorPage =
+      GUIDE_AUTHOR_PATH.test(pathname) && !normalizedFilename.endsWith('.md');
+    if (isAgent && !isImage && !isGuideAuthorPage) {
       let agentHit404 = false;
       const markdownPath = getMarkdownPath(pathname);
 

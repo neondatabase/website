@@ -14,7 +14,7 @@ const getAuthors = () => {
 const getAuthor = (id) => {
   try {
     const authorsData = getAuthors();
-    const authorData = authorsData[id];
+    const authorData = Object.hasOwn(authorsData, id) ? authorsData[id] : null;
 
     if (!authorData) return null;
 
