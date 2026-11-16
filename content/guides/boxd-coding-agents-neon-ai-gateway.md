@@ -4,10 +4,10 @@ subtitle: Run Claude Code, Codex, and OpenCode on boxd machines with one Neon AI
 author: rishi-raj-jain
 enableTableOfContents: true
 createdAt: '2026-11-16T00:00:00.000Z'
-updatedOn: '2026-11-16T11:07:57.642Z'
+updatedOn: '2026-11-16T11:35:26.292Z'
 ---
 
-[boxd](https://boxd.sh) machines come with coding agents like Claude Code, Codex, and OpenCode installed. Each agent normally needs its own provider key, such as an Anthropic key for Claude Code and an OpenAI key for Codex, each with its own account and bill, but with [Neon AI Gateway](/docs/ai-gateway/overview), all three agents share one credential for Claude, GPT, Gemini, and open-weight models. You pay for every model from one [prepaid balance](/docs/ai-gateway/prepaid-credits), and switching models doesn't need a new key. Any code on the machine could read that credential, so boxd [host-bound secrets](https://docs.boxd.sh/guides/env-secrets#host-bound-secrets) keep it out of the machine. The machine gets a `bxds_...` placeholder, and boxd swaps in the token only on HTTPS requests to your branch's gateway host.
+[boxd](https://boxd.sh) runs cloud VMs for AI agents, and every machine comes with coding agents like Claude Code, Codex, and OpenCode installed. Each agent normally needs its own provider key, such as an Anthropic key for Claude Code and an OpenAI key for Codex, each with its own account and bill, but with [Neon AI Gateway](/docs/ai-gateway/overview), all three agents share one credential for Claude, GPT, Gemini, and open-weight models. You pay for every model from one [prepaid balance](/docs/ai-gateway/prepaid-credits), and switching models doesn't need a new key. Any code on the machine could read that credential, so boxd [host-bound secrets](https://boxd.sh/blog/a-secret-the-machine-never-has/) keep it out of the machine. The machine gets a `bxds_...` placeholder, and boxd swaps in the token only on HTTPS requests to your branch's gateway host.
 
 In this guide, you'll store one AI Gateway credential in boxd, create a machine where Claude Code, Codex, and OpenCode all use it, and then rotate and revoke the credential while the machine keeps running:
 
@@ -76,10 +76,10 @@ $ npm run agent -- agents-1 opencode "$TASK" neon-gemini/gemini-3-5-flash
 
 ```bash filename="Terminal"
 $ boxd machine exec agents-1 -- printenv NEON_AI_GATEWAY_TOKEN
-bxds_b32a8763625527b192148024acfe980b
+bxds_5c1e9a7b3d2f48e6a0b4c8d2e6f1a3b7
 
 $ boxd machine exec agents-1 -- 'curl -s https://httpbin.org/anything -H "Authorization: Bearer $NEON_AI_GATEWAY_TOKEN" | jq -r .headers.Authorization'
-Bearer bxds_b32a8763625527b192148024acfe980b
+Bearer bxds_5c1e9a7b3d2f48e6a0b4c8d2e6f1a3b7
 ```
 
 </TabItem>
@@ -91,8 +91,8 @@ Bearer bxds_b32a8763625527b192148024acfe980b
 ```bash filename="Terminal"
 $ npm run rotate
 {
-  "tokenId": "nak_live_1ec2b71a53324ca1a40bbbe8201ec3f4",
-  "revoked": ["nak_live_696c2b7de42242818ad380b51eef747a"]
+  "tokenId": "nak_live_9f8e7d6c5b4a39281706f5e4d3c2b1a0",
+  "revoked": ["nak_live_0a1b2c3d4e5f60718293a4b5c6d7e8f9"]
 }
 
 $ npm run agent -- agents-1 claude 'Reply with only: still working' haiku
@@ -108,7 +108,7 @@ still working
 ```bash filename="Terminal"
 $ npm run revoke
 {
-  "revoked": ["nak_live_1ec2b71a53324ca1a40bbbe8201ec3f4"]
+  "revoked": ["nak_live_9f8e7d6c5b4a39281706f5e4d3c2b1a0"]
 }
 
 $ npm run agent -- agents-1 opencode 'Reply with only: ok'
@@ -223,7 +223,7 @@ export async function mintAndStore(branchId: string, host: string) {
 
 In the code above:
 
-- `gateway()` looks up the default branch's gateway URL, such as `https://br-muddy-bonus-bddl5fum-api.ai.c-8.us-east-2.aws.neon.tech`. Each branch has its own gateway host.
+- `gateway()` looks up the default branch's gateway URL, such as `https://br-cool-darkness-a1b2c3d4-api.ai.c-2.us-east-2.aws.neon.tech`. Each branch has its own gateway host.
 - `liveCredentials()` finds this project's credentials by name, so the scripts don't need to store a token id.
 - `domains: [host]` binds the secret to that exact host. A request to any other host carries the placeholder.
 - `scope: 'unattached'` means the secret reaches no machine on its own, only the machines whose spec lists it. Your other boxd machines never get the variable.
@@ -253,9 +253,9 @@ npm run connect
 
 ```json
 {
-  "tokenId": "nak_live_696c2b7de42242818ad380b51eef747a",
+  "tokenId": "nak_live_0a1b2c3d4e5f60718293a4b5c6d7e8f9",
   "secret": "NEON_AI_GATEWAY_TOKEN",
-  "boundTo": "br-muddy-bonus-bddl5fum-api.ai.c-8.us-east-2.aws.neon.tech"
+  "boundTo": "br-cool-darkness-a1b2c3d4-api.ai.c-2.us-east-2.aws.neon.tech"
 }
 ```
 
@@ -263,7 +263,7 @@ npm run connect
 
 ```text
 NAME                   VALUE     SCOPE               HOSTS
-NEON_AI_GATEWAY_TOKEN  (sealed)  private-unattached  br-muddy-bonus-bddl5fum-a…
+NEON_AI_GATEWAY_TOKEN  (sealed)  private-unattached  br-cool-darkness-a1b2c3d4-a…
 ```
 
 ## Create a boxd machine for the agents
@@ -391,7 +391,7 @@ boxd machine exec agents-1 -- printenv NEON_AI_GATEWAY_TOKEN
 ```
 
 ```text
-bxds_b32a8763625527b192148024acfe980b
+bxds_5c1e9a7b3d2f48e6a0b4c8d2e6f1a3b7
 ```
 
 The machine has the placeholder, not the `nt_live_...` token.
@@ -470,7 +470,7 @@ boxd machine exec agents-1 -- 'curl -s https://httpbin.org/anything -H "Authoriz
 ```
 
 ```text
-Bearer bxds_b32a8763625527b192148024acfe980b
+Bearer bxds_5c1e9a7b3d2f48e6a0b4c8d2e6f1a3b7
 ```
 
 httpbin receives the placeholder, not the token. The same header sent to the gateway arrives with the token and returns `200`.
@@ -505,8 +505,8 @@ npm run agent -- agents-1 claude 'Reply with only: still working' haiku
 
 ```json
 {
-  "tokenId": "nak_live_1ec2b71a53324ca1a40bbbe8201ec3f4",
-  "revoked": ["nak_live_696c2b7de42242818ad380b51eef747a"]
+  "tokenId": "nak_live_9f8e7d6c5b4a39281706f5e4d3c2b1a0",
+  "revoked": ["nak_live_0a1b2c3d4e5f60718293a4b5c6d7e8f9"]
 }
 ```
 
