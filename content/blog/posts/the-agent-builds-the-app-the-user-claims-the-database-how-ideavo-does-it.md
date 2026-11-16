@@ -17,8 +17,8 @@ categories:
 authors:
   - carlota-soto
 cover:
-  image: null
-  alt: null
+  image: https://cdn.neonapi.io/public/images/pages/blog/the-agent-builds-the-app-the-user-claims-the-database-how-ideavo-does-it/cover.jpg
+  alt: Ideavo builds apps with Neon databases
 isFeatured: false
 seo:
   title: 'The agent builds the app, the user claims the database: how Ideavo does it - Neon'
@@ -31,7 +31,7 @@ seo:
   ogDescription: >-
     The Ideavo agent creates a Neon project for app through the API, and users
     can claim that database into their own Neon account at any time
-  image: null
+  image: https://cdn.neonapi.io/public/images/pages/blog/the-agent-builds-the-app-the-user-claims-the-database-how-ideavo-does-it/social.jpg
 ---
 
 <blockquote>
@@ -45,7 +45,10 @@ seo:
 
 The Ideavo agent builds complete apps, including auth, database, payments, and business logic. Users can also run parallel agents, connect MCP servers, load reusable skills, and chain custom workflows, sharing a session with your teammates together in real time.
 
-**[ADD CLIP 1]**
+<video autoPlay muted loop playsInline width="708" height="493" aria-label="Building an app with Ideavo">
+<source src="https://cdn.neonapi.io/public/images/pages/blog/the-agent-builds-the-app-the-user-claims-the-database-how-ideavo-does-it/ideavo-clip-1.webm" type="video/webm" />
+<source src="https://cdn.neonapi.io/public/images/pages/blog/the-agent-builds-the-app-the-user-claims-the-database-how-ideavo-does-it/ideavo-clip-1.mp4" type="video/mp4" />
+</video>
 
 ## How Ideavo uses Neon
 
@@ -79,7 +82,10 @@ Ideavo keeps the connection string out of the model's context and the chat histo
 
 The same flow runs when a user clicks “Add” in the database panel instead of asking in chat, and when they add Ideavo's one-click Better Auth integration to a project without a database.
 
-**[ADD CLIP 2]**
+<video autoPlay muted loop playsInline width="708" height="443" aria-label="Provisioning a Neon database in Ideavo">
+<source src="https://cdn.neonapi.io/public/images/pages/blog/the-agent-builds-the-app-the-user-claims-the-database-how-ideavo-does-it/ideavo-clip-2.webm" type="video/webm" />
+<source src="https://cdn.neonapi.io/public/images/pages/blog/the-agent-builds-the-app-the-user-claims-the-database-how-ideavo-does-it/ideavo-clip-2.mp4" type="video/mp4" />
+</video>
 
 Each Ideavo project maps to exactly one Neon project, with one region and one default branch. Users import existing codebases as well as build new ones, so Ideavo keeps every app's data fully separate from every other app's.
 
