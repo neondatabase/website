@@ -36,7 +36,7 @@ seo:
 
 <blockquote>
 <p>"Neon lets our agent create an isolated Postgres database for every user project over an API, and hand it to the user through a claim link. We've provisioned thousands of databases and nobody on our team spends time managing them"</p>
-<cite><a href="https://www.linkedin.com/in/i-m-sid/">Siddhant Choudhary</a>, Founder of <a href="https://ideavo.ai/">Ideavo</a></cite>
+<cite><a href="https://www.linkedin.com/in/i-m-sid/">Siddhant Choudhary</a>, Founder of Ideavo </cite>
 </blockquote>
 
 [Ideavo](https://ideavo.ai) is a free AI app builder where users generate apps from natural language. Instead of charging a subscription, Ideavo has no subscription and no credits - users connect their own API key or AI subscription from OpenAI, Anthropic, Google, OpenRouter, or another provider, and the Ideavo agent builds with it. Every project produces real, editable code that you own and can sync to GitHub, you can deploy on Vercel, add custom domains, and keep full ownership of your app.
@@ -61,7 +61,7 @@ The team had already used Neon at an earlier startup, so they were already fans 
 
 <blockquote>
 <p>“We didn't want any forced infrastructure for us or for our users”</p>
-<cite><a href="https://www.linkedin.com/in/i-m-sid/">Siddhant Choudhary</a>, Founder of <a href="https://ideavo.ai/">Ideavo</a></cite>
+<cite><a href="https://www.linkedin.com/in/i-m-sid/">Siddhant Choudhary</a>, Founder of Ideavo</cite>
 </blockquote>
 
 Neon fits because each of its [backend primitives](https://neon.com/blog/neon-backend-is-ga) is separate and built on a standard interface. Ideavo uses Lakebase Postgres, provisioning it through the [Neon API](https://neon.com/docs/reference/api-reference) - the team can adopt the other primitives in its codebase when they need them.
