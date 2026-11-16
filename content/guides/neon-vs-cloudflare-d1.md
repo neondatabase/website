@@ -135,7 +135,7 @@ D1 is a database. On Cloudflare, file storage, compute, and other services are s
 | **Auth**                       | [Managed Better Auth](/docs/auth/overview), with users stored in your database               | Not part of D1                      |
 | **File storage**               | S3-compatible [Object Storage](/docs/storage/overview) that branches with the database       | Separate product (R2)               |
 | **Functions**                  | [Functions](/docs/compute/functions/overview) next to the data, up to 15 minutes per request | Separate product (Workers)          |
-| **Realtime**                   | [Neon Realtime](/docs/realtime/overview) (beta) makes any read-only SQL query live           | Not part of D1                      |
+| **Functions**                  | [Functions](/docs/compute/functions/overview) next to the data, which start responding within 15 minutes and can keep streaming as long as data flows | Separate product (Workers)          |
 | **HTTP API with access rules** | PostgREST-compatible [Data API](/docs/data-api/overview) that enforces row-level security    | HTTP API without row-level security |
 | **AI models**                  | [AI Gateway](/docs/ai-gateway/overview) with one credential for several providers            | Separate product                    |
 
