@@ -57,6 +57,10 @@ The page gives you the two values your app needs:
 - **Realtime SQL API endpoint URL**: your [Live SQL API](./how-it-works#live-sql-api) endpoint. Use it as the value for `NEON_REALTIME_URL`.
 - **Copy secret**: copies the branch's shared secret, which you use when [sealing queries](./guides/queries#sealing-queries). The Console doesn't display the secret. Use it as the value for `NEON_REALTIME_SECRET`.
 
+<Admonition type="important" title="Enabling Realtime restarts your computes">
+Enabling Realtime turns on [logical replication](/docs/guides/logical-replication-neon) for the whole project. This suspends every compute in the project, on all branches, which drops active connections. See [Before you enable Realtime](./overview#get-started).
+</Admonition>
+
 ### Using the CLI
 
 Run [`neon realtime enable`](/docs/cli/realtime#enable) to enable Realtime for the currently linked project and branch:
@@ -94,7 +98,7 @@ This keeps running until you stop it with `Ctrl+C`. To see the result update, op
 neon psql -- -c "INSERT INTO items (value) VALUES ('bar')"
 ```
 
-By default, `neon realtime subscribe` prints the full query result every time it changes. To see the underlying delta sync instead, subscribe to the raw changes:
+By default, `neon realtime subscribe` prints the initial result, then a log of each transaction's changes. To see the raw rows and changes the client syncs, add `--changes`:
 
 ```bash filename="Terminal"
 neon realtime subscribe --changes "SELECT * FROM items"
@@ -114,7 +118,7 @@ Scaffold it with [`neon bootstrap`](/docs/cli/bootstrap):
 neon bootstrap my-app --template realtime-react
 ```
 
-Bootstrap scaffolds the app, installs the dependencies and links the new `my-app` directory to a Neon project via `neon.ts` config.
+Bootstrap scaffolds the app. When you run it in an interactive terminal, it also installs the dependencies and links the new `my-app` directory to a Neon project, saving the link in a `.neon` file. If it skips either step, or you belong to more than one organization, run `npm install` and [`neon link`](/docs/cli/link) in `my-app` yourself.
 
 If the branch doesn't have Realtime yet, the link step can't pull the env vars and prints a warning to run `neon deploy`. That's the next step.
 
@@ -125,6 +129,8 @@ cd my-app
 neon deploy
 ```
 
+If you already enabled Realtime on this branch in the steps above, `neon deploy` reports that the branch settings conflict with the policy, because the template's `neon.ts` allows the `http://localhost:5173` origin. Run `neon deploy -y` to apply the template's settings.
+
 This automatically writes your `DATABASE_URL`, `NEON_REALTIME_URL` and `NEON_REALTIME_SECRET` to `.env.local`. You can then run migrations and start the app:
 
 ```bash filename="Terminal"
@@ -132,7 +138,7 @@ npm run db:setup
 npm run dev
 ```
 
-Open [http://localhost:5173](http://localhost:5173) in your browser. If you open two windows or tabs, as you change data in one, you'll see it update in realtime in the other.
+Open [http://localhost:5173](http://localhost:5173) in your browser. If you open two windows or tabs, as you change data in one, you'll see it update in realtime in the other. Use `localhost` rather than `127.0.0.1` or a network address, since `neon.ts` only allows the `http://localhost:5173` origin.
 
 ## Add Realtime to an existing app
 
@@ -146,6 +152,8 @@ Install the [Neon MCP server](/docs/ai/neon-mcp-server). Or [use the CLI](/docs/
 neon skills -s neon-realtime
 ```
 
+The command asks which coding agent to install the skill for. To skip the prompt, pass `-y` to use the agents it detects, or name one with `--agent`.
+
 <CopyPrompt src="/prompts/neon-realtime.md"
     description="Copy this to your coding agent to get started with Realtime."
     buttonText="Copy prompt"
@@ -155,7 +163,7 @@ neon skills -s neon-realtime
 
 On the Realtime page in the Neon Console:
 
-- **Rotate secret** replaces the branch's shared secret. Once rotation finishes, the old secret stops working, so click **Copy secret** and update `NEON_REALTIME_SECRET` in every app that uses it.
+- **Rotate secret** replaces the branch's shared secret. Once rotation finishes, the old secret stops working, so click **Copy secret** and update `NEON_REALTIME_SECRET` in every app that uses it, then restart those apps.
 - **Disable Realtime** disconnects all Realtime clients on the branch and discards its shared secret.
 
 To do the same from the CLI, and for details on how rotation and disabling work, see [`neon realtime rotate-secret`](/docs/cli/realtime#rotate-secret) and [`neon realtime disable`](/docs/cli/realtime#disable).

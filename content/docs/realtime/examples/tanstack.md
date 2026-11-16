@@ -17,11 +17,12 @@ The complete app is in the [`realtime/with-tanstack`](https://github.com/neondat
 
 ## Setup
 
-Install the Realtime SDK with its Drizzle and TanStack&nbsp;DB bindings, plus TanStack&nbsp;DB's React package and its router integration:
+Install the Realtime SDK with its Drizzle and TanStack&nbsp;DB bindings, Drizzle ORM and Zod, plus TanStack&nbsp;DB's React package and its router integration:
 
 ```bash filename="Terminal"
-npm install @neon/realtime @neon/realtime-drizzle @neon/realtime-tanstack
+npm install @neon/realtime @neon/realtime-drizzle @neon/realtime-tanstack drizzle-orm zod
 npm install @tanstack/react-db @tanstack/react-router-with-db
+npm install -D @neon/config
 ```
 
 Add a `neon.ts` that enables Managed Better Auth and Realtime on your branch:

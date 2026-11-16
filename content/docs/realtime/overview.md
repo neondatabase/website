@@ -120,7 +120,7 @@ subscription.onChange(console.log)
 
 ---
 
-Or, in your app, use the [higher-level reactivity primitives](/docs/realtime/guides/reactivity) to bind live queries to your component&nbsp;state:
+Or, in your app, use the [higher-level reactivity primitives](/docs/realtime/guides/reactivity) to bind live queries to your component&nbsp;state. Components that call `useLiveQuery` need a [`RealtimeProvider`](/docs/realtime/guides/reactivity#realtimeprovider) above them:
 
 ```tsx filename="App.tsx"
 import { useLiveQuery } from "@neon/realtime-react"
@@ -330,6 +330,8 @@ No. Realtime isn't supported on projects with [IP Allow](/docs/introduction/ip-a
 
 Not yet. Realtime has been architected to support RLS and we aim to add it by GA if priorities allow. However, it's not yet been implemented and isn't the [recommended approach to auth](/docs/realtime/guides/queries#authorization).
 
+A live query on a table with RLS enabled is rejected with the error code `upstream_rejected`. See [table requirements](/docs/realtime/guides/queries#table-requirements).
+
 See [Why not row-level security](/docs/realtime/guides/queries#why-not-row-level-security) for more details.
 
 </FaqItem>
@@ -414,6 +416,6 @@ Live SQL queries replace shapes. For TanStack DB users, [`realtimeCollectionOpti
 
 ## Next steps
 
-[Get started](/docs/realtime/quickstart) with Realtime and learn more about [how it works](/docs/realtime/how-it-works).
+[Get started](/docs/realtime/quickstart) with Realtime, learn more about [how it works](/docs/realtime/how-it-works), and browse the [examples](/docs/realtime/examples/overview).
 
 <NeedHelp/>

@@ -35,7 +35,7 @@ Each Neon **project** exists in exactly one region. Your database runs in that r
 
 ## Product availability
 
-You can create a project in any region listed above, but not every backend product is available in every region yet. Postgres and Managed Better Auth run in all regions. Object Storage, Functions, the AI Gateway, and Realtime are rolling out region by region.
+You can create a project in any region listed above, but not every backend product is available in every region yet. Postgres and Managed Better Auth run in all regions. Object Storage, Functions, the AI Gateway, and [Realtime](/docs/realtime/overview) are rolling out region by region.
 
 | Region                           | Postgres | Managed Better Auth | Object Storage | Functions | AI Gateway | Realtime |
 | :------------------------------- | :------: | :-----------------: | :------------: | :-------: | :--------: | :------: |
