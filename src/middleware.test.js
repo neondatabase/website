@@ -99,7 +99,7 @@ describe('Middleware - AI Agent Integration Tests', () => {
 
   describe('Content routes - AI Agents should get markdown', () => {
     const testCases = [
-      { name: 'Docs', path: '/docs/get-started/full-backend-quickstart' },
+      { name: 'Docs with a dot in the slug', path: '/docs/auth/migrate/from-auth-v0.1' },
       { name: 'PostgreSQL', path: '/postgresql/tutorial' },
       { name: 'Guides', path: '/guides/neon-sst' },
       { name: 'Branching', path: '/branching/introduction' },
@@ -250,6 +250,52 @@ describe('Middleware - AI Agent Integration Tests', () => {
         expect(response.type).toBe('next');
       });
     });
+  });
+
+  describe('Static files and guide author pages', () => {
+    it.each([
+      '/docs/get-started/sql_editor.png',
+      '/docs/get-started/sql_editor%2Epng',
+      '/docs/og',
+      '/guides/authors/dhanush-reddy',
+    ])(
+      'passes %s through for agents without fetching Markdown or tracking a pageview',
+      async (pathname) => {
+        const response = await middleware(createMockRequest(pathname, 'ClaudeBot/1.0', '*/*'));
+
+        expect(response.type).toBe('next');
+        expect(global.fetch).not.toHaveBeenCalled();
+      }
+    );
+
+    it.each([
+      '/docs/guides/n8n-ai-gateway/chat-with-pdfs.json',
+      '/guides/examples/workflow%2Ejson',
+    ])('passes %s through for JSON clients', async (pathname) => {
+      const response = await middleware(
+        createMockRequest(pathname, 'Mozilla/5.0', 'application/json')
+      );
+
+      expect(response.type).toBe('next');
+      expect(global.fetch).not.toHaveBeenCalled();
+    });
+
+    it.each(['.md', '%2Emd'])(
+      'serves a Markdown 404 for an author URL ending in %s',
+      async (suffix) => {
+        const req = createMockRequest(
+          `/guides/authors/dhanush-reddy${suffix}`,
+          'ClaudeBot/1.0',
+          '*/*'
+        );
+        mockFetchByUrl({ md: { ok: false, status: 404 }, probe: { status: 200 } });
+
+        const response = await middleware(req);
+
+        expect(response.status).toBe(404);
+        expect(response.headers.get('Content-Type')).toBe('text/markdown; charset=utf-8');
+      }
+    );
   });
 
   describe('Error handling', () => {
