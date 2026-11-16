@@ -9,7 +9,7 @@ summary: >-
   default branch. Each subcommand accepts `--project-id` (required only for
   accounts with multiple projects) and `--context-file` for reusable context.
 enableTableOfContents: true
-updatedOn: '2026-11-05T15:33:57.188Z'
+updatedOn: '2026-11-09T17:20:53.058Z'
 redirectFrom:
   - /docs/reference/cli-databases
   - /docs/cli/database
@@ -42,7 +42,7 @@ The table is titled with the branch the databases belong to. Pass `--branch <id-
 
 ## neon databases create (#create)
 
-Creates a database. If you don't specify `--owner-name`, the current user becomes the database owner.
+Creates a database. If you don't specify `--owner-name`, the branch's only role becomes the database owner. If the branch has more than one role, the command fails unless you pass `--owner-name`. If it has no roles, the command fails.
 
 <CliUsage command="databases create" />
 
