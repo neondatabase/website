@@ -27,6 +27,8 @@ Have another idea? Reach out on our [Discord server](https://neon.com/discord).
 
 We appreciate every contribution, but we can't accept all of them. What we publish is at Neon's discretion and depends on factors such as fit with our products and direction, value to Neon users, adoption of the tools covered, and overlap with existing content.
 
+If you're contributing on behalf of a tool or service, we also consider whether your own documentation covers using it with Neon. If it does, include a link to that page in your pull request description.
+
 We review every contribution. We may test your instructions and code, ask for revisions, make revisions ourselves, or decide not to merge it. By submitting, you agree that Neon can edit, update, or remove your contribution at any time, including guides published under your name.
 
 ## How to contribute
