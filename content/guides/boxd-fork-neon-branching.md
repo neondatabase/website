@@ -6,10 +6,10 @@ authors:
   - rishi-raj-jain
 enableTableOfContents: true
 createdAt: '2026-11-14T00:00:00.000Z'
-updatedOn: '2026-11-14T05:35:20.663Z'
+updatedOn: '2026-11-16T11:35:26.292Z'
 ---
 
-Giving a coding agent or a pull request its own copy of your app often means rebuilding the app and sharing one database, so a migration on one copy can break the others. With [boxd](https://boxd.sh), you can fork a running machine, disk, memory, and processes included, and [Neon branching](/docs/introduction/branching) gives the fork a copy-on-write copy of your database.
+Giving a coding agent or a pull request its own copy of your app often means rebuilding the app and sharing one database, so a migration on one copy can break the others. With [boxd](https://boxd.sh), which runs cloud VMs for AI agents, you can fork a running machine, disk, memory, and processes included, and [Neon branching](/docs/introduction/branching) gives the fork a copy-on-write copy of your database.
 
 In this guide, you'll fork a notes API on boxd with its own Neon branch, let a coding agent change the schema on the fork, and then delete both. Because the fork starts with the parent's `DATABASE_URL`, a small helper points its app at the new branch:
 
@@ -460,5 +460,6 @@ deleted machine feature-tags and branch br-calm-dawn-bdbyl8dc
 - You don't have to delete a fork as soon as you stop using it. boxd hibernates idle machines after 4 hours by default and wakes them, with the app's processes intact, when you open the URL or call `boxd.machines.wake(id)`. The branch's compute [scales to zero](/docs/introduction/scale-to-zero) after 5 minutes of inactivity.
 - Set an [expiration time](/docs/guides/branch-expiration) on the branches you create, so a forgotten branch is deleted automatically.
 - If an agent breaks the data on a fork, [reset its branch from the parent](/docs/guides/reset-from-parent) and restart the app on the fork.
+- On machines that aren't isolated, agents can also create Neon projects and branches with `run neon` once you [connect the Neon integration](https://boxd.sh/integrations/neon/).
 
 <NeedHelp />
