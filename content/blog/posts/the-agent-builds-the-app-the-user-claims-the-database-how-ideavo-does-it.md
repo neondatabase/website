@@ -45,6 +45,8 @@ seo:
 
 The Ideavo agent builds complete apps, including auth, database, payments, and business logic. Users can also run parallel agents, connect MCP servers, load reusable skills, and chain custom workflows, sharing a session with your teammates together in real time.
 
+**[ADD CLIP 1]**
+
 ## How Ideavo uses Neon
 
 Ideavo uses Neon in two ways:
@@ -76,6 +78,8 @@ The Ideavo agent decides from the user's prompt whether the app needs a database
 Ideavo keeps the connection string out of the model's context and the chat history. The agent knows a DATABASE_URL exists and works against it, but the credential never goes through the LLM.
 
 The same flow runs when a user clicks “Add” in the database panel instead of asking in chat, and when they add Ideavo's one-click Better Auth integration to a project without a database.
+
+**[ADD CLIP 2]**
 
 Each Ideavo project maps to exactly one Neon project, with one region and one default branch. Users import existing codebases as well as build new ones, so Ideavo keeps every app's data fully separate from every other app's.
 
