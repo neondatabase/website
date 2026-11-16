@@ -32,6 +32,7 @@ import IncludeBlock from 'components/pages/doc/include-block';
 import InfoBlock from 'components/pages/doc/info-block';
 import LinkPreview from 'components/pages/doc/link-preview';
 import McpSetupConfigurator from 'components/pages/doc/mcp-setup-configurator';
+import PromptBlock from 'components/pages/doc/prompt-block';
 import Steps from 'components/pages/doc/steps';
 import StickyTable from 'components/pages/doc/sticky-table';
 import Tabs from 'components/pages/doc/tabs';
@@ -251,6 +252,7 @@ const getComponents = (withoutAnchorHeading, isReleaseNote, isPostgres, isTempla
   InlineSvg,
   MegaLink,
   CopyPrompt,
+  PromptBlock,
   AgentPrompt,
   ImageWithCommand,
   McpSetupConfigurator,
