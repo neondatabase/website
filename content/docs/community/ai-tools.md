@@ -13,6 +13,8 @@ updatedOn: '2026-08-27T14:02:21.025Z'
 
 The Neon website repo includes Claude commands for common documentation tasks. All changes are reviewed by humans via pull requests.
 
+The voice and mechanical rules these commands apply are defined once in the [Style guide](/docs/community/style-guide). The commands enforce that guide; they don't define their own rules.
+
 Run `/list-doc-tools` in Claude to see the full list with descriptions, or browse the files under `.claude/commands/` in the [website repository](https://github.com/neondatabase/website).
 
 ## Writing content

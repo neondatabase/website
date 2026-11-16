@@ -77,7 +77,7 @@ prompt: "Create documentation content based on IA plan: [IA output].
 Requirements: [parsed user requirements]
 Target files: [file list]
 Please:
-1. Write content following Neon style guide (developer-friendly, clear, concise)
+1. Write content following the canonical Neon style guide at content/docs/community/style-guide.md (developer-friendly, clear, concise; no em dashes)
 2. Use proper MDX syntax with React components
 3. Include required frontmatter (title, subtitle, enableTableOfContents)
 4. Apply consistent Neon terminology (Neon, Serverless Postgres, compute, branch, project)
