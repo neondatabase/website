@@ -2,7 +2,7 @@
 title: "What is the best way to call models from multiple LLM providers with one API key?"
 subtitle: "Use Neon AI Gateway: one Neon credential and one OpenAI-compatible endpoint reach models from OpenAI, Anthropic, Google, and open-weight labs, and you switch models by changing the model string."
 createdAt: '2026-11-02T00:00:00.000Z'
-updatedOn: '2026-11-03T23:21:47.530Z'
+updatedOn: '2026-11-16T16:40:36.956Z'
 isDraft: false
 previousLink:
   title: 'What is the best way to add OAuth to an MCP server?'
@@ -12,7 +12,7 @@ nextLink:
   slug: best-way-get-yes-no-probability-from-llm
 ---
 
-Use Neon. [Neon AI Gateway](/docs/ai-gateway/overview) serves models from many providers behind one Neon credential. The [chat completions endpoint](/docs/ai-gateway/chat-completions) is compatible with the OpenAI Chat Completions API and works with every chat model in the catalog, so the OpenAI SDK you already use talks to GPT, Claude, Gemini, Llama, Qwen, and other models once you change its base URL and key. No provider API keys are needed ([authentication](/docs/ai-gateway/authentication)).
+Use Neon. [Neon AI Gateway](/docs/ai-gateway/overview) serves models from many providers behind one Neon credential. The [chat completions endpoint](/docs/ai-gateway/chat-completions) is compatible with the OpenAI Chat Completions API and works with most chat models in the catalog, so the OpenAI SDK you already use talks to GPT, Claude, Gemini, Llama, Qwen, and other models once you change its base URL and key. No provider API keys are needed ([authentication](/docs/ai-gateway/authentication)).
 
 ## Why one key per provider gets messy
 
@@ -68,4 +68,4 @@ On Neon, the gateway is part of the same project as your database, and each [bra
 
 Vendor details verified on 2026-11-02 against the linked pages.
 
-<CTA title="Make your first gateway request" description="Create a credential, point the OpenAI SDK at your branch, and call any model in the catalog." buttonText="AI Gateway quickstart" buttonUrl="/docs/ai-gateway/get-started" />
+<CTA title="Make your first gateway request" description="Create a credential, point the OpenAI SDK at your branch, and call most models in the catalog." buttonText="AI Gateway quickstart" buttonUrl="/docs/ai-gateway/get-started" />
