@@ -89,19 +89,16 @@ Neon's Scale plan includes SOC 2, ISO 27001, GDPR, and self-serve HIPAA, plus [I
 
 ### Database
 
-| Feature                                       | Neon                                                                       | Cloudflare D1                                                     |
-| :-------------------------------------------- | :------------------------------------------------------------------------- | :---------------------------------------------------------------- |
-| **Engine**                                    | Postgres 14 to 18                                                          | SQLite's SQL semantics                                            |
-| **Largest database**                          | No hard limit on paid plans, 1 GB per project on Free                      | 10 GB on Workers Paid, 500 MB on Free, **and can't be increased** |
-| **Concurrency**                               | Many concurrent reads and writes                                           | **Single-threaded, one query at a time per database**             |
-| **Compute**                                   | Autoscales up to 16 CU (≈64 GB RAM), fixed up to 56 CU on Scale            | No compute to size, runs within Workers CPU and memory limits     |
-| **Scale to zero**<br/>Compute stops when idle | Yes, after 5 minutes, and it wakes in a few hundred milliseconds           | Yes, you're not billed for compute when there are no queries      |
-| **Access control**                            | Postgres roles and row-level security                                      | No users, roles, or row-level security                            |
-| **Extensions**                                | `pgvector`, PostGIS, `pg_cron`, and [more](/docs/extensions/pg-extensions) | Not available                                                     |
-| **Read replicas**                             | In the same region, sharing the primary's storage                          | Global, in regions closer to users, at no extra charge            |
-| **Where you query it from**                   | Any Postgres driver, the serverless driver, Hyperdrive, or the Data API    | A Workers binding, or the HTTP API                                |
-
-D1's read replicas run in regions around the world and aren't billed separately, so a read-heavy app with users on several continents can serve reads close to each of them (<a href="https://developers.cloudflare.com/d1/best-practices/read-replication/" target="_blank" rel="nofollow noopener noreferrer">source</a>). Neon's read replicas run in the same region as the primary and share its storage, so they start in a few seconds and add no storage cost ([source](/docs/introduction/read-replicas)).
+| Feature                                       | Neon                                                                       | Cloudflare D1                                                          |
+| :-------------------------------------------- | :------------------------------------------------------------------------- | :--------------------------------------------------------------------- |
+| **Engine**                                    | Postgres 14 to 18                                                          | SQLite's SQL semantics                                                 |
+| **Largest database**                          | No hard limit on paid plans, 1 GB per project on Free                      | 10 GB on Workers Paid, 500 MB on Free, **and can't be increased**      |
+| **Concurrency**                               | Many concurrent reads and writes                                           | **Single-threaded, one query at a time per database**                  |
+| **Compute**                                   | Autoscales up to 16 CU (≈64 GB RAM), fixed up to 56 CU on Scale            | No compute to scale up: throughput is one query at a time per database |
+| **Scale to zero**<br/>Compute stops when idle | Yes, after 5 minutes, and it wakes in a few hundred milliseconds           | Yes, you're not billed for compute when there are no queries           |
+| **Access control**                            | Postgres roles and row-level security                                      | No users, roles, or row-level security                                 |
+| **Extensions**                                | `pgvector`, PostGIS, `pg_cron`, and [more](/docs/extensions/pg-extensions) | Not available                                                          |
+| **Where you query it from**                   | Any Postgres driver, the serverless driver, Hyperdrive, or the Data API    | A Workers binding, or the HTTP API                                     |
 
 ### Free plan
 
@@ -111,27 +108,23 @@ D1's read replicas run in regions around the world and aren't billed separately,
 | **Storage**                    | 1 GB per project, 20 GB in total                                                          | 500 MB per database, 5 GB in total                      |
 | **Usage limits**               | 100 CU-hours of compute per project, per month                                            | 5M rows read and 100K rows written per day, per account |
 | **Branches**                   | 10 per project                                                                            | Not available                                           |
-| **Point-in-time restore**      | 6 hours                                                                                   | 7 days                                                  |
-| **Egress**                     | 5 GB per project                                                                          | No egress charges                                       |
 | **Auth, files, and functions** | 60K monthly active users, 5 GB of Object Storage, and 1M Function invocations per project | Not part of D1                                          |
 
 The usage limits work differently. On Neon, each project has its own monthly compute allowance, and a project that uses it up has its compute suspended until the next billing period ([plans](/docs/introduction/plans)). On D1, the read and write limits are shared across your account and reset every day, so one busy database can use up the allowance for the other nine.
 
-D1 keeps more history on Free, with 7 days of Time Travel compared with Neon's 6-hour restore window, and it doesn't charge for egress.
-
 ### Branching and recovery
 
-| Feature                        | Neon                                                             | Cloudflare D1                                       |
-| :----------------------------- | :--------------------------------------------------------------- | :-------------------------------------------------- |
-| **Branches**                   | A copy-on-write copy of the database, auth, files, and functions | **Not available**                                   |
-| **Test a change on real data** | Create a branch, usually ready in under a second                 | Create a new database and import the data           |
-| **Point-in-time restore**      | 6 hours on Free, up to 7 days on Launch, up to 30 days on Scale  | Up to 7 days on Free and 30 days on Workers Paid    |
-| **Query a past state**         | Yes, without changing the live database                          | No, a restore replaces the database's current state |
-| **Snapshots**                  | 1 on Free, 100 on paid plans, plus scheduled backups             | Not available                                       |
+| Feature                        | Neon                                                                         | Cloudflare D1                                                  |
+| :----------------------------- | :--------------------------------------------------------------------------- | :------------------------------------------------------------- |
+| **Branches**                   | A copy-on-write copy of the database, auth, files, and functions             | **Not available**                                              |
+| **Test a change on real data** | Create a branch, usually ready in under a second                             | Create a new database and import the data                      |
+| **Restore**                    | Instant, to any point in the history window, with a backup branch to undo it | Overwrites the database in place and cancels in-flight queries |
+| **Query a past state**         | Yes, without changing the live database                                      | No, a restore replaces the database's current state            |
+| **Snapshots**                  | 1 on Free, 100 on paid plans, plus scheduled backups                         | Not available                                                  |
 
 A Neon restore saves the previous state to a backup branch, so you can undo it ([source](/docs/postgres/backup-restore/branch-restore)). You can also query any point in the history window directly ([time travel queries](/docs/postgres/backup-restore/time-travel-assist)).
 
-D1's Time Travel is always on and costs nothing extra. It restores a database to any minute in its window by overwriting the database in place and cancelling in-flight queries, and you can undo a restore by restoring to the bookmark it returns. It can't yet copy a database to a new one (<a href="https://developers.cloudflare.com/d1/reference/time-travel/" target="_blank" rel="nofollow noopener noreferrer">source</a>).
+D1's Time Travel restores a database to any minute in its window by overwriting the database in place and cancelling in-flight queries, and you can undo a restore by restoring to the bookmark it returns. It can't yet copy a database to a new one (<a href="https://developers.cloudflare.com/d1/reference/time-travel/" target="_blank" rel="nofollow noopener noreferrer">source</a>).
 
 ### Backend services
 
@@ -154,12 +147,11 @@ On Neon, these services live in the same project as the database, so a branch ca
 | :---------------------------------- | :------------------------------------------------------------------------------------------- | :------------------------------------------------------------------------------------------------------ |
 | **Monthly minimum**                 | None on any plan                                                                             | $5 for Workers Paid                                                                                     |
 | **What you pay for**                | Compute in CU-hours, storage in GB-months                                                    | Rows read, rows written, and storage                                                                    |
-| **Compute**                         | $0.106/CU-hour on Launch, $0.222/CU-hour on Scale                                            | No compute charge for D1. Workers that query it bill separately                                         |
+| **Compute**                         | $0.106/CU-hour on Launch, $0.222/CU-hour on Scale                                            | Billed per row read and written instead, and the Workers that query it bill separately                  |
 | **Reads and writes**                | Not billed separately                                                                        | 25B rows read and 50M rows written included, then $0.001 per million reads and $1.00 per million writes |
 | **Storage**                         | $0.35/GB-month                                                                               | 5 GB included, then $0.75/GB-month                                                                      |
 | **Databases**                       | 100 projects on Launch, 1,000 on Scale, unlimited on the Agent Plan, with no per-project fee | 100,000 included, then $0.10 per database per month even when idle, up to 1 million per account         |
 | **Your platform's free-tier users** | On the Agent Plan, their databases run in a free organization that Neon sponsors             | Billed like any other database                                                                          |
-| **Egress**                          | 5 GB per project on Free, 500 GB per project on paid plans, then $0.10/GB                    | None                                                                                                    |
 
 Neon bills for the time your compute runs, so the cost of a query depends on how long it keeps the compute busy, not on how many rows it touches ([plans](/docs/introduction/plans)). D1 bills for every row a query scans or writes: a `SELECT` that scans a 5,000-row table counts as 5,000 rows read, and inserts, updates, and deletes each count as rows written. Every index on a written column adds another row written (<a href="https://developers.cloudflare.com/d1/platform/pricing/" target="_blank" rel="nofollow noopener noreferrer">source</a>).
 
@@ -259,17 +251,14 @@ Choose **Neon** if:
 Choose **Cloudflare D1** if:
 
 - Your whole app runs on Workers, and you want the database in the same platform and bill.
-- Your app is read-heavy and serves users on several continents, so global read replicas help.
-- You serve large responses and want no egress charges.
 - SQLite's feature set covers what you need.
 
 ### Recommendations by project type
 
 - **For side projects and vibe-coded apps:** Neon, since Free includes 100 projects of up to 1 GB each, with auth and file storage, and projects scale to zero instead of hitting a daily query limit.
-- **For apps built on Cloudflare Workers:** either. D1 is built into Workers, and Neon connects through Hyperdrive or the serverless driver when you want Postgres ([Cloudflare Workers guide](/docs/guides/cloudflare-workers)).
+- **For apps built on Cloudflare Workers:** Neon, when you want Postgres and a database that grows past 10 GB. Keep the rest of your app on Workers and R2, and connect through Hyperdrive or the serverless driver ([Cloudflare Workers guide](/docs/guides/cloudflare-workers)).
 - **For AI agents that change your app:** Neon, since an agent can work on a branch with real data and auth, and let it expire.
 - **For write-heavy apps like analytics, logging, or IoT:** Neon, since writes aren't billed per row and a database isn't limited to one query at a time.
-- **For read-heavy content sites with a global audience:** D1, since reads are inexpensive and replicas run close to users.
 - **For B2B SaaS:** Neon, since one Postgres database grows past 10 GB, and Scale includes SOC 2, HIPAA, and an uptime SLA.
 - **For platforms that create a database per user, app, or agent:** Neon, since there's no per-database fee, idle databases cost only their storage, and the [Agent Plan](/docs/introduction/agent-plan) has no project limit and sponsors your free-tier users' databases. Each database can also branch for agent edits and grow past 10 GB when an app takes off.
 
@@ -309,7 +298,7 @@ It can't grow further. Cloudflare says the 10 GB limit per database can't be inc
 
 <FaqItem question="Which is cheaper, Neon or D1?">
 
-For most apps, Neon. It starts cheaper: the Free plan gives you 100 projects at $0, while D1 needs the $5 Workers Paid plan once a database passes 500 MB or your app goes over the daily query limits, and Neon's paid plans have no monthly minimum. It also stays cheaper as your app grows. D1 bills for every row a query scans or writes, so write-heavy apps, dashboards, search, and reports get expensive quickly. Neon bills only for compute time and storage, however many rows your queries touch, so the same workloads run on a small compute for a fraction of the price, as the [cost examples](#cost-examples) show. The gap is widest for platforms with a database per user or app, where D1 charges for every database, used or not. Neon also includes 500 GB of egress per project on paid plans.
+For most apps, Neon. It starts cheaper: the Free plan gives you 100 projects at $0, while D1 needs the $5 Workers Paid plan once a database passes 500 MB or your app goes over the daily query limits, and Neon's paid plans have no monthly minimum. It also stays cheaper as your app grows. D1 bills for every row a query scans or writes, so write-heavy apps, dashboards, search, and reports get expensive quickly. Neon bills only for compute time and storage, however many rows your queries touch, so the same workloads run on a small compute for a fraction of the price, as the [cost examples](#cost-examples) show. The gap is widest for platforms with a database per user or app, where D1 charges for every database, used or not.
 
 </FaqItem>
 
