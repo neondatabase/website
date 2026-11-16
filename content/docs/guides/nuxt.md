@@ -30,7 +30,7 @@ npm create nuxt@latest my-app -- --template minimal --packageManager npm --no-gi
 cd my-app
 ```
 
-Without a terminal, keep `--template`, `--packageManager`, and `--no-gitInit`: if one is missing, the command exits with code 2 and can leave a partial `my-app`, so delete it before you retry.
+In a non-interactive shell, such as an AI agent's, keep `--template`, `--packageManager`, and `--no-gitInit`: if one is missing, the command exits with code 2 and can leave a partial `my-app`, so delete it before you retry.
 
 Nuxt 4 supports Node.js 22.22.3, 24.15, or 26 or later. On another version, npm prints an `EBADENGINE` warning but still installs.
 
@@ -161,7 +161,7 @@ npm install -D @types/pg
 
 </CodeTabs>
 
-If you use node-postgres, `pg` 8.23 and later print a `SECURITY WARNING` for `sslmode=require`. Change it to `sslmode=verify-full` in `.env` to keep the same behavior without the warning. `neon env pull` and `neon checkout` write `sslmode=require` again, so repeat the change after you run them.
+If you use node-postgres, `pg` 8.23 and later print a `SECURITY WARNING` for `sslmode=require`. Change it to `sslmode=verify-full` in `.env` to keep the same behavior without the warning. `neon link`, `neon env pull`, and `neon checkout` write `sslmode=require` again, so repeat the change after you run them.
 
 ## Create the database client
 
@@ -195,7 +195,7 @@ Code in `app/` also runs in the browser, and Nuxt doesn't stop it from importing
 
 ## Query the database in a server route
 
-Create `server/api/version.get.ts`. `sql` (or `pool`) is available without an import:
+Create `server/api/version.get.ts`. If you're adding Neon to an existing app, name it `server/api/neon-version.get.ts` instead. `sql` (or `pool`) is available without an import:
 
 <CodeTabs labels={["Neon serverless driver", "postgres.js", "node-postgres"]}>
 
@@ -222,7 +222,7 @@ export default defineEventHandler(async () => {
 
 </CodeTabs>
 
-In a new app, replace `app/app.vue` to fetch the route and display the result. If you're adding Neon to an existing app, name the route `server/api/neon-version.get.ts` instead, leave your pages as they are, and open `/api/neon-version` to check it. `useFetch` calls the route on the server during the first render:
+In a new app, replace `app/app.vue` to fetch the route and display the result. In an existing app, leave your pages as they are and open `/api/neon-version` to check the route. `useFetch` calls the route on the server during the first render:
 
 ```vue filename="app/app.vue"
 <script setup lang="ts">
@@ -247,7 +247,7 @@ Nuxt 3 has no `app/` directory, so put `app.vue` at the project root. The rest o
 npm run dev
 ```
 
-Open the URL `npm run dev` prints, usually [localhost:3000](http://localhost:3000). The dev server can listen on IPv6 only (`[::1]`), so use that URL rather than `127.0.0.1`. The page shows your Postgres version, confirming the connection:
+Open the URL `npm run dev` prints, usually [localhost:3000](http://localhost:3000). The dev server can listen on IPv6 only (`[::1]`), so `127.0.0.1` may not connect. The page shows your Postgres version, confirming the connection:
 
 ```text
 Database version
@@ -326,9 +326,12 @@ To skip `neon.ts`, use each service's own CLI commands, such as [`neon buckets c
 <DefinitionList>
 
 `NeonDbError (500): Wrong URL scheme or missing user, host or database in connection parameters` in `npm run dev`
-: `DATABASE_URL` isn't in `.env`. If `neon link` wrote it to `.env.local`, move the variables to `.env`, or create an empty `.env` and run `neon env pull`.
+: With the Neon serverless driver, `DATABASE_URL` isn't in `.env`. If `neon link` wrote it to `.env.local`, move the variables to `.env`, or create an empty `.env` and run `neon env pull`.
 
-The built server returns `500` and logs `NeonDbError: Wrong URL scheme`
+`AggregateError [ECONNREFUSED]` in `npm run dev`
+: With postgres.js or node-postgres, `DATABASE_URL` isn't set, so the driver tries a local Postgres server on port 5432. Check that `.env` has `DATABASE_URL`, or create an empty `.env` and run `neon env pull`.
+
+The built server returns `500` and logs `NeonDbError: Wrong URL scheme` or `AggregateError [ECONNREFUSED]`
 : The built server doesn't read `.env`. Set `DATABASE_URL` in your host's environment, or start the server with `node --env-file=.env .output/server/index.mjs`.
 
 </DefinitionList>
