@@ -12,45 +12,60 @@ updatedOn: '2026-11-16T00:27:35.879Z'
 Features and prices in this guide were checked against the Neon and Cloudflare documentation and pricing pages on November 15, 2026. Confirm the current rates on the [Neon pricing](/pricing) page and on Cloudflare's [D1 pricing](https://developers.cloudflare.com/d1/platform/pricing/) page before you decide.
 </Admonition>
 
-Neon and Cloudflare D1 are both serverless SQL databases that you don't have to size, and both stop charging for compute when nobody is querying them. The biggest difference is the engine. D1 runs SQLite's SQL semantics on Cloudflare's network and is designed to be queried from Workers, with each database capped at 10 GB. Neon runs Postgres, the database most production apps already use, and adds the rest of a backend around it: auth, file storage, functions, and realtime, all of which branch with your data.
+Neon and Cloudflare D1 are both serverless SQL databases that you don't have to size, and both stop charging for compute when nobody is querying them. The difference is what's underneath. D1 runs SQLite's SQL semantics on Cloudflare's network, is designed to be queried from Workers, and caps each database at 10 GB.
+
+Neon runs [Lakebase Postgres](/docs/introduction/architecture-overview). It's still Postgres, so your drivers, ORMs, and migration tools work unchanged, but it's built on a lakebase, a new category of database architecture. Compute and storage are separate: computes are ephemeral and hold no data, and storage is versioned, copy-on-write, and built on the Postgres write-ahead log (WAL) and object storage. That's what lets a Neon database autoscale, scale to zero, branch at any size in about a second, and restore to any point in its history. Neon then adds the rest of a backend around it, with auth, file storage, functions, and realtime, all of which branch with your data.
 
 This guide compares the two for a developer starting a project and for a team running one in production, shows what each costs in four scenarios, and recommends one for each type of project.
 
 ## How is Neon different?
 
-### 1. It's Postgres, and it works from any runtime
+### 1. It's a lakebase: Postgres on a serverless architecture
 
-[Lakebase Postgres](/docs/introduction/architecture-overview) is Postgres 14 to 18 ([source](/docs/reference/compatibility)). Your ORM, migration tool, admin GUI, `psql`, and Postgres extensions like [`pgvector`](/docs/extensions/pgvector) work with it as they do anywhere else, and so does what you already know about Postgres. You can connect from a Cloudflare Worker through [Hyperdrive](/docs/guides/cloudflare-hyperdrive) or the [serverless driver](/docs/serverless/serverless-driver), and just as easily from Vercel, a Python script, a mobile backend, or your laptop.
+A classic database is a single server that owns its data, so you size it in advance, pay for it while it runs, and copy all its data to duplicate it. Lakebase Postgres splits that server in two ([architecture](/docs/introduction/architecture-overview)):
+
+- **Ephemeral compute.** Postgres runs on computes that hold no durable data, so they can start, stop, resize, or be replaced without moving data. A compute provisions instantly, autoscales between limits you set, and scales to zero when idle, restarting on the next query in a few hundred milliseconds.
+- **Durable, versioned storage.** Every change is written to the WAL, replicated across a quorum, and kept as history in object storage. Because storage is copy-on-write and keeps that history, a branch or a restore is a metadata operation, not a data copy. A 1 TB database branches as fast as a 1 GB one, and you can roll back to any moment in the history window instantly.
+
+![Lakebase architecture: ephemeral Postgres computes on top of a durable storage layer built on the WAL and object storage](/docs/introduction/neon-architecture-overview.png)
+
+This architecture is behind most of what follows in this guide: databases you don't have to size, idle databases that cost only storage, branches for every pull request or agent, and instant restores. The same Lakebase Postgres also runs on Databricks, so an app that becomes part of how a company runs has a direct path to the company's lakehouse data ([Neon and Lakebase](/docs/introduction/neon-and-lakebase)).
+
+D1 runs each database as a single-threaded SQLite database that processes one query at a time and is capped at 10 GB (<a href="https://developers.cloudflare.com/d1/platform/limits/" target="_blank" rel="nofollow noopener noreferrer">source</a>). It has no branches, and its Time Travel restores a database by overwriting it in place (<a href="https://developers.cloudflare.com/d1/reference/time-travel/" target="_blank" rel="nofollow noopener noreferrer">source</a>).
+
+### 2. It's still Postgres, and it works from any runtime
+
+Lakebase Postgres is Postgres 14 to 18 ([source](/docs/reference/compatibility)). Your ORM, migration tool, admin GUI, `psql`, and Postgres extensions like [`pgvector`](/docs/extensions/pgvector) work with it as they do anywhere else, and so does what you already know about Postgres. You can connect from a Cloudflare Worker through [Hyperdrive](/docs/guides/cloudflare-hyperdrive) or the [serverless driver](/docs/serverless/serverless-driver), and just as easily from Vercel, a Python script, a mobile backend, or your laptop.
 
 D1 uses SQLite's SQL dialect and is built to be queried from Workers and Pages through a binding, with an HTTP API for access from elsewhere (<a href="https://developers.cloudflare.com/d1/" target="_blank" rel="nofollow noopener noreferrer">source</a>). SQLite has no users, roles, or row-level security, and Postgres extensions aren't available.
 
-### 2. More room on the Free plan
+### 3. More room on the Free plan
 
 Neon Free includes 100 projects, each with 100 CU-hours of compute a month, 1 GB of Postgres storage (20 GB across all projects), 10 branches, and 5 GB of egress ([source](/docs/introduction/plans)). Each project's compute scales to zero after 5 minutes idle and resumes on the next query, typically in a few hundred milliseconds, and projects are never paused for inactivity ([scale to zero](/docs/introduction/scale-to-zero)).
 
 D1 on the Workers Free plan includes 10 databases of up to 500 MB each, with 5 GB of storage in total. Reads are limited to 5 million rows and writes to 100,000 rows per day, and once an account hits either limit, queries return errors until the limit resets at 00:00 UTC (<a href="https://developers.cloudflare.com/d1/platform/limits/" target="_blank" rel="nofollow noopener noreferrer">limits</a>, <a href="https://developers.cloudflare.com/d1/platform/pricing/" target="_blank" rel="nofollow noopener noreferrer">pricing</a>).
 
-### 3. A backend you can branch
+### 4. A backend you can branch
 
 A Neon branch is a copy-on-write copy of your whole backend: the database, [Managed Better Auth](/docs/auth/overview) users and sessions, [Object Storage](/docs/storage/overview) buckets and files, and [Functions](/docs/compute/functions/overview). It starts with your data and is usually ready in under a second, so a pull request, a teammate, or an AI agent can test a change without touching production. A branch can delete itself after a time you set ([branch expiration](/docs/guides/branch-expiration)).
 
 D1 doesn't have branches. To test a change on a copy, you export the database and import it into a new one, and a running export blocks other requests to the database (<a href="https://developers.cloudflare.com/d1/best-practices/import-export-data/" target="_blank" rel="nofollow noopener noreferrer">source</a>). D1's Time Travel restores a database to an earlier minute by overwriting it in place, and it can't yet copy a database to a new one (<a href="https://developers.cloudflare.com/d1/reference/time-travel/" target="_blank" rel="nofollow noopener noreferrer">source</a>).
 
-### 4. A database for every user, app, or agent
+### 5. A database for every user, app, or agent
 
-If you're building a platform, such as an AI app builder, a multi-tenant SaaS, or an agent that ships apps, you can give every user, app, or agent its own Postgres database. Each Neon project is created through the API in seconds, with nothing to size up front, and **there's no per-project fee**. A database nobody uses scales to zero and costs only the storage it holds. When one takes off, it autoscales, with no 10 GB ceiling. Every project can branch, so an agent can try an edit on a copy of the user's real data and throw the copy away. You can cap each project's compute, egress, and storage from the API ([consumption limits](/docs/guides/consumption-limits)), and with [Claimable Neon](/claimable-neon) an agent can create a database before its user has a Neon account.
+If you're building a platform, such as an AI app builder, a multi-tenant SaaS, or an agent that ships apps, you can give every user, app, or agent its own Postgres database. Classic managed Postgres can't do this economically, since each database is a server you size in advance and pay for while it runs, whether or not anyone uses it. On a lakebase, computes run only while a database is in use, and data lives in shared storage. Each Neon project is created through the API in seconds, with nothing to size up front, and **there's no per-project fee**. A database nobody uses scales to zero and costs only the storage it holds. When one takes off, it autoscales, with no 10 GB ceiling. Every project can branch, so an agent can try an edit on a copy of the user's real data and throw the copy away. You can cap each project's compute, egress, and storage from the API ([consumption limits](/docs/guides/consumption-limits)), and with [Claimable Neon](/claimable-neon) an agent can create a database before its user has a Neon account.
 
 The [Agent Plan](/docs/introduction/agent-plan) is built for this. It has no project limit, bills compute at $0.106/CU-hour, and includes up to $25,000 in credits. **Databases for your platform's free-tier users run in a free organization that Neon sponsors, so they cost you nothing.**
 
 D1 is also designed for many small databases, and Workers Paid includes 100,000 of them. Above that, **each database costs $0.10 a month, even when it's empty or nobody queries it**, and an account is limited to 1 million databases and 1 TB of storage unless Cloudflare raises the storage limit on request (<a href="https://developers.cloudflare.com/d1/platform/limits/" target="_blank" rel="nofollow noopener noreferrer">source</a>). At a million databases, that's $90,000 a month in database fees alone, before storage or queries.
 
-### 5. One database that grows with your app
+### 6. One database that grows with your app
 
 On Neon's paid plans, storage has no hard limit and grows with your data, and compute autoscales up to 16 CU (≈64 GB RAM), or runs at a fixed size up to 56 CU (≈224 GB RAM) on Scale ([autoscaling](/docs/introduction/autoscaling), [plans](/docs/introduction/plans)). Postgres processes reads and writes from many connections at once, and [read replicas](/docs/introduction/read-replicas) take read traffic off the primary.
 
 **Each D1 database is capped at 10 GB, and Cloudflare says the limit can't be increased.** Each database is also single-threaded and processes queries one at a time, so its throughput depends on how long each query takes: at 1 ms per query it handles at most 1,000 queries a second. A database that gets too many concurrent requests returns an "overloaded" error once its queue is full (<a href="https://developers.cloudflare.com/d1/platform/limits/" target="_blank" rel="nofollow noopener noreferrer">source</a>). D1 is designed for spreading data across many small databases, for example one per user or tenant, so an app that outgrows 10 GB has to split its data.
 
-### 6. Production controls and compliance
+### 7. Production controls and compliance
 
 Neon's Scale plan includes SOC 2, ISO 27001, GDPR, and self-serve HIPAA, plus [IP Allow](/docs/introduction/ip-allow), [Private Networking](/docs/guides/neon-private-networking), an uptime SLA, and metrics and logs export, with no monthly minimum ([plans](/docs/introduction/plans), [compliance](/docs/security/compliance)).
 
