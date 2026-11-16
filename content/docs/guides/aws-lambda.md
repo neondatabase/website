@@ -23,7 +23,7 @@ This guide describes how to set up a Neon database and connect to it from an AWS
 
 - A Neon account. If you do not have one, see [Sign up](/docs/get-started/signing-up/) for instructions.
 - An AWS account. You can create a free AWS account at [AWS Free plan](https://aws.amazon.com/free/). An [IAM User and Access Key](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_users_create.html) are required to programmatically interact with your AWS account. You must provide these credentials when deploying the Serverless Framework project.
-- A Service Framework account. You can sign up at [Serverless Framework](https://www.serverless.com/).
+- A Serverless Framework account. You can sign up at [Serverless Framework](https://www.serverless.com/).
 
 ## Create a Neon project
 
@@ -66,7 +66,7 @@ Create the Lambda function using the [Serverless Framework](https://www.serverle
    npm install -g serverless
    ```
 
-2. Create a `my-lambda` project directory and navigate to it.
+2. Create a `neon-lambda` project directory and navigate to it.
 
    ```bash
    mkdir neon-lambda
@@ -142,7 +142,7 @@ Create the Lambda function using the [Serverless Framework](https://www.serverle
    ```json
    {
      "dependencies": {
-       "pg": "^8.13.1"
+       "pg": "^8.23.1"
      }
    }
    ```
@@ -159,10 +159,16 @@ Create the Lambda function using the [Serverless Framework](https://www.serverle
      if (!client) {
        console.log('Initializing new database client');
        client = new Client({ connectionString: process.env.DATABASE_URL });
+       // Without a listener, a dropped connection crashes the process.
+       client.on('error', (error) => {
+         console.error('Database connection error:', error);
+         client = undefined;
+       });
        try {
          await client.connect();
        } catch (error) {
          console.error('Error connecting to the database:', error);
+         client = undefined;
          return {
            statusCode: 500,
            body: JSON.stringify({
@@ -182,6 +188,7 @@ Create the Lambda function using the [Serverless Framework](https://www.serverle
        };
      } catch (error) {
        console.error('Error executing query:', error);
+       client = undefined;
        return {
          statusCode: 500,
          body: JSON.stringify({
@@ -196,6 +203,8 @@ Create the Lambda function using the [Serverless Framework](https://www.serverle
 
    This function uses the `pg` library to connect to the Neon database. It creates a new `Client` instance and passes the database connection string, which is defined in the `DATABASE_URL` environment variable. It then calls `connect()` to establish a connection to the database. Finally, it uses the `query()` method to execute a `SELECT` statement that retrieves all rows from the `users` table.
 
+   The `error` listener and the `client = undefined` resets handle a dropped connection. Without them, an idle connection that Neon closes crashes the function's process. With them, the next invocation opens a new connection.
+
    The query method returns a `Promise` that resolves to an object containing the rows retrieved by the `SELECT` statement, which the function parses to retrieve the `rows` property. Finally, the function returns an `HTTP` response with a status code of 200 and a body that contains a `JSON` object with a single `data` property, which is set to the value of the rows variable.
 
 6. Add the `DATABASE_URL` environment variable and the function definition to the `serverless.yml` file, which is located in your `aws-node-project` directory.
@@ -204,14 +213,14 @@ Create the Lambda function using the [Serverless Framework](https://www.serverle
    Environment variables can also be added to a `.env` file and loaded automatically with the help of the [dotenv](https://www.npmjs.com/package/dotenv) package. For more information, see [Resolution of environment variables](https://www.serverless.com/framework/docs/environment-variables).
    </Admonition>
 
-   You can find your database connection details by clicking the **Connect** button in the Console nav. Add the `DATABASE_URL` under `environment`, and add `sslmode=require&channel_binding=require` to the end of the connection string to enable SSL. The `sslmode=require` option tells Postgres to use SSL encryption and verify the server's certificate.
+   You can find your database connection details by clicking the **Connect** button in the Console nav. Add the `DATABASE_URL` under `environment`, and replace `sslmode=require` in the connection string with `sslmode=verify-full`. This enables SSL and verifies the server's certificate. The `sslmode=require` option triggers a security warning in node-postgres 8.23 and later.
 
    ```yaml shouldWrap
    provider:
      name: aws
-     runtime: nodejs14.x
+     runtime: nodejs24.x
      environment:
-       DATABASE_URL: postgresql://[user]:[password]@[neon_hostname]/[dbname]?sslmode=require&channel_binding=require
+       DATABASE_URL: postgresql://[user]:[password]@[neon_hostname]/[dbname]?sslmode=verify-full&channel_binding=require
 
    functions:
      getAllUsers:
@@ -247,7 +256,7 @@ Create the Lambda function using the [Serverless Framework](https://www.serverle
 8. Test the generated endpoint by running a cURL command. For example:
 
    ```bash
-   curl https://eg3onb0jkl.execute-api.us-east-1.amazonaws.com/users | jq
+   curl https://ge3onb0klj.execute-api.us-east-1.amazonaws.com/users | jq
    ```
 
    The response returns the following data:
