@@ -232,7 +232,7 @@ The response includes the model's text plus a `groundingMetadata` object:
           "2026 Nobel Prize in Physics winner",
           "who won the 2026 Nobel Prize in Physics?",
           "Nobel Prize in Physics 2026 announcement date"
-        ]
+        ],
         "groundingChunks": [
           {
             "web": {
@@ -272,6 +272,7 @@ model = Gemini(
     client_kwargs={
         "api_key": os.environ["NEON_AI_GATEWAY_TOKEN"],
         "http_options": {
+            "api_version": "v1beta",
             "headers": {
                 "Authorization": f"Bearer {os.environ['NEON_AI_GATEWAY_TOKEN']}"
             },
