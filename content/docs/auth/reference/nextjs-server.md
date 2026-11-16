@@ -12,7 +12,7 @@ summary: >-
   structured upstream error codes, and migration from v0.1.
 enableTableOfContents: true
 layout: wide
-updatedOn: '2026-11-16T18:53:48.177Z'
+updatedOn: '2026-11-16T19:04:10.124Z'
 ---
 
 Reference documentation for the Managed Better Auth Next.js server SDK (`@neon/auth/next/server`). This package provides server-side authentication for Next.js applications using React Server Components, API routes, middleware, and server actions.
@@ -941,7 +941,7 @@ Complete configuration options for `createNeonAuth()`:
 - **cookies.secret**: Secret for HMAC-SHA256 signing (32+ characters)
 - **cookies.sessionDataTtl**: Cache TTL in seconds for the signed `session_data` cookie
 - **cookies.domain**: For cross-subdomain sessions (for example, ".example.com")
-- **cookies.sameSite**: `lax` (default), `strict`, or `none`. `lax` supports OAuth callbacks and top level cross site navigations; use `strict` to prevent cross site sending; use `none` for third party iframe embedding (requires Secure)
+- **cookies.sameSite**: `lax` (default), `strict`, or `none`. `lax` supports OAuth callbacks and top-level cross-site navigations; use `strict` to prevent cross-site sending; use `none` for third-party iframe embedding (requires Secure)
 - **logLevel**: `silent`, `error`, `warn`, `info`, or `debug` — see [Server logging](#server-logging)
 - **logger**: Optional custom logger; see [Server logging](#server-logging)
 
