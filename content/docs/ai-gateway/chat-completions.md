@@ -3,10 +3,10 @@ title: Chat completions
 subtitle: The OpenAI-compatible unified endpoint
 summary: >-
   The chat completions endpoint is the recommended starting point for Neon AI
-  Gateway. It is OpenAI Chat Completions-compatible, works with any model in
+  Gateway. It is OpenAI Chat Completions-compatible, works with most models in
   the catalog, and lets you switch providers without changing your SDK code.
 enableTableOfContents: true
-updatedOn: '2026-11-16T16:40:36.956Z'
+updatedOn: '2026-11-16T17:42:17.264Z'
 ---
 
 The chat completions endpoint is the recommended way to use Neon AI Gateway. It's fully compatible with the [OpenAI Chat Completions API](https://platform.openai.com/docs/api-reference/chat) and works with most models in the [AI Gateway catalog](/docs/ai-gateway/models). OpenAI Codex models require the [OpenAI Responses](/docs/ai-gateway/openai-responses) endpoint. Switch models by changing a single field.
