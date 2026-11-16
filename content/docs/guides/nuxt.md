@@ -1,6 +1,6 @@
 ---
 title: Connect a Nuxt application to Neon
-subtitle: Connect a Nuxt app to Lakebase Postgres on Neon, develop on a branch, deploy, and add the rest of your backend
+subtitle: Connect a Nuxt app to Lakebase Postgres on Neon, query it from a Nitro server route, develop on a branch, deploy, and add the rest of your backend
 summary: >-
   Connect a Nuxt app to Lakebase Postgres on Neon: optionally add Neon's agent
   skills, create a Neon project (Neon CLI, API, or Console), link it with the
@@ -10,14 +10,10 @@ summary: >-
   with useFetch. Covers Nuxt 4, with a note for Nuxt 3, plus deployment,
   troubleshooting, and Neon's other backend services from Nuxt.
 enableTableOfContents: true
-updatedOn: '2026-11-04T00:23:33.667Z'
+updatedOn: '2026-11-16T22:42:39.598Z'
 ---
 
-[Nuxt](https://nuxt.com/) is a full-stack framework for building web apps with Vue. Learn to connect a Nuxt app to Postgres on Neon, query it from a Nitro server route, develop on a branch, and deploy.
-
-## Have your AI agent follow this guide
-
-<PromptBlock src="/prompts/nuxt-neon-prompt.md" labels={["Set up your agent for Neon", "Use Nuxt's docs server (optional)", "Connect your Nuxt app"]} />
+<PromptBlock src="/prompts/nuxt-neon-prompt.md" labels={["Set up your agent and follow this guide", "Use Nuxt's docs server (optional)", "Connect your Nuxt app"]} />
 
 <Steps>
 
