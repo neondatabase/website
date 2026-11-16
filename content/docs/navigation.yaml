@@ -1239,6 +1239,8 @@
           slug: introduction/usage-calculations
         - title: Cost optimization
           slug: introduction/cost-optimization
+        - title: Reduce storage
+          slug: introduction/reduce-storage
         - title: Network transfer costs
           slug: introduction/network-transfer
         - title: AWS Marketplace
