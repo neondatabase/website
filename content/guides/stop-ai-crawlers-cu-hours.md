@@ -1,7 +1,7 @@
 ---
 title: How to stop AI crawlers from using up your CU-hours
 subtitle: Cache your pages, block unwanted bots, and keep health checks off the database so your compute only runs for real users
-author: neon-team
+author: carlota-soto
 enableTableOfContents: true
 createdAt: '2026-11-16T00:00:00.000Z'
 updatedOn: '2026-11-16T03:24:20.042Z'
