@@ -255,7 +255,7 @@ Valid roles are `admin`, `editor`, `viewer`, and `collaborator`. The value `memb
 
 ```bash shouldWrap
 curl --request PATCH \
-     --url 'https://console.neon.tech/api/v2/organizations/members/{member_id}' \
+     --url 'https://console.neon.tech/api/v2/organizations/{org_id}/members/{member_id}' \
      --header 'accept: application/json' \
      --header "authorization: Bearer $ORG_API_KEY" \
      --header 'content-type: application/json' \
