@@ -25,7 +25,13 @@ This guide compares the two for a developer starting a project and for a team ru
 
 ## How is Neon different?
 
-### 1. It's a lakebase: Postgres on a serverless architecture
+### 1. It's Postgres, and it works from any runtime
+
+Neon's database, Lakebase Postgres, is Postgres 14 to 18 ([source](/docs/reference/compatibility)). Your ORM, migration tool, admin GUI, `psql`, and Postgres extensions like [`pgvector`](/docs/extensions/pgvector) work with it as they do anywhere else, and so does what you already know about Postgres. You can connect from a Cloudflare Worker through [Hyperdrive](/docs/guides/cloudflare-hyperdrive) or the [serverless driver](/docs/serverless/serverless-driver), and just as easily from Vercel, a Python script, a mobile backend, or your laptop.
+
+D1 uses SQLite's SQL dialect and is built to be queried from Workers and Pages through a binding, with an HTTP API for access from elsewhere (<a href="https://developers.cloudflare.com/d1/" target="_blank" rel="nofollow noopener noreferrer">source</a>). SQLite has no users, roles, or row-level security, and Postgres extensions aren't available.
+
+### 2. It's a lakebase: Postgres on a serverless architecture
 
 A classic database is a single server that owns its data, so you size it in advance, pay for it while it runs, and copy all its data to duplicate it. Lakebase Postgres splits that server in two ([architecture](/docs/introduction/architecture-overview)):
 
@@ -38,7 +44,7 @@ This architecture is behind most of what follows in this guide: databases you do
 
 D1 runs each database as a single-threaded SQLite database that processes one query at a time and is capped at 10 GB (<a href="https://developers.cloudflare.com/d1/platform/limits/" target="_blank" rel="nofollow noopener noreferrer">source</a>). It has no branches, and its Time Travel restores a database by overwriting it in place (<a href="https://developers.cloudflare.com/d1/reference/time-travel/" target="_blank" rel="nofollow noopener noreferrer">source</a>).
 
-### 2. Backed by Databricks and proven at scale
+### 3. Backed by Databricks and proven at scale
 
 Neon has been part of Databricks since May 2025, and the same Lakebase Postgres runs on Databricks as [Lakebase](https://www.databricks.com/product/lakebase), on the same infrastructure ([Why Neon](/docs/get-started/why-neon), [Neon and Lakebase](/docs/introduction/neon-and-lakebase)). An app that starts on Neon runs on the database that Databricks offers to its enterprise customers, and it has a direct path to the company's lakehouse data if it ever needs one.
 
@@ -48,12 +54,6 @@ The architecture is proven at both ends of the market:
 - **Enterprises run it in production.** On Databricks, Lakebase runs production workloads for companies like DXC Technology, a Fortune 500 IT services company that serves a GenAI agent to 130,000 consultants, as well as Zillow, Novo Nordisk, and easyJet (<a href="https://www.databricks.com/customers/dxc/lakebase" target="_blank" rel="nofollow noopener noreferrer">DXC</a>, <a href="https://www.databricks.com/customers/zillow/lakebase" target="_blank" rel="nofollow noopener noreferrer">Zillow</a>, <a href="https://www.databricks.com/customers/novo-nordisk/lakebase" target="_blank" rel="nofollow noopener noreferrer">Novo Nordisk</a>, <a href="https://www.databricks.com/customers/easyjet/lakebase" target="_blank" rel="nofollow noopener noreferrer">easyJet</a>). 70% of the Fortune 500 build on the Databricks Platform.
 
 So the database you start a side project on is the same one that runs fleets of agent-built apps and enterprise workloads, and you won't have to migrate off it as you grow.
-
-### 3. It's still Postgres, and it works from any runtime
-
-Lakebase Postgres is Postgres 14 to 18 ([source](/docs/reference/compatibility)). Your ORM, migration tool, admin GUI, `psql`, and Postgres extensions like [`pgvector`](/docs/extensions/pgvector) work with it as they do anywhere else, and so does what you already know about Postgres. You can connect from a Cloudflare Worker through [Hyperdrive](/docs/guides/cloudflare-hyperdrive) or the [serverless driver](/docs/serverless/serverless-driver), and just as easily from Vercel, a Python script, a mobile backend, or your laptop.
-
-D1 uses SQLite's SQL dialect and is built to be queried from Workers and Pages through a binding, with an HTTP API for access from elsewhere (<a href="https://developers.cloudflare.com/d1/" target="_blank" rel="nofollow noopener noreferrer">source</a>). SQLite has no users, roles, or row-level security, and Postgres extensions aren't available.
 
 ### 4. More room on the Free plan
 
