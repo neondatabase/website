@@ -5,7 +5,7 @@ author: neon-team
 excludeFromBlog: true
 enableTableOfContents: true
 createdAt: '2026-11-15T00:00:00.000Z'
-updatedOn: '2026-11-15T15:02:16.686Z'
+updatedOn: '2026-11-16T00:27:35.879Z'
 ---
 
 <Admonition type="note">
@@ -14,7 +14,7 @@ Features and prices in this guide were checked against the Neon and Cloudflare d
 
 Neon and Cloudflare D1 are both serverless SQL databases that you don't have to size, and both stop charging for compute when nobody is querying them. The biggest difference is the engine. D1 runs SQLite's SQL semantics on Cloudflare's network and is designed to be queried from Workers, with each database capped at 10 GB. Neon runs Postgres, the database most production apps already use, and adds the rest of a backend around it: auth, file storage, functions, and realtime, all of which branch with your data.
 
-This guide compares the two for a developer starting a project and for a team running one in production, shows what each costs in three scenarios, and recommends one for each type of project.
+This guide compares the two for a developer starting a project and for a team running one in production, shows what each costs in four scenarios, and recommends one for each type of project.
 
 ## How is Neon different?
 
@@ -36,15 +36,23 @@ A Neon branch is a copy-on-write copy of your whole backend: the database, [Mana
 
 D1 doesn't have branches. To test a change on a copy, you export the database and import it into a new one, and a running export blocks other requests to the database (<a href="https://developers.cloudflare.com/d1/best-practices/import-export-data/" target="_blank" rel="nofollow noopener noreferrer">source</a>). D1's Time Travel restores a database to an earlier minute by overwriting it in place, and it can't yet copy a database to a new one (<a href="https://developers.cloudflare.com/d1/reference/time-travel/" target="_blank" rel="nofollow noopener noreferrer">source</a>).
 
-### 4. One database that grows with your app
+### 4. A database for every user, app, or agent
+
+If you're building a platform, such as an AI app builder, a multi-tenant SaaS, or an agent that ships apps, you can give every user, app, or agent its own Postgres database. Each Neon project is created through the API in seconds, with nothing to size up front, and **there's no per-project fee**. A database nobody uses scales to zero and costs only the storage it holds. When one takes off, it autoscales, with no 10 GB ceiling. Every project can branch, so an agent can try an edit on a copy of the user's real data and throw the copy away. You can cap each project's compute, egress, and storage from the API ([consumption limits](/docs/guides/consumption-limits)), and with [Claimable Neon](/claimable-neon) an agent can create a database before its user has a Neon account.
+
+The [Agent Plan](/docs/introduction/agent-plan) is built for this. It has no project limit, bills compute at $0.106/CU-hour, and includes up to $25,000 in credits. **Databases for your platform's free-tier users run in a free organization that Neon sponsors, so they cost you nothing.**
+
+D1 is also designed for many small databases, and Workers Paid includes 100,000 of them. Above that, **each database costs $0.10 a month, even when it's empty or nobody queries it**, and an account is limited to 1 million databases and 1 TB of storage unless Cloudflare raises the storage limit on request (<a href="https://developers.cloudflare.com/d1/platform/limits/" target="_blank" rel="nofollow noopener noreferrer">source</a>). At a million databases, that's $90,000 a month in database fees alone, before storage or queries.
+
+### 5. One database that grows with your app
 
 On Neon's paid plans, storage has no hard limit and grows with your data, and compute autoscales up to 16 CU (≈64 GB RAM), or runs at a fixed size up to 56 CU (≈224 GB RAM) on Scale ([autoscaling](/docs/introduction/autoscaling), [plans](/docs/introduction/plans)). Postgres processes reads and writes from many connections at once, and [read replicas](/docs/introduction/read-replicas) take read traffic off the primary.
 
 **Each D1 database is capped at 10 GB, and Cloudflare says the limit can't be increased.** Each database is also single-threaded and processes queries one at a time, so its throughput depends on how long each query takes: at 1 ms per query it handles at most 1,000 queries a second. A database that gets too many concurrent requests returns an "overloaded" error once its queue is full (<a href="https://developers.cloudflare.com/d1/platform/limits/" target="_blank" rel="nofollow noopener noreferrer">source</a>). D1 is designed for spreading data across many small databases, for example one per user or tenant, so an app that outgrows 10 GB has to split its data.
 
-### 5. Production controls and compliance
+### 6. Production controls and compliance
 
-Neon's Scale plan includes SOC 2, ISO 27001, GDPR, and self-serve HIPAA, plus [IP Allow](/docs/introduction/ip-allow), [Private Networking](/docs/guides/neon-private-networking), an uptime SLA, and metrics and logs export, with no monthly minimum ([plans](/docs/introduction/plans), [compliance](/docs/security/compliance)). If you run a project per customer or per agent, you can cap each project's compute, egress, and storage from the API ([consumption limits](/docs/guides/consumption-limits)), and with [Claimable Neon](/claimable-neon) an agent can create a database before its user has a Neon account.
+Neon's Scale plan includes SOC 2, ISO 27001, GDPR, and self-serve HIPAA, plus [IP Allow](/docs/introduction/ip-allow), [Private Networking](/docs/guides/neon-private-networking), an uptime SLA, and metrics and logs export, with no monthly minimum ([plans](/docs/introduction/plans), [compliance](/docs/security/compliance)).
 
 ## Feature-by-feature comparison
 
@@ -111,19 +119,20 @@ On Neon, these services live in the same project as the database, so a branch ca
 
 ### Pricing and plans
 
-| Feature              | Neon                                                                      | Cloudflare D1                                                                                           |
-| :------------------- | :------------------------------------------------------------------------ | :------------------------------------------------------------------------------------------------------ |
-| **Monthly minimum**  | None on any plan                                                          | $5 for Workers Paid                                                                                     |
-| **What you pay for** | Compute in CU-hours, storage in GB-months                                 | Rows read, rows written, and storage                                                                    |
-| **Compute**          | $0.106/CU-hour on Launch, $0.222/CU-hour on Scale                         | No compute charge for D1. Workers that query it bill separately                                         |
-| **Reads and writes** | Not billed separately                                                     | 25B rows read and 50M rows written included, then $0.001 per million reads and $1.00 per million writes |
-| **Storage**          | $0.35/GB-month                                                            | 5 GB included, then $0.75/GB-month                                                                      |
-| **Databases**        | 100 projects on Launch, 1,000 on Scale, with no per-project fee           | 100,000 included, then $0.10 per database per month                                                     |
-| **Egress**           | 5 GB per project on Free, 500 GB per project on paid plans, then $0.10/GB | None                                                                                                    |
+| Feature                             | Neon                                                                                         | Cloudflare D1                                                                                           |
+| :---------------------------------- | :------------------------------------------------------------------------------------------- | :------------------------------------------------------------------------------------------------------ |
+| **Monthly minimum**                 | None on any plan                                                                             | $5 for Workers Paid                                                                                     |
+| **What you pay for**                | Compute in CU-hours, storage in GB-months                                                    | Rows read, rows written, and storage                                                                    |
+| **Compute**                         | $0.106/CU-hour on Launch, $0.222/CU-hour on Scale                                            | No compute charge for D1. Workers that query it bill separately                                         |
+| **Reads and writes**                | Not billed separately                                                                        | 25B rows read and 50M rows written included, then $0.001 per million reads and $1.00 per million writes |
+| **Storage**                         | $0.35/GB-month                                                                               | 5 GB included, then $0.75/GB-month                                                                      |
+| **Databases**                       | 100 projects on Launch, 1,000 on Scale, unlimited on the Agent Plan, with no per-project fee | 100,000 included, then $0.10 per database per month even when idle, up to 1 million per account         |
+| **Your platform's free-tier users** | On the Agent Plan, their databases run in a free organization that Neon sponsors             | Billed like any other database                                                                          |
+| **Egress**                          | 5 GB per project on Free, 500 GB per project on paid plans, then $0.10/GB                    | None                                                                                                    |
 
 Neon bills for the time your compute runs, so the cost of a query depends on how long it keeps the compute busy, not on how many rows it touches ([plans](/docs/introduction/plans)). D1 bills for every row a query scans or writes: a `SELECT` that scans a 5,000-row table counts as 5,000 rows read, and inserts, updates, and deletes each count as rows written. Every index on a written column adds another row written (<a href="https://developers.cloudflare.com/d1/platform/pricing/" target="_blank" rel="nofollow noopener noreferrer">source</a>).
 
-That makes D1 inexpensive for read-heavy apps with good indexes, and expensive for write-heavy ones.
+That makes D1 inexpensive for apps whose queries touch a few rows at a time, and expensive for write-heavy apps and for reports that scan many rows.
 
 ## How much does Neon cost compared to D1? (#cost-examples)
 
@@ -163,25 +172,45 @@ Take an analytics app that records about 10M events a day, around 115 a second, 
 
 </details>
 
-### A B2B app with 25 GB of data, on Launch vs Workers Paid
+### A B2B app with customer dashboards, on Launch vs Workers Paid
 
-Take a B2B SaaS app with 25 GB of data and steady weekday traffic, mostly reads:
+Take a B2B SaaS app with 200 customers and 6 GB of data. Each customer has a dashboard that charts their last 12 months of orders, and their teams open it about 20,000 times a day in total:
 
-| Platform      | Plan         | Monthly total                                    |
-| :------------ | :----------- | :----------------------------------------------- |
-| Neon          | Launch       | **About $48**, in one database                   |
-| Cloudflare D1 | Workers Paid | **About $20**, split across at least 3 databases |
+| Platform      | Plan         | Monthly total  |
+| :------------ | :----------- | :------------- |
+| Neon          | Launch       | **About $40**  |
+| Cloudflare D1 | Workers Paid | **About $281** |
 
 <details>
 <summary>Curious how each total is calculated?</summary>
 
-- **Assumptions:** compute averages 0.5 CU around the clock on Neon. On D1, reads and writes stay inside the included 25B rows read and 50M rows written.
-- **Neon:** 365 CU-hours × $0.106 = $38.69, plus 25 GB × $0.35 = $8.75, for about $48.
-- **Cloudflare D1:** the $5 minimum plus (25 − 5) × $0.75 = $15 of storage, for about $20. Since each database is capped at 10 GB, the data has to be split across at least three databases, for example by customer. Queries can't join across databases, and each one is still limited to one query at a time.
+- **Assumptions:** 20M orders in total, about 100K per customer, indexed by customer and date. Each dashboard load runs 5 aggregate queries (revenue, order count, top products, and so on) over the customer's last 12 months, so each query reads about 100K rows: 500K rows per load. Traffic follows the workday, and nobody uses the app overnight.
+- **Neon:** the compute autoscales between 0.25 and 2 CU, averages 1 CU for 12 hours a day, and scales to zero overnight: 1 CU × 12 hours × 30 days = 360 CU-hours × $0.106 = $38.16. Storage is 6 GB × $0.35 = $2.10, and about 1 GB of change history for instant restore is $0.20. Total: about $40.
+- **Cloudflare D1:** D1 counts every row a query scans as a row read, even when an index narrows the scan (<a href="https://developers.cloudflare.com/d1/platform/pricing/" target="_blank" rel="nofollow noopener noreferrer">source</a>). 20,000 loads × 500K rows × 30 days = 300B rows read a month. The first 25B are included, so (300B − 25B) × $0.001 per million = $275. Storage beyond the included 5 GB is (6 − 5) × $0.75 = $0.75. With the $5 Workers Paid minimum, the total is about $281.
 
 </details>
 
-D1 costs less here if your data splits cleanly by customer and your queries never need to cross that split. If you'd rather keep one database, run reports across all customers, or let traffic from a large customer use more than one query at a time, Neon keeps that possible without a migration later.
+On D1, the cost grows with every row your reports scan, so dashboards, search, and analytics add up quickly even with good indexes. You can bring it down by caching results or keeping pre-aggregated summary tables, at the cost of extra code. On Neon, the same queries only cost the compute time they use.
+
+### An AI app builder with a database for each of 500,000 apps, on the Agent Plan vs Workers Paid
+
+Take a platform where users describe an app and an agent builds it, with its own database for every app. It hosts 500,000 apps, and most of them get little or no traffic:
+
+| Platform      | Plan         | Monthly total                                      |
+| :------------ | :----------- | :------------------------------------------------- |
+| Neon          | Agent        | **About $13,600**, including compute               |
+| Cloudflare D1 | Workers Paid | **About $47,500**, before any rows read or written |
+
+<details>
+<summary>Curious how each total is calculated?</summary>
+
+- **Assumptions:** each database holds about 20 MB. 450,000 apps belong to the platform's free-tier users and are rarely visited. 50,000 apps belong to paying users, and each of their databases runs about 10 hours a month at 0.25 CU (≈1 GB RAM).
+- **Neon:** the 450,000 free-tier databases run in the free organization that Neon sponsors, for $0. The 50,000 paid databases use 50,000 × 0.25 CU × 10 hours = 125,000 CU-hours × $0.106 = $13,250 of compute, plus 50,000 × 20 MB = 1,000 GB × $0.35 = $350 of storage. Total: about $13,600, and the Agent Plan's up to $25,000 in credits covers the first months. Idle databases cost only their storage, and the compute cost already covers every query the apps run.
+- **Cloudflare D1:** every database counts, whether a free or paying user owns it. Database fees are (500,000 − 100,000) × $0.10 = $40,000. Storage is 500,000 × 20 MB = 10,000 GB, so (10,000 − 5) × $0.75 = $7,496, and it's above the 1 TB account limit, so you'd need Cloudflare to raise it. With the $5 Workers Paid minimum, the total is about $47,500, before any rows read or written.
+
+</details>
+
+On D1, an idle database still costs $0.10 a month, and every database you create counts toward the bill, even if the app was abandoned the day it was built. On Neon, an idle database costs only its storage, and on the Agent Plan, the databases of your free-tier users cost you nothing at all.
 
 ## When to choose Neon vs Cloudflare D1
 
@@ -190,6 +219,7 @@ Choose **Neon** if:
 - You want Postgres, with your existing ORM, tools, extensions, and the access control that comes with it.
 - You want a free plan with 100 projects, 1 GB per project, and auth, file storage, and functions included.
 - You want a branch with your data, auth users, and files for every pull request, experiment, or AI agent.
+- You're building a platform that gives every user, app, or agent its own database, and you don't want to pay for the ones nobody uses.
 - Your database could grow past 10 GB, or needs many concurrent writes.
 - Your app writes a lot of rows, since Neon bills for compute time rather than rows written.
 - You query the database from more than Workers: Vercel, a Python service, a mobile backend, or a coding agent.
@@ -199,7 +229,6 @@ Choose **Cloudflare D1** if:
 
 - Your whole app runs on Workers, and you want the database in the same platform and bill.
 - Your app is read-heavy and serves users on several continents, so global read replicas help.
-- Your data splits naturally into many small databases, each under 10 GB.
 - You serve large responses and want no egress charges.
 - SQLite's feature set covers what you need.
 
@@ -211,7 +240,7 @@ Choose **Cloudflare D1** if:
 - **For write-heavy apps like analytics, logging, or IoT:** Neon, since writes aren't billed per row and a database isn't limited to one query at a time.
 - **For read-heavy content sites with a global audience:** D1, since reads are inexpensive and replicas run close to users.
 - **For B2B SaaS:** Neon, since one Postgres database grows past 10 GB, and Scale includes SOC 2, HIPAA, and an uptime SLA.
-- **For platforms that create a database per user or agent:** both are built for it. D1 includes 100,000 databases on Workers Paid. Neon has no per-project fee, per-project consumption limits, and an [Agent Plan](/docs/introduction/agent-plan) with no project limit.
+- **For platforms that create a database per user, app, or agent:** Neon, since there's no per-database fee, idle databases cost only their storage, and the [Agent Plan](/docs/introduction/agent-plan) has no project limit and sponsors your free-tier users' databases. Each database can also branch for agent edits and grow past 10 GB when an app takes off.
 
 To try Neon, run this command in your project. It sets up Neon for your AI coding agent, links a project, and writes your `DATABASE_URL` to `.env`:
 
@@ -235,6 +264,12 @@ Yes. Connect through [Hyperdrive](/docs/guides/cloudflare-hyperdrive), which poo
 
 </FaqItem>
 
+<FaqItem question="Which is better for a database per user, app, or agent?">
+
+Neon. Both let you create a database per user, but D1 charges $0.10 a month for every database above the first 100,000, even when it's idle, and caps each one at 10 GB. Neon has no per-database fee, so an idle database costs only its storage, and each one can autoscale, branch for agent edits, and grow without a size cap on paid plans. On the [Agent Plan](/docs/introduction/agent-plan), projects are unlimited and the databases of your platform's free-tier users run in an organization that Neon sponsors, so they cost you nothing. See the [AI app builder cost example](#cost-examples) for the math at 500,000 databases.
+
+</FaqItem>
+
 <FaqItem question="What happens when a D1 database reaches 10 GB?">
 
 It can't grow further. Cloudflare says the 10 GB limit per database can't be increased, so you'd split the data across more databases, for example one per customer ([D1 limits](https://developers.cloudflare.com/d1/platform/limits/)). On Neon's paid plans, storage has no hard limit ([plans](/docs/introduction/plans)).
@@ -243,7 +278,7 @@ It can't grow further. Cloudflare says the 10 GB limit per database can't be inc
 
 <FaqItem question="Which is cheaper, Neon or D1?">
 
-It depends on how your app reads and writes. D1 bills for rows read and written, so read-heavy apps with good indexes cost little, and write-heavy apps cost more. Neon bills for compute time and storage, so a database that writes a lot but runs on a small compute stays inexpensive, as the [cost examples](#cost-examples) show. D1 has no egress charges, and Neon includes 500 GB of egress per project on paid plans.
+For most apps, Neon. It starts cheaper: the Free plan gives you 100 projects at $0, while D1 needs the $5 Workers Paid plan once a database passes 500 MB or your app goes over the daily query limits, and Neon's paid plans have no monthly minimum. It also stays cheaper as your app grows. D1 bills for every row a query scans or writes, so write-heavy apps, dashboards, search, and reports get expensive quickly. Neon bills only for compute time and storage, however many rows your queries touch, so the same workloads run on a small compute for a fraction of the price, as the [cost examples](#cost-examples) show. The gap is widest for platforms with a database per user or app, where D1 charges for every database, used or not. Neon also includes 500 GB of egress per project on paid plans.
 
 </FaqItem>
 
