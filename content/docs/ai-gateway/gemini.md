@@ -51,7 +51,7 @@ Sending a non-Google model ID returns `400 model "<model-id>" is not available o
 ## Basic request
 
 <Admonition type="note">
-The `google-genai` SDK's `apiKey` option sends an `x-goog-api-key` header, but Neon AI Gateway expects `Authorization: Bearer <token>`. Set your credential as an explicit header instead, and pass any non-empty string as `apiKey` since the SDK requires the field even though the gateway ignores it.
+The `google-genai` SDK's `apiKey` option sends an `x-goog-api-key` header, but Neon AI Gateway expects `Authorization: Bearer <token>`. Set your credential as an explicit header instead, and pass any non-empty string as `apiKey` since the SDK requires the field even though the gateway ignores it. Also set the API version to `v1beta`. Current SDK versions default to `v1`, and the gateway returns `404` for `v1` paths.
 </Admonition>
 
 <CodeTabs labels={["TypeScript (google-genai)", "Python (google-genai)", "cURL"]}>
@@ -63,6 +63,7 @@ const client = new GoogleGenAI({
   apiKey: 'placeholder',
   httpOptions: {
     baseUrl: `${process.env.NEON_AI_GATEWAY_BASE_URL}/gemini`,
+    apiVersion: 'v1beta',
     headers: {
       Authorization: `Bearer ${process.env.NEON_AI_GATEWAY_TOKEN}`,
     },
@@ -85,6 +86,7 @@ import os
 client = genai.Client(
     api_key='placeholder',
     http_options=types.HttpOptions(
+        api_version='v1beta',
         base_url=f"{os.environ['NEON_AI_GATEWAY_BASE_URL']}/gemini",
         headers={'Authorization': f"Bearer {os.environ['NEON_AI_GATEWAY_TOKEN']}"},
     ),
@@ -137,12 +139,13 @@ for chunk in client.models.generate_content_stream(
 
 ## URL structure
 
-The gateway uses the model ID and action directly in the URL path. The `google-genai` SDK constructs this automatically from the base URL and model parameter:
+The gateway uses the model ID and action directly in the URL path. The `google-genai` SDK constructs this from the base URL, API version, and model parameter:
 
 ```
-base_url: https://<branch-host>/gemini
-model:    gemini-3-flash
-action:   generateContent or streamGenerateContent
+base_url:    https://<branch-host>/gemini
+api_version: v1beta
+model:       gemini-3-flash
+action:      generateContent or streamGenerateContent
 
 → https://<branch-host>/gemini/v1beta/models/gemini-3-flash:generateContent
 → https://<branch-host>/gemini/v1beta/models/gemini-3-flash:streamGenerateContent
