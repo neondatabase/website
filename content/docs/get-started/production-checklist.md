@@ -11,7 +11,7 @@ summary: >-
 enableTableOfContents: true
 redirectFrom:
   - /docs/get-started-with-neon/production-checklist
-updatedOn: '2026-11-05T15:33:57.188Z'
+updatedOn: '2026-11-11T13:57:38.895Z'
 ---
 
 <CheckList title="Production checklist">
@@ -22,7 +22,7 @@ updatedOn: '2026-11-05T15:33:57.188Z'
 <CheckItem title="2. Choose a region close to your application" href="#choose-a-region-close-to-your-application">
   Deploy your Neon project in the nearest available region to your application to minimize network latency.
 </CheckItem>
-<CheckItem title="3. Keep your production branch as the default" href="#keep-your-production-branch-as-the-default">
+<CheckItem title="3. Keep your production branch as the default" href="#keep-your-production-branch-as-the-default-root-branch">
   Your production branch should be a root branch set as the default to ensure compute availability, enable snapshots, and simplify billing.
 </CheckItem>
 <CheckItem title="4. Protect your production branch" href="#protect-your-production-branch">
@@ -222,6 +222,8 @@ Neon's IP Allow feature ensures that only trusted IP addresses can connect to yo
 ![IP Allow settings](/docs/get-started/ip_allow_settings.png)
 
 Keep reading: [IP Allow](/docs/introduction/ip-allow)
+
+For the full list of security controls to set up before production, see the [Security checklist](/docs/security/security-checklist).
 
 ## Install pg_stat_statements
 

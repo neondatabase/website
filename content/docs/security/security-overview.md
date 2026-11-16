@@ -1,142 +1,134 @@
 ---
 title: Security overview
+subtitle: The controls you use to secure your Neon account, projects, and data
 summary: >-
-  Neon enforces SSL/TLS encryption (verify-full mode), 60-bit entropy
-  passwords, AES-256 data-at-rest encryption, IP allowlists (Scale plan),
-  and AWS PrivateLink private networking. A connection proxy blocks
-  unauthorized login attempts. The page also covers GitHub secret scanning,
-  protected branches, vulnerability management, and the HackerOne bug
-  bounty program.
+  How to secure Neon: what Neon enforces for you (TLS on every Postgres
+  connection, strong role passwords, GitHub secret scanning), and the controls
+  you configure yourself. Covers 2FA, passkeys, organization roles and per-project permissions, API keys and scoped
+  credentials, Enterprise SSO and SCIM (coming soon), verify-full and channel binding, IP Allow and Private
+  Networking (Postgres only), protected branches, row-level security, Neon
+  Functions caller authentication, AI agent access, and credential rotation
+  after a leak. Links to the security checklist and compliance details.
 enableTableOfContents: true
 redirectFrom:
   - /docs/security/security
   - /docs/security
-updatedOn: '2026-11-05T15:33:57.188Z'
+updatedOn: '2026-11-11T14:12:13.720Z'
 ---
 
-At Neon, security is our highest priority. We are committed to implementing best practices and earning the trust of our users. A key aspect of earning this trust is by ensuring that every touchpoint in our system, from connections, to data storage, to our internal processes, adheres to the highest security standards.
+Neon secures the platform your data runs on. You decide who can reach your account, your projects, and your data. This page walks through the controls you have at each layer and links to the page that sets each one up.
 
-## Secure connections
+To work through these controls one at a time for a production project, use the [security checklist](/docs/security/security-checklist). For Neon's certifications and how Neon protects its own infrastructure, see [Compliance](/docs/security/compliance).
 
-Neon supports a variety of protections related to database connections:
+## What Neon enforces for you
 
-- **SSL/TLS encryption**: Neon requires that all connections use SSL/TLS encryption to ensure that data sent over the Internet cannot be viewed or manipulated by third parties.
+These protections are always on. You don't configure them.
 
-  Neon supports the `verify-full` SSL mode for client connections, which is the strictest SSL mode provided by PostgreSQL. When set to `verify-full`, a PostgreSQL client verifies that the server's certificate is issued by a trusted certificate authority (CA), and that the server host name matches the name stored in the certificate. This helps prevent man-in-the-middle attacks. For information about configuring `verify-full` SSL mode for your connections, see [Connect securely](/docs/connect/connect-securely).
+- **Encrypted Postgres connections.** Neon rejects Postgres connections that don't use SSL/TLS. To also verify that you're talking to Neon, see [Verify the server when you connect](#verify-the-server-when-you-connect).
+- **Strong role passwords.** Every Postgres role password needs at least 60 bits of entropy. Neon generates passwords like that for roles you create in the Console, CLI, or API, and rejects weaker passwords set with `CREATE ROLE` or `ALTER ROLE`. Neon accepts passwords only in plaintext, so a pre-hashed password can't skip the check.
+- **Secret scanning on GitHub.** Neon is a GitHub secret scanning partner. See [GitHub secret scanning](#github-secret-scanning).
 
-- **Secure password enforcement**: Neon requires a 60-bit entropy password for all Postgres roles. This degree of entropy ensures that passwords have a high level of randomness. Assuming a perfect distribution of choices for every bit of entropy, a password with 60 bits of entropy has 2^60 (or about 1.15 quintillion) possible combinations, which makes it computationally infeasible for attackers to guess the password through brute-force methods. For Postgres roles created via the Neon Console, API, and CLI, passwords are generated with 60-bit entropy. For Postgres roles created via SQL, user-defined passwords are validated at creation time to ensure 60-bit entropy.
+## Security features by plan
 
-- **The Neon Proxy**: Neon places a proxy in front of your database, which helps safeguard it from unauthorized login attempts. For example, in Postgres, each login attempt spawns a new process, which can pose a security risk. The [Neon Proxy](/docs/reference/glossary#neon-proxy) mitigates this by monitoring connection attempts and preventing misuse. The Neon Proxy also allows us to authenticate connections before they ever reach your Postgres database.
+Most security controls are available on every plan. Branch protection, network restrictions, and HIPAA support come with paid plans.
 
-- **IP Allow**: For additional connection security, the Neon Scale plan offers [IP allowlist support](#ip-allowlist-support), which lets you to limit access to trusted IPs.
+| Feature                                                                                                                                                                     | Free | Launch | Scale                   |
+| --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---- | ------ | ----------------------- |
+| TLS on every connection, password strength rules, GitHub secret scanning                                                                                                    | Yes  | Yes    | Yes                     |
+| [2FA and passkeys](/docs/manage/accounts#two-factor-authentication), and [requiring 2FA](/docs/manage/orgs-manage#require-2fa-for-organization-members) for an organization | Yes  | Yes    | Yes                     |
+| [Organization roles and per-project permissions](/docs/manage/user-permissions)                                                                                             | Yes  | Yes    | Yes                     |
+| [Protected branches](/docs/guides/protected-branches)                                                                                                                       | No   | Yes    | Yes                     |
+| [IP Allow](/docs/introduction/ip-allow)                                                                                                                                     | No   | No     | Yes                     |
+| [Private Networking](/docs/guides/neon-private-networking)                                                                                                                  | No   | No     | Yes                     |
+| [HIPAA](/docs/security/hipaa)                                                                                                                                               | No   | No     | Yes, at additional cost |
+| Enterprise SSO and SCIM                                                                                                                                                     | No   | No     | Coming soon             |
 
-- **Private Networking**: This feature enables connections to your Neon databases via AWS PrivateLink, bypassing the open internet entirely. See [Private Networking](/docs/guides/neon-private-networking).
+For limits, such as how many protected branches each plan allows, see [Plans](/docs/introduction/plans).
 
-## IP allowlist support
+## Secure your account and organization
 
-Neon's [IP Allow](/docs/introduction/ip-allow) feature ensures that only trusted IP addresses can connect to the project where your database resides, preventing unauthorized access and helping maintain overall data security. You can limit access to individual IP addresses, IP ranges, or IP addresses and ranges defined with [CIDR notation](/docs/reference/glossary#cidr-notation). To learn more, see [Configure IP Allow](/docs/manage/projects#configure-ip-allow).
+Your Neon account is the way into every organization you belong to, so protect it first.
 
-## Protected branches
+- **Two-factor authentication and passkeys.** Turn on [2FA](/docs/manage/accounts#two-factor-authentication) or add a [passkey](/docs/manage/accounts#passkeys) in **Account settings**.
+- **Require 2FA for your organization.** Admins can [require 2FA](/docs/manage/orgs-manage#require-2fa-for-organization-members) for every member. A passkey also meets the requirement. It applies when members open the organization while signed in, but not to requests made with an API key, so also review who holds API keys for your organization.
+- **Enterprise SSO and SCIM (coming soon).** Members will sign in through your identity provider, and SCIM provisioning will keep organization membership in sync with your directory.
+- **Verified domains.** When you [verify an email domain](/docs/manage/orgs-add-members-by-domain), anyone who signs up or signs in with an email on that domain joins your organization as an Editor, with access to every project. Verify only domains where everyone should have that access, or [change their role](/docs/manage/user-permissions#set-the-organization-role) once they join.
 
-You can designate any branch as a "protected branch", which implements a series of protections:
+## Control who can access each project
 
-- Protected branches cannot be deleted.
-- Protected branches cannot be [reset](/docs/manage/branches#reset-a-branch-from-parent).
-- Projects with protected branches cannot be deleted.
-- Computes associated with a protected branch cannot be deleted.
-- New passwords are automatically generated for Postgres roles on branches created from protected branches.
-- With additional configuration steps, you can apply IP Allow restrictions to protected branches only.
-- Protected branches are not [archived](/docs/guides/branch-archiving) due to inactivity.
+Give each person and agent only the access they need.
 
-The protected branches feature is available on all Neon paid plans. Typically, the protected branch status is given to a branch or branches that hold production data or sensitive data. For information about how to configure a protected branch, refer to our [Protected branches guide](/docs/guides/protected-branches).
+- **Organization roles.** Every member has one of four [organization roles](/docs/manage/user-permissions#organization-roles): Admin, Editor, Viewer, or Collaborator. Every role except Collaborator can create projects. To keep someone to specific projects only, make them a Collaborator.
+- **Per-project permissions.** Grant [per-project access](/docs/manage/user-permissions#per-project-permissions) to give someone more access on one project than their organization role gives them everywhere. The [permissions quickstart](/docs/manage/project-permissions-get-started) walks through a typical setup.
+- **API keys.** Neon has personal, organization, and project-scoped [API keys](/docs/manage/api-keys). For automation that works on a single project, use a project-scoped key, so a leaked key can't reach your other projects.
 
-## Private Networking
+## Give your app scoped credentials
 
-The [Neon Private Networking](/docs/guides/neon-private-networking) feature enables secure connections to your Neon databases via [AWS PrivateLink](https://docs.aws.amazon.com/vpc/latest/privatelink/concepts.html), bypassing the open internet for enhanced security. This feature is available to Neon [Organization](/docs/manage/organizations) accounts. It's not accessible to Personal Neon accounts.
+An API key manages your Neon setup. Your running app shouldn't hold one. Give each workload its own scoped credential instead, so a leak exposes only what that workload can do. [Credentials and access](/docs/concepts/credentials-access) explains which credential each job needs.
 
-## Data-at-rest encryption
+For the services outside Postgres, the credential is the only access control. [IP Allow](/docs/introduction/ip-allow#ip-allow-and-other-neon-services) and [Private Networking](/docs/guides/neon-private-networking#private-networking-and-other-neon-services) don't apply to them.
 
-Data-at-rest encryption is a method of storing inactive data that converts plaintext data into a coded form or cipher text, making it unreadable without an encryption key. Neon stores inactive data in [NVMe SSD volumes](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ssd-instance-store.html#nvme-ssd-volumes). The data on NVMe instance storage is encrypted using an `AES-256` block cipher implemented in a hardware module on the instance.
+- **Object Storage and the AI Gateway** accept [scoped credentials](/docs/concepts/credentials-access#scoped-credentials) tied to a branch. Grant only the scopes a workload needs, such as `storage:read` without `storage:write`. See [Object Storage authentication](/docs/storage/authentication) and [AI Gateway authentication](/docs/ai-gateway/authentication).
+- **Neon Functions** have public HTTPS URLs. Neon doesn't check who calls a function, so [authenticate callers](/docs/compute/functions/authentication) at the top of your handler.
+- **The Data API** authorizes each request with a JWT, then applies your Postgres grants and row-level security policies. See [Data API access control](/docs/data-api/access-control).
 
-## Secure data centers
+## Secure Postgres connections
 
-Neon’s infrastructure is hosted and managed within either Amazon's or Azure's secure data centers, depending on the cloud service provider you select when setting up your project.
+### Verify the server when you connect
 
-Amazon’s secure data centers backed by [AWS Cloud Security](https://aws.amazon.com/security/). Amazon continually manages risk and undergoes recurring assessments to ensure compliance with industry standards. For information about AWS data center compliance programs, refer to [AWS Compliance Programs](https://aws.amazon.com/compliance/programs/).
+Neon encrypts every connection, but encryption alone doesn't prove the server is Neon. To verify the server's certificate and hostname, connect with `sslmode=verify-full`. Add `channel_binding=require` so the client authenticates over a channel bound to that TLS session. See [Connect securely](/docs/connect/connect-securely).
 
-The Microsoft cloud data centers that power Azure focus on high reliability, operational excellence, cost-effectiveness, and a trustworthy online experience for Microsoft customers and partners worldwide. Microsoft regularly tests data center security through both internal and third-party audits. To learn more, refer to [Microsoft's Datacenter security overview](https://learn.microsoft.com/en-us/compliance/assurance/assurance-datacenter-security).
+### Restrict network access to Postgres
 
-## Compliance-relevant security measures
+- **[IP Allow](/docs/introduction/ip-allow)** blocks Postgres connections from addresses outside your allowlist, including pooled connections and the serverless driver. You can apply it to [protected branches only](/docs/introduction/ip-allow#ip-allow-together-with-protected-branches). Available on the Scale plan.
+- **[Private Networking](/docs/guides/neon-private-networking)** routes Postgres connections from your AWS VPC over AWS PrivateLink, and can block access from the public internet. Available on the Scale plan.
 
-At Neon, we implement robust technical controls to secure customer and sensitive data in alignment with SOC2, ISO27001, ISO27701 standards and GDPR and CCPA regulations. To learn more about these standards and regulations, see [Compliance](/docs/security/compliance).
+Both controls restrict Postgres only. Some Neon services also stop working while they're on. Check [IP Allow and other Neon services](/docs/introduction/ip-allow#ip-allow-and-other-neon-services) before you turn one on.
 
-All systems are hosted on AWS and Azure, where we have implemented specific security measures to protect data. Below is a detailed breakdown of these compliance-relevant security measures for access control, encryption, network security, event logging, vulnerability management, backups, data deletion and retention:
+### Limit what each Postgres role can do
 
-- **Customer and Sensitive Data Encryption (AWS KMS and Azure Key Vault)**
+The default role on a new project, usually `neondb_owner`, can do almost anything in your databases. For your app, create roles with only the privileges it needs. See [Manage database access](/docs/manage/database-access) for read-only, read-write, and developer role examples. To restrict which rows each user sees, use [row-level security](/docs/guides/row-level-security).
 
-  All customer and sensitive data is encrypted using AES-256 encryption at rest. For data in transit, encryption is enforced using TLS 1.2/1.3 protocols across various services. Encryption keys are managed using AWS Key Management Service (KMS) and Azure Key Vault with key rotation policies in place. Only services and users with specific IAM roles can access the decryption keys, and all access is logged via AWS CloudTrail and Azure Monitor for auditing and compliance purposes.
+## Protect production data
 
-- **Fine-Grained Access Control via IAM**
+- **Protected branches.** Mark your production branch as [protected](/docs/guides/protected-branches). A protected branch can't be deleted or reset, and a project with a protected branch can't be deleted. A branch created from a protected branch gets new passwords for its Postgres roles, so the production passwords don't work on it. Available on paid plans.
+- **Keep sensitive data out of development branches.** A branch is a full copy of its parent's data. To develop without production data, create a [schema-only branch](/docs/guides/branching-schema-only), or [anonymize](/docs/workflows/data-anonymization) sensitive columns on a development branch.
 
-  Access to PII and customer or sensitive data is controlled through AWS Identity and Access Management (IAM) policies and Microsoft Entra ID permissions. Broad access is limited to the infrastructure and security teams, while other roles operate under least-privilege principles. When additional access needed, access requests to production systems are received via Teleport, where all sessions are recorded. Only managers and on-call personnel are permitted to access production or approve production access requests.
+## Use AI agents safely
 
-  Additionally, all infrastructure is managed through Terraform, ensuring that any changes to access controls or resources are fully auditable and version-controlled. Regular access reviews and audits are conducted to verify that access rights remain aligned with security best practices.
+Agents act with the access of the credential you give them.
 
-- **Data Segmentation and Isolation Using VPCs and Security Groups**
-
-  In our AWS and Azure environments, workloads are segmented using Virtual Private Clouds (VPCs) and Azure Virtual Networks (VNets) to separate sensitive data environments from other systems. We control network access between services by using security groups, Network Access Control Lists (NACLs) and Azure Network Security Groups (NSGs), restricting access to only the necessary traffic. This ensures a clear separation of environments, minimizing the risk of unauthorized access or lateral movement between services.
-
-- **Event-Based Data Anomaly Detection via AWS GuardDuty and Logz.io**
-
-  Customer data access attempts and other anomalies are continuously monitored via Logzio integration on both infrastructures. All alerts are ingested into our Logz.io SIEM for centralized logging, analysis, and correlation with other security data. This allows our Security Operations Center (SOC) to quickly detect, investigate, and respond to potential security threats.
-
-- **Data Access Logging and Auditing (AWS CloudTrail & Logz.io)**
-
-  All data access actions, including those involving sensitive operations, are logged using AWS CloudTrail and Azure Monitor, and forwarded to Logz.io for centralized logging and analysis. This provides full traceability of who accessed which resources, when, and from where. Logs are secured and retained for audit purposes, while any anomalies or suspicious activity trigger real-time alerts through our Security Operations Center (SOC) for immediate investigation and response.
-
-- **PII Backup, Retention, and Deletion Policies with S3 Versioning**
-
-  Customer data backups are stored in cloud object storage, such as Amazon S3 and Azure Blob Storage, with versioning enabled, allowing recovery from accidental deletions or modifications. Data is encrypted using server-side encryption (SSE) and is retained for 30 days. Data deletion is followed to ensure compliance with SOC2, ISO, GDPR and CCPA requirements, including data subject requests.
-
-- **Vulnerability Management with Orca and Oligo**
-
-  Our vulnerability management program, integrated with Orca and Oligo, continuously scans all AWS and Azure environments for security issues, including misconfigurations, unpatched software, and exposed credentials. We use tagging to classify certain data types, enabling focused monitoring and scanning based on the sensitivity of the data. Automated alerts allow us to address vulnerabilities before they pose a risk to PII or other sensitive information. The vulnerabilities are remediated according to the defined SLAs to reduce the risk.
-
-- **Annual Audits and Continuous Penetration Testing**
-
-  We undergo annual audits for SOC2 and ISO by two independent firms to verify the integrity and security of our systems. In addition, bi-annual penetration tests with Hackerone are performed, with results feeding into our vulnerability management program. The vulnerabilities are remediated according to the defined SLAs to reduce the risk.
-
-To learn more about how we protect your data and uphold the highest standards of security and privacy, please visit our [Trust Center](https://trust.neon.com/).
+- Follow the [MCP security guidance](/docs/ai/neon-mcp-server#mcp-security-guidance), and review what an agent asks to do before you approve it.
+- Use [read-only mode](/docs/ai/neon-mcp-server#read-only-mode) when an agent only needs to look.
+- Scope an agent to the projects it needs. See [Scoping access for agents](/docs/manage/project-permissions-get-started#scoping-access-for-agents).
 
 ## GitHub secret scanning
 
-Neon is a [GitHub Secret Scanning Partner](https://docs.github.com/en/code-security/secret-scanning/secret-scanning-partner-program). If a Neon database credential or API key is detected in a GitHub repository, GitHub alerts Neon through an automated system. This system validates the credential and notifies our security team.
+Neon is a [GitHub secret scanning partner](https://docs.github.com/en/code-security/secret-scanning/introduction/about-secret-scanning-for-partners). When GitHub finds a Neon API key or a Neon connection string in a public repository or a public npm package, it notifies Neon.
 
-By integrating with GitHub Secret Scanning, Neon helps users quickly identify and mitigate exposed credentials, reducing the risk of unauthorized access.
-
-To avoid leaking secrets, follow these security best practices:
+Don't rely on that to catch a leak. GitHub doesn't scan private repositories or other places you store code for partner alerts, so keep credentials out of source code:
 
 - Use environment variables instead of hardcoding credentials.
-- Store sensitive information in secret management tools like AWS Secrets Manager or HashiCorp Vault.
-- Regularly rotate database credentials and API keys.
-
-If you have questions about this integration or need help securing your credentials, reach out on our [Discord server](/discord) or [submit a support ticket](/docs/introduction/support).
+- Store credentials in a secret manager, such as AWS Secrets Manager or HashiCorp Vault.
+- If a credential is exposed, [rotate it](#rotate-after-a-leak-or-breach).
 
 ## Rotate credentials
 
 Rotate your database credentials regularly, and immediately if one is exposed. A Neon connection string is built from a role and its password, so you rotate it by resetting the role's password. See [Reset a password](/docs/manage/roles#reset-a-password) for the Console, CLI, API, and SQL methods.
 
-After you reset a password, the old one stops working on the next connection. Copy the new connection string from the **Connect** modal (**Connect** in the Console nav) and roll it out everywhere it is stored, including deployment platform environment variables, CI/CD secrets, secret managers, and local `.env` files, before clients reconnect.
+After you reset a password, new connections with the old password fail. Sessions that are already open stay connected until they disconnect. Copy the new connection string from the **Connect** modal (**Connect** in the Console nav) and roll it out everywhere it is stored, including deployment platform environment variables, CI/CD secrets, secret managers, and local `.env` files, before clients reconnect.
 
 ### Rotate after a leak or breach
 
 If a credential is exposed, for example through a leaked `.env` file, a compromised deployment target, or a stolen device, rotate every affected credential rather than just one:
 
 1. Reset the password for every role that can log in, starting with the default role (often `neondb_owner`). Roles are branch-scoped, so reset the role on every branch where it can log in.
-2. Roll the new connection strings out to every secret store, then watch your application logs for `password authentication failed` errors, which flag a location you missed.
-3. Revoke any exposed Neon API keys and create new ones. See [Manage API keys](/docs/manage/api-keys).
-4. Tighten your [IP allowlist](#ip-allowlist-support) to limit which addresses can connect.
-5. Audit your roles and remove any you do not recognize.
+2. End the sessions that are already open. A reset only blocks new connections, so [restart every compute](/docs/manage/computes#restart-a-compute) on each affected branch, including read replicas. A restart drops every open session on that compute, including pooled connections. Restarting the primary compute doesn't close sessions on a read replica.
+3. Roll the new connection strings out to every secret store, then watch your application logs for `password authentication failed` errors, which flag a location you missed.
+4. Revoke any exposed Neon API keys and create new ones. See [Manage API keys](/docs/manage/api-keys).
+5. Revoke any exposed scoped credentials for Object Storage or the AI Gateway. See [Revoking credentials](/docs/storage/authentication#revoking-credentials).
+6. Tighten your [IP allowlist](/docs/introduction/ip-allow) to limit which addresses can connect.
+7. Audit your roles and remove any you do not recognize.
 
 Neon has no single command to rotate everything at once. To rotate many roles, list every project, branch, and role, then loop the [reset-password API](/docs/manage/roles#reset-a-password).
 
@@ -144,20 +136,12 @@ Neon has no single command to rotate everything at once. To rotate many roles, l
 
 Resetting a password cuts over all consumers at once. To rotate gradually, create a parallel role, grant it the access the old role had, and migrate consumers one service at a time, since both connection strings keep working during the migration. Reset the old role's password at the end to invalidate it. In most projects the original role owns database objects and cannot be dropped while it does, so resetting its password is what closes the leak. To remove the role later, [reassign ownership](https://www.postgresql.org/docs/current/sql-reassign-owned.html) of its objects, then [delete the role](/docs/manage/roles#delete-a-role).
 
-## Abuse of resources
+## Report a vulnerability
 
-Users must not engage in activities that result in unintended or non-permitted use of Neon resources, or that disrupt or degrade the service for other users. Prohibited activities include, but are not limited to, intentional or unintentional denial-of-service attacks, exceeding [rate limits](/docs/reference/api#rate-limiting), using Neon for distributed computing projects, using Neon as general-purpose file storage, or other usage that falls outside the intended resource usage and limits of the applicable [Neon plan](/docs/introduction/plans).
+To report a security issue in Neon, see [Security reporting](/docs/security/security-reporting). Neon also runs a [public bug bounty program with HackerOne](/docs/security/security-reporting#bug-bounty-program-with-hackerone).
 
-## Unauthorized modifications
+## Questions about Neon security?
 
-Tampering with Neon's infrastructure, configurations, or any restricted settings is prohibited. Doing so will be considered a violation of our terms. This includes attempts to alter Neon-managed serverless configurations or storage settings without proper authorization.
+For Neon's audit reports and security documentation, visit the [Neon Trust Center](https://trust.neon.com/). For other questions, [submit a support ticket](/docs/introduction/support).
 
-## Security reporting
-
-Neon adheres to the [securitytxt.org](https://securitytxt.org/) standard for transparent and efficient security reporting. For details on how to report potential vulnerabilities, please visit our [Security reporting](/docs/security/security-reporting) page or refer to our [security.txt](/security.txt) file.
-
-Neon also has a [public bug bounty program with HackerOne](/docs/security/security-reporting#bug-bounty-program-with-hackerone).
-
-## Questions about our security measures?
-
-If you have any questions about our security protocols or would like a deeper dive into any aspect, our team is here to help. Explore our documentation in the [Neon Trust Center](https://trust.neon.com/), or [submit a support ticket](/docs/introduction/support).
+<NeedHelp/>
