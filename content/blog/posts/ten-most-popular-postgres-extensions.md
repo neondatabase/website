@@ -121,7 +121,7 @@ ORDER BY distance
 LIMIT 5;
 ```
 
-[Check out this guide](https://neon.com/docs/ai/lakebase-search-get-started) to get started with vector search.
+Check out the [pgvector docs](https://neon.com/docs/extensions/pgvector) to get started with pgvector.
 
 ### pgcrypto
 
