@@ -4,7 +4,7 @@ subtitle: 'Bind live queries to component and agent state.'
 summary: >-
   Bind live queries to React component state with useLiveQuery, change their parameters and handle errors, or sync a broader live query into a TanStack DB collection and derive instant, local queries from it.
 enableTableOfContents: true
-updatedOn: '2026-11-05T01:10:58.303Z'
+updatedOn: '2026-11-17T23:27:28.240Z'
 ---
 
 Build reactive apps and agents using higher-level reactivity primitives that manage live query [subscriptions](./subscribing) for you.
@@ -47,7 +47,7 @@ createRoot(document.getElementById("root")!).render(
 )
 ```
 
-`client` is the module singleton from `frontend/client.ts`, created once for the whole app. If you render on the server, create the client in the browser instead, as the [server-side rendering guide](./ssr#open-the-connection-in-the-browser) explains.
+`client` is the module singleton that `frontend/client.ts` creates once for the whole app with `createRealtimeClient()` from `@neon/realtime/client`, as the [subscribing guide](./subscribing#subscribe-to-the-sealed-query) shows. If you render on the server, create the client in the browser instead, as the [server-side rendering guide](./ssr#open-the-connection-in-the-browser) explains. In Next.js, `@neon/realtime-react` ships without a `"use client"` directive, so import it only from files that start with `"use client"`, as the [quickstart's Next.js setup](../quickstart#add-realtime-to-an-existing-app) shows.
 
 ### useLiveQuery
 
