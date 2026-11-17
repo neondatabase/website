@@ -14,7 +14,7 @@ summary: >-
 enableTableOfContents: true
 redirectFrom:
   - /docs/manage/billing
-updatedOn: '2026-11-17T20:50:48.329Z'
+updatedOn: '2026-11-17T21:33:26.422Z'
 ---
 
 <InfoBlock>
@@ -106,16 +106,6 @@ Updating your billing details (company name, address, or tax or VAT ID) applies 
 
 A Neon invoice includes the charges and the amount due for the billing period. For an explanation of what you've been billed for, see [Usage metrics](/docs/introduction/plans#usage-metrics).
 
-<Faq>
-
-<FaqItem question="When will I receive my first invoice?">
-Neon bills on a monthly billing period. Invoices are charged to your payment method on the first day of the month and cover the billing period that just ended (see [Pay an invoice](#pay-an-invoice)).
-
-On the Launch and Scale plans, you pay only for what you use and there's no minimum monthly fee, so nothing is charged when you sign up. Your first invoice is generated on the first day of the month after you start, and it covers your usage up to that point.
-</FaqItem>
-
-</Faq>
-
 ### Pay an invoice
 
 Invoices are charged automatically to your payment method on the first day of the month. If an automatic payment didn't go through, organization admins (or the account owner on a personal account) can pay an outstanding invoice manually at any time.
@@ -194,10 +184,22 @@ To downgrade from a **legacy Enterprise plan**, please open a support ticket. Ca
 
 ## How to prevent further monthly charges to your account
 
-If you're on a Neon paid plan, you need to downgrade to the Free plan to avoid further monthly charges. You can do so from the [Billing](https://console.neon.tech/app/billing#change_plan) page in the Neon Console. Simply removing all Neon projects will **not** stop the monthly fee associated with your plan. You will continue to be invoiced until you downgrade to Free.
+If you're on a Neon paid plan, you need to downgrade to the Free plan to avoid further monthly charges. You can do so from the [Billing](https://console.neon.tech/app/billing#change_plan) page in the Neon Console.
 
 ## Delete your account
 
 If you would like to delete your Neon account entirely, please refer to the steps described here: [Deleting your account](/docs/manage/accounts#delete-account).
+
+## Frequently asked questions
+
+<Faq>
+
+<FaqItem question="When will I receive my first invoice?">
+Neon bills on a monthly billing period. Invoices are charged to your payment method on the first day of the month and cover the billing period that just ended (see [Pay an invoice](#pay-an-invoice)).
+
+On the Launch and Scale plans, you pay only for what you use and there's no minimum monthly fee, so nothing is charged when you sign up. Your first invoice is generated on the first day of the month after you start, and it covers your usage up to that point.
+</FaqItem>
+
+</Faq>
 
 <NeedHelp/>
