@@ -15,7 +15,7 @@ updatedOn: '2026-11-13T20:32:55.831Z'
 ---
 
 <Admonition type="note" title="Beta">
-The Neon Terraform provider is in beta. Terraform installs a beta release only when the version constraint names it exactly, so pin `version = "0.19.0-beta.0"` as shown on this page. Report problems in the [provider's GitHub repository](https://github.com/neondatabase/terraform-provider-neon/issues).
+The Neon Terraform provider is in beta. Terraform installs a beta release only when the version constraint names it exactly, so pin `version = "0.19.0-beta.2"` as shown on this page. Report problems in the [provider's GitHub repository](https://github.com/neondatabase/terraform-provider-neon/issues).
 </Admonition>
 
 The [Neon Terraform provider](https://registry.terraform.io/providers/neondatabase/neon/latest/docs) lets you declare Neon resources in HCL and manage them with `terraform plan` and `terraform apply`. It's published to the Terraform Registry as `neondatabase/neon` and maintained by Neon in [neondatabase/terraform-provider-neon](https://github.com/neondatabase/terraform-provider-neon).
@@ -64,7 +64,7 @@ terraform {
   required_providers {
     neon = {
       source  = "neondatabase/neon"
-      version = "0.19.0-beta.0"
+      version = "0.19.0-beta.2"
     }
   }
 }
@@ -91,7 +91,7 @@ terraform init
 Terraform downloads the provider and checks its signature:
 
 ```text
-- Installed neondatabase/neon v0.19.0-beta.0 (self-signed, key ID 922DFC48EB2F15FF)
+- Installed neondatabase/neon v0.19.0-beta.2 (self-signed, key ID 922DFC48EB2F15FF)
 ```
 
 </Steps>
@@ -321,7 +321,7 @@ Each entry starts with the error summary Terraform prints after `Error:`. For er
 <DefinitionList>
 
 `no available releases match the given constraints ~> 0.19`
-: `terraform init` can't find a release because the provider is in beta, and Terraform skips beta releases unless the constraint names one exactly. Set `version = "0.19.0-beta.0"`.
+: `terraform init` can't find a release because the provider is in beta, and Terraform skips beta releases unless the constraint names one exactly. Set `version = "0.19.0-beta.2"`.
 
 `Unable to Configure Neon Provider` with `authorization key must be provided`
 : The provider found no API key. Export `NEON_API_KEY` in the shell that runs Terraform, or set `api_key` in the `provider` block.
