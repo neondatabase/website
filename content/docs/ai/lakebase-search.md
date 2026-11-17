@@ -13,10 +13,10 @@ redirectFrom:
   - /docs/extensions/migrate-pg-search-to-lakebase-text
   - /guides/pg-search
   - /guides/pg-search-vs-tsvector
-updatedOn: '2026-11-17T15:32:48.504Z'
+updatedOn: '2026-11-17T15:40:41.656Z'
 ---
 
-Lakebase Search gives your agents and apps semantic, keyword, and hybrid search over your own data, as plain SQL inside your [Lakebase Postgres](/docs/postgres/overview) database on Neon. It's built for retrieval at agent scale: there's no separate vector database to run, no pipeline to keep in sync, and nothing to rebuild when your data changes.
+Lakebase Search gives your agents and apps semantic, keyword, and hybrid search over your own data, running as plain SQL inside your [Lakebase Postgres](/docs/postgres/overview) database on Neon.
 
 <AgentPrompt title="Set up with your agent" src="/prompts/lakebase-search-landing.md" buttonText="Copy prompt" />
 
@@ -48,11 +48,9 @@ flowchart TD
     G --- D
 ```
 
-`lakebase_vector` builds the `lakebase_ann` index, which splits vectors into IVF (Inverted File) lists and scans only the relevant ones, reading sequentially instead of chasing pointers through an in-memory graph. It compresses the vectors with RaBitQ quantization to keep the index small and the build fast. `lakebase_text` builds the `lakebase_bm25` index, which adds BM25 ranking with Block-Max WAND top-K pushdown, so it returns the top matches directly instead of scoring every row the way a GIN index does. Because both are ordinary Postgres indexes, hybrid search is just SQL: run both in one query and fuse or rerank the results.
+`lakebase_vector` builds the `lakebase_ann` index, which splits vectors into IVF (Inverted File) lists and scans only the relevant ones, reading sequentially instead of chasing pointers through an in-memory graph. It compresses the vectors with RaBitQ quantization to keep the index small and the build fast. Because the index lives in storage, a cold start needs no rebuild or re-index; the first query pays object-storage latency while the cache warms, which you can avoid by calling `lakebase_ann_prewarm` ahead of time.
 
-## What you get
-
-That architecture is what makes Lakebase Search a `pgvector`-compatible path past tens of millions of vectors. A single `lakebase_ann` index scales to 100 million vectors and beyond without resharding, and because the index lives in storage you don't pay for a large instance sized to hold it in memory. Compute scales to zero, so an idle dev or staging database doesn't cost you compute while it waits. After a cold start there's no rebuild or re-index; the first query pays object-storage latency while the cache warms, which you can avoid by calling `lakebase_ann_prewarm` ahead of time.
+`lakebase_text` builds the `lakebase_bm25` index, which adds BM25 ranking with Block-Max WAND top-K pushdown, so it returns the top matches directly instead of scoring every row the way a GIN index does. Because both are ordinary Postgres indexes, hybrid search is just SQL: run both in one query and fuse or rerank the results.
 
 ## Benchmarks
 
@@ -60,7 +58,7 @@ For throughput and recall figures, Databricks has published benchmarks for Lakeb
 
 ## Vector, keyword, and hybrid search
 
-Vector, keyword, and hybrid are the three ways you query, and each maps to an extension you can go deep on. [`lakebase_vector`](/docs/extensions/lakebase-vector) handles vector (semantic) search through the `lakebase_ann` index: you query with an embedding and get the nearest rows by meaning, which is what you want for natural-language questions, recommendations, and retrieval-augmented generation (RAG). [`lakebase_text`](/docs/extensions/lakebase-text) handles keyword (full-text) search through the `lakebase_bm25` index, ranking rows by BM25 for names, codes, and exact terms. Hybrid search runs both and merges the results; the [Get started guide](/docs/ai/lakebase-search-get-started#combine-results-with-hybrid-search) shows how to fuse them with Reciprocal Rank Fusion (RRF) or rerank them with Jev, a reranking model on Neon AI Gateway. For custom tokenization, including Chinese, Japanese, and Korean (CJK) text, [`lakebase_tokenizer`](/docs/extensions/lakebase-tokenizer) emits standard `tsvector` values.
+Those two engines back three kinds of query. [`lakebase_vector`](/docs/extensions/lakebase-vector) handles vector (semantic) search through the `lakebase_ann` index: you query with an embedding and get the nearest rows by meaning, for natural-language questions, recommendations, and retrieval-augmented generation (RAG). [`lakebase_text`](/docs/extensions/lakebase-text) handles keyword (full-text) search through the `lakebase_bm25` index, ranking rows by BM25 for names, codes, and exact terms. Hybrid search runs both and merges the results; the [Get started guide](/docs/ai/lakebase-search-get-started#combine-results-with-hybrid-search) shows how to fuse them with Reciprocal Rank Fusion (RRF) or rerank them with Jev, a reranking model on Neon AI Gateway. For custom tokenization, including Chinese, Japanese, and Korean (CJK) text, [`lakebase_tokenizer`](/docs/extensions/lakebase-tokenizer) emits standard `tsvector` values.
 
 ![Keyword search matches only documents that contain the typed words and misses synonyms like "quick automobile" for "fast sports car." Vector search places the query and documents in the same embedding space and returns the nearest neighbors by meaning, including those synonyms.](/docs/ai/lakebase-search-keyword-vs-vector.png)
 
