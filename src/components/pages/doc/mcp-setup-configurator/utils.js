@@ -20,8 +20,13 @@ export function isValidRoleName(roleName) {
   return ROLE_NAME_PATTERN.test(roleName);
 }
 
+// `setup` is the server's default, and a read-only connection shows no secrets
+// whatever `secrets` says, so neither adds the param.
+export const DEFAULT_SECRETS = 'setup';
+
 export function buildQueryParams({
   readOnly,
+  secrets,
   projectId,
   roleName,
   selectedScopes,
@@ -31,6 +36,8 @@ export function buildQueryParams({
   const params = new URLSearchParams();
   if (readOnly) {
     params.set('readonly', 'true');
+  } else if (secrets !== DEFAULT_SECRETS) {
+    params.set('secrets', secrets);
   }
   const trimmedProjectId = projectId.trim();
   if (trimmedProjectId) {

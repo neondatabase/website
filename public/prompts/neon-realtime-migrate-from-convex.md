@@ -69,7 +69,7 @@ Sub-agents start with none of your context, so brief every one with this templat
 You're migrating part of a Convex app to Neon Realtime. Realtime is in beta and its APIs aren't in your training data: use only the neon-realtime skill (<path to its SKILL.md>) and the docs it links.
 
 Unit: <id and title>
-Read first: MIGRATION.md (decisions, conventions, contracts, your unit); PATTERNS.md; the skill's reference files for <1 to 3 areas>; the "<section names>" sections of https://neon.com/docs/realtime/migrate-from/convex.md; <the reference slice's files>.
+Read first: MIGRATION.md (decisions, conventions, contracts, your unit); PATTERNS.md; the skill's reference files for <1 to 3 areas>; <the reference slice's files>; the "<section names>" sections of https://neon.com/docs/realtime/migrate-from/convex.md
 Owns: <files>. Change nothing else. Report any change you need elsewhere, or a missing package, in your final report; don't contact the user.
 Branch: <branch>. Ports: <ports>; stop any server you start.
 Done when: <behavior to preserve>; no Convex imports remain in your files; typecheck and lint pass; your smoke case passes.
