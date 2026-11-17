@@ -180,7 +180,7 @@ print(resp.choices[0].message.content)
   });
 
 // cURL swaps to a provider-native dialect only when the unified route is the broken one.
-// A native dialect on its own is not a reason to leave `/v1/chat/completions` — the eight
+// A native dialect on its own is not a reason to leave `/v1/chat/completions` — the
 // conforming Claude models are served at /anthropic/v1/messages too, and showing that
 // instead would trade a portable snippet for a vendor-specific one to fix nothing.
 const curlChat = (model, nativeDialect, responsesOnly, arrayContent) => {
