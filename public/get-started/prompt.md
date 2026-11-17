@@ -27,7 +27,15 @@ pnpm add -g neon@latest    # pnpm
 
 For full CLI installation options, see https://neon.com/docs/cli/install.md
 
-Immediately after the CLI is installed, launch the sign-in flow by running `neon login` (`neon auth` is an alias) and have the user finish signing in via the browser to ensure the CLI is authenticated.
+Then check whether the CLI already has a Neon account, without signing in. It has one if the `NEON_API_KEY` environment variable is set (check without printing it), or if the active profile (`"active": "*"`) in this command's output has an `account` other than `-`:
+
+```bash
+neon profile list -o json
+```
+
+- If the CLI has an account, skip sign-in and continue with the next step.
+- Otherwise, launch the sign-in flow by running `neon login` (`neon auth` is an alias) and have the user finish signing in via the browser.
+- If nobody can finish a browser sign-in, for example when you run unattended, do not run `neon login`: it waits for the browser until it times out. Stop and ask the user to set a Neon API key as the `NEON_API_KEY` environment variable for your session, without pasting the key into chat, then continue.
 
 ---
 
