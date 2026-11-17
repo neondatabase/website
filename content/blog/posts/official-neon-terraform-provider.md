@@ -39,7 +39,7 @@ In July 2022, Dmitry Kisler started [kislerdm/terraform-provider-neon](https://g
 
 Starting today, that provider continues as the official one: [`neondatabase/neon`](https://registry.terraform.io/providers/neondatabase/neon/latest) on the Terraform Registry, built in [neondatabase/terraform-provider-neon](https://github.com/neondatabase/terraform-provider-neon). Neon maintains it together with Dmitry and Justin Frye, who did a large share of the work to get it here. It's in beta, and the current release is 0.19.0-beta.2.
 
-<!-- TODO(Dmitry): a few sentences in your own words on why you started the provider and what handing it to Neon means to you -->
+{/* TODO(Dmitry): a few sentences in your own words on why you started the provider and what handing it to Neon means to you */}
 
 ## What's new since kislerdm/neon 0.18
 
@@ -80,7 +80,7 @@ resource "neon_branch_realtime" "this" {
 }
 ```
 
-<!-- TODO(Justin): a few sentences in your own words on the Plugin Framework migration and what you'd like people to try first -->
+{/* TODO(Justin): a few sentences in your own words on the Plugin Framework migration and what you'd like people to try first */}
 
 ## Moving from kislerdm/neon
 
