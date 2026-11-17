@@ -242,18 +242,18 @@ Changing your plan affects **all databases** in this integration, not just the c
 
 Deleting a database in Vercel deletes the underlying Neon project and all of its data. To delete:
 
-1. Vercel Dashboard → Storage → Settings
-2. Select your database
-3. Find Delete Database section and confirm
+1. In the Vercel dashboard, go to **Storage** and select your database.
+2. Open the database's **Settings** page.
+3. In the **Delete Database** section, click **Delete Database**, type the database and team names, and confirm.
 
-A deleted project can usually be recovered within 7 days, as long as the Vercel integration for the organization still exists. If the Neon organization was deleted too, recovery requires Support. See [Recover a deleted project](/docs/manage/projects#recover-a-deleted-project).
+Vercel warns that this can't be undone, but Neon keeps the deleted project for 7 days. During that time you can [recover it](/docs/manage/projects#recover-a-deleted-project) from the Neon Console, CLI, or API, as long as the Vercel integration for the organization still exists. Recovery adds the database back to Vercel without its project connections, so [connect it to your projects](#connecting-the-database-to-a-vercel-project) again and redeploy. If the Neon organization was deleted too, recovery requires Support.
 
 ### Disconnect a project from database
 
 To disconnect a Vercel project without deleting the database:
 
 1. Go to **Storage → `<your database>` → Projects**
-2. Select your project and choose **Remove Project Connection**
+2. Open the **⋮** menu next to your project, select **Remove Project Connection**, and confirm
 
 This removes database environment variables from your Vercel project but keeps the database intact. Previously created preview branches remain but new ones won't be created.
 
@@ -309,6 +309,20 @@ Check how the database is connected under **Storage → `<your database>` → Pr
 - **Branch-specific values not visible**: With preview branching on, each preview deployment's branch credentials are injected at deployment time. They don't appear in your Vercel project's environment variable settings. Check the Neon Console **Branches** page to confirm a `preview/<git-branch>` branch was created.
 
 Variables only apply to deployments created after you change the connection, so redeploy after updating it.
+
+### Connecting another database fails with a prefix error
+
+If a Vercel project already uses a database's unprefixed variables, connecting a second database to the same environments fails with this message:
+
+```text
+Resource "<database>" is already connected to this project without a prefix in one of the chosen environments. Choose a prefix.
+```
+
+Set a **Custom Prefix** for the second database. For example, the prefix `RT` gives variables such as `RT_DATABASE_URL` and `RT_NEON_REALTIME_URL`.
+
+### Realtime shows as off in Vercel
+
+The database's **Settings** page in Vercel can show **Realtime** as **False** for a database you created with Realtime on, and turning it on there has no effect. You can only turn on Realtime when you create a database. To check whether it's on, look for the `NEON_REALTIME_URL` and `NEON_REALTIME_SECRET` variables in your Vercel project.
 
 ### Preview deployments can't connect to the database
 
