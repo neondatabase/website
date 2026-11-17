@@ -15,7 +15,7 @@ redirectFrom:
   - /docs/extensions/migrate-pg-search-to-lakebase-text
   - /guides/pg-search
   - /guides/pg-search-vs-tsvector
-updatedOn: '2026-11-17T13:44:04.411Z'
+updatedOn: '2026-11-17T14:12:33.323Z'
 ---
 
 Lakebase Search is a search system built for agents. It gives your agents and apps semantic, keyword, and hybrid search over your own data, running as plain SQL inside your [Lakebase Postgres](/docs/postgres/overview) database on Neon. There is no separate vector database to run, no pipeline to keep in sync, and nothing to rebuild when your data changes.
@@ -28,7 +28,7 @@ Lakebase Search is developed by Databricks. These extensions are part of the sha
 
 ## Scaling search past pgvector
 
-Most teams start vector search in Postgres with `pgvector`, then hit a wall as their data grows. The usual `pgvector` index, HNSW, has to fit in memory, and that memory grows with the number of vectors, not with how much you actually query. Past roughly tens of millions of vectors, you pay for a large, always-on instance just to hold the index. These are the limits teams run into:
+Most teams start vector search in Postgres with `pgvector`, then hit a wall as their data grows. The usual `pgvector` index, HNSW (Hierarchical Navigable Small World), has to fit in memory, and that memory grows with the number of vectors, not with how much you actually query. Past roughly tens of millions of vectors, you pay for a large, always-on instance just to hold the index. These are the limits teams run into:
 
 - **Memory scales with data, not usage**: an HNSW index keeps its whole graph in RAM and traverses it with random reads at query time, so cost tracks how much data you store rather than how much you search.
 - **Index builds are slow and disruptive**: building or rebuilding an HNSW index is CPU-heavy and can tie up the database for a long time on large tables.
@@ -66,7 +66,7 @@ The pieces behind that flow:
 
 ## What you get
 
-If you are looking for a `pgvector` alternative that holds up at 100 million vectors, Lakebase Search gives you:
+If you need the `pgvector`-compatible path to scale past tens of millions of vectors, Lakebase Search gives you:
 
 - **Lower cost at scale**: because indexes live in storage and compute scales to zero, you avoid paying for a large, always-on instance sized to hold an in-memory HNSW index.
 - **Scale to 100 million vectors and beyond**: a single `lakebase_ann` index grows with your data without resharding or rebuilding.
@@ -86,7 +86,7 @@ Lakebase Search supports three kinds of search. Hybrid search on Neon combines t
 
 - **Vector (semantic) search** finds rows whose meaning is closest to your query, even when they share no words. You search with an embedding, and the `lakebase_ann` index from [`lakebase_vector`](/docs/extensions/lakebase-vector) returns the nearest vectors by distance. Use it for natural-language questions, recommendations, and retrieval-augmented generation (RAG).
 - **Keyword (full-text) search** ranks rows by how well they match the exact terms in your query, using BM25 relevance scoring from the `lakebase_bm25` index in [`lakebase_text`](/docs/extensions/lakebase-text). Use it for names, codes, and exact-term lookups where wording matters.
-- **Hybrid search** combines vector and keyword results with fusion or reranking, so you get semantic and exact-term matches together. The [Get started guide](/docs/ai/lakebase-search-get-started#combine-results-with-hybrid-search) shows how to combine results with Jev through Neon AI Gateway or with Reciprocal Rank Fusion (RRF).
+- **Hybrid search** combines vector and keyword results with fusion or reranking, so you get semantic and exact-term matches together. The [Get started guide](/docs/ai/lakebase-search-get-started#combine-results-with-hybrid-search) shows how to combine results with Jev, a reranking model on Neon AI Gateway, or with Reciprocal Rank Fusion (RRF).
 
 For configurable whole-word tokenization and Chinese, Japanese, and Korean (CJK) analysis, [`lakebase_tokenizer`](/docs/extensions/lakebase-tokenizer) produces standard `tsvector` values that work with both GIN and `lakebase_bm25` indexes.
 
