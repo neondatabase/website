@@ -2,7 +2,7 @@
 title: 'The Neon Terraform provider is now official'
 description: >-
   The community Terraform provider for Neon is now the official neondatabase/neon provider, in beta, with ephemeral
-  credentials, the newer Neon primitives and a one-command move for existing state.
+  credentials, the newer Neon primitives and a migration path that keeps your existing state.
 excerpt: >-
   Since 2022, Neon users have managed their projects with kislerdm/neon, the community Terraform provider Dmitry
   Kisler started. Today it continues as the official neondatabase/neon provider, maintained by Neon together with
@@ -25,13 +25,13 @@ seo:
   title: 'The Neon Terraform provider is now official - Neon'
   description: >-
     neondatabase/neon is the official Terraform provider for Neon, in beta: ephemeral credentials, Functions, Object
-    Storage, Neon Auth and Realtime, plus a one-command move from kislerdm/neon.
+    Storage, Neon Auth and Realtime, plus a migration path from kislerdm/neon that keeps your state.
   keywords: []
   noindex: false
   ogTitle: 'The Neon Terraform provider is now official - Neon'
   ogDescription: >-
     neondatabase/neon is the official Terraform provider for Neon, in beta: ephemeral credentials, Functions, Object
-    Storage, Neon Auth and Realtime, plus a one-command move from kislerdm/neon.
+    Storage, Neon Auth and Realtime, plus a migration path from kislerdm/neon that keeps your state.
   image: 'https://cdn.neonapi.io/public/images/pages/blog/official-neon-terraform-provider/social.png'
 ---
 
