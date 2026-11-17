@@ -253,7 +253,7 @@ INSERT INTO app.identity_glossary (term, definition) VALUES
 Two of these came from wrong answers:
 
 - Without **usage drop**, the agent compared two halves of the last 30 days for "is usage dropping?" and reported a 5% decline. With the definition, it compared 30-day windows and found the 60% drop.
-- Without **last sign-in**, the agent called active admins "never signed in". Sign-ins don't emit a `user.updated` event, so `last_sign_in_at` only refreshes at the hourly reconcile.
+- Without **last sign-in**, the agent called active admins "never signed in". `last_sign_in_at` only changes when a user event arrives or a reconcile runs, so recent sign-ins are in `workos.auth_attempts`.
 
 The bot builds its system prompt from the comments and the glossary at runtime. The query runs as `identity_analyst`, so the agent only sees what it's allowed to read:
 
