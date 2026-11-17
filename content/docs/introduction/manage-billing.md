@@ -14,7 +14,7 @@ summary: >-
 enableTableOfContents: true
 redirectFrom:
   - /docs/manage/billing
-updatedOn: '2026-10-27T20:26:38.639Z'
+updatedOn: '2026-11-17T19:18:48.657Z'
 ---
 
 <InfoBlock>
@@ -105,6 +105,16 @@ Updating your billing details (company name, address, or tax or VAT ID) applies 
 ## Invoices
 
 A Neon invoice includes the charges and the amount due for the billing period. For an explanation of what you've been billed for, see [Usage metrics](/docs/introduction/plans#usage-metrics).
+
+<Faq>
+
+<FaqItem question="When will I receive my first invoice?">
+Neon bills on a monthly billing period. Invoices are charged to your payment method on the first day of the month and cover the billing period that just ended (see [Pay an invoice](#pay-an-invoice)).
+
+On the Launch and Scale plans, you pay only for what you use and there's no minimum monthly fee, so nothing is charged when you sign up. Your first invoice is generated on the first day of the month after you start, and it covers your usage from sign-up through the end of that first billing period.
+</FaqItem>
+
+</Faq>
 
 ### Pay an invoice
 
