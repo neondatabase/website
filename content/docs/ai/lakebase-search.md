@@ -13,10 +13,10 @@ redirectFrom:
   - /docs/extensions/migrate-pg-search-to-lakebase-text
   - /guides/pg-search
   - /guides/pg-search-vs-tsvector
-updatedOn: '2026-11-17T21:48:30.966Z'
+updatedOn: '2026-11-17T23:36:26.891Z'
 ---
 
-Lakebase Search gives your agents and apps semantic, keyword, and hybrid search over your own data, running as plain SQL inside your [Lakebase Postgres](/docs/postgres/overview) database on Neon.
+Lakebase Search is search built for agents: retrieval over your own data as plain SQL, inside your [Lakebase Postgres](/docs/postgres/overview) database on Neon.
 
 <AgentPrompt title="Set up with your agent" src="/prompts/lakebase-search-landing.md" buttonText="Copy prompt" />
 
@@ -69,7 +69,16 @@ A dedicated vector database trades the memory problem for a sync problem: a seco
 
 ## Benchmarks
 
-On VectorDBBench at 100-million-vector scale, Lakebase Search is the fastest and most cost-efficient system measured, running roughly 4x more cost-effectively than a standard cloud `pgvector` setup. See the [Databricks benchmark](https://www.databricks.com/blog/lakebase-search-state-art-full-text-and-vector-search-postgres) for the full results.
+Databricks benchmarked Lakebase Search on VectorDBBench at 100-million-vector scale. These results were measured by Databricks on Databricks Lakebase, so treat them as a reference point, not numbers a Neon project is guaranteed to hit.
+
+On VectorDBBench, as reported by Databricks:
+
+- Roughly 4x more cost-effective than a standard cloud `pgvector` setup.
+- About 2x the throughput of the next-best system measured [needs verification].
+- 97% recall at 71 ms P99 latency [needs verification].
+- 100 million vectors served on a single compute unit (CU) [needs verification].
+
+See the [Databricks benchmark](https://www.databricks.com/blog/lakebase-search-state-art-full-text-and-vector-search-postgres) for the full methodology and results.
 
 ## Which search to use: vector, keyword, or hybrid
 
