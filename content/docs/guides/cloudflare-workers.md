@@ -17,11 +17,11 @@ updatedOn: '2026-10-09T15:55:57.334Z'
 
 This guide demonstrates how to connect to a Lakebase Postgres database from your Cloudflare Workers application using two approaches:
 
-- **[Hyperdrive](https://developers.cloudflare.com/hyperdrive/)** (recommended): Cloudflare's connection pooling service that provides the lowest possible latencies by performing database connection setup and connection pooling across Cloudflare's network. Hyperdrive is included in all Workers plans and supports native PostgreSQL drivers like [node-postgres](https://node-postgres.com/).
+- **[Hyperdrive](https://developers.cloudflare.com/hyperdrive/)** (recommended): Cloudflare's connection pooling service that reduces connection latency by handling database connection setup and connection pooling across Cloudflare's network. Hyperdrive is included in all Workers plans and supports native Postgres drivers like [node-postgres](https://node-postgres.com/).
 - **[Neon serverless driver](/docs/serverless/serverless-driver)**: A low-latency Postgres driver designed for serverless environments that connects over HTTP or WebSockets.
 
 <Admonition type="note">
-Hyperdrive is the recommended approach as it provides optimized connection pooling and fast query routing by connecting directly to your database. When using Hyperdrive with Neon, use native PostgreSQL drivers like node-postgres or Postgres.js instead of the Neon serverless driver.
+Hyperdrive is the recommended approach as it provides optimized connection pooling and fast query routing by connecting directly to your database. When using Hyperdrive with Neon, use native Postgres drivers like node-postgres or Postgres.js instead of the Neon serverless driver.
 </Admonition>
 
 ## Prerequisites
@@ -85,10 +85,10 @@ To use Hyperdrive with Neon, you'll need to create a dedicated database role for
 4. Copy the connection string, which should look like this:
 
    ```bash
-   postgres://hyperdrive-user:PASSWORD@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname
+   postgresql://hyperdrive-user:PASSWORD@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require&channel_binding=require
    ```
 
-### Create a new Worker project
+### Create a new Worker project (#create-a-new-worker-project-2)
 
 Run the following command in a terminal window to set up a new Cloudflare Workers project:
 
@@ -139,14 +139,14 @@ This command will open a browser window and prompt you to log into your Cloudfla
 Now, create a Hyperdrive configuration with your Neon connection string:
 
 ```bash
-npx wrangler hyperdrive create my-neon-hyperdrive --connection-string="postgres://USERNAME:PASSWORD@HOSTNAME:PORT/DATABASE"
+npx wrangler hyperdrive create my-neon-hyperdrive --connection-string="postgresql://USERNAME:PASSWORD@HOSTNAME/DATABASE?sslmode=require&channel_binding=require"
 ```
 
 Replace the placeholder values with your actual connection details from the previous step. You will then be prompted with "Would you like Wrangler to add it on your behalf?". Enter **Y**, and continue with the default name. This will add the required Hyperdrive configuration (bindings) to your project.
 
 ### Install the node-postgres driver
 
-For Hyperdrive, we'll use the native PostgreSQL driver [node-postgres](https://node-postgres.com/):
+For Hyperdrive, we'll use the native Postgres driver [node-postgres](https://node-postgres.com/):
 
 ```bash
 npm install pg
@@ -178,7 +178,7 @@ Update your `wrangler.jsonc` to add the **compatibility_flags** binding. We will
     {
       "binding": "HYPERDRIVE",
       "id": "<your-hyperdrive-id-here>",
-      "localConnectionString": "postgres://USERNAME:PASSWORD@HOSTNAME:PORT/DATABASE"
+      "localConnectionString": "postgresql://USERNAME:PASSWORD@HOSTNAME/DATABASE?sslmode=require&channel_binding=require"
     }
   ]
 }
@@ -186,9 +186,9 @@ Update your `wrangler.jsonc` to add the **compatibility_flags** binding. We will
 
 Replace the following placeholders:
 
-- `localConnectionString` with your Neon connection string (the same one you used to create the Hyperdrive configuration). This is required for local development with `wrangler dev`.
+- `localConnectionString` with your Neon connection string (the same one you used to create the Hyperdrive configuration). This is required for local development with `wrangler dev`. Keep `sslmode=require` in the string. Without it, the local connection fails with `connection is insecure`.
 
-### Implement the Worker script
+### Implement the Worker script (#implement-the-worker-script-2)
 
 Update the `src/index.ts` file in your project directory with the following code:
 
@@ -215,10 +215,10 @@ export default {
 The `fetch` handler uses the Hyperdrive binding to connect to your Neon database through Cloudflare's optimized connection pooling service.
 
 <Admonition type="important">
-When using Hyperdrive with Neon, always use native PostgreSQL drivers like node-postgres (pg) or Postgres.js instead of the Neon serverless driver. Hyperdrive already provides optimized connection pooling and query routing for Workers.
+When using Hyperdrive with Neon, always use native Postgres drivers like node-postgres (pg) or Postgres.js instead of the Neon serverless driver. Hyperdrive already provides optimized connection pooling and query routing for Workers.
 </Admonition>
 
-### Test the worker application locally
+### Test the worker application locally (#test-the-worker-application-locally-2)
 
 To test the worker application locally, run:
 
@@ -319,6 +319,7 @@ export default {
     const client = new Client(env.DATABASE_URL);
     await client.connect();
     const { rows } = await client.query('SELECT * FROM books_to_read;');
+    ctx.waitUntil(client.end());
     return new Response(JSON.stringify(rows));
   },
 } satisfies ExportedHandler<Env>;
@@ -344,7 +345,7 @@ This command starts a local server and simulates the Cloudflare Workers environm
 
 ```bash
 ❯ npm run dev
- ⛅️ wrangler 3.28.1
+ ⛅️ wrangler 4.61.0
 -------------------
 Using vars defined in .dev.vars
 Your worker has access to the following bindings:
@@ -404,7 +405,7 @@ The Wrangler CLI will output the URL of your Worker hosted on the Cloudflare pla
 
 ```text
 ❯ npm run deploy
- ⛅️ wrangler 3.28.1
+ ⛅️ wrangler 4.61.0
 -------------------
 Total Upload: 189.98 KiB / gzip: 49.94 KiB
 Uploaded my-neon-worker (4.03 sec)

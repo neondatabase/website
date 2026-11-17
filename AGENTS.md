@@ -602,6 +602,7 @@ Use `/simple-content` for edits to existing pages, shorter additions, or when yo
 - Do not modify `src/` components, CSS, or site structure without explicit instruction; a web team actively maintains the frontend
 - Do not modify `node_modules/` or generated files
 - When you add a route handler (`route.js`) that serves a file like JSON or YAML instead of a page, add its path to the route handler list in `exclude` in `next-sitemap.config.js` so it stays out of sitemap.xml
+- When client-side code fetches a `.md` file from the site (prompt text from `/prompts/`, a page's markdown, a skill file), pass `{ headers: NON_AGENT_FETCH_HEADERS }` from `src/constants/llm-analytics.js`. The proxy counts every `.md` request as an agent view, so without the header each human page view also records a fake agent view. Links to `.md` files use a plain `<a>`, not `<Link>`, so they aren't pre-loaded.
 - Do not run `npm run fix`, `npm run fix:all`, or `npm run lint:md` during normal workflows. For JS changes, run `npm run fix:js`. Markdown in `content/` is auto-formatted and `updatedOn` is auto-stamped by the pre-commit hook on staged files. No manual step needed at commit time. To manually reformat markdown (prettier only), run `npm run fix:md`.
 - The codebase uses both `pages/` and `app/` directory (migration in progress)
 - Images are optimized via Next.js Image component

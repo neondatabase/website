@@ -44,7 +44,7 @@ terraform {
     neon = {
       source  = "kislerdm/neon" # [!code --]
       source  = "neondatabase/neon" # [!code ++]
-      version = "0.19.0-beta.0" # [!code ++]
+      version = "0.19.0-beta.2" # [!code ++]
     }
   }
 }
@@ -226,10 +226,6 @@ Error: Invalid data source
 ```
 
 Replace `data.neon_branch_role_password` with the `neon_role` ephemeral resource.
-
-## Known issue in 0.19.0-beta.0
-
-Changing `allowed_ips` on a project with `allowed_ips_protected_branches_only = true` fails with `Provider produced inconsistent result after apply`, and Neon turns the protected-branches restriction off. Run `terraform apply` again: the second apply sets `allowed_ips_protected_branches_only` back to `true`. The next provider release fixes this.
 
 ---
 

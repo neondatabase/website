@@ -5,7 +5,7 @@ summary: >-
   Solutions for common errors when using Neon AI Gateway, including
   authentication failures, model errors, quota limits, and upstream issues.
 enableTableOfContents: true
-updatedOn: '2026-11-10T21:40:40.486Z'
+updatedOn: '2026-11-15T17:20:24.920Z'
 ---
 
 ## Authentication errors
@@ -80,6 +80,12 @@ Only organization admins can add a card or buy credits. After you buy credits, m
 ---
 
 ## Gemini-specific errors
+
+### `404 page not found`
+
+The request didn't reach a gateway route. The Gemini endpoint is served at `/gemini/v1beta/...`, but `google-genai` 3.x defaults to the `v1` API version, so a client configured with only the base URL calls `/gemini/v1/models/...`.
+
+**Fix:** Set `httpOptions.apiVersion` (TypeScript) or `http_options.api_version` (Python) to `v1beta` when you configure the SDK. See [Gemini API](/docs/ai-gateway/gemini#basic-request).
 
 ### `404 unsupported gemini action`
 

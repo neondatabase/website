@@ -12,7 +12,7 @@ enableTableOfContents: true
 updatedOn: '2026-10-28T11:11:18.780Z'
 ---
 
-[Heroku](https://heroku.com) is a popular platform as a service (PaaS) that enables developers to build, run, and operate applications entirely in the cloud. It simplifies the deployment process, making it a favorite among developers for its ease of use and integration capabilities.
+[Heroku](https://heroku.com) is a popular platform as a service (PaaS) that enables developers to build, run, and operate applications entirely in the cloud. It simplifies the deployment process.
 
 This guide walks you through deploying a simple Node.js application connected to a Lakebase Postgres database, on Heroku.
 
@@ -131,8 +131,6 @@ We will use the `Heroku CLI` to deploy our application to Heroku manually. You c
 
 ```bash
 ❯ heroku login
- ›   Warning: Our terms of service have changed:
- ›   https://dashboard.heroku.com/terms-of-service
 heroku: Press any key to open up the browser to login or q to exit:
 Opening browser to https://cli-auth.heroku.com/auth/cli/browser/...
 ```
@@ -172,10 +170,7 @@ remote: -----> Launching...
 remote:        Released v4
 remote:        https://neon-heroku-example-fda03f6acbbe.herokuapp.com/ deployed to Heroku
 remote:
-remote: Verifying deploy... done.
-remote: 2024/02/21 07:26:49 Rollbar error: empty token
 To https://git.heroku.com/neon-heroku-example.git
-remote: Verifying deploy... done.
 ```
 
 Once the deployment is complete, you should see a message with the URL of your deployed application. Navigate to this URL in your browser to see your application live on Heroku.

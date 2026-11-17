@@ -25,13 +25,13 @@ This guide demonstrates how to configure a Hyperdrive service to connect to your
 
 ## Prerequisites
 
-To follow along with this guide, you require:
+To follow along with this guide, you need:
 
 - A Neon account. If you do not have one, sign up at [Neon](https://neon.tech). Your Neon project comes with a ready-to-use Postgres database named `neondb`. We'll use this database in the following examples.
 
 - A Cloudflare account. If you do not have one, sign up for [Cloudflare Workers](https://workers.cloudflare.com/) to get started.
 
-  **NOTE**: You need to be on Cloudflare Workers' paid subscription plan to use Hyperdrive.
+  **NOTE**: Hyperdrive is included in both the Workers Free and Paid plans. The Free plan has a daily limit on Hyperdrive database queries. The Paid plan has no query limit.
 
 - [Node.js](https://nodejs.org/) and [npm](https://www.npmjs.com/) installed on your local machine. We'll use Node.js to build and deploy our Workers application.
 
@@ -66,7 +66,9 @@ To follow along with this guide, you require:
 
 ### Retrieve your Neon database connection string
 
-In the Neon Console, click **Connect** in the nav to open the **Connect to your branch** modal and find your database connection string. It should look similar to this:
+In the Neon Console, click **Connect** in the nav to open the **Connect to your branch** modal and find your database connection string.
+
+Turn **Connection pooling** off. Hyperdrive manages connection pooling, so you need the direct connection string. Your connection string should look similar to this:
 
 ```bash
 postgresql://neondb_owner:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/neondb?sslmode=require&channel_binding=require
@@ -88,25 +90,30 @@ This initiates an interactive CLI prompt to generate a new project. To follow al
 
 ```bash
 ├ In which directory do you want to create your application?
-│ dir ./neon-hyperdrive-guide
+│ type neon-hyperdrive-guide
 │
-├ What type of application do you want to create?
-│ type "Hello World" Worker
+├ What would you like to start with?
+│ select "Hello World example"
 │
-├ Do you want to use TypeScript?
-│ Yes typescript
+├ Which template would you like to use?
+│ select "Worker only"
+│
+├ Which language do you want to use?
+│ select "TypeScript"
 ```
 
 When asked if you want to deploy your application, select `no`. We'll develop and test the application locally before deploying it to the Cloudflare Workers platform.
 
-The `create-cloudflare` CLI also installs the `Wrangler` tool to manage the full workflow of testing and managing your Worker applications. To emulate the Node environment in the Workers runtime, we need to add the following entry to the `wrangler.toml` file.
+The `create-cloudflare` CLI also installs the `Wrangler` tool to manage the full workflow of testing and managing your Worker applications. To emulate the Node environment in the Workers runtime, update the `wrangler.jsonc` file that the CLI creates so it looks like this:
 
-```toml
-#:schema node_modules/wrangler/config-schema.json
-name = "with-hyperdrive"
-main = "src/index.ts"
-compatibility_date = "2024-12-05"
-compatibility_flags = ["nodejs_compat"]
+```jsonc filename="wrangler.jsonc"
+{
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  "name": "with-hyperdrive",
+  "main": "src/index.ts",
+  "compatibility_date": "2024-12-05",
+  "compatibility_flags": ["nodejs_compat"]
+}
 ```
 
 ### Implement the Worker script
@@ -126,7 +133,7 @@ npm install postgres
 
 </CodeTabs>
 
-Now, you can update the `src/index.js` file in the project directory with the following code:
+Now, you can update the `src/index.ts` file in the project directory with the following code:
 
 <CodeTabs reverse={true} labels={["node-postgres", "postgres.js"]}>
 
@@ -169,6 +176,10 @@ First, you need to configure the `DATABASE_URL` environment variable to point to
 DATABASE_URL=YOUR_NEON_CONNECTION_STRING
 ```
 
+<Admonition type="note">
+If you use Postgres.js 4, remove `channel_binding=require` from `DATABASE_URL` in `.dev.vars`. Keep `sslmode=require`. With the parameter in place, `wrangler dev` fails with `CONNECTION_CLOSED`. node-postgres works with the full string.
+</Admonition>
+
 Now, to test the worker application locally, you can use the `wrangler` CLI which comes with the Cloudflare project setup.
 
 ```bash
@@ -186,7 +197,7 @@ With our Workers application able to query the database, we will now set up Clou
 You can use the `Wrangler` CLI to create a new Hyperdrive service, using your Neon database connection string from earlier:
 
 ```bash
-npx wrangler hyperdrive create neon-guide-drive --connection-string=$NEON_DATABASE_CONNECTION_STRING
+npx wrangler hyperdrive create neon-guide-drive --connection-string="$NEON_DATABASE_CONNECTION_STRING"
 ```
 
 This command creates a new Hyperdrive service named `neon-guide-drive` and outputs its configuration details. Copy the `id` field from the output, which we will use next.
@@ -195,17 +206,24 @@ This command creates a new Hyperdrive service named `neon-guide-drive` and outpu
 
 Cloudflare workers uses `Bindings` to interact with other resources on the Cloudflare platform. We will update the `wrangler.toml` file in the project directory to bind our Worker project to the Hyperdrive service.
 
-Add the following lines to the `wrangler.toml` file. This lets us access the Hyperdrive service from our Worker application using the `HYPERDRIVE` binding.
+Add the following to the `hyperdrive` array in the `wrangler.jsonc` file. This lets us access the Hyperdrive service from our Worker application using the `HYPERDRIVE` binding. Replace the `id` value with the ID from the previous step.
 
-```toml
-[[hyperdrive]]
-binding = "HYPERDRIVE"
-id = $id-from-previous-step
+```jsonc filename="wrangler.jsonc"
+"hyperdrive": [
+  {
+    "binding": "HYPERDRIVE",
+    "id": "<your-hyperdrive-id>"
+  }
+]
 ```
+
+<Admonition type="note">
+After you add the binding, `wrangler dev` needs a local connection string for the binding. Add `localConnectionString` to the `hyperdrive` entry, using your Neon connection string with `sslmode=require`. You can also set the `CLOUDFLARE_HYPERDRIVE_LOCAL_CONNECTION_STRING_HYPERDRIVE` environment variable instead. Without one of these, `wrangler dev` stops with an error about a local Postgres connection string.
+</Admonition>
 
 ### Update the Worker script to use Hyperdrive
 
-Now, you can update the `src/index.js` file in the project directory to query the database, through the Hyperdrive service.
+Now, you can update the `src/index.ts` file in the project directory to query the database, through the Hyperdrive service.
 
 <CodeTabs reverse={true} labels={["node-postgres", "postgres.js"]}>
 
@@ -242,18 +260,20 @@ export default {
 
 By default, Workers run in the data center closest to where the request was received. If your Worker makes multiple round trips to your database, you can reduce latency by placing the Worker closer to your database instead.
 
-You can specify the cloud region where your database is hosted by adding a placement in your `wrangler.toml`. For example, if your database is in AWS US East 1:
+You can specify the cloud region where your database is hosted by adding a `placement` property to your `wrangler.jsonc`. For example, if your database is in AWS US East 1:
 
-```toml
-[placement]
-region = "aws:us-east-1"
+```jsonc filename="wrangler.jsonc"
+"placement": {
+  "region": "aws:us-east-1"
+}
 ```
 
 Or if your database is in Azure Germany West Central:
 
-```toml
-[placement]
-region = "azure:germanywestcentral"
+```jsonc filename="wrangler.jsonc"
+"placement": {
+  "region": "azure:germanywestcentral"
+}
 ```
 
 ### Deploy the updated Worker
@@ -303,7 +323,7 @@ Hyperdrive → Neon Database (SSL enabled)
 
 This setup works in production. But for local development, libraries like Postgres.js may still reject the connection due to the local `sslmode=disable`.
 
-✅ **To avoid this issue locally**, use `wrangler dev --remote`. This runs your Worker in Cloudflare’s infrastructure, where the connection string works as expected.
+For local development, keep `sslmode=require` in the local connection string, as shown in the local test steps above. You can also run `wrangler dev --remote` to test against your deployed Hyperdrive configuration in Cloudflare's network.
 
 ## Resources
 

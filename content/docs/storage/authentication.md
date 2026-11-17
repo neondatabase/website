@@ -6,7 +6,7 @@ summary: >-
   Each credential maps to an S3 Access Key ID and Secret Access Key. Credentials
   are scoped to a branch and valid for that branch and all its descendants.
 enableTableOfContents: true
-updatedOn: '2026-10-21T12:36:11.000Z'
+updatedOn: '2026-11-10T18:52:43.837Z'
 ---
 
 Neon Object Storage uses the same scoped-credential system as [AI Gateway](/docs/ai-gateway/authentication): one credential API mints branch-scoped tokens that differ by scope (Object Storage uses `storage:read` and `storage:write`). You create a scoped credential via the Neon API, and it maps directly to the S3 Access Key ID and Secret Access Key your SDK expects. No AWS account or IAM configuration required.

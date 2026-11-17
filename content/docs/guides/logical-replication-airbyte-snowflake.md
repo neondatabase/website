@@ -20,7 +20,7 @@ Neon's logical replication feature allows you to replicate data from your Lakeba
 
 ## Prerequisites
 
-- A source [Neon project](/docs/manage/projects#create-a-project) with a database containing the data you want to replicate. If you're just testing this out and need some data to play with, you run the following statements from the [Neon SQL Editor](/docs/get-started/query-with-neon-sql-editor) or an SQL client such as [psql](/docs/connect/query-with-psql-editor) to create a table with sample data:
+- A source [Neon project](/docs/manage/projects#create-a-project) with a database containing the data you want to replicate. If you're just testing this out and need some data to play with, you can run the following statements from the [Neon SQL Editor](/docs/get-started/query-with-neon-sql-editor) or an SQL client such as [psql](/docs/connect/query-with-psql-editor) to create a table with sample data:
 
   ```sql shouldWrap
   CREATE TABLE IF NOT EXISTS playing_with_neon(id SERIAL PRIMARY KEY, name TEXT NOT NULL, value REAL);
@@ -70,10 +70,10 @@ It's recommended that you create a dedicated Postgres role for replicating data.
 
 <TabItem>
 
-The following CLI command creates a role. To view the CLI documentation for this command, see [Neon CLI commands — roles](/docs/reference/api/branches/create-project-branch-role)
+The following CLI command creates a role. Replace `$PROJECT_ID` with your project ID. You can find it with `neon projects list`. To view the CLI documentation for this command, see [Neon CLI commands: roles](/docs/cli/roles)
 
 ```bash
-neon roles create --name replication_user
+neon roles create --name replication_user --project-id $PROJECT_ID
 ```
 
 </TabItem>
@@ -156,6 +156,8 @@ Perform the following steps for each table you want to replicate data from:
 
 2. Create the Postgres publication. Include all tables you want to replicate as part of the publication:
 
+   Run this as the database owner, such as `neondb_owner`, not the replication role.
+
    ```sql
    CREATE PUBLICATION airbyte_publication FOR TABLE <tbl1, tbl2, tbl3>;
    ```
@@ -205,7 +207,7 @@ To complete your source setup, click **Set up source** in the Airbyte UI. Airbyt
 
 To complete your data integration setup, you can now add Snowflake as your destination.
 
-### Prerequisites (#prerequisites-2)
+### Snowflake prerequisites
 
 - A Snowflake account with the `ACCOUNTADMIN` role. If you're using a company account, you may need to contact your Snowflake administrator to set one up for you.
 
@@ -317,7 +319,7 @@ When you're finished filling in the required fields, click **Set up destination*
 
 In this step, you'll set up a connection between your Lakebase Postgres source and your Snowflake destination.
 
-To set up a new destination:
+To set up a new connection:
 
 1. Navigate to Airbyte.
 2. Select **New connection**.

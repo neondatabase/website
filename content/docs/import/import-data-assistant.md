@@ -21,7 +21,7 @@ The **Import Data Assistant** can help you automatically import your existing da
 <FeatureBetaProps feature_name="Import Data Assistant"/>
 
 <Admonition type="tip" title="Migrate between Neon projects">
-In addition to migrating from other Postgres platforms, you can use the **Import Data Assistant** to migrate data between Neon projects. Use it to upgrade to a newer Postgres version (for example, from Postgres 16 to 17) or move your database to a different region. The assistant steps you through creating a new Neon project.
+In addition to migrating from other Postgres platforms, you can use the **Import Data Assistant** to migrate data between Neon projects. Use it to upgrade to a newer Postgres version (for example, from Postgres 17 to 18) or move your database to a different region. The assistant steps you through creating a new Neon project.
 </Admonition>
 
 ## Before you start
@@ -59,13 +59,19 @@ Enter your database connection string and click **Run Checks**.
 We'll verify the following:
 
 - Database size is within the 10 GB limit
-- Postgres version compatibility (Postgres 14 to 17)
+- Postgres version compatibility (Postgres 14 to 18)
 - Extension compatibility
 - Region availability
 
+Some results are warnings rather than failures. A warning doesn't stop you from continuing to the next step.
+
+<Admonition type="note" title="False extension warning for Postgres 18 sources">
+For a Postgres 18 source database, the checks can list `plpgsql` (and other extensions) as unsupported. This is a false warning. You can continue with the import.
+</Admonition>
+
 ## Create a new Neon project
 
-Click the **Create new Neon project** button, specify your project settings including the **Postgres version** and **region**, and click **Create**.
+Click the **Create new Neon project** button, specify your project settings including the **Postgres version** and **region**, and click **Create**. Choose the same Postgres version as your source database or a newer one. You can't import into an older version.
 
 
 ## Start import process
@@ -75,6 +81,8 @@ Back in the assistant, click the **Start import process** button.
 <Admonition type="note">
 During import, your source database remains untouched. We only read from it to create a copy in Neon.
 </Admonition>
+
+The assistant imports your data into a new [root branch](/docs/manage/branches#root-branch) named `import`, not into the project's default branch. The default branch stays empty.
 
 </Steps>
 
@@ -88,8 +96,9 @@ During import, your source database remains untouched. We only read from it to c
 
 After a successful import:
 
-1. Run some test queries to ensure everything imported correctly.
-2. If you've migrated from another Neon project, remove your old project if it's no longer needed.
-3. Switch the connection string in your app to point to your new Neon database.
+1. Run some test queries on the `import` branch to ensure everything imported correctly.
+2. [Set the `import` branch as the default branch](/docs/manage/branches#set-a-branch-as-default), then [delete](/docs/manage/branches#delete-a-branch) the original, empty default branch. Your project then has a single root branch with your data.
+3. If you've migrated from another Neon project, remove your old project if it's no longer needed.
+4. Switch the connection string in your app to point to your new Neon database.
 
 <NeedHelp/>
