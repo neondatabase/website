@@ -101,7 +101,7 @@ No long-running queries in any database.
 
 ### neon inspect db stalled-queries (#db-stalled-queries)
 
-Active queries that have been running for at least 30 seconds, reported with their waits, blockers, parallel workers, query IDs, and query text. Where `long-running-queries` catches statements past a five-minute mark, this surfaces stalls sooner and shows what each backend is waiting on. Parallel workers are grouped with their leader process, and the `Blocking Pids` column shows which backends are holding others up. It runs compute-wide. Run it during an incident to see what is running right now and what is blocking it. When nothing qualifies, it says so instead of printing an empty table:
+Active queries that have been running for at least 30 seconds, reported with their waits, blockers, parallel workers, and query text. Query IDs are included in `-o json` output. Where `long-running-queries` catches statements past a five-minute mark, this surfaces stalls sooner and shows what each backend is waiting on. Parallel workers are grouped with their leader process, and the `Blocking PIDs` column shows which backends are holding others up. It runs compute-wide. Run it during an incident to see what is running right now and what is blocking it. When nothing qualifies, it says so instead of printing an empty table:
 
 ```bash
 neon inspect db stalled-queries
