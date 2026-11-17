@@ -180,21 +180,18 @@ describe('GET /models', () => {
       expect(curl.variantReason).toBeTruthy();
     });
 
-    // Both return a string for a trivial prompt, so only a reasoning probe catches them.
-    it.each(['claude-sonnet-5-5', 'claude-fable-5-1'])(
-      'serves no OpenAI SDK chat examples for %s, which returns array content once it reasons',
-      async (id) => {
-        const res = await GET(request(`?model=${id}`));
-        const { model } = await body(res);
-        const ids = model.examples.map((e) => e.id);
-        const curl = model.examples.find((e) => e.id === 'curl');
+    // It returns a string for a trivial prompt, so only a reasoning probe catches it.
+    it('serves no OpenAI SDK chat examples for claude-fable-5-1, which returns array content once it reasons', async () => {
+      const res = await GET(request('?model=claude-fable-5-1'));
+      const { model } = await body(res);
+      const ids = model.examples.map((e) => e.id);
+      const curl = model.examples.find((e) => e.id === 'curl');
 
-        expect(model.capabilities.chat).toBe('array-content');
-        expect(ids).not.toContain('typescript');
-        expect(ids).not.toContain('python');
-        expect(curl.endpoint).toBe('/anthropic/v1/messages');
-      }
-    );
+      expect(model.capabilities.chat).toBe('array-content');
+      expect(ids).not.toContain('typescript');
+      expect(ids).not.toContain('python');
+      expect(curl.endpoint).toBe('/anthropic/v1/messages');
+    });
 
     it('keeps cURL on chat completions for a conforming Claude model', async () => {
       const res = await GET(request('?model=claude-haiku-4-5'));

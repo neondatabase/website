@@ -6,7 +6,7 @@ summary: >-
   models, which endpoint to use, shorter and longer request paths, the
   /v1/models API, rate limits, pricing, and provider terms.
 enableTableOfContents: true
-updatedOn: '2026-11-17T18:07:26.865Z'
+updatedOn: '2026-11-17T23:43:15.556Z'
 ---
 
 This page covers how to call models through Neon AI Gateway and the rules that apply. For the full list of models you can call, see the [model catalog](https://neon.com/ai-gateway#models).
@@ -83,32 +83,29 @@ All paths below are appended to your branch's bare AI Gateway host (`NEON_AI_GAT
 | TypeSafe AI (decision models)           | `/typesafe/v1/systemone` | No chat completions. Returns answers to questions, not text. See [Decisions](/docs/ai-gateway/decisions)       |
 
 <Admonition type="warning" title="Content shape varies by model">
-On `/v1/chat/completions`, `message.content` is a plain string for most models. These models return an array of typed content blocks instead:
+On `/v1/chat/completions`, `message.content` is a plain string for most models. For the models below, the gateway returns an array of typed content blocks instead. This is a known gateway issue that we're fixing.
 
-- `gemini-3-7-flash`, `gemini-3-8-flash`, and `gemini-4-argon` return an array of `text` blocks on every non-streaming response, even for a trivial prompt. Their streamed `delta.content` values are strings.
-- `claude-opus-5-5`, `claude-sonnet-5-5`, `claude-haiku-5-5`, and `claude-fable-5-1` return a string for a trivial prompt and an array of blocks (`{ type: 'reasoning', ... }`, `{ type: 'text', text: ... }`) once the model reasons. When streaming, their reasoning chunks carry an array in `delta.content` and their text chunks carry a string. A low `max_tokens` value can cut a response off before the `text` block appears, leaving only a `reasoning` block.
+- `gemini-3-7-flash`, `gemini-3-8-flash`, `gemini-4-argon`, and `gemini-4-carbon` return an array on every non-streaming response, even for a trivial prompt: `[{ type: 'text', text: '...', thoughtSignature: '...' }]`. Their streamed `delta.content` values are strings, with `null` on the final chunk.
+- `claude-opus-5-5`, `claude-haiku-5-5`, `claude-fable-5-1`, and `claude-fable-5-2` return a string for a trivial prompt and an array once the model reasons: `[{ type: 'reasoning', summary: [...] }, { type: 'text', text: '...' }]`. When they reason while streaming, some `delta.content` values are arrays too. A low `max_tokens` value can cut a response off before the `text` block appears, leaving only a `reasoning` block.
 
-Every other chat model returns a string, so code that reads `message.content` as a string works with it unchanged.
-
-To get plain text from the models above without extra code, call them through [`@neon/ai-sdk-provider`](https://www.npmjs.com/package/@neon/ai-sdk-provider) with the Vercel AI SDK, which returns text for every model. Their native endpoints return a fixed shape instead: [Gemini](/docs/ai-gateway/gemini) through the google-genai SDK gives you `response.text`, and [Anthropic Messages](/docs/ai-gateway/anthropic-messages) always returns an array of content blocks, so read the `text` blocks. With the OpenAI SDK on `/v1/chat/completions`, handle both shapes:
+To get plain text from every model without extra code, call the gateway through [`@neon/ai-sdk-provider`](https://www.npmjs.com/package/@neon/ai-sdk-provider) with the Vercel AI SDK. The native endpoints return a fixed shape: [Gemini](/docs/ai-gateway/gemini) through the google-genai SDK gives you `response.text`, and [Anthropic Messages](/docs/ai-gateway/anthropic-messages) always returns an array of content blocks. With the OpenAI SDK on `/v1/chat/completions`, accept both shapes and join the `text` blocks:
 
 ```typescript
 // The OpenAI SDK types content as string | null, so read it as unknown.
-const content: unknown = response.choices[0].message.content;
-const text =
-  typeof content === 'string'
-    ? content
-    : Array.isArray(content)
-      ? (content.find((block) => block?.type === 'text')?.text ?? '')
-      : '';
-```
+function textOf(content: unknown): string {
+  if (typeof content === 'string') return content;
+  if (!Array.isArray(content)) return '';
+  return content
+    .filter((block) => block?.type === 'text' && typeof block.text === 'string')
+    .map((block) => block.text)
+    .join('');
+}
 
-When streaming, write only string deltas:
+const text = textOf(response.choices[0].message.content);
 
-```typescript
+// Streamed deltas can be arrays too, so read them the same way.
 for await (const chunk of stream) {
-  const delta: unknown = chunk.choices[0]?.delta?.content;
-  if (typeof delta === 'string') process.stdout.write(delta);
+  process.stdout.write(textOf(chunk.choices[0]?.delta?.content));
 }
 ```
 
