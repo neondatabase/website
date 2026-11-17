@@ -12,7 +12,7 @@ summary: >-
   structured upstream error codes, and migration from v0.1.
 enableTableOfContents: true
 layout: wide
-updatedOn: '2026-10-09T15:55:57.334Z'
+updatedOn: '2026-11-16T19:04:10.124Z'
 ---
 
 Reference documentation for the Managed Better Auth Next.js server SDK (`@neon/auth/next/server`). This package provides server-side authentication for Next.js applications using React Server Components, API routes, middleware, and server actions.
@@ -80,7 +80,7 @@ Returns an `auth` object with:
 | <tt>cookies.secret</tt>         | string | ✓        | -                     |
 | <tt>cookies.sessionDataTtl</tt> | number |          | 300                   |
 | <tt>cookies.domain</tt>         | string |          | -                     |
-| <tt>cookies.sameSite</tt>       | string |          | `strict`              |
+| <tt>cookies.sameSite</tt>       | string |          | `lax`                 |
 | <tt>logLevel</tt>               | string |          | `warn`                |
 | <tt>logger</tt>                 | object |          | `console` (per level) |
 
@@ -933,7 +933,7 @@ Complete configuration options for `createNeonAuth()`:
 | `cookies.secret`         | string | Yes      | -         |
 | `cookies.sessionDataTtl` | number | No       | 300       |
 | `cookies.domain`         | string | No       | undefined |
-| `cookies.sameSite`       | string | No       | `strict`  |
+| `cookies.sameSite`       | string | No       | `lax`     |
 | `logLevel`               | string | No       | `warn`    |
 | `logger`                 | object | No       | `console` |
 
@@ -941,7 +941,7 @@ Complete configuration options for `createNeonAuth()`:
 - **cookies.secret**: Secret for HMAC-SHA256 signing (32+ characters)
 - **cookies.sessionDataTtl**: Cache TTL in seconds for the signed `session_data` cookie
 - **cookies.domain**: For cross-subdomain sessions (for example, ".example.com")
-- **cookies.sameSite**: `strict` (default), `lax`, or `none`. Use `lax` or `none` if you embed the app in a third-party iframe or need cookies on cross-site navigations
+- **cookies.sameSite**: `lax` (default), `strict`, or `none`. `lax` supports OAuth callbacks and top-level cross-site navigations; use `strict` to prevent cross-site sending; use `none` for third-party iframe embedding (requires Secure)
 - **logLevel**: `silent`, `error`, `warn`, `info`, or `debug` — see [Server logging](#server-logging)
 - **logger**: Optional custom logger; see [Server logging](#server-logging)
 
