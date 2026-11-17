@@ -6,7 +6,7 @@ summary: >-
   host, and making your first request to the Neon AI Gateway using the OpenAI
   SDK. No provider API keys required. Authenticate with your Neon credential.
 enableTableOfContents: true
-updatedOn: '2026-10-01T22:38:59.908Z'
+updatedOn: '2026-11-17T18:07:26.865Z'
 ---
 
 To set up Neon AI Gateway with an AI coding assistant, install the Neon Platform (`neon`) and Neon AI Gateway skills with the [Neon CLI](/docs/cli):
@@ -209,7 +209,7 @@ curl -X POST "$NEON_AI_GATEWAY_BASE_URL/v1/chat/completions" \
 
 ## Swap models
 
-Change the `model` field to use a different provider. No other code changes required.
+Change the `model` field to use a different provider. For most models, no other code changes are required. A few Claude and Gemini models return `message.content` as an array instead of a string. See [Content shape varies by model](/docs/ai-gateway/models#which-endpoint-to-use) for the list.
 
 ```typescript
 // OpenAI
