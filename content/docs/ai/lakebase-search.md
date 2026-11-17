@@ -13,7 +13,7 @@ redirectFrom:
   - /docs/extensions/migrate-pg-search-to-lakebase-text
   - /guides/pg-search
   - /guides/pg-search-vs-tsvector
-updatedOn: '2026-11-17T21:03:40.986Z'
+updatedOn: '2026-11-17T21:48:30.966Z'
 ---
 
 Lakebase Search gives your agents and apps semantic, keyword, and hybrid search over your own data, running as plain SQL inside your [Lakebase Postgres](/docs/postgres/overview) database on Neon.
@@ -69,7 +69,7 @@ A dedicated vector database trades the memory problem for a sync problem: a seco
 
 ## Benchmarks
 
-On VectorDBBench at 100-million-vector scale, Lakebase Search was the fastest and most cost-efficient system measured, and it ran roughly 4x more cost-effectively than a standard cloud `pgvector` setup. Those results come from the [Databricks Lakebase Search blog](https://www.databricks.com/blog/lakebase-search-state-art-full-text-and-vector-search-postgres), measured by Databricks on Databricks Lakebase, not on Neon. See the blog for the detailed chart.
+On VectorDBBench at 100-million-vector scale, Lakebase Search is the fastest and most cost-efficient system measured, running roughly 4x more cost-effectively than a standard cloud `pgvector` setup. See the [Databricks benchmark](https://www.databricks.com/blog/lakebase-search-state-art-full-text-and-vector-search-postgres) for the full results.
 
 ## Which search to use: vector, keyword, or hybrid
 
