@@ -70,7 +70,7 @@ Navigate to your Neon Project using the Neon Console and open the **Settings** >
 ![Neon dashboard settings with option to enable logical replication](/docs/guides/neon-console-settings-logical-replication.png)
 
 <Admonition type="warning">
-Enabling logical replication suspends all active computes in the project. You can't turn it off later.
+Enabling logical replication restarts all computes in your Neon project, so active connections drop briefly and reconnect. It also changes the Postgres `wal_level` setting from `replica` to `logical`, which can't be reverted.
 </Admonition>
 
 ## Configuring the Inngest integration
