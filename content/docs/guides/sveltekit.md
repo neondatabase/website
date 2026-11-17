@@ -10,7 +10,7 @@ summary: >-
   module and a +page.server.ts load function. Covers SvelteKit 3, with a note for SvelteKit 2, plus deployment,
   troubleshooting, and Neon's other backend services from SvelteKit.
 enableTableOfContents: true
-updatedOn: '2026-11-16T22:42:39.598Z'
+updatedOn: '2026-11-17T01:08:58.350Z'
 ---
 
 <PromptBlock src="/prompts/sveltekit-prompt.md" labels={["Set up your agent and follow this guide", "Use Svelte's official skills (optional)", "Connect your SvelteKit app"]} />
@@ -297,7 +297,7 @@ SvelteKit doesn't load `.env` or `.env.local` into `process.env`, so pass values
 
 Managed Better Auth
 : Sign-up, sign-in, and sessions stored in your database.
-: Add it with `neon config add auth`. Neon doesn't have a SvelteKit quick start for Auth yet. Start from [Managed Better Auth](/docs/auth/overview).
+: Add it with `neon config add auth`. See [Managed Better Auth](/docs/auth/overview).
 
 Object Storage
 : S3-compatible buckets for uploads and files.
