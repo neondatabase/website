@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+<svg viewBox="0 0 740 300" xmlns="http://www.w3.org/2000/svg" data-name="search-wide" width="740" height="300">
+<defs></defs>
+<style>
+  svg[data-name="search-wide"] {
+    --line: #c9cbcf;
+    --label: #0c0d0d;
+    --caption: #61646b;
+    --green: #00c98a;
+    --green-text: #078345;
+    --green-fill: rgba(0, 229, 153, 0.06);
+  }
+  :where(.dark) svg[data-name="search-wide"] {
+    --line: #494b50;
+    --label: #fafafa;
+    --caption: #afb1b6;
+    --green: #00e599;
+    --green-text: #47d18c;
+    --green-fill: rgba(0, 229, 153, 0.12);
+  }
+  @media (prefers-color-scheme: dark) {
+    svg:root[data-name="search-wide"] {
+      --line: #494b50;
+      --label: #fafafa;
+      --caption: #afb1b6;
+      --green: #00e599;
+      --green-text: #47d18c;
+      --green-fill: rgba(0, 229, 153, 0.12);
+    }
+  }
+</style>
+<rect x="1" y="100" width="150" height="166" rx="2" fill="none" stroke="var(--line, #c9cbcf)" stroke-width="1.5"></rect>
+<text x="76" y="189" text-anchor="middle" fill="var(--label, #0c0d0d)" font-family="'Geist Mono', monospace" font-size="18" font-weight="500" letter-spacing="-0.3">your app</text>
+<line x1="151" y1="134" x2="289" y2="134" stroke="var(--line, #c9cbcf)" stroke-width="2"></line>
+<polygon points="301,134 289,128 289,140" fill="var(--line, #c9cbcf)"></polygon>
+<text x="226" y="120" text-anchor="middle" fill="var(--caption, #61646b)" font-family="'Geist Mono', monospace" font-size="14" letter-spacing="-0.2">one SQL query</text>
+<line x1="301" y1="232" x2="163" y2="232" stroke="var(--green, #00c98a)" stroke-width="2"></line>
+<polygon points="151,232 163,226 163,238" fill="var(--green, #00c98a)"></polygon>
+<text x="226" y="258" text-anchor="middle" fill="var(--green-text, #078345)" font-family="'Geist Mono', monospace" font-size="14" letter-spacing="-0.2">ranked results</text>
+<rect x="301" y="1" width="438" height="298" rx="2" fill="none" stroke="var(--line, #c9cbcf)" stroke-width="1.5"></rect>
+<text x="324" y="40" fill="var(--label, #0c0d0d)" font-family="'Geist Mono', monospace" font-size="18" font-weight="500" letter-spacing="-0.3">Postgres</text>
+<text x="324" y="64" fill="var(--caption, #61646b)" font-family="'Geist Mono', monospace" font-size="13" letter-spacing="-0.2">search on your tables</text>
+<rect x="324" y="96" width="186" height="76" rx="2" fill="none" stroke="var(--green, #00c98a)" stroke-width="1.5"></rect>
+<text x="417" y="129" text-anchor="middle" fill="var(--green-text, #078345)" font-family="'Geist Mono', monospace" font-size="16" font-weight="500" letter-spacing="-0.3">vector search</text>
+<text x="417" y="154" text-anchor="middle" fill="var(--caption, #61646b)" font-family="'Geist Mono', monospace" font-size="13" letter-spacing="-0.2">by meaning</text>
+<rect x="526" y="96" width="186" height="76" rx="2" fill="none" stroke="var(--green, #00c98a)" stroke-width="1.5"></rect>
+<text x="619" y="129" text-anchor="middle" fill="var(--green-text, #078345)" font-family="'Geist Mono', monospace" font-size="16" font-weight="500" letter-spacing="-0.3">text search</text>
+<text x="619" y="154" text-anchor="middle" fill="var(--caption, #61646b)" font-family="'Geist Mono', monospace" font-size="13" letter-spacing="-0.2">by keywords</text>
+<line x1="417" y1="172" x2="417" y2="202" stroke="var(--green, #00c98a)" stroke-width="1.5"></line>
+<line x1="619" y1="172" x2="619" y2="202" stroke="var(--green, #00c98a)" stroke-width="1.5"></line>
+<rect x="324" y="202" width="388" height="60" rx="2" fill="var(--green-fill, rgba(0, 229, 153, 0.06))" stroke="var(--green, #00c98a)" stroke-width="1.5"></rect>
+<text x="518" y="238" text-anchor="middle" fill="var(--green-text, #078345)" font-family="'Geist Mono', monospace" font-size="16" font-weight="500" letter-spacing="-0.3">one ranked result</text>
+</svg>
