@@ -13,7 +13,7 @@ redirectFrom:
   - /docs/extensions/migrate-pg-search-to-lakebase-text
   - /guides/pg-search
   - /guides/pg-search-vs-tsvector
-updatedOn: '2026-11-17T16:52:33.861Z'
+updatedOn: '2026-11-17T16:58:30.424Z'
 ---
 
 Lakebase Search gives your agents and apps semantic, keyword, and hybrid search over your own data, running as plain SQL inside your [Lakebase Postgres](/docs/postgres/overview) database on Neon.
@@ -40,11 +40,19 @@ Because the index lives in storage, a cold start needs no rebuild or re-index. T
 
 ## Scaling search past pgvector
 
-Most teams start vector search in Postgres with `pgvector`, and the limits show up as the data grows. Its usual index, HNSW (Hierarchical Navigable Small World), has to stay in memory, and that memory grows with the number of vectors, not with how often you query. Past roughly tens of millions of vectors, you pay for a large, always-on instance just to hold the index, index builds get slow enough to disrupt the database, and every tuning pass trades recall against latency. Keeping the index in storage, as `lakebase_vector` does, means the index size no longer sets the instance size.
+Most teams start vector search in Postgres with `pgvector`, and the limits show up as the data grows. Its usual index, HNSW (Hierarchical Navigable Small World), keeps the whole vector index in RAM, so its memory grows with the number of vectors, not with how often you query.
 
-A dedicated vector database trades the memory problem for a sync problem: a second system to run and a pipeline to keep in step, so your search lags your writes. Lakebase Search keeps search in the same database as your data, so a row is searchable the moment it's written. No pipeline, no second system, no sync lag.
+Past roughly tens of millions of vectors, you run into several limits:
 
-`lakebase_vector` is a strict superset of `pgvector`: the same types, operators, and SQL. You keep your existing queries and add the `lakebase_ann` index, which lives in storage and scales past the HNSW memory wall.
+- a large, always-on instance just to hold the index in memory
+- index builds slow enough to disrupt the database
+- a recall-versus-latency tradeoff on every tuning pass
+
+The `lakebase_ann` index lives in storage instead of RAM, so the index size no longer sets the instance size.
+
+A dedicated vector database trades the memory problem for a sync problem: a second system to run and a pipeline to keep in step, so your search lags your writes. Lakebase Search keeps search in the same database as your data, so a row is searchable the moment it's written. There's no separate search system to keep in sync, and no lag between a write and when its row is searchable.
+
+`lakebase_vector` is a strict superset of `pgvector`: the same types, operators, and SQL. You keep your existing queries and add the `lakebase_ann` index.
 
 ## Benchmarks
 
