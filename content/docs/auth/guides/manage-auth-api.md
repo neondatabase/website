@@ -15,7 +15,7 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/neon-auth/api
   - /docs/guides/neon-auth-api
-updatedOn: '2026-10-09T09:41:16.035Z'
+updatedOn: '2026-11-17T00:54:40.457Z'
 ---
 
 You can manage Managed Better Auth programmatically using the [Neon API](/docs/reference/api), or from the terminal with the [Neon CLI](/docs/cli/neon-auth) (`neon neon-auth`), which wraps these same operations. You can also enable and configure Managed Better Auth from an AI editor using the [Neon MCP server](/docs/ai/neon-mcp-server#available-tools) (`provision_neon_auth`, `update_auth_config`, `add_auth_oauth_provider`, `get_neon_auth_config`). See [Set up with your AI editor](/docs/auth/about#set-up-with-your-ai-editor).
@@ -152,6 +152,37 @@ The `delete_data` field controls whether the system removes the `neon_auth` sche
 Setting `delete_data` to `true` permanently removes all auth data from the database. You cannot undo this.
 </Admonition>
 
+## Export Neon Auth logs
+
+<Admonition type="note" title="Beta">
+Neon Auth logs export is in beta and rolling out. It may not be available for your project yet.
+</Admonition>
+
+Neon Auth can export a branch's authentication events to the branch logs, so you can read them alongside your other logs. Export is set per branch and is off by default.
+
+Send a `PATCH` request to turn export on or off for a branch:
+
+```bash
+curl -X PATCH 'https://console.neon.tech/api/v2/projects/{project_id}/branches/{branch_id}/auth/logs_export' \
+  -H "Authorization: Bearer $NEON_API_KEY" \
+  -H 'Content-Type: application/json' \
+  -d '{"enabled": true}'
+```
+
+Response (200 OK):
+
+```json
+{
+  "enabled": true
+}
+```
+
+The `enabled` field reports the current setting. Logs export is only supported for Managed Better Auth (`better_auth`) branches.
+
+The current setting is also returned by the plugins endpoint: `GET .../auth/plugins` may include a `logs_export` object with the same `enabled` field.
+
+Once export is on, the branch's authentication events are available in the branch logs under the `neon_auth` source. Read them with the branch logs query API, passing `source=neon_auth`. Querying `source=neon_auth` returns a `404 telemetry_not_enabled` response when auth logs aren't enabled for the project.
+
 ## Related auth endpoints
 
 The Neon API also provides endpoints for managing auth configuration at the branch level. These are available at `https://console.neon.tech/api/v2/projects/{project_id}/branches/{branch_id}/auth/...`:
@@ -164,6 +195,7 @@ The Neon API also provides endpoints for managing auth configuration at the bran
 | `/email_and_password`     | GET, PATCH               | Configure email/password authentication                                                          |
 | `/users`                  | POST, DELETE, PUT        | Create, delete, and manage user roles                                                            |
 | `/plugins`                | GET, PATCH               | View and configure [auth plugins](/docs/auth/guides/plugins)                                     |
+| `/logs_export`            | PATCH                    | Enable or disable [exporting auth logs](#export-neon-auth-logs) to the branch logs (beta)        |
 | `/plugins/magic-link`     | PATCH                    | Configure the [Magic Link plugin](/docs/auth/guides/plugins/magic-link)                          |
 | `/plugins/phone-number`   | GET, PATCH               | Configure the [Phone Number plugin](/docs/auth/guides/plugins/phone-number)                      |
 | `/plugins/oauth-provider` | GET, PATCH               | Configure the [OAuth provider plugin](/docs/auth/guides/plugins/oauth-provider)                  |
