@@ -56,6 +56,7 @@ export const STATIC_MD_PATHS = [
   '/prompts/ai-gateway-landing.md',
   '/prompts/astro-serverless-prompt.md',
   '/prompts/auth-landing.md',
+  '/prompts/bun-prompt.md',
   '/prompts/clean-up-orphaned-s3-objects-neon-branching-prompt.md',
   '/prompts/connection-issues-prompt.md',
   '/prompts/consumption-api-prompt.md',
