@@ -49,7 +49,7 @@ The official provider started as a community project. In July 2022, Dmitry Kisle
 
 ![Bar chart of Terraform Registry downloads per kislerdm/neon release, placed at each release date from January 2023 to September 2026. Most releases before 2025 have under 60,000 downloads; v0.9.0 has about 190,000, v0.13.0 from January 2026 about 686,000, v0.15.0 about 330,000 and v0.18.0 from September 2026 about 449,000.](https://cdn.neonapi.io/public/images/pages/blog/official-neon-terraform-provider/terraform-downloads.png)
 
-The [Neon package in the Pulumi Registry](https://www.pulumi.com/registry/packages/neon/) is bridged from the same provider. Funny enough, the official provider still builds on Dmitry's SDK, too.
+Terraform providers can also be used from Pulumi, so Dmitry publishes the same provider as the [Neon package in the Pulumi Registry](https://www.pulumi.com/registry/packages/neon/), too. And the official provider still builds on his Go SDK.
 
 Instead of starting over, we worked with Dmitry on porting his provider to `neondatabase/neon` and making it official. We asked him two questions.
 
@@ -102,7 +102,18 @@ resource "aws_ssm_parameter" "database_url" {
 
 Ephemeral resources need Terraform 1.10 or later. The rest of the provider works with Terraform 1.5 and up.
 
-The provider also caught up with the Neon platform. Since 0.18 we added resources for [Neon Functions](https://neon.com/docs/functions) (`neon_function`, `neon_trigger`), [Object Storage](https://neon.com/docs/storage/overview) (`neon_bucket`, `neon_bucket_object`, `neon_service_credential`), [Neon Auth](https://neon.com/docs/auth/overview) (`neon_auth`, `neon_auth_trusted_domain`, `neon_auth_oauth_provider`), [Realtime](https://neon.com/docs/realtime/overview) (`neon_branch_realtime` and the ephemeral `neon_branch_realtime_secret`), the [Data API](https://neon.com/docs/data-api/get-started), snapshots, custom branch domains, project and organization member roles and organization spending limits. Enabling Realtime on a branch, for example, is one resource:
+The provider also caught up with the Neon platform. Since 0.18 we added resources for:
+
+- [Neon Functions](https://neon.com/docs/functions): `neon_function`, `neon_trigger`
+- [Object Storage](https://neon.com/docs/storage/overview): `neon_bucket`, `neon_bucket_object`, `neon_service_credential`
+- [Neon Auth](https://neon.com/docs/auth/overview): `neon_auth`, `neon_auth_trusted_domain`, `neon_auth_oauth_provider`
+- [Realtime](https://neon.com/docs/realtime/overview): `neon_branch_realtime` and the ephemeral `neon_branch_realtime_secret`
+- [Data API](https://neon.com/docs/data-api/get-started): `neon_data_api`
+- Snapshots and custom branch domains: `neon_snapshot`, `neon_custom_branch_domain`
+- Access and billing: `neon_project_member_role`, `neon_org_member_role`, `neon_org_spending_limit`
+
+Enabling Realtime on a branch, for example, is one resource:
+
 
 ```terraform
 resource "neon_branch_realtime" "this" {
