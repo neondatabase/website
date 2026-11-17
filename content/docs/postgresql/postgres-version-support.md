@@ -95,6 +95,8 @@ In such cases, your action may occasionally be required. When this occurs, which
 
 Neon currently supports Postgres 14, 15, 16, 17, 18, and 19. Postgres 18 is the default version for new projects. To use Postgres 19, select it when you [create a project](/docs/manage/projects#create-a-project).
 
+Postgres 19 doesn't support the [Data API](/docs/data-api/overview) or [HIPAA](/docs/security/hipaa) yet, and some extensions aren't available yet. Check [Postgres extensions](/docs/extensions/pg-extensions) before you create a Postgres 19 project.
+
 ### Major version upgrades
 
 Each Neon project is created with a specific Postgres major version. Upgrading to a newer major version requires [creating a new Neon project](/docs/manage/projects#create-a-project) with the desired Postgres version and migrating your data to the new Neon project. For more information, see [Upgrading your Postgres version](/docs/postgresql/postgres-upgrade).

@@ -24,6 +24,20 @@ updatedOn: '2026-10-29T21:02:34.200Z'
 The Data API has no permission layer of its own. Every request is authorized entirely by your PostgreSQL `GRANT` statements and [Row-Level Security (RLS)](/docs/guides/row-level-security) policies, so a missing or misconfigured policy can expose a table to anyone with the endpoint URL. Before exposing data, follow [Access control & security](/docs/data-api/access-control) and [Secure your app with RLS](/docs/guides/rls-tutorial), and run the [Data API advisors](/docs/data-api/database-advisor) to catch misconfigurations.
 </Admonition>
 
+## Enabling the Data API fails on Postgres 19
+
+```bash
+unknown internal server error
+```
+
+### Why this happens
+
+The Data API depends on the `pg_session_jwt` extension, which isn't available on Postgres 19 yet.
+
+### Fix
+
+Use a project on Postgres 18 or earlier. See [Postgres version support](/docs/postgresql/postgres-version-support#supported-major-versions).
+
 ## Permission denied to create extension "pg_session_jwt"
 
 ```bash
