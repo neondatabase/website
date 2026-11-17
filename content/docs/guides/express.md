@@ -10,7 +10,7 @@ summary: >-
   driver from an Express route. Covers Node.js 24 with ES modules, plus
   deployment, troubleshooting, and Neon's other backend services from Express.
 enableTableOfContents: true
-updatedOn: '2026-11-17T17:17:09.707Z'
+updatedOn: '2026-11-17T17:22:23.102Z'
 ---
 
 <PromptBlock src="/prompts/express-prompt.md" labels={["Set up your agent and follow this guide", "Look up Express's docs", "Connect your Express app"]} />
@@ -274,7 +274,7 @@ npm pkg set scripts.start="node index.js"
 npm run dev
 ```
 
-Node prints a notice such as `.env not found. Continuing without it.` for an env file you don't have; that's expected. Open [localhost:3000](http://localhost:3000), or the port in `PORT` if you set one. The response shows your Postgres version, confirming the connection:
+Node prints a notice such as `.env not found. Continuing without it.` for an env file you don't have; that's expected. `--env-file-if-exists` is stable from Node.js 24.10 and 22.21, and available as an experimental flag from 22.9. On older versions, use `--env-file=.env.local` (Node.js 20.6 and later), which fails if the file is missing, or load the file with [dotenv](https://github.com/motdotla/dotenv). Open [localhost:3000](http://localhost:3000), or the port in `PORT` if you set one. The response shows your Postgres version, confirming the connection:
 
 ```json
 {"version":"PostgreSQL 18.6 (fd34222) on aarch64-unknown-linux-gnu, compiled by gcc ..."}
@@ -289,6 +289,7 @@ Set `DATABASE_URL` everywhere your app runs.
 - Use your default branch for production. Get its connection string with `neon connection-string main --pooled` (or `production`), or from **Connect** in the Console.
 - Start the server with `npm start`. It doesn't load env files, so set `DATABASE_URL` in your host's environment. Locally, a variable set in your shell also takes priority over the `dev` script's env files.
 - Most Node.js hosts set `PORT` for you, and the app listens on it.
+- Pick the driver for your host. node-postgres suits long-running servers, [Vercel Fluid compute](https://vercel.com/docs/functions/fluid-compute), and Cloudflare with [Hyperdrive](https://developers.cloudflare.com/hyperdrive/). On serverless platforms without built-in connection pooling, such as Netlify Functions or Cloudflare Workers without Hyperdrive, use the Neon serverless driver. See [Choosing your connection method](/docs/connect/choose-connection).
 - On Vercel, Express apps deploy with [zero configuration](https://vercel.com/docs/frameworks/backend/express). The [Neon integration](/docs/guides/vercel-overview) sets `DATABASE_URL` for you and can create a Neon branch for each preview deployment.
 
 ## Add more of your backend
@@ -360,6 +361,12 @@ To skip `neon.ts`, use each service's own CLI commands, such as [`neon buckets c
 
 `SyntaxError: Cannot use import statement outside a module`
 : The project is still CommonJS. Run `npm pkg set type=module`.
+
+`endpoint ID is not specified`
+: The TLS client your Postgres driver depends on doesn't support Server Name Indication (SNI), which Neon uses to route connections. With node-postgres, this means an outdated TLS stack; upgrading `pg` usually resolves it.
+
+`SSL SYSCALL error: EOF detected`, or a similar connection-reset error
+: The app reused a connection after the Neon compute was suspended for inactivity. This mainly affects long-running servers that keep a connection pool open, like the node-postgres example. The `pool.on('error')` listener in `db.js` keeps it from stopping the app. Closing and recreating idle connections, or reconnecting on error, resolves it.
 
 Express 4
 : Express 4 doesn't pass errors from `async` routes to its error handler, so on current Node.js versions a failed query stops the app. Wrap each route's body in `try...catch` and pass the error to `next(error)`, or upgrade with the [Express 5 migration guide](https://expressjs.com/en/guide/migrating-5.html).
