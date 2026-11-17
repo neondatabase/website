@@ -2275,7 +2275,7 @@ const defaultConfig = {
       // Proxy has an error message, that suggests to read `https://neon.com/sni` for more details.
       {
         source: '/sni',
-        destination: '/docs/connect/connection-errors',
+        destination: '/docs/connect/connection-errors#the-endpoint-id-is-not-specified',
         permanent: true,
       },
       // NOTE: bare `/docs` is the docs front page (src/app/(docs)/docs/page.jsx) and
