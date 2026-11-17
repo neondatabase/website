@@ -7,7 +7,7 @@ summary: >-
   assertion, writes credentials to `.env`, and later opens a claim URL so a
   human can take the project. See [Claimable Neon](/docs/reference/claimable-neon).
 enableTableOfContents: true
-updatedOn: '2026-11-05T15:33:57.188Z'
+updatedOn: '2026-11-17T06:51:06.467Z'
 ---
 
 The `claim` command creates a temporary Neon project when there is no Neon account yet. `neon claimable` is an alias. The CLI stores an identity assertion on the machine, writes provisioned variables to `.env` (or `.env.local`), and later opens a claim URL so a human can take the project into their organization.
@@ -22,7 +22,9 @@ Start in the browser at [neon.com/claimable-neon](/claimable-neon), or give an a
 
 ## neon claim create (#create)
 
-Creates a temporary project and saves its identity assertion. Postgres is always requested. Pass `--service` for Data API, Managed Better Auth, or other services. If a [`neon.ts`](/docs/reference/neon-ts) file is present, declared services are requested automatically. [Realtime](/docs/cli/realtime) isn't available until the project is claimed, so `--service` doesn't accept it and a `neon.ts` Realtime declaration isn't requested.
+Creates a temporary project and saves its identity assertion. Postgres is always requested. Pass `--service data-api` or `--service auth` to provision the Data API or Managed Better Auth. If a [`neon.ts`](/docs/reference/neon-ts) file is present, declared services are requested automatically.
+
+Functions, Object Storage, and AI Gateway need a claimed project. `--service` accepts them and `neon.ts` declarations request them, but they come back in `denied_capabilities` and nothing is provisioned for them (see [Capabilities](/docs/reference/claimable-neon#capabilities)). [`neon dev`](/docs/cli/dev) still runs functions locally. If the app needs anything else on that list, have a human sign in first (`neon login` or `NEON_API_KEY`) and create a regular project instead of a claimable one. A claimable project gets those services only after a human claims it and the CLI is signed in to the claiming account. [Realtime](/docs/cli/realtime) also needs a claimed project, but `--service` doesn't accept it and a `neon.ts` Realtime declaration isn't requested.
 
 <CliUsage command="claim create" />
 

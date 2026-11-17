@@ -8,7 +8,7 @@ summary: >-
 enableTableOfContents: true
 redirectFrom:
   - /docs/storage/quickstart
-updatedOn: '2026-11-04T23:29:42.213Z'
+updatedOn: '2026-11-17T06:51:07.393Z'
 ---
 
 To set up Neon Object Storage with an AI coding assistant, install the Neon Platform (`neon`) and Neon Object Storage skills with the [Neon CLI](/docs/cli):
@@ -22,6 +22,7 @@ Without the Neon CLI, run `npx skills add neondatabase/agent-skills -s neon -s n
 To follow this guide, you need:
 
 - A Neon project in AWS US East (Ohio) (`aws-us-east-2`), AWS US East (N. Virginia) (`aws-us-east-1`), AWS Europe (Frankfurt) (`aws-eu-central-1`), or AWS Asia Pacific (Singapore) (`aws-ap-southeast-1`). Support is expanding toward [all regions](/docs/introduction/regions).
+- A Neon account. A [Claimable Neon](/docs/reference/claimable-neon#capabilities) project created without an account doesn't get Object Storage until a human claims it and the CLI is signed in to the claiming account.
 - The Neon CLI installed and authenticated if you use the recommended `neon.ts` flow
 - A Neon API key in `NEON_API_KEY` if you use the manual API flow
 
