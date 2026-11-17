@@ -10,9 +10,11 @@ summary: >-
   authenticate via API key (`--api-key` or `NEON_API_KEY`) instead. The CLI
   resolves authentication in priority order: `--api-key` flag, then
   `NEON_API_KEY` env var, then the credentials file, then triggers browser
-  login if none are found.
+  login if none are found. Without a terminal on stdin (coding agents,
+  scripts), commands other than `neon login` fail with a sign-in hint instead
+  of starting the browser login.
 enableTableOfContents: true
-updatedOn: '2026-10-09T15:17:33.920Z'
+updatedOn: '2026-11-17T19:28:13.243Z'
 redirectFrom:
   - /docs/reference/cli-auth
   - /docs/cli/auth
@@ -43,7 +45,7 @@ The Neon CLI resolves authentication in this order:
 - The `--api-key` option, if provided.
 - The `NEON_API_KEY` environment variable, if set.
 - The `credentials.json` file created by `neon login`.
-- If none are found, the CLI starts the `neon login` web authentication flow. `neon me` is the exception: it reports that you're signed out instead.
+- If none are found, the CLI starts the `neon login` web authentication flow. When stdin is piped, redirected, or otherwise not a terminal, as in a coding agent's shell or a script, it exits with an error that names `neon login` and the API key options instead, and `neon login` itself still starts the web flow there. `neon me` reports that you're signed out.
 
 </Admonition>
 
