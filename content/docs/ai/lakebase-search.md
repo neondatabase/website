@@ -1,57 +1,96 @@
 ---
 title: Lakebase Search
-subtitle: Scalable vector and full-text search for Postgres
+subtitle: A search system built for agents, running inside your Postgres database
 summary: >-
-  Lakebase Search adds vector, keyword, and hybrid search to Neon through the
-  lakebase_vector and lakebase_text Postgres extensions, with optional
-  configurable tokenization from lakebase_tokenizer. Use this page to understand
-  the search types, how the extensions work, the scale-to-zero architecture
-  advantages, and where to get started.
+  Lakebase Search is agent-native vector, keyword, and hybrid search built into
+  Lakebase Postgres on Neon. It scales vector search in Postgres past the limits
+  of pgvector by separating storage from compute, so a single index handles 100
+  million vectors and beyond with serverless scale-to-zero. The lakebase_vector
+  extension adds the lakebase_ann index (a pgvector-compatible superset),
+  lakebase_text adds the lakebase_bm25 index for BM25 keyword search, and hybrid
+  search runs as plain SQL.
 enableTableOfContents: true
 redirectFrom:
   - /docs/extensions/pg_search
   - /docs/extensions/migrate-pg-search-to-lakebase-text
   - /guides/pg-search
   - /guides/pg-search-vs-tsvector
-updatedOn: '2026-10-23T11:22:59.906Z'
+updatedOn: '2026-11-17T13:44:04.411Z'
 ---
 
-<Callout title="About Lakebase">
-Lakebase Search is developed by Databricks. These extensions are part of the shared technology foundation between Neon and the Databricks Lakebase platform.
-</Callout>
-
-Lakebase Search adds vector, keyword, and hybrid search to your Neon project. Install `lakebase_vector` for vector search, `lakebase_text` for BM25 keyword search, and `lakebase_tokenizer` for configurable tokenization.
+Lakebase Search is a search system built for agents. It gives your agents and apps semantic, keyword, and hybrid search over your own data, running as plain SQL inside your [Lakebase Postgres](/docs/postgres/overview) database on Neon. There is no separate vector database to run, no pipeline to keep in sync, and nothing to rebuild when your data changes.
 
 <AgentPrompt title="Set up with your agent" src="/prompts/lakebase-search-landing.md" buttonText="Copy prompt" />
 
-## Vector, keyword, and hybrid search
+<Callout title="About Lakebase Search">
+Lakebase Search is developed by Databricks. These extensions are part of the shared technology foundation between Neon and the Databricks Lakebase platform.
+</Callout>
 
-Lakebase Search gives you two complementary ways to search. Use either on its own, or combine them:
+## Scaling search past pgvector
 
-- **Vector (semantic) search** finds rows whose meaning is closest to your query, even when they share no words. You search with an embedding (a numeric vector from a model), and the `lakebase_ann` index returns the nearest vectors by distance. Use it for natural-language questions, recommendations, and retrieval-augmented generation (RAG).
-- **Keyword (full-text) search** ranks rows by how well they match the exact terms in your query, using BM25 relevance scoring from the `lakebase_bm25` index. Use it for names, codes, and exact-term lookups where wording matters.
-- **Hybrid search** combines vector and keyword results with fusion or reranking, so you get semantic and exact-term matches together. Use it when queries mix intent with specific terms, which covers most real-world search. The [Get started guide](/docs/ai/lakebase-search-get-started#combine-results-with-hybrid-search) shows how to combine results with Jev through Neon AI Gateway or RRF.
+Most teams start vector search in Postgres with `pgvector`, then hit a wall as their data grows. The usual `pgvector` index, HNSW, has to fit in memory, and that memory grows with the number of vectors, not with how much you actually query. Past roughly tens of millions of vectors, you pay for a large, always-on instance just to hold the index. These are the limits teams run into:
+
+- **Memory scales with data, not usage**: an HNSW index keeps its whole graph in RAM and traverses it with random reads at query time, so cost tracks how much data you store rather than how much you search.
+- **Index builds are slow and disruptive**: building or rebuilding an HNSW index is CPU-heavy and can tie up the database for a long time on large tables.
+- **Recall versus latency is a constant tradeoff**: tuning HNSW means trading recall against query speed, and the balance shifts as the dataset grows.
+- **A separate vector database adds a sync tax**: moving vectors out to a dedicated vector store means running a second system and a pipeline to feed it. Your search results lag your writes, and you own the plumbing that keeps the two in step.
+
+That last point is the one teams feel most. When search lives in a different system from your data, results are only as fresh as the last sync. Lakebase Search keeps search in the same database as your data, so a row is searchable as soon as it is written. No pipeline, no second system, no sync lag.
+
+None of this means leaving `pgvector` behind. `lakebase_vector` is a strict superset of `pgvector`: the same `vector` types, the same distance operators, and the same SQL. You keep what you already use and add an index tuned to run faster and scale further, without the HNSW memory wall.
+
+## How Lakebase Search works
+
+Lakebase Search scales vector search in Postgres past `pgvector` by separating storage from compute, the same architecture that powers Neon. Your indexes live in storage rather than in compute memory, so compute stays stateless and can scale to zero when the database is idle. Lakebase Search is built on two search extensions, `lakebase_vector` and `lakebase_text`, plus `lakebase_tokenizer` for configurable tokenization.
+
+```mermaid
+flowchart TD
+    A["App or agent"] -->|"one SQL query"| B["Lakebase compute<br/>stateless, scales to zero"]
+    B --> C["lakebase_vector<br/>lakebase_ann index: IVF + RaBitQ"]
+    B --> D["lakebase_text<br/>lakebase_bm25 index: BM25 + top-K"]
+    C --> F["Hybrid result"]
+    D --> F
+    F --> A
+    G[("Separated storage<br/>indexes and data")] --- C
+    G --- D
+```
+
+The pieces behind that flow:
+
+- **Separated storage and compute**: indexes live in storage, not in compute RAM, so the size of your index does not force you onto a large, always-on instance.
+- **IVF clustering**: `lakebase_ann` partitions the vector space into lists (Inverted File, or IVF) and scans only the relevant ones at query time, using sequential I/O that suits storage-backed systems rather than random pointer-chasing.
+- **RaBitQ compression**: vectors are compressed with RaBitQ quantization, which keeps index size and build time down while preserving search quality.
+- **Stateless, scale-to-zero compute**: you pay for compute only while the database is actively serving queries, which suits production workloads and idle development or staging environments alike.
+- **Native BM25 keyword search**: `lakebase_text` adds the `lakebase_bm25` index with Block-Max WAND top-K pushdown, returning the most relevant results directly instead of scoring the whole match set the way a GIN index does.
+- **Hybrid as plain SQL**: vector and keyword search are both just SQL, so you can combine their results in one query and then fuse or rerank them.
+
+## What you get
+
+If you are looking for a `pgvector` alternative that holds up at 100 million vectors, Lakebase Search gives you:
+
+- **Lower cost at scale**: because indexes live in storage and compute scales to zero, you avoid paying for a large, always-on instance sized to hold an in-memory HNSW index.
+- **Scale to 100 million vectors and beyond**: a single `lakebase_ann` index grows with your data without resharding or rebuilding.
+- **Serverless with scale-to-zero**: indexes survive a cold start with no rebuild or re-index. The first query after a cold start pays object-storage latency while the cache warms. You can call `lakebase_ann_prewarm` to warm an index ahead of time.
+- **Hybrid search with BM25**: semantic matching and exact-term matching in a single query, so queries that mix intent with specific terms work well.
+- **Data searchable immediately**: a row is searchable as soon as it is written, with no second system to keep in sync.
+
+Because branches on Neon copy on write, your search indexes are available on every branch without re-indexing, which keeps preview and development branches cheap.
+
+## Benchmarks
+
+How fast is it? Databricks has published benchmark results for Lakebase Search on large vector workloads, including query throughput and recall at 100-million-vector scale. For the methodology and the measured figures, see the Databricks engineering blog, [Lakebase Search: state-of-the-art full-text and vector search in Postgres](https://www.databricks.com/blog/lakebase-search-state-art-full-text-and-vector-search-postgres). Those figures were measured by Databricks on Databricks Lakebase.
+
+## Search types
+
+Lakebase Search supports three kinds of search. Hybrid search on Neon combines the first two in a single SQL query:
+
+- **Vector (semantic) search** finds rows whose meaning is closest to your query, even when they share no words. You search with an embedding, and the `lakebase_ann` index from [`lakebase_vector`](/docs/extensions/lakebase-vector) returns the nearest vectors by distance. Use it for natural-language questions, recommendations, and retrieval-augmented generation (RAG).
+- **Keyword (full-text) search** ranks rows by how well they match the exact terms in your query, using BM25 relevance scoring from the `lakebase_bm25` index in [`lakebase_text`](/docs/extensions/lakebase-text). Use it for names, codes, and exact-term lookups where wording matters.
+- **Hybrid search** combines vector and keyword results with fusion or reranking, so you get semantic and exact-term matches together. The [Get started guide](/docs/ai/lakebase-search-get-started#combine-results-with-hybrid-search) shows how to combine results with Jev through Neon AI Gateway or with Reciprocal Rank Fusion (RRF).
+
+For configurable whole-word tokenization and Chinese, Japanese, and Korean (CJK) analysis, [`lakebase_tokenizer`](/docs/extensions/lakebase-tokenizer) produces standard `tsvector` values that work with both GIN and `lakebase_bm25` indexes.
 
 ![Keyword search matches only documents that contain the typed words and misses synonyms like "quick automobile" for "fast sports car." Vector search places the query and documents in the same embedding space and returns the nearest neighbors by meaning, including those synonyms.](/docs/ai/lakebase-search-keyword-vs-vector.png)
-
-## How it works
-
-Lakebase Search is built on three Postgres extensions:
-
-- **[`lakebase_vector`](/docs/extensions/lakebase-vector)**: adds the `lakebase_ann` index type for vector similarity search. No migration from `pgvector` required. The same `vector` types, distance operators, and query syntax work unchanged. Scales to over 1 billion vectors on a single index.
-- **[`lakebase_text`](/docs/extensions/lakebase-text)**: adds the `lakebase_bm25` index type for BM25 keyword search. No migration from Postgres full-text search required. Standard `tsvector` types and query operators work unchanged. Adds BM25 ranking and top-K pushdown that native GIN lacks.
-- **[`lakebase_tokenizer`](/docs/extensions/lakebase-tokenizer)**: adds configurable whole-word tokenization and Chinese, Japanese, and Korean (CJK) morphological analysis through Postgres's text-search dictionary interface. It produces standard `tsvector` values that work with GIN and `lakebase_bm25` indexes.
-
-## How `lakebase_ann` scales
-
-`lakebase_ann` is designed for the separated compute/storage architecture that powers Neon. Because the index lives in storage rather than in compute memory, it works naturally with Neon's scale-to-zero model: your vector index is available immediately after a cold start, with no warmup required. You only pay for compute when your database is actively serving requests. This holds for production workloads and for development or staging environments where the database sits idle most of the time.
-
-It uses IVF (Inverted File) partitioning to divide the vector space into lists and searches only the relevant ones at query time, using sequential I/O that suits storage-backed systems. RaBitQ quantization compresses vectors 4–8x, keeping index size and build time down. The result:
-
-- **Scale to 1 billion+ vectors**: a single `lakebase_ann` index grows with your data without resharding or rebuilding
-- **Faster index builds**: compression reduces index size significantly, making builds 50–100x faster than HNSW
-- **Branching without index rebuilds**: Neon branches copy-on-write; your search indexes are available instantly on every branch without re-indexing
-- **Scale-to-zero compatible**: indexes survive cold starts without warmup; you don't pay for idle compute
 
 ## Get started
 
