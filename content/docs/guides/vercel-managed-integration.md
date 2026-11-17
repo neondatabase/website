@@ -211,11 +211,12 @@ This is separate from Neon's [project transfer](/docs/manage/orgs-project-transf
 
 ### Move a database to a Neon-managed organization
 
-You can't transfer a project out of a Vercel-managed organization, for example to move billing from Vercel to Neon. Instead, create a new project in a Neon-managed organization and migrate your data to it:
+You can't transfer a project out of a Vercel-managed organization, for example to move billing from Vercel to Neon. Instead, copy your data into a new project in a Neon-managed organization:
 
-1. In the Neon Console, switch to (or [create](/docs/manage/orgs-manage#create-an-organization)) a Neon-managed organization and [create a project](/docs/manage/projects#create-a-project) in the region you want. You can choose the Postgres version here.
-2. Migrate your data from the Vercel-managed project to the new project:
-   - **Dump and restore**: Simplest option, but writes made to the source after you start the dump aren't copied, so plan a short write freeze. See [Migrate data from another Neon project](/docs/import/migrate-from-neon).
+1. Get the source connection string. In the Neon Console, open your project in the `Vercel: <team-name>` organization, click **Connect**, and turn off **Connection pooling** to copy the direct connection string. If the integration stored your variables as **Sensitive**, you can't copy them from Vercel.
+2. Switch to (or [create](/docs/manage/orgs-manage#create-an-organization)) a Neon-managed organization, and copy your data with one of these options. The first two are one-time copies, so plan a short write freeze before you cut over.
+   - **Import Data Assistant**: For databases under 10 GB. On the **Projects** page, click **Import data**, paste the connection string, and follow the steps. The assistant creates the new project for you. Choose the same Postgres version as your source or newer (new Vercel-managed databases use Postgres 18). If the checks list `plpgsql` as an unsupported extension, continue anyway: it's a false warning for Postgres 18 sources. The data lands on a new root branch named `import`, not the project's default branch, so after the import, [set `import` as the default branch](/docs/manage/branches#set-a-branch-as-default) and [delete](/docs/manage/branches#delete-a-branch) the empty one. See [Import Data Assistant](/docs/import/import-data-assistant).
+   - **Dump and restore**: [Create a project](/docs/manage/projects#create-a-project) in the region and Postgres version you want, then copy the data with `pg_dump` and `pg_restore`. Works for any size. See [Migrate data from another Neon project](/docs/import/migrate-from-neon).
    - **Logical replication**: Keeps the new project in sync while your app still writes to the old one, so you can cut over with minimal downtime. See [Replicate data from one Neon project to another](/docs/guides/logical-replication-neon-to-neon).
 3. Point your app at the new project. In Vercel, [disconnect the project from the database](#disconnect-a-project-from-database), then connect the new Neon project with the [Neon-Managed Integration](/docs/guides/neon-managed-vercel-integration) or a [manual connection](/docs/guides/vercel-manual), and redeploy.
 4. After you confirm the new project works, [delete the old database](#delete-the-database) in Vercel.
