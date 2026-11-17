@@ -13,7 +13,7 @@ redirectFrom:
   - /docs/extensions/migrate-pg-search-to-lakebase-text
   - /guides/pg-search
   - /guides/pg-search-vs-tsvector
-updatedOn: '2026-11-17T16:58:30.424Z'
+updatedOn: '2026-11-17T17:30:27.940Z'
 ---
 
 Lakebase Search gives your agents and apps semantic, keyword, and hybrid search over your own data, running as plain SQL inside your [Lakebase Postgres](/docs/postgres/overview) database on Neon.
@@ -27,6 +27,46 @@ Lakebase Search separates storage from compute, the same architecture Neon uses 
 It adds two search engines to Postgres: `lakebase_vector` for vector search and `lakebase_text` for keyword search, plus `lakebase_tokenizer` for tokenization. Both build ordinary Postgres indexes, so you query them, and combine them, with plain SQL.
 
 <InlineSvg src="/docs/ai/lakebase-search-architecture.svg" title="Your app sends one SQL query to Postgres, which runs vector search by meaning and text search by keywords on your tables and returns one ranked result." />
+
+Both searches and the fusion are one statement. This query takes candidates from the `lakebase_ann` vector index and the `lakebase_bm25` keyword index, then merges them with Reciprocal Rank Fusion (RRF):
+
+```sql
+WITH vector_ranked AS (
+  SELECT id, RANK() OVER (ORDER BY dist) AS rank
+  FROM (
+    SELECT id, embedding <=> $1::vector AS dist
+    FROM documents
+    WHERE embedding IS NOT NULL
+    ORDER BY dist
+    FETCH FIRST 40 ROWS WITH TIES
+  ) v
+),
+keyword_ranked AS (
+  SELECT id, RANK() OVER (ORDER BY score) AS rank
+  FROM (
+    SELECT id, score
+    FROM (
+      SELECT id, body_tsv <@> to_bm25query(
+        to_tsvector('english', $2), 'documents_bm25'
+      ) AS score
+      FROM documents
+    ) AS scored
+    WHERE score < 0
+    ORDER BY score, id
+    LIMIT 40
+  ) k
+)
+SELECT d.id, d.title,
+  COALESCE(1.0 / (60 + v.rank), 0) + COALESCE(1.0 / (60 + k.rank), 0) AS rrf_score
+FROM documents d
+LEFT JOIN vector_ranked v ON d.id = v.id
+LEFT JOIN keyword_ranked k ON d.id = k.id
+WHERE v.id IS NOT NULL OR k.id IS NOT NULL
+ORDER BY rrf_score DESC, d.id
+LIMIT 5;
+```
+
+For the full runnable version, including Jev reranking, see the [Get started guide](/docs/ai/lakebase-search-get-started#combine-results-with-hybrid-search).
 
 ### How the vector index scales
 
