@@ -1,7 +1,7 @@
 ---
 title: 'The Neon Terraform provider is now official'
 description: >-
-  The community Terraform provider for Neon is now the official neondatabase/neon provider, in beta. We talked to
+  The community Terraform provider for Neon is now the official neondatabase/neon provider. We talked to
   Dmitry Kisler, who started it in 2022, and Justin Frye, who helped us get it here.
 excerpt: >-
   Infrastructure as code is a great fit for agents. Bigger teams compose Neon with AWS, Cloudflare and more in
@@ -24,13 +24,13 @@ isFeatured: false
 seo:
   title: 'The Neon Terraform provider is now official - Neon'
   description: >-
-    neondatabase/neon is the official Terraform provider for Neon, in beta. It started as the community provider
+    neondatabase/neon is the official Terraform provider for Neon. It started as the community provider
     kislerdm/neon and now supports ephemeral credentials, Functions, Object Storage, Neon Auth and Realtime.
   keywords: []
   noindex: false
   ogTitle: 'The Neon Terraform provider is now official - Neon'
   ogDescription: >-
-    neondatabase/neon is the official Terraform provider for Neon, in beta. It started as the community provider
+    neondatabase/neon is the official Terraform provider for Neon. It started as the community provider
     kislerdm/neon and now supports ephemeral credentials, Functions, Object Storage, Neon Auth and Realtime.
   image: 'https://cdn.neonapi.io/public/images/pages/blog/official-neon-terraform-provider/social.png'
 ---
