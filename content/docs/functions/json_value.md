@@ -9,7 +9,7 @@ summary: >-
   (number, date, boolean) rather than a JSON object or array, and when missing
   or invalid values must return a default instead of raising an error.
 enableTableOfContents: true
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-10-09T15:55:57.334Z'
 ---
 
 The `JSON_VALUE()` function introduced in PostgreSQL 17 provides a specialized way to extract single scalar values from `JSON` data with type conversion capabilities. Use it when you need to extract and potentially convert individual values from `JSON` structures while ensuring type safety and proper error handling.
@@ -208,7 +208,7 @@ VALUES (
 
 ```
 
-## Error handling
+## Error handling (#error-handling-2)
 
 The function provides several ways to handle errors:
 

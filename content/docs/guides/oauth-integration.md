@@ -29,7 +29,7 @@ Here is a high-level overview of how Neon's OAuth implementation works:
 2. An authorization URL is generated.
 3. The user is redirected to Neon’s OAuth consent screen to authorize the application.
 4. The user logs in and authorizes the application, granting it the necessary permissions.
-5. The user is redirected to your callback endpoint with an access token that allows the application to manage Neon resources on the user’s behalf.
+5. The user is redirected to your callback endpoint with an authorization code. Your application exchanges that code for an access token, which lets it manage Neon resources on the user's behalf.
 
 ## About the Neon OAuth server
 
@@ -136,7 +136,7 @@ The following OAuth scopes allow varying degrees of access to Neon resources:
 | Delete Organizations            | `urn:neoncloud:orgs:delete`     |
 | Manage Organization Permissions | `urn:neoncloud:orgs:permission` |
 
-You must choose from these predefined scopes when requesting access; custom scopes are not supported.
+You must choose from these predefined scopes when requesting access; custom scopes are not supported. Each OAuth application is also registered with a set of allowed scopes. If you request a scope outside that set, the authorization request fails with `invalid_scope`.
 
 Let's now go through the full flow, step by step:
 
@@ -156,6 +156,7 @@ To initiate the OAuth flow, you need to generate an authorization URL. You can d
 
 - `response_type`: This should be set to `code` to indicate that you are using the [Authorization Code grant type](https://oauth.net/2/grant-types/authorization-code/).
 - `code_challenge`: This is a random string that is used to verify the integrity of the authorization code.
+- `code_challenge_method`: The method used to derive the `code_challenge`. Set this to `S256`, as the example below does.
 - `state`: This is a random string that is returned to your callback URL. You can use this parameter to verify that the request came from your application and not from a third party.
 
 ## Authorization URL

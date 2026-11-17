@@ -408,10 +408,10 @@ export const config = defineConfig({
       name: "Upstash Workflow Endpoint",
       source: "./index.ts",
       env: {
-        QSTASH_URL: process.env.QSTASH_URL!,
-        QSTASH_TOKEN: process.env.QSTASH_TOKEN!,
-        QSTASH_CURRENT_SIGNING_KEY: process.env.QSTASH_CURRENT_SIGNING_KEY!,
-        QSTASH_NEXT_SIGNING_KEY: process.env.QSTASH_NEXT_SIGNING_KEY!,
+        QSTASH_URL: { value: process.env.QSTASH_URL, required: true },
+        QSTASH_TOKEN: { value: process.env.QSTASH_TOKEN, required: true },
+        QSTASH_CURRENT_SIGNING_KEY: { value: process.env.QSTASH_CURRENT_SIGNING_KEY, required: true },
+        QSTASH_NEXT_SIGNING_KEY: { value: process.env.QSTASH_NEXT_SIGNING_KEY, required: true },
       },
     }
   },

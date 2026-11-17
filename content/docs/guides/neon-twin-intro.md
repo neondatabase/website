@@ -8,7 +8,7 @@ summary: >-
   run development and testing against real schema and data without touching
   production, with instant branches spun up per developer or feature. Choosing
   between a full Twin (pg_dump/pg_restore of the entire database) and a partial
-  Twin (schema plus selected tables only) depends on data volume and how much
+  Twin (schema plus a row subset of selected tables) depends on data volume and how much
   production fidelity your workflow requires.
 enableTableOfContents: true
 isDraft: false
@@ -23,15 +23,15 @@ A Neon Twin is a full or partial clone of your production or staging database, p
 
 ![Dev/Test Twin Workflow](/use-cases/dev-test-twin-workflow.png)
 
-## Designed for efficiency
+## Benefits
 
-Creating a Neon Twin will streamline development workflows, enhance productivity, and help teams ship faster, all while being more cost-effective and easier to manage than traditional development/testing environments.
+A Neon Twin moves development and testing off your production database. Each developer or feature team works against its own copy of the data, and production stays untouched.
 
-## Automatically synced
+## Automatic sync
 
-The workflows in this section enable automatic synchronization between your production database and your Neon Twin.
+The workflows in this section refresh your Neon Twin on a schedule. You can also run them when a pull request merges into `main`.
 
-## Instant Branches
+## Instant branches
 
 With a Neon Twin created, [branches](/docs/introduction/branching) can be quickly spun up or torn down, enabling developers to build new features or debug issues, all within their own isolated environments with a dedicated compute resource.
 
@@ -39,12 +39,12 @@ Branches can be created and managed through the [Neon console](https://console.n
 
 ## Get started
 
-Pick the workflow that fits your needs. A full Twin mirrors your entire production database; a partial Twin clones only the schema and selected tables, which is faster and useful when you don't need every row of production data.
+Pick the workflow that fits your needs. A full Twin mirrors your entire production database. A partial Twin copies the schema and a subset of rows from selected tables, which is useful when you don't need every row of production data.
 
 <DetailIconCards>
 
 <a href="/docs/guides/neon-twin-full-pg-dump-restore" description="Clone your entire production database to Neon using pg_dump and pg_restore in a GitHub Actions workflow." icon="database">Create a full Twin</a>
 
-<a href="/docs/guides/neon-twin-partial-pg-dump-restore" description="Clone only the schema and selected tables from production using pg_dump, pg_restore, and psql." icon="split-branch">Create a partial Twin</a>
+<a href="/docs/guides/neon-twin-partial-pg-dump-restore" description="Clone the schema and a row subset of selected tables from production using pg_dump, pg_restore, and psql." icon="split-branch">Create a partial Twin</a>
 
 </DetailIconCards>

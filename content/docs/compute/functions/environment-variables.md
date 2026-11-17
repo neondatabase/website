@@ -77,7 +77,7 @@ A deploy doesn't wipe variables set by earlier deploys. The `--env` flags you pa
 
 ### In neon.ts
 
-Declare variables under the function's `env` field. Values are resolved when `neon deploy` runs, so you can read from `process.env` to avoid hardcoding secrets:
+Declare variables under the function's `env` field. Values are resolved when `neon deploy` runs, so you can read from `process.env` to avoid hardcoding secrets. Declare each one with a `required` rule so `neon deploy` fails if it's unset. This form needs Neon CLI 9.2.0 or later and `@neon/config` 1.13.0 or later, plus `@neon/env` 2.1.0 or later if your function reads the variables with `parseEnv`:
 
 ```ts filename="neon.ts"
 import { defineConfig } from "@neon/config/v1";
@@ -88,7 +88,7 @@ export default defineConfig({
       name: "My first function",
       source: "./functions/hello.ts",
       env: {
-        RESEND_API_KEY: process.env.RESEND_API_KEY!,
+        RESEND_API_KEY: { value: process.env.RESEND_API_KEY, required: true },
       },
     },
   },
@@ -102,6 +102,8 @@ neon deploy --env .env.production
 ```
 
 The file isn't forwarded to the function directly. Only variables declared in the `env` field are deployed; `--env` only controls what `process.env` contains when `neon.ts` is evaluated.
+
+Unlike `--env`, a declared variable that's unset when you deploy is removed from the function, unless you declare it with `onUndefined: "skip"`. `required: true` fails the deploy on every branch when the value is unset. Use `required: "default-branch"` for a variable only the default branch's deployment needs, or `required: false` for one that's optional everywhere. See [Function env](/docs/reference/neon-ts#functions) in the `neon.ts` reference for how unset values are removed or kept.
 
 ## Pull variables locally
 

@@ -2,7 +2,7 @@
 title: Logical replication commands
 subtitle: Commands for managing your logical replication configuration
 summary: >-
-  SQL command reference for managing PostgreSQL logical replication objects on
+  SQL command reference for managing Postgres logical replication objects on
   Neon: publications, subscriptions, and replication slots. Covers CREATE,
   ALTER, and DROP syntax, pg_create_logical_replication_slot and
   pg_drop_replication_slot, and monitoring lag with pg_stat_replication and
@@ -69,7 +69,7 @@ DROP PUBLICATION IF EXISTS my_publication;
 
 ### Recreate a publication
 
-This command recreates a publication within a single transaction:
+This command recreates a publication within a single transaction. The `CREATE PUBLICATION` statement must list the tables to publish. Without them, the new publication contains no tables.
 
 ```sql
 BEGIN;
@@ -77,7 +77,7 @@ BEGIN;
   DROP PUBLICATION IF EXISTS my_publication;
 
   -- re-create the publication
-  CREATE PUBLICATION my_publication;
+  CREATE PUBLICATION my_publication FOR TABLE users;
 COMMIT;
 ```
 
@@ -87,17 +87,17 @@ This section outlines how to manage **subscriptions** in your replication setup.
 
 ### Create a subscription
 
-Building on the `my_publication` example in the preceding section, here’s how you can create a subscription:
+Use the `my_publication` publication from the preceding section to create a subscription:
 
 ```sql
 CREATE SUBSCRIPTION my_subscription
-CONNECTION 'postgresql://username:password@host:port/dbname'
+CONNECTION 'postgresql://[user]:[password]@[neon_hostname]/[dbname]?sslmode=require&channel_binding=require'
 PUBLICATION my_publication;
 ```
 
 A subscription requires a unique name, a database connection string, the name and password of your replication role, and the name of the publication that it subscribes to.
 
-In the example above, `my_subscription` is the name of the subscription that connects to a publication named `my_publication`. In the example above, you would replace the connection details with your Neon database connection string. You can find your Neon connection string by clicking the **Connect** button in the Console nav to open the **Connect to your branch** modal.
+In the example above, `my_subscription` is the name of the subscription that connects to a publication named `my_publication`. Replace the connection details with the connection string for your replication role on your Neon database. You can find your Neon connection string by clicking the **Connect** button in the Console nav to open the **Connect to your branch** modal.
 
 ### Create a subscription with two publications
 
@@ -105,7 +105,7 @@ This command creates a subscription that receives data from two publications:
 
 ```sql
 CREATE SUBSCRIPTION my_subscription
-CONNECTION 'postgresql://username:password@host:port/dbname'
+CONNECTION 'postgresql://[user]:[password]@[neon_hostname]/[dbname]?sslmode=require&channel_binding=require'
 PUBLICATION my_publication, sales_publication;
 ```
 
@@ -117,9 +117,15 @@ This command creates a subscription with `enabled = false` so that you can enabl
 
 ```sql
 CREATE SUBSCRIPTION my_subscription
-CONNECTION 'postgresql://username:password@host:port/dbname'
+CONNECTION 'postgresql://[user]:[password]@[neon_hostname]/[dbname]?sslmode=require&channel_binding=require'
 PUBLICATION my_publication
 WITH (enabled = false);
+```
+
+Neon creates the replication slot on the publisher when you create the subscription, even if it's disabled. A disabled subscription that stays disabled for about 40 hours leaves an inactive slot, which Neon removes. To enable the subscription later, run:
+
+```sql
+ALTER SUBSCRIPTION my_subscription ENABLE;
 ```
 
 ### Change the publication subscribed to
@@ -127,7 +133,7 @@ WITH (enabled = false);
 This command modifies an existing subscription to set it to a different publication:
 
 ```sql
-ALTER SUBSCRIPTION my_subscription SET PUBLICATION new_new_publication;
+ALTER SUBSCRIPTION my_subscription SET PUBLICATION new_publication;
 ```
 
 ### Change the subscription connection
@@ -159,7 +165,7 @@ DROP SUBSCRIPTION my_subscription;
 Replication slots are created on the publisher database to track replication progress, ensuring that no data in the WAL is purged before the subscriber has successfully replicated it. This mechanism serves to maintain data consistency and prevent data loss in cases of network interruption or subscriber downtime.
 
 <Admonition type="important">
-To prevent storage bloat, **Neon automatically removes _inactive_ replication slots after a period of time. Please see [Unused replication slots](/docs/guides/logical-replication-neon#unused-replication-slots) to learn more.
+To prevent storage bloat, Neon automatically removes _inactive_ replication slots after approximately 40 hours. See [Unused replication slots](/docs/guides/logical-replication-neon#unused-replication-slots) to learn more.
 </Admonition>
 
 ### Create a replication slot
@@ -174,7 +180,7 @@ The first value, `my_replication_slot` is the name given to the replication slot
 
 The `max_replication_slots` configuration parameter defines the maximum number of replication slots that can be used to manage database replication connections. Each replication slot tracks changes in the publisher database to ensure that the connected subscriber stays up to date. You'll want a replication slot for each replication connection. For example, if you expect to have 10 separate subscribers replicating from your database, you would set `max_replication_slots` to 10 to accommodate each connection.
 
-The `max_replication_slots` configuration parameter on Neon is set to `10` by default.
+The `max_replication_slots` configuration parameter is set to `10` on Neon. For a different value, contact [Neon Support](/docs/introduction/support).
 
 ```ini
 max_replication_slots = 10
@@ -188,7 +194,7 @@ To drop a logical replication slot that you created, you can use the `pg_drop_re
 SELECT pg_drop_replication_slot('my_replication_slot');
 ```
 
-This command removes the specified replication slot (`my_replication_slot` in this case) from your database. It's important to ensure that the replication slot is no longer in use or required before dropping it, as this action is irreversible and could affect replication processes relying on this slot.
+This command removes the specified replication slot (`my_replication_slot` in this case) from your database. Make sure no subscriber still uses the slot before you drop it. Postgres returns an error for a slot that an active subscription uses. Dropping a slot can't be undone, and it breaks any replication process that depends on it.
 
 ## Data Definition Language (DDL) operations
 
@@ -206,7 +212,7 @@ SELECT * FROM pg_stat_replication;
 
 The view provides details like the state of the replication, the last received WAL location, sent location, write location, and the delay between the publisher and subscriber.
 
-Additionally, the [pg_replication_slots](https://www.postgresql.org/docs/current/view-pg-replication-slots.html) view shows information about the current replication slots on the publisher, including their size.
+Additionally, the [pg_replication_slots](https://www.postgresql.org/docs/current/view-pg-replication-slots.html) view shows information about the current replication slots on the publisher, including whether each slot is `active` and its `restart_lsn`.
 
 ```sql
 SELECT * FROM pg_replication_slots;

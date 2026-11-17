@@ -2,6 +2,7 @@
 import { notFound } from 'next/navigation';
 
 import Post from 'components/pages/doc/post';
+import JsonLd from 'components/shared/json-ld';
 import VERCEL_URL from 'constants/base';
 import { POSTGRESQL_DIR_PATH, isUnusedOrSharedContent } from 'constants/content';
 import { POSTGRESQL_BASE_PATH } from 'constants/docs';
@@ -87,10 +88,7 @@ const PostgresTutorial = async (props) => {
 
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
+      <JsonLd data={jsonLd} />
       <Post
         content={content}
         data={data}

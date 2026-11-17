@@ -83,10 +83,10 @@ export default defineConfig({
       name: "WhatsApp webhook",
       source: "./functions/whatsapp.ts",
       env: {
-        WHATSAPP_ACCESS_TOKEN: process.env.WHATSAPP_ACCESS_TOKEN!,
-        WHATSAPP_PHONE_NUMBER_ID: process.env.WHATSAPP_PHONE_NUMBER_ID!,
-        WHATSAPP_VERIFY_TOKEN: process.env.WHATSAPP_VERIFY_TOKEN!,
-        WHATSAPP_APP_SECRET: process.env.WHATSAPP_APP_SECRET!,
+        WHATSAPP_ACCESS_TOKEN: { value: process.env.WHATSAPP_ACCESS_TOKEN, required: true },
+        WHATSAPP_PHONE_NUMBER_ID: { value: process.env.WHATSAPP_PHONE_NUMBER_ID, required: true },
+        WHATSAPP_VERIFY_TOKEN: { value: process.env.WHATSAPP_VERIFY_TOKEN, required: true },
+        WHATSAPP_APP_SECRET: { value: process.env.WHATSAPP_APP_SECRET, required: true },
       },
       dev: {
         port: 8787,
@@ -113,7 +113,7 @@ neon link
 Linking merges `DATABASE_URL`, `DATABASE_URL_UNPOOLED`, `NEON_BRANCH`, `NEON_BRANCH_ID`, and `NEON_FUNCTION_HOST_SUFFIX` into `.env.local`, leaving the WhatsApp keys untouched. Uncomment and add them:
 
 ```env filename=".env.local"
-# Required. Add real values before deploying; a missing key throws at deploy, an empty one uploads "".
+# Required. Add real values before deploying; a missing or empty value fails the deploy.
 # WHATSAPP_ACCESS_TOKEN=
 # WHATSAPP_PHONE_NUMBER_ID=
 # WHATSAPP_VERIFY_TOKEN=

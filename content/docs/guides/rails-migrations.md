@@ -2,8 +2,8 @@
 title: Schema migration with Lakebase Postgres and Ruby on Rails
 subtitle: Set up a database on Neon and run migrations for your Rails project
 summary: >-
-  Ruby on Rails Active Record migrations against Lakebase Postgres require a direct
-  (non-pooled) connection string in `DATABASE_URL` because PgBouncer pooled
+  Ruby on Rails Active Record migrations against Lakebase Postgres use a direct
+  (non-pooled) connection string in `DATABASE_URL`, because PgBouncer pooled
   connections can cause migration errors. This guide walks through creating a
   Rails project, configuring `database.yml` to read `DATABASE_URL`, running
   `rails db:migrate` to create tables, and applying incremental schema changes
@@ -12,7 +12,7 @@ enableTableOfContents: true
 updatedOn: '2026-10-28T11:11:18.780Z'
 ---
 
-[Ruby on Rails](https://rubyonrails.org/) is a popular web application framework for Ruby developers. It provides an ORM (Object-Relational Mapping) layer called `Active Record`, that simplifies database interactions and schema management. Rails also includes a powerful migration system that allows you to define and manage database schema changes over time.
+[Ruby on Rails](https://rubyonrails.org/) is a web application framework for Ruby. It provides an ORM (Object-Relational Mapping) layer called `Active Record`, which handles database interactions and schema management. Rails also includes a migration system that lets you define and manage database schema changes over time.
 
 This guide demonstrates how to run schema migrations in your Ruby on Rails project backed by the Lakebase Postgres database. We'll create a simple Rails application and walk through the process of setting up the database, defining models, and generating and running migrations to manage schema changes.
 
@@ -24,11 +24,11 @@ To follow along with this guide, you will need:
 
 - [Ruby](https://www.ruby-lang.org/) installed on your local machine.
 
-  You can install Ruby using the instructions provided on the [official Ruby website](https://www.ruby-lang.org/en/documentation/installation/). We recommend using a newer version of Ruby, 3.0 or higher.
+  You can install Ruby using the instructions provided on the [official Ruby website](https://www.ruby-lang.org/en/documentation/installation/). Rails 8.1 requires Ruby 3.2 or later. This guide was tested with Ruby 4.0.
 
 - [Rails](https://rubyonrails.org/) installed on your local machine. You can install Rails by running `gem install rails`.
 
-  We recommend using Rails 6 or higher. This project uses `Rails 7.1.3.2`.
+  This guide uses `Rails 8.1`.
 
 ## Setting up your database
 
@@ -39,17 +39,17 @@ To follow along with this guide, you will need:
 
 ### Retrieve your database connection string
 
-You can find the connection string for your database by clicking the **Connect** button in the Console nav. It should look similar to this:
+Click the **Connect** button in the Console nav to open the **Connect to your branch** modal. The **Connection pooling** toggle is on by default, which shows a pooled connection string. Turn the toggle off to show the direct connection string. It should look similar to this:
 
 ```bash
 postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require&channel_binding=require
 ```
 
-Keep your connection string handy for later use.
-
-<Admonition type="note">
-Neon supports both direct and pooled database connection strings. You can find a connection string for your database by clicking the **Connect** button in the Console nav. A pooled connection string connects your application to the database via a PgBouncer connection pool, allowing for a higher number of concurrent connections. However, using a pooled connection string for migrations can be prone to errors. For this reason, we recommend using a direct (non-pooled) connection when performing migrations. For more information about direct and pooled connections, see [Connection pooling](/docs/connect/connection-pooling).
+<Admonition type="important" title="Use a direct connection for migrations">
+Neon supports both direct and pooled connection strings. A pooled connection string routes your connections through a PgBouncer connection pool, which allows more concurrent connections. Migrations can run into errors through a connection pool, so this guide uses the direct (non-pooled) connection string for all steps. For more information, see [Connection pooling](/docs/connect/connection-pooling).
 </Admonition>
+
+Keep your direct connection string handy for later use.
 
 ## Setting up the Rails project
 
@@ -63,7 +63,7 @@ rails new guide-neon-rails --database=postgresql
 
 This command creates a new Rails project named `guide-neon-rails` with Postgres as the default database. It will also generate the necessary project files and directories, and install the required dependencies.
 
-### Set up the Database configuration
+### Set up the database configuration
 
 Create a `.env` file in the project root directory and add the `DATABASE_URL` environment variable to it. Use the connection string that you obtained from the Neon Console earlier:
 
@@ -91,7 +91,7 @@ Finally, we open the `config/database.yml` file in your project directory and up
 default: &default
   adapter: postgresql
   encoding: unicode
-  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  max_connections: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   url: <%= ENV['DATABASE_URL'] %>
 
 development:
@@ -103,6 +103,8 @@ test:
 production:
   <<: *default
 ```
+
+This snippet replaces the Rails 8 `production` settings for Solid Cache, Solid Queue, and Solid Cable. This guide doesn't cover deploying to production.
 
 ## Defining data models and running migrations
 
@@ -116,6 +118,16 @@ rails generate model Book title:string author:references
 ```
 
 These commands generate model files and the corresponding migration files in the `app/models` and `db/migrate` directories, respectively.
+
+The generator doesn't add the association from `Author` to `Book`. Open `app/models/author.rb` and add the `has_many` line so that `author.books` works in the controllers later in this guide:
+
+```ruby
+# app/models/author.rb
+
+class Author < ApplicationRecord
+  has_many :books, dependent: :destroy
+end
+```
 
 ### Run the migrations
 
@@ -358,7 +370,7 @@ Navigate to the url `http://localhost:3000/authors` to view the list of authors.
 
 ## Conclusion
 
-In this guide, we demonstrated how to set up a Ruby on Rails project with Lakebase Postgres, define database models, generate migrations, and run them. Rails' Active Record ORM and migration system make it easy to interact with the database and manage schema evolution over time.
+In this guide, you set up a Ruby on Rails project with a Neon database, defined models with Active Record, generated migrations, and ran them. Each schema change lives in its own migration file, so the change history stays in your project.
 
 ## Source code
 

@@ -12,7 +12,7 @@ summary: >-
   through the Neon API, with autoscaling, scale-to-zero, branching, and
   point-in-time recovery included.
 enableTableOfContents: true
-updatedOn: '2026-08-25T15:36:44.109Z'
+updatedOn: '2026-11-14T19:49:05.289Z'
 ---
 
 <InfoBlock>
@@ -40,7 +40,7 @@ Agent plan pricing and limits differ from the [Scale plan](/docs/introduction/pl
 The lakebase architecture aligns with how agent platforms operate:
 
 - **Instant provisioning**: Serverless Postgres with separated compute and storage provisions databases in seconds
-- **Autoscaling and scale-to-zero**: Compute scales up and down automatically based on workload, and idle databases cost nothing while remaining instantly accessible
+- **Autoscaling and scale-to-zero**: Compute scales up and down automatically based on workload, and idle databases stop accruing compute charges while remaining instantly accessible
 - **API management**: Every capability, including provisioning, quotas, branching, instant restore, and snapshots, is exposed through the Neon API
 - **Database versioning**: Copy-on-write storage enables instant branching, snapshots, and point-in-time recovery for checkpoints and experimentation
 - **Integrated services**: Neon supports built-in Auth and a PostgREST-compatible Data API for complete, production-ready backends
@@ -94,7 +94,7 @@ Agent and Scale are different plans. Enrollment starts from Scale, but after you
 | Autoscaling                    | Up to 16 CU                                                                | Up to 16 CU                                |
 | Branches per project           | Up to 1,000                                                                | Up to 5,000                                |
 | Root branches per project      | 5                                                                          | 25                                         |
-| Read replicas                  | Up to 3                                                                    | Up to 6 per branch                         |
+| Read replicas                  | Up to 3 per project                                                        | Up to 6 per branch                         |
 | Instant restore history window | Up to 7 days                                                               | Up to 30 days                              |
 | Public network transfer        | 100 GB per project included, then $0.10/GB                                 | 500 GB per project included, then $0.10/GB |
 | Automated snapshot schedules   | Available upon request                                                     | Available                                  |

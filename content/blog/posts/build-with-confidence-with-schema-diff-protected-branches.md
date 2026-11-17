@@ -50,7 +50,7 @@ Ever since we introduced the database branching feature to Neon, developers have
 
 Today, we’ll explore two of our newest features, which will provide you with greater confidence.
 
-# Schema Diff
+## Schema Diff
 
 Similar to diffs in Git, the Neon schema diff feature compares schemas between the current and past state of the branch. Schema diffs are important to development workflows as they allow you to easily track how your database schema has evolved for better debugging, code review, and cross-team collaboration. For example, you can compare schemas after your peer has merged their PR and applied migrations.
 
@@ -115,7 +115,7 @@ Let’s compare again with the state of my database at 10:52 PM, the time after 
 
 We can observe that lines 60 and 61 were modified as a result of the schema change.
 
-# Protected branches
+## Protected branches
 
 Protected branches prevent unauthorized applications, users, and roles from accessing personally identifiable information (PII) or other sensitive data within your branch. This feature is available for users who are on [the Scale plan](https://neon.tech/pricing)
 
@@ -138,6 +138,6 @@ You have a limit of 5 protected branches in your project. To set your branch as 
 
 Check out the documentation for [more details on protected branches](https://neon.com/docs/manage/branches#protected-branch).
 
-# Conclusion
+## Conclusion
 
 The addition of Schema Diff and Protected Branches to Neon allows developers to easily identify schema changes and safeguard sensitive data, and equipped to build with confidence.<br />[You can try Schema Diff and Protected Branches on Neon](https://console.neon.tech) today. Join us on [Discord](https://neon.com/discord), and let us know how we can help you build better and ship faster with Neon.

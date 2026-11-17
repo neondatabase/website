@@ -2,7 +2,7 @@
 title: "How do I get a REST API for my Postgres tables without writing CRUD endpoints?"
 subtitle: "Enable the Neon Data API on a branch and every table in your exposed schemas becomes a PostgREST-compatible HTTPS endpoint, with access decided by Postgres GRANTs and Row-Level Security instead of handler code."
 createdAt: '2026-11-02T00:00:00.000Z'
-updatedOn: '2026-11-02T00:00:00.000Z'
+updatedOn: '2026-11-14T19:48:40.621Z'
 isDraft: false
 previousLink:
   title: 'How do I reset or change my database password in Neon?'
@@ -53,7 +53,7 @@ const { data, error } = await client
   .order('created_at', { ascending: false });
 ```
 
-With [Managed Better Auth](/docs/auth/overview) as the provider, the client attaches the signed-in user's token automatically. Other providers that issue JWTs work too through a JWKS URL ([custom providers](/docs/data-api/custom-authentication-providers)). For type safety, `npx @neondatabase/neon-js gen-types` writes TypeScript types from your schema ([generate types](/docs/data-api/generate-types)).
+With [Managed Better Auth](/docs/auth/overview) as the provider, the client attaches the signed-in user's token automatically. Other providers that issue JWTs work too through a JWKS URL ([custom providers](/docs/data-api/custom-authentication-providers)). For type safety, you can [generate TypeScript types from your schema](/docs/data-api/generate-types).
 
 ## Turning it on
 

@@ -14,7 +14,7 @@ summary: >-
   projects can be recovered within a 7-day window using the Console, CLI, or API.
 redirectFrom:
   - /docs/get-started/projects
-updatedOn: '2026-10-23T14:11:22.712Z'
+updatedOn: '2026-11-14T19:49:05.289Z'
 ---
 
 In Neon, the project is your main workspace. Within a project, you create branches for different workflows, like environments, features, or previews. Each branch contains its own databases, roles, computes, and replicas. Your [Neon Plan](/docs/introduction/plans) determines how many projects you can create and the resource limits within those projects.
@@ -180,7 +180,11 @@ The IP Allow feature provides an added layer of security for your data, restrict
 
 Optionally, you can allow unrestricted access to your project's non-protected branches. For instance, you might want to restrict access to protected branches to a handful of trusted IPs while allowing unrestricted access to your development branches.
 
-By default, Neon allows IP addresses from `0.0.0.0`, which means that Neon accepts connections from any IP address. Once you configure IP Allow by adding IP addresses or ranges, only those IP addresses will be allowed to access Neon.
+By default, Neon allows IP addresses from `0.0.0.0`, which means that Neon accepts connections from any IP address. Once you configure IP Allow by adding IP addresses or ranges, only those IP addresses can connect to your databases.
+
+<Admonition type="warning" title="IP Allow restricts Postgres connections only">
+It doesn't protect the Data API, Realtime, Managed Better Auth, Object Storage, the AI Gateway, or function URLs. Realtime, Managed Better Auth, and database connections from Neon Functions also stop working while IP Allow is enabled. See [IP Allow and other Neon services](/docs/introduction/ip-allow#ip-allow-and-other-neon-services).
+</Admonition>
 
 <Admonition type="note">
 Neon projects provisioned on AWS support both [IPv4](https://en.wikipedia.org/wiki/Internet_Protocol_version_4) and [IPv6](https://en.wikipedia.org/wiki/IPv6) addresses. Neon project provisioned on Azure currently on support IPv4.
@@ -207,10 +211,10 @@ The [Neon CLI ip-allow command](/docs/cli/ip-allow) supports IP Allow configurat
 
 ```bash
 neon ip-allow add 203.0.113.0 203.0.113.1
-ID              wispy-haze-123456
-Name            wispy-haze-123456
-IP Addresses    203.0.113.0, 203.0.113.1
-Protected Only  false
+ID                       wispy-haze-123456
+Name                     wispy-haze-123456
+IP Addresses             203.0.113.0, 203.0.113.1
+Protected Branches Only  false
 ```
 
 To apply an IP allowlist to protected branches only, you can use the `--protected-only` option:
@@ -235,7 +239,7 @@ The [Create project](/docs/reference/api/projects/create-project) and [Update pr
 curl -X PATCH \
      https://console.neon.tech/api/v2/projects/falling-salad-31638542 \
      -H 'accept: application/json' \
-     -H 'authorization: Bearer $NEON_API_KEY' \
+     -H "authorization: Bearer $NEON_API_KEY" \
      -H 'content-type: application/json' \
      -d '
 {
@@ -339,7 +343,7 @@ Specify the `ips` option with an empty string. If applicable, also include `"pro
 curl -X PATCH \
      https://console.neon.tech/api/v2/projects/falling-salad-31638542 \
      -H 'accept: application/json' \
-     -H 'authorization: Bearer $NEON_API_KEY' \
+     -H "authorization: Bearer $NEON_API_KEY" \
      -H 'content-type: application/json' \
      -d '
 {
@@ -1008,7 +1012,7 @@ There are no storage costs or recovery fees during the 7-day deletion recovery p
 
 ### Recover a project
 
-<Tabs labels={["Console", "CLI", "API"]}>
+<Tabs labels={["Console", "CLI", "API", "MCP server"]}>
 
 <TabItem>
 
@@ -1089,6 +1093,12 @@ curl -X POST \
 ```
 
 The API returns a `200` status code with the restored project object.
+
+</TabItem>
+
+<TabItem>
+
+With the [Neon MCP Server](/docs/ai/neon-mcp-server), ask your agent to recover the project. The `list_projects` tool takes `recoverable: true` to find projects that can still be recovered, and the `recover_project` tool recovers one by its `project_id`. [Project-scoped mode](/docs/ai/neon-mcp-server#project-scoped-mode) hides project management tools such as `list_projects`, so use an unscoped connection.
 
 </TabItem>
 

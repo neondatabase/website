@@ -111,7 +111,7 @@ Short-window rate limits, the daily spend cap, and balance depletion are distinc
 - The **daily spend cap** limits how much you can spend in a single day.
 - **Balance depletion** happens when your prepaid credits run out.
 
-If you're blocked and need a limit raised, [contact Support](/docs/introduction/support).
+If you're blocked and need a limit raised, you can request a limit increase. Scale plan users can [request a limit increase](/docs/introduction/support#request-a-limit-increase) from the console.
 See [Rate limits](/docs/ai-gateway/models#rate-limits) for details.
 
 When you exceed a limit, the API returns **HTTP 429**:
@@ -177,9 +177,7 @@ auto-reload back on.
 
 The AI Gateway is available in AWS US East (Ohio), US East (N. Virginia), Europe (Frankfurt), and Asia Pacific (Singapore) (more [regions](/docs/introduction/regions) to follow).
 
-<Admonition type="note">
-**IP Allow** and **Private Networking** do not cover AI Gateway traffic.
-</Admonition>
+[IP Allow](/docs/introduction/ip-allow#ip-allow-and-other-neon-services) and [Private Networking](/docs/guides/neon-private-networking#private-networking-and-other-neon-services) don't protect AI Gateway requests. Access is controlled by credentials.
 
 ## If you downgrade to Free
 
@@ -224,7 +222,7 @@ Your credits stay on your account, and you can keep using AI Gateway on the Free
 </FaqItem>
 
 <FaqItem question="What are the default usage limits?">
-By default, each account has a soft limit of 200,000 tokens per minute (TPM), applied to input and output tokens separately, and a $20 per day spend cap, though both may vary by account. Both guard against runaway costs. If you're blocked and need a limit raised, [contact Support](/docs/introduction/support). See [Usage limits](#usage-limits) for details.
+By default, each account has a soft limit of 200,000 tokens per minute (TPM), applied to input and output tokens separately, and a $20 per day spend cap, though both may vary by account. Both guard against runaway costs. If you're blocked, you can request a limit increase. Scale plan users can [request a limit increase](/docs/introduction/support#request-a-limit-increase) from the console. See [Usage limits](#usage-limits) for details.
 </FaqItem>
 
 <FaqItem question="What happens if I hit a usage limit?">

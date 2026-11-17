@@ -24,7 +24,7 @@ redirectFrom:
 
 Agent Skills provide your AI coding assistant with structured context about Neon's platform, APIs, and best practices. With skills installed, your assistant produces more accurate code and avoids common mistakes when working with Neon, from Postgres and Auth to [Neon Functions](/docs/compute/functions/overview), [Object Storage](/docs/storage/overview), and the [AI Gateway](/docs/ai-gateway/overview).
 
-<YoutubeIframe embedId="NN251KTjAo8" />
+<YoutubeIframe embedId="NN251KTjAo8" title="Neon Agent Skills demo" />
 
 ## Install
 

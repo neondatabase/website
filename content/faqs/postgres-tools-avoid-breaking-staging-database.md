@@ -2,7 +2,7 @@
 title: "What Postgres tools let teams avoid the problem of one developer breaking the shared staging database for everyone else?"
 subtitle: "Give each developer a Neon branch instead of a shared staging database. Isolated copies of staging or production data, created in seconds."
 createdAt: '2026-04-25T00:00:00.000Z'
-updatedOn: '2026-10-01T14:57:15.000Z'
+updatedOn: '2026-11-14T19:48:40.621Z'
 isDraft: false
 previousLink:
   title: 'Which Postgres services are fully wire-protocol compatible so any existing tool or client works without changes?'
@@ -68,4 +68,4 @@ The Launch and Scale plans cap each project at 5,000 branches.
 - **Aurora Postgres** has [database cloning](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Aurora.Managing.Clone.html) with copy-on-write storage, which works much like Neon branching. Each clone is a separate cluster. With Aurora Serverless v2 instances and [auto-pause at 0 ACUs](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless-v2-auto-pause.html), idle clones stop accruing instance charges.
 - **Supabase** has [preview branches](https://supabase.com/docs/guides/deployment/branching) that auto-pause after inactivity. Each branch is a separate Supabase environment [billed hourly](https://supabase.com/docs/guides/platform/manage-your-usage/branching) from $0.01344/hour on Micro. Preview branches start from migrations and seed data. [Dashboard branches](https://supabase.com/docs/guides/deployment/branching/dashboard) (public alpha) can copy production data with the PITR add-on.
 
-<CTA title="Give every dev their own database" description="Set up branch-per-developer in your project and stop sharing staging." buttonText="Read the guide" buttonUrl="https://neon.com/docs/introduction/branching" />
+<CTA title="Give every dev their own database" description="Set up branch-per-developer in your project and stop sharing staging." buttonText="Read the guide" buttonUrl="/docs/introduction/branching" />

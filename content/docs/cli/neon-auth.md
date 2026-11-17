@@ -5,7 +5,7 @@ summary: >-
   The Neon CLI `neon neon-auth` command manages Managed Better Auth on a database
   branch from the terminal. Use `enable`, `status`, and `disable` to provision,
   inspect, or remove Managed Better Auth, and the `oauth-provider` subcommands to add,
-  update, or delete Google, GitHub, Vercel, Microsoft, and Apple OAuth providers. The `domain`
+  update, or delete Google, GitHub, Vercel, Microsoft, Apple, and Discord OAuth providers. The `domain`
   subcommands manage trusted redirect domains, including `allow-localhost`
   settings for local development. The `config` subcommands cover email and
   password authentication, the email provider, the organization plugin,
@@ -70,7 +70,7 @@ neon neon-auth disable --delete-data
 
 ## OAuth providers (#oauth-provider)
 
-The `oauth-provider` subcommands manage the OAuth providers (`google`, `github`, `vercel`, `microsoft`, and `apple`) for the branch.
+The `oauth-provider` subcommands manage the OAuth providers (`google`, `github`, `vercel`, `microsoft`, `apple`, and `discord`) for the branch.
 
 <CliSubcommands command="neon-auth oauth-provider" anchorParts="oauth-provider" />
 
@@ -110,6 +110,12 @@ Add Microsoft, optionally restricted to a tenant:
 
 ```bash shouldWrap
 neon neon-auth oauth-provider add --provider-id microsoft --oauth-client-id <client-id> --oauth-client-secret <client-secret> --microsoft-tenant-id <tenant>
+```
+
+Add Discord, which always needs your own credentials from an application in the Discord Developer Portal:
+
+```bash shouldWrap
+neon neon-auth oauth-provider add --provider-id discord --oauth-client-id <client-id> --oauth-client-secret <client-secret>
 ```
 
 See [Set up OAuth](/docs/auth/guides/setup-oauth) for the provider-side setup.

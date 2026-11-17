@@ -284,12 +284,12 @@ export default defineConfig({
       name: 'Data analyst agent',
       source: './functions/analyst.ts',
       env: {
-        NEON_API_KEY: process.env.NEON_API_KEY!,
-        NEON_PROJECT_ID: process.env.NEON_PROJECT_ID!,
-        UPSTASH_BOX_API_KEY: process.env.UPSTASH_BOX_API_KEY!,
-        UPSTASH_BOX_SNAPSHOT_ID: process.env.UPSTASH_BOX_SNAPSHOT_ID!,
-        SLACK_BOT_TOKEN: process.env.SLACK_BOT_TOKEN ?? '',
-        SLACK_SIGNING_SECRET: process.env.SLACK_SIGNING_SECRET ?? '',
+        NEON_API_KEY: { value: process.env.NEON_API_KEY, required: true },
+        NEON_PROJECT_ID: { value: process.env.NEON_PROJECT_ID, required: true },
+        UPSTASH_BOX_API_KEY: { value: process.env.UPSTASH_BOX_API_KEY, required: true },
+        UPSTASH_BOX_SNAPSHOT_ID: { value: process.env.UPSTASH_BOX_SNAPSHOT_ID, required: true },
+        SLACK_BOT_TOKEN: { value: process.env.SLACK_BOT_TOKEN, required: false },
+        SLACK_SIGNING_SECRET: { value: process.env.SLACK_SIGNING_SECRET, required: false },
       }
     }
   },
@@ -301,7 +301,7 @@ export default defineConfig({
 });
 ```
 
-The `env` block injects your secrets into the function at deploy time. The two Slack values use `?? ''` because you won't have them until you create the Slack app in a later step. The empty fallback lets this first deploy succeed and gives you the function URL, but the function won't load until both Slack values are set. You'll redeploy with the real values right after.
+The `env` block injects your secrets into the function at deploy time. The other values are declared `required: true`, so `neon deploy` stops before making changes if one is unset. The two Slack values are `required: false` because you won't have them until you create the Slack app in a later step. That lets this first deploy succeed and gives you the function URL, but the function won't load until both Slack values are set. You'll redeploy with the real values right after.
 
 You also don't list `DATABASE_URL` as Neon injects it automatically, because the function is deployed onto your branch. The per-session branch connection comes from the Neon SDK at runtime instead.
 
@@ -318,7 +318,7 @@ import config from '../../neon';
 export const env = parseEnv(config, 'analyst');
 ```
 
-[`parseEnv`](https://www.npmjs.com/package/@neon/env) validates the injected variables and returns a typed `env` object. Passing the function's slug (`analyst`) adds a typed `env.function` namespace for the variables you declared in `neon.ts`, so `env.function.NEON_API_KEY` is checked at build time instead of failing with a missing variable at runtime. This guide needs `@neon/env` 2.0.0 or later.
+[`parseEnv`](https://www.npmjs.com/package/@neon/env) validates the injected variables and returns a typed `env` object. Passing the function's slug (`analyst`) adds a typed `env.function` namespace for the variables you declared in `neon.ts`, so `env.function.NEON_API_KEY` is checked at build time instead of failing with a missing variable at runtime. This guide needs `@neon/env` 2.1.0 or later.
 
 Then create `src/lib/neon.ts`:
 

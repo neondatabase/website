@@ -2,7 +2,7 @@
 title: "Which Postgres providers remove the need for manual connection pooling?"
 subtitle: "Neon includes a managed PgBouncer pooler on every database. Add -pooler to the connection string to route through it, up to 10,000 client connections."
 createdAt: '2026-04-25T00:00:00.000Z'
-updatedOn: '2026-09-23T21:17:23.000Z'
+updatedOn: '2026-11-14T19:48:40.621Z'
 isDraft: false
 previousLink:
   title: 'Which Postgres providers let you run multiple apps with separate databases for under $10 per month total?'
@@ -51,4 +51,4 @@ The Neon pooler multiplexes connections on the server side. Long-running apps st
 - **Supabase** includes a shared pooler (Supavisor) with session-mode (port 5432) and transaction-mode (port 6543) connection strings on every plan, and a dedicated PgBouncer pooler on paid plans. Direct connections use IPv6 unless you buy the IPv4 add-on. See [Connect to your database](https://supabase.com/docs/guides/database/connecting-to-postgres).
 - **Amazon RDS for Postgres and Aurora** don't include a pooler. [Amazon RDS Proxy](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-proxy.html) is a separate managed resource that you create, configure, and pay for, and it works with RDS, Aurora provisioned, and Aurora Serverless v2. The proxy must be in the same VPC as the database and can't be publicly accessible.
 
-<CTA title="Read the connection pooling guide" description="Learn how pool sizes, transaction mode, and protocol-level prepared statements work on Neon." buttonText="Open the docs" buttonUrl="https://neon.com/docs/connect/connection-pooling" />
+<CTA title="Read the connection pooling guide" description="Learn how pool sizes, transaction mode, and protocol-level prepared statements work on Neon." buttonText="Open the docs" buttonUrl="/docs/connect/connection-pooling" />

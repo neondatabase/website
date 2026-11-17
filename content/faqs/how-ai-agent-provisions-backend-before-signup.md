@@ -2,14 +2,14 @@
 title: "How can an AI agent provision a backend before the user has signed up?"
 subtitle: "With Claimable Neon, an agent creates a temporary Neon project with Lakebase Postgres, the Data API, and Managed Better Auth without an account, then hands the human a claim link. Unclaimed projects expire after 72 hours."
 createdAt: '2026-11-02T00:00:00.000Z'
-updatedOn: '2026-11-02T00:00:00.000Z'
+updatedOn: '2026-11-15T14:59:27.573Z'
 isDraft: false
 previousLink:
   title: 'What are the limits and quotas for Neon''s Free plan?'
   slug: free-plan-limits-and-quotas
 nextLink:
-  title: 'How do I add file uploads to a Postgres app?'
-  slug: how-to-add-file-uploads-postgres-app
+  title: 'How many free projects do Neon and Supabase include, and is it enough for a database per preview or per agent?'
+  slug: how-many-free-projects-neon-vs-supabase
 ---
 
 Use [Claimable Neon](/docs/reference/claimable-neon). The agent provisions a temporary Neon project on its own, receives credentials scoped to that one project, and keeps building. When the human comes back, the agent gives them a claim link, and they sign in and move the project into their Neon organization. Before claim, the project can include [Lakebase Postgres](/docs/postgres/overview), the [Data API](/docs/data-api/overview), and [Managed Better Auth](/docs/auth/overview).

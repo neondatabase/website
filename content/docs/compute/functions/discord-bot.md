@@ -90,10 +90,10 @@ export default defineConfig({
       name: "Discord interactions",
       source: "./functions/discord.ts",
       env: {
-        DISCORD_PUBLIC_KEY: process.env.DISCORD_PUBLIC_KEY!,
-        DISCORD_APPLICATION_ID: process.env.DISCORD_APPLICATION_ID!,
-        DISCORD_BOT_TOKEN: process.env.DISCORD_BOT_TOKEN!,
-        ...(process.env.DISCORD_GUILD_ID ? { DISCORD_GUILD_ID: process.env.DISCORD_GUILD_ID } : {}),
+        DISCORD_PUBLIC_KEY: { value: process.env.DISCORD_PUBLIC_KEY, required: true },
+        DISCORD_APPLICATION_ID: { value: process.env.DISCORD_APPLICATION_ID, required: true },
+        DISCORD_BOT_TOKEN: { value: process.env.DISCORD_BOT_TOKEN, required: true },
+        DISCORD_GUILD_ID: { value: process.env.DISCORD_GUILD_ID, required: false, onUndefined: "skip" },
       },
       dev: {
         port: 8787,
@@ -120,7 +120,7 @@ neon link
 Linking merges `DATABASE_URL`, `DATABASE_URL_UNPOOLED`, `NEON_BRANCH`, `NEON_BRANCH_ID`, and `NEON_FUNCTION_HOST_SUFFIX` into `.env.local`, leaving the Discord keys untouched. Uncomment and fill the three required `DISCORD_*` keys:
 
 ```env filename=".env.local"
-# Required. Add real values before deploying; a missing key throws at deploy, an empty one uploads "".
+# Required. Add real values before deploying; a missing or empty value fails the deploy.
 # DISCORD_PUBLIC_KEY=
 # DISCORD_APPLICATION_ID=
 # DISCORD_BOT_TOKEN=

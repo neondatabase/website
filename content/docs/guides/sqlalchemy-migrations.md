@@ -13,7 +13,7 @@ enableTableOfContents: true
 updatedOn: '2026-10-28T11:11:18.780Z'
 ---
 
-[SQLAlchemy](https://www.sqlalchemy.org/) is a popular SQL toolkit and Object-Relational Mapping (ORM) library for Python. SQLAlchemy provides a powerful way to interact with databases and manage database schema changes using [Alembic](https://alembic.sqlalchemy.org/), a lightweight database migration tool.
+[SQLAlchemy](https://www.sqlalchemy.org/) is a popular SQL toolkit and Object-Relational Mapping (ORM) library for Python. SQLAlchemy provides a way to interact with databases and manage database schema changes using [Alembic](https://alembic.sqlalchemy.org/), a lightweight database migration tool.
 
 This guide demonstrates how to use SQLAlchemy/Alembic to manage schema migrations for a Lakebase Postgres database. We create a simple API using the [FastAPI](https://fastapi.tiangolo.com/) web framework and define database models using SQLAlchemy. We then generate and run migrations to manage schema changes over time.
 
@@ -22,7 +22,7 @@ This guide demonstrates how to use SQLAlchemy/Alembic to manage schema migration
 To follow along with this guide, you will need:
 
 - A Neon account. If you do not have one, sign up at [Neon](https://neon.tech). Your Neon project comes with a ready-to-use Postgres database named `neondb`. We'll use this database in the following examples.
-- [Python](https://www.python.org/) installed on your local machine. We recommend using a newer version of Python, 3.8 or higher.
+- [Python](https://www.python.org/) 3.11 or later installed on your local machine. SQLAlchemy 2.1 requires Python 3.11 or later.
 
 ## Setting up your database
 
@@ -45,7 +45,7 @@ Keep your connection string handy for later use.
 Neon supports both direct and pooled database connection strings. You can find a connection string for your database by clicking the **Connect** button in the Console nav. A pooled connection string connects your application to the database via a PgBouncer connection pool, allowing for a higher number of concurrent connections. However, using a pooled connection string for migrations can be prone to errors. For this reason, we recommend using a direct (non-pooled) connection when performing migrations. For more information about direct and pooled connections, see [Connection pooling](/docs/connect/connection-pooling).
 </Admonition>
 
-## Setting up the Web application
+## Setting up the web application
 
 ### Set up the Python environment
 
@@ -69,14 +69,14 @@ With the virtual environment activated, we can create a new directory for our Fa
 
 ```bash
 mkdir guide-neon-sqlalchemy && cd guide-neon-sqlalchemy
-pip install sqlalchemy alembic "psycopg2-binary"
+pip install sqlalchemy alembic "psycopg[binary]"
 pip install fastapi uvicorn python-dotenv
 pip freeze > requirements.txt
 ```
 
-We installed SQLAlchemy, Alembic, and the `psycopg2-binary` package to connect to the Lakebase Postgres database. We then installed the `FastAPI` package to create the API endpoints and `uvicorn` as the web server. We then saved the installed packages to a `requirements.txt` file so the project can be easily recreated in another environment.
+We installed SQLAlchemy, Alembic, and psycopg (version 3) to connect to the Lakebase Postgres database. SQLAlchemy 2.1 uses psycopg 3 for `postgresql://` connection strings by default, so you don't need the older `psycopg2` driver. We then installed the `FastAPI` package to create the API endpoints and `uvicorn` as the web server. We then saved the installed packages to a `requirements.txt` file so you can recreate the project in another environment.
 
-### Set up the Database configuration
+### Set up the database configuration
 
 Create a `.env` file in the project root directory and add the `DATABASE_URL` environment variable to it. Use the connection string that you obtained from the Neon Console earlier:
 
@@ -89,7 +89,7 @@ We create an `app` directory at the project root to store the database models an
 
 ```bash
 mkdir app
-touch guide-neon-sqlalchemy/app/__init__.py
+touch app/__init__.py
 ```
 
 Next, create a new file named `database.py` in the `app` subdirectory and add the following code:
@@ -101,8 +101,7 @@ import os
 
 import dotenv
 from sqlalchemy import create_engine
-from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy.orm import sessionmaker
+from sqlalchemy.orm import declarative_base, sessionmaker
 
 dotenv.load_dotenv()
 SQLALCHEMY_DATABASE_URL = os.getenv("DATABASE_URL")
@@ -161,7 +160,9 @@ To initialize Alembic for managing database migrations, run the following comman
 alembic init alembic
 ```
 
-This command creates a new directory named `alembic` with the necessary files for managing migrations. Open the `env.py` file in the `alembic` directory and update the `target_metadata` variable to include the models defined in the `models.py` file:
+This command creates a new directory named `alembic` with the necessary files for managing migrations. Open the `alembic/env.py` file and make two changes.
+
+First, add an import for the models and point `target_metadata` at their metadata. Add the import near the top of the file, and replace the `target_metadata = None` line:
 
 ```python
 # alembic/env.py
@@ -171,17 +172,17 @@ from app.models import Base
 target_metadata = Base.metadata
 ```
 
-We update the `alembic/env.py` file again to load the database URL from the `.env` file at project root and set it as the `sqlalchemy.url` configuration option.
+Second, load the database URL from the `.env` file at the project root and set it as the `sqlalchemy.url` configuration option. Add this code after the `config = context.config` line:
 
 ```python
 # alembic/env.py
 
-import dotenv
 import os
 
-dotenv.load_dotenv()
+import dotenv
 
-config.set_main_option('sqlalchemy.url', os.getenv('DATABASE_URL', ""))
+dotenv.load_dotenv()
+config.set_main_option("sqlalchemy.url", os.getenv("DATABASE_URL", ""))
 ```
 
 ### Generate the initial migration
@@ -211,8 +212,8 @@ To seed the database with some initial data, create a new file named `seed.py` i
 ```python
 # seed.py
 
-from database import SessionLocal
-from models import Author, Book
+from app.database import SessionLocal
+from app.models import Author, Book
 
 def seed_data():
     db = SessionLocal()
@@ -302,7 +303,7 @@ if __name__ == "__main__":
     uvicorn.run(app, host="127.0.0.1", port=8000)
 ```
 
-This code defines endpoints for creating and retrieving authors and books. It uses SQLAlchemy's `Session` to interact with the database and Pydantic models (`schemas`) for request and response data validation and serialization.
+This code defines endpoints for creating and retrieving authors and books. It uses SQLAlchemy's `Session` to query the database. FastAPI serializes the returned SQLAlchemy objects to JSON.
 
 ### Run the FastAPI server
 
@@ -364,7 +365,7 @@ Navigate to `http://localhost:8000/authors` in your browser to view the list of 
 
 ## Conclusion
 
-In this guide, we demonstrated how to set up a FastAPI project with `Neon` Postgres, define database models using SQLAlchemy, generate migrations using Alembic, and run them. Alembic makes it easy to interact with the database and manage schema evolution over time.
+In this guide, we demonstrated how to set up a FastAPI project with Lakebase Postgres, define database models using SQLAlchemy, generate migrations using Alembic, and run them. Alembic records each change as a migration, so you can track how the schema evolves.
 
 ## Source code
 

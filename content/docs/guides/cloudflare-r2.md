@@ -17,7 +17,7 @@ updatedOn: '2026-09-16T19:45:35.340Z'
 [Cloudflare R2](https://www.cloudflare.com/en-in/developer-platform/products/r2/) is S3-compatible object storage offering zero egress fees, designed for storing and serving large amounts of unstructured data like images, videos, and documents globally.
 
 <Callout title="Neon now offers native storage">
-Neon Object Storage is S3-compatible object storage built into the Neon backend. Object storage branches with your database: each branch gets its own isolated namespace, so you can test file uploads in preview branches without touching production. No separate cloud account needed. Use any S3-compatible SDK with your existing Neon credential.
+Neon Object Storage is S3-compatible object storage built into your Neon project. Files branch with your database, so you can test uploads in a preview branch without touching production files. No separate cloud account needed. Point an S3 SDK at your branch endpoint with your Neon credential.
 
 For more information, see [Neon Object Storage](/docs/storage/overview).
 </Callout>
@@ -53,16 +53,17 @@ If your application involves uploading files **directly from a web browser** usi
 
 Follow Cloudflare's guide to [Configure CORS](https://developers.cloudflare.com/r2/buckets/cors/) for your bucket. You can add rules via R2 Bucket settings in the Cloudflare dashboard.
 
-Here’s an example CORS configuration allowing `PUT` uploads and `GET` requests from your deployed frontend application and your local development environment:
+Here's an example CORS configuration allowing `PUT` uploads and `GET` requests from your deployed frontend application and your local development environment. Replace `https://your-production-app.com` with your frontend domain. `AllowedHeaders` must include `Content-Type`, because the browser sends it with the upload.
 
 ```json
 [
   {
     "AllowedOrigins": [
-      "https://your-production-app.com", // Replace with your actual frontend domain
-      "http://localhost:3000" // For local development
+      "https://your-production-app.com",
+      "http://localhost:3000"
     ],
-    "AllowedMethods": ["PUT", "GET"]
+    "AllowedMethods": ["PUT", "GET"],
+    "AllowedHeaders": ["Content-Type"]
   }
 ]
 ```
@@ -147,6 +148,8 @@ const s3 = new S3Client({
     accessKeyId: process.env.R2_ACCESS_KEY_ID,
     secretAccessKey: process.env.R2_SECRET_ACCESS_KEY,
   },
+  // Stops the SDK from adding a checksum of an empty body to presigned URLs.
+  requestChecksumCalculation: 'WHEN_REQUIRED',
 });
 
 const sql = neon(process.env.DATABASE_URL);
@@ -350,12 +353,12 @@ if __name__ == "__main__":
 
 **Explanation**
 
-1.  **Setup:** Initializes the Flask web framework, the R2 client (`s3_client` using `boto3`), and the PostgreSQL client (`psycopg2`) using environment variables.
+1.  **Setup:** Initializes the Flask web framework, the R2 client (`s3_client` using `boto3`), and the Postgres client (`psycopg2`) using environment variables.
 2.  **Authentication:** A placeholder `get_authenticated_user_id` function is included. **Replace this with real authentication logic.**
 3.  **Upload endpoints**:
     - **`/presign-upload`:** Generates a temporary secure URL (`presignedUrl`) that allows uploading a file with a specific `objectKey` and `contentType` directly to R2 using `boto3`. It returns the URL, key, and public URL.
     - **`/save-metadata`:** Called by the client _after_ it successfully uploads the file to R2. It saves the `objectKey`, the final `file_url`, and the `userId` into the `r2_files` table in Neon using `psycopg2`.
-4.  In production, you should use a global PostgreSQL connection instead of creating a new one for each request. This is important for performance and resource management.
+4.  In production, you should use a global Postgres connection instead of creating a new one for each request. This is important for performance and resource management.
 
 </TabItem>
 

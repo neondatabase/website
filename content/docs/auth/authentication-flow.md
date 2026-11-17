@@ -10,7 +10,7 @@ summary: >-
   Security policies via the Data API. All auth state lands directly in your
   Neon database with no sync delay, and each branch holds isolated auth data.
 enableTableOfContents: true
-updatedOn: '2026-11-05T01:12:31.897Z'
+updatedOn: '2026-11-09T18:18:56.726Z'
 ---
 
 This guide explains the authentication flow: how sign-in works from SDK call to session creation.
@@ -140,7 +140,7 @@ By default, anyone can sign up for your application. To add an additional verifi
 
 ## OAuth flow
 
-OAuth authentication (Google, GitHub, Vercel, Microsoft, Apple, etc.):
+OAuth authentication (Google, GitHub, Vercel, Microsoft, Apple, Discord, etc.):
 
 ```typescript
 await client.auth.signIn.social({

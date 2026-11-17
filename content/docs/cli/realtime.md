@@ -98,6 +98,8 @@ The CLI resolves the branch's Realtime URL, secret, and database name for you, t
 
 The subscription runs until you press Ctrl+C, or until the server closes it or reports an error.
 
+`--debug` turns on [debug mode](/docs/realtime/guides/subscribing#show-full-database-errors) for the subscription, the same as setting `debugMode` in the SDK. When a query is rejected or fails, you see the database's own error message, with its SQLSTATE code when there is one, instead of a generic message.
+
 ### Output
 
 The default table output is an append-only log, so it doesn't take over your terminal. It opens with a header naming the project, branch, database, mode, and query, then prints:
@@ -200,6 +202,12 @@ remove  1257d5759a0894512f6859dd60b504e69cbf6f8d9d4d977ee9b3b396661928bf
 ```
 
 </details>
+
+Show the database's full error when a query is rejected or fails:
+
+```bash
+neon realtime subscribe --debug "SELECT * FROM items"
+```
 
 Stream events as newline-delimited JSON, for example to pipe into another tool. Each event is a full snapshot of the result:
 

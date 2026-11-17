@@ -2,13 +2,14 @@
 import { notFound } from 'next/navigation';
 
 import Post from 'components/pages/doc/post';
+import JsonLd from 'components/shared/json-ld';
 import VERCEL_URL from 'constants/base';
 import { GUIDES_DIR_PATH } from 'constants/content';
 import { GUIDES_BASE_PATH } from 'constants/guides';
 import LINKS from 'constants/links';
 import { getPostBySlug } from 'utils/api-content';
 import {
-  getAuthor,
+  getGuideAuthors,
   getAllGuides,
   getGuideNavigationItems,
   getNavigationLinks,
@@ -35,8 +36,7 @@ export async function generateMetadata(props) {
     data: { title, subtitle, canonical, createdAt, updatedOn },
   } = post;
 
-  const authorID = post.data.author;
-  const author = getAuthor(authorID);
+  const authors = getGuideAuthors(post.data);
 
   const encodedTitle = Buffer.from(title).toString('base64');
 
@@ -50,7 +50,7 @@ export async function generateMetadata(props) {
     publishedTime: createdAt ?? null,
     modifiedTime: updatedOn ?? null,
     category: 'Guides',
-    authors: [author.name],
+    authors: authors.map(({ name }) => name),
     canonical,
   });
 }
@@ -64,8 +64,7 @@ const GuidePost = async (props) => {
   const postBySlug = getPostBySlug(slug, GUIDES_DIR_PATH);
   if (!postBySlug) return notFound();
   const { data, content } = postBySlug;
-  const authorID = data.author;
-  const author = getAuthor(authorID);
+  const authors = getGuideAuthors(data);
   const tableOfContents = getTableOfContents(content);
   const jsonLd = {
     '@context': 'https://schema.org',
@@ -83,10 +82,7 @@ const GuidePost = async (props) => {
 
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
+      <JsonLd data={jsonLd} />
       <Post
         content={content}
         data={data}
@@ -105,7 +101,7 @@ const GuidePost = async (props) => {
         currentSlug={slug}
         gitHubPath={gitHubPath}
         tableOfContents={tableOfContents}
-        author={author}
+        authors={authors}
       />
     </>
   );

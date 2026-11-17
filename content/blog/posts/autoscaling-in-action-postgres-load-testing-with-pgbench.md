@@ -120,7 +120,7 @@ You can set your instance size when you create a new project or by navigating to
 
 I will set the range for this load test from ¼ to 7 CUs.
 
-# Executing & monitoring the load test
+## Executing & monitoring the load test
 
 Let’s run our load test now and observe its effect on our Postgres instance. We recently added graphs to monitor the resources allocated to your Postgres instance and its usage, which will come in handy later. After enabling autoscaling, follow these steps to execute the load test:
 

@@ -60,6 +60,7 @@ const GROUP_OF = {
   realtime: 'surfaces',
   docs: 'setup',
   postgres: 'core',
+  incidents: 'debugging',
 };
 
 // Commands documented as a section of another command's page instead of a

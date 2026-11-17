@@ -2,6 +2,7 @@
 import { notFound, redirect } from 'next/navigation';
 
 import Content from 'components/shared/content';
+import JsonLd from 'components/shared/json-ld';
 import Link from 'components/shared/link';
 import SectionLabel from 'components/shared/section-label';
 import VERCEL_URL from 'constants/base';
@@ -10,6 +11,7 @@ import { CHANGELOG_BASE_PATH, CHANGELOG_SLUG_REGEX } from 'constants/docs';
 import ArrowLeftThinIcon from 'icons/arrow-left-thin.inline.svg';
 import { getPostBySlug } from 'utils/api-content';
 import { getAllChangelogs } from 'utils/api-docs';
+import getArticleSchema from 'utils/get-article-schema';
 import getExcerpt from 'utils/get-excerpt';
 import getFormattedDate from 'utils/get-formatted-date';
 import getMetadata from 'utils/get-metadata';
@@ -76,25 +78,16 @@ const ChangelogPost = async ({ currentSlug }) => {
 
   const isChangelogPage = CHANGELOG_SLUG_REGEX.test(currentSlug);
 
-  const jsonLd = {
-    '@context': 'https://schema.org',
-    '@type': 'Article',
-    headline: `Changelog ${date}`,
-    datePublished: date,
-    author: {
-      '@type': 'Organization',
-      name: 'Neon',
-    },
-  };
+  const jsonLd = getArticleSchema({
+    title: `Changelog ${date}`,
+    description: title,
+    datePublished: currentSlug,
+    url: `${VERCEL_URL}${CHANGELOG_BASE_PATH}${currentSlug}`,
+  });
 
   return (
     <>
-      {isChangelogPage && (
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-        />
-      )}
+      {isChangelogPage && <JsonLd data={jsonLd} />}
       <div className="mx-auto w-full max-w-208 pt-9 pb-40 xl:pb-32 lg:pt-0 lg:pb-28 md:pb-20">
         <Link
           className="group sticky top-40 -ml-64 inline-flex items-center gap-1.5 text-sm leading-none tracking-tight xl:static xl:ml-0"
@@ -111,12 +104,12 @@ const ChangelogPost = async ({ currentSlug }) => {
 
         <article className="relative flex w-full max-w-full flex-col items-start">
           {/* Special title for Algolia */}
-          <h2 className="post-title">
+          <h1 className="post-title">
             <time className="sr-only" dateTime={currentSlug}>
               {date}
             </time>
             <span className="sr-only">– {title}</span>
-          </h2>
+          </h1>
           <Content
             className="w-full max-w-full prose-h3:text-xl [&>*:first-child]:pt-4"
             content={content}

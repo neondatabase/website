@@ -165,7 +165,7 @@ Here’s what the full export pipeline looks like in production, with arrows rep
 
 This diagram is nearly identical to our internal metrics collection setup. The key difference is that we now run OpenTelemetry collectors per project, and each collector only scrapes compute pods for that project.
 
-# Conclusion
+## Conclusion
 
 The metrics export feature we’ve built provides a seamless experience for our users. With just a few clicks, they can start exporting metrics to their preferred observability platform. This continuous, real-time export of metrics enables users to monitor their Postgres databases alongside other infrastructure components, making it easier to identify performance bottlenecks and optimize their applications.
 

@@ -4,7 +4,7 @@ subtitle: Learn how to scale .NET applications with Entity Framework's DbContext
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2024-10-13T00:00:00.000Z'
-updatedOn: '2026-09-24T17:56:34.189Z'
+updatedOn: '2026-10-09T15:55:57.334Z'
 ---
 
 [Neon read replicas](/docs/introduction/read-replicas) are independent read-only computes that perform read operations on the same data as your primary read-write compute. Replicas read from the same storage as the primary compute, so adding one doesn't duplicate your data or add storage costs.
@@ -331,7 +331,7 @@ else
 }
 ```
 
-#### Update `appsettings.json` / `appsettings.Development.json`
+#### Update `appsettings.json` / `appsettings.Development.json` (#update-appsettingsjson-appsettingsdevelopmentjson-2)
 
 Add the read replica connection string:
 

@@ -1,5 +1,5 @@
 ---
-title: Branching — Testing queries
+title: Test queries on a branch
 subtitle: Create a Neon branch to test queries before running them in production
 summary: >-
   Neon branching lets you create an instant copy-on-write clone of your
@@ -14,7 +14,7 @@ redirectFrom:
 updatedOn: '2026-10-09T10:18:46.317Z'
 ---
 
-Complex queries that modify data or alter schemas have the potential to be destructive. It is advisable to test these types of queries before running them in production. On other database systems, testing potentially destructive queries can be time and resource intensive. For example, testing may involve setting up a separate database instance and replicating data. With Neon, you can instantly create a database branch with a full copy-on-write clone of your production data in just a few clicks. When you finish testing, you can remove the branch just as easily.
+Queries that modify data or alter schemas can be destructive, so test them before you run them in production. On other database systems, testing takes time and resources, such as a separate database instance with replicated data. With Neon, you create a branch with a copy-on-write clone of your production data. When you finish, you delete the branch just as easily.
 
 <Admonition type="tip" title="working with sensitive data?">
 Neon also supports schema-only branching. [Learn more](/docs/guides/branching-schema-only).
@@ -26,7 +26,7 @@ This guide walks you through creating a branch of your production data, testing 
 2. [Test your query](#test-your-query)
 3. [Delete the test branch](#delete-the-test-branch)
 
-For the purpose of this guide, let's assume you have a database in Neon with the following table and data:
+This guide assumes a database with the following table and data:
 
 ```sql
 CREATE TABLE Post (
@@ -95,7 +95,7 @@ DELETE FROM Post
 WHERE author_name = 'Alice' AND date_published < '2020-01-01';
 ```
 
-Next, inspect the data to ensure the intended records were deleted, while others remained unaffected. This query allows you to quickly see if the number of records matches your expectations:
+Next, check that the query deleted only the intended records. This query returns the row count:
 
 ```sql
 SELECT COUNT(*) FROM Post;
@@ -117,7 +117,7 @@ You can also delete a branch using the [Neon CLI](/docs/cli/branches#delete) or 
 <CodeTabs labels={["CLI", "API"]}>
 
 ```bash
-neon branches delete my_test_branch
+neon branches delete my_test_branch --project-id <project-id>
 ```
 
 ```bash

@@ -76,6 +76,7 @@ const SubprocessorsForm = () => {
                 'dark:bg-gray-new-15 dark:focus:outline-gray-new-30'
               )}
               placeholder="Email"
+              aria-label="Email address"
               required
               onChange={(e) => setEmail(e.target.value)}
             />

@@ -11,7 +11,7 @@ redirectFrom:
   - /docs/functions
   - /docs/functions/overview
   - /docs/compute/functions
-updatedOn: '2026-11-02T22:41:52.272Z'
+updatedOn: '2026-11-12T07:04:55.193Z'
 layout: wide
 hideCopyPage: true
 ---
@@ -100,7 +100,7 @@ export default async function handler(request: Request) {
 }
 ```
 
-A [Hono](https://hono.dev) app exports the object shape, so `export default app` works directly. Hono is the recommended framework.
+A [Hono](https://hono.dev) app exports the object shape, so `export default app` works directly. Hono is the recommended framework. Other frameworks with a built-in `fetch` method work the same way: see [Run an h3 app on Neon Functions](/guides/h3-neon-functions).
 
 ## When to use Neon Functions
 

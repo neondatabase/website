@@ -2,14 +2,14 @@
 title: "How do I get S3-compatible storage without an AWS account?"
 subtitle: "Neon Object Storage speaks the S3 API, so the AWS SDK, boto3, and the AWS CLI work against a Neon endpoint with Neon credentials, no AWS account or IAM setup required."
 createdAt: '2026-11-02T00:00:00.000Z'
-updatedOn: '2026-11-03T23:21:47.530Z'
+updatedOn: '2026-11-13T22:54:32.784Z'
 isDraft: false
 previousLink:
   title: 'What is the best way to run code automatically when a file is uploaded?'
   slug: run-code-when-file-uploaded
 nextLink:
-  title: 'How do I safely query Postgres directly from the browser?'
-  slug: safely-query-postgres-from-browser
+  title: 'Is it safe to connect Claude Code or Cursor to my production database?'
+  slug: safe-connect-claude-code-cursor-production-database
 ---
 
 Use Neon. [Neon Object Storage](/docs/storage/overview) is S3-compatible storage that comes with every Neon project in a supported region. You sign up for Neon, create a bucket, and point your existing S3 code at a Neon endpoint. There's no AWS account, IAM user, or bucket policy to set up. Credentials are Neon credentials, the same system that covers Functions and AI Gateway ([authentication](/docs/storage/authentication)).

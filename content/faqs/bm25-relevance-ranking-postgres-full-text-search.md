@@ -58,7 +58,7 @@ When a `WHERE` clause removes most rows, for example a tenant filter, `SET lakeb
 
 For whole-word normalization, custom stop words, synonyms, or Chinese, Japanese, and Korean text, [`lakebase_tokenizer`](/docs/extensions/lakebase-tokenizer) produces standard `tsvector` values that work with `lakebase_bm25`.
 
-If you used ParadeDB's `pg_search`, it was retired from Neon on September 21, 2026, and `lakebase_text` is its replacement ([migration guide](/docs/extensions/migrate-pg-search-to-lakebase-text)).
+If you used ParadeDB's `pg_search`, it was retired from Neon on September 21, 2026, and [Lakebase Search](/docs/ai/lakebase-search) is its replacement, with `lakebase_text` for BM25 search.
 
 ## Beyond keywords
 

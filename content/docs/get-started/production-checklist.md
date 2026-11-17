@@ -143,7 +143,7 @@ Our recommended approach:
 curl --request POST \
      --url https://console.neon.tech/api/v2/projects/{project_id}/endpoints/{endpoint_id}/restart \
      --header 'accept: application/json' \
-     --header 'authorization: Bearer $NEON_API_KEY'
+     --header "authorization: Bearer $NEON_API_KEY"
 ```
 
 With the Neon CLI:
@@ -217,7 +217,7 @@ Keep reading: [Connection pooling](/docs/connect/connection-pooling)
 
 ## Restrict access to production data
 
-Neon's IP Allow feature ensures that only trusted IP addresses can connect to your database, preventing unauthorized access and enhancing security. Combine an allowlist with protected branches for enhanced security.
+Neon's IP Allow feature ensures that only trusted IP addresses can connect to your database, preventing unauthorized access and enhancing security. Combine an allowlist with protected branches for enhanced security. IP Allow restricts Postgres connections only: it doesn't protect the Data API, Realtime, Managed Better Auth, Object Storage, the AI Gateway, or Function URLs, and Realtime and Managed Better Auth also stop working while it's enabled. See [IP Allow and other Neon services](/docs/introduction/ip-allow#ip-allow-and-other-neon-services).
 
 ![IP Allow settings](/docs/get-started/ip_allow_settings.png)
 

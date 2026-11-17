@@ -278,7 +278,7 @@ export default defineConfig({
     todos: {
       name: "todos",
       source: "functions/todos/index.ts",
-      env: { MCP_RESOURCE: process.env.MCP_RESOURCE! },
+      env: { MCP_RESOURCE: { value: process.env.MCP_RESOURCE, required: true } },
     },
   },
 });

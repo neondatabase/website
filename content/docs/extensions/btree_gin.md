@@ -11,7 +11,7 @@ summary: >-
   with `btree_gin` carry higher write overhead than B-tree indexes, making the
   extension best suited for read-heavy, multi-column filter workloads.
 enableTableOfContents: true
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-10-09T15:55:57.334Z'
 ---
 
 The `btree_gin` extension for Postgres provides a specialized set of **GIN operator classes** that allow common, "B-tree-like" data types to be included in **GIN indexes**. Use it when you need **multicolumn GIN indexes** that combine complex data types (like arrays or JSONB) with simpler types such as integers, timestamps, or text. Ultimately, `btree_gin` extends GIN to a broader range of indexing needs, optimizing queries across diverse data structures.
@@ -116,7 +116,7 @@ The `idx_posts_tags_published` index enables Postgres to efficiently process bot
 
 In an e-commerce context, users often filter products based on dynamic attributes (for example, stored in `JSONB`) and price ranges.
 
-#### Table schema
+#### Table schema (#table-schema-2)
 
 ```sql
 CREATE TABLE products (
@@ -132,7 +132,7 @@ INSERT INTO products (name, attributes, price) VALUES
 ('Unisex Denim Jeans', '{"color": "black", "size": "32/30", "material": "denim"}', 59.95);
 ```
 
-#### `btree_gin` index creation
+#### `btree_gin` index creation (#btreegin-index-creation-2)
 
 ```sql
 CREATE INDEX idx_products_attributes_price
@@ -140,7 +140,7 @@ ON products
 USING GIN (attributes, price);
 ```
 
-#### Example query
+#### Example query (#example-query-2)
 
 Find products made of "cotton" with a price below $50.
 

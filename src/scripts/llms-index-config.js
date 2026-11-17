@@ -406,6 +406,8 @@ module.exports = {
     'auth/migrate/from-auth-v0.1',
     'changelog.md',
     'guides/GUIDE_TEMPLATE.md',
+    // Unlisted TanStack guides, referenced from TanStack's agent skills.
+    'tanstack/',
   ],
 
   // Reclassify specific files into a different subsection.
@@ -483,6 +485,11 @@ module.exports = {
       title: 'Glossary',
       url: 'https://neon.com/docs/reference/glossary.md',
       sourcePath: 'reference/glossary.md',
+    },
+    {
+      title: 'Sitemap',
+      url: 'https://neon.com/docs/sitemap.md',
+      description: 'Every docs page as Markdown links, grouped by the docs navigation',
     },
     {
       title: 'Blog',

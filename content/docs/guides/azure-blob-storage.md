@@ -17,7 +17,7 @@ updatedOn: '2026-10-28T11:11:18.780Z'
 [Azure Blob Storage](https://azure.microsoft.com/en-us/services/storage/blobs/) is Microsoft's object storage solution for the cloud. It's optimized for storing massive amounts of unstructured data, such as text or binary data, including images, documents, streaming media, and archive data.
 
 <Callout title="Neon now offers native storage">
-Neon Object Storage is S3-compatible object storage built into the Neon backend. Object storage branches with your database: each branch gets its own isolated namespace, so you can test file uploads in preview branches without touching production. No separate cloud account needed. Use any S3-compatible SDK with your existing Neon credential.
+Neon Object Storage is S3-compatible object storage built into your Neon project. Files branch with your database, so you can test uploads in a preview branch without touching production files. No separate cloud account needed. Point an S3 SDK at your branch endpoint with your Neon credential.
 
 For more information, see [Neon Object Storage](/docs/storage/overview).
 </Callout>
@@ -229,7 +229,7 @@ We'll use [Flask](https://flask.palletsprojects.com/en/stable/), [`azure-storage
 First, install the necessary dependencies:
 
 ```bash
-pip install Flask azure-storage-blob psycopg2-binary python-dotenv python-dateutil
+pip install Flask azure-storage-blob psycopg2-binary python-dotenv
 ```
 
 Create a `.env` file:
@@ -377,7 +377,7 @@ if __name__ == "__main__":
 3.  **Upload endpoints:**
     - **`/generate-upload-sas`:** Creates a unique `blobName`, gets the base `fileUrl`, and generates a SAS token using `generate_blob_sas` with write permissions and a short expiry. Returns the full `sasUrl`, `blobName`, and base `fileUrl`.
     - **`/save-metadata`:** Called by the client _after_ successful upload. Saves the `blobName`, base `fileUrl`, and `userId` into the `azure_files` table using `psycopg2`.
-4.  In production, you should use a global PostgreSQL connection instead of creating a new one for each request. This is important for performance and resource management.
+4.  In production, you should use a global Postgres connection instead of creating a new one for each request. This is important for performance and resource management.
 
 </TabItem>
 

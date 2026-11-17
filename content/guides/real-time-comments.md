@@ -2,12 +2,18 @@
 author: rishi-raj-jain
 enableTableOfContents: true
 createdAt: '2025-01-07T00:00:00.000Z'
-updatedOn: '2026-09-24T17:56:34.189Z'
+updatedOn: '2026-11-07T02:02:14.459Z'
 title: Building real-time comments with serverless Postgres
 subtitle: Build real-time comments in a Next.js application with Ably LiveSync and Postgres.
 ---
 
 A serverless Postgres database can back a real-time application when you pair it with a publish-subscribe service. In this guide, you'll combine Ably LiveSync with Lakebase Postgres on Neon to build a comment system with optimistic updates in a Next.js application.
+
+<Admonition type="tip" title="Neon now has realtime built in">
+
+[Neon Realtime](/docs/realtime/overview) turns any SQL query into a live query that stays up to date as your data changes. It runs directly from Lakebase Postgres, with no second realtime system to run, and it works with scale to zero and branching.
+
+</Admonition>
 
 ## Prerequisites
 

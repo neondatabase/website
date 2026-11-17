@@ -32,6 +32,7 @@ import IncludeBlock from 'components/pages/doc/include-block';
 import InfoBlock from 'components/pages/doc/info-block';
 import LinkPreview from 'components/pages/doc/link-preview';
 import McpSetupConfigurator from 'components/pages/doc/mcp-setup-configurator';
+import PromptBlock from 'components/pages/doc/prompt-block';
 import Steps from 'components/pages/doc/steps';
 import StickyTable from 'components/pages/doc/sticky-table';
 import Tabs from 'components/pages/doc/tabs';
@@ -71,6 +72,7 @@ import StatBlock from 'components/shared/stat-block';
 import SubprocessorsForm from 'components/shared/subprocessors-form';
 import getCodeProps from 'lib/rehype-code-props';
 import openDetails from 'lib/rehype-open-details';
+import rehypeTaskListLabels from 'lib/rehype-task-list-labels';
 import { cn } from 'utils/cn';
 
 import sharedMdxComponents from '../../../../content/docs/shared-content';
@@ -250,6 +252,7 @@ const getComponents = (withoutAnchorHeading, isReleaseNote, isPostgres, isTempla
   InlineSvg,
   MegaLink,
   CopyPrompt,
+  PromptBlock,
   AgentPrompt,
   ImageWithCommand,
   McpSetupConfigurator,
@@ -289,7 +292,9 @@ const Content = ({
               // Adds support for GitHub Flavored Markdown
               remarkGfm,
             ],
-            rehypePlugins: expandDetails ? [getCodeProps, openDetails] : [getCodeProps],
+            rehypePlugins: expandDetails
+              ? [getCodeProps, rehypeTaskListLabels, openDetails]
+              : [getCodeProps, rehypeTaskListLabels],
           },
           blockJS: false,
           blockDangerousJS: true,

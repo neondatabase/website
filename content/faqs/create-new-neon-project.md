@@ -3,7 +3,7 @@ title: 'How do I create a new project in Neon?'
 subtitle: 'Create one from the Console or the Neon CLI. Each project gets its own Postgres database, branches, and computes.'
 enableTableOfContents: true
 createdAt: '2026-05-18T00:00:00.000Z'
-updatedOn: '2026-11-02T19:00:00.000Z'
+updatedOn: '2026-11-14T19:48:40.621Z'
 isDraft: false
 redirectFrom: []
 previousLink:
@@ -71,7 +71,7 @@ The most common cause is hitting your plan's project limit:
 
 If you're at the limit:
 
-- Delete unused projects in the Console under **Settings** > **Delete**. You can recover a deleted project within 7 days through the [API or CLI](/docs/manage/projects#recover-a-deleted-project).
+- Delete unused projects in the Console under **Settings** > **Delete**. You can [recover a deleted project](/docs/manage/projects#recover-a-deleted-project) within 7 days from the Console, CLI, or API.
 - Or upgrade to the Scale plan for the higher limit.
 
 If you're under the limit, check [neonstatus.com](https://neonstatus.com) for an incident in your region, then retry or pick a different region. If the error message still isn't clear, ask in the [Neon Discord](https://neon.com/discord) and include the request ID from the error if there is one. Scale plan users can also [open a support ticket](/docs/introduction/support#support-tickets).

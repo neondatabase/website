@@ -155,7 +155,7 @@ To create an organization API key via the API, you need to use your personal API
 curl --request POST \
      --url 'https://console.neon.tech/api/v2/organizations/{org_id}/api_keys' \
      --header 'Content-Type: application/json' \
-     --header 'Authorization: Bearer $PERSONAL_API_KEY' \
+     --header "Authorization: Bearer $PERSONAL_API_KEY" \
      --data '{"key_name": "orgkey"}'
 ```
 
@@ -222,7 +222,7 @@ Organization administrators can create an API key for any organization-owned pro
 curl --request POST \
      --url 'https://console.neon.tech/api/v2/organizations/{org_id}/api_keys' \
      --header 'Content-Type: application/json' \
-     --header 'Authorization: Bearer $PERSONAL_API_KEY' \
+     --header "Authorization: Bearer $PERSONAL_API_KEY" \
      --data '{"key_name":"only-this-project", "project_id": "some-project-123"}'
 ```
 

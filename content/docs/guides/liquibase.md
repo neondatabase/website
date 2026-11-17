@@ -244,10 +244,10 @@ liquibase update
 If the command was successful, you’ll see output similar to the following:
 
 ```bash
-Starting Liquibase at 07:33:53 (version 4.24.0 #14062 built at 2023-09-28 12:18+0000)
-Liquibase Version: 4.24.0
-Liquibase Open Source 4.24.0 by Liquibase
-Running Changeset: dbchangelog.xml::myIDNumber1234::AlexL
+Starting Liquibase at 07:33:53 (version 4.33.0 #8744 built at 2025-07-08 20:43+0000)
+Liquibase Version: 4.33.0
+Liquibase Open Source 4.33.0 by Liquibase
+Running Changeset: dbchangelog.xml::myIDNumber1234::alex
 
 UPDATE SUMMARY
 Run:                          1
@@ -256,7 +256,7 @@ Filtered out:                 0
 -------------------------------
 Total change sets:            1
 
-Liquibase: Update has been successful. Rows affected: 1
+Liquibase: Update has been successful. Rows affected: 0
 Liquibase command 'update' was executed successfully.
 ```
 
@@ -285,10 +285,10 @@ liquibase rollbackCount 1
 If the command was successful, you’ll see output similar to the following:
 
 ```bash
-Starting Liquibase at 07:36:22 (version 4.24.0 #14062 built at 2023-09-28 12:18+0000)
-Liquibase Version: 4.24.0
-Liquibase Open Source 4.24.0 by Liquibase
-Rolling Back Changeset: dbchangelog.xml::myIDNumber1234::AlexL
+Starting Liquibase at 07:36:22 (version 4.33.0 #8744 built at 2025-07-08 20:43+0000)
+Liquibase Version: 4.33.0
+Liquibase Open Source 4.33.0 by Liquibase
+Rolling Back Changeset: dbchangelog.xml::myIDNumber1234::alex
 Liquibase command 'rollbackCount' was executed successfully.
 ```
 

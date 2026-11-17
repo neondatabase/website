@@ -129,10 +129,10 @@ export const { handlers, auth, signIn, signOut } = NextAuth(() => {
 
 This file sets up Auth.js with the Lakebase Postgres adapter (`@auth/neon-adapter`) and configures the Email provider for magic link authentication.
 
-Additionally, `Auth.js` also requires setting up an `AUTH_SECRET` environment variable, which is used to encrypt cookies and magic tokens. You can use the `Auth.js` CLI to generate one:
+Additionally, `Auth.js` also requires setting up an `AUTH_SECRET` environment variable, which is used to encrypt cookies and magic tokens. Generate one with OpenSSL:
 
 ```bash
-npx auth secret
+openssl rand -base64 32
 ```
 
 Add the generated secret to your `.env` file:
@@ -154,9 +154,9 @@ import { handlers } from '@/auth';
 export const { GET, POST } = handlers;
 ```
 
-This route file imports the authentication handlers from the `auth.ts` file that handle all auth-related requests &#8212; sign-in, sign-out, and redirect after authentication.
+This route file imports the authentication handlers from the `auth.ts` file that handle all auth-related requests, including sign-in, sign-out, and the redirect after authentication.
 
-The `auth` object exported from `./auth.ts` is the universal method we can use to interact with the authentication state in the application. For example, we add a message above the main app layout that indicates the current user's name and a sign-out button at the bottom.
+The `auth` object exported from `./auth.ts` is the universal method we can use to interact with the authentication state in the application. For example, the home page shows the current user's name and a sign-out link.
 
 ## Implementing the application
 
@@ -302,6 +302,8 @@ export default function TodoList({ initialTodos }: { initialTodos: Todo[] }) {
 Replace the contents of `app/page.tsx` with:
 
 ```tsx
+import { Suspense } from 'react';
+import { connection } from 'next/server';
 import { auth } from '@/auth';
 import TodoList from '@/app/TodoList';
 import { Pool } from '@neondatabase/serverless';
@@ -319,12 +321,24 @@ type Todo = {
   completed: boolean;
 };
 
-export default async function Home() {
-  const session = await auth();
-
+export default function Home() {
   return (
     <div className="flex min-h-screen flex-col items-center justify-center p-4">
       <div className="w-full max-w-md text-center">
+        <Suspense fallback={<p>Loading...</p>}>
+          <HomeContent />
+        </Suspense>
+      </div>
+    </div>
+  );
+}
+
+async function HomeContent() {
+  await connection();
+  const session = await auth();
+
+  return (
+    <>
         {!session ? (
           <>
             <h1 className="mb-4 text-2xl">Welcome to the Todo App</h1>
@@ -342,8 +356,7 @@ export default async function Home() {
             </a>
           </>
         )}
-      </div>
-    </div>
+    </>
   );
 }
 ```
@@ -359,7 +372,7 @@ import { Pool } from '@neondatabase/serverless';
 
 export async function POST(req: Request) {
   const session = await auth();
-  if (!session) {
+  if (!session?.user?.id) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
   }
 
@@ -386,21 +399,22 @@ Create another file `app/api/todos/[id]/route.ts`:
 
 ```typescript
 import { NextResponse } from 'next/server';
-import { auth } from '../../auth/[...nextauth]/route';
+import { auth } from '@/auth';
 import { Pool } from '@neondatabase/serverless';
 
-export async function PATCH(req: Request, { params }: { params: { id: string } }) {
+export async function PATCH(req: Request, { params }: { params: Promise<{ id: string }> }) {
   const session = await auth();
-  if (!session) {
+  if (!session?.user?.id) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
   }
 
+  const { id } = await params;
   const pool = new Pool({ connectionString: process.env.DATABASE_URL });
 
   try {
     const { rows } = await pool.query(
       'UPDATE todos SET completed = NOT completed WHERE id = $1 AND user_id = $2 RETURNING *',
-      [params.id, session.user.id]
+      [id, session.user.id]
     );
     if (rows.length === 0) {
       return NextResponse.json({ error: 'Todo not found' }, { status: 404 });

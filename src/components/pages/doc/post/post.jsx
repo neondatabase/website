@@ -79,7 +79,7 @@ const Post = ({
   gitHubPath,
   markdownPath,
   tableOfContents,
-  author,
+  authors = [],
   aboveContent = null,
   titleLeading = null,
   isFaq = false,
@@ -117,12 +117,16 @@ const Post = ({
   const actionsDivider = (
     <span aria-hidden="true" className="h-4 w-px shrink-0 bg-gray-new-85 dark:bg-gray-new-20" />
   );
+  // A page with its own prompt (a <PromptBlock>) already gives the reader a prompt to copy, so
+  // skip the generic Set up agent button rather than offer two different prompts.
+  // content is an empty object on the changelog index, so check the type first.
+  const showAgentSetup = !(typeof content === 'string' && content.includes('<PromptBlock'));
   const pageActionsRow = (
     <div className="mt-3.5 flex flex-wrap items-center gap-3.5">
       {!hideCopyPage && (
         <>
           <DropdownMenu variant="inline" gitHubPath={gitHubPath} markdownPath={docMarkdownPath} />
-          {actionsDivider}
+          {(docMarkdownPath || showAgentSetup) && actionsDivider}
         </>
       )}
       {docMarkdownPath && (
@@ -136,10 +140,10 @@ const Post = ({
             <MarkdownViewIcon />
             View as Markdown
           </a>
-          {actionsDivider}
+          {showAgentSetup && actionsDivider}
         </>
       )}
-      <AgentSetupButton agentPrompt={agentPrompt} />
+      {showAgentSetup && <AgentSetupButton agentPrompt={agentPrompt} />}
     </div>
   );
 
@@ -269,7 +273,7 @@ const Post = ({
           enableTableOfContents={enableTableOfContents}
           tableOfContents={tableOfContents}
           gitHubPath={gitHubPath}
-          author={author}
+          authors={authors}
         />
       )}
       {modal && <Modal {...modal} />}
@@ -312,17 +316,19 @@ Post.propTypes = {
   gitHubPath: PropTypes.string.isRequired,
   markdownPath: PropTypes.string,
   tableOfContents: PropTypes.arrayOf(PropTypes.shape({})),
-  author: PropTypes.shape({
-    slug: PropTypes.string,
-    name: PropTypes.string.isRequired,
-    position: PropTypes.string,
-    bio: PropTypes.string,
-    link: PropTypes.shape({
-      url: PropTypes.string,
-      title: PropTypes.string,
-    }),
-    photo: PropTypes.string,
-  }),
+  authors: PropTypes.arrayOf(
+    PropTypes.shape({
+      slug: PropTypes.string,
+      name: PropTypes.string.isRequired,
+      position: PropTypes.string,
+      bio: PropTypes.string,
+      link: PropTypes.shape({
+        url: PropTypes.string,
+        title: PropTypes.string,
+      }),
+      photo: PropTypes.string,
+    })
+  ),
   aboveContent: PropTypes.node,
   titleLeading: PropTypes.node,
   isFaq: PropTypes.bool,

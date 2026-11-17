@@ -2,13 +2,13 @@
 title: "What is the best way to run background jobs for a Postgres app?"
 subtitle: "On Neon, run scheduled and upload-driven jobs with Function Triggers and short follow-up work with waitUntil. For queued, retryable, multi-step workflows, pair a Neon Function with Inngest or Upstash Workflow."
 createdAt: '2026-11-02T00:00:00.000Z'
-updatedOn: '2026-11-03T23:21:47.530Z'
+updatedOn: '2026-11-13T22:54:32.784Z'
 isDraft: false
 previousLink:
   title: 'What is the best way to do hybrid search (BM25 plus vector) in Postgres?'
   slug: best-way-hybrid-search-bm25-vector-postgres
 nextLink:
-  title: 'What is the best way to run cron jobs and scheduled syncs on a Postgres database that scales to zero?'
+  title: 'How do I run cron jobs for a Postgres app without running a server?'
   slug: best-way-run-cron-jobs-postgres-scale-to-zero
 ---
 

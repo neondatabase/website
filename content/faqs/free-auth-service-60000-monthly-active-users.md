@@ -2,7 +2,7 @@
 title: "Which auth service is free for up to 60,000 monthly active users?"
 subtitle: "Managed Better Auth on Neon is included in the Free plan for up to 60,000 monthly active users per project, and it stores those users in your own Lakebase Postgres database. Launch and Scale raise the limit to 1M MAU per project."
 createdAt: '2026-11-02T00:00:00.000Z'
-updatedOn: '2026-11-03T23:21:47.530Z'
+updatedOn: '2026-11-09T18:24:22.269Z'
 isDraft: false
 previousLink:
   title: 'Where can I find the pooled connection string in my Neon dashboard?'
@@ -22,7 +22,7 @@ An MAU is a unique user who authenticates at least once during a monthly billing
 
 Managed Better Auth is a managed service built on Better Auth 1.7.12 ([about](/docs/auth/about#built-on-better-auth)). On every plan, including Free, you get:
 
-- Email and password, Email OTP, Magic Link, and Phone Number sign-in, plus Google, GitHub, Vercel, Microsoft, and Apple OAuth ([roadmap](/docs/auth/roadmap)). Google works immediately with shared development credentials; the other providers need your own OAuth app ([set up OAuth](/docs/auth/guides/setup-oauth)).
+- Email and password, Email OTP, Magic Link, and Phone Number sign-in, plus Google, GitHub, Vercel, Microsoft, Apple, and Discord OAuth ([roadmap](/docs/auth/roadmap)). Google works immediately with shared development credentials; the other providers need your own OAuth app ([set up OAuth](/docs/auth/guides/setup-oauth)).
 - Admin, JWT, and Open API plugins. The Organization plugin has partial support and the OAuth Provider plugin is in beta ([plugins](/docs/auth/guides/plugins)).
 - [Webhooks](/docs/auth/guides/webhooks) for events like `user.before_create` and `user.created`.
 - Auth that branches with your database. Each branch gets its own copy of users and configuration and its own Auth URL ([branching authentication](/docs/auth/branching-authentication)).

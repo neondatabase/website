@@ -15,5 +15,5 @@ if (!projectId) {
 }
 
 const neon = neonClient(apiKey);
-await neon.projects.delete(projectId);
+await neon.projects.delete({ projectId });
 console.log(`Deleted project ${projectId}`);

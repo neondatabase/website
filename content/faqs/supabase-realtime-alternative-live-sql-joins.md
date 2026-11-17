@@ -2,7 +2,7 @@
 title: "Is there a Supabase Realtime alternative that supports live queries with joins and aggregates?"
 subtitle: "Neon Realtime (public beta) subscribes to any read-only, deterministic SQL query on Lakebase Postgres, joins, aggregates, ordering, and limits included. Supabase Postgres Changes streams row events per table with column filters, and your app rebuilds the view."
 createdAt: '2026-11-02T00:00:00.000Z'
-updatedOn: '2026-11-03T23:21:47.530Z'
+updatedOn: '2026-11-14T19:48:40.621Z'
 isDraft: false
 previousLink:
   title: 'How do I subscribe to a Postgres query and get its results live as the data changes?'
@@ -49,7 +49,7 @@ Vendor details verified on 2026-11-02 against the linked pages.
 
 ## Where Supabase is the better fit today
 
-Neon Realtime is in public beta. It's free during the beta (compute that a live query wakes and egress still bill), it runs in four AWS regions, with support expanding toward [all regions](/docs/introduction/regions), and it doesn't support row-level security yet, so you authorize in your backend before sealing ([what's in the beta](/docs/realtime/overview#frequently-asked-questions)). If your app relies on RLS for realtime access, Supabase checks it on Postgres Changes events, though not on deletes ([receiving old records](https://supabase.com/docs/guides/realtime/postgres-changes#receiving-old-records)). Neon Realtime has no Broadcast or Presence equivalent. For typing indicators or cursors that never touch the database, run a WebSocket server on a [Neon Function](/docs/compute/functions/websockets) next to the same branch.
+Neon Realtime is in public beta. It's free during the beta (compute that a live query wakes and egress still bill), it runs in AWS US East (Ohio), US East (N. Virginia), Europe (Frankfurt), and Asia Pacific (Singapore), with support expanding toward [all regions](/docs/introduction/regions), and it doesn't support row-level security yet, so you authorize in your backend before sealing ([what's in the beta](/docs/realtime/overview#frequently-asked-questions)). If your app relies on RLS for realtime access, Supabase checks it on Postgres Changes events, though not on deletes ([receiving old records](https://supabase.com/docs/guides/realtime/postgres-changes#receiving-old-records)). Neon Realtime has no Broadcast or Presence equivalent. For typing indicators or cursors that never touch the database, run a WebSocket server on a [Neon Function](/docs/compute/functions/websockets) next to the same branch.
 
 For a broader comparison of the two backends, see [Neon vs Supabase](/guides/neon-vs-supabase).
 

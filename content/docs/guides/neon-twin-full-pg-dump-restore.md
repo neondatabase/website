@@ -1,5 +1,5 @@
 ---
-title: pg_dump / pg_restore — Full Twin
+title: Full Twin with pg_dump and pg_restore
 subtitle: Create a full Twin of your production database
 summary: >-
   Full Neon Twin workflow that copies a complete production database into a Neon
@@ -52,7 +52,7 @@ on:
 env:
   PROD_DATABASE_URL: ${{ secrets.PROD_DATABASE_URL }} # Production or primary database
   DEV_DATABASE_URL: ${{ secrets.DEV_DATABASE_URL }} # Development database
-  PG_VERSION: '17'
+  PG_VERSION: '18'
 
 jobs:
   dump-and-restore:
@@ -86,13 +86,13 @@ Below is an explanation of each part of the GitHub Action.
 
 ### env
 
-- `PROD_DATABASE_URL`: The PostgreSQL connection string for your production database.
-- `DEV_DATABASE_URL`: The PostgreSQL connection string for your Neon database.
-- `PG_VERSION`: The version of PostgreSQL to install in the Action environment.
+- `PROD_DATABASE_URL`: The Postgres connection string for your production database.
+- `DEV_DATABASE_URL`: The Postgres connection string for your Neon database.
+- `PG_VERSION`: The Postgres major version to install in the Action environment. Use the same major version as your production database, or a newer one. `pg_dump` refuses to dump a server with a newer major version than its own.
 
 ### steps
 
-- `Install PostgreSQL`: Installs the specified version of PostgreSQL into the Action environment from the [Apt](https://wiki.debian.org/Apt) repository.
+- `Install PostgreSQL`: Installs the specified Postgres version into the Action environment from the [Apt](https://wiki.debian.org/Apt) repository.
 - `Set PostgreSQL binary path`: Creates `$POSTGRES` variable for use in subsequent steps.
 - `Dump and restore data`: Uses `pg_dump` to create a `dump-file.bak` and `pg_restore` to read the `dump-file.bak` and apply it to the `DEV_DATABASE_URL`.
 
@@ -102,7 +102,7 @@ The table below provides an explanation of each flag used by `pg_dump`.
 
 | Flag | Meaning                                                         |
 | ---- | --------------------------------------------------------------- |
-| -FC  | Dumps the database in a custom format.                          |
+| -Fc  | Dumps the database in a custom format.                          |
 | -f   | Specifies the output file where the schema dump will be stored. |
 
 ### pg_restore flags
@@ -154,7 +154,7 @@ on:
 
 ### Add Concurrency and Conditions
 
-To prevent conflicts between scheduled runs and runs triggered by a Pull Request, set `cancel-in-progress` to `true` under `concurrency`. Additionally, add an `if` statement to ensure the job only executes when specific conditions are met.
+To prevent conflicts between scheduled runs and runs triggered by a Pull Request, set `cancel-in-progress` to `true` under `concurrency`. Add an `if` statement so the job runs only when specific conditions are met.
 
 ```diff
 

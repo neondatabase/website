@@ -90,6 +90,7 @@ To configure Neon Private Networking, perform the following steps:
          - `com.amazonaws.vpce.us-east-2.vpce-svc-0d421498ff01becac`
          - `com.amazonaws.vpce.us-east-2.vpce-svc-0fcb5fccfc8573aa3`
        - **eu-central-1**: Create entries, one for each of the following:
+         - `com.amazonaws.vpce.eu-central-1.vpce-svc-0165f3a480927c9a0`
          - `com.amazonaws.vpce.eu-central-1.vpce-svc-0260f9dcc9bf59e3e`
          - `com.amazonaws.vpce.eu-central-1.vpce-svc-04bac3120b20929cd`
          - `com.amazonaws.vpce.eu-central-1.vpce-svc-05554c35009a5eccb`
@@ -97,8 +98,10 @@ To configure Neon Private Networking, perform the following steps:
          - `com.amazonaws.vpce.eu-central-1.vpce-svc-05a252e6836f01cfd`
          - `com.amazonaws.vpce.eu-central-1.vpce-svc-05a5b03b56954593a`
          - `com.amazonaws.vpce.eu-central-1.vpce-svc-07617c7fc17794cc7`
+         - `com.amazonaws.vpce.eu-central-1.vpce-svc-0efb85c929a6ee91f`
          - `com.amazonaws.vpce.eu-central-1.vpce-svc-0fef417ecf84ed325`
        - **eu-west-2**: Create entries, one for each of the following:
+         - `com.amazonaws.vpce.eu-west-2.vpce-svc-028d190998ab34913`
          - `com.amazonaws.vpce.eu-west-2.vpce-svc-0375428488d22c05b`
          - `com.amazonaws.vpce.eu-west-2.vpce-svc-0c6fedbe99fced2cd`
        - **us-west-2**: Create entries, one for each of the following:
@@ -112,8 +115,10 @@ To configure Neon Private Networking, perform the following steps:
          - `com.amazonaws.vpce.ap-southeast-1.vpce-svc-01c64edf7fe936ac7`
          - `com.amazonaws.vpce.ap-southeast-1.vpce-svc-028cc7060eb23ff43`
          - `com.amazonaws.vpce.ap-southeast-1.vpce-svc-07c68d307f9f05687`
-       - **ap-southeast-2**:
+         - `com.amazonaws.vpce.ap-southeast-1.vpce-svc-0d858726de58b2185`
+       - **ap-southeast-2**: Create entries, one for each of the following:
          - `com.amazonaws.vpce.ap-southeast-2.vpce-svc-031161490f5647f32`
+         - `com.amazonaws.vpce.ap-southeast-2.vpce-svc-07d11c1bc6234e6e4`
        - **sa-east-1**: Create entries, one for each of the following:
          - `com.amazonaws.vpce.sa-east-1.vpce-svc-03cf6c871b7ae95e8`
          - `com.amazonaws.vpce.sa-east-1.vpce-svc-061204a851dbd1a47`
@@ -206,6 +211,10 @@ To configure Neon Private Networking, perform the following steps:
     At this point, it's still possible to connect to a database in your Neon project over the public internet using a database connection string.
 
     You can restrict public internet access to your Neon project via the Neon CLI or API.
+
+    <Admonition type="warning" title="Blocking public access doesn't protect every Neon service">
+    This step restricts Postgres connections only. It doesn't protect the Data API, Realtime, Managed Better Auth, Object Storage, the AI Gateway, or function URLs. Realtime, Managed Better Auth, and database connections from Neon Functions also stop working. See [Private Networking and other Neon services](#private-networking-and-other-neon-services).
+    </Admonition>
 
     <Tabs labels={["CLI", "API"]}>
 
@@ -332,9 +341,24 @@ The Neon API provides endpoints for managing VPC endpoints and project-level VPC
 - [Assign or update a VPC endpoint restriction](/docs/reference/api/projects/assign-project-vpc-endpoint)
 - [Delete a VPC endpoint restriction](/docs/reference/api/projects/delete-project-vpc-endpoint)
 
+## Private Networking and other Neon services
+
+When you [restrict public internet access](#restrict-public-internet-access), only connections that arrive through your VPC endpoint can reach Postgres. This restriction covers Postgres connections only. Before you block public access, check which Neon services your project uses. Blocking public access doesn't protect any other Neon service, so don't rely on it for their security. Some of them also stop working once public access is blocked.
+
+| Service                                                                                              | With public internet access blocked                                                                                                                   |
+| ---------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Postgres connections, including the [serverless driver](/docs/serverless/serverless-driver)          | Allowed only through your VPC endpoint                                                                                                                |
+| [Data API](/docs/data-api/get-started)                                                               | **Not protected.** Requests from the public internet are still served. The Data API isn't supported with Private Networking.                          |
+| [Realtime](/docs/realtime/overview)                                                                  | **Not protected, and stops working.** Subscriptions fail to connect.                                                                                  |
+| [Managed Better Auth](/docs/auth/about)                                                              | **Not protected, and stops working.** Sign-in and other auth requests fail.                                                                           |
+| [Neon Functions](/docs/compute/functions/overview)                                                   | **Not protected, and database connections fail.** Function URLs are still reachable, but a function can't connect to Postgres through `DATABASE_URL`. |
+| [Object Storage](/docs/storage/authentication) and the [AI Gateway](/docs/ai-gateway/authentication) | **Not protected.** Access is controlled by credentials only.                                                                                          |
+
+If you haven't blocked public internet access, these services connect over the public internet as usual.
+
 ## Private networking limits
 
-The Private Networking feature supports a maximum of **20 private networking configurations per AWS region**. Supported AWS regions are listed [above](#create-an-aws-vpc-endpoint).
+The Private Networking feature supports a maximum of **20 private networking configurations per AWS region**. Supported AWS regions are listed [above](#create-an-aws-vpc-endpoint). If you need more, you can request a limit increase. Scale plan users can [request a limit increase](/docs/introduction/support#request-a-limit-increase) from the console.
 
 ## Limitations
 

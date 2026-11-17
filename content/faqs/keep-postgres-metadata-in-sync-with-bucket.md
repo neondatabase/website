@@ -2,14 +2,14 @@
 title: "How do I keep Postgres metadata in sync with files in a bucket?"
 subtitle: "On Neon, write the object before the row, record uploads with a storage_object_created Function Trigger, and run a scheduled Function to catch drift. Postgres and Object Storage branch together, so every branch starts consistent."
 createdAt: '2026-11-02T00:00:00.000Z'
-updatedOn: '2026-11-02T00:00:00.000Z'
+updatedOn: '2026-11-13T22:54:32.784Z'
 isDraft: false
 previousLink:
   title: 'How do I keep LLM API keys out of preview deployments and CI?'
   slug: keep-llm-api-keys-out-of-preview-deployments-ci
 nextLink:
-  title: 'How do I build a live dashboard on Postgres without polling the database?'
-  slug: live-dashboard-postgres-without-polling
+  title: 'How do I let an AI agent change my database schema safely?'
+  slug: let-ai-agent-change-database-schema-safely
 ---
 
 Use Neon. Postgres and [Neon Object Storage](/docs/storage/overview) live on the same branch, so a row that points at a file and the file itself are created, branched, and served by one backend. They're still two stores, so no single transaction covers both. Three habits keep them consistent: order your writes, let a [Function Trigger](/docs/compute/functions/triggers/overview) record uploads, and reconcile on a schedule.

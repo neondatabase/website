@@ -36,14 +36,14 @@ seo:
 ![Post image](https://cdn.neonapi.io/public/images/pages/blog/full-text-search-cms-pgsearch/neon-full-text-search-1-1024x576-511e69b4.jpg)
 
 <Admonition type="important" title="Neon’s support for pg_search has been deprecated">
-As of March 19, 2026, `pg_search` is longer available for new Neon projects. For alternatives, see [The pg_search extension](https://neon.com/docs/extensions/pg_search).
+As of March 19, 2026, `pg_search` is longer available for new Neon projects. For alternatives, see [Lakebase Search](https://neon.com/docs/ai/lakebase-search).
 </Admonition>
 
 A CMS is a “must-have” for building a website. And your choices are many. If you want full-stack, you can go with WordPress or Webflow. If you want headless, you can go with Sanity or Contentful. Heck, with the aid of a GitHub Action, you can just [turn your Notion pages directly into a CMS](https://www.notion.com/templates/cms?srsltid=AfmBOoqknO2b0epM9mx_d8uhUGNerwexj-VVV-vUkLn7Gk63I85jRG4x).
 
 But sometimes these are overkill. If you really just need a place to store words, then that is literally what databases are designed for. All CMSes are DBs under the hood – why not just remove the middleman?
 
-That is what we’re going to do here, using Neon and the [pg_search](https://neon.com/docs/extensions/pg_search) extension. By adding `pg_search` into the mix, we can drastically improve our CMS experience by adding full-text search capabilities straightforwardly into our application. Let’s do it.
+That is what we’re going to do here, using Neon and the [pg_search](https://neon.com/docs/ai/lakebase-search) extension. By adding `pg_search` into the mix, we can drastically improve our CMS experience by adding full-text search capabilities straightforwardly into our application. Let’s do it.
 
 ## Setting up Neon as a CMS
 

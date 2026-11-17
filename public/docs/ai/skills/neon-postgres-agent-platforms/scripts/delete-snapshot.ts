@@ -15,5 +15,5 @@ if (!apiKey || !projectId || !snapshotId) {
 }
 
 const neon = neonClient(apiKey);
-await neon.snapshots.delete(projectId, snapshotId);
+await neon.snapshots.delete({ projectId, snapshotId });
 console.log(JSON.stringify({ ok: true, projectId, snapshotId }, null, 2));

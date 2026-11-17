@@ -11,7 +11,7 @@ summary: >-
 enableTableOfContents: true
 redirectFrom:
   - /docs/neon-auth/roadmap
-updatedOn: '2026-09-17T16:33:54.884Z'
+updatedOn: '2026-11-09T18:18:56.726Z'
 ---
 
 Managed Better Auth is in active development. This page shows what's currently supported and what we're working on next.
@@ -48,12 +48,12 @@ Architectures where frontend and backend are separate deployments (for example, 
 
 Managed Better Auth is built on [Better Auth](https://www.better-auth.com/). Not all Better Auth plugins are currently supported.
 
-### Supported
+### Supported (#supported-2)
 
 | Plugin                                                                             | Status       |
 | ---------------------------------------------------------------------------------- | ------------ |
 | [Email & password](https://www.better-auth.com/docs/authentication/email-password) | ✅ Supported |
-| Social OAuth (Google, GitHub, Vercel, Microsoft, Apple)                            | ✅ Supported |
+| Social OAuth (Google, GitHub, Vercel, Microsoft, Apple, Discord)                   | ✅ Supported |
 | [Email OTP](/docs/auth/guides/plugins/email-otp)                                   | ✅ Supported |
 | [Admin](/docs/auth/guides/plugins/admin)                                           | ✅ Supported |
 | [Organization](/docs/auth/guides/plugins/organization)                             | ⚠️ Partial   |
@@ -77,7 +77,7 @@ These capabilities are documented in Managed Better Auth guides but are not Bett
 
 Branch-aware auth (separate auth state per Neon branch) is supported; see [Branching authentication](/docs/auth/branching-authentication) and [Authentication flow](/docs/auth/authentication-flow).
 
-### On the roadmap
+### On the roadmap (#on-the-roadmap-2)
 
 | Plugin                                                        | Status          |
 | ------------------------------------------------------------- | --------------- |

@@ -434,8 +434,8 @@ export default defineConfig({
       name: "LLM Proxy Server",
       source: "./index.ts",
       env: {
-        UPSTASH_REDIS_REST_URL: process.env.UPSTASH_REDIS_REST_URL!,
-        UPSTASH_REDIS_REST_TOKEN: process.env.UPSTASH_REDIS_REST_TOKEN!,
+        UPSTASH_REDIS_REST_URL: { value: process.env.UPSTASH_REDIS_REST_URL, required: true },
+        UPSTASH_REDIS_REST_TOKEN: { value: process.env.UPSTASH_REDIS_REST_TOKEN, required: true },
       }
     },
   },

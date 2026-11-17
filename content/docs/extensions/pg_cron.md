@@ -38,7 +38,7 @@ The `project_id` and `endpoint_id` values can be obtained from the Neon Console 
 curl --request PATCH \
      --url https://console.neon.tech/api/v2/projects/<project_id>/endpoints/<endpoint_id> \
      --header 'accept: application/json' \
-     --header 'authorization: Bearer $NEON_API_KEY$' \
+     --header "authorization: Bearer $NEON_API_KEY" \
      --header 'content-type: application/json' \
      --data '
 {
@@ -59,7 +59,7 @@ After setting `cron.database_name`, you must restart your compute to apply the n
 curl --request POST \
      --url https://console.neon.tech/api/v2/projects/<project_id>/endpoints/<endpoint_id>/restart \
      --header 'accept: application/json' \
-     --header 'authorization: Bearer $NEON_API_KEY'
+     --header "authorization: Bearer $NEON_API_KEY"
 ```
 
 Or restart it with the Neon CLI:
@@ -112,7 +112,7 @@ Additionally, `pg_cron` supports:
 - Interval scheduling using `'[1-59] seconds'` (for example, `'5 seconds'`).
 - `'$'` to indicate the last day of the month.
 
-Remember that all schedules in `pg_cron` are interpreted in UTC. When scheduling jobs, ensure your cron expressions are set accordingly. You can use tools like [crontab.guru](http://crontab.guru/) and adjust for the UTC timezone.
+Remember that all schedules in `pg_cron` are interpreted in UTC. When scheduling jobs, ensure your cron expressions are set accordingly. You can use tools like [crontab.guru](https://crontab.guru/) and adjust for the UTC timezone.
 
 ## Schedule a job
 
@@ -289,6 +289,6 @@ You have successfully learned how to enable and use the `pg_cron` extension with
 ## Resources
 
 - [pg_cron GitHub Repository](https://github.com/citusdata/pg_cron)
-- [crontab.guru](http://crontab.guru/)
+- [crontab.guru](https://crontab.guru/)
 
 <NeedHelp/>

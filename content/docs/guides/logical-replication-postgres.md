@@ -39,7 +39,7 @@ Replication keeps compute active (no [scale to zero](/docs/introduction/scale-to
 
 ## Prepare your source Neon database
 
-This section describes how to prepare your source Neon database (the publisher) for replicating data to your destination Neon database (the subscriber).
+This section describes how to prepare your source Neon database (the publisher) for replicating data to your destination database (the subscriber).
 
 ### Enable logical replication in the source Neon project
 
@@ -73,10 +73,10 @@ It is recommended that you create a dedicated Postgres role for replicating data
 
 <TabItem>
 
-The following CLI command creates a role. To view the CLI documentation for this command, see [Neon CLI commands — roles](/docs/reference/api/branches/create-project-branch-role)
+The following CLI command creates a role. Replace `{project_id}` with your project ID. Without `--project-id`, the CLI uses the project from your current context, which might not be the one you want. For more options, see the [roles CLI reference](/docs/cli/roles#create).
 
 ```bash
-neon roles create --name replication_user
+neon roles create --name replication_user --project-id {project_id}
 ```
 
 </TabItem>
@@ -145,7 +145,7 @@ To create a publication for multiple tables, provide a comma-separated list of t
 CREATE PUBLICATION my_publication FOR TABLE users, departments;
 ```
 
-For syntax details, see [CREATE PUBLICATION](https://www.postgresql.org/docs/current/sql-createpublication.html), in the PostgreSQL documentation.
+For syntax details, see [CREATE PUBLICATION](https://www.postgresql.org/docs/current/sql-createpublication.html), in the Postgres documentation.
 
 ## Prepare your destination database
 
@@ -166,17 +166,17 @@ CREATE TABLE IF NOT EXISTS playing_with_neon(id SERIAL PRIMARY KEY, name TEXT NO
 After creating a publication on the source database, you need to create a subscription on the destination database.
 
 1. Use the [Neon SQL Editor](/docs/get-started/query-with-neon-sql-editor), `psql`, or another SQL client to connect to your destination database.
-2. Create the subscription using the using a `CREATE SUBSCRIPTION` statement.
+2. Create the subscription using a `CREATE SUBSCRIPTION` statement.
 
    ```sql
    CREATE SUBSCRIPTION my_subscription
-   CONNECTION 'postgresql://neondb_owner:<password>@ep-cool-darkness-123456.us-east-2.aws.neon.tech/neondb?sslmode=require&channel_binding=require'
+   CONNECTION 'postgresql://replication_user:<password>@ep-cool-darkness-123456.us-east-2.aws.neon.tech/neondb?sslmode=require&channel_binding=require'
    PUBLICATION my_publication;
    ```
 
-   - `subscription_name`: A name you chose for the subscription.
-   - `connection_string`: The connection string for the source Neon database where you defined the publication.
-   - `publication_name`: The name of the publication you created on the source Neon database.
+   - `my_subscription`: A name you chose for the subscription.
+   - `CONNECTION`: The connection string for the replication role on the source Neon database.
+   - `PUBLICATION`: The name of the publication you created on the source Neon database.
 
 3. Verify the subscription was created by running the following command:
 
@@ -204,7 +204,7 @@ Testing your logical replication setup ensures that data is being replicated cor
 
    count
    -------
-   30
+   20
    (1 row)
    ```
 

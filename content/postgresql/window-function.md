@@ -6,7 +6,7 @@ page_description: >-
   perform the calculation across the set of rows related to the current row.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-window-function/'
 ogImage: 'https://www.postgresqltutorial.com//postgresqltutorial/window-functions.png'
-updatedOn: '2026-06-19T17:44:03.964Z'
+updatedOn: '2026-10-09T15:55:57.334Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL WIDTH_BUCKET() Function
@@ -198,8 +198,6 @@ WINDOW w AS (PARTITION BY c1 ORDER BY c2);
 ## PostgreSQL window function List
 
 The following table lists all window functions provided by PostgreSQL. Note that some aggregate functions such as `AVG()`, `MIN()`, `MAX()`, `SUM()`, and `COUNT()` can be also used as window functions.
-
-##
 
 | Name                                                                        | Description                                                                                                                 |
 | --------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------- |

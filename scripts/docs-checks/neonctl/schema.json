@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "neonctlVersion": "9.1.0",
+  "neonctlVersion": "9.5.0",
   "binaries": [
     "neonctl",
     "neon"
@@ -910,7 +910,7 @@
         },
         "env": {
           "type": "string",
-          "describe": "Path to a .env file to load into the environment before evaluating neon.ts so Function env values resolve from it. Existing env vars are not overridden. Function env values that read process.env must be set in this file or the environment. Used when this checkout creates a branch from neon.ts; ignored for an existing branch."
+          "describe": "Path to a .env file to load into the environment before evaluating neon.ts so Function env values resolve from it. Existing env vars are not overridden. Required Function env (declared required: true, or required: \"default-branch\" when deploying the default branch) and values that read process.env must be set in this file or the environment. Used when this checkout creates a branch from neon.ts; ignored for an existing branch."
         },
         "env-pull": {
           "type": "boolean",
@@ -1269,7 +1269,7 @@
             },
             "env": {
               "type": "string",
-              "describe": "Path to a .env file to load into the environment before evaluating neon.ts so Function env values resolve from it. Existing env vars are not overridden. Function env values that read process.env must be set in this file or the environment."
+              "describe": "Path to a .env file to load into the environment before evaluating neon.ts so Function env values resolve from it. Existing env vars are not overridden. Required Function env (declared required: true, or required: \"default-branch\" when deploying the default branch) and values that read process.env must be set in this file or the environment."
             },
             "env-pull": {
               "type": "boolean",
@@ -1328,7 +1328,7 @@
             },
             "env": {
               "type": "string",
-              "describe": "Path to a .env file to load into the environment before evaluating neon.ts so Function env values resolve from it. Existing env vars are not overridden. Function env values that read process.env must be set in this file or the environment."
+              "describe": "Path to a .env file to load into the environment before evaluating neon.ts so Function env values resolve from it. Existing env vars are not overridden. Required Function env (declared required: true, or required: \"default-branch\" when deploying the default branch) and values that read process.env must be set in this file or the environment."
             }
           },
           "commands": {},
@@ -1801,7 +1801,7 @@
         },
         "env": {
           "type": "string",
-          "describe": "Path to a .env file to load into the environment before evaluating neon.ts so Function env values resolve from it. Existing env vars are not overridden. Function env values that read process.env must be set in this file or the environment."
+          "describe": "Path to a .env file to load into the environment before evaluating neon.ts so Function env values resolve from it. Existing env vars are not overridden. Required Function env (declared required: true, or required: \"default-branch\" when deploying the default branch) and values that read process.env must be set in this file or the environment."
         },
         "env-pull": {
           "type": "boolean",
@@ -1834,7 +1834,7 @@
       "options": {
         "env": {
           "type": "string",
-          "describe": "Path to a .env file to load into the environment before evaluating neon.ts so Function env values resolve from it. Existing env vars are not overridden. Function env values that read process.env must be set in this file or the environment."
+          "describe": "Path to a .env file to load into the environment before evaluating neon.ts so Function env values resolve from it. Existing env vars are not overridden. Required Function env (declared required: true, or required: \"default-branch\" when deploying the default branch) and values that read process.env must be set in this file or the environment."
         },
         "port": {
           "type": "number",
@@ -2403,6 +2403,24 @@
       },
       "describe": "Sync the checked-out Neon branch to your git branch (Preview)",
       "usage": "$0 git <sub-command> [options]"
+    },
+    "incidents": {
+      "aliases": [],
+      "positionals": [],
+      "options": {},
+      "commands": {},
+      "describe": "Show open Neon incidents and maintenance",
+      "usage": "$0 incidents",
+      "examples": [
+        {
+          "command": "$0 incidents",
+          "description": "Show open Neon incidents and maintenance"
+        },
+        {
+          "command": "$0 incidents -o json",
+          "description": "Print the full report as JSON"
+        }
+      ]
     },
     "init": {
       "aliases": [],
@@ -3891,11 +3909,11 @@
                 },
                 "oauth-client-id": {
                   "type": "string",
-                  "describe": "OAuth client ID from your provider app. For apple, the Services ID. Omit to use Neon's shared OAuth app, where one exists; microsoft and apple always need your own credentials."
+                  "describe": "OAuth client ID from your provider app. For apple, the Services ID. Omit to use Neon's shared OAuth app, where one exists; microsoft, apple and discord always need your own credentials."
                 },
                 "oauth-client-secret": {
                   "type": "string",
-                  "describe": "OAuth client secret from your provider app. Omit to use Neon's shared OAuth app, where one exists; microsoft and apple always need your own credentials."
+                  "describe": "OAuth client secret from your provider app. Omit to use Neon's shared OAuth app, where one exists; microsoft, apple and discord always need your own credentials."
                 },
                 "oauth-client-secret-file": {
                   "type": "string",
@@ -3903,14 +3921,15 @@
                 },
                 "provider-id": {
                   "type": "string",
-                  "describe": "OAuth provider ID. Supported values: google, github, vercel, microsoft, apple",
+                  "describe": "OAuth provider ID. Supported values: google, github, vercel, microsoft, apple, discord",
                   "required": true,
                   "choices": [
                     "google",
                     "github",
                     "vercel",
                     "microsoft",
-                    "apple"
+                    "apple",
+                    "discord"
                   ]
                 }
               },
@@ -3924,14 +3943,15 @@
               "options": {
                 "provider-id": {
                   "type": "string",
-                  "describe": "OAuth provider ID. Supported values: google, github, vercel, microsoft, apple",
+                  "describe": "OAuth provider ID. Supported values: google, github, vercel, microsoft, apple, discord",
                   "required": true,
                   "choices": [
                     "google",
                     "github",
                     "vercel",
                     "microsoft",
-                    "apple"
+                    "apple",
+                    "discord"
                   ]
                 }
               },
@@ -3965,11 +3985,11 @@
                 },
                 "oauth-client-id": {
                   "type": "string",
-                  "describe": "OAuth client ID from your provider app. For apple, the Services ID. Omit to use Neon's shared OAuth app, where one exists; microsoft and apple always need your own credentials."
+                  "describe": "OAuth client ID from your provider app. For apple, the Services ID. Omit to use Neon's shared OAuth app, where one exists; microsoft, apple and discord always need your own credentials."
                 },
                 "oauth-client-secret": {
                   "type": "string",
-                  "describe": "OAuth client secret from your provider app. Omit to use Neon's shared OAuth app, where one exists; microsoft and apple always need your own credentials."
+                  "describe": "OAuth client secret from your provider app. Omit to use Neon's shared OAuth app, where one exists; microsoft, apple and discord always need your own credentials."
                 },
                 "oauth-client-secret-file": {
                   "type": "string",
@@ -3977,14 +3997,15 @@
                 },
                 "provider-id": {
                   "type": "string",
-                  "describe": "OAuth provider ID. Supported values: google, github, vercel, microsoft, apple",
+                  "describe": "OAuth provider ID. Supported values: google, github, vercel, microsoft, apple, discord",
                   "required": true,
                   "choices": [
                     "google",
                     "github",
                     "vercel",
                     "microsoft",
-                    "apple"
+                    "apple",
+                    "discord"
                   ]
                 }
               },
@@ -3992,7 +4013,7 @@
               "describe": "Update an OAuth provider"
             }
           },
-          "describe": "Manage social login providers (google, github, vercel, microsoft, apple)",
+          "describe": "Manage social login providers (google, github, vercel, microsoft, apple, discord)",
           "usage": "$0 neon-auth oauth-provider <sub-command> [options]"
         },
         "plugins": {
@@ -5334,23 +5355,19 @@
             }
           ],
           "options": {
-            "branch": {
-              "type": "string",
-              "describe": "Branch ID or name"
-            },
             "changes": {
               "type": "boolean",
               "describe": "Show raw rows and changes events",
               "default": false
             },
-            "project-id": {
-              "type": "string",
-              "describe": "Project ID"
+            "debug": {
+              "type": "boolean",
+              "describe": "Show full database error details, including SQLSTATE and PostgreSQL's message. Details can name schema objects and row values.",
+              "default": false
             }
           },
           "commands": {},
           "describe": "Subscribe to a live SQL query with Neon Realtime",
-          "usage": "$0 realtime subscribe \"<query>\" [options]",
           "examples": [
             {
               "command": "$0 realtime subscribe \"SELECT * FROM items\"",
@@ -5359,8 +5376,13 @@
             {
               "command": "$0 realtime subscribe --changes \"SELECT * FROM items\"",
               "description": "Print raw rows and changes events"
+            },
+            {
+              "command": "$0 realtime subscribe --debug \"SELECT * FROM items\"",
+              "description": "Show why a query is rejected or fails"
             }
-          ]
+          ],
+          "usage": "$0 realtime subscribe \"<query>\" [options]"
         }
       },
       "describe": "Manage Neon Realtime for a branch",
@@ -5958,7 +5980,7 @@
           "aliases": [],
           "positionals": [
             {
-              "name": "id",
+              "name": "trigger-id",
               "required": true,
               "describe": "Trigger ID",
               "type": "string"
@@ -5973,7 +5995,7 @@
           "aliases": [],
           "positionals": [
             {
-              "name": "id",
+              "name": "trigger-id",
               "required": true,
               "describe": "Trigger ID",
               "type": "string"
@@ -5988,7 +6010,7 @@
           "aliases": [],
           "positionals": [
             {
-              "name": "id",
+              "name": "trigger-id",
               "required": true,
               "describe": "Trigger ID",
               "type": "string"
@@ -6003,7 +6025,7 @@
           "aliases": [],
           "positionals": [
             {
-              "name": "id",
+              "name": "trigger-id",
               "required": true,
               "describe": "Trigger ID",
               "type": "string"
@@ -6026,7 +6048,7 @@
           "aliases": [],
           "positionals": [
             {
-              "name": "id",
+              "name": "trigger-id",
               "required": true,
               "describe": "Trigger ID",
               "type": "string"

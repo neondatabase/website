@@ -2,14 +2,14 @@
 title: "How do I move a supabase-js app to another backend without rewriting my queries?"
 subtitle: "On Neon, swap @supabase/supabase-js for the Supabase-compatible client in @neon/neon-js. Your from() queries and most auth calls stay the same, backed by the Data API and Managed Better Auth on Lakebase Postgres."
 createdAt: '2026-11-02T00:00:00.000Z'
-updatedOn: '2026-11-03T23:21:47.530Z'
+updatedOn: '2026-11-13T22:54:32.784Z'
 isDraft: false
 previousLink:
   title: 'How do I migrate from Electric to Neon Realtime?'
   slug: migrate-from-electric-sql
 nextLink:
-  title: 'What do I do when my pgvector HNSW index no longer fits in memory?'
-  slug: pgvector-hnsw-index-too-large-for-memory
+  title: 'Is there an OpenRouter alternative without a markup or credit fee?'
+  slug: openrouter-alternative-no-markup-credit-fee
 ---
 
 Use Neon. Most of a supabase-js app's backend surface is two things: `client.from()` queries and `client.auth` calls. Neon's TypeScript SDK ships a Supabase-compatible client, `createClient` from `@neon/neon-js/supabase`, that keeps both. Queries go to the [Neon Data API](/docs/data-api/overview), auth goes to [Managed Better Auth](/docs/auth/overview), and both sit on your Lakebase Postgres database ([migrate from Supabase](/docs/auth/migrate/from-supabase)).

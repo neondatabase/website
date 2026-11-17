@@ -16,13 +16,15 @@ Tools are grouped into categories. Use the `?category=` URL parameter to restric
 | SQL (`querying`)                  | Execute queries and transactions; apply schema changes on a temporary branch; run the same diagnostics as `neon inspect db`                                                                                        |
 | Managed Better Auth (`neon_auth`) | Provision Auth; configure branch settings (localhost access, email and password, email provider, plugins, webhooks); manage OAuth providers, the OAuth provider plugin and its clients, trusted domains, and users |
 | Neon Data API (`data_api`)        | Enable, update, and disable the Data API for a branch                                                                                                                                                              |
-| Observability (`observability`)   | Query function and storage logs; check AI Gateway availability                                                                                                                                                     |
+| Observability (`observability`)   | Query function and storage logs, with structured filters or LogQL; check AI Gateway availability                                                                                                                   |
 | Documentation (`docs`)            | Search and read Neon docs, the API reference, guides, the PostgreSQL tutorial, the blog, and the changelog from within your assistant (no OAuth required)                                                          |
 | Functions (`functions`)           | List, deploy, update, and delete Neon Functions                                                                                                                                                                    |
 | Object storage (`storage`)        | Manage buckets and objects; create presigned URLs                                                                                                                                                                  |
 | Realtime (`realtime`)             | Enable and disable Realtime for a branch; get and rotate its secret                                                                                                                                                |
 
 Search and navigation tools (search across projects, fetch resource details by ID) are available by default but disabled in [project-scoped mode](/docs/ai/neon-mcp-server#project-scoped-mode).
+
+`list_incidents` is available on every connection, including read-only, project-scoped, and the docs-only endpoint. It returns open incidents and maintenance from [neonstatus.com](https://neonstatus.com), so your assistant can tell a Neon outage from a problem in your own setup. It needs no credentials.
 
 Schema tools accept schema-qualified table names, such as `crm.contacts`. An unqualified name resolves against the database `search_path`, which defaults to the `public` schema.
 

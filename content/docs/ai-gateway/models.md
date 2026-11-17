@@ -6,7 +6,7 @@ summary: >-
   models, which endpoint to use, shorter and longer request paths, the
   /v1/models API, rate limits, pricing, and provider terms.
 enableTableOfContents: true
-updatedOn: '2026-11-04T20:10:08.844Z'
+updatedOn: '2026-11-15T17:20:24.920Z'
 ---
 
 This page covers how to call models through Neon AI Gateway and the rules that apply. For the full list of models you can call, see the [model catalog](https://neon.com/ai-gateway#models).
@@ -48,7 +48,7 @@ If you hit the limit, you'll receive a `429 Too Many Requests` response with a m
 
 The TPM limit applies to input tokens and output tokens separately. Each direction has its own limit, so using up your output allowance doesn't use up your input allowance. Upstream output token limits (20,000 OTPM for most models) apply independently, so you can hit a `429` on output tokens without reaching the gateway's TPM limit. See [Databricks Foundation Model API limits](https://docs.databricks.com/aws/en/machine-learning/foundation-model-apis/limits) for details.
 
-Both 200,000 TPM limits are soft limits. If you need a higher limit, [contact Support](/docs/introduction/support).
+Both 200,000 TPM limits are soft limits. You can request a higher limit. Scale plan users can [request a limit increase](/docs/introduction/support#request-a-limit-increase) from the console.
 
 A separate account-level daily spend cap also applies and can block AI Gateway requests with a `429` / `REQUEST_LIMIT_EXCEEDED`. It isn't a fixed published number and can vary by account. See [Pricing](#pricing) for details, or [Troubleshooting](/docs/ai-gateway/troubleshooting#429-account-quota-exceeded) if you hit it.
 
@@ -70,17 +70,17 @@ Most models work with the [Chat completions](/docs/ai-gateway/chat-completions) 
 
 All paths below are appended to your branch's bare AI Gateway host (`NEON_AI_GATEWAY_BASE_URL`).
 
-| Provider                                | Recommended endpoint     | Notes                                                                                                    |
-| --------------------------------------- | ------------------------ | -------------------------------------------------------------------------------------------------------- |
-| OpenAI (most models)                    | `/v1/chat/completions`   | Use `/openai/v1/responses` for Responses API features                                                    |
-| OpenAI (`gpt-5-3-codex`, `gpt-5-5-pro`) | `/openai/v1/responses`   | These models require the Responses API and don't work with chat/completions                              |
-| Anthropic Claude                        | `/v1/chat/completions`   | Use `/anthropic/v1/messages` with the Anthropic SDK for extended thinking and prompt caching             |
-| Google Gemini                           | `/v1/chat/completions`   | Use `/gemini/v1beta/models/{model}:generateContent` with the google-genai SDK                            |
-| Google Gemma 3 12B                      | `/v1/chat/completions`   | Chat completions only. Doesn't support the Gemini SDK endpoint                                           |
-| Meta, Zhipu AI, Moonshot AI             | `/v1/chat/completions`   | Chat completions only                                                                                    |
-| Alibaba (chat models)                   | `/v1/chat/completions`   | Chat completions only                                                                                    |
-| Alibaba, BAAI (embedding models)        | `/v1/embeddings`         | No chat completions. Returns a vector, not text                                                          |
-| TypeSafe AI (decision models)           | `/typesafe/v1/systemone` | No chat completions. Returns answers to questions, not text. See [Decisions](/docs/ai-gateway/decisions) |
+| Provider                                | Recommended endpoint     | Notes                                                                                                          |
+| --------------------------------------- | ------------------------ | -------------------------------------------------------------------------------------------------------------- |
+| OpenAI (most models)                    | `/v1/chat/completions`   | Use `/openai/v1/responses` for Responses API features                                                          |
+| OpenAI (`gpt-5-3-codex`, `gpt-5-5-pro`) | `/openai/v1/responses`   | These models require the Responses API and don't work with chat/completions                                    |
+| Anthropic Claude                        | `/v1/chat/completions`   | Use `/anthropic/v1/messages` with the Anthropic SDK for extended thinking and prompt caching                   |
+| Google Gemini                           | `/v1/chat/completions`   | Use `/gemini/v1beta/models/{model}:generateContent` with the google-genai SDK and set `apiVersion` to `v1beta` |
+| Google Gemma 3 12B                      | `/v1/chat/completions`   | Chat completions only. Doesn't support the Gemini SDK endpoint                                                 |
+| Meta, Zhipu AI, Moonshot AI             | `/v1/chat/completions`   | Chat completions only                                                                                          |
+| Alibaba (chat models)                   | `/v1/chat/completions`   | Chat completions only                                                                                          |
+| Alibaba, BAAI (embedding models)        | `/v1/embeddings`         | No chat completions. Returns a vector, not text                                                                |
+| TypeSafe AI (decision models)           | `/typesafe/v1/systemone` | No chat completions. Returns answers to questions, not text. See [Decisions](/docs/ai-gateway/decisions)       |
 
 <Admonition type="warning" title="Content shape varies by model">
 For most models, `message.content` in a chat completions response is a plain string. For `claude-opus-5-5`, it's an array of typed content blocks once the model reasons (`{ type: 'reasoning', ... }`, `{ type: 'text', text: ... }`); a trivial prompt still returns a string. For `gemini-4-argon`, it's an array of `text` blocks, even for a trivial prompt. A low `max_tokens` value can also cut a response off before the `text` block appears, leaving only a `reasoning` block. Handle both shapes:

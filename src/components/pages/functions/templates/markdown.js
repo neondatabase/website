@@ -1,3 +1,5 @@
+import { renderReadmeMarkdown } from 'components/pages/functions/templates/template-readme/readme-markdown';
+import { totalWeeklyInstalls } from 'components/pages/functions/templates/weekly-installs/summary';
 import LINKS from 'constants/links';
 import {
   REGISTRY_COMMUNITY_CATEGORY,
@@ -64,16 +66,24 @@ const sourceLine = (template) => {
 const categoriesLine = (template) =>
   registryTemplateCategories(template).map(registryCategoryLabel).join(', ');
 
-const templateFacts = (template) => {
+const installsLine = (totals) =>
+  totals?.installs > 0 &&
+  `- Installs: ${totals.installs.toLocaleString('en-US')} all time, counted since ${totals.since}`;
+
+const totalInstalls = (rows) =>
+  rows.length > 0 && { installs: totalWeeklyInstalls(rows), since: rows[0].weekStart };
+
+const templateFacts = (template, totals) => {
   const categories = categoriesLine(template);
   return [
     `- Built by: ${builtByLine(template)}`,
     categories && `- Categories: ${categories}`,
+    installsLine(totals),
     `- Install: \`${installCommandFor(template.id)}\``,
   ].filter(Boolean);
 };
 
-export const renderTemplatesIndexMarkdown = (templates) => {
+export const renderTemplatesIndexMarkdown = (templates, installTotals = new Map()) => {
   const categories = registryTemplateFilters(templates, registryCategoryIds(templates)).slice(1);
 
   return [
@@ -104,7 +114,7 @@ export const renderTemplatesIndexMarkdown = (templates) => {
           '',
           escapeText(template.description),
           '',
-          ...templateFacts(template),
+          ...templateFacts(template, installTotals.get(template.id)),
         ].join('\n')
       ),
     ].join('\n\n'),
@@ -120,6 +130,19 @@ export const renderTemplatesIndexMarkdown = (templates) => {
   ]
     .filter(Boolean)
     .join('\n\n');
+};
+
+const renderEnvironmentTable = (environment) => {
+  const showRequired = hasRegistryEnvironmentRequirements(environment);
+  return [
+    showRequired ? '| Variable | Description | Required |' : '| Variable | Description |',
+    showRequired ? '| --- | --- | --- |' : '| --- | --- |',
+    ...environment.map(({ name, description, required }) => {
+      const cells = [`\`${name}\``, escapeTableCell(description ?? '')];
+      if (showRequired) cells.push(registryEnvironmentRequiredLabel(required));
+      return `| ${cells.join(' | ')} |`;
+    }),
+  ].join('\n');
 };
 
 const renderOperation = (operation, installCommand) => {
@@ -141,13 +164,33 @@ const renderOperation = (operation, installCommand) => {
 
 const RUN_LOCALLY = `run it locally with [\`neon dev\`](${BASE_URL}/docs/cli/dev.md) first, and deploy it to a branch with [\`neon deploy\`](${BASE_URL}/docs/compute/functions/deploy.md) once it works.`;
 
-export const renderTemplateMarkdown = ({ template, previous = null, next = null }) => {
+const renderOperationList = (operations, installCommand) =>
+  operations.map((operation) => renderOperation(operation, installCommand)).join('\n\n');
+
+export const renderTemplateMarkdown = ({
+  template,
+  previous = null,
+  next = null,
+  readme = null,
+  installs = [],
+}) => {
   const installCommand = installCommandFor(template.id);
   const operations = template.operations ?? [];
   const environment = (template.environment ?? []).filter((item) => isInlineCodeSafe(item.name));
   const showRequired = hasRegistryEnvironmentRequirements(environment);
   const pagePath = registryTemplatePageHref(template.id);
   const sourceUrl = registryTemplateSourceUrl(template);
+
+  const renderedReadme =
+    readme &&
+    renderReadmeMarkdown({
+      ...readme,
+      blocks: {
+        environment: environment.length > 0 && renderEnvironmentTable(environment),
+        operations: operations.length > 0 && renderOperationList(operations, installCommand),
+      },
+    });
+  const readmeHas = (block) => Boolean(renderedReadme?.used.has(block));
 
   const related = [
     previous &&
@@ -168,33 +211,32 @@ export const renderTemplateMarkdown = ({ template, previous = null, next = null 
       sourceLine(template),
       `- Built by: ${builtByLine(template)}`,
       categoriesLine(template) && `- Categories: ${categoriesLine(template)}`,
+      installsLine(totalInstalls(installs)),
     ]
       .filter(Boolean)
       .join('\n'),
     ['## Install', '', '```bash', installCommand, '```'].join('\n'),
-    operations.length > 0
-      ? [
-          '## What this function exposes',
-          'After you deploy, call these paths on the function URL.',
-          ...operations.map((operation) => renderOperation(operation, installCommand)),
-        ].join('\n\n')
-      : `## What it does\n\nThis template has a single handler and no named operations, so it's a starting point for your own code. To try it, ${RUN_LOCALLY}`,
+    renderedReadme && `## About this template\n\n${renderedReadme.markdown}`,
+    operations.length > 0 &&
+      !readmeHas('operations') &&
+      [
+        '## What this function exposes',
+        'After you deploy, call these paths on the function URL.',
+        renderOperationList(operations, installCommand),
+      ].join('\n\n'),
+    !renderedReadme &&
+      (operations.length === 0
+        ? `## What it does\n\nThis template has a single handler and no named operations, so it's a starting point for your own code. To try it, ${RUN_LOCALLY}`
+        : `## Run it\n\nInstalling a template doesn't deploy it, so ${RUN_LOCALLY}`),
     environment.length > 0 &&
+      !readmeHas('environment') &&
       [
         '## Environment variables',
         '',
         `The CLI declares these variables in \`neon.ts\` and adds them to \`.env.example\` without values, so you need to fill ${showRequired ? 'in the required ones' : 'them in'} before you run the function.`,
         '',
-        showRequired ? '| Variable | Description | Required |' : '| Variable | Description |',
-        showRequired ? '| --- | --- | --- |' : '| --- | --- |',
-        ...environment.map(({ name, description, required }) => {
-          const cells = [`\`${name}\``, escapeTableCell(description ?? '')];
-          if (showRequired) cells.push(registryEnvironmentRequiredLabel(required));
-          return `| ${cells.join(' | ')} |`;
-        }),
+        renderEnvironmentTable(environment),
       ].join('\n'),
-    operations.length > 0 &&
-      `## Run it\n\nInstalling a template doesn't deploy it, so ${RUN_LOCALLY}`,
     ['## Related', '', ...related].join('\n'),
     feedbackFooter(pagePath),
   ]

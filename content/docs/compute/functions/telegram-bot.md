@@ -62,8 +62,8 @@ export default defineConfig({
       name: "Telegram webhook",
       source: "./functions/telegram.ts",
       env: {
-        TELEGRAM_BOT_TOKEN: process.env.TELEGRAM_BOT_TOKEN!,
-        TELEGRAM_WEBHOOK_SECRET: process.env.TELEGRAM_WEBHOOK_SECRET!,
+        TELEGRAM_BOT_TOKEN: { value: process.env.TELEGRAM_BOT_TOKEN, required: true },
+        TELEGRAM_WEBHOOK_SECRET: { value: process.env.TELEGRAM_WEBHOOK_SECRET, required: true },
       },
       dev: {
         port: 8787,
@@ -98,7 +98,7 @@ openssl rand -hex 32
 Uncomment and set `TELEGRAM_BOT_TOKEN` (the BotFather token) and `TELEGRAM_WEBHOOK_SECRET` (the value you just generated). Leave `TELEGRAM_WEBHOOK_URL` empty until you deploy:
 
 ```env filename=".env.local"
-# Required. Add real values before deploying; a missing key throws at deploy, an empty one uploads "".
+# Required. Add real values before deploying; a missing or empty value fails the deploy.
 # TELEGRAM_BOT_TOKEN=
 # TELEGRAM_WEBHOOK_SECRET=
 

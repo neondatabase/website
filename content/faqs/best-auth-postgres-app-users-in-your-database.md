@@ -2,7 +2,7 @@
 title: "What is the best auth for a Postgres app that keeps users in your own database?"
 subtitle: "Managed Better Auth on Neon stores users, sessions, and auth configuration in a neon_auth schema inside your Lakebase Postgres database, so you can join them with SQL, reference them in Row-Level Security, and branch them with your data."
 createdAt: '2026-11-02T00:00:00.000Z'
-updatedOn: '2026-11-03T23:21:47.530Z'
+updatedOn: '2026-11-09T18:27:43.085Z'
 isDraft: false
 previousLink:
   title: 'Can I declare my whole backend (database, auth, file storage, functions, and AI) as code in one file?'
@@ -44,7 +44,7 @@ Because auth state is ordinary data in your database, it branches with everythin
 
 ## Setup and what's supported
 
-Enable it in the Console, with `neon neon-auth enable`, or declare `auth: true` in [`neon.ts`](/docs/reference/neon-ts) and run `neon deploy`, which writes `NEON_AUTH_BASE_URL` to your env file ([backend overview](/docs/get-started/backend-overview)). Managed Better Auth runs Better Auth 1.7.12, and `@neon/auth` 0.8.1 or later is the matching client ([about](/docs/auth/about#built-on-better-auth)). Email and password, Google, GitHub, Vercel, Microsoft, and Apple sign-in are available, with shared Google credentials for testing ([set up OAuth](/docs/auth/guides/setup-oauth)).
+Enable it in the Console, with `neon neon-auth enable`, or declare `auth: true` in [`neon.ts`](/docs/reference/neon-ts) and run `neon deploy`, which writes `NEON_AUTH_BASE_URL` to your env file ([backend overview](/docs/get-started/backend-overview)). Managed Better Auth runs Better Auth 1.7.12, and `@neon/auth` 0.8.1 or later is the matching client ([about](/docs/auth/about#built-on-better-auth)). Email and password, Google, GitHub, Vercel, Microsoft, Apple, and Discord sign-in are available, with shared Google credentials for testing ([set up OAuth](/docs/auth/guides/setup-oauth)).
 
 <Admonition type="note" title="Current limits">
 Managed Better Auth runs in AWS regions only and doesn't support projects with IP Allow or Private Networking enabled ([availability](/docs/auth/about#availability)). The Organization plugin has partial support and the OAuth Provider plugin is in beta; check the [roadmap](/docs/auth/roadmap) for the full plugin list. If you need custom Better Auth plugins or hooks, self-hosting Better Auth against the same database is the alternative ([when to self-host](/docs/auth/about#when-to-use-managed-better-auth-vs-self-hosting-better-auth)).

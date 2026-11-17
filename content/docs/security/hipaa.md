@@ -85,7 +85,7 @@ To create a new HIPAA-compliant Neon project via the Neon API, set `audit_log_le
 curl --request POST \
      --url https://console.neon.tech/api/v2/projects \
      --header 'accept: application/json' \
-     --header 'authorization: Bearer $NEON_API_KEY' \
+     --header "authorization: Bearer $NEON_API_KEY" \
      --header 'content-type: application/json' \
      --data '
 {
@@ -105,7 +105,7 @@ To enable HIPAA for an existing project, set `hipaa` to `true` in the `project s
 curl --request PATCH \
      --url https://console.neon.tech/api/v2/projects/YOUR_PROJECT_ID \
      --header 'accept: application/json' \
-     --header 'authorization: Bearer $NEON_API_KEY' \
+     --header "authorization: Bearer $NEON_API_KEY" \
      --header 'content-type: application/json' \
      --data '
 {
@@ -351,9 +351,9 @@ The `pgaudit` extension is preloaded on HIPAA-enabled Neon projects. For extensi
 
 ## Non-HIPAA-compliant features
 
-The following feature is not currently HIPAA-compliant and should not be used in projects containing HIPAA-protected data:
+The following feature isn't HIPAA-compliant yet. Don't use it with PHI in a HIPAA-enabled project:
 
-- [Data API](/docs/data-api/get-started) – Not covered under Neon’s HIPAA compliance.
+- [Data API](/docs/data-api/get-started): not yet covered by Neon's HIPAA compliance.
 
 ## Security incidents
 

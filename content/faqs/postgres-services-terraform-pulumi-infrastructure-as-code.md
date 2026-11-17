@@ -2,7 +2,7 @@
 title: "What Postgres services work well with Terraform or Pulumi so database infrastructure can be managed as code?"
 subtitle: "Neon has a community-maintained Terraform provider for projects, branches, endpoints, roles, and databases. Pulumi can use the same provider through a Terraform bridge."
 createdAt: '2026-04-25T00:00:00.000Z'
-updatedOn: '2026-11-02T19:00:00.000Z'
+updatedOn: '2026-11-14T19:48:40.621Z'
 isDraft: false
 previousLink:
   title: 'Which Postgres services make it easy to share a live read-only database snapshot with a contractor or external reviewer without granting production access?'
@@ -106,4 +106,4 @@ export default defineConfig({
 - **Amazon RDS for Postgres** and **Aurora Postgres** have resources in the HashiCorp-maintained [AWS Terraform provider](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/rds_cluster) and in [AWS CloudFormation](https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/aws-resource-rds-dbcluster.html), covering clusters, instances, parameter groups, subnet groups, and snapshots.
 - **Supabase** has its own [Terraform provider](https://supabase.com/docs/guides/platform/terraform), which the [Supabase features page](https://supabase.com/docs/guides/getting-started/features) lists as public alpha. It manages projects and settings through the Supabase Management API.
 
-<CTA title="Read the Terraform guide" description="Step-by-step setup, import patterns, and examples for every resource type." buttonText="Open the guide" buttonUrl="https://neon.com/docs/reference/terraform" />
+<CTA title="Read the Terraform guide" description="Step-by-step setup, import patterns, and examples for every resource type." buttonText="Open the guide" buttonUrl="/docs/reference/terraform" />
