@@ -6,6 +6,7 @@ import { useEffect, useId, useRef, useState } from 'react';
 
 import Button from 'components/shared/button';
 import ProviderMarks from 'components/shared/provider-marks';
+import { NON_AGENT_FETCH_HEADERS } from 'constants/llm-analytics';
 import useCopyPrompt from 'hooks/use-copy-prompt';
 import patternSvg from 'images/pages/docs/copy-prompt/pattern.svg';
 import { cn } from 'utils/cn';
@@ -55,7 +56,7 @@ const CopyPrompt = (props) => {
 
   useEffect(() => {
     if (!src) return;
-    fetch(src)
+    fetch(src, { headers: NON_AGENT_FETCH_HEADERS })
       .then((res) => res.text())
       .then(setMarkdown);
   }, [src]);

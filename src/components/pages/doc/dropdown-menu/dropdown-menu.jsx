@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import { useState, useRef, useEffect, useCallback, useId } from 'react';
 
 import Link from 'components/shared/link';
+import { NON_AGENT_FETCH_HEADERS } from 'constants/llm-analytics';
 import ChevronDownIcon from 'icons/chevron-down.inline.svg';
 import CopyIcon from 'icons/copy-docs.inline.svg';
 import ChatGptIcon from 'icons/docs/chat-gpt.inline.svg';
@@ -81,13 +82,15 @@ const CopyMarkdownButton = ({
     };
 
     if (navigator.clipboard?.write && typeof ClipboardItem !== 'undefined') {
-      const textPromise = fetch(markdownPath).then((r) => r.text());
+      const textPromise = fetch(markdownPath, { headers: NON_AGENT_FETCH_HEADERS }).then((r) =>
+        r.text()
+      );
       navigator.clipboard
         .write([new ClipboardItem({ 'text/plain': textPromise })])
         .then(onSuccess)
         .catch(onError);
     } else {
-      fetch(markdownPath)
+      fetch(markdownPath, { headers: NON_AGENT_FETCH_HEADERS })
         .then((r) => r.text())
         .then((content) => {
           copyToClipboard(content);
