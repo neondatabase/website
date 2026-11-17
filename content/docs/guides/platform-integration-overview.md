@@ -4,15 +4,15 @@ subtitle: Choose the right integration path for your platform or application
 summary: >-
   Neon integration overview compares four embedding and partnership paths: AI Agents, Claimable Database, Embedded Postgres, and OAuth. Use this
   page to decide which approach fits your product before reading the individual
-  integration guides. Real-world implementations include TanStack Vite plugin,
-  Netlify DB, and Hasura Cloud.
+  integration guides. Real-world implementations include Netlify DB and Hasura
+  Cloud.
 enableTableOfContents: true
 isDraft: false
 redirectFrom:
   - /docs/guides/partner-intro
   - /docs/guides/platform-integration-intro
   - /docs/guides/platform-integration-get-started
-updatedOn: '2026-10-26T16:14:23.541Z'
+updatedOn: '2026-11-17T22:45:14.232Z'
 ---
 
 Neon provides multiple options for integrating Postgres into your platform, application, or service. Choose the integration approach that best matches your use case.
@@ -62,12 +62,12 @@ Use this approach when you want to create databases for your users without requi
 - Instant database provisioning with no user signup required
 - 72-hour database lifespan if not claimed
 - Ownership transfer when users are ready
-- Claiming moves the project into the user's organization. neon.new keeps the connection string; Claimable Neon rotates `DATABASE_URL`
+- Claiming moves the project into the user's organization and revokes the database password, so the app needs a new `DATABASE_URL`
 - Configurable transfer request expiration
 
 **Example use cases:**
 
-- Framework plugins and CLI tools (like TanStack's Vite plugin)
+- Framework plugins and CLI tools
 - Demo environments and trial experiences
 - Educational platforms providing databases to students
 - Development tools that need instant database access
@@ -76,9 +76,8 @@ Use this approach when you want to create databases for your users without requi
 
 **Example implementations:**
 
-- [TanStack](/blog/neon-joins-tanstack-instant-postgres-integration-for-faster-javascript-development): Official database partner offering instant Postgres through their Vite plugin and create-tanstack CLI
 - [Netlify DB](https://www.netlify.com/blog/netlify-db-database-for-ai-native-development/): One-click Postgres databases for Netlify projects, built on the claimable database flow
-- [Claimable Neon](/claimable-neon): instant Neon project without signup, via the Neon CLI or [auth.md](https://neon.com/auth.md)
+- [Claimable Neon](/claimable-neon): instant Neon project without signup, via `npx neon@latest claim create` or [auth.md](https://neon.com/auth.md)
 
 <DetailIconCards>
 
