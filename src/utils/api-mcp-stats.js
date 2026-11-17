@@ -7,11 +7,7 @@ const toRows = (rows, key) =>
     share: Number(row.user_share_pct),
   }));
 
-export async function getMcpStats() {
-  const url = process.env.STATS_DATABASE_URL;
-  if (!url) throw new Error('STATS_DATABASE_URL is not set');
-
-  const sql = neon(url);
+async function readMcpStats(sql) {
   const [clients, tools, access, published] = await Promise.all([
     sql`
       SELECT week_start::text AS week_start, client, user_share_pct
@@ -48,4 +44,20 @@ export async function getMcpStats() {
     },
     publishedAt: new Date(published[0].published_at).toISOString(),
   };
+}
+
+// Returns null outside Production when the database is unset, so the page answers 404.
+export async function getMcpStats() {
+  const url = process.env.STATS_DATABASE_URL;
+  if (!url) {
+    if (process.env.VERCEL_ENV === 'production') throw new Error('STATS_DATABASE_URL is not set');
+    return null;
+  }
+
+  try {
+    return await readMcpStats(neon(url));
+  } catch (error) {
+    // The driver repeats the connection string, password included, when it can't parse it.
+    throw new Error(String(error.message).replaceAll(url, '[STATS_DATABASE_URL]'));
+  }
 }

@@ -1,3 +1,5 @@
+import { notFound } from 'next/navigation';
+
 import McpServerStats from 'components/pages/mcp-server-stats/mcp-server-stats';
 import Layout from 'components/shared/layout';
 import SEO_DATA from 'constants/seo-data';
@@ -9,7 +11,10 @@ export const metadata = getMetadata(SEO_DATA.mcpServerStats);
 export const revalidate = 3600;
 
 const McpServerStatsPage = async () => {
-  const { clients, tools, access, publishedAt } = await getMcpStats();
+  const stats = await getMcpStats();
+  if (!stats) notFound();
+
+  const { clients, tools, access, publishedAt } = stats;
 
   return (
     <Layout className="bg-black-pure" isHeaderSticky>
