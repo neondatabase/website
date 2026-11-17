@@ -19,7 +19,7 @@ When working with Postgres logical replication, managing schema changes is a tas
 
 "_The database schema and DDL commands are not replicated. The initial schema can be copied by hand using `pg_dump --schema-only`. Subsequent schema changes would need to be kept in sync manually. (Note, however, that there is no need for the schemas to be absolutely the same on both sides.) Logical replication is robust when schema definitions change in a live database: When the schema is changed on the publisher and replicated data starts arriving at the subscriber but does not fit into the table schema, replication will error until the schema is updated. In many cases, intermittent errors can be avoided by applying additive schema changes to the subscriber first._"
 
-This guidelines below outline some recommended practices for handling schema changes in a logical replication setup.
+The following guidelines outline recommended practices for handling schema changes in a logical replication setup.
 
 ## Schema management in a logical replication context
 
@@ -47,13 +47,15 @@ Additive changes, such as adding a new column or creating an index, should be ap
 
 Applying additive schema changes in this order will help prevent replication errors caused by the subscriber not recognizing the additive change in the incoming data.
 
+If you add the column to the publisher first, replication stops with apply errors until the subscriber has the column. Adding the column to the subscriber resumes replication without re-creating the subscription, and the held-up changes apply.
+
 ### 2. Handle non-additive schema changes with caution
 
 Non-additive changes, such as dropping a column or altering a column's data type, require careful handling. When performing a non-additive schema change like dropping a column, apply the change on the publisher first, then on the subscriber.
 
-Non-additive changes are often feasible if applied in the correct order (publisher first). However, always carefully assess how the schema change will impact replication to the subscriber. Will writes still succeed on the subscriber after the change on the publisher? It’s best practice to test schema changes before implementing them in production. For example, test whether writes to the modified publisher schema still execute successfully on the unmodified subscriber schema.
+Non-additive changes are often feasible if applied in the correct order (publisher first). However, always carefully assess how the schema change will impact replication to the subscriber. Will writes still succeed on the subscriber after the change on the publisher? It's best practice to test schema changes before implementing them in production. For example, test whether writes to the modified publisher schema still execute successfully on the unmodified subscriber schema.
 
-Mistakes in the schema update process could disrupt replication on the subscriber, requiring troubleshooting and reestablishing replication.
+If you drop the column on the subscriber first, the publisher keeps sending values for it, and replication stops with apply errors. Dropping the column on the publisher afterward doesn't resume replication. Add the column back to the subscriber to resume. The held-up changes then apply.
 
 For an added degree of safety or for complex schema changes, consider temporarily pausing write activity on the publisher before applying schema changes. The steps for this approach include:
 
@@ -70,6 +72,12 @@ To do this, you can run the following query on the subscriber to make sure the `
 
 ```sql shouldWrap
 SELECT subname, received_lsn, latest_end_lsn, last_msg_receipt_time FROM pg_catalog.pg_stat_subscription;
+```
+
+To check for apply errors, run the following query on the subscriber. The `apply_error_count` and `sync_error_count` values increase each time a change fails to apply. This view is available in Postgres 15 and later.
+
+```sql
+SELECT subname, apply_error_count, sync_error_count FROM pg_stat_subscription_stats;
 ```
 
 You can also perform a row count on the publisher and subscriber databases to make sure results are as expected. If you're actively adding rows, the results may be close but not exactly the same.

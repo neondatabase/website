@@ -10,6 +10,8 @@ summary: >-
   manage protected branches regardless of role, and per-project permissions that
   can raise a member's access but not restrict it.
 enableTableOfContents: true
+redirectFrom:
+  - /docs/manage/orgs
 updatedOn: '2026-08-04T15:25:12.468Z'
 ---
 

@@ -9,15 +9,15 @@ summary: >-
   guide when you need a complete migration workflow for a Node.js TypeScript
   project, including initial table creation, seeding, and iterative schema
   changes. The guide uses drizzle-orm, drizzle-kit, @neondatabase/serverless,
-  and Hono.js, and requires a direct (non-pooled) connection string for
+  and Hono.js, and recommends a direct (non-pooled) connection string for
   migrations.
 enableTableOfContents: true
-updatedOn: '2026-09-16T19:45:35.340Z'
+updatedOn: '2026-10-09T15:55:57.334Z'
 ---
 
-[Drizzle](https://orm.drizzle.team/) is a TypeScript-first ORM that connects to all major databases and works across most Javascript runtimes. It provides a simple way to define database schemas and queries in an SQL-like dialect and tools to generate and run migrations.
+[Drizzle](https://orm.drizzle.team/) is a TypeScript-first ORM that connects to all major databases and works across most JavaScript runtimes. It provides a simple way to define database schemas and queries in an SQL-like dialect and tools to generate and run migrations.
 
-This guide shows how to use `Drizzle` with the Lakebase Postgres database in a Typescript project. We'll create a simple Node.js application with `Hono.js` and demonstrate the full workflow of setting up and working with your database using `Drizzle`.
+This guide shows how to use `Drizzle` with the Lakebase Postgres database in a TypeScript project. We'll create a simple Node.js application with `Hono.js` and demonstrate the full workflow of setting up and working with your database using `Drizzle`.
 
 ## Prerequisites
 
@@ -57,20 +57,12 @@ We'll create a simple catalog, with API endpoints that query the database for au
 npm create hono@latest neon-drizzle-guide
 ```
 
-This initiates an interactive CLI prompt to set up a new project. To follow along with this guide, you can use the following settings:
+This starts an interactive prompt that asks for a project name, a template, whether to install dependencies, and a package manager. To follow along with this guide, choose these settings:
 
-```bash
-Need to install the following packages:
-create-hono@0.9.0
-Ok to proceed? (y) y
-
-create-hono version 0.9.0
-✔ Using target directory … neon-drizzle-guide
-✔ Which template do you want to use? › nodejs
-cloned honojs/starter#main to ./repos/javascript/neon-drizzle-guide
-✔ Do you want to install project dependencies? … yes
-✔ Which package manager do you want to use? › npm
-```
+- Target directory: `neon-drizzle-guide`
+- Template: `nodejs`
+- Install project dependencies: `yes`
+- Package manager: `npm`
 
 To use Drizzle and connect to the Neon database, we also add the `drizzle-orm` and `drizzle-kit` packages to our project, along with the `Neon serverless` driver library.
 
@@ -87,7 +79,7 @@ Add the `DATABASE_URL` environment variable to your `.env` file, which you'll us
 DATABASE_URL=NEON_DATABASE_CONNECTION_STRING
 ```
 
-Test that the starter `Hono.js` application works by running `npm run dev` in the terminal. You should see the `Hello, Hono!` message when you navigate to `http://localhost:3000` in your browser.
+Test that the starter `Hono.js` application works by running `npm run dev` in the terminal. You should see the `Hello Hono!` message when you navigate to `http://localhost:3000` in your browser.
 
 ### Set up the database schema
 
@@ -192,7 +184,7 @@ To test the application works, we need to add some example data to our tables. C
 
 import { drizzle } from 'drizzle-orm/neon-http';
 import { neon } from '@neondatabase/serverless';
-import { authors, books } from './schema';
+import { authors, books } from './schema.js';
 import { config } from 'dotenv';
 
 config({ path: '.env' });
@@ -297,7 +289,7 @@ import { config } from 'dotenv';
 import { eq } from 'drizzle-orm';
 import { drizzle } from 'drizzle-orm/neon-http';
 import { neon } from '@neondatabase/serverless';
-import { authors, books } from './schema';
+import { authors, books } from './schema.js';
 
 config({ path: '.env' });
 const app = new Hono();

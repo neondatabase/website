@@ -7,7 +7,7 @@ excerpt: >-
   demonstrate everything, we’ll be using an app with Neon as the Postgres
   provider, Neon Authorize, Express.js, and HTMX. All the code in...
 date: '2024-12-04T17:26:16'
-updatedOn: '2024-12-04T17:26:19'
+updatedOn: '2026-11-06T12:00:00.000Z'
 category: community
 categories:
   - community
@@ -35,6 +35,10 @@ seo:
 ---
 
 ![Image](https://cdn.neonapi.io/public/images/pages/blog/how-to-set-up-row-level-security-in-postgres-using-aws-cognito/neon-cognito-1024x576-04765de9.jpg)
+
+<Admonition type="important" title="Update: Neon RLS is now part of the Neon Data API">
+We’ve moved the functionality previously known as Neon RLS / Neon Authorize into the Neon Data API. You can [read more about the Data API here](https://neon.com/docs/data-api/get-started) and start using it in your projects today.
+</Admonition>
 
 This blog post teaches you an easy method to implement row-level security in your Postgres database when using AWS Cognito for authorization. To demonstrate everything, we’ll be using an app with Neon as the Postgres provider, Neon Authorize, Express.js, and HTMX. All the code in this post can be found here:
 

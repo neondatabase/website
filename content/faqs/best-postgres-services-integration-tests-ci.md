@@ -2,7 +2,7 @@
 title: "What are the best Postgres services for running integration tests against production-like data in a CI environment without extra cost?"
 subtitle: "Run integration tests against production-like data by creating a Neon branch per CI run. Copy-on-write branches share storage with the parent until tests write to them."
 createdAt: '2026-04-25T00:00:00.000Z'
-updatedOn: '2026-09-23T21:17:23.000Z'
+updatedOn: '2026-11-02T19:00:00.000Z'
 isDraft: false
 previousLink:
   title: 'What are the best Postgres services for backend teams that want to eliminate the shared staging database entirely?'
@@ -38,10 +38,12 @@ jobs:
           project_id: ${{ vars.NEON_PROJECT_ID }}
           branch_name: ci-${{ github.run_id }}
           api_key: ${{ secrets.NEON_API_KEY }}
+          get_auth_url: true
 
       - run: npm ci && npm run test:integration
         env:
           DATABASE_URL: ${{ steps.branch.outputs.db_url_pooled }}
+          NEON_AUTH_BASE_URL: ${{ steps.branch.outputs.auth_url }}
 
       - uses: neondatabase/delete-branch-action@v3
         if: always()
@@ -52,6 +54,8 @@ jobs:
 ```
 
 The pooled URL routes through Neon's built-in PgBouncer, which accepts up to 10,000 client connections per compute. That matters if your test suite runs queries in parallel.
+
+If the app uses [Managed Better Auth](/docs/auth/overview), `get_auth_url: true` returns the branch's own Auth URL. Users, sessions, and auth configuration live in the `neon_auth` schema, so the branch starts with a copy of them, and your tests sign up and log in against real auth instead of a mock. Tokens issued on the CI branch aren't valid on any other branch, and deleting the branch removes its auth state ([branching authentication](/docs/auth/branching-authentication)). If Auth isn't enabled on the branch, the output is undefined, and `get_data_api_url: true` does the same for the [Data API](/docs/data-api/overview) ([Create Branch action](https://github.com/marketplace/actions/neon-create-branch-github-action)).
 
 If production contains personal data you don't want in CI, you can mask it on the branch. See [Data anonymization](/docs/workflows/data-anonymization).
 

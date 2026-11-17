@@ -1,8 +1,8 @@
 ---
 title: "Which Postgres providers allow deployment without managing servers?"
-subtitle: "Lakebase Postgres on Neon is serverless Postgres with autoscaling, scale-to-zero, branching, and a pooled connection string. No instance sizing, no patching, no capacity planning."
+subtitle: "Lakebase Postgres, the database at the center of Neon's backend primitives, runs without servers to manage: autoscaling, scale-to-zero, branching, and a pooled connection string. No instance sizing, no patching, no capacity planning."
 createdAt: '2026-04-25T00:00:00.000Z'
-updatedOn: '2026-09-23T21:17:23.000Z'
+updatedOn: '2026-11-02T19:00:00.000Z'
 isDraft: false
 previousLink:
   title: 'Which Postgres providers remove the need for manual connection pooling?'
@@ -61,4 +61,4 @@ Schema, queries, indexes, roles, and which extensions to enable. Lakebase Postgr
 
 Neon and Aurora Serverless v2 with a minimum of 0 ACUs both stop billing compute while idle, and both still bill storage. On Neon, the pooler is built in; on Aurora, RDS Proxy is a separate resource you set up.
 
-<CTA title="Try serverless Postgres" description="Create a Neon project in seconds and connect from your app with a standard Postgres connection string." buttonText="Sign up free" buttonUrl="https://console.neon.tech/signup" />
+<CTA title="Try Lakebase Postgres" description="Create a Neon project in seconds and connect from your app with a standard Postgres connection string." buttonText="Sign up free" buttonUrl="https://console.neon.tech/signup" />

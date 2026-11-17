@@ -18,7 +18,7 @@ updatedOn: '2026-10-09T10:14:56.146Z'
 Cloudflare recommends Workers for new projects. To build a new app, see [Use Neon with Cloudflare Workers](/docs/guides/cloudflare-workers). This guide still applies to existing Cloudflare Pages projects.
 </Admonition>
 
-`Cloudflare Pages` is a modern web application hosting platform that allows you to build, deploy, and scale your web applications. While it is typically used to host static websites, you can also use it to host interactive web applications by leveraging `functions` to run server-side code. Internally, Cloudflare functions are powered by `Cloudflare Workers`, a serverless platform that allows you to run JavaScript code on Cloudflare's edge network.
+`Cloudflare Pages` is a web application hosting platform that allows you to build, deploy, and scale your web applications. While it is typically used to host static websites, you can also use it to host interactive web applications by using `functions` to run server-side code. Internally, Cloudflare functions are powered by `Cloudflare Workers`, a serverless platform that allows you to run JavaScript code on Cloudflare's edge network.
 
 This guide demonstrates how to connect to a Lakebase Postgres database from your Cloudflare Pages application. We'll create a simple web application using `React` that tracks our reading list using the database and provides a form to add new books to it.
 
@@ -88,7 +88,7 @@ This initiates an interactive CLI prompt to generate a new project. To follow al
 ✔ Select a framework: › React
 ✔ Select a variant: › JavaScript
 
-Scaffolding project in /Users/ishananand/repos/javascript/my-neon-page...
+Scaffolding project in /path/to/my-neon-page...
 
 Done. Now run:
 

@@ -6,7 +6,7 @@ summary: >-
   Auth JWT against the injected JWKS, check an API key, and add CORS when the
   browser calls the function directly.
 enableTableOfContents: true
-updatedOn: '2026-09-16T15:38:57.808Z'
+updatedOn: '2026-11-05T01:14:02.509Z'
 ---
 
 A Neon Function has a public HTTPS URL, so anyone who knows it can reach it. There's no platform gate in front of your handler. Authenticate the caller yourself, at the top of the handler, and reject anything that doesn't check out.
@@ -61,7 +61,7 @@ A long stream (an agent, an SSE feed) stays long only if nothing in front of it 
 
 Two things make the direct call work:
 
-- **A short-lived token.** With Managed Better Auth, the signed-in client gets one from the Managed Better Auth SDK (`authClient.token()`). With a custom signer, mint it on your app backend (a fast call, well within host limits). Either way, the client sends it as `Authorization: Bearer <token>`.
+- **A short-lived token.** With Managed Better Auth, the signed-in client calls `authClient.getSession()`, and the SDK puts the session's JWT in `data.session.token`. With a custom signer, mint it on your app backend (a fast call, well within host limits). Either way, the client sends it as `Authorization: Bearer <token>`.
 - **CORS.** The browser calls the function cross-origin, so handle the preflight and set the headers:
 
 ```ts filename="functions/cors.ts"

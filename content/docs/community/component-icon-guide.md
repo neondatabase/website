@@ -231,7 +231,6 @@ To test if an icon works:
 <a href="#" title="OAuth" description="Authentication protocol (icon: oauth)" icon="oauth">OAuth</a>
 <a href="#" title="Okta" description="Identity platform (icon: okta)" icon="okta">Okta</a>
 <a href="#" title="Uploadcare" description="File handling service (icon: uploadcare)" icon="uploadcare">Uploadcare</a>
-<a href="#" title="WunderGraph" description="API development platform (icon: wundergraph)" icon="wundergraph">WunderGraph</a>
 </TechCards>
 
 ### DetailIconCards Icons (Feature Icons)

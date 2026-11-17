@@ -56,9 +56,10 @@ neon checkout main --project-id polished-snowflake-12345678
 
 ```text filename="Output"
 Checked out branch br-steep-math-aiu3vve7 on project polished-snowflake-12345678 (org org-example-12345678). Updated /path/to/cwd/.neon.
-Pulled 3 Neon variables into .env.local
+Pulled 5 Neon variables into .env.local
   Postgres        DATABASE_URL, DATABASE_URL_UNPOOLED
-  Branch          NEON_BRANCH
+  Branch          NEON_BRANCH, NEON_BRANCH_ID
+  Functions       NEON_FUNCTION_HOST_SUFFIX
 ```
 
 The updated `.neon` file:

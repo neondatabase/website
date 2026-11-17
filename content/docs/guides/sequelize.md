@@ -1,6 +1,6 @@
 ---
 title: Schema migration with Lakebase Postgres and Sequelize
-subtitle: Set up a database on Neon and run migrations for your Javascript project using
+subtitle: Set up a database on Neon and run migrations for your JavaScript project using
   Sequelize ORM
 summary: >-
   Sequelize ORM integration with Lakebase Postgres walks through connecting a
@@ -8,8 +8,7 @@ summary: >-
   `npx sequelize db:migrate` to apply schema changes. Use this guide when you
   need to set up Sequelize migrations against a Lakebase Postgres database, including
   defining foreign key relationships and seeding data. A direct (non-pooled)
-  connection string is required for migrations, as pooled connections via
-  PgBouncer cause migration errors.
+  connection string is recommended for migrations.
 enableTableOfContents: true
 updatedOn: '2026-09-16T19:45:35.340Z'
 ---
@@ -46,7 +45,7 @@ Keep your connection string handy for later use.
 Neon supports both direct and pooled database connection strings. You can find the connection string for your database by clicking the **Connect** button in the Console nav. A pooled connection string connects your application to the database via a PgBouncer connection pool, allowing for a higher number of concurrent connections. However, using a pooled connection string for migrations can be prone to errors. For this reason, we recommend using a direct (non-pooled) connection when performing migrations. For more information about direct and pooled connections, see [Connection pooling](/docs/connect/connection-pooling).
 </Admonition>
 
-## Setting Up the Node application
+## Set up the Node application
 
 ### Create a new Node project
 
@@ -334,7 +333,7 @@ app.listen(port, () => {
 });
 ```
 
-This code sets up a simple API with two endpoints: `/authors` and `/books/:authorId`. The `/authors` endpoint returns a list of all the authors, and the `/books/:authorId` endpoint returns a list of books written by the specific author for the given `authorId`.
+This code sets up a simple API with two endpoints: `/authors` and `/books/:author_id`. The `/authors` endpoint returns a list of all the authors, and the `/books/:author_id` endpoint returns a list of books written by the specific author for the given `authorId`.
 
 Run the application using the following command:
 
@@ -346,7 +345,7 @@ This will start the server at `http://localhost:3000`. Navigate to `http://local
 
 ## Conclusion
 
-In this guide, we set up a new Javascript project using `Express.js` and the `Sequelize` ORM, and connected it to a `Neon` Postgres database. We created a schema for the database, generated and ran migrations, and implemented API endpoints to query the database.
+In this guide, we set up a new JavaScript project using `Express.js` and the `Sequelize` ORM, and connected it to a `Neon` Postgres database. We created a schema for the database, generated and ran migrations, and implemented API endpoints to query the database.
 
 ## Source code
 

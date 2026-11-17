@@ -7,7 +7,7 @@ summary: >-
   with neon dev, and deploy with neon deploy. The function gets a public HTTPS
   URL with DATABASE_URL injected from the branch's Postgres database.
 enableTableOfContents: true
-updatedOn: '2026-11-02T22:41:52.272Z'
+updatedOn: '2026-11-05T01:12:32.486Z'
 ---
 
 A function takes a request and returns a web response, running on long-lived Node.js compute next to your database. The request can come over HTTP, or from a [Function Trigger](/docs/compute/functions/triggers/overview) on a schedule or object upload.
@@ -116,7 +116,7 @@ export default defineConfig({
 });
 ```
 
-The slug is permanent: it can't be renamed after the first deploy. See the [neon.ts reference](/docs/reference/neon-ts) for all options.
+The slug is permanent: it can't be renamed after the first deploy. It allows only 1 to 20 lowercase letters and digits, so `sendemail` works and `send-email` doesn't. See the [neon.ts reference](/docs/reference/neon-ts) for all options.
 
 As a shortcut, `neon config add function hello` creates this `neon.ts` and a starter `functions/hello.ts` handler for you. See [`neon config add`](/docs/cli/config#add). To start from a ready-made [function template](/functions/templates) instead, see [Use function templates](/docs/compute/functions/templates).
 

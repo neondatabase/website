@@ -8,7 +8,7 @@ summary: >-
   delete an organization from the UI. Admins control deletions, billing
   changes, and 2FA enforcement.
 enableTableOfContents: true
-updatedOn: '2026-08-04T15:25:12.468Z'
+updatedOn: '2026-11-05T15:33:57.188Z'
 ---
 
 Learn how to manage your organization's projects, invite members, set their access, and oversee billing details. For a breakdown of what each organization role and per-project permission allows, see [User permissions](/docs/manage/user-permissions).
@@ -60,7 +60,7 @@ To invite members:
 If invite emails aren't received, they may be in spam or quarantined. Recipients should check these folders and mark Neon emails as safe.
 </Admonition>
 
-To list members, update roles, or manage invitations programmatically, see [Manage organizations using the Neon API](/docs/manage/orgs-api) (including [List members](/docs/manage/orgs-api#list-members)).
+To list members, update roles, or send invitations from the terminal, use [`neon orgs members`](/docs/cli/orgs#members) and [`neon orgs invitations`](/docs/cli/orgs#invitations). To do it programmatically, see [Manage organizations using the Neon API](/docs/manage/orgs-api) (including [List members](/docs/manage/orgs-api#list-members)).
 
 The **People** page also shows deactivated organization members with a **Deactivated** badge, so admins can review access without opening each member profile.
 

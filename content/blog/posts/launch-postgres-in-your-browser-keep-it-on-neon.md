@@ -7,7 +7,7 @@ excerpt: >-
   anywhere. Maybe you’re following a tutorial online or testing a quick idea.
   Enter Instagres—a tool that lets you spin up a fully func...
 date: '2025-01-23T19:32:26'
-updatedOn: '2025-01-23T19:58:07'
+updatedOn: '2026-11-06T12:00:00.000Z'
 category: postgres
 categories:
   - postgres
@@ -34,6 +34,10 @@ seo:
 ---
 
 ![Image](https://cdn.neonapi.io/public/images/pages/blog/launch-postgres-in-your-browser-keep-it-on-neon/neon-postgres-browser-1024x576-5987384e.jpg)
+
+<Admonition type="important" title="Instagres is now Claimable Neon">
+Instagres, later Neon Launchpad, has evolved into Claimable Neon. An agent or tool creates a Neon project without an account, uses it right away, and hands the user a claim link to keep it. Claimable projects can also include the Data API and Managed Better Auth. See [Claimable Neon](/claimable-neon) and the [Claimable Neon reference](/docs/reference/claimable-neon) for the current CLI and API.
+</Admonition>
 
 Sometimes you need a Postgres database _right now_, and you’d like to have it without setting up containers, deploying infra, or creating an account anywhere. Maybe you’re following a tutorial online or testing a quick idea.
 

@@ -9,7 +9,7 @@ excerpt: >-
   pricing page. Almost nobody questions this model, but it creates a quagmire
   inside product teams. We know it from experience, a...
 date: '2025-09-04T16:01:18'
-updatedOn: '2025-12-09T01:19:38'
+updatedOn: '2026-11-06T12:00:00.000Z'
 category: product
 categories:
   - product
@@ -39,6 +39,10 @@ seo:
 ---
 
 ![Post image](https://cdn.neonapi.io/public/images/pages/blog/why-we-no-longer-lock-premium-features/screenshot-2025-09-04-at-84516percente2percent80percentafam-1024x572-5d105f67.png)
+
+<Admonition type="important" title="Pricing has changed since this post">
+This post describes pricing from September 2025. As of November 2026, the Free plan includes 100 projects, each with 100 CU-hours of compute per month and 1 GB of storage (up to 20 GB across all projects). Launch compute is $0.106 per CU-hour, Scale compute is $0.222 per CU-hour, and paid plans have no monthly minimum. See the [pricing page](/pricing) and the [plans documentation](/docs/introduction/plans) for current pricing and limits.
+</Admonition>
 
 Most database providers follow the classic SaaS playbook: bundle features into tiered plans with progressively higher monthly fees.
 
@@ -88,21 +92,17 @@ We mirrored this model from Databricks’ serverless pricing, which successfully
 
 ## Premium features are no longer locked
 
-<Admonition type="important" title="Neon pricing update (December 2025)">
-We are no longer enforcing the $5 minimum in our paid plans - if you consume $3, that's what you'll be charged. [Check our pricing page for the up to date pricing information.](https://neon.com/pricing)
-</Admonition>
-
 In other Postgres providers, these are locked behind expensive plans. Not in Neon.
 
-| “Premium” feature | Competition | Neon |
-| --- | --- | --- |
-| SOC 2 | $599/mo plan | Available in Scale: usage-based, no minimum |
-| **SSO** | $599/mo plan | Available in Scale: usage-based, no minimum |
-| **PrivateLink** | Enterprise only | Available in Scale: usage-based, no minimum |
-| **SLA** | Enterprise only | Available in Scale: usage-based, no minimum |
-| **HIPAA** | $599/mo plan, plus additional monthly flat fee | Available in Scale: usage-based, no minimum + usage-based surcharge |
-| **Log export** | $599/mo plan, plus $60/drain/mo + usage fees | Available in Scale: usage-based, no minimum |
-| **PITR** | $25/mo plan, plus $100 extra/month | Available in Scale: usage-based, no minimum +<br />$0.20/GB-month of data changes |
+| “Premium” feature | Competition                                    | Neon                                                                              |
+| ----------------- | ---------------------------------------------- | --------------------------------------------------------------------------------- |
+| SOC 2             | $599/mo plan                                   | Available in Scale: usage-based, no minimum                                       |
+| **SSO**           | $599/mo plan                                   | Available in Scale: usage-based, no minimum                                       |
+| **PrivateLink**   | Enterprise only                                | Available in Scale: usage-based, no minimum                                       |
+| **SLA**           | Enterprise only                                | Available in Scale: usage-based, no minimum                                       |
+| **HIPAA**         | $599/mo plan, plus additional monthly flat fee | Available in Scale: usage-based, no minimum + usage-based surcharge               |
+| **Log export**    | $599/mo plan, plus $60/drain/mo + usage fees   | Available in Scale: usage-based, no minimum                                       |
+| **PITR**          | $25/mo plan, plus $100 extra/month             | Available in Scale: usage-based, no minimum +<br />$0.20/GB-month of data changes |
 
 ## Sign up and try it
 

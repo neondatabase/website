@@ -104,9 +104,9 @@ For syntax details, see [CREATE PUBLICATION](https://www.postgresql.org/docs/cur
 
 ### Allow connections from Neon
 
-Neon connects in to Lakebase over the public internet. Private Link isn't supported for logical replication on Lakebase.
+Neon connects to Lakebase over the public internet. Private Link isn't supported for logical replication on Lakebase.
 
-If your Databricks workspace uses an IP access list, add the NAT gateway IP addresses for your Neon project's region to it. Neon uses 3 to 6 IP addresses per region for outbound communication, one for each availability zone, so be sure to add all of them. See [NAT Gateway IP addresses](/docs/introduction/regions#nat-gateway-ip-addresses) for the list, and [Manage the IP access list](https://docs.databricks.com/aws/en/security/network/front-end/ip-access-list) in the Databricks documentation for instructions.
+If your Databricks workspace uses an IP access list, add the NAT gateway IP addresses for your Neon project's region to it. Neon uses several NAT gateway IP addresses per region for outbound communication, and the list changes over time, so add all of the addresses listed for your region. See [NAT Gateway IP addresses](/docs/introduction/regions#nat-gateway-ip-addresses) for the list, and [Manage the IP access list](https://docs.databricks.com/aws/en/security/network/front-end/ip-access-list) in the Databricks documentation for instructions.
 
 ## Prepare your Neon destination database
 

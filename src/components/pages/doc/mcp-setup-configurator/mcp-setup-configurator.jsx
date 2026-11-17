@@ -9,6 +9,7 @@ import CodeBlockWrapper from 'components/shared/code-block-wrapper';
 import highlight from 'lib/shiki';
 
 import {
+  DEFAULT_SECRETS,
   MCP_PATH,
   MCP_SERVER_BASE,
   appendParams,
@@ -31,6 +32,24 @@ const AUTH_MODES = [
     id: 'apiKey',
     label: 'API Key',
     description: 'Static bearer token. Best for headless and remote agents.',
+  },
+];
+
+const SECRETS_MODES = [
+  {
+    id: 'setup',
+    label: 'Setup credentials',
+    description: 'Connection strings, role passwords, and credential tokens.',
+  },
+  {
+    id: 'all',
+    label: 'All secrets',
+    description: 'Also the SMTP password and OAuth provider secrets stored in Neon Auth.',
+  },
+  {
+    id: 'none',
+    label: 'No secrets',
+    description: 'Results show ***redacted*** and secret-only tools are hidden.',
   },
 ];
 
@@ -60,10 +79,15 @@ const FIELD_LABEL_CLASS =
   'mb-1.5 block text-xs font-semibold uppercase tracking-wide text-gray-new-30 dark:text-gray-new-70';
 const HELPER_TEXT_CLASS = 'text-[13px] leading-relaxed text-gray-new-40 dark:text-gray-new-60';
 
-const SegmentedControl = ({ name, options, value, onChange }) => (
+const SegmentedControl = ({ name, options, value, onChange, disabled = false }) => (
   <div
-    className="relative grid grid-cols-2 gap-1 rounded-lg border border-gray-new-90 bg-gray-new-98 p-1 dark:border-gray-new-20 dark:bg-gray-new-8 sm:grid-cols-1"
+    className={clsx(
+      'relative grid gap-1 rounded-lg border border-gray-new-90 bg-gray-new-98 p-1 dark:border-gray-new-20 dark:bg-gray-new-8 sm:grid-cols-1',
+      options.length > 2 ? 'grid-cols-1' : 'grid-cols-2',
+      disabled && 'opacity-50'
+    )}
     role="radiogroup"
+    aria-disabled={disabled}
   >
     {options.map((option) => {
       const selected = value === option.id;
@@ -74,11 +98,13 @@ const SegmentedControl = ({ name, options, value, onChange }) => (
           role="radio"
           name={name}
           aria-checked={selected}
+          disabled={disabled}
           className={clsx(
             'flex flex-col items-start gap-0.5 rounded-md px-3 py-2 text-left text-sm transition-colors',
             selected
               ? 'bg-white text-gray-new-10 shadow-sm ring-1 ring-gray-new-90 dark:bg-gray-new-10 dark:text-white dark:ring-gray-new-20'
-              : 'text-gray-new-40 hover:text-gray-new-20 dark:text-gray-new-60 dark:hover:text-gray-new-90'
+              : 'text-gray-new-40 hover:text-gray-new-20 dark:text-gray-new-60 dark:hover:text-gray-new-90',
+            disabled && 'cursor-not-allowed'
           )}
           onClick={() => onChange(option.id)}
         >
@@ -101,6 +127,7 @@ SegmentedControl.propTypes = {
   ).isRequired,
   value: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,
+  disabled: PropTypes.bool,
 };
 
 const Toggle = ({ checked, onChange, label, description }) => (
@@ -304,6 +331,7 @@ const McpSetupConfigurator = () => {
   const [apiKey, setApiKey] = useState('');
   const [installGlobally, setInstallGlobally] = useState(false);
   const [readOnly, setReadOnly] = useState(false);
+  const [secrets, setSecrets] = useState(DEFAULT_SECRETS);
   const [projectId, setProjectId] = useState('');
   const [roleName, setRoleName] = useState('');
   const [selectedScopes, setSelectedScopes] = useState(SCOPE_IDS);
@@ -316,11 +344,12 @@ const McpSetupConfigurator = () => {
         projectId,
         readOnly,
         roleName,
+        secrets,
         scopeIds: SCOPE_IDS,
         scopeIdSet: SCOPE_ID_SET,
         selectedScopes,
       }),
-    [readOnly, projectId, roleName, selectedScopes]
+    [readOnly, projectId, roleName, secrets, selectedScopes]
   );
   const queryString = queryParams.toString();
 
@@ -428,6 +457,21 @@ const McpSetupConfigurator = () => {
                 description="Limit tools to read-safe actions. Good default for exploration."
                 onChange={setReadOnly}
               />
+              <div>
+                <span className={FIELD_LABEL_CLASS}>Secrets in tool results</span>
+                <SegmentedControl
+                  name="secrets"
+                  options={SECRETS_MODES}
+                  value={readOnly ? 'none' : secrets}
+                  disabled={readOnly}
+                  onChange={setSecrets}
+                />
+                <span className={clsx('mt-2 block', HELPER_TEXT_CLASS)}>
+                  {readOnly
+                    ? 'Read-only connections show no secrets.'
+                    : 'Which secrets tools return to the agent, and so to its model provider and transcript.'}
+                </span>
+              </div>
               <div>
                 <label className="block">
                   <span className={FIELD_LABEL_CLASS}>Project ID (optional)</span>

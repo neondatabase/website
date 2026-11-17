@@ -3,7 +3,7 @@ title: 'How do I rotate my database URL or connection string in Neon?'
 subtitle: 'Two paths: reset the role password (fast), or create a new role and migrate consumers (zero-downtime).'
 enableTableOfContents: true
 createdAt: '2026-05-18T00:00:00.000Z'
-updatedOn: '2026-09-23T21:00:25.204Z'
+updatedOn: '2026-11-05T15:33:57.188Z'
 isDraft: false
 redirectFrom: []
 previousLink:
@@ -25,7 +25,7 @@ See [Rotate credentials](/docs/security/security-overview#rotate-credentials) fo
 
 Use this for routine rotation or a suspected leak, when you can update every consumer right away.
 
-<Tabs labels={["Console", "API"]}>
+<Tabs labels={["Console", "CLI", "API"]}>
 
 <TabItem>
 
@@ -33,6 +33,22 @@ Use this for routine rotation or a suspected leak, when you can update every con
 2. Under **Postgres database**, select **Roles**. From the role's menu, choose **Reset password**, then click **Reset**.
 3. Click **Connect** in the Console nav to copy the new `DATABASE_URL`.
 4. Update the value on your deploy targets.
+
+</TabItem>
+
+<TabItem>
+
+Reset the password with [`neon roles reset-password`](/docs/cli/roles#reset-password). It prints the new password and waits until the compute applies it:
+
+```bash
+neon roles reset-password alex --branch main
+```
+
+Then print the updated connection string:
+
+```bash
+neon connection-string main --role-name alex
+```
 
 </TabItem>
 

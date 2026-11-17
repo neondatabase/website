@@ -113,6 +113,9 @@
     - title: "Update magic link plugin configuration"
       slug: reference/api/auth/update-neon-auth-magic-link-plugin
       method: PATCH
+    - title: "Update Neon Auth logs export setting"
+      slug: reference/api/auth/update-neon-auth-logs-export
+      method: PATCH
     - title: "Update Neon Auth webhook configuration"
       slug: reference/api/auth/update-neon-auth-webhook-config
       method: PUT

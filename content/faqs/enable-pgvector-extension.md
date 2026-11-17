@@ -3,7 +3,7 @@ title: 'How do I enable the pgvector extension in my Neon database?'
 subtitle: 'Run CREATE EXTENSION vector once and start storing embeddings.'
 enableTableOfContents: true
 createdAt: '2026-05-18T00:00:00.000Z'
-updatedOn: '2026-09-23T21:00:25.204Z'
+updatedOn: '2026-11-02T19:00:00.000Z'
 isDraft: false
 redirectFrom: []
 previousLink:
@@ -69,5 +69,7 @@ The operator class has to match the distance operator you query with: `vector_l2
 <Admonition type="tip" title="Sizing index builds">
 HNSW indexes build much faster when the graph fits in `maintenance_work_mem`. You can raise it for the session, for example `SET maintenance_work_mem = '4 GB';` on a 4 CU (≈16 GB RAM) compute. Keep it under 50 to 60 percent of your compute's RAM. See [HNSW index build time](/docs/extensions/pgvector#hnsw-index-build-time).
 </Admonition>
+
+If your vectors outgrow an in-memory HNSW index, or you also want BM25 keyword ranking, look at [Lakebase Search](/docs/ai/lakebase-search), a set of Postgres extensions for vector, BM25, and hybrid search in Lakebase Postgres. Its `lakebase_vector` extension adds a `lakebase_ann` index that works on the same `vector` columns and operators you set up here, so `CREATE EXTENSION IF NOT EXISTS lakebase_vector CASCADE;` is the only extra step ([lakebase_vector](/docs/extensions/lakebase-vector)). It requires Postgres 16 or later.
 
 <CTA title="Tune pgvector for production" description="Walk through HNSW vs IVFFlat, vector types (halfvec, bit, sparsevec), and query tuning for similarity search." buttonText="Read the pgvector docs" buttonUrl="/docs/extensions/pgvector" />

@@ -14,6 +14,7 @@ import getExcerpt from 'utils/get-excerpt';
 import getFormattedDate from 'utils/get-formatted-date';
 
 const BlogPostCard = ({
+  titleTag: TitleTag = 'h2',
   className,
   title,
   subtitle,
@@ -79,6 +80,7 @@ const BlogPostCard = ({
             fullSize && 'min-w-0 flex-1 basis-[42%] self-start'
           )}
           to={link}
+          aria-label={title}
         >
           <Image
             className={cn(
@@ -137,7 +139,7 @@ const BlogPostCard = ({
         </div>
         <Link className={cn('group flex flex-col', isSmart ? 'mt-0' : 'mt-auto')} to={link}>
           {/* title */}
-          <h1
+          <TitleTag
             className={cn(
               'tracking-tighter transition-colors duration-200 group-hover:text-gray-new-80',
               isSmart
@@ -146,7 +148,7 @@ const BlogPostCard = ({
             )}
           >
             {title}
-          </h1>
+          </TitleTag>
           {/* excerpt */}
           {excerpt && (
             <div
@@ -165,6 +167,7 @@ const BlogPostCard = ({
 };
 
 BlogPostCard.propTypes = {
+  titleTag: PropTypes.oneOf(['h2', 'h3']),
   className: PropTypes.string,
   title: PropTypes.string.isRequired,
   subtitle: PropTypes.string,

@@ -8,6 +8,7 @@ import CodeBlock from 'components/pages/blog-post/code-block';
 import CodeTabs from 'components/pages/blog-post/code-tabs';
 import Content from 'components/pages/blog-post/content';
 import CTA from 'components/pages/blog-post/cta';
+import FunctionRegistryShowcase from 'components/pages/blog-post/function-registry-showcase';
 import Hero from 'components/pages/blog-post/hero';
 import MoreArticles from 'components/pages/blog-post/more-articles';
 import SocialShare from 'components/pages/blog-post/social-share';
@@ -20,8 +21,11 @@ import BlogQuote from 'components/shared/blog-quote';
 import ChangelogForm from 'components/shared/changelog-form';
 import EmbedTweet from 'components/shared/embed-tweet';
 import ImageZoom from 'components/shared/image-zoom';
+import JsonLd from 'components/shared/json-ld';
 import RequestForm from 'components/shared/request-form';
 import { DEFAULT_BLOG_ROUTE_CONFIG } from 'constants/blog';
+import rehypeTaskListLabels from 'lib/rehype-task-list-labels';
+import getArticleSchema from 'utils/get-article-schema';
 import getFormattedDate from 'utils/get-formatted-date';
 import getMarkdownTableOfContents from 'utils/get-markdown-table-of-contents';
 import getNofollowRel from 'utils/get-nofollow-rel';
@@ -100,6 +104,7 @@ const mdxComponents = {
   CodeTabs,
   CTA,
   EmbedTweet,
+  FunctionRegistryShowcase,
   RequestForm: renderBlogRequestForm,
   TabItem,
   Tabs: renderBlogTabs,
@@ -118,26 +123,23 @@ const BlogPostPage = ({
   const formattedDate = getFormattedDate(date);
   const tableOfContents = getMarkdownTableOfContents(content);
 
-  const jsonLd = {
-    '@context': 'https://schema.org',
-    '@type': 'Article',
-    headline: title,
-    image: [seo?.twitterImage?.mediaItemUrl],
+  const jsonLd = getArticleSchema({
+    title,
+    url: postUrl,
+    image: seo?.twitterImage?.mediaItemUrl || pageBlogPost?.largeCover?.mediaItemUrl,
     datePublished: dateGmt,
     dateModified: modifiedGmt,
     description: pageBlogPost?.description,
-    author: {
+    authors: pageBlogPost?.authors?.map(({ author }) => ({
       '@type': 'Person',
-      name: pageBlogPost?.authors?.[0].author.title,
-    },
-  };
+      name: author.title,
+      url: author.postAuthor?.url || undefined,
+    })),
+  });
 
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
+      <JsonLd data={jsonLd} />
       <div className="safe-paddings">
         <article className="dark relative mx-auto grid max-w-[1536px] grid-cols-12 gap-x-10 pt-20 pb-40 2xl:px-10 xl:gap-x-6 xl:pt-12 xl:pb-32 lg:block lg:max-w-none lg:px-8 lg:pt-10 lg:pb-28 md:px-4 md:pt-8 md:pb-20">
           {previewBanner && (
@@ -167,7 +169,9 @@ const BlogPostPage = ({
               <MDXRemote
                 source={content}
                 components={mdxComponents}
-                options={{ mdxOptions: { remarkPlugins: [remarkGfm] } }}
+                options={{
+                  mdxOptions: { remarkPlugins: [remarkGfm], rehypePlugins: [rehypeTaskListLabels] },
+                }}
               />
             }
           />
@@ -198,6 +202,7 @@ BlogPostPage.propTypes = {
     content: PropTypes.string.isRequired,
     pageBlogPost: PropTypes.shape({
       description: PropTypes.string,
+      largeCover: PropTypes.shape({ mediaItemUrl: PropTypes.string }),
       authors: PropTypes.arrayOf(PropTypes.object).isRequired,
     }).isRequired,
     date: PropTypes.string.isRequired,

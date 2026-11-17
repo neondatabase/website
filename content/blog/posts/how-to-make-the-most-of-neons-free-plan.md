@@ -7,7 +7,7 @@ excerpt: >-
   building with Postgres – we’ve seen developers ship amazing things with it. If
   you’re new to Neon, let us share some tips...
 date: '2025-09-03T17:21:13'
-updatedOn: '2025-11-01T01:00:06'
+updatedOn: '2026-11-02T12:00:00.000Z'
 category: product
 categories:
   - product
@@ -21,19 +21,19 @@ isFeatured: true
 seo:
   title: How to Make the Most of Neon's Free Plan - Neon
   description: >-
-    Neon’s Free Plan is packed with everything you need to start building with
-    Postgres. Here are some tips to help you get the most out of it.
+    Tips to get the most out of Neon's Free plan. For current Free plan limits, see neon.com/pricing.
   keywords: []
   noindex: false
   ogTitle: How to Make the Most of Neon's Free Plan - Neon
   ogDescription: >-
-    Neon’s Free Plan is packed with everything you need to start building with
-    Postgres. Here are some tips to help you get the most out of it.
+    Tips to get the most out of Neon's Free plan. For current Free plan limits, see neon.com/pricing.
   image: >-
     https://cdn.neonapi.io/public/images/pages/blog/how-to-make-the-most-of-neons-free-plan/social.jpg
 ---
 
-_Note: This blog post was updated on October 31, 2025 to reflect changes in the Free Plan limits._
+<Admonition type="important" title="Free plan limits have changed since this post">
+The tips in this post still apply, but the limits it quotes are from 2025. As of November 2026, the Free plan includes 100 projects, each with 100 CU-hours of compute per month and 1 GB of storage (up to 20 GB across all projects). See the [pricing page](/pricing) and the [plans documentation](/docs/introduction/plans) for current pricing and limits.
+</Admonition>
 
 Neon’s Free Plan is packed with everything you need to start building with Postgres – [we’ve seen developers ship amazing things with it](https://neon.com/blog/databuddy-is-open-sourcing-privacy-first-analytics-built-on-neon). If you’re new to Neon, let us share some tips to make sure you get the most out of your free account, whether you’re prototyping, testing, or shipping your first Postgres-powered app:
 

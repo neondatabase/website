@@ -10,8 +10,8 @@ previousLink:
   title: 'Why am I getting ''Error connecting to database: Failed to fetch'' in the Neon Console Tables view?'
   slug: failed-to-fetch-error-tables-view
 nextLink:
-  title: 'Where can I find my database connection string or URL in Neon?'
-  slug: find-database-connection-string-url
+  title: 'Where can I find my database connection string in Neon?'
+  slug: find-database-connection-string
 ---
 
 Open your project in the [Neon Console](https://console.neon.tech) and click **Connect** in the Console nav. The **Connect to your branch** modal shows every connection detail for the branch, compute, database, and role you select, including the host, the password, and a ready-to-copy connection string. See [Connect from any app](/docs/connect/connect-from-any-app).

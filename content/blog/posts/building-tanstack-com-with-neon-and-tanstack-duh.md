@@ -7,7 +7,7 @@ excerpt: >-
   select Neon in the CLI, you get a working database instantly and later you can
   go claim it, which is one of the coolest things I...
 date: '2026-01-20T17:17:15'
-updatedOn: '2026-01-20T17:20:32'
+updatedOn: '2026-11-06T12:00:00.000Z'
 category: product
 categories:
   - product
@@ -35,6 +35,10 @@ seo:
 ---
 
 ![Image](https://cdn.neonapi.io/public/images/pages/blog/building-tanstack-com-with-neon-and-tanstack-duh/neon-object-storage-1024x576-7091f146.jpg)
+
+<Admonition type="important" title="Instagres is now Claimable Neon">
+Instagres has evolved into Claimable Neon. An agent or tool creates a Neon project without an account, uses it right away, and hands the user a claim link to keep it. Claimable projects can also include the Data API and Managed Better Auth. See [Claimable Neon](/claimable-neon) and the [Claimable Neon reference](/docs/reference/claimable-neon) for the current CLI and API.
+</Admonition>
 
 <blockquote>
 <p><strong>“Neon was so easy to get started, and it worked flawlessly with TanStack Start and TanStack Query. When you start a new project with TanStack Start and select Neon in the CLI, you get a working database instantly and later you can go claim it, which is one of the coolest things I’ve seen” </strong><br></br><br></br>(<a href="https://x.com/tannerlinsley?s=20">Tanner Linsley</a>, founder of <a href="https://tanstack.com/">TanStack</a>)</p>

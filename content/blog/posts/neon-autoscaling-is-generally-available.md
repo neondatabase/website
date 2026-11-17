@@ -115,7 +115,7 @@ We’ve built Neon autoscaling to offer a better way for Postgres. Instead of pr
 
 In addition to a max autoscaling limit, you also define a minimum autoscaling limit, below which your CPU/RAM will never scale down. This allows you to balance costs and performance for your specific needs. A non-production database can scale to zero when not in use, and a production database can maintain a minimum performance level while also being ready to respond to traffic spikes at a moments notice.
 
-# Getting started
+## Getting started
 
 **All Neon databases can now autoscale, including those in the Free plan (up to 2 CPU, 8 GB RAM).** To enable autoscaling in your Neon branch, navigate to the Edit compute endpoint menu in the Neon console. Select Enable autoscaling. Use the slider to adjust your minimum and maximum autoscaling limits (e.g. 1 and 6 in the example below). Depending on your [pricing plan](https://neon.tech/pricing), you’ll see higher or lower max capacity limits.
 

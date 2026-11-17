@@ -21,9 +21,11 @@ export async function generateMetadata(props) {
   const post = getPostBySlug(slug, USE_CASES_DIR_PATH);
   if (!post) return null;
 
+  const seo = post?.data?.seo || {};
+
   return getMetadata({
-    title: post?.data?.title,
-    description: post?.data?.subtitle,
+    title: seo.title || post?.data?.title,
+    description: seo.description || post?.data?.subtitle,
     pathname: `${LINKS.useCases}/${slug}`,
     type: 'article',
     imagePath: post?.data?.image,

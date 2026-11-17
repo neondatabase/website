@@ -170,6 +170,8 @@ describe('getMarkdownPath', () => {
       ['/auth.md', '/auth.md'],
       ['/lakebase', '/md/lakebase.md'],
       ['/lakebase.md', '/md/lakebase.md'],
+      ['/case-studies', '/md/case-studies.md'],
+      ['/case-studies.md', '/md/case-studies.md'],
     ])('should resolve generated page %s to %s', (pagePath, markdownPath) => {
       expect(getMarkdownPath(pagePath)).toBe(markdownPath);
     });

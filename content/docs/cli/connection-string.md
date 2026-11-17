@@ -9,13 +9,13 @@ summary: >-
   pooling (--pooled), read-only replicas (--endpoint-type read_only), or
   time-travel queries targeting a specific timestamp or LSN.
 enableTableOfContents: true
-updatedOn: '2026-10-09T18:53:48.985Z'
+updatedOn: '2026-11-05T15:33:57.188Z'
 redirectFrom:
   - /docs/reference/cli-connection-string
   - /docs/cli/cs
 ---
 
-The `connection-string` command gets a Postgres connection string for any database on any branch in your Neon project. The connection string includes the password for the specified role. For information about connecting to Neon, see [Connect from any application](/docs/connect/connect-from-any-app). If `--project-id` is omitted, the CLI resolves it from your [context file](/docs/cli/link), auto-selects when your account has only one project, and otherwise asks you to pass `--project-id`. `--database-name` is needed only when the branch has more than one database. Without `--role-name`, the command uses the branch's only role, or `neondb_owner` when there are several. The roles that the [Data API](/docs/data-api/get-started) and [Managed Better Auth](/docs/auth/overview) add (`authenticator`, `anonymous`, and `authenticated`) don't count, so you don't need `--role-name` on those branches either. This is the same role [`neon env pull`](/docs/cli/env) writes into `DATABASE_URL`. If the command still can't pick a role, it asks you to pass `--role-name`.
+The `connection-string` command gets a Postgres connection string for any database on any branch in your Neon project. The connection string includes the password for the specified role. It's also available as [`neon postgres connection-string`](/docs/cli/postgres#connection-string). For information about connecting to Neon, see [Connect from any application](/docs/connect/connect-from-any-app). If `--project-id` is omitted, the CLI resolves it from your [context file](/docs/cli/link), auto-selects when your account has only one project, and otherwise asks you to pass `--project-id`. `--database-name` is needed only when the branch has more than one database. Without `--role-name`, the command uses the branch's only role, or `neondb_owner` when there are several. The roles that the [Data API](/docs/data-api/get-started) and [Managed Better Auth](/docs/auth/overview) add (`authenticator`, `anonymous`, and `authenticated`) don't count, so you don't need `--role-name` on those branches either. This is the same role [`neon env pull`](/docs/cli/env) writes into `DATABASE_URL`. If the command still can't pick a role, it asks you to pass `--role-name`.
 
 <Admonition type="tip" title="Connect with psql">
 To open a `psql` session directly, use the dedicated [`neon psql`](/docs/cli/psql) command. You can also pass `--psql` to `connection-string` to achieve the same result.
@@ -25,7 +25,7 @@ To open a `psql` session directly, use the dedicated [`neon psql`](/docs/cli/psq
 
 <CliUsage command="connection-string" />
 
-The `[branch]` is the branch name or ID. If omitted, the default branch is used. To connect to a specific point in the branch's history, use the point-in-time format `branch@timestamp` or `branch@lsn`. If no timestamp or LSN is appended, the current state (HEAD) is used.
+The `[branch]` is the branch name or ID. If omitted, the default branch from your context (or the project's default branch) is used. To connect to a specific point in the branch's history, use the point-in-time format `branch@timestamp` or `branch@lsn`. If no timestamp or LSN is appended, the current state (HEAD) is used.
 
 ## Options
 

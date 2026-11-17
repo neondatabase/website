@@ -8,6 +8,7 @@ import React, { useState, useEffect } from 'react';
 
 import ProviderMarks from 'components/shared/provider-marks';
 import ICONS_CONFIG from 'config/docs-icons-config';
+import { NON_AGENT_FETCH_HEADERS } from 'constants/llm-analytics';
 import useCopyPrompt from 'hooks/use-copy-prompt';
 import CheckIcon from 'icons/check.inline.svg';
 import ChevronRight from 'icons/chevron-right-sm.inline.svg';
@@ -125,7 +126,7 @@ const CompactCard = ({
 
   useEffect(() => {
     if (promptSrc) {
-      fetch(promptSrc)
+      fetch(promptSrc, { headers: NON_AGENT_FETCH_HEADERS })
         .then((res) => res.text())
         .then(setMarkdown)
         .catch((err) => console.error(`Failed to fetch prompt: ${promptSrc}`, err));
@@ -211,8 +212,16 @@ const CompactCard = ({
   }
 
   if (href) {
+    const isHome = appearance === 'home';
     return (
-      <li className="m-0! before:hidden">
+      <li className={cn('m-0! before:hidden', isHome && 'group/item relative')}>
+        {/* Docs home rows get a soft background while hovered or focused. */}
+        {isHome && (
+          <span
+            className="pointer-events-none absolute -inset-2 bg-gray-new-98 opacity-0 transition-opacity duration-200 group-focus-within/item:opacity-100 group-hover/item:opacity-100 dark:bg-gray-new-10"
+            aria-hidden
+          />
+        )}
         <Link
           className={sharedClassName}
           href={href}

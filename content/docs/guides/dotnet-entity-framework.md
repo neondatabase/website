@@ -26,7 +26,7 @@ The same configuration steps can be used for any .NET application using Entity F
 
 To connect to Neon from an Entity Framework application:
 
-1. [Create a Neon Project](#create-a-neon-project)
+1. [Create a Neon project](#create-a-neon-project)
 2. [Create a .NET project and add dependencies](#create-a-net-project-and-add-dependencies)
 3. [Configure Entity Framework](#configure-entity-framework)
 4. [Run the application](#run-the-application)
@@ -44,27 +44,27 @@ If you do not have one already, create a Neon project.
 1. Create a new ASP.NET Core Web API project and change to the newly created directory:
 
    ```bash
-   dotnet new webapi -n NeonEfExample
+   dotnet new webapi --use-controllers -n NeonEfExample
    cd NeonEfExample
    ```
 
-2. Delete the files `WeatherForecast.cs` and `Controllers/WeatherForecastController.cs` as we won't be using them:
+   The `--use-controllers` option creates a controller-based project. Without it, .NET 8 and later create a minimal API project with no `Controllers` folder.
+
+2. Delete the sample files `WeatherForecast.cs` and `Controllers/WeatherForecastController.cs`, which this guide doesn't use:
 
    ```bash
    rm WeatherForecast.cs Controllers/WeatherForecastController.cs
    ```
 
-3. Install required packages
-
-    <Admonition type="important" title="IMPORTANT">
-    Ensure you install package versions that match your .NET version. You can verify your .NET version at any time by running `dotnet --version`.
-    </Admonition>
+3. Install the EF Core tools and packages. Use package versions with the same major version as your .NET SDK. Run `dotnet --version` to check it: for example, `10.0.403` is .NET 10, so use `10.*`.
 
    ```bash
-   dotnet tool install --global dotnet-ef --version YOUR_DOTNET_VERSION
-   dotnet add package Microsoft.EntityFrameworkCore.Design --version YOUR_DOTNET_VERSION
-   dotnet add package Npgsql.EntityFrameworkCore.PostgreSQL --version YOUR_DOTNET_VERSION
+   dotnet tool install --global dotnet-ef --version '10.*'
+   dotnet add package Microsoft.EntityFrameworkCore.Design --version '10.*'
+   dotnet add package Npgsql.EntityFrameworkCore.PostgreSQL --version '10.*'
    ```
+
+   For .NET 9, use `'9.*'`; for .NET 8, use `'8.*'`. Don't pass the full SDK version (such as `10.0.403`): package versions don't match it, and the install fails.
 
 ## Configure Entity Framework
 
@@ -102,17 +102,19 @@ If you do not have one already, create a Neon project.
    }
    ```
 
-3. Update `appsettings.json` / `appsettings.Development.json`:
-
-   Add the connection string:
+3. Add a `ConnectionStrings` section to `appsettings.json` with your Neon connection details. Get them from the **Connect** modal in the Neon Console:
 
    ```json
    {
      "ConnectionStrings": {
-       "TodoDbConnection": "Host=your-neon-host;Database=your-db;Username=your-username;Password=your-password;SSL Mode=Require"
+       "TodoDbConnection": "Host=[neon_hostname];Database=[dbname];Username=[user];Password=[password];SSL Mode=Require;Channel Binding=Require"
      }
    }
    ```
+
+   Npgsql uses this key-value format rather than a `postgresql://` URL. To convert a URL such as `postgresql://alex:AbC123dEf@ep-cool-darkness-123456-pooler.us-east-2.aws.neon.tech/dbname?sslmode=require&channel_binding=require`, use the hostname for `Host`, the path for `Database`, the user and password for `Username` and `Password`, and map `sslmode=require` to `SSL Mode=Require` and `channel_binding=require` to `Channel Binding=Require`.
+
+   Keep the existing `Logging` and `AllowedHosts` settings in the file. Don't commit a real password: for local development, you can store the connection string with [user secrets](https://learn.microsoft.com/en-us/aspnet/core/security/app-secrets) instead.
 
 4. Create a Todo controller in `Controllers/TodoController.cs`:
 
@@ -152,7 +154,7 @@ If you do not have one already, create a Neon project.
    }
    ```
 
-5. Update `Program.cs`:
+5. Replace the contents of `Program.cs`:
 
    ```csharp
    using Microsoft.EntityFrameworkCore;
@@ -161,30 +163,26 @@ If you do not have one already, create a Neon project.
    var builder = WebApplication.CreateBuilder(args);
 
    builder.Services.AddControllers();
+   builder.Services.AddOpenApi();
 
    builder.Services.AddDbContext<ApplicationDbContext>(options =>
-       options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
-
-   builder.Services.AddEndpointsApiExplorer();
-   builder.Services.AddSwaggerGen();
+       options.UseNpgsql(builder.Configuration.GetConnectionString("TodoDbConnection")));
 
    var app = builder.Build();
 
-   app.UseSwagger();
-   app.UseSwaggerUI();
+   if (app.Environment.IsDevelopment())
+   {
+       app.MapOpenApi();
+   }
+
+   app.UseHttpsRedirection();
    app.UseAuthorization();
    app.MapControllers();
 
-   if (app.Environment.IsDevelopment())
-   {
-       app.Run("http://localhost:5001");
-   }
-   else
-   {
-       app.UseHttpsRedirection();
-       app.Run();
-   }
+   app.Run();
    ```
+
+   The name passed to `GetConnectionString` must match the key in `appsettings.json` (`TodoDbConnection`). If it doesn't, `dotnet ef database update` fails with `The ConnectionString property has not been initialized`.
 
 6. Create and apply the initial migration:
 
@@ -195,13 +193,29 @@ If you do not have one already, create a Neon project.
 
 ## Run the application
 
-1. Start the application:
+1. Start the application on port 5001 (use any free port if 5001 is taken, and change the URLs below to match):
 
    ```bash
-   dotnet run
+   dotnet run --urls http://localhost:5001
    ```
 
-2. Test the connection by navigating to [`http://localhost:5001/swagger`](http://localhost:5001/swagger) in your browser. You can use the Swagger UI to create and retrieve Todo items.
+2. In another terminal, create a todo and then list todos:
+
+   ```bash
+   curl -X POST http://localhost:5001/api/todo \
+     -H "Content-Type: application/json" \
+     -d '{"title": "Try Neon", "isComplete": false}'
+
+   curl http://localhost:5001/api/todo
+   ```
+
+   The second command returns the todo stored in your Neon database:
+
+   ```json filename="Output"
+   [{"id":1,"title":"Try Neon","isComplete":false}]
+   ```
+
+   In development, the OpenAPI document for the API is available at `http://localhost:5001/openapi/v1.json`.
 
 ## Resources
 

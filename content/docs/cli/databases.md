@@ -9,14 +9,14 @@ summary: >-
   default branch. Each subcommand accepts `--project-id` (required only for
   accounts with multiple projects) and `--context-file` for reusable context.
 enableTableOfContents: true
-updatedOn: '2026-10-03T12:43:38.865Z'
+updatedOn: '2026-11-09T17:20:53.058Z'
 redirectFrom:
   - /docs/reference/cli-databases
   - /docs/cli/database
   - /docs/cli/db
 ---
 
-The `databases` command lists, creates, and deletes databases in a Neon project from the terminal. For information about databases in Neon, see [Manage databases](/docs/manage/databases). If `--project-id` is omitted, the CLI resolves it from your [context file](/docs/cli/link), auto-selects when your account has only one project, and otherwise asks you to pass `--project-id`.
+The `databases` command lists, creates, and deletes databases in a Neon project from the terminal. It's also available as [`neon postgres databases`](/docs/cli/postgres#databases). For information about databases in Neon, see [Manage databases](/docs/manage/databases). If `--project-id` is omitted, the CLI resolves it from your [context file](/docs/cli/link), auto-selects when your account has only one project, and otherwise asks you to pass `--project-id`.
 
 <CliSubcommands command="databases" />
 
@@ -42,7 +42,7 @@ The table is titled with the branch the databases belong to. Pass `--branch <id-
 
 ## neon databases create (#create)
 
-Creates a database. If you don't specify `--owner-name`, the current user becomes the database owner.
+Creates a database. If you don't specify `--owner-name`, the branch's only role becomes the database owner. If the branch has more than one role, the command fails unless you pass `--owner-name`. If it has no roles, the command fails.
 
 <CliUsage command="databases create" />
 

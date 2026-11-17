@@ -1,6 +1,6 @@
 ---
 title: Media storage with Cloudinary
-subtitle: Store files via Cloudinary and track metadata in Lakebase
+subtitle: Store files via Cloudinary and track metadata in Lakebase Postgres
 summary: >-
   Cloudinary-Neon integration that securely uploads images and videos from the
   client using backend-generated signatures, then stores the resulting asset
@@ -16,7 +16,7 @@ updatedOn: '2026-10-28T11:11:18.780Z'
 [Cloudinary](https://cloudinary.com/) is a cloud-based platform for image and video management, offering upload, storage, real-time manipulation, optimization, and delivery via CDN.
 
 <Callout title="Neon now offers native storage">
-Neon Object Storage is S3-compatible object storage built into the Neon backend. Object storage branches with your database: each branch gets its own isolated namespace, so you can test file uploads in preview branches without touching production. No separate cloud account needed. Use any S3-compatible SDK with your existing Neon credential.
+Neon Object Storage is S3-compatible object storage built into your Neon project. Files branch with your database, so you can test uploads in a preview branch without touching production files. No separate cloud account needed. Point an S3 SDK at your branch endpoint with your Neon credential.
 
 For more information, see [Neon Object Storage](/docs/storage/overview).
 </Callout>

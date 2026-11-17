@@ -42,7 +42,7 @@ Before you begin, make sure you have:
 3. **Neon CLI**: Installed globally (`npm i -g neon@latest`) and authenticated (`neon login`). See the [Neon CLI quickstart](/docs/cli/quickstart) for details.
 
 <Admonition type="note" title="Plan and feature limits">
-Object Storage and Functions are available on any plan, subject to usage limits. The AI Gateway requires a paid plan. The Data API and Managed Better Auth don't support projects with [IP Allow](/docs/manage/projects#configure-ip-allow) or [Private Networking](/docs/guides/neon-private-networking) enabled.
+Object Storage and Functions are available on any plan, subject to usage limits. The AI Gateway works on any plan with [prepaid credits](/docs/ai-gateway/prepaid-credits). The Data API and Managed Better Auth don't support projects with [IP Allow](/docs/manage/projects#configure-ip-allow) or [Private Networking](/docs/guides/neon-private-networking) enabled.
 </Admonition>
 
 <Steps>
@@ -285,12 +285,12 @@ Function URLs
   • api: https://br-cool-forest-a1b2c3d4-api.compute.c-13.us-east-1.aws.neon.tech/
 
 Utilized services: Postgres, Neon Auth, Data API, Object Storage, Functions, AI Gateway
-Pulled 13 Neon variables into .env.local
+Pulled 14 Neon variables into .env.local
   Postgres        DATABASE_URL, DATABASE_URL_UNPOOLED
-  Branch          NEON_BRANCH
+  Branch          NEON_BRANCH, NEON_BRANCH_ID
   Neon Auth       NEON_AUTH_BASE_URL, NEON_AUTH_JWKS_URL
   Data API        NEON_DATA_API_URL
-  Functions       NEON_FUNCTION_API_BASE_URL
+  Functions       NEON_FUNCTION_HOST_SUFFIX
   Object Storage  AWS_ACCESS_KEY_ID*, AWS_SECRET_ACCESS_KEY*, AWS_ENDPOINT_URL_S3, AWS_REGION
   AI Gateway      NEON_AI_GATEWAY_TOKEN*, NEON_AI_GATEWAY_BASE_URL
   * new credential value

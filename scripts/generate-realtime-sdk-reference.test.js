@@ -145,7 +145,7 @@ describe('generateRealtimeSdkReference', () => {
 
   it('renders the useLiveQuery options default', () => {
     expect(byPath.get('content/docs/shared-content/realtime-sdk-react.md')).toContain(
-      'options: UseLiveQueryOptions<Row> = {}'
+      'options: UseLiveQueryOptions<NoInferCompat<Row>> = {}'
     );
   });
 

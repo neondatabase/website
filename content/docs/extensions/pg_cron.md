@@ -11,7 +11,7 @@ summary: >-
   computes with scale-to-zero disabled. `cron.schedule_in_database()` is not
   supported in Neon.
 enableTableOfContents: true
-updatedOn: '2026-09-18T17:46:57.332Z'
+updatedOn: '2026-11-05T15:33:57.188Z'
 ---
 
 The `pg_cron` extension provides a simple, cron-based job scheduler for Postgres. It operates directly within your database, allowing you to schedule standard SQL commands or calls to stored procedures using familiar cron syntax. This eliminates the need for external cron utilities for many database maintenance and automation tasks.
@@ -38,7 +38,7 @@ The `project_id` and `endpoint_id` values can be obtained from the Neon Console 
 curl --request PATCH \
      --url https://console.neon.tech/api/v2/projects/<project_id>/endpoints/<endpoint_id> \
      --header 'accept: application/json' \
-     --header 'authorization: Bearer $NEON_API_KEY$' \
+     --header "authorization: Bearer $NEON_API_KEY" \
      --header 'content-type: application/json' \
      --data '
 {
@@ -59,11 +59,17 @@ After setting `cron.database_name`, you must restart your compute to apply the n
 curl --request POST \
      --url https://console.neon.tech/api/v2/projects/<project_id>/endpoints/<endpoint_id>/restart \
      --header 'accept: application/json' \
-     --header 'authorization: Bearer $NEON_API_KEY'
+     --header "authorization: Bearer $NEON_API_KEY"
+```
+
+Or restart it with the Neon CLI:
+
+```bash
+neon postgres computes restart <endpoint_id> --project-id <project_id>
 ```
 
 <Admonition type="note">
-The [Restart compute endpoint](/docs/reference/api/endpoints/restart-project-endpoint) API only works on an active compute. If your compute is idle, you can start it by running a query to wake it up or running the [Start compute endpoint](/docs/reference/api/endpoints/start-project-endpoint) API. For more information and other compute restart options, see [Restart a compute](/docs/manage/computes#restart-a-compute).
+The [Restart compute endpoint](/docs/reference/api/endpoints/restart-project-endpoint) API only works on an active compute. If your compute is idle, you can start it by running a query to wake it up, or with the [Start compute endpoint](/docs/reference/api/endpoints/start-project-endpoint) API or [`neon postgres computes start`](/docs/cli/postgres#computes-start). For more information and other compute restart options, see [Restart a compute](/docs/manage/computes#restart-a-compute).
 </Admonition>
 
 You can then install the `pg_cron` extension by running the following `CREATE EXTENSION` statement in the [Neon SQL Editor](/docs/get-started/query-with-neon-sql-editor) or from a client such as [psql](/docs/connect/query-with-psql-editor) that is connected to your Neon database.
@@ -106,7 +112,7 @@ Additionally, `pg_cron` supports:
 - Interval scheduling using `'[1-59] seconds'` (for example, `'5 seconds'`).
 - `'$'` to indicate the last day of the month.
 
-Remember that all schedules in `pg_cron` are interpreted in UTC. When scheduling jobs, ensure your cron expressions are set accordingly. You can use tools like [crontab.guru](http://crontab.guru/) and adjust for the UTC timezone.
+Remember that all schedules in `pg_cron` are interpreted in UTC. When scheduling jobs, ensure your cron expressions are set accordingly. You can use tools like [crontab.guru](https://crontab.guru/) and adjust for the UTC timezone.
 
 ## Schedule a job
 
@@ -283,6 +289,6 @@ You have successfully learned how to enable and use the `pg_cron` extension with
 ## Resources
 
 - [pg_cron GitHub Repository](https://github.com/citusdata/pg_cron)
-- [crontab.guru](http://crontab.guru/)
+- [crontab.guru](https://crontab.guru/)
 
 <NeedHelp/>

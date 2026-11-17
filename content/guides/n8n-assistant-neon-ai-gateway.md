@@ -25,7 +25,7 @@ Here's what you'll do:
 Before starting, make sure you have:
 
 1. **Docker and Docker Compose**: You'll deploy self-hosted n8n with Docker Compose in the next section. Install [Docker Desktop](https://docs.docker.com/get-docker/) (includes Compose) or Docker Engine with the Compose plugin.
-2. **Neon account on a paid plan**: The AI Gateway needs a project on the Launch or Scale plan. Sign up at [console.neon.tech](https://console.neon.tech/signup) if you don't have one.
+2. **Neon account with AI Gateway credits**: The AI Gateway needs [prepaid credits](/docs/ai-gateway/prepaid-credits), which you can buy on any plan, including Free. Sign up at [console.neon.tech](https://console.neon.tech/signup) if you don't have one.
 3. **Prepaid AI Gateway credits**: Buy credits from the **Billing** page in the Neon Console. One credit is $1 USD, with a $5 minimum. See [AI Gateway prepaid credits](/docs/ai-gateway/prepaid-credits).
 4. **Sample documents**: A few PDFs to chat with. You'll upload these to a Neon Object Storage bucket later in the guide.
 
@@ -34,7 +34,7 @@ The AI Gateway and Object Storage are currently available in AWS US East (Ohio) 
 </Admonition>
 
 <Admonition type="important" title="AI Gateway model access">
-The AI Gateway is available on paid plans with prepaid credits, and any paid project with credits can use every model in the catalog. This guide uses `glm-5-3-flash`. See [Model access](/docs/ai-gateway/overview#model-access).
+The AI Gateway is available on any plan with prepaid credits, and any project with credits can use every model in the catalog. This guide uses `glm-5-3-flash`. See [Model access](/docs/ai-gateway/overview#model-access).
 </Admonition>
 
 <Steps>

@@ -11,7 +11,7 @@ summary: >-
 enableTableOfContents: true
 redirectFrom:
   - /docs/get-started-with-neon/production-checklist
-updatedOn: '2026-11-04T20:10:08.844Z'
+updatedOn: '2026-11-05T15:33:57.188Z'
 ---
 
 <CheckList title="Production checklist">
@@ -135,7 +135,7 @@ In a serverless architecture, brief connection interruptions can occur during sc
 
 Our recommended approach:
 
-- Use the Neon API or Console to trigger a compute restart
+- Use the Neon Console, CLI, or API to trigger a compute restart
 - Observe how your application behaves during the restart
 - Confirm that connections are re-established automatically without user-facing errors
 
@@ -143,7 +143,13 @@ Our recommended approach:
 curl --request POST \
      --url https://console.neon.tech/api/v2/projects/{project_id}/endpoints/{endpoint_id}/restart \
      --header 'accept: application/json' \
-     --header 'authorization: Bearer $NEON_API_KEY'
+     --header "authorization: Bearer $NEON_API_KEY"
+```
+
+With the Neon CLI:
+
+```bash
+neon postgres computes restart <endpoint_id> --project-id <project_id>
 ```
 
 Keep reading:
@@ -211,7 +217,7 @@ Keep reading: [Connection pooling](/docs/connect/connection-pooling)
 
 ## Restrict access to production data
 
-Neon's IP Allow feature ensures that only trusted IP addresses can connect to your database, preventing unauthorized access and enhancing security. Combine an allowlist with protected branches for enhanced security.
+Neon's IP Allow feature ensures that only trusted IP addresses can connect to your database, preventing unauthorized access and enhancing security. Combine an allowlist with protected branches for enhanced security. IP Allow restricts Postgres connections only: it doesn't protect the Data API, Realtime, Managed Better Auth, Object Storage, the AI Gateway, or Function URLs, and Realtime and Managed Better Auth also stop working while it's enabled. See [IP Allow and other Neon services](/docs/introduction/ip-allow#ip-allow-and-other-neon-services).
 
 ![IP Allow settings](/docs/get-started/ip_allow_settings.png)
 

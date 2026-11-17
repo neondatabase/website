@@ -30,7 +30,7 @@ This guide shows how to use Neon read replicas to scale Prisma applications usin
 You can create read replicas for any branch in your Neon project.
 
 <Admonition type="note">
-The Free plan is limited to a maximum of 3 read replica computes per project.
+The number of read replicas you can add depends on your plan. See [Read replicas](/docs/introduction/plans#read-replicas) on the plans page.
 </Admonition>
 
 You can add a read replica by following these steps:
@@ -41,7 +41,7 @@ You can add a read replica by following these steps:
 4. On the **Add new compute** dialog, select **Read replica** as the **Compute type**.
 5. Specify the **Compute size settings** options. You can configure a **Fixed Size** compute with a specific amount of RAM (the default) or enable autoscaling by configuring a minimum and maximum compute size. You can also configure the **Scale to zero** setting, which controls whether your read replica compute is automatically suspended due to inactivity after 5 minutes.
    <Admonition type="note">
-   The compute size configuration determines the processing power of your database. More memory means more processing power but also higher compute costs. For information about compute costs, see [Billing metrics](/docs/introduction/billing).
+   The compute size configuration determines the processing power of your database. More memory means more processing power but also higher compute costs. For information about compute costs, see [About billing](/docs/introduction/about-billing).
    </Admonition>
 6. When you finish making selections, click **Create**.
 
@@ -172,12 +172,12 @@ Notice that the `endpoint_id` (`ep-damp-cell-123456`) for the read replica compu
    All write and `$transaction` queries are sent to the primary compute defined by `DATABASE_URL`, which is your read/write compute.
 
    <Admonition type="warning">
-   Read replicas are read-only. Sending a write (`INSERT`, `UPDATE`, `DELETE`, or DDL) to a read replica fails with `ERROR: cannot execute INSERT in a read-only transaction (SQLSTATE 25006)`. Make sure `DATABASE_REPLICA_URL` points at a read replica compute and `DATABASE_URL` points at your read/write compute so writes are routed to the primary. See [cannot execute ... in a read-only transaction](/docs/connect/connection-errors#error-read-only-transaction).
+   Read replicas are read-only. Sending a write (`INSERT`, `UPDATE`, `DELETE`, or DDL) to a read replica fails with `cannot execute INSERT in a read-only transaction` and SQLSTATE `25006`. In Prisma Client, the error is `P2039`. Make sure `DATABASE_REPLICA_URL` points at a read replica compute and `DATABASE_URL` points at your read/write compute so writes are routed to the primary. See [cannot execute ... in a read-only transaction](/docs/connect/connection-errors#error-read-only-transaction).
    </Admonition>
 
    If you want to read from the primary compute and bypass read replicas, you can use the `$primary()` method in your extended Prisma Client instance:
 
-   ```bash
+   ```javascript
    const posts = await prisma.$primary().post.findMany()
    ```
 

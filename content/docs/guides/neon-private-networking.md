@@ -1,12 +1,12 @@
 ---
 title: Neon Private Networking
-subtitle: Learn how to connect to your Neon database via AWS PrivateLink
+subtitle: Learn how to connect to your Neon project through AWS PrivateLink
 summary: >-
   Neon Private Networking routes database traffic through AWS PrivateLink,
   keeping connections entirely within AWS's private network rather than the
   public internet. Use this page when your client application runs on AWS and
   you need to eliminate public internet exposure for a Neon project on the Scale
-  or Business plan (org Admin required). Removed VPC endpoints cannot be
+  plan (organization Admin required). Removed VPC endpoints cannot be
   re-added to the same organization.
 enableTableOfContents: true
 redirectFrom:
@@ -18,22 +18,22 @@ updatedOn: '2026-10-09T15:17:33.920Z'
 Private Networking is available on Neon's [Scale](/docs/introduction/plans#scale) plan. If you're on a different plan, you can request a trial from the **Network Security** page in your project's settings.
 </Admonition>
 
-The **Neon Private Networking** feature enables secure connections to your Neon databases via [AWS PrivateLink](https://docs.aws.amazon.com/vpc/latest/privatelink/concepts.html), bypassing the open internet for enhanced security.
+The **Neon Private Networking** feature enables secure connections to your Lakebase Postgres databases via [AWS PrivateLink](https://docs.aws.amazon.com/vpc/latest/privatelink/concepts.html), bypassing the open internet for enhanced security.
 
 ## Overview
 
-In a standard setup, the client application connects to a Neon database over the open internet via the Neon proxy.
+In a standard setup, the client application connects to a Lakebase Postgres database over the open internet through the Neon proxy.
 
-With **Neon Private Networking**, you can connect to your database via AWS PrivateLink instead of the open internet. In this setup, the client application connects through an [AWS endpoint service](https://docs.aws.amazon.com/vpc/latest/privatelink/configure-endpoint-service.html) (provided by Neon) to a Neon proxy instance that is not accessible from the public internet. This endpoint service is available only within the same AWS region as your client application. With **Neon Private Networking**, all traffic between the client application and the Neon database stays within AWS's private network, rather than crossing the public internet.
+With **Neon Private Networking**, you can connect to your database via AWS PrivateLink instead of the open internet. In this setup, the client application connects through an [AWS endpoint service](https://docs.aws.amazon.com/vpc/latest/privatelink/configure-endpoint-service.html) (provided by Neon) to a Neon proxy instance that is not accessible from the public internet. This endpoint service is available only within the same AWS region as your client application. With **Neon Private Networking**, all traffic between the client application and the database stays within AWS's private network, rather than crossing the public internet.
 
 ![Neon Private Networking diagram](/docs/guides/neon_private_access.jpg)
 
 ## Prerequisites
 
-- You must be a Neon [Business](/docs/introduction/plans#business) and [Scale](/docs/introduction/plans#scale) account user, and your user account must be [Neon organization](/docs/manage/organizations) Admin account. You'll encounter an access error if you attempt the setup from a personal Neon account or on a Neon plan that does not offer Private Networking.
-- **Ensure that your client application is deployed on AWS in the same region as the Neon database you plan to connect to.** The Private Networking feature is available in all [Neon-supported AWS regions](/docs/introduction/regions#aws-regions). Both your private access client application and Neon database must be in one of these regions.
+- You must be on the [Scale](/docs/introduction/plans#scale) plan, and your user must be an Admin of the [Neon organization](/docs/manage/organizations). You'll encounter an access error if you attempt the setup from a personal Neon account or on a plan that doesn't include Private Networking.
+- **Ensure that your client application is deployed on AWS in the same region as the database you plan to connect to.** The Private Networking feature is available in all [Neon-supported AWS regions](/docs/introduction/regions#aws-regions). Both your client application and database must be in one of these regions.
 - Neon Private Networking supports both [IPv4](https://en.wikipedia.org/wiki/Internet_Protocol_version_4) and [IPv6](https://en.wikipedia.org/wiki/IPv6).
-- Install the Neon CLI. You will use it to add your VPC endpoint ID to your Neon organization. For installation instructions, see [Neon CLI — Install and connect](/docs/cli/install).
+- Install the Neon CLI. You will use it to add your VPC endpoint ID to your Neon organization. For installation instructions, see [Neon CLI install and connect](/docs/cli/install).
 
 ## Configuration steps
 
@@ -90,6 +90,7 @@ To configure Neon Private Networking, perform the following steps:
          - `com.amazonaws.vpce.us-east-2.vpce-svc-0d421498ff01becac`
          - `com.amazonaws.vpce.us-east-2.vpce-svc-0fcb5fccfc8573aa3`
        - **eu-central-1**: Create entries, one for each of the following:
+         - `com.amazonaws.vpce.eu-central-1.vpce-svc-0165f3a480927c9a0`
          - `com.amazonaws.vpce.eu-central-1.vpce-svc-0260f9dcc9bf59e3e`
          - `com.amazonaws.vpce.eu-central-1.vpce-svc-04bac3120b20929cd`
          - `com.amazonaws.vpce.eu-central-1.vpce-svc-05554c35009a5eccb`
@@ -97,8 +98,10 @@ To configure Neon Private Networking, perform the following steps:
          - `com.amazonaws.vpce.eu-central-1.vpce-svc-05a252e6836f01cfd`
          - `com.amazonaws.vpce.eu-central-1.vpce-svc-05a5b03b56954593a`
          - `com.amazonaws.vpce.eu-central-1.vpce-svc-07617c7fc17794cc7`
+         - `com.amazonaws.vpce.eu-central-1.vpce-svc-0efb85c929a6ee91f`
          - `com.amazonaws.vpce.eu-central-1.vpce-svc-0fef417ecf84ed325`
        - **eu-west-2**: Create entries, one for each of the following:
+         - `com.amazonaws.vpce.eu-west-2.vpce-svc-028d190998ab34913`
          - `com.amazonaws.vpce.eu-west-2.vpce-svc-0375428488d22c05b`
          - `com.amazonaws.vpce.eu-west-2.vpce-svc-0c6fedbe99fced2cd`
        - **us-west-2**: Create entries, one for each of the following:
@@ -112,8 +115,10 @@ To configure Neon Private Networking, perform the following steps:
          - `com.amazonaws.vpce.ap-southeast-1.vpce-svc-01c64edf7fe936ac7`
          - `com.amazonaws.vpce.ap-southeast-1.vpce-svc-028cc7060eb23ff43`
          - `com.amazonaws.vpce.ap-southeast-1.vpce-svc-07c68d307f9f05687`
-       - **ap-southeast-2**:
+         - `com.amazonaws.vpce.ap-southeast-1.vpce-svc-0d858726de58b2185`
+       - **ap-southeast-2**: Create entries, one for each of the following:
          - `com.amazonaws.vpce.ap-southeast-2.vpce-svc-031161490f5647f32`
+         - `com.amazonaws.vpce.ap-southeast-2.vpce-svc-07d11c1bc6234e6e4`
        - **sa-east-1**: Create entries, one for each of the following:
          - `com.amazonaws.vpce.sa-east-1.vpce-svc-03cf6c871b7ae95e8`
          - `com.amazonaws.vpce.sa-east-1.vpce-svc-061204a851dbd1a47`
@@ -133,7 +138,7 @@ To configure Neon Private Networking, perform the following steps:
 
         ![VPC Create endpoint](/docs/guides/pl_vpc_endpoint_id.png)
 
-## Add your VPC Endpoint ID to your Neon organization
+## Add your VPC endpoint ID to your Neon organization
 
     Assign your **VPC Endpoint ID** to your Neon organization. If the region has multiple **Service Names**, please assign all **VPC Endpoint IDs**. You can do this using the Neon CLI or API.
 
@@ -157,14 +162,15 @@ To configure Neon Private Networking, perform the following steps:
 
     <TabItem>
 
-    You can use the [Assign or update a VPC endpoint](/docs/reference/api/organizations/assign-organization-vpc-endpoint) API to assign a VPC endpoint ID to a Neon organization. You will need to provide your Neon organization ID, region ID, VPC endpoint ID, and a [Neon API key](/docs/manage/api-keys).
+    You can use the [Assign or update a VPC endpoint](/docs/reference/api/organizations/assign-organization-vpc-endpoint) API to assign a VPC endpoint ID to a Neon organization. You will need to provide your Neon organization ID, region ID, VPC endpoint ID, a label for the endpoint, and a [Neon API key](/docs/manage/api-keys).
 
     ```bash
     curl --request POST \
      --url https://console.neon.tech/api/v2/organizations/org-bold-bonus-12345678/vpc/region/aws-us-east-2/vpc_endpoints/vpce-1234567890abcdef0 \
      --header 'accept: application/json' \
-     --header 'authorization: Bearer $NEON_API_KEY' \
-     --header 'content-type: application/json'
+     --header "authorization: Bearer $NEON_API_KEY" \
+     --header 'content-type: application/json' \
+     --data '{"label":"my_vpc"}'
     ```
     </TabItem>
 
@@ -172,7 +178,7 @@ To configure Neon Private Networking, perform the following steps:
 
     Optionally, you can limit access to a Neon project by allowing connections only from a specific VPC endpoint. For instructions, see [Assigning a VPC endpoint restrictions](#assigning-a-vpc-endpoint-restriction).
 
-## Enable Private DNS
+## Enable private DNS
 
     After adding your VPC endpoint ID to your Neon organization, enable private DNS lookup for the VPC endpoint in AWS.
 
@@ -184,11 +190,11 @@ To configure Neon Private Networking, perform the following steps:
 
 ## Check your database connection string
 
-    Your Neon database connection string does not change when using Private Networking.
+    Your connection string doesn't change when you use Private Networking.
 
     To verify that your connection is working correctly, you can perform a DNS lookup on your Neon endpoint hostname from within your AWS VPC. It should resolve to the private IP address of the VPC endpoint.
 
-    For example, if your Neon database connection string is:
+    For example, if your database connection string is:
 
     ```bash
     postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require&channel_binding=require
@@ -205,6 +211,10 @@ To configure Neon Private Networking, perform the following steps:
     At this point, it's still possible to connect to a database in your Neon project over the public internet using a database connection string.
 
     You can restrict public internet access to your Neon project via the Neon CLI or API.
+
+    <Admonition type="warning" title="Blocking public access doesn't protect every Neon service">
+    This step restricts Postgres connections only. It doesn't protect the Data API, Realtime, Managed Better Auth, Object Storage, the AI Gateway, or function URLs. Realtime, Managed Better Auth, and database connections from Neon Functions also stop working. See [Private Networking and other Neon services](#private-networking-and-other-neon-services).
+    </Admonition>
 
     <Tabs labels={["CLI", "API"]}>
 
@@ -228,7 +238,7 @@ To configure Neon Private Networking, perform the following steps:
     curl --request PATCH \
      --url https://console.neon.tech/api/v2/projects/orange-credit-12345678 \
      --header 'accept: application/json' \
-     --header 'authorization: Bearer $NEON_API_KEY' \
+     --header "authorization: Bearer $NEON_API_KEY" \
      --header 'content-type: application/json' \
      --data '
     {
@@ -283,7 +293,7 @@ The Neon API supports managing project restrictions using the [Assign or update 
 curl --request POST \
      --url https://console.neon.tech/api/v2/projects/orange-credit-12345678/vpc_endpoints/vpce-1234567890abcdef0 \
      --header 'accept: application/json' \
-     --header 'authorization: Bearer $NEON_API_KEY' \
+     --header "authorization: Bearer $NEON_API_KEY" \
      --header 'content-type: application/json' \
      --data '{"label":"my_vpc"}'
 ```
@@ -294,25 +304,27 @@ After adding a restriction, you can check the status of the VPC endpoint to view
 curl --request GET \
      --url https://console.neon.tech/api/v2/organizations/org-nameless-block-72040075/vpc/region/aws-eu-central-1/vpc_endpoints/vpce-1234567890abcdef0 \
      --header 'accept: application/json' \
-     --header 'authorization: Bearer $NEON_API_KEY'
+     --header "authorization: Bearer $NEON_API_KEY"
 ```
 
 </TabItem>
 
 </Tabs>
 
-## Managing Private Networking using the Neon CLI
+## Manage private networking with the Neon CLI
 
 You can use the Neon CLI `vpc` command to manage Private Networking configurations in Neon.
 
 The `vpc` command includes `endpoint` and `project` subcommands for managing VPC endpoints and project-level VPC endpoint restrictions:
 
-- **`vpc endpoint`** – List, assign, remove, and retrieve the status of VPC endpoints for a Neon organization.
-- **`vpc project`** – List, configure, or remove VPC endpoint restrictions for specific Neon projects.
+- **`vpc endpoint`**: List, assign, remove, and check the status of VPC endpoints for a Neon organization.
+- **`vpc project`**: List, configure, or remove VPC endpoint restrictions for specific Neon projects.
 
-For more details and examples, see [Neon CLI commands — vpc](/docs/cli/vpc).
+The `neon vpc endpoint list` command requires the `--region-id` option.
 
-## Managing Private Networking using the Neon API
+For more details and examples, see [Neon CLI commands for vpc](/docs/cli/vpc).
+
+## Manage private networking with the Neon API
 
 The Neon API provides endpoints for managing VPC endpoints and project-level VPC endpoint restrictions:
 
@@ -329,9 +341,24 @@ The Neon API provides endpoints for managing VPC endpoints and project-level VPC
 - [Assign or update a VPC endpoint restriction](/docs/reference/api/projects/assign-project-vpc-endpoint)
 - [Delete a VPC endpoint restriction](/docs/reference/api/projects/delete-project-vpc-endpoint)
 
-## Private Networking limits
+## Private Networking and other Neon services
 
-The Private Networking feature supports a maximum of **20 private networking configurations per AWS region**. Supported AWS regions are listed [above](#create-an-aws-vpc-endpoint).
+When you [restrict public internet access](#restrict-public-internet-access), only connections that arrive through your VPC endpoint can reach Postgres. This restriction covers Postgres connections only. Before you block public access, check which Neon services your project uses. Blocking public access doesn't protect any other Neon service, so don't rely on it for their security. Some of them also stop working once public access is blocked.
+
+| Service                                                                                              | With public internet access blocked                                                                                                                   |
+| ---------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Postgres connections, including the [serverless driver](/docs/serverless/serverless-driver)          | Allowed only through your VPC endpoint                                                                                                                |
+| [Data API](/docs/data-api/get-started)                                                               | **Not protected.** Requests from the public internet are still served. The Data API isn't supported with Private Networking.                          |
+| [Realtime](/docs/realtime/overview)                                                                  | **Not protected, and stops working.** Subscriptions fail to connect.                                                                                  |
+| [Managed Better Auth](/docs/auth/about)                                                              | **Not protected, and stops working.** Sign-in and other auth requests fail.                                                                           |
+| [Neon Functions](/docs/compute/functions/overview)                                                   | **Not protected, and database connections fail.** Function URLs are still reachable, but a function can't connect to Postgres through `DATABASE_URL`. |
+| [Object Storage](/docs/storage/authentication) and the [AI Gateway](/docs/ai-gateway/authentication) | **Not protected.** Access is controlled by credentials only.                                                                                          |
+
+If you haven't blocked public internet access, these services connect over the public internet as usual.
+
+## Private networking limits
+
+The Private Networking feature supports a maximum of **20 private networking configurations per AWS region**. Supported AWS regions are listed [above](#create-an-aws-vpc-endpoint). If you need more, you can request a limit increase. Scale plan users can [request a limit increase](/docs/introduction/support#request-a-limit-increase) from the console.
 
 ## Limitations
 

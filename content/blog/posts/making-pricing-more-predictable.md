@@ -7,7 +7,7 @@ excerpt: >-
   automated, more scalable, and more durable. After enrolling over half a
   million databases and nearly a year of listening to user feedbac...
 date: '2024-02-19T19:16:41'
-updatedOn: '2024-02-29T11:12:23'
+updatedOn: '2026-11-02T12:00:00.000Z'
 category: company
 categories:
   - company
@@ -20,21 +20,22 @@ cover:
 isFeatured: false
 seo:
   title: Making pricing more predictable - Neon
-  description: Announcing Launch and Scale pricing for better predictability
+  description: >-
+    Neon's 2024 Launch and Scale plans. Paid plans are now fully usage-based; see neon.com/pricing for current pricing.
   keywords: []
   noindex: false
   ogTitle: Making pricing more predictable - Neon
   ogDescription: >-
-    We created Neon with the idea of providing developers with a cloud-native
-    Postgres that separates storage and compute to make the database more
-    automated, more scalable, and more durable. After enrolling over half a
-    million databases and nearly a year of listening to user feedback, we have
-    learned a considerable amount with regard to what […]
+    Neon's 2024 Launch and Scale plans. Paid plans are now fully usage-based; see neon.com/pricing for current pricing.
   image: >-
     https://cdn.neonapi.io/public/images/pages/blog/making-pricing-more-predictable/social.jpg
 ---
 
 ![Image](https://cdn.neonapi.io/public/images/pages/blog/making-pricing-more-predictable/image-31-1024x576-e6c35634.png)
+
+<Admonition type="important" title="Pricing has changed since this post">
+This post describes plans Neon offered in 2024. Paid plans are now fully usage-based. As of November 2026, the Free plan includes 100 projects, each with 100 CU-hours of compute per month and 1 GB of storage (up to 20 GB across all projects). Launch compute is $0.106 per CU-hour, Scale compute is $0.222 per CU-hour, and paid plans have no monthly minimum. See the [pricing page](/pricing) and the [plans documentation](/docs/introduction/plans) for current pricing and limits.
+</Admonition>
 
 We created Neon with the idea of providing developers with a cloud-native Postgres that separates storage and compute to make the database more automated, more scalable, and more durable.
 

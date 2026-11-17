@@ -13,7 +13,7 @@ redirectFrom:
   - /docs/cloud/about
   - /docs/introduction/about
   - /docs/get-started-with-neon/why-neon
-updatedOn: '2026-10-08T19:31:47.306Z'
+updatedOn: '2026-11-08T12:39:55.292Z'
 ---
 
 ## Our mission
@@ -122,4 +122,11 @@ The rest of Neon's primitives are designed to carry these same properties. Objec
   Lakebase Postgres is available via Neon and via Databricks. For what's the same in both places and when to choose each, see [Neon and Lakebase](/docs/introduction/neon-and-lakebase).
 </Admonition>
 
-<CTA title="Contact us" description="Lakebase Postgres via Neon and via Databricks are two access paths to the same database product. Explore your options and get help deciding which fits your workload." buttonText="Reach out" buttonUrl="https://www.databricks.com/company/contact" />
+## Get started
+
+- **Set up with your AI agent:** [Agent setup](/docs/ai/agent-setup) gives Claude Code, Cursor, Codex, and other agents the Neon tools and skills, so your agent can provision and manage the backend for you.
+- **Build a full backend:** the [full backend quickstart](/docs/get-started/full-backend-quickstart) wires Lakebase Postgres, Object Storage, and Functions into a Next.js app, all declared in one `neon.ts`.
+- **Connect an existing app:** pick your [framework](/docs/get-started/frameworks), [language](/docs/get-started/languages), or [ORM](/docs/get-started/orms), or start from [Connect your app](/docs/connect/connect-hub).
+- **Compare plans:** [Plans](/docs/introduction/plans) covers what the Free plan includes and when a paid plan makes sense.
+
+<CTA title="Choosing between Neon and Databricks?" description="Lakebase Postgres is available via Neon and via Databricks. If your team is deciding which access path fits your workload, talk to sales." buttonText="Contact sales" buttonUrl="https://www.databricks.com/company/contact" />

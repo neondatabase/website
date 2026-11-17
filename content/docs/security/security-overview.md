@@ -11,7 +11,7 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/security/security
   - /docs/security
-updatedOn: '2026-10-30T15:56:48.576Z'
+updatedOn: '2026-11-05T15:33:57.188Z'
 ---
 
 At Neon, security is our highest priority. We are committed to implementing best practices and earning the trust of our users. A key aspect of earning this trust is by ensuring that every touchpoint in our system, from connections, to data storage, to our internal processes, adheres to the highest security standards.
@@ -124,7 +124,7 @@ If you have questions about this integration or need help securing your credenti
 
 ## Rotate credentials
 
-Rotate your database credentials regularly, and immediately if one is exposed. A Neon connection string is built from a role and its password, so you rotate it by resetting the role's password. See [Reset a password](/docs/manage/roles#reset-a-password) for the Console, API, and SQL methods.
+Rotate your database credentials regularly, and immediately if one is exposed. A Neon connection string is built from a role and its password, so you rotate it by resetting the role's password. See [Reset a password](/docs/manage/roles#reset-a-password) for the Console, CLI, API, and SQL methods.
 
 After you reset a password, the old one stops working on the next connection. Copy the new connection string from the **Connect** modal (**Connect** in the Console nav) and roll it out everywhere it is stored, including deployment platform environment variables, CI/CD secrets, secret managers, and local `.env` files, before clients reconnect.
 

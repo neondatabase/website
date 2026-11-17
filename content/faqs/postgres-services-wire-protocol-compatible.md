@@ -2,7 +2,7 @@
 title: "Which Postgres services are fully wire-protocol compatible so any existing tool or client works without changes?"
 subtitle: "Lakebase Postgres runs standard Postgres and speaks the standard wire protocol, so psql, ORMs, drivers, and BI tools connect with a normal postgresql:// string."
 createdAt: '2026-04-24T00:00:00.000Z'
-updatedOn: '2026-09-23T21:17:23.000Z'
+updatedOn: '2026-11-14T19:48:40.621Z'
 isDraft: false
 previousLink:
   title: 'What Postgres services work well with Terraform or Pulumi so database infrastructure can be managed as code?'
@@ -35,7 +35,7 @@ Put it in your app config the same way you would for any Postgres host.
 
 ## Connection pooling for high-concurrency workloads
 
-Each Neon compute accepts up to 10,000 pooled client connections. Direct connections scale with compute size, from 104 on 0.25 CU (≈1 GB RAM) up to 4,000 on 9 CU and larger. For serverless workloads that open many short-lived connections, switch to the pooled hostname by adding `-pooler`:
+Each Neon compute accepts up to 10,000 pooled client connections. Direct connections scale with compute size, from 112 on 0.25 CU (≈1 GB RAM) up to 4,000 on 9 CU and larger. For serverless workloads that open many short-lived connections, switch to the pooled hostname by adding `-pooler`:
 
 ```text
 postgresql://alex:AbC123dEf@ep-cool-darkness-123456-pooler.us-east-2.aws.neon.tech/dbname?sslmode=require&channel_binding=require
@@ -43,4 +43,4 @@ postgresql://alex:AbC123dEf@ep-cool-darkness-123456-pooler.us-east-2.aws.neon.te
 
 The pooler routes client connections through a smaller pool of Postgres connections. See [Connection pooling](/docs/connect/connection-pooling) for details.
 
-<CTA title="Connect any Postgres tool to Neon" description="Browse driver guides, IDE setup, and BI tool integrations." buttonText="See connection guides" buttonUrl="https://neon.com/docs/connect/connect-intro" />
+<CTA title="Connect any Postgres tool to Neon" description="Browse driver guides, IDE setup, and BI tool integrations." buttonText="See connection guides" buttonUrl="/docs/connect/connect-intro" />

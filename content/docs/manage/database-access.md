@@ -11,7 +11,7 @@ summary: >-
 enableTableOfContents: true
 redirectFrom:
   - /docs/guides/manage-database-access
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-11-05T15:33:57.188Z'
 ---
 
 Each Neon project is created with a Postgres role that is named for your database. For example, if your database is named `neondb`, the project is created with a role named `neondb_owner`.
@@ -48,6 +48,12 @@ You can remove a role from a user at any time to revoke privileges. See [Revoke 
 ## Create a read-only role
 
 This section describes how to create a read-only role with access to a specific database and schema. An SQL statement summary is provided at the end.
+
+To skip the SQL, create the role with the Neon CLI instead. [`neon roles create --access read_only`](/docs/cli/roles#create) grants `SELECT` on the tables the database owner owns, now and later, in the `public` schema or the schemas you pass with `--schema`:
+
+```bash
+neon roles create --name readonly_user1 --access read_only --database neondb
+```
 
 <Admonition type="info">
 In Postgres, access must be granted at the database, schema, and object level. For example, to grant access to a table, you must also grant access to the database and schema in which the table resides. If these access permissions are not defined, the role will not be able access the table.
@@ -190,7 +196,7 @@ To create a read-write role:
    dbname=> INSERT INTO <table_name> (col1, col2) VALUES (1, 2);
    ```
 
-### SQL statement summary
+### SQL statement summary (#sql-statement-summary-2)
 
 To create the read-write role and user described above, run the following statements from an SQL client:
 
@@ -278,7 +284,7 @@ To get started:
    dbname=>
    ```
 
-### SQL statement summary
+### SQL statement summary (#sql-statement-summary-3)
 
 ```sql
 -- dev_users role

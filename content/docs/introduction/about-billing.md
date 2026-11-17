@@ -8,7 +8,7 @@ summary: >-
 redirectFrom:
   - /docs/introduction/billing-overview
   - /docs/introduction/how-billing-works
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-11-06T23:11:22.000Z'
 ---
 
 ## Neon plans
@@ -39,6 +39,6 @@ updatedOn: '2026-06-05T17:20:32.620Z'
 
 <DetailIconCards>
 
-<a href="/enterprise" description="Find out how Enterprises are maximizing engineering efficiency with Neon" icon="handshake">Neon for the Enterprise</a>
+<a href="https://www.databricks.com/product/lakebase" description="Run Lakebase Postgres for enterprise workloads on Databricks" icon="handshake">Lakebase on Databricks</a>
 
 </DetailIconCards>

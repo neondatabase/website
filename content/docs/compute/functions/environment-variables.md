@@ -20,6 +20,8 @@ Each variable is present only when its service is enabled on the branch. `DATABA
 | `DATABASE_URL`                               | Postgres            | Pooled connection string. Use this for most queries.                                                                     |
 | `DATABASE_URL_UNPOOLED`                      | Postgres            | Direct connection string. Use for migrations, `LISTEN`/`NOTIFY`, and multi-round-trip transactions.                      |
 | `NEON_BRANCH`                                | Core                | Branch name (e.g. `main`, `preview/foo`). Present on all branches.                                                       |
+| `NEON_BRANCH_ID`                             | Core                | Branch ID (e.g. `br-cool-darkness-123456`). Present on all branches.                                                     |
+| `NEON_FUNCTION_HOST_SUFFIX`                  | Functions           | Hostname suffix shared by the branch's functions, e.g. `.compute.c-2.us-east-2.aws.neon.tech`.                           |
 | `NEON_AUTH_BASE_URL`                         | Managed Better Auth | Base URL for Managed Better Auth.                                                                                        |
 | `NEON_AUTH_JWKS_URL`                         | Managed Better Auth | JWKS endpoint for verifying Managed Better Auth JWTs. See [Authentication](/docs/compute/functions/authentication).      |
 | `NEON_DATA_API_URL`                          | Data API            | Base URL for the Neon Data API (PostgREST). Present when the Data API is provisioned on the branch.                      |
@@ -75,7 +77,7 @@ A deploy doesn't wipe variables set by earlier deploys. The `--env` flags you pa
 
 ### In neon.ts
 
-Declare variables under the function's `env` field. Values are resolved when `neon deploy` runs, so you can read from `process.env` to avoid hardcoding secrets:
+Declare variables under the function's `env` field. Values are resolved when `neon deploy` runs, so you can read from `process.env` to avoid hardcoding secrets. Declare each one with a `required` rule so `neon deploy` fails if it's unset. This form needs Neon CLI 9.2.0 or later and `@neon/config` 1.13.0 or later, plus `@neon/env` 2.1.0 or later if your function reads the variables with `parseEnv`:
 
 ```ts filename="neon.ts"
 import { defineConfig } from "@neon/config/v1";
@@ -86,7 +88,7 @@ export default defineConfig({
       name: "My first function",
       source: "./functions/hello.ts",
       env: {
-        RESEND_API_KEY: process.env.RESEND_API_KEY!,
+        RESEND_API_KEY: { value: process.env.RESEND_API_KEY, required: true },
       },
     },
   },
@@ -100,6 +102,8 @@ neon deploy --env .env.production
 ```
 
 The file isn't forwarded to the function directly. Only variables declared in the `env` field are deployed; `--env` only controls what `process.env` contains when `neon.ts` is evaluated.
+
+Unlike `--env`, a declared variable that's unset when you deploy is removed from the function, unless you declare it with `onUndefined: "skip"`. `required: true` fails the deploy on every branch when the value is unset. Use `required: "default-branch"` for a variable only the default branch's deployment needs, or `required: false` for one that's optional everywhere. See [Function env](/docs/reference/neon-ts#functions) in the `neon.ts` reference for how unset values are removed or kept.
 
 ## Pull variables locally
 
@@ -117,7 +121,29 @@ neon env pull --file .env.preview
 
 To pull from a different branch, switch with `neon checkout`; it pulls the new branch's variables as part of the switch.
 
-`env pull` writes only the Neon-managed variables and preserves every other line in the file. That's the core variables `DATABASE_URL`, `DATABASE_URL_UNPOOLED`, and `NEON_BRANCH`, plus the variables for any service you **declare in `neon.ts`**: the Managed Better Auth URLs, the Neon Data API URL, the AI Gateway credentials (`NEON_AI_GATEWAY_TOKEN`, `NEON_AI_GATEWAY_BASE_URL`), and the Object Storage credentials (`AWS_*`). It also writes a public invocation URL for each Neon Function as `NEON_FUNCTION_<SLUG>_BASE_URL` (origin only, matching `NEON_AUTH_BASE_URL` and `NEON_AI_GATEWAY_BASE_URL`), so code running locally can call your deployed functions by reading their URLs from the environment. These variables are local-only: they aren't injected into a deployed function's runtime. To call one function from another at runtime, pass the target URL explicitly (for example as a `--env` variable) or read the incoming request's `Host` header.
+`env pull` writes only the Neon-managed variables and preserves every other line in the file. That's the core variables `DATABASE_URL`, `DATABASE_URL_UNPOOLED`, `NEON_BRANCH`, and `NEON_BRANCH_ID`, plus the variables for any service you **declare in `neon.ts`**: the Managed Better Auth URLs, the Neon Data API URL, the AI Gateway credentials (`NEON_AI_GATEWAY_TOKEN`, `NEON_AI_GATEWAY_BASE_URL`), and the Object Storage credentials (`AWS_*`). It also writes `NEON_FUNCTION_HOST_SUFFIX`, which together with `NEON_BRANCH_ID` lets code running locally build the same function URLs as deployed code. See [Call another function](#call-another-function).
+
+## Call another function
+
+Every function on a branch answers at `https://<NEON_BRANCH_ID>-<slug><NEON_FUNCTION_HOST_SUFFIX>`. Neon injects both variables into every deployed function. Locally, `neon env pull` writes them, and `neon dev` sets them for the functions it serves. `functionBaseUrl` from `@neon/env` 2.0.0 or later builds the URL for you, without a trailing slash:
+
+```ts
+import { functionBaseUrl } from '@neon/env';
+
+const res = await fetch(`${functionBaseUrl('hello')}/greet`);
+```
+
+Under [`neon dev`](/docs/cli/dev), `functionBaseUrl` returns `http://localhost:<port>` for each function that `neon dev` is serving and the deployed URL for any other slug. It throws a `TypeError` for an invalid slug, and a `PlatformError` when either variable is missing.
+
+`functionBaseUrl` reads `process.env` by default. When the two variables come from somewhere else, pass them as the second argument:
+
+```ts
+functionBaseUrl('hello', { NEON_BRANCH_ID: branchId, NEON_FUNCTION_HOST_SUFFIX: hostSuffix });
+```
+
+Browser code can't read these variables. Build the URL on the server with `functionBaseUrl` and pass it to the client.
+
+Neon CLI 9.0.0 and `@neon/env` 2.0.0 replaced the per-function `NEON_FUNCTION_<SLUG>_BASE_URL` variables, which deployed functions never received. If your code reads `env.functions.<slug>.baseUrl`, upgrade to `@neon/env` 2 and call `functionBaseUrl('<slug>')` instead.
 
 ## Constraints
 

@@ -42,6 +42,43 @@ The easiest way to get started is with the [Neon GitHub integration](/docs/guide
 
 You can now use the Neon GitHub Actions in your workflows by referencing them in your `.github/workflows` YAML files.
 
+## Example workflow
+
+This workflow creates a branch for each pull request and deletes it when the pull request closes. The create action outputs `db_url` and `db_url_pooled`, which later steps can read. If the branch already exists, the create action returns the existing branch.
+
+```yaml filename=".github/workflows/neon-branch.yml"
+name: Neon branch per pull request
+
+on:
+  pull_request:
+    types: [opened, reopened, synchronize, closed]
+
+jobs:
+  create-branch:
+    if: github.event.action != 'closed'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Create Neon branch
+        uses: neondatabase/create-branch-action@v6
+        id: create-branch
+        with:
+          project_id: ${{ vars.NEON_PROJECT_ID }}
+          branch_name: preview/pr-${{ github.event.number }}
+          parent_branch: main
+          api_key: ${{ secrets.NEON_API_KEY }}
+
+  delete-branch:
+    if: github.event.action == 'closed'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Delete Neon branch
+        uses: neondatabase/delete-branch-action@v3
+        with:
+          project_id: ${{ vars.NEON_PROJECT_ID }}
+          branch: preview/pr-${{ github.event.number }}
+          api_key: ${{ secrets.NEON_API_KEY }}
+```
+
 ## Available actions
 
 Neon provides the following GitHub Actions for working with Neon branches. For detailed information on usage, inputs, and outputs, please refer to the official documentation for each action on the GitHub Marketplace.

@@ -3,7 +3,7 @@ title: 'How do I rotate my database password in Neon after a security incident?'
 subtitle: 'Reset a role password from the Neon Console, API, or SQL to invalidate the leaked credential.'
 enableTableOfContents: true
 createdAt: '2026-05-18T00:00:00.000Z'
-updatedOn: '2026-09-23T21:00:25.204Z'
+updatedOn: '2026-11-05T15:33:57.188Z'
 isDraft: false
 redirectFrom: []
 previousLink:
@@ -14,13 +14,13 @@ nextLink:
   slug: rotate-database-url-connection-string
 ---
 
-To rotate a password on Neon, reset the password of the affected Postgres role. You can do it from the **Roles** page in the Neon Console, with the Neon API, or with an SQL `ALTER ROLE` statement. A Console or API reset generates a new password and takes effect immediately, so any new connection with the old password fails. Copy the updated connection string from the **Connect** modal.
+To rotate a password on Neon, reset the password of the affected Postgres role. You can do it from the **Roles** page in the Neon Console, with the Neon CLI or API, or with an SQL `ALTER ROLE` statement. A Console, CLI, or API reset generates a new password and takes effect immediately, so any new connection with the old password fails. Copy the updated connection string from the **Connect** modal.
 
 ## Reset the password
 
 Each method gives you a new password and a new connection string.
 
-<Tabs labels={["Console", "API", "SQL"]}>
+<Tabs labels={["Console", "CLI", "API", "SQL"]}>
 
 <TabItem>
 
@@ -36,7 +36,17 @@ See [Reset a password](/docs/manage/roles#reset-a-password).
 
 <TabItem>
 
-The Neon CLI has no password reset command, so call the API directly. Replace the IDs and role name with yours.
+Reset the password with [`neon roles reset-password`](/docs/cli/roles#reset-password). It prints the new password and waits until the compute applies it:
+
+```bash
+neon roles reset-password alex --branch main
+```
+
+</TabItem>
+
+<TabItem>
+
+Call the [Reset role password](/docs/reference/api/branches/reset-project-branch-role-password) endpoint. Replace the IDs and role name with yours.
 
 ```bash shouldWrap
 curl -X POST \

@@ -2,7 +2,7 @@
 title: "Which database providers let you build a product where the backend provisions Postgres for each new user at sign-up?"
 subtitle: "Neon's API creates a new Postgres project or branch per user in seconds. Idle tenants scale to zero, so you only pay compute for databases that are active."
 createdAt: '2026-04-25T00:00:00.000Z'
-updatedOn: '2026-09-23T21:17:23.000Z'
+updatedOn: '2026-11-02T19:00:00.000Z'
 isDraft: false
 previousLink:
   title: 'Which database providers support pgvector for AI applications and also offer autoscaling for variable AI inference workloads?'
@@ -31,6 +31,10 @@ curl -X POST https://console.neon.tech/api/v2/projects \
 ```
 
 The response includes a connection string, so the sign-up handler can store it and hand it to the app right away. You can also give each user a branch inside one shared project. That keeps provisioning inside one project, but branch limits apply (see below), and a project per user keeps instant restore, compute settings, and deletion separate for each tenant.
+
+A Neon project is a container for a backend, not only a database: branches, computes, and backend services like Object Storage and Functions live in it too ([Projects](/docs/introduction/plans#projects)). If each user's app needs its own sign-in or file storage, add [Managed Better Auth](/docs/auth/overview) or [Object Storage](/docs/storage/overview) to the per-user project through [`neon.ts`](/docs/reference/neon-ts) and `neon deploy`. When the user's app runs in a browser or at the edge, the [Data API](/docs/data-api/overview) gives it a PostgREST-compatible HTTPS endpoint, so it doesn't need a Postgres driver or a server of its own.
+
+If an AI agent is creating the project before the user has a Neon account, [Claimable Neon](/docs/reference/claimable-neon) provisions it without one, and the user claims it later. Before claim, the project can include Postgres, the Data API, and Managed Better Auth; Functions, Object Storage, and AI Gateway require claiming. Unclaimed projects expire after 72 hours.
 
 ## Plan limits for per-user databases
 

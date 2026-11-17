@@ -10,7 +10,7 @@ summary: >-
   which are covered in separate guides. The `revokeOtherSessions` flag in
   `changePassword()` lets you sign out all other devices in the same call.
 enableTableOfContents: true
-updatedOn: '2026-10-09T11:46:19.949Z'
+updatedOn: '2026-11-05T12:32:49.453Z'
 ---
 
 Manage user profiles and account settings after users sign in. This guide covers:
@@ -100,7 +100,7 @@ const { data, error } = await authClient.changePassword({
 ```
 
 <Admonition type="note">
-If a user forgot their password, use the password reset flow (`requestPasswordReset()` and `resetPassword()`) instead. See [Password Reset](/docs/auth/guides/password-reset).
+If a user forgot their password, use the password reset flow (`requestPasswordReset()` and `resetPassword()`) instead. See [Password Reset](/docs/auth/guides/password-reset). To sign users out of every session after a reset, turn on [Revoke sessions on password reset](/docs/auth/guides/password-reset#sign-users-out-after-a-reset).
 </Admonition>
 
 ## Refresh user data

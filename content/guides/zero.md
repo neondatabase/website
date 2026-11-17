@@ -4,7 +4,7 @@ subtitle: A step-by-step guide to integrating Zero with Lakebase Postgres
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2025-05-01T00:00:00.000Z'
-updatedOn: '2026-09-24T17:56:34.189Z'
+updatedOn: '2026-11-07T02:02:14.459Z'
 ---
 
 This guide shows how to integrate [Zero](https://zero.rocicorp.dev/) by [Rocicorp](https://rocicorp.dev/) with Lakebase Postgres. With Zero, you build reactive, real-time applications by writing queries in your client code against your backend database schema. Zero syncs query results to a client-side cache, so the UI updates instantly and feels local-first.
@@ -16,6 +16,12 @@ In this guide, you'll learn how to:
 - Prepare your Lakebase Postgres database for Zero integration.
 - Clone and run the Zero `hello-zero` quickstart application as a practical example.
 - Test that data syncs correctly between the application, `zero-cache`, and Neon.
+
+<Admonition type="tip" title="Neon now has realtime built in">
+
+[Neon Realtime](/docs/realtime/overview) turns any SQL query into a live query that stays up to date as your data changes. It runs directly from Lakebase Postgres, with no second realtime system to run, and it works with scale to zero and branching.
+
+</Admonition>
 
 ## Prerequisites
 

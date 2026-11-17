@@ -21,8 +21,8 @@ updatedOn: '2026-10-09T10:14:56.146Z'
 </DocsList>
 
 <DocsList title="Related resources" theme="docs">
-<a href="https://docs.postgrest.org/en/v12/">PostgREST Documentation</a>
-<a href="https://postgrest.org/en/v12/tutorials/tut0.html">PostgREST Tutorials</a>
+<a href="https://docs.postgrest.org/en/stable/">PostgREST Documentation</a>
+<a href="https://postgrest.org/en/stable/tutorials/tut0.html">PostgREST Tutorials</a>
 </DocsList>
 
 <DocsList title="Source code" theme="repo">
@@ -31,12 +31,12 @@ updatedOn: '2026-10-09T10:14:56.146Z'
 </InfoBlock>
 
 <Admonition type="note">
-Neon also provides a built-in [Data API](/docs/data-api/overview) that automatically creates REST endpoints for the database without requiring PostgREST or any additional setup. The Data API is fully managed and includes built-in authentication support.
+Neon also offers the [Neon Data API](/docs/data-api/overview), a managed REST interface that's compatible with PostgREST. You enable it per branch in the Console or with the API, and it uses its own JWT setup. This guide runs PostgREST yourself.
 </Admonition>
 
 ## What is PostgREST?
 
-PostgREST is a standalone web server that automatically turns your PostgreSQL database schema into a RESTful API. It uses the database's structure, constraints, and permissions to create API endpoints without requiring you to write any backend code. The API follows REST conventions and supports full CRUD operations, filtering, pagination, and even complex joins.
+PostgREST is a standalone web server that automatically turns your Postgres database schema into a RESTful API. It uses the database's structure, constraints, and permissions to create API endpoints without requiring you to write any backend code. The API follows REST conventions and supports full CRUD operations, filtering, pagination, and even complex joins.
 
 This guide shows you how to set up PostgREST with a Lakebase Postgres database using Docker for local development. You'll learn how to configure basic read access, add authenticated endpoints with JWT tokens, and implement row-level security for fine-grained access control.
 
@@ -78,9 +78,13 @@ ALTER DEFAULT PRIVILEGES IN SCHEMA api GRANT SELECT ON TABLES TO anonymous;
 While this example uses SERIAL for simplicity, consider using UUID as a primary key in production systems, especially in distributed environments, when exposing identifiers in URLs, or when avoiding predictable sequences is important.
 </Admonition>
 
+<Admonition type="note">
+This guide creates an `anonymous` role in the database. The managed Neon Data API creates its own `anonymous` role, so enabling it fails with `anonymous role already exists` on a database that has this role. If you plan to use the Data API, use a separate database for this guide.
+</Admonition>
+
 ## Copy your database connection string
 
-Retrieve an unpooled database connection string. PostgREST requires a direct connection to your database.
+Retrieve an unpooled database connection string. We recommend a direct connection for PostgREST.
 
 1. Open your project in the Neon Console.
 2. Click the **Connect** button to open the **Connect to your branch** modal.
@@ -150,7 +154,7 @@ GRANT USAGE, SELECT ON ALL SEQUENCES IN SCHEMA api TO authenticated;
 
 ## Run PostgREST with a JWT secret
 
-Run PostgREST again, this time with a JWT secret that will be used by PostgREST to verify the JWT that we will attach to our requests in a later step.
+Run PostgREST again, this time with a JWT secret that will be used by PostgREST to verify the JWT that we will attach to our requests in a later step. The secret must be at least 32 characters long.
 
 <Tabs labels={["Linux", "macOS", "Windows"]}>
 
@@ -267,14 +271,13 @@ In a real application, you would want to:
 - Include user-specific claims in the JWT (most likely, a "sub" field which corresponds to users' IDs)
 - Implement a proper authentication server/service (or use a third-party managed auth provider)
 
-Now let's test this with a JWT that includes a user ID. We'll create a new JWT with a payload that includes a user ID in the "sub" claim:
+Next, create a JWT that has the following payload, with the student ID in the `sub` claim. Sign it with the same JWT secret from above:
 
-Now, let's generate a new JWT that has the following payload defining the student ID (and sign it with the same JWT secret from above):
-
-```
+```json
 {
   "role": "authenticated",
   "sub": "1"
+}
 ```
 
 Here's the new token:
@@ -296,16 +299,16 @@ Because the `students` table has a RLS policy attached to the student's ID, the 
 
 ## Summary
 
-The examples shown above are simple, but they illustrate how PostgREST works. With Neon and PostgREST, you can instantly turn your Postgres database into a REST API; no backend code required. This setup is ideal for rapid prototyping, internal tools, or even production workloads where you want to focus on your data and business logic rather than boilerplate API code.
+The examples shown above are simple, but they illustrate how PostgREST works. With Neon and PostgREST, you can turn a Postgres database into a REST API without writing backend code. This setup is ideal for rapid prototyping, internal tools, or even production workloads where you want to focus on your data and business logic rather than boilerplate API code.
 
 ## Next steps
 
 Now that you have a basic PostgREST API running with Neon, here are some things you can try next:
 
-- **Explore advanced querying**: Implement [filtering](https://docs.postgrest.org/en/v12/api.html#horizontal-filtering-rows), [ordering](https://docs.postgrest.org/en/v12/api.html#ordering), and [pagination](https://docs.postgrest.org/en/v12/api.html#limits-and-pagination) in your API requests
-- **Add resource embedding**: Use [resource embedding](https://docs.postgrest.org/en/v12/api.html#resource-embedding) to fetch related data in a single request
-- **Implement stored procedures**: Expose [PostgreSQL functions](https://docs.postgrest.org/en/v12/api.html#stored-procedures) as API endpoints for complex operations
-- **Example applications**: Explore [example applications](https://docs.postgrest.org/en/v12/ecosystem.html#example-apps) built with PostgREST to get inspiration for your own projects
-- **Try out templates**: These [templates](https://docs.postgrest.org/en/v12/ecosystem.html#templates) combine PostgREST with various frontend technologies
+- **Explore advanced querying**: Implement [filtering](https://docs.postgrest.org/en/stable/api.html#horizontal-filtering-rows), [ordering](https://docs.postgrest.org/en/stable/api.html#ordering), and [pagination](https://docs.postgrest.org/en/stable/api.html#limits-and-pagination) in your API requests
+- **Add resource embedding**: Use [resource embedding](https://docs.postgrest.org/en/stable/api.html#resource-embedding) to fetch related data in a single request
+- **Implement stored procedures**: Expose [Postgres functions](https://docs.postgrest.org/en/stable/api.html#stored-procedures) as API endpoints for complex operations
+- **Example applications**: Explore [example applications](https://docs.postgrest.org/en/stable/ecosystem.html#example-apps) built with PostgREST to get inspiration for your own projects
+- **Try out templates**: These [templates](https://docs.postgrest.org/en/stable/ecosystem.html#templates) combine PostgREST with various frontend technologies
 
 <NeedHelp/>

@@ -12,7 +12,7 @@ summary: >-
   dictionary is superuser-owned; create a custom dictionary from
   `intdict_template` and bind it to a copied text search configuration.
 enableTableOfContents: true
-updatedOn: '2026-08-04T08:34:18.168Z'
+updatedOn: '2026-10-09T15:55:57.334Z'
 ---
 
 [Postgres Full-Text Search (FTS)](/postgresql/postgresql-indexes/postgresql-full-text-search) is a powerful tool for searching through textual data. However, when this data includes a significant number of integers like product IDs, serial numbers, or document codes, default FTS behavior can sometimes lead to inefficient indexes and slower search performance.
@@ -175,7 +175,7 @@ Here's the recommended approach:
 
 Now, `public.my_app_search_config` is set up to use `my_custom_intdict` for processing integers. `public.my_app_search_config` can now be used in `to_tsvector` and `to_tsquery` functions to process integer tokens according to the rules defined in `my_custom_intdict`.
 
-## Example
+## Example (#example-2)
 
 Let's consider a scenario where we have a `documents` table with a `version_code` field stored as text. These codes can be like "v1", "V2.0", "Rev 003", or purely numeric like "1001", "005". We want to full-text search these, focusing on the numeric parts using a custom integer dictionary and a custom text search configuration.
 

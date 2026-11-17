@@ -59,7 +59,7 @@ Use the [Create anonymized branch](/docs/reference/api/branches/create-project-b
 ```bash
 curl -X POST \
   'https://console.neon.tech/api/v2/projects/{project_id}/branch_anonymized' \
-  -H 'Authorization: Bearer $NEON_API_KEY' \
+  -H "Authorization: Bearer $NEON_API_KEY" \
   -H 'Accept: application/json' \
   -H 'Content-Type: application/json' \
   -d '{
@@ -148,7 +148,7 @@ Example request to mask an email column:
 ```bash
 curl -X PATCH \
   'https://console.neon.tech/api/v2/projects/{project_id}/branches/{branch_id}/masking_rules' \
-  -H 'Authorization: Bearer $NEON_API_KEY' \
+  -H "Authorization: Bearer $NEON_API_KEY" \
   -H 'Content-Type: application/json' \
   -d '{
     "masking_rules": [{
@@ -223,7 +223,7 @@ Use the [Get masking rules](/docs/reference/api/branches/get-masking-rules) endp
 ```bash
 curl -X GET \
   'https://console.neon.tech/api/v2/projects/{project_id}/branches/{branch_id}/masking_rules' \
-  -H 'Authorization: Bearer $NEON_API_KEY' \
+  -H "Authorization: Bearer $NEON_API_KEY" \
   -H 'Accept: application/json'
 ```
 

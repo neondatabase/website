@@ -3,7 +3,7 @@ title: '10x-ing our Free Plan: Everyone Gets Ten Projects'
 description: 'You asked for a second project, so we gave you ten.'
 excerpt: "Lots of you told us it would be nice to have more projects. Starting today (10/10 \U0001F609), everyone on the Free Plan can now create up to ten projects. You can create up to 10 branches on each Free Plan Project. Account-level limits on compute hours, storage, and bandwidth remain unc..."
 date: '2024-10-10T15:10:51'
-updatedOn: '2024-10-10T15:10:54'
+updatedOn: '2026-11-02T12:00:00.000Z'
 category: company
 categories:
   - company
@@ -16,16 +16,22 @@ cover:
 isFeatured: false
 seo:
   title: '10x-ing our Free Plan: Everyone Gets Ten Projects - Neon'
-  description: 'You asked for a second project, so we gave you ten.'
+  description: >-
+    Neon's October 2024 Free plan project increase. The Free plan now includes 100 projects; see neon.com/pricing for current limits.
   keywords: []
   noindex: false
   ogTitle: '10x-ing our Free Plan: Everyone Gets Ten Projects - Neon'
-  ogDescription: "Lots of you told us it would be nice to have more projects. Starting today (10/10 \U0001F609), everyone on the Free Plan can now create up to ten projects. You can create up to 10 branches on each Free Plan Project. Account-level limits on compute hours, storage, and bandwidth remain unchanged. We’re confident that only […]"
+  ogDescription: >-
+    Neon's October 2024 Free plan project increase. The Free plan now includes 100 projects; see neon.com/pricing for current limits.
   image: >-
     https://cdn.neonapi.io/public/images/pages/blog/10x-projects-on-free-plan/social.jpg
 ---
 
 ![Image](https://cdn.neonapi.io/public/images/pages/blog/10x-projects-on-free-plan/neon-10-projects-1-1024x576-db211228.jpg)
+
+<Admonition type="important" title="Free plan limits have changed since this post">
+This post describes the Free plan in October 2024. As of November 2026, the Free plan includes 100 projects, each with 100 CU-hours of compute per month and 1 GB of storage (up to 20 GB across all projects). See the [pricing page](/pricing) and the [plans documentation](/docs/introduction/plans) for current pricing and limits.
+</Admonition>
 
 Lots of you told us it would be nice to have more projects. Starting today (10/10 😉), **everyone on the Free Plan can now create up to ten projects.**
 

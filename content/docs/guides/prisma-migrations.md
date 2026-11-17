@@ -23,7 +23,7 @@ If you just need to connect Prisma to Neon without a full tutorial, see [Connect
 
 ## Prerequisites
 
-- A [Neon account and project](/docs/get-started-with-neon/signing-up)
+- A [Neon account and project](/docs/get-started/signing-up)
 - [Node.js](https://nodejs.org/) 20.19+, 22.12+, or 24+ installed (required by Prisma ORM 7)
 - Both connection strings from your Neon Console (pooled and direct)
 
@@ -36,7 +36,7 @@ mkdir neon-prisma-migrations && cd neon-prisma-migrations
 npm init -y
 npm pkg set type="module"
 npm install express dotenv @prisma/client@7 @prisma/adapter-neon@7
-npm install prisma@7 typescript tsx @types/node --save-dev
+npm install prisma@7 typescript tsx @types/node @types/express --save-dev
 npx prisma init
 ```
 
@@ -58,9 +58,9 @@ DATABASE_URL_UNPOOLED="postgresql://[user]:[password]@[endpoint].[region].aws.ne
 Prisma Migrate requires a direct connection to perform schema changes. The pooled connection is used by your application at runtime.
 </Admonition>
 
-### Configure prisma.config.ts
+### Configure Prisma
 
-Update the `prisma.config.ts` file in your project root:
+Update the config file that `prisma init` created in your project root. Prisma 7.10 and later create `prisma7.config.ts`, and earlier 7.x releases create `prisma.config.ts`. Don't create a second config file. Replace its contents with:
 
 ```typescript
 import 'dotenv/config'
@@ -121,9 +121,14 @@ This command:
 
 1. Creates a `prisma/migrations` folder with SQL migration files
 2. Applies the migration to your Neon database
-3. Generates the Prisma Client
 
 You should see output confirming the migration was applied.
+
+In Prisma 7.10, `migrate dev` doesn't regenerate the Prisma Client, so generate it yourself:
+
+```bash
+npx prisma generate
+```
 
 ## Set up Prisma Client
 
@@ -131,7 +136,7 @@ Create `src/db.ts` to instantiate Prisma Client with the Neon adapter:
 
 ```typescript
 import 'dotenv/config'
-import { PrismaClient } from './generated/prisma'
+import { PrismaClient } from './generated/prisma/client.js'
 import { PrismaNeon } from '@prisma/adapter-neon'
 
 const adapter = new PrismaNeon({
@@ -146,7 +151,7 @@ export const prisma = new PrismaClient({ adapter })
 Create `src/seed.ts` to populate the database with sample data:
 
 ```typescript
-import { prisma } from './db'
+import { prisma } from './db.js'
 
 async function seed() {
   const authors = [
@@ -197,7 +202,7 @@ Create `src/index.ts` with Express endpoints:
 
 ```typescript
 import express from 'express'
-import { prisma } from './db'
+import { prisma } from './db.js'
 
 const app = express()
 const port = process.env.PORT || 3000
@@ -262,7 +267,11 @@ model Author {
 npx prisma migrate dev --name add-author-country
 ```
 
-Prisma creates a new migration file and applies it. The Prisma Client is automatically regenerated.
+Prisma creates a new migration file and applies it. Regenerate the client so the `country` field is available in your code:
+
+```bash
+npx prisma generate
+```
 
 ### Verify the change
 

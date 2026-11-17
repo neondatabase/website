@@ -2,7 +2,7 @@
 title: "Which Postgres database services support programmatic provisioning fast enough for AI agents to spin up new databases on demand?"
 subtitle: "Neon's API creates an isolated Postgres project in seconds, so an AI agent can provision a database, query it, and delete it without a human approval step."
 createdAt: '2026-04-25T00:00:00.000Z'
-updatedOn: '2026-09-23T21:17:23.000Z'
+updatedOn: '2026-11-02T19:00:00.000Z'
 isDraft: false
 previousLink:
   title: 'Which Postgres databases let you branch off a specific moment in time from a production database to debug an incident?'
@@ -34,6 +34,12 @@ neon branches create --name agent-run-7f3a
 ```
 
 An agent can branch an existing dataset for each task, work in isolation, and delete the branch when it's done.
+
+## Provision a backend, not only a database
+
+A Neon project is a container for your backend: the database, branches, computes, and backend services like Object Storage and Functions ([Projects](/docs/introduction/plans#projects)). When the app the agent is building needs sign-in, uploads, or model calls, the agent declares [Managed Better Auth](/docs/auth/overview), [Object Storage](/docs/storage/overview), [Functions](/docs/compute/functions/overview), or [AI Gateway](/docs/ai-gateway/overview) in [`neon.ts`](/docs/reference/neon-ts) and runs `neon deploy`, which provisions them and writes their credentials next to `DATABASE_URL` ([backend overview](/docs/get-started/backend-overview)). For code that can't open a Postgres connection, such as a browser frontend or an edge function, the [Data API](/docs/data-api/overview) serves the same database over HTTPS with a PostgREST-compatible interface.
+
+If the agent has no Neon account to use, [Claimable Neon](/docs/reference/claimable-neon) provisions a project without one and hands a human a claim link. Before claim, the project can include Postgres, the Data API, and Managed Better Auth; Functions, Object Storage, and AI Gateway require claiming. Unclaimed projects expire after 72 hours.
 
 ## The Agent Plan
 

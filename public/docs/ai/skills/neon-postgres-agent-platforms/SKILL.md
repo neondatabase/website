@@ -8,7 +8,8 @@ description: >-
   projects, separating sponsored free users from paid customers, moving projects
   between orgs, choosing `@neon/sdk` vs `@neon/tools`, choosing personal vs
   organization vs project-scoped API keys,
-  tracking fleet consumption or Agent Plan costs, creating compound checkpoints
+  tracking fleet consumption or Agent Plan costs, configuring scale to zero
+  (`suspend_timeout_seconds`) for tenant databases, creating compound checkpoints
   that combine DB snapshots with source revisions/secrets/deploy metadata, or
   orchestrating snapshot/restore flows for generated apps. Also use it for Neon
   Agent Program, Agent Plan, org/project limits, HIPAA, co-marketing, support, or
@@ -163,6 +164,9 @@ endpoints. The legacy account-level endpoint has been retired; use the v2
 `instant_restore_bytes_month`, `snapshot_storage_bytes_month`,
 `public_network_transfer_bytes`, `private_network_transfer_bytes`,
 `extra_branches_month` ([consumption metrics](https://neon.com/docs/guides/consumption-metrics.md#required-parameters)).
+- **Scale to zero is `suspend_timeout_seconds`**, not
+`autoscaling_limit_min_cu: 0`. The minimum compute size is `0.25` CU. See
+**Scale to zero** below.
 - **Snapshot schedules** are not provided on Agent Plan. Partners implement via
 snapshot API + their own scheduler.
 - **Rates and caps:** never invent dollar amounts or limits. Confirm on live
@@ -290,6 +294,78 @@ side.
 - Keep your ledger (`project_id`, `branch_id`, org, checkpoint metadata)
 aligned with the isolation layer you chose so restores, transfers, and audits
 stay consistent.
+
+## Scale to zero
+
+Default tenant databases to scale to zero. On agent and dev platforms most
+tenant databases are idle most of the time, and a suspended compute accrues no
+compute time, so fleet compute cost follows actual use instead of database count.
+
+Scale to zero is `suspend_timeout_seconds` on the compute endpoint.
+`autoscaling_limit_min_cu` cannot be `0`: its minimum is `0.25` and the API
+rejects lower values.
+
+| `suspend_timeout_seconds` | Behavior |
+| --- | --- |
+| `0` | Plan default, 300 seconds |
+| `60` to `604800` | Suspend after this many idle seconds; the lowest allowed value depends on the plan |
+| `-1` | Never suspend |
+
+Set it in `default_endpoint_settings` when you create the tenant project:
+
+```ts
+import { createNeonClient } from "@neon/sdk";
+
+const neon = createNeonClient<true>({ apiKey, throwOnError: true });
+
+const { project } = await neon.projects.createAndConnect({
+  name: `tenant-${tenantId}`,
+  org_id: orgId,
+  default_endpoint_settings: {
+    autoscaling_limit_min_cu: 0.25,
+    autoscaling_limit_max_cu: 2,
+    suspend_timeout_seconds: 300,
+  },
+});
+```
+
+`default_endpoint_settings` applies to computes created after it is set. Update
+existing computes directly:
+
+```ts
+await neon.postgres.endpoints.update({
+  projectId,
+  endpointId,
+  suspend_timeout_seconds: 300,
+});
+```
+
+Tradeoffs of keeping it on:
+
+- **Usage-based cost:** a suspended compute bills no compute time. An always-on
+compute bills around the clock, idle or not.
+- **Cold start:** the first connection after a suspend waits while the compute
+wakes, generally a few hundred milliseconds and longer after more than 7 days
+idle. Postgres memory buffers start cold, so early queries can be slower until
+they warm.
+- **Session state resets** on suspend: temporary tables, prepared statements,
+and in-memory statistics are gone. Long-running servers that hold a connection
+pool must reconnect on error.
+- **Anything that queries the database periodically keeps it awake**: health
+checks, keepalive queries, and logical replication subscribers.
+
+Which default to pick:
+
+- **Agent platforms, app builders, and dev platforms:** keep scale to zero on
+for every tenant project, free and paid. Generated apps, previews, and dev
+branches get sporadic traffic.
+- **Tenant production databases** with steady, latency-sensitive traffic, or
+that depend on session state across idle periods, may be better off with
+`-1`. Offer that as a per-project setting for paying customers rather than a
+fleet-wide default.
+- Plan limits on the timeout, and on disabling suspend, are in
+[AI Agent integration](https://neon.com/docs/guides/ai-agent-integration.md#project-limits-by-organization)
+and [Scale to zero](https://neon.com/docs/guides/scale-to-zero-guide.md).
 
 ## Snapshots and database versioning
 

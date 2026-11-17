@@ -237,6 +237,7 @@ const EndpointIndexPage = ({ tagGroups, total, breadcrumbs, navigationLinks, cur
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           placeholder="Search endpoints, fields, parameters..."
+          aria-label="Search API endpoints, fields, and parameters"
           className="h-9 w-full border border-gray-new-90 bg-white px-4 text-sm text-gray-new-20 placeholder-gray-new-50 transition-colors duration-200 outline-none focus:border-gray-new-50 dark:border-gray-new-20 dark:bg-gray-new-8 dark:text-gray-new-80 dark:placeholder-gray-new-60 dark:focus:border-gray-new-50 md:text-base"
         />
         {query && (

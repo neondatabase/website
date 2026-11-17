@@ -6,6 +6,11 @@ summary: >-
   timeouts, slug constraints, and the Node.js 24 runtime. Functions are
   long-running but still serverless.
 enableTableOfContents: true
+redirectFrom:
+  - /docs/compute/functions/runtime-limits
+  - /docs/compute/functions/limits
+  - /docs/functions/runtime-limits
+  - /docs/functions/limits
 updatedOn: '2026-09-16T15:38:57.808Z'
 ---
 
@@ -66,6 +71,10 @@ Slugs must match `^[a-z0-9]{1,20}$` and are immutable after the first deployment
 | Concurrency       | Multiple requests in flight per isolate (interleaved on the event loop), scaling out with additional isolates. See [Concurrency](#concurrency). |
 | Concurrency limit | 100 concurrent invocations per account (default). See [Concurrency](#concurrency).                                                              |
 | Memory            | 2048 MiB (fixed, not configurable)                                                                                                              |
+
+## Network controls
+
+On a project with [IP Allow](/docs/introduction/ip-allow#ip-allow-and-other-neon-services) or [Private Networking](/docs/guides/neon-private-networking#private-networking-and-other-neon-services) enabled, a function can't connect to Postgres through `DATABASE_URL`. Functions don't have a fixed outbound IP range to add to an allowlist. These controls don't protect function URLs.
 
 ## Environment variables
 

@@ -7,7 +7,7 @@ excerpt: >-
   always been a part of our vision at Neon. We want to help developers ship
   faster with Postgres on Neon, regardless of which cloud...
 date: '2024-08-07T13:09:53'
-updatedOn: '2024-12-09T17:50:58'
+updatedOn: '2026-11-06T12:00:00.000Z'
 category: company
 categories:
   - company
@@ -34,6 +34,10 @@ seo:
 ---
 
 ![Image](https://cdn.neonapi.io/public/images/pages/blog/neon-is-coming-to-azure/neon-azure-1-2-1024x576-265e70e9.jpg)
+
+<Admonition type="important" title="Neon Azure regions are deprecated">
+Neon's Azure regions (`azure-eastus2`, `azure-westus3`, `azure-gwc`) were deprecated on April 7, 2026, and you can no longer create new projects in them. Active and paid projects in those regions keep running. See [Azure regions deprecation](/docs/import/azure-regions-deprecation) for your options and [regions](/docs/introduction/regions) for where you can create projects today.
+</Admonition>
 
 <Admonition type="important" title="December 2024 Update">
 Neon is now available as an Azure Native Integration. You can deploy Neon organizations directly from the Azure Portal, including the Free Plan. Get started [here](https://azuremarketplace.microsoft.com/en-us/marketplace/apps/neon1722366567200.neon_serverless_postgres_azure_prod?tab=overview).

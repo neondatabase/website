@@ -3,12 +3,12 @@ title: 'How do I create and download a backup of my Neon database to my local ma
 subtitle: 'Run pg_dump in custom format against a direct connection string and save the archive to disk.'
 enableTableOfContents: true
 createdAt: '2026-05-18T00:00:00.000Z'
-updatedOn: '2026-11-04T20:10:08.844Z'
+updatedOn: '2026-11-15T14:59:27.573Z'
 isDraft: false
 redirectFrom: []
 previousLink:
-  title: 'How do I delete a database in Neon?'
-  slug: delete-database-neon
+  title: 'Does Neon pause inactive projects?'
+  slug: does-neon-pause-inactive-projects
 nextLink:
   title: 'How do I enable or disable connection pooling for my Neon database?'
   slug: enable-disable-connection-pooling-neon

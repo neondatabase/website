@@ -9,12 +9,33 @@ summary: >-
   branches only, leaving other branches unrestricted, and are configured in
   project settings.
 enableTableOfContents: true
+redirectFrom:
+  - /docs/manage/ip-allow
 updatedOn: '2026-10-09T10:01:16.476Z'
 ---
 
 Neon's IP Allow feature, available with the Neon [Scale](/docs/introduction/plans) plan, ensures that only trusted IP addresses can connect to the project where your database resides, preventing unauthorized access and helping maintain overall data security. You can limit access to individual IP addresses, IP ranges, or IP addresses and ranges defined with [CIDR notation](/docs/reference/glossary#cidr-notation).
 
 You can configure **IP Allow** in your Neon project's settings. To get started, see [Configure IP Allow](/docs/manage/projects#configure-ip-allow).
+
+<Admonition type="warning" title="IP Allow doesn't protect every Neon service">
+IP Allow restricts Postgres connections only. It doesn't protect the Data API, Realtime, Managed Better Auth, Object Storage, the AI Gateway, or function URLs. Realtime, Managed Better Auth, and database connections from Neon Functions also stop working while IP Allow is enabled. Check [IP Allow and other Neon services](#ip-allow-and-other-neon-services) before you rely on it.
+</Admonition>
+
+## IP Allow and other Neon services
+
+IP Allow restricts connections to Postgres only. Before you enable it, check which Neon services your project uses. IP Allow doesn't protect any other Neon service, so don't rely on it for their security. Some of them also stop working while IP Allow is enabled.
+
+| Service                                                                                              | With IP Allow enabled                                                                                                                                 |
+| ---------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Postgres connections, including the [serverless driver](/docs/serverless/serverless-driver)          | Restricted to your allowlist                                                                                                                          |
+| [Data API](/docs/data-api/get-started)                                                               | **Not protected.** Requests from any IP address are still served. The Data API isn't supported with IP Allow.                                         |
+| [Realtime](/docs/realtime/overview)                                                                  | **Not protected, and stops working.** Subscriptions fail to connect.                                                                                  |
+| [Managed Better Auth](/docs/auth/about)                                                              | **Not protected, and stops working.** Sign-in and other auth requests fail.                                                                           |
+| [Neon Functions](/docs/compute/functions/overview)                                                   | **Not protected, and database connections fail.** Function URLs are still reachable, but a function can't connect to Postgres through `DATABASE_URL`. |
+| [Object Storage](/docs/storage/authentication) and the [AI Gateway](/docs/ai-gateway/authentication) | **Not protected.** Access is controlled by credentials only.                                                                                          |
+
+If you apply the allowlist to [protected branches only](#ip-allow-together-with-protected-branches), these limits apply only to protected branches.
 
 ## Neon services to allowlist
 

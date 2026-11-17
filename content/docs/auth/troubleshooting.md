@@ -5,11 +5,12 @@ summary: >-
   Troubleshooting for common Managed Better Auth errors in `@neon/auth` (Next.js
   and React SPA). Covers missing `NEON_AUTH_COOKIE_SECRET`,
   missing `force-dynamic` on server components, `NETWORK_DNS` / `NETWORK_TIMEOUT`
-  upstream errors, and OAuth `redirect_uri_mismatch` from misconfigured callback
+  upstream errors, `Origin` errors when scripts call the
+  Auth API directly, and OAuth `redirect_uri_mismatch` from misconfigured callback
   URIs. Use this page when Managed Better Auth fails at startup, sessions do not persist,
   or OAuth logins loop back to the provider instead of the app.
 enableTableOfContents: true
-updatedOn: '2026-07-15T00:08:00.682Z'
+updatedOn: '2026-11-05T01:14:11.711Z'
 ---
 
 This page covers common issues when integrating [Managed Better Auth](/docs/auth/overview) with `@neon/auth` in Next.js apps and React SPAs.
@@ -64,6 +65,31 @@ Server actions or API routes may return errors with **`code`** values such as **
 3. Enable **`logLevel: 'debug'`** and retry; logs include a safe **`detail`** field.
 
 See [Upstream fetch errors](/docs/auth/reference/nextjs-server#upstream-fetch-errors) for the full code list.
+
+## Origin errors from scripts and server-side calls (#origin-errors)
+
+Managed Better Auth checks the `Origin` header on `POST` requests such as sign-up, sign-in, and sign-out. Browsers send it for you, and so does the `@neon/auth` Next.js handler. Seed scripts, tests, and server code that call `NEON_AUTH_BASE_URL` directly have to send it themselves. Without a trusted `Origin`, the request fails:
+
+| Response                       | Cause                                                         |
+| ------------------------------ | ------------------------------------------------------------- |
+| `403` `MISSING_OR_NULL_ORIGIN` | No `Origin` header (or `Origin: null`) on sign-in or sign-out |
+| `400` `MISSING_ORIGIN`         | No `Origin` header on sign-up                                 |
+| `403` `INVALID_ORIGIN`         | The `Origin` isn't a trusted domain                           |
+
+Set `Origin` to a trusted domain:
+
+```typescript
+const res = await fetch(`${process.env.NEON_AUTH_BASE_URL}/sign-in/email`, {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json',
+    Origin: 'http://localhost:3000',
+  },
+  body: JSON.stringify({ email: 'alex@example.com', password: 'AbC123dEf' }),
+});
+```
+
+Any `localhost` origin is trusted while [localhost access](/docs/auth/production-checklist#localhost-access) is on, which it is by default. Add any other origin as a [trusted domain](/docs/auth/guides/configure-domains), for example with `neon neon-auth domain add https://myapp.com`.
 
 ## Cookies blocked in iframe or cross-site embeds
 

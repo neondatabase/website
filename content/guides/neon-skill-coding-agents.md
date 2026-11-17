@@ -5,10 +5,10 @@ author: anthony-giuliano
 enableTableOfContents: true
 excludeFromBlog: true
 createdAt: '2026-05-12T00:00:00.000Z'
-updatedOn: '2026-09-24T17:56:34.189Z'
+updatedOn: '2026-10-09T15:55:57.334Z'
 ---
 
-<YoutubeIframe embedId="NN251KTjAo8" />
+<YoutubeIframe embedId="NN251KTjAo8" title="Neon Agent Skills demo" />
 
 If you're using an AI coding agent to build an app with Neon, add the **Neon skill** to your project. It puts Neon's best practices directly into your repository so your agent writes better Neon code from the first prompt.
 

@@ -9,7 +9,7 @@ summary: >-
   resent; verification can be configured as required or optional in the Neon
   Console, controlling whether unverified users can sign in.
 enableTableOfContents: true
-updatedOn: '2026-10-09T09:36:23.504Z'
+updatedOn: '2026-11-05T01:14:13.350Z'
 ---
 
 Email verification ensures users own the email addresses they register with. The application name shown in these emails is configurable per branch. See [Application name](/docs/auth/production-checklist#application-name).
@@ -51,7 +51,7 @@ Update the configuration with the [Update email and password configuration](/doc
 
 ```bash
 curl -X PATCH 'https://console.neon.tech/api/v2/projects/{project_id}/branches/{branch_id}/auth/email_and_password' \
-  -H 'Authorization: Bearer $NEON_API_KEY' \
+  -H "Authorization: Bearer $NEON_API_KEY" \
   -H 'Content-Type: application/json' \
   -d '{
   "enabled": true,
@@ -429,4 +429,4 @@ The server sends whichever type (verification link or verification code) you con
 
 ## Required vs optional verification
 
-When email verification is **required** in your Console settings, users cannot sign in until they verify. When verification is **optional**, users can sign in immediately but their `emailVerified` field remains `false` until verified.
+When email verification is **required** in your Console settings, users cannot sign in until they verify. When verification is **optional**, which is the default, users can sign in immediately but their `emailVerified` field remains `false` until verified. If your app links a signed-in user to existing data by matching their email address, check that `emailVerified` is `true` first. Otherwise, anyone who signs up with that address gets that data.

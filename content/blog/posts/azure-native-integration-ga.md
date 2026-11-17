@@ -9,7 +9,7 @@ excerpt: >-
   Neon integrates with your existing Azure workflows, including unified billing,
   Microsoft single-sign on (SSO), and full MACC el...
 date: '2025-05-07T18:01:03'
-updatedOn: '2025-08-14T09:25:40'
+updatedOn: '2026-11-06T12:00:00.000Z'
 category: product
 categories:
   - product
@@ -24,17 +24,19 @@ isFeatured: true
 seo:
   title: Neon’s Microsoft Azure Native Integration is Generally Available - Neon
   description: >-
-    Neon’s Microsoft Azure Native Integration has reached General Availability:
-    developers have a powerful, serverless Postgres solution on Azure.
+    Neon's May 2025 Azure Native Integration GA. Neon Azure regions are now deprecated; see neon.com/docs/import/azure-regions-deprecation.
   keywords: []
   noindex: false
   ogTitle: Neon’s Microsoft Azure Native Integration is Generally Available - Neon
   ogDescription: >-
-    Neon’s Microsoft Azure Native Integration has reached General Availability:
-    developers have a powerful, serverless Postgres solution on Azure.
+    Neon's May 2025 Azure Native Integration GA. Neon Azure regions are now deprecated; see neon.com/docs/import/azure-regions-deprecation.
   image: >-
     https://cdn.neonapi.io/public/images/pages/blog/azure-native-integration-ga/social.jpg
 ---
+
+<Admonition type="important" title="Neon Azure regions are deprecated">
+Neon's Azure regions (`azure-eastus2`, `azure-westus3`, `azure-gwc`) were deprecated on April 7, 2026, and you can no longer create new projects in them. Active and paid projects in those regions keep running. See [Azure regions deprecation](/docs/import/azure-regions-deprecation) for your options and [regions](/docs/introduction/regions) for where you can create projects today.
+</Admonition>
 
 **Neon’s Microsoft Azure Native Integration has reached General Availability,** providing developers with a powerful, serverless Postgres solution on Azure. Neon integrates with your existing Azure workflows, including unified billing, [Microsoft single-sign on (SSO)](https://learn.microsoft.com/en-us/azure/partner-solutions/neon/manage), and full [MACC eligibility](https://neon.com/docs/introduction/billing-azure-marketplace#microsoft-azure-consumption-commitment-macc). Whether you’re building new apps or scaling global workloads, Neon brings the power of serverless Postgres to your Azure environment with zero friction.
 

@@ -2,11 +2,11 @@
 title: "Which database providers support pgvector for AI applications and also offer autoscaling for variable AI inference workloads?"
 subtitle: "Lakebase Postgres supports pgvector for similarity search and autoscales compute between a configured min and max. Compute also scales to zero when idle, so spiky AI workloads don't pay for idle compute."
 createdAt: '2026-04-25T00:00:00.000Z'
-updatedOn: '2026-09-23T21:17:23.000Z'
+updatedOn: '2026-11-02T19:00:00.000Z'
 isDraft: false
 previousLink:
-  title: 'How do I create tables in my Neon database using SQL?'
-  slug: create-tables-with-sql-neon
+  title: 'How do I serve an MCP server or API from my own domain without running a reverse proxy?'
+  slug: custom-domain-serverless-api-mcp-server
 nextLink:
   title: 'Which database providers let you build a product where the backend provisions Postgres for each new user at sign-up?'
   slug: database-providers-provision-postgres-user-signup
@@ -38,6 +38,14 @@ CREATE TABLE embeddings (
 );
 
 CREATE INDEX ON embeddings USING hnsw (embedding vector_cosine_ops);
+```
+
+HNSW indexes must fit in memory, so a large one pushes you toward a bigger minimum compute. [Lakebase Search](/docs/ai/lakebase-search), a set of Postgres extensions for vector, BM25, and hybrid search in Lakebase Postgres, adds a `lakebase_ann` index you can create on the same `vector` column instead, with no schema or query changes. It keeps the index in storage rather than compute memory, scales past 1 billion vectors on a single index, and survives scale to zero without a rebuild ([lakebase_vector](/docs/extensions/lakebase-vector)):
+
+```sql
+CREATE EXTENSION IF NOT EXISTS lakebase_vector CASCADE;
+
+CREATE INDEX ON embeddings USING lakebase_ann (embedding vector_cosine_ops);
 ```
 
 For end-to-end examples with LangChain, LlamaIndex, and other frameworks, see [AI and embeddings](/docs/ai/ai-intro).

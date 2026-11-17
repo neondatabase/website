@@ -1,25 +1,25 @@
 ---
 title: Provide read-only access with Read Replicas
-subtitle: Leverage read replicas to provide read-only access to your data
+subtitle: Use read replicas to provide read-only access to your data
 summary: >-
   Neon read replicas let you grant read-only database access to partners,
   third-party apps, or analysts by routing SELECT queries to an isolated compute
   that blocks all writes (SQLSTATE 25006). Use this approach when you need to
   share live data for reporting or audits without risking changes to production.
-  Setup requires creating the replica in the Console and sharing its connection
-  string.
+  Setup requires creating the replica, a read-only role, and a connection string
+  for that role.
 enableTableOfContents: true
 updatedOn: '2026-09-16T19:45:35.340Z'
 ---
 
 When you create a read replica in Neon, you gain the ability to provide read-only access to your data. Use it when you want to grant access to users, partners, or third-party applications that only need to run queries to analyze data, generate reports, or audit your database. Since no write operations are permitted on read replicas, it ensures the integrity of your data while allowing others to work with up-to-date information.
 
-Suppose you need to give a partner read-only access to your sales data so they can generate custom reports for your business. Here’s how you would go about doing that:
+Suppose you need to give a partner read-only access to your sales data so they can generate custom reports for your business. Here's how you would go about doing that:
 
 1. **Create a read replica**
 
    <Admonition type="note">
-   The Free plan is limited to a maximum of 3 read replica computes per project.
+   The number of read replicas you can add depends on your plan. See [Read replicas](/docs/introduction/plans#read-replicas) on the plans page.
    </Admonition>
 
    Follow these steps to create a read replica for your database branch:
@@ -27,18 +27,38 @@ Suppose you need to give a partner read-only access to your sales data so they c
    - Select the branch that contains your data.
    - Click **Add Read Replica** to create a dedicated compute instance for read operations.
 
-2. **Provide the connection string**
+2. **Create a read-only role**
 
-   Once the read replica is created, obtain the connection string from the Neon Console:
-   - You can find the connection details for your database by clicking the **Connect** button in the Console nav. Select the branch, the database, and the role.
+   Roles you create in the Console or the Neon API join the `neon_superuser` role, which gives them admin privileges. Create a read-only role for the partner instead. With the Neon CLI, pass `--access read_only`:
+
+   ```bash shouldWrap
+   neon roles create --name partner --access read_only --project-id <project_id> --branch <branch_name>
+   ```
+
+   The command prints the role's password once. Save it, or run `neon roles reset-password` later to get a new one. The role can read the tables the database owner owns, but it can't write to them.
+
+3. **Provide the connection string**
+
+   Once the read replica is created, get the connection string for the partner's role and the replica compute. With the Neon CLI, pass `--endpoint-type read_only`:
+
+   ```bash shouldWrap
+   neon connection-string <branch_name> --project-id <project_id> --role-name partner --database-name dbname --endpoint-type read_only
+   ```
+
+   In the Neon Console, you can get the same string instead:
+   - Click the **Connect** button in the Console nav. Select the branch, the database, and the role.
    - Choose **Replica** compute under the compute settings.
-   - Copy the connection string and provide it to your partner. The connection string might look something like this:
+   - Copy the connection string.
 
-     ```bash shouldWrap
-     postgresql://partner:partner_password@ep-read-replica-12345.us-east-2.aws.neon.tech/sales_db?sslmode=require&channel_binding=require
-     ```
+   The string looks like this:
 
-3. **Read-only access for the partner**
+   ```bash shouldWrap
+   postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require&channel_binding=require
+   ```
+
+   Share the string with your partner.
+
+4. **Read-only access for the partner**
 
    The partner can now use this connection string to connect to the read replica and run any `SELECT` queries they need for reporting purposes, such as:
 
@@ -49,14 +69,16 @@ Suppose you need to give a partner read-only access to your sales data so they c
    GROUP BY product_id;
    ```
 
-   This query will run on the read replica without impacting the performance of your production database, since read replicas run on an isolated read-only compute.
+   This query runs on the read replica's own compute, not on your read/write compute.
 
-4. **Write operations are not permitted**
+5. **Write operations are not permitted**
 
    Since the connection is to a read replica, the partner will not be able to run any write operations. If they attempt to run a `DELETE`, `INSERT`, or `UPDATE` query, they will receive an error message like this:
 
    ```bash
    ERROR: cannot execute INSERT in a read-only transaction (SQLSTATE 25006)
    ```
+
+   DDL statements, such as `CREATE TABLE` and `ALTER TABLE`, fail with the same error. For more on this error, see [cannot execute in a read-only transaction](/docs/connect/connection-errors#error-read-only-transaction).
 
 <NeedHelp/>

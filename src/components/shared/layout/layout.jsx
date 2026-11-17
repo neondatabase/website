@@ -22,10 +22,23 @@ const Layout = ({
   isClient = false,
 }) => (
   <>
+    <a
+      className={cn(
+        'fixed top-0 left-4 z-100 -translate-y-full rounded-b-sm px-4 py-2.5',
+        'text-sm leading-none font-medium tracking-extra-tight',
+        'border border-t-0 border-gray-new-90 bg-white text-black-pure',
+        'dark:border-gray-new-20 dark:bg-black-pure dark:text-white',
+        'focus:translate-y-0'
+      )}
+      href="#main-content"
+    >
+      Skip to main content
+    </a>
     {!isClient && <Topbar />}
+    {/* No pt-safe: it misaligns the header and mobile menu (#4208, #6679) */}
     <div
       className={cn(
-        'relative flex flex-col pt-safe',
+        'relative flex flex-col',
         isClient ? 'min-h-screen' : 'min-h-[calc(100vh-36px)]',
         isDocPage && 'lg:pb-12!'
       )}
@@ -44,6 +57,8 @@ const Layout = ({
       />
       <main
         className={cn(withOverflowHidden && 'overflow-hidden', 'flex flex-1 flex-col', className)}
+        id="main-content"
+        tabIndex={-1}
       >
         {children}
       </main>

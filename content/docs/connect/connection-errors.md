@@ -37,7 +37,7 @@ This topic describes how to resolve connection errors you may encounter when usi
 - [DNS resolution issues](#dns-resolution-issues)
 
 <Admonition type="info">
-Connection problems are sometimes related to a system issue. To check for system issues, please refer to the [Neon status page](https://neonstatus.com/).  
+Connection problems are sometimes related to a system issue. To check for system issues, please refer to the [Neon status page](https://neonstatus.com/), or run [`neon incidents`](/docs/cli/incidents) from your terminal.  
 </Admonition>
 
 ## The endpoint ID is not specified
@@ -216,7 +216,7 @@ The error occurs when using a pooled Neon connection string with startup options
 
 This error can also appear as: `active endpoints limit exceeded`.
 
-Neon limits [concurrently active computes](/docs/reference/glossary#concurrently-active-compute-limit) to prevent resource exhaustion. When you exceed the limit, additional computes beyond the limit will remain suspended and you will see this error when attempting to connect to them. You can suspend other active computes and try again. Alternatively, if you encounter this error often, you can reach out to [Support](/docs/introduction/support) to request a `max_active_endpoints` limit increase.
+Neon limits [concurrently active computes](/docs/reference/glossary#concurrently-active-compute-limit) to prevent resource exhaustion. When you exceed the limit, additional computes beyond the limit will remain suspended and you will see this error when attempting to connect to them. You can suspend other active computes and try again. Alternatively, if you encounter this error often, you can request a limit increase. Scale plan users can [request a limit increase](/docs/introduction/support#request-a-limit-increase) from the console.
 
 ## Remaining connection slots are reserved for roles with the SUPERUSER attribute
 

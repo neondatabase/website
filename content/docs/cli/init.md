@@ -9,7 +9,7 @@ summary: >-
   runs interactively by default; pass -y for the recommended setup with no prompts,
   or add flags such as --skill, MCP options, or --claimable for the custom setup.
 enableTableOfContents: true
-updatedOn: '2026-10-31T00:04:51.920Z'
+updatedOn: '2026-11-09T17:20:06.156Z'
 redirectFrom:
   - /docs/reference/cli-init
 ---
@@ -84,7 +84,7 @@ Pass `-y` (alias `--yes`) to run each step with its defaults instead of promptin
 
 Pass `--agent` (alias `-a`) to name the coding agents to set up, which skips both detection and the picker. It's repeatable (`neon init --agent cursor --agent claude-code`) and works with `-y`. Without skill or MCP flags, it installs the plugin, plus skills and MCP for any agent the plugin can't cover. Run `neon init --help` to see which agents each family supports. Passing `--agent` with no value returns an error.
 
-Pass `--claimable` to create a [claimable project](/docs/reference/claimable-neon) that expires in 72 hours unless it's claimed. This selects the custom setup. The project goes in `aws-us-east-2` unless you add `--region-id`. `--claimable` can't be combined with `--no-link`, `--org-id`, `--project-id`, `--project-name`, or `--branch`.
+Pass `--claimable` to create a [claimable project](/docs/reference/claimable-neon) that expires in 72 hours unless it's claimed. This selects the custom setup. The project goes in `aws-us-east-2` unless you add `--region-id`. `--claimable` can't be combined with `--no-link`, `--org-id`, `--project-id`, or `--branch`. Add `--project-name` to name the project.
 
 ## Run it non-interactively
 
@@ -115,12 +115,12 @@ When `-y` can't authenticate, it finishes every step it can and lists what's lef
 
 The files created depend on the flags you pass. Each one is written by the command `init` runs, so see that command's page for details.
 
-| Artifact                                              | Written by                                                                                            | Scope              |
-| ----------------------------------------------------- | ----------------------------------------------------------------------------------------------------- | ------------------ |
-| `.neon` (org, project, and branch context)            | [`neon link`](/docs/cli/link)                                                                         | Project            |
-| `.env` or `.env.local` (`DATABASE_URL` and Neon vars) | [`neon link`](/docs/cli/link)                                                                         | Project            |
-| `neon.ts` (config-as-code policy)                     | [`neon config init`](/docs/cli/config)                                                                | Project            |
-| Agent skills, MCP config, or plugin                   | [`neon skills`](/docs/cli/skills) / [`neon mcp`](/docs/cli/mcp) / [`neon plugins`](/docs/cli/plugins) | Project, per agent |
+| Artifact                                              | Written by                                                                                            | Scope                      |
+| ----------------------------------------------------- | ----------------------------------------------------------------------------------------------------- | -------------------------- |
+| `.neon` (org, project, and branch context)            | [`neon link`](/docs/cli/link)                                                                         | Project                    |
+| `.env` or `.env.local` (`DATABASE_URL` and Neon vars) | [`neon link`](/docs/cli/link)                                                                         | Project                    |
+| `neon.ts` (config-as-code policy)                     | [`neon config init`](/docs/cli/config)                                                                | Project                    |
+| Agent skills, MCP config, or plugin                   | [`neon skills`](/docs/cli/skills) / [`neon mcp`](/docs/cli/mcp) / [`neon plugins`](/docs/cli/plugins) | User or project, per agent |
 
 ## Examples
 
@@ -141,9 +141,10 @@ Linked .neon
 Creating neon.ts...
 Installing Neon dependencies with npm...
 Pulling Neon environment variables...
-Pulled 3 Neon variables into .env.local from branch main (br-restless-wildflower-a1b2c3d4)
+Pulled 5 Neon variables into .env.local from branch main (br-restless-wildflower-a1b2c3d4)
   Postgres        DATABASE_URL, DATABASE_URL_UNPOOLED
-  Branch          NEON_BRANCH
+  Branch          NEON_BRANCH, NEON_BRANCH_ID
+  Functions       NEON_FUNCTION_HOST_SUFFIX
 ```
 
 After setup, restart your editor and ask your assistant to "Get started with Neon." The installed [Neon MCP server](/docs/ai/neon-mcp-server) points your assistant to the right docs, so it can connect to your database and use Neon features as you build.
@@ -161,9 +162,9 @@ neon init -y --claimable --agent cursor
 Installing the Neon plugin...
 Installing the Neon plugin for Cursor (1/1)...
 Plugins
-Scope    Plugin         Agent   Status
-project  neon-postgres  cursor  installed
-Installed the Neon plugin (project).
+Scope  Plugin         Agent   Status
+user   neon-postgres  cursor  installed
+Installed the Neon plugin (user).
 Creating a claimable project...
 Project ID            sweet-breeze-12345678
 Branch ID             br-restless-wildflower-a1b2c3d4
@@ -174,9 +175,10 @@ Granted Capabilities  postgres
 Creating neon.ts...
 Installing Neon dependencies with npm...
 Pulling Neon environment variables...
-Pulled 3 Neon variables into .env.local from branch main (br-restless-wildflower-a1b2c3d4)
+Pulled 5 Neon variables into .env.local from branch main (br-restless-wildflower-a1b2c3d4)
   Postgres        DATABASE_URL, DATABASE_URL_UNPOOLED
-  Branch          NEON_BRANCH
+  Branch          NEON_BRANCH, NEON_BRANCH_ID
+  Functions       NEON_FUNCTION_HOST_SUFFIX
 
 Neon setup complete.
 --------------------
@@ -195,4 +197,4 @@ Next:
 
 ## Manual setup
 
-To configure an editor without running `init`, or to register only the Neon MCP server, see [Connect MCP clients to Neon](/docs/ai/connect-mcp-clients-to-neon). To install only agent skills, use [`neon skills`](/docs/cli/skills); to install only the MCP server, use [`neon mcp`](/docs/cli/mcp).
+To configure a specific agent without running `init`, or to register only the Neon MCP Server, see [Set up your AI agent](/docs/ai/agent-setup). To install only agent skills, use [`neon skills`](/docs/cli/skills); to install only the MCP server, use [`neon mcp`](/docs/cli/mcp).

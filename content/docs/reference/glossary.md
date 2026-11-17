@@ -11,7 +11,7 @@ summary: >-
 enableTableOfContents: true
 redirectFrom:
   - /docs/conceptual-guides/glossary
-  - /docs/cloud/concepts/
+  - /docs/cloud/concepts
 updatedOn: '2026-10-28T11:11:18.780Z'
 ---
 
@@ -126,7 +126,7 @@ A service that provides virtualized computing resources, equipped with an operat
 
 A [compute endpoint](#compute-endpoint) is the access point for connecting to a Neon compute.
 
-Neon creates a primary read-write compute for the project's default branch. Neon supports both read-write and [read replica](/docs/introduction/read-replicas) computes. A branch can have a single primary (read-write) compute but supports multiple read replica computes. The compute hostname is required to connect to a database from a client or application.
+Neon creates a primary read-write compute for the project's default branch. Neon supports both read-write and [read replica](/docs/introduction/read-replicas) computes. A branch can have a single primary (read-write) compute and multiple read replica computes (up to 6 per branch on paid plans). The compute hostname is required to connect to a database from a client or application.
 
 ## compute cache
 
@@ -578,7 +578,7 @@ A Neon feature that lets you compare database schemas between different branches
 
 This limit caps how many computes can run at the same time to prevent resource exhaustion. It protects against accidental surges, such as starting many endpoints at once. The default limit is 20 concurrently active computes.
 
-When you exceed the limit, additional computes beyond the limit will remain suspended and you will see an error when attempting to connect to them. You can suspend other active computes and try again. Alternatively, if you encounter this error often, you can reach out to [Support](/docs/introduction/support) to request a `max_active_endpoints` limit increase.
+When you exceed the limit, additional computes beyond the limit will remain suspended and you will see an error when attempting to connect to them. You can suspend other active computes and try again. Alternatively, if you encounter this error often, you can request a limit increase. Scale plan users can [request a limit increase](/docs/introduction/support#request-a-limit-increase) from the console.
 
 ## serverless
 

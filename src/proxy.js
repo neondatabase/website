@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 
 import { checkCookie, getReferer } from 'app/actions';
+import { SITEMAP_MD } from 'constants/agent-discovery';
 import { CONTENT_ROUTES, GENERATED_PAGE_MARKDOWN_PATHS } from 'constants/content';
 import LINKS from 'constants/links';
 import { STATIC_MD_PATHS } from 'constants/static-md-manifest';
@@ -17,6 +18,9 @@ const SITE_URL =
   process.env.VERCEL_ENV === 'preview'
     ? `https://${process.env.VERCEL_BRANCH_URL}`
     : process.env.NEXT_PUBLIC_DEFAULT_SITE_URL;
+
+const IMAGE_EXTENSION = /\.(?:avif|gif|ico|jpe?g|png|svg|webp)$/i;
+const GUIDE_AUTHOR_PATH = /^\/guides\/authors\/[^/]+$/;
 
 function isContentRoute(pathname) {
   const path = pathname.slice(1).replace(/\/$/, '');
@@ -153,6 +157,8 @@ function skillReferenceRedirectResponse(req, pathname) {
 // them. STATIC_MD is the build-time manifest of those files.
 const STATIC_MD = new Set(STATIC_MD_PATHS);
 
+const SITEMAP_MD_PATHS = new Set([SITEMAP_MD.path, ...SITEMAP_MD.aliases]);
+
 // For a `.md` URL with no generated /md sibling: serve the real static file if it
 // exists (manifest hit → next), else a markdown 404. This makes every missing
 // `.md` — skills, .well-known, or an arbitrary path like /foo/bar.md — return
@@ -185,6 +191,11 @@ function skillAliasTarget(pathname) {
 
 function staticMarkdownResponse(pathname, analytics) {
   if (!pathname.endsWith('.md') || pathname.startsWith('/md/')) return null;
+
+  // /docs/sitemap.md is a route handler, not a file in public/, and its aliases
+  // are rewritten to it. Serve them before the generated /md lookup below, which
+  // would otherwise send /docs/sitemap.md to a missing /md/docs/sitemap.md.
+  if (SITEMAP_MD_PATHS.has(pathname)) return servedStaticMarkdown(analytics);
 
   // Skill-discovery alias: no physical file here — a next.config rewrite maps it
   // to a real SKILL.md. Serve (via the rewrite) if that skill exists, else a
@@ -260,7 +271,19 @@ async function handleProxy(req, analytics) {
     if (staticMd) return staticMd;
 
     const isAgent = isAIAgentRequest(req);
-    if (isAgent) {
+    // Normalize unreserved characters for extension matching and forward the original URL.
+    const filename = pathname.slice(pathname.lastIndexOf('/') + 1);
+    const normalizedFilename = filename.replace(/%([0-9a-f]{2})/gi, (encoded, hex) => {
+      const character = String.fromCharCode(Number.parseInt(hex, 16));
+      return /[a-z0-9._~-]/i.test(character) ? character : encoded;
+    });
+    const isImage = IMAGE_EXTENSION.test(normalizedFilename) || pathname === '/docs/og';
+    const isJsonFile =
+      /\.json$/i.test(normalizedFilename) &&
+      (pathname.startsWith('/docs/') || pathname.startsWith('/guides/'));
+    const isGuideAuthorPage =
+      GUIDE_AUTHOR_PATH.test(pathname) && !normalizedFilename.endsWith('.md');
+    if (isAgent && !isImage && !isJsonFile && !isGuideAuthorPage) {
       let agentHit404 = false;
       const markdownPath = getMarkdownPath(pathname);
 
@@ -414,6 +437,7 @@ export const config = {
     '/object-storage', // Agent-friendly Object Storage page
     '/auth', // Agent-friendly Auth product page
     '/lakebase', // Agent-friendly Lakebase page
+    '/case-studies', // Agent-friendly case studies index
     '/docs', // Bare docs root: serve llms.txt for agents; browsers fall through to the docs front page
     '/blog', // Bare blog root: serve blog/llms.txt for agents; browsers fall through normally
     '/blog/:slug.md', // Individual blog post markdown

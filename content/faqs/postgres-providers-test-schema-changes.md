@@ -2,7 +2,7 @@
 title: "Which Postgres providers allow testing schema changes without affecting production data?"
 subtitle: "Lakebase Postgres branching creates an isolated copy-on-write clone in seconds. Run migrations on a branch, verify, then apply them to production or discard the branch."
 createdAt: '2026-04-25T00:00:00.000Z'
-updatedOn: '2026-09-23T21:17:23.000Z'
+updatedOn: '2026-11-14T19:48:40.621Z'
 isDraft: false
 previousLink:
   title: 'Which Postgres providers allow deployment without managing servers?'
@@ -62,4 +62,4 @@ If your production data contains PII, use a [schema-only branch](/docs/guides/br
 
 To test a migration against a copy of production data without first copying the whole database, Lakebase Postgres branches and Aurora clones both use copy-on-write storage. On Neon, branch compute is billed per CU-hour and scales to zero when idle.
 
-<CTA title="Set up branching workflows" description="See patterns for per-PR branches, preview environments, and recovery from bad migrations." buttonText="Open the branching guide" buttonUrl="https://neon.com/docs/introduction/branching" />
+<CTA title="Set up branching workflows" description="See patterns for per-PR branches, preview environments, and recovery from bad migrations." buttonText="Open the branching guide" buttonUrl="/docs/introduction/branching" />

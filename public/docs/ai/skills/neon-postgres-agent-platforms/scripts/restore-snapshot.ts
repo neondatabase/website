@@ -23,7 +23,9 @@ const neon = neonClient(apiKey);
 // Restore onto an existing branch and finalize immediately (swap computes onto
 // the restored data). Pass a `preview` callback instead of `finalize` to inspect
 // the restored branch before committing.
-await neon.snapshots.restore(projectId, snapshotId, {
+await neon.snapshots.restore({
+  projectId,
+  snapshotId,
   targetBranchId,
   finalize: true,
   name: `before_restore_${Date.now()}`,

@@ -91,8 +91,8 @@ Protect it with the OAuth provider on Managed Better Auth so each user only
 sees their own orders, then show me how to connect it from my MCP client.
 ```
 
-<Admonition type="note" title="More coming">
-We'll publish a full guide to building an MCP server on Neon soon.
+<Admonition type="note" title="Full guide">
+For a step-by-step walkthrough, see [Build an MCP server with Managed Better Auth](https://neon.com/docs/compute/functions/mcp-server).
 </Admonition>
 
 ### Sign users in to your other apps

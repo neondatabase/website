@@ -29,6 +29,7 @@ const GENERATED_PAGE_MARKDOWN_PATHS = {
   'object-storage': '/md/object-storage.md',
   auth: '/md/auth-page.md',
   lakebase: '/md/lakebase.md',
+  'case-studies': '/md/case-studies.md',
 };
 
 const EXCLUDED_ROUTES = ['guides', 'faqs', 'branching'];

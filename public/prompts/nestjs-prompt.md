@@ -145,11 +145,13 @@ Modify the main application files to use the new `DatabaseModule` and create a t
 
 1.  **Import the module:** Open `src/app.module.ts` and add `DatabaseModule` to the `imports` array.
 
+    New NestJS projects use ES modules (`"type": "module"`), so relative imports need the `.js` extension. The `.js` extension also works in CommonJS NestJS projects.
+
     ```typescript title="src/app.module.ts"
     import { Module } from '@nestjs/common';
-    import { AppController } from './app.controller';
-    import { AppService } from './app.service';
-    import { DatabaseModule } from './database/database.module'; // <-- Import this
+    import { AppController } from './app.controller.js';
+    import { AppService } from './app.service.js';
+    import { DatabaseModule } from './database/database.module.js'; // <-- Import this
 
     @Module({
       imports: [DatabaseModule], // <-- Add this
@@ -220,7 +222,7 @@ Modify the main application files to use the new `DatabaseModule` and create a t
 
     ```typescript title="src/app.controller.ts"
     import { Controller, Get, InternalServerErrorException } from '@nestjs/common';
-    import { AppService } from './app.service';
+    import { AppService } from './app.service.js';
 
     @Controller()
     export class AppController {

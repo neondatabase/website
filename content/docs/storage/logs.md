@@ -7,7 +7,7 @@ summary: >-
   levels derived from HTTP status. Covers scope_name values and common
   patterns that look like a problem but aren't.
 enableTableOfContents: true
-updatedOn: '2026-11-04T16:47:40.419Z'
+updatedOn: '2026-11-06T22:09:40.723Z'
 ---
 
 Every S3 request against a bucket streams a log line to the Neon Console. So does any bucket or object change made through the Console or Neon API (creating a bucket, deleting a bucket, deleting an object or prefix):
@@ -64,9 +64,9 @@ Calls to `ListBuckets` or the bucket list root don't appear here. Bucketless req
 
 **Seeing a `501` for an operation you expected to work? It's an unsupported operation, not a server failure, even though it logs at `ERROR`.** Calls like `PutBucketAcl`, `PutBucketPolicy`, or `PutBucketNotificationConfiguration` return `501 Not Implemented` because Neon Object Storage doesn't support them. See [Not supported](/docs/storage/s3-compatibility#not-supported) for the full list.
 
-## Filter, search, and retention
+## Filter and search
 
-For details on filtering by level or service name, searching log bodies, live tail, downloading logs, and the 3-day retention window, see [Monitor logs](/docs/introduction/monitor-logs).
+For details on filtering by level or service name, searching log bodies, live tail, and downloading logs, see [Monitor logs](/docs/introduction/monitor-logs).
 
 You can also read storage logs from the terminal with [`neon logs query`](/docs/cli/logs), scoped with `--source storage`:
 

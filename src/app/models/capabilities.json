@@ -435,8 +435,8 @@
       "imageGeneration": false
     },
     {
-      "id": "inkling",
-      "owner": "databricks",
+      "id": "kimi-k3",
+      "owner": "moonshot",
       "entitled": true,
       "chat": "conforms",
       "deviations": [],
@@ -446,7 +446,7 @@
       "imageGeneration": false
     },
     {
-      "id": "kimi-k3",
+      "id": "kimi-k3-1-pro",
       "owner": "moonshot",
       "entitled": true,
       "chat": "conforms",

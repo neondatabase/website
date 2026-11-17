@@ -14,5 +14,5 @@ if (!apiKey || !projectId) {
 }
 
 const neon = neonClient(apiKey);
-const snapshots = await neon.snapshots.list(projectId);
+const snapshots = await neon.snapshots.list({ projectId });
 console.log(JSON.stringify({ projectId, snapshots }, null, 2));

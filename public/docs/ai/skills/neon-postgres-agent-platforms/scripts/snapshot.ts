@@ -23,7 +23,9 @@ if (!projectId) {
 const neon = neonClient(apiKey);
 const branchId = await getProductionBranchId(neon, projectId);
 
-const snapshot = await neon.snapshots.create(projectId, branchId, {
+const snapshot = await neon.snapshots.create({
+  projectId,
+  branchId,
   ...(snapshotName ? { name: snapshotName } : {}),
   ...(expiresAt ? { expiresAt } : {}),
   // A snapshot is taken at an `lsn` or a `timestamp`; default to "now".

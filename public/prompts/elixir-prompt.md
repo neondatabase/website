@@ -20,7 +20,7 @@ When this prompt is triggered, automatically configure the open Elixir project a
 
 1.  Open the `mix.exs` file.
 2.  Locate the `deps/0` private function.
-3.  Add `{:postgrex, "~> 0.18.0"}` to the list of dependencies.
+3.  Add `{:postgrex, "~> 0.22"}` to the list of dependencies.
 4.  After saving the file, run the following command in the terminal to install the dependency:
     ```bash
     mix deps.get
@@ -52,13 +52,13 @@ Create a new file named `main.exs` in the project's root directory and populate 
 
 ```elixir
 defmodule NeonExample do
-  @app_name: APP_NAME_FROM_MIX_EXS_FILE
+  @app_name :my_app # Replace with the :app value from mix.exs
 
   def run do
     # 1. Fetch connection config and start Postgrex
     config = Application.get_all_env(@app_name)
     {:ok, pid} = Postgrex.start_link(config)
-    IO.puts("Connection successful!")
+    IO.puts("Connection successful.")
 
     try do
       # Set up a table for the example
@@ -82,11 +82,11 @@ defmodule NeonExample do
           IO.puts("READ: Fetched task - '#{task}'")
 
           # UPDATE: Modify the todo item
-          Postgrex.query!(conn, "UPDATE todos SET task = $1 WHERE task = $2;", ["Master Neon with Elixir!", "Learn Neon with Elixir"])
+          Postgrex.query!(conn, "UPDATE todos SET task = $1 WHERE task = $2;", ["Master Neon with Elixir", "Learn Neon with Elixir"])
           IO.puts("UPDATE: Row updated.")
 
           # DELETE: Remove the todo item
-          Postgrex.query!(conn, "DELETE FROM todos WHERE task = $1;", ["Master Neon with Elixir!"])
+          Postgrex.query!(conn, "DELETE FROM todos WHERE task = $1;", ["Master Neon with Elixir"])
           IO.puts("DELETE: Row deleted.")
 
           IO.puts("Transaction committed successfully.\n")

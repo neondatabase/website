@@ -4,7 +4,7 @@ subtitle: 'Make apps and agents super fast, with instant local writes.'
 summary: >-
   Write through your own backend, return the transaction id, apply the change optimistically and drop the optimistic state once the change arrives on the live query. Without a framework, with React useOptimistic or with TanStack DB.
 enableTableOfContents: true
-updatedOn: '2026-10-15T14:51:27.000Z'
+updatedOn: '2026-11-05T01:10:58.303Z'
 ---
 
 Apply instant local writes using [optimistic mutations](#how-optimistic-mutations-work) that [automatically discard their optimistic state](#automatic-management-of-optimistic-state) when the changes [sync in through your live&nbsp;query subscriptions](./subscribing#listen-for-changes).
@@ -21,9 +21,9 @@ Realtime allows you to automate the management and lifecycle of your optimistic 
 
 1. apply the change to local, optimistic state, so the UI updates straight away
 2. send the write through your backend, with your normal validation, authorization and backend logic, which returns the [ID of the transaction](https://www.postgresql.org/docs/current/transaction-id.html) that made it
-3. wait for that transaction ID to arrive on the subscription using [`awaitTxId()`](../sdks/typescript#client-materializedlivequerysubscriptionawaittxid)
+3. wait until the subscription has synced that transaction, using [`awaitTxId()`](../sdks/typescript#client-materializedlivequerysubscriptionawaittxid)
 4. drop the optimistic state
-5. if the write fails, or its transaction ID doesn't arrive before the timeout, drop the optimistic state and show an error
+5. if the write fails, or the transaction doesn't sync before the timeout, drop the optimistic state and show an error
 
 `awaitTxId()` remembers recently seen transaction IDs, so it resolves even when the change arrives before your backend's HTTP response. It also resolves after the subscription's `onChange`, so the synced rows already include the change when the optimistic state drops, which means nothing flickers.
 
@@ -200,7 +200,7 @@ Wrapping a write in `db.transaction()` and then running `select pg_current_xact_
 When an edit or a delete batch matches no rows, the statement returns no row, so `mutationResponse()` returns `{ kind: "unchanged" }` instead of a txid. That happens when every edit leaves the text as it was, or when every message is already gone or someone else wrote it. Nothing changed, so there's nothing to wait for.
 
 <Admonition type="important" title="Always pass a timeout">
-`awaitTxId()` keeps waiting while the subscription reconnects or waits for a renewed sealed query, and it never settles if the txid doesn't reach the query. With a timeout, it rejects, the optimistic change drops and the UI shows that the change couldn't be confirmed. The write may still have committed. It also rejects if the subscription errors or closes.
+`awaitTxId()` keeps waiting while the subscription reconnects or waits for a renewed sealed query, so always pass a timeout. When the timeout passes, it rejects, the optimistic change drops and the UI shows that the change couldn't be confirmed. The write may still have committed. It also rejects if the subscription errors or closes.
 </Admonition>
 
 ### Calling the routes from the frontend

@@ -37,7 +37,9 @@ describe('DropdownMenu', () => {
     );
 
     fireEvent.click(screen.getByRole('button', { name: 'Copy page' }));
-    await waitFor(() => expect(global.fetch).toHaveBeenCalledWith(markdownPath));
+    await waitFor(() =>
+      expect(global.fetch).toHaveBeenCalledWith(markdownPath, { headers: { Purpose: 'prefetch' } })
+    );
 
     fireEvent.click(screen.getByRole('button', { name: 'More page actions' }));
 

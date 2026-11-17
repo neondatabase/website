@@ -10,6 +10,8 @@ summary: >-
   understand the internal decision logic, not the configuration steps covered
   in the enablement guide.
 enableTableOfContents: true
+redirectFrom:
+  - /docs/introduction/autoscaling-algorithm
 updatedOn: '2026-08-07T13:46:01.605Z'
 ---
 
@@ -25,9 +27,9 @@ updatedOn: '2026-08-07T13:46:01.605Z'
 </DocsList>
 </InfoBlock>
 
-The key concept behind autoscaling is that compute resizing happens _automatically_; once you set up your minimum and maximum [compute sizes](/docs/manage/endpoints#how-to-size-your-compute), there’s no action required on your part other than [monitoring](/docs/introduction/monitoring-page) your usage metrics to see if adjustments are needed.
+The key concept behind autoscaling is that compute resizing happens _automatically_; once you set up your minimum and maximum [compute sizes](/docs/manage/computes#how-to-size-your-compute), there’s no action required on your part other than [monitoring](/docs/introduction/monitoring-page) your usage metrics to see if adjustments are needed.
 
-That said, it can be helpful to understand exactly when and under what circumstances the algorithm optimizes your database on two key fronts: **performance** and **efficiency**. In a nutshell, the algorithm automatically **scales up** your compute to ensure optimal performance and **scales down** to maximize efficiency.
+That said, it can be helpful to understand exactly when and under what circumstances the algorithm optimizes your database on two key fronts: **performance** and **efficiency**. The algorithm **scales up** your compute for performance and **scales down** to improve efficiency.
 
 ![autoscaling algorithm](/docs/guides/autoscaling_algorithm.png)
 
@@ -35,13 +37,13 @@ That said, it can be helpful to understand exactly when and under what circumsta
 
 Neon's autoscaling algorithm uses two components, the [vm-monitor](/docs/reference/glossary#vm-monitor) and the [autoscaler-agent](/docs/reference/glossary#autoscaler-agent), to continuously monitor three key metrics: your average CPU load, your memory usage, and the activity of your [compute cache](/docs/reference/glossary#compute-cache). These metrics determine how your compute resources (the virtual machine that powers your database) should be scaled to maintain performance and efficiency.
 
-### The Formula
+### The formula
 
-In essence, the algorithm is built on **goals**. We set a goal (an ideal compute size) for each of the three key metrics:
+The algorithm is built on **goals**. We set a goal (an ideal compute size) for each of the three key metrics:
 
-- **`cpuGoalCU`** &#8212; Keep the 1-minute average CPU load at or below 90% of the available CPU capacity.
-- **`memGoalCU`** &#8212; Keep memory usage at or below 75% of the total allocated RAM.
-- **`lfcGoalCU`** &#8212; Fit your frequently accessed working set within the compute cache (up to 75% of the compute's RAM).
+- **`cpuGoalCU`**: Keep the 1-minute average CPU load at or below 90% of the available CPU capacity.
+- **`memGoalCU`**: Keep memory usage at or below 75% of the total allocated RAM.
+- **`lfcGoalCU`**: Fit your frequently accessed working set within the compute cache (up to 75% of the compute's RAM).
 
 The formula can be expressed as:
 
@@ -51,9 +53,9 @@ goalCU := max(cpuGoalCU, memGoalCU, lfcGoalCU)
 
 The algorithm selects the highest value from these goals as the overall `goalCU`, ensuring your database has enough resources to handle the most demanding metric, while staying within the minimum and maximum limits you’ve set.
 
-### The Metrics
+### The metrics
 
-Let's go into a bit more detail about each metric.
+The sections below describe each metric.
 
 #### CPU load average
 
@@ -61,9 +63,9 @@ The CPU load average is a measure of how much work your CPU is handling. Every 5
 
 The goal is to keep the CPU load at or below 90% of the available CPU capacity. If the load exceeds this threshold, the algorithm increases the compute allocated to your database to handle the additional demand.
 
-In simpler terms, if your database is working too hard, the algorithm adds more CPU power to keep things running smoothly.
+If your database works too hard, the algorithm adds CPU.
 
-#### Memory Usage
+#### Memory usage
 
 Memory usage refers to the amount of RAM your database and its related processes are using. Every 5 seconds, the autoscaler-agent checks for the latest memory metrics from inside the VM, and every 100ms the vm-monitor checks memory usage from Postgres.
 
@@ -76,7 +78,7 @@ An important part of the scaling algorithm is estimating your current working se
 Every 20 seconds, the autoscaler-agent checks the working set size across a variety of time windows, ranging from 1 to 60 minutes. The goal is to fit your working set within the compute cache (up to 75% of the compute’s RAM). If your working set exceeds this threshold, the algorithm increases compute size to expand the cache, keeping frequently accessed data in memory for faster access. To learn more about how we do this, see [Dynamically estimating and scaling Postgres’ working set size](/blog/dynamically-estimating-and-scaling-postgres-working-set-size).
 
 <Admonition type="note">
-If your dataset is small enough, you can improve performance by keeping the entire dataset in memory. Check your database size on the Monitoring [dashboard](/docs/introduction/monitoring-page#database-size) and adjust your minimum compute size accordingly. For example, a 6.4 GB database can comfortably fit within a compute size of 2 CU (8 GB of RAM), where up to 75% of the available RAM is used for data caching.
+If your dataset is small enough, you can improve performance by keeping the entire dataset in memory. Check your database size on the Monitoring [dashboard](/docs/introduction/monitoring-page#database-size) and adjust your minimum compute size accordingly. For example, a 6.4 GB database doesn't fit in 2 CU (8 GB of RAM, of which 75% or 6 GB is available for caching). A 3 CU compute (12 GB of RAM, 9 GB available for caching) holds it.
 </Admonition>
 
 ## How often the metrics are polled
@@ -87,4 +89,4 @@ To give you a sense of the algorithm's responsiveness, here's a summary of how o
 - **Every 20 seconds** → the autoscaler-agent checks the compute cache metrics, including the working set size across various time windows: 1 minute, 2 minutes, up to 60 minutes.
 - **Every 100 milliseconds** → the vm-monitor checks memory usage specifically within Postgres.
 
-This frequent polling allows the algorithm to respond swiftly to changes in workload, ensuring that your compute resources are always appropriately scaled to meet current demands.
+Frequent polling lets the algorithm respond quickly to workload changes.

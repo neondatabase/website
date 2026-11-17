@@ -19,7 +19,7 @@ updatedOn: '2026-10-09T10:14:56.146Z'
 Neon's [Scale to Zero](/docs/introduction/scale-to-zero) feature controls whether a Neon compute transitions to an idle state due to inactivity. For example, if scale to zero is enabled, your compute will transition to an idle state after it's been inactive for 5 minutes. Neon's paid plans allow you to disable scale to zero to keep your compute active. On the Scale plan, you can configure the scale to zero threshold.
 
 <Admonition type="important">
-If you disable scale to zero entirely, your compute will remain active, and you will have to manually restart your compute to pick up the latest updates to Neon's compute images. Neon typically releases compute-related updates weekly. Not all releases contain critical updates, but a weekly compute restart is recommended to ensure that you do not miss anything important. For how to restart a compute, see [Restart a compute](/docs/manage/computes#restart-a-compute). 
+If you disable scale to zero entirely, your compute will remain active, and you will have to manually restart your compute to pick up the latest updates to Neon's compute images. Neon releases compute image updates regularly. Not every release includes a critical fix, so restart your compute about once a week to avoid missing important updates. For how to restart a compute, see [Restart a compute](/docs/manage/computes#restart-a-compute).
 </Admonition>
 
 This guide demonstrates how to configure the scale to zero setting for a new project, for an existing project, or for an individual compute.
@@ -28,14 +28,14 @@ This guide demonstrates how to configure the scale to zero setting for a new pro
 
 Paid plans permit disabling scale to zero. On the Scale plan, you can configure the scale to zero threshold.
 
-| Plan      | Scale to zero after                  | Can be disabled? |
-| :-------- | :----------------------------------- | :--------------- |
-| Free plan | 5 minutes                            |                  |
-| Launch    | 5 minutes                            | &check;          |
-| Scale     | Configurable (1 minute to always on) | &check;          |
+| Plan        | Scale to zero after               | Can be disabled? |
+| :---------- | :-------------------------------- | :--------------- |
+| Free plan   | 5 minutes                         |                  |
+| Launch plan | 5 minutes                         | &check;          |
+| Scale plan  | Configurable (1 minute to 1 week) | &check;          |
 
 <Admonition type="note">
-Scale to zero is only available for computes up to 16 CU in size. Computes larger than 16 CU remain always active to ensure best performance.
+Scale to zero is only available for computes up to 16 CU in size. Computes larger than 16 CU stay active. If you set a suspend timeout on a larger compute through the API, the request fails unless the value is `-1`, which disables scale to zero.
 </Admonition>
 
 ## Enable or disable scale to zero
@@ -63,7 +63,7 @@ Initial configuration of the scale to zero time is only supported via an [Update
 curl --request PATCH \
      --url https://console.neon.tech/api/v2/projects/{project-id}/endpoints/{endpoint-id} \
      --header 'accept: application/json' \
-     --header 'authorization: Bearer $NEON_API_KEY' \
+     --header "authorization: Bearer $NEON_API_KEY" \
      --header 'content-type: application/json' \
      --data '
 {
@@ -80,7 +80,7 @@ curl --request PATCH \
 curl --request PATCH \
      --url https://console.neon.tech/api/v2/projects/{project-id} \
      --header 'accept: application/json' \
-     --header 'authorization: Bearer $NEON_API_KEY' \
+     --header "authorization: Bearer $NEON_API_KEY" \
      --header 'content-type: application/json' \
      --data '
 {
@@ -98,9 +98,10 @@ curl --request PATCH \
 **API parameters:**
 
 - The `suspend_timeout_seconds` setting is defined in seconds
-- The default setting is 300 seconds (5 minutes)
+- The default setting is 300 seconds (5 minutes). A value of `0` applies the plan default.
 - The minimum setting is 60 seconds
 - The maximum setting is 604800 seconds (1 week)
+- To disable scale to zero, set `suspend_timeout_seconds` to `-1`. The compute never suspends.
 - You must supply an [API key](/docs/manage/api-keys), your [project ID](/docs/reference/glossary#project-id), and the [endpoint ID](/docs/reference/glossary#endpoint-id)
 
 After configuring a non-default value via the Neon API, you'll be able to adjust the setting via the console. Setting a non-default value makes the time selector control visible on the **Edit compute** modal.

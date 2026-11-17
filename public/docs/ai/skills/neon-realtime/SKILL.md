@@ -155,7 +155,7 @@ Migrating from Electric: Realtime is a drop-in replacement for Electric's role i
 
 - **New app:** `neon bootstrap my-app --template realtime-react`, then `neon deploy` in `my-app`.
 - **Enable** it on the linked branch with [`neon realtime enable --allowed-origin <app origin>`](https://neon.com/docs/cli/realtime.md), or declare [`preview: { realtime: true }`](https://neon.com/docs/reference/neon-ts.md#realtime) in `neon.ts` (`neon config add realtime`) and run `neon deploy`. Child branches inherit it. It's unavailable on Claimable projects until claimed, or outside the [supported regions](https://neon.com/docs/realtime/overview.md#which-regions-is-it-enabled-in).
-- **Tables** need a [stable replica identity](references/queries.md#table-requirements); a primary key is enough.
+- **Tables** need a [stable replica identity](references/queries.md#table-requirements); a primary key is enough. Leave [row-level security](references/queries.md#why-not-row-level-security) off on every table a live query reads: Realtime rejects those subscriptions with `unsupported query: row security`. For per-user data, authorize in the sealed query instead (see below).
 - **Environment:** `neon env pull --service postgres --service realtime` writes `DATABASE_URL`, `NEON_REALTIME_URL` and `NEON_REALTIME_SECRET`. Expose only the URL to the browser, under your framework's public prefix (like `VITE_`). `url` options take `NEON_REALTIME_URL`; `db` takes the database name from `DATABASE_URL`.
 - **Install** `@neon/realtime` and the packages chosen above. Use these SDKs, not the still-evolving WebSocket protocol.
 

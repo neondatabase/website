@@ -30,7 +30,7 @@ Before you begin, make sure you have:
 1. **Node.js**: Version 24. Download from [nodejs.org](https://nodejs.org/en/download/).
 2. **Neon account**: Sign up for a free Neon account at [console.neon.tech](https://console.neon.tech/signup).
 3. **Discord account**: Sign up for a free Discord account at [discord.com](https://discord.com/register).
-4. **Neon CLI**: Installed globally (`npm i -g neon`) and authenticated (`neon login`). See [Neon CLI Quickstart](/docs/cli/quickstart) for more details.
+4. **Neon CLI**: Installed globally (`npm i -g neon@latest`) and authenticated (`neon login`). See [Neon CLI Quickstart](/docs/cli/quickstart) for more details.
 
 <Steps>
 
@@ -96,9 +96,10 @@ Linked .neon
   Branch          main
   Org             org-example-12345678
 
-Pulled 3 Neon variables into .env.local
+Pulled 5 Neon variables into .env.local
   Postgres        DATABASE_URL, DATABASE_URL_UNPOOLED
-  Branch          NEON_BRANCH
+  Branch          NEON_BRANCH, NEON_BRANCH_ID
+  Functions       NEON_FUNCTION_HOST_SUFFIX
 ✔ Manage this project's Neon setup as code? Adds a neon.ts you can edit and apply with `neon config apply`. … yes
 Created neon.ts with a starter policy.
 Installing @neon/config, @neon/env with npm…
@@ -110,9 +111,10 @@ added 15 packages, and audited 42 packages in 3s
 
 found 0 vulnerabilities
 Next: edit neon.ts, then run `neon config plan` to preview and `neon config apply`.
-Pulled 3 Neon variables into .env.local
+Pulled 5 Neon variables into .env.local
   Postgres        DATABASE_URL, DATABASE_URL_UNPOOLED
-  Branch          NEON_BRANCH
+  Branch          NEON_BRANCH, NEON_BRANCH_ID
+  Functions       NEON_FUNCTION_HOST_SUFFIX
 ```
 
 ## Configure environment variables
@@ -204,9 +206,9 @@ export default defineConfig({
       name: "Discord Bot",
       source: "./index.ts",
       env: {
-        DISCORD_APP_ID: process.env.DISCORD_APP_ID!,
-        DISCORD_PUBLIC_KEY: process.env.DISCORD_PUBLIC_KEY!,
-        DISCORD_BOT_TOKEN: process.env.DISCORD_BOT_TOKEN!,
+        DISCORD_APP_ID: { value: process.env.DISCORD_APP_ID, required: true },
+        DISCORD_PUBLIC_KEY: { value: process.env.DISCORD_PUBLIC_KEY, required: true },
+        DISCORD_BOT_TOKEN: { value: process.env.DISCORD_BOT_TOKEN, required: true },
       },
     },
   },

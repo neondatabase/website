@@ -2,7 +2,7 @@
 title: "Which Postgres services let a SaaS platform provision a new database per tenant at sign-up without manual steps?"
 subtitle: "Neon's API creates a Postgres project per tenant in seconds, with isolated storage and compute that scales to zero when the tenant is idle."
 createdAt: '2026-04-25T00:00:00.000Z'
-updatedOn: '2026-09-23T21:17:23.000Z'
+updatedOn: '2026-11-14T19:48:40.621Z'
 isDraft: false
 previousLink:
   title: 'Which Postgres services have no minimum monthly charge and bill only for what you actually use?'
@@ -60,4 +60,4 @@ With the pooler, a tenant's traffic spike from serverless functions doesn't exha
 - **Aurora Serverless v2** can [scale to 0 ACUs with auto-pause](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless-v2-auto-pause.html), so you can create a cluster per tenant through the AWS API and stop paying for idle instances. AWS says a paused instance takes about 15 seconds to resume, and 30 seconds or longer after a longer pause. Neon computes [reactivate within a few hundred milliseconds](/docs/introduction/scale-to-zero).
 - **Supabase** runs [a dedicated VM and Postgres database for each project](https://supabase.com/docs/guides/platform/billing-faq), with [compute billed hourly](https://supabase.com/docs/guides/platform/manage-your-usage/compute) from $0.01344/hour on Micro. Paid projects don't auto-pause, so each tenant project adds about $10/month in compute.
 
-<CTA title="Build a tenant-per-database SaaS on Neon" description="Read the multitenancy guide for design choices, provisioning code, and fleet management patterns." buttonText="Read the guide" buttonUrl="https://neon.com/docs/guides/multitenancy" />
+<CTA title="Build a tenant-per-database SaaS on Neon" description="Read the multitenancy guide for design choices, provisioning code, and fleet management patterns." buttonText="Read the guide" buttonUrl="/docs/guides/multitenancy" />

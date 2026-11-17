@@ -24,11 +24,11 @@ In this guide, we'll show you how to use Neon's branching feature to spin up a b
 
 - A flyway installation. See [Get started with Flyway and Neon](/docs/guides/flyway) for installation instructions.
 - A Neon account and project. See [Sign up](/docs/get-started/signing-up).
-- A database. This guide uses the ready-to-use `neondb` database on the `production` branch of your Neon project. You can create your own database if you like. See [Create a database](/docs/manage/databases#create-a-database) for instructions.
+- A database. This guide uses the ready-to-use `neondb` database on the `main` branch of your Neon project. You can create your own database if you like. See [Create a database](/docs/manage/databases#create-a-database) for instructions.
 
 ## Add a table to your database
 
-Set up a database to work with by adding a table to your `neondb` database on the `production` branch of your Neon project. If you completed [Get started with Flyway and Neon](/docs/guides/flyway), you might already have this `person` table created. We'll consider this your _production_ environment database.
+Set up a database to work with by adding a table to your `neondb` database on the `main` branch of your Neon project. If you completed [Get started with Flyway and Neon](/docs/guides/flyway), you might already have this `person` table created. We'll consider this your _production_ environment database.
 
 If you still need to create the `person` table, open the [Neon SQL Editor](/docs/get-started/query-with-neon-sql-editor), and run the following statement:
 
@@ -41,7 +41,7 @@ create table person (
 
 ## Create databases for development and staging
 
-Using Neon's branching feature, create your _development_ and _staging_ databases. When you create a branch in Neon, you are creating a copy-on-write clone of the parent branch that incudes all databases and roles that exist on the parent, and each branch is an isolated Postgres instance with its own compute resources.
+Using Neon's branching feature, create your _development_ and _staging_ databases. When you create a branch in Neon, you are creating a copy-on-write clone of the parent branch that includes all databases and roles that exist on the parent, and each branch is an isolated Postgres instance with its own compute resources.
 
 Perform these steps twice, once for your _development_ branch and once for your _staging_ branch.
 
@@ -79,7 +79,7 @@ curl --request POST \
   },
   "endpoints": [
     {
-      "type": "read_only"
+      "type": "read_write"
     }
   ]
 }
@@ -94,7 +94,7 @@ When you are finished, you should have a _development_ branch and a _staging_ br
 
 ## Retrieve your Neon database connection strings
 
-In the Neon Console, click **Connect** to retrieve the connection string for each branch (`production`, `development`, and `staging`) from the **Connect to your branch** modal. Use the **Branch** drop-down menu to select each branch before copying the connection string.
+In the Neon Console, click **Connect** to retrieve the connection string for each branch (`main`, `development`, and `staging`) from the **Connect to your branch** modal. Use the **Branch** drop-down menu to select each branch before copying the connection string.
 
 Your connection strings should look something like the ones shown below. Note that the hostname differs for each (the part starting with `ep-` and ending with `aws.neon.tech`). That's because each branch is hosted on its own compute.
 
@@ -128,7 +128,7 @@ To enable Flyway to connect to multiple environments, we'll create a configurati
 By default, Flyway loads its configuration from the default `conf/flyway.conf` file. This is true even if you specify another configuration file when running Flyway. You can take advantage of this behavior by defining non-environment specific configuration settings in the default `conf/flyway.conf` file, and placing your environment-specific settings in separate configuration files, as we'll do here.
 </Admonition>
 
-1. Switch to your Flyway `/conf` directory and create the following configuration files, one for each environment, by copying the default configuration file. For example:
+1. Switch to your Flyway `/conf` directory and create the following configuration files, one for each environment, by copying the default `flyway.conf` file. If you didn't create `conf/flyway.conf` in [Get started with Flyway and Neon](/docs/guides/flyway), create it first. For example:
 
    ```bash
    cd ~/flyway-x.y.z/conf
@@ -137,7 +137,7 @@ By default, Flyway loads its configuration from the default `conf/flyway.conf` f
    cp flyway.conf env_prod.conf
    ```
 
-2. In each configuration file, update the following items with the correct connection details for that database environment. The `url` setting will differ for each environment (in `env_prod.conf`, the `url` will point to `production`). In this example, where you are the only user, the `user` and `password` settings should be the same for each of your three database environments.
+2. In each configuration file, update the following items with the correct connection details for that database environment. The `url` setting will differ for each environment (in `env_prod.conf`, the `url` will point to the `main` branch). In this example, where you are the only user, the `user` and `password` settings should be the same for each of your three database environments.
 
    ```bash shouldWrap
    flyway.url=jdbc:postgresql://ep-cool-darkness-123456.us-east-2.aws.neon.tech:5432/neondb
@@ -199,15 +199,14 @@ flyway migrate -configFiles="conf/env_prod.conf"
 A successful migration command returns output similar to the following:
 
 ```bash
-Database: jdbc:postgresql://ep-nameless-unit-49929920.us-east-2.aws.neon.tech/neondb (PostgreSQL 15.4)
+Database: jdbc:postgresql://ep-nameless-unit-49929920.us-east-2.aws.neon.tech/neondb (PostgreSQL 18.7)
 Schema history table "public"."flyway_schema_history" does not exist yet
-Successfully validated 1 migration (execution time 00:00.199s)
+Successfully validated 1 migration (execution time 00:00.192s)
 Creating Schema History table "public"."flyway_schema_history" with baseline ...
 Successfully baselined schema with version: 1
 Current version of schema "public": 1
 Migrating schema "public" to version "2 - Add people"
-Successfully applied 1 migration to schema "public", now at version v2 (execution time 00:00.410s)
-A Flyway report has been generated here: /home/alex/flyway-x.y.z/report.html
+Successfully applied 1 migration to schema "public", now at version v2 (execution time 00:00.793s)
 ```
 
 After you run the migration commands, your database should be consistent across all three environments. You can verify that the data was added to each database by viewing the branch and table on the **Tables** page in the Neon Console. Select **Postgres database** > **Tables** from the sidebar and select your database.
@@ -219,6 +218,6 @@ You've seen how you can instantly create new database environment with Neon's br
 ## References
 
 - [Flyway documentation](https://documentation.red-gate.com/fd/flyway-documentation-138346877.html)
-- [Flyway command-line tool](https://documentation.red-gate.com/fd/command-line-184127404.html)
+- [Flyway command-line tool](https://documentation.red-gate.com/fd/command-line-277579359.html)
 - [Flyway command-line quickstart](https://documentation.red-gate.com/fd/quickstart-command-line-184127576.html)
 - [A simple way to manage multi-environment deployments](https://flywaydb.org/blog/a-simple-way-to-manage-multi-environment-deployments)

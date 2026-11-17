@@ -49,6 +49,7 @@ When this prompt is triggered, automatically configure the open Next.js project 
 
     # For pg (node-postgres)
     npm install pg
+    npm install -D @types/pg
     ```
 
 ---
@@ -106,26 +107,28 @@ Implement the following examples to showcase different Next.js patterns.
 Modify the main page to fetch and display the database version on the server.
 **Replace the contents of `app/page.tsx`** with the code corresponding to the selected driver.
 
-**Important for AI:** The code examples below include `export const dynamic = 'force-dynamic'` to ensure fresh database queries on every request. After implementing, briefly inform the user that this setting prevents Next.js from caching the page statically, and they can explore other caching strategies in the [Next.js Caching docs](https://nextjs.org/docs/app/building-your-application/caching) if needed.
+**Important for AI:** New Next.js projects enable Cache Components (`cacheComponents: true` in `next.config.ts`). The examples below call `connection()` from `next/server` before querying and wrap the query in `<Suspense>`, so the query runs on every request and `npm run build` passes. Do not add `export const dynamic = 'force-dynamic'`: it fails the build when Cache Components is enabled. Only if the project's `next.config.ts` does not enable `cacheComponents`, you may use `force-dynamic` instead. After implementing, briefly tell the user that the page queries the database on every request, and point them to the [Next.js Caching docs](https://nextjs.org/docs/app/getting-started/caching) for caching strategies.
 
 ##### Option A & B: For `@neondatabase/serverless` or `postgres`
 
 ```tsx title="app/page.tsx"
+import { Suspense } from 'react';
+import { connection } from 'next/server';
 import { sql } from '@/app/lib/db';
 
-export const dynamic = 'force-dynamic';
-
-async function getDbVersion() {
+async function DbVersion() {
+  await connection();
   const result = await sql`SELECT version()`;
-  return result[0].version as string;
+  return <p>PostgreSQL Version: {result[0].version as string}</p>;
 }
 
-export default async function Home() {
-  const version = await getDbVersion();
+export default function Home() {
   return (
     <main>
       <h1>Next.js + Neon</h1>
-      <p>PostgreSQL Version: {version}</p>
+      <Suspense fallback={<p>Loading...</p>}>
+        <DbVersion />
+      </Suspense>
     </main>
   );
 }
@@ -134,26 +137,28 @@ export default async function Home() {
 ##### Option C: For `pg` (node-postgres)
 
 ```tsx title="app/page.tsx"
+import { Suspense } from 'react';
+import { connection } from 'next/server';
 import { pool } from '@/app/lib/db';
 
-export const dynamic = 'force-dynamic';
-
-async function getDbVersion() {
+async function DbVersion() {
+  await connection();
   const client = await pool.connect();
   try {
     const { rows } = await client.query('SELECT version()');
-    return rows[0].version;
+    return <p>PostgreSQL Version: {rows[0].version}</p>;
   } finally {
     client.release();
   }
 }
 
-export default async function Home() {
-  const version = await getDbVersion();
+export default function Home() {
   return (
     <main>
       <h1>Next.js + Neon</h1>
-      <p>PostgreSQL Version: {version}</p>
+      <Suspense fallback={<p>Loading...</p>}>
+        <DbVersion />
+      </Suspense>
     </main>
   );
 }

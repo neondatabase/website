@@ -52,7 +52,7 @@ To overcome this challenge, we implemented storage sharding, which distributes a
 
 To developers, storage sharding is invisible and requires no configuration or change in how you develop or deploy your application. This article is for those interested in understanding what Neon storage sharding is, the details of its implementation, and how it allows your applications to scale.
 
-# Storage sharding on Neon
+## Storage sharding on Neon
 
 Sharding is a type of partitioning that breaks down large databases into smaller parts called shards. In Neon, storage sharding distributes data across multiple physical Pageservers.
 
@@ -68,7 +68,7 @@ Small-size databases will likely not observe any difference in performance. Larg
 2. Read-intensive workloads where the working set is much larger than the Postgres buffer cache.
 3. Large table scans or index builds workloads that do not fit in Postgres RAM and are limited by bandwidth to stream entire datasets from storage.
 
-# How we implement storage sharding
+## How we implement storage sharding
 
 The purpose of the Pageserver is to store and quickly reconstruct Postgres pages from the database’s history using the GetPage@LSN function. The Pageserver was built to be multi-tenant, where each tenant represents the data of a Postgres Cluster or Neon Project.
 
@@ -94,7 +94,7 @@ In this case, the blocks of tenant-1 will live in multiple shards. Below is an i
 
 Currently, the default stripe size is 256MiB, and this cannot be changed once a tenant is split into multiple shards. As we experiment with performance, this default stripe size is likely to decrease in order to provide a smoother distribution of I/O across Pageservers.
 
-## Read & Write Paths
+### Read & Write Paths
 
 We’ve discussed Neon Read and Write paths in detail in the [deep dive into Neon’s storage engine](https://neon.com/blog/get-page-at-lsn) article. In summary, for insert, delete, and update queries, Postgres streams WAL records to a durability layer called Safekeepers, which uses the Paxos consensus algorithm. Once a quorum is reached, the WAL is sent to the Pageservers that transform it into immutable files.
 
@@ -111,7 +111,7 @@ With storage sharding implemented, there were two major changes to the read and 
 
 ![Image](https://cdn.neonapi.io/public/images/pages/blog/how-we-scale-an-open-source-multi-tenant-storage-engine-for-postgres-written-rust/diagram-5-1024x239-de4135dd.jpg)
 
-# What’s next?
+## What’s next?
 
 The current storage sharding architecture allows Neon to scale tenants to tens of terabytes of data and potentially to hundreds of terabytes in the future. However, there are a few optimizations and enhancements that we want to implement in the future, such as:
 
@@ -123,7 +123,7 @@ Although shard subscription to the Safekeepers doesn’t impact insert query lat
 
 The current problem is that the number of shards in a tenant is defined at creation time and cannot be changed. This causes excessive sharding for most small tenants and an upper bound on the scale for very large tenants. To address this, we will allow one shard to split its data into a number of children.
 
-# Conclusion
+## Conclusion
 
 Storage sharding allows Neon to support databases up to 10x the current capacity. This architecture will enable even larger storage capacity in the near future and is the first step towards implementing bottomless storage.<br />If you have a large dataset and want to benefit from a higher throughput on Neon, contact our [support team](https://support@neon.tech), [join us in Discord](https://neon.com/discord), and let us know how we can help you scale your applications to millions of users.
 

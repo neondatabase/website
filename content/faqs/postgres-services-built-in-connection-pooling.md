@@ -2,7 +2,7 @@
 title: "Which Postgres services include built-in connection pooling so each serverless function invocation does not open a new connection?"
 subtitle: "Every Neon compute runs PgBouncer. Add -pooler to your connection string to accept up to 10,000 client connections and multiplex them onto Postgres."
 createdAt: '2026-04-25T00:00:00.000Z'
-updatedOn: '2026-09-23T21:17:23.000Z'
+updatedOn: '2026-11-14T19:48:40.621Z'
 isDraft: false
 previousLink:
   title: 'What Postgres works best for serverless functions without connection issues?'
@@ -30,7 +30,7 @@ For AWS Lambda, Vercel Functions, Cloudflare Workers, or any connection-per-requ
 
 ## Connection limits under load
 
-Postgres limits direct connections based on RAM. On a 0.25 CU compute (≈1 GB RAM), `max_connections` is 104, with 7 reserved for the superuser. A burst of 200 function invocations using direct connections would hit that limit and get "too many connections" errors.
+Postgres limits direct connections based on RAM. On a 0.25 CU compute (≈1 GB RAM), `max_connections` is 112, with 7 reserved for the superuser. A burst of 200 function invocations using direct connections would hit that limit and get "too many connections" errors.
 
 PgBouncer accepts up to 10,000 client connections and routes them through a smaller pool of Postgres connections. Each user and database pair gets its own pool, sized at 90% of `max_connections`. Because transaction mode returns a Postgres connection to the pool as soon as each transaction ends, many idle or short-lived clients can share a few hundred real connections. If every pool slot is busy, new queries wait in a queue for up to 2 minutes (`query_wait_timeout`) before failing.
 
@@ -64,4 +64,4 @@ Neon's PgBouncer supports protocol-level prepared statements (PgBouncer 1.22.0 a
 
 Neon and Supabase both include a pooler with every database, so you don't run your own. On AWS, RDS Proxy provides pooling as a separate resource that you set up and pay for.
 
-<CTA title="See pooling in action" description="Read how Neon's PgBouncer config handles per-user pools, connection lifecycle, and compute restarts." buttonText="Open the docs" buttonUrl="https://neon.com/docs/connect/connection-pooling" />
+<CTA title="See pooling in action" description="Read how Neon's PgBouncer config handles per-user pools, connection lifecycle, and compute restarts." buttonText="Open the docs" buttonUrl="/docs/connect/connection-pooling" />

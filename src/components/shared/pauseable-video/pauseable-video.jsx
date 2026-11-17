@@ -9,7 +9,10 @@ import { useInView } from 'react-intersection-observer';
 import { cn } from 'utils/cn';
 
 const PauseableVideo = forwardRef(
-  ({ children, width, height, poster, loop = true, className, videoClassName }, ref) => {
+  (
+    { children, width, height, poster, loop = true, paused = false, className, videoClassName },
+    ref
+  ) => {
     const videoRef = useRef(null);
 
     // For lazy loading video element - triggers once and never unmounts
@@ -47,7 +50,7 @@ const PauseableVideo = forwardRef(
       const videoElement = videoRef.current;
       videoElement.setAttribute('muted', 'true');
 
-      if (!isInView) {
+      if (paused || !isInView) {
         videoElement.pause();
       } else {
         // Restart video from beginning when loop is disabled and it comes back into view
@@ -56,7 +59,7 @@ const PauseableVideo = forwardRef(
         }
         playVideo(videoElement);
       }
-    }, [isInView, loop, playVideo]);
+    }, [isInView, loop, paused, playVideo]);
 
     // Combine the external ref with the internal videoRef
     useImperativeHandle(ref, () => videoRef.current);
@@ -91,7 +94,7 @@ const PauseableVideo = forwardRef(
                 animate={{ opacity: 1 }}
                 transition={{ duration: 0.5 }}
                 loop={loop}
-                autoPlay
+                autoPlay={!paused}
                 playsInline
                 muted
               >
@@ -113,6 +116,7 @@ PauseableVideo.propTypes = {
   height: PropTypes.number.isRequired,
   poster: PropTypes.string,
   loop: PropTypes.bool,
+  paused: PropTypes.bool,
   className: PropTypes.string,
   videoClassName: PropTypes.string,
 };

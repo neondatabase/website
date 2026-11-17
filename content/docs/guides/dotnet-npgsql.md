@@ -26,8 +26,8 @@ The same configuration steps can be used for any .NET application type, includin
 ## Prerequisites
 
 - A Neon account. If you do not have one, see [Sign up](https://console.neon.tech/signup).
-- The [.NET 8 SDK](https://dotnet.microsoft.com/download/dotnet/8.0) or later.
-  > _Other versions of .NET may work, but this guide is primarily tested with .NET 8._
+- The [.NET 10 SDK](https://dotnet.microsoft.com/download/dotnet/10.0) or later.
+  > _Other versions of .NET may work, but this guide is primarily tested with .NET 10._
 
 <Steps>
 
@@ -76,7 +76,7 @@ Create a file named `appsettings.json` in your project's root directory. This is
 4.  Copy the **pooled** connection string, which includes your password.
 5.  Create an `appsettings.json` file in your project's root directory and add the connection string to it as shown below.
 
-    ```json title="appsettings.json"
+    ```json filename="appsettings.json"
     {
       "ConnectionStrings": {
         "DefaultConnection": "Host=your-neon-host;Database=your-database;Username=your-username;Password=your-password;SSL Mode=VerifyFull; Channel Binding=Require"
@@ -96,7 +96,7 @@ You will now write the C# code to connect to Neon and perform database operation
 
 Replace the contents of your `Program.cs` file with the following code:
 
-```csharp title="Program.cs"
+```csharp filename="Program.cs"
 using Microsoft.Extensions.Configuration;
 using Npgsql;
 using System.Text;
@@ -291,7 +291,7 @@ In the code above, you:
 
 When this code runs successfully, it produces the following output:
 
-```text title="Output"
+```text filename="Output"
 Connection established
 Finished dropping table (if it existed).
 Finished creating table.
@@ -338,7 +338,7 @@ In the code above, you:
 
 After the initial data insert, the output is:
 
-```text title="Output"
+```text filename="Output"
 
 --- Book Library ---
 ID: 2, Title: The Hobbit, Author: J.R.R. Tolkien, Year: 1937, In Stock: True
@@ -373,7 +373,7 @@ In the code above, you:
 
 The output from this operation is:
 
-```text title="Output"
+```text filename="Output"
 Updated stock status for 'Dune'.
 
 --- Book Library After Update ---
@@ -410,7 +410,7 @@ In the code above, you:
 
 The output from this operation is:
 
-```text title="Output"
+```text filename="Output"
 Deleted the book '1984' from the table.
 
 --- Book Library After Delete ---

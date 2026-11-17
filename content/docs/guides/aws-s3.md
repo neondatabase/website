@@ -16,7 +16,7 @@ updatedOn: '2026-09-16T19:45:35.340Z'
 [Amazon Simple Storage Service (AWS S3)](https://aws.amazon.com/s3/) is an object storage service widely used for storing and retrieving large amounts of data, such as images, videos, backups, and application assets.
 
 <Callout title="Neon now offers native storage">
-Neon Object Storage is S3-compatible object storage built into the Neon backend. Object storage branches with your database: each branch gets its own isolated namespace, so you can test file uploads in preview branches without touching production. No separate cloud account needed. Use any S3-compatible SDK with your existing Neon credential.
+Neon Object Storage is S3-compatible object storage built into your Neon project. Files branch with your database, so you can test uploads in a preview branch without touching production files. No separate cloud account needed. Point an S3 SDK at your branch endpoint with your Neon credential.
 
 For more information, see [Neon Object Storage](/docs/storage/overview).
 </Callout>
@@ -171,6 +171,8 @@ const S3_BUCKET = process.env.S3_BUCKET_NAME;
 const AWS_REGION = process.env.AWS_REGION;
 const s3 = new S3Client({
   region: AWS_REGION,
+  // Stops the SDK from adding a checksum of an empty body to presigned URLs.
+  requestChecksumCalculation: 'WHEN_REQUIRED',
   credentials: {
     accessKeyId: process.env.AWS_ACCESS_KEY_ID,
     secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
@@ -274,6 +276,7 @@ import uuid
 
 import boto3
 import psycopg2
+from botocore.config import Config
 from botocore.exceptions import ClientError
 from dotenv import load_dotenv
 from flask import Flask, jsonify, request
@@ -287,6 +290,8 @@ s3_client = boto3.client(
     region_name=AWS_REGION,
     aws_access_key_id=os.getenv("AWS_ACCESS_KEY_ID"),
     aws_secret_access_key=os.getenv("AWS_SECRET_ACCESS_KEY"),
+    # Use SigV4 so presigned URLs don't fall back to SigV2 for us-east-1.
+    config=Config(signature_version="s3v4"),
 )
 
 app = Flask(__name__)
@@ -386,12 +391,12 @@ if __name__ == "__main__":
 
 **Explanation**
 
-1.  **Setup:** Initializes Flask, the PostgreSQL client (`psycopg2`), and the AWS S3 client (`boto3`) using environment variables for credentials and configuration.
+1.  **Setup:** Initializes Flask, the Postgres client (`psycopg2`), and the AWS S3 client (`boto3`) using environment variables for credentials and configuration.
 2.  **Authentication:** A placeholder `get_authenticated_user_id` function is included. **Replace this with real authentication logic.**
 3.  **Upload endpoints:**
     - **`/presign-upload`:** Generates a temporary secure URL (`presignedUrl`) using `boto3` that allows uploading a file directly to S3. It returns the URL, `objectKey`, and the standard public S3 URL.
     - **`/save-metadata`:** Called by the client _after_ successful upload. Saves the `objectKey`, `file_url`, and `userId` into the `s3_files` table in Neon using `psycopg2`.
-4.  In production, you should use a global PostgreSQL connection instead of creating a new one for each request. This is important for performance and resource management.
+4.  In production, you should use a global Postgres connection instead of creating a new one for each request. This is important for performance and resource management.
 
 </TabItem>
 

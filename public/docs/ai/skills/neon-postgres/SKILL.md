@@ -9,10 +9,11 @@ description: >-
   an existing DATABASE_URL, SQL, schema, inspect, or search. New backends, Auth,
   files, Functions, and LLM calls go to the parent `neon` skill. Live queries,
   reactive UIs, and realtime data go to `neon-realtime`. Also use for
-  "@neondatabase/serverless", "@neon/neon-js", "neon inspect db", "Neon
-  branch", "schema-only branch", "reset branch", "branch per PR", high database
-  bills, network transfer or egress, SELECT * optimization, query overfetching,
-  "semantic search", "vector search", "full-text search", "BM25", or "hybrid
+  "@neondatabase/serverless", "@neon/neon-js", "neon inspect db", "neon
+  postgres computes", "Neon branch", "schema-only branch", "reset branch",
+  "branch per PR", high database bills, network transfer or egress, Free plan
+  limits or a compute suspended over quota (SQLSTATE 53000, HTTP 402), SELECT *
+  optimization, query overfetching, "semantic search", "vector search", "full-text search", "BM25", or "hybrid
   search".
 metadata:
   parent: neon
@@ -108,6 +109,18 @@ Before editing code, read [Egress optimization](references/egress-optimization.m
 
 Work in four steps: diagnose which queries transfer the most data, analyze the code behind them, fix the anti-patterns, then verify that behavior is preserved and transfer drops.
 
+## Free Plan Limits
+
+Use this when a Free plan project ran out of CU-hours or public network transfer, its compute is suspended over quota, or the user asks Neon for a one-time quota increase.
+
+On the Free plan, running out of CU-hours or public network transfer suspends the compute until the next billing period or until you upgrade. No data is deleted, but nothing can connect: Postgres connections, including `pg_dump`, fail with SQLSTATE `53000` ("Your account or project has exceeded the quota"), and HTTP queries from the serverless driver fail with status `402`. See [What happens if I exceed my Free plan limits?](https://neon.com/docs/introduction/plans.md).
+
+To restore service before the monthly reset and stay on Free, upgrade the organization to Launch and downgrade it back to Free right away (**Billing** > **Change plan** in the Neon Console). The plan change resets the Free plan allowances, and the project keeps its database. Launch has no minimum monthly fee, and invoices under $0.50 are not collected ([Price](https://neon.com/docs/introduction/plans.md#price)), so the round trip costs nothing.
+
+Without a plan change, CU-hours and network transfer reset at the start of the next monthly billing period. A temporary limit increase from the Neon team takes time to process and rarely lands before the reset; the plan change is faster.
+
+If network transfer ran out, fix the queries behind it first (see [Egress Optimization](#egress-optimization)), or the project hits the limit again.
+
 ## Troubleshooting and Neon-Specific Performance
 
 Use Neon's predefined, read-only diagnostics before writing catalog queries by hand. The Neon CLI `neon inspect db` subcommands and the Neon MCP server's `inspect_database` tool run the same checks.
@@ -192,9 +205,26 @@ Because `ANALYZE` executes the statement, use it only when execution is safe; do
 
 Use MCP `list_slow_queries` instead of `inspect_database` when the user specifically needs queries ranked by average execution time with a custom threshold and limit. Outside the explicit `EXPLAIN` case above, use `run_sql` only for read-only diagnostic SQL when the predefined checks do not answer the question.
 
+## Computes
+
+Use this when the user wants to resize a compute, change its scale-to-zero timeout, or start, suspend, restart, or delete it.
+
+Manage computes with `neon postgres computes`. `neon pg` and `neon lakebase` are aliases of `neon postgres`.
+
+```bash
+neon postgres computes list                  # --branch <branch> or the branch .neon pins; --all-branches for the project
+neon postgres computes get <compute-id>
+neon postgres computes update <compute-id> --cu 0.25-2 --suspend-timeout 300
+neon postgres computes restart <compute-id>  # also start, suspend, delete
+```
+
+`update` sends only the flags you pass (`--cu`, `--suspend-timeout`, `--name`, `--disabled`) and fails when you pass none. Each change waits until Neon applies it; `update`, `start`, `suspend`, and `restart` then print the compute. With `--no-wait` the command returns once the API accepts the change; find the operation with `neon operations list` and check it with `neon operations get <operation-id>`. Add a compute, such as a read replica, with `neon branches add-compute <branch>`.
+
 ## Autoscaling
 
 Use this when the user needs compute to scale automatically with workload and wants guidance on CU sizing and runtime behavior.
+
+Set a compute's autoscaling range with `neon postgres computes update <compute-id> --cu <min>-<max>` (for example `--cu 0.25-2`), or a fixed size with `--cu 2`.
 
 Link: https://neon.com/docs/introduction/autoscaling.md
 
@@ -204,7 +234,7 @@ Use this when optimizing idle costs and discussing suspend/resume behavior, incl
 
 Key points:
 
-- Idle computes suspend automatically after a default of 5 minutes; the timeout is configurable, and suspension can only be disabled on the Launch and Scale plans.
+- Idle computes suspend automatically after a default of 5 minutes. Change the timeout with `neon postgres computes update <compute-id> --suspend-timeout <seconds>`: `0` uses the plan default and `-1` disables suspension. Free cannot change it, Launch can only enable or disable suspension, and Scale can set any value from 60 to 604800 (one week).
 - First query after suspend typically has a cold-start penalty (around hundreds of ms)
 - Storage remains active while compute is suspended.
 

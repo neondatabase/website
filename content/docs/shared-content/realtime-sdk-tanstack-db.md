@@ -2,21 +2,23 @@
 
 ### Symbols (#tanstack-db-symbols)
 
-| Symbol                                                                  | Kind       | Summary                                                                                                                                                       |
-| ----------------------------------------------------------------------- | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [`realtimeCollectionOptions`](#tanstack-db-realtimecollectionoptions)   | Function   | Create TanStack DB collection options backed by a raw live-query subscription. Complete-row replacements and committed change batches are applied atomically. |
-| [`RealtimeCollectionConfig`](#tanstack-db-realtimecollectionconfig)     | Interface  | Configuration for a Realtime-backed TanStack DB collection. The adapter owns `sync`, uses eager synchronization, and supplies its own collection utilities.   |
-| [`RealtimeCollectionUtils`](#tanstack-db-realtimecollectionutils)       | Interface  | Utilities attached to a Realtime-backed TanStack DB collection.                                                                                               |
-| [`RealtimeCollectionOptions`](#tanstack-db-realtimecollectionoptions-2) | Type alias | TanStack DB collection options produced by [`realtimeCollectionOptions`](/docs/realtime/sdks/typescript#tanstack-db-realtimecollectionoptions).               |
+| Symbol                                                                  | Kind       | Summary                                                                                                                                                                                                                                                                                                                        |
+| ----------------------------------------------------------------------- | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| [`realtimeCollectionOptions`](#tanstack-db-realtimecollectionoptions)   | Function   | Create TanStack DB collection options backed by a raw live-query subscription. Complete-row replacements and committed change batches are applied atomically. This is an unordered keyed collection: move operations do not change membership or values and are ignored. Use core materialized subscriptions for server order. |
+| [`RealtimeCollectionConfig`](#tanstack-db-realtimecollectionconfig)     | Interface  | Configuration for a Realtime-backed TanStack DB collection. The adapter owns `sync`, uses eager synchronization, and supplies its own collection utilities.                                                                                                                                                                    |
+| [`RealtimeCollectionUtils`](#tanstack-db-realtimecollectionutils)       | Interface  | Utilities attached to a Realtime-backed TanStack DB collection.                                                                                                                                                                                                                                                                |
+| [`RealtimeCollectionOptions`](#tanstack-db-realtimecollectionoptions-2) | Type alias | TanStack DB collection options produced by [`realtimeCollectionOptions`](/docs/realtime/sdks/typescript#tanstack-db-realtimecollectionoptions).                                                                                                                                                                                |
 
 ### realtimeCollectionOptions (#tanstack-db-realtimecollectionoptions)
 
 ```ts
-function realtimeCollectionOptions<Row extends object, Key extends string | number = string | number, Schema extends StandardSchemaV1<unknown, unknown> = never>(config: RealtimeCollectionConfig<Row, Key, Schema>): RealtimeCollectionOptions<Row, Key, Schema>
+function realtimeCollectionOptions<Row extends object, Key extends string | number = string | number, Schema extends StandardSchemaV1<unknown, unknown> = never>(config: RealtimeCollectionConfig<NoInferCompat<Row>, Key, Schema> & { readonly query: SealedLiveQuery<Row> }): RealtimeCollectionOptions<Row, Key, Schema>
 ```
 
 Create TanStack DB collection options backed by a raw live-query subscription.
 Complete-row replacements and committed change batches are applied atomically.
+This is an unordered keyed collection: move operations do not change membership
+or values and are ignored. Use core materialized subscriptions for server order.
 
 **Returns:** Collection options to pass to TanStack DB's `createCollection()`.
 
@@ -30,9 +32,9 @@ Complete-row replacements and committed change batches are applied atomically.
 
 #### Parameters (#tanstack-db-realtimecollectionoptions-parameters)
 
-| Name     | Type                                         | Description                                                                   |
-| -------- | -------------------------------------------- | ----------------------------------------------------------------------------- |
-| `config` | `RealtimeCollectionConfig<Row, Key, Schema>` | Live-query subscription settings and ordinary TanStack DB collection options. |
+| Name     | Type                                                                                                   | Description                                                                   |
+| -------- | ------------------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------- |
+| `config` | `RealtimeCollectionConfig<NoInferCompat<Row>, Key, Schema> & { readonly query: SealedLiveQuery<Row> }` | Live-query subscription settings and ordinary TanStack DB collection options. |
 
 #### Returns (#tanstack-db-realtimecollectionoptions-returns)
 

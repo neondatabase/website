@@ -7,6 +7,13 @@ summary: >-
   architecture scale-to-zero, branching, and API-first fleet control for
   full-stack agent backends.
 enableTableOfContents: true
+seo:
+  title: 'Neon for AI Agent Platforms: A Full Backend for Every Agent'
+  description: >-
+    Agent platforms use Neon to give each agent or generated app its own
+    backend: Lakebase Postgres, Managed Better Auth, Object Storage, Functions,
+    Data API, and AI Gateway. Projects provision in about a second, scale to
+    zero when idle, and branch for checkpoints and undo.
 updatedOn: '2025-07-26T09:00:00.000Z'
 image: '/images/social-previews/use-cases/ai-agents.jpg'
 ---

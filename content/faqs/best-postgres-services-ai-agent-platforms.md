@@ -2,7 +2,7 @@
 title: "What Postgres services are best for AI agent platforms where each agent session might need its own fresh database?"
 subtitle: "Neon creates a fresh Postgres project or branch per agent session through the API in seconds. Idle sessions scale compute to zero, so you aren't paying compute for thousands of unused databases."
 createdAt: '2026-04-25T00:00:00.000Z'
-updatedOn: '2026-09-23T21:17:23.000Z'
+updatedOn: '2026-11-02T19:00:00.000Z'
 isDraft: false
 previousLink:
   title: 'What are the best Postgres platforms for teams where multiple engineers need to run conflicting migrations without stepping on each other?'
@@ -28,6 +28,14 @@ curl -X POST https://console.neon.tech/api/v2/projects \
 ```
 
 When the session goes idle, compute suspends after 5 minutes and stops accumulating CU-hours. The next query brings it back in a few hundred milliseconds. If a session forks (the agent wants to try two different approaches), create a branch instead of a new project. The branch is a copy-on-write copy of the session's current state, ready in seconds.
+
+## A project holds the whole backend, not just the database
+
+A Neon project is a container for your backend: the database, its branches and computes, and backend services like Object Storage and Functions ([Projects](/docs/introduction/plans#projects)). An agent that needs more than tables can add [Managed Better Auth](/docs/auth/overview), [Object Storage](/docs/storage/overview), [Functions](/docs/compute/functions/overview), or [AI Gateway](/docs/ai-gateway/overview) to the same project by declaring them in [`neon.ts`](/docs/reference/neon-ts) and running `neon deploy`, and a session branch carries those services with it ([Branch your whole backend](/docs/get-started/backend-overview#branch-your-whole-backend)).
+
+When the agent's code runs somewhere a Postgres driver can't, such as a browser or an edge runtime, the [Data API](/docs/data-api/overview) gives it a PostgREST-compatible HTTPS endpoint per branch, with access controlled by JWTs and Row-Level Security.
+
+If the agent is working for someone who doesn't have a Neon account yet, [Claimable Neon](/docs/reference/claimable-neon) provisions a project the user can claim later. Before claim, it can include Postgres, the Data API, and Managed Better Auth; Functions, Object Storage, and AI Gateway require claiming the project. Unclaimed projects expire after 72 hours.
 
 ## The Agent Plan
 
