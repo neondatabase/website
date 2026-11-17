@@ -312,6 +312,11 @@ const defaultConfig = {
         permanent: true,
       },
       {
+        source: '/guides/vector-search',
+        destination: '/docs/ai/lakebase-search-get-started',
+        permanent: true,
+      },
+      {
         source: '/blog/neon-serverless-driver-on-jsr',
         destination: '/docs/serverless/serverless-driver',
         permanent: true,
