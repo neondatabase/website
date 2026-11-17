@@ -1,11 +1,10 @@
 import React from 'react';
-import slugify from 'slugify';
 
 import { cn } from 'utils/cn';
+import getHeadingId, { stripCustomId } from 'utils/get-heading-id';
 
 import HashIcon from './images/hash.inline.svg';
 
-const CUSTOM_ID_PATTERN = /\s*(?:\(#([^)]+)\)|\{#([^}]+)\})$/;
 const TOC_ONLY_PATTERN = /\s*\[toc-only\]\s*$/i;
 
 const extractText = (children) => {
@@ -29,36 +28,20 @@ const extractText = (children) => {
   return '';
 };
 
-const extractCustomId = (text) => {
-  const match = text.match(CUSTOM_ID_PATTERN);
-  if (match) {
-    return match[1] || match[2];
-  }
-  return null;
-};
-
-const stripCustomId = (text) => text.replace(CUSTOM_ID_PATTERN, '').trim();
 const hasTocOnlyMarker = (text) => TOC_ONLY_PATTERN.test(text);
 
 const AnchorHeading = (Tag) => {
+  // `id` is set by the remark-unique-tab-heading-ids plugin when a heading inside
+  // a tab panel would otherwise duplicate an id already used on the page.
   // eslint-disable-next-line react/prop-types
-  const Component = ({ children, className = null }) => {
+  const Component = ({ children, className = null, id: idProp = null }) => {
     const text = extractText(children);
 
     if (hasTocOnlyMarker(text)) {
       return null;
     }
 
-    const customId = extractCustomId(text);
-    const cleanText = stripCustomId(text);
-
-    const id =
-      customId ||
-      slugify(cleanText, {
-        lower: true,
-        strict: true,
-        remove: /[*+~.()'"!:@]/g,
-      }).replace(/_/g, '');
+    const id = idProp || getHeadingId(text);
 
     // Remove the custom ID from children if it exists
     const cleanedChildren = React.Children.map(children, (child) => {
