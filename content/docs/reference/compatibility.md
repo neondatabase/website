@@ -23,7 +23,7 @@ updatedOn: '2026-09-17T16:33:54.884Z'
 
 ## Postgres versions
 
-Neon supports Postgres 14, 15, 16, 17, and 18. You select the Postgres version you want to use when creating a Neon project. For information about creating a Neon project, see [Manage projects](/docs/manage/projects). Minor Postgres point releases are rolled out by Neon after extensive validation as part of regular platform maintenance.
+Neon supports Postgres 14, 15, 16, 17, 18, and 19. Postgres 18 is the default. You select the Postgres version you want to use when creating a Neon project. For information about creating a Neon project, see [Manage projects](/docs/manage/projects). Minor Postgres point releases are rolled out by Neon after extensive validation as part of regular platform maintenance.
 
 For the current latest minor version available on Neon for each major version, and for details on how minor and major version updates work, see the [Lakebase Postgres version support policy](/docs/postgresql/postgres-version-support).
 

@@ -93,7 +93,7 @@ In such cases, your action may occasionally be required. When this occurs, which
 
 ### Supported major versions
 
-Neon currently supports Postgres 14, 15, 16, 17, and 18. Neon supports the five latest major Postgres versions, in alignment with the official PostgreSQL version support policy.
+Neon currently supports Postgres 14, 15, 16, 17, 18, and 19. Postgres 18 is the default version for new projects. To use Postgres 19, select it when you [create a project](/docs/manage/projects#create-a-project).
 
 ### Major version upgrades
 

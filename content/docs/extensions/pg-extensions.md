@@ -18,6 +18,10 @@ updatedOn: '2026-11-04T20:10:08.844Z'
 
 Neon supports the Postgres extensions shown below. Extension versions may differ by Postgres version. A dash (`-`) indicates an extension is not yet supported for that version.
 
+<Admonition type="note" title="Postgres 19 extension support">
+Postgres 19 extension versions aren't listed in this table yet. To check whether an extension is available on a Postgres 19 database, run `SELECT * FROM pg_available_extensions;`.
+</Admonition>
+
 [Explore by category](/docs/extensions/extension-explorer) | [Install an extension](/docs/extensions/pg-extensions#install-an-extension) | [Update an extension](/docs/extensions/pg-extensions#update-an-extension-version) | [Request an extension](/docs/extensions/pg-extensions#request-an-extension)
 
 <a id="default-extensions/"></a>
