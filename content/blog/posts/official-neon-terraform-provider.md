@@ -45,14 +45,9 @@ In this post, we want to share where the provider comes from, what's new and how
 
 ## Where the provider comes from
 
-The official provider started as a community project. In July 2022, Dmitry Kisler created two repositories: [kislerdm/neon-sdk-go](https://github.com/kislerdm/neon-sdk-go), a Go SDK generated from the Neon API's OpenAPI spec, and [kislerdm/terraform-provider-neon](https://github.com/kislerdm/terraform-provider-neon), the Terraform provider built on it. Both shipped their first release in January 2023 and both have kept up with Neon ever since:
+The official provider started as a community project. In July 2022, Dmitry Kisler created [kislerdm/terraform-provider-neon](https://github.com/kislerdm/terraform-provider-neon) and shipped its first release, v0.0.1, on January 5, 2023. He built it on [kislerdm/neon-sdk-go](https://github.com/kislerdm/neon-sdk-go), a Go SDK he generates from the Neon API's OpenAPI spec. Since then, the provider has had 39 releases and almost two million downloads on the Terraform Registry. Most of them are recent: 1.78 million downloads came in the last 12 months alone.
 
-| | Terraform provider (kislerdm/neon) | Go SDK (neon-sdk-go) |
-| --- | --- | --- |
-| First release | v0.0.1, January 5, 2023 | v0.1.0, January 3, 2023 |
-| Releases | 39, up to v0.18.0 | 56, up to v0.36.0 |
-| Usage | 1,956,631 downloads on the Terraform Registry | Imported by 8 packages on pkg.go.dev |
-| GitHub stars | 116 | 26 |
+![Bar chart of Terraform Registry downloads per kislerdm/neon release, placed at each release date from January 2023 to September 2026. Most releases before 2025 have under 60,000 downloads; v0.9.0 has about 190,000, v0.13.0 from January 2026 about 686,000, v0.15.0 about 330,000 and v0.18.0 from September 2026 about 449,000.](https://cdn.neonapi.io/public/images/pages/blog/official-neon-terraform-provider/terraform-downloads.png)
 
 The [Neon package in the Pulumi Registry](https://www.pulumi.com/registry/packages/neon/) is bridged from the same provider. Funny enough, the official provider still builds on Dmitry's SDK, too.
 
