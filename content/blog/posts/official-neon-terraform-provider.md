@@ -43,17 +43,38 @@ So starting today, Neon has an official Terraform provider: [`neondatabase/neon`
 
 ## Where the provider comes from
 
-The official provider started as a community project. In July 2022, Dmitry Kisler created [kislerdm/terraform-provider-neon](https://github.com/kislerdm/terraform-provider-neon), and it has been the way to manage Neon with Terraform ever since: almost two million downloads on the Terraform Registry, 380 commits from Dmitry alone. The [Neon package in the Pulumi Registry](https://www.pulumi.com/registry/packages/neon/) is bridged from it too.
+The official provider started as a community project. In July 2022, Dmitry Kisler created two repositories: [kislerdm/neon-sdk-go](https://github.com/kislerdm/neon-sdk-go), a Go SDK generated from the Neon API's OpenAPI spec, and [kislerdm/terraform-provider-neon](https://github.com/kislerdm/terraform-provider-neon), the Terraform provider built on it. Both shipped their first release in January 2023, and both have kept up with Neon ever since:
+
+| | Terraform provider (kislerdm/neon) | Go SDK (neon-sdk-go) |
+| --- | --- | --- |
+| First release | v0.0.1, January 5, 2023 | v0.1.0, January 3, 2023 |
+| Releases | 39, up to v0.18.0 | 56, up to v0.36.0 |
+| Usage | 1,956,631 downloads on the Terraform Registry | Imported by 8 packages on pkg.go.dev |
+| GitHub stars | 116 | 26 |
+
+The [Neon package in the Pulumi Registry](https://www.pulumi.com/registry/packages/neon/) is bridged from the same provider, and the official provider still builds on Dmitry's SDK.
 
 Instead of starting over, we worked with Dmitry on porting his provider to `neondatabase/neon` and making it official. We asked him two questions.
 
 **Why did you start a Terraform provider for Neon?**
 
-{/* TODO(Dmitry): your answer */}
+I met Nikita [Shamgunov, Neon's co-founder] and a couple of Neon engineers at WeAreDevelopers in Berlin in 2022. Despite my initial skepticism, which I raised as the question "how are you going to compete with Aurora and AWS?", the guys' rationale and strong understanding of Postgres ins and outs made me a fan right there and then. I subscribed as a beta tester and looked forward to trying their product. The idea of separating storage from compute wasn't new, but Neon's delivery was spotless. The branching feature was simply mind blowing!
+
+I obviously wanted to automate infra provisioning. At the time, there was no provider, nor a CLI available. I decided to solve that problem to ease my own life, but also to give back to the community. That's how I decided to develop a Neon Terraform provider. I made its first release back in January 2023 and maintained it with community support, which I'm deeply grateful for.
 
 **What does it mean to you that the provider is now official?**
 
-{/* TODO(Dmitry): your answer */}
+I find it a privilege when the project you built to solve your own particular problem is useful to others. It motivated me throughout the years when I steered the provider's development. At the same time, that work felt like a big responsibility, because users have certain expectations of the OSS they trust as a dependency. At times, it felt like a huge responsibility that unfortunately I could not keep up with due to my other commitments.
+
+It felt amazing when you approached me and shared that the Databricks/Neon team picked my project as the basis for the official Terraform provider. I was over the moon and über grateful for such an honor! I look forward to our further collaboration, and I will invest as much of my available time as I can for the project to grow and gain more success.
+
+### Timeline
+
+- **2022:** Dmitry meets Nikita and Neon engineers at WeAreDevelopers in Berlin and signs up for the Neon beta.
+- **July 2022:** Dmitry creates neon-sdk-go and terraform-provider-neon.
+- **January 2023:** neon-sdk-go v0.1.0 (January 3) and the first provider release, v0.0.1 on the Terraform Registry (January 5).
+- **September 2026:** kislerdm/neon v0.18.0, the last of 39 community releases.
+- **November 2026:** the official `neondatabase/neon` provider ships its first beta, v0.19.0-beta.0, and Neon maintains it together with Dmitry and Justin. The current release is v0.19.0-beta.2.
 
 ## What's new since kislerdm/neon 0.18
 
