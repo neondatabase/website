@@ -37,6 +37,7 @@ Detect the package manager used in this project (`npm`, `yarn`, `pnpm`, `bun`). 
         "target": "ES2022",
         "module": "NodeNext",
         "moduleResolution": "NodeNext",
+        "types": ["node"],
         "strict": true,
         "allowImportingTsExtensions": true,
         "noEmit": true
@@ -79,14 +80,14 @@ Based on the user's choice, run the appropriate installation command:
 2.  Instruct the user to add their connection string.
     ```env
     # Get your connection string from the Neon Console:
-    DATABASE_URL="postgresql://[user]:[password]@[neon_hostname]/[dbname]?sslmode=require"
+    DATABASE_URL="postgresql://[user]:[password]@[neon_hostname]/[dbname]?sslmode=require&channel_binding=require"
     ```
 
 ### 5. Define Database Types
 
 Kysely is TypeScript-first. Create `src/types.ts` to define the schema.
 
-```typescript title="src/types.ts"
+```typescript filename="src/types.ts"
 import type { Generated, Selectable, Insertable, Updateable } from 'kysely';
 
 export interface Database {
@@ -111,7 +112,7 @@ Create `src/db.ts` based on the driver selection.
 
 #### Option 1: Neon Serverless (HTTP)
 
-```typescript title="src/db.ts"
+```typescript filename="src/db.ts"
 import 'dotenv/config';
 import { Kysely } from 'kysely';
 import { NeonDialect } from 'kysely-neon';
@@ -129,9 +130,9 @@ export const db = new Kysely<Database>({
 
 #### Option 2: Neon WebSocket
 
-```typescript title="src/db.ts"
+```typescript filename="src/db.ts"
 import 'dotenv/config';
-import { Kysely, PostgresDialect } from 'kysely';
+import { Kysely, PostgresDialect, type PostgresPool } from 'kysely';
 import { Pool, neonConfig } from '@neondatabase/serverless';
 import ws from 'ws';
 import type { Database } from './types.ts';
@@ -142,14 +143,15 @@ neonConfig.webSocketConstructor = ws;
 
 export const db = new Kysely<Database>({
   dialect: new PostgresDialect({
-    pool: new Pool({ connectionString: process.env.DATABASE_URL }),
+    // Neon's Pool type doesn't match Kysely's PostgresPool type exactly; it works at runtime.
+    pool: new Pool({ connectionString: process.env.DATABASE_URL }) as unknown as PostgresPool,
   }),
 });
 ```
 
 #### Option 3: `node-postgres`
 
-```typescript title="src/db.ts"
+```typescript filename="src/db.ts"
 import 'dotenv/config';
 import { Kysely, PostgresDialect } from 'kysely';
 import { Pool } from 'pg';
@@ -168,7 +170,7 @@ export const db = new Kysely<Database>({
 
 Create `migrations/001_create_users.ts` to create the table.
 
-```typescript title="migrations/001_create_users.ts"
+```typescript filename="migrations/001_create_users.ts"
 import { Kysely, sql } from 'kysely';
 
 export async function up(db: Kysely<any>): Promise<void> {
@@ -188,11 +190,11 @@ export async function down(db: Kysely<any>): Promise<void> {
 
 Create `src/migrate.ts` to run the migration.
 
-```typescript title="src/migrate.ts"
+```typescript filename="src/migrate.ts"
 import * as path from 'path';
 import { promises as fs } from 'fs';
 import { fileURLToPath } from 'url';
-import { Migrator, FileMigrationProvider } from 'kysely';
+import { Migrator, FileMigrationProvider } from 'kysely/migration';
 import { db } from './db.ts';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -228,7 +230,7 @@ migrate();
 
 Create `src/index.ts`.
 
-```typescript title="src/index.ts"
+```typescript filename="src/index.ts"
 import { db } from './db.ts';
 
 async function main() {

@@ -9,7 +9,7 @@ excerpt: >-
   checked all those boxes” (Chris Sims, CEO and co-founder of Rhythmic) If
   you’ve ever worked in product management, you know th...
 date: '2025-05-09T16:43:14'
-updatedOn: '2025-05-09T17:25:00'
+updatedOn: '2026-11-06T12:00:00.000Z'
 category: case-study
 categories:
   - case-study
@@ -40,6 +40,10 @@ seo:
 ---
 
 ![Image](https://cdn.neonapi.io/public/images/pages/blog/rhythmic-ai-copilot-azure/neon-rhythmic-1-1024x576-b0e874d2.jpg)
+
+<Admonition type="important" title="Neon Azure regions are deprecated">
+Neon's Azure regions (`azure-eastus2`, `azure-westus3`, `azure-gwc`) were deprecated on April 7, 2026, and you can no longer create new projects in them. Active and paid projects in those regions keep running. See [Azure regions deprecation](/docs/import/azure-regions-deprecation) for your options and [regions](/docs/introduction/regions) for where you can create projects today.
+</Admonition>
 
 <blockquote>
 <p><strong>“We needed fast, programmatic provisioning of Postgres on Azure, support for pgvector and RAG, and something that could scale easily across tenants. Neon checked all those boxes”</strong> <em>(<a href="https://www.linkedin.com/in/chrisisagile/">Chris Sims</a>, CEO and co-founder of <a href="https://www.gorhythmic.com/">Rhythmic</a>)  </em></p>

@@ -61,7 +61,7 @@ POSTGRES_URL='postgresql://[user]:[password]@[neon_hostname]/[dbname]?sslmode=re
 ```
 
 <Admonition type="note">
-`Bun.sql` uses `POSTGRES_URL` as the default environment variable for the Primary connection URL for Postgres
+`Bun.sql` reads the connection string from `POSTGRES_URL` by default (it also checks `DATABASE_URL`), so you don't need to pass it in code.
 </Admonition>
 
 <Admonition type="important">
@@ -70,7 +70,7 @@ To ensure the security of your data, never expose your Neon credentials directly
 
 ## Configure the Postgres client
 
-Add an `index.ts` file (or `index.js`) to your project directory and add the following code snippet to connect to your Neon database. Choose the configuration that matches your preferred client.
+`bun init` creates an `index.ts` file in your project directory. Replace its contents with the following code to connect to your Neon database. Choose the configuration that matches your preferred client.
 
 <CodeTabs labels={["Bun.sql", "Neon serverless driver"]}>
 
@@ -88,7 +88,7 @@ getPgVersion();
 ```typescript
 import { neon } from '@neondatabase/serverless';
 
-const sql = neon(process.env.POSTGRES_URL);
+const sql = neon(process.env.POSTGRES_URL!);
 
 async function getPgVersion() {
   const result = await sql`SELECT version()`;
@@ -102,12 +102,12 @@ getPgVersion();
 
 ## Run index.ts
 
-Run `bun run index.ts` (or `bun index.js`) to view the result.
+Run `bun run index.ts` to view the result.
 
 ```shell
 $ bun run index.ts
 {
-  version: "PostgreSQL 17.2 on x86_64-pc-linux-gnu, compiled by gcc (Debian 12.2.0-14) 12.2.0, 64-bit",
+  version: "PostgreSQL 18.6 (ac70818) on aarch64-unknown-linux-gnu, compiled by gcc (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0, 64-bit",
 }
 ```
 

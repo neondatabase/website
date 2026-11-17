@@ -6,7 +6,7 @@ import BlogHeader from 'components/pages/blog/blog-header';
 import Breadcrumbs from 'components/pages/doc/breadcrumbs';
 import GuideCard from 'components/pages/guides/guide-card';
 import { GUIDES_BASE_PATH } from 'constants/guides';
-import { getAllGuides, getAuthors } from 'utils/api-guides';
+import { getAllGuides, getAuthor, getAuthors } from 'utils/api-guides';
 import getMetadata from 'utils/get-metadata';
 
 export async function generateStaticParams() {
@@ -17,10 +17,10 @@ export async function generateStaticParams() {
 
 export async function generateMetadata(props) {
   const params = await props.params;
-  const authorsData = getAuthors();
-  if (!authorsData[params.slug]) return notFound();
+  const author = getAuthor(params.slug);
+  if (!author) return notFound();
   return getMetadata({
-    title: `Neon guides by ${authorsData[params.slug].name}`,
+    title: `Neon guides by ${author.name}`,
     pathname: `${GUIDES_BASE_PATH}authors/${params.slug}`,
     rssPathname: `${GUIDES_BASE_PATH}rss.xml`,
   });
@@ -28,12 +28,13 @@ export async function generateMetadata(props) {
 
 const GuidesPage = async (props) => {
   const params = await props.params;
-  const authorsData = getAuthors();
-  const author = authorsData[params.slug];
+  const author = getAuthor(params.slug);
 
   if (!author) return notFound();
 
-  const posts = (await getAllGuides()).filter((i) => i.author.name === author.name);
+  const posts = (await getAllGuides()).filter((guide) =>
+    guide.authors.some(({ slug }) => slug === params.slug)
+  );
 
   if (!posts || posts.length === 0)
     return <div className="w-full text-center text-lg">No guides yet</div>;

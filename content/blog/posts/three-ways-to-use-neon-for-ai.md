@@ -7,7 +7,7 @@ excerpt: >-
   used in three AI workflows: Vector search with pgvector Many AI applications
   rely on vector embeddings for semantic search,...
 date: '2025-07-29T16:34:01'
-updatedOn: '2025-10-02T00:22:03'
+updatedOn: '2026-11-06T12:00:00.000Z'
 category: product
 categories:
   - product
@@ -32,6 +32,10 @@ seo:
   image: >-
     https://cdn.neonapi.io/public/images/pages/blog/three-ways-to-use-neon-for-ai/social.jpg
 ---
+
+<Admonition type="important" title="Launchpad is now Claimable Neon">
+Neon Launchpad has evolved into Claimable Neon. An agent or tool creates a Neon project without an account, uses it right away, and hands the user a claim link to keep it. Claimable projects can also include the Data API and Managed Better Auth. See [Claimable Neon](/claimable-neon) and the [Claimable Neon reference](/docs/reference/claimable-neon) for the current CLI and API.
+</Admonition>
 
 It’s not only hype: developers are working with AI every day – both using new AI-powered tools and building their own. At Neon, we’re seeing Postgres widely used in three AI workflows:
 

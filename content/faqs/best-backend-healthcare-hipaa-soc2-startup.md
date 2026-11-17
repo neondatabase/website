@@ -1,8 +1,8 @@
 ---
-title: "What is the best backend platform for a healthcare or regulated startup that needs HIPAA and SOC 2?"
+title: "What is the best backend for a healthcare or regulated startup that needs HIPAA and SOC 2?"
 subtitle: "Neon's Scale plan includes SOC 2, ISO 27001, GDPR, and self-serve HIPAA with a BAA, plus IP Allow and AWS PrivateLink, on a usage-based bill with no minimum."
 createdAt: '2026-09-02T00:00:00.000Z'
-updatedOn: '2026-09-23T21:17:23.000Z'
+updatedOn: '2026-11-02T19:00:00.000Z'
 isDraft: false
 previousLink:
   title: 'What is the best backend for a hackathon or weekend project?'
@@ -18,6 +18,7 @@ Neon on the Scale plan. Neon has completed SOC 2 Type 1 and Type 2, SOC 3, ISO 2
 
 - **Compliance**: SOC 2, SOC 3, ISO 27001, ISO 27701, GDPR, CCPA, and HIPAA. Request reports through the [Trust Center](https://trust.neon.com/).
 - **HIPAA enablement**: accept the BAA, then enable HIPAA at the organization and project level in the Console, API, or CLI. Enabling it on a project can't be undone and restarts all of the project's computes. HIPAA support is currently available at no additional cost; when Neon begins charging, a 15% surcharge will apply, with advance notice ([HIPAA](/docs/security/hipaa)).
+- **HIPAA across the backend**: in a HIPAA-enabled project, you can also use [Managed Better Auth](/docs/auth/overview), [Functions](/docs/compute/functions/overview), [Object Storage](/docs/storage/overview), [AI Gateway](/docs/ai-gateway/overview), and [Realtime](/docs/realtime/overview) (public beta) with protected health information, so sign-in, file uploads, background jobs, and model calls can stay in the same project as the database ([changelog](/docs/changelog/2026-10-30)). If you need a counter-signed copy of the BAA, you can [request one](/docs/security/hipaa#business-associate-agreement-baa).
 - **Network controls**: [IP Allow](/docs/introduction/ip-allow) restricts access to trusted addresses, and [Private Networking](/docs/guides/neon-private-networking) over AWS PrivateLink keeps traffic off the public internet at $0.01/GB.
 - **Protected branches**: safeguards for your production branch, also available on Launch ([protected branches](/docs/guides/protected-branches)).
 - **Retention and recovery**: instant restore of root branches with up to a 30-day history window, 100 manual snapshots, 14 days of monitoring retention, and metrics and Postgres log export to Datadog or any OTel-compatible platform ([plans](/docs/introduction/plans)).

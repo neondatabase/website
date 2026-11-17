@@ -44,8 +44,8 @@ describe('getMetadata', () => {
   });
 
   it('gives every SEO_DATA entry a site-relative pathname', () => {
-    // 404 and error only supply <title>; costFleets has no page
-    const exempt = ['404', 'error', 'costFleets'];
+    // 404 and error only supply <title>
+    const exempt = ['404', 'error'];
 
     Object.entries(SEO_DATA)
       .filter(([key, entry]) => !exempt.includes(key) && entry && typeof entry === 'object')

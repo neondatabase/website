@@ -194,6 +194,21 @@ const CHECKS = [
       return body.split('\n')[0]?.slice(0, 80) ?? '';
     },
   },
+  ...['/docs/sitemap.md', '/sitemap.md', '/.well-known/sitemap.md'].map((path) => ({
+    name: `${path} — Markdown sitemap served to curl (no browser UA)`,
+    path,
+    requestHeaders: { 'User-Agent': 'curl/8.4.0', Accept: '*/*' },
+    validate(status, body) {
+      if (status !== 200) return `expected 200, got ${status}`;
+      if (body.includes('Page Not Found')) return 'got agent 404 page instead of sitemap.md';
+      if (!/^## /m.test(body) || !/^- \[.+\]\(https?:\/\//m.test(body))
+        return 'missing H2 sections or Markdown links';
+      return null;
+    },
+    summarize(body) {
+      return `${(body.match(/^ *- \[/gm) || []).length} links`;
+    },
+  })),
   {
     name: '/docs/llms-full.txt — full docs served to curl (no browser UA)',
     path: '/docs/llms-full.txt',

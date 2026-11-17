@@ -18,13 +18,13 @@ When this prompt is triggered, automatically configure the open Kotlin project a
 
 ### 1. Add Required Gradle Dependencies
 
-1.  If the project uses a version catalog (`gradle/libs.versions.toml`), add:
+1.  If the project uses a version catalog (`gradle/libs.versions.toml`), add these lines to the existing `[versions]` and `[libraries]` tables. Don't create a second table with either header, because Gradle fails with a TOML syntax error:
     ```toml
-    [versions]
-    postgresql = "42.7.7"
+    # Add to the [versions] table
+    postgresql = "42.7.14"
     dotenv = "6.5.1"
 
-    [libraries]
+    # Add to the [libraries] table
     postgresql = { module = "org.postgresql:postgresql", version.ref = "postgresql" }
     dotenv = { module = "io.github.cdimascio:dotenv-kotlin", version.ref = "dotenv" }
     ```
@@ -35,13 +35,13 @@ When this prompt is triggered, automatically configure the open Kotlin project a
     ```
 2.  If there is no version catalog, add these dependencies directly to the module `build.gradle.kts`:
     ```kotlin
-    implementation("org.postgresql:postgresql:42.7.7")
+    implementation("org.postgresql:postgresql:42.7.14")
     implementation("io.github.cdimascio:dotenv-kotlin:6.5.1")
     ```
 
 ### 2. Verify the `.env` File
 
-- Check for the presence of a `.env` file in the application module directory (for multi-project Gradle apps, typically `app/.env`) or the project root.
+- Check for the presence of a `.env` file in the application module directory (`app/.env` for the Gradle project from `gradle init`). `./gradlew run` starts the app from that directory, so a `.env` in the project root isn't loaded.
 - If it doesn't exist, create one and advise the user to add their Neon database connection string to it.
 - Provide the following format and instruct the user to replace the placeholders:
   ```

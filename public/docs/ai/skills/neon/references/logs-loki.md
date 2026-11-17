@@ -20,7 +20,17 @@ neon logs field-values service_name --since 1h
 neon logs query --since 1h --logql '{entity_type="function"} |= "timeout"'
 ```
 
-If the CLI is unavailable, fall back to the Neon MCP server's read-only `query_logs`, `list_log_fields`, and `list_log_field_values` tools.
+`neon logs loki` (Neon CLI 9.1 or newer) reads the same records through the Loki-compatible API below and prints Loki's JSON response: lines grouped by stream labels, with nanosecond timestamp strings where `logs query` rounds to the second. Use it when ordering within a second matters or a tool expects Loki output:
+
+```bash
+neon logs loki '{entity_type="function"} |= "timeout"' --since 30m --limit 100
+neon logs loki --endpoint labels
+neon logs loki '{entity_type="function"}' --endpoint label/scope_name/values --since 6h
+```
+
+It has no cursor. A result with `--limit` lines, or 10,000 lines (the server's cap, which adds no `warnings` entry), may be incomplete, so narrow `--since` or the selector instead of trusting it as complete.
+
+If the CLI is unavailable, fall back to the Neon MCP server's read-only `query_logs`, `query_loki_logs`, `list_log_fields`, and `list_log_field_values` tools.
 
 ## Loki-compatible read API
 
@@ -40,22 +50,45 @@ This is a read-only Loki-compatible subset, not a push endpoint or complete Loki
 
 The paths above are the ones to call directly. A Loki client that builds its own paths — a Grafana data source appends `/loki/api/v1` to whatever URL it is given — may need a different root, so confirm the data-source URL against the Neon docs rather than pasting this base.
 
-In TypeScript applications, use `@neon/sdk`. Project and branch are positional, and `query` returns a lazy paginated iterable rather than a promise:
+In TypeScript applications, use `@neon/sdk`. Every method takes one named parameter object, and `query` returns a lazy paginated iterable rather than a promise:
 
 ```typescript
-for await (const record of neon.logs.query(projectId, branchId, {
+for await (const record of neon.logs.query({
+  projectId,
+  branchId,
   since: "1h",
   source: "function",
 })) {
   console.log(record.timestamp, record.severity_text, record.message);
 }
 
-const { data: fields } = await neon.logs.fields(projectId, branchId);
-const { data: serviceNames } = await neon.logs.fieldValues(
+const { data: fields } = await neon.logs.fields({ projectId, branchId });
+const { data: serviceNames } = await neon.logs.fieldValues({
   projectId,
   branchId,
-  "service_name",
-);
+  fieldName: "service_name",
+});
 ```
 
 `query`'s iterator always throws on error, but `fields` and `fieldValues` follow the client's `throwOnError`, which defaults to `false` and hands back `{ data, error }`. `fieldValues` resolves to the whole response, not a bare array: read `serviceNames.values`, and treat them as an arbitrary subset whenever `serviceNames.is_truncated` is true.
+
+`neon.logs.loki` (`@neon/sdk` 7.11 or newer) calls the Loki-compatible API with the client's key and returns Loki's response body unchanged:
+
+```typescript
+const { data, error } = await neon.logs.loki.queryRange({
+  projectId,
+  branchId,
+  query: '{entity_type="function"} |= "timeout"',
+  since: "30m",
+  limit: 100,
+});
+if (error) throw error;
+for (const { stream, values } of data.data.result) {
+  for (const [timestampNs, line] of values) console.log(timestampNs, stream.service_name, line);
+}
+
+await neon.logs.loki.labels({ projectId, branchId });
+await neon.logs.loki.labelValues({ projectId, branchId, name: "service_name" });
+```
+
+A rejected query, such as one with a parser stage, comes back as a `NeonApiError` carrying Loki's message.

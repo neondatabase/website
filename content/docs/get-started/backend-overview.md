@@ -44,7 +44,7 @@ So when you see a `notes` table, an `attachments` bucket, or a `chat` function b
 The sixth capability is the [Data API](/docs/data-api/overview), which exposes Postgres through a PostgREST-compatible HTTPS endpoint. This example doesn't enable it because the `chat` Function queries Postgres directly.
 
 <Admonition type="info" title="Region and access requirements">
-Object Storage, Functions, and the AI Gateway are currently available in AWS US East (Ohio) (`aws-us-east-2`), AWS US East (N. Virginia) (`aws-us-east-1`), AWS Europe (Frankfurt) (`aws-eu-central-1`), and AWS Asia Pacific (Singapore) (`aws-ap-southeast-1`), on new or existing projects in those regions, so use a project in one of them to try them. Support is expanding toward [all regions](/docs/introduction/regions). Postgres and Managed Better Auth work in any region. Object Storage and Functions are available on any plan, subject to usage limits; the AI Gateway requires a paid plan.
+Object Storage, Functions, and the AI Gateway are currently available in AWS US East (Ohio) (`aws-us-east-2`), AWS US East (N. Virginia) (`aws-us-east-1`), AWS Europe (Frankfurt) (`aws-eu-central-1`), and AWS Asia Pacific (Singapore) (`aws-ap-southeast-1`), on new or existing projects in those regions, so use a project in one of them to try them. Support is expanding toward [all regions](/docs/introduction/regions). Postgres and Managed Better Auth work in any region. Object Storage and Functions are available on any plan, subject to usage limits; the AI Gateway works on any plan with prepaid credits.
 </Admonition>
 
 ## The shape of a Neon backend

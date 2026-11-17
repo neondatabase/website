@@ -41,9 +41,9 @@ However, implementing RLS natively requires writing and maintaining separate SQL
 
 Drizzle ORM provides a declarative way to manage these policies directly within your TypeScript database schema, making them much easier to write, review, and maintain. Once you define policies in your Drizzle schema and run migrations, they are automatically created in your Postgres database and reliably enforced for all queries.
 
-## The baseline: RLS in plain SQL
+## RLS in plain SQL
 
-Before seeing how Drizzle simplifies things, it helps to understand the underlying SQL it replaces. Below is a sample schema for a basic todo application, where users should only be able to view and manage their own tasks:
+Before seeing how Drizzle simplifies things, it helps to understand the underlying SQL it replaces. Below is a sample schema for a basic todo application, where users should only be able to view and manage their own tasks. Enable the [Data API](/docs/data-api/get-started) on your branch first. The `user_id` default calls `auth.user_id()`, which the Data API provides, so `CREATE TABLE` fails without it.
 
 ```sql
 CREATE TABLE IF NOT EXISTS "todos" (
@@ -106,6 +106,16 @@ export const todos = pgTable(
 You can run queries that respect these policies using either the [Data API client](/docs/data-api/get-started#connect-and-query) (frontend) or the [Neon serverless driver](#using-drizzle-with-the-serverless-driver) using the Drizzle query builder (backend).
 </Admonition>
 
+### Grant table access
+
+Policies filter rows, but they don't grant table privileges. Drizzle's migration doesn't create grants either. After the migration runs, grant the `authenticated` role the privileges it needs. Without them, the Data API returns `permission denied for table todos`:
+
+```sql
+GRANT SELECT, INSERT, UPDATE, DELETE ON todos TO authenticated;
+```
+
+Grant the `anonymous` role only the tables it should read, as in the [role-based access](#role-based-access-control) example below.
+
 ### Configuration parameters
 
 The `crudPolicy` function from `drizzle-orm/neon` is a high-level helper that declaratively generates Row-Level Security (RLS) policies for your tables. It accepts the following parameters:
@@ -140,7 +150,7 @@ For example, you might want to allow only users with an `admin` role to update o
 
 ### Replicating `crudPolicy` with `pgPolicy`
 
-To understand how `pgPolicy` works, let's rewrite the `todos` example using it. The following `pgPolicy` definition is exactly what `crudPolicy` would generate from your simpler configuration.
+To understand how `pgPolicy` works, let's rewrite the `todos` example using it. The following `pgPolicy` definition gives the same access as the `crudPolicy` example above.
 
 ```typescript {18-22}
 import { pgTable, text, bigint, boolean, pgPolicy } from 'drizzle-orm/pg-core';
@@ -170,11 +180,11 @@ export const todos = pgTable(
 );
 ```
 
-This single `pgPolicy` definition with `for: 'all'` is exactly what `crudPolicy` would generate from your simpler configuration. Note that `withCheck` is omitted because when it's not specified, PostgreSQL automatically uses the `USING` clause for both read and write checks. This eliminates unnecessary repetition while maintaining the same security guarantees.
+This single `pgPolicy` definition with `for: 'all'` gives the same access as the `crudPolicy` example. `crudPolicy` creates one policy per command (`SELECT`, `INSERT`, `UPDATE`, and `DELETE`), while this version creates one policy for all of them. Note that `withCheck` is omitted because when it's not specified, Postgres automatically uses the `USING` clause for both read and write checks. This eliminates unnecessary repetition while maintaining the same security guarantees.
 
 You can apply this approach to additional tables and operations, allowing you to define increasingly sophisticated and tailored security policies as your application's requirements evolve.
 
-### Example: Time limited updates
+### Time-limited updates
 
 Here is how you can implement a rule that `crudPolicy` can't handle alone: **A user can update their todo, but only within 24 hours of creating it.** They should still be able to view and delete it anytime.
 
@@ -325,7 +335,7 @@ export const posts = pgTable(
   'posts',
   {
     id: bigint({ mode: 'number' }).primaryKey(),
-    userId: text()
+    userId: text('user_id')
       .notNull()
       .default(sql`(auth.user_id())`),
     content: text().notNull(),
@@ -353,7 +363,9 @@ export const posts = pgTable(
 
 </CodeTabs>
 
-### Complex relationships & shared data
+Requests that use the `anonymous` role also need a JWT. The Data API rejects requests without one. See [the anonymous role](/docs/data-api/access-control#2-the-anonymous-role) for how to get an anonymous token.
+
+### Complex relationships and shared data
 
 Secure data based on relationships in other tables, such as allowing access to a shared document only if the user is part of a specific group or project. This often involves more complex SQL queries and may require additional metadata to be stored alongside your main data.
 

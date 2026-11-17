@@ -11,7 +11,8 @@ description: >-
   reactive UIs, and realtime data go to `neon-realtime`. Also use for
   "@neondatabase/serverless", "@neon/neon-js", "neon inspect db", "neon
   postgres computes", "Neon branch", "schema-only branch", "reset branch",
-  "branch per PR", high database bills, network transfer or egress, SELECT *
+  "branch per PR", high database bills, network transfer or egress, Free plan
+  limits or a compute suspended over quota (SQLSTATE 53000, HTTP 402), SELECT *
   optimization, query overfetching, "semantic search", "vector search", "full-text search", "BM25", or "hybrid
   search".
 metadata:
@@ -107,6 +108,18 @@ Use this when a user reports high database bills, unexpected network transfer, e
 Before editing code, read [Egress optimization](references/egress-optimization.md). Audit all five patterns: unused columns, missing pagination, repeated static reads, application-side aggregation, and JOIN duplication. Do not stop after fixing `SELECT *`.
 
 Work in four steps: diagnose which queries transfer the most data, analyze the code behind them, fix the anti-patterns, then verify that behavior is preserved and transfer drops.
+
+## Free Plan Limits
+
+Use this when a Free plan project ran out of CU-hours or public network transfer, its compute is suspended over quota, or the user asks Neon for a one-time quota increase.
+
+On the Free plan, running out of CU-hours or public network transfer suspends the compute until the next billing period or until you upgrade. No data is deleted, but nothing can connect: Postgres connections, including `pg_dump`, fail with SQLSTATE `53000` ("Your account or project has exceeded the quota"), and HTTP queries from the serverless driver fail with status `402`. See [What happens if I exceed my Free plan limits?](https://neon.com/docs/introduction/plans.md).
+
+To restore service before the monthly reset and stay on Free, upgrade the organization to Launch and downgrade it back to Free right away (**Billing** > **Change plan** in the Neon Console). The plan change resets the Free plan allowances, and the project keeps its database. Launch has no minimum monthly fee, and invoices under $0.50 are not collected ([Price](https://neon.com/docs/introduction/plans.md#price)), so the round trip costs nothing.
+
+Without a plan change, CU-hours and network transfer reset at the start of the next monthly billing period. A temporary limit increase from the Neon team takes time to process and rarely lands before the reset; the plan change is faster.
+
+If network transfer ran out, fix the queries behind it first (see [Egress Optimization](#egress-optimization)), or the project hits the limit again.
 
 ## Troubleshooting and Neon-Specific Performance
 

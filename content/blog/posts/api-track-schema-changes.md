@@ -9,7 +9,7 @@ excerpt: >-
   Plan. Schema Diff allows you to easily compare schemas between Neon databases.
   It was first made available via the Neon Consol...
 date: '2025-01-09T17:08:23'
-updatedOn: '2025-01-21T15:37:49'
+updatedOn: '2026-11-06T12:00:00.000Z'
 category: postgres
 categories:
   - postgres
@@ -37,6 +37,10 @@ seo:
 ---
 
 ![Post image](https://cdn.neonapi.io/public/images/pages/blog/api-track-schema-changes/neon-api-1-1024x576-78a92fa9.jpg)
+
+<Admonition type="important" title="Free plan limits have changed since this post">
+This post quotes Free plan limits from January 2025. As of November 2026, the Free plan includes 100 projects, each with 100 CU-hours of compute per month and 1 GB of storage (up to 20 GB across all projects). See the [pricing page](/pricing) and the [plans documentation](/docs/introduction/plans) for current pricing and limits.
+</Admonition>
 
 **We keep expanding our Schema Diff feature, this time adding an** [API endpoint](https://neon.com/docs/guides/schema-diff#using-the-neon-api)**: `compare_schema`. You can use it in all your Neon projects, including the** [Free Plan](https://console.neon.tech/signup).
 

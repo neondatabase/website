@@ -1,5 +1,5 @@
 ---
-updatedOn: '2026-05-13T19:04:49.209Z'
+updatedOn: '2026-11-14T05:35:20.663Z'
 ---
 
 # Guides
@@ -20,7 +20,7 @@ Right now Markdown files accept the following fields:
 
 1. `title`: title of the page (required)
 2. `subtitle`: subtitle of the page.
-3. `author`: your author ID.
+3. `author`: your author ID. For a guide with more than one author, use `authors` with a list of IDs instead, e.g. `authors: [michiel-voortman, rishi-raj-jain]`. Authors appear in the order you list them.
 4. `redirectFrom`: array of strings with paths to redirect from to the page, should start and end with a slash, e.g. `/guides/old-path/`
 5. `isDraft`: flag that says the page is not ready yet. It won't appear in production but will appear in the development mode.
 6. `enableTableOfContents`: flag that turns on the display of the outline for the page. The outline gets built out of second and third-level headings ([`h2`, `h3`]), thus appears as two-level nested max.
@@ -483,6 +483,19 @@ author: rishi-raj-jain
 ```
 
 With this approach, all your data will be displayed in guide's author section.
+
+For a guide with more than one author, list every author's ID under `authors`. Each author needs an entry in `data.json` and a photo:
+
+```md
+---
+title: ...
+authors:
+  - michiel-voortman
+  - rishi-raj-jain
+---
+```
+
+The guide card shows every author's photo and name, the guide's sidebar shows a block for each author, and the guide appears on each author's page.
 
 ## Contributing
 

@@ -7,7 +7,7 @@ summary: >-
   subscriber project using Postgres publications and subscriptions, enabling
   cross-region replication, region migration, and Postgres version upgrades (for
   example, Postgres 16 to 17). Use this guide when you need to replicate between
-  two separate Neon projects using Lakebase Postgres; replicating between databases on the same Neon
+  two separate Neon projects. Replicating between databases on the same Neon
   project branch requires a different configuration. Enabling logical replication
   changes wal_level from replica to logical on all databases in the source
   project and the change cannot be reverted.
@@ -97,7 +97,7 @@ CREATE PUBLICATION my_publication FOR TABLE users, departments;
 Defining specific tables lets you add or remove tables from the publication later, which you cannot do when creating publications with `FOR ALL TABLES`.
 </Admonition>
 
-For syntax details, see [CREATE PUBLICATION](https://www.postgresql.org/docs/current/sql-createpublication.html), in the PostgreSQL documentation.
+For syntax details, see [CREATE PUBLICATION](https://www.postgresql.org/docs/current/sql-createpublication.html) in the Postgres documentation.
 
 ## Prepare your Neon destination database
 
@@ -118,17 +118,17 @@ CREATE TABLE IF NOT EXISTS playing_with_neon(id SERIAL PRIMARY KEY, name TEXT NO
 After creating a publication on the source database, you need to create a subscription on the destination database.
 
 1. Use the [Neon SQL Editor](/docs/get-started/query-with-neon-sql-editor), `psql`, or another SQL client to connect to your destination database.
-2. Create the subscription using the using a `CREATE SUBSCRIPTION` statement.
+2. Create the subscription with a `CREATE SUBSCRIPTION` statement.
 
    ```sql
    CREATE SUBSCRIPTION my_subscription
-   CONNECTION 'postgresql://neondb_owner:<password>@ep-cool-darkness-123456.us-east-2.aws.neon.tech/neondb?sslmode=require&channel_binding=require'
+   CONNECTION 'postgresql://[user]:[password]@[neon_hostname]/[dbname]?sslmode=require&channel_binding=require'
    PUBLICATION my_publication;
    ```
 
-   - `subscription_name`: A name you chose for the subscription.
-   - `connection_string`: The connection string for the source Neon database where you defined the publication. Use a direct connection string, not a pooled one. Logical replication requires a persistent connection and is not compatible with connection poolers, so the hostname must not include the `-pooler` suffix. See [Connection pooling](/docs/connect/connection-pooling).
-   - `publication_name`: The name of the publication you created on the source Neon database.
+   - `my_subscription`: A name you choose for the subscription.
+   - The connection string: the connection string for the source Neon database where you defined the publication. Use a direct connection string, not a pooled one. Logical replication requires a persistent connection and is not compatible with connection poolers, so the hostname must not include the `-pooler` suffix. See [Connection pooling](/docs/connect/connection-pooling).
+   - `my_publication`: The name of the publication you created on the source Neon database.
 
 3. Verify the subscription was created by running the following command:
 
@@ -142,7 +142,7 @@ After creating a publication on the source database, you need to create a subscr
 
 Testing your logical replication setup ensures that data is being replicated correctly from the publisher to the subscriber database.
 
-1. Run some data modifying queries on the source database (inserts, updates, or deletes). If you're using the `playing_with_neon` database, you can use this statement to insert some rows:
+1. Run some data modifying queries on the source database (inserts, updates, or deletes). If you're using the `playing_with_neon` table, you can use this statement to insert some rows:
 
    ```sql
    INSERT INTO playing_with_neon(name, value)

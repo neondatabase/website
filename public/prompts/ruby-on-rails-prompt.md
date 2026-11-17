@@ -48,8 +48,8 @@ When this prompt is triggered, automatically configure the open Ruby on Rails pr
 1.  Check for the presence of a `.env` file at the root of the project. If it doesn't exist, create one.
 2.  Add the following line to the `.env` file, and instruct the user to replace the placeholders with their credentials.
     - **Crucially, the connection string must end with a `/` and should not include a specific database name.** Rails will manage the database name (`_development`, `_test`) automatically based on the environment. Inform this clearly to the user when you prompt them.
-    ```
-    DATABASE_URL="postgresql://[user]:[password]@[neon_hostname]/"
+    ```text filename=".env"
+    DATABASE_URL="postgresql://[user]:[password]@[neon_hostname]/?sslmode=require&channel_binding=require"
     ```
 3.  Prompt the user to get their connection string from the **Neon Console → Project → Dashboard → Connect**.
 4.  Inform the user that the database role provided requires `CREATEDB` privileges, which is standard for roles created via the Neon Console.
@@ -61,7 +61,7 @@ When this prompt is triggered, automatically configure the open Ruby on Rails pr
 To avoid potential naming collisions with generators, directly create or overwrite the necessary files.
 
 1.  **Ensure the controller exists with the correct content.** Create or replace the file at `app/controllers/home_controller.rb`:
-    ```ruby title="app/controllers/home_controller.rb"
+    ```ruby filename="app/controllers/home_controller.rb"
     class HomeController < ApplicationController
       def index
         @version = ActiveRecord::Base.connection.execute("SELECT version();").first['version']
@@ -69,7 +69,7 @@ To avoid potential naming collisions with generators, directly create or overwri
     end
     ```
 2.  **Ensure the view exists with the correct content.** Create or replace the file at `app/views/home/index.html.erb`:
-    ```erb title="app/views/home/index.html.erb"
+    ```erb filename="app/views/home/index.html.erb"
     <h1>Neon Postgres Connection Successful!</h1>
     <% if @version %>
       <p><strong>PostgreSQL Version:</strong> <%= @version %></p>
@@ -78,7 +78,7 @@ To avoid potential naming collisions with generators, directly create or overwri
     <% end %>
     ```
 3.  **Ensure the root route is configured.** Overwrite the contents of `config/routes.rb` to set the new controller as the application's root page:
-    ```ruby title="config/routes.rb"
+    ```ruby filename="config/routes.rb"
     Rails.application.routes.draw do
       # Defines the root path route ("/")
       root 'home#index'
@@ -94,7 +94,7 @@ To avoid potential naming collisions with generators, directly create or overwri
 
 Once the setup is complete:
 
-1.  Remind the user to set their `DATABASE_URL` in the .env file, ensuring the connection string is modified to remove the database name and ends with a trailing slash (`/`).
+1.  Remind the user to set their `DATABASE_URL` in the .env file, ensuring the connection string has no database name and keeps the trailing slash (`/`) before the query string.
 2.  Install any new gems by running:
     ```bash
     bundle install
@@ -116,7 +116,7 @@ Once the setup is complete:
 Before suggesting code or making edits, ensure:
 - The `Gemfile` contains both the `pg` and `dotenv-rails` gems.
 - A `.env` file is present or has been created.
-- The `DATABASE_URL` format in the `.env` template ends with a `/` and contains no database name.
+- The `DATABASE_URL` format in the `.env` template has a `/` before the query string and contains no database name.
 - The connection string is loaded from the environment, not hardcoded in any `.rb` or `.yml` files.
 - The controller, view, and routes files (`home_controller.rb`, `home/index.html.erb`, `routes.rb`) are created or updated with the specified content.
 - The `root 'home#index'` route is correctly defined in `config/routes.rb`.

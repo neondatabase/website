@@ -147,6 +147,10 @@ function loadDocumentedOps() {
 const RAW_CALL_RE = /\braw\.([A-Za-z0-9_]+)\s*\(/g;
 const NEON_CALL_RE = /\bneon\.([A-Za-z0-9_]+(?:\.[A-Za-z0-9_]+)*)\s*\(/g;
 const IMPORT_RE = /import\s+(type\s+)?\{([^}]*)\}\s+from\s+['"](@neon\/sdk(?:\/raw)?)['"]/g;
+const NON_SDK_NEON_BINDING_RE =
+  /import\s+(?:\*\s+as\s+)?neon\s+from\s+['"](?!@neon\/sdk['"/])[^'"]+['"]/;
+
+const bindsNeonToOtherModule = (text) => NON_SDK_NEON_BINDING_RE.test(text);
 
 export function extractCallRefs(text) {
   const rawRefs = new Set();
@@ -273,20 +277,25 @@ async function main() {
     const where = relative(file);
     const content = fs.readFileSync(file, 'utf8');
     const { fenced, prose } = splitMarkdown(content);
+    const checkNeonChains = !bindsNeonToOtherModule(content);
 
     // Fenced ts/js blocks are copy-paste runnable => BLOCK on broken refs.
     for (const block of fenced) {
       if (!TS_FENCE_LANGS.has(block.lang)) continue;
       const { rawRefs, neonChains } = extractCallRefs(block.code);
       for (const name of rawRefs) validateRawRef(name, where, blocking);
-      for (const chain of neonChains) validateNeonChain(chain, where, blocking);
+      if (checkNeonChains) {
+        for (const chain of neonChains) validateNeonChain(chain, where, blocking);
+      }
       for (const imp of extractImports(block.code)) validateImport(imp, where);
     }
 
     // Prose + inline code (tables, sentences) => NOTIFY only.
     const { rawRefs, neonChains } = extractCallRefs(prose);
     for (const name of rawRefs) validateRawRef(name, where, notices);
-    for (const chain of neonChains) validateNeonChain(chain, where, notices);
+    if (checkNeonChains) {
+      for (const chain of neonChains) validateNeonChain(chain, where, notices);
+    }
   }
 
   // --- Operation coverage: spec ↔ docs ↔ @neon/sdk raw ---------------------

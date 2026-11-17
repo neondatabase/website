@@ -26,6 +26,7 @@ const useRiveAnimation = ({
   onLoad,
   pauseOnHide = true,
   managePlayback = true,
+  shouldUseIntersectionObserver = true,
 } = {}) => {
   const [isReady, setIsReady] = useState(false);
   const [isLoaded, setIsLoaded] = useState(false);
@@ -68,23 +69,26 @@ const useRiveAnimation = ({
     return true;
   }, []);
 
-  const { rive, RiveComponent } = useRive({
-    src,
-    artboard,
-    stateMachines,
-    autoplay,
-    autoBind,
-    shouldDisableRiveListeners,
-    fit,
-    alignment,
-    assetLoader: assetLoader || getCachedFontLoader(),
-    onRiveReady: (instance) => {
-      setIsReady(false);
-      resizeDrawingSurface(instance);
-      setIsLoaded(true);
-      onLoadRef.current?.(instance);
+  const { rive, RiveComponent } = useRive(
+    {
+      src,
+      artboard,
+      stateMachines,
+      autoplay,
+      autoBind,
+      shouldDisableRiveListeners,
+      fit,
+      alignment,
+      assetLoader: assetLoader || getCachedFontLoader(),
+      onRiveReady: (instance) => {
+        setIsReady(false);
+        resizeDrawingSurface(instance);
+        setIsLoaded(true);
+        onLoadRef.current?.(instance);
+      },
     },
-  });
+    { shouldUseIntersectionObserver }
+  );
 
   // The runtime load event fires before `useRive` exposes its instance. Resize again after
   // React and the Rive wrapper have committed their canvas dimensions, then keep the drawing

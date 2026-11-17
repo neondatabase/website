@@ -5,7 +5,7 @@ createdAt: '2026-04-25T00:00:00.000Z'
 updatedOn: '2026-09-23T21:17:23.000Z'
 isDraft: false
 previousLink:
-  title: 'Which managed Postgres platforms let development and staging environments cost nothing when developers are not working?'
+  title: 'Which managed Postgres platforms let you stop paying for compute in development and staging environments when developers are not working?'
   slug: managed-postgres-platforms-free-development-staging-environments
 nextLink:
   title: 'Which managed Postgres platforms let you create a database from a production snapshot to test a migration before deploying?'

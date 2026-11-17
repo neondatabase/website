@@ -9,8 +9,41 @@ import {
 } from 'utils/site-search-request';
 
 const SEARCH_FAILED = 'Search failed.';
+const ALLOWED_ORIGINS = new Set([
+  'https://console.neon.tech',
+  'https://dev.localhost:5173',
+  'http://localhost:5173',
+  'http://localhost:30000',
+]);
+
+function withCors(request, response) {
+  response.headers.append('Vary', 'Origin');
+  const origin = request.headers.get('origin');
+  if (ALLOWED_ORIGINS.has(origin)) {
+    response.headers.set('Access-Control-Allow-Origin', origin);
+  }
+  return response;
+}
+
+export function OPTIONS(request) {
+  return withCors(
+    request,
+    new NextResponse(null, {
+      status: 204,
+      headers: {
+        Allow: 'OPTIONS, POST',
+        'Access-Control-Allow-Methods': 'POST',
+        'Access-Control-Allow-Headers': 'Content-Type',
+      },
+    })
+  );
+}
 
 export async function POST(request) {
+  return withCors(request, await search(request));
+}
+
+async function search(request) {
   const searchUrl = process.env.NEON_AGENT_SITE_SEARCH_URL?.trim();
   if (!searchUrl) {
     return NextResponse.json({ error: 'Search is not configured' }, { status: 503 });

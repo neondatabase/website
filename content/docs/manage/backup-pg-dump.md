@@ -7,6 +7,9 @@ summary: >-
   regions. Always use a direct (unpooled) connection string for both
   operations; avoid pooled connections.
 enableTableOfContents: true
+redirectFrom:
+  - /docs/manage/backups-pg-dump
+  - /docs/guides/backup-pg-dump
 updatedOn: '2026-11-04T20:10:08.844Z'
 ---
 

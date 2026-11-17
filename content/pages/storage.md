@@ -1,10 +1,14 @@
 ---
-title: 'Database storage: Bottomless, Branchable'
-subtitle: The foundation for scalable, copy-on-write Postgres with usage-based pricing and zero storage management.
-updatedOn: '2025-06-04T09:00:00.000Z'
+title: 'Lakebase Postgres storage: Bottomless, branchable'
+subtitle: The storage engine behind Lakebase Postgres. Copy-on-write, usage-based, with zero storage management.
+updatedOn: '2026-11-07T13:47:23.000Z'
 ---
 
-Neon implements a unique storage layer for Postgres that eliminates capacity planning and enables new workflows. Built on a copy-on-write engine backed by bottomless cloud storage, Neon’s architecture removes the constraints of traditional serverful setups, which require pre-provisioned storage volumes and limit scalability. At the same time, it lays the foundation for core Neon features like [instant branching](/blog/instantly-copy-tb-size-datasets-the-magic-of-copy-on-write) and [point-in-time restores](/blog/recover-large-postgres-databases#neons-instant-point-in-time-recovery).
+<Admonition type="note" title="This page is about database storage">
+This page explains the storage engine inside Lakebase Postgres, the database in the Neon backend. Do not confuse with [Neon Object Storage](/object-storage), the S3-compatible product for files, images, and other objects that branch with your database. For the current architecture, see the [Lakebase architecture overview](/docs/introduction/architecture-overview).
+</Admonition>
+
+Lakebase Postgres uses a unique storage layer that eliminates capacity planning and enables new workflows. Built on a copy-on-write engine backed by bottomless cloud storage, Neon’s architecture removes the constraints of traditional serverful setups, which require pre-provisioned storage volumes and limit scalability. At the same time, it lays the foundation for core Lakebase Postgres features like [instant branching](/blog/instantly-copy-tb-size-datasets-the-magic-of-copy-on-write) and [point-in-time restores](/blog/recover-large-postgres-databases#neons-instant-point-in-time-recovery).
 
 ## Storage constraints in serverful Postgres architectures
 
@@ -16,17 +20,17 @@ The most common examples:
 - **Slow cloning and recovery.** This architecture also implies that making a copy of a large database or restoring from backup is a time-consuming ordeal. Snapshot-based backups in most cloud databases involve copying the entire dataset from cloud storage and replaying logs, meaning that restoring a multi-terabyte instance can take hours. This delays testing and recovery, impacting development agility and uptime.
 - **Low resource efficiency.** In traditional plans you pay for capacity whether you use it or not. An RDS instance’s storage and compute are allocated up-front (and billed 24/7), so idle resources and empty disk space burn a hole in your budget. Maintaining standby replicas or separate dev/test instances compounds the cost, even if they’re mostly idle.
 
-## How Neon reimagines Postgres storage
+## How Lakebase Postgres reimagines Postgres storage
 
-Neon’s architecture separates storage from compute, implementing a multi-tenant cloud service where each layer can scale independently. The Pageserver (running on SSDs) and Safekeepers (which replicate Postgres’ write-ahead log) form a distributed storage system, with durable object storage (e.g., S3) as the ultimate source of truth. This design decouples performance-critical caching and log replication from long-term storage, enabling both dynamic scaling and built-in fault tolerance.
+Neon’s architecture separates storage from compute, implementing a multi-tenant cloud service where each layer can scale independently. The Pageserver (running on SSDs) and Safekeepers (which replicate Postgres’ write-ahead log) form a distributed storage system, with durable cloud object storage (e.g., Amazon S3) as the ultimate source of truth. This design decouples performance-critical caching and log replication from long-term storage, enabling both dynamic scaling and built-in fault tolerance.
 
-![Database storage architecture](/pages/storage/schema.jpg)
+![Lakebase architecture overview](/docs/introduction/neon-architecture-overview.png)
 
 Unlike traditional serverful setups, where compute and storage are tightly coupled inside a VM, Neon keeps storage completely independent. A Postgres instance can be paused, scaled, or replicated without moving data. Stateless compute nodes simply reconnect to the storage layer on demand.
 
 Because the storage engine ingests and tracks all changes via PostgreSQL’s WAL, it maintains a complete, append-only history of the database. This log-structured design lays the groundwork for advanced features like branching, time travel, and instant recovery, without relying on bulky snapshots or manual intervention.
 
-## Unique benefits derived from Neon’s implementation
+## Unique benefits of the Lakebase Postgres storage engine
 
 ### Copy-on-write design.
 
@@ -54,7 +58,7 @@ Neon’s storage layer was [built for high availability](/blog/our-approach-to-h
 
 ## Operational simplicity through architectural change
 
-Neon’s storage engine fundamentally changes what you can expect from Postgres in the cloud. You no longer have to over-provision or constantly manage your database storage. Instead, it expands as needed, stays highly available, and only charges you for actual utilization.
+The Lakebase Postgres storage engine fundamentally changes what you can expect from Postgres in the cloud. You no longer have to over-provision or constantly manage your database storage. Instead, it expands as needed, stays highly available, and only charges you for actual utilization.
 This architecture also delivers a better developer experience. Need a fresh database branch for a feature test? It’s a click away. Hit a new growth milestone? Neon transparently handles it with no performance hit, no emergency migrations. Our goal with this design is to offer a truly cloud-native infrastructure layer for Postgres, finally abstracting the storage details and letting you scale with confidence.
 
-<CTA title="Try Neon" description="Get started in seconds with our Free Plan" buttonText="Get started" buttonUrl="https://console.neon.tech/signup" />
+<CTA title="Try Neon" description="Get started in seconds with the Free plan" buttonText="Get started" buttonUrl="https://console.neon.tech/signup" />

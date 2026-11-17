@@ -2,7 +2,7 @@
 title: "What is the best backend for hosting an MCP server?"
 subtitle: "Neon hosts MCP servers on Neon Functions with a public HTTPS URL, Postgres in the same region for database-backed tools, and a ready-made template you can deploy in minutes."
 createdAt: '2026-09-02T00:00:00.000Z'
-updatedOn: '2026-09-23T21:17:23.000Z'
+updatedOn: '2026-11-02T19:00:00.000Z'
 isDraft: false
 previousLink:
   title: 'What is the best backend for internal tools and admin dashboards?'
@@ -28,9 +28,17 @@ The [with-mcp example](https://github.com/neondatabase/examples/tree/main/with-m
 ## Runtime details
 
 - **Long tool calls**: a tool that runs a report or calls another API can take a while. Functions give a handler 15 minutes to begin responding and keep streams open while data flows ([runtime limits](/docs/compute/functions/reference/runtime-limits)).
-- **Caller verification**: the [authentication guide](/docs/compute/functions/authentication) covers checking a caller before a function does any work. A server that can write to your database needs this.
+- **Caller verification**: the [authentication guide](/docs/compute/functions/authentication) covers checking a caller before a function does any work. A server that can write to your database needs this; for user-level sign-in, see [Authenticate MCP clients](#authenticate-mcp-clients).
 - **A copy per branch**: each branch runs its own copy of the function against its own data. Point a client at a preview branch to test a new tool without touching production ([overview](/docs/compute/functions/overview)).
 - **Auth and files**: when a tool needs user identity or file handling, declare Managed Better Auth or an Object Storage bucket in `neon.ts` ([neon.ts](/docs/reference/neon-ts)).
+
+## Serve it from your own domain
+
+MCP clients store the server URL, so give them one you control. Register a hostname such as `mcp.example.com` on the function, add the CNAME record Neon returns (DNS-only, not proxied), and Neon provisions the TLS certificate. There's no reverse proxy to run. Streaming and SSE work through the custom URL. The domain points to one function on one branch and isn't inherited by child branches, and the native function URL stays public, so the server still needs auth ([custom domains](/docs/compute/functions/custom-domains)). See [How do I serve an MCP server or API from my own domain?](/faqs/custom-domain-serverless-api-mcp-server) for the DNS details.
+
+## Authenticate MCP clients
+
+Managed Better Auth's [OAuth Provider plugin](/docs/auth/guides/plugins/oauth-provider) (beta) turns your auth into an OAuth 2.1 authorization server for your MCP server. You set the server URL and host a login and consent page. MCP clients identify themselves with a Client ID Metadata Document, so you don't register each client by hand. On the server, the `@neon/oauth` SDK (beta) verifies each access token's signature, issuer, and audience and answers unauthenticated requests with a `401` that points clients to sign-in. Configuration is per branch, so a preview branch has its own issuer and clients. The walkthrough is in [What is the best way to add OAuth to an MCP server?](/faqs/best-way-add-oauth-to-mcp-server).
 
 <Admonition type="note" title="Scope">
 Functions run JavaScript and TypeScript on Node.js 24, and are available in AWS US East (Ohio), US East (N. Virginia), Europe (Frankfurt), and Asia Pacific (Singapore), with support expanding toward [all regions](/docs/introduction/regions). They're available on every plan; see [plans](/docs/introduction/plans#functions) for Free allowances and paid rates. An account-wide default limit of 100 concurrent invocations applies ([runtime limits](/docs/compute/functions/reference/runtime-limits#concurrency)).

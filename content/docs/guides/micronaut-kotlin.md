@@ -16,7 +16,7 @@ updatedOn: '2026-08-04T05:18:26.469Z'
 <CopyPrompt src="/prompts/micronaut-kotlin-prompt.md"
 description="Pre-built prompt for connecting Micronaut Kotlin applications to Lakebase Postgres"/>
 
-[Micronaut](https://micronaut.io/) is a modern, JVM-based, full-stack framework for building modular, easily testable microservice and serverless applications. This guide describes how to create a database on Neon and connect to it from a Micronaut Kotlin application.
+[Micronaut](https://micronaut.io/) is a JVM-based, full-stack framework for building microservice and serverless applications. This guide describes how to create a database on Neon and connect to it from a Micronaut Kotlin application.
 
 The final application will expose REST endpoints to perform CRUD (Create, Read, Update, Delete) operations on a `book` table in your Neon database.
 
@@ -44,24 +44,22 @@ Save your connection details. You will need them in a later step.
 
 You can create a new Micronaut project using either the Micronaut CLI or the [Micronaut Launch](https://launch.micronaut.io/) website.
 
-For this guide, we will use the Micronaut CLI.
+This guide uses the Micronaut CLI.
 
-> Install the Micronaut CLI by following the instructions in the [Micronaut documentation](https://micronaut.io/download/). You also need to have JDK 21 installed on your machine.
+> Install the Micronaut CLI by following the instructions in the [Micronaut documentation](https://micronaut.io/download/). The Micronaut 5 CLI runs on JDK 25 (it fails on older JDKs such as 17). The application you create targets JDK 21, so install JDK 21 as well.
 
-Run the following command in your terminal. This command creates a new application and includes features for PostgreSQL connectivity, JDBC connection pooling (Hikari), database migrations (Flyway), data access, and YAML configuration.
+Run the following command in your terminal. This command creates a new application and includes features for Postgres connectivity, JDBC connection pooling (Hikari), database migrations (Flyway), data access, and YAML configuration. The `com.example.` prefix sets the base package to `com.example`, which the code in this guide uses. Without a prefix, the CLI derives a different package from the app name, and Micronaut doesn't find classes in `com.example`.
 
 ```bash
-mn create-app with-micronaut-kotlin \
+mn create-app com.example.with-micronaut-kotlin \
   --lang=kotlin \
   --jdk=21 \
   --features=postgres,jdbc-hikari,flyway,data-jdbc,yaml
 ```
 
-After creating the project, open the `build.gradle.kts` file and add the following configuration inside the `kotlin` block to ensure compatibility with JDK 21 and prevent potential build errors:
+After creating the project, open the `build.gradle.kts` file and add the following block at the top level of the file (the generated file doesn't include a `kotlin` block) so the build uses JDK 21:
 
-```kotlin
-// build.gradle.kts
-
+```kotlin filename="build.gradle.kts"
 kotlin {
     jvmToolchain(21)
 }
@@ -81,9 +79,9 @@ micronaut:
     name: with-micronaut-kotlin
 datasources:
   default:
-    url: 'jdbc:postgresql://<your-endpoint.neon.tech>/<dbname>?sslmode=require&channelBinding=require'
-    username: '<your-db-username>'
-    password: '<your-db-password>'
+    url: 'jdbc:postgresql://[neon_hostname]/[dbname]?sslmode=require&channelBinding=require'
+    username: '[user]'
+    password: '[password]'
     driver-class-name: org.postgresql.Driver
     db-type: postgres
     dialect: POSTGRES
@@ -93,7 +91,7 @@ flyway:
       enabled: true
 ```
 
-> Replace `<your-endpoint.neon.tech>`, `<dbname>`, `<your-db-username>`, and `<your-db-password>` with your actual Neon database connection details you saved earlier.
+> Replace `[neon_hostname]`, `[dbname]`, `[user]`, and `[password]` with the connection details you saved earlier. JDBC takes the host and database in the URL and the user and password as separate settings, and writes `channel_binding` as `channelBinding`.
 
 ## Build the application components
 
@@ -219,7 +217,7 @@ You are now ready to run your application.
     15:48:45.975 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
     15:48:46.126 [main] INFO  i.m.flyway.AbstractFlywayMigration - Running migrations for database with qualifier [default]
     15:48:46.298 [main] INFO  org.flywaydb.core.FlywayExecutor - Database: jdbc:postgresql://endpoint.neon.tech/examples?sslmode=require&channelBinding=require (PostgreSQL 17.5)
-    15:48:48.110 [main] INFO  o.f.c.i.s.JdbcTableSchemaHistory - Schema history table "public"."flyway_schema_history" does not exist yetn
+    15:48:48.110 [main] INFO  o.f.c.i.s.JdbcTableSchemaHistory - Schema history table "public"."flyway_schema_history" does not exist yet
     15:48:48.250 [main] INFO  o.f.core.internal.command.DbValidate - Successfully validated 1 migration (execution time 00:00.432s)
     15:48:49.524 [main] INFO  o.f.c.i.s.JdbcTableSchemaHistory - Creating Schema History table "public"."flyway_schema_history" ...
     15:48:51.817 [main] INFO  o.f.core.internal.command.DbMigrate - Current version of schema "public": << Empty Schema >>
@@ -259,14 +257,14 @@ You are now ready to run your application.
     # Expected Output: {"id":3,"title":"The Great Gatsby","author":"F. Scott Fitzgerald"}
     ```
 
-You have successfully connected a Micronaut Kotlin application to your Lakebase Postgres database!
+Your Micronaut Kotlin application is now connected to your Lakebase Postgres database.
 
 </Steps>
 
 ## Resources
 
 - [Micronaut Documentation](https://docs.micronaut.io/)
-- [Micronaut API Reference](https://docs.micronaut.io/4.10.7/api/)
+- [Micronaut API Reference](https://docs.micronaut.io/latest/api/)
 - [Micronaut Schema Migration with Flyway](https://guides.micronaut.io/latest/micronaut-flyway-maven-java.html)
 - [Micronaut Data JDBC documentation](https://micronaut-projects.github.io/micronaut-data/latest/guide/index.html#jdbc)
 - [Micronaut Hikari JDBC Connection Pool documentation](https://micronaut-projects.github.io/micronaut-sql/latest/guide/index.html#jdbc)

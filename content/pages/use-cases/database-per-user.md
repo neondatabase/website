@@ -3,6 +3,13 @@ title: Database per User
 subtitle: Provision isolated Postgres at massive scale
 summary: Covers how to embed one isolated Postgres database per end user with Neon, using API-first provisioning, independent scaling, and project-level quotas for sustainable platform growth.
 enableTableOfContents: true
+seo:
+  title: 'Database per User: Provision Postgres via API in About a Second | Neon'
+  description: >-
+    Embed one isolated Postgres database per end user. Neon projects provision
+    in about a second, resume from idle in under a second, and take per-project
+    quotas for compute, storage, and data transfer that map to your own pricing
+    tiers.
 updatedOn: '2026-02-13T00:00:00.000Z'
 ---
 

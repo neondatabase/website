@@ -16,11 +16,12 @@
 | [`RawLiveQuerySubscription`](#client-rawlivequerysubscription)                   | Interface  | A live-query subscription that exposes ordered raw result updates.                                                                                                                                                                                                                                                                                                                                                         |
 | [`RealtimeClient`](#client-realtimeclient)                                       | Interface  | A client that multiplexes independently disposable subscriptions.                                                                                                                                                                                                                                                                                                                                                          |
 | [`RealtimeClientOptions`](#client-realtimeclientoptions)                         | Interface  | Configuration for a reusable Realtime browser client.                                                                                                                                                                                                                                                                                                                                                                      |
-| [`LiveQueryChange`](#client-livequerychange)                                     | Type alias | A row upsert or removal in an atomic publication batch.                                                                                                                                                                                                                                                                                                                                                                    |
+| [`WebSocketLike`](#client-websocketlike)                                         | Interface  | Minimal WebSocket contract used by the Realtime client.                                                                                                                                                                                                                                                                                                                                                                    |
+| [`LiveQueryChange`](#client-livequerychange)                                     | Type alias | A row upsert, removal, or sequential move in an atomic publication batch.                                                                                                                                                                                                                                                                                                                                                  |
 | [`LiveQuerySnapshot`](#client-livequerysnapshot)                                 | Type alias | Materialized query rows paired with their atomic lifecycle state.                                                                                                                                                                                                                                                                                                                                                          |
 | [`LiveQueryState`](#client-livequerystate)                                       | Type alias | Atomic lifecycle state for a live-query subscription.                                                                                                                                                                                                                                                                                                                                                                      |
 | [`PostgreSQLBytesParser`](#client-postgresqlbytesparser)                         | Type alias | A parser for PostgreSQL `bytea`, transported as decoded bytes.                                                                                                                                                                                                                                                                                                                                                             |
-| [`PostgreSQLParserForOid`](#client-postgresqlparserforoid)                       | Type alias | Parser input selected by the fixed Realtime protocol v1 OID/codec mapping.                                                                                                                                                                                                                                                                                                                                                 |
+| [`PostgreSQLParserForOid`](#client-postgresqlparserforoid)                       | Type alias | Parser input selected by the fixed Realtime OID/codec mapping.                                                                                                                                                                                                                                                                                                                                                             |
 | [`PostgreSQLParsers`](#client-postgresqlparsers)                                 | Type alias | A sparse collection of result parsers keyed by PostgreSQL type OID.                                                                                                                                                                                                                                                                                                                                                        |
 | [`PostgreSQLTextParser`](#client-postgresqltextparser)                           | Type alias | A parser for a PostgreSQL value transported with the `pg_text` codec.                                                                                                                                                                                                                                                                                                                                                      |
 | [`RawLiveQueryUpdate`](#client-rawlivequeryupdate)                               | Type alias | One authoritative raw query-result update. `rows` replaces the complete preceding result and invalidates its row-ID namespace. `changes` applies incrementally to the current result.                                                                                                                                                                                                                                      |
@@ -28,6 +29,7 @@
 | [`RealtimeLogEvent`](#client-realtimelogevent)                                   | Type alias | Stable name for one client diagnostic event.                                                                                                                                                                                                                                                                                                                                                                               |
 | [`RealtimeLogger`](#client-realtimelogger)                                       | Type alias | Receives structured Realtime client diagnostics.                                                                                                                                                                                                                                                                                                                                                                           |
 | [`RealtimeLogLevel`](#client-realtimeloglevel)                                   | Type alias | Client-side diagnostic verbosity.                                                                                                                                                                                                                                                                                                                                                                                          |
+| [`WebSocketFactory`](#client-websocketfactory)                                   | Type alias | Create a WebSocket-compatible transport for the Realtime client.                                                                                                                                                                                                                                                                                                                                                           |
 | [`nodePostgresParsers`](#client-nodepostgresparsers)                             | Variable   | Core result parsers matching familiar node-postgres/Neon Serverless values. Less-common and unknown OIDs are intentionally absent and fall back to their exact PostgreSQL text. Known built-in array OIDs are decoded recursively by the client using the active parser for their element OID.                                                                                                                             |
 | [`pgTypeOids`](#client-pgtypeoids)                                               | Variable   | Stable PostgreSQL type OIDs used by the built-in Realtime parsers.                                                                                                                                                                                                                                                                                                                                                         |
 | [`postgresJsParsers`](#client-postgresjsparsers)                                 | Variable   | Parsers that differ from the core defaults when matching Postgres.js. Spread this partial preset into the client's `parsers` option.                                                                                                                                                                                                                                                                                       |
@@ -185,10 +187,10 @@ Options for the default materialized subscription.
 
 #### Members (#client-materializedlivequeryoptions-members)
 
-| Name           | Type             | Description                                                          |
-| -------------- | ---------------- | -------------------------------------------------------------------- |
-| `initialData?` | `readonly Row[]` | Preloaded rows exposed while connecting to the authoritative result. |
-| `materialize?` | `readonly true`  | Select materialization; omitted and `true` are equivalent.           |
+| Name           | Type             | Description                                                                                                                                                                                                             |
+| -------------- | ---------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `initialData?` | `readonly Row[]` | Preloaded rows exposed while connecting to the authoritative result. Supply decoded rows matching the live result, restoring any values changed by transport serialization (for example, JSON date strings) beforehand. |
+| `materialize?` | `readonly true`  | Select materialization; omitted and `true` are equivalent.                                                                                                                                                              |
 
 ### MaterializedLiveQuerySubscription (#client-materializedlivequerysubscription)
 
@@ -471,15 +473,15 @@ A client that multiplexes independently disposable subscriptions.
 
 #### Members (#client-realtimeclient-members)
 
-| Name                                           | Type                                                                                                                                                                                                                            | Description                                                        |
-| ---------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------ |
-| `close`                                        | `() => void`                                                                                                                                                                                                                    | Permanently close all subscriptions and the underlying WebSocket.  |
-| [`subscribe`](#client-realtimeclientsubscribe) | `<Row>(query: SealedLiveQuery<Row>, options?: MaterializedLiveQueryOptions<Row>) => MaterializedLiveQuerySubscription<Row> & <Row>(query: SealedLiveQuery<Row>, options: RawLiveQueryOptions) => RawLiveQuerySubscription<Row>` | Start a materialized subscription, optionally with preloaded rows. |
+| Name                                           | Type                                                                                                                                                                                                                                           | Description                                                        |
+| ---------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------ |
+| `close`                                        | `() => void`                                                                                                                                                                                                                                   | Permanently close all subscriptions and the underlying WebSocket.  |
+| [`subscribe`](#client-realtimeclientsubscribe) | `<Row>(query: SealedLiveQuery<Row>, options?: MaterializedLiveQueryOptions<NoInferCompat<Row>>) => MaterializedLiveQuerySubscription<Row> & <Row>(query: SealedLiveQuery<Row>, options: RawLiveQueryOptions) => RawLiveQuerySubscription<Row>` | Start a materialized subscription, optionally with preloaded rows. |
 
 #### RealtimeClient.subscribe (#client-realtimeclientsubscribe)
 
 ```ts
-subscribe<Row>(query: SealedLiveQuery<Row>, options?: MaterializedLiveQueryOptions<Row>): MaterializedLiveQuerySubscription<Row>
+subscribe<Row>(query: SealedLiveQuery<Row>, options?: MaterializedLiveQueryOptions<NoInferCompat<Row>>): MaterializedLiveQuerySubscription<Row>
 ```
 
 Start a materialized subscription, optionally with preloaded rows.
@@ -490,10 +492,10 @@ Start a materialized subscription, optionally with preloaded rows.
 
 **Parameters**
 
-| Name       | Type                                | Description                                                 |
-| ---------- | ----------------------------------- | ----------------------------------------------------------- |
-| `query`    | `SealedLiveQuery<Row>`              | Short-lived capability returned by the application backend. |
-| `options?` | `MaterializedLiveQueryOptions<Row>` | Materialization and optional preloaded-row settings.        |
+| Name       | Type                                               | Description                                                 |
+| ---------- | -------------------------------------------------- | ----------------------------------------------------------- |
+| `query`    | `SealedLiveQuery<Row>`                             | Short-lived capability returned by the application backend. |
+| `options?` | `MaterializedLiveQueryOptions<NoInferCompat<Row>>` | Materialization and optional preloaded-row settings.        |
 
 ```ts
 subscribe<Row>(query: SealedLiveQuery<Row>, options: RawLiveQueryOptions): RawLiveQuerySubscription<Row>
@@ -522,20 +524,39 @@ Configuration for a reusable Realtime browser client.
 
 #### Members (#client-realtimeclientoptions-members)
 
-| Name        | Type                                                                                                                  | Description                                                                                                                                                                                                                                    |
-| ----------- | --------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `logger?`   | `readonly RealtimeLogger`                                                                                             | Structured diagnostic sink. It is called only for events enabled by `logLevel`; exceptions from the sink are ignored.                                                                                                                          |
-| `logLevel?` | `readonly RealtimeLogLevel`                                                                                           | Minimum client diagnostic level. The default, `silent`, emits nothing. When enabled without `logger`, entries are written to `console`.                                                                                                        |
-| `parsers?`  | `readonly Readonly<Record<number, PostgreSQLBytesParser<unknown> \| PostgreSQLTextParser<unknown>> & BuiltInParsers>` | PostgreSQL result parsers keyed by type OID. These entries override [`nodePostgresParsers`](/docs/realtime/sdks/typescript#client-nodepostgresparsers). The client snapshots the object when it is created, so later mutations have no effect. |
-| `url`       | `readonly string`                                                                                                     | Realtime proxy WebSocket URL, using `wss:` outside local development.                                                                                                                                                                          |
+| Name                | Type                                                                                                                  | Description                                                                                                                                                                                                                                                  |
+| ------------------- | --------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `logger?`           | `readonly RealtimeLogger`                                                                                             | Structured diagnostic sink. It is called only for events enabled by `logLevel`; exceptions from the sink are ignored. Server-issued client warnings do not use this sink.                                                                                    |
+| `logLevel?`         | `readonly RealtimeLogLevel`                                                                                           | Minimum client diagnostic level. The default, `silent`, emits no structured diagnostics. Server-issued client warnings are always written to `console.error` independently of this setting. When enabled without `logger`, entries are written to `console`. |
+| `parsers?`          | `readonly Readonly<Record<number, PostgreSQLBytesParser<unknown> \| PostgreSQLTextParser<unknown>> & BuiltInParsers>` | PostgreSQL result parsers keyed by type OID. These entries override [`nodePostgresParsers`](/docs/realtime/sdks/typescript#client-nodepostgresparsers). The client snapshots the object when it is created, so later mutations have no effect.               |
+| `url`               | `readonly string`                                                                                                     | Realtime proxy WebSocket URL, using `wss:` outside local development.                                                                                                                                                                                        |
+| `webSocketFactory?` | `readonly WebSocketFactory`                                                                                           | Override how the client creates its WebSocket. This is primarily useful in runtimes such as React Native, whose WebSocket constructor accepts platform-specific connection options. In browsers, omit this option to use the built-in WebSocket constructor. |
+
+### WebSocketLike (#client-websocketlike)
+
+```ts
+interface WebSocketLike
+```
+
+Minimal WebSocket contract used by the Realtime client.
+
+#### Members (#client-websocketlike-members)
+
+| Name               | Type                                                                                                                                                                                                                              | Description                                                            |
+| ------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------- |
+| `readyState`       | `readonly number`                                                                                                                                                                                                                 |                                                                        |
+| `addEventListener` | `(type: "open", listener: () => void) => void & (type: "message", listener: (event: { readonly data: unknown }) => void) => void & (type: "close", listener: () => void) => void & (type: "error", listener: () => void) => void` |                                                                        |
+| `close`            | `(code?: number, reason?: string) => void`                                                                                                                                                                                        |                                                                        |
+| `send`             | `(data: string) => void`                                                                                                                                                                                                          |                                                                        |
+| `terminate?`       | `() => void`                                                                                                                                                                                                                      | Immediately destroy the transport when the implementation supports it. |
 
 ### LiveQueryChange (#client-livequerychange)
 
 ```ts
-type LiveQueryChange<Row> = { readonly row: Row; readonly rowId: string; readonly type: "upsert" } | { readonly rowId: string; readonly type: "remove" }
+type LiveQueryChange<Row> = { readonly row: Row; readonly rowId: string; readonly type: "upsert" } | { readonly rowId: string; readonly type: "remove" } | { readonly afterRowId: string | null; readonly rowId: string; readonly type: "move" }
 ```
 
-A row upsert or removal in an atomic publication batch.
+A row upsert, removal, or sequential move in an atomic publication batch.
 
 ### LiveQuerySnapshot (#client-livequerysnapshot)
 
@@ -567,7 +588,7 @@ A parser for PostgreSQL `bytea`, transported as decoded bytes.
 type PostgreSQLParserForOid<Oid extends number> = Oid extends typeof pgTypeOids.bytea ? PostgreSQLBytesParser : PostgreSQLTextParser
 ```
 
-Parser input selected by the fixed Realtime protocol v1 OID/codec mapping.
+Parser input selected by the fixed Realtime OID/codec mapping.
 
 ### PostgreSQLParsers (#client-postgresqlparsers)
 
@@ -629,6 +650,14 @@ type RealtimeLogLevel = "silent" | "error" | "warn" | "info" | "debug"
 ```
 
 Client-side diagnostic verbosity.
+
+### WebSocketFactory (#client-websocketfactory)
+
+```ts
+type WebSocketFactory = (url: string, protocols: string | string[]) => WebSocketLike
+```
+
+Create a WebSocket-compatible transport for the Realtime client.
 
 ### nodePostgresParsers (#client-nodepostgresparsers)
 

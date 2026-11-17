@@ -9,7 +9,7 @@ excerpt: >-
   The app got attention on HackerNews and Twitter, resulting in 5,000+ visitors
   and 2,500+ submissions. If you haven’t had a...
 date: '2023-08-25T14:54:35'
-updatedOn: '2024-01-24T22:21:27'
+updatedOn: '2026-11-06T12:00:00.000Z'
 category: community
 categories:
   - community
@@ -35,6 +35,10 @@ seo:
 ---
 
 ![Post image](https://cdn.neonapi.io/public/images/pages/blog/semantic-search/image-6-73bc1d13.png)
+
+<Admonition type="important" title="Use pgvector instead of pg_embedding">
+Neon stopped developing pg_embedding in 2023, and it's no longer one of Neon's [supported extensions](/docs/extensions/pg-extensions). Use [pgvector](/docs/extensions/pgvector) for vector search, or [Lakebase Search](/docs/ai/lakebase-search-get-started), a set of Postgres extensions for vector, BM25, and hybrid search in Lakebase Postgres.
+</Admonition>
 
 A few weeks back, we published an AI-powered app where you can submit an idea for a startup and get a list of similar companies [YCombinator](https://www.google.com/url?q=https://ycombinator.com/&sa=D&source=editors&ust=1692973719736459&usg=AOvVaw0ozJ64gLXNprdZ3egLgAFh) has invested in. The app got attention on HackerNews and Twitter, resulting in 5,000+ visitors and 2,500+ submissions.
 

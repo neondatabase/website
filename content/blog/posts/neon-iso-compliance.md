@@ -70,4 +70,4 @@ At Neon, we go beyond the basics of compliance, with a comprehensive portfolio t
 
 As we celebrate this milestone, we remain focused on continuous improvement and staying at the forefront of security and privacy. In 2025, we’ll be working toward achieving **HIPAA compliance**, further strengthening our platform’s ability to handle sensitive healthcare data. This means not just maintaining our existing certifications but always striving for more robust and secure ways to protect your data.
 
-For more information about our security practices or to request certifications, visit our trust page at [trust.neon.tech](https://trust.neon.tech/).
+For more information about our security practices or to request certifications, visit our trust page at [trust.neon.com](https://trust.neon.com/).

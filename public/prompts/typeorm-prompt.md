@@ -28,12 +28,12 @@ When this prompt is triggered, automatically configure the open project as follo
 
 ### 2. Ensure Required Packages are Installed
 
-- Verify that all necessary packages are installed. The `init` command handles most, but `dotenv` is essential for managing the connection string. Run the installation command to ensure all dependencies are present.
+- Verify that all necessary packages are installed. `typeorm init` does not install `pg` (TypeORM fails with `DriverPackageNotInstalledError` without it) or `dotenv`. Run the installation command to ensure all dependencies are present.
   ```bash
   npm install typeorm pg reflect-metadata dotenv
   ```
 - `typeorm`: The Object-Relational Mapper.
-- `pg`: The PostgreSQL database driver that TypeORM uses.
+- `pg`: The Postgres driver that TypeORM uses.
 - `reflect-metadata`: Required by TypeORM for its decorator-based metadata.
 - `dotenv`: To load environment variables from a `.env` file.
 
@@ -60,7 +60,8 @@ When this prompt is triggered, automatically configure the open project as follo
   ```
   # Get your connection string from the Neon Console
   # Project -> Dashboard -> Connect
-  DATABASE_URL="postgresql://<user>:<password>@<hostname>.neon.tech/<dbname>?sslmode=require"
+  # pg 8.23+ warns on sslmode=require; sslmode=verify-full keeps the same behavior without the warning
+  DATABASE_URL="postgresql://[user]:[password]@[neon_hostname]/[dbname]?sslmode=verify-full&channel_binding=require"
   ```
 
 ### 5. Update TypeORM `DataSource` Configuration
@@ -129,7 +130,7 @@ export const AppDataSource = new DataSource({
 Once setup is complete, verify the connection:
 
 1.  **Create a verification script:** Create a file named `verify-connection.ts` with the following content to test the database connection.
-    ```typescript title="verify-connection.ts"
+    ```typescript filename="verify-connection.ts"
     import "reflect-metadata";
     import { AppDataSource } from "./src/data-source"; // Adjust path if necessary
 
@@ -140,7 +141,7 @@ Once setup is complete, verify the connection:
 
         const result = await AppDataSource.query("SELECT version()");
         console.log("Successfully connected to Neon!");
-        console.log("PostgreSQL version:", result[0].version);
+        console.log("Postgres version:", result[0].version);
 
         await AppDataSource.destroy();
         console.log("Data Source has been destroyed successfully.");
@@ -156,7 +157,7 @@ Once setup is complete, verify the connection:
     ```bash
     npx ts-node verify-connection.ts
     ```
-3.  A successful run will print the PostgreSQL version from their Neon database.
+3.  A successful run will print the Postgres version from their Neon database.
 
 ---
 

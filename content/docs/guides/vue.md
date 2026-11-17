@@ -16,7 +16,7 @@ Lakebase Postgres should be accessed from the server side in Vue.js applications
 
 ## Vue Meta-Frameworks
 
-Find detailed instructions for connecting to Neon from various Vue.js meta-frameworks.
+Find detailed instructions for connecting to Neon from Vue.js meta-frameworks.
 
 <TechCards>
 

@@ -6,12 +6,16 @@ import { useSyncExternalStore } from 'react';
 import PauseableVideo from 'components/shared/pauseable-video';
 
 const MOBILE_QUERY = '(max-width: 767px)';
+const REDUCED_MOTION_QUERY = '(prefers-reduced-motion: reduce)';
 const subscribe = (callback) => {
-  const query = window.matchMedia(MOBILE_QUERY);
-  query.addEventListener('change', callback);
-  return () => query.removeEventListener('change', callback);
+  const queries = [MOBILE_QUERY, REDUCED_MOTION_QUERY].map((query) => window.matchMedia(query));
+  queries.forEach((query) => query.addEventListener('change', callback));
+  return () => queries.forEach((query) => query.removeEventListener('change', callback));
 };
-const getSnapshot = () => window.matchMedia(MOBILE_QUERY).matches;
+const getSnapshot = () => {
+  if (!window.matchMedia(MOBILE_QUERY).matches) return 'desktop';
+  return window.matchMedia(REDUCED_MOTION_QUERY).matches ? 'still' : 'video';
+};
 const getServerSnapshot = () => null;
 
 const GlobeAnimation = dynamic(() => import('./globe-animation'), {
@@ -20,10 +24,10 @@ const GlobeAnimation = dynamic(() => import('./globe-animation'), {
 });
 
 const Globe = () => {
-  const isMobile = useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
+  const mode = useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
 
-  if (isMobile === null) return <div className="size-full" aria-hidden="true" />;
-  if (!isMobile) return <GlobeAnimation />;
+  if (mode === null) return <div className="size-full" aria-hidden="true" />;
+  if (mode === 'desktop') return <GlobeAnimation />;
 
   return (
     <PauseableVideo
@@ -31,6 +35,7 @@ const Globe = () => {
       videoClassName="size-full scale-[1.35] object-cover object-center"
       width={1000}
       height={1000}
+      paused={mode === 'still'}
     >
       <source
         src="https://cdn.neonapi.io/public/images/pages/home/scale-your-app/globe.webm"

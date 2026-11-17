@@ -70,10 +70,10 @@ Now, let's prepare a development database in Neon by creating a development bran
 
 To create a branch:
 
-1. In the Neon Console, select **Branches** in the sidebar. You will see your `production` branch, where you just created your `blog` database and tables.
+1. In the Neon Console, select **Branches** in the sidebar. You will see your `main` branch, where you just created your `blog` database and tables.
 2. Click **New Branch** to open the branch creation dialog.
 3. Enter a name for the branch. Let's call it `feature/blog-schema`.
-4. Leave `production` selected as the parent branch. This is where you created the `blog` database.
+4. Leave `main` selected as the parent branch. This is where you created the `blog` database.
 5. Leave the remaining default settings. Creating a branch from **Head** creates a branch with the latest data, and a compute is required to connect to the database on the branch.
 6. Click **Create Branch** to create your branch.
 
@@ -91,7 +91,7 @@ The target database is the database on your `feature/blog-schema` branch where y
    postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/blog?sslmode=require&channel_binding=require
    ```
 
-2. Select the `production` branch, the `blog` database, and copy the connection string.
+2. Select the `main` branch, the `blog` database, and copy the connection string.
 
    ```bash shouldWrap
    postgresql://alex:AbC123dEf@ep-silent-hill-85675036.us-east-2.aws.neon.tech/blog?sslmode=require&channel_binding=require
@@ -127,7 +127,7 @@ The `liquibase.properties` file defines the location of the Liquibase changelog 
    liquibase.command.password: AbC123dEf
    ```
 
-4. Change the source database settings to the correct values for the `blog` database on your `production` branch. The username and password will be the same as your `feature/blog-schema` branch, but make sure to use the right hostname. Copy the snippet below and replace the hostname (`ep-silent-hill-85675036.us-east-2.aws.neon.tech`), username, and password for your own.
+4. Change the source database settings to the correct values for the `blog` database on your `main` branch. The username and password will be the same as your `feature/blog-schema` branch, but make sure to use the right hostname. Copy the snippet below and replace the hostname (`ep-silent-hill-85675036.us-east-2.aws.neon.tech`), username, and password for your own.
 
    ```bash shouldWrap
    liquibase.command.referenceUrl: jdbc:postgresql://ep-silent-hill-85675036.us-east-2.aws.neon.tech:5432/blog
@@ -358,8 +358,10 @@ Liquibase command 'updateSql' was executed successfully.
 You can also run a `diff` command to compare your source and target databases.
 
 ```bash shouldWrap
-liquibase --referenceUrl=jdbc:postgresql://ep-cool-darkness-123456.us-east-2.aws.neon.tech:5432/blog --referenceUsername alex --referencePassword IwMdnTs1R6kH diff
+liquibase --url=jdbc:postgresql://ep-silent-hill-85675036.us-east-2.aws.neon.tech:5432/blog --referenceUrl=jdbc:postgresql://ep-cool-darkness-123456.us-east-2.aws.neon.tech:5432/blog --referenceUsername=alex --referencePassword=AbC123dEf diff
 ```
+
+The `--url` flag sets the comparison database, which is your source database on `main`. The `--referenceUrl` flag sets the reference database, which is your target database on `feature/blog-schema`. Your `liquibase.properties` file sets `url` to the target database, so pass `--url` explicitly here. Otherwise, both sides of the comparison point to the same database.
 
 <details>
 <summary>Command output</summary>
@@ -381,26 +383,26 @@ Product Version: EQUAL
 Missing Catalog(s): NONE
 Unexpected Catalog(s): NONE
 Changed Catalog(s): NONE
-Missing Column(s): NONE
-Unexpected Column(s):
+Missing Column(s):
      public.comments.author_id
      public.comments.comment
      public.comments.comment_id
      public.comments.commented_date
      public.comments.post_id
+Unexpected Column(s): NONE
 Changed Column(s): NONE
-Missing Foreign Key(s): NONE
-Unexpected Foreign Key(s):
+Missing Foreign Key(s):
      fk_comments_author_id(comments[author_id] -> authors[author_id])
      fk_comments_post_id(comments[post_id] -> posts[post_id])
+Unexpected Foreign Key(s): NONE
 Changed Foreign Key(s): NONE
-Missing Index(s): NONE
-Unexpected Index(s):
+Missing Index(s):
      comments_pkey UNIQUE  ON public.comments(comment_id)
+Unexpected Index(s): NONE
 Changed Index(s): NONE
-Missing Primary Key(s): NONE
-Unexpected Primary Key(s):
+Missing Primary Key(s):
      comments_pkey on public.comments(comment_id)
+Unexpected Primary Key(s): NONE
 Changed Primary Key(s): NONE
 Missing Schema(s): NONE
 Unexpected Schema(s): NONE
@@ -408,9 +410,9 @@ Changed Schema(s): NONE
 Missing Sequence(s): NONE
 Unexpected Sequence(s): NONE
 Changed Sequence(s): NONE
-Missing Table(s): NONE
-Unexpected Table(s):
+Missing Table(s):
      comments
+Unexpected Table(s): NONE
 Changed Table(s): NONE
 Missing Unique Constraint(s): NONE
 Unexpected Unique Constraint(s): NONE
@@ -425,7 +427,7 @@ Liquibase command 'diff' was executed successfully.
 
 ### Save your changelog to source control
 
-When you are satisfied with the changes that will be applied, save your changelog to source control, such as a GitHub repository where you or your team stores you changelog.
+When you are satisfied with the changes that will be applied, save your changelog to source control, such as a GitHub repository where you or your team stores your changelog.
 
 ### Apply the changeset to your source database
 
@@ -459,7 +461,7 @@ Liquibase command 'update' was executed successfully.
 
 </details>
 
-To ensure that all changes have been applied to the production database, you can rerun the `status`, `updatedSql`, and `diff` commands you ran above. After applying the change, there should be no differences. You can also check your databases in the **Tables** view in the Neon Console to verify that the source database now has a `comments` table.
+To ensure that all changes have been applied to the production database, you can rerun the `status`, `updateSQL`, and `diff` commands you ran above. After applying the change, there should be no differences. You can also check your databases in the **Tables** view in the Neon Console to verify that the source database now has a `comments` table.
 
 <Admonition type="note">
 When you run a changeset for the first time on the source database, you will find that Liquibase automatically creates the [databasechangelog](https://docs.liquibase.com/concepts/tracking-tables/databasechangelog-table.html) and [databasechangeloglock](https://docs.liquibase.com/concepts/tracking-tables/databasechangeloglock-table.html) tracking tables that were created in your development database. These tracking tables are created on any database where you apply changesets.

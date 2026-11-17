@@ -27,8 +27,7 @@ const neon = neonClient(apiKey);
 
 if (cmd === "list") {
   // `list()` is cursor-paginated; `.all()` concatenates every page.
-  const { data: branches, error } = await neon.branches.list(projectId).all();
-  if (error) throw error;
+  const branches = await neon.branches.list({ projectId }).all();
   console.log(
     JSON.stringify(
       branches.map((b) => ({
@@ -52,7 +51,8 @@ if (cmd === "create") {
   const parentId =
     process.env.NEON_PARENT_BRANCH_ID?.trim() ||
     (await getProductionBranchId(neon, projectId));
-  const branch = await neon.branches.create(projectId, {
+  const branch = await neon.branches.create({
+    projectId,
     name: branchName,
     parent_id: parentId,
   });

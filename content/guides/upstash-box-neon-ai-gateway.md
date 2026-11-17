@@ -19,7 +19,7 @@ In this guide, you'll build a TypeScript CLI that connects these components into
 
 Before you begin, make sure you have the following:
 
-- **A Neon account on a paid plan:** The AI Gateway requires the Launch or Scale plan. Sign up at [console.neon.tech](https://console.neon.tech/signup) if you don't have an account. See [Neon plans](/docs/introduction/plans).
+- **A Neon account with AI Gateway credits:** The AI Gateway needs [prepaid credits](/docs/ai-gateway/prepaid-credits), which you can buy on any plan, including Free. Sign up at [console.neon.tech](https://console.neon.tech/signup) if you don't have an account.
 - **AI Gateway prepaid credits:** Buy at least $5 on the **Billing** page in the Neon Console: open the **AI gateway credits** card and select **Add credits**. See [AI Gateway prepaid credits](/docs/ai-gateway/prepaid-credits).
 - **An Upstash account:** Create one in the [Upstash Console](https://console.upstash.com/box).
 - **The GitHub CLI, authenticated:** Install the [GitHub CLI](https://cli.github.com/) and run `gh auth login`.

@@ -2,8 +2,7 @@
 title: Integrating with Neon
 subtitle: Choose the right integration path for your platform or application
 summary: >-
-  Neon platform integration overview compares four embedding and partnership
-  paths: AI Agents, Claimable Database, Embedded Postgres, and OAuth. Use this
+  Neon integration overview compares four embedding and partnership paths: AI Agents, Claimable Database, Embedded Postgres, and OAuth. Use this
   page to decide which approach fits your product before reading the individual
   integration guides. Real-world implementations include TanStack Vite plugin,
   Netlify DB, and Hasura Cloud.
@@ -62,7 +61,7 @@ Use this approach when you want to create databases for your users without requi
 
 - Instant database provisioning with no user signup required
 - 72-hour database lifespan if not claimed
-- Seamless ownership transfer when users are ready
+- Ownership transfer when users are ready
 - Claiming moves the project into the user's organization. neon.new keeps the connection string; Claimable Neon rotates `DATABASE_URL`
 - Configurable transfer request expiration
 
@@ -99,7 +98,7 @@ Use the embedded Postgres approach when you want to provision and manage Postgre
 
 **Key features:**
 
-- Instant database provisioning (< 1 second)
+- Project creation through the API returns in under a second
 - Complete data isolation per user
 - Scale-to-zero for cost efficiency
 - Configure consumption limits per user
@@ -144,7 +143,7 @@ Use OAuth when you're building a tool or service that connects to existing Neon 
 
 **Example implementation:**
 
-- [Hasura Cloud](https://hasura.io/): Uses OAuth to seamlessly authenticate users and provision Neon databases from Hasura projects
+- [Hasura Cloud](https://hasura.io/): Uses OAuth to authenticate users and provision Neon databases from Hasura projects
 
 <DetailIconCards>
 
@@ -167,7 +166,7 @@ If you're interested, first [register as a Databricks partner](https://www.datab
 
 Even if you're not pursuing the program, the [Built-On Neon reference architecture](https://databrickslabs.github.io/partner-architecture/built-on/neon) is a useful guide for designing database-per-tenant provisioning, scaling, connectivity, and metering. For requirements and the nomination process, see [Built-On Neon validation](https://databrickslabs.github.io/partner-architecture/built-on/neon/validation).
 
-## Still not sure?
+## Choose a path
 
 If you're uncertain which path is right for you, here's a quick decision tree:
 
@@ -184,8 +183,6 @@ If you're uncertain which path is right for you, here's a quick decision tree:
    → Use [OAuth integration](/docs/guides/oauth-integration)
 
 ## Get help
-
-We're here to support you through every step of your integration.
 
 <DetailIconCards>
 

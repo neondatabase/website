@@ -19,7 +19,7 @@ updatedOn: '2026-09-23T21:49:37.670Z'
 Neon provides [Managed Better Auth](/docs/auth/overview), a managed authentication service built on Better Auth that stores users, sessions, and auth configuration directly in your Neon database. Auth state **branches with your data**, so preview and CI environments get isolated users and sessions.
 </Admonition>
 
-User authentication is a critical requirement for web applications. Modern applications require advanced features like social login and multi-factor authentication besides the regular login flow. Additionally, managing personally identifiable information (PII) requires a secure solution compliant with data protection regulations.
+User authentication is a core requirement for web applications. Users expect more than a basic login form, such as social login and multi-factor authentication. Additionally, managing personally identifiable information (PII) requires a secure solution compliant with data protection regulations.
 
 <Admonition type="note">
 Looking to manage **authorization** along with authentication? The [Neon Data API](/docs/data-api/custom-authentication-providers) validates Clerk JWTs and enforces Row-Level Security (RLS) policies directly in Postgres, so you can manage access at the database level.
@@ -54,11 +54,11 @@ Now, navigate to the project directory and install the required dependencies:
 
 ```bash
 npm install @neondatabase/serverless drizzle-orm
-npm install -D drizzle-kit dotenv
+npm install -D drizzle-kit
 npm install @clerk/nextjs
 ```
 
-We use the `@neondatabase/serverless` package as the Postgres client, and `drizzle-orm`, a lightweight typescript ORM, to interact with the database. `@clerk/nextjs` is the Clerk SDK for Next.js applications. We also use `dotenv` to manage environment variables and the `drizzle-kit` CLI tool for generating database migrations.
+We use the `@neondatabase/serverless` package as the Postgres client, and `drizzle-orm`, a lightweight typescript ORM, to interact with the database. `@clerk/nextjs` is the Clerk SDK for Next.js applications. We also use the `drizzle-kit` CLI tool for generating and applying database migrations. It reads the `.env` file in your project, so you don't need `dotenv`.
 
 Also, add a `.env` file to the root of your project, which we'll use to store Neon/Clerk connection parameters:
 
@@ -177,7 +177,7 @@ npx drizzle-kit generate
 This will create a `drizzle` folder at the project root with the migration files. To apply the migration to the database, run:
 
 ```bash
-npx drizzle-kit push:pg
+npx drizzle-kit push
 ```
 
 The `user_messages` table will now be visible in the console.
@@ -369,7 +369,7 @@ In this guide, we walked through setting up a simple Next.js application with us
 
 Next, we can add more routes and features to the application. The Clerk proxy ensures that only authenticated users can access any app routes, and the `ClerkProvider` component provides the user context to each of them.
 
-To view and manage the users who authenticated with your application, you can navigate to the [Clerk Dashboard](https://dashboard.clerk.dev/).
+To view and manage the users who authenticated with your application, you can navigate to the [Clerk Dashboard](https://dashboard.clerk.com/).
 
 ## Source code
 

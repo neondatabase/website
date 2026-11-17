@@ -115,7 +115,7 @@ If something’s unclear, a senior developer will ask questions before writing b
 
 **By adding something as simple as _“You may ask clarifying questions before coding”_ to your prompt, the interaction goes from a one-way instruction to a collaborative conversation.** The model can then debug the requirements, not just the code. This leverages an LLM’s analytical abilities at the most valuable stage of development.
 
-### Example
+### Example (#example-2)
 
 _TASK: You are helping implement a new user authentication system. Before you begin coding, identify anything that’s unclear in these requirements. Ask specific questions that would help clarify the implementation details, dependencies, or potential issues._
 
@@ -192,7 +192,7 @@ Senior engineers build iteratively. Just as above, we’re talking about back-an
 
 **Breaking work into chunks—first plan, then generate, then refactor—mirrors the development workflow of experienced engineers who wouldn’t dream of writing an entire application in one sitting.** By requesting architecture diagrams, component breakdowns, or pseudocode first, you establish a solid foundation that guides subsequent development. Similarly, explicit refactoring requests after initial implementation help polish rough edges into production-quality code.
 
-### Example
+### Example (#example-3)
 
 _TASK: We need to build a data processing pipeline that ingests CSV files of customer transactions, cleanses the data, identifies fraudulent patterns, and generates daily reports. Let’s work through this iteratively._
 
@@ -241,7 +241,7 @@ Good engineers explain trade-offs, assumptions, and logic. They communicate the 
 
 **Prompting LLMs to explain their approach creates a checkpoint in the development process.** You gain insight into how they interpret requirements and plan to solve the problem. This pre-implementation explanation reveals the model’s model, allowing you to catch misunderstandings before they manifest as bugs.
 
-### Example
+### Example (#example-4)
 
 _TASK: We need to implement a caching layer for our product catalog API to reduce database load and improve response times. Before writing any code, explain:_
 
@@ -307,7 +307,7 @@ Good engineers flag unknowns and admit limitations. They recognize that acknowle
 
 **Prompting the LLM to annotate guesses or assumptions creates a layer of transparency in your AI code.** Just as senior developers distinguish between verified facts and educated guesses in their work, this practice helps you separate reliable outputs from speculative ones. When the model clearly marks areas of uncertainty, you can focus additional verification efforts where they’re most needed. This targeted validation process mirrors how experienced teams manage risk by concentrating scrutiny on the least certain components.
 
-### Example
+### Example (#example-5)
 
 _TASK: You’re designing a recommendation algorithm for an e-commerce platform. Based on the information provided:_
 
@@ -375,7 +375,7 @@ It’s not just about working—it’s about doing it the right way. Senior engi
 
 **Just as experienced developers prioritize readability and maintainability over clever hacks, explicitly prompting for idiomatic code ensures you receive solutions that integrate with existing codebases.** This approach yields code that your team can understand, extend, and maintain long after the initial implementation.
 
-### Example
+### Example (#example-6)
 
 Here, we ask not just for TypeScript, but a specific version, following a particular style guide, and with specific functionality:
 

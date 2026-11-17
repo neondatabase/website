@@ -7,7 +7,7 @@ excerpt: >-
   for vector similarity search. This new indexing method resulted in 20x faster
   queries at a 99% accuracy compared to tradition...
 date: '2023-08-03T16:00:42'
-updatedOn: '2023-08-21T10:27:29'
+updatedOn: '2026-11-06T12:00:00.000Z'
 category: engineering
 categories:
   - engineering
@@ -36,6 +36,10 @@ seo:
 ---
 
 ![Post image](https://cdn.neonapi.io/public/images/pages/blog/pg_embedding-on-disk-hnsw-index/neon-on-disk-hnsw-index2x-1024x576-5a527d05.jpg)
+
+<Admonition type="important" title="Use pgvector instead of pg_embedding">
+Neon stopped developing pg_embedding in 2023, and it's no longer one of Neon's [supported extensions](/docs/extensions/pg-extensions). Use [pgvector](/docs/extensions/pgvector) for vector search, or [Lakebase Search](/docs/ai/lakebase-search-get-started), a set of Postgres extensions for vector, BM25, and hybrid search in Lakebase Postgres.
+</Admonition>
 
 A few weeks back, we released [pg_embedding](https://github.com/neondatabase/pg_embedding), a new extension for Postgres and LangChain which introduced [Hierarchical Navigable Small Worlds (HNSW)](https://arxiv.org/abs/1603.09320) indexes for vector similarity search. This new indexing method resulted in [20x faster queries at a 99% accuracy compared to traditional IVFFlat indexing](https://neon.com/blog/pg-embedding-extension-for-vector-search).
 

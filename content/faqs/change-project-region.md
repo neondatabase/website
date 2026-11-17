@@ -3,12 +3,12 @@ title: 'Can I change the region of my existing Neon project after creation?'
 subtitle: 'No. Region is fixed at project creation. Migrate to a new project to change regions.'
 enableTableOfContents: true
 createdAt: '2026-05-18T00:00:00.000Z'
-updatedOn: '2026-09-23T21:00:25.204Z'
+updatedOn: '2026-11-14T19:48:40.621Z'
 isDraft: false
 redirectFrom: []
 previousLink:
-  title: 'What are the best ways to give every developer on a team their own separate Postgres database for development?'
-  slug: best-ways-separate-postgres-database-development
+  title: 'How do I get BM25 relevance ranking in Postgres full-text search?'
+  slug: bm25-relevance-ranking-postgres-full-text-search
 nextLink:
   title: 'How do I migrate an existing Neon project to a different AWS region?'
   slug: change-region-existing-neon-project
@@ -54,4 +54,4 @@ Branches inherit the project's region, and so do [read replicas](/docs/introduct
 
 All [Neon Azure regions are deprecated](/docs/introduction/regions#azure-regions), and new projects run on AWS. If you need to keep Postgres in Azure for residency or colocation, Databricks Lakebase Postgres supports Azure regions. See [Migrate Neon to Lakebase](/docs/guides/migrate-neon-to-lakebase).
 
-<CTA title="Plan your region migration" description="The region migration overview covers each supported path and helps you pick one." buttonText="Region migration guide" buttonUrl="https://neon.com/docs/import/region-migration" />
+<CTA title="Plan your region migration" description="The region migration overview covers each supported path and helps you pick one." buttonText="Region migration guide" buttonUrl="/docs/import/region-migration" />

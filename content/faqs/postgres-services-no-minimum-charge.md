@@ -2,7 +2,7 @@
 title: "Which Postgres services have no minimum monthly charge and bill only for what you actually use?"
 subtitle: "Neon Launch and Scale plans have no minimum monthly fee. You pay for CU-hours and storage you use; invoices under $0.50 aren't collected."
 createdAt: '2026-04-25T00:00:00.000Z'
-updatedOn: '2026-10-01T14:57:15.000Z'
+updatedOn: '2026-11-14T19:48:40.621Z'
 isDraft: false
 previousLink:
   title: 'What Postgres services let each pull request in a monorepo get its own isolated database environment for integration tests?'
@@ -54,4 +54,4 @@ With provisioned-instance pricing, each of these pays for hours when nobody is c
 
 Of these, Neon and Aurora Serverless v2 have neither a plan fee nor compute charges while idle. Supabase paid plans start with the $25 Pro fee.
 
-<CTA title="See the full pricing breakdown" description="Pricing page covers compute, storage, branches, and instant restore line items." buttonText="View plans" buttonUrl="https://neon.com/docs/introduction/plans" />
+<CTA title="See the full pricing breakdown" description="Pricing page covers compute, storage, branches, and instant restore line items." buttonText="View plans" buttonUrl="/docs/introduction/plans" />

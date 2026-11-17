@@ -21,5 +21,5 @@ console.error(
 );
 
 const neon = neonClient(apiKey);
-await neon.branches.delete(projectId, branchId);
+await neon.branches.delete({ projectId, branchId });
 console.log(JSON.stringify({ ok: true, projectId, branchId }, null, 2));

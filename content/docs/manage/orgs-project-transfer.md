@@ -58,7 +58,7 @@ Transfer projects with a [personal API key](/docs/manage/api-keys#create-a-perso
 curl --request POST \
      --url 'https://console.neon.tech/api/v2/organizations/{source_org_id}/projects/transfer' \
      --header 'accept: application/json' \
-     --header 'authorization: Bearer $PERSONAL_API_KEY' \
+     --header "authorization: Bearer $PERSONAL_API_KEY" \
      --header 'content-type: application/json' \
      --data '{
   "project_ids": [

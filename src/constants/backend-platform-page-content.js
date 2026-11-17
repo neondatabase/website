@@ -239,7 +239,7 @@ const aiGatewayPageContent = {
     {
       question: 'Which models can I call?',
       answer:
-        '<p>AI Gateway includes frontier and open-weight models from Anthropic, OpenAI, Google, Meta, Alibaba, Zhipu AI, Moonshot AI, Thinking Machines, and others. The catalog changes as models are added or retired, and availability can vary by region. Check the <a href="/docs/ai-gateway/overview#available-models">live model catalog</a> for current models, prices, and supported endpoints.</p>',
+        '<p>AI Gateway includes frontier and open-weight models from Anthropic, OpenAI, Google, Meta, Alibaba, Zhipu AI, Moonshot AI, and others. The catalog changes as models are added or retired, and availability can vary by region. Check the <a href="/docs/ai-gateway/overview#available-models">live model catalog</a> for current models, prices, and supported endpoints.</p>',
     },
     {
       question: 'What is the difference between Neon AI Gateway and Databricks Unity AI Gateway?',

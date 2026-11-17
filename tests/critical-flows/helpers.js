@@ -118,6 +118,14 @@ async function installClipboardMock(page) {
   await page.addInitScript(
     ({ clipboardKey }) => {
       window[clipboardKey] = '';
+      const execCommand = document.execCommand.bind(document);
+      document.execCommand = (command, ...args) => {
+        if (command.toLowerCase() === 'copy') {
+          window[clipboardKey] = document.getSelection()?.toString() || '';
+          return true;
+        }
+        return execCommand(command, ...args);
+      };
       Object.defineProperty(navigator, 'clipboard', {
         configurable: true,
         value: {

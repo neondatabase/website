@@ -1,12 +1,12 @@
 ---
 title: "What tools allow restoring a database to before a bug occurred?"
 createdAt: '2026-04-25T00:00:00.000Z'
-updatedOn: '2026-09-23T21:17:23.000Z'
+updatedOn: '2026-11-02T19:00:00.000Z'
 isDraft: false
 subtitle: "Lakebase Postgres instant restore lets you rewind a root branch to any second within your history window, so you can recover from a bad migration or stray DELETE in seconds."
 previousLink:
-  title: 'What is the simplest Postgres setup for startups?'
-  slug: simplest-postgres-setup-for-startups
+  title: 'How do I test cron jobs in staging or a preview environment without running them twice against production?'
+  slug: test-scheduled-jobs-preview-branch-without-double-running
 nextLink:
   title: 'Which tools allow using Postgres without managing infrastructure?'
   slug: tools-for-serverless-postgres-infrastructure
@@ -16,7 +16,7 @@ Lakebase Postgres keeps a continuous log of every write (the Write-Ahead Log, or
 
 ## How instant restore works
 
-The lakebase architecture keeps WAL in its storage layer, so you can query or branch from any point in the history window. There's no backup file to restore from. You either restore a root branch to a timestamp or LSN (Neon keeps the pre-restore state in a backup branch), or create a new branch from a timestamp and inspect it first.
+The lakebase architecture keeps WAL in its storage layer, so you can query or branch from any point in the history window. There's no backup file to restore from. Because history is kept as immutable page versions, a restore doesn't copy data back into place; compute reattaches to the past point, so the restore is fast and predictable even for multi-terabyte databases ([lakebase architecture](/docs/introduction/architecture-overview#what-this-architecture-enables)). You either restore a root branch to a timestamp or LSN (Neon keeps the pre-restore state in a backup branch), or create a new branch from a timestamp and inspect it first.
 
 The maximum history window depends on your plan. New paid-plan projects default to 1 day, so raise it if you need more.
 

@@ -20,7 +20,7 @@ updatedOn: '2026-08-07T16:05:20.768Z'
 
 <DocsList title="External docs" theme="docs">
 <a href="https://grafana.com/docs/grafana-cloud/send-data/otlp/">Grafana Cloud OTLP Documentation</a>
-<a href="https://grafana.com/docs/grafana-cloud/account-management/authentication-and-permissions/">Grafana Cloud Authentication and Permissions</a>
+<a href="https://grafana.com/docs/grafana-cloud/security-and-account-management/authentication-and-permissions/">Grafana Cloud Authentication and Permissions</a>
 </DocsList>
 </InfoBlock>
 
@@ -28,7 +28,7 @@ The Grafana Cloud integration lets you monitor Neon database performance, resour
 
 ## How it works
 
-The integration uses Grafana Cloud's native OTLP endpoint to securely transmit Neon metrics and Postgres logs. By configuring the integration with your Grafana Cloud OTLP endpoint and authentication token, Neon automatically sends data from your project to your Grafana Cloud stack, where it's automatically routed to the appropriate storage backends (Mimir for metrics, Loki for logs, and Tempo for traces).
+The integration uses Grafana Cloud's native OTLP endpoint to securely transmit Neon metrics and Postgres logs. By configuring the integration with your Grafana Cloud OTLP endpoint and authentication token, Neon automatically sends data from your project to your Grafana Cloud stack, where it's automatically routed to the appropriate storage backends (Mimir for metrics and Loki for logs).
 
 <Admonition type="note">
 Data is sent for all computes in your Neon project. For example, if you have multiple branches, each with an attached compute, both metrics and logs will be collected and sent for each compute.
@@ -36,13 +36,13 @@ Data is sent for all computes in your Neon project. For example, if you have mul
 
 ### Neon metrics
 
-The integration exports [a comprehensive set of metrics](#available-metrics) including:
+The integration exports [a set of metrics](#available-metrics) including:
 
-- **Connection counts** &#8212; Tracks active and idle database connections.
-- **Database size** &#8212; Monitors total size of all databases in bytes.
-- **Replication delay** &#8212; Measures replication lag in bytes and seconds.
-- **Compute metrics** &#8212; Includes CPU and memory usage statistics for your compute.
-- **PgBouncer metrics** &#8212; Tracks connection pooling metrics including client and server connections.
+- **Connection counts**: Tracks active and idle database connections.
+- **Database size**: Monitors total size of all databases in bytes.
+- **Replication delay**: Measures replication lag in bytes and seconds.
+- **Compute metrics**: Includes CPU and memory usage statistics for your compute.
+- **PgBouncer metrics**: Tracks connection pooling metrics including client and server connections.
 
 ### Postgres logs
 
@@ -55,7 +55,7 @@ With the Grafana Cloud integration, you can forward Postgres logs to your Grafan
 Before getting started, ensure the following:
 
 - You have a Neon account and project. If not, see [Sign up for a Neon account](/docs/get-started/signing-up).
-- You have a Grafana Cloud account access to the Grafana Cloud Portal.
+- You have a Grafana Cloud account with access to the Grafana Cloud portal.
 
 ## Set up the integration
 
@@ -91,17 +91,17 @@ In the Neon Console:
 
 Click **Add** to enable the integration.
 
-      <Admonition type="tip">
-      You can change these settings later by editing your integration configuration from the **Integrations** page.
-      </Admonition>
+<Admonition type="tip">
+You can change these settings later by editing your integration configuration from the **Integrations** page.
+</Admonition>
 
-      Once the integration is set up, Neon will start sending metrics and logs to your Grafana Cloud stack, where they'll be automatically stored in Mimir (metrics) and Loki (logs).
+Once the integration is set up, Neon will start sending metrics and logs to your Grafana Cloud stack, where they'll be automatically stored in Mimir (metrics) and Loki (logs).
 
-      <Admonition type="note">
-      Neon computes only send logs and metrics when they are active. If the [Scale to Zero](/docs/introduction/scale-to-zero) feature is enabled and a compute is suspended due to inactivity, no logs or metrics will be sent during the suspension. This may result in gaps in your data. If you notice missing data, check if your compute is suspended. You can verify a compute's status as `Idle` or `Active` on the **Branches** page in the Neon console, and review **Suspend compute** events on the **System operations** tab of the **Monitoring** page.
+<Admonition type="note">
+Neon computes only send logs and metrics when they are active. If the [Scale to Zero](/docs/introduction/scale-to-zero) feature is enabled and a compute is suspended due to inactivity, no logs or metrics will be sent during the suspension. This may result in gaps in your data. If you notice missing data, check if your compute is suspended. You can verify a compute's status as `Idle` or `Active` on the **Branches** page in the Neon console, and review **Suspend compute** events on the **System operations** tab of the **Monitoring** page.
 
-      Additionally, if you are setting up the Grafana Cloud integration for a project with an inactive compute, you'll need to activate the compute before it can send data. To activate it, simply run a query from the [Neon SQL Editor](/docs/get-started/query-with-neon-sql-editor) or any connected client.
-      </Admonition>
+Additionally, if you are setting up the Grafana Cloud integration for a project with an inactive compute, you'll need to activate the compute before it can send data. To activate it, simply run a query from the [Neon SQL Editor](/docs/get-started/query-with-neon-sql-editor) or any connected client.
+</Admonition>
 
 ## Example usage
 
@@ -121,7 +121,8 @@ If any of the computes in your project are active, you should start seeing data 
 ### Dashboard JSON
 
 <details>
-<summary>Copy Neon PostgreSQL Monitoring Dashboard JSON</summary>
+<summary>Copy Neon Postgres monitoring dashboard JSON</summary>
+
 ```json shouldWrap
 {
   "id": null,
@@ -181,7 +182,7 @@ If any of the computes in your project are active, you should start seeing data 
           },
           {
             "matcher": {"id": "byName", "options": "Database Size (GB)"},
-            "properties": [{"id": "unit", "value": "decbytes"}]
+            "properties": [{"id": "unit", "value": "short"}]
           }
         ]
       },
@@ -458,7 +459,7 @@ If any of the computes in your project are active, you should start seeing data 
       },
       "targets": [
         {
-          "expr": "{service_name=\"$service_name\", endpoint_id=~\"$endpoint_id\", project_id=~\"$project_id\"} |~ \"(?i)error|fatal|panic\"",
+          "expr": "{service_name=\"$service_name\"} | endpoint_id=~\"$endpoint_id\" | project_id=~\"$project_id\" |~ \"(?i)error|fatal|panic\"",
           "refId": "A"
         }
       ],
@@ -484,7 +485,7 @@ If any of the computes in your project are active, you should start seeing data 
       },
       "targets": [
         {
-          "expr": "{service_name=\"$service_name\", endpoint_id=~\"$endpoint_id\", project_id=~\"$project_id\"} |~ \"(?i)connection|connect|disconnect\"",
+          "expr": "{service_name=\"$service_name\"} | endpoint_id=~\"$endpoint_id\" | project_id=~\"$project_id\" |~ \"(?i)connection|connect|disconnect\"",
           "refId": "A"
         }
       ],
@@ -508,7 +509,7 @@ If any of the computes in your project are active, you should start seeing data 
       },
       "targets": [
         {
-          "expr": "{service_name=\"$service_name\", endpoint_id=~\"$endpoint_id\", project_id=~\"$project_id\"} |~ \"(?i)slow|duration|statement|query\" | logfmt",
+          "expr": "{service_name=\"$service_name\"} | endpoint_id=~\"$endpoint_id\" | project_id=~\"$project_id\" |~ \"(?i)slow|duration|statement|query\"",
           "refId": "A"
         }
       ],
@@ -532,7 +533,7 @@ If any of the computes in your project are active, you should start seeing data 
       },
       "targets": [
         {
-          "expr": "{service_name=\"$service_name\", endpoint_id=~\"$endpoint_id\", project_id=~\"$project_id\"}",
+          "expr": "{service_name=\"$service_name\"} | endpoint_id=~\"$endpoint_id\" | project_id=~\"$project_id\"",
           "refId": "A"
         }
       ],
@@ -625,7 +626,7 @@ If any of the computes in your project are active, you should start seeing data 
         "label": "Service Name",
         "type": "query",
         "query": {
-          "query": "label_values({__name__=~\".+\"}, service_name)",
+          "query": "label_values(service_name)",
           "refId": "StandardVariableQuery"
         },
         "datasource": {
@@ -689,18 +690,18 @@ If any of the computes in your project are active, you should start seeing data 
 
 ## Available metrics
 
-Neon exports a comprehensive set of metrics including connection counts, database size, replication delay, compute metrics (CPU and memory usage), and PgBouncer connection pooling metrics (client and server connections). For a complete list of all available metrics with detailed descriptions, see the [Metrics and logs reference](/docs/reference/metrics-logs).
+Neon exports a broad set of metrics including connection counts, database size, replication delay, compute metrics (CPU and memory usage), and PgBouncer connection pooling metrics (client and server connections). For a complete list of all available metrics with detailed descriptions, see the [Metrics and logs reference](/docs/reference/metrics-logs).
 
 ## Export Postgres logs
 
-You can export your Postgres logs from your Neon compute to your Grafana Cloud stack. These logs provide visibility into database activity, errors, and performance. The logs are automatically sent to Grafana Cloud Loki and can be queried using LogQL.
+You can export your Postgres logs from your Neon compute to your Grafana Cloud stack. These logs provide visibility into database activity, errors, and performance. The logs are automatically sent to Grafana Cloud Loki and can be queried using LogQL. By default, logs include warnings and errors, connections and disconnections, checkpoints, and slow autovacuum runs. Query text isn't logged, and slow-query logging is off unless you turn it on. For the full list of logging settings and log fields, see [Postgres logs](/docs/reference/metrics-logs#postgres-logs) in the Metrics and logs reference.
 
 ### Performance impact
 
 Enabling this feature may result in:
 
 - An increase in compute resource usage for log processing
-- Additional network egress for log transmission, which is billed after 500 GB per project on paid plans
+- Additional public network transfer for log transmission, which counts toward your plan's [network transfer allowance](/docs/introduction/network-transfer)
 - Associated costs based on log volume in Grafana Cloud
 
 ### Querying logs in Grafana Cloud
@@ -725,7 +726,7 @@ Create alerts for key metrics to monitor your database health:
 1. **High CPU Usage**: Alert when CPU usage exceeds 80%
 
    ```promql
-   rate(host_cpu_seconds_total{mode!="idle"}[5m]) > 0.8
+   100 - (avg(rate(host_cpu_seconds_total{mode="idle"}[5m])) * 100) > 80
    ```
 
 2. **Low Cache Hit Rate**: Alert when cache hit rate drops below 90%

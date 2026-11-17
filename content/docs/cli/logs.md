@@ -6,14 +6,15 @@ summary: >-
   Today that covers Neon Functions and Object Storage; Postgres compute logs
   are coming. Query records over a time
   window, filter by source, severity, or OpenTelemetry attributes, run raw
-  LogQL, and list which fields and values a branch reports. Logs are
+  LogQL, list which fields and values a branch reports, and call the branch's
+  Loki-compatible read API. Logs are
   available in AWS US East (Ohio), US East (N. Virginia), Europe (Frankfurt),
   and Asia Pacific (Singapore).
 enableTableOfContents: true
-updatedOn: '2026-11-04T16:47:40.419Z'
+updatedOn: '2026-11-06T22:09:40.723Z'
 ---
 
-The `logs` command reads the logs a branch's services emit. Today that covers Neon Functions and Object Storage; Postgres compute logs are coming. Query records over a time window, filter by source, severity, or OpenTelemetry attribute, and list which fields and values a branch reports so you can build precise filters.
+The `logs` command reads the logs a branch's services emit. Today that covers Neon Functions and Object Storage; Postgres compute logs are coming. Query records over a time window, filter by source, severity, or OpenTelemetry attribute, and list which fields and values a branch reports so you can build precise filters. For output in Loki's format, use [`neon logs loki`](#loki).
 
 Logs are currently available in AWS US East (Ohio) (`aws-us-east-2`), AWS US East (N. Virginia) (`aws-us-east-1`), AWS Europe (Frankfurt) (`aws-eu-central-1`), and AWS Asia Pacific (Singapore) (`aws-ap-southeast-1`), so your project must be in one of these regions to use them. Support is expanding toward [all regions](/docs/introduction/regions).
 
@@ -47,6 +48,12 @@ Filter function errors on a specific branch:
 neon logs query --branch main --source function --severity-text ERROR
 ```
 
+Read one function's logs. A function's service name is `neon-function/<slug>`:
+
+```bash
+neon logs query --source function --service-name neon-function/hello
+```
+
 Use a raw LogQL selection instead of the structured filters:
 
 ```bash
@@ -77,9 +84,67 @@ Show the service names seen in the last six hours:
 neon logs field-values service_name --since 6h
 ```
 
+## neon logs loki (#loki)
+
+Call the branch's [Loki-compatible read API](#loki-read-api) and print its JSON response unchanged. Lines come back grouped by their stream labels, with nanosecond timestamps, where [`neon logs query`](#query) returns one record per line rounded to the second. Use `neon logs loki` when the order of lines within a second matters or a tool expects Loki output. You can also use it to try a LogQL selector before you point a Loki client at the endpoint. For readable tables, structured filters, and cursor pagination, use `neon logs query`.
+
+<CliUsage command="logs loki" />
+
+<CliOptions command="logs loki" />
+
+The default endpoint, `query_range`, needs a LogQL query. `--endpoint labels` and `--endpoint label/<name>/values` list labels and their values; for these, the query is optional and can only be a stream selector. Neon supports stream selectors and line filters, and rejects metric queries and parser stages. The window can be at most 168 hours. Output is JSON or YAML only.
+
+Each value in a range result is a `[timestamp, line]` pair, with the timestamp as a nanosecond string. There's no cursor: a result that reaches `--limit`, or the server's cap of 10,000 lines, may be incomplete. Narrow the window or the selector to get everything.
+
+List the services that logged on the branch in the last six hours:
+
+```bash
+neon logs loki --endpoint label/service_name/values --since 6h
+```
+
+Query function log lines that contain `invoke end`:
+
+```bash
+neon logs loki '{entity_type="function"} |= "invoke end"' --since 6h --limit 2
+```
+
+<details>
+<summary>Show output</summary>
+
+```json
+{
+  "status": "success",
+  "data": {
+    "resultType": "streams",
+    "result": [
+      {
+        "stream": {
+          "entity_type": "function",
+          "scope_name": "neon.function.request",
+          "service_name": "neon-function/todos",
+          "severity_text": "INFO"
+        },
+        "values": [
+          [
+            "1793993911665404000",
+            "invoke end"
+          ],
+          [
+            "1793993910924177000",
+            "invoke end"
+          ]
+        ]
+      }
+    ]
+  }
+}
+```
+
+</details>
+
 ## Loki-compatible read API (#loki-read-api)
 
-The same branch logs are also readable over HTTP through a Loki-compatible endpoint, for tools that speak the [Loki](https://grafana.com/docs/loki/latest/reference/loki-http-api/) query API directly rather than through the CLI. Authenticate with a Neon API key as a bearer token, against this branch-scoped base URL:
+The same branch logs are also readable over HTTP through a Loki-compatible endpoint, for tools that speak the [Loki](https://grafana.com/docs/loki/latest/reference/loki-http-api/) query API directly rather than through the CLI. [`neon logs loki`](#loki) calls the same endpoints from the terminal. Authenticate with a Neon API key as a bearer token, against this branch-scoped base URL:
 
 ```text
 https://console.neon.tech/telemetry/v1/projects/{project_id}/branches/{branch_id}/loki

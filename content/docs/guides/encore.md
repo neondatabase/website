@@ -43,13 +43,13 @@ iwr https://encore.dev/install.ps1 | iex
 
 ## Create an Encore application
 
-Create a new Encore application using the CLI.
+Create a new Encore application using the CLI. The `--lang ts` flag creates a TypeScript app. Without it, the CLI creates a Go app when it runs without an interactive terminal.
 
 ```bash
-encore app create my-neon-app
+encore app create my-neon-app --lang ts
 ```
 
-Select **TypeScript** as the language and choose the template that fits your needs (for example, **URL Shortener** or **Empty app**).
+The CLI asks you to choose a template that fits your needs (for example, **URL Shortener** or **Empty app**).
 
 Navigate to your app directory.
 
@@ -138,7 +138,7 @@ Start your Encore application.
 encore run
 ```
 
-Encore automatically provisions a local PostgreSQL database for development. Your API will be available at `http://localhost:4000` and the development dashboard at `http://localhost:9400`.
+Encore automatically provisions a local PostgreSQL database for development. This database runs in Docker and isn't your Neon project. Neon comes in when you deploy to Encore Cloud later in this guide. Your API will be available at `http://localhost:4000` and the development dashboard at `http://localhost:9400`.
 
 ![Encore local development dashboard](/guides/images/neon-encore-dashboard.png)
 

@@ -13,7 +13,7 @@ summary: >-
   agents.
 redirectFrom:
   - /docs/local/neon-local-connect
-updatedOn: '2026-09-17T16:33:54.884Z'
+updatedOn: '2026-10-09T15:55:57.334Z'
 ---
 
 The Neon extension lets you connect to any Neon branch and manage your database directly in your IDE. Available for VS Code, Cursor, and other VS Code-compatible editors, you can browse schemas, run queries, edit table data, and get connection strings, without leaving your editor.
@@ -197,7 +197,7 @@ Perfect for quick data inspection, testing, and small data modifications without
 
 The Neon extension includes built-in support for AI-powered database features through the [Neon MCP Server](/docs/ai/neon-mcp-server):
 
-### Features
+### Features (#features-2)
 
 - **Automatic MCP Server configuration**: enables AI-powered database features with your coding agent.
 - **Chat with your database** using natural language.

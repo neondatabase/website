@@ -1,5 +1,9 @@
 import { renderTemplateMarkdown } from 'components/pages/functions/templates/markdown';
-import { getFunctionRegistryTemplatePage } from 'utils/function-registry';
+import { getFunctionTemplateInstalls } from 'utils/api-function-template-installs';
+import {
+  getFunctionRegistryTemplatePage,
+  getFunctionRegistryTemplateReadme,
+} from 'utils/function-registry';
 
 import {
   catalogUnavailableResponse,
@@ -23,5 +27,9 @@ export async function GET(_req, { params }) {
   }
 
   if (!page) return templateNotFoundResponse(pathname);
-  return markdownResponse(renderTemplateMarkdown(page));
+  const [readme, installs] = await Promise.all([
+    getFunctionRegistryTemplateReadme(page.template),
+    getFunctionTemplateInstalls(page.template.id),
+  ]);
+  return markdownResponse(renderTemplateMarkdown({ ...page, readme, installs }));
 }

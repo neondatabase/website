@@ -1,18 +1,20 @@
 'use client';
 
+import { Dialog, DialogBackdrop, DialogPanel } from '@headlessui/react';
 import { parseAsInteger, parseAsString, useQueryStates } from 'nuqs';
 import PropTypes from 'prop-types';
-import { useId, useMemo, useRef } from 'react';
+import { useId, useMemo, useRef, useState } from 'react';
 
 import FunctionRegistryTemplateCard from 'components/pages/functions/templates/registry/template-card';
 import Button from 'components/shared/button';
 import SearchClearButton from 'components/shared/search-clear-button';
 import LINKS from 'constants/links';
+import FilterIcon from 'icons/filter.inline.svg';
 import SearchIcon from 'icons/search.inline.svg';
 import { cn } from 'utils/cn';
 import {
   REGISTRY_ALL_FILTER,
-  REGISTRY_FIRST_PARTY_CATEGORY,
+  REGISTRY_SOURCE_CATEGORIES,
   filterRegistryTemplates,
   paginateRegistryTemplates,
   registryCategoryIds,
@@ -28,19 +30,22 @@ const catalogParams = {
   page: parseAsInteger.withDefault(1),
 };
 
-const PINNED_FILTERS = new Set([REGISTRY_ALL_FILTER, REGISTRY_FIRST_PARTY_CATEGORY]);
+const PINNED_FILTERS = new Set([REGISTRY_ALL_FILTER, ...REGISTRY_SOURCE_CATEGORIES]);
 
 const INLINE_LINK_CLASS_NAME =
   'text-white underline underline-offset-2 transition-colors hover:text-green-45';
 
-const FilterButton = ({ filter, isActive, onChange }) => (
+const COLLAPSED_CATEGORY_COUNT = 6;
+
+const FilterButton = ({ filter, isActive, onChange, className = null }) => (
   <button
     type="button"
     aria-pressed={isActive}
     className={cn(
-      'flex items-center justify-between gap-2.5 py-[7px] text-left font-mono text-sm leading-snug tracking-tight uppercase transition-colors hover:text-white lg:shrink-0 lg:border-b-2 lg:py-[3px] lg:whitespace-nowrap',
-      isActive ? 'text-white lg:border-green-45' : 'text-gray-new-60 lg:border-transparent',
-      filter.count === 0 && !isActive && 'text-gray-new-50'
+      'flex items-center justify-between gap-2.5 py-[7px] text-left font-mono text-sm leading-snug tracking-tight uppercase transition-colors hover:text-white',
+      isActive ? 'text-white' : 'text-gray-new-60',
+      filter.count === 0 && !isActive && 'text-gray-new-50',
+      className
     )}
     onClick={() => onChange(filter.id)}
   >
@@ -65,34 +70,52 @@ FilterButton.propTypes = {
   }).isRequired,
   isActive: PropTypes.bool.isRequired,
   onChange: PropTypes.func.isRequired,
+  className: PropTypes.string,
 };
 
-const CategoryFilter = ({ filters, activeFilter, onChange }) => {
+const CategoryFilter = ({ filters, activeFilter, onChange, className = null }) => {
+  const [isExpanded, setIsExpanded] = useState(false);
   const pinned = filters.filter((filter) => PINNED_FILTERS.has(filter.id));
   const categories = filters.filter((filter) => !PINNED_FILTERS.has(filter.id));
+  const hiddenCount = Math.max(categories.length - COLLAPSED_CATEGORY_COUNT, 0);
+  const isActiveHidden = categories
+    .slice(COLLAPSED_CATEGORY_COUNT)
+    .some((filter) => filter.id === activeFilter);
+  const showAll = isExpanded || isActiveHidden;
 
-  const renderButtons = (items) =>
-    items.map((filter) => (
+  const renderButtons = (items, { collapsible = false } = {}) =>
+    items.map((filter, index) => (
       <FilterButton
         key={filter.id}
         filter={filter}
         isActive={filter.id === activeFilter}
+        className={collapsible && !showAll && index >= COLLAPSED_CATEGORY_COUNT ? 'hidden' : null}
         onChange={onChange}
       />
     ));
 
   return (
     <nav
-      className="sticky top-24 flex flex-col gap-2 lg:static lg:no-scrollbars lg:flex-1 lg:flex-row lg:gap-x-5 lg:overflow-x-auto md:-mx-5 md:flex-none md:px-5"
+      className={cn('sticky top-24 flex flex-col gap-2', className)}
       aria-label="Template categories"
     >
       {renderButtons(pinned)}
       {categories.length > 0 && (
-        <p className="mt-6 mb-1 font-mono text-xs leading-none tracking-tight text-gray-new-50 uppercase lg:hidden">
+        <p className="mt-6 mb-1 font-mono text-xs leading-none tracking-tight text-gray-new-50 uppercase">
           Categories
         </p>
       )}
-      {renderButtons(categories)}
+      {renderButtons(categories, { collapsible: true })}
+      {hiddenCount > 0 && !isActiveHidden && (
+        <button
+          type="button"
+          aria-expanded={isExpanded}
+          className="mt-1 w-fit py-[7px] text-left font-mono text-sm leading-snug tracking-tight text-gray-new-50 uppercase underline-offset-4 transition-colors hover:text-white hover:underline"
+          onClick={() => setIsExpanded((value) => !value)}
+        >
+          {isExpanded ? 'Show less' : `Show ${hiddenCount} more`}
+        </button>
+      )}
     </nav>
   );
 };
@@ -101,7 +124,39 @@ CategoryFilter.propTypes = {
   filters: PropTypes.arrayOf(FilterButton.propTypes.filter).isRequired,
   activeFilter: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,
+  className: PropTypes.string,
 };
+
+const FilterSheet = ({ onChange, ...props }) => {
+  const [isOpen, setIsOpen] = useState(false);
+  return (
+    <>
+      <button
+        type="button"
+        className="hidden shrink-0 items-center gap-2 border border-gray-new-20 bg-black-new px-3 font-mono text-sm tracking-tight text-gray-new-80 uppercase lg:flex"
+        onClick={() => setIsOpen(true)}
+      >
+        <FilterIcon className="size-4" aria-hidden />
+        Filter
+      </button>
+      <Dialog className="relative z-50" open={isOpen} onClose={setIsOpen}>
+        <DialogBackdrop className="fixed inset-0 bg-black-pure/70" />
+        <DialogPanel className="fixed inset-x-0 bottom-0 max-h-[80dvh] overflow-y-auto border-t border-gray-new-20 bg-black-new p-5">
+          <CategoryFilter
+            {...props}
+            className="static"
+            onChange={(id) => {
+              onChange(id);
+              setIsOpen(false);
+            }}
+          />
+        </DialogPanel>
+      </Dialog>
+    </>
+  );
+};
+
+FilterSheet.propTypes = CategoryFilter.propTypes;
 
 const EmptyState = ({ onClear }) => (
   <div className="flex flex-col items-center py-16">
@@ -152,6 +207,12 @@ const CatalogClient = ({ templates }) => {
     resultsRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
   };
 
+  const filterProps = {
+    filters,
+    activeFilter: category,
+    onChange: (id) => setParams({ category: id, page: null }),
+  };
+
   const clearFilters = () => {
     setParams({ q: null, category: null, page: null });
     searchInputRef.current?.focus();
@@ -175,9 +236,9 @@ const CatalogClient = ({ templates }) => {
 
   return (
     <div className="flex gap-16 lt:gap-12 lg:flex-col lg:gap-10">
-      <div className="flex w-64 shrink-0 flex-col gap-8 lg:w-full lg:flex-row-reverse lg:items-center lg:gap-6 md:flex-col md:items-stretch md:gap-5">
+      <div className="flex w-64 shrink-0 flex-col gap-8 lg:w-full lg:flex-row lg:gap-2">
         <div
-          className="relative flex items-center gap-2 border border-gray-new-20 bg-black-new px-3 py-1.5 pr-2.5 lg:w-[280px] lg:shrink-0 md:w-full"
+          className="relative flex items-center gap-2 border border-gray-new-20 bg-black-new px-3 py-1.5 pr-2.5 lg:min-w-0 lg:flex-1"
           role="search"
         >
           <label className="sr-only" htmlFor={searchId}>
@@ -196,11 +257,8 @@ const CatalogClient = ({ templates }) => {
           />
           {q && <SearchClearButton onClick={() => setParams({ q: null, page: null })} />}
         </div>
-        <CategoryFilter
-          filters={filters}
-          activeFilter={category}
-          onChange={(id) => setParams({ category: id, page: null })}
-        />
+        <CategoryFilter {...filterProps} className="lg:hidden" />
+        <FilterSheet {...filterProps} />
       </div>
 
       <div className="min-w-0 flex-1 scroll-mt-24" ref={resultsRef}>
@@ -255,6 +313,7 @@ CatalogClient.propTypes = {
       categories: PropTypes.arrayOf(PropTypes.string),
       logo: PropTypes.string,
       website: PropTypes.string,
+      installs: PropTypes.number,
     })
   ).isRequired,
 };

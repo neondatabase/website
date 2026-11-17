@@ -50,6 +50,10 @@ When this prompt is triggered, automatically configure the TanStack Start projec
 
     # For pg (node-postgres)
     npm install pg
+    npm install -D @types/pg
+
+    # Also install this if you use static server functions (section below)
+    npm install @tanstack/start-static-server-functions
     ```
 
 ---

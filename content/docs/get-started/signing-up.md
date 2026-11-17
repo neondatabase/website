@@ -10,9 +10,9 @@ summary: >-
   before you connect an application stack.
 enableTableOfContents: true
 redirectFrom:
-  - /docs/quickstart/console/
-  - /docs/cloud/getting-started/
-  - /docs/cloud/getting_started/
+  - /docs/quickstart/console
+  - /docs/cloud/getting-started
+  - /docs/cloud/getting_started
   - /docs/get-started-with-neon/signing-up
 updatedOn: '2026-10-09T15:17:33.920Z'
 ---

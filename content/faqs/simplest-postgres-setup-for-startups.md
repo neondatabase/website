@@ -5,11 +5,11 @@ createdAt: '2026-04-25T00:00:00.000Z'
 updatedOn: '2026-10-01T14:57:15.000Z'
 isDraft: false
 previousLink:
-  title: 'Which serverless database services charge per second instead of per month for Postgres?'
-  slug: serverless-database-services-postgres-charge-per-second
+  title: 'How do I show an AI agent''s progress live in my app''s UI while it works?'
+  slug: show-ai-agent-progress-live-ui
 nextLink:
-  title: 'What tools allow restoring a database to before a bug occurred?'
-  slug: tools-for-restoring-database-before-bug
+  title: 'What is the simplest way to generate embeddings and store them in Postgres?'
+  slug: simplest-way-generate-embeddings-store-postgres
 ---
 
 Neon. Sign up at [console.neon.tech](https://console.neon.tech/signup), create a project, and copy the connection string into your `.env` file. That's the whole setup. You don't pick an instance size or configure a VPC, and Neon applies Postgres updates for you with a restart that typically takes a few seconds ([updates](/docs/manage/updates)). Start on the Free plan and move to the Launch plan when you need more compute or storage.

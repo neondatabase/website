@@ -6,7 +6,7 @@ summary: >-
   AI Gateway. Required for codex model variants, which do not work with the
   chat completions endpoint.
 enableTableOfContents: true
-updatedOn: '2026-10-23T23:49:26.750Z'
+updatedOn: '2026-11-10T18:56:17.167Z'
 ---
 
 The OpenAI Responses endpoint exposes the [OpenAI Responses API](https://platform.openai.com/docs/api-reference/responses) through Neon AI Gateway. Use it with the OpenAI SDK's `responses.create()` method by changing only the `baseURL`.
@@ -37,6 +37,9 @@ This endpoint accepts OpenAI models only:
 | Model ID        | Notes                  |
 | --------------- | ---------------------- |
 | `gpt-6-astra`   |                        |
+| `gpt-6-1-sol`   |                        |
+| `gpt-6-sol`     |                        |
+| `gpt-6-luna`    |                        |
 | `gpt-5-6-sol`   |                        |
 | `gpt-5-6-terra` |                        |
 | `gpt-5-6-luna`  |                        |

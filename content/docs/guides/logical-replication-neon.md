@@ -21,7 +21,7 @@ This topic outlines information about logical replication specific to Neon, incl
 When replicating data from Neon, enable logical replication on your Neon project. When replicating data to Neon, enable it on the source database instead.
 
 <Admonition type="important">
-Enabling logical replication changes the PostgreSQL `wal_level` setting from `replica` to `logical` for all databases in your Neon project. This allows Postgres to record the row-level WAL detail required for logical decoding. Once changed, it cannot be reverted. Enabling logical replication also restarts all computes, so active connections will be dropped and have to reconnect.
+Enabling logical replication changes the Postgres `wal_level` setting from `replica` to `logical` for all databases in your Neon project. This allows Postgres to record the row-level WAL detail required for logical decoding. Once changed, it cannot be reverted. Enabling logical replication also restarts all computes, so active connections will be dropped and have to reconnect.
 </Admonition>
 
 <Tabs labels={["Console", "CLI", "API"]}>
@@ -50,7 +50,7 @@ neon projects update $PROJECT_ID --enable-logical-replication --yes
 Use the [Update project](/docs/reference/api/projects/update-project) endpoint to enable logical replication programmatically. Replace `$PROJECT_ID` with your project ID.
 
 ```bash
-curl -X PATCH 'https://console.neon.tech/api/v2/projects/$PROJECT_ID' \
+curl -X PATCH "https://console.neon.tech/api/v2/projects/$PROJECT_ID" \
   -H 'Accept: application/json' \
   -H "Authorization: Bearer $NEON_API_KEY" \
   -H 'Content-Type: application/json' \
@@ -85,8 +85,8 @@ To avoid potential issues, please review the following notices carefully before 
 These notices apply when replicating data **from** Neon (Neon as the publisher):
 
 - **Scale to zero and compute usage**: While a logical replication subscriber is connected, your Neon compute stays active and will not scale to zero. Neon does not "disable" scale to zero; the database is simply always active because replication keeps it in use, so the compute never becomes idle. This results in ongoing compute usage and can significantly affect your bill. For details, see [Logical replication and scale to zero](/docs/guides/logical-replication-neon#logical-replication-and-scale-to-zero). If you are optimizing costs, see also [Cost optimization](/docs/introduction/cost-optimization).
-- **Removal of inactive replication slots**: To prevent storage bloat, \*\*Neon automatically removes _inactive_ replication slots after approximately 40 hours. Please see [Unused replication slots](/docs/guides/logical-replication-neon#unused-replication-slots) for more information.
-- **Branch restore removes replication slots**: [Restoring a branch](/docs/guides/branch-restore) will delete all replication slots on that branch. Replication slots are not automatically re-created during the restore process.
+- **Removal of inactive replication slots**: To prevent storage bloat, Neon automatically removes _inactive_ replication slots after approximately 40 hours. Please see [Unused replication slots](/docs/guides/logical-replication-neon#unused-replication-slots) for more information.
+- **Branch restore removes replication slots**: [Restoring a branch](/docs/postgres/backup-restore/branch-restore) will delete all replication slots on that branch. Replication slots are not automatically re-created during the restore process.
 
 ### Neon as a subscriber
 
@@ -107,7 +107,7 @@ If the count is greater than 0, a Neon compute where the publishing Postgres ins
 
 ## Unused replication slots
 
-To prevent storage bloat, \*\*Neon automatically removes _inactive_ replication slots after approximately 40 hours.
+To prevent storage bloat, Neon automatically removes _inactive_ replication slots after approximately 40 hours.
 
 An inactive replication slot is one that doesn't acknowledge `flush_lsn` progress for more than approximately 40 hours. This is the same `flush_lsn` value found in the `pg_stat_replication` view in your Neon database.
 
@@ -123,11 +123,11 @@ An _inactive_ replication slot can be the result of a dead subscriber, where the
 
 ### What to do if your replication slot is removed
 
-If you find that a replication slot was removed and you need to add it back, please see [Create a replication slot](/docs/guides/logical-replication-neon#create-a-replication-slot) for instructions or refer to the replication slot creation instructions for your subscriber.
+If you find that a replication slot was removed and you need to add it back, please see [Dedicated replication slots](/docs/guides/logical-replication-neon#dedicated-replication-slots) for instructions or refer to the replication slot creation instructions for your subscriber.
 
 ## Replication roles
 
-It is recommended that you create a dedicated Postgres role for replicating data from Neon to a subscriber. This role must have the `REPLICATION` privilege. The default Postgres role created with your Neon project and roles created using the Neon Console, CLI, or API are granted membership in the [neon_superuser](/docs/manage/roles#the-neonsuperuser-role) role, which has the required `REPLICATION` privilege. Roles created via SQL do not have this privilege, and the `REPLICATION` privilege cannot be granted.
+It is recommended that you create a dedicated Postgres role for replicating data from Neon to a subscriber. This role must have the `REPLICATION` privilege. The default Postgres role created with your Neon project and roles created using the Neon Console, CLI, or API are granted membership in the [neon_superuser](/docs/manage/roles#the-neonsuperuser-role) role, which has the required `REPLICATION` privilege. Roles created via SQL don't have this privilege by default. A role that can grant privileges can add it with `ALTER ROLE <role_name> REPLICATION`.
 
 You can verify that your role has the `REPLICATION` privilege by running the following query:
 
@@ -165,7 +165,7 @@ Neon supports both `pgoutput` and `wal2json` replication output decoder plugins.
 
 ## Dedicated replication slots
 
-Some data services and platforms require dedicated replication slots. You can create a dedicated replication slot using the standard PostgreSQL syntax. As mentioned above, Neon supports both `pgoutput` and `wal2json` replication output decoder plugins.
+Some data services and platforms require dedicated replication slots. You can create a dedicated replication slot using the standard Postgres syntax. As mentioned above, Neon supports both `pgoutput` and `wal2json` replication output decoder plugins.
 
 ```sql
 SELECT pg_create_logical_replication_slot('my_replication_slot', 'pgoutput');
@@ -191,7 +191,7 @@ If you require different values for these parameters, please contact Neon suppor
 
 ## Replicating between databases on the same Neon project branch
 
-Each branch in a Neon project has its own Postgres instance, and a Postgres instance is a database cluster, capable of supporting multiple databases. If your use case requires replicating data between two databases in the same database cluster, i.e., on the same Neon project branch, the setup is slightly different than configuring replication between separate Postgres instances. As described in the official PostgreSQL [CREATE SUBSCRIPTION Notes documentation](https://www.postgresql.org/docs/current/sql-createsubscription.html):
+Each branch in a Neon project has its own Postgres instance, and a Postgres instance is a database cluster, capable of supporting multiple databases. If your use case requires replicating data between two databases in the same database cluster, i.e., on the same Neon project branch, the setup is slightly different than configuring replication between separate Postgres instances. As described in the official Postgres [CREATE SUBSCRIPTION Notes documentation](https://www.postgresql.org/docs/current/sql-createsubscription.html):
 
 ```text shouldWrap
 Creating a subscription that connects to the same database cluster (for example, to replicate between databases in the same cluster or to replicate within the same database) will only succeed if the replication slot is not created as part of the same command. Otherwise, the `CREATE SUBSCRIPTION` call will hang. To make this work, create the replication slot separately (using the function `pg_create_logical_replication_slot` with the plugin name `pgoutput`) and create the subscription using the parameter `create_slot = false`. This is an implementation restriction that might be lifted in a future release.
@@ -204,7 +204,7 @@ CREATE PUBLICATION my_publication FOR TABLES <table1>, <table2>;
 SELECT pg_create_logical_replication_slot('my_replication_slot', 'pgoutput');
 ```
 
-Then, on the subscriber database, you would create a subscription that references the replication slot with the `create_slot` option set to `false` and `slot_name` set to the name of the slot you created. The `connection_string` should be the connection string for the Postgres role used to connect to the publisher database. This role must have the `REPLICATION` privilege. Any Postgres role create created via the Neon Console, CLI, or API is a member of the `neon_superuser` role, which has the `REPLICATION` privilege by default. You can find your Neon database connection details by clicking the **Connect** button in the Console nav to open the **Connect to your branch** modal. See [Connect from any application](/docs/connect/connect-from-any-app). Be sure to select the correct role and database before copying the connection string.
+Then, on the subscriber database, you would create a subscription that references the replication slot with the `create_slot` option set to `false` and `slot_name` set to the name of the slot you created. The `connection_string` should be the connection string for the Postgres role used to connect to the publisher database. This role must have the `REPLICATION` privilege. Any Postgres role created via the Neon Console, CLI, or API is a member of the `neon_superuser` role, which has the `REPLICATION` privilege by default. You can find your Neon database connection details by clicking the **Connect** button in the Console nav to open the **Connect to your branch** modal. See [Connect from any application](/docs/connect/connect-from-any-app). Be sure to select the correct role and database before copying the connection string.
 
 ```sql
 CREATE SUBSCRIPTION my_subscription

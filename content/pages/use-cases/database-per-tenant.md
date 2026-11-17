@@ -3,6 +3,12 @@ title: 'One Database per User, Zero Complexity'
 subtitle: Give every end-user a dedicated Postgres database with full isolation. Meet compliance requirements, eliminate noisy neighbors, and scale without friction.
 summary: Covers the setup of a database-per-user architecture in Neon, enabling full isolation for each tenant with dedicated Postgres databases, ensuring compliance, stable performance, and simplified management without added complexity.
 enableTableOfContents: true
+seo:
+  title: 'Database per Tenant: Isolated Postgres for Every Customer | Neon'
+  description: >-
+    Give each tenant its own Postgres database on Neon for full isolation,
+    simpler compliance, and per-customer rollbacks in seconds. Inactive tenants
+    scale to zero, so idle databases don't add compute cost.
 updatedOn: '2024-08-23T09:00:00.000Z'
 image: '/images/social-previews/use-cases/db-per-tenant.jpg'
 ---
@@ -16,7 +22,7 @@ Neon makes it easy to isolate each tenant in their own Postgres database with in
 - **Instant per-customer recovery** - If there’s an issue (or a customer request), you can instantly roll back any tenant’s database without affecting the rest of your fleet.
 - **API-first management** - Provision, scale, and manage all your Neon projects programmatically—one engineer can manage thousands of tenants.
 
-Sign up [using this link](http://fyi.neon.tech/credits) to claim $100 off your first invoice, and follow this guide to get started.
+Sign up [using this link](https://fyi.neon.tech/credits) to claim $100 off your first invoice, and follow this guide to get started.
 </Admonition>
 
 ## Why database-per-user?

@@ -91,7 +91,7 @@ At Neon, data security is integral to supporting your GDPR compliance. We implem
 4. **Incident Response**: In the unlikely event of a data breach involving personal data, Neon follows a GDPR-compliant notification protocol, informing affected customers promptly, typically within 72 hours.
 
 <Admonition type="info" title="Additional info">
-Neon is also **ISO 27701** certified, an international standard for privacy information management systems that supports GDPR compliance. For more details about our certifications, policies, and compliance practices, visit our [Trust Center](https://trust.neon.tech/). To learn more about the security features we implement to protect personal data, visit our [Security Overview](https://neon.com/docs/security/security-overview).
+Neon is also **ISO 27701** certified, an international standard for privacy information management systems that supports GDPR compliance. For more details about our certifications, policies, and compliance practices, visit our [Trust Center](https://trust.neon.com/). To learn more about the security features we implement to protect personal data, visit our [Security Overview](https://neon.com/docs/security/security-overview).
 </Admonition>
 
 ## Simplify your path to GDPR compliance
@@ -100,7 +100,7 @@ By choosing Neon, you simplify your path to GDPR compliance. Our platform is des
 
 For more information on how Neon supports your compliance efforts, please visit:
 
-- **Trust Center:** [https://trust.neon.tech/](https://trust.neon.tech/)
+- **Trust Center:** [https://trust.neon.com/](https://trust.neon.com/)
 - **Privacy Guide:** [https://neon.tech/privacy-guide](https://neon.tech/privacy-guide)
 - **Security Overview:** [https://neon.com/docs/security/security-overview](https://neon.com/docs/security/security-overview)
 - **Data Processing Agreement:** [https://neon.tech/dpa](https://neon.tech/dpa)

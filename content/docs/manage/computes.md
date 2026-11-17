@@ -8,6 +8,9 @@ summary: >-
   compute endpoints via the Neon Console or API.
 enableTableOfContents: true
 isDraft: false
+redirectFrom:
+  - /docs/introduction/compute-size
+  - /docs/introduction/compute
 updatedOn: '2026-11-05T15:33:57.188Z'
 ---
 
@@ -153,7 +156,7 @@ For attribute definitions, find the [List computes](/docs/reference/api/endpoint
 
 ## Create a compute
 
-You can only create a single primary read-write compute for a branch that does not have a compute, but a branch can have multiple read replica computes.
+You can only create a single primary read-write compute for a branch that does not have a compute, but a branch can have multiple read replica computes. Projects also have a limit on how many computes can be active at once on non-default branches. Most projects never reach it. See [Concurrently active compute limit](#concurrently-active-compute-limit).
 
 <Tabs labels={["Console", "CLI", "API"]}>
 
@@ -428,16 +431,16 @@ On fixed-size computes of 18 CU and above, Neon delivers this cache as Postgres 
 
 | Compute Size (CU) | RAM (GB) | Compute cache size (GB) | max_connections |
 | :---------------- | :------- | :---------------------- | :-------------- |
-| 0.25              | 1        | 0.75                    | 104             |
-| 0.50              | 2        | 1.5                     | 209             |
-| 1                 | 4        | 3                       | 419             |
-| 2                 | 8        | 6                       | 839             |
-| 3                 | 12       | 9                       | 1258            |
-| 4                 | 16       | 12                      | 1678            |
-| 5                 | 20       | 15                      | 2098            |
-| 6                 | 24       | 18                      | 2517            |
-| 7                 | 28       | 21                      | 2937            |
-| 8                 | 32       | 24                      | 3357            |
+| 0.25              | 1        | 0.75                    | 112             |
+| 0.50              | 2        | 1.5                     | 225             |
+| 1                 | 4        | 3                       | 450             |
+| 2                 | 8        | 6                       | 901             |
+| 3                 | 12       | 9                       | 1351            |
+| 4                 | 16       | 12                      | 1802            |
+| 5                 | 20       | 15                      | 2253            |
+| 6                 | 24       | 18                      | 2703            |
+| 7                 | 28       | 21                      | 3154            |
+| 8                 | 32       | 24                      | 3604            |
 | 9                 | 36       | 27                      | 4000            |
 | 10                | 40       | 30                      | 4000            |
 | 11                | 44       | 33                      | 4000            |
@@ -540,7 +543,7 @@ Issue a [Restart compute endpoint](/docs/reference/api/endpoints/restart-project
 curl --request POST \
    --url https://console.neon.tech/api/v2/projects/autumn-lake-30024670/endpoints/ep-misty-morning-a1pfa4ez/restart \
    --header 'accept: application/json' \
-   --header 'authorization: Bearer $NEON_API_KEY'
+   --header "authorization: Bearer $NEON_API_KEY"
 ```
 
 <Admonition type="note">
@@ -631,6 +634,31 @@ For attribute definitions, find the [Delete compute](/docs/reference/api/endpoin
 ## Compute-related issues
 
 This section outlines compute-related issues you may encounter and possible resolutions.
+
+### Concurrently active compute limit
+
+Each project can have a limited number of computes active at the same time. The default limit is 20 concurrently active computes per project. The limit protects against accidental surges, such as a script that starts many computes at once.
+
+The limit counts computes that are active or starting, including read replicas, on every branch except the project's [default branch](/docs/reference/glossary#default-branch). Computes on the default branch don't count, and neither do suspended computes or computes that are suspending. The limit never blocks a compute on the default branch from starting.
+
+When a project reaches the limit, Neon doesn't start additional computes on non-default branches:
+
+- Creating a compute or branch still succeeds, but the new compute stays suspended.
+- Connecting to a suspended compute returns this error:
+
+```text shouldWrap
+You have exceeded the limit of concurrently active endpoints. Please suspend some endpoints and try again.
+```
+
+The API returns `active endpoints limit exceeded`.
+
+To work within the limit:
+
+- Let idle computes [scale to zero](/docs/introduction/scale-to-zero) so they stop counting toward the limit.
+- [Delete computes](#delete-a-compute) or branches you no longer use.
+- If you run a database per tenant or per agent, see [Multitenancy with Neon](/docs/guides/multitenancy). A project per tenant spreads computes across projects, and each project has its own limit.
+
+If your workload needs more active computes in one project, you can request a limit increase. Scale plan users can [request a limit increase](/docs/introduction/support#request-a-limit-increase) from the console. For details about the error, see [Connection errors](/docs/connect/connection-errors#you-have-exceeded-the-limit-of-concurrently-active-endpoints).
 
 ### No space left on device
 

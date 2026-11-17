@@ -1,6 +1,6 @@
 ---
 title: Managing your data and schemas in the Neon Console
-subtitle: 'Use the Tables page to easily view, edit, and manage your data and schemas'
+subtitle: 'Use the Tables page to view, edit, and manage your data and schemas'
 summary: >-
   The Tables page in the Neon Console is a visual, interactive editor powered
   by Drizzle Studio. It supports reading, inserting, updating, deleting,
@@ -12,10 +12,10 @@ enableTableOfContents: true
 updatedOn: '2026-09-17T16:33:54.884Z'
 ---
 
-The **Tables** page in the Neon Console offers a dynamic, visual interface for managing data and schemas. Fully interactive, this view lets you add, update, and delete records, filter data, modify columns, drop or truncate tables, export data in both .json and .csv formats, and manage schemas, tables, views, and enums.
+The **Tables** page in the Neon Console offers a visual interface for managing data and schemas. You can add, update, and delete records, filter data, modify columns, drop or truncate tables, export data in both .json and .csv formats, and manage schemas, tables, views, and enums.
 
 <Admonition type="note">
-The **Tables** page is powered by a Drizzle Studio integration. For tracking updates, see [Tables page enhancements and updates](#tables-page-enhancements-and-updates).
+The **Tables** page is powered by a Drizzle Studio integration. For tracking updates, see [Tables page updates](#tables-page-updates).
 </Admonition>
 
 ## Edit records
@@ -89,7 +89,7 @@ You can create Postgres roles from the **Tables** page. Define a role name, sele
 
 ![Create roles on the tables page](/docs/changelog/tables_page_create_roles.png)
 
-> Neon role and privilege limitations apply. See [Manage roles](/docs/manage/roles).
+> Roles created in the Console or API join the `neon_superuser` role, which gives them admin privileges on the branch, whatever privileges you select here. For a read-only or read-write role, see [Manage roles](/docs/manage/roles).
 
 ## Add privileges
 
@@ -101,7 +101,7 @@ For more advanced privilege assignments, click the **Add privilege** link when c
 
 ## Define RLS policies
 
-Create Postgres RLS policies using the templates provided. Templates like "based on user_id" restrict each user to their own rows. When using the Data API, access is matched to the `auth.user_id()` function.
+Create Postgres RLS policies using the templates provided. Templates like "based on user_id" restrict each user to their own rows. When using the Data API, access is matched to the `auth.user_id()` function, which is available after you enable the Data API on the branch.
 
 ![Set RLS policies on the tables page](/docs/changelog/tables_page_rls_policies.png)
 
@@ -131,11 +131,11 @@ If it's not a DNS resolution issue, other troubleshooting steps you can try incl
 
 - **Refreshing the page**: This can resolve temporary glitches.
 - **Clearing browser cache**: Cached files might cause issues, so clearing the cache could help.
-- **Disabling browser extensions**: Extensions may interfere with the page’s functionality.
+- **Disabling browser extensions**: Extensions may interfere with the page's functionality.
 - **Using a different browser or device**: Check if the issue occurs on another browser or device.
 - **Trying incognito mode**: Using an incognito window can help bypass issues related to cookies or extensions.
 
 If the issue persists, please follow these steps to report the error:
 
-1. [Open a support ticket](https://console.neon.tech/app/projects?modal=support) and provide a detailed description of what you were doing when the error occurred. Please include any screen captures or files that will help us reproduce the issue. We'll work with our partners at Drizzle to investigate and resolve the issue.
-2. If you're on the Free plan, you can report the issue on [Discord](https://neon.com/discord).
+1. If you're on a paid plan, [open a support ticket](https://console.neon.tech/app/projects?modal=support). Describe what you were doing when the error occurred, and include any screen captures or files that help us reproduce the issue. We'll work with our partners at Drizzle to investigate and resolve the issue.
+2. If you're on the Free plan, report the issue on [Discord](https://neon.com/discord).

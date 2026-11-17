@@ -30,7 +30,7 @@ When this prompt is triggered, automatically configure the open Elixir project a
 3.  Add the following dependencies to the list:
     ```elixir
     {:ecto_sql, "~> 3.11"},
-    {:postgrex, "~> 0.18.0"}
+    {:postgrex, "~> 0.22"}
     ```
 4.  After saving the file, run the following command in the terminal to install the dependencies:
     ```bash
@@ -148,7 +148,7 @@ defmodule NeonEctoExample do
 
       # 3. UPDATE
       IO.puts("\n[UPDATE] Marking the todo as complete...")
-      changeset = Todo.changeset(fetched_todo, %{completed: true, task: "Master Neon with Ecto!"})
+      changeset = Todo.changeset(fetched_todo, %{completed: true, task: "Master Neon with Ecto"})
       {:ok, updated_todo} = Repo.update(changeset)
       IO.puts("Updated: #{inspect(updated_todo)}")
 

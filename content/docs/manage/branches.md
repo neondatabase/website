@@ -13,7 +13,7 @@ enableTableOfContents: true
 isDraft: false
 redirectFrom:
   - /docs/get-started/get-started-branching
-updatedOn: '2026-10-09T15:17:33.920Z'
+updatedOn: '2026-11-14T19:49:05.289Z'
 ---
 
 Data resides in a branch. Each Neon project is created with a [root branch](#root-branch), which is also designated as your [default branch](#default-branch). Projects created in the Neon Console have a root branch named `production`, while projects created via the API or CLI have a root branch named `main`. You can create child branches from your root branch or from previously created branches. A branch can contain multiple databases and roles. Neon's [plan allowances](/docs/introduction/plans) define the number of branches you can create.
@@ -463,7 +463,7 @@ curl -X POST 'https://console.neon.tech/api/v2/projects/dry-heart-13671059/branc
 
 ## Set a branch as protected
 
-This feature is available on all Neon's paid plans, which supports up to five protected branches.
+This feature is available on Neon's paid plans. The number of protected branches you can have per project depends on your plan. See [Protected branches](/docs/guides/protected-branches).
 
 <Tabs labels={["Console", "CLI", "API"]}>
 
@@ -481,7 +481,13 @@ To set a branch as protected:
 
 <TabItem>
 
-No dedicated command sets protection, so use the [`neon api`](/docs/cli/api) passthrough, which sends the request with your CLI credentials:
+To protect a new branch, pass `--protected` when you create it:
+
+```bash
+neon branches create --name production --protected
+```
+
+No command changes protection on an existing branch, so use the [`neon api`](/docs/cli/api) passthrough, which sends the request with your CLI credentials:
 
 ```bash
 neon api /projects/dry-heart-13671059/branches/br-curly-wave-123456 -X PATCH -F branch.protected=true
@@ -623,6 +629,12 @@ You can use the Neon Console, CLI, or API. For more details, see [Instant restor
 
 Deleting a branch is a permanent action. Deleting a branch also deletes the databases and roles that belong to the branch as well as the compute associated with the branch. You cannot delete a branch that has child branches. The child branches must be deleted first.
 
+If a delete is blocked, the CLI and API return one of these errors:
+
+- `cannot delete branch that has children`: delete the child branches first.
+- `cannot delete default branch`: set another branch as the default first.
+- `cannot delete the root branch`: this root branch can't be deleted. See [Root branch](#root-branch) for which root branches can be.
+
 <Tabs labels={["Console", "CLI", "API"]}>
 
 <TabItem>
@@ -758,7 +770,7 @@ A root branch is a branch without a parent branch. Each Neon project starts with
 
 Neon also supports two other types of root branches that have no parent but _can_ be deleted:
 
-- [Backup branches](#backup-branch), created by instant restore operations on other root branches.
+- [Backup branches](#backup-branch), created by instant restore operations on other root branches. The exception: when you restore a root branch from another branch, its backup (the original root) can't be deleted. See [Deleting backup branches](/docs/postgres/backup-restore/branch-restore#deleting-backup-branches).
 - [Schema-only branches](#schema-only-branch).
 
 The number of root branches allowed in a project depends on your Neon plan.

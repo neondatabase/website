@@ -6,7 +6,7 @@
 
 **Scope:**
 - Must be run inside an existing Micronaut project directory.
-- Assumes the user has Micronaut Kotlin CLI and JDK 21 installed as they are required for project setup.
+- Assumes the user has the Micronaut CLI (the Micronaut 5 CLI runs on JDK 25) and JDK 21 (the application's target) installed.
 - Assumes the user has a Neon project and access to their full connection details (host, database, user, password).
 - All modifications will follow Micronaut, Gradle, and Kotlin conventions.
 
@@ -20,7 +20,7 @@
 - **Setup for New Projects:** If the user does not have a project yet, run the following command. This command scaffolds a new project with all required features.
 
   ```bash
-  mn create-app with-micronaut-kotlin --lang=kotlin --jdk=21 --features=postgres,jdbc-hikari,flyway,data-jdbc,yaml
+  mn create-app com.example.with-micronaut-kotlin --lang=kotlin --jdk=21 --features=postgres,jdbc-hikari,flyway,data-jdbc,yaml
   ```
 
 ---
@@ -33,7 +33,7 @@ When this prompt is triggered, automatically configure the open Micronaut projec
 
 1.  **Check `build.gradle.kts`:** Ensure the project includes the necessary dependencies for this task. Look for implementations related to `micronaut-data-jdbc`, `micronaut-flyway`, and `postgresql`. If they are missing, add the necessary packages.
 
-2.  **Ensure JDK Compatibility:** Check the `build.gradle.kts` file for the following block. If it is not present, add it inside the `kotlin { ... }` block to ensure compatibility with modern JDKs.
+2.  **Ensure JDK Compatibility:** Check the `build.gradle.kts` file for the following block. If it is not present, add it at the top level of the file (the generated file has no `kotlin { ... }` block) so the build uses JDK 21.
 
     ```kotlin
     // build.gradle.kts
@@ -49,15 +49,15 @@ When this prompt is triggered, automatically configure the open Micronaut projec
 1.  **Locate the configuration file:** Find the main configuration file at `src/main/resources/application.yml`.
 2.  **Update the `datasources` block:** Modify this file to include connection details for Neon. **Prompt the user to replace the placeholder values** with their credentials.
 
-    ```yaml title="src/main/resources/application.yml"
+    ```yaml filename="src/main/resources/application.yml"
     micronaut:
       application:
         name: with-micronaut-kotlin
     datasources:
       default:
-        url: 'jdbc:postgresql://<your-endpoint.neon.tech>/<dbname>?sslmode=require&channelBinding=require'
-        username: '<your-db-username>'
-        password: '<your-db-password>'
+        url: 'jdbc:postgresql://[neon_hostname]/[dbname]?sslmode=require&channelBinding=require'
+        username: '[user]'
+        password: '[password]'
         driver-class-name: org.postgresql.Driver
         db-type: postgres
         dialect: POSTGRES
@@ -78,7 +78,7 @@ Create the necessary files for a complete CRUD API for an example `Book` entity.
 
 Create a new SQL file at `src/main/resources/db/migration/V1__create_book_table.sql`. This Flyway migration will create the `book` table and seed it with initial data upon application startup.
 
-```sql title="src/main/resources/db/migration/V1__create_book_table.sql"
+```sql filename="src/main/resources/db/migration/V1__create_book_table.sql"
 CREATE TABLE IF NOT EXISTS book (
     id SERIAL PRIMARY KEY,
     title VARCHAR(255) NOT NULL,
@@ -93,7 +93,7 @@ INSERT INTO book (title, author) VALUES ('1984', 'George Orwell');
 
 Create the Kotlin data class at `src/main/kotlin/com/example/entity/Book.kt`. This class maps to the `book` table.
 
-```kotlin title="src/main/kotlin/com/example/entity/Book.kt"
+```kotlin filename="src/main/kotlin/com/example/entity/Book.kt"
 package com.example.entity
 
 import io.micronaut.data.annotation.GeneratedValue
@@ -116,7 +116,7 @@ data class Book(
 
 Create the repository interface at `src/main/kotlin/com/example/repository/BookRepository.kt`. Micronaut Data will automatically implement the CRUD methods.
 
-```kotlin title="src/main/kotlin/com/example/repository/BookRepository.kt"
+```kotlin filename="src/main/kotlin/com/example/repository/BookRepository.kt"
 package com.example.repository
 
 import com.example.entity.Book
@@ -132,7 +132,7 @@ interface BookRepository : CrudRepository<Book, Long>
 
 Create the controller at `src/main/kotlin/com/example/controller/BookController.kt` to expose API endpoints.
 
-```kotlin title="src/main/kotlin/com/example/controller/BookController.kt"
+```kotlin filename="src/main/kotlin/com/example/controller/BookController.kt"
 package com.example.controller
 
 import com.example.entity.Book

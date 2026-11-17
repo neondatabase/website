@@ -2,7 +2,7 @@
 
 Use this page when the request is "let MCP clients sign in my users", "protect my MCP server with OAuth", or "let another app or OAuth client call my API on behalf of my users". Managed Better Auth is the OAuth 2.1 / OIDC authorization server (the OAuth provider plugin, beta, available to all Managed projects). Do not move to self-managed Better Auth for this, and keep the app's existing login method.
 
-"OAuth server" and "OAuth clients" here are not the social providers (Google, GitHub, Apple) of `neon neon-auth oauth-provider`. Those sign users in to Neon Auth. This page makes Neon Auth issue tokens to other apps.
+"OAuth server" and "OAuth clients" here are not the social sign-in providers (`signIn.social`). Those sign users in to Neon Auth. This page makes Neon Auth issue tokens to other apps.
 
 - Docs: https://neon.com/docs/auth/guides/plugins/oauth-provider.md
 - Configuration is per branch: each branch has its own issuer, clients, and settings.
@@ -97,15 +97,15 @@ The user identity is the token's `sub`. Never trust a user id from tool argument
 Verify `iss` (the exact Auth URL of the branch) and `aud` (the exact MCP server URL) as well as the signature. All branches of a project share signing keys, so the signature alone does not identify the branch. `@neon/oauth` 0.3.0 or later (beta) does all three.
 
 ```bash
-npm install @neon/oauth @modelcontextprotocol/sdk hono @hono/mcp
+npm install @neon/oauth @modelcontextprotocol/sdk@^1.30.0 hono
 ```
 
 On a Neon Function, the default export is a Hono app (see the `neon-functions` skill, [references/mcp.md](https://neon.com/docs/ai/skills/neon-functions/references/mcp.md)):
 
 ```typescript
 import { Hono } from "hono";
-import { StreamableHTTPTransport } from "@hono/mcp";
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
+import { WebStandardStreamableHTTPServerTransport } from "@modelcontextprotocol/sdk/server/webStandardStreamableHttp.js";
 import { createMcpAuth } from "@neon/oauth/mcp";
 import { honoMcp, type McpAuthVariables } from "@neon/oauth/mcp/hono";
 
@@ -117,19 +117,38 @@ const mcpAuth = createMcpAuth({
 const app = new Hono<McpAuthVariables>();
 app.use(honoMcp(mcpAuth, { path: "/mcp" })); // metadata routes + bearer guard
 
-app.all("/mcp", async (c) => {
+// Stateless: no standalone SSE stream and no session to delete.
+app.on(["GET", "DELETE"], "/mcp", (c) =>
+  c.json(
+    {
+      jsonrpc: "2.0",
+      error: { code: -32000, message: "Method not allowed." },
+      id: null,
+    },
+    405,
+    { Allow: "POST" },
+  ),
+);
+
+app.post("/mcp", async (c) => {
   const userId = c.get("auth").sub; // verified identity; scope every query by it
   const server = new McpServer({ name: "my-mcp", version: "1.0.0" });
   // register tools that close over userId
-  const transport = new StreamableHTTPTransport({ sessionIdGenerator: undefined });
+  const transport = new WebStandardStreamableHTTPServerTransport({
+    sessionIdGenerator: undefined,
+  });
   await server.connect(transport);
-  return transport.handleRequest(c);
+  return transport.handleRequest(c.req.raw, {
+    authInfo: c.get("authInfo"),
+  });
 });
 
 export default app;
 ```
 
-- Stateless: build the server and transport per request.
+- Use the official Web Standard transport on Neon Functions. It matches the runtime's `Request` / `Response` interface directly and, from SDK 1.30.0, sends SSE keep-alives every 15 seconds. `@hono/mcp` sends no keep-alives on POST responses, so a slow tool call can hit a client's 30-second connection timeout on Neon Functions.
+- The official transport enforces the MCP `Accept` headers. Use `@hono/mcp` only as a compatibility fallback for a known client that does not send the required headers. Its wiring is in the `neon-functions` skill, [references/mcp.md](https://neon.com/docs/ai/skills/neon-functions/references/mcp.md#fallback-for-non-compliant-clients).
+- Stateless: build the server and transport per request. Pass `c.req.raw` and `c.get("authInfo")` to `handleRequest`. Return `405` with `Allow: POST` for GET and DELETE, so a GET does not hold an idle SSE stream open. `honoMcp` still checks the token on those methods.
 - `c.get("auth")` is the verified result (`sub`, `clientId`, `scopes`, `claims`); `c.get("authInfo")` is the MCP SDK `AuthInfo`. Express, Next.js, and `node:http` adapters exist (`@neon/oauth/mcp/express`, `/next`, `/node`).
 - Set `NEON_AUTH_BASE_URL` and `MCP_RESOURCE` through the Function's `env` in `neon.ts`, and deploy with `neon deploy` (or `neon functions deploy <name> --src <file>`).
 - Known gaps: a request with no token gets a challenge with `error="invalid_token"` rather than a bare RFC 6750 challenge, and `/mcp` has no CORS or `OPTIONS` handling, so browser-based MCP clients need CORS added by you.
@@ -157,7 +176,7 @@ Report any step you could not run.
 ## Do NOT
 
 - Do not move to self-managed Better Auth or the Better Auth MCP plugin for this. Managed supports it.
-- Do not confuse this with `neon neon-auth oauth-provider` (social login) or Generic OAuth.
+- Do not confuse this with `neon neon-auth oauth-provider` (`signIn.social` providers) or Generic OAuth.
 - Do not call `auth.oauth.resume()`, `getConsentRequest()`, or any resume helper. Use `oauth2.continue`, `oauth2.publicClient`, and `oauth2.consent`.
 - Do not put client secrets, or Neon API keys, in browser or mobile code.
 - Do not skip `iss` and `aud` checks, or trust a user id from tool input instead of `sub`.

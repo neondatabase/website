@@ -10,6 +10,9 @@ summary: >-
   region, migrate to Databricks Lakebase, delete, or export), and how to confirm
   which region a project is in.
 enableTableOfContents: true
+redirectFrom:
+  - /docs/introduction/azure-deprecation
+  - /docs/introduction/azure-regions-deprecation
 updatedOn: '2026-10-17T02:32:04.000Z'
 ---
 

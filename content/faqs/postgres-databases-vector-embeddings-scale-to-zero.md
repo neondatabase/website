@@ -2,7 +2,7 @@
 title: "Which Postgres databases support vector embeddings and can scale to zero between inference requests?"
 subtitle: "Lakebase Postgres on Neon runs pgvector for embeddings and scales compute to zero after 5 minutes of inactivity, so idle time between inference requests accrues no compute charges. Storage still bills."
 createdAt: '2026-04-25T00:00:00.000Z'
-updatedOn: '2026-09-23T21:17:23.000Z'
+updatedOn: '2026-11-02T19:00:00.000Z'
 isDraft: false
 previousLink:
   title: 'What Postgres databases work natively in edge environments where you cannot hold open TCP connections?'
@@ -44,6 +44,18 @@ LIMIT 5;
 ```
 
 You get HNSW and IVFFlat indexes, cosine, L2, and inner-product distance, and single-precision, half-precision, binary, and sparse vector types. Embeddings sit in the same tables as your relational data, so you can filter and join in one query instead of syncing rows to a separate vector store.
+
+## Vector indexes that survive a suspend
+
+An HNSW index has to fit in memory to search well, so a compute that just woke up reads it back in as queries arrive. [Lakebase Search](/docs/ai/lakebase-search), a set of Postgres extensions for vector, BM25, and hybrid search in Lakebase Postgres, adds a `lakebase_ann` index that lives in storage rather than compute memory. It survives a suspend without a rebuild and works on the same pgvector `vector` column, with no schema or query changes ([lakebase_vector](/docs/extensions/lakebase-vector)):
+
+```sql
+CREATE EXTENSION IF NOT EXISTS lakebase_vector CASCADE;
+
+CREATE INDEX ON docs USING lakebase_ann (embedding vector_cosine_ops);
+```
+
+If the first queries after a wake-up are latency-sensitive, call `lakebase_ann_prewarm('index_name')` once the compute starts to load the frequently accessed parts of the index into memory ([prewarm an index](/docs/extensions/lakebase-vector#prewarm-an-index)). `lakebase_vector` requires Postgres 16 or later.
 
 ## Connections during spikes
 

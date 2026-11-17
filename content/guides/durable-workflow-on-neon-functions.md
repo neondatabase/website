@@ -83,8 +83,8 @@ sequenceDiagram
 Before starting, make sure you have:
 
 1. **Node.js**: Version 20 or later (v24 recommended). Download from [nodejs.org](https://nodejs.org/).
-2. **Neon account**: Sign up at [console.neon.tech](https://console.neon.tech/signup). This guide calls a model through [AI Gateway](/docs/ai-gateway/overview), which is available on paid plans (Launch and Scale) with prepaid credits.
-3. **Neon CLI**: Installed globally (`npm i -g neon`) and authenticated (`neon login`). See the [Neon CLI quickstart](/docs/cli/quickstart) for details.
+2. **Neon account**: Sign up at [console.neon.tech](https://console.neon.tech/signup). This guide calls a model through [AI Gateway](/docs/ai-gateway/overview), which works on any plan with prepaid credits.
+3. **Neon CLI**: Installed globally (`npm i -g neon@latest`) and authenticated (`neon login`). See the [Neon CLI quickstart](/docs/cli/quickstart) for details.
 4. **Inngest account**: Sign up for a free account at [inngest.com](https://www.inngest.com).
    <Admonition type="tip" title="Self-hosting Inngest">
    You can also self-host Inngest using the [Inngest self-hosting guide](https://www.inngest.com/docs/self-hosting). Use Lakebase Postgres as the backing database for Inngest's durable state storage. The workflow code in this guide works the same with Inngest Cloud or a self-hosted Inngest instance.
@@ -353,8 +353,8 @@ export default defineConfig({
       name: "Inngest Workflow Endpoint",
       source: "./index.ts",
       env: {
-        INNGEST_EVENT_KEY: process.env.INNGEST_EVENT_KEY!,
-        INNGEST_SIGNING_KEY: process.env.INNGEST_SIGNING_KEY!,
+        INNGEST_EVENT_KEY: { value: process.env.INNGEST_EVENT_KEY, required: true },
+        INNGEST_SIGNING_KEY: { value: process.env.INNGEST_SIGNING_KEY, required: true },
       },
     }
   },
@@ -529,9 +529,9 @@ const webSearch = tool({
 
 ```ts filename="neon.ts" {4}
 env: {
-  INNGEST_EVENT_KEY: process.env.INNGEST_EVENT_KEY!,
-  INNGEST_SIGNING_KEY: process.env.INNGEST_SIGNING_KEY!,
-  BRAVE_SEARCH_API_KEY: process.env.BRAVE_SEARCH_API_KEY!,
+  INNGEST_EVENT_KEY: { value: process.env.INNGEST_EVENT_KEY, required: true },
+  INNGEST_SIGNING_KEY: { value: process.env.INNGEST_SIGNING_KEY, required: true },
+  BRAVE_SEARCH_API_KEY: { value: process.env.BRAVE_SEARCH_API_KEY, required: true },
 },
 ```
 

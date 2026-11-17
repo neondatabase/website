@@ -35,7 +35,7 @@ Neon is the Postgres layer platforms use when every user, workspace, or generate
 - Branching and instant restore for copies and rollbacks, without manual backups
 - Multi-region placement, autoscaling, and high availability on the same model
 
-With pay-per-use pricing and automatic scale-to-zero, [you spend a fraction of what you'd pay on AWS for the same fleet](/cost-fleets).
+With pay-per-use pricing and automatic scale-to-zero, inactive databases in your fleet don't add compute cost. See [pricing](/pricing) for details.
 
 <QuoteBlock quote="We’ve been able to manage 300K+ Postgres databases via the Neon API. It saved us a tremendous amount of time and engineering effort." author="himanshu-bhandoh" role="Software Engineer at Retool" link="/blog/how-retool-uses-retool-and-the-neon-api-to-manage-300k-postgres-databases" />
 

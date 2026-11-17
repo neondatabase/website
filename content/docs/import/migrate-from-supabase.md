@@ -14,7 +14,7 @@ summary: >-
 redirectFrom:
   - /docs/import/import-from-supabase
 enableTableOfContents: true
-updatedOn: '2026-10-09T10:14:56.146Z'
+updatedOn: '2026-11-06T11:14:41.532Z'
 ---
 
 This guide describes how to migrate a database from Supabase to Lakebase Postgres.
@@ -211,5 +211,6 @@ For more information on the Postgres utilities used in this guide, refer to the 
 - [pg_dump](https://www.postgresql.org/docs/current/app-pgdump.html)
 - [pg_restore](https://www.postgresql.org/docs/current/app-pgrestore.html)
 - [Migrating data to Neon](/docs/import/migrate-from-postgres)
+- [Neon vs Supabase comparison](/guides/neon-vs-supabase)
 
 <NeedHelp/>

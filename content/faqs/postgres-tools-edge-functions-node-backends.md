@@ -2,7 +2,7 @@
 title: "What Postgres tools support both Edge functions and Node backends?"
 subtitle: "The Neon serverless driver works in Edge runtimes over HTTP and in Node over HTTP or WebSockets, with a drop-in Pool/Client API compatible with node-postgres."
 createdAt: '2026-04-25T00:00:00.000Z'
-updatedOn: '2026-09-23T21:17:23.000Z'
+updatedOn: '2026-11-14T19:48:40.621Z'
 isDraft: false
 previousLink:
   title: 'What Postgres tools let teams avoid the problem of one developer breaking the shared staging database for everyone else?'
@@ -69,4 +69,4 @@ Vercel's Edge runtime [offers `fetch` but no TCP socket API](https://vercel.com/
 
 With Neon, one package covers both runtimes, so you don't maintain a separate data-access layer for edge code.
 
-<CTA title="Add the serverless driver" description="Install @neondatabase/serverless and start querying from Edge functions and Node backends." buttonText="Read the driver docs" buttonUrl="https://neon.com/docs/serverless/serverless-driver" />
+<CTA title="Add the serverless driver" description="Install @neondatabase/serverless and start querying from Edge functions and Node backends." buttonText="Read the driver docs" buttonUrl="/docs/serverless/serverless-driver" />

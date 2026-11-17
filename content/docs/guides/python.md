@@ -16,14 +16,14 @@ updatedOn: '2026-10-09T10:14:56.146Z'
 <CopyPrompt src="/prompts/python-prompt.md" 
 description="Pre-built prompt for connecting Python applications to Neon"/>
 
-This guide describes how to create a Neon project and connect to it from a Python application using popular Postgres drivers. We'll cover [Psycopg 3](https://www.psycopg.org/psycopg3/docs/), the latest generation of the popular synchronous adapter, its predecessor [Psycopg 2 (psycopg2)](https://pypi.org/project/psycopg2-binary/), and [asyncpg](https://pypi.org/project/asyncpg/), an asynchronous adapter for use with `asyncio`.
+This guide describes how to create a Neon project and connect to it from a Python application using three Postgres drivers: [Psycopg 3](https://www.psycopg.org/psycopg3/docs/), the current synchronous adapter, its predecessor [Psycopg 2 (psycopg2)](https://pypi.org/project/psycopg2-binary/), and [asyncpg](https://pypi.org/project/asyncpg/), an asynchronous adapter for use with `asyncio`.
 
 You'll learn how to connect to the database from a Python application and perform basic Create, Read, Update, and Delete (CRUD) operations.
 
 ## Prerequisites
 
 - A Neon account. If you do not have one, see [Sign up](https://console.neon.tech/signup).
-- Python 3.8 or later. If you do not have Python installed, install it from the [Python website](https://www.python.org/downloads/).
+- Python 3.10 or later. Current releases of `psycopg` and `psycopg2-binary` require Python 3.10+. If you do not have Python installed, install it from the [Python website](https://www.python.org/downloads/).
 
 <Steps>
 
@@ -73,8 +73,8 @@ For your Python project, create a project directory, set up a virtual environmen
     </CodeTabs>
 
 3.  Install the required libraries using `pip`.
-    - `psycopg`: The modern, synchronous database adapter for connecting to Postgres (Psycopg 3). **Recommended** for new projects.
-    - `psycopg2-binary`: An older, widely-used synchronous database adapter.
+    - `psycopg`: The synchronous database adapter for connecting to Postgres (Psycopg 3). **Recommended** for new projects.
+    - `psycopg2-binary`: The previous-generation synchronous database adapter.
     - `asyncpg`: The asynchronous database adapter for connecting to Postgres.
     - `python-dotenv`: A helper library to manage environment variables.
 
@@ -86,7 +86,7 @@ For your Python project, create a project directory, set up a virtual environmen
 
 ## Store your Neon connection string
 
-Create a file named `.env` in your project's root directory. This file will securely store your database connection string.
+Create a file named `.env` in your project's root directory. This file stores your database connection string outside your code.
 
 1.  In the [Neon Console](https://console.neon.tech), open your project.
 2.  Click **Connect** in the Console nav to open the **Connect to your branch** modal.
@@ -100,7 +100,7 @@ Create a file named `.env` in your project's root directory. This file will secu
 
 ## Examples
 
-This section provides example Python scripts that demonstrate how to connect to your Neon database and perform basic operations such as [creating a table](#create-a-table-and-insert-data), [reading data](#read-data), [updating data](#update-data), and [deleting data](#delete-data).
+This section provides example Python scripts that demonstrate how to connect to your Neon database and perform basic operations such as [creating a table](#create-a-table-and-insert-data), [reading data](#read-data), [updating data](#update-data), and [deleting data](#delete-data). Pick one driver and use its tab for all four scripts.
 
 ### Create a table and insert data
 
@@ -709,13 +709,13 @@ ID: 4, Title: Dune, Author: Frank Herbert, Year: 1965, In Stock: True
 --------------------
 ```
 
-> You can see that the book '1984' has been successfully deleted from the `books` table.
+> You can see that the book '1984' has been deleted from the `books` table.
 
 </Steps>
 
-## Next steps: Using an ORM or framework
+## Use an ORM or framework
 
-While this guide demonstrates how to connect to Neon using raw SQL queries, for more advanced and maintainable data interactions in your Python applications, consider using an Object-Relational Mapping (ORM) framework. ORMs not only let you work with data as objects but also help manage schema changes through automated migrations keeping your database structure in sync with your application models.
+While this guide demonstrates how to connect to Neon using raw SQL queries, for more advanced and maintainable data interactions in your Python applications, consider using an Object-Relational Mapping (ORM) framework. ORMs let you work with data as objects and manage schema changes through migrations, keeping your database structure in sync with your application models.
 
 Explore the following resources to learn how to integrate ORMs with Neon:
 
@@ -731,7 +731,7 @@ Explore the following resources to learn how to integrate ORMs with Neon:
 
 - [Psycopg 3 documentation](https://www.psycopg.org/psycopg3/docs/)
 - [Psycopg 2 documentation](https://www.psycopg.org/docs/)
-- [Asyncpg documentation](https://magicstack.github.io/asyncpg/current/)
-- [Building an API with Django, Django REST Framework, and Neon Postgres](/guides/django-rest-api)
+- [asyncpg documentation](https://magicstack.github.io/asyncpg/current/)
+- [Building an API with Django, Django REST Framework, and Lakebase Postgres](/guides/django-rest-api)
 
 <NeedHelp/>

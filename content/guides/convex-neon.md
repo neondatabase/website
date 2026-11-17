@@ -4,8 +4,14 @@ subtitle: A step-by-step guide to integrating Convex with Lakebase Postgres
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2025-02-14T00:00:00.000Z'
-updatedOn: '2026-09-24T17:56:34.189Z'
+updatedOn: '2026-11-02T23:30:14.016Z'
 ---
+
+<Admonition type="tip" title="Want to replace Convex with Neon Realtime?">
+
+Neon now has realtime reactivity built in. See [how to Migrate from Convex](/docs/realtime/migrate-from/convex) in the [Neon Realtime docs](/docs/realtime/overview).
+
+</Admonition>
 
 This guide explores Convex's self-hosting capability and demonstrates how to use it with Lakebase Postgres. [Convex](https://www.convex.dev) is a reactive backend platform ideal for building real-time applications. A [recent release](https://news.convex.dev/self-hosting) improves the self-hosted experience, removing limitations of the initial open-source version which lacked a dashboard and relied solely on SQLite. The new self-hosted Convex includes the [dashboard](https://docs.convex.dev/dashboard) and supports Postgres as a scalable database option.
 
@@ -398,5 +404,13 @@ You have integrated Convex with Lakebase Postgres and implemented a real-time ch
 - [Neon documentation](/docs)
 - [Neon Console](https://console.neon.tech)
 - [Convex tutorial: A chat app](https://docs.convex.dev/tutorial)
+
+<Admonition type="tip" title="From Convex to Neon Realtime">
+
+Neon now has [realtime live SQL](/docs/realtime/overview#realtime-live-sql) and [end-to-end, type-safe reactivity](/docs/realtime/how-it-works#higher-level-reactive-dx) built-in.
+
+See [how to Migrate from Convex](/docs/realtime/migrate-from/convex) in the [Neon Realtime docs](/docs/realtime/overview).
+
+</Admonition>
 
 <NeedHelp/>

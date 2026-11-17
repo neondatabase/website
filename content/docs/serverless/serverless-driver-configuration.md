@@ -10,6 +10,8 @@ summary: >-
   and `neonConfig` options for `Pool` and `Client`. For installation and basic
   usage, see the Neon serverless driver page.
 enableTableOfContents: true
+redirectFrom:
+  - /docs/serverless/serverless-driver-config
 updatedOn: '2026-10-05T14:32:49.000Z'
 ---
 

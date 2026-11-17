@@ -4,7 +4,7 @@ subtitle: Learn how to authenticate requests using Managed Better Auth JWTs in a
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2025-12-30T00:00:00.000Z'
-updatedOn: '2026-09-24T17:56:34.189Z'
+updatedOn: '2026-10-09T15:55:57.334Z'
 ---
 
 This guide shows how to connect a **standalone React frontend** to a **custom backend API**, with [Managed Better Auth](/docs/auth/overview) handling identity.
@@ -396,7 +396,7 @@ $ npm create vite@latest journal-frontend -- --template react-ts
 └  Done.
 ```
 
-### Install dependencies
+### Install dependencies (#install-dependencies-2)
 
 Navigate into the project directory and install the required dependencies:
 
@@ -428,7 +428,7 @@ export default defineConfig({
 });
 ```
 
-### Configure environment variables
+### Configure environment variables (#configure-environment-variables-2)
 
 Create `.env` in `journal-frontend/`:
 

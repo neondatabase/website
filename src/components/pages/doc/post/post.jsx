@@ -11,7 +11,6 @@ import selectModal from 'components/pages/doc/modal/select-modal';
 import Content from 'components/shared/content';
 import DocFooter from 'components/shared/doc-footer';
 import LastUpdatedDate from 'components/shared/doc-footer/last-updated-date';
-import Link from 'components/shared/link';
 import NavigationLinks from 'components/shared/navigation-links';
 import { DOCS_BASE_PATH } from 'constants/docs';
 import { cn } from 'utils/cn';
@@ -80,7 +79,7 @@ const Post = ({
   gitHubPath,
   markdownPath,
   tableOfContents,
-  author,
+  authors = [],
   aboveContent = null,
   titleLeading = null,
   isFaq = false,
@@ -118,27 +117,33 @@ const Post = ({
   const actionsDivider = (
     <span aria-hidden="true" className="h-4 w-px shrink-0 bg-gray-new-85 dark:bg-gray-new-20" />
   );
+  // A page with its own prompt (a <PromptBlock>) already gives the reader a prompt to copy, so
+  // skip the generic Set up agent button rather than offer two different prompts.
+  // content is an empty object on the changelog index, so check the type first.
+  const showAgentSetup = !(typeof content === 'string' && content.includes('<PromptBlock'));
   const pageActionsRow = (
     <div className="mt-3.5 flex flex-wrap items-center gap-3.5">
       {!hideCopyPage && (
         <>
           <DropdownMenu variant="inline" gitHubPath={gitHubPath} markdownPath={docMarkdownPath} />
-          {actionsDivider}
+          {(docMarkdownPath || showAgentSetup) && actionsDivider}
         </>
       )}
       {docMarkdownPath && (
         <>
-          <Link
+          {/* Plain <a>, not <Link>: the .md isn't a Next.js route, so <Link> only
+              adds a prefetch and an extra RSC fetch on click. */}
+          <a
             className="flex items-center gap-[7px] text-sm leading-none text-gray-new-20 transition-colors duration-[120ms] ease-out hover:text-black-new dark:text-gray-new-94 dark:hover:text-white"
-            to={docMarkdownPath}
+            href={docMarkdownPath}
           >
             <MarkdownViewIcon />
             View as Markdown
-          </Link>
-          {actionsDivider}
+          </a>
+          {showAgentSetup && actionsDivider}
         </>
       )}
-      <AgentSetupButton agentPrompt={agentPrompt} />
+      {showAgentSetup && <AgentSetupButton agentPrompt={agentPrompt} />}
     </div>
   );
 
@@ -268,7 +273,7 @@ const Post = ({
           enableTableOfContents={enableTableOfContents}
           tableOfContents={tableOfContents}
           gitHubPath={gitHubPath}
-          author={author}
+          authors={authors}
         />
       )}
       {modal && <Modal {...modal} />}
@@ -311,17 +316,19 @@ Post.propTypes = {
   gitHubPath: PropTypes.string.isRequired,
   markdownPath: PropTypes.string,
   tableOfContents: PropTypes.arrayOf(PropTypes.shape({})),
-  author: PropTypes.shape({
-    slug: PropTypes.string,
-    name: PropTypes.string.isRequired,
-    position: PropTypes.string,
-    bio: PropTypes.string,
-    link: PropTypes.shape({
-      url: PropTypes.string,
-      title: PropTypes.string,
-    }),
-    photo: PropTypes.string,
-  }),
+  authors: PropTypes.arrayOf(
+    PropTypes.shape({
+      slug: PropTypes.string,
+      name: PropTypes.string.isRequired,
+      position: PropTypes.string,
+      bio: PropTypes.string,
+      link: PropTypes.shape({
+        url: PropTypes.string,
+        title: PropTypes.string,
+      }),
+      photo: PropTypes.string,
+    })
+  ),
   aboveContent: PropTypes.node,
   titleLeading: PropTypes.node,
   isFaq: PropTypes.bool,

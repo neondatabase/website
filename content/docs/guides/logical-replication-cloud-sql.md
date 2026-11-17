@@ -51,7 +51,7 @@ To enable this flag:
 
 The change requires restarting the instance:
 
-![Clod SQL instance restart](/docs/guides/cloud_sql_restart.png)
+![Cloud SQL instance restart](/docs/guides/cloud_sql_restart.png)
 
 Afterward, you can verify that logical replication is enabled by running `SHOW wal_level;` from **Cloud SQL Studio** or your terminal.
 
@@ -68,7 +68,7 @@ You need to allow connections to your Cloud SQL Postgres instance from Neon. To 
 1. Select the **Public IP** checkbox.
 1. Click **Add network**.
 1. Optionally, in the **Name** field, enter a name for this network.
-1. In the **Network** field, enter the IP address from which you want to allow connections. You will need to perform this step for each of the NAT gateway IP addresses associated with your Neon project's region. Neon uses 3 to 6 IP addresses per region for this outbound communication, corresponding to each availability zone in the region. See [NAT Gateway IP addresses](/docs/introduction/regions#nat-gateway-ip-addresses) for Neon's NAT gateway IP addresses.
+1. In the **Network** field, enter the IP address from which you want to allow connections. You will need to perform this step for each of the NAT gateway IP addresses associated with your Neon project's region. Neon uses several NAT gateway IP addresses per region, and the number varies by region. Allow all of the addresses for your project's region. See [NAT Gateway IP addresses](/docs/introduction/regions#nat-gateway-ip-addresses) for Neon's NAT gateway IP addresses.
 
    <Admonition type="note">
    Cloud SQL requires addresses to be specified in CIDR notation. You can do so by appending `/32` to the NAT Gateway IP address; for example: `18.217.181.229/32`
@@ -82,7 +82,7 @@ You need to allow connections to your Cloud SQL Postgres instance from Neon. To 
 1. Click **Save** when you are finished adding Network entries for all of your Neon project's NAT Gateway IP addresses.
 
 <Admonition type="note">
-You can specify a single Network entry using `0.0.0.0/0` to allow traffic from any IP address. However, this configuration is not considered secure and will trigger a warning.
+You can specify a single Network entry using `0.0.0.0/0` to allow traffic from any IP address. However, this configuration is not considered secure.
 </Admonition>
 
 ### Note your public IP address
@@ -90,14 +90,14 @@ You can specify a single Network entry using `0.0.0.0/0` to allow traffic from a
 Record the public IP address of your Cloud SQL Postgres instance. You'll need this value later when you set up a subscription from your Neon database. You can find the public IP address on your Cloud SQL instance's **Overview** page.
 
 <Admonition type="note">
-If you do not use a public IP address, you'll need to configure access via a private IP. Refer to the [Cloud SQL documentation](https://cloud.google.com/sql/docs/mysql/private-ip).
+If you do not use a public IP address, you'll need to configure access via a private IP. Refer to the [Cloud SQL documentation](https://cloud.google.com/sql/docs/postgres/private-ip).
 </Admonition>
 
 ![Cloud SQL public IP address](/docs/guides/cloud_sql_public_ip.png)
 
 ### Create a Postgres role for replication
 
-It is recommended that you create a dedicated Postgres role for replicating data from your Cloud SQL Postgres instance. The role must have the `REPLICATION` privilege. On your Cloud SQL Postgres instance, login in as your `postgres` user or an administrative user you use to create roles and run the following command to create a replication role. You can replace the name `replication_user` with whatever role name you want to use.
+It is recommended that you create a dedicated Postgres role for replicating data from your Cloud SQL Postgres instance. The role must have the `REPLICATION` privilege. On your Cloud SQL Postgres instance, log in as your `postgres` user or an administrative user you use to create roles and run the following command to create a replication role. You can replace the name `replication_user` with whatever role name you want to use.
 
 ```sql shouldWrap
 CREATE USER replication_user WITH REPLICATION IN ROLE cloudsqlsuperuser LOGIN PASSWORD 'replication_user_password';
@@ -135,11 +135,11 @@ CREATE PUBLICATION my_publication FOR TABLE users, departments;
 Defining specific tables lets you add or remove tables from the publication later, which you cannot do when creating publications with `FOR ALL TABLES`.
 </Admonition>
 
-For syntax details, see [CREATE PUBLICATION](https://www.postgresql.org/docs/current/sql-createpublication.html), in the PostgreSQL documentation.
+For syntax details, see [CREATE PUBLICATION](https://www.postgresql.org/docs/current/sql-createpublication.html), in the Postgres documentation.
 
 ## Prepare your Neon destination database
 
-This section describes how to prepare your source database (the subscriber) to receive replicated data from your Cloud SQL Postgres instance.
+This section describes how to prepare your destination Lakebase Postgres database (the subscriber) to receive replicated data from your Cloud SQL Postgres instance.
 
 ### Prepare your database schema
 
@@ -155,17 +155,17 @@ CREATE TABLE IF NOT EXISTS playing_with_neon(id SERIAL PRIMARY KEY, name TEXT NO
 
 After creating a publication on the source database, you need to create a subscription on your Neon destination database.
 
-1. Create the subscription using the using a `CREATE SUBSCRIPTION` statement.
+1. Create the subscription using a `CREATE SUBSCRIPTION` statement.
 
    ```sql
    CREATE SUBSCRIPTION my_subscription
-   CONNECTION 'host=<primary-ip> port=5432 dbname=postgres user=replication_user password=replication_user_password'
+   CONNECTION 'host=<primary_ip> port=5432 dbname=postgres user=replication_user password=replication_user_password'
    PUBLICATION my_publication;
    ```
 
-   - `subscription_name`: A name you chose for the subscription.
-   - `connection_string`: The connection string for the source Cloud SQL database where you defined the publication. For the `<primary_ip>`, use the IP address of your Cloud SQL Postgres instance that you noted earlier, and specify the name and password of your replication role. If you're replicating from a database other than `postgres`, be sure to specify that database name.
-   - `publication_name`: The name of the publication you created on the source Neon database.
+   - `my_subscription`: A name you chose for the subscription.
+   - `CONNECTION` string: The connection string for the source Cloud SQL database where you defined the publication. For the `<primary_ip>`, use the IP address of your Cloud SQL Postgres instance that you noted earlier, and specify the name and password of your replication role. If you're replicating from a database other than `postgres`, be sure to specify that database name.
+   - `my_publication`: The name of the publication you created on the source Cloud SQL database.
 
 2. Verify the subscription was created by running the following command:
 
@@ -193,7 +193,7 @@ Testing your logical replication setup ensures that data is being replicated cor
 
    count
    -------
-   30
+   20
    (1 row)
    ```
 

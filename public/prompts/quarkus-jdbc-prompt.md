@@ -15,7 +15,7 @@
 
 ## 📋 Prerequisites
 
-This prompt must be run inside an existing Quarkus project directory. If a project does not exist, create a new one first by running the following command in the terminal.
+This prompt must be run inside an existing Quarkus project directory. The project needs JDK 21 or later. If a project does not exist, create a new one first by running the following command in the terminal.
 
 ```bash
 quarkus create app neon-with-quarkus-jdbc \
@@ -57,9 +57,9 @@ When this prompt is triggered, automatically configure the open Quarkus project 
 
     ```dotenv title=".env"
     QUARKUS_DATASOURCE_DB_KIND=postgresql
-    QUARKUS_DATASOURCE_USERNAME="your_neon_user"
-    QUARKUS_DATASOURCE_PASSWORD="your_neon_password"
-    QUARKUS_DATASOURCE_JDBC_URL="jdbc:postgresql://aws-xxx-pooler.neon.tech/neondb?sslmode=require&channelBinding=require"
+    QUARKUS_DATASOURCE_USERNAME=your_neon_user
+    QUARKUS_DATASOURCE_PASSWORD=your_neon_password
+    QUARKUS_DATASOURCE_JDBC_URL=jdbc:postgresql://aws-xxx-pooler.neon.tech/neondb?sslmode=require&channelBinding=require
     ```
 
 3.  Direct the user to find their connection details in the **Neon Console → Project → Dashboard → Connect**. Inform them to copy the connection parameters and replace the placeholders in the `.env` file.

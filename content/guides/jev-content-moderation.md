@@ -162,7 +162,7 @@ The examples use both state forms: a plain string in the Score tab, and an objec
 Before you begin, make sure you have the following:
 
 - **Node.js 22 or later:** Download it from [nodejs.org](https://nodejs.org/).
-- **A Neon account on the Launch or Scale plan:** The AI Gateway is available only on paid plans. Sign up at [console.neon.tech](https://console.neon.tech/signup).
+- **A Neon account with AI Gateway credits:** The AI Gateway needs [prepaid credits](/docs/ai-gateway/prepaid-credits), which you can buy on any plan, including Free. Sign up at [console.neon.tech](https://console.neon.tech/signup).
 - **Prepaid AI Gateway credits:** Buy credits from the **Billing** page in the Neon Console. One credit is $1 USD, with a $5 minimum purchase. See [AI Gateway prepaid credits](/docs/ai-gateway/prepaid-credits).
 
 <Admonition type="info" title="Region availability">

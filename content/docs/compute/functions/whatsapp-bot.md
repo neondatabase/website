@@ -83,10 +83,10 @@ export default defineConfig({
       name: "WhatsApp webhook",
       source: "./functions/whatsapp.ts",
       env: {
-        WHATSAPP_ACCESS_TOKEN: process.env.WHATSAPP_ACCESS_TOKEN!,
-        WHATSAPP_PHONE_NUMBER_ID: process.env.WHATSAPP_PHONE_NUMBER_ID!,
-        WHATSAPP_VERIFY_TOKEN: process.env.WHATSAPP_VERIFY_TOKEN!,
-        WHATSAPP_APP_SECRET: process.env.WHATSAPP_APP_SECRET!,
+        WHATSAPP_ACCESS_TOKEN: { value: process.env.WHATSAPP_ACCESS_TOKEN, required: true },
+        WHATSAPP_PHONE_NUMBER_ID: { value: process.env.WHATSAPP_PHONE_NUMBER_ID, required: true },
+        WHATSAPP_VERIFY_TOKEN: { value: process.env.WHATSAPP_VERIFY_TOKEN, required: true },
+        WHATSAPP_APP_SECRET: { value: process.env.WHATSAPP_APP_SECRET, required: true },
       },
       dev: {
         port: 8787,
@@ -110,10 +110,10 @@ cp .env.example .env.local
 neon link
 ```
 
-Linking merges `DATABASE_URL`, `DATABASE_URL_UNPOOLED`, `NEON_BRANCH`, and `NEON_FUNCTION_WHATSAPP_BASE_URL` (your function's public URL, ready before you deploy) into `.env.local`, leaving the WhatsApp keys untouched. Uncomment and add them:
+Linking merges `DATABASE_URL`, `DATABASE_URL_UNPOOLED`, `NEON_BRANCH`, `NEON_BRANCH_ID`, and `NEON_FUNCTION_HOST_SUFFIX` into `.env.local`, leaving the WhatsApp keys untouched. Uncomment and add them:
 
 ```env filename=".env.local"
-# Required. Add real values before deploying; a missing key throws at deploy, an empty one uploads "".
+# Required. Add real values before deploying; a missing or empty value fails the deploy.
 # WHATSAPP_ACCESS_TOKEN=
 # WHATSAPP_PHONE_NUMBER_ID=
 # WHATSAPP_VERIFY_TOKEN=
@@ -123,7 +123,8 @@ Linking merges `DATABASE_URL`, `DATABASE_URL_UNPOOLED`, `NEON_BRANCH`, and `NEON
 NEON_BRANCH=
 DATABASE_URL=
 DATABASE_URL_UNPOOLED=
-NEON_FUNCTION_WHATSAPP_BASE_URL=
+NEON_BRANCH_ID=
+NEON_FUNCTION_HOST_SUFFIX=
 ```
 
 Set `WHATSAPP_ACCESS_TOKEN`, `WHATSAPP_PHONE_NUMBER_ID` and `WHATSAPP_APP_SECRET` to the values from Meta. Set `WHATSAPP_VERIFY_TOKEN` to the random value you generated.
@@ -152,13 +153,13 @@ npm run db:push
 
 ## Set the webhook
 
-Your callback URL is `NEON_FUNCTION_WHATSAPP_BASE_URL` (from `.env.local`) with `/api/webhook` appended:
+Your callback URL is the `whatsapp` function's URL with the path `/api/webhook`. `npm run deploy` prints it in the **Function URLs** list, and `neon functions get whatsapp` shows it in its `URL` field:
 
 ```text shouldWrap
-https://br-cool-darkness-123456-whatsapp.compute.us-east-2.aws.neon.tech/api/webhook
+https://br-cool-darkness-123456-whatsapp.compute.c-2.us-east-2.aws.neon.tech/api/webhook
 ```
 
-Your URL will differ. Use the exact `NEON_FUNCTION_WHATSAPP_BASE_URL` value from `.env.local`, with `/api/webhook` appended; the host is specific to your branch.
+Your URL will differ. Use your own `whatsapp` URL; the host is specific to your branch.
 
 In the Meta App Dashboard, open **WhatsApp** > **Configuration**. Enter:
 

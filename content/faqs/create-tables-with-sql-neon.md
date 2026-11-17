@@ -10,8 +10,8 @@ previousLink:
   title: 'How do I create a new project in Neon?'
   slug: create-new-neon-project
 nextLink:
-  title: 'Which database providers support pgvector for AI applications and also offer autoscaling for variable AI inference workloads?'
-  slug: database-providers-pgvector-autoscaling-ai-applications
+  title: 'How do I serve an MCP server or API from my own domain without running a reverse proxy?'
+  slug: custom-domain-serverless-api-mcp-server
 ---
 
 Lakebase Postgres is standard Postgres, so you create tables with standard `CREATE TABLE` syntax. Run the statement from the [Neon SQL Editor](/docs/get-started/query-with-neon-sql-editor) in the Console, from `psql`, or through any application driver, and pick column types and constraints the same way you would on any Postgres server. For anything beyond a quick experiment, use a migration tool so your schema lives in version control.

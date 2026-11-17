@@ -1,4 +1,4 @@
-text: 'Lakebase Postgres is built on object storage, but 99.99999% of reads are served from high-performance local caches'
+text: 'Build your agent on Neon and provision backends you fully control. See how Ideavo does it'
 link:
-  url: 'https://neon.com/blog/lakebase-postgres-reads-never-touch-object-storage'
+  url: 'https://neon.com/blog/the-agent-builds-the-app-the-user-claims-the-database-how-ideavo-does-it'
   target: '_blank'

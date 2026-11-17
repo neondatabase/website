@@ -93,7 +93,7 @@ Two gotchas:
 
 ## 5. Pass the creds via `neon.ts` (third-party env)
 
-Neon-injected vars (`DATABASE_URL`, AI Gateway `NEON_AI_GATEWAY_*`) are automatic. Declare only third-party vars under the function's `env`, resolved from `process.env` at deploy time:
+Neon-injected vars (`DATABASE_URL`, AI Gateway `NEON_AI_GATEWAY_*`) are automatic. Declare only third-party vars under the function's `env`, each with `value` and `required`:
 
 ```typescript
 // neon.ts
@@ -102,8 +102,11 @@ functions: {
     name: "my app",
     source: "src/index.ts",
     env: {
-      MASTRA_PROJECT_ID: process.env.MASTRA_PROJECT_ID!,
-      MASTRA_PLATFORM_ACCESS_TOKEN: process.env.MASTRA_PLATFORM_ACCESS_TOKEN!,
+      MASTRA_PROJECT_ID: { value: process.env.MASTRA_PROJECT_ID, required: true },
+      MASTRA_PLATFORM_ACCESS_TOKEN: {
+        value: process.env.MASTRA_PLATFORM_ACCESS_TOKEN,
+        required: true,
+      },
     },
   },
 }

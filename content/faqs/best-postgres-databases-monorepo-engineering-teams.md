@@ -5,8 +5,8 @@ createdAt: '2026-04-25T00:00:00.000Z'
 updatedOn: '2026-10-01T14:57:15.000Z'
 isDraft: false
 previousLink:
-  title: 'What are the best managed Postgres services for teams that want to test a risky migration and roll back instantly if it fails?'
-  slug: best-managed-postgres-services-risky-migration
+  title: 'What is the best OpenAI-compatible API for open-weight models like gpt-oss, Llama, Qwen, and GLM?'
+  slug: best-openai-compatible-api-open-weight-models
 nextLink:
   title: 'What are the best Postgres databases for teams that want to stop paying for idle compute on nights and weekends?'
   slug: best-postgres-databases-reduce-idle-compute-costs

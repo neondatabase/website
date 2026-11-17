@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "neonctlVersion": "8.23.1",
+  "neonctlVersion": "9.5.0",
   "binaries": [
     "neonctl",
     "neon"
@@ -910,7 +910,7 @@
         },
         "env": {
           "type": "string",
-          "describe": "Path to a .env file to load into the environment before evaluating neon.ts so Function env values resolve from it. Existing env vars are not overridden. Function env values that read process.env must be set in this file or the environment. Used when this checkout creates a branch from neon.ts; ignored for an existing branch."
+          "describe": "Path to a .env file to load into the environment before evaluating neon.ts so Function env values resolve from it. Existing env vars are not overridden. Required Function env (declared required: true, or required: \"default-branch\" when deploying the default branch) and values that read process.env must be set in this file or the environment. Used when this checkout creates a branch from neon.ts; ignored for an existing branch."
         },
         "env-pull": {
           "type": "boolean",
@@ -1269,7 +1269,7 @@
             },
             "env": {
               "type": "string",
-              "describe": "Path to a .env file to load into the environment before evaluating neon.ts so Function env values resolve from it. Existing env vars are not overridden. Function env values that read process.env must be set in this file or the environment."
+              "describe": "Path to a .env file to load into the environment before evaluating neon.ts so Function env values resolve from it. Existing env vars are not overridden. Required Function env (declared required: true, or required: \"default-branch\" when deploying the default branch) and values that read process.env must be set in this file or the environment."
             },
             "env-pull": {
               "type": "boolean",
@@ -1328,7 +1328,7 @@
             },
             "env": {
               "type": "string",
-              "describe": "Path to a .env file to load into the environment before evaluating neon.ts so Function env values resolve from it. Existing env vars are not overridden. Function env values that read process.env must be set in this file or the environment."
+              "describe": "Path to a .env file to load into the environment before evaluating neon.ts so Function env values resolve from it. Existing env vars are not overridden. Required Function env (declared required: true, or required: \"default-branch\" when deploying the default branch) and values that read process.env must be set in this file or the environment."
             }
           },
           "commands": {},
@@ -1801,7 +1801,7 @@
         },
         "env": {
           "type": "string",
-          "describe": "Path to a .env file to load into the environment before evaluating neon.ts so Function env values resolve from it. Existing env vars are not overridden. Function env values that read process.env must be set in this file or the environment."
+          "describe": "Path to a .env file to load into the environment before evaluating neon.ts so Function env values resolve from it. Existing env vars are not overridden. Required Function env (declared required: true, or required: \"default-branch\" when deploying the default branch) and values that read process.env must be set in this file or the environment."
         },
         "env-pull": {
           "type": "boolean",
@@ -1834,7 +1834,7 @@
       "options": {
         "env": {
           "type": "string",
-          "describe": "Path to a .env file to load into the environment before evaluating neon.ts so Function env values resolve from it. Existing env vars are not overridden. Function env values that read process.env must be set in this file or the environment."
+          "describe": "Path to a .env file to load into the environment before evaluating neon.ts so Function env values resolve from it. Existing env vars are not overridden. Required Function env (declared required: true, or required: \"default-branch\" when deploying the default branch) and values that read process.env must be set in this file or the environment."
         },
         "port": {
           "type": "number",
@@ -2033,11 +2033,7 @@
             },
             {
               "command": "$0 env pull -s functions",
-              "description": "Pull NEON_FUNCTION_<SLUG>_BASE_URL for every deployed function"
-            },
-            {
-              "command": "$0 env pull -e NEON_FUNCTION_HELLO_BASE_URL",
-              "description": "Write that function's production invocation URL (no deploy required)"
+              "description": "Pull NEON_BRANCH_ID and NEON_FUNCTION_HOST_SUFFIX, which functionBaseUrl(\"<slug>\") from @neon/env reads"
             }
           ],
           "usage": "$0 env pull [options]"
@@ -2407,6 +2403,24 @@
       },
       "describe": "Sync the checked-out Neon branch to your git branch (Preview)",
       "usage": "$0 git <sub-command> [options]"
+    },
+    "incidents": {
+      "aliases": [],
+      "positionals": [],
+      "options": {},
+      "commands": {},
+      "describe": "Show open Neon incidents and maintenance",
+      "usage": "$0 incidents",
+      "examples": [
+        {
+          "command": "$0 incidents",
+          "description": "Show open Neon incidents and maintenance"
+        },
+        {
+          "command": "$0 incidents -o json",
+          "description": "Print the full report as JSON"
+        }
+      ]
     },
     "init": {
       "aliases": [],
@@ -2981,6 +2995,81 @@
           "commands": {},
           "describe": "List the log fields whose values can be discovered on a branch"
         },
+        "loki": {
+          "name": "loki",
+          "aliases": [],
+          "positionals": [
+            {
+              "name": "query",
+              "describe": "LogQL expression. With a label endpoint, an optional stream selector that scopes the labels.",
+              "type": "string"
+            }
+          ],
+          "options": {
+            "branch": {
+              "type": "string",
+              "describe": "Branch ID or name (defaults to the project's default branch)"
+            },
+            "direction": {
+              "type": "string",
+              "describe": "Timestamp order (query_range only): forward (oldest first) or backward (newest first)",
+              "choices": [
+                "forward",
+                "backward"
+              ]
+            },
+            "end": {
+              "type": "string",
+              "describe": "Window end as RFC 3339 or Unix nanoseconds (kept as a string). Defaults to now."
+            },
+            "endpoint": {
+              "type": "string",
+              "describe": "Read endpoint: query_range, labels, or label/<name>/values",
+              "default": "query_range"
+            },
+            "limit": {
+              "type": "number",
+              "describe": "Maximum number of log lines (query_range only); the server enforces its cap"
+            },
+            "project-id": {
+              "type": "string",
+              "describe": "Project ID"
+            },
+            "since": {
+              "type": "string",
+              "describe": "Lookback window as a positive Go duration, e.g. 30m or 24h. Defaults to 1h for queries and 6h for label values. Explicit --start takes precedence."
+            },
+            "start": {
+              "type": "string",
+              "describe": "Window start as RFC 3339 or Unix nanoseconds (kept as a string)"
+            }
+          },
+          "commands": {},
+          "describe": "Call the branch's Loki read API and return its JSON response",
+          "examples": [
+            {
+              "command": "$0 logs loki '{entity_type=\"function\"} |= \"error\"' --since 30m --limit 100",
+              "description": "Query function logs with a bounded time window and line count"
+            },
+            {
+              "command": "$0 logs loki --endpoint labels",
+              "description": "Discover stream labels"
+            },
+            {
+              "command": "$0 logs loki --endpoint label/service_name/values --since 6h",
+              "description": "Discover service names before choosing a selector"
+            },
+            {
+              "command": "$0 logs loki '{entity_type=\"function\"}' --endpoint label/severity_text/values",
+              "description": "List the severities function logs carry"
+            },
+            {
+              "command": "$0 logs loki '{entity_type=\"function\"}' --project-id <id> --branch <id|name> --start 2026-11-01T00:00:00Z --end 2026-11-01T01:00:00Z",
+              "description": "Query an explicit branch and absolute time window"
+            }
+          ],
+          "usage": "$0 logs loki [query] [options]"
+        },
         "query": {
           "name": "query",
           "aliases": [],
@@ -3062,7 +3151,7 @@
             }
           },
           "commands": {},
-          "describe": "Query log records on a branch",
+          "describe": "Query log records with structured filters or LogQL",
           "examples": [
             {
               "command": "$0 logs query --since 1h --logql '{entity_type=\"function\"} |= \"timeout\"'",
@@ -3079,7 +3168,7 @@
           ]
         }
       },
-      "describe": "Query branch logs",
+      "describe": "Query branch logs with structured filters, LogQL, or the Loki API",
       "usage": "$0 logs <sub-command> [options]"
     },
     "mcp": {
@@ -3820,11 +3909,11 @@
                 },
                 "oauth-client-id": {
                   "type": "string",
-                  "describe": "OAuth client ID from your provider app. For apple, the Services ID. Omit to use Neon's shared OAuth app, where one exists; microsoft and apple always need your own credentials."
+                  "describe": "OAuth client ID from your provider app. For apple, the Services ID. Omit to use Neon's shared OAuth app, where one exists; microsoft, apple and discord always need your own credentials."
                 },
                 "oauth-client-secret": {
                   "type": "string",
-                  "describe": "OAuth client secret from your provider app. Omit to use Neon's shared OAuth app, where one exists; microsoft and apple always need your own credentials."
+                  "describe": "OAuth client secret from your provider app. Omit to use Neon's shared OAuth app, where one exists; microsoft, apple and discord always need your own credentials."
                 },
                 "oauth-client-secret-file": {
                   "type": "string",
@@ -3832,14 +3921,15 @@
                 },
                 "provider-id": {
                   "type": "string",
-                  "describe": "OAuth provider ID. Supported values: google, github, vercel, microsoft, apple",
+                  "describe": "OAuth provider ID. Supported values: google, github, vercel, microsoft, apple, discord",
                   "required": true,
                   "choices": [
                     "google",
                     "github",
                     "vercel",
                     "microsoft",
-                    "apple"
+                    "apple",
+                    "discord"
                   ]
                 }
               },
@@ -3853,14 +3943,15 @@
               "options": {
                 "provider-id": {
                   "type": "string",
-                  "describe": "OAuth provider ID. Supported values: google, github, vercel, microsoft, apple",
+                  "describe": "OAuth provider ID. Supported values: google, github, vercel, microsoft, apple, discord",
                   "required": true,
                   "choices": [
                     "google",
                     "github",
                     "vercel",
                     "microsoft",
-                    "apple"
+                    "apple",
+                    "discord"
                   ]
                 }
               },
@@ -3894,11 +3985,11 @@
                 },
                 "oauth-client-id": {
                   "type": "string",
-                  "describe": "OAuth client ID from your provider app. For apple, the Services ID. Omit to use Neon's shared OAuth app, where one exists; microsoft and apple always need your own credentials."
+                  "describe": "OAuth client ID from your provider app. For apple, the Services ID. Omit to use Neon's shared OAuth app, where one exists; microsoft, apple and discord always need your own credentials."
                 },
                 "oauth-client-secret": {
                   "type": "string",
-                  "describe": "OAuth client secret from your provider app. Omit to use Neon's shared OAuth app, where one exists; microsoft and apple always need your own credentials."
+                  "describe": "OAuth client secret from your provider app. Omit to use Neon's shared OAuth app, where one exists; microsoft, apple and discord always need your own credentials."
                 },
                 "oauth-client-secret-file": {
                   "type": "string",
@@ -3906,14 +3997,15 @@
                 },
                 "provider-id": {
                   "type": "string",
-                  "describe": "OAuth provider ID. Supported values: google, github, vercel, microsoft, apple",
+                  "describe": "OAuth provider ID. Supported values: google, github, vercel, microsoft, apple, discord",
                   "required": true,
                   "choices": [
                     "google",
                     "github",
                     "vercel",
                     "microsoft",
-                    "apple"
+                    "apple",
+                    "discord"
                   ]
                 }
               },
@@ -3921,7 +4013,7 @@
               "describe": "Update an OAuth provider"
             }
           },
-          "describe": "Manage social login providers (google, github, vercel, microsoft, apple)",
+          "describe": "Manage social login providers (google, github, vercel, microsoft, apple, discord)",
           "usage": "$0 neon-auth oauth-provider <sub-command> [options]"
         },
         "plugins": {
@@ -4313,12 +4405,12 @@
         },
         "global": {
           "type": "boolean",
-          "describe": "Install user-level. Default is project",
-          "default": false
+          "default": false,
+          "hidden": true
         },
         "yes": {
           "type": "boolean",
-          "describe": "Skip prompts. Detected agents (project folders, else the host CLI agent). --global uses installed apps, else the host CLI agent",
+          "describe": "Skip prompts. Detected agents (project folders, else the host CLI agent, else installed apps)",
           "default": false,
           "alias": "y"
         }
@@ -4333,15 +4425,11 @@
         },
         {
           "command": "$0 plugins -y",
-          "description": "Detected agents (project folders, else the host CLI agent), skip prompts"
+          "description": "Detected agents (project folders, else the host CLI agent, else installed apps), skip prompts"
         },
         {
           "command": "$0 plugins --agent cursor --agent claude-code",
           "description": "Install into specific agents"
-        },
-        {
-          "command": "$0 plugins --global",
-          "description": "Install user-level"
         }
       ]
     },
@@ -5267,23 +5355,19 @@
             }
           ],
           "options": {
-            "branch": {
-              "type": "string",
-              "describe": "Branch ID or name"
-            },
             "changes": {
               "type": "boolean",
               "describe": "Show raw rows and changes events",
               "default": false
             },
-            "project-id": {
-              "type": "string",
-              "describe": "Project ID"
+            "debug": {
+              "type": "boolean",
+              "describe": "Show full database error details, including SQLSTATE and PostgreSQL's message. Details can name schema objects and row values.",
+              "default": false
             }
           },
           "commands": {},
           "describe": "Subscribe to a live SQL query with Neon Realtime",
-          "usage": "$0 realtime subscribe \"<query>\" [options]",
           "examples": [
             {
               "command": "$0 realtime subscribe \"SELECT * FROM items\"",
@@ -5292,8 +5376,13 @@
             {
               "command": "$0 realtime subscribe --changes \"SELECT * FROM items\"",
               "description": "Print raw rows and changes events"
+            },
+            {
+              "command": "$0 realtime subscribe --debug \"SELECT * FROM items\"",
+              "description": "Show why a query is rejected or fails"
             }
-          ]
+          ],
+          "usage": "$0 realtime subscribe \"<query>\" [options]"
         }
       },
       "describe": "Manage Neon Realtime for a branch",
@@ -5891,7 +5980,7 @@
           "aliases": [],
           "positionals": [
             {
-              "name": "id",
+              "name": "trigger-id",
               "required": true,
               "describe": "Trigger ID",
               "type": "string"
@@ -5906,7 +5995,7 @@
           "aliases": [],
           "positionals": [
             {
-              "name": "id",
+              "name": "trigger-id",
               "required": true,
               "describe": "Trigger ID",
               "type": "string"
@@ -5921,7 +6010,7 @@
           "aliases": [],
           "positionals": [
             {
-              "name": "id",
+              "name": "trigger-id",
               "required": true,
               "describe": "Trigger ID",
               "type": "string"
@@ -5936,7 +6025,7 @@
           "aliases": [],
           "positionals": [
             {
-              "name": "id",
+              "name": "trigger-id",
               "required": true,
               "describe": "Trigger ID",
               "type": "string"
@@ -5959,7 +6048,7 @@
           "aliases": [],
           "positionals": [
             {
-              "name": "id",
+              "name": "trigger-id",
               "required": true,
               "describe": "Trigger ID",
               "type": "string"

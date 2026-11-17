@@ -17,8 +17,14 @@ const Breadcrumbs = ({ className, breadcrumbs, baseUrl = DOCS_BASE_PATH }) => (
       className
     )}
   >
-    <Link className={linkClassName} to={baseUrl}>
-      <HomeIcon />
+    <Link
+      className={linkClassName}
+      to={baseUrl}
+      aria-label={
+        baseUrl.startsWith('/postgresql') ? 'PostgreSQL tutorials home' : 'Documentation home'
+      }
+    >
+      <HomeIcon aria-hidden />
     </Link>
 
     {breadcrumbs.map(({ title, slug }, index) => {

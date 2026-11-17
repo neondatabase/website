@@ -7,7 +7,7 @@
 **Scope:**
 - Assumes the user is working within an existing Symfony project directory.
 - Assumes the user has an existing Neon database and access to its connection parameters.
-- Assumes the user has Composer and the Symfony CLI installed.
+- Assumes the user has Composer and PHP 8.4 or later installed.
 
 ✅ Read and understand the entire instruction set before executing.
 
@@ -26,12 +26,12 @@
 
 ## 📋 Prerequisites
 
-- **Symfony CLI**: The user must have the [Symfony CLI](https://symfony.com/download) installed.
 - **Existing Project**: This prompt should be run inside a Symfony project directory. If the user needs to create a new project, run the following command, which creates a new Symfony project:
 
     ```bash
-    symfony new project_name --version="7.3.x"
+    composer create-project symfony/skeleton project_name
     ```
+    The [Symfony CLI](https://symfony.com/download) is optional. The steps below use `php bin/console`.
 - **Required PHP Extensions**: Before proceeding, ensure the user's PHP environment has the necessary PostgreSQL drivers enabled. These are the **`pdo_pgsql`** and **`pgsql`** extensions. Without them, the application will fail with a "driver not found" error. To verify, run `php -m | grep pgsql`. If the extensions are missing, inform the user they must install them for their specific platform (e.g., `sudo apt install php-pgsql` for Debian/Ubuntu) before continuing.
 - **Required Composer Packages**: For an existing project, ensure that Doctrine is installed. If it's missing run:
     ```bash
@@ -47,10 +47,10 @@ When this prompt is triggered, automatically configure the open Symfony project 
 
 ### 1. Configure Environment Variables for Neon
 
-1.  Locate the `.env` file at the root of the project.
-2.  Update the `DATABASE_URL` variable in the `.env` file. **Prompt the user to replace the placeholder values** with their actual credentials from their Neon project.
+1.  Locate the `.env` file at the root of the project. Don't change its default `DATABASE_URL`.
+2.  Create or update the `.env.local` file at the root of the project. Add the `DATABASE_URL` variable there, because `.env.local` overrides `.env` and is excluded from version control. **Prompt the user to replace the placeholder values** with their actual credentials from their Neon project.
 
-    ```dotenv title=".env"
+    ```dotenv filename=".env.local"
     # Replace with your Neon connection string
     DATABASE_URL="postgresql://[user]:[password]@[neon_hostname]/[dbname]?sslmode=require&channel_binding=require"
     ```
@@ -93,7 +93,7 @@ To validate the entire setup, create a custom Symfony console command that demon
     - Open the newly created file at `src/Command/TestNeonConnectionCommand.php`.
     - Replace its contents with the following code. This script uses Doctrine's EntityManager to perform create, read, update, and delete operations on the `Todo` entity.
 
-    ```php title="src/Command/TestNeonConnectionCommand.php"
+    ```php filename="src/Command/TestNeonConnectionCommand.php"
     <?php
 
     namespace App\Command;
@@ -194,7 +194,7 @@ To validate the entire setup, create a custom Symfony console command that demon
 
 Once the setup is complete:
 
-1.  Verify that the user has correctly set their `DATABASE_URL` in the `.env` file. Do not proceed if placeholder values are still present.
+1.  Verify that the user has correctly set their `DATABASE_URL` in the `.env.local` file. Do not proceed if placeholder values are still present.
 2.  Run the migration to create the `todos` table in their Neon database.
     ```bash
     php bin/console doctrine:migrations:migrate
@@ -211,7 +211,7 @@ Once the setup is complete:
 ## ✅ Validation Rules for AI
 
 Before suggesting code or making edits, ensure:
-- A `.env` file is present and contains the `DATABASE_URL` variable.
+- A `.env.local` file is present and contains the `DATABASE_URL` variable.
 - The `DATABASE_URL` starts with `postgresql://`.
 - The `doctrine/orm` and `symfony/maker-bundle` packages are listed in `composer.json`.
 - The `src/Entity/Todo.php` entity class exists.
@@ -224,5 +224,5 @@ Before suggesting code or making edits, ensure:
 ## ❌ Do Not
 
 - **Do not hardcode credentials** in any `.php` or `.yaml` file. Always use `env()` for sensitive data.
-- **Do not output the contents of the `.env` file** or the user's connection string in any response.
+- **Do not output the contents of the `.env.local` file** or the user's connection string in any response.
 - **Do not try different commands or approaches** if any command fails. Always halt and request user intervention.

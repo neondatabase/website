@@ -103,7 +103,7 @@ On Neon paid plans, the [Create project](/docs/reference/api/projects/create-pro
 curl --request PATCH \
      --url https://console.neon.tech/api/v2/projects/fragrant-mode-99795914 \
      --header 'accept: application/json' \
-     --header 'authorization: Bearer $NEON_API' \
+     --header "authorization: Bearer $NEON_API" \
      --header 'content-type: application/json' \
      --data '
 {
@@ -136,7 +136,7 @@ To get your project details, send the following request, replacing `<your_projec
 curl --request GET \
      --url https://console.neon.tech/api/v2/projects/<your_project_id> \
      --header 'accept: application/json' \
-     --header 'authorization: Bearer $NEON_API_KEY'
+     --header "authorization: Bearer $NEON_API_KEY"
 ```
 
 In the response, locate the `maintenance_window` field. It specifies the selected weekday and hour for updates. For Free plan accounts, the update window is set by Neon. Paid plan accounts can [choose a preferred update window](#updates-on-paid-plans). The `weekdays` value is a number from 1 to 7, representing the day of the week.

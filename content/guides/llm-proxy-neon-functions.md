@@ -55,7 +55,7 @@ sequenceDiagram
 Before starting, ensure you have:
 
 1. **Node.js**: Version `20` or higher installed. Download from [nodejs.org](https://nodejs.org/).
-2. **Neon account on a paid plan**: Sign up at [console.neon.tech](https://console.neon.tech/signup). AI Gateway requires a Launch or Scale plan and a prepaid credit balance. See [AI Gateway pricing](/docs/ai-gateway/models#pricing).
+2. **Neon account with AI Gateway credits**: Sign up at [console.neon.tech](https://console.neon.tech/signup). AI Gateway needs a prepaid credit balance, which you can buy on any plan, including Free. See [AI Gateway pricing](/docs/ai-gateway/models#pricing).
 3. **Neon CLI**: Installed globally (`npm i -g neon@latest`) and authenticated (`neon login`). Check out the [Neon CLI quickstart](/docs/cli/quickstart) for details.
 
 <Steps>
@@ -98,9 +98,10 @@ Linked .neon
   Branch          main
   Org             org-example-12345678
 
-Pulled 3 Neon variables into .env.local
+Pulled 5 Neon variables into .env.local
   Postgres        DATABASE_URL, DATABASE_URL_UNPOOLED
-  Branch          NEON_BRANCH
+  Branch          NEON_BRANCH, NEON_BRANCH_ID
+  Functions       NEON_FUNCTION_HOST_SUFFIX
 ✔ Manage this project's Neon setup as code? Adds a neon.ts you can edit and apply with `neon config apply`. … yes
 ```
 
@@ -433,8 +434,8 @@ export default defineConfig({
       name: "LLM Proxy Server",
       source: "./index.ts",
       env: {
-        UPSTASH_REDIS_REST_URL: process.env.UPSTASH_REDIS_REST_URL!,
-        UPSTASH_REDIS_REST_TOKEN: process.env.UPSTASH_REDIS_REST_TOKEN!,
+        UPSTASH_REDIS_REST_URL: { value: process.env.UPSTASH_REDIS_REST_URL, required: true },
+        UPSTASH_REDIS_REST_TOKEN: { value: process.env.UPSTASH_REDIS_REST_TOKEN, required: true },
       }
     },
   },

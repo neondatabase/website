@@ -82,6 +82,8 @@ DATABASE_URL="postgres://[PGUSER]:[PGPASSWORD]@[PGHOST]/[PGDATABASE]?ssl=true"
 
 > Replace the placeholders `[PGUSER]`, `[PGPASSWORD]`, `[PGHOST]`, and `[PGDATABASE]` with the corresponding values from your Neon connection details. Make sure to include `ssl=true` to ensure a secure connection.
 
+If you copy a full connection string from the Console instead, remove `-pooler` from the host and replace `sslmode=require&channel_binding=require` with `ssl=true`. Tortoise doesn't accept the `sslmode` parameter.
+
 <Admonition type="important">
 Use a direct (non-pooled) connection string when generating schemas or running migrations (for example, with Aerich). Neon's pooled connection uses PgBouncer in transaction mode, which doesn't support all session-level operations that schema changes rely on, so running them over a pooled connection can lead to errors. Make sure the hostname does not include the `-pooler` suffix. See [Connection pooling](/docs/connect/connection-pooling).
 </Admonition>
@@ -207,8 +209,8 @@ The `in_transaction()` block ensures an all-or-nothing execution. Because the si
 
 - Do not install packages globally. Always use a virtual environment and run commands with `venv/bin/pip` and `venv/bin/python` (or the activated equivalent).
 - Install Tortoise ORM with the `asyncpg` extra: `pip install "tortoise-orm[asyncpg]"`.
-- The connection string protocol must be `postgres://` for Tortoise to utilize the `asyncpg` driver automatically.
-- Always include `ssl=true` in your connection string to ensure a secure connection to Neon.
+- Tortoise picks the `asyncpg` driver from the `postgres://` or `postgresql://` scheme. Use `postgres://` as shown in this guide.
+- Always include `ssl=true` in your connection string to ensure a secure connection to Neon. Don't use `sslmode=require`. The asyncpg backend in Tortoise rejects it with a `TypeError`.
 - Always ensure `await Tortoise.close_connections()` is called during application teardown or use the `tortoise.run_async()` wrapper to prevent hanging python processes.
 - Do not hardcode credentials in initialization scripts. Use environment variables via `python-dotenv` and `os.getenv()`.
 

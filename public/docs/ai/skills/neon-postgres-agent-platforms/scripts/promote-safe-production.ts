@@ -49,13 +49,17 @@ if (sub === "bootstrap-dev") {
   console.error(
     `[bootstrap-dev] Snapshot production branch, restore as new branch "${newName}"...`,
   );
-  const snapshot = await neon.snapshots.create(projectId, pre, {
+  const snapshot = await neon.snapshots.create({
+    projectId,
+    branchId: pre,
     name:
       process.env.NEON_SNAPSHOT_BOOTSTRAP_NAME?.trim() ??
       `bootstrap-from-prod-${runId}`,
   });
   // No `targetBranchId` → restore as a new branch.
-  const branch = await neon.snapshots.restore(projectId, snapshot.id, {
+  const branch = await neon.snapshots.restore({
+    projectId,
+    snapshotId: snapshot.id,
     name: newName,
   });
   console.log(
@@ -92,19 +96,25 @@ if (sub === "promote") {
     `dev_snap_${runId}_candidate`;
 
   console.error("[promote] 1/3 Snapshot prod (rollback point)...");
-  const rollback = await neon.snapshots.create(projectId, prodId, {
+  const rollback = await neon.snapshots.create({
+    projectId,
+    branchId: prodId,
     name: preName,
   });
 
   console.error("[promote] 2/3 Snapshot dev (candidate to publish)...");
-  const candidate = await neon.snapshots.create(projectId, devBranchId, {
+  const candidate = await neon.snapshots.create({
+    projectId,
+    branchId: devBranchId,
     name: candName,
   });
 
   console.error(
     "[promote] 3/3 Restore dev snapshot onto prod (finalize); brief connection drop on prod...",
   );
-  await neon.snapshots.restore(projectId, candidate.id, {
+  await neon.snapshots.restore({
+    projectId,
+    snapshotId: candidate.id,
     targetBranchId: prodId,
     finalize: true,
     name:
@@ -145,12 +155,16 @@ if (sub === "refresh-dev") {
     `prod_snap_${runId}_refresh_dev`;
 
   console.error("[refresh-dev] 1/2 Snapshot prod...");
-  const prodSnap = await neon.snapshots.create(projectId, prodId, {
+  const prodSnap = await neon.snapshots.create({
+    projectId,
+    branchId: prodId,
     name: snapName,
   });
 
   console.error("[refresh-dev] 2/2 Restore prod snapshot onto dev...");
-  await neon.snapshots.restore(projectId, prodSnap.id, {
+  await neon.snapshots.restore({
+    projectId,
+    snapshotId: prodSnap.id,
     targetBranchId: devBranchId,
     finalize: true,
     name:
@@ -184,7 +198,9 @@ if (sub === "rollback-prod") {
   const prodId = await prodBranchId();
 
   console.error("[rollback-prod] Restore snapshot onto prod...");
-  await neon.snapshots.restore(projectId, snap, {
+  await neon.snapshots.restore({
+    projectId,
+    snapshotId: snap,
     targetBranchId: prodId,
     finalize: true,
     name:

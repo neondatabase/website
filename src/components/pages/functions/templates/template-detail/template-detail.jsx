@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 
+import FunctionRegistrySourceLabel from 'components/pages/functions/templates/registry/source-label';
 import FunctionRegistryTemplateLogo from 'components/pages/functions/templates/registry/template-logo';
 import FunctionRegistryWebsiteLink from 'components/pages/functions/templates/registry/website-link';
 import {
@@ -7,6 +8,8 @@ import {
   OperationList,
 } from 'components/pages/functions/templates/template-blocks';
 import { renderReadme } from 'components/pages/functions/templates/template-readme';
+import WeeklyInstalls from 'components/pages/functions/templates/weekly-installs';
+import { weeklyInstallRowsPropType } from 'components/pages/functions/templates/weekly-installs/summary';
 import Container from 'components/shared/container';
 import CopyCommand from 'components/shared/copy-command';
 import Link from 'components/shared/link';
@@ -14,8 +17,8 @@ import LINKS from 'constants/links';
 import ArrowBackIcon from 'icons/arrow-back.inline.svg';
 import { cn } from 'utils/cn';
 import {
+  hasRegistryEnvironmentRequirements,
   isInlineCodeSafe,
-  isFirstPartyRegistryTemplate,
   registryCategoryLabel,
   registryProviderLabel,
   registryTemplateCategories,
@@ -136,9 +139,10 @@ DetailRow.propTypes = {
   children: PropTypes.node.isRequired,
 };
 
-const TemplateSidebar = ({ template, installCommand }) => {
+const TemplateSidebar = ({ template, installCommand, installs }) => {
   const provider = registryProviderLabel(template) || 'Neon';
   const categories = registryTemplateCategories(template);
+  const sourceUrl = registryTemplateSourceUrl(template);
 
   return (
     <div className="sticky top-24 flex flex-col gap-6 lg:static">
@@ -149,21 +153,10 @@ const TemplateSidebar = ({ template, installCommand }) => {
           command={installCommand}
           trackingLabel={`Copy ${installCommand}`}
         />
-        <p className="mt-3 text-[13px] leading-snug text-gray-new-50">
-          With the{' '}
-          <Link className={TEXT_LINK_CLASS_NAME} to={LINKS.cliInstall} theme="green">
-            Neon CLI
-          </Link>{' '}
-          8.11.0 or later, this command copies the template into{' '}
-          <Code>functions/&lt;slug&gt;/</Code> and declares the function in{' '}
-          <Link className={TEXT_LINK_CLASS_NAME} to="/docs/reference/neon-ts" theme="green">
-            neon.ts
-          </Link>
-          .
-        </p>
       </div>
 
       <dl>
+        <WeeklyInstalls rows={installs} />
         <DetailRow label="Built by">
           <span className="flex items-center gap-3">
             <FunctionRegistryTemplateLogo template={template} eager variant="title" />
@@ -192,12 +185,14 @@ const TemplateSidebar = ({ template, installCommand }) => {
         )}
         <DetailRow label="Resources">
           <ul className="flex flex-col gap-2">
-            <li>
-              <Link to={registryTemplateSourceUrl(template)} theme="green" isExternal>
-                Template source
-                <span className="sr-only"> (opens in a new tab)</span>
-              </Link>
-            </li>
+            {sourceUrl && (
+              <li>
+                <Link to={sourceUrl} theme="green" isExternal>
+                  Template source
+                  <span className="sr-only"> (opens in a new tab)</span>
+                </Link>
+              </li>
+            )}
             <li>
               <Link to={LINKS.functionsTemplatesDocs} theme="green">
                 How to use templates
@@ -217,6 +212,7 @@ const TemplateSidebar = ({ template, installCommand }) => {
 
 TemplateSidebar.propTypes = {
   installCommand: PropTypes.string.isRequired,
+  installs: weeklyInstallRowsPropType,
   template: PropTypes.shape({
     id: PropTypes.string.isRequired,
     provider: PropTypes.string,
@@ -225,7 +221,13 @@ TemplateSidebar.propTypes = {
   }).isRequired,
 };
 
-const TemplateDetail = async ({ template, previous = null, next = null, readme = null }) => {
+const TemplateDetail = async ({
+  template,
+  previous = null,
+  next = null,
+  readme = null,
+  installs,
+}) => {
   const operations = template.operations ?? [];
   const environment = (template.environment ?? []).filter((item) => isInlineCodeSafe(item.name));
   const installCommand = `neon functions new ${template.id}`;
@@ -256,11 +258,7 @@ const TemplateDetail = async ({ template, previous = null, next = null, readme =
           <ArrowBackIcon />
           Function templates
         </Link>
-        {isFirstPartyRegistryTemplate(template) && (
-          <p className="mb-4 font-mono text-xs leading-none font-medium tracking-tight text-green-45 uppercase">
-            First Party
-          </p>
-        )}
+        <FunctionRegistrySourceLabel className="mb-4 block text-xs" template={template} />
         <h1 className="text-5xl leading-dense font-normal tracking-tighter text-balance lg:text-[36px] md:text-[32px]">
           {template.title}
         </h1>
@@ -270,7 +268,7 @@ const TemplateDetail = async ({ template, previous = null, next = null, readme =
       </header>
 
       <aside className="col-span-4 col-start-9 row-span-2 row-start-1 lg:w-full lg:max-w-[704px]">
-        <TemplateSidebar template={template} installCommand={installCommand} />
+        <TemplateSidebar template={template} installCommand={installCommand} installs={installs} />
       </aside>
 
       <article className="col-span-8 row-start-2 max-w-[704px] lg:-mt-14 md:-mt-10">
@@ -320,8 +318,11 @@ const TemplateDetail = async ({ template, previous = null, next = null, readme =
             description={
               <>
                 The CLI declares these variables in <Code>neon.ts</Code> and adds them to{' '}
-                <Code>.env.example</Code> without values, so you need to fill them in before you run
-                the function.
+                <Code>.env.example</Code> without values, so you need to fill{' '}
+                {hasRegistryEnvironmentRequirements(environment)
+                  ? 'in the required ones'
+                  : 'them in'}{' '}
+                before you run the function.
               </>
             }
           >
@@ -355,6 +356,7 @@ TemplateDetail.propTypes = {
     imageBase: PropTypes.string.isRequired,
     linkBase: PropTypes.string.isRequired,
   }),
+  installs: weeklyInstallRowsPropType,
 };
 
 export default TemplateDetail;

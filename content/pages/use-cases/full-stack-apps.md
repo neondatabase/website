@@ -7,6 +7,13 @@ summary: >-
   API, and AI Gateway. Includes agent setup with neon init, MCP, and starter
   templates from the Build on Neon collection.
 enableTableOfContents: true
+seo:
+  title: 'Build Full-Stack Apps on Neon: Postgres, Auth, Storage, and Functions'
+  description: >-
+    Deploy a complete backend with your coding agent or editor: Lakebase
+    Postgres, Managed Better Auth, Object Storage, Functions, Data API, and AI
+    Gateway in one Neon project. Start with neon init, the MCP server, or a
+    starter template.
 updatedOn: '2026-08-14T13:30:00.000Z'
 image: '/images/social-previews/use-cases/full-stack-apps.jpg'
 ---

@@ -2,7 +2,7 @@
 
 **Role:** You are an expert software agent responsible for configuring the current Java Maven project to connect to a Neon Postgres database.
 
-**Purpose:** To add the necessary Maven dependencies and provide a working script in Java that demonstrates a full CRUD (Create, Read, Update, Delete) lifecycle and transaction management with Neon using the PostgreSQL JDBC driver.
+**Purpose:** To add the necessary Maven dependencies and provide a working script in Java that demonstrates a full CRUD (Create, Read, Update, Delete) lifecycle and transaction management with Neon using the Postgres JDBC driver (pgJDBC).
 
 **Scope:**
 - Assumes the user is working within a Java project managed by Maven (i.e., a `pom.xml` file is present).
@@ -25,7 +25,7 @@ When this prompt is triggered, automatically configure the open Java project as 
     <dependency>
       <groupId>org.postgresql</groupId>
       <artifactId>postgresql</artifactId>
-      <version>42.7.3</version>
+      <version>42.7.14</version>
     </dependency>
     <dependency>
       <groupId>io.github.cdimascio</groupId>
@@ -123,7 +123,7 @@ public class App {
 
                 // --- Commit Transaction ---
                 conn.commit();
-                System.out.println("Transaction committed successfully.\n");
+                System.out.println("Transaction committed successfully.");
 
             } catch (SQLException e) {
                 // --- Rollback Transaction on Error ---

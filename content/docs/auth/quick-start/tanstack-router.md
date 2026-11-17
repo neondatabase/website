@@ -8,7 +8,7 @@ summary: >-
   account settings, and route protection without writing custom auth UI. User profiles are stored automatically in the `neon_auth.user` table
   in your database.
 enableTableOfContents: true
-updatedOn: '2026-10-29T00:20:05.587Z'
+updatedOn: '2026-11-05T01:14:02.509Z'
 layout: wide
 ---
 
@@ -122,8 +122,6 @@ This quick start uses the standalone Auth client. For one `createClient()` insta
 import { createAuthClient } from '@neon/auth';
 import { BetterAuthReactAdapter } from '@neon/auth/react/adapters';
 
-// credentials: 'include' sends the session cookie on cross-origin requests.
-// Required if you later call authClient.token() from an origin other than your Managed Better Auth URL.
 export const authClient = createAuthClient(import.meta.env.VITE_NEON_AUTH_URL, {
   adapter: BetterAuthReactAdapter({ fetchOptions: { credentials: 'include' } }),
 });

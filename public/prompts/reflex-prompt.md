@@ -35,12 +35,13 @@ This is a mandatory first step.
 Install the required Python packages into the virtual environment.
 
 ```bash
-.venv/bin/pip install reflex python-dotenv psycopg2-binary
+.venv/bin/pip install "reflex[db]" python-dotenv "psycopg[binary]"
 ```
 
 - **`reflex`**: The full-stack Python web framework.
+- **`reflex[db]`**: The database extra. Installs SQLModel and Alembic for the `reflex db` commands.
 - **`python-dotenv`**: To securely load the database connection string from a `.env` file.
-- **`psycopg2-binary`**: The PostgreSQL adapter for Python, required for database connectivity.
+- **`psycopg[binary]`**: The PostgreSQL driver (psycopg 3) that the `postgresql://` connection string uses.
 
 ---
 
@@ -61,7 +62,7 @@ Install the required Python packages into the virtual environment.
 2.  Add the `DATABASE_URL` parameter to the `.env` file and **prompt the user to replace the placeholder value** with their connection string from Neon.
 
     ```dotenv title=".env"
-    DATABASE_URL="postgresql://<user>:<password>@<endpoint_hostname>.neon.tech:<port>/<dbname>?sslmode=require&channel_binding=require"
+    DATABASE_URL="postgresql://[user]:[password]@[neon_hostname]/[dbname]?sslmode=require&channel_binding=require"
     ```
 
 3.  Direct the user to find this value in the **Neon Console → Project → Connect**.
@@ -89,7 +90,7 @@ Modify the `rxconfig.py` file to use the database connection string from the env
 
     config = rx.Config(
         app_name="my_reflex_app", # Or the existing app name
-        plugins=[...],  # Existing plugins
+        plugins=[...],  # Existing plugins, including rx.plugins.RadixThemesPlugin() if present
         db_url=os.environ.get("DATABASE_URL")
     )
     ```
@@ -123,7 +124,7 @@ Once the file modifications are complete:
 
 Before suggesting code or making edits, ensure:
 - A Python virtual environment exists and is intended for use.
-- The `reflex`, `python-dotenv`, and `psycopg2-binary` packages are installed in the virtual environment.
+- The `reflex[db]`, `python-dotenv`, and `psycopg[binary]` packages are installed in the virtual environment.
 - A `rxconfig.py` file exists (or has been created by `reflex init`).
 - A `.env` file is present or has been created and contains a `DATABASE_URL` placeholder.
 - The `rxconfig.py` file correctly imports `os` and `dotenv`, calls `load_dotenv()`, and sets the `db_url` parameter using `os.environ.get("DATABASE_URL")`.

@@ -348,7 +348,7 @@ with open("graph.png", "wb") as f:
     f.write(agent_graph.get_graph().draw_mermaid_png())
 ```
 
-<img width="200" height="200" src="/docs/guides/langgraph-graph.png" alt="LangGraph Agent Graph" />
+<img width="200" height="200" src="/docs/guides/langgraph-graph.png" alt="LangGraph Agent Graph" loading="lazy" />
 
 The graph shows the agent's cyclical workflow. Its components are:
 

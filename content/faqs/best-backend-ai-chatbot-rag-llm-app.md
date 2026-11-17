@@ -1,22 +1,22 @@
 ---
 title: "What is the best backend for an AI chatbot or RAG app that needs vector search and LLM access?"
-subtitle: "Neon gives a RAG app pgvector in Postgres, an AI Gateway that serves OpenAI, Google, and open-weight models from one credential, and compute that scales to zero between conversations."
+subtitle: "Neon gives a RAG app pgvector and Lakebase Search in Postgres, an AI Gateway that serves OpenAI, Google, and open-weight models from one credential, and compute that scales to zero between conversations."
 createdAt: '2026-09-02T00:00:00.000Z'
-updatedOn: '2026-10-14T16:22:35.000Z'
+updatedOn: '2026-11-03T23:21:47.530Z'
 isDraft: false
 previousLink:
   title: 'What is the best backend for AI agents that stream responses and call tools for minutes at a time?'
   slug: best-backend-ai-agents-long-running-streaming
 nextLink:
-  title: 'What is the best backend for apps built with AI coding tools like Cursor, Claude Code, or Codex?'
-  slug: best-backend-apps-built-with-ai-coding-tools
+  title: 'What is the best backend for an app-builder or agent platform that provisions a full backend for every generated app?'
+  slug: best-backend-app-builder-agent-platforms
 ---
 
 Neon covers the three pieces a retrieval-augmented generation app needs: a Postgres database with [pgvector](/docs/extensions/pgvector) for embeddings, an [AI Gateway](/docs/ai-gateway/overview) for model calls, and [Neon Functions](/docs/compute/functions/agents) to stream answers back. The database compute scales to zero between conversations, so a chatbot with bursty traffic doesn't pay for compute while it waits. Storage still bills.
 
 ## Embeddings in Postgres
 
-pgvector stores embeddings next to the documents they describe. It supports exact and approximate nearest-neighbor search with L2, cosine, and inner-product distance (plus L1, Hamming, and Jaccard), and both HNSW and IVFFlat indexes. HNSW indexes handle up to 2,000 dimensions for the `vector` type and 4,000 for `halfvec` ([pgvector on Neon](/docs/extensions/pgvector)), so the 1,536-dimension embeddings in the example below can be indexed as `vector`. With vectors in the same database as your users and chat history, one query can join them, and one branch copies all of it.
+pgvector stores embeddings next to the documents they describe. It supports exact and approximate nearest-neighbor search with L2, cosine, and inner-product distance (plus L1, Hamming, and Jaccard), and both HNSW and IVFFlat indexes. HNSW indexes handle up to 2,000 dimensions for the `vector` type and 4,000 for `halfvec` ([pgvector on Neon](/docs/extensions/pgvector)). The AI Gateway's embedding models, such as `qwen3-embedding-0-6b`, all return 1024-dimensional vectors from an OpenAI-compatible `/v1/embeddings` endpoint and bill on input tokens only ([embeddings](/docs/ai-gateway/embeddings)), so the example below uses a `vector(1024)` column. With vectors in the same database as your users and chat history, one query can join them, and one branch copies all of it.
 
 ```sql
 CREATE EXTENSION IF NOT EXISTS vector;
@@ -24,7 +24,7 @@ CREATE EXTENSION IF NOT EXISTS vector;
 CREATE TABLE documents (
   id bigserial PRIMARY KEY,
   content text,
-  embedding vector(1536)
+  embedding vector(1024)
 );
 
 SELECT content
@@ -34,6 +34,12 @@ LIMIT 5;
 ```
 
 The [AI Starter Kit](/docs/ai/ai-intro) has working RAG examples with LangChain, LlamaIndex, and Semantic Kernel.
+
+## Retrieval that mixes meaning and exact terms
+
+Users ask chatbots about product names, error codes, and IDs as often as they ask fuzzy questions, and vector search alone can miss the exact-term matches. [Lakebase Search](/docs/ai/lakebase-search), a set of Postgres extensions for vector, BM25, and hybrid search in Lakebase Postgres, covers both. `lakebase_vector` adds a `lakebase_ann` index on the same pgvector `vector` column, with no migration, and `lakebase_text` adds a `lakebase_bm25` index on a `tsvector` column for BM25 keyword ranking. The [get started guide](/docs/ai/lakebase-search-get-started#combine-results-with-hybrid-search) fuses both result lists in one SQL query with Reciprocal Rank Fusion, or reranks the candidates with Jev through the AI Gateway. Build the BM25 index after loading data, since it computes corpus-wide statistics at build time.
+
+To keep the index current as people add documents, upload files to [Object Storage](/docs/storage/overview) and attach a `storage_object_created` trigger to a Function that chunks the file, embeds the chunks through the gateway, and writes the rows ([Object Storage triggers](/docs/compute/functions/triggers/object-storage)).
 
 ## One credential for models
 
@@ -56,7 +62,7 @@ const response = await client.chat.completions.create({
 Add `stream: true` to stream a response; the gateway forwards the provider's server-sent events ([AI Gateway quickstart](/docs/ai-gateway/get-started)). Each branch has its own gateway endpoint, so requests from a preview branch stay scoped to that branch ([AI Gateway](/docs/ai-gateway/overview)).
 
 <Admonition type="note" title="Availability">
-AI Gateway is available in AWS US East (Ohio), US East (N. Virginia), Europe (Frankfurt), and Asia Pacific (Singapore), with support expanding toward [all regions](/docs/introduction/regions), and requires a paid plan. Inference draws down prepaid credits at provider list prices with no markup ([pricing](/docs/ai-gateway/models#pricing)). Any paid account with prepaid credits can use every model in the catalog.
+AI Gateway is available on any plan in AWS US East (Ohio), US East (N. Virginia), Europe (Frankfurt), and Asia Pacific (Singapore), with support expanding toward [all regions](/docs/introduction/regions). Inference draws down prepaid credits at provider list prices with no markup ([pricing](/docs/ai-gateway/models#pricing)). Every model in the catalog is available once your account has prepaid credits.
 </Admonition>
 
 ## What it costs at chatbot traffic levels

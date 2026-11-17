@@ -12,6 +12,8 @@ summary: >-
   manually because Stripe does not support e-Mandate recurring payments in
   India.
 enableTableOfContents: true
+redirectFrom:
+  - /docs/manage/billing
 updatedOn: '2026-10-27T20:26:38.639Z'
 ---
 

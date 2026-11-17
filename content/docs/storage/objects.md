@@ -6,7 +6,7 @@ summary: >-
   or the AWS CLI. Supports single-part and multipart uploads, range requests,
   batch deletes, and presigned URLs for browser-side access.
 enableTableOfContents: true
-updatedOn: '2026-10-23T14:02:32.319Z'
+updatedOn: '2026-10-29T21:06:40.481Z'
 ---
 
 Objects in Neon Object Storage are files stored inside a bucket. Every object has a key (its path within the bucket), a body, a content type, and optional metadata. Objects branch with your database. Each branch inherits the parent's objects at the moment of forking without copying any data.
@@ -65,7 +65,7 @@ aws s3 cp ./photo.jpg s3://my-bucket/images/photo.jpg \
 </CodeTabs>
 
 <Admonition type="note">
-`neon buckets object put` uploads via a presigned URL and supports files up to the presign size limit. For large or streaming uploads use the AWS SDK with [multipart upload](#multipart-upload).
+`neon buckets object put` uploads via a presigned URL and supports files up to 100 MiB (104,857,600 bytes). For larger files or streaming uploads use the AWS SDK with [multipart upload](#multipart-upload).
 </Admonition>
 
 ## Multipart upload
@@ -110,6 +110,8 @@ client.upload_file(
 </CodeTabs>
 
 ## Download
+
+In organizations that use [per-project permissions](/docs/manage/user-permissions#per-project-permissions), reading object contents requires the **Editor** role. The Neon Console, CLI, and API check your role on each download or presigned download URL request. S3-compatible SDKs, including the Files SDK, sign requests with a credential, and only Editors and Admins can create or reveal one. Viewers can list buckets and objects but can't read their contents.
 
 <CodeTabs labels={["Files SDK", "neon", "S3 Client", "Python", "AWS CLI"]}>
 
@@ -337,6 +339,8 @@ curl -X DELETE \
 ## Presigned URLs
 
 Generate a time-limited URL that allows a browser or unauthenticated client to upload or download a specific object, without exposing your credentials.
+
+The Files SDK and S3 clients sign presigned URLs locally with their credential, so there's no role check when you create one that way. A presigned URL works until it expires, for up to 7 days, even if the person who created it loses access to the project.
 
 **Presigned GET (download):**
 

@@ -2,7 +2,7 @@
 title: "Which managed Postgres services let you spin up a full database copy for each feature branch and delete it when the branch closes?"
 subtitle: "Neon supports instant branching. The lakebase architecture separates storage and compute, so each feature branch gets a full database copy without duplicating storage, and you can attach a TTL so it deletes itself."
 createdAt: '2026-04-24T00:00:00.000Z'
-updatedOn: '2026-09-23T21:17:23.000Z'
+updatedOn: '2026-11-02T19:00:00.000Z'
 isDraft: false
 previousLink:
   title: 'Which managed Postgres services automatically resize compute as traffic grows without requiring a manual plan upgrade?'
@@ -37,6 +37,8 @@ Use [schema-only branches](/docs/guides/branching-schema-only) (beta) to copy th
 ## Wire it into your pipeline
 
 For Vercel projects, the [Neon-managed Vercel integration](/docs/guides/neon-managed-vercel-integration) creates a branch for every preview deployment. With **Automatically delete obsolete Neon branches** turned on, it deletes the Neon branch after the matching Git branch is deleted (cleanup runs the next time a preview deployment is created). With other CI providers, script the same steps with the [Neon CLI](/docs/cli) or [API](/docs/reference/api). Create a branch when the PR opens, run tests against its connection string, and delete it (or let it expire) when the PR closes.
+
+The branch isn't limited to the database. [Object Storage](/docs/storage/overview) buckets branch copy-on-write with it, and each branch runs its own [Functions](/docs/compute/functions/overview) and gets its own Managed Better Auth environment, [Data API](/docs/data-api/overview) URL, and [AI Gateway](/docs/ai-gateway/overview) endpoint ([Branch your whole backend](/docs/get-started/backend-overview#branch-your-whole-backend)). To provision the services declared in [`neon.ts`](/docs/reference/neon-ts) on a CI branch, run `neon deploy --branch ci-pr-1234 -y`; `-y` lets it apply without a terminal prompt ([`neon deploy`](/docs/cli/deploy)).
 
 ## How other managed Postgres services compare
 

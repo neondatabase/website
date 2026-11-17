@@ -27,7 +27,7 @@ Using an organization API key:
 ```bash
 curl --request GET \
      --url 'https://console.neon.tech/api/v2/projects' \
-     --header 'authorization: Bearer $ORG_API_KEY'
+     --header "authorization: Bearer $ORG_API_KEY"
 ```
 
 Using a personal API key:
@@ -35,7 +35,7 @@ Using a personal API key:
 ```bash
 curl --request GET \
      --url 'https://console.neon.tech/api/v2/projects?org_id=org-example-12345678' \
-     --header 'authorization: Bearer $PERSONAL_API_KEY'
+     --header "authorization: Bearer $PERSONAL_API_KEY"
 ```
 
 Both examples retrieve a list of projects, but notice how the personal API key request includes `org_id=org-example-12345678` to specify which organization's projects to list. With an organization API key, this parameter isn't needed because the key itself is already tied to a specific organization.
@@ -86,7 +86,7 @@ Lists all API keys for your organization. The response does not include the actu
 ```bash shouldWrap
 curl --request GET \
      --url 'https://console.neon.tech/api/v2/organizations/{org_id}/api_keys' \
-     --header 'authorization: Bearer $PERSONAL_API_KEY' | jq
+     --header "authorization: Bearer $PERSONAL_API_KEY" | jq
 ```
 
 Example response:
@@ -118,7 +118,7 @@ Revokes the specified organization API key. This action cannot be reversed. You 
 curl --request DELETE \
      --url 'https://console.neon.tech/api/v2/organizations/{org_id}/api_keys/{key_id}' \
      --header 'accept: application/json' \
-     --header 'authorization: Bearer $PERSONAL_API_KEY' | jq
+     --header "authorization: Bearer $PERSONAL_API_KEY" | jq
 ```
 
 Example response:
@@ -144,7 +144,7 @@ Retrieves information about your organization, including its name, plan, and cre
 ```bash shouldWrap
 curl --request GET \
      --url 'https://console.neon.tech/api/v2/organizations/{org_id}' \
-     --header 'authorization: Bearer $PERSONAL_API_KEY' | jq
+     --header "authorization: Bearer $PERSONAL_API_KEY" | jq
 ```
 
 Example response:
@@ -178,7 +178,7 @@ You can sort by `email`, `role`, or `joined_at` (default), set `sort_order` to `
 curl --request GET \
      --url 'https://console.neon.tech/api/v2/organizations/{org_id}/members?limit=20&sort_by=joined_at&sort_order=desc' \
      --header 'accept: application/json' \
-     --header 'authorization: Bearer $ORG_API_KEY' | jq
+     --header "authorization: Bearer $ORG_API_KEY" | jq
 ```
 
 **Example: next page (using cursor from previous response)**
@@ -187,7 +187,7 @@ curl --request GET \
 curl --request GET \
      --url 'https://console.neon.tech/api/v2/organizations/{org_id}/members?limit=20&sort_by=joined_at&sort_order=desc&cursor=eyJtZW1iZXJfaWQiOi...' \
      --header 'accept: application/json' \
-     --header 'authorization: Bearer $ORG_API_KEY' | jq
+     --header "authorization: Bearer $ORG_API_KEY" | jq
 ```
 
 Example response:
@@ -230,7 +230,7 @@ Retrieves information about a specific member using their member ID (obtained fr
 curl --request GET \
      --url 'https://console.neon.tech/api/v2/organizations/{org_id}/members/{member_id}' \
      --header 'accept: application/json' \
-     --header 'authorization: Bearer $ORG_API_KEY'
+     --header "authorization: Bearer $ORG_API_KEY"
 ```
 
 Example response:
@@ -257,7 +257,7 @@ Valid roles are `admin`, `editor`, `viewer`, and `collaborator`. The value `memb
 curl --request PATCH \
      --url 'https://console.neon.tech/api/v2/organizations/members/{member_id}' \
      --header 'accept: application/json' \
-     --header 'authorization: Bearer $ORG_API_KEY' \
+     --header "authorization: Bearer $ORG_API_KEY" \
      --header 'content-type: application/json' \
      --data '{"role": "editor"}' | jq
 ```
@@ -284,7 +284,7 @@ You must use your personal API key and have admin-level permissions in the organ
 curl --request DELETE \
      --url 'https://console.neon.tech/api/v2/organizations/{org_id}/members/{member_id}' \
      --header 'accept: application/json' \
-     --header 'authorization: Bearer $PERSONAL_API_KEY'
+     --header "authorization: Bearer $PERSONAL_API_KEY"
 ```
 
 [Try in API Reference](/docs/reference/api/organizations/remove-organization-member)
@@ -297,7 +297,7 @@ Retrieves a list of all pending invitations for the organization.
 curl --request GET \
      --url 'https://console.neon.tech/api/v2/organizations/invitations' \
      --header 'accept: application/json' \
-     --header 'authorization: Bearer $ORG_API_KEY' | jq
+     --header "authorization: Bearer $ORG_API_KEY" | jq
 ```
 
 Example response:
@@ -333,7 +333,7 @@ You must use your personal API key and have admin-level permissions in the organ
 curl --request POST \
      --url 'https://console.neon.tech/api/v2/organizations/{org_id}/invitations' \
      --header 'accept: application/json' \
-     --header 'authorization: Bearer $PERSONAL_API_KEY' \
+     --header "authorization: Bearer $PERSONAL_API_KEY" \
      --header 'content-type: application/json' \
      --data '{
        "invitations": [

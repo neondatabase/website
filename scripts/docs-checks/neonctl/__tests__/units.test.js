@@ -524,6 +524,50 @@ describe('parseCommandFile: enum-member arrays and template-literal consts', () 
   });
 });
 
+describe('parseCommandFile: .slice() and .at() on const string arrays in describes', () => {
+  const sourceFor = (noteExpr) => `
+    import type yargs from "yargs";
+    const NO_SHARED = ["microsoft", "apple", "discord"] as const;
+    const NOTE = \`${noteExpr} always need your own credentials\`;
+    export const command = "auth";
+    export const describe = "Manage auth";
+    export const builder = (argv: yargs.Argv) =>
+      argv.options({ "client-id": { describe: \`Client ID; \${NOTE}.\`, type: "string" } });
+  `;
+
+  it('resolves the list-with-"and" note built in neon_auth.ts at 9.5.0', () => {
+    // 9.4.0 built this note with NO_SHARED.join(" and "); 9.5.0 builds it with
+    // .slice(0, -1).join(", ") and .at(-1). Without .slice()/.at() support the
+    // whole describe was dropped and the coverage test failed.
+    const note = '${NO_SHARED.slice(0, -1).join(", ")} and ${NO_SHARED.at(-1)}';
+    const parsed = parseCommandFile(writeTempSource(sourceFor(note)), new Map());
+    expect(parsed.options['client-id'].describe).toBe(
+      'Client ID; microsoft, apple and discord always need your own credentials.'
+    );
+  });
+
+  it('handles a one-argument slice and a positive .at() index', () => {
+    const note = '${NO_SHARED.slice(1).join("/")} ${NO_SHARED.at(0)}';
+    const parsed = parseCommandFile(writeTempSource(sourceFor(note)), new Map());
+    expect(parsed.options['client-id'].describe).toBe(
+      'Client ID; apple/discord microsoft always need your own credentials.'
+    );
+  });
+
+  it('still drops the describe when an argument or the array is unresolvable', () => {
+    // A wrong describe is worse than a dropped one: the coverage test only
+    // catches the drop.
+    for (const note of [
+      '${NO_SHARED.slice(0, someVar).join(", ")}',
+      '${UNKNOWN.slice(0, -1).join(", ")}',
+      '${NO_SHARED.at(9)}',
+    ]) {
+      const parsed = parseCommandFile(writeTempSource(sourceFor(note)), new Map());
+      expect(parsed.options['client-id'].describe).toBeUndefined();
+    }
+  });
+});
+
 describe('parseCommandFile: curried builderFor(usage) builders', () => {
   // neon-pkgs #1022 changed databases, roles, psql, connection-string, and
   // computes to export `builderFor(usage)` so postgres.ts can re-mount them.
@@ -574,6 +618,92 @@ describe('parseCommandFile: curried builderFor(usage) builders', () => {
     expect(nestedRoles.describe).toBe('Manage roles');
     expect(nestedRoles.usage).toBe('$0 postgres roles <sub-command> [options]');
     expect(Object.keys(nestedRoles.commands)).toEqual(['list']);
+  });
+
+  it('resolves a module mounted with .command(x.command, x.describe, x.builder)', () => {
+    const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'neonctl-units-'));
+    fs.writeFileSync(
+      path.join(dir, 'loki.ts'),
+      `
+      import type yargs from "yargs";
+      export const command = "loki [query]";
+      export const describe = "Call the Loki read API";
+      export const builder = (argv: yargs.Argv) =>
+        argv
+          .usage("$0 logs loki [query] [options]")
+          .positional("query", { describe: "LogQL expression", type: "string" })
+          .options({ since: { describe: "Lookback window", type: "string" } });
+    `
+    );
+    const group = path.join(dir, 'logs.ts');
+    fs.writeFileSync(
+      group,
+      `
+      import type yargs from "yargs";
+      import * as loki from "./loki.js";
+      export const command = "logs";
+      export const describe = "Query branch logs";
+      export const builder = (argv: yargs.Argv) =>
+        argv
+          .usage("$0 logs <sub-command> [options]")
+          .command("fields", "List log fields", (y) => y)
+          .command(loki.command, loki.describe, loki.builder, (args) => loki.handler(args));
+    `
+    );
+    const parsed = parseCommandFile(group, new Map());
+    expect(Object.keys(parsed.commands)).toEqual(['fields', 'loki']);
+    const sub = parsed.commands.loki;
+    expect(sub.describe).toBe('Call the Loki read API');
+    expect(sub.usage).toBe('$0 logs loki [query] [options]');
+    expect(sub.positionals.map((p) => [p.name, p.describe])).toEqual([
+      ['query', 'LogQL expression'],
+    ]);
+    expect(Object.keys(sub.options)).toEqual(['since']);
+  });
+
+  it('follows a builder imported by name into its own file', () => {
+    const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'neonctl-units-'));
+    fs.writeFileSync(
+      path.join(dir, 'subscribe.ts'),
+      `
+      import type yargs from "yargs";
+      const LABEL = "Show raw rows and changes events";
+      export const builder = (argv: yargs.Argv) =>
+        argv
+          .usage('$0 realtime subscribe "<query>" [options]')
+          .positional("query", { describe: "SELECT query to subscribe to", type: "string" })
+          .options({
+            changes: { describe: LABEL, type: "boolean", default: false },
+            debug: { describe: "Show full database error details", type: "boolean", default: false },
+          })
+          .example('$0 realtime subscribe "SELECT 1"', "Subscribe");
+    `
+    );
+    const group = path.join(dir, 'realtime.ts');
+    fs.writeFileSync(
+      group,
+      `
+      import type yargs from "yargs";
+      import { builder as subscribeBuilder, handler as subscribeHandler } from "./subscribe.js";
+      export const command = "realtime";
+      export const describe = "Manage Neon Realtime";
+      export const builder = (argv: yargs.Argv) =>
+        argv
+          .usage("$0 realtime <sub-command> [options]")
+          .command("subscribe <query>", "Subscribe to a live query", subscribeBuilder, subscribeHandler);
+    `
+    );
+    const sub = parseCommandFile(group, new Map()).commands.subscribe;
+    expect(sub.describe).toBe('Subscribe to a live query');
+    expect(sub.usage).toBe('$0 realtime subscribe "<query>" [options]');
+    expect(sub.positionals.map((p) => [p.name, p.describe])).toEqual([
+      ['query', 'SELECT query to subscribe to'],
+    ]);
+    expect(Object.keys(sub.options)).toEqual(['changes', 'debug']);
+    expect(sub.options.changes.describe).toBe('Show raw rows and changes events');
+    expect(sub.examples).toEqual([
+      { command: '$0 realtime subscribe "SELECT 1"', description: 'Subscribe' },
+    ]);
   });
 });
 

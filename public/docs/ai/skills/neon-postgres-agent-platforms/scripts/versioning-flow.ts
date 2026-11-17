@@ -31,12 +31,15 @@ const demoBranchName =
   process.env.VERSION_DEMO_BRANCH_NAME ?? `versioning-demo-${runId}`;
 
 console.error("[versioning-flow] 1/5 Snapshot production branch (baseline)...");
-const baseline = await neon.snapshots.create(projectId, prodBranchId, {
+const baseline = await neon.snapshots.create({
+  projectId,
+  branchId: prodBranchId,
   name: baselineName,
 });
 
 console.error("[versioning-flow] 2/5 Create child branch from production...");
-const demoBranch = await neon.branches.create(projectId, {
+const demoBranch = await neon.branches.create({
+  projectId,
   name: demoBranchName,
   parent_id: prodBranchId,
 });
@@ -52,7 +55,9 @@ console.error(
 console.error(
   "[versioning-flow] 5/5 Restore baseline snapshot onto demo branch (rewind)...",
 );
-await neon.snapshots.restore(projectId, baseline.id, {
+await neon.snapshots.restore({
+  projectId,
+  snapshotId: baseline.id,
   targetBranchId: demoBranch.id,
   finalize: true,
   name: `before_restore_${runId}`,

@@ -87,13 +87,15 @@ curl --request POST \
      --data '{
   "project": {
     "name": "user-database-123",
-    "pg_version": 16,
+    "pg_version": 18,
     "region_id": "aws-us-east-1"
   }
 }' | jq
 ```
 
 The response includes connection details you can provide to your user. Projects are created in under 1 second.
+
+If your API key belongs to more than one organization, add the organization ID to the `project` object with `"org_id": "$ORG_ID"`. Without it, Neon creates the project in a default organization. List your organization IDs with `GET /users/me/organizations`.
 
 <Admonition type="tip" title="Custom names">
 You can customize the default database and role names when creating a project. See the [Create project API docs](/docs/reference/api/projects/create-project) for details.
@@ -122,7 +124,7 @@ curl --request POST \
       "autoscaling_limit_max_cu": 4,
       "suspend_timeout_seconds": 600
     },
-    "pg_version": 16
+    "pg_version": 18
   }
 }'
 ```
@@ -153,12 +155,12 @@ curl --request POST \
       }
     },
     "name": "starter-tier-user",
-    "pg_version": 16
+    "pg_version": 18
   }
 }'
 ```
 
-When a quota is reached, the project's computes are automatically suspended until the next billing period or until you adjust the limits.
+When a compute, written data, or data transfer quota is reached, the project's computes are suspended and new connections fail with a quota error. They stay suspended until the next billing period or until you raise the limit. When a branch reaches its `logical_size_bytes` quota, the compute keeps running: reads and deletes still work, but writes that would grow the branch fail. See [Configure consumption limits](/docs/guides/consumption-limits).
 
 For detailed information about configuring limits, see [Configure consumption limits](/docs/guides/consumption-limits).
 
@@ -175,16 +177,16 @@ For real-world examples, see how [Koyeb defines their database instance types an
 
 ## Monitor usage
 
-Query consumption metrics to track usage across your projects and implement billing:
+Query consumption metrics to track usage across your projects and implement billing. Set `ORG_ID` to your organization ID, and set `FROM` and `TO` to a date range within the last 60 days. Daily metrics are available for 60 days, and requests outside that window return an error.
 
 ```bash shouldWrap
 curl --request GET \
-     --url 'https://console.neon.tech/api/v2/consumption_history/v2/projects?org_id=$ORG_ID&from=2024-11-01T00:00:00Z&to=2024-11-30T23:59:59Z&granularity=daily&metrics=compute_unit_seconds,root_branch_bytes_month,child_branch_bytes_month,public_network_transfer_bytes' \
+     --url "https://console.neon.tech/api/v2/consumption_history/v2/projects?org_id=$ORG_ID&from=$FROM&to=$TO&granularity=daily&metrics=compute_unit_seconds,root_branch_bytes_month,child_branch_bytes_month,public_network_transfer_bytes" \
      --header 'accept: application/json' \
      --header "authorization: Bearer $NEON_API_KEY"
 ```
 
-The v2 project metrics endpoint returns billing-aligned metrics including compute, storage, and data transfer. To break usage down by branch within a project, use the [branch metrics endpoint](/docs/guides/consumption-metrics#branch-metrics) (`GET /consumption_history/v2/branches`).
+The v2 project metrics endpoint returns billing-aligned metrics including compute, storage, and data transfer. To break usage down by branch within a project, use the [branch metrics endpoint](/docs/guides/consumption-metrics#branch-metrics) (`GET /consumption_history/v2/branches`). This endpoint requires a `project_ids` query parameter.
 
 For details on querying metrics, see [Query consumption metrics](/docs/guides/consumption-metrics).
 

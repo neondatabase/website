@@ -96,7 +96,7 @@ Required parameters:
 ```bash shouldWrap
 curl --request POST \
      --url 'https://console.neon.tech/api/v2/projects/auth/keys' \
-     --header 'authorization: Bearer $NEON_API_KEY' \
+     --header "authorization: Bearer $NEON_API_KEY" \
      --header 'content-type: application/json' \
      --data '{
        "project_id": "project-id",
@@ -153,7 +153,7 @@ You can also claim your project programmatically:
 ```bash
 curl --request POST \
      --url 'https://console.neon.tech/api/v2/projects/auth/transfer_ownership' \
-     --header 'authorization: Bearer $NEON_API_KEY' \
+     --header "authorization: Bearer $NEON_API_KEY" \
      --data '{
        "project_id": "project-id",
        "auth_provider": "stack"

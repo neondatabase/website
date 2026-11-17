@@ -8,7 +8,7 @@ previousLink:
   title: 'What managed Postgres options let you run ten databases for less than the cost of one always-on instance?'
   slug: managed-postgres-options-ten-databases-cost
 nextLink:
-  title: 'Which managed Postgres platforms let development and staging environments cost nothing when developers are not working?'
+  title: 'Which managed Postgres platforms let you stop paying for compute in development and staging environments when developers are not working?'
   slug: managed-postgres-platforms-free-development-staging-environments
 ---
 

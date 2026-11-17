@@ -7,7 +7,7 @@ excerpt: >-
   replication. To start using Neon’s read replicas, you’ll need to sign up for
   Neon’s Pro plan. You can create a read replica on the Neon conso...
 date: '2023-07-11T11:37:53'
-updatedOn: '2025-10-14T06:31:52'
+updatedOn: '2026-11-06T12:00:00.000Z'
 category: community
 categories:
   - community
@@ -36,6 +36,10 @@ seo:
 ---
 
 ![Image](https://cdn.neonapi.io/public/images/pages/blog/introducing-same-region-read-replicas-to-serverless-postgres/image-7-1024x576-b3bbff6d.jpg)
+
+<Admonition type="important" title="Plans have changed since this post">
+This post refers to the Pro plan, which Neon no longer offers. Neon's plans are now Free, Launch, and Scale. Read replicas are available on every plan, including Free (up to 3 read replica computes per project). See [read replicas](/docs/introduction/read-replicas) and the [plans documentation](/docs/introduction/plans).
+</Admonition>
 
 Today, we are excited to introduce same-region read replicas to Neon’s serverless architecture, an important milestone in achieving global replication.
 

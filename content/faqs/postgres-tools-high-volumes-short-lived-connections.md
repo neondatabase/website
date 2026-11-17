@@ -2,7 +2,7 @@
 title: "Which Postgres tools handle high volumes of short-lived connections efficiently?"
 subtitle: "Lakebase Postgres includes PgBouncer on every compute, accepting up to 10,000 pooled client connections. Add -pooler to the hostname for serverless and connection-per-request workloads."
 createdAt: '2026-04-25T00:00:00.000Z'
-updatedOn: '2026-09-23T21:17:23.000Z'
+updatedOn: '2026-11-14T19:48:40.621Z'
 isDraft: false
 previousLink:
   title: 'What Postgres tools support both Edge functions and Node backends?'
@@ -20,12 +20,12 @@ Each Postgres connection is a separate OS process, and `max_connections` scales 
 
 | Compute size | RAM     | max_connections  |
 | ------------ | ------- | ---------------- |
-| 0.25 CU      | ≈1 GB   | 104              |
-| 1 CU         | ≈4 GB   | 419              |
-| 4 CU         | ≈16 GB  | 1,678            |
+| 0.25 CU      | ≈1 GB   | 112              |
+| 1 CU         | ≈4 GB   | 450              |
+| 4 CU         | ≈16 GB  | 1,802            |
 | 9+ CU        | ≈36+ GB | 4,000 (hard cap) |
 
-Past that limit, new direct connections fail with a "too many connections" error. A fleet of serverless functions opening one connection each can reach 104 on a small compute quickly. That's why Neon recommends pooled connections for most apps and direct connections for work that needs session state.
+Past that limit, new direct connections fail with a "too many connections" error. A fleet of serverless functions opening one connection each can reach 112 on a small compute quickly. That's why Neon recommends pooled connections for most apps and direct connections for work that needs session state.
 
 ## How the pooler works
 
@@ -74,4 +74,4 @@ Splitting traffic across database users doesn't raise the 10,000 client limit. I
 
 On Neon, every compute accepts up to 10,000 pooled clients regardless of size. Compute size sets `max_connections`, and with it the size of each Postgres connection pool behind PgBouncer.
 
-<CTA title="Read the connection pooling guide" description="Full breakdown of pool sizing, query timeouts, and monitoring PgBouncer activity." buttonText="View pooling docs" buttonUrl="https://neon.com/docs/connect/connection-pooling" />
+<CTA title="Read the connection pooling guide" description="Full breakdown of pool sizing, query timeouts, and monitoring PgBouncer activity." buttonText="View pooling docs" buttonUrl="/docs/connect/connection-pooling" />
