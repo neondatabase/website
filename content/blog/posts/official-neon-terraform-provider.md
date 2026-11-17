@@ -37,7 +37,7 @@ seo:
 
 Infrastructure as code (IaC) has always been a great idea that was a bit cumbersome in practice. Resources drifted, state broke and someone had to clean it up by hand. With agents, that changes, because your agent reads the plan, fixes the config and runs the apply for you. We made that case when we [introduced neon.ts](https://neon.com/blog/introducing-neon-ts), our infrastructure-as-code file for Neon projects.
 
-`neon.ts` works great when your stack is all Neon. Bigger teams, however, usually compose Neon with other cloud services such as AWS, Cloudflare or Vercel and reach for tools built for exactly that: [Terraform](https://developer.hashicorp.com/terraform), [OpenTofu](https://opentofu.org), [Pulumi](https://www.pulumi.com) or [Alchemy](https://alchemy.run). We want Neon to be a first-class citizen in all of them and part of that is maintaining first-party providers wherever they're needed.
+`neon.ts` works great when your stack is all Neon. Bigger teams, however, usually compose Neon with other cloud services such as AWS, Cloudflare, Resend or Sentry and reach for tools built for exactly that: [Terraform](https://developer.hashicorp.com/terraform), [OpenTofu](https://opentofu.org), [Pulumi](https://www.pulumi.com) or [Alchemy](https://alchemy.run). We want Neon to be a first-class citizen in all of them and part of that is maintaining first-party providers wherever they're needed.
 
 So today, we're releasing an official Terraform provider for Neon: [`neondatabase/neon`](https://registry.terraform.io/providers/neondatabase/neon/latest) on the Terraform Registry, built in [neondatabase/terraform-provider-neon](https://github.com/neondatabase/terraform-provider-neon). It's in beta and the current release is 0.19.0-beta.2.
 
