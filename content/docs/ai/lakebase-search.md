@@ -13,7 +13,7 @@ redirectFrom:
   - /docs/extensions/migrate-pg-search-to-lakebase-text
   - /guides/pg-search
   - /guides/pg-search-vs-tsvector
-updatedOn: '2026-11-17T19:42:00.158Z'
+updatedOn: '2026-11-17T20:48:49.063Z'
 ---
 
 Lakebase Search gives your agents and apps semantic, keyword, and hybrid search over your own data, running as plain SQL inside your [Lakebase Postgres](/docs/postgres/overview) database on Neon.
@@ -39,17 +39,17 @@ ORDER BY embedding <=> $1::vector
 LIMIT 5;
 ```
 
-Keyword search and hybrid search (vector and keyword fused with Reciprocal Rank Fusion (RRF), with optional Jev reranking) run the same way, as SQL. See the [Get started guide](/docs/ai/lakebase-search-get-started#combine-results-with-hybrid-search) for the full runnable hybrid query.
+Keyword search and hybrid search run the same way, as SQL. Hybrid search fuses the vector and keyword result lists with Reciprocal Rank Fusion (RRF), which merges two ranked lists into one, and can optionally rerank them with Jev, a reranking model on Neon AI Gateway. See the [Get started guide](/docs/ai/lakebase-search-get-started#combine-results-with-hybrid-search) for the full runnable hybrid query.
 
 ### How the vector index scales
 
-`lakebase_vector` builds the `lakebase_ann` index. It splits vectors into IVF (Inverted File) lists and scans only the relevant ones, reading sequentially instead of chasing pointers through an in-memory graph. It compresses the vectors with RaBitQ quantization to keep the index small and the build fast.
+`lakebase_vector` builds the `lakebase_ann` index, which combines two techniques. IVF (Inverted File) partitioning groups the vectors into lists and scans only the lists closest to your query, so a search reads a small part of the index with sequential reads instead of random reads across the whole index. RaBitQ quantization compresses each vector into a smaller form, which keeps the index small and makes index builds fast.
 
 Because the index lives in storage, a cold start needs no rebuild or re-index. The first query pays object-storage latency while the cache warms; call `lakebase_ann_prewarm` ahead of time to skip that.
 
 ### How the text index ranks
 
-`lakebase_text` builds the `lakebase_bm25` index. It ranks with BM25 and uses Block-Max WAND top-K pushdown to return the top matches directly, instead of scoring every row the way a GIN index does.
+`lakebase_text` builds the `lakebase_bm25` index. It ranks results with BM25, and it uses Block-Max WAND, an algorithm that finds the top K matches without fully scoring every matching row, so text search stays fast as the index grows. A standard GIN full-text index scores all matching rows before returning the top ones; `lakebase_bm25` returns the top K directly.
 
 ## Scaling search past pgvector
 
@@ -59,7 +59,7 @@ Past roughly tens of millions of vectors, you run into several limits:
 
 - a large, always-on instance just to hold the index in memory
 - index builds slow enough to disrupt the database
-- a recall-versus-latency tradeoff on every tuning pass
+- a recall-versus-latency tradeoff on every tuning pass (recall is the share of true matches returned)
 
 The `lakebase_ann` index lives in storage instead of RAM, so the index size no longer sets the instance size.
 
