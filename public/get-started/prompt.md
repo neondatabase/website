@@ -39,11 +39,13 @@ Immediately after the CLI is installed, launch the sign-in flow by running `neon
 
 Follow these instructions if the user's prompt references an existing Neon project by providing a project ID and an organization ID.
 
-Run the following command in the root directory of the user's source-code repo to link their app to an existing Neon project, populate `.env` variables in their repo, and install the Neon skills and MCP server. Use the project ID and organization ID from the user's prompt for `<project-id>` and `<org-id>`.
+Run the following command in the root directory of the user's source-code repo to link their app to an existing Neon project, pull the project's environment variables into `.env` (or `.env.local` when there is no `.env`), and install the Neon skills and MCP server. Use the project ID and organization ID from the user's prompt for `<project-id>` and `<org-id>`.
 
 ```bash
-neon init -y --agent <agent-name> --org-id <org-id> --project-id <project-id>
+neon init -y --agent <agent-name> --org-id <org-id> --project-id <project-id> --no-config
 ```
+
+`--no-config` keeps `neon init` from writing a `neon.ts` config file and from adding `@neon/config` and `@neon/env` to the app and running a package install. The project already exists, so linking it and pulling its environment variables from the branch is all the app needs. If the user later wants to manage the project's Neon services as code, run `neon config init --from-branch` to write a `neon.ts` that matches the services the branch already has.
 
 The supported agents are antigravity, cline, cline-cli, claude-code, claude-desktop, codex, cursor, gemini-cli, goose, github-copilot-cli, grok-build, opencode, vscode, windsurf, and zed. A few also accept aliases (claude for claude-code, copilot for vscode, gemini for gemini-cli). Passing an unknown agent stops the command and prints the current supported list.
 
@@ -93,11 +95,13 @@ What region would you like your Neon project created in?
 
     Do not show region-ids, only use them when populating the CLI command. Also do not recommend one region over the others.
 
-Then run the following command in the root directory of the user's source-code repo to create a new Neon project, populate `.env` variables in their repo, and install the Neon skills and MCP server. Use the region-id for the user's choice, and use the name of the repo's directory for `<project-name>` unless the user specifies another name.
+Then run the following command in the root directory of the user's source-code repo to create a new Neon project, pull its environment variables into `.env` (or `.env.local` when there is no `.env`), and install the Neon skills and MCP server. Use the region-id for the user's choice, and use the name of the repo's directory for `<project-name>` unless the user specifies another name.
 
 ```bash
 neon init -y --agent <agent-name> --region-id <region-id> --project-name <project-name>
 ```
+
+This command also writes a starter `neon.ts` config file, adds `@neon/config` and `@neon/env` to the app's dependencies (creating a `package.json` first if the directory has none), and runs the app's package manager to install them.
 
 The supported agents are antigravity, cline, cline-cli, claude-code, claude-desktop, codex, cursor, gemini-cli, goose, github-copilot-cli, grok-build, opencode, vscode, windsurf, and zed. A few also accept aliases (claude for claude-code, copilot for vscode, gemini for gemini-cli). Passing an unknown agent stops the command and prints the current supported list.
 
