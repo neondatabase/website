@@ -39,7 +39,8 @@ Follow these rules from the guide:
 - On the consent page, read `window.location.search` in an effect, not during render.
 - On a child branch, point both `MCP_RESOURCE` and `--mcp-resource` at that branch's function URL.
 
-If I want the optional MCP Apps widget, follow the guide's "Render todos in chat with MCP Apps" section and https://modelcontextprotocol.io/extensions/apps/overview:
+If I want the optional MCP Apps widget, read the MCP Apps overview at https://modelcontextprotocol.io/extensions/apps/overview
+For the widget, follow the guide's "Render todos in chat with MCP Apps" section and these points:
 
 - Put the widget HTML in a TypeScript module so `neon functions deploy` bundles it. Don't read a sibling `.html` file with `readFileSync`.
 - Register the UI as two resources: an MCP Apps resource (`text/html;profile=mcp-app`) and the ChatGPT skybridge variant (`text/html+skybridge`).
