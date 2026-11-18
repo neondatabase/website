@@ -11,7 +11,7 @@ summary: >-
 enableTableOfContents: true
 redirectFrom:
   - /docs/guides/neon-private-access
-updatedOn: '2026-11-18T19:46:48.277Z'
+updatedOn: '2026-11-18T20:25:12.697Z'
 ---
 
 <Admonition type="info" title="Private Networking availability">
@@ -60,68 +60,87 @@ To configure Neon Private Networking, perform the following steps:
 
        ![VPC Create endpoint](/docs/guides/pl_vpc_create_endpoint.png)
 
-    1. Under **Service settings**, specify the **Service name**. Some regions require specifying multiple service names, and service names vary by region:
+    1. Under **Service settings**, specify the **Service name**. Service names vary by region, and a region can have several. Select your region below and create one entry for each service name:
 
-       - **us-east-1**: Create entries, one for each of the following:
-         - `com.amazonaws.vpce.us-east-1.vpce-svc-01aeec2f4b558bc22`
-         - `com.amazonaws.vpce.us-east-1.vpce-svc-01b3c73657ed9bd29`
-         - `com.amazonaws.vpce.us-east-1.vpce-svc-02a0abd91f32f1ed7`
-         - `com.amazonaws.vpce.us-east-1.vpce-svc-040132f4a2dc43d76`
-         - `com.amazonaws.vpce.us-east-1.vpce-svc-0492424e0bf471d59`
-         - `com.amazonaws.vpce.us-east-1.vpce-svc-074ac4111275eaf07`
-         - `com.amazonaws.vpce.us-east-1.vpce-svc-07e0ce252b3a16acc`
-         - `com.amazonaws.vpce.us-east-1.vpce-svc-0824666dc46176a87`
-         - `com.amazonaws.vpce.us-east-1.vpce-svc-0adffb07ac0333ac0`
-         - `com.amazonaws.vpce.us-east-1.vpce-svc-0b676a43303caf7d8`
-         - `com.amazonaws.vpce.us-east-1.vpce-svc-0bef3dbe6e4a2df49`
-         - `com.amazonaws.vpce.us-east-1.vpce-svc-0c4afbefbfdf6b031`
-         - `com.amazonaws.vpce.us-east-1.vpce-svc-0d07f7f68c9a99f3b`
-         - `com.amazonaws.vpce.us-east-1.vpce-svc-0de57c578b0e614a9`
-         - `com.amazonaws.vpce.us-east-1.vpce-svc-0e018376e3c90bfae`
-         - `com.amazonaws.vpce.us-east-1.vpce-svc-0f37140e9710ee3af`
-       - **us-east-2**: Create entries, one for each of the following:
-         - `com.amazonaws.vpce.us-east-2.vpce-svc-0056bdfba63cc6ea1`
-         - `com.amazonaws.vpce.us-east-2.vpce-svc-010736480bcef5824`
-         - `com.amazonaws.vpce.us-east-2.vpce-svc-0125f603817b3d7f7`
-         - `com.amazonaws.vpce.us-east-2.vpce-svc-0234a2d750f731a18`
-         - `com.amazonaws.vpce.us-east-2.vpce-svc-0465c21ce8ba95fb2`
-         - `com.amazonaws.vpce.us-east-2.vpce-svc-0a59493ecf790eccf`
-         - `com.amazonaws.vpce.us-east-2.vpce-svc-0ce57d490de78526a`
-         - `com.amazonaws.vpce.us-east-2.vpce-svc-0d421498ff01becac`
-         - `com.amazonaws.vpce.us-east-2.vpce-svc-0fcb5fccfc8573aa3`
-       - **eu-central-1**: Create entries, one for each of the following:
-         - `com.amazonaws.vpce.eu-central-1.vpce-svc-0165f3a480927c9a0`
-         - `com.amazonaws.vpce.eu-central-1.vpce-svc-0260f9dcc9bf59e3e`
-         - `com.amazonaws.vpce.eu-central-1.vpce-svc-04bac3120b20929cd`
-         - `com.amazonaws.vpce.eu-central-1.vpce-svc-05554c35009a5eccb`
-         - `com.amazonaws.vpce.eu-central-1.vpce-svc-0575a0aedec0492b8`
-         - `com.amazonaws.vpce.eu-central-1.vpce-svc-05a252e6836f01cfd`
-         - `com.amazonaws.vpce.eu-central-1.vpce-svc-05a5b03b56954593a`
-         - `com.amazonaws.vpce.eu-central-1.vpce-svc-07617c7fc17794cc7`
-         - `com.amazonaws.vpce.eu-central-1.vpce-svc-0efb85c929a6ee91f`
-         - `com.amazonaws.vpce.eu-central-1.vpce-svc-0fef417ecf84ed325`
-       - **eu-west-2**: Create entries, one for each of the following:
-         - `com.amazonaws.vpce.eu-west-2.vpce-svc-028d190998ab34913`
-         - `com.amazonaws.vpce.eu-west-2.vpce-svc-0375428488d22c05b`
-         - `com.amazonaws.vpce.eu-west-2.vpce-svc-0c6fedbe99fced2cd`
-       - **us-west-2**: Create entries, one for each of the following:
-         - `com.amazonaws.vpce.us-west-2.vpce-svc-045eebdf710e1066d`
-         - `com.amazonaws.vpce.us-west-2.vpce-svc-060e0d5f582365b8e`
-         - `com.amazonaws.vpce.us-west-2.vpce-svc-07b750990c172f22f`
-         - `com.amazonaws.vpce.us-west-2.vpce-svc-0a7b662960507808f`
-         - `com.amazonaws.vpce.us-west-2.vpce-svc-0ed672a4d41b5e687`
-       - **ap-southeast-1**: Create entries, one for each of the following:
-         - `com.amazonaws.vpce.ap-southeast-1.vpce-svc-00eb29496a51d8bee`
-         - `com.amazonaws.vpce.ap-southeast-1.vpce-svc-01c64edf7fe936ac7`
-         - `com.amazonaws.vpce.ap-southeast-1.vpce-svc-028cc7060eb23ff43`
-         - `com.amazonaws.vpce.ap-southeast-1.vpce-svc-07c68d307f9f05687`
-         - `com.amazonaws.vpce.ap-southeast-1.vpce-svc-0d858726de58b2185`
-       - **ap-southeast-2**: Create entries, one for each of the following:
-         - `com.amazonaws.vpce.ap-southeast-2.vpce-svc-031161490f5647f32`
-         - `com.amazonaws.vpce.ap-southeast-2.vpce-svc-07d11c1bc6234e6e4`
-       - **sa-east-1**: Create entries, one for each of the following:
-         - `com.amazonaws.vpce.sa-east-1.vpce-svc-03cf6c871b7ae95e8`
-         - `com.amazonaws.vpce.sa-east-1.vpce-svc-061204a851dbd1a47`
+       <CodeTabs labels={["us-east-1", "us-east-2", "eu-central-1", "eu-west-2", "us-west-2", "ap-southeast-1", "ap-southeast-2", "sa-east-1"]}>
+
+       ```text
+       com.amazonaws.vpce.us-east-1.vpce-svc-01aeec2f4b558bc22
+       com.amazonaws.vpce.us-east-1.vpce-svc-01b3c73657ed9bd29
+       com.amazonaws.vpce.us-east-1.vpce-svc-02a0abd91f32f1ed7
+       com.amazonaws.vpce.us-east-1.vpce-svc-040132f4a2dc43d76
+       com.amazonaws.vpce.us-east-1.vpce-svc-0492424e0bf471d59
+       com.amazonaws.vpce.us-east-1.vpce-svc-074ac4111275eaf07
+       com.amazonaws.vpce.us-east-1.vpce-svc-07e0ce252b3a16acc
+       com.amazonaws.vpce.us-east-1.vpce-svc-0824666dc46176a87
+       com.amazonaws.vpce.us-east-1.vpce-svc-0adffb07ac0333ac0
+       com.amazonaws.vpce.us-east-1.vpce-svc-0b676a43303caf7d8
+       com.amazonaws.vpce.us-east-1.vpce-svc-0bef3dbe6e4a2df49
+       com.amazonaws.vpce.us-east-1.vpce-svc-0c4afbefbfdf6b031
+       com.amazonaws.vpce.us-east-1.vpce-svc-0d07f7f68c9a99f3b
+       com.amazonaws.vpce.us-east-1.vpce-svc-0de57c578b0e614a9
+       com.amazonaws.vpce.us-east-1.vpce-svc-0e018376e3c90bfae
+       com.amazonaws.vpce.us-east-1.vpce-svc-0f37140e9710ee3af
+       ```
+
+       ```text
+       com.amazonaws.vpce.us-east-2.vpce-svc-0056bdfba63cc6ea1
+       com.amazonaws.vpce.us-east-2.vpce-svc-010736480bcef5824
+       com.amazonaws.vpce.us-east-2.vpce-svc-0125f603817b3d7f7
+       com.amazonaws.vpce.us-east-2.vpce-svc-0234a2d750f731a18
+       com.amazonaws.vpce.us-east-2.vpce-svc-0465c21ce8ba95fb2
+       com.amazonaws.vpce.us-east-2.vpce-svc-0a59493ecf790eccf
+       com.amazonaws.vpce.us-east-2.vpce-svc-0ce57d490de78526a
+       com.amazonaws.vpce.us-east-2.vpce-svc-0d421498ff01becac
+       com.amazonaws.vpce.us-east-2.vpce-svc-0fcb5fccfc8573aa3
+       ```
+
+       ```text
+       com.amazonaws.vpce.eu-central-1.vpce-svc-0165f3a480927c9a0
+       com.amazonaws.vpce.eu-central-1.vpce-svc-0260f9dcc9bf59e3e
+       com.amazonaws.vpce.eu-central-1.vpce-svc-04bac3120b20929cd
+       com.amazonaws.vpce.eu-central-1.vpce-svc-05554c35009a5eccb
+       com.amazonaws.vpce.eu-central-1.vpce-svc-0575a0aedec0492b8
+       com.amazonaws.vpce.eu-central-1.vpce-svc-05a252e6836f01cfd
+       com.amazonaws.vpce.eu-central-1.vpce-svc-05a5b03b56954593a
+       com.amazonaws.vpce.eu-central-1.vpce-svc-07617c7fc17794cc7
+       com.amazonaws.vpce.eu-central-1.vpce-svc-0efb85c929a6ee91f
+       com.amazonaws.vpce.eu-central-1.vpce-svc-0fef417ecf84ed325
+       ```
+
+       ```text
+       com.amazonaws.vpce.eu-west-2.vpce-svc-028d190998ab34913
+       com.amazonaws.vpce.eu-west-2.vpce-svc-0375428488d22c05b
+       com.amazonaws.vpce.eu-west-2.vpce-svc-0c6fedbe99fced2cd
+       ```
+
+       ```text
+       com.amazonaws.vpce.us-west-2.vpce-svc-045eebdf710e1066d
+       com.amazonaws.vpce.us-west-2.vpce-svc-060e0d5f582365b8e
+       com.amazonaws.vpce.us-west-2.vpce-svc-07b750990c172f22f
+       com.amazonaws.vpce.us-west-2.vpce-svc-0a7b662960507808f
+       com.amazonaws.vpce.us-west-2.vpce-svc-0ed672a4d41b5e687
+       ```
+
+       ```text
+       com.amazonaws.vpce.ap-southeast-1.vpce-svc-00eb29496a51d8bee
+       com.amazonaws.vpce.ap-southeast-1.vpce-svc-01c64edf7fe936ac7
+       com.amazonaws.vpce.ap-southeast-1.vpce-svc-028cc7060eb23ff43
+       com.amazonaws.vpce.ap-southeast-1.vpce-svc-07c68d307f9f05687
+       com.amazonaws.vpce.ap-southeast-1.vpce-svc-0d858726de58b2185
+       ```
+
+       ```text
+       com.amazonaws.vpce.ap-southeast-2.vpce-svc-031161490f5647f32
+       com.amazonaws.vpce.ap-southeast-2.vpce-svc-07d11c1bc6234e6e4
+       ```
+
+       ```text
+       com.amazonaws.vpce.sa-east-1.vpce-svc-03cf6c871b7ae95e8
+       com.amazonaws.vpce.sa-east-1.vpce-svc-061204a851dbd1a47
+       ```
+
+       </CodeTabs>
 
        You can also get the current service names for a region from the Neon API with the [List VPC endpoint service names for a region](/docs/reference/api/regions/get-region-vpc-endpoint-services) endpoint. This is useful when you automate endpoint creation with a script or Terraform. Use the Neon region ID, such as `aws-us-east-1`:
 
