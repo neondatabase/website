@@ -1,8 +1,8 @@
 ---
 title: 'The Neon Terraform provider is now official'
 description: >-
-  The community Terraform provider for Neon is now the official neondatabase/neon provider. Let's see how we
-  got here and why we're betting big on IaC.
+  neondatabase/neon is now the official Terraform provider for Neon, maintained by the Neon team. Let's see how
+  we got here and why we're betting big on IaC.
 excerpt: >-
   Infrastructure as code is a great fit for agents. Bigger teams compose Neon with AWS, Cloudflare and more in
   Terraform, OpenTofu, Pulumi or Alchemy. That's why kislerdm/neon, the community Terraform provider Dmitry Kisler
