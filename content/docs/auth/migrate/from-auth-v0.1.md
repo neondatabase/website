@@ -10,7 +10,7 @@ summary: >-
   API route and middleware changes, the updated `getSession()` return format,
   and a complete migration checklist.
 enableTableOfContents: true
-updatedOn: '2026-07-15T00:08:00.682Z'
+updatedOn: '2026-11-18T13:16:40.784Z'
 ---
 
 This guide helps you migrate from Managed Better Auth SDK v0.1.x to v0.2.x, which introduces a unified API and performance improvements through session caching.
@@ -315,6 +315,10 @@ const { data: session } = await auth.getSession();
 ```
 
 The new format is consistent with Better Auth's standard response pattern.
+
+#### Error handling
+
+The `{ data, error }` format applies to the server `auth` instance. Methods on the browser client from `createAuthClient()` throw when a request fails. [Handling errors](/docs/auth/quick-start/nextjs-api-only#handling-errors) describes the error shape in the current `@neon/auth` package.
 
 ## Configuration options
 
