@@ -7,7 +7,7 @@ summary: >-
   to connect, `disable` to remove it, `rotate-secret` to replace its shared
   secret, and `subscribe` to stream a live SQL query.
 enableTableOfContents: true
-updatedOn: '2026-11-05T15:33:57.188Z'
+updatedOn: '2026-11-18T02:47:24.620Z'
 redirectFrom:
   - /docs/cli/subscribe
 ---
@@ -20,7 +20,9 @@ If `--project-id` is omitted, the CLI reads it from your [context file](/docs/cl
 
 ## neon realtime enable (#enable)
 
-Requests Realtime provisioning for a branch. Provisioning finishes in the background, usually within a few seconds. Run it again on a branch that already has Realtime to replace its allowed origins with the ones you pass. Without `--allowed-origin`, a re-run keeps the existing origins.
+Enables Realtime on a branch. Run it again on a branch that already has Realtime to replace its allowed origins with the ones you pass. Without `--allowed-origin`, a re-run keeps the existing origins.
+
+By default, the command waits up to a minute for the branch to apply the change, usually a few seconds, then confirms that Realtime is enabled. If the wait times out, the command exits with an error, but the change may still be in progress; run the command again to keep waiting. With `--no-wait`, it prints only the "enable requested" line and returns right away. To check a branch's Realtime state later, run [`neon status`](/docs/cli/status): it lists Realtime and its allowed origins when Realtime is enabled.
 
 <CliUsage command="realtime enable" />
 
@@ -35,7 +37,7 @@ neon realtime enable --allowed-origin https://app.example.com --allowed-origin h
 ```
 
 ```text
-Realtime enable requested for branch br-cool-darkness-123456.
+Realtime is enabled on branch br-cool-darkness-123456.
 ```
 
 ## neon realtime disable (#disable)
