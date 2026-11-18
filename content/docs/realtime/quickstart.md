@@ -6,7 +6,7 @@ summary: >-
 enableTableOfContents: true
 redirectFrom:
   - /docs/realtime/get-started
-updatedOn: '2026-11-17T23:36:26.452Z'
+updatedOn: '2026-11-18T04:57:20.460Z'
 ---
 
 [Enable Realtime](#enable-realtime), run your [first live SQL queries](#subscribe-to-a-live-query) and [build an app with realtime&nbsp;reactivity](#build-a-realtime-app), or [add Realtime to an existing&nbsp;app](#add-realtime-to-an-existing-app).
@@ -138,7 +138,21 @@ Open [http://localhost:5173](http://localhost:5173) in your browser. If you open
 
 To make an app you already have live, seal a query on your server and subscribe to it in the browser. This example adds a live task list to a [Next.js](https://nextjs.org) App Router app with raw SQL and no ORM. The file paths assume the `@/` import alias that `create-next-app` sets up.
 
-Run these steps in your app's directory. Link it with `neon link`, as in [Link a project](#link-a-project), which works in a directory that already has code, and [enable Realtime](#enable-realtime) first.
+### Declare Realtime in `neon.ts`
+
+In your app's directory, link it to a Neon project in a supported region, declare Realtime with `http://localhost:3000` as an allowed origin and deploy the config:
+
+```bash filename="Terminal"
+neon link
+neon config add realtime --allowed-origin http://localhost:3000
+neon deploy
+```
+
+[`neon config add realtime`](/docs/cli/config#add-realtime) adds Realtime to your `neon.ts`. If your app doesn't have one, it creates the file and installs `@neon/config` and `@neon/env`. [`neon deploy`](/docs/cli/deploy) enables Realtime on the branch, waits until it's ready and writes `DATABASE_URL`, `NEON_REALTIME_URL` and `NEON_REALTIME_SECRET` to `.env.local`. If Realtime isn't ready before the deploy stops waiting, run `neon env pull` once it is.
+
+Only server code reads these variables. The page passes `NEON_REALTIME_URL` to the browser as a prop, so you don't need a `NEXT_PUBLIC_` copy, and the secret never leaves the server.
+
+Before you deploy the app, add its production origin and run `neon deploy` again. Each `neon config add realtime` run replaces the list, so pass `--allowed-origin` for every origin you keep.
 
 ### Install the SDK
 
@@ -147,16 +161,6 @@ npm install @neon/realtime @neon/realtime-react
 ```
 
 `@neon/realtime` has two dedicated entry points: `@neon/realtime/server` seals queries on your server, and `@neon/realtime/client` subscribes to them from the browser. `@neon/realtime-react` provides `RealtimeProvider` and the `useLiveQuery()` hook.
-
-### Pull the environment variables
-
-```bash filename="Terminal"
-neon env pull --service postgres --service realtime
-```
-
-This writes `DATABASE_URL`, `NEON_REALTIME_URL` and `NEON_REALTIME_SECRET` to `.env`, or to `.env.local` if there's no `.env`. Only server code reads them. The page passes `NEON_REALTIME_URL` to the browser as a prop, so you don't need a `NEXT_PUBLIC_` copy, and the secret never leaves the server.
-
-By default, any browser origin can connect. If your branch [restricts origins](/docs/cli/realtime#enable), add `http://localhost:3000` with `neon realtime enable --allowed-origin`, or the subscription stays `connecting` without an error. Each run replaces the list, so repeat the flag for every origin you keep.
 
 ### Create a table
 
