@@ -19,14 +19,14 @@ The steps work in an existing Next.js App Router app as well as a new one. Add e
 
 ## Setup
 
-Install the Realtime SDK with its Drizzle adapter and React bindings, Drizzle ORM and `drizzle-kit` for migrations:
+Install the Realtime SDK with its Drizzle adapter and React bindings, Drizzle ORM and `drizzle-kit` for migrations. Without Drizzle, install only `@neon/realtime` and `@neon/realtime-react`, as [use raw SQL instead of Drizzle](#use-raw-sql-instead-of-drizzle) shows:
 
 ```bash filename="Terminal"
 npm install @neon/realtime @neon/realtime-drizzle @neon/realtime-react drizzle-orm
 npm install -D drizzle-kit dotenv
 ```
 
-Link your app's directory to a Neon project in a [supported region](../overview#which-regions-is-it-enabled-in), then declare Managed Better Auth and Realtime in your `neon.ts`:
+Link your app's directory to a Neon project in a [supported region](../overview#which-regions-is-it-enabled-in), then declare Managed Better Auth and Realtime in your `neon.ts`. Skip `neon config add auth` if your app has its own sign-in or none:
 
 ```bash filename="Terminal"
 neon link
@@ -34,7 +34,7 @@ neon config add auth
 neon config add realtime --allowed-origin http://localhost:3000
 ```
 
-[`neon config add`](/docs/cli/config#add) edits an existing `neon.ts` in place. If your app doesn't have one, it creates the file and installs `@neon/config` and `@neon/env`. The file then declares both services:
+[`neon config add`](/docs/cli/config#add) edits an existing `neon.ts` in place. If your app doesn't have one, it creates the file and installs `@neon/config` and `@neon/env`. Either way, the file then declares both services, next to anything else it already holds:
 
 ```ts filename="neon.ts"
 import { defineConfig } from "@neon/config/v1"
@@ -49,7 +49,7 @@ export default defineConfig({
 })
 ```
 
-`allowedOrigins` lists the browser origins that can connect to Realtime. A missing origin doesn't raise an error: the subscription stays `connecting`, so add your app's origin when you deploy it. Each `neon config add realtime` run replaces the list, so pass `--allowed-origin` once for every origin you keep. The [`neon.ts` reference](/docs/reference/neon-ts) covers the options.
+`allowedOrigins` lists the browser origins that can connect to Realtime. A missing origin doesn't raise an error: the subscription stays `connecting`, so add your app's origin when you deploy it. Each `neon config add realtime` run replaces the list, so pass `--allowed-origin` once for every origin you keep. Once Realtime is enabled, deploy a changed list with `neon deploy --update-existing`, because plain `neon deploy` stops when the branch's settings differ from `neon.ts`. The [`neon.ts` reference](/docs/reference/neon-ts) covers the options.
 
 Deploy the config to your branch:
 
@@ -59,7 +59,7 @@ neon deploy
 
 [`neon deploy`](/docs/cli/deploy) enables Managed Better Auth and Realtime, waits until they're ready, and writes `DATABASE_URL`, `NEON_REALTIME_URL`, `NEON_REALTIME_SECRET` and `NEON_AUTH_BASE_URL` to your env file: `.env` if your app has one, otherwise `.env.local`. If Realtime isn't ready before the deploy stops waiting, run `neon env pull` once it is.
 
-The Managed Better Auth server SDK also needs a cookie secret of at least 32 characters, which comes from you:
+The Managed Better Auth server SDK also needs a cookie secret of at least 32 characters, which comes from you. Add it to the same env file, here `.env.local`:
 
 ```bash filename="Terminal"
 printf '\nNEON_AUTH_COOKIE_SECRET=%s\n' "$(openssl rand -base64 32)" >> .env.local
@@ -621,7 +621,7 @@ Don't revalidate after a write. The live query already delivers it, and a revali
 
 ## Adapt the example to your app
 
-The example uses Drizzle and Managed Better Auth. If your app uses neither, the Next.js parts stay the same: seal in a Server Component and a Route Handler, and subscribe in a Client Component. Only the query and the session check change.
+The example uses Drizzle and Managed Better Auth. If your app uses neither, the Next.js parts stay the same: seal in a Server Component and a Route Handler, and subscribe in a Client Component. Only the query and the session check change. [Optimistic mutations](#optimistic-mutations) are optional: without them, your app's existing writes appear in every open window when the live query delivers them.
 
 ### Use raw SQL instead of Drizzle
 
@@ -663,7 +663,7 @@ export const sealTodos = (userId: string) => getRealtime().seal({ query: todosQu
 The rest of the page changes in three places:
 
 - the Route Handler calls this `sealTodos()` unchanged
-- in `RealtimeRoot`, create the client with `createRealtimeClient({ url })`, without `drizzleParsers`
+- in `RealtimeRoot`, create the client with `createRealtimeClient({ url })`, without `drizzleParsers`. Its default parsers already turn `timestamptz` into a `Date`
 - to render the first rows on the server, read them with your own database client and pass them as `initialData`, as the SSR guide shows in [return the sealed query and initial results](../guides/ssr#return-the-sealed-query-and-initial-results). Or pass only the sealed query, and render a loading state while `data` is `undefined`
 
 The [raw SQL section](../guides/queries#using-raw-sql) of the queries guide covers parameters and their types.
@@ -672,7 +672,7 @@ The [raw SQL section](../guides/queries#using-raw-sql) of the queries guide cove
 
 If your app has its own sign-in, call it wherever the example calls `getUser()`, and take the user id from your session, never from the browser.
 
-Without sign-in, drop the `userId` parameter and seal the same query for every request:
+Without sign-in, seal the same query for every request. Drop the `userId` parameter and the `WHERE` clause from `todosQuery()`, and the `userId` argument from `sealTodos()`. Without parameters, `rawSql()` takes only the SQL. The Route Handler then renews with no session check:
 
 ```ts filename="src/app/api/todos/live-query/route.ts"
 import { sealTodos } from "../../../../lib/todos"
@@ -681,6 +681,16 @@ export async function POST() {
   // No session check: anyone who can call this route can read the rows the query selects
   return Response.json(await sealTodos(), { headers: { "Cache-Control": "private, no-store" } })
 }
+```
+
+In `TodoList`, `refreshQuery` posts to the Route Handler without `renewOrLeave()`, which only handles a lost session:
+
+```tsx filename="src/app/todo-list.tsx"
+const refreshQuery = useCallback(async () => {
+  const response = await fetch("/api/todos/live-query", { method: "POST", cache: "no-store" })
+  if (!response.ok) throw new Error(`Couldn't renew the live query (${response.status})`)
+  return (await response.json()) as SealedLiveQuery<TodoRow>
+}, [])
 ```
 
 A sealed query is a [bearer token](../guides/queries#sealing-queries) for the rows it selects, so do this only for data every visitor can see.
