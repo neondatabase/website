@@ -8,7 +8,7 @@ summary: >-
   projects, require a personal admin key and reject organization API keys. A
   permission matrix maps each endpoint to its supported key type.
 enableTableOfContents: true
-updatedOn: '2026-08-04T15:25:12.468Z'
+updatedOn: '2026-11-18T16:54:31.977Z'
 ---
 
 Learn how to manage Neon Organizations using the Neon API, including managing organization API keys, working with organization members, and handling member invitations.
@@ -255,7 +255,7 @@ Valid roles are `admin`, `editor`, `viewer`, and `collaborator`. The value `memb
 
 ```bash shouldWrap
 curl --request PATCH \
-     --url 'https://console.neon.tech/api/v2/organizations/members/{member_id}' \
+     --url 'https://console.neon.tech/api/v2/organizations/{org_id}/members/{member_id}' \
      --header 'accept: application/json' \
      --header "authorization: Bearer $ORG_API_KEY" \
      --header 'content-type: application/json' \
