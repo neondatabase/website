@@ -1,6 +1,6 @@
 # Realtime SDK reference
 
-Build pipeline for the [TypeScript SDK reference](https://neon.com/docs/realtime/sdks/typescript). A vendored TypeDoc artifact generates seven shared-content partials. Each module has its own hand-written page that includes its partial, and the TypeScript page is an overview that links to them.
+Build pipeline for the [TypeScript SDK reference](https://neon.com/docs/realtime/sdks/typescript). A vendored TypeDoc artifact generates seven shared-content partials. Six hand-written module pages include them, with Drizzle and Drizzle client sharing one page, and the TypeScript page is an overview that links to them.
 
 ## What is generated and what is hand-written
 
@@ -10,7 +10,7 @@ Build pipeline for the [TypeScript SDK reference](https://neon.com/docs/realtime
 | `vendor/realtime/sdk-docs.json`                                                           | update script | No           |
 | [`config/realtime-sdk.json`](../config/realtime-sdk.json)                                 | humans        | Yes          |
 | [`content/docs/realtime/sdks/typescript.md`](../content/docs/realtime/sdks/typescript.md) | docs team     | Yes          |
-| `content/docs/realtime/sdks/typescript/<module>.md` (7)                                   | docs team     | Yes          |
+| `content/docs/realtime/sdks/typescript/<page>.md` (6)                                     | docs team     | Yes          |
 
 The partials are `backend`, `client`, `react`, `tanstack-db`, `drizzle`, `drizzle-client` and `kysely`. They have no frontmatter, banner, `h1` or `h2`. The module page with the same slug owns its frontmatter, prose and the include, so a prose edit there needs no regeneration. The exception is `drizzle-client`, which the `drizzle` page includes after the `drizzle` partial (`MODULE_PAGE_OVERRIDES` in the generator), because both are short. Generated signatures and summaries come from the SDK's TSDoc comments, so revise those upstream.
 
