@@ -52,6 +52,8 @@ Run the following command in the root directory of the user's source-code repo t
 neon init -y --agent <agent-name> --org-id <org-id> --project-id <project-id>
 ```
 
+If `neon init` fails because the credential can't reach the project or organization (`Project '<project-id>' not found ... or that your API key has access to it`, `You don't have access to project`, or `your API key doesn't have access to it`), run `neon login`, have the user finish signing in via the browser, and run the same `neon init` command again with `NEON_API_KEY` unset.
+
 The supported agents are antigravity, cline, cline-cli, claude-code, claude-desktop, codex, cursor, gemini-cli, goose, github-copilot-cli, grok-build, opencode, vscode, windsurf, and zed. A few also accept aliases (claude for claude-code, copilot for vscode, gemini for gemini-cli). Passing an unknown agent stops the command and prints the current supported list.
 
 An agent that can't install skills is skipped with a warning. Agents that share a target collapse into one: Claude Desktop and Claude Code both write to claude-code, and VS Code and the GitHub Copilot CLI both write to github-copilot.
