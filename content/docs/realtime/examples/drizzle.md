@@ -4,7 +4,7 @@ subtitle: 'Using Realtime with your Drizzle schema and queries.'
 summary: >-
   Use Drizzle ORM with Neon Realtime: add the Drizzle adapter, seal Drizzle selects with parameters and aliases, decode rows with drizzleParsers and return the txid from Drizzle writes.
 enableTableOfContents: true
-updatedOn: '2026-11-18T00:59:49.148Z'
+updatedOn: '2026-11-18T16:41:34.386Z'
 ---
 
 This page shows how to build a Realtime app with [Drizzle ORM](https://orm.drizzle.team), using your existing schema, queries, types and writes. You'll learn which Drizzle queries seal unchanged, when a field needs an SQL alias, how live rows keep Drizzle's types in the browser, and how a Drizzle write returns its transaction ID.
@@ -89,7 +89,7 @@ export type Message = typeof messages.$inferSelect
 - give each table a primary key. That's all Realtime needs from it. See the [table requirements](../guides/queries#table-requirements)
 - `Message` is the row type of a select of every `messages` column. You'll use it when you [type rows in the browser](#type-rows-in-the-browser)
 
-Create the tables with your usual Drizzle workflow. Realtime needs nothing extra from your migrations: no publications, triggers or grants. See [Schema migration with Neon Postgres and Drizzle ORM](/docs/guides/drizzle-migrations).
+Create the tables with your usual Drizzle workflow. Realtime needs nothing extra from your migrations: no publications, triggers or grants. See [Schema migration with Drizzle ORM and Lakebase Postgres on Neon](/docs/guides/drizzle-migrations).
 
 ### Create the Drizzle client
 

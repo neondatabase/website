@@ -60,6 +60,7 @@
     "test:unit:run": "vitest run",
     "test:unit:coverage": "vitest run --coverage",
     "check:docs": "vitest run scripts/docs-checks/**/__tests__/*.test.js",
+    "check:docs:access-path-titles": "vitest run scripts/docs-checks/access-path-titles/__tests__/access-path-titles-docs.test.js",
     "cli-docs": "node scripts/docs-checks/neonctl/cli.js"
   },
   "dependencies": {
