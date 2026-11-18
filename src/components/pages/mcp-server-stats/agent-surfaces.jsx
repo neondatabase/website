@@ -89,8 +89,10 @@ const AgentSurfaces = ({ agents, windowStart, windowEnd }) => (
         ))}
       </ul>
       <p className="mt-6 max-w-[672px] text-sm leading-normal tracking-extra-tight text-gray-new-50">
-        Accounts that ran the Neon CLI from a coding agent or called MCP tools from it. ChatGPT and
-        Claude Desktop have no CLI.
+        Web-based agents like ChatGPT and Claude Desktop can&apos;t run a CLI, so MCP is their only
+        path. For the rest, Neon&apos;s onboarding and agent skills point to the CLI first, so the
+        MCP share shows how often agents use the MCP server anyway, because a user installed it
+        directly or the agent found it first.
       </p>
     </Container>
   </section>
