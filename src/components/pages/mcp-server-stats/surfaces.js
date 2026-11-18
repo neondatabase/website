@@ -6,9 +6,6 @@ export const SURFACES = [
   { value: 'mcp_only', label: 'MCP only' },
 ];
 
-// Rows are { agent, surface, share }. Agents come back with the most CLI use
-// first, and an agent without a label, an unknown surface, or a missing one
-// fails the build.
 export function buildAgentSurfaces(rows) {
   const byAgent = new Map();
   rows.forEach(({ agent, surface, share }) => {
