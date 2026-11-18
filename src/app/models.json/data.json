@@ -2414,9 +2414,9 @@
           "output": 65536
         },
         "cost": {
-          "input": 2,
-          "output": 10,
-          "cache_read": 0.2
+          "input": 0,
+          "output": 0,
+          "cache_read": 0
         }
       },
       "claude-fable-5-2": {
