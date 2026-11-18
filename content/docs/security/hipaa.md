@@ -20,10 +20,6 @@ We take the security and privacy of health information seriously. This guide exp
 
 If anything on this page differs from the BAA, the BAA applies.
 
-<Admonition type="note">
-HIPAA isn't supported for Postgres 19 yet. Use Postgres 18 or earlier for HIPAA projects.
-</Admonition>
-
 ## Business Associate Agreement (BAA)
 
 The BAA sets out each party's responsibilities for protecting PHI. Accepting it is part of the self-serve HIPAA enablement process: you review and accept the BAA when you enable HIPAA for your organization. If you need a counter-signed (executed) copy of the BAA for your records, you can request one.
