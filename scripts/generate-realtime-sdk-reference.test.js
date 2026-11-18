@@ -311,9 +311,7 @@ describe('module pages', () => {
     // Anchor ids declared on each module page, across every partial it includes.
     const idsByPage = new Map();
     for (const page of pages) {
-      const slug = modulePageSlug(
-        page.path.replace(/^.*\/realtime-sdk-/, '').replace(/\.md$/, '')
-      );
+      const slug = modulePageSlug(page.path.replace(/^.*\/realtime-sdk-/, '').replace(/\.md$/, ''));
       const ids = idsByPage.get(slug) ?? new Set();
       for (const id of declaredAnchorIds(page.contents)) ids.add(id);
       idsByPage.set(slug, ids);
