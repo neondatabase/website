@@ -19,7 +19,7 @@ updatedOn: '2026-11-18T00:59:49.148Z'
 ## Before you begin
 
 - Your Neon project must be in a [supported region](/docs/realtime/overview#which-regions-is-it-enabled-in).
-- Enabling Realtime permanently turns on [logical replication](/docs/guides/logical-replication-neon) for the project and suspends every compute on every branch, which drops active connections. Each compute starts again on its next connection.
+- Enabling Realtime permanently turns on [logical replication](/docs/guides/logical-replication-neon) for the project and restarts all computes on every branch, so active connections drop and reconnect.
 - Tables in live queries need a stable replica identity. A primary key is enough.
 - For SSR in TanStack Start, `@tanstack/react-router-with-db` requires `@tanstack/react-db` 1.0.0-rc.1 or later.
 

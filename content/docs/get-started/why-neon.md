@@ -39,7 +39,7 @@ At the center of Neon is Lakebase Postgres. It isn’t “Postgres-like”: it i
 - **Scale-to-zero.** Inactive databases shut down automatically to save costs. Ideal for side projects, development environments, and agent-generated apps.
 - **Autoscaling.** For production, Lakebase Postgres resizes compute up and down automatically based on traffic, so performance stays steady without capacity planning.
 - **Branching.** Clone your entire database (data and schema) instantly to create dev environments, run migrations safely, automate previews, and build versioning and checkpoints for agents.
-- **Realtime.** Subscribe to live SQL queries and build fast, modern apps with end-to-end reactivity and type safety.
+- **[Realtime](/docs/realtime/overview).** Subscribe to live SQL queries and build fast, modern apps with end-to-end reactivity and type safety.
 - **Instant restores.** Go back to any point in time in seconds, no matter how large your database, or instantly revert to a saved snapshot.
 - **Usage-based pricing.** Pay only for what you use, without provisioning storage or compute in advance and without expensive add-ons.
 - **A Free plan developers can actually use.** The lakebase architecture makes it efficient for Neon to run a large Free plan with many projects per account and enough resources to build real apps.
