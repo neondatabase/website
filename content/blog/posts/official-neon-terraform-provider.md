@@ -75,7 +75,9 @@ It felt amazing when you approached me and shared that the Databricks/Neon team 
 
 ## What's new since kislerdm/neon 0.18
 
-Most of the work went into something you won't see in your config. We moved the provider from Terraform's Plugin SDK v2 to the Plugin Framework, which is what HashiCorp recommends for new providers and what makes ephemeral resources possible. Dmitry wrote most of that migration.
+v0.18.0, released in September 2026, is the last community release of kislerdm/neon. Neon shipped a lot of new primitives in the meantime, so we used the move to an official provider to catch up. Dmitry migrated the provider to Terraform's Plugin Framework, Justin added resources for the newer Neon primitives and we reviewed and tested everything against the live API, added the remaining resources and made sure existing state moves over without replacing anything.
+
+The Plugin Framework is what HashiCorp recommends for new providers, and it's what makes ephemeral resources possible.
 
 Ephemeral resources keep credentials out of the state file. With kislerdm/neon, a role password or connection URI ended up in `terraform.tfstate`. Now you read it during the run and hand it straight to the place that needs it:
 
