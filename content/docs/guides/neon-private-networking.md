@@ -11,7 +11,7 @@ summary: >-
 enableTableOfContents: true
 redirectFrom:
   - /docs/guides/neon-private-access
-updatedOn: '2026-10-09T15:17:33.920Z'
+updatedOn: '2026-11-18T19:46:48.277Z'
 ---
 
 <Admonition type="info" title="Private Networking availability">
@@ -48,7 +48,7 @@ To configure Neon Private Networking, perform the following steps:
     </Admonition>
 
     <Admonition type="important" title="Add all service names for your region">
-    A region can list multiple endpoint service names. When you create the endpoint, add **all** of the names listed for your region below (under **Service settings**). Neon adds service names over time as it expands capacity and updates this page, so re-check that list after a regional expansion. Adding those later additions is optional but improves capacity and reliability. Expansions are announced in the [changelog](/docs/changelog).
+    A region can list multiple endpoint service names. When you create the endpoint, add **all** of the names listed for your region below (under **Service settings**). Neon adds service names over time as it expands capacity and updates this page, so re-check that list after a regional expansion, or get the current list from the [Neon API](/docs/reference/api/regions/get-region-vpc-endpoint-services). Adding those later additions is optional but improves capacity and reliability. Expansions are announced in the [changelog](/docs/changelog).
     </Admonition>
 
     1. Go to the AWS **VPC > Endpoints** dashboard and select **Create endpoint**. Make sure you create the endpoint in the same VPC as your client application.
@@ -122,6 +122,30 @@ To configure Neon Private Networking, perform the following steps:
        - **sa-east-1**: Create entries, one for each of the following:
          - `com.amazonaws.vpce.sa-east-1.vpce-svc-03cf6c871b7ae95e8`
          - `com.amazonaws.vpce.sa-east-1.vpce-svc-061204a851dbd1a47`
+
+       You can also get the current service names for a region from the Neon API with the [List VPC endpoint service names for a region](/docs/reference/api/regions/get-region-vpc-endpoint-services) endpoint. This is useful when you automate endpoint creation with a script or Terraform. Use the Neon region ID, such as `aws-us-east-1`:
+
+       ```bash
+       curl "https://console.neon.tech/api/v2/regions/aws-us-east-1/vpc_endpoint_services" \
+         -H "Accept: application/json" \
+         -H "Authorization: Bearer $NEON_API_KEY"
+       ```
+
+       The response lists every service name for the region:
+
+       ```json
+       {
+         "region_id": "aws-us-east-1",
+         "vpc_endpoint_service_names": [
+           "com.amazonaws.vpce.us-east-1.vpce-svc-01aeec2f4b558bc22",
+           "com.amazonaws.vpce.us-east-1.vpce-svc-01b3c73657ed9bd29",
+           ...
+         ]
+       }
+       ```
+
+       To check that a region is available to your organization, add `?org_id=<your_org_id>` to the request. The API returns a `404` if the region isn't available to your organization, or if you're a collaborator rather than a member of that organization.
+
     1. Click **Verify service**. If successful, you should see a `Service name verified` message.
 
         ![VPC Create endpoint](/docs/guides/pl_vpc_service_name_verified.png)
