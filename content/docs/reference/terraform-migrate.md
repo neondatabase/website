@@ -44,7 +44,7 @@ terraform {
     neon = {
       source  = "kislerdm/neon" # [!code --]
       source  = "neondatabase/neon" # [!code ++]
-      version = "0.19.0-beta.2" # [!code ++]
+      version = "0.19.0-beta.3" # [!code ++]
     }
   }
 }
