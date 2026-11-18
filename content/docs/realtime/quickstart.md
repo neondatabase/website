@@ -2,14 +2,14 @@
 title: 'Quickstart'
 subtitle: 'Get started with Realtime.'
 summary: >-
-  Enable Realtime, run your first live SQL queries and build an app with realtime reactivity.
+  Enable Realtime, run your first live SQL queries, build an app with realtime reactivity, or add Realtime to an existing Next.js app.
 enableTableOfContents: true
 redirectFrom:
   - /docs/realtime/get-started
-updatedOn: '2026-10-16T11:18:06.000Z'
+updatedOn: '2026-11-18T04:57:20.460Z'
 ---
 
-[Enable Realtime](#enable-realtime), run your [first live SQL queries](#subscribe-to-a-live-query) and [build an app with realtime&nbsp;reactivity](#build-a-realtime-app).
+[Enable Realtime](#enable-realtime), run your [first live SQL queries](#subscribe-to-a-live-query) and [build an app with realtime&nbsp;reactivity](#build-a-realtime-app), or [add Realtime to an existing&nbsp;app](#add-realtime-to-an-existing-app).
 
 <Admonition type="important" title="Create your project in a supported region">
 Realtime is currently [available in limited regions](./overview#which-regions-is-it-enabled-in). Support is expanding toward [all regions](/docs/introduction/regions#product-availability).
@@ -133,6 +133,10 @@ npm run dev
 ```
 
 Open [http://localhost:5173](http://localhost:5173) in your browser. If you open two windows or tabs, as you change data in one, you'll see it update in realtime in the other.
+
+## Add Realtime to an existing app
+
+To add Realtime to a Next.js app you already have, follow the [Next.js example](./examples/nextjs). Its steps work in an existing App Router app, and it shows how to adapt them for raw SQL or an app without Managed Better Auth.
 
 ## Agent skills and MCP
 

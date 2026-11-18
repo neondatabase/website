@@ -47,7 +47,7 @@ createRoot(document.getElementById("root")!).render(
 )
 ```
 
-`client` is the module singleton from `frontend/client.ts`, created once for the whole app. If you render on the server, create the client in the browser instead, as the [server-side rendering guide](./ssr#open-the-connection-in-the-browser) explains.
+`client` is the module singleton that `frontend/client.ts` creates once for the whole app with `createRealtimeClient()` from `@neon/realtime/client`, as the [subscribing guide](./subscribing#subscribe-to-the-sealed-query) shows. If you render on the server, create the client in the browser instead, as the [server-side rendering guide](./ssr#open-the-connection-in-the-browser) explains. In Next.js, `@neon/realtime-react` ships without a `"use client"` directive, so import it only from files that start with `"use client"`, as the [Next.js example](../examples/nextjs#create-the-realtime-client-in-the-browser) shows.
 
 ### useLiveQuery
 
