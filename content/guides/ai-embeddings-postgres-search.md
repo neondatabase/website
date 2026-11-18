@@ -1,10 +1,10 @@
 ---
 title: Build and deploy a Lakebase Search API as a Neon Function
 subtitle: Wire vector, full-text, and hybrid search into a serverless HTTP API that runs next to your database.
-author: bobbyiliev
+author: neon-team
 enableTableOfContents: true
-createdAt: '2025-05-17T00:00:00.000Z'
-updatedOn: '2026-11-18T13:54:17.597Z'
+createdAt: '2026-11-18T00:00:00.000Z'
+updatedOn: '2026-11-18T18:35:25.107Z'
 ---
 
 In this guide, you build a search API and deploy it as a [Neon Function](/docs/compute/functions/overview), a long-running serverless function that runs on your Neon branch. The function embeds documents, stores them in Postgres, and answers queries with vector, full-text, and hybrid search.
