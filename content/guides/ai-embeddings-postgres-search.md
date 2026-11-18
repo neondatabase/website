@@ -4,12 +4,12 @@ subtitle: Wire vector, full-text, and hybrid search into a serverless HTTP API t
 author: bobbyiliev
 enableTableOfContents: true
 createdAt: '2025-05-17T00:00:00.000Z'
-updatedOn: '2026-11-17T23:15:04.156Z'
+updatedOn: '2026-11-18T13:54:17.597Z'
 ---
 
-Lakebase Search gives Postgres fast vector search (`lakebase_vector`), BM25 full-text search (`lakebase_text`), and the pieces to combine them. [Get started with Lakebase Search](/docs/ai/lakebase-search-get-started) shows how to run those queries from a script.
+In this guide, you build a search API and deploy it as a [Neon Function](/docs/compute/functions/overview), a long-running serverless function that runs on your Neon branch. The function embeds documents, stores them in Postgres, and answers queries with vector, full-text, and hybrid search.
 
-This guide takes the next step: it wires that search into an HTTP API and deploys it as a [Neon Function](/docs/compute/functions/overview), a long-running serverless function that runs on your Neon branch with `DATABASE_URL` and the [AI Gateway](/docs/ai-gateway/overview) credentials injected automatically. No local server to host, no separate embedding key to manage.
+The stack is [Lakebase Search](/docs/ai/lakebase-search-get-started) for the queries (`lakebase_vector` for vector search, `lakebase_text` for BM25 full-text search) and the [AI Gateway](/docs/ai-gateway/overview) for embeddings. Because the function runs on your branch, Neon injects `DATABASE_URL` and the AI Gateway credentials at runtime. [Get started with Lakebase Search](/docs/ai/lakebase-search-get-started) covers running these queries from a script; this guide wires them into a deployed function.
 
 ## What you'll build
 
@@ -63,7 +63,7 @@ neon link
 Install the dependencies. Inside a function you use a pooled `pg` client, not the serverless driver:
 
 ```bash
-npm install hono pg @neon/functions @neon/ai-sdk-provider@1.1.0 ai@7.0.133
+npm install @neon/config @neon/functions hono pg @neon/ai-sdk-provider@1.1.0 ai@7.0.133
 npm install -D @types/pg
 ```
 
@@ -132,9 +132,9 @@ app.post('/documents', async (c) => {
   return c.json(rows[0]);
 });
 
-// Search: embed the query, then fuse vector and BM25 results with RRF.
-app.post('/search', async (c) => {
-  const { query, limit = 5 } = await c.req.json();
+// Hybrid search: embed the query, then fuse vector and BM25 results with RRF.
+// Returns rows shaped { id, title, score }.
+async function hybridSearch(query: string, limit = 5) {
   const queryVector = await embedText(query);
 
   const { rows } = await pool.query(
@@ -164,16 +164,22 @@ app.post('/search', async (c) => {
        ) k
      )
      SELECT d.id, d.title,
-       COALESCE(1.0 / (60 + v.rank), 0) + COALESCE(1.0 / (60 + k.rank), 0) AS rrf_score
+       COALESCE(1.0 / (60 + v.rank), 0) + COALESCE(1.0 / (60 + k.rank), 0) AS score
      FROM documents d
      LEFT JOIN vector_ranked v ON d.id = v.id
      LEFT JOIN keyword_ranked k ON d.id = k.id
      WHERE v.id IS NOT NULL OR k.id IS NOT NULL
-     ORDER BY rrf_score DESC, d.id
+     ORDER BY score DESC, d.id
      LIMIT $3`,
     [queryVector, query, limit],
   );
-  return c.json({ query, results: rows });
+  return rows;
+}
+
+// Search: embed the query and return the fused ranking.
+app.post('/search', async (c) => {
+  const { query, limit = 5 } = await c.req.json();
+  return c.json({ query, results: await hybridSearch(query, limit) });
 });
 
 export default app;
@@ -254,9 +260,7 @@ curl -X POST https://<branch_id>-search.compute.<cell>.us-east-2.aws.neon.tech/s
 ```json
 {
   "query": "approximate nearest neighbor search",
-  "results": [
-    { "id": 1, "title": "Vector search on Postgres", "rrf_score": 0.032... }
-  ]
+  "results": [{ "id": 1, "title": "Vector search on Postgres", "score": 0.032 }]
 }
 ```
 
@@ -273,7 +277,8 @@ import { experimental_decide as decide } from 'ai';
 
 type Candidate = { id: number; title: string; body: string };
 
-async function rerankWithJev(query: string, limit = 5): Promise<Candidate[]> {
+// Returns rows shaped { id, title, score }, the same shape as hybridSearch.
+async function rerankWithJev(query: string, limit = 5) {
   const queryVector = await embedText(query);
 
   const candidates = (
@@ -346,20 +351,21 @@ async function rerankWithJev(query: string, limit = 5): Promise<Candidate[]> {
     })
     .sort((a, b) => b.probability - a.probability || a.index - b.index)
     .slice(0, limit)
-    .map(({ doc }) => doc);
+    .map(({ doc, probability }) => ({ id: doc.id, title: doc.title, score: probability }));
 }
 ```
 
-Then let a request opt into reranking by passing `rerank: true`, so the `/search` endpoint falls back to RRF when it's absent:
+Then update the `/search` handler to rerank when a request passes `rerank: true`, and fall back to RRF when it's absent. Both paths return the same `{ id, title, score }` shape:
 
 ```ts filename="functions/search.ts"
 app.post('/search', async (c) => {
   const { query, limit = 5, rerank = false } = await c.req.json();
 
-  if (rerank) {
-    return c.json({ query, results: await rerankWithJev(query, limit) });
-  }
-  // ...existing RRF search...
+  const results = rerank
+    ? await rerankWithJev(query, limit)
+    : await hybridSearch(query, limit);
+
+  return c.json({ query, results });
 });
 ```
 
@@ -374,5 +380,3 @@ Jev sends the query and all candidates in one request, which must fit the model'
 - [Embeddings](/docs/ai-gateway/embeddings) and [Decisions](/docs/ai-gateway/decisions): the AI Gateway models this guide uses
 
 <NeedHelp />
-</content>
-</invoke>
