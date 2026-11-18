@@ -6,7 +6,7 @@ summary: >-
   buckets via the Neon Console, the Neon API, or the S3 API. Set the access
   level to private or public_read to control who can read objects.
 enableTableOfContents: true
-updatedOn: '2026-09-24T07:04:24.872Z'
+updatedOn: '2026-11-18T13:46:11.132Z'
 ---
 
 A bucket is a named container for objects in Neon Object Storage. Buckets are scoped to a branch and inherit from parent branches when a new branch is created. No data is copied on fork.
@@ -73,7 +73,7 @@ aws s3api create-bucket \
 
 </CodeTabs>
 
-Creating a `public_read` bucket requires the project **Admin** role in organizations that use [per-project permissions](/docs/manage/user-permissions#per-project-permissions). Editors can create private buckets.
+Creating a `public_read` bucket requires the project **Admin** role in organizations that use [per-project permissions](/docs/manage/user-permissions#per-project-permissions). Organization API keys aren't subject to this check. Editors can create private buckets.
 
 To create a `public_read` bucket with neon:
 
