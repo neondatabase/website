@@ -6,7 +6,7 @@ summary: >-
   models, which endpoint to use, shorter and longer request paths, the
   /v1/models API, rate limits, pricing, and provider terms.
 enableTableOfContents: true
-updatedOn: '2026-11-17T23:45:15.648Z'
+updatedOn: '2026-11-18T00:17:54.883Z'
 ---
 
 This page covers how to call models through Neon AI Gateway and the rules that apply. For the full list of models you can call, see the [model catalog](https://neon.com/ai-gateway#models).
@@ -86,7 +86,7 @@ All paths below are appended to your branch's bare AI Gateway host (`NEON_AI_GAT
 On `/v1/chat/completions`, `message.content` is a plain string for most models. For the models below, the gateway returns an array of typed content blocks instead. This is a known gateway issue that we're fixing.
 
 - `gemini-3-7-flash`, `gemini-3-8-flash`, `gemini-4-argon`, and `gemini-4-carbon` return an array on every non-streaming response, even for a trivial prompt. Their streamed `delta.content` values are strings, with `null` on the final chunk.
-- `claude-opus-5-5`, `claude-haiku-5-5`, `claude-fable-5-1`, and `claude-fable-5-2` return a string for a trivial prompt and an array once the model reasons. When they reason while streaming, some `delta.content` values are arrays too. A low `max_tokens` value can cut a response off before the `text` block appears, leaving only a `reasoning` block.
+- `claude-opus-5-5`, `claude-haiku-5-5`, `claude-fable-5-1`, and `claude-fable-5-2` return an array whenever the model reasons and a string when it doesn't. They decide on their own when to reason, so even a trivial prompt can return an array. When they reason while streaming, some `delta.content` values are arrays too. A low `max_tokens` value can cut a response off before the `text` block appears, leaving only a `reasoning` block.
 
 The arrays have these shapes:
 
