@@ -14,7 +14,7 @@ const McpServerStatsPage = async () => {
   const stats = await getMcpStats();
   if (!stats) notFound();
 
-  const { clients, tools, access, surfaces, publishedAt } = stats;
+  const { clients, tools, access, surfaces, customerSize, publishedAt } = stats;
 
   return (
     <Layout className="bg-black-pure" isHeaderSticky>
@@ -23,6 +23,7 @@ const McpServerStatsPage = async () => {
         tools={tools}
         access={access}
         surfaces={surfaces}
+        customerSize={customerSize}
         publishedAt={publishedAt}
       />
     </Layout>

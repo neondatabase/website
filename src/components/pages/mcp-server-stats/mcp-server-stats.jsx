@@ -6,10 +6,12 @@ import LINKS from 'constants/links';
 import { buildAccessSplit } from './access';
 import AccessSplit from './access-split';
 import AgentSurfaces from './agent-surfaces';
+import CustomerSize from './customer-size';
 import Hero from './hero';
 import HowItWorks from './how-it-works';
 import ShareList from './share-list';
 import { buildClientShares, buildToolShares } from './share-series';
+import { buildCustomerSize } from './size-bands';
 import { buildAgentSurfaces } from './surfaces';
 import Trend from './trend';
 import { formatWeekRange } from './weeks';
@@ -22,11 +24,12 @@ const rowsShape = PropTypes.arrayOf(
   })
 );
 
-const McpServerStats = ({ clients, tools, access, surfaces, publishedAt }) => {
+const McpServerStats = ({ clients, tools, access, surfaces, customerSize, publishedAt }) => {
   const clientShares = buildClientShares(clients);
   const toolShares = buildToolShares(tools);
   const accessSplit = buildAccessSplit(access.rows);
   const agentSurfaces = buildAgentSurfaces(surfaces.rows);
+  const customerSizeBands = buildCustomerSize(customerSize.rows);
 
   return (
     <>
@@ -66,6 +69,11 @@ const McpServerStats = ({ clients, tools, access, surfaces, publishedAt }) => {
         windowStart={surfaces.windowStart}
         windowEnd={surfaces.windowEnd}
       />
+      <CustomerSize
+        bands={customerSizeBands}
+        windowStart={customerSize.windowStart}
+        windowEnd={customerSize.windowEnd}
+      />
       <HowItWorks />
       <CTANew
         label="Get started"
@@ -99,6 +107,17 @@ McpServerStats.propTypes = {
     rows: PropTypes.arrayOf(
       PropTypes.shape({
         agent: PropTypes.string.isRequired,
+        surface: PropTypes.string.isRequired,
+        share: PropTypes.number.isRequired,
+      })
+    ).isRequired,
+  }).isRequired,
+  customerSize: PropTypes.shape({
+    windowStart: PropTypes.string.isRequired,
+    windowEnd: PropTypes.string.isRequired,
+    rows: PropTypes.arrayOf(
+      PropTypes.shape({
+        band: PropTypes.string.isRequired,
         surface: PropTypes.string.isRequired,
         share: PropTypes.number.isRequired,
       })
