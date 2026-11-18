@@ -164,9 +164,9 @@ A few attributes changed shape on the way to the Plugin Framework. Nested blocks
 
 The provider is also on the [OpenTofu registry](https://search.opentofu.org/provider/neondatabase/neon/latest) under the same `neondatabase/neon` address.
 
-## What beta means here
+## Why we shipped a beta
 
-Beta means the configuration you write today may still need small changes before 1.0 and every one of them will be in the [changelog](https://github.com/neondatabase/terraform-provider-neon/blob/main/CHANGELOG.md). We run the full acceptance test suite against a live Neon organization on Terraform 1.5 and 1.17 for every change, so we think it's ready for real projects. Pin the exact version, read the changelog before you bump it and tell us what breaks.
+We wanted to get the official provider out quickly and hear from you early, so we released it as a beta. We run the full acceptance test suite against a live Neon organization on Terraform 1.5 and 1.17 for every change, so we think it's ready for real projects. We're still very much open to feedback: tell us what's missing, what feels off and what breaks. Pin the exact version and check the [changelog](https://github.com/neondatabase/terraform-provider-neon/blob/main/CHANGELOG.md) before you bump it.
 
 The [Terraform docs](https://neon.com/docs/reference/terraform) walk through API keys, a first project and common errors. The [Registry docs](https://registry.terraform.io/providers/neondatabase/neon/latest/docs) cover every resource. Issues and feature requests go to [neondatabase/terraform-provider-neon](https://github.com/neondatabase/terraform-provider-neon/issues).
 
