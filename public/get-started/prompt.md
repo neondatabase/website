@@ -33,10 +33,11 @@ Then check whether the CLI already has a Neon account, without signing in. It ha
 neon profile list -o json
 ```
 
-- If the CLI has an account, skip sign-in and continue with the next step.
-- Otherwise, launch the sign-in flow by running `neon login` (`neon auth` is an alias) and have the user finish signing in via the browser.
-- If nobody can finish a browser sign-in, for example when you run headless or unattended, do not run `neon login`: it waits for the browser until it times out. Do not ask the user for an API key. Use Claimable Neon instead: it creates a Neon project without an account, and the user claims it later. Follow the "New Neon project" section below with its claimable command, which runs `neon claim create`.
-- If the user says they already have a Neon API key, have them set it as the `NEON_API_KEY` environment variable for your session instead, without pasting the key into chat, then continue as signed in.
+If the CLI has an account, skip sign-in and continue with the next step. Otherwise, pick one of these three options:
+
+1. **Browser sign-in**, when the user is present and can open a browser: run `neon login` (`neon auth` is an alias) and have the user finish signing in in the browser, or ask the user to run `neon login` in their own terminal and tell you when they're done.
+2. **API key**, when you run in a sandbox or another environment where the user can't finish a browser sign-in: `neon login` waits for the browser until it times out, so don't run it. Ask the user for a Neon API key (see https://neon.com/docs/manage/api-keys.md) and have them set it as the `NEON_API_KEY` environment variable in your environment, without pasting the key into chat. Then continue as signed in.
+3. **Claimable Neon**, when the user isn't around to sign in or provide an API key, or says this is an experiment and a throwaway project is fine: Claimable Neon creates a Neon project without an account, and the user can claim it later. Follow the "New Neon project" section below with its claimable command, which runs `neon claim create`.
 
 ---
 
@@ -48,7 +49,7 @@ neon profile list -o json
 
 Follow these instructions if the user's prompt references an existing Neon project by providing a project ID and an organization ID.
 
-Linking an existing project needs a Neon account: a signed-in CLI or `NEON_API_KEY`. Claimable Neon only creates new projects. If you have neither, tell the user that linking needs them to finish `neon login` in a browser or set an API key they already have, and stop.
+Linking an existing project needs a Neon account: a signed-in CLI or `NEON_API_KEY`. Claimable Neon only creates new projects. If you have neither, tell the user that linking needs them to finish `neon login` in a browser or provide an API key, and stop.
 
 Run the following command in the root directory of the user's source-code repo to link their app to an existing Neon project, populate `.env` variables in their repo, and install the Neon skills and MCP server. Use the project ID and organization ID from the user's prompt for `<project-id>` and `<org-id>`.
 
@@ -112,7 +113,7 @@ Then run the following command in the root directory of the user's source-code r
 neon init -y --agent <agent-name> --region-id <region-id> --project-name <project-name>
 ```
 
-If the CLI has no Neon account and nobody can sign in, run the claimable command instead. `--claimable` runs `neon claim create`, which creates the project without an account, and the rest of `neon init` runs as usual:
+If you chose Claimable Neon in the sign-in step, run the claimable command instead. `--claimable` runs `neon claim create`, which creates the project without an account, and the rest of `neon init` runs as usual:
 
 ```bash
 neon init -y --agent <agent-name> --claimable --region-id <region-id> --project-name <project-name>
