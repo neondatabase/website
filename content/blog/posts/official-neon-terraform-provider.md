@@ -75,7 +75,7 @@ It felt amazing when you approached me and shared that the Databricks/Neon team 
 
 ## What's new since kislerdm/neon 0.18
 
-v0.18.0, released in September 2026, is the last community release of kislerdm/neon. We shipped a lot of new Neon primitives in the meantime, so we used the move to an official provider to catch up. Dmitry migrated the provider to Terraform's Plugin Framework, Justin added resources for the newer Neon primitives and we reviewed and tested everything against the live API, added the remaining resources and made sure existing state moves over without replacing anything.
+v0.18.0, released in September 2026, is the last community release of kislerdm/neon. We shipped a lot of new Neon primitives in the meantime, so we used the move to an official provider to catch up. Over the last few weeks, Dmitry and Justin worked on both: migrating the provider to Terraform's Plugin Framework and adding resources for the newer Neon primitives. We reviewed and tested everything against the live API, added the remaining resources and made sure existing state moves over without replacing anything.
 
 The Plugin Framework is what HashiCorp recommends for new providers and it's what makes ephemeral resources possible.
 
@@ -127,7 +127,7 @@ resource "neon_branch_realtime" "this" {
 
 ## Meet Justin
 
-To get the provider over the line, we brought in Justin Frye, a platform engineer who had already been contributing to it. Justin added many of the new resources, including `neon_function`, `neon_trigger`, `neon_snapshot`, `neon_data_api` and the organization spending limit. He also built [pi-provider-neon-ai-gateway](https://github.com/randoneering/pi-provider-neon-ai-gateway), an extension that lets you use the Neon AI Gateway from the [pi](https://github.com/badlogic/pi-mono) coding agent, so we asked him about that too.
+To get the provider over the line, we brought in Justin Frye, a platform engineer who had already been contributing to it. He also built [pi-provider-neon-ai-gateway](https://github.com/randoneering/pi-provider-neon-ai-gateway), an extension that lets you use the Neon AI Gateway from the [pi](https://github.com/badlogic/pi-mono) coding agent, so we asked him about that too.
 
 **Why did you build pi-provider-neon-ai-gateway?**
 
