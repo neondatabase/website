@@ -71,7 +71,7 @@ It felt amazing when you approached me and shared that the Databricks/Neon team 
 - **July 2022:** Dmitry creates neon-sdk-go and terraform-provider-neon.
 - **January 2023:** neon-sdk-go v0.1.0 (January 3) and the first provider release, v0.0.1 on the Terraform Registry (January 5).
 - **September 2026:** kislerdm/neon v0.18.0, the last of 39 community releases.
-- **November 2026:** the official `neondatabase/neon` provider ships its first beta, v0.19.0-beta.0, and we maintain it together with Dmitry and Justin. The current release is v0.19.0-beta.2.
+- **November 2026:** the official `neondatabase/neon` provider ships its first beta, v0.19.0-beta.0, and we maintain it together with Dmitry and Justin. The current release is v0.19.0-beta.3.
 
 ## What's new since kislerdm/neon 0.18
 
@@ -146,7 +146,7 @@ terraform {
   required_providers {
     neon = {
       source  = "neondatabase/neon"
-      version = "0.19.0-beta.2"
+      version = "0.19.0-beta.3"
     }
   }
 }
