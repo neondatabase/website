@@ -206,10 +206,10 @@ pnpm add -g neon    # pnpm
 
 For full CLI installation options, see https://neon.com/docs/cli/install.md
 
-Then inspect credentials without printing secrets. `NEON_API_KEY` or a `neon profile list -o json` row whose `account` is not `-` is an account. A `DEFAULT` row with `account: "-"` and `file: "missing"` is not.
+Then inspect credentials without printing secrets. `NEON_API_KEY`, or the active `neon profile list -o json` row (`active: "*"`) with an `account` other than `-`, is an account. A `DEFAULT` row with `account: "-"` and `file: "missing"` is not.
 
 - Credentials already available: reuse them. Do not launch a browser.
-- A human needs to sign in: they run `neon login` (`neon auth` is an alias). An unattended agent must not launch browser authentication.
+- A human needs to sign in: they run `neon login` (`neon auth` is an alias). An unattended agent must not launch browser authentication; with no credentials and nobody to finish a browser sign-in, it takes the Claimable Neon path below.
 - No account yet: follow [Starting without a Neon account](#starting-without-a-neon-account) for the Claimable Neon path.
 
 ### Combined setup: `neon init`
@@ -311,7 +311,9 @@ neon bootstrap
 
 ## Starting without a Neon account
 
-If the Getting Started account check found credentials, use them. If a command waits on a browser (`Awaiting authentication in web browser`) or authentication fails, stop and ask the user to sign in (`neon auth`) or mint an API key. Do not create a Claimable project as a substitute for a failed existing account.
+If the Getting Started account check found credentials, use them. If those credentials fail to authenticate, stop and ask the user to sign in (`neon auth`). Do not create a Claimable project as a substitute for a failed existing account.
+
+If the check found no credentials and nobody can finish a browser sign-in (an unattended run, or a command waits on `Awaiting authentication in web browser`), stop waiting and create the database with `npx neon@latest claim create`. It needs no Neon account, and the user claims the project later from the claim link; the next paragraph and its reference cover the flow. Use a Neon API key instead only when the user says they already have one; they set it as `NEON_API_KEY` in the session environment rather than pasting it into chat.
 
 If there is no Neon account yet, follow [references/claimable-neon.md](https://neon.com/docs/ai/skills/neon/references/claimable-neon.md). Do not run `neon init --agent` or `neon auth` on this path; those need a human Neon account. If `neon claim` is missing, the reference has the REST fallback. Unclaimed projects expire at `project_expires_at` (72 hours today). Claim codes expire in `expires_in` (15 minutes today). Functions, Object Storage, and AI Gateway report `requires_claim` before a human claims the project; report that and keep the denied capabilities. Add Auth with `neon.ts` and `neon deploy` when login is requested and no existing provider should be preserved. Add the Data API only for PostgREST / Supabase database-client compatibility or a migration that already depends on it.
 
@@ -370,7 +372,7 @@ neon config plan     # dry-run diff of what apply would change (read-only)
 neon deploy --env <file>  # apply neon.ts. Pass --env when Function env reads process.env. Alias for `neon config apply`
 ```
 
-`apply` / `deploy` provision the declared services **and then pull the branch's env into your local `.env.local`** (e.g. `Pulled 5 Neon variables into .env.local: DATABASE_URL, …`), so your local env always matches what's deployed.
+`apply` / `deploy` provision the declared services **and then pull the branch's env into your local env file** (`.env` if it exists, otherwise `.env.local`) (e.g. `Pulled 5 Neon variables into .env.local: DATABASE_URL, …`), so your local env always matches what's deployed.
 
 ### Function env and `neon deploy`
 
@@ -460,7 +462,7 @@ Neon branches enable a branch-first development flow, which we recommend when us
 Create a Neon branch any time you would create a git branch. Use the following commands if you have CLI access:
 
 - `neon checkout <branch-name>` — Pins an existing branch by updating only the branch pointer in `.neon`. Pass `--create` to create a missing **name** (`neon checkout dev --create`). Run without a name for an interactive picker. It does not touch code or local Postgres.
-- `neon env pull` — Fetches the current branch's Neon environment variables into your `.env`. **`link` and `checkout` run this for you by default**, so you rarely call it directly.
+- `neon env pull` — Fetches the current branch's Neon environment variables into your local env file (`.env` if it exists, otherwise `.env.local`). **`link` and `checkout` run this for you by default**, so you rarely call it directly.
 - `neon diff` — Shows the schema diff between the child branch and its parent. Run this to see what changes have been made to the schema since the last branch was created and before you commit your changes.
 
 ```bash
@@ -468,7 +470,7 @@ neon link                     # once; also pulls the linked branch's env
 neon checkout dev-add-search --create  # per feature; also pulls the branch's env
 ```
 
-Because `link` and `checkout` pull env by default, the branch's `DATABASE_URL` lands in your local `.env` automatically — build against it, then `checkout` the next branch and repeat. As the agent, drive this loop yourself: run `checkout` between tasks.
+Because `link` and `checkout` pull env by default, the branch's `DATABASE_URL` lands in your local env file automatically — build against it, then `checkout` the next branch and repeat. As the agent, drive this loop yourself: run `checkout` between tasks.
 
 ### How checkout composes with neon.ts
 
