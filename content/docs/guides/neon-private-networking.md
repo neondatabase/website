@@ -11,7 +11,7 @@ summary: >-
 enableTableOfContents: true
 redirectFrom:
   - /docs/guides/neon-private-access
-updatedOn: '2026-11-18T21:17:18.064Z'
+updatedOn: '2026-11-18T21:49:53.868Z'
 ---
 
 <Admonition type="info" title="Private Networking availability">
@@ -62,7 +62,7 @@ To configure Neon Private Networking, perform the following steps:
 
     1. Under **Service settings**, specify the **Service name**. Service names vary by region. Select your region below and copy one service name. You repeat these steps for each remaining name later.
 
-       <Tabs labels={["US", "Europe", "Asia Pacific", "South America"]}>
+       <Tabs labels={["US", "Europe", "APAC", "LATAM"]}>
 
        <TabItem>
 
