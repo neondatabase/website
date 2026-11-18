@@ -1,6 +1,6 @@
 ---
-title: Add an MCP server to your app with Neon Functions and Managed Better Auth
-subtitle: Build an OAuth-protected MCP server with a coding agent, test it with MCPJam and Manufact, and connect it to ChatGPT
+title: Build an MCP server for your app with Neon Functions and Managed Better Auth
+subtitle: Add an OAuth-protected MCP server to your app so ChatGPT, Claude, and Cursor can call its tools as your signed-in users, then test it and connect it to ChatGPT.
 author: tony-dang
 enableTableOfContents: true
 createdAt: '2026-11-18T00:00:00.000Z'
@@ -8,7 +8,7 @@ createdAt: '2026-11-18T00:00:00.000Z'
 
 Your users already ask agents like ChatGPT and Claude to do work for them. An MCP server lets those agents use your app too: they call the tools you expose, signed in as the user they act for.
 
-This guide adds an MCP server to an existing app. The server runs on [Neon Functions](/docs/compute/functions/overview), and [Managed Better Auth](/docs/auth/overview) secures it with OAuth, so users sign in with the account they already have. A coding agent with the Neon agent skills writes most of the code. You'll read what it built at each step, test the server, and connect it to ChatGPT.
+This guide shows you how to build an MCP server for an existing app. The server runs on [Neon Functions](/docs/compute/functions/overview), and [Managed Better Auth](/docs/auth/overview) secures it with OAuth, so users sign in with the account they already have. A coding agent with the Neon agent skills writes most of the code. You'll read what it built at each step, test the server, and connect it to ChatGPT.
 
 <YoutubeIframe embedId="xwgdvbpVMG8" />
 
@@ -261,11 +261,7 @@ For low-level checks, [MCP Inspector](https://github.com/modelcontextprotocol/in
 2. Click **Add Server**, enter a name and your MCP server URL, and leave **Authentication** on **Auto**.
 3. MCPJam starts the OAuth flow and opens your sign-in page on Vercel. Create an account, sign in, and click **Allow** on the consent page.
 
-![The Add MCP Server dialog in MCPJam, with the server name mcp-place-demo and the function's /mcp URL.](/guides/images/mcp-server-neon-functions/ui-mcpjam-add-server.png)
-
-In the **Playground** tab, MCPJam lists `paint_square`. Set a color and a square, then click **Run** to see the result in Claude, ChatGPT, and Cursor side by side.
-
-![The MCPJam Playground runs paint_square in Claude, ChatGPT, and Cursor, and each returns the painted square and the ID of the user who painted it.](/guides/images/mcp-server-neon-functions/ui-mcpjam-playground.png)
+MCPJam then shows the server as connected. In the **Playground** tab, it lists `paint_square`. Set a color and a square, then click **Run** to call the tool in Claude, ChatGPT, and Cursor side by side. Each client should return the same result: the painted square and the `paintedBy` user ID from your sign-in.
 
 ### Check plugin store requirements with Manufact
 
@@ -275,11 +271,9 @@ Passing the MCP spec is enough to connect a client, but ChatGPT and Claude have 
 2. Paste your MCP server URL, click **Connect MCP**, and complete the same OAuth flow.
 3. Open **Checklist** and click **Run checklist**.
 
-The first run of mcp/place scored 88 out of 100, with two errors. OpenAI and Claude both require tool annotations, and `paint_square` had none.
+The first run of mcp/place scored 88 out of 100: 19 checks passed and 2 failed, so Manufact marked it **Not ready to submit**. Both errors were the same problem. OpenAI and Claude require tool annotations, and `paint_square` had none.
 
-![The Manufact checklist shows a score of 88 out of 100, with 19 passed checks and 2 errors, and a Copy fix prompt button.](/guides/images/mcp-server-neon-functions/ui-manufact-checklist.png)
-
-Click **Copy fix prompt** and paste it into your coding agent.
+Manufact writes a prompt that fixes the failed checks. Click **Copy fix prompt** and paste it into your coding agent.
 
 ### Add tool annotations
 
@@ -323,13 +317,9 @@ Run the Manufact checklist again. This time every check passes. Compare your wor
 3. Read the safety notice, check **I understand and want to continue**, and click **Create as a plugin**.
 4. Complete the sign-in and consent flow.
 
-![The Add custom MCP server dialog in ChatGPT, with the server URL and OAuth authentication.](/guides/images/mcp-server-neon-functions/ui-chatgpt-add-mcp-server.png)
-
 If writes fail with an error like "Unknown tool" while reads work, open the connector's details and allow write tools. After you change tools on the server, refresh the connector or start a new chat, because ChatGPT caches the tool list ([Connect ChatGPT](/docs/compute/functions/mcp-server#connect-chatgpt)).
 
-Start a new chat and ask ChatGPT to change B4 to blue and D2 to purple. It calls `paint_square` twice, and the grid updates.
-
-![ChatGPT replies "Done. B4 is blue and D2 is purple." and the mcp/place grid shows both squares painted.](/guides/images/mcp-server-neon-functions/ui-chatgpt-result.png)
+Start a new chat and ask ChatGPT to change B4 to blue and D2 to purple. It calls `paint_square` once for each square and replies that both are done. Open your app in another tab: B4 and D2 change color without a reload.
 
 ## Next steps
 
