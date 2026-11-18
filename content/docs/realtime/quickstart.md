@@ -58,7 +58,7 @@ The page gives you the two values your app needs:
 - **Copy secret**: copies the branch's shared secret, which you use when [sealing queries](./guides/queries#sealing-queries). The Console doesn't display the secret. Use it as the value for `NEON_REALTIME_SECRET`.
 
 <Admonition type="important" title="Enabling Realtime restarts your computes">
-Enabling Realtime turns on [logical replication](/docs/guides/logical-replication-neon) for the whole project. This suspends every compute in the project, on all branches, which drops active connections. See [Before you enable Realtime](./overview#get-started).
+Enabling Realtime turns on [logical replication](/docs/guides/logical-replication-neon) for the whole project. This restarts all computes in the project, on all branches, so active connections drop and reconnect. See [Before you enable Realtime](./overview#get-started).
 </Admonition>
 
 ### Using the CLI

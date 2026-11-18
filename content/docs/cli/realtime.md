@@ -23,7 +23,7 @@ If `--project-id` is omitted, the CLI reads it from your [context file](/docs/cl
 Requests Realtime provisioning for a branch. Provisioning finishes in the background, usually within a few seconds. Run it again on a branch that already has Realtime to replace its allowed origins with the ones you pass. Without `--allowed-origin`, a re-run keeps the existing origins.
 
 <Admonition type="important" title="Enabling Realtime restarts your computes">
-Enabling Realtime turns on [logical replication](/docs/guides/logical-replication-neon) for the whole project. This suspends every compute in the project, on all branches, which drops active connections. See [Before you enable Realtime](/docs/realtime/overview#get-started).
+Enabling Realtime turns on [logical replication](/docs/guides/logical-replication-neon) for the whole project. This restarts all computes in the project, on all branches, so active connections drop and reconnect. See [Before you enable Realtime](/docs/realtime/overview#get-started).
 </Admonition>
 
 <CliUsage command="realtime enable" />

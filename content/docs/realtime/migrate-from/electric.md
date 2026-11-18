@@ -40,7 +40,7 @@ neon realtime enable
 ```
 
 <Admonition type="important" title="Enabling Realtime restarts your computes">
-Enabling Realtime suspends every compute in the project, on all branches, which drops active connections, including Electric's replication connection. Each compute starts again on its next connection. Enable it in a quiet window. See [Before you enable Realtime](../overview#get-started).
+Enabling Realtime restarts all computes in the project, on all branches, so active connections drop and reconnect, including Electric's replication connection. Enable it in a quiet window. See [Before you enable Realtime](../overview#get-started).
 </Admonition>
 
 <Admonition type="tip" title="Migrate one view at a time">

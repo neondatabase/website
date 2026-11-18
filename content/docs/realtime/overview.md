@@ -39,7 +39,7 @@ neon realtime enable
 
 <Admonition type="important" title="Before you enable Realtime">
 - Your project must be in a [supported region](#which-regions-is-it-enabled-in).
-- Enabling Realtime turns on [logical replication](/docs/guides/logical-replication-neon) for the whole project. This permanently changes `wal_level` to `logical` and suspends every compute in the project, on all branches, which drops active connections. Each compute starts again on its next connection. Disabling Realtime later doesn't turn logical replication off.
+- Enabling Realtime turns on [logical replication](/docs/guides/logical-replication-neon) for the whole project. This permanently changes `wal_level` to `logical` and restarts all computes in the project, on all branches, so active connections drop and reconnect. Disabling Realtime later doesn't turn logical replication off.
 </Admonition>
 
 To add Realtime to an app by hand, follow the [Quickstart](/docs/realtime/quickstart). To see how the pieces fit together, read [how it works](/docs/realtime/how-it-works).
