@@ -162,11 +162,9 @@ terraform plan
 
 A few attributes changed shape on the way to the Plugin Framework. Nested blocks like `branch` and `primary_compute` are nested attributes now and `"yes"`/`"no"` strings are booleans. The [migration guide](https://neon.com/docs/reference/terraform-migrate) lists every change. After those edits, the plan should show no changes or only in-place updates. If it shows a resource being replaced, don't apply it; [open an issue](https://github.com/neondatabase/terraform-provider-neon/issues) with the plan output instead.
 
-The provider is also on the [OpenTofu registry](https://search.opentofu.org/provider/neondatabase/neon/latest) under the same `neondatabase/neon` address.
-
 ## Why we shipped a beta
 
-We wanted to get the official provider out quickly and hear from you early, so we released it as a beta. We run the full acceptance test suite against a live Neon organization on Terraform 1.5 and 1.17 for every change, so we think it's ready for real projects. We're still very much open to feedback: tell us what's missing, what feels off and what breaks. Pin the exact version and check the [changelog](https://github.com/neondatabase/terraform-provider-neon/blob/main/CHANGELOG.md) before you bump it.
+We wanted to get the official provider out quickly and hear from you early, so we released it as a beta. Every change runs the full acceptance test suite against a live Neon organization on Terraform 1.5, the oldest version we support, and Terraform 1.17. Ephemeral resources need Terraform 1.10 or later, so their tests run on 1.17. We also tested the release with OpenTofu 1.13, which installs the provider from the [OpenTofu registry](https://search.opentofu.org/provider/neondatabase/neon/latest) under the same `neondatabase/neon` address. So we think it's ready for real projects, whether you use Terraform or OpenTofu. We're still very much open to feedback: tell us what's missing, what feels off and what breaks. Pin the exact version and check the [changelog](https://github.com/neondatabase/terraform-provider-neon/blob/main/CHANGELOG.md) before you bump it.
 
 The [Terraform docs](https://neon.com/docs/reference/terraform) walk through API keys, a first project and common errors. The [Registry docs](https://registry.terraform.io/providers/neondatabase/neon/latest/docs) cover every resource. Issues and feature requests go to [neondatabase/terraform-provider-neon](https://github.com/neondatabase/terraform-provider-neon/issues).
 
