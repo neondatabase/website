@@ -8,7 +8,7 @@ summary: >-
   CI step, a deploy script, or another tool that needs to reconcile a branch
   against a neon.ts policy.
 enableTableOfContents: true
-updatedOn: '2026-10-30T19:13:49.000Z'
+updatedOn: '2026-11-18T16:34:27.404Z'
 ---
 
 `@neon/config-runtime` is the package the [`neon` CLI](/docs/cli/config) itself uses to run a [`neon.ts`](/docs/reference/neon-ts) policy: read a branch's live state, diff a policy against it, apply the result, bundle and deploy Neon Functions, and register their custom domains. Import it directly when you're writing your own CI step or script and the CLI commands (`neon config plan`, `neon deploy`) don't fit. For example, a custom GitHub Actions job that applies a policy to a freshly created preview branch.
@@ -161,7 +161,7 @@ Creates a branch **from** a `neon.ts` policy and brings it up with its declared 
 | `api`                       | `NeonApi?`         | Inject a custom adapter.                                     |
 | `bundleFunction`            | `FunctionBundler?` | Custom bundler. See [Function bundling](#function-bundling). |
 
-Returns `{ branchId, branchName, result: PushResult }`. Throws a `PlatformError` (`PLATFORM_CONFLICT`) if `branchName` already exists, or (`PLATFORM_BRANCH_NOT_FOUND`) if the policy's `parent` names a branch that doesn't exist on the project.
+Returns `{ branchId, branchName, result: PushResult }`. Throws a `PlatformError` (`PLATFORM_CONFLICT`) if `branchName` already exists, or (`PLATFORM_BRANCH_NOT_FOUND`) if the policy's `parent` names a branch that doesn't exist on the project. If the branch is created but applying the rest of the policy then fails, it throws a `PartialBranchCreateError` (`PLATFORM_PARTIAL_BRANCH_CREATE`) that carries `branchId`, `branchName`, and `reason`. The branch exists at that point. Check for it with `isPartialBranchCreateError(err)`, then run `apply` with `updateExisting: true` to finish applying the policy.
 
 ## Lower-level: `pullConfig` and `pushConfig`
 
@@ -287,13 +287,14 @@ Every error this package throws extends `PlatformError` (also re-exported here f
 
 The subclasses relevant to programmatic use:
 
-| Class                                                 | `code`                        | Thrown by             | When                                                                                                                                                                                         |
-| ----------------------------------------------------- | ----------------------------- | --------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `PushConflictError`                                   | `PLATFORM_PUSH_CONFLICT`      | `apply`, `pushConfig` | Local policy conflicts with remote state and you passed neither `updateExisting` nor a `confirm` callback, or the conflict can't be resolved. Carries a `conflicts: ConflictReport[]` array. |
-| `PushAbortedError`                                    | `PLATFORM_PUSH_ABORTED`       | `apply`, `pushConfig` | Your `confirm` callback returned `false`. Carries `branchName` and `reasons`.                                                                                                                |
-| `ConfigLoadError`                                     | `PLATFORM_CONFIG_LOAD_FAILED` | `loadConfigFromFile`  | No config file found, or it failed to evaluate.                                                                                                                                              |
-| `PlatformError` with code `PLATFORM_MISSING_API_KEY`  | `PLATFORM_MISSING_API_KEY`    | any operation         | You passed neither `apiKey` nor an `api` adapter. See [Authentication](#authentication).                                                                                                     |
-| `PlatformError` with code `PLATFORM_BRANCH_NOT_FOUND` | `PLATFORM_BRANCH_NOT_FOUND`   | any operation         | `branchId` doesn't exist on the project (see [Resolving project and branch ids](#resolving-project-and-branch-ids)), or a policy's `parent` names a branch that doesn't exist.               |
+| Class                                                 | `code`                           | Thrown by             | When                                                                                                                                                                                         |
+| ----------------------------------------------------- | -------------------------------- | --------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `PushConflictError`                                   | `PLATFORM_PUSH_CONFLICT`         | `apply`, `pushConfig` | Local policy conflicts with remote state and you passed neither `updateExisting` nor a `confirm` callback, or the conflict can't be resolved. Carries a `conflicts: ConflictReport[]` array. |
+| `PushAbortedError`                                    | `PLATFORM_PUSH_ABORTED`          | `apply`, `pushConfig` | Your `confirm` callback returned `false`. Carries `branchName` and `reasons`.                                                                                                                |
+| `ConfigLoadError`                                     | `PLATFORM_CONFIG_LOAD_FAILED`    | `loadConfigFromFile`  | No config file found, or it failed to evaluate.                                                                                                                                              |
+| `PlatformError` with code `PLATFORM_MISSING_API_KEY`  | `PLATFORM_MISSING_API_KEY`       | any operation         | You passed neither `apiKey` nor an `api` adapter. See [Authentication](#authentication).                                                                                                     |
+| `PlatformError` with code `PLATFORM_BRANCH_NOT_FOUND` | `PLATFORM_BRANCH_NOT_FOUND`      | any operation         | `branchId` doesn't exist on the project (see [Resolving project and branch ids](#resolving-project-and-branch-ids)), or a policy's `parent` names a branch that doesn't exist.               |
+| `PartialBranchCreateError`                            | `PLATFORM_PARTIAL_BRANCH_CREATE` | `createBranch`        | The branch was created, but applying its policy failed. The branch exists. Carries `branchId`, `branchName`, and `reason`. Check with `isPartialBranchCreateError(err)`.                     |
 
 A `ConflictReport` (on `PushConflictError.conflicts` and `PushResult.conflicts`) has `kind`, `identifier`, `field`, `current`, `desired`, and a human-readable `reason`.
 
