@@ -83,7 +83,7 @@ https://console.neon.tech/app/projects/<project-id>/
 
 Follow these instructions if the user's prompt doesn't reference an existing Neon project (no project ID or organization ID).
 
-Before running `neon init`, ask the user the following question:
+Before running `neon init`, ask the user the following question. If you chose Claimable Neon because nobody is available to answer, skip the question and omit `--region-id` from the claimable command below: `neon claim create` then creates the project in AWS US East (Ohio).
 
 What region would you like your Neon project created in?
 
@@ -139,4 +139,8 @@ Neon Setup Complete
 And give them the link to view their new project in the Neon Console. Get `<project-id>` from the `neon init` output or the `.neon` file:
 https://console.neon.tech/app/projects/<project-id>/
 
-For a claimable project, skip the Console link. Tell the user when the project expires (the `neon init` output prints it), and that running `neon claim accept` opens the page where they sign in to Neon and claim it before then.
+For a claimable project, skip the Console link and tell the user when the project expires (the `neon init` output prints it). When the user is ready to keep the project, run this command in the same directory and give them the URL it prints, where they sign in to Neon and claim the project. The URL expires after 15 minutes. `neon claim accept` works only on the machine and in the directory that created the project.
+
+```bash
+neon claim accept --no-open
+```

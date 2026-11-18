@@ -45,4 +45,16 @@ describe('get started prompt sign-in', () => {
     expect(claimable, 'no `neon init --claimable` command in the prompt').toHaveLength(1);
     expect(validateInvocation(claimable[0], { schema: loadSchema() })).toEqual([]);
   });
+
+  // The agent has to hand the claim URL to the user; a browser opened on the
+  // agent's machine reaches nobody.
+  it('hands off the claim with neon claim accept --no-open', () => {
+    const accept = invocations.filter(
+      (inv) => inv.source === 'fenced' && inv.argv[0] === 'claim' && inv.argv[1] === 'accept'
+    );
+
+    expect(accept, 'no fenced `neon claim accept` command in the prompt').toHaveLength(1);
+    expect(accept[0].argv).toContain('--no-open');
+    expect(validateInvocation(accept[0], { schema: loadSchema() })).toEqual([]);
+  });
 });
