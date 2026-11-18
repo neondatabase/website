@@ -48,7 +48,7 @@ Neon roles cannot install Postgres extensions other than those supported by Neon
 The following table shows parameter settings that are set explicitly for your database. These values may differ from standard Postgres defaults, and a few settings differ based on your Neon compute size.
 
 <Admonition type="note">
-Because Neon is a managed Postgres service, Postgres parameters are not user-configurable outside of a [session, database, or role context](#configuring-postgres-parameters-for-a-session-database-or-role).
+Because Neon is a managed Postgres service, Postgres parameters are not user-configurable outside of a [session, database, or role context](#configuring-postgres-parameters-for-a-session-database-or-role). The exception is `log_min_duration_statement`, which you can set per compute with the Neon API to log slow queries. See [Log slow queries](/docs/reference/metrics-logs#log-slow-queries).
 
 If you are a Neon [Scale plan](/docs/introduction/plans) user and require a different Postgres instance-level setting, you can contact [Neon Support](/docs/introduction/support) to see if the desired setting can be supported. Please keep in mind that it may not be possible to support some parameters due to platform limitations and constraints.
 </Admonition>
