@@ -8,7 +8,7 @@ summary: >-
   that affects older PDO_PGSQL or libpq drivers, with workarounds for passing
   the endpoint ID as a URL option or in the password field.
 enableTableOfContents: true
-updatedOn: '2026-09-16T19:45:35.340Z'
+updatedOn: '2026-11-18T16:41:34.386Z'
 ---
 
 <CopyPrompt src="/prompts/laravel-prompt.md" 
@@ -89,7 +89,7 @@ For schema migration with Laravel, see:
 
 <DetailIconCards>
 
-<a href="/docs/guides/laravel-migrations" description="Schema migration with Lakebase Postgres and Laravel" icon="app-store">Laravel Migrations</a>
+<a href="/docs/guides/laravel-migrations" description="Schema migration with Laravel and Lakebase Postgres on Neon" icon="app-store">Laravel Migrations</a>
 
 </DetailIconCards>
 
