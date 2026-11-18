@@ -306,17 +306,25 @@ describe('GET /models', () => {
   });
 
   describe('embeddings', () => {
-    it('serves TypeScript/Python/cURL examples for an embedding model, no AI SDK or Mastra', async () => {
+    it('serves AI SDK/Mastra/TypeScript/Python/cURL examples for an embedding model', async () => {
       const res = await GET(request('?model=qwen3-embedding-0-6b&use_case=embeddings'));
       const { model } = await body(res);
-      const ids = model.examples.map((e) => e.id);
+      const byId = Object.fromEntries(model.examples.map((e) => [e.id, e]));
 
       expect(model.unsupported).toBeUndefined();
-      expect(ids).toEqual(['typescript', 'python', 'curl']);
+      expect(Object.keys(byId)).toEqual(['ai-sdk', 'mastra', 'typescript', 'python', 'curl']);
       for (const example of model.examples) {
-        expect(example.endpoint).toBe('/v1/embeddings');
+        expect(example.endpoint).toMatch(/^\/v1\/embeddings/);
         expect(example.files[0].content).toContain('qwen3-embedding-0-6b');
-        expect(example.files[0].content).toContain('encoding_format');
+      }
+      expect(byId['ai-sdk'].files[0].content).toContain(
+        'neon.embeddingModel("qwen3-embedding-0-6b")'
+      );
+      expect(byId.mastra.files[0].content).toContain(
+        'new ModelRouterEmbeddingModel("neon/qwen3-embedding-0-6b")'
+      );
+      for (const id of ['typescript', 'python', 'curl']) {
+        expect(byId[id].files[0].content).toContain('encoding_format');
       }
     });
 

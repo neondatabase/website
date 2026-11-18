@@ -378,11 +378,44 @@ print(response.output_text)
 
 /* ---------------------------------------------------------------- embeddings */
 
-// No AI SDK or Mastra variant: neither has an EmbeddingModelV2 implementation for the Neon
-// provider yet. `encoding_format: "float"` is not a style choice — the gateway always returns a
-// float array regardless of what is requested, and the OpenAI SDKs default that field to
-// "base64" and decode accordingly, silently producing a corrupt vector if it is left out.
+// `encoding_format: "float"` in the OpenAI SDK and cURL variants is not a style choice — the
+// gateway always returns a float array regardless of what is requested, and the OpenAI SDKs
+// default that field to "base64" and decode accordingly, silently producing a corrupt vector if it
+// is left out. Mastra resolves the neon/<model> string for embeddings from @mastra/core 1.83.0 on;
+// its router model is specification v2, so it pairs with embedV2 rather than the AI SDK's embed.
 const embeddingExamples = (model) => [
+  tsExample({
+    id: 'ai-sdk',
+    title: 'AI SDK',
+    dependencies: AI_SDK_DEPS,
+    endpoint: '/v1/embeddings (via provider)',
+    content: `import { embed } from "ai";
+import { neon } from "@neon/ai-sdk-provider";
+
+const { embedding, usage } = await embed({
+  model: neon.embeddingModel("${model}"),
+  value: "${EMBEDDING_INPUT}",
+});
+
+console.log(embedding.length, usage);
+`,
+  }),
+  tsExample({
+    id: 'mastra',
+    title: 'Mastra',
+    dependencies: ['@mastra/core'],
+    endpoint: '/v1/embeddings',
+    content: `import { ModelRouterEmbeddingModel } from "@mastra/core/llm";
+import { embedV2 } from "@mastra/core/vector";
+
+const { embedding, usage } = await embedV2({
+  model: new ModelRouterEmbeddingModel("neon/${model}"),
+  value: "${EMBEDDING_INPUT}",
+});
+
+console.log(embedding.length, usage);
+`,
+  }),
   tsExample({
     id: 'typescript',
     title: 'TypeScript',
