@@ -719,6 +719,35 @@
       "responses": false,
       "webSearch": false,
       "imageGeneration": false
+    },
+    {
+      "id": "gemini-4-carbon",
+      "owner": "google",
+      "entitled": true,
+      "chat": "array-content",
+      "deviations": [
+        "`id` is null; the spec requires a string",
+        "`content` is an array[1] of {text} with keys {text, thoughtSignature, type}; the spec requires a string",
+        "`usage.total_tokens` is 441, but prompt + completion is 267",
+        "`usage.reasoning_tokens` is top-level; the spec nests it under `completion_tokens_details`"
+      ],
+      "nativeDialect": "gemini",
+      "responses": false,
+      "webSearch": false,
+      "imageGeneration": false
+    },
+    {
+      "id": "claude-fable-5-2",
+      "owner": "anthropic",
+      "entitled": true,
+      "chat": "array-content",
+      "deviations": [
+        "`content` is an array[2] of {reasoning, text} with keys {summary, text, type}; the spec requires a string"
+      ],
+      "nativeDialect": "anthropic",
+      "responses": false,
+      "webSearch": false,
+      "imageGeneration": false
     }
   ]
 }
