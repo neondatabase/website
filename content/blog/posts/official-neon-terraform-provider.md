@@ -129,15 +129,11 @@ To get the provider over the line, we brought in Justin Frye, a platform enginee
 
 **Why did you build pi-provider-neon-ai-gateway?**
 
-Selfishly, I wanted to use the gateway using my preferred coding agent. Initially, Dominik worked on a more official provider through the official pi repo, but hit some resistance. It was much easier to take the work he started and, instead, build an extension to allow pi users to tap into the Neon AI Gateway as a provider. For me, having access to the gateway gave me access to multiple models from different providers with minimal resistance. There are several other providers out there that can route you to different models, but they add a cost on top of that. Neon does not.
+Selfishly, I wanted to use the gateway using my preferred coding agent. Initially, [Dominik](https://x.com/dominikkoch) worked on a more official provider through the official pi repo, but hit some resistance. It was much easier to take the work he started and, instead, build an extension to allow pi users to tap into the Neon AI Gateway as a provider. For me, having access to the gateway gave me access to multiple models from different providers with minimal resistance. There are several other providers out there that can route you to different models, but they add a cost on top of that. Neon does not.
 
 **How is maintaining packages like this changing with AI?**
 
 With the use of agents, maintaining the extension has been relatively easy. With every new update to the gateway, I can have one of my agents grab the specs, implement new models and run tests against the gateway to ensure functionality. Iterating on new versions has been something I enjoy and it makes managing my subscriptions easier since I technically only need one!
-
-**What do you typically do for your clients?**
-
-My client work varies because platform engineering covers a lot of ground: some teams need infrastructure built to support their product, while others bring me in to fix a specific problem, like bot traffic on their service. Maintaining open source projects taught me to work async, across industries and alongside a lot of skilled engineers, which makes it easier to jump into a new team's stack.
 
 ## Moving from kislerdm/neon
 
