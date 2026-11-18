@@ -35,7 +35,8 @@ neon profile list -o json
 
 - If the CLI has an account, skip sign-in and continue with the next step.
 - Otherwise, launch the sign-in flow by running `neon login` (`neon auth` is an alias) and have the user finish signing in via the browser.
-- If nobody can finish a browser sign-in, for example when you run unattended, do not run `neon login`: it waits for the browser until it times out. Stop and ask the user to set a Neon API key as the `NEON_API_KEY` environment variable for your session, without pasting the key into chat, then continue.
+- If nobody can finish a browser sign-in, for example when you run headless or unattended, do not run `neon login`: it waits for the browser until it times out. Do not ask the user for an API key. Use Claimable Neon instead: it creates a Neon project without an account, and the user claims it later. Follow the "New Neon project" section below with its claimable command, which runs `neon claim create`.
+- If the user says they already have a Neon API key, have them set it as the `NEON_API_KEY` environment variable for your session instead, without pasting the key into chat, then continue as signed in.
 
 ---
 
@@ -46,6 +47,8 @@ neon profile list -o json
 ### Existing Neon project
 
 Follow these instructions if the user's prompt references an existing Neon project by providing a project ID and an organization ID.
+
+Linking an existing project needs a Neon account: a signed-in CLI or `NEON_API_KEY`. Claimable Neon only creates new projects. If you have neither, tell the user that linking needs them to finish `neon login` in a browser or set an API key they already have, and stop.
 
 Run the following command in the root directory of the user's source-code repo to link their app to an existing Neon project, populate `.env` variables in their repo, and install the Neon skills and MCP server. Use the project ID and organization ID from the user's prompt for `<project-id>` and `<org-id>`.
 
@@ -109,6 +112,12 @@ Then run the following command in the root directory of the user's source-code r
 neon init -y --agent <agent-name> --region-id <region-id> --project-name <project-name>
 ```
 
+If the CLI has no Neon account and nobody can sign in, run the claimable command instead. `--claimable` runs `neon claim create`, which creates the project without an account, and the rest of `neon init` runs as usual:
+
+```bash
+neon init -y --agent <agent-name> --claimable --region-id <region-id> --project-name <project-name>
+```
+
 The supported agents are antigravity, cline, cline-cli, claude-code, claude-desktop, codex, cursor, gemini-cli, goose, github-copilot-cli, grok-build, opencode, vscode, windsurf, and zed. A few also accept aliases (claude for claude-code, copilot for vscode, gemini for gemini-cli). Passing an unknown agent stops the command and prints the current supported list.
 
 An agent that can't install skills is skipped with a warning. Agents that share a target collapse into one: Claude Desktop and Claude Code both write to claude-code, and VS Code and the GitHub Copilot CLI both write to github-copilot.
@@ -128,3 +137,5 @@ Neon Setup Complete
 
 And give them the link to view their new project in the Neon Console. Get `<project-id>` from the `neon init` output or the `.neon` file:
 https://console.neon.tech/app/projects/<project-id>/
+
+For a claimable project, skip the Console link. Tell the user when the project expires (the `neon init` output prints it), and that running `neon claim accept` opens the page where they sign in to Neon and claim it before then.
