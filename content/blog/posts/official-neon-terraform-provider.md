@@ -49,7 +49,7 @@ The official provider started as a community project. In July 2022, Dmitry Kisle
 
 ![Bar chart of Terraform Registry downloads per kislerdm/neon release, placed at each release date from January 2023 to September 2026. Most releases before 2025 have under 60,000 downloads; v0.9.0 has about 190,000, v0.13.0 from January 2026 about 686,000, v0.15.0 about 330,000 and v0.18.0 from September 2026 about 449,000.](https://cdn.neonapi.io/public/images/pages/blog/official-neon-terraform-provider/terraform-downloads.png)
 
-Terraform providers can also be used from Pulumi, so Dmitry publishes the same provider as the [Neon package in the Pulumi Registry](https://www.pulumi.com/registry/packages/neon/), too.
+Pulumi generates packages from Terraform providers, which is how the [Neon package in the Pulumi Registry](https://www.pulumi.com/registry/packages/neon/) exists today. So an official Terraform provider also gives us a path to an official Pulumi package.
 
 Instead of starting over, we worked with Dmitry on porting his provider to `neondatabase/neon` and making it official. We asked him two questions.
 
