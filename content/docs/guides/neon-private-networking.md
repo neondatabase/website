@@ -11,7 +11,7 @@ summary: >-
 enableTableOfContents: true
 redirectFrom:
   - /docs/guides/neon-private-access
-updatedOn: '2026-11-18T20:25:12.697Z'
+updatedOn: '2026-11-18T20:32:25.882Z'
 ---
 
 <Admonition type="info" title="Private Networking availability">
@@ -48,7 +48,7 @@ To configure Neon Private Networking, perform the following steps:
     </Admonition>
 
     <Admonition type="important" title="Add all service names for your region">
-    A region can list multiple endpoint service names. When you create the endpoint, add **all** of the names listed for your region below (under **Service settings**). Neon adds service names over time as it expands capacity and updates this page, so re-check that list after a regional expansion, or get the current list from the [Neon API](/docs/reference/api/regions/get-region-vpc-endpoint-services). Adding those later additions is optional but improves capacity and reliability. Expansions are announced in the [changelog](/docs/changelog).
+    A region can list multiple endpoint service names, and each VPC endpoint connects to one service name. Create one VPC endpoint for **each** service name listed for your region below. Neon adds service names over time as it expands capacity and updates this page, so re-check that list after a regional expansion, or get the current list from the [Neon API](/docs/reference/api/regions/get-region-vpc-endpoint-services). Adding those later additions is optional but improves capacity and reliability. Expansions are announced in the [changelog](/docs/changelog).
     </Admonition>
 
     1. Go to the AWS **VPC > Endpoints** dashboard and select **Create endpoint**. Make sure you create the endpoint in the same VPC as your client application.
@@ -60,7 +60,7 @@ To configure Neon Private Networking, perform the following steps:
 
        ![VPC Create endpoint](/docs/guides/pl_vpc_create_endpoint.png)
 
-    1. Under **Service settings**, specify the **Service name**. Service names vary by region, and a region can have several. Select your region below and create one entry for each service name:
+    1. Under **Service settings**, specify the **Service name**. Service names vary by region. Select your region below and copy one service name. You repeat these steps for each remaining name later.
 
        <CodeTabs labels={["us-east-1", "us-east-2", "eu-central-1", "eu-west-2", "us-west-2", "ap-southeast-1", "ap-southeast-2", "sa-east-1"]}>
 
@@ -142,7 +142,7 @@ To configure Neon Private Networking, perform the following steps:
 
        </CodeTabs>
 
-       You can also get the current service names for a region from the Neon API with the [List VPC endpoint service names for a region](/docs/reference/api/regions/get-region-vpc-endpoint-services) endpoint. This is useful when you automate endpoint creation with a script or Terraform. Use the Neon region ID, such as `aws-us-east-1`:
+       If your region has more than a few service names, consider scripting endpoint creation with the AWS CLI, Terraform, or CloudFormation instead of repeating these steps in the AWS console. To get the current service names for a region, use the Neon API [List VPC endpoint service names for a region](/docs/reference/api/regions/get-region-vpc-endpoint-services) endpoint with the Neon region ID, such as `aws-us-east-1`:
 
        ```bash
        curl "https://console.neon.tech/api/v2/regions/aws-us-east-1/vpc_endpoint_services" \
@@ -177,7 +177,8 @@ To configure Neon Private Networking, perform the following steps:
 
         ![VPC Create endpoint](/docs/guides/pl_vpc_network_settings.png)
 
-    1. Note your **VPC Endpoint ID**. You will need it in the next step.
+    1. Note your **VPC Endpoint ID**. You need it when you add the endpoint to your Neon organization.
+    1. Repeat these steps for each remaining service name in your region, noting each **VPC Endpoint ID**.
 
         ![VPC Create endpoint](/docs/guides/pl_vpc_endpoint_id.png)
 
