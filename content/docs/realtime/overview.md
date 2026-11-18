@@ -12,7 +12,7 @@ redirectFrom:
   - /docs/introduction/realtime
   - /docs/guides/realtime
   - /docs/guides/neon-realtime
-updatedOn: '2026-10-30T16:28:20.000Z'
+updatedOn: '2026-11-18T00:59:49.148Z'
 ---
 
 <div className="mb-6">
@@ -283,7 +283,7 @@ Realtime does require logical replication to be enabled. Technically, this adds 
 
 Yes. Realtime works with SQL, so any library that generates SQL can work with it. There are built-in adapters for [Drizzle](/docs/realtime/examples/drizzle) and [Kysely](/docs/realtime/examples/kysely), and you can write your own for other libraries.
 
-See [Using a query builder or ORM](/docs/realtime/guides/queries#using-a-query-builder-or-orm) for how to set one up, and the [`RealtimeAdapter`](/docs/realtime/sdks/typescript#backend-realtimeadapter) reference for the interface.
+See [Using a query builder or ORM](/docs/realtime/guides/queries#using-a-query-builder-or-orm) for how to set one up, and the [`RealtimeAdapter`](/docs/realtime/sdks/typescript/backend#backend-realtimeadapter) reference for the interface.
 
 </FaqItem>
 
@@ -406,7 +406,7 @@ Compared with <a className="group inline text-pretty" href="https://materialize.
 
 Realtime is the successor to [Electric](/blog/electric-joins-neon), developed by the Electric team inside Neon. It's a new system rather than a version of the Electric sync engine, but it **is a drop-in replacement** for Electric's role in your stack. We recommend that teams using Electric migrate to Realtime.
 
-Live SQL queries replace shapes. For TanStack DB users, [`realtimeCollectionOptions()`](/docs/realtime/sdks/typescript#tanstack-db-realtimecollectionoptions) replaces `electricCollectionOptions()`. See [how to Migrate from Electric](/docs/realtime/migrate-from/electric).
+Live SQL queries replace shapes. For TanStack DB users, [`realtimeCollectionOptions()`](/docs/realtime/sdks/typescript/tanstack-db#tanstack-db-realtimecollectionoptions) replaces `electricCollectionOptions()`. See [how to Migrate from Electric](/docs/realtime/migrate-from/electric).
 
 </FaqItem>
 

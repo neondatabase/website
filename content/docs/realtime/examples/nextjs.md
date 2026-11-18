@@ -4,7 +4,7 @@ subtitle: 'Full-stack example app using Realtime with Next.js.'
 summary: >-
   Build a per-user todo app with Next.js, Drizzle and Managed Better Auth on Neon Realtime: read and seal live queries in a Server Component, renew them through a Route Handler, and settle optimistic server action writes by txid.
 enableTableOfContents: true
-updatedOn: '2026-10-30T15:07:38.000Z'
+updatedOn: '2026-11-18T00:59:49.148Z'
 ---
 
 This example shows how to use Neon Realtime with [Next.js](https://nextjs.org), [Drizzle ORM](https://orm.drizzle.team) and Neon's [Managed Better Auth](/docs/auth/overview), with support for [auth](#authorize-with-the-session), [SSR](#server-side-rendering), [client-side reactivity](#client-side-reactivity) and [optimistic mutations](#optimistic-mutations).
@@ -132,7 +132,7 @@ Seal the query on the server, for the user in the session. The browser can subsc
 
 ### Create the Realtime server
 
-The Realtime server, from [`createRealtime()`](../sdks/typescript#backend-createrealtime), holds the secret and seals queries. It should be created and then used in your trusted server code. Pass it [`drizzleAdapter()`](../sdks/typescript#drizzle-drizzleadapter), so it can seal Drizzle queries:
+The Realtime server, from [`createRealtime()`](../sdks/typescript/backend#backend-createrealtime), holds the secret and seals queries. It should be created and then used in your trusted server code. Pass it [`drizzleAdapter()`](../sdks/typescript/drizzle#drizzle-drizzleadapter), so it can seal Drizzle queries:
 
 ```ts filename="src/lib/realtime.ts"
 import "server-only"
@@ -253,7 +253,7 @@ export async function loadTodos(userId: string) {
 }
 ```
 
-[`seal()`](../sdks/typescript#backend-realtimeserverseal) returns a typed [`SealedLiveQuery<TodoRow>`](../sdks/typescript#backend-sealedlivequery), so the row type flows through to the Client Component.
+[`seal()`](../sdks/typescript/backend#backend-realtimeserverseal) returns a typed [`SealedLiveQuery<TodoRow>`](../sdks/typescript/backend#backend-sealedlivequery), so the row type flows through to the Client Component.
 
 ### Render in a Server Component
 
@@ -342,7 +342,7 @@ export const config = { matcher: ["/"] }
 
 ### Create the Realtime client in the browser
 
-Create the Realtime client once, inside the React tree, in a `useState` initializer, and provide it with [`RealtimeProvider`](../sdks/typescript#react-realtimeprovider). This is [open the connection in the browser](../guides/ssr#open-the-connection-in-the-browser) as a Client Component:
+Create the Realtime client once, inside the React tree, in a `useState` initializer, and provide it with [`RealtimeProvider`](../sdks/typescript/react#react-realtimeprovider). This is [open the connection in the browser](../guides/ssr#open-the-connection-in-the-browser) as a Client Component:
 
 ```tsx filename="src/app/realtime-root.tsx"
 "use client"
@@ -367,7 +367,7 @@ Render `RealtimeRoot` around the components that subscribe. With one live query 
 
 ## Client-side reactivity
 
-In the browser, [`useLiveQuery()`](../sdks/typescript#react-uselivequery) subscribes to the sealed query and re-renders with each result. It's standard React, so the reactivity guide covers the hook in [React](../guides/reactivity#react). With Next.js, the Client Component also has to survive server re-renders and renew through the Route Handler.
+In the browser, [`useLiveQuery()`](../sdks/typescript/react#react-uselivequery) subscribes to the sealed query and re-renders with each result. It's standard React, so the reactivity guide covers the hook in [React](../guides/reactivity#react). With Next.js, the Client Component also has to survive server re-renders and renew through the Route Handler.
 
 ### Subscribe with `useLiveQuery()`
 
@@ -427,7 +427,7 @@ Apply each change to local, optimistic state at once, and send it to a server ac
 
 ### Apply writes optimistically
 
-Run each write in a transition with `startTransition`, apply it with `useOptimistic`, and keep the transition open until [`utils.awaitTxId()`](../sdks/typescript#react-uselivequeryutils) sees the write's txid. At the top level of `src/app/todo-list.tsx`, add `FormEvent`, `startTransition`, `useMemo` and `useOptimistic` to the `react` import and `leaveSession` to the `session-lost` import, then add:
+Run each write in a transition with `startTransition`, apply it with `useOptimistic`, and keep the transition open until [`utils.awaitTxId()`](../sdks/typescript/react#react-uselivequeryutils) sees the write's txid. At the top level of `src/app/todo-list.tsx`, add `FormEvent`, `startTransition`, `useMemo` and `useOptimistic` to the `react` import and `leaveSession` to the `session-lost` import, then add:
 
 ```tsx filename="src/app/todo-list.tsx"
 import { addTodo, deleteTodo, setTodoCompleted, type WriteResult } from "./actions"
@@ -606,7 +606,7 @@ Don't revalidate after a write. The live query already delivers it, and a revali
 ## Next steps
 
 - read the guides on [reactivity](../guides/reactivity), [optimistic mutations](../guides/mutations) and [server-side rendering](../guides/ssr) for the concepts behind each step
-- look up `useLiveQuery()` and `RealtimeProvider` in the [React section of the SDK reference](../sdks/typescript#react)
+- look up `useLiveQuery()` and `RealtimeProvider` in the [React section of the SDK reference](../sdks/typescript/react)
 - see how Realtime works with your own Drizzle schema, selects and writes in the [Drizzle example](./drizzle)
 - see the [TanStack example](./tanstack), which seeds a TanStack&nbsp;DB collection in a route loader and writes through collection handlers
 - browse the [full source on GitHub](https://github.com/neondatabase/examples/tree/main/realtime/with-nextjs)

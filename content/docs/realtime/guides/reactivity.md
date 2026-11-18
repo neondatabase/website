@@ -4,7 +4,7 @@ subtitle: 'Bind live queries to component and agent state.'
 summary: >-
   Bind live queries to React component state with useLiveQuery, change their parameters and handle errors, or sync a broader live query into a TanStack DB collection and derive instant, local queries from it.
 enableTableOfContents: true
-updatedOn: '2026-11-05T01:10:58.303Z'
+updatedOn: '2026-11-18T00:59:49.148Z'
 ---
 
 Build reactive apps and agents using higher-level reactivity primitives that manage live query [subscriptions](./subscribing) for you.
@@ -19,7 +19,7 @@ This page continues the [running example](https://github.com/neondatabase/exampl
 
 ## React
 
-The `@neon/realtime-react` binding exports a [`RealtimeProvider`](../sdks/typescript#react-realtimeprovider), a [`useLiveQuery()` hook](../sdks/typescript#react-uselivequery) and a [`useRealtimeClient()` hook](../sdks/typescript#react-userealtimeclient) that returns the provider's client. It works with React 18 and 19.
+The `@neon/realtime-react` binding exports a [`RealtimeProvider`](../sdks/typescript/react#react-realtimeprovider), a [`useLiveQuery()` hook](../sdks/typescript/react#react-uselivequery) and a [`useRealtimeClient()` hook](../sdks/typescript/react#react-userealtimeclient) that returns the provider's client. It works with React 18 and 19.
 
 Install it alongside the client SDK:
 
@@ -29,7 +29,7 @@ npm install @neon/realtime-react
 
 ### RealtimeProvider
 
-Wrap your app in `<RealtimeProvider>`. This allows all of your `useLiveQuery()` subscriptions to use the same [`RealtimeClient`](../sdks/typescript#client-realtimeclient) and WebSocket connection.
+Wrap your app in `<RealtimeProvider>`. This allows all of your `useLiveQuery()` subscriptions to use the same [`RealtimeClient`](../sdks/typescript/client#client-realtimeclient) and WebSocket connection.
 
 ```tsx filename="frontend/main.tsx"
 import { StrictMode } from "react"
@@ -51,7 +51,7 @@ createRoot(document.getElementById("root")!).render(
 
 ### useLiveQuery
 
-[`useLiveQuery()`](../sdks/typescript#react-uselivequery) takes a `sealedQuery` and a `refreshQuery` (and, optionally, [`initialData` from SSR](./ssr)) and returns the query's current rows and state.
+[`useLiveQuery()`](../sdks/typescript/react#react-uselivequery) takes a `sealedQuery` and a `refreshQuery` (and, optionally, [`initialData` from SSR](./ssr)) and returns the query's current rows and state.
 
 For example, here we define a `Messages` component with `useLiveQuery`:
 
@@ -133,11 +133,11 @@ The hook also accepts an optional `initialData` parameter, for example from a se
 
 #### utils
 
-The `utils` in the return value give you access to the hook's underlying [materialized subscription](../sdks/typescript#react-uselivequeryutils).
+The `utils` in the return value give you access to the hook's underlying [materialized subscription](../sdks/typescript/react#react-uselivequeryutils).
 
 This provides `getSnapshot()`, `getState()`, `awaitRows()`, the `onChange`, `onUpdate` and `onStateChange` listeners, `renew()` and `awaitTxId()`. It's stable for the life of the subscription, so register listeners in an effect and return the remover, as the `onUpdate` listener does.
 
-Note that a `changes` update has already been applied by the time its listener runs, and it [carries the txids](../sdks/typescript#client-livequerybatchinfo) of the transactions in it, which the [mutations guide](./mutations#how-optimistic-mutations-work) uses to confirm optimistic writes.
+Note that a `changes` update has already been applied by the time its listener runs, and it [carries the txids](../sdks/typescript/client#client-livequerybatchinfo) of the transactions in it, which the [mutations guide](./mutations#how-optimistic-mutations-work) uses to confirm optimistic writes.
 
 `utils` omits `unsubscribe()`, because React owns cleanup. The hook unsubscribes when the component unmounts or its sealed query changes. `getState()` and the listeners report the state of the underlying subscription, so they can differ from the hook's `status`.
 
@@ -294,7 +294,7 @@ export function createMessagesCollection(sealedQuery: SealedLiveQuery<Message>) 
 export type MessagesCollection = ReturnType<typeof createMessagesCollection>
 ```
 
-`getKey` returns each message's primary key. TanStack&nbsp;DB keys rows by it, so use a stable, unique column, never a subscription's `rowId`. `refreshQuery` renews the sealed query the same way [the React hook does](#refreshquery). While renewals fail, the collection stays `ready` with its last rows. See the [`realtimeCollectionOptions()` reference](../sdks/typescript#tanstack-db-realtimecollectionoptions) for the rest of the options.
+`getKey` returns each message's primary key. TanStack&nbsp;DB keys rows by it, so use a stable, unique column, never a subscription's `rowId`. `refreshQuery` renews the sealed query the same way [the React hook does](#refreshquery). While renewals fail, the collection stays `ready` with its last rows. See the [`realtimeCollectionOptions()` reference](../sdks/typescript/tanstack-db#tanstack-db-realtimecollectionoptions) for the rest of the options.
 
 The collection starts syncing as soon as a live query using it is mounted. It's in the `loading` state until the first result arrives, and `ready` from then on, with each committed transaction applied atomically. A `ready` collection stays ready while the subscription is `connecting` or `stale`, so there's no separate recovery flag to render. If the subscription ends in `error`, so does the collection.
 
@@ -388,7 +388,7 @@ For writes through the collection, with optimistic state, see the [mutations gui
 
 Bindings for other frameworks are coming. Until then, you can use the current implementations as a reference to write your own.
 
-The React binding is a thin layer over the client subscription: `useSyncExternalStore` plus the [`QueryRefreshController`](../sdks/typescript#client-queryrefreshcontroller). Point a coding agent at [its source](https://github.com/neondatabase/neon-pkgs/tree/main/packages/realtime-react) and it can reproduce the binding for other frameworks, such as Solid, Svelte or Vue.
+The React binding is a thin layer over the client subscription: `useSyncExternalStore` plus the [`QueryRefreshController`](../sdks/typescript/client#client-queryrefreshcontroller). Point a coding agent at [its source](https://github.com/neondatabase/neon-pkgs/tree/main/packages/realtime-react) and it can reproduce the binding for other frameworks, such as Solid, Svelte or Vue.
 
 You can also see the [source code for the TanStack DB collection here](https://github.com/neondatabase/neon-pkgs/blob/main/packages/realtime-tanstack/src/collection-options.ts).
 

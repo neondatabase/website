@@ -3,13 +3,23 @@ import { resolve } from 'node:path';
 
 import { beforeAll, describe, expect, it } from 'vitest';
 
+import sharedMdxComponents from '../content/docs/shared-content/index.js';
 import {
+  addNavigationContext,
+  buildNavigationMap,
+  processFile,
+} from '../src/scripts/process-md-for-llms.js';
+
+import {
+  MODULE_PAGE_BASE,
   REPO_ROOT,
   buildSymbolIndex,
   declarationSignature,
   declaredAnchorIds,
   generatePages,
   kindLabel,
+  moduleSlug,
+  readManifest,
   renderModulePartial,
   renderType,
   slugify,
@@ -249,6 +259,89 @@ describe('anchor ids', () => {
       expect(contents, modulePath).toContain('**Import specifier** `');
       expect(contents, modulePath).not.toContain('## Import specifier');
       expect(contents, modulePath).not.toContain('### Import specifier');
+    }
+  });
+});
+
+// ---------------------------------------------------------------------------
+// Module pages
+// ---------------------------------------------------------------------------
+
+// OpenCode cuts a fetched page at 50 KiB or 2,000 lines (MAX_BYTES and MAX_LINES in its
+// tool-output.ts), and an agent that gets a truncated reference falls back to reading
+// .d.ts files. Every page in the SDK reference has to arrive whole.
+const AGENT_FETCH_MAX_BYTES = 50 * 1024;
+const AGENT_FETCH_MAX_LINES = 2000;
+
+const MODULES = readManifest().modules;
+const MODULE_SLUGS = MODULES.map((module) => moduleSlug(module.name));
+const SDK_PAGES = [
+  { contentPath: `${MODULE_PAGE_BASE.slice(1)}.md` },
+  ...MODULES.map(({ name, importSpecifier }) => ({
+    contentPath: `${MODULE_PAGE_BASE.slice(1)}/${moduleSlug(name)}.md`,
+    importSpecifier,
+  })),
+];
+
+describe('module pages', () => {
+  it('gives every module a page that includes its partial', () => {
+    for (const slug of MODULE_SLUGS) {
+      const entry = Object.entries(sharedMdxComponents).find(
+        ([, partial]) => partial === `shared-content/realtime-sdk-${slug}`
+      );
+      expect(entry, `${slug} has no shared-content component`).toBeDefined();
+      const [component] = entry;
+      const page = readFileSync(
+        resolve(REPO_ROOT, `content${MODULE_PAGE_BASE}/${slug}.md`),
+        'utf8'
+      );
+      expect(page, slug).toContain(`<${component} />`);
+    }
+  });
+
+  it('links every generated symbol to the module page that declares its anchor', async () => {
+    const pages = await generatePages();
+    const idsBySlug = new Map(
+      pages.map((page) => [
+        page.path.replace(/^.*\/realtime-sdk-/, '').replace(/\.md$/, ''),
+        new Set(declaredAnchorIds(page.contents)),
+      ])
+    );
+    let crossPageLinks = 0;
+    for (const page of pages) {
+      expect(page.contents, page.path).not.toContain(`](${MODULE_PAGE_BASE}#`);
+      for (const [, slug, id] of page.contents.matchAll(
+        new RegExp(`\\]\\(${MODULE_PAGE_BASE}/([a-z-]+)#([^)]+)\\)`, 'g')
+      )) {
+        crossPageLinks += 1;
+        expect(idsBySlug.get(slug)?.has(id), `${page.path}: ${slug}#${id}`).toBe(true);
+      }
+    }
+    expect(crossPageLinks).toBeGreaterThan(0);
+  });
+
+  it('serves every SDK reference page, with its partial, within an agent fetch budget', async () => {
+    const navigationMap = buildNavigationMap(REPO_ROOT);
+    for (const { contentPath, importSpecifier } of SDK_PAGES) {
+      const { content } = await processFile(
+        resolve(REPO_ROOT, 'content', contentPath),
+        `https://neon.com/${contentPath.replace(/\.md$/, '')}`,
+        REPO_ROOT
+      );
+      const served = addNavigationContext(content, contentPath, navigationMap);
+      // The converter drops a shared-content component it doesn't know with only a
+      // warning, which would leave a small page that passes the budget.
+      if (importSpecifier) {
+        expect(served, `${contentPath} partial`).toContain(
+          `**Import specifier** \`${importSpecifier}\``
+        );
+      }
+      expect(Buffer.byteLength(served), `${contentPath} bytes`).toBeLessThanOrEqual(
+        AGENT_FETCH_MAX_BYTES
+      );
+      expect(served.split('\n').length, `${contentPath} lines`).toBeLessThanOrEqual(
+        AGENT_FETCH_MAX_LINES
+      );
     }
   });
 });
