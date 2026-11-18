@@ -89,9 +89,8 @@ const AgentSurfaces = ({ agents, windowStart, windowEnd }) => (
         ))}
       </ul>
       <p className="mt-6 max-w-[672px] text-sm leading-normal tracking-extra-tight text-gray-new-50">
-        Accounts that ran the Neon CLI from a coding agent or called MCP tools from it. Only recent
-        CLI versions report the agent, so CLI shares are a floor. ChatGPT and Claude Desktop have no
-        CLI.
+        Accounts that ran the Neon CLI from a coding agent or called MCP tools from it. ChatGPT and
+        Claude Desktop have no CLI.
       </p>
     </Container>
   </section>
