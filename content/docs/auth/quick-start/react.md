@@ -8,7 +8,7 @@ summary: >-
   own auth UI rather than dropping in ready-made components. Registered users are
   automatically synced to the `neon_auth.user` table in your database.
 enableTableOfContents: true
-updatedOn: '2026-10-09T10:21:18.858Z'
+updatedOn: '2026-11-18T13:16:42.597Z'
 layout: wide
 redirectFrom:
   - /docs/auth/quick-start/react-router-components
@@ -142,12 +142,14 @@ export default function App() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const result = isSignUp
-      ? await authClient.signUp.email({ name: email.split('@')[0] || 'User', email, password })
-      : await authClient.signIn.email({ email, password });
-
-    if (result.error) {
-      alert(result.error.message);
+    try {
+      if (isSignUp) {
+        await authClient.signUp.email({ name: email.split('@')[0] || 'User', email, password });
+      } else {
+        await authClient.signIn.email({ email, password });
+      }
+    } catch (error) {
+      alert(error.message);
       return;
     }
 

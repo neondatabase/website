@@ -9,7 +9,7 @@ summary: >-
   reference when you need custom sign-up and sign-in forms. Requires Next.js
   App Router.
 enableTableOfContents: true
-updatedOn: '2026-11-06T11:14:41.532Z'
+updatedOn: '2026-11-18T13:16:41.722Z'
 layout: wide
 redirectFrom:
   - /docs/auth/quick-start/nextjs
@@ -482,6 +482,34 @@ Both `authClient` and `auth` expose similar API methods. Use `authClient` for cl
 - `authClient.updateUser()` / `auth.updateUser()` - Update user details
 
 The `auth` instance also includes `.handler()` for API routes and `.middleware()` for route protection.
+
+### Handling errors
+
+The two clients report a failed request differently:
+
+- `auth` methods return `{ data, error }`. A failed request sets `error`, as in the server actions above.
+- `authClient` methods throw when the request fails, and resolve with the result in `data` when it succeeds. Wrap them in `try`/`catch` and narrow the error with `isAuthError`.
+
+On both, `error.code` is a normalized code such as `invalid_credentials`. Match on it. On a thrown error, `error.error` holds the raw Better Auth response and HTTP status, whose `code` uses Better Auth's own names (`INVALID_EMAIL_OR_PASSWORD`).
+
+This helper signs in from a client component and returns a message to show on a wrong email or password:
+
+```typescript filename="lib/auth/sign-in.ts"
+import { isAuthError } from '@neon/auth/next';
+import { authClient } from '@/lib/auth/client';
+
+export async function signIn(email: string, password: string) {
+  try {
+    await authClient.signIn.email({ email, password });
+    return null;
+  } catch (error) {
+    if (isAuthError(error) && error.code === 'invalid_credentials') {
+      return 'Wrong email or password.';
+    }
+    throw error;
+  }
+}
+```
 
 ## Next steps
 

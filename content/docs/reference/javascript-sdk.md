@@ -15,7 +15,7 @@ enableTableOfContents: true
 layout: wide
 redirectFrom:
   - /docs/auth/reference/javascript-sdk
-updatedOn: '2026-08-31T17:42:21.786Z'
+updatedOn: '2026-11-18T13:16:43.503Z'
 ---
 
 This page documents `@neon/neon-js`, which combines Managed Better Auth and the Data API in a single client. Neon also publishes standalone packages:
@@ -30,6 +30,8 @@ Authentication is provided through an adapter-based architecture, letting you wo
 - **SupabaseAuthAdapter**: Supabase-compatible API for easy migration, built into `createClient` from `@neon/neon-js/supabase`. See the [migration guide](/docs/auth/migrate/from-supabase).
 
 Database query methods (`client.from()`, `.select()`, etc.) work the same regardless of which adapter you use.
+
+With the Better Auth adapters, an auth method resolves with the result in `data` when the request succeeds and throws when it fails, so the auth examples on this page use `try`/`catch`. Narrow the error with `isAuthError`; its `code` is a normalized code such as `invalid_credentials`. The SupabaseAuthAdapter returns `{ data, error }` instead, and database query methods return `{ data, error }` with every adapter.
 
 <TwoColumnLayout>
 
@@ -149,16 +151,15 @@ const client = createClient({
 <TwoColumnLayout.Block>
 
 ```typescript
-const result = await client.auth.signUp.email({
-  email: 'user@example.com',
-  password: 'password123',
-  name: 'John Doe'
-})
-
-if (result.error) {
-console.error('Sign up error:', result.error.message)
-} else {
-console.log('User created:', result.data.user)
+try {
+  const { data } = await client.auth.signUp.email({
+    email: 'user@example.com',
+    password: 'password123',
+    name: 'John Doe'
+  })
+  console.log('User created:', data?.user)
+} catch (error) {
+  console.error('Sign up error:', error)
 }
 
 ```
@@ -191,15 +192,20 @@ console.log('User created:', result.data.user)
 <TwoColumnLayout.Block>
 
 ```typescript
-const result = await client.auth.signIn.email({
-  email: 'user@example.com',
-  password: 'password123'
-})
+import { isAuthError } from '@neon/neon-js/auth'
 
-if (result.error) {
-console.error('Sign in error:', result.error.message)
-} else {
-console.log('Signed in:', result.data.user.email)
+try {
+  const { data } = await client.auth.signIn.email({
+    email: 'user@example.com',
+    password: 'password123'
+  })
+  console.log('Signed in:', data?.user.email)
+} catch (error) {
+  if (isAuthError(error) && error.code === 'invalid_credentials') {
+    console.error('Wrong email or password')
+  } else {
+    throw error
+  }
 }
 
 ```
@@ -269,10 +275,10 @@ await client.auth.signIn.social({
 <TwoColumnLayout.Block>
 
 ```typescript
-const { error } = await client.auth.signOut()
-
-if (error) {
-console.error('Sign out error:', error.message)
+try {
+  await client.auth.signOut()
+} catch (error) {
+  console.error('Sign out error:', error)
 }
 
 ```
@@ -291,7 +297,7 @@ console.error('Sign out error:', error.message)
 <TwoColumnLayout.Block>
 
 ```typescript
-const { data, error } = await client.auth.getSession()
+const { data } = await client.auth.getSession()
 
 if (data.session) {
 console.log('User is logged in:', data.user.email)
@@ -325,7 +331,7 @@ Note: Password updates require password reset flow for security.
 <TwoColumnLayout.Block>
 
 ```typescript
-const { data, error } = await client.auth.updateUser({
+const { data } = await client.auth.updateUser({
   name: 'New Name'
 })
 ```
@@ -355,13 +361,13 @@ The user must then call `signIn.emailOtp()` with the received code.
 <TwoColumnLayout.Block>
 
 ```typescript
-const { error } = await client.auth.emailOtp.sendVerificationOtp({
-  email: 'user@example.com',
-  type: 'sign-in'
-})
-
-if (error) {
-console.error('Failed to send OTP:', error.message)
+try {
+  await client.auth.emailOtp.sendVerificationOtp({
+    email: 'user@example.com',
+    type: 'sign-in'
+  })
+} catch (error) {
+  console.error('Failed to send OTP:', error)
 }
 
 ```
@@ -391,15 +397,14 @@ First call `emailOtp.sendVerificationOtp()` to send the code.
 <TwoColumnLayout.Block>
 
 ```typescript
-const { data, error } = await client.auth.signIn.emailOtp({
-  email: 'user@example.com',
-  otp: '123456'
-})
-
-if (error) {
-console.error('OTP verification failed:', error.message)
-} else {
-console.log('Signed in:', data.user.email)
+try {
+  const { data } = await client.auth.signIn.emailOtp({
+    email: 'user@example.com',
+    otp: '123456'
+  })
+  console.log('Signed in:', data?.user.email)
+} catch (error) {
+  console.error('OTP verification failed:', error)
 }
 
 ```
@@ -429,15 +434,14 @@ This is typically used after `signUp.email()` when email verification is require
 <TwoColumnLayout.Block>
 
 ```typescript
-const { data, error } = await client.auth.emailOtp.verifyEmail({
-  email: 'user@example.com',
-  otp: '123456'
-})
-
-if (error) {
-console.error('Email verification failed:', error.message)
-} else {
-console.log('Email verified successfully')
+try {
+  await client.auth.emailOtp.verifyEmail({
+    email: 'user@example.com',
+    otp: '123456'
+  })
+  console.log('Email verified successfully')
+} catch (error) {
+  console.error('Email verification failed:', error)
 }
 
 ```
@@ -468,14 +472,15 @@ Useful for password reset flows where you need to verify the code before allowin
 <TwoColumnLayout.Block>
 
 ```typescript
-const { data, error } = await client.auth.emailOtp.checkVerificationOtp({
-  email: 'user@example.com',
-  otp: '123456',
-  type: 'forget-password'
-})
-
-if (error || !data.success) {
-console.error('Invalid OTP code')
+try {
+  await client.auth.emailOtp.checkVerificationOtp({
+    email: 'user@example.com',
+    otp: '123456',
+    type: 'forget-password'
+  })
+  console.log('OTP code is valid')
+} catch (error) {
+  console.error('Invalid OTP code:', error)
 }
 
 ```
@@ -504,13 +509,13 @@ Sends a verification email to the user. Used for email verification after signup
 <TwoColumnLayout.Block>
 
 ```typescript
-const { error } = await client.auth.sendVerificationEmail({
-  email: 'user@example.com',
-  callbackURL: 'https://yourapp.com/verify-email'
-})
-
-if (error) {
-console.error('Failed to send verification email:', error.message)
+try {
+  await client.auth.sendVerificationEmail({
+    email: 'user@example.com',
+    callbackURL: 'https://yourapp.com/verify-email'
+  })
+} catch (error) {
+  console.error('Failed to send verification email:', error)
 }
 
 ```
@@ -539,15 +544,15 @@ Used for email change verification.
 <TwoColumnLayout.Block>
 
 ```typescript
-const { data, error } = await client.auth.verifyEmail({
-  query: {
-    token: 'verification-token-from-email',
-    callbackURL: 'https://yourapp.com/email-verified'
-  }
-})
-
-if (error) {
-console.error('Email verification failed:', error.message)
+try {
+  await client.auth.verifyEmail({
+    query: {
+      token: 'verification-token-from-email',
+      callbackURL: 'https://yourapp.com/email-verified'
+    }
+  })
+} catch (error) {
+  console.error('Email verification failed:', error)
 }
 
 ```
@@ -576,13 +581,13 @@ Sends a password reset email to the user. The email contains a link to reset the
 <TwoColumnLayout.Block>
 
 ```typescript
-const { error } = await client.auth.requestPasswordReset({
-  email: 'user@example.com',
-  redirectTo: 'https://yourapp.com/reset-password'
-})
-
-if (error) {
-console.error('Failed to send password reset email:', error.message)
+try {
+  await client.auth.requestPasswordReset({
+    email: 'user@example.com',
+    redirectTo: 'https://yourapp.com/reset-password'
+  })
+} catch (error) {
+  console.error('Failed to send password reset email:', error)
 }
 
 ```
