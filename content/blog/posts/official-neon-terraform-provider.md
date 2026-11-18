@@ -18,7 +18,7 @@ authors:
   - dmitry-kisler
   - justin-frye
 cover:
-  image: 'https://cdn.neonapi.io/public/images/pages/blog/official-neon-terraform-provider/cover.png'
+  image: 'https://cdn.neonapi.io/public/images/pages/blog/official-neon-terraform-provider/cover-v1.jpg'
   alt: Neon logo above the headline "The Neon Terraform provider is now official" on a dark dotted background.
 isFeatured: false
 seo:
@@ -32,7 +32,7 @@ seo:
   ogDescription: >-
     neondatabase/neon is the official Terraform provider for Neon. It started as the community provider
     kislerdm/neon and now supports ephemeral credentials, Functions, Object Storage, Neon Auth and Realtime.
-  image: 'https://cdn.neonapi.io/public/images/pages/blog/official-neon-terraform-provider/social.png'
+  image: 'https://cdn.neonapi.io/public/images/pages/blog/official-neon-terraform-provider/social-v1.jpg'
 ---
 
 Infrastructure as code (IaC) has always been a great idea that was a bit cumbersome in practice. Resources drifted, state broke and someone had to clean it up by hand. With agents, that changes, because your agent reads the plan, fixes the config and runs the apply for you. We made that case when we [introduced neon.ts](https://neon.com/blog/introducing-neon-ts), our infrastructure-as-code file for Neon projects.
