@@ -27,7 +27,14 @@ pnpm add -g neon@latest    # pnpm
 
 For full CLI installation options, see https://neon.com/docs/cli/install.md
 
-Immediately after the CLI is installed, launch the sign-in flow by running `neon login` (`neon auth` is an alias) and have the user finish signing in via the browser to ensure the CLI is authenticated.
+Then check whether the CLI is already authenticated:
+
+```bash
+neon me
+```
+
+- If it prints the account, or fails with `not allowed for organization API keys` (the credential is an organization- or project-scoped API key), the CLI is authenticated. Skip sign-in.
+- Otherwise, launch the sign-in flow by running `neon login` (`neon auth` is an alias) and have the user finish signing in via the browser to ensure the CLI is authenticated.
 
 ---
 
@@ -98,6 +105,8 @@ Then run the following command in the root directory of the user's source-code r
 ```bash
 neon init -y --agent <agent-name> --region-id <region-id> --project-name <project-name>
 ```
+
+A project-scoped API key can't create projects. If `neon init` fails with `your API key doesn't have access to it`, run `neon login`, have the user finish signing in via the browser, and run the same `neon init` command again with `NEON_API_KEY` unset.
 
 The supported agents are antigravity, cline, cline-cli, claude-code, claude-desktop, codex, cursor, gemini-cli, goose, github-copilot-cli, grok-build, opencode, vscode, windsurf, and zed. A few also accept aliases (claude for claude-code, copilot for vscode, gemini for gemini-cli). Passing an unknown agent stops the command and prints the current supported list.
 
