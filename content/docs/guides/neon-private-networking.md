@@ -11,7 +11,7 @@ summary: >-
 enableTableOfContents: true
 redirectFrom:
   - /docs/guides/neon-private-access
-updatedOn: '2026-11-18T20:45:13.734Z'
+updatedOn: '2026-11-18T21:17:18.064Z'
 ---
 
 <Admonition type="info" title="Private Networking availability">
@@ -62,9 +62,11 @@ To configure Neon Private Networking, perform the following steps:
 
     1. Under **Service settings**, specify the **Service name**. Service names vary by region. Select your region below and copy one service name. You repeat these steps for each remaining name later.
 
-       <CodeTabs labels={["us-east-1", "us-east-2", "eu-central-1", "eu-west-2", "us-west-2", "ap-southeast-1", "ap-southeast-2", "sa-east-1"]}>
+       <Tabs labels={["US", "Europe", "Asia Pacific", "South America"]}>
 
-       ```text
+       <TabItem>
+
+       ```text filename="us-east-1"
        com.amazonaws.vpce.us-east-1.vpce-svc-01aeec2f4b558bc22
        com.amazonaws.vpce.us-east-1.vpce-svc-01b3c73657ed9bd29
        com.amazonaws.vpce.us-east-1.vpce-svc-02a0abd91f32f1ed7
@@ -83,7 +85,7 @@ To configure Neon Private Networking, perform the following steps:
        com.amazonaws.vpce.us-east-1.vpce-svc-0f37140e9710ee3af
        ```
 
-       ```text
+       ```text filename="us-east-2"
        com.amazonaws.vpce.us-east-2.vpce-svc-0056bdfba63cc6ea1
        com.amazonaws.vpce.us-east-2.vpce-svc-010736480bcef5824
        com.amazonaws.vpce.us-east-2.vpce-svc-0125f603817b3d7f7
@@ -95,7 +97,19 @@ To configure Neon Private Networking, perform the following steps:
        com.amazonaws.vpce.us-east-2.vpce-svc-0fcb5fccfc8573aa3
        ```
 
-       ```text
+       ```text filename="us-west-2"
+       com.amazonaws.vpce.us-west-2.vpce-svc-045eebdf710e1066d
+       com.amazonaws.vpce.us-west-2.vpce-svc-060e0d5f582365b8e
+       com.amazonaws.vpce.us-west-2.vpce-svc-07b750990c172f22f
+       com.amazonaws.vpce.us-west-2.vpce-svc-0a7b662960507808f
+       com.amazonaws.vpce.us-west-2.vpce-svc-0ed672a4d41b5e687
+       ```
+
+       </TabItem>
+
+       <TabItem>
+
+       ```text filename="eu-central-1"
        com.amazonaws.vpce.eu-central-1.vpce-svc-0165f3a480927c9a0
        com.amazonaws.vpce.eu-central-1.vpce-svc-0260f9dcc9bf59e3e
        com.amazonaws.vpce.eu-central-1.vpce-svc-04bac3120b20929cd
@@ -108,21 +122,17 @@ To configure Neon Private Networking, perform the following steps:
        com.amazonaws.vpce.eu-central-1.vpce-svc-0fef417ecf84ed325
        ```
 
-       ```text
+       ```text filename="eu-west-2"
        com.amazonaws.vpce.eu-west-2.vpce-svc-028d190998ab34913
        com.amazonaws.vpce.eu-west-2.vpce-svc-0375428488d22c05b
        com.amazonaws.vpce.eu-west-2.vpce-svc-0c6fedbe99fced2cd
        ```
 
-       ```text
-       com.amazonaws.vpce.us-west-2.vpce-svc-045eebdf710e1066d
-       com.amazonaws.vpce.us-west-2.vpce-svc-060e0d5f582365b8e
-       com.amazonaws.vpce.us-west-2.vpce-svc-07b750990c172f22f
-       com.amazonaws.vpce.us-west-2.vpce-svc-0a7b662960507808f
-       com.amazonaws.vpce.us-west-2.vpce-svc-0ed672a4d41b5e687
-       ```
+       </TabItem>
 
-       ```text
+       <TabItem>
+
+       ```text filename="ap-southeast-1"
        com.amazonaws.vpce.ap-southeast-1.vpce-svc-00eb29496a51d8bee
        com.amazonaws.vpce.ap-southeast-1.vpce-svc-01c64edf7fe936ac7
        com.amazonaws.vpce.ap-southeast-1.vpce-svc-028cc7060eb23ff43
@@ -130,17 +140,23 @@ To configure Neon Private Networking, perform the following steps:
        com.amazonaws.vpce.ap-southeast-1.vpce-svc-0d858726de58b2185
        ```
 
-       ```text
+       ```text filename="ap-southeast-2"
        com.amazonaws.vpce.ap-southeast-2.vpce-svc-031161490f5647f32
        com.amazonaws.vpce.ap-southeast-2.vpce-svc-07d11c1bc6234e6e4
        ```
 
-       ```text
+       </TabItem>
+
+       <TabItem>
+
+       ```text filename="sa-east-1"
        com.amazonaws.vpce.sa-east-1.vpce-svc-03cf6c871b7ae95e8
        com.amazonaws.vpce.sa-east-1.vpce-svc-061204a851dbd1a47
        ```
 
-       </CodeTabs>
+       </TabItem>
+
+       </Tabs>
 
        If your region has more than a few service names, consider scripting endpoint creation with the AWS CLI, Terraform, or CloudFormation instead of repeating these steps in the AWS console. To get the current service names for a region, use the Neon API [List VPC endpoint service names for a region](/docs/reference/api/regions/get-region-vpc-endpoint-services) endpoint with the Neon region ID, such as `aws-us-east-1`:
 
