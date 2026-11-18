@@ -102,7 +102,7 @@ resource "aws_ssm_parameter" "database_url" {
 }
 ```
 
-Ephemeral resources need Terraform 1.10 or later. The rest of the provider works with Terraform 1.5 and up.
+Ephemeral resources need Terraform 1.10 or OpenTofu 1.11 or later. The rest of the provider works with Terraform 1.5 and up.
 
 The provider also caught up with the Neon platform. Since 0.18 we added resources for:
 
