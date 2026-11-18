@@ -10,11 +10,12 @@ summary: >-
   authenticate via API key (`--api-key` or `NEON_API_KEY`) instead. The CLI
   resolves authentication in priority order: `--api-key` flag, then
   `NEON_API_KEY` env var, then the credentials file, then triggers browser
-  login if none are found. When stdin is not a terminal and `CI` is not set
-  (coding agents, local scripts), commands other than `neon login` fail with a
+  login if none are found. When no terminal is attached (stdin, stdout, and
+  stderr are all piped or redirected) and `CI` is not set, as in a coding
+  agent's shell or a script, commands other than `neon login` fail with a
   sign-in hint instead of starting the browser login.
 enableTableOfContents: true
-updatedOn: '2026-11-17T22:44:10.134Z'
+updatedOn: '2026-11-18T02:36:19.467Z'
 redirectFrom:
   - /docs/reference/cli-auth
   - /docs/cli/auth
@@ -45,7 +46,7 @@ The Neon CLI resolves authentication in this order:
 - The `--api-key` option, if provided.
 - The `NEON_API_KEY` environment variable, if set.
 - The `credentials.json` file created by `neon login`.
-- If none are found, the CLI starts the `neon login` web authentication flow. When stdin is piped, redirected, or otherwise not a terminal and `CI` is not set, as in a coding agent's shell or a local script, it exits with an error that names `neon login` and the API key options instead, and `neon login` itself still starts the web flow there. When `CI` is set, it exits with `Cannot run interactive auth in CI`. `neon me` reports that you're signed out.
+- If none are found, the CLI starts the `neon login` web authentication flow. When no terminal is attached (stdin, stdout, and stderr are all piped or redirected) and `CI` is not set, as in a coding agent's shell or a script, it exits with an error that names `neon login` and the API key options instead, and `neon login` itself still starts the web flow there. When `CI` is set, it exits with `Cannot run interactive auth in CI`. `neon me` reports that you're signed out.
 
 </Admonition>
 
