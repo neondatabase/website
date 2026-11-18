@@ -121,10 +121,19 @@ export function buildSymbolIndex(artifact) {
 
 export const MODULE_PAGE_BASE = '/docs/realtime/sdks/typescript';
 
+// Modules whose partial is included by another module's page. Both Drizzle entry
+// points are short, so they share content/docs/realtime/sdks/typescript/drizzle.md.
+const MODULE_PAGE_OVERRIDES = { 'drizzle-client': 'drizzle' };
+
+/** Slug of the hand-written page that includes a module's partial. */
+export function modulePageSlug(slug) {
+  return MODULE_PAGE_OVERRIDES[slug] ?? slug;
+}
+
 export function symbolHref(entry) {
   // Each module's partial is included by the hand-written page at
-  // content/docs/realtime/sdks/typescript/<module-slug>.md.
-  return `${MODULE_PAGE_BASE}/${entry.slug}#${entry.anchorId}`;
+  // content/docs/realtime/sdks/typescript/<page-slug>.md.
+  return `${MODULE_PAGE_BASE}/${modulePageSlug(entry.slug)}#${entry.anchorId}`;
 }
 
 // ---------------------------------------------------------------------------

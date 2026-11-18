@@ -18,6 +18,7 @@ import {
   declaredAnchorIds,
   generatePages,
   kindLabel,
+  modulePageSlug,
   moduleSlug,
   readManifest,
   renderModulePartial,
@@ -275,11 +276,17 @@ const AGENT_FETCH_MAX_LINES = 2000;
 
 const MODULES = readManifest().modules;
 const MODULE_SLUGS = MODULES.map((module) => moduleSlug(module.name));
+// A page can include more than one module's partial (Drizzle and Drizzle client share one).
+const importSpecifiersByPage = new Map();
+for (const { name, importSpecifier } of MODULES) {
+  const page = modulePageSlug(moduleSlug(name));
+  importSpecifiersByPage.set(page, [...(importSpecifiersByPage.get(page) ?? []), importSpecifier]);
+}
 const SDK_PAGES = [
-  { contentPath: `${MODULE_PAGE_BASE.slice(1)}.md` },
-  ...MODULES.map(({ name, importSpecifier }) => ({
-    contentPath: `${MODULE_PAGE_BASE.slice(1)}/${moduleSlug(name)}.md`,
-    importSpecifier,
+  { contentPath: `${MODULE_PAGE_BASE.slice(1)}.md`, importSpecifiers: [] },
+  ...[...importSpecifiersByPage].map(([page, importSpecifiers]) => ({
+    contentPath: `${MODULE_PAGE_BASE.slice(1)}/${page}.md`,
+    importSpecifiers,
   })),
 ];
 
@@ -292,7 +299,7 @@ describe('module pages', () => {
       expect(entry, `${slug} has no shared-content component`).toBeDefined();
       const [component] = entry;
       const page = readFileSync(
-        resolve(REPO_ROOT, `content${MODULE_PAGE_BASE}/${slug}.md`),
+        resolve(REPO_ROOT, `content${MODULE_PAGE_BASE}/${modulePageSlug(slug)}.md`),
         'utf8'
       );
       expect(page, slug).toContain(`<${component} />`);
@@ -301,12 +308,16 @@ describe('module pages', () => {
 
   it('links every generated symbol to the module page that declares its anchor', async () => {
     const pages = await generatePages();
-    const idsBySlug = new Map(
-      pages.map((page) => [
-        page.path.replace(/^.*\/realtime-sdk-/, '').replace(/\.md$/, ''),
-        new Set(declaredAnchorIds(page.contents)),
-      ])
-    );
+    // Anchor ids declared on each module page, across every partial it includes.
+    const idsByPage = new Map();
+    for (const page of pages) {
+      const slug = modulePageSlug(
+        page.path.replace(/^.*\/realtime-sdk-/, '').replace(/\.md$/, '')
+      );
+      const ids = idsByPage.get(slug) ?? new Set();
+      for (const id of declaredAnchorIds(page.contents)) ids.add(id);
+      idsByPage.set(slug, ids);
+    }
     let crossPageLinks = 0;
     for (const page of pages) {
       expect(page.contents, page.path).not.toContain(`](${MODULE_PAGE_BASE}#`);
@@ -314,7 +325,7 @@ describe('module pages', () => {
         new RegExp(`\\]\\(${MODULE_PAGE_BASE}/([a-z-]+)#([^)]+)\\)`, 'g')
       )) {
         crossPageLinks += 1;
-        expect(idsBySlug.get(slug)?.has(id), `${page.path}: ${slug}#${id}`).toBe(true);
+        expect(idsByPage.get(slug)?.has(id), `${page.path}: ${slug}#${id}`).toBe(true);
       }
     }
     expect(crossPageLinks).toBeGreaterThan(0);
@@ -322,7 +333,7 @@ describe('module pages', () => {
 
   it('serves every SDK reference page, with its partial, within an agent fetch budget', async () => {
     const navigationMap = buildNavigationMap(REPO_ROOT);
-    for (const { contentPath, importSpecifier } of SDK_PAGES) {
+    for (const { contentPath, importSpecifiers } of SDK_PAGES) {
       const { content } = await processFile(
         resolve(REPO_ROOT, 'content', contentPath),
         `https://neon.com/${contentPath.replace(/\.md$/, '')}`,
@@ -331,7 +342,7 @@ describe('module pages', () => {
       const served = addNavigationContext(content, contentPath, navigationMap);
       // The converter drops a shared-content component it doesn't know with only a
       // warning, which would leave a small page that passes the budget.
-      if (importSpecifier) {
+      for (const importSpecifier of importSpecifiers) {
         expect(served, `${contentPath} partial`).toContain(
           `**Import specifier** \`${importSpecifier}\``
         );

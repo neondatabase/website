@@ -12,7 +12,7 @@ Build pipeline for the [TypeScript SDK reference](https://neon.com/docs/realtime
 | [`content/docs/realtime/sdks/typescript.md`](../content/docs/realtime/sdks/typescript.md) | docs team     | Yes          |
 | `content/docs/realtime/sdks/typescript/<module>.md` (7)                                   | docs team     | Yes          |
 
-The partials are `backend`, `client`, `react`, `tanstack-db`, `drizzle`, `drizzle-client` and `kysely`. They have no frontmatter, banner, `h1` or `h2`. The module page with the same slug owns its frontmatter, prose and the include, so a prose edit there needs no regeneration. Generated signatures and summaries come from the SDK's TSDoc comments, so revise those upstream.
+The partials are `backend`, `client`, `react`, `tanstack-db`, `drizzle`, `drizzle-client` and `kysely`. They have no frontmatter, banner, `h1` or `h2`. The module page with the same slug owns its frontmatter, prose and the include, so a prose edit there needs no regeneration. The exception is `drizzle-client`, which the `drizzle` page includes after the `drizzle` partial (`MODULE_PAGE_OVERRIDES` in the generator), because both are short. Generated signatures and summaries come from the SDK's TSDoc comments, so revise those upstream.
 
 Agents read these pages as markdown (`<page>.md`), and some fetch tools cut a page at 50 KiB or 2,000 lines. That's why each module has its own page. The `module pages` tests fail when a served page outgrows that budget or drops its partial, or when a module has no page. They run in the unit suite, not in the pull request workflow (see [CI and tests](#ci-and-tests)).
 
@@ -64,7 +64,7 @@ All generated ids start with the module slug: `backend`, `client`, `react`, `tan
 
 The slugger lowercases names, removes punctuation other than hyphens, and replaces spaces with hyphens. For example, `MaterializedLiveQuerySubscription.onChange` gets `client-materializedlivequerysubscriptiononchange`. Exports receive ids first, then member and subsection ids are allocated from the same per-module allocator. Case collisions are resolved in export order: `realtimeCollectionOptions` has `tanstack-db-realtimecollectionoptions`, while `RealtimeCollectionOptions` has `tanstack-db-realtimecollectionoptions-2`.
 
-The symbol index and renderer share that allocation. Cross-links to exported symbols use `/docs/realtime/sdks/typescript/<module>#<allocated-id>`; links within each partial use its declared fragment ids. Moving a module page changes cross-link URLs, not the anchors.
+The symbol index and renderer share that allocation. Cross-links to exported symbols use `/docs/realtime/sdks/typescript/<page>#<allocated-id>`, where `<page>` is the module slug unless `MODULE_PAGE_OVERRIDES` maps it to another page; links within each partial use its declared fragment ids. Moving a module page changes cross-link URLs, not the anchors.
 
 ## The TypeDoc pin
 

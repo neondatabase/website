@@ -14,32 +14,40 @@ Realtime SDK 0.2.0 uses version 2 of the Realtime protocol. Upgrade `@neon/realt
   The TypeScript SDK is still evolving. The APIs are subject to change.
 </Admonition>
 
-The Realtime SDK is split into modules, one import specifier each. Each module has its own reference page with every export, its signature and its members.
+The Realtime SDK is split into modules, one import specifier each. Each section below summarizes a module and links to its API reference page, which lists every export with its signature and members.
 
 ## Backend
 
-[Backend](/docs/realtime/sdks/typescript/backend) (`@neon/realtime/server`) runs on your server. [`createRealtime()`](/docs/realtime/sdks/typescript/backend#backend-createrealtime) returns a [`RealtimeServer`](/docs/realtime/sdks/typescript/backend#backend-realtimeserver) that [seals queries](/docs/realtime/guides/queries#sealing-queries), or a [`RealtimeDirectServer`](/docs/realtime/sdks/typescript/backend#backend-realtimedirectserver) that subscribes from trusted backend code.
+`@neon/realtime/server` runs on your server. [`createRealtime()`](/docs/realtime/sdks/typescript/backend#backend-createrealtime) returns a [`RealtimeServer`](/docs/realtime/sdks/typescript/backend#backend-realtimeserver) that [seals queries](/docs/realtime/guides/queries#sealing-queries), or a [`RealtimeDirectServer`](/docs/realtime/sdks/typescript/backend#backend-realtimedirectserver) that subscribes from trusted backend code.
+
+[Backend API reference →](/docs/realtime/sdks/typescript/backend)
 
 ## Client
 
-[Client](/docs/realtime/sdks/typescript/client) (`@neon/realtime/client`) runs in the browser and React Native. [`createRealtimeClient()`](/docs/realtime/sdks/typescript/client#client-createrealtimeclient) returns a [`RealtimeClient`](/docs/realtime/sdks/typescript/client#client-realtimeclient) that subscribes to sealed queries and materializes their results.
+`@neon/realtime/client` runs in the browser and React Native. [`createRealtimeClient()`](/docs/realtime/sdks/typescript/client#client-createrealtimeclient) returns a [`RealtimeClient`](/docs/realtime/sdks/typescript/client#client-realtimeclient) that subscribes to sealed queries and materializes their results.
+
+[Client API reference →](/docs/realtime/sdks/typescript/client)
 
 ## React
 
-[React](/docs/realtime/sdks/typescript/react) (`@neon/realtime-react`) provides [`RealtimeProvider`](/docs/realtime/sdks/typescript/react#react-realtimeprovider) and the [`useLiveQuery`](/docs/realtime/sdks/typescript/react#react-uselivequery) and [`useRealtimeClient`](/docs/realtime/sdks/typescript/react#react-userealtimeclient) hooks.
+`@neon/realtime-react` provides [`RealtimeProvider`](/docs/realtime/sdks/typescript/react#react-realtimeprovider) and the [`useLiveQuery`](/docs/realtime/sdks/typescript/react#react-uselivequery) and [`useRealtimeClient`](/docs/realtime/sdks/typescript/react#react-userealtimeclient) hooks.
+
+[React API reference →](/docs/realtime/sdks/typescript/react)
 
 ## TanStack DB
 
-[TanStack DB](/docs/realtime/sdks/typescript/tanstack-db) (`@neon/realtime-tanstack`) provides [`realtimeCollectionOptions`](/docs/realtime/sdks/typescript/tanstack-db#tanstack-db-realtimecollectionoptions) to create a [TanStack DB collection](https://tanstack.com/db/latest/docs/overview#defining-collections) from a sealed query.
+`@neon/realtime-tanstack` provides [`realtimeCollectionOptions`](/docs/realtime/sdks/typescript/tanstack-db#tanstack-db-realtimecollectionoptions) to create a [TanStack DB collection](https://tanstack.com/db/latest/docs/overview#defining-collections) from a sealed query.
+
+[TanStack DB API reference →](/docs/realtime/sdks/typescript/tanstack-db)
 
 ## Drizzle
 
-[Drizzle](/docs/realtime/sdks/typescript/drizzle) (`@neon/realtime-drizzle`) provides [`drizzleAdapter()`](/docs/realtime/sdks/typescript/drizzle#drizzle-drizzleadapter), a [live query adapter](/docs/realtime/guides/queries#using-a-query-builder-or-orm) for sealing Drizzle selects on your server.
+`@neon/realtime-drizzle` provides [`drizzleAdapter()`](/docs/realtime/sdks/typescript/drizzle#drizzle-drizzleadapter), a [live query adapter](/docs/realtime/guides/queries#using-a-query-builder-or-orm) for sealing Drizzle selects on your server. In the browser, `@neon/realtime-drizzle/client` provides [`drizzleParsers`](/docs/realtime/sdks/typescript/drizzle#drizzle-client-drizzleparsers), which decode dates and timestamps the way Drizzle does.
 
-## Drizzle client
-
-[Drizzle client](/docs/realtime/sdks/typescript/drizzle-client) (`@neon/realtime-drizzle/client`) provides [`drizzleParsers`](/docs/realtime/sdks/typescript/drizzle-client#drizzle-client-drizzleparsers), which decode dates and timestamps in the browser the way Drizzle does.
+[Drizzle API reference →](/docs/realtime/sdks/typescript/drizzle)
 
 ## Kysely
 
-[Kysely](/docs/realtime/sdks/typescript/kysely) (`@neon/realtime-kysely`) provides [`kyselyAdapter()`](/docs/realtime/sdks/typescript/kysely#kysely-kyselyadapter), a [live query adapter](/docs/realtime/guides/queries#using-a-query-builder-or-orm) for sealing Kysely selects on your server.
+`@neon/realtime-kysely` provides [`kyselyAdapter()`](/docs/realtime/sdks/typescript/kysely#kysely-kyselyadapter), a [live query adapter](/docs/realtime/guides/queries#using-a-query-builder-or-orm) for sealing Kysely selects on your server.
+
+[Kysely API reference →](/docs/realtime/sdks/typescript/kysely)

@@ -230,7 +230,7 @@ Subscribe in the browser as the [subscribing guide](../guides/subscribing) shows
 
 ### Decode rows with `drizzleParsers`
 
-Spread [`drizzleParsers`](../sdks/typescript/drizzle-client#drizzle-client-drizzleparsers) into the Realtime client's parsers, so live rows decode the way Drizzle decodes the same columns:
+Spread [`drizzleParsers`](../sdks/typescript/drizzle#drizzle-client-drizzleparsers) into the Realtime client's parsers, so live rows decode the way Drizzle decodes the same columns:
 
 ```ts filename="frontend/client.ts"
 import { createRealtimeClient } from "@neon/realtime/client"

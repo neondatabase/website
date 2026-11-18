@@ -297,7 +297,7 @@ export function getRouter() {
 ```
 
 - no collection is shared between users, because each request and each page load gets its own `DbClient`, as in [create a `DbClient` per router](../guides/ssr#create-a-dbclient-per-router). Sign-in and sign-out are full page loads, which drop the browser's `DbClient` and the previous user's rows with it. See [when the session changes](../guides/ssr#when-the-session-changes)
-- [`drizzleParsers`](../sdks/typescript/drizzle-client#drizzle-client-drizzleparsers) parses live values the way Drizzle does, so live rows have the same types as the rows the server rendered. See [keep row shapes identical](../guides/ssr#keep-row-shapes-identical)
+- [`drizzleParsers`](../sdks/typescript/drizzle#drizzle-client-drizzleparsers) parses live values the way Drizzle does, so live rows have the same types as the rows the server rendered. See [keep row shapes identical](../guides/ssr#keep-row-shapes-identical)
 - `routerWithDbClient()` wraps the app in TanStack&nbsp;DB's provider, so components get this `DbClient` from `useDbClient()`. It also snapshots the collections that loaders seeded on the server into the HTML, and restores them in the browser before the first render
 - `RouterContext` puts `dbClient` on route context, where the route loader reads it
 

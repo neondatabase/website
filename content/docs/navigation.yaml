@@ -933,8 +933,6 @@
                   slug: realtime/sdks/typescript/tanstack-db
                 - title: 'Drizzle'
                   slug: realtime/sdks/typescript/drizzle
-                - title: 'Drizzle client'
-                  slug: realtime/sdks/typescript/drizzle-client
                 - title: 'Kysely'
                   slug: realtime/sdks/typescript/kysely
         - section: Reference
