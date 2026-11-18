@@ -79,6 +79,10 @@ jobs:
           api_key: ${{ secrets.NEON_API_KEY }}
 ```
 
+<Admonition type="note" title="Preview branches count toward your active compute limit">
+Each branch this workflow creates gets its own compute, and active computes on non-default branches count toward your project's [concurrently active compute limit](/docs/manage/computes#concurrently-active-compute-limit). If many pull requests run CI at the same time, computes beyond the limit stay suspended and connections to them fail with `You have exceeded the limit of concurrently active endpoints`. To stay under the limit, delete branches when pull requests close, as this workflow does, and let idle computes [scale to zero](/docs/introduction/scale-to-zero). To catch branches that a failed or skipped workflow run leaves behind, set a [branch expiration](/docs/guides/branch-expiration).
+</Admonition>
+
 ## Available actions
 
 Neon provides the following GitHub Actions for working with Neon branches. For detailed information on usage, inputs, and outputs, please refer to the official documentation for each action on the GitHub Marketplace.

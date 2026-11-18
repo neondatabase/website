@@ -187,6 +187,10 @@ To use the sample workflow, create a pull request in your GitHub application rep
 
 Closing the pull request removes the Neon branch from the Neon project, which you can also verify on the **Branches** page in the Neon Console.
 
+<Admonition type="note" title="Preview branches count toward your active compute limit">
+Each pull request branch gets its own compute, and active computes on non-default branches count toward your project's [concurrently active compute limit](/docs/manage/computes#concurrently-active-compute-limit). If many pull requests run the workflow at the same time, computes beyond the limit stay suspended and connections to them fail with `You have exceeded the limit of concurrently active endpoints`. Keep the delete step in your workflow so closed pull requests release their branches, and let idle computes [scale to zero](/docs/introduction/scale-to-zero).
+</Admonition>
+
 To view workflow results in GitHub, follow the instructions in [Viewing your workflow results](https://docs.github.com/en/actions/quickstart#viewing-your-workflow-results), in the _GitHub documentation_.
 
 ## Building your own GitHub Actions workflow
