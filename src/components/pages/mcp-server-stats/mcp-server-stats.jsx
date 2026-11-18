@@ -5,10 +5,12 @@ import LINKS from 'constants/links';
 
 import { buildAccessSplit } from './access';
 import AccessSplit from './access-split';
+import AgentSurfaces from './agent-surfaces';
 import Hero from './hero';
 import HowItWorks from './how-it-works';
 import ShareList from './share-list';
 import { buildClientShares, buildToolShares } from './share-series';
+import { buildAgentSurfaces } from './surfaces';
 import Trend from './trend';
 import { formatWeekRange } from './weeks';
 
@@ -20,10 +22,11 @@ const rowsShape = PropTypes.arrayOf(
   })
 );
 
-const McpServerStats = ({ clients, tools, access, publishedAt }) => {
+const McpServerStats = ({ clients, tools, access, surfaces, publishedAt }) => {
   const clientShares = buildClientShares(clients);
   const toolShares = buildToolShares(tools);
   const accessSplit = buildAccessSplit(access.rows);
+  const agentSurfaces = buildAgentSurfaces(surfaces.rows);
 
   return (
     <>
@@ -58,6 +61,11 @@ const McpServerStats = ({ clients, tools, access, publishedAt }) => {
         windowStart={access.windowStart}
         windowEnd={access.windowEnd}
       />
+      <AgentSurfaces
+        agents={agentSurfaces}
+        windowStart={surfaces.windowStart}
+        windowEnd={surfaces.windowEnd}
+      />
       <HowItWorks />
       <CTANew
         label="Get started"
@@ -81,6 +89,17 @@ McpServerStats.propTypes = {
       PropTypes.shape({
         dimension: PropTypes.string.isRequired,
         value: PropTypes.string.isRequired,
+        share: PropTypes.number.isRequired,
+      })
+    ).isRequired,
+  }).isRequired,
+  surfaces: PropTypes.shape({
+    windowStart: PropTypes.string.isRequired,
+    windowEnd: PropTypes.string.isRequired,
+    rows: PropTypes.arrayOf(
+      PropTypes.shape({
+        agent: PropTypes.string.isRequired,
+        surface: PropTypes.string.isRequired,
         share: PropTypes.number.isRequired,
       })
     ).isRequired,
