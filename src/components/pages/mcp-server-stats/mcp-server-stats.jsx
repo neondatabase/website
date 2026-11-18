@@ -47,6 +47,16 @@ const McpServerStats = ({ clients, tools, access, surfaces, customerSize, publis
         rows={clientShares.ranked}
         footnote="Accounts that called a tool that week. Shares add up to over 100% because people use several clients. Custom code is scripts that only report an HTTP library. Changes are against the previous week."
       />
+      <AgentSurfaces
+        agents={agentSurfaces}
+        windowStart={surfaces.windowStart}
+        windowEnd={surfaces.windowEnd}
+      />
+      <CustomerSize
+        bands={customerSizeBands}
+        windowStart={customerSize.windowStart}
+        windowEnd={customerSize.windowEnd}
+      />
       <Trend weeks={clientShares.weeks} series={clientShares.series} />
       <ShareList
         id="mcp-stats-tools-heading"
@@ -63,16 +73,6 @@ const McpServerStats = ({ clients, tools, access, surfaces, customerSize, publis
         access={accessSplit.access}
         windowStart={access.windowStart}
         windowEnd={access.windowEnd}
-      />
-      <AgentSurfaces
-        agents={agentSurfaces}
-        windowStart={surfaces.windowStart}
-        windowEnd={surfaces.windowEnd}
-      />
-      <CustomerSize
-        bands={customerSizeBands}
-        windowStart={customerSize.windowStart}
-        windowEnd={customerSize.windowEnd}
       />
       <HowItWorks />
       <CTANew
