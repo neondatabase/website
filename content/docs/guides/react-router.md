@@ -8,7 +8,7 @@ summary: >-
   serverless Postgres backend, with driver options for node-postgres,
   postgres.js, or the Neon serverless driver.
 enableTableOfContents: true
-updatedOn: '2026-10-08T19:32:04.700Z'
+updatedOn: '2026-11-18T00:59:49.148Z'
 ---
 
 [React Router](https://reactrouter.com/home) is a powerful routing library for React that also includes modern, full-stack framework features. This guide explains how to connect a React Router application to Neon using a server-side `loader` function.
@@ -197,6 +197,6 @@ PostgreSQL 18.6 (ac70818) on aarch64-unknown-linux-gnu, compiled by gcc (Ubuntu 
 ## Next steps
 
 - [Set up Managed Better Auth](/docs/auth/quick-start/react): Add managed authentication that branches with your database
-- [Realtime](/docs/realtime/sdks/typescript#react): Build realtime React apps on Neon with end-to-end reactivity and type-safety &raquo;
+- [Realtime](/docs/realtime/sdks/typescript/react): Build realtime React apps on Neon with end-to-end reactivity and type-safety &raquo;
 
 <NeedHelp/>

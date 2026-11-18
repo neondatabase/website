@@ -9,7 +9,7 @@ summary: >-
   common mistakes.
 enableTableOfContents: true
 noindex: true
-updatedOn: '2026-11-13T07:16:27.663Z'
+updatedOn: '2026-11-18T00:59:49.148Z'
 ---
 
 <FeatureBetaProps feature_name="Realtime" />
@@ -178,7 +178,7 @@ export function todosCollection(userId: string, query: SealedLiveQuery<Todo>) {
 }
 ```
 
-The adapter syncs eagerly. It has no `syncMode` option. See the [`realtimeCollectionOptions()` reference](/docs/realtime/sdks/typescript#tanstack-db-realtimecollectionoptions) for every option.
+The adapter syncs eagerly. It has no `syncMode` option. See the [`realtimeCollectionOptions()` reference](/docs/realtime/sdks/typescript/tanstack-db#tanstack-db-realtimecollectionoptions) for every option.
 
 ## Return the transaction ID from writes
 

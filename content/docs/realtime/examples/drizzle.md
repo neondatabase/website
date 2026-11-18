@@ -4,7 +4,7 @@ subtitle: 'Using Realtime with your Drizzle schema and queries.'
 summary: >-
   Use Drizzle ORM with Neon Realtime: add the Drizzle adapter, seal Drizzle selects with parameters and aliases, decode rows with drizzleParsers and return the txid from Drizzle writes.
 enableTableOfContents: true
-updatedOn: '2026-10-20T14:31:30.000Z'
+updatedOn: '2026-11-18T00:59:49.148Z'
 ---
 
 This page shows how to build a Realtime app with [Drizzle ORM](https://orm.drizzle.team), using your existing schema, queries, types and writes. You'll learn which Drizzle queries seal unchanged, when a field needs an SQL alias, how live rows keep Drizzle's types in the browser, and how a Drizzle write returns its transaction ID.
@@ -36,7 +36,7 @@ The queries guide's [setup](../guides/queries#setup) covers the rest: Neon's [Ma
 
 ### Create the Realtime server
 
-Pass `drizzleAdapter()` to [`createRealtime`](../sdks/typescript#backend-createrealtime), so the Realtime server accepts Drizzle queries:
+Pass `drizzleAdapter()` to [`createRealtime`](../sdks/typescript/backend#backend-createrealtime), so the Realtime server accepts Drizzle queries:
 
 ```ts filename="backend/realtime.ts" {2,7}
 import { createRealtime } from "@neon/realtime/server"
@@ -49,7 +49,7 @@ export const realtime = createRealtime({
 })
 ```
 
-- [`drizzleAdapter()`](../sdks/typescript#drizzle-drizzleadapter) takes no options. When you seal a Drizzle select, it compiles it to SQL and bind parameters
+- [`drizzleAdapter()`](../sdks/typescript/drizzle#drizzle-drizzleadapter) takes no options. When you seal a Drizzle select, it compiles it to SQL and bind parameters
 - `db` is the database name, such as `"neondb"`, not a Drizzle client. Use the database in your `DATABASE_URL`, and keep `NEON_REALTIME_SECRET` [on the server](../guides/queries#sealing-queries)
 - the same server still seals [`rawSql`](../guides/queries#using-raw-sql) queries, so you can mix the two. Add `url` and it can [subscribe in trusted backend code](../guides/subscribing#subscribe-in-trusted-backend-code), where `subscribe()` takes a Drizzle query directly
 
@@ -230,7 +230,7 @@ Subscribe in the browser as the [subscribing guide](../guides/subscribing) shows
 
 ### Decode rows with `drizzleParsers`
 
-Spread [`drizzleParsers`](../sdks/typescript#drizzle-client-drizzleparsers) into the Realtime client's parsers, so live rows decode the way Drizzle decodes the same columns:
+Spread [`drizzleParsers`](../sdks/typescript/drizzle#drizzle-client-drizzleparsers) into the Realtime client's parsers, so live rows decode the way Drizzle decodes the same columns:
 
 ```ts filename="frontend/client.ts"
 import { createRealtimeClient } from "@neon/realtime/client"
@@ -256,11 +256,11 @@ The parsers work by Postgres type, so for common column types a live row matches
 | `bigint({ mode: "number" })`        | `number`       | `string`                         |
 | `bigint({ mode: "bigint" })`        | `bigint`       | `string`                         |
 
-Per-column modes, such as `date({ mode: "date" })` or `timestamp({ mode: "string" })`, aren't carried over. Nor are custom types or columns that Drizzle maps to tuples or arrays, such as `point()`, `line()` and `vector()`. For those, and for `bigint`, register a parser for the Postgres type with [`defineParsers`](../sdks/typescript#client-defineparsers), and decode server-rendered rows the same way. The subscribing guide lists [every default parser](../guides/subscribing#subscribe-to-the-sealed-query).
+Per-column modes, such as `date({ mode: "date" })` or `timestamp({ mode: "string" })`, aren't carried over. Nor are custom types or columns that Drizzle maps to tuples or arrays, such as `point()`, `line()` and `vector()`. For those, and for `bigint`, register a parser for the Postgres type with [`defineParsers`](../sdks/typescript/client#client-defineparsers), and decode server-rendered rows the same way. The subscribing guide lists [every default parser](../guides/subscribing#subscribe-to-the-sealed-query).
 
 ### Type rows in the browser
 
-You don't write the row type yourself. [`seal()`](../sdks/typescript#backend-realtimeserverseal) infers it from the select: `realtime.seal({ query: messagesQuery(userId, channelId) })` returns a `SealedLiveQuery<Message>`. A typed API client, such as Hono's `hc`, carries that type to the browser. Hono types the response as JSON, though, so it types a `Date` column such as `created_at` as a `string`, while live rows decode it to a `Date`. See [fetch from an API endpoint](../guides/subscribing#fetch-from-an-api-endpoint).
+You don't write the row type yourself. [`seal()`](../sdks/typescript/backend#backend-realtimeserverseal) infers it from the select: `realtime.seal({ query: messagesQuery(userId, channelId) })` returns a `SealedLiveQuery<Message>`. A typed API client, such as Hono's `hc`, carries that type to the browser. Hono types the response as JSON, though, so it types a `Date` column such as `created_at` as a `string`, while live rows decode it to a `Date`. See [fetch from an API endpoint](../guides/subscribing#fetch-from-an-api-endpoint).
 
 - to name the row type in the browser, use `import type { Message } from "../backend/schema"`. TypeScript erases the import, so the schema stays out of the browser bundle
 - `$inferSelect` fits `messagesQuery` because it selects every column. For a narrower or aliased selection, derive the type from the query: `type UserMessage = Awaited<ReturnType<typeof userMessagesQuery>>[number]`
@@ -320,7 +320,7 @@ These Drizzle query shapes don't work as live queries. All but the last fail on 
 
 - read the [queries guide](../guides/queries)
 - see how the client applies writes optimistically in the [mutations guide](../guides/mutations)
-- look up `drizzleAdapter()` and `drizzleParsers` in the [Drizzle section of the SDK reference](../sdks/typescript#drizzle)
+- look up `drizzleAdapter()` and `drizzleParsers` in the [Drizzle section of the SDK reference](../sdks/typescript/drizzle)
 - see Drizzle in a full-stack app in the [Next.js](./nextjs) and [TanStack](./tanstack) examples
 - browse the full source of the [chat app](https://github.com/neondatabase/examples/tree/main/realtime/guides-chat-app), [`with-react`](https://github.com/neondatabase/examples/tree/main/realtime/with-react), [`with-tanstack`](https://github.com/neondatabase/examples/tree/main/realtime/with-tanstack) and [`with-nextjs`](https://github.com/neondatabase/examples/tree/main/realtime/with-nextjs) on GitHub
 

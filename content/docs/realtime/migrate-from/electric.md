@@ -4,6 +4,7 @@ subtitle: "Migrate a reactive app from Electric to Neon Realtime."
 summary: >-
   Migrate a reactive app's shapes, proxy auth and writes from Electric to use Neon Realtime instead.
 enableTableOfContents: true
+updatedOn: '2026-11-18T00:59:49.148Z'
 ---
 
 [Neon Realtime](../overview) is the successor to <a className="group inline text-pretty" href="https://electric.ax" target="_blank" rel="nofollow noopener noreferrer">Electric<span className="whitespace-nowrap no-underline"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="none" viewBox="0 0 14 14" className="ml-1 inline-block size-3.5! shrink-0 align-[-0.125em]"><path fill="currentColor" d="M0 0h14v14H0z" opacity="0.2"></path><path stroke="currentColor" strokeLinecap="square" d="M9.915 8.885V4.08H5.11M9.625 4.375 4.083 9.917"></path></svg></span></a>, built by the Electric team [inside Neon](/blog/electric-joins-neon). Live SQL queries are a drop-in replacement for shapes, and this page shows how to migrate your Electric app.
@@ -192,7 +193,7 @@ function Messages({ channelId }: { channelId: string }) {
 }
 ```
 
-[`useLiveQuery`](../sdks/typescript#react-uselivequery) takes a sealed query that the parent fetches, not a URL. So `useShape(params)` becomes two steps: fetch the sealed query for the params, then pass it to `useLiveQuery`, as `Channel` below shows. A `preloadShape()` in a route loader becomes fetching the sealed query in the loader.
+[`useLiveQuery`](../sdks/typescript/react#react-uselivequery) takes a sealed query that the parent fetches, not a URL. So `useShape(params)` becomes two steps: fetch the sealed query for the params, then pass it to `useLiveQuery`, as `Channel` below shows. A `preloadShape()` in a route loader becomes fetching the sealed query in the loader.
 
 ```tsx filename="frontend/Messages.tsx"
 function Messages({ sealedQuery, refreshQuery }) {
@@ -202,7 +203,7 @@ function Messages({ sealedQuery, refreshQuery }) {
 }
 ```
 
-Then wrap your app in [`RealtimeProvider`](../sdks/typescript#react-realtimeprovider), using the `VITE_` variables from the queries guide's [Setup](../guides/queries#setup). With [TanStack DB](#tanstack-db), skip the provider: you pass the client to each collection instead.
+Then wrap your app in [`RealtimeProvider`](../sdks/typescript/react#react-realtimeprovider), using the `VITE_` variables from the queries guide's [Setup](../guides/queries#setup). With [TanStack DB](#tanstack-db), skip the provider: you pass the client to each collection instead.
 
 ```tsx filename="frontend/main.tsx"
 import { createRealtimeClient } from "@neon/realtime/client"
@@ -425,7 +426,7 @@ function send(body: string) {
 }
 ```
 
-`matchStream` becomes [`awaitTxId`](../sdks/typescript#client-materializedlivequerysubscriptionawaittxid) on the write's txid. It remembers recent txids, so you call it after the write returns:
+`matchStream` becomes [`awaitTxId`](../sdks/typescript/client#client-materializedlivequerysubscriptionawaittxid) on the write's txid. It remembers recent txids, so you call it after the write returns:
 
 ```tsx filename="frontend/Messages.tsx"
 const { data, utils } = useLiveQuery(sealedQuery, { refreshQuery })
@@ -550,7 +551,7 @@ See [How optimistic mutations work](../guides/mutations#how-optimistic-mutations
 
 ## TanStack DB
 
-If your app uses TanStack&nbsp;DB, swap [`electricCollectionOptions`](https://tanstack.com/db/latest/docs/collections/electric-collection) for [`realtimeCollectionOptions`](../sdks/typescript#tanstack-db-realtimecollectionoptions):
+If your app uses TanStack&nbsp;DB, swap [`electricCollectionOptions`](https://tanstack.com/db/latest/docs/collections/electric-collection) for [`realtimeCollectionOptions`](../sdks/typescript/tanstack-db#tanstack-db-realtimecollectionoptions):
 
 ```ts filename="frontend/collections.ts"
 const MESSAGES_SHAPE_URL = new URL('/api/messages/shape', window.location.origin).href // [!code --]
