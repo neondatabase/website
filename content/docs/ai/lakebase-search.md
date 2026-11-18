@@ -13,7 +13,7 @@ redirectFrom:
   - /docs/extensions/migrate-pg-search-to-lakebase-text
   - /guides/pg-search
   - /guides/pg-search-vs-tsvector
-updatedOn: '2026-11-17T23:36:26.891Z'
+updatedOn: '2026-11-18T14:21:49.129Z'
 ---
 
 Lakebase Search is search built for agents: retrieval over your own data as plain SQL, inside your [Lakebase Postgres](/docs/postgres/overview) database on Neon.
@@ -22,11 +22,11 @@ Lakebase Search is search built for agents: retrieval over your own data as plai
 
 ## How Lakebase Search works
 
-Lakebase Search separates storage from compute, the same architecture Neon uses for Postgres. Your indexes live in storage, not in compute memory, so compute stays stateless and scales to zero when the database is idle.
+Lakebase Search adds two engines to Postgres: `lakebase_vector` for vector search and `lakebase_text` for keyword search, plus `lakebase_tokenizer` for tokenization. Both build ordinary Postgres indexes, so a single SQL query can run vector search, keyword search, or both, and come back as one ranked result.
 
-It adds two search engines to Postgres: `lakebase_vector` for vector search and `lakebase_text` for keyword search, plus `lakebase_tokenizer` for tokenization. Both build ordinary Postgres indexes, so you query them, and combine them, with plain SQL.
+<InlineSvg src="/docs/ai/lakebase-search-architecture.svg" title="An agent sends one SQL query to stateless compute that runs the lakebase_vector and lakebase_text engines. Their lakebase_ann and lakebase_bm25 indexes persist in separate storage, and ranked results return to the agent." />
 
-<InlineSvg src="/docs/ai/lakebase-search-architecture.svg" title="Your app sends one SQL query to Postgres, which runs vector search by meaning and text search by keywords on your tables and returns one ranked result." />
+The engines run on stateless compute, and their indexes persist in separate storage, the same architecture Neon uses for Postgres. Compute scales to zero when the database is idle. Because the indexes stay in storage, waking the database needs no rebuild or re-index: the first query after a wake pays object-storage latency while the cache warms, and you can call `lakebase_ann_prewarm` ahead of time to avoid it.
 
 Search by meaning is a single SQL query: order rows by the distance between their embedding and your query vector, then take the top matches.
 
@@ -45,15 +45,13 @@ Keyword search and hybrid search run the same way, as SQL. Hybrid search combine
 
 `lakebase_vector` builds the `lakebase_ann` index. It sorts vectors into groups and only searches the groups closest to your query, so it reads a small part of the index instead of scanning all of it (this grouping is called IVF, short for Inverted File). It also shrinks each vector into a smaller form, which keeps the index small and quick to build (this compression is called RaBitQ).
 
-Because the index lives in storage, a cold start needs no rebuild or re-index. The first query pays object-storage latency while the cache warms; call `lakebase_ann_prewarm` ahead of time to skip that.
-
 ### How the text index ranks
 
 `lakebase_text` builds the `lakebase_bm25` index. It ranks results with BM25 and finds the best matches without scoring every matching row, so text search stays fast as your data grows (the technique for this is called Block-Max WAND). A standard Postgres full-text index (GIN) scores all the matching rows first and then picks the top ones; `lakebase_bm25` goes straight to the best matches.
 
 ## Scaling search past pgvector
 
-Most teams start vector search in Postgres with `pgvector`, and the limits show up as the data grows. Its usual index, HNSW (Hierarchical Navigable Small World), keeps the whole vector index in RAM, so its memory grows with the number of vectors, not with how often you query.
+Most teams start vector search in Postgres with `pgvector`, and the limits show up as the data grows. On traditional Postgres, a search index has to stay resident in memory to answer quickly, so `pgvector`'s usual HNSW (Hierarchical Navigable Small World) index grows its memory with the number of vectors, not with how often you query.
 
 Past roughly tens of millions of vectors, you run into several limits:
 
@@ -61,7 +59,9 @@ Past roughly tens of millions of vectors, you run into several limits:
 - index builds slow enough to disrupt the database
 - a recall-versus-latency tradeoff on every tuning pass (recall means how many of the true matches you actually get back)
 
-The `lakebase_ann` index lives in storage instead of RAM, so the index size no longer sets the instance size.
+<InlineSvg src="/docs/ai/lakebase-search-contrast.svg" title="In traditional Postgres the search index sits in RAM on always-on compute. In Lakebase Search the index lives in storage, and stateless compute reads it on demand." />
+
+Lakebase Search keeps the `lakebase_ann` index in storage and reads it from stateless compute on demand, so the index size no longer sets the instance size. You no longer need an always-on instance sized to hold the whole index in memory, and a single index scales to 100 million vectors and beyond.
 
 A dedicated vector database trades the memory problem for a sync problem: a second system to run and a pipeline to keep in step, so your search lags your writes. Lakebase Search keeps search in the same database as your data, so a row is searchable the moment it's written. There's no separate search system to keep in sync, and no lag between a write and when its row is searchable.
 

@@ -1,53 +1,76 @@
-<?xml version="1.0"?>
-<svg viewBox="0 0 740 300" xmlns="http://www.w3.org/2000/svg" data-name="search-wide" width="740" height="300">
-<defs></defs>
+<?xml version="1.0"?><svg viewBox="0 0 900 390" width="900" height="390" xmlns="http://www.w3.org/2000/svg" data-name="search-architecture" role="img" aria-label="Lakebase Search architecture: stateless compute runs the vector and text engines, their indexes persist in separate storage, and an app sends one SQL query and gets ranked results back.">
+  <defs></defs>
 <style>
-  svg[data-name="search-wide"] {
-    --line: #c9cbcf;
-    --label: #0c0d0d;
-    --caption: #61646b;
-    --green: #00c98a;
-    --green-text: #078345;
-    --green-fill: rgba(0, 229, 153, 0.06);
+  svg[data-name="search-architecture"] {
+    --line: #6E727A;
+    --label: #71757B;
+    --caption: #5D6168;
+    --green: #18936B;
+    --green-text: #16855F;
+    --green-fill: rgba(24, 147, 107, 0.14);
   }
-  :where(.dark) svg[data-name="search-wide"] {
-    --line: #494b50;
-    --label: #fafafa;
-    --caption: #afb1b6;
-    --green: #00e599;
-    --green-text: #47d18c;
-    --green-fill: rgba(0, 229, 153, 0.12);
+  :where(.dark) svg[data-name="search-architecture"] {
+    --line: #8A8F98;
+    --label: #FAFAFA;
+    --caption: #AFB1B6;
+    --green: #00E599;
+    --green-text: #47D18C;
+    --green-fill: rgba(0, 229, 153, 0.16);
   }
   @media (prefers-color-scheme: dark) {
-    svg:root[data-name="search-wide"] {
-      --line: #494b50;
-      --label: #fafafa;
-      --caption: #afb1b6;
-      --green: #00e599;
-      --green-text: #47d18c;
-      --green-fill: rgba(0, 229, 153, 0.12);
+    svg:root[data-name="search-architecture"] {
+      --line: #8A8F98;
+      --label: #FAFAFA;
+      --caption: #AFB1B6;
+      --green: #00E599;
+      --green-text: #47D18C;
+      --green-fill: rgba(0, 229, 153, 0.16);
     }
   }
 </style>
-<rect x="1" y="100" width="150" height="166" rx="2" fill="none" stroke="var(--line, #c9cbcf)" stroke-width="1.5"></rect>
-<text x="76" y="189" text-anchor="middle" fill="var(--label, #0c0d0d)" font-family="'Geist Mono', monospace" font-size="18" font-weight="500" letter-spacing="-0.3">your app</text>
-<line x1="151" y1="134" x2="289" y2="134" stroke="var(--line, #c9cbcf)" stroke-width="2"></line>
-<polygon points="301,134 289,128 289,140" fill="var(--line, #c9cbcf)"></polygon>
-<text x="226" y="120" text-anchor="middle" fill="var(--caption, #61646b)" font-family="'Geist Mono', monospace" font-size="14" letter-spacing="-0.2">one SQL query</text>
-<line x1="301" y1="232" x2="163" y2="232" stroke="var(--green, #00c98a)" stroke-width="2"></line>
-<polygon points="151,232 163,226 163,238" fill="var(--green, #00c98a)"></polygon>
-<text x="226" y="258" text-anchor="middle" fill="var(--green-text, #078345)" font-family="'Geist Mono', monospace" font-size="14" letter-spacing="-0.2">ranked results</text>
-<rect x="301" y="1" width="438" height="298" rx="2" fill="none" stroke="var(--line, #c9cbcf)" stroke-width="1.5"></rect>
-<text x="324" y="40" fill="var(--label, #0c0d0d)" font-family="'Geist Mono', monospace" font-size="18" font-weight="500" letter-spacing="-0.3">Postgres</text>
-<text x="324" y="64" fill="var(--caption, #61646b)" font-family="'Geist Mono', monospace" font-size="13" letter-spacing="-0.2">search on your tables</text>
-<rect x="324" y="96" width="186" height="76" rx="2" fill="none" stroke="var(--green, #00c98a)" stroke-width="1.5"></rect>
-<text x="417" y="129" text-anchor="middle" fill="var(--green-text, #078345)" font-family="'Geist Mono', monospace" font-size="16" font-weight="500" letter-spacing="-0.3">vector search</text>
-<text x="417" y="154" text-anchor="middle" fill="var(--caption, #61646b)" font-family="'Geist Mono', monospace" font-size="13" letter-spacing="-0.2">by meaning</text>
-<rect x="526" y="96" width="186" height="76" rx="2" fill="none" stroke="var(--green, #00c98a)" stroke-width="1.5"></rect>
-<text x="619" y="129" text-anchor="middle" fill="var(--green-text, #078345)" font-family="'Geist Mono', monospace" font-size="16" font-weight="500" letter-spacing="-0.3">text search</text>
-<text x="619" y="154" text-anchor="middle" fill="var(--caption, #61646b)" font-family="'Geist Mono', monospace" font-size="13" letter-spacing="-0.2">by keywords</text>
-<line x1="417" y1="172" x2="417" y2="202" stroke="var(--green, #00c98a)" stroke-width="1.5"></line>
-<line x1="619" y1="172" x2="619" y2="202" stroke="var(--green, #00c98a)" stroke-width="1.5"></line>
-<rect x="324" y="202" width="388" height="60" rx="2" fill="var(--green-fill, rgba(0, 229, 153, 0.06))" stroke="var(--green, #00c98a)" stroke-width="1.5"></rect>
-<text x="518" y="238" text-anchor="middle" fill="var(--green-text, #078345)" font-family="'Geist Mono', monospace" font-size="16" font-weight="500" letter-spacing="-0.3">one ranked result</text>
+  <g class="theme">
+  
+  <g id="app">
+    <rect x="1" y="60" width="140" height="120" rx="2" fill="none" stroke="var(--line, #6E727A)" stroke-width="1.5"></rect>
+    <text x="71" y="126" text-anchor="middle" fill="var(--label, #71757B)" font-family="'Geist Mono', monospace" font-size="16" font-weight="500" letter-spacing="-0.3">agent / app</text>
+  </g>
+  
+  <g id="arrows">
+    <line x1="141" y1="96" x2="269" y2="96" stroke="var(--line, #6E727A)" stroke-width="1.5"></line>
+    <polygon points="281,96 269,90 269,102" fill="var(--line, #6E727A)"></polygon>
+    <text x="211" y="84" text-anchor="middle" fill="var(--caption, #5D6168)" font-family="'Geist Mono', monospace" font-size="12" letter-spacing="-0.2">one SQL query</text>
+    <line x1="281" y1="150" x2="153" y2="150" stroke="var(--green, #18936B)" stroke-width="1.5"></line>
+    <polygon points="141,150 153,144 153,156" fill="var(--green, #18936B)"></polygon>
+    <text x="211" y="170" text-anchor="middle" fill="var(--green-text, #16855F)" font-family="'Geist Mono', monospace" font-size="12" letter-spacing="-0.2">ranked results</text>
+  </g>
+  
+  <g id="compute">
+    <rect x="281" y="1" width="618" height="200" rx="2" fill="none" stroke="var(--line, #6E727A)" stroke-width="1.5" stroke-dasharray="6 5"></rect>
+    <text x="304" y="40" fill="var(--label, #71757B)" font-family="'Geist Mono', monospace" font-size="16" font-weight="500" letter-spacing="-0.3">Stateless compute</text>
+    <rect x="304" y="72" width="270" height="104" rx="2" fill="none" stroke="var(--green, #18936B)" stroke-width="1.5"></rect>
+    <text x="439" y="106" text-anchor="middle" fill="var(--green-text, #16855F)" font-family="'Geist Mono', monospace" font-size="16" font-weight="500" letter-spacing="-0.3">lakebase_vector</text>
+    <text x="439" y="131" text-anchor="middle" fill="var(--caption, #5D6168)" font-family="'Geist Mono', monospace" font-size="13" letter-spacing="-0.2">lakebase_ann index</text>
+    <text x="439" y="154" text-anchor="middle" fill="var(--caption, #5D6168)" font-family="'Geist Mono', monospace" font-size="12" letter-spacing="-0.2">IVF grouping + RaBitQ compression</text>
+    <rect x="606" y="72" width="270" height="104" rx="2" fill="none" stroke="var(--green, #18936B)" stroke-width="1.5"></rect>
+    <text x="741" y="106" text-anchor="middle" fill="var(--green-text, #16855F)" font-family="'Geist Mono', monospace" font-size="16" font-weight="500" letter-spacing="-0.3">lakebase_text</text>
+    <text x="741" y="131" text-anchor="middle" fill="var(--caption, #5D6168)" font-family="'Geist Mono', monospace" font-size="13" letter-spacing="-0.2">lakebase_bm25 index</text>
+    <text x="741" y="154" text-anchor="middle" fill="var(--caption, #5D6168)" font-family="'Geist Mono', monospace" font-size="12" letter-spacing="-0.2">BM25 ranking</text>
+  </g>
+  
+  <g id="boundary">
+    <line x1="281" y1="236" x2="899" y2="236" stroke="var(--line, #6E727A)" stroke-width="1" stroke-dasharray="2 4"></line>
+    <text x="590" y="228" text-anchor="middle" fill="var(--caption, #5D6168)" font-family="'Geist Mono', monospace" font-size="12" letter-spacing="-0.2">storage / compute separation</text>
+    <line x1="439" y1="176" x2="439" y2="306" stroke="var(--green, #18936B)" stroke-width="1.5" stroke-dasharray="4 4"></line>
+    <line x1="741" y1="176" x2="741" y2="306" stroke="var(--green, #18936B)" stroke-width="1.5" stroke-dasharray="4 4"></line>
+  </g>
+  
+  <g id="storage">
+    <rect x="281" y="270" width="618" height="118" rx="2" fill="none" stroke="var(--line, #6E727A)" stroke-width="1.5"></rect>
+    <text x="304" y="298" fill="var(--label, #71757B)" font-family="'Geist Mono', monospace" font-size="16" font-weight="500" letter-spacing="-0.3">Storage</text>
+    <rect x="304" y="306" width="270" height="56" rx="2" fill="var(--green-fill, rgba(24, 147, 107, 0.14))" stroke="var(--green, #18936B)" stroke-width="1.5"></rect>
+    <text x="439" y="339" text-anchor="middle" fill="var(--green-text, #16855F)" font-family="'Geist Mono', monospace" font-size="14" font-weight="500" letter-spacing="-0.3">lakebase_ann index</text>
+    <rect x="606" y="306" width="270" height="56" rx="2" fill="var(--green-fill, rgba(24, 147, 107, 0.14))" stroke="var(--green, #18936B)" stroke-width="1.5"></rect>
+    <text x="741" y="339" text-anchor="middle" fill="var(--green-text, #16855F)" font-family="'Geist Mono', monospace" font-size="14" font-weight="500" letter-spacing="-0.3">lakebase_bm25 index</text>
+  </g>
+  </g>
 </svg>
