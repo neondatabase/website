@@ -49,6 +49,8 @@ Postgres 19 was first scheduled for October 29. The release team added a second 
 
 ## What's new in Postgres 19
 
+<YoutubeIframe embedId="RLeBHG_jC3s" isDocPost={false} />
+
 Postgres 19 is a practical release. There is no single headline feature that changes what Postgres is. Instead, version 19 goes after operational problems that database teams know well: bloated tables, unstable query plans, replica lag, incomplete statistics, and maintenance work that is hard to run safely in production.
 
 The common thread is control. Postgres 19 gives you more ways to step in when the defaults are not enough, without giving up the project's bias toward reliability and predictable behavior.
