@@ -18,8 +18,8 @@ categories:
 authors:
   - carlota-soto
 cover:
-  image: null
-  alt: null
+  image: https://cdn.neonapi.io/public/images/pages/blog/query-your-workos-users-in-neon-with-the-workos-sync-engine/cover.jpg
+  alt: Query your WorkOS users in Neon with the WorkOS Sync Engine
 isFeatured: false
 seo:
   title: "Query your WorkOS users in Neon with the WorkOS Sync Engine - Neon"
@@ -32,7 +32,7 @@ seo:
   ogDescription: >-
     WorkOS Sync Engine mirrors identity data into a workos schema in Postgres.
     On Neon, the engine runs as a Function on your branch with Function Triggers.
-  image: null
+  image: https://cdn.neonapi.io/public/images/pages/blog/query-your-workos-users-in-neon-with-the-workos-sync-engine/social.png
 updatedOn: '2026-11-19T04:02:27.347Z'
 ---
 
@@ -87,7 +87,10 @@ SELECT _raw->'custom_attributes'->>'department'
 
 Every row also has an `_env` column with the WorkOS environment it came from, so one database can hold both staging and production.
 
-**[ADD DIAGRAM]**
+<video autoPlay muted loop playsInline width="708" height="521" aria-label="WorkOS Sync Engine diagram">
+<source src="https://cdn.neonapi.io/public/images/pages/blog/query-your-workos-users-in-neon-with-the-workos-sync-engine/workos-sync.webm" type="video/webm" />
+<source src="https://cdn.neonapi.io/public/images/pages/blog/query-your-workos-users-in-neon-with-the-workos-sync-engine/workos-sync.mp4" type="video/mp4" />
+</video>
 
 ### How it stays in sync
 
