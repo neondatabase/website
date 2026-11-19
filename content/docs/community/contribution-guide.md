@@ -9,7 +9,7 @@ summary: >-
   request, add yourself as a guide author, frontmatter, navigation.yaml,
   Markdown, components, and style rules.
 enableTableOfContents: true
-updatedOn: '2026-11-16T00:00:06.000Z'
+updatedOn: '2026-11-19T01:52:43.726Z'
 ---
 
 Thanks for helping improve Neon content. This page explains ways to contribute, how to submit a contribution, and the Markdown and style conventions we follow.
@@ -259,7 +259,7 @@ npm install postgres
 </CodeTabs>
 ````
 
-To view this example in the Neon documentation, see [Create a Next.js project and add dependencies](/docs/guides/nextjs#create-a-nextjs-project-and-add-dependencies).
+To view this example in the Neon documentation, see [Install a Postgres driver](/docs/guides/nextjs#install-a-postgres-driver).
 
 ## Admonitions
 

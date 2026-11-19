@@ -52,12 +52,14 @@ describe('MDX to Markdown Conversion', () => {
       const inputPath = 'content/docs/guides/nextjs.md';
       const pageUrl = 'https://neon.com/docs/guides/nextjs';
 
-      const { content: result } = await processFile(inputPath, pageUrl);
+      const projectRoot = process.cwd();
+
+      const { content: result } = await processFile(inputPath, pageUrl, projectRoot);
 
       // Should have converted CodeTabs to bold labels
       expect(result).toContain('**node-postgres**');
       expect(result).toContain('**postgres.js**');
-      expect(result).toContain('**Neon serverless driver (Recommended)**');
+      expect(result).toContain('**Neon serverless driver**');
 
       // Should NOT have raw CodeTabs
       expect(result).not.toContain('<CodeTabs');
