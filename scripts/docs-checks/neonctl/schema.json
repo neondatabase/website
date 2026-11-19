@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "neonctlVersion": "9.5.0",
+  "neonctlVersion": "9.7.2",
   "binaries": [
     "neonctl",
     "neon"
@@ -1912,8 +1912,38 @@
     },
     "docs": {
       "aliases": [],
-      "positionals": [],
-      "options": {},
+      "positionals": [
+        {
+          "name": "query",
+          "describe": "What to search for",
+          "type": "string"
+        }
+      ],
+      "options": {
+        "category": {
+          "type": "array",
+          "describe": "Only return pages in these categories (repeatable)",
+          "choices": [
+            "docs",
+            "api",
+            "postgresql",
+            "guides",
+            "faqs",
+            "blog",
+            "changelog"
+          ]
+        },
+        "limit": {
+          "type": "number",
+          "describe": "Maximum number of results (1-40)",
+          "default": 10
+        },
+        "url": {
+          "type": "string",
+          "describe": "Override the site search URL",
+          "hidden": true
+        }
+      },
       "commands": {
         "search": {
           "name": "search",
@@ -1926,31 +1956,7 @@
               "type": "string"
             }
           ],
-          "options": {
-            "category": {
-              "type": "array",
-              "describe": "Only return pages in these categories (repeatable)",
-              "choices": [
-                "docs",
-                "api",
-                "postgresql",
-                "guides",
-                "faqs",
-                "blog",
-                "changelog"
-              ]
-            },
-            "limit": {
-              "type": "number",
-              "describe": "Maximum number of results (1-40)",
-              "default": 10
-            },
-            "url": {
-              "type": "string",
-              "describe": "Override the site search URL",
-              "hidden": true
-            }
-          },
+          "options": {},
           "commands": {},
           "describe": "Search neon.com: docs, API reference, PostgreSQL tutorial, guides, FAQs, changelog, and blog",
           "examples": [
@@ -1966,7 +1972,13 @@
         }
       },
       "describe": "Search neon.com docs, guides, and more",
-      "usage": "$0 docs <sub-command> [options]"
+      "usage": "$0 docs <query> [options]",
+      "examples": [
+        {
+          "command": "$0 docs \"reset a branch\"",
+          "description": "Same as neon docs search"
+        }
+      ]
     },
     "env": {
       "aliases": [],
@@ -2466,7 +2478,7 @@
         },
         "mcp-auth": {
           "type": "string",
-          "describe": "MCP authentication. Selects skills and MCP setup. oauth is neon mcp --oauth",
+          "describe": "MCP authentication. Selects skills and MCP setup. oauth is neon mcp --oauth. api-key mints a key, which needs neon login or a personal API key: with an organization or project-scoped key and no Neon MCP key already configured, init skips MCP and exits 1. Omit it to fall back to oauth when no key can be minted",
           "choices": [
             "oauth",
             "api-key"
@@ -2970,7 +2982,8 @@
               "choices": [
                 "function",
                 "storage",
-                "pg_endpoint"
+                "pg_endpoint",
+                "neon_auth"
               ]
             },
             "start-time": {
@@ -3138,7 +3151,8 @@
               "choices": [
                 "function",
                 "storage",
-                "pg_endpoint"
+                "pg_endpoint",
+                "neon_auth"
               ]
             },
             "start-time": {
@@ -3259,7 +3273,7 @@
         }
       },
       "commands": {},
-      "describe": "Show current user"
+      "describe": "Show the current user or organization"
     },
     "neon-auth": {
       "aliases": [],
@@ -5324,6 +5338,11 @@
             "allowed-origin": {
               "type": "array",
               "describe": "Allowed browser origin (repeatable). \"*\" allows every origin"
+            },
+            "wait": {
+              "type": "boolean",
+              "describe": "Wait until Realtime is enabled on the branch",
+              "default": true
             }
           },
           "commands": {},
@@ -5699,7 +5718,9 @@
           "positionals": [
             {
               "name": "id",
-              "required": true
+              "required": true,
+              "describe": "Snapshot id or name. An id match wins over a name.",
+              "type": "string"
             }
           ],
           "options": {},
@@ -5730,7 +5751,9 @@
           "positionals": [
             {
               "name": "id",
-              "required": true
+              "required": true,
+              "describe": "Snapshot id or name. An id match wins over a name.",
+              "type": "string"
             }
           ],
           "options": {},
@@ -5751,7 +5774,9 @@
           "positionals": [
             {
               "name": "id",
-              "required": true
+              "required": true,
+              "describe": "Snapshot id or name. An id match wins over a name.",
+              "type": "string"
             }
           ],
           "options": {
@@ -5869,7 +5894,9 @@
           "positionals": [
             {
               "name": "id",
-              "required": true
+              "required": true,
+              "describe": "Snapshot id or name. An id match wins over a name.",
+              "type": "string"
             }
           ],
           "options": {
