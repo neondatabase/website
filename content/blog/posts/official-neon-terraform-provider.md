@@ -37,7 +37,10 @@ seo:
 
 Infrastructure as code (IaC) is objectively the right call for managing infrastructure in complex systems, which is why many bigger companies rely on it. However, it also adds complexity to infrastructure management and has always been painful to work with, so it's much less common among hobby projects and startups.
 
-Agents change both sides of that. Your agent can write, test and debug the config and fix whatever got out of sync, so IaC stops being a burden. And the config is great context for your agent: your architecture is right there in code, so it doesn't need a round of tool calls to figure out where things run.
+There are two very interesting developments happening here with agents:
+
+- Your agent can write, test and debug the config and fix whatever got out of sync, so IaC stops being a big burden to maintain and operate.
+- The IaC config is great context for your agent: your architecture is right there in code, so it doesn't need a round of tool calls to figure out where things run.
 
 We think agents make IaC mainstream and IaC makes agents better, so we're betting big on it. Most teams run Neon next to services like AWS, Cloudflare or Sentry, and we want Neon to be first class in whichever IaC tool they pick: [Alchemy](https://alchemy.run), [Pulumi](https://www.pulumi.com), [SST](https://sst.dev), [Terraform](https://developer.hashicorp.com/terraform) or [OpenTofu](https://opentofu.org). On top of that, every Neon project ships with [neon.ts](https://neon.com/blog/introducing-neon-ts), our own lightweight infrastructure-as-code file that gives your agent all your Neon definitions in one place.
 
