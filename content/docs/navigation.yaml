@@ -908,6 +908,19 @@
           items:
             - title: 'TypeScript'
               slug: realtime/sdks/typescript
+              items:
+                - title: 'Backend'
+                  slug: realtime/sdks/typescript/backend
+                - title: 'Client'
+                  slug: realtime/sdks/typescript/client
+                - title: 'React'
+                  slug: realtime/sdks/typescript/react
+                - title: 'TanStack DB'
+                  slug: realtime/sdks/typescript/tanstack-db
+                - title: 'Drizzle'
+                  slug: realtime/sdks/typescript/drizzle
+                - title: 'Kysely'
+                  slug: realtime/sdks/typescript/kysely
         - section: Reference
           items:
             - title: 'API'

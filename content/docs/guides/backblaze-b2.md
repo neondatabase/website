@@ -12,7 +12,7 @@ summary: >-
   implementations in JavaScript (Hono, @aws-sdk/client-s3) and Python (Flask,
   boto3).
 enableTableOfContents: true
-updatedOn: '2026-10-28T11:11:18.780Z'
+updatedOn: '2026-11-16T22:07:37.000Z'
 ---
 
 [Backblaze B2 Cloud Storage](https://www.backblaze.com/cloud-storage) is an S3-compatible object storage service known for its affordability and ease of use. It's suitable for storing large amounts of unstructured data like backups, archives, images, videos, and application assets.

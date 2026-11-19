@@ -106,7 +106,7 @@ AI Gateway now exposes `POST /v1/embeddings`. It accepts a single string or a ba
 | `gte-large-en`         | 1024                | No, use cosine distance | $0.13 per 1M input tokens |
 
 <Admonition type="note" title="Availability">
-AI Gateway is available on the Launch and Scale plans, paid with [prepaid credits](/docs/ai-gateway/prepaid-credits). If you'd like to try it for free, [tell us on Discord](https://discord.gg/92vNTzKDGp): we have credits to give.
+AI Gateway is available on every Neon plan, including Free, paid with [prepaid credits](/docs/ai-gateway/prepaid-credits). If you'd like to try it for free, [tell us on Discord](https://discord.gg/92vNTzKDGp): we have credits to give.
 </Admonition>
 
 <Admonition type="tip" title="Choosing a model">

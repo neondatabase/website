@@ -4,7 +4,7 @@ subtitle: 'Full-stack example app using Realtime with TanStack.'
 summary: >-
   Build a per-user todo app with TanStack Start, TanStack DB, Drizzle and Managed Better Auth on Neon Realtime: seal live queries in server functions, seed a Realtime collection in a route loader, and settle optimistic writes by txid.
 enableTableOfContents: true
-updatedOn: '2026-10-15T14:51:27.000Z'
+updatedOn: '2026-11-18T00:59:49.148Z'
 ---
 
 This example shows how to use Neon Realtime with [TanStack&nbsp;Start](https://tanstack.com/start), [TanStack&nbsp;DB](https://tanstack.com/db), Drizzle and Neon's [Managed Better Auth](/docs/auth/overview), with support for [auth](#authorize-with-the-session), [SSR](#server-side-rendering), [client-side reactivity](#client-side-reactivity) and [optimistic mutations](#optimistic-mutations).
@@ -17,11 +17,12 @@ The complete app is in the [`realtime/with-tanstack`](https://github.com/neondat
 
 ## Setup
 
-Install the Realtime SDK with its Drizzle and TanStack&nbsp;DB bindings, plus TanStack&nbsp;DB's React package and its router integration:
+Install the Realtime SDK with its Drizzle and TanStack&nbsp;DB bindings, Drizzle ORM and Zod, plus TanStack&nbsp;DB's React package and its router integration:
 
 ```bash filename="Terminal"
-npm install @neon/realtime @neon/realtime-drizzle @neon/realtime-tanstack
+npm install @neon/realtime @neon/realtime-drizzle @neon/realtime-tanstack drizzle-orm zod
 npm install @tanstack/react-db @tanstack/react-router-with-db
+npm install -D @neon/config
 ```
 
 Add a `neon.ts` that enables Managed Better Auth and Realtime on your branch:
@@ -115,7 +116,7 @@ Seal the query on the server, for the user in the session. The browser can subsc
 
 ### Create the Realtime server
 
-The Realtime server, from [`createRealtime()`](../sdks/typescript#backend-createrealtime), holds the secret and seals queries. It should be created and then used in your trusted server code:
+The Realtime server, from [`createRealtime()`](../sdks/typescript/backend#backend-createrealtime), holds the secret and seals queries. It should be created and then used in your trusted server code:
 
 ```ts filename="src/realtime.server.ts"
 import { createRealtime } from "@neon/realtime/server"
@@ -208,7 +209,7 @@ export const loadTodos = createServerFn({ method: "POST" })
   })
 ```
 
-[`realtime.seal()`](../sdks/typescript#backend-realtimeserverseal) returns a typed [`SealedLiveQuery<Todo>`](../sdks/typescript#backend-sealedlivequery), so the row type flows through to the collection and the page.
+[`realtime.seal()`](../sdks/typescript/backend#backend-realtimeserverseal) returns a typed [`SealedLiveQuery<Todo>`](../sdks/typescript/backend#backend-sealedlivequery), so the row type flows through to the collection and the page.
 
 ### Keep signed-in pages private
 
@@ -297,7 +298,7 @@ export function getRouter() {
 ```
 
 - no collection is shared between users, because each request and each page load gets its own `DbClient`, as in [create a `DbClient` per router](../guides/ssr#create-a-dbclient-per-router). Sign-in and sign-out are full page loads, which drop the browser's `DbClient` and the previous user's rows with it. See [when the session changes](../guides/ssr#when-the-session-changes)
-- [`drizzleParsers`](../sdks/typescript#drizzle-client-drizzleparsers) parses live values the way Drizzle does, so live rows have the same types as the rows the server rendered. See [keep row shapes identical](../guides/ssr#keep-row-shapes-identical)
+- [`drizzleParsers`](../sdks/typescript/drizzle#drizzle-client-drizzleparsers) parses live values the way Drizzle does, so live rows have the same types as the rows the server rendered. See [keep row shapes identical](../guides/ssr#keep-row-shapes-identical)
 - `routerWithDbClient()` wraps the app in TanStack&nbsp;DB's provider, so components get this `DbClient` from `useDbClient()`. It also snapshots the collections that loaders seeded on the server into the HTML, and restores them in the browser before the first render
 - `RouterContext` puts `dbClient` on route context, where the route loader reads it
 
@@ -337,7 +338,7 @@ In the browser, a TanStack&nbsp;DB collection syncs the live query's rows, and c
 
 ### Define the collection
 
-Define the collection as a descriptor, with the two-argument `collectionOptions(id, factory)` around [`realtimeCollectionOptions()`](../sdks/typescript#tanstack-db-realtimecollectionoptions). The descriptor is cheap to build, so the loader and the page both build it, and the shared `id` resolves both to the collection the loader seeded. The factory runs once per `DbClient`, and reads that `DbClient`'s Realtime client:
+Define the collection as a descriptor, with the two-argument `collectionOptions(id, factory)` around [`realtimeCollectionOptions()`](../sdks/typescript/tanstack-db#tanstack-db-realtimecollectionoptions). The descriptor is cheap to build, so the loader and the page both build it, and the shared `id` resolves both to the collection the loader seeded. The factory runs once per `DbClient`, and reads that `DbClient`'s Realtime client:
 
 ```ts filename="src/todos.collection.ts"
 import type { RealtimeClient, SealedLiveQuery } from "@neon/realtime/client"
@@ -368,7 +369,7 @@ export function todosCollection(userId: string, query: SealedLiveQuery<Todo>) {
 }
 ```
 
-- `realtimeCollectionOptions()` takes the sealed `query`, the Realtime `client` and `getKey`, and syncs the collection from the subscription. Other TanStack&nbsp;DB options, like `gcTime`, pass through. The [config reference](../sdks/typescript#tanstack-db-realtimecollectionconfig) lists them all
+- `realtimeCollectionOptions()` takes the sealed `query`, the Realtime `client` and `getKey`, and syncs the collection from the subscription. Other TanStack&nbsp;DB options, like `gcTime`, pass through. The [config reference](../sdks/typescript/tanstack-db#tanstack-db-realtimecollectionconfig) lists them all
 - `refreshQuery` returns a fresh sealed query for the same query. The collection calls it before the current one expires and renews the subscription in place, keeping its rows. See [`refreshQuery`](../guides/reactivity#refreshquery)
 - `gcTime: 0` turns off garbage collection in TanStack&nbsp;DB, which differs from TanStack&nbsp;Query, where `0` collects at once
 
@@ -592,7 +593,7 @@ function notSyncedYet(cause: unknown): never {
 }
 ```
 
-- [`collection.utils.awaitTxId(txid, timeout)`](../sdks/typescript#tanstack-db-realtimecollectionutilsawaittxid) waits until the subscription has delivered that transaction's changes. While a handler runs, TanStack&nbsp;DB holds back synced changes, so the optimistic row hands over to the synced one in one step
+- [`collection.utils.awaitTxId(txid, timeout)`](../sdks/typescript/tanstack-db#tanstack-db-realtimecollectionutilsawaittxid) waits until the subscription has delivered that transaction's changes. While a handler runs, TanStack&nbsp;DB holds back synced changes, so the optimistic row hands over to the synced one in one step
 - TanStack&nbsp;DB rolls the change back if the server function throws, the wait times out, or the subscription errors or closes. The mutations guide covers [handlers with TanStack&nbsp;DB collections](../guides/mutations#with-tanstack-db-collections)
 - `awaitTxId()` keeps waiting while the subscription reconnects or waits for a renewed sealed query, and the collection holds back synced changes while it waits. Keep the timeout short: `ECHO_TIMEOUT_MS` is 10 seconds, as in the guides
 - once a handler has a txid, the write has committed, so `notSyncedYet` turns any failed wait into a `NotSyncedYetError`. The change still rolls back, but the page says it's saved rather than showing an error, and the change shows again when Realtime catches up
@@ -690,7 +691,7 @@ export const deleteTodos = createServerFn({ method: "POST" })
 ## Next steps
 
 - read the guides on [reactivity](../guides/reactivity), [optimistic mutations](../guides/mutations) and [server-side rendering](../guides/ssr) for the concepts behind each step
-- look up every `realtimeCollectionOptions()` option in the [TanStack&nbsp;DB section of the SDK reference](../sdks/typescript#tanstack-db)
+- look up every `realtimeCollectionOptions()` option in the [TanStack&nbsp;DB section of the SDK reference](../sdks/typescript/tanstack-db)
 - see the [Next.js example](./nextjs), which reads and seals in a Server Component and subscribes in a Client Component
 - browse the [full source on GitHub](https://github.com/neondatabase/examples/tree/main/realtime/with-tanstack)
 

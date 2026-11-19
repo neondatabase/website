@@ -9,7 +9,7 @@ summary: >-
   skills to their latest versions, and `neon skills status` to check whether
   they're current.
 enableTableOfContents: true
-updatedOn: '2026-11-02T21:58:12.242Z'
+updatedOn: '2026-11-18T05:11:04.729Z'
 ---
 
 The `skills` command installs [Neon agent skills](/docs/ai/agent-skills) into your coding agents, so tools like Cursor and Claude Code know how to work with Neon's Postgres, AI Gateway, Object Storage, and Functions.
@@ -38,7 +38,7 @@ For the full setup, use [`neon init`](/docs/cli/init). For just one piece: `neon
 
 ### Choosing agents
 
-Without `--agent`, the interactive command lists all supported agents, pre-selects the ones it detects, and lets you toggle the selection. In non-interactive mode, `-y` installs into every detected agent. Pass `--agent <name>` (repeatable) to name agents explicitly and skip the picker.
+Without `--agent`, the interactive command lists all supported agents, pre-selects the ones it detects, and lets you toggle the selection. In non-interactive mode, `-y` or `--skill` installs into every detected agent: agents with a folder such as `.cursor` in the current directory (installed agents with `--global`), else the coding agent running the command. Pass `--agent <name>` (repeatable) to name agents explicitly and skip the picker.
 
 The supported agents are `antigravity`, `cline`, `cline-cli`, `claude-code`, `claude-desktop`, `codex`, `cursor`, `factory-droid`, `fx`, `gemini-cli`, `goose`, `github-copilot-cli`, `grok-build`, `hermes`, `junie`, `kilo-code`, `kimi-code`, `kiro-cli`, `opencode`, `pi`, `vscode`, `windsurf`, and `zed`. A few also accept aliases (`claude` for `claude-code`, `copilot` for `vscode`, `gemini` for `gemini-cli`). Passing an unknown agent stops the command and prints the current supported list.
 

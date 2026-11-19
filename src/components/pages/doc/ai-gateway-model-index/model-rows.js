@@ -42,7 +42,7 @@ const ORG_LABELS = {
 };
 
 const MODEL_CATALOG_NOTE =
-  'Prices are provider list prices per million tokens. Inference is free during the private preview. Click a model for a copy-paste quickstart.';
+  "Prices are per million tokens at each provider's list rate, with no Neon markup. Inference draws down your prepaid AI Gateway credits. Click a model for a copy-paste quickstart.";
 
 const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 

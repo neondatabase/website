@@ -12,7 +12,7 @@ summary: >-
 enableTableOfContents: true
 redirectFrom:
   - /docs/introduction/autoscaling-algorithm
-updatedOn: '2026-08-07T13:46:01.605Z'
+updatedOn: '2026-11-10T13:07:59.000Z'
 ---
 
 <InfoBlock>

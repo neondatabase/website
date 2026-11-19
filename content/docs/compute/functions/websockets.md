@@ -7,7 +7,7 @@ summary: >-
   @neon/functions, server-sent events for one-way streams, and Postgres to
   broadcast across isolates.
 enableTableOfContents: true
-updatedOn: '2026-09-16T15:38:57.808Z'
+updatedOn: '2026-11-18T08:58:29.712Z'
 ---
 
 Real-time backends on Neon Functions still follow the request/response model: one request opens a connection, and the handler keeps a streamed response open while data keeps moving. Because the function keeps running for the life of that connection, it can host a real-time backend on the same branch as your Postgres database, using Postgres itself for cross-isolate messaging (polling, or `LISTEN/NOTIFY`) instead of a separate broker like Redis.
@@ -24,7 +24,7 @@ Accept a WebSocket connection with `upgradeWebSocket` from `@neon/functions` (0.
 ```ts filename="functions/echo.ts"
 import { upgradeWebSocket } from '@neon/functions';
 
-export default {
+const handler = {
   fetch(request: Request) {
     if (request.headers.get('upgrade')?.toLowerCase() !== 'websocket') {
       return new Response('This endpoint speaks WebSocket. Send an Upgrade request.', {
@@ -39,6 +39,8 @@ export default {
     return response;
   },
 };
+
+export default handler;
 ```
 
 Install the dependency (`@neon/functions` 0.7.0 or later):
@@ -102,9 +104,11 @@ app.get(
   })),
 );
 
-export default {
+const handler = {
   fetch: (request: Request) => app.fetch(request),
 };
+
+export default handler;
 ```
 
 Install the dependencies (`@neon/functions` 0.9.0 or later, plus Hono):
@@ -173,7 +177,7 @@ pool
   .catch((err) => console.error('[seed]', err))
   .finally(() => setInterval(poll, 1000).unref?.());
 
-export default {
+const handler = {
   fetch(request: Request) {
     if (request.headers.get('upgrade')?.toLowerCase() !== 'websocket') {
       return new Response('This endpoint speaks WebSocket. Send an Upgrade request.', { status: 426 });
@@ -184,6 +188,8 @@ export default {
     return response;
   },
 };
+
+export default handler;
 ```
 
 Install the dependencies:
@@ -242,7 +248,7 @@ listener.on('notification', (msg) => {
   }
 });
 
-export default {
+const handler = {
   fetch(request: Request) {
     if (request.headers.get('upgrade')?.toLowerCase() !== 'websocket') {
       return new Response('This endpoint speaks WebSocket. Send an Upgrade request.', { status: 426 });
@@ -258,6 +264,8 @@ export default {
     return response;
   },
 };
+
+export default handler;
 ```
 
 Use `DATABASE_URL_UNPOOLED` for the `LISTEN` client. The pooled `DATABASE_URL` routes through PgBouncer, which doesn't support `LISTEN/NOTIFY`.
@@ -290,7 +298,7 @@ When you only need server-to-client updates, SSE is simpler than a WebSocket. Th
 ```ts filename="functions/sse.ts"
 const encoder = new TextEncoder();
 
-export default {
+const handler = {
   fetch(request: Request) {
     const url = new URL(request.url);
     if (url.pathname !== '/events') return new Response('ok');
@@ -320,6 +328,8 @@ export default {
     });
   },
 };
+
+export default handler;
 ```
 
 An SSE frame is `data: <payload>\n\n`. Send a `: ping\n\n` comment every 25 to 30 seconds, the SSE equivalent of the WebSocket [heartbeat](#heartbeat), so idle streams stay alive, and set `Cache-Control: no-cache, no-transform` so proxies don't cache or buffer the stream.

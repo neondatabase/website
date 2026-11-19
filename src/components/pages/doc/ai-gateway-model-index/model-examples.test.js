@@ -70,7 +70,7 @@ describe('AI Gateway model examples', () => {
     expect(getInitialMode({ text: [], image: [] }, 'image')).toBe('text');
   });
 
-  it('renders TypeScript/Python/cURL only for an embedding model — no AI SDK or Mastra yet', () => {
+  it('renders AI SDK, Mastra, TypeScript, Python, and cURL for an embedding model', () => {
     const languages = getLanguagesForMode(
       {
         embeddings: resolveModel(modelsData, capabilities, 'gte-large-en', 'embeddings')?.examples,
@@ -78,8 +78,11 @@ describe('AI Gateway model examples', () => {
       'embeddings'
     );
 
-    expect(languages.map(({ key }) => key)).toEqual(['ts', 'python', 'curl']);
+    expect(languages.map(({ key }) => key)).toEqual(['aisdk', 'mastra', 'ts', 'python', 'curl']);
+    expect(languages.find(({ key }) => key === 'aisdk')?.install).toBe(
+      'npm i ai @neon/ai-sdk-provider'
+    );
+    expect(languages.find(({ key }) => key === 'mastra')?.install).toBe('npm i @mastra/core');
     expect(languages.find(({ key }) => key === 'ts')?.code).toContain('client.embeddings.create');
-    expect(languages.every(({ code }) => code.includes('encoding_format'))).toBe(true);
   });
 });

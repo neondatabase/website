@@ -11,7 +11,7 @@ summary: >-
 enableTableOfContents: true
 redirectFrom:
   - /docs/tutorial/test-queries
-updatedOn: '2026-10-09T10:18:46.317Z'
+updatedOn: '2026-11-13T10:54:02.000Z'
 ---
 
 Queries that modify data or alter schemas can be destructive, so test them before you run them in production. On other database systems, testing takes time and resources, such as a separate database instance with replicated data. With Neon, you create a branch with a copy-on-write clone of your production data. When you finish, you delete the branch just as easily.

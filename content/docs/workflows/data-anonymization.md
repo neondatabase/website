@@ -12,7 +12,7 @@ summary: >-
 redirectFrom:
   - /docs/concepts/anonymized-data
 enableTableOfContents: true
-updatedOn: '2026-09-25T09:36:22.797Z'
+updatedOn: '2026-11-10T14:15:46.000Z'
 ---
 
 <FeatureBeta />

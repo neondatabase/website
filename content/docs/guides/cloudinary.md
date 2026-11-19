@@ -10,7 +10,7 @@ summary: >-
   Postgres. Includes JavaScript (Hono) and Python (Flask) backend examples
   covering the /generate-signature and /save-metadata endpoints.
 enableTableOfContents: true
-updatedOn: '2026-10-28T11:11:18.780Z'
+updatedOn: '2026-11-16T20:07:08.000Z'
 ---
 
 [Cloudinary](https://cloudinary.com/) is a cloud-based platform for image and video management, offering upload, storage, real-time manipulation, optimization, and delivery via CDN.

@@ -9,7 +9,7 @@ summary: >-
   wal_level to logical for all databases in the Neon project.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2026-10-09T15:55:57.334Z'
+updatedOn: '2026-11-16T20:43:06.000Z'
 ---
 
 Neon's logical replication feature allows you to replicate data from your Lakebase Postgres database to external destinations. In this guide, you will learn how to define your Lakebase Postgres database as a data source in Airbyte so that you can stream data to Snowflake.

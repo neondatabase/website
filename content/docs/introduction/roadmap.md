@@ -12,7 +12,7 @@ redirectFrom:
   - /docs/cloud/roadmap
   - /docs/conceptual-guides/roadmap
   - /docs/reference/roadmap
-updatedOn: '2026-11-09T18:24:22.269Z'
+updatedOn: '2026-11-17T23:28:01.910Z'
 ---
 
 This roadmap describes what's in flight, what we delivered recently, and what's on the horizon.
@@ -191,7 +191,7 @@ We're also improving and scaling Lakebase Postgres on Neon. Here's what's on the
 - **Usage-based pricing plans**: Our paid plans are fully usage-based. Pay only for what you use. See [Neon plans](/docs/introduction/plans).
 - **Branch expiration management**: Set a time-to-live (TTL) for Neon branches to simplify branch cleanup and management, see our [branch expiration guide](/docs/guides/branch-expiration).
 - **Neon VS Code extension**: An extension that lets you connect to Neon and manage your database directly in your IDE. Available for VS Code, Cursor, and other compatible editors. See [Neon VS Code Extension](/docs/local/vscode-extension).
-- **TanStack integration & new open-source tools**: Neon is now the official database partner of TanStack, with new open-source tools including a Vite Plugin for Neon to streamline fullstack development with TanStack, Vite, and Postgres.
+- **TanStack partnership**: Neon is now the official database partner of TanStack.
 - **Data API**: Neon's Data API feature, powered by PostgREST, is open to all Neon users. [Learn more](/docs/data-api/get-started).
 - **Monitoring platform support**: Neon supports exporting metrics and Postgres logs to any OpenTelemetry-compatible backend, like New Relic. For details, refer to our [OpenTelemetry docs](/docs/guides/opentelemetry).
 - **Claimable Neon**: A new way for SaaS vendors to partner with Neon to offer instant Neon projects. Let your users create a project with no registration required. [Learn more about Claimable Neon](/docs/reference/claimable-neon), and see our [Claimable database integration guide](/docs/workflows/claimable-database-integration).

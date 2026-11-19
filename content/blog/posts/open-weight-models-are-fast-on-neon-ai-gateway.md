@@ -37,7 +37,7 @@ seo:
 
 Open-weight models are built for performance, but how they’re served determines whether end users actually feel that speed.
 
-[Neon AI Gateway](https://neon.com/docs/ai-gateway/overview) calls [Databricks Foundation Model APIs](https://docs.databricks.com/aws/en/machine-learning/foundation-model-apis/) for Databricks-hosted open-weight models, a stack that has years of inference engineering behind it - including continuous batching and KV-cache paging, a TensorRT-LLM-era backend with custom kernels, careful quantization, hardware-tuned multi-GPU layouts, and prompt caching. 
+[Neon AI Gateway](https://neon.com/docs/ai-gateway/overview) calls [Databricks Foundation Model APIs](https://docs.databricks.com/aws/en/machine-learning/foundation-model-apis/) for Databricks-hosted open-weight models, a stack that has years of inference engineering behind it - including continuous batching and KV-cache paging, a TensorRT-LLM-era backend with custom kernels, careful quantization, hardware-tuned multi-GPU layouts, and prompt caching.
 
 That last optimization (prompt caching) is the one that maps most directly to agent loops, a main use case for the Neon backend. Coding agents and multi-step tool loops tend to resend the same system prompt, tools schema, and few-shot examples on every turn - prompt caching speeds up that traffic pattern. When Databricks first rolled prompt caching out on gpt-oss in a large production batch-inference pipeline, [per-replica input-token throughput went up 2.5× and P50 latency went down 3×, even at a ~30% cache hit rate.](https://www.databricks.com/blog/accelerating-llm-inference-prompt-caching-open-source-models-databricks)
 
@@ -64,7 +64,7 @@ LLM requests don’t arrive in neat, uniform batches - one user asks for a long 
 Two things make this approach hold up under real traffic:
 
 - **KV-cache paging.** Every in-flight request keeps a key/value cache in GPU memory that grows with its context, and those caches can’t be evicted mid-request. Databricks manages them with a [PagedAttention-style allocator](https://www.databricks.com/blog/fast-secure-and-reliable-enterprise-grade-llm-inference) (the vLLM approach): the cache is split into fixed-size token blocks allocated on demand, which cuts fragmentation and packs more concurrent requests onto the same GPU before running out of memory.
-- **Overlaying prefill and decode.&& Processing a new prompt (prefill) and generating tokens for existing requests (decode) compete for the same GPU. The stack overlays them in the same batch up to a tuned token budget, so prompt processing for a new request doesn’t stall token generation for everyone already streaming.
+- **Overlaying prefill and decode.** Processing a new prompt (prefill) and generating tokens for existing requests (decode) compete for the same GPU. The stack overlays them in the same batch up to a tuned token budget, so prompt processing for a new request doesn’t stall token generation for everyone already streaming.
 
 The real goal is maximum throughput under a fixed latency budget (not peak tokens/second in a benchmark). Databricks holds target P90/P95 time-to-first-token and time-per-output-token, then pushes batch size and utilization as high as they’ll go underneath that ceiling. That’s the number that matches what a user feels under load.
 
@@ -127,7 +127,7 @@ const response = await client.chat.completions.create({
 **You’d pay the standard per-token rate for each model, with no Neon markup on top.** If you’re a Neon user, calling AI Gateway is a no-brainer - you’ll get a boost in performance and convenience without price penalties.
 
 <Admonition type="note" title="Try Neon AI Gateway">
-AI Gateway is now generally available. It was free to use during the [beta](https://neon.com/blog/neon-backend-is-beta); see [pricing](https://neon.com/pricing) for current token costs. Spin up a Neon project on a Launch or Scale plan in one of the [supported regions](https://neon.com/docs/introduction/regions), point your SDK at Neon, and benchmark latency on your own agent loop. 
+AI Gateway is now generally available. It was free to use during the [beta](https://neon.com/blog/neon-backend-is-beta); see [pricing](https://neon.com/pricing) for current token costs. Spin up a Neon project on any plan, including Free, in one of the [supported regions](https://neon.com/docs/introduction/regions), buy [prepaid credits](https://neon.com/docs/ai-gateway/prepaid-credits), point your SDK at Neon, and benchmark latency on your own agent loop. 
   
   If you have feedback, [please send it over](https://neon.com/discord) - read the [GA announcement](https://neon.com/blog/neon-backend-is-ga) for the rest of the Neon backend.
 </Admonition>

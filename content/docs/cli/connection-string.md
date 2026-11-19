@@ -9,7 +9,7 @@ summary: >-
   pooling (--pooled), read-only replicas (--endpoint-type read_only), or
   time-travel queries targeting a specific timestamp or LSN.
 enableTableOfContents: true
-updatedOn: '2026-11-05T15:33:57.188Z'
+updatedOn: '2026-11-09T15:59:29.000Z'
 redirectFrom:
   - /docs/reference/cli-connection-string
   - /docs/cli/cs

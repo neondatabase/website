@@ -8,7 +8,7 @@ summary: >-
   meta-framework, since Lakebase Postgres must be accessed server-side in React apps. Neon
   Auth quick starts for Next.js and TanStack Router are also linked here.
 enableTableOfContents: true
-updatedOn: '2026-10-08T19:32:04.700Z'
+updatedOn: '2026-11-18T00:59:49.148Z'
 ---
 
 React is an open-source JavaScript library for building component-based user interfaces.
@@ -48,6 +48,6 @@ For React Router, follow the [React Auth quick start](/docs/auth/quick-start/rea
 - [Add Object Storage](/docs/storage/overview): S3-compatible file storage that branches with your database
 - [Deploy a Function](/docs/compute/functions/overview): Run backend compute next to your database, no separate hosting needed
 - [Call an LLM with AI Gateway](/docs/ai-gateway/overview): Access foundation models from Anthropic, OpenAI, Google, and more with one credential
-- [Realtime](/docs/realtime/sdks/typescript#react): Build realtime React apps on Neon with end-to-end reactivity and type safety
+- [Realtime](/docs/realtime/sdks/typescript/react): Build realtime React apps on Neon with end-to-end reactivity and type safety
 
 <NeedHelp/>

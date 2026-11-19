@@ -11,7 +11,7 @@ summary: >-
   connection string stable, or when you need temporary preview branches from any
   saved version. Snapshot limits and storage pricing vary by plan.
 enableTableOfContents: true
-updatedOn: '2026-09-17T16:33:54.884Z'
+updatedOn: '2026-11-10T14:15:46.000Z'
 ---
 
 <Admonition type="note">

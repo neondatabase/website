@@ -17,7 +17,7 @@ redirectFrom:
   - /docs/postgres/backup-restore/snapshots
   - /docs/guides/snapshots
   - /docs/introduction/snapshots
-updatedOn: '2026-09-11T12:15:20.212Z'
+updatedOn: '2026-11-09T22:07:35.000Z'
 ---
 
 <Admonition type="note" title="Snapshots">

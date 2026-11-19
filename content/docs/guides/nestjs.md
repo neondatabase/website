@@ -9,7 +9,7 @@ summary: >-
   cover Neon project creation, DATABASE_URL configuration in .env, and wiring
   a service and GET controller endpoint to query the database.
 enableTableOfContents: true
-updatedOn: '2026-10-05T12:27:24.167Z'
+updatedOn: '2026-11-07T14:53:52.000Z'
 ---
 
 <CopyPrompt src="/prompts/nestjs-prompt.md"

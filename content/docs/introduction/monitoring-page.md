@@ -7,7 +7,7 @@ summary: >-
   connection saturation, cache misses, or replication lag, and decide whether
   to scale up or enable pooling. Historical data retention depends on your plan.
 enableTableOfContents: true
-updatedOn: '2026-09-25T09:58:44.827Z'
+updatedOn: '2026-10-16T11:18:06.000Z'
 ---
 
 The **Monitoring** dashboard in the Neon console provides several graphs for monitoring system and database metrics. You can access the **Monitoring** dashboard from the sidebar in the Neon Console.

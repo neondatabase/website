@@ -39,6 +39,11 @@ const defaultConfig = {
       './public/images/og-image/docs-background.jpg',
       './public/images/technology-logos/neon-dark.svg',
     ],
+    '/mcp-server/stats/og': [
+      './src/fonts/geist-mono/GeistMono-Regular.ttf',
+      './src/fonts/inter/Inter-Regular.ttf',
+      './public/images/og-image/logo.png',
+    ],
     // The blog `.md` route handler reads the blog snapshot from disk at request
     // time (unlike the blog pages, which are statically generated at build).
     // Its read path is dynamic (process.cwd() + join), so nft can't detect the
@@ -2280,7 +2285,7 @@ const defaultConfig = {
       // Proxy has an error message, that suggests to read `https://neon.com/sni` for more details.
       {
         source: '/sni',
-        destination: '/docs/connect/connection-errors',
+        destination: '/docs/connect/connection-errors#the-endpoint-id-is-not-specified',
         permanent: true,
       },
       // NOTE: bare `/docs` is the docs front page (src/app/(docs)/docs/page.jsx) and

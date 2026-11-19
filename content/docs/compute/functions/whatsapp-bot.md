@@ -5,7 +5,7 @@ summary: >-
   Host a WhatsApp bot on Neon Functions. Receive WhatsApp Cloud API webhooks, verify Meta's
   request signatures, reply through the Graph API, and store data in Postgres on the same branch.
 enableTableOfContents: true
-updatedOn: '2026-10-31T13:11:38.215Z'
+updatedOn: '2026-11-09T23:20:10.000Z'
 isDraft: false
 ---
 

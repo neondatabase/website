@@ -12,7 +12,7 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/quickstart/java
   - /docs/integrations/java
-updatedOn: '2026-10-09T10:14:56.146Z'
+updatedOn: '2026-11-07T17:15:39.000Z'
 ---
 
 <CopyPrompt src="/prompts/java-prompt.md" 

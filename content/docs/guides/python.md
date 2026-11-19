@@ -10,7 +10,7 @@ summary: >-
   the SQLAlchemy or Django guides when you need raw SQL driver code rather than
   an ORM.
 enableTableOfContents: true
-updatedOn: '2026-10-09T10:14:56.146Z'
+updatedOn: '2026-11-18T16:51:04.173Z'
 ---
 
 <CopyPrompt src="/prompts/python-prompt.md" 
@@ -719,7 +719,7 @@ While this guide demonstrates how to connect to Neon using raw SQL queries, for 
 
 Explore the following resources to learn how to integrate ORMs with Neon:
 
-- [Connect an SQLAlchemy application to Neon](/docs/guides/sqlalchemy)
+- [Connect an SQLAlchemy application to Lakebase Postgres on Neon](/docs/guides/sqlalchemy)
 - [Connect a Django application to Neon](/docs/guides/django)
 
 ## Next steps: Neon backend services

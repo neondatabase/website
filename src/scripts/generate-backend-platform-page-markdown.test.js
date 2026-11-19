@@ -82,7 +82,7 @@ describe('backend platform page Markdown', () => {
     expect(markdown).toContain('### Text models');
     expect(markdown).toContain('`gemini-3-5-flash`');
     expect(markdown).toContain('| Released |');
-    expect(markdown).toContain('Inference is free during the private preview.');
+    expect(markdown).toContain('Inference draws down your prepaid AI Gateway credits.');
     expect(markdown).toContain('## Compatibility');
     expect(markdown).toContain('## Built for agents and the developers behind them.');
     expect(markdown).toContain('## Trusted at scale.');

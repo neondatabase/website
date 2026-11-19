@@ -6,7 +6,7 @@ summary: >-
   Gateway. It is OpenAI Chat Completions-compatible, works with any model in
   the catalog, and lets you switch providers without changing your SDK code.
 enableTableOfContents: true
-updatedOn: '2026-10-23T11:00:38.670Z'
+updatedOn: '2026-11-18T00:17:54.883Z'
 ---
 
 The chat completions endpoint is the recommended way to use Neon AI Gateway. It's fully compatible with the [OpenAI Chat Completions API](https://platform.openai.com/docs/api-reference/chat) and works with every model in the [AI Gateway catalog](/docs/ai-gateway/models). Switch models by changing a single field.
@@ -158,11 +158,11 @@ model: 'gemini-3-flash'
 model: 'qwen3-next-80b-a3b-instruct'
 ```
 
-For a few models, `message.content` comes back as an array of content blocks instead of a plain string. See [Content shape varies by model](/docs/ai-gateway/models#which-endpoint-to-use) before swapping in a model you haven't used yet.
+For a few Claude and Gemini models, `message.content` comes back as an array of content blocks instead of a plain string. [Content shape varies by model](/docs/ai-gateway/models#which-endpoint-to-use) lists those models and how to get plain text from them.
 
 Gemini models don't support `parallel_tool_calls: false`, and a request that sets it returns `400` with `Unknown name "parallel_tool_calls"`. Leave the field out instead. Gemini makes parallel tool calls by default, so your code needs to handle more than one tool call per turn.
 
-`gemini-4-argon` doesn't support `temperature` or `reasoning_effort` on this endpoint, and a request that sets either returns `400`. Leave both out. If you need to control them, call the model through the [Gemini endpoint](/docs/ai-gateway/gemini) instead, where `temperature` and `thinkingConfig.thinkingLevel` both work.
+`gemini-4-argon` and `gemini-4-carbon` don't support `temperature` or `reasoning_effort` on this endpoint, and a request that sets either returns `400`. Leave both out. If you need to control them, call the model through the [Gemini endpoint](/docs/ai-gateway/gemini) instead, where `temperature` and `thinkingConfig.thinkingLevel` both work.
 
 See [Models](/docs/ai-gateway/models) for the full list.
 

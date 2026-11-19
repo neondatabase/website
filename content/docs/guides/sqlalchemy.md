@@ -1,5 +1,5 @@
 ---
-title: Connect an SQLAlchemy application to Lakebase Postgres
+title: Connect an SQLAlchemy application to Lakebase Postgres on Neon
 subtitle: Set up a project on Neon in seconds and connect from an SQLAlchemy application
 summary: >-
   SQLAlchemy, a Python SQL toolkit and ORM, connects to Lakebase Postgres by
@@ -13,7 +13,7 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/quickstart/sqlalchemy
   - /docs/integrations/sqlalchemy
-updatedOn: '2026-09-16T19:45:35.340Z'
+updatedOn: '2026-11-18T16:41:34.386Z'
 ---
 
 <CopyPrompt src="/prompts/sqlalchemy-prompt.md" 
@@ -119,7 +119,7 @@ For schema migration with SQLAlchemy, see:
 
 <DetailIconCards>
 
-<a href="/docs/guides/sqlalchemy-migrations" description="Schema migration with Lakebase Postgres and SQLAlchemy" icon="app-store">SQLAlchemy Migrations</a>
+<a href="/docs/guides/sqlalchemy-migrations" description="Schema migration with SQLAlchemy and Lakebase Postgres on Neon" icon="app-store">SQLAlchemy Migrations</a>
 
 </DetailIconCards>
 

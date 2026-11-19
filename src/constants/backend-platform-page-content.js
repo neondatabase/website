@@ -156,7 +156,7 @@ const functionsPageContent = {
 
 const aiGatewayPageContent = {
   // Bump when this page's copy changes; shown on the page and in its Markdown version.
-  updatedOn: '2026-10-14',
+  updatedOn: '2026-11-17',
   slug: 'ai-gateway',
   pageLabel: 'AI Gateway',
   hero: {
@@ -267,9 +267,9 @@ const aiGatewayPageContent = {
         '<p>For an OpenAI-compatible client, change the base URL and credential. The request and streaming formats stay the same. AI Gateway also provides provider-specific endpoints when you need features from the OpenAI Responses API, Anthropic Messages API, or Gemini API.</p>',
     },
     {
-      question: 'Who can use AI Gateway after GA?',
+      question: 'Which plans can use AI Gateway?',
       answer:
-        '<p>AI Gateway is available on the Neon Launch and Scale plans. Both plans have the same AI Gateway pricing. You need prepaid AI Gateway credits before you can make inference requests. Any paid account with prepaid credits can use every model in the catalog, subject to regional availability.</p>',
+        '<p>AI Gateway is available on every Neon plan, including Free, with the same pricing on every plan. You need prepaid AI Gateway credits before you can make inference requests. On the Free plan, add a payment card to buy credits; you don&apos;t need to upgrade. Any account with prepaid credits can use every model in the catalog, subject to regional availability.</p>',
     },
     {
       question: 'How does AI Gateway pricing work?',
@@ -284,7 +284,7 @@ const aiGatewayPageContent = {
     {
       question: 'How do I buy and manage credits?',
       answer:
-        '<p>Buy credits from the Billing page in the Neon Console. Credits are added to your AI Gateway balance after payment and accumulate across purchases. You can see your current balance in the Neon Console. Automatic top-ups can add credits when your balance falls below a threshold.</p>',
+        '<p>Buy credits from the Billing page in the Neon Console. Credits are added to your AI Gateway balance after payment and accumulate across purchases. You can see your current balance in the Neon Console. On paid plans, automatic top-ups can add credits when your balance falls below a threshold.</p>',
     },
     {
       question: 'How are credits deducted?',
@@ -304,7 +304,7 @@ const aiGatewayPageContent = {
     {
       question: "Why can't I access a model in the catalog?",
       answer:
-        '<p>Model availability can vary by region, and the catalog changes as models are added or retired. Use the authenticated <code>GET /v1/models</code> endpoint to see the models available to you.</p>',
+        '<p>Models are locked until your organization has prepaid AI Gateway credits and Neon confirms access. Only organization admins can buy credits. A model can also be locked by account verification, the daily spend limit, or an account restriction. Model availability can vary by region, and the catalog changes as models are added or retired. Use the authenticated <code>GET /v1/models</code> endpoint to see the models available to you, and see <a href="/docs/ai-gateway/troubleshooting#some-models-are-restricted-in-the-console">Troubleshooting</a> for what each lock means.</p>',
     },
   ],
 };
