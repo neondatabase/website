@@ -71,7 +71,7 @@ It felt amazing when you approached me and shared that the Databricks/Neon team 
 - **July 2022:** Dmitry creates neon-sdk-go and terraform-provider-neon.
 - **January 2023:** neon-sdk-go v0.1.0 (January 3) and the first provider release, v0.0.1 on the Terraform Registry (January 5).
 - **September 2026:** kislerdm/neon v0.18.0, the last of 39 community releases.
-- **November 2026:** the official `neondatabase/neon` provider ships its first beta, v0.19.0-beta.0, and we maintain it together with Dmitry and Justin. The current release is v0.19.0-beta.3.
+- **November 2026:** the official `neondatabase/neon` provider ships its first beta, v0.19.0-beta.0, and we maintain it together with Dmitry and Justin. The current release is v0.19.0-beta.4.
 
 ## What's new since kislerdm/neon 0.18
 
@@ -108,7 +108,7 @@ Here are the resources we added since 0.18, grouped by Neon primitive:
 
 - [Neon Functions](https://neon.com/docs/functions): `neon_function`, `neon_trigger`
 - [Object Storage](https://neon.com/docs/storage/overview): `neon_bucket`, `neon_bucket_object`, `neon_service_credential`
-- [Neon Auth](https://neon.com/docs/auth/overview): `neon_auth`, `neon_auth_trusted_domain`, `neon_auth_oauth_provider`
+- [Neon Auth](https://neon.com/docs/auth/overview): `neon_auth` (including sign-in methods, the email provider and webhooks), `neon_auth_trusted_domain`, `neon_auth_oauth_provider`
 - [Realtime](https://neon.com/docs/realtime/overview): `neon_branch_realtime` and the ephemeral `neon_branch_realtime_secret`
 - [Data API](https://neon.com/docs/data-api/get-started): `neon_data_api`
 - Snapshots and custom branch domains: `neon_snapshot`, `neon_custom_branch_domain`
@@ -146,7 +146,7 @@ terraform {
   required_providers {
     neon = {
       source  = "neondatabase/neon"
-      version = "0.19.0-beta.3"
+      version = "0.19.0-beta.4"
     }
   }
 }
