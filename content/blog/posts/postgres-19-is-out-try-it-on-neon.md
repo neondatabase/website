@@ -14,8 +14,8 @@ categories:
 authors:
   - savannah-longoria
 cover:
-  image: null
-  alt: null
+  image: https://cdn.neonapi.io/public/images/pages/blog/postgres-19-is-out-try-it-on-neon/cover.jpg
+  alt: Postgres 19 is out, try it on Neon
 isFeatured: false
 seo:
   title: 'Postgres 19 is out: try it on Neon - Neon'
@@ -24,10 +24,13 @@ seo:
   noindex: false
   ogTitle: 'Postgres 19 is out: try it on Neon - Neon'
   ogDescription: 'REPACK, query plan advice, WAIT FOR LSN, and more'
-  image: null
+  image: https://cdn.neonapi.io/public/images/pages/blog/postgres-19-is-out-try-it-on-neon/social.jpg
 ---
 
-**[ADD CLIP 1 by pixelpoint]** 
+<video autoPlay muted loop playsInline width="708" height="398" aria-label="Postgres 19 available on Neon">
+<source src="https://cdn.neonapi.io/public/images/pages/blog/postgres-19-is-out-try-it-on-neon/clip-1.webm" type="video/webm" />
+<source src="https://cdn.neonapi.io/public/images/pages/blog/postgres-19-is-out-try-it-on-neon/clip-1.mp4" type="video/mp4" />
+</video>
 
 Postgres 19 is out, and [as always](https://neon.com/blog/postgres-18), it's available on Neon the same day. You can already try it on the Neon Free plan: start a Postgres 19 project from the Neon Console by choosing version 19 when you create the project, or [ask your agent to do it](https://neon.com/docs/ai/neon-mcp-server):
 
@@ -35,7 +38,10 @@ Postgres 19 is out, and [as always](https://neon.com/blog/postgres-18), it's ava
 Create a new Neon project on Postgres 19
 ```
 
-**[ADD CLIP 2 (agent)]**
+<video autoPlay muted loop playsInline width="708" height="403" aria-label="Trying Postgres 19 on Neon with an agent">
+<source src="https://cdn.neonapi.io/public/images/pages/blog/postgres-19-is-out-try-it-on-neon/clip-2.webm" type="video/webm" />
+<source src="https://cdn.neonapi.io/public/images/pages/blog/postgres-19-is-out-try-it-on-neon/clip-2.mp4" type="video/mp4" />
+</video>
 
 <Admonition type="note" title="This release took a little longer">
 Postgres 19 was first scheduled for October 29. The release team added a second release candidate, moved general availability to November 19, and pulled several large features late in the cycle (more on those below). Robert Haas, a Postgres committer on our team, wrote [wrote a blog post discussing why.](https://neon.com/blog/postgres-19-is-late-and-its-ais-fault)**.**
