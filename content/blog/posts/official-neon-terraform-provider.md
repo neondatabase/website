@@ -116,7 +116,6 @@ Here are the resources we added since 0.18, grouped by Neon primitive:
 
 Enabling Realtime on a branch, for example, is one resource:
 
-
 ```terraform
 resource "neon_branch_realtime" "this" {
   project_id      = neon_project.app.id
@@ -136,6 +135,45 @@ Selfishly, I wanted to use the gateway using my preferred coding agent. Initiall
 **How is maintaining packages like this changing with AI?**
 
 With the use of agents, maintaining the extension has been relatively easy. With every new update to the gateway, I can have one of my agents grab the specs, implement new models and run tests against the gateway to ensure functionality. Iterating on new versions has been something I enjoy and it makes managing my subscriptions easier since I technically only need one!
+
+## Getting started
+
+Create an API key in the Neon Console and export it as `NEON_API_KEY`. This config creates a Neon project and an Object Storage bucket on its default branch:
+
+```terraform
+terraform {
+  required_providers {
+    neon = {
+      source  = "neondatabase/neon"
+      version = "0.19.0-beta.4"
+    }
+  }
+}
+
+provider "neon" {}
+
+resource "neon_project" "app" {
+  name      = "app"
+  region_id = "aws-us-east-2"
+}
+
+resource "neon_bucket" "uploads" {
+  project_id = neon_project.app.id
+  branch_id  = neon_project.app.branch.id
+  name       = "uploads"
+}
+
+output "s3_endpoint" {
+  value = neon_bucket.uploads.s3_endpoint
+}
+```
+
+```shell
+terraform init
+terraform apply
+```
+
+OpenTofu installs the same provider from the [OpenTofu registry](https://search.opentofu.org/provider/neondatabase/neon/latest), so `tofu init` and `tofu apply` work too. Our [Terraform docs](https://neon.com/docs/reference/terraform) cover API keys and common errors, and the [Registry docs](https://registry.terraform.io/providers/neondatabase/neon/latest/docs) cover every resource.
 
 ## Moving from kislerdm/neon
 
@@ -164,9 +202,7 @@ A few attributes changed shape on the way to the Plugin Framework. Nested blocks
 
 ## Why we shipped a beta
 
-We wanted to get the official provider out quickly and hear from you early, so we released it as a beta. Every change runs the full acceptance test suite against a live Neon organization on Terraform 1.5, the oldest version we support, and Terraform 1.17. We also tested the release with OpenTofu 1.13, which installs the provider from the [OpenTofu registry](https://search.opentofu.org/provider/neondatabase/neon/latest) under the same `neondatabase/neon` address. So we think it's ready for real projects, whether you use Terraform or OpenTofu. We're still very much open to feedback: tell us what's missing, what feels off and what breaks. Pin the exact version and check the [changelog](https://github.com/neondatabase/terraform-provider-neon/blob/main/CHANGELOG.md) before you bump it.
-
-If you want to get started, our [Terraform docs](https://neon.com/docs/reference/terraform) walk you through API keys, a first project and common errors, while the [Registry docs](https://registry.terraform.io/providers/neondatabase/neon/latest/docs) cover every resource. Issues and feature requests are always welcome in [neondatabase/terraform-provider-neon](https://github.com/neondatabase/terraform-provider-neon/issues).
+We shipped the provider as a beta to get it into your hands early, and we're iterating on the feedback coming in. We're aiming for v1 within weeks. Until then, pin the exact version and check the [changelog](https://github.com/neondatabase/terraform-provider-neon/blob/main/CHANGELOG.md) before you bump it. Issues and feature requests are always welcome in [neondatabase/terraform-provider-neon](https://github.com/neondatabase/terraform-provider-neon/issues).
 
 A big thank you to Dmitry for building and maintaining the provider for over three years and to Justin for the work that made the official release possible. We're really excited to keep building it together.
 
