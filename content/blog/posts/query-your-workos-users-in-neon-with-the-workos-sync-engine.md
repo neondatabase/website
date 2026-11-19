@@ -57,7 +57,10 @@ Set up the WorkOS Sync Engine on my Neon project using the workos-sync Function 
 A follow-up guide walks through deploying the Sync Engine on Neon, then adding a Neon Function that answers support, sales, and security questions in Slack with read-only SQL through Neon AI Gateway.
 </Admonition>
 
-**[ADD CLIP]**
+<video autoPlay muted loop playsInline width="708" height="398" aria-label="Slack bot powered by WorkOS data on Neon">
+<source src="https://cdn.neonapi.io/public/images/pages/blog/query-your-workos-users-in-neon-with-the-workos-sync-engine/workos-slack-bot.webm" type="video/webm" />
+<source src="https://cdn.neonapi.io/public/images/pages/blog/query-your-workos-users-in-neon-with-the-workos-sync-engine/workos-slack-bot.mp4" type="video/mp4" />
+</video>
 
 ## How the Sync Engine works
 
