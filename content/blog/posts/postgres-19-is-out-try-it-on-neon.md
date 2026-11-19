@@ -44,7 +44,7 @@ Create a new Neon project on Postgres 19
 </video>
 
 <Admonition type="note" title="This release took a little longer">
-Postgres 19 was first scheduled for October 29. The release team added a second release candidate, moved general availability to November 19, and pulled several large features late in the cycle (more on those below). Robert Haas, a Postgres committer on our team, wrote [wrote a blog post discussing why.](https://neon.com/blog/postgres-19-is-late-and-its-ais-fault)**.**
+Postgres 19 was first scheduled for October 29. The release team added a second release candidate, moved general availability to November 19, and pulled several large features late in the cycle (more on those below). Robert Haas, a Postgres committer on our team, wrote [wrote a blog post discussing why](https://neon.com/blog/postgres-19-is-late-and-its-ais-fault)**.**
 </Admonition>
 
 ## What's new in Postgres 19
