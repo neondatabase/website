@@ -54,7 +54,7 @@ Set up the WorkOS Sync Engine on my Neon project using the workos-sync Function 
 ```
 
 <Admonition type="tip" title="Example: Build a Slack bot on top of your WorkOS data">
-A follow-up guide walks through deploying the Sync Engine on Neon, then adding a Neon Function that answers support, sales, and security questions in Slack with read-only SQL through Neon AI Gateway.
+[This guide](https://neon.com/guides/workos-slack-bot-neon) walks through deploying the Sync Engine on Neon, then adding a Neon Function that answers support, sales, and security questions in Slack with read-only SQL through Neon AI Gateway.
 </Admonition>
 
 <video autoPlay muted loop playsInline width="708" height="398" aria-label="Slack bot powered by WorkOS data on Neon">
