@@ -11,7 +11,7 @@ summary: >-
   require manual intervention on the subscriber.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2026-09-16T19:45:35.340Z'
+updatedOn: '2026-11-12T18:51:28.000Z'
 ---
 
 This topic provides commands for managing publications, subscriptions, and replication slots.

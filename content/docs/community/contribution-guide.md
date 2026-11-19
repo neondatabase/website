@@ -9,7 +9,7 @@ summary: >-
   request, add yourself as a guide author, frontmatter, navigation.yaml,
   Markdown, components, and style rules.
 enableTableOfContents: true
-updatedOn: '2026-09-17T16:33:54.884Z'
+updatedOn: '2026-11-16T00:00:06.000Z'
 ---
 
 Thanks for helping improve Neon content. This page explains ways to contribute, how to submit a contribution, and the Markdown and style conventions we follow.

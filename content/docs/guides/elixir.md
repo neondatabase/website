@@ -8,7 +8,7 @@ summary: >-
   when you want direct Postgrex access without an ORM; for Ecto-based
   integration see the Elixir Ecto guide.
 enableTableOfContents: true
-updatedOn: '2026-10-09T10:14:56.146Z'
+updatedOn: '2026-11-08T14:16:38.000Z'
 ---
 
 <CopyPrompt src="/prompts/elixir-prompt.md" 

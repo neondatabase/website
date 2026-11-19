@@ -8,7 +8,7 @@ summary: >-
   to choose the right command for each task. Commands are stored in
   .claude/commands/ and their sub-agents in .claude/agents/.
 enableTableOfContents: true
-updatedOn: '2026-08-27T14:02:21.025Z'
+updatedOn: '2026-11-02T12:50:30.000Z'
 ---
 
 The Neon website repo includes Claude commands for common documentation tasks. All changes are reviewed by humans via pull requests.

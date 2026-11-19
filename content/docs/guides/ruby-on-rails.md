@@ -1,5 +1,5 @@
 ---
-title: Connect a Ruby on Rails application to Lakebase Postgres
+title: Connect a Ruby on Rails application to Lakebase Postgres on Neon
 subtitle: Set up a project on Neon in seconds and connect from a Ruby on Rails application
 summary: >-
   Ruby on Rails connection guide that shows how to configure DATABASE_URL in a
@@ -8,7 +8,7 @@ summary: >-
   page when setting up a new or existing Rails project. A separate
   sibling page covers Rails schema migrations.
 enableTableOfContents: true
-updatedOn: '2026-09-16T19:45:35.340Z'
+updatedOn: '2026-11-18T16:41:34.386Z'
 ---
 
 <CopyPrompt src="/prompts/ruby-on-rails-prompt.md" 
@@ -131,7 +131,7 @@ For schema migration with Ruby on Rails, see our guide:
 
 <DetailIconCards>
 
-<a href="/docs/guides/rails-migrations" description="Schema migration with Lakebase Postgres and Ruby on Rails" icon="app-store" icon="app-store">Ruby on Rails Migrations</a>
+<a href="/docs/guides/rails-migrations" description="Schema migration with Ruby on Rails and Lakebase Postgres on Neon" icon="app-store">Ruby on Rails Migrations</a>
 
 </DetailIconCards>
 

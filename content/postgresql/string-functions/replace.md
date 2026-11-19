@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-string-functions/postgresql-replace/
 ogImage: ''
-updatedOn: '2026-06-19T17:44:03.964Z'
+updatedOn: '2026-08-17T11:10:28.000Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL REVERSE() Function

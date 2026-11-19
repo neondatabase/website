@@ -6,7 +6,7 @@ summary: >-
   models, which endpoint to use, shorter and longer request paths, the
   /v1/models API, rate limits, pricing, and provider terms.
 enableTableOfContents: true
-updatedOn: '2026-11-15T17:20:24.920Z'
+updatedOn: '2026-11-18T00:17:54.883Z'
 ---
 
 This page covers how to call models through Neon AI Gateway and the rules that apply. For the full list of models you can call, see the [model catalog](https://neon.com/ai-gateway#models).
@@ -83,17 +83,45 @@ All paths below are appended to your branch's bare AI Gateway host (`NEON_AI_GAT
 | TypeSafe AI (decision models)           | `/typesafe/v1/systemone` | No chat completions. Returns answers to questions, not text. See [Decisions](/docs/ai-gateway/decisions)       |
 
 <Admonition type="warning" title="Content shape varies by model">
-For most models, `message.content` in a chat completions response is a plain string. For `claude-opus-5-5`, it's an array of typed content blocks once the model reasons (`{ type: 'reasoning', ... }`, `{ type: 'text', text: ... }`); a trivial prompt still returns a string. For `gemini-4-argon`, it's an array of `text` blocks, even for a trivial prompt. A low `max_tokens` value can also cut a response off before the `text` block appears, leaving only a `reasoning` block. Handle both shapes:
+On `/v1/chat/completions`, `message.content` is a plain string for most models. For the models below, the gateway returns an array of typed content blocks instead. This is a known gateway issue that we're fixing.
+
+- `gemini-3-7-flash`, `gemini-3-8-flash`, `gemini-4-argon`, and `gemini-4-carbon` return an array on every non-streaming response, even for a trivial prompt. Their streamed `delta.content` values are strings, with `null` on the final chunk.
+- `claude-opus-5-5`, `claude-haiku-5-5`, `claude-fable-5-1`, and `claude-fable-5-2` return an array whenever the model reasons and a string when it doesn't. They decide on their own when to reason, so even a trivial prompt can return an array. When they reason while streaming, some `delta.content` values are arrays too. A low `max_tokens` value can cut a response off before the `text` block appears, leaving only a `reasoning` block.
+
+The arrays have these shapes:
+
+```typescript
+// Gemini models
+[
+  { type: 'text', text: '...', thoughtSignature: '...' },
+];
+
+// Claude models, once they reason
+[
+  { type: 'reasoning', summary: [...] },
+  { type: 'text', text: '...' },
+];
+```
+
+To get plain text from every model without extra code, call the gateway through [`@neon/ai-sdk-provider`](https://www.npmjs.com/package/@neon/ai-sdk-provider) with the Vercel AI SDK. The native endpoints return a fixed shape: [Gemini](/docs/ai-gateway/gemini) through the google-genai SDK gives you `response.text`, and [Anthropic Messages](/docs/ai-gateway/anthropic-messages) always returns an array of content blocks. With the OpenAI SDK on `/v1/chat/completions`, accept both shapes and join the `text` blocks:
 
 ```typescript
 // The OpenAI SDK types content as string | null, so read it as unknown.
-const content: unknown = response.choices[0].message.content;
-const text =
-  typeof content === 'string'
-    ? content
-    : Array.isArray(content)
-      ? (content.find((block) => block?.type === 'text')?.text ?? '')
-      : '';
+function textOf(content: unknown): string {
+  if (typeof content === 'string') return content;
+  if (!Array.isArray(content)) return '';
+  return content
+    .filter((block) => block?.type === 'text' && typeof block.text === 'string')
+    .map((block) => block.text)
+    .join('');
+}
+
+const text = textOf(response.choices[0].message.content);
+
+// Streamed deltas can be arrays too, so read them the same way.
+for await (const chunk of stream) {
+  process.stdout.write(textOf(chunk.choices[0]?.delta?.content));
+}
 ```
 
 </Admonition>

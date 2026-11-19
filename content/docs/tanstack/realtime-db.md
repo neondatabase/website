@@ -9,7 +9,7 @@ summary: >-
   common mistakes.
 enableTableOfContents: true
 noindex: true
-updatedOn: '2026-11-13T07:16:27.663Z'
+updatedOn: '2026-11-18T00:59:49.148Z'
 ---
 
 <FeatureBetaProps feature_name="Realtime" />
@@ -19,7 +19,7 @@ updatedOn: '2026-11-13T07:16:27.663Z'
 ## Before you begin
 
 - Your Neon project must be in a [supported region](/docs/realtime/overview#which-regions-is-it-enabled-in).
-- Enabling Realtime permanently turns on [logical replication](/docs/guides/logical-replication-neon) for the project and suspends every compute on every branch, which drops active connections. Each compute starts again on its next connection.
+- Enabling Realtime permanently turns on [logical replication](/docs/guides/logical-replication-neon) for the project and restarts all computes on every branch, so active connections drop and reconnect.
 - Tables in live queries need a stable replica identity. A primary key is enough.
 - For SSR in TanStack Start, `@tanstack/react-router-with-db` requires `@tanstack/react-db` 1.0.0-rc.1 or later.
 
@@ -178,7 +178,7 @@ export function todosCollection(userId: string, query: SealedLiveQuery<Todo>) {
 }
 ```
 
-The adapter syncs eagerly. It has no `syncMode` option. See the [`realtimeCollectionOptions()` reference](/docs/realtime/sdks/typescript#tanstack-db-realtimecollectionoptions) for every option.
+The adapter syncs eagerly. It has no `syncMode` option. See the [`realtimeCollectionOptions()` reference](/docs/realtime/sdks/typescript/tanstack-db#tanstack-db-realtimecollectionoptions) for every option.
 
 ## Return the transaction ID from writes
 

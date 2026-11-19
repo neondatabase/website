@@ -10,7 +10,7 @@ summary: >-
   Console and API equivalents for these operations are covered on separate
   pages.
 enableTableOfContents: true
-updatedOn: '2026-10-09T15:17:33.920Z'
+updatedOn: '2026-11-10T14:13:57.000Z'
 ---
 
 The examples in this guide demonstrate creating, viewing, and deleting branches using the Neon CLI. For other branch-related CLI commands, refer to the [Neon CLI branch commands](/docs/cli/branches). This guide also describes how to use the `--api-key` option to authenticate CLI branching commands from the command line.

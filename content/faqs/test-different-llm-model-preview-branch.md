@@ -2,7 +2,7 @@
 title: "How do I test a different LLM model on a preview branch before switching production?"
 subtitle: "Branch your Neon backend, deploy the branch with a different model ID through Neon AI Gateway, and run your evals against a copy-on-write clone of production data. Production keeps its model until you merge the change."
 createdAt: '2026-11-02T00:00:00.000Z'
-updatedOn: '2026-11-03T23:21:47.530Z'
+updatedOn: '2026-11-17T18:07:26.865Z'
 isDraft: false
 previousLink:
   title: 'Is there a Supabase Realtime alternative that supports live queries with joins and aggregates?'
@@ -64,7 +64,7 @@ To keep eval branches from piling up, give new branches a TTL with the `branch` 
 
 ## Things to check when you swap models
 
-- **Response shape**: for most models `message.content` is a string, but some return an array of content blocks, for example once a model reasons. Handle both shapes ([which endpoint to use](/docs/ai-gateway/models#which-endpoint-to-use)).
+- **Response shape**: for most models `message.content` is a string, but a few Claude and Gemini models return an array of content blocks, some only once they reason. If the model you're switching to is on the [list](/docs/ai-gateway/models#which-endpoint-to-use), handle both shapes or call it through `@neon/ai-sdk-provider`, which returns plain text.
 - **Unsupported parameters**: Gemini models reject `parallel_tool_calls: false`, and `gemini-4-argon` rejects `temperature` and `reasoning_effort` on chat completions ([chat completions](/docs/ai-gateway/chat-completions#switching-models)).
 - **Endpoint requirements**: Codex variants such as `gpt-5-3-codex` work only on the [Responses API endpoint](/docs/ai-gateway/openai-responses).
 - **Cost**: eval traffic draws down the same prepaid credit balance as production, at each provider's per-token rate. Compare per-model rates in [`neon.com/models.json`](https://neon.com/models.json) before you switch.

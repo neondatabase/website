@@ -2,10 +2,10 @@ import PropTypes from 'prop-types';
 
 import { cn } from 'utils/cn';
 
-const LastUpdatedDate = ({ className = null, updatedOn }) => {
+const LastUpdatedDate = ({ className = null, updatedOn, monthFormat = 'long' }) => {
   const lastUpdatedOn = new Date(updatedOn).toLocaleDateString('en-US', {
     year: 'numeric',
-    month: 'long',
+    month: monthFormat,
     day: 'numeric',
   });
 
@@ -19,6 +19,7 @@ const LastUpdatedDate = ({ className = null, updatedOn }) => {
 LastUpdatedDate.propTypes = {
   className: PropTypes.string,
   updatedOn: PropTypes.string.isRequired,
+  monthFormat: PropTypes.oneOf(['long', 'short']),
 };
 
 export default LastUpdatedDate;

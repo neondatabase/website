@@ -1,118 +1,53 @@
 ---
 title: TypeScript SDK
 subtitle: Seal queries, subscribe from clients, and sync with frameworks
-summary: Reference for the Realtime TypeScript SDK, covering backend query sealing, low-level client subscriptions, React integration, and TanStack DB adapter.
+summary: Overview of the Realtime TypeScript SDK modules (backend query sealing, browser client subscriptions, React, TanStack DB, Drizzle and Kysely), with a link to each module's API reference page.
 enableTableOfContents: true
-updatedOn: '2026-10-23T14:30:57.000Z'
+updatedOn: '2026-11-18T00:59:49.148Z'
 ---
 
-<Admonition type="important" title="Upgrading to 0.2.0">
-Realtime SDK 0.2.0 uses version 2 of the Realtime protocol. Upgrade `@neon/realtime` and every Realtime adapter you use (`@neon/realtime-react`, `@neon/realtime-tanstack`, `@neon/realtime-drizzle`, `@neon/realtime-kysely`) to 0.2.0 together, since the 0.2.0 adapters require `@neon/realtime` 0.2.0.
+<Admonition type="important" title="Upgrading from 0.1">
+Realtime SDK 0.2 and later use version 2 of the Realtime protocol. Upgrade `@neon/realtime` and every Realtime adapter you use (`@neon/realtime-react`, `@neon/realtime-tanstack`, `@neon/realtime-drizzle`, `@neon/realtime-kysely`) to their latest versions together, since current adapters require `@neon/realtime` 0.2 or later.
 </Admonition>
-
-The Realtime SDK is split into modules:
-
-- [Backend](#backend) provides a [`RealtimeServer`](#backend-realtimeserver) that [seals queries](../guides/queries#sealing-queries)
-- [Client](#client) provides a [`RealtimeClient`](#client-realtimeclient) that subscribes to live queries and materializes results
-- [React](#react) provides a [`RealtimeProvider`](#react-realtimeprovider) and the [`useLiveQuery`](#react-uselivequery) and [`useRealtimeClient`](#react-userealtimeclient) hooks
-- [TanStack DB](#tanstack-db) provides [`realtimeCollectionOptions`](#tanstack-db-realtimecollectionoptions) to create a [TanStack DB collection](https://tanstack.com/db/latest/docs/overview#defining-collections)
-- [Drizzle](#drizzle) and [Kysely](#kysely) provide [live query adapters](../guides/queries#using-a-query-builder-or-orm)
 
 <Admonition type="warning" title="Beta: APIs may change">
   The TypeScript SDK is still evolving. The APIs are subject to change.
 </Admonition>
 
+The Realtime SDK is split into modules, one import specifier each. Each section below summarizes a module and links to its API reference page, which lists every export with its signature and members.
+
 ## Backend
 
-Import the Backend module from `@neon/realtime/server`. It runs only on your server, because it uses your Realtime secret. It defines live queries and seals them, so an untrusted client can subscribe to a query without being able to read or change it. It's taught in the [Defining queries](../guides/queries) guide.
+`@neon/realtime/server` runs on your server. [`createRealtime()`](/docs/realtime/sdks/typescript/backend#backend-createrealtime) returns a [`RealtimeServer`](/docs/realtime/sdks/typescript/backend#backend-realtimeserver) that [seals queries](/docs/realtime/guides/queries#sealing-queries), or a [`RealtimeDirectServer`](/docs/realtime/sdks/typescript/backend#backend-realtimedirectserver) that subscribes from trusted backend code.
 
-Create the server once, then seal a query:
-
-```ts
-import { createRealtime } from "@neon/realtime/server"
-
-const realtime = createRealtime({ secret: process.env.NEON_REALTIME_SECRET!, db: "neondb" })
-const sealedQuery = await realtime.seal({ query: messagesQuery(userId, channelId) })
-```
-
-`secret` is your `NEON_REALTIME_SECRET`, written by `neon env pull --service realtime` or shown on the Realtime page in the Neon Console. `db` is the database your queries run against. [Setup](../guides/queries#setup) covers both, and [`RealtimeServerOptions`](#backend-realtimeserveroptions) lists the other options, including [`debugMode`](../guides/subscribing#show-full-database-errors).
-
-### Direct subscriptions
-
-Add a `url` to `createRealtime()` and it returns a [`RealtimeDirectServer`](#backend-realtimedirectserver), which subscribes to queries itself, for workers, trusted agents and other backend code. [Subscribe in trusted backend code](../guides/subscribing#subscribe-in-trusted-backend-code) shows how.
-
-### Typed parameters
-
-Most `rawSql` parameter values pass as they are. Wrap dates, JSON, `bytea` and arrays in a [`pgParam`](#backend-pgparam) helper to name their Postgres type, as [Parameter types](../guides/queries#parameter-types) shows.
-
-<RealtimeSdkBackend />
+[Backend API reference →](/docs/realtime/sdks/typescript/backend)
 
 ## Client
 
-Import the Client module from `@neon/realtime/client`. It runs in the browser, where it subscribes to sealed queries over one shared WebSocket and keeps their results up to date. It's taught in the [Subscribing to queries](../guides/subscribing) guide.
+`@neon/realtime/client` runs in the browser and React Native. [`createRealtimeClient()`](/docs/realtime/sdks/typescript/client#client-createrealtimeclient) returns a [`RealtimeClient`](/docs/realtime/sdks/typescript/client#client-realtimeclient) that subscribes to sealed queries and materializes their results.
 
-Create one client for your app, then subscribe to a sealed query from your backend:
-
-```ts
-import { createRealtimeClient } from "@neon/realtime/client"
-
-const client = createRealtimeClient({ url: import.meta.env.VITE_NEON_REALTIME_URL })
-const subscription = client.subscribe(sealedQuery)
-subscription.onChange(({ data, status }) => render(data, status))
-```
-
-Pass a `logLevel` to see what the client is doing, as [Log client diagnostics](../guides/subscribing#log-client-diagnostics) shows.
-
-### React Native
-
-The client also runs in React Native apps, with `@neon/realtime` 0.1.2 or later. Import it from `@neon/realtime/client` as usual.
-
-React Native's WebSocket sends an `Origin` header derived from the Realtime endpoint. If your branch restricts Realtime to specific origins, pass a `webSocketFactory` that sends one of the allowed origins:
-
-```ts
-const client = createRealtimeClient({
-  url: realtimeUrl,
-  webSocketFactory: (url, protocols) =>
-    new WebSocket(url, protocols, {
-      headers: { origin: "https://app.example.com" },
-    }),
-})
-```
-
-The third `WebSocket` argument is a React Native extension and isn't available in browsers. An origin allowlist protects browser apps only. A native app can send any origin, so don't rely on it to authenticate native clients.
-
-### Renewing sealed queries
-
-Most apps pass a `refreshQuery` function to the [React or TanStack DB bindings](../guides/reactivity), which renew for them. To renew a subscription yourself, see [Renew the sealed query](../guides/subscribing#renew-the-sealed-query). Integration authors can build on [`QueryRefreshController`](#client-queryrefreshcontroller).
-
-<RealtimeSdkClient />
+[Client API reference →](/docs/realtime/sdks/typescript/client)
 
 ## React
 
-Import the React bindings from `@neon/realtime-react`. They run in your React frontend: [`RealtimeProvider`](#react-realtimeprovider) shares one client, [`useLiveQuery`](#react-uselivequery) subscribes a component to a sealed query, and [`useRealtimeClient`](#react-userealtimeclient) returns the shared client. They're taught in the [React section](../guides/reactivity#react) of the reactivity guide.
+`@neon/realtime-react` provides [`RealtimeProvider`](/docs/realtime/sdks/typescript/react#react-realtimeprovider) and the [`useLiveQuery`](/docs/realtime/sdks/typescript/react#react-uselivequery) and [`useRealtimeClient`](/docs/realtime/sdks/typescript/react#react-userealtimeclient) hooks.
 
-<RealtimeSdkReact />
+[React API reference →](/docs/realtime/sdks/typescript/react)
 
 ## TanStack DB
 
-Import the TanStack DB adapter from `@neon/realtime-tanstack`. It runs in the browser, where [`realtimeCollectionOptions`](#tanstack-db-realtimecollectionoptions) turns a sealed query into a TanStack DB collection. It's taught in the [TanStack DB section](../guides/reactivity#tanstack-db) of the reactivity guide. The mutations guide covers [optimistic writes](../guides/mutations#with-tanstack-db-collections), and the SSR guide covers [hydration](../guides/ssr#with-tanstack-db).
+`@neon/realtime-tanstack` provides [`realtimeCollectionOptions`](/docs/realtime/sdks/typescript/tanstack-db#tanstack-db-realtimecollectionoptions) to create a [TanStack DB collection](https://tanstack.com/db/latest/docs/overview#defining-collections) from a sealed query.
 
-<RealtimeSdkTanstackDb />
+[TanStack DB API reference →](/docs/realtime/sdks/typescript/tanstack-db)
 
 ## Drizzle
 
-Import the Drizzle adapter from `@neon/realtime-drizzle`. It runs on your server: pass `drizzleAdapter()` as the `adapter` option to `createRealtime()`, then seal Drizzle selects like any other query. It's taught in [Using a query builder or ORM](../guides/queries#using-a-query-builder-or-orm), and the [Drizzle example](../examples/drizzle) goes further.
+`@neon/realtime-drizzle` provides [`drizzleAdapter()`](/docs/realtime/sdks/typescript/drizzle#drizzle-drizzleadapter), a [live query adapter](/docs/realtime/guides/queries#using-a-query-builder-or-orm) for sealing Drizzle selects on your server. In the browser, `@neon/realtime-drizzle/client` provides [`drizzleParsers`](/docs/realtime/sdks/typescript/drizzle#drizzle-client-drizzleparsers), which decode dates and timestamps the way Drizzle does.
 
-<RealtimeSdkDrizzle />
-
-### Drizzle client
-
-Import `drizzleParsers` from `@neon/realtime-drizzle/client`. It runs in the browser: spread it into the client's `parsers` option so dates and timestamps decode the way Drizzle decodes them. The [Drizzle example](../examples/drizzle) shows it in use.
-
-<RealtimeSdkDrizzleClient />
+[Drizzle API reference →](/docs/realtime/sdks/typescript/drizzle)
 
 ## Kysely
 
-Import the Kysely adapter from `@neon/realtime-kysely`. It runs on your server: pass `kyselyAdapter()` as the `adapter` option to `createRealtime()`, then seal Kysely selects like any other query. It's taught in [Using a query builder or ORM](../guides/queries#using-a-query-builder-or-orm), and the [Kysely example](../examples/kysely) goes further.
+`@neon/realtime-kysely` provides [`kyselyAdapter()`](/docs/realtime/sdks/typescript/kysely#kysely-kyselyadapter), a [live query adapter](/docs/realtime/guides/queries#using-a-query-builder-or-orm) for sealing Kysely selects on your server.
 
-<RealtimeSdkKysely />
+[Kysely API reference →](/docs/realtime/sdks/typescript/kysely)

@@ -6,7 +6,7 @@ summary: >-
   template.json and registry.json fields, layouts, categories, limits, local
   testing with NEON_FUNCTION_REGISTRY_DIR, and the review checklist.
 enableTableOfContents: true
-updatedOn: '2026-11-07T22:08:33.797Z'
+updatedOn: '2026-11-18T08:58:29.349Z'
 ---
 
 The Function Registry is the public catalog behind [`neon functions new`](/docs/cli/functions#new). Each template is a folder in [`registry/`](https://github.com/neondatabase/examples/tree/main/registry) in `neondatabase/examples`. To add one, you open a pull request with the template folder and an index entry. Neon reviews it, and after it merges to `main`, the template shows up in the CLI and on [neon.com/functions/templates](/functions/templates) within about an hour. You don't publish anything yourself.
@@ -37,11 +37,13 @@ The CLI lists templates from `registry.json`. Installing one downloads the `neon
 Each module default-exports a fetch handler:
 
 ```ts filename="functions/send-email.ts"
-export default {
+const handler = {
   async fetch(request: Request): Promise<Response> {
     return Response.json({ ok: true });
   },
 };
+
+export default handler;
 ```
 
 - Read configuration from `process.env`, and declare every variable you read in `environment`.

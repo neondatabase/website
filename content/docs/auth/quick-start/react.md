@@ -8,7 +8,7 @@ summary: >-
   own auth UI rather than dropping in ready-made components. Registered users are
   automatically synced to the `neon_auth.user` table in your database.
 enableTableOfContents: true
-updatedOn: '2026-10-09T10:21:18.858Z'
+updatedOn: '2026-10-30T18:52:42.000Z'
 layout: wide
 redirectFrom:
   - /docs/auth/quick-start/react-router-components

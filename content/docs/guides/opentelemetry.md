@@ -12,7 +12,7 @@ summary: >-
   signal-specific paths (/v1/metrics, /v1/logs) and collects data from all
   computes in a project.
 enableTableOfContents: true
-updatedOn: '2026-10-23T12:11:49.591Z'
+updatedOn: '2026-11-13T14:28:33.000Z'
 ---
 
 <FeatureBetaProps feature_name="OpenTelemetry integration" />

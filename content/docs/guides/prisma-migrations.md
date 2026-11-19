@@ -9,7 +9,7 @@ summary: >-
   migration files, then shows how iterative schema changes work and when to
   switch to `prisma migrate deploy` for production.
 enableTableOfContents: true
-updatedOn: '2026-10-05T14:25:23.981Z'
+updatedOn: '2026-11-14T19:56:27.000Z'
 ---
 
 <CopyPrompt src="/prompts/prisma-prompt.md" 

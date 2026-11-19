@@ -9,7 +9,7 @@ summary: >-
   rows, stale schema cache hiding new tables, and OpenAPI spec "Entry not
   found" errors.
 enableTableOfContents: true
-updatedOn: '2026-10-29T21:02:34.200Z'
+updatedOn: '2026-11-09T22:07:35.000Z'
 ---
 
 <InfoBlock>

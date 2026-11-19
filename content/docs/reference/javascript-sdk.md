@@ -15,7 +15,7 @@ enableTableOfContents: true
 layout: wide
 redirectFrom:
   - /docs/auth/reference/javascript-sdk
-updatedOn: '2026-08-31T17:42:21.786Z'
+updatedOn: '2026-11-09T22:07:35.000Z'
 ---
 
 This page documents `@neon/neon-js`, which combines Managed Better Auth and the Data API in a single client. Neon also publishes standalone packages:

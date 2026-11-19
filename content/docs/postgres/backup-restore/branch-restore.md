@@ -22,7 +22,7 @@ redirectFrom:
   - /docs/introduction/branch-restore
   - /docs/introduction/restore
   - /docs/introduction/instant-restore
-updatedOn: '2026-09-25T09:36:22.797Z'
+updatedOn: '2026-11-06T19:23:00.000Z'
 ---
 
 <InfoBlock>

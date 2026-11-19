@@ -9,7 +9,7 @@ summary: >-
   configuring QUARKUS_DATASOURCE_REACTIVE_URL with sslmode=require, and
   exposing a REST endpoint that queries the database asynchronously using Mutiny.
 enableTableOfContents: true
-updatedOn: '2026-09-16T19:45:35.340Z'
+updatedOn: '2026-11-08T17:38:28.000Z'
 ---
 
 <CopyPrompt src="/prompts/quarkus-reactive-prompt.md"

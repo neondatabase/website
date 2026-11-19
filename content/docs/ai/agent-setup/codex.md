@@ -11,6 +11,7 @@ enableTableOfContents: true
 agentPrompt: I use Codex.
 redirectFrom:
   - /docs/ai/ai-codex-plugin
+updatedOn: '2026-11-05T23:08:56.000Z'
 ---
 
 The Neon plugin gives [OpenAI Codex](https://developers.openai.com/codex/) Neon's [agent skills](https://developers.openai.com/codex/skills/), so it knows how to build on Neon. It also adds the Neon MCP Server, so Codex can act on your Neon account. In Codex, the MCP Server appears as the **Neon** app.

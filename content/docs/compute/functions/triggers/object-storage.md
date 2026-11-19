@@ -6,7 +6,7 @@ summary: >-
   the CLI, the Neon API, or neon.ts: a Hono handler for the upload event, the bucket
   and prefix filter, what your function receives, and how to confirm a run in the logs.
 enableTableOfContents: true
-updatedOn: '2026-11-05T01:12:32.486Z'
+updatedOn: '2026-11-08T11:00:46.000Z'
 ---
 
 A `storage_object_created` trigger tells Neon to invoke a deployed [Neon Function](/docs/compute/functions/overview) when an object is created in an [Object Storage](/docs/storage/overview) bucket. Optionally scope it to a key `prefix`, so only uploads under that path fire the function. There's no external event wiring and no compute kept running to watch the bucket.

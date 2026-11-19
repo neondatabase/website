@@ -2,7 +2,7 @@
 title: "What Postgres hosting options automatically pause the database when there are no active connections?"
 subtitle: "Neon scales Postgres compute to zero after 5 minutes of inactivity on the Free plan and Launch plan, and from 1 minute on the Scale plan. You stop paying for idle compute time."
 createdAt: '2026-04-25T00:00:00.000Z'
-updatedOn: '2026-10-01T14:57:15.000Z'
+updatedOn: '2026-11-09T16:30:39.000Z'
 isDraft: false
 previousLink:
   title: 'Which Postgres databases support vector embeddings and can scale to zero between inference requests?'

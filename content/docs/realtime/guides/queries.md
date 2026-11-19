@@ -4,7 +4,7 @@ subtitle: 'Define live SQL queries that you can subscribe to.'
 summary: >-
   Define live queries in your backend with raw SQL or Drizzle, fill in their parameters from the authenticated request, and seal them so clients can subscribe without being able to read or change them.
 enableTableOfContents: true
-updatedOn: '2026-10-30T15:07:38.000Z'
+updatedOn: '2026-11-18T00:59:49.148Z'
 ---
 
 Realtime works by defining and [subscribing](./subscribing) to live SQL queries. Queries are designed to be [defined&nbsp;securely](#defining-live-queries) in your backend code and [subscribed&#8209;to&nbsp;safely](#exposing-queries) in your frontend.
@@ -25,7 +25,7 @@ npm install drizzle-orm pg hono jose ws
 npm install -D @types/pg @types/ws
 ```
 
-Install the Realtime [TypeScript&nbsp;SDK](../sdks/typescript) and its [Drizzle&nbsp;adapter](../sdks/typescript#drizzle):
+Install the Realtime [TypeScript&nbsp;SDK](../sdks/typescript) and its [Drizzle&nbsp;adapter](../sdks/typescript/drizzle):
 
 ```bash filename="Terminal"
 npm install @neon/realtime @neon/realtime-drizzle
@@ -122,7 +122,7 @@ export const db = drizzle(pool, { schema })
 pool.on("error", (error: Error) => console.error(error))
 ```
 
-Great, that's the main setup to follow along with the guides. Or for the full boilerplate, see the [example source code](https://github.com/neondatabase/examples/tree/main/realtime/guides-chat-app) on GitHub.
+That's the setup you need to follow along with the guides. For the full boilerplate, see the [example source code](https://github.com/neondatabase/examples/tree/main/realtime/guides-chat-app) on GitHub.
 
 </details>
 
@@ -145,7 +145,7 @@ Tables need a [stable replica identity](https://www.postgresql.org/docs/current/
 
 Tables can't have [row-level security](/docs/guides/row-level-security) enabled. A live query on a table with RLS is rejected: the subscription moves to `error` with the code `upstream_rejected`. With [debug mode](./subscribing#show-full-database-errors) on, the message says the table has row-level security enabled. Filter rows in the query instead, as shown in [Authorization](#authorization).
 
-<Callout title="Optional: REPLICA IDENTITY FULL">
+<Callout title="REPLICA IDENTITY FULL (optional)">
 Setting `REPLICA IDENTITY FULL` can make live queries marginally faster, at the cost of writing the whole old row to the Postgres WAL on every update and delete. That may save Realtime a lookup when it processes those changes. If latency matters for a write-heavy table, benchmark both settings with your own workload before you switch.
 
 ```sql
@@ -169,7 +169,7 @@ export const realtime = createRealtime({
 
 `createRealtime()` also takes a [`debugMode`](./subscribing#show-full-database-errors) option.
 
-Then define queries using [`rawSql`](../sdks/typescript#backend-rawsql). For example:
+Then define queries using [`rawSql`](../sdks/typescript/backend#backend-rawsql). For example:
 
 ```ts filename="backend/queries-raw.ts"
 import { rawSql } from "@neon/realtime/server"
@@ -213,7 +213,7 @@ Never use literal interpolation for user input like `` `WHERE user_id = '${userI
 
 #### Parameter types
 
-You can pass strings, numbers, booleans, bigints and `null` as they are. Other value types need a [`pgParam`](../sdks/typescript#backend-pgparam) helper to specify the Postgres type. A `Date` could be a `date`, a `timestamp` or a `timestamptz`, so wrap it in `pgParam.date()`, `pgParam.timestamp()` or `pgParam.timestamptz()`.
+You can pass strings, numbers, booleans, bigints and `null` as they are. Other value types need a [`pgParam`](../sdks/typescript/backend#backend-pgparam) helper to specify the Postgres type. A `Date` could be a `date`, a `timestamp` or a `timestamptz`, so wrap it in `pgParam.date()`, `pgParam.timestamp()` or `pgParam.timestamptz()`.
 
 For example, this filters messages `since` a [timestamp with timezone](/postgresql/tutorial/timestamp#introduction-to-postgresql-timestamp):
 
@@ -239,11 +239,11 @@ There are helpers for dates, JSON, `bytea` and arrays, such as `pgParam.array("t
 
 ### Using a query builder or ORM
 
-Realtime supports an adapter pattern to convert any typed query object to raw SQL. This works by passing an adapter to [`createRealtime`](../sdks/typescript#backend-createrealtime).
+Realtime supports an adapter pattern to convert any typed query object to raw SQL. This works by passing an adapter to [`createRealtime`](../sdks/typescript/backend#backend-createrealtime).
 
 The rest of these guides use the Drizzle versions of `backend/realtime.ts` and `backend/queries.ts` below in place of the raw SQL files above.
 
-For example, configure Realtime to use the [`drizzleAdapter`](../sdks/typescript#drizzle-drizzleadapter):
+For example, configure Realtime to use the [`drizzleAdapter`](../sdks/typescript/drizzle#drizzle-drizzleadapter):
 
 ```ts filename="backend/realtime.ts" {2,7}
 import { createRealtime } from "@neon/realtime/server"
@@ -299,13 +299,13 @@ To seal a query you pass your query instance, e.g.:
 const query = messagesQuery(userId, channelId)
 ```
 
-To the [`seal`](../sdks/typescript#backend-realtimeserverseal) method of the `RealtimeServer` instance you created above:
+To the [`seal`](../sdks/typescript/backend#backend-realtimeserverseal) method of the `RealtimeServer` instance you created above:
 
 ```ts filename="backend/server.ts"
 const sealedQuery = await realtime.seal({ query })
 ```
 
-It's local [Web Crypto](https://developer.mozilla.org/en-US/docs/Web/API/Web_Crypto_API) work with no network call, so it's cheap to run on every request. It returns a [`SealedLiveQuery<Row>`](../sdks/typescript#backend-sealedlivequery), which has three fields:
+It's local [Web Crypto](https://developer.mozilla.org/en-US/docs/Web/API/Web_Crypto_API) work with no network call, so it's cheap to run on every request. It returns a [`SealedLiveQuery<Row>`](../sdks/typescript/backend#backend-sealedlivequery), which has three fields:
 
 - `capability`: the encrypted query
 - `expiresAt`: when it expires, in Unix milliseconds
@@ -340,7 +340,7 @@ The flow is as follows:
 1. construct the query, passing in any relevant parameters from the auth context (e.g.: filtering or joining on the authenticated `userId`)
 1. seal the query so these can't be changed
 
-This allows you to authorize live query subscriptions using existing web auth logic, middleware and frameworks, such as [Neon&nbsp;Auth](/docs/auth/overview).
+This allows you to authorize live query subscriptions using existing web auth logic, middleware and frameworks, such as [Managed Better Auth](/docs/auth/overview).
 
 ### Live authorization
 
