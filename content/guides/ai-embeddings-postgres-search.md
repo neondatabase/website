@@ -4,7 +4,7 @@ subtitle: Wire vector, full-text, and hybrid search into a serverless HTTP API t
 author: neon-team
 enableTableOfContents: true
 createdAt: '2026-11-18T00:00:00.000Z'
-updatedOn: '2026-11-18T18:35:25.107Z'
+updatedOn: '2026-11-19T14:21:35.699Z'
 ---
 
 In this guide, you build a search API and deploy it as a [Neon Function](/docs/compute/functions/overview), a long-running serverless function that runs on your Neon branch. The function embeds documents, stores them in Postgres, and answers queries with vector, full-text, and hybrid search.
@@ -53,7 +53,7 @@ CREATE INDEX documents_embedding_idx ON documents
 
 ## Set up the project
 
-Create a directory and link it to your Neon project. `neon link` writes a `.neon` file and pulls the branch's environment variables into a local `.env`:
+Create a directory and link it to your Neon project. `neon link` writes a `.neon` file and pulls the branch's environment variables into a local `.env.local`:
 
 ```bash
 mkdir lakebase-search-api && cd lakebase-search-api
@@ -260,9 +260,14 @@ curl -X POST https://<branch_id>-search.compute.<cell>.us-east-2.aws.neon.tech/s
 ```json
 {
   "query": "approximate nearest neighbor search",
-  "results": [{ "id": 1, "title": "Vector search on Postgres", "score": 0.032 }]
+  "results": [
+    { "id": 1, "title": "Vector search on Postgres", "score": "0.03278688524590163934" },
+    { "id": 2, "title": "BM25 full-text search", "score": "0.01612903225806451613" }
+  ]
 }
 ```
+
+Each document that matches the vector or BM25 search appears in the ranking. The RRF `score` comes back as a string because the fusion runs in Postgres `numeric`, which the `pg` driver returns as a string. Parse it client-side if you need a number.
 
 </Steps>
 
