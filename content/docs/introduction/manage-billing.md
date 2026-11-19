@@ -14,7 +14,7 @@ summary: >-
 enableTableOfContents: true
 redirectFrom:
   - /docs/manage/billing
-updatedOn: '2026-11-17T21:33:26.422Z'
+updatedOn: '2026-11-19T14:47:17.800Z'
 ---
 
 <InfoBlock>
@@ -195,9 +195,11 @@ If you would like to delete your Neon account entirely, please refer to the step
 <Faq>
 
 <FaqItem question="When will I receive my first invoice?">
-Neon bills on a monthly billing period. Invoices are charged to your payment method on the first day of the month and cover the billing period that just ended (see [Pay an invoice](#pay-an-invoice)).
+Neon bills on a monthly billing period. The invoice for each period is sent on the first day of the following month and covers the usage from the month that just ended (see [Pay an invoice](#pay-an-invoice)).
 
-On the Launch and Scale plans, you pay only for what you use and there's no minimum monthly fee, so nothing is charged when you sign up. Your first invoice is generated on the first day of the month after you start, and it covers your usage up to that point.
+On the Launch and Scale plans, you pay only for what you use and there's no minimum monthly fee, so nothing is charged when you sign up. Your first invoice arrives on the first day of the month after you start and covers your usage up to that point.
+
+AI Gateway credits are billed separately from this monthly cycle. They are prepaid, so each credit purchase is charged at the time you buy it and generates its own invoice (see [AI Gateway prepaid credits](/docs/ai-gateway/prepaid-credits)).
 </FaqItem>
 
 </Faq>
