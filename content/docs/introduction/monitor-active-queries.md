@@ -9,7 +9,7 @@ summary: >-
   Editor or psql for custom analysis. Completed queries do not persist in the
   view, and no active queries appear while a compute is scaled to zero.
 enableTableOfContents: true
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-11-13T15:47:21.000Z'
 ---
 
 You can monitor active queries for your Neon project from the **Monitoring** page in the Neon Console.

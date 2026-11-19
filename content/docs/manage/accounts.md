@@ -9,7 +9,7 @@ summary: >-
   and passkey removal both have a 24-hour security delay. Deleted accounts can
   be reactivated within 30 days, after which all data is permanently removed.
 enableTableOfContents: true
-updatedOn: '2026-10-26T16:37:59.022Z'
+updatedOn: '2026-10-28T20:59:38.000Z'
 ---
 
 Your **Neon account** is your personal identity for logging in, managing your profile, and authenticating actions across all organizations you belong to.

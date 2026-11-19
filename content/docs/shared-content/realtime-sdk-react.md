@@ -2,15 +2,15 @@
 
 ### Symbols (#react-symbols)
 
-| Symbol                                                  | Kind       | Summary                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
-| ------------------------------------------------------- | ---------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [`RealtimeProvider`](#react-realtimeprovider)           | Function   | Provide one shared Realtime client to descendant [`useLiveQuery`](/docs/realtime/sdks/typescript#react-uselivequery) and [`useRealtimeClient`](/docs/realtime/sdks/typescript#react-userealtimeclient) hooks. Create the client once for the browser application. The provider does not fetch sealed queries or close the client when it unmounts.                                                                                                                                                                         |
-| [`useLiveQuery`](#react-uselivequery)                   | Function   | Subscribe to a sealed query and expose its materialized snapshot to React. The hook owns subscription cleanup.                                                                                                                                                                                                                                                                                                                                                                                                             |
-| [`useRealtimeClient`](#react-userealtimeclient)         | Function   | Read the shared Realtime client from the nearest [`RealtimeProvider`](/docs/realtime/sdks/typescript#react-realtimeprovider). Use it alongside [`useLiveQuery`](/docs/realtime/sdks/typescript#react-uselivequery) when a component needs the client itself: to pass it to `realtimeCollectionOptions()` from `@neon/realtime-tanstack`, or to call `subscribe()` with a sealed query directly. Subscriptions opened through `subscribe()` are not owned by React, so call `unsubscribe()` when they are no longer needed. |
-| [`RealtimeProviderProps`](#react-realtimeproviderprops) | Interface  | Props accepted by [`RealtimeProvider`](/docs/realtime/sdks/typescript#react-realtimeprovider).                                                                                                                                                                                                                                                                                                                                                                                                                             |
-| [`UseLiveQueryOptions`](#react-uselivequeryoptions)     | Interface  | Options for [`useLiveQuery`](/docs/realtime/sdks/typescript#react-uselivequery).                                                                                                                                                                                                                                                                                                                                                                                                                                           |
-| [`UseLiveQueryResult`](#react-uselivequeryresult)       | Type alias | React-facing snapshot and lower-level utilities returned by `useLiveQuery()`.                                                                                                                                                                                                                                                                                                                                                                                                                                              |
-| [`UseLiveQueryUtils`](#react-uselivequeryutils)         | Type alias | Stable imperative access to the hook's underlying materialized subscription. Cleanup remains owned by React, so `unsubscribe()` is intentionally omitted.                                                                                                                                                                                                                                                                                                                                                                  |
+| Symbol                                                  | Kind       | Summary                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
+| ------------------------------------------------------- | ---------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [`RealtimeProvider`](#react-realtimeprovider)           | Function   | Provide one shared Realtime client to descendant [`useLiveQuery`](/docs/realtime/sdks/typescript/react#react-uselivequery) and [`useRealtimeClient`](/docs/realtime/sdks/typescript/react#react-userealtimeclient) hooks. Create the client once for the browser application. The provider does not fetch sealed queries or close the client when it unmounts.                                                                                                                                                                         |
+| [`useLiveQuery`](#react-uselivequery)                   | Function   | Subscribe to a sealed query and expose its materialized snapshot to React. The hook owns subscription cleanup.                                                                                                                                                                                                                                                                                                                                                                                                                         |
+| [`useRealtimeClient`](#react-userealtimeclient)         | Function   | Read the shared Realtime client from the nearest [`RealtimeProvider`](/docs/realtime/sdks/typescript/react#react-realtimeprovider). Use it alongside [`useLiveQuery`](/docs/realtime/sdks/typescript/react#react-uselivequery) when a component needs the client itself: to pass it to `realtimeCollectionOptions()` from `@neon/realtime-tanstack`, or to call `subscribe()` with a sealed query directly. Subscriptions opened through `subscribe()` are not owned by React, so call `unsubscribe()` when they are no longer needed. |
+| [`RealtimeProviderProps`](#react-realtimeproviderprops) | Interface  | Props accepted by [`RealtimeProvider`](/docs/realtime/sdks/typescript/react#react-realtimeprovider).                                                                                                                                                                                                                                                                                                                                                                                                                                   |
+| [`UseLiveQueryOptions`](#react-uselivequeryoptions)     | Interface  | Options for [`useLiveQuery`](/docs/realtime/sdks/typescript/react#react-uselivequery).                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
+| [`UseLiveQueryResult`](#react-uselivequeryresult)       | Type alias | React-facing snapshot and lower-level utilities returned by `useLiveQuery()`.                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
+| [`UseLiveQueryUtils`](#react-uselivequeryutils)         | Type alias | Stable imperative access to the hook's underlying materialized subscription. Cleanup remains owned by React, so `unsubscribe()` is intentionally omitted.                                                                                                                                                                                                                                                                                                                                                                              |
 
 ### RealtimeProvider (#react-realtimeprovider)
 
@@ -18,8 +18,8 @@
 function RealtimeProvider(props: RealtimeProviderProps): ReactElement
 ```
 
-Provide one shared Realtime client to descendant [`useLiveQuery`](/docs/realtime/sdks/typescript#react-uselivequery) and
-[`useRealtimeClient`](/docs/realtime/sdks/typescript#react-userealtimeclient) hooks.
+Provide one shared Realtime client to descendant [`useLiveQuery`](/docs/realtime/sdks/typescript/react#react-uselivequery) and
+[`useRealtimeClient`](/docs/realtime/sdks/typescript/react#react-userealtimeclient) hooks.
 
 Create the client once for the browser application. The provider does not
 fetch sealed queries or close the client when it unmounts.
@@ -48,7 +48,7 @@ React. The hook owns subscription cleanup.
 **Returns:** The current rows and lifecycle state plus stable subscription
 utilities.
 
-**Throws:** If used outside a [`RealtimeProvider`](/docs/realtime/sdks/typescript#react-realtimeprovider).
+**Throws:** If used outside a [`RealtimeProvider`](/docs/realtime/sdks/typescript/react#react-realtimeprovider).
 
 #### Type parameters (#react-uselivequery-type-parameters)
 
@@ -73,9 +73,9 @@ utilities.
 function useRealtimeClient(): RealtimeClient
 ```
 
-Read the shared Realtime client from the nearest [`RealtimeProvider`](/docs/realtime/sdks/typescript#react-realtimeprovider).
+Read the shared Realtime client from the nearest [`RealtimeProvider`](/docs/realtime/sdks/typescript/react#react-realtimeprovider).
 
-Use it alongside [`useLiveQuery`](/docs/realtime/sdks/typescript#react-uselivequery) when a component needs the client
+Use it alongside [`useLiveQuery`](/docs/realtime/sdks/typescript/react#react-uselivequery) when a component needs the client
 itself: to pass it to `realtimeCollectionOptions()` from
 `@neon/realtime-tanstack`, or to call `subscribe()` with a sealed query
 directly. Subscriptions opened through `subscribe()` are not owned by React,
@@ -83,7 +83,7 @@ so call `unsubscribe()` when they are no longer needed.
 
 **Returns:** The client passed to the nearest provider.
 
-**Throws:** If used outside a [`RealtimeProvider`](/docs/realtime/sdks/typescript#react-realtimeprovider).
+**Throws:** If used outside a [`RealtimeProvider`](/docs/realtime/sdks/typescript/react#react-realtimeprovider).
 
 **Example**
 
@@ -123,14 +123,14 @@ function useTodos(query: SealedLiveQuery<Todo>) {
 interface RealtimeProviderProps
 ```
 
-Props accepted by [`RealtimeProvider`](/docs/realtime/sdks/typescript#react-realtimeprovider).
+Props accepted by [`RealtimeProvider`](/docs/realtime/sdks/typescript/react#react-realtimeprovider).
 
 #### Members (#react-realtimeproviderprops-members)
 
-| Name       | Type                      | Description                                                                                                                                                                       |
-| ---------- | ------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `children` | `readonly ReactNode`      | React subtree that may call [`useLiveQuery`](/docs/realtime/sdks/typescript#react-uselivequery) or [`useRealtimeClient`](/docs/realtime/sdks/typescript#react-userealtimeclient). |
-| `client`   | `readonly RealtimeClient` | Shared browser client made available to descendant hooks.                                                                                                                         |
+| Name       | Type                      | Description                                                                                                                                                                                   |
+| ---------- | ------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `children` | `readonly ReactNode`      | React subtree that may call [`useLiveQuery`](/docs/realtime/sdks/typescript/react#react-uselivequery) or [`useRealtimeClient`](/docs/realtime/sdks/typescript/react#react-userealtimeclient). |
+| `client`   | `readonly RealtimeClient` | Shared browser client made available to descendant hooks.                                                                                                                                     |
 
 ### UseLiveQueryOptions (#react-uselivequeryoptions)
 
@@ -138,7 +138,7 @@ Props accepted by [`RealtimeProvider`](/docs/realtime/sdks/typescript#react-real
 interface UseLiveQueryOptions<Row>
 ```
 
-Options for [`useLiveQuery`](/docs/realtime/sdks/typescript#react-uselivequery).
+Options for [`useLiveQuery`](/docs/realtime/sdks/typescript/react#react-uselivequery).
 
 #### Members (#react-uselivequeryoptions-members)
 

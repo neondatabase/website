@@ -13,7 +13,7 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/introduction/branch-protection
   - /docs/manage/protected-branches
-updatedOn: '2026-10-09T15:17:33.920Z'
+updatedOn: '2026-11-12T18:09:59.000Z'
 ---
 
 Neon's protected branches feature implements a series of protections:

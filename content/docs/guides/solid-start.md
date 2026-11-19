@@ -7,7 +7,7 @@ summary: >-
   Covers server-side data loading and API routes using node-postgres,
   postgres.js, or the Neon serverless driver.
 enableTableOfContents: true
-updatedOn: '2026-09-16T19:45:35.340Z'
+updatedOn: '2026-11-08T17:41:31.000Z'
 ---
 
 <CopyPrompt src="/prompts/solidstart-prompt.md"

@@ -10,7 +10,7 @@ summary: >-
   guide also shows how to point Drizzle at different Neon branches per
   environment by selecting a connection string based on NODE_ENV.
 enableTableOfContents: true
-updatedOn: '2026-10-08T19:32:04.700Z'
+updatedOn: '2026-11-18T16:41:34.386Z'
 ---
 
 <Callout title="Realtime with Drizzle">
@@ -397,7 +397,7 @@ Each branch has its own connection string, available in the Neon Console or via 
 
 - [Get Started with Drizzle and Neon](https://orm.drizzle.team/docs/get-started/neon-new)
 - [Drizzle with Neon Postgres](https://orm.drizzle.team/docs/tutorials/drizzle-with-neon)
-- [Schema migration with Lakebase Postgres and Drizzle ORM](/docs/guides/drizzle-migrations)
+- [Schema migration with Drizzle ORM and Lakebase Postgres on Neon](/docs/guides/drizzle-migrations)
 - [Todo App with Neon Postgres and Drizzle ORM](https://orm.drizzle.team/docs/tutorials/drizzle-nextjs-neon)
 
 ## Next steps

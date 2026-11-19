@@ -9,7 +9,7 @@ summary: >-
   Setup requires creating the replica, a read-only role, and a connection string
   for that role.
 enableTableOfContents: true
-updatedOn: '2026-09-16T19:45:35.340Z'
+updatedOn: '2026-11-09T21:11:59.000Z'
 ---
 
 When you create a read replica in Neon, you gain the ability to provide read-only access to your data. Use it when you want to grant access to users, partners, or third-party applications that only need to run queries to analyze data, generate reports, or audit your database. Since no write operations are permitted on read replicas, it ensures the integrity of your data while allowing others to work with up-to-date information.

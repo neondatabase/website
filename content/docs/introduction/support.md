@@ -7,7 +7,7 @@ summary: >-
   options aligned with Databricks Support. Use this page to find which
   channels your plan includes and review the general support policy.
 enableTableOfContents: true
-updatedOn: '2026-10-28T11:11:18.780Z'
+updatedOn: '2026-11-10T19:59:44.000Z'
 ---
 
 This page covers Neon's support plans, channels, and policies. To share ideas or report a docs gap without opening a support request, see [Send feedback](/docs/introduction/feedback).

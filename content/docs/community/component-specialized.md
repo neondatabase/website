@@ -10,7 +10,7 @@ summary: >-
   copy-paste MDX syntax, live rendering, dependency requirements, and guidance
   on when to choose a simpler alternative.
 enableTableOfContents: true
-updatedOn: '2026-10-14T10:52:09.441Z'
+updatedOn: '2026-11-09T22:07:35.000Z'
 ---
 
 A comprehensive reference for specialized and less commonly used MDX components in Neon documentation. This guide covers components used in specific scenarios, specialized workflows, and edge cases.

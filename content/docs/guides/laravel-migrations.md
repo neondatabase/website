@@ -1,5 +1,5 @@
 ---
-title: Schema migration with Lakebase Postgres and Laravel
+title: Schema migration with Laravel and Lakebase Postgres on Neon
 subtitle: Set up a database on Neon and run migrations for your Laravel project
 summary: >-
   Run Laravel schema migrations on Lakebase Postgres using the Eloquent ORM and
@@ -7,7 +7,7 @@ summary: >-
   migration files. Use a direct (non-pooled) connection string for migrations,
   because pooled PgBouncer connections can cause migration errors.
 enableTableOfContents: true
-updatedOn: '2026-10-28T11:11:18.780Z'
+updatedOn: '2026-11-18T16:41:34.386Z'
 ---
 
 [Laravel](https://laravel.com/) is a PHP web application framework. It includes an ORM (Object-Relational Mapping) called Eloquent, which lets you interact with databases using a fluent API. Laravel also includes a migration system to manage database schema changes over time.

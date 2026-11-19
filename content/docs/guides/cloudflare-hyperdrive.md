@@ -14,7 +14,7 @@ summary: >-
 enableTableOfContents: true
 redirectFrom:
   - /docs/guides/hyperdrive
-updatedOn: '2026-10-09T10:14:56.146Z'
+updatedOn: '2026-11-16T20:40:47.000Z'
 ---
 
 [Cloudflare Hyperdrive](https://developers.cloudflare.com/hyperdrive/) is a serverless application that proxies queries to your database and accelerates them. It works by maintaining a globally distributed pool of database connections, and routing queries to the closest available connection.

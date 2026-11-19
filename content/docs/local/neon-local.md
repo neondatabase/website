@@ -9,7 +9,7 @@ summary: >-
   ephemeral branches with PARENT_BRANCH_ID that are deleted when the container
   stops. Both the standard postgres driver and the Neon serverless driver are
   supported through the same Docker configuration.
-updatedOn: '2026-11-06T11:14:41.532Z'
+updatedOn: '2026-11-09T22:07:35.000Z'
 ---
 
 [Neon Local](https://github.com/neondatabase-labs/neon_local) is a proxy service that creates a local interface to your Neon cloud database. It supports two main use cases:

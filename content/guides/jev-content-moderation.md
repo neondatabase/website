@@ -4,7 +4,7 @@ subtitle: 'Use the TypeSafe System One model through the Neon AI Gateway to clas
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2026-10-17T00:00:00.000Z'
-updatedOn: '2026-10-23T10:50:13.441Z'
+updatedOn: '2026-11-05T23:41:12.000Z'
 ---
 
 Content moderation is a common problem when building products that accept user-generated content. You need to evaluate every message against a few key questions: Is it spam? Does it contain abusive language? Does it expose sensitive personal information? Should it be allowed, flagged for review, or blocked? A common approach is to use a large language model (LLM) to assess content and explain its decisions in natural language. LLMs are good at understanding text, but their responses can be inconsistent and difficult to integrate into automated workflows. For pipelines that process large volumes of messages, typed, machine-readable outputs are more reliable for driving moderation decisions.

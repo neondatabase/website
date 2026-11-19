@@ -8,7 +8,7 @@ summary: >-
   Use it when you need to limit Neon project connections to a specific AWS or
   Azure VPC rather than the public internet.
 enableTableOfContents: true
-updatedOn: '2026-07-01T13:41:48.668Z'
+updatedOn: '2026-07-24T20:11:16.000Z'
 redirectFrom:
   - /docs/reference/cli-vpc
 ---

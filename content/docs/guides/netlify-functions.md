@@ -10,7 +10,7 @@ summary: >-
   page when the goal is serverless backend database access inside a Netlify
   Function, not edge middleware or static site build steps.
 enableTableOfContents: true
-updatedOn: '2026-10-09T10:14:56.146Z'
+updatedOn: '2026-11-16T20:28:04.000Z'
 ---
 
 [Netlify Functions](https://www.netlify.com/platform/functions/) provide a serverless execution environment for building and deploying backend functionality without managing server infrastructure. It's integrated with Netlify's ecosystem, making it ideal for augmenting web applications with server-side logic, API integrations, and data processing tasks in a scalable way.

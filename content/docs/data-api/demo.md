@@ -10,7 +10,7 @@ summary: >-
   for a working end-to-end example of Data API query patterns, RLS setup, and
   ON DELETE CASCADE.
 enableTableOfContents: true
-updatedOn: '2026-09-30T16:23:41.172Z'
+updatedOn: '2026-10-13T12:53:23.000Z'
 ---
 
 This tutorial uses a note-taking app to show how Neon's Data API works with the `@neondatabase/neon-js` client library to write queries from your frontend code, with authentication and Row-Level Security (RLS) policies keeping your data secure. The Data API is compatible with PostgREST, so you can use any PostgREST client library.

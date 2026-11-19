@@ -9,7 +9,7 @@ summary: >-
   (status), and prune stale branch mappings (cleanup).
 tag: new
 enableTableOfContents: true
-updatedOn: '2026-10-07T03:48:49.832Z'
+updatedOn: '2026-11-06T20:35:55.000Z'
 ---
 
 The `git` command connects your git workflow to Neon branching. After you install its git hook, switching git branches with `git checkout` also checks out the Neon branch mapped to that git branch, so your application code and its database branch stay in sync. Under the hood it delegates to [`neon checkout`](/docs/cli/checkout) and records the git-to-Neon mapping in your local [context file](/docs/cli/link).

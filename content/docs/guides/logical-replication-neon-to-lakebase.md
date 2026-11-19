@@ -14,7 +14,7 @@ summary: >-
   restarts all computes in the project.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2026-10-21T12:30:44.000Z'
+updatedOn: '2026-11-12T18:10:44.000Z'
 ---
 
 Neon's logical replication feature lets you replicate data from a Neon database to Lakebase Postgres on Databricks. Lakebase subscribes to a publication on your Neon database, copies the existing data, and then applies each insert, update, and delete as it happens. Use it to:

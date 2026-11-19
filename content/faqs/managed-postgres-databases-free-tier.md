@@ -2,7 +2,7 @@
 title: "Which managed Postgres databases have a free tier generous enough to run a real app without paying anything until you have users?"
 subtitle: "Neon's Free plan includes 100 projects, 1 GB storage and 100 CU-hours per project, with scale-to-zero after 5 minutes. No credit card required."
 createdAt: '2026-04-25T00:00:00.000Z'
-updatedOn: '2026-10-01T14:57:15.000Z'
+updatedOn: '2026-11-09T16:30:39.000Z'
 isDraft: false
 previousLink:
   title: 'Should I use Managed Better Auth or self-host Better Auth?'

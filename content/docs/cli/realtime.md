@@ -7,12 +7,12 @@ summary: >-
   to connect, `disable` to remove it, `rotate-secret` to replace its shared
   secret, and `subscribe` to stream a live SQL query.
 enableTableOfContents: true
-updatedOn: '2026-11-05T15:33:57.188Z'
+updatedOn: '2026-11-18T21:57:37.000Z'
 redirectFrom:
   - /docs/cli/subscribe
 ---
 
-The `realtime` command enables and disables [Neon Realtime](/docs/realtime/overview) on a branch and rotates the branch's Realtime secret. Once Realtime is on, you can stream a live SQL query's results with `neon realtime subscribe`, and [`neon env pull`](/docs/cli/env) writes the branch's `NEON_REALTIME_URL` and `NEON_REALTIME_SECRET` to your `.env`. To manage Realtime declaratively instead, add it to your `neon.ts` with [`neon config add realtime`](/docs/cli/config#add-realtime).
+The `realtime` command enables and disables [Neon Realtime](/docs/realtime/overview) on a branch and rotates the branch's Realtime secret. Once Realtime is on, you can stream a live SQL query's results with `neon realtime subscribe`, and [`neon env pull`](/docs/cli/env) writes the branch's `NEON_REALTIME_URL` and `NEON_REALTIME_SECRET` to `.env.local`, or to `.env` if one already exists. To manage Realtime declaratively instead, add it to your `neon.ts` with [`neon config add realtime`](/docs/cli/config#add-realtime).
 
 <CliSubcommands command="realtime" />
 
@@ -21,6 +21,10 @@ If `--project-id` is omitted, the CLI reads it from your [context file](/docs/cl
 ## neon realtime enable (#enable)
 
 Requests Realtime provisioning for a branch. Provisioning finishes in the background, usually within a few seconds. Run it again on a branch that already has Realtime to replace its allowed origins with the ones you pass. Without `--allowed-origin`, a re-run keeps the existing origins.
+
+<Admonition type="important" title="Enabling Realtime restarts your computes">
+Enabling Realtime turns on [logical replication](/docs/guides/logical-replication-neon) for the whole project. This restarts all computes in the project, on all branches, so active connections drop and reconnect. See [Before you enable Realtime](/docs/realtime/overview#get-started).
+</Admonition>
 
 <CliUsage command="realtime enable" />
 

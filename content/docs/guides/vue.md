@@ -7,7 +7,7 @@ summary: >-
   Use a Vue meta-framework such as Nuxt.js or Quasar Framework to run database
   queries on the server and expose data to your Vue frontend.
 enableTableOfContents: true
-updatedOn: '2026-08-04T05:18:26.469Z'
+updatedOn: '2026-11-08T14:10:10.000Z'
 ---
 
 Vue.js is a progressive JavaScript framework for building user interfaces.

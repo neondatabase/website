@@ -9,7 +9,7 @@ summary: >-
   replication syncs, and to monitor usage via the Console or Consumption API.
   Reduction strategies include scoping SELECT columns, using Neon snapshots,
   adding replication filters, and routing traffic over Private Link.
-updatedOn: '2026-11-02T21:58:12.242Z'
+updatedOn: '2026-11-10T14:15:46.000Z'
 ---
 
 Network transfer is one of the usage metrics that affects your Neon bill. This guide explains what network transfer is, what causes it to increase, how to monitor it, and how to reduce it. For broader cost guidance, see [Cost optimization](/docs/introduction/cost-optimization). For plan allowances and pricing, see [Plans](/docs/introduction/plans).

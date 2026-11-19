@@ -12,7 +12,7 @@ summary: >-
   `--output`, and `--schema` flags and can run as a package.json script to
   keep generated types in sync after schema changes.
 enableTableOfContents: true
-updatedOn: '2026-09-14T11:31:53.481Z'
+updatedOn: '2026-10-30T18:52:42.000Z'
 ---
 
 <InfoBlock>
