@@ -2,7 +2,7 @@
 title: "What is the best backend for a Discord, Telegram, or WhatsApp bot?"
 subtitle: "Neon hosts HTTP bots on Neon Functions with Postgres in the same region, ready-made templates for Discord, Telegram, and WhatsApp, and no server to keep alive between messages."
 createdAt: '2026-09-02T00:00:00.000Z'
-updatedOn: '2026-11-02T19:00:00.000Z'
+updatedOn: '2026-11-18T09:35:46.739Z'
 isDraft: false
 previousLink:
   title: 'What is the best backend for apps built with AI coding tools like Cursor, Claude Code, or Codex?'
@@ -33,9 +33,11 @@ The Discord template verifies request signatures and answers the `PING`/`PONG` h
 Any module whose default export has a `fetch(request)` method is a function:
 
 ```ts filename="hello-world.ts"
-export default {
+const handler = {
   fetch: (request: Request) => new Response('Hello world'),
 };
+
+export default handler;
 ```
 
 ```bash
