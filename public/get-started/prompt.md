@@ -4,12 +4,12 @@ Complete all of the following steps yourself by running the commands directly. D
 
 Never print connection strings, passwords, API keys or other values from the app's `.env` files, and never paste them into chat. `neon init` writes them to the app's env file, so the app reads them from there.
 
-- Install the Neon CLI
+- Install the Neon CLI and sign in
 - Run `neon init` to connect your app to Neon, and install Neon skills and the MCP server
 
 ---
 
-## Install the Neon CLI
+## Install the Neon CLI and sign in
 
 Check to see if the CLI is already installed:
 
@@ -27,7 +27,18 @@ pnpm add -g neon@latest    # pnpm
 
 For full CLI installation options, see https://neon.com/docs/cli/install.md
 
-Immediately after the CLI is installed, launch the sign-in flow by running `neon login` (`neon auth` is an alias) and have the user finish signing in via the browser to ensure the CLI is authenticated.
+Then check whether the CLI is already signed in. `neon me` prints the account the CLI uses and exits non-zero when it has no usable credential:
+
+```bash
+neon me
+```
+
+If `neon me` succeeds, the CLI already has a credential, either a `NEON_API_KEY` in the environment or a saved sign-in. Do not run `neon login`; go to the next step.
+
+If `neon me` fails while `NEON_API_KEY` is set, the key was rejected and takes precedence over any sign-in, so ask the user for a new key. Otherwise, show the user the message from `neon me` and pick the sign-in path:
+
+- The user is at the machine that runs the CLI: run `neon login` (`neon auth` is an alias) in the background. It opens a browser on this machine and prints an `Auth Url`; give the user the URL in case no browser opened. Sign-in finishes when the browser redirects to the CLI on `127.0.0.1`, so the URL only works in a browser on this machine. Wait up to 10 minutes for `neon login` to print `Auth complete`, then run `neon me` again.
+- The CLI runs where the user's browser can't reach it, such as a sandbox, a container, or a remote machine: do not run `neon login`. Ask the user to create a personal API key (https://neon.com/docs/manage/api-keys.md) and set it as `NEON_API_KEY` in the environment your shell commands run in, without pasting it into chat. Your session may need a restart to see the variable. Then run `neon me` again.
 
 ---
 
