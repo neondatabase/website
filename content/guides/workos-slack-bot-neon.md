@@ -3,7 +3,7 @@ title: Build a Slack bot that turns your WorkOS data into answers for support, s
 subtitle: Mirror WorkOS into Postgres with the WorkOS Sync Engine, then deploy a Neon Function that turns Slack questions into read-only SQL through Neon AI Gateway.
 author: rishi-raj-jain
 enableTableOfContents: true
-isDraft: true
+isDraft: false
 createdAt: '2026-11-19T00:00:00.000Z'
 updatedOn: '2026-11-17T07:28:07.700Z'
 ---
