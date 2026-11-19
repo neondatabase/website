@@ -630,7 +630,7 @@ The Free plan costs $0/month and includes 100 projects, 10 branches per project,
 </FaqItem>
 
 <FaqItem question="What happens if I exceed my Free plan limits?">
-On the Free plan, when you run out of CU-hours or public network transfer, your compute is suspended until the next billing period or until you upgrade. Exceeding the 1 GB per-project storage cap, or the 20 GB total cap across all your projects, causes operations that increase storage (inserts, updates, and deletes) to fail until you free space or upgrade. Branch creation fails once you reach 10 branches per project. None of these limits delete your data.
+On the Free plan, when you run out of CU-hours, your compute is suspended until the next billing period or until you upgrade. The 5 GB of public network transfer is shared by Postgres, Object Storage, and Neon Functions in the project. When the project uses it up, all three are restricted until the next billing period or until you upgrade, and your compute is suspended. Exceeding the 1 GB per-project storage cap, or the 20 GB total cap across all your projects, causes operations that increase storage (inserts, updates, and deletes) to fail until you free space or upgrade. Branch creation fails once you reach 10 branches per project. None of these limits delete your data.
 </FaqItem>
 
 <FaqItem question="How do I restore or export a Free plan project that hit its limits?">
