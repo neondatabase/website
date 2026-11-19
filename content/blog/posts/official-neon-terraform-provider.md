@@ -129,15 +129,15 @@ resource "neon_branch_realtime" "this" {
 
 ## Meet Justin
 
-To get the provider over the line, we brought in Justin Frye, a platform engineer who had already been contributing to it. He also built [pi-provider-neon-ai-gateway](https://github.com/randoneering/pi-provider-neon-ai-gateway), an extension that lets you use the Neon AI Gateway from the [pi](https://github.com/badlogic/pi-mono) coding agent, so we asked him about that too.
+To get the provider over the line, we brought in Justin Frye, a platform engineer who had already been contributing to it. He also maintains [pi-provider-neon-ai-gateway](https://github.com/randoneering/pi-provider-neon-ai-gateway), an extension that lets you use the Neon AI Gateway from the [pi](https://github.com/badlogic/pi-mono) coding agent.
 
 **Why did you build pi-provider-neon-ai-gateway?**
 
-Selfishly, I wanted to use the gateway using my preferred coding agent. Initially, [Dominik](https://x.com/dominikkoch) worked on a more official provider through the official pi repo, but hit some resistance. It was much easier to take the work he started and, instead, build an extension to allow pi users to tap into the Neon AI Gateway as a provider. For me, having access to the gateway gave me access to multiple models from different providers with minimal resistance. There are several other providers out there that can route you to different models, but they add a cost on top of that. Neon does not.
+Selfishly, I wanted to use the gateway from my preferred coding agent. [Dominik](https://x.com/dominikkoch) had started on a provider in the official pi repo, so I took his work and turned it into an extension instead. The gateway gives me models from several providers through one subscription, and unlike other routers, Neon doesn't add a cost on top.
 
-**How is maintaining packages like this changing with AI?**
+**How are agents changing how you maintain projects like the pi extension and the Terraform provider?**
 
-With the use of agents, maintaining the extension has been relatively easy. With every new update to the gateway, I can have one of my agents grab the specs, implement new models and run tests against the gateway to ensure functionality. Iterating on new versions has been something I enjoy and it makes managing my subscriptions easier since I technically only need one!
+Once a project has a good foundation, adding new things gets much easier. With every gateway update, one of my agents grabs the specs, implements the new models and runs tests against the gateway. The Terraform provider works the same way: the repo documents how to add a resource and test it against a live Neon organization, so an agent can follow that pattern for each new Neon primitive, and the acceptance tests tell us whether it actually works.
 
 ## Getting started
 
