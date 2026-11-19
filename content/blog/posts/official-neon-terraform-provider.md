@@ -43,13 +43,13 @@ We think agents make IaC mainstream and IaC makes agents better, so we're bettin
 
 Terraform is still the default and most widely used IaC tool, so that's where we're starting. Today, we're releasing an official Terraform provider for Neon: [`neondatabase/neon`](https://registry.terraform.io/providers/neondatabase/neon/latest) on the Terraform Registry, built in [neondatabase/terraform-provider-neon](https://github.com/neondatabase/terraform-provider-neon). It's currently in beta and we aim to release v1 in the next 1-2 weeks!
 
-In this post, I want to share where the provider comes from, what's new and how to move over from the community provider. I also asked [Dmitry Kisler](https://www.linkedin.com/in/dkisler/) and Justin Frye, who co-wrote this post with me, a few questions along the way.
+In this post, I want to share where the provider comes from, what's new and how to move over from the community provider. I also asked [Dmitry Kisler](https://www.linkedin.com/in/dkisler/) and [Justin Frye](https://www.linkedin.com/in/justin-frye-b4b14763/), who co-wrote this post with me, a few questions along the way.
 
 ## Where the provider comes from
 
 The official provider started as a community project. In July 2022, Dmitry created [kislerdm/terraform-provider-neon](https://github.com/kislerdm/terraform-provider-neon) and shipped its first release, v0.0.1, on January 5, 2023. He built it on [kislerdm/neon-sdk-go](https://github.com/kislerdm/neon-sdk-go), a Go SDK he generates from the Neon API's OpenAPI spec. Since then, the provider has had 39 releases and almost two million downloads on the Terraform Registry. Most of them are recent: 1.78 million downloads came in the last 12 months alone (likely thanks to agents!).
 
-![Bar chart of Terraform Registry downloads per kislerdm/neon release, placed at each release date from January 2023 to September 2026. Most releases before 2025 have under 60,000 downloads; v0.9.0 has about 190,000, v0.13.0 from January 2026 about 686,000, v0.15.0 about 330,000 and v0.18.0 from September 2026 about 449,000.](https://cdn.neonapi.io/public/images/pages/blog/official-neon-terraform-provider/terraform-downloads.png)
+![Bar chart of Terraform Registry downloads per kislerdm/neon release, placed at each release date from January 2023 to September 2026, 1,980,291 downloads in total. Most releases before 2025 have under 60,000 downloads; v0.9.0 has about 191,000, v0.13.0 from January 2026 about 690,000, v0.15.0 about 333,000 and v0.18.0 from September 2026 about 463,000.](https://cdn.neonapi.io/public/images/pages/blog/official-neon-terraform-provider/terraform-downloads-2.png)
 
 Pulumi generates packages from Terraform providers, which is how the [Neon package in the Pulumi Registry](https://www.pulumi.com/registry/packages/neon/) exists today. So an official Terraform provider also gives us a path to an official Pulumi package.
 
