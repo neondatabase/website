@@ -27,7 +27,7 @@ seo:
   image: null
 ---
 
-## REPACK, query plan advice, WAIT FOR LSN, and more
+**[ADD CLIP 1 by pixelpoint]** 
 
 Postgres 19 is out, and [as always](https://neon.com/blog/postgres-18), it's available on Neon the same day. You can already try it on the Neon Free plan: start a Postgres 19 project from the Neon Console by choosing version 19 when you create the project, or [ask your agent to do it](https://neon.com/docs/ai/neon-mcp-server):
 
@@ -35,7 +35,7 @@ Postgres 19 is out, and [as always](https://neon.com/blog/postgres-18), it's ava
 Create a new Neon project on Postgres 19
 ```
 
-**[ADD CLIP]**
+**[ADD CLIP 2 (agent)]**
 
 <Admonition type="note" title="This release took a little longer">
 Postgres 19 was first scheduled for October 29. The release team added a second release candidate, moved general availability to November 19, and pulled several large features late in the cycle (more on those below). Robert Haas, a Postgres committer on our team, wrote [wrote a blog post discussing why.](https://neon.com/blog/postgres-19-is-late-and-its-ais-fault)**.**
