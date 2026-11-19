@@ -59,6 +59,8 @@ Set up the WorkOS Sync Engine on my Neon project using the workos-sync Function 
 A follow-up guide walks through deploying the Sync Engine on Neon, then adding a Neon Function that answers support, sales, and security questions in Slack with read-only SQL through Neon AI Gateway.
 </Admonition>
 
+**[ADD CLIP]**
+
 ## How the Sync Engine works
 
 Once the sync is running, your database has a new workos schema with one table for each kind of WorkOS object. You query it like any other schema and join it to your own tables:
@@ -86,6 +88,8 @@ SELECT _raw->'custom_attributes'->>'department'
 ```
 
 Every row also has an `_env` column with the WorkOS environment it came from, so one database can hold both staging and production.
+
+**[ADD DIAGRAM]**
 
 ### How it stays in sync
 
