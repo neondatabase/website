@@ -785,3 +785,51 @@ describe('parseCommandFile: shorthand describe from an option factory', () => {
     expect(parsed.commands.update.options.role.describe).toBeUndefined();
   });
 });
+
+describe('parseCommandFile: const positional specs and Object.keys choices', () => {
+  it('resolves a positional spec held in a module const (like docs.ts)', () => {
+    const file = writeTempSource(`
+      import type yargs from "yargs";
+      export const command = "docs [query]";
+      export const describe = "Search";
+      const QUERY_POSITIONAL = { describe: "What to search for", type: "string" } as const;
+      export const builder = (argv: yargs.Argv) =>
+        argv
+          .positional("query", QUERY_POSITIONAL)
+          .command("search <query>", "Search", (yargs) =>
+            yargs.positional("query", QUERY_POSITIONAL),
+          );
+    `);
+    const parsed = parseCommandFile(file, new Map());
+    expect(parsed.positionals[0]).toMatchObject({
+      name: 'query',
+      describe: 'What to search for',
+      type: 'string',
+    });
+    expect(parsed.commands.search.positionals[0]).toMatchObject({
+      name: 'query',
+      required: true,
+      describe: 'What to search for',
+      type: 'string',
+    });
+  });
+
+  it('resolves choices built with Object.keys({...}) (like logs.ts LOG_SOURCES)', () => {
+    const file = writeTempSource(`
+      import type yargs from "yargs";
+      export const command = "logs";
+      export const describe = "Logs";
+      const LOG_SOURCES = Object.keys({
+        function: true,
+        storage: true,
+        "neon_auth": true,
+      } satisfies Record<string, true>) as readonly string[];
+      export const builder = (argv: yargs.Argv) =>
+        argv.options({
+          source: { describe: "Source", type: "string", choices: LOG_SOURCES },
+        });
+    `);
+    const parsed = parseCommandFile(file, new Map());
+    expect(parsed.options.source.choices).toEqual(['function', 'storage', 'neon_auth']);
+  });
+});
