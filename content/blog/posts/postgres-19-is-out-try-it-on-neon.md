@@ -16,7 +16,7 @@ authors:
 cover:
   image: https://cdn.neonapi.io/public/images/pages/blog/postgres-19-is-out-try-it-on-neon/cover.jpg
   alt: Postgres 19 is out, try it on Neon
-isFeatured: false
+isFeatured: true
 seo:
   title: 'Postgres 19 is out: try it on Neon - Neon'
   description: 'REPACK, query plan advice, WAIT FOR LSN, and more'
