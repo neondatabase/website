@@ -5,6 +5,7 @@ summary: >-
   Add the Neon plugin to ChatGPT from Settings > Plugins > Browse directory.
   The plugin includes Neon's agent skills and the Neon app, which connects
   ChatGPT to your Neon account through the Neon MCP Server with OAuth.
+updatedOn: '2026-11-08T14:07:08.000Z'
 ---
 
 The Neon plugin for ChatGPT includes Neon's agent skills and the **Neon** app. The app connects ChatGPT to your Neon account through the [Neon MCP Server](/docs/ai/neon-mcp-server). With the plugin, ChatGPT can manage your projects, branches, and SQL in natural language.

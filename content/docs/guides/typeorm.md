@@ -9,7 +9,7 @@ summary: >-
   handle high concurrency without exhausting connections. If you set TypeORM's
   `connectTimeoutMS`, leave room for a suspended compute to start.
 enableTableOfContents: true
-updatedOn: '2026-09-16T20:12:32.981Z'
+updatedOn: '2026-11-07T16:24:01.000Z'
 ---
 
 <CopyPrompt src="/prompts/typeorm-prompt.md" 

@@ -12,7 +12,7 @@ summary: >-
   `Microsoft.EntityFrameworkCore.Design`, and `dotnet-ef`, then applying the
   initial schema with `dotnet ef database update`.
 enableTableOfContents: true
-updatedOn: '2026-07-31T15:27:48.506Z'
+updatedOn: '2026-11-08T10:46:55.000Z'
 ---
 
 <CopyPrompt src="/prompts/dotnet-ef-prompt.md"

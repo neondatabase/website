@@ -10,7 +10,7 @@ summary: >-
   datasource configuration with SSL required, and a working HTTP endpoint that
   queries the Postgres version.
 enableTableOfContents: true
-updatedOn: '2026-09-16T19:45:35.340Z'
+updatedOn: '2026-11-08T14:14:48.000Z'
 ---
 
 <CopyPrompt src="/prompts/quarkus-jdbc-prompt.md"

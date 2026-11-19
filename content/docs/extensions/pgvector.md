@@ -13,7 +13,7 @@ summary: >-
 enableTableOfContents: true
 redirectFrom:
   - /docs/extensions/pg_embedding
-updatedOn: '2026-11-06T11:14:41.532Z'
+updatedOn: '2026-11-13T20:59:05.000Z'
 ---
 
 <LakebaseVectorTip />

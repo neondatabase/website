@@ -10,7 +10,7 @@ summary: >-
   uses an existing auth provider and you need provider-specific configuration
   details rather than the default Managed Better Auth setup.
 enableTableOfContents: true
-updatedOn: '2026-09-30T16:23:41.172Z'
+updatedOn: '2026-10-30T20:07:37.000Z'
 redirectFrom:
   - /docs/guides/neon-authorize
 ---

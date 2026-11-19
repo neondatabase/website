@@ -11,7 +11,7 @@ summary: >-
   suspended by Scale to Zero, which can cause gaps; log export also counts
   toward your plan's public network transfer allowance.
 enableTableOfContents: true
-updatedOn: '2026-08-07T13:46:01.605Z'
+updatedOn: '2026-11-06T01:37:15.000Z'
 ---
 
 This page provides a comprehensive reference for all metrics and log fields that Neon exports to observability platforms through integrations like [Datadog](/docs/guides/datadog), [Grafana Cloud](/docs/guides/grafana-cloud), and [OpenTelemetry](/docs/guides/opentelemetry).

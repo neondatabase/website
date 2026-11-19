@@ -11,7 +11,7 @@ isDraft: false
 redirectFrom:
   - /docs/conceptual-guides/regions
   - /docs/manage/regions
-updatedOn: '2026-10-14T21:25:07.454Z'
+updatedOn: '2026-11-18T21:57:37.000Z'
 ---
 
 Neon offers project deployment in multiple AWS regions. To minimize latency between your Neon database and application, we recommend choosing the region closest to your application server.

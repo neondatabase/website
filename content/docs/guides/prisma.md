@@ -16,7 +16,7 @@ redirectFrom:
   - /docs/integrations/prisma
   - /docs/guides/prisma-guide
   - /docs/guides/prisma-migrate
-updatedOn: '2026-10-05T14:25:23.981Z'
+updatedOn: '2026-11-03T21:16:37.000Z'
 ---
 
 <CopyPrompt src="/prompts/prisma-prompt.md" 

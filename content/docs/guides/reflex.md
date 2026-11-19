@@ -9,7 +9,7 @@ summary: >-
   covering virtual environment setup, psycopg installation, schema
   migrations, and a working CRUD example.
 enableTableOfContents: true
-updatedOn: '2026-09-16T19:45:35.340Z'
+updatedOn: '2026-11-08T14:19:23.000Z'
 ---
 
 <CopyPrompt src="/prompts/reflex-prompt.md"

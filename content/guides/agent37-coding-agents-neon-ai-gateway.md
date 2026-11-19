@@ -4,6 +4,7 @@ enableTableOfContents: true
 createdAt: '2026-11-06T00:00:00.000Z'
 title: Use Neon AI Gateway as the model provider for coding agents on Agent37
 subtitle: Run Claude Code, Codex, and OpenCode on Agent37 with one revocable Neon AI Gateway credential per instance, and reach Claude, GPT, Gemini, and open-weight models with no provider keys.
+updatedOn: '2026-11-09T07:17:22.000Z'
 ---
 
 [Agent37](https://www.agent37.com) runs each coding agent on its own always-on computer, and its chat API carries your messages to that agent. The agent still needs a model provider: Claude Code expects an Anthropic key and Codex an OpenAI key, and the agent can read any key you place on its instance. [Neon AI Gateway](/docs/ai-gateway/overview) replaces those keys with one token per instance, a branch-scoped credential with the `ai_gateway:invoke` scope that reaches Claude, GPT, Gemini, and open-weight models.

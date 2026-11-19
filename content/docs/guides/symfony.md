@@ -10,7 +10,7 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/quickstart/symfony
   - /docs/integrations/symfony
-updatedOn: '2026-09-16T19:45:35.340Z'
+updatedOn: '2026-11-08T14:10:53.000Z'
 ---
 
 <CopyPrompt src="/prompts/symfony-prompt.md" 

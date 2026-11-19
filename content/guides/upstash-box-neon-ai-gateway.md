@@ -4,7 +4,7 @@ subtitle: 'Learn how to run a coding agent in a disposable Upstash Box sandbox w
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2026-10-29T00:00:00.000Z'
-updatedOn: '2026-10-29T18:05:57.073Z'
+updatedOn: '2026-11-05T23:41:12.000Z'
 ---
 
 Coding agents like Claude Code, Codex, and OpenCode can automate repository tasks: investigating issues, making code changes, running tests, and opening pull requests. To do that independently, each agent needs a working environment with the repository, the development tools, and the credentials the job requires. Disposable environments make this easier by giving each task its own workspace, created on demand and discarded when the work is done.
