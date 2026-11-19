@@ -48,7 +48,7 @@ Neon roles cannot install Postgres extensions other than those supported by Neon
 The following table shows parameter settings that are set explicitly for your database. These values may differ from standard Postgres defaults, and a few settings differ based on your Neon compute size.
 
 <Admonition type="note">
-Because Neon is a managed Postgres service, Postgres parameters are not user-configurable outside of a [session, database, or role context](#configuring-postgres-parameters-for-a-session-database-or-role). The exception is `log_min_duration_statement`, which you can set per compute with the Neon API to log slow queries. See [Log slow queries](/docs/reference/metrics-logs#log-slow-queries).
+Because Neon is a managed Postgres service, you can't change most Postgres parameters directly. You can set parameters for a [session, database, or role](#configuring-postgres-parameters-for-a-session-database-or-role), and you can set a short list of parameters for a [compute](#configure-postgres-parameters-for-a-compute) with the Neon API. The exception is `log_min_duration_statement`, which you can set per compute with the Neon API to log slow queries. See [Log slow queries](/docs/reference/metrics-logs#log-slow-queries).
 
 If you are a Neon [Scale plan](/docs/introduction/plans) user and require a different Postgres instance-level setting, you can contact [Neon Support](/docs/introduction/support) to see if the desired setting can be supported. Please keep in mind that it may not be possible to support some parameters due to platform limitations and constraints.
 </Admonition>
@@ -223,6 +223,49 @@ ALTER DATABASE neondb SET maintenance_work_mem='1 GB';
 ```sql
 ALTER USER neondb_owner SET maintenance_work_mem='1 GB';
 ```
+
+### Configure Postgres parameters for a compute
+
+You can set the following parameters for a compute with the `pg_settings` field of the [Update compute endpoint](/docs/reference/api/endpoints/update-project-endpoint) API. Some of them, such as `hot_standby_feedback` and `log_min_duration_statement`, can't be set any other way.
+
+| Use                        | Parameters                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+| -------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Timeouts                   | `statement_timeout`, `idle_in_transaction_session_timeout`, `idle_session_timeout`, `lock_timeout`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
+| Read replicas              | `hot_standby_feedback`, `max_standby_streaming_delay`, `max_standby_archive_delay`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
+| Logging and I/O statistics | `log_min_duration_statement` (minimum `500`), `track_io_timing`, `track_wal_io_timing`, `track_cost_delay_timing` (Postgres 18 and later), `neon.track_wait_events`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
+| Query planner              | `constraint_exclusion`, `cpu_index_tuple_cost`, `cpu_operator_cost`, `cpu_tuple_cost`, `cursor_tuple_fraction`, `from_collapse_limit`, `min_parallel_table_scan_size`, `parallel_setup_cost`, `parallel_tuple_cost`, `plan_cache_mode`, `random_page_cost`, `seq_page_cost`, and the `enable_*` planner parameters (`enable_async_append`, `enable_bitmapscan`, `enable_gathermerge`, `enable_hashagg`, `enable_hashjoin`, `enable_incremental_sort`, `enable_indexonlyscan`, `enable_indexscan`, `enable_material`, `enable_mergejoin`, `enable_nestloop`, `enable_parallel_append`, `enable_parallel_hash`, `enable_partition_pruning`, `enable_partitionwise_aggregate`, `enable_partitionwise_join`, `enable_seqscan`, `enable_sort`, `enable_tidscan`) |
+| Other                      | `default_text_search_config`, `exit_on_error`, `transaction_isolation`, `cron.database_name` (for [pg_cron](/docs/extensions/pg_cron), takes effect after a [compute restart](/docs/manage/computes#restart-a-compute))                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
+
+For example, this request sets a 60-second statement timeout and a 5-minute idle-in-transaction timeout on a compute:
+
+```bash
+curl --request PATCH \
+     --url https://console.neon.tech/api/v2/projects/<project_id>/endpoints/<endpoint_id> \
+     --header 'accept: application/json' \
+     --header "authorization: Bearer $NEON_API_KEY" \
+     --header 'content-type: application/json' \
+     --data '
+{
+  "endpoint": {
+    "settings": {
+      "pg_settings": {
+        "statement_timeout": "60000",
+        "idle_in_transaction_session_timeout": "300000"
+      }
+    }
+  }
+}
+'
+```
+
+Keep these rules in mind:
+
+- **The request replaces all compute settings.** Neon replaces the compute's whole `pg_settings` object with the one you send. Any parameter you leave out goes back to its default, so include every parameter you want to keep. To see the current values, call the [Get compute endpoint](/docs/reference/api/endpoints/get-project-endpoint) API.
+- **Values are strings in the parameter's base unit.** Send `"60000"` for 60 seconds, not `"60s"`. Boolean parameters accept only `"on"` or `"off"`.
+- **Changes apply without a restart**, including to sessions that are already open, except `cron.database_name`.
+- **Role and database settings take precedence.** A value set with `ALTER ROLE` or `ALTER DATABASE` overrides the compute value, and `SET` overrides both for the current session.
+
+The API rejects any other parameter with `setting cannot be changed`.
 
 ## Tablespaces
 
