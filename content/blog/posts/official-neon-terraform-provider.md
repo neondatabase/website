@@ -51,7 +51,7 @@ The official provider started as a community project. In July 2022, Dmitry creat
 
 ![Bar chart of Terraform Registry downloads per kislerdm/neon release, placed at each release date from January 2023 to September 2026, 1,980,291 downloads in total. Most releases before 2025 have under 60,000 downloads; v0.9.0 has about 191,000, v0.13.0 from January 2026 about 690,000, v0.15.0 about 333,000 and v0.18.0 from September 2026 about 463,000.](https://cdn.neonapi.io/public/images/pages/blog/official-neon-terraform-provider/terraform-downloads-2.png)
 
-Instead of starting over, we worked with Dmitry on porting his provider to `neondatabase/neon` and making it official. We asked him two questions.
+Instead of starting over, we worked with Dmitry on porting his provider to `neondatabase/neon` and making it official. For this launch, we asked him a few questions.
 
 **Why did you start a Terraform provider for Neon?**
 
