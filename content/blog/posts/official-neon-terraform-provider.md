@@ -7,8 +7,8 @@ excerpt: >-
   Infrastructure as code is a great fit for agents. Bigger teams compose Neon with AWS, Cloudflare and more in
   Terraform, OpenTofu, Pulumi or Alchemy. That's why kislerdm/neon, the community Terraform provider Dmitry Kisler
   started in 2022, is now the official neondatabase/neon provider.
-date: '2026-11-18T17:00:00'
-updatedOn: '2026-11-18T17:00:00'
+date: '2026-11-19T17:00:00'
+updatedOn: '2026-11-19T17:00:00'
 category: product
 categories:
   - product
