@@ -308,7 +308,6 @@ Some of the features that finally won't ship in 19:
 - `GROUP BY ALL`. Shorthand for grouping by every non-aggregate expression in the select list.. [Reverted on July 17, 2026](https://git.postgresql.org/gitweb/?p=postgresql.git;a=commit;h=a32733d8f10f0e35f7e4ee772ddbef552296577f).
 - Non-text output formats for `pg_dumpall`. [Reverted on June 18, 2026](https://git.postgresql.org/gitweb/?p=postgresql.git;a=commit;h=7ca548f23a60887541493b2da47f2b2720c35ee3).
 - DDL extraction functions. `pg_get_role_ddl()`, `pg_get_tablespace_ddl()`, and `pg_get_database_ddl()` were [Reverted on September 13, 202](https://www.postgresql.org/message-id/E1x5ovh-00000000AmY-3ObG%40gemulon.postgresql.org)6.
-- [MAYBE] Online data checksum enablement?
 
 ## Thanks to the Postgres contributors
 
