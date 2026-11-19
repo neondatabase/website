@@ -35,7 +35,7 @@ seo:
   image: 'https://cdn.neonapi.io/public/images/pages/blog/official-neon-terraform-provider/social-v1.jpg'
 ---
 
-Infrastructure as code (IaC) has always been the right call for complex systems, which is why bigger companies rely on it. It has also always taken more time to manage than clicking through a dashboard, so most hobby projects and startups skipped it.
+Infrastructure as code (IaC) has always been the right call for complex systems, which is why bigger companies rely on it. It has also always taken more time to manage than clicking through a dashboard, so it's much less common among TypeScript and web developers, hobby projects and startups.
 
 Agents change both sides of that. Your agent can write, test and debug the config and fix whatever got out of sync, so IaC stops being a burden. And the config is great context for your agent: your architecture is right there in code, so it doesn't need a round of tool calls to figure out where things run.
 
