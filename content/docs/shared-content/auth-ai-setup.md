@@ -1,5 +1,5 @@
 ---
-updatedOn: '2026-07-15T00:08:00.682Z'
+updatedOn: '2026-08-27T21:39:27.000Z'
 ---
 
 The fastest way to connect your editor to Managed Better Auth is to run `npx neon@latest init` from your project root:

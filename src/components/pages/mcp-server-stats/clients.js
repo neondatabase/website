@@ -8,6 +8,8 @@ export const CLIENTS = {
   v0: { label: 'v0', color: '#00E599' },
   replit: { label: 'Replit', color: '#FF6B6B' },
   opencode: { label: 'OpenCode', color: '#3DD6D0' },
+  antigravity: { label: 'Antigravity', color: '#8E9BFF' },
+  'github-copilot-cli': { label: 'Copilot CLI', color: '#C9D1D9' },
   'custom-code': { label: 'Custom code', color: '#E5D55B' },
   other: { label: 'Other', color: '#5E6066' },
 };

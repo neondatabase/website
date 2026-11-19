@@ -8,6 +8,7 @@ summary: >-
   locally with neon dev, and deploy it. Also explains how registry templates
   differ from neon bootstrap starter apps.
 enableTableOfContents: true
+updatedOn: '2026-11-03T12:00:00.000Z'
 ---
 
 Function templates are ready-made [Neon Functions](/docs/compute/functions/overview) you can add to your project instead of writing one from scratch. There are templates for REST APIs, MCP servers, authenticated APIs, AI agents, image generation and analysis, and chat bots. Some are built by Neon and some by partners such as Mastra, TanStack, and Telegram.

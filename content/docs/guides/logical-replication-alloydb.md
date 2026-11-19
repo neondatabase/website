@@ -9,7 +9,7 @@ summary: >-
   psql before starting the subscription.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2026-09-16T19:45:35.340Z'
+updatedOn: '2026-11-13T18:56:48.000Z'
 ---
 
 This guide describes how to replicate data from AlloyDB Postgres to Neon using native Postgres logical replication. The publisher steps follow the native Postgres logical replication setup in the [Postgres documentation](https://www.postgresql.org/docs/current/logical-replication-quick-setup.html). For the AlloyDB-specific flags, see the [AlloyDB flags reference](https://docs.cloud.google.com/alloydb/docs/reference/alloydb-flags), in the _Google AlloyDB documentation_.

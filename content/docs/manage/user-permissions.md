@@ -10,7 +10,7 @@ summary: >-
 enableTableOfContents: true
 redirectFrom:
   - /docs/manage/user-permissions-preview
-updatedOn: '2026-07-29T13:53:54.324Z'
+updatedOn: '2026-11-18T21:57:37.000Z'
 ---
 
 In Neon, access works in two layers. Your **organization role** sets a baseline level of access across every project in the org, and **per-project permissions** grant additional access on individual projects. This page explains how the two layers combine and what each role and permission lets you do.
@@ -118,7 +118,7 @@ To grant one, see [Assign project access](#assign-project-access). The following
 | Upload or delete objects, create private buckets, and delete buckets                      |   ❌   |   ✅   |  ✅   |
 | Create, reveal, rotate, or revoke Object Storage and AI Gateway credentials               |   ❌   |   ✅   |  ✅   |
 | Deploy, update, or delete Neon Functions and their triggers                               |   ❌   |   ✅   |  ✅   |
-| Enable, disable, or rotate Realtime, and copy its secret                                  |   ❌   |   ✅   |  ✅   |
+| Enable, disable, or rotate [Realtime](/docs/realtime/overview), and copy its secret       |   ❌   |   ✅   |  ✅   |
 | Create a public (`public_read`) Object Storage bucket                                     |   ❌   |   ❌   |  ✅   |
 | Register or delete a Neon Functions custom domain                                         |   ❌   |   ❌   |  ✅   |
 | Manage who can access the project                                                         |   ❌   |   ❌   |  ✅   |

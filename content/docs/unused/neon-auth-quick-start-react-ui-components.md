@@ -6,7 +6,7 @@ summary: >-
   pre-built UI components, including enabling Managed Better Auth, creating a React app,
   and configuring the necessary environment variables.
 enableTableOfContents: true
-updatedOn: '2026-09-16T15:38:57.808Z'
+updatedOn: '2026-10-14T16:22:21.000Z'
 layout: wide
 ---
 

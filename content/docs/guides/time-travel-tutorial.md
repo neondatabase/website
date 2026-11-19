@@ -11,7 +11,7 @@ summary: >-
   timestamp from query history, and verifying pre- and post-activation values
   with time-scoped queries.
 enableTableOfContents: true
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-11-02T21:44:13.000Z'
 ---
 
 This tutorial shows how to use Time Travel to debug a common problem: an issue that appears right after a CI/CD deployment to production.

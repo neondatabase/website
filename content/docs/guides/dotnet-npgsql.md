@@ -9,7 +9,7 @@ summary: >-
   injection, and credential storage in appsettings.json. For ORM-based
   alternatives, see the Entity Framework guide.
 enableTableOfContents: true
-updatedOn: '2026-10-09T10:14:56.146Z'
+updatedOn: '2026-11-08T14:11:56.000Z'
 ---
 
 <CopyPrompt src="/prompts/dotnet-prompt.md" 

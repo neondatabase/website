@@ -4,10 +4,10 @@ subtitle: 'Subscribe to live queries using the Realtime client.'
 summary: >-
   Subscribe to live queries from trusted backend code or the browser. Fetch sealed queries from your API, handle every callback and renew sealed queries before they expire.
 enableTableOfContents: true
-updatedOn: '2026-11-05T20:22:23.610Z'
+updatedOn: '2026-11-18T00:59:49.148Z'
 ---
 
-Once you've [defined](./queries) and [sealed](./queries#sealing-queries) a query, you can [subscribe&nbsp;to&nbsp;it](#subscribe-to-the-sealed-query) using the [low&#8209;level Realtime&nbsp;client](../sdks/typescript#client-createrealtimeclient).
+Once you've [defined](./queries) and [sealed](./queries#sealing-queries) a query, you can [subscribe&nbsp;to&nbsp;it](#subscribe-to-the-sealed-query) using the [low&#8209;level Realtime&nbsp;client](../sdks/typescript/client#client-createrealtimeclient).
 
 <Admonition type="important" title="Client-side reactivity">
 Manual subscriptions are a relatively low-level API. Most apps and agents can use the [higher&#8209;level reactivity&nbsp;primitives](./reactivity) that manage the subscription for you.
@@ -25,7 +25,7 @@ The guide continues the [running example](https://github.com/neondatabase/exampl
 
 ### Subscribe in trusted backend code
 
-Add a `url` to [`createRealtime()`](../sdks/typescript#backend-createrealtime) and it returns a direct server, which seals queries with your secret and subscribes to them itself.
+Add a `url` to [`createRealtime()`](../sdks/typescript/backend#backend-createrealtime) and it returns a direct server, which seals queries with your secret and subscribes to them itself.
 
 ```ts filename="backend/worker.ts" {11,19,20,22}
 import { createRealtime } from "@neon/realtime/server"
@@ -106,7 +106,7 @@ export async function fetchSealedMessages(channelId: number): Promise<SealedLive
 
 Hono's client types the response body as JSON, so the `Date` in `created_at` shows up as a `string`. The `as` restores the row type that the Realtime client decodes at runtime.
 
-`getSession()` returns the cached session until its JWT is about to expire, then fetches a new one, so each request carries a valid token. Managed Better Auth tokens only last about 15 minutes. Without a session there's no token, so the API answers 401.
+`getSession()` returns the cached session until its JWT is about to expire, then fetches a new one, so each request carries a valid token. Managed Better Auth [tokens expire after 15 minutes](/docs/auth/guides/plugins/jwt). Without a session there's no token, so the API answers 401.
 
 `window.location.origin` assumes your dev server proxies `/api` to the API, as the [example's Vite config](https://github.com/neondatabase/examples/tree/main/realtime/guides-chat-app/vite.config.ts) does.
 
@@ -401,11 +401,11 @@ function renderMessage(message: Message): HTMLLIElement {
 
 If the replacement's `queryFingerprint` doesn't match, the promise that `renew()` returns rejects. A changed parameter, like a different channel, makes a different query, so subscribe to the new one and unsubscribe from the old.
 
-You don't write this yourself when you use the bindings. The [React and TanStack&nbsp;DB bindings](./reactivity) take a `refreshQuery` function and renew with the same timing, 10 seconds before expiry with a 1-second retry. They're built on [`QueryRefreshController`](../sdks/typescript#client-queryrefreshcontroller), which you can use if you're writing a binding for another framework.
+You don't write this yourself when you use the bindings. The [React and TanStack&nbsp;DB bindings](./reactivity) take a `refreshQuery` function and renew with the same timing, 10 seconds before expiry with a 1-second retry. They're built on [`QueryRefreshController`](../sdks/typescript/client#client-queryrefreshcontroller), which you can use if you're writing a binding for another framework.
 
 ## Handle errors
 
-When automatic recovery stops, the subscription moves to `error`, and its `error` is a [`LiveQueryError`](../sdks/typescript#client-livequeryerror) with:
+When automatic recovery stops, the subscription moves to `error`, and its `error` is a [`LiveQueryError`](../sdks/typescript/client#client-livequeryerror) with:
 
 - `code`: a stable, machine-readable error code
 - `message`: a description of the failure
@@ -423,7 +423,7 @@ If the connection itself fails, for example because of a fatal protocol error, e
 
 ### Log client diagnostics
 
-The client is silent by default. To see what it's doing, pass a `logLevel` to [`createRealtimeClient()`](../sdks/typescript#client-createrealtimeclient): `"error"`, `"warn"`, `"info"` or `"debug"`. Each level includes the ones before it.
+The client is silent by default. To see what it's doing, pass a `logLevel` to [`createRealtimeClient()`](../sdks/typescript/client#client-createrealtimeclient): `"error"`, `"warn"`, `"info"` or `"debug"`. Each level includes the ones before it.
 
 ```ts filename="frontend/client.ts" {7}
 import { createRealtimeClient } from "@neon/realtime/client"
@@ -436,7 +436,7 @@ export const client = createRealtimeClient({
 })
 ```
 
-Entries go to the console unless you pass a [`logger`](../sdks/typescript#client-realtimelogger), which receives each [entry](../sdks/typescript#client-realtimelogentry) instead. An entry has a `level`, a `message`, a `timestamp` and a stable `event` name, like `connection_lost` or `subscription_failed`. Match on `event`, not on `message`:
+Entries go to the console unless you pass a [`logger`](../sdks/typescript/client#client-realtimelogger), which receives each [entry](../sdks/typescript/client#client-realtimelogentry) instead. An entry has a `level`, a `message`, a `timestamp` and a stable `event` name, like `connection_lost` or `subscription_failed`. Match on `event`, not on `message`:
 
 ```ts
 logger: (entry) => {

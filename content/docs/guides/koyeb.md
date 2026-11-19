@@ -9,7 +9,7 @@ summary: >-
   own database server. Covers both the Koyeb control panel and CLI deployment
   paths, including Prisma schema sync and database seeding.
 enableTableOfContents: true
-updatedOn: '2026-08-04T05:18:26.469Z'
+updatedOn: '2026-11-16T20:12:28.000Z'
 ---
 
 [Koyeb](https://www.koyeb.com/) is a developer-friendly, serverless platform designed to easily deploy reliable and scalable applications globally. Koyeb offers native autoscaling, automatic HTTPS (SSL), auto-healing, and global load-balancing across their edge network with zero configuration.

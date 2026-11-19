@@ -13,7 +13,7 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/quickstart/vercel
   - /docs/integrations/vercel
-updatedOn: '2026-10-08T19:32:04.700Z'
+updatedOn: '2026-11-09T22:07:35.000Z'
 ---
 
 <Callout title="Realtime with Next.js">

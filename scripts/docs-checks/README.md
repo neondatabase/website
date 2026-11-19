@@ -14,9 +14,10 @@ Exits non-zero on any validation error.
 
 ## Checks
 
-| Check                   | Validates                                    |
-| ----------------------- | -------------------------------------------- |
-| [`neonctl`](./neonctl/) | Every `neonctl`/`neon` CLI example is valid. |
+| Check                                         | Validates                                                                   |
+| --------------------------------------------- | --------------------------------------------------------------------------- |
+| [`neonctl`](./neonctl/)                       | Every `neonctl`/`neon` CLI example is valid.                                |
+| [`access-path-titles`](./access-path-titles/) | A title naming Lakebase Postgres keeps "on Neon" when its subtitle says it. |
 
 ## Add a new check
 

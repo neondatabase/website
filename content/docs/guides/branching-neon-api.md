@@ -10,7 +10,7 @@ summary: >-
   RFC 3339 timestamp up to 30 days in the future. Schema-only branch creation
   via init_source=schema-only is in beta.
 enableTableOfContents: true
-updatedOn: '2026-10-14T11:21:37.306Z'
+updatedOn: '2026-11-10T14:15:06.000Z'
 ---
 
 The examples in this guide demonstrate creating, viewing, and deleting branches using the Neon API. For other branch-related API methods, refer to the [Neon API Reference](/docs/reference/api).

@@ -12,7 +12,7 @@ summary: >-
   python-dotenv, and avoiding hanging processes by calling
   Tortoise.close_connections() or using run_async().
 enableTableOfContents: true
-updatedOn: '2026-09-16T19:45:35.340Z'
+updatedOn: '2026-11-08T14:18:40.000Z'
 ---
 
 <CopyPrompt src="/prompts/tortoise-orm-prompt.md" 

@@ -9,7 +9,7 @@ summary: >-
   building a RedwoodSDK app on Cloudflare that needs a serverless Postgres
   backend.
 enableTableOfContents: true
-updatedOn: '2026-09-16T19:45:35.340Z'
+updatedOn: '2026-11-08T17:43:35.000Z'
 ---
 
 <CopyPrompt src="/prompts/redwood-sdk-prompt.md"

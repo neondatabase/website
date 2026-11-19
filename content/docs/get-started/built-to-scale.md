@@ -9,7 +9,7 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/get-started-with-neon/production-readiness
   - /docs/get-started/production-readiness
-updatedOn: '2026-10-13T07:55:06.255Z'
+updatedOn: '2026-10-15T14:51:27.000Z'
 ---
 
 Neon fits into every stage of growth, from the first side project to operating large fleets of production backends, without forcing you to rethink your architecture along the way.

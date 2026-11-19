@@ -9,7 +9,7 @@ summary: >-
   and rollback. Also covers dotenv-kotlin for credential management. Focuses on
   raw JDBC without an ORM, unlike Micronaut or Hibernate guides.
 enableTableOfContents: true
-updatedOn: '2026-10-31T13:11:38.215Z'
+updatedOn: '2026-11-18T16:51:04.173Z'
 ---
 
 <CopyPrompt src="/prompts/kotlin-prompt.md"
@@ -535,7 +535,7 @@ While this guide demonstrates how to connect to Neon using raw SQL queries, for 
 
 Explore the following resources to learn how to integrate frameworks with Neon:
 
-- [Connect a Micronaut Kotlin application to Neon](/docs/guides/micronaut-kotlin)
+- [Connect a Micronaut Kotlin application to Lakebase Postgres on Neon](/docs/guides/micronaut-kotlin)
 - [Database Schema Changes with Hibernate, Spring Boot, and Neon](/guides/spring-boot-hibernate)
 
 ## Next steps with Neon backend services
@@ -549,6 +549,6 @@ Explore the following resources to learn how to integrate frameworks with Neon:
 - [PostgreSQL JDBC Driver Documentation](https://jdbc.postgresql.org/documentation/use/)
 - [Gradle User Manual](https://docs.gradle.org/current/userguide/userguide.html)
 - [dotenv-kotlin](https://github.com/cdimascio/dotenv-kotlin)
-- [Connect a Micronaut Kotlin application to Neon](/docs/guides/micronaut-kotlin)
+- [Connect a Micronaut Kotlin application to Lakebase Postgres on Neon](/docs/guides/micronaut-kotlin)
 
 <NeedHelp/>

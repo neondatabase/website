@@ -10,7 +10,7 @@ summary: >-
   suits serverless and edge runtimes. Bun users are directed to a separate
   guide.
 enableTableOfContents: true
-updatedOn: '2026-10-14T02:43:52.455Z'
+updatedOn: '2026-11-06T12:04:57.000Z'
 ---
 
 <CopyPrompt src="/prompts/javascript-prompt.md" 

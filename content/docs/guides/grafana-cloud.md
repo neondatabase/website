@@ -8,7 +8,7 @@ summary: >-
   queries covering connection counts, CPU, memory, cache hit rate, replication
   delay, and PgBouncer pooling metrics. Requires the Neon Scale plan.
 enableTableOfContents: true
-updatedOn: '2026-08-07T16:05:20.768Z'
+updatedOn: '2026-11-13T16:10:31.000Z'
 ---
 
 <InfoBlock>

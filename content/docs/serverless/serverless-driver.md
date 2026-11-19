@@ -13,7 +13,7 @@ summary: >-
   and troubleshooting for common errors. Optional settings are on the Neon
   serverless driver configuration page. Install with
   `npm install @neondatabase/serverless`; TypeScript types are bundled.
-updatedOn: '2026-10-05T14:13:05.152Z'
+updatedOn: '2026-11-18T16:41:34.386Z'
 ---
 
 <CopyPrompt src="/prompts/serverless-driver-prompt.md" 
@@ -470,7 +470,7 @@ The GitHub repository and [changelog](https://github.com/neondatabase/serverless
 - [Fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API)
 - [node-postgres](https://node-postgres.com/)
 - [Drizzle-ORM](https://orm.drizzle.team/docs/quick-postgresql/neon)
-- [Schema migration with Lakebase Postgres and Drizzle ORM](/docs/guides/drizzle-migrations)
+- [Schema migration with Drizzle ORM and Lakebase Postgres on Neon](/docs/guides/drizzle-migrations)
 - [kysely](https://github.com/kysely-org/kysely)
 - [Zapatos](https://jawj.github.io/zapatos/)
 - [Vercel Functions](https://vercel.com/docs/functions)

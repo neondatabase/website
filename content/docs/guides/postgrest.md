@@ -8,7 +8,7 @@ summary: >-
   database as a REST API locally using Docker, including JWT-based
   authentication and row-level security for per-user access control.
 enableTableOfContents: true
-updatedOn: '2026-10-09T10:14:56.146Z'
+updatedOn: '2026-11-16T17:34:43.000Z'
 ---
 
 <InfoBlock>

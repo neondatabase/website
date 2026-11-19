@@ -9,7 +9,7 @@ summary: >-
   with `exo dev` that exposes a GraphQL endpoint and playground.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-11-14T19:39:43.000Z'
 ---
 
 _This guide was contributed by the Exograph team_

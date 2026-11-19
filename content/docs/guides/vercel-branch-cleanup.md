@@ -12,7 +12,7 @@ summary: >-
   Stale branches count toward plan branch limits and incur storage costs even
   after being auto-archived.
 enableTableOfContents: true
-updatedOn: '2026-09-25T09:36:22.797Z'
+updatedOn: '2026-11-18T20:38:42.000Z'
 ---
 
 <InfoBlock>
@@ -66,6 +66,8 @@ Vercel's current default retention periods:
 Preview deployments use the Pre-Production column. Production retention matters here too, because production deployments count toward the "last 10 deployments" exception described below.
 
 In the worst case (a deployment created moments before the PR is closed), this means up to **~6 months** before the Neon branch is automatically deleted, and longer, potentially never, if a [retention exception](#retention-exceptions) keeps one of the branch's deployments alive.
+
+Stale preview branches that still receive traffic keep their computes active, and active computes on non-default branches count toward your project's [concurrently active compute limit](/docs/manage/computes#concurrently-active-compute-limit). If preview deployments start failing with `You have exceeded the limit of concurrently active endpoints`, cleaning up old preview branches is usually the fix.
 
 <Admonition type="warning" title="Restoring deleted deployments">
 Vercel lets you [restore deleted deployments](https://vercel.com/docs/deployment-retention#restoring-a-deleted-deployment) within a 30-day recovery window. However, restoring a Vercel deployment does **not** restore the associated Neon branch. The restored deployment will have no database behind it. To recover, you would need to recreate the Neon branch manually or push a new commit to trigger the integration.

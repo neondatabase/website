@@ -14,7 +14,7 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/quickstart/django
   - /docs/cloud/integrations/django
-updatedOn: '2026-09-16T19:45:35.340Z'
+updatedOn: '2026-11-18T16:41:34.386Z'
 ---
 
 <CopyPrompt src="/prompts/django-prompt.md" 
@@ -189,7 +189,7 @@ For schema migration with Django, see:
 
 <DetailIconCards>
 
-<a href="/docs/guides/django-migrations" description="Schema migration with Lakebase Postgres and Django" icon="app-store">Django Migrations</a>
+<a href="/docs/guides/django-migrations" description="Schema migration with Django and Lakebase Postgres on Neon" icon="app-store">Django Migrations</a>
 
 </DetailIconCards>
 

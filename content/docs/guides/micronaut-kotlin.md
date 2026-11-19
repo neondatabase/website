@@ -1,5 +1,5 @@
 ---
-title: Connect a Micronaut Kotlin application to Lakebase Postgres
+title: Connect a Micronaut Kotlin application to Lakebase Postgres on Neon
 subtitle: Connect a Micronaut Kotlin app to Lakebase Postgres on Neon, migrate it with Flyway, query it from a controller, develop on a branch, deploy, and add the rest of your backend
 summary: >-
   Connect a Micronaut 5 Kotlin app to Lakebase Postgres on Neon: create the app
@@ -11,7 +11,7 @@ summary: >-
   controller and a Micronaut Data repository. Covers JDK 25 with Gradle, plus
   deployment, troubleshooting, and Neon's other backend services.
 enableTableOfContents: true
-updatedOn: '2026-11-17T23:06:05.218Z'
+updatedOn: '2026-11-18T16:41:34.386Z'
 ---
 
 <PromptBlock src="/prompts/micronaut-kotlin-prompt.md" labels={["Set up your agent and follow this guide", "Look up Micronaut's docs", "Connect your Micronaut app"]} />

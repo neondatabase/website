@@ -8,7 +8,7 @@ summary: >-
   when authoring cards. TechCards uses kebab-case. DetailIconCards accepts
   camelCase or kebab-case. Also covers SVG file locations.
 enableTableOfContents: true
-updatedOn: '2026-10-08T19:01:23.222Z'
+updatedOn: '2026-11-06T12:04:57.000Z'
 ---
 
 A comprehensive guide to all icon systems used in Neon documentation. This guide helps you understand which icon system to use and how to implement them correctly.

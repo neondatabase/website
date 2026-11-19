@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-delete-cascade/
 ogImage: ''
-updatedOn: '2026-06-03T13:01:21.685Z'
+updatedOn: '2026-08-17T12:47:57.000Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL DELETE JOIN
