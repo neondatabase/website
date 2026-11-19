@@ -11,3 +11,6 @@ public/
 # content files
 content/docs/postgresql/query-reference.md
 content/docs/functions/json_extract_path.md
+
+# generated from the Build your backend motion prototype
+src/components/pages/home/build-your-backend/motion/
