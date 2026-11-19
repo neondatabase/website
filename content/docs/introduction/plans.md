@@ -252,7 +252,7 @@ Even though child branch storage is capped at your logical data size, it's still
 
 ### Public network transfer
 
-Public network transfer (egress) is the total volume of data sent from your databases over the public internet during the monthly billing period.
+Public network transfer (egress) is the total volume of data sent over the public internet during the monthly billing period. It includes data sent from your databases, from [Object Storage](/docs/storage/overview), and from [Neon Functions](/docs/compute/functions/overview), and the allowance is shared across all three in each project.
 
 > Public network transfer includes data sent via [logical replication](/docs/reference/glossary#logical-replication) to any destination, including other Neon databases.
 
