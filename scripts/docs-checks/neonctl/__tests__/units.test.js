@@ -47,6 +47,33 @@ describe('tokenize', () => {
     expect(tokenize('foo "a b" \'c d\' bar')).toEqual(['foo', 'a b', 'c d', 'bar']);
   });
 
+  it('stops at an unquoted shell operator', () => {
+    expect(tokenize("connection-string main --pooled | sed -E 's#a#b#'")).toEqual([
+      'connection-string',
+      'main',
+      '--pooled',
+    ]);
+    expect(tokenize('branches list -o json|jq -r .name')).toEqual([
+      'branches',
+      'list',
+      '-o',
+      'json',
+    ]);
+    expect(tokenize('projects list && echo done')).toEqual(['projects', 'list']);
+    expect(tokenize('env pull ; cat .env')).toEqual(['env', 'pull']);
+    expect(tokenize('branches list > out.txt')).toEqual(['branches', 'list']);
+    expect(tokenize('branches list 2>&1')).toEqual(['branches', 'list']);
+    expect(tokenize('branches get <branch> > out.txt')).toEqual(['branches', 'get', '<branch>']);
+  });
+
+  it('keeps shell operators inside quotes', () => {
+    expect(tokenize('connection-string "a|b" \'c;d\'')).toEqual([
+      'connection-string',
+      'a|b',
+      'c;d',
+    ]);
+  });
+
   it('keeps placeholders intact', () => {
     expect(tokenize('branches create --project-id <project-id> --name ${NAME}')).toEqual([
       'branches',
