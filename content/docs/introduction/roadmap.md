@@ -4,8 +4,8 @@ summary: >-
   Neon's public product roadmap tracks what is in flight, recently shipped, and
   planned across compute, storage, security, and cloud regions. Planned features
   include higher storage and compute limits, CMK encryption, and RBAC.
-  Recently shipped milestones include Postgres 18
-  GA, a major write throughput improvement, Managed Better Auth GA, and the AI agent
+  Recently shipped milestones include Postgres 19
+  support, Postgres 18 GA, a major write throughput improvement, Managed Better Auth GA, and the AI agent
   pricing plan.
 enableTableOfContents: true
 redirectFrom:
@@ -59,7 +59,6 @@ We're also improving and scaling Lakebase Postgres on Neon. Here's what's on the
 
 ### Postgres compute
 
-- **Postgres 19 support**: We support Postgres 14 through 18 today, with Postgres 19 support on the way.
 - Fixed compute sizes up to 128 CUs
 - Autoscaling up to 60 CUs
 - Automatic updates for large computes, with no manual restart required
@@ -78,6 +77,7 @@ We're also improving and scaling Lakebase Postgres on Neon. Here's what's on the
 
 ## What we've shipped recently 🚢
 
+- **Postgres 19 support**: Postgres 19 is now available on Neon. Select it when you create a project. Postgres 18 remains the default. [Learn more](/docs/postgresql/postgres-version-support).
 - **AI Gateway credits for all accounts**: You no longer need a paid plan to use the AI Gateway. Free plan organization admins can buy prepaid credits from $5 under **Billing** in the Console. [Learn more](/docs/ai-gateway/prepaid-credits).
 - **Recover deleted projects from the Console**: Recover a deleted project from the **Projects** page for 7 days after deletion, in addition to the CLI and API. [Learn more](/docs/manage/projects#recover-a-deleted-project).
 - **Automatic updates for computes up to 16 CU**: Every compute up to 16 CU, including all autoscaling computes, now gets compute updates automatically, with no manual restart required. [Learn more](/docs/manage/updates).
