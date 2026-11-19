@@ -12,7 +12,7 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/quickstart/tanstack-start
   - /docs/integrations/tanstack-start
-updatedOn: '2026-10-08T19:32:04.700Z'
+updatedOn: '2026-11-07T14:41:52.000Z'
 ---
 
 <Callout title="Realtime with TanStack">

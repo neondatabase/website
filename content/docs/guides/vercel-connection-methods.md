@@ -13,7 +13,7 @@ summary: >-
   suspends. Use this page instead of the integration guides when deciding which
   connection method to use based on your Vercel compute model.
 enableTableOfContents: true
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-11-18T22:30:32.000Z'
 ---
 
 <InfoBlock>

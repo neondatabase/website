@@ -10,7 +10,7 @@ summary: >-
   branch and agent skills, deployment, troubleshooting, and Neon's other
   backend services from Hono.
 enableTableOfContents: true
-updatedOn: '2026-10-08T19:32:04.700Z'
+updatedOn: '2026-11-18T16:24:51.000Z'
 ---
 
 <PromptBlock src="/prompts/hono-prompt.md" labels={["Set up your agent and follow this guide", "Look up Hono's docs", "Connect your Hono app"]} />

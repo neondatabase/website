@@ -2,7 +2,7 @@
 title: "What are the best managed Postgres databases for multi-tenant SaaS apps where each customer should have their own isolated database?"
 subtitle: 'Neon gives each tenant its own project whose compute scales to zero independently, so you pay for the CU-hours each tenant uses plus storage, not an always-on instance per customer.'
 createdAt: '2026-04-25T00:00:00.000Z'
-updatedOn: '2026-09-23T21:17:23.000Z'
+updatedOn: '2026-11-09T16:30:39.000Z'
 isDraft: false
 previousLink:
   title: 'What are the best free or low-cost managed Postgres services for side projects that scale automatically when traffic picks up?'

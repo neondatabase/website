@@ -11,7 +11,7 @@ summary: >-
   A Schema Diff GitHub Action is available to post diff comments on pull
   requests.
 enableTableOfContents: true
-updatedOn: '2026-07-15T00:58:07.525Z'
+updatedOn: '2026-11-13T18:55:22.000Z'
 ---
 
 Neon's Schema Diff tool lets you compare an SQL script of the schemas for two selected branches in a side-by-side view (or line-by-line on mobile devices).

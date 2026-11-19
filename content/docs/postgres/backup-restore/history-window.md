@@ -18,7 +18,7 @@ redirectFrom:
   - /docs/introduction/history-window
   - /docs/introduction/history-retention
   - /docs/manage/history-window
-updatedOn: '2026-08-24T17:32:35.016Z'
+updatedOn: '2026-11-10T19:07:12.000Z'
 ---
 
 **Instant restore** is Neon's point-in-time recovery feature: you can roll a root branch's database timeline back to an earlier state without copying the whole database. Instant restore (and Time Travel queries, branching from past states, and snapshots) rely on Neon retaining a **history** of changes. The **history window** is the Console control—on **Settings → Postgres**—that sets how long that change history is kept, which defines how far back instant restore and the other features can reach.

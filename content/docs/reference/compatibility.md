@@ -16,7 +16,7 @@ redirectFrom:
   - /docs/postgresql/postgres-compatibility
   - /docs/introduction/compatibility
   - /docs/introduction/postgres-compatibility
-updatedOn: '2026-09-17T16:33:54.884Z'
+updatedOn: '2026-11-18T20:38:42.000Z'
 ---
 
 **Neon is Postgres**. However, as a managed Postgres service, there are some differences you should be aware of.

@@ -10,7 +10,7 @@ summary: >-
   branch for a single database and does not support projects with IP Allow or
   Private Networking configured.
 enableTableOfContents: true
-updatedOn: '2026-10-09T10:18:46.317Z'
+updatedOn: '2026-11-11T12:31:00.000Z'
 ---
 
 This guide walks you through enabling the Data API, creating a table with RLS, and running your first query.

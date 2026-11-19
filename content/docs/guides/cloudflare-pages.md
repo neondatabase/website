@@ -11,7 +11,7 @@ summary: >-
   Wrangler, and adding DATABASE_URL as a Cloudflare environment variable for
   production deployment.
 enableTableOfContents: true
-updatedOn: '2026-10-09T10:14:56.146Z'
+updatedOn: '2026-11-16T20:37:57.000Z'
 ---
 
 <Admonition type="note">

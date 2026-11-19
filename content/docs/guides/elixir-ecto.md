@@ -9,7 +9,7 @@ summary: >-
   Postgrex idle_interval defaults that can prevent Neon's scale-to-zero
   autosuspend from triggering.
 enableTableOfContents: true
-updatedOn: '2026-10-09T10:18:46.317Z'
+updatedOn: '2026-11-08T14:17:42.000Z'
 ---
 
 <CopyPrompt src="/prompts/elixir-ecto-prompt.md" 

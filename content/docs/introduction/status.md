@@ -11,7 +11,7 @@ summary: >-
   from the terminal with `neon incidents`. Routine
   maintenance and compute updates are not posted here.
 enableTableOfContents: true
-updatedOn: '2026-10-30T10:54:04.862Z'
+updatedOn: '2026-11-09T23:20:10.000Z'
 ---
 
 Real-time uptime and incident status live on the Neon status page, not on this page. Open it to see current platform status and bookmark it for quick access during incidents.

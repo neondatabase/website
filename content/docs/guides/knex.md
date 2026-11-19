@@ -8,7 +8,7 @@ summary: >-
   also improve performance by switching to `pg-native` via the
   `NODE_PG_FORCE_NATIVE` environment variable.
 enableTableOfContents: true
-updatedOn: '2026-09-16T20:12:32.981Z'
+updatedOn: '2026-11-08T14:08:08.000Z'
 ---
 
 Knex is an open-source SQL query builder for Postgres. This guide covers the following topics:

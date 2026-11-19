@@ -10,7 +10,7 @@ summary: >-
   before wiring them into workflow YAML files. The schema diff action posts a
   branch comparison as a pull request comment.
 enableTableOfContents: true
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-11-18T20:38:42.000Z'
 ---
 
 Neon provides a set of GitHub Actions to automate the creation, deletion, and management of database branches in your Neon projects.

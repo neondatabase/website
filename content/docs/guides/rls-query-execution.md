@@ -10,7 +10,7 @@ summary: >-
   schema to wire up the runtime connection layer, whether from a frontend using
   the Data API or a backend using the Neon serverless driver.
 enableTableOfContents: true
-updatedOn: '2026-07-15T00:08:00.682Z'
+updatedOn: '2026-11-13T16:12:47.000Z'
 ---
 
 <InfoBlock>

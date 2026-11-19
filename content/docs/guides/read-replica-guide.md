@@ -11,7 +11,7 @@ summary: >-
   automatic synchronization of max_connections and related Postgres parameters
   between primary and replica computes.
 enableTableOfContents: true
-updatedOn: '2026-11-06T11:14:41.532Z'
+updatedOn: '2026-11-10T13:02:59.000Z'
 ---
 
 [Read replicas](/docs/introduction/read-replicas) are supported with all Neon plans. The number of read replicas you can add depends on your plan. See [Read replicas](/docs/introduction/plans#read-replicas) on the plans page. This guide steps you through the process of creating and managing read replicas.

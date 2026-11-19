@@ -6,7 +6,7 @@ page_description: >-
   to repeat a string a specified number of times.
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-string-functions/postgresql-repeat/
-updatedOn: '2026-06-04T15:04:42.682Z'
+updatedOn: '2026-11-12T15:13:08.000Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL REGEXP_REPLACE() Function

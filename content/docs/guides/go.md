@@ -11,7 +11,7 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/quickstart/go
   - /docs/integrations/go
-updatedOn: '2026-10-09T10:14:56.146Z'
+updatedOn: '2026-11-07T17:13:16.000Z'
 ---
 
 <CopyPrompt src="/prompts/golang-prompt.md" 

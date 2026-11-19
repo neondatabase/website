@@ -12,7 +12,7 @@ summary: >-
   the Auth0 client and Next.js proxy, and Next.js server actions for inserting
   and deleting user data.
 enableTableOfContents: true
-updatedOn: '2026-09-16T19:45:35.340Z'
+updatedOn: '2026-11-16T20:40:03.000Z'
 ---
 
 <Admonition type="tip" title="Building on Neon?">

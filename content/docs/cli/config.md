@@ -14,7 +14,7 @@ summary: >-
   evaluating it, and --allow-protected, --update-existing, or -y to answer
   the apply confirmation prompts in non-interactive use.
 enableTableOfContents: true
-updatedOn: '2026-10-31T11:32:37.000Z'
+updatedOn: '2026-11-02T22:52:43.000Z'
 ---
 
 The `config` command manages a branch declaratively with a `neon.ts` policy file: scaffold a starter config, inspect the branch's live state, preview what an apply would change, and apply the policy. For the `neon.ts` file format, see the [neon.ts reference](/docs/reference/neon-ts).

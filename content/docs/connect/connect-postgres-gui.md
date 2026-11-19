@@ -10,7 +10,7 @@ summary: >-
   BI tools such as Metabase, Tableau, and Power BI, Neon recommends connecting
   to a read replica to avoid performance impact on the primary branch.
 enableTableOfContents: true
-updatedOn: '2026-11-06T11:14:41.532Z'
+updatedOn: '2026-11-08T10:44:59.000Z'
 ---
 
 This topic describes how to connect to a Neon database from a GUI application or IDE. Most GUI applications and IDEs that support connecting to a Postgres database also support connecting to Neon.

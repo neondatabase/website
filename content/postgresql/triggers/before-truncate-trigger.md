@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-triggers/postgresql-before-truncate-trigger/
 ogImage: ''
-updatedOn: '2026-06-04T15:04:42.682Z'
+updatedOn: '2026-08-17T12:43:33.000Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL INSTEAD OF Triggers

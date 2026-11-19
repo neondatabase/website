@@ -7,7 +7,7 @@ summary: >-
   to connect, `disable` to remove it, `rotate-secret` to replace its shared
   secret, and `subscribe` to stream a live SQL query.
 enableTableOfContents: true
-updatedOn: '2026-11-05T15:33:57.188Z'
+updatedOn: '2026-11-18T21:57:37.000Z'
 redirectFrom:
   - /docs/cli/subscribe
 ---
