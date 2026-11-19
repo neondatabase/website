@@ -10,7 +10,7 @@ summary: >-
   automatic retries, readiness polling, and auto-pagination built in. A raw
   1:1 layer exposes every endpoint and is generated from the Neon OpenAPI spec.
 enableTableOfContents: true
-updatedOn: '2026-10-21T12:44:07.000Z'
+updatedOn: '2026-11-18T13:58:28.424Z'
 ---
 
 <InfoBlock>
@@ -387,7 +387,7 @@ Branch-scoped Neon Functions. <small>REST: [Functions API](/docs/reference/api/f
 | -------------------------------------------- | --------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `list({ projectId, branchId, ...query })`    | [`Paginated`](#lazy-auto-paginated-lists)`<NeonFunction>` | `query`: `{ limit? }`                                                                                                                                   |
 | `get({ projectId, branchId, slug })`         | `NeonFunction`                                            |                                                                                                                                                         |
-| `update({ projectId, branchId, slug, ... })` | `NeonFunction`                                            | Fields: `{ name? }`                                                                                                                                     |
+| `update({ projectId, branchId, slug, ... })` | `NeonFunction`                                            | Fields: `{ name: string \| null }`. `null` clears the display name                                                                                      |
 | `delete({ projectId, branchId, slug })`      | `void`                                                    |                                                                                                                                                         |
 | `deploy({ projectId, branchId, slug, ... })` | `NeonFunctionDeployment`                                  | Multipart. Fields: `{ zip?: Blob \| File, runtime?: "nodejs24", environment?: string }`, where `environment` is a JSON-encoded `Record<string, string>` |
 
