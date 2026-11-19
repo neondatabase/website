@@ -50,6 +50,7 @@
     "check:content-data": "node scripts/validate-content-data.js",
     "check:deps-proxy": "node scripts/check-deps-proxy-allowlisted.mjs",
     "check:updated-on": "node scripts/check-updated-on.mjs",
+    "find:stale-updated-on": "node scripts/find-stale-updated-on.mjs",
     "stamp:updated-on": "node src/scripts/update-frontmatter.js",
     "prepare": "node scripts/setup-git-hooks.mjs",
     "test": "playwright test",
