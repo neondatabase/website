@@ -36,8 +36,6 @@ seo:
 updatedOn: '2026-11-19T04:02:27.347Z'
 ---
 
-## WorkOS open-sourced a sync engine that mirrors identity data into your database. On Neon, it runs as a Function on your branch
-
 If your auth data lives in WorkOS but your product data lives in Postgres, answering questions like "which enterprise customers have admins who never set up SSO" meant paging through the WorkOS API and stitching the results together in application code. To fix this, WorkOS has built [WorkOS Sync Engine](https://github.com/workos/sync-engine), which mirrors that data into a workos schema in your own database and keeps it current.
 
 You can use it right away if you're using Neon + WorkOS. You don't even need a separate server to run the sync - WorkOS built a [Neon Functions template](https://neon.com/functions/templates/workos-sync) that runs the engine on your branch, next to your database, on a schedule set by Function Triggers. To get it going, run `neon functions new workos-sync`, add your WorkOS keys and the schedule triggers to `neon.ts`, and deploy.
