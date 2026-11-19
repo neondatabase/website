@@ -2,7 +2,7 @@
 title: 'Postgres 19 is out: try it on Neon'
 description: 'REPACK, query plan advice, WAIT FOR LSN, and more'
 excerpt: >-
-  Postgres 19 is out [link Postgres docs], and as always, it's available on Neon
+  Postgres 19 is out, and as always, it's available on Neon
   the same day. You can already try it on the Neon Free plan: start a Postgres
   19 project from the Neon Console by choosing version 19 when you create the
   project, or ask your agent to do it...
@@ -32,7 +32,7 @@ seo:
 <source src="https://cdn.neonapi.io/public/images/pages/blog/postgres-19-is-out-try-it-on-neon/clip-1.mp4" type="video/mp4" />
 </video>
 
-Postgres 19 is out, and [as always](https://neon.com/blog/postgres-18), it's available on Neon the same day. You can already try it on the Neon Free plan: start a Postgres 19 project from the Neon Console by choosing version 19 when you create the project, or [ask your agent to do it](https://neon.com/docs/ai/neon-mcp-server):
+Postgres 19 [just went GA](https://www.postgresql.org/about/news/postgresql-19-released-3449/), and [as always](https://neon.com/blog/postgres-18), it's available on Neon the same day. You can already try it on the Neon Free plan: start a Postgres 19 project from the Neon Console by choosing version 19 when you create the project, or [ask your agent to do it](https://neon.com/docs/ai/neon-mcp-server):
 
 ```
 Create a new Neon project on Postgres 19
