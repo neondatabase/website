@@ -11,10 +11,10 @@ summary: >-
   pg_dump must use an unpooled connection string. A coding agent with a
   terminal can run the upgrade for you.
 enableTableOfContents: true
-updatedOn: '2026-11-20T12:03:40.183Z'
+updatedOn: '2026-11-20T12:18:00.238Z'
 ---
 
-Each Neon project runs one major Postgres version, the one you chose when you created it. Neon applies minor version updates for you (see [Postgres version support](/docs/postgresql/postgres-version-support)). To move to a newer major version, such as from Postgres 17 to Postgres 19, create a new project on that version and migrate your data to it.
+Each Neon project runs one major Postgres version, the one you chose when you created it. Neon applies minor version updates for you (see [Postgres version support](/docs/postgresql/postgres-version-support)). To move to a newer major version, such as from Postgres 17 to Postgres 19, create a new project on that version and migrate your data to it. You can do it yourself or [have a coding agent do it](#upgrade-with-an-ai-agent).
 
 To check your current version, run this in the [Neon SQL Editor](/docs/get-started/query-with-neon-sql-editor) or any SQL client:
 
@@ -62,8 +62,9 @@ The Import Data Assistant only needs the connection string for your current proj
 If you use `pg_dump` and `pg_restore`:
 
 - Connect with an [unpooled connection string](/docs/reference/glossary#unpooled-connection-string), not a [pooled one](/docs/reference/glossary#pooled-connection-string).
-- Use the `pg_dump` and `pg_restore` programs from the newer Postgres version. They can read data from every older version Neon supports.
+- Use the `pg_dump` and `pg_restore` programs from the newer Postgres version. They can read data from every older version Neon supports, and an older `pg_restore` refuses to restore into a newer server.
 - Dump one database at a time. Neon doesn't support `pg_dumpall`.
+- You can ignore `permission denied to change default privileges` errors for the `cloud_admin` role during the restore. The new project already has those privileges.
 - Create your roles in the new project before you restore, because `pg_dump` doesn't copy roles. See [Database object ownership considerations](/docs/import/migrate-from-postgres#database-object-ownership-considerations).
 
 <Admonition type="note">
@@ -80,10 +81,12 @@ To get the new connection details, click **Connect** in the Console nav to open 
 
 ## Upgrade with an AI agent
 
-A coding agent with a terminal, such as Claude Code, Cursor, or Codex, can run the upgrade for you. Copy this prompt into your agent. It [sets up Neon for your agent](/docs/ai/agent-setup), checks your extensions, copies your data to a new project, and compares row counts before it hands back.
+A coding agent with a terminal, such as Claude Code, Cursor, or Codex, can run the upgrade for you. Copy this prompt into your agent. It [sets up Neon for your agent](/docs/ai/agent-setup), checks your project, copies your data to a new project, and compares row counts before it hands back.
+
+<Admonition type="important" title="Before you run it">
+The agent copies only your Postgres data. It doesn't change your current project, and it stops to check with you if your project also has other branches or uses Neon services such as Functions, Object Storage, or Managed Better Auth, or if your database is over 10 GB. Large copies can take hours and count toward [network transfer](/docs/introduction/network-transfer). Review the results before you switch your applications over.
+</Admonition>
 
 <AgentPrompt title="Upgrade with your agent" src="/prompts/postgres-upgrade.md" buttonText="Copy prompt" />
-
-The agent needs the `pg_dump` and `pg_restore` programs for the new Postgres version, and tells you if they're missing. The prompt has the agent stop and check with you first when the copy isn't simple: a database over 10 GB, one that can't pause writes, or a project that also uses other branches or Neon services such as Functions, Object Storage, or Managed Better Auth, which `pg_dump` doesn't copy. A large copy from your own machine can take hours, needs local disk space, and counts toward [network transfer](/docs/introduction/network-transfer). Review the results before you switch your applications over.
 
 <NeedHelp/>
