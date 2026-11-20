@@ -1,11 +1,11 @@
 ---
 title: Why your cron job keeps Neon awake, and what to do about it
 subtitle: Move your schedules to Function Triggers, which fire even while your compute is scaled to zero, and run jobs that query the database every 15 minutes or less often so it can sleep between runs
-author: neon-team
+author: carlota-soto
 enableTableOfContents: true
 isDraft: false
 createdAt: '2026-11-20T00:00:00.000Z'
-updatedOn: '2026-11-20T14:56:15.533Z'
+updatedOn: '2026-11-20T14:59:45.761Z'
 ---
 
 You picked Neon because it [scales to zero](/docs/introduction/scale-to-zero), so you expected to pay only when your app is in use. Then the [monitoring page](/docs/introduction/monitoring-page) shows your compute active all day, every day. Very often the cause is one line in a scheduler: a job that runs every few minutes.
@@ -23,7 +23,7 @@ By default, Neon suspends a compute after 5 minutes of inactivity. Each query re
 
 The scheduler itself doesn't matter. A Vercel cron, a GitHub Actions schedule, a worker on a VM, or an uptime check all count the same - if they query the database, they reset the timer.
 
-## What it costs
+## How much a frequent cron job costs on Neon
 
 To illustrate the effect of this, here's what each cadence would mean for a compute at the smallest size, 0.25 CU, when nothing else is using the database. These estimates assume each run takes about a minute and the compute stays on for 5 minutes after the last query:
 
