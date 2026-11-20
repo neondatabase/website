@@ -1,31 +1,33 @@
 ---
 title: Connect a React application to Neon
-subtitle: Set up a Neon project in seconds and connect from a React application
+subtitle: Choose a React framework and connect its server side to Lakebase Postgres on Neon
 summary: >-
-  React connection hub for Lakebase Postgres, directing developers to server-side
-  integration guides for Next.js, React Router, Remix, and TanStack Start. Use
-  this page when setting up a Lakebase Postgres connection from a React
-  meta-framework, since Lakebase Postgres must be accessed server-side in React apps. Neon
-  Auth quick starts for Next.js and TanStack Router are also linked here.
+  To connect a React app to Lakebase Postgres on Neon, use the server-side guide for
+  your framework: Next.js, React Router, TanStack Start, RedwoodSDK, or Remix (v2).
+  Browser code can't query Lakebase Postgres directly, so the connection belongs on
+  the server. Managed Better Auth quick starts for Next.js and TanStack Router are
+  linked here too.
 enableTableOfContents: true
-updatedOn: '2026-11-18T00:59:49.148Z'
+updatedOn: '2026-11-20T21:29:59.067Z'
 ---
 
 React is an open-source JavaScript library for building component-based user interfaces.
 
-Connect to Lakebase Postgres from the server side of a React application, never from the browser. The following React frameworks each have a guide for configuring a server-side connection.
+Connect to Lakebase Postgres from the server side of a React application, never from the browser. Each React framework below has a guide for configuring a server-side connection.
 
 ## React frameworks
 
 <TechCards>
 
-<a href="/docs/guides/tanstack-start" title="TanStack Start" description="Connect a TanStack Start application to Neon" icon="tanstack"></a>
+<a href="/docs/guides/nextjs" title="Next.js" description="Connect a Next.js app to Lakebase Postgres on Neon" icon="next-js"></a>
 
-<a href="/docs/guides/nextjs" title="Next.js" description="Connect a Next.js application to Neon" icon="next-js"></a>
+<a href="/docs/guides/react-router" title="React Router" description="Connect a React Router app to Lakebase Postgres on Neon" icon="react"></a>
 
-<a href="/docs/guides/react-router" title="React Router" description="Connect a React Router application to Neon" icon="react"></a>
+<a href="/docs/guides/tanstack-start" title="TanStack Start" description="Connect a TanStack Start app to Lakebase Postgres on Neon" icon="tanstack"></a>
 
-<a href="/docs/guides/remix" title="Remix" description="Connect a Remix application to Neon" icon="remix"></a>
+<a href="/docs/guides/redwoodsdk" title="RedwoodSDK" description="Connect a RedwoodSDK app to Lakebase Postgres on Neon" icon="redwoodsdk"></a>
+
+<a href="/docs/guides/remix" title="Remix" description="Connect an existing Remix v2 app to Lakebase Postgres on Neon" icon="remix"></a>
 
 </TechCards>
 
@@ -41,13 +43,14 @@ After you connect your database, add managed authentication with [Managed Better
 
 </TechCards>
 
-For React Router, follow the [React Auth quick start](/docs/auth/quick-start/react).
+For a client-only React app built with Vite, follow the [React quick start](/docs/auth/quick-start/react).
 
 ## Next steps
 
-- [Add Object Storage](/docs/storage/overview): S3-compatible file storage that branches with your database
-- [Deploy a Function](/docs/compute/functions/overview): Run backend compute next to your database, no separate hosting needed
-- [Call an LLM with AI Gateway](/docs/ai-gateway/overview): Access foundation models from Anthropic, OpenAI, Google, and more with one credential
-- [Realtime](/docs/realtime/sdks/typescript/react): Build realtime React apps on Neon with end-to-end reactivity and type safety
+- [Managed Better Auth](/docs/auth/overview): Sign-up, sign-in, and sessions stored in your database.
+- [Object Storage](/docs/storage/overview): S3-compatible buckets for uploads and files.
+- [AI Gateway](/docs/ai-gateway/overview): One credential for models from Anthropic, OpenAI, Google, and more.
+- [Neon Functions](/docs/compute/functions/overview): Long-running Node.js compute next to your database.
+- [Realtime](/docs/realtime/sdks/typescript/react) (beta): Live SQL query subscriptions.
 
 <NeedHelp/>
