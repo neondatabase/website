@@ -64,6 +64,20 @@ describe('AI Gateway model Markdown index', () => {
     );
   });
 
+  it('shows the image output price next to the text output price only when there is one', () => {
+    const markdown = renderAiGatewayModelIndex([
+      createRow({ id: 'text-model', inputs: ['text'], isImageCapable: false }),
+      {
+        ...createRow({ id: 'image-output-model', inputs: ['text'], isImageCapable: false }),
+        costOutputLabel: '$12',
+        costOutputImageLabel: '$120',
+      },
+    ]);
+
+    expect(markdown).toContain('| $1 | $2 | openai/responses |');
+    expect(markdown).toContain('| $1 | $12 (image $120) | openai/responses |');
+  });
+
   it('gives embedding models their own section, out of Text and Other', () => {
     const embeddingRow = {
       ...createRow({ id: 'qwen3-embedding-0-6b', inputs: [], isImageCapable: false }),

@@ -36,6 +36,28 @@ describe('getModelDetailPageData', () => {
     ]);
   });
 
+  it('adds the image output price after the text output price when the model has one', () => {
+    const { content, tableOfContents } = getModelDetailPageData({
+      id: 'example-image-model',
+      name: 'Example Image Model',
+      labName: 'Example Lab',
+      providerName: 'Example Provider',
+      endpoints: [],
+      inputsLabel: 'text, image',
+      contextLabel: '66K',
+      releaseLabel: 'Nov 2025',
+      costInputLabel: '$2',
+      costOutputLabel: '$12',
+      costOutputImageLabel: '$120',
+    });
+
+    expect(content).toContain('## Output /M\n\n$12\n\n## Image output /M\n\n$120');
+    expect(tableOfContents.slice(-2).map(({ title, id }) => ({ title, id }))).toEqual([
+      { title: 'Output /M', id: 'output-m' },
+      { title: 'Image output /M', id: 'image-output-m' },
+    ]);
+  });
+
   // No Inputs, Context, or Output /M — those describe chat completion behavior, not a fixed
   // vector length, and there is no completion to charge for.
   it('reports Dimensions instead of the chat-shaped sections for an embedding model', () => {
