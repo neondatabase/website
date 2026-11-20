@@ -6,10 +6,10 @@ summary: >-
   Gateway by changing only the base URL. Supports streaming, prompt caching,
   and extended thinking on Claude models.
 enableTableOfContents: true
-updatedOn: '2026-11-18T00:17:54.883Z'
+updatedOn: '2026-11-20T10:46:07.314Z'
 ---
 
-The Anthropic Messages endpoint exposes the [Anthropic Messages API](https://docs.anthropic.com/en/api/messages) through Neon AI Gateway. Use it when you need extended thinking or prompt caching, which require the native Anthropic SDK. For standard completions, the [chat completions](/docs/ai-gateway/chat-completions) endpoint works with all Anthropic models and doesn't require the Anthropic SDK.
+The Anthropic Messages endpoint exposes the [Anthropic Messages API](https://docs.anthropic.com/en/api/messages) through Neon AI Gateway. Use it when you want the native Anthropic SDK and response shape, for example for extended thinking. For standard completions, the [chat completions](/docs/ai-gateway/chat-completions) endpoint works with all Anthropic models and doesn't require the Anthropic SDK.
 
 **Base URL:** `https://<branch-host>/anthropic`
 
@@ -100,7 +100,7 @@ Streaming works the same as with the Anthropic SDK directly. Use `client.message
 
 ## Prompt caching
 
-The gateway forwards the `cache_control` field to Anthropic unchanged. Prompt caching works exactly as described in the [Anthropic prompt caching docs](https://docs.anthropic.com/en/docs/build-with-claude/prompt-caching).
+The gateway forwards the `cache_control` field to Anthropic unchanged. Prompt caching works exactly as described in the [Anthropic prompt caching docs](https://docs.anthropic.com/en/docs/build-with-claude/prompt-caching). `cache_control` also works on the [chat completions](/docs/ai-gateway/chat-completions) endpoint, and both endpoints share one cache. See [Prompt caching](/docs/ai-gateway/prompt-caching) for which models cache automatically, how to confirm a cache hit, and cache pricing.
 
 <CodeTabs labels={["TypeScript (Anthropic SDK)", "Python (Anthropic SDK)"]}>
 
@@ -224,6 +224,7 @@ For authentication, quota, and upstream errors, see [Troubleshooting](/docs/ai-g
 ## Next steps
 
 - [Models](/docs/ai-gateway/models): full model catalog
+- [Prompt caching](/docs/ai-gateway/prompt-caching): caching across all models, usage fields, and cache pricing
 - [Chat completions](/docs/ai-gateway/chat-completions): use any model including Anthropic via the unified endpoint
 - [Authentication](/docs/ai-gateway/authentication): credential scopes and branch binding
 

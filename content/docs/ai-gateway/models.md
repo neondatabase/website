@@ -6,7 +6,7 @@ summary: >-
   models, which endpoint to use, shorter and longer request paths, the
   /v1/models API, rate limits, pricing, and provider terms.
 enableTableOfContents: true
-updatedOn: '2026-11-18T00:17:54.883Z'
+updatedOn: '2026-11-20T10:46:07.314Z'
 ---
 
 This page covers how to call models through Neon AI Gateway and the rules that apply. For the full list of models you can call, see the [model catalog](https://neon.com/ai-gateway#models).
@@ -60,6 +60,8 @@ AI Gateway usage draws down a prepaid credit balance. Here's how pricing works:
 - **No markup.** Neon charges the same per-token rate as the model provider. Published provider prices are passed on to users with no additional markup.
 - **Prepaid credits.** Inference draws down a prepaid credit balance. 1 credit equals $1 USD, with a $5 minimum purchase, and credits are valid for 12 months from purchase. You buy credits from the **Billing** page in the [Neon Console](https://console.neon.tech/app/billing).
 
+Many models also have lower rates for cached input. See [Prompt caching](/docs/ai-gateway/prompt-caching#cache-pricing).
+
 See the [model catalog](/docs/ai-gateway/overview#available-models) for per-model rates, and [AI Gateway prepaid credits](/docs/ai-gateway/prepaid-credits) for how to buy credits and manage your balance.
 
 Independent of billing, Neon enforces an account-level daily spend cap on AI Gateway usage, separate from the per-minute rate limits above. If your account exceeds it, every AI Gateway endpoint returns `429 Too Many Requests` with error code `REQUEST_LIMIT_EXCEEDED` until the cap resets or the block is lifted. The cap is $20 per day by default, but it may vary by account. To have it raised, [contact Support](/docs/introduction/support). See [Troubleshooting](/docs/ai-gateway/troubleshooting#429-account-quota-exceeded) if you hit this.
@@ -74,7 +76,7 @@ All paths below are appended to your branch's bare AI Gateway host (`NEON_AI_GAT
 | --------------------------------------- | ------------------------ | -------------------------------------------------------------------------------------------------------------- |
 | OpenAI (most models)                    | `/v1/chat/completions`   | Use `/openai/v1/responses` for Responses API features                                                          |
 | OpenAI (`gpt-5-3-codex`, `gpt-5-5-pro`) | `/openai/v1/responses`   | These models require the Responses API and don't work with chat/completions                                    |
-| Anthropic Claude                        | `/v1/chat/completions`   | Use `/anthropic/v1/messages` with the Anthropic SDK for extended thinking and prompt caching                   |
+| Anthropic Claude                        | `/v1/chat/completions`   | Use `/anthropic/v1/messages` with the Anthropic SDK for extended thinking                                      |
 | Google Gemini                           | `/v1/chat/completions`   | Use `/gemini/v1beta/models/{model}:generateContent` with the google-genai SDK and set `apiVersion` to `v1beta` |
 | Google Gemma 3 12B                      | `/v1/chat/completions`   | Chat completions only. Doesn't support the Gemini SDK endpoint                                                 |
 | Meta, Zhipu AI, Moonshot AI             | `/v1/chat/completions`   | Chat completions only                                                                                          |
