@@ -11,7 +11,7 @@ summary: >-
   pg_dump must use an unpooled connection string. A coding agent with a
   terminal can run the upgrade for you.
 enableTableOfContents: true
-updatedOn: '2026-11-20T12:18:00.238Z'
+updatedOn: '2026-11-20T12:24:33.797Z'
 ---
 
 Each Neon project runs one major Postgres version, the one you chose when you created it. Neon applies minor version updates for you (see [Postgres version support](/docs/postgresql/postgres-version-support)). To move to a newer major version, such as from Postgres 17 to Postgres 19, create a new project on that version and migrate your data to it. You can do it yourself or [have a coding agent do it](#upgrade-with-an-ai-agent).
@@ -75,7 +75,13 @@ Neon doesn't upgrade a project to a new major version in place, and doesn't supp
 
 After the migration finishes and you've checked that the new database works as expected, point your applications at it by replacing your current connection details with the new ones.
 
-To get the new connection details, click **Connect** in the Console nav to open the **Connect to your branch** modal. See [Connect from any application](/docs/connect/connect-from-any-app).
+To get the new connection details, click **Connect** in the Console nav to open the **Connect to your branch** modal, or run [`neon connection-string`](/docs/cli/connection-string) with the new project's ID. Add `--pooled` for a pooled connection string.
+
+```bash
+neon connection-string --project-id <new_project_id>
+```
+
+See [Connect from any application](/docs/connect/connect-from-any-app).
 
 </Steps>
 
