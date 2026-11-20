@@ -9,7 +9,7 @@ summary: >-
   runs interactively by default; pass -y for the recommended setup with no prompts,
   or add flags such as --skill, MCP options, or --claimable for the custom setup.
 enableTableOfContents: true
-updatedOn: '2026-11-18T23:07:55.084Z'
+updatedOn: '2026-11-20T01:40:38.895Z'
 redirectFrom:
   - /docs/reference/cli-init
 ---
@@ -68,7 +68,7 @@ After agent setup, `init` runs [`neon link`](/docs/cli/link) (unless the directo
 
 It can also write a [`neon.ts` config](/docs/cli/config) you can edit and apply with [`neon deploy`](/docs/cli/deploy). In a terminal, `init` asks whether to create it. Pass `--config` to create it without asking, `--no-config` to skip it, or `--services` to create it with specific services declared (which implies `--config`). Pass `--package-manager` (`npm`, `pnpm`, `yarn`, or `bun`) to choose which package manager installs the `neon.ts` dependencies.
 
-When `init` links an existing project in this run, it writes `neon.ts` from the branch's current services, the same way [`neon config init --from-branch`](/docs/cli/config#init) does, adds `@neon/config` and `@neon/env` (they read that file), and runs the install. A Custom setup skips the service picker in this case. A new project, an already-linked directory, or a project linked offline without credentials gets the starter policy: Postgres, with a 7-day expiration for new branches. `--services` declares the services you name instead, for either kind of project. Pass `--no-config` if you only want connection strings in `.env` without `neon.ts`.
+When `init` links an existing project in this run, it writes `neon.ts` from the branch's current services, the same way [`neon config init --from-branch`](/docs/cli/config#init) does, adds `@neon/config` and `@neon/env` (they read that file), and runs the install. A Custom setup skips the service picker in this case. In Recommended setup, a new project, an already-linked directory, or a project linked offline without credentials gets the starter policy: Postgres, with a 7-day expiration for new branches; in a terminal, Custom setup asks which services to declare. `--services` declares the services you name instead, for either kind of project. Pass `--no-config` if you only want connection strings in `.env` without `neon.ts`.
 
 When `init` creates a new `neon.ts`, it pulls environment variables once, after the file is written. If the file was written from the branch, every service it declares already runs there, so the pull includes all of them. If `neon.ts` declares only services that need no deploy (the AI Gateway or Functions), the pull includes all of them. If it declares Managed Better Auth, the Data API, Object Storage, or Realtime, `init` pulls Postgres (plus the AI Gateway and the scaffolded function's URL when declared), and [`neon deploy`](/docs/cli/deploy) provisions the rest and pulls their variables. With `--claimable`, `init` skips the pull when `neon.ts` declares services beyond Postgres.
 
