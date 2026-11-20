@@ -13,7 +13,7 @@ redirectFrom:
   - /docs/manage/users
   - /docs/introduction/roles
   - /docs/postgresql/postgres-roles
-updatedOn: '2026-11-05T15:33:57.188Z'
+updatedOn: '2026-11-19T00:59:42.125Z'
 ---
 
 In Neon, roles are Postgres roles. Each Neon project is created with a Postgres role that is named for your database. For example, if your database is named `neondb`, the project is created with a role named `neondb_owner`. This role owns the database that is created in your Neon project's default branch.
@@ -62,6 +62,8 @@ You can think of roles with `neon_superuser` privileges as administrator roles. 
 
 <Admonition type="note">
 Creating a database with the `neon_superuser` role, altering a database to have owner `neon_superuser`, and altering the `neon_superuser` role itself are _not_ permitted. This `NOLOGIN` role is not intended to be used directly or modified.
+
+Roles with `neon_superuser` privileges also can't grant or revoke `EXECUTE` on built-in `pg_catalog` functions. See [Built-in function privileges](/docs/manage/database-access#built-in-function-privileges).
 </Admonition>
 
 You may also see internal roles Neon uses to operate your project, such as `neon_service`. They act on your behalf (which is why they can appear with `neon_superuser` membership); their credentials are managed by Neon, and they are not intended for you to use or modify.
