@@ -17,7 +17,7 @@ redirectFrom:
   - /docs/guides/connection-pooling
   - /docs/introduction/connection-pooling
   - /docs/manage/connection-pooling
-updatedOn: '2026-11-20T13:20:55.466Z'
+updatedOn: '2026-11-20T13:27:56.231Z'
 ---
 
 Neon gives you two connection strings for every database: a **pooled** one and a **direct** one. Most apps should use the pooled connection. Use a direct connection for migrations, backups, and anything that needs one continuous session.
@@ -83,7 +83,7 @@ The toggle is on by default for new projects. It doesn't start or stop the poole
 
 ## Connection pooling in transaction mode
 
-Neon uses PgBouncer in transaction mode (`pool_mode=transaction`), which means connections are returned to the pool after each transaction completes. This limits some Postgres features that require persistent sessions:
+Neon uses [PgBouncer](https://www.pgbouncer.org/) in transaction mode (`pool_mode=transaction`), which means connections are returned to the pool after each transaction completes. This limits some Postgres features that require persistent sessions:
 
 **Not supported with pooled connections:**
 
