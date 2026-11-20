@@ -10,7 +10,7 @@ summary: >-
   pg_upgrade is not supported, minor version upgrades are automatic, and
   pg_dump must use an unpooled connection string.
 enableTableOfContents: true
-updatedOn: '2026-11-20T13:53:03.601Z'
+updatedOn: '2026-11-20T14:06:24.575Z'
 ---
 
 Each Neon project runs one major Postgres version, the one you chose when you created it. Neon applies minor version updates for you (see [Postgres version support](/docs/postgresql/postgres-version-support)). To move to a newer major version, such as from Postgres 17 to Postgres 19, create a new project on that version and migrate your data to it.
@@ -59,15 +59,9 @@ Choose a method based on your database size and how much downtime you can accept
 | [Piping pg_dump to pg_restore](/docs/import/migrate-from-neon)       | Small databases                                  | Some, during the copy                  |
 | [Logical replication](/docs/guides/logical-replication-neon-to-neon) | Active databases that can't afford much downtime | Near zero                              |
 
-The Import Data Assistant only needs the connection string for your current project. It imports into the same or a newer Postgres version, never an older one. Its compatibility checks can flag an extension as unsupported even when it's available on the new version. See the [false extension warning note](/docs/import/import-data-assistant#check-compatibility) and compare against the [supported extensions table](/docs/extensions/pg-extensions) instead. Piping `pg_dump` output directly into `pg_restore` saves time but can fail during long migrations, so use it only for small databases.
+The Import Data Assistant only needs the connection string for your current project, and it can import into a newer Postgres version. See [Import Data Assistant](/docs/import/import-data-assistant). Piping `pg_dump` output directly into `pg_restore` saves time but can fail during long migrations, so use it only for small databases.
 
-If you use `pg_dump` and `pg_restore`:
-
-- Connect with an [unpooled connection string](/docs/reference/glossary#unpooled-connection-string), not a [pooled one](/docs/reference/glossary#pooled-connection-string).
-- Use the `pg_dump` and `pg_restore` programs from the newer Postgres version. They can read data from every older version Neon supports, and an older `pg_restore` refuses to restore into a newer server.
-- Dump one database at a time. Neon doesn't support `pg_dumpall`.
-- You can ignore `permission denied to change default privileges` errors for the `cloud_admin` role during the restore. The new project already has those privileges.
-- Create your roles in the new project before you restore, because `pg_dump` doesn't copy roles. See [Database object ownership considerations](/docs/import/migrate-from-postgres#database-object-ownership-considerations).
+If you use `pg_dump` and `pg_restore`, use the programs from the newer Postgres version, because an older `pg_restore` refuses to restore into a newer server. For connection strings, roles, and errors you can ignore, see [Migrate data with pg_dump and pg_restore](/docs/import/migrate-from-postgres).
 
 <Admonition type="note">
 Neon doesn't upgrade a project to a new major version in place, and doesn't support `pg_upgrade`.
