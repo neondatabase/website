@@ -11,7 +11,7 @@ summary: >-
   pg_dump must use an unpooled connection string. A coding agent with a
   terminal can run the upgrade for you.
 enableTableOfContents: true
-updatedOn: '2026-11-20T12:42:48.485Z'
+updatedOn: '2026-11-20T12:54:02.368Z'
 ---
 
 Each Neon project runs one major Postgres version, the one you chose when you created it. Neon applies minor version updates for you (see [Postgres version support](/docs/postgresql/postgres-version-support)). To move to a newer major version, such as from Postgres 17 to Postgres 19, create a new project on that version and migrate your data to it. You can do it yourself or [have a coding agent do it](#upgrade-with-an-ai-agent).
@@ -26,7 +26,6 @@ SELECT version();
 
 - Read the [PostgreSQL release notes](https://www.postgresql.org/docs/current/release.html) for the new version, and for any versions you skip, to find changes that affect your app.
 - Check that the extensions you use are available on the new version. Run `SELECT extname, extversion FROM pg_extension;` in each database to list them, then look them up in the [supported extensions table](/docs/extensions/pg-extensions).
-- Optionally, benchmark your current database so you can compare performance after the upgrade.
 
 ## Upgrade your project
 
@@ -34,7 +33,11 @@ SELECT version();
 
 ## Create a Neon project with the new Postgres version
 
-[Create a new Neon project](/docs/manage/projects#create-a-project) and select the Postgres version you want. Create it in the same region as your current project.
+[Create a new Neon project](/docs/manage/projects#create-a-project) and select the Postgres version you want. Create it in the same region as your current project. With the [Neon CLI](/docs/cli/projects#create):
+
+```bash
+neon projects create --name my-app-pg19 --pg-version 19 --region-id aws-us-east-2
+```
 
 If you use the Import Data Assistant, you can create the project from inside the assistant instead. It defaults to your current database's version, so select the newer one.
 
@@ -87,7 +90,7 @@ See [Connect from any application](/docs/connect/connect-from-any-app).
 
 ## Upgrade with an AI agent
 
-A coding agent with a terminal, such as Claude Code, Cursor, or Codex, can run the upgrade for you. Copy this prompt into your agent. It [sets up Neon for your agent](/docs/ai/agent-setup), checks your project, copies your data to a new project, and compares row counts before it hands back.
+A coding agent with a terminal, such as Claude Code, Cursor, or Codex, can run the upgrade for you. Copy this prompt into your agent. It [sets up Neon for your agent](/docs/ai/agent-setup), checks your project, copies your data to a new project with [`pg_dump` and `pg_restore`](/docs/import/migrate-from-postgres), and compares row counts before it hands back. Your agent needs `pg_dump` and `pg_restore` at the new Postgres version or newer, or Docker to run them.
 
 <Admonition type="important" title="Before you run it">
 The agent copies only your Postgres data. It doesn't change your current project, and it stops to check with you if your project also has other branches or uses Neon services such as Functions, Object Storage, or Managed Better Auth, or if your database is over 10 GB. Large copies can take hours and count toward [network transfer](/docs/introduction/network-transfer). Review the results before you switch your applications over.
