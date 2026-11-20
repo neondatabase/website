@@ -215,8 +215,6 @@ It covers:
 
 The full terminology system (preferred terms, terms to avoid, product and feature names) lives in `.claude/neon-terminology.md`, which the style guide references as its terminology data source.
 
-SEAM (TODO, do not build yet): a future opt-in reviewer slash-command can read the same canonical style guide (`content/docs/community/style-guide.md`) so external contributors without the doc AI tooling get the same voice and mechanical checks. This is a separate, opt-in change; it is intentionally not built here.
-
 ## Code Blocks
 
 See `content/docs/README.md` for full syntax. Key features:

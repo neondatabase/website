@@ -19,9 +19,9 @@ Review a documentation page against Neon standards and produce a structured find
 
 Read these before doing anything else:
 
-- `content/docs/community/style-guide.md` — the canonical voice and mechanical rules this review enforces (source of truth)
+- `content/docs/community/style-guide.md`: the canonical voice and mechanical rules this review enforces (source of truth)
 - `.claude/neon-terminology.md` — terminology rules, preferred terms, words to avoid
-- `AGENTS.md` — MDX components and frontmatter fields (its style section points to the canonical style guide)
+- `AGENTS.md`: MDX components and frontmatter fields (its style section points to the canonical style guide)
 
 The checks below are the operational enforcement of the canonical style guide. Where a rule's wording and the style guide differ, the style guide wins.
 
