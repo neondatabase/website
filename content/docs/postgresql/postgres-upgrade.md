@@ -11,7 +11,7 @@ summary: >-
   pg_dump must use an unpooled connection string. A coding agent with a
   terminal can run the upgrade for you.
 enableTableOfContents: true
-updatedOn: '2026-11-20T11:59:01.597Z'
+updatedOn: '2026-11-20T12:00:42.034Z'
 ---
 
 Each Neon project runs one major Postgres version, the one you chose when you created it. Neon applies minor version updates for you (see [Postgres version support](/docs/postgresql/postgres-version-support)). To move to a newer major version, such as from Postgres 17 to Postgres 19, create a new project on that version and migrate your data to it.
@@ -84,6 +84,6 @@ A coding agent with a terminal, such as Claude Code, Cursor, or Codex, can run t
 
 <AgentPrompt title="Upgrade with your agent" src="/prompts/postgres-upgrade.md" buttonText="Copy prompt" />
 
-The agent needs the `pg_dump` and `pg_restore` programs for the new Postgres version, and tells you if they're missing. Review the results before you switch your applications over.
+The agent needs the `pg_dump` and `pg_restore` programs for the new Postgres version, and tells you if they're missing. For a database over 10 GB, or one that can't pause writes, the prompt has the agent propose a plan and wait for your approval instead of copying right away. A large copy from your own machine can take hours, needs local disk space, and counts toward [network transfer](/docs/introduction/network-transfer). Review the results before you switch your applications over.
 
 <NeedHelp/>
