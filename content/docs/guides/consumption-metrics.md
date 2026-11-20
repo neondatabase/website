@@ -4,8 +4,8 @@ subtitle: Learn how to query project consumption metrics for usage-based plans u
   Neon API
 summary: >-
   The Neon consumption metrics API (/consumption_history/v2) returns project
-  usage metrics for compute, storage, data transfer, extra branches, and
-  Functions, plus per-branch metrics. It is available on Launch, Scale, Agent,
+  usage metrics for compute, storage, data transfer, extra branches,
+  Functions, AI Gateway, and Object Storage, plus per-branch metrics. It is available on Launch, Scale, Agent,
   and Enterprise plans. Use the project endpoint for project totals and
   invoicing inputs; use the branch endpoint to attribute compute, storage, and
   Functions usage to individual branches, CI environments, or development
@@ -15,15 +15,15 @@ redirectFrom:
   - /docs/guides/metrics-api
   - /docs/guides/partner-consumption-metrics
 enableTableOfContents: true
-updatedOn: '2026-11-20T15:10:05.191Z'
+updatedOn: '2026-11-20T15:13:42.042Z'
 ---
 
 Using the Neon API, you can query consumption metrics to track your resource usage. This page covers the two v2 metrics endpoints for usage-based plans. To monitor usage in the Console instead, see [Monitor billing and usage](/docs/introduction/monitor-usage).
 
-| API                               | Endpoint                           | Description                                                                                | Plan availability                |
-| --------------------------------- | ---------------------------------- | ------------------------------------------------------------------------------------------ | -------------------------------- |
-| **Project metrics (usage-based)** | `/consumption_history/v2/projects` | Returns project metrics for compute, storage, data transfer, extra branches, and Functions | Launch, Scale, Agent, Enterprise |
-| **Branch metrics**                | `/consumption_history/v2/branches` | Returns 10 project metrics broken down by branch, across one or more projects              | Launch, Scale, Agent, Enterprise |
+| API                               | Endpoint                           | Description                                                                                                            | Plan availability                |
+| --------------------------------- | ---------------------------------- | ---------------------------------------------------------------------------------------------------------------------- | -------------------------------- |
+| **Project metrics (usage-based)** | `/consumption_history/v2/projects` | Returns project metrics for compute, storage, data transfer, extra branches, Functions, AI Gateway, and Object Storage | Launch, Scale, Agent, Enterprise |
+| **Branch metrics**                | `/consumption_history/v2/branches` | Returns 17 project metrics broken down by branch, across one or more projects                                          | Launch, Scale, Agent, Enterprise |
 
 <Admonition type="tip">
 **Which API should I use?**
