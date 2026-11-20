@@ -15,7 +15,7 @@ redirectFrom:
   - /docs/guides/metrics-api
   - /docs/guides/partner-consumption-metrics
 enableTableOfContents: true
-updatedOn: '2026-11-20T15:13:42.042Z'
+updatedOn: '2026-11-20T15:24:42.221Z'
 ---
 
 Using the Neon API, you can query consumption metrics to track your resource usage. This page covers the two v2 metrics endpoints for usage-based plans. To monitor usage in the Console instead, see [Monitor billing and usage](/docs/introduction/monitor-usage).
@@ -77,7 +77,9 @@ The response includes these usage metrics:
 
 Use `snapshot_storage_bytes_month` for invoice-aligned, time-windowed snapshot storage reporting.
 
-The four Functions metrics, the six AI Gateway metrics, and `object_storage_network_transfer_bytes` are available from both v2 endpoints. `object_storage_bytes_month` is available only from this endpoint. For current Functions rates, see [Plans](/docs/introduction/plans#functions).
+The four Functions metrics, the six AI Gateway metrics, and `object_storage_network_transfer_bytes` are available from both v2 endpoints. `object_storage_bytes_month` is available only from this endpoint.
+
+The AI Gateway metrics are token counts summed across all models. They don't include cost or a per-model breakdown, and model prices differ, so to bill AI usage per project or branch, combine these counts with your own record of which models each one used. For current rates, see [AI Gateway pricing](/docs/introduction/plans#ai-gateway). For current Functions rates, see [Plans](/docs/introduction/plans#functions).
 
 To convert these raw values into readable units and, where applicable, calculate costs, see [Usage and cost calculations](/docs/introduction/usage-calculations).
 
