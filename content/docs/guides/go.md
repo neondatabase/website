@@ -1,106 +1,162 @@
 ---
-title: Connect a Go application to Lakebase Postgres
-subtitle: Learn how to run SQL queries in Neon from Go using the pgx library
+title: Connect a Go application to Neon
+subtitle: Create a Go module, link it with neon link, and query Lakebase Postgres from Go with pgx
 summary: >-
-  Connecting a Go application to Lakebase Postgres with pgx/v5 requires Go 1.25 or
-  later and a DATABASE_URL connection string passed via environment variable.
-  Use this page for raw SQL access with parameterized queries, not an ORM: it
-  walks through CREATE, SELECT, UPDATE, DELETE, bulk inserts via CopyFrom, and
-  multi-statement transactions with conn.Begin and defer tx.Rollback.
+  To connect a Go app to Lakebase Postgres on Neon, create a Go module, run neon
+  link to write DATABASE_URL to .env.local, and query it with pgx v5. Covers one
+  runnable example (create, insert, select, update, delete, and a transaction),
+  running the app elsewhere, troubleshooting, and the GORM guide as a next step.
 enableTableOfContents: true
 redirectFrom:
   - /docs/quickstart/go
   - /docs/integrations/go
-updatedOn: '2026-11-07T17:13:16.000Z'
+updatedOn: '2026-11-20T21:24:22.510Z'
 ---
 
-<CopyPrompt src="/prompts/golang-prompt.md" 
-description="Pre-built prompt for connecting Go applications to Neon"/>
-
-This guide describes how to create a Neon project and connect to it from a Go (Golang) application using [pgx](https://github.com/jackc/pgx), a Postgres driver for Go.
-
-You'll learn how to connect to your database from a Go application, and perform basic Create, Read, Update, and Delete (CRUD) operations.
-
-## Prerequisites
-
-- A Neon account. If you do not have one, see [Sign up](https://console.neon.tech/signup).
-- Go 1.25 or later. If you do not have Go installed, see the [official installation guide](https://go.dev/doc/install).
-
-<Admonition type="note">
-`pgx/v5` v5.9.0 and later require Go 1.25. If you can't upgrade Go, pin a release that supports Go 1.21: `go get github.com/jackc/pgx/v5@v5.7.4`.
-</Admonition>
+<PromptBlock src="/prompts/golang-prompt.md" labels={["Set up your agent and follow this guide", "Look up driver docs", "Connect your Go project"]} />
 
 <Steps>
 
-## Create a Neon project
-
-If you do not have one already, create a Neon project.
-
-1.  Navigate to the [Projects](https://console.neon.tech/app/projects) page in the [Neon Console](https://console.neon.tech).
-2.  Click **New Project**.
-3.  Specify your project settings and click **Create Project**.
-
-Your project is created with a ready-to-use database named `neondb`. In the following steps, you will connect to this database from your Go application.
-
 ## Create a Go project
 
-For your Go project, create a project directory, initialize a Go module, and add the required libraries.
+Create a Go module with `go mod init`, the Go command that starts a project and records its dependencies. You need Go 1.25 or later, the minimum for pgx v5.13, the version `go get` installs in [Install a Postgres driver](#install-a-postgres-driver). If Go isn't installed, follow the [official installation guide](https://go.dev/doc/install). Skip this step if you already have a Go module.
 
-1.  Create a project directory and change into it.
+```bash filename="Terminal"
+mkdir neon-go-app
+cd neon-go-app
+go mod init neon-go-app
+```
 
-    ```bash
-    mkdir neon-go-quickstart
-    cd neon-go-quickstart
-    ```
+This creates a `go.mod` file that lists the module's dependencies. It doesn't create a git repository, so run `git init` if you want one.
 
-    > Open the directory in your preferred code editor (for example, VS Code, GoLand).
+## Add Neon's agent skills (optional)
 
-2.  Initialize a Go module. This command creates a `go.mod` file to track your project's dependencies.
+Add Neon's [agent skills](/docs/ai/agent-skills) to your project with the command below. They teach your AI coding agent how to use the Neon CLI, branches, and Neon's backend services. The agent prompt at the top of this page installs them, so skip this step if you used it. The command runs through npm, so it needs Node.js 22.20 or later, even though the app is Go.
 
-    ```bash
-    go mod init neon-go-quickstart
-    ```
+```bash filename="Terminal"
+npx neon@latest skills
+```
 
-3.  Add the required Go packages using `go get`.
-    - `pgx/v5`: The database driver for connecting to Postgres.
-    - `godotenv`: A helper library to manage environment variables from a `.env` file.
+The [Neon MCP Server](/docs/ai/neon-mcp-server) connects your agent to Neon's tools as well; its page covers the setup.
 
-    ```bash
-    go get github.com/jackc/pgx/v5 github.com/joho/godotenv
-    ```
+## Create a Neon project
 
-    This will download the packages and add them to your `go.mod` and `go.sum` files.
+Create a Neon project in a region that runs every Neon backend service: `aws-us-east-2` (Ohio), `aws-us-east-1` (N. Virginia), `aws-eu-central-1` (Frankfurt), or `aws-ap-southeast-1` (Singapore). Postgres and [Managed Better Auth](/docs/auth/overview) run in every region; Object Storage, Neon Functions, the AI Gateway, and Realtime run in those four (see [product availability](/docs/introduction/regions#product-availability)). Skip this step if you already have a Neon project you want to use.
 
-## Store your Neon connection string
+<Tabs labels={["Neon CLI", "API", "Console"]}>
 
-Create a file named `.env` in your project's root directory. This file stores your database connection string. Don't commit it to source control.
+<TabItem>
 
-1.  In the [Neon Console](https://console.neon.tech), open your project.
-2.  Click **Connect** in the Console nav to open the **Connect to your branch** modal.
-    ![Connection modal](/docs/connect/connect_to_branch_modal.png)
-3.  Copy the connection string, which includes your password.
-4.  Add the connection string to your `.env` file as shown below.
-    ```text
-    DATABASE_URL="postgresql://[user]:[password]@[neon_hostname]/[dbname]?sslmode=require&channel_binding=require"
-    ```
-    > Replace `[user]`, `[password]`, `[neon_hostname]`, and `[dbname]` with your actual database credentials.
+Install the [Neon CLI](/docs/cli/install), sign in, and create the project. The npm install needs Node.js 20.19 or later; without Node.js, run `brew install neonctl` (Homebrew) or use another option on the install page:
 
-## Examples
+```bash filename="Terminal"
+npm i -g neon@latest
+neon login
+neon projects create --name my-app --region-id aws-us-east-2 --no-secrets
+```
 
-This section provides example Go scripts that demonstrate how to connect to your Neon database and perform basic operations such as [creating a table](#create-a-table-and-insert-data), [reading data](#read-data), [updating data](#update-data), and [deleting data](#delete-data).
+`--region-id` sets the region. `--no-secrets` keeps the connection string out of the output, since the next step pulls it into your env file. Pass `--org-id` to choose the organization (find IDs with `neon orgs list`).
 
-Each script is a standalone program with its own `main` function, so run each one by file name with `go run <file>.go`. Because they share a directory, `go build .` and your editor report `main redeclared`. That's expected for this guide. In a real app, put each program in its own directory under `cmd/`.
+</TabItem>
 
-### Create a table and insert data
+<TabItem>
 
-In your project directory, create a file named `create_table.go`. This script connects to your Neon database, creates a table named `books`, and inserts some sample data into it.
+Create an [API key](https://console.neon.tech/app/settings/api-keys), export it, then create the project in your organization:
 
-```go filename="create_table.go"
+```bash filename="Terminal"
+export NEON_API_KEY=napi_...
+
+curl -X POST https://console.neon.tech/api/v2/projects \
+  -H "Authorization: Bearer $NEON_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{"project": {"name": "my-app", "region_id": "aws-us-east-2", "org_id": "<org-id>"}}'
+```
+
+The response includes the project's connection string in `connection_uris[0].connection_uri`. See [Create a project with the API](/docs/manage/projects#create-a-project-with-the-api) for the other options.
+
+</TabItem>
+
+<TabItem>
+
+Go to the [Projects](https://console.neon.tech/app/projects) page in the Neon Console, click **New Project**, and pick one of the regions above.
+
+</TabItem>
+
+</Tabs>
+
+## Connect your app to the project
+
+The first tab runs `neon link --no-config` in your project directory, which writes `DATABASE_URL` into `.env.local` (or `.env` if one exists); the second tab copies the connection string into that file by hand. Add the env files to `.gitignore` first, so the connection string stays out of git:
+
+```bash filename="Terminal"
+printf '\n.env\n.env.local\n' >> .gitignore
+```
+
+Go doesn't read env files itself. The examples load them with [godotenv](https://github.com/joho/godotenv), which you install in [Install a Postgres driver](#install-a-postgres-driver).
+
+<Tabs labels={["Neon CLI", "Without the CLI"]}>
+
+<TabItem>
+
+From your project's directory, link it to the Neon project. Install the [Neon CLI](/docs/cli/install) and run `neon login` first if you haven't.
+
+`neon link` prompts you to pick an organization and a project, or to create a new project. Then it:
+
+- writes a `.neon` file with the project context;
+- pins a branch (pass `--branch` to choose one);
+- pulls that branch's Neon variables, including `DATABASE_URL`, into `.env.local`, or into `.env` if your project already has one.
+
+`--no-config` skips the offer to create a [`neon.ts`](/docs/reference/neon-ts) file, which is for Node.js projects.
+
+To skip the prompts, pass `-y` with `--org-id` and `--project-id`, or with `--org-id`, `--project-name`, and `--region-id` to create a project. Find IDs with `neon orgs list` and `neon projects list --org-id <org-id>`.
+
+</TabItem>
+
+<TabItem>
+
+Copy the connection string from **Connect** in the Console nav, or from the API response, and add it to a `.env.local` file in your project directory. For more information, see [Connect from any application](/docs/connect/connect-from-any-app).
+
+```shell filename=".env.local" shouldWrap
+DATABASE_URL="postgresql://[user]:[password]@[neon_hostname]/[dbname]?sslmode=require&channel_binding=require"
+```
+
+The development branch step below needs the Neon CLI, so skip it in this tab.
+
+</TabItem>
+
+</Tabs>
+
+## Work on a development branch (optional)
+
+Run `neon checkout dev --create` to develop on a branch of your database instead of the default branch, where production data usually lives. The default branch is `main` for projects created with the CLI or API, and `production` for projects created in the Console. A [branch](/docs/introduction/branching) starts from its parent's data and schema without copying them (copy-on-write: only the changes you make are stored), so you can change it freely:
+
+```bash filename="Terminal"
+neon checkout dev --create
+```
+
+This creates the `dev` branch, pins it in `.neon`, and pulls its `DATABASE_URL` into the same env file, so your app now uses the branch. To switch back, run `neon checkout main` (or `production`).
+
+## Install a Postgres driver
+
+Install [pgx](https://github.com/jackc/pgx) v5, the Postgres driver and toolkit for Go, and godotenv, which loads your env file in development. pgx takes the connection string from `neon link` as it is, including `channel_binding=require`, so you don't need to change it.
+
+```bash filename="Terminal"
+go get github.com/jackc/pgx/v5 github.com/joho/godotenv
+```
+
+`go get` adds both packages to `go.mod` and downloads them. The [pgx reference](https://pkg.go.dev/github.com/jackc/pgx/v5) lists its API.
+
+## Connect and run a query
+
+Create `main.go` in the project directory with a program that connects and prints the Postgres version. The `godotenv` calls read `.env.local`, then `.env`. Variables already set in your shell take priority over both.
+
+```go filename="main.go"
 package main
 
 import (
 	"context"
 	"fmt"
+	"log"
 	"os"
 
 	"github.com/jackc/pgx/v5"
@@ -108,481 +164,206 @@ import (
 )
 
 func main() {
-	// Load environment variables from .env file
-	err := godotenv.Load()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error loading .env file: %v\n", err)
-		os.Exit(1)
-	}
+	// neon link writes .env.local, or .env if your project already has one.
+	// In production, set DATABASE_URL in the host's environment instead.
+	_ = godotenv.Load(".env.local")
+	_ = godotenv.Load()
 
-	// Get the connection string from the environment variable
-	connString := os.Getenv("DATABASE_URL")
-	if connString == "" {
-		fmt.Fprintf(os.Stderr, "DATABASE_URL not set\n")
-		os.Exit(1)
+	databaseURL := os.Getenv("DATABASE_URL")
+	if databaseURL == "" {
+		log.Fatal("DATABASE_URL is not set")
 	}
 
 	ctx := context.Background()
-
-	// Connect to the database
-	conn, err := pgx.Connect(ctx, connString)
+	conn, err := pgx.Connect(ctx, databaseURL)
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "Unable to connect to database: %v\n", err)
-		os.Exit(1)
+		log.Fatal("Unable to connect: ", err)
 	}
 	defer conn.Close(ctx)
 
-	fmt.Println("Connection established")
-
-	// Drop the table if it already exists
-	_, err = conn.Exec(ctx, "DROP TABLE IF EXISTS books;")
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Unable to drop table: %v\n", err)
-		os.Exit(1)
+	var version string
+	if err := conn.QueryRow(ctx, "SELECT version()").Scan(&version); err != nil {
+		log.Fatal("Query failed: ", err)
 	}
-	fmt.Println("Finished dropping table (if it existed).")
-
-	// Create a new table
-	_, err = conn.Exec(ctx, `
-        CREATE TABLE books (
-            id SERIAL PRIMARY KEY,
-            title VARCHAR(255) NOT NULL,
-            author VARCHAR(255),
-            publication_year INT,
-            in_stock BOOLEAN DEFAULT TRUE
-        );
-    `)
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Unable to create table: %v\n", err)
-		os.Exit(1)
-	}
-	fmt.Println("Finished creating table.")
-
-	// Insert a single book record
-	_, err = conn.Exec(ctx,
-		"INSERT INTO books (title, author, publication_year, in_stock) VALUES ($1, $2, $3, $4);",
-		"The Catcher in the Rye", "J.D. Salinger", 1951, true,
-	)
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Unable to insert single row: %v\n", err)
-		os.Exit(1)
-	}
-	fmt.Println("Inserted a single book.")
-
-	// Data to be inserted
-	booksToInsert := [][]interface{}{
-		{"The Hobbit", "J.R.R. Tolkien", 1937, true},
-		{"1984", "George Orwell", 1949, true},
-		{"Dune", "Frank Herbert", 1965, false},
-	}
-
-	// Use CopyFrom for efficient bulk insertion
-	copyCount, err := conn.CopyFrom(
-		ctx,
-		pgx.Identifier{"books"},
-		[]string{"title", "author", "publication_year", "in_stock"},
-		pgx.CopyFromRows(booksToInsert),
-	)
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Unable to copy rows: %v\n", err)
-		os.Exit(1)
-	}
-	fmt.Printf("Inserted %d rows of data.\n", copyCount)
+	fmt.Println(version)
 }
 ```
 
-The above code does the following:
-
-- Loads the connection string from the `.env` file using the `godotenv` library.
-- Connects to the Neon database using `pgx.Connect`. The `defer conn.Close(ctx)` statement ensures the connection is closed when the `main` function exits.
-- Uses `conn.Exec` to run SQL commands that don't return rows, such as `DROP TABLE` and `CREATE TABLE`.
-- Inserts a single row using `conn.Exec` with parameterized query placeholders (`$1`, `$2`, etc.) to prevent SQL injection.
-- Uses `conn.CopyFrom` for efficient bulk insertion of multiple records.
-
-Run the script using the following command:
-
-```bash
-go run create_table.go
+```bash filename="Terminal"
+go run .
 ```
 
-When the code runs successfully, it produces the following output:
+The output shows the Postgres version of your database, which confirms the connection. The exact text varies with the version and platform:
 
-```text filename="Output"
-Connection established
-Finished dropping table (if it existed).
-Finished creating table.
-Inserted a single book.
-Inserted 3 rows of data.
+```text
+PostgreSQL 18.x ...
 ```
-
-### Read data
-
-In your project directory, create a file named `read_data.go`. This script connects to your Neon database and retrieves all rows from the `books` table.
-
-```go filename="read_data.go"
-package main
-
-import (
-	"context"
-	"fmt"
-	"os"
-
-	"github.com/jackc/pgx/v5"
-	"github.com/joho/godotenv"
-)
-
-func main() {
-	err := godotenv.Load()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error loading .env file: %v\n", err)
-		os.Exit(1)
-	}
-
-	connString := os.Getenv("DATABASE_URL")
-	if connString == "" {
-		fmt.Fprintf(os.Stderr, "DATABASE_URL not set\n")
-		os.Exit(1)
-	}
-
-	ctx := context.Background()
-	conn, err := pgx.Connect(ctx, connString)
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Unable to connect to database: %v\n", err)
-		os.Exit(1)
-	}
-	defer conn.Close(ctx)
-	fmt.Println("Connection established")
-
-	// Fetch all rows from the books table
-	rows, err := conn.Query(ctx, "SELECT * FROM books ORDER BY publication_year;")
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Query failed: %v\n", err)
-		os.Exit(1)
-	}
-	defer rows.Close()
-
-	fmt.Println("\n--- Book Library ---")
-	for rows.Next() {
-		var id, publicationYear int
-		var title, author string
-		var inStock bool
-
-		err := rows.Scan(&id, &title, &author, &publicationYear, &inStock)
-		if err != nil {
-			fmt.Fprintf(os.Stderr, "Failed to scan row: %v\n", err)
-			os.Exit(1)
-		}
-		fmt.Printf("ID: %d, Title: %s, Author: %s, Year: %d, In Stock: %t\n",
-			id, title, author, publicationYear, inStock)
-	}
-	fmt.Println("--------------------")
-
-	if err := rows.Err(); err != nil {
-		fmt.Fprintf(os.Stderr, "Error during rows iteration: %v\n", err)
-		os.Exit(1)
-	}
-}
-```
-
-The above code does the following:
-
-- Connects to the database using the connection string from the `.env` file.
-- Uses `conn.Query` to execute a `SELECT` statement, which returns a `pgx.Rows` object.
-- Iterates through the rows using `rows.Next()`.
-- Uses `rows.Scan()` to copy the column values from the current row into Go variables.
-- Prints each book's details in a formatted output.
-- Checks for any errors that occurred during row iteration with `rows.Err()`.
-
-Run the script using the following command:
-
-```bash
-go run read_data.go
-```
-
-When the code runs successfully, it produces the following output:
-
-```text filename="Output"
-Connection established
-
---- Book Library ---
-ID: 2, Title: The Hobbit, Author: J.R.R. Tolkien, Year: 1937, In Stock: true
-ID: 3, Title: 1984, Author: George Orwell, Year: 1949, In Stock: true
-ID: 1, Title: The Catcher in the Rye, Author: J.D. Salinger, Year: 1951, In Stock: true
-ID: 4, Title: Dune, Author: Frank Herbert, Year: 1965, In Stock: false
---------------------
-```
-
-### Update data
-
-In your project directory, create a file named `update_data.go`. This script connects to your Neon database and updates the stock status of the book 'Dune' to `true`.
-
-```go filename="update_data.go"
-package main
-
-import (
-	"context"
-	"fmt"
-	"os"
-
-	"github.com/jackc/pgx/v5"
-	"github.com/joho/godotenv"
-)
-
-func main() {
-	err := godotenv.Load()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error loading .env file: %v\n", err)
-		os.Exit(1)
-	}
-
-	connString := os.Getenv("DATABASE_URL")
-	if connString == "" {
-		fmt.Fprintf(os.Stderr, "DATABASE_URL not set\n")
-		os.Exit(1)
-	}
-
-	ctx := context.Background()
-	conn, err := pgx.Connect(ctx, connString)
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Unable to connect to database: %v\n", err)
-		os.Exit(1)
-	}
-	defer conn.Close(ctx)
-	fmt.Println("Connection established")
-
-	// Update a data row in the table
-	_, err = conn.Exec(ctx, "UPDATE books SET in_stock = $1 WHERE title = $2;", true, "Dune")
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Update failed: %v\n", err)
-		os.Exit(1)
-	}
-
-	fmt.Println("Updated stock status for 'Dune'.")
-}
-```
-
-The above code uses `conn.Exec` with a parameterized `UPDATE` statement to change the `in_stock` status of the book 'Dune'.
-
-Run the script using the following command:
-
-```bash
-go run update_data.go
-```
-
-After running this script, you can run `read_data.go` again to verify that the row was updated.
-
-```bash
-go run read_data.go
-```
-
-When the code runs successfully, it produces the following output:
-
-```text filename="Output"
-Connection established
-
---- Book Library ---
-ID: 2, Title: The Hobbit, Author: J.R.R. Tolkien, Year: 1937, In Stock: true
-ID: 3, Title: 1984, Author: George Orwell, Year: 1949, In Stock: true
-ID: 1, Title: The Catcher in the Rye, Author: J.D. Salinger, Year: 1951, In Stock: true
-ID: 4, Title: Dune, Author: Frank Herbert, Year: 1965, In Stock: true
---------------------
-```
-
-> You can see that the stock status for 'Dune' has been updated to `true`.
-
-### Delete data
-
-In your project directory, create a file named `delete_data.go`. This script connects to your Neon database and deletes the book '1984' from the `books` table.
-
-```go filename="delete_data.go"
-package main
-
-import (
-	"context"
-	"fmt"
-	"os"
-
-	"github.com/jackc/pgx/v5"
-	"github.com/joho/godotenv"
-)
-
-func main() {
-	err := godotenv.Load()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error loading .env file: %v\n", err)
-		os.Exit(1)
-	}
-
-	connString := os.Getenv("DATABASE_URL")
-	if connString == "" {
-		fmt.Fprintf(os.Stderr, "DATABASE_URL not set\n")
-		os.Exit(1)
-	}
-
-	ctx := context.Background()
-	conn, err := pgx.Connect(ctx, connString)
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Unable to connect to database: %v\n", err)
-		os.Exit(1)
-	}
-	defer conn.Close(ctx)
-	fmt.Println("Connection established")
-
-	// Delete a data row from the table
-	_, err = conn.Exec(ctx, "DELETE FROM books WHERE title = $1;", "1984")
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Delete failed: %v\n", err)
-		os.Exit(1)
-	}
-	fmt.Println("Deleted the book '1984' from the table.")
-}
-```
-
-The above code uses `conn.Exec` with a parameterized `DELETE` statement to remove the book '1984' from the `books` table.
-
-Run the script using the following command:
-
-```bash
-go run delete_data.go
-```
-
-After running this script, you can run `read_data.go` again to verify that the row was deleted.
-
-```bash
-go run read_data.go
-```
-
-When the code runs successfully, it produces the following output:
-
-```text filename="Output"
-Connection established
-
---- Book Library ---
-ID: 2, Title: The Hobbit, Author: J.R.R. Tolkien, Year: 1937, In Stock: true
-ID: 1, Title: The Catcher in the Rye, Author: J.D. Salinger, Year: 1951, In Stock: true
-ID: 4, Title: Dune, Author: Frank Herbert, Year: 1965, In Stock: true
---------------------
-```
-
-> You can see that the book '1984' has been successfully deleted from the `books` table.
-
-### Using transactions
-
-The examples above execute each operation independently. For production code where multiple operations must succeed or fail together, wrap them in a transaction. The `defer tx.Rollback(ctx)` pattern ensures the transaction is rolled back if the function exits before committing.
-
-```go filename="transaction_example.go"
-package main
-
-import (
-	"context"
-	"fmt"
-	"os"
-
-	"github.com/jackc/pgx/v5"
-	"github.com/joho/godotenv"
-)
-
-func main() {
-	err := godotenv.Load()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error loading .env file: %v\n", err)
-		os.Exit(1)
-	}
-
-	connString := os.Getenv("DATABASE_URL")
-	if connString == "" {
-		fmt.Fprintf(os.Stderr, "DATABASE_URL not set\n")
-		os.Exit(1)
-	}
-
-	ctx := context.Background()
-	conn, err := pgx.Connect(ctx, connString)
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Unable to connect to database: %v\n", err)
-		os.Exit(1)
-	}
-	defer conn.Close(ctx)
-
-	// Begin a transaction
-	tx, err := conn.Begin(ctx)
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Failed to begin transaction: %v\n", err)
-		os.Exit(1)
-	}
-	// Defer a rollback in case anything fails. If the transaction
-	// is committed successfully, the rollback is a no-op.
-	defer tx.Rollback(ctx)
-
-	// All operations use the tx object, not conn
-	_, err = tx.Exec(ctx, "INSERT INTO books (title, author, publication_year) VALUES ($1, $2, $3)", "Brave New World", "Aldous Huxley", 1932)
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Insert failed: %v\n", err)
-		os.Exit(1)
-	}
-
-	_, err = tx.Exec(ctx, "UPDATE books SET in_stock = $1 WHERE title = $2", false, "Brave New World")
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Update failed: %v\n", err)
-		os.Exit(1)
-	}
-
-	// Commit the transaction
-	if err := tx.Commit(ctx); err != nil {
-		fmt.Fprintf(os.Stderr, "Commit failed: %v\n", err)
-		os.Exit(1)
-	}
-
-	fmt.Println("Transaction committed successfully.")
-}
-```
-
-Run with:
-
-```bash
-go run transaction_example.go
-```
-
-When the code runs successfully, it produces the following output:
-
-```text filename="Output"
-Transaction committed successfully.
-```
-
-Run `read_data.go` again to see the new row: `Brave New World` by Aldous Huxley, with `In Stock: false`.
 
 </Steps>
 
-## Connection issues
+## Examples
 
-- If you see an `endpoint ID is not specified` error, the TLS client your Postgres driver depends on doesn't support Server Name Indication (SNI), which Neon uses to route connections. This is uncommon with `pgx/v5`, which uses Go's standard `crypto/tls` package and supports SNI by default, but can occur with an older driver or an outdated TLS implementation.
-- If you encounter an `SSL SYSCALL error: EOF detected` (or a similar connection-reset error), this typically happens when an application tries to reuse a connection after the Neon compute has been suspended due to inactivity. The examples in this guide open a fresh connection with `pgx.Connect` each time they run, so this mainly affects long-running servers that keep a connection or pool open across requests. For production use, consider [pgxpool](https://pkg.go.dev/github.com/jackc/pgx/v5/pgxpool) with health checks, or reconnecting on error.
+The example is one program that creates a `books` table, then inserts, selects, updates, and deletes rows, with a transaction in the middle. It deletes the rows it adds, so you can run it again. Save it as `cmd/books/main.go` (create the `cmd/books` directory first), then run it with `go run ./cmd/books`. It lives in its own directory because two `main` functions in one directory won't build.
 
-<details>
-<summary>**Notes for AI-assisted setup**</summary>
+The example writes to the branch that your `DATABASE_URL` points at, so run it on a development branch: complete [Work on a development branch](#work-on-a-development-branch-optional) first. Without the CLI, create a branch in the Neon Console and copy its connection string into `.env.local`, as described in [Create a branch](/docs/manage/branches#create-a-branch).
 
-- Do not use `lib/pq`. It is a deprecated Go Postgres driver. Use `pgx/v5` as shown in this guide.
-- Always use parameterized queries (`$1`, `$2`, etc.) for INSERT, UPDATE, and DELETE operations. Never concatenate user input into SQL strings.
-- Wrap related database operations in a transaction (`conn.Begin` / `tx.Commit` / `tx.Rollback`). Use `defer tx.Rollback(ctx)` immediately after `conn.Begin` as a safety net.
-- Always use `context.Context` for database operations. This enables cancellation and timeout control.
-- Do not hardcode credentials in `.go` files. Use environment variables via `godotenv` and `os.Getenv`. For more information, see [Security overview](/docs/security/security-overview).
+```go filename="cmd/books/main.go"
+package main
 
-</details>
+import (
+	"context"
+	"fmt"
+	"log"
+	"os"
 
-## Use an ORM
+	"github.com/jackc/pgx/v5"
+	"github.com/joho/godotenv"
+)
 
-This guide uses raw SQL. An Object-Relational Mapping (ORM) library lets you work with rows as Go structs and can run migrations that keep your schema in sync with your models.
+func main() {
+	_ = godotenv.Load(".env.local")
+	_ = godotenv.Load()
 
-To use an ORM with Neon, see:
+	databaseURL := os.Getenv("DATABASE_URL")
+	if databaseURL == "" {
+		log.Fatal("DATABASE_URL is not set")
+	}
 
-- [Connect a Go application to Neon using GORM](/guides/golang-gorm-postgres)
+	ctx := context.Background()
+	conn, err := pgx.Connect(ctx, databaseURL)
+	if err != nil {
+		log.Fatal("Unable to connect: ", err)
+	}
+	defer conn.Close(ctx)
 
-## Neon backend services
+	// Create a table
+	_, err = conn.Exec(ctx, `
+		CREATE TABLE IF NOT EXISTS books (
+			id SERIAL PRIMARY KEY,
+			title TEXT NOT NULL,
+			author TEXT NOT NULL,
+			year INT
+		)`)
+	if err != nil {
+		log.Fatal("Create table failed: ", err)
+	}
 
-- [Add Object Storage](/docs/storage/overview): S3-compatible file storage that branches with your database
-- [Call an LLM with AI Gateway](/docs/ai-gateway/overview): Access foundation models from Anthropic, OpenAI, Google, and more with one credential
+	// Insert a row and get its id back
+	var duneID int
+	err = conn.QueryRow(ctx,
+		"INSERT INTO books (title, author, year) VALUES ($1, $2, $3) RETURNING id",
+		"Dune", "Frank Herbert", 1965,
+	).Scan(&duneID)
+	if err != nil {
+		log.Fatal("Insert failed: ", err)
+	}
 
-## Resources
+	// Select the row
+	var title string
+	var year int
+	err = conn.QueryRow(ctx, "SELECT title, year FROM books WHERE id = $1", duneID).Scan(&title, &year)
+	if err != nil {
+		log.Fatal("Select failed: ", err)
+	}
+	fmt.Println("Selected:", title, year)
 
-- [pgx Documentation](https://pkg.go.dev/github.com/jackc/pgx/v5)
+	// Update the row
+	_, err = conn.Exec(ctx, "UPDATE books SET year = $1 WHERE id = $2", 1966, duneID)
+	if err != nil {
+		log.Fatal("Update failed: ", err)
+	}
+
+	// Insert two rows in a transaction: both commit, or neither does
+	tx, err := conn.Begin(ctx)
+	if err != nil {
+		log.Fatal("Begin failed: ", err)
+	}
+	defer tx.Rollback(ctx) // does nothing after a successful Commit
+
+	var emmaID, persuasionID int
+	err = tx.QueryRow(ctx,
+		"INSERT INTO books (title, author, year) VALUES ($1, $2, $3) RETURNING id",
+		"Emma", "Jane Austen", 1815,
+	).Scan(&emmaID)
+	if err != nil {
+		log.Fatal("Insert failed: ", err)
+	}
+	err = tx.QueryRow(ctx,
+		"INSERT INTO books (title, author, year) VALUES ($1, $2, $3) RETURNING id",
+		"Persuasion", "Jane Austen", 1817,
+	).Scan(&persuasionID)
+	if err != nil {
+		log.Fatal("Insert failed: ", err)
+	}
+	if err := tx.Commit(ctx); err != nil {
+		log.Fatal("Commit failed: ", err)
+	}
+
+	// Select all rows, ordered by year
+	rows, err := conn.Query(ctx, "SELECT title, year FROM books ORDER BY year")
+	if err != nil {
+		log.Fatal("Select failed: ", err)
+	}
+	fmt.Println("All books:")
+	for rows.Next() {
+		var t string
+		var y int
+		if err := rows.Scan(&t, &y); err != nil {
+			log.Fatal("Scan failed: ", err)
+		}
+		fmt.Printf("  %s (%d)\n", t, y)
+	}
+	if err := rows.Err(); err != nil {
+		log.Fatal("Rows failed: ", err)
+	}
+
+	// Delete the rows this program added
+	_, err = conn.Exec(ctx, "DELETE FROM books WHERE id = ANY($1)", []int{duneID, emmaID, persuasionID})
+	if err != nil {
+		log.Fatal("Delete failed: ", err)
+	}
+	fmt.Println("Deleted the rows this program added.")
+}
+```
+
+## Run it elsewhere
+
+On a host, set `DATABASE_URL` in the host's environment instead of an env file. For production, use your default branch's pooled connection string, which goes through [Neon's connection pooler](/docs/connect/connection-pooling): run `neon connection-string main --pooled` in your own terminal, replacing `main` with `production` if that's your project's default branch, because the command prints the password. Neon's pooler already pools connections, so you don't need to add a pool in your app; if you do, return connections to it promptly (see [Double pooling](/docs/connect/choose-connection#common-pitfalls)).
+
+## Add more of your backend
+
+Neon also runs object storage, a model gateway, and serverless functions next to your database. Each entry below says what the service does.
+
+<DefinitionList>
+
+Object Storage
+: S3-compatible buckets for uploads and files, so any S3 client works from Go. See [Object Storage](/docs/storage/overview).
+
+AI Gateway
+: Routes calls to models from Anthropic, OpenAI, Google, and more through one OpenAI-compatible endpoint on your branch. See [AI Gateway](/docs/ai-gateway/overview).
+
+Neon Functions
+: Long-running Node.js compute (the server that runs your code next to your database), called over HTTP. See [Neon Functions](/docs/compute/functions/overview).
+
+</DefinitionList>
+
+## Troubleshooting
+
+<DefinitionList>
+
+`DATABASE_URL is not set`
+: The program ran without `DATABASE_URL` in its environment. Run it from the project directory, where the env file is, or set the variable in your shell.
+
+`SSL SYSCALL error: EOF detected`, or a similar connection-reset error
+: The app reused a connection after the Neon compute was suspended for inactivity. This mainly affects long-running servers that keep a connection pool open, such as a `pgxpool` pool. The request that hits the closed connection can fail; the next request opens a new connection, so retrying the request resolves it.
+
+`no required module provides package github.com/jackc/pgx/v5`
+: The `go get` command in [Install a Postgres driver](#install-a-postgres-driver) hasn't run, so `go.mod` doesn't list the package. Run that command from the project directory, then run the program again. The same error names `github.com/joho/godotenv` when that package is missing.
+
+</DefinitionList>
+
+## Next steps
+
+- [Using GORM with Lakebase Postgres](/guides/golang-gorm-postgres): Use GORM's models and queries instead of raw SQL.
 
 <NeedHelp/>
