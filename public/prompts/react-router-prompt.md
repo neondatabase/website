@@ -2,7 +2,7 @@ Connect my React Router app to Neon.
 
 - Fetch https://neon.com/prompts/agent-setup.md and follow it.
 
-- Look up React Router's docs at https://reactrouter.com/home.md. If my project has React Router's agent skill in .agents/skills/react-router, use it too.
+- Look up React Router's docs at https://reactrouter.com/home.md and its agent skill at https://github.com/remix-run/react-router/tree/main/.agents/skills/react-router
 
 - Fetch Neon's React Router guide and follow it: https://neon.com/docs/guides/react-router.md
 - Keep my app's React Router version. If it's version 7, follow the guide's notes for it.

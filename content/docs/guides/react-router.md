@@ -9,7 +9,7 @@ summary: >-
   TypeScript: an optional Neon development branch and agent skills, deployment,
   troubleshooting, and Neon's other backend services from React Router.
 enableTableOfContents: true
-updatedOn: '2026-11-20T21:29:38.132Z'
+updatedOn: '2026-11-20T23:14:28.585Z'
 ---
 
 <PromptBlock src="/prompts/react-router-prompt.md" labels={["Set up your agent and follow this guide", "Look up React Router's docs", "Connect your React Router app"]} />
@@ -44,7 +44,7 @@ npx neon@latest skills
 
 To also connect the [Neon MCP Server](/docs/ai/neon-mcp-server), run `npx neon@latest mcp`.
 
-React Router's docs are at [reactrouter.com](https://reactrouter.com/home), and the scaffold's React Router agent skill in `.agents/skills/react-router` covers the framework's routes, loaders, and modes.
+React Router's docs are at [reactrouter.com](https://reactrouter.com/home), and its [agent skill](https://github.com/remix-run/react-router/tree/main/.agents/skills/react-router) covers the framework's routes, loaders, and modes. React Router 8's scaffold adds the skill to `.agents/skills/react-router`.
 
 ## Create a Neon project
 
