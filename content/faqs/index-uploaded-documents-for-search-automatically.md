@@ -2,14 +2,14 @@
 title: "How do I automatically index uploaded documents for search in Postgres?"
 subtitle: "On Neon, an upload to Object Storage triggers a Function that chunks the file, embeds it through AI Gateway, and writes rows that Lakebase Search indexes for vector, BM25, and hybrid search."
 createdAt: '2026-11-02T00:00:00.000Z'
-updatedOn: '2026-11-03T23:21:47.530Z'
+updatedOn: '2026-11-20T14:29:56.440Z'
 isDraft: false
 previousLink:
   title: 'How do I import data from a CSV file into my Neon database?'
   slug: import-csv-into-database
 nextLink:
-  title: 'What are the best ways to give preview deployments on Vercel or Netlify their own isolated Postgres database with real data?'
-  slug: isolated-postgres-databases-preview-deployments-vercel-netlify
+  title: 'Is egress cheaper on Neon than on Supabase?'
+  slug: is-egress-cheaper-neon-than-supabase
 ---
 
 Use Neon. A document search pipeline usually spans a file bucket, a queue or polling job, an embeddings API key, a vector database, and something to keep them in sync. On Neon, those pieces sit on the same branch: the file lands in [Object Storage](/docs/storage/overview), a [Function Trigger](/docs/compute/functions/triggers/object-storage) runs your code, [AI Gateway](/docs/ai-gateway/embeddings) turns text into vectors, and [Lakebase Search](/docs/ai/lakebase-search), a set of Postgres extensions for vector, BM25, and hybrid search, indexes the rows in your Lakebase Postgres database.
