@@ -11,7 +11,7 @@ summary: >-
   pg_dump must use an unpooled connection string. A coding agent with a
   terminal can run the upgrade for you.
 enableTableOfContents: true
-updatedOn: '2026-11-20T12:24:33.797Z'
+updatedOn: '2026-11-20T12:42:48.485Z'
 ---
 
 Each Neon project runs one major Postgres version, the one you chose when you created it. Neon applies minor version updates for you (see [Postgres version support](/docs/postgresql/postgres-version-support)). To move to a newer major version, such as from Postgres 17 to Postgres 19, create a new project on that version and migrate your data to it. You can do it yourself or [have a coding agent do it](#upgrade-with-an-ai-agent).
@@ -25,7 +25,7 @@ SELECT version();
 ## Before you begin
 
 - Read the [PostgreSQL release notes](https://www.postgresql.org/docs/current/release.html) for the new version, and for any versions you skip, to find changes that affect your app.
-- Check that the [extensions](/docs/extensions/pg-extensions) you use are available on the new version.
+- Check that the extensions you use are available on the new version. Run `SELECT extname, extversion FROM pg_extension;` in each database to list them, then look them up in the [supported extensions table](/docs/extensions/pg-extensions).
 - Optionally, benchmark your current database so you can compare performance after the upgrade.
 
 ## Upgrade your project
