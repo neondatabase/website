@@ -11,4 +11,4 @@ Help me upgrade a Neon project to a newer major Postgres version:
 9. Prove it worked: compare the row count of every table in both projects and show me the results.
 10. Tell me how to get the new project's connection string so I can switch my app over. Don't print passwords or other secrets.
 
-For details on each step, see https://neon.com/docs/postgresql/postgres-upgrade.md.
+For other ways to migrate, such as the Import Data Assistant or logical replication, see https://neon.com/docs/postgresql/postgres-upgrade.md.
