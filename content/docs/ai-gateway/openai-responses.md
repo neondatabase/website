@@ -6,7 +6,7 @@ summary: >-
   AI Gateway. Required for codex model variants, which do not work with the
   chat completions endpoint.
 enableTableOfContents: true
-updatedOn: '2026-11-10T18:56:17.167Z'
+updatedOn: '2026-11-20T16:51:06.128Z'
 ---
 
 The OpenAI Responses endpoint exposes the [OpenAI Responses API](https://platform.openai.com/docs/api-reference/responses) through Neon AI Gateway. Use it with the OpenAI SDK's `responses.create()` method by changing only the `baseURL`.
@@ -37,6 +37,7 @@ This endpoint accepts OpenAI models only:
 | Model ID        | Notes                  |
 | --------------- | ---------------------- |
 | `gpt-6-astra`   |                        |
+| `gpt-6-1-terra` |                        |
 | `gpt-6-1-sol`   |                        |
 | `gpt-6-sol`     |                        |
 | `gpt-6-luna`    |                        |
@@ -173,7 +174,7 @@ const result = streamText({
 return result.toUIMessageStreamResponse();
 ```
 
-AI SDK `generateImage()` is not supported by AI Gateway; image generation is available only through this Responses tool.
+AI SDK `generateImage()` is not supported by AI Gateway. For OpenAI image models, use this Responses tool. The Google image models, `gemini-3-pro-image` and `gemini-3-1-flash-image`, generate images on [chat completions](/docs/ai-gateway/chat-completions) and the [Gemini endpoint](/docs/ai-gateway/gemini) instead.
 
 ## Error handling
 
