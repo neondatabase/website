@@ -5,10 +5,10 @@ summary: >-
   Managed Better Auth's trusted domain allowlist restricts OAuth and email verification
   redirects to domains you explicitly approve, blocking unauthorized redirects.
   Add exact production origins (https://myapp.com) or wildcard patterns
-  (https://*.preview.vercel.app) in Console > Auth > Configuration > Domains.
+  (https://*.preview.example.com) in Console > Auth > Configuration > Domains.
   Localhost ports are pre-approved and need no entry.
 enableTableOfContents: true
-updatedOn: '2026-11-10T14:15:46.000Z'
+updatedOn: '2026-11-20T13:31:17.623Z'
 ---
 
 Add your application domains to Managed Better Auth's allowlist to enable OAuth and email verification redirects in production.
@@ -86,12 +86,24 @@ Add all domains where users access your application:
 
 ## Wildcard domains for previews
 
-For preview environments with dynamic hostnames (for example Vercel preview deployments), you can add a **wildcard trusted domain** such as `https://*.my-app-preview.vercel.app`. One entry can match every preview under that pattern instead of adding hosts one by one.
+For preview environments with dynamic hostnames, you can add a **wildcard trusted domain** such as `https://*.preview.example.com`. One entry matches every host one level below `preview.example.com`, instead of adding hosts one by one.
 
 Use the same rules as fixed domains: include `https://` (or `http://` where appropriate) and omit trailing slashes after the pattern.
 
+The `*` must be the entire leftmost label of the hostname. A pattern such as `https://my-app-*.vercel.app` is rejected with `Wildcard (*) must be the leftmost subdomain label`.
+
+<Admonition type="important" title="Vercel preview URLs">
+Vercel's generated preview URLs, such as `my-app-git-feature-my-team.vercel.app`, are a single label under `vercel.app`. The only wildcard that matches them is `https://*.vercel.app`, which trusts every site hosted on Vercel, including other people's. Don't add it. Instead, serve previews from a domain you own and add a wildcard for it, or add each preview URL you test as an exact entry.
+</Admonition>
+
+```bash
+neon neon-auth domain add https://my-app-git-feature-my-team.vercel.app --branch preview
+```
+
+Trusted domains belong to a branch. A new branch starts with a copy of its parent's trusted domains. If preview deployments use a different branch than production, add preview domains to that branch with `--branch`.
+
 <Admonition type="note">
-Wildcard patterns apply to the hostname segment you replace with `*`. Production apex domains (for example `https://myapp.com`) are usually still added as exact entries unless your wildcard covers them.
+Production apex domains (for example `https://myapp.com`) are usually still added as exact entries unless your wildcard covers them.
 </Admonition>
 
 ## Common issues

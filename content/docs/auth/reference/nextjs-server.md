@@ -12,7 +12,7 @@ summary: >-
   structured upstream error codes, and migration from v0.1.
 enableTableOfContents: true
 layout: wide
-updatedOn: '2026-10-09T15:55:57.334Z'
+updatedOn: '2026-11-20T13:31:17.623Z'
 ---
 
 Reference documentation for the Managed Better Auth Next.js server SDK (`@neon/auth/next/server`). This package provides server-side authentication for Next.js applications using React Server Components, API routes, middleware, and server actions.
@@ -234,7 +234,7 @@ Retrieves the current session in Server Components, Server Actions, and API Rout
 - Automatically refreshes expired tokens
 - Returns null if no active session
 
-Server Components that use `auth.getSession()` must export `dynamic = 'force-dynamic'` because session data depends on cookies.
+Session data depends on cookies, so a Server Component that calls `auth.getSession()` renders at request time. Wrap it in `<Suspense>`, as in the example. This works with and without Next.js Cache Components. Don't export `dynamic = 'force-dynamic'`, which fails the build when Cache Components is enabled.
 
 ### Returns (#returns-2)
 
@@ -250,10 +250,9 @@ Server Components that use `auth.getSession()` must export `dynamic = 'force-dyn
 ```typescript
 // app/dashboard/page.tsx
 import { auth } from '@/lib/auth/server';
+import { Suspense } from 'react';
 
-export const dynamic = 'force-dynamic';
-
-export default async function DashboardPage() {
+async function Welcome() {
   const { data: session } = await auth.getSession();
 
   if (!session?.user) {
@@ -261,6 +260,14 @@ export default async function DashboardPage() {
   }
 
   return <h1>Welcome, {session.user.name}</h1>;
+}
+
+export default function DashboardPage() {
+  return (
+    <Suspense fallback={<div>Loading…</div>}>
+      <Welcome />
+    </Suspense>
+  );
 }
 ```
 

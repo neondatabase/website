@@ -5,7 +5,7 @@ summary: >-
   Solutions for common errors when using Neon AI Gateway, including
   authentication failures, model errors, quota limits, and upstream issues.
 enableTableOfContents: true
-updatedOn: '2026-11-15T17:20:24.920Z'
+updatedOn: '2026-11-20T13:31:17.623Z'
 ---
 
 ## Authentication errors
@@ -21,6 +21,24 @@ The bearer token is missing, malformed, or has been revoked.
 The credential exists but lacks the `ai_gateway:invoke` scope.
 
 **Fix:** Create a new credential that includes `ai_gateway:invoke` in the `scopes` array. You can't add scopes to an existing credential. See [Authentication](/docs/ai-gateway/authentication#creating-a-credential).
+
+### `403 AI Gateway is not enabled on this account's current plan`
+
+The full response looks like this:
+
+```json
+{
+  "error": {
+    "message": "AI Gateway is not enabled on this account's current plan. Review the available plans in Neon Billing. https://console.neon.tech/app/{org_id}/billing",
+    "recovery_url": "https://console.neon.tech/app/{org_id}/billing",
+    "unavailable_reason": "paid_plan_required"
+  }
+}
+```
+
+Despite the wording, you don't need a different plan. The organization has no AI Gateway credits, and every model request fails until it does. `GET /v1/models` still lists the full catalog in this state.
+
+**Fix:** Buy credits on the **Billing** page in the Neon Console. Credits work on every plan, including Free, and the minimum purchase is $5. See [Prepaid credits](/docs/ai-gateway/prepaid-credits). To tell this error apart from a credential problem in code, check `error.unavailable_reason`, since both return `403`.
 
 ### `403 credential not authorized for this branch`
 

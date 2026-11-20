@@ -9,7 +9,7 @@ summary: >-
   reference when you need custom sign-up and sign-in forms. Requires Next.js
   App Router.
 enableTableOfContents: true
-updatedOn: '2026-11-06T11:14:41.532Z'
+updatedOn: '2026-11-20T13:31:17.623Z'
 layout: wide
 redirectFrom:
   - /docs/auth/quick-start/nextjs
@@ -32,6 +32,8 @@ If you don't have a Neon project yet, create one at [console.neon.tech](https://
 In the Neon Console, open the **Better Auth** page and click **Enable Auth**, then copy your Auth URL from **Settings** > **Better Auth** > **Project Info**.
 
 **Console path:** Project → Branch → Auth → Configuration
+
+To enable it from a terminal instead, in a directory linked to your project with `neon link` or `neon init`, set `auth: true` in your [`neon.ts`](/docs/reference/neon-ts) and run `neon deploy`. It enables Auth on the linked branch and writes `NEON_AUTH_BASE_URL` to your env file. You can also run [`neon neon-auth enable`](/docs/cli/neon-auth).
 
 </TwoColumnLayout.Block>
 <TwoColumnLayout.Block label="Console">
@@ -72,6 +74,8 @@ Create a `.env.local` file in your project root and add your Auth URL and a cook
 <Admonition type="note">
 Replace the Auth URL with your actual Auth URL from the Neon Console. Generate a secure cookie secret with `openssl rand -base64 32`.
 </Admonition>
+
+If you enabled Auth with `neon deploy`, `NEON_AUTH_BASE_URL` is already in your env file. Neon doesn't create `NEON_AUTH_COOKIE_SECRET`, so add it yourself.
 
 </TwoColumnLayout.Block>
 <TwoColumnLayout.Block>
@@ -165,7 +169,7 @@ export const config = {
 </TwoColumnLayout.Block>
 <TwoColumnLayout.Footer>
 <Admonition type="note">
-Your Next.js project is now fully configured to use Managed Better Auth. Now, lets proceed with setting up the auth clients.
+Your Next.js project is now fully configured to use Managed Better Auth. Next, set up the auth clients.
 </Admonition>
 </TwoColumnLayout.Footer>
 </TwoColumnLayout.Step>
@@ -196,7 +200,7 @@ export const authClient = createAuthClient();
 <TwoColumnLayout.Step title="Create Sign up form">
 <TwoColumnLayout.Block>
 
-Lets create a sign-up form and action in `app/auth/sign-up/page.tsx` and `app/auth/sign-up/actions.ts` files respectively using the auth instance we created in previous step
+Create a sign-up form and action in `app/auth/sign-up/page.tsx` and `app/auth/sign-up/actions.ts`, using the auth instance from the previous step.
 
 - To create user with email and password, we will use `auth.signUp.email()` with user name, email address, and password
 - You can optionally add business logic before invoking the API, for example restrict signups to emails ending with `@my-company.com`
@@ -309,7 +313,7 @@ export default function SignUpForm() {
 <TwoColumnLayout.Step title="Create Sign in form">
 <TwoColumnLayout.Block>
 
-Lets create a sign-in form and action in `app/auth/sign-in/page.tsx` and `app/auth/sign-in/actions.ts` files respectively.
+Create a sign-in form and action in `app/auth/sign-in/page.tsx` and `app/auth/sign-in/actions.ts`.
 
 - To sign-in the user we will use `auth.signIn.email()` with user's email address and password.
 
@@ -398,7 +402,9 @@ export default function SignInForm() {
 <TwoColumnLayout.Step title="Create home page">
 <TwoColumnLayout.Block>
 
-In last step, lets create the home page and display authenticated user status:
+Finally, create the home page and show whether the user is signed in.
+
+Reading the session reads cookies, so the part of the page that does it renders at request time inside `<Suspense>`. This works whether or not [Cache Components](https://nextjs.org/docs/app/getting-started/caching) is enabled. Current `create-next-app` projects enable it by default. Don't add `export const dynamic = 'force-dynamic'`: with Cache Components enabled, the build fails with `Route segment config "dynamic" is not compatible with nextConfig.cacheComponents`.
 
 </TwoColumnLayout.Block>
 <TwoColumnLayout.Block>
@@ -406,27 +412,24 @@ In last step, lets create the home page and display authenticated user status:
 ```typescript filename="app/page.tsx"
 import { auth } from '@/lib/auth/server';
 import Link from 'next/link';
+import { Suspense } from 'react';
 
-// Server components using auth methods must be rendered dynamically
-export const dynamic = 'force-dynamic';
-
-export default async function Home() {
+// Reading the session reads cookies, so it renders at request time inside Suspense
+async function SessionStatus() {
   const { data: session } = await auth.getSession();
 
   if (session?.user) {
     return (
-      <div className="flex flex-col gap-2 min-h-screen items-center justify-center bg-gray-900">
-        <h1 className="mb-4 text-4xl">
-          Logged in as <span className="font-bold underline">{session.user.name}</span>
-        </h1>
-      </div>
+      <h1 className="mb-4 text-4xl">
+        Logged in as <span className="font-bold underline">{session.user.name}</span>
+      </h1>
     );
   }
 
   return (
-    <div className="flex flex-col gap-2 min-h-screen items-center justify-center bg-gray-900">
+    <>
       <h1 className="mb-4 text-4xl font-bold">Not logged in</h1>
-      <div className="flex item-center gap-2">
+      <div className="flex items-center gap-2">
         <Link
           href="/auth/sign-up"
           className="inline-flex text-lg text-indigo-400 hover:underline"
@@ -440,6 +443,16 @@ export default async function Home() {
           Sign-in
         </Link>
       </div>
+    </>
+  );
+}
+
+export default function Home() {
+  return (
+    <div className="flex flex-col gap-2 min-h-screen items-center justify-center bg-gray-900">
+      <Suspense fallback={<p className="text-gray-400">Loading…</p>}>
+        <SessionStatus />
+      </Suspense>
     </div>
   );
 }
@@ -464,6 +477,31 @@ Safari blocks third-party cookies on non-HTTPS connections. Use `npm run dev -- 
 
 ```bash filename="Terminal"
 npm run dev
+```
+
+</TwoColumnLayout.Block>
+</TwoColumnLayout.Step>
+
+<TwoColumnLayout.Step title="Deploy to production">
+<TwoColumnLayout.Block>
+
+Managed Better Auth only accepts requests from [trusted domains](/docs/auth/guides/configure-domains). Localhost is pre-approved, which is why sign-up works locally. Before your first deploy, add your production origin to the branch that production uses. Otherwise sign-up and sign-in fail with `Invalid origin`.
+
+In your hosting provider, set `NEON_AUTH_BASE_URL` to the Auth URL of that same branch (each branch has its own) and set a new `NEON_AUTH_COOKIE_SECRET`. The commands here do this for a Vercel project linked with `vercel link`. Then work through the [production checklist](/docs/auth/production-checklist).
+
+</TwoColumnLayout.Block>
+<TwoColumnLayout.Block>
+
+```bash filename="Terminal"
+neon neon-auth domain add https://my-app.vercel.app --branch main
+
+neon env pull --branch main --env NEON_AUTH_BASE_URL --file .env.auth
+AUTH_URL="$(grep '^NEON_AUTH_BASE_URL=' .env.auth | cut -d= -f2- | tr -d '"')"
+rm .env.auth
+COOKIE_SECRET="$(openssl rand -base64 32)"
+
+printf '%s' "$AUTH_URL" | vercel env add NEON_AUTH_BASE_URL --environment production --yes
+printf '%s' "$COOKIE_SECRET" | vercel env add NEON_AUTH_COOKIE_SECRET --environment production --sensitive --yes
 ```
 
 </TwoColumnLayout.Block>

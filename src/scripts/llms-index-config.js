@@ -239,7 +239,8 @@ module.exports = {
     },
     {
       name: 'AI Gateway',
-      description: 'Access frontier and open-source models through a single API.',
+      description:
+        'Access frontier and open-source models through a single API. Requests need prepaid AI Gateway credits ($5 minimum, any plan), which a person buys in the Neon Console.',
       subIndex: {
         outputPath: 'public/docs/ai-gateway/llms.txt',
         url: 'https://neon.com/docs/ai-gateway/llms.txt',
