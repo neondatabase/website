@@ -7,7 +7,7 @@ summary: >-
   cache hit in the response usage, and how cache-read and cache-write tokens
   are priced.
 enableTableOfContents: true
-updatedOn: '2026-11-20T10:46:07.314Z'
+updatedOn: '2026-11-20T17:03:32.892Z'
 ---
 
 Prompt caching lets a model reuse work it already did for the start of a prompt. When a request begins with the same tokens as a recent request, such as a long system prompt, a reference document, tool definitions, or the earlier turns of a conversation, the provider reads that prefix from its cache instead of processing it again. Cached input tokens are billed at a lower cache-read rate and the response comes back faster.
@@ -30,12 +30,12 @@ Cache entries are short-lived. A prefix that isn't reused for a few minutes is u
 
 ## Caching by model
 
-| Lab                                          | How caching works                     | What you do                                                                           |
-| -------------------------------------------- | ------------------------------------- | ------------------------------------------------------------------------------------- |
-| Anthropic (Claude)                           | Explicit. Only marked prefixes cache. | Add `cache_control` to the prompt. See [Cache Claude prompts](#cache-claude-prompts). |
-| OpenAI (GPT)                                 | Automatic                             | Nothing                                                                               |
-| Google (Gemini)                              | Automatic                             | Nothing                                                                               |
-| DeepSeek, Zhipu AI (GLM), Moonshot AI (Kimi) | Automatic                             | Nothing                                                                               |
+| Lab                                | How caching works                     | What you do                                                                           |
+| ---------------------------------- | ------------------------------------- | ------------------------------------------------------------------------------------- |
+| Anthropic (Claude)                 | Explicit. Only marked prefixes cache. | Add `cache_control` to the prompt. See [Cache Claude prompts](#cache-claude-prompts). |
+| OpenAI (GPT)                       | Automatic                             | Nothing                                                                               |
+| Google (Gemini)                    | Automatic                             | Nothing                                                                               |
+| Zhipu AI (GLM), Moonshot AI (Kimi) | Automatic                             | Nothing                                                                               |
 
 To see a specific model's cache rates, check its `pricing` object in [`/v1/models`](#cache-pricing).
 
@@ -146,13 +146,13 @@ There's no cache-hit flag in the response. Check the cached token count in `usag
 
 The field name depends on the endpoint and, on chat completions, on the model:
 
-| Endpoint                                        | Models                                  | Cached tokens read                          | Cache tokens written                                                  |
-| ----------------------------------------------- | --------------------------------------- | ------------------------------------------- | --------------------------------------------------------------------- |
-| `/v1/chat/completions`                          | OpenAI, DeepSeek, Zhipu AI, Moonshot AI | `usage.prompt_tokens_details.cached_tokens` | `usage.prompt_tokens_details.cache_write_tokens` (some OpenAI models) |
-| `/v1/chat/completions`                          | Claude, Gemini                          | `usage.cache_read_input_tokens`             | `usage.cache_creation_input_tokens` (Claude)                          |
-| `/openai/v1/responses`                          | OpenAI                                  | `usage.input_tokens_details.cached_tokens`  | `usage.input_tokens_details.cache_write_tokens`                       |
-| `/anthropic/v1/messages`                        | Claude                                  | `usage.cache_read_input_tokens`             | `usage.cache_creation_input_tokens`                                   |
-| `/gemini/v1beta/models/{model}:generateContent` | Gemini                                  | `usageMetadata.cachedContentTokenCount`     | Not applicable                                                        |
+| Endpoint                                        | Models                        | Cached tokens read                          | Cache tokens written                                                  |
+| ----------------------------------------------- | ----------------------------- | ------------------------------------------- | --------------------------------------------------------------------- |
+| `/v1/chat/completions`                          | OpenAI, Zhipu AI, Moonshot AI | `usage.prompt_tokens_details.cached_tokens` | `usage.prompt_tokens_details.cache_write_tokens` (some OpenAI models) |
+| `/v1/chat/completions`                          | Claude, Gemini                | `usage.cache_read_input_tokens`             | `usage.cache_creation_input_tokens` (Claude)                          |
+| `/openai/v1/responses`                          | OpenAI                        | `usage.input_tokens_details.cached_tokens`  | `usage.input_tokens_details.cache_write_tokens`                       |
+| `/anthropic/v1/messages`                        | Claude                        | `usage.cache_read_input_tokens`             | `usage.cache_creation_input_tokens`                                   |
+| `/gemini/v1beta/models/{model}:generateContent` | Gemini                        | `usageMetadata.cachedContentTokenCount`     | Not applicable                                                        |
 
 On chat completions, read both places so the same code works for every model:
 
