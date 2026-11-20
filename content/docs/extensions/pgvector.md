@@ -13,7 +13,7 @@ summary: >-
 enableTableOfContents: true
 redirectFrom:
   - /docs/extensions/pg_embedding
-updatedOn: '2026-11-13T20:59:05.000Z'
+updatedOn: '2026-11-17T22:25:43.741Z'
 ---
 
 <LakebaseVectorTip />
@@ -684,7 +684,7 @@ LINE 1: SELECT '[4e38,1]'::vector;
 ## Resources
 
 - `pgvector` source code: [https://github.com/pgvector/pgvector](https://github.com/pgvector/pgvector)
-- [Vector search in Postgres](/guides/vector-search)
+- [Get started with Lakebase Search](/docs/ai/lakebase-search-get-started)
 - [Building semantic search with AI embeddings, Neon, and pgvector](/guides/ai-embeddings-postgres-search)
 
 <NeedHelp/>

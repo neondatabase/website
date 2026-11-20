@@ -346,12 +346,6 @@
                   slug: extensions/hstore
                 - title: intarray
                   slug: extensions/intarray
-                - title: lakebase_text
-                  slug: extensions/lakebase-text
-                - title: lakebase_tokenizer
-                  slug: extensions/lakebase-tokenizer
-                - title: lakebase_vector
-                  slug: extensions/lakebase-vector
                 - title: ltree
                   slug: extensions/ltree
                 - title: neon
@@ -453,14 +447,6 @@
                               slug: ai/ai-scale-with-neon
                         - title: Google Colab
                           slug: ai/ai-google-colab
-                    - title: Lakebase Search
-                      icon: sparks
-                      slug: ai/lakebase-search
-                      items:
-                        - title: Overview
-                          slug: ai/lakebase-search
-                        - title: Get started
-                          slug: ai/lakebase-search-get-started
             - title: Postgres guides
               slug: postgresql/introduction
               icon: book
@@ -1065,6 +1051,14 @@
           slug: ai/lakebase-search
         - title: Get started
           slug: ai/lakebase-search-get-started
+        - section: Extension reference
+          items:
+            - title: lakebase_vector
+              slug: extensions/lakebase-vector
+            - title: lakebase_text
+              slug: extensions/lakebase-text
+            - title: lakebase_tokenizer
+              slug: extensions/lakebase-tokenizer
 
 - nav: Platform
   title: Platform
@@ -1340,8 +1334,6 @@
               slug: ai/ai-database-versioning
             - title: Neon API Reference
               slug: reference/api
-            - title: Lakebase Search
-              slug: ai/lakebase-search
         - section: Agent frameworks
           icon: frameworks
           items:

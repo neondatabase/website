@@ -73,7 +73,6 @@ For a Postgres 18 source database, the checks can list `plpgsql` (and other exte
 
 Click the **Create new Neon project** button, specify your project settings including the **Postgres version** and **region**, and click **Create**. Choose the same Postgres version as your source database or a newer one. You can't import into an older version.
 
-
 ## Start import process
 
 Back in the assistant, click the **Start import process** button.
