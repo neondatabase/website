@@ -1,259 +1,187 @@
 ---
 title: Connect from Drizzle to Neon
-subtitle: Learn how to connect to Neon from Drizzle
+subtitle: Create a Node.js project, link it with neon link, and query Lakebase Postgres through Drizzle ORM with node-postgres
 summary: >-
-  Drizzle ORM connection guide for Lakebase Postgres on Neon walks through initializing a
-  TypeScript/Node.js project with supported drivers: Neon serverless HTTP, Neon
-  WebSocket, node-postgres, and postgres.js. Use this page when you need
-  type-safe queries plus Drizzle Kit migrations against a Lakebase Postgres database on Neon and want
-  to pick the right driver for serverless or long-running environments. The
-  guide also shows how to point Drizzle at different Neon branches per
-  environment by selecting a connection string based on NODE_ENV.
+  To connect a Drizzle app to Lakebase Postgres on Neon, run neon link to write a
+  pooled DATABASE_URL and a direct DATABASE_URL_UNPOOLED to your env file, then
+  configure Drizzle Kit, define a table, run a migration, and query it with Drizzle
+  ORM and node-postgres. Covers loading .env.local in drizzle.config.ts, why
+  migrations use the direct connection, an optional development branch, the agent
+  prompt, and Neon's other backend services.
 enableTableOfContents: true
-updatedOn: '2026-11-19T01:52:43.726Z'
+updatedOn: '2026-11-20T21:27:30.279Z'
 ---
 
-<Callout title="Realtime with Drizzle">
-See how to subscribe to live SQL queries with [Neon Realtime + Drizzle](/docs/realtime/examples/drizzle)
-</Callout>
-
-<CopyPrompt src="/prompts/drizzle-prompt.md" 
-description="Pre-built prompt for connecting Node/TypeScript applications to Neon using Drizzle ORM."/>
-
-<InfoBlock>
-<DocsList title="What you will learn:">
-<p>How to connect from Drizzle using different drivers</p>
-<p>How to configure Drizzle Kit for migrations</p>
-</DocsList>
-
-<DocsList title="Related resources" theme="docs">
-  <a href="https://orm.drizzle.team/docs/tutorials/drizzle-with-neon">Drizzle with Neon Postgres (Drizzle Docs)</a>
-  <a href="/docs/guides/drizzle-migrations">Schema migration with Drizzle ORM</a>
-  <a href="/docs/guides/nextjs#next-steps">Getting started with Neon (Next.js and Drizzle video)</a>
-</DocsList>
-
-</InfoBlock>
-
-Drizzle is a TypeScript ORM with type-safe queries. This guide shows you how to connect your application to a database on Neon using Drizzle ORM.
-
-To connect a TypeScript/Node.js project to Neon using Drizzle ORM, follow these steps:
+<PromptBlock src="/prompts/drizzle-prompt.md" labels={["Set up your agent and follow this guide", "Look up Drizzle's docs", "Connect your Drizzle app"]} />
 
 <Steps>
 
-## Create a TypeScript/Node.js project
+## Start from a Node.js project
 
-Create a new directory for your project and navigate into it:
+Use an existing Node.js 22.21 or later (or 24.10 or later) project that uses ES modules, since the examples use top-level `await`. To set one up, follow [Connect a Node.js application to Neon](/docs/guides/node), or the guide for your framework, such as [Hono](/docs/guides/hono).
 
-```bash
-mkdir my-drizzle-neon-project
-cd my-drizzle-neon-project
+## Add Neon's agent skills (optional)
+
+Run `npx neon@latest skills` from your project directory to add Neon's [agent skills](/docs/ai/agent-skills), which teach your AI coding agent how to use the Neon CLI, branches, and Neon's backend services. The command needs Node.js 22.20 or later. The agent prompt at the top of this page installs them, so skip this step if you used it:
+
+```bash filename="Terminal"
+npx neon@latest skills
 ```
 
-Initialize a new Node.js project with a `package.json` file:
-
-```bash
-npm init -y
-```
+To also connect the [Neon MCP Server](/docs/ai/neon-mcp-server), run `npx neon@latest mcp`.
 
 ## Create a Neon project
 
-If you do not have one already, create a Neon project.
+Create a Neon project in a region that runs every Neon backend service: `aws-us-east-2` (Ohio), `aws-us-east-1` (N. Virginia), `aws-eu-central-1` (Frankfurt), or `aws-ap-southeast-1` (Singapore). Postgres and Managed Better Auth run in every region; Object Storage, Neon Functions, the AI Gateway, and Realtime run in those four (see [product availability](/docs/introduction/regions#product-availability)). Skip this step if you already have a Neon project you want to use.
 
-1.  Navigate to the [Projects](https://console.neon.tech/app/projects) page in the Neon Console.
-2.  Click **New Project**.
-3.  Specify your project settings and click **Create Project**.
-
-## Get your connection string
-
-Find your database connection string by clicking the **Connect** button in the Console nav to open the **Connect to your branch** modal. Select a branch, a user, and the database you want to connect to. A connection string is constructed for you.
-![Connection details modal](/docs/connect/connect_to_branch_modal.png)
-The connection string includes the user name, password, hostname, and database name.
-
-Create a `.env` file in your project's root directory and add the connection string to it. Your `.env` file should look like this:
-
-```text shouldWrap
-# Pooled connection for your application
-DATABASE_URL="postgresql://[user]:[password]@[endpoint]-pooler.[region].aws.neon.tech/[dbname]?sslmode=require&channel_binding=require"
-
-# Unpooled connection for Drizzle Kit
-DATABASE_URL_UNPOOLED="postgresql://[user]:[password]@[endpoint].[region].aws.neon.tech/[dbname]?sslmode=require&channel_binding=require"
-```
-
-<Admonition type="note">
-Neon supports both direct and pooled connection strings, which you can find by clicking the **Connect** button in the Console nav. A pooled connection string (the hostname includes `-pooler`) routes through a PgBouncer connection pool, which suits your application at runtime. However, using a pooled connection string for migrations can lead to errors. Use a direct (non-pooled) connection when running Drizzle Kit migrations. If you only have the pooled string, remove `-pooler` from the hostname to get the direct one. For more information, see [Connection pooling](/docs/connect/connection-pooling) and [Schema migration with Drizzle ORM](/docs/guides/drizzle-migrations).
-</Admonition>
-
-## Install Drizzle and a driver
-
-Install Drizzle ORM, Drizzle Kit for migrations, `tsx` to run TypeScript, and a database driver. If you're not sure which driver to use, choose `node-postgres` for a Node.js server or script, and the Neon serverless HTTP driver for serverless and edge functions. For more detail, see [Choosing your connection method](/docs/connect/choose-connection).
-
-<Tabs labels={["Neon Serverless (HTTP)", "Neon WebSocket", "node-postgres", "postgres.js"]}>
+<Tabs labels={["Neon CLI", "API", "Console"]}>
 
 <TabItem>
 
-Use the Neon serverless HTTP driver for serverless environments (for example, Vercel, Netlify).
+Install the [Neon CLI](/docs/cli/install), sign in, and create the project:
 
-```bash
-npm install drizzle-orm @neondatabase/serverless dotenv
-npm install -D drizzle-kit tsx
+```bash filename="Terminal"
+npm i -g neon@latest
+neon login
+neon projects create --name my-app --region-id aws-us-east-2 --no-secrets
 ```
+
+`--region-id` sets the region. `--no-secrets` keeps the connection string out of the output, since the next step pulls it into your env file. Pass `--org-id` to choose the organization (find IDs with `neon orgs list`).
 
 </TabItem>
 
 <TabItem>
 
-Use the Neon WebSocket driver when you need sessions or interactive transactions in a serverless or edge environment.
+Create an [API key](https://console.neon.tech/app/settings/api-keys), export it, then create the project in your organization:
 
-```bash
-npm install drizzle-orm @neondatabase/serverless ws dotenv
-npm install -D drizzle-kit tsx @types/ws
+```bash filename="Terminal"
+export NEON_API_KEY=napi_...
+
+curl -X POST https://console.neon.tech/api/v2/projects \
+  -H "Authorization: Bearer $NEON_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{"project": {"name": "my-app", "region_id": "aws-us-east-2", "org_id": "<org-id>"}}'
 ```
+
+The response includes the project's connection string in `connection_uris[0].connection_uri`. See [Create a project with the API](/docs/manage/projects#create-a-project-with-the-api) for the other options.
 
 </TabItem>
 
 <TabItem>
 
-Use the `node-postgres` (`pg`) driver for Node.js servers and scripts that keep a TCP connection pool.
-
-```bash
-npm install drizzle-orm pg dotenv
-npm install -D drizzle-kit tsx @types/pg
-```
-
-`pg` 8.23 and later print a `SECURITY WARNING` when a connection string uses `sslmode=require`. To keep the current behavior and remove the warning, change `sslmode=require` to `sslmode=verify-full` in both connection strings.
-
-</TabItem>
-
-<TabItem>
-
-Use the `postgres.js` driver, another TCP driver for Node.js servers and scripts.
-
-```bash
-npm install drizzle-orm postgres dotenv
-npm install -D drizzle-kit tsx
-```
+Go to the [Projects](https://console.neon.tech/app/projects) page in the Neon Console, click **New Project**, and pick one of the regions above.
 
 </TabItem>
 
 </Tabs>
 
-## Configure Drizzle Kit
+## Connect your app to the project
 
-Drizzle Kit uses a configuration file to manage schema and migrations. Create a `drizzle.config.ts` file in your project root and add the following content. This configuration tells Drizzle where to find your schema and where to output migration files.
+Get two connection strings into an env file. The **pooled** connection goes through Neon's connection pooler, and its host name has `-pooler`. Your app uses it. The **direct** connection goes straight to Postgres, and Drizzle Kit's migrations use it (see [Why two connection strings?](#why-two-connection-strings)).
 
-```typescript
-import 'dotenv/config';
+<Tabs labels={["Neon CLI", "Without the CLI"]}>
+
+<TabItem>
+
+Before you link, check that `.gitignore` lists `.env.local`, so the connection strings stay out of git. Then, from your app's directory, link it to the Neon project (install the [Neon CLI](/docs/cli/install) and run `neon login` first if you haven't):
+
+```bash filename="Terminal"
+neon link
+```
+
+`neon link` prompts you to pick an organization and a project, or to create a new project. Then it:
+
+- writes a `.neon` file with the project context;
+- pins a branch (pass `--branch` to choose one);
+- pulls that branch's `DATABASE_URL` (pooled) and `DATABASE_URL_UNPOOLED` (direct) into `.env.local`, or into `.env` if your project already has one;
+- offers to create a [`neon.ts`](/docs/reference/neon-ts) file, which is optional.
+
+To skip the prompts, pass `-y` with `--org-id` and `--project-id`, or with `--org-id`, `--project-name`, and `--region-id` to create a project. Find IDs with `neon orgs list` and `neon projects list --org-id <org-id>`.
+
+</TabItem>
+
+<TabItem>
+
+Copy both connection strings from **Connect** in the Neon Console, or from the API response, and add them to a `.env.local` file in your project directory. For more information, see [Connect from any application](/docs/connect/connect-from-any-app).
+
+```shell filename=".env.local" shouldWrap
+DATABASE_URL="postgresql://[user]:[password]@[endpoint]-pooler.[region].aws.neon.tech/[dbname]?sslmode=require&channel_binding=require"
+DATABASE_URL_UNPOOLED="postgresql://[user]:[password]@[endpoint].[region].aws.neon.tech/[dbname]?sslmode=require&channel_binding=require"
+```
+
+The optional development branch step needs the Neon CLI, so run `neon link` in this directory first.
+
+</TabItem>
+
+</Tabs>
+
+## Work on a development branch (optional)
+
+Run `neon checkout dev --create` to develop on a branch of your database instead of the default branch, where production data usually lives. The default branch is `main` for projects created with the CLI or API, and `production` for projects created in the Console. A [branch](/docs/introduction/branching) starts from its parent's data and schema without copying them (copy-on-write: only the changes you make are stored), so you can change it freely:
+
+```bash filename="Terminal"
+neon checkout dev --create
+```
+
+This creates the `dev` branch, pins it in `.neon`, and pulls its `DATABASE_URL` and `DATABASE_URL_UNPOOLED` into the same env file, so your app and migrations now use the branch. To switch back, run `neon checkout main` (or `production`).
+
+## Install Drizzle and a driver
+
+Install Drizzle ORM, an ORM that maps your TypeScript code to database tables, plus `pg` (the node-postgres driver) and `dotenv`, which loads your env file. Then install Drizzle Kit, the migration CLI, `tsx`, which runs TypeScript, and the `pg` types:
+
+```bash filename="Terminal"
+npm install drizzle-orm@0.45 pg dotenv
+npm install -D drizzle-kit@0.31 tsx @types/pg
+```
+
+The `@0.45` and `@0.31` pins are the latest stable releases of Drizzle ORM and Drizzle Kit. Drizzle 1.0 is still in release candidates, and the pins keep `npm install` from moving to it once it's stable.
+
+This guide uses node-postgres because it's the driver for a Node.js server or script that keeps a pool of TCP connections. Drizzle Kit uses `pg` too when it's installed, so migrations need no second driver. For edge and serverless functions, see [Choosing your connection method](/docs/connect/choose-connection).
+
+Current `pg` versions print a `SECURITY WARNING` for `sslmode=require`. Change it to `sslmode=verify-full` in your env file to keep the same behavior without the warning. `neon link` writes `sslmode=require` again, so repeat the change after you run it.
+
+## Configure Drizzle
+
+Create `drizzle.config.ts` in the project root. Drizzle Kit reads it for the schema file, the migrations folder, and the direct database URL. Drizzle Kit loads `.env` on its own but not `.env.local`, so this file loads both with `dotenv`:
+
+```typescript filename="drizzle.config.ts"
+import { config } from 'dotenv';
 import { defineConfig } from 'drizzle-kit';
 
-if (!process.env.DATABASE_URL_UNPOOLED) {
-  throw new Error('DATABASE_URL_UNPOOLED is not set in the .env file');
-}
+// neon link writes .env.local, or .env if that file exists
+config({ path: ['.env.local', '.env'], quiet: true });
 
 export default defineConfig({
-  schema: './src/schema.ts', // Your schema file path
-  out: './drizzle', // Your migrations folder
+  schema: './src/schema.ts',
+  out: './drizzle',
   dialect: 'postgresql',
   dbCredentials: {
-    url: process.env.DATABASE_URL_UNPOOLED,
+    url: process.env.DATABASE_URL_UNPOOLED!,
   },
 });
 ```
 
-<Admonition type="tip" title="Loading a .env.local file">
-`import 'dotenv/config'` loads variables from a `.env` file. If you keep your connection string in `.env.local` (a common convention in Next.js and other frameworks), point dotenv at it explicitly instead:
+Create `src/db.ts` to make the one Drizzle client the app uses. It calls `dotenv` too, the same loader as `drizzle.config.ts`, so `DATABASE_URL` is set before the pool starts. Neon can [scale a compute to zero](/docs/introduction/scale-to-zero) after a period without queries, which closes its idle connections. The pool listener keeps that from stopping the app:
 
-```typescript
+```typescript filename="src/db.ts"
 import { config } from 'dotenv';
-config({ path: '.env.local' });
-
-import { defineConfig } from 'drizzle-kit';
-
-if (!process.env.DATABASE_URL_UNPOOLED) {
-  throw new Error('DATABASE_URL_UNPOOLED is not set in .env.local');
-}
-
-// ...rest of config unchanged
-```
-
-</Admonition>
-
-## Initialize the Drizzle client
-
-Create a file: `src/db.ts`, to initialize and export your Drizzle client. The setup varies depending on the driver you installed.
-
-<Tabs labels={["Neon Serverless (HTTP)", "Neon WebSocket", "node-postgres", "postgres.js"]}>
-
-<TabItem>
-
-```typescript
-import 'dotenv/config';
-import { drizzle } from 'drizzle-orm/neon-http';
-import { neon } from '@neondatabase/serverless';
-
-const sql = neon(process.env.DATABASE_URL!);
-export const db = drizzle(sql);
-```
-
-</TabItem>
-
-<TabItem>
-
-```typescript
-import 'dotenv/config';
-import { drizzle } from 'drizzle-orm/neon-serverless';
-import { Pool, neonConfig } from '@neondatabase/serverless';
-import ws from 'ws';
-
-// For Node.js environments older than v22, you must provide a WebSocket constructor
-neonConfig.webSocketConstructor = ws;
-
-// To work in edge environments (Cloudflare Workers, Vercel Edge, etc.), enable querying over fetch
-// neonConfig.poolQueryViaFetch = true
-
-const pool = new Pool({ connectionString: process.env.DATABASE_URL! });
-export const db = drizzle(pool);
-```
-
-</TabItem>
-
-<TabItem>
-
-```typescript
-import 'dotenv/config';
 import { drizzle } from 'drizzle-orm/node-postgres';
 import { Pool } from 'pg';
 
-const pool = new Pool({
-  connectionString: process.env.DATABASE_URL!,
-});
+config({ path: ['.env.local', '.env'], quiet: true });
+
+export const pool = new Pool({ connectionString: process.env.DATABASE_URL });
+
+pool.on('error', (error) => console.error('Postgres pool error:', error.message));
 
 export const db = drizzle(pool);
 ```
 
-</TabItem>
+## Define a model and run a migration
 
-<TabItem>
+Create `src/schema.ts`, which defines a `demo_users` table:
 
-```typescript
-import 'dotenv/config';
-import { drizzle } from 'drizzle-orm/postgres-js';
-import postgres from 'postgres';
-
-const client = postgres(process.env.DATABASE_URL!);
-export const db = drizzle(client);
-```
-
-</TabItem>
-
-</Tabs>
-
-## Create a schema
-
-Drizzle uses a schema-first approach, allowing you to define your database schema using TypeScript. This schema will be used to generate migrations and ensure type safety throughout your application.
-
-The following example defines a schema for a simple `demo_users` table. Create a `src/schema.ts` file and add the following content:
-
-```typescript
+```typescript filename="src/schema.ts"
 import { pgTable, serial, text } from 'drizzle-orm/pg-core';
 
 export const demoUsers = pgTable('demo_users', {
@@ -262,150 +190,69 @@ export const demoUsers = pgTable('demo_users', {
 });
 ```
 
-## Generate migrations
+Generate a SQL migration from the schema, then apply it:
 
-After defining your schema, you can generate migration files with Drizzle Kit. This will create the necessary SQL files to set up your database schema in Neon.
-
-```bash
+```bash filename="Terminal"
 npx drizzle-kit generate
-```
-
-You should see output similar to the following, indicating that migration files have been created:
-
-```bash
-$ npx drizzle-kit generate
-No config path provided, using default 'drizzle.config.ts'
-Reading config file '/home/user/drizzle/drizzle.config.ts'
-1 tables
-demo_users 2 columns 0 indexes 0 fks
-
-[✓] Your SQL migration file ➜ drizzle/0000_clever_purple_man.sql 🚀
-```
-
-You can find the generated SQL migration files in the `drizzle` directory specified in your `drizzle.config.ts`.
-
-## Apply migrations
-
-Apply the generated migrations (SQL files) to your Neon database using Drizzle Kit. This command will use the `drizzle.config.ts` file for database connection details and apply the migrations to your Neon database.
-
-```bash
 npx drizzle-kit migrate
 ```
 
-You should see output similar to the following, indicating that the migrations have been applied successfully:
+`generate` writes a SQL file to `drizzle/` and doesn't connect to your database. `migrate` applies the migrations that haven't run yet and records each one in the `drizzle.__drizzle_migrations` table, so run it again after each schema change. It ends with `migrations applied successfully!`.
 
-```bash
-$ npx drizzle-kit migrate
-No config path provided, using default 'drizzle.config.ts'
-Reading config file '/home/user/drizzle/drizzle.config.ts'
-Using 'pg' driver for database querying
-```
+## Query it
 
-The driver line depends on the driver you installed. With `@neondatabase/serverless`, Drizzle Kit also warns that it can only connect to Neon through a websocket. The migration still applies, so you can ignore that warning.
+Create `src/index.ts`, a script that inserts a row, reads the table back, and prints the Postgres version:
 
-You can verify that the `demo_users` table has been created in your Neon database by checking the **Tables** section in the Neon Console.
-
-## Query the database
-
-Create a file: `src/index.ts`, to interact with your database using the Drizzle client. Here's an example of inserting a new user and querying all users from the `demo_users` table:
-
-<Tabs labels={["Neon Serverless (HTTP)", "Neon WebSocket / node-postgres / postgres.js"]}>
-
-<TabItem>
-
-```typescript shouldWrap
-import { db } from './db';
+```typescript filename="src/index.ts"
+import { sql } from 'drizzle-orm';
+import { db, pool } from './db';
 import { demoUsers } from './schema';
 
-async function main() {
-  try {
-    await db.insert(demoUsers).values({ name: 'John Doe' });
-    const result = await db.select().from(demoUsers);
-    console.log('Successfully queried the database:', result);
-  } catch (error) {
-    console.error('Error querying the database:', error);
-  }
-}
+try {
+  await db.insert(demoUsers).values({ name: 'Ada' });
+  const rows = await db.select().from(demoUsers);
+  console.log('demo_users:', rows);
 
-main();
+  const version = await db.execute<{ version: string }>(sql`SELECT version()`);
+  console.log('Postgres version:', version.rows[0].version);
+} finally {
+  await pool.end();
+}
 ```
 
-</TabItem>
+Run the script:
 
-<TabItem>
-
-```typescript shouldWrap
-import { db } from './db';
-import { demoUsers } from './schema';
-
-async function main() {
-  try {
-    await db.insert(demoUsers).values({ name: 'John Doe' });
-    const result = await db.select().from(demoUsers);
-    console.log('Successfully queried the database:', result);
-  } catch (error) {
-    console.error('Error querying the database:', error);
-  } finally {
-    // Close the database connection to ensure proper shutdown for Neon WebSocket, node-postgres, and postgres.js drivers
-    await db.$client.end();
-  }
-}
-
-main();
-```
-
-</TabItem>
-
-</Tabs>
-
-Run the script using `tsx`:
-
-```bash
+```bash filename="Terminal"
 npx tsx src/index.ts
 ```
 
-You should see output similar to the following, indicating that the user was inserted and queried successfully:
-
-```bash
-Successfully queried the database: [ { id: 1, name: 'John Doe' } ]
-```
+The output lists the rows in `demo_users` and the Postgres version. Each run adds one row.
 
 </Steps>
 
-## Using Neon branches with Drizzle
+## Why two connection strings?
 
-You can point Drizzle at different Neon [branches](/docs/introduction/branching) per environment by selecting the connection string based on `NODE_ENV` (or any other environment variable):
+Your app uses the pooled `DATABASE_URL`, which goes through PgBouncer, the connection pooler Neon runs. Migrations use the direct `DATABASE_URL_UNPOOLED`, because PgBouncer runs in [transaction mode](/docs/connect/connection-pooling#connection-pooling-in-transaction-mode). Drizzle Kit's migrations follow the same rule, and `drizzle.config.ts` reads the direct connection. For when to use each, see [Connection pooling](/docs/connect/connection-pooling).
 
-```typescript
-import { drizzle } from 'drizzle-orm/neon-http';
-import { neon } from '@neondatabase/serverless';
+## Troubleshooting
 
-const getBranchUrl = () => {
-  const env = process.env.NODE_ENV;
-  if (env === 'development') return process.env.DEV_DATABASE_URL;
-  if (env === 'test') return process.env.TEST_DATABASE_URL;
-  return process.env.DATABASE_URL;
-};
+<DefinitionList>
 
-const sql = neon(getBranchUrl()!);
-export const db = drizzle({ client: sql });
-```
+`Please provide required params for Postgres driver: url: undefined`
+: `drizzle-kit` ran without `DATABASE_URL_UNPOOLED`. Check that your env file sets it (`neon link` writes it), and that `drizzle.config.ts` loads the file.
 
-Each branch has its own connection string, available in the Neon Console or via the CLI (`neon connection-string <branch-id-or-name> --project-id <project-id>`).
+`DrizzleQueryError: Failed query` with `ECONNREFUSED 127.0.0.1:5432`
+: The app ran without `DATABASE_URL`, so the driver tried to connect to a local Postgres. Check that `src/db.ts` loads the env file and that the file sets `DATABASE_URL`.
 
-## Resources
+`relation "demo_users" does not exist`
+: The migration hasn't run on the branch your `DATABASE_URL` points at. Run `npx drizzle-kit migrate`.
 
-- [Get Started with Drizzle and Neon](https://orm.drizzle.team/docs/get-started/neon-new)
-- [Drizzle with Neon Postgres](https://orm.drizzle.team/docs/tutorials/drizzle-with-neon)
-- [Schema migration with Drizzle ORM and Lakebase Postgres on Neon](/docs/guides/drizzle-migrations)
-- [Todo App with Neon Postgres and Drizzle ORM](https://orm.drizzle.team/docs/tutorials/drizzle-nextjs-neon)
+</DefinitionList>
 
 ## Next steps
 
-- [Set up Managed Better Auth](/docs/auth/overview): Add managed authentication that branches with your database
-- [Add Object Storage](/docs/storage/overview): S3-compatible file storage that branches with your database
-- [Deploy a Function](/docs/compute/functions/overview): Run backend compute next to your database, no separate hosting needed
-- [Call an LLM with AI Gateway](/docs/ai-gateway/overview): Access foundation models from Anthropic, OpenAI, Google, and more with one credential
-- [Realtime](/docs/realtime/examples/drizzle): Build realtime Drizzle apps on Neon using your existing schema and queries
+- **Deploy:** set `DATABASE_URL` and `DATABASE_URL_UNPOOLED` in your host's environment, not in a file. Run `npx drizzle-kit migrate` once per deploy, not from each instance, before you start the app.
+- [Drizzle with Neon](https://orm.drizzle.team/docs/get-started/neon-existing): Drizzle's guide for an existing Neon project, with schemas, queries, and migrations.
+- **Add more of your backend:** [Managed Better Auth](/docs/auth/overview) for sign-in, [Object Storage](/docs/storage/overview) for files, [Neon Functions](/docs/compute/functions/overview) for long-running work, [AI Gateway](/docs/ai-gateway/overview) for LLM calls, and [Realtime](/docs/realtime/examples/drizzle) for live updates from SQL queries with your Drizzle schema. Each one branches with your database.
 
 <NeedHelp/>
