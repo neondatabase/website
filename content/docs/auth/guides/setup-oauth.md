@@ -15,7 +15,7 @@ summary: >-
 enableTableOfContents: true
 redirectFrom:
   - /docs/auth/guides/oauth
-updatedOn: '2026-11-13T23:21:42.611Z'
+updatedOn: '2026-11-20T13:31:17.623Z'
 ---
 
 OAuth lets users sign in with their Google, GitHub, Vercel, Microsoft, Apple, or Discord account. Managed Better Auth handles the OAuth flow and creates a session after authorization.
@@ -317,7 +317,7 @@ Managed Better Auth will use your configured credentials for that branch.
 
 Each branch has its own **`NEON_AUTH_BASE_URL`**. Register **`{NEON_AUTH_BASE_URL}/callback/google`** (and other providers you use) for every branch you test against (for example preview databases).
 
-For preview deployments, trusted domains support **wildcard patterns** (for example `https://*.my-app-preview.vercel.app`), so you can cover many preview hosts without listing each one. See [Configure trusted domains](/docs/auth/guides/configure-domains), [Branching authentication](/docs/auth/branching-authentication), and the API for [trusted domains](/docs/reference/api/auth/add-branch-neon-auth-trusted-domain).
+For preview deployments, trusted domains support **wildcard patterns** on the leftmost label (for example `https://*.preview.example.com`), so you can cover many preview hosts without listing each one. Vercel's generated `*.vercel.app` preview URLs can't be matched safely by a wildcard. See [Wildcard domains for previews](/docs/auth/guides/configure-domains#wildcard-domains-for-previews). See [Configure trusted domains](/docs/auth/guides/configure-domains), [Branching authentication](/docs/auth/branching-authentication), and the API for [trusted domains](/docs/reference/api/auth/add-branch-neon-auth-trusted-domain).
 
 ## Microsoft setup
 

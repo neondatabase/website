@@ -15,7 +15,7 @@ redirectFrom:
   - /docs/guides/vercel
   - /docs/guides/vercel-postgres-transition-guide
 enableTableOfContents: true
-updatedOn: '2026-11-20T12:32:58.582Z'
+updatedOn: '2026-11-20T13:31:17.623Z'
 ---
 
 ## Overview
@@ -43,7 +43,7 @@ Set up Neon with the Neon CLI (for example, `neon init`) or a coding agent? Then
 | **Branch cleanup**                              | Automatic (deployment-based)                                                                          | Automatic (Git-branch-based)                                                                                 | N/A                                             |
 | **Implementation type**                         | [Native Integration](https://vercel.com/docs/integrations/install-an-integration/product-integration) | [Connectable Account](https://vercel.com/docs/integrations/install-an-integration/add-a-connectable-account) | N/A                                             |
 
-You can use Object Storage, Functions, AI Gateway, and the Data API with a project created or connected through either integration. The integrations don't set these services' environment variables, so turn on the service for your project in Neon and add its variables to your Vercel project. Preview deployments don't get per-branch values for these services automatically, the way they do for Postgres, Managed Better Auth, and Realtime.
+You can use Object Storage, Functions, AI Gateway, and the Data API with a project created or connected through either integration. The integrations don't set these services' environment variables, so turn on the service for your project in Neon and add its variables to your Vercel project. See Deploy to Vercel for [Object Storage](/docs/storage/get-started#deploy-to-vercel) and [AI Gateway](/docs/ai-gateway/get-started#deploy-to-vercel). Preview deployments don't get per-branch values for these services automatically, the way they do for Postgres, Managed Better Auth, and Realtime.
 
 <Admonition type="note" title="Branch cleanup timing">
 Branch cleanup behavior differs between the two integrations. Vercel-Managed cleanup depends on Vercel's deployment retention policy, which can delay branch deletion by months. Neon-Managed cleanup is triggered by Git branch deletion. See [Managing Vercel preview branch cleanup](/docs/guides/vercel-branch-cleanup) for details, workarounds, and recommendations.

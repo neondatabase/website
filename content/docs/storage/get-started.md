@@ -8,7 +8,7 @@ summary: >-
 enableTableOfContents: true
 redirectFrom:
   - /docs/storage/quickstart
-updatedOn: '2026-11-04T23:29:42.213Z'
+updatedOn: '2026-11-20T13:31:17.623Z'
 ---
 
 To set up Neon Object Storage with an AI coding assistant, install the Neon Platform (`neon`) and Neon Object Storage skills with the [Neon CLI](/docs/cli):
@@ -53,6 +53,10 @@ neon deploy          # provisions buckets and writes AWS_* vars to .env (or .env
 ```
 
 After deploy, your env file (`.env` if you have one, otherwise `.env.local`) contains `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`, `AWS_ENDPOINT_URL_S3`, and `AWS_REGION`. Skip to [Configure your client](#configure-your-client) below.
+
+<Admonition type="note" title="Using AWS services in the same app?">
+These are the standard AWS variable names, so every AWS SDK client in the app reads them, not only your storage client. If the app also calls AWS itself (for example, Amazon SES or your own S3 buckets), those calls would sign with your Neon credential. In that case, store the Neon values under your own names and pass them to the storage client explicitly: the Files SDK `neon()` adapter accepts `endpoint`, `region`, `accessKeyId`, and `secretAccessKey`.
+</Admonition>
 
 Already deployed? Pull the vars again with:
 
@@ -306,6 +310,32 @@ aws s3 cp s3://my-bucket/hello.txt ./downloaded.txt \
 </CodeTabs>
 
 </Steps>
+
+## Deploy to Vercel
+
+`neon deploy` and `neon env pull` write storage variables to your local env file only, and the [Vercel integrations](/docs/guides/vercel-overview) don't set them. Give your Vercel project its own credential, so you can revoke it without affecting your local setup. Run these commands in a project directory linked to Neon and to Vercel (`vercel link`). They use [jq](https://jqlang.org) to read the credential:
+
+```bash
+CREDENTIAL="$(neon credentials create --branch main --name vercel-production \
+  --scope storage:read --scope storage:write -o json)"
+KEY_ID="$(printf '%s' "$CREDENTIAL" | jq -r .token_id)"
+SECRET="$(printf '%s' "$CREDENTIAL" | jq -r .s3_secret_access_key)"
+
+# The credential doesn't include the endpoint or region, so pull them separately
+neon env pull --branch main --env AWS_ENDPOINT_URL_S3,AWS_REGION --file .env.storage
+ENDPOINT="$(grep '^AWS_ENDPOINT_URL_S3=' .env.storage | cut -d= -f2- | tr -d '"')"
+REGION="$(grep '^AWS_REGION=' .env.storage | cut -d= -f2- | tr -d '"')"
+rm .env.storage
+
+printf '%s' "$KEY_ID" | vercel env add AWS_ACCESS_KEY_ID --environment production --sensitive --yes
+printf '%s' "$SECRET" | vercel env add AWS_SECRET_ACCESS_KEY --environment production --sensitive --yes
+printf '%s' "$ENDPOINT" | vercel env add AWS_ENDPOINT_URL_S3 --environment production --yes
+printf '%s' "$REGION" | vercel env add AWS_REGION --environment production --yes
+```
+
+Replace `main` with the branch your production data lives on, then redeploy. Run each block once: every `neon credentials create` issues a new credential.
+
+Buckets are branch-scoped, so preview deployments that should use a different branch need their own values. Repeat the commands with that branch and `--environment preview`. Each preview deployment doesn't get its own branch's storage automatically.
 
 ## Next steps
 

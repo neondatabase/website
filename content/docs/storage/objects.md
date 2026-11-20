@@ -6,7 +6,7 @@ summary: >-
   or the AWS CLI. Supports single-part and multipart uploads, range requests,
   batch deletes, and presigned URLs for browser-side access.
 enableTableOfContents: true
-updatedOn: '2026-11-10T21:39:54.000Z'
+updatedOn: '2026-11-20T13:31:17.623Z'
 ---
 
 Objects in Neon Object Storage are files stored inside a bucket. Every object has a key (its path within the bucket), a body, a content type, and optional metadata. Objects branch with your database. Each branch inherits the parent's objects at the moment of forking without copying any data.
@@ -341,6 +341,8 @@ curl -X DELETE \
 Generate a time-limited URL that allows a browser or unauthenticated client to upload or download a specific object, without exposing your credentials.
 
 The Files SDK and S3 clients sign presigned URLs locally with their credential, so there's no role check when you create one that way. A presigned URL works until it expires, for up to 7 days, even if the person who created it loses access to the project.
+
+Browsers can use presigned URLs on a bucket that Neon created without any CORS setup, since its default CORS rule allows every origin. To limit it to your app's origins, or to add CORS to a bucket created with the S3 API, see [CORS](/docs/storage/s3-compatibility#cors).
 
 **Presigned GET (download):**
 
