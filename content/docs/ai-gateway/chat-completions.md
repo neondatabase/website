@@ -6,7 +6,7 @@ summary: >-
   Gateway. It is OpenAI Chat Completions-compatible, works with any model in
   the catalog, and lets you switch providers without changing your SDK code.
 enableTableOfContents: true
-updatedOn: '2026-11-18T00:17:54.883Z'
+updatedOn: '2026-11-18T13:35:44.977Z'
 ---
 
 The chat completions endpoint is the recommended way to use Neon AI Gateway. It's fully compatible with the [OpenAI Chat Completions API](https://platform.openai.com/docs/api-reference/chat) and works with every model in the [AI Gateway catalog](/docs/ai-gateway/models). Switch models by changing a single field.
@@ -197,7 +197,7 @@ When the upstream provider rate-limits a request, AI Gateway forwards the releva
 | `429 Too Many Requests`        | Upstream rate limited  | Upstream provider rate limit. Check the `Retry-After` and `X-Ratelimit-*` headers.                                                           |
 | `502 Bad Gateway`              | Upstream error         | Temporary issue with the upstream workspace. Retry the request.                                                                              |
 
-Error responses are a JSON object with an `error.message` field:
+Errors the gateway generates itself, such as an unknown model, use an OpenAI-style `error.message` object:
 
 ```json
 {
@@ -206,6 +206,8 @@ Error responses are a JSON object with an `error.message` field:
   }
 }
 ```
+
+Quota blocks and upstream errors use a flat object with `error_code` and `message` fields instead. See [Error response formats](/docs/ai-gateway/troubleshooting#error-response-formats).
 
 ## Next steps
 
