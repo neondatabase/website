@@ -11,7 +11,7 @@ summary: >-
   pg_dump must use an unpooled connection string. A coding agent with a
   terminal can run the upgrade for you.
 enableTableOfContents: true
-updatedOn: '2026-11-20T11:55:49.607Z'
+updatedOn: '2026-11-20T11:59:01.597Z'
 ---
 
 Each Neon project runs one major Postgres version, the one you chose when you created it. Neon applies minor version updates for you (see [Postgres version support](/docs/postgresql/postgres-version-support)). To move to a newer major version, such as from Postgres 17 to Postgres 19, create a new project on that version and migrate your data to it.
@@ -80,12 +80,10 @@ To get the new connection details, click **Connect** in the Console nav to open 
 
 ## Upgrade with an AI agent
 
-A coding agent with a terminal, such as Claude Code, Cursor, or Codex, can run the upgrade for you. The prompt below starts by [setting up Neon for your agent](/docs/ai/agent-setup), which installs the Neon CLI, signs you in, and adds the Neon skills and MCP Server. The agent also needs the `pg_dump` and `pg_restore` programs for the new Postgres version.
+A coding agent with a terminal, such as Claude Code, Cursor, or Codex, can run the upgrade for you. Copy this prompt into your agent. It [sets up Neon for your agent](/docs/ai/agent-setup), checks your extensions, copies your data to a new project, and compares row counts before it hands back.
 
-```text shouldWrap
-Set me up for Neon. Fetch https://neon.com/prompts/agent-setup.md and follow it. Then upgrade my Neon project <project_id> to Postgres 19: create a new Neon project on Postgres 19 in the same region, and create the same roles in it. Copy each database to it with pg_dump and pg_restore over unpooled connection strings, using the Postgres 19 versions of those programs. Don't change the current project. When the restore finishes, compare row counts for every table in both projects and give me the new project's connection string.
-```
+<AgentPrompt title="Upgrade with your agent" src="/prompts/postgres-upgrade.md" buttonText="Copy prompt" />
 
-Review the result before you switch your applications over. Chat-only assistants that can't run `pg_dump` can create the project, but they can't copy your data.
+The agent needs the `pg_dump` and `pg_restore` programs for the new Postgres version, and tells you if they're missing. Review the results before you switch your applications over.
 
 <NeedHelp/>
