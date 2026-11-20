@@ -98,7 +98,6 @@ export const STATIC_MD_PATHS = [
   '/prompts/object-storage-landing.md',
   '/prompts/phoenix-prompt.md',
   '/prompts/postgres-landing.md',
-  '/prompts/postgres-upgrade.md',
   '/prompts/prisma-prompt.md',
   '/prompts/python-prompt.md',
   '/prompts/quarkus-jdbc-prompt.md',

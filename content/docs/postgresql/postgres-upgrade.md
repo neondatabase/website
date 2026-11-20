@@ -8,13 +8,12 @@ summary: >-
   Assistant for smaller databases, pg_dump/pg_restore for larger ones, or
   logical replication for near-zero downtime on active databases. Note that
   pg_upgrade is not supported, minor version upgrades are automatic, and
-  pg_dump must use an unpooled connection string. A coding agent with a
-  terminal can run the upgrade for you.
+  pg_dump must use an unpooled connection string.
 enableTableOfContents: true
-updatedOn: '2026-11-20T13:27:38.798Z'
+updatedOn: '2026-11-20T13:53:03.601Z'
 ---
 
-Each Neon project runs one major Postgres version, the one you chose when you created it. Neon applies minor version updates for you (see [Postgres version support](/docs/postgresql/postgres-version-support)). To move to a newer major version, such as from Postgres 17 to Postgres 19, create a new project on that version and migrate your data to it. You can do it yourself or [have a coding agent do it](#upgrade-with-an-ai-agent).
+Each Neon project runs one major Postgres version, the one you chose when you created it. Neon applies minor version updates for you (see [Postgres version support](/docs/postgresql/postgres-version-support)). To move to a newer major version, such as from Postgres 17 to Postgres 19, create a new project on that version and migrate your data to it.
 
 To check your current version, run this in the [Neon SQL Editor](/docs/get-started/query-with-neon-sql-editor) or any SQL client:
 
@@ -87,15 +86,5 @@ neon connection-string --project-id <new_project_id>
 See [Connect from any application](/docs/connect/connect-from-any-app).
 
 </Steps>
-
-## Upgrade with an AI agent
-
-A coding agent with a terminal, such as Claude Code, Cursor, or Codex, can run the upgrade for you. Copy this prompt into your agent. It [sets up Neon for your agent](/docs/ai/agent-setup), checks your project, copies your data to a new project with [`pg_dump` and `pg_restore`](/docs/import/migrate-from-postgres), and compares row counts before it hands back. Your agent needs `pg_dump` and `pg_restore` at the new Postgres version or newer, or Docker to run them.
-
-<Admonition type="important" title="Before you run it">
-The agent copies only your Postgres data. It doesn't change your current project, and it stops to check with you if your project also has other branches or uses Neon services such as Functions, Object Storage, or Managed Better Auth, or if your database is over 10 GB. Large copies can take hours and count toward [network transfer](/docs/introduction/network-transfer). Review the results before you switch your applications over.
-</Admonition>
-
-<AgentPrompt title="Upgrade with your agent" src="/prompts/postgres-upgrade.md" buttonText="Copy prompt" />
 
 <NeedHelp/>
