@@ -25,7 +25,7 @@ redirectFrom:
   - /docs/introduction/pricing-estimation-guide
   - /docs/introduction/billing-sample
   - /docs/introduction/pricing
-updatedOn: '2026-11-12T19:10:00.000Z'
+updatedOn: '2026-11-18T23:49:34.327Z'
 ---
 
 Neon offers plans to support you at every stage, from your first prototype to production at scale.
@@ -636,7 +636,7 @@ On the Free plan, when you run out of CU-hours, your compute is suspended until 
 <FaqItem question="How do I restore or export a Free plan project that hit its limits?">
 It depends on which limit you hit. If you hit the storage limit, your compute stays available. You can still query the project or export it with [pg_dump](/docs/import/migrate-from-postgres), but writes fail until you free space or upgrade.
 
-If you ran out of CU-hours or public network transfer, the compute is suspended until the next billing period, and connections, including `pg_dump`, fail with SQLSTATE `53000`. To restore access sooner, upgrade the organization that contains the project to Launch (**Billing** > **Change plan** in the Neon Console). If you want to return to Free later, you can downgrade, and the plan change resets the Free plan's monthly compute and network transfer allowances. Launch has no minimum monthly fee and invoices under $0.50 are not collected, so the round trip usually costs nothing. If you plan to export your data, do it before you downgrade, because `pg_dump` counts toward network transfer. If you ran out of network transfer, check what's using it so the project doesn't hit the limit again. See [Reduce network transfer costs](/docs/introduction/network-transfer).
+If you ran out of CU-hours or public network transfer, the compute is suspended until the next billing period, and connections, including `pg_dump`, fail with SQLSTATE `53000`. To restore access sooner, upgrade the organization that contains the project to Launch (**Billing** > **Change plan** in the Neon Console). Launch has no minimum monthly fee and invoices under $0.50 are not collected, so if you only restore access or export your data and then downgrade, the round trip usually costs nothing. When you downgrade back to Free, the plan change resets the Free plan's monthly compute and network transfer allowances. If you plan to export your data, do it before you downgrade, because `pg_dump` counts toward network transfer. If you ran out of network transfer, check what's using it so the project doesn't hit the limit again. See [Reduce network transfer costs](/docs/introduction/network-transfer).
 
 You can load a dump into a new project in another Free organization, as long as the data fits within the Free plan's 1 GB per-project storage limit. You can't use [project transfer](/docs/manage/orgs-project-transfer) to move a project from a Launch organization to a Free one, because the destination organization must be on the same plan or higher.
 </FaqItem>
