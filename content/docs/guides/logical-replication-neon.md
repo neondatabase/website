@@ -11,7 +11,7 @@ summary: >-
   `pgoutput` and `wal2json`.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2026-10-09T10:14:56.146Z'
+updatedOn: '2026-11-09T21:14:35.000Z'
 ---
 
 This topic outlines information about logical replication specific to Neon, including important notices.

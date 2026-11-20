@@ -11,7 +11,7 @@ summary: >-
   configurable, requests are rate-limited per IP, and an OTP is invalidated
   after too many incorrect attempts.
 enableTableOfContents: true
-updatedOn: '2026-10-09T09:36:23.504Z'
+updatedOn: '2026-10-30T15:07:38.000Z'
 ---
 
 Managed Better Auth is built on [Better Auth](https://www.better-auth.com/) and supports the [Phone Number](https://www.better-auth.com/docs/plugins/phone-number) plugin through the Neon SDK.

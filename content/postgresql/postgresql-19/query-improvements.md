@@ -3,7 +3,7 @@ title: 'PostgreSQL 19 Query Writing Improvements'
 page_title: 'PostgreSQL 19 Query Improvements - IGNORE NULLS and Memoize Estimates'
 page_description: 'Learn about PostgreSQL 19 query writing improvements including IGNORE NULLS for window functions and Memoize plan estimates in EXPLAIN.'
 ogImage: ''
-updatedOn: '2026-06-04T14:03:00.799Z'
+updatedOn: '2026-07-28T21:18:41.000Z'
 enableTableOfContents: true
 previousLink:
   title: 'PostgreSQL 19 JSON COPY TO'

@@ -9,7 +9,7 @@ summary: >-
   Useful when migrating from Heroku Postgres or hosting a new Node app on
   Heroku with Neon.
 enableTableOfContents: true
-updatedOn: '2026-10-28T11:11:18.780Z'
+updatedOn: '2026-11-16T20:51:17.000Z'
 ---
 
 [Heroku](https://heroku.com) is a popular platform as a service (PaaS) that enables developers to build, run, and operate applications entirely in the cloud. It simplifies the deployment process.

@@ -12,7 +12,7 @@ summary: >-
   Stale branches count toward plan branch limits and incur storage costs even
   after being auto-archived.
 enableTableOfContents: true
-updatedOn: '2026-09-25T09:36:22.797Z'
+updatedOn: '2026-11-18T20:38:42.000Z'
 ---
 
 <InfoBlock>

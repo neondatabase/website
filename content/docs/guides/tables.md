@@ -9,7 +9,7 @@ summary: >-
   SQL Editor when you want point-and-click record editing, column filtering,
   bulk deletion, or JSON/CSV export.
 enableTableOfContents: true
-updatedOn: '2026-09-17T16:33:54.884Z'
+updatedOn: '2026-11-09T20:08:41.000Z'
 ---
 
 The **Tables** page in the Neon Console offers a visual interface for managing data and schemas. You can add, update, and delete records, filter data, modify columns, drop or truncate tables, export data in both .json and .csv formats, and manage schemas, tables, views, and enums.

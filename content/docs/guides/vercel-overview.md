@@ -15,7 +15,7 @@ redirectFrom:
   - /docs/guides/vercel
   - /docs/guides/vercel-postgres-transition-guide
 enableTableOfContents: true
-updatedOn: '2026-10-08T10:34:22.890Z'
+updatedOn: '2026-11-18T21:57:37.000Z'
 ---
 
 ## Overview

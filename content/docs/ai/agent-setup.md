@@ -11,6 +11,7 @@ summary: >-
 redirectFrom:
   - /docs/ai/ai-agents-tools
   - /docs/get-started/with-an-agent
+updatedOn: '2026-11-05T21:35:15.000Z'
 ---
 
 <AgentPrompt title="Set up with your agent" src="/prompts/agent-setup-landing.md" buttonText="Copy prompt" />

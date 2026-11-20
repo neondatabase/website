@@ -12,7 +12,7 @@ summary: >-
   Drizzle-kit migration commands, ClerkProvider setup, and Next.js server
   actions backed by the Neon serverless driver.
 enableTableOfContents: true
-updatedOn: '2026-09-23T21:49:37.670Z'
+updatedOn: '2026-11-16T20:41:36.000Z'
 ---
 
 <Admonition type="tip" title="Building on Neon?">

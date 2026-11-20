@@ -7,6 +7,7 @@ summary: >-
   system disclosures describe how the Neon Platform meets the AICPA trust
   services criteria for security, availability, and confidentiality.
 enableTableOfContents: true
+updatedOn: '2026-11-09T17:28:25.000Z'
 ---
 
 The SOC 3 report is a public-facing summary of Neon's SOC 2 examination. It provides assurance to external parties that the Neon Platform meets the American Institute of Certified Public Accountants (AICPA) trust services criteria for security, availability, and confidentiality, without disclosing the sensitive control details found in a full SOC 2 report.

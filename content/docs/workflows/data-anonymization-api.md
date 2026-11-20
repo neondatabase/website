@@ -11,7 +11,7 @@ summary: >-
   one. Anonymized branches cannot be restored or have their read-write
   endpoint deleted.
 enableTableOfContents: true
-updatedOn: '2026-07-15T00:58:07.525Z'
+updatedOn: '2026-11-10T14:15:46.000Z'
 ---
 
 This page provides detailed API documentation for data anonymization. For conceptual overview and usage instructions, see [Data Anonymization](/docs/workflows/data-anonymization).

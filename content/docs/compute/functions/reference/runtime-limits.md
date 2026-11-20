@@ -11,7 +11,7 @@ redirectFrom:
   - /docs/compute/functions/limits
   - /docs/functions/runtime-limits
   - /docs/functions/limits
-updatedOn: '2026-09-16T15:38:57.808Z'
+updatedOn: '2026-11-11T12:31:00.000Z'
 ---
 
 Neon Functions run on Node.js 24.

@@ -6,7 +6,7 @@ summary: >-
   Auth JWT against the injected JWKS, check an API key, and add CORS when the
   browser calls the function directly.
 enableTableOfContents: true
-updatedOn: '2026-11-05T01:14:02.509Z'
+updatedOn: '2026-11-18T08:58:28.545Z'
 ---
 
 A Neon Function has a public HTTPS URL, so anyone who knows it can reach it. There's no platform gate in front of your handler. Authenticate the caller yourself, at the top of the handler, and reject anything that doesn't check out.
@@ -35,7 +35,7 @@ import { createRemoteJWKSet, jwtVerify } from 'jose';
 const jwks = createRemoteJWKSet(new URL(process.env.NEON_AUTH_JWKS_URL!));
 const issuer = new URL(process.env.NEON_AUTH_BASE_URL!).origin;
 
-export default {
+const handler = {
   async fetch(request: Request) {
     const auth = request.headers.get('authorization');
     if (!auth?.toLowerCase().startsWith('bearer ')) {
@@ -51,6 +51,8 @@ export default {
     }
   },
 };
+
+export default handler;
 ```
 
 Managed Better Auth issues these tokens for your signed-in users; they're EdDSA-signed and short-lived (15 minutes), so see the [JWT plugin](/docs/auth/guides/plugins/jwt) for retrieving and refreshing them. The function only verifies. If you sign your own tokens instead (with a signer like NextAuth or [Better Auth](https://better-auth.com)'s `jwt` plugin), verify against your app's JWKS and issuer rather than the Managed Better Auth ones.
@@ -73,7 +75,7 @@ function cors(request: Request) {
   };
 }
 
-export default {
+const handler = {
   async fetch(request: Request) {
     if (request.method === 'OPTIONS') {
       return new Response(null, { status: 204, headers: cors(request) });
@@ -82,6 +84,8 @@ export default {
     return Response.json({ ok: true }, { headers: cors(request) });
   },
 };
+
+export default handler;
 ```
 
 This example echoes any request origin. In production, check `request.headers.get('origin')` against an allowlist of your app's domains and reject the rest, so the function only answers calls from sites you control.
@@ -103,7 +107,7 @@ new DefaultChatTransport({
 When the callers are your own scripts, cron jobs, or internal tools, you don't need full user auth. Check a shared secret instead. Set it on the deployment with `--env` (see [Environment variables](/docs/compute/functions/environment-variables)), then compare it on every request:
 
 ```ts
-export default {
+const handler = {
   async fetch(request: Request) {
     if (request.headers.get('authorization') !== `Bearer ${process.env.API_KEY}`) {
       return new Response('Unauthorized', { status: 401 });
@@ -112,6 +116,8 @@ export default {
     return Response.json({ ok: true });
   },
 };
+
+export default handler;
 ```
 
 ```bash

@@ -11,7 +11,7 @@ summary: >-
   @auth/neon-adapter, @neondatabase/serverless, and Resend as the email provider
   for magic link delivery.
 enableTableOfContents: true
-updatedOn: '2026-10-28T11:11:18.780Z'
+updatedOn: '2026-11-16T20:53:35.000Z'
 ---
 
 <Admonition type="important" title="Start here: pick your auth setup">

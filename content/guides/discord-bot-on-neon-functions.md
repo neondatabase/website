@@ -4,7 +4,7 @@ subtitle: 'Build a Discord bot with AI chat and image generation using Neon Func
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2026-06-28T00:00:00.000Z'
-updatedOn: '2026-10-23T23:49:26.750Z'
+updatedOn: '2026-11-09T23:20:10.000Z'
 ---
 
 If you've spent any time on Discord, you've run into bots: moderation bots, music players, AI image generators like Midjourney, which started out as a Discord bot before becoming a standalone product. They all do the same basic thing under the hood: listen for a command and respond, whether that's a one-line reply or a fully generated image.

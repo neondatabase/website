@@ -14,7 +14,7 @@ summary: >-
 enableTableOfContents: true
 redirectFrom:
   - /docs/manage/billing
-updatedOn: '2026-10-27T20:26:38.639Z'
+updatedOn: '2026-11-19T14:47:17.800Z'
 ---
 
 <InfoBlock>
@@ -184,10 +184,24 @@ To downgrade from a **legacy Enterprise plan**, please open a support ticket. Ca
 
 ## How to prevent further monthly charges to your account
 
-If you're on a Neon paid plan, you need to downgrade to the Free plan to avoid further monthly charges. You can do so from the [Billing](https://console.neon.tech/app/billing#change_plan) page in the Neon Console. Simply removing all Neon projects will **not** stop the monthly fee associated with your plan. You will continue to be invoiced until you downgrade to Free.
+If you're on a Neon paid plan, you need to downgrade to the Free plan to avoid further monthly charges. You can do so from the [Billing](https://console.neon.tech/app/billing#change_plan) page in the Neon Console.
 
 ## Delete your account
 
 If you would like to delete your Neon account entirely, please refer to the steps described here: [Deleting your account](/docs/manage/accounts#delete-account).
+
+## Frequently asked questions
+
+<Faq>
+
+<FaqItem question="When will I receive my first invoice?">
+Neon bills on a monthly billing period. The invoice for each period is sent on the first day of the following month and covers the usage from the month that just ended (see [Pay an invoice](#pay-an-invoice)).
+
+On the Launch and Scale plans, you pay only for what you use and there's no minimum monthly fee, so nothing is charged when you sign up. Your first invoice arrives on the first day of the month after you start and covers your usage up to that point.
+
+AI Gateway credits are billed separately from this monthly cycle. They are prepaid, so each credit purchase is charged at the time you buy it and generates its own invoice (see [AI Gateway prepaid credits](/docs/ai-gateway/prepaid-credits)).
+</FaqItem>
+
+</Faq>
 
 <NeedHelp/>

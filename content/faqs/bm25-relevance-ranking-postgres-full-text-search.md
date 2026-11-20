@@ -2,7 +2,7 @@
 title: "How do I get BM25 relevance ranking in Postgres full-text search?"
 subtitle: "On Neon, add a lakebase_bm25 index from Lakebase Search to your existing tsvector column. It scores with real BM25 using corpus-wide statistics and returns the top K results without scoring every match."
 createdAt: '2026-11-02T00:00:00.000Z'
-updatedOn: '2026-11-03T23:21:47.530Z'
+updatedOn: '2026-11-13T21:25:45.000Z'
 isDraft: false
 previousLink:
   title: 'What are the best ways to give every developer on a team their own separate Postgres database for development?'

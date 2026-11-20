@@ -7,7 +7,7 @@ summary: >-
   Also covers deploying a function from a Neon Function Registry template,
   checking status, listing functions, and deleting them.
 enableTableOfContents: true
-updatedOn: '2026-11-04T23:32:57.663Z'
+updatedOn: '2026-11-09T15:31:27.000Z'
 ---
 
 ## Deploy with `neon.ts`

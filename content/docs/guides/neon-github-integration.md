@@ -15,7 +15,7 @@ summary: >-
 enableTableOfContents: true
 redirectFrom:
   - /docs/guides/neon-github-app
-updatedOn: '2026-08-04T05:05:30.414Z'
+updatedOn: '2026-11-18T20:38:42.000Z'
 ---
 
 The Neon GitHub integration connects your Neon project to a GitHub repository, so you can manage database changes alongside your application code. For instance, you can configure GitHub Actions to create a database branch for each pull request and automatically apply schema changes to that database branch. To help you get started, we provide a [sample GitHub Actions workflow](#add-the-github-actions-workflow-to-your-repository).

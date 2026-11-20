@@ -1,7 +1,4 @@
 #!/bin/sh
-. "$(dirname "$0")/_/husky.sh"
-
-# Fallback paths for GUI git clients
-export PATH="$PATH:/opt/homebrew/bin:/usr/local/bin:$HOME/.npm-global/bin"
+. "$(dirname "$0")/ensure-deps.sh"
 
 npm run test:unit:run

@@ -9,7 +9,7 @@ summary: >-
   SPA project off Stack Auth, or when ejecting to a self-managed Stack Auth
   project.
 enableTableOfContents: true
-updatedOn: '2026-10-09T09:41:16.035Z'
+updatedOn: '2026-10-30T15:07:38.000Z'
 redirectFrom:
   - /docs/neon-auth/quick-start/nextjs
   - /docs/neon-auth/quick-start/react
