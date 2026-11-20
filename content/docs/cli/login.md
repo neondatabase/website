@@ -12,7 +12,7 @@ summary: >-
   `NEON_API_KEY` env var, then the credentials file, then triggers browser
   login if none are found.
 enableTableOfContents: true
-updatedOn: '2026-10-09T15:17:33.920Z'
+updatedOn: '2026-11-19T18:35:00.025Z'
 redirectFrom:
   - /docs/reference/cli-auth
   - /docs/cli/auth
@@ -43,7 +43,7 @@ The Neon CLI resolves authentication in this order:
 - The `--api-key` option, if provided.
 - The `NEON_API_KEY` environment variable, if set.
 - The `credentials.json` file created by `neon login`.
-- If none are found, the CLI starts the `neon login` web authentication flow. `neon me` is the exception: it reports that you're signed out instead.
+- If none are found, the CLI starts the `neon login` web authentication flow. `neon me` is the exception: it reports that you're signed out instead. When stdin, stdout, and stderr are all pipes or files, as in a coding agent's shell or a script, the command exits with an error that names `neon login` and the API key options instead of waiting for a browser. `neon login` itself still starts the browser sign-in there.
 
 </Admonition>
 

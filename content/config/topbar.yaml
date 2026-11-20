@@ -1,4 +1,4 @@
-text: 'Build your agent on Neon and provision backends you fully control. See how Ideavo does it'
+text: 'Postgres 19 is available on Neon. Try it on the Free Plan'
 link:
-  url: 'https://neon.com/blog/the-agent-builds-the-app-the-user-claims-the-database-how-ideavo-does-it'
+  url: 'https://neon.com/blog/postgres-19-is-out-try-it-on-neon'
   target: '_blank'

@@ -6,7 +6,7 @@ summary: >-
 enableTableOfContents: true
 redirectFrom:
   - /docs/realtime/get-started
-updatedOn: '2026-11-18T04:57:20.460Z'
+updatedOn: '2026-11-20T15:53:09.183Z'
 ---
 
 [Enable Realtime](#enable-realtime), run your [first live SQL queries](#subscribe-to-a-live-query) and [build an app with realtime&nbsp;reactivity](#build-a-realtime-app), or [add Realtime to an existing&nbsp;app](#add-realtime-to-an-existing-app).
@@ -36,7 +36,7 @@ neon login
 neon link
 ```
 
-[`neon link`](/docs/cli/link) asks which project to use. Pick an existing project or create a new one. Either way, it needs to be in a supported region.
+[`neon link`](/docs/cli/link) asks which project to use. Pick an existing project or create a new one. Either way, it needs to be in a supported region and run Postgres 18.
 
 ## Enable Realtime
 

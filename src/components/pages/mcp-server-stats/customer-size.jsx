@@ -20,8 +20,7 @@ const CustomerSize = ({ bands, windowStart, windowEnd }) => (
         <span className="text-white">
           Neon&apos;s largest customers build with MCP and the CLI.
         </span>{' '}
-        Share of active accounts using each, by customer size,{' '}
-        {formatDayRange(windowStart, windowEnd)}.
+        Share of paying customers using each, {formatDayRange(windowStart, windowEnd)}.
       </h2>
       <ul className="mt-16 flex flex-wrap gap-x-6 gap-y-2 lg:mt-12 md:mt-8" aria-hidden="true">
         {CUSTOMER_SIZE_SURFACES.map(({ value, label }) => (
@@ -64,8 +63,8 @@ const CustomerSize = ({ bands, windowStart, windowEnd }) => (
         ))}
       </ul>
       <p className="mt-6 max-w-[672px] text-sm leading-normal tracking-extra-tight text-gray-new-50">
-        Paying customers are ranked by size into the smaller 50%, the next 40%, the next 9%, and the
-        largest 1%. An account counts under each tool someone on it used, so the two shares overlap.
+        Paying customers ranked by size. An account counts under each tool someone on it used, so
+        the two shares overlap.
       </p>
     </Container>
   </section>

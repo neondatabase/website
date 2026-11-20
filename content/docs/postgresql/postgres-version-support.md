@@ -13,7 +13,7 @@ redirectFrom:
   - /docs/postgresql/postgres-version
   - /docs/postgres/postgres-versions
   - /docs/postgres/postgres-version-policy
-updatedOn: '2026-11-13T02:34:39.065Z'
+updatedOn: '2026-11-20T19:23:34.905Z'
 ---
 
 This topic outlines [PostgreSQL version support on Neon](#postgresql-version-support-on-neon).
@@ -69,12 +69,13 @@ Neon only supports the latest minor release for each major Postgres version. For
 
 Neon does not support skipping minor releases or downgrading to a previous minor release.
 
-#### Recent minor version rollouts
+#### Recent version rollouts (#recent-minor-version-rollouts)
 
-The table below shows when recent Postgres releases became available on Neon. Each version links to its PostgreSQL release notes, which list the bug fixes and CVE patches included in that minor release.
+The table below shows when recent Postgres releases became available on Neon, including new major versions and minor releases. Each version links to its PostgreSQL release notes, which list the changes in that release. For minor releases, the notes include the bug fixes and CVE patches.
 
 | Postgres release date | Versions in the release                                                                                                                                                                                                                                                                   | First available on Neon | Time to availability |
 | --------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------- | -------------------- |
+| 2026-11-19            | [19.0](https://www.postgresql.org/docs/release/19.0/)                                                                                                                                                                                                                                     | 2026-11-19              | Same day             |
 | 2026-11-12            | [18.7](https://www.postgresql.org/docs/release/18.7/), [17.12](https://www.postgresql.org/docs/release/17.12/), [16.16](https://www.postgresql.org/docs/release/16.16/), [15.20](https://www.postgresql.org/docs/release/15.20/), [14.25](https://www.postgresql.org/docs/release/14.25/) | 2026-11-12              | Under 30 minutes     |
 | 2026-08-13            | [18.6](https://www.postgresql.org/docs/release/18.6/), [17.11](https://www.postgresql.org/docs/release/17.11/), [16.15](https://www.postgresql.org/docs/release/16.15/), [15.19](https://www.postgresql.org/docs/release/15.19/), [14.24](https://www.postgresql.org/docs/release/14.24/) | 2026-08-18              | 5 days               |
 | 2026-05-14            | [18.4](https://www.postgresql.org/docs/release/18.4/), [17.10](https://www.postgresql.org/docs/release/17.10/), [16.14](https://www.postgresql.org/docs/release/16.14/), [15.18](https://www.postgresql.org/docs/release/15.18/), [14.23](https://www.postgresql.org/docs/release/14.23/) | 2026-05-19              | 5 days               |
@@ -83,7 +84,7 @@ The table below shows when recent Postgres releases became available on Neon. Ea
 
 The **First available on Neon** date marks when a release first became available to run, not the point at which every compute is running it; each compute picks it up on the next restart, as described above.
 
-As of November 2026, Neon runs the latest community minor release for every supported major version: 18.7, 17.12, 16.16, 15.20, and 14.25. For the current version list, see [Compatibility](/docs/reference/compatibility).
+As of November 2026, Neon runs the latest community release for every supported major version: 19.0, 18.7, 17.12, 16.16, 15.20, and 14.25. For the current version list, see [Compatibility](/docs/reference/compatibility).
 
 #### Manual actions after minor release upgrades
 
@@ -93,7 +94,9 @@ In such cases, your action may occasionally be required. When this occurs, which
 
 ### Supported major versions
 
-Neon currently supports Postgres 14, 15, 16, 17, and 18. Neon supports the five latest major Postgres versions, in alignment with the official PostgreSQL version support policy.
+Neon currently supports Postgres 14, 15, 16, 17, 18, and 19. Postgres 18 is the default version for new projects. To use Postgres 19, select it when you [create a project](/docs/manage/projects#create-a-project).
+
+Postgres 19 doesn't support the [Data API](/docs/data-api/overview), [Realtime](/docs/realtime/overview), or [data anonymization](/docs/workflows/data-anonymization) yet, and some extensions aren't available yet, including `anon`. Check [Postgres extensions](/docs/extensions/pg-extensions) before you create a Postgres 19 project. Advice stashes created with `pg_stash_advice` aren't saved across compute restarts on Postgres 19 yet.
 
 ### Major version upgrades
 

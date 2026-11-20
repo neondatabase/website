@@ -1,9 +1,6 @@
 const BANDS = [
-  { value: 'free', label: 'Free' },
-  { value: 'smaller_50', label: 'Paying, smaller 50%' },
-  { value: 'next_40', label: 'Next 40%' },
-  { value: 'next_9', label: 'Next 9%' },
   { value: 'largest_1', label: 'Largest 1%' },
+  { value: 'other_paying', label: 'Other customers' },
 ];
 
 export const CUSTOMER_SIZE_SURFACES = [

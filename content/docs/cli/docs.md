@@ -9,10 +9,29 @@ summary: >-
   login; use `--category` to narrow results and `--output json` for
   machine-readable output when scripting or calling it from an agent.
 enableTableOfContents: true
-updatedOn: '2026-10-22T22:27:57.000Z'
+updatedOn: '2026-11-19T18:35:00.025Z'
 ---
 
 The `docs` command searches neon.com and prints matching pages in your terminal. It covers the docs, API reference, PostgreSQL tutorial, guides, FAQs, changelog, and blog. No login is required, and it doesn't touch your projects or account. To get a written answer instead of a list of pages, use [`neon ask`](/docs/cli/ask).
+
+<CliUsage command="docs" />
+
+`neon docs <query>` is a shorthand for `neon docs search <query>` and takes the same options. Run `neon docs` with no query to print its help.
+
+```bash
+neon docs "reset a branch" --limit 3
+```
+
+```text
+Manage branches › Reset a branch from parent
+  https://neon.com/docs/manage/branches
+
+Branching with the Neon CLI › Resetting a branch from its parent
+  https://neon.com/docs/guides/branching-neon-cli
+
+Automate branching with CircleCI › Available commands › Resetting a long-lived branch
+  https://neon.com/docs/guides/branching-circleci
+```
 
 <CliSubcommands command="docs" />
 
