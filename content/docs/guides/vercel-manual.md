@@ -10,13 +10,14 @@ summary: >-
   monorepo, or any setup requiring direct control over branch naming, seeding, and
   migrations.
 enableTableOfContents: true
-updatedOn: '2026-11-18T15:17:33.000Z'
+updatedOn: '2026-11-20T12:32:58.582Z'
 ---
 
 <InfoBlock>
 <DocsList title="What you will learn:">
 <a href="#when-to-choose-this-path">When to use manual connections over integrations</a>
 <a href="#connection-steps">How to connect using environment variables</a>
+<a href="#connect-with-the-neon-and-vercel-clis">How to connect from a terminal with the Neon and Vercel CLIs</a>
 <a href="#cicd-based-preview-branching-github-actions">Advanced CI/CD automation options</a>
 </DocsList>
 
@@ -43,8 +44,8 @@ If you simply want Neon and Vercel with minimal setup, stick to the managed inte
 
 ## Prerequisites
 
-- Neon project with database (get a connection string via **Connect** in the Console)
-- Deployed Vercel project
+- Neon project with database (get a connection string via **Connect** in the Console, or with [`neon connection-string`](/docs/cli/connection-string))
+- Vercel project. To use the [CLI steps](#connect-with-the-neon-and-vercel-clis), link your project directory to it with `vercel link`.
 
 ---
 
@@ -91,6 +92,37 @@ If you simply want Neon and Vercel with minimal setup, stick to the managed inte
 5. Redeploy your application (or wait for your next deployment) for the variables to take effect.
 
 That's it. Your Vercel app now connects to Neon just like any other Postgres database.
+
+---
+
+## Connect with the Neon and Vercel CLIs
+
+You can set the same variables from a terminal, which also works for coding agents. Run these commands in a project directory that's linked to Neon (with `neon link` or `neon init`) and to Vercel (with `vercel link`). Outside a directory linked to Neon, pass `--project-id` to `neon connection-string`.
+
+```bash
+POOLED_URL="$(neon connection-string main --pooled)"
+DIRECT_URL="$(neon connection-string main)"
+printf '%s' "$POOLED_URL" | vercel env add DATABASE_URL --environment production --sensitive --yes
+printf '%s' "$DIRECT_URL" | vercel env add DATABASE_URL_UNPOOLED --environment production --sensitive --yes
+```
+
+Your app connects with the pooled `DATABASE_URL`. Run migrations over the direct `DATABASE_URL_UNPOOLED` instead, as [Connection pooling](/docs/connect/connection-pooling) explains. Reading each connection string into a shell variable first keeps it out of your shell history.
+
+Replace `main` with the branch that holds your production data. To replace a variable that's already set, add `--force`. Then redeploy so the variables take effect.
+
+### Add a database for preview deployments
+
+`vercel deploy` without `--prod` creates a preview deployment, and preview deployments read the Preview variables. If those aren't set and your build reads `DATABASE_URL`, for example to run migrations, the build fails. Create a branch for previews and add its connection strings to Preview:
+
+```bash
+neon branches create --name preview
+POOLED_URL="$(neon connection-string preview --pooled)"
+DIRECT_URL="$(neon connection-string preview)"
+printf '%s' "$POOLED_URL" | vercel env add DATABASE_URL --environment preview --sensitive --yes
+printf '%s' "$DIRECT_URL" | vercel env add DATABASE_URL_UNPOOLED --environment preview --sensitive --yes
+```
+
+Every preview deployment shares this one branch. To give each preview deployment its own branch, use one of the [managed integrations](/docs/guides/vercel-overview) or [GitHub Actions](/docs/guides/branching-github-actions).
 
 ---
 
