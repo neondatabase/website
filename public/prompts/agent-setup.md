@@ -53,7 +53,7 @@ Install the Neon skills and MCP server for your agent.
 If your agent supports the Neon plugin, install it in one step (it bundles the skills and the MCP server):
 
 ```bash
-neon plugins --global --agent <agent> -y
+neon plugins --agent <agent> -y
 ```
 
 If the command reports your agent is not supported, install the skills and MCP server directly instead:

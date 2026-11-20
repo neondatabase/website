@@ -6,7 +6,7 @@ summary: >-
   Gateway. It is OpenAI Chat Completions-compatible, works with any model in
   the catalog, and lets you switch providers without changing your SDK code.
 enableTableOfContents: true
-updatedOn: '2026-11-18T00:17:54.883Z'
+updatedOn: '2026-11-20T13:31:17.623Z'
 ---
 
 The chat completions endpoint is the recommended way to use Neon AI Gateway. It's fully compatible with the [OpenAI Chat Completions API](https://platform.openai.com/docs/api-reference/chat) and works with every model in the [AI Gateway catalog](/docs/ai-gateway/models). Switch models by changing a single field.
@@ -187,15 +187,15 @@ When the upstream provider rate-limits a request, AI Gateway forwards the releva
 
 ## Error handling
 
-| Status                         | Meaning                | Common cause                                                                                                                                 |
-| ------------------------------ | ---------------------- | -------------------------------------------------------------------------------------------------------------------------------------------- |
-| `400 Bad Request`              | Invalid request        | Unknown model ID, or model used on the wrong endpoint                                                                                        |
-| `413 Request Entity Too Large` | Body too large         | Request body exceeds 32 MiB. Reduce the size of your request.                                                                                |
-| `401 Unauthorized`             | Authentication failed  | Missing or invalid `NEON_AI_GATEWAY_TOKEN`                                                                                                   |
-| `403 Forbidden`                | Access denied          | Credential lacks `ai_gateway:invoke` scope, or branch not in credential lineage                                                              |
-| `429 Too Many Requests`        | Account quota exceeded | Your account's AI Gateway quota is blocked. Error code: `REQUEST_LIMIT_EXCEEDED`. Check `Retry-After` for when to retry, or contact support. |
-| `429 Too Many Requests`        | Upstream rate limited  | Upstream provider rate limit. Check the `Retry-After` and `X-Ratelimit-*` headers.                                                           |
-| `502 Bad Gateway`              | Upstream error         | Temporary issue with the upstream workspace. Retry the request.                                                                              |
+| Status                         | Meaning                | Common cause                                                                                                                                                                                                     |
+| ------------------------------ | ---------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `400 Bad Request`              | Invalid request        | Unknown model ID, or model used on the wrong endpoint                                                                                                                                                            |
+| `413 Request Entity Too Large` | Body too large         | Request body exceeds 32 MiB. Reduce the size of your request.                                                                                                                                                    |
+| `401 Unauthorized`             | Authentication failed  | Missing or invalid `NEON_AI_GATEWAY_TOKEN`                                                                                                                                                                       |
+| `403 Forbidden`                | Access denied          | Credential lacks `ai_gateway:invoke` scope, or branch not in credential lineage. With `unavailable_reason: "paid_plan_required"`, the organization has no [AI Gateway credits](/docs/ai-gateway/prepaid-credits) |
+| `429 Too Many Requests`        | Account quota exceeded | Your account's AI Gateway quota is blocked. Error code: `REQUEST_LIMIT_EXCEEDED`. Check `Retry-After` for when to retry, or contact support.                                                                     |
+| `429 Too Many Requests`        | Upstream rate limited  | Upstream provider rate limit. Check the `Retry-After` and `X-Ratelimit-*` headers.                                                                                                                               |
+| `502 Bad Gateway`              | Upstream error         | Temporary issue with the upstream workspace. Retry the request.                                                                                                                                                  |
 
 Error responses are a JSON object with an `error.message` field:
 

@@ -8,7 +8,7 @@ summary: >-
 enableTableOfContents: true
 redirectFrom:
   - /docs/storage/s3-api
-updatedOn: '2026-09-16T15:38:57.808Z'
+updatedOn: '2026-11-20T13:31:17.623Z'
 ---
 
 Neon Object Storage is compatible with the S3 API for core operations. It works with the AWS SDK for JavaScript (`@aws-sdk/client-s3`), boto3, the AWS CLI, and other S3-compatible tools. Not all S3 API operations are available.
@@ -78,6 +78,8 @@ Configure your S3 client with `forcePathStyle: true` (JavaScript) or `endpoint_u
 | ------------------------------------------------------ | ------------------------- |
 | `OPTIONS` preflight                                    | Handled automatically     |
 | `GetBucketCors` / `PutBucketCors` / `DeleteBucketCors` | Full CORS rule management |
+
+A bucket that Neon creates (with `neon.ts` or the Neon CLI) comes with a CORS rule that allows every origin (`*`), the `GET`, `PUT`, `POST`, `HEAD`, and `DELETE` methods, and any header, so browser uploads and downloads with presigned URLs work without setup. `GetBucketCors` returns that rule. A bucket created with the S3 `CreateBucket` operation has no CORS rule, so add one with `PutBucketCors` before browsers use it. To allow only your app's origins, replace it with `PutBucketCors`. Preflight requests from other origins then get `403`. `DeleteBucketCors` removes CORS from the bucket entirely rather than restoring the default, so browser requests to the bucket stop working.
 
 ## Not supported
 
