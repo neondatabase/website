@@ -106,6 +106,7 @@ export const STATIC_MD_PATHS = [
   '/prompts/realtime-landing.md',
   '/prompts/redwood-sdk-prompt.md',
   '/prompts/reflex-prompt.md',
+  '/prompts/remix-prompt.md',
   '/prompts/ruby-on-rails-prompt.md',
   '/prompts/rust-prompt.md',
   '/prompts/sentry-neon-functions-prompt.md',
