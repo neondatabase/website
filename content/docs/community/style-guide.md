@@ -9,7 +9,7 @@ summary: >-
   string format). Every other contribution guide, command, and agent references
   this page instead of restating the rules.
 enableTableOfContents: true
-updatedOn: '2026-11-13T22:15:00.528Z'
+updatedOn: '2026-11-20T14:15:47.781Z'
 ---
 
 This page is the single source of truth for how Neon documentation reads. The contribution guide, the doc AI commands, and the writing agents all point here instead of repeating these rules, so there is one place to read and one place to change.
@@ -30,6 +30,7 @@ Write like one person explaining something to another: approachable and precise,
 - **Cut minimizing words.** Remove "simply", "just", "easily", and "quick" before a step. Let the steps speak. Don't call something "easy" or "straightforward" when complexity follows.
 - **No hedging or filler.** Cut "it's worth noting", "in order to", "it's important to remember", and stacked hedges like "could potentially" or "may or may not". Make the claim or cut it.
 - **No AI-tell phrasing.** Avoid "seamlessly", "robust", "powerful", "comprehensive", and similar words used without specifics. Describe what actually happens instead.
+- **Link, don't repeat.** Don't duplicate information from another page. Link to the original source and explain why it matters in context.
 
 ## Mechanical rules
 
