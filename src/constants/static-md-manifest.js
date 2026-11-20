@@ -68,6 +68,7 @@ export const STATIC_MD_PATHS = [
   '/prompts/durable-workflow-on-neon-functions-prompt.md',
   '/prompts/elixir-ecto-prompt.md',
   '/prompts/elixir-prompt.md',
+  '/prompts/encore-prompt.md',
   '/prompts/express-prompt.md',
   '/prompts/functions-landing.md',
   '/prompts/golang-prompt.md',
