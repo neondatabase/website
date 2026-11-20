@@ -12,7 +12,7 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/quickstart/rust
   - /docs/integrations/rust
-updatedOn: '2026-11-07T17:16:39.000Z'
+updatedOn: '2026-11-20T22:23:16.924Z'
 ---
 
 <CopyPrompt src="/prompts/rust-prompt.md" 
@@ -306,7 +306,7 @@ The above code does the following:
 - Start a transaction to insert multiple book records in a single operation.
 
   <Admonition type="info" title="Why use a transaction for inserting multiple rows?">
-  Unlike database drivers in some other languages that offer a single high-level method for bulk inserts (like [Python's](/docs/guides/python#create-a-table-and-insert-data) `executemany` in `psycopg2`), the idiomatic Rust approach is to loop through the data inside a transaction.
+  Unlike database drivers in some other languages that offer a single high-level method for bulk inserts (like [Python's](/docs/guides/python) `executemany` in `psycopg2`), the idiomatic Rust approach is to loop through the data inside a transaction.
 
   This guarantees atomicity: all rows are inserted successfully, or none are inserted if an error occurs.
   </Admonition>
