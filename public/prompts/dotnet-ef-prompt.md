@@ -2,7 +2,7 @@ Connect my .NET Entity Framework Core project to Neon.
 
 - Fetch https://neon.com/prompts/agent-setup.md and follow it.
 
-- Look up the EF Core 10 release notes at https://learn.microsoft.com/en-us/ef/core/what-is-new/ef-core-10.0/whatsnew
+- Look up the EF Core docs at https://learn.microsoft.com/en-us/ef/core/
 - Look up the Npgsql provider docs at https://www.npgsql.org/efcore/index.html
 
 - Fetch Neon's Entity Framework guide and follow it: https://neon.com/docs/guides/dotnet-entity-framework.md
