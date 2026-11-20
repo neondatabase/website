@@ -11,7 +11,7 @@ summary: >-
   pg_dump must use an unpooled connection string. A coding agent with a
   terminal can run the upgrade for you.
 enableTableOfContents: true
-updatedOn: '2026-11-20T12:54:02.368Z'
+updatedOn: '2026-11-20T13:27:38.798Z'
 ---
 
 Each Neon project runs one major Postgres version, the one you chose when you created it. Neon applies minor version updates for you (see [Postgres version support](/docs/postgresql/postgres-version-support)). To move to a newer major version, such as from Postgres 17 to Postgres 19, create a new project on that version and migrate your data to it. You can do it yourself or [have a coding agent do it](#upgrade-with-an-ai-agent).
@@ -60,7 +60,7 @@ Choose a method based on your database size and how much downtime you can accept
 | [Piping pg_dump to pg_restore](/docs/import/migrate-from-neon)       | Small databases                                  | Some, during the copy                  |
 | [Logical replication](/docs/guides/logical-replication-neon-to-neon) | Active databases that can't afford much downtime | Near zero                              |
 
-The Import Data Assistant only needs the connection string for your current project. It imports into the same or a newer Postgres version, never an older one. Piping `pg_dump` output directly into `pg_restore` saves time but can fail during long migrations, so use it only for small databases.
+The Import Data Assistant only needs the connection string for your current project. It imports into the same or a newer Postgres version, never an older one. Its compatibility checks can flag an extension as unsupported even when it's available on the new version. See the [false extension warning note](/docs/import/import-data-assistant#check-compatibility) and compare against the [supported extensions table](/docs/extensions/pg-extensions) instead. Piping `pg_dump` output directly into `pg_restore` saves time but can fail during long migrations, so use it only for small databases.
 
 If you use `pg_dump` and `pg_restore`:
 
