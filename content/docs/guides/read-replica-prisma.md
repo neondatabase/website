@@ -10,7 +10,7 @@ summary: >-
   to be a separate PrismaClient instance with a PrismaNeon adapter. Multiple
   replicas are selected randomly per query.
 enableTableOfContents: true
-updatedOn: '2026-10-05T14:25:23.981Z'
+updatedOn: '2026-11-10T13:02:22.000Z'
 ---
 
 A Neon read replica is an independent read-only compute that performs read operations on the same data as your primary read-write compute, which means adding a read replica to a Neon project requires no additional storage.

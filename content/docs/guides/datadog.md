@@ -10,7 +10,7 @@ summary: >-
   Log transmission counts toward your plan's public network transfer
   allowance.
 enableTableOfContents: true
-updatedOn: '2026-10-14T11:21:37.306Z'
+updatedOn: '2026-11-06T01:37:15.000Z'
 ---
 
 <InfoBlock>

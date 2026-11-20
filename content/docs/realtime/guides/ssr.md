@@ -154,7 +154,7 @@ export async function POST(_request: Request, { params }: Context) {
 
 A server re-render, for example from `router.refresh()` or `revalidatePath()`, sends a new object for the same query. `useLiveQuery()` restarts on each new object, which rejects pending `awaitTxId()` calls. So `HydratedMessages` keeps the first sealed query, and renewals go through `refreshQuery`. Callers key it on `queryFingerprint`, so another channel or user remounts it.
 
-Or with [TanStack Start](../examples/tanstack), [create server functions](https://tanstack.com/start/latest/docs/framework/react/guide/server-functions) for the loader and the renewal. During SSR, a route loader needs the session from the request's cookies on the server. The official Managed Better Auth adapter for TanStack&nbsp;Start isn't out yet, so set up the session yourself. `requireUser` reads the cookie during SSR and for calls from the browser:
+Or with [TanStack Start](../examples/tanstack), [create server functions](https://tanstack.com/start/latest/docs/framework/react/guide/server-functions) for the loader and the renewal. During SSR, a route loader needs the session from the request's cookies on the server. The official Managed Better Auth adapter for TanStack&nbsp;Start isn't available yet, so set up the session yourself. `requireUser` reads the cookie during SSR and for calls from the browser:
 
 <details>
   <summary>Read the Managed Better Auth session in TanStack Start</summary>

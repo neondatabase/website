@@ -10,7 +10,7 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/get-started/using-api-keys
   - /docs/get-started/api-keys
-updatedOn: '2026-10-09T15:17:33.920Z'
+updatedOn: '2026-11-10T14:15:46.000Z'
 ---
 
 Most actions performed in the Neon Console can also be performed using the [Neon API](/docs/reference/api). You'll need an API key to validate your requests. Each key is a randomly-generated 64-bit token that you must include when calling Neon API methods. All keys remain valid until deliberately revoked.

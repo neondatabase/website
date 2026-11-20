@@ -4,7 +4,7 @@ subtitle: A step-by-step guide describing how to use pgvector for vector search 
 author: vkarpov15
 enableTableOfContents: true
 createdAt: '2025-02-04T13:24:36.612Z'
-updatedOn: '2026-09-30T00:39:07.369Z'
+updatedOn: '2026-11-13T20:59:05.000Z'
 ---
 
 <LakebaseVectorTip />

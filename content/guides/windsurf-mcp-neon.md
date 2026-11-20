@@ -4,7 +4,7 @@ subtitle: 'Make schema changes with natural language using Windsurf and the Neon
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2025-02-22T00:00:00.000Z'
-updatedOn: '2026-09-24T17:56:34.189Z'
+updatedOn: '2026-11-12T17:34:53.000Z'
 ---
 
 This guide shows how to use [Windsurf](https://codeium.com/windsurf) with the [Neon MCP Server](https://github.com/neondatabase/mcp-server-neon) to manage your Neon databases.

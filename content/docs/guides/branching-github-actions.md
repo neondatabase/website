@@ -10,7 +10,7 @@ summary: >-
   before wiring them into workflow YAML files. The schema diff action posts a
   branch comparison as a pull request comment.
 enableTableOfContents: true
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-11-18T20:38:42.000Z'
 ---
 
 Neon provides a set of GitHub Actions to automate the creation, deletion, and management of database branches in your Neon projects.
@@ -78,6 +78,10 @@ jobs:
           branch: preview/pr-${{ github.event.number }}
           api_key: ${{ secrets.NEON_API_KEY }}
 ```
+
+<Admonition type="note" title="Preview branches count toward your active compute limit">
+Each branch this workflow creates gets its own compute, and active computes on non-default branches count toward your project's [concurrently active compute limit](/docs/manage/computes#concurrently-active-compute-limit). If many pull requests run CI at the same time, computes beyond the limit stay suspended and connections to them fail with `You have exceeded the limit of concurrently active endpoints`. To stay under the limit, delete branches when pull requests close, as this workflow does, and let idle computes [scale to zero](/docs/introduction/scale-to-zero). To catch branches that a failed or skipped workflow run leaves behind, set a [branch expiration](/docs/guides/branch-expiration).
+</Admonition>
 
 ## Available actions
 

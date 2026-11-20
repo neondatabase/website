@@ -10,7 +10,7 @@ summary: >-
   with `neon skills`, `npx skills add neondatabase/agent-skills -y`, `neon init`,
   or the Neon plugin, at project or user level.
 enableTableOfContents: true
-updatedOn: '2026-11-05T13:53:34.719Z'
+updatedOn: '2026-11-09T22:07:35.000Z'
 redirectFrom:
   - /docs/ai/ai-rules
   - /docs/ai/ai-rules-neon-toolkit

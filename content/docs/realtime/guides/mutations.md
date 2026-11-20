@@ -1,6 +1,6 @@
 ---
 title: 'Optimistic mutations'
-subtitle: 'Make apps and agents super fast, with instant local writes.'
+subtitle: 'Show writes instantly in apps and agents, before the server confirms them.'
 summary: >-
   Write through your own backend, return the transaction id, apply the change optimistically and drop the optimistic state once the change arrives on the live query. Without a framework, with React useOptimistic or with TanStack DB.
 enableTableOfContents: true
@@ -13,7 +13,7 @@ Apply instant local writes using [optimistic mutations](#how-optimistic-mutation
 
 Normally, with online systems, you first send writes to the server and then display them to the user once the server has written to the database and responded successfully. Depending on network connectivity and system uptime, this can be slow or broken.
 
-With optimistic mutations, you first display the write to the user and only then send to the server in the background. This makes apps feel super-fast and responsive, as well as resilient to connectivity or downtime issues.
+With optimistic mutations, you first display the write to the user and only then send to the server in the background. This makes apps feel responsive, and keeps them usable when the connection is slow or drops.
 
 ### Automatic management of optimistic state
 
@@ -29,7 +29,7 @@ Realtime allows you to automate the management and lifecycle of your optimistic 
 
 ## Running example
 
-Let's return to our running example, flesh out the backend server, call its new routes from the frontend and add some shared frontend helpers.
+This section returns to the running example to flesh out the backend server, call its new routes from the frontend and add some shared frontend helpers.
 
 ### Returning the `txid` from your backend
 

@@ -6,8 +6,8 @@ enableTableOfContents: true
 updatedOn: '2026-11-18T00:59:49.148Z'
 ---
 
-<Admonition type="important" title="Upgrading to 0.2.0">
-Realtime SDK 0.2.0 uses version 2 of the Realtime protocol. Upgrade `@neon/realtime` and every Realtime adapter you use (`@neon/realtime-react`, `@neon/realtime-tanstack`, `@neon/realtime-drizzle`, `@neon/realtime-kysely`) to 0.2.0 together, since the 0.2.0 adapters require `@neon/realtime` 0.2.0.
+<Admonition type="important" title="Upgrading from 0.1">
+Realtime SDK 0.2 and later use version 2 of the Realtime protocol. Upgrade `@neon/realtime` and every Realtime adapter you use (`@neon/realtime-react`, `@neon/realtime-tanstack`, `@neon/realtime-drizzle`, `@neon/realtime-kysely`) to their latest versions together, since current adapters require `@neon/realtime` 0.2 or later.
 </Admonition>
 
 <Admonition type="warning" title="Beta: APIs may change">

@@ -11,7 +11,7 @@ isDraft: false
 redirectFrom:
   - /docs/conceptual-guides/regions
   - /docs/manage/regions
-updatedOn: '2026-10-14T21:25:07.454Z'
+updatedOn: '2026-11-18T21:57:37.000Z'
 ---
 
 Neon offers project deployment in multiple AWS regions. To minimize latency between your Neon database and application, we recommend choosing the region closest to your application server.
@@ -35,7 +35,7 @@ Each Neon **project** exists in exactly one region. Your database runs in that r
 
 ## Product availability
 
-You can create a project in any region listed above, but not every backend product is available in every region yet. Postgres and Managed Better Auth run in all regions. Object Storage, Functions, the AI Gateway, and Realtime are rolling out region by region.
+You can create a project in any region listed above, but not every backend product is available in every region yet. Postgres and Managed Better Auth run in all regions. Object Storage, Functions, the AI Gateway, and [Realtime](/docs/realtime/overview) are rolling out region by region.
 
 | Region                           | Postgres | Managed Better Auth | Object Storage | Functions | AI Gateway | Realtime |
 | :------------------------------- | :------: | :-----------------: | :------------: | :-------: | :--------: | :------: |
@@ -89,7 +89,7 @@ Neon connects to external systems (for example, when replicating data into Neon 
 Allow **all** NAT gateway IP addresses listed for your project's region, not just the ones you connect through today, and add the new addresses to your allowlist after Neon expands a region. Expansions are announced in the [changelog](/docs/changelog).
 </Admonition>
 
-_NAT gateway IP lists last updated: October 28, 2026._
+_NAT gateway IP lists last updated: November 16, 2026._
 
 ### AWS NAT Gateway IP Addresses
 

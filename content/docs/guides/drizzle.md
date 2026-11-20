@@ -10,7 +10,7 @@ summary: >-
   guide also shows how to point Drizzle at different Neon branches per
   environment by selecting a connection string based on NODE_ENV.
 enableTableOfContents: true
-updatedOn: '2026-10-08T19:32:04.700Z'
+updatedOn: '2026-11-19T01:52:43.726Z'
 ---
 
 <Callout title="Realtime with Drizzle">
@@ -29,7 +29,7 @@ description="Pre-built prompt for connecting Node/TypeScript applications to Neo
 <DocsList title="Related resources" theme="docs">
   <a href="https://orm.drizzle.team/docs/tutorials/drizzle-with-neon">Drizzle with Neon Postgres (Drizzle Docs)</a>
   <a href="/docs/guides/drizzle-migrations">Schema migration with Drizzle ORM</a>
-  <a href="/docs/guides/nextjs#video-walkthrough">Getting started with Neon (Next.js and Drizzle video)</a>
+  <a href="/docs/guides/nextjs#next-steps">Getting started with Neon (Next.js and Drizzle video)</a>
 </DocsList>
 
 </InfoBlock>
@@ -397,7 +397,7 @@ Each branch has its own connection string, available in the Neon Console or via 
 
 - [Get Started with Drizzle and Neon](https://orm.drizzle.team/docs/get-started/neon-new)
 - [Drizzle with Neon Postgres](https://orm.drizzle.team/docs/tutorials/drizzle-with-neon)
-- [Schema migration with Lakebase Postgres and Drizzle ORM](/docs/guides/drizzle-migrations)
+- [Schema migration with Drizzle ORM and Lakebase Postgres on Neon](/docs/guides/drizzle-migrations)
 - [Todo App with Neon Postgres and Drizzle ORM](https://orm.drizzle.team/docs/tutorials/drizzle-nextjs-neon)
 
 ## Next steps

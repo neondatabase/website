@@ -137,7 +137,7 @@ The `utils` in the return value give you access to the hook's underlying [materi
 
 This provides `getSnapshot()`, `getState()`, `awaitRows()`, the `onChange`, `onUpdate` and `onStateChange` listeners, `renew()` and `awaitTxId()`. It's stable for the life of the subscription, so register listeners in an effect and return the remover, as the `onUpdate` listener does.
 
-Note that a `changes` update has already been applied by the time its listener runs, and it [carries the txids](../sdks/typescript/client#client-livequerybatchinfo) of the transactions in it, which the [mutations guide](./mutations#how-optimistic-mutations-work) uses to confirm optimistic writes.
+A `changes` update has already been applied by the time its listener runs, and it [carries the txids](../sdks/typescript/client#client-livequerybatchinfo) of the transactions in it, which the [mutations guide](./mutations#how-optimistic-mutations-work) uses to confirm optimistic writes.
 
 `utils` omits `unsubscribe()`, because React owns cleanup. The hook unsubscribes when the component unmounts or its sealed query changes. `getState()` and the listeners report the state of the underlying subscription, so they can differ from the hook's `status`.
 
@@ -333,7 +333,7 @@ if (!session) {
 }
 ```
 
-Sign-in isn't part of these guides: build the page with [Better Auth UI](/docs/auth/reference/ui-components), as the [running example](https://github.com/neondatabase/examples/tree/main/realtime/guides-chat-app) does by rendering `<Auth>` on `/auth/*` before it checks the session.
+Sign-in isn't part of these guides: build the page with the [Managed Better Auth UI components](/docs/auth/reference/ui-components), as the [running example](https://github.com/neondatabase/examples/tree/main/realtime/guides-chat-app) does by rendering `<Auth>` on `/auth/*` before it checks the session.
 
 Then read from the collection with TanStack's own `useLiveQuery()`. It shares a name with the Realtime hook, so import it under an alias that won't clash in an app that uses both. This view shows one channel, newest first:
 
@@ -386,7 +386,7 @@ For writes through the collection, with optimistic state, see the [mutations gui
 
 ## Other frameworks
 
-Bindings for other frameworks are coming. Until then, you can use the current implementations as a reference to write your own.
+Bindings for other frameworks aren't available yet. Until then, you can use the current implementations as a reference to write your own.
 
 The React binding is a thin layer over the client subscription: `useSyncExternalStore` plus the [`QueryRefreshController`](../sdks/typescript/client#client-queryrefreshcontroller). Point a coding agent at [its source](https://github.com/neondatabase/neon-pkgs/tree/main/packages/realtime-react) and it can reproduce the binding for other frameworks, such as Solid, Svelte or Vue.
 

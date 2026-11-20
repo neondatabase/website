@@ -7,6 +7,7 @@ summary: >-
   hosts the sign-in and consent pages, and each tool reads and writes only the
   signed-in user's rows.
 enableTableOfContents: true
+updatedOn: '2026-11-09T23:20:10.000Z'
 ---
 
 Let your customers use your app from Claude, Cursor, or ChatGPT. They connect to your app's MCP server, sign in with their existing account, and call tools that read and write only their own rows in Lakebase Postgres.

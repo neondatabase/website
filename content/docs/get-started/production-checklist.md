@@ -11,7 +11,7 @@ summary: >-
 enableTableOfContents: true
 redirectFrom:
   - /docs/get-started-with-neon/production-checklist
-updatedOn: '2026-11-05T15:33:57.188Z'
+updatedOn: '2026-11-11T12:31:00.000Z'
 ---
 
 <CheckList title="Production checklist">
