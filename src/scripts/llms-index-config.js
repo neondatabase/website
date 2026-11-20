@@ -71,6 +71,10 @@ module.exports = {
       url: 'https://neon.com/docs/connect/choose-connection.md',
     },
     {
+      label: 'Deploy on Vercel: pick an integration, or connect from the CLI',
+      url: 'https://neon.com/docs/guides/vercel-overview.md',
+    },
+    {
       label: 'Troubleshoot connection errors and timeouts',
       url: 'https://neon.com/docs/connect/connection-errors.md',
     },
