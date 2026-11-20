@@ -14,7 +14,7 @@ summary: >-
   evaluating it, and --allow-protected, --update-existing, or -y to answer
   the apply confirmation prompts in non-interactive use.
 enableTableOfContents: true
-updatedOn: '2026-11-02T22:52:43.000Z'
+updatedOn: '2026-11-19T18:35:00.025Z'
 ---
 
 The `config` command manages a branch declaratively with a `neon.ts` policy file: scaffold a starter config, inspect the branch's live state, preview what an apply would change, and apply the policy. For the `neon.ts` file format, see the [neon.ts reference](/docs/reference/neon-ts).
@@ -193,6 +193,8 @@ Shows the branch's live Neon state.
 ```bash
 neon config status
 ```
+
+When Realtime is enabled on the branch, the status table includes `Realtime` and `Realtime Origins` rows. `Realtime Origins` lists the allowed origins, or `any` when every origin is allowed.
 
 The top-level `neon status` command is an alias for `config status` and accepts the same options.
 

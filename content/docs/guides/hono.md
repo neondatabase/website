@@ -10,7 +10,7 @@ summary: >-
   branch and agent skills, deployment, troubleshooting, and Neon's other
   backend services from Hono.
 enableTableOfContents: true
-updatedOn: '2026-11-18T16:24:51.000Z'
+updatedOn: '2026-11-19T02:38:16.738Z'
 ---
 
 <PromptBlock src="/prompts/hono-prompt.md" labels={["Set up your agent and follow this guide", "Look up Hono's docs", "Connect your Hono app"]} />
@@ -310,7 +310,7 @@ To deploy to a Node.js host, set `DATABASE_URL` in the host's environment, build
 
 ## Add more of your backend
 
-Add a Neon backend service to your Hono app with [`neon config add`](/docs/cli/config#add), then provision it with [`neon deploy`](/docs/cli/deploy). Each service branches with your database, so a `dev` branch gets its own copy of the service's data. Object Storage, Neon Functions, the AI Gateway, and Realtime need a project in a [supported region](#create-a-neon-project). For example, to add an Object Storage bucket:
+Add a Neon backend service to your Hono app with [`neon config add`](/docs/cli/config#add), then provision it with [`neon deploy`](/docs/cli/deploy). Each service branches with your database, so a `dev` branch gets its own data for each service. Object Storage, Neon Functions, the AI Gateway, and Realtime need a project in a [supported region](#create-a-neon-project). For example, to add an Object Storage bucket:
 
 ```bash filename="Terminal"
 neon config add bucket uploads
@@ -375,8 +375,8 @@ To skip `neon.ts`, use each service's own CLI commands, such as [`neon buckets c
 `Error: listen EADDRINUSE: address already in use :::3000`
 : Another server, often an earlier `npm run dev`, is still using the port. Stop it, or set `PORT` to use another port.
 
-`endpoint ID is not specified`
-: The client doesn't send Server Name Indication (SNI), which Neon uses to route connections. Current node-postgres and postgres.js send SNI, so this usually means an older client or a libpq older than Postgres 14. If upgrading doesn't fix it, append `&options=endpoint%3D<endpoint-id>` to `DATABASE_URL` (use `?` instead of `&` if the URL has no query string), with the endpoint ID from your connection string. See [The endpoint ID is not specified](/docs/connect/connection-errors#the-endpoint-id-is-not-specified).
+`Endpoint ID is not specified`
+: The client doesn't send Server Name Indication (SNI), which Neon uses to route connections. Current node-postgres and postgres.js send SNI, so this usually means an older client or a libpq older than Postgres 14. If upgrading doesn't fix it, append `&options=endpoint%3D<endpoint-id>` to `DATABASE_URL` (use `?` instead of `&` if the URL has no query string). The endpoint ID is the first part of the host name without `-pooler`, for example `ep-cool-darkness-123456`. See [The endpoint ID is not specified](/docs/connect/connection-errors#the-endpoint-id-is-not-specified).
 
 `SSL SYSCALL error: EOF detected`, or a similar connection-reset error
 : The app reused a connection after the Neon compute was suspended for inactivity. This mainly affects long-running servers that keep a connection pool open, like the node-postgres example. The `pool.on('error')` listener in `src/db.ts` keeps it from stopping the app. The request that hits the closed connection can fail with a `500`; the next request opens a new connection, so retrying the request resolves it. The Neon serverless driver isn't affected, since it opens a new HTTP connection per query.
@@ -389,7 +389,7 @@ To skip `neon.ts`, use each service's own CLI commands, such as [`neon buckets c
 ## Next steps
 
 - **Create your first table:** run `neon psql` in your project directory to open a SQL shell on your linked branch, or use an ORM such as [Drizzle](/docs/guides/drizzle) or [Prisma](/docs/guides/prisma) to manage your schema with migrations.
-- [Build a full backend](/docs/get-started/full-backend-quickstart): Postgres, Object Storage, and a Neon Function declared in one `neon.ts`.
+- [Build a full backend with Next.js and Neon](/docs/get-started/full-backend-quickstart): A Next.js walkthrough of Postgres, Object Storage, and a Neon Function declared in one `neon.ts`.
 - [Branching](/docs/introduction/branching): Give each preview deployment or pull request its own branch of your database.
 
 <NeedHelp/>

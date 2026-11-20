@@ -12,7 +12,7 @@ redirectFrom:
   - /docs/introduction/realtime
   - /docs/guides/realtime
   - /docs/guides/neon-realtime
-updatedOn: '2026-11-18T00:59:49.148Z'
+updatedOn: '2026-11-20T15:53:09.183Z'
 ---
 
 <div className="mb-6">
@@ -39,6 +39,7 @@ neon realtime enable
 
 <Admonition type="important" title="Before you enable Realtime">
 - Your project must be in a [supported region](#which-regions-is-it-enabled-in).
+- Your project must run Postgres 18. Realtime isn't available on other Postgres versions yet, including Postgres 19.
 - Enabling Realtime turns on [logical replication](/docs/guides/logical-replication-neon) for the whole project. This permanently changes `wal_level` to `logical` and restarts all computes in the project, on all branches, so active connections drop and reconnect. Disabling Realtime later doesn't turn logical replication off.
 </Admonition>
 

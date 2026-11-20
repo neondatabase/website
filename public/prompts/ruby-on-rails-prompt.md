@@ -1,131 +1,15 @@
-# 💡 AI Prompt: Connect Ruby on Rails to Neon Postgres
+Connect my Ruby on Rails app to Neon.
 
-**Role:** You are an expert software agent responsible for configuring the current Ruby on Rails project to connect to a Neon Postgres database.
+- Fetch https://neon.com/prompts/agent-setup.md and follow it.
 
-**Purpose:** To install and configure the necessary gems, create a `.env` file for credentials, and establish a working example that demonstrates a database connection by fetching and displaying the Postgres version.
+- Look up Rails docs at https://guides.rubyonrails.org/
 
-**Scope:**
-- Assumes the user is working within an existing Ruby on Rails project directory.
-- Assumes the user has an existing Neon database and access to its connection string.
-
-✅ Read and understand the entire instruction set before executing.
-
----
-
-## 📋 Prerequisites
-
-- This prompt must be run inside an existing Ruby on Rails project directory.
-- The project must be configured to use PostgreSQL. If the user is creating a new project run the following command:
-  ```bash
-  rails new your_app_name --database=postgresql
-  ```
-
----
-
-## 🛠️ Instructions (for AI-enabled editors)
-
-When this prompt is triggered, automatically configure the open Ruby on Rails project as follows:
-
-### 1. Verify Project Dependencies
-
-1.  Open the `Gemfile` in the project root.
-2.  Ensure the `pg` gem is present and uncommented. If it is missing, add it:
-    ```ruby
-    gem "pg"
-    ```
-3.  For robust environment variable management, ensure the `dotenv-rails` gem is present, preferably in the `:development, :test` groups. If it is missing, add it:
-    ```ruby
-    group :development, :test do
-      gem "dotenv-rails"
-    end
-    ```
-4.  Run `bundle install` in the terminal to install any added gems.
-
----
-
-### 2. Configure the Environment for Neon
-
-1.  Check for the presence of a `.env` file at the root of the project. If it doesn't exist, create one.
-2.  Add the following line to the `.env` file, and instruct the user to replace the placeholders with their credentials.
-    - **Crucially, the connection string must end with a `/` and should not include a specific database name.** Rails will manage the database name (`_development`, `_test`) automatically based on the environment. Inform this clearly to the user when you prompt them.
-    ```text filename=".env"
-    DATABASE_URL="postgresql://[user]:[password]@[neon_hostname]/?sslmode=require&channel_binding=require"
-    ```
-3.  Prompt the user to get their connection string from the **Neon Console → Project → Dashboard → Connect**.
-4.  Inform the user that the database role provided requires `CREATEDB` privileges, which is standard for roles created via the Neon Console.
-
----
-
-### 3. Create or Update MVC for Database Test
-
-To avoid potential naming collisions with generators, directly create or overwrite the necessary files.
-
-1.  **Ensure the controller exists with the correct content.** Create or replace the file at `app/controllers/home_controller.rb`:
-    ```ruby filename="app/controllers/home_controller.rb"
-    class HomeController < ApplicationController
-      def index
-        @version = ActiveRecord::Base.connection.execute("SELECT version();").first['version']
-      end
-    end
-    ```
-2.  **Ensure the view exists with the correct content.** Create or replace the file at `app/views/home/index.html.erb`:
-    ```erb filename="app/views/home/index.html.erb"
-    <h1>Neon Postgres Connection Successful!</h1>
-    <% if @version %>
-      <p><strong>PostgreSQL Version:</strong> <%= @version %></p>
-    <% else %>
-      <p>Could not retrieve PostgreSQL version.</p>
-    <% end %>
-    ```
-3.  **Ensure the root route is configured.** Overwrite the contents of `config/routes.rb` to set the new controller as the application's root page:
-    ```ruby filename="config/routes.rb"
-    Rails.application.routes.draw do
-      # Defines the root path route ("/")
-      root 'home#index'
-
-      # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
-      get "up" => "rails/health#show", as: :rails_health_check
-    end
-    ```
-
----
-
-## 🚀 Next Steps
-
-Once the setup is complete:
-
-1.  Remind the user to set their `DATABASE_URL` in the .env file, ensuring the connection string has no database name and keeps the trailing slash (`/`) before the query string.
-2.  Install any new gems by running:
-    ```bash
-    bundle install
-    ```
-3.  Create the development database:
-    ```bash
-    bin/rails db:create
-    ```
-4.  Start the Rails server:
-    ```bash
-    bin/rails server
-    ```
-5.  To test the connection, visit `http://localhost:3000` in a browser. The page should display the PostgreSQL version reported by your Neon database.
-
----
-
-## ✅ Validation Rules for AI
-
-Before suggesting code or making edits, ensure:
-- The `Gemfile` contains both the `pg` and `dotenv-rails` gems.
-- A `.env` file is present or has been created.
-- The `DATABASE_URL` format in the `.env` template has a `/` before the query string and contains no database name.
-- The connection string is loaded from the environment, not hardcoded in any `.rb` or `.yml` files.
-- The controller, view, and routes files (`home_controller.rb`, `home/index.html.erb`, `routes.rb`) are created or updated with the specified content.
-- The `root 'home#index'` route is correctly defined in `config/routes.rb`.
-
----
-
-## ❌ Do Not
-
-- Do not hardcode credentials in any file, especially `config/database.yml`.
-- Do not include a specific database name (e.g., `dbname_development`) in the `DATABASE_URL` inside the `.env` file.
-- Do not output the user's connection string in any response.
-- Do not modify `config/database.yml` if `dotenv-rails` is being used, as `DATABASE_URL` takes precedence.
+- Fetch Neon's Ruby on Rails guide and follow it: https://neon.com/docs/guides/ruby-on-rails.md
+- If this folder has no bin/rails, stop and tell me: it isn't a Rails app. If my app uses SQLite, stop and tell me too; the guide doesn't convert it.
+- Keep my app's Rails version. If it's on any version before 8.1, stop and ask me whether to continue. Don't change config/database.yml; Rails reads DATABASE_URL from the environment. If the Gemfile has no dotenv-rails, add it with `bundle add dotenv-rails --group development,test`, as the guide's Connect step does. Then dotenv-rails loads DATABASE_URL from .env.
+- Keep the database name out of DATABASE_URL, run migrations on the direct connection string, and do the development branch step before any migration, as the guide describes.
+- When a generator would overwrite a file, use `--skip` so it leaves the file alone.
+- Ask me before you pick or create a Neon project. If I already have the org and project IDs, link with `neon link --no-config -y --org-id <org-id> --project-id <project-id>`.
+- Run `bin/rails server` in the background to check the page, and stop it when you finish.
+- Finish by showing me the Postgres version from the running server.
+- If my app needs sign-in, file uploads, long-running or scheduled work, LLM calls, or live updates, suggest the matching service from the guide's "Add more of your backend" section.

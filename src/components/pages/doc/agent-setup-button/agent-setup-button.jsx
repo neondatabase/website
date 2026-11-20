@@ -1,16 +1,18 @@
 'use client';
 
+import { render, toText } from '@copybook/core';
 import PropTypes from 'prop-types';
 
 import ProviderMarks from 'components/shared/provider-marks';
+import { agentSetup } from 'constants/agent-prompts.mjs';
 import useCopyPrompt from 'hooks/use-copy-prompt';
 import { cn } from 'utils/cn';
 import sendGtagEvent from 'utils/send-gtag-event';
 
-// Base prompt copied on every docs page. Pages may append a page-specific
-// sentence via the `agentPrompt` frontmatter field (threaded in from post.jsx).
-export const BASE_AGENT_PROMPT =
-  'Set me up for Neon. Fetch https://neon.com/prompts/agent-setup.md and follow it.';
+// Base prompt copied on every docs page, defined in constants/agent-prompts.mjs. Pages may
+// append a page-specific sentence via the `agentPrompt` frontmatter field (threaded in from
+// post.jsx).
+export const BASE_AGENT_PROMPT = toText(render(agentSetup));
 
 const CheckIcon = (props) => (
   <svg
@@ -32,7 +34,9 @@ const CheckIcon = (props) => (
 const AgentSetupButton = ({ agentPrompt = null, className = null }) => {
   const { isCopied, copy } = useCopyPrompt();
 
-  const prompt = agentPrompt ? `${BASE_AGENT_PROMPT} ${agentPrompt}` : BASE_AGENT_PROMPT;
+  const prompt = agentPrompt
+    ? toText(render(agentSetup, { pageNote: agentPrompt }))
+    : BASE_AGENT_PROMPT;
 
   const handleClick = () =>
     copy(prompt, () =>
