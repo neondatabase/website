@@ -10,7 +10,7 @@ summary: >-
   then hand-tune only where you need to. For exact ranges and defaults, it
   links to the lakebase_vector and lakebase_text reference pages.
 enableTableOfContents: true
-updatedOn: '2026-11-20T21:11:26.906Z'
+updatedOn: '2026-11-20T21:36:04.360Z'
 ---
 
 Lakebase Search performs well on its defaults, so most projects never need to tune it. When you do, tuning is a tradeoff between three things: recall (getting the right rows back), latency (how fast the query returns), and cost (how much compute you use). This page names the main lever for each goal, says which way it moves things, and gives you one concrete move. For exact ranges and defaults, it links to the [lakebase_vector](/docs/extensions/lakebase-vector) and [lakebase_text](/docs/extensions/lakebase-text) reference pages rather than repeating them.
