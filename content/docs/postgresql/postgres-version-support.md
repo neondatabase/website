@@ -13,7 +13,7 @@ redirectFrom:
   - /docs/postgresql/postgres-version
   - /docs/postgres/postgres-versions
   - /docs/postgres/postgres-version-policy
-updatedOn: '2026-11-20T15:53:09.183Z'
+updatedOn: '2026-11-20T19:23:34.905Z'
 ---
 
 This topic outlines [PostgreSQL version support on Neon](#postgresql-version-support-on-neon).
@@ -96,7 +96,7 @@ In such cases, your action may occasionally be required. When this occurs, which
 
 Neon currently supports Postgres 14, 15, 16, 17, 18, and 19. Postgres 18 is the default version for new projects. To use Postgres 19, select it when you [create a project](/docs/manage/projects#create-a-project).
 
-Postgres 19 doesn't support the [Data API](/docs/data-api/overview) or [Realtime](/docs/realtime/overview) yet, and some extensions aren't available yet. Check [Postgres extensions](/docs/extensions/pg-extensions) before you create a Postgres 19 project. Advice stashes created with `pg_stash_advice` aren't saved across compute restarts on Postgres 19 yet.
+Postgres 19 doesn't support the [Data API](/docs/data-api/overview), [Realtime](/docs/realtime/overview), or [data anonymization](/docs/workflows/data-anonymization) yet, and some extensions aren't available yet, including `anon`. Check [Postgres extensions](/docs/extensions/pg-extensions) before you create a Postgres 19 project. Advice stashes created with `pg_stash_advice` aren't saved across compute restarts on Postgres 19 yet.
 
 ### Major version upgrades
 
