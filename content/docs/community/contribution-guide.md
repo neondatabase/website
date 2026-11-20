@@ -9,7 +9,7 @@ summary: >-
   request, add yourself as a guide author, frontmatter, navigation.yaml,
   Markdown, components, and style rules.
 enableTableOfContents: true
-updatedOn: '2026-11-20T19:37:09.541Z'
+updatedOn: '2026-11-20T19:38:18.731Z'
 ---
 
 Thanks for helping improve Neon content. This page explains ways to contribute, how to submit a contribution, and the Markdown and style conventions we follow.
@@ -337,7 +337,7 @@ The [Style guide](/docs/community/style-guide) is the single source of truth for
 A few rules to know up front:
 
 - **No em dashes (—):** Rewrite with a period, comma, colon, or parentheses. See the [Style guide](/docs/community/style-guide) for the full rule.
-- **Link instead of repeating text:** Avoid duplicating information from other pages. Link to the source and explain why it matters in context.
+- **Link instead of repeating text:** Don't duplicate information from other pages. See the [Style guide](/docs/community/style-guide) for the rule.
 - **Fake user data and connection strings:** Use only fake example data (never real user data), and follow the standard connection string format. See the [Style guide](/docs/community/style-guide) for the exact values and format.
 
 See the [Style guide](/docs/community/style-guide) for the full set of rules and examples.
