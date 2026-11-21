@@ -58,6 +58,10 @@ export function parseSiteSearchRequest(body) {
   if (query.length > SEARCH_QUERY_MAX_CHARS) {
     throw new Error('query is too long');
   }
+  // neon-agent rejects U+0000 because Postgres can't store it in text.
+  if (query.includes('\u0000')) {
+    throw new Error('query must not contain NUL characters');
+  }
   if (body.limit !== undefined) {
     if (!Number.isInteger(body.limit) || body.limit < 1 || body.limit > 40) {
       throw new Error('limit must be an integer from 1 to 40');
