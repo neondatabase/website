@@ -8,7 +8,7 @@ summary: >-
   projects, require a personal admin key and reject organization API keys. A
   permission matrix maps each endpoint to its supported key type.
 enableTableOfContents: true
-updatedOn: '2026-11-18T16:54:31.977Z'
+updatedOn: '2026-11-21T21:02:43.597Z'
 ---
 
 Learn how to manage Neon Organizations using the Neon API, including managing organization API keys, working with organization members, and handling member invitations.
@@ -75,7 +75,7 @@ If you're an Editor, Viewer, or Collaborator, create a personal API key instead;
 
 The key token is only displayed once at creation time. Copy it immediately and store it securely. If lost, you’ll need to revoke the key and create a new one. For detailed instructions, see [Manage API Keys](/docs/manage/api-keys#create-an-organization-api-key).
 
-Organization API key creation (`POST /organizations/{org_id}/api_keys`) is rate limited to 10 requests per second. If you create keys in bulk, throttle your requests or use retries with backoff.
+Organization API key creation (`POST /organizations/{org_id}/api_keys`) is rate limited. If you create keys in bulk, throttle your requests or use retries with backoff.
 
 [Try in API Reference](/docs/reference/api/organizations/create-org-api-key)
 
@@ -154,7 +154,7 @@ Example response:
   "id": "org-example-12345678",
   "name": "Example Organization",
   "handle": "example-organization-org-example-12345678",
-  "plan": "business",
+  "plan": "scale",
   "created_at": "2024-01-01T12:00:00Z",
   "managed_by": "console",
   "updated_at": "2024-01-01T12:00:00Z"
@@ -295,7 +295,7 @@ Retrieves a list of all pending invitations for the organization.
 
 ```bash shouldWrap
 curl --request GET \
-     --url 'https://console.neon.tech/api/v2/organizations/invitations' \
+     --url 'https://console.neon.tech/api/v2/organizations/{org_id}/invitations' \
      --header 'accept: application/json' \
      --header "authorization: Bearer $ORG_API_KEY" | jq
 ```
