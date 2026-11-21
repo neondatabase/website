@@ -13,7 +13,7 @@ summary: >-
 enableTableOfContents: true
 redirectFrom:
   - /docs/extensions/pg_embedding
-updatedOn: '2026-11-13T20:59:05.000Z'
+updatedOn: '2026-11-21T12:03:25.240Z'
 ---
 
 <LakebaseVectorTip />
@@ -52,10 +52,10 @@ SELECT extname, extversion FROM pg_extension WHERE extname = 'vector';
 
 Neon allows you to install the previous version of `pgvector`, which is one version behind the latest supported version.
 
-For example, if Neon’s latest supported `pgvector` version is 0.8.0, you can install the prior version, 0.7.4, by specifying the version number:
+For example, if Neon’s latest supported `pgvector` version is 0.8.7, you can install the prior version, 0.8.6, by specifying the version number:
 
 ```sql
-CREATE EXTENSION vector VERSION '0.7.4';
+CREATE EXTENSION vector VERSION '0.8.6';
 ```
 
 To check the latest supported `pgvector` version on Neon, visit our [Postgres extensions page](/docs/extensions/pg-extensions). You can install one version back from that version.
@@ -317,12 +317,12 @@ Like other index types, it’s faster to create an index after loading your init
 
   You can also speed up index creation by increasing the number of parallel workers. The default is `2`.
 
-  The `max_parallel_maintenance_workers` sets the maximum number of parallel workers that can be started by a single utility command such as `CREATE INDEX`. By default, the `max_parallel_maintenance_workers` setting is `2`. For efficient parallel index creation, you can increase this setting. Parallel workers are taken from the pool of processes established by `max_worker_processes` (`13`), limited by `max_parallel_workers` (`8`).
+  The `max_parallel_maintenance_workers` sets the maximum number of parallel workers that can be started by a single utility command such as `CREATE INDEX`. By default, the `max_parallel_maintenance_workers` setting is `2`. For efficient parallel index creation, you can increase this setting. Parallel workers are taken from the pool of processes set by `max_worker_processes`, limited by `max_parallel_workers` (`8`).
 
   You can increase the `maintenance_work_mem` setting for the current session with a command similar to the following:
 
   ```sql
-  SET max_parallel_maintenance_workers = 7
+  SET max_parallel_maintenance_workers = 7;
   ```
 
   For example, if you have a 7 CU compute size, you could set `max_parallel_maintenance_workers` to 7, before index creation, to make use of all of the available CPU cores.
@@ -342,7 +342,7 @@ The phases for HNSW are:
 1. initializing
 2. loading tuples
 
-For related information, see [CREATE INDEX Progress Reporting](https://www.postgresql.org/docs/current/progress-reporting.html#CREATE-INDEX-PROGRESS-REPORTING), in the _PostgreSQL documentation_.
+For related information, see [CREATE INDEX Progress Reporting](https://www.postgresql.org/docs/current/progress-reporting.html#CREATE-INDEX-PROGRESS-REPORTING), in the _Postgres documentation_.
 
 ### IVFFlat
 
@@ -352,7 +352,7 @@ Keys to achieving good recall include:
 
 - Creating the index after the table has some data
 - Choosing an appropriate number of lists. A good starting point is rows/1000 for up to 1M rows and `sqrt(rows)` for over 1M rows.
-- Specifying an appropriate number of [probes](#hnsw-query-options) when querying. A higher number is better for recall, and a lower is better for speed. A good starting point is `sqrt(lists)`.
+- Specifying an appropriate number of [probes](#ivfflat-query-options) when querying. A higher number is better for recall, and a lower is better for speed. A good starting point is `sqrt(lists)`.
 
 #### IVFFlat vector types
 
@@ -425,10 +425,6 @@ To optimize index build time, consider configuring the `maintenance_work_mem` an
 Like other index types, it’s faster to create an index after loading your initial data.
 </Admonition>
 
-<Admonition type="note">
-Like other index types, it’s faster to create an index after loading your initial data.
-</Admonition>
-
 - `maintenance_work_mem`
 
   In Postgres, the `maintenance_work_mem` setting determines the maximum memory allocation for tasks such as `CREATE INDEX`. The default `maintenance_work_mem` value in Neon is set according to your Neon [compute size](/docs/manage/computes#how-to-size-your-compute). For a table that shows the `maintenance_work_mem` setting by compute size, see [Parameter settings that differ by compute size](/docs/reference/compatibility#parameter-settings-that-differ-by-compute-size).
@@ -445,19 +441,19 @@ Like other index types, it’s faster to create an index after loading your init
 
   You can also speed up index creation by increasing the number of parallel workers. The default is `2`.
 
-  The `max_parallel_maintenance_workers` sets the maximum number of parallel workers that can be started by a single utility command such as `CREATE INDEX`. By default, the `max_parallel_maintenance_workers` setting is `2`. For efficient parallel index creation, you can increase this setting. Parallel workers are taken from the pool of processes established by `max_worker_processes` (`13`), limited by `max_parallel_workers` (`8`).
+  The `max_parallel_maintenance_workers` sets the maximum number of parallel workers that can be started by a single utility command such as `CREATE INDEX`. By default, the `max_parallel_maintenance_workers` setting is `2`. For efficient parallel index creation, you can increase this setting. Parallel workers are taken from the pool of processes set by `max_worker_processes`, limited by `max_parallel_workers` (`8`).
 
   You can increase the `maintenance_work_mem` setting for the current session with a command similar to the following:
 
   ```sql
-  SET max_parallel_maintenance_workers = 7
+  SET max_parallel_maintenance_workers = 7;
   ```
 
   For example, if you have a 7 CU compute size, you could set `max_parallel_maintenance_workers` to 7, before index creation, to make use of all of the available CPU cores.
 
   For a large number of workers, you may also need to increase the Postgres `max_parallel_workers`, which is `8` by default.
 
-#### Check indexing progress (#check-indexing-progress-2)
+#### Check indexing progress
 
 You can check indexing progress with the following query:
 
@@ -465,12 +461,14 @@ You can check indexing progress with the following query:
 SELECT phase, round(100.0 * blocks_done / nullif(blocks_total, 0), 1) AS "%" FROM pg_stat_progress_create_index;
 ```
 
-The phases for HNSW are:
+The phases for IVFFlat are:
 
 1. initializing
-2. loading tuples
+2. performing k-means
+3. assigning tuples
+4. loading tuples
 
-For related information, see [CREATE INDEX Progress Reporting](https://www.postgresql.org/docs/current/progress-reporting.html#CREATE-INDEX-PROGRESS-REPORTING), in the _PostgreSQL documentation_.
+For related information, see [CREATE INDEX Progress Reporting](https://www.postgresql.org/docs/current/progress-reporting.html#CREATE-INDEX-PROGRESS-REPORTING), in the _Postgres documentation_.
 
 ## Filtering
 
@@ -480,7 +478,7 @@ There are a few ways to index nearest neighbor queries with a `WHERE` clause:
 SELECT * FROM items WHERE category_id = 123 ORDER BY embedding <-> '[3,1,2]' LIMIT 5;
 ```
 
-Create an index on one or more of the `WHERE` columns for exact search"
+Create an index on one or more of the `WHERE` columns for exact search.
 
 ```sql
 CREATE INDEX ON items (category_id);
@@ -502,7 +500,7 @@ CREATE TABLE items (embedding vector(3), category_id int) PARTITION BY LIST(cate
 
 Half-precision vectors enable the storage of vector embeddings using 16-bit floating-point numbers, or half-precision, which reduces both storage size and memory usage by nearly half compared 32-bit floats. This efficiency comes with minimal loss in precision, making half-precision vectors beneficial for applications dealing with large datasets or facing memory constraints.
 
-When integrating OpenAI's embeddings, you can take advantage of half-precision vectors by storing embeddings in a compressed format. For instance, OpenAI’s high-dimensional embeddings can be effectively stored with half-precision vectors, achieving high levels of accuracy, such as a 98% rate. This approach optimizes memory usage while maintaining performance.
+When integrating OpenAI's embeddings, you can take advantage of half-precision vectors by storing embeddings in a compressed format. For instance, OpenAI’s high-dimensional embeddings can be effectively stored with half-precision vectors, with high accuracy. This approach optimizes memory usage while maintaining performance.
 
 You can use the `halfvec` type to store half-precision vectors, as shown here:
 
@@ -514,7 +512,7 @@ CREATE TABLE items (id bigserial PRIMARY KEY, embedding halfvec(3));
 
 Binary vector embeddings are a form of vector representation where each component is encoded as a binary digit, typically 0 or 1. For example, the word "cat" might be represented as `[0, 1, 0, 1, 1, 0, 0, 1, ...],` with each position in the vector being binary.
 
-These embeddings are advantageous for their efficiency in both storage and computation. Because they use only one bit per dimension, binary embeddings require less memory compared to traditional embeddings that use floating-point numbers. This makes them useful when there is limited memory or when dealing with large datasets. Additionally, operations with binary values are generally quicker than those involving real numbers, leading to faster computations.
+These embeddings are advantageous for their efficiency in both storage and computation. Because they use only one bit per dimension, binary embeddings require less memory compared to traditional embeddings that use floating-point numbers. This makes them useful when there is limited memory or when dealing with large datasets. Operations with binary values are also generally quicker than those involving real numbers, which makes computations faster.
 
 However, the trade-off with binary vector embeddings is a potential loss in accuracy. Unlike denser embeddings, which have real-valued entries and can represent subtleties in the data, binary embeddings simplify the representation. This can result in a loss of information and may not fully capture the intricacies of the data they represent.
 
@@ -552,14 +550,14 @@ CREATE INDEX ON items USING hnsw ((binary_quantize(embedding)::bit(3)) bit_hammi
 Get the nearest neighbors by Hamming distance:
 
 ```sql
-SELECT * FROM items ORDER BY binary_quantize(embedding)::bit(3) <~> binary_quantize('[1,-2,3]') LIMIT 5;
+SELECT * FROM items ORDER BY binary_quantize(embedding)::bit(3) <~> binary_quantize('[1,-2,3]'::vector) LIMIT 5;
 ```
 
 Re-rank by the original vectors for better recall:
 
 ```sql
 SELECT * FROM (
-    SELECT * FROM items ORDER BY binary_quantize(embedding)::bit(3) <~> binary_quantize('[1,-2,3]') LIMIT 20
+    SELECT * FROM items ORDER BY binary_quantize(embedding)::bit(3) <~> binary_quantize('[1,-2,3]'::vector) LIMIT 20
 ) ORDER BY embedding <=> '[1,-2,3]' LIMIT 5;
 ```
 
