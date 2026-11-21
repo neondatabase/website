@@ -10,7 +10,7 @@ summary: >-
   `histogram` for time-oriented analysis. Only Apache-2 licensed features are
   supported on Neon; compression is not available.
 enableTableOfContents: true
-updatedOn: '2026-11-06T11:14:41.532Z'
+updatedOn: '2026-11-21T12:09:42.363Z'
 ---
 
 `timescaledb` enables the efficient storage and retrieval of time-series data. Time-series data is a sequential collection of observations or measurements recorded over time. For example, IoT devices continuously generate data points with timestamps, representing measurements or events. `timescaledb` is designed to handle large volumes of time-stamped data and provides SQL capabilities on top of a time-oriented data model such as IoT data, sensor readings, financial market data, and other time-series datasets.
@@ -23,7 +23,7 @@ This guide provides an introduction to the `timescaledb` extension. You’ll lea
 `timescaledb` is an open-source extension for Postgres that can be installed on any Neon Project using the instructions below.
 </Admonition>
 
-**Version availability:** For version availability, refer to our [Postgres extensions](/docs/extensions/pg-extensions) page, which includes a table of supported extension versions by Postgres version.
+**Version availability:** For version availability, refer to our [Postgres extensions](/docs/extensions/pg-extensions) page, which includes a table of supported extension versions by Postgres version. `timescaledb` isn't available on Postgres 19 yet.
 
 _Only [Apache-2](https://docs.timescale.com/about/latest/timescaledb-editions/) licensed features are supported. Compression is not supported._
 
@@ -63,7 +63,7 @@ You should receive the following output:
 ```text
 |       create_hypertable         |
 |---------------------------------|
-| (3,public,weather_conditions,t) |
+| (1,public,weather_conditions,t) |
 ```
 
 It is possible to use both standard SQL commands and `timescaledb` functions (which will be covered later).
@@ -161,7 +161,7 @@ Get the latest temperature reading for each location:
 ```sql
 SELECT
 device_id,
-last(temperature, time) AS first_temperature
+last(temperature, time) AS last_temperature
 FROM weather_conditions
 GROUP BY device_id
 LIMIT 10;
@@ -172,7 +172,7 @@ The aggregate function [`last`](https://docs.timescale.com/api/latest/hyperfunct
 You should receive the following output:
 
 ```text
-|     device_id      | first_temperature |
+|     device_id      | last_temperature |
 |--------------------|-------------------|
 | weather-pro-000000 |                42 |
 | weather-pro-000001 |                42 |
@@ -252,9 +252,10 @@ You should receive the following output:
 
 [**approximate_row_count()**](https://docs.timescale.com/api/latest/hyperfunctions/approximate_row_count/)
 
-Use the [`approximate_row_count`](https://docs.timescale.com/api/latest/hyperfunctions/approximate_row_count/) function to get the approximate number of rows in `weather_conditions` hypertable:
+Use the [`approximate_row_count`](https://docs.timescale.com/api/latest/hyperfunctions/approximate_row_count/) function to get the approximate number of rows in `weather_conditions` hypertable. The function reads table statistics, so run `ANALYZE` after loading data. Until then, it returns `0`:
 
 ```sql
+ANALYZE weather_conditions;
 SELECT approximate_row_count('weather_conditions');
 ```
 
@@ -263,7 +264,7 @@ You should receive the following output:
 ```text
 | approximate_row_count |
 |-----------------------|
-|             1000000   |
+|             1000003   |
 ```
 
 ## Working with chunks
@@ -283,8 +284,8 @@ You should receive the following output:
 ```text
 |               show_chunks               |
 |-----------------------------------------|
-| _timescaledb_internal._hyper_7_24_chunk |
-| _timescaledb_internal._hyper_7_25_chunk |
+| _timescaledb_internal._hyper_1_1_chunk |
+| _timescaledb_internal._hyper_1_2_chunk |
 ```
 
 `show_chunks` output indicates the presence of two internal chunks within your hypertable. To show detailed chunks information:
@@ -298,8 +299,8 @@ You should receive the following output:
 ```text
 |     chunk_schema      |    chunk_name     | table_bytes | index_bytes | toast_bytes | total_bytes | node_name |
 |-----------------------|-------------------|-------------|-------------|-------------|-------------|-----------|
-| _timescaledb_internal | _hyper_7_24_chunk |        8192 |       16384 |        8192 |       32768 |           |
-| _timescaledb_internal | _hyper_7_25_chunk |    82190336 |     8249344 |        8192 |    90447872 |           |
+| _timescaledb_internal | _hyper_1_1_chunk |        8192 |       16384 |        8192 |       32768 |           |
+| _timescaledb_internal | _hyper_1_2_chunk |    82190336 |     8249344 |        8192 |    90447872 |           |
 ```
 
 [**drop_chunks()**](https://docs.timescale.com/api/latest/hypertable/drop_chunks/)
@@ -307,7 +308,7 @@ You should receive the following output:
 You can use the [`drop_chunks`](https://docs.timescale.com/api/latest/hypertable/drop_chunks/) function to remove data chunks whose time range falls completely before (or after) a specified time.
 
 ```sql
-SELECT drop_chunks('temperature_data', INTERVAL '1 days');
+SELECT drop_chunks('weather_conditions', INTERVAL '1 days');
 ```
 
 It returns a list of the chunks that were dropped.
@@ -317,18 +318,17 @@ You should receive the following output:
 ```text
 |               drop_chunks               |
 |-----------------------------------------|
-| _timescaledb_internal._hyper_4_19_chunk |
-| _timescaledb_internal._hyper_4_20_chunk |
+| _timescaledb_internal._hyper_1_2_chunk |
 ```
 
 ## Data deletion
 
-You may run into space concerns as data accumulates in timescaledb hypertables. While Neon's Postgres service does not support compression, deleting old data is an option if you don't need to hold on to it for long periods of time.
+You may run into space concerns as data accumulates in timescaledb hypertables. Compression isn't supported on Neon, so deleting old data is an option if you don't need to hold on to it for long periods of time.
 
 You can use the [`drop_chunks`](<https://docs.timescale.com/api/latest/hypertable/drop_chunks/#:~:text=drop_chunks(),always%20before%20the%20end%20time.>) function outlined above to easily delete outdated chunks from a hypertable. For example, to delete all chunks older than 3 months:
 
 ```sql
-SELECT drop_chunks('temperature_data', INTERVAL '3 months');
+SELECT drop_chunks('weather_conditions', INTERVAL '3 months');
 ```
 
 The query deletes any chunks that contain only data older than 3 months.
@@ -336,7 +336,7 @@ The query deletes any chunks that contain only data older than 3 months.
 To automatically run this deletion periodically, you can setup a cron task. For example, adding this line to the crontab will run the deletion query every day at 1AM:
 
 ```sql
-0 1 * * * psql -c "SELECT drop_chunks('temperature_data', INTERVAL '3 months')"
+0 1 * * * psql -c "SELECT drop_chunks('weather_conditions', INTERVAL '3 months')"
 ```
 
 <Admonition type="note">
@@ -345,12 +345,8 @@ Please be aware that Neon's [Scale to Zero](/docs/guides/scale-to-zero-guide) fe
 
 This will help ensure the hypertable size is managed by deleting old unneeded data. Tune the interval passed to drop_chunks and the cron schedule based on your data retention needs.
 
-## Conclusion
-
-You were able to configure the timescaledb extension in Neon and create a hypertable to store `weather` data. Then you executed simple queries and analyzed data using a combination of standard SQL and `timescaledb` functions before finally using `drop_chunks()` to delete data.
-
 ## Reference
 
 - [TimescaleDB editions](https://docs.timescale.com/about/latest/timescaledb-editions/)
-- [TimesscaleDB hyperfunctions](https://docs.timescale.com/api/latest/hyperfunctions/)
+- [TimescaleDB hyperfunctions](https://docs.timescale.com/api/latest/hyperfunctions/)
 - [Timeseries data in Postgres](/guides/timeseries-data)
