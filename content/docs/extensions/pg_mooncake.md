@@ -9,7 +9,7 @@ summary: >-
   separate OLAP system. The extension requires
   `SET neon.allow_unstable_extensions='true'` before installation.
 enableTableOfContents: true
-updatedOn: '2026-10-14T11:21:37.306Z'
+updatedOn: '2026-11-21T19:21:16.214Z'
 ---
 
 The [pg_mooncake](https://github.com/Mooncake-Labs/pg_mooncake) extension enables fast analytic workloads in Postgres by adding native columnstore tables and vectorized execution (DuckDB).
@@ -55,6 +55,10 @@ This guide provides a quickstart to the `pg_mooncake` extension.
 <Steps>
 
 ## Enable the extension
+
+<Admonition type="note">
+`pg_mooncake` is available on Postgres 14 to 17. It isn't available on Postgres 18 or 19 yet, so select an earlier Postgres version when you create your project.
+</Admonition>
 
 <Admonition type="note">
 The `pg_mooncake` extension is experimental in Neon. A separate, dedicated Neon project is recommended when using an experimental extension. For additional guidance, see [Experimental extensions](/docs/extensions/pg-extensions#experimental-extensions).
