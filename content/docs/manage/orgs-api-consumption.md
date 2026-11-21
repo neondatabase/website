@@ -2,20 +2,20 @@
 title: Query organization usage metrics with the Neon API
 summary: >-
   The Neon API provides an organization-scoped consumption endpoint on the
-  Scale plan: `/consumption_history/projects` for per-project breakdowns.
+  Scale and Enterprise plans: `/consumption_history/projects` for per-project breakdowns.
   It returns usage metrics at hourly, daily, or monthly granularity. Use this
   page to audit cross-project usage, build chargeback reports, or monitor
   billing trends. To find your org_id before querying, use GET
   `/users/me/organizations` with a personal API key.
 enableTableOfContents: true
-updatedOn: '2026-11-10T14:15:46.000Z'
+updatedOn: '2026-11-21T21:02:51.160Z'
 ---
 
 You can use the Neon API to retrieve project-level consumption metrics for your organization:
 
-| Metric                                                                                          | Description                                                                       | Plan Availability |
-| ----------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- | ----------------- |
-| [Project-level](/docs/reference/api/consumption/get-consumption-history-per-project) (granular) | Project-level metrics available at hourly, daily, or monthly level of granularity | Scale             |
+| Metric                                                                                          | Description                                                                       | Plan Availability    |
+| ----------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- | -------------------- |
+| [Project-level](/docs/reference/api/consumption/get-consumption-history-per-project) (granular) | Project-level metrics available at hourly, daily, or monthly level of granularity | Scale and Enterprise |
 
 ## Finding organizations for consumption queries
 
@@ -37,7 +37,7 @@ The response includes details about each organization, including the `org_id` yo
       "id": "org-morning-bread-81040908",
       "name": "Morning Bread Organization",
       "handle": "morning-bread-organization-org-morning-bread-81040908",
-      "plan": "free_v2",
+      "plan": "free",
       "created_at": "2025-04-30T14:43:00Z",
       "managed_by": "console",
       "updated_at": "2025-04-30T14:46:22Z"
@@ -46,7 +46,7 @@ The response includes details about each organization, including the `org_id` yo
       "id": "org-super-grass-41324851",
       "name": "Super Org Inc",
       "handle": "super-org-inc-org-super-grass-41324851",
-      "plan": "scale_v2",
+      "plan": "scale",
       "created_at": "2025-06-02T16:56:18Z",
       "managed_by": "console",
       "updated_at": "2025-06-02T16:56:18Z"
@@ -90,7 +90,7 @@ For attribute definitions, find the [Retrieve project consumption metrics](/docs
               "active_time_seconds": 147472,
               "compute_time_seconds": 43222,
               "written_data_bytes": 112730864,
-              "synthetic_storage_size_bytes": 37000959232
+              "synthetic_storage_size_bytes": 0
             },
             {
               "timeframe_start": "2024-07-01T00:00:00Z",
@@ -114,7 +114,7 @@ For attribute definitions, find the [Retrieve project consumption metrics](/docs
               "active_time_seconds": 150924,
               "compute_time_seconds": 44108,
               "written_data_bytes": 114912552,
-              "synthetic_storage_size_bytes": 36593552376
+              "synthetic_storage_size_bytes": 0
             }
             // ... More consumption data
           ]
@@ -140,4 +140,4 @@ For metrics that match your invoice on usage-based plans (Launch, Scale, Agent, 
   - A compute that uses 1 CPU for 1 second is equal to `compute_time=1`.
   - A compute that uses 2 CPUs simultaneously for 1 second is equal to `compute_time=2`.
 - **written_data_bytes**: The total amount of data written to all of a project's branches.
-- **synthetic_storage_size_bytes**: The total space occupied in storage. Synthetic storage size combines the logical data size and Write-Ahead Log (WAL) size for all branches.
+- **synthetic_storage_size_bytes**: Deprecated. This endpoint always returns `0`. Use the [v2 endpoint](/docs/guides/consumption-metrics) for storage metrics.
