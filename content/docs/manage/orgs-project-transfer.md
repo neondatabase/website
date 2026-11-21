@@ -5,7 +5,7 @@ summary: >-
   connection strings, via the Console or API. The destination organization's
   plan must be the same tier or higher than the source.
 enableTableOfContents: true
-updatedOn: '2026-11-05T20:55:58.596Z'
+updatedOn: '2026-11-21T21:02:41.078Z'
 ---
 
 Move projects between organizations you belong to in the Neon Console or via the Neon API. You can also hand a project to a different Neon account with a claim link.
@@ -75,7 +75,7 @@ Where:
 - `destination_org_id` is the organization receiving the projects
 - `project_ids` is an array of up to 400 project IDs to transfer
 
-A `200` response with an empty object (`{}`) means the transfer succeeded. A `406` (plan or capacity) or `422` (active integrations) means it failed; see [Limits and requirements](#limits-and-requirements) to resolve.
+A `200` response with an empty object (`{}`) means the transfer succeeded. A `406` (plan or capacity) or `422` (active integrations) means it failed; see [Limits and requirements](#limits-and-requirements) to resolve. An empty `project_ids` array, or more than 400 IDs, returns a `400` before any project moves.
 
 For the full request and response schema, see the [API reference](/docs/reference/api/organizations/transfer-projects-from-org-to-org).
 
