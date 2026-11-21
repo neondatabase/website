@@ -36,6 +36,7 @@ The OAuth provider plugin and the `@neon/oauth` SDK are in beta ([changelog](/do
 - A [Neon account](https://console.neon.tech/signup) and a project in AWS US East (Ohio), AWS US East (N. Virginia), AWS Europe (Frankfurt), or AWS Asia Pacific (Singapore). These are the regions the MCP server setup supports today ([Build an MCP server](/docs/compute/functions/mcp-server#before-you-start)).
 - A coding agent such as Cursor, Claude Code, or Codex. The video uses Pi.
 - Node.js and pnpm, to run the app locally.
+- The [Neon CLI](/docs/cli/install), signed in to your Neon account.
 - A [Vercel](https://vercel.com) account, or another host for the frontend.
 
 ## Start from the canvas app
@@ -69,7 +70,37 @@ export const canvasSquares = pgTable(
 
 ![Each row in canvas_squares is one square on the grid. Updating a row's color changes the square in the browser.](/guides/images/mcp-server-neon-functions/03-app-and-database.png)
 
-To confirm the app works, change a row in the [SQL Editor](/docs/get-started/query-with-neon-sql-editor) and watch the square change in the browser:
+The repo doesn't create the table or deploy the function for you. Set up the starting app on your Neon project:
+
+1. Link the repo to your project and turn on [Neon Realtime](/docs/realtime/quickstart) for the branch:
+
+   ```bash
+   neon link --project-id <project_id>
+   neon realtime enable
+   ```
+
+2. `neon.ts` reads two variables when it loads, so set them before you run other Neon commands. Get the Realtime secret from **Copy secret** on the branch's **Realtime** page in the Neon Console:
+
+   ```bash
+   export NEON_REALTIME_SECRET=<realtime_secret>
+   export APP_ALLOWED_ORIGINS=http://localhost:3000
+   ```
+
+3. Write the branch's connection details to `.env.local`, create the `canvas_squares` table with its 25 rows, and deploy the `api` function:
+
+   ```bash
+   neon env pull
+   pnpm db:migrate
+   neon deploy -y
+   ```
+
+4. Add two variables for the frontend to `.env.local`: `VITE_NEON_FUNCTION_API_BASE_URL`, set to the `api` function's URL from the deploy output, and `VITE_NEON_REALTIME_URL`, set to the `NEON_REALTIME_URL` value that `neon env pull` wrote. Then start the app:
+
+   ```bash
+   pnpm dev
+   ```
+
+Open `http://localhost:3000` to see the grid. To confirm the app works, change a row in the [SQL Editor](/docs/get-started/query-with-neon-sql-editor) and watch the square change in the browser:
 
 ```sql
 UPDATE canvas_squares SET color = 'green' WHERE x = 'C' AND y = 3;
@@ -104,6 +135,7 @@ export default defineConfig({
   functions: {
     api: { /* ... */ },
   },
+  preview: { /* realtime.allowedOrigins, unchanged */ },
 });
 ```
 
@@ -313,12 +345,12 @@ Run the Manufact checklist again. This time every check passes. Compare your wor
 
 ## Connect ChatGPT
 
-1. In ChatGPT, open **Plugins** and add a custom MCP server.
+1. In ChatGPT, open **Plugins** and add a custom MCP server as a plugin.
 2. Enter a name and your MCP server URL, the function URL ending in `/mcp`, not the Vercel URL. Set **Authentication** to **OAuth**.
 3. Read the safety notice, check **I understand and want to continue**, and click **Create as a plugin**.
 4. Complete the sign-in and consent flow.
 
-If writes fail with an error like "Unknown tool" while reads work, open the connector's details and allow write tools. After you change tools on the server, refresh the connector or start a new chat, because ChatGPT caches the tool list ([Connect ChatGPT](/docs/compute/functions/mcp-server#connect-chatgpt)).
+If writes fail with an error like "Unknown tool" while reads work, open the plugin's details and allow write tools. After you change tools on the server, refresh the plugin or start a new chat, because ChatGPT caches the tool list ([Connect ChatGPT](/docs/compute/functions/mcp-server#connect-chatgpt)).
 
 Start a new chat and ask ChatGPT to change B4 to blue and D2 to purple. It calls `paint_square` once for each square and replies that both are done. Open your app in another tab: B4 and D2 change color without a reload.
 
