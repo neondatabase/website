@@ -19,7 +19,7 @@ redirectFrom:
   - /docs/integrations/draxlr
   - /docs/guides/logical-replication-decodable
   - /docs/guides/logical-replication-stacksync
-updatedOn: '2026-11-18T16:41:34.386Z'
+updatedOn: '2026-11-21T16:05:37.000Z'
 ---
 
 ## Authentication
@@ -45,6 +45,8 @@ updatedOn: '2026-11-18T16:41:34.386Z'
 <a href="/docs/guides/cloudflare-pages" title="Cloudflare Pages" description="Use Neon with Cloudflare Pages" icon="cloudflare"></a>
 
 <a href="/docs/guides/cloudflare-workers" title="Cloudflare Workers" description="Use Neon with Cloudflare Workers" icon="cloudflare"></a>
+
+<a href="/docs/guides/fly" title="Fly.io" description="Use Neon with Fly.io" icon="fly"></a>
 
 <a href="/docs/guides/heroku" title="Heroku" description="Deploy an app with Neon on Heroku" icon="heroku"></a>
 
