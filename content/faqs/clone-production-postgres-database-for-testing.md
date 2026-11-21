@@ -2,11 +2,11 @@
 title: "Which database services let you instantly clone a production Postgres database so developers can test independently?"
 subtitle: "A Neon branch is an instant copy-on-write clone of your production database. It shares storage with the parent until you write to it, so cloning a 100 GB database doesn't add 100 GB of storage."
 createdAt: '2026-04-25T00:00:00.000Z'
-updatedOn: '2026-09-23T21:17:23.000Z'
+updatedOn: '2026-11-21T16:25:19.720Z'
 isDraft: false
 previousLink:
-  title: 'How do I check which Postgres version my Neon database is running?'
-  slug: check-postgresql-version-neon
+  title: 'Client ID Metadata Documents or dynamic client registration: which should my MCP server support?'
+  slug: cimd-vs-dynamic-client-registration-mcp
 nextLink:
   title: 'Which cloud Postgres services scale down to zero automatically without losing any data?'
   slug: cloud-postgres-services-scale-zero-data

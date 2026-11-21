@@ -3,15 +3,15 @@ title: 'How do I check which Postgres version my Neon database is running?'
 subtitle: 'Run SELECT version() in SQL, check the Project Dashboard, or use the Neon CLI.'
 enableTableOfContents: true
 createdAt: '2026-05-18T00:00:00.000Z'
-updatedOn: '2026-09-23T21:00:25.204Z'
+updatedOn: '2026-11-21T16:25:19.720Z'
 isDraft: false
 redirectFrom: []
 previousLink:
   title: 'How can I check which region my Neon project is running in?'
   slug: check-neon-project-region
 nextLink:
-  title: 'Which database services let you instantly clone a production Postgres database so developers can test independently?'
-  slug: clone-production-postgres-database-for-testing
+  title: 'Client ID Metadata Documents or dynamic client registration: which should my MCP server support?'
+  slug: cimd-vs-dynamic-client-registration-mcp
 ---
 
 Every Neon project is tied to the Postgres major version you picked when you created it. To check which one you're on, run `SELECT version();` from any SQL client, or read it from the **Settings** widget on the **Project Dashboard** in the [Neon Console](https://console.neon.tech). `neon projects get <project_id> --output json` returns it in the `pg_version` field. Neon supports Postgres 14, 15, 16, 17, and 18 ([version support](/docs/postgresql/postgres-version-support)).

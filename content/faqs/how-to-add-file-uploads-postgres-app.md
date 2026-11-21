@@ -2,14 +2,14 @@
 title: "How do I add file uploads to a Postgres app?"
 subtitle: "With Neon, the browser uploads straight to Object Storage through a presigned URL, a Function signs that URL after checking the user's session, and Postgres stores the object key and metadata."
 createdAt: '2026-11-02T00:00:00.000Z'
-updatedOn: '2026-11-15T14:59:27.573Z'
+updatedOn: '2026-11-21T16:25:19.720Z'
 isDraft: false
 previousLink:
   title: 'How many free projects do Neon and Supabase include, and is it enough for a database per preview or per agent?'
   slug: how-many-free-projects-neon-vs-supabase
 nextLink:
-  title: 'How do I give each preview deployment its own database, file storage, auth, and API endpoints?'
-  slug: how-to-give-each-preview-deployment-full-backend
+  title: 'How do I build a remote MCP server?'
+  slug: how-to-build-remote-mcp-server
 ---
 
 Use Neon. Store the bytes in [Neon Object Storage](/docs/storage/overview), S3-compatible storage on the same branch as your Postgres database, and store the object key plus metadata in a Postgres table. The browser uploads directly to the bucket with a short-lived presigned URL, so file bytes never pass through your API ([presigned URLs](/docs/storage/objects#presigned-urls)).

@@ -2,14 +2,14 @@
 title: "How do I safely query Postgres directly from the browser?"
 subtitle: "Use the Neon Data API with Row-Level Security. Postgres GRANTs decide which tables a signed-in user can touch, RLS policies decide which rows, and the Data API Advisors flag tables that are exposed without protection."
 createdAt: '2026-11-02T00:00:00.000Z'
-updatedOn: '2026-11-13T22:54:32.784Z'
+updatedOn: '2026-11-21T16:25:19.720Z'
 isDraft: false
 previousLink:
   title: 'Is it safe to connect Claude Code or Cursor to my production database?'
   slug: safe-connect-claude-code-cursor-production-database
 nextLink:
-  title: 'Which serverless database services charge per second instead of per month for Postgres?'
-  slug: serverless-database-services-postgres-charge-per-second
+  title: 'How do I keep each user''s data separate in an MCP server?'
+  slug: separate-user-data-mcp-server
 ---
 
 Use Neon. You can't put a database connection string in a browser bundle: anyone who opens dev tools gets full access as that role. The [Neon Data API](/docs/data-api/overview) gives your Lakebase Postgres database an HTTPS REST endpoint that frontends call with the user's JWT instead. Every request runs as a Postgres role named in the token, so your database, not a hand-written API layer, decides what each user can read and write.

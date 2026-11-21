@@ -2,11 +2,11 @@
 title: "How do I test cron jobs in staging or a preview environment without running them twice against production?"
 subtitle: "On Neon, a branch inherits its parent's Function Triggers disabled, so nothing fires on the copy until you enable it there or deploy a neon.ts that declares it, and an enabled trigger on the branch runs against the branch's own data."
 createdAt: '2026-11-02T00:00:00.000Z'
-updatedOn: '2026-11-03T23:21:47.530Z'
+updatedOn: '2026-11-21T16:25:19.720Z'
 isDraft: false
 previousLink:
-  title: 'How do I test a new embedding model or chunking strategy on production data without affecting production?'
-  slug: test-embedding-model-chunking-changes-production-data
+  title: 'How do I test an MCP server across ChatGPT, Claude, and Cursor?'
+  slug: test-mcp-server-chatgpt-claude-cursor
 nextLink:
   title: 'What tools allow restoring a database to before a bug occurred?'
   slug: tools-for-restoring-database-before-bug

@@ -3,15 +3,15 @@ title: 'How do I connect my application to my Neon database using the connection
 subtitle: 'Read DATABASE_URL from your environment and pass it to a Postgres driver.'
 enableTableOfContents: true
 createdAt: '2026-05-18T00:00:00.000Z'
-updatedOn: '2026-10-29T21:25:47.650Z'
+updatedOn: '2026-11-21T16:25:19.720Z'
 isDraft: false
 redirectFrom: []
 previousLink:
   title: 'Which cloud Postgres services scale down to zero automatically without losing any data?'
   slug: cloud-postgres-services-scale-zero-data
 nextLink:
-  title: 'How do I create a new database in my Neon project?'
-  slug: create-new-database-neon-project
+  title: 'How do I connect a custom MCP server to ChatGPT?'
+  slug: connect-custom-mcp-server-chatgpt
 ---
 
 Click **Connect** in the Neon Console to open the **Connect to your branch** modal and copy the connection string ([docs](/docs/connect/connect-from-any-app)). Save it as an environment variable (usually `DATABASE_URL`) and pass it to a Postgres driver in your code. Lakebase Postgres speaks the standard Postgres wire protocol, so standard clients and ORMs work: `pg`, `psycopg2`, `psql`, Prisma, Drizzle, SQLAlchemy, and others. For serverless and edge runtimes, the [Neon serverless driver](/docs/serverless/serverless-driver) connects over HTTP or WebSockets instead of TCP.
