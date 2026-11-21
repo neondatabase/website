@@ -135,7 +135,7 @@ https://console.neon.tech/app/projects/<project-id>/
 Follow these instructions only when the sign-in step sent you here. Claimable Neon creates a project without a Neon account, and the user claims it later. Skip the region question; the project is created in AWS US East (Ohio). Run these commands in the root directory of the user's source-code repo, using the name of the repo's directory for `<project-name>`:
 
 ```bash
-neon config init
+neon config init --services postgres
 neon claim create --project-name <project-name>
 neon skills -y --agent <agent-name>
 ```
