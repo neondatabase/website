@@ -33,10 +33,10 @@ Then check whether the CLI can already use a Neon account. `neon me` doesn't ope
 neon me
 ```
 
-If `neon me` succeeds, skip sign-in. If it fails with `Not signed in`, pick one of these options. For any other failure, follow what it prints.
+If `neon me` succeeds, skip sign-in. If it fails:
 
-- If the user is at this machine, run `neon login` (`neon auth` is an alias) and have the user finish signing in in the browser.
-- If nobody can finish a browser sign-in on this machine (a sandbox, a container, a remote host, or an unattended run), don't run `neon login` and don't ask the user for an API key. For a new project, follow the "Claimable Neon project" section below. For an existing project, tell the user they need to sign in with `neon login` on this machine or set an API key they already have as `NEON_API_KEY`, and stop.
+- If the user is at this machine, follow what `neon me` prints. A local coding agent the user is chatting with counts, even in a sandbox mode. When it says `Not signed in`, run `neon login` (`neon auth` is an alias) and have the user finish signing in in the browser.
+- If nobody can finish a browser sign-in on this machine (a remote or cloud sandbox, a container, a remote host, or an unattended run), don't run `neon login` and don't ask the user for an API key. If `neon me` printed `has no stored credential` and this is a new project, follow the "Claimable Neon project" section below. Otherwise, tell the user what `neon me` printed and that they need to sign in with `neon login` on this machine or set an API key they already have as `NEON_API_KEY`, and stop.
 
 ---
 
