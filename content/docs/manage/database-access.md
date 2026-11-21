@@ -11,12 +11,12 @@ summary: >-
 enableTableOfContents: true
 redirectFrom:
   - /docs/guides/manage-database-access
-updatedOn: '2026-11-19T00:59:42.125Z'
+updatedOn: '2026-11-21T12:16:49.084Z'
 ---
 
 Each Neon project is created with a Postgres role that is named for your database. For example, if your database is named `neondb`, the project is created with a role named `neondb_owner`.
 
-This Postgres role is automatically assigned the [neon_superuser](/docs/manage/roles#the-neonsuperuser-role) role, which allows creating databases, roles, and reading and writing data in all tables, views, and sequences. Any user created with the Neon Console, Neon API, or Neon CLI is also assigned the `neon_superuser` role.
+This Postgres role is automatically assigned the [neon_superuser](/docs/manage/roles#the-neonsuperuser-role) role, which allows creating databases, roles, and reading and writing data in all tables, views, and sequences. Roles created in the Neon Console or Neon API are also assigned the `neon_superuser` role. So are roles created with the Neon CLI, unless you pass `--access`.
 
 It is good practice to reserve `neon_superuser` roles for database administration tasks like creating roles and databases. For other users, we recommend creating roles with specific sets of permissions based on application and access requirements. Then, assign the appropriate roles to your users. The roles you create should adhere to a _least privilege_ model, granting only the permissions required to accomplish their tasks.
 
@@ -129,7 +129,7 @@ GRANT SELECT ON ALL TABLES IN SCHEMA <schema> TO readonly;
 ALTER DEFAULT PRIVILEGES IN SCHEMA <schema> GRANT SELECT ON TABLES TO readonly;
 
 -- User creation
-CREATE USER readonly_user1 WITH PASSWORD '<password>';
+CREATE ROLE readonly_user1 WITH LOGIN PASSWORD '<password>';
 
 -- Grant privileges to user
 GRANT readonly TO readonly_user1;
@@ -185,7 +185,7 @@ To create a read-write role:
    GRANT readwrite TO readwrite_user1;
    ```
 
-   The `readwrite_user1` user now has read-write access to tables in the specified schema and database and should able to connect and run `SELECT`, `INSERT`, `UPDATE`, `DELETE` queries.
+   The `readwrite_user1` user now has read-write access to tables in the specified schema and database and should be able to connect and run `SELECT`, `INSERT`, `UPDATE`, `DELETE` queries.
 
    ```bash
    psql postgresql://readwrite_user1:AbC123dEf@ep-cool-darkness-123456.us-west-2.aws.neon.tech/dbname?sslmode=require&channel_binding=require
@@ -196,7 +196,7 @@ To create a read-write role:
    dbname=> INSERT INTO <table_name> (col1, col2) VALUES (1, 2);
    ```
 
-### SQL statement summary (#sql-statement-summary-2)
+### SQL statement summary
 
 To create the read-write role and user described above, run the following statements from an SQL client:
 
@@ -211,7 +211,7 @@ GRANT USAGE ON ALL SEQUENCES IN SCHEMA <schema> TO readwrite;
 ALTER DEFAULT PRIVILEGES IN SCHEMA <schema> GRANT USAGE ON SEQUENCES TO readwrite;
 
 -- User creation
-CREATE USER readwrite_user1 WITH PASSWORD '<password>';
+CREATE ROLE readwrite_user1 WITH LOGIN PASSWORD '<password>';
 
 -- Grant privileges to user
 GRANT readwrite TO readwrite_user1;
@@ -235,26 +235,19 @@ To get started:
 
    The password should have at least 12 characters with a mix of lowercase, uppercase, number, and symbol characters. For detailed password guidelines, see [Manage roles with SQL](/docs/manage/roles#manage-roles-with-sql).
 
-3. Grant the `dev_users` role privileges on the database:
+3. Grant the `dev_users` role privileges on the database, the schema, and the objects in the schema:
 
    ```sql
    GRANT ALL PRIVILEGES ON DATABASE <database> TO dev_users;
+   GRANT ALL PRIVILEGES ON SCHEMA <schema_name> TO dev_users;
+   GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA <schema_name> TO dev_users;
+   GRANT ALL PRIVILEGES ON ALL SEQUENCES IN SCHEMA <schema_name> TO dev_users;
    ```
 
    You now have a `dev_users` role on your parent branch, and the role is not assigned to any users. This role will now be included in all future branches created from this branch.
 
    <Admonition type="note">
-   The `GRANT` statement above does not grant privileges on existing schemas, tables, sequences, etc., within the database. If you want the `dev_users` role to access specific schemas, tables, etc., you need to grant those permissions explicitly.
-
-   For example, to grant all privileges on all tables in a schema:
-
-   ```sql
-   GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA <schema_name> TO dev_users;
-   ```
-
-   Similarly, you'd grant privileges for sequences and other objects as needed.
-
-   That said, the `GRANT` command above allows users with the `dev_users` role to create new schemas within the database. But for pre-existing schemas and their objects, you need to grant permissions explicitly.
+   The database-level `GRANT` allows the role to create new schemas. It doesn't cover existing schemas, tables, or sequences, so the schema and object grants above are required before developers can read or change existing data. Objects you create on the parent branch later need their own grants.
    </Admonition>
 
 4. Create a development branch. Name it something like `dev1`. See [Create a branch](/docs/manage/branches#create-a-branch) for instructions.
@@ -284,15 +277,16 @@ To get started:
    dbname=>
    ```
 
-### SQL statement summary (#sql-statement-summary-3)
+### SQL statement summary
 
 ```sql
 -- dev_users role
-CREATE ROLE dev_users PASSWORD `password`;
+CREATE ROLE dev_users PASSWORD '<password>';
 GRANT ALL PRIVILEGES ON DATABASE <database> TO dev_users;
 
--- optionally, grant access to an existing schema
+GRANT ALL PRIVILEGES ON SCHEMA <schema_name> TO dev_users;
 GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA <schema_name> TO dev_users;
+GRANT ALL PRIVILEGES ON ALL SEQUENCES IN SCHEMA <schema_name> TO dev_users;
 
 -- User creation
 CREATE ROLE dev_user1 WITH LOGIN PASSWORD '<password>';
@@ -303,7 +297,7 @@ GRANT dev_users TO dev_user1;
 
 ## Revoke privileges
 
-If you set up privilege-holding roles as describe above, you can revoke privileges by removing assigned roles. For example, to remove the `readwrite` role from `readwrite_user1`, run the following SQL statement:
+If you set up privilege-holding roles as described above, you can revoke privileges by removing assigned roles. For example, to remove the `readwrite` role from `readwrite_user1`, run the following SQL statement:
 
 ```sql
 REVOKE readwrite FROM readwrite_user1;
