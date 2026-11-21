@@ -9,7 +9,7 @@ summary: >-
   observability, security and compliance, and operations and maintenance.
   Use this page to find the right sub-topic when you know the management
   area but not the specific doc.
-updatedOn: '2026-10-28T11:11:18.780Z'
+updatedOn: '2026-11-21T12:37:18.172Z'
 ---
 
 ## The Neon platform, in brief
@@ -22,7 +22,7 @@ Neon is a full backend platform for apps and agents, not just a database. For an
 
 <a href="/docs/auth/overview" description="Managed Better Auth with sign-up, OAuth, and sessions. Users live in your Postgres and branch with it." icon="lock-landscape">Auth</a>
 
-<a href="/docs/data-api/overview" description="HTTPS queries with no backend code. Drop-in compatible with Supabase." icon="network">Data API</a>
+<a href="/docs/data-api/overview" description="PostgREST-compatible HTTPS queries with no backend code." icon="network">Data API</a>
 
 <a href="/docs/storage/overview" description="S3-compatible object storage that branches with your database." icon="data">Object Storage</a>
 
@@ -70,7 +70,7 @@ Learn how to manage all aspects of your Neon projects. These topics cover the ba
 
 <a href="/docs/manage/branches" description="Learn about database branching in Neon" icon="branching">Branches</a>
 
-<a href="/docs/manage/computes" description="Configure and optimimze compute resources for your Neon projects" icon="laptop">Computes</a>
+<a href="/docs/manage/computes" description="Configure and optimize compute resources for your Neon projects" icon="laptop">Computes</a>
 
 <a href="/docs/manage/roles" description="Manage roles within projects and assign permissions" icon="user">Roles</a>
 
@@ -142,7 +142,7 @@ Learn how Neon secures your projects and data, and explore the security features
 
 <a href="/docs/get-started/production-checklist" description="Guidelines to optimize price, performance, and reliability" icon="check">Production checklist</a>
 
-<a href="/docs/manage/backups" description="An overview of backup strategies for Lakebase Postgres" icon="database">Backups</a>
+<a href="/docs/postgres/backup-restore/backups" description="An overview of backup strategies for Lakebase Postgres" icon="database">Backups</a>
 
 <a href="/docs/manage/backup-pg-dump" description="Learn how to create a backup of your Neon database using pg_dump" icon="database">Backup with pg_dump</a>
 
