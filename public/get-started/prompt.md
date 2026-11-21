@@ -33,7 +33,7 @@ Then check whether the CLI can already use a Neon account. `neon me` doesn't ope
 neon me
 ```
 
-If `neon me` succeeds, skip sign-in. If it fails, follow what it prints. When the CLI has no credential:
+If `neon me` succeeds, skip sign-in. If it fails with `Not signed in`, pick one of these options. For any other failure, follow what it prints.
 
 - If the user is at this machine, run `neon login` (`neon auth` is an alias) and have the user finish signing in in the browser.
 - If nobody can finish a browser sign-in on this machine (a sandbox, a container, a remote host, or an unattended run), don't run `neon login` and don't ask the user for an API key. For a new project, follow the "Claimable Neon project" section below. For an existing project, tell the user they need to sign in with `neon login` on this machine or set an API key they already have as `NEON_API_KEY`, and stop.
@@ -135,6 +135,7 @@ https://console.neon.tech/app/projects/<project-id>/
 Follow these instructions only when the sign-in step sent you here. Claimable Neon creates a project without a Neon account, and the user claims it later. Skip the region question; the project is created in AWS US East (Ohio). Run these commands in the root directory of the user's source-code repo, using the name of the repo's directory for `<project-name>`:
 
 ```bash
+neon config init
 neon claim create --project-name <project-name>
 neon skills -y --agent <agent-name>
 ```
