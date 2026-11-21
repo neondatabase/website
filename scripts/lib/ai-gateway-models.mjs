@@ -49,6 +49,7 @@ const isDecision = (item) => item.dialects?.includes('systemone') === true;
 
 function toCost(item, committedCost = {}) {
   const cost = rates(item.pricing);
+  if (item.pricing.image_output != null) cost.output_image = perMillion(item.pricing.image_output);
   if (item.model_type === 'embedding' || isDecision(item)) delete cost.output;
   if (committedCost.input_audio != null) cost.input_audio = committedCost.input_audio;
   const overrides = item.pricing.overrides ?? [];

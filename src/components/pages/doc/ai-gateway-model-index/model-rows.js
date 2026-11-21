@@ -111,6 +111,7 @@ const toRow = (model, capability) => {
   const contextWindow = model.limit?.context;
   const costInput = model.cost?.input;
   const costOutput = model.cost?.output;
+  const costOutputImage = model.cost?.output_image;
   return {
     id: model.id,
     name: model.name,
@@ -127,6 +128,7 @@ const toRow = (model, capability) => {
     costOutput,
     costInputLabel: formatPrice(costInput),
     costOutputLabel: formatPrice(costOutput),
+    costOutputImageLabel: costOutputImage === undefined ? null : formatPrice(costOutputImage),
     knowledge: model.knowledge || null,
     releaseDate: model.release_date || null,
     releaseLabel: formatDate(model.release_date),
