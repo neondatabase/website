@@ -42,7 +42,7 @@ If `neon me` succeeds, skip sign-in. If it fails:
 
 ## Run `neon init` to connect your app to Neon, and install Neon skills and the MCP server
 
-`neon init` can create a new Neon project and connect your app to it, or connect your app to an existing Neon project. If the user's prompt includes a project ID and an organization ID, follow the instructions in the "Existing Neon project" section. Otherwise, follow the instructions in the "New Neon project" section.
+`neon init` can create a new Neon project and connect your app to it, or connect your app to an existing Neon project. If the sign-in step sent you to the "Claimable Neon project" section, follow only that section. Otherwise, if the user's prompt includes a project ID and an organization ID, follow the instructions in the "Existing Neon project" section. Otherwise, follow the instructions in the "New Neon project" section.
 
 ### Existing Neon project
 

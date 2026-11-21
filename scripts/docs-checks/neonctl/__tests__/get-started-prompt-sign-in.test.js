@@ -30,7 +30,7 @@ describe('get started prompt sign-in', () => {
     const login = fs
       .readFileSync(PROMPT, 'utf8')
       .split(/\r?\n/)
-      .findIndex((line) => /(?<!n't )\brun `neon (login|auth)`/i.test(line));
+      .findIndex((line) => /(?<!(n't|not|never) )\brun `neon (login|auth)`/i.test(line));
 
     expect(check, 'no fenced `neon me` credential check in the prompt').toBeDefined();
     expect(login, 'no instruction to run `neon login` in the prompt').not.toBe(-1);
