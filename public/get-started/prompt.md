@@ -27,13 +27,22 @@ pnpm add -g neon@latest    # pnpm
 
 For full CLI installation options, see https://neon.com/docs/cli/install.md
 
-Immediately after the CLI is installed, launch the sign-in flow by running `neon login` (`neon auth` is an alias) and have the user finish signing in via the browser to ensure the CLI is authenticated.
+Then check whether the CLI can already use a Neon account. `neon me` doesn't open a browser, and it exits 0 when `NEON_API_KEY` or a saved sign-in works:
+
+```bash
+neon me
+```
+
+If `neon me` succeeds, skip sign-in. If it fails:
+
+- If the user is at this machine, follow what `neon me` prints. A local coding agent the user is chatting with counts, even in a sandbox mode. When it says `Not signed in`, run `neon login` (`neon auth` is an alias) and have the user finish signing in in the browser.
+- If nobody can finish a browser sign-in on this machine (a remote or cloud sandbox, a container, a remote host, or an unattended run), don't run `neon login` and don't ask the user for an API key. If `neon me` printed `has no stored credential` and this is a new project, follow the "Claimable Neon project" section below. Otherwise, tell the user what `neon me` printed and that they need to sign in with `neon login` on this machine or set an API key they already have as `NEON_API_KEY`, and stop.
 
 ---
 
 ## Run `neon init` to connect your app to Neon, and install Neon skills and the MCP server
 
-`neon init` can create a new Neon project and connect your app to it, or connect your app to an existing Neon project. If the user's prompt includes a project ID and an organization ID, follow the instructions in the "Existing Neon project" section. Otherwise, follow the instructions in the "New Neon project" section.
+`neon init` can create a new Neon project and connect your app to it, or connect your app to an existing Neon project. If the sign-in step sent you to the "Claimable Neon project" section, follow only that section. Otherwise, if the user's prompt includes a project ID and an organization ID, follow the instructions in the "Existing Neon project" section. Otherwise, follow the instructions in the "New Neon project" section.
 
 ### Existing Neon project
 
@@ -120,3 +129,15 @@ Neon Setup Complete
 
 And give them the link to view their new project in the Neon Console. Get `<project-id>` from the `neon init` output or the `.neon` file:
 https://console.neon.tech/app/projects/<project-id>/
+
+### Claimable Neon project
+
+Follow these instructions only when the sign-in step sent you here. Claimable Neon creates a project without a Neon account, and the user claims it later. Skip the region question; the project is created in AWS US East (Ohio). Run these commands in the root directory of the user's source-code repo, using the name of the repo's directory for `<project-name>`:
+
+```bash
+neon config init --services postgres
+neon claim create --project-name <project-name>
+neon skills -y --agent <agent-name>
+```
+
+Tell the user the project expires at the `Project Expires At` time that `neon claim create` printed unless they claim it. When they want to keep it, run `neon claim accept --no-open` in the same directory and give them the printed `Verification URL`, which expires after 15 minutes.
