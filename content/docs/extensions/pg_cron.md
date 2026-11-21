@@ -11,7 +11,7 @@ summary: >-
   computes with scale-to-zero disabled. `cron.schedule_in_database()` is not
   supported in Neon.
 enableTableOfContents: true
-updatedOn: '2026-11-10T14:15:46.000Z'
+updatedOn: '2026-11-21T12:06:20.472Z'
 ---
 
 The `pg_cron` extension provides a simple, cron-based job scheduler for Postgres. It operates directly within your database, allowing you to schedule standard SQL commands or calls to stored procedures using familiar cron syntax. This eliminates the need for external cron utilities for many database maintenance and automation tasks.
@@ -107,7 +107,7 @@ You can use the following special characters:
 - `-`: Specifies a range of values (for example, `10-12` for hours 10, 11, and 12).
 - `/`: Specifies step values (for example, `*/15` in the minutes field means "every 15 minutes").
 
-Additionally, `pg_cron` supports:
+`pg_cron` also supports:
 
 - Interval scheduling using `'[1-59] seconds'` (for example, `'5 seconds'`).
 - `'$'` to indicate the last day of the month.
@@ -150,7 +150,7 @@ Here's a breakdown of the command:
   - `*`: The job will run every month.
   - `0`: The job will run on Sunday (where 0 represents Sunday).
     Therefore, this job is scheduled to run at 2:00 AM UTC every Sunday.
-- `$$ ... $$`: This is a way to define a string literal in PostgreSQL, especially useful for multi-line commands.
+- `$$ ... $$`: This is a way to define a string literal in Postgres, especially useful for multi-line commands.
 - `INSERT INTO orders_archive ...`: This is the SQL command that will be executed. It selects all rows from the `orders` table older than 90 days and inserts them into the `orders_archive` table. (A CTE is used to make sure the same rows are used for both the `INSERT` and `DELETE` commands.)
 - `DELETE FROM orders ...`: This command then deletes the archived orders from the main `orders` table.
 
@@ -236,7 +236,7 @@ This table includes details like the job ID, run ID, execution status, start and
 The `pg_cron` extension can only be installed in one database per Postgres cluster (each compute in a Neon project runs a Postgres instance, i.e., a Postgres cluster). If you need to schedule jobs in multiple databases, you can use the `cron.schedule_in_database()` function. This function allows you to create a cron job that runs in a specific database, even if `pg_cron` is installed in a different database.
 
 <Admonition type="warning" title="Function not supported in Neon">
-The `cron.schedule_in_database()` function is currently not supported in Neon.
+The `cron.schedule_in_database()` function is currently not supported in Neon. Calling it returns `permission denied for function schedule_in_database`.
 </Admonition>
 
 ### Example: Scheduling a job in a different database
@@ -275,16 +275,12 @@ Here are a few key `pg_cron` settings and their descriptions:
 | `cron.log_statement`          | `on`      | If enabled (`on`), the SQL command of each scheduled job is logged before execution.                                                                                                                                                             |
 | `cron.max_running_jobs`       | `32`      | This parameter defines the maximum number of `pg_cron` jobs that can run concurrently.                                                                                                                                                           |
 | `cron.timezone`               | `GMT`     | Specifies the timezone in which the `pg_cron` background worker operates. **Note:** Although this setting exists, `pg_cron` internally interprets all job schedules in UTC. Changing this parameter has no effect on how schedules are executed. |
-| `cron.use_background_workers` | `off`     | When enabled (`on`), `pg_cron` uses background workers instead of direct client connections to execute jobs. This may require adjustments to the `max_worker_processes` PostgreSQL setting.                                                      |
+| `cron.use_background_workers` | `off`     | When enabled (`on`), `pg_cron` uses background workers instead of direct client connections to execute jobs. This may require adjustments to the `max_worker_processes` Postgres setting.                                                        |
 
 <Admonition type="note" title="Important: Setting Modifications in Neon">
-It's important to note that because `pg_cron` is managed by Neon, modifying these settings requires superuser privileges. Therefore, you cannot directly alter these `pg_cron` configuration parameters yourself. If you have a specific need to adjust any of these settings, please [open a support ticket](https://console.neon.tech/app/projects?modal=support). **After Neon support implements the requested configuration change, you will need to [restart your Neon compute](/docs/manage/computes#restart-a-compute) for the new settings to take effect.**
+Because Neon manages `pg_cron`, changing these settings requires superuser privileges, so you cannot alter these `pg_cron` configuration parameters yourself. If you have a specific need to adjust any of these settings, please [open a support ticket](https://console.neon.tech/app/projects?modal=support). **After Neon support implements the requested configuration change, you will need to [restart your Neon compute](/docs/manage/computes#restart-a-compute) for the new settings to take effect.**
 
 </Admonition>
-
-## Conclusion
-
-You have successfully learned how to enable and use the `pg_cron` extension within your Lakebase Postgres environment. You can now schedule routine database tasks directly within your database, simplifying automation and maintenance. Remember that `pg_cron` schedules are interpreted in UTC and will only run when your compute is active.
 
 ## Resources
 
