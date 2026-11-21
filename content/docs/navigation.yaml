@@ -1051,6 +1051,10 @@
               slug: ai-gateway/gemini
         - section: Reference
           items:
+            - title: Prompt caching
+              slug: ai-gateway/prompt-caching
+              tag: new
+              tagTheme: green
             - title: Authentication
               slug: ai-gateway/authentication
             - title: Data retention
