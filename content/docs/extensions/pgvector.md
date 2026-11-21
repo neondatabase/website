@@ -13,7 +13,7 @@ summary: >-
 enableTableOfContents: true
 redirectFrom:
   - /docs/extensions/pg_embedding
-updatedOn: '2026-11-21T12:02:05.118Z'
+updatedOn: '2026-11-21T12:03:25.240Z'
 ---
 
 <LakebaseVectorTip />
@@ -342,7 +342,7 @@ The phases for HNSW are:
 1. initializing
 2. loading tuples
 
-For related information, see [CREATE INDEX Progress Reporting](https://www.postgresql.org/docs/current/progress-reporting.html#CREATE-INDEX-PROGRESS-REPORTING), in the _PostgreSQL documentation_.
+For related information, see [CREATE INDEX Progress Reporting](https://www.postgresql.org/docs/current/progress-reporting.html#CREATE-INDEX-PROGRESS-REPORTING), in the _Postgres documentation_.
 
 ### IVFFlat
 
@@ -468,7 +468,7 @@ The phases for IVFFlat are:
 3. assigning tuples
 4. loading tuples
 
-For related information, see [CREATE INDEX Progress Reporting](https://www.postgresql.org/docs/current/progress-reporting.html#CREATE-INDEX-PROGRESS-REPORTING), in the _PostgreSQL documentation_.
+For related information, see [CREATE INDEX Progress Reporting](https://www.postgresql.org/docs/current/progress-reporting.html#CREATE-INDEX-PROGRESS-REPORTING), in the _Postgres documentation_.
 
 ## Filtering
 
@@ -512,7 +512,7 @@ CREATE TABLE items (id bigserial PRIMARY KEY, embedding halfvec(3));
 
 Binary vector embeddings are a form of vector representation where each component is encoded as a binary digit, typically 0 or 1. For example, the word "cat" might be represented as `[0, 1, 0, 1, 1, 0, 0, 1, ...],` with each position in the vector being binary.
 
-These embeddings are advantageous for their efficiency in both storage and computation. Because they use only one bit per dimension, binary embeddings require less memory compared to traditional embeddings that use floating-point numbers. This makes them useful when there is limited memory or when dealing with large datasets. Additionally, operations with binary values are generally quicker than those involving real numbers, leading to faster computations.
+These embeddings are advantageous for their efficiency in both storage and computation. Because they use only one bit per dimension, binary embeddings require less memory compared to traditional embeddings that use floating-point numbers. This makes them useful when there is limited memory or when dealing with large datasets. Operations with binary values are also generally quicker than those involving real numbers, which makes computations faster.
 
 However, the trade-off with binary vector embeddings is a potential loss in accuracy. Unlike denser embeddings, which have real-valued entries and can represent subtleties in the data, binary embeddings simplify the representation. This can result in a loss of information and may not fully capture the intricacies of the data they represent.
 
