@@ -10,16 +10,16 @@ summary: >-
 enableTableOfContents: true
 redirectFrom:
   - /docs/manage/orgs-auto-provision-domain
-updatedOn: '2026-11-03T18:28:18.000Z'
+updatedOn: '2026-11-21T21:02:46.190Z'
 ---
 
 Organization admins can add verified email domains so that users whose email matches one of those domains are automatically added as members when they sign up or log in. No manual invite is required for those users.
 
-Only organization admins can add, verify, or remove domains. The **Auto-join by domain** section appears on your organization's **People** page when this feature is available for your org.
+Only organization admins can add, verify, or remove domains. The domain settings are on your organization's **Settings** page, in the **Verified domains** section, when this feature is available for your org.
 
 ## How it works
 
-- You add a domain (for example, `example.com`) on the organization **People** page under **Auto-join by domain**. The domain is added in a "Pending verification" state and Neon generates a verification code.
+- You add a domain (for example, `example.com`) on the organization **Settings** page under **Verified domains**. The domain is added in a "Pending verification" state and Neon generates a verification code.
 - You add a TXT record at your domain with that exact code. After DNS propagates, you click **Verify** in the Console to confirm you own the domain.
 - When a user signs up or logs in to Neon with an email whose domain matches one of your verified domains (for example, `alex@example.com`), they are automatically added to your organization as an Editor. They do not receive an invite email; they simply see the organization in their [org switcher](/docs/manage/orgs-manage#switch-organizations).
 
@@ -29,9 +29,9 @@ An organization can have multiple verified domains. The same domain can also be 
 
 <Steps>
 
-## Open the People page
+## Open the Settings page
 
-In the Neon Console, switch to the organization you want to manage, then open the **People** page. Scroll to the **Auto-join by domain** section (below **Pending invites**). The section shows a short description and a **Domain** field with an **Add domain** button.
+In the Neon Console, switch to the organization you want to manage, then open the **Settings** page. Scroll to the **Verified domains** section. The section shows a **Domain** field with an **Add domain** button.
 
 ![Auto-join by domain section before adding a domain: Domain input field and Add domain button](/docs/manage/Auto_join_by_domain.png)
 
@@ -61,11 +61,12 @@ You can delete the TXT record from your domain after verification. Neon only use
 
 ## Remove a domain
 
-Only organization admins can remove a domain. In the **Auto-join by domain** section on the **People** page, open the actions menu (⋮) for the domain and choose **Remove**. Confirm in the dialog. After removal, new users with that email domain will no longer be automatically added to the organization. Existing members are not affected.
+Only organization admins can remove a domain. In the **Verified domains** section on the **Settings** page, open the actions menu (⋮) for the domain and choose **Remove**. Confirm in the dialog. After removal, new users with that email domain will no longer be automatically added to the organization. Existing members are not affected.
 
 ## Behavior details
 
 - **Role:** Users who are automatically added receive the **Editor** role, which gives them access to every project in the organization. Admins can change their role later from the **People** page if needed. See [Organization roles](/docs/manage/user-permissions#organization-roles).
+- **Turn auto-add off:** The **Verified domains** section also has an **Auto-add new users** toggle. Admins can turn it off to stop adding new users from verified domains. Existing members are not affected. The toggle has no effect while the organization has an SSO connection or active SCIM tokens.
 - **Existing members:** If the user is already a member of the organization, no duplicate is created; they are simply signed in as usual.
 - **Sign up and log in:** Users are automatically added both when they create a new Neon account and when an existing user logs in. So if you add and verify a domain after some colleagues already have Neon accounts, those colleagues will be added to the org the next time they log in (as long as their email domain matches).
 
