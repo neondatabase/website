@@ -12,7 +12,7 @@ summary: >-
 enableTableOfContents: true
 redirectFrom:
   - /docs/manage/orgs
-updatedOn: '2026-08-04T15:25:12.468Z'
+updatedOn: '2026-11-21T21:02:29.138Z'
 ---
 
 In Neon, all projects live within organizations. When you sign up, you automatically get a free organization for your first project. Organizations provide a central place to manage your projects and collaborate with team members. You can start inviting teammates as soon as your organization is created. Paid plans also include billing management for your organization.
@@ -29,7 +29,7 @@ There are four organization roles:
 
 - **Admin**: Full control over the organization and all its projects, including billing, members, and settings.
 - **Editor**: Access to all organization projects, but cannot modify org settings, delete projects, or transfer them out of the organization.
-- **Viewer**: Read-only access to organization and project metadata. Cannot see connection strings or run SQL.
+- **Viewer**: Read-only access to organization and project metadata, and can create projects. Can't see connection strings or run SQL.
 - **Collaborator**: No access by default. Sees only the projects they're explicitly granted.
 
 For a full breakdown of what each role and per-project permission allows, see the [User permissions](/docs/manage/user-permissions) page. That page also explains [which roles receive certain organization emails](/docs/manage/user-permissions#email-notifications) (for example, alerts when a project is close to its storage limit).
