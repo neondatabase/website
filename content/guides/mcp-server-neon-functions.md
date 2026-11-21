@@ -154,6 +154,7 @@ export default defineConfig({
       env: { MCP_RESOURCE },
     },
   },
+  preview: { /* realtime.allowedOrigins, unchanged */ },
 });
 ```
 
