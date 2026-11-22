@@ -11,7 +11,7 @@ summary: >-
   metrics that match your invoice or for Launch plan access, use the Query
   consumption metrics page instead.
 enableTableOfContents: true
-updatedOn: '2026-11-20T18:37:54.892Z'
+updatedOn: '2026-11-22T11:32:47.789Z'
 ---
 
 Using the Neon API, you can query project-level consumption metrics with the legacy endpoint. The Management API only allows this path for **Scale plans and above** (legacy **Scale, Business, and Enterprise**, and usage-based **Scale** and higher). It is **not** available on **Launch**; use [`GET /consumption_history/v2/projects`](/docs/guides/consumption-metrics) instead. On every eligible plan, this endpoint returns **legacy metrics** only (active time, compute time, written data, synthetic storage). On a usage-based plan, those metrics do not match your invoice; for invoice-aligned metrics use the [project metrics endpoint](/docs/guides/consumption-metrics) in Query consumption metrics.
@@ -59,7 +59,7 @@ Retrieves consumption metrics per project at the chosen granularity. The same **
 - **`from`** (date-time, required): Start of the consumption period in RFC 3339 format. The value is rounded according to the specified granularity. Consumption history is available from March 1, 2024, at 00:00:00 UTC. The range must respect the granularity limits (hourly: last 168 hours; daily: last 60 days; monthly: last year).
 - **`to`** (date-time, required): End of the consumption period in RFC 3339 format. The value is rounded according to the specified granularity. The range must respect the same granularity limits as `from`.
 - **`granularity`** (string, required): Granularity of consumption metrics. `hourly` (last 168 hours), `daily` (last 60 days), or `monthly` (last year).
-- **`org_id`** (string, required with a personal API key): Organization for which to return project consumption metrics. An organization API key that is not project-scoped already identifies its organization, so you can omit `org_id` when you use one. To find your organization IDs, see [Finding organizations for consumption queries](/docs/manage/orgs-api-consumption#finding-organizations-for-consumption-queries).
+- **`org_id`** (string, required with a personal API key): Organization for which to return project consumption metrics. An organization API key that is not project-scoped already identifies its organization, so you can omit `org_id` when you use one. To find your organization IDs, see [Find your organization ID](/docs/guides/consumption-metrics#find-your-organization-id).
 
 #### Optional parameters
 
