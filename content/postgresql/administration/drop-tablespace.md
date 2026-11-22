@@ -49,7 +49,7 @@ Let’s explore some examples of using the `DROP TABLESPACE` statement.
 First, open the Command Prompt or Terminal on a Unix\-like system and create a new directory for the tablespace such as `C:\pgdata\demo`:
 
 ```bash
-mkdir C:\pgdata\sample
+mkdir C:\pgdata\demo
 ```
 
 Next, connect to the PostgreSQL server:
@@ -85,18 +85,18 @@ First, create a new directory called `C:/pgdata/demo` on your server. Replace th
 mkdir C:\pgdata\demo
 ```
 
-Second, [create a new tablespace](postgresql-create-tablespace 'PostgreSQL Creating Tablespace') named `demo` and map it to the `c:\pgdata\demo` directory.
+Second, [create a new tablespace](postgresql-create-tablespace 'PostgreSQL Creating Tablespace') named `demo_ts` and map it to the `c:\pgdata\demo` directory.
 
 ```sql
 CREATE TABLESPACE demo_ts
 LOCATION 'C:/pgdata/demo';
 ```
 
-Third, [create a new database](postgresql-create-database 'PostgreSQL CREATE DATABASE') named `dbdemo` and set its tablespace to `demo`:
+Third, [create a new database](postgresql-create-database 'PostgreSQL CREATE DATABASE') named `demodb` and set its tablespace to `demo_ts`:
 
 ```sql
 CREATE DATABASE demodb
-TABLESPACE = demo;
+TABLESPACE = demo_ts;
 ```
 
 Fourth, connect to the `demodb` database:
@@ -105,16 +105,16 @@ Fourth, connect to the `demodb` database:
 \c demodb
 ```
 
-Fifth, [create a new table](../postgresql-tutorial/postgresql-create-table 'PostgreSQL CREATE TABLE') named `test`in the `dbdemo` and set it `tablespace` to `demo_ts`:
+Fifth, [create a new table](../postgresql-tutorial/postgresql-create-table 'PostgreSQL CREATE TABLE') named `test`in the `demodb` and set it `tablespace` to `demo_ts`:
 
 ```sql
 CREATE TABLE test (
   id serial PRIMARY KEY,
   title VARCHAR (255) NOT NULL
-) TABLESPACE demo;
+) TABLESPACE demo_ts;
 ```
 
-Sixth, attempt to drop the `demo` tablespace:
+Sixth, attempt to drop the `demo_ts` tablespace:
 
 ```sql
 DROP TABLESPACE demo_ts;
@@ -146,7 +146,7 @@ Ninth, drop the `demo_ts` tablespace:
 DROP TABLESPACE demo_ts;
 ```
 
-Instead of [dropping the database](postgresql-drop-database 'PostgreSQL DROP DATABASE'), you can move it to another tablespace such as `pg_default` by using the [ALTER TABLE](postgresql-alter-database 'PostgreSQL ALTER DATABASE') statement as follows:
+Instead of [dropping the database](postgresql-drop-database 'PostgreSQL DROP DATABASE'), you can move it to another tablespace such as `pg_default` by using the [ALTER DATABASE](postgresql-alter-database 'PostgreSQL ALTER DATABASE') statement as follows:
 
 ```sql
 ALTER DATABASE demodb
