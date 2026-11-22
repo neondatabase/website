@@ -16,10 +16,10 @@ redirectFrom:
   - /docs/guides/partner-consumption-metrics
   - /docs/manage/orgs-api-consumption
 enableTableOfContents: true
-updatedOn: '2026-11-22T11:32:47.789Z'
+updatedOn: '2026-11-22T11:42:17.881Z'
 ---
 
-Using the Neon API, you can query consumption metrics to track your resource usage. This page covers the two v2 metrics endpoints for usage-based plans. To monitor usage in the Console instead, see [Monitor billing and usage](/docs/introduction/monitor-usage).
+Using the Neon API, you can query consumption metrics to track your resource usage. This page covers the project and branch metrics endpoints for usage-based plans. To monitor usage in the Console instead, see [Monitor billing and usage](/docs/introduction/monitor-usage).
 
 | API                               | Endpoint                           | Description                                                                                                            | Plan availability                |
 | --------------------------------- | ---------------------------------- | ---------------------------------------------------------------------------------------------------------------------- | -------------------------------- |
@@ -35,8 +35,8 @@ Using the Neon API, you can query consumption metrics to track your resource usa
 
 </Admonition>
 
-<Admonition type="note" title="API reference: legacy vs v2">
-In the [API reference](/docs/reference/api), two similarly named pages cover different paths. **Retrieve project consumption metrics (legacy plans)** is **`GET /consumption_history/projects`** and lists older metrics such as `active_time_seconds` and `compute_time_seconds`. **Retrieve project consumption metrics** (no "legacy plans" in the title) is **`GET /consumption_history/v2/projects`** and documents usage-based metrics, including snapshot storage and Functions metrics, in the **`metrics`** parameter. That v2 page matches this guide; see **[Retrieve project consumption metrics](/docs/reference/api/consumption/get-consumption-history-per-project-v2)**.
+<Admonition type="note" title="API reference: legacy and current endpoints">
+In the [API reference](/docs/reference/api), two similarly named pages cover different paths. **Retrieve project consumption metrics (legacy plans)** is **`GET /consumption_history/projects`** and lists older metrics such as `active_time_seconds` and `compute_time_seconds`. **Retrieve project consumption metrics** (no "legacy plans" in the title) is **`GET /consumption_history/v2/projects`** and documents usage-based metrics, including snapshot storage and Functions metrics, in the **`metrics`** parameter. That page matches this guide; see **[Retrieve project consumption metrics](/docs/reference/api/consumption/get-consumption-history-per-project-v2)**.
 </Admonition>
 
 ## Find your organization ID
@@ -104,7 +104,7 @@ The response includes these usage metrics:
 
 Use `snapshot_storage_bytes_month` for invoice-aligned, time-windowed snapshot storage reporting.
 
-The four Functions metrics, the six AI Gateway metrics, and `object_storage_network_transfer_bytes` are available from both v2 endpoints. `object_storage_bytes_month` is available only from this endpoint.
+The four Functions metrics, the six AI Gateway metrics, and `object_storage_network_transfer_bytes` are available from both the project and branch endpoints. `object_storage_bytes_month` is available only from this endpoint.
 
 The AI Gateway metrics are token counts summed across all models. They don't include cost or a per-model breakdown, and model prices differ, so to bill AI usage per project or branch, combine these counts with your own record of which models each one used. For current rates, see [AI Gateway pricing](/docs/introduction/plans#ai-gateway). For current Functions rates, see [Plans](/docs/introduction/plans#functions).
 

@@ -11,7 +11,7 @@ summary: >-
   metrics that match your invoice or for Launch plan access, use the Query
   consumption metrics page instead.
 enableTableOfContents: true
-updatedOn: '2026-11-22T11:32:47.789Z'
+updatedOn: '2026-11-22T11:42:17.881Z'
 ---
 
 Using the Neon API, you can query project-level consumption metrics with the legacy endpoint. The Management API only allows this path for **Scale plans and above** (legacy **Scale, Business, and Enterprise**, and usage-based **Scale** and higher). It is **not** available on **Launch**; use [`GET /consumption_history/v2/projects`](/docs/guides/consumption-metrics) instead. On every eligible plan, this endpoint returns **legacy metrics** only (active time, compute time, written data, synthetic storage). On a usage-based plan, those metrics do not match your invoice; for invoice-aligned metrics use the [project metrics endpoint](/docs/guides/consumption-metrics) in Query consumption metrics.
@@ -52,7 +52,7 @@ Both endpoints return metrics that align with legacy billing. Default metrics ar
 GET https://console.neon.tech/api/v2/consumption_history/projects
 ```
 
-Retrieves consumption metrics per project at the chosen granularity. The same **Scale plans and above** access rule applies as for the account endpoint (not available on **Launch**, use [v2 project metrics](/docs/guides/consumption-metrics) instead). Results are ordered by time in ascending order (oldest to newest). History begins at the time of upgrade. Issuing a call to this API does not wake a project's compute endpoint.
+Retrieves consumption metrics per project at the chosen granularity. The same **Scale plans and above** access rule applies as for the account endpoint (not available on **Launch**, use the [project metrics endpoint](/docs/guides/consumption-metrics) instead). Results are ordered by time in ascending order (oldest to newest). History begins at the time of upgrade. Issuing a call to this API does not wake a project's compute endpoint.
 
 #### Required parameters
 
@@ -77,7 +77,7 @@ The **`include_v1_metrics`** parameter is deprecated; use **`metrics`** instead.
 - **active_time_seconds**: Seconds. The amount of time the compute endpoints have been active.
 - **compute_time_seconds**: Seconds. The number of CPU seconds used by compute endpoints, including compute endpoints that have been deleted. For example: 1 CPU for 1 second = 1; 2 CPUs for 1 second = 2.
 - **written_data_bytes**: Bytes. The amount of written data for all branches.
-- **synthetic_storage_size_bytes**: Bytes. Deprecated. The API returns 0. Synthetic storage size combined the logical data size and Write-Ahead Log (WAL) size for all branches. Use the [v2 endpoints](/docs/guides/consumption-metrics) for storage.
+- **synthetic_storage_size_bytes**: Bytes. Deprecated. The API returns 0. Synthetic storage size combined the logical data size and Write-Ahead Log (WAL) size for all branches. Use the [usage-based metrics endpoints](/docs/guides/consumption-metrics) for storage.
 
 **Additional metrics** (include via the `metrics` parameter):
 
@@ -189,6 +189,6 @@ Common error responses you may encounter:
 
 The legacy endpoints on this page were designed for Neon's legacy billing plans and do not align with [usage-based plans](/docs/introduction/plans). If you're on a usage-based plan (Launch, Scale, Agent, or Enterprise), use [Query consumption metrics](/docs/guides/consumption-metrics) for metrics that map to your invoice.
 
-**Legacy API:** Reports storage through `synthetic_storage_size_bytes`, which is deprecated and returns 0. Use the v2 storage metrics instead.
+**Legacy API:** Reports storage through `synthetic_storage_size_bytes`, which is deprecated and returns 0. Use the storage metrics in [Query consumption metrics](/docs/guides/consumption-metrics) instead.
 
 **Usage-based API:** Returns separate metrics that match your invoice: `root_branch_bytes_month`, `child_branch_bytes_month`, `instant_restore_bytes_month`, `snapshot_storage_bytes_month`, `public_network_transfer_bytes`, `private_network_transfer_bytes`, `extra_branches_month`, and `compute_unit_seconds`. The legacy APIs do not provide these. Use the [project metrics endpoint](/docs/guides/consumption-metrics#request-overview) in Query consumption metrics to retrieve them.
