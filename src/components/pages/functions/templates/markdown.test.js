@@ -148,6 +148,33 @@ describe('function template Markdown', () => {
   });
 });
 
+describe('function template features in Markdown', () => {
+  it('lists each feature with its types, linking known ones to their docs', () => {
+    const markdown = renderTemplateMarkdown({
+      template: {
+        ...template,
+        features: [
+          'postgres',
+          { id: 'function-triggers', types: ['schedule', 'storage_object_created'] },
+          'new-thing',
+        ],
+      },
+    });
+
+    expect(markdown).toContain(
+      [
+        '- Built with: [Lakebase Postgres](https://neon.com/docs/postgres/overview.md)',
+        '[Function Triggers](https://neon.com/docs/compute/functions/triggers/overview.md) ([Schedule](https://neon.com/docs/compute/functions/triggers/schedule.md), [Object upload](https://neon.com/docs/compute/functions/triggers/object-storage.md))',
+        'New thing',
+      ].join(', ')
+    );
+  });
+
+  it('leaves the line out when the template lists no features', () => {
+    expect(renderTemplateMarkdown({ template })).not.toContain('Built with:');
+  });
+});
+
 describe('function template installs in Markdown', () => {
   it('totals the published weeks on the template page', () => {
     const markdown = renderTemplateMarkdown({
