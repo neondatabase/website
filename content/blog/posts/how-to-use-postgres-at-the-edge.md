@@ -64,7 +64,7 @@ The serverless driver can use either HTTP or Websockets to make a connection to 
 
 In the below example, I’ll show you how to use Neon’s serverless driver with Next.js [API Routes](https://nextjs.org/docs/pages/building-your-application/routing/api-routes).
 
-To get started, sign up to [Neon](https://neon.tech/), then follow our [Create your first project](https://neon.com/docs/get-started-with-neon/setting-up-a-project) guide. You might also like to have a look at this guide from our docs: [Query with Neon’s SQL Editor](https://neon.com/docs/get-started-with-neon/query-with-neon-sql-editor).<br />Once you have a database set up, save the connection string to your Next.js `.env` file and give it a name of `DATABASE_URL`.
+To get started, sign up to [Neon](https://neon.tech/), then follow our [Create your first project](https://neon.com/docs/manage/projects#create-a-project) guide. You might also like to have a look at this guide from our docs: [Query with Neon’s SQL Editor](https://neon.com/docs/get-started-with-neon/query-with-neon-sql-editor).<br />Once you have a database set up, save the connection string to your Next.js `.env` file and give it a name of `DATABASE_URL`.
 
 ### Neon’s serverless driver
 

@@ -63,4 +63,4 @@ And you’ll see a summary of the main usage metrics:
 
 ## Install it and tell us what you think
 
-[Follow the instructions in the docs](https://neon.com/docs/manage/slack-app#setup) to install the app and view the full list of available commands. If there are other notifications you’d like to see in Slack, let us know by running `/neon feedback` in a Slack DM!
+[Follow the instructions in the docs (archived)](https://github.com/neondatabase/website/blob/906fcd0c04a78a553f180ec7beba40abc6b00d4c/content/docs/manage/slack-app.md#setup) to install the app and view the full list of available commands. If there are other notifications you’d like to see in Slack, let us know by running `/neon feedback` in a Slack DM!
