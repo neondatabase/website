@@ -4,7 +4,7 @@ subtitle: How to use hstore and JSONB to store key-value pairs in Postgres
 author: vkarpov15
 enableTableOfContents: true
 createdAt: '2025-04-15T13:24:36.612Z'
-updatedOn: '2026-09-24T17:56:34.189Z'
+updatedOn: '2026-11-22T09:08:00.969Z'
 ---
 
 Postgres is well known for its relational features, but it also has tools for working with key-value pairs. If you want to store flexible, schema-less data in a Postgres column, you can use either the [`hstore` extension](https://www.postgresql.org/docs/current/hstore.html) or the built-in [JSONB type](https://www.postgresql.org/docs/current/datatype-json.html).
@@ -103,7 +103,7 @@ WHERE attributes->>'color' = 'blue';
 
 ### Index key-value data for performance
 
-[GIN indexes](https://www.postgresql.org/docs/current/gin-intro.html) let you index `hstore` and `JSONB` columns, which can make your queries faster as your data grows. The following command shows how you can create a GIN index on the `attributes` column in both tables. GIN indexes work on both `hstore` and `JSONB` columns.
+[GIN indexes](https://www.postgresql.org/docs/current/gin.html#GIN-INTRO) let you index `hstore` and `JSONB` columns, which can make your queries faster as your data grows. The following command shows how you can create a GIN index on the `attributes` column in both tables. GIN indexes work on both `hstore` and `JSONB` columns.
 
 ```sql
 -- hstore

@@ -4,7 +4,7 @@ subtitle: A step-by-step guide describing how to use Postgres as a document stor
 author: vkarpov15
 enableTableOfContents: true
 createdAt: '2024-12-17T13:24:36.612Z'
-updatedOn: '2026-09-24T17:56:34.189Z'
+updatedOn: '2026-11-22T09:08:00.969Z'
 ---
 
 The JSONB type enables you to store and query nested JSON-like data in Postgres.
@@ -204,7 +204,7 @@ Note that `jsonb_set()` expects the nested property name separated by commas (`,
 
 ## Index JSONB fields using GIN indexes
 
-[GIN indexes](https://www.postgresql.org/docs/current/gin-intro.html) allow you to index JSONB properties, which can make your queries faster as your data grows. This query shows how you can create a GIN index on the `data` property:
+[GIN indexes](https://www.postgresql.org/docs/current/gin.html#GIN-INTRO) allow you to index JSONB properties, which can make your queries faster as your data grows. This query shows how you can create a GIN index on the `data` property:
 
 ```sql
 CREATE INDEX content_idx ON documents USING GIN (data);

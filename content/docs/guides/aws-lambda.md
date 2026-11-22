@@ -8,7 +8,7 @@ summary: >-
   Neon database using the pg library, the Serverless Framework CLI, and
   DATABASE_URL with SSL enabled via sslmode=require.
 enableTableOfContents: true
-updatedOn: '2026-11-16T20:16:52.000Z'
+updatedOn: '2026-11-22T09:08:00.969Z'
 ---
 
 AWS Lambda is a serverless, event-driven compute service that allows you to run code without provisioning or managing servers. It is a convenient and cost-effective solution for running various types of workloads, including those that require a database.
@@ -210,7 +210,7 @@ Create the Lambda function using the [Serverless Framework](https://www.serverle
 6. Add the `DATABASE_URL` environment variable and the function definition to the `serverless.yml` file, which is located in your `aws-node-project` directory.
 
    <Admonition type="note">
-   Environment variables can also be added to a `.env` file and loaded automatically with the help of the [dotenv](https://www.npmjs.com/package/dotenv) package. For more information, see [Resolution of environment variables](https://www.serverless.com/framework/docs/environment-variables).
+   Environment variables can also be added to a `.env` file and loaded automatically with the help of the [dotenv](https://www.npmjs.com/package/dotenv) package. For more information, see [Resolution of environment variables](https://www.serverless.com/framework/docs/guides/variables/env-vars).
    </Admonition>
 
    You can find your database connection details by clicking the **Connect** button in the Console nav. Add the `DATABASE_URL` under `environment`, and replace `sslmode=require` in the connection string with `sslmode=verify-full`. This enables SSL and verifies the server's certificate. The `sslmode=require` option triggers a security warning in node-postgres 8.23 and later.

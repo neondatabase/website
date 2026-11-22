@@ -4,7 +4,7 @@ subtitle: Build a React portfolio website with a chatbot powered by pgvector, La
 author: sam-harri
 enableTableOfContents: true
 createdAt: '2024-10-17T00:00:00.000Z'
-updatedOn: '2026-09-24T17:56:34.189Z'
+updatedOn: '2026-11-22T09:08:00.969Z'
 ---
 
 In this guide, you will build a full-stack portfolio website using `React` for the frontend and `FastAPI` for the backend, with a Retrieval-Augmented Generation (RAG) chatbot that uses `pgvector` in a Postgres database on Neon to store and retrieve embeddings created with an OpenAI embedding model.
@@ -20,7 +20,7 @@ Before you start, make sure you have the following tools and services ready:
   pip --version
   ```
 - Neon account: You need a Neon account for your Postgres database. If you don't have an account yet, [sign up here](https://console.neon.tech/signup).
-- Node.js: Needed for developing the frontend using React, you can download it following the [official installation guide](https://nodejs.org/en/learn/getting-started/how-to-install-nodejs).
+- Node.js: Needed for developing the frontend using React, you can download it following the [official installation guide](https://nodejs.org/en/download).
 - OpenAI API key: You need access to the OpenAI API for generating embeddings, you can [sign up here](https://platform.openai.com/signup).
 
 ## Setting up the backend
