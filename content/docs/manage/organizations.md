@@ -12,7 +12,7 @@ summary: >-
 enableTableOfContents: true
 redirectFrom:
   - /docs/manage/orgs
-updatedOn: '2026-11-21T21:02:29.138Z'
+updatedOn: '2026-11-22T11:36:12.156Z'
 ---
 
 In Neon, all projects live within organizations. When you sign up, you automatically get a free organization for your first project. Organizations provide a central place to manage your projects and collaborate with team members. You can start inviting teammates as soon as your organization is created. Paid plans also include billing management for your organization.
@@ -43,6 +43,12 @@ You can create additional organizations at any time. [See how to create an organ
 ## Switching between organizations
 
 If you belong to more than one organization, use the org switcher in the profile menu (click your name in the top-right corner of the Console) to change the active organization. [See how to switch organizations.](/docs/manage/orgs-manage#switch-organizations)
+
+## View organization usage
+
+To see usage and costs for an organization and the projects in it, use the **Billing** and **Projects** pages in the Neon Console. See [Monitor billing and usage](/docs/introduction/monitor-usage).
+
+To retrieve the same metrics programmatically for each project in an organization, or broken down by branch, use the [consumption metrics API](/docs/guides/consumption-metrics) with your organization's ID. The API is available on the Launch, Scale, Agent, and Enterprise plans.
 
 ## Limitations
 
