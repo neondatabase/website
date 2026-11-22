@@ -8,7 +8,7 @@ summary: >-
   projects, require a personal admin key and reject organization API keys. A
   permission matrix maps each endpoint to its supported key type.
 enableTableOfContents: true
-updatedOn: '2026-11-21T21:02:43.597Z'
+updatedOn: '2026-11-22T11:36:15.765Z'
 ---
 
 Learn how to manage Neon Organizations using the Neon API, including managing organization API keys, working with organization members, and handling member invitations.
@@ -361,3 +361,7 @@ Key requirements:
 ## Manage project access
 
 For organizations on the [new permissions model](/docs/manage/user-permissions), you can list project members and set or remove a member's project role through the API. See [Manage project access with the API](/docs/manage/user-permissions#manage-project-access-with-the-api) for endpoints and examples.
+
+## Query organization usage metrics
+
+To retrieve usage metrics for the projects in an organization, or for their branches, use the consumption metrics endpoints `GET /consumption_history/v2/projects` and `GET /consumption_history/v2/branches` with your `org_id`. They're available on the Launch, Scale, Agent, and Enterprise plans. See [Query consumption metrics](/docs/guides/consumption-metrics) for parameters, examples, and metric definitions.
