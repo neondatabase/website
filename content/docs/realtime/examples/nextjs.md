@@ -4,7 +4,7 @@ subtitle: 'Full-stack example app using Realtime with Next.js.'
 summary: >-
   Build a per-user todo app with Next.js, Drizzle and Managed Better Auth on Neon Realtime: read and seal live queries in a Server Component, renew them through a Route Handler, and settle optimistic server action writes by txid.
 enableTableOfContents: true
-updatedOn: '2026-11-23T20:06:39.059Z'
+updatedOn: '2026-11-23T20:49:21.830Z'
 ---
 
 This example shows how to use Neon Realtime with [Next.js](https://nextjs.org), [Drizzle ORM](https://orm.drizzle.team) and Neon's [Managed Better Auth](/docs/auth/overview), with support for [auth](#authorize-with-the-session), [SSR](#server-side-rendering), [client-side reactivity](#client-side-reactivity) and [optimistic mutations](#optimistic-mutations).
@@ -101,7 +101,24 @@ export const todos = pgTable(
 export type Todo = typeof todos.$inferSelect
 ```
 
-Give the table a primary key, here `id`, and create it with your usual migration tool. The example's `src/setup.mts` creates it with `CREATE TABLE IF NOT EXISTS`, which leaves the database's other tables as they are. A primary key is all Realtime needs from the table, as [table requirements](../guides/queries#table-requirements) explains.
+Give the table a primary key, here `id`. A primary key is all Realtime needs from the table, as [table requirements](../guides/queries#table-requirements) explains.
+
+Create the table with your usual migration tool, or run this SQL in the Neon Console SQL Editor or with `psql "$DATABASE_URL"`. `IF NOT EXISTS` leaves the database's other tables as they are and makes the statements safe to run again:
+
+```sql
+CREATE TABLE IF NOT EXISTS realtime_next_todos (
+  id uuid PRIMARY KEY,
+  user_id uuid NOT NULL,
+  title text NOT NULL,
+  completed boolean NOT NULL DEFAULT false,
+  created_at timestamptz NOT NULL DEFAULT now()
+);
+
+CREATE INDEX IF NOT EXISTS realtime_next_todos_user_id_created_at_idx
+  ON realtime_next_todos (user_id, created_at);
+```
+
+The example runs the same statements from [`src/setup.mts`](https://github.com/neondatabase/examples/blob/main/realtime/with-nextjs/src/setup.mts) with `npm run db:setup`.
 
 ## Defining queries
 
