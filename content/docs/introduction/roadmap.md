@@ -13,7 +13,7 @@ redirectFrom:
   - /docs/conceptual-guides/roadmap
   - /docs/reference/roadmap
   - /docs/community/public-preview
-updatedOn: '2026-11-17T23:28:01.910Z'
+updatedOn: '2026-11-21T11:30:46.668Z'
 ---
 
 This roadmap describes what's in flight, what we delivered recently, and what's on the horizon.
@@ -79,6 +79,13 @@ We're also improving and scaling Lakebase Postgres on Neon. Here's what's on the
 ## What we've shipped recently 🚢
 
 - **Postgres 19 support**: Postgres 19 is now available on Neon. Select it when you create a project. Postgres 18 remains the default. [Learn more](/docs/postgresql/postgres-version-support).
+- **Official Neon Terraform provider (beta)**: The `neondatabase/neon` provider replaces the community provider and manages Postgres along with Functions, Object Storage, Managed Better Auth, Realtime, and the Data API. [Learn more](/docs/reference/terraform).
+- **Fix slow query plans with `pg_stash_advice`**: On Postgres 19, stash planner advice by query ID so Postgres uses a faster plan every time that query runs, without changing your app's SQL. [Learn more](/docs/extensions/pg_stash_advice).
+- **Discord sign-in for Managed Better Auth**: Managed Better Auth now supports Discord as an OAuth provider, alongside Google, GitHub, Vercel, Apple, and Microsoft. [Learn more](/docs/auth/guides/setup-oauth#discord-setup).
+- **Backend usage in the consumption history API**: The consumption history API now reports AI Gateway token usage and Object Storage usage for each project, alongside compute, storage, network transfer, and Functions. [Learn more](/docs/guides/consumption-metrics).
+- **Neon as a Kiro Power**: One install adds the Neon agent skills and the Neon MCP Server to the Kiro IDE and Kiro CLI. [Learn more](/docs/ai/connect-mcp-clients-to-neon#kiro).
+- **New AI Gateway models, including image generation**: Claude Fable 5.2, Kimi K3.1 Pro, GPT-6.1 Terra, and Gemini 4 Carbon joined the catalog, along with Gemini image models that generate images from a prompt. [Learn more](/docs/ai-gateway/overview#available-models).
+- **Project permissions for backend services**: Object Storage, Functions, and the AI Gateway now check each member's project role (Viewer, Editor, or Admin) before allowing actions such as downloading objects or managing credentials. [Learn more](/docs/manage/user-permissions#per-project-permissions).
 - **AI Gateway credits for all accounts**: You no longer need a paid plan to use the AI Gateway. Free plan organization admins can buy prepaid credits from $5 under **Billing** in the Console. [Learn more](/docs/ai-gateway/prepaid-credits).
 - **Recover deleted projects from the Console**: Recover a deleted project from the **Projects** page for 7 days after deletion, in addition to the CLI and API. [Learn more](/docs/manage/projects#recover-a-deleted-project).
 - **Automatic updates for computes up to 16 CU**: Every compute up to 16 CU, including all autoscaling computes, now gets compute updates automatically, with no manual restart required. [Learn more](/docs/manage/updates).

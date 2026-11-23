@@ -44,6 +44,9 @@ const getSections = (row) =>
           { title: 'Released', id: 'released', value: row.releaseLabel },
           { title: 'Input /M', id: 'input-m', value: row.costInputLabel },
           { title: 'Output /M', id: 'output-m', value: row.costOutputLabel },
+          ...(row.costOutputImageLabel
+            ? [{ title: 'Image output /M', id: 'image-output-m', value: row.costOutputImageLabel }]
+            : []),
         ];
 
 const getModelDetailPageData = (row) => {
