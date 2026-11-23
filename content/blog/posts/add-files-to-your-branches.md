@@ -17,7 +17,7 @@ authors:
 cover:
   image: https://cdn.neonapi.io/public/images/pages/blog/add-files-to-your-branches/cover.jpg
   alt: Branch your database and files with Neon Object Storage
-isFeatured: false
+isFeatured: true
 seo:
   title: Add files to your branches - Neon
   description: >-
