@@ -607,6 +607,8 @@ describe('AI assistants vs AI crawlers', () => {
     'meta-externalfetcher/1.1 (+https://developers.facebook.com/docs/sharing/webmasters/web-crawlers)',
     'Mozilla/5.0 AppleWebKit/537.36 (KHTML, like Gecko; compatible; MistralAI-User/1.0; +https://docs.mistral.ai/robots)',
     'Mozilla/5.0 AppleWebKit/537.36 (KHTML, like Gecko; compatible; Amzn-User/0.1) Chrome/131.0.0.0 Safari/537.36',
+    'Mozilla/5.0 (compatible; ExaUser/1.0)',
+    'Mozilla/5.0 (compatible; amazon-quick-on-behalf-of/1.0)',
   ])('labels %s as ai-assistant', (userAgent) => {
     expect(classifyReader(requestWith({ 'user-agent': userAgent }))).toBe('ai-assistant');
   });
@@ -621,6 +623,8 @@ describe('AI assistants vs AI crawlers', () => {
     'meta-externalagent/1.1 (+https://developers.facebook.com/docs/sharing/webmasters/web-crawlers)',
     'CCBot/2.0 (https://commoncrawl.org/faq/)',
     'DuckAssistBot/1.2; (+http://duckduckgo.com/duckassistbot.html)',
+    'Mozilla/5.0 (compatible; pkgseer/1.0)',
+    'Mozilla/5.0 (compatible; inkeep-crawler/1.0)',
   ])('labels %s as ai-crawler', (userAgent) => {
     expect(classifyReader(requestWith({ 'user-agent': userAgent }))).toBe('ai-crawler');
   });

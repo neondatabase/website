@@ -93,6 +93,10 @@ export const AI_ASSISTANT_USER_AGENT_TOKENS = [
   // Cohere, per https://github.com/ai-robots-txt/ai.robots.txt ("responses to
   // user-initiated prompts"); Cohere doesn't publish a User-Agent string.
   'cohere-ai',
+  // Seen in Neon's traffic (week of Oct 27, review on #6975): ExaUser
+  // (bots.fyi "User Initiated") and Amazon Quick acting for a user.
+  'exauser',
+  'amazon-quick-on-behalf-of',
 ];
 
 // AI crawlers: collect pages without a person waiting on the answer.
@@ -131,6 +135,10 @@ export const AI_CRAWLER_USER_AGENT_TOKENS = [
   'diffbot',
   'facebookbot',
   'youbot',
+  // Seen in Neon's traffic (week of Oct 27, review on #6975): pkgseer's docs
+  // crawler and Inkeep.
+  'pkgseer',
+  'inkeep',
 ];
 
 export const AI_AGENT_USER_AGENT_TOKENS = [
@@ -157,17 +165,25 @@ export function isKnownAIAgentUserAgent(userAgent) {
   return Boolean(findUserAgentToken(userAgent, AI_AGENT_USER_AGENT_TOKENS));
 }
 
-// A browser's background request: a page script's fetch, which includes Next.js
-// prefetches and router fetches. Browsers send Sec-Fetch-Mode on every request
-// (`navigate` for a page load; `cors`, `no-cors` or `same-origin` otherwise),
-// and clients that aren't browsers don't send it. This works in the proxy,
-// unlike the rsc/next-router-* headers, which Next.js removes before it runs.
-export function isBrowserBackgroundRequest(request) {
-  const fetchMode = request.headers.get('sec-fetch-mode');
-  return Boolean(fetchMode) && fetchMode !== 'navigate';
+// Browsers send Fetch Metadata on every request: Sec-Fetch-Mode, Sec-Fetch-Dest
+// and Sec-Fetch-Site together. Node.js's built-in fetch (undici) sends only
+// `Sec-Fetch-Mode: cors`, so Sec-Fetch-Mode alone doesn't mean a browser:
+// agents and MCP servers built on Node's fetch would look like a page script.
+// Sec-Fetch-Dest is the header that marks a real browser engine.
+function isBrowserEngineRequest(request) {
+  return Boolean(request.headers.get('sec-fetch-dest'));
 }
 
-// Requests that aren't reads: Next.js router fetches (RSC payload requests from
+// A browser's background request: a page script's fetch, which includes Next.js
+// prefetches and router fetches (`Sec-Fetch-Mode` is `cors`, `no-cors` or
+// `same-origin`; `navigate` is a page load). This works in the proxy, unlike
+// the rsc/next-router-* headers, which Next.js removes before it runs.
+export function isBrowserBackgroundRequest(request) {
+  const fetchMode = request.headers.get('sec-fetch-mode');
+  return Boolean(fetchMode) && fetchMode !== 'navigate' && isBrowserEngineRequest(request);
+}
+
+// Requests that aren't reads: anything but GET, Next.js router fetches (RSC payload requests from
 // a <Link>, both prefetches and the fetch on click that precedes a full
 // navigation), browser prefetches (speculation rules, link rel=prefetch), and
 // the site's own .md fetches (NON_AGENT_FETCH_HEADERS). Counting them inflates
@@ -179,6 +195,9 @@ export function isBrowserBackgroundRequest(request) {
 // proxy router fetches are recognized by Sec-Fetch-Mode instead
 // (isBrowserBackgroundRequest).
 export function isNonReadRequest(request) {
+  // Only GET reads a page. HEAD (uptime monitors) and OPTIONS (CORS
+  // preflights) are skipped on every branch, markdown ones included.
+  if ((request.method || 'GET').toUpperCase() !== 'GET') return true;
   const headers = request.headers;
   if (headers.get('rsc') || headers.get('next-router-prefetch')) return true;
   if (isBrowserBackgroundRequest(request)) return true;
@@ -290,6 +309,16 @@ export function classifyReader(request) {
   return 'unknown';
 }
 
+// A real browser engine opening a URL (link click, typed URL, reload), whoever
+// drives it: a person, a headless browser, an agent's browser, or a crawler
+// that renders pages. Browsers send Sec-Fetch-Mode: navigate (with
+// Sec-Fetch-Dest) on these; HTTP clients don't. A browser engine runs the
+// page's analytics script, so the browser script already counts its HTML page
+// views.
+export function isBrowserNavigation(request) {
+  return request.headers.get('sec-fetch-mode') === 'navigate' && isBrowserEngineRequest(request);
+}
+
 // A person opening a URL in a browser tab: browsers send these Fetch Metadata
 // headers on every top-level navigation (link click, typed URL, reload), and
 // HTTP clients used by agents (curl, axios, fetch tools) don't. Headless,
@@ -299,7 +328,7 @@ export function classifyReader(request) {
 export function isHumanBrowserNavigation(request) {
   const userAgent = request.headers.get('user-agent') || '';
   return (
-    request.headers.get('sec-fetch-mode') === 'navigate' &&
+    isBrowserNavigation(request) &&
     request.headers.get('sec-fetch-dest') === 'document' &&
     !/headless/i.test(userAgent) &&
     !isKnownAIAgentRequest(request) &&

@@ -63,9 +63,6 @@ describe('LLM analytics delivery', () => {
     ['sec-purpose', 'prefetch'],
     ['sec-purpose', 'prefetch;prerender'],
     ['purpose', 'prefetch'],
-    ['sec-fetch-mode', 'cors'],
-    ['sec-fetch-mode', 'no-cors'],
-    ['sec-fetch-mode', 'same-origin'],
   ])('does not send a pageview for a router or prefetch request (%s: %s)', async (name, value) => {
     const req = new Request('https://neon.com/docs/introduction/support.md', {
       headers: { [name]: value },
@@ -75,6 +72,35 @@ describe('LLM analytics delivery', () => {
     await expect(analytics.track()).resolves.toEqual({ outcome: 'skipped_non_read' });
     expect(analytics.beacon).toBeNull();
     expect(fetch).not.toHaveBeenCalled();
+  });
+
+  it.each(['cors', 'no-cors', 'same-origin'])(
+    "does not send a pageview for a browser's background request (Sec-Fetch-Mode: %s)",
+    async (mode) => {
+      // Real browsers send all three Fetch Metadata headers together.
+      const req = new Request('https://neon.com/docs/introduction/support.md', {
+        headers: {
+          'sec-fetch-mode': mode,
+          'sec-fetch-dest': 'empty',
+          'sec-fetch-site': 'same-origin',
+        },
+      });
+      expect(isNonReadRequest(req)).toBe(true);
+      await expect(createLLMAnalytics(req).track()).resolves.toEqual({
+        outcome: 'skipped_non_read',
+      });
+      expect(fetch).not.toHaveBeenCalled();
+    }
+  );
+
+  it("counts Node.js fetch, which sends Sec-Fetch-Mode: cors but isn't a browser", async () => {
+    // undici sends only Sec-Fetch-Mode, never Sec-Fetch-Dest or Sec-Fetch-Site.
+    const req = new Request('https://neon.com/docs/introduction/support.md', {
+      headers: { 'user-agent': 'node', 'sec-fetch-mode': 'cors' },
+    });
+    expect(isNonReadRequest(req)).toBe(false);
+    await trackLLMPageview(req);
+    expect(fetch).toHaveBeenCalledTimes(1);
   });
 
   it('still sends a pageview for a normal markdown read', async () => {
