@@ -32,6 +32,8 @@ seo:
   image: null
 ---
 
+**[ADD CLIP]**
+
 If you use Neon branches, you are probably used to creating one for every PR, preview, test, agent run… But if your files still live in Amazon S3, every branch still points at the same bucket. Imagine you're testing a new feature you vibe coded for your app - if you delete a file in the preview, is that file being deleted for real in your bucket? Also, if you want to test an upload - does it land next to the real customer files you're storing?
 
 You can make this workflow much cleaner with [Neon Object Storage](https://neon.com/docs/storage/overview). It feels just like you're used to on S3, but your buckets can branch - when you create a branch, your files will automatically come with it, working the same way as you're already used to with the database - your storage won't duplicate, but you will see what looks like a perfect copy of your real files; but this is isolated - you don't have to worry about affecting the production bucket.
