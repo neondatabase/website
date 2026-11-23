@@ -9,7 +9,7 @@ summary: >-
 enableTableOfContents: true
 redirectFrom:
   - /docs/reference/cli-api
-updatedOn: '2026-09-18T04:20:24.000Z'
+updatedOn: '2026-11-23T12:21:23.032Z'
 ---
 
 The `api` command sends an authenticated request to any [Neon API](/docs/reference/api) route and prints the response. Pass an API path as the first argument. The method defaults to `GET`, or `POST` when you supply a body.
@@ -80,6 +80,17 @@ neon api /projects -X POST -d @project.json
 ```bash
 neon api --list
 ```
+
+### Find an endpoint
+
+To find a route, filter the list. Then pass the route to `--describe` to print its path, query, and body fields without calling the API. Body field names are dotted, ready for `--field`:
+
+```bash
+neon api --list | grep -i snapshot
+neon api /projects/{project_id}/branches -X POST --describe
+```
+
+`--list`, `--describe`, and a normal call together let an AI agent with a shell find and call any Neon API route, including routes the [Neon MCP Server](/docs/ai/neon-mcp-server) doesn't expose as tools.
 
 ### YAML output
 
