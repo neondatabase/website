@@ -11,7 +11,7 @@ summary: >-
   tree to the project root, supports multiple independent named files, and
   persists until reset with `neon set-context` or deleted manually.
 enableTableOfContents: true
-updatedOn: '2026-10-09T15:17:33.920Z'
+updatedOn: '2026-11-23T20:50:51.980Z'
 redirectFrom:
   - /docs/reference/cli-set-context
 ---
@@ -24,6 +24,8 @@ The `set-context` command sets a background context for your CLI sessions, so yo
 
 <Admonition type="tip" title="How the CLI finds your `.neon` file">
 When you run a command, the CLI starts in your current directory and checks for a `.neon` file. If it does not find one, it checks the parent directory, then the parent of that, and so on until it finds a `.neon` file or reaches your home directory. This means you can run commands from any subdirectory of a linked project without re-specifying `--project-id`.
+
+The search also stops at a directory that holds both `package.json` and `neon.ts` (or `neon.mts`, `neon.js`, `neon.mjs`) but no `.neon`. That directory is a project of its own, such as an app scaffolded inside a linked folder, so a `.neon` in a folder above it doesn't apply, and `neon link` run in it writes the app's own `.neon`.
 
 To write context to a specific file or location, use `--context-file`.
 </Admonition>
