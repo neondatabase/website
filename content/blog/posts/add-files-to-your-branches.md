@@ -15,8 +15,8 @@ categories:
 authors:
   - carlota-soto
 cover:
-  image: null
-  alt: null
+  image: https://cdn.neonapi.io/public/images/pages/blog/add-files-to-your-branches/cover.jpg
+  alt: Branch your database and files with Neon Object Storage
 isFeatured: false
 seo:
   title: Add files to your branches - Neon
@@ -29,10 +29,13 @@ seo:
   ogDescription: >-
     Move your buckets to Neon Object Storage so your files branch with your
     database. Then, trigger a Neon Function every time a file lands
-  image: null
+  image: https://cdn.neonapi.io/public/images/pages/blog/add-files-to-your-branches/social.jpg
 ---
 
-**[ADD CLIP]**
+<video autoPlay muted loop playsInline width="708" height="384" aria-label="Branching a database and files with Neon Object Storage">
+<source src="https://cdn.neonapi.io/public/images/pages/blog/add-files-to-your-branches/branching.webm" type="video/webm" />
+<source src="https://cdn.neonapi.io/public/images/pages/blog/add-files-to-your-branches/branching.mp4" type="video/mp4" />
+</video>
 
 If you use Neon branches, you are probably used to creating one for every PR, preview, test, agent run… But if your files still live in Amazon S3, every branch still points at the same bucket. Imagine you're testing a new feature you vibe coded for your app - if you delete a file in the preview, is that file being deleted for real in your bucket? Also, if you want to test an upload - does it land next to the real customer files you're storing?
 
