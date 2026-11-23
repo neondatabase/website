@@ -71,6 +71,10 @@ module.exports = {
       url: 'https://neon.com/docs/connect/choose-connection.md',
     },
     {
+      label: 'Deploy on Vercel: pick an integration, or connect from the CLI',
+      url: 'https://neon.com/docs/guides/vercel-overview.md',
+    },
+    {
       label: 'Troubleshoot connection errors and timeouts',
       url: 'https://neon.com/docs/connect/connection-errors.md',
     },
@@ -235,7 +239,8 @@ module.exports = {
     },
     {
       name: 'AI Gateway',
-      description: 'Access frontier and open-source models through a single API.',
+      description:
+        'Access frontier and open-source models through a single API. Requests need prepaid AI Gateway credits ($5 minimum, any plan), which a person buys in the Neon Console.',
       subIndex: {
         outputPath: 'public/docs/ai-gateway/llms.txt',
         url: 'https://neon.com/docs/ai-gateway/llms.txt',

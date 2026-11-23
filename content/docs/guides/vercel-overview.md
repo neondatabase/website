@@ -15,7 +15,7 @@ redirectFrom:
   - /docs/guides/vercel
   - /docs/guides/vercel-postgres-transition-guide
 enableTableOfContents: true
-updatedOn: '2026-11-18T21:57:37.000Z'
+updatedOn: '2026-11-20T13:31:17.623Z'
 ---
 
 ## Overview
@@ -25,6 +25,7 @@ This page helps you choose a Neon-Vercel integration for your project. If you're
 <Admonition type="tip" title="Quick decision guide">
 Choose the **Vercel-Managed Integration** if you're new to Neon and want unified billing through Vercel.
 Choose the **Neon-Managed Integration** if you already have a Neon account or prefer to manage billing directly with Neon.
+Set up Neon with the Neon CLI (for example, `neon init`) or a coding agent? Then you already have a Neon account and project. Use the **Neon-Managed Integration**, or a **[manual connection](/docs/guides/vercel-manual#connect-with-the-neon-and-vercel-clis)** to finish from the terminal.
 </Admonition>
 ---
 
@@ -42,10 +43,14 @@ Choose the **Neon-Managed Integration** if you already have a Neon account or pr
 | **Branch cleanup**                              | Automatic (deployment-based)                                                                          | Automatic (Git-branch-based)                                                                                 | N/A                                             |
 | **Implementation type**                         | [Native Integration](https://vercel.com/docs/integrations/install-an-integration/product-integration) | [Connectable Account](https://vercel.com/docs/integrations/install-an-integration/add-a-connectable-account) | N/A                                             |
 
-You can use Object Storage, Functions, AI Gateway, and the Data API with a project created or connected through either integration. The integrations don't set these services' environment variables, so turn on the service for your project in Neon and add its variables to your Vercel project. Preview deployments don't get per-branch values for these services automatically, the way they do for Postgres, Managed Better Auth, and Realtime.
+You can use Object Storage, Functions, AI Gateway, and the Data API with a project created or connected through either integration. The integrations don't set these services' environment variables, so turn on the service for your project in Neon and add its variables to your Vercel project. See Deploy to Vercel for [Object Storage](/docs/storage/get-started#deploy-to-vercel) and [AI Gateway](/docs/ai-gateway/get-started#deploy-to-vercel). Preview deployments don't get per-branch values for these services automatically, the way they do for Postgres, Managed Better Auth, and Realtime.
 
 <Admonition type="note" title="Branch cleanup timing">
 Branch cleanup behavior differs between the two integrations. Vercel-Managed cleanup depends on Vercel's deployment retention policy, which can delay branch deletion by months. Neon-Managed cleanup is triggered by Git branch deletion. See [Managing Vercel preview branch cleanup](/docs/guides/vercel-branch-cleanup) for details, workarounds, and recommendations.
+</Admonition>
+
+<Admonition type="tip" title="Put Neon in the same region as your Vercel Functions">
+Every query travels between your Vercel Function and your Neon compute, so keep them in the same region. Vercel runs functions in Washington, D.C. (`iad1`, AWS `us-east-1`) by default, which matches the Neon region `aws-us-east-1`. If you change your functions' region in Vercel, create your Neon project in the matching AWS region.
 </Admonition>
 
 ---
@@ -62,9 +67,9 @@ For automated integrations, follow this simple flow:
 
 ## Do you have an existing Neon account?
 
-**Do you already have a Neon account or project you want to keep using?**
+**Do you already have a Neon account or project you want to keep using?** This includes a project you created with the Neon CLI, for example with `neon init`.
 
-- **Yes** → Use **[Neon-Managed Integration](/docs/guides/neon-managed-vercel-integration)**
+- **Yes** → Use **[Neon-Managed Integration](/docs/guides/neon-managed-vercel-integration)**. You connect it in the browser, from the Neon Console. To connect from a terminal instead, use a **[manual connection](/docs/guides/vercel-manual#connect-with-the-neon-and-vercel-clis)**.
 - **No** → Continue below
 
 ## Choose your billing preference

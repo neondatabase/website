@@ -6,7 +6,7 @@ summary: >-
   host, and making your first request to the Neon AI Gateway using the OpenAI
   SDK. No provider API keys required. Authenticate with your Neon credential.
 enableTableOfContents: true
-updatedOn: '2026-11-17T18:07:26.865Z'
+updatedOn: '2026-11-20T13:31:17.623Z'
 ---
 
 To set up Neon AI Gateway with an AI coding assistant, install the Neon Platform (`neon`) and Neon AI Gateway skills with the [Neon CLI](/docs/cli):
@@ -226,9 +226,30 @@ See [Models](/docs/ai-gateway/models) for the full list of available model IDs.
 
 <Callout title="Using the AI SDK?">
 For TypeScript apps and agents, use [`@neon/ai-sdk-provider`](https://www.npmjs.com/package/@neon/ai-sdk-provider) with the Vercel AI SDK. It reads `NEON_AI_GATEWAY_BASE_URL` and `NEON_AI_GATEWAY_TOKEN`, then routes each catalog model to the best AI Gateway endpoint for that provider.
+
+Pass every model through the provider, as in `model: neon('gpt-5-mini')`. The AI SDK sends a plain model string such as `'openai/gpt-5-mini'` to Vercel's own AI Gateway, which is a separate product with its own credentials and billing.
 </Callout>
 
 </Steps>
+
+## Deploy to Vercel
+
+`neon env pull` writes `NEON_AI_GATEWAY_TOKEN` and `NEON_AI_GATEWAY_BASE_URL` to your local env file only, and the [Vercel integrations](/docs/guides/vercel-overview) don't set them. Give your Vercel project its own credential, so you can revoke it without affecting your local setup. Run these commands in a project directory linked to Neon and to Vercel (`vercel link`). They use [jq](https://jqlang.org) to read the credential:
+
+```bash
+TOKEN="$(neon credentials create --branch main --name vercel-production \
+  --scope ai_gateway:invoke -o json | jq -r .api_token)"
+
+# The credential doesn't include the gateway host, so pull it separately
+neon env pull --branch main --env NEON_AI_GATEWAY_BASE_URL --file .env.gateway
+BASE_URL="$(grep '^NEON_AI_GATEWAY_BASE_URL=' .env.gateway | cut -d= -f2- | tr -d '"')"
+rm .env.gateway
+
+printf '%s' "$TOKEN" | vercel env add NEON_AI_GATEWAY_TOKEN --environment production --sensitive --yes
+printf '%s' "$BASE_URL" | vercel env add NEON_AI_GATEWAY_BASE_URL --environment production --yes
+```
+
+Replace `main` with the branch you want production to use, then redeploy. Each branch has its own gateway host, so preview deployments that use another branch need that branch's values under `--environment preview`.
 
 ## Next steps
 

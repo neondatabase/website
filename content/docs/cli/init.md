@@ -9,7 +9,7 @@ summary: >-
   runs interactively by default; pass -y for the recommended setup with no prompts,
   or add flags such as --skill, MCP options, or --claimable for the custom setup.
 enableTableOfContents: true
-updatedOn: '2026-11-20T01:40:38.895Z'
+updatedOn: '2026-11-20T12:32:58.582Z'
 redirectFrom:
   - /docs/reference/cli-init
 ---
@@ -72,7 +72,7 @@ When `init` links an existing project in this run, it writes `neon.ts` from the 
 
 When `init` creates a new `neon.ts`, it pulls environment variables once, after the file is written. If the file was written from the branch, every service it declares already runs there, so the pull includes all of them. If `neon.ts` declares only services that need no deploy (the AI Gateway or Functions), the pull includes all of them. If it declares Managed Better Auth, the Data API, Object Storage, or Realtime, `init` pulls Postgres (plus the AI Gateway and the scaffolded function's URL when declared), and [`neon deploy`](/docs/cli/deploy) provisions the rest and pulls their variables. With `--claimable`, `init` skips the pull when `neon.ts` declares services beyond Postgres.
 
-When `init` writes a new `neon.ts` for a linked project, it lists next steps under `Next`. Preview the changes with [`neon config plan`](/docs/cli/config#plan), then apply them with [`neon deploy`](/docs/cli/deploy). It also suggests [`neon checkout dev --create`](/docs/cli/checkout) to work on a development branch once you've deployed. These steps appear even for the default Postgres-only `neon.ts`. For a claimable project, `init` lists `neon claim accept` instead, followed by the plan and deploy steps when `neon.ts` declares services beyond Postgres. If you skip `neon.ts` (for example, with `--no-config`) and the directory doesn't have one, `init` suggests [`neon config init`](/docs/cli/config#init) to create it later.
+When `init` writes a new `neon.ts` for a linked project, it lists next steps under `Next`. Preview the changes with [`neon config plan`](/docs/cli/config#plan), then apply them with [`neon deploy`](/docs/cli/deploy). It also suggests [`neon checkout dev --create`](/docs/cli/checkout) to work on a development branch once you've deployed. The starter policy gives that branch a 7-day expiration, so it's deleted a week after you create it. To keep it, remove the expiration with [`neon branches set-expiration dev`](/docs/cli/branches#set-expiration), or change or remove `ttl` in `neon.ts` before you create the branch. These steps appear even for the default Postgres-only `neon.ts`, where `neon config plan` reports no changes. For a claimable project, `init` lists `neon claim accept` instead, followed by the plan and deploy steps when `neon.ts` declares services beyond Postgres. If you skip `neon.ts` (for example, with `--no-config`) and the directory doesn't have one, `init` suggests [`neon config init`](/docs/cli/config#init) to create it later.
 
 `--services realtime` declares [Realtime](/docs/realtime/overview) in `neon.ts`. `init` doesn't enable it on the branch: [`neon deploy`](/docs/cli/deploy) does, or you can run [`neon realtime enable`](/docs/cli/realtime#enable). The interactive service picker doesn't list Realtime, so pass `--services realtime` to declare it.
 
@@ -151,7 +151,7 @@ Pulled 5 Neon variables into .env.local from branch main (br-restless-wildflower
 
 After setup, restart your editor and ask your assistant to "Get started with Neon." The installed [Neon MCP server](/docs/ai/neon-mcp-server) points your assistant to the right docs, so it can connect to your database and use Neon features as you build.
 
-Install the Neon plugin for a specific agent and create a [claimable project](/docs/reference/claimable-neon). Naming an agent with `--agent` selects the custom setup, which installs the plugin at the project level:
+Install the Neon plugin for a specific agent and create a [claimable project](/docs/reference/claimable-neon). Naming an agent with `--agent` selects the custom setup. The plugin itself always installs at the user level, as [`neon plugins`](/docs/cli/plugins) explains:
 
 ```bash
 neon init -y --claimable --agent cursor

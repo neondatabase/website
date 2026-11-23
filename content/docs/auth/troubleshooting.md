@@ -10,7 +10,7 @@ summary: >-
   URIs. Use this page when Managed Better Auth fails at startup, sessions do not persist,
   or OAuth logins loop back to the provider instead of the app.
 enableTableOfContents: true
-updatedOn: '2026-11-05T01:14:11.711Z'
+updatedOn: '2026-11-20T13:31:17.623Z'
 ---
 
 This page covers common issues when integrating [Managed Better Auth](/docs/auth/overview) with `@neon/auth` in Next.js apps and React SPAs.
@@ -25,9 +25,33 @@ openssl rand -base64 32
 
 See the [Next.js Server SDK reference](/docs/auth/reference/nextjs-server) for the full list of required environment variables.
 
+## Route segment config "dynamic" is not compatible with `nextConfig.cacheComponents`
+
+`next build` fails with this error when a page that calls `auth.getSession()` exports `dynamic = 'force-dynamic'` and the app enables [Cache Components](https://nextjs.org/docs/app/getting-started/caching), as current `create-next-app` projects do. Remove the export and read the session in a component wrapped in `<Suspense>`:
+
+```typescript
+import { Suspense } from 'react';
+import { auth } from '@/lib/auth/server';
+
+async function UserName() {
+  const { data: session } = await auth.getSession();
+  return <p>{session?.user ? session.user.name : 'Not signed in'}</p>;
+}
+
+export default function Page() {
+  return (
+    <Suspense fallback={<p>Loading…</p>}>
+      <UserName />
+    </Suspense>
+  );
+}
+```
+
+This pattern also works without Cache Components. See [getSession](/docs/auth/reference/nextjs-server#auth-getsession) in the Next.js Server SDK reference.
+
 ## Missing force-dynamic on server components
 
-If `next build` fails with a "Dynamic server usage" error on a page that calls `auth.getSession()`, the server component needs to opt out of static rendering:
+If `next build` fails with a "Dynamic server usage" error on a page that calls `auth.getSession()`, and your app doesn't enable Cache Components, the server component needs to opt out of static rendering. Wrapping the session read in `<Suspense>`, as shown above, works too:
 
 ```typescript
 export const dynamic = 'force-dynamic';
@@ -43,6 +67,8 @@ This is required because `getSession()` reads cookies, which are only available 
 ## Managed Better Auth server logging in the terminal
 
 You may see structured **`warn`** or **`error`** lines in the Next.js server console when the auth proxy cannot reach Managed Better Auth or when session cookies fail validation. This is expected: the SDK defaults to **`logLevel: 'warn'`** (opt-out).
+
+During `next build`, and in production logs when Next.js prerenders a page, you may also see `[neon-auth] Cookie validation error before getSession upstream call` or `[neon-auth] Server API unexpected fetch error` with the detail `During prerendering, cookies() rejects when the prerender is complete` (or `fetch() rejects`). These come from Next.js stopping the prerender at the session read, which is how request-time rendering works. They aren't failures, and the build still succeeds.
 
 To mute Managed Better Auth console output:
 
