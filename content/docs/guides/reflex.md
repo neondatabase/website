@@ -10,7 +10,7 @@ summary: >-
   branch, deployment, troubleshooting, and Neon's other backend services from
   Reflex.
 enableTableOfContents: true
-updatedOn: '2026-11-19T01:52:58.892Z'
+updatedOn: '2026-11-23T20:06:38.718Z'
 ---
 
 <PromptBlock src="/prompts/reflex-prompt.md" labels={["Set up your agent and follow this guide", "Look up Reflex's docs", "Connect your Reflex app"]} />
@@ -268,13 +268,29 @@ The engine here takes `async_db_url` directly, so it avoids the warning that Ref
 
 ## Initialize migrations
 
-Reflex uses [Alembic](https://alembic.sqlalchemy.org/en/latest/) for schema migrations. Run this command before you define the `Customer` model. If your app already has an `alembic.ini`, skip it: `reflex db init` logs that the database is already initialized and does nothing else. The one exception is a legacy `env.py`, which it updates.
+Reflex uses [Alembic](https://alembic.sqlalchemy.org/en/latest/) for schema migrations. Run `reflex db init` before you define the `Customer` model. If your app already has an `alembic.ini`, skip it: `reflex db init` logs that the database is already initialized and does nothing else. The one exception is a legacy `env.py`, which it updates.
+
+`reflex db init` compares the app's models with the tables in the database's `public` schema, writes the result as an initial revision, and applies it right away, without a chance to review it. A table that the models don't define gets a `drop_table` in that revision, so on a database that already has tables, the command deletes them and their data. Check that the database has no tables first:
+
+<CodeTabs labels={["MacOS/Linux", "PowerShell"]}>
+
+```bash filename="Terminal"
+.venv/bin/python -c "import reflex as rx, sqlalchemy as sa; print(sa.inspect(sa.create_engine(rx.config.get_config().db_url)).get_table_names())"
+```
+
+```shell filename="PowerShell"
+.\.venv\Scripts\python -c "import reflex as rx, sqlalchemy as sa; print(sa.inspect(sa.create_engine(rx.config.get_config().db_url)).get_table_names())"
+```
+
+</CodeTabs>
+
+The command lists the tables at `db_url`, the database that `reflex db init` migrates. If it prints `[]`, continue. If it lists tables, don't run `reflex db init` against this database. Create a new Neon project and link it instead, as described in [Create a Neon project](#create-a-neon-project). A development branch doesn't avoid this: it starts with its parent's tables, so the revision drops them there, and migrating the parent with that revision later drops them on the parent too. If the command fails with `Expected string or URL object, got None`, `DATABASE_URL_UNPOOLED` isn't set: add it to `.env` as described in [Connect your app to the project](#connect-your-app-to-the-project).
 
 ```bash filename="Terminal"
 .venv/bin/reflex db init
 ```
 
-It creates `alembic.ini` and an `alembic/` directory in the project, then generates an initial revision from the models the app has at that point and applies it to the database. Run it before you add the model, so that the `Customer` table comes from `makemigrations` in a later step. If you run it after the model exists, the initial revision already includes the `customer` table, and `makemigrations` has nothing new to add. In that case, skip the `makemigrations` step. The command needs `DATABASE_URL_UNPOOLED` set; without it, see Troubleshooting.
+It creates `alembic.ini` and an `alembic/` directory in the project, then generates the initial revision from the models the app has at that point and applies it. Run it before you add the model, so that the `Customer` table comes from `makemigrations` in a later step. If you run it after the model exists, the initial revision already includes the `customer` table, and `makemigrations` has nothing new to add. In that case, skip the `makemigrations` step. The command needs `DATABASE_URL_UNPOOLED` set; without it, see Troubleshooting.
 
 ## Define the model and the page
 
@@ -561,7 +577,7 @@ Generate a migration for the `Customer` table:
 `makemigrations` writes a script to `alembic/versions/`. Open it and review it before you apply it.
 
 <Admonition type="warning" title="Check the revision before you migrate">
-On Reflex 0.10, `makemigrations` only sees the models that `rx.ModelRegistry.register(Base)` registers. If `with_reflex/db.py` doesn't make that call, the revision can include a `drop_table` for the `customer` table when that table already exists in the database. Don't run `reflex db migrate` on a revision that drops it.
+`makemigrations` compares the models with the tables in the database's `public` schema, and a table that the models don't define gets a `drop_table` in the revision. That includes tables another app created in the same database. On Reflex 0.10, it also includes the `customer` table when `with_reflex/db.py` doesn't call `rx.ModelRegistry.register(Base)`, because Reflex 0.10 only sees the models that this call registers. Reflex 0.11 logs a warning that names the tables a revision drops. Don't run `reflex db migrate` on a revision that drops a table you want to keep.
 </Admonition>
 
 When the revision looks right, apply it to the direct database that `DATABASE_URL_UNPOOLED` points at:
