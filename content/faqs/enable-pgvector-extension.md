@@ -3,15 +3,15 @@ title: 'How do I enable the pgvector extension in my Neon database?'
 subtitle: 'Run CREATE EXTENSION vector once and start storing embeddings.'
 enableTableOfContents: true
 createdAt: '2026-05-18T00:00:00.000Z'
-updatedOn: '2026-11-02T19:00:00.000Z'
+updatedOn: '2026-11-20T14:29:56.440Z'
 isDraft: false
 redirectFrom: []
 previousLink:
   title: 'How do I enable or disable connection pooling for my Neon database?'
   slug: enable-disable-connection-pooling-neon
 nextLink:
-  title: 'How do I export or download my Neon database as a SQL file?'
-  slug: export-database-sql-file
+  title: 'What happens when I go over my egress quota on Supabase, and how does Neon handle it?'
+  slug: exceed-egress-quota-supabase-vs-neon
 ---
 
 Connect to your database and run `CREATE EXTENSION IF NOT EXISTS vector;`. There's nothing else to install, and `pgvector` is available on every Neon plan with no add-on required. Run the statement from the [Neon SQL Editor](/docs/get-started/query-with-neon-sql-editor), psql, or any Postgres client. See [The pgvector extension](/docs/extensions/pgvector) for distance operators, index types, and supported vector types.

@@ -66,6 +66,16 @@ describe('Middleware - AI Agent Integration Tests', () => {
     ]),
   });
 
+  // A person opening a page in a browser tab. Real browsers send these Fetch
+  // Metadata headers on every navigation; requests without them are counted
+  // as non-browser reads.
+  const createBrowserRequest = (pathname, userAgent, accept) => {
+    const req = createMockRequest(pathname, userAgent, accept);
+    req.headers.set('sec-fetch-mode', 'navigate');
+    req.headers.set('sec-fetch-dest', 'document');
+    return req;
+  };
+
   it('matches every generated marketing page for content negotiation', async () => {
     const { GENERATED_PAGE_MARKDOWN_PATHS } = await import('./constants/content');
     expect(middlewareConfig.matcher).toEqual(
@@ -146,7 +156,7 @@ describe('Middleware - AI Agent Integration Tests', () => {
         expect(text).toContain(`# ${name} Content`);
       });
 
-      it(`should NOT serve markdown for ${name} (${path}) with AI User-Agent that accepts HTML`, async () => {
+      it(`should NOT serve markdown for ${name} (${path}) with AI User-Agent that accepts HTML, but count the read`, async () => {
         const req = createMockRequest(
           path,
           'Mozilla/5.0 AppleWebKit/537.36 (KHTML, like Gecko); compatible; ChatGPT-User/1.0; +https://openai.com/bot',
@@ -155,12 +165,17 @@ describe('Middleware - AI Agent Integration Tests', () => {
 
         const response = await middleware(req);
 
-        expect(global.fetch).not.toHaveBeenCalled();
+        // HTML is served (no markdown fetch); the only fetch is the agent beacon.
         expect(response.type).toBe('next');
+        expect(global.fetch).toHaveBeenCalledTimes(1);
+        const [url, options] = global.fetch.mock.calls[0];
+        expect(url).toBe('https://neonapi.io/t.js');
+        expect(options.headers['User-Agent']).toMatch(/^LLMAGENT: .*ChatGPT-User/);
+        expect(JSON.parse(options.body).data.llm_agent).toBe(true);
       });
 
       it(`should NOT serve markdown for ${name} (${path}) with regular browser request`, async () => {
-        const req = createMockRequest(
+        const req = createBrowserRequest(
           path,
           'Mozilla/5.0 (Windows NT 10.0; Win64; x64)',
           'text/html'
@@ -182,7 +197,9 @@ describe('Middleware - AI Agent Integration Tests', () => {
 
       const response = await middleware(req);
 
-      expect(global.fetch).toHaveBeenCalledWith('https://neon.com/docs/llms.txt');
+      expect(global.fetch).toHaveBeenCalledWith('https://neon.com/docs/llms.txt', {
+        headers: { Purpose: 'prefetch' },
+      });
       const text = await response.text();
       expect(text).toContain('# Neon Postgres');
       expect(response.headers.get('X-Content-Source')).toBe('markdown');
@@ -194,13 +211,15 @@ describe('Middleware - AI Agent Integration Tests', () => {
 
       const response = await middleware(req);
 
-      expect(global.fetch).toHaveBeenCalledWith('https://neon.com/docs/llms.txt');
+      expect(global.fetch).toHaveBeenCalledWith('https://neon.com/docs/llms.txt', {
+        headers: { Purpose: 'prefetch' },
+      });
       const text = await response.text();
       expect(text).toContain('# Neon Postgres');
     });
 
     it('passes browsers through to the /docs front page without redirecting', async () => {
-      const req = createMockRequest(
+      const req = createBrowserRequest(
         '/docs',
         'Mozilla/5.0 (Windows NT 10.0; Win64; x64)',
         'text/html'
@@ -253,12 +272,7 @@ describe('Middleware - AI Agent Integration Tests', () => {
   });
 
   describe('Static files and guide author pages', () => {
-    it.each([
-      '/docs/get-started/sql_editor.png',
-      '/docs/get-started/sql_editor%2Epng',
-      '/docs/og',
-      '/guides/authors/dhanush-reddy',
-    ])(
+    it.each(['/docs/get-started/sql_editor.png', '/docs/get-started/sql_editor%2Epng', '/docs/og'])(
       'passes %s through for agents without fetching Markdown or tracking a pageview',
       async (pathname) => {
         const response = await middleware(createMockRequest(pathname, 'ClaudeBot/1.0', '*/*'));
@@ -267,6 +281,17 @@ describe('Middleware - AI Agent Integration Tests', () => {
         expect(global.fetch).not.toHaveBeenCalled();
       }
     );
+
+    it('passes a guide author page through as HTML and counts the agent read once', async () => {
+      const response = await middleware(
+        createMockRequest('/guides/authors/dhanush-reddy', 'ClaudeBot/1.0', '*/*')
+      );
+
+      expect(response.type).toBe('next');
+      const urls = global.fetch.mock.calls.map(([url]) => url);
+      expect(urls).toEqual(['https://neonapi.io/t.js']);
+      expect(JSON.parse(global.fetch.mock.calls[0][1].body).data.llm_agent).toBe(true);
+    });
 
     it.each([
       '/docs/guides/n8n-ai-gateway/chat-with-pdfs.json',
@@ -463,7 +488,7 @@ describe('Middleware - AI Agent Integration Tests', () => {
 
       const response = await middleware(req);
 
-      expect(global.fetch).toHaveBeenCalledWith(markdownUrl);
+      expect(global.fetch).toHaveBeenCalledWith(markdownUrl, { headers: { Purpose: 'prefetch' } });
       expect(response.status).toBe(200);
       expect(response.headers.get('Content-Type')).toBe('text/markdown; charset=utf-8');
       expect(response.headers.get('X-Robots-Tag')).toBe('noindex');
@@ -819,7 +844,7 @@ describe('Middleware - AI Agent Integration Tests', () => {
     it('does not add a beacon for an ordinary HTML request', async () => {
       const event = { waitUntil: vi.fn() };
       const response = await middleware(
-        createMockRequest('/docs/introduction', 'Mozilla/5.0', 'text/html'),
+        createBrowserRequest('/docs/introduction', 'Mozilla/5.0', 'text/html'),
         event
       );
       expect(response.type).toBe('next');
@@ -846,24 +871,480 @@ describe('Middleware - AI Agent Integration Tests', () => {
       expect(global.fetch).not.toHaveBeenCalled();
     });
 
-    it('leaves blog beacon ownership to the rewritten route handler', async () => {
+    it('logs the blog .md read the proxy counted', async () => {
       vi.stubEnv('LLM_ANALYTICS_DEBUG', 'true');
+      global.fetch.mockImplementation((url) =>
+        Promise.resolve(
+          url === 'https://neonapi.io/t.js'
+            ? { ok: true, status: 200 }
+            : new Response('# Blog post', { headers: { 'X-Content-Source': 'markdown' } })
+        )
+      );
       const req = createMockRequest('/blog/example-post.md', 'ChatGPT-User');
-      req.nextUrl.clone = () => new URL(req.url);
       req.headers.set('x-vercel-id', 'fra1::blog-request');
       const event = { waitUntil: vi.fn() };
       const response = await middleware(req, event);
+      await event.waitUntil.mock.calls[0][0];
+
+      expect(await response.text()).toBe('# Blog post');
+      const logs = console.info.mock.calls.map(([line]) => JSON.parse(line));
+      expect(logs).toEqual(
+        expect.arrayContaining([
+          expect.objectContaining({
+            type: 'llm_request',
+            request_id: 'fra1::blog-request',
+            branch: 'markdown',
+            beacon_scheduled: true,
+            beacon_branch: 'blog-markdown',
+          }),
+        ])
+      );
+    });
+  });
+
+  describe('Blog posts and full-site agent counting', () => {
+    const CHATGPT_USER =
+      'Mozilla/5.0 AppleWebKit/537.36 (KHTML, like Gecko); compatible; ChatGPT-User/1.0; +https://openai.com/bot';
+    const BROWSER = 'Mozilla/5.0 (Macintosh) AppleWebKit/537.36 Chrome/131.0 Safari/537.36';
+    const beaconCalls = () =>
+      global.fetch.mock.calls.filter(([url]) => url === 'https://neonapi.io/t.js');
+    const withClone = (req) => {
+      req.nextUrl.clone = () => new URL(req.url);
+      return req;
+    };
+
+    // Blog markdown comes from the route handler at /blog/[slug]/md; the proxy
+    // fetches it, returns the body, and counts the read.
+    const mockBlogRoute = (route) => {
+      global.fetch.mockImplementation((url) => {
+        if (url === 'https://neonapi.io/t.js') return Promise.resolve({ ok: true, status: 200 });
+        if (url === 'https://neon.com/blog/example-post/md') return route();
+        return Promise.reject(new Error(`unexpected fetch ${url}`));
+      });
+    };
+    const blogPost = () =>
+      Promise.resolve(
+        new Response('# Blog post', {
+          headers: {
+            'Content-Type': 'text/markdown; charset=utf-8',
+            'X-Content-Source': 'markdown',
+            'X-Robots-Tag': 'noindex',
+            'X-LLMs-Txt': '/blog/llms.txt',
+          },
+        })
+      );
+
+    it.each([
+      ['Accept: text/markdown', 'Mozilla/5.0', 'text/markdown'],
+      ['an agent UA without HTML in Accept', 'Claude-User/1.0', '*/*'],
+    ])(
+      'serves /blog/[slug] as the post markdown for %s and counts it under the .md URL',
+      async (_label, userAgent, accept) => {
+        mockBlogRoute(blogPost);
+        const event = { waitUntil: vi.fn() };
+        const req = withClone(createMockRequest('/blog/example-post', userAgent, accept));
+        const response = await middleware(req, event);
+
+        expect(response.status).toBe(200);
+        expect(await response.text()).toBe('# Blog post');
+        expect(response.headers.get('Content-Type')).toBe('text/markdown; charset=utf-8');
+        expect(response.headers.get('Vary')).toBe('Accept, User-Agent');
+        expect(beaconCalls()).toHaveLength(1);
+        expect(event.waitUntil).toHaveBeenCalledTimes(1);
+        const payload = JSON.parse(beaconCalls()[0][1].body);
+        expect(payload.zarazData.l).toBe('https://neon.com/blog/example-post.md');
+        expect(payload.data).toMatchObject({ llm_agent: true, llm_404: false });
+      }
+    );
+
+    it('logs a negotiated blog read under the same branch as docs (agent-markdown)', async () => {
+      vi.stubEnv('LLM_ANALYTICS_DEBUG', 'true');
+      vi.spyOn(console, 'info').mockImplementation(() => {});
+      mockBlogRoute(blogPost);
+      await middleware(
+        withClone(createMockRequest('/blog/example-post', 'Claude-User/1.0', 'text/markdown'))
+      );
+      const logs = console.info.mock.calls.map(([line]) => JSON.parse(line));
+      expect(logs).toEqual(
+        expect.arrayContaining([
+          expect.objectContaining({ type: 'llm_request', beacon_branch: 'agent-markdown' }),
+        ])
+      );
+      vi.unstubAllEnvs();
+    });
+
+    it('serves /blog/[slug].md from the route and counts it once', async () => {
+      mockBlogRoute(blogPost);
+      const response = await middleware(
+        withClone(createMockRequest('/blog/example-post.md', 'axios/1.7', '*/*'))
+      );
+
+      expect(response.status).toBe(200);
+      expect(await response.text()).toBe('# Blog post');
+      expect(response.headers.get('X-Content-Source')).toBe('markdown');
+      expect(response.headers.get('X-Robots-Tag')).toBe('noindex');
+      expect(response.headers.get('Cache-Control')).toBe('public, max-age=60, s-maxage=300');
+      expect(response.headers.get('x-middleware-rewrite')).toBeNull();
+      // Same as docs markdown, which always varies on the negotiation inputs.
+      expect(response.headers.get('Vary')).toBe('Accept, User-Agent');
+      // The route is fetched with a neutral UA so it isn't counted again.
+      const routeCall = global.fetch.mock.calls.find(([url]) => url.endsWith('/md'));
+      expect(routeCall[1].headers['User-Agent']).toBe('neon-blog-markdown-proxy');
+      expect(beaconCalls()).toHaveLength(1);
+      expect(JSON.parse(beaconCalls()[0][1].body).data.llm_404).toBe(false);
+    });
+
+    it('counts a missing blog post as a 404 read and returns the markdown 404', async () => {
+      mockBlogRoute(() =>
+        Promise.resolve(
+          new Response('# Page Not Found', {
+            status: 404,
+            headers: {
+              'X-Content-Source': 'agent-404',
+              Link: '</blog/llms.txt>; rel="llms-txt"',
+            },
+          })
+        )
+      );
+      const response = await middleware(
+        withClone(createMockRequest('/blog/example-post.md', 'axios/1.7', '*/*'))
+      );
+
+      expect(response.status).toBe(404);
+      expect(await response.text()).toBe('# Page Not Found');
+      expect(response.headers.get('Link')).toBe('</blog/llms.txt>; rel="llms-txt"');
+      expect(beaconCalls()).toHaveLength(1);
+      expect(JSON.parse(beaconCalls()[0][1].body).data.llm_404).toBe(true);
+    });
+
+    it('serves a blog route 5xx without counting it', async () => {
+      mockBlogRoute(() => Promise.resolve(new Response('# Service Unavailable', { status: 502 })));
+      const response = await middleware(
+        withClone(createMockRequest('/blog/example-post.md', 'axios/1.7', '*/*'))
+      );
+
+      expect(response.status).toBe(502);
+      expect(response.headers.get('Cache-Control')).toBeNull();
+      expect(beaconCalls()).toHaveLength(0);
+    });
+
+    it('falls back to the route handler, uncounted, when the fetch throws', async () => {
+      vi.spyOn(console, 'error').mockImplementation(() => {});
+      mockBlogRoute(() => Promise.reject(new Error('fetch failed')));
+      const response = await middleware(
+        withClone(createMockRequest('/blog/example-post.md', 'axios/1.7', '*/*'))
+      );
+
       expect(response.headers.get('x-middleware-rewrite')).toBe(
         'https://neon.com/blog/example-post/md'
       );
-      expect(JSON.parse(console.info.mock.calls[0][0])).toMatchObject({
-        request_id: 'fra1::blog-request',
-        branch: 'rewrite',
-        proxy_status: null,
-        beacon_scheduled: false,
-      });
+      expect(beaconCalls()).toHaveLength(0);
+    });
+
+    it('counts a person opening a blog .md in a browser tab as a human pageview', async () => {
+      mockBlogRoute(blogPost);
+      const req = withClone(createMockRequest('/blog/example-post.md', BROWSER, 'text/html'));
+      req.headers.set('sec-fetch-mode', 'navigate');
+      req.headers.set('sec-fetch-dest', 'document');
+      await middleware(req);
+
+      expect(beaconCalls()).toHaveLength(1);
+      const [, options] = beaconCalls()[0];
+      expect(JSON.parse(options.body).data.llm_agent).toBe(false);
+      expect(options.headers['User-Agent']).toBe(BROWSER);
+    });
+
+    it.each([
+      ['/pricing', 'https://neon.com/pricing.md'],
+      ['/', 'https://neon.com/index.md'],
+      ['/docs/introduction', 'https://neon.com/md/docs/introduction.md'],
+      ['/docs/introduction.md', 'https://neon.com/md/docs/introduction.md'],
+    ])(
+      "marks the proxy's own markdown fetch for %s so it isn't counted again",
+      async (pathname, markdownUrl) => {
+        global.fetch.mockImplementation((url) =>
+          Promise.resolve(
+            url === 'https://neonapi.io/t.js' ? { ok: true, status: 200 } : new Response('# Page')
+          )
+        );
+        await middleware(
+          withClone(createMockRequest(pathname, 'Claude-User/1.0', 'text/markdown'))
+        );
+
+        const markdownFetch = global.fetch.mock.calls.find(([url]) => url === markdownUrl);
+        expect(markdownFetch[1].headers).toEqual({ Purpose: 'prefetch' });
+        expect(beaconCalls()).toHaveLength(1);
+      }
+    );
+
+    it('does not count a prefetch of a blog .md', async () => {
+      mockBlogRoute(blogPost);
+      const req = withClone(createMockRequest('/blog/example-post.md', BROWSER, '*/*'));
+      req.headers.set('purpose', 'prefetch');
+      const response = await middleware(req);
+
+      expect(await response.text()).toBe('# Blog post');
+      expect(beaconCalls()).toHaveLength(0);
+    });
+
+    it('passes browsers through to the blog post HTML without a beacon', async () => {
+      const response = await middleware(
+        withClone(createBrowserRequest('/blog/example-post', BROWSER, 'text/html'))
+      );
+      expect(response.type).toBe('next');
       expect(global.fetch).not.toHaveBeenCalled();
-      expect(event.waitUntil).not.toHaveBeenCalled();
+    });
+
+    it.each(['/blog/category/engineering', '/blog/rss.xml', '/blog/llms.txt'])(
+      'does not treat %s as a blog post',
+      async (pathname) => {
+        const response = await middleware(
+          withClone(createMockRequest(pathname, 'Mozilla/5.0', 'text/markdown'))
+        );
+        expect(response.headers.get('x-middleware-rewrite')).toBeNull();
+      }
+    );
+
+    it.each(['/blog/example-post', '/blog/category/engineering', '/security', '/startups'])(
+      'counts a named AI agent that is served the HTML of %s',
+      async (pathname) => {
+        const event = { waitUntil: vi.fn() };
+        const response = await middleware(
+          withClone(createMockRequest(pathname, CHATGPT_USER, 'text/html,*/*;q=0.8')),
+          event
+        );
+
+        expect(response.type).toBe('next');
+        expect(beaconCalls()).toHaveLength(1);
+        expect(global.fetch).toHaveBeenCalledTimes(1);
+        expect(event.waitUntil).toHaveBeenCalledTimes(1);
+        const payload = JSON.parse(beaconCalls()[0][1].body);
+        expect(payload.data.llm_agent).toBe(true);
+        expect(payload.zarazData.l).toBe(`https://neon.com${pathname}`);
+      }
+    );
+
+    const readerOf = () => JSON.parse(beaconCalls()[0][1].body).data;
+
+    it.each([
+      ['python-requests/2.32.3', 'unknown'],
+      ['Wget/1.24.5', 'unknown'],
+      ['Go-http-client/2.0', 'unknown'],
+      [
+        'Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)',
+        'search-crawler',
+      ],
+      ['Mozilla/5.0 (compatible; bingbot/2.0; +http://www.bing.com/bingbot.htm)', 'search-crawler'],
+    ])('counts %s served the HTML of a page as llm_reader=%s', async (userAgent, reader) => {
+      const response = await middleware(
+        withClone(createMockRequest('/docs/introduction', userAgent, 'text/html,*/*'))
+      );
+
+      expect(response.type).toBe('next');
+      expect(beaconCalls()).toHaveLength(1);
+      expect(global.fetch).toHaveBeenCalledTimes(1);
+      expect(readerOf()).toMatchObject({ llm_agent: true, llm_reader: reader });
+    });
+
+    // Next.js strips rsc/next-router-* headers before the proxy runs, so a
+    // browser's background requests are recognized by Sec-Fetch-Mode.
+    it.each([
+      ['a Next.js prefetch from a person', BROWSER],
+      ['a prefetch inside ChatGPT agent', `${BROWSER} (compatible; Claude-Agent/1.0)`],
+    ])('does not count %s (Sec-Fetch-Mode: cors)', async (_label, userAgent) => {
+      const req = withClone(createMockRequest('/docs/introduction', userAgent, '*/*'));
+      req.headers.set('sec-fetch-mode', 'cors');
+      req.headers.set('sec-fetch-dest', 'empty');
+      const response = await middleware(req);
+
+      expect(response.type).toBe('next');
+      expect(global.fetch).not.toHaveBeenCalled();
+    });
+
+    it.each([
+      ['Claude-User/1.0', 'agent'],
+      ['axios/1.7', 'unknown'],
+      ['python-requests/2.32.3', 'unknown'],
+    ])('labels a docs .md read by %s as llm_reader=%s', async (userAgent, reader) => {
+      mockFetchByUrl({ md: { ok: true, status: 200, text: () => Promise.resolve('# Intro') } });
+      await middleware(createMockRequest('/docs/introduction.md', userAgent, '*/*'));
+
+      expect(beaconCalls()).toHaveLength(1);
+      expect(readerOf()).toMatchObject({ llm_agent: true, llm_reader: reader });
+    });
+
+    it.each(['HEAD', 'OPTIONS'])('does not count a %s request to a page', async (method) => {
+      const req = withClone(createMockRequest('/security', 'python-requests/2.32.3', '*/*'));
+      req.method = method;
+      await middleware(req);
+      expect(global.fetch).not.toHaveBeenCalled();
+    });
+
+    it.each(['/llms.txt', '/blog/llms.txt', '/.well-known/ai-catalog.json', '/models.json'])(
+      'counts a person opening the discovery file %s as a human pageview',
+      async (pathname) => {
+        const response = await middleware(
+          withClone(createBrowserRequest(pathname, BROWSER, 'text/html'))
+        );
+
+        expect(response.type).toBe('next');
+        expect(beaconCalls()).toHaveLength(1);
+        expect(readerOf()).toMatchObject({ llm_agent: false, llm_reader: 'human' });
+        expect(beaconCalls()[0][1].headers['User-Agent']).toBe(BROWSER);
+      }
+    );
+
+    it.each([
+      ['/.well-known/mcp', 'curl/8.7.1', 'unknown'],
+      ['/.well-known/mcp/server-card.json', 'Claude-User/1.0', 'agent'],
+      ['/models.json', 'python-requests/2.32.3', 'unknown'],
+      ['/llms.txt', 'Mozilla/5.0 (compatible; Googlebot/2.1)', 'search-crawler'],
+    ])('counts %s fetched by %s once as llm_reader=%s', async (pathname, userAgent, reader) => {
+      const response = await middleware(withClone(createMockRequest(pathname, userAgent, '*/*')));
+
+      expect(response.type).toBe('next');
+      expect(beaconCalls()).toHaveLength(1);
+      expect(readerOf()).toMatchObject({ llm_agent: true, llm_reader: reader });
+    });
+
+    it('counts ChatGPT agent (Chrome UA + Signature-Agent) served the HTML of a page', async () => {
+      const req = withClone(createMockRequest('/security', BROWSER, 'text/html'));
+      req.headers.set('signature-agent', '"https://chatgpt.com"');
+      req.headers.set('sec-fetch-mode', 'navigate');
+      req.headers.set('sec-fetch-dest', 'document');
+      const response = await middleware(req);
+
+      expect(response.type).toBe('next');
+      expect(beaconCalls()).toHaveLength(1);
+      expect(JSON.parse(beaconCalls()[0][1].body).data.llm_agent).toBe(true);
+    });
+
+    it('does not count a named AI agent prefetching a page', async () => {
+      const req = withClone(createMockRequest('/security', CHATGPT_USER, 'text/html'));
+      req.headers.set('purpose', 'prefetch');
+      await middleware(req);
+      expect(global.fetch).not.toHaveBeenCalled();
+    });
+
+    it('counts a generic agent (non-HTML Accept) on a marketing page once and serves HTML', async () => {
+      const response = await middleware(
+        withClone(createMockRequest('/security', 'curl/8.7.1', '*/*'))
+      );
+      expect(response.type).toBe('next');
+      expect(beaconCalls()).toHaveLength(1);
+    });
+
+    it('does not count people browsing marketing pages (the browser script does)', async () => {
+      const { checkCookie } = await import('app/actions');
+      const response = await middleware(
+        withClone(createBrowserRequest('/security', BROWSER, 'text/html'))
+      );
+      expect(response.type).toBe('next');
+      expect(global.fetch).not.toHaveBeenCalled();
+      // The login cookie only drives / and /home.
+      expect(checkCookie).not.toHaveBeenCalled();
+    });
+
+    it('counts a person opening a docs .md in a browser tab as a human pageview', async () => {
+      const req = createMockRequest('/docs/introduction.md', BROWSER, 'text/html,*/*;q=0.8');
+      req.headers.set('sec-fetch-mode', 'navigate');
+      req.headers.set('sec-fetch-dest', 'document');
+      mockFetchByUrl({ md: { ok: true, status: 200, text: () => Promise.resolve('# Intro') } });
+
+      const response = await middleware(req);
+
+      expect(response.headers.get('Content-Type')).toBe('text/markdown; charset=utf-8');
+      expect(beaconCalls()).toHaveLength(1);
+      const [, options] = beaconCalls()[0];
+      expect(JSON.parse(options.body).data.llm_agent).toBe(false);
+      expect(options.headers['User-Agent']).toBe(BROWSER);
+    });
+
+    describe('matcher covers every page', () => {
+      // Compile the matcher the way Next does, then check real page routes.
+      const matchers = () => {
+        const { tryToParsePath } = require('next/dist/lib/try-to-parse-path');
+        return middlewareConfig.matcher.map(
+          (source) => new RegExp(tryToParsePath(source).regexStr)
+        );
+      };
+      const isMatched = (pathname) => matchers().some((regex) => regex.test(pathname));
+
+      // Pages under src/app, as URL paths with sample values for dynamic segments.
+      const appPagePaths = () => {
+        const fs = require('fs');
+        const path = require('path');
+        const appDir = path.join(process.cwd(), 'src/app');
+        const pages = [];
+        const walk = (dir) => {
+          for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
+            const abs = path.join(dir, entry.name);
+            if (entry.isDirectory()) walk(abs);
+            else if (/^page\.jsx?$/.test(entry.name)) pages.push(path.relative(appDir, dir));
+          }
+        };
+        walk(appDir);
+        return pages.map(
+          (route) =>
+            `/${route
+              .split(path.sep)
+              .filter((segment) => !/^\(.*\)$/.test(segment)) // route groups aren't in the URL
+              .map((segment) =>
+                segment.startsWith('[...') || segment.startsWith('[[...')
+                  ? 'a/b'
+                  : segment.startsWith('[')
+                    ? 'example'
+                    : segment
+              )
+              .join('/')}`.replace(/\/$/, '') || '/'
+        );
+      };
+
+      // Not content: auth redirects and draft previews.
+      const UNTRACKED_PAGES = ['/login', '/signup', '/blog-preview'];
+      // src/app/[slug] is checked through content/pages below.
+      const isUntracked = (pathname) =>
+        pathname === '/example' ||
+        UNTRACKED_PAGES.some((page) => pathname === page || pathname.startsWith(`${page}/`));
+
+      it('matches every page route under src/app', () => {
+        const missing = appPagePaths().filter((page) => !isUntracked(page) && !isMatched(page));
+        expect(missing).toEqual([]);
+      });
+
+      it('matches every page rendered from content/pages', () => {
+        const fs = require('fs');
+        const pages = fs
+          .readdirSync(require('path').join(process.cwd(), 'content/pages'))
+          .filter((name) => name.endsWith('.md'))
+          .map((name) => `/${name.slice(0, -3)}`);
+        expect(pages.filter((page) => !isMatched(page))).toEqual([]);
+      });
+
+      it.each([
+        '/blog/rss.xml',
+        '/blog/example-post/md',
+        '/mcp',
+        '/api/search',
+        '/images/social-previews/blog.jpg',
+        '/_next/static/chunks/main.js',
+      ])('does not run on %s', (pathname) => {
+        expect(isMatched(pathname)).toBe(false);
+      });
+
+      it.each([
+        '/llms.txt',
+        '/llms-full.txt',
+        '/blog/llms.txt',
+        '/docs/llms.txt',
+        '/.well-known/mcp',
+        '/.well-known/mcp/server-card.json',
+        '/.well-known/ai-catalog.json',
+        '/models',
+        '/models.json',
+      ])('runs on the agent discovery file %s', (pathname) => {
+        expect(isMatched(pathname)).toBe(true);
+      });
     });
   });
 
@@ -964,7 +1445,7 @@ describe('Middleware - AI Agent Integration Tests', () => {
     });
 
     it('should NOT serve markdown with Accept: text/html', async () => {
-      const req = createMockRequest('/docs/introduction', 'Mozilla/5.0', 'text/html');
+      const req = createBrowserRequest('/docs/introduction', 'Mozilla/5.0', 'text/html');
 
       const response = await middleware(req);
 
@@ -972,13 +1453,16 @@ describe('Middleware - AI Agent Integration Tests', () => {
       expect(response.type).toBe('next');
     });
 
-    it('should NOT serve markdown with Accept: */*', async () => {
+    it('should NOT serve markdown with Accept: */*, and counts the non-browser read', async () => {
       const req = createMockRequest('/docs/introduction', 'Mozilla/5.0', '*/*');
 
       const response = await middleware(req);
 
-      expect(global.fetch).not.toHaveBeenCalled();
       expect(response.type).toBe('next');
+      // No markdown fetch; the only fetch is the pageview for this non-browser read.
+      const urls = global.fetch.mock.calls.map(([url]) => url);
+      expect(urls).toEqual(['https://neonapi.io/t.js']);
+      expect(JSON.parse(global.fetch.mock.calls[0][1].body).data.llm_reader).toBe('unknown');
     });
   });
 });

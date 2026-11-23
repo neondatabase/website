@@ -111,7 +111,9 @@ function tokenize(input) {
   // Minimal POSIX-ish tokenizer: splits on whitespace, respects single
   // and double quotes, strips surrounding quotes from the resulting
   // tokens, and splits `--key=value` into two tokens. Keeps `<foo>`
-  // / `${FOO}` placeholders intact.
+  // / `${FOO}` placeholders intact. Stops at the first unquoted shell
+  // operator (`|`, `;`, `&`, `>`), so a pipe like `neon ... | sed -E`
+  // doesn't validate the next command's flags as neon options.
   const tokens = [];
   let cur = '';
   let inSingle = false;
@@ -142,6 +144,13 @@ function tokenize(input) {
     } else if (ch === '"') {
       inDouble = true;
       hasContent = true;
+    } else if (ch === '|' || ch === ';' || ch === '&' || (ch === '>' && !cur.startsWith('<'))) {
+      // `2>&1` and `2>file`: drop the file descriptor number too.
+      if (ch === '>' && /^\d$/.test(cur)) {
+        cur = '';
+        hasContent = false;
+      }
+      break;
     } else if (/\s/.test(ch)) {
       push();
     } else if (ch === '\\' && i + 1 < input.length) {

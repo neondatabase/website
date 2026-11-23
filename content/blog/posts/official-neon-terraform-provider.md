@@ -1,0 +1,212 @@
+---
+title: 'The Neon Terraform provider is now official'
+description: >-
+  neondatabase/neon is now the official Terraform provider for Neon, maintained by the Neon team. Let's see how
+  we got here and why we're betting big on IaC.
+excerpt: >-
+  Infrastructure as code is a great fit for agents. Bigger teams compose Neon with AWS, Cloudflare and more in
+  Terraform, OpenTofu, Pulumi or Alchemy. That's why kislerdm/neon, the community Terraform provider Dmitry Kisler
+  started in 2022, is now the official neondatabase/neon provider.
+date: '2026-11-19T17:00:00'
+updatedOn: '2026-11-19T17:00:00'
+category: product
+categories:
+  - product
+  - community
+authors:
+  - andre-landgraf
+  - dmitry-kisler
+  - justin-frye
+cover:
+  image: 'https://cdn.neonapi.io/public/images/pages/blog/official-neon-terraform-provider/cover-v1.jpg'
+  alt: Neon logo and the headline "The Neon Terraform provider is now official" next to a terraform required_providers block that sources neondatabase/neon, with the Neon and Terraform logos.
+isFeatured: false
+seo:
+  title: 'The Neon Terraform provider is now official - Neon'
+  description: >-
+    neondatabase/neon is the official Terraform provider for Neon. It started as the community provider
+    kislerdm/neon and now supports ephemeral credentials, Functions, Object Storage, Neon Auth and Realtime.
+  keywords: []
+  noindex: false
+  ogTitle: 'The Neon Terraform provider is now official - Neon'
+  ogDescription: >-
+    neondatabase/neon is the official Terraform provider for Neon. It started as the community provider
+    kislerdm/neon and now supports ephemeral credentials, Functions, Object Storage, Neon Auth and Realtime.
+  image: 'https://cdn.neonapi.io/public/images/pages/blog/official-neon-terraform-provider/social-v1.jpg'
+---
+
+Infrastructure as code (IaC) is objectively the right call for managing infrastructure in complex systems, which is why many bigger companies rely on it. However, it also adds complexity to infrastructure management and has always been painful to work with, so it's much less common among hobby projects and startups.
+
+There are two very interesting developments happening here with agents:
+
+- Your agent can write, test and debug the config and fix whatever got out of sync, so IaC stops being a big burden to maintain and operate.
+- The IaC config is great context for your agent: your architecture is right there in code, so it doesn't need a round of tool calls to figure out where things run.
+
+That's why we're betting big on IaC: it will only grow in popularity and it's great for agents. Many teams run Neon next to services like AWS, Cloudflare or Sentry, and we want Neon to be first class in whichever IaC tool they pick: [Alchemy](https://alchemy.run), [Pulumi](https://www.pulumi.com), [SST](https://sst.dev), [Terraform](https://developer.hashicorp.com/terraform) or [OpenTofu](https://opentofu.org). On top of that, every Neon project ships with [neon.ts](https://neon.com/blog/introducing-neon-ts), our own lightweight infrastructure-as-code file that gives your agent all your Neon definitions in one place.
+
+Terraform is still the default and most widely used IaC tool, so that's where we're starting. Today, we're releasing an official Terraform provider for Neon: [`neondatabase/neon`](https://registry.terraform.io/providers/neondatabase/neon/latest) on the Terraform Registry, built in [neondatabase/terraform-provider-neon](https://github.com/neondatabase/terraform-provider-neon). It's currently in beta and we aim to release v1 in the next 1-2 weeks!
+
+In this post, I want to share where the provider comes from, what's new and how to move over from the community provider. I also asked [Dmitry Kisler](https://www.linkedin.com/in/dkisler/) and [Justin Frye](https://www.linkedin.com/in/justin-frye-b4b14763/), who co-wrote this post with me, a few questions along the way.
+
+## Where the provider comes from
+
+The official provider started as a community project. In July 2022, Dmitry created [kislerdm/terraform-provider-neon](https://github.com/kislerdm/terraform-provider-neon) and shipped its first release, v0.0.1, on January 5, 2023. He built it on [kislerdm/neon-sdk-go](https://github.com/kislerdm/neon-sdk-go), a Go SDK he generates from the Neon API's OpenAPI spec. Since then, the provider has had 39 releases and almost two million downloads on the Terraform Registry. Most of them are recent: 1.78 million downloads came in the last 12 months alone (likely thanks to agents!).
+
+![Bar chart of Terraform Registry downloads per kislerdm/neon release, placed at each release date from January 2023 to September 2026, 1,980,291 downloads in total. Most releases before 2025 have under 60,000 downloads; v0.9.0 has about 191,000, v0.13.0 from January 2026 about 690,000, v0.15.0 about 333,000 and v0.18.0 from September 2026 about 463,000.](https://cdn.neonapi.io/public/images/pages/blog/official-neon-terraform-provider/terraform-downloads-2.png)
+
+Instead of starting over, we worked with Dmitry on porting his provider to `neondatabase/neon` and making it official. For this launch, we asked him a few questions.
+
+**Why did you start a Terraform provider for Neon?**
+
+I met Nikita [Shamgunov, Neon's co-founder] and a couple of Neon engineers at WeAreDevelopers in Berlin in 2022. Despite my initial skepticism, which I raised as the question "how are you going to compete with Aurora and AWS?", the guys' rationale and strong understanding of Postgres ins and outs made me a fan right there and then. I subscribed as a beta tester and looked forward to trying their product. The idea of separating storage from compute wasn't new, but Neon's delivery was spotless. The branching feature was simply mind blowing!
+
+I obviously wanted to automate infra provisioning. At the time, there was no provider, nor a CLI available. I decided to solve that problem to ease my own life, but also to give back to the community. That's how I decided to develop a Neon Terraform provider. I made its first release back in January 2023 and maintained it with community support, which I'm deeply grateful for.
+
+**What does it mean to you that the provider is now official?**
+
+I find it a privilege when the project you built to solve your own particular problem is useful to others. It motivated me throughout the years when I steered the provider's development. At the same time, that work felt like a big responsibility, because users have certain expectations of the OSS they trust as a dependency. At times, it felt like a huge responsibility that unfortunately I could not keep up with due to my other commitments.
+
+It felt amazing when you approached me and shared that the Databricks/Neon team picked my project as the basis for the official Terraform provider. I was over the moon and über grateful for such an honor! I look forward to our further collaboration, and I will invest as much of my available time as I can for the project to grow and gain more success.
+
+### Timeline
+
+- **2022:** Dmitry meets Nikita and Neon engineers at WeAreDevelopers in Berlin and signs up for the Neon beta.
+- **July 2022:** Dmitry creates neon-sdk-go and terraform-provider-neon.
+- **January 2023:** neon-sdk-go v0.1.0 (January 3) and the first provider release, v0.0.1 on the Terraform Registry (January 5).
+- **September 2026:** kislerdm/neon v0.18.0, the last of 39 community releases.
+- **November 2026:** the official `neondatabase/neon` provider ships its first beta, v0.19.0-beta.0, and we maintain it together with Dmitry and Justin. The current release is v0.19.0-beta.4.
+
+## What's new since kislerdm/neon 0.18
+
+v0.18.0, released in September 2026, is the last community release of kislerdm/neon. We shipped a lot of new Neon primitives in the meantime, so we used the move to an official provider to catch up. Over the last few weeks, Dmitry and Justin migrated the provider to Terraform's Plugin Framework and added resources for the newer Neon primitives. We reviewed and tested everything against the live API, added the remaining resources and made sure existing state moves over without replacing anything.
+
+The Plugin Framework is what HashiCorp recommends for new providers and it's what makes ephemeral resources possible.
+
+Ephemeral resources keep credentials out of the state file. With kislerdm/neon, a role password or connection URI ended up in `terraform.tfstate`. Now you read it during the run and hand it straight to the place that needs it:
+
+```terraform
+resource "neon_project" "app" {
+  name = "app"
+}
+
+ephemeral "neon_connection_uri" "app" {
+  project_id  = neon_project.app.id
+  branch_id   = neon_project.app.branch.id
+  endpoint_id = neon_project.app.primary_compute.id
+  database    = neon_project.app.database_name
+  role        = neon_project.app.database_user
+}
+
+resource "aws_ssm_parameter" "database_url" {
+  name             = "/app/database-url"
+  type             = "SecureString"
+  value_wo         = ephemeral.neon_connection_uri.app.uri
+  value_wo_version = 1
+}
+```
+
+Ephemeral resources need Terraform 1.10 or OpenTofu 1.11 or later. The rest of the provider works with Terraform 1.5 and up.
+
+Here are the resources we added since 0.18, grouped by Neon primitive:
+
+- [Neon Functions](https://neon.com/docs/functions): `neon_function`, `neon_trigger`
+- [Object Storage](https://neon.com/docs/storage/overview): `neon_bucket`, `neon_bucket_object`, `neon_service_credential`
+- [Neon Auth](https://neon.com/docs/auth/overview): `neon_auth` (including sign-in methods, the email provider and webhooks), `neon_auth_trusted_domain`, `neon_auth_oauth_provider`
+- [Realtime](https://neon.com/docs/realtime/overview): `neon_branch_realtime` and the ephemeral `neon_branch_realtime_secret`
+- [Data API](https://neon.com/docs/data-api/get-started): `neon_data_api`
+- Snapshots and custom branch domains: `neon_snapshot`, `neon_custom_branch_domain`
+- Access and billing: `neon_project_member_role`, `neon_org_member_role`, `neon_org_spending_limit`
+
+Enabling Realtime on a branch, for example, is one resource:
+
+```terraform
+resource "neon_branch_realtime" "this" {
+  project_id      = neon_project.app.id
+  branch_id       = neon_project.app.default_branch_id
+  allowed_origins = ["https://app.example.com"]
+}
+```
+
+## Meet Justin
+
+To get the provider over the line, we brought in Justin Frye, a platform engineer who had already been contributing to it. He also maintains [pi-provider-neon-ai-gateway](https://github.com/randoneering/pi-provider-neon-ai-gateway), an extension that lets you use the Neon AI Gateway from the [pi](https://github.com/badlogic/pi-mono) coding agent.
+
+**Why did you build pi-provider-neon-ai-gateway?**
+
+Selfishly, I wanted to use the gateway from my preferred coding agent. [Dominik](https://x.com/dominikkoch) had started on a provider in the official pi repo, so I took his work and turned it into an extension instead. The gateway gives me models from several providers through one subscription, and unlike other routers, Neon doesn't add a cost on top.
+
+**How are agents changing how you maintain projects like the pi extension and the Terraform provider?**
+
+Once a project has a good foundation, adding new things gets much easier. With every gateway update, one of my agents grabs the specs, implements the new models and runs tests against the gateway. The Terraform provider works the same way: the repo documents how to add a resource and test it against a live Neon organization, so an agent can follow that pattern for each new Neon primitive, and the acceptance tests tell us whether it actually works.
+
+## Getting started
+
+Create an API key in the Neon Console and export it as `NEON_API_KEY`. This config creates a Neon project and an Object Storage bucket on its default branch:
+
+```terraform
+terraform {
+  required_providers {
+    neon = {
+      source  = "neondatabase/neon"
+      version = "0.19.0-beta.4"
+    }
+  }
+}
+
+provider "neon" {}
+
+resource "neon_project" "app" {
+  name      = "app"
+  region_id = "aws-us-east-2"
+}
+
+resource "neon_bucket" "uploads" {
+  project_id = neon_project.app.id
+  branch_id  = neon_project.app.branch.id
+  name       = "uploads"
+}
+
+output "s3_endpoint" {
+  value = neon_bucket.uploads.s3_endpoint
+}
+```
+
+```shell
+terraform init
+terraform apply
+```
+
+OpenTofu installs the same provider from the [OpenTofu registry](https://search.opentofu.org/provider/neondatabase/neon/latest), so `tofu init` and `tofu apply` work too. Our [Terraform docs](https://neon.com/docs/reference/terraform) cover API keys and common errors, and the [Registry docs](https://registry.terraform.io/providers/neondatabase/neon/latest/docs) cover every resource.
+
+## Moving from kislerdm/neon
+
+If you already manage Neon with kislerdm/neon 0.18, you keep your state and your databases. Change the provider source and pin the beta version, since Terraform only installs a beta release when `version` names it exactly:
+
+```terraform
+terraform {
+  required_providers {
+    neon = {
+      source  = "neondatabase/neon"
+      version = "0.19.0-beta.4"
+    }
+  }
+}
+```
+
+Then point the existing state at the new provider and review the plan:
+
+```shell
+terraform state replace-provider registry.terraform.io/kislerdm/neon registry.terraform.io/neondatabase/neon
+terraform init -upgrade
+terraform plan
+```
+
+A few attributes changed shape on the way to the Plugin Framework. Nested blocks like `branch` and `primary_compute` are nested attributes now and `"yes"`/`"no"` strings are booleans. The [migration guide](https://neon.com/docs/reference/terraform-migrate) lists every change. After those edits, the plan should show no changes or only in-place updates. If it shows a resource being replaced, don't apply it; [open an issue](https://github.com/neondatabase/terraform-provider-neon/issues) with the plan output instead.
+
+## Why we shipped a beta
+
+We shipped the provider as a beta to get it into your hands early, and we're iterating on the feedback coming in. We're aiming for v1 within weeks. Until then, pin the exact version and check the [changelog](https://github.com/neondatabase/terraform-provider-neon/blob/main/CHANGELOG.md) before you bump it. Issues and feature requests are always welcome in [neondatabase/terraform-provider-neon](https://github.com/neondatabase/terraform-provider-neon/issues).
+
+A big thank you to Dmitry for building and maintaining the provider for over three years and to Justin for the work that made the official release possible. We're really excited to keep building it together.
+
+Happy coding!

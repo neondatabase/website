@@ -1,226 +1,354 @@
 ---
 title: Connect a Django application to Neon
-subtitle: Set up a Neon project in seconds and connect from a Django application
+subtitle: Connect a Django app to Lakebase Postgres on Neon, query it from a view, develop on a branch, deploy, and add the rest of your backend
 summary: >-
-  Connecting Django to Lakebase Postgres on Neon requires configuring the
-  `DATABASES` block in `settings.py` with the psycopg3 driver, `sslmode:
-  require`, and `CONN_HEALTH_CHECKS: True` to prevent dropped connections when
-  the compute scales to zero after 5 minutes of inactivity. Use this page
-  when setting up a new Django connection or debugging the `Endpoint ID
-  is not specified` SNI error, which occurs with psycopg2 and libpq versions
-  older than v14. For schema migrations after connecting, see the separate Django
-  Migrations guide.
+  Connect a Django 6.1 app to Lakebase Postgres on Neon: create a Neon project
+  (Neon CLI, API, or Console), link it with the Neon CLI to write DATABASE_URL
+  to .env.local, load it in settings.py with python-dotenv and dj-database-url,
+  use psycopg 3 with connection health checks for Neon's scale to zero, and
+  query it from a view. Covers Django 5.2 LTS, deployment, and troubleshooting.
 enableTableOfContents: true
 redirectFrom:
   - /docs/quickstart/django
   - /docs/cloud/integrations/django
-updatedOn: '2026-11-18T16:41:34.386Z'
+updatedOn: '2026-11-19T01:51:18.666Z'
 ---
 
-<CopyPrompt src="/prompts/django-prompt.md" 
-description="Pre-built prompt for connecting Django applications to Neon"/>
-
-To connect to Neon from a Django application:
-
-## Prerequisites
-
-- A [Neon account and project](/docs/get-started/signing-up) with connection parameters ready
-- Python 3.12+ installed (required by Django 6). Django 5.2 LTS supports Python 3.10+.
-- An existing Django project (or create one with `django-admin startproject myproject`)
-
-<Admonition type="important">
-Always use a Python virtual environment. Do not install packages globally. If you do not have one set up, create and activate it before proceeding:
-
-```bash
-python3 -m venv venv
-source venv/bin/activate   # macOS / Linux
-# venv\Scripts\activate    # Windows
-```
-
-</Admonition>
-
-## Install the Postgres driver
-
-Install `psycopg` (psycopg 3) and `python-dotenv` inside your virtual environment:
-
-```bash
-pip install "psycopg[binary]" python-dotenv
-```
-
-<Admonition type="note">
-The examples below use `psycopg` (v3). If your project uses the older `psycopg2` driver, see [Connection issues](#connection-issues) for SNI compatibility requirements.
-</Admonition>
+<PromptBlock src="/prompts/django-prompt.md" labels={["Set up your agent and follow this guide", "Look up Django's docs", "Connect your Django app"]} />
 
 <Steps>
 
+## Create a Django app
+
+Install Python 3.12 or later, which Django 6.1 requires. Then create a project directory with a virtual environment, install Django and the packages this guide uses, and create a Django project:
+
+```bash filename="Terminal"
+mkdir my-app
+cd my-app
+python3 -m venv .venv
+source .venv/bin/activate
+pip install "Django>=6.1,<6.2" "psycopg[binary]" dj-database-url python-dotenv
+django-admin startproject mysite .
+printf '.venv/\n.env\n.env.local\n' > .gitignore
+```
+
+On Windows, run `.venv\Scripts\activate` instead of `source .venv/bin/activate`.
+
+The packages are:
+
+- `psycopg[binary]`: the psycopg 3 Postgres driver, which Django uses by default.
+- `dj-database-url`: reads `DATABASE_URL` and builds Django's `DATABASES` setting from it.
+- `python-dotenv`: loads the env files, because Django doesn't read them itself.
+
+`startproject` creates the project files but no `.gitignore`, so the `printf` line adds one that keeps the virtual environment and your env files out of git. On Windows, create the same file in PowerShell with `Set-Content -Path .gitignore -Value ".venv/", ".env", ".env.local"`, or in cmd with `(echo .venv/& echo .env& echo .env.local)>.gitignore`.
+
+If you're adding Neon to an existing Django app, don't run `django-admin startproject`, and don't use the `pip install` line above, because it would upgrade Django. Use the app's virtual environment (`venv` or `.venv`). If the app has none, create `.venv` and install Django at the app's version too. In an existing environment, install only the three packages:
+
+```bash filename="Terminal"
+pip install "psycopg[binary]" dj-database-url python-dotenv
+```
+
+If you created a new `.venv`, also run `pip install "Django==5.2.*"` (or the app's exact version).
+
+Keep the app's Django version. Add `.venv/`, `.env`, and `.env.local` to its `.gitignore` if they aren't there. The code in this guide also works on [Django 5.2 LTS](#troubleshooting), which is covered in Troubleshooting.
+
+## Add Neon's agent skills (optional)
+
+If your AI coding agent doesn't have Neon's [Agent Skills](/docs/ai/agent-skills) yet, add them to this project. The prompt above installs them, so skip this step if you used it. From your project directory, run:
+
+```bash filename="Terminal"
+npx neon@latest skills
+```
+
+To also connect the [Neon MCP Server](/docs/ai/neon-mcp-server), run `npx neon@latest mcp`.
+
+Django doesn't publish an `llms.txt` file, so the prompt above has your agent look up its [documentation](https://docs.djangoproject.com/en/stable/) instead.
+
 ## Create a Neon project
 
-If you do not have one already, create a Neon project. Save your connection details including your password. They are required when defining connection settings.
+Create a Neon project in a region that runs every Neon backend service: `aws-us-east-2` (Ohio), `aws-us-east-1` (N. Virginia), `aws-eu-central-1` (Frankfurt), or `aws-ap-southeast-1` (Singapore). Postgres and Managed Better Auth run in every region; Object Storage, Neon Functions, the AI Gateway, and Realtime run in those four (see [product availability](/docs/introduction/regions#product-availability)). Skip this step if you already have a Neon project you want to use.
 
-To create a Neon project:
+<Tabs labels={["Neon CLI", "API", "Console"]}>
 
-1. Navigate to the [Projects](https://console.neon.tech/app/projects) page in the Neon Console.
-2. Click **New Project**.
-3. Specify your project settings and click **Create Project**.
+<TabItem>
 
-## Configure Django connection settings
+Install the [Neon CLI](/docs/cli/install), sign in, and create the project:
 
-Connecting to Neon requires configuring database connection settings in your Django project's `settings.py` file.
+```bash filename="Terminal"
+npm i -g neon@latest
+neon login
+neon projects create --name my-app --region-id aws-us-east-2 --no-secrets
+```
 
-<Admonition type="note">
-To avoid the `endpoint ID is not specified` connection issue described [here](#connection-issues), be sure that you are using an up-to-date driver.
-</Admonition>
+`--region-id` sets the region; pass a different one to pick another of the regions above. `--no-secrets` keeps the connection string out of the output, since the next step pulls it into your env file. Pass `--org-id` to choose the organization (find IDs with `neon orgs list`).
 
-In your Django project, navigate to the `DATABASES` section of your `settings.py` file and modify the connection details as shown:
+</TabItem>
 
-```python
-# Add these at the top of your settings.py
-from os import getenv
+<TabItem>
+
+Create an [API key](https://console.neon.tech/app/settings/api-keys), export it, then create the project in your organization:
+
+```bash filename="Terminal"
+export NEON_API_KEY=napi_...
+
+curl -X POST https://console.neon.tech/api/v2/projects \
+  -H "Authorization: Bearer $NEON_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{"project": {"name": "my-app", "region_id": "aws-us-east-2", "org_id": "<org-id>"}}'
+```
+
+The response includes the project's connection string in `connection_uris[0].connection_uri`. See [Create a project with the API](/docs/manage/projects#create-a-project-with-the-api) for the other options.
+
+</TabItem>
+
+<TabItem>
+
+Go to the [Projects](https://console.neon.tech/app/projects) page in the Neon Console, click **New Project**, and pick one of the regions above.
+
+</TabItem>
+
+</Tabs>
+
+## Connect your app to the project
+
+Get a `DATABASE_URL` into an env file in your project directory, the one that contains `manage.py`. Django doesn't read env files itself. The settings file in the next step loads `.env.local` and `.env` with python-dotenv.
+
+<Tabs labels={["Neon CLI", "Without the CLI"]}>
+
+<TabItem>
+
+From your project directory, link it to the Neon project (install the [Neon CLI](/docs/cli/install) and run `neon login` first if you haven't):
+
+```bash filename="Terminal"
+neon link --no-config
+```
+
+`neon link` prompts you to pick an organization and a project, or to create a new project. It writes a `.neon` file with the project context. It pins a branch (pass `--branch` to choose one) and pulls that branch's `DATABASE_URL` into `.env.local`. If your project already has a `.env` file, it writes there instead. `--no-config` skips the offer to create a `neon.ts` file, which is for JavaScript projects.
+
+To skip the other prompts, pass `-y` with `--org-id` and `--project-id`. For example, to link to the project you created in the CLI tab above:
+
+```bash filename="Terminal"
+neon link --no-config -y --org-id <org-id> --project-id <project-id>
+```
+
+Or pass `-y` with `--org-id`, `--project-name`, and `--region-id` to create a project. Find IDs with `neon orgs list` and `neon projects list --org-id <org-id>`.
+
+</TabItem>
+
+<TabItem>
+
+Copy the connection string from **Connect** in the Console nav, or from the API response, and add it to a `.env.local` file in your project directory. Keep connection pooling on for this `DATABASE_URL`, which uses the `-pooler` hostname. For more information, see [Connect from any application](/docs/connect/connect-from-any-app).
+
+```shell filename=".env.local" shouldWrap
+DATABASE_URL="postgresql://[user]:[password]@[neon_hostname]/[dbname]?sslmode=require&channel_binding=require"
+```
+
+The optional development branch step uses the Neon CLI. To use it, run `neon link` in this directory.
+
+</TabItem>
+
+</Tabs>
+
+Keep `DATABASE_URL` in only one env file: if `.env` and `.env.local` both have it, `.env.local` wins.
+
+## Work on a development branch (optional)
+
+If you linked your project's default branch, your app uses the branch where production data usually lives. That's `main` for projects created with the CLI or API, and `production` for projects created in the Console. Create a [branch](/docs/introduction/branching) for local development instead. A branch starts from its parent's data and schema with copy-on-write, so you can change it freely:
+
+```bash filename="Terminal"
+neon checkout dev --create
+```
+
+This creates the `dev` branch, pins it in `.neon`, and pulls its `DATABASE_URL` into the same env file, so your app now uses the branch. To switch back, run `neon checkout main` (or `production`).
+
+## Configure the database connection
+
+Open `mysite/settings.py`. The examples use `mysite` as the project package name, the folder that contains `settings.py`; replace it with your project's name in the paths and imports. Replace the import lines at the top of the file, and the `BASE_DIR` line, with the block below. Then replace the `DATABASES` block that `startproject` created. The block shows only those parts, so keep the rest of the file as `startproject` generated it:
+
+```python filename="mysite/settings.py"
+import os
+from pathlib import Path
+
+import dj_database_url
+from django.core.exceptions import ImproperlyConfigured
 from dotenv import load_dotenv
 
-load_dotenv()
+BASE_DIR = Path(__file__).resolve().parent.parent
 
-# Replace the DATABASES section of your settings.py with this
+# neon link writes DATABASE_URL to .env.local, or to .env if the project has one.
+# .env.local loads first, so it wins if both files set the variable.
+load_dotenv(BASE_DIR / ".env.local")
+load_dotenv(BASE_DIR / ".env")
+
+if not os.getenv("DATABASE_URL"):
+    raise ImproperlyConfigured(
+        "DATABASE_URL is not set. Run `neon link` in the project directory, or add it to .env.local."
+    )
+
 DATABASES = {
-  'default': {
-    'ENGINE': 'django.db.backends.postgresql',
-    'NAME': getenv('PGDATABASE'),
-    'USER': getenv('PGUSER'),
-    'PASSWORD': getenv('PGPASSWORD'),
-    'HOST': getenv('PGHOST'),
-    'PORT': getenv('PGPORT', 5432),
-    'OPTIONS': {
-      'sslmode': 'require',
-    },
-    'DISABLE_SERVER_SIDE_CURSORS': True,
-    'CONN_HEALTH_CHECKS': True,
-  }
+    "default": dj_database_url.config(
+        conn_max_age=300,
+        conn_health_checks=True,
+        disable_server_side_cursors=True,
+    )
 }
+# Keep the sslmode from DATABASE_URL if it has one; otherwise require SSL.
+DATABASES["default"].setdefault("OPTIONS", {}).setdefault("sslmode", "require")
 ```
 
-<Admonition type="note">
-Neon places computes into an idle state and closes connections after 5 minutes of inactivity (see [Compute lifecycle](/docs/introduction/compute-lifecycle/)). To avoid connection errors, you can set the Django [CONN_MAX_AGE](https://docs.djangoproject.com/en/stable/ref/settings/#std-setting-CONN_MAX_AGE) setting to 0 to close database connections at the end of each request so that your application does not attempt to reuse connections that were closed by Neon. From Django 4.1, you can use a higher `CONN_MAX_AGE` setting in combination with the [CONN_HEALTH_CHECKS](https://docs.djangoproject.com/en/stable/ref/settings/#conn-health-checks) setting to enable connection reuse while preventing errors that might occur due to closed connections. For more information about these configuration options, see [Connection management](https://docs.djangoproject.com/en/stable/ref/databases/#connection-management), in the _Django documentation_.
-</Admonition>
+The settings do three things:
 
-You can find all of the connection details listed above by clicking the **Connect** button in the Console nav to open the **Connect to your branch** modal. For more information, see [Connect from any application](/docs/connect/connect-from-any-app).
+- `dj_database_url.config()` reads `DATABASE_URL` and fills in the host, user, password, and database. The `sslmode` and `channel_binding` parameters from the connection string pass to the driver.
+- The `setdefault` line sets `sslmode=require` only when the URL doesn't set one. The URLs `neon link` writes include `sslmode=require`, and a stricter value such as `verify-full` in the URL is kept.
+- `conn_max_age=300` and `conn_health_checks=True` handle scale to zero. Neon suspends an idle compute after 5 minutes of inactivity by default, which closes its connections (see [Compute lifecycle](/docs/introduction/compute-lifecycle)). Django drops a connection after 300 seconds, and it checks a reused connection before a request uses it, so a connection Neon closed gets replaced. For more on the setting, see [CONN_MAX_AGE](https://docs.djangoproject.com/en/stable/ref/settings/#conn-max-age) in the Django docs.
+- `disable_server_side_cursors=True` applies to every connection, because the pooled connection string needs it. Neon's pooler runs PgBouncer in transaction mode, which doesn't support server-side cursors, and Django's docs recommend this setting for transaction pooling. The cost: `QuerySet.iterator()` fetches rows in one batch instead of a server-side cursor, so a large iteration holds more rows in memory.
 
-Add a `.env` file to your project's root directory with the individual connection parameters (not a single `DATABASE_URL`, since Django's `DATABASES` setting expects separate fields):
+Django already turns off psycopg's prepared statements by default, so the pooler needs no other setting.
 
-```shell shouldWrap
-PGHOST="<endpoint_hostname>.neon.tech"
-PGDATABASE="<dbname>"
-PGUSER="<user>"
-PGPASSWORD="<password>"
-PGPORT=5432
-```
-
-> Replace `<endpoint_hostname>`, `<dbname>`, `<user>`, and `<password>` with your actual database credentials. If you have a connection string (`postgresql://[user]:[password]@[neon_hostname]/[dbname]`), copy its parts into the matching variables. The pooled hostname (with `-pooler`) works with these settings.
-
-For additional information about Django project settings, see [Django Settings: Databases](https://docs.djangoproject.com/en/stable/ref/settings/#databases), in the Django documentation.
+If `DATABASE_URL` isn't set, Django stops with an `ImproperlyConfigured` error that names the variable.
 
 ## Test the connection
 
-Create a simple view to verify the database connection is working.
+Create a view that returns the Postgres version. Create `views.py` in your project package (`mysite/views.py` in these examples, where `mysite` is replaced with your project package name) with the function below. If the file already exists, add the function to it instead of replacing the file.
 
-1. In your project's main app directory (next to `urls.py`), create `views.py`:
+```python filename="mysite/views.py"
+from django.db import connection
+from django.http import JsonResponse
 
-   ```python
-   from django.http import JsonResponse
-   from django.db import connection
 
-   def db_version(request):
-       with connection.cursor() as cursor:
-           cursor.execute("SELECT version();")
-           version = cursor.fetchone()[0]
-       return JsonResponse({'version': version})
-   ```
+def db_version(request):
+    with connection.cursor() as cursor:
+        cursor.execute("SELECT version();")
+        version = cursor.fetchone()[0]
+    return JsonResponse({"version": version})
+```
 
-2. Add a URL route in your project's `urls.py`:
+In your project package's `urls.py` (`mysite/urls.py` in these examples), add the `views` import and the path to `urlpatterns`. For a new project, the file looks like this:
 
-   ```python
-   from django.contrib import admin
-   from django.urls import path
-   from . import views
+```python filename="mysite/urls.py"
+from django.contrib import admin
+from django.urls import path
 
-   urlpatterns = [
-       path('admin/', admin.site.urls),
-       path('', views.db_version, name='db_version'),
-   ]
-   ```
+from . import views
 
-3. Run migrations and start the server:
+urlpatterns = [
+    path("", views.db_version, name="db_version"),
+    path("admin/", admin.site.urls),
+]
+```
 
-   ```bash
-   python manage.py migrate
-   python manage.py runserver
-   ```
+If `mysite/urls.py` already exists, add the import and the path to it instead of replacing the file. If your project already has a root route, use `path("neon/", views.db_version, name="db_version")` instead of `""`, so you keep that route.
 
-4. Visit `http://localhost:8000` to see the Postgres version from your Neon database.
+Create Django's tables over a direct connection, then start the server. Neon recommends the direct string (the connection string without `-pooler` in the hostname) for migrations, so set `DATABASE_URL` to the direct string for the `migrate` command only:
+
+```bash filename="Terminal"
+DATABASE_URL="$(neon connection-string)" python manage.py migrate
+python manage.py runserver
+```
+
+`neon connection-string` with no branch name prints the direct string for the branch that `neon link` pinned, so the value doesn't need to be copied. A variable set in the shell takes priority over the env files, so `migrate` uses the direct string and `runserver` uses `DATABASE_URL` from the env file. `migrate` creates the tables that Django's built-in apps use, such as users and sessions.
+
+The `$(neon connection-string)` form works in macOS and Linux shells. On Windows, run `neon connection-string` and paste its output in place of `<direct string>`. The command prints the direct string by default:
+
+<CodeTabs labels={["PowerShell", "cmd"]}>
+
+```powershell filename="PowerShell"
+$env:DATABASE_URL="<direct string>"; python manage.py migrate; Remove-Item Env:DATABASE_URL
+```
+
+```bat filename="cmd"
+set "DATABASE_URL=<direct string>" && python manage.py migrate & set "DATABASE_URL="
+```
+
+</CodeTabs>
+
+The cmd form quotes the value, so the `&` in the string doesn't end the command. Both forms clear `DATABASE_URL` after `migrate` finishes, so the next `runserver` in that window reads the pooled string from your env file.
+
+If you set up the project in the Console and don't use the Neon CLI, copy the direct string from **Connect** with connection pooling turned off. See [Connection pooling](/docs/connect/connection-pooling). Use that string in place of `$(neon connection-string)`.
+
+Open [localhost:8000](http://localhost:8000). The response shows your Postgres version, which confirms the connection:
+
+```json
+{"version": "PostgreSQL 18.6 ..."}
+```
 
 </Steps>
 
-## Connection issues
+## Deploy
 
-- Django uses `psycopg` (v3) when it's installed and falls back to `psycopg2`. If your project uses an older version of `psycopg2`, you may encounter an `Endpoint ID is not specified` error when connecting to Neon. This error occurs if the client library used by your driver does not support the Server Name Indication (SNI) mechanism in TLS, which Neon uses to route incoming connections. The `psycopg2` driver uses the `libpq` client library, which supports SNI as of v14. You can check your `psycopg2` and `libpq` versions by starting a Django shell in your Django project and running the following commands:
+Set `DATABASE_URL` on your host to the pooled string for the running app. Get it with `neon connection-string main --pooled` (or `neon connection-string production --pooled` for a project created in the Console), or copy it from **Connect** in the Console with connection pooling on. The settings file reads `DATABASE_URL` from the environment, so a host doesn't need `.env` files.
 
-  ```bash
-  # Start a Django shell
-  python3 manage.py shell
-  ```
+Run migrations before you start the new code. Do it from a machine where the project is linked (where you ran `neon link`), so the host doesn't need the Neon CLI or a `.neon` file. Use the direct string for the project's default branch, with `DATABASE_URL` set for that command only. The default branch is `main` for projects created with the CLI or API, and `production` for projects created in the Console. The command below uses `main`. For a Console project, replace `main` with `production`:
 
-  ```python
-  # Check versions
-  import psycopg2
-  print("psycopg2 version:", psycopg2.__version__)
-  print("libpq version:", psycopg2._psycopg.libpq_version())
-  ```
+```bash filename="Terminal"
+DATABASE_URL="$(neon connection-string main)" python manage.py migrate
+```
 
-  The version number for `libpq` is presented in a different format, for example, version 14.1 will be shown as 140001. If your `libpq` version is less than version 14, you can either upgrade your `psycopg2` driver to get a newer `libpq` version or use one of the workarounds in [Connection errors](/docs/connect/connection-errors#the-endpoint-id-is-not-specified). Upgrading your `psycopg2` driver may introduce compatibility issues with your Django or Python version, so you should test your application thoroughly.
+If you don't use the Neon CLI, replace the `$(neon connection-string main)` part with the direct string from **Connect**, with connection pooling turned off. On Windows, use the PowerShell or cmd form from the Test step, and paste in the output of `neon connection-string main` in place of `<direct string>` (or the direct string from **Connect**, if you don't use the CLI).
 
-- If you encounter an `SSL SYSCALL error: EOF detected` when connecting to the database, this typically occurs because the application is trying to reuse a connection after the Neon compute has been suspended due to inactivity. To resolve this issue, try one of the following options:
-  - Set your Django [`CONN_MAX_AGE`](https://docs.djangoproject.com/en/stable/ref/settings/#conn-max-age) setting to a value less than or equal to the scale to zero setting configured for your compute. The default is 5 minutes (300 seconds).
-  - Enable [`CONN_HEALTH_CHECKS`](https://docs.djangoproject.com/en/stable/ref/settings/#conn-health-checks) by setting it to `True`. This forces a health check to verify that the connection is alive before executing a query.
+Django's deployment checklist covers the rest of production setup. Set `DEBUG = False`, read `SECRET_KEY` and `ALLOWED_HOSTS` from the environment, and set `STATIC_ROOT` if the app serves static files. Then run `python manage.py check --deploy` against the production settings. For the full list, see the [deployment checklist](https://docs.djangoproject.com/en/stable/howto/deployment/checklist/).
 
-  For information configuring Neon's Scale to zero setting, see [Configuring Scale to zero for Neon computes](/docs/guides/scale-to-zero-guide).
+Serve the app with a WSGI server such as gunicorn, which doesn't use `runserver`:
 
-## Schema migration with Django
+```bash filename="Terminal"
+pip install gunicorn
+gunicorn mysite.wsgi:application --bind 0.0.0.0:$PORT
+```
 
-For schema migration with Django, see:
+If you serve the app with an ASGI server such as uvicorn, Django's docs say to disable persistent connections. Set the `conn_max_age` argument of `dj_database_url.config()` to `0`.
 
-<DetailIconCards>
+## Add more of your backend
 
-<a href="/docs/guides/django-migrations" description="Schema migration with Django and Lakebase Postgres on Neon" icon="app-store">Django Migrations</a>
+Neon's other backend services branch with your database. Object Storage, Neon Functions, the AI Gateway, and Realtime need a project in a [supported region](#create-a-neon-project). Object Storage has a Neon CLI command, `neon buckets create`, and each service's page below covers its setup.
 
-</DetailIconCards>
+<DefinitionList>
 
-## Django application blog post and sample application
+Managed Better Auth
+: Sign-up, sign-in, and sessions stored in your database. See [Managed Better Auth](/docs/auth/overview).
 
-Learn how to use Django with Lakebase Postgres with this blog post and the accompanying sample application.
+Object Storage
+: S3-compatible buckets for uploads and files.
+: Create a bucket with `neon buckets create <name>`, then call it from a view. See [Object Storage](/docs/storage/overview).
 
-<DetailIconCards>
-<a href="/blog/python-django-and-neons-serverless-postgres" description="Learn how to build a Django application with Lakebase Postgres" icon="import">Blog Post: Using Django with Neon</a>
+AI Gateway
+: One credential for models from Anthropic, OpenAI, Google, and more.
+: Call models from a view. See [AI Gateway](/docs/ai-gateway/overview).
 
-<a href="https://github.com/evanshortiss/django-neon-quickstart" description="Django with Lakebase Postgres" icon="github">Django sample application</a>
-</DetailIconCards>
+Neon Functions
+: Long-running Node.js compute next to your database.
+: Use a function for work that outlasts a request, such as agents and webhooks, and call it from Django over HTTP. See [Neon Functions](/docs/compute/functions/overview).
 
-## Community resources
+Realtime (beta)
+: Live SQL query subscriptions.
+: See [Realtime](/docs/realtime/overview).
 
-- [Django Project: Build a Micro eCommerce with Python, Django, Neon Postgres, Stripe, & TailwindCSS](https://youtu.be/qx9nshX9CQQ?start=1569)
+</DefinitionList>
 
-<details>
-<summary>**Notes for AI-assisted setup**</summary>
+## Troubleshooting
 
-- Do not install packages globally. Always use a virtual environment and run commands with `venv/bin/pip` and `venv/bin/python` (or the activated equivalent).
-- Use `psycopg[binary]` (psycopg v3), not the older `psycopg2`. If the project already uses `psycopg2`, check the [Connection issues](#connection-issues) section for SNI compatibility.
-- Include `CONN_HEALTH_CHECKS: True` in the `DATABASES` configuration. This prevents errors from idle connections when Neon scales to zero.
-- Do not hardcode credentials in `settings.py`. Use environment variables via `python-dotenv` and `os.getenv()`. For more information, see [Security overview](/docs/security/security-overview).
-- The `.env` file should use individual `PG*` variables (`PGHOST`, `PGDATABASE`, etc.), not a single `DATABASE_URL`, since Django's database configuration expects separate fields.
+<DefinitionList>
 
-</details>
+`ImproperlyConfigured: DATABASE_URL is not set`
+: Django found no `DATABASE_URL`. Run `neon link` in the directory that contains `manage.py`, or check that `.env.local` or `.env` is there and has the variable. On a host, set the variable in the environment.
+
+`OperationalError` when `runserver` starts
+: `runserver` checks for unapplied migrations when it starts, so it exits if it can't reach the database. Check the connection string and start the server again. A wrong URL fails the same way.
+
+`Endpoint ID is not specified`
+: Your app is using psycopg2 with a libpq version older than 14, which doesn't send the Server Name Indication that Neon uses for routing. Install psycopg 3 with `pip install "psycopg[binary]"`. Django uses psycopg 3 when it's installed. Use an up-to-date driver, and test your app after you upgrade psycopg. For other options, see [Connection errors](/docs/connect/connection-errors#the-endpoint-id-is-not-specified).
+
+`SSL SYSCALL error: EOF detected`
+: The app reused a connection that Neon closed while the compute was suspended. The `conn_max_age` and `conn_health_checks` settings guard against this for web requests. Django runs the health check only before a request's first query. A long-running command or worker that holds one connection for hours doesn't get that check. Django's request signals don't run for commands or worker loops, so call `django.db.connection.close()` (or `django.db.close_old_connections()`) before each unit of work. For more on scale to zero, see [Configuring Scale to Zero for Neon computes](/docs/guides/scale-to-zero-guide).
+
+Django 5.2 LTS
+: The settings and the view in this guide also work on Django 5.2 LTS, which supports Python 3.10 and later. An app on Django 5.2 keeps that version: install the packages without Django, as shown in the existing-app step, and keep the rest of the steps as written. The three packages also install on Python 3.10, the same floor as Django 5.2. Apps older than 5.2 aren't covered by this guide, so check with your team before you change the version. For upgrade notes, see the [Django release notes](https://docs.djangoproject.com/en/stable/releases/).
+
+</DefinitionList>
 
 ## Next steps
 
+- **Create your tables:** follow [Schema migration with Django and Lakebase Postgres on Neon](/docs/guides/django-migrations) to define models and generate migrations.
+- [Branching](/docs/introduction/branching): give each preview deployment or pull request its own branch of your database.
 - [Add Object Storage](/docs/storage/overview): S3-compatible file storage that branches with your database.
-- [Call an LLM with AI Gateway](/docs/ai-gateway/overview): Access foundation models from Anthropic, OpenAI, Google, and more with one credential.
 
 <NeedHelp/>
