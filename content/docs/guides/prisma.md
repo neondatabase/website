@@ -14,7 +14,7 @@ redirectFrom:
   - /docs/integrations/prisma
   - /docs/guides/prisma-guide
   - /docs/guides/prisma-migrate
-updatedOn: '2026-11-20T22:29:31.468Z'
+updatedOn: '2026-11-23T15:52:09.688Z'
 ---
 
 <PromptBlock src="/prompts/prisma-prompt.md" labels={["Set up your agent and follow this guide", "Look up Prisma's docs", "Connect your Prisma app"]} />
@@ -271,17 +271,7 @@ Your app uses the pooled `DATABASE_URL`, which goes through PgBouncer, the conne
 : `DATABASE_URL` is missing when the script starts. Check that your env file sets it, or set it in the environment before you run the script.
 
 `P1002` with `Timed out trying to acquire a postgres advisory lock`
-: Another migration is running, or an earlier migration ran through the pooled connection and left its advisory lock held. An advisory lock is a lock on a database-wide key, and Prisma Migrate takes one so only one migration runs at a time. In our tests, a migration through the pooled connection left the lock held, and the next migration timed out. Run migrations with `DATABASE_URL_UNPOOLED`, which `prisma.config.ts` already does. If no other migration is running, find the session that holds the lock in [`neon psql`](/docs/cli/psql), which uses the direct connection:
-
-```sql shouldWrap
-SELECT pid, granted FROM pg_locks WHERE locktype = 'advisory' AND classid = 0 AND objid = 72707369 AND objsubid = 1;
-```
-
-The row with `granted` set to `t` is the session that holds the lock. End that one session by its `pid`:
-
-```sql
-SELECT pg_terminate_backend(<pid>);
-```
+: Another migration is running, or an earlier migration ran through the pooled connection and left its advisory lock held. An advisory lock is a lock on a database-wide key, and Prisma Migrate takes one so only one migration runs at a time. In our tests, a migration through the pooled connection left the lock held, and the next migration timed out. Run migrations with `DATABASE_URL_UNPOOLED`, which `prisma.config.ts` already does. If no other migration is running, open [`neon psql`](/docs/cli/psql), which uses the direct connection, and find the session that holds the lock with `SELECT pid, granted FROM pg_locks WHERE locktype = 'advisory' AND classid = 0 AND objid = 72707369 AND objsubid = 1;`. The row with `granted` set to `t` is the holder. End that one session with `SELECT pg_terminate_backend(<pid>);`, using its `pid`.
 
 `Connection terminated due to connection timeout`
 : The adapter gave up on a connection attempt. Set `connectionTimeoutMillis` in the `PrismaNeon` config in `src/db.ts`, in milliseconds. The `connect_timeout` URL parameter doesn't apply to the adapter. [Connection latency](/docs/connect/connection-latency) covers scale to zero, when a compute suspends after inactivity.
