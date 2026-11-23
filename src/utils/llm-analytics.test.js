@@ -42,7 +42,7 @@ describe('LLM analytics delivery', () => {
       name: 'Pageview',
       data: {
         llm_agent: true,
-        llm_reader: 'agent',
+        llm_reader: 'ai-assistant',
         llm_404: true,
         llm_request_id: 'fra1::test-request',
       },
@@ -211,7 +211,7 @@ describe('LLM analytics delivery', () => {
         path: '/docs/introduction',
         agent_family: 'chatgpt-user',
         agent_detected: true,
-        reader: 'agent',
+        reader: 'ai-assistant',
         deployment_sha: 'deployment-sha',
         branch: 'markdown',
         proxy_status: 200,

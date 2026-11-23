@@ -1162,7 +1162,7 @@ describe('Middleware - AI Agent Integration Tests', () => {
     });
 
     it.each([
-      ['Claude-User/1.0', 'agent'],
+      ['Claude-User/1.0', 'ai-assistant'],
       ['axios/1.7', 'unknown'],
       ['python-requests/2.32.3', 'unknown'],
     ])('labels a docs .md read by %s as llm_reader=%s', async (userAgent, reader) => {
@@ -1196,7 +1196,7 @@ describe('Middleware - AI Agent Integration Tests', () => {
 
     it.each([
       ['/.well-known/mcp', 'curl/8.7.1', 'unknown'],
-      ['/.well-known/mcp/server-card.json', 'Claude-User/1.0', 'agent'],
+      ['/.well-known/mcp/server-card.json', 'Claude-User/1.0', 'ai-assistant'],
       ['/models.json', 'python-requests/2.32.3', 'unknown'],
       ['/llms.txt', 'Mozilla/5.0 (compatible; Googlebot/2.1)', 'search-crawler'],
     ])('counts %s fetched by %s once as llm_reader=%s', async (pathname, userAgent, reader) => {
@@ -1205,6 +1205,42 @@ describe('Middleware - AI Agent Integration Tests', () => {
       expect(response.type).toBe('next');
       expect(beaconCalls()).toHaveLength(1);
       expect(readerOf()).toMatchObject({ llm_agent: true, llm_reader: reader });
+    });
+
+    it.each([
+      [
+        'Mozilla/5.0 AppleWebKit/537.36 (KHTML, like Gecko); compatible; GPTBot/1.4; +https://openai.com/gptbot',
+        'ai-crawler',
+      ],
+      [
+        'Mozilla/5.0 AppleWebKit/537.36 (KHTML, like Gecko; compatible; ClaudeBot/1.0; +claudebot@anthropic.com)',
+        'ai-crawler',
+      ],
+      ['Mozilla/5.0 (compatible; ChatGPT-User/1.0; +https://openai.com/bot)', 'ai-assistant'],
+      [
+        'Mozilla/5.0 (compatible; Perplexity-User/1.0; +https://perplexity.ai/perplexity-user)',
+        'ai-assistant',
+      ],
+    ])('labels %s served the HTML of a page as llm_reader=%s', async (userAgent, reader) => {
+      await middleware(withClone(createMockRequest('/security', userAgent, 'text/html')));
+
+      expect(beaconCalls()).toHaveLength(1);
+      expect(readerOf()).toMatchObject({ llm_agent: true, llm_reader: reader });
+    });
+
+    it('counts a search crawler rendering a page in a real browser as a search crawler, not a person', async () => {
+      const req = withClone(
+        createBrowserRequest(
+          '/blog/example-post',
+          'Mozilla/5.0 (Linux; Android 10) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Mobile Safari/537.36 (compatible; Baiduspider-render/2.0; +http://www.baidu.com/search/spider.html)',
+          'text/html'
+        )
+      );
+      const response = await middleware(req);
+
+      expect(response.type).toBe('next');
+      expect(beaconCalls()).toHaveLength(1);
+      expect(readerOf()).toMatchObject({ llm_agent: true, llm_reader: 'search-crawler' });
     });
 
     it('counts ChatGPT agent (Chrome UA + Signature-Agent) served the HTML of a page', async () => {
