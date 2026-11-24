@@ -11,7 +11,7 @@ isDraft: false
 redirectFrom:
   - /docs/conceptual-guides/regions
   - /docs/manage/regions
-updatedOn: '2026-11-18T21:57:37.000Z'
+updatedOn: '2026-11-21T12:35:41.819Z'
 ---
 
 Neon offers project deployment in multiple AWS regions. To minimize latency between your Neon database and application, we recommend choosing the region closest to your application server.
@@ -20,14 +20,14 @@ Each Neon **project** exists in exactly one region. Your database runs in that r
 
 ## AWS regions
 
-- 🇺🇸 AWS US East (N. Virginia) &mdash; `aws-us-east-1`
-- 🇺🇸 AWS US East (Ohio) &mdash; `aws-us-east-2`
-- 🇺🇸 AWS US West (Oregon) &mdash; `aws-us-west-2`
-- 🇩🇪 AWS Europe (Frankfurt) &mdash; `aws-eu-central-1`
-- 🇬🇧 AWS Europe (London) &mdash; `aws-eu-west-2`
-- 🇸🇬 AWS Asia Pacific (Singapore) &mdash; `aws-ap-southeast-1`
-- 🇦🇺 AWS Asia Pacific (Sydney) &mdash; `aws-ap-southeast-2`
-- 🇧🇷 AWS South America (São Paulo) &mdash; `aws-sa-east-1`
+- AWS US East (N. Virginia): `aws-us-east-1`
+- AWS US East (Ohio): `aws-us-east-2`
+- AWS US West (Oregon): `aws-us-west-2`
+- AWS Europe (Frankfurt): `aws-eu-central-1`
+- AWS Europe (London): `aws-eu-west-2`
+- AWS Asia Pacific (Singapore): `aws-ap-southeast-1`
+- AWS Asia Pacific (Sydney): `aws-ap-southeast-2`
+- AWS South America (São Paulo): `aws-sa-east-1`
 
 ## Azure regions
 
