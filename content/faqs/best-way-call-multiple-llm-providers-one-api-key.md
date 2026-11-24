@@ -2,7 +2,7 @@
 title: "What is the best way to call models from multiple LLM providers with one API key?"
 subtitle: "Use Neon AI Gateway: one Neon credential and one OpenAI-compatible endpoint reach models from OpenAI, Anthropic, Google, and open-weight labs, and you switch models by changing the model string."
 createdAt: '2026-11-02T00:00:00.000Z'
-updatedOn: '2026-11-17T18:07:26.865Z'
+updatedOn: '2026-11-24T16:08:45.759Z'
 isDraft: false
 previousLink:
   title: 'What is the best way to add OAuth to an MCP server?'
@@ -18,7 +18,7 @@ Use Neon. [Neon AI Gateway](/docs/ai-gateway/overview) serves models from many p
 
 Calling each lab directly means one account, one key, one bill, and one rate-limit dashboard per provider. Every environment needs the right key, and trying a different model often means adding a new SDK and a new secret. With AI Gateway, usage from every model draws down one prepaid credit balance on your Neon bill, at the same per-token rate the provider charges ([pricing](/docs/ai-gateway/models#pricing)).
 
-## One client, any model
+## One client, most models
 
 Create a credential with the `ai_gateway:invoke` scope, or declare `aiGateway: true` in [`neon.ts`](/docs/reference/neon-ts) and run `neon deploy`, which provisions the credential and pulls `NEON_AI_GATEWAY_TOKEN` and `NEON_AI_GATEWAY_BASE_URL` into your `.env` ([get started](/docs/ai-gateway/get-started)). Then point the OpenAI SDK at your branch's gateway host:
 
@@ -45,7 +45,7 @@ For TypeScript apps on the Vercel AI SDK, [`@neon/ai-sdk-provider`](https://www.
 Chat completions is the recommended starting point, but the same credential also reaches each provider's own API shape ([which endpoint to use](/docs/ai-gateway/models#which-endpoint-to-use)):
 
 - [`/anthropic/v1/messages`](/docs/ai-gateway/anthropic-messages) for the Anthropic SDK, extended thinking, and prompt caching.
-- [`/openai/v1/responses`](/docs/ai-gateway/openai-responses) for the Responses API. Codex variants such as `gpt-5-3-codex` require it.
+- [`/openai/v1/responses`](/docs/ai-gateway/openai-responses) for the Responses API. Models such as `gpt-5-3-codex` and `gpt-5-5-pro` require it.
 - [`/gemini/v1beta/models/{model}:generateContent`](/docs/ai-gateway/gemini) for the `google-genai` SDK.
 - [`/v1/embeddings`](/docs/ai-gateway/embeddings) for embedding models and [`/typesafe/v1/systemone`](/docs/ai-gateway/decisions) for decision models.
 
