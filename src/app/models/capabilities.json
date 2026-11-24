@@ -774,7 +774,8 @@
       "nativeDialect": "gemini",
       "responses": false,
       "webSearch": false,
-      "imageGeneration": false
+      "imageGeneration": false,
+      "imageOutput": true
     },
     {
       "id": "gemini-3-1-flash-image",
@@ -790,7 +791,8 @@
       "nativeDialect": "gemini",
       "responses": false,
       "webSearch": false,
-      "imageGeneration": false
+      "imageGeneration": false,
+      "imageOutput": true
     }
   ]
 }

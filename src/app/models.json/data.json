@@ -2582,7 +2582,8 @@
         },
         "cost": {
           "input": 2,
-          "output": 12
+          "output": 12,
+          "output_image": 120
         }
       },
       "gemini-3-1-flash-image": {
@@ -2617,7 +2618,8 @@
         },
         "cost": {
           "input": 0.5,
-          "output": 3
+          "output": 3,
+          "output_image": 60
         }
       }
     }
