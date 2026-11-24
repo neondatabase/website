@@ -6,7 +6,7 @@ summary: >-
   models, which endpoint to use, shorter and longer request paths, the
   /v1/models API, rate limits, pricing, and provider terms.
 enableTableOfContents: true
-updatedOn: '2026-11-18T00:17:54.883Z'
+updatedOn: '2026-11-24T01:54:06.575Z'
 ---
 
 This page covers how to call models through Neon AI Gateway and the rules that apply. For the full list of models you can call, see the [model catalog](https://neon.com/ai-gateway#models).
@@ -62,6 +62,24 @@ AI Gateway usage draws down a prepaid credit balance. Here's how pricing works:
 
 See the [model catalog](/docs/ai-gateway/overview#available-models) for per-model rates, and [AI Gateway prepaid credits](/docs/ai-gateway/prepaid-credits) for how to buy credits and manage your balance.
 
+### Image output pricing
+
+`gemini-3-pro-image` and `gemini-3-1-flash-image` bill each generated image as image output tokens, at a separate rate: the **Image output /M** price in the model catalog, also published as `cost.output_image` in [`/models.json`](https://neon.com/models.json). The prompt bills at the input rate, and text output, including thinking, at the output rate.
+
+The number of image tokens depends on the image size. Set it with `imageConfig.imageSize` on the [Gemini endpoint](/docs/ai-gateway/gemini). Requests that don't set it, including every chat completions request, generate a `1K` image.
+
+| Model                    | Image output /M | Image size     | Image tokens | Cost per image |
+| ------------------------ | --------------- | -------------- | ------------ | -------------- |
+| `gemini-3-1-flash-image` | $60             | `512`          | 747          | $0.045         |
+|                          |                 | `1K` (default) | 1,120        | $0.067         |
+|                          |                 | `2K`           | 1,680        | $0.101         |
+|                          |                 | `4K`           | 2,520        | $0.151         |
+| `gemini-3-pro-image`     | $120            | `1K` (default) | 1,120        | $0.134         |
+|                          |                 | `2K`           | 1,120        | $0.134         |
+|                          |                 | `4K`           | 2,000        | $0.24          |
+
+Cost per image is image tokens times the image output rate, rounded to a tenth of a cent, and leaves out prompt and thinking tokens. Every response reports the tokens it used: `usage.image_output_tokens` on chat completions, and the `IMAGE` entry of `usageMetadata.candidatesTokensDetails` on the Gemini endpoint. `gemini-3-pro-image` also returns draft images while it thinks, marked `thought: true` on the Gemini endpoint. Usage counts only the final image.
+
 Independent of billing, Neon enforces an account-level daily spend cap on AI Gateway usage, separate from the per-minute rate limits above. If your account exceeds it, every AI Gateway endpoint returns `429 Too Many Requests` with error code `REQUEST_LIMIT_EXCEEDED` until the cap resets or the block is lifted. The cap is $20 per day by default, but it may vary by account. To have it raised, [contact Support](/docs/introduction/support). See [Troubleshooting](/docs/ai-gateway/troubleshooting#429-account-quota-exceeded) if you hit this.
 
 ## Which endpoint to use
@@ -86,6 +104,7 @@ All paths below are appended to your branch's bare AI Gateway host (`NEON_AI_GAT
 On `/v1/chat/completions`, `message.content` is a plain string for most models. For the models below, the gateway returns an array of typed content blocks instead. This is a known gateway issue that we're fixing.
 
 - `gemini-3-7-flash`, `gemini-3-8-flash`, `gemini-4-argon`, and `gemini-4-carbon` return an array on every non-streaming response, even for a trivial prompt. Their streamed `delta.content` values are strings, with `null` on the final chunk.
+- `gemini-3-pro-image` and `gemini-3-1-flash-image` return an array on every non-streaming response, and some streamed `delta.content` values are arrays too. When the model generates an image, the array includes an `image_url` block with the image as a base64 `data:image/png` URL.
 - `claude-opus-5-5`, `claude-haiku-5-5`, `claude-fable-5-1`, and `claude-fable-5-2` return an array whenever the model reasons and a string when it doesn't. They decide on their own when to reason, so even a trivial prompt can return an array. When they reason while streaming, some `delta.content` values are arrays too. A low `max_tokens` value can cut a response off before the `text` block appears, leaving only a `reasoning` block.
 
 The arrays have these shapes:
@@ -94,6 +113,12 @@ The arrays have these shapes:
 // Gemini models
 [
   { type: 'text', text: '...', thoughtSignature: '...' },
+];
+
+// Gemini image models, when they generate an image
+[
+  { type: 'reasoning', summary: [...] },
+  { type: 'image_url', image_url: { url: 'data:image/png;base64,...' } },
 ];
 
 // Claude models, once they reason
@@ -162,22 +187,26 @@ curl "$NEON_AI_GATEWAY_BASE_URL/v1/models" \
       "name": "GPT-5 Mini",
       "object": "model",
       "owned_by": "openai",
-      "created": 0,
+      "created": 1754524800,
       "enabled": true,
-      "context_length": null,
+      "context_length": 400000,
       "architecture": {
-        "modality": "text->text",
-        "input_modalities": ["text"],
-        "output_modalities": ["text"],
+        "modality": "text+image->text+image",
+        "input_modalities": ["text", "image"],
+        "output_modalities": ["text", "image"],
         "tokenizer": "GPT",
         "instruct_type": null
       },
       "top_provider": {
         "is_moderated": false,
-        "context_length": null,
-        "max_completion_tokens": null
+        "context_length": 400000,
+        "max_completion_tokens": 128000
       },
-      "pricing": null,
+      "pricing": {
+        "prompt": "0.00000025",
+        "completion": "0.000002",
+        "input_cache_read": "0.000000025"
+      },
       "per_request_limits": null
     }
   ]
@@ -189,7 +218,8 @@ The response returns one object per model. Key fields:
 - `enabled` is whether the model is currently callable. Any account with prepaid credits can call every model in the catalog. See [Model access](#model-access) for details.
 - `id`, `name`, and `owned_by` identify the model. Use `id` (or its `databricks-` prefixed form) in the `model` field of a request.
 - `canonical_slug`, `architecture`, and `top_provider` are OpenRouter-compatible descriptive fields.
-- `created` is always `0`, and `pricing`, `per_request_limits`, and `context_length` are currently always `null`. Use the [model catalog](/docs/ai-gateway/overview#available-models) for context windows and model details.
+- `pricing` holds each rate in USD per token, as a string: `prompt` (input), `completion` (output), the cache rates where the model has them, `image_output` for the Gemini image models, and `overrides` for long-context tiers. Multiply by 1,000,000 for the per-million price in the [model catalog](/docs/ai-gateway/overview#available-models). See [Image output pricing](#image-output-pricing).
+- `per_request_limits` is currently always `null`.
 
 ### Check what your account can call
 

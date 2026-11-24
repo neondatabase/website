@@ -684,7 +684,7 @@ LINE 1: SELECT '[4e38,1]'::vector;
 ## Resources
 
 - `pgvector` source code: [https://github.com/pgvector/pgvector](https://github.com/pgvector/pgvector)
-- [Vector search in Postgres](/guides/vector-search)
+- [Get started with Lakebase Search](/docs/ai/lakebase-search-get-started)
 - [Build and deploy a Lakebase Search API as a Neon Function](/guides/ai-embeddings-postgres-search)
 
 <NeedHelp/>
