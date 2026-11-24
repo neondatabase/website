@@ -57,7 +57,7 @@ This guide provides a quickstart to the `pg_mooncake` extension.
 ## Enable the extension
 
 <Admonition type="note">
-`pg_mooncake` is available on Postgres 14 to 17. It isn't available on Postgres 18 or 19 yet, so select an earlier Postgres version when you create your project.
+`pg_mooncake` is available on Postgres 14 to 17. It isn't available on Postgres 18 or 19, so select an earlier Postgres version when you create your project.
 </Admonition>
 
 <Admonition type="note">
