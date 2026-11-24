@@ -6,7 +6,7 @@ summary: >-
   host, and making your first request to the Neon AI Gateway using the OpenAI
   SDK. No provider API keys required. Authenticate with your Neon credential.
 enableTableOfContents: true
-updatedOn: '2026-11-16T16:40:36.956Z'
+updatedOn: '2026-11-24T15:46:20.173Z'
 ---
 
 To set up Neon AI Gateway with an AI coding assistant, install the Neon Platform (`neon`) and Neon AI Gateway skills with the [Neon CLI](/docs/cli):
@@ -70,7 +70,7 @@ This is different from your database connection string.
 
 ## Install dependencies
 
-The quickstart uses the OpenAI SDK because the chat completions endpoint is OpenAI-compatible. It works with most models in the catalog; OpenAI Codex models use the [OpenAI Responses](/docs/ai-gateway/openai-responses) endpoint.
+The quickstart uses the OpenAI SDK because the chat completions endpoint is OpenAI-compatible. It works with most models in the catalog; a few OpenAI models, such as `gpt-5-3-codex` and `gpt-5-5-pro`, use the [OpenAI Responses](/docs/ai-gateway/openai-responses) endpoint.
 
 <CodeTabs labels={["npm", "yarn", "pnpm", "pip"]}>
 

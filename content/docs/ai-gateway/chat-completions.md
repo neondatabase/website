@@ -6,10 +6,10 @@ summary: >-
   Gateway. It is OpenAI Chat Completions-compatible, works with most models in
   the catalog, and lets you switch providers without changing your SDK code.
 enableTableOfContents: true
-updatedOn: '2026-11-16T17:42:17.264Z'
+updatedOn: '2026-11-24T15:46:20.173Z'
 ---
 
-The chat completions endpoint is the recommended way to use Neon AI Gateway. It's fully compatible with the [OpenAI Chat Completions API](https://platform.openai.com/docs/api-reference/chat) and works with most models in the [AI Gateway catalog](/docs/ai-gateway/models). OpenAI Codex models require the [OpenAI Responses](/docs/ai-gateway/openai-responses) endpoint. Switch models by changing a single field.
+The chat completions endpoint is the recommended way to use Neon AI Gateway. It's fully compatible with the [OpenAI Chat Completions API](https://platform.openai.com/docs/api-reference/chat) and works with most models in the [AI Gateway catalog](/docs/ai-gateway/models). A few OpenAI models, such as `gpt-5-3-codex` and `gpt-5-5-pro`, require the [OpenAI Responses](/docs/ai-gateway/openai-responses) endpoint. Switch models by changing a single field.
 
 **Base URL:** `https://<branch-host>/v1`
 
