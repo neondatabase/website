@@ -269,16 +269,17 @@ const REGISTRY_CATEGORY_LABELS = {
 
 const UPPERCASE_CATEGORY_WORDS = new Set(['ai', 'api', 'cdn', 'cli', 'llm', 'mcp', 'sdk', 'sql']);
 
-export const registryCategoryLabel = (id) => {
-  if (REGISTRY_CATEGORY_LABELS[id]) return REGISTRY_CATEGORY_LABELS[id];
-  const words = id.split('-').filter(Boolean);
-  return words
+const humanizeRegistryId = (id) =>
+  id
+    .split(/[-_]/)
+    .filter(Boolean)
     .map((word, index) => {
       if (UPPERCASE_CATEGORY_WORDS.has(word)) return word.toUpperCase();
       return index === 0 ? word.charAt(0).toUpperCase() + word.slice(1) : word;
     })
     .join(' ');
-};
+
+export const registryCategoryLabel = (id) => REGISTRY_CATEGORY_LABELS[id] ?? humanizeRegistryId(id);
 
 export const normalizeRegistryCategories = (value) => {
   if (!Array.isArray(value)) return [];
@@ -453,6 +454,65 @@ export const registryEnvironmentRequiredLabel = (value) =>
 export const hasRegistryEnvironmentRequirements = (variables) =>
   variables.some(({ required }) => REGISTRY_ENV_REQUIRED_LABELS.has(required));
 
+const REGISTRY_FEATURE_MAX_ITEMS = 16;
+
+const REGISTRY_FEATURES = {
+  postgres: { label: 'Lakebase Postgres', href: '/docs/postgres/overview' },
+  'lakebase-search': { label: 'Lakebase Search', href: '/docs/ai/lakebase-search' },
+  auth: { label: 'Managed Better Auth', href: '/docs/auth/overview' },
+  'data-api': { label: 'Data API', href: '/docs/data-api/overview' },
+  realtime: { label: 'Realtime', href: '/docs/realtime/overview' },
+  'object-storage': { label: 'Object Storage', href: '/docs/storage/overview' },
+  'ai-gateway': { label: 'AI Gateway', href: '/docs/ai-gateway/overview' },
+  'function-triggers': {
+    label: 'Function Triggers',
+    href: '/docs/compute/functions/triggers/overview',
+    types: {
+      schedule: { label: 'Schedule', href: '/docs/compute/functions/triggers/schedule' },
+      storage_object_created: {
+        label: 'Object upload',
+        href: '/docs/compute/functions/triggers/object-storage',
+      },
+    },
+  },
+};
+
+const REGISTRY_FEATURE_TYPE_PATTERN = /^[a-z0-9][a-z0-9_-]*$/;
+
+const isRegistryFeatureId = (id, pattern = REGISTRY_ID_PATTERN) =>
+  typeof id === 'string' && id.length <= REGISTRY_CATEGORY_MAX_LENGTH && pattern.test(id);
+
+const normalizeRegistryFeatureTypes = (value) =>
+  Array.isArray(value)
+    ? [...new Set(value.filter((id) => isRegistryFeatureId(id, REGISTRY_FEATURE_TYPE_PATTERN)))]
+    : [];
+
+export const normalizeRegistryFeatures = (value) => {
+  if (!Array.isArray(value)) return [];
+  const features = value
+    .map((item) => (typeof item === 'string' ? { id: item } : item))
+    .filter((item) => item && isRegistryFeatureId(item.id))
+    .map(({ id, types }) => ({ id, types: normalizeRegistryFeatureTypes(types) }));
+  return features
+    .filter(({ id }, index) => features.findIndex((feature) => feature.id === id) === index)
+    .slice(0, REGISTRY_FEATURE_MAX_ITEMS);
+};
+
+export const registryTemplateFeatures = (template) =>
+  normalizeRegistryFeatures(template?.features).map(({ id, types }) => {
+    const feature = REGISTRY_FEATURES[id];
+    return {
+      id,
+      label: feature?.label ?? humanizeRegistryId(id),
+      href: feature?.href ?? null,
+      types: types.map((typeId) => ({
+        id: typeId,
+        label: feature?.types?.[typeId]?.label ?? humanizeRegistryId(typeId),
+        href: feature?.types?.[typeId]?.href ?? null,
+      })),
+    };
+  });
+
 const pickTemplateJsonFields = (data) => {
   if (!data || typeof data !== 'object') return {};
   const picked = {};
@@ -477,6 +537,8 @@ const pickTemplateJsonFields = (data) => {
     );
   }
   if (typeof data.provider === 'string' && data.provider) picked.provider = data.provider;
+  const features = normalizeRegistryFeatures(data.features);
+  if (features.length > 0) picked.features = features;
   return picked;
 };
 

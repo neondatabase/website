@@ -114,6 +114,15 @@ describe('classifyDrift', () => {
     expect(drift.inSync).toBe(true);
   });
 
+  it('does not count an image output rate models.dev cannot carry as drift', () => {
+    const drift = classifyDrift(
+      { a: model({ cost: { input: 2, output: 12, output_image: 120 } }) },
+      { a: model({ cost: { input: 2, output: 12 } }) }
+    );
+
+    expect(drift.inSync).toBe(true);
+  });
+
   it('ignores key order within a compared field', () => {
     const drift = classifyDrift(
       { a: model({ cost: { input: 1, output: 2 } }) },
@@ -279,6 +288,17 @@ describe('validateCatalog', () => {
     );
 
     expect(errors).toEqual([expect.stringContaining('a.cost.per_wish is not a known rate')]);
+  });
+
+  it('accepts an image output rate and holds it to the same rules as other rates', () => {
+    const priced = (outputImage) =>
+      validateCatalog(
+        catalog({ a: model({ cost: { input: 2, output: 12, output_image: outputImage } }) })
+      );
+
+    expect(priced(120)).toEqual([]);
+    expect(priced('120')).toEqual([expect.stringContaining('a.cost.output_image')]);
+    expect(priced(-1)).toEqual([expect.stringContaining('a.cost.output_image')]);
   });
 
   it('rejects a malformed or duplicated tier descriptor', () => {

@@ -727,6 +727,11 @@ const ModelIndexView = ({ rows, variant = 'docs', filters, setFilters }) => {
                     </td>
                     <td className="py-4! pl-4! text-left! font-mono text-[.8125rem]! text-gray-new-30 dark:text-gray-new-80">
                       {row.costOutputLabel}
+                      {row.costOutputImageLabel && (
+                        <span className="mt-1 block text-xs leading-tight text-gray-new-40 dark:text-gray-new-60">
+                          <span className="font-sans">image</span> {row.costOutputImageLabel}
+                        </span>
+                      )}
                     </td>
                     <td className="pr-4! text-left! text-[.8125rem]! whitespace-nowrap text-gray-new-40 dark:text-gray-new-60">
                       {row.openWeights ? 'Open weights' : '—'}

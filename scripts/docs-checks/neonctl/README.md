@@ -154,7 +154,8 @@ The TypeScript source is canonical. CI only reads `schema.json`.
   `overrides.json`. Arrays of enum members (`[Enum.A, Enum.B]`) do resolve
   in `choices` and `.join()` describes (also through `.slice(a, b)` and
   `.at(n)` with integer literals), but only for enums the parser can
-  see: command files and `utils/api_enums.ts`. Other array methods
+  see: command files and `utils/api_enums.ts`. `Object.keys({ a: true, … })`
+  with literal keys also resolves (logs.ts `LOG_SOURCES`). Other array methods
   (`.filter()`, `.map()`, `.concat()`) don't resolve. An enum anywhere else leaves
   the describe unresolved, and the parser drops it without failing. The
   "every command and visible option has a describe" coverage test catches

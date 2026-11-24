@@ -1,9 +1,11 @@
 'use client';
 
+import { render, toSegments } from '@copybook/core';
 import { useId, useRef, useState } from 'react';
 
 import { BASE_AGENT_PROMPT } from 'components/pages/doc/agent-setup-button';
 import ProviderMarks from 'components/shared/provider-marks';
+import { agentSetup } from 'constants/agent-prompts.mjs';
 import useCopyPrompt from 'hooks/use-copy-prompt';
 import CopiedIcon from 'icons/home/copied.inline.svg';
 import CopyIcon from 'icons/home/copy.inline.svg';
@@ -12,12 +14,10 @@ import sendGtagEvent from 'utils/send-gtag-event';
 
 import { strongBorder } from './docs-home-tokens';
 
-// The copied text is the shared BASE_AGENT_PROMPT constant, never a local
-// rebuild. These parts drive only the display spans (with the URL highlighted);
-// they mirror BASE_AGENT_PROMPT so what you read matches what you copy.
-const AGENT_SETUP_URL = 'https://neon.com/prompts/agent-setup.md';
-const AGENT_PROMPT_LEAD = 'Set me up for Neon. Fetch ';
-const AGENT_PROMPT_TAIL = ' and follow it.';
+// The copied text is the shared BASE_AGENT_PROMPT. The display spans come from the same
+// definition (constants/agent-prompts.mjs), so what you read is what you copy. The URL is a
+// param segment, which is the one that's highlighted.
+const AGENT_PROMPT_SEGMENTS = toSegments(render(agentSetup));
 
 const CLI_LINES = [
   { text: '# Install the Neon CLI (needs Node.js 22.20+)', comment: true },
@@ -159,9 +159,16 @@ const DocsHomeComposer = () => {
       <div id={panelId} role="tabpanel" aria-labelledby={tabId(tab)}>
         {agent ? (
           <div className="bg-gray-new-98 px-6 pt-6 pb-[25px] font-mono text-sm leading-[30.8px] [text-wrap:pretty] [overflow-wrap:anywhere] text-gray-new-30 dark:bg-gray-new-8 dark:text-gray-new-80 sm:px-4">
-            <span>{AGENT_PROMPT_LEAD}</span>
-            <span className="text-green-44 dark:text-green-52">{AGENT_SETUP_URL}</span>
-            <span>{AGENT_PROMPT_TAIL}</span>
+            {AGENT_PROMPT_SEGMENTS.map((segment) => (
+              <span
+                key={`${segment.type}-${segment.text}`}
+                className={
+                  segment.type === 'param' ? 'text-green-44 dark:text-green-52' : undefined
+                }
+              >
+                {segment.text}
+              </span>
+            ))}
           </div>
         ) : (
           <div className="grid gap-0.5 bg-gray-new-98 px-6 pt-6 pb-[25px] font-mono text-sm leading-[30.8px] [overflow-wrap:anywhere] dark:bg-gray-new-8 sm:px-4">

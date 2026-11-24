@@ -11,7 +11,7 @@ summary: >-
   Neon's proxy layer regardless of the underlying database version.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2026-11-10T14:15:46.000Z'
+updatedOn: '2026-11-20T22:29:31.468Z'
 ---
 
 Neon's _Scale to zero_ feature is designed to minimize costs by automatically scaling a compute resource down to zero after a period of inactivity. By default, Neon scales a compute to zero after 5 minutes of inactivity. A characteristic of this feature is the concept of a "cold start". During this process, a compute transitions from an idle state to an active state to process requests. Currently, activating a Neon compute from an idle state typically takes a few hundred milliseconds not counting other factors that can add to latencies such as the physical distance between your application and database or startup times of other services that participate in your connection process.
@@ -124,14 +124,19 @@ properties.setProperty("connectTimeout", "10");
 Connection conn = DriverManager.getConnection(dbUrl, properties);
 ```
 
-```prisma
-DATABASE_URL=postgresql://[user]:[password]@[neon_hostname]/[dbname]?connect_timeout=15&pool_timeout=15`
+```typescript
+// Prisma 7 with the Neon driver adapter: set the timeout in the PrismaNeon config, in milliseconds.
+// The connect_timeout and pool_timeout URL parameters don't apply to the adapter.
+const adapter = new PrismaNeon({
+  connectionString: process.env.DATABASE_URL!,
+  connectionTimeoutMillis: 15000,
+})
 ```
 
 </CodeTabs>
 
 <Admonition type="note">
-If you are using Prisma Client, your timeout issue could be related to Prisma's connection pool configuration. The Prisma Client query engine instantiates its own connection pool when it opens a first connection to the database. If you encounter a `Timed out fetching a new connection from the connection pool` error, refer to [Prisma connection pool timeouts](/docs/guides/prisma#troubleshooting) for information about configuring your Prisma connection pool size and pool timeout settings.
+If you are using Prisma Client, your timeout issue could be related to Prisma's connection pool configuration. The Prisma Client query engine instantiates its own connection pool when it opens a first connection to the database. If Prisma Client waits too long for a connection, the Neon adapter reports `timeout exceeded when trying to connect`. See the [Troubleshooting section of our Prisma guide](/docs/guides/prisma#troubleshooting) for how to set the pool size and the connection timeout.
 </Admonition>
 
 Remember that increasing connection timeout settings might impact the responsiveness of your application, and users could end up waiting longer for their requests to be processed. Always test and monitor your application's performance when making changes like these.

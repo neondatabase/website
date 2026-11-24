@@ -127,6 +127,25 @@ describe('AI Gateway model rows', () => {
     expect(row.costOutputLabel).toBe('—');
   });
 
+  it('labels a separately billed image output rate and leaves text-only models without one', () => {
+    const [row] = buildRows(
+      {
+        models: {
+          'example-image': {
+            id: 'example-image',
+            name: 'Example Image',
+            cost: { input: 2, output: 12, output_image: 120 },
+          },
+        },
+      },
+      { models: [] }
+    );
+
+    expect(row.costOutputLabel).toBe('$12');
+    expect(row.costOutputImageLabel).toBe('$120');
+    expect(rows.find(({ id }) => id === 'gpt-5-4').costOutputImageLabel).toBeNull();
+  });
+
   it('keeps sub-cent digits and reports a decision model context window', () => {
     const row = rows.find(({ id }) => id === 'typesafeai-jev-1-14-0');
 

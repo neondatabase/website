@@ -11,8 +11,9 @@ summary: >-
   and the branch is unavailable while anonymization runs.
 redirectFrom:
   - /docs/concepts/anonymized-data
+  - /docs/guides/neosync-anonymize
 enableTableOfContents: true
-updatedOn: '2026-11-10T14:15:46.000Z'
+updatedOn: '2026-11-20T19:23:34.905Z'
 ---
 
 <FeatureBeta />
@@ -26,6 +27,10 @@ Neon uses [PostgreSQL Anonymizer](https://postgresql-anonymizer.readthedocs.io/)
 - **Static masking**: Data is masked once during branch creation or when you rerun anonymization
 - **PostgreSQL Anonymizer integration**: Uses the [PostgreSQL Anonymizer extension's](/docs/extensions/postgresql-anonymizer) masking functions
 - **Branch-specific rules**: You can define different masking rules for each anonymized Neon branch
+
+<Admonition type="note" title="Postgres 19 not supported yet">
+Data anonymization isn't available on Postgres 19 projects yet because the `anon` extension doesn't support Postgres 19. Use a project on Postgres 14 through 18.
+</Admonition>
 
 <Admonition type="info" title="Static versus dynamic masking">
 This feature uses **static masking**, which permanently transforms data in the branch when anonymization runs. Unlike dynamic masking (which masks data during queries), static masking creates an actual masked copy of the data. To get fresh data from the parent, create a new anonymized branch.
@@ -297,6 +302,7 @@ This query returns all rules regardless of how they were created (Console, API, 
 
 ## Limitations
 
+- Not supported on Postgres 19 yet. The `anon` extension isn't available on Postgres 19.
 - Currently cannot reset to parent, restore, or delete the read-write endpoint for anonymized branches.
 - Branch is unavailable during anonymization.
 - Masking does not fully enforce database constraints, but improvements are ongoing. For example, use **Random Unique Email** for columns with unique constraints on emails.
