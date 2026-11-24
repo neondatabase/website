@@ -1,6 +1,6 @@
 ---
 title: 'How fast does your Postgres get security patches?'
-description: "Neon applies Postgres minor upgrades automatically on your compute's next restart. With storage separate from compute, there's no maintenance window to wait for"
+description: "Neon computes don't store your data, so Postgres minor upgrades apply automatically on the next restart"
 excerpt: >-
   Last November 12, the Postgres community released 18.7, 17.12, 16.16, 15.20,
   and 14.25, with fixes for 52 CVEs. The first Neon and Lakebase customers were
@@ -18,11 +18,11 @@ cover:
 isFeatured: false
 seo:
   title: 'How fast does your Postgres get security patches? - Neon'
-  description: "Neon applies Postgres minor upgrades automatically on your compute's next restart. With storage separate from compute, there's no maintenance window to wait for"
+  description: "Neon computes don't store your data, so Postgres minor upgrades apply automatically on the next restart"
   keywords: []
   noindex: false
   ogTitle: 'How fast does your Postgres get security patches? - Neon'
-  ogDescription: "Neon applies Postgres minor upgrades automatically on your compute's next restart. With storage separate from compute, there's no maintenance window to wait for"
+  ogDescription: "Neon computes don't store your data, so Postgres minor upgrades apply automatically on the next restart"
   image: null
 ---
 
