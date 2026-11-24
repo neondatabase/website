@@ -19,12 +19,12 @@ redirectFrom:
   - /docs/guides/partner-billing
   - /docs/guides/partner-consumption-limits
 isDraft: false
-updatedOn: '2026-11-13T19:04:21.000Z'
+updatedOn: '2026-11-24T11:14:19.985Z'
 ---
 
 When setting up your integration's billing solution with Neon, you may want to impose some hard limits on how much storage or compute resources a given project can consume. For example, you may want to cap how much usage your free plan users can consume versus pro or enterprise users. With the Neon API, you can use the `quota` key to set usage limits for a variety of consumption metrics. These limits act as thresholds after which all active computes for a project are [suspended](#suspending-active-computes). The `logical_size_bytes` quota works differently and applies to a single branch. See [Branch size quota](#branch-size-quota).
 
-Consumption limits actively enforce usage caps: when a project hits a project-level quota, Neon suspends its computes. They apply per project and per consumption metric (compute, storage, and data transfer). If you instead want email alerts when your organization's total monthly charges approach a dollar amount, without stopping usage, see [Spending notifications](/docs/introduction/spending-notifications).
+Consumption limits actively enforce usage caps: when a project hits a project-level quota, Neon suspends its computes. They apply per project and per consumption metric (compute, storage, and data transfer). If you instead want to work from your organization's total dollar spend, with email alerts and optional service suspension, see [Spending limits](/docs/introduction/spending-notifications).
 
 ## Metrics and quotas
 

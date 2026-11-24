@@ -25,7 +25,7 @@ redirectFrom:
   - /docs/introduction/pricing-estimation-guide
   - /docs/introduction/billing-sample
   - /docs/introduction/pricing
-updatedOn: '2026-11-18T23:49:34.327Z'
+updatedOn: '2026-11-24T11:14:19.985Z'
 ---
 
 Neon offers plans to support you at every stage, from your first prototype to production at scale.
@@ -55,7 +55,7 @@ For AI agent platforms that provision thousands of databases, Neon offers an **A
 | [Public network transfer](#public-network-transfer)   | 5 GB per project included                                          | 500 GB per project included, then $0.10/GB | 500 GB per project included, then $0.10/GB                                                        |
 | [Monitoring](#monitoring)                             | 1 day                                                              | 3 days                                     | 14 days                                                                                           |
 | [Metrics/logs export](#metricslogs-export)            | Not available                                                      | Not available                              | ✅                                                                                                |
-| [Spending notifications](#spending-notifications)     | Not available                                                      | ✅                                         | ✅                                                                                                |
+| [Spending limits](#spending-limits)                   | Not available                                                      | ✅                                         | ✅                                                                                                |
 | [Instant restore](#instant-restore)                   | No charge, up to 6 hours                                           | $0.20/GB-month                             | $0.20/GB-month                                                                                    |
 | [History window](#history-window)                     | 6 hours, up to 1 GB of changes                                     | Up to 7 days                               | Up to 30 days                                                                                     |
 | [Snapshots](#snapshots)                               | 1 manual snapshot                                                  | 100 manual snapshots, $0.09/GB-month       | 100 manual snapshots, $0.09/GB-month                                                              |
@@ -281,11 +281,11 @@ See [Monitoring dashboard](/docs/introduction/monitoring-page) for details.
 Export metrics and Postgres logs to [Datadog](/docs/guides/datadog) or any [OTel-compatible platform](/docs/guides/opentelemetry).  
 Available only on the **Scale** plan.
 
-### Spending notifications
+### Spending limits
 
-Get email alerts when your organization's monthly Neon charges reach 80% and 100% of a threshold you set, so you can act before the bill grows. Available on the **Launch** and **Scale** plans.
+Set a spending limit for your organization. Neon emails admins when charges in the current invoice period reach 80% and 100% of the limit, and can optionally suspend services when the limit is reached. Spend data is delayed by 1-2 hours, so a spending limit isn't a hard cap. Available on the **Launch** and **Scale** plans.
 
-See [Spending notifications](/docs/introduction/spending-notifications) for how to set a threshold.
+See [Spending limits](/docs/introduction/spending-notifications) for how to set a limit.
 
 ### Instant restore
 

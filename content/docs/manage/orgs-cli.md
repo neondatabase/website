@@ -7,7 +7,7 @@ summary: >-
   repeating `--org-id` on every command, set a persistent org context with
   `set-context`.
 enableTableOfContents: true
-updatedOn: '2026-11-22T11:47:13.601Z'
+updatedOn: '2026-11-24T11:14:19.985Z'
 ---
 
 Neon's CLI provides an expanding set of commands to manage your organizations.
@@ -46,9 +46,9 @@ neon orgs invitations create --email dana@example.com --role editor --org-id org
 
 See [Orgs - CLI](/docs/cli/orgs#members) to learn more.
 
-## Manage spending notifications
+## Manage spending limits
 
-The `neon orgs spending-limit` commands get, set, and delete the organization's monthly [spending notification](/docs/introduction/spending-notifications) threshold, in US dollars. Despite the command name, this isn't a cap: Neon emails your organization's admins at 80% and 100% of the threshold, and your computes keep running. Setting or deleting the threshold requires an organization Admin, and the commands are available on the Launch and Scale plans:
+The `neon orgs spending-limit` commands get, set, and delete the organization's [spending limit](/docs/introduction/spending-notifications), in US dollars. Neon emails your organization's admins at 80% and 100% of the limit. Your computes keep running unless service suspension is turned on, which you set in the Console or with the API. Setting or deleting the limit requires an organization Admin, and the commands are available on the Launch and Scale plans:
 
 ```bash
 neon orgs spending-limit set 500 --org-id org-xxxx-xxxx
