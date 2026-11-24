@@ -14,6 +14,8 @@ const ENV = ['NEON_AI_GATEWAY_BASE_URL', 'NEON_AI_GATEWAY_TOKEN'];
 const AI_SDK_DEPS = ['ai', '@neon/ai-sdk-provider'];
 // experimental_decide needs ai 7.0.133 or later, so pin the major.
 const DECISION_AI_SDK_DEPS = ['ai@7', '@neon/ai-sdk-provider'];
+// Earlier provider versions drop the image and return empty `files` without an error.
+const NATIVE_IMAGE_AI_SDK_DEPS = ['ai', '@neon/ai-sdk-provider@^1.6.0'];
 
 const CHAT_PROMPT = 'Explain Serverless Postgres.';
 const SEARCH_PROMPT = 'What is the latest stable Postgres release?';
@@ -604,7 +606,7 @@ const nativeImageExamples = (model) => {
     tsExample({
       id: 'ai-sdk',
       title: 'AI SDK',
-      dependencies: AI_SDK_DEPS,
+      dependencies: NATIVE_IMAGE_AI_SDK_DEPS,
       endpoint: '/v1/chat/completions (via provider)',
       content: `import { writeFile } from "node:fs/promises";
 import { generateText } from "ai";
@@ -697,14 +699,18 @@ print(len(images), response.usage_metadata)
       id: 'curl',
       title: 'cURL',
       endpoint: '/v1/chat/completions',
-      content: `curl -sS "\${NEON_AI_GATEWAY_BASE_URL}/v1/chat/completions" \\
+      content: `set -euo pipefail
+
+curl -sS --fail-with-body "\${NEON_AI_GATEWAY_BASE_URL}/v1/chat/completions" \\
   -H "Authorization: Bearer \${NEON_AI_GATEWAY_TOKEN}" \\
   -H "Content-Type: application/json" \\
   -d '{
     "model": "${model}",
     "messages": [{"role": "user", "content": "${NATIVE_IMAGE_PROMPT}"}]
   }' \\
-  | jq -r '.choices[0].message.content[] | select(.type == "image_url") | .image_url.url' \\
+  -o response.json
+
+jq -er '.choices[0].message.content[] | select(.type == "image_url") | .image_url.url' response.json \\
   | sed 's/^data:image\\/[a-z]*;base64,//' \\
   | base64 --decode > image.png
 `,
