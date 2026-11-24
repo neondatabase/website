@@ -25,7 +25,7 @@ redirectFrom:
   - /docs/introduction/pricing-estimation-guide
   - /docs/introduction/billing-sample
   - /docs/introduction/pricing
-updatedOn: '2026-11-18T23:49:34.327Z'
+updatedOn: '2026-11-24T16:48:31.962Z'
 ---
 
 Neon offers plans to support you at every stage, from your first prototype to production at scale.
@@ -417,7 +417,6 @@ Billed at $0.01/GB for network transferred to and from Neon. You'll only see thi
 Compliance certifications available on **Scale**:
 
 - SOC 2
-- SOC 3
 - ISO 27001
 - ISO 27701
 - GDPR
