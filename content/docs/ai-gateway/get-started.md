@@ -209,7 +209,7 @@ curl -X POST "$NEON_AI_GATEWAY_BASE_URL/v1/chat/completions" \
 
 ## Swap models
 
-Change the `model` field to use a different provider. No other code changes required.
+Change the `model` field to use a different provider. For most models, no other code changes are required. A few Claude and Gemini models return `message.content` as an array instead of a string. See [Content shape varies by model](/docs/ai-gateway/models#which-endpoint-to-use) for the list.
 
 ```typescript
 // OpenAI

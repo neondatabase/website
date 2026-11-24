@@ -11,7 +11,7 @@ summary: >-
   A Schema Diff GitHub Action is available to post diff comments on pull
   requests.
 enableTableOfContents: true
-updatedOn: '2026-07-15T00:58:07.525Z'
+updatedOn: '2026-11-13T18:55:22.000Z'
 ---
 
 Neon's Schema Diff tool lets you compare an SQL script of the schemas for two selected branches in a side-by-side view (or line-by-line on mobile devices).
@@ -118,17 +118,17 @@ curl --request GET \
 
 The `compare_schema` endpoint supports the following parameters:
 
-| Parameter          | Description                                                                   | Required | Example                    |
-| ------------------ | ----------------------------------------------------------------------------- | -------- | -------------------------- |
-| `<project_id>`     | The ID of your Neon project.                                                  | Yes      | `wispy-butterfly-25042691` |
-| `<branch_id>`      | The ID of the target branch to compare (the branch with the modified schema). | Yes      | `br-rough-boat-a54bs9yb`   |
+| Parameter          | Description                                                                                                              | Required | Example                    |
+| ------------------ | ------------------------------------------------------------------------------------------------------------------------ | -------- | -------------------------- |
+| `<project_id>`     | The ID of your Neon project.                                                                                             | Yes      | `wispy-butterfly-25042691` |
+| `<branch_id>`      | The ID of the target branch to compare (the branch with the modified schema).                                            | Yes      | `br-rough-boat-a54bs9yb`   |
 | `<base_branch_id>` | The ID of the base branch for comparison. If you omit it, the endpoint compares against the parent of the target branch. | No       | `br-royal-star-a54kykl2`   |
-| `<db_name>`        | The name of the database in the target branch.                                | Yes      | `neondb`                   |
-| `lsn`              | The LSN on the target branch for which the schema is retrieved.               | No       | `0/1EC5378`                |
-| `timestamp`        | The point in time on the target branch for which the schema is retrieved.     | No       | `2022-11-30T20:09:48Z`     |
-| `base_lsn`         | The LSN for the base branch schema.                                           | No       | `0/2FC6321`                |
-| `base_timestamp`   | The point in time for the base branch schema.                                 | No       | `2022-11-30T20:09:48Z`     |
-| `Authorization`    | Bearer token for API access (your [Neon API key](/docs/manage/api-keys))      | Yes      | `$NEON_API_KEY`            |
+| `<db_name>`        | The name of the database in the target branch.                                                                           | Yes      | `neondb`                   |
+| `lsn`              | The LSN on the target branch for which the schema is retrieved.                                                          | No       | `0/1EC5378`                |
+| `timestamp`        | The point in time on the target branch for which the schema is retrieved.                                                | No       | `2022-11-30T20:09:48Z`     |
+| `base_lsn`         | The LSN for the base branch schema.                                                                                      | No       | `0/2FC6321`                |
+| `base_timestamp`   | The point in time for the base branch schema.                                                                            | No       | `2022-11-30T20:09:48Z`     |
+| `Authorization`    | Bearer token for API access (your [Neon API key](/docs/manage/api-keys))                                                 | Yes      | `$NEON_API_KEY`            |
 
 <Admonition type="note" title="notes">
 - The optional `jq -r '.diff'` command appended to the example above extracts the diff field from the JSON response and outputs it as plain text to make it easier to read. This command is not  necessary when using the endpoint programmatically.

@@ -60,3 +60,23 @@ describe('Post hideCopyPage', () => {
     expect(screen.queryByTestId('copy-page-menu')).not.toBeInTheDocument();
   });
 });
+
+describe('Post agent-setup button', () => {
+  it('shows the agent-setup button on a page without its own prompt', () => {
+    renderPost({});
+
+    expect(screen.getByTestId('agent-setup-button')).toBeInTheDocument();
+  });
+
+  it('hides the agent-setup button on a page with a PromptBlock', () => {
+    renderPost({}, { content: 'Intro\n\n<PromptBlock src="/prompts/example.md" />\n' });
+
+    expect(screen.queryByTestId('agent-setup-button')).not.toBeInTheDocument();
+  });
+
+  it('renders when content is not a string, as on the changelog index', () => {
+    renderPost({}, { content: {} });
+
+    expect(screen.getByTestId('agent-setup-button')).toBeInTheDocument();
+  });
+});

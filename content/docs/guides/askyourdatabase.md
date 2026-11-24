@@ -11,10 +11,10 @@ summary: >-
 redirectFrom:
   - /docs/connect/connect-ai
 enableTableOfContents: true
-updatedOn: '2026-07-31T15:27:48.506Z'
+updatedOn: '2026-11-16T20:43:37.000Z'
 ---
 
-AskYourDatabase is the ChatGPT for SQL databases, enabling you to interact with your SQL databases using natural language. You can use it for data management, business intelligence, schema design & migration, data visualization, and more. To learn more, see [AskYourDatabase](https://www.askyourdatabase.com/).
+AskYourDatabase lets you work with SQL databases using natural language. You can use it for data management, business intelligence, schema design and migration, data visualization, and more. To learn more, see [AskYourDatabase](https://www.askyourdatabase.com/).
 
 This guide shows how to connect from AskYourDatabase to Lakebase Postgres.
 
@@ -25,7 +25,7 @@ This guide shows how to connect from AskYourDatabase to Lakebase Postgres.
 
 ## Connect to Neon from AskYourDatabase
 
-1. Get the Neon URL by navigating to the Neon Console and copying the connection string. The URL will look something like this:
+1. In the Neon Console, copy your connection string. It looks something like this:
 
    ```text shouldWrap
    postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require&channel_binding=require
@@ -48,7 +48,7 @@ Within the chat session, you can start asking your database questions.
 
 For example, suppose you have a `user` table with a column named `dbType` that indicates the type of database.
 
-If you want to know what the four most popular databases are and visualize the distribution in a pie chart, you can quickly and easily do so with a natural language question, as shown below:
+If you want to know what the four most popular databases are and visualize the distribution in a pie chart, you can do so with a natural language question, as shown below:
 
 ![Chat with Neon](/docs/guides/askyourdatabase_ask_neon.png)
 

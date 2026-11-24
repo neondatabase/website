@@ -1,6 +1,6 @@
 ---
 title: Connect a SvelteKit application to Neon
-subtitle: Connect a SvelteKit app to Lakebase Postgres on Neon, develop on a branch, deploy, and add the rest of your backend
+subtitle: Connect a SvelteKit app to Lakebase Postgres on Neon, query it from a server load function, develop on a branch, deploy, and add the rest of your backend
 summary: >-
   Connect a SvelteKit app to Lakebase Postgres on Neon: optionally add Neon's
   agent skills, create a Neon project (Neon CLI, API, or Console), link it
@@ -10,14 +10,10 @@ summary: >-
   module and a +page.server.ts load function. Covers SvelteKit 3, with a note for SvelteKit 2, plus deployment,
   troubleshooting, and Neon's other backend services from SvelteKit.
 enableTableOfContents: true
-updatedOn: '2026-11-03T20:17:45.483Z'
+updatedOn: '2026-11-17T01:08:58.350Z'
 ---
 
-[SvelteKit](https://svelte.dev/docs/kit) is a full-stack framework for building web apps with Svelte. Learn to connect a SvelteKit app to Postgres on Neon, query it from a server `load` function, develop on a branch, and deploy.
-
-## Have your AI agent follow this guide
-
-<PromptBlock src="/prompts/sveltekit-prompt.md" labels={["Set up your agent for Neon", "Use Svelte's official skills (optional)", "Connect your SvelteKit app"]} />
+<PromptBlock src="/prompts/sveltekit-prompt.md" labels={["Set up your agent and follow this guide", "Use Svelte's official skills (optional)", "Connect your SvelteKit app"]} />
 
 <Steps>
 
@@ -301,7 +297,7 @@ SvelteKit doesn't load `.env` or `.env.local` into `process.env`, so pass values
 
 Managed Better Auth
 : Sign-up, sign-in, and sessions stored in your database.
-: Add it with `neon config add auth`. Neon doesn't have a SvelteKit quick start for Auth yet. Start from [Managed Better Auth](/docs/auth/overview).
+: Add it with `neon config add auth`. See [Managed Better Auth](/docs/auth/overview).
 
 Object Storage
 : S3-compatible buckets for uploads and files.

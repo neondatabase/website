@@ -11,7 +11,7 @@ summary: >-
   configure GRANT statements, enable RLS, and write per-row policies with
   `auth.user_id()`, which extracts the `sub` claim from the request JWT.
 enableTableOfContents: true
-updatedOn: '2026-09-14T11:31:53.481Z'
+updatedOn: '2026-10-30T20:07:37.000Z'
 ---
 
 <InfoBlock>

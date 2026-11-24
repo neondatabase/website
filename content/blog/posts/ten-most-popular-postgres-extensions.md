@@ -121,7 +121,7 @@ ORDER BY distance
 LIMIT 5;
 ```
 
-[Check out this guide](https://neon.com/guides/vector-search) to get started with pgvector.
+Check out the [pgvector docs](https://neon.com/docs/extensions/pgvector) to get started with pgvector.
 
 ### pgcrypto
 

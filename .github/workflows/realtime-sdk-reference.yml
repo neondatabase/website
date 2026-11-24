@@ -1,7 +1,8 @@
 name: Realtime SDK Reference
 
-# The hand-written TypeScript SDK page includes seven generated partials under
-# content/docs/shared-content/realtime-sdk-*.md. This job renders the vendored TypeDoc
+# The hand-written module pages under content/docs/realtime/sdks/typescript/ include seven
+# generated partials from content/docs/shared-content/realtime-sdk-*.md (Drizzle and Drizzle
+# client share one page). This job renders the vendored TypeDoc
 # artifact in memory and byte-compares those partials against the committed copies.
 # Drift fails the pull request with the file named.
 #

@@ -9,7 +9,7 @@ summary: >-
   performance and understand what a database is doing without leaving the
   terminal.
 enableTableOfContents: true
-updatedOn: '2026-10-09T21:54:03.000Z'
+updatedOn: '2026-11-16T20:47:16.065Z'
 ---
 
 The `inspect` command runs a set of read-only diagnostic queries against a branch's Postgres and prints the results. Each query targets a common operational question, such as which tables are largest, which indexes go unused, what is holding locks, or how the cache is performing. Nothing is modified, so the command is safe to run against any branch.
@@ -101,7 +101,7 @@ No long-running queries in any database.
 
 ### neon inspect db stalled-queries (#db-stalled-queries)
 
-Active queries running longer than 30 seconds, with their parallel workers, what each one is waiting on, and any queries blocking them. It runs compute-wide. When nothing qualifies, it says so instead of printing an empty table:
+Active queries that have been running for at least 30 seconds, reported with their waits, blockers, parallel workers, and query text. Query IDs are included in `-o json` output. Where `long-running-queries` catches statements past a five-minute mark, this surfaces stalls sooner and shows what each backend is waiting on. Parallel workers are grouped with their leader process, and the `Blocking PIDs` column shows which backends are holding others up. It runs compute-wide. Run it during an incident to see what is running right now and what is blocking it. When nothing qualifies, it says so instead of printing an empty table:
 
 ```bash
 neon inspect db stalled-queries
@@ -121,14 +121,6 @@ neon inspect db locks
 
 ```text
 No locks held in any database.
-```
-
-### neon inspect db stalled-queries (#db-stalled-queries-2)
-
-Active queries that have been running for at least 30 seconds, reported with their waits, blockers, parallel workers, query IDs, and query text. Where `long-running-queries` catches statements past a five-minute mark, this surfaces stalls sooner and shows what each backend is waiting on. Parallel workers are grouped with their leader process, and the `Blocking Pids` column shows which backends are holding others up. Run it during an incident to see what is running right now and what is blocking it.
-
-```bash
-neon inspect db stalled-queries
 ```
 
 ### neon inspect db outliers (#db-outliers)

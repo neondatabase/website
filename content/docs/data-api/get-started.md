@@ -10,7 +10,7 @@ summary: >-
   branch for a single database and does not support projects with IP Allow or
   Private Networking configured.
 enableTableOfContents: true
-updatedOn: '2026-10-09T10:18:46.317Z'
+updatedOn: '2026-11-11T12:31:00.000Z'
 ---
 
 This guide walks you through enabling the Data API, creating a table with RLS, and running your first query.
@@ -22,6 +22,7 @@ The Data API has no permission layer of its own. Every request is authorized ent
 ## Before you begin
 
 - The Neon Data API is enabled at the **branch** level for a single database. Each branch has its own Data API configuration, so you must select the correct branch before enabling the API.
+- The Data API doesn't support Postgres 19 yet. Use a project on Postgres 18 or earlier.
 - The Data API doesn't support projects with [IP Allow](/docs/introduction/ip-allow#ip-allow-and-other-neon-services) or [Private Networking](/docs/guides/neon-private-networking#private-networking-and-other-neon-services) enabled, and these controls don't restrict Data API requests.
 
 <Steps>

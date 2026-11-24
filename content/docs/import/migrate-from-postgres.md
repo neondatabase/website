@@ -12,7 +12,7 @@ redirectFrom:
   - /docs/cloud/tutorials
   - /docs/how-to-guides/import-an-existing-database
   - /docs/import/import-from-postgres
-updatedOn: '2026-11-04T20:10:08.844Z'
+updatedOn: '2026-11-20T14:06:24.575Z'
 ---
 
 This topic describes migrating data from one Postgres database to another using the `pg_dump` and `pg_restore`.
@@ -185,6 +185,8 @@ Table-level data migration (using CSV files, for example) does not preserve data
 
 - You can load data using the `psql` utility, but it only supports plain-text SQL dumps, which you should only consider for small datasets or specific use cases. To create a plain-text SQL dump with `pg_dump` utility, leave out the `-F` format option. Plain-text SQL is the default `pg_dump` output format.
 - `pg_dumpall` is not supported.
+- Use `pg_dump` and `pg_restore` from the same Postgres version as the destination or newer. They can read data from older versions, but an older `pg_restore` refuses to restore into a newer server (`aborting because of server version mismatch`). If your package manager doesn't have the newer version yet, the official `postgres:<version>` Docker image includes the tools.
+- When the source is a Neon project, `pg_restore` can report `permission denied to change default privileges` errors for the `cloud_admin` role. You can ignore them. The destination project already has those privileges.
 - `pg_dump` with the `-C, --create` option is not supported.
 - Some PostgreSQL features, such as tablespaces and large objects, which require access to the local file system are not supported by Neon. To exclude selecting tablespaces, specify the `--no-tablespaces` option with `pg_restore`. To exclude large objects, specify the `--no-blobs` option with `pg_dump`.
 

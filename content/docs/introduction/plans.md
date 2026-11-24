@@ -25,7 +25,7 @@ redirectFrom:
   - /docs/introduction/pricing-estimation-guide
   - /docs/introduction/billing-sample
   - /docs/introduction/pricing
-updatedOn: '2026-11-12T19:10:00.000Z'
+updatedOn: '2026-11-18T23:49:34.327Z'
 ---
 
 Neon offers plans to support you at every stage, from your first prototype to production at scale.
@@ -252,7 +252,7 @@ Even though child branch storage is capped at your logical data size, it's still
 
 ### Public network transfer
 
-Public network transfer (egress) is the total volume of data sent from your databases over the public internet during the monthly billing period.
+Public network transfer (egress) is the total volume of data sent over the public internet during the monthly billing period. It includes data sent from your databases, from [Object Storage](/docs/storage/overview), and from [Neon Functions](/docs/compute/functions/overview), and the allowance is shared across all three in each project.
 
 > Public network transfer includes data sent via [logical replication](/docs/reference/glossary#logical-replication) to any destination, including other Neon databases.
 
@@ -289,7 +289,7 @@ See [Spending notifications](/docs/introduction/spending-notifications) for how 
 
 ### Instant restore
 
-Neon stores a change history to support point-in-time restore (instant restore). You can only point-in-time restore from **root branches**, so PITR storage is charged only for root branches. Child branches do not add to this charge.
+Neon stores a change history to support point-in-time restore (instant restore). PITR storage is charged only for **root branches**. Child branches do not add to this charge, even though you can also restore them.
 
 - **Free**: No charge, up to 6 hours, limited to 1 GB of change history per project
 - **Launch**: Up to 7 days, billed at $0.20/GB-month
@@ -600,7 +600,7 @@ Change history is stored as Postgres WAL records.
 </FaqItem>
 
 <FaqItem question="Is instant restore history accumulated at the project or branch level?">
-You can only point-in-time restore from root branches, so only root branches contribute to your billed PITR storage. You set a single **history window** (for example, 7 days or 30 days) for the entire project for **instant restore**. You cannot enable, disable, or configure the history window per branch.
+Only root branches contribute to your billed PITR storage. Child branches can also be restored, but their change history isn't billed. You set a single **history window** (for example, 7 days or 30 days) for the entire project for **instant restore**. You cannot enable, disable, or configure the history window per branch.
 </FaqItem>
 
 <FaqItem question="Can I disable scale-to-zero?">
@@ -630,13 +630,13 @@ The Free plan costs $0/month and includes 100 projects, 10 branches per project,
 </FaqItem>
 
 <FaqItem question="What happens if I exceed my Free plan limits?">
-On the Free plan, when you run out of CU-hours or public network transfer, your compute is suspended until the next billing period or until you upgrade. Exceeding the 1 GB per-project storage cap, or the 20 GB total cap across all your projects, causes operations that increase storage (inserts, updates, and deletes) to fail until you free space or upgrade. Branch creation fails once you reach 10 branches per project. None of these limits delete your data.
+On the Free plan, when you run out of CU-hours, your compute is suspended until the next billing period or until you upgrade. The 5 GB of public network transfer is shared by Postgres, Object Storage, and Neon Functions in the project. When the project uses it up, all three are restricted until the next billing period or until you upgrade, and your compute is suspended. Exceeding the 1 GB per-project storage cap, or the 20 GB total cap across all your projects, causes operations that increase storage (inserts, updates, and deletes) to fail until you free space or upgrade. Branch creation fails once you reach 10 branches per project. None of these limits delete your data.
 </FaqItem>
 
 <FaqItem question="How do I restore or export a Free plan project that hit its limits?">
 It depends on which limit you hit. If you hit the storage limit, your compute stays available. You can still query the project or export it with [pg_dump](/docs/import/migrate-from-postgres), but writes fail until you free space or upgrade.
 
-If you ran out of CU-hours or public network transfer, the compute is suspended until the next billing period, and connections, including `pg_dump`, fail with SQLSTATE `53000`. To restore access sooner, upgrade the organization that contains the project to Launch (**Billing** > **Change plan** in the Neon Console). If you want to return to Free later, you can downgrade, and the plan change resets the Free plan's monthly compute and network transfer allowances. Launch has no minimum monthly fee and invoices under $0.50 are not collected, so the round trip usually costs nothing. If you plan to export your data, do it before you downgrade, because `pg_dump` counts toward network transfer. If you ran out of network transfer, check what's using it so the project doesn't hit the limit again. See [Reduce network transfer costs](/docs/introduction/network-transfer).
+If you ran out of CU-hours or public network transfer, the compute is suspended until the next billing period, and connections, including `pg_dump`, fail with SQLSTATE `53000`. To restore access sooner, upgrade the organization that contains the project to Launch (**Billing** > **Change plan** in the Neon Console). Launch has no minimum monthly fee and invoices under $0.50 are not collected, so if you only restore access or export your data and then downgrade, the round trip usually costs nothing. When you downgrade back to Free, the plan change resets the Free plan's monthly compute and network transfer allowances. If you plan to export your data, do it before you downgrade, because `pg_dump` counts toward network transfer. If you ran out of network transfer, check what's using it so the project doesn't hit the limit again. See [Reduce network transfer costs](/docs/introduction/network-transfer).
 
 You can load a dump into a new project in another Free organization, as long as the data fits within the Free plan's 1 GB per-project storage limit. You can't use [project transfer](/docs/manage/orgs-project-transfer) to move a project from a Launch organization to a Free one, because the destination organization must be on the same plan or higher.
 </FaqItem>

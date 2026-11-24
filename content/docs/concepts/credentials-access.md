@@ -12,7 +12,7 @@ summary: >-
   connections; the Data API, Object Storage, the AI Gateway, and Function URLs
   are gated by their credentials.
 enableTableOfContents: true
-updatedOn: '2026-09-15T20:19:36.000Z'
+updatedOn: '2026-11-11T12:31:00.000Z'
 ---
 
 Access to your Neon backend runs on a handful of credentials, one for each kind of job: an **API key** manages your setup, a **scoped credential** does your running app's work, a **database connection credential** reaches Postgres, and a **JWT** authorizes end users through the Data API.

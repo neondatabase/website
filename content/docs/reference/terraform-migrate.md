@@ -11,7 +11,7 @@ summary: >-
   old syntax produces.
 enableTableOfContents: true
 tag: beta
-updatedOn: '2026-11-12T06:13:30.409Z'
+updatedOn: '2026-11-18T10:21:28.000Z'
 ---
 
 `neondatabase/neon` is the official Neon Terraform provider and continues the community provider `kislerdm/neon`. Your projects, branches, computes, roles, and databases stay in place during the migration: the provider upgrades the state written by `kislerdm/neon` v0.18.0 on the first plan, so nothing is imported again or recreated.
@@ -44,7 +44,7 @@ terraform {
     neon = {
       source  = "kislerdm/neon" # [!code --]
       source  = "neondatabase/neon" # [!code ++]
-      version = "0.19.0-beta.0" # [!code ++]
+      version = "0.19.0-beta.4" # [!code ++]
     }
   }
 }
@@ -226,10 +226,6 @@ Error: Invalid data source
 ```
 
 Replace `data.neon_branch_role_password` with the `neon_role` ephemeral resource.
-
-## Known issue in 0.19.0-beta.0
-
-Changing `allowed_ips` on a project with `allowed_ips_protected_branches_only = true` fails with `Provider produced inconsistent result after apply`, and Neon turns the protected-branches restriction off. Run `terraform apply` again: the second apply sets `allowed_ips_protected_branches_only` back to `true`. The next provider release fixes this.
 
 ---
 

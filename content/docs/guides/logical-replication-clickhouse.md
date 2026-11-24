@@ -10,7 +10,7 @@ summary: >-
   wal_level=logical for the entire Neon project.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2026-10-09T10:14:56.146Z'
+updatedOn: '2026-11-16T20:51:43.000Z'
 ---
 
 Neon's logical replication feature allows you to replicate data from your Lakebase Postgres database to external destinations.
@@ -200,6 +200,8 @@ Using `REPLICA IDENTITY FULL` requires more data to be written to the WAL for ea
 Create a Postgres publication that includes the tables you want to replicate. It is recommended to create a publication that includes only the tables you want to replicate, rather than using `FOR ALL TABLES`, to minimize unnecessary data replication and reduce the amount of WAL data generated.
 
 To create a publication named `clickpipes_pub` for specific tables, run the following command:
+
+Run this as the database owner, such as `neondb_owner`, not the replication role.
 
 ```sql
 CREATE PUBLICATION clickpipes_pub FOR TABLE tb1, tb2;
@@ -555,4 +557,3 @@ Terraform will create the ClickHouse Cloud service and set up the ClickPipe to r
 - [ClickHouse Terraform provider documentation](https://registry.terraform.io/providers/ClickHouse/clickhouse/latest/docs)
 
 <NeedHelp/>
-```

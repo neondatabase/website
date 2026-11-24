@@ -11,7 +11,7 @@ summary: >-
   metrics that match your invoice or for Launch plan access, use the Query
   consumption metrics page instead.
 enableTableOfContents: true
-updatedOn: '2026-07-15T00:58:07.525Z'
+updatedOn: '2026-11-20T18:37:54.892Z'
 ---
 
 Using the Neon API, you can query project-level consumption metrics with the legacy endpoint. The Management API only allows this path for **Scale plans and above** (legacy **Scale, Business, and Enterprise**, and usage-based **Scale** and higher). It is **not** available on **Launch**; use [`GET /consumption_history/v2/projects`](/docs/guides/consumption-metrics) instead. On every eligible plan, this endpoint returns **legacy metrics** only (active time, compute time, written data, synthetic storage). On a usage-based plan, those metrics do not match your invoice; for invoice-aligned metrics use the [project metrics endpoint](/docs/guides/consumption-metrics) in Query consumption metrics.
@@ -59,11 +59,11 @@ Retrieves consumption metrics per project at the chosen granularity. The same **
 - **`from`** (date-time, required): Start of the consumption period in RFC 3339 format. The value is rounded according to the specified granularity. Consumption history is available from March 1, 2024, at 00:00:00 UTC. The range must respect the granularity limits (hourly: last 168 hours; daily: last 60 days; monthly: last year).
 - **`to`** (date-time, required): End of the consumption period in RFC 3339 format. The value is rounded according to the specified granularity. The range must respect the same granularity limits as `from`.
 - **`granularity`** (string, required): Granularity of consumption metrics. `hourly` (last 168 hours), `daily` (last 60 days), or `monthly` (last year).
+- **`org_id`** (string, required with a personal API key): Organization for which to return project consumption metrics. An organization API key that is not project-scoped already identifies its organization, so you can omit `org_id` when you use one. To find your organization IDs, see [Finding organizations for consumption queries](/docs/manage/orgs-api-consumption#finding-organizations-for-consumption-queries).
 
 #### Optional parameters
 
 - **`project_ids`** (array of strings, 0-100 items): Filter to specific project IDs. If omitted, the response contains all projects. Can be an array of parameter values or a comma-separated list in a single parameter value.
-- **`org_id`** (string): Organization for which to return project consumption metrics. If not provided, returns metrics for the authenticated user's projects.
 - **`metrics`** (array of strings): Metrics to include. If omitted, `active_time_seconds`, `compute_time_seconds`, `written_data_bytes`, and `synthetic_storage_size_bytes` are returned. The last one is deprecated and returns 0. Possible values: `active_time_seconds`, `compute_time_seconds`, `written_data_bytes`, `synthetic_storage_size_bytes`, `data_storage_bytes_hour`, `logical_size_bytes`, `logical_size_bytes_hour`. Can be an array or comma-separated list.
 - **`limit`** (integer, 1-100): Number of projects in the response. Default: `10`.
 - **`cursor`** (string): Cursor value from the previous response to get the next batch of projects.
@@ -87,7 +87,7 @@ The **`include_v1_metrics`** parameter is deprecated; use **`metrics`** instead.
 
 ## Example request and response
 
-Replace `$NEON_API_KEY` with your API key and include `org_id` if needed. With `granularity=daily`, the `from` and `to` values must fall within the last 60 days.
+Replace `$NEON_API_KEY` with your API key and the `org_id` value with your organization ID. With `granularity=daily`, the `from` and `to` values must fall within the last 60 days.
 
 ### Project-level
 
@@ -179,8 +179,8 @@ The endpoints on this page return **legacy metrics** only; when your organizatio
 
 Common error responses you may encounter:
 
-- **400 Bad Request**: The request is invalid. For example, `from` is before March 1, 2024.
-- **403 Forbidden**: These endpoints are not available for your plan. The API response states that access is included with **Scale plans and above** (legacy **Scale, Business, and Enterprise**, and usage-based **Scale** and higher, not **Launch**).
+- **400 Bad Request**: The request is invalid. For example, `from` is before March 1, 2024. A request made with a personal API key and no `org_id` can also return this error.
+- **403 Forbidden**: These endpoints are not available for your plan. The API response states that access is included with **Scale plans and above** (legacy **Scale, Business, and Enterprise**, and usage-based **Scale** and higher, not **Launch**). A request made with a personal API key and no `org_id` can also return this error even when your organization is on an eligible plan; add `org_id`.
 - **404 Not Found**: Account is not a member of the organization specified by `org_id`.
 - **406 Not Acceptable**: The specified date-time range is outside the boundaries of the specified granularity. Adjust your `from` and `to` values or select a different `granularity`.
 - **429 Too Many Requests**: Too many requests. Wait before retrying.

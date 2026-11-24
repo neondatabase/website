@@ -1,5 +1,5 @@
 ---
-title: Schema migration with Lakebase Postgres and Django
+title: Schema migration with Django and Lakebase Postgres on Neon
 subtitle: Set up a database on Neon and run migrations for your Django project
 summary: >-
   Django schema migrations with Lakebase Postgres use Django's built-in ORM and the
@@ -10,7 +10,7 @@ summary: >-
   connection string for running migrations to avoid PgBouncer-related errors;
   the guide also covers dj-database-url configuration and seeding initial data.
 enableTableOfContents: true
-updatedOn: '2026-10-28T11:11:18.780Z'
+updatedOn: '2026-11-18T16:41:34.386Z'
 ---
 
 [Django](https://www.djangoproject.com/) is a high-level Python framework to make database-driven web applications. It provides an ORM (Object-Relational Mapping) layer that abstracts database operations, making it easy to interact with databases using Python code. Django also includes a migration system that allows you to define and manage database schema changes over time.

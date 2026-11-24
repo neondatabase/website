@@ -4,15 +4,16 @@ summary: >-
   Neon's public product roadmap tracks what is in flight, recently shipped, and
   planned across compute, storage, security, and cloud regions. Planned features
   include higher storage and compute limits, CMK encryption, and RBAC.
-  Recently shipped milestones include Postgres 18
-  GA, a major write throughput improvement, Managed Better Auth GA, and the AI agent
+  Recently shipped milestones include Postgres 19
+  support, Postgres 18 GA, a major write throughput improvement, Managed Better Auth GA, and the AI agent
   pricing plan.
 enableTableOfContents: true
 redirectFrom:
   - /docs/cloud/roadmap
   - /docs/conceptual-guides/roadmap
   - /docs/reference/roadmap
-updatedOn: '2026-11-16T17:42:17.264Z'
+  - /docs/community/public-preview
+updatedOn: '2026-11-21T11:30:46.668Z'
 ---
 
 This roadmap describes what's in flight, what we delivered recently, and what's on the horizon.
@@ -59,7 +60,6 @@ We're also improving and scaling Lakebase Postgres on Neon. Here's what's on the
 
 ### Postgres compute
 
-- **Postgres 19 support**: We support Postgres 14 through 18 today, with Postgres 19 support on the way.
 - Fixed compute sizes up to 128 CUs
 - Autoscaling up to 60 CUs
 - Automatic updates for large computes, with no manual restart required
@@ -78,6 +78,14 @@ We're also improving and scaling Lakebase Postgres on Neon. Here's what's on the
 
 ## What we've shipped recently 🚢
 
+- **Postgres 19 support**: Postgres 19 is now available on Neon. Select it when you create a project. Postgres 18 remains the default. [Learn more](/docs/postgresql/postgres-version-support).
+- **Official Neon Terraform provider (beta)**: The `neondatabase/neon` provider replaces the community provider and manages Postgres along with Functions, Object Storage, Managed Better Auth, Realtime, and the Data API. [Learn more](/docs/reference/terraform).
+- **Fix slow query plans with `pg_stash_advice`**: On Postgres 19, stash planner advice by query ID so Postgres uses a faster plan every time that query runs, without changing your app's SQL. [Learn more](/docs/extensions/pg_stash_advice).
+- **Discord sign-in for Managed Better Auth**: Managed Better Auth now supports Discord as an OAuth provider, alongside Google, GitHub, Vercel, Apple, and Microsoft. [Learn more](/docs/auth/guides/setup-oauth#discord-setup).
+- **Backend usage in the consumption history API**: The consumption history API now reports AI Gateway token usage and Object Storage usage for each project, alongside compute, storage, network transfer, and Functions. [Learn more](/docs/guides/consumption-metrics).
+- **Neon as a Kiro Power**: One install adds the Neon agent skills and the Neon MCP Server to the Kiro IDE and Kiro CLI. [Learn more](/docs/ai/connect-mcp-clients-to-neon#kiro).
+- **New AI Gateway models, including image generation**: Claude Fable 5.2, Kimi K3.1 Pro, GPT-6.1 Terra, and Gemini 4 Carbon joined the catalog, along with Gemini image models that generate images from a prompt. [Learn more](/docs/ai-gateway/overview#available-models).
+- **Project permissions for backend services**: Object Storage, Functions, and the AI Gateway now check each member's project role (Viewer, Editor, or Admin) before allowing actions such as downloading objects or managing credentials. [Learn more](/docs/manage/user-permissions#per-project-permissions).
 - **AI Gateway credits for all accounts**: You no longer need a paid plan to use the AI Gateway. Free plan organization admins can buy prepaid credits from $5 under **Billing** in the Console. [Learn more](/docs/ai-gateway/prepaid-credits).
 - **Recover deleted projects from the Console**: Recover a deleted project from the **Projects** page for 7 days after deletion, in addition to the CLI and API. [Learn more](/docs/manage/projects#recover-a-deleted-project).
 - **Automatic updates for computes up to 16 CU**: Every compute up to 16 CU, including all autoscaling computes, now gets compute updates automatically, with no manual restart required. [Learn more](/docs/manage/updates).
@@ -191,7 +199,7 @@ We're also improving and scaling Lakebase Postgres on Neon. Here's what's on the
 - **Usage-based pricing plans**: Our paid plans are fully usage-based. Pay only for what you use. See [Neon plans](/docs/introduction/plans).
 - **Branch expiration management**: Set a time-to-live (TTL) for Neon branches to simplify branch cleanup and management, see our [branch expiration guide](/docs/guides/branch-expiration).
 - **Neon VS Code extension**: An extension that lets you connect to Neon and manage your database directly in your IDE. Available for VS Code, Cursor, and other compatible editors. See [Neon VS Code Extension](/docs/local/vscode-extension).
-- **TanStack integration & new open-source tools**: Neon is now the official database partner of TanStack, with new open-source tools including a Vite Plugin for Neon to streamline fullstack development with TanStack, Vite, and Postgres.
+- **TanStack partnership**: Neon is now the official database partner of TanStack.
 - **Data API**: Neon's Data API feature, powered by PostgREST, is open to all Neon users. [Learn more](/docs/data-api/get-started).
 - **Monitoring platform support**: Neon supports exporting metrics and Postgres logs to any OpenTelemetry-compatible backend, like New Relic. For details, refer to our [OpenTelemetry docs](/docs/guides/opentelemetry).
 - **Claimable Neon**: A new way for SaaS vendors to partner with Neon to offer instant Neon projects. Let your users create a project with no registration required. [Learn more about Claimable Neon](/docs/reference/claimable-neon), and see our [Claimable database integration guide](/docs/workflows/claimable-database-integration).

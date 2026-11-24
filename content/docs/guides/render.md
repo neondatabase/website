@@ -9,10 +9,10 @@ summary: >-
   using Render's native database. The guide uses Node.js with the pg library and
   Render's Git-based continuous deployment.
 enableTableOfContents: true
-updatedOn: '2026-10-09T10:14:56.146Z'
+updatedOn: '2026-11-16T20:10:42.000Z'
 ---
 
-[Render](https://render.com) is a comprehensive cloud service that provides hosting for web applications and static sites, with PR previews, zero-downtime deployments, and more. Render supports full-stack applications, offering both web services and background workers.
+[Render](https://render.com) hosts web applications and static sites, with PR previews and zero-downtime deployments. Render supports full-stack applications, offering both web services and background workers.
 
 This guide shows how to deploy a simple Node.js application connected to a Lakebase Postgres database on Render.
 
@@ -144,7 +144,7 @@ You can visit the GitHub repository to verify that your code has been pushed suc
 
 ### Create a New Web Service on Render
 
-Log in to your Render account and navigate to the dashboard. Click on the `New +` button and select "Web Service". Pick the option to `build and deploy` from a Git repository.
+Log in to your Render account and navigate to the dashboard. Click **New** > **Web Service**. Pick the option to `build and deploy` from a Git repository.
 
 Next, choose the GitHub repository hosting the Node.js application we created above. Configure your web service as follows: - **Environment**: Select "Node". - **Build Command**: Enter `npm install`. - **Start Command**: Enter `node index.js`. - **Environment Variables**: Add your Neon database connection string from earlier as an environment variable: - Name: `DATABASE_URL` - Value: `{NEON_DATABASE_CONNECTION_STRING}`
 

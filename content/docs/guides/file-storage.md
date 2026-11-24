@@ -1,23 +1,23 @@
 ---
 title: File storage
 subtitle: Store files in external object storage and file management services and track
-  metadata in Lakebase
+  metadata in Lakebase Postgres
 summary: >-
   File storage in Neon uses a split-storage pattern where files go to an
   external object storage or file management service and file URLs, keys, and
   metadata are stored in a Lakebase Postgres database. Supported providers include
   AWS S3, Cloudflare R2, Azure Blob, Backblaze B2, Cloudinary, ImageKit, and
-  Uploadcare. Choose this approach when your app needs file uploads and you want
-  a relational store for querying and filtering metadata without building a
-  native file store.
+  Uploadcare. Choose this approach when you want a specialized file service and a
+  relational store for querying and filtering metadata. To keep files in your Neon
+  project instead, use Neon Object Storage.
 enableTableOfContents: true
-updatedOn: '2026-09-16T15:38:57.808Z'
+updatedOn: '2026-11-16T20:08:52.000Z'
 ---
 
 Applications often need to handle file uploads and storage, from user avatars and documents to images and other media.
 
 <Callout title="Neon now offers native storage">
-Neon Object Storage is S3-compatible object storage built into the Neon backend. Object storage branches with your database: each branch gets its own isolated namespace, so you can test file uploads in preview branches without touching production. No separate cloud account needed. Use any S3-compatible SDK with your existing Neon credential.
+Neon Object Storage is S3-compatible object storage built into your Neon project. Files branch with your database, so you can test uploads in a preview branch without touching production files. No separate cloud account needed. Point an S3 SDK at your branch endpoint with your Neon credential.
 
 For more information, see [Neon Object Storage](/docs/storage/overview).
 </Callout>

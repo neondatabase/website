@@ -9,17 +9,21 @@ summary: >-
   own database server. Covers both the Koyeb control panel and CLI deployment
   paths, including Prisma schema sync and database seeding.
 enableTableOfContents: true
-updatedOn: '2026-08-04T05:18:26.469Z'
+updatedOn: '2026-11-16T20:12:28.000Z'
 ---
 
 [Koyeb](https://www.koyeb.com/) is a developer-friendly, serverless platform designed to easily deploy reliable and scalable applications globally. Koyeb offers native autoscaling, automatic HTTPS (SSL), auto-healing, and global load-balancing across their edge network with zero configuration.
 
-This guide describes how connect a Lakebase Postgres database to an application deployed with Koyeb. To follow the instructions in this guide, you require:
+This guide describes how to connect a Lakebase Postgres database to an application deployed with Koyeb. To follow the instructions in this guide, you need:
 
-- A [Koyeb account](https://app.koyeb.com/) to deploy the application. Alternatively, you can install the [Koyeb CLI](https://www.koyeb.com/docs/quickstart/koyeb-cli) if you prefer to deploy the application from your terminal.
+- A [Koyeb account](https://app.koyeb.com/) on a paid plan (Pro, Scale, or Enterprise) to deploy the application. Koyeb no longer offers the Starter plan to new users. Alternatively, you can install the [Koyeb CLI](https://www.koyeb.com/docs/quickstart/koyeb-cli) if you prefer to deploy the application from your terminal.
 - A Neon account to deploy the Postgres database. If you do not have one, see [Sign up](/docs/get-started/signing-up).
 
 The example application connects to your database using [Prisma](https://www.prisma.io/) as an ORM. Prisma synchronizes the database schema with the Prisma schema included with the application and seeds the database.
+
+<Admonition type="warning">
+The build command `npm run postgres:init` runs `prisma db push --force-reset`. Every build drops and recreates the tables, which deletes any data you added after the initial seed. Use this command for the example only. Remove it from the build command before you store your own data.
+</Admonition>
 
 ## Create a Neon project
 
@@ -85,14 +89,14 @@ To deploy the example application, run the following command in your terminal. M
 
 ```bash
 koyeb apps init express-neon \
---instance-type free \
+--instance-type nano \
 --git github.com/koyeb/example-express-prisma \
 --git-branch main \
---git-build-command "npm run postgres:init" \
+--git-buildpack-build-command "npm run postgres:init" \
 --ports 8080:http \
 --routes /:8080 \
 --env PORT=8080 \
---env DATABASE_URL="{}"
+--env DATABASE_URL="NEON_DATABASE_CONNECTION_STRING"
 ```
 
 #### Access Koyeb deployment logs
@@ -100,7 +104,7 @@ koyeb apps init express-neon \
 To track the app deployment and visualize build logs, execute the following command:
 
 ```bash
-koyeb service logs express-neon/express-neon -t build
+koyeb services logs express-neon --app express-neon -t build
 ```
 
 #### Access your app

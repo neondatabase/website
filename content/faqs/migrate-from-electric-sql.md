@@ -2,7 +2,7 @@
 title: "How do I migrate from Electric to Neon Realtime?"
 subtitle: "Neon Realtime (public beta) is built by the team behind Electric and is a drop-in replacement for Electric's role in your stack. Shapes become live SQL queries, your auth proxy becomes a sealing endpoint, and electricCollectionOptions() becomes realtimeCollectionOptions()."
 createdAt: '2026-11-02T00:00:00.000Z'
-updatedOn: '2026-11-03T23:21:47.530Z'
+updatedOn: '2026-11-18T00:59:49.148Z'
 isDraft: false
 previousLink:
   title: 'Is there a managed alternative to running PostgREST myself?'
@@ -20,7 +20,7 @@ Move to [Neon Realtime](/docs/realtime/overview) (public beta). The Electric tea
 | ------------------------------------------------ | ---------------------------------------------------------------------------------------------------------- |
 | Shape (table, `where`, `columns`)                | [Live SQL query](/docs/realtime/guides/queries#defining-live-queries), raw SQL, Drizzle, or Kysely         |
 | Auth proxy or gatekeeper in front of `/v1/shape` | [Sealing endpoint](/docs/realtime/guides/queries#exposing-an-endpoint) that authorizes and seals the query |
-| `electricCollectionOptions()` in TanStack DB     | [`realtimeCollectionOptions()`](/docs/realtime/sdks/typescript#tanstack-db) from `@neon/realtime-tanstack` |
+| `electricCollectionOptions()` in TanStack DB     | [`realtimeCollectionOptions()`](/docs/realtime/sdks/typescript/tanstack-db) from `@neon/realtime-tanstack` |
 | Electric service you run next to Postgres        | Realtime enabled on the branch with `neon realtime enable`                                                 |
 | Writes through your API                          | Writes through your API, returning a txid for [`awaitTxId()`](/docs/realtime/guides/mutations)             |
 

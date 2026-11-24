@@ -8,7 +8,7 @@ summary: >-
   `<UserButton>` in the header. Use this page for the provider props, redirect
   validation, and route protection.
 enableTableOfContents: true
-updatedOn: '2026-09-16T15:38:57.808Z'
+updatedOn: '2026-10-30T15:07:38.000Z'
 ---
 
 Managed Better Auth works with [Better Auth UI](https://better-auth-ui.com): sign-in, sign-up, password reset, and user menu components for Better Auth. The shadcn CLI copies the components into your app, so you can edit them. `@better-auth-ui/react` provides the hooks and data layer they use.

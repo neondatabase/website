@@ -13,7 +13,7 @@ summary: >-
   application cutover.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2026-09-16T19:45:35.340Z'
+updatedOn: '2026-11-10T13:58:33.000Z'
 ---
 
 Neon's logical replication feature allows you to replicate data from a local Postgres instance or another Postgres provider to Neon. If you're looking to replicate data from one Neon project to another, see [Replicate data from one Neon project to another](/docs/guides/logical-replication-neon-to-neon).

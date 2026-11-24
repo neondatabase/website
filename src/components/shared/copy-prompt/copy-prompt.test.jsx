@@ -171,7 +171,11 @@ describe('CopyPrompt (legacy mode)', () => {
   it('renders the default description and copy button, with no header title', async () => {
     render(<CopyPrompt src="/prompts/example.md" />);
 
-    await waitFor(() => expect(global.fetch).toHaveBeenCalledWith('/prompts/example.md'));
+    await waitFor(() =>
+      expect(global.fetch).toHaveBeenCalledWith('/prompts/example.md', {
+        headers: { Purpose: 'prefetch' },
+      })
+    );
 
     expect(
       screen.getByText('Use this pre-built prompt to get started faster.')
@@ -182,7 +186,11 @@ describe('CopyPrompt (legacy mode)', () => {
   it('renders the dark pill with provider marks and no copy icon', async () => {
     render(<CopyPrompt src="/prompts/example.md" />);
 
-    await waitFor(() => expect(global.fetch).toHaveBeenCalledWith('/prompts/example.md'));
+    await waitFor(() =>
+      expect(global.fetch).toHaveBeenCalledWith('/prompts/example.md', {
+        headers: { Purpose: 'prefetch' },
+      })
+    );
 
     const copyButton = screen.getByRole('button', { name: 'Copy prompt' });
     // Same dark pill as the agent-variant button and the docs-home composer pill.
@@ -202,7 +210,11 @@ describe('CopyPrompt (legacy mode)', () => {
       />
     );
 
-    await waitFor(() => expect(global.fetch).toHaveBeenCalledWith('/prompts/example.md'));
+    await waitFor(() =>
+      expect(global.fetch).toHaveBeenCalledWith('/prompts/example.md', {
+        headers: { Purpose: 'prefetch' },
+      })
+    );
 
     expect(screen.getByText('Copy into your AI assistant.')).toBeInTheDocument();
     expect(screen.queryByText('AI prompt: Get started with the Neon API')).not.toBeInTheDocument();
@@ -216,7 +228,11 @@ describe('CopyPrompt (legacy mode)', () => {
       value: { writeText },
     });
     render(<CopyPrompt src="/prompts/example.md" />);
-    await waitFor(() => expect(global.fetch).toHaveBeenCalledWith('/prompts/example.md'));
+    await waitFor(() =>
+      expect(global.fetch).toHaveBeenCalledWith('/prompts/example.md', {
+        headers: { Purpose: 'prefetch' },
+      })
+    );
 
     fireEvent.click(screen.getByRole('button', { name: 'Copy prompt' }));
 

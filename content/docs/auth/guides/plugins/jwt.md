@@ -14,7 +14,7 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/auth/guides/jwt
   - /docs/auth/jwt
-updatedOn: '2026-11-05T01:14:02.509Z'
+updatedOn: '2026-11-06T21:28:10.000Z'
 ---
 
 Managed Better Auth is built on [Better Auth](https://www.better-auth.com/) and provides support for JWT plugin APIs through the Neon SDK. You do not need to manually install or configure the Better Auth JWT plugin.
