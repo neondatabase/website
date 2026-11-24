@@ -17,12 +17,14 @@ redirectFrom:
   - /docs/guides/connection-pooling
   - /docs/introduction/connection-pooling
   - /docs/manage/connection-pooling
-updatedOn: '2026-11-24T19:32:36.240Z'
+updatedOn: '2026-11-24T20:37:23.980Z'
 ---
 
 For most apps, use a pooled connection. It reuses database connections to help you avoid connection limits. Direct connections are typically used for schema migrations, backups, and other work that needs a single continuous session.
 
-## Pooled connections
+## Choose a connection
+
+### Pooled connections
 
 <div className="flex items-center gap-6 sm:flex-col">
   <div style={{ flex: '1 1 50%' }}>
@@ -37,7 +39,7 @@ For most apps, use a pooled connection. It reuses database connections to help y
   </div>
 </div>
 
-## Direct connections
+### Direct connections
 
 <div className="flex items-center gap-6 sm:flex-col">
   <div style={{ flex: '1 1 50%' }}>
@@ -52,7 +54,7 @@ For most apps, use a pooled connection. It reuses database connections to help y
   </div>
 </div>
 
-## When to use pooled vs direct connections
+### When to use pooled vs direct connections
 
 Use a direct connection for any tool that holds one connection open and expects the same session across statements. Use a pooled connection for anything that opens and closes connections frequently.
 
@@ -75,7 +77,7 @@ If you run on a platform that scales instances up and down quickly (for example 
 For connection errors or slow connections, see [Connection errors](/docs/connect/connection-errors) and [Connection latency and timeouts](/docs/connect/connection-latency).
 </Admonition>
 
-## How to use connection pooling
+### How to use connection pooling
 
 To use connection pooling, connect with the pooled connection string. It's your direct connection string with `-pooler` added to the endpoint ID.
 
@@ -111,77 +113,7 @@ PgBouncer creates a separate pool for each combination of database user and data
 
 Each pool can grow up to `default_pool_size` on its own, but all pools on a compute draw from the same underlying `max_connections` limit.
 
-## Understanding connection pool limits
-
-Each Postgres connection starts a new operating-system process that uses memory and CPU, so Postgres caps the number of connections based on available RAM. In Neon, that cap is `max_connections`, which scales with compute size.
-
-### Connection limits without connection pooling
-
-| Compute size (CU) | RAM         | max_connections |
-| :---------------- | :---------- | :-------------- |
-| 0.25              | 1 GB        | 112             |
-| 0.50              | 2 GB        | 225             |
-| 1                 | 4 GB        | 450             |
-| 2                 | 8 GB        | 901             |
-| 3                 | 12 GB       | 1351            |
-| 4                 | 16 GB       | 1802            |
-| 5                 | 20 GB       | 2253            |
-| 6                 | 24 GB       | 2703            |
-| 7                 | 28 GB       | 3154            |
-| 8                 | 32 GB       | 3604            |
-| 9 - 56            | 36 - 224 GB | 4000            |
-
-<Admonition type="note">
-For compute sizes 9 CU and above, `max_connections` is capped at 4000 regardless of RAM size. See [Postgres settings that differ by compute size](/docs/reference/compatibility#parameter-settings-that-differ-by-compute-size) for details.
-</Admonition>
-
-<Admonition type="note">
-Seven connections are reserved for the Neon superuser account. For a 0.25 CU compute, this means 105 connections are available for your application (112 total - 7 reserved).
-</Admonition>
-
-Workloads that commonly exceed `max_connections` on a direct connection:
-
-- Serverless functions (each invocation may open a connection)
-- Connection-per-request web frameworks
-- Multiple application instances without proper connection management
-- Applications that don't close connections properly
-
-To check your current limit:
-
-```sql
-SHOW max_connections;
-```
-
-To view active connections:
-
-```sql
-SELECT usename, count(*)
-FROM pg_stat_activity
-WHERE datname = '<database_name>'
-GROUP BY usename;
-```
-
-You can also view active connections on the [Monitoring page](/docs/introduction/monitoring-page#connections) in the Neon Console, which graphs connection usage over time.
-
-### Pooler limits
-
-Connection pooling adds two more limits on top of `max_connections`:
-
-| Limit               | Value                    | What it controls                                 | When you hit it                            |
-| ------------------- | ------------------------ | ------------------------------------------------ | ------------------------------------------ |
-| `max_client_conn`   | 10,000                   | Maximum client connections to PgBouncer          | Client gets: "no more connections allowed" |
-| `default_pool_size` | 90% of `max_connections` | Maximum active connections per user per database | Client waits in the queue                  |
-| `max_connections`   | Varies by compute        | Direct connections to Postgres                   | Client gets: "too many connections"        |
-
-The 10,000 client connection limit is not 10,000 concurrent queries. For a 1 CU compute (`max_connections` = 450), you can have up to 10,000 client connections to PgBouncer, about 405 concurrent active transactions per user per database (`default_pool_size`, 90% of 450), and 450 concurrent connections to Postgres. The 10,000 limit is useful for applications with many idle or short-lived connections, such as serverless functions that open and close connections frequently.
-
-### What happens when you hit a limit
-
-- **Per-user, per-database pool full**: on a 1 CU compute (`default_pool_size` = 405), if `user1` holds 405 active connections to `database1` with long-running queries, connection 406 waits in the queue and fails with `query_wait_timeout` after 2 minutes. Keep transactions short, move to a larger compute to raise the pool size, or use additional database users to get more pools.
-- **Client connection limit reached**: the 10,001st client connection to PgBouncer fails with `no more connections allowed (max_client_conn)`. Fix connection leaks, add client-side pooling, or reduce the number of application instances.
-- **`max_connections` reached on a direct connection**: on a 0.25 CU compute (112 `max_connections`), connection 106 on a non-pooled string fails with `FATAL: remaining connection slots are reserved`. Switch to the pooled connection string (add `-pooler` to the hostname), increase the compute size, or add connection pooling in your application.
-
-## Connection pooling in transaction mode
+### Connection pooling in transaction mode
 
 Neon uses [PgBouncer](https://www.pgbouncer.org/) in transaction mode (`pool_mode=transaction`), so a server connection returns to the pool after each transaction completes. This limits Postgres features that need a persistent session. The following are not supported on pooled connections:
 
@@ -259,7 +191,79 @@ results = cur.fetchall()
 
 Most PostgreSQL client libraries support protocol-level prepared statements. Check your driver's documentation for details.
 
-## Neon PgBouncer configuration settings
+## Connection limits
+
+Each Postgres connection starts a new operating-system process that uses memory and CPU, so Postgres caps the number of connections based on available RAM. In Neon, that cap is `max_connections`, which scales with compute size.
+
+### Connection limits without connection pooling
+
+| Compute size (CU) | RAM         | max_connections |
+| :---------------- | :---------- | :-------------- |
+| 0.25              | 1 GB        | 112             |
+| 0.50              | 2 GB        | 225             |
+| 1                 | 4 GB        | 450             |
+| 2                 | 8 GB        | 901             |
+| 3                 | 12 GB       | 1351            |
+| 4                 | 16 GB       | 1802            |
+| 5                 | 20 GB       | 2253            |
+| 6                 | 24 GB       | 2703            |
+| 7                 | 28 GB       | 3154            |
+| 8                 | 32 GB       | 3604            |
+| 9 - 56            | 36 - 224 GB | 4000            |
+
+<Admonition type="note">
+For compute sizes 9 CU and above, `max_connections` is capped at 4000 regardless of RAM size. See [Postgres settings that differ by compute size](/docs/reference/compatibility#parameter-settings-that-differ-by-compute-size) for details.
+</Admonition>
+
+<Admonition type="note">
+Seven connections are reserved for the Neon superuser account. For a 0.25 CU compute, this means 105 connections are available for your application (112 total - 7 reserved).
+</Admonition>
+
+Workloads that commonly exceed `max_connections` on a direct connection:
+
+- Serverless functions (each invocation may open a connection)
+- Connection-per-request web frameworks
+- Multiple application instances without proper connection management
+- Applications that don't close connections properly
+
+To check your current limit:
+
+```sql
+SHOW max_connections;
+```
+
+To view active connections:
+
+```sql
+SELECT usename, count(*)
+FROM pg_stat_activity
+WHERE datname = '<database_name>'
+GROUP BY usename;
+```
+
+You can also view active connections on the [Monitoring page](/docs/introduction/monitoring-page#connections) in the Neon Console, which graphs connection usage over time.
+
+### Pooler limits
+
+Connection pooling adds two more limits on top of `max_connections`:
+
+| Limit               | Value                    | What it controls                                 | When you hit it                            |
+| ------------------- | ------------------------ | ------------------------------------------------ | ------------------------------------------ |
+| `max_client_conn`   | 10,000                   | Maximum client connections to PgBouncer          | Client gets: "no more connections allowed" |
+| `default_pool_size` | 90% of `max_connections` | Maximum active connections per user per database | Client waits in the queue                  |
+| `max_connections`   | Varies by compute        | Direct connections to Postgres                   | Client gets: "too many connections"        |
+
+The 10,000 client connection limit is not 10,000 concurrent queries. For a 1 CU compute (`max_connections` = 450), you can have up to 10,000 client connections to PgBouncer, about 405 concurrent active transactions per user per database (`default_pool_size`, 90% of 450), and 450 concurrent connections to Postgres. The 10,000 limit is useful for applications with many idle or short-lived connections, such as serverless functions that open and close connections frequently.
+
+### What happens when you hit a limit
+
+- **Per-user, per-database pool full**: on a 1 CU compute (`default_pool_size` = 405), if `user1` holds 405 active connections to `database1` with long-running queries, connection 406 waits in the queue and fails with `query_wait_timeout` after 2 minutes. Keep transactions short, move to a larger compute to raise the pool size, or use additional database users to get more pools.
+- **Client connection limit reached**: the 10,001st client connection to PgBouncer fails with `no more connections allowed (max_client_conn)`. Fix connection leaks, add client-side pooling, or reduce the number of application instances.
+- **`max_connections` reached on a direct connection**: on a 0.25 CU compute (112 `max_connections`), connection 106 on a non-pooled string fails with `FATAL: remaining connection slots are reserved`. Switch to the pooled connection string (add `-pooler` to the hostname), increase the compute size, or add connection pooling in your application.
+
+## Reference
+
+### Neon PgBouncer configuration settings
 
 Neon's PgBouncer settings are not user-configurable:
 
@@ -278,7 +282,7 @@ query_wait_timeout=120
 - `max_prepared_statements=1000`: the maximum number of protocol-level prepared statements per connection.
 - `query_wait_timeout=120`: the maximum time, in seconds, a query waits for a connection from the pool.
 
-## Pool lifecycle and compute restarts
+### Pool lifecycle and compute restarts
 
 Connection pools reduce dropped connections during compute restarts (maintenance, updates, or scaling):
 
@@ -289,7 +293,7 @@ Connection pools reduce dropped connections during compute restarts (maintenance
 
 For complete guidance, see [Building resilient applications with Postgres](/guides/building-resilient-applications-with-postgres).
 
-## Monitoring connection pool activity
+### Monitoring connection pool activity
 
 The [Monitoring page](/docs/introduction/monitoring-page) in the Neon Console provides two dedicated graphs for tracking PgBouncer connection pool activity:
 
