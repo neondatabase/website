@@ -13,8 +13,8 @@ categories:
 authors:
   - carlota-soto
 cover:
-  image: null
-  alt: null
+  image: https://cdn.neonapi.io/public/images/pages/blog/how-fast-does-your-postgres-get-security-patches/cover.jpg
+  alt: How fast does your Postgres get security patches?
 isFeatured: false
 seo:
   title: 'How fast does your Postgres get security patches? - Neon'
@@ -23,7 +23,7 @@ seo:
   noindex: false
   ogTitle: 'How fast does your Postgres get security patches? - Neon'
   ogDescription: "Neon computes don't store your data, so Postgres minor upgrades apply automatically on the next restart"
-  image: null
+  image: https://cdn.neonapi.io/public/images/pages/blog/how-fast-does-your-postgres-get-security-patches/social.jpg
 ---
 
 Last November 12, the Postgres community released [18.7, 17.12, 16.16, 15.20, and 14.25](https://neon.com/docs/postgresql/postgres-version-support#recent-minor-version-rollouts), with fixes for 52 CVEs. The first Neon and [Lakebase](https://www.databricks.com/product/lakebase) customers were running the new minor versions within 30 minutes of the announcement. The rollout reached every region by the end of the day.
