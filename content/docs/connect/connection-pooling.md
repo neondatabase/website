@@ -17,7 +17,7 @@ redirectFrom:
   - /docs/guides/connection-pooling
   - /docs/introduction/connection-pooling
   - /docs/manage/connection-pooling
-updatedOn: '2026-11-24T19:24:42.990Z'
+updatedOn: '2026-11-24T19:32:36.240Z'
 ---
 
 For most apps, use a pooled connection. It reuses database connections to help you avoid connection limits. Direct connections are typically used for schema migrations, backups, and other work that needs a single continuous session.
@@ -72,7 +72,7 @@ Use a direct connection for any tool that holds one connection open and expects 
 If you run on a platform that scales instances up and down quickly (for example AWS Fargate, Google Cloud Run, or Vercel), see [Serverless connection pooling](/docs/guides/serverless-connection-pooling) for strategies that prevent connection leaks and exhaustion when instances scale out or suspend.
 
 <Admonition type="tip">
-Hitting connection errors or slow connections? See [Connection errors](/docs/connect/connection-errors) and [Connection latency and timeouts](/docs/connect/connection-latency).
+For connection errors or slow connections, see [Connection errors](/docs/connect/connection-errors) and [Connection latency and timeouts](/docs/connect/connection-latency).
 </Admonition>
 
 ## How to use connection pooling
