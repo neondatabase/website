@@ -1,4 +1,4 @@
-text: 'Postgres 19 is available on Neon. Try it on the Free Plan'
+text: 'Neon Object Storage: your files now branch with your database'
 link:
-  url: 'https://neon.com/blog/postgres-19-is-out-try-it-on-neon'
+  url: 'https://neon.com/blog/add-files-to-your-branches'
   target: '_blank'
