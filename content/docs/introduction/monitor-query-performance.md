@@ -10,7 +10,7 @@ summary: >-
   system-managed database. Query history resets whenever the Neon compute
   suspends or restarts, including after scaling to zero due to inactivity.
 enableTableOfContents: true
-updatedOn: '2026-07-22T19:54:54.241Z'
+updatedOn: '2026-11-13T15:47:21.000Z'
 redirectFrom:
   - /docs/introduction/monitor-query-history
 ---

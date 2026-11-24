@@ -9,7 +9,7 @@ summary: >-
   them via the Neon Console or Neon API. The Organization plugin has partial
   support.
 enableTableOfContents: true
-updatedOn: '2026-10-30T16:43:50.867Z'
+updatedOn: '2026-11-02T22:45:25.000Z'
 ---
 
 Managed Better Auth is built on [Better Auth](https://www.better-auth.com/), which supports a variety of plugins to extend authentication functionality.

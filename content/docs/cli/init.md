@@ -9,7 +9,7 @@ summary: >-
   runs interactively by default; pass -y for the recommended setup with no prompts,
   or add flags such as --skill, MCP options, or --claimable for the custom setup.
 enableTableOfContents: true
-updatedOn: '2026-11-09T17:20:06.156Z'
+updatedOn: '2026-11-20T01:40:38.895Z'
 redirectFrom:
   - /docs/reference/cli-init
 ---
@@ -36,7 +36,7 @@ Before 6.0, `init` could scaffold a starter template in an empty directory, and 
 
 `init` has two setup modes:
 
-- **Recommended setup** installs tooling for your detected coding agents, links a Neon project when the CLI is authenticated (or the session is interactive), and writes a default `neon.ts`. Run it with no prompts using `-y`. When no agents are detected, it writes the default skills in the current directory.
+- **Recommended setup** installs tooling for your detected coding agents, links a Neon project when the CLI is authenticated (or the session is interactive), and writes `neon.ts`. Run it with no prompts using `-y`. When no agents are detected, it writes the default skills in the current directory.
 - **Custom setup** applies the specific answers you pass as flags and falls back to the recommended defaults for anything you don't. Passing `--skill`, an MCP flag (`--mcp-auth`, `--mcp-config-location`, or `--mcp-project-scoped`), `--no-agent-setup`, or `--claimable` selects it.
 
 `-y` alone runs the recommended setup without prompts and never opens a browser. `-y` with any of those flags runs the custom setup with your answers, still without prompts.
@@ -68,7 +68,9 @@ After agent setup, `init` runs [`neon link`](/docs/cli/link) (unless the directo
 
 It can also write a [`neon.ts` config](/docs/cli/config) you can edit and apply with [`neon deploy`](/docs/cli/deploy). In a terminal, `init` asks whether to create it. Pass `--config` to create it without asking, `--no-config` to skip it, or `--services` to create it with specific services declared (which implies `--config`). Pass `--package-manager` (`npm`, `pnpm`, `yarn`, or `bun`) to choose which package manager installs the `neon.ts` dependencies.
 
-When `init` creates a new `neon.ts`, it pulls environment variables once, after the file is written. If `neon.ts` declares only services that need no deploy (the AI Gateway or Functions), the pull includes all of them. If it declares Managed Better Auth, the Data API, Object Storage, or Realtime, `init` pulls Postgres (plus the AI Gateway and the scaffolded function's URL when declared), and [`neon deploy`](/docs/cli/deploy) provisions the rest and pulls their variables. With `--claimable`, `init` skips the pull when `neon.ts` declares services beyond Postgres.
+When `init` links an existing project in this run, it writes `neon.ts` from the branch's current services, the same way [`neon config init --from-branch`](/docs/cli/config#init) does, adds `@neon/config` and `@neon/env` (they read that file), and runs the install. A Custom setup skips the service picker in this case. In Recommended setup, a new project, an already-linked directory, or a project linked offline without credentials gets the starter policy: Postgres, with a 7-day expiration for new branches; in a terminal, Custom setup asks which services to declare. `--services` declares the services you name instead, for either kind of project. Pass `--no-config` if you only want connection strings in `.env` without `neon.ts`.
+
+When `init` creates a new `neon.ts`, it pulls environment variables once, after the file is written. If the file was written from the branch, every service it declares already runs there, so the pull includes all of them. If `neon.ts` declares only services that need no deploy (the AI Gateway or Functions), the pull includes all of them. If it declares Managed Better Auth, the Data API, Object Storage, or Realtime, `init` pulls Postgres (plus the AI Gateway and the scaffolded function's URL when declared), and [`neon deploy`](/docs/cli/deploy) provisions the rest and pulls their variables. With `--claimable`, `init` skips the pull when `neon.ts` declares services beyond Postgres.
 
 When `init` writes a new `neon.ts` for a linked project, it lists next steps under `Next`. Preview the changes with [`neon config plan`](/docs/cli/config#plan), then apply them with [`neon deploy`](/docs/cli/deploy). It also suggests [`neon checkout dev --create`](/docs/cli/checkout) to work on a development branch once you've deployed. These steps appear even for the default Postgres-only `neon.ts`. For a claimable project, `init` lists `neon claim accept` instead, followed by the plan and deploy steps when `neon.ts` declares services beyond Postgres. If you skip `neon.ts` (for example, with `--no-config`) and the directory doesn't have one, `init` suggests [`neon config init`](/docs/cli/config#init) to create it later.
 

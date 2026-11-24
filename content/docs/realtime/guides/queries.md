@@ -122,7 +122,7 @@ export const db = drizzle(pool, { schema })
 pool.on("error", (error: Error) => console.error(error))
 ```
 
-Great, that's the main setup to follow along with the guides. Or for the full boilerplate, see the [example source code](https://github.com/neondatabase/examples/tree/main/realtime/guides-chat-app) on GitHub.
+That's the setup you need to follow along with the guides. For the full boilerplate, see the [example source code](https://github.com/neondatabase/examples/tree/main/realtime/guides-chat-app) on GitHub.
 
 </details>
 
@@ -145,7 +145,7 @@ Tables need a [stable replica identity](https://www.postgresql.org/docs/current/
 
 Tables can't have [row-level security](/docs/guides/row-level-security) enabled. A live query on a table with RLS is rejected: the subscription moves to `error` with the code `upstream_rejected`. With [debug mode](./subscribing#show-full-database-errors) on, the message says the table has row-level security enabled. Filter rows in the query instead, as shown in [Authorization](#authorization).
 
-<Callout title="Optional: REPLICA IDENTITY FULL">
+<Callout title="REPLICA IDENTITY FULL (optional)">
 Setting `REPLICA IDENTITY FULL` can make live queries marginally faster, at the cost of writing the whole old row to the Postgres WAL on every update and delete. That may save Realtime a lookup when it processes those changes. If latency matters for a write-heavy table, benchmark both settings with your own workload before you switch.
 
 ```sql
@@ -340,7 +340,7 @@ The flow is as follows:
 1. construct the query, passing in any relevant parameters from the auth context (e.g.: filtering or joining on the authenticated `userId`)
 1. seal the query so these can't be changed
 
-This allows you to authorize live query subscriptions using existing web auth logic, middleware and frameworks, such as [Neon&nbsp;Auth](/docs/auth/overview).
+This allows you to authorize live query subscriptions using existing web auth logic, middleware and frameworks, such as [Managed Better Auth](/docs/auth/overview).
 
 ### Live authorization
 

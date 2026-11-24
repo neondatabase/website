@@ -59,7 +59,7 @@ Your `Database` interface stays plain Kysely. Use the column names as its keys:
 import type { Generated, Selectable } from "kysely"
 
 // Kysely's types for the table. src/setup.ts creates it.
-// Keys equal the column names: Realtime builds live rows from PostgreSQL's result names, so the
+// Keys equal the column names: Realtime builds live rows from Postgres's result names, so the
 // live rows and the rows the server reads share the same keys.
 export interface TodosTable {
   id: Generated<number> // SERIAL PRIMARY KEY
@@ -170,7 +170,7 @@ Where Postgres can't infer a parameter's type from the SQL, wrap the value in a 
 
 ## Subscribing to queries
 
-Subscribe in the browser as the [subscribing guide](../guides/subscribing) shows. The client needs no Kysely-specific parsers: its defaults decode like node-postgres, which `PostgresDialect` uses, so each live row is the same `{ id, title, completed }` — a number, a string and a boolean — that Kysely reads on the server.
+Subscribe in the browser as the [subscribing guide](../guides/subscribing) shows. The client needs no Kysely-specific parsers: its defaults decode like node-postgres, which `PostgresDialect` uses, so each live row is the same `{ id, title, completed }` (a number, a string and a boolean) that Kysely reads on the server.
 
 [`seal()`](../sdks/typescript/backend#backend-realtimeserverseal) infers the row type from the select: `realtime.seal({ query: selectTodos() })` resolves to a [`SealedLiveQuery<Todo>`](../sdks/typescript/backend#backend-sealedlivequery).
 
@@ -184,10 +184,11 @@ The client holds each optimistic change until the write's transaction ID comes b
 
 ### Return the txid from Kysely writes
 
-Return the [transaction ID](../guides/mutations#returning-the-txid-from-your-backend) from the write's own statement, with `.returning()`. Every mutation in the example — insert, toggle and delete — returns it. The example is a plain Node HTTP server; here is its toggle handler:
+Return the [transaction ID](../guides/mutations#returning-the-txid-from-your-backend) from the write's own statement, with `.returning()`. Every mutation in the example (insert, toggle and delete) returns it. The example is a plain Node HTTP server; here is its toggle handler:
 
-```ts filename="src/server.ts" {5,12}
+```ts filename="src/server.ts" {6,13}
 import { sql } from "kysely"
+import type { MutationResponse } from "./api-types.js" // { readonly txid: string }
 
 // Same statement on every mutation: the client waits for this txid over Realtime before dropping
 // its optimistic state, so the write must keep returning it.
@@ -207,7 +208,7 @@ return result
 
 - `pg_current_xact_id()` runs in the write's statement, so it returns the ID of the transaction that made the change, with any driver. The `text` cast keeps the 64-bit ID exact, as the decimal string the client waits for
 - `executeTakeFirst()` returns `undefined` when no row matched. Nothing comes over Realtime, so the handler responds `404` and the client has nothing to wait for
-- the insert returns the new `id` too, with `.returning(["id", txid])`, so the client can swap its optimistic row for the real one. This demo doesn't authenticate its routes — add authorization before adapting it for production
+- the insert returns the new `id` too, with `.returning(["id", txid])`, so the client can swap its optimistic row for the real one. This demo doesn't authenticate its routes. Add authorization before adapting it for production
 - for writes that span several statements, run them all on `trx` in `db.transaction().execute(async (trx) => ...)`, and read the txid there with `trx.selectNoFrom(txid).executeTakeFirstOrThrow()`
 - call it from a route or server function, and see how the frontend [calls these writes](../guides/mutations#calling-the-routes-from-the-frontend)
 

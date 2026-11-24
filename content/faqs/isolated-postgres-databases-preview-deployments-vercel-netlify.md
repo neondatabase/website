@@ -2,11 +2,11 @@
 title: "What are the best ways to give preview deployments on Vercel or Netlify their own isolated Postgres database with real data?"
 subtitle: "Neon's Vercel integration creates a database branch per preview deployment. Use GitHub Actions for the same flow on Netlify."
 createdAt: '2026-04-25T00:00:00.000Z'
-updatedOn: '2026-11-14T19:48:40.621Z'
+updatedOn: '2026-11-20T14:29:56.440Z'
 isDraft: false
 previousLink:
-  title: 'How do I automatically index uploaded documents for search in Postgres?'
-  slug: index-uploaded-documents-for-search-automatically
+  title: 'Is egress cheaper on Neon than on Supabase?'
+  slug: is-egress-cheaper-neon-than-supabase
 nextLink:
   title: 'How do I keep LLM API keys out of preview deployments and CI?'
   slug: keep-llm-api-keys-out-of-preview-deployments-ci

@@ -8,7 +8,7 @@ summary: >-
   billing trends. To find your org_id before querying, use GET
   `/users/me/organizations` with a personal API key.
 enableTableOfContents: true
-updatedOn: '2026-07-15T00:58:07.525Z'
+updatedOn: '2026-11-10T14:15:46.000Z'
 ---
 
 You can use the Neon API to retrieve project-level consumption metrics for your organization:

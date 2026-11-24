@@ -79,7 +79,7 @@ The three functions below mirror the Terraform mental model (`inspect` reads sta
 ### `inspect`
 
 ```ts
-function inspect(options: ConfigOperationOptions): Promise<PulledBranchConfig>;
+function inspect(options: ConfigOperationOptions & { realtime?: boolean }): Promise<PulledBranchConfig>;
 ```
 
 Reads a branch's live Neon state and reverse-engineers it into a `neon.ts`-shaped `Config`, plus raw project/branch metadata. Read-only, and never mutates anything.
@@ -91,6 +91,8 @@ Reads a branch's live Neon state and reverse-engineers it into a `neon.ts`-shape
 | `apiKey`                       | `string?`  | Required unless you pass `api`.                                           |
 | `apiHost`                      | `string?`  | Optional non-production API host. Defaults to Neon's production API.      |
 | `api`                          | `NeonApi?` | Inject a custom adapter (mainly for tests).                               |
+
+`inspect` also accepts `realtime` (`boolean`, optional). It defaults to `true`, which reads the branch's Realtime state. Pass `false` to skip it.
 
 Returns a `PulledBranchConfig`:
 

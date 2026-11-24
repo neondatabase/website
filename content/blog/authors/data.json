@@ -894,5 +894,19 @@
     "url": null,
     "photo": "https://cdn.neonapi.io/public/images/pages/blog/authors/zachary-proser.jpg",
     "photoAlt": "Zachary Proser"
+  },
+  "dmitry-kisler": {
+    "name": "Dmitry Kisler",
+    "role": "Software Engineer and Architect",
+    "url": "https://www.dkisler.com",
+    "photo": "https://cdn.neonapi.io/public/images/pages/blog/authors/dmitry-kisler.jpg",
+    "photoAlt": "Dmitry Kisler"
+  },
+  "justin-frye": {
+    "name": "Justin Frye",
+    "role": "Platform Engineer",
+    "url": "https://randoneering.tech",
+    "photo": "https://cdn.neonapi.io/public/images/pages/blog/authors/justin-frye.jpg",
+    "photoAlt": "Justin Frye"
   }
 }

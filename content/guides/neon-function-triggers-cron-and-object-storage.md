@@ -4,7 +4,7 @@ subtitle: 'Run scheduled jobs and react to object uploads with Neon Function Tri
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2026-09-19T00:00:00.000Z'
-updatedOn: '2026-10-09T15:17:33.920Z'
+updatedOn: '2026-11-06T20:35:55.000Z'
 ---
 
 If you're building a backend, you eventually need work that runs outside the request-response cycle. Some of it runs on the clock: nightly reports, cleanup jobs, periodic syncs. Some of it runs on events: a file lands in storage, and something needs to process it before anyone notices it's there.

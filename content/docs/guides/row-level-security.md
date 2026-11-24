@@ -10,7 +10,7 @@ summary: >-
 enableTableOfContents: true
 redirectFrom:
   - /docs/guides/neon-rls
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-11-09T20:09:39.000Z'
 ---
 
 <InfoBlock>

@@ -12,7 +12,7 @@ redirectFrom:
   - /docs/introduction/realtime
   - /docs/guides/realtime
   - /docs/guides/neon-realtime
-updatedOn: '2026-11-18T00:59:49.148Z'
+updatedOn: '2026-11-20T15:53:09.183Z'
 ---
 
 <div className="mb-6">
@@ -39,7 +39,8 @@ neon realtime enable
 
 <Admonition type="important" title="Before you enable Realtime">
 - Your project must be in a [supported region](#which-regions-is-it-enabled-in).
-- Enabling Realtime turns on [logical replication](/docs/guides/logical-replication-neon) for the whole project. This permanently changes `wal_level` to `logical` and suspends every compute in the project, on all branches, which drops active connections. Each compute starts again on its next connection. Disabling Realtime later doesn't turn logical replication off.
+- Your project must run Postgres 18. Realtime isn't available on other Postgres versions yet, including Postgres 19.
+- Enabling Realtime turns on [logical replication](/docs/guides/logical-replication-neon) for the whole project. This permanently changes `wal_level` to `logical` and restarts all computes in the project, on all branches, so active connections drop and reconnect. Disabling Realtime later doesn't turn logical replication off.
 </Admonition>
 
 To add Realtime to an app by hand, follow the [Quickstart](/docs/realtime/quickstart). To see how the pieces fit together, read [how it works](/docs/realtime/how-it-works).
@@ -120,7 +121,7 @@ subscription.onChange(console.log)
 
 ---
 
-Or, in your app, use the [higher-level reactivity primitives](/docs/realtime/guides/reactivity) to bind live queries to your component&nbsp;state:
+Or, in your app, use the [higher-level reactivity primitives](/docs/realtime/guides/reactivity) to bind live queries to your component&nbsp;state. Components that call `useLiveQuery` need a [`RealtimeProvider`](/docs/realtime/guides/reactivity#realtimeprovider) above them:
 
 ```tsx filename="App.tsx"
 import { useLiveQuery } from "@neon/realtime-react"
@@ -330,6 +331,8 @@ No. Realtime isn't supported on projects with [IP Allow](/docs/introduction/ip-a
 
 Not yet. Realtime has been architected to support RLS and we aim to add it by GA if priorities allow. However, it's not yet been implemented and isn't the [recommended approach to auth](/docs/realtime/guides/queries#authorization).
 
+A live query on a table with RLS enabled is rejected with the error code `upstream_rejected`. See [table requirements](/docs/realtime/guides/queries#table-requirements).
+
 See [Why not row-level security](/docs/realtime/guides/queries#why-not-row-level-security) for more details.
 
 </FaqItem>
@@ -414,6 +417,6 @@ Live SQL queries replace shapes. For TanStack DB users, [`realtimeCollectionOpti
 
 ## Next steps
 
-[Get started](/docs/realtime/quickstart) with Realtime and learn more about [how it works](/docs/realtime/how-it-works).
+[Get started](/docs/realtime/quickstart) with Realtime, learn more about [how it works](/docs/realtime/how-it-works), and browse the [examples](/docs/realtime/examples/overview).
 
 <NeedHelp/>

@@ -8,6 +8,7 @@ summary: >-
   login or linked project, so you can run it when something looks wrong to
   check whether Neon is having an issue. Pass `-o json` for the full report.
 enableTableOfContents: true
+updatedOn: '2026-11-18T21:16:31.125Z'
 ---
 
 The `incidents` command shows what the [Neon status page](/docs/introduction/status) reports right now: the overall status, open incidents, components that aren't operational, and active or upcoming maintenance posted on the status page. Run it when a connection fails or a command errors and you want to know whether the problem is on Neon's side.
@@ -37,6 +38,8 @@ Status Page URL  https://neonstatus.com
 
 No open incidents or maintenance.
 ```
+
+The command fetches the status page on every run. `Updated At` (`updated_at` in JSON) is when the status page last updated the overall status, not when the command fetched it.
 
 The overall `Status` is one of `operational`, `maintenance`, `degraded_performance`, `partial_disruption`, `disruption`, or `security_event`. When something is open, up to three tables follow:
 

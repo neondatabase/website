@@ -12,7 +12,7 @@ summary: >-
 enableTableOfContents: true
 redirectFrom:
   - /docs/introduction/branch-archiving
-updatedOn: '2026-10-09T15:17:33.920Z'
+updatedOn: '2026-11-10T19:59:44.000Z'
 ---
 
 <InfoBlock>

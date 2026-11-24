@@ -19,11 +19,11 @@ The steps work in an existing Next.js App Router app as well as a new one. Add e
 
 ## Setup
 
-Install the Realtime SDK with its Drizzle adapter and React bindings, Drizzle ORM and `drizzle-kit` for migrations. Without Drizzle, install only `@neon/realtime` and `@neon/realtime-react`, as [use raw SQL instead of Drizzle](#use-raw-sql-instead-of-drizzle) shows:
+Install the Realtime SDK with its Drizzle adapter and React bindings, the Managed Better Auth SDK, Drizzle ORM, Zod, and `drizzle-kit` for migrations. Without Drizzle, install only `@neon/realtime` and `@neon/realtime-react`, as [use raw SQL instead of Drizzle](#use-raw-sql-instead-of-drizzle) shows:
 
 ```bash filename="Terminal"
-npm install @neon/realtime @neon/realtime-drizzle @neon/realtime-react drizzle-orm
-npm install -D drizzle-kit dotenv
+npm install @neon/realtime @neon/realtime-drizzle @neon/realtime-react @neon/auth drizzle-orm zod
+npm install -D @neon/config drizzle-kit dotenv
 ```
 
 Link your app's directory to a Neon project in a [supported region](../overview#which-regions-is-it-enabled-in), then declare Managed Better Auth and Realtime in your `neon.ts`. Skip `neon config add auth` if your app has its own sign-in or none:
@@ -79,7 +79,7 @@ Define your database schema. In this example, we're using Drizzle and defining a
 import { boolean, index, pgTable, text, timestamp, uuid } from "drizzle-orm/pg-core"
 
 // The single schema source: the app and `drizzle-kit push` both read it. Columns are declared snake_case
-// on purpose. Realtime builds live rows from PostgreSQL's result names, so a camelCase JS property that
+// on purpose. Realtime builds live rows from Postgres's result names, so a camelCase JS property that
 // mapped to a different column would give live rows different keys from server rows.
 export const todos = pgTable(
   "realtime_next_todos",

@@ -13,6 +13,7 @@ agentPrompt: I use GitHub Copilot in VS Code.
 redirectFrom:
   - /docs/ai/ai-github-copilot-agents
   - /guides/neon-mcp-server-github-copilot-vs-code
+updatedOn: '2026-11-05T23:08:56.000Z'
 ---
 
 GitHub Copilot in VS Code gets Neon through the Neon plugin, which bundles Neon's agent skills and the Neon MCP Server. To use MCP servers in VS Code, you need the [GitHub Copilot](https://marketplace.visualstudio.com/items?itemName=GitHub.copilot) and [GitHub Copilot Chat](https://marketplace.visualstudio.com/items?itemName=GitHub.copilot-chat) extensions.

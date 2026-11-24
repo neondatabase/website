@@ -39,6 +39,10 @@ If your database isn't on Neon yet, [migrate it to Neon](/docs/import/migrate-in
 neon realtime enable
 ```
 
+<Admonition type="important" title="Enabling Realtime restarts your computes">
+Enabling Realtime restarts all computes in the project, on all branches, so active connections drop and reconnect, including Electric's replication connection. Enable it in a quiet window. See [Before you enable Realtime](../overview#get-started).
+</Admonition>
+
 <Admonition type="tip" title="Migrate one view at a time">
 Electric and Realtime can run against the same database, so you can move views across one at a time and [remove Electric](#remove-electric) once nothing reads from it. Keep Electric on a direct (unpooled) connection string: `neon link` and `neon env pull` set `DATABASE_URL` to the pooled one.
 </Admonition>

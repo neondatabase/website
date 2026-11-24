@@ -1,554 +1,338 @@
 ---
-title: Connect a Kotlin application to Neon Postgres
-subtitle: Learn how to run SQL queries in Neon from Kotlin using the PostgreSQL JDBC
-  driver
+title: Connect a Kotlin application to Neon
+subtitle: Create a Gradle project, link it with neon link, and query Lakebase Postgres from Kotlin with the PostgreSQL JDBC driver
 summary: >-
-  Connect a Kotlin application to Neon Postgres using the PostgreSQL JDBC driver
-  with Gradle. Covers complete CRUD examples including PreparedStatement
-  inserts, batch operations, and transaction control with autoCommit, commit,
-  and rollback. Also covers dotenv-kotlin for credential management. Focuses on
-  raw JDBC without an ORM, unlike Micronaut or Hibernate guides.
+  To connect a Kotlin app to Lakebase Postgres on Neon, create a Gradle project,
+  run neon link to write DATABASE_URL to .env.local, and query it with the
+  PostgreSQL JDBC driver. Covers one runnable example (create, insert, select,
+  update, delete, and a transaction), running the app elsewhere, troubleshooting,
+  and the Java and Micronaut Kotlin guides as next steps.
 enableTableOfContents: true
-updatedOn: '2026-10-31T13:11:38.215Z'
+updatedOn: '2026-11-20T21:26:20.094Z'
 ---
 
-<CopyPrompt src="/prompts/kotlin-prompt.md"
-description="Pre-built prompt for connecting Kotlin applications to Neon"/>
-
-This guide describes how to create a Neon project and connect to it from a Kotlin application using **Java Database Connectivity (JDBC)**, the standard API for interacting with relational databases on the JVM.
-
-You will learn how to set up a project, connect to your database, and perform basic create, read, update, and delete (CRUD) operations.
-
-## Prerequisites
-
-- A Neon account. If you do not have one, see [Sign up](https://console.neon.tech/signup).
-- [Java Development Kit (JDK)](https://www.oracle.com/java/technologies/downloads/) 21 or later. The project that `gradle init` creates sets a Java 21 toolchain.
-- [Gradle](https://gradle.org/install/) to manage the project and dependencies.
+<PromptBlock src="/prompts/kotlin-prompt.md" labels={["Set up your agent and follow this guide", "Look up driver docs", "Connect your Kotlin project"]} />
 
 <Steps>
 
-## Create a Neon project
-
-If you do not have one already, create a Neon project.
-
-1.  Navigate to the [Projects](https://console.neon.tech/app/projects) page in the [Neon Console](https://console.neon.tech).
-2.  Click **New Project**.
-3.  Specify your project settings and click **Create Project**.
-
-Your project is created with a ready-to-use database named `neondb`. In the following steps, you will connect to this database from your Kotlin application.
-
 ## Create a Kotlin project
 
-Create a project using the Gradle `init` command. This sets up a standard Kotlin application structure.
+Create a project with [Gradle](https://gradle.org/install/), the standard build tool for Kotlin. The command below uses the Kotlin DSL and runs without prompts. It needs JDK 21: the generated build sets a Java 21 toolchain. If no JDK 21 is installed, Gradle downloads one through the foojay resolver that `--java-version` adds to `settings.gradle.kts`, which needs network access. Skip this step if you already have a Kotlin project, and run the rest of the guide from the module that holds your app's code.
 
-1.  Run the following command in your terminal to generate a new Kotlin application project.
+```bash filename="Terminal"
+mkdir neon-kotlin-app
+cd neon-kotlin-app
+gradle init --type kotlin-application --dsl kotlin --package com.neon.quickstart --no-split-project --java-version 21 --use-defaults
+cd app
+```
 
-    ```bash
-    gradle init \
-        --type kotlin-application \
-        --dsl kotlin \
-        --project-name neon-kotlin-jdbc \
-        --package com.neon.quickstart
-    ```
+This creates `neon-kotlin-app` with the Gradle wrapper (`gradlew`) and one module, `app`, which holds a sample `App.kt` in `app/src/main/kotlin` and a test in `app/src/test`. Gradle creates the `app` module even with `--no-split-project`, so the last command moves you into it. The rest of this guide runs from `app`, and its file paths are relative to `app`. `--use-defaults` answers the remaining questions.
 
-2.  Change into the newly created project directory.
+## Add Neon's agent skills (optional)
 
-    ```bash
-    cd neon-kotlin-jdbc
-    ```
+Add Neon's [agent skills](/docs/ai/agent-skills) to your project with the command below. They teach your AI coding agent how to use the Neon CLI, branches, and Neon's backend services. The agent prompt at the top of this page installs them, so skip this step if you used it. The command runs through npm, so it needs Node.js 22.20 or later, even though the app is Kotlin.
 
-    > Open this directory in your preferred code editor (for example, VS Code, IntelliJ IDEA).
+```bash filename="Terminal"
+npx neon@latest skills
+```
 
-3.  Add the `postgresql` driver and `dotenv-kotlin` libraries. The project uses a Gradle version catalog (`gradle/libs.versions.toml`), so declare the libraries there and reference them from `app/build.gradle.kts`.
+The [Neon MCP Server](/docs/ai/neon-mcp-server) connects your agent to Neon's tools as well; its page covers the setup.
 
-    Add these lines to the existing `[versions]` and `[libraries]` tables in `gradle/libs.versions.toml`. Don't create a second `[versions]` or `[libraries]` table, or Gradle fails with a TOML syntax error:
+## Create a Neon project
 
-    ```toml filename="gradle/libs.versions.toml"
-    # Add to the [versions] table
-    postgresql = "42.7.14"
-    dotenv = "6.5.1"
+Create a Neon project in a region that runs every Neon backend service: `aws-us-east-2` (Ohio), `aws-us-east-1` (N. Virginia), `aws-eu-central-1` (Frankfurt), or `aws-ap-southeast-1` (Singapore). Postgres and [Managed Better Auth](/docs/auth/overview) run in every region; Object Storage, Neon Functions, the AI Gateway, and Realtime run in those four (see [product availability](/docs/introduction/regions#product-availability)). Skip this step if you already have a Neon project you want to use.
 
-    # Add to the [libraries] table
-    postgresql = { module = "org.postgresql:postgresql", version.ref = "postgresql" }
-    dotenv = { module = "io.github.cdimascio:dotenv-kotlin", version.ref = "dotenv" }
-    ```
+<Tabs labels={["Neon CLI", "API", "Console"]}>
 
-    Then add these two lines to the `dependencies` block in `app/build.gradle.kts`:
+<TabItem>
 
-    ```kotlin filename="app/build.gradle.kts"
-    implementation(libs.postgresql)
-    implementation(libs.dotenv)
-    ```
+Install the [Neon CLI](/docs/cli/install), sign in, and create the project. The npm install needs Node.js 20.19 or later; without Node.js, run `brew install neonctl` (Homebrew) or use another option on the install page:
 
-    Save both files.
+```bash filename="Terminal"
+npm i -g neon@latest
+neon login
+neon projects create --name my-app --region-id aws-us-east-2 --no-secrets
+```
 
-4.  Compile the project to download the dependencies.
+`--region-id` sets the region. `--no-secrets` keeps the connection string out of the output, since the next step pulls it into your env file. Pass `--org-id` to choose the organization (find IDs with `neon orgs list`).
 
-    ```bash
-    ./gradlew build
-    ```
+</TabItem>
 
-    On Windows, use `gradlew.bat build`.
+<TabItem>
 
-    This command compiles your Kotlin code and downloads the required dependencies.
+Create an [API key](https://console.neon.tech/app/settings/api-keys), export it, then create the project in your organization:
 
-## Store your Neon connection string
+```bash filename="Terminal"
+export NEON_API_KEY=napi_...
 
-Create a file named `.env` in the `app` directory. This file will securely store your database connection string. Place it next to the application module so `dotenv-kotlin` can load it when you run the app with Gradle.
+curl -X POST https://console.neon.tech/api/v2/projects \
+  -H "Authorization: Bearer $NEON_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{"project": {"name": "my-app", "region_id": "aws-us-east-2", "org_id": "<org-id>"}}'
+```
 
-1.  In the [Neon Console](https://console.neon.tech), open your project.
-2.  Click **Connect** in the Console nav to open the **Connect to your branch** modal.
-3.  Select **Java** as your programming language. Kotlin uses the same JDBC connection string format.
-    ![Connection modal](/docs/connect/java_connection_details.png)
-4.  Copy the connection string, which includes your password.
-5.  Create a file named `.env` in the `app` directory and add the connection string to it as shown below:
+The response includes the project's connection string in `connection_uris[0].connection_uri`. See [Create a project with the API](/docs/manage/projects#create-a-project-with-the-api) for the other options.
 
-    ```text filename="app/.env"
-    DATABASE_URL="jdbc:postgresql://[neon_hostname]/[dbname]?user=[user]&password=[password]&sslmode=require&channelBinding=require"
-    ```
+</TabItem>
 
-    > Replace `[user]`, `[password]`, `[neon_hostname]`, and `[dbname]` with your actual database credentials.
+<TabItem>
 
-## Examples
+Go to the [Projects](https://console.neon.tech/app/projects) page in the Neon Console, click **New Project**, and pick one of the regions above.
 
-This section provides code examples for performing CRUD operations. Place the example files inside `app/src/main/kotlin/com/neon/quickstart/`.
+</TabItem>
 
-You can also clone the complete example project from GitHub: [neon-kotlin-jdbc](https://github.com/aaravmahajanofficial/neon-kotlin-jdbc).
+</Tabs>
 
-Each example is a package-level function. Replace the contents of `App.kt` with the following code, then uncomment the example you want to run:
+## Connect your app to the project
 
-The template also generates a test in `app/src/test/` for the original `App` class. Delete the `app/src/test` directory so `./gradlew build` still passes after you replace `App.kt`.
+The first tab runs `neon link --no-config` in your project directory, which writes `DATABASE_URL` into `.env.local` (or `.env` if one exists); the second tab copies the connection string into that file by hand. Add the env files to `.gitignore` first, so the connection string stays out of git:
 
-```kotlin filename="app/src/main/kotlin/com/neon/quickstart/App.kt"
+```bash filename="Terminal"
+printf '\n.env\n.env.local\n' >> .gitignore
+```
+
+<Tabs labels={["Neon CLI", "Without the CLI"]}>
+
+<TabItem>
+
+From your project's directory, link it to the Neon project. Install the [Neon CLI](/docs/cli/install) and run `neon login` first if you haven't.
+
+`neon link` prompts you to pick an organization and a project, or to create a new project. Then it:
+
+- writes a `.neon` file with the project context;
+- pins a branch (pass `--branch` to choose one);
+- pulls that branch's Neon variables, including `DATABASE_URL`, into `.env.local`, or into `.env` if your project already has one.
+
+`--no-config` skips the offer to create a [`neon.ts`](/docs/reference/neon-ts) file, which is for Node.js projects.
+
+To skip the prompts, pass `-y` with `--org-id` and `--project-id`, or with `--org-id`, `--project-name`, and `--region-id` to create a project. Find IDs with `neon orgs list` and `neon projects list --org-id <org-id>`.
+
+</TabItem>
+
+<TabItem>
+
+Copy the connection string from **Connect** in the Console nav, or from the API response, and add it to a `.env.local` file in your project directory. For more information, see [Connect from any application](/docs/connect/connect-from-any-app).
+
+```shell filename=".env.local" shouldWrap
+DATABASE_URL="postgresql://[user]:[password]@[neon_hostname]/[dbname]?sslmode=require&channel_binding=require"
+```
+
+The development branch step below needs the Neon CLI, so skip it in this tab.
+
+</TabItem>
+
+</Tabs>
+
+## Work on a development branch (optional)
+
+Run `neon checkout dev --create` to develop on a branch of your database instead of the default branch, where production data usually lives. The default branch is `main` for projects created with the CLI or API, and `production` for projects created in the Console. A [branch](/docs/introduction/branching) starts from its parent's data and schema without copying them (copy-on-write: only the changes you make are stored), so you can change it freely:
+
+```bash filename="Terminal"
+neon checkout dev --create
+```
+
+This creates the `dev` branch, pins it in `.neon`, and pulls its `DATABASE_URL` into the same env file, so your app now uses the branch. To switch back, run `neon checkout main` (or `production`).
+
+## Install the PostgreSQL JDBC driver
+
+Add the [PostgreSQL JDBC driver](https://jdbc.postgresql.org/documentation/) for Postgres (JDBC, Java Database Connectivity, is Java's standard database API), and [dotenv-kotlin](https://github.com/cdimascio/dotenv-kotlin), which loads the env file in development, to the `dependencies` block of `build.gradle.kts`:
+
+```kotlin filename="build.gradle.kts"
+implementation("org.postgresql:postgresql:42.7.14")
+implementation("io.github.cdimascio:dotenv-kotlin:6.5.1")
+```
+
+Gradle downloads them on the next build. The [Java guide](/docs/guides/java) covers JDBC in more depth.
+
+## Connect and run a query
+
+Create `Database.kt` with a `connect()` function, which every example calls. It reads `DATABASE_URL` and converts it to the JDBC form. The PostgreSQL JDBC driver doesn't read `user:password@` from the URL, so the function passes the user and password separately. The driver also names the parameter `channelBinding`, not `channel_binding`, so the function renames it. Without the rename, pgJDBC ignores `channel_binding` and falls back to `prefer`, without an error.
+
+```kotlin filename="src/main/kotlin/com/neon/quickstart/Database.kt"
+package com.neon.quickstart
+
+import io.github.cdimascio.dotenv.dotenv
+import java.net.URI
+import java.sql.Connection
+import java.sql.DriverManager
+
+fun connect(): Connection {
+    val dotenv = dotenv {
+        filename = ".env.local"
+        ignoreIfMissing = true
+    }
+    val databaseUrl = dotenv["DATABASE_URL"] ?: error("DATABASE_URL is not set")
+
+    val uri = URI(databaseUrl)
+    val (user, password) = uri.userInfo.split(":", limit = 2)
+    val query = uri.rawQuery.orEmpty().replace("channel_binding=", "channelBinding=")
+    return DriverManager.getConnection(
+        "jdbc:postgresql://${uri.rawAuthority.substringAfter('@')}${uri.rawPath}?$query",
+        user,
+        password
+    )
+}
+```
+
+Replace the sample `App.kt` in `src/main/kotlin/com/neon/quickstart/` with a script that prints the Postgres version:
+
+```kotlin filename="src/main/kotlin/com/neon/quickstart/App.kt"
 package com.neon.quickstart
 
 fun main() {
-    // Uncomment the example you want to run.
-
-    createTable()
-    // readData()
-    // updateData()
-    // deleteData()
-    // transactionExample()
-}
-```
-
-Then run the selected example with:
-
-```bash
-./gradlew run
-```
-
-On Windows, use `gradlew.bat run`.
-
-### Create a table and insert data
-
-Create a file named `CreateTable.kt`. This function connects to your database, creates a table, and inserts data.
-
-```kotlin filename="app/src/main/kotlin/com/neon/quickstart/CreateTable.kt"
-package com.neon.quickstart
-
-import io.github.cdimascio.dotenv.dotenv
-import java.sql.DriverManager
-
-fun createTable() {
-    val dotEnv = dotenv()
-    val connString = dotEnv["DATABASE_URL"]
-
-    try {
-        DriverManager.getConnection(connString).use { conn ->
-            println("Connection established")
-
-            conn.createStatement().use { stmt ->
-                // Drop the table if it already exists
-                stmt.execute("DROP TABLE IF EXISTS books;")
-                println("Finished dropping table (if it existed).")
-
-                // Create a new table
-                stmt.execute(
-                    """
-                    CREATE TABLE books (
-                        id SERIAL PRIMARY KEY,
-                        title VARCHAR(255) NOT NULL,
-                        author VARCHAR(255),
-                        publication_year INT,
-                        in_stock BOOLEAN DEFAULT TRUE
-                    );
-                    """.trimIndent()
-                )
-                println("Finished creating table.")
-
-                // Insert a single book record
-                val insertOneSql = """
-                    INSERT INTO books (title, author, publication_year, in_stock)
-                    VALUES (?, ?, ?, ?);
-                """.trimIndent()
-
-                conn.prepareStatement(insertOneSql).use { pstmt ->
-                    pstmt.setString(1, "The Catcher in the Rye")
-                    pstmt.setString(2, "J.D. Salinger")
-                    pstmt.setInt(3, 1951)
-                    pstmt.setBoolean(4, true)
-                    pstmt.executeUpdate()
-
-                    println("Inserted a single book.")
-                }
-
-                // Insert multiple books
-                val insertManySql = """
-                    INSERT INTO books (title, author, publication_year, in_stock)
-                    VALUES (?, ?, ?, ?);
-                """.trimIndent()
-
-                conn.prepareStatement(insertManySql).use { pstmt ->
-                    val booksToInsert = listOf(
-                        listOf("The Hobbit", "J.R.R. Tolkien", 1937, true),
-                        listOf("1984", "George Orwell", 1949, true),
-                        listOf("Dune", "Frank Herbert", 1965, false)
-                    )
-
-                    for (book in booksToInsert) {
-                        pstmt.setString(1, book[0] as String)
-                        pstmt.setString(2, book[1] as String)
-                        pstmt.setInt(3, book[2] as Int)
-                        pstmt.setBoolean(4, book[3] as Boolean)
-                        pstmt.addBatch()
-                    }
-
-                    pstmt.executeBatch()
-                    println("Inserted 3 rows of data.")
-                }
+    connect().use { conn ->
+        conn.createStatement().use { stmt ->
+            stmt.executeQuery("SELECT version()").use { rs ->
+                rs.next()
+                println(rs.getString(1))
             }
-        }
-    } catch (e: Exception) {
-        println("Connection failed.")
-        e.printStackTrace()
-    }
-}
-```
-
-The above code does the following:
-
-- Connects to the Neon database using the connection string from the `.env` file.
-- Drops the `books` table if it already exists.
-- Creates a new `books` table with columns for `id`, `title`, `author`, `publication_year`, and `in_stock`.
-- Inserts a single book record.
-- Inserts multiple book records in a batch operation.
-
-In `App.kt`, ensure only `createTable()` is uncommented, then run:
-
-```bash
-./gradlew run
-```
-
-When the code runs successfully, it produces the following output:
-
-```text filename="Output"
-Connection established
-Finished dropping table (if it existed).
-Finished creating table.
-Inserted a single book.
-Inserted 3 rows of data.
-```
-
-### Read data
-
-Create a file named `ReadData.kt`. This function fetches all rows from the `books` table and prints them.
-
-```kotlin filename="app/src/main/kotlin/com/neon/quickstart/ReadData.kt"
-package com.neon.quickstart
-
-import io.github.cdimascio.dotenv.dotenv
-import java.sql.DriverManager
-
-fun readData() {
-    val dotenv = dotenv()
-    val connString = dotenv["DATABASE_URL"]
-
-    try {
-        DriverManager.getConnection(connString).use { conn ->
-            conn.createStatement().use { stmt ->
-                println("Connection established")
-
-                val sql = "SELECT * FROM books ORDER BY publication_year;"
-
-                stmt.executeQuery(sql).use { rs ->
-                    println("\n--- Book Library ---")
-
-                    while (rs.next()) {
-                        println(
-                            "ID: ${rs.getInt("id")}, " +
-                                    "Title: ${rs.getString("title")}, " +
-                                    "Author: ${rs.getString("author")}, " +
-                                    "Year: ${rs.getInt("publication_year")}, " +
-                                    "In Stock: ${rs.getBoolean("in_stock")}"
-                        )
-                    }
-
-                    println("--------------------\n")
-                }
-            }
-        }
-    } catch (e: Exception) {
-        println("Connection failed.")
-        e.printStackTrace()
-    }
-}
-```
-
-The above code does the following:
-
-- Connects to the Neon database using the connection string from the `.env` file.
-- Executes a SQL query to select all rows from the `books` table, ordered by `publication_year`.
-- Iterates through the result set and prints each book's details.
-
-In `App.kt`, uncomment `readData()` (and comment out the other calls), then run:
-
-```bash
-./gradlew run
-```
-
-When the read logic runs, it produces the following output:
-
-```text filename="Output"
-Connection established
-
---- Book Library ---
-ID: 2, Title: The Hobbit, Author: J.R.R. Tolkien, Year: 1937, In Stock: true
-ID: 3, Title: 1984, Author: George Orwell, Year: 1949, In Stock: true
-ID: 1, Title: The Catcher in the Rye, Author: J.D. Salinger, Year: 1951, In Stock: true
-ID: 4, Title: Dune, Author: Frank Herbert, Year: 1965, In Stock: false
---------------------
-```
-
-### Update data
-
-Create a file named `UpdateData.kt` to update the stock status of 'Dune' to `true`.
-
-```kotlin filename="app/src/main/kotlin/com/neon/quickstart/UpdateData.kt"
-package com.neon.quickstart
-
-import io.github.cdimascio.dotenv.dotenv
-import java.sql.DriverManager
-
-fun updateData() {
-    val dotenv = dotenv()
-    val connString = dotenv["DATABASE_URL"]
-    val sql = "UPDATE books SET in_stock = ? WHERE title = ?;"
-
-    try {
-        DriverManager.getConnection(connString).use { conn ->
-            conn.prepareStatement(sql).use { pstmt ->
-                println("Connection established")
-
-                pstmt.setBoolean(1, true)
-                pstmt.setString(2, "Dune")
-
-                val rowsAffected = pstmt.executeUpdate()
-
-                if (rowsAffected > 0) {
-                    println("Updated stock status for 'Dune'.")
-                }
-            }
-        }
-    } catch (e: Exception) {
-        println("Connection failed.")
-        e.printStackTrace()
-    }
-}
-```
-
-The above code does the following:
-
-- Connects to the Neon database.
-- Prepares an SQL `UPDATE` statement to set the `in_stock` status of the book 'Dune' to `true`.
-- Executes the update and prints a confirmation message if successful.
-
-In `App.kt`, uncomment `updateData()`, then run:
-
-```bash
-./gradlew run
-```
-
-After running the update, verify the change by switching `App.kt` to call `readData()` and running again.
-
-```bash
-./gradlew run
-```
-
-The updated output will be:
-
-```text filename="Output"
---- Book Library ---
-ID: 2, Title: The Hobbit, Author: J.R.R. Tolkien, Year: 1937, In Stock: true
-ID: 3, Title: 1984, Author: George Orwell, Year: 1949, In Stock: true
-ID: 1, Title: The Catcher in the Rye, Author: J.D. Salinger, Year: 1951, In Stock: true
-ID: 4, Title: Dune, Author: Frank Herbert, Year: 1965, In Stock: true
---------------------
-```
-
-> You can see that the stock status for 'Dune' has been updated to `true`.
-
-### Delete data
-
-Create a file named `DeleteData.kt` to delete the book '1984' from the table.
-
-```kotlin filename="app/src/main/kotlin/com/neon/quickstart/DeleteData.kt"
-package com.neon.quickstart
-
-import io.github.cdimascio.dotenv.dotenv
-import java.sql.DriverManager
-
-fun deleteData() {
-    val dotenv = dotenv()
-    val connString = dotenv["DATABASE_URL"]
-    val sql = "DELETE FROM books WHERE title = ?;"
-
-    try {
-        DriverManager.getConnection(connString).use { conn ->
-            conn.prepareStatement(sql).use { pstmt ->
-                println("Connection established")
-
-                pstmt.setString(1, "1984")
-
-                val rowsAffected = pstmt.executeUpdate()
-
-                if (rowsAffected > 0) {
-                    println("Deleted the book '1984' from the table.")
-                }
-            }
-        }
-    } catch (e: Exception) {
-        println("Connection failed.")
-        e.printStackTrace()
-    }
-}
-```
-
-The above code does the following:
-
-- Connects to the Neon database.
-- Prepares an SQL `DELETE` statement to remove the book '1984'.
-- Executes the delete and prints a confirmation message if successful.
-
-In `App.kt`, uncomment `deleteData()`, then run:
-
-```bash
-./gradlew run
-```
-
-After running the delete, verify the change by switching `App.kt` to call `readData()` and running again.
-
-```bash
-./gradlew run
-```
-
-The final output will be:
-
-```text filename="Output"
---- Book Library ---
-ID: 2, Title: The Hobbit, Author: J.R.R. Tolkien, Year: 1937, In Stock: true
-ID: 1, Title: The Catcher in the Rye, Author: J.D. Salinger, Year: 1951, In Stock: true
-ID: 4, Title: Dune, Author: Frank Herbert, Year: 1965, In Stock: true
---------------------
-```
-
-> You can see that the book '1984' has been successfully deleted from the `books` table.
-
-### Using transactions
-
-The examples above execute each operation independently. For production code where multiple operations must succeed or fail together, wrap them in a transaction. Set `autoCommit = false` to start a transaction, call `commit()` on success, and `rollback()` in the catch block on failure.
-
-```kotlin filename="app/src/main/kotlin/com/neon/quickstart/TransactionExample.kt"
-package com.neon.quickstart
-
-import io.github.cdimascio.dotenv.dotenv
-import java.sql.DriverManager
-import java.sql.SQLException
-
-fun transactionExample() {
-    val dotenv = dotenv()
-    val connString = dotenv["DATABASE_URL"]
-
-    DriverManager.getConnection(connString).use { conn ->
-        try {
-            conn.autoCommit = false // Begin Transaction
-
-            // Insert
-            conn.prepareStatement(
-                "INSERT INTO books (title, author, publication_year) VALUES (?, ?, ?)"
-            ).use { pstmt ->
-                pstmt.setString(1, "Brave New World")
-                pstmt.setString(2, "Aldous Huxley")
-                pstmt.setInt(3, 1932)
-                pstmt.executeUpdate()
-
-                println("Inserted book.")
-            }
-
-            // Update
-            conn.prepareStatement(
-                "UPDATE books SET in_stock = ? WHERE title = ?"
-            ).use { pstmt ->
-                pstmt.setBoolean(1, false)
-                pstmt.setString(2, "Brave New World")
-                pstmt.executeUpdate()
-
-                println("Updated stock status.")
-            }
-
-            conn.commit() // Commit transaction
-            println("Transaction committed successfully.")
-
-        } catch (e: SQLException) {
-            println("Transaction failed. Rolling back.")
-
-            conn.rollback()
-            e.printStackTrace()
         }
     }
 }
 ```
 
-In `App.kt`, uncomment `transactionExample()`, then run:
+The generated test in `src/test` refers to the sample `App` class you just replaced, so delete the `src/test` directory. `../gradlew run` doesn't compile tests, but `../gradlew build` does.
 
-```bash
-./gradlew run
+Run the app from the `app` directory. The wrapper is in the parent directory, so run `../gradlew run`. On Windows, use `..\gradlew.bat run`:
+
+```bash filename="Terminal"
+../gradlew run
 ```
+
+The output is the Postgres version of your database, which confirms the connection. `dotenv-kotlin` reads `.env.local` from the directory the app runs in, which is `app`, where `neon link` wrote it. If `neon link` wrote `.env`, change `filename` in `Database.kt` to `.env`.
 
 </Steps>
 
-<details>
-<summary>**Notes for AI-assisted setup**</summary>
+## Examples
 
-- Always use `PreparedStatement` (with `?` placeholders) for INSERT, UPDATE, and DELETE operations. Do not use `Statement` for queries with user-provided data, as this is vulnerable to SQL injection.
-- Add library versions to `gradle/libs.versions.toml` and reference them with `implementation(libs.*)` in `app/build.gradle.kts`.
-- Wrap related database operations in a transaction (`autoCommit = false` / `commit()` / `rollback()`). Always call `rollback()` in a catch block to ensure atomicity on failure.
-- Close JDBC connections and statements using Kotlin's `.use { }` (equivalent to Java try-with-resources) to prevent connection leaks.
-- Do not hardcode credentials in `.kt` files. Use environment variables via `dotenv-kotlin`. For more information, see [Security overview](/docs/security/security-overview).
+This example replaces `App.kt` with one program that creates a `books` table, then inserts, selects, updates, and deletes rows, with a transaction in the middle. The program deletes the rows it adds, so you can run it again. If `App.kt` has code you wrote, don't replace it: ask first, or put the example in a new file and point `mainClass` at it. Run it on a development branch: complete [Work on a development branch](#work-on-a-development-branch-optional) first. Without the CLI, create a branch in the Neon Console and copy its connection string into `.env.local`, as described in [Create a branch](/docs/manage/branches#create-a-branch).
 
-</details>
+```kotlin filename="src/main/kotlin/com/neon/quickstart/App.kt"
+package com.neon.quickstart
 
-## Next steps with a framework
+import java.sql.Connection
+import java.sql.SQLException
 
-While this guide demonstrates how to connect to Neon using raw SQL queries, for more advanced and maintainable data interactions in your Kotlin applications, consider using a framework or ORM. Frameworks help you manage schema changes and keep your database structure in sync with your application models.
+fun insertBook(conn: Connection, title: String, author: String, year: Int): Int =
+    conn.prepareStatement("INSERT INTO books (title, author, year) VALUES (?, ?, ?) RETURNING id").use { ps ->
+        ps.setString(1, title)
+        ps.setString(2, author)
+        ps.setInt(3, year)
+        ps.executeQuery().use { rs ->
+            rs.next()
+            rs.getInt(1)
+        }
+    }
 
-Explore the following resources to learn how to integrate frameworks with Neon:
+fun main() {
+    connect().use { conn ->
+        conn.createStatement().use { stmt ->
+            stmt.execute(
+                """
+                CREATE TABLE IF NOT EXISTS books (
+                    id SERIAL PRIMARY KEY,
+                    title TEXT NOT NULL,
+                    author TEXT NOT NULL,
+                    year INT
+                )
+                """.trimIndent()
+            )
+        }
 
-- [Connect a Micronaut Kotlin application to Neon](/docs/guides/micronaut-kotlin)
-- [Database Schema Changes with Hibernate, Spring Boot, and Neon](/guides/spring-boot-hibernate)
+        // Insert a row and get its id back
+        val dune = insertBook(conn, "Dune", "Frank Herbert", 1965)
 
-## Next steps with Neon backend services
+        // Select the row
+        conn.prepareStatement("SELECT title, year FROM books WHERE id = ?").use { ps ->
+            ps.setInt(1, dune)
+            ps.executeQuery().use { rs ->
+                while (rs.next()) {
+                    println("Selected: ${rs.getString("title")} (${rs.getInt("year")})")
+                }
+            }
+        }
 
-- [Add Object Storage](/docs/storage/overview): S3-compatible file storage that branches with your database
-- [Call an LLM with AI Gateway](/docs/ai-gateway/overview): Access foundation models from Anthropic, OpenAI, Google, and more with one credential
+        // Update the row
+        conn.prepareStatement("UPDATE books SET year = ? WHERE id = ?").use { ps ->
+            ps.setInt(1, 1966)
+            ps.setInt(2, dune)
+            ps.executeUpdate()
+        }
 
-## Resources
+        // Insert two rows in a transaction: both commit, or neither does
+        conn.autoCommit = false
+        val added = try {
+            val ids = listOf(
+                insertBook(conn, "Emma", "Jane Austen", 1815),
+                insertBook(conn, "Persuasion", "Jane Austen", 1817),
+            )
+            conn.commit()
+            ids
+        } catch (e: SQLException) {
+            conn.rollback()
+            throw e
+        } finally {
+            conn.autoCommit = true
+        }
 
-- [Example project on GitHub](https://github.com/aaravmahajanofficial/neon-kotlin-jdbc)
-- [PostgreSQL JDBC Driver Documentation](https://jdbc.postgresql.org/documentation/use/)
-- [Gradle User Manual](https://docs.gradle.org/current/userguide/userguide.html)
-- [dotenv-kotlin](https://github.com/cdimascio/dotenv-kotlin)
-- [Connect a Micronaut Kotlin application to Neon](/docs/guides/micronaut-kotlin)
+        // Select all rows
+        conn.createStatement().use { stmt ->
+            stmt.executeQuery("SELECT title, year FROM books ORDER BY year").use { rs ->
+                while (rs.next()) {
+                    println("Book: ${rs.getString("title")} (${rs.getInt("year")})")
+                }
+            }
+        }
+
+        // Delete the rows this program added
+        conn.prepareStatement("DELETE FROM books WHERE id = ?").use { ps ->
+            for (id in listOf(dune) + added) {
+                ps.setInt(1, id)
+                ps.executeUpdate()
+            }
+        }
+    }
+}
+```
+
+Run it with `../gradlew run`. The JDBC driver commits each statement on its own by default (`autoCommit` is on). The transaction block turns it off, commits when both inserts succeed, and rolls back if one fails. `use` closes the connection and statements, so the code doesn't call `close()`.
+
+## Run it elsewhere
+
+On a host, set `DATABASE_URL` in the host's environment instead of an env file. `connect()` reads it from there first, because variables in the host environment take precedence over the file, and dotenv-kotlin doesn't fail when the file is missing. For production, use your default branch's pooled connection string (it goes through Neon's [connection pooler](/docs/connect/connection-pooling)): run `neon connection-string main --pooled` in your own terminal, replacing `main` with `production` if that's your project's default branch, because the command prints the password. Neon's pooler already pools connections, so you don't need to add a pool in your app; if you do, return connections to it promptly (see [Double pooling](/docs/connect/choose-connection#common-pitfalls)).
+
+## Add more of your backend
+
+Neon also runs object storage, a model gateway, and serverless functions next to your database. Each entry below says what the service does and links to its docs.
+
+<DefinitionList>
+
+Object Storage
+: S3-compatible buckets for uploads and files. See [Object Storage](/docs/storage/overview).
+
+AI Gateway
+: Routes calls to models from Anthropic, OpenAI, Google, and more through one endpoint on your branch. See [AI Gateway](/docs/ai-gateway/overview).
+
+Neon Functions
+: Long-running Node.js compute (the server that runs your code next to your database), called over HTTP. See [Neon Functions](/docs/compute/functions/overview).
+
+</DefinitionList>
+
+## Troubleshooting
+
+<DefinitionList>
+
+`java.lang.IllegalStateException: DATABASE_URL is not set`
+: `connect()` found no `DATABASE_URL` in the environment or in `.env.local`, in the `app` directory, where the app runs. Check that the file is in `app`. If `neon link` wrote `.env`, change `filename` in `Database.kt` to `.env`.
+
+`The program reaches a different database than your branch`
+: A `DATABASE_URL` already set in your shell takes precedence over the env file. Run `unset DATABASE_URL` in that shell, then run the app again.
+
+</DefinitionList>
+
+## Next steps
+
+- [Java guide](/docs/guides/java): the same PostgreSQL JDBC driver from Java, with more on JDBC.
+- [Connect a Micronaut Kotlin application to Lakebase Postgres on Neon](/docs/guides/micronaut-kotlin): Use the Micronaut framework with Kotlin instead of raw JDBC.
 
 <NeedHelp/>

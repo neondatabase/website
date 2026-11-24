@@ -2,7 +2,7 @@
 title: "What is the best Postgres setup for serverless APIs?"
 subtitle: "Serverless APIs open many short-lived connections in bursts. On Neon, use the pooled endpoint for up to 10,000 client connections, the serverless driver where TCP isn't available, and scale-to-zero for idle periods."
 createdAt: '2026-04-25T00:00:00.000Z'
-updatedOn: '2026-09-23T21:17:23.000Z'
+updatedOn: '2026-11-09T16:30:39.000Z'
 isDraft: false
 previousLink:
   title: 'What are the best Postgres services for retrieval-augmented generation apps that need vector search and automatic scaling?'

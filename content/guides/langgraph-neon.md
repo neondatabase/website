@@ -4,7 +4,7 @@ subtitle: A step-by-step guide to building AI agents with LangGraph and Neon
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2025-02-21T00:00:00.000Z'
-updatedOn: '2026-10-27T11:48:14.853Z'
+updatedOn: '2026-11-09T22:07:35.000Z'
 ---
 
 This guide shows how to integrate LangGraph with Neon. [LangGraph](https://www.langchain.com/langgraph) is a library in the [LangChain](https://www.langchain.com/langchain) ecosystem for building multi-agent LLM applications. It models the application as a directed graph, which handles coordination and state management between steps.

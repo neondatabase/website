@@ -4,7 +4,7 @@ const STEPS = [
   {
     title: 'The server records each call',
     description:
-      'The Neon MCP server records an event for every tool call, with the Neon account, the tool, and the name the client reports.',
+      'The Neon MCP server records an event for every tool call, with the Neon account, the tool, and the name the client reports. The Neon CLI records each run, with the coding agent it detected.',
   },
   {
     title: 'A daily job computes shares',
