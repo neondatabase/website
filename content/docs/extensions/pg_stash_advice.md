@@ -12,7 +12,7 @@ summary: >-
   database. Advice stashes aren't saved across compute restarts yet.
 enableTableOfContents: true
 tag: new
-updatedOn: '2026-11-20T16:25:24.432Z'
+updatedOn: '2026-11-23T20:25:35.944Z'
 ---
 
 Postgres usually picks a good query plan, but not always. When the planner chooses a slow plan for an important query, the usual fixes are better statistics, a new index, or a rewritten query. Postgres 19 adds a more direct option with two modules that work together:
@@ -281,6 +281,10 @@ LIMIT 10;
 
 Query IDs ignore constant values, so this ID covers any customer ID and any `LIMIT` value. A change to the query's structure, such as removing the `LIMIT` or adding a column, gives it a different ID. Query IDs also differ between databases, so use the ID from your own database.
 
+<Admonition type="important" title="Parameterized queries have their own query ID">
+Most application drivers send values as bind parameters instead of writing them into the SQL. A parameterized query gets a different query ID from the same query with literal values, so advice stashed for the ID you got in `psql` won't apply to your application's query. Both versions can appear in `pg_stat_statements` with the same query text. Use the `queryid` from the row your application created, usually the one with the most `calls`, and check that the advice applies to your application before you rely on it.
+</Admonition>
+
 ### Create a stash and add advice
 
 Create a stash, then store the advice for the query ID:
@@ -357,7 +361,9 @@ LIMIT 10;
 
 The stashed advice applies even though the customer ID is different. It applies to self-serve customers too, which already got this plan, so their queries stay fast.
 
-Advice is applied only when a query is planned. Prepared statements and PL/pgSQL functions can keep using a cached plan after you change a stash. Run `DISCARD PLANS` in a session to force those queries to be planned again.
+<Admonition type="note" title="Cached plans ignore stash changes">
+Stashed advice is applied only when a query is planned. Prepared statements and queries in PL/pgSQL functions can keep using a cached plan, so they ignore a new stash entry until they're planned again. The same is true when you change or remove an entry: a cached plan keeps the old advice. To force those queries to be planned again, run `DISCARD PLANS` in the session or open a new connection. If your application uses a connection pool, restart the application or recycle its connections.
+</Admonition>
 
 ### Remove advice
 

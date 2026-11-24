@@ -77,8 +77,11 @@ const formatDate = (iso) => {
   return `${MONTHS[monthIndex]} ${year}`;
 };
 
+// `imageGeneration` is the Responses image_generation tool (OpenAI models); `imageOutput` is a
+// model that returns the image itself (the Gemini image models).
 const isImageCapable = (capability) =>
-  capability?.entitled !== false && capability?.imageGeneration === true;
+  capability?.entitled !== false &&
+  (capability?.imageGeneration === true || capability?.imageOutput === true);
 // From the catalog (`model.type`), not measured capabilities: the catalog is allowed to list a
 // model before it has been probed, same as any other model, and an embedding model is still an
 // embedding model while unmeasured — it just has no known-working endpoint yet (see

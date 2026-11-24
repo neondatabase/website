@@ -15,6 +15,13 @@ describe('AI Gateway model rows', () => {
     expect(row.endpoints).toEqual(['chat/completions', 'openai/responses']);
   });
 
+  it('counts models that return images themselves as image models', () => {
+    for (const id of ['gemini-3-pro-image', 'gemini-3-1-flash-image']) {
+      expect(rows.find((row) => row.id === id).isImageCapable).toBe(true);
+    }
+    expect(rows.find(({ id }) => id === 'gemini-3-flash').isImageCapable).toBe(false);
+  });
+
   it('uses only the measured Responses endpoint for Codex models', () => {
     const row = rows.find(({ id }) => id === 'gpt-5-3-codex');
 

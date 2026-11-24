@@ -562,7 +562,11 @@ describe('Middleware - AI Agent Integration Tests', () => {
 
       // Probe fired against the HTML sibling with a neutral (non-agent) UA.
       expect(global.fetch).toHaveBeenCalledWith('https://neon.com/docs/cli/auth', {
-        headers: { Accept: 'text/html', 'User-Agent': 'neon-md-redirect-probe' },
+        headers: {
+          Purpose: 'prefetch',
+          Accept: 'text/html',
+          'User-Agent': 'neon-md-redirect-probe',
+        },
         redirect: 'manual',
       });
       expect(response.type).toBe('redirect');
@@ -1162,7 +1166,7 @@ describe('Middleware - AI Agent Integration Tests', () => {
     });
 
     it.each([
-      ['Claude-User/1.0', 'agent'],
+      ['Claude-User/1.0', 'ai-assistant'],
       ['axios/1.7', 'unknown'],
       ['python-requests/2.32.3', 'unknown'],
     ])('labels a docs .md read by %s as llm_reader=%s', async (userAgent, reader) => {
@@ -1196,7 +1200,7 @@ describe('Middleware - AI Agent Integration Tests', () => {
 
     it.each([
       ['/.well-known/mcp', 'curl/8.7.1', 'unknown'],
-      ['/.well-known/mcp/server-card.json', 'Claude-User/1.0', 'agent'],
+      ['/.well-known/mcp/server-card.json', 'Claude-User/1.0', 'ai-assistant'],
       ['/models.json', 'python-requests/2.32.3', 'unknown'],
       ['/llms.txt', 'Mozilla/5.0 (compatible; Googlebot/2.1)', 'search-crawler'],
     ])('counts %s fetched by %s once as llm_reader=%s', async (pathname, userAgent, reader) => {
@@ -1207,16 +1211,143 @@ describe('Middleware - AI Agent Integration Tests', () => {
       expect(readerOf()).toMatchObject({ llm_agent: true, llm_reader: reader });
     });
 
-    it('counts ChatGPT agent (Chrome UA + Signature-Agent) served the HTML of a page', async () => {
-      const req = withClone(createMockRequest('/security', BROWSER, 'text/html'));
-      req.headers.set('signature-agent', '"https://chatgpt.com"');
-      req.headers.set('sec-fetch-mode', 'navigate');
-      req.headers.set('sec-fetch-dest', 'document');
+    it.each([
+      [
+        'Mozilla/5.0 AppleWebKit/537.36 (KHTML, like Gecko); compatible; GPTBot/1.4; +https://openai.com/gptbot',
+        'ai-crawler',
+      ],
+      [
+        'Mozilla/5.0 AppleWebKit/537.36 (KHTML, like Gecko; compatible; ClaudeBot/1.0; +claudebot@anthropic.com)',
+        'ai-crawler',
+      ],
+      ['Mozilla/5.0 (compatible; ChatGPT-User/1.0; +https://openai.com/bot)', 'ai-assistant'],
+      [
+        'Mozilla/5.0 (compatible; Perplexity-User/1.0; +https://perplexity.ai/perplexity-user)',
+        'ai-assistant',
+      ],
+    ])('labels %s served the HTML of a page as llm_reader=%s', async (userAgent, reader) => {
+      await middleware(withClone(createMockRequest('/security', userAgent, 'text/html')));
+
+      expect(beaconCalls()).toHaveLength(1);
+      expect(readerOf()).toMatchObject({ llm_agent: true, llm_reader: reader });
+    });
+
+    // A browser engine runs the page's analytics script, which counts the view
+    // once. Counting it on the server too would double it.
+    it.each([
+      [
+        'a search crawler rendering the page',
+        'Mozilla/5.0 (Linux; Android 10) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Mobile Safari/537.36 (compatible; Baiduspider-render/2.0; +http://www.baidu.com/search/spider.html)',
+        {},
+      ],
+      [
+        'a headless browser',
+        'Mozilla/5.0 (X11; Linux x86_64) HeadlessChrome/131.0 Safari/537.36',
+        {},
+      ],
+      ['an agent UA browser', `${BROWSER} (compatible; Claude-Agent/1.0)`, {}],
+      ['ChatGPT agent (Signature-Agent)', BROWSER, { 'signature-agent': '"https://chatgpt.com"' }],
+    ])(
+      'leaves %s navigating to an HTML page to the browser script (no server pageview)',
+      async (_label, userAgent, extraHeaders) => {
+        const req = withClone(createBrowserRequest('/blog/example-post', userAgent, 'text/html'));
+        for (const [name, value] of Object.entries(extraHeaders)) req.headers.set(name, value);
+        const response = await middleware(req);
+
+        expect(response.type).toBe('next');
+        expect(global.fetch).not.toHaveBeenCalled();
+      }
+    );
+
+    it.each([
+      [
+        'a search crawler rendering pages',
+        'Mozilla/5.0 AppleWebKit/537.36 (KHTML, like Gecko; compatible; Googlebot/2.1; +http://www.google.com/bot.html) Chrome/131.0.0.0 Safari/537.36',
+        {},
+        'search-crawler',
+      ],
+      [
+        'a headless browser',
+        'Mozilla/5.0 (X11; Linux x86_64) HeadlessChrome/131.0 Safari/537.36',
+        {},
+        'unknown',
+      ],
+      [
+        'ChatGPT agent (Signature-Agent)',
+        BROWSER,
+        { 'signature-agent': '"https://chatgpt.com"' },
+        'ai-assistant',
+      ],
+    ])(
+      'counts %s opening a .md once on the server, since a .md runs no browser script',
+      async (_label, userAgent, extraHeaders, reader) => {
+        const req = createBrowserRequest('/docs/introduction.md', userAgent, 'text/html');
+        for (const [name, value] of Object.entries(extraHeaders)) req.headers.set(name, value);
+        mockFetchByUrl({ md: { ok: true, status: 200, text: () => Promise.resolve('# Intro') } });
+        await middleware(req);
+
+        expect(beaconCalls()).toHaveLength(1);
+        expect(readerOf()).toMatchObject({ llm_agent: true, llm_reader: reader });
+      }
+    );
+
+    it("marks the proxy's redirect probe for a missing .md so it isn't counted as a page read", async () => {
+      mockFetchByUrl({
+        md: { ok: false, status: 404 },
+        probe: { status: 200, headers: new Headers() },
+      });
+      await middleware(createMockRequest('/docs/introduction/missing.md', 'axios/1.7', '*/*'));
+
+      const probe = global.fetch.mock.calls.find(([, options]) => options?.redirect === 'manual');
+      expect(probe[1].headers).toMatchObject({ Purpose: 'prefetch' });
+      expect(beaconCalls()).toHaveLength(1);
+    });
+
+    // Node.js's fetch sends Sec-Fetch-Mode: cors but no Sec-Fetch-Dest, so it
+    // isn't a browser: it gets markdown and is counted like any agent.
+    it('serves markdown to an agent on Node.js fetch and counts the read', async () => {
+      mockFetchByUrl({ md: { ok: true, status: 200, text: () => Promise.resolve('# Intro') } });
+      const req = createMockRequest('/docs/introduction', 'node', 'text/markdown');
+      req.headers.set('sec-fetch-mode', 'cors');
       const response = await middleware(req);
 
-      expect(response.type).toBe('next');
+      expect(response.headers.get('Content-Type')).toBe('text/markdown; charset=utf-8');
       expect(beaconCalls()).toHaveLength(1);
-      expect(JSON.parse(beaconCalls()[0][1].body).data.llm_agent).toBe(true);
+      expect(readerOf()).toMatchObject({ llm_agent: true, llm_reader: 'unknown' });
+    });
+
+    it('counts Node.js fetch served the HTML of a page', async () => {
+      const req = withClone(createMockRequest('/security', 'node', '*/*'));
+      req.headers.set('sec-fetch-mode', 'cors');
+      await middleware(req);
+
+      expect(beaconCalls()).toHaveLength(1);
+    });
+
+    // Only GET reads a page: HEAD (monitors) and OPTIONS (CORS preflights) are
+    // skipped on the markdown branches too, not only the HTML fallback.
+    it.each([
+      ['HEAD', '/docs/introduction.md', 'axios/1.7', '*/*'],
+      ['OPTIONS', '/docs/introduction.md', 'axios/1.7', '*/*'],
+      ['OPTIONS', '/pricing', 'Claude-User/1.0', 'text/markdown'],
+      ['HEAD', '/docs/introduction', 'Claude-User/1.0', 'text/markdown'],
+      ['HEAD', '/llms.txt', 'curl/8.7.1', '*/*'],
+    ])('does not count a %s request to %s', async (method, pathname, userAgent, accept) => {
+      mockFetchByUrl({ md: { ok: true, status: 200, text: () => Promise.resolve('# Page') } });
+      const req = withClone(createMockRequest(pathname, userAgent, accept));
+      req.method = method;
+      await middleware(req);
+
+      expect(beaconCalls()).toHaveLength(0);
+    });
+
+    it.each(['HEAD', 'OPTIONS'])('does not count a %s request to a blog .md', async (method) => {
+      mockBlogRoute(blogPost);
+      const req = withClone(createMockRequest('/blog/example-post.md', 'axios/1.7', '*/*'));
+      req.method = method;
+      await middleware(req);
+
+      expect(beaconCalls()).toHaveLength(0);
     });
 
     it('does not count a named AI agent prefetching a page', async () => {

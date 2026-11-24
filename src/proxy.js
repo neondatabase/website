@@ -10,7 +10,7 @@ import { STATIC_MD_PATHS } from 'constants/static-md-manifest';
 import {
   isAIAgentRequest,
   isBrowserBackgroundRequest,
-  isHumanBrowserNavigation,
+  isBrowserNavigation,
   getFunctionTemplatesMarkdownPath,
   getMarkdownPath,
 } from './utils/ai-agent-detection';
@@ -120,8 +120,14 @@ async function resolveMarkdownRedirect(pathname, origin) {
   try {
     // Neutral UA so the probe isn't classified as an AI agent (isAIAgentRequest
     // matches broad tokens like curl/got/axios) and gets the next.config 308.
+    // NON_AGENT_FETCH_HEADERS keeps the probe itself from being counted as a
+    // read of the HTML page.
     const response = await fetch(`${origin}${htmlPathname}`, {
-      headers: { Accept: 'text/html', 'User-Agent': 'neon-md-redirect-probe' },
+      headers: {
+        ...NON_AGENT_FETCH_HEADERS,
+        Accept: 'text/html',
+        'User-Agent': 'neon-md-redirect-probe',
+      },
       redirect: 'manual',
     });
 
@@ -333,25 +339,22 @@ export async function proxy(req, event) {
   const response = await handleProxy(req, analytics);
 
   // Count reads the branches above didn't, when the request passes through to
-  // the page or file (GET only: HEAD from monitors and CORS preflights aren't
-  // reads). Prefetches and router fetches are skipped inside track().
-  // - Pages: every reader that isn't a person in a browser tab. People run the
-  //   browser analytics script; nothing else does, so AI agents, search
-  //   crawlers and unknown clients (python-requests, wget, ...) are counted here.
-  //   A browser's background requests (Next.js prefetches and router fetches)
-  //   aren't reads; track() skips them by their Sec-Fetch-Mode.
+  // the page or file. Non-GET requests, prefetches and router fetches are
+  // skipped inside track() (isNonReadRequest).
+  // - Pages: only clients that don't navigate like a browser (AI agents,
+  //   search crawlers, python-requests, wget, ...). Any browser engine (a
+  //   person, a headless or agent-driven browser, a crawler that renders
+  //   pages) runs the page's analytics script, which counts that view once;
+  //   counting it here too would double it. The browser script's pageview
+  //   carries the User-Agent, so those can be labeled downstream.
   // - Agent discovery files (llms.txt, /.well-known/*, /models): every reader,
-  //   people included, since these files run no browser script.
+  //   browsers included, since these files run no script.
   // classifyReader labels each pageview (llm_reader).
-  if (
-    !analytics.beacon &&
-    response.headers.get('x-middleware-next') === '1' &&
-    (req.method || 'GET') === 'GET'
-  ) {
+  if (!analytics.beacon && response.headers.get('x-middleware-next') === '1') {
     const { pathname } = req.nextUrl;
     if (isAgentDiscoveryPath(pathname)) {
       analytics.track({ branch: 'discovery-file' });
-    } else if (!isAssetRequest(pathname) && !isHumanBrowserNavigation(req)) {
+    } else if (!isAssetRequest(pathname) && !isBrowserNavigation(req)) {
       analytics.track({ branch: 'non-browser-html' });
     }
   }

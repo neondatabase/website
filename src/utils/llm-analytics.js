@@ -16,12 +16,11 @@ async function sendPageview(req, context, { is404, branch, pageUrl, debug }) {
 
   try {
     // Preserve the Zaraz payload and identity cookies; only add the correlation ID.
-    // llm_reader is the category: agent, search-crawler, human, or unknown
-    // (classifyReader). A human pageview (a person opening a .md or a
-    // discovery file) has no agent flag and no LLMAGENT user-agent prefix.
-    // agent, search-crawler and unknown reads
-    // keep llm_agent: true and the prefix, so existing human counts that
-    // exclude llm_agent rows stay human-only.
+    // llm_reader is the category: ai-assistant, ai-crawler, search-crawler,
+    // human, or unknown (classifyReader). A human pageview (a person opening a
+    // .md or a discovery file) has no agent flag and no LLMAGENT user-agent
+    // prefix. Every other reader keeps llm_agent: true and the prefix, so
+    // existing human counts that exclude llm_agent rows stay human-only.
     const isAgent = context.reader !== 'human';
     const payload = {
       name: 'Pageview',

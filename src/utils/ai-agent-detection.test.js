@@ -483,12 +483,12 @@ describe('classifyReader', () => {
     [
       'ChatGPT-User',
       { 'user-agent': 'Mozilla/5.0 (compatible; ChatGPT-User/1.0)', accept: 'text/html' },
-      'agent',
+      'ai-assistant',
     ],
     [
       'ChatGPT agent (Signature-Agent)',
       { 'user-agent': CHROME, 'signature-agent': '"https://chatgpt.com"', ...navigation },
-      'agent',
+      'ai-assistant',
     ],
     // Generic clients and markdown requests aren't known AI agents by their headers.
     ['curl', { 'user-agent': 'curl/8.7.1', accept: '*/*' }, 'unknown'],
@@ -555,7 +555,7 @@ describe('isSearchCrawlerUserAgent', () => {
     expect(isSearchCrawlerUserAgent(userAgent)).toBe(false);
   });
 
-  it('labels MistralAI-Index and Amzn-SearchBot as search crawlers, not agents', () => {
+  it('labels MistralAI-Index and Amzn-SearchBot as search crawlers, not AI readers', () => {
     const requestWith = (userAgent) => ({ headers: new Map([['user-agent', userAgent]]) });
     expect(
       classifyReader(
@@ -568,7 +568,7 @@ describe('isSearchCrawlerUserAgent', () => {
       'search-crawler'
     );
     expect(classifyReader(requestWith('Mozilla/5.0 (compatible; MistralAI-User/1.0)'))).toBe(
-      'agent'
+      'ai-assistant'
     );
   });
 });
@@ -587,5 +587,82 @@ describe('agentFamily', () => {
     ['', 'other'],
   ])('labels %s as %s', (userAgent, family) => {
     expect(agentFamily(userAgent)).toBe(family);
+  });
+});
+
+describe('AI assistants vs AI crawlers', () => {
+  const requestWith = (headers) => ({ headers: new Map(Object.entries(headers)) });
+  const CHROME =
+    'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36';
+  const navigation = { 'sec-fetch-mode': 'navigate', 'sec-fetch-dest': 'document' };
+
+  // bots.fyi "User Initiated", or operator docs say the fetch is for a user's request.
+  it.each([
+    'Mozilla/5.0 AppleWebKit/537.36 (KHTML, like Gecko); compatible; ChatGPT-User/1.0; +https://openai.com/bot',
+    'Claude-User/1.0',
+    `${CHROME} (compatible; Claude-Agent/1.0)`,
+    'Mozilla/5.0 (compatible; Perplexity-User/1.0; +https://perplexity.ai/perplexity-user)',
+    `${CHROME} (compatible; Google-Agent; +https://developers.google.com/crawling/docs/crawlers-fetchers/google-agent)`,
+    `${CHROME} (compatible; Google-GeminiNotebook; +https://developers.google.com/crawling/docs/crawlers-fetchers/google-gemininotebook)`,
+    'meta-externalfetcher/1.1 (+https://developers.facebook.com/docs/sharing/webmasters/web-crawlers)',
+    'Mozilla/5.0 AppleWebKit/537.36 (KHTML, like Gecko; compatible; MistralAI-User/1.0; +https://docs.mistral.ai/robots)',
+    'Mozilla/5.0 AppleWebKit/537.36 (KHTML, like Gecko; compatible; Amzn-User/0.1) Chrome/131.0.0.0 Safari/537.36',
+    'Mozilla/5.0 (compatible; ExaUser/1.0)',
+    'Mozilla/5.0 (compatible; amazon-quick-on-behalf-of/1.0)',
+  ])('labels %s as ai-assistant', (userAgent) => {
+    expect(classifyReader(requestWith({ 'user-agent': userAgent }))).toBe('ai-assistant');
+  });
+
+  it.each([
+    'Mozilla/5.0 AppleWebKit/537.36 (KHTML, like Gecko); compatible; GPTBot/1.4; +https://openai.com/gptbot',
+    'Mozilla/5.0 AppleWebKit/537.36 (KHTML, like Gecko); compatible; OAI-SearchBot/1.4; +https://openai.com/searchbot',
+    'Mozilla/5.0 AppleWebKit/537.36 (KHTML, like Gecko; compatible; ClaudeBot/1.0; +claudebot@anthropic.com)',
+    'Mozilla/5.0 (compatible; Claude-SearchBot/1.0)',
+    'Mozilla/5.0 (compatible; PerplexityBot/1.0; +https://perplexity.ai/perplexitybot)',
+    'Mozilla/5.0 AppleWebKit/537.36 (KHTML, like Gecko; compatible; Amazonbot/0.1) Chrome/131.0.0.0 Safari/537.36',
+    'meta-externalagent/1.1 (+https://developers.facebook.com/docs/sharing/webmasters/web-crawlers)',
+    'CCBot/2.0 (https://commoncrawl.org/faq/)',
+    'DuckAssistBot/1.2; (+http://duckduckgo.com/duckassistbot.html)',
+    'Mozilla/5.0 (compatible; pkgseer/1.0)',
+    'Mozilla/5.0 (compatible; inkeep-crawler/1.0)',
+  ])('labels %s as ai-crawler', (userAgent) => {
+    expect(classifyReader(requestWith({ 'user-agent': userAgent }))).toBe('ai-crawler');
+  });
+
+  it('labels ChatGPT agent (Signature-Agent: chatgpt.com) as ai-assistant', () => {
+    expect(
+      classifyReader(
+        requestWith({
+          'user-agent': CHROME,
+          'signature-agent': '"https://chatgpt.com"',
+          ...navigation,
+        })
+      )
+    ).toBe('ai-assistant');
+  });
+
+  it("labels a Web Bot Auth signer it can't name as unknown, never human", () => {
+    const signer = requestWith({
+      'user-agent': CHROME,
+      'signature-agent': '"https://bots.example.com"',
+      ...navigation,
+    });
+    expect(classifyReader(signer)).toBe('unknown');
+    expect(isHumanBrowserNavigation(signer)).toBe(false);
+  });
+});
+
+describe('search crawlers that render pages in a browser', () => {
+  const requestWith = (headers) => ({ headers: new Map(Object.entries(headers)) });
+  const navigation = { 'sec-fetch-mode': 'navigate', 'sec-fetch-dest': 'document' };
+
+  it.each([
+    'Mozilla/5.0 (Linux; Android 10) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Mobile Safari/537.36 (compatible; Baiduspider-render/2.0; +http://www.baidu.com/search/spider.html)',
+    'Mozilla/5.0 AppleWebKit/537.36 (KHTML, like Gecko; compatible; Googlebot/2.1; +http://www.google.com/bot.html) Chrome/131.0.0.0 Safari/537.36',
+    'Mozilla/5.0 AppleWebKit/537.36 (KHTML, like Gecko; compatible; bingbot/2.0; +http://www.bing.com/bingbot.htm) Chrome/131.0.0.0 Safari/537.36',
+  ])('treats %s with navigation headers as a search crawler, not a person', (userAgent) => {
+    const request = requestWith({ 'user-agent': userAgent, accept: 'text/html', ...navigation });
+    expect(isHumanBrowserNavigation(request)).toBe(false);
+    expect(classifyReader(request)).toBe('search-crawler');
   });
 });

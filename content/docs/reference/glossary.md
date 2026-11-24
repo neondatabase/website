@@ -541,14 +541,14 @@ The Neon Console setting (under **Settings → Postgres**) that controls how lon
 
 ## root branch
 
-Each Neon project is created with a root branch, which cannot be deleted and is set as the [default branch](#default-branch) for the project. Projects created in the Console have a root branch named `production`, while projects created via the API or CLI have a root branch named `main`. A root branch has no parent branch.
+Each Neon project is created with a root branch, which is set as the [default branch](#default-branch) for the project. Projects created in the Console have a root branch named `production`, while projects created via the API or CLI have a root branch named `main`. A root branch has no parent branch.
 
-Neon also supports two other types of root branches that have no parent but _can_ be deleted:
+Neon also supports two other types of root branches:
 
-- [Backup branches](#backup-branch), created by instant restore operations on other root branches.
+- [Backup branches](#backup-branch), created by instant restore operations on root branches.
 - [Schema-only branches](#schema-only-branch).
 
-The number of root branches allowed in a project depends on your Neon plan. See [Branch types: Root branch](/docs/manage/branches#root-branch).
+You can delete a root branch as long as the project has at least one other root branch. Snapshots and backup schedules are only available on root branches. The number of root branches allowed in a project depends on your Neon plan. See [Branch types: Root branch](/docs/manage/branches#root-branch).
 
 ## Safekeeper
 
