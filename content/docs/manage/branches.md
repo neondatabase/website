@@ -537,7 +537,7 @@ To set or update a branch's expiration (auto-deletion TTL):
 Set an expiration with [`neon branches set-expiration`](/docs/cli/branches#set-expiration). Omit `--expires-at` to remove it:
 
 ```bash
-neon branches set-expiration br-curly-wave-123456 --expires-at 2025-08-15T18:00:00Z
+neon branches set-expiration br-curly-wave-123456 --expires-at 2026-12-15T18:00:00Z
 ```
 
 </TabItem>
@@ -551,14 +551,14 @@ curl -X PATCH 'https://console.neon.tech/api/v2/projects/dry-heart-13671059/bran
   -H 'Accept: application/json' \
   -H "Authorization: Bearer $NEON_API_KEY" \
   -H 'Content-Type: application/json' \
-  -d '{"branch": {"expires_at": "2025-08-15T18:00:00Z"}}'
+  -d '{"branch": {"expires_at": "2026-12-15T18:00:00Z"}}'
 ```
 
 </TabItem>
 
 </Tabs>
 
-For details and configuration instructions, refer to our [Branch expiration guide](/docs/guides/branch-expiration).
+The expiration time must be in the future and within the maximum expiration interval for your plan. For details and configuration instructions, refer to our [Branch expiration guide](/docs/guides/branch-expiration).
 
 ## Connect to a branch
 
