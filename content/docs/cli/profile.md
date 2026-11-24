@@ -9,7 +9,7 @@ summary: >-
 redirectFrom:
   - /docs/cli/profiles
 enableTableOfContents: true
-updatedOn: '2026-10-19T14:21:42.000Z'
+updatedOn: '2026-11-24T22:51:03.746Z'
 ---
 
 A profile is a pointer to a credentials file, so one machine can hold logins for several Neon accounts and pick between them per command.
@@ -114,7 +114,15 @@ Active  Name     Account                               Auth     Credentials     
         laptop   alex@example.com                      oauth    keyring                   account
 ```
 
-`Account` is the recorded email label, the user ID when there's no label (as with a `DEFAULT` profile from a plain `neon login`), or the organization identifier for an organization- or project-scoped key. `Auth` shows how the profile authenticates (`oauth` for a browser sign-in, `api key` for a stored key). `Credentials` gives the credentials file's name, or `keyring` when the credential is kept in the OS keyring. `Scope` shows what the credential can reach: `account` for a browser sign-in or an account key, or `org <org-id>` or `project <project-id>` for a key limited to that organization or project. Pass `-o json` to also get two more fields: `file`, which reports whether the credential could be read (`ok`, or else `missing`, `invalid`, or `unreadable`), and `storage`, which is `file` or `keyring`.
+Each column shows:
+
+- `Account`: the recorded email label, the user ID when there's no label (as with a `DEFAULT` profile from a plain `neon login`), or the organization identifier for an organization- or project-scoped key.
+- `Auth`: how the profile authenticates, `oauth` for a browser sign-in or `api key` for a stored key.
+- `Credentials`: the credentials file's name, or `keyring` when the credential is kept in the OS keyring.
+- `Scope`: what the credential can reach, `account` for a browser sign-in or an account key, or `org <org-id>` or `project <project-id>` for a key limited to that organization or project.
+- `API Host`: the API host a profile remembers when it was created against a non-default one. The column appears only when a profile has one.
+
+Pass `-o json` to also get two more fields: `file`, which reports whether the credential could be read (`ok`, or else `missing`, `invalid`, or `unreadable`), and `storage`, which is `file` or `keyring`.
 
 ## neon profile rotate-key (#rotate-key)
 

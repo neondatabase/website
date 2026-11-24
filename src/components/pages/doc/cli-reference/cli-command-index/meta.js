@@ -41,7 +41,10 @@ const META = {
     desc: 'Open the linked project in the Neon Console in your browser.',
     examples: ['neon open'],
   },
-  me: { desc: 'Show the authenticated user or organization.', examples: ['neon me'] },
+  me: {
+    desc: 'Show the authenticated user, organization, or Claimable project.',
+    examples: ['neon me'],
+  },
   ask: {
     desc: 'Ask the Neon assistant a question from the terminal.',
     examples: ['neon ask --prompt "How do schema-only branches work?"'],
