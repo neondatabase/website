@@ -5,7 +5,7 @@ author: rishi-raj-jain
 excludeFromBlog: true
 enableTableOfContents: true
 createdAt: '2026-05-06T00:00:00.000Z'
-updatedOn: '2026-11-24T14:47:35.564Z'
+updatedOn: '2026-11-24T16:48:31.962Z'
 ---
 
 <Admonition type="note">
@@ -152,7 +152,7 @@ AI Gateway routes requests to models from Anthropic, OpenAI, Google, and other p
 
 | Feature                                               | Neon                                                                       | Supabase                                                                                                                                         |
 | :---------------------------------------------------- | :------------------------------------------------------------------------- | :----------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Certifications**<br/>Audits and regulations covered | SOC 2 Type 1 and Type 2, SOC 3, ISO 27001, ISO 27701, GDPR, and CCPA       | SOC 2 Type 2, ISO 27001, and GDPR                                                                                                                |
+| **Certifications**<br/>Audits and regulations covered | SOC 2 Type 1 and Type 2, ISO 27001, ISO 27701, GDPR, and CCPA              | SOC 2 Type 2, ISO 27001, and GDPR                                                                                                                |
 | **Plan with compliance reports**                      | Scale, with no monthly minimum                                             | **Team, from $599/month**                                                                                                                        |
 | **HIPAA**                                             | Self-serve on Scale: accept the BAA in the Console, at no extra cost today | **Paid add-on on Team, with no listed price**, after you request a BAA through a form                                                            |
 | **HIPAA project requirements**                        | Turn on HIPAA in the project's settings                                    | **Point-in-time recovery ($100/month per 7 days, with at least a Small compute)**, SSL enforcement, network restrictions, and connection logging |
@@ -305,7 +305,7 @@ It depends on your traffic. Neon bills for the compute you use, scales to zero w
 
 <FaqItem question="Which compliance certifications do Neon and Supabase have?">
 
-Neon has SOC 2 Type 1 and Type 2, SOC 3, ISO 27001, ISO 27701, GDPR, and CCPA, plus self-serve HIPAA, all on the Scale plan with no monthly minimum ([source](/docs/security/compliance)). Supabase has SOC 2 Type 2, ISO 27001, and GDPR, with reports on the Team plan from $599 a month, and HIPAA as a paid add-on.
+Neon has SOC 2 Type 1 and Type 2, ISO 27001, ISO 27701, GDPR, and CCPA, plus self-serve HIPAA, all on the Scale plan with no monthly minimum ([source](/docs/security/compliance)). Supabase has SOC 2 Type 2, ISO 27001, and GDPR, with reports on the Team plan from $599 a month, and HIPAA as a paid add-on.
 
 </FaqItem>
 

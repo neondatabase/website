@@ -1,7 +1,7 @@
 ---
 title: Compliance
 summary: >-
-  Neon has completed SOC 2 Type 1 and Type 2 and SOC 3 audits, is covered by
+  Neon has completed SOC 2 Type 1 and Type 2 audits, is covered by
   Databricks' ISO 27001 and ISO 27701 certifications, and adheres to GDPR,
   CCPA, and HIPAA. HIPAA compliance is available on the Scale plan. Neon isn't
   PCI DSS compliant. Request the SOC 2 report through the Neon Trust Center at
@@ -10,18 +10,15 @@ summary: >-
 enableTableOfContents: false
 redirectFrom:
   - /docs/security/soc2-compliance
-updatedOn: '2026-11-24T14:47:35.564Z'
+  - /docs/security/soc-3-report
+updatedOn: '2026-11-24T16:48:31.962Z'
 ---
 
-At Neon, we prioritize data security and privacy, and we have achieved several key compliances that validate our efforts. We have completed SOC 2 Type 1 and Type 2 and SOC 3 audits, and we adhere to GDPR and CCPA regulations. Neon is also covered by Databricks' ISO 27001 and ISO 27701 certifications.
+At Neon, we prioritize data security and privacy, and we have achieved several key compliances that validate our efforts. We have completed SOC 2 Type 1 and Type 2 audits, and we adhere to GDPR and CCPA regulations. Neon is also covered by Databricks' ISO 27001 and ISO 27701 certifications.
 
 ## SOC 2
 
 We have successfully attained SOC 2 Type 1 and Type 2 compliance. These compliances, validated by independent auditors, confirm that our systems adhere to the American Institute of Certified Public Accountants (AICPA) trust service criteria for security, availability, processing integrity, confidentiality, and privacy.
-
-## SOC 3
-
-The SOC 3 report is a public-facing version of the SOC 2 report, providing assurance to external parties about our system's ability to meet the trust service criteria without disclosing sensitive details. You can read the full [SOC 3 report](/docs/security/soc-3-report).
 
 ## ISO 27001
 
