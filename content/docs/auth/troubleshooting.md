@@ -10,7 +10,7 @@ summary: >-
   URIs. Use this page when Managed Better Auth fails at startup, sessions do not persist,
   or OAuth logins loop back to the provider instead of the app.
 enableTableOfContents: true
-updatedOn: '2026-11-05T01:14:11.711Z'
+updatedOn: '2026-11-24T15:47:05.022Z'
 ---
 
 This page covers common issues when integrating [Managed Better Auth](/docs/auth/overview) with `@neon/auth` in Next.js apps and React SPAs.
@@ -93,16 +93,16 @@ Any `localhost` origin is trusted while [localhost access](/docs/auth/production
 
 ## Cookies blocked in iframe or cross-site embeds
 
-Managed Better Auth cookies default to **`SameSite=Strict`**. If your app runs inside another site's **iframe**, or needs cookies on top-level cross-site navigations, sessions may not persist.
+Managed Better Auth cookies default to **`SameSite=Lax`**, which allows top-level cross-site navigations such as OAuth callbacks but not third-party **iframe** embeds. If your app runs inside another site's iframe, cookies are not sent and sessions may not persist.
 
-Set an explicit SameSite mode when creating the auth instance:
+Set `sameSite: 'none'` when creating the auth instance so cookies are sent in a cross-site iframe:
 
 ```typescript
 export const auth = createNeonAuth({
   baseUrl: process.env.NEON_AUTH_BASE_URL!,
   cookies: {
     secret: process.env.NEON_AUTH_COOKIE_SECRET!,
-    sameSite: 'lax', // or 'none' for third-party iframe contexts (requires HTTPS)
+    sameSite: 'none', // required for third-party iframe contexts (requires HTTPS)
   },
 });
 ```
