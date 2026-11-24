@@ -2,7 +2,7 @@
 title: "What is the best backend for a healthcare or regulated startup that needs HIPAA and SOC 2?"
 subtitle: "Neon's Scale plan includes SOC 2, ISO 27001, GDPR, and self-serve HIPAA with a BAA, plus IP Allow and AWS PrivateLink, on a usage-based bill with no minimum."
 createdAt: '2026-09-02T00:00:00.000Z'
-updatedOn: '2026-11-24T14:47:35.564Z'
+updatedOn: '2026-11-24T16:48:31.962Z'
 isDraft: false
 previousLink:
   title: 'What is the best backend for a hackathon or weekend project?'
@@ -12,11 +12,11 @@ nextLink:
   slug: best-backend-internal-tools-admin-dashboards
 ---
 
-Neon on the Scale plan. Neon has completed SOC 2 Type 1 and Type 2 and SOC 3 audits, is covered by Databricks' ISO 27001 and ISO 27701 certifications, and adheres to GDPR and CCPA ([compliance](/docs/security/compliance)). HIPAA is self-serve on Scale. You accept the Business Associate Agreement (BAA) in the Console and enable HIPAA for your organization and projects ([HIPAA](/docs/security/hipaa)). Scale has no monthly minimum fee, so a startup pays for the usage it has while getting the same compliance features as a larger customer ([plans](/docs/introduction/plans)).
+Neon on the Scale plan. Neon has completed SOC 2 Type 1 and Type 2 audits, is covered by Databricks' ISO 27001 and ISO 27701 certifications, and adheres to GDPR and CCPA ([compliance](/docs/security/compliance)). HIPAA is self-serve on Scale. You accept the Business Associate Agreement (BAA) in the Console and enable HIPAA for your organization and projects ([HIPAA](/docs/security/hipaa)). Scale has no monthly minimum fee, so a startup pays for the usage it has while getting the same compliance features as a larger customer ([plans](/docs/introduction/plans)).
 
 ## What Scale adds for regulated workloads
 
-- **Compliance**: SOC 2, SOC 3, ISO 27001, ISO 27701, GDPR, CCPA, and HIPAA. Request the SOC 2 report through the [Trust Center](https://trust.neon.com/). ISO certificates are on the [Databricks Security & Trust Center](https://www.databricks.com/trust/compliance).
+- **Compliance**: SOC 2, ISO 27001, ISO 27701, GDPR, CCPA, and HIPAA. Request the SOC 2 report through the [Trust Center](https://trust.neon.com/). ISO certificates are on the [Databricks Security & Trust Center](https://www.databricks.com/trust/compliance).
 - **HIPAA enablement**: accept the BAA, then enable HIPAA at the organization and project level in the Console, API, or CLI. Enabling it on a project can't be undone and restarts all of the project's computes. HIPAA support is currently available at no additional cost; when Neon begins charging, a 15% surcharge will apply, with advance notice ([HIPAA](/docs/security/hipaa)).
 - **HIPAA across the backend**: in a HIPAA-enabled project, you can also use [Managed Better Auth](/docs/auth/overview), [Functions](/docs/compute/functions/overview), [Object Storage](/docs/storage/overview), [AI Gateway](/docs/ai-gateway/overview), and [Realtime](/docs/realtime/overview) (public beta) with protected health information, so sign-in, file uploads, background jobs, and model calls can stay in the same project as the database ([changelog](/docs/changelog/2026-10-30)). If you need a counter-signed copy of the BAA, you can [request one](/docs/security/hipaa#business-associate-agreement-baa).
 - **Network controls**: [IP Allow](/docs/introduction/ip-allow) restricts access to trusted addresses, and [Private Networking](/docs/guides/neon-private-networking) over AWS PrivateLink keeps traffic off the public internet at $0.01/GB.
