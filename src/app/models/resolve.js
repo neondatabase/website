@@ -49,6 +49,7 @@ function toModel(id, entry, caps) {
       responses: caps.responses,
       web_search: caps.webSearch,
       image_generation: caps.imageGeneration,
+      image_output: caps.imageOutput === true,
       embeddings: caps.embeddings === true,
       decision: caps.decision === true,
     },

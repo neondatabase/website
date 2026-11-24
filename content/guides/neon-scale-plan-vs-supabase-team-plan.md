@@ -5,7 +5,7 @@ author: rishi-raj-jain
 excludeFromBlog: true
 enableTableOfContents: true
 createdAt: '2026-07-15T00:00:00.000Z'
-updatedOn: '2026-10-14T09:49:03.958Z'
+updatedOn: '2026-11-24T16:48:31.962Z'
 ---
 
 <Admonition type="note">
@@ -138,11 +138,11 @@ Neon backup schedules take snapshots of your production branch on the days and a
 
 |                               | Neon Scale                                                                  | Supabase Team                                                                                      |
 | :---------------------------- | :-------------------------------------------------------------------------- | :------------------------------------------------------------------------------------------------- |
-| Certifications and frameworks | SOC 2 Type 1 and Type 2, SOC 3, ISO 27001, ISO 27701, GDPR, and CCPA        | SOC 2 Type 2, ISO 27001, and GDPR                                                                  |
+| Certifications and frameworks | SOC 2 Type 1 and Type 2, ISO 27001, ISO 27701, GDPR, and CCPA               | SOC 2 Type 2, ISO 27001, and GDPR                                                                  |
 | HIPAA                         | Self-serve: accept the BAA in the Console, then turn it on for each project | Paid add-on, and each HIPAA project also needs point-in-time recovery and at least a Small compute |
 | Uptime SLA                    | Included                                                                    | Enterprise plan only                                                                               |
 
-Neon Scale covers two certifications that Supabase doesn't list: SOC 3, a public summary of the SOC 2 report that you can share with prospects, and ISO 27701, which extends ISO 27001 to privacy and helps with GDPR reviews ([source](/docs/security/compliance)). You can request the reports from the Neon Trust Center. For HIPAA, you accept the Business Associate Agreement in the Console and turn on HIPAA for each project that stores health data ([source](/docs/security/hipaa)). On Supabase Team, HIPAA is a paid add-on, and each HIPAA project also needs point-in-time recovery and at least a Small compute, which adds at least $105 a month per project on top of the add-on.
+Neon Scale covers a certification that Supabase doesn't list: ISO 27701, which extends ISO 27001 to privacy and helps with GDPR reviews. Neon is covered by Databricks' ISO certifications ([source](/docs/security/compliance)). You can request the SOC 2 report from the [Neon Trust Center](https://trust.neon.com/), and download ISO certificates from the [Databricks Security & Trust Center](https://www.databricks.com/trust/compliance). For HIPAA, you accept the Business Associate Agreement in the Console and turn on HIPAA for each project that stores health data ([source](/docs/security/hipaa)). On Supabase Team, HIPAA is a paid add-on, and each HIPAA project also needs point-in-time recovery and at least a Small compute, which adds at least $105 a month per project on top of the add-on.
 
 ### 9. IP rules
 
@@ -335,7 +335,7 @@ Choose **Supabase Team** if:
 | Branches                 | 25 per project, then $1.50/branch-month, plus compute while a branch runs        | Each branch billed hourly, from $0.01344/hour on Micro compute                  |
 | History retention        | Restore to any point in up to 30 days ($0.20/GB-month)                           | Point-in-time recovery for $100/month per 7 days                                |
 | Scheduled backups        | Daily, weekly, or monthly, kept up to 35 days ($0.09/GB-month)                   | Daily, kept 14 days                                                             |
-| Compliance               | SOC 2, SOC 3, ISO 27001, ISO 27701, GDPR, CCPA, and HIPAA                        | SOC 2, ISO 27001, GDPR, and HIPAA as a paid add-on                              |
+| Compliance               | SOC 2, ISO 27001, ISO 27701, GDPR, CCPA, and HIPAA                               | SOC 2, ISO 27001, GDPR, and HIPAA as a paid add-on                              |
 | Uptime SLA               | Included                                                                         | Enterprise plan only                                                            |
 | IP rules                 | IP Allow with addresses, ranges, and CIDR blocks                                 | Network restrictions with CIDR blocks                                           |
 | Private networking       | AWS PrivateLink                                                                  | AWS PrivateLink through VPC Lattice                                             |
@@ -370,7 +370,7 @@ Neon Scale includes an uptime SLA. On Supabase, the uptime SLA is available only
 
 <FaqItem question="Which compliance certifications does each plan cover?">
 
-Neon Scale covers SOC 2 Type 1 and Type 2, SOC 3, ISO 27001, ISO 27701, GDPR, and CCPA, with self-serve HIPAA. Supabase Team covers SOC 2 Type 2, ISO 27001, and GDPR, with HIPAA as a paid add-on.
+Neon Scale covers SOC 2 Type 1 and Type 2, ISO 27001, ISO 27701, GDPR, and CCPA, with self-serve HIPAA. Supabase Team covers SOC 2 Type 2, ISO 27001, and GDPR, with HIPAA as a paid add-on.
 
 </FaqItem>
 

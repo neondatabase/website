@@ -1,6 +1,15 @@
 import { describe, it, expect } from 'vitest';
 
-import { isAIAgentRequest, getMarkdownPath, buildAgent404Response } from './ai-agent-detection';
+import {
+  isAIAgentRequest,
+  getMarkdownPath,
+  buildAgent404Response,
+  isKnownAIAgentRequest,
+  isHumanBrowserNavigation,
+  classifyReader,
+  isSearchCrawlerUserAgent,
+  agentFamily,
+} from './ai-agent-detection';
 
 describe('isAIAgentRequest', () => {
   // Helper to create mock request objects
@@ -400,5 +409,260 @@ describe('buildAgent404Response', () => {
     const result = buildAgent404Response('/docs/guides/deeply/nested/path');
     expect(result).toContain('`/docs/guides/deeply/nested/path`');
     expect(result).toContain('/docs/llms.txt');
+  });
+});
+
+describe('isKnownAIAgentRequest', () => {
+  const requestWith = (headers) => ({ headers: new Map(Object.entries(headers)) });
+  const CHROME =
+    'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36';
+
+  // User-Agent strings as published by each operator (see the source links in
+  // AI_AGENT_USER_AGENT_TOKENS).
+  it.each([
+    'Mozilla/5.0 AppleWebKit/537.36 (KHTML, like Gecko); compatible; GPTBot/1.4; +https://openai.com/gptbot',
+    'Mozilla/5.0 AppleWebKit/537.36 (KHTML, like Gecko); compatible; ChatGPT-User/1.0; +https://openai.com/bot',
+    'Mozilla/5.0 AppleWebKit/537.36 (KHTML, like Gecko); compatible; OAI-SearchBot/1.4; +https://openai.com/searchbot',
+    `${CHROME} (compatible; Claude-Agent/1.0)`,
+    'Mozilla/5.0 AppleWebKit/537.36 (KHTML, like Gecko; compatible; ClaudeBot/1.0; +claudebot@anthropic.com)',
+    'Mozilla/5.0 (compatible; PerplexityBot/1.0; +https://perplexity.ai/perplexitybot)',
+    'Mozilla/5.0 (compatible; Perplexity-User/1.0; +https://perplexity.ai/perplexity-user)',
+    `${CHROME} (compatible; Google-Agent; +https://developers.google.com/crawling/docs/crawlers-fetchers/google-agent)`,
+    'meta-externalfetcher/1.1 (+https://developers.facebook.com/docs/sharing/webmasters/web-crawlers)',
+    'meta-webindexer/1.1',
+    'Mozilla/5.0 AppleWebKit/537.36 (KHTML, like Gecko; compatible; MistralAI-User/1.0; +https://docs.mistral.ai/robots)',
+    'Mozilla/5.0 AppleWebKit/537.36 (KHTML, like Gecko; compatible; Amzn-User/0.1) Chrome/131.0.0.0 Safari/537.36',
+    'DuckAssistBot/1.2; (+http://duckduckgo.com/duckassistbot.html)',
+  ])('recognizes %s', (userAgent) => {
+    expect(isKnownAIAgentRequest(requestWith({ 'user-agent': userAgent }))).toBe(true);
+  });
+
+  it.each([
+    CHROME,
+    'Mozilla/5.0 (Macintosh; Intel Mac OS X 14_5) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.5 Safari/605.1.15',
+    'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:132.0) Gecko/20100101 Firefox/132.0',
+    `${CHROME} Edg/131.0.0.0`,
+    'Mozilla/5.0 (iPhone; CPU iPhone OS 17_5 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.5 Mobile/15E148 Safari/604.1',
+  ])('does not treat the browser %s as an AI agent', (userAgent) => {
+    expect(isKnownAIAgentRequest(requestWith({ 'user-agent': userAgent }))).toBe(false);
+  });
+
+  it('recognizes ChatGPT agent, which uses a Chrome User-Agent and Web Bot Auth', () => {
+    const chatgptAgent = requestWith({
+      'user-agent': CHROME,
+      'signature-agent': '"https://chatgpt.com"',
+      'sec-fetch-mode': 'navigate',
+      'sec-fetch-dest': 'document',
+    });
+    expect(isKnownAIAgentRequest(chatgptAgent)).toBe(true);
+    // It browses like a person, so it must not be counted as one.
+    expect(isHumanBrowserNavigation(chatgptAgent)).toBe(false);
+  });
+
+  it('still treats a person browsing in Chrome as human', () => {
+    expect(
+      isHumanBrowserNavigation(
+        requestWith({
+          'user-agent': CHROME,
+          'sec-fetch-mode': 'navigate',
+          'sec-fetch-dest': 'document',
+        })
+      )
+    ).toBe(true);
+  });
+});
+
+describe('classifyReader', () => {
+  const requestWith = (headers) => ({ headers: new Map(Object.entries(headers)) });
+  const CHROME =
+    'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36';
+  const navigation = { 'sec-fetch-mode': 'navigate', 'sec-fetch-dest': 'document' };
+
+  it.each([
+    ['a person in Chrome', { 'user-agent': CHROME, accept: 'text/html', ...navigation }, 'human'],
+    [
+      'ChatGPT-User',
+      { 'user-agent': 'Mozilla/5.0 (compatible; ChatGPT-User/1.0)', accept: 'text/html' },
+      'ai-assistant',
+    ],
+    [
+      'ChatGPT agent (Signature-Agent)',
+      { 'user-agent': CHROME, 'signature-agent': '"https://chatgpt.com"', ...navigation },
+      'ai-assistant',
+    ],
+    // Generic clients and markdown requests aren't known AI agents by their headers.
+    ['curl', { 'user-agent': 'curl/8.7.1', accept: '*/*' }, 'unknown'],
+    ['a markdown request', { 'user-agent': 'Mozilla/5.0', accept: 'text/markdown' }, 'unknown'],
+    [
+      'Googlebot',
+      {
+        'user-agent':
+          'Mozilla/5.0 AppleWebKit/537.36 (KHTML, like Gecko; compatible; Googlebot/2.1; +http://www.google.com/bot.html) Chrome/131.0.0.0 Safari/537.36',
+        accept: 'text/html',
+      },
+      'search-crawler',
+    ],
+    [
+      'Applebot',
+      {
+        'user-agent':
+          'Mozilla/5.0 (Macintosh) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.4 Safari/605.1.15 (Applebot/0.1; +http://www.apple.com/go/applebot)',
+        accept: 'text/html',
+      },
+      'search-crawler',
+    ],
+    ['python-requests', { 'user-agent': 'python-requests/2.32.3', accept: '*/*' }, 'unknown'],
+    ['Wget', { 'user-agent': 'Wget/1.24.5', accept: '*/*' }, 'unknown'],
+    ['a browser UA without navigation headers', { 'user-agent': CHROME, accept: '*/*' }, 'unknown'],
+    ['a headless browser', { 'user-agent': 'HeadlessChrome/131.0', ...navigation }, 'unknown'],
+  ])('labels %s as %s', (_label, headers, reader) => {
+    expect(classifyReader(requestWith(headers))).toBe(reader);
+  });
+});
+
+describe('isSearchCrawlerUserAgent', () => {
+  // Example User-Agents from each operator's documentation (sources next to
+  // SEARCH_CRAWLER_USER_AGENT_TOKENS).
+  it.each([
+    'Mozilla/5.0 AppleWebKit/537.36 (KHTML, like Gecko; compatible; Googlebot/2.1; +http://www.google.com/bot.html) Chrome/131.0.0.0 Safari/537.36',
+    'Mozilla/5.0 AppleWebKit/537.36 (KHTML, like Gecko; compatible; GoogleOther) Chrome/131.0.0.0 Safari/537.36',
+    'Mozilla/5.0 (X11; Linux x86_64; Storebot-Google/1.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36',
+    'AdsBot-Google (+http://www.google.com/adsbot.html)',
+    'Mozilla/5.0 (compatible; Mediapartners-Google/2.1; +http://www.google.com/bot.html)',
+    'APIs-Google (+https://developers.google.com/webmasters/APIs-Google.html)',
+    'Mozilla/5.0 AppleWebKit/537.36 (KHTML, like Gecko; compatible; bingbot/2.0; +http://www.bing.com/bingbot.htm) Chrome/131.0.0.0 Safari/537.36',
+    'Mozilla/5.0 (Macintosh) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.4 Safari/605.1.15 (Applebot/0.1; +http://www.apple.com/go/applebot)',
+    'Mozilla/5.0 AppleWebKit/537.36 (KHTML, like Gecko; compatible; Amzn-SearchBot/0.1) Chrome/131.0.0.0 Safari/537.36',
+    'Mozilla/5.0 (compatible; AmazonAdBot/1.0; +https://adbot.amazon.com)',
+    'Mozilla/5.0 AppleWebKit/537.36 (KHTML, like Gecko; compatible; MistralAI-Index/1.0; +https://docs.mistral.ai/robots)',
+    'DuckDuckBot/1.1; (+http://duckduckgo.com/duckduckbot.html)',
+    'Mozilla/5.0 (compatible; ExaSearchBot/1.0; +https://crawler.exa.ai/)',
+    'Mozilla/5.0 (compatible; Pinterestbot/1.0; +https://www.pinterest.com/bot.html)',
+    'Mozilla/5.0 (compatible; Qwantbot/1.0_12345; +https://help.qwant.com/bot/)',
+    'Mozilla/5.0 (compatible; SeekportBot; +https://bot.seekport.com)',
+    'SeobilityBot (SEO Tool; https://www.seobility.net/sites/bot.html)',
+    'Mozilla/5.0 (compatible; SeznamBot/4.0; +https://o-seznam.cz/napoveda/vyhledavani/en/seznambot-crawler/)',
+    'Mozilla/5.0 (compatible; Yahoo! Slurp; http://help.yahoo.com/help/us/ysearch/slurp)',
+  ])('recognizes %s', (userAgent) => {
+    expect(isSearchCrawlerUserAgent(userAgent)).toBe(true);
+  });
+
+  it.each([
+    'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36',
+    'Mozilla/5.0 AppleWebKit/537.36 (KHTML, like Gecko); compatible; GPTBot/1.4; +https://openai.com/gptbot',
+    'python-requests/2.32.3',
+  ])('does not treat %s as a search crawler', (userAgent) => {
+    expect(isSearchCrawlerUserAgent(userAgent)).toBe(false);
+  });
+
+  it('labels MistralAI-Index and Amzn-SearchBot as search crawlers, not AI readers', () => {
+    const requestWith = (userAgent) => ({ headers: new Map([['user-agent', userAgent]]) });
+    expect(
+      classifyReader(
+        requestWith(
+          'Mozilla/5.0 (compatible; MistralAI-Index/1.0; +https://docs.mistral.ai/robots)'
+        )
+      )
+    ).toBe('search-crawler');
+    expect(classifyReader(requestWith('Mozilla/5.0 (compatible; Amzn-SearchBot/0.1)'))).toBe(
+      'search-crawler'
+    );
+    expect(classifyReader(requestWith('Mozilla/5.0 (compatible; MistralAI-User/1.0)'))).toBe(
+      'ai-assistant'
+    );
+  });
+});
+
+describe('agentFamily', () => {
+  it.each([
+    [
+      'Mozilla/5.0 (compatible; Perplexity-User/1.0; +https://perplexity.ai/perplexity-user)',
+      'perplexity-user',
+    ],
+    ['Mozilla/5.0 (compatible; Claude-Agent/1.0)', 'claude-agent'],
+    ['Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)', 'googlebot'],
+    ['curl/8.7.1', 'curl'],
+    ['axios/1.7.2', 'axios'],
+    ['python-requests/2.32.3', 'other'],
+    ['', 'other'],
+  ])('labels %s as %s', (userAgent, family) => {
+    expect(agentFamily(userAgent)).toBe(family);
+  });
+});
+
+describe('AI assistants vs AI crawlers', () => {
+  const requestWith = (headers) => ({ headers: new Map(Object.entries(headers)) });
+  const CHROME =
+    'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36';
+  const navigation = { 'sec-fetch-mode': 'navigate', 'sec-fetch-dest': 'document' };
+
+  // bots.fyi "User Initiated", or operator docs say the fetch is for a user's request.
+  it.each([
+    'Mozilla/5.0 AppleWebKit/537.36 (KHTML, like Gecko); compatible; ChatGPT-User/1.0; +https://openai.com/bot',
+    'Claude-User/1.0',
+    `${CHROME} (compatible; Claude-Agent/1.0)`,
+    'Mozilla/5.0 (compatible; Perplexity-User/1.0; +https://perplexity.ai/perplexity-user)',
+    `${CHROME} (compatible; Google-Agent; +https://developers.google.com/crawling/docs/crawlers-fetchers/google-agent)`,
+    `${CHROME} (compatible; Google-GeminiNotebook; +https://developers.google.com/crawling/docs/crawlers-fetchers/google-gemininotebook)`,
+    'meta-externalfetcher/1.1 (+https://developers.facebook.com/docs/sharing/webmasters/web-crawlers)',
+    'Mozilla/5.0 AppleWebKit/537.36 (KHTML, like Gecko; compatible; MistralAI-User/1.0; +https://docs.mistral.ai/robots)',
+    'Mozilla/5.0 AppleWebKit/537.36 (KHTML, like Gecko; compatible; Amzn-User/0.1) Chrome/131.0.0.0 Safari/537.36',
+    'Mozilla/5.0 (compatible; ExaUser/1.0)',
+    'Mozilla/5.0 (compatible; amazon-quick-on-behalf-of/1.0)',
+  ])('labels %s as ai-assistant', (userAgent) => {
+    expect(classifyReader(requestWith({ 'user-agent': userAgent }))).toBe('ai-assistant');
+  });
+
+  it.each([
+    'Mozilla/5.0 AppleWebKit/537.36 (KHTML, like Gecko); compatible; GPTBot/1.4; +https://openai.com/gptbot',
+    'Mozilla/5.0 AppleWebKit/537.36 (KHTML, like Gecko); compatible; OAI-SearchBot/1.4; +https://openai.com/searchbot',
+    'Mozilla/5.0 AppleWebKit/537.36 (KHTML, like Gecko; compatible; ClaudeBot/1.0; +claudebot@anthropic.com)',
+    'Mozilla/5.0 (compatible; Claude-SearchBot/1.0)',
+    'Mozilla/5.0 (compatible; PerplexityBot/1.0; +https://perplexity.ai/perplexitybot)',
+    'Mozilla/5.0 AppleWebKit/537.36 (KHTML, like Gecko; compatible; Amazonbot/0.1) Chrome/131.0.0.0 Safari/537.36',
+    'meta-externalagent/1.1 (+https://developers.facebook.com/docs/sharing/webmasters/web-crawlers)',
+    'CCBot/2.0 (https://commoncrawl.org/faq/)',
+    'DuckAssistBot/1.2; (+http://duckduckgo.com/duckassistbot.html)',
+    'Mozilla/5.0 (compatible; pkgseer/1.0)',
+    'Mozilla/5.0 (compatible; inkeep-crawler/1.0)',
+  ])('labels %s as ai-crawler', (userAgent) => {
+    expect(classifyReader(requestWith({ 'user-agent': userAgent }))).toBe('ai-crawler');
+  });
+
+  it('labels ChatGPT agent (Signature-Agent: chatgpt.com) as ai-assistant', () => {
+    expect(
+      classifyReader(
+        requestWith({
+          'user-agent': CHROME,
+          'signature-agent': '"https://chatgpt.com"',
+          ...navigation,
+        })
+      )
+    ).toBe('ai-assistant');
+  });
+
+  it("labels a Web Bot Auth signer it can't name as unknown, never human", () => {
+    const signer = requestWith({
+      'user-agent': CHROME,
+      'signature-agent': '"https://bots.example.com"',
+      ...navigation,
+    });
+    expect(classifyReader(signer)).toBe('unknown');
+    expect(isHumanBrowserNavigation(signer)).toBe(false);
+  });
+});
+
+describe('search crawlers that render pages in a browser', () => {
+  const requestWith = (headers) => ({ headers: new Map(Object.entries(headers)) });
+  const navigation = { 'sec-fetch-mode': 'navigate', 'sec-fetch-dest': 'document' };
+
+  it.each([
+    'Mozilla/5.0 (Linux; Android 10) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Mobile Safari/537.36 (compatible; Baiduspider-render/2.0; +http://www.baidu.com/search/spider.html)',
+    'Mozilla/5.0 AppleWebKit/537.36 (KHTML, like Gecko; compatible; Googlebot/2.1; +http://www.google.com/bot.html) Chrome/131.0.0.0 Safari/537.36',
+    'Mozilla/5.0 AppleWebKit/537.36 (KHTML, like Gecko; compatible; bingbot/2.0; +http://www.bing.com/bingbot.htm) Chrome/131.0.0.0 Safari/537.36',
+  ])('treats %s with navigation headers as a search crawler, not a person', (userAgent) => {
+    const request = requestWith({ 'user-agent': userAgent, accept: 'text/html', ...navigation });
+    expect(isHumanBrowserNavigation(request)).toBe(false);
+    expect(classifyReader(request)).toBe('search-crawler');
   });
 });

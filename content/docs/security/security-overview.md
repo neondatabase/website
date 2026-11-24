@@ -11,7 +11,7 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/security/security
   - /docs/security
-updatedOn: '2026-11-05T15:33:57.188Z'
+updatedOn: '2026-11-24T14:47:35.564Z'
 ---
 
 At Neon, security is our highest priority. We are committed to implementing best practices and earning the trust of our users. A key aspect of earning this trust is by ensuring that every touchpoint in our system, from connections, to data storage, to our internal processes, adheres to the highest security standards.
@@ -102,11 +102,11 @@ All systems are hosted on AWS and Azure, where we have implemented specific secu
 
   Our vulnerability management program, integrated with Orca and Oligo, continuously scans all AWS and Azure environments for security issues, including misconfigurations, unpatched software, and exposed credentials. We use tagging to classify certain data types, enabling focused monitoring and scanning based on the sensitivity of the data. Automated alerts allow us to address vulnerabilities before they pose a risk to PII or other sensitive information. The vulnerabilities are remediated according to the defined SLAs to reduce the risk.
 
-- **Annual Audits and Continuous Penetration Testing**
+- **Annual Audits and Penetration Testing**
 
-  We undergo annual audits for SOC2 and ISO by two independent firms to verify the integrity and security of our systems. In addition, bi-annual penetration tests with Hackerone are performed, with results feeding into our vulnerability management program. The vulnerabilities are remediated according to the defined SLAs to reduce the risk.
+  Neon undergoes annual SOC 2 audits by an independent firm to verify the integrity and security of our systems, and Neon is covered by Databricks' ISO 27001 and ISO 27701 certifications. Penetration testing is performed by Databricks' central security team, with results feeding into our vulnerability management program. The vulnerabilities are remediated according to the defined SLAs to reduce the risk.
 
-To learn more about how we protect your data and uphold the highest standards of security and privacy, please visit our [Trust Center](https://trust.neon.com/).
+To learn more about how we protect your data and uphold the highest standards of security and privacy, visit our [Trust Center](https://trust.neon.com/). ISO certificates and the annual penetration test confirmation letter are in the due diligence package on the [Databricks Security & Trust Center](https://www.databricks.com/trust/compliance).
 
 ## GitHub secret scanning
 

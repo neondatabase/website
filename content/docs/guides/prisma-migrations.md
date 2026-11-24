@@ -9,11 +9,10 @@ summary: >-
   migration files, then shows how iterative schema changes work and when to
   switch to `prisma migrate deploy` for production.
 enableTableOfContents: true
-updatedOn: '2026-11-14T19:56:27.000Z'
+updatedOn: '2026-11-20T22:29:31.468Z'
 ---
 
-<CopyPrompt src="/prompts/prisma-prompt.md" 
-description="Pre-built prompt for connecting Node/TypeScript applications to Neon using Prisma ORM."/>
+To connect your app to Neon first, follow [Connect from Prisma to Neon](/docs/guides/prisma).
 
 This tutorial walks you through building a Node.js application with Prisma ORM and Neon, focusing on how to create and apply schema migrations. You'll build a simple book catalog API while learning the migration workflow.
 

@@ -87,6 +87,14 @@ async function search(request) {
   const proxyMs = performance.now() - originStarted;
 
   if (!response.ok) {
+    if (response.status >= 400 && response.status < 500) {
+      const rejection = await response.json().catch(() => null);
+      // A 4xx without neon-agent's { error } body comes from the platform, such as a
+      // misconfigured NEON_AGENT_SITE_SEARCH_URL, and is a server fault.
+      if (typeof rejection?.error === 'string') {
+        return NextResponse.json({ error: rejection.error }, { status: response.status });
+      }
+    }
     return NextResponse.json({ error: SEARCH_FAILED }, { status: 502 });
   }
 
