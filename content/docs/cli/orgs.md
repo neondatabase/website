@@ -8,7 +8,7 @@ summary: >-
   organization's monthly spending limit. Use it to look up an org ID before
   running org-scoped commands, or to manage an organization from the terminal.
 enableTableOfContents: true
-updatedOn: '2026-11-05T15:33:57.188Z'
+updatedOn: '2026-11-24T11:14:19.985Z'
 redirectFrom:
   - /docs/reference/cli-orgs
   - /docs/cli/org
@@ -196,7 +196,7 @@ neon orgs invitations create --email dana@example.com --email zhang@example.com 
 
 ## neon orgs spending-limit (#spending-limit)
 
-Gets, sets, and removes the organization's monthly spending limit, which the Console calls the [spending notification](/docs/introduction/spending-notifications) threshold. Available on the Launch and Scale plans.
+Gets, sets, and removes the organization's [spending limit](/docs/introduction/spending-notifications) for the current invoice period. Available on the Launch and Scale plans.
 
 <CliUsage command="orgs spending-limit" />
 
@@ -223,7 +223,7 @@ Monthly Limit  $500.00
 
 ### neon orgs spending-limit set (#spending-limit-set)
 
-Sets the monthly spending limit in US dollars, with up to two decimal places. Neon emails organization Admins at 80% and 100% of the limit. Reaching the limit doesn't suspend computes.
+Sets the monthly spending limit in US dollars, with up to two decimal places. Neon emails organization Admins at 80% and 100% of the limit. Reaching the limit suspends services only if service suspension is turned on, which you set in the Console or with the API. Setting the amount keeps the current service suspension setting.
 
 <CliUsage command="orgs spending-limit set" />
 

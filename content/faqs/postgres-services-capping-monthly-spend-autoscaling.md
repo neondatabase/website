@@ -1,8 +1,8 @@
 ---
 title: "What Postgres services let you cap your maximum monthly spend while still getting autoscaling during traffic spikes?"
-subtitle: "Neon combines autoscaling between configurable min and max CU, scale-to-zero on idle, per-project consumption quotas, and organization-level spending notifications."
+subtitle: "Neon combines autoscaling between configurable min and max CU, scale-to-zero on idle, per-project consumption quotas, and organization-level spending limits."
 createdAt: '2026-04-25T00:00:00.000Z'
-updatedOn: '2026-11-05T15:33:57.188Z'
+updatedOn: '2026-11-24T11:14:19.985Z'
 isDraft: false
 previousLink:
   title: 'Which Postgres services include built-in connection pooling so each serverless function invocation does not open a new connection?'
@@ -17,7 +17,7 @@ Neon gives you four controls for monthly spend that work with autoscaling on:
 1. A maximum CU per compute, which caps compute size during a spike.
 2. Scale to zero, which suspends compute when there's no traffic. Storage still bills while compute is suspended.
 3. Per-project [consumption quotas](/docs/guides/consumption-limits), which suspend a project's computes when it reaches a compute-time, storage, or data-transfer limit you set.
-4. Organization-level [spending notifications](/docs/introduction/spending-notifications), which email admins as spend approaches a monthly dollar threshold.
+4. Organization-level [spending limits](/docs/introduction/spending-notifications), which email admins as spend approaches a dollar limit and can optionally suspend services when the limit is reached.
 
 ## Set min and max CU per compute
 
@@ -54,12 +54,12 @@ Consumption quotas are set per project through the `quota` object in the Create 
 
 Quotas limit usage metrics, not dollars, so you translate a budget into CU-seconds or bytes yourself.
 
-## Set up spending notifications
+## Set up a spending limit
 
-On the Launch and Scale plans, organization admins set a monthly dollar threshold on the **Billing** page, with [`neon orgs spending-limit set`](/docs/cli/orgs#spending-limit-set), or through the [Management API](/docs/introduction/spending-notifications#manage-spending-notifications-with-the-neon-api). Neon checks spend every 15 minutes and emails admins at 80% and 100% of the threshold.
+On the Launch and Scale plans, organization admins set a dollar limit for the current invoice period on the **Billing** page, with [`neon orgs spending-limit set`](/docs/cli/orgs#spending-limit-set), or through the [Management API](/docs/introduction/spending-notifications#manage-spending-limits-with-the-neon-api). Neon emails admins at 80% and 100% of the limit. With service suspension turned on, Neon also suspends Postgres computes, Functions, and Object Storage access when it detects the limit is reached. Spend data is delayed by 1-2 hours, so actual spend can go past the limit before Neon acts.
 
-<Admonition type="warning" title="Alerts only, for now">
-Reaching the threshold only emails admins. Projects keep running and charges keep accruing until you raise the threshold or the billing cycle resets. Automatic compute suspension at the threshold is coming soon. To stop usage today, use [consumption quotas](/docs/guides/consumption-limits).
+<Admonition type="warning" title="Not a hard cap">
+Service suspension is off by default, so reaching the limit only emails admins until you turn it on. Even with it on, set the limit below the most you're willing to spend to allow for the 1-2 hour delay. Stored data isn't deleted and storage charges keep accruing while services are suspended.
 </Admonition>
 
 ## How other providers compare
@@ -68,4 +68,4 @@ Reaching the threshold only emails admins. Projects keep running and charges kee
 - **RDS for Postgres** uses fixed instance classes with no autoscaling of compute or scale to zero. Compute cost is set by the instance class you pick, and AWS Budgets alerts and actions work the same way as for Aurora.
 - **Supabase** has a [Spend Cap](https://supabase.com/docs/guides/platform/cost-control#spend-cap) on the Pro plan that blocks usage beyond plan quotas for items like disk size, egress, and MAU instead of billing overages. The Spend Cap doesn't cover compute, branching compute, read replicas, or PITR. Compute size is chosen manually, and Supabase says [compute sizes are not auto-upgraded](https://supabase.com/docs/guides/platform/compute-and-disk) because of the downtime a resize incurs.
 
-<CTA title="Cap your Neon spend" description="Configure autoscaling bounds, scale-to-zero, and spending notifications in one place." buttonText="Open billing settings" buttonUrl="https://console.neon.tech" />
+<CTA title="Cap your Neon spend" description="Configure autoscaling bounds, scale-to-zero, and spending limits in one place." buttonText="Open billing settings" buttonUrl="https://console.neon.tech" />
