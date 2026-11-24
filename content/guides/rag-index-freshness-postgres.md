@@ -4,7 +4,7 @@ subtitle: 'Keep a pgvector index on Postgres in sync with a scheduled Neon Funct
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2026-11-18T00:00:00.000Z'
-updatedOn: '2026-11-24T19:23:09.663Z'
+updatedOn: '2026-11-24T19:28:59.224Z'
 ---
 
 If you've built RAG workflows, you've probably run into this problem: someone updates a price in your documentation, but your assistant keeps quoting the old one for days. Nothing errors and no alert fires. Your application is working as expected, but your vector index is out of date.
@@ -40,7 +40,7 @@ A sync job looks for documents whose current `version` has no chunk, embeds only
 Before you begin, make sure you have the following:
 
 1. **Node.js**: Version 22 or later (v24 recommended). Download from [nodejs.org](https://nodejs.org/).
-2. **A Neon account with AI Gateway credits:** The AI Gateway needs [prepaid credits](/docs/ai-gateway/prepaid-credits), which you can buy on any plan, including Free. Sign up at [console.neon.tech](https://console.neon.tech/signup).
+2. **A Neon account with AI Gateway credits:** The AI Gateway needs [prepaid credits](/docs/ai-gateway/prepaid-credits), which you can buy on any plan, including the Free plan. Sign up at [console.neon.tech](https://console.neon.tech/signup).
 3. The **Neon CLI**, installed and authenticated:
 
    ```bash filename="Terminal"
@@ -495,7 +495,7 @@ neon logs query --since 30m --source function --service-name neon-function/ragsy
 The example above is a simple versioned sync. In production, you may want to add the following improvements:
 
 - **Chunk long documents.** The handler embeds the whole document as one vector, which works until documents outgrow the model's input limit. You can split on headings first, then sentence-split only the sections that exceed the model's token budget. Split on structure rather than fixed length, because a heading-based split keeps an edit from shifting every chunk that follows it. Store one chunk row per piece, keyed by `${id}:v${version}:${index}`, and send them in one request instead of one call per chunk.
-- **Retire old versions.** The old chunks remain in the `chunks` table, but you may want to delete them after a certain period of time. You can add a separate scheduled trigger that deletes chunks whose `version` is older than the current version of their document and older than a certain age. This keeps the table size manageable and avoids returning stale chunks in search results.
+- **Retire old versions.** The old chunks remain in the `chunks` table, but you may want to delete them after a certain period of time. You can add a separate scheduled trigger that deletes chunks whose `version` is older than the current version of their document and older than a certain age. The search query already skips old versions, so this keeps the table and its index from growing with every edit.
 
 ## Resources
 
