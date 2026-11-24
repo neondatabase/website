@@ -748,6 +748,49 @@
       "responses": false,
       "webSearch": false,
       "imageGeneration": false
+    },
+    {
+      "id": "gpt-6-1-terra",
+      "owner": "openai",
+      "entitled": true,
+      "chat": "conforms",
+      "deviations": [],
+      "nativeDialect": "openai-responses",
+      "responses": true,
+      "webSearch": true,
+      "imageGeneration": true
+    },
+    {
+      "id": "gemini-3-pro-image",
+      "owner": "google",
+      "entitled": true,
+      "chat": "array-content",
+      "deviations": [
+        "`id` is null; the spec requires a string",
+        "`content` is an array[2] of {reasoning, text} with keys {summary, text, thoughtSignature, type}; the spec requires a string",
+        "`usage.total_tokens` is 964, but prompt + completion is 225",
+        "`usage.reasoning_tokens` is top-level; the spec nests it under `completion_tokens_details`"
+      ],
+      "nativeDialect": "gemini",
+      "responses": false,
+      "webSearch": false,
+      "imageGeneration": false
+    },
+    {
+      "id": "gemini-3-1-flash-image",
+      "owner": "google",
+      "entitled": true,
+      "chat": "array-content",
+      "deviations": [
+        "`id` is null; the spec requires a string",
+        "`content` is an array[1] of {text} with keys {text, thoughtSignature, type}; the spec requires a string",
+        "`usage.total_tokens` is 788, but prompt + completion is 242",
+        "`usage.reasoning_tokens` is top-level; the spec nests it under `completion_tokens_details`"
+      ],
+      "nativeDialect": "gemini",
+      "responses": false,
+      "webSearch": false,
+      "imageGeneration": false
     }
   ]
 }
