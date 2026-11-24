@@ -103,6 +103,7 @@ export const STATIC_MD_PATHS = [
   '/prompts/python-prompt.md',
   '/prompts/quarkus-jdbc-prompt.md',
   '/prompts/quarkus-reactive-prompt.md',
+  '/prompts/rag-index-freshness-postgres-prompt.md',
   '/prompts/react-router-prompt.md',
   '/prompts/realtime-landing.md',
   '/prompts/redwood-sdk-prompt.md',
