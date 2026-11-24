@@ -81,11 +81,11 @@ Vercel's Fluid model allows function runs to _reuse warm compute instances_ and 
 
 This table breaks down the trade-offs, which are all about setup cost versus query speed.
 
-| Connection Method  | Protocol      | Setup Cost (Roundtrips) | Best For...                                                                                           |
-| :----------------- | :------------ | :---------------------- | :---------------------------------------------------------------------------------------------------- |
-| **Postgres (TCP)** | `postgres://` | High (~8)               | **Fluid compute / Long-running servers.** (Render, Railway). Once established, queries skip connection setup.      |
-| **HTTP**           | `https://`    | Lowest (~3)             | **Classic Serverless.** Fastest for a _single query_ where you can't pool connections.                |
-| **WebSocket**      | `wss://`      | Low (~4)                | **Classic Serverless.** A good alternative to HTTP, especially in environments that don't support it. |
+| Connection Method  | Protocol      | Setup Cost (Roundtrips) | Best For...                                                                                                   |
+| :----------------- | :------------ | :---------------------- | :------------------------------------------------------------------------------------------------------------ |
+| **Postgres (TCP)** | `postgres://` | High (~8)               | **Fluid compute / Long-running servers.** (Render, Railway). Once established, queries skip connection setup. |
+| **HTTP**           | `https://`    | Lowest (~3)             | **Classic Serverless.** Fastest for a _single query_ where you can't pool connections.                        |
+| **WebSocket**      | `wss://`      | Low (~4)                | **Classic Serverless.** A good alternative to HTTP, especially in environments that don't support it.         |
 
 _Note: Roundtrip counts are estimates and vary based on authentication and configuration._
 
