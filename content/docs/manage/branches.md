@@ -13,7 +13,7 @@ enableTableOfContents: true
 isDraft: false
 redirectFrom:
   - /docs/get-started/get-started-branching
-updatedOn: '2026-11-14T19:49:05.289Z'
+updatedOn: '2026-11-24T10:56:47.700Z'
 ---
 
 Data resides in a branch. Each Neon project is created with a [root branch](#root-branch), which is also designated as your [default branch](#default-branch). Projects created in the Neon Console have a root branch named `production`, while projects created via the API or CLI have a root branch named `main`. You can create child branches from your root branch or from previously created branches. A branch can contain multiple databases and roles. Neon's [plan allowances](/docs/introduction/plans) define the number of branches you can create.
@@ -422,6 +422,8 @@ curl -X 'PATCH' \
 Each Neon project is created with a default branch (named `main` if the project was created with the CLI or API, or `production` if created in the Console), but you can designate any branch as your project's default branch. When creating a new branch without specifying the parent, a new branch is created from your project's default branch. Default branch is automatically selected in the UI when creating the new branch, and it's used in the [create branch API call](/docs/reference/api/branches/create-project-branch). The [Neon-Managed Vercel integration](/docs/guides/neon-managed-vercel-integration) also creates preview deployment branches from your project's default branch.
 
 For more information, see [Default branch](#default-branch).
+
+If the branch you set as default runs production, keep it a [root branch](#root-branch). Snapshots and backup schedules are only available on root branches, so a child branch set as the default can't use them.
 
 <Tabs labels={["Console", "CLI", "API"]}>
 
