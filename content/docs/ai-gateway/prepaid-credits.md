@@ -6,7 +6,7 @@ summary: >-
   credits, how to set up automatic top-up, how to check your balance, and how
   usage limits and metering affect access.
 enableTableOfContents: true
-updatedOn: '2026-11-04T20:10:08.844Z'
+updatedOn: '2026-11-11T12:31:00.000Z'
 ---
 
 The Neon AI Gateway is billed with **prepaid credits**. You buy credits up front,

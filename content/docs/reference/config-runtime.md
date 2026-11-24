@@ -8,7 +8,7 @@ summary: >-
   CI step, a deploy script, or another tool that needs to reconcile a branch
   against a neon.ts policy.
 enableTableOfContents: true
-updatedOn: '2026-10-30T19:13:49.000Z'
+updatedOn: '2026-11-18T16:36:42.417Z'
 ---
 
 `@neon/config-runtime` is the package the [`neon` CLI](/docs/cli/config) itself uses to run a [`neon.ts`](/docs/reference/neon-ts) policy: read a branch's live state, diff a policy against it, apply the result, bundle and deploy Neon Functions, and register their custom domains. Import it directly when you're writing your own CI step or script and the CLI commands (`neon config plan`, `neon deploy`) don't fit. For example, a custom GitHub Actions job that applies a policy to a freshly created preview branch.
@@ -79,7 +79,7 @@ The three functions below mirror the Terraform mental model (`inspect` reads sta
 ### `inspect`
 
 ```ts
-function inspect(options: ConfigOperationOptions): Promise<PulledBranchConfig>;
+function inspect(options: ConfigOperationOptions & { realtime?: boolean }): Promise<PulledBranchConfig>;
 ```
 
 Reads a branch's live Neon state and reverse-engineers it into a `neon.ts`-shaped `Config`, plus raw project/branch metadata. Read-only, and never mutates anything.
@@ -91,6 +91,8 @@ Reads a branch's live Neon state and reverse-engineers it into a `neon.ts`-shape
 | `apiKey`                       | `string?`  | Required unless you pass `api`.                                           |
 | `apiHost`                      | `string?`  | Optional non-production API host. Defaults to Neon's production API.      |
 | `api`                          | `NeonApi?` | Inject a custom adapter (mainly for tests).                               |
+
+`inspect` also accepts `realtime` (`boolean`, optional). It defaults to `true`, which reads the branch's Realtime state. Pass `false` to skip it.
 
 Returns a `PulledBranchConfig`:
 

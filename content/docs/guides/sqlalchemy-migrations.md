@@ -1,5 +1,5 @@
 ---
-title: Schema migration with Lakebase Postgres and SQLAlchemy
+title: Schema migration with SQLAlchemy and Lakebase Postgres on Neon
 subtitle: Manage database migrations in your Python project with SQLAlchemy and Alembic
 summary: >-
   SQLAlchemy with Alembic autogenerates and applies versioned schema migrations
@@ -10,7 +10,7 @@ summary: >-
   The guide builds a FastAPI app with SQLAlchemy ORM models and walks through an
   end-to-end schema evolution cycle.
 enableTableOfContents: true
-updatedOn: '2026-10-28T11:11:18.780Z'
+updatedOn: '2026-11-18T16:41:34.386Z'
 ---
 
 [SQLAlchemy](https://www.sqlalchemy.org/) is a popular SQL toolkit and Object-Relational Mapping (ORM) library for Python. SQLAlchemy provides a way to interact with databases and manage database schema changes using [Alembic](https://alembic.sqlalchemy.org/), a lightweight database migration tool.

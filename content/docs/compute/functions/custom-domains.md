@@ -7,7 +7,7 @@ summary: >-
 enableTableOfContents: true
 redirectFrom:
   - /docs/guides/custom-domains
-updatedOn: '2026-11-02T11:41:12.000Z'
+updatedOn: '2026-11-10T21:39:54.000Z'
 ---
 
 Each Neon Function has a native invocation URL. You can also serve it from a

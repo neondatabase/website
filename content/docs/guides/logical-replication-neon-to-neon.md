@@ -13,7 +13,7 @@ summary: >-
   project and the change cannot be reverted.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2026-10-09T10:14:56.146Z'
+updatedOn: '2026-11-09T21:15:32.000Z'
 ---
 
 Neon's logical replication feature allows you to replicate data from one Neon project to another. This enables different usage scenarios, including:

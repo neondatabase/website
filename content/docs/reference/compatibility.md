@@ -16,14 +16,14 @@ redirectFrom:
   - /docs/postgresql/postgres-compatibility
   - /docs/introduction/compatibility
   - /docs/introduction/postgres-compatibility
-updatedOn: '2026-09-17T16:33:54.884Z'
+updatedOn: '2026-11-18T20:38:42.000Z'
 ---
 
 **Neon is Postgres**. However, as a managed Postgres service, there are some differences you should be aware of.
 
 ## Postgres versions
 
-Neon supports Postgres 14, 15, 16, 17, and 18. You select the Postgres version you want to use when creating a Neon project. For information about creating a Neon project, see [Manage projects](/docs/manage/projects). Minor Postgres point releases are rolled out by Neon after extensive validation as part of regular platform maintenance.
+Neon supports Postgres 14, 15, 16, 17, 18, and 19. Postgres 18 is the default. You select the Postgres version you want to use when creating a Neon project. For information about creating a Neon project, see [Manage projects](/docs/manage/projects). Minor Postgres point releases are rolled out by Neon after extensive validation as part of regular platform maintenance.
 
 For the current latest minor version available on Neon for each major version, and for details on how minor and major version updates work, see the [Lakebase Postgres version support policy](/docs/postgresql/postgres-version-support).
 
@@ -48,7 +48,7 @@ Neon roles cannot install Postgres extensions other than those supported by Neon
 The following table shows parameter settings that are set explicitly for your database. These values may differ from standard Postgres defaults, and a few settings differ based on your Neon compute size.
 
 <Admonition type="note">
-Because Neon is a managed Postgres service, Postgres parameters are not user-configurable outside of a [session, database, or role context](#configuring-postgres-parameters-for-a-session-database-or-role).
+Because Neon is a managed Postgres service, Postgres parameters are not user-configurable outside of a [session, database, or role context](#configuring-postgres-parameters-for-a-session-database-or-role). The exception is `log_min_duration_statement`, which you can set per compute with the Neon API to log slow queries. See [Log slow queries](/docs/reference/metrics-logs#log-slow-queries).
 
 If you are a Neon [Scale plan](/docs/introduction/plans) user and require a different Postgres instance-level setting, you can contact [Neon Support](/docs/introduction/support) to see if the desired setting can be supported. Please keep in mind that it may not be possible to support some parameters due to platform limitations and constraints.
 </Admonition>

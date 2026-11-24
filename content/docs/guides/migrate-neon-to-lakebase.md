@@ -10,7 +10,7 @@ summary: >-
   Lakebase OAuth tokens expire approximately every hour.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2026-10-21T11:04:20.383Z'
+updatedOn: '2026-11-09T20:00:36.000Z'
 ---
 
 This guide describes how to migrate a **Neon** database to **Databricks Lakebase Postgres** using **`pg_dump`** and **`pg_restore`**.

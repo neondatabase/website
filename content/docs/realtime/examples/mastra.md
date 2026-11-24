@@ -4,7 +4,7 @@ subtitle: 'Using Realtime with Mastra to keep users and agents in sync.'
 summary: >-
   Use Mastra with Neon Realtime: start agents from your writes, store their memory and traces in Postgres, sync them to the browser and restart them when users edit.
 enableTableOfContents: true
-updatedOn: '2026-10-15T14:51:27.000Z'
+updatedOn: '2026-11-18T00:59:49.148Z'
 ---
 
 To Realtime, a [Mastra](https://mastra.ai) agent is one more writer on your data. This example [triggers agents when users write data](#start-agents-from-your-writes) and [syncs agent activity](#sync-agent-activity-to-the-browser) and [agent sessions](#store-mastras-data-in-your-database) through the database.
@@ -139,7 +139,7 @@ export const sealSpans = createServerFn({ method: "POST" }).handler(async () => 
 
 - `mastraAiSpans` declares only the columns you sync. Mastra creates and migrates the table, so keep it out of your Drizzle migrations
 - Mastra's timestamp column names differ from their Drizzle field names, so `startedAt` and `endedAt` need an [SQL alias](./drizzle#alias-renamed-and-computed-fields)
-- [`realtime.seal()`](../sdks/typescript#backend-realtimeserverseal) seals the server's `workspaceId`, so a browser only gets its own workspace's spans
+- [`realtime.seal()`](../sdks/typescript/backend#backend-realtimeserverseal) seals the server's `workspaceId`, so a browser only gets its own workspace's spans
 
 ### Filter the spans in the browser
 
@@ -163,7 +163,7 @@ export function useLeadActivity(leadId: string) {
 }
 ```
 
-- `descriptors.spans` comes from [`realtimeCollectionOptions()`](../sdks/typescript#tanstack-db-realtimecollectionoptions) with `refreshQuery: () => sealSpans()`. Its `getKey` returns `` `${span.traceId}:${span.spanId}` ``, for the table's composite primary key
+- `descriptors.spans` comes from [`realtimeCollectionOptions()`](../sdks/typescript/tanstack-db#tanstack-db-realtimecollectionoptions) with `refreshQuery: () => sealSpans()`. Its `getKey` returns `` `${span.traceId}:${span.spanId}` ``, for the table's composite primary key
 - the sealed query has no `ORDER BY`, so order the spans in `useLiveQuery`
 
 See the [TanStack example](./tanstack) for collections, SSR and optimistic writes.

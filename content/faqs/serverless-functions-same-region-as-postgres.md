@@ -2,7 +2,7 @@
 title: "Which serverless functions run in the same region as my Postgres database?"
 subtitle: "Neon Functions deploy onto your Lakebase Postgres branch, in the same region as the database, with DATABASE_URL and the credentials for other Neon services injected at runtime."
 createdAt: '2026-11-02T00:00:00.000Z'
-updatedOn: '2026-11-03T23:21:47.530Z'
+updatedOn: '2026-11-18T09:35:47.088Z'
 isDraft: false
 previousLink:
   title: 'Which serverless database services charge per second instead of per month for Postgres?'
@@ -40,12 +40,14 @@ import { attachDatabasePool } from '@neon/functions';
 const pool = new Pool({ connectionString: process.env.DATABASE_URL, max: 5 });
 attachDatabasePool(pool);
 
-export default {
+const handler = {
   async fetch() {
     const { rows } = await pool.query('SELECT now() AS time');
     return Response.json(rows[0]);
   },
 };
+
+export default handler;
 ```
 
 You don't need to drain the pool on shutdown. When the runtime evicts an idle function, Neon's pooler reclaims those connections.

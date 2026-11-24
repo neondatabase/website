@@ -42,7 +42,7 @@ const ORG_LABELS = {
 };
 
 const MODEL_CATALOG_NOTE =
-  'Prices are provider list prices per million tokens. Inference is free during the private preview. Click a model for a copy-paste quickstart.';
+  "Prices are per million tokens at each provider's list rate, with no Neon markup. Inference draws down your prepaid AI Gateway credits. Click a model for a copy-paste quickstart.";
 
 const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
@@ -77,8 +77,11 @@ const formatDate = (iso) => {
   return `${MONTHS[monthIndex]} ${year}`;
 };
 
+// `imageGeneration` is the Responses image_generation tool (OpenAI models); `imageOutput` is a
+// model that returns the image itself (the Gemini image models).
 const isImageCapable = (capability) =>
-  capability?.entitled !== false && capability?.imageGeneration === true;
+  capability?.entitled !== false &&
+  (capability?.imageGeneration === true || capability?.imageOutput === true);
 // From the catalog (`model.type`), not measured capabilities: the catalog is allowed to list a
 // model before it has been probed, same as any other model, and an embedding model is still an
 // embedding model while unmeasured — it just has no known-working endpoint yet (see
@@ -111,6 +114,7 @@ const toRow = (model, capability) => {
   const contextWindow = model.limit?.context;
   const costInput = model.cost?.input;
   const costOutput = model.cost?.output;
+  const costOutputImage = model.cost?.output_image;
   return {
     id: model.id,
     name: model.name,
@@ -127,6 +131,7 @@ const toRow = (model, capability) => {
     costOutput,
     costInputLabel: formatPrice(costInput),
     costOutputLabel: formatPrice(costOutput),
+    costOutputImageLabel: costOutputImage === undefined ? null : formatPrice(costOutputImage),
     knowledge: model.knowledge || null,
     releaseDate: model.release_date || null,
     releaseLabel: formatDate(model.release_date),

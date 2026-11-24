@@ -11,7 +11,7 @@ summary: >-
   credentials to the Inngest integration wizard (credentials are not stored).
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2026-09-16T19:45:35.340Z'
+updatedOn: '2026-11-16T20:15:07.000Z'
 ---
 
 Neon's logical replication feature allows you to replicate data from your Lakebase Postgres database to external destinations.

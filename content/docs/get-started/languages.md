@@ -11,7 +11,7 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/guides/guides-intro
   - /docs/get-started-with-neon/languages
-updatedOn: '2026-07-31T15:27:48.506Z'
+updatedOn: '2026-11-20T21:12:21.472Z'
 ---
 
 <TechCards>
@@ -26,7 +26,9 @@ updatedOn: '2026-07-31T15:27:48.506Z'
 
 <a href="/docs/guides/kotlin" title="Kotlin" description="Connect a Kotlin application to Neon" icon="kotlin"></a>
 
-<a href="/docs/guides/javascript" title="JavaScript" description="Connect a JavaScript application to Neon" icon="javascript"></a>
+<a href="/docs/guides/node" title="JavaScript" description="Connect a JavaScript application to Neon" icon="javascript"></a>
+
+<a href="/docs/guides/node" title="Node.js" description="Connect a Node.js application to Neon" icon="node-js"></a>
 
 <a href="/docs/guides/python" title="Python" description="Connect a Python application to Neon" icon="python"></a>
 

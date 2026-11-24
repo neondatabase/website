@@ -12,6 +12,7 @@ redirectFrom:
   - /docs/api
   - /docs/api/about
   - /docs/api-reference
+  - /docs/reference/api/branches/recover-project-branch
 updatedOn: '2026-09-04T22:12:54.000Z'
 ---
 

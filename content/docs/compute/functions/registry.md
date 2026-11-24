@@ -3,10 +3,10 @@ title: Contribute a function template
 subtitle: Share a reusable Neon Function that anyone can add to their project with neon functions new.
 summary: >-
   How to contribute a template to the Neon Function Registry: module format,
-  template.json and registry.json fields, layouts, categories, limits, local
+  template.json and registry.json fields, layouts, categories, features, limits, local
   testing with NEON_FUNCTION_REGISTRY_DIR, and the review checklist.
 enableTableOfContents: true
-updatedOn: '2026-11-07T22:08:33.797Z'
+updatedOn: '2026-11-22T21:45:58.455Z'
 ---
 
 The Function Registry is the public catalog behind [`neon functions new`](/docs/cli/functions#new). Each template is a folder in [`registry/`](https://github.com/neondatabase/examples/tree/main/registry) in `neondatabase/examples`. To add one, you open a pull request with the template folder and an index entry. Neon reviews it, and after it merges to `main`, the template shows up in the CLI and on [neon.com/functions/templates](/functions/templates) within about an hour. You don't publish anything yourself.
@@ -37,11 +37,13 @@ The CLI lists templates from `registry.json`. Installing one downloads the `neon
 Each module default-exports a fetch handler:
 
 ```ts filename="functions/send-email.ts"
-export default {
+const handler = {
   async fetch(request: Request): Promise<Response> {
     return Response.json({ ok: true });
   },
 };
+
+export default handler;
 ```
 
 - Read configuration from `process.env`, and declare every variable you read in `environment`.
@@ -115,6 +117,7 @@ Run the [local test](#test-your-template-locally), go through the [review checkl
 | `dependencies`         | no       | Exact `name@version` pins, scoped packages included. No ranges and no `latest`, so users install the version a reviewer approved.                       |
 | `environment`          | no       | `UPPER_SNAKE` names, each with a description. The CLI declares them in `neon.ts` and adds them to `.env.example`, using the description as the comment. |
 | `operations`           | no       | 1 to 40 entries. Leave them out for a single-module template.                                                                                           |
+| `features`             | no       | 1 to 16 Neon products the template uses, shown under **Built with** on its neon.com page. See [Features](#features).                                    |
 
 Each operation takes these fields:
 
@@ -170,6 +173,31 @@ Add at least one topical label to `template.json`, even though the schema doesn'
 | `mcp`               | Model Context Protocol servers.                   |
 
 To add a new topical category, use it in your `template.json` and add a row to the categories table in the registry [README](https://github.com/neondatabase/examples/blob/main/registry/README.md).
+
+## Features
+
+`features` lists the Neon products a template uses. The template's page on [neon.com/functions/templates](/functions/templates) shows them under **Built with**, in the order you list them, so put the product the template is mainly about first. Leave out Functions, since every template is one, and leave out `features` entirely if the template uses nothing else.
+
+| Feature             | Product                                                        |
+| ------------------- | -------------------------------------------------------------- |
+| `postgres`          | [Lakebase Postgres](/docs/postgres/overview)                   |
+| `lakebase-search`   | [Lakebase Search](/docs/ai/lakebase-search)                    |
+| `auth`              | [Managed Better Auth](/docs/auth/overview)                     |
+| `data-api`          | [Data API](/docs/data-api/overview)                            |
+| `realtime`          | [Realtime](/docs/realtime/overview)                            |
+| `object-storage`    | [Object Storage](/docs/storage/overview)                       |
+| `ai-gateway`        | [AI Gateway](/docs/ai-gateway/overview)                        |
+| `function-triggers` | [Function Triggers](/docs/compute/functions/triggers/overview) |
+
+Write each feature as its id, and list each one once. For Function Triggers, you can write an object instead that lists the trigger types the template sets up: `schedule` for a [cron schedule](/docs/compute/functions/triggers/schedule), or `storage_object_created` for an [object upload](/docs/compute/functions/triggers/object-storage).
+
+```json filename="template.json"
+"features": [
+  "ai-gateway",
+  "object-storage",
+  { "id": "function-triggers", "types": ["storage_object_created"] }
+]
+```
 
 ## Limits
 

@@ -7,7 +7,7 @@ summary: >-
   with neon dev, and deploy with neon deploy. The function gets a public HTTPS
   URL with DATABASE_URL injected from the branch's Postgres database.
 enableTableOfContents: true
-updatedOn: '2026-11-05T01:12:32.486Z'
+updatedOn: '2026-11-18T08:58:28.881Z'
 ---
 
 A function takes a request and returns a web response, running on long-lived Node.js compute next to your database. The request can come over HTTP, or from a [Function Trigger](/docs/compute/functions/triggers/overview) on a schedule or object upload.
@@ -21,9 +21,11 @@ Browse the [function templates](/functions/templates) for ready-made APIs, MCP s
 Write a file and deploy it:
 
 ```ts filename="hello-world.ts"
-export default {
+const handler = {
   fetch: (request: Request) => new Response('Hello world'),
 };
+
+export default handler;
 ```
 
 ```bash filename="Neon CLI"
@@ -127,12 +129,14 @@ npm install @neon/config @neon/functions hono pg
 npm install --save-dev @types/pg
 ```
 
-A function is any module whose default export has a `fetch(request)` method that returns a `Response`. That can be an object with a `fetch` method:
+A function is any module whose default export has a `fetch(request)` method that returns a `Response`. That can be an object with a `fetch` method, assigned to a name before it is exported so that Next.js's ESLint config (`import/no-anonymous-default-export`) accepts it:
 
 ```ts
-export default {
+const handler = {
   fetch: (request: Request) => new Response('Hello world'),
 };
+
+export default handler;
 ```
 
 Or a bare async function:

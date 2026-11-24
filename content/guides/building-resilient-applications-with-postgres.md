@@ -4,7 +4,7 @@ subtitle: Learn best practices for building applications that gracefully handle 
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2025-11-13T00:00:00.000Z'
-updatedOn: '2026-09-24T17:56:34.189Z'
+updatedOn: '2026-11-04T17:48:11.000Z'
 ---
 
 Managed database services occasionally drop connections for a few seconds. This guide uses Neon as an example, but the practices and code examples apply to **any** managed database service, so your application can handle these interruptions and keep serving requests.
