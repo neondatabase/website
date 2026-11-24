@@ -62,37 +62,66 @@ export function isAIAgentRequest(request) {
 // they don't run the browser analytics script either. Lowercase substrings of
 // the User-Agent header. robots.txt-only tokens (Google-Extended,
 // Applebot-Extended) never appear in a User-Agent, so they aren't listed.
-export const AI_AGENT_USER_AGENT_TOKENS = [
+//
+// Split the way https://bots.fyi tags them: AI assistants fetch a page because
+// a person asked them to, right now ("User Initiated"); AI crawlers collect
+// pages on their own (indexing, training, "AI Crawler"). They answer different
+// questions: how many people use AI with Neon vs how much AI companies read
+// the site.
+
+// AI assistants: tagged "User Initiated" on bots.fyi, or documented by the
+// operator as fetching only when a user's request needs it.
+export const AI_ASSISTANT_USER_AGENT_TOKENS = [
   // OpenAI: https://developers.openai.com/api/docs/bots
   'chatgpt-user',
-  'oai-searchbot',
-  'gptbot',
   // Anthropic: https://support.claude.com/en/articles/8896518 and /18234133
   'claude-user',
-  'claude-searchbot',
-  'claudebot',
   'claude-agent',
   // Perplexity: https://docs.perplexity.ai/guides/bots
-  'perplexitybot',
   'perplexity-user',
-  // Google: https://developers.google.com/crawling/docs/crawlers-fetchers
+  // Google user-triggered fetchers:
+  // https://developers.google.com/crawling/docs/crawlers-fetchers/google-user-triggered-fetchers
   'google-agent',
   'google-gemininotebook',
   'google-notebooklm',
+  // Meta: https://developers.facebook.com/docs/sharing/webmasters/web-crawlers
+  'meta-externalfetcher',
+  // Mistral: https://docs.mistral.ai/robots
+  'mistralai-user',
+  // Amazon: https://developer.amazon.com/amazonbot
+  'amzn-user',
+  // Cohere, per https://github.com/ai-robots-txt/ai.robots.txt ("responses to
+  // user-initiated prompts"); Cohere doesn't publish a User-Agent string.
+  'cohere-ai',
+  // Seen in Neon's traffic (week of Oct 27, review on #6975): ExaUser
+  // (bots.fyi "User Initiated") and Amazon Quick acting for a user.
+  'exauser',
+  'amazon-quick-on-behalf-of',
+];
+
+// AI crawlers: collect pages without a person waiting on the answer.
+export const AI_CRAWLER_USER_AGENT_TOKENS = [
+  // OpenAI: https://developers.openai.com/api/docs/bots
+  'oai-searchbot',
+  'gptbot',
+  // Anthropic: https://support.claude.com/en/articles/8896518
+  'claude-searchbot',
+  'claudebot',
+  // Perplexity: https://docs.perplexity.ai/guides/bots
+  'perplexitybot',
+  // Google: https://developers.google.com/crawling/docs/crawlers-fetchers
   'google-cloudvertexbot',
   // Meta: https://developers.facebook.com/docs/sharing/webmasters/web-crawlers
   'meta-externalagent',
-  'meta-externalfetcher',
   'meta-webindexer',
   // Mistral: https://docs.mistral.ai/robots (MistralAI-Index is a search
   // crawler on bots.fyi, so it's in SEARCH_CRAWLER_USER_AGENT_TOKENS)
-  'mistralai-user',
   'mistralai-training',
   // Amazon: https://developer.amazon.com/amazonbot (Amzn-SearchBot is a
   // search crawler on bots.fyi, so it's in SEARCH_CRAWLER_USER_AGENT_TOKENS)
   'amazonbot',
-  'amzn-user',
   // DuckDuckGo: https://duckduckgo.com/duckduckgo-help-pages/results/duckassistbot
+  // (bots.fyi: AI Assistant, not User Initiated)
   'duckassistbot',
   // AI crawlers listed by https://bots.fyi and
   // https://github.com/ai-robots-txt/ai.robots.txt whose operators don't
@@ -102,28 +131,59 @@ export const AI_AGENT_USER_AGENT_TOKENS = [
   'ai2bot',
   'bytespider',
   'ccbot',
-  'cohere-ai',
   'deepseekbot',
   'diffbot',
   'facebookbot',
   'youbot',
+  // Seen in Neon's traffic (week of Oct 27, review on #6975): pkgseer's docs
+  // crawler and Inkeep.
+  'pkgseer',
+  'inkeep',
 ];
+
+export const AI_AGENT_USER_AGENT_TOKENS = [
+  ...AI_ASSISTANT_USER_AGENT_TOKENS,
+  ...AI_CRAWLER_USER_AGENT_TOKENS,
+];
+
+// Web Bot Auth signers known to act for a person. ChatGPT agent sends a normal
+// Chrome User-Agent and `Signature-Agent: "https://chatgpt.com"`
+// (https://help.openai.com/en/articles/11845367; bots.fyi lists it as
+// ChatGPT-Operator, "User Initiated").
+const AI_ASSISTANT_SIGNATURE_AGENTS = ['https://chatgpt.com'];
+
+function isAIAssistantRequest(request) {
+  const signatureAgent = (request.headers.get('signature-agent') || '').replace(/"/g, '');
+  return (
+    Boolean(
+      findUserAgentToken(request.headers.get('user-agent'), AI_ASSISTANT_USER_AGENT_TOKENS)
+    ) || AI_ASSISTANT_SIGNATURE_AGENTS.includes(signatureAgent)
+  );
+}
 
 export function isKnownAIAgentUserAgent(userAgent) {
   return Boolean(findUserAgentToken(userAgent, AI_AGENT_USER_AGENT_TOKENS));
 }
 
-// A browser's background request: a page script's fetch, which includes Next.js
-// prefetches and router fetches. Browsers send Sec-Fetch-Mode on every request
-// (`navigate` for a page load; `cors`, `no-cors` or `same-origin` otherwise),
-// and clients that aren't browsers don't send it. This works in the proxy,
-// unlike the rsc/next-router-* headers, which Next.js removes before it runs.
-export function isBrowserBackgroundRequest(request) {
-  const fetchMode = request.headers.get('sec-fetch-mode');
-  return Boolean(fetchMode) && fetchMode !== 'navigate';
+// Browsers send Fetch Metadata on every request: Sec-Fetch-Mode, Sec-Fetch-Dest
+// and Sec-Fetch-Site together. Node.js's built-in fetch (undici) sends only
+// `Sec-Fetch-Mode: cors`, so Sec-Fetch-Mode alone doesn't mean a browser:
+// agents and MCP servers built on Node's fetch would look like a page script.
+// Sec-Fetch-Dest is the header that marks a real browser engine.
+function isBrowserEngineRequest(request) {
+  return Boolean(request.headers.get('sec-fetch-dest'));
 }
 
-// Requests that aren't reads: Next.js router fetches (RSC payload requests from
+// A browser's background request: a page script's fetch, which includes Next.js
+// prefetches and router fetches (`Sec-Fetch-Mode` is `cors`, `no-cors` or
+// `same-origin`; `navigate` is a page load). This works in the proxy, unlike
+// the rsc/next-router-* headers, which Next.js removes before it runs.
+export function isBrowserBackgroundRequest(request) {
+  const fetchMode = request.headers.get('sec-fetch-mode');
+  return Boolean(fetchMode) && fetchMode !== 'navigate' && isBrowserEngineRequest(request);
+}
+
+// Requests that aren't reads: anything but GET, Next.js router fetches (RSC payload requests from
 // a <Link>, both prefetches and the fetch on click that precedes a full
 // navigation), browser prefetches (speculation rules, link rel=prefetch), and
 // the site's own .md fetches (NON_AGENT_FETCH_HEADERS). Counting them inflates
@@ -135,6 +195,9 @@ export function isBrowserBackgroundRequest(request) {
 // proxy router fetches are recognized by Sec-Fetch-Mode instead
 // (isBrowserBackgroundRequest).
 export function isNonReadRequest(request) {
+  // Only GET reads a page. HEAD (uptime monitors) and OPTIONS (CORS
+  // preflights) are skipped on every branch, markdown ones included.
+  if ((request.method || 'GET').toUpperCase() !== 'GET') return true;
   const headers = request.headers;
   if (headers.get('rsc') || headers.get('next-router-prefetch')) return true;
   if (isBrowserBackgroundRequest(request)) return true;
@@ -223,37 +286,53 @@ export function agentFamily(userAgent) {
 }
 
 // Who read a page or file, for the pageview's llm_reader label:
-// - agent: the request's headers identify a known AI agent (a token in
-//   AI_AGENT_USER_AGENT_TOKENS, or a Web Bot Auth Signature-Agent header).
-//   Asking for a .md or for markdown doesn't make a request an agent, and
-//   neither does a generic client (curl, axios, python-requests).
+// - ai-assistant: an AI tool fetching for a person right now
+//   (AI_ASSISTANT_USER_AGENT_TOKENS, or ChatGPT agent's Signature-Agent)
+// - ai-crawler: an AI company's crawler (AI_CRAWLER_USER_AGENT_TOKENS)
 // - search-crawler: the User-Agent names a verified search engine crawler
 //   (SEARCH_CRAWLER_USER_AGENT_TOKENS). This is the crawler's claim; the proxy
 //   doesn't check its IP.
 // - human: a person in a browser tab (see isHumanBrowserNavigation)
-// - unknown: everything else (generic HTTP clients, link unfurlers,
-//   monitors, headless browsers). The raw User-Agent is sent with the
-//   pageview, so dashboards can break these down further.
-// This only labels reads. What a request is served (markdown or HTML) is
-// decided separately by isAIAgentRequest.
+// - unknown: everything else (generic HTTP clients, link unfurlers, monitors,
+//   headless browsers, Web Bot Auth signers we can't name). The raw
+//   User-Agent is sent with the pageview, so dashboards can break these down.
+// Asking for a .md or for markdown doesn't make a request an AI reader, and
+// neither does a generic client (curl, axios, python-requests). This only
+// labels reads; what a request is served (markdown or HTML) is decided
+// separately by isAIAgentRequest.
 export function classifyReader(request) {
-  if (isKnownAIAgentRequest(request)) return 'agent';
-  if (isSearchCrawlerUserAgent(request.headers.get('user-agent'))) return 'search-crawler';
+  if (isAIAssistantRequest(request)) return 'ai-assistant';
+  const userAgent = request.headers.get('user-agent');
+  if (findUserAgentToken(userAgent, AI_CRAWLER_USER_AGENT_TOKENS)) return 'ai-crawler';
+  if (isSearchCrawlerUserAgent(userAgent)) return 'search-crawler';
   if (isHumanBrowserNavigation(request)) return 'human';
   return 'unknown';
 }
 
+// A real browser engine opening a URL (link click, typed URL, reload), whoever
+// drives it: a person, a headless browser, an agent's browser, or a crawler
+// that renders pages. Browsers send Sec-Fetch-Mode: navigate (with
+// Sec-Fetch-Dest) on these; HTTP clients don't. A browser engine runs the
+// page's analytics script, so the browser script already counts its HTML page
+// views.
+export function isBrowserNavigation(request) {
+  return request.headers.get('sec-fetch-mode') === 'navigate' && isBrowserEngineRequest(request);
+}
+
 // A person opening a URL in a browser tab: browsers send these Fetch Metadata
 // headers on every top-level navigation (link click, typed URL, reload), and
-// HTTP clients used by agents (curl, axios, fetch tools) don't. Headless and
-// agent-driven browsers send them too, so exclude those.
+// HTTP clients used by agents (curl, axios, fetch tools) don't. Headless,
+// agent-driven and crawler-driven browsers send them too, so exclude those:
+// search crawlers that render pages in a real browser (Baiduspider-render,
+// Googlebot) look like a person otherwise.
 export function isHumanBrowserNavigation(request) {
   const userAgent = request.headers.get('user-agent') || '';
   return (
-    request.headers.get('sec-fetch-mode') === 'navigate' &&
+    isBrowserNavigation(request) &&
     request.headers.get('sec-fetch-dest') === 'document' &&
     !/headless/i.test(userAgent) &&
-    !isKnownAIAgentRequest(request)
+    !isKnownAIAgentRequest(request) &&
+    !isSearchCrawlerUserAgent(userAgent)
   );
 }
 
