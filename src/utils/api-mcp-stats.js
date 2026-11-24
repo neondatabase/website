@@ -8,7 +8,7 @@ const toRows = (rows, key) =>
   }));
 
 async function readMcpStats(sql) {
-  const [clients, tools, access, published] = await Promise.all([
+  const [clients, tools, access, surfaces, customerSize, published] = await Promise.all([
     sql`
       SELECT week_start::text AS week_start, client, user_share_pct
       FROM public_stats.mcp_client_users_weekly
@@ -24,11 +24,23 @@ async function readMcpStats(sql) {
              window_start::text AS window_start, window_end::text AS window_end
       FROM public_stats.mcp_access_users
     `,
+    sql`
+      SELECT agent, surface, account_share_pct,
+             window_start::text AS window_start, window_end::text AS window_end
+      FROM public_stats.agent_surfaces
+    `,
+    sql`
+      SELECT band, surface, account_share_pct,
+             window_start::text AS window_start, window_end::text AS window_end
+      FROM public_stats.customer_size_surfaces
+    `,
     sql`SELECT max(published_at) AS published_at FROM public_stats.mcp_client_users_weekly`,
   ]);
   if (clients.length === 0) throw new Error('public_stats.mcp_client_users_weekly is empty');
   if (tools.length === 0) throw new Error('public_stats.mcp_tool_users_weekly is empty');
   if (access.length === 0) throw new Error('public_stats.mcp_access_users is empty');
+  if (surfaces.length === 0) throw new Error('public_stats.agent_surfaces is empty');
+  if (customerSize.length === 0) throw new Error('public_stats.customer_size_surfaces is empty');
 
   return {
     clients: toRows(clients, 'client'),
@@ -40,6 +52,24 @@ async function readMcpStats(sql) {
         dimension: row.dimension,
         value: row.value,
         share: Number(row.user_share_pct),
+      })),
+    },
+    surfaces: {
+      windowStart: surfaces[0].window_start,
+      windowEnd: surfaces[0].window_end,
+      rows: surfaces.map((row) => ({
+        agent: row.agent,
+        surface: row.surface,
+        share: Number(row.account_share_pct),
+      })),
+    },
+    customerSize: {
+      windowStart: customerSize[0].window_start,
+      windowEnd: customerSize[0].window_end,
+      rows: customerSize.map((row) => ({
+        band: row.band,
+        surface: row.surface,
+        share: Number(row.account_share_pct),
       })),
     },
     publishedAt: new Date(published[0].published_at).toISOString(),

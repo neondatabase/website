@@ -157,6 +157,7 @@ WAL
 TIMING
 SUMMARY
 FORMAT { TEXT | XML | JSON | YAML }
+PLAN_ADVICE
 ```
 
 The `ANALYZE` option executes the SQL statement first and includes actual run times and other statistics in your query plans, so it's helpful to include this option when explaining `SELECT` queries. For other types of statements such as `INSERT`, `UPDATE`, or `DELETE`, you can enclose an `EXPLAIN ANALYZE` statement in a transaction, as shown below, to prevent the `EXPLAIN ANALYZE` statement from altering your data.
@@ -166,6 +167,8 @@ BEGIN;
     EXPLAIN ANALYZE sql_statement;
 ROLLBACK;
 ```
+
+Starting in Postgres 19, the `PLAN_ADVICE` option generates plan hints that you can apply to lock in or stabilize a query plan. In Neon, `pg_plan_advice` is preloaded on Postgres 19 computes, so you don't need to run `LOAD 'pg_plan_advice'` or configure preload libraries before using `EXPLAIN (PLAN_ADVICE)` or setting `pg_plan_advice.advice`. To learn how to generate and apply plan advice, see [PostgreSQL 19 pg_plan_advice](/postgresql/postgresql-19/pg-plan-advice).
 
 For a description of the other `EXPLAIN` options listed above, refer to the [official PostgreSQL EXPLAIN documentation](https://www.postgresql.org/docs/current/sql-explain.html).
 

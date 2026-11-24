@@ -60,6 +60,8 @@ function stringLiteralValue(node) {
 }
 
 function arrayLiteralStrings(node, consts) {
+  const keys = objectKeysCallStrings(node);
+  if (keys) return keys;
   if (!node || !ts.isArrayLiteralExpression(node)) return undefined;
   const out = [];
   for (const el of node.elements) {
@@ -69,6 +71,33 @@ function arrayLiteralStrings(node, consts) {
     // values as invalid choices.
     if (v === undefined) return undefined;
     out.push(v);
+  }
+  return out;
+}
+
+// `Object.keys({ a: true, b: true })` → ['a', 'b']. logs.ts builds
+// LOG_SOURCES this way so the build fails when the SDK gains a source the
+// CLI doesn't offer. Only plain identifier or string-literal keys resolve.
+function objectKeysCallStrings(node) {
+  const e = unwrapExpression(node);
+  if (
+    !e ||
+    !ts.isCallExpression(e) ||
+    !ts.isPropertyAccessExpression(e.expression) ||
+    !ts.isIdentifier(e.expression.expression) ||
+    e.expression.expression.text !== 'Object' ||
+    e.expression.name.text !== 'keys' ||
+    e.arguments.length !== 1
+  ) {
+    return undefined;
+  }
+  const obj = unwrapExpression(e.arguments[0]);
+  if (!obj || !ts.isObjectLiteralExpression(obj)) return undefined;
+  const out = [];
+  for (const p of obj.properties) {
+    if (!ts.isPropertyAssignment(p) && !ts.isShorthandPropertyAssignment(p)) return undefined;
+    if (ts.isIdentifier(p.name) || ts.isStringLiteral(p.name)) out.push(p.name.text);
+    else return undefined;
   }
   return out;
 }
@@ -177,6 +206,7 @@ function collectModuleConsts(sf) {
           ts.isArrayLiteralExpression(init) ||
           ts.isNumericLiteral(init) ||
           ts.isTemplateExpression(init) ||
+          objectKeysCallStrings(init) !== undefined ||
           stringLiteralValue(init) !== undefined)
       ) {
         consts.set(decl.name.text, init);
@@ -214,6 +244,11 @@ function resolveSpecObject(expr, consts) {
   const e = unwrapExpression(expr);
   if (!e) return undefined;
   if (ts.isObjectLiteralExpression(e)) return e;
+  // A bare const, e.g. docs.ts's `.positional('query', QUERY_POSITIONAL)`.
+  if (ts.isIdentifier(e) && consts && consts.has(e.text)) {
+    const c = unwrapExpression(consts.get(e.text));
+    return c && ts.isObjectLiteralExpression(c) ? c : undefined;
+  }
   if (
     ts.isElementAccessExpression(e) &&
     ts.isIdentifier(e.expression) &&

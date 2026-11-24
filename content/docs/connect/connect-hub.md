@@ -8,7 +8,7 @@ summary: >-
   choosing a branch, getting your connection details, storing credentials, and
   using each service.
 enableTableOfContents: true
-updatedOn: '2026-10-30T18:52:42.000Z'
+updatedOn: '2026-11-06T20:35:55.000Z'
 ---
 
 For all backend services, you connect your app to a particular branch. Each branch can serve whichever services you have enabled: Lakebase Postgres, Object Storage, Managed Better Auth, and AI Gateway.

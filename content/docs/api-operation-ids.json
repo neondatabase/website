@@ -1,6 +1,6 @@
 {
   "_generatedBy": "scripts/generate-api-ref.mjs — do not edit by hand",
-  "count": 194,
+  "count": 195,
   "operationIds": [
     "acceptProjectTransferRequest",
     "addBranchNeonAuthOauthProvider",
@@ -109,6 +109,7 @@
     "getProjectEndpoint",
     "getProjectJWKS",
     "getProjectOperation",
+    "getRegionVPCEndpointServices",
     "getSnapshotSchedule",
     "grantPermissionToProject",
     "listApiKeys",

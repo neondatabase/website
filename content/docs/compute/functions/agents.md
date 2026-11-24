@@ -51,7 +51,7 @@ import { Pool } from 'pg';
 const pool = new Pool({ connectionString: process.env.DATABASE_URL, max: 5 });
 attachDatabasePool(pool);
 
-export default {
+const handler = {
   async fetch(request: Request) {
     if (request.method !== 'POST') {
       return new Response('POST { messages } here', { status: 405 });
@@ -86,6 +86,8 @@ export default {
     });
   },
 };
+
+export default handler;
 ```
 
 `tool({ inputSchema, execute })` is the AI SDK v5+ shape. Create the `pg` pool once at module scope so it's reused across requests, and call `attachDatabasePool(pool)` so an idle disconnect can't crash the isolate (see [Connecting to Postgres](/docs/compute/functions/get-started#connect-to-postgres)). Pick any model from the [AI Gateway catalog](/docs/ai-gateway/models); swap `gpt-5-mini` for a different one without changing anything else.

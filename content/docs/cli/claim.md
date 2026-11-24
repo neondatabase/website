@@ -7,7 +7,7 @@ summary: >-
   assertion, writes credentials to `.env`, and later opens a claim URL so a
   human can take the project. See [Claimable Neon](/docs/reference/claimable-neon).
 enableTableOfContents: true
-updatedOn: '2026-11-05T15:33:57.188Z'
+updatedOn: '2026-11-19T18:35:00.025Z'
 ---
 
 The `claim` command creates a temporary Neon project when there is no Neon account yet. `neon claimable` is an alias. The CLI stores an identity assertion on the machine, writes provisioned variables to `.env` (or `.env.local`), and later opens a claim URL so a human can take the project into their organization.
@@ -95,7 +95,7 @@ neon claim list
 
 ## neon claim delete (#delete)
 
-Permanently deletes an unclaimed project, or drops a local record that can no longer reach the service. Pass a project ID from `neon claim list`, or omit it to use the linked project. Pass `--yes` to skip the confirmation prompt.
+Permanently deletes an unclaimed project, or drops a local record that can no longer reach the service. Pass a project ID from `neon claim list`, or omit it to use the linked project. Pass `--yes` to skip the confirmation prompt. Whether it deletes the project or only drops the local record, `delete` removes the `.neon` file when it links that project.
 
 <CliUsage command="claim delete" />
 

@@ -10,7 +10,7 @@ summary: >-
   Worker that queries Postgres and needs to choose between Hyperdrive's
   connection pooling and the serverless driver's lightweight setup.
 enableTableOfContents: true
-updatedOn: '2026-10-09T15:55:57.334Z'
+updatedOn: '2026-11-16T21:04:53.000Z'
 ---
 
 [Cloudflare Workers](https://workers.cloudflare.com/) is a serverless platform allowing you to deploy your applications globally across Cloudflare's network. It supports running JavaScript, TypeScript, and WebAssembly, making it a great choice for high-performance, low-latency web applications.

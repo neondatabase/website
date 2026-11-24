@@ -11,7 +11,7 @@ summary: >-
 redirectFrom:
   - /docs/connect/connect-ai
 enableTableOfContents: true
-updatedOn: '2026-07-31T15:27:48.506Z'
+updatedOn: '2026-11-16T20:43:37.000Z'
 ---
 
 AskYourDatabase lets you work with SQL databases using natural language. You can use it for data management, business intelligence, schema design and migration, data visualization, and more. To learn more, see [AskYourDatabase](https://www.askyourdatabase.com/).

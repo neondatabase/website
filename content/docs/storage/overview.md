@@ -14,7 +14,7 @@ redirectFrom:
   - /docs/object-storage
   - /docs/introduction/object-storage
   - /docs/guides/neon-object-storage
-updatedOn: '2026-10-23T14:02:32.319Z'
+updatedOn: '2026-11-11T12:31:00.000Z'
 layout: wide
 hideCopyPage: true
 ---

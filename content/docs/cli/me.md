@@ -7,12 +7,12 @@ summary: >-
   account is active and how it's authenticated. JSON output (`-o json`) exposes
   additional fields, such as the account id, plan, and linked auth accounts.
 enableTableOfContents: true
-updatedOn: '2026-10-09T15:17:33.920Z'
+updatedOn: '2026-11-19T18:35:00.025Z'
 redirectFrom:
   - /docs/reference/cli-me
 ---
 
-The `me` command shows information about the authenticated Neon CLI user: login, email, name, and how you're authenticated (the credential source, such as `OAuth` or an API key, and the profile in use).
+The `me` command shows information about the authenticated Neon CLI user, or the organization for an organization API key: login, email, name, and how you're authenticated (the credential source, such as `OAuth` or an API key, and the profile in use).
 
 ## Usage
 
@@ -34,6 +34,19 @@ Email           sally@example.com
 Name            Sally Smith
 Authentication  OAuth (profile DEFAULT)
 ```
+
+An organization API key has no user, so `me` shows the organization ID instead:
+
+```bash
+neon me --profile work
+```
+
+```text filename="Output"
+Organization    org-polished-surf-12345678
+Authentication  API key (profile work)
+```
+
+With `-o json`, it prints `{"account_id": "org-…", "auth_method": "api_key_org"}`. Check `auth_method` to tell an organization key apart from a user.
 
 When you're signed out, `me` doesn't start a browser sign-in. It prints a notice to stderr and exits with status `1`, so scripts and agents can run `neon me` as a sign-in check:
 

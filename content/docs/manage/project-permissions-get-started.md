@@ -8,7 +8,7 @@ summary: >-
   verify the result on the Project permissions page. Includes the same setup
   through the Neon API for orchestrators and agents.
 enableTableOfContents: true
-updatedOn: '2026-11-01T14:46:44.000Z'
+updatedOn: '2026-11-21T21:02:53.765Z'
 ---
 
 By default, everyone you invite to your Neon organization can reach every project in it. That's fine until it isn't: a contractor you brought in for one reporting project can open your production database, and an agent you gave a credential to can modify any project instead of the one you meant. Project permissions fix that, so a mistake or a leaked credential affects one project rather than everything you have.
@@ -133,7 +133,7 @@ For a definitive answer rather than a visual check, ask the API who can reach a 
 ```bash shouldWrap
 curl --request GET \
      --url 'https://console.neon.tech/api/v2/projects/$PROJECT_ID/members' \
-     --header "authorization: Bearer $ORG_API_KEY" | jq '.project_members[] | {email, org_role, effective_project_permission, grant_source}'
+     --header "authorization: Bearer $PERSONAL_API_KEY" | jq '.project_members[] | {email, org_role, effective_project_permission, grant_source}'
 ```
 
 Run it against `acme-production` and you should see Alex with `EDITOR` from `org_role_default`. Sam still appears in the list as an organization member, but with `effective_project_permission` of `null` and `grant_source` of `unassigned`, which is how the API reports someone who has no access to the project. `grant_source` tells you whether the access came from someone's organization role or an explicit grant.
@@ -164,14 +164,14 @@ neon api-keys create --name analytics-agent --project-id $PROJECT_ID
 <details>
 <summary>**Do the whole setup through the API**</summary>
 
-If you provision projects programmatically, the same two layers are available through the [Neon API](/docs/reference/api). These calls need an [organization API key](/docs/manage/api-keys) with the Admin role. Roles are sent lowercase and returned uppercase.
+If you provision projects programmatically, the same two layers are available through the [Neon API](/docs/reference/api). These calls need a [personal API key](/docs/manage/api-keys) from an organization Admin. Organization API keys are rejected with the message "Project permissions can only be managed by user-backed requests." Roles are sent lowercase and returned uppercase.
 
 Grant a member Editor on one project:
 
 ```bash shouldWrap
 curl --request PUT \
      --url 'https://console.neon.tech/api/v2/projects/$PROJECT_ID/members/$MEMBER_ID/role' \
-     --header "authorization: Bearer $ORG_API_KEY" \
+     --header "authorization: Bearer $PERSONAL_API_KEY" \
      --header 'content-type: application/json' \
      --data '{"role": "editor"}'
 ```

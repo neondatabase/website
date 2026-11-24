@@ -8,14 +8,14 @@ summary: >-
   environment variables automatically. Choose this path over the Neon-Managed
   Integration when you have no existing Neon account or want a single Vercel
   bill; it does not support the `neon login` CLI command. Automated Preview
-  Branching creates an isolated copy-on-write Lakebase Postgres branch for every Vercel
-  Preview Deployment, with branches cleaned up according to Vercel's 6-month
+  Branching creates an isolated copy-on-write Lakebase Postgres branch for each Git
+  branch you deploy as a Vercel Preview Deployment, with branches cleaned up according to Vercel's 6-month
   default deployment retention policy.
 redirectFrom:
   - /docs/guides/vercel-native-integration
   - /docs/guides/vercel-native-integration-previews
 enableTableOfContents: true
-updatedOn: '2026-11-13T00:47:46.965Z'
+updatedOn: '2026-11-18T15:22:49.000Z'
 ---
 
 <InfoBlock>
@@ -42,7 +42,7 @@ updatedOn: '2026-11-13T00:47:46.965Z'
 - Creates a Neon account + project for you (if you don't already have one)
 - For existing Neon users, adds a new organization named `Vercel: <team-name>` to your account
 - Injects the required database environment variables (`DATABASE_URL`, etc.) into your Vercel project
-- Optionally creates a dedicated database branch for every Preview Deployment so you can test schema changes safely
+- Optionally creates a dedicated database branch for each Git branch you preview, so you can test schema changes safely
 
 <Admonition type="note" title="Who should use this path?">
 Choose the Vercel-Managed Integration if you **do not already have a Neon account** *or* you prefer to consolidate payment for Neon inside your Vercel invoice.
@@ -62,18 +62,32 @@ Open the [Neon integration on the Vercel Marketplace](https://vercel.com/marketp
 
 This opens the **Install Neon** modal where you can choose between two options. Select **Create New Neon Account**, then click **Continue**.
 
+## Choose a team
+
+Under **Choose Team**, select the Vercel team to install Neon to, then click **Continue**. If Neon is already installed for that team, you can still continue: the new database joins the existing installation.
+
 ## Complete Vercel's configuration
 
 Under **Configuration and Plan**, choose a region and set the optional services:
 
-- **Auth**: provisions [Managed Better Auth](/docs/auth/overview) for your app's users, with profiles synced to Postgres.
-- **Realtime**: enables [Neon Realtime](/docs/realtime/overview) (beta) on the database's default branch. Preview branches get their own. You can only turn on Realtime when you create a database, not for an existing one.
+- **Auth** (on by default): provisions [Managed Better Auth](/docs/auth/overview) for your app's users, with profiles synced to Postgres.
+- **Realtime** (off by default): enables [Neon Realtime](/docs/realtime/overview) (beta) on the database's default branch. Preview branches get their own. You can only turn on Realtime when you create a database, not for an existing one.
 
-Then pick a plan, accept the terms, and name your database. (Remember: a "Database" in Vercel is a **Project** in Neon.)
+Auth and Realtime apply only to the database you're creating. Under **Installation Plan**, choose a plan. The plan applies to every database in this installation. Click **Continue**.
+
+## Confirm and create
+
+On the **Confirmation** step, review the **Resource Name** and the parameters, then click **Create**. The resource name becomes the database name in Vercel and the project name in Neon. (Remember: a "Database" in Vercel is a **Project** in Neon.) If you go back to an earlier step, check the parameters again before you click **Create**, because going back resets your choices and generates a new name.
+
+When **Your Neon database is ready to use** appears, click **Continue**.
+
+## Connect a project
+
+The **Connect a Project** step lets you connect the database to a Vercel project right away. See [Connecting the database to a Vercel project](#connecting-the-database-to-a-vercel-project) for the options, or click **Skip** to connect later.
 
 ## View storage settings
 
-After creation you'll land on Vercel's **Storage** tab that includes status, plan, connection string, billing plan, and more.
+You'll land on the database's page in Vercel **Storage**, which shows its status, plan, connected projects, and quickstart snippets for connecting.
 
 ## Optionally open the project in the Neon Console
 
@@ -85,16 +99,21 @@ From the **Storage** tab, click **Open in Neon** to jump straight to your new Ne
 
 ## Connecting the database to a Vercel project
 
-1. In **Storage → `<your database>` → Connect Project**, choose the Vercel **Project** and the **Environments** that should receive database variables (Development, Preview, Production).
-2. (Optional) Under **Create database branch for deployment**, select **Preview** to turn on _Preview Branching_ (see next section). Leave **Production** unchecked. It creates a new branch for every production deployment, which the recommended setup doesn't need: production deployments use your [production branch](#choose-a-production-branch).
+You can connect a project during installation (the **Connect a Project** step) or later from **Storage → `<your database>` → Connect to Project**.
+
+1. Choose the Vercel **Project** and the **Environments** that should receive database variables. **Production** and **Preview** are selected by default. Add **Development** if you also want the variables in that environment.
+2. (Optional) Under **Create database branch for deployment**, select **Preview** to turn on _Preview Branching_ (see next section). Leave **Production** unchecked: production deployments use your [production branch](#choose-a-production-branch).
 3. (Optional) Set a **Custom Prefix** for the environment variables. You only need one if your Vercel project already uses the unprefixed variable names, for example from a database you connected earlier.
-4. Click **Connect**.
+4. (Optional) Leave **Sensitive** on (the default) to store the variables as [sensitive environment variables](https://vercel.com/docs/environment-variables/sensitive-environment-variables), which can't be read back from the Vercel dashboard or CLI. Turn it off if you need to view or pull the values.
+5. Click **Connect**.
+
+To change these settings later, open **Storage → `<your database>` → Projects**, then select **Update Project Connection** from the **⋮** menu next to your project.
 
 ---
 
 ## Enable automated preview branching (recommended)
 
-Preview branching creates an isolated Neon branch (copy-on-write) for every Vercel Preview Deployment so database schema changes can be tested safely.
+Preview branching creates an isolated Neon branch (copy-on-write) for each Git branch that gets a Vercel Preview Deployment, so database schema changes can be tested safely. Later preview deployments of the same Git branch reuse that Neon branch, so its data and schema carry over from one deployment to the next.
 
 <Admonition type="tip" title="Managed Better Auth support for preview deployments">
 If you've enabled [Managed Better Auth](/docs/auth/overview) on your production branch, it's automatically provisioned on preview branches too. Preview deployments receive `NEON_AUTH_BASE_URL` and `VITE_NEON_AUTH_URL` environment variables, letting you test authentication in isolated environments. Auth data branches with your database, so each preview has its own independent user profiles and sessions.
@@ -105,7 +124,7 @@ To enable it, select **Preview** under **Create database branch for deployment**
 Once enabled, the flow looks like this:
 
 1.  Developer pushes to feature branch → Vercel kicks off Preview Deployment.
-2.  Vercel sends a webhook to Neon → Neon creates branch `preview/<git-branch>`.
+2.  Vercel sends a webhook to Neon → Neon creates branch `preview/<git-branch>` from your default branch, or reuses it if it already exists.
 3.  Environment variables for the branch connection are injected via webhook at deployment time, overriding preview environment variables for this deployment only (cannot be accessed or viewed in your Vercel project's environment variable settings).
 4.  (Optional) Run migrations in build step so schema matches code.
 
@@ -132,7 +151,7 @@ To verify preview branching works:
 
 1. Create a local branch: `git checkout -b test-feature`
 2. Make any change and commit: `git commit -a -m "Test change"`
-3. Push: `git push`
+3. Push the new branch: `git push -u origin test-feature`
 4. Check Vercel deployments and Neon Console branches to confirm the preview branch was created
 
 ---
@@ -227,9 +246,10 @@ You can't transfer a project out of a Vercel-managed organization, for example t
 
 ### Add another database (project)
 
-1. Go to **Integrations → Neon Postgres → Manage → More Products → Install**
-2. Select region, scale settings, and plan
-3. Specify a **Database Name** and click **Create**
+1. Go to **Integrations → Neon → Manage**, then under **More Products**, click **Install** on the Neon card
+2. Choose a region and the Auth and Realtime settings for the new database
+3. On the **Confirmation** step, check the **Resource Name** and parameters, then click **Create**
+4. Connect it to a project. Both **Create database branch for deployment** options start unchecked, and if the project already uses another database's variables, set a **Custom Prefix**
 
 ### Change compute / scale settings
 
@@ -284,6 +304,7 @@ Branches you don't delete are eventually [archived](/docs/guides/branch-archivin
 | `DATABASE_URL_UNPOOLED`                                           | Direct connection string                                                                                                                    |
 | `PGHOST`, `PGHOST_UNPOOLED`, `PGUSER`, `PGDATABASE`, `PGPASSWORD` | Raw pieces to build custom strings                                                                                                          |
 | `POSTGRES_*` (legacy)                                             | Provided for backwards compatibility with Vercel Postgres templates                                                                         |
+| `NEON_PROJECT_ID`                                                 | ID of the Neon project behind the database                                                                                                  |
 | `NEON_AUTH_BASE_URL`, `VITE_NEON_AUTH_URL`                        | Managed Better Auth endpoints (when enabled on production branch)                                                                           |
 | `NEON_REALTIME_URL`, `NEON_REALTIME_SECRET`                       | [Neon Realtime](/docs/realtime/overview) endpoint and secret (when Realtime is enabled). Preview deployments get their own branch's values. |
 

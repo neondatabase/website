@@ -4,7 +4,7 @@ subtitle: Learn how to revert a failed deployment and schema migration in Larave
 author: bobbyiliev
 enableTableOfContents: true
 createdAt: '2024-05-26T00:00:00.000Z'
-updatedOn: '2026-09-24T17:56:34.189Z'
+updatedOn: '2026-11-24T10:56:47.700Z'
 ---
 
 Not every deployment goes as planned. When something goes wrong, especially with schema migrations, the consequences can range from data inconsistencies to extended application downtime.
@@ -106,7 +106,7 @@ If rolling back migrations doesn't solve the issue, Neon's [instant restore](/do
 ### Restore options on Neon
 
 1. **Point-in-time restore:** Restore a branch to a specific moment before the failed deployment, within your project's history window.
-2. **Restore from another branch:** Restore your branch from the data in another, stable branch.
+2. **Restore from another branch:** Restore your branch from the data in another, stable branch. If your production branch is a root branch, this makes it a child of the source branch, and it can no longer use snapshots or backup schedules. See [How a restore affects root branches](/docs/postgres/backup-restore/branch-restore#how-a-restore-affects-root-branches).
 
 ### Restoration steps
 

@@ -28,8 +28,11 @@ describe('parseSiteSearchRequest', () => {
     });
   });
 
-  it('rejects a blank query, extra fields, and a bad limit', () => {
+  it('rejects a blank query, a NUL character, extra fields, and a bad limit', () => {
     expect(() => parseSiteSearchRequest({ query: '   ' })).toThrow(/query is required/);
+    expect(() => parseSiteSearchRequest({ query: 'branch\u0000ing' })).toThrow(
+      'query must not contain NUL characters'
+    );
     expect(() => parseSiteSearchRequest({ query: 'hello', prompt: 'nope' })).toThrow(
       /Unexpected field/
     );

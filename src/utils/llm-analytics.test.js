@@ -1,7 +1,8 @@
 // @vitest-environment node
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 
-import { createLLMAnalytics, isNonReadRequest, trackLLMPageview } from './llm-analytics';
+import { isNonReadRequest } from './ai-agent-detection';
+import { createLLMAnalytics, trackLLMPageview } from './llm-analytics';
 
 const request = () =>
   new Request('https://neon.com/docs/introduction?token=query-secret', {
@@ -39,7 +40,12 @@ describe('LLM analytics delivery', () => {
     expect(options.headers['User-Agent']).toBe('LLMAGENT: ChatGPT-User/1.0 raw-user-agent-secret');
     expect(JSON.parse(options.body)).toEqual({
       name: 'Pageview',
-      data: { llm_agent: true, llm_404: true, llm_request_id: 'fra1::test-request' },
+      data: {
+        llm_agent: true,
+        llm_reader: 'ai-assistant',
+        llm_404: true,
+        llm_request_id: 'fra1::test-request',
+      },
       zarazData: {
         c: 'ajs_anonymous_id=cookie-secret',
         l: 'https://neon.com/docs/introduction?token=query-secret',
@@ -66,6 +72,35 @@ describe('LLM analytics delivery', () => {
     await expect(analytics.track()).resolves.toEqual({ outcome: 'skipped_non_read' });
     expect(analytics.beacon).toBeNull();
     expect(fetch).not.toHaveBeenCalled();
+  });
+
+  it.each(['cors', 'no-cors', 'same-origin'])(
+    "does not send a pageview for a browser's background request (Sec-Fetch-Mode: %s)",
+    async (mode) => {
+      // Real browsers send all three Fetch Metadata headers together.
+      const req = new Request('https://neon.com/docs/introduction/support.md', {
+        headers: {
+          'sec-fetch-mode': mode,
+          'sec-fetch-dest': 'empty',
+          'sec-fetch-site': 'same-origin',
+        },
+      });
+      expect(isNonReadRequest(req)).toBe(true);
+      await expect(createLLMAnalytics(req).track()).resolves.toEqual({
+        outcome: 'skipped_non_read',
+      });
+      expect(fetch).not.toHaveBeenCalled();
+    }
+  );
+
+  it("counts Node.js fetch, which sends Sec-Fetch-Mode: cors but isn't a browser", async () => {
+    // undici sends only Sec-Fetch-Mode, never Sec-Fetch-Dest or Sec-Fetch-Site.
+    const req = new Request('https://neon.com/docs/introduction/support.md', {
+      headers: { 'user-agent': 'node', 'sec-fetch-mode': 'cors' },
+    });
+    expect(isNonReadRequest(req)).toBe(false);
+    await trackLLMPageview(req);
+    expect(fetch).toHaveBeenCalledTimes(1);
   });
 
   it('still sends a pageview for a normal markdown read', async () => {
@@ -97,6 +132,46 @@ describe('LLM analytics delivery', () => {
       http_status: status,
     });
     expect(fetch).toHaveBeenCalledTimes(1); // No automatic retries or duplicate events.
+  });
+
+  const browserNavigation = (userAgent) =>
+    new Request('https://neon.com/docs/introduction.md', {
+      headers: {
+        'user-agent': userAgent,
+        'sec-fetch-mode': 'navigate',
+        'sec-fetch-dest': 'document',
+        'sec-fetch-user': '?1',
+      },
+    });
+
+  it('sends a person opening a .md in a browser tab as a human pageview', async () => {
+    await trackLLMPageview(
+      browserNavigation('Mozilla/5.0 (Macintosh) AppleWebKit/537.36 Chrome/131.0 Safari/537.36')
+    );
+    const [, options] = fetch.mock.calls[0];
+    expect(options.headers['User-Agent']).toBe(
+      'Mozilla/5.0 (Macintosh) AppleWebKit/537.36 Chrome/131.0 Safari/537.36'
+    );
+    expect(JSON.parse(options.body).data.llm_agent).toBe(false);
+  });
+
+  it.each([
+    ['a headless browser', 'Mozilla/5.0 (X11; Linux x86_64) HeadlessChrome/131.0 Safari/537.36'],
+    ['a named AI agent browser', 'Mozilla/5.0 AppleWebKit/537.36; compatible; ChatGPT-User/1.0'],
+  ])('still sends a .md navigation from %s as an agent read', async (_label, userAgent) => {
+    await trackLLMPageview(browserNavigation(userAgent));
+    const [, options] = fetch.mock.calls[0];
+    expect(options.headers['User-Agent']).toBe(`LLMAGENT: ${userAgent}`);
+    expect(JSON.parse(options.body).data.llm_agent).toBe(true);
+  });
+
+  it('sends a .md fetch without browser navigation headers as an agent read', async () => {
+    await trackLLMPageview(
+      new Request('https://neon.com/docs/introduction.md', {
+        headers: { 'user-agent': 'Mozilla/5.0 (Macintosh) Chrome/131.0' },
+      })
+    );
+    expect(JSON.parse(fetch.mock.calls[0][1].body).data.llm_agent).toBe(true);
   });
 
   it('resolves network failures and does not log the exception message', async () => {
@@ -162,6 +237,7 @@ describe('LLM analytics delivery', () => {
         path: '/docs/introduction',
         agent_family: 'chatgpt-user',
         agent_detected: true,
+        reader: 'ai-assistant',
         deployment_sha: 'deployment-sha',
         branch: 'markdown',
         proxy_status: 200,

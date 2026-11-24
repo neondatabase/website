@@ -10,7 +10,7 @@ summary: >-
   include rewriting JavaScript-in-SQL logic in plpgsql or moving it to
   application or worker code outside the database.
 enableTableOfContents: false
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-10-22T21:15:47.000Z'
 ---
 
 <Admonition type="warning" title="The plv8 extension is deprecated on Neon.">

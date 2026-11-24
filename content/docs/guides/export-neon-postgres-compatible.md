@@ -12,7 +12,7 @@ summary: >-
   Neon's internal roles.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2026-11-04T20:10:08.844Z'
+updatedOn: '2026-11-10T14:00:10.000Z'
 ---
 
 This topic describes how to export your **Neon** database to a **Postgres-compatible** archive using the Postgres **`pg_dump`** utility. You get a normal custom-format dump (for example `-Fc`) that any Postgres toolchain can consume.

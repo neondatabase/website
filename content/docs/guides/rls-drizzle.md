@@ -12,7 +12,7 @@ summary: >-
   running queries that respect those policies at runtime, see the companion page
   on RLS query execution with Drizzle.
 enableTableOfContents: true
-updatedOn: '2026-10-14T02:43:52.455Z'
+updatedOn: '2026-11-10T19:07:12.000Z'
 redirectFrom:
   - /docs/guides/neon-rls-authorize-drizzle
   - /docs/guides/neon-authorize-drizzle

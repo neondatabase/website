@@ -45,6 +45,8 @@ Run the following command in the root directory of the user's source-code repo t
 neon init -y --agent <agent-name> --org-id <org-id> --project-id <project-id>
 ```
 
+When the CLI is signed in and the repo has no `neon.ts`, `neon init` writes `neon.ts` from the linked branch's current services, adds `@neon/config` and `@neon/env` (they read that file), and runs the install, so the env pull includes the variables of every service that file declares, such as Managed Better Auth. An existing `neon.ts` is kept, and the pull follows the services it declares. Pass `--no-config` only if the user wants connection strings without `neon.ts`.
+
 The supported agents are antigravity, cline, cline-cli, claude-code, claude-desktop, codex, cursor, gemini-cli, goose, github-copilot-cli, grok-build, opencode, vscode, windsurf, and zed. A few also accept aliases (claude for claude-code, copilot for vscode, gemini for gemini-cli). Passing an unknown agent stops the command and prints the current supported list.
 
 An agent that can't install skills is skipped with a warning. Agents that share a target collapse into one: Claude Desktop and Claude Code both write to claude-code, and VS Code and the GitHub Copilot CLI both write to github-copilot.

@@ -11,7 +11,7 @@ summary: >-
   and `NEON_API_KEY` secrets, and a companion `delete-branch-action`
   workflow can clean up anonymized branches when PRs close.
 enableTableOfContents: true
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-11-20T19:23:34.905Z'
 ---
 
 This page shows how to automate data anonymization with GitHub Actions. For conceptual overview and usage instructions, see [Data Anonymization](/docs/workflows/data-anonymization).
@@ -24,7 +24,7 @@ Automate anonymized branch creation using the [Neon Create Branch Action](https:
 
 Before setting up the workflow:
 
-- A **Neon project** with a populated parent branch
+- A **Neon project** on Postgres 14 through 18 with a populated parent branch. Data anonymization doesn't support Postgres 19 yet.
 - The following GitHub repository secrets:
   - `NEON_PROJECT_ID`
   - `NEON_API_KEY`
