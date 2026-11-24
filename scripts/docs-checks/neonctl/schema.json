@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "neonctlVersion": "9.7.2",
+  "neonctlVersion": "9.9.6",
   "binaries": [
     "neonctl",
     "neon"
@@ -905,7 +905,7 @@
       "options": {
         "create": {
           "type": "boolean",
-          "describe": "Create the named branch if it does not exist, then check it out",
+          "describe": "Create the named branch if it does not exist, then check it out. New branches start from the parent set in neon.ts, else the project's default branch. An existing branch is checked out unchanged.",
           "default": false
         },
         "env": {
@@ -1562,7 +1562,7 @@
           "options": {
             "add-default-grants": {
               "type": "boolean",
-              "describe": "Grant all permissions on tables in the public schema to authenticated users"
+              "describe": "Grant authenticated users read and write access to public-schema tables, including tables the database owner creates later"
             },
             "auth-provider": {
               "type": "string",
@@ -2460,7 +2460,7 @@
         },
         "config": {
           "type": "boolean",
-          "describe": "Create neon.ts after linking. Use --no-config to skip. Omitted in Custom: you will be asked"
+          "describe": "Create neon.ts after linking: from the branch's services when init links an existing project, otherwise the starter policy. Use --no-config to skip. Omitted in Custom: you will be asked"
         },
         "context-file": {
           "type": "string",
@@ -2544,7 +2544,7 @@
         },
         "yes": {
           "type": "boolean",
-          "describe": "Skip prompts. Alone: Recommended (detected agents, link when authenticated, default neon.ts). With --skill, MCP flags, --no-agent-setup, or --claimable: Custom using those flags",
+          "describe": "Skip prompts. Alone: Recommended (detected agents, link when authenticated, neon.ts). With --skill, MCP flags, --no-agent-setup, or --claimable: Custom using those flags",
           "default": false,
           "alias": "y"
         }
@@ -2621,7 +2621,7 @@
               "positionals": [],
               "options": {},
               "commands": {},
-              "describe": "Most frequently called queries (needs pg_stat_statements)"
+              "describe": "Most frequently called queries, leaving out Neon's own setup and session-reset statements and inspect's own queries (needs pg_stat_statements)"
             },
             "index-sizes": {
               "aliases": [],
@@ -2656,7 +2656,7 @@
               "positionals": [],
               "options": {},
               "commands": {},
-              "describe": "Queries taking the most cumulative execution time (needs pg_stat_statements)"
+              "describe": "Queries taking the most cumulative execution time, leaving out Neon's own setup and session-reset statements and inspect's own queries (needs pg_stat_statements)"
             },
             "replication-slots": {
               "aliases": [],
@@ -3273,7 +3273,7 @@
         }
       },
       "commands": {},
-      "describe": "Show the current user or organization"
+      "describe": "Show the current user, organization, or Claimable project"
     },
     "neon-auth": {
       "aliases": [],
