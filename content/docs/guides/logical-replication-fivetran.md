@@ -10,7 +10,7 @@ summary: >-
   irreversible change, and Fivetran IPs must be added to Neon's IP Allow list.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2026-10-09T10:14:56.146Z'
+updatedOn: '2026-11-16T20:52:23.000Z'
 ---
 
 Neon's logical replication feature allows you to replicate data from your Lakebase Postgres database to external destinations.

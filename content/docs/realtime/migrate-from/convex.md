@@ -4,6 +4,7 @@ subtitle: "Migrate a reactive app from Convex to Neon Realtime."
 summary: >-
   Migrate a reactive app's schema, queries and mutations from Convex to use Neon Realtime instead.
 enableTableOfContents: true
+updatedOn: '2026-11-18T00:59:49.148Z'
 ---
 
 <a className="group inline text-pretty" href="https://convex.dev" target="_blank" rel="nofollow noopener noreferrer">Convex<span className="whitespace-nowrap no-underline"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="none" viewBox="0 0 14 14" className="ml-1 inline-block size-3.5! shrink-0 align-[-0.125em]"><path fill="currentColor" d="M0 0h14v14H0z" opacity="0.2"></path><path stroke="currentColor" strokeLinecap="square" d="M9.915 8.885V4.08H5.11M9.625 4.375 4.083 9.917"></path></svg></span></a> and [Neon Realtime](../overview) share a similar [reactive development model](/docs/realtime/overview#integrated-reactive-dx). This page shows how to migrate your Convex app to use Neon Realtime.
@@ -322,7 +323,7 @@ The client can subscribe to a sealed query, but it can't read or change it. See 
 
 ## Subscribe to queries
 
-Convex's `ConvexProvider` and `useQuery` become [`RealtimeProvider`](../sdks/typescript#react-realtimeprovider) and [`useLiveQuery`](../sdks/typescript#react-uselivequery).
+Convex's `ConvexProvider` and `useQuery` become [`RealtimeProvider`](../sdks/typescript/react#react-realtimeprovider) and [`useLiveQuery`](../sdks/typescript/react#react-uselivequery).
 
 So instead of wrapping your app with `<ConvexProvider />`:
 
@@ -573,7 +574,7 @@ export async function sendMessage(message: Message): Promise<MutationResponse> {
 
 ## Optimistic state
 
-Convex's `.withOptimisticUpdate` becomes React's `useOptimistic` plus [`awaitTxId`](../sdks/typescript#client-materializedlivequerysubscriptionawaittxid):
+Convex's `.withOptimisticUpdate` becomes React's `useOptimistic` plus [`awaitTxId`](../sdks/typescript/client#client-materializedlivequerysubscriptionawaittxid):
 
 ```tsx filename="src/MessageSender.tsx"
 const send = useMutation(api.messages.send).withOptimisticUpdate((store, { channelId, body }) => {
@@ -764,7 +765,7 @@ By default, Managed Better Auth email and password sign-up doesn't require email
 
 [TanStack&nbsp;DB](https://tanstack.com/db/latest/docs/overview) is a reactive client store that you query and write locally. It supports fine-grained reactivity, optimistic mutations and automatic management of optimistic state.
 
-The Neon Realtime team develops and maintains TanStack&nbsp;DB. DB has first-class support for Neon&nbsp;Realtime, through [`@neon/realtime-tanstack`](../sdks/typescript#tanstack-db), and integrations for other systems, including Convex.
+The Neon Realtime team develops and maintains TanStack&nbsp;DB. DB has first-class support for Neon&nbsp;Realtime, through [`@neon/realtime-tanstack`](../sdks/typescript/tanstack-db), and integrations for other systems, including Convex.
 
 You can migrate to using TanStack&nbsp;DB with Realtime [from "standard" Convex](#from-the-convex-react-client), using the React client and / or [from using Convex with DB](#from-convex-with-db).
 
@@ -783,7 +784,7 @@ A collection replaces everything from `<ConvexProvider />` to `.withOptimisticUp
 | `ConvexProvider` + `useQuery`           | →   | `realtimeCollectionOptions` + `useCollectionQuery` |
 | `useMutation` + `.withOptimisticUpdate` | →   | `collection.insert()` + `onInsert`                 |
 
-Create the collection with [`realtimeCollectionOptions()`](../sdks/typescript#tanstack-db-realtimecollectionoptions). It takes the Realtime client directly, so there's no provider:
+Create the collection with [`realtimeCollectionOptions()`](../sdks/typescript/tanstack-db#tanstack-db-realtimecollectionoptions). It takes the Realtime client directly, so there's no provider:
 
 ```ts filename="frontend/collections.ts"
 import { createRealtimeClient } from "@neon/realtime/client"
@@ -893,7 +894,7 @@ export function Channel({ channelId, userId }: { channelId: string; userId: stri
 
 ### From Convex with DB
 
-If you already use Convex with TanStack&nbsp;DB, migration is simple. Swap out your collections defined with [`convexCollectionOptions`](https://tanstack.com/db/latest/docs/collections/convex-collection), for collections defined with [`realtimeCollectionOptions`](../sdks/typescript#tanstack-db-realtimecollectionoptions):
+If you already use Convex with TanStack&nbsp;DB, migration is simple. Swap out your collections defined with [`convexCollectionOptions`](https://tanstack.com/db/latest/docs/collections/convex-collection), for collections defined with [`realtimeCollectionOptions`](../sdks/typescript/tanstack-db#tanstack-db-realtimecollectionoptions):
 
 ```ts filename="frontend/collections.ts"
 const client = new ConvexClient(CONVEX_URL) // [!code --]

@@ -132,7 +132,7 @@ See existing handlers in the code for examples of each pattern.
 | Testimonial                                                                            | Blockquote with author name/company                                                              |
 | YoutubeIframe                                                                          | `Watch on YouTube: url`                                                                          |
 | CommunityBanner                                                                        | Text + link                                                                                      |
-| CompactCards                                                                           | List of compact card links, including prompt links via `promptSrc`                                |
+| CompactCards                                                                           | List of compact card links, including prompt links via `promptSrc`                               |
 | CTA                                                                                    | Title, description (HTML links converted via `parseHtmlWithLinks`), command, button link         |
 | ProgramForm                                                                            | Hardcoded text for form types                                                                    |
 
@@ -149,7 +149,7 @@ FeatureBeta, FeatureBetaProps (`{feature_name}`), EarlyAccessProps, AgentSkillsT
 
 ### Serialization options
 
-Configured in `getMarkdownOptions()`: GFM table serialization via `gfmToMarkdown()`, underscores for emphasis (`_text_`), `---` for horizontal rules, `listItemIndent: 'one'` for compact list markers, trailing spaces for hard line breaks, custom text handler that uses `state.safe()` inside table cells (for pipe escaping) but returns raw `node.value` elsewhere (to prevent over-escaping), smart quotes normalized to straight quotes.
+Configured in `getMarkdownOptions()`: GFM table serialization via `gfmToMarkdown({ tablePipeAlign: false })`, which writes compact tables (`| a | b |` with a `| - | - |` delimiter row) instead of padding every cell to its column's widest cell, underscores for emphasis (`_text_`), `---` for horizontal rules, `listItemIndent: 'one'` for compact list markers, trailing spaces for hard line breaks, custom text handler that uses `state.safe()` inside table cells (for pipe escaping) but returns raw `node.value` elsewhere (to prevent over-escaping), smart quotes normalized to straight quotes.
 
 ## llms.txt Index
 
@@ -188,6 +188,7 @@ Output goes to `public/md/` (gitignored), served via rewrites (`/docs/x.md` -> `
 15. **Flow vs phrasing content**: Handlers that return inline nodes (like `link`) must wrap them in a `paragraph` when the source was a block-level element (`mdxJsxFlowElement`). Otherwise `toMarkdown` merges the content with surrounding nodes onto one line. Check `node.type === 'mdxJsxFlowElement'` to decide.
 16. **Generated lists need `spread: false`**: Lists created by handlers (DetailIconCards, TechCards, DocsList, CompactCards) should set `spread: false` to avoid blank lines between items.
 17. **GFM tables**: `remark-gfm` is needed so tables are parsed into proper AST nodes. Without it, tables are plain text and `\|` escapes are consumed by the parser as backslash escapes, breaking table columns.
+18. **Table padding**: `tablePipeAlign: false` applies to every served `.md` page and `llms-full.txt`, not only the Realtime SDK reference. With alignment on, a table with long cells (like the generated SDK Symbols tables) spends about 40% of its bytes on padding, which pushes pages past agent fetch limits (50 KiB or 2,000 lines in some tools). Rendered HTML comes from the source markdown and isn't affected. Turning alignment back on changes every served table and the converter snapshot, and the SDK reference's fetch-budget test in `scripts/generate-realtime-sdk-reference.test.js` fails once the Client page goes over budget.
 
 ## Testing & CLI
 

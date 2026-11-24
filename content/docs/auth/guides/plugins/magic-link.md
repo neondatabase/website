@@ -11,7 +11,7 @@ summary: >-
   event (`send.magic_link`) to bypass the built-in mailer and deliver links
   through a custom email provider.
 enableTableOfContents: true
-updatedOn: '2026-10-09T09:36:23.504Z'
+updatedOn: '2026-10-30T15:07:38.000Z'
 ---
 
 Managed Better Auth is built on [Better Auth](https://www.better-auth.com/) and provides full support for the [Magic Link](https://www.better-auth.com/docs/plugins/magic-link) plugin APIs through the Neon SDK. You do not need to manually install or configure the Better Auth Magic Link plugin.

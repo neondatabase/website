@@ -99,10 +99,14 @@ const STATUSES = new Set(['alpha', 'beta', 'deprecated']);
 /** Nested rate blocks, keyed by the condition under which they apply. */
 const NESTED_COST_KEYS = new Set(['context_over_200k']);
 const ISO_DATE = /^\d{4}-\d{2}(-\d{2})?$/;
-/** Rate keys a `[cost]` block may carry, besides the `tiers` array. */
+/**
+ * Rate keys a `[cost]` block may carry, besides the `tiers` array. `output_image` (image output
+ * tokens, billed apart from text output) is ours: models.dev's cost schema has no image rate.
+ */
 const COST_RATE_KEYS = new Set([
   'input',
   'output',
+  'output_image',
   'cache_read',
   'cache_write',
   'input_audio',
@@ -134,6 +138,11 @@ function canonical(value) {
 function comparable(model) {
   const picked = {};
   for (const key of COMPARE_KEYS) if (model[key] !== undefined) picked[key] = model[key];
+  // The mirror cannot carry `output_image` (see COST_RATE_KEYS), so it is not drift.
+  if (picked.cost) {
+    const { output_image: _outputImage, ...mirroredCost } = picked.cost;
+    picked.cost = mirroredCost;
+  }
   return canonical(picked);
 }
 

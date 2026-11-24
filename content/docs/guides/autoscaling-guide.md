@@ -9,7 +9,7 @@ summary: >-
   neon_utils extension exposes a num_cpus() function for observing live CPU
   allocation.
 enableTableOfContents: true
-updatedOn: '2026-10-09T10:14:56.146Z'
+updatedOn: '2026-11-10T19:07:12.000Z'
 ---
 
 <InfoBlock>

@@ -10,7 +10,7 @@ summary: >-
   seconds via the Console, CLI, or API, and scales to zero automatically after
   5 minutes of inactivity.
 enableTableOfContents: true
-updatedOn: '2026-09-25T09:40:59.046Z'
+updatedOn: '2026-11-10T13:01:55.000Z'
 ---
 
 With Neon's read replica feature, you can instantly create a dedicated read replica for running data-intensive analytics or reporting queries. This allows you to avoid disruption or performance degradation on your production database.

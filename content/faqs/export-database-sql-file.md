@@ -3,12 +3,12 @@ title: 'How do I export or download my Neon database as a SQL file?'
 subtitle: 'Run pg_dump in plain-text format against a direct (non-pooled) connection string.'
 enableTableOfContents: true
 createdAt: '2026-05-18T00:00:00.000Z'
-updatedOn: '2026-09-23T21:00:25.204Z'
+updatedOn: '2026-11-20T14:29:56.440Z'
 isDraft: false
 redirectFrom: []
 previousLink:
-  title: 'How do I enable the pgvector extension in my Neon database?'
-  slug: enable-pgvector-extension
+  title: 'What happens when I go over my egress quota on Supabase, and how does Neon handle it?'
+  slug: exceed-egress-quota-supabase-vs-neon
 nextLink:
   title: 'Why am I getting ''Error connecting to database: Failed to fetch'' in the Neon Console Tables view?'
   slug: failed-to-fetch-error-tables-view

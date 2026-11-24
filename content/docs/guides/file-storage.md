@@ -11,7 +11,7 @@ summary: >-
   relational store for querying and filtering metadata. To keep files in your Neon
   project instead, use Neon Object Storage.
 enableTableOfContents: true
-updatedOn: '2026-09-16T15:38:57.808Z'
+updatedOn: '2026-11-16T20:08:52.000Z'
 ---
 
 Applications often need to handle file uploads and storage, from user avatars and documents to images and other media.

@@ -1,737 +1,280 @@
 ---
-title: Connect a Python application to Lakebase Postgres
-subtitle: Learn how to run SQL queries from Python using psycopg, psycopg2, or
-  asyncpg
+title: Connect a Python application to Neon
+subtitle: Create a uv project, link it with neon link, and query Lakebase Postgres from Python with psycopg 3
 summary: >-
-  Connecting Python to Lakebase Postgres requires choosing between three drivers:
-  psycopg (v3, synchronous), psycopg2 (legacy synchronous), and asyncpg
-  (asyncio-based async). The guide covers project setup, .env connection string
-  configuration, and full CRUD examples for all three drivers. Pick this over
-  the SQLAlchemy or Django guides when you need raw SQL driver code rather than
-  an ORM.
+  To connect a Python app to Lakebase Postgres on Neon, create a uv project, run
+  neon link to write DATABASE_URL to .env.local, and query it with psycopg 3.
+  Covers one runnable example (create, insert, select, update, delete, and a
+  transaction), running the app elsewhere, troubleshooting, and the Django,
+  Reflex, SQLAlchemy, and Tortoise ORM guides as next steps.
 enableTableOfContents: true
-updatedOn: '2026-10-09T10:14:56.146Z'
+updatedOn: '2026-11-20T22:23:16.924Z'
 ---
 
-<CopyPrompt src="/prompts/python-prompt.md" 
-description="Pre-built prompt for connecting Python applications to Neon"/>
-
-This guide describes how to create a Neon project and connect to it from a Python application using three Postgres drivers: [Psycopg 3](https://www.psycopg.org/psycopg3/docs/), the current synchronous adapter, its predecessor [Psycopg 2 (psycopg2)](https://pypi.org/project/psycopg2-binary/), and [asyncpg](https://pypi.org/project/asyncpg/), an asynchronous adapter for use with `asyncio`.
-
-You'll learn how to connect to the database from a Python application and perform basic Create, Read, Update, and Delete (CRUD) operations.
-
-## Prerequisites
-
-- A Neon account. If you do not have one, see [Sign up](https://console.neon.tech/signup).
-- Python 3.10 or later. Current releases of `psycopg` and `psycopg2-binary` require Python 3.10+. If you do not have Python installed, install it from the [Python website](https://www.python.org/downloads/).
+<PromptBlock src="/prompts/python-prompt.md" labels={["Set up your agent and follow this guide", "Look up driver docs", "Connect your Python project"]} />
 
 <Steps>
 
-## Create a Neon project
-
-If you do not have one already, create a Neon project.
-
-1.  Navigate to the [Projects](https://console.neon.tech/app/projects) page in the [Neon Console](https://console.neon.tech).
-2.  Click **New Project**.
-3.  Specify your project settings and click **Create Project**.
-
-Your project is created with a ready-to-use database named `neondb`. In the following steps, you will connect to this database from your Python application.
-
 ## Create a Python project
 
-For your Python project, create a project directory, set up a virtual environment, and install the required libraries.
+Create a project with [uv](https://docs.astral.sh/uv/), a Python package and project manager. You need Python 3.10 or later, the minimum for psycopg 3. uv uses a matching Python it finds, and can install one for the project. Skip this step if you already have a Python project.
 
-1.  Create a project directory and change into it.
+```bash filename="Terminal"
+uv init neon-python-app
+cd neon-python-app
+```
 
-    ```bash
-    mkdir neon-python-quickstart
-    cd neon-python-quickstart
-    ```
+This creates `pyproject.toml`, a `main.py` placeholder, and a git repository.
 
-    > Open the directory in your preferred code editor (for example, VS Code, PyCharm).
+If you use pip in a virtual environment instead of uv, skip the `uv add` step: install the driver with `pip install "psycopg[binary]"` in the activated environment, and run each script with `uv run --no-project --env-file .env.local python main.py` in place of `uv run`.
 
-2.  Create and activate a Python virtual environment. This isolates your project's dependencies from your system's Python environment.
+## Add Neon's agent skills (optional)
 
-    <CodeTabs labels={["MacOS / Linux / Windows Subsystem for Linux (WSL)", "Windows"]}>
+Add Neon's [agent skills](/docs/ai/agent-skills) to your project with the command below. They teach your AI coding agent how to use the Neon CLI, branches, and Neon's backend services. The agent prompt at the top of this page installs them, so skip this step if you used it. The command runs through npm, so it needs Node.js 22.20 or later, even though the app is Python.
 
-    ```bash
-    # Create a virtual environment
-    python3 -m venv venv
+```bash filename="Terminal"
+npx neon@latest skills
+```
 
-    # Activate the virtual environment
-    source venv/bin/activate
-    ```
+The [Neon MCP Server](/docs/ai/neon-mcp-server) connects your agent to Neon's tools as well; its page covers the setup.
 
-    ```bash
-    # Create a virtual environment
-    python -m venv venv
+## Create a Neon project
 
-    # Activate the virtual environment
-    .\venv\Scripts\activate
-    ```
+Create a Neon project in a region that runs every Neon backend service: `aws-us-east-2` (Ohio), `aws-us-east-1` (N. Virginia), `aws-eu-central-1` (Frankfurt), or `aws-ap-southeast-1` (Singapore). Postgres and [Managed Better Auth](/docs/auth/overview) run in every region; Object Storage, Neon Functions, the AI Gateway, and Realtime run in those four (see [product availability](/docs/introduction/regions#product-availability)). Skip this step if you already have a Neon project you want to use.
 
-    </CodeTabs>
+<Tabs labels={["Neon CLI", "API", "Console"]}>
 
-3.  Install the required libraries using `pip`.
-    - `psycopg`: The synchronous database adapter for connecting to Postgres (Psycopg 3). **Recommended** for new projects.
-    - `psycopg2-binary`: The previous-generation synchronous database adapter.
-    - `asyncpg`: The asynchronous database adapter for connecting to Postgres.
-    - `python-dotenv`: A helper library to manage environment variables.
+<TabItem>
 
-    ```bash
-    pip install "psycopg[binary]" psycopg2-binary asyncpg python-dotenv
-    ```
+Install the [Neon CLI](/docs/cli/install), sign in, and create the project. The npm install needs Node.js 20.19 or later; without Node.js, run `brew install neonctl` (Homebrew) or use another option on the install page:
 
-    > If you're not sure which driver to use, use `psycopg` (v3). It's the actively maintained successor to `psycopg2`. This guide provides examples for all three in case your project already depends on one of the others.
+```bash filename="Terminal"
+npm i -g neon@latest
+neon login
+neon projects create --name my-app --region-id aws-us-east-2 --no-secrets
+```
 
-## Store your Neon connection string
+`--region-id` sets the region. `--no-secrets` keeps the connection string out of the output, since the next step pulls it into your env file. Pass `--org-id` to choose the organization (find IDs with `neon orgs list`).
 
-Create a file named `.env` in your project's root directory. This file stores your database connection string outside your code.
+</TabItem>
 
-1.  In the [Neon Console](https://console.neon.tech), open your project.
-2.  Click **Connect** in the Console nav to open the **Connect to your branch** modal.
-    ![Connection modal](/docs/connect/connect_to_branch_modal.png)
-3.  Copy the connection string, which includes your password.
-4.  Add the connection string to your `.env` file as shown below.
-    ```text
-    DATABASE_URL="postgresql://[user]:[password]@[neon_hostname]/[dbname]?sslmode=require&channel_binding=require"
-    ```
-    > Replace `[user]`, `[password]`, `[neon_hostname]`, and `[dbname]` with your actual database credentials.
+<TabItem>
 
-## Examples
+Create an [API key](https://console.neon.tech/app/settings/api-keys), export it, then create the project in your organization:
 
-This section provides example Python scripts that demonstrate how to connect to your Neon database and perform basic operations such as [creating a table](#create-a-table-and-insert-data), [reading data](#read-data), [updating data](#update-data), and [deleting data](#delete-data). Pick one driver and use its tab for all four scripts.
+```bash filename="Terminal"
+export NEON_API_KEY=napi_...
 
-### Create a table and insert data
+curl -X POST https://console.neon.tech/api/v2/projects \
+  -H "Authorization: Bearer $NEON_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{"project": {"name": "my-app", "region_id": "aws-us-east-2", "org_id": "<org-id>"}}'
+```
 
-In your project directory, create a file named `create_table.py` and add the code for your preferred library. This script connects to your Neon database, creates a table named `books`, and inserts some sample data into it.
+The response includes the project's connection string in `connection_uris[0].connection_uri`. See [Create a project with the API](/docs/manage/projects#create-a-project-with-the-api) for the other options.
 
-<CodeTabs labels={["psycopg (v3)", "psycopg2", "asyncpg"]}>
+</TabItem>
 
-```python title="create_table.py"
+<TabItem>
+
+Go to the [Projects](https://console.neon.tech/app/projects) page in the Neon Console, click **New Project**, and pick one of the regions above.
+
+</TabItem>
+
+</Tabs>
+
+## Connect your app to the project
+
+The first tab runs `neon link --no-config` in your project directory, which writes `DATABASE_URL` into `.env.local` (or `.env` if one exists); the second tab copies the connection string into that file by hand. Add the env files to `.gitignore` first, so the connection string stays out of git:
+
+```bash filename="Terminal"
+printf '\n.env\n.env.local\n' >> .gitignore
+```
+
+Python doesn't read env files itself: `uv run --env-file` in [Connect and run a query](#connect-and-run-a-query) loads them, so you don't need `python-dotenv`.
+
+<Tabs labels={["Neon CLI", "Without the CLI"]}>
+
+<TabItem>
+
+From your project's directory, link it to the Neon project. Install the [Neon CLI](/docs/cli/install) and run `neon login` first if you haven't.
+
+`neon link` prompts you to pick an organization and a project, or to create a new project. Then it:
+
+- writes a `.neon` file with the project context;
+- pins a branch (pass `--branch` to choose one);
+- pulls that branch's Neon variables, including `DATABASE_URL`, into `.env.local`, or into `.env` if your project already has one.
+
+`--no-config` skips the offer to create a [`neon.ts`](/docs/reference/neon-ts) file, which is for Node.js projects.
+
+To skip the prompts, pass `-y` with `--org-id` and `--project-id`, or with `--org-id`, `--project-name`, and `--region-id` to create a project. Find IDs with `neon orgs list` and `neon projects list --org-id <org-id>`.
+
+</TabItem>
+
+<TabItem>
+
+Copy the connection string from **Connect** in the Console nav, or from the API response, and add it to a `.env.local` file in your project directory. For more information, see [Connect from any application](/docs/connect/connect-from-any-app).
+
+```shell filename=".env.local" shouldWrap
+DATABASE_URL="postgresql://[user]:[password]@[neon_hostname]/[dbname]?sslmode=require&channel_binding=require"
+```
+
+The development branch step below needs the Neon CLI, so skip it in this tab.
+
+</TabItem>
+
+</Tabs>
+
+## Work on a development branch (optional)
+
+Run `neon checkout dev --create` to develop on a branch of your database instead of the default branch, where production data usually lives. The default branch is `main` for projects created with the CLI or API, and `production` for projects created in the Console. A [branch](/docs/introduction/branching) starts from its parent's data and schema without copying them (copy-on-write: only the changes you make are stored), so you can change it freely:
+
+```bash filename="Terminal"
+neon checkout dev --create
+```
+
+This creates the `dev` branch, pins it in `.neon`, and pulls its `DATABASE_URL` into the same env file, so your app now uses the branch. To switch back, run `neon checkout main` (or `production`).
+
+## Install a Postgres driver
+
+Install [psycopg 3](https://www.psycopg.org/psycopg3/docs/), the synchronous Postgres driver for Python. The `binary` extra includes libpq, the Postgres client library, so you don't need to install it separately. psycopg 3 also has an async API for `asyncio` code, `psycopg.AsyncConnection`, described in its [async docs](https://www.psycopg.org/psycopg3/docs/advanced/async.html). The `DATABASE_URL` from the previous step works with both.
+
+If your code already uses [asyncpg](https://magicstack.github.io/asyncpg/current/), the same `DATABASE_URL` works. Pass an SSL context so that asyncpg verifies the server certificate, which `sslmode=require` alone doesn't do: `await asyncpg.connect(os.environ["DATABASE_URL"], ssl=ssl.create_default_context())`. asyncpg doesn't support channel binding, so it ignores `channel_binding=require`.
+
+```bash filename="Terminal"
+uv add "psycopg[binary]"
+```
+
+`uv add` records the package in `pyproject.toml` and installs it into the project's `.venv` directory.
+
+## Connect and run a query
+
+Replace the `main.py` that `uv init` created (or your existing script) with a script that prints the Postgres version. `uv run` installs the project's packages if they're missing. `--env-file` loads the env file into the script's environment; use `.env` there instead if `neon link` wrote to `.env`.
+
+```python filename="main.py"
 import os
 
 import psycopg
-from dotenv import load_dotenv
 
-# Load environment variables from .env file
-load_dotenv()
-
-# Get the connection string from the environment variable
-conn_string = os.getenv("DATABASE_URL")
-
-try:
-    with psycopg.connect(conn_string) as conn:
-        print("Connection established")
-
-        # Open a cursor to perform database operations
-        with conn.cursor() as cur:
-            # Drop the table if it already exists
-            cur.execute("DROP TABLE IF EXISTS books;")
-            print("Finished dropping table (if it existed).")
-
-            # Create a new table
-            cur.execute("""
-                CREATE TABLE books (
-                    id SERIAL PRIMARY KEY,
-                    title VARCHAR(255) NOT NULL,
-                    author VARCHAR(255),
-                    publication_year INT,
-                    in_stock BOOLEAN DEFAULT TRUE
-                );
-            """)
-            print("Finished creating table.")
-
-            # Insert a single book record
-            cur.execute(
-                "INSERT INTO books (title, author, publication_year, in_stock) VALUES (%s, %s, %s, %s);",
-                ("The Catcher in the Rye", "J.D. Salinger", 1951, True),
-            )
-            print("Inserted a single book.")
-
-            # Data to be inserted
-            books_to_insert = [
-                ("The Hobbit", "J.R.R. Tolkien", 1937, True),
-                ("1984", "George Orwell", 1949, True),
-                ("Dune", "Frank Herbert", 1965, False),
-            ]
-
-            # Insert multiple books at once
-            cur.executemany(
-                "INSERT INTO books (title, author, publication_year, in_stock) VALUES (%s, %s, %s, %s);",
-                books_to_insert,
-            )
-
-            print("Inserted 3 rows of data.")
-            # The transaction is committed automatically when the 'with' block exits in psycopg (v3)
-
-except Exception as e:
-    print("Connection failed.")
-    print(e)
+with psycopg.connect(os.environ["DATABASE_URL"]) as conn:
+    with conn.cursor() as cur:
+        cur.execute("SELECT version()")
+        print(cur.fetchone()[0])
 ```
 
-```python title="create_table.py"
-import os
-
-import psycopg2
-from dotenv import load_dotenv
-
-# Load environment variables from .env file
-load_dotenv()
-
-# Get the connection string from the environment variable
-conn_string = os.getenv("DATABASE_URL")
-conn = None
-
-try:
-    with psycopg2.connect(conn_string) as conn:
-        print("Connection established")
-
-        # Open a cursor to perform database operations
-        with conn.cursor() as cur:
-            # Drop the table if it already exists
-            cur.execute("DROP TABLE IF EXISTS books;")
-            print("Finished dropping table (if it existed).")
-
-            # Create a new table
-            cur.execute("""
-                CREATE TABLE books (
-                    id SERIAL PRIMARY KEY,
-                    title VARCHAR(255) NOT NULL,
-                    author VARCHAR(255),
-                    publication_year INT,
-                    in_stock BOOLEAN DEFAULT TRUE
-                );
-            """)
-            print("Finished creating table.")
-
-            # Insert a single book record
-            cur.execute(
-                "INSERT INTO books (title, author, publication_year, in_stock) VALUES (%s, %s, %s, %s);",
-                ("The Catcher in the Rye", "J.D. Salinger", 1951, True),
-            )
-            print("Inserted a single book.")
-
-            # Data to be inserted
-            books_to_insert = [
-                ("The Hobbit", "J.R.R. Tolkien", 1937, True),
-                ("1984", "George Orwell", 1949, True),
-                ("Dune", "Frank Herbert", 1965, False),
-            ]
-
-            # Insert multiple books at once
-            cur.executemany(
-                "INSERT INTO books (title, author, publication_year, in_stock) VALUES (%s, %s, %s, %s);",
-                books_to_insert,
-            )
-
-            print("Inserted 3 rows of data.")
-
-            # Commit the changes to the database
-            conn.commit()
-
-except Exception as e:
-    print("Connection failed.")
-    print(e)
+```bash filename="Terminal"
+uv run --env-file .env.local main.py
 ```
 
-```python title="create_table.py"
-import asyncio
-import os
+The output shows the Postgres version of your database, which confirms the connection:
 
-import asyncpg
-from dotenv import load_dotenv
-
-# Load environment variables from .env file
-load_dotenv()
-
-async def run():
-    # Get the connection string from the environment variable
-    conn_string = os.getenv("DATABASE_URL")
-    conn = None
-
-    try:
-        conn = await asyncpg.connect(conn_string)
-        print("Connection established")
-
-        # Drop the table if it already exists
-        await conn.execute("DROP TABLE IF EXISTS books;")
-        print("Finished dropping table (if it existed).")
-
-        # Create a new table
-        await conn.execute("""
-            CREATE TABLE books (
-                id SERIAL PRIMARY KEY,
-                title VARCHAR(255) NOT NULL,
-                author VARCHAR(255),
-                publication_year INT,
-                in_stock BOOLEAN DEFAULT TRUE
-            );
-        """)
-        print("Finished creating table.")
-
-        # Insert a single book record (using $1, $2 for placeholders)
-        await conn.execute(
-            "INSERT INTO books (title, author, publication_year, in_stock) VALUES ($1, $2, $3, $4);",
-            "The Catcher in the Rye",
-            "J.D. Salinger",
-            1951,
-            True,
-        )
-        print("Inserted a single book.")
-
-        # Data to be inserted
-        books_to_insert = [
-            ("The Hobbit", "J.R.R. Tolkien", 1937, True),
-            ("1984", "George Orwell", 1949, True),
-            ("Dune", "Frank Herbert", 1965, False),
-        ]
-
-        # Insert multiple books at once
-        await conn.executemany(
-            "INSERT INTO books (title, author, publication_year, in_stock) VALUES ($1, $2, $3, $4);",
-            books_to_insert,
-        )
-        print("Inserted 3 rows of data.")
-
-    except Exception as e:
-        print("Connection failed.")
-        print(e)
-    finally:
-        if conn:
-            await conn.close()
-
-# Run the asynchronous function
-asyncio.run(run())
+```text
+PostgreSQL 18.7 (84da7d8) on aarch64-unknown-linux-gnu, compiled by gcc ...
 ```
-
-</CodeTabs>
-
-The above code does the following:
-
-- Load the connection string from the `.env` file.
-- Connect to the Neon database.
-- Drop the `books` table if it already exists to ensure a clean slate.
-- Create a table named `books` with columns for `id`, `title`, `author`, `publication_year`, and `in_stock`.
-- Insert a single book record.
-- Insert multiple book records.
-- Commit the changes to the database (in `psycopg`, this happens automatically on exiting the `with` block).
-
-Run the script using the following command:
-
-```bash
-python create_table.py
-```
-
-When the code runs successfully, it produces the following output:
-
-```text title="Output"
-Connection established
-Finished dropping table (if it existed).
-Finished creating table.
-Inserted a single book.
-Inserted 3 rows of data.
-```
-
-### Read data
-
-In your project directory, create a file named `read_data.py`. This script connects to your Neon database and retrieves all rows from the `books` table.
-
-<CodeTabs labels={["psycopg (v3)", "psycopg2", "asyncpg"]}>
-
-```python title="read_data.py"
-import os
-
-import psycopg
-from dotenv import load_dotenv
-
-load_dotenv()
-
-conn_string = os.getenv("DATABASE_URL")
-
-try:
-    with psycopg.connect(conn_string) as conn:
-        print("Connection established")
-        with conn.cursor() as cur:
-            # Fetch all rows from the books table
-            cur.execute("SELECT * FROM books ORDER BY publication_year;")
-            rows = cur.fetchall()
-
-            print("\n--- Book Library ---")
-            for row in rows:
-                print(
-                    f"ID: {row[0]}, Title: {row[1]}, Author: {row[2]}, Year: {row[3]}, In Stock: {row[4]}"
-                )
-            print("--------------------\n")
-
-except Exception as e:
-    print("Connection failed.")
-    print(e)
-```
-
-```python title="read_data.py"
-import os
-
-import psycopg2
-from dotenv import load_dotenv
-
-load_dotenv()
-
-conn_string = os.getenv("DATABASE_URL")
-conn = None
-
-try:
-    with psycopg2.connect(conn_string) as conn:
-        print("Connection established")
-        with conn.cursor() as cur:
-            # Fetch all rows from the books table
-            cur.execute("SELECT * FROM books ORDER BY publication_year;")
-            rows = cur.fetchall()
-
-            print("\n--- Book Library ---")
-            for row in rows:
-                print(
-                    f"ID: {row[0]}, Title: {row[1]}, Author: {row[2]}, Year: {row[3]}, In Stock: {row[4]}"
-                )
-            print("--------------------\n")
-
-except Exception as e:
-    print("Connection failed.")
-    print(e)
-```
-
-```python title="read_data.py"
-import asyncio
-import os
-
-import asyncpg
-from dotenv import load_dotenv
-
-load_dotenv()
-
-async def run():
-    conn_string = os.getenv("DATABASE_URL")
-    conn = None
-
-    try:
-        conn = await asyncpg.connect(conn_string)
-        print("Connection established")
-
-        # Fetch all rows from the books table
-        rows = await conn.fetch("SELECT * FROM books ORDER BY publication_year;")
-
-        print("\n--- Book Library ---")
-        for row in rows:
-            # asyncpg rows can be accessed by index or column name
-            print(
-                f"ID: {row['id']}, Title: {row['title']}, Author: {row['author']}, Year: {row['publication_year']}, In Stock: {row['in_stock']}"
-            )
-        print("--------------------\n")
-
-    except Exception as e:
-        print("Connection failed.")
-        print(e)
-    finally:
-        if conn:
-            await conn.close()
-
-asyncio.run(run())
-```
-
-</CodeTabs>
-
-The above code does the following:
-
-- Load the connection string from the `.env` file.
-- Connect to the Neon database.
-- Use a SQL `SELECT` statement to fetch all rows from the `books` table, ordered by `publication_year`.
-- Print each book's details in a formatted output.
-
-Run the script using the following command:
-
-```bash
-python read_data.py
-```
-
-When the code runs successfully, it produces the following output:
-
-```text title="Output"
-Connection established
-
---- Book Library ---
-ID: 2, Title: The Hobbit, Author: J.R.R. Tolkien, Year: 1937, In Stock: True
-ID: 3, Title: 1984, Author: George Orwell, Year: 1949, In Stock: True
-ID: 1, Title: The Catcher in the Rye, Author: J.D. Salinger, Year: 1951, In Stock: True
-ID: 4, Title: Dune, Author: Frank Herbert, Year: 1965, In Stock: False
---------------------
-```
-
-### Update data
-
-In your project directory, create a file named `update_data.py`. This script connects to your Neon database and updates the stock status of the book 'Dune' to `True`.
-
-<CodeTabs labels={["psycopg (v3)", "psycopg2", "asyncpg"]}>
-
-```python title="update_data.py"
-import os
-
-import psycopg
-from dotenv import load_dotenv
-
-load_dotenv()
-conn_string = os.getenv("DATABASE_URL")
-
-try:
-    with psycopg.connect(conn_string) as conn:
-        print("Connection established")
-        with conn.cursor() as cur:
-            # Update a data row in the table
-            cur.execute(
-                "UPDATE books SET in_stock = %s WHERE title = %s;", (True, "Dune")
-            )
-            print("Updated stock status for 'Dune'.")
-
-except Exception as e:
-    print("Connection failed.")
-    print(e)
-```
-
-```python title="update_data.py"
-import os
-
-import psycopg2
-from dotenv import load_dotenv
-
-load_dotenv()
-conn_string = os.getenv("DATABASE_URL")
-conn = None
-
-try:
-    with psycopg2.connect(conn_string) as conn:
-        print("Connection established")
-        with conn.cursor() as cur:
-            # Update a data row in the table
-            cur.execute(
-                "UPDATE books SET in_stock = %s WHERE title = %s;", (True, "Dune")
-            )
-            print("Updated stock status for 'Dune'.")
-
-            # Commit the changes
-            conn.commit()
-
-except Exception as e:
-    print("Connection failed.")
-    print(e)
-```
-
-```python title="update_data.py"
-import asyncio
-import os
-
-import asyncpg
-from dotenv import load_dotenv
-
-load_dotenv()
-
-async def run():
-    conn_string = os.getenv("DATABASE_URL")
-    conn = None
-    try:
-        conn = await asyncpg.connect(conn_string)
-        print("Connection established")
-
-        # Update a data row in the table
-        await conn.execute(
-            "UPDATE books SET in_stock = $1 WHERE title = $2;", True, "Dune"
-        )
-        print("Updated stock status for 'Dune'.")
-
-    except Exception as e:
-        print("Connection failed.")
-        print(e)
-    finally:
-        if conn:
-            await conn.close()
-
-asyncio.run(run())
-```
-
-</CodeTabs>
-
-The above code does the following:
-
-- Load the connection string from the `.env` file.
-- Connect to the Neon database.
-- Use a SQL `UPDATE` statement to change the `in_stock` status of the book 'Dune' to `True`.
-- Commit the changes to the database.
-
-Run the script using the following command:
-
-```bash
-python update_data.py
-```
-
-After running this script, you can run `read_data.py` again to verify that the row was updated.
-
-```bash
-python read_data.py
-```
-
-When the code runs successfully, it produces the following output:
-
-```text title="Output"
-Connection established
-
---- Book Library ---
-ID: 2, Title: The Hobbit, Author: J.R.R. Tolkien, Year: 1937, In Stock: True
-ID: 3, Title: 1984, Author: George Orwell, Year: 1949, In Stock: True
-ID: 1, Title: The Catcher in the Rye, Author: J.D. Salinger, Year: 1951, In Stock: True
-ID: 4, Title: Dune, Author: Frank Herbert, Year: 1965, In Stock: True
---------------------
-```
-
-> You can see that the stock status for 'Dune' has been updated to `True`.
-
-### Delete data
-
-In your project directory, create a file named `delete_data.py`. This script connects to your Neon database and deletes the book '1984' from the `books` table.
-
-<CodeTabs labels={["psycopg (v3)", "psycopg2", "asyncpg"]}>
-
-```python title="delete_data.py"
-import os
-
-import psycopg
-from dotenv import load_dotenv
-
-load_dotenv()
-conn_string = os.getenv("DATABASE_URL")
-
-try:
-    with psycopg.connect(conn_string) as conn:
-        print("Connection established")
-        with conn.cursor() as cur:
-            # Delete a data row from the table
-            cur.execute("DELETE FROM books WHERE title = %s;", ("1984",))
-            print("Deleted the book '1984' from the table.")
-
-except Exception as e:
-    print("Connection failed.")
-    print(e)
-```
-
-```python title="delete_data.py"
-import os
-
-import psycopg2
-from dotenv import load_dotenv
-
-load_dotenv()
-conn_string = os.getenv("DATABASE_URL")
-conn = None
-
-try:
-    with psycopg2.connect(conn_string) as conn:
-        print("Connection established")
-        with conn.cursor() as cur:
-            # Delete a data row from the table
-            cur.execute("DELETE FROM books WHERE title = %s;", ("1984",))
-            print("Deleted the book '1984' from the table.")
-
-            # Commit the changes
-            conn.commit()
-
-except Exception as e:
-    print("Connection failed.")
-    print(e)
-```
-
-```python title="delete_data.py"
-import asyncio
-import os
-
-import asyncpg
-from dotenv import load_dotenv
-
-load_dotenv()
-
-async def run():
-    conn_string = os.getenv("DATABASE_URL")
-    conn = None
-    try:
-        conn = await asyncpg.connect(conn_string)
-        print("Connection established")
-
-        # Delete a data row from the table
-        await conn.execute("DELETE FROM books WHERE title = $1;", "1984")
-        print("Deleted the book '1984' from the table.")
-
-    except Exception as e:
-        print("Connection failed.")
-        print(e)
-    finally:
-        if conn:
-            await conn.close()
-
-asyncio.run(run())
-```
-
-</CodeTabs>
-
-The above code does the following:
-
-- Load the connection string from the `.env` file.
-- Connect to the Neon database.
-- Use a SQL `DELETE` statement to remove the book '1984' from the `books` table.
-- Commit the changes to the database.
-
-Run the script using the following command:
-
-```bash
-python delete_data.py
-```
-
-After running this script, you can run `read_data.py` again to verify that the row was deleted.
-
-```bash
-python read_data.py
-```
-
-When the code runs successfully, it produces the following output:
-
-```text title="Output"
-Connection established
-
---- Book Library ---
-ID: 2, Title: The Hobbit, Author: J.R.R. Tolkien, Year: 1937, In Stock: True
-ID: 1, Title: The Catcher in the Rye, Author: J.D. Salinger, Year: 1951, In Stock: True
-ID: 4, Title: Dune, Author: Frank Herbert, Year: 1965, In Stock: True
---------------------
-```
-
-> You can see that the book '1984' has been deleted from the `books` table.
 
 </Steps>
 
-## Use an ORM or framework
+## Examples
 
-While this guide demonstrates how to connect to Neon using raw SQL queries, for more advanced and maintainable data interactions in your Python applications, consider using an Object-Relational Mapping (ORM) framework. ORMs let you work with data as objects and manage schema changes through migrations, keeping your database structure in sync with your application models.
+The example is one script that creates a `books` table, then inserts, selects, updates, and deletes rows, with a transaction in the middle. The script deletes the rows it adds, so you can run it again. Save it as `books.py` in your project, and run it with `uv run --env-file .env.local books.py`. The example creates the `books` table and writes rows to the branch that your `DATABASE_URL` points at, so run it on a development branch: complete [Work on a development branch](#work-on-a-development-branch-optional) first. Without the CLI, create a branch in the Neon Console and copy its connection string into `.env.local`, as described in [Create a branch](/docs/manage/branches#create-a-branch).
 
-Explore the following resources to learn how to integrate ORMs with Neon:
+```python filename="books.py"
+import os
 
-- [Connect an SQLAlchemy application to Neon](/docs/guides/sqlalchemy)
-- [Connect a Django application to Neon](/docs/guides/django)
+import psycopg
 
-## Next steps: Neon backend services
+with psycopg.connect(os.environ["DATABASE_URL"]) as conn:
+    with conn.cursor() as cur:
+        # Create a table
+        cur.execute("""
+            CREATE TABLE IF NOT EXISTS books (
+                id SERIAL PRIMARY KEY,
+                title TEXT NOT NULL,
+                author TEXT NOT NULL,
+                year INT
+            )
+        """)
 
-- [Add Object Storage](/docs/storage/overview): S3-compatible file storage that branches with your database
-- [Call an LLM with AI Gateway](/docs/ai-gateway/overview): Access foundation models from Anthropic, OpenAI, Google, and more with one credential
+        # Insert a row and get its id back
+        cur.execute(
+            "INSERT INTO books (title, author, year) VALUES (%s, %s, %s) RETURNING id",
+            ("Dune", "Frank Herbert", 1965),
+        )
+        dune_id = cur.fetchone()[0]
 
-## Resources
+        # Select the row
+        cur.execute("SELECT id, title, year FROM books WHERE id = %s", (dune_id,))
+        print("Selected:", cur.fetchone())
 
-- [Psycopg 3 documentation](https://www.psycopg.org/psycopg3/docs/)
-- [Psycopg 2 documentation](https://www.psycopg.org/docs/)
-- [asyncpg documentation](https://magicstack.github.io/asyncpg/current/)
-- [Building an API with Django, Django REST Framework, and Lakebase Postgres](/guides/django-rest-api)
+        # Update the row
+        cur.execute("UPDATE books SET year = %s WHERE id = %s", (1966, dune_id))
+
+        # Insert two rows in a transaction: both commit, or neither does
+        with conn.transaction():
+            cur.execute(
+                "INSERT INTO books (title, author, year) VALUES (%s, %s, %s) RETURNING id",
+                ("Emma", "Jane Austen", 1815),
+            )
+            emma_id = cur.fetchone()[0]
+            cur.execute(
+                "INSERT INTO books (title, author, year) VALUES (%s, %s, %s) RETURNING id",
+                ("Persuasion", "Jane Austen", 1817),
+            )
+            persuasion_id = cur.fetchone()[0]
+
+        cur.execute("SELECT title, year FROM books ORDER BY year")
+        print("All books:", cur.fetchall())
+
+        # Delete the rows this script added
+        cur.execute(
+            "DELETE FROM books WHERE id = ANY(%s)",
+            ([dune_id, emma_id, persuasion_id],),
+        )
+```
+
+`with psycopg.connect()` commits when the block ends without an error, so the script doesn't call `commit()`.
+
+## Run it elsewhere
+
+On a host, set `DATABASE_URL` in the host's environment instead of an env file. For production, use your default branch's pooled connection string, which goes through [Neon's connection pooler](/docs/connect/connection-pooling): run `neon connection-string main --pooled` in your own terminal, replacing `main` with `production` if that's your project's default branch, because the command prints the password. Neon's pooler already pools connections, so you don't need to add a pool in your app; if you do, return connections to it promptly (see [Double pooling](/docs/connect/choose-connection#common-pitfalls)).
+
+## Add more of your backend
+
+Neon also runs object storage, a model gateway, and serverless functions next to your database. Each entry below says what the service does.
+
+<DefinitionList>
+
+Object Storage
+: S3-compatible buckets for uploads and files, used with boto3. See [Object Storage](/docs/storage/overview).
+
+AI Gateway
+: Routes calls to models from Anthropic, OpenAI, Google, and more through one endpoint on your branch, used with the OpenAI SDK. See [AI Gateway](/docs/ai-gateway/overview).
+
+Neon Functions
+: Long-running Node.js compute (the server that runs your code next to your database), called over HTTP. See [Neon Functions](/docs/compute/functions/overview).
+
+</DefinitionList>
+
+## Troubleshooting
+
+<DefinitionList>
+
+`KeyError: 'DATABASE_URL'`
+: The script ran without `DATABASE_URL` in its environment. Run it with `uv run --env-file .env.local`, or set the variable in your shell.
+
+``error: No environment file found at: `.env.local` ``
+: `neon link` wrote `.env` because your project already had one, so `.env.local` doesn't exist. Pass `--env-file .env` instead.
+
+`ModuleNotFoundError: No module named 'psycopg'`
+: The script ran with `python` instead of `uv run`, so it isn't using the project's virtual environment. Run it with `uv run --env-file .env.local` from the project directory.
+
+</DefinitionList>
+
+## Next steps
+
+- [Connect a Django application to Neon](/docs/guides/django): Query Neon from a Django view, with branches and deployment.
+- [Connect a Reflex application to Neon](/docs/guides/reflex): Define a SQLAlchemy model in a Reflex app, migrate it with Alembic, and query it from a page.
+- [Connect from SQLAlchemy to Neon](/docs/guides/sqlalchemy): Use SQLAlchemy's models and queries instead of raw SQL.
+- [Connect from Tortoise ORM to Neon](/docs/guides/tortoise-orm): Use an asyncio-native ORM.
 
 <NeedHelp/>

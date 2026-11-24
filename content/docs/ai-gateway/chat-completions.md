@@ -187,15 +187,15 @@ When the upstream provider rate-limits a request, AI Gateway forwards the releva
 
 ## Error handling
 
-| Status                         | Meaning                | Common cause                                                                                                                                 |
-| ------------------------------ | ---------------------- | -------------------------------------------------------------------------------------------------------------------------------------------- |
-| `400 Bad Request`              | Invalid request        | Unknown model ID, or model used on the wrong endpoint                                                                                        |
-| `413 Request Entity Too Large` | Body too large         | Request body exceeds 32 MiB. Reduce the size of your request.                                                                                |
-| `401 Unauthorized`             | Authentication failed  | Missing or invalid `NEON_AI_GATEWAY_TOKEN`                                                                                                   |
-| `403 Forbidden`                | Access denied          | Credential lacks `ai_gateway:invoke` scope, or branch not in credential lineage                                                              |
-| `429 Too Many Requests`        | Account quota exceeded | Your account's AI Gateway quota is blocked. Error code: `REQUEST_LIMIT_EXCEEDED`. Check `Retry-After` for when to retry, or contact support. |
-| `429 Too Many Requests`        | Upstream rate limited  | Upstream provider rate limit. Check the `Retry-After` and `X-Ratelimit-*` headers.                                                           |
-| `502 Bad Gateway`              | Upstream error         | Temporary issue with the upstream workspace. Retry the request.                                                                              |
+| Status                         | Meaning                | Common cause                                                                                                                                                             |
+| ------------------------------ | ---------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `400 Bad Request`              | Invalid request        | Unknown model ID, or model used on the wrong endpoint                                                                                                                    |
+| `413 Request Entity Too Large` | Body too large         | Request body exceeds 32 MiB. Reduce the size of your request.                                                                                                            |
+| `401 Unauthorized`             | Authentication failed  | Missing or invalid `NEON_AI_GATEWAY_TOKEN`                                                                                                                               |
+| `403 Forbidden`                | Access denied          | Credential lacks `ai_gateway:invoke` scope, branch not in credential lineage, or [no AI Gateway credits yet](/docs/ai-gateway/troubleshooting#403-no-ai-gateway-credits) |
+| `429 Too Many Requests`        | Account quota exceeded | Your account's AI Gateway quota is blocked. Error code: `REQUEST_LIMIT_EXCEEDED`. Check `Retry-After` for when to retry, or contact support.                             |
+| `429 Too Many Requests`        | Upstream rate limited  | Upstream provider rate limit. Check the `Retry-After` and `X-Ratelimit-*` headers.                                                                                       |
+| `502 Bad Gateway`              | Upstream error         | Temporary issue with the upstream workspace. Retry the request.                                                                                                          |
 
 Errors the gateway generates itself, such as an unknown model, use an OpenAI-style `error.message` object:
 

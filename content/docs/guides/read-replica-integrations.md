@@ -10,7 +10,7 @@ summary: >-
   `read`/`write` database config, Django's `DATABASE_ROUTERS`, and Entity
   Framework Core's separate `DbContext` classes.
 enableTableOfContents: true
-updatedOn: '2026-08-04T04:41:00.271Z'
+updatedOn: '2026-11-10T13:00:30.000Z'
 ---
 
 In Neon, a read replica is an independent read-only compute that performs read operations on the same data as your primary read-write compute, which means adding a read replica to a Neon project requires no additional storage.

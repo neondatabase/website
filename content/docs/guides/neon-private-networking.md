@@ -11,11 +11,11 @@ summary: >-
 enableTableOfContents: true
 redirectFrom:
   - /docs/guides/neon-private-access
-updatedOn: '2026-10-09T15:17:33.920Z'
+updatedOn: '2026-11-18T21:49:53.868Z'
 ---
 
 <Admonition type="info" title="Private Networking availability">
-Private Networking is available on Neon's [Scale](/docs/introduction/plans#scale) plan. If you're on a different plan, you can request a trial from the **Network Security** page in your project's settings.
+Private Networking is available on Neon's [Scale](/docs/introduction/plans#scale-plan) plan. If you're on a different plan, you can request a trial from the **Network Security** page in your project's settings.
 </Admonition>
 
 The **Neon Private Networking** feature enables secure connections to your Lakebase Postgres databases via [AWS PrivateLink](https://docs.aws.amazon.com/vpc/latest/privatelink/concepts.html), bypassing the open internet for enhanced security.
@@ -30,7 +30,7 @@ With **Neon Private Networking**, you can connect to your database via AWS Priva
 
 ## Prerequisites
 
-- You must be on the [Scale](/docs/introduction/plans#scale) plan, and your user must be an Admin of the [Neon organization](/docs/manage/organizations). You'll encounter an access error if you attempt the setup from a personal Neon account or on a plan that doesn't include Private Networking.
+- You must be on the [Scale](/docs/introduction/plans#scale-plan) plan, and your user must be an Admin of the [Neon organization](/docs/manage/organizations). You'll encounter an access error if you attempt the setup from a personal Neon account or on a plan that doesn't include Private Networking.
 - **Ensure that your client application is deployed on AWS in the same region as the database you plan to connect to.** The Private Networking feature is available in all [Neon-supported AWS regions](/docs/introduction/regions#aws-regions). Both your client application and database must be in one of these regions.
 - Neon Private Networking supports both [IPv4](https://en.wikipedia.org/wiki/Internet_Protocol_version_4) and [IPv6](https://en.wikipedia.org/wiki/IPv6).
 - Install the Neon CLI. You will use it to add your VPC endpoint ID to your Neon organization. For installation instructions, see [Neon CLI install and connect](/docs/cli/install).
@@ -48,7 +48,7 @@ To configure Neon Private Networking, perform the following steps:
     </Admonition>
 
     <Admonition type="important" title="Add all service names for your region">
-    A region can list multiple endpoint service names. When you create the endpoint, add **all** of the names listed for your region below (under **Service settings**). Neon adds service names over time as it expands capacity and updates this page, so re-check that list after a regional expansion. Adding those later additions is optional but improves capacity and reliability. Expansions are announced in the [changelog](/docs/changelog).
+    A region can list multiple endpoint service names, and each VPC endpoint connects to one service name. Create one VPC endpoint for **each** service name listed for your region below. Neon adds service names over time as it expands capacity and updates this page, so re-check that list after a regional expansion, or get the current list from the [Neon API](/docs/reference/api/regions/get-region-vpc-endpoint-services). Adding those later additions is optional but improves capacity and reliability. Expansions are announced in the [changelog](/docs/changelog).
     </Admonition>
 
     1. Go to the AWS **VPC > Endpoints** dashboard and select **Create endpoint**. Make sure you create the endpoint in the same VPC as your client application.
@@ -60,68 +60,127 @@ To configure Neon Private Networking, perform the following steps:
 
        ![VPC Create endpoint](/docs/guides/pl_vpc_create_endpoint.png)
 
-    1. Under **Service settings**, specify the **Service name**. Some regions require specifying multiple service names, and service names vary by region:
+    1. Under **Service settings**, specify the **Service name**. Service names vary by region. Select your region below and copy one service name. You repeat these steps for each remaining name later.
 
-       - **us-east-1**: Create entries, one for each of the following:
-         - `com.amazonaws.vpce.us-east-1.vpce-svc-01aeec2f4b558bc22`
-         - `com.amazonaws.vpce.us-east-1.vpce-svc-01b3c73657ed9bd29`
-         - `com.amazonaws.vpce.us-east-1.vpce-svc-02a0abd91f32f1ed7`
-         - `com.amazonaws.vpce.us-east-1.vpce-svc-040132f4a2dc43d76`
-         - `com.amazonaws.vpce.us-east-1.vpce-svc-0492424e0bf471d59`
-         - `com.amazonaws.vpce.us-east-1.vpce-svc-074ac4111275eaf07`
-         - `com.amazonaws.vpce.us-east-1.vpce-svc-07e0ce252b3a16acc`
-         - `com.amazonaws.vpce.us-east-1.vpce-svc-0824666dc46176a87`
-         - `com.amazonaws.vpce.us-east-1.vpce-svc-0adffb07ac0333ac0`
-         - `com.amazonaws.vpce.us-east-1.vpce-svc-0b676a43303caf7d8`
-         - `com.amazonaws.vpce.us-east-1.vpce-svc-0bef3dbe6e4a2df49`
-         - `com.amazonaws.vpce.us-east-1.vpce-svc-0c4afbefbfdf6b031`
-         - `com.amazonaws.vpce.us-east-1.vpce-svc-0d07f7f68c9a99f3b`
-         - `com.amazonaws.vpce.us-east-1.vpce-svc-0de57c578b0e614a9`
-         - `com.amazonaws.vpce.us-east-1.vpce-svc-0e018376e3c90bfae`
-         - `com.amazonaws.vpce.us-east-1.vpce-svc-0f37140e9710ee3af`
-       - **us-east-2**: Create entries, one for each of the following:
-         - `com.amazonaws.vpce.us-east-2.vpce-svc-0056bdfba63cc6ea1`
-         - `com.amazonaws.vpce.us-east-2.vpce-svc-010736480bcef5824`
-         - `com.amazonaws.vpce.us-east-2.vpce-svc-0125f603817b3d7f7`
-         - `com.amazonaws.vpce.us-east-2.vpce-svc-0234a2d750f731a18`
-         - `com.amazonaws.vpce.us-east-2.vpce-svc-0465c21ce8ba95fb2`
-         - `com.amazonaws.vpce.us-east-2.vpce-svc-0a59493ecf790eccf`
-         - `com.amazonaws.vpce.us-east-2.vpce-svc-0ce57d490de78526a`
-         - `com.amazonaws.vpce.us-east-2.vpce-svc-0d421498ff01becac`
-         - `com.amazonaws.vpce.us-east-2.vpce-svc-0fcb5fccfc8573aa3`
-       - **eu-central-1**: Create entries, one for each of the following:
-         - `com.amazonaws.vpce.eu-central-1.vpce-svc-0165f3a480927c9a0`
-         - `com.amazonaws.vpce.eu-central-1.vpce-svc-0260f9dcc9bf59e3e`
-         - `com.amazonaws.vpce.eu-central-1.vpce-svc-04bac3120b20929cd`
-         - `com.amazonaws.vpce.eu-central-1.vpce-svc-05554c35009a5eccb`
-         - `com.amazonaws.vpce.eu-central-1.vpce-svc-0575a0aedec0492b8`
-         - `com.amazonaws.vpce.eu-central-1.vpce-svc-05a252e6836f01cfd`
-         - `com.amazonaws.vpce.eu-central-1.vpce-svc-05a5b03b56954593a`
-         - `com.amazonaws.vpce.eu-central-1.vpce-svc-07617c7fc17794cc7`
-         - `com.amazonaws.vpce.eu-central-1.vpce-svc-0efb85c929a6ee91f`
-         - `com.amazonaws.vpce.eu-central-1.vpce-svc-0fef417ecf84ed325`
-       - **eu-west-2**: Create entries, one for each of the following:
-         - `com.amazonaws.vpce.eu-west-2.vpce-svc-028d190998ab34913`
-         - `com.amazonaws.vpce.eu-west-2.vpce-svc-0375428488d22c05b`
-         - `com.amazonaws.vpce.eu-west-2.vpce-svc-0c6fedbe99fced2cd`
-       - **us-west-2**: Create entries, one for each of the following:
-         - `com.amazonaws.vpce.us-west-2.vpce-svc-045eebdf710e1066d`
-         - `com.amazonaws.vpce.us-west-2.vpce-svc-060e0d5f582365b8e`
-         - `com.amazonaws.vpce.us-west-2.vpce-svc-07b750990c172f22f`
-         - `com.amazonaws.vpce.us-west-2.vpce-svc-0a7b662960507808f`
-         - `com.amazonaws.vpce.us-west-2.vpce-svc-0ed672a4d41b5e687`
-       - **ap-southeast-1**: Create entries, one for each of the following:
-         - `com.amazonaws.vpce.ap-southeast-1.vpce-svc-00eb29496a51d8bee`
-         - `com.amazonaws.vpce.ap-southeast-1.vpce-svc-01c64edf7fe936ac7`
-         - `com.amazonaws.vpce.ap-southeast-1.vpce-svc-028cc7060eb23ff43`
-         - `com.amazonaws.vpce.ap-southeast-1.vpce-svc-07c68d307f9f05687`
-         - `com.amazonaws.vpce.ap-southeast-1.vpce-svc-0d858726de58b2185`
-       - **ap-southeast-2**: Create entries, one for each of the following:
-         - `com.amazonaws.vpce.ap-southeast-2.vpce-svc-031161490f5647f32`
-         - `com.amazonaws.vpce.ap-southeast-2.vpce-svc-07d11c1bc6234e6e4`
-       - **sa-east-1**: Create entries, one for each of the following:
-         - `com.amazonaws.vpce.sa-east-1.vpce-svc-03cf6c871b7ae95e8`
-         - `com.amazonaws.vpce.sa-east-1.vpce-svc-061204a851dbd1a47`
+       <Tabs labels={["US", "Europe", "APAC", "LATAM"]}>
+
+       <TabItem>
+
+       ```text filename="us-east-1"
+       com.amazonaws.vpce.us-east-1.vpce-svc-01aeec2f4b558bc22
+       com.amazonaws.vpce.us-east-1.vpce-svc-01b3c73657ed9bd29
+       com.amazonaws.vpce.us-east-1.vpce-svc-02a0abd91f32f1ed7
+       com.amazonaws.vpce.us-east-1.vpce-svc-040132f4a2dc43d76
+       com.amazonaws.vpce.us-east-1.vpce-svc-0492424e0bf471d59
+       com.amazonaws.vpce.us-east-1.vpce-svc-074ac4111275eaf07
+       com.amazonaws.vpce.us-east-1.vpce-svc-07e0ce252b3a16acc
+       com.amazonaws.vpce.us-east-1.vpce-svc-0824666dc46176a87
+       com.amazonaws.vpce.us-east-1.vpce-svc-0adffb07ac0333ac0
+       com.amazonaws.vpce.us-east-1.vpce-svc-0b676a43303caf7d8
+       com.amazonaws.vpce.us-east-1.vpce-svc-0bef3dbe6e4a2df49
+       com.amazonaws.vpce.us-east-1.vpce-svc-0c4afbefbfdf6b031
+       com.amazonaws.vpce.us-east-1.vpce-svc-0d07f7f68c9a99f3b
+       com.amazonaws.vpce.us-east-1.vpce-svc-0de57c578b0e614a9
+       com.amazonaws.vpce.us-east-1.vpce-svc-0e018376e3c90bfae
+       com.amazonaws.vpce.us-east-1.vpce-svc-0f37140e9710ee3af
+       ```
+
+       ```text filename="us-east-2"
+       com.amazonaws.vpce.us-east-2.vpce-svc-0056bdfba63cc6ea1
+       com.amazonaws.vpce.us-east-2.vpce-svc-010736480bcef5824
+       com.amazonaws.vpce.us-east-2.vpce-svc-0125f603817b3d7f7
+       com.amazonaws.vpce.us-east-2.vpce-svc-0234a2d750f731a18
+       com.amazonaws.vpce.us-east-2.vpce-svc-0465c21ce8ba95fb2
+       com.amazonaws.vpce.us-east-2.vpce-svc-0a59493ecf790eccf
+       com.amazonaws.vpce.us-east-2.vpce-svc-0ce57d490de78526a
+       com.amazonaws.vpce.us-east-2.vpce-svc-0d421498ff01becac
+       com.amazonaws.vpce.us-east-2.vpce-svc-0fcb5fccfc8573aa3
+       ```
+
+       ```text filename="us-west-2"
+       com.amazonaws.vpce.us-west-2.vpce-svc-045eebdf710e1066d
+       com.amazonaws.vpce.us-west-2.vpce-svc-060e0d5f582365b8e
+       com.amazonaws.vpce.us-west-2.vpce-svc-07b750990c172f22f
+       com.amazonaws.vpce.us-west-2.vpce-svc-0a7b662960507808f
+       com.amazonaws.vpce.us-west-2.vpce-svc-0ed672a4d41b5e687
+       ```
+
+       </TabItem>
+
+       <TabItem>
+
+       ```text filename="eu-central-1"
+       com.amazonaws.vpce.eu-central-1.vpce-svc-0165f3a480927c9a0
+       com.amazonaws.vpce.eu-central-1.vpce-svc-0260f9dcc9bf59e3e
+       com.amazonaws.vpce.eu-central-1.vpce-svc-04bac3120b20929cd
+       com.amazonaws.vpce.eu-central-1.vpce-svc-05554c35009a5eccb
+       com.amazonaws.vpce.eu-central-1.vpce-svc-0575a0aedec0492b8
+       com.amazonaws.vpce.eu-central-1.vpce-svc-05a252e6836f01cfd
+       com.amazonaws.vpce.eu-central-1.vpce-svc-05a5b03b56954593a
+       com.amazonaws.vpce.eu-central-1.vpce-svc-07617c7fc17794cc7
+       com.amazonaws.vpce.eu-central-1.vpce-svc-0efb85c929a6ee91f
+       com.amazonaws.vpce.eu-central-1.vpce-svc-0fef417ecf84ed325
+       ```
+
+       ```text filename="eu-west-2"
+       com.amazonaws.vpce.eu-west-2.vpce-svc-028d190998ab34913
+       com.amazonaws.vpce.eu-west-2.vpce-svc-0375428488d22c05b
+       com.amazonaws.vpce.eu-west-2.vpce-svc-0c6fedbe99fced2cd
+       ```
+
+       </TabItem>
+
+       <TabItem>
+
+       ```text filename="ap-southeast-1"
+       com.amazonaws.vpce.ap-southeast-1.vpce-svc-00eb29496a51d8bee
+       com.amazonaws.vpce.ap-southeast-1.vpce-svc-01c64edf7fe936ac7
+       com.amazonaws.vpce.ap-southeast-1.vpce-svc-028cc7060eb23ff43
+       com.amazonaws.vpce.ap-southeast-1.vpce-svc-07c68d307f9f05687
+       com.amazonaws.vpce.ap-southeast-1.vpce-svc-0d858726de58b2185
+       ```
+
+       ```text filename="ap-southeast-2"
+       com.amazonaws.vpce.ap-southeast-2.vpce-svc-031161490f5647f32
+       com.amazonaws.vpce.ap-southeast-2.vpce-svc-07d11c1bc6234e6e4
+       ```
+
+       </TabItem>
+
+       <TabItem>
+
+       ```text filename="sa-east-1"
+       com.amazonaws.vpce.sa-east-1.vpce-svc-03cf6c871b7ae95e8
+       com.amazonaws.vpce.sa-east-1.vpce-svc-061204a851dbd1a47
+       ```
+
+       </TabItem>
+
+       </Tabs>
+
+       If your region has more than a few service names, consider scripting endpoint creation with the AWS CLI, Terraform, or CloudFormation instead of repeating these steps in the AWS console. To get the current service names for a region, use the Neon API [List VPC endpoint service names for a region](/docs/reference/api/regions/get-region-vpc-endpoint-services) endpoint with the Neon region ID, such as `aws-us-east-1`:
+
+       ```bash
+       curl "https://console.neon.tech/api/v2/regions/aws-us-east-1/vpc_endpoint_services" \
+         -H "Accept: application/json" \
+         -H "Authorization: Bearer $NEON_API_KEY"
+       ```
+
+       The response lists every service name for the region:
+
+       ```json
+       {
+         "region_id": "aws-us-east-1",
+         "vpc_endpoint_service_names": [
+           "com.amazonaws.vpce.us-east-1.vpce-svc-01aeec2f4b558bc22",
+           "com.amazonaws.vpce.us-east-1.vpce-svc-01b3c73657ed9bd29",
+           ...
+         ]
+       }
+       ```
+
+       To check that a region is available to your organization, add `?org_id=<your_org_id>` to the request. The API returns a `404` if the region isn't available to your organization, or if you're a collaborator rather than a member of that organization.
+
     1. Click **Verify service**. If successful, you should see a `Service name verified` message.
 
         ![VPC Create endpoint](/docs/guides/pl_vpc_service_name_verified.png)
@@ -134,7 +193,8 @@ To configure Neon Private Networking, perform the following steps:
 
         ![VPC Create endpoint](/docs/guides/pl_vpc_network_settings.png)
 
-    1. Note your **VPC Endpoint ID**. You will need it in the next step.
+    1. Note your **VPC Endpoint ID**. You need it when you add the endpoint to your Neon organization.
+    1. Repeat these steps for each remaining service name in your region, noting each **VPC Endpoint ID**.
 
         ![VPC Create endpoint](/docs/guides/pl_vpc_endpoint_id.png)
 
@@ -150,7 +210,7 @@ To configure Neon Private Networking, perform the following steps:
 
     <TabItem>
 
-    In the following example, the VPC endpoint ID is assigned to a Neon organization in the specified AWS region using the [neon vpc endpoint](/docs/cli/vpc#endpoint) command.
+    In the following example, the VPC endpoint ID is assigned to a Neon organization in the specified AWS region using the [neon vpc endpoint](/docs/cli/vpc#endpoint) command. To identify the endpoint later, you can add an optional label with `--label`.
 
     ```bash shouldWrap
     neon vpc endpoint assign vpce-1234567890abcdef0 --org-id org-bold-bonus-12345678 --region-id aws-us-east-2
@@ -175,6 +235,8 @@ To configure Neon Private Networking, perform the following steps:
     </TabItem>
 
     </Tabs>
+
+    After you assign an endpoint, its state is `new`. Neon then accepts the endpoint connection in AWS automatically, and the state changes to `accepted`. No manual approval is needed. To check the state, see [Assigning a VPC endpoint restriction](#assigning-a-vpc-endpoint-restriction) for the `status` command and API.
 
     Optionally, you can limit access to a Neon project by allowing connections only from a specific VPC endpoint. For instructions, see [Assigning a VPC endpoint restrictions](#assigning-a-vpc-endpoint-restriction).
 
@@ -210,7 +272,7 @@ To configure Neon Private Networking, perform the following steps:
 
     At this point, it's still possible to connect to a database in your Neon project over the public internet using a database connection string.
 
-    You can restrict public internet access to your Neon project via the Neon CLI or API.
+    You can restrict public internet access to your Neon project via the Neon CLI or API. Blocking public connections overrides your project's [IP Allow](/docs/introduction/ip-allow) list, so public connections are rejected even from allowed IP addresses.
 
     <Admonition type="warning" title="Blocking public access doesn't protect every Neon service">
     This step restricts Postgres connections only. It doesn't protect the Data API, Realtime, Managed Better Auth, Object Storage, the AI Gateway, or function URLs. Realtime, Managed Better Auth, and database connections from Neon Functions also stop working. See [Private Networking and other Neon services](#private-networking-and-other-neon-services).
@@ -271,7 +333,7 @@ You can specify a CLI command similar to the following to restrict project acces
 neon vpc project restrict vpce-1234567890abcdef0 --project-id orange-credit-12345678
 ```
 
-You will need to provide the VPC endpoint ID and your Neon project ID. If the region has multiple **Service Names**, all **VPC Endpoint IDs** must be restricted in the way as above. You can find your Neon project ID under your project's settings in the Neon Console, or by running this Neon CLI command: `neon projects list`
+You will need to provide the VPC endpoint ID and your Neon project ID. The VPC endpoint must already be assigned to the project's Neon organization, as described in [Add your VPC endpoint ID to your Neon organization](#add-your-vpc-endpoint-id-to-your-neon-organization). Otherwise, the request fails with a `VPC_ENDPOINT_ACCOUNT_OWNERSHIP_ERROR` error. If the region has multiple **Service Names**, all **VPC Endpoint IDs** must be restricted in the way as above. You can find your Neon project ID under your project's settings in the Neon Console, or by running this Neon CLI command: `neon projects list`
 
 After adding a restriction, you can check the status of the VPC endpoint to view the restricted project using the [vpc endpoint status command](/docs/cli/vpc#endpoint). You will need to provide your VPC endpoint ID, region ID, and Neon organization ID.
 
@@ -358,10 +420,12 @@ If you haven't blocked public internet access, these services connect over the p
 
 ## Private networking limits
 
-The Private Networking feature supports a maximum of **20 private networking configurations per AWS region**. Supported AWS regions are listed [above](#create-an-aws-vpc-endpoint). If you need more, you can request a limit increase. Scale plan users can [request a limit increase](/docs/introduction/support#request-a-limit-increase) from the console.
+The Private Networking feature supports a maximum of **20 private networking configurations per AWS region**. Supported AWS regions are listed [above](#create-an-aws-vpc-endpoint). If you need more, you can request a limit increase. Scale plan users can [request a limit increase](/docs/introduction/support#request-a-limit-increase-scale-plan) from the console.
 
 ## Limitations
 
 If you remove a VPC endpoint from a Neon organization, that VPC endpoint cannot be added back to the same Neon organization. Attempting to do so will result in an error. In this case, you must set up a new VPC endpoint.
+
+Before you remove a VPC endpoint from a Neon organization, remove it from any project-level VPC endpoint restrictions that use it. Neon doesn't let you remove an endpoint from an organization while a project in that organization is still restricted to it.
 
 <NeedHelp />

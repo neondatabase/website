@@ -11,7 +11,7 @@ summary: >-
 enableTableOfContents: true
 tag: beta
 tagTheme: blue
-updatedOn: '2026-09-16T19:45:35.340Z'
+updatedOn: '2026-11-20T14:06:24.575Z'
 redirectFrom:
   - /docs/import/migration-assistant
 ---
@@ -65,14 +65,13 @@ We'll verify the following:
 
 Some results are warnings rather than failures. A warning doesn't stop you from continuing to the next step.
 
-<Admonition type="note" title="False extension warning for Postgres 18 sources">
-For a Postgres 18 source database, the checks can list `plpgsql` (and other extensions) as unsupported. This is a false warning. You can continue with the import.
+<Admonition type="note" title="False extension warnings">
+The checks can list an extension as unsupported even when Neon supports it, for example `plpgsql` on a Postgres 18 source, or `lakebase_vector`, `lakebase_text`, and `lakebase_tokenizer` on any source. These warnings don't stop the import. If you see one, look up the extension in the [supported extensions table](/docs/extensions/pg-extensions) for the Postgres version you're importing into, then continue.
 </Admonition>
 
 ## Create a new Neon project
 
-Click the **Create new Neon project** button, specify your project settings including the **Postgres version** and **region**, and click **Create**. Choose the same Postgres version as your source database or a newer one. You can't import into an older version.
-
+Click the **Create new Neon project** button, specify your project settings including the **Postgres version** and **region**, and click **Create**. Choose the same Postgres version as your source database or a newer one. You can't import into an older version. The assistant defaults to your source database's version, so to [upgrade to a newer major version](/docs/postgresql/postgres-upgrade), select the newer one.
 
 ## Start import process
 

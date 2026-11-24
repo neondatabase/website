@@ -25,23 +25,20 @@ describe('MDX to Markdown Conversion', () => {
       const inputPath = 'content/docs/guides/prisma.md';
       const pageUrl = 'https://neon.com/docs/guides/prisma';
 
-      const { content: result } = await processFile(inputPath, pageUrl);
+      const projectRoot = process.cwd();
+
+      const { content: result } = await processFile(inputPath, pageUrl, projectRoot);
 
       // Should have title from frontmatter
       expect(result).toContain('# Connect from Prisma to Neon');
 
-      // Should have converted Admonitions
-      expect(result).toContain('**Tip:**');
-      expect(result).toContain('**Note:**');
+      // Should have converted the PromptBlock to the prompt's text
+      expect(result).toContain('Connect my Prisma app to Neon.');
 
       // Should NOT have raw MDX components
-      expect(result).not.toContain('<Admonition');
-      expect(result).not.toContain('<CopyPrompt');
+      expect(result).not.toContain('<PromptBlock');
+      expect(result).not.toContain('<Steps');
       expect(result).not.toContain('<NeedHelp');
-
-      // Should preserve <details> as HTML
-      expect(result).toContain('<details>');
-      expect(result).toContain('<summary>');
 
       // Should have absolute URLs
       expect(result).toContain('https://neon.com/docs/');
@@ -52,12 +49,14 @@ describe('MDX to Markdown Conversion', () => {
       const inputPath = 'content/docs/guides/nextjs.md';
       const pageUrl = 'https://neon.com/docs/guides/nextjs';
 
-      const { content: result } = await processFile(inputPath, pageUrl);
+      const projectRoot = process.cwd();
+
+      const { content: result } = await processFile(inputPath, pageUrl, projectRoot);
 
       // Should have converted CodeTabs to bold labels
       expect(result).toContain('**node-postgres**');
       expect(result).toContain('**postgres.js**');
-      expect(result).toContain('**Neon serverless driver (Recommended)**');
+      expect(result).toContain('**Neon serverless driver**');
 
       // Should NOT have raw CodeTabs
       expect(result).not.toContain('<CodeTabs');

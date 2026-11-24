@@ -12,7 +12,7 @@ summary: >-
   signal-specific paths (/v1/metrics, /v1/logs) and collects data from all
   computes in a project.
 enableTableOfContents: true
-updatedOn: '2026-10-23T12:11:49.591Z'
+updatedOn: '2026-11-13T14:28:33.000Z'
 ---
 
 <FeatureBetaProps feature_name="OpenTelemetry integration" />
@@ -118,8 +118,7 @@ If you use New Relic, you'll need to sign up for an account and get your license
    1. Click on your user menu in the bottom left corner.
    2. Select **API Keys** from the menu.
 
-   ![New Relic profile menu showing API Keys option](/docs/guides/new_relic_api_keys.png)
-   3. Click **Create a key** and choose **Ingest - License**. Copy the key immediately (you can't view it again later).
+   ![New Relic profile menu showing API Keys option](/docs/guides/new_relic_api_keys.png) 3. Click **Create a key** and choose **Ingest - License**. Copy the key immediately (you can't view it again later).
 
    ![New Relic API Keys page showing license key types](/docs/guides/new_relic_copy_key.png)
 

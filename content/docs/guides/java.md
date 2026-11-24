@@ -1,72 +1,51 @@
 ---
-title: Connect a Java application to Lakebase Postgres
-subtitle: Learn how to run SQL queries in Neon from Java using the Postgres JDBC
-  driver
+title: Connect a Java application to Neon
+subtitle: Create a Maven project, link it with neon link, and query Lakebase Postgres from Java with the Postgres JDBC driver
 summary: >-
-  Connect a Java application to Lakebase Postgres using the Postgres JDBC driver (pgJDBC)
-  with Apache Maven. Covers complete CRUD examples including PreparedStatement
-  inserts, batch operations, and transaction control with setAutoCommit,
-  commit, and rollback. Also covers dotenv-java for credential management.
-  Focuses on raw JDBC without an ORM, unlike Spring Boot or Hibernate guides.
+  To connect a Java app to Lakebase Postgres on Neon, create a Maven project, run
+  neon link to write DATABASE_URL to .env.local, and query it with the Postgres
+  JDBC driver (pgJDBC). Covers one runnable example (create, insert, select,
+  update, delete, and a transaction), converting DATABASE_URL for JDBC, running
+  the app elsewhere, troubleshooting, and the Spring Boot and Quarkus guides as
+  next steps.
 enableTableOfContents: true
 redirectFrom:
   - /docs/quickstart/java
   - /docs/integrations/java
-updatedOn: '2026-10-09T10:14:56.146Z'
+updatedOn: '2026-11-20T21:25:57.225Z'
 ---
 
-<CopyPrompt src="/prompts/java-prompt.md" 
-description="Pre-built prompt for connecting Java applications to Neon"/>
-
-This guide describes how to create a Neon project and connect to it from a Java application using **Java Database Connectivity (JDBC)**, Java's standard API for relational databases, and the Postgres JDBC driver ([pgJDBC](https://jdbc.postgresql.org)).
-
-You will learn how to set up a project, connect to your database, and perform basic create, read, update, and delete (CRUD) operations.
-
-## Prerequisites
-
-- A Neon account. If you do not have one, see [Sign up](https://console.neon.tech/signup).
-- [Java Development Kit (JDK) 17](https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html) or later.
-- [Apache Maven](https://maven.apache.org/install.html) to manage project dependencies.
+<PromptBlock src="/prompts/java-prompt.md" labels={["Set up your agent and follow this guide", "Look up driver docs", "Connect your Java project"]} />
 
 <Steps>
 
-## Create a Neon project
-
-If you do not have one already, create a Neon project.
-
-1.  Navigate to the [Projects](https://console.neon.tech/app/projects) page in the [Neon Console](https://console.neon.tech).
-2.  Click **New Project**.
-3.  Specify your project settings and click **Create Project**.
-
-Your project is created with a ready-to-use database named `neondb`. In the following steps, you will connect to this database from your Java application.
-
 ## Create a Java project
 
-Create a project using the Maven `archetype:generate` command. This sets up a standard Java project structure.
+Create a project with [Maven](https://maven.apache.org/), the build tool for Java. You need JDK 17 or later, the minimum the `pom.xml` below targets. Skip this step if you already have a Java project.
 
-1.  Run the following command in your terminal to generate a new Maven project. This command creates a simple Java project with the `maven-archetype-quickstart` archetype.
+```bash filename="Terminal"
+mkdir -p neon-java-app/src/main/java/com/example
+cd neon-java-app
+```
 
-    ```bash
-    mvn archetype:generate \
-        -DarchetypeGroupId=org.apache.maven.archetypes \
-        -DarchetypeArtifactId=maven-archetype-quickstart \
-        -DarchetypeVersion=1.5 \
-        -DgroupId=com.neon.quickstart \
-        -DartifactId=neon-java-jdbc \
-        -DinteractiveMode=false
-    ```
+Save this file as `pom.xml` in `neon-java-app`. It sets the Java release, and declares the Postgres JDBC driver and dotenv-java, which loads the env file in development:
 
-2.  Change into the newly created project directory.
+```xml filename="pom.xml"
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
 
-    ```bash
-    cd neon-java-jdbc
-    ```
+  <groupId>com.example</groupId>
+  <artifactId>neon-java-app</artifactId>
+  <version>1.0-SNAPSHOT</version>
 
-    > Open this directory in your preferred code editor (for example, VS Code, IntelliJ IDEA).
+  <properties>
+    <maven.compiler.release>17</maven.compiler.release>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
 
-3.  Add the `postgresql` driver and `dotenv-java` libraries to your `pom.xml` file. The generated `pom.xml` already has a `<dependencies>` section with JUnit dependencies. Add these two `<dependency>` elements inside that existing section. Don't add a second `<dependencies>` section: Maven fails with `Duplicated tag: 'dependencies'`.
-
-    ```xml filename="pom.xml"
+  <dependencies>
     <dependency>
       <groupId>org.postgresql</groupId>
       <artifactId>postgresql</artifactId>
@@ -77,450 +56,326 @@ Create a project using the Maven `archetype:generate` command. This sets up a st
       <artifactId>dotenv-java</artifactId>
       <version>3.2.0</version>
     </dependency>
-    ```
+  </dependencies>
+</project>
+```
 
-    <Admonition type="note" title="Note">
-    The generated `pom.xml` also has a `<dependencies>` section inside `<dependencyManagement>`. Don't add the libraries there: `<dependencyManagement>` only declares versions and doesn't include the libraries in your build.
-    </Admonition>
+With Gradle, add these two lines to `dependencies` in `build.gradle.kts`: `implementation("org.postgresql:postgresql:42.7.14")` and `implementation("io.github.cdimascio:dotenv-java:3.2.0")`.
 
-    Save the file.
+## Add Neon's agent skills (optional)
 
-4.  Compile the project to download the dependencies.
+Add Neon's [agent skills](/docs/ai/agent-skills) to your project with the command below. They teach your AI coding agent how to use the Neon CLI, branches, and Neon's backend services. The agent prompt at the top of this page installs them, so skip this step if you used it. The command runs through npm, so it needs Node.js 22.20 or later, even though the app is Java.
 
-    ```bash
-    mvn clean compile
-    ```
+```bash filename="Terminal"
+npx neon@latest skills
+```
 
-    This command compiles your Java code and downloads the required dependencies specified in `pom.xml`.
+The [Neon MCP Server](/docs/ai/neon-mcp-server) connects your agent to Neon's tools as well; its page covers the setup.
 
-## Store your Neon connection string
+## Create a Neon project
 
-Create a file named `.env` in your project's root directory. This file stores your database connection string. Don't commit it to source control.
+Create a Neon project in a region that runs every Neon backend service: `aws-us-east-2` (Ohio), `aws-us-east-1` (N. Virginia), `aws-eu-central-1` (Frankfurt), or `aws-ap-southeast-1` (Singapore). Postgres and [Managed Better Auth](/docs/auth/overview) run in every region; Object Storage, Neon Functions, the AI Gateway, and Realtime run in those four (see [product availability](/docs/introduction/regions#product-availability)). Skip this step if you already have a Neon project you want to use.
 
-1.  In the [Neon Console](https://console.neon.tech), open your project.
-2.  Click **Connect** in the Console nav to open the **Connect to your branch** modal.
-3.  Select **Java** as your programming language.
-    ![Connection modal](/docs/connect/java_connection_details.png)
-4.  Copy the connection string, which includes your password.
-5.  Create a file named `.env` in your project's root directory and add the connection string to it as shown below:
+<Tabs labels={["Neon CLI", "API", "Console"]}>
 
-    ```text filename=".env"
-    DATABASE_URL="jdbc:postgresql://[neon_hostname]/[dbname]?user=[user]&password=[password]&sslmode=require&channelBinding=require"
-    ```
+<TabItem>
 
-    > Replace `[user]`, `[password]`, `[neon_hostname]`, and `[dbname]` with your actual database credentials. If you start from a `postgresql://` connection string, move the user and password into the `user` and `password` parameters, add the `jdbc:` prefix, and write `channel_binding=require` as `channelBinding=require`.
+Install the [Neon CLI](/docs/cli/install), sign in, and create the project. The npm install needs Node.js 20.19 or later; without Node.js, run `brew install neonctl` (Homebrew) or use another option on the install page:
 
-## Examples
+```bash filename="Terminal"
+npm i -g neon@latest
+neon login
+neon projects create --name my-app --region-id aws-us-east-2 --no-secrets
+```
 
-This section provides code examples for performing CRUD operations. The examples should be placed inside `src/main/java/com/neon/quickstart/`.
+`--region-id` sets the region. `--no-secrets` keeps the connection string out of the output, since the next step pulls it into your env file. Pass `--org-id` to choose the organization (find IDs with `neon orgs list`).
 
-### Create a table and insert data
+</TabItem>
 
-Create a file named `CreateTable.java`. This class connects to your database, creates a table, and inserts data.
+<TabItem>
 
-```java filename="src/main/java/com/neon/quickstart/CreateTable.java"
-package com.neon.quickstart;
+Create an [API key](https://console.neon.tech/app/settings/api-keys), export it, then create the project in your organization:
+
+```bash filename="Terminal"
+export NEON_API_KEY=napi_...
+
+curl -X POST https://console.neon.tech/api/v2/projects \
+  -H "Authorization: Bearer $NEON_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{"project": {"name": "my-app", "region_id": "aws-us-east-2", "org_id": "<org-id>"}}'
+```
+
+The response includes the project's connection string in `connection_uris[0].connection_uri`. See [Create a project with the API](/docs/manage/projects#create-a-project-with-the-api) for the other options.
+
+</TabItem>
+
+<TabItem>
+
+Go to the [Projects](https://console.neon.tech/app/projects) page in the Neon Console, click **New Project**, and pick one of the regions above.
+
+</TabItem>
+
+</Tabs>
+
+## Connect your app to the project
+
+The first tab runs `neon link --no-config` in your project directory, which writes `DATABASE_URL` into `.env.local` (or `.env` if one exists); the second tab copies the connection string into that file by hand. Add the env files to `.gitignore` first, so the connection string stays out of git:
+
+```bash filename="Terminal"
+printf '\n.env\n.env.local\n' >> .gitignore
+```
+
+The example in [Connect and run a query](#connect-and-run-a-query) loads `.env.local` with dotenv-java, so you don't need to pass the file to the command.
+
+<Tabs labels={["Neon CLI", "Without the CLI"]}>
+
+<TabItem>
+
+From your project's directory, link it to the Neon project. Install the [Neon CLI](/docs/cli/install) and run `neon login` first if you haven't.
+
+`neon link` prompts you to pick an organization and a project, or to create a new project. Then it:
+
+- writes a `.neon` file with the project context;
+- pins a branch (pass `--branch` to choose one);
+- pulls that branch's Neon variables, including `DATABASE_URL`, into `.env.local`, or into `.env` if your project already has one.
+
+`--no-config` skips the offer to create a [`neon.ts`](/docs/reference/neon-ts) file, which is for JavaScript projects.
+
+To skip the prompts, pass `-y` with `--org-id` and `--project-id`, or with `--org-id`, `--project-name`, and `--region-id` to create a project. Find IDs with `neon orgs list` and `neon projects list --org-id <org-id>`.
+
+</TabItem>
+
+<TabItem>
+
+Copy the connection string from **Connect** in the Console nav, or from the API response, and add it to a `.env.local` file in your project directory. For more information, see [Connect from any application](/docs/connect/connect-from-any-app).
+
+```shell filename=".env.local" shouldWrap
+DATABASE_URL="postgresql://[user]:[password]@[neon_hostname]/[dbname]?sslmode=require&channel_binding=require"
+```
+
+The development branch step below needs the Neon CLI, so skip it in this tab.
+
+</TabItem>
+
+</Tabs>
+
+## Work on a development branch (optional)
+
+Run `neon checkout dev --create` to develop on a branch of your database instead of the default branch, where production data usually lives. The default branch is `main` for projects created with the CLI or API, and `production` for projects created in the Console. A [branch](/docs/introduction/branching) starts from its parent's data and schema without copying them (copy-on-write: only the changes you make are stored), so you can change it freely:
+
+```bash filename="Terminal"
+neon checkout dev --create
+```
+
+This creates the `dev` branch, pins it in `.neon`, and pulls its `DATABASE_URL` into the same env file, so your app now uses the branch. To switch back, run `neon checkout main` (or `production`).
+
+## Install a Postgres driver
+
+The `pom.xml` from the first step declares the [PostgreSQL JDBC driver (pgJDBC)](https://jdbc.postgresql.org), the Java library that connects to Postgres. Compile the project to download it and dotenv-java into your local Maven repository:
+
+```bash filename="Terminal"
+mvn compile
+```
+
+## Connect and run a query
+
+Create `Db.java` in `src/main/java/com/example/`. It has the connection helper that the examples use, and a `main` method that prints `SELECT version()`.
+
+```java filename="src/main/java/com/example/Db.java"
+package com.example;
 
 import io.github.cdimascio.dotenv.Dotenv;
+import java.net.URI;
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.Statement;
-
-public class CreateTable {
-
-    public static void main(String[] args) {
-        Dotenv dotenv = Dotenv.load();
-        String connString = dotenv.get("DATABASE_URL");
-
-        try (Connection conn = DriverManager.getConnection(connString)) {
-            System.out.println("Connection established");
-
-            try (Statement stmt = conn.createStatement()) {
-                // Drop the table if it already exists
-                stmt.execute("DROP TABLE IF EXISTS books;");
-                System.out.println("Finished dropping table (if it existed).");
-
-                // Create a new table
-                stmt.execute("""
-                    CREATE TABLE books (
-                        id SERIAL PRIMARY KEY,
-                        title VARCHAR(255) NOT NULL,
-                        author VARCHAR(255),
-                        publication_year INT,
-                        in_stock BOOLEAN DEFAULT TRUE
-                    );
-                """);
-                System.out.println("Finished creating table.");
-
-                // Insert a single book record
-                String insertOneSql = "INSERT INTO books (title, author, publication_year, in_stock) VALUES (?, ?, ?, ?);";
-                try (PreparedStatement pstmt = conn.prepareStatement(insertOneSql)) {
-                    pstmt.setString(1, "The Catcher in the Rye");
-                    pstmt.setString(2, "J.D. Salinger");
-                    pstmt.setInt(3, 1951);
-                    pstmt.setBoolean(4, true);
-                    pstmt.executeUpdate();
-                    System.out.println("Inserted a single book.");
-                }
-
-                // Insert multiple books
-                String insertManySql = "INSERT INTO books (title, author, publication_year, in_stock) VALUES (?, ?, ?, ?);";
-                try (PreparedStatement pstmt = conn.prepareStatement(insertManySql)) {
-                    Object[][] booksToInsert = {
-                        {"The Hobbit", "J.R.R. Tolkien", 1937, true},
-                        {"1984", "George Orwell", 1949, true},
-                        {"Dune", "Frank Herbert", 1965, false}
-                    };
-
-                    for (Object[] book : booksToInsert) {
-                        pstmt.setString(1, (String) book[0]);
-                        pstmt.setString(2, (String) book[1]);
-                        pstmt.setInt(3, (Integer) book[2]);
-                        pstmt.setBoolean(4, (Boolean) book[3]);
-                        pstmt.addBatch();
-                    }
-                    pstmt.executeBatch();
-                    System.out.println("Inserted 3 rows of data.");
-                }
-            }
-        } catch (Exception e) {
-            System.out.println("Connection failed.");
-            e.printStackTrace();
-        }
-    }
-}
-```
-
-The above code does the following:
-
-- Connects to the Neon database using the connection string from the `.env` file.
-- Drops the `books` table if it already exists.
-- Creates a new `books` table with columns for `id`, `title`, `author`, `publication_year`, and `in_stock`.
-- Inserts a single book record.
-- Inserts multiple book records in a batch operation.
-
-Run the code to create the table and insert the data using the following command:
-
-```bash
-mvn exec:java -Dexec.mainClass="com.neon.quickstart.CreateTable"
-```
-
-When the code runs successfully, it produces the following output:
-
-```text filename="Output"
-Connection established
-Finished dropping table (if it existed).
-Finished creating table.
-Inserted a single book.
-Inserted 3 rows of data.
-```
-
-### Read data
-
-Create a file named `ReadData.java`. This class fetches all rows from the `books` table and prints them.
-
-```java filename="src/main/java/com/neon/quickstart/ReadData.java"
-package com.neon.quickstart;
-
-import io.github.cdimascio.dotenv.Dotenv;
-import java.sql.*;
-
-public class ReadData {
-    public static void main(String[] args) {
-        Dotenv dotenv = Dotenv.load();
-        String connString = dotenv.get("DATABASE_URL");
-
-        try (Connection conn = DriverManager.getConnection(connString);
-             Statement stmt = conn.createStatement()) {
-            System.out.println("Connection established");
-            String sql = "SELECT * FROM books ORDER BY publication_year;";
-            try (ResultSet rs = stmt.executeQuery(sql)) {
-                System.out.println("\n--- Book Library ---");
-                while (rs.next()) {
-                    System.out.printf("ID: %d, Title: %s, Author: %s, Year: %d, In Stock: %b%n",
-                            rs.getInt("id"), rs.getString("title"), rs.getString("author"),
-                            rs.getInt("publication_year"), rs.getBoolean("in_stock"));
-                }
-                System.out.println("--------------------\n");
-            }
-        } catch (Exception e) {
-            System.out.println("Connection failed.");
-            e.printStackTrace();
-        }
-    }
-}
-```
-
-The above code does the following:
-
-- Connects to the Neon database using the connection string from the `.env` file.
-- Executes a SQL query to select all rows from the `books` table, ordered by `publication_year`.
-- Iterates through the result set and prints each book's details.
-
-Run the code to read the data using the following command:
-
-```bash
-mvn exec:java -Dexec.mainClass="com.neon.quickstart.ReadData"
-```
-
-When the read logic runs, it produces the following output:
-
-```text filename="Output"
-Connection established
-
---- Book Library ---
-ID: 2, Title: The Hobbit, Author: J.R.R. Tolkien, Year: 1937, In Stock: true
-ID: 3, Title: 1984, Author: George Orwell, Year: 1949, In Stock: true
-ID: 1, Title: The Catcher in the Rye, Author: J.D. Salinger, Year: 1951, In Stock: true
-ID: 4, Title: Dune, Author: Frank Herbert, Year: 1965, In Stock: false
---------------------
-```
-
-### Update data
-
-Create a file named `UpdateData.java` to update the stock status of 'Dune' to `true`.
-
-```java filename="src/main/java/com/neon/quickstart/UpdateData.java"
-package com.neon.quickstart;
-
-import io.github.cdimascio.dotenv.Dotenv;
-import java.sql.*;
-
-public class UpdateData {
-    public static void main(String[] args) {
-        Dotenv dotenv = Dotenv.load();
-        String connString = dotenv.get("DATABASE_URL");
-        String sql = "UPDATE books SET in_stock = ? WHERE title = ?;";
-
-        try (Connection conn = DriverManager.getConnection(connString);
-             PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            System.out.println("Connection established");
-            pstmt.setBoolean(1, true);
-            pstmt.setString(2, "Dune");
-            int rowsAffected = pstmt.executeUpdate();
-            if (rowsAffected > 0) {
-                System.out.println("Updated stock status for 'Dune'.");
-            }
-        } catch (Exception e) {
-            System.out.println("Connection failed.");
-            e.printStackTrace();
-        }
-    }
-}
-```
-
-The above code does the following:
-
-- Connects to the Lakebase Postgres database.
-- Prepares an SQL `UPDATE` statement to set the `in_stock` status of the book 'Dune' to `true`.
-- Executes the update and prints a confirmation message if successful.
-
-Run the code to update the data using the following command:
-
-```bash
-mvn exec:java -Dexec.mainClass="com.neon.quickstart.UpdateData"
-```
-
-After running the update, verify the change by running the `ReadData` class again.
-
-```bash
-mvn exec:java -Dexec.mainClass="com.neon.quickstart.ReadData"
-```
-
-The updated output will be:
-
-```text filename="Output"
-Connection established
-
---- Book Library ---
-ID: 2, Title: The Hobbit, Author: J.R.R. Tolkien, Year: 1937, In Stock: true
-ID: 3, Title: 1984, Author: George Orwell, Year: 1949, In Stock: true
-ID: 1, Title: The Catcher in the Rye, Author: J.D. Salinger, Year: 1951, In Stock: true
-ID: 4, Title: Dune, Author: Frank Herbert, Year: 1965, In Stock: true
---------------------
-```
-
-> You can see that the stock status for 'Dune' has been updated to `true`.
-
-### Delete data
-
-Create a file named `DeleteData.java` to delete the book '1984' from the table.
-
-```java filename="src/main/java/com/neon/quickstart/DeleteData.java"
-package com.neon.quickstart;
-
-import io.github.cdimascio.dotenv.Dotenv;
-import java.sql.*;
-
-public class DeleteData {
-    public static void main(String[] args) {
-        Dotenv dotenv = Dotenv.load();
-        String connString = dotenv.get("DATABASE_URL");
-        String sql = "DELETE FROM books WHERE title = ?;";
-
-        try (Connection conn = DriverManager.getConnection(connString);
-             PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            System.out.println("Connection established");
-            pstmt.setString(1, "1984");
-            int rowsAffected = pstmt.executeUpdate();
-            if (rowsAffected > 0) {
-                System.out.println("Deleted the book '1984' from the table.");
-            }
-        } catch (Exception e) {
-            System.out.println("Connection failed.");
-            e.printStackTrace();
-        }
-    }
-}
-```
-
-The above code does the following:
-
-- Connects to the Lakebase Postgres database.
-- Prepares an SQL `DELETE` statement to remove the book '1984'.
-- Executes the delete and prints a confirmation message if successful.
-
-Run the code to delete the data using the following command:
-
-```bash
-mvn exec:java -Dexec.mainClass="com.neon.quickstart.DeleteData"
-```
-
-After running the delete, verify the change by running the `ReadData` class again.
-
-```bash
-mvn exec:java -Dexec.mainClass="com.neon.quickstart.ReadData"
-```
-
-The final output will be:
-
-```text filename="Output"
-Connection established
-
---- Book Library ---
-ID: 2, Title: The Hobbit, Author: J.R.R. Tolkien, Year: 1937, In Stock: true
-ID: 1, Title: The Catcher in the Rye, Author: J.D. Salinger, Year: 1951, In Stock: true
-ID: 4, Title: Dune, Author: Frank Herbert, Year: 1965, In Stock: true
---------------------
-```
-
-> You can see that the book '1984' has been successfully deleted from the `books` table.
-
-### Using transactions
-
-The examples above execute each operation independently. For production code where multiple operations must succeed or fail together, wrap them in a transaction. Use `setAutoCommit(false)` to start a transaction, `commit()` on success, and `rollback()` in the catch block on failure.
-
-```java filename="src/main/java/com/neon/quickstart/TransactionExample.java"
-package com.neon.quickstart;
-
-import io.github.cdimascio.dotenv.Dotenv;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.Objects;
 
-public class TransactionExample {
-    public static void main(String[] args) {
-        Dotenv dotenv = Dotenv.load();
-        String connString = dotenv.get("DATABASE_URL");
+public class Db {
 
-        Connection conn = null;
-        try {
-            conn = DriverManager.getConnection(connString);
-            conn.setAutoCommit(false); // Begin transaction
-
-            // Insert
-            try (PreparedStatement pstmt = conn.prepareStatement(
-                    "INSERT INTO books (title, author, publication_year) VALUES (?, ?, ?)")) {
-                pstmt.setString(1, "Brave New World");
-                pstmt.setString(2, "Aldous Huxley");
-                pstmt.setInt(3, 1932);
-                pstmt.executeUpdate();
-                System.out.println("Inserted book.");
-            }
-
-            // Update
-            try (PreparedStatement pstmt = conn.prepareStatement(
-                    "UPDATE books SET in_stock = ? WHERE title = ?")) {
-                pstmt.setBoolean(1, false);
-                pstmt.setString(2, "Brave New World");
-                pstmt.executeUpdate();
-                System.out.println("Updated stock status.");
-            }
-
-            conn.commit(); // Commit transaction
-            System.out.println("Transaction committed successfully.");
-
-        } catch (SQLException e) {
-            System.err.println("Transaction failed. Rolling back.");
-            if (conn != null) {
-                try {
-                    conn.rollback();
-                } catch (SQLException ex) {
-                    ex.printStackTrace();
-                }
-            }
-            e.printStackTrace();
-        } finally {
-            if (conn != null) {
-                try {
-                    conn.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
+    public static void main(String[] args) throws SQLException {
+        try (Connection conn = connect();
+             Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery("SELECT version()")) {
+            rs.next();
+            System.out.println(rs.getString(1));
         }
+    }
+
+    // Converts DATABASE_URL (postgresql://user:password@host/dbname?...) to the
+    // jdbc:postgresql:// form pgJDBC accepts, with the user and password passed separately.
+    public static Connection connect() throws SQLException {
+        String url = Dotenv.configure().filename(".env.local").ignoreIfMissing().load().get("DATABASE_URL");
+        Objects.requireNonNull(url, "DATABASE_URL is not set");
+        URI uri = URI.create(url);
+        String[] userInfo = uri.getUserInfo().split(":", 2);
+        String authority = uri.getRawAuthority();
+        String query = Objects.requireNonNullElse(uri.getRawQuery(), "").replace("channel_binding=", "channelBinding=");
+        String jdbcUrl = "jdbc:postgresql://" + authority.substring(authority.indexOf('@') + 1)
+                + uri.getRawPath() + "?" + query;
+        return DriverManager.getConnection(jdbcUrl, userInfo[0], userInfo[1]);
     }
 }
 ```
 
-Run with:
+pgJDBC doesn't accept a `postgresql://user:password@host/dbname` URL, so `connect()` moves the user and password into the arguments of `DriverManager.getConnection`. It also renames `channel_binding` to `channelBinding`, because pgJDBC has no property by that name: without the rename, it ignores the setting and uses its default, `prefer`, without an error.
 
-```bash
-mvn exec:java -Dexec.mainClass="com.neon.quickstart.TransactionExample"
+Run the class with:
+
+```bash filename="Terminal"
+mvn compile exec:java -Dexec.mainClass=com.example.Db
 ```
 
-When the code runs successfully, it produces the following output:
+The output shows the Postgres version of your database, which confirms the connection:
 
 ```text filename="Output"
-Inserted book.
-Updated stock status.
-Transaction committed successfully.
+PostgreSQL 18.7 (84da7d8) on aarch64-unknown-linux-gnu, compiled by gcc ...
 ```
-
-Run `ReadData` again to see the new row: `Brave New World` by Aldous Huxley, with `In Stock: false`.
 
 </Steps>
 
-<details>
-<summary>**Notes for AI-assisted setup**</summary>
+## Examples
 
-- Always use `PreparedStatement` (with `?` placeholders) for INSERT, UPDATE, and DELETE operations. Do not use `Statement` for queries with user-provided data, as this is vulnerable to SQL injection.
-- Add dependencies to the `<dependencies>` section of `pom.xml`, not `<dependencyManagement>`. The `<dependencyManagement>` section declares versions but does not include libraries in the build.
-- Wrap related database operations in a transaction (`setAutoCommit(false)` / `commit()` / `rollback()`). Always call `rollback()` in a catch block to ensure atomicity on failure.
-- Close JDBC connections and statements using `try-with-resources` or explicit `finally` blocks to prevent connection leaks.
-- Do not hardcode credentials in `.java` files. Use environment variables via `dotenv-java`. For more information, see [Security overview](/docs/security/security-overview).
+The example is one class that creates a `books` table, then inserts, selects, updates, and deletes rows, with a transaction in the middle. The class deletes the rows it adds, so you can run it again. Save it as `Books.java` in `src/main/java/com/example/`, and run it with `mvn compile exec:java -Dexec.mainClass=com.example.Books`. The example creates the `books` table and writes rows to the branch that your `DATABASE_URL` points at, so run it on a development branch: complete [Work on a development branch](#work-on-a-development-branch-optional) first. Without the CLI, create a branch in the Neon Console and copy its connection string into `.env.local`, as described in [Create a branch](/docs/manage/branches#create-a-branch).
 
-</details>
+```java filename="src/main/java/com/example/Books.java"
+package com.example;
 
-## Use an ORM or framework
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 
-This guide uses raw SQL through JDBC. An Object-Relational Mapping (ORM) framework such as Hibernate lets you work with rows as Java objects, and migration tools keep your schema in sync with your models.
+public class Books {
 
-To use an ORM or framework with Neon, see:
+    public static void main(String[] args) throws SQLException {
+        try (Connection conn = Db.connect()) {
+            // Create a table
+            try (Statement stmt = conn.createStatement()) {
+                stmt.execute("""
+                    CREATE TABLE IF NOT EXISTS books (
+                        id SERIAL PRIMARY KEY,
+                        title TEXT NOT NULL,
+                        author TEXT NOT NULL,
+                        year INT
+                    )""");
+            }
 
-- [Database Schema Changes with Hibernate, Spring Boot, and Neon](/guides/spring-boot-hibernate)
+            // Insert a row and get its id back
+            long dune = insert(conn, "Dune", "Frank Herbert", 1965);
 
-## Neon backend services
+            // Select the row
+            try (PreparedStatement ps = conn.prepareStatement("SELECT id, title, year FROM books WHERE id = ?")) {
+                ps.setLong(1, dune);
+                try (ResultSet rs = ps.executeQuery()) {
+                    rs.next();
+                    System.out.printf("Selected: %s (%d)%n", rs.getString("title"), rs.getInt("year"));
+                }
+            }
 
-- [Add Object Storage](/docs/storage/overview): S3-compatible file storage that branches with your database
-- [Call an LLM with AI Gateway](/docs/ai-gateway/overview): Access foundation models from Anthropic, OpenAI, Google, and more with one credential
+            // Update the row
+            try (PreparedStatement ps = conn.prepareStatement("UPDATE books SET year = ? WHERE id = ?")) {
+                ps.setInt(1, 1966);
+                ps.setLong(2, dune);
+                ps.executeUpdate();
+            }
 
-## Resources
+            // Insert two rows in a transaction: both commit, or neither does
+            conn.setAutoCommit(false);
+            long emma;
+            long persuasion;
+            try {
+                emma = insert(conn, "Emma", "Jane Austen", 1815);
+                persuasion = insert(conn, "Persuasion", "Jane Austen", 1817);
+                conn.commit();
+            } catch (SQLException e) {
+                conn.rollback();
+                throw e;
+            } finally {
+                conn.setAutoCommit(true);
+            }
 
-- [pgJDBC documentation](https://jdbc.postgresql.org/documentation/use/)
-- [Apache Maven Quickstart](https://maven.apache.org/guides/getting-started/maven-in-five-minutes.html)
-- [Database Migrations in Spring Boot with Flyway and Neon](/guides/spring-boot-flyway)
+            // Select all rows
+            try (Statement stmt = conn.createStatement();
+                 ResultSet rs = stmt.executeQuery("SELECT title, year FROM books ORDER BY year")) {
+                while (rs.next()) {
+                    System.out.printf("Book: %s (%d)%n", rs.getString("title"), rs.getInt("year"));
+                }
+            }
+
+            // Delete the rows this program added
+            try (PreparedStatement ps = conn.prepareStatement("DELETE FROM books WHERE id IN (?, ?, ?)")) {
+                ps.setLong(1, dune);
+                ps.setLong(2, emma);
+                ps.setLong(3, persuasion);
+                ps.executeUpdate();
+            }
+        }
+    }
+
+    private static long insert(Connection conn, String title, String author, int year) throws SQLException {
+        try (PreparedStatement ps = conn.prepareStatement(
+                "INSERT INTO books (title, author, year) VALUES (?, ?, ?) RETURNING id")) {
+            ps.setString(1, title);
+            ps.setString(2, author);
+            ps.setInt(3, year);
+            try (ResultSet rs = ps.executeQuery()) {
+                rs.next();
+                return rs.getLong(1);
+            }
+        }
+    }
+}
+```
+
+The transaction block commits or rolls back explicitly. The other statements run in autocommit mode, so each one commits when it finishes.
+
+## Run it elsewhere
+
+On a host, set `DATABASE_URL` in the host's environment instead of an env file. `Db.connect()` uses that value when `.env.local` doesn't exist. If `DATABASE_URL` is also set in your shell, the shell value wins over `.env.local`. For production, use your default branch's pooled connection string: run `neon connection-string main --pooled` in your own terminal, replacing `main` with `production` if that's your project's default branch, because the command prints the password. Neon's pooler already pools connections, so you don't need to add a pool in your app; if you do, return connections to it promptly (see [Double pooling](/docs/connect/choose-connection#common-pitfalls)).
+
+## Add more of your backend
+
+Neon also runs object storage, a model gateway, and serverless functions next to your database. Each entry below says what the service does.
+
+<DefinitionList>
+
+Object Storage
+: S3-compatible buckets for uploads and files, used with any S3 client library. See [Object Storage](/docs/storage/overview).
+
+AI Gateway
+: Routes calls to models from Anthropic, OpenAI, Google, and more through one OpenAI-compatible endpoint on your branch, used with any OpenAI-compatible client. See [AI Gateway](/docs/ai-gateway/overview).
+
+Neon Functions
+: Long-running Node.js compute (the server that runs your code next to your database), called over HTTP. See [Neon Functions](/docs/compute/functions/overview).
+
+</DefinitionList>
+
+## Troubleshooting
+
+<DefinitionList>
+
+`DATABASE_URL` in `.env.local` is ignored
+: A `DATABASE_URL` already set in your shell wins over `.env.local`, so the program reaches whichever database the shell points at. Run `unset DATABASE_URL` in that shell, then run the command again.
+
+`DATABASE_URL is not set`
+: The program found no `DATABASE_URL` in `.env.local` or its environment. Run the command from the project directory, where `neon link` wrote the file, or set the variable in your shell. If `neon link` wrote `.env` because your project already had one, change the filename in `Db.java` to `.env`.
+
+`No suitable driver found for postgresql://...`
+: `DriverManager` got the `postgresql://` URL as is. Pass the URL through `Db.connect()`, which converts it to the `jdbc:postgresql://` form.
+
+`Unable to parse URL jdbc:postgresql://user:...`
+: The JDBC URL puts the user and password before the host (`user:password@host`), which pgJDBC doesn't parse. Pass them as arguments to `DriverManager.getConnection`, as `Db.connect()` does.
+
+</DefinitionList>
+
+## Next steps
+
+- [Database schema changes with Hibernate, Spring Boot, and Neon](/guides/spring-boot-hibernate): Use Hibernate's entities and queries instead of raw SQL.
+- [Database migrations in Spring Boot with Flyway and Neon](/guides/spring-boot-flyway): Keep your schema in sync with versioned migration files.
+- [Connect a Quarkus application (JDBC) to Neon](/docs/guides/quarkus-jdbc): Query Neon from a Quarkus REST resource over JDBC.
 
 <NeedHelp/>

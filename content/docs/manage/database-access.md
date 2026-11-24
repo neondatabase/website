@@ -11,7 +11,7 @@ summary: >-
 enableTableOfContents: true
 redirectFrom:
   - /docs/guides/manage-database-access
-updatedOn: '2026-11-05T15:33:57.188Z'
+updatedOn: '2026-11-19T00:59:42.125Z'
 ---
 
 Each Neon project is created with a Postgres role that is named for your database. For example, if your database is named `neondb`, the project is created with a role named `neondb_owner`.
@@ -332,6 +332,20 @@ REVOKE ALL ON DATABASE <database> FROM PUBLIC;
 ```
 
 This ensures users are unable to connect to a database by default unless this permission is explicitly granted.
+
+## Built-in function privileges
+
+You can't revoke or grant `EXECUTE` on built-in functions in `pg_catalog`, such as the large object functions (`lo_create`, `lo_open`, `loread`, `lowrite`, `lo_get`, `lo_put`, `lo_unlink`). Neon's system role `cloud_admin` owns every function in `pg_catalog`, and `PUBLIC` has `EXECUTE` on the large object functions, so every role can call them. Revoking from one role has no effect while `PUBLIC` holds the grant, and only the owner can revoke from `PUBLIC`. Roles with `neon_superuser` privileges don't own these functions, so `REVOKE` and `GRANT` complete with a warning and change nothing:
+
+```sql
+REVOKE EXECUTE ON FUNCTION pg_catalog.lo_create(oid) FROM PUBLIC;
+-- WARNING:  no privileges could be revoked for "lo_create"
+
+SELECT has_function_privilege('readwrite_user1', 'pg_catalog.lo_create(oid)', 'EXECUTE');
+-- t
+```
+
+For large objects, you control access per object. A role can read a large object only if it owns it or has `SELECT` on it, and write to it only with both `SELECT` and `UPDATE` (`GRANT SELECT, UPDATE ON LARGE OBJECT <oid> TO <role>`). Only the owner can delete a large object. Any role can create large objects, and you can't prevent it. `lo_compat_privileges` is off, the Postgres default, and you can't change it.
 
 ## More information
 

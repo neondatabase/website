@@ -9,6 +9,7 @@ summary: >-
   Neon project. The other subcommands match their top-level forms, such as
   `neon roles` and `neon psql`.
 enableTableOfContents: true
+updatedOn: '2026-11-05T15:36:46.000Z'
 ---
 
 The `postgres` command groups the commands that work with Lakebase Postgres in a Neon project: [computes](#computes), [databases](/docs/cli/databases), [roles](/docs/cli/roles), [connection strings](/docs/cli/connection-string), and [psql](/docs/cli/psql). Its aliases are `pg` and `lakebase`, so `neon pg roles list` and `neon lakebase roles list` work too.

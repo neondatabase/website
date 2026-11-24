@@ -8,7 +8,7 @@ summary: >-
   queries covering connection counts, CPU, memory, cache hit rate, replication
   delay, and PgBouncer pooling metrics. Requires the Neon Scale plan.
 enableTableOfContents: true
-updatedOn: '2026-08-07T16:05:20.768Z'
+updatedOn: '2026-11-13T16:10:31.000Z'
 ---
 
 <InfoBlock>
@@ -566,7 +566,7 @@ If any of the computes in your project are active, you should start seeing data 
       },
       {
         "name": "DS_LOKI",
-        "label": "Loki Datasource", 
+        "label": "Loki Datasource",
         "type": "datasource",
         "query": "loki",
         "hide": 0,
@@ -660,7 +660,7 @@ If any of the computes in your project are active, you should start seeing data 
       {
         "name": "Low Cache Hit Rate",
         "datasource": {
-          "type": "prometheus", 
+          "type": "prometheus",
           "uid": "${DS_PROMETHEUS}"
         },
         "expr": "neon_lfc_hits / (neon_lfc_hits + neon_lfc_misses) * 100 < 90",
@@ -686,6 +686,7 @@ If any of the computes in your project are active, you should start seeing data 
   ]
 }
 ```
+
 </details>
 
 ## Available metrics

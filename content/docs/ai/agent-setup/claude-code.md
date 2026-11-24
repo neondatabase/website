@@ -11,6 +11,7 @@ enableTableOfContents: true
 agentPrompt: I use Claude Code.
 redirectFrom:
   - /docs/ai/ai-claude-code-plugin
+updatedOn: '2026-11-05T23:08:56.000Z'
 ---
 
 The Neon plugin gives [Claude Code](https://docs.anthropic.com/en/docs/claude-code) Neon's agent skills, so it knows how to build on Neon, and the Neon MCP Server, so it can act on your Neon account.

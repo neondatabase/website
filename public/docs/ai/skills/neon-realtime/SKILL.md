@@ -154,6 +154,7 @@ Migrating from Electric: Realtime is a drop-in replacement for Electric's role i
 ## Setup
 
 - **New app:** `neon bootstrap my-app --template realtime-react`, then `neon deploy` in `my-app`.
+- **Existing app:** follow the [Next.js example](https://neon.com/docs/realtime/examples/nextjs.md). Its setup declares Realtime with `neon config add realtime` and runs `neon deploy`, and [Adapt the example to your app](https://neon.com/docs/realtime/examples/nextjs.md#adapt-the-example-to-your-app) covers raw SQL with `createRealtime()` and no adapter, and apps with their own auth or none.
 - **Enable** it on the linked branch with [`neon realtime enable --allowed-origin <app origin>`](https://neon.com/docs/cli/realtime.md), or declare [`preview: { realtime: true }`](https://neon.com/docs/reference/neon-ts.md#realtime) in `neon.ts` (`neon config add realtime`) and run `neon deploy`. Child branches inherit it. It's unavailable on Claimable projects until claimed, or outside the [supported regions](https://neon.com/docs/realtime/overview.md#which-regions-is-it-enabled-in).
 - **Tables** need a [stable replica identity](references/queries.md#table-requirements); a primary key is enough. Leave [row-level security](references/queries.md#why-not-row-level-security) off on every table a live query reads: Realtime rejects those subscriptions with `unsupported query: row security`. For per-user data, authorize in the sealed query instead (see below).
 - **Environment:** `neon env pull --service postgres --service realtime` writes `DATABASE_URL`, `NEON_REALTIME_URL` and `NEON_REALTIME_SECRET`. Expose only the URL to the browser, under your framework's public prefix (like `VITE_`). `url` options take `NEON_REALTIME_URL`; `db` takes the database name from `DATABASE_URL`.
@@ -200,7 +201,7 @@ Read [references/ssr.md](references/ssr.md) before rendering live queries on the
 | Beta scope, regions, pricing, FAQ, other systems | [Overview](https://neon.com/docs/realtime/overview.md) |
 | Architecture and consistency | [How it works](https://neon.com/docs/realtime/how-it-works.md) |
 | A first live query | [Quickstart](https://neon.com/docs/realtime/quickstart.md) |
-| Every SDK export | [TypeScript SDK reference](https://neon.com/docs/realtime/sdks/typescript.md) |
-| Full-stack apps with auth and SSR | [Next.js](https://neon.com/docs/realtime/examples/nextjs.md), [TanStack](https://neon.com/docs/realtime/examples/tanstack.md) |
+| Every SDK export, one page per module | [TypeScript SDK overview](https://neon.com/docs/realtime/sdks/typescript.md): [Backend](https://neon.com/docs/realtime/sdks/typescript/backend.md), [Client](https://neon.com/docs/realtime/sdks/typescript/client.md), [React](https://neon.com/docs/realtime/sdks/typescript/react.md), [TanStack DB](https://neon.com/docs/realtime/sdks/typescript/tanstack-db.md), [Drizzle and Drizzle client](https://neon.com/docs/realtime/sdks/typescript/drizzle.md), [Kysely](https://neon.com/docs/realtime/sdks/typescript/kysely.md) |
+| Full-stack apps with auth and SSR, or Realtime in an existing Next.js app | [Next.js](https://neon.com/docs/realtime/examples/nextjs.md), [TanStack](https://neon.com/docs/realtime/examples/tanstack.md) |
 | Live agent workflows | [Mastra](https://neon.com/docs/realtime/examples/mastra.md) |
 | ORM adapters | [Drizzle](https://neon.com/docs/realtime/examples/drizzle.md), [Kysely](https://neon.com/docs/realtime/examples/kysely.md) |

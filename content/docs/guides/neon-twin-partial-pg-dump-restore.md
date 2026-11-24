@@ -11,7 +11,7 @@ summary: >-
   and is subject to GitHub Actions' 6-hour job limit.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-11-13T19:01:23.000Z'
 ---
 
 This workflow will create a partial Neon Twin using `pg_dump`, `pg_restore` and `psql`.
