@@ -123,8 +123,8 @@ export default {
   trust: 'https://trust.neon.com',
   certCCPA: 'https://trust.neon.com/?itemUid=4064ac33-7b48-407b-aed7-ce02971d1ec1',
   certGDPR: 'https://trust.neon.com/?itemUid=45220873-6e51-4dbb-b1b1-37d66ee9ef95',
-  certISO27001: 'https://trust.neon.com/?itemUid=1fed9faa-4a87-427c-9a95-96b4d6bf66b7',
-  certISO27701: 'https://trust.neon.com/?itemUid=dc79cbc7-c99d-4eb9-891e-f5dc44b943d7',
+  certISO27001: 'https://www.databricks.com/trust/compliance',
+  certISO27701: 'https://www.databricks.com/trust/compliance',
   certSOC2: 'https://trust.neon.com/?itemUid=7bfa66da-33ab-49de-8391-e329738a1ae9',
   certHIPAA: '/docs/security/hipaa',
 
