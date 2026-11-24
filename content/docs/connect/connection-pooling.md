@@ -17,7 +17,7 @@ redirectFrom:
   - /docs/guides/connection-pooling
   - /docs/introduction/connection-pooling
   - /docs/manage/connection-pooling
-updatedOn: '2026-11-24T18:42:41.645Z'
+updatedOn: '2026-11-24T19:24:42.990Z'
 ---
 
 For most apps, use a pooled connection. It reuses database connections to help you avoid connection limits. Direct connections are typically used for schema migrations, backups, and other work that needs a single continuous session.
@@ -54,11 +54,12 @@ For most apps, use a pooled connection. It reuses database connections to help y
 
 ## When to use pooled vs direct connections
 
+Use a direct connection for any tool that holds one connection open and expects the same session across statements. Use a pooled connection for anything that opens and closes connections frequently.
+
 | Use case                                                                                               | Connection type | Why                                       |
 | ------------------------------------------------------------------------------------------------------ | --------------- | ----------------------------------------- |
 | Web and serverless apps                                                                                | Pooled          | Many short-lived connections              |
 | Connection-per-request workloads                                                                       | Pooled          | High connection churn                     |
-| Anything opening many short-lived connections                                                          | Pooled          | The pooler accepts up to 10,000 clients   |
 | Schema migrations                                                                                      | Direct          | Tools may not support transaction pooling |
 | `pg_dump` / `pg_restore` and backups                                                                   | Direct          | Use `SET` statements and a stable session |
 | Logical replication                                                                                    | Direct          | Requires a persistent connection          |
@@ -68,9 +69,7 @@ For most apps, use a pooled connection. It reuses database connections to help y
 | Long-running analytics queries                                                                         | Direct          | Avoid pool contention                     |
 | Admin tasks                                                                                            | Direct          | May need session-level features           |
 
-**Rule of thumb:** if a tool holds one connection open and expects the same session, use a direct connection. If it opens and closes connections constantly, use pooled.
-
-If you run on a highly elastic platform such as AWS Fargate, Google Cloud Run, or Vercel, see [Serverless connection pooling](/docs/guides/serverless-connection-pooling) for strategies that prevent connection leaks and exhaustion when instances scale out or suspend.
+If you run on a platform that scales instances up and down quickly (for example AWS Fargate, Google Cloud Run, or Vercel), see [Serverless connection pooling](/docs/guides/serverless-connection-pooling) for strategies that prevent connection leaks and exhaustion when instances scale out or suspend.
 
 <Admonition type="tip">
 Hitting connection errors or slow connections? See [Connection errors](/docs/connect/connection-errors) and [Connection latency and timeouts](/docs/connect/connection-latency).
@@ -78,92 +77,45 @@ Hitting connection errors or slow connections? See [Connection errors](/docs/con
 
 ## How to use connection pooling
 
-To enable connection pooling, use a pooled connection string. Add `-pooler` to your endpoint ID:
+To use connection pooling, connect with the pooled connection string. It's your direct connection string with `-pooler` added to the endpoint ID.
 
-**Direct connection (no pooling):**
+Direct (no pooling):
 
 ```text shouldWrap
 postgresql://user1:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require
 ```
 
-**Pooled connection:**
+Pooled:
 
 ```text shouldWrap
 postgresql://user1:AbC123dEf@ep-cool-darkness-123456-pooler.us-east-2.aws.neon.tech/dbname?sslmode=require
 ```
 
-You can copy a pooled connection string from the Neon Console by clicking **Connect** in the Console nav and enabling the **Connection pooling** toggle.
+To copy the pooled string from the Neon Console, click **Connect** in the Console nav and turn on the **Connection pooling** toggle.
 
 ![Connection Details pooled connection string](/docs/connect/connect_to_branch_modal.png)
 
-### Enable, disable, and find the pooled connection string in the Console
+The toggle is on by default for new projects. It doesn't start or stop the pooler; the pooled endpoint is always available. The toggle only switches the displayed connection string between the pooled hostname (with the `-pooler` suffix) and the direct hostname. Use the pooled string to enable pooling in your app, or the direct string to disable it.
 
-To get the pooled connection string or switch between pooled and direct from the dashboard:
+## How connection pooling works
 
-1. Sign in to the [Neon Console](https://console.neon.tech) and select your project.
-2. Click **Connect** in the Console nav.
-3. In the **Connect to your branch** modal, choose a **Branch**, **Compute**, **Database**, and **Role**.
-4. Turn the **Connection pooling** toggle on to get the pooled string, or off to get the direct string, then copy it.
+Connection pooling works around the `max_connections` limit by keeping a pool of reusable connections. Instead of opening a new Postgres connection for every client, PgBouncer routes many client connections through a smaller set of actual Postgres connections.
 
-The toggle is on by default for new projects. It doesn't start or stop the pooler at the compute. The pooled endpoint is always available. The toggle just switches the displayed connection string between the pooled hostname (with the `-pooler` suffix) and the direct hostname, so you can pick which one your app uses. To enable pooling in your app, use the pooled string; to disable it, use the direct string.
+### Per-user, per-database pools
 
-## Connection pooling in transaction mode
+PgBouncer creates a separate pool for each combination of database user and database name:
 
-Neon uses [PgBouncer](https://www.pgbouncer.org/) in transaction mode (`pool_mode=transaction`), which means connections are returned to the pool after each transaction completes. This limits some Postgres features that require persistent sessions:
+- `user1` connecting to `database1` gets one pool.
+- `user2` connecting to `database1` gets a separate pool.
+- `user1` connecting to `database2` gets another separate pool.
 
-**Not supported with pooled connections:**
-
-- `SET` / `RESET` (session variables)
-- `LISTEN` / `NOTIFY`
-- `WITH HOLD CURSOR`
-- `PREPARE` / `DEALLOCATE` (SQL-level prepared statements)
-- Temporary tables with `PRESERVE` / `DELETE ROWS`
-- `LOAD` statement
-- Session-level advisory locks
-
-### Common issues with SET statements
-
-The most common issue users encounter is with `SET` statements, particularly `SET search_path`.
-
-PgBouncer doesn't reset a server connection when it returns to the pool in transaction mode. A `SET` changes the setting on the server connection, not on your client, so two things can happen:
-
-- Your next transaction might run on a different server connection that doesn't have the setting.
-- Another client connecting to the same database with the same role might get the connection and inherit your setting. For example, a leftover `search_path` can make that client read from or write to tables in the wrong schema.
-
-PgBouncer does restore each client's own values for a few parameters: `client_encoding`, `DateStyle`, `TimeZone`, `standard_conforming_strings`, `application_name`, `IntervalStyle`, and `default_transaction_read_only`. Other settings, including `search_path`, `statement_timeout`, and `synchronous_commit`, carry over.
-
-**Problem example:**
-
-```sql
-SET search_path TO myschema;
-SELECT * FROM mytable;  -- Works on this server connection
--- Transaction ends, connection returns to the pool with search_path still set
-SELECT * FROM mytable;  -- Might run on another connection: ERROR: relation "mytable" does not exist
-```
-
-**Solutions:**
-
-1. **Use `SET LOCAL` inside a transaction** so the setting reverts when the transaction ends:
-   ```sql
-   BEGIN;
-   SET LOCAL search_path TO myschema, public;
-   SELECT * FROM mytable;
-   COMMIT;
-   ```
-2. **Specify schema explicitly** in your queries: `SELECT * FROM myschema.mytable`
-3. **Set at the role level** (applies to new server connections, so pooled connections that are already open keep the old value until they close):
-   ```sql
-   ALTER ROLE user1 SET search_path TO myschema, public;
-   ```
-4. **Use a direct connection** when you need persistent session settings
-
-This issue also affects tools like `pg_dump`, which relies on `SET` statements. Always use direct connections for `pg_dump`.
-
-For the complete list of limitations, see the [PgBouncer features documentation](https://www.pgbouncer.org/features.html).
+Each pool can grow up to `default_pool_size` on its own, but all pools on a compute draw from the same underlying `max_connections` limit.
 
 ## Understanding connection pool limits
 
-Each Postgres connection creates a new process in the operating system, consuming memory and CPU resources. Postgres limits the number of connections based on available RAM. In Neon, this limit is defined by `max_connections`, which varies by compute size:
+Each Postgres connection starts a new operating-system process that uses memory and CPU, so Postgres caps the number of connections based on available RAM. In Neon, that cap is `max_connections`, which scales with compute size.
+
+### Connection limits without connection pooling
 
 | Compute size (CU) | RAM         | max_connections |
 | :---------------- | :---------- | :-------------- |
@@ -187,20 +139,20 @@ For compute sizes 9 CU and above, `max_connections` is capped at 4000 regardless
 Seven connections are reserved for the Neon superuser account. For a 0.25 CU compute, this means 105 connections are available for your application (112 total - 7 reserved).
 </Admonition>
 
-**Common scenarios that exceed these limits:**
+Workloads that commonly exceed `max_connections` on a direct connection:
 
 - Serverless functions (each invocation may open a connection)
 - Connection-per-request web frameworks
 - Multiple application instances without proper connection management
 - Applications that don't close connections properly
 
-Check your current limit:
+To check your current limit:
 
 ```sql
 SHOW max_connections;
 ```
 
-View active connections:
+To view active connections:
 
 ```sql
 SELECT usename, count(*)
@@ -209,180 +161,83 @@ WHERE datname = '<database_name>'
 GROUP BY usename;
 ```
 
-You can also view active connections on the [Monitoring page](/docs/introduction/monitoring-page#connections) in the Neon Console, which provides a visual graph of connection usage over time.
+You can also view active connections on the [Monitoring page](/docs/introduction/monitoring-page#connections) in the Neon Console, which graphs connection usage over time.
 
-### Three types of limits
+### Pooler limits
 
-| Limit Type          | Value                    | What it controls                                 | When you hit it                            |
+Connection pooling adds two more limits on top of `max_connections`:
+
+| Limit               | Value                    | What it controls                                 | When you hit it                            |
 | ------------------- | ------------------------ | ------------------------------------------------ | ------------------------------------------ |
 | `max_client_conn`   | 10,000                   | Maximum client connections to PgBouncer          | Client gets: "no more connections allowed" |
-| `default_pool_size` | 90% of `max_connections` | Maximum active connections per user per database | Client waits in queue (2 min timeout)      |
+| `default_pool_size` | 90% of `max_connections` | Maximum active connections per user per database | Client waits in the queue                  |
 | `max_connections`   | Varies by compute        | Direct connections to Postgres                   | Client gets: "too many connections"        |
 
-### What happens when you hit limits
+The 10,000 client connection limit is not 10,000 concurrent queries. For a 1 CU compute (`max_connections` = 450), you can have up to 10,000 client connections to PgBouncer, about 405 concurrent active transactions per user per database (`default_pool_size`, 90% of 450), and 450 concurrent connections to Postgres. The 10,000 limit is useful for applications with many idle or short-lived connections, such as serverless functions that open and close connections frequently.
 
-**Scenario 1: Hitting the per-user-per-database pool limit**
+### What happens when you hit a limit
 
-You have a 1 CU compute (`default_pool_size` = 405). User `user1` opens 405 connections to `database1`, all running long queries:
+- **Per-user, per-database pool full**: on a 1 CU compute (`default_pool_size` = 405), if `user1` holds 405 active connections to `database1` with long-running queries, connection 406 waits in the queue and fails with `query_wait_timeout` after 2 minutes. Keep transactions short, move to a larger compute to raise the pool size, or use additional database users to get more pools.
+- **Client connection limit reached**: the 10,001st client connection to PgBouncer fails with `no more connections allowed (max_client_conn)`. Fix connection leaks, add client-side pooling, or reduce the number of application instances.
+- **`max_connections` reached on a direct connection**: on a 0.25 CU compute (112 `max_connections`), connection 106 on a non-pooled string fails with `FATAL: remaining connection slots are reserved`. Switch to the pooled connection string (add `-pooler` to the hostname), increase the compute size, or add connection pooling in your application.
 
-```
-Connection 406 from user1 to database1 → Waits in queue
-After 2 minutes → Error: "query_wait_timeout"
-```
+## Connection pooling in transaction mode
 
-**Solution:**
+Neon uses [PgBouncer](https://www.pgbouncer.org/) in transaction mode (`pool_mode=transaction`), so a server connection returns to the pool after each transaction completes. This limits Postgres features that need a persistent session. The following are not supported on pooled connections:
 
-- Ensure transactions complete quickly
-- Use a larger compute size (increases pool size)
-- Use multiple database users to get additional pools
+- `SET` / `RESET` (session variables)
+- `LISTEN` / `NOTIFY`
+- `WITH HOLD CURSOR`
+- `PREPARE` / `DEALLOCATE` (SQL-level prepared statements)
+- Temporary tables with `PRESERVE` / `DELETE ROWS`
+- `LOAD` statement
+- Session-level advisory locks
 
-**Scenario 2: Hitting the global client connection limit**
+For the complete list, see the [PgBouncer features documentation](https://www.pgbouncer.org/features.html).
 
-Your application opens 10,001 client connections to PgBouncer:
+### Common issues with SET statements
 
-```
-Connection 10,001 → Error: "no more connections allowed (max_client_conn)"
-```
+The most common issue you'll hit is with `SET` statements, particularly `SET search_path`.
 
-**Solution:**
+PgBouncer doesn't reset a server connection when it returns to the pool in transaction mode. A `SET` changes the setting on the server connection, not on your client, so two things can happen:
 
-- Fix connection leaks in your application
-- Implement client-side connection pooling
-- Reduce the number of application instances
+- Your next transaction might run on a different server connection that doesn't have the setting.
+- Another client connecting to the same database with the same role might get the connection and inherit your setting. For example, a leftover `search_path` can make that client read from or write to tables in the wrong schema.
 
-**Scenario 3: Hitting max_connections with direct connections**
+PgBouncer does restore each client's own values for a few parameters: `client_encoding`, `DateStyle`, `TimeZone`, `standard_conforming_strings`, `application_name`, `IntervalStyle`, and `default_transaction_read_only`. Other settings, including `search_path`, `statement_timeout`, and `synchronous_commit`, carry over.
 
-Using a non-pooled connection string with a 0.25 CU compute (112 max_connections):
+For example, a `SET search_path` can break on the next transaction:
 
-```
-Connection 106 → Error: "FATAL: remaining connection slots are reserved"
-```
-
-**Solution:**
-
-- Use a pooled connection string (add `-pooler` to hostname)
-- Increase compute size
-- Implement connection pooling in your application
-
-## How Neon's connection pooling works
-
-Connection pooling solves the `max_connections` limit by maintaining a pool of reusable connections. Instead of opening a new Postgres connection for each client, PgBouncer routes multiple client connections through a smaller pool of actual Postgres connections.
-
-```mermaid
-flowchart LR
-  subgraph client["Client application"]
-    c1["user 1"]
-    c2["user 1"]
-    c3["..."]
-    c4["user 2"]
-    c5["user 1"]
-  end
-
-  subgraph pooler["PgBouncer connection pooler"]
-    p1["user1/database1 pool"]
-    p2["user2/database1 pool"]
-    p3["user1/database2 pool"]
-  end
-
-  subgraph postgres["Postgres (max_connections limit)"]
-    d1[("database 1")]
-    d2[("database 2")]
-  end
-
-  c1 --> p1
-  c2 --> p1
-  c3 --> p1
-  c4 --> p2
-  c5 --> p3
-  p1 --> d1
-  p2 --> d1
-  p3 --> d2
+```sql
+SET search_path TO myschema;
+SELECT * FROM mytable;  -- Works on this server connection
+-- Transaction ends, connection returns to the pool with search_path still set
+SELECT * FROM mytable;  -- Might run on another connection: ERROR: relation "mytable" does not exist
 ```
 
-_The diagram shows how multiple client connections from different users route through separate PgBouncer pools (one per user/database combination), which share a limited number of actual Postgres connections to access the databases._
+To work around this, you have a few options:
 
-### Key concept: Per-user, per-database pools
+1. Use `SET LOCAL` inside a transaction so the setting reverts when the transaction ends:
+   ```sql
+   BEGIN;
+   SET LOCAL search_path TO myschema, public;
+   SELECT * FROM mytable;
+   COMMIT;
+   ```
+2. Specify the schema explicitly in your queries: `SELECT * FROM myschema.mytable`
+3. Set it at the role level (applies to new server connections, so pooled connections that are already open keep the old value until they close):
+   ```sql
+   ALTER ROLE user1 SET search_path TO myschema, public;
+   ```
+4. Use a direct connection when you need persistent session settings.
 
-**An important thing to understand about Neon's connection pooling:**
+This issue also affects tools like `pg_dump`, which relies on `SET` statements. Always use a direct connection for `pg_dump`.
 
-PgBouncer creates separate pools for each combination of database user and database name. This means:
+### Optimize queries with PgBouncer and prepared statements
 
-- User `user1` connecting to `database1` gets one pool
-- User `user2` connecting to `database1` gets a separate pool
-- User `user1` connecting to `database2` gets another separate pool
+PgBouncer supports protocol-level prepared statements (as of PgBouncer 1.22.0), which can improve query performance and reduce SQL injection risk. SQL-level `PREPARE` and `EXECUTE` are not supported, so use the protocol-level prepared statements exposed by your database driver.
 
-Each pool has a maximum size defined by `default_pool_size`. In Neon, this is configured as:
-
-```
-default_pool_size = 0.9 × max_connections
-```
-
-For details on how `max_connections` is set based on compute size, see [Parameter settings that differ by compute size](/docs/reference/compatibility#parameter-settings-that-differ-by-compute-size).
-
-**Example with a 1 CU compute:**
-
-- `max_connections` = 450
-- `default_pool_size` = 405 (90% of 450)
-
-This means:
-
-- User `user1` can have up to 405 active transactions to `database1` through the pooler
-- User `user2` can simultaneously have up to 405 active transactions to the same `database1` database
-- User `user1` can also have up to 405 active transactions to a different database `database2`
-
-All of these pools share the underlying `max_connections` limit (450 in this example).
-
-### Connection pooling vs concurrent queries
-
-**Important:** The 10,000 connection limit does not mean 10,000 simultaneous query results.
-
-- **10,000** = Maximum number of client connections PgBouncer can accept
-- **~405** (for 1 CU) = Maximum concurrent active transactions per user per database
-- **450** (for 1 CU) = Maximum concurrent connections to actual Postgres
-
-The 10,000 limit is useful for applications with many idle or short-lived connections, such as serverless functions where connections are opened and closed frequently.
-
-## Neon PgBouncer configuration
-
-Neon's PgBouncer configuration:
-
-```ini
-[pgbouncer]
-pool_mode=transaction
-max_client_conn=10000
-default_pool_size=0.9 * max_connections
-max_prepared_statements=1000
-query_wait_timeout=120
-```
-
-**Configuration details:**
-
-- **`pool_mode=transaction`**: Connections are returned to the pool after each transaction
-- **`max_client_conn=10000`**: Maximum number of client connections PgBouncer accepts
-- **`default_pool_size`**: Maximum concurrent connections per user per database (90% of `max_connections`)
-- **`max_prepared_statements=1000`**: Maximum protocol-level prepared statements per connection
-- **`query_wait_timeout=120`**: Maximum time (seconds) a query waits for a connection from the pool
-
-These settings are not user-configurable.
-
-## Pool lifecycle and compute restarts
-
-Connection pools help minimize disruption during compute restarts (maintenance, updates, or scaling):
-
-- **Automatic reconnection**: Production connection pools detect stale connections and replace them
-- **Health checks**: Configure validation queries (`pool_pre_ping` in SQLAlchemy, validation in HikariCP) to test connections before use
-- **Connection lifecycle tuning**: Settings like `maxLifetime` (HikariCP) or `idleTimeoutMillis` (node-postgres) refresh connections periodically
-- **Retry logic integration**: Combined with [retry logic and exponential backoff](/docs/connect/connection-latency#build-connection-timeout-handling-into-your-application), pools provide resilience during brief interruptions
-
-For complete guidance, see [Building resilient applications with Postgres](/guides/building-resilient-applications-with-postgres).
-
-## Protocol-level prepared statements
-
-PgBouncer supports protocol-level prepared statements (as of PgBouncer 1.22.0), which can improve query performance and security.
-
-**Note:** SQL-level `PREPARE` and `EXECUTE` statements are not supported with PgBouncer. You must use protocol-level prepared statements through your database driver.
-
-**Example with JavaScript (pg):**
+With JavaScript (pg):
 
 ```javascript
 const query = {
@@ -393,7 +248,7 @@ const query = {
 await client.query(query);
 ```
 
-**Example with Python (psycopg2):**
+With Python (psycopg2):
 
 ```python
 cur = conn.cursor()
@@ -402,12 +257,37 @@ cur.execute(query, ('alice',), prepare=True)
 results = cur.fetchall()
 ```
 
-Benefits of prepared statements:
-
-- **Performance**: Query parsing and planning happens once, speeding up repeated executions
-- **Security**: Reduces SQL injection risk by separating query structure from data
-
 Most PostgreSQL client libraries support protocol-level prepared statements. Check your driver's documentation for details.
+
+## Neon PgBouncer configuration settings
+
+Neon's PgBouncer settings are not user-configurable:
+
+```ini
+[pgbouncer]
+pool_mode=transaction
+max_client_conn=10000
+default_pool_size=0.9 * max_connections
+max_prepared_statements=1000
+query_wait_timeout=120
+```
+
+- `pool_mode=transaction`: connections return to the pool after each transaction.
+- `max_client_conn=10000`: the maximum number of client connections PgBouncer accepts.
+- `default_pool_size`: the maximum concurrent connections per user per database, set to 90% of `max_connections`.
+- `max_prepared_statements=1000`: the maximum number of protocol-level prepared statements per connection.
+- `query_wait_timeout=120`: the maximum time, in seconds, a query waits for a connection from the pool.
+
+## Pool lifecycle and compute restarts
+
+Connection pools reduce dropped connections during compute restarts (maintenance, updates, or scaling):
+
+- **Automatic reconnection**: production connection pools detect stale connections and replace them.
+- **Health checks**: configure validation queries (`pool_pre_ping` in SQLAlchemy, validation in HikariCP) to test connections before use.
+- **Connection lifecycle tuning**: settings like `maxLifetime` (HikariCP) or `idleTimeoutMillis` (node-postgres) refresh connections periodically.
+- **Retry logic integration**: combined with [retry logic and exponential backoff](/docs/connect/connection-latency#build-connection-timeout-handling-into-your-application), pools provide resilience during brief interruptions.
+
+For complete guidance, see [Building resilient applications with Postgres](/guides/building-resilient-applications-with-postgres).
 
 ## Monitoring connection pool activity
 
