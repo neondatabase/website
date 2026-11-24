@@ -4,7 +4,7 @@ subtitle: 'Keep a pgvector index on Postgres in sync with a scheduled Neon Funct
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2026-11-18T00:00:00.000Z'
-updatedOn: '2026-11-18T16:40:23.122Z'
+updatedOn: '2026-11-24T19:23:09.663Z'
 ---
 
 If you've built RAG workflows, you've probably run into this problem: someone updates a price in your documentation, but your assistant keeps quoting the old one for days. Nothing errors and no alert fires. Your application is working as expected, but your vector index is out of date.
@@ -33,7 +33,7 @@ Here's what you'll build:
 
 The `documents` table holds the current state: one row per document, and every edit bumps its `version`. The `chunks` table holds the index: each row records the `version` its vector was built from.
 
-A sync job looks for documents whose current `version` has no chunk, embeds only those, and writes a new chunk row. Because `version` is part of the chunk's primary key, a re-index adds rows next to the old ones instead of replacing them. Superseded chunks stay in the table, and the search query filters them out by matching the document's current version.
+A sync job looks for documents whose current `version` has no chunk, embeds only those, and writes a new chunk row. Because each chunk's `id` includes the `version`, a re-index adds rows next to the old ones instead of replacing them. Superseded chunks stay in the table, and the search query filters them out by matching the document's current version.
 
 ## Prerequisites
 
@@ -70,6 +70,8 @@ Follow the prompts:
 
 `neon link` creates a `.neon` context file, adds your branch variables to `.env.local`, installs the `@neon/config` and `@neon/env` packages, and generates a `neon.ts` configuration file. It also creates an example function, `hello.ts`.
 
+The setup-as-code prompt only appears in an interactive terminal. If you run `neon link` from a script or an agent, it links the project but doesn't create `neon.ts`, so run `neon config init --services functions,ai-gateway` instead. It creates the same `neon.ts` and `hello.ts` files and installs the same packages.
+
 Since you'll write your own function in the next step, delete the example file:
 
 ```bash filename="Terminal"
@@ -93,7 +95,7 @@ npm install -D typescript tsx @types/node @types/pg
 
 The RAG index uses two tables:
 
-- **`documents`** is the source of truth. One row per logical document, with the `title`, `body` and a `version` for each version.
+- **`documents`** is the source of truth. One row per logical document, with its `title`, `body`, and a `version` that increases with each edit.
 - **`chunks`** is the index. It stores the text that was embedded and the resulting `embedding`, keyed by `document_id`, `version`, and `chunk_index`. Because `version` is part of the key, a document can have chunks from several versions at once, so a re-index adds new rows instead of overwriting the old ones.
 
 <Admonition type="note" title="Document-level versioning vs. chunk-level reuse">
@@ -149,7 +151,7 @@ VALUES
 ON CONFLICT (id) DO NOTHING;
 ```
 
-You'll embed them in the next step, then change one to test incremental indexing.
+You'll embed them when you test the sync handler, then change one to test incremental indexing.
 
 ## Write the sync handler
 
@@ -285,7 +287,7 @@ curl -s -X POST http://localhost:8787/sync \
 
 The `scanned` count shows how many documents needed re-embedding, and `synced` shows the number of documents that were actually embedded. The first run embeds both documents, so both counts are 2. The handler logs the same counts to the console.
 
-Run the same request again with a different invocation ID, as a redelivery would:
+Run the next scheduled invocation, which has a new invocation ID and a later `scheduled_at`:
 
 ```bash filename="Terminal"
 curl -s -X POST http://localhost:8787/sync \
@@ -298,7 +300,7 @@ curl -s -X POST http://localhost:8787/sync \
 {"ok":true,"scanned":0,"synced":0}
 ```
 
-The second run finds no documents to embed, so both counts are 0.
+The second run finds no documents to embed, so both counts are 0. The handler decides what to embed from the index, not from the schedule, so it also does nothing when Neon redelivers an invocation.
 
 Now change one document and bump its `version` by running this SQL in the SQL Editor:
 
