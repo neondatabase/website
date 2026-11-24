@@ -17,10 +17,10 @@ redirectFrom:
   - /docs/guides/connection-pooling
   - /docs/introduction/connection-pooling
   - /docs/manage/connection-pooling
-updatedOn: '2026-11-24T16:04:19.153Z'
+updatedOn: '2026-11-24T18:42:41.645Z'
 ---
 
-Use the pooled connection for your app. Use a direct connection only for work that needs one continuous session, like schema migrations or `pg_dump`.
+For most apps, use a pooled connection. It reuses database connections to help you avoid connection limits. Direct connections are typically used for schema migrations, backups, and other work that needs a single continuous session.
 
 ## Pooled connections
 
