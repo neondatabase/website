@@ -14,7 +14,7 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/auth/guides/jwt
   - /docs/auth/jwt
-updatedOn: '2026-11-06T21:28:10.000Z'
+updatedOn: '2026-11-18T14:08:32.901Z'
 ---
 
 Managed Better Auth is built on [Better Auth](https://www.better-auth.com/) and provides support for JWT plugin APIs through the Neon SDK. You do not need to manually install or configure the Better Auth JWT plugin.
@@ -127,7 +127,7 @@ If the user belongs to an [organization](/docs/auth/guides/plugins/organization)
 - `slug`: the organization slug
 - `role`: the user's role in the organization, such as `owner`, `admin`, or `member`
 
-The `o` claim is `null` when the session has no active organization or the Organization plugin is disabled for the branch. Creating an organization makes it the active organization for that session. To switch, call `authClient.organization.setActive()`.
+The `o` claim is left out of the token when the session has no active organization or the Organization plugin is disabled for the branch. Creating an organization makes it the active organization for that session. To switch, call `authClient.organization.setActive()`.
 
 The `role` value is read when the token is issued. If a user's role changes, tokens issued afterward include the new role, but an existing token keeps the old role until it expires. Tokens expire after 15 minutes.
 

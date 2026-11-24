@@ -197,7 +197,7 @@ When the upstream provider rate-limits a request, AI Gateway forwards the releva
 | `429 Too Many Requests`        | Upstream rate limited  | Upstream provider rate limit. Check the `Retry-After` and `X-Ratelimit-*` headers.                                                                                       |
 | `502 Bad Gateway`              | Upstream error         | Temporary issue with the upstream workspace. Retry the request.                                                                                                          |
 
-Error responses are a JSON object with an `error.message` field:
+Errors the gateway generates itself, such as an unknown model, use an OpenAI-style `error.message` object:
 
 ```json
 {
@@ -206,6 +206,8 @@ Error responses are a JSON object with an `error.message` field:
   }
 }
 ```
+
+Quota blocks and upstream errors use a flat object with `error_code` and `message` fields instead. See [Error response formats](/docs/ai-gateway/troubleshooting#error-response-formats).
 
 ## Next steps
 
