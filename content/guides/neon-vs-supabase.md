@@ -5,7 +5,7 @@ author: rishi-raj-jain
 excludeFromBlog: true
 enableTableOfContents: true
 createdAt: '2026-05-06T00:00:00.000Z'
-updatedOn: '2026-11-05T23:41:12.000Z'
+updatedOn: '2026-11-24T14:47:35.564Z'
 ---
 
 <Admonition type="note">
@@ -160,7 +160,7 @@ AI Gateway routes requests to models from Anthropic, OpenAI, Google, and other p
 | **Private networking**                                | AWS PrivateLink and IP Allow on Scale                                      | AWS PrivateLink on Team                                                                                                                          |
 | **Read-only and per-project roles**                   | Viewer and Collaborator roles on every plan                                | Team plan (from $599/month)                                                                                                                      |
 
-Neon Scale includes SOC 2, ISO 27001, and the other reports above with no monthly minimum, and you request them from the [Trust Center](https://trust.neon.com/) ([source](/docs/security/compliance)). HIPAA is self-serve on Scale: you accept the Business Associate Agreement in the Console and turn on HIPAA for each project that stores health data. It's included at no extra cost today, and Neon will give notice before it adds a 15% surcharge ([source](/docs/security/hipaa)). Every connection to Neon already requires TLS, and Scale adds [IP Allow](/docs/introduction/ip-allow) and [Private Networking](/docs/guides/neon-private-networking) ([source](/docs/security/security-overview)).
+Neon Scale includes SOC 2, ISO 27001, and the other certifications above with no monthly minimum. You request the SOC 2 report from the [Trust Center](https://trust.neon.com/), and ISO certificates are on the [Databricks Security & Trust Center](https://www.databricks.com/trust/compliance) ([source](/docs/security/compliance)). HIPAA is self-serve on Scale: you accept the Business Associate Agreement in the Console and turn on HIPAA for each project that stores health data. It's included at no extra cost today, and Neon will give notice before it adds a 15% surcharge ([source](/docs/security/hipaa)). Every connection to Neon already requires TLS, and Scale adds [IP Allow](/docs/introduction/ip-allow) and [Private Networking](/docs/guides/neon-private-networking) ([source](/docs/security/security-overview)).
 
 On Supabase, **compliance reports start on the Team plan, at least $599 a month**, and HIPAA is a paid add-on on top of that. A HIPAA project also has to turn on point-in-time recovery, so **the smallest HIPAA setup costs about $704 a month before the add-on's own price**: $599 for Team, $100 for 7 days of point-in-time recovery, and $5 for a Small compute after the $10 compute credit.
 
