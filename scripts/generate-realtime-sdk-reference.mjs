@@ -26,11 +26,8 @@ export const SUPPORTED_SCHEMA_VERSION = '2.0';
 // MAINTAINER NOTE: The partials in content/docs/shared-content/realtime-sdk-*.md are
 // generated from the Realtime SDK source. Do not edit them by hand. To change them, run
 // npm run update:realtime-sdk if the SDK moved, or npm run generate:realtime-sdk-reference
-// if only the generator changed.
-// The banner text that used to appear in the partial body is now removed to avoid appearing
-// multiple times on the rendered SDK reference page (which inlines all the partials).
-// The drift check (npm run check:realtime-sdk-reference) enforces that generated partials match
-// the generator's output exactly.
+// if only the generator changed. The drift check (npm run check:realtime-sdk-reference)
+// enforces that generated partials match the generator's output exactly.
 
 const KIND_VARIABLE = 32;
 const KIND_FUNCTION = 64;
@@ -122,10 +119,21 @@ export function buildSymbolIndex(artifact) {
   return index;
 }
 
+export const MODULE_PAGE_BASE = '/docs/realtime/sdks/typescript';
+
+// Modules whose partial is included by another module's page. Both Drizzle entry
+// points are short, so they share content/docs/realtime/sdks/typescript/drizzle.md.
+const MODULE_PAGE_OVERRIDES = { 'drizzle-client': 'drizzle' };
+
+/** Slug of the hand-written page that includes a module's partial. */
+export function modulePageSlug(slug) {
+  return MODULE_PAGE_OVERRIDES[slug] ?? slug;
+}
+
 export function symbolHref(entry) {
-  // All symbols are on the hand-written TypeScript SDK page, with anchor ids
-  // prefixed by module slug.
-  return `/docs/realtime/sdks/typescript#${entry.anchorId}`;
+  // Each module's partial is included by the hand-written page at
+  // content/docs/realtime/sdks/typescript/<page-slug>.md.
+  return `${MODULE_PAGE_BASE}/${modulePageSlug(entry.slug)}#${entry.anchorId}`;
 }
 
 // ---------------------------------------------------------------------------

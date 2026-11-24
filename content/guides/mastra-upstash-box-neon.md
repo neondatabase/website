@@ -4,7 +4,7 @@ subtitle: 'Learn how to build a Slack bot that runs a Mastra agent on Neon Funct
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2026-09-14T00:00:00.000Z'
-updatedOn: '2026-09-21T10:11:50.241Z'
+updatedOn: '2026-11-09T23:20:10.000Z'
 ---
 
 [Mastra](https://mastra.ai) is a TypeScript framework for building AI agents in production. It provides the primitives you need to define an agent, its tools, and the reasoning loop that decides which tool to call next. With Mastra, you can build agents that explore databases, run Python scripts, generate charts, and write Markdown reports.

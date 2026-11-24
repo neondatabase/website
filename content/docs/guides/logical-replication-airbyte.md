@@ -9,7 +9,7 @@ summary: >-
   sets wal_level to logical for all databases in the project.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2026-10-09T10:14:56.146Z'
+updatedOn: '2026-11-16T20:44:17.000Z'
 ---
 
 Neon's logical replication feature allows you to replicate data from your Lakebase Postgres database to external destinations.
@@ -62,10 +62,10 @@ It's recommended that you create a dedicated Postgres role for replicating data.
 
 <TabItem>
 
-The following CLI command creates a role. To view the CLI documentation for this command, see [Neon CLI commands — roles](/docs/reference/api/branches/create-project-branch-role)
+The following CLI command creates a role. Replace `$PROJECT_ID` with your project ID. You can find it with `neon projects list`. To view the CLI documentation for this command, see [Neon CLI commands: roles](/docs/cli/roles)
 
 ```bash
-neon roles create --name replication_user
+neon roles create --name replication_user --project-id $PROJECT_ID
 ```
 
 </TabItem>
@@ -147,6 +147,8 @@ Perform the following steps for each table you want to replicate data from:
    ```
 
 2. Create the Postgres publication. Include all tables you want to replicate as part of the publication:
+
+   Run this as the database owner, such as `neondb_owner`, not the replication role.
 
    ```sql
    CREATE PUBLICATION airbyte_publication FOR TABLE <tbl1, tbl2, tbl3>;

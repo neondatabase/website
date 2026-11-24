@@ -1,215 +1,382 @@
 ---
 title: Connect an Express application to Neon
-subtitle: Set up a Neon project in seconds and connect from an Express application
+subtitle: Connect an Express app to Lakebase Postgres on Neon, query it from a route, develop on a branch, deploy, and add the rest of your backend
 summary: >-
-  Express and Lakebase Postgres connection guide covering Node.js driver options:
-  `@neondatabase/serverless` for edge and serverless platforms such as Vercel
-  and Cloudflare Workers, `pg` (node-postgres) for long-running servers, and
-  `postgres.js` for both. Use this page when connecting an Express API to a
-  Neon database and choosing the right driver for your deployment target, from
-  traditional Node.js servers to serverless runtimes without TCP support. Also
-  covers project creation, `DATABASE_URL` setup via `dotenv`, and connection
-  pool initialization outside route handlers.
+  Connect an Express 5 app to Lakebase Postgres on Neon: optionally add Neon's
+  agent skills, create a Neon project (Neon CLI, API, or Console), link it with
+  the Neon CLI to pull DATABASE_URL into .env.local, load it with Node's
+  --env-file-if-exists flags instead of dotenv, optionally develop on a Neon
+  branch, and query it with node-postgres, postgres.js, or the Neon serverless
+  driver from an Express route. Covers Node.js 24 with ES modules, plus
+  deployment, troubleshooting, and Neon's other backend services from Express.
 enableTableOfContents: true
-updatedOn: '2026-10-08T19:32:04.700Z'
+updatedOn: '2026-11-17T17:22:23.102Z'
 ---
 
-<CopyPrompt src="/prompts/express-prompt.md"
-description="Pre-built prompt for connecting ExpressJS applications to Lakebase Postgres"/>
-
-This guide describes how to create a Neon project and connect to it from an Express application to query a Lakebase Postgres database.
-
-## Choose a driver
-
-- **`@neondatabase/serverless`** connects over HTTP or WebSockets instead of TCP. Use it for serverless and edge platforms without built-in connection pooling (Vercel, Netlify Functions, Cloudflare Workers without Hyperdrive).
-- **`postgres` (postgres.js)** works in both serverless and traditional Node.js server environments.
-- **`pg` (node-postgres)** is the most widely used driver for traditional, long-running Node.js servers. Also the standard choice for [Vercel Fluid compute](https://vercel.com/docs/functions/fluid-compute) and Cloudflare with [Hyperdrive](https://developers.cloudflare.com/hyperdrive/).
-
-For a detailed comparison including all platforms, see [Choosing your connection method](/docs/connect/choose-connection).
+<PromptBlock src="/prompts/express-prompt.md" labels={["Set up your agent and follow this guide", "Look up Express's docs", "Connect your Express app"]} />
 
 <Steps>
 
+## Create an Express app
+
+Install [Node.js](https://nodejs.org/en/download) 24 or later if you don't have it, then create a project if you don't have one:
+
+```bash filename="Terminal"
+mkdir my-app
+cd my-app
+npm init -y
+npm install express
+npm pkg set type=module
+printf 'node_modules\n.env\n.env.local\n' > .gitignore
+```
+
+This guide uses Express 5 with ES modules. `npm init -y` creates a CommonJS project, so `npm pkg set type=module` switches it to `import` syntax. The `.gitignore` keeps your dependencies and your env files, which will hold the connection string, out of git.
+
+If you're adding Neon to an existing app that uses `require()`, keep it CommonJS: don't run `npm pkg set type=module`, which would break its `require()` calls. Write the files below with `require()` in place of `import`, and for postgres.js use `require('postgres').default`. If your app is on Express 4, see Express 4 in [Troubleshooting](#troubleshooting).
+
+## Add Neon's agent skills (optional)
+
+If your AI coding agent doesn't have Neon's [agent skills](/docs/ai/agent-skills) yet, add them to this project. The prompt above installs them, so skip this step if you used it. From your project directory, run:
+
+```bash filename="Terminal"
+npx neon@latest skills
+```
+
+To also connect the [Neon MCP Server](/docs/ai/neon-mcp-server), run `npx neon@latest mcp`.
+
+Express publishes its docs for AI agents at [expressjs.com/llms.txt](https://expressjs.com/llms.txt). The prompt above has your agent look up Express docs there.
+
 ## Create a Neon project
 
-If you do not have one already, create a Neon project.
+Skip this step if you already have a Neon project you want to use.
 
-1. Navigate to the [Projects](https://console.neon.tech/app/projects) page in the Neon Console.
-2. Click **New Project**.
-3. Specify your project settings and click **Create Project**.
+Consider picking a region that supports all Neon backend services: US East (Ohio), US East (N. Virginia), Europe (Frankfurt), or Asia Pacific (Singapore). Postgres and Managed Better Auth run in every region, while Object Storage, Neon Functions, the AI Gateway, and Realtime run in those four, with support expanding toward [all regions](/docs/introduction/regions#product-availability).
 
-## Create an Express project and add dependencies
+<Tabs labels={["Neon CLI", "API", "Console"]}>
 
-1. Create an Express project and change to the newly created directory.
+<TabItem>
 
-   ```shell
-   mkdir neon-express-example
-   cd neon-express-example
-   npm init -y
-   npm install express
-   ```
+Install the [Neon CLI](/docs/cli/install), sign in, and create the project:
 
-2. Add project dependencies using one of the following commands:
+```bash filename="Terminal"
+npm i -g neon@latest
+neon login
+neon projects create --name my-app --region-id aws-us-east-2 --no-secrets
+```
 
-   <CodeTabs labels={["Neon serverless driver", "node-postgres", "postgres.js"]}>
+`--region-id` sets the region; pass a different one to pick another of the regions above. `--no-secrets` keeps the connection string out of the output, since the next step pulls it into your env file. Pass `--org-id` to choose the organization (find IDs with `neon orgs list`).
 
-   ```shell
-   npm install @neondatabase/serverless dotenv
-   ```
+</TabItem>
 
-   ```shell
-   npm install pg dotenv
-   ```
+<TabItem>
 
-   ```shell
-   npm install postgres dotenv
-   ```
+Create an [API key](https://console.neon.tech/app/settings/api-keys), export it, then create the project in your organization:
 
-   </CodeTabs>
+```bash filename="Terminal"
+export NEON_API_KEY=napi_...
 
-## Store your Neon credentials
+curl -X POST https://console.neon.tech/api/v2/projects \
+  -H "Authorization: Bearer $NEON_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{"project": {"name": "my-app", "region_id": "aws-us-east-2", "org_id": "<org-id>"}}'
+```
 
-Add a `.env` file to your project directory and add your Neon connection details to it. Find your database connection details by clicking the **Connect** button in the Console nav to open the **Connect to your branch** modal. Select Node.js from the **Connection string** dropdown. For more information, see [Connect from any application](/docs/connect/connect-from-any-app).
+The response includes the project's connection string in `connection_uris[0].connection_uri`. See [Create a project with the API](/docs/manage/projects#create-a-project-with-the-api) for the other options.
 
-```shell shouldWrap
+</TabItem>
+
+<TabItem>
+
+Go to the [Projects](https://console.neon.tech/app/projects) page in the Neon Console, click **New Project**, and pick one of the regions above.
+
+</TabItem>
+
+</Tabs>
+
+## Connect your app to the project
+
+Get a `DATABASE_URL` into an env file. Express doesn't read env files itself: the `dev` script in [Run the app](#run-the-app) loads them with Node's `--env-file-if-exists` flags, so you don't need `dotenv`.
+
+<Tabs labels={["Neon CLI", "Without the CLI"]}>
+
+<TabItem>
+
+From your app's directory, link it to the Neon project (install the [Neon CLI](/docs/cli/install) and run `neon login` first if you haven't):
+
+```bash filename="Terminal"
+neon link
+```
+
+`neon link` prompts you to pick an organization and a project, or to create a new project. It writes a `.neon` file with the project context, pins a branch (pass `--branch` to choose one), and pulls that branch's `DATABASE_URL` into `.env.local`, or into `.env` if your project already has one. It also offers to create a [`neon.ts`](/docs/reference/neon-ts) file; that's optional and covered in [Add more of your backend](#add-more-of-your-backend).
+
+To skip the prompts, pass `-y` with `--org-id` and `--project-id`, or with `--org-id`, `--project-name`, and `--region-id` to create a project. Find IDs with `neon orgs list` and `neon projects list --org-id <org-id>`.
+
+</TabItem>
+
+<TabItem>
+
+Copy the connection string from **Connect** in the Console nav, or from the API response, and add it to a `.env.local` file in your project directory. For more information, see [Connect from any application](/docs/connect/connect-from-any-app).
+
+```shell filename=".env.local" shouldWrap
 DATABASE_URL="postgresql://[user]:[password]@[neon_hostname]/[dbname]?sslmode=require&channel_binding=require"
 ```
 
-<Admonition type="important">
-Never hardcode credentials in source code files. Always use environment variables via `process.env`. For more information, see [Security overview](/docs/security/security-overview).
-</Admonition>
+The optional development branch step and [Add more of your backend](#add-more-of-your-backend) use the Neon CLI. To use them, run `neon link` in this directory.
 
-## Configure the Postgres client
+</TabItem>
 
-Add an `index.js` file to your project directory and add the following code snippet to connect to your Neon database:
+</Tabs>
 
-<CodeTabs labels={["Neon serverless driver", "node-postgres", "postgres.js"]}>
+Keep `DATABASE_URL` in only one env file: if `.env` and `.env.local` both have it, `.env.local` wins.
 
-```javascript
-require('dotenv').config();
+## Work on a development branch (optional)
 
-const express = require('express');
-const { neon } = require('@neondatabase/serverless');
+If you linked your project's default branch, your app uses the branch where production data usually lives. That's `main` for projects created with the CLI or API, and `production` for projects created in the Console. Create a [branch](/docs/introduction/branching) for local development instead. A branch starts from its parent's data and schema with copy-on-write, so you can change it freely:
+
+```bash filename="Terminal"
+neon checkout dev --create
+```
+
+This creates the `dev` branch, pins it in `.neon`, and pulls its `DATABASE_URL` into the same env file, so your app now uses the branch. To switch back, run `neon checkout main` (or `production`).
+
+## Install a Postgres driver
+
+[node-postgres](https://node-postgres.com) (`pg`) suits a long-running Express server, and [postgres.js](https://github.com/porsager/postgres) works there too. The [Neon serverless driver](/docs/serverless/serverless-driver) queries over HTTP, which suits serverless and edge hosts. See [Choosing your connection method](/docs/connect/choose-connection).
+
+<CodeTabs reverse={true} labels={["node-postgres", "postgres.js", "Neon serverless driver"]}>
+
+```bash
+npm install pg
+```
+
+```bash
+npm install postgres
+```
+
+```bash
+npm install @neondatabase/serverless
+```
+
+</CodeTabs>
+
+If you use node-postgres, `pg` 8.23 and later print a `SECURITY WARNING` for `sslmode=require`. Change it to `sslmode=verify-full` in your env file to keep the same behavior without the warning. `neon env pull` and `neon checkout` write `sslmode=require` again, so repeat the change after you run them.
+
+## Create the database client
+
+Create the client once for the whole app, in `db.js`, rather than in each route. It reads `DATABASE_URL` from `process.env` and stops the app at startup if the variable isn't set:
+
+<CodeTabs reverse={true} labels={["node-postgres", "postgres.js", "Neon serverless driver"]}>
+
+```javascript filename="db.js"
+import pg from 'pg';
+
+const url = process.env.DATABASE_URL;
+if (!url) throw new Error('DATABASE_URL is not set');
+
+export const pool = new pg.Pool({ connectionString: url });
+
+// An idle connection can drop, for example when the compute scales to zero.
+// Without a listener, the pool's error event stops the app.
+pool.on('error', (error) => console.error('Postgres pool error:', error.message));
+```
+
+```javascript filename="db.js"
+import postgres from 'postgres';
+
+const url = process.env.DATABASE_URL;
+if (!url) throw new Error('DATABASE_URL is not set');
+
+export const sql = postgres(url);
+```
+
+```javascript filename="db.js"
+import { neon } from '@neondatabase/serverless';
+
+const url = process.env.DATABASE_URL;
+if (!url) throw new Error('DATABASE_URL is not set');
+
+export const sql = neon(url);
+```
+
+</CodeTabs>
+
+## Query the database from a route
+
+Serve the query from an Express route in `index.js`. If your app doesn't have an `index.js` yet, create it. If it already has a `/` route, add a route such as `/neon` instead so you don't replace one of yours. The route returns the version as JSON:
+
+<CodeTabs reverse={true} labels={["node-postgres", "postgres.js", "Neon serverless driver"]}>
+
+```javascript filename="index.js"
+import express from 'express';
+import { pool } from './db.js';
 
 const app = express();
-const PORT = process.env.PORT || 4242;
-
-const sql = neon(process.env.DATABASE_URL);
+const port = process.env.PORT ?? 3000;
 
 app.get('/', async (req, res) => {
-  try {
-    const [result] = await sql`SELECT version()`;
-    const version = result?.version || 'No version found';
-    res.json({ version });
-  } catch (error) {
-    console.error('Database query failed:', error);
-    res.status(500).json({ error: 'Failed to connect to the database.' });
-  }
+  const { rows } = await pool.query('SELECT version()');
+  res.json({ version: rows[0].version });
 });
 
-app.listen(PORT, () => {
-  console.log(`Listening to http://localhost:${PORT}`);
+app.listen(port, (error) => {
+  if (error) throw error;
+  console.log(`Listening on http://localhost:${port}`);
 });
 ```
 
-```javascript
-require('dotenv').config();
-
-const express = require('express');
-const { Pool } = require('pg');
+```javascript filename="index.js"
+import express from 'express';
+import { sql } from './db.js';
 
 const app = express();
-const PORT = process.env.PORT || 4242;
-
-const pool = new Pool({
-  connectionString: process.env.DATABASE_URL,
-});
+const port = process.env.PORT ?? 3000;
 
 app.get('/', async (req, res) => {
-  let client;
-  try {
-    client = await pool.connect();
-    const { rows } = await client.query('SELECT version()');
-    const version = rows[0]?.version || 'No version found';
-    res.json({ version });
-  } catch (error) {
-    console.error('Database query failed:', error);
-    res.status(500).json({ error: 'Failed to connect to the database.' });
-  } finally {
-    client?.release();
-  }
+  const [row] = await sql`SELECT version()`;
+  res.json({ version: row?.version });
 });
 
-app.listen(PORT, () => {
-  console.log(`Listening to http://localhost:${PORT}`);
+app.listen(port, (error) => {
+  if (error) throw error;
+  console.log(`Listening on http://localhost:${port}`);
 });
 ```
 
-```javascript
-require('dotenv').config();
-
-const express = require('express');
-// postgres.js 4 and later is ESM-only; .default returns the postgres function
-const postgres = require('postgres').default;
+```javascript filename="index.js"
+import express from 'express';
+import { sql } from './db.js';
 
 const app = express();
-const PORT = process.env.PORT || 4242;
-
-const sql = postgres(process.env.DATABASE_URL);
+const port = process.env.PORT ?? 3000;
 
 app.get('/', async (req, res) => {
-  try {
-    const [result] = await sql`SELECT version()`;
-    const version = result?.version || 'No version found';
-    res.json({ version });
-  } catch (error) {
-    console.error('Database query failed:', error);
-    res.status(500).json({ error: 'Failed to connect to the database.' });
-  }
+  const [row] = await sql`SELECT version()`;
+  res.json({ version: row?.version });
 });
 
-app.listen(PORT, () => {
-  console.log(`Listening to http://localhost:${PORT}`);
+app.listen(port, (error) => {
+  if (error) throw error;
+  console.log(`Listening on http://localhost:${port}`);
 });
 ```
 
 </CodeTabs>
 
-<Admonition type="note">
-If you use node-postgres, note that `pg` 8.23 and later print a `SECURITY WARNING` when a connection string uses `sslmode=require`. To keep the current behavior and remove the warning, change `sslmode=require` to `sslmode=verify-full` in your connection string. For SSL mode definitions, see [SSL support](https://www.postgresql.org/docs/current/libpq-ssl.html) in the Postgres documentation.
-</Admonition>
+The routes don't need `try...catch`: Express 5 passes an error from an `async` route to its error handler, which responds with a `500` and keeps the server running.
 
-## Run index.js
+## Run the app
 
-Run `node index.js` and open [localhost:4242](http://localhost:4242). The response looks like this:
+Add `dev` and `start` scripts. `dev` loads your env files and restarts the server when you edit a file; `start` runs the server the way your host will:
+
+```bash filename="Terminal"
+npm pkg set scripts.dev="node --watch --env-file-if-exists=.env --env-file-if-exists=.env.local index.js"
+npm pkg set scripts.start="node index.js"
+npm run dev
+```
+
+Node prints a notice such as `.env not found. Continuing without it.` for an env file you don't have; that's expected. `--env-file-if-exists` is stable from Node.js 24.10 and 22.21, and available as an experimental flag from 22.9. On older versions, use `--env-file=.env.local` (Node.js 20.6 and later), which fails if the file is missing, or load the file with [dotenv](https://github.com/motdotla/dotenv). Open [localhost:3000](http://localhost:3000), or the port in `PORT` if you set one. The response shows your Postgres version, confirming the connection:
 
 ```json
-{ "version": "PostgreSQL 18.6 (ac70818) on aarch64-unknown-linux-gnu, compiled by gcc (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0, 64-bit" }
+{"version":"PostgreSQL 18.6 (fd34222) on aarch64-unknown-linux-gnu, compiled by gcc ..."}
 ```
 
 </Steps>
 
-## Connection issues
+## Deploy
 
-- If you see an `endpoint ID is not specified` error, the TLS client your Postgres driver depends on doesn't support Server Name Indication (SNI), which Neon uses to route connections. For `pg` (node-postgres), this means an outdated `libpq`-compatible TLS stack; upgrading `pg` usually resolves it.
-- If you encounter an `SSL SYSCALL error: EOF detected` (or a similar connection-reset error), this typically happens when an application tries to reuse a connection after the Neon compute has been suspended due to inactivity. This mainly affects long-running servers that keep a connection pool open, like the `pg` example above. Closing and recreating idle connections, or reconnecting on error, resolves it.
+Set `DATABASE_URL` everywhere your app runs.
 
-<details>
-<summary>**Notes for AI-assisted setup**</summary>
+- Use your default branch for production. Get its connection string with `neon connection-string main --pooled` (or `production`), or from **Connect** in the Console.
+- Start the server with `npm start`. It doesn't load env files, so set `DATABASE_URL` in your host's environment. Locally, a variable set in your shell also takes priority over the `dev` script's env files.
+- Most Node.js hosts set `PORT` for you, and the app listens on it.
+- Pick the driver for your host. node-postgres suits long-running servers, [Vercel Fluid compute](https://vercel.com/docs/functions/fluid-compute), and Cloudflare with [Hyperdrive](https://developers.cloudflare.com/hyperdrive/). On serverless platforms without built-in connection pooling, such as Netlify Functions or Cloudflare Workers without Hyperdrive, use the Neon serverless driver. See [Choosing your connection method](/docs/connect/choose-connection).
+- On Vercel, Express apps deploy with [zero configuration](https://vercel.com/docs/frameworks/backend/express). The [Neon integration](/docs/guides/vercel-overview) sets `DATABASE_URL` for you and can create a Neon branch for each preview deployment.
 
-- Do not hardcode credentials or connection strings in any `.js` source file. Always use environment variables via `process.env` and `dotenv`.
-- Wrap all database queries in a `try...catch` block. Return a `500` status with an error message on failure.
-- When using `pg` (node-postgres), declare `let client` before the `try` block and call `client?.release()` in the `finally` block. This safely handles cases where `pool.connect()` itself fails.
-- Initialize the connection pool or client outside the route handler, not inside it. Creating a new pool on every request wastes resources.
-- Choose the right driver for your platform. `@neondatabase/serverless` is for serverless/edge platforms without TCP support. For long-running Express servers, use `pg` or `postgres`. See [Choosing your connection method](/docs/connect/choose-connection).
+## Add more of your backend
 
-</details>
+Neon's other backend services branch with your database. Object Storage, Neon Functions, the AI Gateway, and Realtime need a project in a [supported region](#create-a-neon-project). Add a service with [`neon config add`](/docs/cli/config#add), then provision it with [`neon deploy`](/docs/cli/deploy). For example, to add an Object Storage bucket:
+
+```bash filename="Terminal"
+neon config add bucket uploads
+neon deploy
+```
+
+`neon config add` creates a [`neon.ts`](/docs/reference/neon-ts) file at your project root if you don't have one, installs `@neon/config` and `@neon/env`, and declares the service. `neon deploy` provisions it and writes its variables to `.env.local`. The `dev` script loads them into `process.env`, so SDKs that read `process.env` find them. Set them on your host too.
+
+<DefinitionList>
+
+Managed Better Auth
+: Sign-up, sign-in, and sessions stored in your database.
+: Add it with `neon config add auth`. See [Managed Better Auth](/docs/auth/overview).
+
+Object Storage
+: S3-compatible buckets for uploads and files.
+: Add a bucket with `neon config add bucket <name>`. In Express, use it from route handlers. See [Object Storage](/docs/storage/overview).
+
+AI Gateway
+: One credential for models from Anthropic, OpenAI, Google, and more.
+: Add it with `neon config add ai-gateway`. In Express, call models from route handlers. See [AI Gateway](/docs/ai-gateway/overview).
+
+Neon Functions
+: Long-running Node.js compute next to your database.
+: Add one with `neon config add function <slug>`, which also creates its handler file in `functions/`. Use a function for work that outlasts a request on your Express host, such as agents and webhooks, and call it with `fetch`. See [Neon Functions](/docs/compute/functions/overview).
+
+Realtime (beta)
+: Live SQL query subscriptions.
+: Add it with `neon config add realtime`. In Express, seal live queries in a route with `NEON_REALTIME_SECRET`, then subscribe from the browser with `NEON_REALTIME_URL`. Keep the secret on the server. See [Realtime](/docs/realtime/overview).
+
+</DefinitionList>
+
+To declare several services at once before you have a `neon.ts`, run `neon config init --services auth,functions,realtime`, or edit the file directly. With every service declared, it looks like this. The comments list the variables each service adds:
+
+```typescript filename="neon.ts"
+import { defineConfig } from '@neon/config/v1';
+
+export default defineConfig({
+  auth: true, // NEON_AUTH_BASE_URL, NEON_AUTH_JWKS_URL
+  buckets: {
+    uploads: {}, // AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY, AWS_ENDPOINT_URL_S3, AWS_REGION
+  },
+  aiGateway: true, // NEON_AI_GATEWAY_TOKEN, NEON_AI_GATEWAY_BASE_URL
+  functions: {
+    jobs: { name: 'Jobs', source: './functions/jobs.ts' }, // NEON_FUNCTION_HOST_SUFFIX
+  },
+  preview: {
+    realtime: true, // NEON_REALTIME_URL, NEON_REALTIME_SECRET
+  },
+});
+```
+
+To skip `neon.ts`, use each service's own CLI commands, such as [`neon buckets create`](/docs/cli/buckets) or [`neon realtime enable`](/docs/cli/realtime).
+
+## Troubleshooting
+
+<DefinitionList>
+
+`Error: DATABASE_URL is not set`
+: The app started without `DATABASE_URL`. Locally, start it with `npm run dev` so the env files load, and check that one of them has the variable, or run `neon env pull`. With `npm start` or on a host, set it in the environment.
+
+`Error: listen EADDRINUSE: address already in use :::3000`
+: Another server, often an earlier `npm run dev`, is still using the port. Stop it, or set `PORT` to use another port.
+
+`SyntaxError: Cannot use import statement outside a module`
+: The project is still CommonJS. Run `npm pkg set type=module`.
+
+`endpoint ID is not specified`
+: The TLS client your Postgres driver depends on doesn't support Server Name Indication (SNI), which Neon uses to route connections. With node-postgres, this means an outdated TLS stack; upgrading `pg` usually resolves it.
+
+`SSL SYSCALL error: EOF detected`, or a similar connection-reset error
+: The app reused a connection after the Neon compute was suspended for inactivity. This mainly affects long-running servers that keep a connection pool open, like the node-postgres example. The `pool.on('error')` listener in `db.js` keeps it from stopping the app. Closing and recreating idle connections, or reconnecting on error, resolves it.
+
+Express 4
+: Express 4 doesn't pass errors from `async` routes to its error handler, so on current Node.js versions a failed query stops the app. Wrap each route's body in `try...catch` and pass the error to `next(error)`, or upgrade with the [Express 5 migration guide](https://expressjs.com/en/guide/migrating-5.html).
+
+</DefinitionList>
 
 ## Next steps
 
-- [Set up Managed Better Auth](/docs/auth/overview): Add managed authentication that branches with your database
-- [Add Object Storage](/docs/storage/overview): S3-compatible file storage that branches with your database
-- [Deploy a Function](/docs/compute/functions/overview): Run backend compute next to your database, no separate hosting needed
-- [Call an LLM with AI Gateway](/docs/ai-gateway/overview): Access foundation models from Anthropic, OpenAI, Google, and more with one credential
-- [Realtime](/docs/realtime/guides/queries): Build realtime apps with end-to-end reactivity
+- **Create your first table:** run `neon psql` in your project directory to open a SQL shell on your linked branch, or use an ORM such as [Drizzle](/docs/guides/drizzle) or [Prisma](/docs/guides/prisma) to manage your schema with migrations.
+- [Build a full backend](/docs/get-started/full-backend-quickstart): Postgres, Object Storage, and a Neon Function declared in one `neon.ts`.
+- [Branching](/docs/introduction/branching): Give each preview deployment or pull request its own copy of your database.
 
 <NeedHelp/>

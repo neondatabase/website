@@ -5,7 +5,7 @@ summary: >-
   Solutions for common errors when using Neon AI Gateway, including
   authentication failures, model errors, quota limits, and upstream issues.
 enableTableOfContents: true
-updatedOn: '2026-11-10T21:40:40.486Z'
+updatedOn: '2026-11-18T08:10:37.191Z'
 ---
 
 ## Authentication errors
@@ -61,6 +61,12 @@ The request body does not contain a valid `model` field.
 
 **Fix:** Include `"model": "<model-id>"` in the request body.
 
+### `403`: `AI Gateway is not enabled on this account's current plan` (#403-no-ai-gateway-credits)
+
+Your organization hasn't added a payment card and bought AI Gateway credits, so no model is enabled. Every new Free account starts in this state. The response's `unavailable_reason` is `paid_plan_required`, and `GET /v1/models` lists every model with `enabled: false`, the same `unavailable_reason`, and a `recovery_url` that links to your organization's **Billing** page.
+
+**Fix:** Despite the message and the reason name, an organization billed directly by Neon doesn't need to change its plan, including on Free. An organization admin adds a payment card and buys credits on the **Billing** page. See [Buy or top up credits](/docs/ai-gateway/prepaid-credits#buy-or-top-up-credits). Models unlock once Neon confirms access, usually within a few seconds. If your organization can't buy credits in the Console, for example because it's billed through a marketplace, the padlock on your project's **AI Gateway** page shows what to do instead. See [Locked models in the Console](#some-models-are-restricted-in-the-console).
+
 ### Locked models in the Console (#some-models-are-restricted-in-the-console)
 
 On your project's **AI Gateway** page, a locked model shows a padlock. Hover over the padlock to see why the model is locked, along with a link to fix it:
@@ -80,6 +86,12 @@ Only organization admins can add a card or buy credits. After you buy credits, m
 ---
 
 ## Gemini-specific errors
+
+### `404 page not found`
+
+The request didn't reach a gateway route. The Gemini endpoint is served at `/gemini/v1beta/...`, but `google-genai` 3.x defaults to the `v1` API version, so a client configured with only the base URL calls `/gemini/v1/models/...`.
+
+**Fix:** Set `httpOptions.apiVersion` (TypeScript) or `http_options.api_version` (Python) to `v1beta` when you configure the SDK. See [Gemini API](/docs/ai-gateway/gemini#basic-request).
 
 ### `404 unsupported gemini action`
 

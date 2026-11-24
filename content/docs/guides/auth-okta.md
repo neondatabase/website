@@ -9,9 +9,9 @@ summary: >-
   Choose this guide for organization-internal SSO login rather than Auth0 or
   Managed Better Auth. The tutorial covers creating an Okta OIDC web application, setting
   issuer URI and client credentials, defining a user_messages schema, and
-  running drizzle-kit push:pg migrations against a Lakebase database.
+  running drizzle-kit push migrations against a Lakebase database.
 enableTableOfContents: true
-updatedOn: '2026-09-16T19:45:35.340Z'
+updatedOn: '2026-11-16T20:38:33.000Z'
 ---
 
 <Admonition type="tip" title="Building on Neon?">
@@ -113,10 +113,10 @@ AUTH_OKTA_SECRET=YOUR_CLIENT_SECRET
 AUTH_SECRET=YOUR_SECRET
 ```
 
-The last variable, `AUTH_SECRET`, is a random string used by `Auth.js` to encrypt tokens. Run the following command to generate one and add it to your `.env.local` file:
+The last variable, `AUTH_SECRET`, is a random string used by `Auth.js` to encrypt tokens. Generate one with OpenSSL and add it to your `.env.local` file:
 
 ```bash
-npx auth secret
+openssl rand -base64 32
 ```
 
 <Admonition type="note">
@@ -184,9 +184,9 @@ if (!process.env.DATABASE_URL) throw new Error('DATABASE_URL not found in enviro
 export default {
   schema: './app/db/schema.ts',
   out: './drizzle',
-  driver: 'pg',
+  dialect: 'postgresql',
   dbCredentials: {
-    connectionString: process.env.DATABASE_URL,
+    url: process.env.DATABASE_URL,
   },
   strict: true,
 } satisfies Config;
@@ -195,14 +195,16 @@ export default {
 Now, generate the migration files by running the following command:
 
 ```bash
-npx drizzle-kit generate:pg
+npx drizzle-kit generate
 ```
 
 This will create a `drizzle` folder at the project root with the migration files. To apply the migration to the database, run:
 
 ```bash
-npx drizzle-kit push:pg
+npx drizzle-kit push
 ```
+
+Because the config sets `strict: true`, `drizzle-kit push` lists the changes and asks you to confirm before it runs them.
 
 The `user_messages` table will now be visible in the console.
 
@@ -239,7 +241,7 @@ import { handlers } from '@/auth';
 export const { GET, POST } = handlers;
 ```
 
-This route file imports the authentication handlers from the `auth.ts` file that handle all auth-related requests &#8212; sign-in, sign-out, and redirect after authentication.
+This route file imports the authentication handlers from the `auth.ts` file that handle all auth-related requests, including sign-in, sign-out, and the redirect after authentication.
 
 The `auth` object exported from `./auth.ts` is the universal method we can use to interact with the authentication state in the application. For example, we add a **User information** bar to the app layout that indicates the current user's name and provides a sign-out button.
 
@@ -247,6 +249,7 @@ Replace the contents of the `app/layout.tsx` file with the following:
 
 ```tsx
 import type { Metadata } from 'next';
+import { Suspense } from 'react';
 import { Inter } from 'next/font/google';
 import './globals.css';
 import { auth } from '@/auth';
@@ -284,8 +287,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <UserInfoBar />
-        {children}
+        <Suspense fallback={null}>
+          <UserInfoBar />
+          {children}
+        </Suspense>
       </body>
     </html>
   );

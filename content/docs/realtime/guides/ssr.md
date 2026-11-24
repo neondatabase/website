@@ -4,7 +4,7 @@ subtitle: 'Render sealed queries and initial query results on the server.'
 summary: >-
   Server-render pages that use live queries. Read and seal the same query for each request, send both to the browser, render the initial rows straight away and let the first result bring the page live.
 enableTableOfContents: true
-updatedOn: '2026-10-30T15:07:38.000Z'
+updatedOn: '2026-11-18T00:59:49.148Z'
 ---
 
 [Server-side rendering (SSR)](https://developer.mozilla.org/en-US/docs/Glossary/SSR) lets a page arrive with its rows already in the HTML, then subscribe to ongoing changes as soon as it hydrates.
@@ -154,7 +154,7 @@ export async function POST(_request: Request, { params }: Context) {
 
 A server re-render, for example from `router.refresh()` or `revalidatePath()`, sends a new object for the same query. `useLiveQuery()` restarts on each new object, which rejects pending `awaitTxId()` calls. So `HydratedMessages` keeps the first sealed query, and renewals go through `refreshQuery`. Callers key it on `queryFingerprint`, so another channel or user remounts it.
 
-Or with [TanStack Start](../examples/tanstack), [create server functions](https://tanstack.com/start/latest/docs/framework/react/guide/server-functions) for the loader and the renewal. During SSR, a route loader needs the session from the request's cookies on the server. The official Managed Better Auth adapter for TanStack&nbsp;Start isn't out yet, so set up the session yourself. `requireUser` reads the cookie during SSR and for calls from the browser:
+Or with [TanStack Start](../examples/tanstack), [create server functions](https://tanstack.com/start/latest/docs/framework/react/guide/server-functions) for the loader and the renewal. During SSR, a route loader needs the session from the request's cookies on the server. The official Managed Better Auth adapter for TanStack&nbsp;Start isn't available yet, so set up the session yourself. `requireUser` reads the cookie during SSR and for calls from the browser:
 
 <details>
   <summary>Read the Managed Better Auth session in TanStack Start</summary>
@@ -542,7 +542,7 @@ export function getRouter() {
 
 ### Define the collection
 
-Define the collection as a descriptor with the two-argument `collectionOptions(id, factory)` around [`realtimeCollectionOptions()`](../sdks/typescript#tanstack-db-realtimecollectionoptions), and give it a stable id. Each `DbClient` runs the factory once, to create its own instance of the collection. Unlike `createMessagesCollection()` in the reactivity guide, it doesn't take a Realtime client: the factory reads the one from its `DbClient`. The descriptor is cheap to build, so the loader and the channel page each build it, and the id resolves both to the same collection:
+Define the collection as a descriptor with the two-argument `collectionOptions(id, factory)` around [`realtimeCollectionOptions()`](../sdks/typescript/tanstack-db#tanstack-db-realtimecollectionoptions), and give it a stable id. Each `DbClient` runs the factory once, to create its own instance of the collection. Unlike `createMessagesCollection()` in the reactivity guide, it doesn't take a Realtime client: the factory reads the one from its `DbClient`. The descriptor is cheap to build, so the loader and the channel page each build it, and the id resolves both to the same collection:
 
 ```ts filename="src/collections.ts"
 import { collectionOptions } from "@tanstack/react-db"

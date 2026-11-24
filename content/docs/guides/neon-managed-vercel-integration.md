@@ -17,7 +17,7 @@ summary: >-
 redirectFrom:
   - /docs/guides/vercel-previews-integration
 enableTableOfContents: true
-updatedOn: '2026-10-23T11:36:04.672Z'
+updatedOn: '2026-11-18T20:38:42.000Z'
 ---
 
 <InfoBlock>
@@ -246,6 +246,10 @@ If needed, you can delete branches manually:
 - **Neon Console:** delete branches from your project's **Branches** page. See [Delete a branch](/docs/manage/branches#delete-a-branch).
 - **API/CLI:** Use the [Neon CLI](/docs/cli/branches#delete) or [Neon API](/docs/manage/branches#delete-a-branch-with-the-api) for programmatic cleanup
 
+<Admonition type="note" title="Preview branches count toward your active compute limit">
+Each preview branch gets its own compute, and active computes on non-default branches count toward your project's [concurrently active compute limit](/docs/manage/computes#concurrently-active-compute-limit). If many preview deployments run at once, computes beyond the limit stay suspended and connections to them fail. Preview computes [scale to zero](/docs/introduction/scale-to-zero) when idle, and cleaning up stale preview branches keeps the count down.
+</Admonition>
+
 <Admonition type="warning" title="Important cleanup considerations">
 - **Don't rename branches:** Renaming either the Git branch or Neon branch breaks name-matching logic and may cause unintended deletions
 - **Avoid child branches:** Creating child branches on preview branches prevents automatic deletion
@@ -305,5 +309,11 @@ If you see "Failed to set environment variables" during setup, remove conflictin
 **Issue:** Preview branches no longer created
 **Cause:** The PostgreSQL role selected during setup was deleted
 **Solution:** Reinstall the integration with a valid role, or change the role under **Default database and role** on the **Settings** tab (**Neon Console → Integrations → Manage**)
+
+### Preview deployments can't connect to the database
+
+**Issue:** Preview deployments fail to connect while many previews are active, with the error `You have exceeded the limit of concurrently active endpoints`
+**Cause:** The project reached its [concurrently active compute limit](/docs/manage/computes#concurrently-active-compute-limit), so new preview computes stay suspended
+**Solution:** Delete preview branches you no longer need, or let idle computes [scale to zero](/docs/introduction/scale-to-zero) so they stop counting toward the limit. If your team regularly needs more active previews, [request a limit increase](/docs/introduction/support#request-a-limit-increase)
 
 <NeedHelp/>

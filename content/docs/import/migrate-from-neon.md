@@ -10,7 +10,7 @@ summary: >-
 enableTableOfContents: true
 redirectFrom:
   - /docs/import/import-from-neon
-updatedOn: '2026-09-16T19:45:35.340Z'
+updatedOn: '2026-11-20T14:06:24.575Z'
 ---
 
 This guide describes how to migrate a database from one Neon project to another by **piping** output from **`pg_dump`** straight into **`pg_restore`** (`pg_dump ... | pg_restore ...`). That runs the dump and restore in one step without writing an intermediate dump file on disk.
@@ -21,7 +21,7 @@ Avoid using `pg_dump` over a [pooled connection string](/docs/reference/glossary
 
 ## Important considerations
 
-- **Upgrading the Postgres version**: When upgrading to a new version of Postgres, always test thoroughly before migrating your production systems or applications.
+- **Upgrading the Postgres version**: When upgrading to a new version of Postgres, always test thoroughly before migrating your production systems or applications. Use `pg_dump` and `pg_restore` from the newer version, because an older `pg_restore` refuses to restore into a newer server. See [Upgrading your Postgres version](/docs/postgresql/postgres-upgrade) and the [data migration notes](/docs/import/migrate-from-postgres#data-migration-notes).
 - **Piping considerations**: Piping simplifies the operation, but for large or complex datasets, we highly recommend a **separate** dump and restore. See [Migrate data from Postgres with pg_dump and pg_restore](/docs/import/migrate-from-postgres).
 
 ## Import data from another project

@@ -7,6 +7,7 @@ import {
   EnvironmentTable,
   OperationList,
 } from 'components/pages/functions/templates/template-blocks';
+import BuiltWithList from 'components/pages/functions/templates/template-detail/built-with-list';
 import { renderReadme } from 'components/pages/functions/templates/template-readme';
 import WeeklyInstalls from 'components/pages/functions/templates/weekly-installs';
 import { weeklyInstallRowsPropType } from 'components/pages/functions/templates/weekly-installs/summary';
@@ -22,6 +23,7 @@ import {
   registryCategoryLabel,
   registryProviderLabel,
   registryTemplateCategories,
+  registryTemplateFeatures,
   registryTemplatePageHref,
   registryTemplateSourceUrl,
 } from 'utils/function-registry';
@@ -142,6 +144,7 @@ DetailRow.propTypes = {
 const TemplateSidebar = ({ template, installCommand, installs }) => {
   const provider = registryProviderLabel(template) || 'Neon';
   const categories = registryTemplateCategories(template);
+  const features = registryTemplateFeatures(template);
   const sourceUrl = registryTemplateSourceUrl(template);
 
   return (
@@ -181,6 +184,11 @@ const TemplateSidebar = ({ template, installCommand, installs }) => {
                 </li>
               ))}
             </ul>
+          </DetailRow>
+        )}
+        {features.length > 0 && (
+          <DetailRow label="Built with">
+            <BuiltWithList features={features} />
           </DetailRow>
         )}
         <DetailRow label="Resources">

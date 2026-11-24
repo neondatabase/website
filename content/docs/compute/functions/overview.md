@@ -11,7 +11,7 @@ redirectFrom:
   - /docs/functions
   - /docs/functions/overview
   - /docs/compute/functions
-updatedOn: '2026-11-12T07:04:55.193Z'
+updatedOn: '2026-11-18T08:58:29.034Z'
 layout: wide
 hideCopyPage: true
 ---
@@ -84,12 +84,14 @@ A function always runs in response to a request and returns a web response: JSON
 
 Functions fit request/response work, including scheduled runs with [Function Triggers](/docs/compute/functions/triggers/overview). They aren't a job queue. Queued, retryable, cancellable work with its own lifecycle, like sending a welcome email after signup, still needs a queue or workflow engine to own that lifecycle. You can pair a function with a third-party queue like [Upstash QStash](https://upstash.com/docs/qstash) or [Inngest](https://www.inngest.com), which owns the queue and retries and invokes your function over HTTP. A native Neon job queue and workflow engine is a separate, upcoming offering.
 
-Any module whose default export provides a `fetch(request)` method that returns a `Response` is a function. It embraces the web platform standards: the Fetch API's `Request` and `Response` interface, the same handler shape used by other serverless runtimes and standardized by [WinterTC](https://wintertc.org/). That can be an object with a `fetch` method:
+Any module whose default export provides a `fetch(request)` method that returns a `Response` is a function. It embraces the web platform standards: the Fetch API's `Request` and `Response` interface, the same handler shape used by other serverless runtimes and standardized by [WinterTC](https://wintertc.org/). That can be an object with a `fetch` method, assigned to a name before it is exported so that Next.js's ESLint config (`import/no-anonymous-default-export`) accepts it:
 
 ```ts
-export default {
+const handler = {
   fetch: (request: Request) => new Response('Hello world'),
 };
+
+export default handler;
 ```
 
 Or a bare async function:

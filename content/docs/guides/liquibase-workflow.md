@@ -9,7 +9,7 @@ summary: >-
   setup. Neon's copy-on-write branching keeps development changes isolated
   until explicitly promoted.
 enableTableOfContents: true
-updatedOn: '2026-09-25T09:36:22.797Z'
+updatedOn: '2026-11-15T11:02:09.000Z'
 ---
 
 Liquibase is an open-source database-independent library for tracking, managing, and applying database schema changes. To learn more about Liquibase, refer to the [Liquibase documentation](https://docs.liquibase.com/home.html).

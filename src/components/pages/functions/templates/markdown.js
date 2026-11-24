@@ -12,6 +12,7 @@ import {
   registryEnvironmentRequiredLabel,
   registryProviderLabel,
   registryTemplateCategories,
+  registryTemplateFeatures,
   registryTemplateFilters,
   registryTemplatePageHref,
   registryTemplateSource,
@@ -65,6 +66,18 @@ const sourceLine = (template) => {
 
 const categoriesLine = (template) =>
   registryTemplateCategories(template).map(registryCategoryLabel).join(', ');
+
+const featureLink = ({ label, href }) =>
+  href ? `[${escapeText(label)}](${absoluteUrl(href)}.md)` : escapeText(label);
+
+const builtWithLine = (template) =>
+  registryTemplateFeatures(template)
+    .map((feature) =>
+      feature.types.length > 0
+        ? `${featureLink(feature)} (${feature.types.map(featureLink).join(', ')})`
+        : featureLink(feature)
+    )
+    .join(', ');
 
 const installsLine = (totals) =>
   totals?.installs > 0 &&
@@ -211,6 +224,7 @@ export const renderTemplateMarkdown = ({
       sourceLine(template),
       `- Built by: ${builtByLine(template)}`,
       categoriesLine(template) && `- Categories: ${categoriesLine(template)}`,
+      builtWithLine(template) && `- Built with: ${builtWithLine(template)}`,
       installsLine(totalInstalls(installs)),
     ]
       .filter(Boolean)

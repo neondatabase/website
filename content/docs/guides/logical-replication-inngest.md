@@ -11,18 +11,18 @@ summary: >-
   credentials to the Inngest integration wizard (credentials are not stored).
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2026-09-16T19:45:35.340Z'
+updatedOn: '2026-11-16T20:15:07.000Z'
 ---
 
 Neon's logical replication feature allows you to replicate data from your Lakebase Postgres database to external destinations.
 
-[Inngest](https://www.inngest.com?utm_source=neon&utm_medium=logical-replication-guide) is a durable workflow platform that allows you to trigger workflow based on Neon database changes. With its native Neon integration, it is the easiest way to set up data replication with custom transformations or 3rd party API destinations (ex, Neon to Amplitude, Neon to S3).
+[Inngest](https://www.inngest.com?utm_source=neon&utm_medium=logical-replication-guide) is a durable workflow platform that allows you to trigger workflows based on Neon database changes. With its native Neon integration, it is the easiest way to set up data replication with custom transformations or 3rd party API destinations (for example, Neon to Amplitude or Neon to S3).
 
 In this guide, you will learn how to configure your Inngest account for ingesting changes from your Neon database, enabling you to replicate data from Lakebase Postgres to Inngest workflows.
 
 ## Prerequisites
 
-- A [Inngest account](https://www.inngest.com?utm_source=neon&utm_medium=logical-replication-guide)
+- An [Inngest account](https://www.inngest.com?utm_source=neon&utm_medium=logical-replication-guide)
 - A [Neon account](https://console.neon.tech/)
 - Read the [important notices about logical replication in Neon](/docs/guides/logical-replication-neon#important-notices) before you begin
 
@@ -30,11 +30,11 @@ In this guide, you will learn how to configure your Inngest account for ingestin
 Replication keeps compute active (no [scale to zero](/docs/introduction/scale-to-zero)) while subscribers are connected, which can increase your bill. See [Important notices about logical replication in Neon](/docs/guides/logical-replication-neon#important-notices).
 </Admonition>
 
-## Enabling Logical Replication on your database
+## Enable logical replication on your database
 
-The Inngest Integration relies on Neon’s Logical Replication feature to get notified upon database changes.
+The Inngest integration relies on Neon's logical replication feature to get notified upon database changes.
 
-Navigate to your Neon Project using the Neon Console and open the **Settings** > **Postgres** page. From here, follow the instructions to enable Logical Replication:
+Navigate to your Neon Project using the Neon Console and open the **Settings** > **Postgres** page. From here, follow the instructions to enable logical replication:
 
 ![Neon dashboard settings with option to enable logical replication](/docs/guides/neon-console-settings-logical-replication.png)
 
@@ -42,7 +42,7 @@ Navigate to your Neon Project using the Neon Console and open the **Settings** >
 
 Your Neon database is now ready to work with Inngest.
 
-To configure the Inngest Neon Integration, navigate to the Inngest Platform, open the [Integrations page](https://app.inngest.com/settings/integrations?utm_source=neon&utm_medium=trigger-serverless-functions-guide), and follow the instructions of the [Neon Integration installation wizard](https://app.inngest.com/settings/integrations/neon/connect?utm_source=neon&utm_medium=trigger-serverless-functions-guide):
+To configure the Inngest Neon Integration, navigate to the Inngest Platform, open the [Integrations page](https://app.inngest.com/settings/integrations?utm_source=neon&utm_medium=logical-replication-guide), and follow the instructions of the [Neon Integration installation wizard](https://app.inngest.com/settings/integrations/neon/connect?utm_source=neon&utm_medium=logical-replication-guide):
 
 ![Neon integration card inside the Inngest integrations page](/docs/guides/inngest-integrations-page.png)
 
@@ -54,7 +54,7 @@ You can find your admin Neon database connection credentials by clicking the **C
 
 ## Example: Replicating data to Amplitude
 
-The below example demonstrates how to replicate new `users` table rows to Amplitude using Amplitude's API.
+The following example shows how to replicate new `users` table rows to Amplitude using Amplitude's API.
 
 Once the Inngest integration is installed, a flow of `"db/*"` events will be created when updates are made to your database.
 
@@ -90,7 +90,7 @@ Such events can be used to trigger Inngest functions to transform and replicate 
 
 ```typescript
 // inngest/functions/users-replication.ts
-import { inngest } from './client';
+import { inngest } from '../client';
 
 export const updateAmplitudeUserMapping = inngest.createFunction(
   { id: 'update-amplitude-user-mapping' },

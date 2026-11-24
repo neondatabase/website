@@ -31,6 +31,8 @@ updatedOn: '2026-06-05T17:20:32.620Z'
 The `pg_session_jwt` extension is automatically installed when you enable the [Neon Data API](/docs/data-api/overview) for a branch. Do not install this extension manually.
 </Admonition>
 
+`pg_session_jwt` isn't available on Postgres 19 yet, so the Data API doesn't support Postgres 19 projects.
+
 The `pg_session_jwt` extension is a Postgres extension designed to handle authenticated sessions through JSON Web Tokens (JWTs). When configured with a JWK (JSON Web Key), it verifies JWT authenticity. When operating without a JWK, it falls back to using PostgREST-compatible JWT claims.
 
 This extension powers the [Neon Data API](/docs/data-api/overview), enabling secure session management and Row-Level Security (RLS) based on user identity.

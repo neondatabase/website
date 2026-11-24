@@ -7,6 +7,7 @@ summary: >-
   OAuth. Claude Desktop can also load the Neon MCP Server from
   claude_desktop_config.json through the mcp-remote bridge.
 enableTableOfContents: true
+updatedOn: '2026-11-05T21:35:15.000Z'
 ---
 
 Claude.ai and Claude Desktop connect to Neon through the hosted [Neon MCP Server](/docs/ai/neon-mcp-server), which is an official Claude connector. Add the connector once and sign in, and Claude can manage your projects, branches, and SQL in natural language.

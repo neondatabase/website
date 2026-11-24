@@ -39,6 +39,11 @@ const defaultConfig = {
       './public/images/og-image/docs-background.jpg',
       './public/images/technology-logos/neon-dark.svg',
     ],
+    '/mcp-server/stats/og': [
+      './src/fonts/geist-mono/GeistMono-Regular.ttf',
+      './src/fonts/inter/Inter-Regular.ttf',
+      './public/images/og-image/logo.png',
+    ],
     // The blog `.md` route handler reads the blog snapshot from disk at request
     // time (unlike the blog pages, which are statically generated at build).
     // Its read path is dynamic (process.cwd() + join), so nft can't detect the
@@ -300,6 +305,48 @@ const defaultConfig = {
         destination: '/about-us',
         permanent: true,
       },
+      ...['/plans', '/pricing/plans', '/pro', '/upgrade', '/premium'].map((source) => ({
+        source,
+        destination: '/pricing',
+        permanent: true,
+      })),
+      ...['/developer', '/developers'].map((source) => ({
+        source,
+        destination: '/docs',
+        permanent: true,
+      })),
+      {
+        source: '/api',
+        destination: '/docs/reference/api',
+        permanent: true,
+      },
+      {
+        source: '/agent',
+        destination: '/docs/ai/agent-setup',
+        permanent: true,
+      },
+      // Agents request AGENTS.md the way they request llms.txt.
+      ...['/llms', '/AGENTS.md', '/agents.md'].map((source) => ({
+        source,
+        destination: '/llms.txt',
+        permanent: false,
+      })),
+      {
+        source: '/design',
+        destination: '/brand',
+        permanent: true,
+      },
+      {
+        source: '/docs/sitemap.xml',
+        destination: '/sitemap.xml',
+        permanent: true,
+      },
+      {
+        // The proxy maps /.well-known/agent-skills/<name>/SKILL.md to the vendored skill of the same name; there is no `postgres` skill.
+        source: '/.well-known/agent-skills/postgres/SKILL.md',
+        destination: '/.well-known/agent-skills/neon-postgres/SKILL.md',
+        permanent: true,
+      },
       {
         // Legacy favicon path removed in #4345; redirect stale references to the current icon.
         source: '/favicon/favicon.png',
@@ -309,6 +356,11 @@ const defaultConfig = {
       {
         source: '/guides/neondatabase-toolkit',
         destination: '/docs/reference/sdk',
+        permanent: true,
+      },
+      {
+        source: '/guides/vector-search',
+        destination: '/docs/ai/lakebase-search-get-started',
         permanent: true,
       },
       {
@@ -2275,7 +2327,7 @@ const defaultConfig = {
       // Proxy has an error message, that suggests to read `https://neon.com/sni` for more details.
       {
         source: '/sni',
-        destination: '/docs/connect/connection-errors',
+        destination: '/docs/connect/connection-errors#the-endpoint-id-is-not-specified',
         permanent: true,
       },
       // NOTE: bare `/docs` is the docs front page (src/app/(docs)/docs/page.jsx) and

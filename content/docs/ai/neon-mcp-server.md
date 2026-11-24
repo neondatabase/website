@@ -8,7 +8,7 @@ summary: >-
 enableTableOfContents: true
 redirectFrom:
   - /docs/ai/mcp
-updatedOn: '2026-11-06T11:14:41.532Z'
+updatedOn: '2026-11-17T18:21:44.521Z'
 ---
 
 The Neon MCP Server implements the Model Context Protocol (MCP), letting AI assistants interact with your Neon projects on your behalf. Your AI agent can interact with Neon via MCP tools or by running [Neon CLI](/docs/cli) commands directly.
@@ -138,6 +138,28 @@ Create the role with SQL, as shown above, or create a read-only or read-write ro
 - The role applies to SQL only. Combine it with `readonly=true` and `category` to limit Management API tools too.
 - With OAuth, `roleName` on the URL is fixed when you authorize. With the plain `https://mcp.neon.tech/mcp` URL, enter the role in the optional **Postgres role** field on the authorization page instead.
 
+### Secrets in tool results
+
+Set `?secrets=<mode>` to choose which secrets tool results show. Hidden values read `***redacted***`.
+
+| Mode              | Tool results show                                                                                                                                                        |
+| ----------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `setup` (default) | Credentials Neon issues: connection strings, Postgres role passwords, credential tokens, presigned URLs, and the Neon Auth server key, OAuth client and Realtime secrets |
+| `all`             | Setup credentials, plus the secrets you stored in Neon Auth: OAuth provider client secrets and the SMTP password                                                         |
+| `none`            | No secrets. Tools whose result is only a secret, such as `get_connection_string`, `get_realtime_secret`, and `rotate_credential`, are hidden                             |
+
+```
+https://mcp.neon.tech/mcp?secrets=none
+```
+
+Secrets a tool returns reach your AI client's model provider and its transcript. Use `none` when the agent doesn't need them, for example when your app already reads its connection string from an environment variable.
+
+- Read-only connections show no secrets.
+- A [pinned Postgres role](#postgres-role) hides the passwords in `list_postgres_roles` and `get_postgres_role`.
+- With API key auth, the `X-Neon-Secrets` header can tighten the URL's mode, never loosen it.
+- With OAuth, `secrets` on the URL is fixed when you authorize. With the plain `https://mcp.neon.tech/mcp` URL, choose under **Secrets in tool results** on the authorization page instead.
+- Under `none`, a create that returns its secret only once still runs, for example `create_auth_oauth_client`, and that secret can't be read again.
+
 ## MCP security guidance
 
 We recommend MCP for **development and testing only**, not production environments.
@@ -148,7 +170,7 @@ We recommend MCP for **development and testing only**, not production environmen
 - Always review and authorize LLM-requested actions before execution
 - Restrict MCP access to trusted users and regularly audit access
 
-To limit what an agent can do, combine [read-only mode](#read-only-mode), a [Postgres role](#postgres-role) with limited grants, and [category filtering](#category-filtering).
+To limit what an agent can do, combine [read-only mode](#read-only-mode), a [Postgres role](#postgres-role) with limited grants, [category filtering](#category-filtering), and [`secrets=none`](#secrets-in-tool-results).
 
 ### Check the authorization page
 

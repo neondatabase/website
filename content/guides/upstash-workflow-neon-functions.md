@@ -4,7 +4,7 @@ subtitle: 'Learn how to build reliable, long-running multi-step pipelines by com
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2026-09-09T00:00:00.000Z'
-updatedOn: '2026-09-21T17:34:26.747Z'
+updatedOn: '2026-11-09T23:20:10.000Z'
 ---
 
 If you're building a backend that runs long jobs, you need a way to execute each step reliably and keep track of state between them. Maybe it's a sequence of onboarding emails spread over a few days, an AI pipeline where each model call depends on the previous one's output, or a weekly report that takes minutes to generate. If the request times out or the server restarts halfway through, the job can stop, and restarting it often means repeating steps that already succeeded.

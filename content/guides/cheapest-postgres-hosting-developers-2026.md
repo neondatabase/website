@@ -5,6 +5,7 @@ author: rishi-raj-jain
 excludeFromBlog: true
 enableTableOfContents: true
 createdAt: '2026-11-09T00:00:00.000Z'
+updatedOn: '2026-11-10T18:16:57.000Z'
 ---
 
 A lot of Postgres hosts say they're free, but "free" can mean a lot of things. It can be as generous as 100 databases with no time limit ([yes, really](/pricing)), or as limited as a 30-day trial that needs a credit card.

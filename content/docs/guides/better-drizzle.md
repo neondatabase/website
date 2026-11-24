@@ -8,7 +8,7 @@ summary: >-
   defineRelations, seed data, run CRUD queries, use plugins, and manage
   transactions with savepoints.
 enableTableOfContents: true
-updatedOn: '2026-10-08T19:32:04.700Z'
+updatedOn: '2026-11-18T16:41:34.386Z'
 ---
 
 <InfoBlock>
@@ -645,7 +645,7 @@ To explore more advanced capabilities of better-drizzle, refer to the following 
 - [better-drizzle documentation](https://better-drizzle.com/docs)
 - [better-drizzle GitHub repository](https://github.com/almeidazs/better-drizzle)
 - [Neon Drizzle setup guide](/docs/guides/drizzle)
-- [Schema migration with Neon and Drizzle](/docs/guides/drizzle-migrations)
+- [Schema migration with Drizzle ORM and Lakebase Postgres on Neon](/docs/guides/drizzle-migrations)
 - [Realtime live SQL queries with Drizzle](/docs/realtime/examples/drizzle)
 
 <NeedHelp />

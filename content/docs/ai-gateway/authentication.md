@@ -7,7 +7,7 @@ summary: >-
   created on your main branch works in all preview branches. No provider
   API keys are required.
 enableTableOfContents: true
-updatedOn: '2026-10-09T09:48:21.765Z'
+updatedOn: '2026-11-18T08:10:37.191Z'
 ---
 
 AI Gateway uses Neon bearer credentials, the same scoped-credential system as [Object Storage](/docs/storage/authentication): one credential API mints branch-scoped tokens that differ by scope (AI Gateway uses `ai_gateway:invoke`). No provider API keys are needed.
@@ -186,12 +186,13 @@ This design lets you use a single credential across your entire development work
 
 ## Common auth errors
 
-| Error                     | Cause                                      | Fix                                                                                                                             |
-| ------------------------- | ------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------- |
-| `401 Unauthorized`        | Missing or invalid credential              | Check that `NEON_AI_GATEWAY_TOKEN` is set and contains the full token                                                           |
-| `403 Forbidden`           | Credential lacks `ai_gateway:invoke` scope | Recreate the credential with the correct scope                                                                                  |
-| `403 Forbidden`           | Branch not in credential lineage           | Use a credential created on this branch or an ancestor branch. The gateway returns: `credential not authorized for this branch` |
-| `503 Service Unavailable` | Auth store temporarily unavailable         | Retry the request                                                                                                               |
+| Error                     | Cause                                      | Fix                                                                                                                                           |
+| ------------------------- | ------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------- |
+| `401 Unauthorized`        | Missing or invalid credential              | Check that `NEON_AI_GATEWAY_TOKEN` is set and contains the full token                                                                         |
+| `403 Forbidden`           | Credential lacks `ai_gateway:invoke` scope | Recreate the credential with the correct scope                                                                                                |
+| `403 Forbidden`           | Branch not in credential lineage           | Use a credential created on this branch or an ancestor branch. The gateway returns: `credential not authorized for this branch`               |
+| `403 Forbidden`           | No payment card and no AI Gateway credits  | Add a payment card and buy credits on the **Billing** page. See [Troubleshooting](/docs/ai-gateway/troubleshooting#403-no-ai-gateway-credits) |
+| `503 Service Unavailable` | Auth store temporarily unavailable         | Retry the request                                                                                                                             |
 
 ## Rotating credentials
 

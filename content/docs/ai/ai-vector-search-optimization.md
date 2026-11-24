@@ -12,7 +12,7 @@ summary: >-
   speed than IVFFlat at the cost of higher build time and memory; IVFFlat
   requires existing data before the index can be created.
 enableTableOfContents: true
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-11-13T20:59:05.000Z'
 ---
 
 <LakebaseVectorTip />

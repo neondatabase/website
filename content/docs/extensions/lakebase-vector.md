@@ -10,7 +10,7 @@ summary: >-
   lakebase_ann.epsilon, and lakebase_ann.prefilter GUCs, and reference all
   operator classes and index options.
 enableTableOfContents: true
-updatedOn: '2026-09-09T10:20:49.000Z'
+updatedOn: '2026-10-28T15:12:08.000Z'
 ---
 
 The `lakebase_vector` extension adds the `lakebase_ann` index type to Postgres for approximate nearest-neighbor (ANN) vector search. It is a drop-in companion to `pgvector`: the same `vector` types, distance operators, and query syntax work unchanged; only the index type changes.
