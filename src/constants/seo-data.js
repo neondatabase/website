@@ -68,6 +68,12 @@ export default {
       'Let agents provision a temporary Neon project (Lakebase Postgres, Data API, and Managed Better Auth) before a human creates a Neon account.',
     pathname: LINKS.claimableNeon,
   },
+  onboardAgentSetup: {
+    title: 'Set up your agent for Neon',
+    description: 'Paste this prompt into your coding agent to set it up to work with Neon.',
+    pathname: LINKS.onboardAgentSetup,
+    robotsNoindex: 'noindex',
+  },
   functions: {
     title: 'Neon Functions — Long-running serverless functions',
     description:
