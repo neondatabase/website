@@ -17,22 +17,40 @@ redirectFrom:
   - /docs/guides/connection-pooling
   - /docs/introduction/connection-pooling
   - /docs/manage/connection-pooling
-updatedOn: '2026-11-24T15:58:19.058Z'
+updatedOn: '2026-11-24T16:04:19.153Z'
 ---
 
 Use the pooled connection for your app. Use a direct connection only for work that needs one continuous session, like schema migrations or `pg_dump`.
 
 ## Pooled connections
 
-A pooled connection reuses a small set of Postgres connections across many clients, so your app can open many connections at once without running into connection limits. The pooler accepts up to 10,000 concurrent connections. This is the right choice for most apps, including web and serverless apps. The pooled hostname ends in `-pooler`.
+<div className="flex items-center gap-6 sm:flex-col">
+  <div style={{ flex: '1 1 50%' }}>
+
+    A pooled connection reuses a small set of Postgres connections across many clients, so your app can open many connections at once without running into connection limits. The pooler accepts up to 10,000 concurrent connections. This is the right choice for most apps, including web and serverless apps. The pooled hostname ends in `-pooler`.
+
+  </div>
+  <div style={{ flex: '1 1 50%' }}>
 
 <InlineSvg src="/docs/connect/pooled-connection.svg" title="Many app connections enter the pooler and are shared over a few Postgres sessions, up to 10,000 connections." />
 
+  </div>
+</div>
+
 ## Direct connections
 
-A direct connection is its own continuous, dedicated Postgres session, up to your compute's connection limit. Use it for work that needs one stable session, like the cases below.
+<div className="flex items-center gap-6 sm:flex-col">
+  <div style={{ flex: '1 1 50%' }}>
+
+    A direct connection is its own continuous, dedicated Postgres session, up to your compute's connection limit. Use it for work that needs one stable session, like the cases below.
+
+  </div>
+  <div style={{ flex: '1 1 50%' }}>
 
 <InlineSvg src="/docs/connect/direct-connection.svg" title="Each app connection holds its own dedicated Postgres session, up to the compute's connection limit." />
+
+  </div>
+</div>
 
 ## When to use pooled vs direct connections
 
