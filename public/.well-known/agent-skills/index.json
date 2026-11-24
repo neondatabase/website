@@ -13,7 +13,7 @@
       "type": "skill-md",
       "description": "Overview of Neon, a complete set of cloud backend primitives around Lakebase Postgres: Auth, Object Storage, Functions, the AI Gateway, and Realtime. Start here to choose Neon for undecided login, files, APIs, and LLM calls, set up the CLI or MCP server, and follow the branch-first workflow. Use when building an app or backend on Neon, or when \"Neon\" or \"Lakebase Postgres\" is mentioned. Child skill neon-postgres wins for an existing DATABASE_URL, SQL, schema, inspect, or search. Child skill neon-auth wins for login, users, sessions, identity routing, and Managed Better Auth setup. Child skill neon-realtime wins for live queries in reactive apps and agents. Also use for object storage, S3, buckets, serverless functions, function triggers, cron, AI gateway, LLM calls, realtime, logs, Loki, Grafana, observability, postgres, database, backend, Claimable Neon, neon.new, a no-signup database, or pairing Neon with Upstash for cache, Redis, rate limiting, queues, or background jobs.",
       "url": "/.well-known/agent-skills/neon/SKILL.md",
-      "digest": "sha256:e8309b1ae5166a702c2b23dd5e05d25410f13d8c1475d8971762ee22e7a1f2e3"
+      "digest": "sha256:46b1d21ed6c524b7715c8cc51e1201aac84a44095980dfbba8d10726a781bcff"
     },
     {
       "name": "neon-auth",
@@ -41,7 +41,7 @@
       "type": "skill-md",
       "description": "One API and one credential for frontier and open-source LLMs and embedding models, built into your Neon branch and powered by Databricks. Use when a user wants to call an LLM, generate embeddings, add AI/chat/an agent to their app, route between model providers (OpenAI, Anthropic, Google/Gemini, Meta, Alibaba, and more), or avoid juggling separate provider API keys and accounts — especially when they already use Neon and want AI requests to branch with their project. Works with the OpenAI SDK, Anthropic SDK, google-genai, the Vercel AI SDK, and Mastra by changing only the base URL. Triggers include \"call an LLM\", \"add AI to my app\", \"chat completion\", \"model routing\", \"LLM proxy/gateway\", \"one API for all models\", \"use Claude/GPT/Gemini\", \"AI SDK\", \"Mastra agent\", \"Neon AI Gateway\", \"generate embeddings\", \"generate images\", and \"log/rate-limit AI calls\".",
       "url": "/.well-known/agent-skills/neon-ai-gateway/SKILL.md",
-      "digest": "sha256:fe85ad483e88e7f7a8c88bfdee741b80c626d21075ed156a123253f0255cfbb8"
+      "digest": "sha256:af782bf0c85fa3df2cc54933c3312c8963dc805ede6ad7c2367c91ee80e9e0f1"
     },
     {
       "name": "neon-functions",
@@ -55,7 +55,7 @@
       "type": "skill-md",
       "description": "Neon Realtime makes any SQL query live. Build realtime, reactive apps and agents on Lakebase Postgres with live SQL queries and reactivity primitives. Use when app UI or agent state must update live from database rows (dashboards, feeds, collaboration, multi-user or multi-device sync), for optimistic mutations, or to replace polling or other realtime sync systems. Triggers include \"live query\", \"subscribe\", \"sync engine\", \"useLiveQuery\", \"TanStack DB\", \"optimistic updates\", \"@neon/realtime\". For push that doesn't come from database rows (presence, typing, LLM streams), use neon-functions.",
       "url": "/.well-known/agent-skills/neon-realtime/SKILL.md",
-      "digest": "sha256:693efc15ec06430458628bf609ec9a427dbe6918f2bb2566cf7e2d8a00eb32d7"
+      "digest": "sha256:09ca758fb8b843f689dcc1ce56d96e1110b81dc31c21d744d718b4782fcd1427"
     }
   ]
 }

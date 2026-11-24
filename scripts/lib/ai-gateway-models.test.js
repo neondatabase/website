@@ -161,6 +161,14 @@ describe('toCatalogEntry', () => {
     };
     expect(toCatalogEntry(item).cost).toEqual({ input: 0.2, output: 0.12, cache_read: 0.005 });
   });
+
+  it('maps the image output rate of a model that bills image tokens separately', () => {
+    const item = {
+      ...GPT,
+      pricing: { prompt: '0.000002', completion: '0.000012', image_output: '0.00012' },
+    };
+    expect(toCatalogEntry(item).cost).toEqual({ input: 2, output: 12, output_image: 120 });
+  });
 });
 
 describe('buildCatalog', () => {

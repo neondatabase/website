@@ -88,6 +88,10 @@ For markdown changes in `content/`, no manual step is needed. The pre-commit hoo
 
 The pre-push hook runs `npm run test:unit:run` automatically. If unit tests fail, the push is aborted.
 
+The hooks live in `.husky/`, and `npm install` points git at them. Git worktrees use the same setting, so each worktree runs its own branch's hooks. A new worktree has no `node_modules`, so run `npm ci --prefer-offline` in it before the first commit. Without dependencies, the hooks stop the commit and say so. Set `HUSKY=0` to skip the hooks.
+
+A CI check (`npm run check:updated-on`) adds a warning to a PR, without failing it, when a changed page in `content/{docs,guides,postgresql,branching,faqs}` kept its old `updatedOn`, which happens after a GitHub web edit or a commit that skipped the hooks. To fix it, run `npm run stamp:updated-on -- <files>` and commit the result.
+
 ## Environment Setup
 
 Copy `.env.example` to `.env` and configure. See internal Notion page for values.
@@ -618,3 +622,10 @@ This version has breaking changes — APIs, conventions, and file structure may 
 This block is written and re-added by `next dev` — verify at `node_modules/next/dist/server/lib/generate-agent-files.js`. Removing it from a diff only re-creates the uncommitted change; committing it with your work keeps the tree clean.
 
 <!-- END:nextjs-agent-rules -->
+
+<!-- copybook:start -->
+
+## Copybook
+
+The code snippets, shell commands, and coding-agent prompts in this product's UI are Copybook definitions, configured in `copybook.config.mjs`. Before changing one, run `npx copybook status --json`. After changing one, run `npx copybook snapshot` and `npx copybook check`, and commit the snapshots with the code. Markdown prompts from the config's `markdown` sources are their own snapshots, so editing one needs no snapshot. The Copybook skill in `.agents/skills/copybook` and the `copybook` MCP server have the details. Docs for agents: https://copybook.dev/llms.txt
+<!-- copybook:end -->

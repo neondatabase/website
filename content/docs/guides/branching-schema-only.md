@@ -11,7 +11,7 @@ summary: >-
   independent root branches with plan-specific storage limits; reset-from-parent
   is not available until the branch is restored.
 enableTableOfContents: true
-updatedOn: '2026-10-14T10:50:40.535Z'
+updatedOn: '2026-11-10T14:01:14.000Z'
 ---
 
 <FeatureBeta />

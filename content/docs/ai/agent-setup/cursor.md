@@ -11,6 +11,7 @@ enableTableOfContents: true
 agentPrompt: I use Cursor.
 redirectFrom:
   - /docs/ai/ai-cursor-plugin
+updatedOn: '2026-11-05T23:08:56.000Z'
 ---
 
 The Neon plugin gives Cursor Neon's agent skills, so it knows how to build on Neon, and the Neon MCP Server, so it can act on your Neon account.

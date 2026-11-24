@@ -3,15 +3,15 @@ title: 'Where do I find a copy-pasteable Postgres connection string in Neon?'
 subtitle: 'Click Connect in the Neon Console, pick a branch, compute, database, and role, and copy the string or a framework snippet.'
 enableTableOfContents: true
 createdAt: '2026-05-18T00:00:00.000Z'
-updatedOn: '2026-09-23T21:00:25.204Z'
+updatedOn: '2026-11-20T14:29:56.440Z'
 isDraft: false
 redirectFrom: []
 previousLink:
   title: 'Where should an AI agent store the files it generates?'
   slug: where-ai-agents-store-generated-files
 nextLink:
-  title: ''
-  slug: ''
+  title: 'Why is my Postgres egress so high, and how do I reduce it?'
+  slug: why-postgres-egress-high-how-reduce
 ---
 
 Open your project in the [Neon Console](https://console.neon.tech), click **Connect** in the Console nav, and copy the connection string from the **Connect to your branch** modal. You choose the branch, compute, database, and role, and the modal builds the string for that selection. The modal also shows connection examples for common frameworks and languages ([Connect from any application](/docs/connect/connect-from-any-app)).

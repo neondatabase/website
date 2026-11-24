@@ -4,7 +4,7 @@ subtitle: 'Using Realtime with your Kysely schema and queries.'
 summary: >-
   Use Kysely with Neon Realtime: add the Kysely adapter, seal a Kysely select, keep live rows typed and return the txid from Kysely writes.
 enableTableOfContents: true
-updatedOn: '2026-10-20T14:31:30.000Z'
+updatedOn: '2026-11-18T00:59:49.148Z'
 ---
 
 This page shows how to build a Realtime app with [Kysely](https://kysely.dev), using your existing schema, queries, types and writes.
@@ -30,7 +30,7 @@ npm install -D @types/pg
 
 ### Create the Realtime server
 
-Pass `kyselyAdapter()` to [`createRealtime`](../sdks/typescript#backend-createrealtime), so the Realtime server accepts Kysely queries:
+Pass `kyselyAdapter()` to [`createRealtime`](../sdks/typescript/backend#backend-createrealtime), so the Realtime server accepts Kysely queries:
 
 ```ts filename="src/server.ts" {2,7}
 import { createRealtime } from "@neon/realtime/server"
@@ -43,7 +43,7 @@ const realtime = createRealtime({
 })
 ```
 
-- [`kyselyAdapter()`](../sdks/typescript#kysely-kyselyadapter) takes no options. When you seal a Kysely select, it compiles it to SQL and bind parameters
+- [`kyselyAdapter()`](../sdks/typescript/kysely#kysely-kyselyadapter) takes no options. When you seal a Kysely select, it compiles it to SQL and bind parameters
 - `db` is the database name, not a Kysely instance. The example derives it from `DATABASE_URL` with `@neon/env` (as `postgresDatabaseName` in `src/env.ts`), reads the secret from the same parsed env, and keeps `NEON_REALTIME_SECRET` [on the server](../guides/queries#sealing-queries)
 - the same server still seals [`rawSql`](../guides/queries#using-raw-sql) queries, so you can mix the two
 
@@ -59,7 +59,7 @@ Your `Database` interface stays plain Kysely. Use the column names as its keys:
 import type { Generated, Selectable } from "kysely"
 
 // Kysely's types for the table. src/setup.ts creates it.
-// Keys equal the column names: Realtime builds live rows from PostgreSQL's result names, so the
+// Keys equal the column names: Realtime builds live rows from Postgres's result names, so the
 // live rows and the rows the server reads share the same keys.
 export interface TodosTable {
   id: Generated<number> // SERIAL PRIMARY KEY
@@ -166,16 +166,16 @@ The adapter doesn't check the SQL. That happens when a client subscribes, so a q
 
 This example seals a single query with no parameters. When a query does need a parameter (like a user ID or search term) Kysely compiles each value to a bind parameter. The adapter encodes values the way node-postgres does, and Postgres infers each parameter's type from the SQL.
 
-Where Postgres can't infer a parameter's type from the SQL, wrap the value in a [`pgParam`](../sdks/typescript#backend-pgparam) helper for a built-in type, inside a `sql` template.
+Where Postgres can't infer a parameter's type from the SQL, wrap the value in a [`pgParam`](../sdks/typescript/backend#backend-pgparam) helper for a built-in type, inside a `sql` template.
 
 ## Subscribing to queries
 
-Subscribe in the browser as the [subscribing guide](../guides/subscribing) shows. The client needs no Kysely-specific parsers: its defaults decode like node-postgres, which `PostgresDialect` uses, so each live row is the same `{ id, title, completed }` — a number, a string and a boolean — that Kysely reads on the server.
+Subscribe in the browser as the [subscribing guide](../guides/subscribing) shows. The client needs no Kysely-specific parsers: its defaults decode like node-postgres, which `PostgresDialect` uses, so each live row is the same `{ id, title, completed }` (a number, a string and a boolean) that Kysely reads on the server.
 
-[`seal()`](../sdks/typescript#backend-realtimeserverseal) infers the row type from the select: `realtime.seal({ query: selectTodos() })` resolves to a [`SealedLiveQuery<Todo>`](../sdks/typescript#backend-sealedlivequery).
+[`seal()`](../sdks/typescript/backend#backend-realtimeserverseal) infers the row type from the select: `realtime.seal({ query: selectTodos() })` resolves to a [`SealedLiveQuery<Todo>`](../sdks/typescript/backend#backend-sealedlivequery).
 
 - to name the row type in the browser, use `import type { Todo } from "../../src/schema.js"`. TypeScript erases the import, so Kysely and your server code stay out of the browser bundle
-- if your dialect runs on another driver, pass its parsers, such as [`postgresJsParsers`](../sdks/typescript#client-postgresjsparsers). For custom types, register a parser with [`defineParsers`](../sdks/typescript#client-defineparsers)
+- if your dialect runs on another driver, pass its parsers, such as [`postgresJsParsers`](../sdks/typescript/client#client-postgresjsparsers). For custom types, register a parser with [`defineParsers`](../sdks/typescript/client#client-defineparsers)
 - for the rest, see [subscribing to the sealed query](../guides/subscribing#subscribe-to-the-sealed-query) and the [React and TanStack&nbsp;DB bindings](../guides/reactivity)
 
 ## Optimistic mutations
@@ -184,10 +184,11 @@ The client holds each optimistic change until the write's transaction ID comes b
 
 ### Return the txid from Kysely writes
 
-Return the [transaction ID](../guides/mutations#returning-the-txid-from-your-backend) from the write's own statement, with `.returning()`. Every mutation in the example — insert, toggle and delete — returns it. The example is a plain Node HTTP server; here is its toggle handler:
+Return the [transaction ID](../guides/mutations#returning-the-txid-from-your-backend) from the write's own statement, with `.returning()`. Every mutation in the example (insert, toggle and delete) returns it. The example is a plain Node HTTP server; here is its toggle handler:
 
-```ts filename="src/server.ts" {5,12}
+```ts filename="src/server.ts" {6,13}
 import { sql } from "kysely"
+import type { MutationResponse } from "./api-types.js" // { readonly txid: string }
 
 // Same statement on every mutation: the client waits for this txid over Realtime before dropping
 // its optimistic state, so the write must keep returning it.
@@ -207,7 +208,7 @@ return result
 
 - `pg_current_xact_id()` runs in the write's statement, so it returns the ID of the transaction that made the change, with any driver. The `text` cast keeps the 64-bit ID exact, as the decimal string the client waits for
 - `executeTakeFirst()` returns `undefined` when no row matched. Nothing comes over Realtime, so the handler responds `404` and the client has nothing to wait for
-- the insert returns the new `id` too, with `.returning(["id", txid])`, so the client can swap its optimistic row for the real one. This demo doesn't authenticate its routes — add authorization before adapting it for production
+- the insert returns the new `id` too, with `.returning(["id", txid])`, so the client can swap its optimistic row for the real one. This demo doesn't authenticate its routes. Add authorization before adapting it for production
 - for writes that span several statements, run them all on `trx` in `db.transaction().execute(async (trx) => ...)`, and read the txid there with `trx.selectNoFrom(txid).executeTakeFirstOrThrow()`
 - call it from a route or server function, and see how the frontend [calls these writes](../guides/mutations#calling-the-routes-from-the-frontend)
 
@@ -216,13 +217,13 @@ return result
 These don't work as live queries:
 
 - **`CamelCasePlugin`.** Its result transform doesn't apply to live rows, so they keep the snake_case column names while Kysely types camelCase keys. Aliases don't help, because the plugin snake-cases them too. Remove the plugin and use the column names as keys. For a camelCase field, alias the column, as in `"created_at as createdAt"`
-- **anything but a select builder.** TypeScript rejects an executed result, a compiled query, an insert, update or delete builder, and a bare `` sql`...` `` template. Pass the builder from `selectFrom()`, and seal raw SQL with [`rawSql`](../sdks/typescript#backend-rawsql)
+- **anything but a select builder.** TypeScript rejects an executed result, a compiled query, an insert, update or delete builder, and a bare `` sql`...` `` template. Pass the builder from `selectFrom()`, and seal raw SQL with [`rawSql`](../sdks/typescript/backend#backend-rawsql)
 
 ## Next steps
 
 - read the [queries guide](../guides/queries)
 - see how the client applies writes optimistically in the [mutations guide](../guides/mutations)
-- look up `kyselyAdapter()` in the [Kysely section of the SDK reference](../sdks/typescript#kysely)
+- look up `kyselyAdapter()` in the [Kysely section of the SDK reference](../sdks/typescript/kysely)
 - browse the full [`realtime/with-kysely`](https://github.com/neondatabase/examples/tree/main/realtime/with-kysely) example on GitHub
 
 <NeedHelp/>

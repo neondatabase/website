@@ -3,7 +3,7 @@ import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 
 import { BASE_AGENT_PROMPT } from 'components/pages/doc/agent-setup-button';
 
-import MODALS from './data';
+import MODALS, { DISABLED_MODALS } from './data';
 import Modal from './modal';
 
 const sendGtagEvent = vi.fn();
@@ -23,7 +23,7 @@ vi.mock('icons/docs/providers/cursor.inline.svg', () => ({
   default: (props) => <svg data-testid="mark-cursor" {...props} />,
 }));
 
-const agentSetupModal = MODALS.find((modal) => modal.id === 'docs-agent-setup');
+const agentSetupModal = DISABLED_MODALS.find((modal) => modal.id === 'docs-agent-setup');
 
 describe('docs agent-setup modal entry', () => {
   beforeEach(() => {
@@ -39,7 +39,8 @@ describe('docs agent-setup modal entry', () => {
     vi.restoreAllMocks();
   });
 
-  it('is registered in MODALS targeting all docs pages with the base agent prompt', () => {
+  it('is switched off: kept in DISABLED_MODALS, not in MODALS, so no docs page shows it', () => {
+    expect(MODALS.find((modal) => modal.id === 'docs-agent-setup')).toBeUndefined();
     expect(agentSetupModal).toBeDefined();
     expect(agentSetupModal.targeting).toEqual({ all: true });
     // Guard against a silent undefined === undefined pass if the named export regresses.

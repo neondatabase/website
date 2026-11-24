@@ -10,7 +10,7 @@ summary: >-
   migration workflow across multiple Neon branches or environments, see the
   companion guide on multiple database environments.
 enableTableOfContents: true
-updatedOn: '2026-09-16T19:45:35.340Z'
+updatedOn: '2026-11-15T10:59:48.000Z'
 ---
 
 Flyway is a database migration tool that provides version control for databases. It allows developers to manage and track changes to the database schema, ensuring that the database evolves consistently across different environments.

@@ -1,5 +1,5 @@
 ---
-title: Schema migration with Lakebase Postgres and Ruby on Rails
+title: Schema migration with Ruby on Rails and Lakebase Postgres on Neon
 subtitle: Set up a database on Neon and run migrations for your Rails project
 summary: >-
   Ruby on Rails Active Record migrations against Lakebase Postgres use a direct
@@ -9,7 +9,7 @@ summary: >-
   `rails db:migrate` to create tables, and applying incremental schema changes
   such as adding a new column with a follow-on migration.
 enableTableOfContents: true
-updatedOn: '2026-10-28T11:11:18.780Z'
+updatedOn: '2026-11-18T16:41:34.386Z'
 ---
 
 [Ruby on Rails](https://rubyonrails.org/) is a web application framework for Ruby. It provides an ORM (Object-Relational Mapping) layer called `Active Record`, which handles database interactions and schema management. Rails also includes a migration system that lets you define and manage database schema changes over time.

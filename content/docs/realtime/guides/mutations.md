@@ -1,10 +1,10 @@
 ---
 title: 'Optimistic mutations'
-subtitle: 'Make apps and agents super fast, with instant local writes.'
+subtitle: 'Show writes instantly in apps and agents, before the server confirms them.'
 summary: >-
   Write through your own backend, return the transaction id, apply the change optimistically and drop the optimistic state once the change arrives on the live query. Without a framework, with React useOptimistic or with TanStack DB.
 enableTableOfContents: true
-updatedOn: '2026-11-05T01:10:58.303Z'
+updatedOn: '2026-11-18T00:59:49.148Z'
 ---
 
 Apply instant local writes using [optimistic mutations](#how-optimistic-mutations-work) that [automatically discard their optimistic state](#automatic-management-of-optimistic-state) when the changes [sync in through your live&nbsp;query subscriptions](./subscribing#listen-for-changes).
@@ -13,7 +13,7 @@ Apply instant local writes using [optimistic mutations](#how-optimistic-mutation
 
 Normally, with online systems, you first send writes to the server and then display them to the user once the server has written to the database and responded successfully. Depending on network connectivity and system uptime, this can be slow or broken.
 
-With optimistic mutations, you first display the write to the user and only then send to the server in the background. This makes apps feel super-fast and responsive, as well as resilient to connectivity or downtime issues.
+With optimistic mutations, you first display the write to the user and only then send to the server in the background. This makes apps feel responsive, and keeps them usable when the connection is slow or drops.
 
 ### Automatic management of optimistic state
 
@@ -21,7 +21,7 @@ Realtime allows you to automate the management and lifecycle of your optimistic 
 
 1. apply the change to local, optimistic state, so the UI updates straight away
 2. send the write through your backend, with your normal validation, authorization and backend logic, which returns the [ID of the transaction](https://www.postgresql.org/docs/current/transaction-id.html) that made it
-3. wait until the subscription has synced that transaction, using [`awaitTxId()`](../sdks/typescript#client-materializedlivequerysubscriptionawaittxid)
+3. wait until the subscription has synced that transaction, using [`awaitTxId()`](../sdks/typescript/client#client-materializedlivequerysubscriptionawaittxid)
 4. drop the optimistic state
 5. if the write fails, or the transaction doesn't sync before the timeout, drop the optimistic state and show an error
 
@@ -29,7 +29,7 @@ Realtime allows you to automate the management and lifecycle of your optimistic 
 
 ## Running example
 
-Let's return to our running example, flesh out the backend server, call its new routes from the frontend and add some shared frontend helpers.
+This section returns to the running example to flesh out the backend server, call its new routes from the frontend and add some shared frontend helpers.
 
 ### Returning the `txid` from your backend
 
@@ -510,7 +510,7 @@ export function Messages({ sealedQuery, refreshQuery, initialData, channelId, us
 }
 ```
 
-`mutate()` runs each mutation in its own transition, so independent writes run concurrently. The transition applies the mutation optimistically, writes through your backend and, if the write committed, waits for its txid with [`utils.awaitTxId()`](../sdks/typescript#react-uselivequeryutils). When the transition ends, React drops its optimistic change. By then the change is in `data`, with the same id for a sent message, so the list doesn't flicker. If the write fails or isn't confirmed in time, the optimistic change drops the same way, the message reverts and the error line shows.
+`mutate()` runs each mutation in its own transition, so independent writes run concurrently. The transition applies the mutation optimistically, writes through your backend and, if the write committed, waits for its txid with [`utils.awaitTxId()`](../sdks/typescript/react#react-uselivequeryutils). When the transition ends, React drops its optimistic change. By then the change is in `data`, with the same id for a sent message, so the list doesn't flicker. If the write fails or isn't confirmed in time, the optimistic change drops the same way, the message reverts and the error line shows.
 
 Edit and Delete show only on the user's own messages, and the routes still enforce authorship. They're disabled on pending messages, so you don't start a new change on a message whose last change isn't confirmed yet.
 
@@ -594,7 +594,7 @@ export function createMessagesCollection(sealedQuery: SealedLiveQuery<Message>) 
 export type MessagesCollection = ReturnType<typeof createMessagesCollection>
 ```
 
-While a handler runs, TanStack&nbsp;DB holds back synced changes. When the handler returns, it drops the optimistic state and applies the synced rows together, so a sent message's optimistic row gives way to its synced row, which has the same id, in a single step. If a handler throws, the optimistic change rolls back. [`collection.utils.awaitTxId()`](../sdks/typescript#tanstack-db-realtimecollectionutilsawaittxid) resolves once the transaction has entered TanStack&nbsp;DB's sync queue, and it takes the same explicit timeout.
+While a handler runs, TanStack&nbsp;DB holds back synced changes. When the handler returns, it drops the optimistic state and applies the synced rows together, so a sent message's optimistic row gives way to its synced row, which has the same id, in a single step. If a handler throws, the optimistic change rolls back. [`collection.utils.awaitTxId()`](../sdks/typescript/tanstack-db#tanstack-db-realtimecollectionutilsawaittxid) resolves once the transaction has entered TanStack&nbsp;DB's sync queue, and it takes the same explicit timeout.
 
 Then write through the collection. This is the optimistic version of `frontend/Inbox.tsx` from the [reactivity guide](./reactivity#query-the-collection). It runs the same local query, and its `insert()`, `update()` and `delete()` calls apply each change locally at once and call the matching handler:
 

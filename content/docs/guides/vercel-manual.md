@@ -10,7 +10,7 @@ summary: >-
   monorepo, or any setup requiring direct control over branch naming, seeding, and
   migrations.
 enableTableOfContents: true
-updatedOn: '2026-09-16T20:12:32.981Z'
+updatedOn: '2026-11-18T15:17:33.000Z'
 ---
 
 <InfoBlock>
@@ -79,13 +79,14 @@ If you simply want Neon and Vercel with minimal setup, stick to the managed inte
    PGDATABASE=dbname
    PGPASSWORD=AbC123dEf
    PGPORT=5432
+   PGSSLMODE=verify-full
    ```
 
    <Admonition type="note">
-   Neon uses the default Postgres port, `5432`.
+   Neon uses the default Postgres port, `5432`. Neon requires SSL, and the `PG*` variables don't carry the `sslmode` setting from a connection string, so set `PGSSLMODE` yourself. Without it, the connection fails with a `connection is insecure` error.
    </Admonition>
 
-4. Select which environments need database access (Production, Preview, Development) and click **Save**.
+4. Select which environments need database access (Production, Preview, Development) and click **Save**. To use the Development value on your machine, run `vercel env pull .env.local` in your project directory.
 
 5. Redeploy your application (or wait for your next deployment) for the variables to take effect.
 

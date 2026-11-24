@@ -1,42 +1,14 @@
-import { isAIAgentRequest } from './ai-agent-detection';
+import {
+  agentFamily,
+  classifyReader,
+  isAIAgentRequest,
+  isNonReadRequest,
+} from './ai-agent-detection';
 
 const BEACON_URL = 'https://neonapi.io/t.js';
 const BEACON_TIMEOUT_MS = 5000;
 
-// Fixed labels for diagnostics only. Keep the existing traffic classifier intact.
-function agentFamily(userAgent) {
-  const ua = userAgent.toLowerCase();
-  const families = [
-    'chatgpt-user',
-    'oai-searchbot',
-    'gptbot',
-    'claude-user',
-    'claude-searchbot',
-    'claudebot',
-    'perplexity',
-    'cursor',
-    'windsurf',
-    'copilot',
-    'curl',
-    'axios',
-    'got',
-  ];
-  return families.find((family) => ua.includes(family)) || 'other';
-}
-
-// Requests that aren't reads: Next.js router fetches (RSC payload requests from
-// a <Link>, both prefetches and the fetch on click that precedes a full
-// navigation) and browser prefetches (speculation rules, link rel=prefetch).
-// Counting them as agent pageviews inflates LLM stats: a <Link> to a page's own
-// .md made every human visit look like an agent read.
-export function isNonReadRequest(req) {
-  const headers = req.headers;
-  if (headers.get('rsc') || headers.get('next-router-prefetch')) return true;
-  const purpose = `${headers.get('sec-purpose') || ''} ${headers.get('purpose') || ''}`;
-  return purpose.toLowerCase().includes('prefetch');
-}
-
-async function sendPageview(req, context, { is404, branch, debug }) {
+async function sendPageview(req, context, { is404, branch, pageUrl, debug }) {
   const controller = new AbortController();
   const timer = setTimeout(() => controller.abort(), BEACON_TIMEOUT_MS);
   const startedAt = Date.now();
@@ -44,12 +16,23 @@ async function sendPageview(req, context, { is404, branch, debug }) {
 
   try {
     // Preserve the Zaraz payload and identity cookies; only add the correlation ID.
+    // llm_reader is the category: ai-assistant, ai-crawler, search-crawler,
+    // human, or unknown (classifyReader). A human pageview (a person opening a
+    // .md or a discovery file) has no agent flag and no LLMAGENT user-agent
+    // prefix. Every other reader keeps llm_agent: true and the prefix, so
+    // existing human counts that exclude llm_agent rows stay human-only.
+    const isAgent = context.reader !== 'human';
     const payload = {
       name: 'Pageview',
-      data: { llm_agent: true, llm_404: is404, llm_request_id: context.request_id },
+      data: {
+        llm_agent: isAgent,
+        llm_reader: context.reader,
+        llm_404: is404,
+        llm_request_id: context.request_id,
+      },
       zarazData: {
         c: req.headers.get('cookie') || '',
-        l: req.nextUrl?.href ?? req.url,
+        l: pageUrl ?? req.nextUrl?.href ?? req.url,
         r: req.headers.get('referer') || '',
       },
       system: { device: { ip: '192.168.0.1' } },
@@ -59,7 +42,7 @@ async function sendPageview(req, context, { is404, branch, debug }) {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'User-Agent': `LLMAGENT: ${req.headers.get('user-agent') || ''}`,
+        'User-Agent': `${isAgent ? 'LLMAGENT: ' : ''}${req.headers.get('user-agent') || ''}`,
       },
       body: JSON.stringify(payload),
       signal: controller.signal,
@@ -107,6 +90,7 @@ export function createLLMAnalytics(req) {
     method: req.method || 'GET',
     agent_family: agentFamily(req.headers.get('user-agent') || ''),
     agent_detected: isAIAgentRequest(req),
+    reader: classifyReader(req),
     deployment_sha: process.env.VERCEL_GIT_COMMIT_SHA || null,
   };
   let beacon = null;
@@ -114,13 +98,15 @@ export function createLLMAnalytics(req) {
   const nonRead = isNonReadRequest(req);
 
   return {
-    track({ is404 = false, branch = 'unspecified' } = {}) {
+    // pageUrl: record the read under this URL instead of the request URL (an
+    // agent's negotiated read of /blog/<slug> is recorded as /blog/<slug>.md).
+    track({ is404 = false, branch = 'unspecified', pageUrl } = {}) {
       if (nonRead) return Promise.resolve({ outcome: 'skipped_non_read' });
       // A failed markdown read can fall through into another branch. Never send
       // a second pageview for the same incoming request.
       if (!beacon) {
         beaconBranch = branch;
-        beacon = sendPageview(req, context, { is404, branch, debug });
+        beacon = sendPageview(req, context, { is404, branch, pageUrl, debug });
       }
       return beacon;
     },

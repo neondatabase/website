@@ -4,8 +4,8 @@ subtitle: Learn how to query project consumption metrics for usage-based plans u
   Neon API
 summary: >-
   The Neon consumption metrics API (/consumption_history/v2) returns project
-  usage metrics for compute, storage, data transfer, extra branches, and
-  Functions, plus per-branch metrics. It is available on Launch, Scale, Agent,
+  usage metrics for compute, storage, data transfer, extra branches,
+  Functions, AI Gateway, and Object Storage, plus per-branch metrics. It is available on Launch, Scale, Agent,
   and Enterprise plans. Use the project endpoint for project totals and
   invoicing inputs; use the branch endpoint to attribute compute, storage, and
   Functions usage to individual branches, CI environments, or development
@@ -15,15 +15,15 @@ redirectFrom:
   - /docs/guides/metrics-api
   - /docs/guides/partner-consumption-metrics
 enableTableOfContents: true
-updatedOn: '2026-10-31T12:33:31.190Z'
+updatedOn: '2026-11-20T15:24:42.221Z'
 ---
 
 Using the Neon API, you can query consumption metrics to track your resource usage. This page covers the two v2 metrics endpoints for usage-based plans. To monitor usage in the Console instead, see [Monitor billing and usage](/docs/introduction/monitor-usage).
 
-| API                               | Endpoint                           | Description                                                                                | Plan availability                |
-| --------------------------------- | ---------------------------------- | ------------------------------------------------------------------------------------------ | -------------------------------- |
-| **Project metrics (usage-based)** | `/consumption_history/v2/projects` | Returns project metrics for compute, storage, data transfer, extra branches, and Functions | Launch, Scale, Agent, Enterprise |
-| **Branch metrics**                | `/consumption_history/v2/branches` | Returns 10 project metrics broken down by branch, across one or more projects              | Launch, Scale, Agent, Enterprise |
+| API                               | Endpoint                           | Description                                                                                                            | Plan availability                |
+| --------------------------------- | ---------------------------------- | ---------------------------------------------------------------------------------------------------------------------- | -------------------------------- |
+| **Project metrics (usage-based)** | `/consumption_history/v2/projects` | Returns project metrics for compute, storage, data transfer, extra branches, Functions, AI Gateway, and Object Storage | Launch, Scale, Agent, Enterprise |
+| **Branch metrics**                | `/consumption_history/v2/branches` | Returns 17 project metrics broken down by branch, across one or more projects                                          | Launch, Scale, Agent, Enterprise |
 
 <Admonition type="tip">
 **Which API should I use?**
@@ -66,10 +66,20 @@ The response includes these usage metrics:
 | `functions_waiting_capacity_microseconds` | capacity-microseconds | Capacity-Hours      | Time Functions spend waiting on I/O                                                                                                                                                                            |
 | `functions_invocations`                   | invocations           | million invocations | Number of function calls                                                                                                                                                                                       |
 | `functions_egress_bytes`                  | bytes                 | GB                  | Data sent by Functions                                                                                                                                                                                         |
+| `ai_gateway_input_tokens`                 | tokens                | tokens              | Input tokens sent to models through the AI Gateway                                                                                                                                                             |
+| `ai_gateway_output_tokens`                | tokens                | tokens              | Output tokens returned by models through the AI Gateway                                                                                                                                                        |
+| `ai_gateway_total_tokens`                 | tokens                | tokens              | Input and output tokens combined                                                                                                                                                                               |
+| `ai_gateway_cached_input_tokens`          | tokens                | tokens              | Input tokens read from the prompt cache                                                                                                                                                                        |
+| `ai_gateway_cache_creation_tokens`        | tokens                | tokens              | Input tokens written to the prompt cache                                                                                                                                                                       |
+| `ai_gateway_reasoning_tokens`             | tokens                | tokens              | Reasoning tokens used by reasoning models                                                                                                                                                                      |
+| `object_storage_bytes_month`              | byte-months           | GB-months           | Object Storage used                                                                                                                                                                                            |
+| `object_storage_network_transfer_bytes`   | bytes                 | GB                  | Data sent out of Object Storage                                                                                                                                                                                |
 
 Use `snapshot_storage_bytes_month` for invoice-aligned, time-windowed snapshot storage reporting.
 
-The four Functions metrics are available from both v2 endpoints. For current Functions rates, see [Plans](/docs/introduction/plans#functions).
+The four Functions metrics, the six AI Gateway metrics, and `object_storage_network_transfer_bytes` are available from both v2 endpoints. `object_storage_bytes_month` is available only from this endpoint.
+
+The AI Gateway metrics are token counts summed across all models. They don't include cost or a per-model breakdown, and model prices differ, so to bill AI usage per project or branch, combine these counts with your own record of which models each one used. For current rates, see [AI Gateway pricing](/docs/introduction/plans#ai-gateway). For current Functions rates, see [Plans](/docs/introduction/plans#functions).
 
 To convert these raw values into readable units and, where applicable, calculate costs, see [Usage and cost calculations](/docs/introduction/usage-calculations).
 
@@ -79,7 +89,7 @@ To convert these raw values into readable units and, where applicable, calculate
 - **`to`** (date-time, required): End date-time for the consumption period in RFC 3339 format. The value is rounded according to the specified granularity. The range must respect the same granularity limits as `from`.
 - **`granularity`** (string, required): Granularity of consumption metrics. Hourly, daily, and monthly metrics are available for the last 168 hours, 60 days, and 1 year, respectively.
 - **`org_id`** (string, required): Organization for which the project consumption metrics should be returned.
-- **`metrics`** (array of strings, required): List of metrics to include in the response. Possible values: `compute_unit_seconds`, `root_branch_bytes_month`, `child_branch_bytes_month`, `instant_restore_bytes_month`, `snapshot_storage_bytes_month`, `public_network_transfer_bytes`, `private_network_transfer_bytes`, `extra_branches_month`, `functions_active_capacity_microseconds`, `functions_waiting_capacity_microseconds`, `functions_invocations`, `functions_egress_bytes`. Can be an array of parameter values or a comma-separated list in a single parameter value.
+- **`metrics`** (array of strings, required): List of metrics to include in the response. Possible values: `compute_unit_seconds`, `root_branch_bytes_month`, `child_branch_bytes_month`, `instant_restore_bytes_month`, `snapshot_storage_bytes_month`, `public_network_transfer_bytes`, `private_network_transfer_bytes`, `extra_branches_month`, `functions_active_capacity_microseconds`, `functions_waiting_capacity_microseconds`, `functions_invocations`, `functions_egress_bytes`, `ai_gateway_input_tokens`, `ai_gateway_output_tokens`, `ai_gateway_total_tokens`, `ai_gateway_cached_input_tokens`, `ai_gateway_cache_creation_tokens`, `ai_gateway_reasoning_tokens`, `object_storage_bytes_month`, `object_storage_network_transfer_bytes`. Can be an array of parameter values or a comma-separated list in a single parameter value.
 
 ### Date format, range, and granularity
 
@@ -256,22 +266,29 @@ GET https://console.neon.tech/api/v2/consumption_history/v2/branches
 
 ### Metrics (#metrics-2)
 
-Ten of the 12 project metrics are available on this endpoint:
+17 of the 20 project metrics are available on this endpoint:
 
-| Metric                                    | Description                             |
-| ----------------------------------------- | --------------------------------------- |
-| `compute_unit_seconds`                    | CPU time weighted by compute size       |
-| `root_branch_bytes_month`                 | Storage consumed by root branches       |
-| `child_branch_bytes_month`                | Storage consumed by child branches      |
-| `instant_restore_bytes_month`             | Instant restore (PITR) history storage  |
-| `public_network_transfer_bytes`           | Data transfer over the public internet  |
-| `private_network_transfer_bytes`          | Data transfer over private networks     |
-| `functions_active_capacity_microseconds`  | Time Functions spend actively using CPU |
-| `functions_waiting_capacity_microseconds` | Time Functions spend waiting on I/O     |
-| `functions_invocations`                   | Number of function calls                |
-| `functions_egress_bytes`                  | Data sent by Functions                  |
+| Metric                                    | Description                                             |
+| ----------------------------------------- | ------------------------------------------------------- |
+| `compute_unit_seconds`                    | CPU time weighted by compute size                       |
+| `root_branch_bytes_month`                 | Storage consumed by root branches                       |
+| `child_branch_bytes_month`                | Storage consumed by child branches                      |
+| `instant_restore_bytes_month`             | Instant restore (PITR) history storage                  |
+| `public_network_transfer_bytes`           | Data transfer over the public internet                  |
+| `private_network_transfer_bytes`          | Data transfer over private networks                     |
+| `functions_active_capacity_microseconds`  | Time Functions spend actively using CPU                 |
+| `functions_waiting_capacity_microseconds` | Time Functions spend waiting on I/O                     |
+| `functions_invocations`                   | Number of function calls                                |
+| `functions_egress_bytes`                  | Data sent by Functions                                  |
+| `ai_gateway_input_tokens`                 | Input tokens sent to models through the AI Gateway      |
+| `ai_gateway_output_tokens`                | Output tokens returned by models through the AI Gateway |
+| `ai_gateway_total_tokens`                 | Input and output tokens combined                        |
+| `ai_gateway_cached_input_tokens`          | Input tokens read from the prompt cache                 |
+| `ai_gateway_cache_creation_tokens`        | Input tokens written to the prompt cache                |
+| `ai_gateway_reasoning_tokens`             | Reasoning tokens used by reasoning models               |
+| `object_storage_network_transfer_bytes`   | Data sent out of Object Storage                         |
 
-`extra_branches_month` and `snapshot_storage_bytes_month` are not available on this endpoint. Use the [project metrics endpoint](#request-overview) for those.
+`extra_branches_month`, `snapshot_storage_bytes_month`, and `object_storage_bytes_month` are not available on this endpoint. Use the [project metrics endpoint](#request-overview) for those.
 
 ### Required parameters (#required-parameters-2)
 
@@ -280,7 +297,7 @@ Ten of the 12 project metrics are available on this endpoint:
 - **`to`** (date-time, required): End of the consumption period in RFC 3339 format.
 - **`granularity`** (string, required): `hourly`, `daily`, or `monthly`. Subject to the same window limits as the project endpoint.
 - **`org_id`** (string, required): Organization ID.
-- **`metrics`** (array of strings, required): One or more of the 10 supported metrics above.
+- **`metrics`** (array of strings, required): One or more of the 17 supported metrics above.
 
 ### Optional parameters (#optional-parameters-2)
 

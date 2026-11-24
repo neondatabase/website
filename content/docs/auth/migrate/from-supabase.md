@@ -11,7 +11,7 @@ summary: >-
   OAuth-only apps. Managed Better Auth does not support phone authentication (SMS/WhatsApp),
   SAML SSO, or Web3 wallet sign-in.
 enableTableOfContents: true
-updatedOn: '2026-09-16T15:38:57.808Z'
+updatedOn: '2026-10-30T18:52:42.000Z'
 ---
 
 Managed Better Auth provides a Supabase-compatible API, and Neon Data API provides PostgreSQL database access. This guide shows how to migrate from Supabase to Neon.

@@ -11,7 +11,7 @@ summary: >-
   issuer URI and client credentials, defining a user_messages schema, and
   running drizzle-kit push migrations against a Lakebase database.
 enableTableOfContents: true
-updatedOn: '2026-09-16T19:45:35.340Z'
+updatedOn: '2026-11-16T20:38:33.000Z'
 ---
 
 <Admonition type="tip" title="Building on Neon?">

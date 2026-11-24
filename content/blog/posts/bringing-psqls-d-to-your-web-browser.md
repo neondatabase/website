@@ -50,7 +50,7 @@ It turns out that `\d`, `\l`, and their relatives are a psql feature. That is, t
 
 Of course, it’s not just `\d` and `\l`: there are lots of other useful backslash commands. You can get a brief cheat-sheet with `\? `, or look up [more details in the Postgres docs](https://www.postgresql.org/docs/current/app-psql.html#APP-PSQL-META-COMMANDS). Some personal favourites are `\dconfig`, which lists configuration parameter values; `\du` and `\dx`, which list users and installed extensions; `\sf` and `\sv`, which display the source of functions and views; and `\h`, which provides a syntax reference for SQL commands.
 
-## \d **works now**
+## \d works now
 
 Fast-forward a year or two. Having put together Neon’s [serverless driver](https://neon.com/docs/serverless/serverless-driver) — which runs in environments that don’t offer raw TCP connections, such as web browsers — I was tasked to upgrade our web-based SQL Editor to make use of it. This enables interactive sessions and transactions in the SQL Editor, and reduces memory usage on our back-end, amongst other things.
 

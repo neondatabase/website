@@ -8,7 +8,7 @@ summary: >-
   Neon database using the pg library, the Serverless Framework CLI, and
   DATABASE_URL with SSL enabled via sslmode=require.
 enableTableOfContents: true
-updatedOn: '2026-09-16T19:45:35.340Z'
+updatedOn: '2026-11-16T20:16:52.000Z'
 ---
 
 AWS Lambda is a serverless, event-driven compute service that allows you to run code without provisioning or managing servers. It is a convenient and cost-effective solution for running various types of workloads, including those that require a database.

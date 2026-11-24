@@ -9,7 +9,7 @@ summary: >-
   JDBC URL format for Neon and demonstrates the update and rollbackCount
   commands.
 enableTableOfContents: true
-updatedOn: '2026-09-16T19:45:35.340Z'
+updatedOn: '2026-11-15T11:01:13.000Z'
 ---
 
 Liquibase is an open-source library for tracking, managing, and applying database schema changes. To learn more about Liquibase, refer to the [Liquibase documentation](https://docs.liquibase.com/home.html).

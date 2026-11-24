@@ -1,138 +1,14 @@
-# 💡 AI Prompt: Connect Reflex to Neon Postgres
+Connect my Reflex app to Neon.
 
-**Role:** You are an expert software agent responsible for configuring a new or existing Reflex project to connect to a Neon Postgres database.
+- Fetch https://neon.com/prompts/agent-setup.md and follow it.
 
-**Purpose:** To correctly set up a Python virtual environment, install the required packages, initialize a Reflex application (if needed), and configure it to use a Neon database connection string from an environment variable.
+- Offer to install Reflex's agent skills with `npx skills add reflex-dev/agent-skills -a <your agent id> --skill '*' -y`. Look up Reflex docs at https://reflex.dev/docs/llms.txt. If the reflex-docs skill is installed, use it for Reflex APIs.
 
-**Scope:**
-- Must be run inside a new or existing Reflex project directory.
-- Assumes the user has a Neon project and access to its connection string.
-- All package installations must occur within an active Python virtual environment.
-- The primary goal is to establish the database connection configuration, not to build a full application.
-
-✅ Read and understand the entire instruction set before executing.
-
----
-
-## 🛠️ Instructions (for AI-enabled editors)
-
-When this prompt is triggered, automatically configure the open project as follows:
-
-### 1. Ensure a Virtual Environment is Active
-
-This is a mandatory first step.
-- Check for a virtual environment directory (e.g., `.venv`, `venv`) in the project root.
-- If one does not exist, create it immediately by running:
-  ```bash
-  python3 -m venv .venv
-  ```
-- **Execute all subsequent `pip` and `python` commands using the virtual environment's executables** (e.g., `.venv/bin/python`, `.venv/bin/pip`).
-
----
-
-### 2. Install Dependencies
-
-Install the required Python packages into the virtual environment.
-
-```bash
-.venv/bin/pip install "reflex[db]" python-dotenv "psycopg[binary]"
-```
-
-- **`reflex`**: The full-stack Python web framework.
-- **`reflex[db]`**: The database extra. Installs SQLModel and Alembic for the `reflex db` commands.
-- **`python-dotenv`**: To securely load the database connection string from a `.env` file.
-- **`psycopg[binary]`**: The PostgreSQL driver (psycopg 3) that the `postgresql://` connection string uses.
-
----
-
-### 3. Initialize the Reflex Project (if needed)
-
-1.  Check for the presence of an `rxconfig.py` file in the project root.
-2.  If the file does not exist, initialize a new Reflex application by running:
-    ```bash
-    .venv/bin/reflex init
-    ```
-3.  During initialization, if prompted to choose a template, **select the default "blank" template**.
-
----
-
-### 4. Configure Environment Variables
-
-1.  Check for the presence of a `.env` file at the root of the project. If it doesn't exist, create one.
-2.  Add the `DATABASE_URL` parameter to the `.env` file and **prompt the user to replace the placeholder value** with their connection string from Neon.
-
-    ```dotenv title=".env"
-    DATABASE_URL="postgresql://[user]:[password]@[neon_hostname]/[dbname]?sslmode=require&channel_binding=require"
-    ```
-
-3.  Direct the user to find this value in the **Neon Console → Project → Connect**.
-
----
-
-### 5. Update Reflex Configuration
-
-Modify the `rxconfig.py` file to use the database connection string from the environment variable.
-
-1.  **Locate the `rxconfig.py` file** in the project root.
-2.  **Add imports** for `os` and `dotenv` at the top of the file.
-3.  **Load the environment variables** immediately after the imports.
-4.  **Update the `rx.Config` object** to include the `db_url` parameter, reading its value from the `DATABASE_URL` environment variable.
-
-    The modified file should look like this:
-
-    ```python title="rxconfig.py"
-    import os
-    from dotenv import load_dotenv
-    import reflex as rx
-
-    # Load environment variables from .env file
-    load_dotenv()
-
-    config = rx.Config(
-        app_name="my_reflex_app", # Or the existing app name
-        plugins=[...],  # Existing plugins, including rx.plugins.RadixThemesPlugin() if present
-        db_url=os.environ.get("DATABASE_URL")
-    )
-    ```
-
----
-
-## 🚀 Next Steps
-
-Once the file modifications are complete:
-
-1.  Verify the user has correctly set their connection string in `.env`. Do not proceed if placeholder value is still present.
-2.  Initialize the database migrations by running:
-    ```bash
-    .venv/bin/reflex db init
-    ```
-3.  Inform the user that a successful connection will result in output like:
-    
-    ```text
-    Creating directory ... alembic ... done
-    Creating directory ... alembic/versions ... done
-    Generating ... alembic.ini ... done
-    Generating ... alembic/env.py ... done
-    ...
-    ```
-
-4.  Finally, state that the project is now correctly configured to use Neon. They can proceed to define models in their application and run `reflex db makemigrations` followed by `reflex db migrate` to create the necessary database tables.
-
----
-
-## ✅ Validation Rules for AI
-
-Before suggesting code or making edits, ensure:
-- A Python virtual environment exists and is intended for use.
-- The `reflex[db]`, `python-dotenv`, and `psycopg[binary]` packages are installed in the virtual environment.
-- A `rxconfig.py` file exists (or has been created by `reflex init`).
-- A `.env` file is present or has been created and contains a `DATABASE_URL` placeholder.
-- The `rxconfig.py` file correctly imports `os` and `dotenv`, calls `load_dotenv()`, and sets the `db_url` parameter using `os.environ.get("DATABASE_URL")`.
-
----
-
-## ❌ Do Not
-
-- **Do not install packages globally** or outside of an active Python virtual environment.
-- **Do not hardcode credentials** or sensitive information in `rxconfig.py` or any other source code file.
-- Do not output the contents of the `.env` file or the user's connection string in any response.
+- Fetch Neon's Reflex guide and follow it: https://neon.com/docs/guides/reflex.md
+- Keep my app's Reflex version. Reuse the project's .venv if it exists, and never install packages globally: use .venv/bin/pip (on Windows, .\.venv\Scripts\pip).
+- If my app uses Reflex 0.10 or earlier, or rx.Model or rx.session(), follow the guide's notes for those.
+- If my app already has rxconfig.py, skip the steps that create the app, and add the guide's changes to my files instead of replacing them. Use my app's own package name wherever the guide says with_reflex.
+- Ask me before you pick or create a Neon project.
+- Before you run migrations, check that .env sets DATABASE_URL_UNPOOLED, which migrations require, and DATABASE_URL, which the app uses. Use count-only greps (grep -c '^DATABASE_URL_UNPOOLED=' .env and grep -c '^DATABASE_URL=' .env) and never print the lines. If either count is 0, stop and ask me before migrating.
+- Finish by showing me the Postgres version from the running server.
+- If my app needs sign-in, file uploads, long-running or scheduled work, LLM calls, or live updates, suggest the matching service from the guide's "Add more of your backend" section.

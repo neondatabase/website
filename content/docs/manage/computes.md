@@ -11,7 +11,7 @@ isDraft: false
 redirectFrom:
   - /docs/introduction/compute-size
   - /docs/introduction/compute
-updatedOn: '2026-11-05T15:33:57.188Z'
+updatedOn: '2026-11-10T19:59:44.000Z'
 ---
 
 A compute is a virtualized service that runs applications. In Neon, a compute runs Postgres.
