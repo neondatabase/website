@@ -11,7 +11,7 @@ summary: >-
   database for the synced tables.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2026-11-25T16:38:36.841Z'
+updatedOn: '2026-11-25T17:01:03.226Z'
 ---
 
 [Codeless Sync](https://codelesssync.com) copies data from Stripe, QuickBooks, Xero, and Paddle into tables in your own Postgres database, and can keep those tables up to date on a schedule. With the data in Neon, you can join it with your app's tables and query it with any Postgres client.
@@ -130,7 +130,7 @@ See [Manage roles](/docs/manage/roles), [Manage databases](/docs/manage/database
 
 ## Common gotchas
 
-- **SSL mode**: Codeless Sync rewrites `sslmode=require`, `verify-ca`, and `verify-full` to `sslmode=no-verify`. The connection stays encrypted, but Codeless Sync doesn't verify Neon's certificate. See [Connect to Neon securely](/docs/connect/connect-securely).
+- **SSL certificate verification**: Neon connection strings use `sslmode=require`, which Codeless Sync treats as `sslmode=no-verify`. The connection is encrypted, but Neon's certificate isn't verified. To verify it, change `sslmode=require` to `sslmode=verify-full` in the connection string before you paste it into Codeless Sync. See [Connect to Neon securely](/docs/connect/connect-securely).
 - **Table names**: Codeless Sync creates tables with `stripe_`, `quickbooks_`, `xero_`, and `paddle_` prefixes. If your app has tables with the same names in the same database, use a separate database.
 
 ## Next steps
