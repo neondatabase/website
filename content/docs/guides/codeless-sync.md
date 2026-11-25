@@ -11,7 +11,7 @@ summary: >-
   database for the synced tables.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2026-11-25T15:18:52.700Z'
+updatedOn: '2026-11-25T15:45:17.871Z'
 ---
 
 [Codeless Sync](https://codelesssync.com) copies data from Stripe, QuickBooks, Xero, and Paddle into tables in your own Postgres database, and can keep those tables up to date on a schedule. With the data in Neon, you can join it with your app's tables and query it with any Postgres client.
@@ -33,8 +33,6 @@ Neon offers two kinds of connection string:
 
 - **Pooled**: the hostname contains `-pooler`. Connections go through PgBouncer in transaction mode.
 - **Direct**: the hostname has no `-pooler`. Connections go straight to Postgres.
-
-TODO(ilshaad): confirm the pooled string works end to end (connection test, table creation, a manual sync, and a scheduled run) before opening the PR.
 
 Use the pooled connection string for Codeless Sync. Codeless Sync writes with parameterized `INSERT ... ON CONFLICT DO UPDATE` statements and doesn't use the session features that [transaction mode doesn't support](/docs/connect/connection-pooling#connection-pooling-in-transaction-mode), such as `SET`, `LISTEN`, or SQL-level `PREPARE`. A pooled string looks like this:
 
@@ -102,8 +100,6 @@ See [Query with Neon's SQL Editor](/docs/get-started/query-with-neon-sql-editor)
 
 </Tabs>
 
-TODO(ilshaad): set the count below to the number shown in codeless-sync-first-sync.png. 117 is the count from the Prisma guide's test account.
-
 ```text
  count
 -------
@@ -116,8 +112,6 @@ The count matches the rows processed in the sync.
 ## 6. Put the sync on a schedule
 
 A manual sync is enough to try it out. To keep the table current, add a schedule to the configuration. Schedules need a paid Codeless Sync plan. The Starter and Pro plans run daily, weekly, or monthly, and the Business plan adds every 12 hours.
-
-TODO(ilshaad): confirm the plan names and frequencies match the live plan_limits table in production, not only Insert-mock-data/plan_limits.sql.
 
 ## Scheduled syncs and scale to zero
 
@@ -139,8 +133,6 @@ See [Manage roles](/docs/manage/roles), [Manage databases](/docs/manage/database
 - **SSL mode**: Codeless Sync rewrites `sslmode=require`, `verify-ca`, and `verify-full` to `sslmode=no-verify`. The connection stays encrypted, but Codeless Sync doesn't verify Neon's certificate. See [Connect to Neon securely](/docs/connect/connect-securely).
 - **Table names**: Codeless Sync creates tables with `stripe_`, `quickbooks_`, `xero_`, and `paddle_` prefixes. If your app has tables with the same names in the same database, use a separate database.
 - **Platform choice**: the platform you pick in Codeless Sync is a label. The connection string decides which database it connects to.
-
-TODO(ilshaad): confirm you want the SSL mode gotcha stated in the Neon docs, and confirm a string with &channel_binding=require passes the connection test as copied.
 
 ## Next steps
 
