@@ -101,6 +101,7 @@ The following limits apply:
 Some limits are behavioral rather than fixed numbers:
 
 - **Region**: object storage is available in AWS US East (Ohio) (`aws-us-east-2`), AWS US East (N. Virginia) (`aws-us-east-1`), AWS Europe (Frankfurt) (`aws-eu-central-1`), and AWS Asia Pacific (Singapore) (`aws-ap-southeast-1`). Support is expanding toward all regions.
+- **Single region, no CDN**: objects are stored only in your project's region and aren't replicated to other regions or cached at the edge. Every request, including reads from a `public_read` bucket or a presigned URL, is served from that region. To serve public files globally with low latency, put your own CDN in front of a `public_read` bucket.
 - **Rate limiting**: requests may be throttled during heavy use, returning a `503 SlowDown` response. Back off and retry. See [Connection and performance errors](/docs/storage/troubleshooting#connection-and-performance-errors).
 - **Network controls**: [IP Allow](/docs/introduction/ip-allow#ip-allow-and-other-neon-services) and [Private Networking](/docs/guides/neon-private-networking#private-networking-and-other-neon-services) don't protect Object Storage requests. Access is controlled by credentials.
 

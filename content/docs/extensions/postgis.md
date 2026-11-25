@@ -10,7 +10,7 @@ summary: >-
   extensions such as pgRouting, PostGIS SFCGAL, and PostGIS Tiger Geocoder, see
   the PostGIS-related extensions page.
 enableTableOfContents: true
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-11-21T12:10:55.590Z'
 ---
 
 The `postgis` extension provides support for spatial data - coordinates, maps and polygons, encompassing geographical and location-based information. It introduces new data types, functions, and operators to manage and analyze spatial data effectively.
@@ -153,15 +153,15 @@ This query returns the following:
 We can use the `ST_Intersects` function to find if two roads intersect. To ensure we don't get duplicate pairs of roads, we filter out pairs where the first road has a higher `id` than the second road.
 
 ```sql
-SELECT a.name, b.name
-FROM roads a AS name_A, roads b AS name_B
+SELECT a.name AS name_a, b.name AS name_b
+FROM roads a, roads b
 WHERE a.id < b.id AND ST_Intersects(a.path, b.path);
 ```
 
 This query returns the following:
 
 ```text
-| name_A         | name_B         |
+| name_a         | name_b         |
 |----------------|----------------|
 | Main Street    | Second Street  |
 ```
@@ -226,12 +226,8 @@ CREATE INDEX spatial_index_name ON landmarks USING GIST(location);
 
 ### Query optimization
 
-- **Unnecessary Casting**: `GEOMETRY` and `GEOGRAPHY` are the two primary data types in `postgis`, and a lot of functions are overloaded to work with both. However, casting between the two types can be expensive, so it's best to store data in the more frequently used type.
-- **Use Appropriate Precision**: Reducing the precision of coordinates can often improve performance without significantly impacting the results.
-
-## Conclusion
-
-These examples provide a quick introduction to handling and analyzing spatial data in PostgresQL. We saw how to create tables with spatial data, insert data, and perform spatial queries using the `postgis` extension. It offers a powerful set of tools, with functions for calculating distances, identifying spatial relationships, and aggregating spatial data.
+- **Unnecessary casting**: `GEOMETRY` and `GEOGRAPHY` are the two primary data types in `postgis`, and a lot of functions are overloaded to work with both. However, casting between the two types can be expensive, so it's best to store data in the more frequently used type.
+- **Use appropriate precision**: Reducing the precision of coordinates can often improve performance without significantly impacting the results.
 
 ## Resources
 

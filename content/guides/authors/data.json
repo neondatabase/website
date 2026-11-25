@@ -106,5 +106,13 @@
       "title": "GitHub",
       "url": "https://github.com/MichielMAnalytics"
     }
+  },
+  "tony-dang": {
+    "name": "Tony Dang",
+    "position": "Developer Advocate",
+    "link": {
+      "title": "GitHub",
+      "url": "https://github.com/thisistonydang"
+    }
   }
 }
