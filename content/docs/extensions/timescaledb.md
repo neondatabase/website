@@ -10,7 +10,7 @@ summary: >-
   `histogram` for time-oriented analysis. Only Apache-2 licensed features are
   supported on Neon; compression is not available.
 enableTableOfContents: true
-updatedOn: '2026-11-21T12:09:42.363Z'
+updatedOn: '2026-11-25T23:06:01.692Z'
 ---
 
 `timescaledb` enables the efficient storage and retrieval of time-series data. Time-series data is a sequential collection of observations or measurements recorded over time. For example, IoT devices continuously generate data points with timestamps, representing measurements or events. `timescaledb` is designed to handle large volumes of time-stamped data and provides SQL capabilities on top of a time-oriented data model such as IoT data, sensor readings, financial market data, and other time-series datasets.
@@ -173,17 +173,17 @@ You should receive the following output:
 
 ```text
 |     device_id      | last_temperature |
-|--------------------|-------------------|
-| weather-pro-000000 |                42 |
-| weather-pro-000001 |                42 |
-| weather-pro-000002 |              72.0 |
-| weather-pro-000003 |              71.5 |
-| weather-pro-000004 |              73.0 |
-| weather-pro-000005 | 70.3              |
-| weather-pro-000006 |                42 |
-| weather-pro-000007 | 69.9              |
-| weather-pro-000008 |                42 |
-| weather-pro-000009 |                91 |
+|--------------------|------------------|
+| weather-pro-000000 |               42 |
+| weather-pro-000001 |               42 |
+| weather-pro-000002 |             72.0 |
+| weather-pro-000003 |             71.5 |
+| weather-pro-000004 |             73.0 |
+| weather-pro-000005 |             70.3 |
+| weather-pro-000006 |               42 |
+| weather-pro-000007 |             69.9 |
+| weather-pro-000008 |               42 |
+| weather-pro-000009 |               91 |
 ```
 
 [**time_bucket()**](https://docs.timescale.com/api/latest/hyperfunctions/time_bucket/)
@@ -282,8 +282,8 @@ SELECT show_chunks('weather_conditions');
 You should receive the following output:
 
 ```text
-|               show_chunks               |
-|-----------------------------------------|
+|              show_chunks               |
+|----------------------------------------|
 | _timescaledb_internal._hyper_1_1_chunk |
 | _timescaledb_internal._hyper_1_2_chunk |
 ```
@@ -297,8 +297,8 @@ SELECT * FROM chunks_detailed_size('weather_conditions') ORDER BY chunk_name;
 You should receive the following output:
 
 ```text
-|     chunk_schema      |    chunk_name     | table_bytes | index_bytes | toast_bytes | total_bytes | node_name |
-|-----------------------|-------------------|-------------|-------------|-------------|-------------|-----------|
+|      chunk_schema     |    chunk_name    | table_bytes | index_bytes | toast_bytes | total_bytes | node_name |
+|-----------------------|------------------|-------------|-------------|-------------|-------------|-----------|
 | _timescaledb_internal | _hyper_1_1_chunk |        8192 |       16384 |        8192 |       32768 |           |
 | _timescaledb_internal | _hyper_1_2_chunk |    82190336 |     8249344 |        8192 |    90447872 |           |
 ```
@@ -316,8 +316,8 @@ It returns a list of the chunks that were dropped.
 You should receive the following output:
 
 ```text
-|               drop_chunks               |
-|-----------------------------------------|
+|              drop_chunks               |
+|----------------------------------------|
 | _timescaledb_internal._hyper_1_2_chunk |
 ```
 
@@ -333,9 +333,11 @@ SELECT drop_chunks('weather_conditions', INTERVAL '3 months');
 
 The query deletes any chunks that contain only data older than 3 months.
 
-To automatically run this deletion periodically, you can setup a cron task. For example, adding this line to the crontab will run the deletion query every day at 1AM:
+If you ran the 1-day example in the previous section on the sample dataset, it already dropped those chunks, so this query returns no rows.
 
-```sql
+To automatically run this deletion periodically, you can set up a cron task. For example, adding this line to the crontab will run the deletion query every day at 1AM:
+
+```bash
 0 1 * * * psql -c "SELECT drop_chunks('weather_conditions', INTERVAL '3 months')"
 ```
 
