@@ -670,17 +670,6 @@
       "imageGeneration": false
     },
     {
-      "id": "deepseek-v4-1-flash",
-      "owner": "deepseek",
-      "entitled": true,
-      "chat": "conforms",
-      "deviations": [],
-      "nativeDialect": "none",
-      "responses": false,
-      "webSearch": false,
-      "imageGeneration": false
-    },
-    {
       "id": "openjev-qwen35-4b",
       "owner": "typesafe",
       "entitled": true,

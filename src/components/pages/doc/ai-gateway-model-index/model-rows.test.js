@@ -58,7 +58,7 @@ describe('AI Gateway model rows', () => {
   });
 
   it.each([
-    ['deepseek', 'DeepSeek'],
+    ['zhipuai', 'Zhipu AI'],
     ['baai', 'BAAI'],
   ])('labels the %s lab as %s', (lab, label) => {
     expect(rows.find((row) => row.lab === lab).labName).toBe(label);

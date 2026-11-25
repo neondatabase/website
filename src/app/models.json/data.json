@@ -2336,35 +2336,6 @@
           "cache_read": 0.26
         }
       },
-      "deepseek-v4-1-flash": {
-        "id": "deepseek-v4-1-flash",
-        "name": "DeepSeek V4.1 Flash",
-        "lab": "deepseek",
-        "provider": "databricks",
-        "family": "deepseek-flash",
-        "released": true,
-        "attachment": true,
-        "reasoning": true,
-        "tool_call": true,
-        "temperature": true,
-        "structured_output": false,
-        "open_weights": true,
-        "release_date": "2026-09-10",
-        "last_updated": "2026-09-10",
-        "modalities": {
-          "input": ["text", "image"],
-          "output": ["text"]
-        },
-        "limit": {
-          "context": 128000,
-          "output": 8192
-        },
-        "cost": {
-          "input": 0.3,
-          "output": 1.2,
-          "cache_read": 0.03
-        }
-      },
       "openjev-qwen35-4b": {
         "id": "openjev-qwen35-4b",
         "name": "OpenJev (Qwen 3.5 4B)",
