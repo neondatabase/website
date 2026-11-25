@@ -4,7 +4,7 @@ subtitle: Learn how to implement secure user authentication and authorization in
 author: bobbyiliev
 enableTableOfContents: true
 createdAt: '2024-11-03T00:00:00.000Z'
-updatedOn: '2026-11-22T09:08:00.969Z'
+updatedOn: '2026-11-25T00:40:14.519Z'
 ---
 
 This guide shows how to implement authentication and authorization in an ASP.NET Core application using ASP.NET Core Identity with Lakebase Postgres as the database backend. We'll cover user management, role-based authorization, and JWT token generation for secure API access.
@@ -751,7 +751,7 @@ You now have an ASP.NET Core API with user registration and login backed by ASP.
 
 For more information, check out:
 
-- [ASP.NET Core Identity Documentation](https://docs.microsoft.com/en-us/aspnet/core/security/authentication/identity)
+- [ASP.NET Core Identity Documentation](https://learn.microsoft.com/en-us/aspnet/core/security/authentication/identity)
 - [JWT Authentication in ASP.NET Core](https://learn.microsoft.com/en-us/aspnet/core/security/authentication/configure-jwt-bearer-authentication)
 - [Neon Documentation](/docs)
 

@@ -4,12 +4,12 @@ subtitle: Learn how to create a simple TODO app using Laravel, Livewire, Volt, a
 author: bobbyiliev
 enableTableOfContents: true
 createdAt: '2024-06-30T00:00:00.000Z'
-updatedOn: '2026-11-22T09:08:00.969Z'
+updatedOn: '2026-11-25T00:40:14.519Z'
 ---
 
 In this guide, we'll build a TODO application using [Laravel](https://laravel.com/), [Livewire](https://livewire.laravel.com/), and [Volt](https://livewire.laravel.com/docs/volt).
 
-We'll use [Laravel Breeze](https://laravel.com/docs/11.x/starter-kits) for authentication and Lakebase Postgres as our database.
+We'll use [Laravel Breeze](https://laravel.com/framework/docs/11.x/starter-kits) for authentication and Lakebase Postgres as our database.
 
 By the end of this tutorial, you'll have a working TODO application that lets users create, update, and delete tasks.
 
@@ -555,6 +555,6 @@ You've built a TODO application with Laravel, Livewire, and Volt, with per-user 
 
 - [Laravel Documentation](https://laravel.com/docs)
 - [Livewire Documentation](https://livewire.laravel.com/docs)
-- [Laravel Breeze Documentation](https://laravel.com/docs/11.x/starter-kits)
+- [Laravel Breeze Documentation](https://laravel.com/framework/docs/11.x/starter-kits)
 - [Tailwind CSS Documentation](https://tailwindcss.com/docs)
 - [Neon Documentation](/docs)
