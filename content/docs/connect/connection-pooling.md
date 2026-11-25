@@ -17,7 +17,7 @@ redirectFrom:
   - /docs/guides/connection-pooling
   - /docs/introduction/connection-pooling
   - /docs/manage/connection-pooling
-updatedOn: '2026-11-25T17:40:32.961Z'
+updatedOn: '2026-11-25T18:13:16.780Z'
 ---
 
 For most apps, use a pooled connection. It reuses database connections to help you avoid connection limits. Direct connections are typically used for schema migrations, backups, and other work that needs a single continuous session.
@@ -58,7 +58,7 @@ For most apps, use a pooled connection. It reuses database connections to help y
 
 Use a pooled connection by default. Switch to a direct connection only for work that needs a single, continuous session.
 
-<div className="flex items-center gap-6 sm:flex-col">
+<div className="flex items-start gap-6 sm:flex-col">
 <div style={{ flex: '1 1 50%' }}>
 
 **Use a pooled connection for**
