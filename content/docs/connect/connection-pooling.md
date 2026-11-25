@@ -17,7 +17,7 @@ redirectFrom:
   - /docs/guides/connection-pooling
   - /docs/introduction/connection-pooling
   - /docs/manage/connection-pooling
-updatedOn: '2026-11-25T18:13:16.780Z'
+updatedOn: '2026-11-25T19:18:29.360Z'
 ---
 
 For most apps, use a pooled connection. It reuses database connections to help you avoid connection limits. Direct connections are typically used for schema migrations, backups, and other work that needs a single continuous session.
@@ -26,7 +26,7 @@ For most apps, use a pooled connection. It reuses database connections to help y
 
 ### Pooled connections
 
-<div className="flex items-center gap-6 sm:flex-col">
+<div className="flex items-start gap-6 sm:flex-col">
   <div style={{ flex: '1 1 50%' }}>
 
     A pooled connection reuses a small set of Postgres connections across many clients, so your app can open many connections at once without running into connection limits. The pooler accepts up to 10,000 concurrent connections. This is the right choice for most apps, including web and serverless apps. The pooled hostname ends in `-pooler`.
@@ -41,7 +41,7 @@ For most apps, use a pooled connection. It reuses database connections to help y
 
 ### Direct connections
 
-<div className="flex items-center gap-6 sm:flex-col">
+<div className="flex items-start gap-6 sm:flex-col">
   <div style={{ flex: '1 1 50%' }}>
 
     A direct connection is its own continuous, dedicated Postgres session, up to your compute's connection limit. Use it for work that needs one stable session, like the cases below.
