@@ -8,7 +8,7 @@ summary: >-
   a Fly release command, picking the Fly region closest to your Neon region,
   and deploying from the terminal, from GitHub, or with a coding agent.
 enableTableOfContents: true
-updatedOn: '2026-11-21T19:16:06.000Z'
+updatedOn: '2026-11-25T15:02:09.680Z'
 ---
 
 [Fly.io](https://fly.io) runs applications on fast-booting VMs called Fly Machines. Fly builds a container image from your code and runs it in the region you pick.
@@ -21,33 +21,52 @@ To follow along with this guide, you will need:
 
 - A Neon account. If you do not have one, sign up at [Neon](https://neon.tech). Your Neon project comes with a ready-to-use Postgres database named `neondb`. We'll use this database in the following examples.
 - A Fly.io account. Sign up at [Fly.io](https://fly.io/app/sign-up) to get started.
-- [Node.js](https://nodejs.org/) 20.6 or later and [npm](https://www.npmjs.com/) installed on your local machine. We'll use Node.js to build and test the application locally.
+- [Node.js](https://nodejs.org/) 20.19 or later and [npm](https://www.npmjs.com/) installed on your local machine. We'll use Node.js to build and test the application locally, and the Neon CLI needs 20.19.
 
-## Set up your Neon database
+## Create a Neon project
 
-### Create a project
+Note the region you pick, since you'll deploy your Fly app close to it. The [region table](#create-a-fly-app) below maps each Neon region to its closest Fly region.
 
-1. Log in to the Neon Console and navigate to the [Projects](https://console.neon.tech/app/projects) section.
+<Tabs labels={["Neon CLI", "API", "Console"]}>
 
-2. Click **New Project** to create a new project. Note the region you pick, since you'll deploy your Fly app close to it.
+<TabItem>
 
-### Retrieve your Neon connection strings
+Install the [Neon CLI](/docs/cli/install), sign in, and create the project:
 
-You'll use two connection strings. Click the **Connect** button in the Console nav to find them:
-
-- With the **Connection pooling** toggle on, copy the pooled connection string. The endpoint ID in its hostname has a `-pooler` suffix. Your app uses this one to serve requests.
-- With the toggle off, copy the direct connection string. Migrations use this one, because schema changes should run over a direct connection. See [Connection pooling](/docs/connect/connection-pooling) for details.
-
-They should look similar to this:
-
-```bash
-# Pooled
-postgresql://alex:AbC123dEf@ep-cool-darkness-123456-pooler.us-east-2.aws.neon.tech/dbname?sslmode=require&channel_binding=require
-# Direct
-postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require&channel_binding=require
+```bash filename="Terminal"
+npm i -g neon@latest
+neon login
+neon projects create --name neon-fly-example --region-id aws-us-east-2 --no-secrets
 ```
 
-Keep both connection strings handy for later use.
+`--region-id` sets the region. `--no-secrets` keeps the connection string out of the output, since a later step writes it to your env file. Pass `--org-id` to choose the organization (find IDs with `neon orgs list`).
+
+</TabItem>
+
+<TabItem>
+
+Create an [API key](https://console.neon.tech/app/settings/api-keys), export it, then create the project in your organization:
+
+```bash filename="Terminal"
+export NEON_API_KEY=napi_...
+
+curl -X POST https://console.neon.tech/api/v2/projects \
+  -H "Authorization: Bearer $NEON_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{"project": {"name": "neon-fly-example", "region_id": "aws-us-east-2", "org_id": "<org-id>"}}'
+```
+
+See [Create a project with the API](/docs/manage/projects#create-a-project-with-the-api) for the other options.
+
+</TabItem>
+
+<TabItem>
+
+Go to the [Projects](https://console.neon.tech/app/projects) page in the Neon Console, click **New Project**, and pick a region.
+
+</TabItem>
+
+</Tabs>
 
 ## Build the Node.js application
 
@@ -60,24 +79,50 @@ npm install express pg
 touch .env
 ```
 
-We use the `npm pkg set type="module"` command to enable ES6 module support in our project. The `start` script is what Fly runs to start your app. We'll also create a new `.env` file to store the `DATABASE_URL` and `DIRECT_URL` environment variables, which we'll use to connect to our Neon database. Lastly, we install the `pg` library which is the Postgres driver we use to connect to our database.
+We use the `npm pkg set type="module"` command to enable ES6 module support in our project. The `start` script is what Fly runs to start your app. We also install the `pg` library, the Postgres driver we use to connect to our database, and create an empty `.env` file for the connection strings.
 
-In the `.env` file, store your Neon connection strings:
+### Add your connection strings
 
-```bash
-# .env
-DATABASE_URL=NEON_POOLED_CONNECTION_STRING
-DIRECT_URL=NEON_DIRECT_CONNECTION_STRING
+The app uses two connection strings:
+
+- `DATABASE_URL`, the pooled connection string. The endpoint ID in its hostname has a `-pooler` suffix. Your app uses it to serve requests.
+- `DATABASE_URL_UNPOOLED`, the direct connection string. Migrations use it, because schema changes should run over a direct connection. See [Connection pooling](/docs/connect/connection-pooling) for details.
+
+<Tabs labels={["Neon CLI", "Without the CLI"]}>
+
+<TabItem>
+
+From the project folder, link it to your Neon project:
+
+```bash filename="Terminal"
+neon link
 ```
 
-Create a file named `migrate.js` that creates the `music_albums` table and adds some sample rows. It connects with `DIRECT_URL`:
+`neon link` prompts you to pick an organization and a project, then writes `DATABASE_URL` and `DATABASE_URL_UNPOOLED` to your `.env` file, along with a few other Neon variables the app doesn't use. It also writes a `.neon` file that records the linked project and adds it to `.gitignore`.
+
+</TabItem>
+
+<TabItem>
+
+Click **Connect** in the Neon Console nav. Copy the connection string with **Connection pooling** on for `DATABASE_URL`, and with it off for `DATABASE_URL_UNPOOLED`. Then add both to your `.env` file:
+
+```bash filename=".env"
+DATABASE_URL=postgresql://alex:AbC123dEf@ep-cool-darkness-123456-pooler.us-east-2.aws.neon.tech/dbname?sslmode=require&channel_binding=require
+DATABASE_URL_UNPOOLED=postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require&channel_binding=require
+```
+
+</TabItem>
+
+</Tabs>
+
+Create a file named `migrate.js` that creates the `music_albums` table and adds some sample rows. It connects with `DATABASE_URL_UNPOOLED`:
 
 ```javascript filename="migrate.js"
 import pkg from 'pg';
 
 // Migrations use the direct (non-pooled) connection string
 const { Client } = pkg;
-const client = new Client({ connectionString: process.env.DIRECT_URL });
+const client = new Client({ connectionString: process.env.DATABASE_URL_UNPOOLED });
 await client.connect();
 
 await client.query(`
@@ -146,6 +191,8 @@ node --env-file=.env index.js
 
 Now, navigate to `http://localhost:3000/` in your browser to check it returns the sample data from the `music_albums` table.
 
+`pg` 8.23 and later print a `SECURITY WARNING` for `sslmode=require`. Change it to `sslmode=verify-full` in your `.env` file to keep the same behavior without the warning. `neon link` writes `sslmode=require` again, so repeat the change after you run it.
+
 ## Deploy to Fly.io
 
 ### Install flyctl and log in
@@ -196,7 +243,7 @@ Fly runs the release command in a temporary Machine before it starts the new ver
 Then set both connection strings as secrets on your Fly app. Fly encrypts secrets and passes them to your app and the release command as environment variables.
 
 ```bash
-fly secrets set DATABASE_URL='NEON_POOLED_CONNECTION_STRING' DIRECT_URL='NEON_DIRECT_CONNECTION_STRING'
+fly secrets set DATABASE_URL='NEON_POOLED_CONNECTION_STRING' DATABASE_URL_UNPOOLED='NEON_DIRECT_CONNECTION_STRING'
 ```
 
 ### Deploy your application
@@ -207,7 +254,7 @@ Deploy the application with:
 fly deploy
 ```
 
-Fly builds the image, runs the migration, starts your app on Fly Machines, and prints the URL of your app when it's done, for example `https://neon-fly-example.fly.dev/`. Open it in your browser, or run `fly open`, to see the list of albums from your Neon database.
+Fly builds the image, runs the migration, starts your app on Fly Machines, and prints the URL of your app when it's done, for example `https://neon-fly-example.fly.dev/`. Open it in your browser, or run `fly apps open`, to see the list of albums from your Neon database.
 
 <Admonition type="tip">
 By default, Fly stops Machines when your app has no traffic and starts them again on the next request. Neon also scales to zero when idle, so the first request after a quiet period can take a moment while both start.
@@ -228,7 +275,7 @@ node --env-file=.env migrate.js
 Push your project to a new GitHub repository, keeping `node_modules` and your `.env` file out of it:
 
 ```bash
-echo "node_modules/" > .gitignore && echo ".env" >> .gitignore
+printf 'node_modules/\n.env\n' >> .gitignore
 git init && git add . && git commit -m "Initial commit"
 git branch -M main
 git remote add origin YOUR_GITHUB_REPO_URL
@@ -249,7 +296,7 @@ Fly builds and deploys the app, and deploys it again each time you push to the b
 A coding agent can create the Neon project and deploy the app.
 
 1. Set up Neon in your agent by following [Set up your AI agent](/docs/ai/agent-setup). This adds the [Neon MCP Server](/docs/ai/neon-mcp-server), so the agent can create a project, run SQL and get a connection string.
-2. Set up Fly.io in your agent with [`fly setup agent`](https://docs.fly.io/model-context-protocol/setup-agent). This installs the Fly.io agent skills and the Fly.io MCP server, and signs you in to Fly.io. It needs flyctl v0.5.2 or later, so run `fly version upgrade` first.
+2. Set up Fly.io in your agent with [`fly setup agent`](https://docs.fly.io/model-context-protocol/setup-agent). This installs the Fly.io agent skills and the Fly.io MCP server, and offers to sign you in to Fly.io. It needs flyctl v0.5.2 or later, so run `fly version upgrade` first.
 
    ```bash
    fly setup agent
@@ -261,7 +308,8 @@ A coding agent can create the Neon project and deploy the app.
    Create a Neon project and build a small Express app that returns rows from a
    music_albums table as JSON. Add a migration that creates the table and runs as the
    Fly release command. Deploy it to Fly.io in the region closest to the Neon project,
-   with the pooled connection string as DATABASE_URL and the direct one as DIRECT_URL.
+   with the pooled connection string as DATABASE_URL and the direct one as
+   DATABASE_URL_UNPOOLED.
    ```
 
 ## Remove your application and Neon project
@@ -272,7 +320,13 @@ To remove your application from Fly.io, run the following command, replacing `ne
 fly apps destroy neon-fly-example
 ```
 
-To delete your Neon project, follow the steps outlined in the Neon documentation under [Delete a project](/docs/manage/projects#delete-a-project).
+To delete your Neon project with the Neon CLI, run the following command, replacing `<project-id>` with your project's ID (find it with `neon projects list`):
+
+```bash
+neon projects delete <project-id>
+```
+
+You can also delete it in the Console. See [Delete a project](/docs/manage/projects#delete-a-project).
 
 ## Resources
 
