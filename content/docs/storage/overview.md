@@ -14,7 +14,7 @@ redirectFrom:
   - /docs/object-storage
   - /docs/introduction/object-storage
   - /docs/guides/neon-object-storage
-updatedOn: '2026-11-11T12:31:00.000Z'
+updatedOn: '2026-11-25T17:45:27.914Z'
 layout: wide
 hideCopyPage: true
 ---
@@ -53,6 +53,8 @@ hideCopyPage: true
 <DetailIconCards>
 
 <a href="/docs/compute/functions/triggers/object-storage" description="Run a function when an object is uploaded to a bucket." icon="stopwatch">Triggers</a>
+
+<a href="/docs/storage/uploads/resumable-uploads" description="Upload large files from the browser with Uppy, with pause, resume, and recovery after a reload." icon="refresh">Resumable uploads</a>
 
 <a href="/docs/storage/s3-compatibility" description="See which S3 operations Neon supports and point any S3 SDK at your bucket." icon="network">S3 API support</a>
 

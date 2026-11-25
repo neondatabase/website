@@ -999,6 +999,21 @@
               slug: storage/authentication
             - title: Logs
               slug: storage/logs
+            - title: Resumable uploads
+              slug: storage/uploads/resumable-uploads
+              items:
+                - title: Uppy with a signing endpoint
+                  slug: storage/uploads/uppy-s3-multipart
+                - title: Uppy Companion
+                  slug: storage/uploads/uppy-companion
+                - title: Import from URLs and cloud services
+                  slug: storage/uploads/uppy-remote-sources
+                - title: Browser-side signing
+                  slug: storage/uploads/uppy-browser-signing
+                - title: Uppy with tus
+                  slug: storage/uploads/uppy-tus
+                - title: Recover after a reload
+                  slug: storage/uploads/uppy-golden-retriever
         - section: Reference
           items:
             - title: S3 compatibility
