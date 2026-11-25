@@ -10,7 +10,7 @@ summary: >-
   plus links to starter apps for chatbot, RAG, semantic search, reverse image
   search, and PDF chat.
 enableTableOfContents: true
-updatedOn: '2026-11-25T00:40:14.519Z'
+updatedOn: '2026-11-25T00:45:56.825Z'
 ---
 
 LlamaIndex is a popular framework for working with AI, Vectors, and embeddings. LlamaIndex supports using Neon as a vector store, using the `pgvector` extension.
@@ -79,7 +79,7 @@ Set `NEON_AI_GATEWAY_TOKEN` and `NEON_AI_GATEWAY_BASE_URL` from your branch (`ne
 
 ## Generate Embeddings with OpenAI
 
-LlamaIndex handles embedding generation internally while adding vectors to the Postgres database, simplifying the process for users. For more detailed control over embeddings, refer to the respective [JavaScript](https://ts.llamaindex.ai/docs/llamaindex/modules/models/embeddings/openai) and [Python](https://developers.llamaindex.ai/python/framework/integrations/embeddings/openai/) documentation.
+LlamaIndex handles embedding generation internally while adding vectors to the Postgres database, simplifying the process for users. For more detailed control over embeddings, refer to the respective [JavaScript](https://developers.llamaindex.ai/typescript/framework/modules/models/embeddings/openai/) and [Python](https://developers.llamaindex.ai/python/framework/integrations/embeddings/openai/) documentation.
 
 ## Stream Chat Completions with OpenAI
 
