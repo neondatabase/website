@@ -13,8 +13,8 @@ categories:
 authors:
   - tony-dang
 cover:
-  image: null
-  alt: null
+  image: https://cdn.neonapi.io/public/images/pages/blog/every-app-needs-an-mcp-server/cover.jpg
+  alt: Every app needs an MCP server
 isFeatured: false
 seo:
   title: 'Every app needs an MCP server, and you can build it with Neon - Neon'
@@ -23,7 +23,7 @@ seo:
   noindex: false
   ogTitle: 'Every app needs an MCP server, and you can build it with Neon - Neon'
   ogDescription: 'An MCP server lets your users work in your app from any AI assistant (i.e. ChatGPT, Claude, and Cursor)'
-  image: null
+  image: https://cdn.neonapi.io/public/images/pages/blog/every-app-needs-an-mcp-server/social.jpg
 ---
 
 Not long ago, using software meant clicking through its UI. That's still a great model for some software, but increasingly, that's not how people want to work: users want to ask their agent to do a task and let the agent handle it. If the agent can't reach a tool, there's a good chance users will switch to one their agent can work with.
@@ -169,7 +169,10 @@ The prompt above comes from a demo app we built, with its own MCP server on Neon
 
 [mcp/place](https://github.com/thisistonydang/mcp-place-demo) is a shared 5 by 5 grid that anyone can paint. Its UI has no buttons or color pickers, so the only way to paint a square is to ask an agent. That makes it a small, clear test of an MCP server: if a square changes color, an agent did it through a tool.
 
-**[ADD CLIP NO SOUND]**
+<video autoPlay muted loop playsInline width="708" height="398" aria-label="Demo app with an MCP server on Neon">
+<source src="https://cdn.neonapi.io/public/images/pages/blog/every-app-needs-an-mcp-server/demo-app.webm" type="video/webm" />
+<source src="https://cdn.neonapi.io/public/images/pages/blog/every-app-needs-an-mcp-server/demo-app.mp4" type="video/mp4" />
+</video>
 
 Under the hood, the app is simple. Each square has a corresponding row in a Lakebase Postgres table called `canvas_squares`, with each row storing an x and y coordinate and a color. The frontend is a Vite and React app on Vercel. [Neon Realtime](https://neon.com/docs/realtime/overview) watches the table and updates the browser UI as soon as the color of a row changes.
 
