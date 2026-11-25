@@ -11,7 +11,7 @@ summary: >-
   suspended by Scale to Zero, which can cause gaps; log export also counts
   toward your plan's public network transfer allowance.
 enableTableOfContents: true
-updatedOn: '2026-11-21T21:01:34.495Z'
+updatedOn: '2026-11-25T20:09:37.694Z'
 ---
 
 This page provides a comprehensive reference for all metrics and log fields that Neon exports to observability platforms through integrations like [Datadog](/docs/guides/datadog), [Grafana Cloud](/docs/guides/grafana-cloud), and [OpenTelemetry](/docs/guides/opentelemetry).
@@ -134,9 +134,10 @@ The other statement logging parameters, such as `log_statement` and `log_lock_wa
 Each log message starts with a prefix that Neon sets through `log_line_prefix`. It includes:
 
 - Timestamp, in GMT
+- `ttid`: the tenant and timeline IDs (`tenant_id/timeline_id`) that identify the branch's storage
 - `sqlstate`: the [SQLSTATE error code](https://www.postgresql.org/docs/current/errcodes-appendix.html), or `00000` for messages that aren't errors
 - `user`: the Postgres role
-- `ttid`: the tenant and timeline IDs (`tenant_id/timeline_id`) that identify the branch's storage.
+- `dboid`: the database OID. To map it to a name, run `SELECT oid, datname FROM pg_database;`.
 - `backend`: the process type, such as `client backend`, `autovacuum worker`, or `checkpointer`
 - `app`: the client's `application_name`
 - Process ID
