@@ -40,6 +40,8 @@ The [Model Context Protocol (MCP)](https://modelcontextprotocol.io/docs/getting-
 
 Without a standard, connecting your app to AI assistants would mean building a separate integration for each one. With MCP, you build one server, and any AI client that supports the protocol can use it.
 
+**[ADD IMAGE 1]**
+
 An MCP server can offer [three kinds of things](https://modelcontextprotocol.io/docs/learn/server-concepts):
 
 - Tools: actions the model can call, like "create a task" or "book a flight"
@@ -52,12 +54,16 @@ To let agents do things in your app, you need tools, so the rest of this post fo
 
 Say your app is [a shared grid that anyone can paint,](https://github.com/thisistonydang/mcp-place-demo) and a user asks ChatGPT to paint a square red.
 
+**[ADD IMAGE 2]**
+
 Here's what actually happens behind the scenes:
 
 - Discovery. When ChatGPT connects, it asks your server which tools it offers. Each tool comes back with a name, a plain-language description, and the inputs it accepts - e.g. `paint_square`, which takes inputs such as a column, a row, and a color.
 - Decision. If you type "paint A1 red", the model reads the tool descriptions, picks `paint_square`, and fills in the inputs
 - Call. ChatGPT sends the tool call to your server, along with a token that identifies the user. Your server checks who the user is and what they're allowed to do, then runs your code - e.g. it updates one row in the database
 - Response. Your server returns the result. ChatGPT tells the user it's done, or calls another tool if the task needs more steps.
+
+**[ADD IMAGE 3]**
 
 ## Why not let agents use the UI or the database directly?
 
@@ -66,6 +72,8 @@ Take an app whose state lives in a database. An agent would have a few ways to c
 The first would be to use the app the way a person would. Some agents can operate a browser - they take screenshots, find buttons, and click them. But this is slow, and a small redesign can break it. UIs were built for people, not for agents.
 
 You also could, in theory, give the agent a database connection string, but this is a problem. Your app sits between users and the database - it checks who's signed in, what they're allowed to change, and whether the input makes sense. By giving the agent a connection string directly, all these security steps are skipped - an agent might log in with a database role that can read and write every user's rows, and it could run any query, without anything stopping it from changing or deleting data that belongs to other users.
+
+**[ADD IMAGE 3]**
 
 The third way is to call tools that your app exposes, and that's what an MCP server is for. You decide which actions exist and what each one accepts. The agent sees a list of tools and can only do what they allow, and your code stays between the agent and your data.
 
@@ -99,6 +107,8 @@ If you want your server to appear in the ChatGPT or Claude plugin stores, each t
 
 ## Build your MCP server on Neon
 
+**[ADD IMAGE 4]**
+
 Put together, most of that list is infrastructure. You need a place to run the server, an identity provider that already knows your users, and a database those two can share. You can find all these elements with [Neon](https://neon.com/).
 
 Neon is a backend platform that comes with all the pieces you need to build and scale apps, including the primitives we'll use to build an MCP:
@@ -129,9 +139,13 @@ Once your server has a token, it still needs to answer one question: which rows 
 
 Many apps keep users in a separate identity service and the app data in a database, and keep the two in sync. [Managed Better Auth](https://neon.com/docs/auth/overview) stores your users in your own database, in a schema called `neon_auth`, next to your app's tables. The token's `sub` field is the user's ID, the same ID your tables already reference. Your tool filters by it, and that's the whole check.
 
+**[ADD IMAGE 5]**
+
 ### You can branch
 
 At some point you'll want to change your MCP server, for example by adding a tool or changing how sign-in works. You don't want to test that on the server your users are connected to.
+
+**[ADD IMAGE 6]**
 
 On Neon, a [branch](https://neon.com/docs/introduction/branching) is an isolated copy of your backend. When you create one, it gets its own database, its own functions, and its own auth setup, with separate OAuth settings and a separate auth URL. Tokens issued on one branch don't work on another. You can connect an AI client to a development branch's MCP server, try the new tool against a copy of your data, and merge the change once it works.
 
@@ -155,6 +169,8 @@ The prompt above comes from a demo app we built, with its own MCP server on Neon
 
 [mcp/place](https://github.com/thisistonydang/mcp-place-demo) is a shared 5 by 5 grid that anyone can paint. Its UI has no buttons or color pickers, so the only way to paint a square is to ask an agent. That makes it a small, clear test of an MCP server: if a square changes color, an agent did it through a tool.
 
+**[ADD CLIP NO SOUND]**
+
 Under the hood, the app is simple. Each square has a corresponding row in a Lakebase Postgres table called `canvas_squares`, with each row storing an x and y coordinate and a color. The frontend is a Vite and React app on Vercel. [Neon Realtime](https://neon.com/docs/realtime/overview) watches the table and updates the browser UI as soon as the color of a row changes.
 
 ### How we built the MCP server
@@ -167,6 +183,8 @@ The build takes four prompts to a coding agent:
 - Turn on Managed Better Auth, using a prompt you copy from the Neon Console. This adds sign-up and sign-in to the app
 - Add the MCP server as a Neon Function, with the OAuth provider plugin and the `paint_square` tool. The agent also writes the sign-in and consent pages and configures the OAuth settings
 - Deploy the frontend to Vercel and update the OAuth page URLs, so ChatGPT and Claude can reach the sign-in and consent pages over HTTPS
+
+**[ADD IMAGE 7]**
 
 Beyond building the MCP server, we also test it:
 
