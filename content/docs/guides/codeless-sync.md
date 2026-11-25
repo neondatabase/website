@@ -1,20 +1,22 @@
 ---
-title: Sync Stripe data to Neon with Codeless Sync
-subtitle: Copy Stripe, QuickBooks, Xero, or Paddle data into Neon tables and keep them up to date on a schedule
+title: Sync billing data to Neon with Codeless Sync
+subtitle: Copy Stripe, QuickBooks, Xero, or Paddle billing data into Neon tables and keep them up to date on a schedule
 summary: >-
-  How to connect a Neon database to Codeless Sync, copy Stripe customers into a
-  stripe_customers table, and check the rows with psql or the Neon SQL Editor.
-  Covers which Neon connection string to use (pooled or direct), how scheduled
-  syncs interact with scale to zero, the paid Codeless Sync plans that include
-  schedules, and an optional dedicated role and database for the synced tables.
+  How to connect a Neon database to Codeless Sync and sync billing data from
+  Stripe, QuickBooks, Xero, or Paddle, using Stripe customers as the example:
+  copy them into a stripe_customers table and check the rows with psql or the
+  Neon SQL Editor. Covers which Neon connection string to use (pooled or
+  direct), how scheduled syncs interact with scale to zero, the paid Codeless
+  Sync plans that include schedules, and an optional dedicated role and
+  database for the synced tables.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2026-11-25T13:07:53.915Z'
+updatedOn: '2026-11-25T15:18:52.700Z'
 ---
 
 [Codeless Sync](https://codelesssync.com) copies data from Stripe, QuickBooks, Xero, and Paddle into tables in your own Postgres database, and can keep those tables up to date on a schedule. With the data in Neon, you can join it with your app's tables and query it with any Postgres client.
 
-In this guide, you connect Codeless Sync to a Neon database, copy your Stripe customers into a `stripe_customers` table, and count the rows with `psql`. QuickBooks, Xero, and Paddle follow the same steps. Paddle connects with its own API key, while QuickBooks and Xero connect with OAuth.
+This guide uses Stripe customers as an example. You connect Codeless Sync to a Neon database, copy your Stripe customers into a `stripe_customers` table, and count the rows with `psql`. QuickBooks, Xero, and Paddle follow the same steps. Paddle connects with its own API key, while QuickBooks and Xero connect with OAuth.
 
 ## Prerequisites
 
