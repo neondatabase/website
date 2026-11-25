@@ -13,7 +13,7 @@ redirectFrom:
   - /docs/conceptual-guides/roadmap
   - /docs/reference/roadmap
   - /docs/community/public-preview
-updatedOn: '2026-11-25T11:12:07.045Z'
+updatedOn: '2026-11-25T11:31:25.692Z'
 ---
 
 This page has two lists: [what's coming](#whats-coming) and [what we've shipped recently](#what-weve-shipped-recently). Items in **What's coming** are planned or in progress. They're grouped by product area, not listed in priority order, and don't have committed dates, so plans can change. For release-by-release detail, see the [Changelog](/docs/changelog).
@@ -29,89 +29,83 @@ This page has two lists: [what's coming](#whats-coming) and [what we've shipped 
 
 ### Functions
 
-- Function environments
-- Multiple concurrent requests per function instance
-- Static site hosting
-- A code editor in the Console
-- Request affinity, so related requests reach the same function instance
-- A Python runtime
+- **Code editor in the Console**: Write, edit, and deploy a function from the Neon Console without setting up a local project.
+- **Stateful functions**: Keep state in memory for a chat room, game session, or shared document, with every request for that room or session handled by the same running function.
+- **Python runtime**: Write functions in Python, in addition to JavaScript and TypeScript on Node.js.
 
 ### Object Storage
 
-- Point-in-time restore, snapshots, and time travel for Object Storage, matching Postgres branches
-- Custom domains for Object Storage
+- **Restore Object Storage to an earlier point**: Restore a branch's Object Storage to an earlier point in time or a snapshot, the same way you restore Postgres. Today, restoring a branch reverts only the database.
+- **Custom domains for Object Storage**: Serve public files from a bucket on a domain you own, the way you can with [Functions](/docs/compute/functions/custom-domains).
 
 ### Managed Better Auth
 
-- Multi-factor authentication (MFA)
-- Full support for the Organization plugin
-- Custom fields in sign-up flows
-- Admin plugin customization
-- Device authorization, so users can sign in to CLI tools
+- **Multi-factor authentication (MFA)**: Let your app's users add a second sign-in step, such as a code from an authenticator app.
+- **Full Organization plugin support**: Complete support for teams, members, and invitations in your app through the [Organization plugin](/docs/auth/guides/plugins/organization), which is partially supported today.
+- **Custom sign-up fields**: Collect extra details at sign-up, such as a company name, and store them with the user record.
+- **Admin plugin customization**: Adjust the [Admin plugin](/docs/auth/guides/plugins/admin) to fit how your app manages users.
+- **Device authorization**: Let users sign in to your CLI tool by approving a short code in their browser, the same flow tools like the GitHub CLI use.
 
 For plugin-level status, see the [Managed Better Auth roadmap](/docs/auth/roadmap).
 
 ### AI Gateway
 
-- A free tier with selected open-source models
-- Model comparison and selection in the Console
-- Cost and performance observability for AI Gateway requests
-- More models in the catalog
+- **AI Gateway observability**: See request volume, latency, errors, and cost for your AI Gateway traffic in the Console.
+- **More models**: New frontier and open-weight models added to the [catalog](/docs/ai-gateway/models) as providers release them.
 
 ### Billing & cost controls
 
-- Spend limits that cap your organization's monthly spend
-- Cost and usage dashboards across Postgres and backend services
+- **Spend limits**: Set a monthly cap on your organization's spend. Today, [spending notifications](/docs/introduction/spending-notifications) email you at a threshold but don't stop usage.
+- **Usage and cost dashboards for your whole backend**: See usage and cost for Functions, Object Storage, AI Gateway, Managed Better Auth, and Realtime in the Console, next to Postgres. Today, the Console shows Postgres usage, and the [consumption API](/docs/guides/consumption-metrics) reports backend usage.
 
 ### Postgres compute
 
-- Major version upgrades on a branch, starting with upgrades to Postgres 18
-- Shared buffers that grow and shrink with autoscaling, with no restart
-- Fixed compute sizes up to 128 CUs
-- Autoscaling up to 60 CUs
-- Automatic updates for large computes, with no manual restart required
-- Scale to zero for computes larger than 16 CU
+- **Major version upgrades on a branch**: Upgrade to a newer major Postgres version on a branch, with checks that stop early if an extension or setting isn't compatible. Upgrades to Postgres 18 come first. Today, moving to a new major version means [migrating your data to a new project](/docs/postgresql/postgres-upgrade).
+- **Cache that grows with autoscaling**: As an autoscaling compute scales up, Postgres gets a larger in-memory cache (shared buffers) without a restart, so more of your data is served from memory.
+- **Larger fixed computes**: Fixed compute sizes up to 128 CU, up from 56 CU today.
+- **Larger autoscaling range**: Autoscaling up to 60 CU, up from 16 CU today.
+- **Automatic updates for large computes**: Computes larger than 16 CU get [compute updates](/docs/manage/updates) without a manual restart, as smaller computes do today.
+- **Scale to zero for large computes**: Computes larger than 16 CU can [suspend when idle](/docs/introduction/scale-to-zero). Today, they stay active.
 
 ### Backups & restore
 
-- Externally exported backups
-- Integration with external backup systems
-- Cross-region branch snapshots and exported backups
-- Cross-cloud branch snapshots and exported backups
-- Branch recovery, so you can restore a deleted branch during a short recovery period
-- Snapshots on non-root branches
+- **Exported backups**: Export backups of your databases to storage outside Neon that you control.
+- **External backup systems**: Send Neon backups to the backup tools you already use.
+- **Cross-region and cross-cloud backups**: Keep snapshots and exported backups in a different region or cloud provider from your project, so a regional outage doesn't affect your backups.
+- **Branch recovery**: Restore a deleted branch for a short period after you delete it, as you can with [deleted projects](/docs/manage/projects#recover-a-deleted-project) today.
+- **Snapshots on any branch**: Create [snapshots and backup schedules](/docs/guides/backup-restore) on child branches, not only root branches.
 
 ### High availability
 
-- Cross-availability zone (AZ) highly available compute
-- Cross-AZ, cross-region, and cross-cloud disaster recovery
+- **Compute that survives a zone outage**: Keep your compute running through an availability zone (AZ) outage, with automatic failover to another zone. Neon storage is already [replicated across zones](/docs/introduction/high-availability).
+- **Disaster recovery across zones, regions, and clouds**: Recover your databases in another availability zone, region, or cloud provider if your primary location becomes unavailable.
 
 ### Database storage
 
-- Increased ingestion speeds
-- Continued storage scaling
+- **Faster ingestion**: Load and write large volumes of data faster.
+- **Larger databases**: Continued increases to how much data a project can store.
 
 ### Security & compliance
 
-- Custom key support for encryption at rest
-- Customer-managed key (CMK) support for application-level encryption
-- Kerberos and LDAP authentication support
-- Mutual TLS connections
-- SOC 2 coverage for backend services
+- **Your own key for encryption at rest**: Encrypt stored data with a key you provide instead of a Neon-managed key.
+- **Customer-managed keys (CMK) for application-level encryption**: Encrypt data with keys held in your own key management service, so you control access to them and can revoke it.
+- **Kerberos and LDAP authentication**: Connect to Postgres with your company's existing Kerberos or LDAP credentials.
+- **Mutual TLS (mTLS)**: Require clients to present a trusted certificate when they connect, so only approved machines can reach your database.
+- **SOC 2 for backend services**: Extend Neon's [SOC 2](/docs/security/compliance) coverage to Functions, Object Storage, AI Gateway, Managed Better Auth, and Realtime.
 
 ### Account security
 
-- Single sign-on (SSO) with identity providers such as Okta, and SCIM user provisioning for organizations
-- Role-based access control (RBAC) roles extended into the database
-- Self-serve audit logs of all database access
+- **Single sign-on (SSO) and SCIM**: Sign in to Neon through your identity provider, such as Okta, and add or remove organization members automatically as people join or leave your company.
+- **Neon roles inside Postgres**: Carry a member's [Neon role](/docs/manage/user-permissions) into the database, so their access to data matches their access in the Console.
+- **Self-serve audit logs**: View a log of all database access yourself. Today, [HIPAA projects](/docs/security/hipaa) can request audit logs through Support.
 
 ### Integrations
 
-- Vercel OIDC support, so Vercel apps can connect to Neon with a short-lived Vercel OIDC token instead of a static password
+- **Vercel OIDC**: Vercel apps connect to Neon with short-lived tokens that Vercel issues, instead of a stored database password.
 
 ### Clouds & regions
 
-- Region expansion for paid plan users. Let us know where you want to see Neon next: [Request a region](/docs/introduction/regions)
+- **More regions for paid plans**: Neon is adding Postgres regions for paid plans. Let us know where you want to see Neon next: [Request a region](/docs/introduction/regions).
 
 Want something that isn't listed? Tell us in our Discord feedback channel.
 
