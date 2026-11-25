@@ -40,7 +40,10 @@ The [Model Context Protocol (MCP)](https://modelcontextprotocol.io/docs/getting-
 
 Without a standard, connecting your app to AI assistants would mean building a separate integration for each one. With MCP, you build one server, and any AI client that supports the protocol can use it.
 
-**[ADD IMAGE 1]**
+<video autoPlay muted loop playsInline width="708" height="224" aria-label="AI clients connecting to an MCP server">
+<source src="https://cdn.neonapi.io/public/images/pages/blog/every-app-needs-an-mcp-server/clients.webm" type="video/webm" />
+<source src="https://cdn.neonapi.io/public/images/pages/blog/every-app-needs-an-mcp-server/clients.mp4" type="video/mp4" />
+</video>
 
 An MCP server can offer [three kinds of things](https://modelcontextprotocol.io/docs/learn/server-concepts):
 
@@ -54,7 +57,10 @@ To let agents do things in your app, you need tools, so the rest of this post fo
 
 Say your app is [a shared grid that anyone can paint,](https://github.com/thisistonydang/mcp-place-demo) and a user asks ChatGPT to paint a square red.
 
-**[ADD IMAGE 2]**
+<video autoPlay muted loop playsInline width="708" height="356" aria-label="Canvas squares and their database rows">
+<source src="https://cdn.neonapi.io/public/images/pages/blog/every-app-needs-an-mcp-server/canvas-rows.webm" type="video/webm" />
+<source src="https://cdn.neonapi.io/public/images/pages/blog/every-app-needs-an-mcp-server/canvas-rows.mp4" type="video/mp4" />
+</video>
 
 Here's what actually happens behind the scenes:
 
@@ -63,7 +69,10 @@ Here's what actually happens behind the scenes:
 - Call. ChatGPT sends the tool call to your server, along with a token that identifies the user. Your server checks who the user is and what they're allowed to do, then runs your code - e.g. it updates one row in the database
 - Response. Your server returns the result. ChatGPT tells the user it's done, or calls another tool if the task needs more steps.
 
-**[ADD IMAGE 3]**
+<video autoPlay muted loop playsInline width="708" height="292" aria-label="How an agent calls an MCP tool">
+<source src="https://cdn.neonapi.io/public/images/pages/blog/every-app-needs-an-mcp-server/agent-flow.webm" type="video/webm" />
+<source src="https://cdn.neonapi.io/public/images/pages/blog/every-app-needs-an-mcp-server/agent-flow.mp4" type="video/mp4" />
+</video>
 
 ## Why not let agents use the UI or the database directly?
 
@@ -73,7 +82,10 @@ The first would be to use the app the way a person would. Some agents can operat
 
 You also could, in theory, give the agent a database connection string, but this is a problem. Your app sits between users and the database - it checks who's signed in, what they're allowed to change, and whether the input makes sense. By giving the agent a connection string directly, all these security steps are skipped - an agent might log in with a database role that can read and write every user's rows, and it could run any query, without anything stopping it from changing or deleting data that belongs to other users.
 
-**[ADD IMAGE 4]**
+<video autoPlay muted loop playsInline width="708" height="459" aria-label="Three ways for agents to interact with an app">
+<source src="https://cdn.neonapi.io/public/images/pages/blog/every-app-needs-an-mcp-server/three-ways.webm" type="video/webm" />
+<source src="https://cdn.neonapi.io/public/images/pages/blog/every-app-needs-an-mcp-server/three-ways.mp4" type="video/mp4" />
+</video>
 
 The third way is to call tools that your app exposes, and that's what an MCP server is for. You decide which actions exist and what each one accepts. The agent sees a list of tools and can only do what they allow, and your code stays between the agent and your data.
 
@@ -107,7 +119,10 @@ If you want your server to appear in the ChatGPT or Claude plugin stores, each t
 
 ## Build your MCP server on Neon
 
-**[ADD IMAGE 5]**
+<video autoPlay muted loop playsInline width="708" height="388" aria-label="Production MCP server requirements on Neon">
+<source src="https://cdn.neonapi.io/public/images/pages/blog/every-app-needs-an-mcp-server/production-needs.webm" type="video/webm" />
+<source src="https://cdn.neonapi.io/public/images/pages/blog/every-app-needs-an-mcp-server/production-needs.mp4" type="video/mp4" />
+</video>
 
 Put together, most of that list is infrastructure. You need a place to run the server, an identity provider that already knows your users, and a database those two can share. You can find all these elements with [Neon](https://neon.com/).
 
@@ -139,13 +154,19 @@ Once your server has a token, it still needs to answer one question: which rows 
 
 Many apps keep users in a separate identity service and the app data in a database, and keep the two in sync. [Managed Better Auth](https://neon.com/docs/auth/overview) stores your users in your own database, in a schema called `neon_auth`, next to your app's tables. The token's `sub` field is the user's ID, the same ID your tables already reference. Your tool filters by it, and that's the whole check.
 
-**[ADD IMAGE 6]**
+<video autoPlay muted loop playsInline width="708" height="207" aria-label="Matching an OAuth token to user data">
+<source src="https://cdn.neonapi.io/public/images/pages/blog/every-app-needs-an-mcp-server/token-user-id.webm" type="video/webm" />
+<source src="https://cdn.neonapi.io/public/images/pages/blog/every-app-needs-an-mcp-server/token-user-id.mp4" type="video/mp4" />
+</video>
 
 ### You can branch
 
 At some point you'll want to change your MCP server, for example by adding a tool or changing how sign-in works. You don't want to test that on the server your users are connected to.
 
-**[ADD IMAGE 7]**
+<video autoPlay muted loop playsInline width="708" height="322" aria-label="Isolated MCP servers on Neon branches">
+<source src="https://cdn.neonapi.io/public/images/pages/blog/every-app-needs-an-mcp-server/branches.webm" type="video/webm" />
+<source src="https://cdn.neonapi.io/public/images/pages/blog/every-app-needs-an-mcp-server/branches.mp4" type="video/mp4" />
+</video>
 
 On Neon, a [branch](https://neon.com/docs/introduction/branching) is an isolated copy of your backend. When you create one, it gets its own database, its own functions, and its own auth setup, with separate OAuth settings and a separate auth URL. Tokens issued on one branch don't work on another. You can connect an AI client to a development branch's MCP server, try the new tool against a copy of your data, and merge the change once it works.
 
@@ -187,7 +208,10 @@ The build takes four prompts to a coding agent:
 - Add the MCP server as a Neon Function, with the OAuth provider plugin and the `paint_square` tool. The agent also writes the sign-in and consent pages and configures the OAuth settings
 - Deploy the frontend to Vercel and update the OAuth page URLs, so ChatGPT and Claude can reach the sign-in and consent pages over HTTPS
 
-**[ADD IMAGE 8]**
+<video autoPlay muted loop playsInline width="708" height="415" aria-label="Building an MCP server on Neon">
+<source src="https://cdn.neonapi.io/public/images/pages/blog/every-app-needs-an-mcp-server/build-overview.webm" type="video/webm" />
+<source src="https://cdn.neonapi.io/public/images/pages/blog/every-app-needs-an-mcp-server/build-overview.mp4" type="video/mp4" />
+</video>
 
 Beyond building the MCP server, we also test it:
 
