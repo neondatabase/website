@@ -9,7 +9,7 @@ summary: >-
   scale to zero, and the paid Codeless Sync plans that include schedules.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2026-11-25T12:35:23.705Z'
+updatedOn: '2026-11-25T12:42:50.681Z'
 ---
 
 [Codeless Sync](https://codelesssync.com) copies data from Stripe, QuickBooks, Xero, and Paddle into tables in your own Postgres database, and can keep those tables up to date on a schedule. With the data in Neon, you can join it with your app's tables and query it with any Postgres client.
@@ -28,7 +28,7 @@ In this guide, you connect Codeless Sync to a Neon database, copy your Stripe cu
 Codeless Sync creates its tables outside your schema migrations. If your app manages its schema with a migration tool, keep the synced tables in their own database, or on their own [branch](/docs/introduction/branching), so your migrations don't see tables they didn't create. A dedicated role also lets you revoke Codeless Sync's access without affecting your other apps.
 
 1. In the [Neon Console](https://console.neon.tech), select your project and branch.
-2. Under **Postgres database**, select **Roles**, click **Add role**, and create a role such as `codeless_sync`. Copy the password, which is shown once.
+2. Under **Postgres database**, select **Roles**, click **Add role**, and create a role such as `codeless_sync`. Copy the password that Neon shows you.
 3. Under **Postgres database**, select **Databases**, click **Add database**, name it (for example, `billing`), and select `codeless_sync` as the owner.
 
 For details, see [Manage roles](/docs/manage/roles) and [Manage databases](/docs/manage/databases).
@@ -58,7 +58,16 @@ Keep the direct string for `psql`, schema migrations, and `pg_dump`. For more on
 
 ## 3. Create a restricted Stripe key
 
-Codeless Sync only reads from Stripe, so give it a key that can only read. In the Stripe Dashboard, go to **Developers** > **API keys** and create a restricted key with **Read** access to **Customers**. Restricted keys start with `rk_test_` or `rk_live_`.
+Codeless Sync connects to Stripe with a restricted key, which you can revoke at any time without affecting your other keys. In the [Stripe Dashboard](https://dashboard.stripe.com):
+
+1. Click **Developers**, then select **API keys**.
+2. Click **Create Restricted Key**, then choose **Providing this key to another website**.
+3. Name the key and enter `https://codelesssync.com` as the URL.
+4. Leave **Customize permissions for this key** unticked, and click **Create restricted key**.
+
+Restricted keys start with `rk_test_` or `rk_live_`.
+
+TODO(ilshaad): confirm which Stripe permissions the "Providing this key to another website" option grants, and whether they are read-only.
 
 ## 4. Connect Neon to Codeless Sync
 
@@ -69,7 +78,7 @@ Create a sync configuration that points at your Neon database:
 3. On the **Database Project Setup** step, enter a project name, choose **Neon** as the **Database Platform**, paste the pooled connection string, and click **Test & Continue**.
 4. Paste the restricted Stripe key, click **Connect**, then click **Next**.
 5. Click **Auto-create Table**. Codeless Sync creates a `stripe_customers` table in your Neon database. Click **Next**.
-6. Name the configuration and click **Create Sync Configuration**.
+6. Name the configuration and click **Create Sync Configuration**. Codeless Sync returns you to the dashboard.
 
 ![The Codeless Sync database step with Neon selected as the database platform](/docs/guides/codeless-sync-database-step.png)
 
@@ -77,7 +86,7 @@ If you see `Database authentication failed - check username and password`, part 
 
 ## 5. Run the first sync
 
-Open the configuration and click **Sync Now**. The run page shows the rows processed as each batch is written.
+On the dashboard, click **Sync Now** on the new configuration. Codeless Sync opens the run page, which shows the rows processed as each batch is written.
 
 ![A completed Codeless Sync run showing the rows processed](/docs/guides/codeless-sync-first-sync.png)
 
@@ -103,7 +112,7 @@ SELECT count(*) FROM stripe_customers;
 
 <TabItem>
 
-In the Neon Console, open the **SQL Editor**, select your branch and the `billing` database, and run:
+In the Neon Console, select **Postgres database** > **SQL Editor**, select your branch and the `billing` database, and run:
 
 ```sql
 SELECT count(*) FROM stripe_customers;
@@ -134,7 +143,7 @@ TODO(ilshaad): confirm the plan names and frequencies match the live plan_limits
 
 ## Scheduled syncs and scale to zero
 
-With [scale to zero](/docs/introduction/scale-to-zero), Neon suspends a compute after 5 minutes of inactivity. A scheduled sync connects to the database, so it wakes a suspended compute. The compute reactivates within a few hundred milliseconds, then stays active while the sync runs and for 5 minutes of inactivity afterwards before it suspends again.
+With [scale to zero](/docs/introduction/scale-to-zero), Neon suspends a compute after 5 minutes of inactivity by default. A scheduled sync connects to the database, so it wakes a suspended compute. The compute reactivates within a few hundred milliseconds, then stays active while the sync runs and suspends again after 5 minutes of inactivity.
 
 Each scheduled sync therefore adds compute time to your usage. A daily or weekly schedule wakes the compute once per run. To see the effect, check your compute usage in the Neon Console after a few scheduled runs.
 
