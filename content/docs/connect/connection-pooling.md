@@ -17,7 +17,7 @@ redirectFrom:
   - /docs/guides/connection-pooling
   - /docs/introduction/connection-pooling
   - /docs/manage/connection-pooling
-updatedOn: '2026-11-25T19:18:29.360Z'
+updatedOn: '2026-11-25T21:33:50.925Z'
 ---
 
 For most apps, use a pooled connection. It reuses database connections to help you avoid connection limits. Direct connections are typically used for schema migrations, backups, and other work that needs a single continuous session.
@@ -95,13 +95,13 @@ To use connection pooling, connect with the pooled connection string. It's your 
 Direct (no pooling):
 
 ```text shouldWrap
-postgresql://user1:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require
+postgresql://user1:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require&channel_binding=require
 ```
 
 Pooled:
 
 ```text shouldWrap
-postgresql://user1:AbC123dEf@ep-cool-darkness-123456-pooler.us-east-2.aws.neon.tech/dbname?sslmode=require
+postgresql://user1:AbC123dEf@ep-cool-darkness-123456-pooler.us-east-2.aws.neon.tech/dbname?sslmode=require&channel_binding=require
 ```
 
 To copy the pooled string from the Neon Console, click **Connect** in the Console nav and turn on the **Connection pooling** toggle.
@@ -122,7 +122,7 @@ PgBouncer creates a separate pool for each combination of database user and data
 - `user2` connecting to `database1` gets a separate pool.
 - `user1` connecting to `database2` gets another separate pool.
 
-Each pool can grow up to `default_pool_size` on its own, but all pools on a compute draw from the same underlying `max_connections` limit.
+Each pool can grow up to `default_pool_size` (90% of `max_connections`) on its own, but all pools on a compute draw from the same underlying `max_connections` limit. For the exact numbers and what happens when a pool fills up, see [Pooler limits](#pooler-limits).
 
 ### Connection pooling in transaction mode
 
@@ -191,13 +191,12 @@ const query = {
 await client.query(query);
 ```
 
-With Python (psycopg2):
+With Python (psycopg 3):
 
 ```python
-cur = conn.cursor()
-query = "SELECT * FROM users WHERE username = %s;"
-cur.execute(query, ('alice',), prepare=True)
-results = cur.fetchall()
+with conn.cursor() as cur:
+    cur.execute("SELECT * FROM users WHERE username = %s", ("alice",), prepare=True)
+    results = cur.fetchall()
 ```
 
 Most PostgreSQL client libraries support protocol-level prepared statements. Check your driver's documentation for details.
@@ -268,7 +267,7 @@ The 10,000 client connection limit is not 10,000 concurrent queries. For a 1 CU 
 
 ### What happens when you hit a limit
 
-- **Per-user, per-database pool full**: on a 1 CU compute (`default_pool_size` = 405), if `user1` holds 405 active connections to `database1` with long-running queries, connection 406 waits in the queue and fails with `query_wait_timeout` after 2 minutes. Keep transactions short, move to a larger compute to raise the pool size, or use additional database users to get more pools.
+- **Per-user, per-database pool full**: on a 1 CU compute (`default_pool_size` = 405), if `user1` holds 405 active connections to `database1` with long-running queries, connection 406 waits in the queue and fails with `query_wait_timeout` after 2 minutes. Keep transactions short, or move to a larger compute to raise the pool size. A second database user gets its own pool, but all pools share `max_connections`, so it helps only when `max_connections` still has headroom (on a 1 CU compute, about 38 connections remain after a full 405-connection pool and the 7 reserved for the superuser).
 - **Client connection limit reached**: the 10,001st client connection to PgBouncer fails with `no more connections allowed (max_client_conn)`. Fix connection leaks, add client-side pooling, or reduce the number of application instances.
 - **`max_connections` reached on a direct connection**: on a 0.25 CU compute (112 `max_connections`), connection 106 on a non-pooled string fails with `FATAL: remaining connection slots are reserved`. Switch to the pooled connection string (add `-pooler` to the hostname), increase the compute size, or add connection pooling in your application.
 
@@ -276,7 +275,7 @@ The 10,000 client connection limit is not 10,000 concurrent queries. For a 1 CU 
 
 ### Neon PgBouncer configuration settings
 
-Neon's PgBouncer settings are not user-configurable:
+You can't change Neon's PgBouncer settings yourself. To request a different `default_pool_size`, contact [Support](/docs/introduction/support). The current settings are:
 
 ```ini
 [pgbouncer]
