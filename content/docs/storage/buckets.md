@@ -6,7 +6,7 @@ summary: >-
   buckets via the Neon Console, the Neon API, or the S3 API. Set the access
   level to private or public_read to control who can read objects.
 enableTableOfContents: true
-updatedOn: '2026-11-18T13:46:11.132Z'
+updatedOn: '2026-11-25T10:20:39.215Z'
 ---
 
 A bucket is a named container for objects in Neon Object Storage. Buckets are scoped to a branch and inherit from parent branches when a new branch is created. No data is copied on fork.
@@ -107,6 +107,8 @@ Objects in a `public_read` bucket are accessible at:
 ```
 https://<branch-id>.storage.c-<N>.us-east-2.aws.neon.tech/my-public-bucket/<object-key>
 ```
+
+Requests to this URL are served from your project's region. Object Storage doesn't use a CDN. See [Limits](/docs/storage/overview#limits).
 
 ## List buckets
 
