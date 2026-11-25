@@ -17,7 +17,7 @@ redirectFrom:
   - /docs/guides/connection-pooling
   - /docs/introduction/connection-pooling
   - /docs/manage/connection-pooling
-updatedOn: '2026-11-24T20:37:23.980Z'
+updatedOn: '2026-11-25T16:24:55.227Z'
 ---
 
 For most apps, use a pooled connection. It reuses database connections to help you avoid connection limits. Direct connections are typically used for schema migrations, backups, and other work that needs a single continuous session.
@@ -56,20 +56,31 @@ For most apps, use a pooled connection. It reuses database connections to help y
 
 ### When to use pooled vs direct connections
 
-Use a direct connection for any tool that holds one connection open and expects the same session across statements. Use a pooled connection for anything that opens and closes connections frequently.
+Use a pooled connection by default. Switch to a direct connection only for work that needs a single, continuous session.
 
-| Use case                                                                                               | Connection type | Why                                       |
-| ------------------------------------------------------------------------------------------------------ | --------------- | ----------------------------------------- |
-| Web and serverless apps                                                                                | Pooled          | Many short-lived connections              |
-| Connection-per-request workloads                                                                       | Pooled          | High connection churn                     |
-| Schema migrations                                                                                      | Direct          | Tools may not support transaction pooling |
-| `pg_dump` / `pg_restore` and backups                                                                   | Direct          | Use `SET` statements and a stable session |
-| Logical replication                                                                                    | Direct          | Requires a persistent connection          |
-| `LISTEN` / `NOTIFY`                                                                                    | Direct          | Needs the same session across statements  |
-| Session-level advisory locks                                                                           | Direct          | The lock is tied to the session           |
-| `SET` / session state, temp tables, `CREATE INDEX CONCURRENTLY`, prepared statements that must persist | Direct          | Need one continuous session               |
-| Long-running analytics queries                                                                         | Direct          | Avoid pool contention                     |
-| Admin tasks                                                                                            | Direct          | May need session-level features           |
+<div className="flex items-center gap-6 sm:flex-col">
+  <div style={{ flex: '1 1 50%' }}>
+
+**Use a pooled connection for**
+
+- Web and serverless apps
+- Connection-per-request workloads
+- Anything that opens many short-lived connections
+
+  </div>
+  <div style={{ flex: '1 1 50%' }}>
+
+**Use a direct connection for**
+
+- Schema migrations
+- `pg_dump` / `pg_restore` and backups
+- Logical replication
+- `LISTEN` / `NOTIFY`
+- Session-level advisory locks
+- `SET` and other session state (temp tables, `CREATE INDEX CONCURRENTLY`, persistent prepared statements)
+
+  </div>
+</div>
 
 If you run on a platform that scales instances up and down quickly (for example AWS Fargate, Google Cloud Run, or Vercel), see [Serverless connection pooling](/docs/guides/serverless-connection-pooling) for strategies that prevent connection leaks and exhaustion when instances scale out or suspend.
 
