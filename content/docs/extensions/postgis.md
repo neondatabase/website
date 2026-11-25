@@ -10,14 +10,14 @@ summary: >-
   extensions such as pgRouting, PostGIS SFCGAL, and PostGIS Tiger Geocoder, see
   the PostGIS-related extensions page.
 enableTableOfContents: true
-updatedOn: '2026-11-21T12:10:55.590Z'
+updatedOn: '2026-11-25T17:08:04.460Z'
 ---
 
-The `postgis` extension provides support for spatial data - coordinates, maps and polygons, encompassing geographical and location-based information. It introduces new data types, functions, and operators to manage and analyze spatial data effectively.
+The `postgis` extension adds support for spatial data such as coordinates, maps, and polygons. It introduces new data types, functions, and operators to manage and analyze spatial data effectively.
 
 <CTA />
 
-This guide introduces you to the `postgis` extension - how to enable it, store and query spatial data, and perform geospatial analysis with real-world examples. Geospatial data is crucial in fields like urban planning, environmental science, and logistics.
+This guide introduces the `postgis` extension: how to enable it, store and query spatial data, and perform geospatial analysis with real-world examples. Geospatial data is crucial in fields like urban planning, environmental science, and logistics.
 
 <Admonition type="note">
     PostGIS is an open-source extension for Postgres that can be installed on any Neon Project using the instructions below. Detailed installation instructions and compatibility information can be found at [PostGIS Documentation](https://postgis.net/documentation/). 
@@ -100,7 +100,7 @@ The actual shapes are stored as a set of coordinates. For example, a point is st
 
 ## Longer example
 
-PostGIS provides a number of other functions for spatial analysis - area, distance, intersection, and more. To illustrate, we'll create dataset representing a small set of landmarks and roads in a fictional city and run spatial queries on it.
+PostGIS provides a number of other functions for spatial analysis, such as area, distance, and intersection. To illustrate, we'll create a dataset representing a small set of landmarks and roads in a fictional city and run spatial queries on it.
 
 **Creating the test dataset**
 
@@ -134,7 +134,7 @@ VALUES
 Finding the nearest places to a given point is a common spatial query. We can use the `ST_Distance` function to find the distance between two points and order the results by distance.
 
 ```sql
-SELECT name, ST_Distance(location, ST_GeomFromText('POINT(150 250)')) AS distance
+SELECT name, ST_Distance(location, ST_GeomFromText('POINT(140 240)')) AS distance
 FROM landmarks
 ORDER BY distance
 LIMIT 1;
@@ -143,9 +143,9 @@ LIMIT 1;
 This query returns the following:
 
 ```text
-| name   | distance |
-|--------|----------|
-| Park   | 70.7107  |
+| name | distance           |
+|------|--------------------|
+| Park | 56.568542494923804 |
 ```
 
 **Intersection of Roads**
