@@ -10,7 +10,7 @@ summary: >-
 enableTableOfContents: true
 redirectFrom:
   - /docs/manage/orgs-auto-provision-domain
-updatedOn: '2026-11-25T11:53:13.496Z'
+updatedOn: '2026-11-25T12:44:08.560Z'
 ---
 
 Organization admins can add verified email domains so that users whose email matches one of those domains are automatically added as members when they sign up or log in. No manual invite is required for those users.
@@ -32,6 +32,8 @@ An organization can have multiple verified domains. The same domain can also be 
 ## Open Verified domains
 
 In the Neon Console, switch to the organization you want to manage, then open the organization **Settings** page and select **Verified domains**. The section shows a short description and a **Domain** field with an **Add domain** button.
+
+![Verified domains section on the organization Settings page, with the Domain field, Add domain button, and Auto-add new users setting](/docs/manage/verified-domains.png)
 
 ## Add the domain
 
