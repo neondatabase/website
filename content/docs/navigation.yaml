@@ -1559,6 +1559,8 @@
                       slug: guides/cloudflare-pages
                     - title: Cloudflare Workers
                       slug: guides/cloudflare-workers
+                - title: Fly.io
+                  slug: guides/fly
                 - title: Heroku
                   slug: guides/heroku
                 - title: Koyeb
