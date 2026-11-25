@@ -1655,6 +1655,8 @@
                   slug: guides/logical-replication-rds-to-neon
                 - title: Cloud SQL
                   slug: guides/logical-replication-cloud-sql
+                - title: Codeless Sync
+                  slug: guides/codeless-sync
                 - title: Lakebase to Neon
                   slug: guides/logical-replication-lakebase-to-neon
                 - title: Neon to Neon
