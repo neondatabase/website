@@ -31,14 +31,22 @@ export function getExperimentVariant(experimentId, variantIds) {
   return variantId;
 }
 
+// The warehouse reads experiment_name and experiment_group_name (see neon-analytics
+// stg_tracking_zerobus_website_clicks); experiment_id and variant_id are kept for other consumers.
+const experimentProperties = (experimentId, variantId) => ({
+  experiment_id: experimentId,
+  variant_id: variantId,
+  experiment_name: experimentId,
+  experiment_group_name: variantId,
+});
+
 export function trackExperimentViewed(experimentId, variantId) {
-  return sendGtagEvent('Experiment Viewed', { experiment_id: experimentId, variant_id: variantId });
+  return sendGtagEvent('Experiment Viewed', experimentProperties(experimentId, variantId));
 }
 
 export function trackExperimentSuccess(experimentId, variantId, properties = {}) {
   return sendGtagEvent('Experiment Success', {
-    experiment_id: experimentId,
-    variant_id: variantId,
+    ...experimentProperties(experimentId, variantId),
     ...properties,
   });
 }
