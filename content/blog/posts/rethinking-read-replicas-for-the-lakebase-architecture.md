@@ -10,8 +10,8 @@ categories:
 authors:
   - carlota-soto
 cover:
-  image: null
-  alt: null
+  image: https://cdn.neonapi.io/public/images/pages/blog/rethinking-read-replicas-for-the-lakebase-architecture/cover.jpg
+  alt: Rethinking read replicas for the lakebase architecture
 isFeatured: false
 seo:
   title: 'Rethinking read replicas for the lakebase architecture - Neon'
@@ -20,16 +20,22 @@ seo:
   noindex: false
   ogTitle: 'Rethinking read replicas for the lakebase architecture - Neon'
   ogDescription: 'When compute is decoupled from storage, adding a replica doesn''t mean copying the database'
-  image: null
+  image: https://cdn.neonapi.io/public/images/pages/blog/rethinking-read-replicas-for-the-lakebase-architecture/social.jpg
 ---
 
-**[ADD "LAKEBASE POSTGRES REPLICAS" ANIMATION]**
+<video autoPlay muted loop playsInline width="708" height="521" aria-label="Lakebase Postgres read replicas">
+<source src="https://cdn.neonapi.io/public/images/pages/blog/rethinking-read-replicas-for-the-lakebase-architecture/lakebase-postgres-replicas.webm" type="video/webm" />
+<source src="https://cdn.neonapi.io/public/images/pages/blog/rethinking-read-replicas-for-the-lakebase-architecture/lakebase-postgres-replicas.mp4" type="video/mp4" />
+</video>
 
 The idea behind read replicas makes sense: when your app gets busy, you add a couple of read-only replicas, route the heavy reads to them, and let the primary focus on writes.
 
 In practice, that rarely works well. In traditional managed Postgres, a replica is a physical clone of the primary: its own instance, its own storage volume, and its own copy of every page. That makes replicas impractical for scaling reads on the go. They take minutes to hours to create, each one adds a full copy of the data to your bill, and they keep running long after the traffic spike is gone. What was supposed to be a nimble way to scale reads turns into one more instance to manage.
 
-**[ADD DIAGRAM - monolith vs lakebase]**
+<video autoPlay muted loop playsInline width="708" height="306" aria-label="Monolithic and Lakebase replica architectures">
+<source src="https://cdn.neonapi.io/public/images/pages/blog/rethinking-read-replicas-for-the-lakebase-architecture/monolith-vs-lakebase-replicas.webm" type="video/webm" />
+<source src="https://cdn.neonapi.io/public/images/pages/blog/rethinking-read-replicas-for-the-lakebase-architecture/monolith-vs-lakebase-replicas.mp4" type="video/mp4" />
+</video>
 
 [Like other DX problems with OLTP databases](https://neon.com/blog/inside-branch-based-restores-in-lakebase-postgres),this is an architecture problem that comes from running things as a monolith. In Lakebase Postgres, a read replica doesn't copy anything - it's one more compute attached to the storage the primary already uses. It's ready in seconds, adds no storage, and scales to zero when nobody is reading from it.
 
@@ -107,7 +113,10 @@ A [read replica in Lakebase Postgres](https://neon.com/docs/introduction/read-re
 
 That is it. Nothing in that list depends on the size of the database, which is why creating a replica takes seconds on a small database and on a large one alike. It also adds no replication work to the primary: the primary keeps streaming WAL to the safekeepers as usual, and the replica reads from the safekeepers, not from the primary.
 
-**[ADD architecture diagram]**
+<video autoPlay muted loop playsInline width="708" height="354" aria-label="Lakebase read replica architecture">
+<source src="https://cdn.neonapi.io/public/images/pages/blog/rethinking-read-replicas-for-the-lakebase-architecture/replica-architecture.webm" type="video/webm" />
+<source src="https://cdn.neonapi.io/public/images/pages/blog/rethinking-read-replicas-for-the-lakebase-architecture/replica-architecture.mp4" type="video/mp4" />
+</video>
 
 ### Lakebase replicas don't duplicate storage
 
@@ -127,7 +136,10 @@ Since a replica is just a compute, it gets everything a Lakebase compute gets, c
 - **Each replica has its own autoscaling range.** [The same algorithm that resizes the primary](https://neon.com/blog/autoscaling-lakebase-postgres) tracks the replica's CPU, memory, and working set, and resizes it in place as read load moves. Resizing never means provisioning a new instance
 - **Replicas scale to zero.** By default, a replica suspends after 5 minutes of inactivity and starts automatically with the next query. There is no WAL backlog to replay on wake: storage kept ingesting WAL while the replica was suspended, so it reads current pages and is up to date with the primary almost immediately
 
-**[ADD traffic diagram]**
+<video autoPlay muted loop playsInline width="708" height="664" aria-label="Read replica autoscaling with traffic">
+<source src="https://cdn.neonapi.io/public/images/pages/blog/rethinking-read-replicas-for-the-lakebase-architecture/replica-autoscaling.webm" type="video/webm" />
+<source src="https://cdn.neonapi.io/public/images/pages/blog/rethinking-read-replicas-for-the-lakebase-architecture/replica-autoscaling.mp4" type="video/mp4" />
+</video>
 
 ## Making replicas cheaper
 
