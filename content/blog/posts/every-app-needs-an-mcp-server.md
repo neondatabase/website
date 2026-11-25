@@ -73,7 +73,7 @@ The first would be to use the app the way a person would. Some agents can operat
 
 You also could, in theory, give the agent a database connection string, but this is a problem. Your app sits between users and the database - it checks who's signed in, what they're allowed to change, and whether the input makes sense. By giving the agent a connection string directly, all these security steps are skipped - an agent might log in with a database role that can read and write every user's rows, and it could run any query, without anything stopping it from changing or deleting data that belongs to other users.
 
-**[ADD IMAGE 3]**
+**[ADD IMAGE 4]**
 
 The third way is to call tools that your app exposes, and that's what an MCP server is for. You decide which actions exist and what each one accepts. The agent sees a list of tools and can only do what they allow, and your code stays between the agent and your data.
 
@@ -107,7 +107,7 @@ If you want your server to appear in the ChatGPT or Claude plugin stores, each t
 
 ## Build your MCP server on Neon
 
-**[ADD IMAGE 4]**
+**[ADD IMAGE 5]**
 
 Put together, most of that list is infrastructure. You need a place to run the server, an identity provider that already knows your users, and a database those two can share. You can find all these elements with [Neon](https://neon.com/).
 
@@ -139,13 +139,13 @@ Once your server has a token, it still needs to answer one question: which rows 
 
 Many apps keep users in a separate identity service and the app data in a database, and keep the two in sync. [Managed Better Auth](https://neon.com/docs/auth/overview) stores your users in your own database, in a schema called `neon_auth`, next to your app's tables. The token's `sub` field is the user's ID, the same ID your tables already reference. Your tool filters by it, and that's the whole check.
 
-**[ADD IMAGE 5]**
+**[ADD IMAGE 6]**
 
 ### You can branch
 
 At some point you'll want to change your MCP server, for example by adding a tool or changing how sign-in works. You don't want to test that on the server your users are connected to.
 
-**[ADD IMAGE 6]**
+**[ADD IMAGE 7]**
 
 On Neon, a [branch](https://neon.com/docs/introduction/branching) is an isolated copy of your backend. When you create one, it gets its own database, its own functions, and its own auth setup, with separate OAuth settings and a separate auth URL. Tokens issued on one branch don't work on another. You can connect an AI client to a development branch's MCP server, try the new tool against a copy of your data, and merge the change once it works.
 
@@ -187,7 +187,7 @@ The build takes four prompts to a coding agent:
 - Add the MCP server as a Neon Function, with the OAuth provider plugin and the `paint_square` tool. The agent also writes the sign-in and consent pages and configures the OAuth settings
 - Deploy the frontend to Vercel and update the OAuth page URLs, so ChatGPT and Claude can reach the sign-in and consent pages over HTTPS
 
-**[ADD IMAGE 7]**
+**[ADD IMAGE 8]**
 
 Beyond building the MCP server, we also test it:
 
