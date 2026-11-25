@@ -13,7 +13,7 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/how-to-guides/connectivity-issues
   - /docs/connect/connectivity-issues
-updatedOn: '2026-11-20T22:29:31.468Z'
+updatedOn: '2026-11-25T23:16:01.302Z'
 ---
 
 This topic describes how to resolve connection errors you may encounter when using Neon. The errors covered include:
@@ -33,7 +33,7 @@ This topic describes how to resolve connection errors you may encounter when usi
 - [query_wait_timeout SSL connection has been closed unexpectedly](#querywaittimeout-ssl-connection-has-been-closed-unexpectedly)
 - [The request could not be authorized due to an internal error](#the-request-could-not-be-authorized-due-to-an-internal-error)
 - [Terminating connection due to idle-in-transaction timeout](#terminating-connection-due-to-idle-in-transaction-timeout)
-- [Error connecting to database: Failed to fetch](#error-connecting-to-database-failed-to-fetch)
+- [Tables page can't reach the database](#tables-page-cant-reach-the-database)
 - [DNS resolution issues](#dns-resolution-issues)
 
 <Admonition type="info">
@@ -302,31 +302,25 @@ If you encounter this error, you can adjust the `idle_in_transaction_session_tim
 
 Be aware that leaving transactions idle for extended periods can prevent vacuuming and increase the number of open connections. Please use caution and consider only changing the value temporarily, as needed.
 
-## Error connecting to database: Failed to fetch
+## Tables page can't reach the database
 
-This error appears on the **Tables** page in the Neon Console when the Console's request to your compute doesn't complete:
+This error appears on the **Tables** page in the Neon Console when the Console's request to your compute doesn't complete. The page shows it under **Couldn't load schemas** in the sidebar or **Couldn't load table** in the grid, with a **Retry** button:
 
 ```text
-Error connecting to database: Failed to fetch
+The browser couldn’t reach the database. Check your connection and try again.
 ```
 
 The most common causes, in order, are:
 
-- **The compute is starting up.** If your compute is suspended after [scale to zero](/docs/introduction/scale-to-zero), the Console wakes it before listing tables, and the first request can fail before the compute is ready. Wait a second or two and click **Refresh**. The second request usually succeeds. You can confirm the compute state on the **Branches** page, where a suspended compute shows as **Idle**. See [Couldn't connect to compute node](#couldnt-connect-to-compute-node) for more on cold-start timing.
-- **A browser extension is blocking the request.** Ad-blockers, privacy extensions, and corporate browser security tools sometimes block requests to `*.neon.tech`. Open the Console in an incognito window with extensions disabled, or temporarily disable extensions like uBlock Origin or Privacy Badger on `console.neon.tech` and reload. Check the browser's developer console (**F12 → Network**) for blocked requests to your compute hostname.
-- **IP Allow is rejecting your connection.** If you've configured an [IP Allow](/docs/manage/projects#configure-ip-allow) list (Scale plan), the Tables view connects from the IP address you're browsing from, so the request is rejected when that address isn't on the allowlist. Add your current IP address under **Settings → Networking**, or if you only need IP Allow on protected branches, enable **Restrict IP Access to protected branches only** so queries against development branches still work.
+- **The compute is starting up.** If your compute is suspended after [scale to zero](/docs/introduction/scale-to-zero), the first request can fail before the compute is ready. Wait a second or two and click **Retry**. The second request usually succeeds. You can confirm the compute state on the **Branches** page, where a suspended compute shows as **Idle**. See [Couldn't connect to compute node](#couldnt-connect-to-compute-node) for more on cold-start timing.
+- **A browser extension is blocking the request.** Ad-blockers, privacy extensions, and corporate browser security tools sometimes block requests to `*.neon.tech`. Open the Console in an incognito window with extensions disabled, or temporarily disable extensions like uBlock Origin or Privacy Badger on `console.neon.tech` and reload. Check the browser's developer console (**F12 → Network**) for blocked requests to `neon.tech` hosts.
+- **IP Allow is rejecting your connection.** If you've configured an [IP Allow](/docs/manage/projects#configure-ip-allow) list (Scale plan), the Tables page connects from the IP address you're browsing from, so the request is rejected when that address isn't on the allowlist. Add your current IP address under **Settings → Networking**, or if you only need IP Allow on protected branches, enable **Restrict IP Access to protected branches only** so queries against development branches still work.
 - **A DNS resolution issue.** Some networks fail to resolve compute hostnames. See [DNS resolution issues](#dns-resolution-issues) below to test and resolve this.
 - **A transient backend error.** If none of the above explain it, check the [Neon status page](https://neonstatus.com/) for ongoing incidents.
 
-<Admonition type="tip" title="Grab the error ID before contacting Support">
-The full error message on the Tables view includes an error ID after the colon. Copy it before refreshing. Support uses that ID to look up the exact request in our logs, which is faster than reproducing the issue.
-</Admonition>
-
 ## DNS resolution issues
 
-Some users encounter DNS resolution failures when connecting to their Neon database. These issues are often reported when using the **Tables** page in the Neon Console. In such cases, users may see an **Unexpected error happened** message like the one below:
-
-![Unexpected error happened on Tables page](/docs/guides/tables_error.png)
+Some users encounter DNS resolution failures when connecting to their Neon database. These issues are often reported when using the **Tables** page in the Neon Console, where they appear as a [Tables page can't reach the database](#tables-page-cant-reach-the-database) error.
 
 To check for a DNS resolution issue, you can run `nslookup` on your Neon hostname, which is the part of your Neon database [connection string](/docs/reference/glossary#connection-string) starting with your endpoint ID (for example, `ep-cool-darkness-a1b2c3d4`) and ending with `neon.tech`. For example:
 
