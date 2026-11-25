@@ -1,13 +1,13 @@
 ---
-title: 'Building a Nuxt.js app with a Vercel and Neon branching workflow'
+title: 'Building a Nuxt app with a Vercel and Neon branching workflow'
 subtitle: 'Automate database branching for every preview deployment with the Vercel-Managed Neon integration'
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2025-07-14T00:00:00.000Z'
-updatedOn: '2026-09-24T17:56:34.189Z'
+updatedOn: '2026-11-25T02:50:12.255Z'
 ---
 
-[Nuxt.js](https://nuxt.com) is an open-source framework built on [Vue.js](https://vuejs.org/). It adds rendering options to Vue, including default [universal rendering (SSR)](https://nuxt.com/docs/guide/concepts/rendering#universal-rendering) for fast initial loads and strong SEO, and [client-side rendering](https://nuxt.com/docs/guide/concepts/rendering#client-side-rendering) for highly interactive applications. Nuxt also supports advanced strategies like [hybrid rendering](https://nuxt.com/docs/guide/concepts/rendering#hybrid-rendering) to mix modes per-route.
+[Nuxt](https://nuxt.com) is an open-source framework built on [Vue.js](https://vuejs.org/). It adds rendering options to Vue, including default [universal rendering (SSR)](https://nuxt.com/docs/guide/concepts/rendering#universal-rendering) for fast initial loads and strong SEO, and [client-side rendering](https://nuxt.com/docs/guide/concepts/rendering#client-side-rendering) for highly interactive applications. Nuxt also supports advanced strategies like [hybrid rendering](https://nuxt.com/docs/guide/concepts/rendering#hybrid-rendering) to mix modes per-route.
 
 As your Nuxt application grows, you need a way to test features that change the database schema without touching your live application. The integration between [Vercel](https://vercel.com) and [Neon](https://neon.com) handles this. Vercel is a deployment platform, and Neon is a complete set of cloud backend primitives built around Lakebase Postgres. Together, they give every preview deployment its own [database branch](/branching).
 
@@ -15,10 +15,10 @@ When you enable the integration, every time you push a new feature branch, Verce
 
 In this guide, you will learn how to:
 
-- Set up a Nuxt.js project and connect it to a GitHub repository.
+- Set up a Nuxt project and connect it to a GitHub repository.
 - Install and configure the Vercel-Managed Neon integration.
 - Define a database schema and manage migrations with Drizzle ORM.
-- Build a full-stack Todo application with Nuxt.js server routes.
+- Build a full-stack Todo application with Nuxt server routes.
 - Test the automated branching workflow: Push a new feature branch and see Vercel and Neon automatically create a sandboxed environment with its own database branch.
 - Safely merge schema changes into production.
 
@@ -26,75 +26,78 @@ In this guide, you will learn how to:
 
 Before you begin, ensure you have the following:
 
-- Node.js `v18.0` or later.
+- Node.js 22 or later
 - A Vercel account
 - A Neon account. The Vercel integration can create one for you if you don't have one.
 
 <Steps>
 
-## Initialize Nuxt.js project
+## Initialize Nuxt project
 
-First, create a new Nuxt.js application and push it to a GitHub repository, which Vercel will use for deployments.
+First, create a new Nuxt application and push it to a GitHub repository, which Vercel will use for deployments.
 
-1.  **Create a Nuxt.js app:**
+1.  **Create a Nuxt app:**
     Open your terminal and run the following command:
 
     ```bash
-    npm create nuxt nuxt-neon-vercel-todo
+    npm create nuxt@latest nuxt-neon-vercel-todo
     ```
 
     When prompted, choose the following options:
     - **Package manager:** `npm`
     - **Initialize git repository:** `Yes`
-    - **Install official modules:** `No`
+    - **Browse and install modules:** `No`
 
     You should see output similar to this:
 
     ```text
-    > npm create nuxt nuxt-neon-vercel-todo
-    Need to install the following packages:
-    create-nuxt@3.26.0
-    Ok to proceed? (y) y
+    > 'create-nuxt' nuxt-neon-vercel-todo
 
-           .d$b.
+
+            .d$b.
           i$$A$$L  .d$b
         .$$F` `$$L.$$A$$.
-       j$$'    `4$$:` `$$.
+        j$$'    `4$$:` `$$.
       j$$'     .4$:    `$$.
-     j$$`     .$$:      `4$L
+      j$$`     .$$:      `4$L
     :$$:____.d$$:  _____.:$$:
     `4$$$$$$$$P` .i$$$$$$$$P`
 
-    ℹ Welcome to Nuxt!                                                                                            nuxi 9:46:56 AM
-    ℹ Creating a new project in nuxt-neon-vercel-todo.                                                            nuxi 9:46:58 AM
-
-    ✔ Which package manager would you like to use?
-    npm
-    ◐ Installing dependencies...                                                                                   nuxi 9:47:02 AM
-    npm WARN deprecated node-domexception@1.0.0: Use your platform's native DOMException instead
-    npm WARN deprecated @types/parse-path@7.1.0: This is a stub types definition. parse-path provides its own type definitions, so you do not need this installed.
-
-    > postinstall
-    > nuxt prepare
-
-    ✔ Types generated in .nuxt                                                                                    nuxi 9:48:15 AM
-
-    added 751 packages, and audited 753 packages in 1m
-
-    171 packages are looking for funding
-    run `npm fund` for details
-
-    found 0 vulnerabilities
-    ✔ Installation completed.                                                                                     nuxi 9:48:15 AM
-
-    ✔ Initialize git repository?
-    Yes
-    ℹ Initializing git repository...                                                                              nuxi 9:48:18 AM
-
-    Initialized empty Git repository in /nuxt-neon-vercel-todo/.git/
-
-    ✔ Would you like to install any of the official modules?
-    No
+    ┌  Welcome to Nuxt!
+    │
+    ◇  Templates loaded
+    │
+    ◇  Which template would you like to use?
+    │  minimal · Minimal starter with a single app.vue.
+    │
+    ◇  Creating project in nuxt-neon-vercel-todo
+    │
+    ◇  Downloaded minimal template
+    │
+    ◇  Which package manager would you like to use?
+    │  npm
+    │
+    ◇  Initialize git repository?
+    │  Yes
+    │
+    ◇  Dependencies installed [1s]
+    │
+    ◇  Git repository initialized
+    │
+    ◇  Would you like to browse and install modules?
+    │  No
+    │
+    ◇  Created your project from the minimal template
+    │
+    ●  to scaffold this project again without prompts:
+    │  npm create nuxt@latest nuxt-neon-vercel-todo -- --template=minimal \
+    │    --packageManager=npm --gitInit --no-modules
+    │
+    │  Next steps:
+    │  › cd nuxt-neon-vercel-todo
+    │  › npm run dev
+    │
+    └  ✨ Happy building!
     ```
 
 2.  Navigate into the project directory
@@ -114,17 +117,17 @@ First, create a new Nuxt.js application and push it to a GitHub repository, whic
     git push -u origin main
     ```
 
-Next, you'll set up the Vercel-Managed Neon integration. This step provisions a database on Neon and automatically injects the `DATABASE_URL` environment variable into your Nuxt.js application. This setup covers both local development and Vercel deployments.
+Next, you'll set up the Vercel-Managed Neon integration. This step provisions a database on Neon and automatically injects the `DATABASE_URL` environment variable into your Nuxt application. This setup covers both local development and Vercel deployments.
 
 ## Create a Vercel project
 
 1.  Log in to the [Vercel dashboard](https://vercel.com/dashboard).
 2.  Click on **Add New** and select **Project**.
 3.  Select the GitHub repository you created earlier (`nuxt-neon-vercel-todo`).
-4.  Vercel will automatically detect that this is a Nuxt.js application and configure the build settings accordingly.
+4.  Vercel will automatically detect that this is a Nuxt application and configure the build settings accordingly.
 5.  Click **Deploy** to create your Vercel project.
 
-    ![Create Nuxt.js project in Vercel](/docs/guides/nuxt-vercel-create-project.png)
+    ![Create Nuxt project in Vercel](/docs/guides/nuxt-vercel-create-project.png)
 
 ## Configure the Vercel Neon integration
 
@@ -339,7 +342,7 @@ With the database configured, build the Todo application: server routes for CRUD
       <div class="container">
         <h1>Todo List</h1>
         <p>
-          A Nuxt.js app with a serverless Postgres database from Neon, deployed on Vercel with
+          A Nuxt app with a serverless Postgres database from Neon, deployed on Vercel with
           automated database branching.
         </p>
         <form @submit.prevent="addTodo">
@@ -461,7 +464,7 @@ With the database configured, build the Todo application: server routes for CRUD
 
 4.  **Run the application locally:**
 
-    Start your Nuxt.js application locally to test the functionality.
+    Start your Nuxt application locally to test the functionality.
 
     ```bash
     npm run dev
@@ -525,7 +528,7 @@ To demonstrate the automated branching workflow, you will add a new feature to y
       <div class="container">
         <h1>Todo List</h1>
         <p>
-          A Nuxt.js app with a serverless Postgres database from Neon, deployed on Vercel with
+          A Nuxt app with a serverless Postgres database from Neon, deployed on Vercel with
           automated database branching.
         </p>
         <form @submit.prevent="addTodo">
@@ -752,14 +755,14 @@ To demonstrate the automated branching workflow, you will add a new feature to y
 
 ## Summary
 
-You configured a Nuxt.js application so every preview deployment on Vercel gets its own copy-on-write database branch on Neon, with migrations applied during the build.
+You configured a Nuxt application so every preview deployment on Vercel gets its own copy-on-write database branch on Neon, with migrations applied during the build.
 
 Preview branches stay around after you merge. To delete them automatically, see [Vercel branch cleanup](/docs/guides/vercel-branch-cleanup).
 
 ## Resources
 
 - **Vercel-Managed Neon integration:** [Vercel Marketplace](https://vercel.com/marketplace/neon)
-- **Nuxt.js documentation:** [nuxt.com](https://nuxt.com)
+- **Nuxt documentation:** [nuxt.com](https://nuxt.com)
 - **Drizzle ORM:** [orm.drizzle.team](https://orm.drizzle.team)
 - **Neon documentation:** [neon.com/docs](/docs)
 
