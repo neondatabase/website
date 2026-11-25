@@ -1,33 +1,76 @@
 ---
 title: Roadmap
 summary: >-
-  Neon's public product roadmap tracks what is in flight, recently shipped, and
-  planned across compute, storage, security, and cloud regions. Planned features
-  include higher storage and compute limits, CMK encryption, and RBAC.
-  Recently shipped milestones include Postgres 19
-  support, Postgres 18 GA, a major write throughput improvement, Managed Better Auth GA, and the AI agent
-  pricing plan.
+  Neon's product roadmap in two lists: what's coming and what we've shipped
+  recently. Coming soon: Realtime general availability, more regions for backend
+  services, spend limits, SSO with identity providers, major version upgrades,
+  larger computes, high availability, and customer-managed encryption keys.
+  Recently shipped: Postgres 19, the official Terraform provider, Managed Better
+  Auth GA, and project permissions for backend services.
 enableTableOfContents: true
 redirectFrom:
   - /docs/cloud/roadmap
   - /docs/conceptual-guides/roadmap
   - /docs/reference/roadmap
   - /docs/community/public-preview
-updatedOn: '2026-11-21T11:30:46.668Z'
+updatedOn: '2026-11-25T11:12:07.045Z'
 ---
 
-This roadmap describes what's in flight, what we delivered recently, and what's on the horizon.
+This page has two lists: [what's coming](#whats-coming) and [what we've shipped recently](#what-weve-shipped-recently). Items in **What's coming** are planned or in progress. They're grouped by product area, not listed in priority order, and don't have committed dates, so plans can change. For release-by-release detail, see the [Changelog](/docs/changelog).
 
-## Backend primitives for apps and agents
+## What's coming
 
-We've expanded Neon with [a branchable stack of backend primitives](/blog/were-building-backends). Managed Better Auth, Functions, Object Storage, and AI Gateway are now generally available alongside Lakebase Postgres, and Realtime is in public beta. See [What we've shipped recently](#what-weve-shipped-recently-). Here's what we're working on next.
+### Backend services
 
-- **Realtime general availability**: Realtime is in public beta and moving toward general availability. [Learn more](/docs/realtime/overview).
-- **More regions for backend services**: Functions, Object Storage, AI Gateway, and Realtime are expanding beyond their current AWS regions. [Learn more](/docs/introduction/regions).
+- **Realtime general availability**: Realtime is in public beta and moving to general availability with usage-based billing. [Learn more](/docs/realtime/overview).
+- **More regions for backend services**: Functions, Object Storage, AI Gateway, and Realtime are expanding beyond their current AWS regions, starting with US West (Oregon), Europe (London), Asia Pacific (Sydney), and South America (São Paulo). [Learn more](/docs/introduction/regions).
+- **Observability for backend services**: Logs and metrics for every backend service in one place in the Console.
+- **Backend services in the Vercel Marketplace**: Add Functions, Object Storage, AI Gateway, and Managed Better Auth to a Vercel project through the Neon integration, with billing through Vercel.
 
-## Core Postgres database features and improvements
+### Functions
 
-We're also improving and scaling Lakebase Postgres on Neon. Here's what's on the roadmap.
+- Function environments
+- Multiple concurrent requests per function instance
+- Static site hosting
+- A code editor in the Console
+- Request affinity, so related requests reach the same function instance
+- A Python runtime
+
+### Object Storage
+
+- Point-in-time restore, snapshots, and time travel for Object Storage, matching Postgres branches
+- Custom domains for Object Storage
+
+### Managed Better Auth
+
+- Multi-factor authentication (MFA)
+- Full support for the Organization plugin
+- Custom fields in sign-up flows
+- Admin plugin customization
+- Device authorization, so users can sign in to CLI tools
+
+For plugin-level status, see the [Managed Better Auth roadmap](/docs/auth/roadmap).
+
+### AI Gateway
+
+- A free tier with selected open-source models
+- Model comparison and selection in the Console
+- Cost and performance observability for AI Gateway requests
+- More models in the catalog
+
+### Billing & cost controls
+
+- Spend limits that cap your organization's monthly spend
+- Cost and usage dashboards across Postgres and backend services
+
+### Postgres compute
+
+- Major version upgrades on a branch, starting with upgrades to Postgres 18
+- Shared buffers that grow and shrink with autoscaling, with no restart
+- Fixed compute sizes up to 128 CUs
+- Autoscaling up to 60 CUs
+- Automatic updates for large computes, with no manual restart required
+- Scale to zero for computes larger than 16 CU
 
 ### Backups & restore
 
@@ -38,45 +81,43 @@ We're also improving and scaling Lakebase Postgres on Neon. Here's what's on the
 - Branch recovery, so you can restore a deleted branch during a short recovery period
 - Snapshots on non-root branches
 
-### Security
+### High availability
 
-- Custom key support for encryption at rest
-- Customer-managed key (CMK) support for application-level encryption
-- Kerberos and LDAP authentication support
-- Mutual TLS connections
-
-### Clouds & regions
-
-- Region expansion for paid plan users. Let us know where you want to see Neon next: [Request a region](/docs/introduction/regions)
-
-### Integrations
-
-- Vercel OIDC support, so Vercel apps can connect to Neon with a short-lived Vercel OIDC token instead of a static password
+- Cross-availability zone (AZ) highly available compute
+- Cross-AZ, cross-region, and cross-cloud disaster recovery
 
 ### Database storage
 
 - Increased ingestion speeds
 - Continued storage scaling
 
-### Postgres compute
+### Security & compliance
 
-- Fixed compute sizes up to 128 CUs
-- Autoscaling up to 60 CUs
-- Automatic updates for large computes, with no manual restart required
-- Scale to zero for computes larger than 16 CU
+- Custom key support for encryption at rest
+- Customer-managed key (CMK) support for application-level encryption
+- Kerberos and LDAP authentication support
+- Mutual TLS connections
+- SOC 2 coverage for backend services
 
 ### Account security
 
+- Single sign-on (SSO) with identity providers such as Okta, and SCIM user provisioning for organizations
 - Role-based access control (RBAC) roles extended into the database
 - Self-serve audit logs of all database access
-- Single sign-on (SSO) and SCIM user provisioning for organizations
 
-### High availability
+### Integrations
 
-- Cross-availability zone (AZ) highly available compute
-- Cross-AZ, cross-region, and cross-cloud disaster recovery
+- Vercel OIDC support, so Vercel apps can connect to Neon with a short-lived Vercel OIDC token instead of a static password
 
-## What we've shipped recently 🚢
+### Clouds & regions
+
+- Region expansion for paid plan users. Let us know where you want to see Neon next: [Request a region](/docs/introduction/regions)
+
+Want something that isn't listed? Tell us in our Discord feedback channel.
+
+<CommunityBanner buttonText="Leave feedback" buttonUrl="https://discord.com/channels/1176467419317940276/1176788564890112042" logo="discord">Share your ideas in&nbsp;Discord</CommunityBanner>
+
+## What we've shipped recently
 
 - **Postgres 19 support**: Postgres 19 is now available on Neon. Select it when you create a project. Postgres 18 remains the default. [Learn more](/docs/postgresql/postgres-version-support).
 - **Official Neon Terraform provider (beta)**: The `neondatabase/neon` provider replaces the community provider and manages Postgres along with Functions, Object Storage, Managed Better Auth, Realtime, and the Data API. [Learn more](/docs/reference/terraform).
@@ -267,9 +308,3 @@ We're also improving and scaling Lakebase Postgres on Neon. Here's what's on the
 </details>
 
 For more of the latest features and fixes, check our [Changelog](/docs/changelog), published weekly. Or watch for our Changelog email, also sent out weekly. You can also subscribe to updates using our [RSS feed](/docs/changelog/rss.xml).
-
-## Share your thoughts
-
-As always, we are listening. If you see something you like, something you disagree with, or something you'd love for us to add, let us know in our Discord feedback channel.
-
-<CommunityBanner buttonText="Leave feedback" buttonUrl="https://discord.com/channels/1176467419317940276/1176788564890112042" logo="discord">Share your ideas in&nbsp;Discord</CommunityBanner>
