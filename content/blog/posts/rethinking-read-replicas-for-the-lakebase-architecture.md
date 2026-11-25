@@ -23,9 +23,13 @@ seo:
   image: null
 ---
 
+**[ADD "LAKEBASE POSTGRES REPLICAS" ANIMATION]**
+
 The idea behind read replicas makes sense: when your app gets busy, you add a couple of read-only replicas, route the heavy reads to them, and let the primary focus on writes.
 
 In practice, that rarely works well. In traditional managed Postgres, a replica is a physical clone of the primary: its own instance, its own storage volume, and its own copy of every page. That makes replicas impractical for scaling reads on the go. They take minutes to hours to create, each one adds a full copy of the data to your bill, and they keep running long after the traffic spike is gone. What was supposed to be a nimble way to scale reads turns into one more instance to manage.
+
+**[ADD DIAGRAM - monolith vs lakebase]**
 
 [Like other DX problems with OLTP databases](https://neon.com/blog/inside-branch-based-restores-in-lakebase-postgres),this is an architecture problem that comes from running things as a monolith. In Lakebase Postgres, a read replica doesn't copy anything - it's one more compute attached to the storage the primary already uses. It's ready in seconds, adds no storage, and scales to zero when nobody is reading from it.
 
@@ -103,6 +107,8 @@ A [read replica in Lakebase Postgres](https://neon.com/docs/introduction/read-re
 
 That is it. Nothing in that list depends on the size of the database, which is why creating a replica takes seconds on a small database and on a large one alike. It also adds no replication work to the primary: the primary keeps streaming WAL to the safekeepers as usual, and the replica reads from the safekeepers, not from the primary.
 
+**[ADD architecture diagram]**
+
 ### Lakebase replicas don't duplicate storage
 
 In a traditional setup, N replicas means N + 1 copies of the database: one on the primary's volume and one on each replica's volume, each provisioned, filled, and billed separately. In Lakebase Postgres, N replicas still means one copy. The data lives once in the storage layer, and every compute on the branch, the primary and all of its replicas, reads from it.
@@ -120,6 +126,8 @@ Since a replica is just a compute, it gets everything a Lakebase compute gets, c
 
 - **Each replica has its own autoscaling range.** [The same algorithm that resizes the primary](https://neon.com/blog/autoscaling-lakebase-postgres) tracks the replica's CPU, memory, and working set, and resizes it in place as read load moves. Resizing never means provisioning a new instance
 - **Replicas scale to zero.** By default, a replica suspends after 5 minutes of inactivity and starts automatically with the next query. There is no WAL backlog to replay on wake: storage kept ingesting WAL while the replica was suspended, so it reads current pages and is up to date with the primary almost immediately
+
+**[ADD traffic diagram]**
 
 ## Making replicas cheaper
 
