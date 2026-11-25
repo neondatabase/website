@@ -89,6 +89,8 @@ const Modal = ({ experiment, ...baseProps }) => {
 
   const handleLinkClick = (linkTitle) => {
     sendGtagEvent('click_docs_modal_link', {
+      text: linkTitle,
+      tag_name: 'DocsAgentSetupPopup',
       modal: id,
       link: linkTitle,
       destination: destination.url,
