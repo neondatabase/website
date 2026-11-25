@@ -17,7 +17,7 @@ redirectFrom:
   - /docs/guides/connection-pooling
   - /docs/introduction/connection-pooling
   - /docs/manage/connection-pooling
-updatedOn: '2026-11-25T16:24:55.227Z'
+updatedOn: '2026-11-25T17:40:32.961Z'
 ---
 
 For most apps, use a pooled connection. It reuses database connections to help you avoid connection limits. Direct connections are typically used for schema migrations, backups, and other work that needs a single continuous session.
@@ -59,7 +59,7 @@ For most apps, use a pooled connection. It reuses database connections to help y
 Use a pooled connection by default. Switch to a direct connection only for work that needs a single, continuous session.
 
 <div className="flex items-center gap-6 sm:flex-col">
-  <div style={{ flex: '1 1 50%' }}>
+<div style={{ flex: '1 1 50%' }}>
 
 **Use a pooled connection for**
 
@@ -67,8 +67,8 @@ Use a pooled connection by default. Switch to a direct connection only for work 
 - Connection-per-request workloads
 - Anything that opens many short-lived connections
 
-  </div>
-  <div style={{ flex: '1 1 50%' }}>
+</div>
+<div style={{ flex: '1 1 50%' }}>
 
 **Use a direct connection for**
 
@@ -79,7 +79,7 @@ Use a pooled connection by default. Switch to a direct connection only for work 
 - Session-level advisory locks
 - `SET` and other session state (temp tables, `CREATE INDEX CONCURRENTLY`, persistent prepared statements)
 
-  </div>
+</div>
 </div>
 
 If you run on a platform that scales instances up and down quickly (for example AWS Fargate, Google Cloud Run, or Vercel), see [Serverless connection pooling](/docs/guides/serverless-connection-pooling) for strategies that prevent connection leaks and exhaustion when instances scale out or suspend.
