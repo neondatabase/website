@@ -12,7 +12,7 @@ summary: >-
 enableTableOfContents: true
 redirectFrom:
   - /docs/manage/orgs
-updatedOn: '2026-11-22T11:36:12.156Z'
+updatedOn: '2026-11-25T21:47:27.743Z'
 ---
 
 In Neon, all projects live within organizations. When you sign up, you automatically get a free organization for your first project. Organizations provide a central place to manage your projects and collaborate with team members. You can start inviting teammates as soon as your organization is created. Paid plans also include billing management for your organization.
@@ -29,7 +29,7 @@ There are four organization roles:
 
 - **Admin**: Full control over the organization and all its projects, including billing, members, and settings.
 - **Editor**: Access to all organization projects, but cannot modify org settings, delete projects, or transfer them out of the organization.
-- **Viewer**: Read-only access to organization and project metadata, and can create projects. Can't see connection strings or run SQL.
+- **Viewer**: Read-only access to organization and project metadata, and can create projects. Can't see connection strings or run SQL on projects they didn't create.
 - **Collaborator**: No access by default. Sees only the projects they're explicitly granted.
 
 For a full breakdown of what each role and per-project permission allows, see the [User permissions](/docs/manage/user-permissions) page. That page also explains [which roles receive certain organization emails](/docs/manage/user-permissions#email-notifications) (for example, alerts when a project is close to its storage limit).
@@ -46,9 +46,9 @@ If you belong to more than one organization, use the org switcher in the profile
 
 ## View organization usage
 
-To see usage and costs for an organization and the projects in it, use the **Billing** and **Projects** pages in the Neon Console. See [Monitor billing and usage](/docs/introduction/monitor-usage).
+To see usage for an organization and the projects in it, use the **Projects** page in the Neon Console. Charges are on the **Billing** page. See [Monitor billing and usage](/docs/introduction/monitor-usage).
 
-To retrieve the same metrics programmatically for each project in an organization, or broken down by branch, use the [consumption metrics API](/docs/guides/consumption-metrics) with your organization's ID. The API is available on the Launch, Scale, Agent, and Enterprise plans.
+To retrieve usage metrics programmatically for each project in an organization, use the [consumption metrics API](/docs/guides/consumption-metrics) with your organization's ID. A [branch metrics endpoint](/docs/guides/consumption-metrics#branch-metrics) breaks usage down by branch, but it supports fewer metrics and requires `project_ids`. The API is available on the Launch, Scale, Agent, and Enterprise plans.
 
 ## Limitations
 
