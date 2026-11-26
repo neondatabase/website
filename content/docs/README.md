@@ -1,5 +1,5 @@
 ---
-updatedOn: '2026-11-09T16:32:04.936Z'
+updatedOn: '2026-11-26T19:22:59.526Z'
 ---
 
 # Docs
@@ -548,7 +548,7 @@ To change text in CTA block, you can pass to the component props `title`, `descr
 ## Steps
 
 To display numbered steps, wrap the content with `Steps` component.  
-Steps will be split by `h2` headings.
+Steps will be split by `h2` headings and by `---` thematic breaks. A `---` line starts a new step, so a step can have prose instead of a heading.
 
 ```md
 <Steps>

@@ -9,7 +9,7 @@ summary: >-
   reference when you need custom sign-up and sign-in forms. Requires Next.js
   App Router.
 enableTableOfContents: true
-updatedOn: '2026-11-06T11:14:41.532Z'
+updatedOn: '2026-11-26T19:22:59.526Z'
 layout: wide
 redirectFrom:
   - /docs/auth/quick-start/nextjs
@@ -31,7 +31,7 @@ If you don't have a Neon project yet, create one at [console.neon.tech](https://
 
 In the Neon Console, open the **Better Auth** page and click **Enable Auth**, then copy your Auth URL from **Settings** > **Better Auth** > **Project Info**.
 
-**Console path:** Project → Branch → Auth → Configuration
+**Console path:** **Settings** > **Better Auth** > **Project Info**
 
 </TwoColumnLayout.Block>
 <TwoColumnLayout.Block label="Console">

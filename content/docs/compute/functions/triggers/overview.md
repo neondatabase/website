@@ -9,7 +9,7 @@ summary: >-
 enableTableOfContents: true
 redirectFrom:
   - /docs/compute/functions/triggers
-updatedOn: '2026-11-05T01:12:32.486Z'
+updatedOn: '2026-11-26T19:22:59.526Z'
 ---
 
 A Function Trigger tells Neon to invoke a deployed [Neon Function](/docs/compute/functions/overview) in response to an event, so recurring or event-driven work runs as your own code next to your data. There's no scheduler or queue to operate and no compute kept running to watch for the event. Functions are long-running, so one trigger handles a quick health check or a table-scanning batch, and it fires even when the compute is scaled to zero.
@@ -77,7 +77,7 @@ A trigger invocation can be slower on a cold start: if the function's runtime wa
 
 ### Confirming a request came from Neon
 
-Neon delivers trigger calls to the function's public URL. To confirm a request is a genuine trigger invocation and not an arbitrary caller, check for the `X-Neon-Trigger-Invocation-Id` header: Neon strips any client-supplied `X-Neon-*` header at the edge, so a request that carries one is sent by Neon's trigger system. A handler that only serves triggers can reject requests that lack it with `401 Unauthorized`, as the [worked handler](/docs/compute/functions/triggers/schedule#write-a-handler-for-the-scheduled-call) does.
+Neon delivers trigger calls to the function's public URL. To confirm a request is a genuine trigger invocation and not an arbitrary caller, check for the `X-Neon-Trigger-Invocation-Id` header: Neon strips any client-supplied `X-Neon-*` header from every request to a function, not only trigger calls, so a request that carries `X-Neon-Trigger-Invocation-Id` is sent by Neon's trigger system. A handler that only serves triggers can reject requests that lack it with `401 Unauthorized`, as the [worked handler](/docs/compute/functions/triggers/schedule#write-a-handler-for-the-scheduled-call) does.
 
 The `invocation_id` is a correlation ID, not a secret. It's a digest of the trigger and its occurrence, stable across retries, so it ties your logs to a specific run. What proves the request came from Neon is the presence of the header, not its value, so matching the header against the body is only a consistency check. Keep the handler idempotent and guard destructive actions regardless.
 

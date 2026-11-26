@@ -8,7 +8,7 @@ summary: >-
   account settings, and route protection without writing custom auth UI. User profiles are stored automatically in the `neon_auth.user` table
   in your database.
 enableTableOfContents: true
-updatedOn: '2026-11-05T01:14:02.509Z'
+updatedOn: '2026-11-26T19:22:59.526Z'
 layout: wide
 ---
 
@@ -23,7 +23,7 @@ If you don't have a Neon project yet, create one at [console.neon.tech](https://
 
 In the Neon Console, open the **Better Auth** page and click **Enable Auth**.
 
-You can then find your Auth URL on the Configuration tab. Copy this URL - you'll need it in the next step.
+You can then find your Auth URL under **Settings** > **Better Auth** > **Project Info**. Copy this URL - you'll need it in the next step.
 
 </TwoColumnLayout.Block>
 <TwoColumnLayout.Block label="Console">

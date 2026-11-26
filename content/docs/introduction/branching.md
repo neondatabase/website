@@ -14,7 +14,7 @@ redirectFrom:
   - /docs/concepts/branching
   - /docs/guides/branching
   - /docs/introduction/point-in-time-restore
-updatedOn: '2026-10-09T15:55:57.334Z'
+updatedOn: '2026-11-26T19:22:59.526Z'
 ---
 
 With Neon, you can quickly branch your data for development, testing, and various other purposes, enabling you to improve developer productivity and optimize continuous integration and delivery (CI/CD) pipelines.
@@ -34,6 +34,8 @@ Neon also supports schema-only branching. [Learn more](/docs/guides/branching-sc
 </Admonition>
 
 A branch is isolated from its originating data, so you are free to play around with it, modify it, or delete it when it's no longer needed. Changes to a branch are independent. A branch and its parent can share the same data but diverge at the point of branch creation. Writes to a branch are saved as a delta.
+
+A branch also copies the current state of sequences and identity columns. A branch and its parent can therefore generate the same IDs, so don't rely on generated IDs alone to tell rows apart when you compare or combine data across branches.
 
 Creating a branch does not increase load on the parent branch or affect it in any way, which means you can create a branch without impacting the performance of your production database.
 
