@@ -1,0 +1,84 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 480" font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, sans-serif">
+  <defs>
+    <marker id="anat-ar" markerWidth="9" markerHeight="9" refX="6.5" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L7,3 L0,6 Z" fill="#9ca3af"/>
+    </marker>
+    <marker id="anat-ar-rev" markerWidth="9" markerHeight="9" refX="6.5" refY="3" orient="auto-start-reverse" markerUnits="strokeWidth">
+      <path d="M0,0 L7,3 L0,6 Z" fill="#9ca3af"/>
+    </marker>
+  </defs>
+
+  <rect x="1" y="1" width="758" height="478" rx="14" fill="#ffffff" stroke="#e5e7eb"/>
+  <text x="24" y="34" font-size="15" font-weight="700" fill="#111827">Anatomy of a lakebase</text>
+
+  <!-- Clients -->
+  <text x="40" y="66" font-size="11" font-weight="700" letter-spacing="0.5" fill="#6b7280">APPS, AGENTS, AND PEOPLE</text>
+  <rect x="40" y="78" width="118" height="30" rx="15" fill="#f9fafb" stroke="#d1d5db"/>
+  <text x="99" y="97" font-size="12" fill="#111827" text-anchor="middle">Your app</text>
+  <rect x="172" y="78" width="118" height="30" rx="15" fill="#f9fafb" stroke="#d1d5db"/>
+  <text x="231" y="97" font-size="12" fill="#111827" text-anchor="middle">Coding agent</text>
+  <rect x="304" y="78" width="118" height="30" rx="15" fill="#f9fafb" stroke="#d1d5db"/>
+  <text x="363" y="97" font-size="12" fill="#111827" text-anchor="middle">Agent task</text>
+  <rect x="436" y="78" width="118" height="30" rx="15" fill="#f9fafb" stroke="#d1d5db"/>
+  <text x="495" y="97" font-size="12" fill="#111827" text-anchor="middle">Analyst</text>
+
+  <line x1="99" y1="112" x2="99" y2="172" stroke="#9ca3af" stroke-width="1.5" marker-end="url(#anat-ar)"/>
+  <line x1="231" y1="112" x2="231" y2="172" stroke="#9ca3af" stroke-width="1.5" marker-end="url(#anat-ar)"/>
+  <line x1="363" y1="112" x2="363" y2="172" stroke="#d1d5db" stroke-width="1.5" stroke-dasharray="4 4" marker-end="url(#anat-ar)"/>
+  <path d="M495,112 L495,124 L706,124 L706,172" fill="none" stroke="#9ca3af" stroke-width="1.5" marker-end="url(#anat-ar)"/>
+
+  <!-- Compute layer -->
+  <rect x="24" y="138" width="552" height="150" rx="10" fill="none" stroke="#9ca3af" stroke-width="1.5" stroke-dasharray="5 4"/>
+  <text x="560" y="160" font-size="11" font-weight="700" letter-spacing="0.5" fill="#374151" text-anchor="end">STATELESS COMPUTE</text>
+
+  <rect x="40" y="176" width="118" height="92" rx="8" fill="#f9fafb" stroke="#6b7280" stroke-width="1.5"/>
+  <text x="99" y="200" font-size="12" font-weight="600" fill="#111827" text-anchor="middle">Postgres</text>
+  <text x="99" y="218" font-size="10.5" fill="#6b7280" text-anchor="middle">main branch</text>
+  <rect x="67" y="234" width="64" height="20" rx="10" fill="#ecfdf5" stroke="#047857"/>
+  <text x="99" y="248" font-size="10" fill="#065f46" text-anchor="middle">active</text>
+
+  <rect x="172" y="176" width="118" height="92" rx="8" fill="#f9fafb" stroke="#6b7280" stroke-width="1.5"/>
+  <text x="231" y="200" font-size="12" font-weight="600" fill="#111827" text-anchor="middle">Postgres</text>
+  <text x="231" y="218" font-size="10.5" fill="#6b7280" text-anchor="middle">agent branch</text>
+  <rect x="199" y="234" width="64" height="20" rx="10" fill="#ecfdf5" stroke="#047857"/>
+  <text x="231" y="248" font-size="10" fill="#065f46" text-anchor="middle">active</text>
+
+  <rect x="304" y="176" width="118" height="92" rx="8" fill="#ffffff" stroke="#d1d5db" stroke-width="1.5" stroke-dasharray="5 4"/>
+  <text x="363" y="200" font-size="12" font-weight="600" fill="#9ca3af" text-anchor="middle">Postgres</text>
+  <text x="363" y="218" font-size="10.5" fill="#9ca3af" text-anchor="middle">idle branch</text>
+  <rect x="317" y="234" width="92" height="20" rx="10" fill="#ffffff" stroke="#d1d5db"/>
+  <text x="363" y="248" font-size="10" fill="#9ca3af" text-anchor="middle">scaled to zero</text>
+
+  <rect x="436" y="176" width="118" height="92" rx="8" fill="#f9fafb" stroke="#6b7280" stroke-width="1.5"/>
+  <text x="495" y="200" font-size="12" font-weight="600" fill="#111827" text-anchor="middle">Postgres</text>
+  <text x="495" y="218" font-size="10.5" fill="#6b7280" text-anchor="middle">read replica</text>
+  <rect x="463" y="234" width="64" height="20" rx="10" fill="#ecfdf5" stroke="#047857"/>
+  <text x="495" y="248" font-size="10" fill="#065f46" text-anchor="middle">active</text>
+
+  <!-- Analytics engines -->
+  <rect x="600" y="138" width="136" height="150" rx="10" fill="none" stroke="#9ca3af" stroke-width="1.5" stroke-dasharray="5 4"/>
+  <text x="616" y="160" font-size="11" font-weight="700" letter-spacing="0.5" fill="#374151">ANALYTICS</text>
+  <rect x="614" y="176" width="108" height="92" rx="8" fill="#f9fafb" stroke="#6b7280" stroke-width="1.5"/>
+  <text x="668" y="206" font-size="12" font-weight="600" fill="#111827" text-anchor="middle">Lakehouse</text>
+  <text x="668" y="222" font-size="12" font-weight="600" fill="#111827" text-anchor="middle">engines</text>
+  <text x="668" y="244" font-size="10.5" fill="#6b7280" text-anchor="middle">SQL, notebooks,</text>
+  <text x="668" y="258" font-size="10.5" fill="#6b7280" text-anchor="middle">ML, BI</text>
+
+  <!-- Arrows to storage -->
+  <line x1="300" y1="296" x2="300" y2="334" stroke="#9ca3af" stroke-width="1.5" marker-start="url(#anat-ar-rev)" marker-end="url(#anat-ar)"/>
+  <text x="312" y="320" font-size="10.5" fill="#6b7280">via safekeepers and pageservers</text>
+  <line x1="668" y1="296" x2="668" y2="334" stroke="#9ca3af" stroke-width="1.5" marker-start="url(#anat-ar-rev)" marker-end="url(#anat-ar)"/>
+  <text x="560" y="320" font-size="10.5" fill="#6b7280">open formats</text>
+
+  <!-- Storage layer -->
+  <rect x="24" y="342" width="712" height="94" rx="10" fill="#ecfdf5" stroke="#047857" stroke-width="1.5"/>
+  <text x="40" y="364" font-size="11" font-weight="700" letter-spacing="0.5" fill="#065f46">OBJECT STORAGE (THE LAKE): THE SOURCE OF TRUTH</text>
+  <rect x="40" y="376" width="508" height="46" rx="8" fill="#ffffff" stroke="#047857"/>
+  <text x="294" y="396" font-size="12" font-weight="600" fill="#065f46" text-anchor="middle">Transactional data (rows)</text>
+  <text x="294" y="412" font-size="10.5" fill="#047857" text-anchor="middle">Full change history, shared by every branch, replica, and compute</text>
+  <rect x="562" y="376" width="160" height="46" rx="8" fill="#ffffff" stroke="#047857"/>
+  <text x="642" y="396" font-size="12" font-weight="600" fill="#065f46" text-anchor="middle">Analytical tables</text>
+  <text x="642" y="412" font-size="10.5" fill="#047857" text-anchor="middle">(columns)</text>
+
+  <text x="24" y="460" font-size="11" fill="#6b7280">Compute owns no durable state. Every branch, replica, and engine works from one shared, durable store.</text>
+</svg>

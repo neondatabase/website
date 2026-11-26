@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 350" font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, sans-serif">
+  <defs>
+    <!-- Always-on instance -->
+    <symbol id="fleet-on-amber" viewBox="0 0 40 26">
+      <rect x="0.75" y="0.75" width="38.5" height="24.5" rx="5" fill="#fef3c7" stroke="#b45309" stroke-width="1.5"/>
+    </symbol>
+    <!-- Active lakebase compute -->
+    <symbol id="fleet-on-green" viewBox="0 0 40 26">
+      <rect x="0.75" y="0.75" width="38.5" height="24.5" rx="5" fill="#ecfdf5" stroke="#047857" stroke-width="1.5"/>
+    </symbol>
+    <!-- Scaled to zero -->
+    <symbol id="fleet-off" viewBox="0 0 40 26">
+      <rect x="0.75" y="0.75" width="38.5" height="24.5" rx="5" fill="#ffffff" stroke="#d1d5db" stroke-width="1.5" stroke-dasharray="4 3"/>
+    </symbol>
+  </defs>
+
+  <rect x="1" y="1" width="758" height="348" rx="14" fill="#ffffff" stroke="#e5e7eb"/>
+  <text x="24" y="34" font-size="15" font-weight="700" fill="#111827">A fleet of databases, priced for idle</text>
+  <line x1="380" y1="54" x2="380" y2="306" stroke="#e5e7eb" stroke-width="1" stroke-dasharray="4 4"/>
+
+  <!-- LEFT: always-on -->
+  <text x="40" y="70" font-size="11" font-weight="700" letter-spacing="0.5" fill="#b45309">ALWAYS-ON INSTANCES</text>
+  <g>
+    <use href="#fleet-on-amber" x="40" y="90" width="40" height="26"/><use href="#fleet-on-amber" x="92" y="90" width="40" height="26"/><use href="#fleet-on-amber" x="144" y="90" width="40" height="26"/><use href="#fleet-on-amber" x="196" y="90" width="40" height="26"/><use href="#fleet-on-amber" x="248" y="90" width="40" height="26"/><use href="#fleet-on-amber" x="300" y="90" width="40" height="26"/>
+    <use href="#fleet-on-amber" x="40" y="128" width="40" height="26"/><use href="#fleet-on-amber" x="92" y="128" width="40" height="26"/><use href="#fleet-on-amber" x="144" y="128" width="40" height="26"/><use href="#fleet-on-amber" x="196" y="128" width="40" height="26"/><use href="#fleet-on-amber" x="248" y="128" width="40" height="26"/><use href="#fleet-on-amber" x="300" y="128" width="40" height="26"/>
+    <use href="#fleet-on-amber" x="40" y="166" width="40" height="26"/><use href="#fleet-on-amber" x="92" y="166" width="40" height="26"/><use href="#fleet-on-amber" x="144" y="166" width="40" height="26"/><use href="#fleet-on-amber" x="196" y="166" width="40" height="26"/><use href="#fleet-on-amber" x="248" y="166" width="40" height="26"/><use href="#fleet-on-amber" x="300" y="166" width="40" height="26"/>
+    <use href="#fleet-on-amber" x="40" y="204" width="40" height="26"/><use href="#fleet-on-amber" x="92" y="204" width="40" height="26"/><use href="#fleet-on-amber" x="144" y="204" width="40" height="26"/><use href="#fleet-on-amber" x="196" y="204" width="40" height="26"/><use href="#fleet-on-amber" x="248" y="204" width="40" height="26"/><use href="#fleet-on-amber" x="300" y="204" width="40" height="26"/>
+  </g>
+  <text x="40" y="266" font-size="11" fill="#6b7280">Each database is a provisioned server with its own disk.</text>
+  <text x="40" y="282" font-size="11" fill="#6b7280">All 24 bill for compute around the clock, busy or not.</text>
+
+  <!-- RIGHT: lakebase -->
+  <text x="404" y="70" font-size="11" font-weight="700" letter-spacing="0.5" fill="#047857">LAKEBASE</text>
+  <g>
+    <use href="#fleet-on-green" x="404" y="90" width="40" height="26"/><use href="#fleet-off" x="456" y="90" width="40" height="26"/><use href="#fleet-off" x="508" y="90" width="40" height="26"/><use href="#fleet-off" x="560" y="90" width="40" height="26"/><use href="#fleet-on-green" x="612" y="90" width="40" height="26"/><use href="#fleet-off" x="664" y="90" width="40" height="26"/>
+    <use href="#fleet-off" x="404" y="128" width="40" height="26"/><use href="#fleet-off" x="456" y="128" width="40" height="26"/><use href="#fleet-on-green" x="508" y="128" width="40" height="26"/><use href="#fleet-off" x="560" y="128" width="40" height="26"/><use href="#fleet-off" x="612" y="128" width="40" height="26"/><use href="#fleet-off" x="664" y="128" width="40" height="26"/>
+    <use href="#fleet-off" x="404" y="166" width="40" height="26"/><use href="#fleet-off" x="456" y="166" width="40" height="26"/><use href="#fleet-off" x="508" y="166" width="40" height="26"/><use href="#fleet-off" x="560" y="166" width="40" height="26"/><use href="#fleet-off" x="612" y="166" width="40" height="26"/><use href="#fleet-on-green" x="664" y="166" width="40" height="26"/>
+    <use href="#fleet-off" x="404" y="204" width="40" height="26"/><use href="#fleet-on-green" x="456" y="204" width="40" height="26"/><use href="#fleet-off" x="508" y="204" width="40" height="26"/><use href="#fleet-off" x="560" y="204" width="40" height="26"/><use href="#fleet-off" x="612" y="204" width="40" height="26"/><use href="#fleet-off" x="664" y="204" width="40" height="26"/>
+  </g>
+  <rect x="404" y="240" width="300" height="14" rx="7" fill="#ecfdf5" stroke="#047857"/>
+  <text x="554" y="251" font-size="9.5" fill="#065f46" text-anchor="middle">shared object storage</text>
+  <text x="404" y="276" font-size="11" fill="#6b7280">Idle databases scale to zero. Only the 5 that are</text>
+  <text x="404" y="292" font-size="11" fill="#6b7280">running queries use compute. All 24 share one store.</text>
+
+  <!-- legend -->
+  <use href="#fleet-on-green" x="404" y="314" width="20" height="13"/>
+  <text x="430" y="324" font-size="10" fill="#6b7280">active compute</text>
+  <use href="#fleet-off" x="520" y="314" width="20" height="13"/>
+  <text x="546" y="324" font-size="10" fill="#6b7280">scaled to zero</text>
+</svg>
