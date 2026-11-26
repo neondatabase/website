@@ -13,7 +13,7 @@ summary: >-
   phone_number.verified, use EdDSA Ed25519 detached JWS signatures for
   verification, and retry blocking events within a global timeout.
 enableTableOfContents: true
-updatedOn: '2026-11-26T20:10:30.152Z'
+updatedOn: '2026-11-26T20:44:20.251Z'
 ---
 
 Managed Better Auth webhooks send HTTP POST requests to your server when authentication events occur.
@@ -415,7 +415,15 @@ Webhook responses must not exceed 10KB.
 
 Return any 2xx status code. The response body is ignored.
 
-If all 3 delivery attempts fail or the 15-second global timeout expires, the auth flow fails and the user sees an error.
+If all 3 delivery attempts fail or the 15-second global timeout expires, the code or link isn't delivered. What the user's request returns depends on the flow:
+
+| Flow                    | Request returns                           |
+| ----------------------- | ----------------------------------------- |
+| Magic link sign-in      | `502` with code `WEBHOOK_DELIVERY_FAILED` |
+| Email code (`send.otp`) | `200`                                     |
+| Password reset link     | `200`                                     |
+
+For email codes and password reset links, the request reports success even though nothing was sent, so monitor your webhook endpoint and delivery logs to catch failures.
 
 ### `user.before_create`
 
