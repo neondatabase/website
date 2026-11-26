@@ -10,7 +10,7 @@ summary: >-
   then hand-tune only where you need to. For exact ranges and defaults, it
   links to the lakebase_vector and lakebase_text reference pages.
 enableTableOfContents: true
-updatedOn: '2026-11-26T20:37:21.118Z'
+updatedOn: '2026-11-26T20:46:09.624Z'
 ---
 
 Lakebase Search performs well on its defaults, so most projects never need to tune it. When you do, tuning is a tradeoff between three things: recall (getting the right rows back), latency (how fast the query returns), and cost (how much compute you use). This page names the main lever for each goal, says which way it moves things, and gives you one concrete move. For exact ranges and defaults, it links to the [lakebase_vector](/docs/extensions/lakebase-vector) and [lakebase_text](/docs/extensions/lakebase-text) reference pages rather than repeating them.
@@ -80,7 +80,7 @@ One thing to get right from application code: these settings are session GUCs, s
 
 Cost tracks index size and how much compute you run, and the main lever on size is **RaBitQ quantization**. The `rabitq8` and `rabitq4` operator classes store vectors in a smaller, quantized form, which shrinks the index in exchange for some loss of precision that you can offset with `lakebase_ann.epsilon`. See the [operator classes](/docs/extensions/lakebase-vector#operator-classes) table for the full set and the metric each one supports.
 
-Compute scales to zero when the database is idle, so an idle search database stops paying for compute (storage still bills) (see [how Lakebase Search works](/docs/ai/lakebase-search#how-lakebase-search-works)). The tradeoff is the first query after a wake, which is slower while the index loads into memory. Run `lakebase_ann_prewarm` after the compute starts and before traffic arrives to absorb that work up front:
+Compute scales to zero when the database is idle, so an idle search database stops paying for compute, though storage still bills (see [how Lakebase Search works](/docs/ai/lakebase-search#how-lakebase-search-works)). The tradeoff is the first query after a wake, which is slower while the index loads into memory. Run `lakebase_ann_prewarm` after the compute starts and before traffic arrives to absorb that work up front:
 
 ```sql
 -- Full search scope: prewarm everything the search path reads.
