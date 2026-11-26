@@ -2,11 +2,11 @@
 title: "How do I give each preview deployment its own database, file storage, auth, and API endpoints?"
 subtitle: "Create a Neon branch per preview. The branch carries a copy-on-write copy of your Lakebase Postgres data and Object Storage files, plus its own Functions, Managed Better Auth environment, Data API URL, and AI Gateway endpoint, provisioned from one neon.ts."
 createdAt: '2026-11-02T00:00:00.000Z'
-updatedOn: '2026-11-14T19:48:40.621Z'
+updatedOn: '2026-11-21T16:25:19.720Z'
 isDraft: false
 previousLink:
-  title: 'How do I add file uploads to a Postgres app?'
-  slug: how-to-add-file-uploads-postgres-app
+  title: 'How do I build a remote MCP server?'
+  slug: how-to-build-remote-mcp-server
 nextLink:
   title: 'How do I let other apps sign in with my app''s accounts?'
   slug: how-to-let-other-apps-sign-in-with-your-app

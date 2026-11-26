@@ -2,14 +2,14 @@
 title: "How do I let an AI agent change my database schema safely?"
 subtitle: "Make the agent test every schema change on a temporary branch before it touches the real one. The Neon MCP Server's migration tools apply the SQL to a copy of your branch, let the agent check the result there, and apply it to the real branch only after you approve."
 createdAt: '2026-11-13T00:00:00.000Z'
-updatedOn: '2026-11-13T22:54:32.784Z'
+updatedOn: '2026-11-21T16:25:19.720Z'
 isDraft: false
 previousLink:
   title: 'How do I keep Postgres metadata in sync with files in a bucket?'
   slug: keep-postgres-metadata-in-sync-with-bucket
 nextLink:
-  title: 'How do I build a live dashboard on Postgres without polling the database?'
-  slug: live-dashboard-postgres-without-polling
+  title: 'How do I let ChatGPT or Claude act for a specific user in my app?'
+  slug: let-chatgpt-claude-act-for-user-in-app
 ---
 
 Make the agent prove the change on a copy first. The [Neon MCP Server](/docs/ai/neon-mcp-server) has two tools for this in its SQL (`querying`) category. `prepare_database_migration` applies schema changes on a temporary [branch](/docs/introduction/branching), and `complete_database_migration` applies them to your branch once you've approved ([available tools](/docs/ai/neon-mcp-server#available-tools)). Claude Code, Cursor, and other MCP clients call them when you ask for a schema change in plain language.

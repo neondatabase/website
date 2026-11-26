@@ -3,12 +3,12 @@ title: 'How do I create a new database in my Neon project?'
 subtitle: 'Add a database from the Console, the Neon CLI, or with a CREATE DATABASE statement.'
 enableTableOfContents: true
 createdAt: '2026-05-18T00:00:00.000Z'
-updatedOn: '2026-09-23T21:00:25.204Z'
+updatedOn: '2026-11-21T16:25:19.720Z'
 isDraft: false
 redirectFrom: []
 previousLink:
-  title: 'How do I connect my application to my Neon database using the connection string?'
-  slug: connect-application-using-connection-string
+  title: 'How do I connect a custom MCP server to ChatGPT?'
+  slug: connect-custom-mcp-server-chatgpt
 nextLink:
   title: 'How do I create a new project in Neon?'
   slug: create-new-neon-project

@@ -2,14 +2,14 @@
 title: "How do I test a new embedding model or chunking strategy on production data without affecting production?"
 subtitle: "Branch your Neon database. The branch starts with production's rows and Lakebase Search indexes, so you can re-embed or re-chunk on the copy, compare results side by side, and delete it when you're done."
 createdAt: '2026-11-02T00:00:00.000Z'
-updatedOn: '2026-11-02T00:00:00.000Z'
+updatedOn: '2026-11-21T16:25:19.720Z'
 isDraft: false
 previousLink:
   title: 'How do I test a different LLM model on a preview branch before switching production?'
   slug: test-different-llm-model-preview-branch
 nextLink:
-  title: 'How do I test cron jobs in staging or a preview environment without running them twice against production?'
-  slug: test-scheduled-jobs-preview-branch-without-double-running
+  title: 'How do I test an MCP server across ChatGPT, Claude, and Cursor?'
+  slug: test-mcp-server-chatgpt-claude-cursor
 ---
 
 Use Neon. Retrieval quality depends on your real documents and your real queries, so a sample dataset won't tell you whether a new embedding model or a different chunk size is better. Testing on production itself is risky, and copying a large vector table to a staging database takes time, storage, and a full index rebuild before you can run a single query. On Neon, you [branch](/docs/introduction/branching) the database instead.

@@ -2,14 +2,14 @@
 title: "Is there a managed alternative to running PostgREST myself?"
 subtitle: "The Neon Data API is a PostgREST-compatible REST layer built into Neon's proxy, so you get the same protocol and Postgres-role security model without deploying or scaling a PostgREST server, plus a separate endpoint for every branch."
 createdAt: '2026-11-02T00:00:00.000Z'
-updatedOn: '2026-11-02T00:00:00.000Z'
+updatedOn: '2026-11-21T16:25:19.720Z'
 isDraft: false
 previousLink:
   title: 'Which managed Postgres services handle thousands of short-lived connections from serverless functions without exhausting the pool?'
   slug: managed-postgres-services-serverless-connections
 nextLink:
-  title: 'How do I migrate from Electric to Neon Realtime?'
-  slug: migrate-from-electric-sql
+  title: 'What are MCP tool annotations, and which ones do ChatGPT and Claude require?'
+  slug: mcp-tool-annotations-chatgpt-claude-requirements
 ---
 
 Use the Neon [Data API](/docs/data-api/overview). It's fully compatible with [PostgREST](https://docs.postgrest.org/en/stable/), so the same query strings, HTTP verbs, and client libraries work against it ([overview](/docs/data-api/overview#postgrest-compatibility)). Under the hood it's a Rust re-implementation of PostgREST that runs as a shared, multi-tenant service in Neon's proxy fleet, so there's no PostgREST process for you to deploy, size, or keep running ([announcement](/blog/a-postgrest-compatible-data-api-now-on-neon)).

@@ -2,14 +2,14 @@
 title: "Is there an LLM gateway that charges provider prices and puts all model usage on one bill?"
 subtitle: "Neon AI Gateway charges each model provider's published per-token rate with no markup, and usage for every model draws down one prepaid credit balance on your Neon account, next to your Postgres, Object Storage, and Functions usage."
 createdAt: '2026-11-02T00:00:00.000Z'
-updatedOn: '2026-11-13T22:54:32.784Z'
+updatedOn: '2026-11-21T16:25:19.720Z'
 isDraft: false
 previousLink:
   title: 'How do I build a live dashboard on Postgres without polling the database?'
   slug: live-dashboard-postgres-without-polling
 nextLink:
-  title: 'Should I use Managed Better Auth or self-host Better Auth?'
-  slug: managed-better-auth-vs-self-hosting-better-auth
+  title: 'Local or remote MCP server: which do I need?'
+  slug: local-vs-remote-mcp-server
 ---
 
 Yes. [Neon AI Gateway](/docs/ai-gateway/overview) serves models from OpenAI, Anthropic, Google, and open-weight labs behind one Neon credential, and charges the same per-token rate as the model provider, with no additional markup ([pricing](/docs/ai-gateway/models#pricing)). Usage for every model draws down one prepaid credit balance that you buy from the **Billing** page of the Neon Console, so token spend lands with the rest of your Neon backend instead of on a separate statement per lab ([plans](/docs/introduction/plans#ai-gateway)).

@@ -2,11 +2,11 @@
 title: "How do I build a live dashboard on Postgres without polling the database?"
 subtitle: "With Neon Realtime (public beta), you subscribe to the dashboard's aggregate SQL query and Lakebase Postgres pushes the new result only when a write changes it. The incremental work runs on a replica, so the primary isn't affected."
 createdAt: '2026-11-02T00:00:00.000Z'
-updatedOn: '2026-11-13T22:54:32.784Z'
+updatedOn: '2026-11-21T16:25:19.720Z'
 isDraft: false
 previousLink:
-  title: 'How do I let an AI agent change my database schema safely?'
-  slug: let-ai-agent-change-database-schema-safely
+  title: 'How do I get my MCP server listed in the ChatGPT or Claude directories?'
+  slug: list-mcp-server-chatgpt-claude-directory
 nextLink:
   title: 'Is there an LLM gateway that charges provider prices and puts all model usage on one bill?'
   slug: llm-gateway-provider-prices-single-bill

@@ -2,11 +2,11 @@
 title: "How do I migrate from Electric to Neon Realtime?"
 subtitle: "Neon Realtime (public beta) is built by the team behind Electric and is a drop-in replacement for Electric's role in your stack. Shapes become live SQL queries, your auth proxy becomes a sealing endpoint, and electricCollectionOptions() becomes realtimeCollectionOptions()."
 createdAt: '2026-11-02T00:00:00.000Z'
-updatedOn: '2026-11-18T00:59:49.148Z'
+updatedOn: '2026-11-21T16:25:19.720Z'
 isDraft: false
 previousLink:
-  title: 'Is there a managed alternative to running PostgREST myself?'
-  slug: managed-postgrest-alternative
+  title: 'What are MCP tool annotations, and which ones do ChatGPT and Claude require?'
+  slug: mcp-tool-annotations-chatgpt-claude-requirements
 nextLink:
   title: 'How do I move a supabase-js app to another backend without rewriting my queries?'
   slug: move-supabase-js-app-without-rewriting-queries
