@@ -3,11 +3,11 @@ title: 'Where can I find my database connection details in the Neon Console?'
 subtitle: 'Click Connect in the Neon Console to see every connection detail for a branch.'
 enableTableOfContents: true
 createdAt: '2026-05-18T00:00:00.000Z'
-updatedOn: '2026-09-23T21:00:25.204Z'
+updatedOn: '2026-11-25T23:16:01.302Z'
 isDraft: false
 redirectFrom: []
 previousLink:
-  title: 'Why am I getting ''Error connecting to database: Failed to fetch'' in the Neon Console Tables view?'
+  title: "Why does the Neon Console Tables page say it couldn't reach the database?"
   slug: failed-to-fetch-error-tables-view
 nextLink:
   title: 'Where can I find my database connection string in Neon?'

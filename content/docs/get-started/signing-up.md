@@ -14,7 +14,7 @@ redirectFrom:
   - /docs/cloud/getting-started
   - /docs/cloud/getting_started
   - /docs/get-started-with-neon/signing-up
-updatedOn: '2026-10-09T15:17:33.920Z'
+updatedOn: '2026-11-25T23:16:01.302Z'
 ---
 
 <InfoBlock>
@@ -109,11 +109,11 @@ Learn more about AI features in the [SQL Editor documentation](/docs/get-started
 
 ## View and modify data in the console
 
-Now that you have some data to play with, let's take a look at it on the **Tables** page in the Neon Console. The **Tables** page, powered by [Drizzle Studio](https://orm.drizzle.team/drizzle-studio/overview), provides a visual interface for exploring and modifying data and schemas directly from the console. The integration with Drizzle Studio provides the ability to add, update, and delete records, filter data, export data in `.json` and `.csv` formats, manage schemas (including creating and altering tables, views, and enums), create Postgres roles, and define RLS policies.
+Now that you have some data to play with, let's take a look at it on the **Tables** page in the Neon Console. Select **Postgres database** > **Tables** in the sidebar, then select the `playing_with_neon` table. The **Tables** page lets you browse, filter, sort, and edit rows, export them as JSON, CSV, or SQL, and manage your schema, including tables, columns, constraints, indexes, views, enums, and RLS policies.
 
-![Tables page Drizzle integration](/docs/get-started/tables_drizzle.png)
+![Tables page in the Neon Console](/docs/get-started/tables-page.png)
 
-For a detailed guide on how to interact with your data using the **Tables** page, visit [Managing your data with interactive tables](/docs/guides/tables).
+For a detailed guide on how to interact with your data using the **Tables** page, visit [Managing your data and schemas in the Neon Console](/docs/guides/tables).
 
 ## Set up Managed Better Auth
 
