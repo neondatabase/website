@@ -11,7 +11,7 @@ import {
   isAIAgentRequest,
   isBrowserBackgroundRequest,
   isBrowserNavigation,
-  isNamedCrawlerUserAgent,
+  isNamedFetcherUserAgent,
   getFunctionTemplatesMarkdownPath,
   getMarkdownPath,
 } from './utils/ai-agent-detection';
@@ -343,14 +343,16 @@ export async function proxy(req, event) {
   // the page or file. Non-GET requests, prefetches and router fetches are
   // skipped inside track() (isNonReadRequest).
   // - Pages: clients that don't navigate like a browser (AI agents, search
-  //   crawlers, python-requests, wget, ...), plus every named AI or search
-  //   crawler (isNamedCrawlerUserAgent). Other browser engines (a person, a
-  //   headless or agent-driven browser) run the page's analytics script, which
-  //   counts that view once; counting it here too would double it. Crawlers
-  //   are the exception: some send navigation headers, but no browser-script
-  //   pageview arrives for them, so they'd be counted nowhere. A crawler
-  //   whose browser-script pageview does arrive is counted twice; that
-  //   pageview carries the User-Agent, so it can be dropped downstream.
+  //   crawlers, python-requests, wget, ...), plus every named AI assistant,
+  //   AI crawler or search crawler except browser agents
+  //   (isNamedFetcherUserAgent). Other browser engines (a person, a headless
+  //   browser, Claude-Agent, Google-Agent, ChatGPT agent) run the page's
+  //   analytics script, which counts that view once; counting it here too
+  //   would double it. Named fetchers are the exception: some send navigation
+  //   headers, but no browser-script pageview arrives for them, so they'd be
+  //   counted nowhere. One whose browser-script pageview does arrive is
+  //   counted twice; that pageview carries the User-Agent, so it can be
+  //   dropped downstream.
   // - Agent discovery files (llms.txt, /.well-known/*, /models): every reader,
   //   browsers included, since these files run no script.
   // classifyReader labels each pageview (llm_reader).
@@ -360,7 +362,7 @@ export async function proxy(req, event) {
       analytics.track({ branch: 'discovery-file' });
     } else if (
       !isAssetRequest(pathname) &&
-      (!isBrowserNavigation(req) || isNamedCrawlerUserAgent(req.headers.get('user-agent')))
+      (!isBrowserNavigation(req) || isNamedFetcherUserAgent(req.headers.get('user-agent')))
     ) {
       analytics.track({ branch: 'non-browser-html' });
     }
