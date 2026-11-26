@@ -11,7 +11,7 @@ AI companies, search engines, and SEO tools fetch pages around the clock. If eve
 
 ## How a crawler keeps your compute awake
 
-By default, [Neon suspends a compute after 5 minutes without activity](/docs/introduction/scale-to-zero) and starts it again on the next query, typically within a few hundred milliseconds. That makes quiet apps cheap on Neon: you pay for compute only while it's running.
+By default, [Lakebase Postgres suspends a compute after 5 minutes without activity](/docs/introduction/scale-to-zero) and starts it again on the next query, typically within a few hundred milliseconds. That makes quiet apps cheap on Neon: you pay for compute only while it's running.
 
 A crawler can break that pattern without sending much traffic. If something requests a database-backed page every few minutes, the 5-minute idle timer never runs out, and the compute stays on all day.
 
