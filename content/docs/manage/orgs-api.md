@@ -8,7 +8,7 @@ summary: >-
   projects, require a personal admin key and reject organization API keys. A
   permission matrix maps each endpoint to its supported key type.
 enableTableOfContents: true
-updatedOn: '2026-11-22T11:36:15.765Z'
+updatedOn: '2026-11-26T20:53:50.317Z'
 ---
 
 Learn how to manage Neon Organizations using the Neon API, including managing organization API keys, working with organization members, and handling member invitations.
@@ -73,9 +73,9 @@ There are two types of organization API keys:
 
 If you're an Editor, Viewer, or Collaborator, create a personal API key instead; it's scoped to your own access.
 
-The key token is only displayed once at creation time. Copy it immediately and store it securely. If lost, you’ll need to revoke the key and create a new one. For detailed instructions, see [Manage API Keys](/docs/manage/api-keys#create-an-organization-api-key).
+The key token is only displayed once at creation time. Copy it immediately and store it securely. If lost, you'll need to revoke the key and create a new one. For detailed instructions, see [Manage API Keys](/docs/manage/api-keys#create-an-organization-api-key).
 
-Organization API key creation (`POST /organizations/{org_id}/api_keys`) is rate limited. If you create keys in bulk, throttle your requests or use retries with backoff.
+Organization API key creation (`POST /organizations/{org_id}/api_keys`) is [rate limited](/docs/reference/api/key-concepts#rate-limiting). If you create keys in bulk, throttle your requests or use retries with backoff.
 
 [Try in API Reference](/docs/reference/api/organizations/create-org-api-key)
 
@@ -249,9 +249,9 @@ Example response:
 
 ## Update member role
 
-Changes a member's current role in the organization. If using your personal API key, you need to be an admin in the organization to perform this action. Note: you cannot downgrade the role of the organization's only admin.
+Changes a member's current role in the organization. If using your personal API key, you need to be an admin in the organization to perform this action. You can't downgrade the role of the organization's only admin.
 
-Valid roles are `admin`, `editor`, `viewer`, and `collaborator`. The value `member` is still accepted as a legacy alias for `editor`. A member's organization role sets their baseline access on every project; to change their access on a single project, see [Manage project access](#manage-project-access).
+Valid roles are `admin`, `editor`, `viewer`, and `collaborator`. The value `member` is still accepted as a legacy alias for `editor`, and the members list can still return `member` as a role for existing members. A member's organization role sets their baseline access on every project; to change their access on a single project, see [Manage project access](#manage-project-access).
 
 ```bash shouldWrap
 curl --request PATCH \
@@ -291,7 +291,7 @@ curl --request DELETE \
 
 ## List invitations
 
-Retrieves a list of all pending invitations for the organization.
+Retrieves the organization's pending and accepted invitations.
 
 ```bash shouldWrap
 curl --request GET \
@@ -364,4 +364,4 @@ For organizations on the [new permissions model](/docs/manage/user-permissions),
 
 ## Query organization usage metrics
 
-To retrieve usage metrics for the projects in an organization, or for their branches, use the consumption metrics endpoints `GET /consumption_history/v2/projects` and `GET /consumption_history/v2/branches` with your `org_id`. They're available on the Launch, Scale, Agent, and Enterprise plans. See [Query consumption metrics](/docs/guides/consumption-metrics) for parameters, examples, and metric definitions.
+To retrieve usage metrics for the projects in an organization, use `GET /consumption_history/v2/projects` with your `org_id`. For per-branch metrics, use `GET /consumption_history/v2/branches`, which requires both `org_id` and `project_ids` (1 to 100 projects). They're available on the Launch, Scale, Agent, and Enterprise plans. See [Query consumption metrics](/docs/guides/consumption-metrics) for parameters, examples, and metric definitions.
