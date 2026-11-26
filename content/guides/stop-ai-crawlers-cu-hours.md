@@ -69,7 +69,7 @@ Think about what you block, though: if you want your product to show up in AI an
 
 For crawlers that ignore `robots.txt`, block or rate-limit them before they reach your app. Vercel and Cloudflare both offer firewall rules and bot protection that can challenge or block automated traffic by user agent or behavior. A rate limit on routes that query the database means a crawler can't fetch hundreds of uncached pages a minute.
 
-### Fix 4: Keep health checks off the database
+### Keep health checks off the database
 
 Uptime monitors are crawlers you set up yourself. A check every minute against a route that queries Postgres keeps the compute on around the clock, the same way a crawler does.
 
