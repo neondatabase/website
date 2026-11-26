@@ -11,6 +11,7 @@ import {
   isAIAgentRequest,
   isBrowserBackgroundRequest,
   isBrowserNavigation,
+  isNamedCrawlerUserAgent,
   getFunctionTemplatesMarkdownPath,
   getMarkdownPath,
 } from './utils/ai-agent-detection';
@@ -341,12 +342,15 @@ export async function proxy(req, event) {
   // Count reads the branches above didn't, when the request passes through to
   // the page or file. Non-GET requests, prefetches and router fetches are
   // skipped inside track() (isNonReadRequest).
-  // - Pages: only clients that don't navigate like a browser (AI agents,
-  //   search crawlers, python-requests, wget, ...). Any browser engine (a
-  //   person, a headless or agent-driven browser, a crawler that renders
-  //   pages) runs the page's analytics script, which counts that view once;
-  //   counting it here too would double it. The browser script's pageview
-  //   carries the User-Agent, so those can be labeled downstream.
+  // - Pages: clients that don't navigate like a browser (AI agents, search
+  //   crawlers, python-requests, wget, ...), plus every named AI or search
+  //   crawler (isNamedCrawlerUserAgent). Other browser engines (a person, a
+  //   headless or agent-driven browser) run the page's analytics script, which
+  //   counts that view once; counting it here too would double it. Crawlers
+  //   are the exception: some send navigation headers but never run the
+  //   script, so they'd be counted nowhere. A crawler that does run it is
+  //   counted twice, and its browser-script pageview is filtered out
+  //   downstream by User-Agent.
   // - Agent discovery files (llms.txt, /.well-known/*, /models): every reader,
   //   browsers included, since these files run no script.
   // classifyReader labels each pageview (llm_reader).
@@ -354,7 +358,10 @@ export async function proxy(req, event) {
     const { pathname } = req.nextUrl;
     if (isAgentDiscoveryPath(pathname)) {
       analytics.track({ branch: 'discovery-file' });
-    } else if (!isAssetRequest(pathname) && !isBrowserNavigation(req)) {
+    } else if (
+      !isAssetRequest(pathname) &&
+      (!isBrowserNavigation(req) || isNamedCrawlerUserAgent(req.headers.get('user-agent')))
+    ) {
       analytics.track({ branch: 'non-browser-html' });
     }
   }

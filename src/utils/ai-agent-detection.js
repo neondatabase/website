@@ -272,6 +272,19 @@ export function isSearchCrawlerUserAgent(userAgent) {
   return Boolean(findUserAgentToken(userAgent, SEARCH_CRAWLER_USER_AGENT_TOKENS));
 }
 
+// A crawler named on the AI crawler or search crawler lists. Some send browser
+// navigation headers without running the page's analytics script
+// (PerplexityBot, Bytespider, meta-externalagent), so the proxy counts them on
+// every page read instead of leaving them to the browser script. AI assistants
+// aren't included: the ones that send navigation headers (Claude-Agent,
+// ChatGPT agent) drive a real browser, which runs the script.
+export function isNamedCrawlerUserAgent(userAgent) {
+  return (
+    Boolean(findUserAgentToken(userAgent, AI_CRAWLER_USER_AGENT_TOKENS)) ||
+    isSearchCrawlerUserAgent(userAgent)
+  );
+}
+
 // A short, fixed label for diagnostics logs (agent_family): the matched token
 // from the AI agent list, then the search crawler list, then the broad
 // markdown patterns (curl, axios, ...), else 'other'. Never the raw User-Agent,
