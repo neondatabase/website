@@ -1255,9 +1255,9 @@ describe('Middleware - AI Agent Integration Tests', () => {
     );
 
     // Named AI and search crawlers are counted on the server even when they
-    // send browser navigation headers: some (PerplexityBot, Bytespider,
-    // meta-externalagent) never run the browser script, so they'd be counted
-    // nowhere otherwise.
+    // send browser navigation headers: for some (PerplexityBot, Bytespider,
+    // meta-externalagent) no browser-script pageview arrives, so they'd be
+    // counted nowhere otherwise.
     it.each([
       [
         'PerplexityBot',

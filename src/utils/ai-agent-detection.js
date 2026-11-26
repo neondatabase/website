@@ -273,7 +273,7 @@ export function isSearchCrawlerUserAgent(userAgent) {
 }
 
 // A crawler named on the AI crawler or search crawler lists. Some send browser
-// navigation headers without running the page's analytics script
+// navigation headers, but no browser-script pageview arrives for them
 // (PerplexityBot, Bytespider, meta-externalagent), so the proxy counts them on
 // every page read instead of leaving them to the browser script. AI assistants
 // aren't included: the ones that send navigation headers (Claude-Agent,

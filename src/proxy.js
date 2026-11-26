@@ -347,10 +347,10 @@ export async function proxy(req, event) {
   //   crawler (isNamedCrawlerUserAgent). Other browser engines (a person, a
   //   headless or agent-driven browser) run the page's analytics script, which
   //   counts that view once; counting it here too would double it. Crawlers
-  //   are the exception: some send navigation headers but never run the
-  //   script, so they'd be counted nowhere. A crawler that does run it is
-  //   counted twice, and its browser-script pageview is filtered out
-  //   downstream by User-Agent.
+  //   are the exception: some send navigation headers, but no browser-script
+  //   pageview arrives for them, so they'd be counted nowhere. A crawler
+  //   whose browser-script pageview does arrive is counted twice; that
+  //   pageview carries the User-Agent, so it can be dropped downstream.
   // - Agent discovery files (llms.txt, /.well-known/*, /models): every reader,
   //   browsers included, since these files run no script.
   // classifyReader labels each pageview (llm_reader).
