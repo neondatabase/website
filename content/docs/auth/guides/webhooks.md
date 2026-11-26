@@ -13,7 +13,7 @@ summary: >-
   phone_number.verified, use EdDSA Ed25519 detached JWS signatures for
   verification, and retry blocking events within a global timeout.
 enableTableOfContents: true
-updatedOn: '2026-11-09T18:18:56.726Z'
+updatedOn: '2026-11-26T20:10:30.152Z'
 ---
 
 Managed Better Auth webhooks send HTTP POST requests to your server when authentication events occur.
@@ -80,7 +80,7 @@ Webhook endpoints that point at private networks, localhost, cloud metadata serv
 
 <TabItem>
 
-In the Neon Console, go to **Auth → Configuration → Webhooks** to enable webhook delivery, set the **Webhook URL** (an HTTPS endpoint; see [Webhook URL requirements](#webhook-url-requirements)), choose which events to send, and set the per-attempt timeout in seconds (1-10, default 5). Save to apply.
+In the Neon Console, go to **Settings** > **Better Auth** > **Webhooks** to enable webhook delivery, set the **Webhook URL** (an HTTPS endpoint; see [Webhook URL requirements](#webhook-url-requirements)), choose which events to send, and set the per-attempt timeout in seconds (1-10, default 5). Save to apply.
 
 </TabItem>
 
@@ -116,7 +116,7 @@ curl -X PUT "https://console.neon.tech/api/v2/projects/{project_id}/branches/{br
 
 <TabItem>
 
-View the current webhook configuration under **Auth → Configuration → Webhooks** in the Neon Console.
+View the current webhook configuration under **Settings** > **Better Auth** > **Webhooks** in the Neon Console.
 
 </TabItem>
 
@@ -300,6 +300,8 @@ Each webhook request includes the following headers:
 | `X-Neon-Event-Type`       | Event type (for example, `user.created`)       |
 | `X-Neon-Event-Id`         | Unique event UUID                              |
 | `X-Neon-Delivery-Attempt` | Attempt number: 1, 2, or 3                     |
+
+Managed Better Auth also sends each of these headers with a `Neon-Better-Auth-` prefix, for example `Neon-Better-Auth-Signature`. If your endpoint is a [Neon Function](/docs/compute/functions/overview), read those names: Neon strips client-set `X-Neon-*` headers from requests to functions, so the `X-Neon-*` versions don't arrive.
 
 Example incoming webhook request:
 

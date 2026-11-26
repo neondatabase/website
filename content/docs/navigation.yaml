@@ -1598,6 +1598,15 @@
                   slug: guides/prisma
                 - title: TypeORM
                   slug: guides/typeorm
+            - title: Email
+              items:
+                - title: Loops
+                  slug: guides/loops
+                  items:
+                    - title: Send email with Loops
+                      slug: guides/loops
+                    - title: Store Loops webhook events
+                      slug: guides/loops-webhooks
             - title: File & media storage
               items:
                 - title: File storage
