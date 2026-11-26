@@ -7,7 +7,7 @@ summary: >-
   bge-large-en, or gte-large-en, all 1024-dimensional, with the same Neon
   credential you use for chat completions.
 enableTableOfContents: true
-updatedOn: '2026-10-23T19:28:25.610Z'
+updatedOn: '2026-11-18T08:10:37.191Z'
 ---
 
 Embeddings turn text into vectors that capture meaning, so you can match text by what it means rather than by the exact words. They power semantic search, recommendations, clustering, and retrieval-augmented generation (RAG).
@@ -200,12 +200,12 @@ For an end-to-end example that stores AI Gateway embeddings in Postgres and sear
 
 ## Error handling
 
-| Status                  | Meaning               | Common cause                                                                                     |
-| ----------------------- | --------------------- | ------------------------------------------------------------------------------------------------ |
-| `400 Bad Request`       | Invalid request       | Unknown model ID, an embedding model used on a chat endpoint, or `stream: true`                  |
-| `401 Unauthorized`      | Authentication failed | Missing or invalid `NEON_AI_GATEWAY_TOKEN`                                                       |
-| `403 Forbidden`         | Access denied         | Credential lacks `ai_gateway:invoke` scope, or branch not in credential lineage                  |
-| `429 Too Many Requests` | Quota or rate limited | Account quota or per-minute token limit. See [Rate limits](/docs/ai-gateway/models#rate-limits). |
+| Status                  | Meaning               | Common cause                                                                                                                                                             |
+| ----------------------- | --------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `400 Bad Request`       | Invalid request       | Unknown model ID, an embedding model used on a chat endpoint, or `stream: true`                                                                                          |
+| `401 Unauthorized`      | Authentication failed | Missing or invalid `NEON_AI_GATEWAY_TOKEN`                                                                                                                               |
+| `403 Forbidden`         | Access denied         | Credential lacks `ai_gateway:invoke` scope, branch not in credential lineage, or [no AI Gateway credits yet](/docs/ai-gateway/troubleshooting#403-no-ai-gateway-credits) |
+| `429 Too Many Requests` | Quota or rate limited | Account quota or per-minute token limit. See [Rate limits](/docs/ai-gateway/models#rate-limits).                                                                         |
 
 ## Next steps
 

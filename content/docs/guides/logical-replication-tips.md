@@ -12,7 +12,7 @@ summary: >-
   per-table CREATE PUBLICATION syntax as an alternative.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-11-10T13:05:39.000Z'
 ---
 
 The following tips are based on actual customer data migrations to Neon using logical replication:

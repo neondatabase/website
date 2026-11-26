@@ -1,0 +1,30 @@
+<svg viewBox="0 0 560 260" width="560" height="260" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="pooled-connection-title">
+  <title id="pooled-connection-title">Pooled connection: many app connections enter the pooler and are shared over a few Postgres sessions, up to 10,000 connections.</title>
+  <g id="app">
+    <rect x="1" y="20" width="110" height="200" rx="2" fill="none" stroke="currentColor" stroke-width="1.5"></rect>
+    <text x="56" y="126" text-anchor="middle" fill="currentColor" font-family="'Geist Mono', ui-monospace, monospace" font-size="16" letter-spacing="-0.3" font-weight="500">your app</text>
+  </g>
+  <g id="pooler">
+    <path d="M111 50.0 C 190 50.0, 200 120, 262 120" fill="none" stroke="#39A57D" stroke-width="1" opacity="0.5"></path>
+    <path d="M111 62.7 C 190 62.7, 200 120, 262 120" fill="none" stroke="#39A57D" stroke-width="1" opacity="0.5"></path>
+    <path d="M111 75.5 C 190 75.5, 200 120, 262 120" fill="none" stroke="#39A57D" stroke-width="1" opacity="0.5"></path>
+    <path d="M111 88.2 C 190 88.2, 200 120, 262 120" fill="none" stroke="#39A57D" stroke-width="1" opacity="0.5"></path>
+    <path d="M111 100.9 C 190 100.9, 200 120, 262 120" fill="none" stroke="#39A57D" stroke-width="1" opacity="0.5"></path>
+    <path d="M111 113.6 C 190 113.6, 200 120, 262 120" fill="none" stroke="#39A57D" stroke-width="1" opacity="0.5"></path>
+    <path d="M111 126.4 C 190 126.4, 200 120, 262 120" fill="none" stroke="#39A57D" stroke-width="1" opacity="0.5"></path>
+    <path d="M111 139.1 C 190 139.1, 200 120, 262 120" fill="none" stroke="#39A57D" stroke-width="1" opacity="0.5"></path>
+    <path d="M111 151.8 C 190 151.8, 200 120, 262 120" fill="none" stroke="#39A57D" stroke-width="1" opacity="0.5"></path>
+    <path d="M111 164.5 C 190 164.5, 200 120, 262 120" fill="none" stroke="#39A57D" stroke-width="1" opacity="0.5"></path>
+    <path d="M111 177.3 C 190 177.3, 200 120, 262 120" fill="none" stroke="#39A57D" stroke-width="1" opacity="0.5"></path>
+    <path d="M111 190.0 C 190 190.0, 200 120, 262 120" fill="none" stroke="#39A57D" stroke-width="1" opacity="0.5"></path>
+    <rect x="262" y="102" width="36" height="36" rx="2" fill="#39A57D" fill-opacity="0.14" stroke="#39A57D" stroke-width="1.5"></rect>
+    <path d="M298 120 C 340 120, 340 104, 380 104 L 449 104" fill="none" stroke="#39A57D" stroke-width="2"></path>
+    <path d="M298 120 C 340 120, 340 120, 380 120 L 449 120" fill="none" stroke="#39A57D" stroke-width="2"></path>
+    <path d="M298 120 C 340 120, 340 136, 380 136 L 449 136" fill="none" stroke="#39A57D" stroke-width="2"></path>
+    <text x="186" y="246" text-anchor="middle" fill="currentColor" font-family="'Geist Mono', ui-monospace, monospace" font-size="12" letter-spacing="-0.3" opacity="0.8">up to 10,000 connections</text>
+  </g>
+  <g id="postgres">
+    <rect x="449" y="20" width="110" height="200" rx="2" fill="none" stroke="currentColor" stroke-width="1.5"></rect>
+    <text x="504" y="126" text-anchor="middle" fill="currentColor" font-family="'Geist Mono', ui-monospace, monospace" font-size="16" letter-spacing="-0.3" font-weight="500">Postgres</text>
+  </g>
+</svg>

@@ -2,7 +2,7 @@
 title: "What are the best managed Postgres options for developers who find that the smallest available instance on major cloud providers is still too expensive?"
 subtitle: 'Neon''s smallest Lakebase Postgres compute is 0.25 CU (≈1 GB RAM) and suspends after 5 minutes of inactivity, so you pay for active CU-hours plus storage instead of a 24/7 instance.'
 createdAt: '2026-04-25T00:00:00.000Z'
-updatedOn: '2026-10-01T14:57:15.000Z'
+updatedOn: '2026-11-09T16:30:39.000Z'
 isDraft: false
 previousLink:
   title: 'What are the best managed Postgres databases that only charge you when the database is actually being used?'

@@ -8,6 +8,7 @@ import React, { useState, useEffect } from 'react';
 
 import ProviderMarks from 'components/shared/provider-marks';
 import ICONS_CONFIG from 'config/docs-icons-config';
+import { NON_AGENT_FETCH_HEADERS } from 'constants/llm-analytics';
 import useCopyPrompt from 'hooks/use-copy-prompt';
 import CheckIcon from 'icons/check.inline.svg';
 import ChevronRight from 'icons/chevron-right-sm.inline.svg';
@@ -125,7 +126,7 @@ const CompactCard = ({
 
   useEffect(() => {
     if (promptSrc) {
-      fetch(promptSrc)
+      fetch(promptSrc, { headers: NON_AGENT_FETCH_HEADERS })
         .then((res) => res.text())
         .then(setMarkdown)
         .catch((err) => console.error(`Failed to fetch prompt: ${promptSrc}`, err));

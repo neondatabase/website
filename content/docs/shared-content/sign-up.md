@@ -1,5 +1,5 @@
 ---
-updatedOn: '2024-06-30T18:09:08.270Z'
+updatedOn: '2026-05-28T20:48:57.000Z'
 ---
 
 ## Try it on Neon!

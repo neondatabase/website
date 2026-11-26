@@ -9,7 +9,7 @@ summary: >-
   using Render's native database. The guide uses Node.js with the pg library and
   Render's Git-based continuous deployment.
 enableTableOfContents: true
-updatedOn: '2026-10-09T10:14:56.146Z'
+updatedOn: '2026-11-16T20:10:42.000Z'
 ---
 
 [Render](https://render.com) hosts web applications and static sites, with PR previews and zero-downtime deployments. Render supports full-stack applications, offering both web services and background workers.

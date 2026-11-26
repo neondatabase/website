@@ -3,7 +3,7 @@ title: Neon integration guides
 subtitle: Find setup instructions for connecting Neon to platforms and services.
 summary: >-
   Index of Neon integration guides organized by category: authentication,
-  deployment, development, file and media storage, monitoring, query,
+  deployment, development, email, file and media storage, monitoring, query,
   replication, schema migration, and serverless. Use this page to find setup
   instructions for connecting Neon to a specific platform or tool.
 enableTableOfContents: true
@@ -19,7 +19,7 @@ redirectFrom:
   - /docs/integrations/draxlr
   - /docs/guides/logical-replication-decodable
   - /docs/guides/logical-replication-stacksync
-updatedOn: '2026-10-21T11:04:20.383Z'
+updatedOn: '2026-11-26T15:47:29.446Z'
 ---
 
 ## Authentication
@@ -45,6 +45,8 @@ updatedOn: '2026-10-21T11:04:20.383Z'
 <a href="/docs/guides/cloudflare-pages" title="Cloudflare Pages" description="Use Neon with Cloudflare Pages" icon="cloudflare"></a>
 
 <a href="/docs/guides/cloudflare-workers" title="Cloudflare Workers" description="Use Neon with Cloudflare Workers" icon="cloudflare"></a>
+
+<a href="/docs/guides/fly" title="Fly.io" description="Use Neon with Fly.io" icon="fly"></a>
 
 <a href="/docs/guides/heroku" title="Heroku" description="Deploy an app with Neon on Heroku" icon="heroku"></a>
 
@@ -73,6 +75,14 @@ updatedOn: '2026-10-21T11:04:20.383Z'
 <a href="/docs/guides/prisma" title="Prisma" description="Connect from Prisma to Neon" icon="prisma"></a>
 
 <a href="/docs/guides/typeorm" title="TypeORM" description="Connect from TypeORM to Neon" icon="typeorm"></a>
+
+</TechCards>
+
+## Email
+
+<TechCards>
+
+<a href="/docs/guides/loops" title="Loops" description="Send Managed Better Auth emails and sync users with Loops" icon="loops"></a>
 
 </TechCards>
 
@@ -184,9 +194,9 @@ updatedOn: '2026-10-21T11:04:20.383Z'
 
 <a href="/docs/guides/django-migrations" title="Django" description="Connect a Django application to Neon" icon="django"></a>
 
-<a href="/docs/guides/drizzle-migrations" title="Drizzle" description="Schema migration with Lakebase Postgres and Drizzle ORM" icon="drizzle"></a>
+<a href="/docs/guides/drizzle-migrations" title="Drizzle" description="Schema migration with Drizzle ORM and Lakebase Postgres on Neon" icon="drizzle"></a>
 
-<a href="/docs/guides/entity-migrations" title="Entity Framework" description="Schema migration with Neon and Entity Framework" icon="entity"></a>
+<a href="/docs/guides/entity-migrations" title="Entity Framework" description="Schema migration with Entity Framework and Lakebase Postgres on Neon" icon="entity"></a>
 
 <a href="/docs/guides/flyway" title="Flyway" description="Use Flyway with Neon" icon="flyway"></a>
 
@@ -194,11 +204,11 @@ updatedOn: '2026-10-21T11:04:20.383Z'
 
 <a href="/docs/guides/liquibase" title="Liquibase" description="Use Liquibase with Neon" icon="liquibase"></a>
 
-<a href="/docs/guides/prisma-migrations" title="Prisma" description="Schema migration with Lakebase Postgres and Prisma ORM" icon="prisma"></a>
+<a href="/docs/guides/prisma-migrations" title="Prisma" description="Schema migrations with Prisma and Neon" icon="prisma"></a>
 
 <a href="/docs/guides/rails-migrations" title="Rails" description="Connect a Rails application to Neon" icon="rails"></a>
 
-<a href="/docs/guides/sequelize" title="Sequelize" description="Schema migration with Lakebase Postgres and Sequelize" icon="sequelize"></a>
+<a href="/docs/guides/sequelize" title="Sequelize" description="Schema migration with Sequelize and Lakebase Postgres on Neon" icon="sequelize"></a>
 
 <a href="/docs/guides/sqlalchemy" title="SQLAlchemy" description="Connect an SQLAlchemy application to Neon" icon="sqlalchemy"></a>
 

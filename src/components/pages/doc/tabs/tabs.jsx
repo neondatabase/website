@@ -41,13 +41,13 @@ const Tabs = ({ labels = [], children }) => {
     const label = labels[index];
 
     if (label === activeTab && index === currentIndex) {
-      sendGtagEvent('Tab Clicked', { tab_label: label, tag_name: 'ContentTab' });
+      sendGtagEvent('Tab Clicked', { text: label, tab_label: label, tag_name: 'ContentTab' });
       return;
     }
 
     tabTopBeforeClickRef.current = containerRef.current?.getBoundingClientRect().top ?? null;
     setActiveTab(label);
-    sendGtagEvent('Tab Clicked', { tab_label: label, tag_name: 'ContentTab' });
+    sendGtagEvent('Tab Clicked', { text: label, tab_label: label, tag_name: 'ContentTab' });
   };
 
   return (

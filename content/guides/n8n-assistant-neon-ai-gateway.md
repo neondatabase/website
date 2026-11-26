@@ -4,7 +4,7 @@ subtitle: 'Power your n8n Assistant with models served through the Neon AI Gatew
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2026-10-01T00:00:00.000Z'
-updatedOn: '2026-10-05T18:14:46.820Z'
+updatedOn: '2026-11-05T23:41:12.000Z'
 ---
 
 Neon is a complete set of cloud backend primitives built around Lakebase Postgres. [Neon Object Storage](/docs/storage/overview) gives you S3-compatible file storage that branches with your database. The [Neon AI Gateway](/docs/ai-gateway/overview) serves embedding and chat models through one credential and an OpenAI-compatible endpoint, and [Lakebase Postgres](/docs/postgres/overview) with [`pgvector`](/docs/extensions/pgvector) handles vector storage and similarity search. They all run alongside your database in the same project.

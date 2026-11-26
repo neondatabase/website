@@ -1,168 +1,219 @@
 ---
-title: Connect from Elixir with Ecto to Neon
-subtitle: Set up a Neon project in seconds and connect from Elixir with Ecto
+title: Connect from Ecto to Neon
+subtitle: Create a Neon project, link it with neon link, and query Lakebase Postgres from Ecto with Postgrex
 summary: >-
-  Elixir Ecto connection guide walks through adding ecto_sql and Postgrex
-  dependencies, configuring SSL with cacerts against a Neon Serverless Postgres
-  database, and running migrations via mix ecto.migrate. Choose this page when
-  setting up a new Elixir project that connects to Neon and needs to account for
-  Postgrex idle_interval defaults that can prevent Neon's scale-to-zero
-  autosuspend from triggering.
+  To connect an Elixir app with Ecto to Lakebase Postgres on Neon, run neon link
+  to write DATABASE_URL and DATABASE_URL_UNPOOLED to an env file, configure the Ecto
+  repo with SSL in config/runtime.exs, then define a schema, run a migration, and
+  query it. Covers ecto_sql 3.14 and Postgrex 0.22, why migrations use the direct
+  connection, an optional development branch, the agent prompt, and links for
+  Phoenix and Elixir users.
 enableTableOfContents: true
-updatedOn: '2026-10-09T10:18:46.317Z'
+updatedOn: '2026-11-20T23:02:12.987Z'
 ---
 
-<CopyPrompt src="/prompts/elixir-ecto-prompt.md" 
-description="Pre-built prompt for connecting Elixir applications to Neon with Ecto"/>
-
-This guide describes how to connect from an Elixir application with Ecto, which is a database wrapper and query generator for Elixir. Ecto provides an API and abstractions for interacting databases, enabling Elixir developers to query any database using similar constructs.
-
-The instructions in this guide follow the steps outlined in the [Ecto Getting Started](https://ecto.hexdocs.pm/getting-started.html) guide, modified to demonstrate connecting to a Neon Serverless Postgres database. It is assumed that you have a working installation of [Elixir](https://elixir-lang.org/install.html).
-
-To connect to Neon from Elixir with Ecto:
+<PromptBlock src="/prompts/elixir-ecto-prompt.md" labels={["Set up your agent and follow this guide", "Look up Ecto's docs", "Connect your Ecto app"]} />
 
 <Steps>
 
-## Create a database in Neon and copy the connection string
+## Start from a Mix project with a supervision tree
 
-The instructions in this configuration use a database named `friends`.
+Create the project with `mix new friends --sup`, which adds the supervision tree that Ecto, the database wrapper and query generator for Elixir, needs. This guide needs Elixir 1.15 or later on Erlang/OTP 25 or later. Skip this step if you already have such a project. A Phoenix app has one (see the [Phoenix guide](/docs/guides/phoenix)). For Elixir without Ecto, see the [Elixir guide](/docs/guides/elixir), which creates a project without `--sup`.
 
-To create the database:
-
-1. Navigate to the [Neon Console](https://console.neon.tech).
-1. Select a project.
-1. Select **Postgres database** > **Databases**.
-1. Select the branch where you want to create the database.
-1. Click **Add database**.
-1. Enter a database name (`friends`), and select a database owner.
-1. Click **Create**.
-
-You can also create the database with SQL. Connect to the `neondb` database on your branch, for example with `psql`, and run the following command:
-
-```sql
-CREATE DATABASE friends;
-```
-
-Find your database connection string by clicking the **Connect** button in the Console nav to open the **Connect to your branch** modal. Select a branch, a role, and the database you want to connect to. A connection string is constructed for you. Your connection string should look something like this:
-
-```bash shouldWrap
-postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-west-2.aws.neon.tech/friends?sslmode=require&channel_binding=require
-```
-
-You will need the connection string details later in the setup.
-
-## Create an Elixir project
-
-Create an Elixir application called `friends`.
-
-```bash
+```bash filename="Terminal"
 mix new friends --sup
+cd friends
 ```
 
-The `--sup` option ensures that the application has a supervision tree, which is required by Ecto.
+## Add Neon's agent skills (optional)
 
-## Add Ecto and Postgrex to the application
+Run `npx neon@latest skills` from your project directory to add Neon's [agent skills](/docs/ai/agent-skills), which teach your AI coding agent how to use the Neon CLI, branches, and Neon's backend services. The command needs Node.js 22.20 or later, even though the app is Elixir. The agent prompt at the top of this page installs them, so skip this step if you used it:
 
-1. Add the Ecto and the Postgrex driver dependencies to the `mix.exs` file by updating the `deps` definition in the file to include those items. For example:
-
-   ```elixir filename="mix.exs"
-   defp deps do
-     [
-       {:ecto_sql, "~> 3.0"},
-       {:postgrex, "~> 0.22"}
-     ]
-   end
-   ```
-
-   Ecto provides the common querying API. The Postgrex driver acts as a bridge between Ecto and Postgres. Ecto interfaces with its own `Ecto.Adapters.Postgres` module, which communicates to Postgres through the Postgrex driver.
-
-2. Install the Ecto and the Postgrex driver dependencies by running the following command in your application directory:
-
-   ```bash
-   mix deps.get
-   ```
-
-## Configure Ecto
-
-Run the following command in your application directory to generate the configuration required to connect from Ecto to your Neon database.
-
-```bash
-mix ecto.gen.repo -r Friends.Repo
+```bash filename="Terminal"
+npx neon@latest skills
 ```
 
-Follow these steps to complete the configuration:
+To also connect the [Neon MCP Server](/docs/ai/neon-mcp-server), run `npx neon@latest mcp`.
 
-1. The first part of the configuration generated by the `mix ecto.gen.repo` command is found in the `config/config.exs` file. Update this configuration with your Neon database connection details. Use the connection details from the Neon connection string you copied in the first part of the guide. Your `hostname` will differ from the example below.
+Ecto publishes its docs for AI agents at [hexdocs.pm/ecto/llms.txt](https://hexdocs.pm/ecto/llms.txt), and the agent prompt points your agent there.
 
-   ```elixir
-   config :friends, Friends.Repo,
-     database: "friends",
-     username: "alex",
-     password: "AbC123dEf",
-     hostname: "ep-cool-darkness-123456.us-west-2.aws.neon.tech",
-     ssl: [cacerts: :public_key.cacerts_get()]
-   ```
+## Create a Neon project
 
-   The `:ssl` option is required to connect to Neon. Postgrex, since v0.18, verifies the server SSL certificate and you need to select CA trust store using `:cacerts` or `:cacertfile` options. You can use the OS-provided CA store by setting `cacerts: :public_key.cacerts_get()`. While not recommended, you can disable certificate verification by setting `ssl: [verify: :verify_none]`.
+Create a Neon project in a region that runs every Neon backend service: `aws-us-east-2` (Ohio), `aws-us-east-1` (N. Virginia), `aws-eu-central-1` (Frankfurt), or `aws-ap-southeast-1` (Singapore). Postgres and Managed Better Auth run in every region; Object Storage, Neon Functions, the AI Gateway, and Realtime run in those four (see [product availability](/docs/introduction/regions#product-availability)). Skip this step if you already have a Neon project you want to use.
 
-   <Admonition type="note">
-   Postgrex has an `:idle_interval` connection parameter that defines an interval for pinging connections after a period of inactivity. The default setting is `1000ms`. If you rely on Neon's [autosuspend](/docs/introduction/scale-to-zero) feature to scale your compute to zero when your database is not active, this setting will prevent that. For more, see [Postgrex: DBConnection ConnectionError ssl send: closed](/docs/connect/connection-errors#postgrex-dbconnection-connectionerror-ssl-send-closed).
-   </Admonition>
+<Tabs labels={["Neon CLI", "API", "Console"]}>
 
-2. The second part of the configuration generated by the `mix ecto.gen.repo` command is the `Ecto.Repo` module, found in `lib/friends/repo.ex`. You shouldn't have to make any changes here, but verify that the following configuration is present:
+<TabItem>
 
-   ```elixir
-   defmodule Friends.Repo do
-     use Ecto.Repo,
-       otp_app: :friends,
-       adapter: Ecto.Adapters.Postgres
-   end
-   ```
+Install the [Neon CLI](/docs/cli/install), sign in, and create the project. The npm install needs Node.js 20.19 or later; without Node.js, run `brew install neonctl` (Homebrew) or use another option on the install page:
 
-   Ecto uses the module definition to query the database. The `otp_app` setting tells Ecto where to find the database configuration. In this case, the `:friends` application is specified, so Ecto will use the configuration defined in the that application's `config/config.exs` file. The `:adapter` option defines the Postgres adapter.
-
-3. Next, the `Friends.Repo` must be defined as a supervisor within the application's supervision tree. In `lib/friends/application.ex`, make sure `Friends.Repo` is specified in the `start` function, as shown:
-
-   ```elixir
-   def start(_type, _args) do
-     children = [
-       Friends.Repo,
-     ]
-   ```
-
-   This configuration starts the Ecto process, enabling it to receive and execute the application's queries.
-
-4. The final part of the configuration is to add the following line under the configuration in the `config/config.exs` file that you updated in the first step:
-
-   ```elixir
-   config :friends, ecto_repos: [Friends.Repo]
-   ```
-
-   This line tells the application about the new repo, allowing you to run commands such as `mix ecto.migrate`, which you will use in a later step to create a table in your database.
-
-## Create a migration and add a table
-
-Your `friends` database is currently empty. It has no tables or data. In this step, you will add a table. To do so, you will create a "migration" by running the following command in your application directory:
-
-```bash
-mix ecto.gen.migration create_people
+```bash filename="Terminal"
+npm i -g neon@latest
+neon login
+neon projects create --name my-app --region-id aws-us-east-2 --no-secrets
 ```
 
-The command generates an empty migration file in `priv/repo/migrations`, which looks like this:
+`--region-id` sets the region. `--no-secrets` keeps the connection string out of the output, since the next step pulls it into your env file. Pass `--org-id` to choose the organization (find IDs with `neon orgs list`).
 
-```elixir
-defmodule Friends.Repo.Migrations.CreatePeople do
-  use Ecto.Migration
+</TabItem>
 
-  def change do
+<TabItem>
 
-  end
+Create an [API key](https://console.neon.tech/app/settings/api-keys), export it, then create the project in your organization:
+
+```bash filename="Terminal"
+export NEON_API_KEY=napi_...
+
+curl -X POST https://console.neon.tech/api/v2/projects \
+  -H "Authorization: Bearer $NEON_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{"project": {"name": "my-app", "region_id": "aws-us-east-2", "org_id": "<org-id>"}}'
+```
+
+The response includes the project's connection string in `connection_uris[0].connection_uri`. See [Create a project with the API](/docs/manage/projects#create-a-project-with-the-api) for the other options.
+
+</TabItem>
+
+<TabItem>
+
+Go to the [Projects](https://console.neon.tech/app/projects) page in the Neon Console, click **New Project**, and pick one of the regions above.
+
+</TabItem>
+
+</Tabs>
+
+## Connect your app to the project
+
+Get two connection strings into an env file. The **pooled** connection goes through Neon's connection pooler, and its host name has `-pooler`. Your app uses it. The **direct** connection goes straight to Postgres, and migrations use it (see [Why two connection strings?](#why-two-connection-strings)). Add the env files to `.gitignore` first, so the connection strings stay out of git:
+
+```bash filename="Terminal"
+printf '\n.env\n.env.local\n' >> .gitignore
+```
+
+<Tabs labels={["Neon CLI", "Without the CLI"]}>
+
+<TabItem>
+
+From your project's directory, link it to the Neon project. Install the [Neon CLI](/docs/cli/install) and run `neon login` first if you haven't.
+
+`neon link` prompts you to pick an organization and a project, or to create a new project. Then it:
+
+- writes a `.neon` file with the project context;
+- pins a branch (pass `--branch` to choose one);
+- pulls that branch's `DATABASE_URL` (pooled) and `DATABASE_URL_UNPOOLED` (direct) into `.env.local`, or into `.env` if your project already has one.
+
+`--no-config` skips the offer to create a [`neon.ts`](/docs/reference/neon-ts) file, which is for JavaScript projects.
+
+```bash filename="Terminal"
+neon link --no-config
+```
+
+Without a terminal, as in a script or an agent's shell, `neon link` doesn't prompt. Pass `-y` with `--org-id` and `--project-id`, or with `--org-id`, `--project-name`, and `--region-id` to create a project. Find IDs with `neon orgs list` and `neon projects list --org-id <org-id>`.
+
+</TabItem>
+
+<TabItem>
+
+Copy both connection strings from **Connect** in the Neon Console, or from the API response, and add them to a `.env.local` file in your project directory. For more information, see [Connect from any application](/docs/connect/connect-from-any-app).
+
+```shell filename=".env.local" shouldWrap
+DATABASE_URL="postgresql://[user]:[password]@[endpoint]-pooler.[region].aws.neon.tech/[dbname]?sslmode=require&channel_binding=require"
+DATABASE_URL_UNPOOLED="postgresql://[user]:[password]@[endpoint].[region].aws.neon.tech/[dbname]?sslmode=require&channel_binding=require"
+```
+
+The development branch step needs the Neon CLI, so skip it in this tab.
+
+</TabItem>
+
+</Tabs>
+
+## Work on a development branch (optional)
+
+Run `neon checkout dev --create` to develop on a branch of your database instead of the default branch, where production data usually lives. The default branch is `main` for projects created with the CLI or API, and `production` for projects created in the Console. A [branch](/docs/introduction/branching) starts from its parent's data and schema without copying them (copy-on-write: only the changes you make are stored), so you can change it freely:
+
+```bash filename="Terminal"
+neon checkout dev --create
+```
+
+This creates the `dev` branch, pins it in `.neon`, and pulls its `DATABASE_URL` and `DATABASE_URL_UNPOOLED` into the same env file, so your app now uses the branch. To switch back, run `neon checkout main` (or `production`).
+
+## Install Ecto and Postgrex
+
+Install [`ecto_sql`](https://hexdocs.pm/ecto_sql), which provides Ecto's SQL adapters and its migration tool. Install [Postgrex](https://hexdocs.pm/postgrex/Postgrex.html), the Postgres driver that Ecto uses. Install [Dotenvy](https://hexdocs.pm/dotenvy), which loads the env file in development, because Elixir doesn't read env files on its own. Add all three to the `deps` function in `mix.exs`:
+
+```elixir filename="mix.exs"
+defp deps do
+  [
+    {:ecto_sql, "~> 3.14"},
+    {:postgrex, "~> 0.22"},
+    {:dotenvy, "~> 1.2"}
+  ]
 end
 ```
 
-Add code to the migration file to create a table called `people`. For example:
+Then download them:
 
-```elixir
+```bash filename="Terminal"
+mix deps.get
+```
+
+This guide is for Ecto 3, the current major version. For an older Ecto project, read the [Ecto changelog](https://hexdocs.pm/ecto/changelog.html) before you upgrade.
+
+## Configure Ecto
+
+The code in this section uses the app name `friends` and the module `Friends`. In an existing app, replace them with your app's name and module from `mix.exs`.
+
+Ecto needs a repo module, which runs the queries, and its configuration. Create the repo in `lib/friends/repo.ex`:
+
+```elixir filename="lib/friends/repo.ex"
+defmodule Friends.Repo do
+  use Ecto.Repo,
+    otp_app: :friends,
+    adapter: Ecto.Adapters.Postgres
+end
+```
+
+Add the repo to the children of the application in `lib/friends/application.ex`, so it starts with the app:
+
+```elixir filename="lib/friends/application.ex"
+children = [
+  Friends.Repo
+]
+```
+
+Create `config/config.exs`. It names the repo so Ecto's Mix tasks can find it:
+
+```elixir filename="config/config.exs"
+import Config
+
+config :friends, ecto_repos: [Friends.Repo]
+```
+
+Create `config/runtime.exs`. Mix reads it every time it starts the app, including for `mix ecto.migrate`, so the repo gets its connection from `DATABASE_URL` each time:
+
+```elixir filename="config/runtime.exs"
+import Config
+
+# In development, load the env file that neon link wrote (.env, or .env.local).
+# Variables set in your shell come last, so they override the file.
+if config_env() == :dev do
+  Dotenvy.source!([".env", ".env.local", System.get_env()], side_effect: &System.put_env/1)
+end
+
+config :friends, Friends.Repo,
+  url: System.get_env("DATABASE_URL"),
+  ssl: [cacerts: :public_key.cacerts_get()]
+```
+
+The `ssl` option is required to connect to Neon. Postgrex verifies the server certificate, so it needs a trust store, and `:public_key.cacerts_get()` uses your operating system's CA certificates. Postgrex doesn't read `sslmode` from the URL, so this option is what turns on TLS. Postgrex also sends the URL's host name as the TLS server name, so the config doesn't need to set it.
+
+Production reads `DATABASE_URL` from the host's environment, not from an env file. The dev block is the only one that loads a file.
+
+## Define a schema and run a migration
+
+Generate a migration with `mix ecto.gen.migration create_people`. The generator writes an empty file in `priv/repo/migrations`, named with a timestamp, like `<timestamp>_create_people.exs`. Replace its `change/0` function so the file reads:
+
+```elixir filename="priv/repo/migrations/<timestamp>_create_people.exs"
 defmodule Friends.Repo.Migrations.CreatePeople do
   use Ecto.Migration
 
@@ -176,49 +227,73 @@ defmodule Friends.Repo.Migrations.CreatePeople do
 end
 ```
 
-To run the migration and create the `people` table in your database, which also verifies your connection to Neon, run the following command from your application directory:
+Create `lib/friends/person.ex`, the schema that maps Elixir structs to the `people` table:
 
-```bash
-mix ecto.migrate
+```elixir filename="lib/friends/person.ex"
+defmodule Friends.Person do
+  use Ecto.Schema
+
+  schema "people" do
+    field :first_name, :string
+    field :last_name, :string
+    field :age, :integer
+  end
+end
 ```
 
-The output of this command should appear similar to the following:
+Run the migration on your development branch if you made one. It creates the table and records the migration in the `schema_migrations` table. Ecto's repo reads a single `DATABASE_URL`, so this command sets it to the direct string for that run. The Neon CLI prints the direct string:
 
-```bash shouldWrap
-14:30:04.924 [info]  == Running 20230524172817 Friends.Repo.Migrations.CreatePeople.change/0 forward
-14:30:04.925 [info]  create table people
-14:30:05.014 [info]  == Migrated 20230524172817 in 0.0s
+```bash filename="Terminal"
+DATABASE_URL="$(neon connection-string)" mix ecto.migrate
 ```
 
-You can use the **Tables** feature in the Neon Console to view the table that was created:
+Without the CLI, replace `$(neon connection-string)` with the value of `DATABASE_URL_UNPOOLED` from your env file, keeping the double quotes.
 
-1. Navigate to the [Neon Console](https://console.neon.tech).
-1. Select a project.
-1. Select **Postgres database** > **Tables** from the sidebar.
-1. Select the Branch, Database (`friends`), and the schema (`public`). You should see the `people` table along with a `schema_migrations` table that was created by the migration.
+## Query it
+
+Create `query.exs` in the project root. It inserts a row, reads it back, and prints the Postgres version:
+
+```elixir filename="query.exs"
+alias Friends.{Person, Repo}
+
+person = Repo.insert!(%Person{first_name: "Ada", last_name: "Lovelace", age: 36})
+IO.inspect(Repo.get!(Person, person.id), label: "Person")
+
+%{rows: [[version]]} = Repo.query!("SELECT version()")
+IO.puts(version)
+```
+
+Run the script:
+
+```bash filename="Terminal"
+mix run query.exs
+```
+
+The output shows the new row and the Postgres version. Each run adds one row, so run it on your development branch if you made one.
 
 </Steps>
 
-## Application code
+## Why two connection strings?
 
-You can find the application code for the example above on GitHub.
+Your app uses the pooled `DATABASE_URL`, which goes through PgBouncer, the connection pooler Neon runs. Migrations use the direct `DATABASE_URL_UNPOOLED`, because PgBouncer runs in [transaction mode](/docs/connect/connection-pooling#connection-pooling-in-transaction-mode). Ecto's repo reads one URL, so the migration command sets `DATABASE_URL` to the direct string (see [Neon's connection pooling page](/docs/connect/connection-pooling) for which tasks use the direct connection).
 
-<DetailIconCards>
-<a href="https://github.com/neondatabase/neon-ecto-getting-started-app" description="Learn how to connect from Elixir with Ecto to Neon" icon="github">Neon Ecto Getting Started App</a>
-</DetailIconCards>
+## Troubleshooting
+
+<DefinitionList>
+
+`** (ArgumentError) missing the :database key in options for Friends.Repo`
+: `DATABASE_URL` isn't set when the app starts, so the repo has no connection options. Check that `.env.local` or `.env` sets it. In production, set it in the host's environment. Queries that wait for a connection then fail with `DBConnection.ConnectionError` after about six seconds.
+
+`ssl send: closed`
+: The connection to Neon closed before Ecto used it. We saw this once, after an idle period; running the command again worked. See [Postgrex: DBConnection ConnectionError ssl send: closed](/docs/connect/connection-errors#postgrex-dbconnection-connectionerror-ssl-send-closed).
+</DefinitionList>
 
 ## Next steps
 
-The [Ecto Getting Started Guide](https://ecto.hexdocs.pm/getting-started.html) provides additional steps that you can follow to create a schema, insert data, and run queries. See [Creating the schema](https://ecto.hexdocs.pm/getting-started.html#creating-the-schema) in the _Ecto Getting Started Guide_ to pick up where the steps in this guide leave off.
-
-## Next steps with Neon backend services
-
-- [Add Object Storage](/docs/storage/overview): S3-compatible file storage that branches with your database
-- [Call an LLM with AI Gateway](/docs/ai-gateway/overview): Access foundation models from Anthropic, OpenAI, Google, and more with one credential
-
-## Usage notes
-
-- Suppose you have `PGHOST` environment variable on your system set to something other than your Neon hostname. In that case, this hostname will be used instead of the Neon `hostname` defined in your Ecto Repo configuration when running `mix ecto` commands. To avoid this issue, you can either set the `PGHOST` environment variable to your Neon hostname or specify `PGHOST=""` when running `mix ecto` commands; for example: `PGHOST="" mix ecto.migrate`.
-- Neon's _Scale to Zero_ feature scales computes to zero after 300 seconds (5 minutes) of inactivity, which can result in a `connection not available` error when running `mix ecto` commands. Typically, a Neon compute takes a few hundred milliseconds to transition from `Idle` to `Active`. Wait a second or two and try running the command again. Alternatively, consider the strategies outlined in [Connection latency and timeouts](/docs/connect/connection-latency) to manage connection issues resulting from compute suspension.
+- **Deploy:** set `DATABASE_URL` and `DATABASE_URL_UNPOOLED` in the host's environment, since only the dev block of `config/runtime.exs` reads an env file. Run migrations before you start a new version with `DATABASE_URL="$DATABASE_URL_UNPOOLED" mix ecto.migrate` (the [Phoenix guide's deploy section](/docs/guides/phoenix#deploy) shows a release and its migrate script).
+- [Ecto Getting Started](https://hexdocs.pm/ecto/getting-started.html): schemas, queries, and changesets.
+- [Connect a Phoenix application to Neon](/docs/guides/phoenix): Ecto and Postgrex in a Phoenix app, with configuration for development and production.
+- [Connect an Elixir application to Neon](/docs/guides/elixir): Postgrex without Ecto.
+- **Add more of your backend:** [Managed Better Auth](/docs/auth/overview) for sign-in, [Object Storage](/docs/storage/overview) for files, [Neon Functions](/docs/compute/functions/overview) for long-running work, and [AI Gateway](/docs/ai-gateway/overview) for LLM calls. Each one branches with your database.
 
 <NeedHelp/>

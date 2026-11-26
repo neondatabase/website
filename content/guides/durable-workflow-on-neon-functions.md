@@ -4,7 +4,7 @@ subtitle: 'Learn how to orchestrate reliable, long-running workflows with Innges
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2026-07-25T00:00:00.000Z'
-updatedOn: '2026-09-24T17:56:34.189Z'
+updatedOn: '2026-11-09T23:20:10.000Z'
 ---
 
 Some work shouldn't or can't happen inside a single HTTP request-response cycle: multi-step AI enrichment pipelines, customer onboarding sequences, background uploads, and third-party webhooks. Production backends need a way to run it in the background.

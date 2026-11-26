@@ -6,7 +6,7 @@ summary: >-
   buckets via the Neon Console, the Neon API, or the S3 API. Set the access
   level to private or public_read to control who can read objects.
 enableTableOfContents: true
-updatedOn: '2026-09-24T07:04:24.872Z'
+updatedOn: '2026-11-25T11:01:32.807Z'
 ---
 
 A bucket is a named container for objects in Neon Object Storage. Buckets are scoped to a branch and inherit from parent branches when a new branch is created. No data is copied on fork.
@@ -73,7 +73,7 @@ aws s3api create-bucket \
 
 </CodeTabs>
 
-Creating a `public_read` bucket requires the project **Admin** role in organizations that use [per-project permissions](/docs/manage/user-permissions#per-project-permissions). Editors can create private buckets.
+Creating a `public_read` bucket requires the project **Admin** role in organizations that use [per-project permissions](/docs/manage/user-permissions#per-project-permissions). Organization API keys aren't subject to this check. Editors can create private buckets.
 
 To create a `public_read` bucket with neon:
 
@@ -107,6 +107,10 @@ Objects in a `public_read` bucket are accessible at:
 ```
 https://<branch-id>.storage.c-<N>.us-east-2.aws.neon.tech/my-public-bucket/<object-key>
 ```
+
+Requests to this URL are served from your project's region. Object Storage doesn't use a CDN. See [Limits](/docs/storage/overview#limits).
+
+To serve these objects through your own CDN, use your production branch's endpoint as the origin and set `Cache-Control` when you upload objects to control how long the CDN caches them. Presigned URLs aren't cacheable because each one is unique.
 
 ## List buckets
 

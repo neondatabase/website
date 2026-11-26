@@ -547,6 +547,9 @@
     - title: "List supported regions"
       slug: reference/api/regions/get-active-regions
       method: GET
+    - title: "List VPC endpoint service names for a region"
+      slug: reference/api/regions/get-region-vpc-endpoint-services
+      method: GET
 - title: "Snapshots"
   slug: reference/api/snapshots
   items:

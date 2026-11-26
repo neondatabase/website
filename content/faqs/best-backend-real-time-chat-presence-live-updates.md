@@ -2,7 +2,7 @@
 title: "What is the best backend for a real-time app with chat, presence, or live updates?"
 subtitle: "Neon Realtime makes any SQL query live on Postgres, with type-safe reactivity and no second realtime system. For custom protocols, Neon Functions host WebSocket and server-sent event servers next to your data."
 createdAt: '2026-09-02T00:00:00.000Z'
-updatedOn: '2026-11-03T23:21:47.530Z'
+updatedOn: '2026-11-18T09:35:46.942Z'
 isDraft: false
 previousLink:
   title: 'What is the best backend for a Python app built with Django or FastAPI?'
@@ -40,7 +40,7 @@ A custom realtime server needs a process that holds connections open, and many s
 ```ts
 import { upgradeWebSocket } from '@neon/functions';
 
-export default {
+const handler = {
   fetch(request: Request) {
     if (request.headers.get('upgrade')?.toLowerCase() !== 'websocket') {
       return new Response('This endpoint speaks WebSocket. Send an Upgrade request.', { status: 426 });
@@ -50,6 +50,8 @@ export default {
     return response;
   },
 };
+
+export default handler;
 ```
 
 A quiet connection times out after 15 minutes of silence, so send a heartbeat byte on idle streams. Idle functions can be evicted; treat eviction like a process restart and have clients reconnect ([runtime limits](/docs/compute/functions/reference/runtime-limits)).

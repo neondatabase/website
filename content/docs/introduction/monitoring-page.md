@@ -7,7 +7,7 @@ summary: >-
   connection saturation, cache misses, or replication lag, and decide whether
   to scale up or enable pooling. Historical data retention depends on your plan.
 enableTableOfContents: true
-updatedOn: '2026-09-25T09:58:44.827Z'
+updatedOn: '2026-11-21T19:17:23.207Z'
 ---
 
 The **Monitoring** dashboard in the Neon console provides several graphs for monitoring system and database metrics. You can access the **Monitoring** dashboard from the sidebar in the Neon Console.
@@ -42,15 +42,15 @@ The values and plotted lines in your graphs will drop to `0` when your compute i
 
 This graph shows allocated RAM and usage over time for the selected compute.
 
-**ALLOCATED**: The amount of allocated RAM.
+**RAM allocated**: The amount of allocated RAM.
 
 RAM is allocated according to the size of your compute or your [autoscaling](/docs/guides/autoscaling-guide) configuration, if applicable. For example, if your compute size is .25 CU (1 GB RAM), your allocated RAM is always 1 (GB). With autoscaling, allocated RAM increases and decreases as your compute size scales up and down in response to load. If [scale to zero](/docs/guides/scale-to-zero-guide) is enabled and your compute transitions to an idle state after a period of inactivity, allocated RAM drops to 0.
 
-**Used**: The amount of RAM used.
+**RAM usage**: The amount of RAM used.
 
 The graph plots a line showing the amount of RAM used. If the line regularly reaches the maximum amount of allocated RAM, consider increasing your compute size to increase the amount of allocated RAM. To see the amount of RAM allocated for each Neon compute size, see [Compute size and autoscaling configuration](/docs/manage/computes#compute-size-and-autoscaling-configuration).
 
-**Cached**: The amount of data cached in memory.
+**RAM cached**: The amount of data cached in memory.
 
 ## CPU
 
@@ -58,11 +58,11 @@ The graph plots a line showing the amount of RAM used. If the line regularly rea
 
 This graph shows the amount of allocated CPU and usage over time for the selected compute.
 
-**ALLOCATED**: The amount of allocated CPU.
+**Allocated CU**: The amount of allocated CPU.
 
 CPU is allocated according to the size of your compute or your [autoscaling](/docs/guides/autoscaling-guide) configuration, if applicable. For example, if your compute size is .25 CU (1 GB RAM), your allocated CPU scales proportionally. With autoscaling, allocated CPU increases and decreases as your compute size scales up and down in response to load. If [scale to zero](/docs/guides/scale-to-zero-guide) is enabled and your compute transitions to an idle state after a period of inactivity, allocated CPU drops to 0.
 
-**Used**: The amount of CPU used, in [Compute Units (CU)](/docs/reference/glossary#compute-unit-cu).
+**CU Usage**: The amount of CPU used, in [Compute Units (CU)](/docs/reference/glossary#compute-unit-cu).
 
 If the plotted line regularly reaches the maximum amount of allocated CPU, consider increasing your compute size. To see the compute sizes available with Neon, see [Compute size and autoscaling configuration](/docs/manage/computes#compute-size-and-autoscaling-configuration).
 
@@ -72,17 +72,17 @@ If the plotted line regularly reaches the maximum amount of allocated CPU, consi
 
 The **Postgres connections count** graph shows the number of idle connections, active connections, and the total number of connections directly to your Postgres database over time for the selected compute. These are the actual connections on the Postgres server itself.
 
-**ACTIVE**: The number of active connections for the selected compute.
+**Active**: The number of active connections for the selected compute.
 
 Monitoring active connections can help you understand your database workload at any given time. If the number of active connections is consistently high, it might indicate that your database is under heavy load, which could lead to performance issues such as slow query response times. See [Connections](/docs/postgresql/query-reference#connections) for related SQL queries.
 
-**IDLE**: The number of idle connections for the selected compute.
+**Idle**: The number of idle connections for the selected compute.
 
 Idle connections are those that are open but not currently being used. While a few idle connections are generally harmless, a large number of idle connections can consume unnecessary resources, leaving less room for active connections and potentially affecting performance. Identifying and closing unnecessary idle connections can help free up resources. See [Find long-running or idle connections](/docs/postgresql/query-reference#find-long-running-or-idle-connections).
 
-**TOTAL**: The sum of active and idle connections for the selected compute.
+**Total**: The sum of active and idle connections for the selected compute.
 
-**MAX**: The maximum number of simultaneous connections allowed for your compute size.
+**Max**: The maximum number of simultaneous connections allowed for your compute size.
 
 The MAX line helps you visualize how close you are to reaching your connection limit. When your TOTAL connections approach the MAX line, you may want to consider:
 
@@ -104,11 +104,11 @@ The **Pooler client connections** graph shows connections from your applications
 
 PgBouncer supports up to 10,000 simultaneous client connections, which is significantly higher than the direct Postgres connection limit. The graph shows the following connection states:
 
-**ACTIVE**: Client connections actively executing a query through the pooler.
+**Active connections**: Client connections actively executing a query through the pooler.
 
 These are connections that currently have an active query running. A high number of active connections indicates your application is actively using the database.
 
-**WAITING**: Client connections waiting for an available server connection from the pool.
+**Waiting connections**: Client connections waiting for an available server connection from the pool.
 
 When all available server connections (connections from PgBouncer to Postgres) are in use, additional client requests must wait in a queue. If you consistently see a high number of waiting connections, it may indicate:
 
@@ -118,7 +118,7 @@ When all available server connections (connections from PgBouncer to Postgres) a
 
 The graph also displays **Max wait**, which shows the maximum time (in seconds) that any client connection has been waiting for an available server connection. A consistently high max wait time indicates that clients are experiencing delays in getting database access, which could impact application performance
 
-**ACTIVE CANCEL** and **WAITING CANCEL**: Connections in the process of being cancelled.
+**Active cancel connections** and **Waiting cancel connections**: Connections in the process of being cancelled.
 
 These represent client connections where a cancellation request has been issued (for example, when a user cancels a query).
 
@@ -134,15 +134,15 @@ The **Pooler server connections** graph shows connections from Neon's PgBouncer 
 
 These server connections are shared by all client connections to the pooler, enabling thousands of clients to efficiently share a smaller pool of Postgres connections. The graph shows the following states:
 
-**SERVER ACTIVE**: Server connections currently serving client queries.
+**Server active**: Server connections currently serving client queries.
 
 These are the pooler's connections to Postgres that are actively processing queries from clients. This number represents the actual concurrent queries being executed on your Postgres database through the pooler.
 
-**SERVER IDLE**: Server connections in the pool that are available but not currently in use.
+**Server idle**: Server connections in the pool that are available but not currently in use.
 
 PgBouncer maintains these idle connections in the pool so they're ready to handle new client requests without the overhead of establishing new connections. In transaction pooling mode (which Neon uses), connections are returned to the idle state as soon as a transaction completes.
 
-The total number of server connections (active + idle) is limited by PgBouncer's `default_pool_size` setting, which is set to 0.9 × your compute's `max_connections`. For example:
+The total number of server connections (active + idle) is limited by PgBouncer's `default_pool_size` setting, which is set to 0.9 × the `max_connections` value for your compute's maximum autoscaling size. For example:
 
 - A 1 CU compute with `max_connections=450` can have up to 405 pooler server connections
 - A 2 CU compute with `max_connections=901` can have up to 810 pooler server connections
@@ -161,7 +161,7 @@ The **Pooler server connections** count is a subset of what you see in the [Post
 
 ![Monitoring page database size graph](/docs/introduction/monitor_data_size.png)
 
-The **Database size** graph shows the logical data size (the size of your actual data) for the named database and the total size for all user-created databases (**All Databases**) on the selected branch. The **All Databases** metric is only shown when there is more than one database on the selected branch.
+The **Database size** graph shows the logical data size (the size of your actual data) for each user database on the selected branch. The **All databases** line shows the combined size of all user databases.
 
 <Admonition type="important">
 Database size metrics are only displayed while your compute is active. When your compute is idle, database size values are not reported, and the **Database size** graph shows zero even though data may be present.
@@ -171,7 +171,7 @@ Database size metrics are only displayed while your compute is active. When your
 
 ![Monitoring page deadlocks graph](/docs/introduction/monitor_deadlocks.png)
 
-The **Deadlocks** graph shows a count of deadlocks over time for the named database on the selected branch. The named database is always the oldest database on the selected branch.
+The **Deadlocks** graph shows a count of deadlocks over time across all user databases on the selected compute. This graph isn't shown for read replica computes.
 
 Deadlocks occur in a database when two or more transactions simultaneously block each other by holding onto resources the other transactions need, creating a cycle of dependencies that prevent any of the transactions from proceeding, potentially leading to performance issues or application errors. For lock-related queries you can use to investigate deadlocks, see [Performance tuning](/docs/postgresql/query-reference#performance-tuning). To learn more about deadlocks in Postgres, see [Deadlocks](https://www.postgresql.org/docs/current/explicit-locking.html).
 
@@ -179,7 +179,7 @@ Deadlocks occur in a database when two or more transactions simultaneously block
 
 ![Monitoring page rows graph](/docs/introduction/monitor_rows.png)
 
-The **Rows** graph shows the number of rows deleted, updated, and inserted over time for the named database on the selected branch. The named database is always the oldest database on the selected branch. Row metrics are reset to zero whenever your compute restarts.
+The **Rows** graph shows the number of rows deleted, updated, and inserted over time across all user databases on the selected compute. This graph isn't shown for read replica computes. Row metrics are reset to zero whenever your compute restarts.
 
 Tracking rows inserted, updated, and deleted over time provides insights into your database's activity patterns. You can use this data to identify trends or irregularities, such as insert spikes or an unusual number of deletions.
 
@@ -203,7 +203,7 @@ The **Replication delay seconds** graph shows the time delay, in seconds, betwee
 
 ![compute cache hit rate graph](/docs/introduction/compute_cache_hit_rate.png)
 
-The **Compute cache hit rate** graph shows the percentage of read requests served from your [compute cache](/docs/reference/glossary#compute-cache) rather than from storage. Reads served from storage are more costly and can result in slower query performance. To learn more about how Neon caches data, see [Monitoring compute cache usage](/docs/extensions/neon#monitoring-compute-cache-usage).
+The **Local file cache hit rate** graph shows the percentage of read requests served from your [compute cache](/docs/reference/glossary#compute-cache) rather than from storage. If shared buffers monitoring is enabled for your project, the graph is titled **Compute cache hit rate** and also shows the **Shared buffers** hit rate and a **Total** line across both caches. Reads served from storage are more costly and can result in slower query performance. To learn more about how Neon caches data, see [Monitoring compute cache usage](/docs/extensions/neon#monitoring-compute-cache-usage).
 
 ## Working set size
 
@@ -216,7 +216,7 @@ The **Working set size** graph visualizes the amount of data accessed (calculate
 - **5m** (5 minutes): This line shows the data accessed in the last 5 minutes.
 - **15m** (15 minutes): Similar to the 5-minute window, this metric tracks the data accessed in the last 15 minutes.
 - **1h** (1 hour): This line represents the data accessed in the last hour.
-- **Compute cache size**: The size of your compute cache, determined by the size of your compute. Larger computes have larger caches. For cache sizes, see [How to size your compute](/docs/manage/computes#how-to-size-your-compute).
+- **Local file cache size**: The size of your compute cache, determined by the size of your compute. Larger computes have larger caches. For cache sizes, see [How to size your compute](/docs/manage/computes#how-to-size-your-compute). If shared buffers monitoring is enabled, a **Shared buffers size** line also appears.
 
 For optimal performance your compute cache should be larger than your working set size for a given time interval. If your working set size is larger than the compute cache size it is recommended to increase the maximum size of the compute to improve the cache hit rate and achieve good performance.
 

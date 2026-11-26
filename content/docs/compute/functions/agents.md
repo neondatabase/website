@@ -6,7 +6,7 @@ summary: >-
   stream a response for minutes while the agent calls models and tools, with
   the Neon AI Gateway wired in automatically and Postgres next to your code.
 enableTableOfContents: true
-updatedOn: '2026-10-09T17:51:53.586Z'
+updatedOn: '2026-11-18T13:57:09.109Z'
 ---
 
 AI agents make several model and tool calls to answer a single request, then stream the result back. That work can run for minutes, but lambda-style serverless caps execution at roughly 10 to 60 seconds, so a multi-step tool loop or an image-generation run gets cut off mid-stream.
@@ -37,7 +37,7 @@ Install the AI SDK, the Neon provider, and `pg`:
 npm install ai@^7 @neon/ai-sdk-provider @neon/functions pg zod
 ```
 
-Pin `ai` to v7, the major `@neon/ai-sdk-provider` supports.
+`@neon/ai-sdk-provider` supports AI SDK 6 and 7. This example uses 7.
 
 The handler streams a tool-calling agent. The `@neon/ai-sdk-provider` reads the injected gateway credentials on its own, so `neon('<model>')` is the only model configuration you need. Tools run inside the function, right next to Postgres:
 
@@ -51,7 +51,7 @@ import { Pool } from 'pg';
 const pool = new Pool({ connectionString: process.env.DATABASE_URL, max: 5 });
 attachDatabasePool(pool);
 
-export default {
+const handler = {
   async fetch(request: Request) {
     if (request.method !== 'POST') {
       return new Response('POST { messages } here', { status: 405 });
@@ -86,6 +86,8 @@ export default {
     });
   },
 };
+
+export default handler;
 ```
 
 `tool({ inputSchema, execute })` is the AI SDK v5+ shape. Create the `pg` pool once at module scope so it's reused across requests, and call `attachDatabasePool(pool)` so an idle disconnect can't crash the isolate (see [Connecting to Postgres](/docs/compute/functions/get-started#connect-to-postgres)). Pick any model from the [AI Gateway catalog](/docs/ai-gateway/models); swap `gpt-5-mini` for a different one without changing anything else.

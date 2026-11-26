@@ -226,6 +226,11 @@ const ICONS_CONFIG = {
     lightIconPath: '/images/technology-logos/fivetran.svg',
     darkIconPath: null,
   },
+  fly: {
+    name: 'fly',
+    lightIconPath: '/images/technology-logos/fly.svg',
+    darkIconPath: '/images/technology-logos/fly-dark.svg',
+  },
   flyway: {
     name: 'flyway',
     lightIconPath: '/images/technology-logos/flyway.svg',
@@ -360,6 +365,11 @@ const ICONS_CONFIG = {
     name: 'liquibase',
     lightIconPath: '/images/technology-logos/liquibase.svg',
     darkIconPath: '/images/technology-logos/liquibase-dark.svg',
+  },
+  loops: {
+    name: 'loops',
+    lightIconPath: '/images/technology-logos/loops.svg',
+    darkIconPath: null,
   },
   mastra: {
     name: 'mastra',

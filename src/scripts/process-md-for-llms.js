@@ -294,7 +294,9 @@ function resolveAuthorSlug(slug) {
  */
 function getMarkdownOptions() {
   return {
-    extensions: [mdxToMarkdown(), gfmToMarkdown()],
+    // Aligned pipes pad every cell to its column's widest cell, which can double the size
+    // of a table with long cells and push a page past agents' fetch limits.
+    extensions: [mdxToMarkdown(), gfmToMarkdown({ tablePipeAlign: false })],
     bullet: '-',
     listItemIndent: 'one', // "- item" not "-   item"
     emphasis: '_', // Use underscores for emphasis (matches source/Python)

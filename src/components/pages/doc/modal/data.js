@@ -56,14 +56,22 @@ import { BASE_AGENT_PROMPT } from 'components/pages/doc/agent-setup-button';
  */
 
 /**
- * Video modals are temporarily disabled: no videos pop up on doc pages for now.
+ * Docs modals are currently disabled: nothing pops up on doc pages for now.
  *
- * The modal capability is fully intact. To re-enable, move the entries below back into the
- * `MODALS` array (or add new ones).
+ * The modal capability is fully intact. To re-enable a modal, move its entry from
+ * `DISABLED_MODALS` back into this array (or add a new one).
  *
  * @type {VideoModalConfig[]}
  */
-const MODALS = [
+const MODALS = [];
+
+/**
+ * Disabled modal configurations, kept for easy re-enabling. Exported so the modal component tests
+ * can keep exercising these configs while they're switched off.
+ *
+ * @type {VideoModalConfig[]}
+ */
+export const DISABLED_MODALS = [
   {
     id: 'docs-agent-setup',
     title: 'Set up your agent',
@@ -80,15 +88,6 @@ const MODALS = [
       },
     },
   },
-];
-
-/**
- * Disabled modal configurations, kept for easy re-enabling.
- *
- * @type {VideoModalConfig[]}
- */
-// eslint-disable-next-line no-unused-vars
-const DISABLED_MODALS = [
   {
     id: 'serverless-video',
     embedId: 'llSTZMVrbx8',

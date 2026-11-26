@@ -16,7 +16,7 @@ redirectFrom:
   - /docs/guides/logical-replication-aurora-to-neon
   - /docs/guides/sequin
   - /docs/guides/bemi
-updatedOn: '2026-10-21T11:04:20.383Z'
+updatedOn: '2026-11-14T16:16:16.000Z'
 ---
 
 Neon's logical replication feature, available to all Neon users, allows you to replicate data to and from your Lakebase Postgres database:

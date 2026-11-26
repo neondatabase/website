@@ -2,7 +2,9 @@
 
 Preferred terms and patterns for Neon documentation. Used by `/review-content` and `/humanize` for programmatic checks.
 
-**Scope:** `content/docs/` and `content/changelog/` only. Does not apply to `content/postgresql/` (that section has its own conventions).
+This file is the terminology data source for the canonical style guide (`content/docs/community/style-guide.md`). The style guide points here for terminology, product names, and feature-name casing; keep the detailed term tables in this file.
+
+**Scope:** `content/docs/`, `content/changelog/`, and `content/guides/`. Does not apply to `content/postgresql/` (that section has its own conventions).
 
 ---
 
@@ -37,7 +39,7 @@ Add the qualifier when the sentence touches any of these:
 
 - A Neon-only or Databricks-only feature (Managed Better Auth, Object Storage, Functions, AI Gateway, Data API, Claimable Neon, Unity Catalog governance, high availability)
 - Console or UI instructions, signup, or account creation
-- Pricing, plans, credits, or free-tier limits
+- Pricing, plans, credits, or Free plan limits
 - A path-specific API, CLI, SDK, Terraform provider, or MCP Server
 - A partner or marketplace integration that exists on only one path
 
@@ -109,12 +111,23 @@ When in doubt, use Postgres.
 | read replica | replica, standby, read-only instance | Lowercase, two words, no hyphen |
 | connection pooling | | Lowercase. PgBouncer powers this in Neon. |
 | connection string | connection URL, DSN, connection URI | Neon standardizes on "connection string" |
+| database | DB, db (in prose) | Write it out. `db` is fine in code and identifiers. |
+| organization | workspace (for a Neon account) | Neon accounts are organizations, identified by an organization ID (`org-...`). "Workspace" is a Databricks term. |
 | compute unit | | Lowercase when written out. Abbreviate as "CU" after first mention. |
 | Postgres storage | storage, database storage (for plan and billing amounts) | Qualify storage next to Object Storage and in plan, limit, and billing text, so "1 GB of storage" can't be read as Object Storage. Bare "storage" is fine on Postgres-only pages, and "database storage" for the storage layer in architecture text stays. |
 | your Lakebase Postgres database | your Lakebase Postgres | You query a database, not the product. |
 | API keys | platform API keys | Matches the Manage API Keys page. |
 | scoped credential | service credential | A branch credential with scopes for Object Storage, AI Gateway, or function invocation (`neon credentials`). |
 | CU | vCPU (as a synonym for CU) | Standard abbreviation for compute unit |
+
+---
+
+## Plans
+
+| Use | Avoid | Notes |
+| --- | --- | --- |
+| Free plan | free tier, Free account, the free version | Neon has plans, not tiers. |
+| Launch plan, Scale plan | bare "Launch" or "Scale" on first mention | Name the plan with "plan" on first mention. Bare "Scale" reads as a verb. After that, "Scale" is fine when it's clearly the plan. |
 
 ---
 
@@ -128,12 +141,14 @@ Named features that are always capitalized regardless of context — these are p
 | --- | --- |
 | Neon Console | The web UI |
 | Managed Better Auth | The auth product. Not "Neon Auth", which now means only the older Stack Auth version ("legacy Neon Auth"). Keep identifiers such as `NEON_AUTH_BASE_URL` and `@neondatabase/auth` as they are. Avoid the possessive: "the Managed Better Auth server SDK", not "Managed Better Auth's server SDK". |
-| Neon CLI | "Neon CLI" in prose; `neonctl` only in code |
+| Neon CLI | "Neon CLI" in prose. The package and command are `neon` (`npm i -g neon`); `neonctl` is the old package name and appears only in older examples. |
 | Neon MCP Server | Full name on first mention; "the MCP Server" after. Never "Neon Postgres MCP Server" — drop "Postgres"; the product name does not contain the database name. |
-| Neon Serverless Driver | The `@neondatabase/serverless` package |
+| Neon serverless driver | The `@neondatabase/serverless` package. Lowercase "serverless driver", matching how the docs write it. |
 | Data API | Neon's PostgREST-based API |
 | Import Data Assistant | |
 | IP Allow | Not "IP allowlist" as the feature name |
+
+**The Neon prefix.** The product names are Object Storage, Functions, and AI Gateway. Add "Neon" only when the name would otherwise be generic: a title, a first mention, or a sentence with no other Neon context ("Neon Functions"). Once the page is clearly about Neon, use the names without the prefix, and don't stack them ("the Neon backend with Neon Object Storage"). Managed Better Auth never takes the prefix. Never write "Neon Storage" or "Neon Blob Storage".
 
 Feature names — capitalize when referring to the feature, lowercase in general prose:
 
@@ -172,7 +187,7 @@ Use `postgresql://` not `postgres://` in examples. Standard format:
 postgresql://[user]:[password]@[neon_hostname]/[dbname]
 ```
 
-Always include `?sslmode=require` in examples unless demonstrating a specific non-SSL scenario.
+Include `?sslmode=require&channel_binding=require` in examples, matching the connection string the Neon Console gives you. Omit `channel_binding` only when the example's driver or tool doesn't support it, and say so in the text. Omit `sslmode=require` only when demonstrating a non-SSL scenario.
 
 ---
 
@@ -194,6 +209,17 @@ Always include `?sslmode=require` in examples unless demonstrating a specific no
 | whitelist | allowlist | |
 | blacklist | blocklist | |
 | master (branch name in examples) | main | |
+| effortless, effortlessly | cut, or say why it's easy | |
+| delve | explore, look at | |
+| enhance | improve, add, extend | |
+| holistic, unified | be specific | |
+| best-in-class, world-class, state-of-the-art, industry-leading | cut, or cite a source | |
+| purpose-built | built for, designed for | |
+| demystify | explain | |
+| foster, empower, embrace, harness (verb), elevate, amplify | be specific | AI-tell words |
+| cornerstone, game-changer, cutting-edge, groundbreaking, innovative | cut, or be specific | AI-tell words |
+| moreover, furthermore, additionally | start with the point | Filler transitions |
+| it's important to note, worth noting | cut | State the thing directly |
 
 ---
 

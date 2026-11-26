@@ -68,6 +68,12 @@ export default {
       'Let agents provision a temporary Neon project (Lakebase Postgres, Data API, and Managed Better Auth) before a human creates a Neon account.',
     pathname: LINKS.claimableNeon,
   },
+  onboardAgentSetup: {
+    title: 'Set up your agent for Neon',
+    description: 'Paste this prompt into your coding agent to set it up to work with Neon.',
+    pathname: LINKS.onboardAgentSetup,
+    robotsNoindex: 'noindex',
+  },
   functions: {
     title: 'Neon Functions — Long-running serverless functions',
     description:
@@ -94,6 +100,12 @@ export default {
       'S3-compatible object storage built into the Neon backend. Branch files alongside Postgres, use your existing S3 tools, and authenticate with a Neon credential.',
     pathname: LINKS.objectStorage,
     markdownPath: `${LINKS.objectStorage}.md`,
+  },
+  mcpServerStats: {
+    title: 'Neon MCP leaderboard: which AI agents use Neon',
+    description:
+      'Which AI clients and tools active users of the Neon MCP server use each week, including Codex, Claude, ChatGPT, and Cursor.',
+    pathname: LINKS.mcpServerStats,
   },
   contactSales: {
     title: 'Contact Neon Sales: Enterprise Plans, Migrations, and Agent Platforms',

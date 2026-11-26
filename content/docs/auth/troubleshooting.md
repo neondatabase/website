@@ -10,7 +10,7 @@ summary: >-
   URIs. Use this page when Managed Better Auth fails at startup, sessions do not persist,
   or OAuth logins loop back to the provider instead of the app.
 enableTableOfContents: true
-updatedOn: '2026-11-05T01:14:11.711Z'
+updatedOn: '2026-11-26T19:22:59.526Z'
 ---
 
 This page covers common issues when integrating [Managed Better Auth](/docs/auth/overview) with `@neon/auth` in Next.js apps and React SPAs.
@@ -60,7 +60,7 @@ To investigate further, use **`logLevel: 'debug'`** or a custom **`logger`**. Se
 
 Server actions or API routes may return errors with **`code`** values such as **`NETWORK_DNS`**, **`NETWORK_REFUSED`**, or **`NETWORK_TIMEOUT`**. These mean your app could not reach the Auth server at **`NEON_AUTH_BASE_URL`** (typo, wrong branch URL, offline network, or TLS issue).
 
-1. Confirm **`NEON_AUTH_BASE_URL`** in `.env.local` matches the Auth URL in the Neon Console (Project → Branch → Auth → Configuration).
+1. Confirm **`NEON_AUTH_BASE_URL`** in `.env.local` matches the Auth URL in the Neon Console (**Settings** > **Better Auth** > **Project Info**).
 2. Restart the dev server after changing env vars.
 3. Enable **`logLevel: 'debug'`** and retry; logs include a safe **`detail`** field.
 

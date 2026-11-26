@@ -7,7 +7,7 @@
 | [`realtimeCollectionOptions`](#tanstack-db-realtimecollectionoptions)   | Function   | Create TanStack DB collection options backed by a raw live-query subscription. Complete-row replacements and committed change batches are applied atomically. This is an unordered keyed collection: move operations do not change membership or values and are ignored. Use core materialized subscriptions for server order. |
 | [`RealtimeCollectionConfig`](#tanstack-db-realtimecollectionconfig)     | Interface  | Configuration for a Realtime-backed TanStack DB collection. The adapter owns `sync`, uses eager synchronization, and supplies its own collection utilities.                                                                                                                                                                    |
 | [`RealtimeCollectionUtils`](#tanstack-db-realtimecollectionutils)       | Interface  | Utilities attached to a Realtime-backed TanStack DB collection.                                                                                                                                                                                                                                                                |
-| [`RealtimeCollectionOptions`](#tanstack-db-realtimecollectionoptions-2) | Type alias | TanStack DB collection options produced by [`realtimeCollectionOptions`](/docs/realtime/sdks/typescript#tanstack-db-realtimecollectionoptions).                                                                                                                                                                                |
+| [`RealtimeCollectionOptions`](#tanstack-db-realtimecollectionoptions-2) | Type alias | TanStack DB collection options produced by [`realtimeCollectionOptions`](/docs/realtime/sdks/typescript/tanstack-db#tanstack-db-realtimecollectionoptions).                                                                                                                                                                    |
 
 ### realtimeCollectionOptions (#tanstack-db-realtimecollectionoptions)
 
@@ -372,4 +372,4 @@ from transactions known to have committed.
 type RealtimeCollectionOptions<Row extends object, Key extends string | number, Schema extends StandardSchemaV1> = Omit<CollectionConfig<Row, Key, Schema, RealtimeCollectionUtils>, "utils"> & { readonly utils: RealtimeCollectionUtils }
 ```
 
-TanStack DB collection options produced by [`realtimeCollectionOptions`](/docs/realtime/sdks/typescript#tanstack-db-realtimecollectionoptions).
+TanStack DB collection options produced by [`realtimeCollectionOptions`](/docs/realtime/sdks/typescript/tanstack-db#tanstack-db-realtimecollectionoptions).

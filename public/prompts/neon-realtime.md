@@ -19,4 +19,6 @@ Read the current docs for exact package names and APIs:
 - Optimistic mutations: https://neon.com/docs/realtime/guides/mutations.md
 - Server-side rendering: https://neon.com/docs/realtime/guides/ssr.md
 - TypeScript SDK reference: https://neon.com/docs/realtime/sdks/typescript.md
-- Full-stack examples: https://neon.com/docs/realtime/examples/nextjs.md, https://neon.com/docs/realtime/examples/tanstack.md
+- Full-stack examples:
+  - https://neon.com/docs/realtime/examples/nextjs.md
+  - https://neon.com/docs/realtime/examples/tanstack.md

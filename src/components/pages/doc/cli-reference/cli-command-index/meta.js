@@ -41,14 +41,17 @@ const META = {
     desc: 'Open the linked project in the Neon Console in your browser.',
     examples: ['neon open'],
   },
-  me: { desc: 'Show the authenticated user.', examples: ['neon me'] },
+  me: {
+    desc: 'Show the authenticated user, organization, or Claimable project.',
+    examples: ['neon me'],
+  },
   ask: {
     desc: 'Ask the Neon assistant a question from the terminal.',
     examples: ['neon ask --prompt "How do schema-only branches work?"'],
   },
   docs: {
     desc: 'Search neon.com docs, guides, and more from the terminal.',
-    examples: ['neon docs search "reset a branch"'],
+    examples: ['neon docs "reset a branch"'],
   },
   mcp: {
     desc: 'Install the Neon MCP server into your coding agents.',
