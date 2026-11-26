@@ -4,7 +4,7 @@ subtitle: Learn how to use Managed Better Auth webhooks to build custom authenti
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2026-03-24T00:00:00.000Z'
-updatedOn: '2026-11-26T20:10:30.152Z'
+updatedOn: '2026-11-26T20:44:20.251Z'
 ---
 
 Managed Better Auth is a managed authentication and user management service that stores its data in your Neon database. By default, it handles common authentication flows and delivers OTPs for email verification and passwordless login.
@@ -40,7 +40,7 @@ You'll need a Neon project with Auth enabled to generate webhook events.
 
 1. **Create a Neon project:** Navigate to the [Neon Console](https://console.neon.tech) to create a new Neon project. Give your project a name, such as `neon-webhooks-demo`.
 2. **Enable Auth:**
-   - In your project's dashboard, go to the **Auth** tab.
+   - In the Neon Console, open the **Better Auth** page.
    - Click **Enable Auth** to set up authentication for your project.
 3. **Copy your credentials:**
    - **Managed Better Auth URL:** Found under **Settings** > **Better Auth** > **Project Info** as **Auth URL**.

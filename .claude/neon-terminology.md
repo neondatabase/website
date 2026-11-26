@@ -4,7 +4,7 @@ Preferred terms and patterns for Neon documentation. Used by `/review-content` a
 
 This file is the terminology data source for the canonical style guide (`content/docs/community/style-guide.md`). The style guide points here for terminology, product names, and feature-name casing; keep the detailed term tables in this file.
 
-**Scope:** `content/docs/` and `content/changelog/` only. Does not apply to `content/postgresql/` (that section has its own conventions).
+**Scope:** `content/docs/`, `content/changelog/`, and `content/guides/`. Does not apply to `content/postgresql/` (that section has its own conventions).
 
 ---
 
