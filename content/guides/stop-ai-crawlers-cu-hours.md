@@ -19,7 +19,7 @@ When a [Free plan project](/pricing) uses up its CU-hours, Neon suspends its com
 
 On a paid plan, this pattern can also cause you problems: it won't stop your app, but the extra consumption will show up on your bill.
 
-## Step 1: Check whether crawlers are the cause
+## Check whether crawlers are the cause
 
 To check if this is happening to you, start with the shape of your compute usage. In the Neon Console, the project's [monitoring page](/docs/introduction/monitoring-page) shows when the compute was active. A healthy low-traffic app shows short bursts with gaps between them. A crawler problem shows a compute that's active almost all the time, including overnight in your users' time zone.
 
