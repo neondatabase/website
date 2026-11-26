@@ -116,6 +116,11 @@ const ICONS_CONFIG = {
     lightIconPath: '/images/technology-logos/cloudinary.svg',
     darkIconPath: null,
   },
+  'codeless-sync': {
+    name: 'codeless-sync',
+    lightIconPath: '/images/technology-logos/codeless-sync.svg',
+    darkIconPath: null,
+  },
   codex: {
     name: 'codex',
     lightIconPath: '/images/technology-logos/codex.svg',

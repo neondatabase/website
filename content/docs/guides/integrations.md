@@ -19,7 +19,7 @@ redirectFrom:
   - /docs/integrations/draxlr
   - /docs/guides/logical-replication-decodable
   - /docs/guides/logical-replication-stacksync
-updatedOn: '2026-11-21T16:05:37.000Z'
+updatedOn: '2026-11-25T12:35:23.705Z'
 ---
 
 ## Authentication
@@ -169,6 +169,8 @@ updatedOn: '2026-11-21T16:05:37.000Z'
 <a href="/docs/guides/logical-replication-rds-to-neon" title="AWS RDS" description="Replicate data from AWS RDS PostgreSQL to Neon" icon="aws-rds"></a>
 
 <a href="/docs/guides/logical-replication-cloud-sql" title="Cloud SQL" description="Replicate data from Cloud SQL to Neon" icon="google-cloud-sql"></a>
+
+<a href="/docs/guides/codeless-sync" title="Codeless Sync" description="Sync Stripe, QuickBooks, Xero, and Paddle data to Neon with Codeless Sync" icon="codeless-sync"></a>
 
 <a href="/docs/guides/logical-replication-lakebase-to-neon" title="Lakebase to Neon" description="Replicate data from Lakebase Postgres on Databricks to Neon" icon="databricks"></a>
 
