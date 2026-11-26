@@ -7,7 +7,7 @@ summary: >-
   with no signing round trips. Covers setup, expiry, revocation, and the security
   tradeoffs compared with a signing endpoint.
 enableTableOfContents: true
-updatedOn: '2026-11-25T17:45:27.914Z'
+updatedOn: '2026-11-26T11:46:18.830Z'
 ---
 
 With `getCredentials`, `@uppy/aws-s3` signs S3 requests in the browser itself. Your backend makes one call to issue a credential. After that, the browser sends every part upload, `ListParts` call, and completion request directly to Neon, with no signing round trips.
@@ -25,7 +25,7 @@ A Neon credential can't be limited to one bucket or key prefix. A credential wit
 
 <Steps>
 
-## Per-session credential issuance
+## Issue a credential per session
 
 Create a credential with the [credentials API](/docs/storage/authentication#creating-a-credential), set to expire soon. Return it in the shape Uppy expects. Neon credentials have no session token, so `sessionToken` is an empty string.
 
@@ -67,7 +67,7 @@ app.post('/api/uploads/credentials', async (req, res) => {
 });
 ```
 
-## Uppy configuration
+## Configure Uppy
 
 Set `s3Endpoint` to your branch's storage endpoint followed by the bucket name. Neon uses path-style addressing, so the bucket goes in the path, not the hostname.
 
@@ -90,7 +90,7 @@ export const uppy = new Uppy().use(AwsS3, {
 });
 ```
 
-## File upload
+## Upload a file
 
 ```typescript shouldWrap
 uppy.addFile({ name: file.name, type: file.type, data: file });

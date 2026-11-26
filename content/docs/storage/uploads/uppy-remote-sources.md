@@ -6,7 +6,7 @@ summary: >-
   to import remote files into Neon Object Storage. Companion downloads each file and
   uploads it to Neon with S3 multipart upload, so the bytes never pass through the browser.
 enableTableOfContents: true
-updatedOn: '2026-11-25T17:45:27.914Z'
+updatedOn: '2026-11-26T11:46:18.830Z'
 ---
 
 Uppy can add files that aren't on the user's device: a link pasted into [`@uppy/url`](https://uppy.io/docs/url/), or a file picked from Google Drive, Dropbox, OneDrive, Box, and other [provider plugins](https://uppy.io/docs/companion/). For these remote files, [Uppy Companion](https://uppy.io/docs/companion/) does the transfer. It downloads the file from the source and uploads it to your Neon bucket with S3 multipart upload. The browser only receives progress updates over a WebSocket.
@@ -23,7 +23,7 @@ Set up Companion for Neon as described in [Resumable uploads with Uppy Companion
 
 <Steps>
 
-## URL endpoint configuration
+## Enable the URL endpoint
 
 ```typescript filename="companion.ts" shouldWrap
 const options = {
@@ -32,7 +32,7 @@ const options = {
 };
 ```
 
-## URL plugin installation
+## Add the URL plugin
 
 ```bash
 npm install @uppy/url
@@ -57,9 +57,9 @@ await uppy.getPlugin('Url').addFile('https://example.com/videos/talk.mp4');
 await uppy.upload();
 ```
 
-## Stored object key
+## Get the stored object key
 
-When the import finishes, `upload-success` returns the key Companion's `getKey` chose:
+When the import finishes, `upload-success` returns the key Companion's `getKey` chose. For remote files, `response.body` is the S3 `CompleteMultipartUpload` response that Companion forwards, so the field is `Key`. For files from the user's device, Uppy builds the body itself and uses lowercase `key`.
 
 ```typescript shouldWrap
 uppy.on('upload-success', (file, response) => {

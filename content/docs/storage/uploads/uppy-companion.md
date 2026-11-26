@@ -6,7 +6,7 @@ summary: >-
   upload with companionEndpoint. Companion presigns every S3 request, including
   ListParts for resuming, while the browser sends file parts directly to Neon.
 enableTableOfContents: true
-updatedOn: '2026-11-25T17:45:27.914Z'
+updatedOn: '2026-11-26T11:46:18.830Z'
 ---
 
 [Uppy Companion](https://uppy.io/docs/companion/) is Uppy's server component. Point its S3 settings at your Neon branch and it presigns every request `@uppy/aws-s3` needs, so you don't write a signing route yourself. The browser still sends file parts directly to Neon. Companion only handles the small signing requests.
@@ -21,14 +21,14 @@ Use Companion if you already run it, or if you also want users to [import files 
 
 <Steps>
 
-## Package installation
+## Install the packages
 
 ```bash
 npm install @uppy/companion express
 npm install @uppy/core @uppy/aws-s3
 ```
 
-## Companion configuration for Neon
+## Configure Companion for Neon
 
 Pass your branch's storage endpoint and credential in the `s3` options. Companion uses `key` and `secret`.
 
@@ -70,7 +70,7 @@ companion.socket(server, options); // progress events for remote imports
 
 To run Companion standalone instead, set the same values as environment variables: `COMPANION_AWS_ENDPOINT`, `COMPANION_AWS_REGION`, `COMPANION_AWS_FORCE_PATH_STYLE=true`, `COMPANION_AWS_BUCKET`, `COMPANION_AWS_KEY`, and `COMPANION_AWS_SECRET`. See [Companion's configuration docs](https://uppy.io/docs/companion/).
 
-## Uppy configuration
+## Configure Uppy
 
 ```typescript filename="uploader.ts" shouldWrap
 import Uppy from '@uppy/core';
@@ -85,7 +85,7 @@ export const uppy = new Uppy().use(AwsS3, {
 });
 ```
 
-## File upload
+## Upload a file
 
 ```typescript shouldWrap
 uppy.addFile({ name: file.name, type: file.type, data: file });
