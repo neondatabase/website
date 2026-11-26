@@ -10,7 +10,7 @@ summary: >-
   then hand-tune only where you need to. For exact ranges and defaults, it
   links to the lakebase_vector and lakebase_text reference pages.
 enableTableOfContents: true
-updatedOn: '2026-11-23T13:56:54.042Z'
+updatedOn: '2026-11-26T20:37:21.118Z'
 ---
 
 Lakebase Search performs well on its defaults, so most projects never need to tune it. When you do, tuning is a tradeoff between three things: recall (getting the right rows back), latency (how fast the query returns), and cost (how much compute you use). This page names the main lever for each goal, says which way it moves things, and gives you one concrete move. For exact ranges and defaults, it links to the [lakebase_vector](/docs/extensions/lakebase-vector) and [lakebase_text](/docs/extensions/lakebase-text) reference pages rather than repeating them.
@@ -21,13 +21,14 @@ If you're still setting up, start with [Lakebase Search](/docs/ai/lakebase-searc
 
 Each goal has one main lever. Changing it trades one of recall, latency, or cost for another.
 
-| Goal                  | What to change                                                      | The tradeoff                  |
-| :-------------------- | :------------------------------------------------------------------ | :---------------------------- |
-| Higher recall         | More probes (`lakebase_ann.probes`)                                 | Slower queries                |
-| Lower query latency   | Fewer probes, plus `lakebase_ann.prefilter` for selective filters   | Lower recall                  |
-| Lower cost            | A smaller index with RaBitQ operator classes (`rabitq8`, `rabitq4`) | Some loss of precision        |
-| Faster cold starts    | `lakebase_ann_prewarm` before traffic arrives                       | Warming work up front         |
-| Accurate BM25 ranking | `VACUUM` after bulk loads                                           | Maintenance work on the table |
+| Goal                    | What to change                                                      | The tradeoff                           |
+| :---------------------- | :------------------------------------------------------------------ | :------------------------------------- |
+| Higher recall           | More probes (`lakebase_ann.probes`)                                 | Slower queries                         |
+| Lower query latency     | Fewer probes (`lakebase_ann.probes`)                                | Lower recall                           |
+| Faster filtered queries | `lakebase_ann.prefilter` on selective filters                       | Overhead on loose or expensive filters |
+| Lower cost              | A smaller index with RaBitQ operator classes (`rabitq8`, `rabitq4`) | Some loss of precision                 |
+| Faster cold starts      | `lakebase_ann_prewarm` before traffic arrives                       | Warming work up front                  |
+| Accurate BM25 ranking   | `VACUUM` after bulk loads                                           | Maintenance work on the table          |
 
 ## Start with the advisor
 
@@ -52,7 +53,7 @@ Then set the `probes` value from the row you chose:
 SET lakebase_ann.probes TO '10';
 ```
 
-The advisor recommends and measures; it doesn't change your index. On a large index the call can take a while, and its recall and latency are estimates, so verify a value on your real workload before you rely on it in production. `lakebase_ann_advise` is built on `lakebase_ann_tune` and `lakebase_ann_latency`, which you can also run on their own. For the full inputs, column meanings, and version requirements, see [Get recommended probes values](/docs/extensions/lakebase-vector#get-recommended-probes-values).
+The advisor recommends and measures; it doesn't change your index. On a large index the call can take a while, and its recall and latency are estimates, so verify a value on your real workload before you rely on it in production. Because the advisor runs real queries on your compute, run it when the database isn't under heavy load, or its latency numbers can skew. `lakebase_ann_advise` is built on `lakebase_ann_tune` and `lakebase_ann_latency`, which you can also run on their own. For the full inputs, column meanings, and version requirements, see [Get recommended probes values](/docs/extensions/lakebase-vector#get-recommended-probes-values).
 
 ## Improve recall
 
@@ -65,7 +66,7 @@ SELECT lakebase_ann_index_info('items_embedding_idx');
 SET lakebase_ann.probes TO '20';
 ```
 
-Two secondary levers help once probes alone stops paying off. `lakebase_ann.epsilon` controls how many candidates get reranked with full-precision distances, so a higher value recovers precision that quantization gave up, and it takes longer. At index build time, `build_mode = 'quality'` improves recall in exchange for a much longer build (use it only for tables up to 50 million vectors), and setting `lists` explicitly lets you override the automatic partition layout. The reference covers the ranges and defaults for all three: see [Index tuning](/docs/extensions/lakebase-vector#index-tuning).
+Two secondary levers help once probes alone stops paying off. `lakebase_ann.epsilon` controls how many candidates get reranked with full-precision distances, so a higher value recovers precision that quantization gave up, and it takes longer. It only helps on a quantized (RaBitQ) index; on a plain vector index there's no precision to recover, so leave it at the default. At index build time, `build_mode = 'quality'` improves recall in exchange for a much longer build (use it only for tables up to 50 million vectors), and setting `lists` explicitly lets you override the automatic partition layout. The reference covers the ranges and defaults for all three: see [Index tuning](/docs/extensions/lakebase-vector#index-tuning).
 
 ## Lower query latency
 
@@ -79,7 +80,7 @@ One thing to get right from application code: these settings are session GUCs, s
 
 Cost tracks index size and how much compute you run, and the main lever on size is **RaBitQ quantization**. The `rabitq8` and `rabitq4` operator classes store vectors in a smaller, quantized form, which shrinks the index in exchange for some loss of precision that you can offset with `lakebase_ann.epsilon`. See the [operator classes](/docs/extensions/lakebase-vector#operator-classes) table for the full set and the metric each one supports.
 
-Compute scales to zero when the database is idle, so an idle search database costs nothing (see [how Lakebase Search works](/docs/ai/lakebase-search#how-lakebase-search-works)). The tradeoff is the first query after a wake, which is slower while the index loads into memory. Run `lakebase_ann_prewarm` after the compute starts and before traffic arrives to absorb that work up front:
+Compute scales to zero when the database is idle, so an idle search database stops paying for compute (storage still bills) (see [how Lakebase Search works](/docs/ai/lakebase-search#how-lakebase-search-works)). The tradeoff is the first query after a wake, which is slower while the index loads into memory. Run `lakebase_ann_prewarm` after the compute starts and before traffic arrives to absorb that work up front:
 
 ```sql
 -- Full search scope: prewarm everything the search path reads.
@@ -101,7 +102,7 @@ SET lakebase_bm25.default_limit TO 10;
 
 Relevance itself is tuned at the index with two storage parameters: `k1` controls term-frequency saturation and `b` controls document-length normalization. Because BM25 scores depend on corpus-wide statistics that are computed at build time and refreshed by `VACUUM`, keeping `VACUUM` current is what keeps scores accurate; after a bulk load, run it manually. For a table dedicated to search, setting `autovacuum_vacuum_insert_scale_factor` to `0` keeps the insert-triggered threshold from drifting as the table grows. As with vector search, `lakebase_bm25.prefilter` helps a strict, cheap filter and can hurt a loose or expensive one. See [Configure default_limit](/docs/extensions/lakebase-text#configure-default_limit), [Keep the index accurate](/docs/extensions/lakebase-text#keep-the-index-accurate), and [Prefilter](/docs/extensions/lakebase-text#prefilter).
 
-If you change tokenization (stop words, synonyms, or the language analyzer) through [lakebase_tokenizer](/docs/extensions/lakebase-tokenizer), regenerate the stored `tsvector` values so old and new rows tokenize the same way. Otherwise your scores mix two tokenizations.
+If you change tokenization (stop words, synonyms, or the language analyzer), follow the full procedure in [lakebase_tokenizer](/docs/extensions/lakebase-tokenizer): reload the dictionary, then regenerate the stored `tsvector` values so old and new rows tokenize the same way. Otherwise your scores mix two tokenizations.
 
 ## Tune hybrid search
 
