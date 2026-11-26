@@ -17,7 +17,7 @@ redirectFrom:
   - /docs/guides/connection-pooling
   - /docs/introduction/connection-pooling
   - /docs/manage/connection-pooling
-updatedOn: '2026-11-25T21:33:50.925Z'
+updatedOn: '2026-11-26T14:33:45.440Z'
 ---
 
 For most apps, use a pooled connection. It reuses database connections to help you avoid connection limits. Direct connections are typically used for schema migrations, backups, and other work that needs a single continuous session.
@@ -77,7 +77,8 @@ Use a pooled connection by default. Switch to a direct connection only for work 
 - Logical replication
 - `LISTEN` / `NOTIFY`
 - Session-level advisory locks
-- `SET` and other session state (temp tables, `CREATE INDEX CONCURRENTLY`, persistent prepared statements)
+- `SET` and other session state (temp tables, persistent prepared statements)
+- `CREATE INDEX CONCURRENTLY` and other statements that can't run inside a transaction block
 
 </div>
 </div>
