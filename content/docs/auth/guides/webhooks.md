@@ -13,7 +13,7 @@ summary: >-
   phone_number.verified, use EdDSA Ed25519 detached JWS signatures for
   verification, and retry blocking events within a global timeout.
 enableTableOfContents: true
-updatedOn: '2026-11-26T15:47:29.446Z'
+updatedOn: '2026-11-26T20:10:30.152Z'
 ---
 
 Managed Better Auth webhooks send HTTP POST requests to your server when authentication events occur.
@@ -80,7 +80,7 @@ Webhook endpoints that point at private networks, localhost, cloud metadata serv
 
 <TabItem>
 
-In the Neon Console, go to **Auth → Configuration → Webhooks** to enable webhook delivery, set the **Webhook URL** (an HTTPS endpoint; see [Webhook URL requirements](#webhook-url-requirements)), choose which events to send, and set the per-attempt timeout in seconds (1-10, default 5). Save to apply.
+In the Neon Console, go to **Settings** > **Better Auth** > **Webhooks** to enable webhook delivery, set the **Webhook URL** (an HTTPS endpoint; see [Webhook URL requirements](#webhook-url-requirements)), choose which events to send, and set the per-attempt timeout in seconds (1-10, default 5). Save to apply.
 
 </TabItem>
 
@@ -116,7 +116,7 @@ curl -X PUT "https://console.neon.tech/api/v2/projects/{project_id}/branches/{br
 
 <TabItem>
 
-View the current webhook configuration under **Auth → Configuration → Webhooks** in the Neon Console.
+View the current webhook configuration under **Settings** > **Better Auth** > **Webhooks** in the Neon Console.
 
 </TabItem>
 

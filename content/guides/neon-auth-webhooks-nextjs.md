@@ -4,7 +4,7 @@ subtitle: Learn how to use Managed Better Auth webhooks to build custom authenti
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2026-03-24T00:00:00.000Z'
-updatedOn: '2026-11-26T15:47:29.446Z'
+updatedOn: '2026-11-26T20:10:30.152Z'
 ---
 
 Managed Better Auth is a managed authentication and user management service that stores its data in your Neon database. By default, it handles common authentication flows and delivers OTPs for email verification and passwordless login.
@@ -87,16 +87,7 @@ Create a Resend [API key](https://resend.com/docs/dashboard/api-keys/introductio
 
 Verify a [sending domain](https://loops.so/docs/sending-domain) and create an API key in [Loops API settings](https://app.loops.so/settings?page=api). With Loops, you design each email in the Loops editor, and the handler sends the one that matches the event.
 
-Create and publish a [transactional email](https://loops.so/docs/transactional) for each email type your app sends, with this data variable, and copy its **Transactional ID**:
-
-| Email                   | Event             | Type                 | Data variable      | Environment variable                        |
-| ----------------------- | ----------------- | -------------------- | ------------------ | ------------------------------------------- |
-| Sign-in code            | `send.otp`        | `sign-in`            | `otpCode`          | `LOOPS_OTP_SIGNIN_TRANSACTIONAL_ID`         |
-| Email verification code | `send.otp`        | `email-verification` | `otpCode`          | `LOOPS_OTP_VERIFICATION_TRANSACTIONAL_ID`   |
-| Password reset code     | `send.otp`        | `forget-password`    | `otpCode`          | `LOOPS_OTP_PASSWORD_RESET_TRANSACTIONAL_ID` |
-| Magic link              | `send.magic_link` | `sign-in`            | `magicLinkUrl`     | `LOOPS_MAGIC_LINK_TRANSACTIONAL_ID`         |
-| Email verification link | `send.magic_link` | `email-verification` | `verificationUrl`  | `LOOPS_VERIFY_EMAIL_TRANSACTIONAL_ID`       |
-| Password reset link     | `send.magic_link` | `forget-password`    | `resetPasswordUrl` | `LOOPS_RESET_PASSWORD_TRANSACTIONAL_ID`     |
+Create and publish a [transactional email](https://loops.so/docs/transactional) for each email type your app sends, and copy its **Transactional ID**. The [Loops guide](/docs/guides/loops#create-transactional-emails-in-loops) lists the data variable each email needs.
 
 </TabItem>
 
@@ -133,15 +124,11 @@ NEON_BRANCH_ID="your-branch-id"
 
 # Loops configuration
 LOOPS_API_KEY="your-loops-api-key"
-LOOPS_OTP_SIGNIN_TRANSACTIONAL_ID="your-transactional-id"
-LOOPS_OTP_VERIFICATION_TRANSACTIONAL_ID="your-transactional-id"
-LOOPS_OTP_PASSWORD_RESET_TRANSACTIONAL_ID="your-transactional-id"
-LOOPS_MAGIC_LINK_TRANSACTIONAL_ID="your-transactional-id"
-LOOPS_VERIFY_EMAIL_TRANSACTIONAL_ID="your-transactional-id"
-LOOPS_RESET_PASSWORD_TRANSACTIONAL_ID="your-transactional-id"
 ```
 
 </CodeTabs>
+
+With Loops, also add a transactional ID for each email you created, using the variable names from [Set your Loops keys](/docs/guides/loops#set-your-loops-keys) in the Loops guide.
 
 ## Configure Managed Better Auth in Next.js
 
@@ -410,7 +397,7 @@ export async function sendLink(eventData: any, user: User) {
 
 </CodeTabs>
 
-With Loops, an email type with no transactional ID set throws an error, so the webhook fails instead of dropping the email. Neon doesn't send that email itself once you subscribe to its event.
+With Loops, an email type with no transactional ID set throws an error, so the route returns `500` instead of dropping the email. Neon doesn't send that email itself once you subscribe to its event.
 
 ### Create the webhook route
 

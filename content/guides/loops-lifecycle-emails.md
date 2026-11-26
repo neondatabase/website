@@ -4,7 +4,7 @@ subtitle: Query Lakebase Postgres on a schedule for inactive users and accounts 
 author: rishi-raj-jain
 enableTableOfContents: true
 createdAt: '2026-11-26T00:00:00.000Z'
-updatedOn: '2026-11-26T15:47:29.446Z'
+updatedOn: '2026-11-26T20:10:30.152Z'
 ---
 
 Some emails depend on what's in your database rather than on a user action: a nudge to a user who hasn't been active for a week, or a heads-up to an account that has used most of its plan. [Loops](https://loops.so) sends those emails from [workflows](https://loops.so/docs/workflows) that start when an [event](https://loops.so/docs/events) arrives. Your app still has to notice the condition and send the event.
@@ -324,7 +324,7 @@ Deploy to the branch:
 neon deploy --env .env.local
 ```
 
-The deploy updates the branch's function and leaves the inherited trigger disabled.
+The deploy updates the branch's function and leaves the inherited trigger disabled. This needs Neon CLI 9.3.2 or later and `@neon/config` 1.14.0 or later. Earlier versions turn the inherited trigger on when you deploy, so the branch starts sending on its own schedule.
 
 ---
 

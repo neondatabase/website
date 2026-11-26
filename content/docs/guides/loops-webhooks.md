@@ -1,16 +1,16 @@
 ---
 title: Store Loops webhook events in Postgres
-subtitle: Receive Loops delivery, bounce, spam, and unsubscribe events in a Neon Function and write them to Lakebase Postgres
+subtitle: Receive Loops delivery, bounce, spam, and unsubscribe events in a Neon Function and write them to Lakebase Postgres on Neon
 summary: >-
   How to receive Loops webhooks (email.delivered, email.hardBounced,
   email.spamReported, contact.unsubscribed) in a Neon Function, verify the
-  HMAC-SHA256 signature, and store each event in a Lakebase Postgres table
-  keyed by Webhook-Id so repeat deliveries are ignored. Includes SQL to find
-  addresses to stop emailing and to count deliveries per transactional email,
-  and shows how to test the endpoint on a Neon branch with its own function
-  URL, database, and Loops team.
+  HMAC-SHA256 signature, and store each event in a table in Lakebase Postgres
+  on Neon, keyed by Webhook-Id so repeat deliveries are ignored. Includes SQL
+  to find addresses to stop emailing and to count deliveries per transactional
+  email, and shows how to test the endpoint on a Neon branch with its own
+  function URL, database, and Loops team.
 enableTableOfContents: true
-updatedOn: '2026-11-26T15:47:29.446Z'
+updatedOn: '2026-11-26T20:10:30.152Z'
 ---
 
 [Loops](https://loops.so) can send a [webhook](https://loops.so/docs/webhooks) each time something happens to an email or contact: an email is delivered, bounces, or is reported as spam, or a contact unsubscribes. This guide receives those webhooks in a [Neon Function](/docs/compute/functions/overview) and writes each one to Postgres. With the events in your database, you can join email outcomes with your own users and stop emailing addresses that bounce or complain.
@@ -22,7 +22,8 @@ The function runs on the same branch as the database it writes to, so a test bra
 You need:
 
 - A [Loops](https://app.loops.so) account
-- A [Neon](https://console.neon.tech/signup) project and the [Neon CLI](/docs/cli/install), with your directory [linked](/docs/cli/link) to the project
+- A [Neon](https://console.neon.tech/signup) project in a region where [Neon Functions are available](/docs/compute/functions/overview): AWS US East (Ohio) (`aws-us-east-2`), AWS US East (N. Virginia) (`aws-us-east-1`), AWS Europe (Frankfurt) (`aws-eu-central-1`), or AWS Asia Pacific (Singapore) (`aws-ap-southeast-1`). In any other region, `neon deploy` fails.
+- The [Neon CLI](/docs/cli/install), with your directory [linked](/docs/cli/link) to the project
 
 <Steps>
 

@@ -5,12 +5,12 @@ summary: >-
   How to use Loops with Neon: send Managed Better Auth sign-in codes, magic
   links, and password reset emails as Loops transactional emails from a Neon
   Function, create Loops contacts when users sign up, start Loops workflows
-  from Lakebase Postgres data with a scheduled Function Trigger, and store
-  Loops delivery, bounce, and unsubscribe events in Postgres. Includes a quick
-  start with the loops-email Function template and explains why Managed Better
-  Auth custom SMTP doesn't work with Loops.
+  from data in Lakebase Postgres on Neon with a scheduled Function Trigger,
+  and store Loops delivery, bounce, and unsubscribe events in Postgres.
+  Includes a quick start with the loops-email Function template and explains
+  why Managed Better Auth custom SMTP doesn't work with Loops.
 enableTableOfContents: true
-updatedOn: '2026-11-26T15:47:29.446Z'
+updatedOn: '2026-11-26T20:10:30.152Z'
 ---
 
 [Loops](https://loops.so) is an email platform for SaaS products. It sends transactional emails, marketing campaigns, and [workflows](https://loops.so/docs/workflows): email sequences that start when a contact is added or an event arrives. You design emails in the Loops editor and send them through the Loops API.
@@ -89,7 +89,7 @@ neon functions get loopsemail
 
 ## Turn on the webhook
 
-In the [Neon Console](https://console.neon.tech), open your project and go to **Settings** > **Better Auth**. In the **Webhooks** section, turn on **Enable Webhooks**, set **Webhook URL** to the function URL followed by `/auth-webhook`, and select **Send OTP** and **Send Magic Link** under **Enabled Events**.
+In the [Neon Console](https://console.neon.tech), open your project and go to **Settings** > **Better Auth** > **Webhooks**. Turn on **Enable Webhooks**, set **Webhook URL** to the function URL followed by `/auth-webhook`, and select **Send OTP** and **Send Magic Link** under **Enabled Events**.
 
 <Admonition type="warning">
 Once you subscribe to `send.otp` or `send.magic_link`, Neon stops sending those emails itself. If an email type has no transactional ID set, the function returns `422` and the user doesn't get that email. A magic sign-in link then fails the request with `WEBHOOK_DELIVERY_FAILED`. Email codes and password reset links still report success to your app, so the function logs are the only place a missing email shows up. Set a transactional ID for every email type your app sends.
@@ -126,7 +126,7 @@ If you use the [Organization plugin](/docs/auth/guides/plugins/organization), al
 Some emails depend on your data rather than on an auth event: a user who hasn't been active for a week, or an account close to its plan limit. A [scheduled Function Trigger](/docs/compute/functions/triggers/schedule) can query Postgres for those users and send Loops events that start workflows. The guide records each send in Postgres, so a user gets each email once even across trigger retries.
 
 <DetailIconCards>
-<a href="/guides/loops-lifecycle-emails" description="Query Postgres on a schedule and send Loops events that start workflows, with duplicate protection in Postgres" icon="code">Send lifecycle emails from Postgres with Function Triggers and Loops</a>
+<a href="/guides/loops-lifecycle-emails" description="Query Postgres on a schedule and send Loops events that start workflows, with duplicate protection in Postgres" icon="code">Send lifecycle emails from Postgres with Neon Function Triggers and Loops</a>
 </DetailIconCards>
 
 ## Store Loops email events in Postgres
