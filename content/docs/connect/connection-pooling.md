@@ -17,7 +17,7 @@ redirectFrom:
   - /docs/guides/connection-pooling
   - /docs/introduction/connection-pooling
   - /docs/manage/connection-pooling
-updatedOn: '2026-11-26T14:33:45.440Z'
+updatedOn: '2026-11-26T17:18:03.547Z'
 ---
 
 For most apps, use a pooled connection. It reuses database connections to help you avoid connection limits. Direct connections are typically used for schema migrations, backups, and other work that needs a single continuous session.
@@ -29,7 +29,7 @@ For most apps, use a pooled connection. It reuses database connections to help y
 <div className="flex items-start gap-6 sm:flex-col">
   <div style={{ flex: '1 1 50%' }}>
 
-    A pooled connection reuses a small set of Postgres connections across many clients, so your app can open many connections at once without running into connection limits. The pooler accepts up to 10,000 concurrent connections. This is the right choice for most apps, including web and serverless apps. The pooled hostname ends in `-pooler`.
+    A pooled connection reuses a small set of Postgres connections across many clients, so your app can open many connections at once without running into connection limits. The pooler accepts up to 10,000 connections. This is the right choice for most apps, including web and serverless apps. The pooled hostname ends in `-pooler`.
 
   </div>
   <div style={{ flex: '1 1 50%' }}>
@@ -79,6 +79,7 @@ Use a pooled connection by default. Switch to a direct connection only for work 
 - Session-level advisory locks
 - `SET` and other session state (temp tables, persistent prepared statements)
 - `CREATE INDEX CONCURRENTLY` and other statements that can't run inside a transaction block
+- Long-running analytics queries
 
 </div>
 </div>
@@ -252,7 +253,7 @@ WHERE datname = '<database_name>'
 GROUP BY usename;
 ```
 
-You can also view active connections on the [Monitoring page](/docs/introduction/monitoring-page#connections) in the Neon Console, which graphs connection usage over time.
+You can also view active connections on the [Monitoring page](/docs/introduction/monitoring-page#postgres-connections-count) in the Neon Console, which graphs connection usage over time.
 
 ### Pooler limits
 
@@ -268,7 +269,7 @@ The 10,000 client connection limit is not 10,000 concurrent queries. For a 1 CU 
 
 ### What happens when you hit a limit
 
-- **Per-user, per-database pool full**: on a 1 CU compute (`default_pool_size` = 405), if `user1` holds 405 active connections to `database1` with long-running queries, connection 406 waits in the queue and fails with `query_wait_timeout` after 2 minutes. Keep transactions short, or move to a larger compute to raise the pool size. A second database user gets its own pool, but all pools share `max_connections`, so it helps only when `max_connections` still has headroom (on a 1 CU compute, about 38 connections remain after a full 405-connection pool and the 7 reserved for the superuser).
+- **Per-user, per-database pool full**: on a 1 CU compute (`default_pool_size` = 405), if `user1` holds 405 active connections to `database1` with long-running queries, connection 406 waits in the queue and fails with `query_wait_timeout` after 2 minutes. Keep transactions short, or move to a larger compute to raise the pool size. A second database user gets its own pool, but all pools share `max_connections`, so it helps only when `max_connections` still has headroom. After a full pool, the remaining headroom is small and varies (Neon's own sessions also use connection slots), so a second user's pool helps only a little.
 - **Client connection limit reached**: the 10,001st client connection to PgBouncer fails with `no more connections allowed (max_client_conn)`. Fix connection leaks, add client-side pooling, or reduce the number of application instances.
 - **`max_connections` reached on a direct connection**: on a 0.25 CU compute (112 `max_connections`), connection 106 on a non-pooled string fails with `FATAL: remaining connection slots are reserved`. Switch to the pooled connection string (add `-pooler` to the hostname), increase the compute size, or add connection pooling in your application.
 
