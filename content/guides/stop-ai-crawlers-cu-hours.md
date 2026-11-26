@@ -44,7 +44,7 @@ The most effective fix is to make sure most requests never reach the database at
 
 With caching in place, a crawler that fetches 10,000 pages gets them from the CDN, and your compute can scale to zero between real visits.
 
-### Fix 2: Tell crawlers what they can fetch
+### Tell crawlers what they can fetch
 
 `robots.txt` lets you ask crawlers to skip parts of your site, or skip it entirely. If you don't want AI crawlers to fetch your app's dynamic pages, block those paths for their user agents:
 
