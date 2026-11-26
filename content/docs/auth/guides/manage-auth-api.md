@@ -15,7 +15,7 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/neon-auth/api
   - /docs/guides/neon-auth-api
-updatedOn: '2026-11-10T14:15:46.000Z'
+updatedOn: '2026-11-16T18:53:48.177Z'
 ---
 
 You can manage Managed Better Auth programmatically using the [Neon API](/docs/reference/api), or from the terminal with the [Neon CLI](/docs/cli/neon-auth) (`neon neon-auth`), which wraps these same operations. You can also enable and configure Managed Better Auth from an AI editor using the [Neon MCP server](/docs/ai/neon-mcp-server#available-tools) (`provision_neon_auth`, `update_auth_config`, `add_auth_oauth_provider`, `get_neon_auth_config`). See [Set up with your AI editor](/docs/auth/about#set-up-with-your-ai-editor).
@@ -163,7 +163,7 @@ The Neon API also provides endpoints for managing auth configuration at the bran
 | `/email_provider`         | GET, PATCH               | Configure the email provider                                                                     |
 | `/email_and_password`     | GET, PATCH               | Configure email/password authentication                                                          |
 | `/users`                  | POST, DELETE, PUT        | Create, delete, and manage user roles                                                            |
-| `/plugins`                | GET, PATCH               | View and configure [auth plugins](/docs/auth/guides/plugins)                                     |
+| `/plugins`                | GET                      | View and configure [auth plugins](/docs/auth/guides/plugins)                                     |
 | `/plugins/magic-link`     | PATCH                    | Configure the [Magic Link plugin](/docs/auth/guides/plugins/magic-link)                          |
 | `/plugins/phone-number`   | GET, PATCH               | Configure the [Phone Number plugin](/docs/auth/guides/plugins/phone-number)                      |
 | `/plugins/oauth-provider` | GET, PATCH               | Configure the [OAuth provider plugin](/docs/auth/guides/plugins/oauth-provider)                  |
