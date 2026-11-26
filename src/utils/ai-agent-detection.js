@@ -272,6 +272,33 @@ export function isSearchCrawlerUserAgent(userAgent) {
   return Boolean(findUserAgentToken(userAgent, SEARCH_CRAWLER_USER_AGENT_TOKENS));
 }
 
+// AI assistants that drive a real browser for a person: the browser runs the
+// page's analytics script, so the proxy leaves their page views to it.
+// Claude-Agent (https://support.claude.com/en/articles/18234133) and
+// Google-Agent, which agents hosted by Google use to browse and act on a
+// user's request
+// (https://developers.google.com/crawling/docs/crawlers-fetchers/google-agent).
+// ChatGPT agent isn't listed: it sends a plain Chrome User-Agent, so it never
+// matches the fetcher tokens below.
+const BROWSER_AGENT_USER_AGENT_TOKENS = ['claude-agent', 'google-agent'];
+
+// A named reader that the proxy counts on every page read, even when it sends
+// browser navigation headers: a token from the AI assistant, AI crawler or
+// search crawler lists, except the browser agents above. Some of these send
+// navigation headers, but no browser-script pageview arrives for them
+// (PerplexityBot, Bytespider, meta-externalagent, and some ChatGPT-User and
+// Claude-User fetches), so leaving them to the browser script counts them
+// nowhere. Matched on the User-Agent only: a Signature-Agent header or a
+// headless browser doesn't change the result, so a fetcher that signs its
+// requests or renders with headless Chrome is still counted.
+export function isNamedFetcherUserAgent(userAgent) {
+  if (findUserAgentToken(userAgent, BROWSER_AGENT_USER_AGENT_TOKENS)) return false;
+  return (
+    Boolean(findUserAgentToken(userAgent, AI_AGENT_USER_AGENT_TOKENS)) ||
+    isSearchCrawlerUserAgent(userAgent)
+  );
+}
+
 // A short, fixed label for diagnostics logs (agent_family): the matched token
 // from the AI agent list, then the search crawler list, then the broad
 // markdown patterns (curl, axios, ...), else 'other'. Never the raw User-Agent,

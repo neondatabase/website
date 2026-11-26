@@ -1236,16 +1236,16 @@ describe('Middleware - AI Agent Integration Tests', () => {
     // once. Counting it on the server too would double it.
     it.each([
       [
-        'a search crawler rendering the page',
-        'Mozilla/5.0 (Linux; Android 10) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Mobile Safari/537.36 (compatible; Baiduspider-render/2.0; +http://www.baidu.com/search/spider.html)',
-        {},
-      ],
-      [
         'a headless browser',
         'Mozilla/5.0 (X11; Linux x86_64) HeadlessChrome/131.0 Safari/537.36',
         {},
       ],
       ['an agent UA browser', `${BROWSER} (compatible; Claude-Agent/1.0)`, {}],
+      [
+        'Google-Agent',
+        `${BROWSER} (compatible; Google-Agent; +https://developers.google.com/crawling/docs/crawlers-fetchers/google-agent)`,
+        {},
+      ],
       ['ChatGPT agent (Signature-Agent)', BROWSER, { 'signature-agent': '"https://chatgpt.com"' }],
     ])(
       'leaves %s navigating to an HTML page to the browser script (no server pageview)',
@@ -1258,6 +1258,91 @@ describe('Middleware - AI Agent Integration Tests', () => {
         expect(global.fetch).not.toHaveBeenCalled();
       }
     );
+
+    // Named AI assistants, AI crawlers and search crawlers are counted on the
+    // server even when they send browser navigation headers: for some
+    // (PerplexityBot, Bytespider, meta-externalagent, some ChatGPT-User and
+    // Claude-User fetches) no browser-script pageview arrives, so they'd be
+    // counted nowhere otherwise.
+    it.each([
+      [
+        'ChatGPT-User',
+        'Mozilla/5.0 AppleWebKit/537.36 (KHTML, like Gecko); compatible; ChatGPT-User/1.0; +https://openai.com/bot',
+        'ai-assistant',
+      ],
+      ['Claude-User', 'Claude-User/1.0', 'ai-assistant'],
+      [
+        'Perplexity-User',
+        'Mozilla/5.0 (compatible; Perplexity-User/1.0; +https://perplexity.ai/perplexity-user)',
+        'ai-assistant',
+      ],
+      [
+        'a ChatGPT-User fetch rendered in headless Chrome',
+        'Mozilla/5.0 (X11; Linux x86_64) HeadlessChrome/131.0 Safari/537.36 (compatible; ChatGPT-User/1.0)',
+        'ai-assistant',
+      ],
+      [
+        'PerplexityBot',
+        'Mozilla/5.0 AppleWebKit/537.36 (KHTML, like Gecko; compatible; PerplexityBot/1.0; +https://perplexity.ai/perplexitybot)',
+        'ai-crawler',
+      ],
+      [
+        'Bytespider',
+        'Mozilla/5.0 (Linux; Android 5.0) AppleWebKit/537.36 (KHTML, like Gecko) Mobile Safari/537.36 (compatible; Bytespider; spider-feedback@bytedance.com)',
+        'ai-crawler',
+      ],
+      [
+        'meta-externalagent',
+        'meta-externalagent/1.1 (+https://developers.facebook.com/docs/sharing/webmasters/web-crawlers)',
+        'ai-crawler',
+      ],
+      [
+        'Baiduspider-render',
+        'Mozilla/5.0 (Linux; Android 10) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Mobile Safari/537.36 (compatible; Baiduspider-render/2.0; +http://www.baidu.com/search/spider.html)',
+        'search-crawler',
+      ],
+    ])(
+      'counts %s navigating to an HTML page once on the server',
+      async (_label, userAgent, reader) => {
+        const response = await middleware(
+          withClone(createBrowserRequest('/blog/example-post', userAgent, 'text/html'))
+        );
+
+        expect(response.type).toBe('next');
+        expect(beaconCalls()).toHaveLength(1);
+        expect(readerOf()).toMatchObject({ llm_agent: true, llm_reader: reader });
+      }
+    );
+
+    it('counts a ChatGPT-User fetch that signs with Web Bot Auth and navigates like a browser', async () => {
+      const req = withClone(
+        createBrowserRequest(
+          '/blog/example-post',
+          'Mozilla/5.0 AppleWebKit/537.36 (KHTML, like Gecko); compatible; ChatGPT-User/1.0; +https://openai.com/bot',
+          'text/html'
+        )
+      );
+      req.headers.set('signature-agent', '"https://chatgpt.com"');
+      await middleware(req);
+
+      expect(beaconCalls()).toHaveLength(1);
+      expect(readerOf()).toMatchObject({ llm_agent: true, llm_reader: 'ai-assistant' });
+    });
+
+    it('does not count a named crawler prefetching a page (Sec-Fetch-Mode: cors)', async () => {
+      const req = withClone(
+        createMockRequest(
+          '/docs/introduction',
+          'Mozilla/5.0 (compatible; PerplexityBot/1.0; +https://perplexity.ai/perplexitybot)',
+          '*/*'
+        )
+      );
+      req.headers.set('sec-fetch-mode', 'cors');
+      req.headers.set('sec-fetch-dest', 'empty');
+      await middleware(req);
+
+      expect(global.fetch).not.toHaveBeenCalled();
+    });
 
     it.each([
       [

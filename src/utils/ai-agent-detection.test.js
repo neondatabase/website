@@ -8,6 +8,7 @@ import {
   isHumanBrowserNavigation,
   classifyReader,
   isSearchCrawlerUserAgent,
+  isNamedFetcherUserAgent,
   agentFamily,
 } from './ai-agent-detection';
 
@@ -664,5 +665,41 @@ describe('search crawlers that render pages in a browser', () => {
     const request = requestWith({ 'user-agent': userAgent, accept: 'text/html', ...navigation });
     expect(isHumanBrowserNavigation(request)).toBe(false);
     expect(classifyReader(request)).toBe('search-crawler');
+  });
+});
+
+describe('isNamedFetcherUserAgent', () => {
+  const CHROME =
+    'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36';
+
+  it.each([
+    // AI crawlers
+    'Mozilla/5.0 (compatible; PerplexityBot/1.0; +https://perplexity.ai/perplexitybot)',
+    'Mozilla/5.0 (Linux; Android 5.0) AppleWebKit/537.36 (KHTML, like Gecko) Mobile Safari/537.36 (compatible; Bytespider; spider-feedback@bytedance.com)',
+    'meta-externalagent/1.1 (+https://developers.facebook.com/docs/sharing/webmasters/web-crawlers)',
+    // Search crawlers
+    'Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)',
+    // AI assistants that fetch pages
+    'Mozilla/5.0 AppleWebKit/537.36 (KHTML, like Gecko); compatible; ChatGPT-User/1.0; +https://openai.com/bot',
+    'Claude-User/1.0',
+    'Mozilla/5.0 (compatible; Perplexity-User/1.0; +https://perplexity.ai/perplexity-user)',
+    'meta-externalfetcher/1.1 (+https://developers.facebook.com/docs/sharing/webmasters/web-crawlers)',
+    'Mozilla/5.0 (compatible; amazon-quick-on-behalf-of/1.0)',
+    // A fetcher token wins over a headless browser
+    'Mozilla/5.0 (X11; Linux x86_64) HeadlessChrome/131.0 Safari/537.36 (compatible; ChatGPT-User/1.0)',
+  ])('matches %s', (userAgent) => {
+    expect(isNamedFetcherUserAgent(userAgent)).toBe(true);
+  });
+
+  // Browser agents run the browser script, so they're left to it.
+  it.each([
+    CHROME,
+    `${CHROME} (compatible; Claude-Agent/1.0)`,
+    `${CHROME} (compatible; Google-Agent; +https://developers.google.com/crawling/docs/crawlers-fetchers/google-agent)`,
+    'Mozilla/5.0 (X11; Linux x86_64) HeadlessChrome/131.0 Safari/537.36',
+    'curl/8.7.1',
+    '',
+  ])('does not match %s', (userAgent) => {
+    expect(isNamedFetcherUserAgent(userAgent)).toBe(false);
   });
 });
