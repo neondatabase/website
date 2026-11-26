@@ -586,6 +586,7 @@ export const config = {
     '/contact-sales',
     '/mcp-server/stats',
     '/mts',
+    '/onboard/agent-setup',
     '/pg-eu-conf-raffle',
     '/ping-thing',
     '/restores-survey',

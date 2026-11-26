@@ -10,6 +10,7 @@ export default {
   caseStudies: '/case-studies',
   claimableNeon: '/claimable-neon',
   contactSales: '/contact-sales',
+  onboardAgentSetup: '/onboard/agent-setup',
   flow: '/flow',
   functions: '/functions',
   functionsTemplates: '/functions/templates',
