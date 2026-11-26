@@ -15,7 +15,7 @@ authors:
 cover:
   image: https://cdn.neonapi.io/public/images/pages/blog/every-app-needs-an-mcp-server/cover.jpg
   alt: Every app needs an MCP server
-isFeatured: false
+isFeatured: true
 seo:
   title: 'Every app needs an MCP server, and you can build it with Neon - Neon'
   description: 'An MCP server lets your users work in your app from any AI assistant (i.e. ChatGPT, Claude, and Cursor)'

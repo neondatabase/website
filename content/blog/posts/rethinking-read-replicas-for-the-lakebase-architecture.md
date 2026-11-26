@@ -12,7 +12,7 @@ authors:
 cover:
   image: https://cdn.neonapi.io/public/images/pages/blog/rethinking-read-replicas-for-the-lakebase-architecture/cover.jpg
   alt: Rethinking read replicas for the lakebase architecture
-isFeatured: false
+isFeatured: true
 seo:
   title: 'Rethinking read replicas for the lakebase architecture - Neon'
   description: 'When compute is decoupled from storage, adding a replica doesn''t mean copying the database'
