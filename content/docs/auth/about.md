@@ -16,7 +16,7 @@ redirectFrom:
   - /docs/guides/neon-auth-how-it-works
   - /docs/guides/neon-auth-best-practices
   - /docs/neon-auth/about
-updatedOn: '2026-11-11T12:31:00.000Z'
+updatedOn: '2026-11-26T19:03:51.740Z'
 ---
 
 Managed Better Auth is the managed authentication service in the Neon backend for apps and agents. It stores users, sessions, and auth configuration directly in your Neon database. When you branch your database, your entire auth state branches with it, so you can test real authentication workflows in preview environments.
@@ -37,17 +37,23 @@ Managed Better Auth runs Better Auth version **1.7.12**. Use `@neon/auth` **0.8.
 
 ### When to use Managed Better Auth vs. self-hosting Better Auth
 
-Managed Better Auth is a managed authentication service built into Lakebase Postgres on Neon:
+You can also run Better Auth yourself, inside your own app, and store its tables in a Neon database. Both options use the same Better Auth APIs. The difference is who runs the auth server and what you maintain.
 
-- **Branch-aware authentication**: Every Neon branch gets its own isolated auth environment, so you can test authentication features without affecting your production branch.
-- **Built-in Data API integration**: JWT token validation for the Data API has native support for Managed Better Auth.
-- **No infrastructure to manage**: Managed Better Auth is deployed in the same region as your database, reducing latency without requiring you to run auth infrastructure.
-- **Shared OAuth credentials for testing**: Get started quickly with out-of-the-box Google OAuth credentials, eliminating the setup complexity for testing and prototyping.
+|                     | Managed Better Auth                                                                           | Self-hosted Better Auth on Neon                                                                                                      |
+| ------------------- | --------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------ |
+| Auth server         | Neon runs it in the same region as your database                                              | You run it in your app, usually as an API route that calls `betterAuth()`                                                            |
+| Auth tables         | Neon creates and upgrades them in the `neon_auth` schema                                      | You generate them with the Better Auth CLI and apply your own migrations                                                             |
+| Better Auth version | Neon upgrades it for you                                                                      | You upgrade the package and migrate any schema changes                                                                               |
+| Configuration       | Console, Neon CLI, Neon API, or MCP                                                           | Code in your app, plus a secret, a base URL, and a database connection                                                               |
+| Branching           | Each branch gets its own users, sessions, configuration, and auth URL                         | Auth tables branch with your data, but you set the auth server URL, secret, and OAuth redirect URLs for each environment             |
+| Data API            | Validates Managed Better Auth tokens with no setup                                            | Add the Better Auth JWT plugin and register it as a [custom authentication provider](/docs/data-api/custom-authentication-providers) |
+| Plugins and hooks   | A supported subset (see the [roadmap](/docs/auth/roadmap#better-auth-plugins))                | Any Better Auth plugin, hook, or option                                                                                              |
+| Email               | Built-in provider, [custom SMTP](/docs/auth/production-checklist#email-provider), or webhooks | You send every email through your own provider                                                                                       |
+| OAuth for testing   | Shared Google OAuth credentials included                                                      | You bring your own OAuth credentials                                                                                                 |
+| Where it works      | AWS regions, without IP Allow or Private Networking (see [Availability](#availability))       | Anywhere your app runs                                                                                                               |
+| Cost                | Included in every plan, up to the plan's MAU limit (see [Pricing](#pricing))                  | Your app's compute, plus database usage on your Neon plan                                                                            |
 
-Self-hosting Better Auth makes sense if you need:
-
-- Flexibility in auth configuration: custom plugins, hooks, and options not yet supported by Managed Better Auth.
-- Full control over your auth code and the ability to run it inside your own infrastructure.
+Choose Managed Better Auth if you want auth that branches with your database and nothing extra to run or upgrade. Self-host Better Auth if you need a plugin, hook, or option Managed Better Auth doesn't support yet, or if your auth code has to run inside your own infrastructure.
 
 For more details on the SDK differences between `@neon/auth` and `better-auth/client`, see [Why use @neon/auth over better-auth/client](https://github.com/neondatabase/neon-js/blob/main/packages/auth/neon-auth_vs_better-auth.md).
 
