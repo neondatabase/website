@@ -15,7 +15,7 @@ By default, [Lakebase Postgres suspends a compute after 5 minutes without activi
 
 A crawler can break that pattern without sending much traffic. If something requests a database-backed page every few minutes, the 5-minute idle timer never runs out, and the compute stays on all day.
 
-When a [Free plan project](/pricing) uses up its CU-hours, Neon suspends its compute until the next billing period or until you upgrade. Also, if autoscaling pushes the compute above 0.25 CU while a crawler hammers it, your free compute allowance will run out even sooner.
+When a [Free plan project](/pricing) uses up its CU-hours, Neon suspends its compute until the next billing period or until you upgrade. If autoscaling pushes the compute above 0.25 CU while a crawler hammers it, your free compute allowance will run out even sooner.
 
 On a paid plan, the pattern won't stop your app, but the extra consumption shows up on your bill.
 
