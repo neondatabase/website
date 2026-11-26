@@ -366,6 +366,11 @@ const ICONS_CONFIG = {
     lightIconPath: '/images/technology-logos/liquibase.svg',
     darkIconPath: '/images/technology-logos/liquibase-dark.svg',
   },
+  loops: {
+    name: 'loops',
+    lightIconPath: '/images/technology-logos/loops.svg',
+    darkIconPath: null,
+  },
   mastra: {
     name: 'mastra',
     lightIconPath: '/images/technology-logos/mastra.svg',

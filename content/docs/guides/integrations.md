@@ -3,7 +3,7 @@ title: Neon integration guides
 subtitle: Find setup instructions for connecting Neon to platforms and services.
 summary: >-
   Index of Neon integration guides organized by category: authentication,
-  deployment, development, file and media storage, monitoring, query,
+  deployment, development, email, file and media storage, monitoring, query,
   replication, schema migration, and serverless. Use this page to find setup
   instructions for connecting Neon to a specific platform or tool.
 enableTableOfContents: true
@@ -19,7 +19,7 @@ redirectFrom:
   - /docs/integrations/draxlr
   - /docs/guides/logical-replication-decodable
   - /docs/guides/logical-replication-stacksync
-updatedOn: '2026-11-21T16:05:37.000Z'
+updatedOn: '2026-11-26T15:47:29.446Z'
 ---
 
 ## Authentication
@@ -75,6 +75,14 @@ updatedOn: '2026-11-21T16:05:37.000Z'
 <a href="/docs/guides/prisma" title="Prisma" description="Connect from Prisma to Neon" icon="prisma"></a>
 
 <a href="/docs/guides/typeorm" title="TypeORM" description="Connect from TypeORM to Neon" icon="typeorm"></a>
+
+</TechCards>
+
+## Email
+
+<TechCards>
+
+<a href="/docs/guides/loops" title="Loops" description="Send Managed Better Auth emails and sync users with Loops" icon="loops"></a>
 
 </TechCards>
 

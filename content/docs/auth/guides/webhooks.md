@@ -13,7 +13,7 @@ summary: >-
   phone_number.verified, use EdDSA Ed25519 detached JWS signatures for
   verification, and retry blocking events within a global timeout.
 enableTableOfContents: true
-updatedOn: '2026-11-09T18:18:56.726Z'
+updatedOn: '2026-11-26T15:47:29.446Z'
 ---
 
 Managed Better Auth webhooks send HTTP POST requests to your server when authentication events occur.
@@ -300,6 +300,8 @@ Each webhook request includes the following headers:
 | `X-Neon-Event-Type`       | Event type (for example, `user.created`)       |
 | `X-Neon-Event-Id`         | Unique event UUID                              |
 | `X-Neon-Delivery-Attempt` | Attempt number: 1, 2, or 3                     |
+
+Managed Better Auth also sends each of these headers with a `Neon-Better-Auth-` prefix, for example `Neon-Better-Auth-Signature`. If your endpoint is a [Neon Function](/docs/compute/functions/overview), read those names: Neon strips client-set `X-Neon-*` headers from requests to functions, so the `X-Neon-*` versions don't arrive.
 
 Example incoming webhook request:
 
