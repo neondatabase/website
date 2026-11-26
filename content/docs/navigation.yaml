@@ -1101,6 +1101,15 @@
                   slug: manage/orgs-manage
                 - title: Add members by domain
                   slug: manage/orgs-add-members-by-domain
+                - title: Enterprise SSO and SCIM
+                  slug: manage/orgs-sso
+                  items:
+                    - title: Overview
+                      slug: manage/orgs-sso
+                    - title: Set up with Okta
+                      slug: manage/orgs-sso-okta
+                    - title: Set up with Microsoft Entra ID
+                      slug: manage/orgs-sso-entra
                 - title: Transfer projects
                   slug: manage/orgs-project-transfer
                 - title: Organizations API
