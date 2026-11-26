@@ -3,6 +3,14 @@
     "name": "Team Neon",
     "position": "Neon"
   },
+  "carlota-soto": {
+    "name": "Carlota Soto",
+    "position": "Neon",
+    "link": {
+      "title": "GitHub",
+      "url": "https://github.com/carlotas19"
+    }
+  },
   "rishi-raj-jain": {
     "name": "Rishi Raj Jain",
     "position": "Solutions Engineer",
