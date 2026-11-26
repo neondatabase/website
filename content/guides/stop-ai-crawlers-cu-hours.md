@@ -17,7 +17,7 @@ A crawler can break that pattern without sending much traffic. If something requ
 
 When a [Free plan project](/pricing) uses up its CU-hours, Neon suspends its compute until the next billing period or until you upgrade. Also, if autoscaling pushes the compute above 0.25 CU while a crawler hammers it, your free compute allowance will run out even sooner.
 
-On a paid plan, this pattern can also cause you problems: it won't stop your app, but the extra consumption will show up on your bill.
+On a paid plan, the pattern won't stop your app, but the extra consumption shows up on your bill.
 
 ## Check whether crawlers are the cause
 
