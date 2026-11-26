@@ -12,7 +12,7 @@ summary: >-
   retry logic to handle the brief disruption.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2026-11-25T20:28:41.322Z'
+updatedOn: '2026-11-26T14:22:48.468Z'
 ---
 
 To keep your Neon [computes](/docs/reference/glossary#compute) and Postgres instances up to date with the latest patches and features, Neon applies updates to your project's computes. We notify you of updates in advance so that you can plan for them if necessary. On Neon's paid plans, you can select an update window (a specific day and hour for updates).
@@ -169,26 +169,34 @@ For compute restart instructions, see [Restart a compute](/docs/manage/computes#
 
 ## Avoid restarts during a critical period
 
-If a brief restart would disrupt an event, such as a product launch or a sales peak, you can keep scheduled updates out of it. Neon schedules an update once a compute has been active for 30 days, and a restart starts that count again. A restart shortly before the event pushes the next scheduled update past it.
+If a brief restart would disrupt an event, such as a product launch or a sales peak, you can keep scheduled updates out of it. Neon applies scheduled updates only in your project's update window, and only after a compute has been active for 30 days. What to do depends on how long the event lasts.
 
 These steps apply to computes up to 16 CU. Larger computes aren't updated automatically, so they restart only when you restart them. See [Updating large computes](#updating-large-computes).
 
-1. **Pick a time to restart.** Choose a quiet time a few days before the event starts, and make sure the event ends within 30 days of the restart. For longer events, see [Events longer than 30 days](#events-longer-than-30-days).
-2. **Restart every compute the event depends on**, including read replicas. Each compute has its own update schedule, so a compute you don't restart can still be updated during the event. See [Restart a compute](/docs/manage/computes#restart-a-compute).
-3. **Move your update window (paid plans).** If the event lasts less than a week, set your project's update window to a day and hour outside the event. Neon also schedules planned platform maintenance for computes of 4 CU and larger in the update window, so this keeps it out of the event too. See [Updates on paid plans](#updates-on-paid-plans). On the Free plan, Neon sets the update window, so skip this step.
-4. **Check for planned updates.** In the Neon Console, open your project and select **Settings** > **Postgres**, or check the `maintenance_scheduled_for` field with the API. See [Check for updates using the Neon API](#check-for-updates-using-the-neon-api). Confirm nothing is planned during the event.
+### Events shorter than a week
 
-A compute that scales to zero restarts when it wakes up, so it can restart during the event if it goes idle. On paid plans, you can disable scale to zero on the computes the event depends on until the event ends. See [Configuring scale to zero for Neon computes](/docs/guides/scale-to-zero-guide).
+On paid plans, change your project's update window to a day and hour outside the event, a few days before it starts. Scheduled updates happen in the update window, and so does planned platform maintenance for computes of 4 CU and larger, so neither falls during the event. See [Updates on paid plans](#updates-on-paid-plans).
+
+On the Free plan, Neon sets the update window, so restart your computes instead, as described in the next section.
+
+### Events from one week to 30 days
+
+A few days before the event, at a quiet time, restart every compute the event depends on, including read replicas. The restart applies any available updates and starts the 30-day count again, so the next scheduled update falls after the event. Each compute has its own update schedule, so a compute you don't restart can still be updated during the event. See [Restart a compute](/docs/manage/computes#restart-a-compute).
+
+### Events longer than 30 days
+
+A single restart can't cover an event longer than 30 days, so a scheduled update might happen during it. To limit the impact on paid plans, set your update window to the quietest hour of your week.
+
+### Steps for any event
+
+- If the computes the event depends on scale to zero, disable scale to zero until the event ends (paid plans). A compute that scales to zero restarts when it wakes up, so it can restart during the event if it goes idle. See [Configuring scale to zero for Neon computes](/docs/guides/scale-to-zero-guide).
+- In the Neon Console, open your project and select **Settings** > **Postgres**, or check the `maintenance_scheduled_for` field with the API. Confirm nothing is planned during the event. See [Check for updates using the Neon API](#check-for-updates-using-the-neon-api).
 
 <Admonition type="note" title="These steps don't cover every restart">
 These steps keep scheduled updates out of your event. [Platform maintenance](/docs/manage/platform-maintenance), urgent security fixes, and hardware failures can still restart a compute, and computes smaller than 4 CU can be restarted for platform maintenance at any time. Make sure your application retries dropped connections. See [Handling connection disruptions during compute updates](#handling-connection-disruptions-during-compute-updates).
 </Admonition>
 
 If the timing of an upcoming update is a problem for your business, [contact Neon Support](/docs/introduction/support).
-
-### Events longer than 30 days
-
-A single restart can't cover an event longer than 30 days, so a scheduled update might happen during it. To limit the impact on paid plans, set your update window to the quietest hour of your week.
 
 ## Updating large computes
 
