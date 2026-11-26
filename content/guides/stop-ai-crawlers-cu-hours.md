@@ -79,8 +79,4 @@ Point uptime checks at a static route, or at a health endpoint that doesn't touc
 
 On paid plans, [spending notifications](/docs/introduction/spending-notifications) email you at 80% and 100% of a threshold you set. Set them up to keep an eye out for this issue.
 
-## Summary
-
-Crawlers, bots, and uptime checks can take your database's idle time away and keep it from scaling to zero. Cache what you can, block what you don't want crawled, and keep health checks off the database.
-
 <NeedHelp/>
