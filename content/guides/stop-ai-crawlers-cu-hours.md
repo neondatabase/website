@@ -75,7 +75,7 @@ Uptime monitors are crawlers you set up yourself. A check every minute against a
 
 Point uptime checks at a static route, or at a health endpoint that doesn't touch the database. If you want to know the database is reachable, check it less often, for example every 15 or 30 minutes, so the compute can sleep in between.
 
-### Fix 5: Set up notifications
+### Set up notifications
 
 On paid plans, [spending notifications](/docs/introduction/spending-notifications) email you at 80% and 100% of a threshold you set. Set them up to keep an eye out for this issue.
 
