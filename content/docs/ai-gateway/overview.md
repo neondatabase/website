@@ -8,7 +8,7 @@ summary: >-
 enableTableOfContents: true
 redirectFrom:
   - /docs/ai/ai-gateway
-updatedOn: '2026-11-05T23:41:12.000Z'
+updatedOn: '2026-11-16T16:40:36.956Z'
 layout: wide
 hideCopyPage: true
 ---
@@ -45,7 +45,7 @@ For full request paths and when to prefer each endpoint, see [Which endpoint to 
 
 <a href="/docs/ai-gateway/models" description="Endpoints, model IDs, rate limits, pricing, and provider terms." icon="database">Model reference</a>
 
-<a href="/docs/ai-gateway/chat-completions" description="Use the OpenAI-compatible endpoint with any model in the catalog." icon="code">Chat completions</a>
+<a href="/docs/ai-gateway/chat-completions" description="Use the OpenAI-compatible endpoint with most models in the catalog." icon="code">Chat completions</a>
 
 <a href="/docs/ai-gateway/embeddings" description="Turn text into vectors for search with the OpenAI-compatible embeddings endpoint." icon="database">Embeddings</a>
 
