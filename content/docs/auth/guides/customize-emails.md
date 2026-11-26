@@ -16,7 +16,7 @@ updatedOn: '2026-11-26T20:44:20.251Z'
 
 Managed Better Auth sends verification codes, magic links, and password reset emails using its built-in email provider. By default, emails use shared Neon branding and your Neon project name as the main header. To make emails recognizable to users, update the Application Name in your [Auth settings](/docs/auth/production-checklist#application-name) to match your app’s public-facing name.
 
-For deeper customization, use webhooks to intercept email events and send fully branded emails through your preferred provider. Dashboard-based email templates aren’t available yet, but they’re planned for a future release. If you only need a custom sender address without changing the email content, you can configure a custom SMTP provider instead (see the [Auth production checklist](/docs/auth/production-checklist#email-provider)). Custom SMTP doesn't work with Loops, use the [Loops webhook setup](/docs/guides/loops#custom-smtp-doesnt-work-with-loops) instead.
+For deeper customization, use webhooks to intercept email events and send fully branded emails through your preferred provider. Dashboard-based email templates aren’t available yet, but they’re planned for a future release. If you only need a custom sender address without changing the email content, you can configure a custom SMTP provider instead (see the [Auth production checklist](/docs/auth/production-checklist#email-provider)). Custom SMTP doesn't work with Loops, so use the [Loops webhook setup](/docs/guides/loops#custom-smtp-doesnt-work-with-loops) instead.
 
 ## How it works
 
