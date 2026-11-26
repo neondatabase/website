@@ -8,7 +8,7 @@ summary: >-
   delete an organization from the UI. Admins control deletions, billing
   changes, and 2FA enforcement.
 enableTableOfContents: true
-updatedOn: '2026-11-05T15:33:57.188Z'
+updatedOn: '2026-11-21T21:02:38.326Z'
 ---
 
 Learn how to manage your organization's projects, invite members, set their access, and oversee billing details. For a breakdown of what each organization role and per-project permission allows, see [User permissions](/docs/manage/user-permissions).
@@ -54,7 +54,7 @@ To invite members:
 - Navigate to the **People** page in your Organization.
 - Click **Invite member** and enter the email addresses in a comma-separated list.
 - Choose the organization role each person should get. The role sets their baseline access across every project in the organization. See [Organization roles](/docs/manage/user-permissions#organization-roles).
-- Monitor the status of sent invites on the **Pending Invites** section; from here, you can resend or cancel invitations as needed.
+- Monitor the status of sent invites in the **Pending invites** section; from here, you can resend or cancel invitations as needed.
 
 <Admonition type="note" title="Invites not received?">
 If invite emails aren't received, they may be in spam or quarantined. Recipients should check these folders and mark Neon emails as safe.
