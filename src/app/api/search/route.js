@@ -78,7 +78,10 @@ async function search(request) {
   try {
     response = await fetch(searchUrl, {
       method: 'POST',
-      headers: siteSearchUpstreamHeaders(request.headers.get('user-agent')),
+      headers: siteSearchUpstreamHeaders(
+        request.headers.get('user-agent'),
+        request.headers.get('x-caller-source')
+      ),
       body: JSON.stringify(body),
     });
   } catch {
