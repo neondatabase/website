@@ -6,7 +6,7 @@ summary: >-
   reload, closed tab, or browser crash. Works with @uppy/aws-s3 multipart uploads and
   @uppy/tus. Covers small files restored automatically and large files the user re-selects.
 enableTableOfContents: true
-updatedOn: '2026-11-25T17:45:27.914Z'
+updatedOn: '2026-11-26T11:46:18.830Z'
 ---
 
 Pause, resume, and retry only work while the page stays open. If the user reloads, closes the tab, or the browser crashes, Uppy forgets the upload. [Golden Retriever](https://uppy.io/docs/golden-retriever/) saves Uppy's state in the browser so the next visit can pick up where the last one stopped.
@@ -16,7 +16,7 @@ It works with every method in this section:
 - With `@uppy/aws-s3` (a [signing endpoint](/docs/storage/uploads/uppy-s3-multipart), [Companion](/docs/storage/uploads/uppy-companion), or [browser signing](/docs/storage/uploads/uppy-browser-signing)), it saves each file's multipart `uploadId` and `key`. On restore, Uppy calls `ListParts` and uploads only the parts Neon doesn't have.
 - With [`@uppy/tus`](/docs/storage/uploads/uppy-tus), it saves each file's tus upload URL. On restore, Uppy asks the tus server for the offset and continues from there.
 
-## Golden Retriever installation
+## Install Golden Retriever
 
 ```bash
 npm install @uppy/golden-retriever
@@ -51,7 +51,7 @@ When Uppy starts, Golden Retriever restores the saved files and emits `restored`
 
 ```typescript shouldWrap
 uppy.on('restored', () => {
-  if (Object.keys(uppy.getFiles()).length > 0) showResumePrompt();
+  if (uppy.getFiles().length > 0) showResumePrompt();
 });
 
 function onResumeClicked() {
@@ -67,7 +67,7 @@ Golden Retriever keeps the file's bytes in IndexedDB only for files up to 10 MiB
 - **Over 10 MiB:** the file comes back as a "ghost". Uppy knows the file's name, size, and upload ID, but not its bytes. Ask the user to select the same file again. Uppy matches it to the ghost by name, type, size, and last-modified time, replaces the ghost, and resumes the existing upload.
 
   ```typescript shouldWrap
-  const ghosts = Object.values(uppy.getFiles()).filter((file) => file.isGhost);
+  const ghosts = uppy.getFiles().filter((file) => file.isGhost);
   if (ghosts.length > 0) {
     showMessage(`Select ${ghosts.map((f) => f.name).join(', ')} again to resume.`);
   }

@@ -7,7 +7,7 @@ summary: >-
   so credentials never reach the browser. Covers pause, resume, retry, cancel,
   parallel uploads, small-file PUTs, and POST policies.
 enableTableOfContents: true
-updatedOn: '2026-11-25T17:45:27.914Z'
+updatedOn: '2026-11-26T11:46:18.830Z'
 ---
 
 This is the recommended way to add resumable uploads to a web app. The browser uploads file parts directly to your Neon bucket. Your backend has one route that presigns each S3 request Uppy needs, so your Neon credential stays on the server and you decide which keys a user may write.
@@ -25,13 +25,13 @@ This guide uses the `signRequest` option from `@uppy/aws-s3` 6. Earlier versions
 
 <Steps>
 
-## Package installation
+## Install the packages
 
 ```bash
 npm install @uppy/core @uppy/aws-s3 @aws-sdk/client-s3 @aws-sdk/s3-request-presigner
 ```
 
-## S3 client configuration
+## Configure the S3 client
 
 On your server, point the AWS SDK at your branch's storage endpoint. `neon env pull` writes these variables for you. See [Get started](/docs/storage/get-started) for details.
 
@@ -52,7 +52,7 @@ export const s3 = new S3Client({
 });
 ```
 
-## Signing route
+## Add a signing route
 
 Uppy calls `signRequest` with one request at a time, such as "create a multipart upload for this key" or "upload part 3". The route maps each request to the matching S3 command and returns a presigned URL. This example uses Express, but any framework works.
 
@@ -110,7 +110,7 @@ If you sign `PutObject` with a `Content-Type`, return the same header in `header
 The route signs whatever key the browser sends. Before you sign, check that the current user is allowed to write that key, for example by requiring keys to start with the user's ID. Without a check, any visitor can overwrite any object in the bucket.
 </Admonition>
 
-## Uppy configuration
+## Configure Uppy
 
 In the browser, point the plugin at your signing route.
 
@@ -143,7 +143,7 @@ uppy.on('upload-success', (file, response) => {
 
 By default, Uppy names objects `{randomId}-{filename}`. Pass `generateObjectKey: (file) => ...` to choose your own keys.
 
-## User interface and file upload
+## Upload a file
 
 Add a file to Uppy and start the upload. To get a drag-and-drop UI with pause, resume, and retry buttons, add [`@uppy/dashboard`](https://uppy.io/docs/dashboard/) instead.
 

@@ -6,14 +6,14 @@ summary: >-
   with a signing endpoint, Uppy Companion, browser-side signing, or a tus server to
   upload large files that resume from the last stored part instead of starting over.
 enableTableOfContents: true
-updatedOn: '2026-11-25T17:45:27.914Z'
+updatedOn: '2026-11-26T11:46:18.830Z'
 ---
 
 Neon Object Storage supports resumable uploads. A large file is uploaded as a series of parts with [S3 multipart upload](/docs/storage/objects#multipart-upload), and Neon stores each part as soon as it arrives. If the upload is paused, the network drops, or the user closes the tab, the client asks Neon which parts it already has and continues from the next missing part.
 
 Because Neon stores the upload state, not the browser or your server's memory, an upload can resume in a new tab, after a server restart, or from a different server instance.
 
-This section covers [Uppy](https://uppy.io), the open-source upload library, with every upload method it offers.
+This section covers [Uppy](https://uppy.io), the open-source upload library, with every upload method it offers. Any S3 client that supports multipart upload works the same way. For a server-side example with the AWS SDK, see [Multipart upload](/docs/storage/objects#multipart-upload).
 
 ## Upload methods
 
@@ -84,7 +84,30 @@ The tus method doesn't need a CORS rule on the bucket, because the browser only 
 
 ## Abandoned upload cleanup
 
-When a user never comes back to finish an upload, its parts stay in the bucket until the multipart upload is completed or aborted. On AWS S3 you'd usually set a lifecycle rule to abort these. Neon Object Storage [stores lifecycle rules but doesn't run them](/docs/storage/s3-compatibility#known-limitations), so abort stale uploads yourself. You can use a [Neon Function with a schedule trigger](/docs/compute/functions/triggers/schedule) to cleanup the abandoned uploads regularly.
+When a user never comes back to finish an upload, its parts stay in the bucket until the multipart upload is completed or aborted. On AWS S3 you'd usually set a lifecycle rule to abort these. Neon Object Storage [stores lifecycle rules but doesn't run them](/docs/storage/s3-compatibility#known-limitations), so abort stale uploads yourself. This script lists the bucket's in-progress uploads and aborts any started more than 7 days ago:
+
+```typescript filename="cleanup.ts" shouldWrap
+import { ListMultipartUploadsCommand, AbortMultipartUploadCommand } from '@aws-sdk/client-s3';
+import { s3 } from './s3';
+
+const Bucket = process.env.BUCKET!;
+const cutoff = Date.now() - 7 * 24 * 60 * 60 * 1000; // 7 days
+
+let KeyMarker: string | undefined;
+let UploadIdMarker: string | undefined;
+do {
+  const page = await s3.send(new ListMultipartUploadsCommand({ Bucket, KeyMarker, UploadIdMarker }));
+  for (const { Key, UploadId, Initiated } of page.Uploads ?? []) {
+    if (Initiated && Initiated.getTime() < cutoff) {
+      await s3.send(new AbortMultipartUploadCommand({ Bucket, Key, UploadId }));
+    }
+  }
+  KeyMarker = page.IsTruncated ? page.NextKeyMarker : undefined;
+  UploadIdMarker = page.IsTruncated ? page.NextUploadIdMarker : undefined;
+} while (KeyMarker);
+```
+
+`s3` is the client from [Configure the S3 client](/docs/storage/uploads/uppy-s3-multipart#configure-the-s3-client). Set the cutoff longer than your longest expected upload, including time spent paused. To run the script on a schedule, deploy it as a [Neon Function with a schedule trigger](/docs/compute/functions/triggers/schedule).
 
 ## Additional considerations
 

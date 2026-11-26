@@ -6,7 +6,7 @@ summary: >-
   files to Neon Object Storage over the tus resumable upload protocol. Upload state
   is stored in your Neon bucket, so uploads resume across tabs and server restarts.
 enableTableOfContents: true
-updatedOn: '2026-11-25T17:45:27.914Z'
+updatedOn: '2026-11-26T11:46:18.830Z'
 ---
 
 [tus](https://tus.io) is an open protocol for resumable uploads. A tus client sends a file to a tus server in chunks, and on resume it asks the server how many bytes it already has. With [`@tus/s3-store`](https://github.com/tus/tus-node-server/tree/main/packages/s3-store), a Node.js tus server writes each upload to your Neon bucket with S3 multipart upload.
@@ -24,14 +24,14 @@ Unlike the other methods in this section, the file passes through your server: b
 
 <Steps>
 
-## Package installation
+## Install the packages
 
 ```bash
 npm install @tus/server @tus/s3-store express
 npm install @uppy/core @uppy/tus
 ```
 
-## tus server configuration
+## Configure the tus server
 
 Configure `S3Store` with your branch's storage endpoint. `s3ClientConfig` is passed to the AWS SDK's `S3Client`, so it takes the same options as in [Get started](/docs/storage/get-started), plus the bucket name.
 
@@ -69,7 +69,7 @@ app.listen(3000);
 
 The `/files/*splat` route is Express 5 syntax. With Express 4, use `/files/*`.
 
-## Uppy configuration
+## Configure Uppy
 
 ```typescript filename="uploader.ts" shouldWrap
 import Uppy from '@uppy/core';
@@ -83,7 +83,7 @@ export const uppy = new Uppy().use(Tus, {
 });
 ```
 
-## File upload
+## Upload a file
 
 ```typescript shouldWrap
 uppy.addFile({ name: file.name, type: file.type, data: file });
