@@ -1,91 +1,66 @@
-import { after } from 'next/server';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 
 import { getBlogPostRawBySlug } from 'utils/api-blog';
 
 import { GET } from './route';
 
-vi.mock('next/server', () => ({ after: vi.fn() }));
 vi.mock('utils/api-blog', () => ({ getBlogPostRawBySlug: vi.fn() }));
 
 const request = () =>
-  new Request('https://neon.com/blog/example-post/md?token=query-secret', {
-    headers: { 'x-vercel-id': 'fra1::blog-request', 'user-agent': 'ChatGPT-User/1.0' },
+  new Request('https://neon.com/blog/example-post/md', {
+    headers: { 'user-agent': 'neon-blog-markdown-proxy' },
   });
 const params = { params: Promise.resolve({ slug: 'example-post' }) };
 
-describe('Blog Markdown analytics', () => {
+// The proxy fetches this route and counts the read (src/proxy.js,
+// blogMarkdownResponse). The route only serves the post.
+describe('Blog Markdown route', () => {
   beforeEach(() => {
     vi.clearAllMocks();
-    vi.stubEnv('LLM_ANALYTICS_DEBUG', 'false');
-    vi.stubGlobal('fetch', vi.fn().mockResolvedValue(new Response('', { status: 200 })));
-    getBlogPostRawBySlug.mockResolvedValue('# Blog post');
-    vi.spyOn(console, 'info').mockImplementation(() => {});
-    vi.spyOn(console, 'warn').mockImplementation(() => {});
+    vi.stubGlobal('fetch', vi.fn());
     vi.spyOn(console, 'error').mockImplementation(() => {});
   });
 
   afterEach(() => {
-    vi.unstubAllEnvs();
     vi.unstubAllGlobals();
     vi.restoreAllMocks();
   });
 
-  it.each([
-    ['# Blog post', 200, false],
-    [null, 404, true],
-  ])('uses after() for a %s post and preserves HTTP %s', async (content, status, is404) => {
-    getBlogPostRawBySlug.mockResolvedValue(content);
-    let acceptBeacon;
-    fetch.mockImplementation(
-      () =>
-        new Promise((resolve) => {
-          acceptBeacon = resolve;
-        })
-    );
+  it('serves the raw post with CDN-cacheable Markdown headers and sends no pageview', async () => {
+    getBlogPostRawBySlug.mockResolvedValue('# Blog post');
     const response = await GET(request(), params);
-    expect(response.status).toBe(status);
-    expect(after).toHaveBeenCalledTimes(1);
-    expect(fetch).toHaveBeenCalledTimes(1);
-    const payload = JSON.parse(fetch.mock.calls[0][1].body);
-    expect(payload.zarazData.l).toBe('https://neon.com/blog/example-post.md');
-    expect(payload.data).toMatchObject({ llm_404: is404, llm_request_id: 'fra1::blog-request' });
-    acceptBeacon({ ok: true, status: 200 });
-    await after.mock.calls[0][0];
-  });
 
-  it('reports collector failure while serving the original blog content', async () => {
-    fetch.mockResolvedValue(new Response('', { status: 429 }));
-    const response = await GET(request(), params);
     expect(response.status).toBe(200);
     expect(await response.text()).toBe('# Blog post');
-    await expect(after.mock.calls[0][0]).resolves.toMatchObject({ outcome: 'http_error' });
-    expect(JSON.parse(console.warn.mock.calls[0][0]).http_status).toBe(429);
-  });
-
-  it('preserves the untracked 502 when the blog snapshot cannot be read', async () => {
-    getBlogPostRawBySlug.mockRejectedValue(new Error('Snapshot unavailable'));
-    const response = await GET(request(), params);
-    expect(response.status).toBe(502);
-    expect(after).not.toHaveBeenCalled();
+    expect(response.headers.get('Content-Type')).toBe('text/markdown; charset=utf-8');
+    expect(response.headers.get('Cache-Control')).toBe('public, max-age=60, s-maxage=300');
+    expect(response.headers.get('X-Content-Source')).toBe('markdown');
+    expect(response.headers.get('X-Robots-Tag')).toBe('noindex');
+    expect(response.headers.get('X-LLMs-Txt')).toBe('/blog/llms.txt');
     expect(fetch).not.toHaveBeenCalled();
   });
 
-  it('uses the public Markdown path and shared Vercel ID in diagnostics', async () => {
-    vi.stubEnv('LLM_ANALYTICS_DEBUG', 'true');
-    await GET(request(), params);
-    await after.mock.calls[0][0];
-    const logs = console.info.mock.calls.map(([line]) => JSON.parse(line));
-    expect(logs).toEqual(
-      expect.arrayContaining([
-        expect.objectContaining({ type: 'llm_request', proxy_status: 200, beacon_scheduled: true }),
-        expect.objectContaining({ type: 'llm_beacon', outcome: 'accepted' }),
-      ])
-    );
-    for (const log of logs) {
-      expect(log.request_id).toBe('fra1::blog-request');
-      expect(log.path).toBe('/blog/example-post.md');
-    }
-    expect(JSON.stringify(logs)).not.toContain('query-secret');
+  it('returns a Markdown 404 for a missing post', async () => {
+    getBlogPostRawBySlug.mockResolvedValue(null);
+    const response = await GET(request(), params);
+
+    expect(response.status).toBe(404);
+    expect(await response.text()).toContain('/blog/example-post.md');
+    expect(response.headers.get('X-Content-Source')).toBe('agent-404');
+    expect(response.headers.get('Cache-Control')).toBe('public, max-age=60, s-maxage=300');
+    // Same markdown-404 format as docs, pointing at the blog index.
+    expect(response.headers.get('X-LLMs-Txt')).toBe('/blog/llms.txt');
+    expect(response.headers.get('Link')).toContain('</blog/llms.txt>; rel="llms-txt"');
+    expect(response.headers.get('Vary')).toContain('Accept');
+    expect(fetch).not.toHaveBeenCalled();
+  });
+
+  it('returns 502 when the blog snapshot cannot be read', async () => {
+    getBlogPostRawBySlug.mockRejectedValue(new Error('Snapshot unavailable'));
+    const response = await GET(request(), params);
+
+    expect(response.status).toBe(502);
+    expect(response.headers.get('Cache-Control')).toBeNull();
+    expect(fetch).not.toHaveBeenCalled();
   });
 });

@@ -4,7 +4,7 @@ subtitle: Recreate a Google Docs style version history flow on Postgres with a b
 author: rishi-raj-jain
 enableTableOfContents: true
 createdAt: '2026-05-04T00:00:00.000Z'
-updatedOn: '2026-09-24T17:56:34.189Z'
+updatedOn: '2026-11-24T10:56:47.700Z'
 ---
 
 If you have used Google Docs version history, you know you can jump to an older version, compare it to what you have now, and roll back without losing the thread of what changed. Relational databases usually give you one live schema and one head revision, unless you add your own audit tables or event sourcing.
@@ -162,7 +162,11 @@ The [reference demo](#demo) uses a line-based diff in the UI (baseline versus cu
 
 ## Restore production to a snapshot
 
-Restore is where branching does something hand-rolled revision tables can't. The Neon [branch restore API](/docs/reference/api/branches/restore-project-branch) updates a **target** branch (typically your default branch) so its state reflects a **source** snapshot branch. The `preserve_under_name` field saves the previous head as a new backup branch. It's required here because your production branch has child branches (the snapshots), and those children move to the backup branch. Backup branches created by restoring a root branch from another branch can't be deleted, so each restore adds a branch to your project. See [Branch restore](/docs/postgres/backup-restore/branch-restore) for the full rules.
+Restore is where branching does something hand-rolled revision tables can't. The Neon [branch restore API](/docs/reference/api/branches/restore-project-branch) updates a **target** branch (typically your default branch) so its state reflects a **source** snapshot branch. The `preserve_under_name` field saves the previous head as a new backup branch. It's required here because your production branch has child branches (the snapshots), and those children move to the backup branch. The backup branch becomes a root branch, and while it has child branches you can't delete it, so each restore adds a branch to your project. See [Branch restore](/docs/postgres/backup-restore/branch-restore) for the full rules.
+
+<Admonition type="warning" title="Restoring from a branch makes production a child branch">
+When you restore your production branch from a snapshot branch, it becomes a child of that branch. [Snapshots and backup schedules](/docs/guides/backup-restore) are only available on root branches, so your production branch can no longer use them. If you rely on them, save versions as [snapshots](/docs/guides/backup-restore) instead of branches, and roll back with the [snapshot restore API](/docs/reference/api/snapshots/restore-snapshot) and `finalize_restore: true`. Your production branch stays a root branch and keeps its connection string, though its branch ID changes. See [Database versioning with snapshots](/docs/ai/ai-database-versioning) for that pattern.
+</Admonition>
 
 <div align="center">
 

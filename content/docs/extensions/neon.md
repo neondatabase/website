@@ -12,7 +12,7 @@ summary: >-
   ANALYZE` with the `FILECACHE` and `PREFETCH` options provides per-query cache
   and prefetch metrics without requiring the extension.
 enableTableOfContents: true
-updatedOn: '2026-11-04T20:10:08.844Z'
+updatedOn: '2026-11-21T19:21:43.757Z'
 ---
 
 The `neon` extension provides functions and views designed to gather Neon-specific metrics.
@@ -34,7 +34,7 @@ On large fixed-size computes (18 CU and above), Neon sets `shared_buffers` to 75
 
 ## Monitoring compute cache usage
 
-You can monitor compute cache usage by installing the `neon` extension on your database and querying the [neon_stat_file_cache](#the-neonstatfilecache-view) view or [using EXPLAIN ANALYZE](#view-lfc-metrics-with-explain-analyze). Additionally, you can monitor the [Compute cache hit rate](/docs/introduction/monitoring-page#compute-cache-hit-rate) graph on the **Monitoring** page in the Neon console, or check it from the terminal with [`neon inspect db lfc-hit-rate`](/docs/cli/inspect#db-lfc-hit-rate) and [`neon inspect db working-set`](/docs/cli/inspect#db-working-set).
+You can monitor compute cache usage by installing the `neon` extension on your database and querying the [neon_stat_file_cache](#the-neonstatfilecache-view) view or [using EXPLAIN ANALYZE](#view-compute-cache-metrics-with-explain-analyze). Additionally, you can monitor the [Compute cache hit rate](/docs/introduction/monitoring-page#compute-cache-hit-rate) graph on the **Monitoring** page in the Neon console, or check it from the terminal with [`neon inspect db lfc-hit-rate`](/docs/cli/inspect#db-lfc-hit-rate) and [`neon inspect db working-set`](/docs/cli/inspect#db-working-set).
 
 ## neon_stat_file_cache view
 
@@ -83,7 +83,7 @@ Compute cache statistics represent the lifetime of your compute, from the last t
 Remember that Postgres checks shared buffers first before it checks your compute cache. If you are only working with a small amount of data, queries may be served entirely from the shared buffers, resulting in no compute cache hits.
 </Admonition>
 
-## View compute cache metrics with EXPLAIN ANALYZE (#view-lfc-metrics-with-explain-analyze)
+## View compute cache metrics with EXPLAIN ANALYZE
 
 You can also use `EXPLAIN ANALYZE` with the `FILECACHE` and `PREFETCH` options to view compute cache hit and miss data, as well as prefetch statistics. Installing the `neon` extension is not required. For example, this query fetches data for a `SELECT COUNT(*)` query.
 

@@ -88,7 +88,7 @@ Storage limits depend on your Neon plan:
 
 If your database is small but your bill seems high, check these factors:
 
-- **Instant restore history:** Neon charges for point-in-time restore (PITR) storage only for branches you can point-in-time restore from: **root branches**. Child branches do not add to PITR storage charges. If you perform many data modifications on your root branch(es) with a 7-day history window, you'll accumulate 7 days of that billable history at $0.20/GB-month. See [Instant restore storage](#instant-restore-storage) for optimization strategies.
+- **Instant restore history:** Neon charges for point-in-time restore (PITR) storage only for **root branches**. Child branches do not add to PITR storage charges. If you perform many data modifications on your root branch(es) with a 7-day history window, you'll accumulate 7 days of that billable history at $0.20/GB-month. See [Instant restore storage](#instant-restore-storage) for optimization strategies.
 - **Unused branches:** If you created branches, performed write operations, and forgot about the branches, they could be contributing to your storage costs. Review and [delete](/docs/manage/branches#delete-a-branch) branches you no longer need.
 - **Table bloat:** Frequent updates and deletes can cause table bloat (dead tuples), which can make your data size larger than expected. See the [VACUUM FAQ](#how-does-running-vacuum-or-vacuum-full-affect-my-storage-costs) for details.
 
@@ -150,7 +150,7 @@ Storage is unlimited on paid plans (Launch and Scale). Neon applies quota-based 
 
 ## Instant restore storage
 
-Instant restore storage (PITR storage) is the change history retained for point-in-time recovery. Neon only charges for PITR storage on branches you can point-in-time restore from: **root branches**. You cannot point-in-time restore from child branches, so child branches do not add to this charge. Instant restore storage is billed at $0.20/GB-month on paid plans, separate from your data storage. The Free plan includes up to 1 GB of instant restore history at no charge.
+Instant restore storage (PITR storage) is the change history retained for point-in-time recovery. Neon only charges for PITR storage on **root branches**. Child branches do not add to this charge, even though you can also point-in-time restore them. Instant restore storage is billed at $0.20/GB-month on paid plans, separate from your data storage. The Free plan includes up to 1 GB of instant restore history at no charge.
 
 **Optimization strategies:**
 

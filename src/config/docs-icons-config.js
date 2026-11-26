@@ -231,6 +231,11 @@ const ICONS_CONFIG = {
     lightIconPath: '/images/technology-logos/fivetran.svg',
     darkIconPath: null,
   },
+  fly: {
+    name: 'fly',
+    lightIconPath: '/images/technology-logos/fly.svg',
+    darkIconPath: '/images/technology-logos/fly-dark.svg',
+  },
   flyway: {
     name: 'flyway',
     lightIconPath: '/images/technology-logos/flyway.svg',

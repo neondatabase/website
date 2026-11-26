@@ -13,7 +13,7 @@ redirectFrom:
   - /docs/extensions/pg_extensions
   - /docs/extensions/overview
   - /docs/postgresql/extensions
-updatedOn: '2026-11-20T19:23:34.905Z'
+updatedOn: '2026-11-21T12:16:53.676Z'
 ---
 
 Neon supports the Postgres extensions shown below. Extension versions may differ by Postgres version. A dash (`-`) indicates an extension is not yet supported for that version.
@@ -61,10 +61,10 @@ Neon supports the Postgres extensions shown below. Extension versions may differ
 | [pg_cron](/docs/extensions/pg_cron)                                                              |    1.6 |    1.6 |    1.6 |    1.6 |    1.6 |    1.6 | Prefer [scheduled Function Triggers](/docs/compute/functions/triggers/schedule); `pg_cron` runs only while the compute is active, so it needs [scale to zero](/docs/introduction/scale-to-zero) disabled.                                                                                                                                                                                                                                                     |
 | [pg_graphql](/docs/extensions/pg_graphql)                                                        | 1.5.11 | 1.5.11 | 1.5.11 | 1.5.11 | 1.5.12 |      - |                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
 | [pg_hashids](https://github.com/iCyberon/pg_hashids)                                             |  1.2.1 |  1.2.1 |  1.2.1 |  1.2.1 |  1.2.1 |  1.2.1 |                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
-| [pg_hint_plan](https://github.com/ossc-db/pg_hint_plan)                                          |  1.4.1 |  1.5.0 |  1.6.0 |  1.7.0 |  1.8.0 |  1.9.0 |                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
+| [pg_hint_plan](https://github.com/ossc-db/pg_hint_plan)                                          |  1.4.1 |    1.5 |  1.6.0 |  1.7.0 |  1.8.0 |  1.9.0 |                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
 | [pg_ivm](https://github.com/sraoss/pg_ivm)                                                       |    1.9 |    1.9 |    1.9 |    1.9 |   1.12 |      - | **Not available for new installs.** Existing databases that already installed `pg_ivm` are unaffected. On PG14–17, use `SELECT create_immv(...)` (function in `pg_catalog`). On PG18, use `SELECT pgivm.create_immv(...)` or add `pgivm` to your `search_path`. For new projects, use standard [materialized views](/postgresql/views/materialized-views).                                                                                                    |
 | [pg_jsonschema](https://github.com/supabase/pg_jsonschema)                                       |  0.3.3 |  0.3.3 |  0.3.3 |  0.3.3 |  0.3.4 |      - |                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
-| [pg_mooncake](/docs/extensions/pg_mooncake)                                                      |  0.1.3 |  0.1.3 |  0.1.3 |  0.1.3 |      - |      - | This extension is **experimental**. Using a separate, dedicated Neon project is recommended. Run `SET neon.allow_unstable_extensions='true';` before installing. See the [YouTube demo](https://youtu.be/QDNsxw_3ris?feature=shared&t=2048) and the [pg_mooncake documentation](https://pgmooncake.com/docs).                                                                                                                                                 |
+| [pg_mooncake](/docs/extensions/pg_mooncake)                                                      |  0.1.4 |  0.1.4 |  0.1.4 |  0.1.4 |      - |      - | This extension is **experimental**. Using a separate, dedicated Neon project is recommended. Run `SET neon.allow_unstable_extensions='true';` before installing. See the [YouTube demo](https://youtu.be/QDNsxw_3ris?feature=shared&t=2048) and the [pg_mooncake documentation](https://pgmooncake.com/docs).                                                                                                                                                 |
 | [pg_partman](https://github.com/pgpartman/pg_partman)                                            |  5.5.0 |  5.5.0 |  5.5.0 |  5.5.0 |  5.5.0 |      - |                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
 | [pg_prewarm](/docs/extensions/pg_prewarm)                                                        |    1.2 |    1.2 |    1.2 |    1.2 |    1.2 |    1.2 |                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
 | [pg_repack](/docs/extensions/pg_repack)                                                          |  1.5.2 |  1.5.2 |  1.5.2 |  1.5.2 |  1.5.2 |      - | Available only on paid Neon plans. To install `pg_repack`, it must first be enabled by Neon Support. [Open a support ticket](https://console.neon.tech/app/projects?modal=support) with your endpoint ID and database name to request it. After it's enabled, you'll need to restart your compute before running `CREATE EXTENSION pg_repack;` To use `pg_repack`, you will need to [install the pg_repack CLI](https://reorg.github.io/pg_repack/#download). |
@@ -88,7 +88,7 @@ Neon supports the Postgres extensions shown below. Extension versions may differ
 | [plcoffee](https://coffeescript.org/)                                                            | 3.1.10 | 3.1.10 | 3.1.10 |      - |      - |      - | **Deprecated.** Ships with plv8. See [The plv8 extension](/docs/extensions/plv8).                                                                                                                                                                                                                                                                                                                                                                             |
 | [plls](https://livescript.net/)                                                                  | 3.1.10 | 3.1.10 | 3.1.10 |      - |      - |      - | **Deprecated.** Ships with plv8. See [The plv8 extension](/docs/extensions/plv8).                                                                                                                                                                                                                                                                                                                                                                             |
 | [plpgsql](https://www.postgresql.org/docs/16/plpgsql.html)                                       |    1.0 |    1.0 |    1.0 |    1.0 |    1.0 |    1.0 | Pre-installed with Postgres.                                                                                                                                                                                                                                                                                                                                                                                                                                  |
-| [plpgsql_check](https://pgxn.org/dist/plpgsql_check/)                                            |  2.8.2 |  2.8.2 |  2.8.2 |  2.8.2 |  2.8.2 |   2.10 |                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
+| [plpgsql_check](https://pgxn.org/dist/plpgsql_check/)                                            |    2.8 |    2.8 |    2.8 |    2.8 |    2.8 |   2.10 |                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
 | [plv8](/docs/extensions/plv8)                                                                    | 3.1.10 | 3.1.10 | 3.1.10 |  3.2.3 |      - |      - | **Deprecated.** New installs are blocked for security reasons. See [The plv8 extension](/docs/extensions/plv8).                                                                                                                                                                                                                                                                                                                                               |
 | [postgis](/docs/extensions/postgis)                                                              | 3.3.10 | 3.3.10 | 3.3.10 |  3.5.7 |  3.6.4 |  3.7.0 |                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
 | [postgis_raster](https://postgis.net/docs/RT_reference.html)                                     | 3.3.10 | 3.3.10 | 3.3.10 |  3.5.7 |  3.6.4 |  3.7.0 |                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
@@ -136,7 +136,7 @@ SELECT * FROM pg_extension;
 You can update an extension to the latest version using `ALTER EXTENSION <extension_name> UPDATE TO <new_version>` syntax. For example:
 
 ```sql
-ALTER EXTENSION vector UPDATE TO '0.7.0';
+ALTER EXTENSION vector UPDATE TO '0.8.7';
 ```
 
 <Admonition type="important">
@@ -190,7 +190,7 @@ Some Postgres extensions require preloaded libraries but most do not. Lakebase P
 
 ```sql shouldWrap
 SHOW shared_preload_libraries;
-neon,pg_stat_statements,timescaledb,pg_cron,pg_partman_bgw,rag_bge_small_en_v15,rag_jina_reranker_v1_tiny_en
+neon,pg_stat_statements,timescaledb,pg_cron,pg_partman_bgw,rag_bge_small_en_v15,rag_jina_reranker_v1_tiny_en,lakebase_vector,lakebase_text
 ```
 
 ### Viewing available libraries
@@ -225,14 +225,14 @@ For attribute definitions, find the [List preloaded libraries](/docs/reference/a
       "description": "Enables scalable inserts and complex queries for time-series data.",
       "is_default": true,
       "is_experimental": false,
-      "version": "2.17.1"
+      "version": "2.24.0"
     },
     {
       "library_name": "pg_cron",
       "description": "pg_cron is a cron-like job scheduler for PostgreSQL.",
       "is_default": true,
       "is_experimental": false,
-      "version": "1.6.4"
+      "version": "1.6.7"
     },
     {
       "library_name": "pg_partman_bgw",
@@ -243,7 +243,7 @@ For attribute definitions, find the [List preloaded libraries](/docs/reference/a
     },
     {
       "library_name": "rag_bge_small_en_v15,rag_jina_reranker_v1_tiny_en",
-      "description": "Deprecated. Shared libraries for the pgrag extension. Not for new projects; see the pgrag extension docs.",
+      "description": "Shared libraries for pgrag extensions",
       "is_default": true,
       "is_experimental": true,
       "version": "0.0.0"
@@ -253,28 +253,14 @@ For attribute definitions, find the [List preloaded libraries](/docs/reference/a
       "description": "pgx_ulid is a PostgreSQL extension for ULID generation.",
       "is_default": false,
       "is_experimental": false,
-      "version": "0.2.0"
-    },
-    {
-      "library_name": "pg_mooncake",
-      "description": "Columnstore Table in Postgres",
-      "is_default": false,
-      "is_experimental": false,
-      "version": "0.1.1"
-    },
-    {
-      "library_name": "pg_search",
-      "description": "Unavailable. Full text search using BM25. Not for new projects; see Lakebase Search.",
-      "is_default": false,
-      "is_experimental": false,
-      "version": "0.15.12"
+      "version": "0.2.2"
     },
     {
       "library_name": "anon",
       "description": "Anonymization & Data Masking for PostgreSQL",
       "is_default": false,
       "is_experimental": false,
-      "version": "2.5.1"
+      "version": "2.4.1"
     },
     {
       "library_name": "lakebase_vector",

@@ -251,6 +251,33 @@ describe('GET /models', () => {
       expect(model.examples.map((e) => e.id)).toEqual(['ai-sdk', 'mastra', 'typescript', 'python']);
     });
 
+    it.each(['gemini-3-pro-image', 'gemini-3-1-flash-image'])(
+      'returns native image examples for %s, which returns the image itself',
+      async (id) => {
+        const res = await GET(request(`?model=${id}&use_case=image-generation`));
+        const { model } = await body(res);
+
+        expect(model.unsupported).toBeUndefined();
+        expect(model.capabilities.image_output).toBe(true);
+        expect(model.examples.map((e) => [e.id, e.endpoint])).toEqual([
+          ['ai-sdk', '/v1/chat/completions (via provider)'],
+          ['typescript', `/gemini/v1beta/models/${id}:generateContent`],
+          ['python', `/gemini/v1beta/models/${id}:generateContent`],
+          ['curl', '/v1/chat/completions'],
+        ]);
+        for (const example of model.examples) {
+          expect(example.files[0].content).not.toContain('image_generation');
+        }
+      }
+    );
+
+    it('does not mark tool-only image models as returning images themselves', async () => {
+      const res = await GET(request('?model=gpt-5-nano&use_case=image-generation'));
+      const { model } = await body(res);
+
+      expect(model.capabilities.image_output).toBe(false);
+    });
+
     it('carries the provider-executed tool in the Mastra tool examples', async () => {
       for (const useCase of ['image-generation', 'web-search']) {
         const res = await GET(request(`?model=gpt-5-nano&use_case=${useCase}`));

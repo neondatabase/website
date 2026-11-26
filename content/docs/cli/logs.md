@@ -3,18 +3,18 @@ title: 'Neon CLI command: logs'
 subtitle: Query the logs a branch's services emit
 summary: >-
   The Neon CLI `neon logs` command reads the logs a branch's services emit.
-  Today that covers Neon Functions and Object Storage; Postgres compute logs
-  are coming. Query records over a time
+  Today that covers Neon Functions, Object Storage, and Realtime; Postgres
+  compute logs are coming. Query records over a time
   window, filter by source, severity, or OpenTelemetry attributes, run raw
   LogQL, list which fields and values a branch reports, and call the branch's
   Loki-compatible read API. Logs are
   available in AWS US East (Ohio), US East (N. Virginia), Europe (Frankfurt),
   and Asia Pacific (Singapore).
 enableTableOfContents: true
-updatedOn: '2026-11-19T18:35:00.025Z'
+updatedOn: '2026-11-25T20:36:09.173Z'
 ---
 
-The `logs` command reads the logs a branch's services emit. Today that covers Neon Functions and Object Storage; Postgres compute logs are coming. Query records over a time window, filter by source, severity, or OpenTelemetry attribute, and list which fields and values a branch reports so you can build precise filters. For output in Loki's format, use [`neon logs loki`](#loki).
+The `logs` command reads the logs a branch's services emit. Today that covers Neon Functions, Object Storage, and Realtime; Postgres compute logs are coming. Query records over a time window, filter by source, severity, or OpenTelemetry attribute, and list which fields and values a branch reports so you can build precise filters. For output in Loki's format, use [`neon logs loki`](#loki).
 
 Logs are currently available in AWS US East (Ohio) (`aws-us-east-2`), AWS US East (N. Virginia) (`aws-us-east-1`), AWS Europe (Frankfurt) (`aws-eu-central-1`), and AWS Asia Pacific (Singapore) (`aws-ap-southeast-1`), so your project must be in one of these regions to use them. Support is expanding toward [all regions](/docs/introduction/regions).
 
@@ -34,7 +34,7 @@ Bound the window with `--since` (a duration like `30m` or `1h`, ending at `--end
 
 The structured content filters (`--source`, `--service-name`, `--scope-name`, `--severity-text`, `--body-contains`, and `--trace-id`) combine with each other. Passing `--logql` replaces all of them with a raw [LogQL](https://grafana.com/docs/loki/latest/query/) expression (stream selectors and line filters only); the window, `--limit`, `--sort-order`, and `--cursor` still apply.
 
-`--source` accepts `function`, `storage`, `pg_endpoint`, and `neon_auth`. Only `function` and `storage` return records today; `pg_endpoint` (Postgres compute) is accepted but comes back empty until Postgres logs ship. `--source neon_auth` fails with `neon_auth logs are not enabled for this project` until Neon Auth logs are enabled for the project, even when the other sources return logs.
+`--source` accepts `function`, `storage`, `pg_endpoint`, and `neon_auth`. Only `function` and `storage` return records today. Realtime records come back under `--source function`, with the service name `neon-function/neonrealtimesocket`. `pg_endpoint` (Postgres compute) is accepted but comes back empty until Postgres logs ship. `--source neon_auth` fails with `neon_auth logs are not enabled for this project` until Neon Auth logs are enabled for the project, even when the other sources return logs.
 
 Filter by severity with `--severity-text`, which matches the exact, case-sensitive value a record carries (for example `ERROR` or `INFO`, uppercase). Severities vary by source, so a filter can legitimately return nothing. Storage logs take their level from the HTTP status (`WARN` for 4xx, `ERROR` for 5xx, `INFO` otherwise), so `--source storage --severity-text ERROR` returns only server errors. Run `neon logs field-values severity_text` to see the values a branch actually reports before filtering. `--minimum-severity` (match a level and everything above it) is not supported by the branch log backend; use `--severity-text` for an exact match instead.
 

@@ -246,6 +246,10 @@ describe('ModelIndexClient', () => {
     expect(row('Image output model')).toHaveTextContent('$12');
     expect(row('Image output model')).toHaveTextContent('image $120');
     expect(row('New image model')).not.toHaveTextContent('image $');
+    expect(screen.getByRole('link', { name: 'image $120' })).toHaveAttribute(
+      'href',
+      '/docs/ai-gateway/models#image-output-pricing'
+    );
   });
 
   it('navigates to the model detail page when a row is clicked', () => {

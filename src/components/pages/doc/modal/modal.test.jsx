@@ -128,6 +128,8 @@ describe('docs agent-setup modal entry', () => {
       expect(sendGtagEvent).toHaveBeenCalledWith('Experiment Success', {
         experiment_id: 'docs-agent-setup-title',
         variant_id: 'neon-superpowers',
+        experiment_name: 'docs-agent-setup-title',
+        experiment_group_name: 'neon-superpowers',
         method: 'button',
       })
     );

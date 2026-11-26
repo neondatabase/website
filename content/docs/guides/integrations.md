@@ -46,6 +46,8 @@ updatedOn: '2026-11-25T12:35:23.705Z'
 
 <a href="/docs/guides/cloudflare-workers" title="Cloudflare Workers" description="Use Neon with Cloudflare Workers" icon="cloudflare"></a>
 
+<a href="/docs/guides/fly" title="Fly.io" description="Use Neon with Fly.io" icon="fly"></a>
+
 <a href="/docs/guides/heroku" title="Heroku" description="Deploy an app with Neon on Heroku" icon="heroku"></a>
 
 <a href="/docs/guides/koyeb" title="Koyeb" description="Use Neon with Koyeb" icon="koyeb"></a>

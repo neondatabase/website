@@ -3,8 +3,8 @@ title: The lakebase_text extension
 subtitle: BM25 full-text search for Lakebase Postgres
 summary: >-
   The lakebase_text extension adds the lakebase_bm25 index type to Lakebase Postgres
-  for BM25 full-text search. It requires no migration from PostgreSQL's built-in
-  full-text search — standard tsvector types and tsquery operators work unchanged.
+  for BM25 full-text search. It requires no migration from Postgres's built-in
+  full-text search. Standard tsvector types and tsquery operators work unchanged.
   Use this page to enable the extension, create a lakebase_bm25 index, query
   with the <@> operator and to_bm25query function, configure the default_limit
   and prefilter GUCs, set fallback parameters at the index level, and reference
@@ -12,16 +12,16 @@ summary: >-
 enableTableOfContents: true
 redirectFrom:
   - /docs/extensions/lakebase_text
-updatedOn: '2026-07-31T15:27:48.506Z'
+updatedOn: '2026-11-21T19:20:19.492Z'
 ---
 
-The `lakebase_text` extension adds a `lakebase_bm25` index type to Postgres for [BM25](https://en.wikipedia.org/wiki/Okapi_BM25) full-text search. It is a native upgrade to PostgreSQL's built-in full-text search: standard `tsvector` type and query operators work unchanged; only the index type changes.
+The `lakebase_text` extension adds a `lakebase_bm25` index type to Postgres for [BM25](https://en.wikipedia.org/wiki/Okapi_BM25) full-text search. It is a native upgrade to Postgres's built-in full-text search: standard `tsvector` type and query operators work unchanged; only the index type changes.
 
 See [Lakebase Search](/docs/ai/lakebase-search) for the architecture and the companion `lakebase_vector` extension.
 
 ## Why lakebase_text?
 
-PostgreSQL's built-in full-text search uses GIN indexes with `tsvector`. GIN works well for boolean filtering, but it has two limitations for search relevance:
+Postgres's built-in full-text search uses GIN indexes with `tsvector`. GIN works well for boolean filtering, but it has two limitations for search relevance:
 
 - **No BM25 ranking.** GIN uses `ts_rank`, which does not use global corpus statistics, so scores degrade as data grows. BM25 is more accurate, accounting for term frequency, document length, and corpus-wide statistics together.
 - **No top-K pushdown.** GIN must score all matching documents even when you only need the top 10. For large tables, this means significant unnecessary work on every query.
@@ -107,13 +107,13 @@ A `lakebase_bm25` index scan can omit any number of rows whose `<@>` value is ex
 
 BM25 statistics are computed at index build time and updated by VACUUM. For most workloads, regular VACUUM keeps scores accurate. After bulk-loading a large amount of new data, run VACUUM manually:
 
-```sql title="PostgreSQL"
+```sql filename="PostgreSQL"
 VACUUM documents;
 ```
 
 To maintain query and update performance, `VACUUM` must clean the index promptly. For a table dedicated to text search, Neon recommends setting `autovacuum_vacuum_insert_scale_factor` to `0` so the insert-triggered autovacuum threshold does not grow with the table:
 
-```sql title="PostgreSQL"
+```sql filename="PostgreSQL"
 ALTER TABLE documents SET (
   autovacuum_vacuum_insert_scale_factor = 0
 );
@@ -127,7 +127,7 @@ BM25 global statistics are not MVCC-versioned. If `VACUUM` updates the statistic
 
 ## Configure default_limit
 
-The `lakebase_bm25.default_limit` GUC controls how many results the index returns before PostgreSQL applies any `LIMIT` clause from your query. The default is `1000`.
+The `lakebase_bm25.default_limit` GUC controls how many results the index returns before Postgres applies any `LIMIT` clause from your query. The default is `1000`.
 
 ```sql
 -- Return at most 10 results from the index
@@ -168,7 +168,7 @@ GUCs take precedence over index storage parameters when both are set. To avoid h
 
 ## Prefilter
 
-In a filtered query, PostgreSQL applies `WHERE` conditions after the index scan returns results. If your filter eliminates many rows, the index may return far more results than your `LIMIT` requires.
+In a filtered query, Postgres applies `WHERE` conditions after the index scan returns results. If your filter eliminates many rows, the index may return far more results than your `LIMIT` requires.
 
 The `lakebase_bm25.prefilter` GUC enables the index to evaluate filter conditions before computing BM25 scores, pruning the search space early:
 
