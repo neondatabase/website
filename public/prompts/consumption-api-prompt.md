@@ -5,7 +5,7 @@ IMPORTANT: Use the correct API endpoint for usage-based plans, NOT the legacy en
 - Legacy plans: /api/v2/consumption_history/projects — do NOT use for usage-based plans
 
 Ask me what time period I want to query (see examples below), then generate a curl command with these placeholders that I'll replace when I run it:
-- $NEON_API_KEY — my API key (create at https://console.neon.tech/app/settings/api-keys)
+- $NEON_API_KEY — my API key. Create one at https://console.neon.tech/app/settings/api-keys
 - $ORG_ID — my organization ID (found in Organization Settings in the Neon Console)
 
 SECURITY: Do not enter your API key or organization ID in this chat. Replace the placeholders in the generated command when you run it yourself.

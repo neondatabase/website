@@ -7,7 +7,7 @@ summary: >-
   the credentials on a branch, reveal a credential's secrets, rotate its secrets
   in place, and revoke it.
 enableTableOfContents: true
-updatedOn: '2026-10-21T14:03:15.000Z'
+updatedOn: '2026-11-18T23:58:46.430Z'
 ---
 
 The `credentials` command manages scoped credentials on a branch. A credential grants an application or agent direct access to a branch's surfaces without an account API key. Each credential carries one or more scopes and, when issued, a pair of secrets: an `api_token` and an `s3_secret_access_key`.
@@ -87,7 +87,7 @@ With `--output json`, the secrets stay on the object so scripts can read them:
 
 ## neon credentials reveal (#reveal)
 
-Shows a credential's `api_token` and `s3_secret_access_key` again, looked up by `token_id`.
+Shows a credential's `api_token` and `s3_secret_access_key` again, looked up by `token_id`, together with its `branch_id`, `name`, and `scopes` from [`neon credentials list`](#list).
 
 <CliUsage command="credentials reveal" />
 
@@ -99,10 +99,35 @@ neon credentials reveal nak_live_0123456789abcdef0123456789abcdef --project-id s
 
 ```text filename="Output"
 Token ID  nak_live_0123456789abcdef0123456789abcdef
+Name      uploads
+Scopes    storage:read, storage:write
 api_token: <api_token>
 s3_secret_access_key: <s3_secret_access_key>
 WARNING: These are live secrets. Treat them like a password.
 ```
+
+With `--output json`, `branch_id` is the branch the credential was issued on, which can be an ancestor of `--branch`. Check it before you use the secret in an environment that must stay isolated:
+
+<details>
+<summary>Show output</summary>
+
+```json
+{
+  "token_id": "nak_live_0123456789abcdef0123456789abcdef",
+  "token_id_short": "0123456789ab",
+  "name": "uploads",
+  "scopes": ["storage:read", "storage:write"],
+  "branch_id": "br-morning-frost-a1b2c3d4",
+  "principal_type": "user",
+  "created_at": "2026-09-10T20:02:49Z",
+  "api_token": "<api_token>",
+  "s3_secret_access_key": "<s3_secret_access_key>"
+}
+```
+
+</details>
+
+When `--branch` does not list the credential, the command still prints its secrets, leaves out `branch_id`, `name`, and `scopes`, and prints a warning.
 
 ## neon credentials rotate (#rotate)
 

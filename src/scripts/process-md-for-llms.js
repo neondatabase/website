@@ -24,6 +24,7 @@
  * - <details>/<summary> -> preserved as HTML
  * - CTA -> blockquote with title, description, command, link
  * - CopyPrompt -> description text (buttons/icons omitted)
+ * - PromptBlock -> lead-in sentence + the prompt file in a fenced block
  * - RequestForm -> title + description (form controls omitted)
  * - NeedHelp, Comment -> removed (UI-only)
  *
@@ -293,7 +294,9 @@ function resolveAuthorSlug(slug) {
  */
 function getMarkdownOptions() {
   return {
-    extensions: [mdxToMarkdown(), gfmToMarkdown()],
+    // Aligned pipes pad every cell to its column's widest cell, which can double the size
+    // of a table with long cells and push a page past agents' fetch limits.
+    extensions: [mdxToMarkdown(), gfmToMarkdown({ tablePipeAlign: false })],
     bullet: '-',
     listItemIndent: 'one', // "- item" not "-   item"
     emphasis: '_', // Use underscores for emphasis (matches source/Python)
@@ -1663,6 +1666,28 @@ const componentHandlers = {
    */
   AgentPrompt(node) {
     return componentHandlers.CopyPrompt.call(this, node);
+  },
+
+  /**
+   * PromptBlock -> the prompt file in a fenced block, after a sentence telling an
+   * agent that followed the prompt here not to run it again.
+   */
+  PromptBlock(node) {
+    const src = getAttr(node, 'src');
+    const prompt = fsSync.readFileSync(path.join(projectRoot, 'public', src), 'utf-8').trim();
+    return [
+      {
+        type: 'paragraph',
+        children: [
+          {
+            type: 'text',
+            value:
+              'This prompt is for pasting into an AI coding agent. If it brought you to this page, you are already following it, so continue with the rest of the page.',
+          },
+        ],
+      },
+      { type: 'code', lang: 'text', value: prompt },
+    ];
   },
 
   /**

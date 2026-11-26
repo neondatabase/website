@@ -18,7 +18,7 @@ The `ip-allow` command lists, adds, removes, and resets the IP allowlist for you
 
 <CliSubcommands command="ip-allow" />
 
-The `--project-id` option is required only if your Neon account has more than one project and no project is set in your [context file](/docs/cli/link).
+The `--project-id` option is required only if your Neon account has more than one project and no project is set in your [context file](/docs/cli/link). If you belong to more than one organization, pass `--project-id`, or pass `--org-id` to use that organization's only project.
 
 ## neon ip-allow list (#list)
 

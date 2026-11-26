@@ -11,7 +11,7 @@ summary: >-
   LEVEL SECURITY` to expose the leak, then shows how `crudPolicy` restores
   isolation without touching application code.
 enableTableOfContents: true
-updatedOn: '2026-07-15T00:08:00.682Z'
+updatedOn: '2026-11-10T13:23:46.000Z'
 redirectFrom:
   - /docs/guides/neon-rls-authorize-tutorial
   - /docs/guides/neon-authorize-tutorial

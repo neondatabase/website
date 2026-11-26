@@ -1,11 +1,12 @@
 // Runnable code examples per model and use case.
 //
 // Support on the AI Gateway is not uniform per model, and the differences are not derivable
-// from the model id. Three independent facts decide which examples are correct:
+// from the model id. Four independent facts decide which examples are correct:
 //
 //   1. whether /v1/chat/completions returns a spec-conforming body,
 //   2. whether the model has a provider-native dialect,
-//   3. whether /openai/v1/responses is served for it (image generation and web search).
+//   3. whether /openai/v1/responses is served for it (image generation and web search),
+//   4. whether the model returns images itself (`imageOutput`, the Gemini image models).
 //
 // Every branch below keys off a measured value in ./capabilities.json, never off a family name.
 
@@ -13,10 +14,13 @@ const ENV = ['NEON_AI_GATEWAY_BASE_URL', 'NEON_AI_GATEWAY_TOKEN'];
 const AI_SDK_DEPS = ['ai', '@neon/ai-sdk-provider'];
 // experimental_decide needs ai 7.0.133 or later, so pin the major.
 const DECISION_AI_SDK_DEPS = ['ai@7', '@neon/ai-sdk-provider'];
+// Earlier provider versions drop the image and return empty `files` without an error.
+const NATIVE_IMAGE_AI_SDK_DEPS = ['ai', '@neon/ai-sdk-provider@^1.6.0'];
 
 const CHAT_PROMPT = 'Explain Serverless Postgres.';
 const SEARCH_PROMPT = 'What is the latest stable Postgres release?';
 const IMAGE_PROMPT = 'A red apple on a wooden table.';
+const NATIVE_IMAGE_PROMPT = 'Generate an image of a red apple on a wooden table.';
 const EMBEDDING_INPUT = 'Explain Serverless Postgres.';
 const DECISION_STATE = 'I was charged twice this month.';
 const DECISION_QUESTION = 'Is the user asking about billing?';
@@ -180,7 +184,7 @@ print(resp.choices[0].message.content)
   });
 
 // cURL swaps to a provider-native dialect only when the unified route is the broken one.
-// A native dialect on its own is not a reason to leave `/v1/chat/completions` — the eight
+// A native dialect on its own is not a reason to leave `/v1/chat/completions` — the
 // conforming Claude models are served at /anthropic/v1/messages too, and showing that
 // instead would trade a portable snippet for a vendor-specific one to fix nothing.
 const curlChat = (model, nativeDialect, responsesOnly, arrayContent) => {
@@ -378,11 +382,44 @@ print(response.output_text)
 
 /* ---------------------------------------------------------------- embeddings */
 
-// No AI SDK or Mastra variant: neither has an EmbeddingModelV2 implementation for the Neon
-// provider yet. `encoding_format: "float"` is not a style choice — the gateway always returns a
-// float array regardless of what is requested, and the OpenAI SDKs default that field to
-// "base64" and decode accordingly, silently producing a corrupt vector if it is left out.
+// `encoding_format: "float"` in the OpenAI SDK and cURL variants is not a style choice — the
+// gateway always returns a float array regardless of what is requested, and the OpenAI SDKs
+// default that field to "base64" and decode accordingly, silently producing a corrupt vector if it
+// is left out. Mastra resolves the neon/<model> string for embeddings from @mastra/core 1.83.0 on;
+// its router model is specification v2, so it pairs with embedV2 rather than the AI SDK's embed.
 const embeddingExamples = (model) => [
+  tsExample({
+    id: 'ai-sdk',
+    title: 'AI SDK',
+    dependencies: AI_SDK_DEPS,
+    endpoint: '/v1/embeddings (via provider)',
+    content: `import { embed } from "ai";
+import { neon } from "@neon/ai-sdk-provider";
+
+const { embedding, usage } = await embed({
+  model: neon.embeddingModel("${model}"),
+  value: "${EMBEDDING_INPUT}",
+});
+
+console.log(embedding.length, usage);
+`,
+  }),
+  tsExample({
+    id: 'mastra',
+    title: 'Mastra',
+    dependencies: ['@mastra/core'],
+    endpoint: '/v1/embeddings',
+    content: `import { ModelRouterEmbeddingModel } from "@mastra/core/llm";
+import { embedV2 } from "@mastra/core/vector";
+
+const { embedding, usage } = await embedV2({
+  model: new ModelRouterEmbeddingModel("neon/${model}"),
+  value: "${EMBEDDING_INPUT}",
+});
+
+console.log(embedding.length, usage);
+`,
+  }),
   tsExample({
     id: 'typescript',
     title: 'TypeScript',
@@ -558,6 +595,129 @@ print(sizes)
   }),
 ];
 
+// Models that return the image themselves (the Gemini image models). The image comes back as an
+// `image_url` block in chat completions `content`, or as an `inlineData` part on the Gemini route.
+// gemini-3-pro-image also returns draft images while it thinks; those parts set `thought` and are
+// not billed, so the Gemini variants skip them. The OpenAI SDK variants are left out: the SDKs
+// type `content` as a string, and this content is always an array.
+const nativeImageExamples = (model) => {
+  const genaiPath = `/gemini/v1beta/models/${model}:generateContent`;
+  return [
+    tsExample({
+      id: 'ai-sdk',
+      title: 'AI SDK',
+      dependencies: NATIVE_IMAGE_AI_SDK_DEPS,
+      endpoint: '/v1/chat/completions (via provider)',
+      content: `import { writeFile } from "node:fs/promises";
+import { generateText } from "ai";
+import { neon } from "@neon/ai-sdk-provider";
+
+const { files, usage } = await generateText({
+  model: neon("${model}"),
+  prompt: "${NATIVE_IMAGE_PROMPT}",
+});
+
+for (const [i, file] of files.entries()) {
+  await writeFile(\`image-\${i}.png\`, file.uint8Array);
+}
+console.log(files.length, usage.raw);
+`,
+    }),
+    tsExample({
+      id: 'typescript',
+      title: 'TypeScript',
+      dependencies: ['@google/genai'],
+      endpoint: genaiPath,
+      content: `import { writeFile } from "node:fs/promises";
+import { GoogleGenAI } from "@google/genai";
+
+const client = new GoogleGenAI({
+  apiKey: "placeholder",
+  httpOptions: {
+    apiVersion: "v1beta",
+    baseUrl: \`\${process.env.NEON_AI_GATEWAY_BASE_URL}/gemini\`,
+    headers: { Authorization: \`Bearer \${process.env.NEON_AI_GATEWAY_TOKEN}\` },
+  },
+});
+
+const response = await client.models.generateContent({
+  model: "${model}",
+  contents: "${NATIVE_IMAGE_PROMPT}",
+  config: { responseModalities: ["TEXT", "IMAGE"], imageConfig: { imageSize: "1K" } },
+});
+
+const images = (response.candidates?.[0]?.content?.parts ?? []).flatMap((part) =>
+  part.inlineData?.data && !part.thought ? [part.inlineData.data] : [],
+);
+for (const [i, data] of images.entries()) {
+  await writeFile(\`image-\${i}.png\`, Buffer.from(data, "base64"));
+}
+console.log(images.length, response.usageMetadata);
+`,
+    }),
+    example({
+      id: 'python',
+      title: 'Python',
+      language: 'python',
+      dependencies: ['google-genai'],
+      endpoint: genaiPath,
+      path: 'main.py',
+      content: `import os
+from google import genai
+from google.genai import types
+
+client = genai.Client(
+    api_key="placeholder",
+    http_options=types.HttpOptions(
+        api_version="v1beta",
+        base_url=f"{os.environ['NEON_AI_GATEWAY_BASE_URL']}/gemini",
+        headers={"Authorization": f"Bearer {os.environ['NEON_AI_GATEWAY_TOKEN']}"},
+    ),
+)
+
+response = client.models.generate_content(
+    model="${model}",
+    contents="${NATIVE_IMAGE_PROMPT}",
+    config=types.GenerateContentConfig(
+        response_modalities=["TEXT", "IMAGE"],
+        image_config=types.ImageConfig(image_size="1K"),
+    ),
+)
+
+images = [
+    part.inline_data.data
+    for part in response.candidates[0].content.parts
+    if part.inline_data and not part.thought
+]
+for i, data in enumerate(images):
+    with open(f"image-{i}.png", "wb") as f:
+        f.write(data)
+print(len(images), response.usage_metadata)
+`,
+    }),
+    shExample({
+      id: 'curl',
+      title: 'cURL',
+      endpoint: '/v1/chat/completions',
+      content: `set -euo pipefail
+
+curl -sS --fail-with-body "\${NEON_AI_GATEWAY_BASE_URL}/v1/chat/completions" \\
+  -H "Authorization: Bearer \${NEON_AI_GATEWAY_TOKEN}" \\
+  -H "Content-Type: application/json" \\
+  -d '{
+    "model": "${model}",
+    "messages": [{"role": "user", "content": "${NATIVE_IMAGE_PROMPT}"}]
+  }' \\
+  -o response.json
+
+jq -er '.choices[0].message.content[] | select(.type == "image_url") | .image_url.url' response.json \\
+  | sed 's/^data:image\\/[a-z]*;base64,//' \\
+  | base64 --decode > image.png
+`,
+    }),
+  ];
+};
+
 /* ------------------------------------------------------------ systemone */
 
 // System One decision models are served only on /typesafe/v1/systemone. The TypeSafe SDKs take
@@ -684,6 +844,7 @@ export function buildExamples(modelId, useCase, caps) {
   }
 
   if (useCase === 'image-generation') {
+    if (caps.imageOutput) return { examples: nativeImageExamples(modelId) };
     return caps.imageGeneration
       ? { examples: imageExamples(modelId) }
       : {

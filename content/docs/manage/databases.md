@@ -9,7 +9,7 @@ summary: >-
   ALTER TABLE ... OWNER TO or REASSIGN OWNED.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2026-10-03T12:43:38.865Z'
+updatedOn: '2026-11-03T00:39:27.000Z'
 ---
 
 A database is a container for SQL objects such as schemas, tables, views, functions, and indexes. In the [Neon object model](/docs/concepts/the-object-model), a database exists within a branch of a project. There is a limit of 500 databases per branch.

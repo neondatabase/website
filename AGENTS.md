@@ -88,6 +88,10 @@ For markdown changes in `content/`, no manual step is needed. The pre-commit hoo
 
 The pre-push hook runs `npm run test:unit:run` automatically. If unit tests fail, the push is aborted.
 
+The hooks live in `.husky/`, and `npm install` points git at them. Git worktrees use the same setting, so each worktree runs its own branch's hooks. A new worktree has no `node_modules`, so run `npm ci --prefer-offline` in it before the first commit. Without dependencies, the hooks stop the commit and say so. Set `HUSKY=0` to skip the hooks.
+
+A CI check (`npm run check:updated-on`) adds a warning to a PR, without failing it, when a changed page in `content/{docs,guides,postgresql,branching,faqs}` kept its old `updatedOn`, which happens after a GitHub web edit or a commit that skipped the hooks. To fix it, run `npm run stamp:updated-on -- <files>` and commit the result.
+
 ## Environment Setup
 
 Copy `.env.example` to `.env` and configure. See internal Notion page for values.
@@ -202,59 +206,14 @@ Tags (`new`, `beta`, etc.) set in frontmatter must also be added to the correspo
 
 ## Writing Style
 
-The voice should sound like one human being explaining something to another — approachable and professional, not stiff or overly formal.
+The canonical voice and mechanical rules live in one place: `content/docs/community/style-guide.md` (published at `/docs/community/style-guide`). Follow it when writing or editing docs. Do not restate these rules here or in other files; point to the style guide instead.
 
-### Voice and language
+It covers:
 
-- **Contractions:** Use them (it's, don't, you're). They make the tone more conversational. Don't overuse to the point of sacrificing clarity.
-- **Active voice:** Prefer it. "The software converts the file" not "The file is converted by the software."
-- **Simple language:** Choose simpler words. "Use the tool" not "Utilize the instrument."
-- **Concise sentences:** Keep them short. Don't pad.
-- **Address the reader:** Use "you" but don't start every sentence with it.
-- **Consistent terminology:** Pick one term per concept and stick to it. Don't mix "dashboard" and "control panel."
-- **US English:** Use US spelling and grammar throughout.
-- **No emojis or exclamation marks** in documentation.
-- **No em dashes (—):** Restructure the sentence instead.
+- **Voice:** plain, developer-first prose. Contractions, second-person "you", active voice, brief sentences (about 25 words), US English, no emojis or exclamation marks, no filler or hedging, no AI-tell phrasing.
+- **Mechanical rules:** sentence-case page titles and headings, no em dashes (—), consistent terminology, Postgres vs PostgreSQL, product-name casing (PostgreSQL, GitHub, npm, Vercel), fake example data only, and connection string format (`postgresql://`, not `postgres://`).
 
-### Capitalization
-
-- Use lowercase wherever possible.
-- Page titles: sentence case ("Create your first project", not "Create Your First Project").
-- Product names: follow official capitalization (PostgreSQL, GitHub, npm, Vercel).
-- UI text: match the interface exactly.
-- Feature names: lowercase by default.
-- Methods/methodologies: capitalize (Continuous Integration, Continuous Deployment).
-
-### Links
-
-Link to the source instead of repeating information. Explain why the linked content matters in context.
-
-### Fake user information
-
-Never use real user data in examples.
-
-- Emails: use `@example.com` or `@domain.com`
-- Usernames: `example_username`, Zhang Kai, Alex Lopez, or Dana Smith
-- Passwords: `AbC123dEf`
-- Database names: `dbname`
-
-### Connection strings
-
-Standard format:
-
-```text
-postgresql://[user]:[password]@[neon_hostname]/[dbname]
-```
-
-Example with realistic values:
-
-```text
-postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require&channel_binding=require
-```
-
-### Commands, parameters, filenames
-
-Enclose in backticks: `neon projects list`, `git clone`, `postgresql://...`
+The full terminology system (preferred terms, terms to avoid, product and feature names) lives in `.claude/neon-terminology.md`, which the style guide references as its terminology data source.
 
 ## Code Blocks
 
@@ -602,6 +561,7 @@ Use `/simple-content` for edits to existing pages, shorter additions, or when yo
 - Do not modify `src/` components, CSS, or site structure without explicit instruction; a web team actively maintains the frontend
 - Do not modify `node_modules/` or generated files
 - When you add a route handler (`route.js`) that serves a file like JSON or YAML instead of a page, add its path to the route handler list in `exclude` in `next-sitemap.config.js` so it stays out of sitemap.xml
+- When client-side code fetches a `.md` file from the site (prompt text from `/prompts/`, a page's markdown, a skill file), pass `{ headers: NON_AGENT_FETCH_HEADERS }` from `src/constants/llm-analytics.js`. The proxy counts every `.md` request as an agent view, so without the header each human page view also records a fake agent view. Links to `.md` files use a plain `<a>`, not `<Link>`, so they aren't pre-loaded.
 - Do not run `npm run fix`, `npm run fix:all`, or `npm run lint:md` during normal workflows. For JS changes, run `npm run fix:js`. Markdown in `content/` is auto-formatted and `updatedOn` is auto-stamped by the pre-commit hook on staged files. No manual step needed at commit time. To manually reformat markdown (prettier only), run `npm run fix:md`.
 - The codebase uses both `pages/` and `app/` directory (migration in progress)
 - Images are optimized via Next.js Image component
@@ -617,3 +577,10 @@ This version has breaking changes — APIs, conventions, and file structure may 
 This block is written and re-added by `next dev` — verify at `node_modules/next/dist/server/lib/generate-agent-files.js`. Removing it from a diff only re-creates the uncommitted change; committing it with your work keeps the tree clean.
 
 <!-- END:nextjs-agent-rules -->
+
+<!-- copybook:start -->
+
+## Copybook
+
+The code snippets, shell commands, and coding-agent prompts in this product's UI are Copybook definitions, configured in `copybook.config.mjs`. Before changing one, run `npx copybook status --json`. After changing one, run `npx copybook snapshot` and `npx copybook check`, and commit the snapshots with the code. Markdown prompts from the config's `markdown` sources are their own snapshots, so editing one needs no snapshot. The Copybook skill in `.agents/skills/copybook` and the `copybook` MCP server have the details. Docs for agents: https://copybook.dev/llms.txt
+<!-- copybook:end -->

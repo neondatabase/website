@@ -7,7 +7,7 @@ page_description: >-
   buckets.
 prev_url: index.html
 ogImage: /postgresqltutorial/sales_stats-table.png
-updatedOn: '2026-06-03T13:01:21.685Z'
+updatedOn: '2026-08-17T11:12:49.000Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL LEAD Function

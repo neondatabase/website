@@ -12,7 +12,7 @@ summary: >-
   open-source regional latency dashboard for comparing connection methods across
   AWS regions.
 enableTableOfContents: true
-updatedOn: '2026-11-04T20:10:08.844Z'
+updatedOn: '2026-11-10T13:04:03.000Z'
 ---
 
 Benchmarking database query latency is inherently complex, requiring careful consideration of numerous variables and testing methodologies. Neon's serverless Postgres environment adds additional layers to this complexity due to compute auto-suspension, connection protocol differences, and geographic distribution. This guide provides detailed methodologies for separating cold-start costs from operational latency, selecting optimal connection types, and designing tests that accurately reflect production conditions.

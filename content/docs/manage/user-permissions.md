@@ -10,7 +10,7 @@ summary: >-
 enableTableOfContents: true
 redirectFrom:
   - /docs/manage/user-permissions-preview
-updatedOn: '2026-07-29T13:53:54.324Z'
+updatedOn: '2026-11-21T12:20:55.628Z'
 ---
 
 In Neon, access works in two layers. Your **organization role** sets a baseline level of access across every project in the org, and **per-project permissions** grant additional access on individual projects. This page explains how the two layers combine and what each role and permission lets you do.
@@ -118,7 +118,7 @@ To grant one, see [Assign project access](#assign-project-access). The following
 | Upload or delete objects, create private buckets, and delete buckets                      |   ❌   |   ✅   |  ✅   |
 | Create, reveal, rotate, or revoke Object Storage and AI Gateway credentials               |   ❌   |   ✅   |  ✅   |
 | Deploy, update, or delete Neon Functions and their triggers                               |   ❌   |   ✅   |  ✅   |
-| Enable, disable, or rotate Realtime, and copy its secret                                  |   ❌   |   ✅   |  ✅   |
+| Enable, disable, or rotate [Realtime](/docs/realtime/overview), and copy its secret       |   ❌   |   ✅   |  ✅   |
 | Create a public (`public_read`) Object Storage bucket                                     |   ❌   |   ❌   |  ✅   |
 | Register or delete a Neon Functions custom domain                                         |   ❌   |   ❌   |  ✅   |
 | Manage who can access the project                                                         |   ❌   |   ❌   |  ✅   |
@@ -145,7 +145,7 @@ When a user has both an organization-role default and an explicit grant, the hig
 
 ## Manage project access with the API
 
-You can manage project access programmatically with the [Neon API](/docs/reference/api). These calls require an [organization API key](/docs/manage/api-keys) with the Admin role. Roles are sent in the request as lowercase values (`viewer`, `editor`, `admin`) and returned in responses as uppercase permission levels (`VIEWER`, `EDITOR`, `ADMIN`). Response fields vary by endpoint; get a member's `member_id` from the [List project members](#list-project-members) response.
+You can manage project access programmatically with the [Neon API](/docs/reference/api). These calls need a user-backed credential: a [personal API key](/docs/manage/api-keys) or OAuth token for an organization member with Admin access to the project. Organization API keys get a `404` response with the message `Project permissions can only be managed by user-backed requests`. Send roles in requests as lowercase values (`viewer`, `editor`, `admin`). In responses, `org_role` and `project_role` are lowercase, and the permission fields (`org_default_project_permission`, `explicit_project_permission`, `effective_project_permission`) are uppercase (`VIEWER`, `EDITOR`, `ADMIN`). Response fields vary by endpoint; get a member's `member_id` from the [List project members](#list-project-members) response.
 
 The Neon CLI doesn't have a dedicated command for these operations yet. You can call the same routes with the [`neon api`](/docs/cli/api) passthrough command, for example `neon api /projects/{project_id}/members/{member_id}/role -X PUT -F role=editor`.
 

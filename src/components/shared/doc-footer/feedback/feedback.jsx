@@ -19,6 +19,8 @@ const Feedback = ({ slug }) => {
     if (!feedbackSentData?.includes(slug)) {
       setFeedbackSentData([...feedbackSentData, slug]);
       sendGtagEvent('page_feedback', {
+        text: isPositive ? 'Like' : 'Dislike',
+        tag_name: 'DocsFeedback',
         rate: isPositive ? 'like' : 'dislike',
       });
     }

@@ -50,7 +50,11 @@ describe('CompactCards prompt tile', () => {
       </CompactCards>
     );
 
-    await waitFor(() => expect(global.fetch).toHaveBeenCalledWith('/prompts/tile.md'));
+    await waitFor(() =>
+      expect(global.fetch).toHaveBeenCalledWith('/prompts/tile.md', {
+        headers: { Purpose: 'prefetch' },
+      })
+    );
 
     expect(screen.getByTestId('mark-claude')).toBeInTheDocument();
     expect(screen.getByTestId('mark-openai')).toBeInTheDocument();

@@ -9,7 +9,7 @@ summary: >-
   performance and understand what a database is doing without leaving the
   terminal.
 enableTableOfContents: true
-updatedOn: '2026-10-09T21:54:03.000Z'
+updatedOn: '2026-11-24T22:51:03.746Z'
 ---
 
 The `inspect` command runs a set of read-only diagnostic queries against a branch's Postgres and prints the results. Each query targets a common operational question, such as which tables are largest, which indexes go unused, what is holding locks, or how the cache is performing. Nothing is modified, so the command is safe to run against any branch.
@@ -101,7 +101,7 @@ No long-running queries in any database.
 
 ### neon inspect db stalled-queries (#db-stalled-queries)
 
-Active queries running longer than 30 seconds, with their parallel workers, what each one is waiting on, and any queries blocking them. It runs compute-wide. When nothing qualifies, it says so instead of printing an empty table:
+Active queries that have been running for at least 30 seconds, reported with their waits, blockers, parallel workers, and query text. Query IDs are included in `-o json` output. Where `long-running-queries` catches statements past a five-minute mark, this surfaces stalls sooner and shows what each backend is waiting on. Parallel workers are grouped with their leader process, and the `Blocking PIDs` column shows which backends are holding others up. It runs compute-wide. Run it during an incident to see what is running right now and what is blocking it. When nothing qualifies, it says so instead of printing an empty table:
 
 ```bash
 neon inspect db stalled-queries
@@ -123,14 +123,6 @@ neon inspect db locks
 No locks held in any database.
 ```
 
-### neon inspect db stalled-queries (#db-stalled-queries-2)
-
-Active queries that have been running for at least 30 seconds, reported with their waits, blockers, parallel workers, query IDs, and query text. Where `long-running-queries` catches statements past a five-minute mark, this surfaces stalls sooner and shows what each backend is waiting on. Parallel workers are grouped with their leader process, and the `Blocking Pids` column shows which backends are holding others up. Run it during an incident to see what is running right now and what is blocking it.
-
-```bash
-neon inspect db stalled-queries
-```
-
 ### neon inspect db outliers (#db-outliers)
 
 The top 25 queries by cumulative execution time (`Total Exec Time`), with each query's share of the total (`Prop Exec Time`) and how often it ran (`Ncalls`). This ranks by total time spent, so a cheap query that runs constantly can outrank an expensive one that runs rarely. Needs the [`pg_stat_statements`](/docs/extensions/pg_stat_statements) extension.
@@ -143,10 +135,10 @@ neon inspect db outliers
 <summary>Show output</summary>
 
 ```text
-Total Exec Time  Prop Exec Time  Ncalls  Query
-00:00:00.875831  57.0%           250     SELECT * FROM orders WHERE customer_id = $1
-00:00:00.439406  28.6%           400     SELECT * FROM customers WHERE email = $1
-00:00:00.220669  14.4%           15      SELECT status, count(*), sum(total_cents) FROM orders GROUP BY status
+Database  Total Exec Time  Prop Exec Time  Ncalls  Query
+neondb    00:00:02.01648   71.2%           250     SELECT * FROM orders WHERE customer_id = $1
+neondb    00:00:00.44487   15.7%           15      SELECT status, count(*), sum(total_cents) FROM orders GROUP BY status
+neondb    00:00:00.369074  13.0%           400     SELECT * FROM customers WHERE email = $1
 ```
 
 </details>
@@ -163,10 +155,10 @@ neon inspect db calls
 <summary>Show output</summary>
 
 ```text
-Ncalls  Total Exec Time  Prop Exec Time  Query
-400     00:00:00.439406  59.8%           SELECT * FROM customers WHERE email = $1
-250     00:00:00.875831  37.4%           SELECT * FROM orders WHERE customer_id = $1
-15      00:00:00.220669  2.2%            SELECT status, count(*), sum(total_cents) FROM orders GROUP BY status
+Database  Ncalls  Total Exec Time  Prop Exec Time  Query
+neondb    400     00:00:00.369074  60.2%           SELECT * FROM customers WHERE email = $1
+neondb    250     00:00:02.01648   37.6%           SELECT * FROM orders WHERE customer_id = $1
+neondb    15      00:00:00.44487   2.3%            SELECT status, count(*), sum(total_cents) FROM orders GROUP BY status
 ```
 
 </details>

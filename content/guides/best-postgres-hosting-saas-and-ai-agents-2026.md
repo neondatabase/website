@@ -5,7 +5,7 @@ author: rishi-raj-jain
 excludeFromBlog: true
 enableTableOfContents: true
 createdAt: '2026-10-30T00:00:00.000Z'
-updatedOn: '2026-10-30T16:33:22.082Z'
+updatedOn: '2026-11-18T09:35:46.608Z'
 ---
 
 A growing share of Postgres databases aren't long-running production apps. They're previews, experiments, and apps an AI agent built in a few minutes, and many of them become idle soon. AI agents now create [over 80% of the databases on Neon](https://www.databricks.com/company/newsroom/press-releases/databricks-agrees-acquire-neon-help-developers-deliver-ai-systems).
@@ -99,7 +99,7 @@ attachDatabasePool(pool);
 
 const files = new Files({ adapter: neonStorage({ bucket: 'reports' }) });
 
-export default {
+const handler = {
   async fetch(request: Request) {
     const { accountId } = await request.json();
     const { rows } = await pool.query('SELECT * FROM invoices WHERE account_id = $1', [accountId]);
@@ -116,6 +116,8 @@ export default {
     return Response.json({ key });
   },
 };
+
+export default handler;
 ```
 
 A Neon Function has 15 minutes to send its first byte, then keeps a response stream open as long as data flows, with 2,048 MiB of memory ([runtime limits](/docs/compute/functions/reference/runtime-limits)). That covers agents that chain many model and tool calls before they respond.

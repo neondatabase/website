@@ -19,7 +19,7 @@ redirectFrom:
   - /docs/integrations/draxlr
   - /docs/guides/logical-replication-decodable
   - /docs/guides/logical-replication-stacksync
-updatedOn: '2026-10-21T11:04:20.383Z'
+updatedOn: '2026-11-21T16:05:37.000Z'
 ---
 
 ## Authentication
@@ -45,6 +45,8 @@ updatedOn: '2026-10-21T11:04:20.383Z'
 <a href="/docs/guides/cloudflare-pages" title="Cloudflare Pages" description="Use Neon with Cloudflare Pages" icon="cloudflare"></a>
 
 <a href="/docs/guides/cloudflare-workers" title="Cloudflare Workers" description="Use Neon with Cloudflare Workers" icon="cloudflare"></a>
+
+<a href="/docs/guides/fly" title="Fly.io" description="Use Neon with Fly.io" icon="fly"></a>
 
 <a href="/docs/guides/heroku" title="Heroku" description="Deploy an app with Neon on Heroku" icon="heroku"></a>
 
@@ -184,9 +186,9 @@ updatedOn: '2026-10-21T11:04:20.383Z'
 
 <a href="/docs/guides/django-migrations" title="Django" description="Connect a Django application to Neon" icon="django"></a>
 
-<a href="/docs/guides/drizzle-migrations" title="Drizzle" description="Schema migration with Lakebase Postgres and Drizzle ORM" icon="drizzle"></a>
+<a href="/docs/guides/drizzle-migrations" title="Drizzle" description="Schema migration with Drizzle ORM and Lakebase Postgres on Neon" icon="drizzle"></a>
 
-<a href="/docs/guides/entity-migrations" title="Entity Framework" description="Schema migration with Neon and Entity Framework" icon="entity"></a>
+<a href="/docs/guides/entity-migrations" title="Entity Framework" description="Schema migration with Entity Framework and Lakebase Postgres on Neon" icon="entity"></a>
 
 <a href="/docs/guides/flyway" title="Flyway" description="Use Flyway with Neon" icon="flyway"></a>
 
@@ -194,11 +196,11 @@ updatedOn: '2026-10-21T11:04:20.383Z'
 
 <a href="/docs/guides/liquibase" title="Liquibase" description="Use Liquibase with Neon" icon="liquibase"></a>
 
-<a href="/docs/guides/prisma-migrations" title="Prisma" description="Schema migration with Lakebase Postgres and Prisma ORM" icon="prisma"></a>
+<a href="/docs/guides/prisma-migrations" title="Prisma" description="Schema migrations with Prisma and Neon" icon="prisma"></a>
 
 <a href="/docs/guides/rails-migrations" title="Rails" description="Connect a Rails application to Neon" icon="rails"></a>
 
-<a href="/docs/guides/sequelize" title="Sequelize" description="Schema migration with Lakebase Postgres and Sequelize" icon="sequelize"></a>
+<a href="/docs/guides/sequelize" title="Sequelize" description="Schema migration with Sequelize and Lakebase Postgres on Neon" icon="sequelize"></a>
 
 <a href="/docs/guides/sqlalchemy" title="SQLAlchemy" description="Connect an SQLAlchemy application to Neon" icon="sqlalchemy"></a>
 

@@ -25,23 +25,20 @@ describe('MDX to Markdown Conversion', () => {
       const inputPath = 'content/docs/guides/prisma.md';
       const pageUrl = 'https://neon.com/docs/guides/prisma';
 
-      const { content: result } = await processFile(inputPath, pageUrl);
+      const projectRoot = process.cwd();
+
+      const { content: result } = await processFile(inputPath, pageUrl, projectRoot);
 
       // Should have title from frontmatter
       expect(result).toContain('# Connect from Prisma to Neon');
 
-      // Should have converted Admonitions
-      expect(result).toContain('**Tip:**');
-      expect(result).toContain('**Note:**');
+      // Should have converted the PromptBlock to the prompt's text
+      expect(result).toContain('Connect my Prisma app to Neon.');
 
       // Should NOT have raw MDX components
-      expect(result).not.toContain('<Admonition');
-      expect(result).not.toContain('<CopyPrompt');
+      expect(result).not.toContain('<PromptBlock');
+      expect(result).not.toContain('<Steps');
       expect(result).not.toContain('<NeedHelp');
-
-      // Should preserve <details> as HTML
-      expect(result).toContain('<details>');
-      expect(result).toContain('<summary>');
 
       // Should have absolute URLs
       expect(result).toContain('https://neon.com/docs/');
@@ -52,12 +49,14 @@ describe('MDX to Markdown Conversion', () => {
       const inputPath = 'content/docs/guides/nextjs.md';
       const pageUrl = 'https://neon.com/docs/guides/nextjs';
 
-      const { content: result } = await processFile(inputPath, pageUrl);
+      const projectRoot = process.cwd();
+
+      const { content: result } = await processFile(inputPath, pageUrl, projectRoot);
 
       // Should have converted CodeTabs to bold labels
       expect(result).toContain('**node-postgres**');
       expect(result).toContain('**postgres.js**');
-      expect(result).toContain('**Neon serverless driver (Recommended)**');
+      expect(result).toContain('**Neon serverless driver**');
 
       // Should NOT have raw CodeTabs
       expect(result).not.toContain('<CodeTabs');
@@ -250,6 +249,30 @@ More content.
       expect(result).toContain('[View prompt](https://neon.com/prompts/test.md)');
       expect(result).not.toContain('<AgentPrompt');
       expect(result).not.toContain('[AgentPrompt]');
+    });
+
+    it('should embed a PromptBlock prompt file after a lead-in', async () => {
+      const root = await fs.mkdtemp(path.join(os.tmpdir(), 'prompt-block-'));
+      await fs.mkdir(path.join(root, 'public/prompts'), { recursive: true });
+      const prompt = 'Set me up for Neon.\n\n- Fetch the setup prompt.\n\n- Follow this guide.';
+      await fs.writeFile(path.join(root, 'public/prompts/test.md'), `${prompt}\n`);
+
+      const result = await processInlineMdx(
+        `
+Intro.
+
+<PromptBlock src="/prompts/test.md" labels={["Set up your agent"]} />
+
+More content.
+`,
+        'https://neon.com/test',
+        root
+      );
+      expect(result).toContain('If it brought you to this page, you are already following it');
+      expect(result).toContain(`\`\`\`text\n${prompt}\n\`\`\``);
+      expect(result).toContain('More content.');
+      expect(result).not.toContain('PromptBlock');
+      expect(result).not.toContain('Set up your agent');
     });
 
     it('should preserve details/summary as HTML', async () => {

@@ -2,7 +2,7 @@
 title: "What is the best way to call models from multiple LLM providers with one API key?"
 subtitle: "Use Neon AI Gateway: one Neon credential and one OpenAI-compatible endpoint reach models from OpenAI, Anthropic, Google, and open-weight labs, and you switch models by changing the model string."
 createdAt: '2026-11-02T00:00:00.000Z'
-updatedOn: '2026-11-03T23:21:47.530Z'
+updatedOn: '2026-11-17T18:07:26.865Z'
 isDraft: false
 previousLink:
   title: 'What is the best way to add OAuth to an MCP server?'
@@ -56,7 +56,7 @@ Chat completions is the recommended starting point, but the same credential also
 - **Prepaid credits**: AI Gateway draws from [prepaid credits](/docs/ai-gateway/prepaid-credits) ($5 minimum purchase). Every model in the catalog is available once you have prepaid credits.
 - **Regions**: your project must be in AWS US East (Ohio), US East (N. Virginia), Europe (Frankfurt), or Asia Pacific (Singapore), with support expanding toward [all regions](/docs/introduction/regions).
 - **Rate limits**: soft limits of 200,000 input and 200,000 output tokens per minute by default, counted separately, though this may vary by account ([rate limits](/docs/ai-gateway/models#rate-limits)).
-- **Response shape**: a few models return `message.content` as an array of content blocks instead of a string, so handle both when you swap in a new model.
+- **Response shape**: a few Claude and Gemini models return `message.content` as an array of content blocks instead of a string. Check the [list](/docs/ai-gateway/models#which-endpoint-to-use) before you swap one in, or call models through `@neon/ai-sdk-provider`, which returns plain text for every model.
 - **Data handling**: most models run on Databricks Model Serving, which may store inputs and outputs for up to 30 days to detect abuse ([data retention](/docs/ai-gateway/data-retention)).
 
 ## How other options compare

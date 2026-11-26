@@ -114,32 +114,58 @@ const Post = ({
 
   // Page actions row: Copy page (menu) · View as Markdown · Set up agent.
   // Text-only, left-aligned, with 1px dividers between items.
+  // A page with its own prompt (a <PromptBlock>) already gives the reader a prompt to copy, so
+  // skip the generic Set up agent button rather than offer two different prompts.
+  // content is an empty object on the changelog index, so check the type first.
+  const showAgentSetup = !(typeof content === 'string' && content.includes('<PromptBlock'));
+  // Hide the dividers once the row is too narrow to fit every action on one line. A divider is
+  // its own flex item, so when the row wraps it would be left dangling at the end of a line.
+  // Thresholds are the measured one-line widths: about 460px with all three actions and about
+  // 320px with two.
+  const hasAllActions = !hideCopyPage && Boolean(docMarkdownPath) && showAgentSetup;
   const actionsDivider = (
-    <span aria-hidden="true" className="h-4 w-px shrink-0 bg-gray-new-85 dark:bg-gray-new-20" />
+    <span
+      aria-hidden="true"
+      className={cn(
+        'h-4 w-px shrink-0 bg-gray-new-85 dark:bg-gray-new-20',
+        hasAllActions ? '@max-[464px]:hidden' : '@max-[324px]:hidden'
+      )}
+    />
   );
+  // The actions and the date are separate groups, so on narrow columns the date wraps to its
+  // own line (kept right-aligned by ml-auto) instead of sitting next to Set up agent.
   const pageActionsRow = (
-    <div className="mt-3.5 flex flex-wrap items-center gap-3.5">
-      {!hideCopyPage && (
-        <>
-          <DropdownMenu variant="inline" gitHubPath={gitHubPath} markdownPath={docMarkdownPath} />
-          {actionsDivider}
-        </>
-      )}
-      {docMarkdownPath && (
-        <>
-          {/* Plain <a>, not <Link>: the .md isn't a Next.js route, so <Link> only
+    <div className="@container mt-3.5 flex flex-wrap items-center gap-x-4 gap-y-2.5">
+      <div className="flex flex-wrap items-center gap-3.5">
+        {!hideCopyPage && (
+          <>
+            <DropdownMenu variant="inline" gitHubPath={gitHubPath} markdownPath={docMarkdownPath} />
+            {(docMarkdownPath || showAgentSetup) && actionsDivider}
+          </>
+        )}
+        {docMarkdownPath && (
+          <>
+            {/* Plain <a>, not <Link>: the .md isn't a Next.js route, so <Link> only
               adds a prefetch and an extra RSC fetch on click. */}
-          <a
-            className="flex items-center gap-[7px] text-sm leading-none text-gray-new-20 transition-colors duration-[120ms] ease-out hover:text-black-new dark:text-gray-new-94 dark:hover:text-white"
-            href={docMarkdownPath}
-          >
-            <MarkdownViewIcon />
-            View as Markdown
-          </a>
-          {actionsDivider}
-        </>
+            <a
+              className="flex items-center gap-[7px] text-sm leading-none text-gray-new-20 transition-colors duration-[120ms] ease-out hover:text-black-new dark:text-gray-new-94 dark:hover:text-white"
+              href={docMarkdownPath}
+            >
+              <MarkdownViewIcon />
+              View as Markdown
+            </a>
+            {showAgentSetup && actionsDivider}
+          </>
+        )}
+        {showAgentSetup && <AgentSetupButton agentPrompt={agentPrompt} />}
+      </div>
+      {updatedOn && (
+        <LastUpdatedDate
+          className="ml-auto text-gray-new-40 dark:text-gray-new-60"
+          updatedOn={updatedOn}
+          monthFormat="short"
+        />
       )}
-      <AgentSetupButton agentPrompt={agentPrompt} />
     </div>
   );
 
@@ -245,11 +271,7 @@ const Post = ({
             />
           </article>
         )}
-        <DocFooter
-          slug={currentSlug}
-          gitHubPath={gitHubPath}
-          updatedOn={isFaq || isChangelog ? null : updatedOn}
-        />
+        <DocFooter slug={currentSlug} gitHubPath={gitHubPath} />
 
         {!isChangelog && (
           <NavigationLinks

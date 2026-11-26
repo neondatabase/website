@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-administration/postgresql-database-indexes-table-size/
 ogImage: ''
-updatedOn: '2026-06-19T17:44:03.964Z'
+updatedOn: '2026-11-09T13:16:38.000Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL Copy Database Made Easy

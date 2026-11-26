@@ -36,6 +36,8 @@ import { LAB_ORDER, MODEL_CATALOG_NOTE, orgLabel } from './model-rows';
 
 const ASIDE_COLLISION_GAP = 24;
 
+const IMAGE_PRICING_HREF = '/docs/ai-gateway/models#image-output-pricing';
+
 const MODEL_TYPES = [
   { key: 'all', label: 'All' },
   { key: 'text', label: 'Text' },
@@ -727,6 +729,15 @@ const ModelIndexView = ({ rows, variant = 'docs', filters, setFilters }) => {
                     </td>
                     <td className="py-4! pl-4! text-left! font-mono text-[.8125rem]! text-gray-new-30 dark:text-gray-new-80">
                       {row.costOutputLabel}
+                      {row.costOutputImageLabel && (
+                        <Link
+                          href={IMAGE_PRICING_HREF}
+                          title="Image output pricing per image size"
+                          className="mt-1 block text-xs leading-tight whitespace-nowrap text-gray-new-40 underline decoration-dotted underline-offset-2 hover:text-gray-new-20 dark:text-gray-new-60 dark:hover:text-white"
+                        >
+                          <span className="font-sans">image</span> {row.costOutputImageLabel}
+                        </Link>
+                      )}
                     </td>
                     <td className="pr-4! text-left! text-[.8125rem]! whitespace-nowrap text-gray-new-40 dark:text-gray-new-60">
                       {row.openWeights ? 'Open weights' : '—'}

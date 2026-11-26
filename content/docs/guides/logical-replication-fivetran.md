@@ -10,7 +10,7 @@ summary: >-
   irreversible change, and Fivetran IPs must be added to Neon's IP Allow list.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2026-10-09T10:14:56.146Z'
+updatedOn: '2026-11-16T20:52:23.000Z'
 ---
 
 Neon's logical replication feature allows you to replicate data from your Lakebase Postgres database to external destinations.
@@ -59,10 +59,10 @@ It is recommended that you create a dedicated Postgres role for replicating data
 
 <TabItem>
 
-The following CLI command creates a role. To view the CLI documentation for this command, see [Neon CLI commands — roles](/docs/reference/api/branches/create-project-branch-role)
+The following CLI command creates a role. Replace `$PROJECT_ID` with your project ID. You can find it with `neon projects list`. To view the CLI documentation for this command, see [Neon CLI commands: roles](/docs/cli/roles)
 
 ```bash
-neon roles create --name replication_user
+neon roles create --name replication_user --project-id $PROJECT_ID
 ```
 
 </TabItem>
@@ -119,6 +119,8 @@ Granting `SELECT ON ALL TABLES IN SCHEMA` instead of naming the specific tables 
 
 Create the Postgres publication. Include all tables you want to replicate as part of the publication:
 
+Run this as the database owner, such as `neondb_owner`, not the replication role.
+
 ```sql
 CREATE PUBLICATION fivetran_pub FOR TABLE <tbl1, tbl2, tbl3>;
 ```
@@ -129,7 +131,7 @@ The publication name is customizable. Refer to the [Postgres docs](https://www.p
 
 Fivetran requires a dedicated replication slot. Only one source should be configured to use this replication slot.
 
-Fivetran uses the `pgoutput` plugin in Postgres for decoding WAL changes into a logical replication stream. To create a replication slot called `fivetran_slot` that uses the `pgoutput` plugin, run the following command on your database using your replication role:
+Fivetran uses the `pgoutput` plugin in Postgres for decoding WAL changes into a logical replication stream. To create a replication slot called `fivetran_pgoutput_slot` that uses the `pgoutput` plugin, run the following command on your database using your replication role:
 
 ```sql
 SELECT pg_create_logical_replication_slot('fivetran_pgoutput_slot', 'pgoutput');

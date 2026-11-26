@@ -99,7 +99,7 @@ const FRAMEWORKS = [
   { name: 'Hono', icon: 'hono', to: '/docs/guides/hono' },
   { name: 'SolidStart', icon: 'solidstart', to: '/docs/guides/solid-start' },
   { name: 'Reflex', icon: 'reflex', to: '/docs/guides/reflex' },
-  { name: 'JavaScript', icon: 'javascript', to: '/docs/guides/javascript' },
+  { name: 'JavaScript', icon: 'javascript', to: '/docs/guides/node' },
   { name: 'Symfony', icon: 'symfony', to: '/docs/guides/symfony' },
   { name: 'Quarkus', icon: 'quarkus', to: '/docs/guides/quarkus-jdbc' },
   { name: 'Micronaut', icon: 'micronaut', to: '/docs/guides/micronaut-kotlin' },

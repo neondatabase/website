@@ -4,7 +4,7 @@ subtitle: Automating schema changes with EF Core and Azure Pipelines in Lakebase
 author: bobbyiliev
 enableTableOfContents: true
 createdAt: '2025-01-18T00:00:00.000Z'
-updatedOn: '2026-09-24T17:56:34.189Z'
+updatedOn: '2026-11-18T16:41:34.386Z'
 ---
 
 [Entity Framework Core](https://learn.microsoft.com/en-us/ef/core/) provides a migration system for managing database schema changes in .NET applications. When combined with [Azure Pipelines](https://azure.microsoft.com/en-us/products/devops/pipelines#overview), you can apply database migrations to your Lakebase Postgres database automatically as part of a CI/CD pipeline.
@@ -118,7 +118,7 @@ Run the following command to apply the migration to your Neon database:
 dotnet ef database update
 ```
 
-To learn more, see [Schema migration with Lakebase Postgres and Entity Framework](/docs/guides/entity-migrations), which covers the migration process in more detail.
+To learn more, see [Schema migration with Entity Framework and Lakebase Postgres on Neon](/docs/guides/entity-migrations), which covers the migration process in more detail.
 
 At this point, your database schema is set up. Next, we'll automate this process using Azure Pipelines.
 

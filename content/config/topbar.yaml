@@ -1,4 +1,4 @@
-text: "See what's recently landed on the Neon backend: Object Storage, Functions, AI Gateway, and more"
+text: 'Build an MCP server for your app with a few prompts to your agent'
 link:
-  url: 'https://neon.com/blog/whats-new-with-the-neon-backend'
+  url: 'https://neon.com/blog/every-app-needs-an-mcp-server'
   target: '_blank'

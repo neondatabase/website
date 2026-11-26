@@ -12,14 +12,14 @@ summary: >-
   the Auth0 client and Next.js proxy, and Next.js server actions for inserting
   and deleting user data.
 enableTableOfContents: true
-updatedOn: '2026-09-16T19:45:35.340Z'
+updatedOn: '2026-11-16T20:40:03.000Z'
 ---
 
 <Admonition type="tip" title="Building on Neon?">
 Neon provides [Managed Better Auth](/docs/auth/overview), a managed authentication service built on Better Auth that stores users, sessions, and auth configuration directly in your Neon database. Auth state **branches with your data**, so preview and CI environments get isolated users and sessions.
 </Admonition>
 
-User authentication is an essential part of most web applications. Modern apps often require features like social login, multi-factor authentication, and secure user data management that complies with privacy regulations.
+Most web applications need user authentication. Users often expect social login and multi-factor authentication, and you need to protect personal data under privacy regulations.
 
 [Auth0](https://auth0.com/) is an authentication and authorization platform that provides these features out of the box. It offers SDKs for popular web frameworks, making it straightforward to integrate with your application backed by a Lakebase Postgres database.
 
@@ -206,6 +206,8 @@ This will create a `drizzle` folder at the project root with the migration files
 ```bash
 npx drizzle-kit push
 ```
+
+The config sets `strict: true`, so `drizzle-kit push` lists the changes and asks you to confirm before it runs them.
 
 The `user_messages` table will now be visible in the console.
 

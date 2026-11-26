@@ -11,7 +11,7 @@ summary: >-
   levels INFO, WARN, or ERROR, and are accessible via the Neon Console or the
   REST API.
 enableTableOfContents: true
-updatedOn: '2026-09-30T16:23:41.172Z'
+updatedOn: '2026-11-11T12:30:27.000Z'
 ---
 
 The Data API Advisors analyze your database schema and configuration to detect security and performance issues for tables and objects exposed by the [Data API](/docs/data-api/overview) feature. They run a set of checks against your database and report issues with severity levels and recommended fixes.

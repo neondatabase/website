@@ -1,6 +1,6 @@
 # Realtime SDK reference
 
-Build pipeline for the [TypeScript SDK reference](https://neon.com/docs/realtime/sdks/typescript). A vendored TypeDoc artifact generates seven shared-content partials, which the hand-written TypeScript page includes.
+Build pipeline for the [TypeScript SDK reference](https://neon.com/docs/realtime/sdks/typescript). A vendored TypeDoc artifact generates seven shared-content partials. Six hand-written module pages include them, with Drizzle and Drizzle client sharing one page, and the TypeScript page is an overview that links to them.
 
 ## What is generated and what is hand-written
 
@@ -10,8 +10,11 @@ Build pipeline for the [TypeScript SDK reference](https://neon.com/docs/realtime
 | `vendor/realtime/sdk-docs.json`                                                           | update script | No           |
 | [`config/realtime-sdk.json`](../config/realtime-sdk.json)                                 | humans        | Yes          |
 | [`content/docs/realtime/sdks/typescript.md`](../content/docs/realtime/sdks/typescript.md) | docs team     | Yes          |
+| `content/docs/realtime/sdks/typescript/<page>.md` (6)                                     | docs team     | Yes          |
 
-The partials are `backend`, `client`, `react`, `tanstack-db`, `drizzle`, `drizzle-client` and `kysely`. They have no frontmatter, banner, `h1` or `h2`. The TypeScript page owns its frontmatter, prose, module sections and includes, so a prose edit there needs no regeneration. Generated signatures and summaries come from the SDK's TSDoc comments, so revise those upstream.
+The partials are `backend`, `client`, `react`, `tanstack-db`, `drizzle`, `drizzle-client` and `kysely`. They have no frontmatter, banner, `h1` or `h2`. The module page with the same slug owns its frontmatter, prose and the include, so a prose edit there needs no regeneration. The exception is `drizzle-client`, which the `drizzle` page includes after the `drizzle` partial (`MODULE_PAGE_OVERRIDES` in the generator), because both are short. Generated signatures and summaries come from the SDK's TSDoc comments, so revise those upstream.
+
+Agents read these pages as markdown (`<page>.md`), and some fetch tools cut a page at 50 KiB or 2,000 lines. That's why each module has its own page. The `module pages` tests fail when a served page outgrows that budget or drops its partial, or when a module has no page. They run in the unit suite, not in the pull request workflow (see [CI and tests](#ci-and-tests)).
 
 The config holds one key, `modules`: each entry's `name` (its `@module` tag), `entryPoint` (relative to the neon-pkgs root) and `importSpecifier`, in render order.
 
@@ -37,7 +40,7 @@ node scripts/generate-realtime-sdk-reference.mjs /tmp/realtime-sdk-probe
 
 ## Adding a module
 
-Add a `modules` entry. The generator fails if TypeDoc's `@module` names and the config disagree.
+Add a `modules` entry, a `RealtimeSdk*` entry for its partial in `content/docs/shared-content/index.js` and `src/scripts/process-md-for-llms.js`, a module page under `content/docs/realtime/sdks/typescript/` that includes it, and a navigation entry. The generator fails if TypeDoc's `@module` names and the config disagree, and the tests fail if the module has no page.
 
 ## Anchor ids and headings
 
@@ -47,7 +50,7 @@ Every generated heading declares an explicit id using the repository's trailing-
 ### createRealtimeClient (#client-createrealtimeclient)
 ```
 
-All generated ids start with the module slug: `backend`, `client`, `react`, `tanstack-db`, `drizzle`, `drizzle-client` or `kysely`. This keeps anchors unique when the partials are included on the same TypeScript page. Explicit ids also avoid collisions between repeated headings such as `Members`.
+All generated ids start with the module slug: `backend`, `client`, `react`, `tanstack-db`, `drizzle`, `drizzle-client` or `kysely`. This keeps anchors unique across modules, so a link changes only its path when a module moves. Explicit ids also avoid collisions between repeated headings such as `Members`.
 
 | Content                                          | Heading level             | Id                                                                   |
 | ------------------------------------------------ | ------------------------- | -------------------------------------------------------------------- |
@@ -61,7 +64,7 @@ All generated ids start with the module slug: `backend`, `client`, `react`, `tan
 
 The slugger lowercases names, removes punctuation other than hyphens, and replaces spaces with hyphens. For example, `MaterializedLiveQuerySubscription.onChange` gets `client-materializedlivequerysubscriptiononchange`. Exports receive ids first, then member and subsection ids are allocated from the same per-module allocator. Case collisions are resolved in export order: `realtimeCollectionOptions` has `tanstack-db-realtimecollectionoptions`, while `RealtimeCollectionOptions` has `tanstack-db-realtimecollectionoptions-2`.
 
-The symbol index and renderer share that allocation. Cross-links to exported symbols use `/docs/realtime/sdks/typescript#<allocated-id>`; links within each partial use its declared fragment ids. Moving the including page changes cross-link URLs, not the anchors.
+The symbol index and renderer share that allocation. Cross-links to exported symbols use `/docs/realtime/sdks/typescript/<page>#<allocated-id>`, where `<page>` is the module slug unless `MODULE_PAGE_OVERRIDES` maps it to another page; links within each partial use its declared fragment ids. Moving a module page changes cross-link URLs, not the anchors.
 
 ## The TypeDoc pin
 
@@ -87,7 +90,7 @@ The symbol index and renderer share that allocation. Cross-links to exported sym
 | A partial is stale after a generator change | Run `npm run generate:realtime-sdk-reference` and review the partial diff.                   |
 | The SDK source changed                      | Run `npm run update:realtime-sdk` and review the artifact and partial diffs.                 |
 
-The tests run through the normal unit suite and can be run directly:
+The tests, including the page size budget, run through the normal unit suite (and the pre-push hook), not this workflow. Run them directly after changing a module page, the generator or the markdown converter:
 
 ```bash
 npx vitest run scripts/generate-realtime-sdk-reference.test.js scripts/check-realtime-sdk-reference.test.js

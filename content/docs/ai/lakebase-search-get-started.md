@@ -7,7 +7,7 @@ summary: >-
   BM25 full-text index, and running vector and keyword searches from a
   TypeScript application using @neondatabase/serverless and the Vercel AI SDK.
 enableTableOfContents: true
-updatedOn: '2026-10-23T14:49:00.291Z'
+updatedOn: '2026-11-05T23:41:12.000Z'
 ---
 
 This guide sets up Lakebase Search on a Neon project: enabling both extensions, creating a schema that supports vector and full-text search, inserting documents with embeddings, and querying from TypeScript.

@@ -15,6 +15,13 @@ describe('AI Gateway model rows', () => {
     expect(row.endpoints).toEqual(['chat/completions', 'openai/responses']);
   });
 
+  it('counts models that return images themselves as image models', () => {
+    for (const id of ['gemini-3-pro-image', 'gemini-3-1-flash-image']) {
+      expect(rows.find((row) => row.id === id).isImageCapable).toBe(true);
+    }
+    expect(rows.find(({ id }) => id === 'gemini-3-flash').isImageCapable).toBe(false);
+  });
+
   it('uses only the measured Responses endpoint for Codex models', () => {
     const row = rows.find(({ id }) => id === 'gpt-5-3-codex');
 
@@ -51,7 +58,7 @@ describe('AI Gateway model rows', () => {
   });
 
   it.each([
-    ['deepseek', 'DeepSeek'],
+    ['zhipuai', 'Zhipu AI'],
     ['baai', 'BAAI'],
   ])('labels the %s lab as %s', (lab, label) => {
     expect(rows.find((row) => row.lab === lab).labName).toBe(label);
@@ -125,6 +132,25 @@ describe('AI Gateway model rows', () => {
     expect(row.inputs).toEqual([]);
     expect(row.costInputLabel).toBe('$0.10');
     expect(row.costOutputLabel).toBe('—');
+  });
+
+  it('labels a separately billed image output rate and leaves text-only models without one', () => {
+    const [row] = buildRows(
+      {
+        models: {
+          'example-image': {
+            id: 'example-image',
+            name: 'Example Image',
+            cost: { input: 2, output: 12, output_image: 120 },
+          },
+        },
+      },
+      { models: [] }
+    );
+
+    expect(row.costOutputLabel).toBe('$12');
+    expect(row.costOutputImageLabel).toBe('$120');
+    expect(rows.find(({ id }) => id === 'gpt-5-4').costOutputImageLabel).toBeNull();
   });
 
   it('keeps sub-cent digits and reports a decision model context window', () => {

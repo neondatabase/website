@@ -110,5 +110,13 @@
   "carlota-soto": {
     "name": "Carlota Soto",
     "position": "Product Team"
+  },
+  "tony-dang": {
+    "name": "Tony Dang",
+    "position": "Developer Advocate",
+    "link": {
+      "title": "GitHub",
+      "url": "https://github.com/thisistonydang"
+    }
   }
 }

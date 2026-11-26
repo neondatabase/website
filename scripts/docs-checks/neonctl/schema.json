@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "neonctlVersion": "9.5.0",
+  "neonctlVersion": "9.9.6",
   "binaries": [
     "neonctl",
     "neon"
@@ -905,7 +905,7 @@
       "options": {
         "create": {
           "type": "boolean",
-          "describe": "Create the named branch if it does not exist, then check it out",
+          "describe": "Create the named branch if it does not exist, then check it out. New branches start from the parent set in neon.ts, else the project's default branch. An existing branch is checked out unchanged.",
           "default": false
         },
         "env": {
@@ -1562,7 +1562,7 @@
           "options": {
             "add-default-grants": {
               "type": "boolean",
-              "describe": "Grant all permissions on tables in the public schema to authenticated users"
+              "describe": "Grant authenticated users read and write access to public-schema tables, including tables the database owner creates later"
             },
             "auth-provider": {
               "type": "string",
@@ -1912,8 +1912,38 @@
     },
     "docs": {
       "aliases": [],
-      "positionals": [],
-      "options": {},
+      "positionals": [
+        {
+          "name": "query",
+          "describe": "What to search for",
+          "type": "string"
+        }
+      ],
+      "options": {
+        "category": {
+          "type": "array",
+          "describe": "Only return pages in these categories (repeatable)",
+          "choices": [
+            "docs",
+            "api",
+            "postgresql",
+            "guides",
+            "faqs",
+            "blog",
+            "changelog"
+          ]
+        },
+        "limit": {
+          "type": "number",
+          "describe": "Maximum number of results (1-40)",
+          "default": 10
+        },
+        "url": {
+          "type": "string",
+          "describe": "Override the site search URL",
+          "hidden": true
+        }
+      },
       "commands": {
         "search": {
           "name": "search",
@@ -1926,31 +1956,7 @@
               "type": "string"
             }
           ],
-          "options": {
-            "category": {
-              "type": "array",
-              "describe": "Only return pages in these categories (repeatable)",
-              "choices": [
-                "docs",
-                "api",
-                "postgresql",
-                "guides",
-                "faqs",
-                "blog",
-                "changelog"
-              ]
-            },
-            "limit": {
-              "type": "number",
-              "describe": "Maximum number of results (1-40)",
-              "default": 10
-            },
-            "url": {
-              "type": "string",
-              "describe": "Override the site search URL",
-              "hidden": true
-            }
-          },
+          "options": {},
           "commands": {},
           "describe": "Search neon.com: docs, API reference, PostgreSQL tutorial, guides, FAQs, changelog, and blog",
           "examples": [
@@ -1966,7 +1972,13 @@
         }
       },
       "describe": "Search neon.com docs, guides, and more",
-      "usage": "$0 docs <sub-command> [options]"
+      "usage": "$0 docs <query> [options]",
+      "examples": [
+        {
+          "command": "$0 docs \"reset a branch\"",
+          "description": "Same as neon docs search"
+        }
+      ]
     },
     "env": {
       "aliases": [],
@@ -2448,7 +2460,7 @@
         },
         "config": {
           "type": "boolean",
-          "describe": "Create neon.ts after linking. Use --no-config to skip. Omitted in Custom: you will be asked"
+          "describe": "Create neon.ts after linking: from the branch's services when init links an existing project, otherwise the starter policy. Use --no-config to skip. Omitted in Custom: you will be asked"
         },
         "context-file": {
           "type": "string",
@@ -2466,7 +2478,7 @@
         },
         "mcp-auth": {
           "type": "string",
-          "describe": "MCP authentication. Selects skills and MCP setup. oauth is neon mcp --oauth",
+          "describe": "MCP authentication. Selects skills and MCP setup. oauth is neon mcp --oauth. api-key mints a key, which needs neon login or a personal API key: with an organization or project-scoped key and no Neon MCP key already configured, init skips MCP and exits 1. Omit it to fall back to oauth when no key can be minted",
           "choices": [
             "oauth",
             "api-key"
@@ -2532,7 +2544,7 @@
         },
         "yes": {
           "type": "boolean",
-          "describe": "Skip prompts. Alone: Recommended (detected agents, link when authenticated, default neon.ts). With --skill, MCP flags, --no-agent-setup, or --claimable: Custom using those flags",
+          "describe": "Skip prompts. Alone: Recommended (detected agents, link when authenticated, neon.ts). With --skill, MCP flags, --no-agent-setup, or --claimable: Custom using those flags",
           "default": false,
           "alias": "y"
         }
@@ -2609,7 +2621,7 @@
               "positionals": [],
               "options": {},
               "commands": {},
-              "describe": "Most frequently called queries (needs pg_stat_statements)"
+              "describe": "Most frequently called queries, leaving out Neon's own setup and session-reset statements and inspect's own queries (needs pg_stat_statements)"
             },
             "index-sizes": {
               "aliases": [],
@@ -2644,7 +2656,7 @@
               "positionals": [],
               "options": {},
               "commands": {},
-              "describe": "Queries taking the most cumulative execution time (needs pg_stat_statements)"
+              "describe": "Queries taking the most cumulative execution time, leaving out Neon's own setup and session-reset statements and inspect's own queries (needs pg_stat_statements)"
             },
             "replication-slots": {
               "aliases": [],
@@ -2970,7 +2982,8 @@
               "choices": [
                 "function",
                 "storage",
-                "pg_endpoint"
+                "pg_endpoint",
+                "neon_auth"
               ]
             },
             "start-time": {
@@ -3138,7 +3151,8 @@
               "choices": [
                 "function",
                 "storage",
-                "pg_endpoint"
+                "pg_endpoint",
+                "neon_auth"
               ]
             },
             "start-time": {
@@ -3259,7 +3273,7 @@
         }
       },
       "commands": {},
-      "describe": "Show current user"
+      "describe": "Show the current user, organization, or Claimable project"
     },
     "neon-auth": {
       "aliases": [],
@@ -5324,6 +5338,11 @@
             "allowed-origin": {
               "type": "array",
               "describe": "Allowed browser origin (repeatable). \"*\" allows every origin"
+            },
+            "wait": {
+              "type": "boolean",
+              "describe": "Wait until Realtime is enabled on the branch",
+              "default": true
             }
           },
           "commands": {},
@@ -5699,7 +5718,9 @@
           "positionals": [
             {
               "name": "id",
-              "required": true
+              "required": true,
+              "describe": "Snapshot id or name. An id match wins over a name.",
+              "type": "string"
             }
           ],
           "options": {},
@@ -5730,7 +5751,9 @@
           "positionals": [
             {
               "name": "id",
-              "required": true
+              "required": true,
+              "describe": "Snapshot id or name. An id match wins over a name.",
+              "type": "string"
             }
           ],
           "options": {},
@@ -5751,7 +5774,9 @@
           "positionals": [
             {
               "name": "id",
-              "required": true
+              "required": true,
+              "describe": "Snapshot id or name. An id match wins over a name.",
+              "type": "string"
             }
           ],
           "options": {
@@ -5869,7 +5894,9 @@
           "positionals": [
             {
               "name": "id",
-              "required": true
+              "required": true,
+              "describe": "Snapshot id or name. An id match wins over a name.",
+              "type": "string"
             }
           ],
           "options": {

@@ -10,7 +10,7 @@ summary: >-
   lakebase_ann.epsilon, and lakebase_ann.prefilter GUCs, and reference all
   operator classes and index options.
 enableTableOfContents: true
-updatedOn: '2026-09-09T10:20:49.000Z'
+updatedOn: '2026-11-21T19:20:45.236Z'
 ---
 
 The `lakebase_vector` extension adds the `lakebase_ann` index type to Postgres for approximate nearest-neighbor (ANN) vector search. It is a drop-in companion to `pgvector`: the same `vector` types, distance operators, and query syntax work unchanged; only the index type changes.
@@ -50,7 +50,7 @@ The latest available extension version is reported by `SELECT default_version FR
 
 The latest storage format version is `_2`. The following query finds all indexes that use an older storage format. You can then rebuild them to the latest storage format with `REINDEX INDEX` or `REINDEX INDEX CONCURRENTLY`:
 
-```sql title="PostgreSQL"
+```sql filename="PostgreSQL"
 SELECT oid::regclass AS index, lakebase_ann_index_info(oid::regclass)::json ->> 'version' AS storage_format_version
 FROM pg_class
 WHERE relam = (SELECT oid FROM pg_am WHERE amname = 'lakebase_ann') AND relkind = 'i';
@@ -211,7 +211,7 @@ When you set these GUCs from application code, the `SET` and the query must run 
 
 Larger `shared_buffers` can significantly reduce index build time. Neon enables this optimization only on [larger fixed-size computes](/docs/manage/computes#how-to-size-your-compute). Check the current value before optimizing an index build:
 
-```sql title="PostgreSQL"
+```sql filename="PostgreSQL"
 SHOW shared_buffers;
 ```
 
@@ -225,7 +225,7 @@ The `max_parallel_workers` configuration parameter sets the maximum number of wo
 
 The `max_worker_processes` configuration parameter sets the maximum number of background processes that the compute can support. Neon [manages this setting](/docs/reference/compatibility#parameter-settings-that-differ-by-compute-size) based on compute size. Values of `max_parallel_workers` above this limit have no effect.
 
-```sql title="PostgreSQL"
+```sql filename="PostgreSQL"
 SHOW max_worker_processes;
 -- Set both values to the desired parallelism minus one.
 SET max_parallel_workers = 15;
@@ -236,7 +236,7 @@ SET max_parallel_maintenance_workers = 15;
 
 `CREATE INDEX CONCURRENTLY` and `REINDEX INDEX CONCURRENTLY` allow reads and writes to continue while an index is built or rebuilt:
 
-```sql title="PostgreSQL"
+```sql filename="PostgreSQL"
 CREATE INDEX CONCURRENTLY items_embedding_idx_concurrent ON items
   USING lakebase_ann (embedding vector_l2_ops);
 
@@ -250,7 +250,7 @@ Use `lakebase_ann_prewarm` after a compute starts to load the frequently accesse
 - `search` (default): Prewarms the full hot portion used for search.
 - `routing`: Prewarms only the routing structures. This option is faster and provides a better cost-performance tradeoff for large indexes.
 
-```sql title="PostgreSQL"
+```sql filename="PostgreSQL"
 -- Prewarm the full search scope
 SELECT lakebase_ann_prewarm('items_embedding_idx');
 

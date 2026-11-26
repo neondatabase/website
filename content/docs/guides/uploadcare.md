@@ -10,13 +10,13 @@ summary: >-
   server and a Python Flask server, both writing to an uploadcare_files table
   with optional Row Level Security.
 enableTableOfContents: true
-updatedOn: '2026-09-16T19:45:35.340Z'
+updatedOn: '2026-11-16T20:08:05.000Z'
 ---
 
 [Uploadcare](https://uploadcare.com/) provides a cloud platform designed to simplify file uploading, processing, storage, and delivery via a fast CDN. It offers tools that manage and optimize media like images, videos, and documents for your applications.
 
 <Callout title="Neon now offers native storage">
-Neon Object Storage is S3-compatible object storage built into the Neon backend. Object storage branches with your database: each branch gets its own isolated namespace, so you can test file uploads in preview branches without touching production. No separate cloud account needed. Use any S3-compatible SDK with your existing Neon credential.
+Neon Object Storage is S3-compatible object storage built into your Neon project. Files branch with your database, so you can test uploads in a preview branch without touching production files. No separate cloud account needed. Point an S3 SDK at your branch endpoint with your Neon credential.
 
 For more information, see [Neon Object Storage](/docs/storage/overview).
 </Callout>
@@ -77,7 +77,7 @@ For this example, we'll build a simple Node.js server using [Hono](https://hono.
 First, install the necessary dependencies:
 
 ```bash
-npm install @uploadcare/upload-client @neondatabase/serverless @hono/node-server hono
+npm install @uploadcare/upload-client @neondatabase/serverless @hono/node-server hono dotenv
 ```
 
 Create a `.env` file in your project root and add your Uploadcare and Neon connection details which you obtained in the previous steps:
@@ -245,7 +245,7 @@ if __name__ == "__main__":
 
 **Explanation**
 
-1.  **Setup:** Initializes the Flask web framework, Uploadcare client, and the PostgreSQL client (`psycopg2`) using environment variables.
+1.  **Setup:** Initializes the Flask web framework, Uploadcare client, and the Postgres client (`psycopg2`) using environment variables.
 2.  **Authentication:** A placeholder `get_authenticated_user_id` function is included. **Replace this with real authentication logic.**
 3.  **Upload Endpoint (`/upload`):**
     - It expects a `POST` request with `multipart/form-data`.
@@ -255,7 +255,7 @@ if __name__ == "__main__":
     - Upon successful upload, Uploadcare returns details including a unique `uuid` and a `cdnUrl`.
     - It executes an `INSERT` statement using `psycopg2` to save the `uuid`, `cdnUrl`, and the `userId` into a `uploadcare_files` table in your database.
     - It sends a JSON response back to the client containing the `fileUrl` from Uploadcare.
-4.  In production, you should use a global PostgreSQL connection instead of creating a new one for each request. This is important for performance and resource management.
+4.  In production, you should use a global Postgres connection instead of creating a new one for each request. This is important for performance and resource management.
 
 </TabItem>
 
