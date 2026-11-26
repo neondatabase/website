@@ -32,7 +32,7 @@ Then look at who's requesting your pages. Your hosting platform's request logs o
 - SEO and monitoring tools
 - Uptime checks that hit a page or endpoint that queries the database
 
-## Step 2: Fix the issue
+## Reduce crawler load on your database
 
 ### Fix 1: Serve crawlers from a cache
 
