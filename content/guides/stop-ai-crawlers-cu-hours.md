@@ -65,7 +65,7 @@ Crawlers from the major AI companies say they respect `robots.txt`, but it's a r
 
 Think about what you block, though: if you want your product to show up in AI answers, you probably want crawlers to read your public marketing pages and docs. Block the routes that query the database, like search results, filters, and logged-in pages.
 
-### Fix 3: Block or rate-limit at the edge
+### Block or rate-limit at the edge
 
 For crawlers that ignore `robots.txt`, block or rate-limit them before they reach your app. Vercel and Cloudflare both offer firewall rules and bot protection that can challenge or block automated traffic by user agent or behavior. A rate limit on routes that query the database means a crawler can't fetch hundreds of uncached pages a minute.
 
