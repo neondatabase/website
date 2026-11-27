@@ -8,10 +8,14 @@ summary: >-
   name, search log bodies, poll for new lines with Go live, and download the
   current view as a .log file.
 enableTableOfContents: true
-updatedOn: '2026-11-27T00:23:12.316Z'
+updatedOn: '2026-11-27T00:39:29.985Z'
 ---
 
-The Monitoring page shows service logs in four tabs: **Functions**, **Storage**, **Realtime**, and **Auth**. Each tab is a log viewer for that service on the current branch; there is no combined, all-services view. The tabs share the same controls, described below. The **Realtime** tab appears only on branches where [Realtime](/docs/realtime/overview) is available. The **Auth** tab shows [Managed Better Auth](/docs/auth/overview) events, such as sign-ups and sign-ins, on branches that [export auth logs](/docs/auth/guides/manage-auth-api#export-managed-better-auth-logs).
+The Monitoring page shows service logs in four tabs: **Functions**, **Storage**, **Realtime**, and **Auth**. Each tab is a log viewer for that service on the current branch; there is no combined, all-services view. The tabs share the same controls, described below. The **Realtime** tab appears only on branches where [Realtime](/docs/realtime/overview) is available. The **Auth** tab shows [Managed Better Auth](/docs/auth/overview) events, such as sign-ups and sign-ins.
+
+<Admonition type="note" title="Turn on logs export for the Auth tab">
+Managed Better Auth events appear on the **Auth** tab only while logs export is on for the branch. Export is on by default when you enable Managed Better Auth on a branch, but a branch that had Managed Better Auth before logs export was available may have it off, and its **Auth** tab stays empty. To turn it on, go to **Settings** > **Better Auth**, and under **Logs**, turn on **Enable logs**. You can also use the [Neon API or CLI](/docs/auth/guides/manage-auth-api#export-managed-better-auth-logs). Turning export off stops new events, but events already exported stay visible.
+</Admonition>
 
 ## View logs
 

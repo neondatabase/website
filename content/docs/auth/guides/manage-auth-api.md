@@ -15,7 +15,7 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/neon-auth/api
   - /docs/guides/neon-auth-api
-updatedOn: '2026-11-27T00:23:12.316Z'
+updatedOn: '2026-11-27T00:39:29.985Z'
 ---
 
 You can manage Managed Better Auth programmatically using the [Neon API](/docs/reference/api), or from the terminal with the [Neon CLI](/docs/cli/neon-auth) (`neon neon-auth`), which wraps these same operations. You can also enable and configure Managed Better Auth from an AI editor using the [Neon MCP server](/docs/ai/neon-mcp-server#available-tools) (`provision_neon_auth`, `update_auth_config`, `add_auth_oauth_provider`, `get_neon_auth_config`). See [Set up with your AI editor](/docs/auth/about#set-up-with-your-ai-editor).
@@ -160,7 +160,7 @@ Managed Better Auth logs export is in beta. It's available in AWS US East (N. Vi
 
 Managed Better Auth can export a branch's authentication events, such as sign-ups and sign-ins, to the branch logs, so you can read them alongside your other logs. Export is set per branch. Where the feature is available, export is turned on by default when you enable Managed Better Auth on a branch. If you disable and re-enable Managed Better Auth, the branch keeps its previous export setting. Child branches inherit the parent branch's setting.
 
-Send a `PATCH` request to turn export on or off for a branch:
+In the Neon Console, go to **Settings** > **Better Auth**, and under **Logs**, turn **Enable logs** on or off. With the API, send a `PATCH` request to turn export on or off for a branch:
 
 ```bash
 curl -X PATCH 'https://console.neon.tech/api/v2/projects/{project_id}/branches/{branch_id}/auth/logs_export' \
