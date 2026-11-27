@@ -1,23 +1,23 @@
 ---
 title: Monitor logs
-subtitle: View, search, and download logs for Functions, Object Storage, and Realtime
+subtitle: View, search, and download logs for Functions, Object Storage, Realtime, and Managed Better Auth
 summary: >-
-  Logs for Functions, Object Storage, and Realtime live on the Monitoring
-  page, split across the Functions, Storage, and Realtime tabs (one viewer per
-  service, no combined view). Filter by level (DEBUG, INFO, NOTICE, WARN, ERROR, FATAL) or service
+  Logs for Functions, Object Storage, Realtime, and Managed Better Auth live on
+  the Monitoring page, split across the Functions, Storage, Realtime, and Auth
+  tabs (one viewer per service, no combined view). Filter by level (DEBUG, INFO, NOTICE, WARN, ERROR, FATAL) or service
   name, search log bodies, poll for new lines with Go live, and download the
   current view as a .log file.
 enableTableOfContents: true
-updatedOn: '2026-11-06T22:09:40.723Z'
+updatedOn: '2026-11-27T00:23:12.316Z'
 ---
 
-The Monitoring page shows service logs in three tabs: **Functions**, **Storage**, and **Realtime**. Each tab is a log viewer for that service on the current branch; there is no combined, all-services view. The tabs share the same controls, described below. The **Realtime** tab appears only on branches where [Realtime](/docs/realtime/overview) is available.
+The Monitoring page shows service logs in four tabs: **Functions**, **Storage**, **Realtime**, and **Auth**. Each tab is a log viewer for that service on the current branch; there is no combined, all-services view. The tabs share the same controls, described below. The **Realtime** tab appears only on branches where [Realtime](/docs/realtime/overview) is available. The **Auth** tab shows [Managed Better Auth](/docs/auth/overview) events, such as sign-ups and sign-ins, on branches that [export auth logs](/docs/auth/guides/manage-auth-api#export-managed-better-auth-logs).
 
 ## View logs
 
 1. In the Neon Console, select a project and branch.
 2. Go to **Monitoring**.
-3. Open the **Functions**, **Storage**, or **Realtime** tab.
+3. Open the **Functions**, **Storage**, **Realtime**, or **Auth** tab.
 
 Each tab shows logs from every function or bucket on the branch. Narrow to a single service with the service name field (see [Scope by service](#scope-by-service)).
 
@@ -28,9 +28,9 @@ You can also jump straight to a service's tab without visiting Monitoring first:
 
 Both land you on the matching tab.
 
-Each row shows a timestamp, a level, and the log message. Expand a row to see its full context: `timestamp`, `severity`, `entity_type`, `scope_name`, and `service_name`. `entity_type` identifies the kind of service a line came from (`function` or `storage`); `service_name` identifies the specific one (`neon-function/<slug>` or `neon-storage/<bucket>`).
+Each row shows a timestamp, a level, and the log message. Expand a row to see its full context: `timestamp`, `severity`, `entity_type`, `scope_name`, and `service_name`. `entity_type` identifies the kind of service a line came from (`function` or `storage`); `service_name` identifies the specific one (`neon-function/<slug>` or `neon-storage/<bucket>`). Managed Better Auth lines use the service name `neon-auth`, with scope names such as `neon.auth.sign_in` and `neon.auth.sign_up`.
 
-For what these fields mean for a given service, and how each service maps its own output onto the shared level set, see [Function logs](/docs/compute/functions/logs) or [Object Storage logs](/docs/storage/logs).
+For what these fields mean for a given service, and how each service maps its own output onto the shared level set, see [Function logs](/docs/compute/functions/logs), [Object Storage logs](/docs/storage/logs), or [Export Managed Better Auth logs](/docs/auth/guides/manage-auth-api#export-managed-better-auth-logs).
 
 ## Scope by service
 

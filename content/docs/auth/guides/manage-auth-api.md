@@ -15,7 +15,7 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/neon-auth/api
   - /docs/guides/neon-auth-api
-updatedOn: '2026-11-26T23:10:36.477Z'
+updatedOn: '2026-11-27T00:23:12.316Z'
 ---
 
 You can manage Managed Better Auth programmatically using the [Neon API](/docs/reference/api), or from the terminal with the [Neon CLI](/docs/cli/neon-auth) (`neon neon-auth`), which wraps these same operations. You can also enable and configure Managed Better Auth from an AI editor using the [Neon MCP server](/docs/ai/neon-mcp-server#available-tools) (`provision_neon_auth`, `update_auth_config`, `add_auth_oauth_provider`, `get_neon_auth_config`). See [Set up with your AI editor](/docs/auth/about#set-up-with-your-ai-editor).
@@ -155,7 +155,7 @@ Setting `delete_data` to `true` permanently removes all auth data from the datab
 ## Export Managed Better Auth logs
 
 <Admonition type="note" title="Beta">
-Managed Better Auth logs export is in beta and rolling out gradually. It's available in select AWS regions and may not be enabled for your project yet.
+Managed Better Auth logs export is in beta. It's available in AWS US East (N. Virginia) (`aws-us-east-1`), AWS US East (Ohio) (`aws-us-east-2`), AWS Europe (Frankfurt) (`aws-eu-central-1`), and AWS Asia Pacific (Singapore) (`aws-ap-southeast-1`). In other regions, a request to turn on export returns `404`.
 </Admonition>
 
 Managed Better Auth can export a branch's authentication events, such as sign-ups and sign-ins, to the branch logs, so you can read them alongside your other logs. Export is set per branch. Where the feature is available, export is turned on by default when you enable Managed Better Auth on a branch. If you disable and re-enable Managed Better Auth, the branch keeps its previous export setting. Child branches inherit the parent branch's setting.
