@@ -15,7 +15,7 @@ summary: >-
 enableTableOfContents: true
 redirectFrom:
   - /docs/auth/guides/oauth
-updatedOn: '2026-11-13T23:21:42.611Z'
+updatedOn: '2026-11-27T09:42:18.213Z'
 ---
 
 OAuth lets users sign in with their Google, GitHub, Vercel, Microsoft, Apple, or Discord account. Managed Better Auth handles the OAuth flow and creates a session after authorization.
@@ -135,6 +135,8 @@ const handleDiscordSignIn = async () => {
 ```
 
 </CodeTabs>
+
+A signed-in user can also link a provider account to their existing account. The user's email must be verified before the link starts. If it isn't, the request fails with a `403` response and the code `EMAIL_NOT_VERIFIED`, and no provider is linked. This applies even when verification is optional in the Console. To fix it, [verify the email](/docs/auth/guides/email-verification) first.
 
 ## Handle the callback
 
