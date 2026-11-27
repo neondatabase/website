@@ -19,7 +19,7 @@ redirectFrom:
   - /docs/integrations/draxlr
   - /docs/guides/logical-replication-decodable
   - /docs/guides/logical-replication-stacksync
-updatedOn: '2026-11-26T15:47:29.446Z'
+updatedOn: '2026-11-27T05:28:08.327Z'
 ---
 
 ## Authentication
@@ -83,6 +83,8 @@ updatedOn: '2026-11-26T15:47:29.446Z'
 <TechCards>
 
 <a href="/docs/guides/loops" title="Loops" description="Send Managed Better Auth emails and sync users with Loops" icon="loops"></a>
+
+<a href="/docs/guides/autosend" title="AutoSend" description="Send emails, start automations, and store email events with AutoSend" icon="autosend"></a>
 
 </TechCards>
 
