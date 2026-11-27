@@ -7,7 +7,7 @@ summary: >-
   options aligned with Databricks Support. Use this page to find which
   channels your plan includes and review the general support policy.
 enableTableOfContents: true
-updatedOn: '2026-11-10T19:59:44.000Z'
+updatedOn: '2026-11-27T09:55:26.458Z'
 ---
 
 This page covers Neon's support plans, channels, and policies. To share ideas or report a docs gap without opening a support request, see [Send feedback](/docs/introduction/feedback).
@@ -68,7 +68,7 @@ The [Neon Discord Server](https://neon.com/discord) is not an official Neon Supp
 
 Neon AI chat assistance is available to all Neon users. You can access it from these locations:
 
-- **Neon Console**: Open the [support center](#open-the-support-center) and select **Ask the AI assistant**.
+- **Neon Console**: Open the [support center](#open-the-support-center) and select **Ask Neon Agent**.
 - **Neon documentation**: Select **Ask AI** in the header of the [Neon documentation](/docs) site, or open search with **⌘K** (**Ctrl+K** on Windows and Linux) and ask Neon AI from there.
 - **Neon CLI**: Run [`neon ask`](/docs/cli/ask) to ask questions about Neon from your terminal
 
@@ -95,14 +95,14 @@ You open support tickets from the support center in the Neon Console.
 
 The **Support center** drawer opens. Under **Which organization needs support?**, select the organization the request is for. The options under **How can we help?** depend on that organization's plan:
 
-- **Ask the AI assistant**: Get answers sourced from the Neon docs. See [Neon AI chat assistance](#neon-ai-chat-assistance).
+- **Ask Neon Agent**: Get answers sourced from the Neon docs. See [Neon AI chat assistance](#neon-ai-chat-assistance).
 - **Read the docs**: Browse Neon guides, references, and quickstarts.
 - **Contact our support team**: Open a technical support ticket. Available on the **Scale** plan.
 - **Ask a billing question**: Open a billing support ticket about an invoice, charge, refund, or your plan. Available on the **Launch** and **Scale** plans.
 - **Increase your platform limits**: Raise project, branch, AI Gateway, and other limits. Available on the **Scale** plan. See [Request a limit increase](#request-a-limit-increase).
 - **Get help from the community**: Join the [Neon Discord Server](#neon-discord-server).
 
-On the **Free** plan, the support center offers the AI assistant, the docs, and the community. To unlock support tickets, [upgrade to a paid plan](/docs/introduction/manage-billing#change-your-plan).
+On the **Free** plan, the support center offers Neon Agent, the docs, and the community. To unlock support tickets, [upgrade to a paid plan](/docs/introduction/manage-billing#change-your-plan).
 
 #### Open a technical support ticket (Scale plan)
 
