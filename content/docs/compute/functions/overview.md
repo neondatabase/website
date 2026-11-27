@@ -11,7 +11,7 @@ redirectFrom:
   - /docs/functions
   - /docs/functions/overview
   - /docs/compute/functions
-updatedOn: '2026-11-18T08:58:29.034Z'
+updatedOn: '2026-11-27T01:30:45.635Z'
 layout: wide
 hideCopyPage: true
 ---
@@ -77,6 +77,20 @@ Functions run on Neon's own compute platform, the same infrastructure that runs 
 <Admonition type="important" title="JavaScript and TypeScript only">
 Neon Functions currently run JavaScript or TypeScript on the Node.js runtime. Deploy JS/TS handlers, or code that bundles to JS for Node.js 24. Other runtimes and language targets aren't currently supported.
 </Admonition>
+
+## Use your other Neon services from a function
+
+A function is where the rest of your Neon backend comes together. Each service you enable on the branch is a few lines of code away, and for most of them Neon injects the credentials into the function at runtime, so there are no keys to copy.
+
+| Service                                      | What a function does with it                                                                                                           | Credentials                                                                                                                   |
+| -------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------- |
+| [Lakebase Postgres](/docs/postgres/overview) | Reads and writes your data in the same region                                                                                          | `DATABASE_URL`, injected                                                                                                      |
+| [Object Storage](/docs/storage/overview)     | Accepts uploads, hands out presigned URLs, and processes new files with a [storage trigger](/docs/compute/functions/triggers/overview) | `AWS_*`, injected                                                                                                             |
+| [AI Gateway](/docs/ai-gateway/overview)      | Calls LLMs and embedding models and streams the response back, keeping model keys off the client                                       | `NEON_AI_GATEWAY_*`, injected                                                                                                 |
+| [Managed Better Auth](/docs/auth/overview)   | Verifies the signed-in user's JWT before doing any work                                                                                | `NEON_AUTH_JWKS_URL`, injected                                                                                                |
+| [Realtime](/docs/realtime/overview)          | Seals live queries for your frontend; rows the function writes show up live in subscribed clients                                      | Add `NEON_REALTIME_SECRET` as an [environment variable](/docs/compute/functions/environment-variables#user-defined-variables) |
+
+For example, one function can verify the user, save an uploaded image to Object Storage, ask a vision model on AI Gateway to describe it, and store the description in Postgres. Declare the services in [`neon.ts`](/docs/reference/config-runtime), run `neon deploy`, and the function picks up the credentials on every branch. See [Environment variables](/docs/compute/functions/environment-variables) for the full list.
 
 ## Request/response, not background jobs
 
