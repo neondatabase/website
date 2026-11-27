@@ -13,7 +13,7 @@ summary: >-
   phone_number.verified, use EdDSA Ed25519 detached JWS signatures for
   verification, and retry blocking events within a global timeout.
 enableTableOfContents: true
-updatedOn: '2026-11-26T20:44:20.251Z'
+updatedOn: '2026-11-27T09:46:59.429Z'
 ---
 
 Managed Better Auth webhooks send HTTP POST requests to your server when authentication events occur.
@@ -66,6 +66,7 @@ Managed Better Auth validates `webhook_url` when you configure webhooks to reduc
 - **Hostname required** — Use a domain name (for example `https://your-app.com/webhooks/neon-auth`). Raw IP addresses (for example `https://93.184.216.34/webhook`) are rejected, including public IPs.
 - **No internal targets** — Localhost, private IP addresses, link-local addresses (including cloud metadata endpoints), and encoded IP bypass formats (octal, decimal, hex) are blocked.
 - **No redirects** — Webhook delivery does not follow HTTP `3xx` redirects. Configure the final HTTPS endpoint directly.
+- **Neon Function URLs are allowed**: Other hostnames under `neon.tech` and `neon.com` are rejected, but you can point a webhook at a [Neon Function](/docs/compute/functions/overview) URL on the same Neon deployment, such as `https://br-cool-darkness-123456-hooks.compute.c-1.us-east-2.aws.neon.tech/neon-auth`. Read the `Neon-Better-Auth-*` [request headers](#request-headers) in your function.
 - **DNS pinning during delivery** — Managed Better Auth validates the hostname's resolved IP addresses and only connects to that validated set. If DNS later resolves the same hostname to a different IP during delivery, the delivery is blocked as a DNS rebinding attempt.
 
 Digit-prefixed domains such as `1password.com` are allowed. If configuration fails validation, the API returns an error with code `INVALID_WEBHOOK_URL_FORMAT`.
