@@ -11,7 +11,7 @@ isDraft: false
 redirectFrom:
   - /docs/introduction/compute-size
   - /docs/introduction/compute
-updatedOn: '2026-11-10T19:59:44.000Z'
+updatedOn: '2026-11-21T12:14:37.599Z'
 ---
 
 A compute is a virtualized service that runs applications. In Neon, a compute runs Postgres.
@@ -165,7 +165,7 @@ You can only create a single primary read-write compute for a branch that does n
 1. In the Neon Console, select your branch from the project/branch menu at the top of the sidebar.
 1. Under **Postgres database**, select **Computes**.
 1. Click **Add a compute** or **Add Read Replica** if you already have a primary read-write compute.
-1. On the **Add new compute** drawer or **Add read replica** drawer, specify your compute settings, and click **Add**. Selecting the **Read replica** compute type creates a [read replica](/docs/introduction/read-replicas).
+1. On the **Add primary compute** or **Add read replica** drawer, specify your compute settings, and click **Add**. Selecting the **Read replica** compute type creates a [read replica](/docs/introduction/read-replicas).
 
 </TabItem>
 
@@ -353,7 +353,7 @@ Some key points to understand about how your endpoint responds when you make cha
 - Editing minimum or maximum autoscaling sizes also requires a restart; existing connections are temporarily disconnected.
 - If you disable scale to zero, you may need to restart your compute manually to get the latest compute-related release updates from Neon if updates are not applied automatically by a [scheduled update](/docs/manage/updates). Scheduled updates are applied according to certain criteria, so not all computes receive these updates automatically. See [Restart a compute](#restart-a-compute).
 
-To avoid prolonged interruptions resulting from compute restarts, we recommend configuring your clients and applications to reconnect automatically in case of a dropped connection. See [Handling connection disruptions](/docs/manage/updates#handling-connection-disruptions).
+To avoid prolonged interruptions resulting from compute restarts, we recommend configuring your clients and applications to reconnect automatically in case of a dropped connection. See [Handling connection disruptions](/docs/manage/updates#handling-connection-disruptions-during-compute-updates).
 
 ### Compute size and autoscaling configuration
 
@@ -467,7 +467,7 @@ Regarding connection limits, you'll want a compute size that can support your an
 
 #### Sizing your compute based on the working set
 
-If it's not possible to hold your entire dataset in memory, the next best option is to ensure that your working set is in memory. A working set is your frequently accessed or recently used data and indexes. To determine whether your working set is fully in memory, you can query the cache hit ratio for your Neon compute. The cache hit ratio tells you how many queries are served from memory. Queries not served from memory bypass the cache to retrieve data from database storage (the [Pageserver](#docs/reference/glossary#pageserver)), which can affect query performance.
+If it's not possible to hold your entire dataset in memory, the next best option is to ensure that your working set is in memory. A working set is your frequently accessed or recently used data and indexes. To determine whether your working set is fully in memory, you can query the cache hit ratio for your Neon compute. The cache hit ratio tells you how many queries are served from memory. Queries not served from memory bypass the cache to retrieve data from database storage (the [Pageserver](/docs/reference/glossary#pageserver)), which can affect query performance.
 
 You can monitor your compute cache hit rate and your working set size from Neon's **Monitoring** page, where you'll find the following charts:
 
@@ -486,10 +486,10 @@ As mentioned above, your `max_connections` setting is based on both your minimum
 
 ### Scale to zero configuration
 
-Neon's _Scale to Zero_ feature automatically transitions a compute into an idle state after 5 minutes of inactivity. You can disable scale to zero to maintain an "always-active" compute. An "always-active" configuration eliminates the few hundred milliseconds seconds of latency required to reactivate a compute but is likely to increase your compute time usage on systems where the database is not always active.
+Neon's _Scale to Zero_ feature automatically transitions a compute into an idle state after 5 minutes of inactivity. You can disable scale to zero to maintain an "always-active" compute. An "always-active" configuration eliminates the few hundred milliseconds of latency required to reactivate a compute but is likely to increase your compute time usage on systems where the database is not always active.
 
 <Admonition type="note">
-Scale to zero is only available for computes up to 16 CU in size. Computes larger than 16 CU remain always active to ensure best performance.
+Scale to zero is only available for computes up to 16 CU in size. To run a larger compute, turn off scale to zero first. Neon rejects a compute larger than 16 CU if scale to zero is still on.
 </Admonition>
 
 For more information, refer to [Configuring scale to zero for Neon computes](/docs/guides/scale-to-zero-guide).
@@ -537,7 +537,7 @@ neon postgres computes restart ep-misty-morning-a1pfa4ez
 
 <TabItem>
 
-Issue a [Restart compute endpoint](/docs/reference/api/endpoints/restart-project-endpoint) call. You'll need your [project ID](/docs/reference/glossary#project-id), compute [endpoint ID](/docs/reference/glossary#endpoint-id), and an [API key](/docs/manage/api-keys#create-an-api-key):
+Issue a [Restart compute endpoint](/docs/reference/api/endpoints/restart-project-endpoint) call. You'll need your [project ID](/docs/reference/glossary#project-id), compute [endpoint ID](/docs/reference/glossary#endpoint-id), and an [API key](/docs/manage/api-keys#creating-api-keys):
 
 ```bash
 curl --request POST \
@@ -565,7 +565,7 @@ A branch can have a single read-write compute and multiple read replica computes
 1. In the Neon Console, select your branch from the project/branch menu at the top of the sidebar.
 1. Under **Postgres database**, select **Computes**.
 1. Click **Edit** for the compute you want to delete.
-1. At the bottom of the **Edit compute** drawer, click **Delete compute**.
+1. In the drawer, click **Delete**, then confirm in the dialog.
 
 </TabItem>
 
@@ -637,7 +637,7 @@ This section outlines compute-related issues you may encounter and possible reso
 
 ### Concurrently active compute limit
 
-Each project can have a limited number of computes active at the same time. The default limit is 20 concurrently active computes per project. The limit protects against accidental surges, such as a script that starts many computes at once.
+Each project has a limit on how many computes can be active at the same time. The limit protects against accidental surges, such as a script that starts many computes at once.
 
 The limit counts computes that are active or starting, including read replicas, on every branch except the project's [default branch](/docs/reference/glossary#default-branch). Computes on the default branch don't count, and neither do suspended computes or computes that are suspending. The limit never blocks a compute on the default branch from starting.
 

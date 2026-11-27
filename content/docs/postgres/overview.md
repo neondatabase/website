@@ -10,7 +10,7 @@ summary: >-
 enableTableOfContents: true
 layout: wide
 hideCopyPage: true
-updatedOn: '2026-10-15T14:51:27.000Z'
+updatedOn: '2026-11-24T11:00:40.269Z'
 ---
 
 <div className="not-prose -mb-4 grid grid-cols-[minmax(0,7fr)_minmax(0,4fr)] items-start gap-16 lg:mb-6 lg:grid-cols-1 lg:gap-10">
@@ -60,6 +60,8 @@ updatedOn: '2026-10-15T14:51:27.000Z'
 
 <a href="/docs/serverless/serverless-driver" description="Optimized driver for serverless and edge runtimes using HTTP or WebSockets." icon="audio-jack">Serverless driver</a>
 
+<a href="/docs/extensions/pg-extensions" description="Add vector search, scheduling, geospatial, and more with supported Postgres extensions." icon="puzzle">Postgres extensions</a>
+
 </DetailIconCards>
 
 ## About Lakebase Postgres
@@ -72,5 +74,6 @@ Lakebase Postgres is fully managed and compatible with any Postgres driver, ORM,
 - **Realtime.** Subscribe to data in realtime with live SQL queries.
 - **Instant restore.** Restore to any point in time within your history window.
 - **Read replicas.** Scale your app by offloading read traffic to read replicas.
+- **Extensions.** Install [supported Postgres extensions](/docs/extensions/pg-extensions) such as pgvector, PostGIS, and pg_cron.
 
 <NeedHelp/>

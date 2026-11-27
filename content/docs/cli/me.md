@@ -7,12 +7,12 @@ summary: >-
   account is active and how it's authenticated. JSON output (`-o json`) exposes
   additional fields, such as the account id, plan, and linked auth accounts.
 enableTableOfContents: true
-updatedOn: '2026-11-19T18:35:00.025Z'
+updatedOn: '2026-11-24T22:51:03.746Z'
 redirectFrom:
   - /docs/reference/cli-me
 ---
 
-The `me` command shows information about the authenticated Neon CLI user, or the organization for an organization API key: login, email, name, and how you're authenticated (the credential source, such as `OAuth` or an API key, and the profile in use).
+The `me` command shows who the Neon CLI is authenticated as: a user (login, email, and name), the organization for an organization API key, or the Claimable project in a directory linked by `neon claim create`. It also shows how you're authenticated (the credential source, such as `OAuth` or an API key, and the profile in use).
 
 ## Usage
 
@@ -48,11 +48,24 @@ Authentication  API key (profile work)
 
 With `-o json`, it prints `{"account_id": "org-…", "auth_method": "api_key_org"}`. Check `auth_method` to tell an organization key apart from a user.
 
-When you're signed out, `me` doesn't start a browser sign-in. It prints a notice to stderr and exits with status `1`, so scripts and agents can run `neon me` as a sign-in check:
+When you're signed out, `me` doesn't start a browser sign-in. It prints a notice to stderr and exits with status `1`, so scripts and agents can run `neon me` as a sign-in check. The notice lists the ways to authenticate:
 
 ```text filename="Output"
-Not signed in: profile "DEFAULT" has no stored credential. Run `neon login --profile DEFAULT` to sign in, or use an API key with --api-key or NEON_API_KEY.
+Not signed in: profile "DEFAULT" has no stored credential.
+Sign in with a browser on this machine: `neon login`
+Or save an API key you already have: `echo "$KEY" | neon profile create DEFAULT --api-key -`
+Or create a temporary project without an account: `neon claim create` (it expires in 72 hours unless claimed)
 ```
+
+In a directory linked by [`neon claim create`](/docs/cli/claim), `me` shows the Claimable project the CLI authenticates as and when it expires:
+
+```text filename="Output"
+Project ID          lucky-haze-12345678
+Project Expires At  2026-11-27T22:05:54.178Z
+Authentication      Claimable project
+```
+
+With `-o json`, it prints `{"auth_method": "claimable", "project_id": "…", "project_expires_at": "…"}`.
 
 Show details with `--output json`, which includes data omitted from the `table` output:
 

@@ -42,6 +42,7 @@ const Item = ({
 
     // Track TOC click
     sendGtagEvent('TOC Clicked', {
+      text: title,
       heading: title,
       anchor: id,
       level,

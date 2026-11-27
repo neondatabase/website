@@ -51,7 +51,9 @@ describe('getModelDetailPageData', () => {
       costOutputImageLabel: '$120',
     });
 
-    expect(content).toContain('## Output /M\n\n$12\n\n## Image output /M\n\n$120');
+    expect(content).toContain(
+      '## Output /M\n\n$12\n\n## Image output /M\n\n$120. The cost per image depends on the image size; see [Image output pricing](/docs/ai-gateway/models#image-output-pricing).'
+    );
     expect(tableOfContents.slice(-2).map(({ title, id }) => ({ title, id }))).toEqual([
       { title: 'Output /M', id: 'output-m' },
       { title: 'Image output /M', id: 'image-output-m' },

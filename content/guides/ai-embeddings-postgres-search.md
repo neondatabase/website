@@ -1,606 +1,387 @@
 ---
-title: Building semantic search with AI embeddings, Neon, and pgvector
-subtitle: Learn how to create a semantic search system using AI embeddings, Neon, and pgvector.
-author: bobbyiliev
+title: Build and deploy a Lakebase Search API as a Neon Function
+subtitle: Wire vector, full-text, and hybrid search into a serverless HTTP API that runs next to your database.
+author: neon-team
 enableTableOfContents: true
-createdAt: '2025-05-17T00:00:00.000Z'
-updatedOn: '2026-09-30T00:39:07.369Z'
+createdAt: '2026-11-18T00:00:00.000Z'
+updatedOn: '2026-11-19T14:21:35.699Z'
 ---
 
-Traditional text search relies on exact keyword matches, which often misses the semantic meaning behind queries.
+In this guide, you build a search API and deploy it as a [Neon Function](/docs/compute/functions/overview), a long-running serverless function that runs on your Neon branch. The function embeds documents, stores them in Postgres, and answers queries with vector, full-text, and hybrid search.
 
-When someone searches for "car maintenance," they might also be interested in results about "vehicle servicing" or "auto repair", but keyword-based search won't make these connections.
-
-AI embeddings solve this problem by converting text into high-dimensional vectors that capture semantic meaning. Words and phrases with similar meanings cluster together in this vector space, so search can match on meaning rather than exact words.
-
-The pgvector extension adds vector similarity search to Postgres, so you can store embeddings alongside your regular data and run semantic searches with SQL. On Neon, the database's compute autoscales with query load.
-
-In this guide, you'll learn how to build a semantic search system that can power document search and content recommendations using OpenAI embeddings stored in Neon with pgvector.
+The stack is [Lakebase Search](/docs/ai/lakebase-search-get-started) for the queries (`lakebase_vector` for vector search, `lakebase_text` for BM25 full-text search) and the [AI Gateway](/docs/ai-gateway/overview) for embeddings. Because the function runs on your branch, Neon injects `DATABASE_URL` and the AI Gateway credentials at runtime. [Get started with Lakebase Search](/docs/ai/lakebase-search-get-started) covers running these queries from a script; this guide wires them into a deployed function.
 
 ## What you'll build
 
-By the end of this guide, you'll have:
+An HTTP API with two endpoints, running as a Neon Function:
 
-- An understanding of AI embeddings and how they improve search
-- A Neon database configured with the pgvector extension
-- An embedding generation service powered by OpenAI's API
-- A document search system that understands semantic similarity
+- `POST /documents` embeds a document with the AI Gateway and stores it.
+- `POST /search` embeds a query, runs vector and BM25 search, and fuses the results.
+
+Embeddings come from the AI Gateway's `qwen3-embedding-0-6b` model (1024 dimensions), so the same Neon credential that reaches your database also reaches the model. At the end, you add optional reranking with a decision model.
 
 ## Prerequisites
 
-To follow along with this guide, you'll need:
+- A Neon project on Postgres 16 or later, in an [AI Gateway region](/docs/ai-gateway/overview). Lakebase Search and the AI Gateway both require PG16+.
+- The latest `neon` CLI, installed and authenticated (`npm install -g neon@latest`). Functions commands change often, so upgrade before you start.
+- Node.js 20 or later. Deployed functions run on Node.js 24, so 24 is the closest local match.
+- [Prepaid AI Gateway credits](/docs/ai-gateway/prepaid-credits), available on any plan. Embeddings and the decision model both bill against them.
 
-- A [Neon account](https://console.neon.tech/signup) with a project
-- An [OpenAI API key](https://platform.openai.com/api-keys)
-- Node.js 20.x or later installed
-- Basic familiarity with SQL and REST APIs
-- Understanding of JavaScript promises and async/await
+## Set up the schema
 
-## Understanding AI embeddings and vector search
-
-Before the implementation, here's how AI embeddings work and why they help with search.
-
-### What are embeddings?
-
-Embeddings are numerical representations of text that capture semantic meaning in high-dimensional space. When you send text to OpenAI's embedding API, it returns an array of floating-point numbers (typically 1,536 dimensions for the `text-embedding-3-small` model) that represents the "meaning" of that text.
-
-Here's a simplified example of how embeddings work:
-
-```javascript
-// These texts have similar meanings
-const text1 = "The cat jumped over the fence";
-const text2 = "A feline leaped across a barrier";
-
-// Their embeddings would be mathematically similar
-const embedding1 = [-0.02, 0.15, -0.08, ...]; // 1,536 numbers
-const embedding2 = [-0.01, 0.16, -0.09, ...]; // Similar values
-```
-
-Semantically similar texts produce similar embedding vectors, so a search can find relevant content even when it doesn't share exact keywords with the query.
-
-### Why pgvector?
-
-pgvector extends Postgres with vector data types and similarity search operations. Instead of moving your data to specialized vector databases, you can store embeddings alongside your existing relational data and perform vector similarity searches with SQL:
+Enable the extensions and create the table in the [Neon SQL Editor](/docs/get-started/query-with-neon-sql-editor) or any connected client:
 
 ```sql
--- Find documents most similar to a query embedding
-SELECT title, content,
-       embedding <-> $1 as distance
-FROM documents
-ORDER BY embedding <-> $1
-LIMIT 5;
-```
+CREATE EXTENSION IF NOT EXISTS lakebase_vector CASCADE;
+CREATE EXTENSION IF NOT EXISTS lakebase_text CASCADE;
 
-The `<->` operator calculates the distance between vectors, with smaller distances indicating higher similarity.
-
-## Setting up pgvector on Neon
-
-We'll start by enabling pgvector on your Neon database and creating the necessary tables for our search system.
-
-First, create a new Neon project:
-
-1. Navigate to the [Neon Console](https://console.neon.tech)
-2. Click "New Project"
-3. Name your project "semantic-search-system"
-4. Choose a region close to your users
-5. Click **Create project**
-6. After the project is created, consider [editing the compute](/docs/manage/computes#edit-a-compute) to use at least 1 CU (≈4 GB RAM), since vector operations can be CPU-intensive
-
-Next, enable the pgvector extension. Connect to your database and run this SQL:
-
-```sql
--- Enable the pgvector extension
-CREATE EXTENSION IF NOT EXISTS vector;
-
--- Verify the extension is working
-SELECT extversion FROM pg_extension WHERE extname = 'vector';
-```
-
-This command adds vector data types and similarity functions to your Postgres database. The second query returns the installed pgvector version.
-
-Next, we'll create the database schema for our semantic search system. This includes tables for documents and their embeddings, along with indexes for fast vector similarity search.
-
-```sql
--- Table for storing documents with their embeddings
 CREATE TABLE documents (
-    id SERIAL PRIMARY KEY,
-    title TEXT NOT NULL,
-    content TEXT NOT NULL,
-    category VARCHAR(100),
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    embedding vector(1536) -- OpenAI's text-embedding-3-small produces 1536-dimensional vectors
+  id        SERIAL PRIMARY KEY,
+  title     TEXT NOT NULL,
+  body      TEXT NOT NULL,
+  embedding VECTOR(1024),
+  body_tsv  TSVECTOR GENERATED ALWAYS AS (to_tsvector('english', body)) STORED
 );
 
--- Create indexes for fast vector similarity search
-CREATE INDEX documents_embedding_idx ON documents USING ivfflat (embedding vector_cosine_ops);
+CREATE INDEX documents_embedding_idx ON documents
+  USING lakebase_ann (embedding vector_cosine_ops);
 ```
 
-The `vector(1536)` data type stores 1,536-dimensional vectors, matching OpenAI's embedding size. The `ivfflat` index enables approximate nearest neighbor search using cosine distance, which speeds up searches across thousands of embeddings. See [Performance optimization](#performance-optimization) for tuning, and the [pgvector docs](/docs/extensions/pgvector#ivfflat) for why IVFFlat indexes work best when built after the table has data.
+`CASCADE` pulls in `pgvector`, which `lakebase_vector` depends on. The `VECTOR(1024)` column matches the `qwen3-embedding-0-6b` output size. The `lakebase_bm25` index comes later, after documents exist, because BM25 computes corpus-wide statistics at build time. For index tuning and the full schema walkthrough, see [Get started with Lakebase Search](/docs/ai/lakebase-search-get-started).
 
-## Building an embedding generation service
+<Steps>
 
-Next, create a Node.js service that generates embeddings with [OpenAI's API](https://platform.openai.com/docs/guides/embeddings). It turns your text content into the vectors you store in the database.
+## Set up the project
 
-Let's set up the project structure and install the necessary dependencies:
+Create a directory and link it to your Neon project. `neon link` writes a `.neon` file and pulls the branch's environment variables into a local `.env.local`:
 
 ```bash
-mkdir semantic-search-service
-cd semantic-search-service
-npm init -y
-npm install openai pg dotenv express cors
+mkdir lakebase-search-api && cd lakebase-search-api
+neon link
 ```
 
-Create a `.env` file to store your API credentials:
+Install the dependencies. Inside a function you use a pooled `pg` client, not the serverless driver:
 
 ```bash
-OPENAI_API_KEY=your_openai_api_key_here
-DATABASE_URL=postgresql://user:password@ep-abc123.region.aws.neon.tech/neondb?sslmode=require&channel_binding=require
+npm install @neon/config @neon/functions hono pg @neon/ai-sdk-provider@1.1.0 ai@7.0.133
+npm install -D @types/pg
 ```
 
-Now let's create an embedding service that handles OpenAI API interactions. This service preprocesses text, generates embeddings, and handles errors:
+Keep the `ai` and `@neon/ai-sdk-provider` versions pinned while `experimental_decide` (used for reranking at the end) is experimental.
 
-```javascript
-// embedding.js
-const OpenAI = require('openai');
-require('dotenv').config();
+## Declare the function and AI Gateway
 
-const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY,
+Create `neon.ts` at the project root. It declares your function and turns on the AI Gateway. `neon deploy` reads this file, provisions the gateway, and injects its credentials at runtime:
+
+```ts filename="neon.ts"
+import { defineConfig } from '@neon/config/v1';
+
+export default defineConfig({
+  aiGateway: true,
+  functions: {
+    search: {
+      name: 'Lakebase Search API',
+      source: './functions/search.ts',
+    },
+  },
 });
+```
 
-class EmbeddingService {
-  constructor() {
-    this.model = 'text-embedding-3-small'; // Cost-effective and performant
-    this.maxTokens = 8191; // Maximum tokens for this model
-  }
+The key (`search`) is the function's slug: a permanent ID of 1 to 20 lowercase letters and digits, used in CLI commands and the URL. See the [neon.ts reference](/docs/reference/neon-ts) for all options.
 
-  async generateEmbedding(text) {
-    try {
-      // Clean and prepare text for embedding generation
-      const cleanText = this.preprocessText(text);
+## Write the handler
 
-      const response = await openai.embeddings.create({
-        model: this.model,
-        input: cleanText,
-      });
+A function is any module whose default export has a `fetch(request)` method returning a `Response`. A [Hono](https://hono.dev) app exports that shape, so you can route multiple endpoints in one function.
 
-      return response.data[0].embedding;
-    } catch (error) {
-      console.error('Error generating embedding:', error);
-      throw new Error(`Failed to generate embedding: ${error.message}`);
-    }
-  }
+Create `functions/search.ts`. It opens a `pg` pool once at module scope, reads the injected AI Gateway credentials through `@neon/ai-sdk-provider`, and exposes the two endpoints:
 
-  preprocessText(text) {
-    // Remove extra whitespace and normalize the text
-    let cleaned = text.trim().replace(/\s+/g, ' ');
+```ts filename="functions/search.ts"
+import { Hono } from 'hono';
+import { attachDatabasePool } from '@neon/functions';
+import { Pool } from 'pg';
+import { neon } from '@neon/ai-sdk-provider';
+import { embed } from 'ai';
 
-    // Truncate if too long (rough estimate: 1 token ≈ 4 characters)
-    const maxChars = this.maxTokens * 3; // Conservative estimate
-    if (cleaned.length > maxChars) {
-      cleaned = cleaned.substring(0, maxChars) + '...';
-    }
+// Create the pool once at module scope so it's reused across requests.
+const pool = new Pool({ connectionString: process.env.DATABASE_URL, max: 5 });
+attachDatabasePool(pool);
 
-    return cleaned;
-  }
+const app = new Hono();
 
-  // Create optimized text for embedding generation
-  createDocumentText(title, content, category = '') {
-    return `Title: ${title}\nCategory: ${category}\nContent: ${content}`;
-  }
+// Embed text with the AI Gateway. The provider reads the injected
+// credentials on its own, so the model ID is the only configuration.
+async function embedText(text: string): Promise<string> {
+  const { embedding } = await embed({
+    model: neon.embeddingModel('qwen3-embedding-0-6b'),
+    value: text,
+  });
+  return JSON.stringify(embedding);
 }
 
-module.exports = EmbeddingService;
-```
+// Ingest: embed a document and store it.
+app.post('/documents', async (c) => {
+  const { title, body } = await c.req.json();
+  const vector = await embedText(body);
 
-This service preprocesses text so it fits within OpenAI's token limits, combines document fields into a single labeled string, and handles API errors. The `createDocumentText` method labels the title, category, and content so the embedding reflects all three.
-
-At the time of writing, OpenAI's `text-embedding-3-small` model is its lowest-cost embedding model. Check [OpenAI's embeddings guide](https://platform.openai.com/docs/guides/embeddings) for current models.
-
-<Admonition type="tip" title="Generate embeddings with the Neon AI Gateway">
-The [Neon AI Gateway](/docs/ai-gateway/embeddings) serves embedding models on the same OpenAI-compatible API, so you can generate embeddings with the same Neon credential you use for the rest of your project, no separate OpenAI key required. Point the client at your branch's gateway URL and pick a gateway model:
-
-```javascript shouldWrap
-const openai = new OpenAI({
-  apiKey: process.env.NEON_AI_GATEWAY_TOKEN,
-  baseURL: `${process.env.NEON_AI_GATEWAY_BASE_URL}/v1`,
+  const { rows } = await pool.query(
+    `INSERT INTO documents (title, body, embedding)
+     VALUES ($1, $2, $3::vector)
+     RETURNING id, title`,
+    [title, body, vector],
+  );
+  return c.json(rows[0]);
 });
-// ...then set this.model = 'qwen3-embedding-0-6b' in the service, and pass
-// encoding_format: 'float' on the create() call for the openai SDK v6.
+
+// Hybrid search: embed the query, then fuse vector and BM25 results with RRF.
+// Returns rows shaped { id, title, score }.
+async function hybridSearch(query: string, limit = 5) {
+  const queryVector = await embedText(query);
+
+  const { rows } = await pool.query(
+    `WITH vector_ranked AS (
+       SELECT id, RANK() OVER (ORDER BY dist) AS rank
+       FROM (
+         SELECT id, embedding <=> $1::vector AS dist
+         FROM documents
+         WHERE embedding IS NOT NULL
+         ORDER BY dist
+         FETCH FIRST 40 ROWS WITH TIES
+       ) v
+     ),
+     keyword_ranked AS (
+       SELECT id, RANK() OVER (ORDER BY score) AS rank
+       FROM (
+         SELECT id, score
+         FROM (
+           SELECT id, body_tsv <@> to_bm25query(
+             to_tsvector('english', $2), 'documents_bm25'
+           ) AS score
+           FROM documents
+         ) AS scored
+         WHERE score < 0
+         ORDER BY score, id
+         LIMIT 40
+       ) k
+     )
+     SELECT d.id, d.title,
+       COALESCE(1.0 / (60 + v.rank), 0) + COALESCE(1.0 / (60 + k.rank), 0) AS score
+     FROM documents d
+     LEFT JOIN vector_ranked v ON d.id = v.id
+     LEFT JOIN keyword_ranked k ON d.id = k.id
+     WHERE v.id IS NOT NULL OR k.id IS NOT NULL
+     ORDER BY score DESC, d.id
+     LIMIT $3`,
+    [queryVector, query, limit],
+  );
+  return rows;
+}
+
+// Search: embed the query and return the fused ranking.
+app.post('/search', async (c) => {
+  const { query, limit = 5 } = await c.req.json();
+  return c.json({ query, results: await hybridSearch(query, limit) });
+});
+
+export default app;
 ```
 
-The gateway's `qwen3-embedding-0-6b` model returns **1024-dimensional** vectors, so change the schema's `embedding vector(1536)` to `embedding vector(1024)` to match. See [Embeddings](/docs/ai-gateway/embeddings) for the model list and options.
+The vector search orders by cosine distance (`<=>`) against the `lakebase_ann` index. The BM25 search uses the `<@>` operator with `to_bm25query`, which returns negative scores, so lower is more relevant. Reciprocal Rank Fusion (RRF) scores each result by its position in the two lists (`1 / (60 + rank)`) and adds the scores. See [Get started with Lakebase Search](/docs/ai/lakebase-search-get-started#combine-results-with-hybrid-search) for how these queries work in depth.
+
+<Admonition type="important" title="Use a connection pool, not the serverless driver">
+A function keeps running across requests, so connect to Postgres with a long-lived `pg` `Pool` created once at module scope. Don't use `@neondatabase/serverless` here: it's built for short-lived, per-request invocations. Call `attachDatabasePool(pool)` once after creating the pool (requires `@neon/functions` 0.8.0 or later) so an idle disconnect can't crash the isolate. See [Connecting to Postgres](/docs/compute/functions/get-started#connect-to-postgres).
 </Admonition>
 
-## Creating a document management system
+## Run it locally
 
-Next, build a service that stores documents in the database and generates an embedding for each one:
-
-```javascript
-// document-service.js
-const { Pool } = require('pg');
-const EmbeddingService = require('./embedding');
-require('dotenv').config();
-
-class DocumentService {
-  constructor() {
-    this.pool = new Pool({
-      connectionString: process.env.DATABASE_URL,
-      ssl: true,
-      max: 20,
-    });
-    this.embeddingService = new EmbeddingService();
-  }
-
-  async addDocument(title, content, category = null) {
-    const client = await this.pool.connect();
-
-    try {
-      await client.query('BEGIN');
-
-      // Combine document fields into optimized text for embedding
-      const fullText = this.embeddingService.createDocumentText(title, content, category || '');
-
-      // Generate embedding using OpenAI API
-      console.log(`Generating embedding for document: ${title}`);
-      const embedding = await this.embeddingService.generateEmbedding(fullText);
-      const formattedEmbedding = `[${embedding.join(',')}]`;
-
-      // Store document with its embedding in the database
-      const result = await client.query(
-        `
-        INSERT INTO documents (title, content, category, embedding)
-        VALUES ($1, $2, $3, $4)
-        RETURNING id, title, created_at
-      `,
-        [title, content, category, formattedEmbedding]
-      );
-
-      await client.query('COMMIT'); // Complete transaction
-
-      console.log(`Document added successfully: ${result.rows[0].id}`);
-      return result.rows[0];
-    } catch (error) {
-      await client.query('ROLLBACK'); // Undo changes on error
-      console.error('Error adding document:', error);
-      throw error;
-    } finally {
-      client.release(); // Return connection to pool
-    }
-  }
-
-  async searchDocuments(query, limit = 10, category = null) {
-    try {
-      // First, convert the search query into an embedding
-      const fullText = this.embeddingService.createDocumentText(query, '', category || '');
-      const queryEmbedding = await this.embeddingService.generateEmbedding(fullText);
-
-      // Format embedding as a pgvector-compatible string
-      const formattedEmbedding = `[${queryEmbedding.join(',')}]`;
-
-      // Start building the SQL query
-      let sql = `
-            SELECT
-                id,
-                title,
-                content,
-                category,
-                created_at,
-                1 - (embedding <=> $1) as similarity_score
-            FROM documents
-            WHERE 1 - (embedding <=> $1) > 0.3
-            `;
-
-      const params = [formattedEmbedding];
-
-      // Add category filter if needed
-      if (category) {
-        sql += ` AND category = $2`;
-        params.push(category);
-      }
-
-      // Append ORDER BY and LIMIT clauses
-      sql += ` ORDER BY embedding <=> $1 LIMIT $${params.length + 1}`;
-      params.push(limit);
-
-      const result = await this.pool.query(sql, params);
-
-      // Format results
-      return result.rows.map((row) => ({
-        ...row,
-        similarity_score: parseFloat(row.similarity_score.toFixed(4)),
-        preview: row.content.length > 200 ? row.content.substring(0, 200) + '...' : row.content,
-      }));
-    } catch (error) {
-      console.error('Error searching documents:', error);
-      throw error;
-    }
-  }
-
-  async getDocumentById(id) {
-    try {
-      const result = await this.pool.query(
-        `
-        SELECT id, title, content, category, created_at
-        FROM documents
-        WHERE id = $1
-      `,
-        [id]
-      );
-
-      return result.rows[0] || null;
-    } catch (error) {
-      console.error('Error getting document:', error);
-      throw error;
-    }
-  }
-}
-
-module.exports = DocumentService;
-```
-
-The `addDocument` method generates embeddings and stores them alongside the document data, while `searchDocuments` performs the actual semantic search by converting queries to embeddings and finding the most similar documents using pgvector's distance operators.
-
-The `<=>` operator in the SQL query calculates cosine distance between vectors, with smaller values indicating higher similarity. The query converts it to a similarity score (`1 - distance`) that's easier to read, where higher is more similar.
-
-The `getDocumentById` method retrieves a document by its ID so applications can fetch the full content.
-
-## Building the search API
-
-With the document service in place, create an Express API with endpoints for adding documents and running semantic searches.
-
-```javascript
-// server.js
-const express = require('express');
-const cors = require('cors');
-const DocumentService = require('./document-service');
-require('dotenv').config();
-
-const app = express();
-app.use(express.json());
-app.use(cors());
-
-const documentService = new DocumentService();
-
-// Add a single document with automatic embedding generation
-app.post('/documents', async (req, res) => {
-  try {
-    const { title, content, category } = req.body;
-
-    // Validate required fields
-    if (!title || !content) {
-      return res.status(400).json({
-        error: 'Title and content are required',
-      });
-    }
-
-    // Add document and generate embedding
-    const result = await documentService.addDocument(title, content, category);
-    res.status(201).json(result);
-  } catch (error) {
-    console.error('Error adding document:', error);
-    res.status(500).json({
-      error: 'Failed to add document',
-      message: error.message,
-    });
-  }
-});
-
-// Perform semantic search across all documents
-app.post('/search', async (req, res) => {
-  try {
-    const { query, limit = 10, category } = req.body;
-
-    if (!query) {
-      return res.status(400).json({
-        error: 'Search query is required',
-      });
-    }
-
-    const startTime = Date.now();
-
-    // Execute semantic search using vector similarity
-    const results = await documentService.searchDocuments(query, limit, category);
-
-    const searchTime = Date.now() - startTime;
-
-    res.json({
-      query,
-      results,
-      count: results.length,
-      search_time_ms: searchTime,
-    });
-  } catch (error) {
-    console.error('Error searching documents:', error);
-    res.status(500).json({
-      error: 'Search failed',
-      message: error.message,
-    });
-  }
-});
-
-// Get a specific document by ID
-app.get('/documents/:id', async (req, res) => {
-  try {
-    const { id } = req.params;
-    const document = await documentService.getDocumentById(parseInt(id));
-
-    if (!document) {
-      return res.status(404).json({ error: 'Document not found' });
-    }
-
-    res.json(document);
-  } catch (error) {
-    console.error('Error getting document:', error);
-    res.status(500).json({
-      error: 'Failed to get document',
-      message: error.message,
-    });
-  }
-});
-
-// Health check endpoint
-app.get('/health', async (req, res) => {
-  try {
-    // Test database connection
-    await documentService.pool.query('SELECT 1');
-    res.json({ status: 'healthy', database: 'connected' });
-  } catch (error) {
-    res.status(500).json({ status: 'unhealthy', database: 'disconnected' });
-  }
-});
-
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-  console.log(`Semantic search service running on port ${PORT}`);
-});
-```
-
-The `/search` endpoint takes natural language queries and returns semantically relevant documents, even when there are no exact keyword matches.
-
-The endpoint also returns the search time, which you can use to monitor performance as your document collection grows.
-
-## Testing the semantic search system
-
-With the API in place, add some sample documents and run a few queries to see how the search matches on meaning rather than exact keywords.
-
-Create a test script to populate your database with sample content and test the search functionality:
-
-```javascript
-// test-search.js
-const axios = require('axios');
-
-const baseURL = 'http://localhost:3000';
-
-async function testSemanticSearch() {
-  try {
-    console.log('Adding sample documents to test semantic search...\n');
-
-    // Add diverse sample documents across different topics
-    const sampleDocuments = [
-      {
-        title: 'Getting Started with Machine Learning',
-        content:
-          'Machine learning is a subset of artificial intelligence that enables computers to learn and make decisions from data without being explicitly programmed. This guide covers the basics of supervised learning, unsupervised learning, and neural networks.',
-        category: 'technology',
-      },
-      {
-        title: 'Healthy Cooking Tips',
-        content:
-          "Eating nutritious meals doesn't have to be complicated. Focus on fresh ingredients, reduce processed foods, and try cooking methods like steaming and grilling. Meal prep can save time and help maintain a balanced diet.",
-        category: 'health',
-      },
-      {
-        title: 'Remote Work Best Practices',
-        content:
-          'Working from home requires discipline and good habits. Set up a dedicated workspace, maintain regular hours, and use collaboration tools effectively. Communication with team members is crucial for remote success.',
-        category: 'productivity',
-      },
-      {
-        title: 'Understanding Neural Networks',
-        content:
-          'Neural networks are computing systems inspired by biological neural networks. They consist of layers of interconnected nodes that process information. Deep learning uses multi-layered neural networks to solve complex problems.',
-        category: 'technology',
-      },
-    ];
-
-    // Add each document to the system
-    for (const doc of sampleDocuments) {
-      await axios.post(`${baseURL}/documents`, doc);
-      console.log(`✓ Added: ${doc.title}`);
-    }
-
-    console.log('\nDocuments added successfully! Now testing semantic search...\n');
-
-    // Test semantic searches that don't use exact keywords
-    const testQueries = [
-      'artificial intelligence and computers', // Should find ML and neural network docs
-      'how to stay healthy while eating', // Should find cooking tips
-      'working from home effectively', // Should find remote work practices
-      'deep learning algorithms', // Should find both AI-related documents
-    ];
-
-    // Run each test query and display results
-    for (const query of testQueries) {
-      console.log(`🔍 Searching for: "${query}"`);
-
-      const response = await axios.post(`${baseURL}/search`, {
-        query,
-        limit: 3,
-      });
-
-      const { results, search_time_ms } = response.data;
-
-      console.log(`   Found ${results.length} results in ${search_time_ms}ms`);
-
-      // Display the most relevant results
-      results.forEach((doc, index) => {
-        console.log(`   ${index + 1}. ${doc.title} (similarity: ${doc.similarity_score})`);
-        console.log(`      Category: ${doc.category}`);
-        console.log(`      Preview: ${doc.preview}\n`);
-      });
-
-      console.log('---\n');
-    }
-  } catch (error) {
-    console.error('Test failed:', error.response?.data || error.message);
-  }
-}
-
-// Start the server and run tests
-console.log('Make sure your server is running with: node server.js\n');
-testSemanticSearch();
-```
-
-Install `axios` for the test script and run it:
+`neon dev` serves the function with hot reload, injecting `DATABASE_URL` and the AI Gateway credentials from the linked branch:
 
 ```bash
-npm install axios
-
-# Start your server in one terminal
-node server.js
-
-# Run the test in another terminal
-node test-search.js
+neon dev
 ```
 
-You should see output showing how the semantic search finds relevant documents even when the search terms don't appear exactly in the document text.
+The terminal prints a local URL for the function:
 
-For example, searching for "artificial intelligence and computers" should return documents about machine learning and neural networks, because the search matches on meaning rather than keywords.
+```text
+  Neon Functions dev server
 
-Scores closer to 1.0 indicate higher semantic similarity.
+  search               http://localhost:8787
+```
 
-## Performance optimization
+## Load documents and build the BM25 index
 
-As your document collection grows, tune the pgvector index. The default index settings work for small datasets, but larger collections need tuning:
+With the dev server running, add a few documents through the ingest endpoint:
+
+```bash shouldWrap
+curl -X POST http://localhost:8787/documents \
+  -H 'content-type: application/json' \
+  -d '{"title":"Vector search on Postgres","body":"lakebase_vector adds a lakebase_ann index to Postgres for fast approximate nearest-neighbor search at billion-vector scale."}'
+
+curl -X POST http://localhost:8787/documents \
+  -H 'content-type: application/json' \
+  -d '{"title":"BM25 full-text search","body":"lakebase_text adds a lakebase_bm25 index that provides BM25 ranking and top-K pushdown while preserving standard tsvector types."}'
+```
+
+Now that the table has data, create the BM25 index once in the SQL Editor:
 
 ```sql
--- Drop existing indexes to recreate with optimal settings
-DROP INDEX IF EXISTS documents_embedding_idx;
-
--- Create optimized indexes based on your data size
--- Rule of thumb: lists = rows / 1000, with minimum of 10
-CREATE INDEX documents_embedding_idx ON documents
-USING ivfflat (embedding vector_cosine_ops)
-WITH (lists = 100);  -- Adjust based on your document count
-
--- Update table statistics for optimal query planning
-ANALYZE documents;
+CREATE INDEX documents_bm25 ON documents
+  USING lakebase_bm25 (body_tsv)
+  WITH (default_limit = 10);
 ```
 
-The index speeds up queries by running approximate nearest neighbor searches instead of comparing every vector.
+After bulk-loading more documents later, run `VACUUM documents` to keep BM25 scores accurate. See [The lakebase_text extension](/docs/extensions/lakebase-text) for the details.
 
-Adjust the `lists` parameter as your data grows. More documents need more lists. For other index types and tuning options, see [The pgvector extension](/docs/extensions/pgvector).
+## Deploy
 
-## Conclusion
+`neon deploy` reads `neon.ts`, bundles the function with esbuild, uploads it, and waits for the deployment to finish:
 
-You've built a semantic search API that stores OpenAI embeddings in a Postgres database on Neon and queries them with `pgvector`. From here, you could add features like search suggestions or multilingual support.
+```bash
+neon deploy
+```
 
-## Additional resources
+Retrieve the public URL once the deployment reaches `completed`:
 
-- [pgvector documentation](https://github.com/pgvector/pgvector)
-- [OpenAI embeddings guide](https://platform.openai.com/docs/guides/embeddings)
-- [Neon documentation](/docs)
-- [pgvector best practices](https://github.com/pgvector/pgvector#best-practices)
+```bash
+neon functions get search
+```
+
+The `URL` field holds the public HTTPS URL for your function (`invocation_url` in `--output json`).
+
+## Call the deployed API
+
+Point the same requests at the deployed URL. Search returns the fused ranking:
+
+```bash shouldWrap
+curl -X POST https://<branch_id>-search.compute.<cell>.us-east-2.aws.neon.tech/search \
+  -H 'content-type: application/json' \
+  -d '{"query":"approximate nearest neighbor search","limit":5}'
+```
+
+```json
+{
+  "query": "approximate nearest neighbor search",
+  "results": [
+    { "id": 1, "title": "Vector search on Postgres", "score": "0.03278688524590163934" },
+    { "id": 2, "title": "BM25 full-text search", "score": "0.01612903225806451613" }
+  ]
+}
+```
+
+Each document that matches the vector or BM25 search appears in the ranking. The RRF `score` comes back as a string because the fusion runs in Postgres `numeric`, which the `pg` driver returns as a string. Parse it client-side if you need a number.
+
+</Steps>
+
+## Optional: rerank with a decision model
+
+RRF ranks by position alone. To rank by whether each result actually answers the query, add reranking with [Jev](/docs/ai-gateway/decisions), a decision model served through the AI Gateway. It reads each candidate alongside the query and returns a probability, with no change to your schema. Jev bills against the same AI Gateway credits as embeddings.
+
+Add the import and a reranking function to `functions/search.ts`:
+
+```ts filename="functions/search.ts"
+import { experimental_decide as decide } from 'ai';
+
+type Candidate = { id: number; title: string; body: string };
+
+// Returns rows shaped { id, title, score }, the same shape as hybridSearch.
+async function rerankWithJev(query: string, limit = 5) {
+  const queryVector = await embedText(query);
+
+  const candidates = (
+    await pool.query(
+      `WITH vector_candidates AS (
+         SELECT id
+         FROM documents
+         WHERE embedding IS NOT NULL
+         ORDER BY embedding <=> $1::vector
+         LIMIT 40
+       ),
+       keyword_candidates AS (
+         SELECT id
+         FROM (
+           SELECT id, body_tsv <@> to_bm25query(
+             to_tsvector('english', $2), 'documents_bm25'
+           ) AS score
+           FROM documents
+         ) AS scored
+         WHERE score < 0
+         ORDER BY score, id
+         LIMIT 40
+       ),
+       candidate_ids AS (
+         SELECT id FROM vector_candidates
+         UNION
+         SELECT id FROM keyword_candidates
+       )
+       SELECT d.id, d.title, d.body
+       FROM candidate_ids AS c
+       JOIN documents AS d ON d.id = c.id
+       ORDER BY d.id`,
+      [queryVector, query],
+    )
+  ).rows as Candidate[];
+  if (candidates.length === 0) return [];
+
+  const { answers } = await decide({
+    model: neon.decisionModel('typesafeai-jev-1-14-0'),
+    state: { query },
+    questions: Object.fromEntries(
+      candidates.map((doc, index) => [
+        `d${index}`,
+        {
+          type: 'boolean' as const,
+          instructions: {
+            question:
+              'Given the search query in state.query, does this candidate passage supply the specific information the user is looking for?',
+            candidate: { title: doc.title, body: doc.body },
+          },
+          criteria: {
+            true: 'The candidate states the specific facts or steps the query asks for.',
+            false:
+              'The candidate only shares keywords or a topic with the query, answers a different question, or lacks the requested information.',
+          },
+        },
+      ]),
+    ),
+    maxRetries: 0,
+    abortSignal: AbortSignal.timeout(10_000),
+  });
+
+  return candidates
+    .map((doc, index) => {
+      const answer = answers[`d${index}`];
+      if (answer?.type !== 'boolean') {
+        throw new Error(`Missing relevance probability for d${index}`);
+      }
+      return { doc, index, probability: answer.probability };
+    })
+    .sort((a, b) => b.probability - a.probability || a.index - b.index)
+    .slice(0, limit)
+    .map(({ doc, probability }) => ({ id: doc.id, title: doc.title, score: probability }));
+}
+```
+
+Then update the `/search` handler to rerank when a request passes `rerank: true`, and fall back to RRF when it's absent. Both paths return the same `{ id, title, score }` shape:
+
+```ts filename="functions/search.ts"
+app.post('/search', async (c) => {
+  const { query, limit = 5, rerank = false } = await c.req.json();
+
+  const results = rerank
+    ? await rerankWithJev(query, limit)
+    : await hybridSearch(query, limit);
+
+  return c.json({ query, results });
+});
+```
+
+Jev sends the query and all candidates in one request, which must fit the model's 65,536-token context window. For long documents, search shorter passages or send fewer candidates. One result always ranks first even when none answers the query, so test with unanswered queries to pick a minimum probability for accepting a result. See [Decisions](/docs/ai-gateway/decisions) for the model and SDK details.
+
+## Next steps
+
+- [Get started with Lakebase Search](/docs/ai/lakebase-search-get-started): the raw SQL for vector, BM25, and hybrid search
+- [The lakebase_vector extension](/docs/extensions/lakebase-vector): `lakebase_ann` index options, operator classes, and tuning
+- [The lakebase_text extension](/docs/extensions/lakebase-text): BM25 operators, functions, and index parameters
+- [Neon Functions](/docs/compute/functions/overview): triggers, custom domains, authentication, and logs
+- [Embeddings](/docs/ai-gateway/embeddings) and [Decisions](/docs/ai-gateway/decisions): the AI Gateway models this guide uses
 
 <NeedHelp />

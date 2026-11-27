@@ -8,7 +8,7 @@ summary: >-
 enableTableOfContents: true
 redirectFrom:
   - /docs/ai/mcp
-updatedOn: '2026-11-23T12:21:23.032Z'
+updatedOn: '2026-11-25T05:19:14.187Z'
 ---
 
 The Neon MCP Server implements the Model Context Protocol (MCP), letting AI assistants interact with your Neon projects on your behalf. Your AI agent can interact with Neon via MCP tools or by running [Neon CLI](/docs/cli) commands directly.
@@ -84,7 +84,7 @@ Append `?readonly=true` to restrict the server to read operations:
 https://mcp.neon.tech/mcp?readonly=true
 ```
 
-`SELECT` queries and schema inspection remain available. Write operations (creating branches, running migrations, modifying auth config) are disabled. `run_sql_transaction` and `get_connection_string` aren't available in read-only mode; use `run_sql` for read queries.
+`SELECT` queries and schema inspection remain available. Write operations (creating branches, running migrations, modifying auth config) are disabled. `run_sql_transaction`, `get_connection_string`, and `call_api` aren't available in read-only mode; use `run_sql` for read queries.
 
 With OAuth, you can also choose read-only scope during the authorization flow instead of using the URL parameter.
 

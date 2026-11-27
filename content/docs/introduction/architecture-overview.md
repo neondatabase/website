@@ -17,7 +17,7 @@ redirectFrom:
   - /docs/conceptual-guides/architecture-overview
   - /docs/guides/neon-features
   - /docs/introduction/architecture
-updatedOn: '2026-08-07T17:19:40.308Z'
+updatedOn: '2026-11-21T12:38:54.885Z'
 ---
 
 ## Top level overview
@@ -90,7 +90,7 @@ Rather than exposing a traditional filesystem, the database storage layer is bui
 - The pageserver: turns WAL into queryable data pages
 - Object storage: holds long-term, immutable history
 
-### Safekeepers: defining correctness via WAL quorum
+### Safekeepers and WAL quorum
 
 Safekeepers are responsible for one thing: **durable replication of WAL**. When a compute node generates WAL records, it streams them to multiple safekeepers. A transaction is considered committed once a quorum of safekeepers has acknowledged the WAL record [via the Paxos protocol](/blog/paxos).
 
@@ -100,7 +100,7 @@ This is a fundamental difference from how traditional Postgres works:
 - Commit latency is primarily quorum/network-bound, with safekeepers batching WAL flushes rather than relying on compute-local fsync
 - No single machine defines the durable state of the database
 
-### Pageserver: WAL ⇄ pages
+### Pageserver and page materialization
 
 The pageserver sits between WAL and data [pages](/docs/reference/glossary#page). Its job is to **materialize page versions** by combining previously materialized base pages and committed WAL records. It is the system’s translation layer between the logical history of the database and the physical representation needed to run queries.
 
@@ -108,13 +108,13 @@ When a compute node needs a page at a specific [LSN (Log Sequence Number)](/docs
 
 Importantly, page materialization is not on the transaction’s critical path. Commits do not wait for pages to be written or uploaded.
 
-### Object storage: long-term, immutable history
+### Object storage for long-term history
 
 Object storage is where Lakebase Postgres keeps the **durable history** of the database. This layer stores materialized page versions, historical snapshots of data, and immutable representations of past states. It is not a query engine, and it is never accessed directly by the compute layer. It backs the pageserver, not Postgres.
 
 This distinction is critical for performance. Object storage is optimal for durability, scale, and cost, not latency. Reads from object storage may take hundreds of milliseconds, but those reads happen only inside the pageserver when reconstructing pages, and never on the hot query path.
 
-## Write path: committing a transaction
+## Committing a transaction on the write path
 
 ![Write path in Lakebase Postgres](/docs/introduction/neon-write-path.png)
 
@@ -125,13 +125,13 @@ When a transaction executes on a compute node:
 3. **Commit is defined by quorum.** A transaction is considered committed once a quorum of safekeepers has acknowledged the WAL record. At this point, the client receives success.
 4. **Page materialization happens later.** Page reconstruction and persistence happen asynchronously in the storage layer.
 
-## Read path: serving data without object-store latency
+## Serving reads without object storage latency
 
 ![Read path in Lakebase Postgres](/docs/introduction/neon-read-path.png)
 
 The obvious concern with running a database on object storage is latency, but the lakebase architecture is designed specifically to avoid this. The most important thing to understand about reads is this: **queries do not read from object storage.** Object storage backs the system, but it is never on the hot query path.
 
-### The preferred path: local first
+### Preferring local pages
 
 When Postgres running on a compute node needs to read a page, it follows a preference order:
 
@@ -140,7 +140,7 @@ When Postgres running on a compute node needs to read a page, it follows a prefe
 
 Only if the page is missing locally does the system involve the storage layer (next section).
 
-### Cache miss: requesting a page from the pageserver
+### Requesting a page on a cache miss
 
 On a cache miss, the compute node requests the required page from the pageserver, specifying the page identifier and the logical point in time (LSN). The pageserver then:
 

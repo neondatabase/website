@@ -1,4 +1,4 @@
-text: 'Postgres 19 is available on Neon. Try it on the Free Plan'
+text: 'Build an MCP server for your app with a few prompts to your agent'
 link:
-  url: 'https://neon.com/blog/postgres-19-is-out-try-it-on-neon'
+  url: 'https://neon.com/blog/every-app-needs-an-mcp-server'
   target: '_blank'

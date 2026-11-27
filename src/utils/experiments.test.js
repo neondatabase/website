@@ -51,10 +51,14 @@ describe('experiments', () => {
     expect(sendGtagEvent).toHaveBeenCalledWith('Experiment Viewed', {
       experiment_id: 'test-exp',
       variant_id: 'a',
+      experiment_name: 'test-exp',
+      experiment_group_name: 'a',
     });
     expect(sendGtagEvent).toHaveBeenCalledWith('Experiment Success', {
       experiment_id: 'test-exp',
       variant_id: 'a',
+      experiment_name: 'test-exp',
+      experiment_group_name: 'a',
       method: 'button',
     });
   });

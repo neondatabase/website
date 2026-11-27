@@ -15,7 +15,7 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/neon-auth/api
   - /docs/guides/neon-auth-api
-updatedOn: '2026-11-10T14:15:46.000Z'
+updatedOn: '2026-11-27T00:39:29.985Z'
 ---
 
 You can manage Managed Better Auth programmatically using the [Neon API](/docs/reference/api), or from the terminal with the [Neon CLI](/docs/cli/neon-auth) (`neon neon-auth`), which wraps these same operations. You can also enable and configure Managed Better Auth from an AI editor using the [Neon MCP server](/docs/ai/neon-mcp-server#available-tools) (`provision_neon_auth`, `update_auth_config`, `add_auth_oauth_provider`, `get_neon_auth_config`). See [Set up with your AI editor](/docs/auth/about#set-up-with-your-ai-editor).
@@ -152,6 +152,86 @@ The `delete_data` field controls whether the system removes the `neon_auth` sche
 Setting `delete_data` to `true` permanently removes all auth data from the database. You cannot undo this.
 </Admonition>
 
+## Export Managed Better Auth logs
+
+<Admonition type="note" title="Beta">
+Managed Better Auth logs export is in beta. It's available in AWS US East (N. Virginia) (`aws-us-east-1`), AWS US East (Ohio) (`aws-us-east-2`), AWS Europe (Frankfurt) (`aws-eu-central-1`), and AWS Asia Pacific (Singapore) (`aws-ap-southeast-1`). In other regions, a request to turn on export returns `404`.
+</Admonition>
+
+Managed Better Auth can export a branch's authentication events, such as sign-ups and sign-ins, to the branch logs, so you can read them alongside your other logs. Export is set per branch. Where the feature is available, export is turned on by default when you enable Managed Better Auth on a branch. If you disable and re-enable Managed Better Auth, the branch keeps its previous export setting. Child branches inherit the parent branch's setting.
+
+In the Neon Console, go to **Settings** > **Better Auth**, and under **Logs**, turn **Enable logs** on or off. With the API, send a `PATCH` request to turn export on or off for a branch:
+
+```bash
+curl -X PATCH 'https://console.neon.tech/api/v2/projects/{project_id}/branches/{branch_id}/auth/logs_export' \
+  -H "Authorization: Bearer $NEON_API_KEY" \
+  -H 'Content-Type: application/json' \
+  -d '{"enabled": true}'
+```
+
+Response (200 OK):
+
+```json
+{
+  "enabled": true
+}
+```
+
+The `enabled` field reports the current setting. Logs export is only supported for Managed Better Auth (`better_auth`) branches. Other auth providers return `400`.
+
+If logs export isn't available for your project, a request with `enabled: true` returns `404`. You can always send `enabled: false` to turn export off. Enabling export can also return `409` or `423` if the branch is busy, `429` if you're rate limited, or `503` if the service is temporarily unavailable. Retry these later.
+
+Send `{"enabled": false}` to stop exporting. Events already exported aren't deleted, and events may continue to be exported for a few seconds after you turn export off.
+
+The current setting is also returned by `GET /projects/{project_id}/branches/{branch_id}/auth/plugins`, in a `logs_export` object with the same `enabled` field. The `logs_export` object is omitted when logs export isn't available for the project.
+
+With the [Neon CLI](/docs/cli), use `neon neon-auth config logs-export` with `get`, `enable`, or `disable`:
+
+```bash
+neon neon-auth config logs-export enable --project-id <project_id> --branch <branch_id>
+```
+
+### Read Managed Better Auth logs
+
+Exported events are stored in the branch logs under the `neon_auth` source. Read them with the [Query branch logs](/docs/reference/api/logs/query-project-branch-logs) API, passing `source` in the JSON body:
+
+```bash
+curl -X POST 'https://console.neon.tech/api/v2/projects/{project_id}/branches/{branch_id}/logs/query' \
+  -H "Authorization: Bearer $NEON_API_KEY" \
+  -H 'Content-Type: application/json' \
+  -d '{"source": "neon_auth", "since": "1h"}'
+```
+
+Or use [`neon logs query`](/docs/cli/logs):
+
+```bash
+neon logs query --source neon_auth --since 1h
+```
+
+Queries cover at most the last 7 days. You can also view these logs on the branch's [Monitoring page](/docs/introduction/monitor-logs), on the **Auth** tab.
+
+Each event is a structured JSON record with the route, method, status, duration, outcome, request ID, auth provider, client IP address, user agent, and, for successful requests, the user ID. Secrets in request paths are redacted. For example, a failed sign-in looks like this:
+
+```json
+{
+  "event": "sign_in",
+  "outcome": "failure",
+  "message": "sign_in failed",
+  "method": "POST",
+  "route": "/:database/auth/sign-in/email",
+  "status": 401,
+  "error_code": "INVALID_EMAIL_OR_PASSWORD",
+  "duration_ms": 105.04,
+  "request_id": "48d8d547-81e8-476e-aede-da9ab0c9b24b",
+  "ip": "203.0.113.42",
+  "user_agent": "curl/8.7.1"
+}
+```
+
+Better Auth's own logs are exported under the `neon.auth.better_auth` scope.
+
+If Managed Better Auth logs aren't available for your project yet, querying `neon_auth` returns `404` with reason `telemetry_not_enabled`. Turning export off doesn't cause this error. It stops new events from being exported, and logs already exported stay readable.
+
 ## Related auth endpoints
 
 The Neon API also provides endpoints for managing auth configuration at the branch level. These are available at `https://console.neon.tech/api/v2/projects/{project_id}/branches/{branch_id}/auth/...`:
@@ -167,6 +247,7 @@ The Neon API also provides endpoints for managing auth configuration at the bran
 | `/plugins/magic-link`     | PATCH                    | Configure the [Magic Link plugin](/docs/auth/guides/plugins/magic-link)                          |
 | `/plugins/phone-number`   | GET, PATCH               | Configure the [Phone Number plugin](/docs/auth/guides/plugins/phone-number)                      |
 | `/plugins/oauth-provider` | GET, PATCH               | Configure the [OAuth provider plugin](/docs/auth/guides/plugins/oauth-provider)                  |
+| `/logs_export`            | PATCH                    | Turn [auth logs export](#export-managed-better-auth-logs) on or off for the branch (beta)        |
 | `/oauth-provider/clients` | GET, POST, PATCH, DELETE | Manage [OAuth clients](/docs/auth/guides/plugins/oauth-provider#create-and-manage-oauth-clients) |
 | `/webhooks`               | GET, PUT                 | Configure webhook notifications                                                                  |
 | `/allow_localhost`        | GET, PATCH               | Toggle localhost access for development                                                          |

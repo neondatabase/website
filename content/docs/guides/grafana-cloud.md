@@ -566,7 +566,7 @@ If any of the computes in your project are active, you should start seeing data 
       },
       {
         "name": "DS_LOKI",
-        "label": "Loki Datasource", 
+        "label": "Loki Datasource",
         "type": "datasource",
         "query": "loki",
         "hide": 0,
@@ -660,7 +660,7 @@ If any of the computes in your project are active, you should start seeing data 
       {
         "name": "Low Cache Hit Rate",
         "datasource": {
-          "type": "prometheus", 
+          "type": "prometheus",
           "uid": "${DS_PROMETHEUS}"
         },
         "expr": "neon_lfc_hits / (neon_lfc_hits + neon_lfc_misses) * 100 < 90",
@@ -686,6 +686,7 @@ If any of the computes in your project are active, you should start seeing data 
   ]
 }
 ```
+
 </details>
 
 ## Available metrics

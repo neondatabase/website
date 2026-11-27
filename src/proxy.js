@@ -4,15 +4,23 @@ import { checkCookie, getReferer } from 'app/actions';
 import { SITEMAP_MD } from 'constants/agent-discovery';
 import { CONTENT_ROUTES, GENERATED_PAGE_MARKDOWN_PATHS } from 'constants/content';
 import LINKS from 'constants/links';
+import { NON_AGENT_FETCH_HEADERS } from 'constants/llm-analytics';
 import { STATIC_MD_PATHS } from 'constants/static-md-manifest';
 
 import {
   isAIAgentRequest,
+  isBrowserBackgroundRequest,
+  isBrowserNavigation,
+  isNamedFetcherUserAgent,
   getFunctionTemplatesMarkdownPath,
   getMarkdownPath,
 } from './utils/ai-agent-detection';
 import { createLLMAnalytics } from './utils/llm-analytics';
-import { markdownNotFoundResponse } from './utils/markdown-404';
+import {
+  MARKDOWN_CACHE_CONTROL,
+  markdownNotFoundResponse,
+  markdownResponse,
+} from './utils/markdown-response';
 
 const SITE_URL =
   process.env.VERCEL_ENV === 'preview'
@@ -21,6 +29,53 @@ const SITE_URL =
 
 const IMAGE_EXTENSION = /\.(?:avif|gif|ico|jpe?g|png|svg|webp)$/i;
 const GUIDE_AUTHOR_PATH = /^\/guides\/authors\/[^/]+$/;
+// A blog post page: /blog/<slug>, one segment, no dot (so /blog/rss.xml and
+// /blog/llms.txt aren't posts). /blog/category is a listing prefix, not a post.
+const BLOG_POST_PATH = /^\/blog\/([^/.]+)$/;
+
+// Last path segment with percent-encoded unreserved characters decoded, for
+// extension matching (the original URL is still what gets forwarded).
+function getNormalizedFilename(pathname) {
+  const filename = pathname.slice(pathname.lastIndexOf('/') + 1);
+  return filename.replace(/%([0-9a-f]{2})/gi, (encoded, hex) => {
+    const character = String.fromCharCode(Number.parseInt(hex, 16));
+    return /[a-z0-9._~-]/i.test(character) ? character : encoded;
+  });
+}
+
+// Files that aren't pages (images, downloads, data). Fetching one isn't a page
+// read, so agent-html doesn't count it. Docs slugs can contain a dot
+// (/docs/auth/migrate/from-auth-v0.1), so this lists asset types rather than
+// treating every dot as a file extension.
+const ASSET_EXTENSION =
+  /\.(?:avif|gif|ico|jpe?g|png|svg|webp|json|pdf|js|css|map|woff2?|ttf|otf|mp4|webm|zip)$/i;
+
+function isAssetRequest(pathname) {
+  return pathname === '/docs/og' || ASSET_EXTENSION.test(getNormalizedFilename(pathname));
+}
+
+// Files agents read to discover the site: llms.txt indexes (/llms.txt,
+// /docs/llms.txt, /blog/llms.txt, ...), /.well-known/* (MCP server cards, AI
+// catalog, skills), and the AI Gateway model catalog (/models, /models.json).
+const AGENT_DISCOVERY_PATH =
+  /(?:^|\/)llms(?:-full)?\.txt$|(?:^|\/)\.well-known\/|^\/models(?:\.json)?$/;
+
+function isAgentDiscoveryPath(pathname) {
+  return AGENT_DISCOVERY_PATH.test(pathname);
+}
+
+// Serve markdown in place of a page's HTML to clients isAIAgentRequest picks,
+// but never to a browser's background request: an agent-driven browser
+// (Claude-Agent's UA contains "claude") prefetches pages with Accept: */*, and
+// answering Next.js's prefetch with markdown would break its navigation.
+function wantsNegotiatedMarkdown(req) {
+  return isAIAgentRequest(req) && !isBrowserBackgroundRequest(req);
+}
+
+function blogPostSlug(pathname) {
+  const slug = pathname.match(BLOG_POST_PATH)?.[1];
+  return slug && slug !== 'category' ? slug : null;
+}
 
 function isContentRoute(pathname) {
   const path = pathname.slice(1).replace(/\/$/, '');
@@ -66,8 +121,14 @@ async function resolveMarkdownRedirect(pathname, origin) {
   try {
     // Neutral UA so the probe isn't classified as an AI agent (isAIAgentRequest
     // matches broad tokens like curl/got/axios) and gets the next.config 308.
+    // NON_AGENT_FETCH_HEADERS keeps the probe itself from being counted as a
+    // read of the HTML page.
     const response = await fetch(`${origin}${htmlPathname}`, {
-      headers: { Accept: 'text/html', 'User-Agent': 'neon-md-redirect-probe' },
+      headers: {
+        ...NON_AGENT_FETCH_HEADERS,
+        Accept: 'text/html',
+        'User-Agent': 'neon-md-redirect-probe',
+      },
       redirect: 'manual',
     });
 
@@ -101,7 +162,7 @@ async function markdownRedirectResponse(req, pathname) {
 
   const response = NextResponse.redirect(new URL(target, req.url), 308);
   // Short TTL so cached 308s still re-enter the proxy and get tracked.
-  response.headers.set('Cache-Control', 'public, max-age=60, s-maxage=300');
+  response.headers.set('Cache-Control', MARKDOWN_CACHE_CONTROL);
   return response;
 }
 
@@ -148,7 +209,7 @@ function skillReferenceRedirectResponse(req, pathname) {
 
   const response = NextResponse.redirect(new URL(target, req.url), 308);
   // Short TTL so cached redirects still re-enter the proxy and get LLM-tracked.
-  response.headers.set('Cache-Control', 'public, max-age=60, s-maxage=300');
+  response.headers.set('Cache-Control', MARKDOWN_CACHE_CONTROL);
   return response;
 }
 
@@ -222,9 +283,90 @@ function staticMarkdownResponse(pathname, analytics) {
   return markdownNotFoundResponse(pathname, { source: 'agent-404' });
 }
 
+// The blog route handler (/blog/[slug]/md) reads the post from the in-repo
+// snapshot; its bundle includes the blog content. The proxy fetches it rather
+// than rewriting to it so the read is counted here, before any cache, with the
+// real outcome, the same way docs .md are served. The route's own response may
+// be CDN-cached; this response isn't.
+const BLOG_MARKDOWN_FETCH_USER_AGENT = 'neon-blog-markdown-proxy';
+const BLOG_MARKDOWN_HEADERS = [
+  'Content-Type',
+  'X-Content-Source',
+  'X-Robots-Tag',
+  'X-LLMs-Txt',
+  'Link',
+];
+
+async function blogMarkdownResponse(req, slug, analytics, { branch }) {
+  try {
+    const upstream = await fetch(`${req.nextUrl.origin}/blog/${slug}/md`, {
+      headers: { ...NON_AGENT_FETCH_HEADERS, 'User-Agent': BLOG_MARKDOWN_FETCH_USER_AGENT },
+    });
+
+    // Count found and not-found posts. A 5xx is a failed read: serve it, don't
+    // count it. Recorded under the public .md URL, also for negotiated reads.
+    if (upstream.ok || upstream.status === 404) {
+      analytics.track({
+        is404: upstream.status === 404,
+        branch,
+        pageUrl: new URL(`/blog/${slug}.md`, req.url).href,
+      });
+    }
+
+    const headers = new Headers();
+    for (const name of BLOG_MARKDOWN_HEADERS) {
+      const value = upstream.headers.get(name);
+      if (value) headers.set(name, value);
+    }
+    if (upstream.ok || upstream.status === 404) {
+      headers.set('Cache-Control', MARKDOWN_CACHE_CONTROL);
+    }
+    const response = new NextResponse(await upstream.text(), {
+      status: upstream.status,
+      headers,
+    });
+    return applyNegotiationVary(response);
+  } catch (error) {
+    console.error('[blog .md] Error serving blog markdown', { slug, error: error.message });
+    // Still serve the post through the route handler; this read goes uncounted.
+    const rewriteUrl = req.nextUrl.clone();
+    rewriteUrl.pathname = `/blog/${slug}/md`;
+    return applyNegotiationVary(NextResponse.rewrite(rewriteUrl));
+  }
+}
+
 export async function proxy(req, event) {
   const analytics = createLLMAnalytics(req);
   const response = await handleProxy(req, analytics);
+
+  // Count reads the branches above didn't, when the request passes through to
+  // the page or file. Non-GET requests, prefetches and router fetches are
+  // skipped inside track() (isNonReadRequest).
+  // - Pages: clients that don't navigate like a browser (AI agents, search
+  //   crawlers, python-requests, wget, ...), plus every named AI assistant,
+  //   AI crawler or search crawler except browser agents
+  //   (isNamedFetcherUserAgent). Other browser engines (a person, a headless
+  //   browser, Claude-Agent, Google-Agent, ChatGPT agent) run the page's
+  //   analytics script, which counts that view once; counting it here too
+  //   would double it. Named fetchers are the exception: some send navigation
+  //   headers, but no browser-script pageview arrives for them, so they'd be
+  //   counted nowhere. One whose browser-script pageview does arrive is
+  //   counted twice; that pageview carries the User-Agent, so it can be
+  //   dropped downstream.
+  // - Agent discovery files (llms.txt, /.well-known/*, /models): every reader,
+  //   browsers included, since these files run no script.
+  // classifyReader labels each pageview (llm_reader).
+  if (!analytics.beacon && response.headers.get('x-middleware-next') === '1') {
+    const { pathname } = req.nextUrl;
+    if (isAgentDiscoveryPath(pathname)) {
+      analytics.track({ branch: 'discovery-file' });
+    } else if (
+      !isAssetRequest(pathname) &&
+      (!isBrowserNavigation(req) || isNamedFetcherUserAgent(req.headers.get('user-agent')))
+    ) {
+      analytics.track({ branch: 'non-browser-html' });
+    }
+  }
 
   if (analytics.beacon) {
     if (event?.waitUntil) {
@@ -242,21 +384,24 @@ async function handleProxy(req, analytics) {
   try {
     const { pathname } = req.nextUrl;
 
-    // /blog/[slug].md — serve raw markdown from the in-repo blog snapshot (the
-    // same source the HTML post page renders from). Rewrite to
-    // the blog route handler at /blog/[slug]/md, which reads it and
-    // fires the LLM read beacon. (Previously this fetched an external CDN that
-    // stopped receiving new posts once the blog moved into this repo.)
+    // /blog/[slug].md — the post's raw markdown, from the in-repo blog snapshot
+    // (the same source the HTML post page renders from).
     if (pathname.startsWith('/blog/') && pathname.endsWith('.md')) {
       const slug = pathname.slice('/blog/'.length, -'.md'.length);
       // Only real (single-segment) post slugs map to the handler. A nested path
       // like /blog/a/b.md isn't a post; let it fall through to the generic .md
       // handler below so it still returns a markdown 404, not an HTML one.
       if (slug && !slug.includes('/')) {
-        const rewriteUrl = req.nextUrl.clone();
-        rewriteUrl.pathname = `/blog/${slug}/md`;
-        return NextResponse.rewrite(rewriteUrl);
+        return blogMarkdownResponse(req, slug, analytics, { branch: 'blog-markdown' });
       }
+    }
+
+    // /blog/[slug] for an AI agent (Accept: text/markdown, a non-HTML Accept,
+    // or an agent UA that doesn't accept HTML): serve the post's markdown, the
+    // same way docs pages are negotiated. Browsers get the HTML page below.
+    const negotiatedBlogSlug = blogPostSlug(pathname);
+    if (negotiatedBlogSlug && wantsNegotiatedMarkdown(req)) {
+      return blogMarkdownResponse(req, negotiatedBlogSlug, analytics, { branch: 'agent-markdown' });
     }
 
     // Retired neon-postgres skill reference URLs (PR #4666) → 308 to their
@@ -270,13 +415,8 @@ async function handleProxy(req, analytics) {
     const staticMd = staticMarkdownResponse(pathname, analytics);
     if (staticMd) return staticMd;
 
-    const isAgent = isAIAgentRequest(req);
-    // Normalize unreserved characters for extension matching and forward the original URL.
-    const filename = pathname.slice(pathname.lastIndexOf('/') + 1);
-    const normalizedFilename = filename.replace(/%([0-9a-f]{2})/gi, (encoded, hex) => {
-      const character = String.fromCharCode(Number.parseInt(hex, 16));
-      return /[a-z0-9._~-]/i.test(character) ? character : encoded;
-    });
+    const isAgent = wantsNegotiatedMarkdown(req);
+    const normalizedFilename = getNormalizedFilename(pathname);
     const isImage = IMAGE_EXTENSION.test(normalizedFilename) || pathname === '/docs/og';
     const isJsonFile =
       /\.json$/i.test(normalizedFilename) &&
@@ -290,23 +430,12 @@ async function handleProxy(req, analytics) {
       if (markdownPath) {
         try {
           const markdownUrl = `${req.nextUrl.origin}${markdownPath}`;
-          const response = await fetch(markdownUrl);
+          const response = await fetch(markdownUrl, { headers: NON_AGENT_FETCH_HEADERS });
 
           if (response.ok) {
             analytics.track({ branch: 'agent-markdown' });
             const markdown = await response.text();
-            return applyDocHeaders(
-              new NextResponse(markdown, {
-                status: 200,
-                headers: {
-                  'Content-Type': 'text/markdown; charset=utf-8',
-                  // Preserve the existing short Markdown cache policy.
-                  'Cache-Control': 'public, max-age=60, s-maxage=300',
-                  'X-Content-Source': 'markdown',
-                  'X-Robots-Tag': 'noindex',
-                },
-              })
-            );
+            return applyDocHeaders(markdownResponse(markdown));
           }
           agentHit404 = response.status === 404;
           if (!agentHit404) {
@@ -342,7 +471,7 @@ async function handleProxy(req, analytics) {
         if (markdownPath) {
           try {
             const markdownUrl = `${req.nextUrl.origin}${markdownPath}`;
-            const response = await fetch(markdownUrl);
+            const response = await fetch(markdownUrl, { headers: NON_AGENT_FETCH_HEADERS });
 
             // Track .md as agent traffic, but only on outcomes handled here
             // (200/404). A 5xx falls through untracked. Skip agents entirely:
@@ -356,18 +485,7 @@ async function handleProxy(req, analytics) {
 
             if (response.ok) {
               const markdown = await response.text();
-              return applyDocHeaders(
-                new NextResponse(markdown, {
-                  status: 200,
-                  headers: {
-                    'Content-Type': 'text/markdown; charset=utf-8',
-                    // Preserve the existing short Markdown cache policy.
-                    'Cache-Control': 'public, max-age=60, s-maxage=300',
-                    'X-Content-Source': 'markdown',
-                    'X-Robots-Tag': 'noindex',
-                  },
-                })
-              );
+              return applyDocHeaders(markdownResponse(markdown));
             }
 
             if (response.status === 404) {
@@ -389,7 +507,13 @@ async function handleProxy(req, analytics) {
       return applyNegotiationVary(response);
     }
 
-    // Check if the user is logged in
+    // Check if the user is logged in. Only / and /home use it, and the proxy
+    // runs on every page, so skip the cookie read everywhere else.
+    if (pathname !== '/' && pathname !== '/home') {
+      const response = NextResponse.next();
+      return getMarkdownPath(pathname) ? applyNegotiationVary(response) : response;
+    }
+
     try {
       const isLoggedIn = await checkCookie('neon_login_indicator');
       if (pathname === '/' && isLoggedIn) {
@@ -444,5 +568,38 @@ export const config = {
     '/(docs|postgresql|guides|branching|programs|use-cases|faqs)/:path*', // All markdown routes
     '/:path(docs|postgresql|guides|branching|programs|use-cases).md', // Top-level .md index URLs
     '/(.*\\.md)', // Any .md anywhere: staticMarkdownResponse serves the file or a markdown 404
+    // Agent discovery files, counted for agents and people alike.
+    '/llms.txt',
+    '/llms-full.txt',
+    '/blog/llms.txt',
+    '/.well-known/:path*',
+    '/models',
+    '/models.json',
+    // Pages below are matched so AI agents that fetch them (often as HTML) are
+    // counted. Keep this list in sync with the page routes: middleware.test.js
+    // fails if a page under src/app or content/pages is missing.
+    '/blog/:slug([^/.]+)', // Blog posts (no dot, so /blog/rss.xml and /blog/llms.txt stay out)
+    '/blog/category/:slug', // Blog category listings
+    '/about-us',
+    '/brand',
+    '/claimable-neon',
+    '/contact-sales',
+    '/mcp-server/stats',
+    '/mts',
+    '/onboard/agent-setup',
+    '/pg-eu-conf-raffle',
+    '/ping-thing',
+    '/restores-survey',
+    '/security',
+    '/startups',
+    '/tools',
+    // Pages rendered by src/app/[slug] from content/pages/*.md
+    '/autoscaling-report',
+    '/faster',
+    '/hipaa-contractors',
+    '/platform-terms',
+    '/platforms',
+    '/storage',
+    '/subscribe-to-subprocessors',
   ],
 };

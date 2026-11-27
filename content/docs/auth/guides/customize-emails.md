@@ -4,19 +4,19 @@ subtitle: Custom branding, content, and delivery for Managed Better Auth emails
 summary: >-
   Managed Better Auth email customization lets you intercept OTP code and magic link
   delivery events via webhooks and send fully branded emails through your own
-  provider (Resend, SendGrid, Postmark, or any SMTP service) instead of Neon's
-  default shared-branded emails. Use this page when you need custom sender
+  provider (Resend, Loops, SendGrid, Postmark, or any SMTP service) instead of
+  Neon's default shared-branded emails. Use this page when you need custom sender
   addresses, HTML templates, multi-language support, or your own branding for
   sign-in, email-verification, and password-reset emails. Dashboard-based email
   templates are not yet available; webhook-based delivery is the current
   customization path.
 enableTableOfContents: true
-updatedOn: '2026-09-16T15:38:57.808Z'
+updatedOn: '2026-11-26T20:44:20.251Z'
 ---
 
 Managed Better Auth sends verification codes, magic links, and password reset emails using its built-in email provider. By default, emails use shared Neon branding and your Neon project name as the main header. To make emails recognizable to users, update the Application Name in your [Auth settings](/docs/auth/production-checklist#application-name) to match your app’s public-facing name.
 
-For deeper customization, use webhooks to intercept email events and send fully branded emails through your preferred provider. Dashboard-based email templates aren’t available yet, but they’re planned for a future release. If you only need a custom sender address without changing the email content, you can configure a custom SMTP provider instead (see the [Auth production checklist](/docs/auth/production-checklist#email-provider)).
+For deeper customization, use webhooks to intercept email events and send fully branded emails through your preferred provider. Dashboard-based email templates aren’t available yet, but they’re planned for a future release. If you only need a custom sender address without changing the email content, you can configure a custom SMTP provider instead (see the [Auth production checklist](/docs/auth/production-checklist#email-provider)). Custom SMTP doesn't work with Loops, so use the [Loops webhook setup](/docs/guides/loops#custom-smtp-doesnt-work-with-loops) instead.
 
 ## How it works
 
@@ -27,7 +27,7 @@ Managed Better Auth fires two events when it needs to send an email to a user:
 | `send.otp`        | A verification code needs delivery                 | Neon sends the code via its default email |
 | `send.magic_link` | A magic link or password reset link needs delivery | Neon sends the link via its default email |
 
-When you subscribe to either event, Managed Better Auth **skips its default email** and calls your webhook handler instead. Your handler receives the code or link in the payload and is responsible for sending it through Resend, SendGrid, Postmark, or any email provider you choose.
+When you subscribe to either event, Managed Better Auth **skips its default email** and calls your webhook handler instead. Your handler receives the code or link in the payload and is responsible for sending it through Resend, [Loops](/docs/guides/loops), SendGrid, Postmark, or any email provider you choose.
 
 See the [Webhooks reference](/docs/auth/guides/webhooks) for configuration, payload structure, signature verification, and retry behavior.
 
