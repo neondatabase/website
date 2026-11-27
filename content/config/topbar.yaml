@@ -1,4 +1,4 @@
-text: 'Build an MCP server for your app with a few prompts to your agent'
+text: 'Even senior Postgres developers still make these 5 mistakes'
 link:
-  url: 'https://neon.com/blog/every-app-needs-an-mcp-server'
+  url: 'https://neon.com/blog/postgres-mistakes-we-all-still-make'
   target: '_blank'
