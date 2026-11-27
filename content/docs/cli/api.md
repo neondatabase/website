@@ -9,7 +9,7 @@ summary: >-
 enableTableOfContents: true
 redirectFrom:
   - /docs/reference/cli-api
-updatedOn: '2026-11-23T12:21:23.032Z'
+updatedOn: '2026-11-27T09:51:52.404Z'
 ---
 
 The `api` command sends an authenticated request to any [Neon API](/docs/reference/api) route and prints the response. Pass an API path as the first argument. The method defaults to `GET`, or `POST` when you supply a body.
@@ -73,17 +73,9 @@ For a larger body, put the JSON in a file and pass it with `-d @<file>`:
 neon api /projects -X POST -d @project.json
 ```
 
-### List endpoints
+### List and describe endpoints
 
-`--list` prints every route from the Neon OpenAPI spec; `--refresh` refetches the cached spec:
-
-```bash
-neon api --list
-```
-
-### Find an endpoint
-
-To find a route, filter the list. Then pass the route to `--describe` to print its path, query, and body fields without calling the API. Body field names are dotted, ready for `--field`:
+`--list` prints every route from the Neon OpenAPI spec; `--refresh` refetches the cached spec. To find a route, filter the list. Then pass the route to `--describe` to print its path, query, and body fields without calling the API. Body field names are dotted, ready for `--field`:
 
 ```bash
 neon api --list | grep -i snapshot

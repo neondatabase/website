@@ -8,7 +8,7 @@ summary: >-
 enableTableOfContents: true
 redirectFrom:
   - /docs/ai/mcp
-updatedOn: '2026-11-25T05:19:14.187Z'
+updatedOn: '2026-11-27T09:51:52.404Z'
 ---
 
 The Neon MCP Server implements the Model Context Protocol (MCP), letting AI assistants interact with your Neon projects on your behalf. Your AI agent can interact with Neon via MCP tools or by running [Neon CLI](/docs/cli) commands directly.
@@ -86,6 +86,8 @@ https://mcp.neon.tech/mcp?readonly=true
 
 `SELECT` queries and schema inspection remain available. Write operations (creating branches, running migrations, modifying auth config) are disabled. `run_sql_transaction`, `get_connection_string`, and `call_api` aren't available in read-only mode; use `run_sql` for read queries.
 
+`run_sql` and `explain_sql_statement` keep their `destructiveHint: true` annotation in read-only mode, so a client that prompts on that hint still asks before running them.
+
 With OAuth, you can also choose read-only scope during the authorization flow instead of using the URL parameter.
 
 ### Project-scoped mode
@@ -122,6 +124,8 @@ Category filtering also saves context. Each tool the server exposes adds its nam
 | Develop on branches                   | `branches`, `endpoints`, `querying` |
 | Set up Neon Auth                      | `neon_auth`                         |
 | Look up Neon docs                     | `docs`                              |
+
+The `docs` category also includes `list_incidents` and `send_feedback`.
 
 `neon_auth` has the most tools, so leave it out unless you're working on authentication. Some clients load tool definitions only when the agent needs them. Filtering matters most for clients that load every tool at startup.
 
@@ -183,20 +187,13 @@ We recommend MCP for **development and testing only**, not production environmen
 - Always review and authorize LLM-requested actions before execution
 - Restrict MCP access to trusted users and regularly audit access
 
-To limit what an agent can do, combine [read-only mode](#read-only-mode), a [Postgres role](#postgres-role) with limited grants, [category filtering](#category-filtering), and [`secrets=none`](#secrets-in-tool-results).
+To limit what an agent can do, combine [read-only mode](#read-only-mode), [project-scoped mode](#project-scoped-mode), a [Postgres role](#postgres-role) with limited grants, [category filtering](#category-filtering), and [`secrets=none`](#secrets-in-tool-results) if the agent needs write access.
 
 ### Agents that call tools from code
 
 Some setups don't show you each tool call. An MCP gateway that puts several servers behind one endpoint, or a client that lets the model write code that calls tools (sometimes called code mode or programmatic tool calling), can run many Neon tools in a single step. Approval prompts based on tool annotations such as `destructiveHint` may never appear.
 
-In these setups, limit the connection itself instead of relying on approvals:
-
-- `readonly=true`: write tools are hidden, and SQL runs in a `READ ONLY` transaction, so Postgres rejects writes even if a script attempts them. Read-only connections also show no secrets.
-- `projectId=<project_id>`: keeps the agent inside one project.
-- `roleName=<role>`: runs SQL as a role that has only the grants the agent needs.
-- `secrets=none`: if the agent needs write access, keeps credentials out of tool results, and so out of script output and transcripts.
-
-Neon applies these limits on the server, so they hold no matter which client or gateway sends the request.
+In these setups, limit the connection itself instead of relying on approvals. Use the combination listed in [MCP security guidance](#mcp-security-guidance). In read-only mode, SQL runs in a `READ ONLY` transaction, so Postgres rejects writes even if a script attempts them. Neon applies these limits on the server, so they hold no matter which client or gateway sends the request.
 
 ### Check the authorization page
 
