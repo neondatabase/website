@@ -1609,6 +1609,8 @@
                       slug: guides/loops
                     - title: Store Loops webhook events
                       slug: guides/loops-webhooks
+                - title: AutoSend
+                  slug: guides/autosend
             - title: File & media storage
               items:
                 - title: File storage

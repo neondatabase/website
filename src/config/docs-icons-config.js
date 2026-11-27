@@ -36,6 +36,11 @@ const ICONS_CONFIG = {
     lightIconPath: '/images/technology-logos/auth0.svg',
     darkIconPath: null,
   },
+  autosend: {
+    name: 'autosend',
+    lightIconPath: '/images/technology-logos/autosend.svg',
+    darkIconPath: '/images/technology-logos/autosend-dark.svg',
+  },
   'aws-lambda': {
     name: 'aws-lambda',
     lightIconPath: '/images/technology-logos/aws-lambda.svg',

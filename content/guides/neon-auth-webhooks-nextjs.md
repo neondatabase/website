@@ -4,7 +4,7 @@ subtitle: Learn how to use Managed Better Auth webhooks to build custom authenti
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2026-03-24T00:00:00.000Z'
-updatedOn: '2026-11-26T20:44:20.251Z'
+updatedOn: '2026-11-27T05:28:08.327Z'
 ---
 
 Managed Better Auth is a managed authentication and user management service that stores its data in your Neon database. By default, it handles common authentication flows and delivers OTPs for email verification and passwordless login.
@@ -12,7 +12,7 @@ Managed Better Auth is a managed authentication and user management service that
 You may need to customize how these messages are delivered or add extra logic to your authentication flow. Common scenarios include:
 
 - **Multi-channel delivery:** Sending OTPs via SMS (e.g., with Twilio) or delivering notifications through WhatsApp or Slack instead of email.
-- **Custom branding:** Using dedicated providers like Resend, Loops, SendGrid, or Postmark to design branded email templates.
+- **Custom branding:** Using dedicated providers like Resend, Loops, AutoSend, SendGrid, or Postmark to design branded email templates.
 - **Localization:** Translating OTP or Magic Link messages dynamically based on the user’s language or region.
 - **Analytics & integrations:** Logging user creation events to a CRM, triggering marketing automations, or syncing with third-party identity providers.
 - **Signup validation:** Blocking disposable email domains, IP addresses, or implementing custom fraud detection logic before allowing user sign-ups.
