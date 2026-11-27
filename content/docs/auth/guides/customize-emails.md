@@ -11,7 +11,7 @@ summary: >-
   templates are not yet available; webhook-based delivery is the current
   customization path.
 enableTableOfContents: true
-updatedOn: '2026-11-26T20:44:20.251Z'
+updatedOn: '2026-11-27T14:33:00.634Z'
 ---
 
 Managed Better Auth sends verification codes, magic links, and password reset emails using its built-in email provider. By default, emails use shared Neon branding and your Neon project name as the main header. To make emails recognizable to users, update the Application Name in your [Auth settings](/docs/auth/production-checklist#application-name) to match your app’s public-facing name.
@@ -50,6 +50,8 @@ When your webhook receives a `send.otp` or `send.magic_link` event, the payload 
 
 Your handler receives a 6-digit OTP code, the OTP type (`sign-in`, `email-verification`, or `forget-password`), and the user's email. Send it through your email provider.
 
+For a first-time `sign-in` code there is no account yet, so `user` contains only `email` and `event_data.user_exists` is `false`. Existing users get the full `user` object and `user_exists: true`. See [`send.otp` event data](/docs/auth/guides/webhooks#sendotp-event-data).
+
 ```json
 {
   "event_id": "xxx-yyy-zzz",
@@ -75,6 +77,7 @@ Your handler receives a 6-digit OTP code, the OTP type (`sign-in`, `email-verifi
   "event_data": {
     "otp_code": "123456",
     "otp_type": "sign-in",
+    "user_exists": true,
     "expires_at": "20xx-xx-xxTxx:xx:xx.xxxZ",
     "ip_address": "IP_ADDRESS_OF_USER",
     "user_agent": "USER_AGENT_OF_USER"
@@ -113,7 +116,7 @@ Your handler receives a full verification URL and a raw token. The `link_type` i
 
 Before your handler can receive events, you must register its endpoint. Follow the [Webhooks guide](/docs/auth/guides/webhooks) to configure your webhook URL and subscribe to the `send.otp` and `send.magic_link` events.
 
-Here’s an example Next.js API route that verifies the webhook signature, handles the `send.otp` and `send.magic_link` events, and sends emails through Resend.
+Here’s an example Next.js API route that verifies the webhook signature, handles the `send.otp` and `send.magic_link` events, and sends emails through Resend. It reads the `Neon-Better-Auth-*` headers; the `X-Neon-*` names are deprecated (see [Request headers](/docs/auth/guides/webhooks#request-headers)). To host the handler as a Neon Function on the same branch instead, see [Use a Neon Function as the receiver](/docs/auth/guides/webhooks#use-a-neon-function-as-the-receiver).
 
 ```ts shouldWrap
 import crypto from 'node:crypto';
@@ -123,9 +126,9 @@ import { Resend } from 'resend';
 const resend = new Resend(process.env.RESEND_API_KEY);
 
 async function verifyWebhook(rawBody: string, headers: Headers) {
-  const signature = headers.get('x-neon-signature');
-  const kid = headers.get('x-neon-signature-kid');
-  const timestamp = headers.get('x-neon-timestamp');
+  const signature = headers.get('neon-better-auth-signature');
+  const kid = headers.get('neon-better-auth-signature-kid');
+  const timestamp = headers.get('neon-better-auth-timestamp');
 
   if (!signature || !kid || !timestamp) {
     throw new Error('Missing required Neon webhook headers');

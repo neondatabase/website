@@ -13,7 +13,7 @@ summary: >-
   phone_number.verified, use EdDSA Ed25519 detached JWS signatures for
   verification, and retry blocking events within a global timeout.
 enableTableOfContents: true
-updatedOn: '2026-11-27T09:46:59.429Z'
+updatedOn: '2026-11-27T14:33:00.634Z'
 ---
 
 Managed Better Auth webhooks send HTTP POST requests to your server when authentication events occur.
@@ -66,7 +66,7 @@ Managed Better Auth validates `webhook_url` when you configure webhooks to reduc
 - **Hostname required** — Use a domain name (for example `https://your-app.com/webhooks/neon-auth`). Raw IP addresses (for example `https://93.184.216.34/webhook`) are rejected, including public IPs.
 - **No internal targets** — Localhost, private IP addresses, link-local addresses (including cloud metadata endpoints), and encoded IP bypass formats (octal, decimal, hex) are blocked.
 - **No redirects** — Webhook delivery does not follow HTTP `3xx` redirects. Configure the final HTTPS endpoint directly.
-- **Neon Function URLs are allowed**: Other hostnames under `neon.tech` and `neon.com` are rejected, but you can point a webhook at a [Neon Function](/docs/compute/functions/overview) URL on the same Neon deployment, such as `https://br-cool-darkness-123456-hooks.compute.c-1.us-east-2.aws.neon.tech/neon-auth`. Read the `Neon-Better-Auth-*` [request headers](#request-headers) in your function.
+- **No other Neon-hosted domains** — Hostnames under `neon.tech` and `neon.com` are rejected with `Webhook URL cannot target Neon infrastructure`. The one exception is a [Neon Function](/docs/compute/functions/overview) invocation URL, which has the form `https://br-<branch>-<slug>.compute.c-<N>.<region>.aws.neon.tech/<path>` and is accepted as long as it has no explicit port. See [Use a Neon Function as the receiver](#use-a-neon-function-as-the-receiver).
 - **DNS pinning during delivery** — Managed Better Auth validates the hostname's resolved IP addresses and only connects to that validated set. If DNS later resolves the same hostname to a different IP during delivery, the delivery is blocked as a DNS rebinding attempt.
 
 Digit-prefixed domains such as `1password.com` are allowed. If configuration fails validation, the API returns an error with code `INVALID_WEBHOOK_URL_FORMAT`.
@@ -206,14 +206,34 @@ The `user` object uses a fixed allowlist. Fields are optional and vary by event;
 
 ### `send.otp` event data
 
-| Field                 | Type              | Description                                                 |
-| --------------------- | ----------------- | ----------------------------------------------------------- |
-| `otp_code`            | string            | 6-digit OTP code                                            |
-| `otp_type`            | string            | `"sign-in"`, `"email-verification"`, or `"forget-password"` |
-| `delivery_preference` | string (optional) | `"email"` or `"sms"`                                        |
-| `expires_at`          | ISO datetime      | Expiry time                                                 |
-| `ip_address`          | string            | Requester's IP address                                      |
-| `user_agent`          | string            | Requester's user agent                                      |
+| Field                 | Type               | Description                                                                 |
+| --------------------- | ------------------ | --------------------------------------------------------------------------- |
+| `otp_code`            | string             | 6-digit OTP code                                                            |
+| `otp_type`            | string             | `"sign-in"`, `"email-verification"`, or `"forget-password"`                 |
+| `delivery_preference` | string (optional)  | `"email"` or `"sms"`                                                        |
+| `user_exists`         | boolean (optional) | Whether an account exists for the recipient. Omitted when the lookup fails. |
+| `expires_at`          | ISO datetime       | Expiry time                                                                 |
+| `ip_address`          | string             | Requester's IP address                                                      |
+| `user_agent`          | string             | Requester's user agent                                                      |
+
+`send.otp` fires for first-time sign-ins too. Email OTP sign-in creates the account when the code is verified, so when a new user requests a code there is no account yet: `user` contains only `email` (lowercased) and `event_data.user_exists` is `false`. For an existing account, `user` carries the full allowlisted user and `user_exists` is `true`. Don't rely on `user.id` or `user.name` for `sign-in` codes.
+
+```json
+{
+  "event_type": "send.otp",
+  "user": { "email": "new.user@example.com" },
+  "event_data": {
+    "otp_code": "123456",
+    "otp_type": "sign-in",
+    "user_exists": false,
+    "expires_at": "2026-02-23T12:10:00.000Z",
+    "ip_address": "192.0.2.1",
+    "user_agent": "Mozilla/5.0"
+  }
+}
+```
+
+If sign-up is disabled in your project's email and password settings, a `sign-in` code request for an email with no account returns the same `200` as a request for an existing account, but no email is sent and no webhook fires. Verifying any code for that email then fails with `INVALID_OTP`. The identical response keeps the request from revealing which emails have accounts.
 
 When `delivery_preference` is `"sms"`, the event is fired by the [Phone Number plugin](/docs/auth/guides/plugins/phone-number). Your handler is responsible for delivering the OTP through your SMS provider. Because Managed Better Auth does not deliver SMS, a subscribed `send.otp` webhook is a hard requirement for the Phone Number plugin.
 
@@ -291,39 +311,39 @@ Managed Better Auth uses asymmetric EdDSA (Ed25519) signatures with detached JWS
 
 ### Request headers
 
-Each webhook request includes the following headers:
+Read these headers on each webhook request:
 
-| Header                    | Description                                    |
-| ------------------------- | ---------------------------------------------- |
-| `X-Neon-Signature`        | Detached JWS signature (`header..signature`)   |
-| `X-Neon-Signature-Kid`    | Key ID for looking up the public key from JWKS |
-| `X-Neon-Timestamp`        | Unix timestamp in milliseconds                 |
-| `X-Neon-Event-Type`       | Event type (for example, `user.created`)       |
-| `X-Neon-Event-Id`         | Unique event UUID                              |
-| `X-Neon-Delivery-Attempt` | Attempt number: 1, 2, or 3                     |
+| Header                              | Description                                    | Deprecated equivalent     |
+| ----------------------------------- | ---------------------------------------------- | ------------------------- |
+| `Neon-Better-Auth-Signature`        | Detached JWS signature (`header..signature`)   | `X-Neon-Signature`        |
+| `Neon-Better-Auth-Signature-Kid`    | Key ID for looking up the public key from JWKS | `X-Neon-Signature-Kid`    |
+| `Neon-Better-Auth-Timestamp`        | Unix timestamp in milliseconds                 | `X-Neon-Timestamp`        |
+| `Neon-Better-Auth-Event-Type`       | Event type (for example, `user.created`)       | `X-Neon-Event-Type`       |
+| `Neon-Better-Auth-Event-Id`         | Unique event UUID                              | `X-Neon-Event-Id`         |
+| `Neon-Better-Auth-Delivery-Attempt` | Attempt number: 1, 2, or 3                     | `X-Neon-Delivery-Attempt` |
 
-Managed Better Auth also sends each of these headers with a `Neon-Better-Auth-` prefix, for example `Neon-Better-Auth-Signature`. If your endpoint is a [Neon Function](/docs/compute/functions/overview), read those names: Neon strips client-set `X-Neon-*` headers from requests to functions, so the `X-Neon-*` versions don't arrive.
+Managed Better Auth still sends the `X-Neon-*` headers with identical values, but they are deprecated. Some proxies strip `X-Neon-*` request headers, and Neon Functions is one of them, so a function never sees the `X-Neon-*` set. Read all six headers from one set. Never combine a signature from one set with a key ID or timestamp from the other.
 
 Example incoming webhook request:
 
 ```http
 POST /webhooks/neon-auth HTTP/1.1
 Content-Type: application/json
-X-Neon-Signature: eyJhbGciOiJFZERTQSIsInR5cCI6IkpXUyIsImtpZCI6IjAxZGVjNTJiIn0..MEUCIQDZ8Qs
-X-Neon-Signature-Kid: 01dec52b-4666-40f7-87ed-6423552eecaf
-X-Neon-Timestamp: 1740312000000
-X-Neon-Event-Type: send.otp
-X-Neon-Event-Id: 550e8400-e29b-41d4-a716-446655440000
-X-Neon-Delivery-Attempt: 1
+Neon-Better-Auth-Signature: eyJhbGciOiJFZERTQSIsInR5cCI6IkpXUyIsImtpZCI6IjAxZGVjNTJiIn0..MEUCIQDZ8Qs
+Neon-Better-Auth-Signature-Kid: 01dec52b-4666-40f7-87ed-6423552eecaf
+Neon-Better-Auth-Timestamp: 1740312000000
+Neon-Better-Auth-Event-Type: send.otp
+Neon-Better-Auth-Event-Id: 550e8400-e29b-41d4-a716-446655440000
+Neon-Better-Auth-Delivery-Attempt: 1
 
 {"event_id":"550e8400-e29b-41d4-a716-446655440000","event_type":"send.otp",...}
 ```
 
 ### Verification steps
 
-1. Fetch your JWKS from `<NEON_AUTH_URL>/.well-known/jwks.json`. Find the key where `kid` matches the `X-Neon-Signature-Kid` header.
-2. Parse the detached JWS from `X-Neon-Signature`. The format is `header..signature` (empty middle section).
-3. Reconstruct the signing input using standard JWS with double base64url encoding:
+1. Fetch your JWKS from `<NEON_AUTH_URL>/.well-known/jwks.json`, where `<NEON_AUTH_URL>` is your Managed Better Auth base URL. Find the key where `kid` matches the `Neon-Better-Auth-Signature-Kid` header.
+2. Parse the detached JWS from `Neon-Better-Auth-Signature`. The format is `header..signature` (empty middle section).
+3. Reconstruct the signing input using standard JWS with double base64url encoding, where `timestamp` is the `Neon-Better-Auth-Timestamp` value:
    - `payloadB64 = base64url(rawRequestBody)`
    - `signaturePayload = timestamp + "." + payloadB64`
    - `signaturePayloadB64 = base64url(signaturePayload)`
@@ -334,9 +354,9 @@ The double base64url encoding occurs because the timestamp is bound into the JWS
 
 ### Idempotency and additional checks
 
-Retries send the same `X-Neon-Event-Id`. Your endpoint should track this value and return the same response for duplicate deliveries. This is especially important for `user.before_create`, where a lost response triggers a retry with the same event.
+Retries send the same `Neon-Better-Auth-Event-Id`. Your endpoint should track this value and return the same response for duplicate deliveries. This is especially important for `user.before_create`, where a lost response triggers a retry with the same event.
 
-Consider rejecting requests where `X-Neon-Timestamp` is more than 5 minutes old to prevent replay attacks.
+Consider rejecting requests where `Neon-Better-Auth-Timestamp` is more than 5 minutes old to prevent replay attacks.
 
 ### Node.js example
 
@@ -344,9 +364,10 @@ Consider rejecting requests where `X-Neon-Timestamp` is more than 5 minutes old 
 import crypto from 'node:crypto';
 
 async function verifyWebhook(rawBody, headers) {
-  const signature = headers['x-neon-signature'];
-  const kid = headers['x-neon-signature-kid'];
-  const timestamp = headers['x-neon-timestamp'];
+  const signature = headers['neon-better-auth-signature'];
+  const kid = headers['neon-better-auth-signature-kid'];
+  const timestamp = headers['neon-better-auth-timestamp'];
+  if (!signature || !kid || !timestamp) throw new Error('Missing Neon-Better-Auth-* headers');
 
   // 1. Fetch JWKS and find the matching key
   const res = await fetch(`${process.env.NEON_AUTH_URL}/.well-known/jwks.json`);
@@ -408,6 +429,36 @@ export async function POST(request) {
 In production, cache the JWKS response and refresh it when you encounter an unknown key ID. Rate-limit refresh attempts to avoid excessive requests to the JWKS endpoint.
 </Admonition>
 
+### Use a Neon Function as the receiver
+
+A [Neon Function](/docs/compute/functions/overview) on the same branch can receive webhooks. Configure the function's invocation URL (`https://br-<branch>-<slug>.compute.c-<N>.<region>.aws.neon.tech/<path>`, shown by `neon functions get <slug>`) as the webhook URL. It is the only Neon-hosted URL the [URL rules](#webhook-url-requirements) accept.
+
+Neon strips `X-Neon-*` request headers before they reach a function, so the function sees only the `Neon-Better-Auth-*` set. The handler below reuses `verifyWebhook` from the [Node.js example](#nodejs-example), which already reads those names. When Managed Better Auth is enabled on the branch, the function gets `NEON_AUTH_BASE_URL` injected, so use it as the JWKS base URL instead of `NEON_AUTH_URL`.
+
+```ts filename="functions/neon-auth-webhook.ts"
+const handler = {
+  async fetch(request: Request) {
+    const rawBody = await request.text();
+    let event;
+    try {
+      event = await verifyWebhook(rawBody, Object.fromEntries(request.headers));
+    } catch {
+      return new Response('Invalid signature', { status: 401 });
+    }
+
+    if (event.event_type === 'send.otp') {
+      // send event.event_data.otp_code to event.user.email through your email provider
+    }
+
+    return new Response(null, { status: 200 });
+  },
+};
+
+export default handler;
+```
+
+`Object.fromEntries(request.headers)` yields lowercase header names, which is what `verifyWebhook` looks up.
+
 ## Expected responses
 
 Webhook responses must not exceed 10KB.
@@ -424,7 +475,7 @@ If all 3 delivery attempts fail or the 15-second global timeout expires, the cod
 | Email code (`send.otp`) | `200`                                     |
 | Password reset link     | `200`                                     |
 
-For email codes and password reset links, the request reports success even though nothing was sent, so monitor your webhook endpoint and delivery logs to catch failures.
+For email codes and password reset links, the request reports success even though nothing was sent. This is deliberate: a failure response would reveal which emails have accounts. Log and monitor deliveries on your receiver, since the caller gets no signal.
 
 ### `user.before_create`
 

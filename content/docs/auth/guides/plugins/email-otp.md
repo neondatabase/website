@@ -12,7 +12,7 @@ summary: >-
 enableTableOfContents: true
 redirectFrom:
   - /docs/auth/guides/email-otp
-updatedOn: '2026-11-05T12:32:49.453Z'
+updatedOn: '2026-11-27T14:33:00.634Z'
 ---
 
 Managed Better Auth is built on [Better Auth](https://www.better-auth.com/) and provides full support for Email OTP plugin APIs through the Neon SDK. You do not need to manually install or configure the Better Auth Email OTP plugin.
@@ -197,6 +197,10 @@ To sign the user out of every existing session after an OTP reset, turn on [Revo
 Email OTP codes are time-limited and rate-limited.
 
 If users exceed the allowed verification attempts, the API returns an error code like `TOO_MANY_ATTEMPTS` and the user must request a new code.
+
+Sign-in with Email OTP creates the account when the code is verified, so it follows the sign-up switch in your project's email and password settings. With sign-up disabled, a `sign-in` code request for an email with no account returns the same `200` as a request for an existing account, but no email is sent and no `send.otp` webhook fires. Verifying any code for that email then fails with `INVALID_OTP`. The identical response keeps the request from revealing which emails have accounts.
+
+If you deliver codes through a [`send.otp` webhook](/docs/auth/guides/webhooks#sendotp-event-data), a delivery failure also returns `200` to the caller, so monitor deliveries on your receiver.
 
 ## Email provider configuration
 

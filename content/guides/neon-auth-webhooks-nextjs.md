@@ -4,7 +4,7 @@ subtitle: Learn how to use Managed Better Auth webhooks to build custom authenti
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2026-03-24T00:00:00.000Z'
-updatedOn: '2026-11-27T05:28:08.327Z'
+updatedOn: '2026-11-27T14:33:00.634Z'
 ---
 
 Managed Better Auth is a managed authentication and user management service that stores its data in your Neon database. By default, it handles common authentication flows and delivers OTPs for email verification and passwordless login.
@@ -261,9 +261,9 @@ Create `lib/neon-webhook.ts`:
 import crypto from 'node:crypto';
 
 export async function verifyNeonWebhook(rawBody: string, headers: Headers) {
-  const signature = headers.get('x-neon-signature');
-  const kid = headers.get('x-neon-signature-kid');
-  const timestamp = headers.get('x-neon-timestamp');
+  const signature = headers.get('neon-better-auth-signature');
+  const kid = headers.get('neon-better-auth-signature-kid');
+  const timestamp = headers.get('neon-better-auth-timestamp');
 
   if (!signature || !kid || !timestamp) {
     throw new Error('Missing required Neon webhook headers');
