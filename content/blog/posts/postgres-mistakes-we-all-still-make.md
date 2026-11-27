@@ -431,6 +431,8 @@ SELECT rolname
 
 When it returns no application roles, you're done.
 
+---
+
 ## FAQ
 
 ### Why does opening a new Postgres connection per request hurt performance?
