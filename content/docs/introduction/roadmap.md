@@ -13,7 +13,7 @@ redirectFrom:
   - /docs/conceptual-guides/roadmap
   - /docs/reference/roadmap
   - /docs/community/public-preview
-updatedOn: '2026-11-25T11:31:25.692Z'
+updatedOn: '2026-11-27T16:09:11.298Z'
 ---
 
 This page has two lists: [what's coming](#whats-coming) and [what we've shipped recently](#what-weve-shipped-recently). Items in **What's coming** are planned or in progress. They're grouped by product area, not listed in priority order, and don't have committed dates, so plans can change. For release-by-release detail, see the [Changelog](/docs/changelog).
@@ -196,7 +196,7 @@ Want something that isn't listed? Tell us in our Discord feedback channel.
 - **Data API advisors**: A new Monitoring tab scans your database when you use the Data API and reports security and performance issues (such as missing RLS or unindexed foreign keys) with recommended fixes. [Learn more](/docs/data-api/database-advisor).
 - **Cursor plugin for Neon**: The Neon plugin adds Neon Skills and MCP to Cursor so your assistant can use workflow guidance and run database operations from natural language. [Learn more](/docs/ai/agent-setup/cursor).
 - **Neon CircleCI orb**: A community-contributed orb provisions a Neon database branch per job for isolated, production-like CI. [Learn more](/docs/guides/branching-circleci).
-- **Add organization members by domain**: Verify email domains on the organization People page so users with matching addresses automatically join your org. [Learn more](/docs/manage/orgs-add-members-by-domain).
+- **Add organization members by domain**: Verify email domains in the **Verified domains** section of the organization **Settings** page so users with matching addresses automatically join your org. [Learn more](/docs/manage/orgs-add-members-by-domain).
 - **TimescaleDB on Postgres 18**: The timescaledb extension is now supported on Postgres 18. [Learn more](/docs/extensions/timescaledb).
 - **Claimable Neon**: Agents can provision a temporary Neon project with no signup or credit card, then a human claims it. [Learn more](/docs/reference/claimable-neon).
 - **Neon MCP Server documentation tools**: The MCP Server now includes `list_docs_resources` and `get_doc_resource` so your agent can fetch Neon docs on demand. [Learn more](/docs/ai/neon-mcp-server).

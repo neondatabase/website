@@ -1,7 +1,7 @@
 ---
 title: Add organization members by domain
 summary: >-
-  Auto-join by domain lets admins verify email domains via DNS TXT record.
+  Verified domains let admins verify email domains via DNS TXT record.
   Users who sign up or log in with a matching address are automatically added
   as Editors, with no manual invite required. Use this page to auto-provision
   org membership for your company domain instead of sending individual invites.
@@ -10,7 +10,7 @@ summary: >-
 enableTableOfContents: true
 redirectFrom:
   - /docs/manage/orgs-auto-provision-domain
-updatedOn: '2026-11-25T12:44:08.560Z'
+updatedOn: '2026-11-27T16:54:51.982Z'
 ---
 
 Organization admins can add verified email domains so that users whose email matches one of those domains are automatically added as members when they sign up or log in. No manual invite is required for those users.
@@ -41,7 +41,7 @@ In the **Domain** field, enter your domain (for example, `example.com`) and clic
 
 ## Add the TXT record at your DNS provider
 
-In your DNS provider's console, add a TXT record at your domain with the exact value shown in the Neon Console (copy it using the icon next to the value). Use the root or host you manage for the domain. Do not add a subdomain prefix to the value itself; paste the single string as the TXT record content.
+In your DNS provider's console, add a TXT record at your domain with the exact value shown in the Neon Console (copy it using the icon next to the value). Add the record on the exact domain you entered in the Console (for example, `example.com`), not on a subdomain. Do not add a prefix to the value itself; paste the single string as the TXT record content.
 
 <Admonition type="tip" title="DNS propagation">
 TXT records can take from a few minutes to 48 hours to propagate. If verification fails, wait a bit and try again, or check that the TXT record is published (for example, with `dig TXT yourdomain.com` or your provider's DNS checker).
@@ -67,7 +67,8 @@ Only organization admins can remove a domain. In the **Verified domains** sectio
 
 ## Behavior details
 
-- **Role:** Users who are automatically added receive the **Editor** role, which gives them access to every project in the organization. Admins can change their role later from the **People** page if needed. See [Organization roles](/docs/manage/user-permissions#organization-roles).
+- **Role:** Users who are automatically added receive the **Editor** role, which gives them access to every project in the organization. The API lists this role as `member`, the legacy name for Editor. Admins can change their role later from the **People** page if needed. See [Organization roles](/docs/manage/user-permissions#organization-roles).
+- **Member limit:** If your organization has a member limit and it's full, matching users aren't added, and they get no error or invite. They are added the next time they log in after a seat frees up. Current [plans](/docs/introduction/plans#organization-members) include unlimited members.
 - **Existing members:** If the user is already a member of the organization, no duplicate is created; they are simply signed in as usual.
 - **Sign up and log in:** Users are automatically added both when they create a new Neon account and when an existing user logs in. So if you add and verify a domain after some colleagues already have Neon accounts, those colleagues will be added to the org the next time they log in (as long as their email domain matches).
 
