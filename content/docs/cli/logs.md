@@ -11,7 +11,7 @@ summary: >-
   available in AWS US East (Ohio), US East (N. Virginia), Europe (Frankfurt),
   and Asia Pacific (Singapore).
 enableTableOfContents: true
-updatedOn: '2026-11-26T23:10:36.477Z'
+updatedOn: '2026-11-27T09:42:21.822Z'
 ---
 
 The `logs` command reads the logs a branch's services emit. Today that covers Neon Functions, Object Storage, and Realtime; Postgres compute logs are coming. Query records over a time window, filter by source, severity, or OpenTelemetry attribute, and list which fields and values a branch reports so you can build precise filters. For output in Loki's format, use [`neon logs loki`](#loki).
@@ -30,7 +30,7 @@ Query log records over a time window. By default it returns the last hour of log
 
 <CliOptions command="logs query" />
 
-Bound the window with `--since` (a duration like `30m` or `1h`, ending at `--end-time` or now) or with an explicit `--start-time`/`--end-time` pair. `--since` and `--start-time` are mutually exclusive, and the maximum window is 7 days.
+Bound the window with `--since` (a duration like `30m` or `1h`, ending at `--end-time` or now) or with an explicit `--start-time`/`--end-time` pair. `--since` and `--start-time` are mutually exclusive, and the maximum window is 7 days. Neon keeps logs for about 30 days after it receives them, so logs older than that may no longer be available.
 
 The structured content filters (`--source`, `--service-name`, `--scope-name`, `--severity-text`, `--body-contains`, and `--trace-id`) combine with each other. Passing `--logql` replaces all of them with a raw [LogQL](https://grafana.com/docs/loki/latest/query/) expression (stream selectors and line filters only); the window, `--limit`, `--sort-order`, and `--cursor` still apply.
 

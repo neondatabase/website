@@ -8,7 +8,7 @@ summary: >-
   name, search log bodies, poll for new lines with Go live, and download the
   current view as a .log file.
 enableTableOfContents: true
-updatedOn: '2026-11-27T00:39:29.985Z'
+updatedOn: '2026-11-27T09:42:21.822Z'
 ---
 
 The Monitoring page shows service logs in four tabs: **Functions**, **Storage**, **Realtime**, and **Auth**. Each tab is a log viewer for that service on the current branch; there is no combined, all-services view. The tabs share the same controls, described below. The **Realtime** tab appears only on branches where [Realtime](/docs/realtime/overview) is available. The **Auth** tab shows [Managed Better Auth](/docs/auth/overview) events, such as sign-ups and sign-ins.
@@ -59,6 +59,10 @@ If no logs match the current filters, the empty state offers a **Widen time rang
 ## Download
 
 **Download** saves the log lines currently loaded in the view, exactly as filtered, to a plain-text `.log` file, newest first. Downloading doesn't re-run the query: it's a snapshot of what's on screen, so narrow your search, levels, and time range first if you want a smaller or more targeted file.
+
+## Log retention
+
+Neon keeps logs for about 30 days after it receives them. Retention counts from when Neon receives a log, not from the timestamp the log carries. Each query covers at most 7 days, which is the widest time range the chips offer. Logs older than 30 days may no longer be available.
 
 ## Query logs from the CLI
 
