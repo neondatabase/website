@@ -1109,8 +1109,8 @@
                   items:
                     - title: Manage organizations via API
                       slug: manage/orgs-api
-                    - title: Query organization metrics via API
-                      slug: manage/orgs-api-consumption
+                    - title: Query consumption metrics via API
+                      slug: guides/consumption-metrics
                 - title: CLI
                   items:
                     - title: CLI actions

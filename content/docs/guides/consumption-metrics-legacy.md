@@ -11,7 +11,7 @@ summary: >-
   metrics that match your invoice or for Launch plan access, use the Query
   consumption metrics page instead.
 enableTableOfContents: true
-updatedOn: '2026-11-20T18:37:54.892Z'
+updatedOn: '2026-11-27T14:47:22.357Z'
 ---
 
 Using the Neon API, you can query project-level consumption metrics with the legacy endpoint. The Management API only allows this path for **Scale plans and above** (legacy **Scale, Business, and Enterprise**, and usage-based **Scale** and higher). It is **not** available on **Launch**; use [`GET /consumption_history/v2/projects`](/docs/guides/consumption-metrics) instead. On every eligible plan, this endpoint returns **legacy metrics** only (active time, compute time, written data, synthetic storage). On a usage-based plan, those metrics do not match your invoice; for invoice-aligned metrics use the [project metrics endpoint](/docs/guides/consumption-metrics) in Query consumption metrics.
@@ -40,7 +40,7 @@ Both endpoints return metrics that align with legacy billing. Default metrics ar
 | `compute_time_seconds`         | Seconds    | CPU seconds used by compute endpoints (see [Legacy metric definitions](#legacy-metric-definitions)) |
 | `written_data_bytes`           | Bytes      | Total data written to all of a project's branches                                                   |
 | `synthetic_storage_size_bytes` | Bytes      | Deprecated, returns 0                                                                               |
-| `data_storage_bytes_hour`      | Bytes-Hour | Storage consumed hourly (optional)                                                                  |
+| `data_storage_bytes_hour`      | Bytes-Hour | Retired, returns 0                                                                                  |
 | `logical_size_bytes`           | Bytes      | Logical size consumed (optional)                                                                    |
 | `logical_size_bytes_hour`      | Bytes-Hour | Logical size consumed hourly (optional)                                                             |
 
@@ -52,14 +52,14 @@ Both endpoints return metrics that align with legacy billing. Default metrics ar
 GET https://console.neon.tech/api/v2/consumption_history/projects
 ```
 
-Retrieves consumption metrics per project at the chosen granularity. The same **Scale plans and above** access rule applies as for the account endpoint (not available on **Launch**, use [v2 project metrics](/docs/guides/consumption-metrics) instead). Results are ordered by time in ascending order (oldest to newest). History begins at the time of upgrade. Issuing a call to this API does not wake a project's compute endpoint.
+Retrieves consumption metrics per project at the chosen granularity. The same **Scale plans and above** access rule applies as for the account endpoint (not available on **Launch**, use the [project metrics endpoint](/docs/guides/consumption-metrics) instead). Results are ordered by time in ascending order (oldest to newest). History begins at the time of upgrade. Issuing a call to this API does not wake a project's compute endpoint.
 
 #### Required parameters
 
 - **`from`** (date-time, required): Start of the consumption period in RFC 3339 format. The value is rounded according to the specified granularity. Consumption history is available from March 1, 2024, at 00:00:00 UTC. The range must respect the granularity limits (hourly: last 168 hours; daily: last 60 days; monthly: last year).
 - **`to`** (date-time, required): End of the consumption period in RFC 3339 format. The value is rounded according to the specified granularity. The range must respect the same granularity limits as `from`.
 - **`granularity`** (string, required): Granularity of consumption metrics. `hourly` (last 168 hours), `daily` (last 60 days), or `monthly` (last year).
-- **`org_id`** (string, required with a personal API key): Organization for which to return project consumption metrics. An organization API key that is not project-scoped already identifies its organization, so you can omit `org_id` when you use one. To find your organization IDs, see [Finding organizations for consumption queries](/docs/manage/orgs-api-consumption#finding-organizations-for-consumption-queries).
+- **`org_id`** (string): Organization for which to return project consumption metrics. With a personal API key, always include it. Without it, the request doesn't target your organization and can return `403` even on an eligible plan. An organization API key that is not project-scoped already identifies its organization, so you can omit `org_id` when you use one. To find your organization IDs, see [Find your organization ID](/docs/guides/consumption-metrics#find-your-organization-id).
 
 #### Optional parameters
 
@@ -77,7 +77,7 @@ The **`include_v1_metrics`** parameter is deprecated; use **`metrics`** instead.
 - **active_time_seconds**: Seconds. The amount of time the compute endpoints have been active.
 - **compute_time_seconds**: Seconds. The number of CPU seconds used by compute endpoints, including compute endpoints that have been deleted. For example: 1 CPU for 1 second = 1; 2 CPUs for 1 second = 2.
 - **written_data_bytes**: Bytes. The amount of written data for all branches.
-- **synthetic_storage_size_bytes**: Bytes. Deprecated. The API returns 0. Synthetic storage size combined the logical data size and Write-Ahead Log (WAL) size for all branches. Use the [v2 endpoints](/docs/guides/consumption-metrics) for storage.
+- **synthetic_storage_size_bytes**: Bytes. Deprecated. The API returns 0. Synthetic storage size combined the logical data size and Write-Ahead Log (WAL) size for all branches. Use the [usage-based metrics endpoints](/docs/guides/consumption-metrics) for storage.
 
 **Additional metrics** (include via the `metrics` parameter):
 
@@ -189,6 +189,6 @@ Common error responses you may encounter:
 
 The legacy endpoints on this page were designed for Neon's legacy billing plans and do not align with [usage-based plans](/docs/introduction/plans). If you're on a usage-based plan (Launch, Scale, Agent, or Enterprise), use [Query consumption metrics](/docs/guides/consumption-metrics) for metrics that map to your invoice.
 
-**Legacy API:** Reports storage through `synthetic_storage_size_bytes`, which is deprecated and returns 0. Use the v2 storage metrics instead.
+**Legacy API:** Reports storage through `synthetic_storage_size_bytes`, which is deprecated and returns 0. Use the storage metrics in [Query consumption metrics](/docs/guides/consumption-metrics) instead.
 
 **Usage-based API:** Returns separate metrics that match your invoice: `root_branch_bytes_month`, `child_branch_bytes_month`, `instant_restore_bytes_month`, `snapshot_storage_bytes_month`, `public_network_transfer_bytes`, `private_network_transfer_bytes`, `extra_branches_month`, and `compute_unit_seconds`. The legacy APIs do not provide these. Use the [project metrics endpoint](/docs/guides/consumption-metrics#request-overview) in Query consumption metrics to retrieve them.
