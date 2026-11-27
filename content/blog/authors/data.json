@@ -797,6 +797,13 @@
     "photo": "https://cdn.neonapi.io/public/images/pages/blog/authors/thorsten-ries.jpg",
     "photoAlt": "Thorsten Rieß"
   },
+  "tony-dang": {
+    "name": "Tony Dang",
+    "role": "Developer Advocate",
+    "url": "https://github.com/thisistonydang",
+    "photo": "https://cdn.neonapi.io/public/images/pages/blog/authors/tony-dang.jpg",
+    "photoAlt": "Tony Dang"
+  },
   "tony-holdstock-brown": {
     "name": "Tony Holdstock-Brown",
     "role": "CEO of Inngest",
@@ -908,5 +915,12 @@
     "url": "https://randoneering.tech",
     "photo": "https://cdn.neonapi.io/public/images/pages/blog/authors/justin-frye.jpg",
     "photoAlt": "Justin Frye"
+  },
+  "scott-mead": {
+    "name": "Scott Mead",
+    "role": "Sr. Staff Software Engineer at Databricks Lakebase",
+    "url": "https://www.linkedin.com/in/scottrmead/",
+    "photo": "https://cdn.neonapi.io/public/images/pages/blog/authors/scott-mead.jpg",
+    "photoAlt": "Scott Mead"
   }
 }

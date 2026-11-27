@@ -231,6 +231,27 @@ describe('ModelIndexClient', () => {
     expect(getVisibleModelNames()).toHaveLength(3);
   });
 
+  it('shows the image output price under the text output price only for models that have one', () => {
+    const imageOutput = createRow({
+      id: 'image-output-model',
+      name: 'Image output model',
+      costOutput: 12,
+      costOutputLabel: '$12',
+      costOutputImageLabel: '$120',
+    });
+    render(<ModelIndexClient rows={[rows[0], imageOutput]} variant="landing" />);
+
+    const row = (name) => screen.getByRole('link', { name }).closest('tr');
+
+    expect(row('Image output model')).toHaveTextContent('$12');
+    expect(row('Image output model')).toHaveTextContent('image $120');
+    expect(row('New image model')).not.toHaveTextContent('image $');
+    expect(screen.getByRole('link', { name: 'image $120' })).toHaveAttribute(
+      'href',
+      '/docs/ai-gateway/models#image-output-pricing'
+    );
+  });
+
   it('navigates to the model detail page when a row is clicked', () => {
     render(<ModelIndexClient rows={rows} variant="landing" />);
 

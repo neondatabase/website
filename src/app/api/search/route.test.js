@@ -23,6 +23,12 @@ const SEARCH_HIT = {
   excerpt: 'Troubleshoot connection errors.',
   score: 1,
 };
+// neon-agent's 400 body carries the ZodError message, a JSON list of issues.
+const UPSTREAM_VALIDATION_ERROR = JSON.stringify(
+  [{ code: 'custom', path: ['query'], message: 'query must not contain NUL characters' }],
+  null,
+  2
+);
 
 function searchRequest(origin, body = JSON.stringify(SEARCH_BODY)) {
   return new Request('https://neon.com/api/search', {
@@ -126,6 +132,7 @@ describe('/api/search CORS', () => {
   it.each([
     ['invalid JSON', '{', 400, 'Invalid JSON body'],
     ['invalid query', '{"query":""}', 400, 'query is required'],
+    ['NUL query', '{"query":"branch\\u0000ing"}', 400, 'query must not contain NUL characters'],
     ['missing configuration', JSON.stringify(SEARCH_BODY), 503, 'Search is not configured'],
   ])('includes CORS on %s errors', async (scenario, body, status, error) => {
     if (scenario === 'missing configuration') vi.stubEnv('NEON_AGENT_SITE_SEARCH_URL', '');
@@ -139,24 +146,43 @@ describe('/api/search CORS', () => {
     expect(fetch).not.toHaveBeenCalled();
   });
 
-  it.each(['network failure', 'upstream error', 'invalid JSON', 'invalid hits'])(
-    'includes CORS for %s',
-    async (scenario) => {
-      if (scenario === 'network failure') fetch.mockRejectedValueOnce(new Error('Unavailable'));
-      if (scenario === 'upstream error') {
-        fetch.mockResolvedValueOnce(new Response(null, { status: 500 }));
-      }
-      if (scenario === 'invalid JSON') fetch.mockResolvedValueOnce(new Response('{'));
-      if (scenario === 'invalid hits') {
-        fetch.mockResolvedValueOnce(new Response(JSON.stringify({ hits: [{}] })));
-      }
+  it('passes an upstream 400 through with its error and CORS', async () => {
+    fetch.mockResolvedValueOnce(
+      new Response(JSON.stringify({ error: UPSTREAM_VALIDATION_ERROR }), { status: 400 })
+    );
 
-      const response = await POST(searchRequest(CONSOLE_ORIGIN));
+    const response = await POST(searchRequest(CONSOLE_ORIGIN));
 
-      expect(response.status).toBe(502);
-      expect(await response.json()).toEqual({ error: 'Search failed.' });
-      expect(response.headers.get('Access-Control-Allow-Origin')).toBe(CONSOLE_ORIGIN);
-      expect(response.headers.get('Vary')).toBe('Origin');
+    expect(response.status).toBe(400);
+    expect(await response.json()).toEqual({ error: UPSTREAM_VALIDATION_ERROR });
+    expect(response.headers.get('Access-Control-Allow-Origin')).toBe(CONSOLE_ORIGIN);
+    expect(response.headers.get('Vary')).toBe('Origin');
+  });
+
+  it.each([
+    'network failure',
+    'upstream error',
+    'upstream 404 without an error body',
+    'invalid JSON',
+    'invalid hits',
+  ])('includes CORS for %s', async (scenario) => {
+    if (scenario === 'network failure') fetch.mockRejectedValueOnce(new Error('Unavailable'));
+    if (scenario === 'upstream error') {
+      fetch.mockResolvedValueOnce(new Response(null, { status: 500 }));
     }
-  );
+    if (scenario === 'upstream 404 without an error body') {
+      fetch.mockResolvedValueOnce(new Response('404 Not Found', { status: 404 }));
+    }
+    if (scenario === 'invalid JSON') fetch.mockResolvedValueOnce(new Response('{'));
+    if (scenario === 'invalid hits') {
+      fetch.mockResolvedValueOnce(new Response(JSON.stringify({ hits: [{}] })));
+    }
+
+    const response = await POST(searchRequest(CONSOLE_ORIGIN));
+
+    expect(response.status).toBe(502);
+    expect(await response.json()).toEqual({ error: 'Search failed.' });
+    expect(response.headers.get('Access-Control-Allow-Origin')).toBe(CONSOLE_ORIGIN);
+    expect(response.headers.get('Vary')).toBe('Origin');
+  });
 });

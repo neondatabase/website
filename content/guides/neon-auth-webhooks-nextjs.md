@@ -4,7 +4,7 @@ subtitle: Learn how to use Managed Better Auth webhooks to build custom authenti
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2026-03-24T00:00:00.000Z'
-updatedOn: '2026-09-24T17:56:34.189Z'
+updatedOn: '2026-11-27T05:28:08.327Z'
 ---
 
 Managed Better Auth is a managed authentication and user management service that stores its data in your Neon database. By default, it handles common authentication flows and delivers OTPs for email verification and passwordless login.
@@ -12,14 +12,14 @@ Managed Better Auth is a managed authentication and user management service that
 You may need to customize how these messages are delivered or add extra logic to your authentication flow. Common scenarios include:
 
 - **Multi-channel delivery:** Sending OTPs via SMS (e.g., with Twilio) or delivering notifications through WhatsApp or Slack instead of email.
-- **Custom branding:** Using dedicated providers like Resend, SendGrid, or Postmark to design branded HTML email templates.
+- **Custom branding:** Using dedicated providers like Resend, Loops, AutoSend, SendGrid, or Postmark to design branded email templates.
 - **Localization:** Translating OTP or Magic Link messages dynamically based on the user’s language or region.
 - **Analytics & integrations:** Logging user creation events to a CRM, triggering marketing automations, or syncing with third-party identity providers.
 - **Signup validation:** Blocking disposable email domains, IP addresses, or implementing custom fraud detection logic before allowing user sign-ups.
 
 For these cases, Managed Better Auth provides [**webhooks**](/docs/auth/guides/webhooks). Webhooks let you intercept authentication events (such as `send.otp`, `send.magic_link`, and `user.before_create`) and handle them with your own backend logic. For example, when you subscribe to `send.otp`, Managed Better Auth skips its default delivery, leaving your webhook handler in charge of sending the OTP. You control the content, the delivery method, and any side effects.
 
-This guide walks through building a custom webhook handler in a Next.js application. You’ll learn how to send OTPs via email using Resend, implement a blocking handler to prevent sign-ups from disposable email providers, and optionally modify the handler to send SMS or WhatsApp messages using Twilio.
+This guide walks through building a custom webhook handler in a Next.js application. You’ll learn how to send OTPs via email using Resend or Loops, implement a blocking handler to prevent sign-ups from disposable email providers, and optionally modify the handler to send SMS or WhatsApp messages using Twilio.
 
 ## Prerequisites
 
@@ -27,7 +27,7 @@ Before you begin, ensure you have the following:
 
 - **Node.js:** Version `18` or later installed on your machine.
 - **Neon account:** A free Neon project. If you don't have one, sign up at [Neon](https://console.neon.tech/signup).
-- **Resend account:** To send custom emails. You'll need an [API key](https://resend.com/docs/dashboard/api-keys/introduction). You can use the default `resend.dev` testing domain, or [verify a custom domain](https://resend.com/docs/dashboard/domains/introduction).
+- **Email provider account:** A [Resend](https://resend.com) or [Loops](https://loops.so) account to send custom emails.
 - **ngrok** (or a similar tunneling tool): To test webhooks locally, you will need `ngrok` installed and configured on your machine. See the [ngrok Quickstart](https://ngrok.com/docs/getting-started/) to sign up, install the CLI, and authenticate with your auth token.
 
 See the [Managed Better Auth webhooks reference](/docs/auth/guides/webhooks) for complete event payload fields, required response formats, retry behavior, and signature verification details.
@@ -40,10 +40,10 @@ You'll need a Neon project with Auth enabled to generate webhook events.
 
 1. **Create a Neon project:** Navigate to the [Neon Console](https://console.neon.tech) to create a new Neon project. Give your project a name, such as `neon-webhooks-demo`.
 2. **Enable Auth:**
-   - In your project's dashboard, go to the **Auth** tab.
+   - In the Neon Console, open the **Better Auth** page.
    - Click **Enable Auth** to set up authentication for your project.
 3. **Copy your credentials:**
-   - **Managed Better Auth URL:** Found on the **Configuration** tab of the **Auth** page.
+   - **Managed Better Auth URL:** Found under **Settings** > **Better Auth** > **Project Info** as **Auth URL**.
      ![Managed Better Auth URL](/docs/auth/neon-auth-base-url.png)
    - **Neon API key:** Create an API key in the Neon Console (see [Creating API keys](/docs/manage/api-keys#creating-api-keys)). You'll need it to register your webhook.
      ![Neon API Key](/docs/manage/org_api_keys.png)
@@ -52,7 +52,7 @@ You'll need a Neon project with Auth enabled to generate webhook events.
 
 ## Set up the Next.js application
 
-Create a new Next.js project and install the dependencies for Managed Better Auth and Resend.
+Create a new Next.js project and install the dependencies for Managed Better Auth and your email provider.
 
 ```bash
 npx create-next-app@latest neon-webhooks-demo --yes
@@ -61,14 +61,44 @@ cd neon-webhooks-demo
 
 Install the required packages:
 
+<CodeTabs labels={["Resend", "Loops"]}>
+
 ```bash
 npm install @neondatabase/auth@latest @neondatabase/auth-ui @neondatabase/neon-js@latest resend
 ```
 
+```bash
+npm install @neondatabase/auth@latest @neondatabase/auth-ui @neondatabase/neon-js@latest loops
+```
+
+</CodeTabs>
+
+## Set up your email provider
+
+<Tabs labels={["Resend", "Loops"]}>
+
+<TabItem>
+
+Create a Resend [API key](https://resend.com/docs/dashboard/api-keys/introduction). You can send from the default `resend.dev` testing domain, or [verify a custom domain](https://resend.com/docs/dashboard/domains/introduction). The handler builds each email's HTML in code, so there's nothing else to set up in Resend.
+
+</TabItem>
+
+<TabItem>
+
+Verify a [sending domain](https://loops.so/docs/sending-domain) and create an API key in [Loops API settings](https://app.loops.so/settings?page=api). With Loops, you design each email in the Loops editor, and the handler sends the one that matches the event.
+
+Create and publish a [transactional email](https://loops.so/docs/transactional) for each email type your app sends, and copy its **Transactional ID**. The [Loops guide](/docs/guides/loops#create-transactional-emails-in-loops) lists the data variable each email needs.
+
+</TabItem>
+
+</Tabs>
+
 ## Configure environment variables
 
-Create a `.env.local` file in the root of your project. Add your API keys and Managed Better Auth details.
+Create a `.env.local` file in the root of your project. Add your API keys, Managed Better Auth details, and email provider settings.
 Generate a random string of at least 32 characters for `NEON_AUTH_COOKIE_SECRET`. For example, run `openssl rand -base64 32`.
+
+<CodeTabs labels={["Resend", "Loops"]}>
 
 ```bash
 # Neon configuration
@@ -83,6 +113,22 @@ RESEND_API_KEY="re_123456789"
 # Use the default resend.dev domain for testing, or verify your own domain
 EMAIL_FROM="onboarding@yourdomain.com"
 ```
+
+```bash
+# Neon configuration
+NEON_AUTH_BASE_URL="https://ep-xxx.neon.tech/neondb/auth"
+NEON_AUTH_COOKIE_SECRET="your-random-string" # openssl rand -base64 32
+NEON_API_KEY="your-neon-api-key"
+NEON_PROJECT_ID="your-project-id"
+NEON_BRANCH_ID="your-branch-id"
+
+# Loops configuration
+LOOPS_API_KEY="your-loops-api-key"
+```
+
+</CodeTabs>
+
+With Loops, also add a transactional ID for each email you created, using the variable names from [Set your Loops keys](/docs/guides/loops#set-your-loops-keys) in the Loops guide.
 
 ## Configure Managed Better Auth in Next.js
 
@@ -168,7 +214,7 @@ Set up the Managed Better Auth SDK to handle user sessions, API routing, and the
 
 7.  **Create the main page:** Overwrite `app/page.tsx` with a simple app that shows a "Logged In" state or a link to sign up.
 
-    ```tsx shouldWrap
+    ```tsx collapse={3-5, 13-30} shouldWrap
     'use client';
 
     import { UserButton } from '@neondatabase/auth-ui';
@@ -260,19 +306,110 @@ export async function verifyNeonWebhook(rawBody: string, headers: Headers) {
 }
 ```
 
-### Create the webhook route
+### Send the emails
 
-Create the endpoint that receives the events from Managed Better Auth. This route reads the raw text, verifies the signature using your helper, and routes the payload to the appropriate handler (Resend or the blocking logic).
+Create `lib/email.ts`. It exports `sendOtp` and `sendLink`, which send the code or link through your email provider:
 
-Create `app/api/webhooks/neon/route.ts`:
+<CodeTabs labels={["Resend", "Loops"]}>
 
-```typescript
-import { NextRequest, NextResponse } from 'next/server';
-import { verifyNeonWebhook } from '@/lib/neon-webhook';
+```typescript filename="lib/email.ts" collapse={13-20, 32-39}
 import { Resend } from 'resend';
 import { User } from '@neondatabase/auth/types';
 
 const resend = new Resend(process.env.RESEND_API_KEY);
+
+export async function sendOtp(eventData: any, user: User) {
+    console.log(`Sending custom Resend OTP to ${user.email}`);
+    await resend.emails.send({
+        from: process.env.EMAIL_FROM!,
+        to: user.email,
+        subject: 'Your Verification Code',
+        html: `
+      <div style="font-family: sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
+        <h2>Welcome to Our App!</h2>
+        <p>Your secure verification code is:</p>
+        <h1 style="background: #f4f4f5; padding: 16px; letter-spacing: 6px; text-align: center; border-radius: 8px;">
+          ${eventData.otp_code}
+        </h1>
+        <p>This code will expire in 15 minutes.</p>
+      </div>
+    `,
+    });
+}
+
+export async function sendLink(eventData: any, user: User) {
+    console.log(`Sending custom ${eventData.link_type} link to ${user.email}`);
+    await resend.emails.send({
+        from: process.env.EMAIL_FROM!,
+        to: user.email,
+        subject: 'Your Secure Sign-in Link',
+        html: `
+      <div style="font-family: sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
+        <h2>Sign in to your account</h2>
+        <p>Use the button below to continue:</p>
+        <p style="text-align: center; margin: 24px 0;">
+          <a href="${eventData.link_url}" style="display: inline-block; background: #111827; color: #ffffff; text-decoration: none; padding: 12px 20px; border-radius: 8px;">Open secure link</a>
+        </p>
+        <p>If you didn't request this, you can safely ignore this email.</p>
+      </div>
+    `,
+    });
+}
+```
+
+```typescript filename="lib/email.ts"
+import { LoopsClient } from 'loops';
+import { User } from '@neondatabase/auth/types';
+
+const loops = new LoopsClient(process.env.LOOPS_API_KEY!);
+
+// One Loops transactional email per email type, and the data variable it uses.
+const LOOPS_EMAILS: Record<string, { id?: string; variable: string }> = {
+    'send.otp:sign-in': { id: process.env.LOOPS_OTP_SIGNIN_TRANSACTIONAL_ID, variable: 'otpCode' },
+    'send.otp:email-verification': { id: process.env.LOOPS_OTP_VERIFICATION_TRANSACTIONAL_ID, variable: 'otpCode' },
+    'send.otp:forget-password': { id: process.env.LOOPS_OTP_PASSWORD_RESET_TRANSACTIONAL_ID, variable: 'otpCode' },
+    'send.magic_link:sign-in': { id: process.env.LOOPS_MAGIC_LINK_TRANSACTIONAL_ID, variable: 'magicLinkUrl' },
+    'send.magic_link:email-verification': { id: process.env.LOOPS_VERIFY_EMAIL_TRANSACTIONAL_ID, variable: 'verificationUrl' },
+    'send.magic_link:forget-password': { id: process.env.LOOPS_RESET_PASSWORD_TRANSACTIONAL_ID, variable: 'resetPasswordUrl' },
+};
+
+async function send(type: string, user: User, value: string) {
+    const email = LOOPS_EMAILS[type];
+    // Neon doesn't send this email itself, so fail instead of dropping it.
+    if (!email?.id) throw new Error(`No Loops email for ${type}`);
+
+    console.log(`Sending Loops email ${type} to ${user.email}`);
+    await loops.sendTransactionalEmail({
+        transactionalId: email.id,
+        email: user.email,
+        dataVariables: { [email.variable]: value },
+    });
+}
+
+export async function sendOtp(eventData: any, user: User) {
+    await send(`send.otp:${eventData.otp_type}`, user, eventData.otp_code);
+}
+
+export async function sendLink(eventData: any, user: User) {
+    await send(`send.magic_link:${eventData.link_type}`, user, eventData.link_url);
+}
+```
+
+</CodeTabs>
+
+With Loops, an email type with no transactional ID set throws an error, so the route returns `500` instead of dropping the email. Neon doesn't send that email itself once you subscribe to its event.
+
+### Create the webhook route
+
+Create the endpoint that receives the events from Managed Better Auth. This route reads the raw text, verifies the signature using your helper, and routes the payload to the email functions or the blocking logic.
+
+Create `app/api/webhooks/neon/route.ts`:
+
+```typescript collapse={1-4}
+import { NextRequest, NextResponse } from 'next/server';
+import { verifyNeonWebhook } from '@/lib/neon-webhook';
+import { sendLink, sendOtp } from '@/lib/email';
+import { User } from '@neondatabase/auth/types';
 
 export async function POST(request: NextRequest) {
     try {
@@ -283,11 +420,11 @@ export async function POST(request: NextRequest) {
         // Route the event
         switch (event_type) {
             case 'send.otp':
-                await handleSendOtp(event_data, user);
+                await sendOtp(event_data, user);
                 return NextResponse.json({ success: true });
 
             case 'send.magic_link':
-                await handleSendMagicLink(event_data, user);
+                await sendLink(event_data, user);
                 return NextResponse.json({ success: true });
 
             case 'user.before_create':
@@ -312,48 +449,6 @@ export async function POST(request: NextRequest) {
     }
 }
 
-async function handleSendOtp(eventData: any, user: User) {
-    const { otp_code } = eventData;
-
-    console.log(`Sending custom Resend OTP to ${user.email}`);
-    await resend.emails.send({
-        from: process.env.EMAIL_FROM!,
-        to: user.email,
-        subject: 'Your Verification Code',
-        html: `
-      <div style="font-family: sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
-        <h2>Welcome to Our App!</h2>
-        <p>Your secure verification code is:</p>
-        <h1 style="background: #f4f4f5; padding: 16px; letter-spacing: 6px; text-align: center; border-radius: 8px;">
-          ${otp_code}
-        </h1>
-        <p>This code will expire in 15 minutes.</p>
-      </div>
-    `,
-    });
-}
-
-async function handleSendMagicLink(eventData: any, user: User) {
-    const { link_url, link_type } = eventData;
-
-    console.log(`Sending custom ${link_type} magic link to ${user.email}`);
-    await resend.emails.send({
-        from: process.env.EMAIL_FROM!,
-        to: user.email,
-        subject: 'Your Secure Sign-in Link',
-        html: `
-      <div style="font-family: sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
-        <h2>Sign in to your account</h2>
-        <p>Use the button below to continue:</p>
-        <p style="text-align: center; margin: 24px 0;">
-          <a href="${link_url}" style="display: inline-block; background: #111827; color: #ffffff; text-decoration: none; padding: 12px 20px; border-radius: 8px;">Open secure link</a>
-        </p>
-        <p>If you didn't request this, you can safely ignore this email.</p>
-      </div>
-    `,
-    });
-}
-
 // Example: Block signups from disposable domains
 async function handleUserBeforeCreate(user: User) {
     const blockedDomains = ['spam.com', 'tempmail.org'];
@@ -375,8 +470,8 @@ async function handleUserBeforeCreate(user: User) {
 The above code does the following:
 
 - Verifies the webhook signature and parses the payload.
-- For `send.otp` events, it sends a custom OTP email using Resend.
-- For `send.magic_link` events, it sends a custom sign-in or password reset link email using Resend.
+- For `send.otp` events, it calls `sendOtp`, which sends the code through your email provider.
+- For `send.magic_link` events, it calls `sendLink`, which sends the sign-in or password reset link through your email provider.
 - For `user.before_create` events, it checks if the email domain is in a blocked list and returns a response to allow or deny the signup accordingly.
 - For `user.created` events, logs the new user, which you can extend for analytics or other side effects.
 
@@ -394,7 +489,7 @@ Managed Better Auth requires a public HTTPS URL to deliver webhooks. Use **ngrok
    ```
    _Note the forwarding URL provided by ngrok (e.g., `https://a1b2c3d4.ngrok.app`)._
 
-Next, register this webhook URL with Managed Better Auth using the Neon API. You can also do this in the Neon Console under **Auth** > **Configuration** > **Webhooks**. Run the following `curl` command, replacing the placeholders with your API Key, Project ID, Branch ID, and your ngrok URL:
+Next, register this webhook URL with Managed Better Auth using the Neon API. You can also do this in the Neon Console under **Settings** > **Better Auth** > **Webhooks**. Run the following `curl` command, replacing the placeholders with your API Key, Project ID, Branch ID, and your ngrok URL:
 
 ```bash shouldWrap
 curl -X PUT "https://console.neon.tech/api/v2/projects/$NEON_PROJECT_ID/branches/$NEON_BRANCH_ID/auth/webhooks" \
@@ -431,7 +526,7 @@ With the webhook active and your Next.js app running, test the full authenticati
 2. **Test custom OTP and magic link delivery:**
    - Sign up using a valid email.
    - Sign out and either click on "Sign In with Email Code" or click "Forgot your password?".
-   - **Result:** Instead of receiving a default email from Neon, you receive your custom Resend email. OTP flows trigger `send.otp`, and if you choose "Send reset link" in password reset, Neon triggers `send.magic_link` and your webhook delivers the custom link email.
+   - **Result:** Instead of receiving a default email from Neon, you receive your custom Resend email, or the email you designed in Loops. OTP flows trigger `send.otp`, and if you choose "Send reset link" in password reset, Neon triggers `send.magic_link` and your webhook delivers the custom link email. Loops sends also appear on the Loops [Transactional](https://app.loops.so/transactional) page.
 
 </Steps>
 
@@ -445,14 +540,14 @@ First, install the Twilio SDK in your project:
 npm install twilio
 ```
 
-Then, you can adjust your `handleSendOtp` function to send an SMS instead of an email. Here's an example of how to do this with Twilio:
+Then, replace `sendOtp` in `lib/email.ts` to send an SMS instead of an email. Here's an example of how to do this with Twilio:
 
 ```typescript shouldWrap
 import twilio from 'twilio';
 
 const twilioClient = twilio(process.env.TWILIO_ACCOUNT_SID, process.env.TWILIO_AUTH_TOKEN);
 
-async function handleSendOtp(eventData: any, user: any) {
+export async function sendOtp(eventData: any, user: any) {
     const { otp_code } = eventData;
     await twilioClient.messages.create({
         body: `Your App verification code is: ${otp_code}. Do not share this with anyone.`,
@@ -469,7 +564,7 @@ You can integrate WhatsApp or other channels supported by Twilio or your chosen 
 When you're ready to go live:
 
 1. Deploy your app to a hosting platform like Vercel, Netlify, or AWS.
-2. Ensure you configure your environment variables (`RESEND_API_KEY`, `NEON_AUTH_COOKIE_SECRET`, etc.) in your hosting provider's dashboard.
+2. Ensure you configure your environment variables (`RESEND_API_KEY` or the `LOOPS_` variables, `NEON_AUTH_COOKIE_SECRET`, etc.) in your hosting provider's dashboard.
 3. Update your webhook URL in Managed Better Auth. Run the `curl` command from [Expose and register the webhook](#expose-and-register-the-webhook) again, replacing the ngrok URL with your new production URL (e.g., `https://yourdomain.com/api/webhooks/neon`).
 
 <Admonition type="important">
@@ -482,6 +577,7 @@ The complete source code for a Next.js application implementing these webhooks i
 
 <DetailIconCards>
 <a href="https://github.com/dhanushreddy291/neon-webhooks-demo" description="Complete source code for handling Managed Better Auth Webhooks using Next.js and Resend." icon="github">Managed Better Auth webhooks Next.js demo</a>
+<a href="https://github.com/neondatabase/examples/tree/main/registry/loops-email" description="A Neon Function that sends Managed Better Auth emails through Loops and syncs new users to Loops." icon="github">Send email with Loops Function template</a>
 </DetailIconCards>
 
 ## Resources

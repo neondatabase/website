@@ -6,7 +6,7 @@ summary: >-
   active branch in your local context, so subsequent commands target that
   branch without specifying `--branch` on every command.
 enableTableOfContents: true
-updatedOn: '2026-11-06T20:35:55.000Z'
+updatedOn: '2026-11-24T22:51:03.746Z'
 redirectFrom:
   - /docs/reference/cli-checkout
 ---
@@ -34,7 +34,11 @@ Creating a branch from a [`neon.ts`](/docs/reference/neon-ts) policy evaluates t
 Branch ID vs name is detected automatically (a `br-…` value is treated as an ID):
 
 - **ID:** Matched strictly by ID. A non-existent ID is a hard "not found" error (IDs are server-assigned, so `checkout` never creates one).
-- **Name:** Matched by name. If the name doesn't exist, pass `--create` to create it (equivalent to `neon branches create --name <name>`: branched from the project's default branch with a read-write compute), then check it out. Without `--create`, an interactive terminal offers to create it, while a non-interactive context (CI or no TTY) exits with a "not found" error that tells you to pass `--create`. `--create` needs a branch name, so `neon checkout --create` on its own is an error. `--create` requires neon 4.15.0 or later.
+- **Name:** Matched by name. If the name doesn't exist, pass `--create` to create it with a read-write compute, then check it out (`--create` requires neon 4.15.0 or later).
+  - The new branch starts from the `parent` your [`neon.ts`](/docs/reference/neon-ts#branchtuning-fields) branch policy sets, or from the project's default branch when it sets none.
+  - If the branch already exists, `--create` prints a warning, checks it out unchanged, and exits 0.
+  - Without `--create`, an interactive terminal offers to create the branch, while a non-interactive context (CI or no TTY) exits with a "not found" error that tells you to pass `--create`.
+  - `--create` needs a branch name, so `neon checkout --create` on its own is an error.
 
 ## Project resolution
 

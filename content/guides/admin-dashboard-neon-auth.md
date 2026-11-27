@@ -4,7 +4,7 @@ subtitle: Learn how to create an internal admin dashboard for user management us
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2025-12-31T00:00:00.000Z'
-updatedOn: '2026-09-24T17:56:34.189Z'
+updatedOn: '2026-11-26T20:44:20.251Z'
 ---
 
 Support and operations teams need internal tools to manage users. The Managed Better Auth [Admin plugin](/docs/auth/guides/plugins/admin) (powered by Better Auth) exposes user management APIs through the SDK, so you can build these tools without writing your own backend.
@@ -30,7 +30,7 @@ You'll need to create a Neon project and enable Managed Better Auth.
 
 1.  **Create a Neon project:** Navigate to the [Neon Console](https://console.neon.tech) to create a new Neon project. Give your project a name, such as `admin-dashboard-demo`.
 2.  **Enable Auth:**
-    - In your project dashboard, go to the **Auth** page.
+    - In the Neon Console, open the **Better Auth** page.
     - Click **Enable Auth** to set up authentication for your project.
 
 3.  **Copy your Auth URL:**

@@ -8,7 +8,7 @@ summary: >-
 enableTableOfContents: true
 redirectFrom:
   - /docs/storage/s3-api
-updatedOn: '2026-09-16T15:38:57.808Z'
+updatedOn: '2026-11-25T10:32:56.843Z'
 ---
 
 Neon Object Storage is compatible with the S3 API for core operations. It works with the AWS SDK for JavaScript (`@aws-sdk/client-s3`), boto3, the AWS CLI, and other S3-compatible tools. Not all S3 API operations are available.
@@ -108,6 +108,6 @@ To set a bucket's access level (`private` or `public_read`), use the [Neon Conso
 - **Lifecycle rules stored but not enforced.** `PutBucketLifecycle` accepts and stores configuration, but expiration and transition rules do not run.
 - **Versioning stored but not enforced.** Versioning configuration is stored and echoed. Objects always return `x-amz-version-id: null`.
 - **No bucket notifications.** SNS/SQS integration is not available.
-- **Branches, not regions.** Buckets are scoped to a branch, not an AWS region. `GetBucketLocation` returns the configured region string but bucket selection is always branch-based.
+- **Branches, not regions.** Buckets are scoped to a branch and stored in your project's region only. `GetBucketLocation` returns the configured region string, but bucket selection is always branch-based.
 
 <NeedHelp/>

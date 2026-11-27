@@ -3,7 +3,7 @@ title: Neon integration guides
 subtitle: Find setup instructions for connecting Neon to platforms and services.
 summary: >-
   Index of Neon integration guides organized by category: authentication,
-  deployment, development, file and media storage, monitoring, query,
+  deployment, development, email, file and media storage, monitoring, query,
   replication, schema migration, and serverless. Use this page to find setup
   instructions for connecting Neon to a specific platform or tool.
 enableTableOfContents: true
@@ -19,7 +19,7 @@ redirectFrom:
   - /docs/integrations/draxlr
   - /docs/guides/logical-replication-decodable
   - /docs/guides/logical-replication-stacksync
-updatedOn: '2026-11-18T16:41:34.386Z'
+updatedOn: '2026-11-27T05:28:08.327Z'
 ---
 
 ## Authentication
@@ -45,6 +45,8 @@ updatedOn: '2026-11-18T16:41:34.386Z'
 <a href="/docs/guides/cloudflare-pages" title="Cloudflare Pages" description="Use Neon with Cloudflare Pages" icon="cloudflare"></a>
 
 <a href="/docs/guides/cloudflare-workers" title="Cloudflare Workers" description="Use Neon with Cloudflare Workers" icon="cloudflare"></a>
+
+<a href="/docs/guides/fly" title="Fly.io" description="Use Neon with Fly.io" icon="fly"></a>
 
 <a href="/docs/guides/heroku" title="Heroku" description="Deploy an app with Neon on Heroku" icon="heroku"></a>
 
@@ -73,6 +75,16 @@ updatedOn: '2026-11-18T16:41:34.386Z'
 <a href="/docs/guides/prisma" title="Prisma" description="Connect from Prisma to Neon" icon="prisma"></a>
 
 <a href="/docs/guides/typeorm" title="TypeORM" description="Connect from TypeORM to Neon" icon="typeorm"></a>
+
+</TechCards>
+
+## Email
+
+<TechCards>
+
+<a href="/docs/guides/loops" title="Loops" description="Send Managed Better Auth emails and sync users with Loops" icon="loops"></a>
+
+<a href="/docs/guides/autosend" title="AutoSend" description="Send emails, start automations, and store email events with AutoSend" icon="autosend"></a>
 
 </TechCards>
 

@@ -1,6 +1,9 @@
 import { Suspense } from 'react';
 
-import { getFunctionTemplateInstallTotals } from 'utils/api-function-template-installs';
+import {
+  SHOW_FUNCTION_TEMPLATE_INSTALLS,
+  getFunctionTemplateInstallTotals,
+} from 'utils/api-function-template-installs';
 import { getFunctionRegistryCatalog } from 'utils/function-registry';
 
 import CatalogClient from './catalog-client';
@@ -8,7 +11,7 @@ import CatalogClient from './catalog-client';
 const Catalog = async () => {
   const [templates, installTotals] = await Promise.all([
     getFunctionRegistryCatalog(),
-    getFunctionTemplateInstallTotals(),
+    SHOW_FUNCTION_TEMPLATE_INSTALLS ? getFunctionTemplateInstallTotals() : new Map(),
   ]);
   const templatesWithInstalls = templates.map((template) => ({
     ...template,

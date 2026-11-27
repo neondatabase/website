@@ -15,7 +15,7 @@ summary: >-
 enableTableOfContents: true
 redirectFrom:
   - /docs/reference/cli-neon-auth
-updatedOn: '2026-11-18T14:07:15.661Z'
+updatedOn: '2026-11-26T23:29:57.687Z'
 ---
 
 The `neon-auth` command manages [Managed Better Auth](/docs/auth/overview) on a database branch from the terminal. You can enable or disable Managed Better Auth, configure OAuth providers, trusted domains, email settings, and webhooks, and manage auth users.
@@ -308,6 +308,48 @@ Sends a test email through your saved SMTP provider so you can verify it works. 
 
 ```bash
 neon neon-auth config email-provider test --recipient-email user@example.com
+```
+
+### neon neon-auth config logs-export (#config-logs-export)
+
+Manages export of Managed Better Auth events, such as sign-ups and sign-ins, to the branch logs (beta). See [Export Managed Better Auth logs](/docs/auth/guides/manage-auth-api#export-managed-better-auth-logs).
+
+<CliSubcommands command="neon-auth config logs-export" anchorParts="config-logs-export" />
+
+### neon neon-auth config logs-export get (#config-logs-export-get)
+
+Gets the logs export setting.
+
+<CliUsage command="neon-auth config logs-export get" />
+
+<CliOptions command="neon-auth config logs-export get" />
+
+```bash
+neon neon-auth config logs-export get
+```
+
+### neon neon-auth config logs-export enable (#config-logs-export-enable)
+
+Turns on logs export for the branch. Read the exported events with [`neon logs query --source neon_auth`](/docs/cli/logs).
+
+<CliUsage command="neon-auth config logs-export enable" />
+
+<CliOptions command="neon-auth config logs-export enable" />
+
+```bash
+neon neon-auth config logs-export enable
+```
+
+### neon neon-auth config logs-export disable (#config-logs-export-disable)
+
+Turns off logs export for the branch. Events already exported stay readable.
+
+<CliUsage command="neon-auth config logs-export disable" />
+
+<CliOptions command="neon-auth config logs-export disable" />
+
+```bash
+neon neon-auth config logs-export disable
 ```
 
 ### neon neon-auth config organization (#config-organization)

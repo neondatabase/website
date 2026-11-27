@@ -3,7 +3,10 @@ import { notFound } from 'next/navigation';
 
 import TemplateDetail from 'components/pages/functions/templates/template-detail';
 import VERCEL_URL from 'constants/base';
-import { getFunctionTemplateInstalls } from 'utils/api-function-template-installs';
+import {
+  SHOW_FUNCTION_TEMPLATE_INSTALLS,
+  getFunctionTemplateInstalls,
+} from 'utils/api-function-template-installs';
 import {
   getFunctionRegistryCatalog,
   getFunctionRegistryTemplatePage,
@@ -42,7 +45,7 @@ const FunctionTemplatePage = async ({ params }) => {
   if (!page) return notFound();
   const [readme, installs] = await Promise.all([
     getFunctionRegistryTemplateReadme(page.template),
-    getFunctionTemplateInstalls(page.template.id),
+    SHOW_FUNCTION_TEMPLATE_INSTALLS ? getFunctionTemplateInstalls(page.template.id) : [],
   ]);
   return <TemplateDetail {...page} readme={readme} installs={installs} />;
 };

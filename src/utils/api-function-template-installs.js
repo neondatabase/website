@@ -1,5 +1,10 @@
 import { neon } from '@neondatabase/serverless';
 
+// Install counts are hidden on the Function Registry pages (web and markdown) while template
+// installs are still low, because a small public count reads as low adoption. The stats
+// pipeline keeps collecting. Set this to true to show the counts again once installs grow.
+export const SHOW_FUNCTION_TEMPLATE_INSTALLS = false;
+
 async function queryStats(query) {
   const url = process.env.STATS_DATABASE_URL;
   if (!url) {

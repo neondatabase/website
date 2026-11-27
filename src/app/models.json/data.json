@@ -2139,6 +2139,62 @@
           }
         }
       },
+      "gpt-6-1-terra": {
+        "id": "gpt-6-1-terra",
+        "name": "GPT-6.1 Terra",
+        "lab": "openai",
+        "provider": "databricks",
+        "family": "gpt-terra",
+        "released": true,
+        "attachment": true,
+        "reasoning": true,
+        "reasoning_options": [
+          {
+            "type": "effort",
+            "values": ["none", "low", "medium", "high", "xhigh"]
+          }
+        ],
+        "tool_call": true,
+        "temperature": false,
+        "structured_output": true,
+        "open_weights": false,
+        "knowledge": "2026-06-01",
+        "release_date": "2026-10-27",
+        "last_updated": "2026-10-27",
+        "modalities": {
+          "input": ["text", "image", "pdf"],
+          "output": ["text"]
+        },
+        "limit": {
+          "context": 1050000,
+          "input": 922000,
+          "output": 128000
+        },
+        "cost": {
+          "input": 1,
+          "output": 5,
+          "cache_read": 0.05,
+          "cache_write": 1.25,
+          "tiers": [
+            {
+              "input": 2,
+              "output": 7.5,
+              "cache_read": 0.1,
+              "cache_write": 2.5,
+              "tier": {
+                "type": "context",
+                "size": 272000
+              }
+            }
+          ],
+          "context_over_200k": {
+            "input": 2,
+            "output": 7.5,
+            "cache_read": 0.1,
+            "cache_write": 2.5
+          }
+        }
+      },
       "gpt-6-luna": {
         "id": "gpt-6-luna",
         "name": "GPT-6 Luna",
@@ -2280,35 +2336,6 @@
           "cache_read": 0.26
         }
       },
-      "deepseek-v4-1-flash": {
-        "id": "deepseek-v4-1-flash",
-        "name": "DeepSeek V4.1 Flash",
-        "lab": "deepseek",
-        "provider": "databricks",
-        "family": "deepseek-flash",
-        "released": true,
-        "attachment": true,
-        "reasoning": true,
-        "tool_call": true,
-        "temperature": true,
-        "structured_output": false,
-        "open_weights": true,
-        "release_date": "2026-09-10",
-        "last_updated": "2026-09-10",
-        "modalities": {
-          "input": ["text", "image"],
-          "output": ["text"]
-        },
-        "limit": {
-          "context": 128000,
-          "output": 8192
-        },
-        "cost": {
-          "input": 0.3,
-          "output": 1.2,
-          "cache_read": 0.03
-        }
-      },
       "openjev-qwen35-4b": {
         "id": "openjev-qwen35-4b",
         "name": "OpenJev (Qwen 3.5 4B)",
@@ -2414,9 +2441,9 @@
           "output": 65536
         },
         "cost": {
-          "input": 0,
-          "output": 0,
-          "cache_read": 0
+          "input": 2,
+          "output": 10,
+          "cache_read": 0.2
         }
       },
       "claude-fable-5-2": {
@@ -2486,9 +2513,84 @@
           "output": 65536
         },
         "cost": {
-          "input": 0,
-          "output": 0,
-          "cache_read": 0
+          "input": 4,
+          "output": 20,
+          "cache_read": 0.2
+        }
+      },
+      "gemini-3-pro-image": {
+        "id": "gemini-3-pro-image",
+        "name": "Gemini 3 Pro Image",
+        "lab": "google",
+        "provider": "databricks",
+        "family": "gemini-pro",
+        "released": true,
+        "attachment": true,
+        "reasoning": true,
+        "reasoning_options": [
+          {
+            "type": "toggle"
+          },
+          {
+            "type": "effort",
+            "values": ["low", "medium", "high", "xhigh", "max"]
+          }
+        ],
+        "tool_call": true,
+        "temperature": true,
+        "structured_output": true,
+        "open_weights": false,
+        "knowledge": "2025-01",
+        "release_date": "2025-11-20",
+        "last_updated": "2025-11-20",
+        "modalities": {
+          "input": ["text", "image", "pdf"],
+          "output": ["text", "image"]
+        },
+        "limit": {
+          "context": 65536,
+          "output": 32768
+        },
+        "cost": {
+          "input": 2,
+          "output": 12,
+          "output_image": 120
+        }
+      },
+      "gemini-3-1-flash-image": {
+        "id": "gemini-3-1-flash-image",
+        "name": "Gemini 3.1 Flash Image",
+        "lab": "google",
+        "provider": "databricks",
+        "family": "gemini-flash",
+        "released": true,
+        "attachment": true,
+        "reasoning": true,
+        "reasoning_options": [
+          {
+            "type": "effort",
+            "values": ["low", "medium", "high", "max"]
+          }
+        ],
+        "tool_call": true,
+        "temperature": true,
+        "structured_output": true,
+        "open_weights": false,
+        "knowledge": "2025-01",
+        "release_date": "2026-02-26",
+        "last_updated": "2026-02-26",
+        "modalities": {
+          "input": ["text", "image", "pdf"],
+          "output": ["text", "image"]
+        },
+        "limit": {
+          "context": 131072,
+          "output": 32768
+        },
+        "cost": {
+          "input": 0.5,
+          "output": 3,
+          "output_image": 60
         }
       }
     }

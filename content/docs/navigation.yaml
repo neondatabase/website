@@ -51,8 +51,6 @@
               slug: guides/nestjs
             - title: Next.js
               slug: guides/nextjs
-            - title: Node.js
-              slug: guides/node
             - title: Nuxt
               slug: guides/nuxt
             - title: Phoenix
@@ -96,9 +94,11 @@
             - title: Java
               slug: guides/java
             - title: JavaScript
-              slug: guides/javascript
+              slug: guides/node
             - title: Kotlin
               slug: guides/kotlin
+            - title: Node.js
+              slug: guides/node
             - title: Python
               slug: guides/python
             - title: Rust
@@ -346,12 +346,6 @@
                   slug: extensions/hstore
                 - title: intarray
                   slug: extensions/intarray
-                - title: lakebase_text
-                  slug: extensions/lakebase-text
-                - title: lakebase_tokenizer
-                  slug: extensions/lakebase-tokenizer
-                - title: lakebase_vector
-                  slug: extensions/lakebase-vector
                 - title: ltree
                   slug: extensions/ltree
                 - title: neon
@@ -453,14 +447,6 @@
                               slug: ai/ai-scale-with-neon
                         - title: Google Colab
                           slug: ai/ai-google-colab
-                    - title: Lakebase Search
-                      icon: sparks
-                      slug: ai/lakebase-search
-                      items:
-                        - title: Overview
-                          slug: ai/lakebase-search
-                        - title: Get started
-                          slug: ai/lakebase-search-get-started
             - title: Postgres guides
               slug: postgresql/introduction
               icon: book
@@ -973,6 +959,8 @@
               slug: compute/functions/triggers/object-storage
         - section: Use cases
           items:
+            - title: Backend API for a frontend app
+              slug: compute/functions/frontend-api
             - title: AI agents
               slug: compute/functions/agents
             - title: WebSockets and SSE
@@ -1013,6 +1001,21 @@
               slug: storage/authentication
             - title: Logs
               slug: storage/logs
+            - title: Resumable uploads
+              slug: storage/uploads/resumable-uploads
+              items:
+                - title: Uppy with a signing endpoint
+                  slug: storage/uploads/uppy-s3-multipart
+                - title: Uppy Companion
+                  slug: storage/uploads/uppy-companion
+                - title: Import from URLs and cloud services
+                  slug: storage/uploads/uppy-remote-sources
+                - title: Browser-side signing
+                  slug: storage/uploads/uppy-browser-signing
+                - title: Uppy with tus
+                  slug: storage/uploads/uppy-tus
+                - title: Recover after a reload
+                  slug: storage/uploads/uppy-golden-retriever
         - section: Reference
           items:
             - title: S3 compatibility
@@ -1065,6 +1068,14 @@
           slug: ai/lakebase-search
         - title: Get started
           slug: ai/lakebase-search-get-started
+        - section: Extension reference
+          items:
+            - title: lakebase_vector
+              slug: extensions/lakebase-vector
+            - title: lakebase_text
+              slug: extensions/lakebase-text
+            - title: lakebase_tokenizer
+              slug: extensions/lakebase-tokenizer
 
 - nav: Platform
   title: Platform
@@ -1098,8 +1109,8 @@
                   items:
                     - title: Manage organizations via API
                       slug: manage/orgs-api
-                    - title: Query organization metrics via API
-                      slug: manage/orgs-api-consumption
+                    - title: Query consumption metrics via API
+                      slug: guides/consumption-metrics
                 - title: CLI
                   items:
                     - title: CLI actions
@@ -1224,8 +1235,6 @@
           slug: security/security-reporting
         - title: Compliance
           slug: security/compliance
-        - title: SOC 3 report
-          slug: security/soc-3-report
         - title: HIPAA
           slug: security/hipaa
         - title: AI use in Neon
@@ -1340,8 +1349,6 @@
               slug: ai/ai-database-versioning
             - title: Neon API Reference
               slug: reference/api
-            - title: Lakebase Search
-              slug: ai/lakebase-search
         - section: Agent frameworks
           icon: frameworks
           items:
@@ -1554,6 +1561,8 @@
                       slug: guides/cloudflare-pages
                     - title: Cloudflare Workers
                       slug: guides/cloudflare-workers
+                - title: Fly.io
+                  slug: guides/fly
                 - title: Heroku
                   slug: guides/heroku
                 - title: Koyeb
@@ -1591,6 +1600,17 @@
                   slug: guides/prisma
                 - title: TypeORM
                   slug: guides/typeorm
+            - title: Email
+              items:
+                - title: Loops
+                  slug: guides/loops
+                  items:
+                    - title: Send email with Loops
+                      slug: guides/loops
+                    - title: Store Loops webhook events
+                      slug: guides/loops-webhooks
+                - title: AutoSend
+                  slug: guides/autosend
             - title: File & media storage
               items:
                 - title: File storage
@@ -1760,6 +1780,8 @@
               slug: community/community-intro
             - title: Docs contribution guide
               slug: community/contribution-guide
+            - title: Style guide
+              slug: community/style-guide
             - title: Using Mermaid diagrams
               slug: community/mermaid-diagrams
             - title: Component guide

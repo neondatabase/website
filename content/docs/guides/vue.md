@@ -1,34 +1,37 @@
 ---
 title: Connect a Vue.js application to Neon
-subtitle: Set up a project on Neon in seconds and connect from a Vue.js application
+subtitle: Connect a Vue.js app to Lakebase Postgres on Neon from the server side with Nuxt
 summary: >-
-  Connecting a Vue.js application to a Lakebase Postgres database requires
-  server-side access because the database cannot be queried directly from the browser.
-  Use a Vue meta-framework such as Nuxt.js or Quasar Framework to run database
-  queries on the server and expose data to your Vue frontend.
+  To connect a Vue.js app to Lakebase Postgres on Neon, run your database queries on
+  the server, because the database can't be queried directly from the browser. Use
+  a Vue meta-framework such as Nuxt, which has a guide linked here, and expose the
+  data to your Vue frontend.
 enableTableOfContents: true
-updatedOn: '2026-11-08T14:10:10.000Z'
+updatedOn: '2026-11-27T01:39:33.820Z'
 ---
 
 Vue.js is a progressive JavaScript framework for building user interfaces.
 
-Lakebase Postgres should be accessed from the server side in Vue.js applications. You can achieve this using Vue.js meta-frameworks like Nuxt.js or Quasar Framework.
+Connect to Lakebase Postgres from the server side of a Vue.js application, never from the browser. A Vue meta-framework such as Nuxt runs your queries on the server.
 
-## Vue Meta-Frameworks
-
-Find detailed instructions for connecting to Neon from Vue.js meta-frameworks.
+## Vue meta-frameworks
 
 <TechCards>
 
-<a href="/docs/guides/nuxt" title="Nuxt.js" description="Connect a Nuxt.js application to Neon" icon="nuxt"></a>
+<a href="/docs/guides/nuxt" title="Nuxt" description="Connect a Nuxt app to Lakebase Postgres on Neon" icon="nuxt"></a>
 
 </TechCards>
 
+## Vue apps without a server
+
+A Vue app built with Vite and no meta-framework runs only in the browser. To give it a backend that queries the database, deploy an API on Neon Functions: see [Add a backend API to a frontend app](/docs/compute/functions/frontend-api).
+
 ## Next steps
 
-- [Set up Managed Better Auth](/docs/auth/overview): Add managed authentication that branches with your database
-- [Add Object Storage](/docs/storage/overview): S3-compatible file storage that branches with your database
-- [Deploy a Function](/docs/compute/functions/overview): Run backend compute next to your database, no separate hosting needed
-- [Call an LLM with AI Gateway](/docs/ai-gateway/overview): Access foundation models from Anthropic, OpenAI, Google, and more with one credential
+- [Managed Better Auth](/docs/auth/overview): Sign-up, sign-in, and sessions stored in your database.
+- [Object Storage](/docs/storage/overview): S3-compatible buckets for uploads and files.
+- [AI Gateway](/docs/ai-gateway/overview): One credential for models from Anthropic, OpenAI, Google, and more.
+- [Neon Functions](/docs/compute/functions/overview): Long-running Node.js compute next to your database.
+- [Realtime](/docs/realtime/overview) (beta): Live SQL query subscriptions.
 
 <NeedHelp/>

@@ -44,6 +44,15 @@ const getSections = (row) =>
           { title: 'Released', id: 'released', value: row.releaseLabel },
           { title: 'Input /M', id: 'input-m', value: row.costInputLabel },
           { title: 'Output /M', id: 'output-m', value: row.costOutputLabel },
+          ...(row.costOutputImageLabel
+            ? [
+                {
+                  title: 'Image output /M',
+                  id: 'image-output-m',
+                  value: `${row.costOutputImageLabel}. The cost per image depends on the image size; see [Image output pricing](/docs/ai-gateway/models#image-output-pricing).`,
+                },
+              ]
+            : []),
         ];
 
 const getModelDetailPageData = (row) => {

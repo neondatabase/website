@@ -11,7 +11,7 @@ summary: >-
   with a note for Astro 6, plus deployment, troubleshooting, and Neon's other
   backend services from Astro.
 enableTableOfContents: true
-updatedOn: '2026-11-17T01:08:58.350Z'
+updatedOn: '2026-11-27T01:39:33.820Z'
 ---
 
 <PromptBlock src="/prompts/astro-serverless-prompt.md" labels={["Set up your agent and follow this guide", "Use Astro's docs MCP server (optional)", "Connect your Astro app"]} />
@@ -336,7 +336,7 @@ AI Gateway
 
 Neon Functions
 : Long-running Node.js compute next to your database.
-: Add one with `neon config add function <slug>`, which also creates its handler file in `functions/`. Use a function for work that outlasts a request on your Astro host, such as agents and webhooks, and call it with `fetch`. See [Neon Functions](/docs/compute/functions/overview).
+: Add one with `neon config add function <slug>`, which also creates its handler file in `functions/`. Use a function for work that outlasts a request on your Astro host, such as agents and webhooks, and call it with `fetch`. For a static Astro site with no adapter, a function can be the site's whole API: see [Add a backend API to a frontend app](/docs/compute/functions/frontend-api). See [Neon Functions](/docs/compute/functions/overview).
 
 Realtime (beta)
 : Live SQL query subscriptions.

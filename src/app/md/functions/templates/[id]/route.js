@@ -1,5 +1,8 @@
 import { renderTemplateMarkdown } from 'components/pages/functions/templates/markdown';
-import { getFunctionTemplateInstalls } from 'utils/api-function-template-installs';
+import {
+  SHOW_FUNCTION_TEMPLATE_INSTALLS,
+  getFunctionTemplateInstalls,
+} from 'utils/api-function-template-installs';
 import {
   getFunctionRegistryTemplatePage,
   getFunctionRegistryTemplateReadme,
@@ -29,7 +32,7 @@ export async function GET(_req, { params }) {
   if (!page) return templateNotFoundResponse(pathname);
   const [readme, installs] = await Promise.all([
     getFunctionRegistryTemplateReadme(page.template),
-    getFunctionTemplateInstalls(page.template.id),
+    SHOW_FUNCTION_TEMPLATE_INSTALLS ? getFunctionTemplateInstalls(page.template.id) : [],
   ]);
   return markdownResponse(renderTemplateMarkdown({ ...page, readme, installs }));
 }

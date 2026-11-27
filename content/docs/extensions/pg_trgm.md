@@ -10,7 +10,7 @@ summary: >-
   configurable similarity threshold, and functions including `similarity`,
   `word_similarity`, and `strict_word_similarity`.
 enableTableOfContents: true
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-11-21T19:22:11.930Z'
 ---
 
 The `pg_trgm` extension enhances Postgres' ability to perform text searches by using trigram matching. Trigrams are groups of three consecutive characters taken from a string. By breaking down text into trigrams, Postgres can perform more efficient and flexible searches, such as similarity and proximity searches.
@@ -77,7 +77,7 @@ This query returns the following:
 ```text
 | id | title               |
 |----|---------------------|
-| 1  | Great Expectations  |
+| 3  | Great Expectations  |
 ```
 
 The similarity threshold can be adjusted by setting the `pg_trgm.similarity_threshold` parameter (default value is `0.3`).
@@ -96,7 +96,7 @@ The `pg_trgm` module makes these assumptions about how to count trigrams in a te
 We can use the `show_trgm` function to see how `pg_trgm` counts trigrams in a string. Here is an example:
 
 ```sql
-SELECT show_trgm('War and Peace'); -- {" a"," p"," w"," an"," pe"," wa",ace,and,"ar ","ce ",eac,"nd ",pea,war}
+SELECT show_trgm('War and Peace'); -- {"  a","  p","  w"," an"," pe"," wa",ace,and,"ar ","ce ",eac,"nd ",pea,war}
 ```
 
 ### Computing similarity
@@ -114,7 +114,7 @@ This query returns the following:
 ```text
 | show_trgm              | show_trgm              | similarity |
 |------------------------|------------------------|------------|
-| {" w"," wa","ar ",war} | {" b"," ba","ar ",bar} | 0.14285715 |
+| {"  w"," wa","ar ",war} | {"  b"," ba","ar ",bar} | 0.14285715 |
 ```
 
 There are 7 distinct trigrams across the two input strings and 1 trigram in common. So the similarity score comes out to be 1/7 (0.14285715).

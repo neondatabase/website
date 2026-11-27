@@ -10,7 +10,7 @@ summary: >-
   automatic retries, readiness polling, and auto-pagination built in. A raw
   1:1 layer exposes every endpoint and is generated from the Neon OpenAPI spec.
 enableTableOfContents: true
-updatedOn: '2026-10-21T12:44:07.000Z'
+updatedOn: '2026-11-27T10:44:55.897Z'
 ---
 
 <InfoBlock>
@@ -64,7 +64,7 @@ Every method follows this shape: select a namespace, call a method, and receive 
 Each method takes a **single named-parameter object**: the path selectors (`projectId`, `branchId`, and any resource id such as `roleName` or `slug`) and any input or query fields are merged into one flat object, followed by an optional trailing options argument (`{ throwOnError?, waitForReadiness?, signal? }`, omitted from the tables for brevity).
 
 <Admonition type="important" title="Named parameters in v5 and later">
-`@neon/sdk` v5 replaced positional arguments with a single named-parameter object, and v6 is the current major. For example, `neon.branches.get(projectId, branchId)` is now `neon.branches.get({ projectId, branchId })`. If you're upgrading from v4, update your calls to the object form shown throughout this page. See [Upgrading from v4](#upgrading-from-v4).
+`@neon/sdk` v5 replaced positional arguments with a single named-parameter object, and v7 is the current major. For example, `neon.branches.get(projectId, branchId)` is now `neon.branches.get({ projectId, branchId })`. If you're upgrading from v4, update your calls to the object form shown throughout this page. See [Upgrading from v4](#upgrading-from-v4).
 </Admonition>
 
 In the reference tables, the **Returns** column names the resolved resource, the type of `data` on success (or the value returned directly when `throwOnError` is set). A method resolving to `void` has no resource body; [`Paginated`](#lazy-auto-paginated-lists)`<T>` is the lazy, auto-paginated list described below.
@@ -387,7 +387,7 @@ Branch-scoped Neon Functions. <small>REST: [Functions API](/docs/reference/api/f
 | -------------------------------------------- | --------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `list({ projectId, branchId, ...query })`    | [`Paginated`](#lazy-auto-paginated-lists)`<NeonFunction>` | `query`: `{ limit? }`                                                                                                                                   |
 | `get({ projectId, branchId, slug })`         | `NeonFunction`                                            |                                                                                                                                                         |
-| `update({ projectId, branchId, slug, ... })` | `NeonFunction`                                            | Fields: `{ name? }`                                                                                                                                     |
+| `update({ projectId, branchId, slug, ... })` | `NeonFunction`                                            | Fields: `{ name: string \| null }`. `null` clears the display name                                                                                      |
 | `delete({ projectId, branchId, slug })`      | `void`                                                    |                                                                                                                                                         |
 | `deploy({ projectId, branchId, slug, ... })` | `NeonFunctionDeployment`                                  | Multipart. Fields: `{ zip?: Blob \| File, runtime?: "nodejs24", environment?: string }`, where `environment` is a JSON-encoded `Record<string, string>` |
 
@@ -581,7 +581,46 @@ await neon.storage.objects.presign({
 
 The `{ pooled }` option on `projects.createAndConnect` and `branches.createAndConnect`, and the `operations` argument to `operations.waitFor`, also move into the params object. `postgres.connectionString` and the `consumption.*` methods were already object-shaped and are unchanged.
 
-v6 is the current major. It extends the triggers surface (`storage_object_created` alongside `schedule`) and does not change the named-parameter shape introduced in v5.
+v7 is the current major. It removes snapshot slugs: `snapshots.create` no longer takes `slug`, and snapshots resolve by ID or unique name. v6 extended the triggers surface (`storage_object_created` alongside `schedule`). Neither changes the named-parameter shape introduced in v5.
+
+## neon.request
+
+`neon.request` calls any Neon API route with the client's auth, deadline, retries, and typed errors. Use it for a route that no namespace on this page wraps, or when you only know the route at runtime. It never polls operations, so it returns as soon as the API responds.
+
+| Method                                     | Returns                                                                                            |
+| ------------------------------------------ | -------------------------------------------------------------------------------------------------- |
+| `request({ method, path, query?, body? })` | The response body as `data`: parsed JSON, the text of a non-JSON body, or `null` for an empty body |
+
+`method` is `GET`, `POST`, `PUT`, `PATCH`, or `DELETE`. `path` is relative to `baseUrl`, with every `{placeholder}` replaced by a real value. Put query parameters in `query`, and `body` is sent as JSON. The SDK refuses a path that keeps a placeholder, contains `?` or `#`, or has an empty, `.`, `..`, or encoded-slash segment. A refused path produces a `NeonClientError` before any request goes out. Errors follow the client's `throwOnError` setting.
+
+```ts
+const { data, error } = await neon.request({
+  method: "GET",
+  path: "/projects/cool-forest-12345678",
+});
+```
+
+The `parseApiPath(path)` export applies the same path check, for callers that add their own rules. It returns `{ data }` with the decoded path segments, or `{ error }` with a `NeonClientError` for a refused path.
+
+### @neon/sdk/openapi
+
+The `@neon/sdk/openapi` subpath works with the released Neon OpenAPI spec as data. Use it to find a route and check its fields before you send it with `neon.request`. The [`neon api`](/docs/cli/api) command uses the same functions for `--list` and `--describe`.
+
+| Export                                        | Returns                                                                                                                                                           |
+| --------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `fetchOpenApiSpec({ url?, fetch?, signal? })` | The spec from `https://neon.com/api_spec/release/v2.json` by default. Throws on a network error, a 10-second timeout, a non-2xx status, or a body without `paths` |
+| `listEndpoints(spec)`                         | Every route as `{ method, path, summary, operationId, tags }`, sorted by path and then method                                                                     |
+| `searchEndpoints(spec, query, { limit? })`    | Matching routes, best match first. `limit` defaults to 10                                                                                                         |
+| `describeEndpoint(spec, path, method)`        | The route's path, query, header, and body fields. Body fields use dotted names, such as `branch.name`. Throws `EndpointNotFoundError` when no route matches       |
+
+```ts
+import { describeEndpoint, fetchOpenApiSpec } from "@neon/sdk/openapi";
+
+const spec = await fetchOpenApiSpec();
+const { fields } = describeEndpoint(spec, "/projects/cool-forest-12345678/branches", "POST");
+```
+
+A concrete path such as `/projects/cool-forest-12345678/branches` matches the spec's `{project_id}` template.
 
 ## Raw layer
 

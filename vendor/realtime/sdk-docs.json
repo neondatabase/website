@@ -1369,7 +1369,7 @@
                       },
                       "type": {
                         "type": "reference",
-                        "target": 318,
+                        "target": 323,
                         "typeArguments": [
                           {
                             "type": "reference",
@@ -1406,7 +1406,7 @@
                     "typeArguments": [
                       {
                         "type": "reference",
-                        "target": 322,
+                        "target": 327,
                         "typeArguments": [
                           {
                             "type": "reference",
@@ -1534,7 +1534,7 @@
                       },
                       "type": {
                         "type": "reference",
-                        "target": 368,
+                        "target": 373,
                         "name": "RawLiveQueryOptions",
                         "package": "@neon/realtime"
                       }
@@ -1550,7 +1550,7 @@
                     "typeArguments": [
                       {
                         "type": "reference",
-                        "target": 374,
+                        "target": 379,
                         "typeArguments": [
                           {
                             "type": "reference",
@@ -1769,7 +1769,7 @@
               },
               "type": {
                 "type": "reference",
-                "target": 432,
+                "target": 437,
                 "name": "RealtimeLogger",
                 "package": "@neon/realtime"
               }
@@ -1793,7 +1793,7 @@
               },
               "type": {
                 "type": "reference",
-                "target": 436,
+                "target": 441,
                 "name": "RealtimeLogLevel",
                 "package": "@neon/realtime"
               }
@@ -1843,7 +1843,7 @@
                             "types": [
                               {
                                 "type": "reference",
-                                "target": 178,
+                                "target": 183,
                                 "typeArguments": [
                                   {
                                     "type": "intrinsic",
@@ -1855,7 +1855,7 @@
                               },
                               {
                                 "type": "reference",
-                                "target": 186,
+                                "target": 191,
                                 "typeArguments": [
                                   {
                                     "type": "intrinsic",
@@ -3400,7 +3400,7 @@
               },
               {
                 "kind": "text",
-                "text": " to their React or\nTanStack DB integration instead of constructing this class. Integration\nauthors can use it to refresh shortly before expiry and keep retrying across\ncapability expiry or an arbitrarily long transport outage."
+                "text": " to their React or\nTanStack DB integration instead of constructing this class. Integration\nauthors can use it to refresh shortly before expiry and keep retrying across\ncapability expiry or an arbitrarily long transport outage. Refreshes stop\nonce the associated subscription is in error or closed, because neither\nstate can accept a replacement capability."
               }
             ]
           },
@@ -3484,14 +3484,14 @@
               ]
             },
             {
-              "id": 144,
+              "id": 147,
               "name": "currentQuery",
               "variant": "declaration",
               "kind": 2048,
               "flags": {},
               "signatures": [
                 {
-                  "id": 145,
+                  "id": 148,
                   "name": "currentQuery",
                   "variant": "signature",
                   "kind": 4096,
@@ -3524,14 +3524,14 @@
               ]
             },
             {
-              "id": 154,
+              "id": 157,
               "name": "replaceSealedQuery",
               "variant": "declaration",
               "kind": 2048,
               "flags": {},
               "signatures": [
                 {
-                  "id": 155,
+                  "id": 158,
                   "name": "replaceSealedQuery",
                   "variant": "signature",
                   "kind": 4096,
@@ -3557,7 +3557,7 @@
                   },
                   "parameters": [
                     {
-                      "id": 156,
+                      "id": 159,
                       "name": "query",
                       "variant": "param",
                       "kind": 32768,
@@ -3600,14 +3600,14 @@
               ]
             },
             {
-              "id": 146,
+              "id": 149,
               "name": "setRefreshCallback",
               "variant": "declaration",
               "kind": 2048,
               "flags": {},
               "signatures": [
                 {
-                  "id": 147,
+                  "id": 150,
                   "name": "setRefreshCallback",
                   "variant": "signature",
                   "kind": 4096,
@@ -3630,7 +3630,7 @@
                   },
                   "parameters": [
                     {
-                      "id": 148,
+                      "id": 151,
                       "name": "refreshQuery",
                       "variant": "param",
                       "kind": 32768,
@@ -3641,14 +3641,14 @@
                           {
                             "type": "reflection",
                             "declaration": {
-                              "id": 149,
+                              "id": 152,
                               "name": "__type",
                               "variant": "declaration",
                               "kind": 65536,
                               "flags": {},
                               "signatures": [
                                 {
-                                  "id": 150,
+                                  "id": 153,
                                   "name": "__type",
                                   "variant": "signature",
                                   "kind": 4096,
@@ -3701,14 +3701,14 @@
               ]
             },
             {
-              "id": 151,
+              "id": 154,
               "name": "setSubscription",
               "variant": "declaration",
               "kind": 2048,
               "flags": {},
               "signatures": [
                 {
-                  "id": 152,
+                  "id": 155,
                   "name": "setSubscription",
                   "variant": "signature",
                   "kind": 4096,
@@ -3717,13 +3717,13 @@
                     "summary": [
                       {
                         "kind": "text",
-                        "text": "Associate the active subscription managed by this controller."
+                        "text": "Associate the active subscription managed by this controller. Refreshes\nstop once it is in error or closed."
                       }
                     ]
                   },
                   "parameters": [
                     {
-                      "id": 153,
+                      "id": 156,
                       "name": "subscription",
                       "variant": "param",
                       "kind": 32768,
@@ -3733,7 +3733,7 @@
                         "types": [
                           {
                             "type": "reference",
-                            "target": 374,
+                            "target": 379,
                             "typeArguments": [
                               {
                                 "type": "reference",
@@ -3763,14 +3763,14 @@
               ]
             },
             {
-              "id": 157,
+              "id": 160,
               "name": "start",
               "variant": "declaration",
               "kind": 2048,
               "flags": {},
               "signatures": [
                 {
-                  "id": 158,
+                  "id": 161,
                   "name": "start",
                   "variant": "signature",
                   "kind": 4096,
@@ -3791,14 +3791,14 @@
               ]
             },
             {
-              "id": 159,
+              "id": 162,
               "name": "stop",
               "variant": "declaration",
               "kind": 2048,
               "flags": {},
               "signatures": [
                 {
-                  "id": 160,
+                  "id": 163,
                   "name": "stop",
                   "variant": "signature",
                   "kind": 4096,
@@ -3829,12 +3829,12 @@
             {
               "title": "Methods",
               "children": [
-                144,
-                154,
-                146,
-                151,
+                147,
                 157,
-                159
+                149,
+                154,
+                160,
+                162
               ]
             }
           ],
@@ -3857,7 +3857,7 @@
           ]
         },
         {
-          "id": 284,
+          "id": 289,
           "name": "LiveQueryBatchInfo",
           "variant": "declaration",
           "kind": 256,
@@ -3872,7 +3872,7 @@
           },
           "children": [
             {
-              "id": 285,
+              "id": 290,
               "name": "txids",
               "variant": "declaration",
               "kind": 1024,
@@ -3904,13 +3904,13 @@
             {
               "title": "Properties",
               "children": [
-                285
+                290
               ]
             }
           ]
         },
         {
-          "id": 299,
+          "id": 304,
           "name": "LiveQueryError",
           "variant": "declaration",
           "kind": 256,
@@ -3925,7 +3925,7 @@
           },
           "children": [
             {
-              "id": 306,
+              "id": 311,
               "name": "cause",
               "variant": "declaration",
               "kind": 1024,
@@ -3945,7 +3945,7 @@
               }
             },
             {
-              "id": 300,
+              "id": 305,
               "name": "code",
               "variant": "declaration",
               "kind": 1024,
@@ -3966,7 +3966,7 @@
               }
             },
             {
-              "id": 304,
+              "id": 309,
               "name": "message",
               "variant": "declaration",
               "kind": 1024,
@@ -3985,7 +3985,7 @@
               }
             },
             {
-              "id": 303,
+              "id": 308,
               "name": "name",
               "variant": "declaration",
               "kind": 1024,
@@ -4004,7 +4004,7 @@
               }
             },
             {
-              "id": 302,
+              "id": 307,
               "name": "retryable",
               "variant": "declaration",
               "kind": 1024,
@@ -4025,7 +4025,7 @@
               }
             },
             {
-              "id": 301,
+              "id": 306,
               "name": "sqlState",
               "variant": "declaration",
               "kind": 1024,
@@ -4047,7 +4047,7 @@
               }
             },
             {
-              "id": 305,
+              "id": 310,
               "name": "stack",
               "variant": "declaration",
               "kind": 1024,
@@ -4071,13 +4071,13 @@
             {
               "title": "Properties",
               "children": [
+                311,
+                305,
+                309,
+                308,
+                307,
                 306,
-                300,
-                304,
-                303,
-                302,
-                301,
-                305
+                310
               ]
             }
           ],
@@ -4095,7 +4095,7 @@
           ]
         },
         {
-          "id": 318,
+          "id": 323,
           "name": "MaterializedLiveQueryOptions",
           "variant": "declaration",
           "kind": 256,
@@ -4110,7 +4110,7 @@
           },
           "children": [
             {
-              "id": 321,
+              "id": 326,
               "name": "initialData",
               "variant": "declaration",
               "kind": 1024,
@@ -4133,7 +4133,7 @@
                   "type": "array",
                   "elementType": {
                     "type": "reference",
-                    "target": 319,
+                    "target": 324,
                     "name": "Row",
                     "package": "@neon/realtime",
                     "qualifiedName": "MaterializedLiveQueryOptions.Row",
@@ -4143,7 +4143,7 @@
               }
             },
             {
-              "id": 320,
+              "id": 325,
               "name": "materialize",
               "variant": "declaration",
               "kind": 1024,
@@ -4177,14 +4177,14 @@
             {
               "title": "Properties",
               "children": [
-                321,
-                320
+                326,
+                325
               ]
             }
           ],
           "typeParameters": [
             {
-              "id": 319,
+              "id": 324,
               "name": "Row",
               "variant": "typeParam",
               "kind": 131072,
@@ -4193,7 +4193,7 @@
           ]
         },
         {
-          "id": 322,
+          "id": 327,
           "name": "MaterializedLiveQuerySubscription",
           "variant": "declaration",
           "kind": 256,
@@ -4208,14 +4208,14 @@
           },
           "children": [
             {
-              "id": 326,
+              "id": 331,
               "name": "awaitRows",
               "variant": "declaration",
               "kind": 2048,
               "flags": {},
               "signatures": [
                 {
-                  "id": 327,
+                  "id": 332,
                   "name": "awaitRows",
                   "variant": "signature",
                   "kind": 4096,
@@ -4241,7 +4241,7 @@
                   },
                   "parameters": [
                     {
-                      "id": 328,
+                      "id": 333,
                       "name": "matches",
                       "variant": "param",
                       "kind": 32768,
@@ -4257,21 +4257,21 @@
                       "type": {
                         "type": "reflection",
                         "declaration": {
-                          "id": 329,
+                          "id": 334,
                           "name": "__type",
                           "variant": "declaration",
                           "kind": 65536,
                           "flags": {},
                           "signatures": [
                             {
-                              "id": 330,
+                              "id": 335,
                               "name": "__type",
                               "variant": "signature",
                               "kind": 4096,
                               "flags": {},
                               "parameters": [
                                 {
-                                  "id": 331,
+                                  "id": 336,
                                   "name": "rows",
                                   "variant": "param",
                                   "kind": 32768,
@@ -4283,7 +4283,7 @@
                                       "type": "array",
                                       "elementType": {
                                         "type": "reference",
-                                        "target": 323,
+                                        "target": 328,
                                         "name": "Row",
                                         "package": "@neon/realtime",
                                         "qualifiedName": "MaterializedLiveQuerySubscription.Row",
@@ -4303,7 +4303,7 @@
                       }
                     },
                     {
-                      "id": 332,
+                      "id": 337,
                       "name": "timeout",
                       "variant": "param",
                       "kind": 32768,
@@ -4344,7 +4344,7 @@
               ]
             },
             {
-              "id": 359,
+              "id": 364,
               "name": "awaitTxId",
               "variant": "declaration",
               "kind": 2048,
@@ -4353,7 +4353,7 @@
               },
               "signatures": [
                 {
-                  "id": 360,
+                  "id": 365,
                   "name": "awaitTxId",
                   "variant": "signature",
                   "kind": 4096,
@@ -4390,7 +4390,7 @@
                   },
                   "parameters": [
                     {
-                      "id": 361,
+                      "id": 366,
                       "name": "txid",
                       "variant": "param",
                       "kind": 32768,
@@ -4409,7 +4409,7 @@
                       }
                     },
                     {
-                      "id": 362,
+                      "id": 367,
                       "name": "timeout",
                       "variant": "param",
                       "kind": 32768,
@@ -4448,26 +4448,26 @@
                   },
                   "inheritedFrom": {
                     "type": "reference",
-                    "target": 395,
+                    "target": 400,
                     "name": "RawLiveQuerySubscription.awaitTxId"
                   }
                 }
               ],
               "inheritedFrom": {
                 "type": "reference",
-                "target": 394,
+                "target": 399,
                 "name": "RawLiveQuerySubscription.awaitTxId"
               }
             },
             {
-              "id": 324,
+              "id": 329,
               "name": "getSnapshot",
               "variant": "declaration",
               "kind": 2048,
               "flags": {},
               "signatures": [
                 {
-                  "id": 325,
+                  "id": 330,
                   "name": "getSnapshot",
                   "variant": "signature",
                   "kind": 4096,
@@ -4482,11 +4482,11 @@
                   },
                   "type": {
                     "type": "reference",
-                    "target": 307,
+                    "target": 312,
                     "typeArguments": [
                       {
                         "type": "reference",
-                        "target": 323,
+                        "target": 328,
                         "name": "Row",
                         "package": "@neon/realtime",
                         "qualifiedName": "MaterializedLiveQuerySubscription.Row",
@@ -4500,7 +4500,7 @@
               ]
             },
             {
-              "id": 341,
+              "id": 346,
               "name": "getState",
               "variant": "declaration",
               "kind": 2048,
@@ -4509,7 +4509,7 @@
               },
               "signatures": [
                 {
-                  "id": 342,
+                  "id": 347,
                   "name": "getState",
                   "variant": "signature",
                   "kind": 4096,
@@ -4526,32 +4526,32 @@
                   },
                   "type": {
                     "type": "reference",
-                    "target": 311,
+                    "target": 316,
                     "name": "LiveQueryState",
                     "package": "@neon/realtime"
                   },
                   "inheritedFrom": {
                     "type": "reference",
-                    "target": 377,
+                    "target": 382,
                     "name": "RawLiveQuerySubscription.getState"
                   }
                 }
               ],
               "inheritedFrom": {
                 "type": "reference",
-                "target": 376,
+                "target": 381,
                 "name": "RawLiveQuerySubscription.getState"
               }
             },
             {
-              "id": 333,
+              "id": 338,
               "name": "onChange",
               "variant": "declaration",
               "kind": 2048,
               "flags": {},
               "signatures": [
                 {
-                  "id": 334,
+                  "id": 339,
                   "name": "onChange",
                   "variant": "signature",
                   "kind": 4096,
@@ -4577,7 +4577,7 @@
                   },
                   "parameters": [
                     {
-                      "id": 335,
+                      "id": 340,
                       "name": "listener",
                       "variant": "param",
                       "kind": 32768,
@@ -4585,32 +4585,32 @@
                       "type": {
                         "type": "reflection",
                         "declaration": {
-                          "id": 336,
+                          "id": 341,
                           "name": "__type",
                           "variant": "declaration",
                           "kind": 65536,
                           "flags": {},
                           "signatures": [
                             {
-                              "id": 337,
+                              "id": 342,
                               "name": "__type",
                               "variant": "signature",
                               "kind": 4096,
                               "flags": {},
                               "parameters": [
                                 {
-                                  "id": 338,
+                                  "id": 343,
                                   "name": "snapshot",
                                   "variant": "param",
                                   "kind": 32768,
                                   "flags": {},
                                   "type": {
                                     "type": "reference",
-                                    "target": 307,
+                                    "target": 312,
                                     "typeArguments": [
                                       {
                                         "type": "reference",
-                                        "target": 323,
+                                        "target": 328,
                                         "name": "Row",
                                         "package": "@neon/realtime",
                                         "qualifiedName": "MaterializedLiveQuerySubscription.Row",
@@ -4635,14 +4635,14 @@
                   "type": {
                     "type": "reflection",
                     "declaration": {
-                      "id": 339,
+                      "id": 344,
                       "name": "__type",
                       "variant": "declaration",
                       "kind": 65536,
                       "flags": {},
                       "signatures": [
                         {
-                          "id": 340,
+                          "id": 345,
                           "name": "__type",
                           "variant": "signature",
                           "kind": 4096,
@@ -4659,7 +4659,7 @@
               ]
             },
             {
-              "id": 351,
+              "id": 356,
               "name": "onStateChange",
               "variant": "declaration",
               "kind": 2048,
@@ -4668,7 +4668,7 @@
               },
               "signatures": [
                 {
-                  "id": 352,
+                  "id": 357,
                   "name": "onStateChange",
                   "variant": "signature",
                   "kind": 4096,
@@ -4696,7 +4696,7 @@
                   },
                   "parameters": [
                     {
-                      "id": 353,
+                      "id": 358,
                       "name": "listener",
                       "variant": "param",
                       "kind": 32768,
@@ -4704,28 +4704,28 @@
                       "type": {
                         "type": "reflection",
                         "declaration": {
-                          "id": 354,
+                          "id": 359,
                           "name": "__type",
                           "variant": "declaration",
                           "kind": 65536,
                           "flags": {},
                           "signatures": [
                             {
-                              "id": 355,
+                              "id": 360,
                               "name": "__type",
                               "variant": "signature",
                               "kind": 4096,
                               "flags": {},
                               "parameters": [
                                 {
-                                  "id": 356,
+                                  "id": 361,
                                   "name": "state",
                                   "variant": "param",
                                   "kind": 32768,
                                   "flags": {},
                                   "type": {
                                     "type": "reference",
-                                    "target": 311,
+                                    "target": 316,
                                     "name": "LiveQueryState",
                                     "package": "@neon/realtime"
                                   }
@@ -4744,14 +4744,14 @@
                   "type": {
                     "type": "reflection",
                     "declaration": {
-                      "id": 357,
+                      "id": 362,
                       "name": "__type",
                       "variant": "declaration",
                       "kind": 65536,
                       "flags": {},
                       "signatures": [
                         {
-                          "id": 358,
+                          "id": 363,
                           "name": "__type",
                           "variant": "signature",
                           "kind": 4096,
@@ -4766,19 +4766,19 @@
                   },
                   "inheritedFrom": {
                     "type": "reference",
-                    "target": 387,
+                    "target": 392,
                     "name": "RawLiveQuerySubscription.onStateChange"
                   }
                 }
               ],
               "inheritedFrom": {
                 "type": "reference",
-                "target": 386,
+                "target": 391,
                 "name": "RawLiveQuerySubscription.onStateChange"
               }
             },
             {
-              "id": 343,
+              "id": 348,
               "name": "onUpdate",
               "variant": "declaration",
               "kind": 2048,
@@ -4787,7 +4787,7 @@
               },
               "signatures": [
                 {
-                  "id": 344,
+                  "id": 349,
                   "name": "onUpdate",
                   "variant": "signature",
                   "kind": 4096,
@@ -4815,7 +4815,7 @@
                   },
                   "parameters": [
                     {
-                      "id": 345,
+                      "id": 350,
                       "name": "listener",
                       "variant": "param",
                       "kind": 32768,
@@ -4823,32 +4823,32 @@
                       "type": {
                         "type": "reflection",
                         "declaration": {
-                          "id": 346,
+                          "id": 351,
                           "name": "__type",
                           "variant": "declaration",
                           "kind": 65536,
                           "flags": {},
                           "signatures": [
                             {
-                              "id": 347,
+                              "id": 352,
                               "name": "__type",
                               "variant": "signature",
                               "kind": 4096,
                               "flags": {},
                               "parameters": [
                                 {
-                                  "id": 348,
+                                  "id": 353,
                                   "name": "update",
                                   "variant": "param",
                                   "kind": 32768,
                                   "flags": {},
                                   "type": {
                                     "type": "reference",
-                                    "target": 403,
+                                    "target": 408,
                                     "typeArguments": [
                                       {
                                         "type": "reference",
-                                        "target": 323,
+                                        "target": 328,
                                         "name": "Row",
                                         "package": "@neon/realtime",
                                         "qualifiedName": "MaterializedLiveQuerySubscription.Row",
@@ -4873,14 +4873,14 @@
                   "type": {
                     "type": "reflection",
                     "declaration": {
-                      "id": 349,
+                      "id": 354,
                       "name": "__type",
                       "variant": "declaration",
                       "kind": 65536,
                       "flags": {},
                       "signatures": [
                         {
-                          "id": 350,
+                          "id": 355,
                           "name": "__type",
                           "variant": "signature",
                           "kind": 4096,
@@ -4895,19 +4895,19 @@
                   },
                   "inheritedFrom": {
                     "type": "reference",
-                    "target": 379,
+                    "target": 384,
                     "name": "RawLiveQuerySubscription.onUpdate"
                   }
                 }
               ],
               "inheritedFrom": {
                 "type": "reference",
-                "target": 378,
+                "target": 383,
                 "name": "RawLiveQuerySubscription.onUpdate"
               }
             },
             {
-              "id": 363,
+              "id": 368,
               "name": "renew",
               "variant": "declaration",
               "kind": 2048,
@@ -4916,7 +4916,7 @@
               },
               "signatures": [
                 {
-                  "id": 364,
+                  "id": 369,
                   "name": "renew",
                   "variant": "signature",
                   "kind": 4096,
@@ -4977,7 +4977,7 @@
                   },
                   "parameters": [
                     {
-                      "id": 365,
+                      "id": 370,
                       "name": "query",
                       "variant": "param",
                       "kind": 32768,
@@ -4988,7 +4988,7 @@
                         "typeArguments": [
                           {
                             "type": "reference",
-                            "target": 323,
+                            "target": 328,
                             "name": "Row",
                             "package": "@neon/realtime",
                             "qualifiedName": "MaterializedLiveQuerySubscription.Row",
@@ -5018,19 +5018,19 @@
                   },
                   "inheritedFrom": {
                     "type": "reference",
-                    "target": 399,
+                    "target": 404,
                     "name": "RawLiveQuerySubscription.renew"
                   }
                 }
               ],
               "inheritedFrom": {
                 "type": "reference",
-                "target": 398,
+                "target": 403,
                 "name": "RawLiveQuerySubscription.renew"
               }
             },
             {
-              "id": 366,
+              "id": 371,
               "name": "unsubscribe",
               "variant": "declaration",
               "kind": 2048,
@@ -5039,7 +5039,7 @@
               },
               "signatures": [
                 {
-                  "id": 367,
+                  "id": 372,
                   "name": "unsubscribe",
                   "variant": "signature",
                   "kind": 4096,
@@ -5060,14 +5060,14 @@
                   },
                   "inheritedFrom": {
                     "type": "reference",
-                    "target": 402,
+                    "target": 407,
                     "name": "RawLiveQuerySubscription.unsubscribe"
                   }
                 }
               ],
               "inheritedFrom": {
                 "type": "reference",
-                "target": 401,
+                "target": 406,
                 "name": "RawLiveQuerySubscription.unsubscribe"
               }
             }
@@ -5076,21 +5076,21 @@
             {
               "title": "Methods",
               "children": [
-                326,
-                359,
-                324,
-                341,
-                333,
-                351,
-                343,
-                363,
-                366
+                331,
+                364,
+                329,
+                346,
+                338,
+                356,
+                348,
+                368,
+                371
               ]
             }
           ],
           "typeParameters": [
             {
-              "id": 323,
+              "id": 328,
               "name": "Row",
               "variant": "typeParam",
               "kind": 131072,
@@ -5108,11 +5108,11 @@
           "extendedTypes": [
             {
               "type": "reference",
-              "target": 374,
+              "target": 379,
               "typeArguments": [
                 {
                   "type": "reference",
-                  "target": 323,
+                  "target": 328,
                   "name": "Row",
                   "package": "@neon/realtime",
                   "qualifiedName": "MaterializedLiveQuerySubscription.Row",
@@ -5125,7 +5125,7 @@
           ]
         },
         {
-          "id": 368,
+          "id": 373,
           "name": "RawLiveQueryOptions",
           "variant": "declaration",
           "kind": 256,
@@ -5140,7 +5140,7 @@
           },
           "children": [
             {
-              "id": 369,
+              "id": 374,
               "name": "materialize",
               "variant": "declaration",
               "kind": 1024,
@@ -5165,13 +5165,13 @@
             {
               "title": "Properties",
               "children": [
-                369
+                374
               ]
             }
           ]
         },
         {
-          "id": 370,
+          "id": 375,
           "name": "RawLiveQueryRow",
           "variant": "declaration",
           "kind": 256,
@@ -5186,7 +5186,7 @@
           },
           "children": [
             {
-              "id": 373,
+              "id": 378,
               "name": "row",
               "variant": "declaration",
               "kind": 1024,
@@ -5203,7 +5203,7 @@
               },
               "type": {
                 "type": "reference",
-                "target": 371,
+                "target": 376,
                 "name": "Row",
                 "package": "@neon/realtime",
                 "qualifiedName": "RawLiveQueryRow.Row",
@@ -5211,7 +5211,7 @@
               }
             },
             {
-              "id": 372,
+              "id": 377,
               "name": "rowId",
               "variant": "declaration",
               "kind": 1024,
@@ -5244,14 +5244,14 @@
             {
               "title": "Properties",
               "children": [
-                373,
-                372
+                378,
+                377
               ]
             }
           ],
           "typeParameters": [
             {
-              "id": 371,
+              "id": 376,
               "name": "Row",
               "variant": "typeParam",
               "kind": 131072,
@@ -5268,7 +5268,7 @@
           ]
         },
         {
-          "id": 374,
+          "id": 379,
           "name": "RawLiveQuerySubscription",
           "variant": "declaration",
           "kind": 256,
@@ -5283,14 +5283,14 @@
           },
           "children": [
             {
-              "id": 394,
+              "id": 399,
               "name": "awaitTxId",
               "variant": "declaration",
               "kind": 2048,
               "flags": {},
               "signatures": [
                 {
-                  "id": 395,
+                  "id": 400,
                   "name": "awaitTxId",
                   "variant": "signature",
                   "kind": 4096,
@@ -5325,7 +5325,7 @@
                   },
                   "parameters": [
                     {
-                      "id": 396,
+                      "id": 401,
                       "name": "txid",
                       "variant": "param",
                       "kind": 32768,
@@ -5344,7 +5344,7 @@
                       }
                     },
                     {
-                      "id": 397,
+                      "id": 402,
                       "name": "timeout",
                       "variant": "param",
                       "kind": 32768,
@@ -5385,14 +5385,14 @@
               ]
             },
             {
-              "id": 376,
+              "id": 381,
               "name": "getState",
               "variant": "declaration",
               "kind": 2048,
               "flags": {},
               "signatures": [
                 {
-                  "id": 377,
+                  "id": 382,
                   "name": "getState",
                   "variant": "signature",
                   "kind": 4096,
@@ -5407,7 +5407,7 @@
                   },
                   "type": {
                     "type": "reference",
-                    "target": 311,
+                    "target": 316,
                     "name": "LiveQueryState",
                     "package": "@neon/realtime"
                   }
@@ -5415,14 +5415,14 @@
               ]
             },
             {
-              "id": 386,
+              "id": 391,
               "name": "onStateChange",
               "variant": "declaration",
               "kind": 2048,
               "flags": {},
               "signatures": [
                 {
-                  "id": 387,
+                  "id": 392,
                   "name": "onStateChange",
                   "variant": "signature",
                   "kind": 4096,
@@ -5448,7 +5448,7 @@
                   },
                   "parameters": [
                     {
-                      "id": 388,
+                      "id": 393,
                       "name": "listener",
                       "variant": "param",
                       "kind": 32768,
@@ -5456,28 +5456,28 @@
                       "type": {
                         "type": "reflection",
                         "declaration": {
-                          "id": 389,
+                          "id": 394,
                           "name": "__type",
                           "variant": "declaration",
                           "kind": 65536,
                           "flags": {},
                           "signatures": [
                             {
-                              "id": 390,
+                              "id": 395,
                               "name": "__type",
                               "variant": "signature",
                               "kind": 4096,
                               "flags": {},
                               "parameters": [
                                 {
-                                  "id": 391,
+                                  "id": 396,
                                   "name": "state",
                                   "variant": "param",
                                   "kind": 32768,
                                   "flags": {},
                                   "type": {
                                     "type": "reference",
-                                    "target": 311,
+                                    "target": 316,
                                     "name": "LiveQueryState",
                                     "package": "@neon/realtime"
                                   }
@@ -5496,14 +5496,14 @@
                   "type": {
                     "type": "reflection",
                     "declaration": {
-                      "id": 392,
+                      "id": 397,
                       "name": "__type",
                       "variant": "declaration",
                       "kind": 65536,
                       "flags": {},
                       "signatures": [
                         {
-                          "id": 393,
+                          "id": 398,
                           "name": "__type",
                           "variant": "signature",
                           "kind": 4096,
@@ -5520,14 +5520,14 @@
               ]
             },
             {
-              "id": 378,
+              "id": 383,
               "name": "onUpdate",
               "variant": "declaration",
               "kind": 2048,
               "flags": {},
               "signatures": [
                 {
-                  "id": 379,
+                  "id": 384,
                   "name": "onUpdate",
                   "variant": "signature",
                   "kind": 4096,
@@ -5553,7 +5553,7 @@
                   },
                   "parameters": [
                     {
-                      "id": 380,
+                      "id": 385,
                       "name": "listener",
                       "variant": "param",
                       "kind": 32768,
@@ -5561,32 +5561,32 @@
                       "type": {
                         "type": "reflection",
                         "declaration": {
-                          "id": 381,
+                          "id": 386,
                           "name": "__type",
                           "variant": "declaration",
                           "kind": 65536,
                           "flags": {},
                           "signatures": [
                             {
-                              "id": 382,
+                              "id": 387,
                               "name": "__type",
                               "variant": "signature",
                               "kind": 4096,
                               "flags": {},
                               "parameters": [
                                 {
-                                  "id": 383,
+                                  "id": 388,
                                   "name": "update",
                                   "variant": "param",
                                   "kind": 32768,
                                   "flags": {},
                                   "type": {
                                     "type": "reference",
-                                    "target": 403,
+                                    "target": 408,
                                     "typeArguments": [
                                       {
                                         "type": "reference",
-                                        "target": 375,
+                                        "target": 380,
                                         "name": "Row",
                                         "package": "@neon/realtime",
                                         "qualifiedName": "RawLiveQuerySubscription.Row",
@@ -5611,14 +5611,14 @@
                   "type": {
                     "type": "reflection",
                     "declaration": {
-                      "id": 384,
+                      "id": 389,
                       "name": "__type",
                       "variant": "declaration",
                       "kind": 65536,
                       "flags": {},
                       "signatures": [
                         {
-                          "id": 385,
+                          "id": 390,
                           "name": "__type",
                           "variant": "signature",
                           "kind": 4096,
@@ -5635,14 +5635,14 @@
               ]
             },
             {
-              "id": 398,
+              "id": 403,
               "name": "renew",
               "variant": "declaration",
               "kind": 2048,
               "flags": {},
               "signatures": [
                 {
-                  "id": 399,
+                  "id": 404,
                   "name": "renew",
                   "variant": "signature",
                   "kind": 4096,
@@ -5701,7 +5701,7 @@
                   },
                   "parameters": [
                     {
-                      "id": 400,
+                      "id": 405,
                       "name": "query",
                       "variant": "param",
                       "kind": 32768,
@@ -5712,7 +5712,7 @@
                         "typeArguments": [
                           {
                             "type": "reference",
-                            "target": 375,
+                            "target": 380,
                             "name": "Row",
                             "package": "@neon/realtime",
                             "qualifiedName": "RawLiveQuerySubscription.Row",
@@ -5744,14 +5744,14 @@
               ]
             },
             {
-              "id": 401,
+              "id": 406,
               "name": "unsubscribe",
               "variant": "declaration",
               "kind": 2048,
               "flags": {},
               "signatures": [
                 {
-                  "id": 402,
+                  "id": 407,
                   "name": "unsubscribe",
                   "variant": "signature",
                   "kind": 4096,
@@ -5776,18 +5776,18 @@
             {
               "title": "Methods",
               "children": [
-                394,
-                376,
-                386,
-                378,
-                398,
-                401
+                399,
+                381,
+                391,
+                383,
+                403,
+                406
               ]
             }
           ],
           "typeParameters": [
             {
-              "id": 375,
+              "id": 380,
               "name": "Row",
               "variant": "typeParam",
               "kind": 131072,
@@ -5805,13 +5805,13 @@
           "extendedBy": [
             {
               "type": "reference",
-              "target": 322,
+              "target": 327,
               "name": "MaterializedLiveQuerySubscription"
             }
           ]
         },
         {
-          "id": 412,
+          "id": 417,
           "name": "RealtimeClient",
           "variant": "declaration",
           "kind": 256,
@@ -5826,14 +5826,14 @@
           },
           "children": [
             {
-              "id": 422,
+              "id": 427,
               "name": "close",
               "variant": "declaration",
               "kind": 2048,
               "flags": {},
               "signatures": [
                 {
-                  "id": 423,
+                  "id": 428,
                   "name": "close",
                   "variant": "signature",
                   "kind": 4096,
@@ -5854,14 +5854,14 @@
               ]
             },
             {
-              "id": 413,
+              "id": 418,
               "name": "subscribe",
               "variant": "declaration",
               "kind": 2048,
               "flags": {},
               "signatures": [
                 {
-                  "id": 414,
+                  "id": 419,
                   "name": "subscribe",
                   "variant": "signature",
                   "kind": 4096,
@@ -5896,7 +5896,7 @@
                   },
                   "typeParameters": [
                     {
-                      "id": 415,
+                      "id": 420,
                       "name": "Row",
                       "variant": "typeParam",
                       "kind": 131072,
@@ -5913,7 +5913,7 @@
                   ],
                   "parameters": [
                     {
-                      "id": 416,
+                      "id": 421,
                       "name": "query",
                       "variant": "param",
                       "kind": 32768,
@@ -5932,7 +5932,7 @@
                         "typeArguments": [
                           {
                             "type": "reference",
-                            "target": 415,
+                            "target": 420,
                             "name": "Row",
                             "package": "@neon/realtime",
                             "refersToTypeParameter": true
@@ -5943,7 +5943,7 @@
                       }
                     },
                     {
-                      "id": 417,
+                      "id": 422,
                       "name": "options",
                       "variant": "param",
                       "kind": 32768,
@@ -5960,7 +5960,7 @@
                       },
                       "type": {
                         "type": "reference",
-                        "target": 318,
+                        "target": 323,
                         "typeArguments": [
                           {
                             "type": "reference",
@@ -5972,7 +5972,7 @@
                             "typeArguments": [
                               {
                                 "type": "reference",
-                                "target": 415,
+                                "target": 420,
                                 "name": "Row",
                                 "package": "@neon/realtime",
                                 "refersToTypeParameter": true
@@ -5989,11 +5989,11 @@
                   ],
                   "type": {
                     "type": "reference",
-                    "target": 322,
+                    "target": 327,
                     "typeArguments": [
                       {
                         "type": "reference",
-                        "target": 415,
+                        "target": 420,
                         "name": "Row",
                         "package": "@neon/realtime",
                         "refersToTypeParameter": true
@@ -6004,7 +6004,7 @@
                   }
                 },
                 {
-                  "id": 418,
+                  "id": 423,
                   "name": "subscribe",
                   "variant": "signature",
                   "kind": 4096,
@@ -6039,7 +6039,7 @@
                   },
                   "typeParameters": [
                     {
-                      "id": 419,
+                      "id": 424,
                       "name": "Row",
                       "variant": "typeParam",
                       "kind": 131072,
@@ -6056,7 +6056,7 @@
                   ],
                   "parameters": [
                     {
-                      "id": 420,
+                      "id": 425,
                       "name": "query",
                       "variant": "param",
                       "kind": 32768,
@@ -6075,7 +6075,7 @@
                         "typeArguments": [
                           {
                             "type": "reference",
-                            "target": 419,
+                            "target": 424,
                             "name": "Row",
                             "package": "@neon/realtime",
                             "refersToTypeParameter": true
@@ -6086,7 +6086,7 @@
                       }
                     },
                     {
-                      "id": 421,
+                      "id": 426,
                       "name": "options",
                       "variant": "param",
                       "kind": 32768,
@@ -6117,7 +6117,7 @@
                       },
                       "type": {
                         "type": "reference",
-                        "target": 368,
+                        "target": 373,
                         "name": "RawLiveQueryOptions",
                         "package": "@neon/realtime"
                       }
@@ -6125,11 +6125,11 @@
                   ],
                   "type": {
                     "type": "reference",
-                    "target": 374,
+                    "target": 379,
                     "typeArguments": [
                       {
                         "type": "reference",
-                        "target": 419,
+                        "target": 424,
                         "name": "Row",
                         "package": "@neon/realtime",
                         "refersToTypeParameter": true
@@ -6146,14 +6146,14 @@
             {
               "title": "Methods",
               "children": [
-                422,
-                413
+                427,
+                418
               ]
             }
           ]
         },
         {
-          "id": 424,
+          "id": 429,
           "name": "RealtimeClientOptions",
           "variant": "declaration",
           "kind": 256,
@@ -6168,7 +6168,7 @@
           },
           "children": [
             {
-              "id": 429,
+              "id": 434,
               "name": "logger",
               "variant": "declaration",
               "kind": 1024,
@@ -6186,7 +6186,7 @@
                     "kind": "inline-tag",
                     "tag": "@link",
                     "text": "logLevel",
-                    "target": 428
+                    "target": 433
                   },
                   {
                     "kind": "text",
@@ -6196,13 +6196,13 @@
               },
               "type": {
                 "type": "reference",
-                "target": 432,
+                "target": 437,
                 "name": "RealtimeLogger",
                 "package": "@neon/realtime"
               }
             },
             {
-              "id": 428,
+              "id": 433,
               "name": "logLevel",
               "variant": "declaration",
               "kind": 1024,
@@ -6236,7 +6236,7 @@
                     "kind": "inline-tag",
                     "tag": "@link",
                     "text": "logger",
-                    "target": 429
+                    "target": 434
                   },
                   {
                     "kind": "text",
@@ -6254,13 +6254,13 @@
               },
               "type": {
                 "type": "reference",
-                "target": 436,
+                "target": 441,
                 "name": "RealtimeLogLevel",
                 "package": "@neon/realtime"
               }
             },
             {
-              "id": 427,
+              "id": 432,
               "name": "parsers",
               "variant": "declaration",
               "kind": 1024,
@@ -6278,7 +6278,7 @@
                     "kind": "inline-tag",
                     "tag": "@link",
                     "text": "nodePostgresParsers",
-                    "target": 196
+                    "target": 201
                   },
                   {
                     "kind": "text",
@@ -6314,7 +6314,7 @@
                             "types": [
                               {
                                 "type": "reference",
-                                "target": 178,
+                                "target": 183,
                                 "typeArguments": [
                                   {
                                     "type": "intrinsic",
@@ -6326,7 +6326,7 @@
                               },
                               {
                                 "type": "reference",
-                                "target": 186,
+                                "target": 191,
                                 "typeArguments": [
                                   {
                                     "type": "intrinsic",
@@ -6360,7 +6360,7 @@
               }
             },
             {
-              "id": 425,
+              "id": 430,
               "name": "url",
               "variant": "declaration",
               "kind": 1024,
@@ -6389,7 +6389,7 @@
               }
             },
             {
-              "id": 426,
+              "id": 431,
               "name": "webSocketFactory",
               "variant": "declaration",
               "kind": 1024,
@@ -6407,7 +6407,7 @@
               },
               "type": {
                 "type": "reference",
-                "target": 437,
+                "target": 442,
                 "name": "WebSocketFactory",
                 "package": "@neon/realtime"
               }
@@ -6417,17 +6417,17 @@
             {
               "title": "Properties",
               "children": [
-                429,
-                428,
-                427,
-                425,
-                426
+                434,
+                433,
+                432,
+                430,
+                431
               ]
             }
           ]
         },
         {
-          "id": 442,
+          "id": 447,
           "name": "WebSocketLike",
           "variant": "declaration",
           "kind": 256,
@@ -6442,7 +6442,7 @@
           },
           "children": [
             {
-              "id": 443,
+              "id": 448,
               "name": "readyState",
               "variant": "declaration",
               "kind": 1024,
@@ -6455,66 +6455,12 @@
               }
             },
             {
-              "id": 444,
+              "id": 449,
               "name": "addEventListener",
               "variant": "declaration",
               "kind": 2048,
               "flags": {},
               "signatures": [
-                {
-                  "id": 445,
-                  "name": "addEventListener",
-                  "variant": "signature",
-                  "kind": 4096,
-                  "flags": {},
-                  "parameters": [
-                    {
-                      "id": 446,
-                      "name": "type",
-                      "variant": "param",
-                      "kind": 32768,
-                      "flags": {},
-                      "type": {
-                        "type": "literal",
-                        "value": "open"
-                      }
-                    },
-                    {
-                      "id": 447,
-                      "name": "listener",
-                      "variant": "param",
-                      "kind": 32768,
-                      "flags": {},
-                      "type": {
-                        "type": "reflection",
-                        "declaration": {
-                          "id": 448,
-                          "name": "__type",
-                          "variant": "declaration",
-                          "kind": 65536,
-                          "flags": {},
-                          "signatures": [
-                            {
-                              "id": 449,
-                              "name": "__type",
-                              "variant": "signature",
-                              "kind": 4096,
-                              "flags": {},
-                              "type": {
-                                "type": "intrinsic",
-                                "name": "void"
-                              }
-                            }
-                          ]
-                        }
-                      }
-                    }
-                  ],
-                  "type": {
-                    "type": "intrinsic",
-                    "name": "void"
-                  }
-                },
                 {
                   "id": 450,
                   "name": "addEventListener",
@@ -6530,7 +6476,7 @@
                       "flags": {},
                       "type": {
                         "type": "literal",
-                        "value": "message"
+                        "value": "open"
                       }
                     },
                     {
@@ -6554,48 +6500,6 @@
                               "variant": "signature",
                               "kind": 4096,
                               "flags": {},
-                              "parameters": [
-                                {
-                                  "id": 455,
-                                  "name": "event",
-                                  "variant": "param",
-                                  "kind": 32768,
-                                  "flags": {},
-                                  "type": {
-                                    "type": "reflection",
-                                    "declaration": {
-                                      "id": 456,
-                                      "name": "__type",
-                                      "variant": "declaration",
-                                      "kind": 65536,
-                                      "flags": {},
-                                      "children": [
-                                        {
-                                          "id": 457,
-                                          "name": "data",
-                                          "variant": "declaration",
-                                          "kind": 1024,
-                                          "flags": {
-                                            "isReadonly": true
-                                          },
-                                          "type": {
-                                            "type": "intrinsic",
-                                            "name": "unknown"
-                                          }
-                                        }
-                                      ],
-                                      "groups": [
-                                        {
-                                          "title": "Properties",
-                                          "children": [
-                                            457
-                                          ]
-                                        }
-                                      ]
-                                    }
-                                  }
-                                }
-                              ],
                               "type": {
                                 "type": "intrinsic",
                                 "name": "void"
@@ -6612,25 +6516,25 @@
                   }
                 },
                 {
-                  "id": 458,
+                  "id": 455,
                   "name": "addEventListener",
                   "variant": "signature",
                   "kind": 4096,
                   "flags": {},
                   "parameters": [
                     {
-                      "id": 459,
+                      "id": 456,
                       "name": "type",
                       "variant": "param",
                       "kind": 32768,
                       "flags": {},
                       "type": {
                         "type": "literal",
-                        "value": "close"
+                        "value": "message"
                       }
                     },
                     {
-                      "id": 460,
+                      "id": 457,
                       "name": "listener",
                       "variant": "param",
                       "kind": 32768,
@@ -6638,18 +6542,60 @@
                       "type": {
                         "type": "reflection",
                         "declaration": {
-                          "id": 461,
+                          "id": 458,
                           "name": "__type",
                           "variant": "declaration",
                           "kind": 65536,
                           "flags": {},
                           "signatures": [
                             {
-                              "id": 462,
+                              "id": 459,
                               "name": "__type",
                               "variant": "signature",
                               "kind": 4096,
                               "flags": {},
+                              "parameters": [
+                                {
+                                  "id": 460,
+                                  "name": "event",
+                                  "variant": "param",
+                                  "kind": 32768,
+                                  "flags": {},
+                                  "type": {
+                                    "type": "reflection",
+                                    "declaration": {
+                                      "id": 461,
+                                      "name": "__type",
+                                      "variant": "declaration",
+                                      "kind": 65536,
+                                      "flags": {},
+                                      "children": [
+                                        {
+                                          "id": 462,
+                                          "name": "data",
+                                          "variant": "declaration",
+                                          "kind": 1024,
+                                          "flags": {
+                                            "isReadonly": true
+                                          },
+                                          "type": {
+                                            "type": "intrinsic",
+                                            "name": "unknown"
+                                          }
+                                        }
+                                      ],
+                                      "groups": [
+                                        {
+                                          "title": "Properties",
+                                          "children": [
+                                            462
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                  }
+                                }
+                              ],
                               "type": {
                                 "type": "intrinsic",
                                 "name": "void"
@@ -6680,7 +6626,7 @@
                       "flags": {},
                       "type": {
                         "type": "literal",
-                        "value": "error"
+                        "value": "close"
                       }
                     },
                     {
@@ -6718,25 +6664,79 @@
                     "type": "intrinsic",
                     "name": "void"
                   }
+                },
+                {
+                  "id": 468,
+                  "name": "addEventListener",
+                  "variant": "signature",
+                  "kind": 4096,
+                  "flags": {},
+                  "parameters": [
+                    {
+                      "id": 469,
+                      "name": "type",
+                      "variant": "param",
+                      "kind": 32768,
+                      "flags": {},
+                      "type": {
+                        "type": "literal",
+                        "value": "error"
+                      }
+                    },
+                    {
+                      "id": 470,
+                      "name": "listener",
+                      "variant": "param",
+                      "kind": 32768,
+                      "flags": {},
+                      "type": {
+                        "type": "reflection",
+                        "declaration": {
+                          "id": 471,
+                          "name": "__type",
+                          "variant": "declaration",
+                          "kind": 65536,
+                          "flags": {},
+                          "signatures": [
+                            {
+                              "id": 472,
+                              "name": "__type",
+                              "variant": "signature",
+                              "kind": 4096,
+                              "flags": {},
+                              "type": {
+                                "type": "intrinsic",
+                                "name": "void"
+                              }
+                            }
+                          ]
+                        }
+                      }
+                    }
+                  ],
+                  "type": {
+                    "type": "intrinsic",
+                    "name": "void"
+                  }
                 }
               ]
             },
             {
-              "id": 471,
+              "id": 476,
               "name": "close",
               "variant": "declaration",
               "kind": 2048,
               "flags": {},
               "signatures": [
                 {
-                  "id": 472,
+                  "id": 477,
                   "name": "close",
                   "variant": "signature",
                   "kind": 4096,
                   "flags": {},
                   "parameters": [
                     {
-                      "id": 473,
+                      "id": 478,
                       "name": "code",
                       "variant": "param",
                       "kind": 32768,
@@ -6749,7 +6749,7 @@
                       }
                     },
                     {
-                      "id": 474,
+                      "id": 479,
                       "name": "reason",
                       "variant": "param",
                       "kind": 32768,
@@ -6770,21 +6770,21 @@
               ]
             },
             {
-              "id": 468,
+              "id": 473,
               "name": "send",
               "variant": "declaration",
               "kind": 2048,
               "flags": {},
               "signatures": [
                 {
-                  "id": 469,
+                  "id": 474,
                   "name": "send",
                   "variant": "signature",
                   "kind": 4096,
                   "flags": {},
                   "parameters": [
                     {
-                      "id": 470,
+                      "id": 475,
                       "name": "data",
                       "variant": "param",
                       "kind": 32768,
@@ -6803,7 +6803,7 @@
               ]
             },
             {
-              "id": 475,
+              "id": 480,
               "name": "terminate",
               "variant": "declaration",
               "kind": 2048,
@@ -6812,7 +6812,7 @@
               },
               "signatures": [
                 {
-                  "id": 476,
+                  "id": 481,
                   "name": "terminate",
                   "variant": "signature",
                   "kind": 4096,
@@ -6837,22 +6837,22 @@
             {
               "title": "Properties",
               "children": [
-                443
+                448
               ]
             },
             {
               "title": "Methods",
               "children": [
-                444,
-                471,
-                468,
-                475
+                449,
+                476,
+                473,
+                480
               ]
             }
           ]
         },
         {
-          "id": 286,
+          "id": 291,
           "name": "LiveQueryChange",
           "variant": "declaration",
           "kind": 2097152,
@@ -6867,7 +6867,7 @@
           },
           "typeParameters": [
             {
-              "id": 298,
+              "id": 303,
               "name": "Row",
               "variant": "typeParam",
               "kind": 131072,
@@ -6888,14 +6888,14 @@
               {
                 "type": "reflection",
                 "declaration": {
-                  "id": 287,
+                  "id": 292,
                   "name": "__type",
                   "variant": "declaration",
                   "kind": 65536,
                   "flags": {},
                   "children": [
                     {
-                      "id": 290,
+                      "id": 295,
                       "name": "row",
                       "variant": "declaration",
                       "kind": 1024,
@@ -6912,14 +6912,14 @@
                       },
                       "type": {
                         "type": "reference",
-                        "target": 298,
+                        "target": 303,
                         "name": "Row",
                         "package": "@neon/realtime",
                         "refersToTypeParameter": true
                       }
                     },
                     {
-                      "id": 289,
+                      "id": 294,
                       "name": "rowId",
                       "variant": "declaration",
                       "kind": 1024,
@@ -6948,7 +6948,7 @@
                       }
                     },
                     {
-                      "id": 288,
+                      "id": 293,
                       "name": "type",
                       "variant": "declaration",
                       "kind": 1024,
@@ -6973,9 +6973,9 @@
                     {
                       "title": "Properties",
                       "children": [
-                        290,
-                        289,
-                        288
+                        295,
+                        294,
+                        293
                       ]
                     }
                   ]
@@ -6984,14 +6984,14 @@
               {
                 "type": "reflection",
                 "declaration": {
-                  "id": 291,
+                  "id": 296,
                   "name": "__type",
                   "variant": "declaration",
                   "kind": 65536,
                   "flags": {},
                   "children": [
                     {
-                      "id": 293,
+                      "id": 298,
                       "name": "rowId",
                       "variant": "declaration",
                       "kind": 1024,
@@ -7020,7 +7020,7 @@
                       }
                     },
                     {
-                      "id": 292,
+                      "id": 297,
                       "name": "type",
                       "variant": "declaration",
                       "kind": 1024,
@@ -7045,8 +7045,8 @@
                     {
                       "title": "Properties",
                       "children": [
-                        293,
-                        292
+                        298,
+                        297
                       ]
                     }
                   ]
@@ -7055,14 +7055,14 @@
               {
                 "type": "reflection",
                 "declaration": {
-                  "id": 294,
+                  "id": 299,
                   "name": "__type",
                   "variant": "declaration",
                   "kind": 65536,
                   "flags": {},
                   "children": [
                     {
-                      "id": 297,
+                      "id": 302,
                       "name": "afterRowId",
                       "variant": "declaration",
                       "kind": 1024,
@@ -7092,7 +7092,7 @@
                       }
                     },
                     {
-                      "id": 296,
+                      "id": 301,
                       "name": "rowId",
                       "variant": "declaration",
                       "kind": 1024,
@@ -7113,7 +7113,7 @@
                       }
                     },
                     {
-                      "id": 295,
+                      "id": 300,
                       "name": "type",
                       "variant": "declaration",
                       "kind": 1024,
@@ -7138,9 +7138,9 @@
                     {
                       "title": "Properties",
                       "children": [
-                        297,
-                        296,
-                        295
+                        302,
+                        301,
+                        300
                       ]
                     }
                   ]
@@ -7150,7 +7150,7 @@
           }
         },
         {
-          "id": 307,
+          "id": 312,
           "name": "LiveQuerySnapshot",
           "variant": "declaration",
           "kind": 2097152,
@@ -7165,7 +7165,7 @@
           },
           "typeParameters": [
             {
-              "id": 310,
+              "id": 315,
               "name": "Row",
               "variant": "typeParam",
               "kind": 131072,
@@ -7185,21 +7185,21 @@
             "types": [
               {
                 "type": "reference",
-                "target": 311,
+                "target": 316,
                 "name": "LiveQueryState",
                 "package": "@neon/realtime"
               },
               {
                 "type": "reflection",
                 "declaration": {
-                  "id": 308,
+                  "id": 313,
                   "name": "__type",
                   "variant": "declaration",
                   "kind": 65536,
                   "flags": {},
                   "children": [
                     {
-                      "id": 309,
+                      "id": 314,
                       "name": "data",
                       "variant": "declaration",
                       "kind": 1024,
@@ -7232,7 +7232,7 @@
                               "type": "array",
                               "elementType": {
                                 "type": "reference",
-                                "target": 310,
+                                "target": 315,
                                 "name": "Row",
                                 "package": "@neon/realtime",
                                 "refersToTypeParameter": true
@@ -7251,7 +7251,7 @@
                     {
                       "title": "Properties",
                       "children": [
-                        309
+                        314
                       ]
                     }
                   ]
@@ -7261,7 +7261,7 @@
           }
         },
         {
-          "id": 311,
+          "id": 316,
           "name": "LiveQueryState",
           "variant": "declaration",
           "kind": 2097152,
@@ -7280,14 +7280,14 @@
               {
                 "type": "reflection",
                 "declaration": {
-                  "id": 312,
+                  "id": 317,
                   "name": "__type",
                   "variant": "declaration",
                   "kind": 65536,
                   "flags": {},
                   "children": [
                     {
-                      "id": 314,
+                      "id": 319,
                       "name": "error",
                       "variant": "declaration",
                       "kind": 1024,
@@ -7308,7 +7308,7 @@
                       }
                     },
                     {
-                      "id": 313,
+                      "id": 318,
                       "name": "status",
                       "variant": "declaration",
                       "kind": 1024,
@@ -7366,8 +7366,8 @@
                     {
                       "title": "Properties",
                       "children": [
-                        314,
-                        313
+                        319,
+                        318
                       ]
                     }
                   ]
@@ -7376,14 +7376,14 @@
               {
                 "type": "reflection",
                 "declaration": {
-                  "id": 315,
+                  "id": 320,
                   "name": "__type",
                   "variant": "declaration",
                   "kind": 65536,
                   "flags": {},
                   "children": [
                     {
-                      "id": 317,
+                      "id": 322,
                       "name": "error",
                       "variant": "declaration",
                       "kind": 1024,
@@ -7400,13 +7400,13 @@
                       },
                       "type": {
                         "type": "reference",
-                        "target": 299,
+                        "target": 304,
                         "name": "LiveQueryError",
                         "package": "@neon/realtime"
                       }
                     },
                     {
-                      "id": 316,
+                      "id": 321,
                       "name": "status",
                       "variant": "declaration",
                       "kind": 1024,
@@ -7431,8 +7431,8 @@
                     {
                       "title": "Properties",
                       "children": [
-                        317,
-                        316
+                        322,
+                        321
                       ]
                     }
                   ]
@@ -7442,7 +7442,7 @@
           }
         },
         {
-          "id": 178,
+          "id": 183,
           "name": "PostgreSQLBytesParser",
           "variant": "declaration",
           "kind": 2097152,
@@ -7465,7 +7465,7 @@
           },
           "typeParameters": [
             {
-              "id": 182,
+              "id": 187,
               "name": "Value",
               "variant": "typeParam",
               "kind": 131072,
@@ -7479,21 +7479,21 @@
           "type": {
             "type": "reflection",
             "declaration": {
-              "id": 179,
+              "id": 184,
               "name": "__type",
               "variant": "declaration",
               "kind": 65536,
               "flags": {},
               "signatures": [
                 {
-                  "id": 180,
+                  "id": 185,
                   "name": "__type",
                   "variant": "signature",
                   "kind": 4096,
                   "flags": {},
                   "parameters": [
                     {
-                      "id": 181,
+                      "id": 186,
                       "name": "value",
                       "variant": "param",
                       "kind": 32768,
@@ -7512,7 +7512,7 @@
                   ],
                   "type": {
                     "type": "reference",
-                    "target": 182,
+                    "target": 187,
                     "name": "Value",
                     "package": "@neon/realtime",
                     "refersToTypeParameter": true
@@ -7523,7 +7523,7 @@
           }
         },
         {
-          "id": 183,
+          "id": 188,
           "name": "PostgreSQLParserForOid",
           "variant": "declaration",
           "kind": 2097152,
@@ -7538,7 +7538,7 @@
           },
           "typeParameters": [
             {
-              "id": 184,
+              "id": 189,
               "name": "Oid",
               "variant": "typeParam",
               "kind": 131072,
@@ -7553,7 +7553,7 @@
             "type": "conditional",
             "checkType": {
               "type": "reference",
-              "target": 184,
+              "target": 189,
               "name": "Oid",
               "package": "@neon/realtime",
               "refersToTypeParameter": true
@@ -7575,20 +7575,20 @@
             },
             "trueType": {
               "type": "reference",
-              "target": 178,
+              "target": 183,
               "name": "PostgreSQLBytesParser",
               "package": "@neon/realtime"
             },
             "falseType": {
               "type": "reference",
-              "target": 186,
+              "target": 191,
               "name": "PostgreSQLTextParser",
               "package": "@neon/realtime"
             }
           }
         },
         {
-          "id": 185,
+          "id": 190,
           "name": "PostgreSQLParsers",
           "variant": "declaration",
           "kind": 2097152,
@@ -7629,13 +7629,13 @@
                         "types": [
                           {
                             "type": "reference",
-                            "target": 186,
+                            "target": 191,
                             "name": "PostgreSQLTextParser",
                             "package": "@neon/realtime"
                           },
                           {
                             "type": "reference",
-                            "target": 178,
+                            "target": 183,
                             "name": "PostgreSQLBytesParser",
                             "package": "@neon/realtime"
                           }
@@ -7663,7 +7663,7 @@
           }
         },
         {
-          "id": 186,
+          "id": 191,
           "name": "PostgreSQLTextParser",
           "variant": "declaration",
           "kind": 2097152,
@@ -7686,7 +7686,7 @@
           },
           "typeParameters": [
             {
-              "id": 190,
+              "id": 195,
               "name": "Value",
               "variant": "typeParam",
               "kind": 131072,
@@ -7700,21 +7700,21 @@
           "type": {
             "type": "reflection",
             "declaration": {
-              "id": 187,
+              "id": 192,
               "name": "__type",
               "variant": "declaration",
               "kind": 65536,
               "flags": {},
               "signatures": [
                 {
-                  "id": 188,
+                  "id": 193,
                   "name": "__type",
                   "variant": "signature",
                   "kind": 4096,
                   "flags": {},
                   "parameters": [
                     {
-                      "id": 189,
+                      "id": 194,
                       "name": "value",
                       "variant": "param",
                       "kind": 32768,
@@ -7727,7 +7727,7 @@
                   ],
                   "type": {
                     "type": "reference",
-                    "target": 190,
+                    "target": 195,
                     "name": "Value",
                     "package": "@neon/realtime",
                     "refersToTypeParameter": true
@@ -7738,7 +7738,7 @@
           }
         },
         {
-          "id": 403,
+          "id": 408,
           "name": "RawLiveQueryUpdate",
           "variant": "declaration",
           "kind": 2097152,
@@ -7769,7 +7769,7 @@
           },
           "typeParameters": [
             {
-              "id": 411,
+              "id": 416,
               "name": "Row",
               "variant": "typeParam",
               "kind": 131072,
@@ -7790,14 +7790,14 @@
               {
                 "type": "reflection",
                 "declaration": {
-                  "id": 404,
+                  "id": 409,
                   "name": "__type",
                   "variant": "declaration",
                   "kind": 65536,
                   "flags": {},
                   "children": [
                     {
-                      "id": 406,
+                      "id": 411,
                       "name": "rows",
                       "variant": "declaration",
                       "kind": 1024,
@@ -7819,11 +7819,11 @@
                           "type": "array",
                           "elementType": {
                             "type": "reference",
-                            "target": 370,
+                            "target": 375,
                             "typeArguments": [
                               {
                                 "type": "reference",
-                                "target": 411,
+                                "target": 416,
                                 "name": "Row",
                                 "package": "@neon/realtime",
                                 "refersToTypeParameter": true
@@ -7836,7 +7836,7 @@
                       }
                     },
                     {
-                      "id": 405,
+                      "id": 410,
                       "name": "type",
                       "variant": "declaration",
                       "kind": 1024,
@@ -7861,8 +7861,8 @@
                     {
                       "title": "Properties",
                       "children": [
-                        406,
-                        405
+                        411,
+                        410
                       ]
                     }
                   ]
@@ -7871,14 +7871,14 @@
               {
                 "type": "reflection",
                 "declaration": {
-                  "id": 407,
+                  "id": 412,
                   "name": "__type",
                   "variant": "declaration",
                   "kind": 65536,
                   "flags": {},
                   "children": [
                     {
-                      "id": 410,
+                      "id": 415,
                       "name": "batch",
                       "variant": "declaration",
                       "kind": 1024,
@@ -7895,13 +7895,13 @@
                       },
                       "type": {
                         "type": "reference",
-                        "target": 284,
+                        "target": 289,
                         "name": "LiveQueryBatchInfo",
                         "package": "@neon/realtime"
                       }
                     },
                     {
-                      "id": 409,
+                      "id": 414,
                       "name": "changes",
                       "variant": "declaration",
                       "kind": 1024,
@@ -7923,11 +7923,11 @@
                           "type": "array",
                           "elementType": {
                             "type": "reference",
-                            "target": 286,
+                            "target": 291,
                             "typeArguments": [
                               {
                                 "type": "reference",
-                                "target": 411,
+                                "target": 416,
                                 "name": "Row",
                                 "package": "@neon/realtime",
                                 "refersToTypeParameter": true
@@ -7940,7 +7940,7 @@
                       }
                     },
                     {
-                      "id": 408,
+                      "id": 413,
                       "name": "type",
                       "variant": "declaration",
                       "kind": 1024,
@@ -7965,9 +7965,9 @@
                     {
                       "title": "Properties",
                       "children": [
-                        410,
-                        409,
-                        408
+                        415,
+                        414,
+                        413
                       ]
                     }
                   ]
@@ -7977,7 +7977,7 @@
           }
         },
         {
-          "id": 430,
+          "id": 435,
           "name": "RealtimeLogEntry",
           "variant": "declaration",
           "kind": 2097152,
@@ -8002,7 +8002,7 @@
             "type": "indexedAccess",
             "indexType": {
               "type": "reference",
-              "target": 431,
+              "target": 436,
               "name": "RealtimeLogEvent",
               "package": "@neon/realtime"
             },
@@ -8011,7 +8011,7 @@
               "parameter": "Event",
               "parameterType": {
                 "type": "reference",
-                "target": 431,
+                "target": 436,
                 "name": "RealtimeLogEvent",
                 "package": "@neon/realtime"
               },
@@ -8042,7 +8042,7 @@
           }
         },
         {
-          "id": 431,
+          "id": 436,
           "name": "RealtimeLogEvent",
           "variant": "declaration",
           "kind": 2097152,
@@ -8071,7 +8071,7 @@
           }
         },
         {
-          "id": 432,
+          "id": 437,
           "name": "RealtimeLogger",
           "variant": "declaration",
           "kind": 2097152,
@@ -8087,28 +8087,28 @@
           "type": {
             "type": "reflection",
             "declaration": {
-              "id": 433,
+              "id": 438,
               "name": "__type",
               "variant": "declaration",
               "kind": 65536,
               "flags": {},
               "signatures": [
                 {
-                  "id": 434,
+                  "id": 439,
                   "name": "__type",
                   "variant": "signature",
                   "kind": 4096,
                   "flags": {},
                   "parameters": [
                     {
-                      "id": 435,
+                      "id": 440,
                       "name": "entry",
                       "variant": "param",
                       "kind": 32768,
                       "flags": {},
                       "type": {
                         "type": "reference",
-                        "target": 430,
+                        "target": 435,
                         "name": "RealtimeLogEntry",
                         "package": "@neon/realtime"
                       }
@@ -8124,7 +8124,7 @@
           }
         },
         {
-          "id": 436,
+          "id": 441,
           "name": "RealtimeLogLevel",
           "variant": "declaration",
           "kind": 2097152,
@@ -8164,7 +8164,7 @@
           }
         },
         {
-          "id": 437,
+          "id": 442,
           "name": "WebSocketFactory",
           "variant": "declaration",
           "kind": 2097152,
@@ -8180,21 +8180,21 @@
           "type": {
             "type": "reflection",
             "declaration": {
-              "id": 438,
+              "id": 443,
               "name": "__type",
               "variant": "declaration",
               "kind": 65536,
               "flags": {},
               "signatures": [
                 {
-                  "id": 439,
+                  "id": 444,
                   "name": "__type",
                   "variant": "signature",
                   "kind": 4096,
                   "flags": {},
                   "parameters": [
                     {
-                      "id": 440,
+                      "id": 445,
                       "name": "url",
                       "variant": "param",
                       "kind": 32768,
@@ -8205,7 +8205,7 @@
                       }
                     },
                     {
-                      "id": 441,
+                      "id": 446,
                       "name": "protocols",
                       "variant": "param",
                       "kind": 32768,
@@ -8230,7 +8230,7 @@
                   ],
                   "type": {
                     "type": "reference",
-                    "target": 442,
+                    "target": 447,
                     "name": "WebSocketLike",
                     "package": "@neon/realtime"
                   }
@@ -8240,7 +8240,7 @@
           }
         },
         {
-          "id": 196,
+          "id": 201,
           "name": "nodePostgresParsers",
           "variant": "declaration",
           "kind": 32,
@@ -8257,14 +8257,14 @@
           },
           "type": {
             "type": "reference",
-            "target": 185,
+            "target": 190,
             "name": "PostgreSQLParsers",
             "package": "@neon/realtime"
           },
           "defaultValue": "..."
         },
         {
-          "id": 197,
+          "id": 202,
           "name": "pgTypeOids",
           "variant": "declaration",
           "kind": 32,
@@ -8290,14 +8290,14 @@
               {
                 "type": "reflection",
                 "declaration": {
-                  "id": 198,
+                  "id": 203,
                   "name": "__type",
                   "variant": "declaration",
                   "kind": 65536,
                   "flags": {},
                   "children": [
                     {
-                      "id": 232,
+                      "id": 237,
                       "name": "bit",
                       "variant": "declaration",
                       "kind": 1024,
@@ -8311,7 +8311,7 @@
                       "defaultValue": "1560"
                     },
                     {
-                      "id": 267,
+                      "id": 272,
                       "name": "bitArray",
                       "variant": "declaration",
                       "kind": 1024,
@@ -8325,7 +8325,7 @@
                       "defaultValue": "1561"
                     },
                     {
-                      "id": 199,
+                      "id": 204,
                       "name": "bool",
                       "variant": "declaration",
                       "kind": 1024,
@@ -8339,7 +8339,7 @@
                       "defaultValue": "16"
                     },
                     {
-                      "id": 240,
+                      "id": 245,
                       "name": "boolArray",
                       "variant": "declaration",
                       "kind": 1024,
@@ -8353,7 +8353,7 @@
                       "defaultValue": "1000"
                     },
                     {
-                      "id": 213,
+                      "id": 218,
                       "name": "box",
                       "variant": "declaration",
                       "kind": 1024,
@@ -8367,7 +8367,7 @@
                       "defaultValue": "603"
                     },
                     {
-                      "id": 251,
+                      "id": 256,
                       "name": "boxArray",
                       "variant": "declaration",
                       "kind": 1024,
@@ -8381,7 +8381,7 @@
                       "defaultValue": "1020"
                     },
                     {
-                      "id": 224,
+                      "id": 229,
                       "name": "bpchar",
                       "variant": "declaration",
                       "kind": 1024,
@@ -8395,7 +8395,7 @@
                       "defaultValue": "1042"
                     },
                     {
-                      "id": 258,
+                      "id": 263,
                       "name": "bpcharArray",
                       "variant": "declaration",
                       "kind": 1024,
@@ -8409,7 +8409,7 @@
                       "defaultValue": "1014"
                     },
                     {
-                      "id": 200,
+                      "id": 205,
                       "name": "bytea",
                       "variant": "declaration",
                       "kind": 1024,
@@ -8423,7 +8423,7 @@
                       "defaultValue": "17"
                     },
                     {
-                      "id": 241,
+                      "id": 246,
                       "name": "byteaArray",
                       "variant": "declaration",
                       "kind": 1024,
@@ -8437,7 +8437,7 @@
                       "defaultValue": "1001"
                     },
                     {
-                      "id": 201,
+                      "id": 206,
                       "name": "char",
                       "variant": "declaration",
                       "kind": 1024,
@@ -8451,7 +8451,7 @@
                       "defaultValue": "18"
                     },
                     {
-                      "id": 242,
+                      "id": 247,
                       "name": "charArray",
                       "variant": "declaration",
                       "kind": 1024,
@@ -8465,7 +8465,7 @@
                       "defaultValue": "1002"
                     },
                     {
-                      "id": 216,
+                      "id": 221,
                       "name": "cidr",
                       "variant": "declaration",
                       "kind": 1024,
@@ -8479,7 +8479,7 @@
                       "defaultValue": "650"
                     },
                     {
-                      "id": 273,
+                      "id": 278,
                       "name": "cidrArray",
                       "variant": "declaration",
                       "kind": 1024,
@@ -8493,7 +8493,7 @@
                       "defaultValue": "651"
                     },
                     {
-                      "id": 221,
+                      "id": 226,
                       "name": "circle",
                       "variant": "declaration",
                       "kind": 1024,
@@ -8507,7 +8507,7 @@
                       "defaultValue": "718"
                     },
                     {
-                      "id": 274,
+                      "id": 279,
                       "name": "circleArray",
                       "variant": "declaration",
                       "kind": 1024,
@@ -8521,7 +8521,7 @@
                       "defaultValue": "719"
                     },
                     {
-                      "id": 238,
+                      "id": 243,
                       "name": "cstring",
                       "variant": "declaration",
                       "kind": 1024,
@@ -8535,7 +8535,7 @@
                       "defaultValue": "2275"
                     },
                     {
-                      "id": 278,
+                      "id": 283,
                       "name": "cstringArray",
                       "variant": "declaration",
                       "kind": 1024,
@@ -8549,7 +8549,7 @@
                       "defaultValue": "1263"
                     },
                     {
-                      "id": 226,
+                      "id": 231,
                       "name": "date",
                       "variant": "declaration",
                       "kind": 1024,
@@ -8563,7 +8563,7 @@
                       "defaultValue": "1082"
                     },
                     {
-                      "id": 260,
+                      "id": 265,
                       "name": "dateArray",
                       "variant": "declaration",
                       "kind": 1024,
@@ -8577,7 +8577,7 @@
                       "defaultValue": "1182"
                     },
                     {
-                      "id": 219,
+                      "id": 224,
                       "name": "float4",
                       "variant": "declaration",
                       "kind": 1024,
@@ -8591,7 +8591,7 @@
                       "defaultValue": "700"
                     },
                     {
-                      "id": 252,
+                      "id": 257,
                       "name": "float4Array",
                       "variant": "declaration",
                       "kind": 1024,
@@ -8605,7 +8605,7 @@
                       "defaultValue": "1021"
                     },
                     {
-                      "id": 220,
+                      "id": 225,
                       "name": "float8",
                       "variant": "declaration",
                       "kind": 1024,
@@ -8619,7 +8619,7 @@
                       "defaultValue": "701"
                     },
                     {
-                      "id": 253,
+                      "id": 258,
                       "name": "float8Array",
                       "variant": "declaration",
                       "kind": 1024,
@@ -8633,7 +8633,7 @@
                       "defaultValue": "1022"
                     },
                     {
-                      "id": 223,
+                      "id": 228,
                       "name": "inet",
                       "variant": "declaration",
                       "kind": 1024,
@@ -8647,7 +8647,7 @@
                       "defaultValue": "869"
                     },
                     {
-                      "id": 257,
+                      "id": 262,
                       "name": "inetArray",
                       "variant": "declaration",
                       "kind": 1024,
@@ -8661,7 +8661,7 @@
                       "defaultValue": "1041"
                     },
                     {
-                      "id": 204,
+                      "id": 209,
                       "name": "int2",
                       "variant": "declaration",
                       "kind": 1024,
@@ -8675,7 +8675,7 @@
                       "defaultValue": "21"
                     },
                     {
-                      "id": 244,
+                      "id": 249,
                       "name": "int2Array",
                       "variant": "declaration",
                       "kind": 1024,
@@ -8689,7 +8689,7 @@
                       "defaultValue": "1005"
                     },
                     {
-                      "id": 205,
+                      "id": 210,
                       "name": "int4",
                       "variant": "declaration",
                       "kind": 1024,
@@ -8703,7 +8703,7 @@
                       "defaultValue": "23"
                     },
                     {
-                      "id": 245,
+                      "id": 250,
                       "name": "int4Array",
                       "variant": "declaration",
                       "kind": 1024,
@@ -8717,7 +8717,7 @@
                       "defaultValue": "1007"
                     },
                     {
-                      "id": 203,
+                      "id": 208,
                       "name": "int8",
                       "variant": "declaration",
                       "kind": 1024,
@@ -8731,7 +8731,7 @@
                       "defaultValue": "20"
                     },
                     {
-                      "id": 247,
+                      "id": 252,
                       "name": "int8Array",
                       "variant": "declaration",
                       "kind": 1024,
@@ -8745,7 +8745,7 @@
                       "defaultValue": "1016"
                     },
                     {
-                      "id": 230,
+                      "id": 235,
                       "name": "interval",
                       "variant": "declaration",
                       "kind": 1024,
@@ -8759,7 +8759,7 @@
                       "defaultValue": "1186"
                     },
                     {
-                      "id": 264,
+                      "id": 269,
                       "name": "intervalArray",
                       "variant": "declaration",
                       "kind": 1024,
@@ -8773,7 +8773,7 @@
                       "defaultValue": "1187"
                     },
                     {
-                      "id": 208,
+                      "id": 213,
                       "name": "json",
                       "variant": "declaration",
                       "kind": 1024,
@@ -8787,7 +8787,7 @@
                       "defaultValue": "114"
                     },
                     {
-                      "id": 239,
+                      "id": 244,
                       "name": "jsonArray",
                       "variant": "declaration",
                       "kind": 1024,
@@ -8801,7 +8801,7 @@
                       "defaultValue": "199"
                     },
                     {
-                      "id": 237,
+                      "id": 242,
                       "name": "jsonb",
                       "variant": "declaration",
                       "kind": 1024,
@@ -8815,7 +8815,7 @@
                       "defaultValue": "3802"
                     },
                     {
-                      "id": 271,
+                      "id": 276,
                       "name": "jsonbArray",
                       "variant": "declaration",
                       "kind": 1024,
@@ -8829,7 +8829,7 @@
                       "defaultValue": "3807"
                     },
                     {
-                      "id": 215,
+                      "id": 220,
                       "name": "line",
                       "variant": "declaration",
                       "kind": 1024,
@@ -8843,7 +8843,7 @@
                       "defaultValue": "628"
                     },
                     {
-                      "id": 272,
+                      "id": 277,
                       "name": "lineArray",
                       "variant": "declaration",
                       "kind": 1024,
@@ -8857,7 +8857,7 @@
                       "defaultValue": "629"
                     },
                     {
-                      "id": 211,
+                      "id": 216,
                       "name": "lseg",
                       "variant": "declaration",
                       "kind": 1024,
@@ -8871,7 +8871,7 @@
                       "defaultValue": "601"
                     },
                     {
-                      "id": 249,
+                      "id": 254,
                       "name": "lsegArray",
                       "variant": "declaration",
                       "kind": 1024,
@@ -8885,7 +8885,7 @@
                       "defaultValue": "1018"
                     },
                     {
-                      "id": 222,
+                      "id": 227,
                       "name": "macaddr",
                       "variant": "declaration",
                       "kind": 1024,
@@ -8899,7 +8899,7 @@
                       "defaultValue": "829"
                     },
                     {
-                      "id": 217,
+                      "id": 222,
                       "name": "macaddr8",
                       "variant": "declaration",
                       "kind": 1024,
@@ -8913,7 +8913,7 @@
                       "defaultValue": "774"
                     },
                     {
-                      "id": 275,
+                      "id": 280,
                       "name": "macaddr8Array",
                       "variant": "declaration",
                       "kind": 1024,
@@ -8927,7 +8927,7 @@
                       "defaultValue": "775"
                     },
                     {
-                      "id": 256,
+                      "id": 261,
                       "name": "macaddrArray",
                       "variant": "declaration",
                       "kind": 1024,
@@ -8941,7 +8941,7 @@
                       "defaultValue": "1040"
                     },
                     {
-                      "id": 218,
+                      "id": 223,
                       "name": "money",
                       "variant": "declaration",
                       "kind": 1024,
@@ -8955,7 +8955,7 @@
                       "defaultValue": "790"
                     },
                     {
-                      "id": 276,
+                      "id": 281,
                       "name": "moneyArray",
                       "variant": "declaration",
                       "kind": 1024,
@@ -8969,7 +8969,7 @@
                       "defaultValue": "791"
                     },
                     {
-                      "id": 202,
+                      "id": 207,
                       "name": "name",
                       "variant": "declaration",
                       "kind": 1024,
@@ -8983,7 +8983,7 @@
                       "defaultValue": "19"
                     },
                     {
-                      "id": 243,
+                      "id": 248,
                       "name": "nameArray",
                       "variant": "declaration",
                       "kind": 1024,
@@ -8997,7 +8997,7 @@
                       "defaultValue": "1003"
                     },
                     {
-                      "id": 234,
+                      "id": 239,
                       "name": "numeric",
                       "variant": "declaration",
                       "kind": 1024,
@@ -9011,7 +9011,7 @@
                       "defaultValue": "1700"
                     },
                     {
-                      "id": 265,
+                      "id": 270,
                       "name": "numericArray",
                       "variant": "declaration",
                       "kind": 1024,
@@ -9025,7 +9025,7 @@
                       "defaultValue": "1231"
                     },
                     {
-                      "id": 207,
+                      "id": 212,
                       "name": "oid",
                       "variant": "declaration",
                       "kind": 1024,
@@ -9039,7 +9039,7 @@
                       "defaultValue": "26"
                     },
                     {
-                      "id": 255,
+                      "id": 260,
                       "name": "oidArray",
                       "variant": "declaration",
                       "kind": 1024,
@@ -9053,7 +9053,7 @@
                       "defaultValue": "1028"
                     },
                     {
-                      "id": 212,
+                      "id": 217,
                       "name": "path",
                       "variant": "declaration",
                       "kind": 1024,
@@ -9067,7 +9067,7 @@
                       "defaultValue": "602"
                     },
                     {
-                      "id": 250,
+                      "id": 255,
                       "name": "pathArray",
                       "variant": "declaration",
                       "kind": 1024,
@@ -9081,7 +9081,7 @@
                       "defaultValue": "1019"
                     },
                     {
-                      "id": 236,
+                      "id": 241,
                       "name": "pgLsn",
                       "variant": "declaration",
                       "kind": 1024,
@@ -9095,7 +9095,7 @@
                       "defaultValue": "3220"
                     },
                     {
-                      "id": 270,
+                      "id": 275,
                       "name": "pgLsnArray",
                       "variant": "declaration",
                       "kind": 1024,
@@ -9109,7 +9109,7 @@
                       "defaultValue": "3221"
                     },
                     {
-                      "id": 210,
+                      "id": 215,
                       "name": "point",
                       "variant": "declaration",
                       "kind": 1024,
@@ -9123,7 +9123,7 @@
                       "defaultValue": "600"
                     },
                     {
-                      "id": 248,
+                      "id": 253,
                       "name": "pointArray",
                       "variant": "declaration",
                       "kind": 1024,
@@ -9137,7 +9137,7 @@
                       "defaultValue": "1017"
                     },
                     {
-                      "id": 214,
+                      "id": 219,
                       "name": "polygon",
                       "variant": "declaration",
                       "kind": 1024,
@@ -9151,7 +9151,7 @@
                       "defaultValue": "604"
                     },
                     {
-                      "id": 254,
+                      "id": 259,
                       "name": "polygonArray",
                       "variant": "declaration",
                       "kind": 1024,
@@ -9165,7 +9165,7 @@
                       "defaultValue": "1027"
                     },
                     {
-                      "id": 206,
+                      "id": 211,
                       "name": "text",
                       "variant": "declaration",
                       "kind": 1024,
@@ -9179,7 +9179,7 @@
                       "defaultValue": "25"
                     },
                     {
-                      "id": 246,
+                      "id": 251,
                       "name": "textArray",
                       "variant": "declaration",
                       "kind": 1024,
@@ -9193,7 +9193,7 @@
                       "defaultValue": "1009"
                     },
                     {
-                      "id": 227,
+                      "id": 232,
                       "name": "time",
                       "variant": "declaration",
                       "kind": 1024,
@@ -9207,7 +9207,7 @@
                       "defaultValue": "1083"
                     },
                     {
-                      "id": 261,
+                      "id": 266,
                       "name": "timeArray",
                       "variant": "declaration",
                       "kind": 1024,
@@ -9221,7 +9221,7 @@
                       "defaultValue": "1183"
                     },
                     {
-                      "id": 228,
+                      "id": 233,
                       "name": "timestamp",
                       "variant": "declaration",
                       "kind": 1024,
@@ -9235,7 +9235,7 @@
                       "defaultValue": "1114"
                     },
                     {
-                      "id": 262,
+                      "id": 267,
                       "name": "timestampArray",
                       "variant": "declaration",
                       "kind": 1024,
@@ -9249,7 +9249,7 @@
                       "defaultValue": "1115"
                     },
                     {
-                      "id": 229,
+                      "id": 234,
                       "name": "timestamptz",
                       "variant": "declaration",
                       "kind": 1024,
@@ -9263,7 +9263,7 @@
                       "defaultValue": "1184"
                     },
                     {
-                      "id": 263,
+                      "id": 268,
                       "name": "timestamptzArray",
                       "variant": "declaration",
                       "kind": 1024,
@@ -9277,7 +9277,7 @@
                       "defaultValue": "1185"
                     },
                     {
-                      "id": 231,
+                      "id": 236,
                       "name": "timetz",
                       "variant": "declaration",
                       "kind": 1024,
@@ -9291,7 +9291,7 @@
                       "defaultValue": "1266"
                     },
                     {
-                      "id": 266,
+                      "id": 271,
                       "name": "timetzArray",
                       "variant": "declaration",
                       "kind": 1024,
@@ -9305,7 +9305,7 @@
                       "defaultValue": "1270"
                     },
                     {
-                      "id": 235,
+                      "id": 240,
                       "name": "uuid",
                       "variant": "declaration",
                       "kind": 1024,
@@ -9319,7 +9319,7 @@
                       "defaultValue": "2950"
                     },
                     {
-                      "id": 269,
+                      "id": 274,
                       "name": "uuidArray",
                       "variant": "declaration",
                       "kind": 1024,
@@ -9333,7 +9333,7 @@
                       "defaultValue": "2951"
                     },
                     {
-                      "id": 233,
+                      "id": 238,
                       "name": "varbit",
                       "variant": "declaration",
                       "kind": 1024,
@@ -9347,7 +9347,7 @@
                       "defaultValue": "1562"
                     },
                     {
-                      "id": 268,
+                      "id": 273,
                       "name": "varbitArray",
                       "variant": "declaration",
                       "kind": 1024,
@@ -9361,7 +9361,7 @@
                       "defaultValue": "1563"
                     },
                     {
-                      "id": 225,
+                      "id": 230,
                       "name": "varchar",
                       "variant": "declaration",
                       "kind": 1024,
@@ -9375,7 +9375,7 @@
                       "defaultValue": "1043"
                     },
                     {
-                      "id": 259,
+                      "id": 264,
                       "name": "varcharArray",
                       "variant": "declaration",
                       "kind": 1024,
@@ -9389,7 +9389,7 @@
                       "defaultValue": "1015"
                     },
                     {
-                      "id": 209,
+                      "id": 214,
                       "name": "xml",
                       "variant": "declaration",
                       "kind": 1024,
@@ -9403,7 +9403,7 @@
                       "defaultValue": "142"
                     },
                     {
-                      "id": 277,
+                      "id": 282,
                       "name": "xmlArray",
                       "variant": "declaration",
                       "kind": 1024,
@@ -9421,86 +9421,86 @@
                     {
                       "title": "Properties",
                       "children": [
-                        232,
-                        267,
-                        199,
-                        240,
-                        213,
-                        251,
-                        224,
-                        258,
-                        200,
-                        241,
-                        201,
-                        242,
-                        216,
-                        273,
-                        221,
-                        274,
-                        238,
-                        278,
-                        226,
-                        260,
-                        219,
-                        252,
-                        220,
-                        253,
-                        223,
-                        257,
-                        204,
-                        244,
-                        205,
-                        245,
-                        203,
-                        247,
-                        230,
-                        264,
-                        208,
-                        239,
                         237,
-                        271,
-                        215,
                         272,
-                        211,
-                        249,
-                        222,
-                        217,
-                        275,
-                        256,
+                        204,
+                        245,
                         218,
-                        276,
-                        202,
-                        243,
-                        234,
-                        265,
-                        207,
-                        255,
-                        212,
-                        250,
-                        236,
-                        270,
-                        210,
-                        248,
-                        214,
-                        254,
-                        206,
-                        246,
-                        227,
-                        261,
-                        228,
-                        262,
+                        256,
                         229,
                         263,
+                        205,
+                        246,
+                        206,
+                        247,
+                        221,
+                        278,
+                        226,
+                        279,
+                        243,
+                        283,
                         231,
-                        266,
+                        265,
+                        224,
+                        257,
+                        225,
+                        258,
+                        228,
+                        262,
+                        209,
+                        249,
+                        210,
+                        250,
+                        208,
+                        252,
                         235,
                         269,
-                        233,
-                        268,
-                        225,
+                        213,
+                        244,
+                        242,
+                        276,
+                        220,
+                        277,
+                        216,
+                        254,
+                        227,
+                        222,
+                        280,
+                        261,
+                        223,
+                        281,
+                        207,
+                        248,
+                        239,
+                        270,
+                        212,
+                        260,
+                        217,
+                        255,
+                        241,
+                        275,
+                        215,
+                        253,
+                        219,
                         259,
-                        209,
-                        277
+                        211,
+                        251,
+                        232,
+                        266,
+                        233,
+                        267,
+                        234,
+                        268,
+                        236,
+                        271,
+                        240,
+                        274,
+                        238,
+                        273,
+                        230,
+                        264,
+                        214,
+                        282
                       ]
                     }
                   ]
@@ -9513,7 +9513,7 @@
           "defaultValue": "..."
         },
         {
-          "id": 279,
+          "id": 284,
           "name": "postgresJsParsers",
           "variant": "declaration",
           "kind": 32,
@@ -9538,21 +9538,21 @@
           },
           "type": {
             "type": "reference",
-            "target": 185,
+            "target": 190,
             "name": "PostgreSQLParsers",
             "package": "@neon/realtime"
           },
           "defaultValue": "..."
         },
         {
-          "id": 280,
+          "id": 285,
           "name": "createRealtimeClient",
           "variant": "declaration",
           "kind": 64,
           "flags": {},
           "signatures": [
             {
-              "id": 281,
+              "id": 286,
               "name": "createRealtimeClient",
               "variant": "signature",
               "kind": 4096,
@@ -9578,7 +9578,7 @@
               },
               "parameters": [
                 {
-                  "id": 282,
+                  "id": 287,
                   "name": "options",
                   "variant": "param",
                   "kind": 32768,
@@ -9593,7 +9593,7 @@
                   },
                   "type": {
                     "type": "reference",
-                    "target": 424,
+                    "target": 429,
                     "name": "RealtimeClientOptions",
                     "package": "@neon/realtime"
                   }
@@ -9601,7 +9601,7 @@
               ],
               "type": {
                 "type": "reference",
-                "target": 412,
+                "target": 417,
                 "name": "RealtimeClient",
                 "package": "@neon/realtime"
               }
@@ -9609,14 +9609,14 @@
           ]
         },
         {
-          "id": 191,
+          "id": 196,
           "name": "defineParsers",
           "variant": "declaration",
           "kind": 64,
           "flags": {},
           "signatures": [
             {
-              "id": 192,
+              "id": 197,
               "name": "defineParsers",
               "variant": "signature",
               "kind": 4096,
@@ -9647,7 +9647,7 @@
               },
               "parameters": [
                 {
-                  "id": 193,
+                  "id": 198,
                   "name": "parsers",
                   "variant": "param",
                   "kind": 32768,
@@ -9666,13 +9666,13 @@
               ],
               "type": {
                 "type": "reference",
-                "target": 185,
+                "target": 190,
                 "name": "PostgreSQLParsers",
                 "package": "@neon/realtime"
               }
             },
             {
-              "id": 194,
+              "id": 199,
               "name": "defineParsers",
               "variant": "signature",
               "kind": 4096,
@@ -9703,7 +9703,7 @@
               },
               "parameters": [
                 {
-                  "id": 195,
+                  "id": 200,
                   "name": "parsers",
                   "variant": "param",
                   "kind": 32768,
@@ -9730,7 +9730,7 @@
                           },
                           {
                             "type": "reference",
-                            "target": 186,
+                            "target": 191,
                             "name": "PostgreSQLTextParser",
                             "package": "@neon/realtime"
                           }
@@ -9746,7 +9746,7 @@
               ],
               "type": {
                 "type": "reference",
-                "target": 185,
+                "target": 190,
                 "name": "PostgreSQLParsers",
                 "package": "@neon/realtime"
               }
@@ -9754,7 +9754,7 @@
           ]
         },
         {
-          "id": 283,
+          "id": 288,
           "name": "SealedLiveQuery",
           "variant": "reference",
           "kind": 4194304,
@@ -9772,55 +9772,55 @@
         {
           "title": "Interfaces",
           "children": [
-            284,
-            299,
-            318,
-            322,
-            368,
-            370,
-            374,
-            412,
-            424,
-            442
+            289,
+            304,
+            323,
+            327,
+            373,
+            375,
+            379,
+            417,
+            429,
+            447
           ]
         },
         {
           "title": "Type Aliases",
           "children": [
-            286,
-            307,
-            311,
-            178,
+            291,
+            312,
+            316,
             183,
-            185,
-            186,
-            403,
-            430,
-            431,
-            432,
+            188,
+            190,
+            191,
+            408,
+            435,
             436,
-            437
+            437,
+            441,
+            442
           ]
         },
         {
           "title": "Variables",
           "children": [
-            196,
-            197,
-            279
+            201,
+            202,
+            284
           ]
         },
         {
           "title": "Functions",
           "children": [
-            280,
-            191
+            285,
+            196
           ]
         },
         {
           "title": "References",
           "children": [
-            283
+            288
           ]
         }
       ]
@@ -9841,14 +9841,14 @@
       },
       "children": [
         {
-          "id": 551,
+          "id": 556,
           "name": "drizzleAdapter",
           "variant": "declaration",
           "kind": 64,
           "flags": {},
           "signatures": [
             {
-              "id": 552,
+              "id": 557,
               "name": "drizzleAdapter",
               "variant": "signature",
               "kind": 4096,
@@ -9914,7 +9914,7 @@
         {
           "title": "Functions",
           "children": [
-            551
+            556
           ]
         }
       ]
@@ -9976,7 +9976,7 @@
           },
           "type": {
             "type": "reference",
-            "target": 185,
+            "target": 190,
             "name": "PostgreSQLParsers",
             "package": "@neon/realtime"
           },
@@ -10008,14 +10008,14 @@
       },
       "children": [
         {
-          "id": 553,
+          "id": 558,
           "name": "kyselyAdapter",
           "variant": "declaration",
           "kind": 64,
           "flags": {},
           "signatures": [
             {
-              "id": 554,
+              "id": 559,
               "name": "kyselyAdapter",
               "variant": "signature",
               "kind": 4096,
@@ -10073,7 +10073,7 @@
         {
           "title": "Functions",
           "children": [
-            553
+            558
           ]
         }
       ]
@@ -10094,7 +10094,7 @@
       },
       "children": [
         {
-          "id": 482,
+          "id": 487,
           "name": "RealtimeProviderProps",
           "variant": "declaration",
           "kind": 256,
@@ -10109,7 +10109,7 @@
                 "kind": "inline-tag",
                 "tag": "@link",
                 "text": "RealtimeProvider",
-                "target": 477
+                "target": 482
               },
               {
                 "kind": "text",
@@ -10119,7 +10119,7 @@
           },
           "children": [
             {
-              "id": 484,
+              "id": 489,
               "name": "children",
               "variant": "declaration",
               "kind": 1024,
@@ -10136,7 +10136,7 @@
                     "kind": "inline-tag",
                     "tag": "@link",
                     "text": "useLiveQuery",
-                    "target": 497
+                    "target": 502
                   },
                   {
                     "kind": "text",
@@ -10146,7 +10146,7 @@
                     "kind": "inline-tag",
                     "tag": "@link",
                     "text": "useRealtimeClient",
-                    "target": 480
+                    "target": 485
                   },
                   {
                     "kind": "text",
@@ -10167,7 +10167,7 @@
               }
             },
             {
-              "id": 483,
+              "id": 488,
               "name": "client",
               "variant": "declaration",
               "kind": 1024,
@@ -10184,7 +10184,7 @@
               },
               "type": {
                 "type": "reference",
-                "target": 412,
+                "target": 417,
                 "name": "RealtimeClient",
                 "package": "@neon/realtime"
               }
@@ -10194,14 +10194,14 @@
             {
               "title": "Properties",
               "children": [
-                484,
-                483
+                489,
+                488
               ]
             }
           ]
         },
         {
-          "id": 485,
+          "id": 490,
           "name": "UseLiveQueryOptions",
           "variant": "declaration",
           "kind": 256,
@@ -10216,7 +10216,7 @@
                 "kind": "inline-tag",
                 "tag": "@link",
                 "text": "useLiveQuery",
-                "target": 497
+                "target": 502
               },
               {
                 "kind": "text",
@@ -10226,7 +10226,7 @@
           },
           "children": [
             {
-              "id": 487,
+              "id": 492,
               "name": "initialData",
               "variant": "declaration",
               "kind": 1024,
@@ -10249,7 +10249,7 @@
                   "type": "array",
                   "elementType": {
                     "type": "reference",
-                    "target": 486,
+                    "target": 491,
                     "name": "Row",
                     "package": "@neon/realtime-react",
                     "qualifiedName": "UseLiveQueryOptions.Row",
@@ -10259,7 +10259,7 @@
               }
             },
             {
-              "id": 488,
+              "id": 493,
               "name": "refreshQuery",
               "variant": "declaration",
               "kind": 1024,
@@ -10278,14 +10278,14 @@
               "type": {
                 "type": "reflection",
                 "declaration": {
-                  "id": 489,
+                  "id": 494,
                   "name": "__type",
                   "variant": "declaration",
                   "kind": 65536,
                   "flags": {},
                   "signatures": [
                     {
-                      "id": 490,
+                      "id": 495,
                       "name": "__type",
                       "variant": "signature",
                       "kind": 4096,
@@ -10304,7 +10304,7 @@
                             "typeArguments": [
                               {
                                 "type": "reference",
-                                "target": 486,
+                                "target": 491,
                                 "name": "Row",
                                 "package": "@neon/realtime-react",
                                 "qualifiedName": "UseLiveQueryOptions.Row",
@@ -10328,14 +10328,14 @@
             {
               "title": "Properties",
               "children": [
-                487,
-                488
+                492,
+                493
               ]
             }
           ],
           "typeParameters": [
             {
-              "id": 486,
+              "id": 491,
               "name": "Row",
               "variant": "typeParam",
               "kind": 131072,
@@ -10352,7 +10352,7 @@
           ]
         },
         {
-          "id": 491,
+          "id": 496,
           "name": "UseLiveQueryResult",
           "variant": "declaration",
           "kind": 2097152,
@@ -10375,7 +10375,7 @@
           },
           "typeParameters": [
             {
-              "id": 494,
+              "id": 499,
               "name": "Row",
               "variant": "typeParam",
               "kind": 131072,
@@ -10395,11 +10395,11 @@
             "types": [
               {
                 "type": "reference",
-                "target": 307,
+                "target": 312,
                 "typeArguments": [
                   {
                     "type": "reference",
-                    "target": 494,
+                    "target": 499,
                     "name": "Row",
                     "package": "@neon/realtime-react",
                     "refersToTypeParameter": true
@@ -10411,14 +10411,14 @@
               {
                 "type": "reflection",
                 "declaration": {
-                  "id": 492,
+                  "id": 497,
                   "name": "__type",
                   "variant": "declaration",
                   "kind": 65536,
                   "flags": {},
                   "children": [
                     {
-                      "id": 493,
+                      "id": 498,
                       "name": "utils",
                       "variant": "declaration",
                       "kind": 1024,
@@ -10435,11 +10435,11 @@
                       },
                       "type": {
                         "type": "reference",
-                        "target": 495,
+                        "target": 500,
                         "typeArguments": [
                           {
                             "type": "reference",
-                            "target": 494,
+                            "target": 499,
                             "name": "Row",
                             "package": "@neon/realtime-react",
                             "refersToTypeParameter": true
@@ -10454,7 +10454,7 @@
                     {
                       "title": "Properties",
                       "children": [
-                        493
+                        498
                       ]
                     }
                   ]
@@ -10464,7 +10464,7 @@
           }
         },
         {
-          "id": 495,
+          "id": 500,
           "name": "UseLiveQueryUtils",
           "variant": "declaration",
           "kind": 2097152,
@@ -10487,7 +10487,7 @@
           },
           "typeParameters": [
             {
-              "id": 496,
+              "id": 501,
               "name": "Row",
               "variant": "typeParam",
               "kind": 131072,
@@ -10512,11 +10512,11 @@
             "typeArguments": [
               {
                 "type": "reference",
-                "target": 322,
+                "target": 327,
                 "typeArguments": [
                   {
                     "type": "reference",
-                    "target": 496,
+                    "target": 501,
                     "name": "Row",
                     "package": "@neon/realtime-react",
                     "refersToTypeParameter": true
@@ -10535,14 +10535,14 @@
           }
         },
         {
-          "id": 477,
+          "id": 482,
           "name": "RealtimeProvider",
           "variant": "declaration",
           "kind": 64,
           "flags": {},
           "signatures": [
             {
-              "id": 478,
+              "id": 483,
               "name": "RealtimeProvider",
               "variant": "signature",
               "kind": 4096,
@@ -10557,7 +10557,7 @@
                     "kind": "inline-tag",
                     "tag": "@link",
                     "text": "useLiveQuery",
-                    "target": 497
+                    "target": 502
                   },
                   {
                     "kind": "text",
@@ -10567,7 +10567,7 @@
                     "kind": "inline-tag",
                     "tag": "@link",
                     "text": "useRealtimeClient",
-                    "target": 480
+                    "target": 485
                   },
                   {
                     "kind": "text",
@@ -10588,7 +10588,7 @@
               },
               "parameters": [
                 {
-                  "id": 479,
+                  "id": 484,
                   "name": "props",
                   "variant": "param",
                   "kind": 32768,
@@ -10603,7 +10603,7 @@
                   },
                   "type": {
                     "type": "reference",
-                    "target": 482,
+                    "target": 487,
                     "name": "RealtimeProviderProps",
                     "package": "@neon/realtime-react"
                   }
@@ -10624,14 +10624,14 @@
           ]
         },
         {
-          "id": 497,
+          "id": 502,
           "name": "useLiveQuery",
           "variant": "declaration",
           "kind": 64,
           "flags": {},
           "signatures": [
             {
-              "id": 498,
+              "id": 503,
               "name": "useLiveQuery",
               "variant": "signature",
               "kind": 4096,
@@ -10664,7 +10664,7 @@
                         "kind": "inline-tag",
                         "tag": "@link",
                         "text": "RealtimeProvider",
-                        "target": 477
+                        "target": 482
                       },
                       {
                         "kind": "text",
@@ -10676,7 +10676,7 @@
               },
               "typeParameters": [
                 {
-                  "id": 499,
+                  "id": 504,
                   "name": "Row",
                   "variant": "typeParam",
                   "kind": 131072,
@@ -10693,7 +10693,7 @@
               ],
               "parameters": [
                 {
-                  "id": 500,
+                  "id": 505,
                   "name": "query",
                   "variant": "param",
                   "kind": 32768,
@@ -10712,7 +10712,7 @@
                     "typeArguments": [
                       {
                         "type": "reference",
-                        "target": 499,
+                        "target": 504,
                         "name": "Row",
                         "package": "@neon/realtime-react",
                         "refersToTypeParameter": true
@@ -10723,7 +10723,7 @@
                   }
                 },
                 {
-                  "id": 501,
+                  "id": 506,
                   "name": "options",
                   "variant": "param",
                   "kind": 32768,
@@ -10738,7 +10738,7 @@
                   },
                   "type": {
                     "type": "reference",
-                    "target": 485,
+                    "target": 490,
                     "typeArguments": [
                       {
                         "type": "reference",
@@ -10750,7 +10750,7 @@
                         "typeArguments": [
                           {
                             "type": "reference",
-                            "target": 499,
+                            "target": 504,
                             "name": "Row",
                             "package": "@neon/realtime-react",
                             "refersToTypeParameter": true
@@ -10768,11 +10768,11 @@
               ],
               "type": {
                 "type": "reference",
-                "target": 491,
+                "target": 496,
                 "typeArguments": [
                   {
                     "type": "reference",
-                    "target": 499,
+                    "target": 504,
                     "name": "Row",
                     "package": "@neon/realtime-react",
                     "refersToTypeParameter": true
@@ -10785,14 +10785,14 @@
           ]
         },
         {
-          "id": 480,
+          "id": 485,
           "name": "useRealtimeClient",
           "variant": "declaration",
           "kind": 64,
           "flags": {},
           "signatures": [
             {
-              "id": 481,
+              "id": 486,
               "name": "useRealtimeClient",
               "variant": "signature",
               "kind": 4096,
@@ -10807,7 +10807,7 @@
                     "kind": "inline-tag",
                     "tag": "@link",
                     "text": "RealtimeProvider",
-                    "target": 477
+                    "target": 482
                   },
                   {
                     "kind": "text",
@@ -10817,7 +10817,7 @@
                     "kind": "inline-tag",
                     "tag": "@link",
                     "text": "useLiveQuery",
-                    "target": 497
+                    "target": 502
                   },
                   {
                     "kind": "text",
@@ -10885,7 +10885,7 @@
                         "kind": "inline-tag",
                         "tag": "@link",
                         "text": "RealtimeProvider",
-                        "target": 477
+                        "target": 482
                       },
                       {
                         "kind": "text",
@@ -10906,7 +10906,7 @@
               },
               "type": {
                 "type": "reference",
-                "target": 412,
+                "target": 417,
                 "name": "RealtimeClient",
                 "package": "@neon/realtime"
               }
@@ -10918,23 +10918,23 @@
         {
           "title": "Interfaces",
           "children": [
-            482,
-            485
+            487,
+            490
           ]
         },
         {
           "title": "Type Aliases",
           "children": [
-            491,
-            495
+            496,
+            500
           ]
         },
         {
           "title": "Functions",
           "children": [
-            477,
-            497,
-            480
+            482,
+            502,
+            485
           ]
         }
       ]
@@ -10955,7 +10955,7 @@
       },
       "children": [
         {
-          "id": 502,
+          "id": 507,
           "name": "RealtimeCollectionConfig",
           "variant": "declaration",
           "kind": 256,
@@ -10978,7 +10978,7 @@
           },
           "children": [
             {
-              "id": 520,
+              "id": 525,
               "name": "autoIndex",
               "variant": "declaration",
               "kind": 1024,
@@ -11036,7 +11036,7 @@
               }
             },
             {
-              "id": 506,
+              "id": 511,
               "name": "client",
               "variant": "declaration",
               "kind": 1024,
@@ -11053,13 +11053,13 @@
               },
               "type": {
                 "type": "reference",
-                "target": 412,
+                "target": 417,
                 "name": "RealtimeClient",
                 "package": "@neon/realtime"
               }
             },
             {
-              "id": 522,
+              "id": 527,
               "name": "compare",
               "variant": "declaration",
               "kind": 1024,
@@ -11090,7 +11090,7 @@
               "type": {
                 "type": "reflection",
                 "declaration": {
-                  "id": 523,
+                  "id": 528,
                   "name": "__type",
                   "variant": "declaration",
                   "kind": 65536,
@@ -11099,7 +11099,7 @@
                   },
                   "signatures": [
                     {
-                      "id": 524,
+                      "id": 529,
                       "name": "__type",
                       "variant": "signature",
                       "kind": 4096,
@@ -11122,7 +11122,7 @@
                       },
                       "parameters": [
                         {
-                          "id": 525,
+                          "id": 530,
                           "name": "x",
                           "variant": "param",
                           "kind": 32768,
@@ -11139,7 +11139,7 @@
                           },
                           "type": {
                             "type": "reference",
-                            "target": 503,
+                            "target": 508,
                             "name": "Row",
                             "package": "@neon/realtime-tanstack",
                             "qualifiedName": "RealtimeCollectionConfig.Row",
@@ -11147,7 +11147,7 @@
                           }
                         },
                         {
-                          "id": 526,
+                          "id": 531,
                           "name": "y",
                           "variant": "param",
                           "kind": 32768,
@@ -11164,7 +11164,7 @@
                           },
                           "type": {
                             "type": "reference",
-                            "target": 503,
+                            "target": 508,
                             "name": "Row",
                             "package": "@neon/realtime-tanstack",
                             "qualifiedName": "RealtimeCollectionConfig.Row",
@@ -11188,7 +11188,7 @@
               }
             },
             {
-              "id": 521,
+              "id": 526,
               "name": "defaultIndexType",
               "variant": "declaration",
               "kind": 1024,
@@ -11226,7 +11226,7 @@
                 "typeArguments": [
                   {
                     "type": "reference",
-                    "target": 504,
+                    "target": 509,
                     "name": "Key",
                     "package": "@neon/realtime-tanstack",
                     "qualifiedName": "RealtimeCollectionConfig.Key",
@@ -11244,7 +11244,7 @@
               }
             },
             {
-              "id": 529,
+              "id": 534,
               "name": "defaultStringCollation",
               "variant": "declaration",
               "kind": 1024,
@@ -11279,7 +11279,7 @@
               }
             },
             {
-              "id": 518,
+              "id": 523,
               "name": "gcTime",
               "variant": "declaration",
               "kind": 1024,
@@ -11292,7 +11292,7 @@
                 "summary": [
                   {
                     "kind": "text",
-                    "text": "Time in milliseconds after which the collection will be garbage collected\nwhen it has no active subscribers. Defaults to 5 minutes (300000ms)."
+                    "text": "Time in milliseconds after which the collection will be garbage collected\nwhen it has no active subscribers. Defaults to 5 minutes (300000ms).\nSync started without subscribers gets a minimum 50ms handoff grace period\nuntil a subscriber attaches. After the last subscriber leaves, gcTime\napplies without that startup minimum.\nPending preloads retain the collection until they settle. Preloading ready\ndata refreshes the retention period. A persisting transaction that touches\nthe collection also retains it, and the period starts again when the last\none completes or fails, preserving any remaining startup grace. Pending\nmanual transactions do not retain it; keep a subscription for draft\nvisibility until commit or rollback. Rolling\nback a manual transaction that stayed pending preserves the existing GC\ndeadline. Cleanup runs at a host idle opportunity after the delay.\nA non-positive or non-finite value\ndisables automatic garbage collection."
                   }
                 ]
               },
@@ -11308,7 +11308,7 @@
               }
             },
             {
-              "id": 511,
+              "id": 516,
               "name": "getKey",
               "variant": "declaration",
               "kind": 1024,
@@ -11326,28 +11326,28 @@
               "type": {
                 "type": "reflection",
                 "declaration": {
-                  "id": 512,
+                  "id": 517,
                   "name": "__type",
                   "variant": "declaration",
                   "kind": 65536,
                   "flags": {},
                   "signatures": [
                     {
-                      "id": 513,
+                      "id": 518,
                       "name": "__type",
                       "variant": "signature",
                       "kind": 4096,
                       "flags": {},
                       "parameters": [
                         {
-                          "id": 514,
+                          "id": 519,
                           "name": "row",
                           "variant": "param",
                           "kind": 32768,
                           "flags": {},
                           "type": {
                             "type": "reference",
-                            "target": 503,
+                            "target": 508,
                             "name": "Row",
                             "package": "@neon/realtime-tanstack",
                             "qualifiedName": "RealtimeCollectionConfig.Row",
@@ -11357,7 +11357,7 @@
                       ],
                       "type": {
                         "type": "reference",
-                        "target": 504,
+                        "target": 509,
                         "name": "Key",
                         "package": "@neon/realtime-tanstack",
                         "qualifiedName": "RealtimeCollectionConfig.Key",
@@ -11375,7 +11375,7 @@
               }
             },
             {
-              "id": 515,
+              "id": 520,
               "name": "id",
               "variant": "declaration",
               "kind": 1024,
@@ -11396,7 +11396,7 @@
               }
             },
             {
-              "id": 528,
+              "id": 533,
               "name": "onDelete",
               "variant": "declaration",
               "kind": 1024,
@@ -11414,25 +11414,6 @@
                 ],
                 "blockTags": [
                   {
-                    "tag": "@param",
-                    "name": "params",
-                    "content": [
-                      {
-                        "kind": "text",
-                        "text": "Object containing transaction and collection information"
-                      }
-                    ]
-                  },
-                  {
-                    "tag": "@returns",
-                    "content": [
-                      {
-                        "kind": "text",
-                        "text": "Promise resolving to any value"
-                      }
-                    ]
-                  },
-                  {
                     "tag": "@example",
                     "content": [
                       {
@@ -11446,7 +11427,16 @@
                     "content": [
                       {
                         "kind": "code",
-                        "text": "```ts\n// Delete handler with multiple items\nonDelete: async ({ transaction, collection }) => {\n  const keysToDelete = transaction.mutations.map(m => m.key)\n  await api.deleteTodos(keysToDelete)\n}\n```"
+                        "text": "```ts\n// Delete handler with refetch (Query Collection)\nonDelete: async ({ transaction, collection }) => {\n  const keysToDelete = transaction.mutations.map(m => m.key)\n  await api.deleteTodos(keysToDelete)\n  // Trigger refetch to sync server state\n  await collection.utils.refetch()\n}\n```"
+                      }
+                    ]
+                  },
+                  {
+                    "tag": "@example",
+                    "content": [
+                      {
+                        "kind": "code",
+                        "text": "```ts\n// Delete handler with sync wait (Electric Collection)\nonDelete: async ({ transaction, collection }) => {\n  const mutation = transaction.mutations[0]\n  const result = await api.deleteTodo(mutation.original.id)\n  // Wait for txid to sync\n  await collection.utils.awaitTxId(result.txid)\n}\n```"
                       }
                     ]
                   },
@@ -11480,7 +11470,7 @@
                 "typeArguments": [
                   {
                     "type": "reference",
-                    "target": 503,
+                    "target": 508,
                     "name": "Row",
                     "package": "@neon/realtime-tanstack",
                     "qualifiedName": "RealtimeCollectionConfig.Row",
@@ -11488,7 +11478,7 @@
                   },
                   {
                     "type": "reference",
-                    "target": 504,
+                    "target": 509,
                     "name": "Key",
                     "package": "@neon/realtime-tanstack",
                     "qualifiedName": "RealtimeCollectionConfig.Key",
@@ -11496,13 +11486,9 @@
                   },
                   {
                     "type": "reference",
-                    "target": 536,
+                    "target": 541,
                     "name": "RealtimeCollectionUtils",
                     "package": "@neon/realtime-tanstack"
-                  },
-                  {
-                    "type": "intrinsic",
-                    "name": "void"
                   }
                 ],
                 "name": "DeleteMutationFn",
@@ -11516,7 +11502,7 @@
               }
             },
             {
-              "id": 527,
+              "id": 532,
               "name": "onInsert",
               "variant": "declaration",
               "kind": 1024,
@@ -11534,25 +11520,6 @@
                 ],
                 "blockTags": [
                   {
-                    "tag": "@param",
-                    "name": "params",
-                    "content": [
-                      {
-                        "kind": "text",
-                        "text": "Object containing transaction and collection information"
-                      }
-                    ]
-                  },
-                  {
-                    "tag": "@returns",
-                    "content": [
-                      {
-                        "kind": "text",
-                        "text": "Promise resolving to any value"
-                      }
-                    ]
-                  },
-                  {
                     "tag": "@example",
                     "content": [
                       {
@@ -11566,7 +11533,7 @@
                     "content": [
                       {
                         "kind": "code",
-                        "text": "```ts\n// Insert handler with multiple items\nonInsert: async ({ transaction, collection }) => {\n  const items = transaction.mutations.map(m => m.modified)\n  await api.createTodos(items)\n}\n```"
+                        "text": "```ts\n// Insert handler with refetch (Query Collection)\nonInsert: async ({ transaction, collection }) => {\n  const newItem = transaction.mutations[0].modified\n  await api.createTodo(newItem)\n  // Trigger refetch to sync server state\n  await collection.utils.refetch()\n}\n```"
                       }
                     ]
                   },
@@ -11575,7 +11542,7 @@
                     "content": [
                       {
                         "kind": "code",
-                        "text": "```ts\n// Insert handler with error handling\nonInsert: async ({ transaction, collection }) => {\n  try {\n    const newItem = transaction.mutations[0].modified\n    const result = await api.createTodo(newItem)\n    return result\n  } catch (error) {\n    console.error('Insert failed:', error)\n    throw error // This will cause the transaction to fail\n  }\n}\n```"
+                        "text": "```ts\n// Insert handler with sync wait (Electric Collection)\nonInsert: async ({ transaction, collection }) => {\n  const newItem = transaction.mutations[0].modified\n  const result = await api.createTodo(newItem)\n  // Wait for txid to sync\n  await collection.utils.awaitTxId(result.txid)\n}\n```"
                       }
                     ]
                   },
@@ -11584,7 +11551,16 @@
                     "content": [
                       {
                         "kind": "code",
-                        "text": "```ts\n// Insert handler with metadata\nonInsert: async ({ transaction, collection }) => {\n  const mutation = transaction.mutations[0]\n  await api.createTodo(mutation.modified, {\n    source: mutation.metadata?.source,\n    timestamp: mutation.createdAt\n  })\n}\n```"
+                        "text": "```ts\n// Insert handler with multiple items\nonInsert: async ({ transaction, collection }) => {\n  const items = transaction.mutations.map(m => m.modified)\n  await api.createTodos(items)\n  // Refetch to get updated data from server\n  await collection.utils.refetch()\n}\n```"
+                      }
+                    ]
+                  },
+                  {
+                    "tag": "@example",
+                    "content": [
+                      {
+                        "kind": "code",
+                        "text": "```ts\n// Insert handler with error handling\nonInsert: async ({ transaction, collection }) => {\n  try {\n    const newItem = transaction.mutations[0].modified\n    await api.createTodo(newItem)\n  } catch (error) {\n    console.error('Insert failed:', error)\n    throw error // This will cause the transaction to rollback\n  }\n}\n```"
                       }
                     ]
                   }
@@ -11600,7 +11576,7 @@
                 "typeArguments": [
                   {
                     "type": "reference",
-                    "target": 503,
+                    "target": 508,
                     "name": "Row",
                     "package": "@neon/realtime-tanstack",
                     "qualifiedName": "RealtimeCollectionConfig.Row",
@@ -11608,7 +11584,7 @@
                   },
                   {
                     "type": "reference",
-                    "target": 504,
+                    "target": 509,
                     "name": "Key",
                     "package": "@neon/realtime-tanstack",
                     "qualifiedName": "RealtimeCollectionConfig.Key",
@@ -11616,13 +11592,9 @@
                   },
                   {
                     "type": "reference",
-                    "target": 536,
+                    "target": 541,
                     "name": "RealtimeCollectionUtils",
                     "package": "@neon/realtime-tanstack"
-                  },
-                  {
-                    "type": "intrinsic",
-                    "name": "void"
                   }
                 ],
                 "name": "InsertMutationFn",
@@ -11636,7 +11608,7 @@
               }
             },
             {
-              "id": 516,
+              "id": 521,
               "name": "onUpdate",
               "variant": "declaration",
               "kind": 1024,
@@ -11654,25 +11626,6 @@
                 ],
                 "blockTags": [
                   {
-                    "tag": "@param",
-                    "name": "params",
-                    "content": [
-                      {
-                        "kind": "text",
-                        "text": "Object containing transaction and collection information"
-                      }
-                    ]
-                  },
-                  {
-                    "tag": "@returns",
-                    "content": [
-                      {
-                        "kind": "text",
-                        "text": "Promise resolving to any value"
-                      }
-                    ]
-                  },
-                  {
                     "tag": "@example",
                     "content": [
                       {
@@ -11686,7 +11639,7 @@
                     "content": [
                       {
                         "kind": "code",
-                        "text": "```ts\n// Update handler with partial updates\nonUpdate: async ({ transaction, collection }) => {\n  const mutation = transaction.mutations[0]\n  const changes = mutation.changes // Only the changed fields\n  await api.updateTodo(mutation.original.id, changes)\n}\n```"
+                        "text": "```ts\n// Update handler with refetch (Query Collection)\nonUpdate: async ({ transaction, collection }) => {\n  const mutation = transaction.mutations[0]\n  const changes = mutation.changes // Only the changed fields\n  await api.updateTodo(mutation.original.id, changes)\n  // Trigger refetch to sync server state\n  await collection.utils.refetch()\n}\n```"
                       }
                     ]
                   },
@@ -11695,7 +11648,16 @@
                     "content": [
                       {
                         "kind": "code",
-                        "text": "```ts\n// Update handler with multiple items\nonUpdate: async ({ transaction, collection }) => {\n  const updates = transaction.mutations.map(m => ({\n    id: m.key,\n    changes: m.changes\n  }))\n  await api.updateTodos(updates)\n}\n```"
+                        "text": "```ts\n// Update handler with sync wait (Electric Collection)\nonUpdate: async ({ transaction, collection }) => {\n  const mutation = transaction.mutations[0]\n  const result = await api.updateTodo(mutation.original.id, mutation.changes)\n  // Wait for txid to sync\n  await collection.utils.awaitTxId(result.txid)\n}\n```"
+                      }
+                    ]
+                  },
+                  {
+                    "tag": "@example",
+                    "content": [
+                      {
+                        "kind": "code",
+                        "text": "```ts\n// Update handler with multiple items\nonUpdate: async ({ transaction, collection }) => {\n  const updates = transaction.mutations.map(m => ({\n    id: m.key,\n    changes: m.changes\n  }))\n  await api.updateTodos(updates)\n  await collection.utils.refetch()\n}\n```"
                       }
                     ]
                   },
@@ -11720,7 +11682,7 @@
                 "typeArguments": [
                   {
                     "type": "reference",
-                    "target": 503,
+                    "target": 508,
                     "name": "Row",
                     "package": "@neon/realtime-tanstack",
                     "qualifiedName": "RealtimeCollectionConfig.Row",
@@ -11728,7 +11690,7 @@
                   },
                   {
                     "type": "reference",
-                    "target": 504,
+                    "target": 509,
                     "name": "Key",
                     "package": "@neon/realtime-tanstack",
                     "qualifiedName": "RealtimeCollectionConfig.Key",
@@ -11736,13 +11698,9 @@
                   },
                   {
                     "type": "reference",
-                    "target": 536,
+                    "target": 541,
                     "name": "RealtimeCollectionUtils",
                     "package": "@neon/realtime-tanstack"
-                  },
-                  {
-                    "type": "intrinsic",
-                    "name": "void"
                   }
                 ],
                 "name": "UpdateMutationFn",
@@ -11756,7 +11714,7 @@
               }
             },
             {
-              "id": 507,
+              "id": 512,
               "name": "query",
               "variant": "declaration",
               "kind": 1024,
@@ -11777,7 +11735,7 @@
                 "typeArguments": [
                   {
                     "type": "reference",
-                    "target": 503,
+                    "target": 508,
                     "name": "Row",
                     "package": "@neon/realtime-tanstack",
                     "qualifiedName": "RealtimeCollectionConfig.Row",
@@ -11789,7 +11747,7 @@
               }
             },
             {
-              "id": 508,
+              "id": 513,
               "name": "refreshQuery",
               "variant": "declaration",
               "kind": 1024,
@@ -11801,21 +11759,21 @@
                 "summary": [
                   {
                     "kind": "text",
-                    "text": "Obtain a replacement capability for the same exact query before expiry.\nTransient failures are retried while the current capability remains valid."
+                    "text": "Obtain a replacement capability for the same exact query before expiry.\nTransient failures are retried while the current capability remains valid.\nA collection that restarts or reloads subscribes with the newest\ncapability this returned, and calls it straight away if that one has\nexpired."
                   }
                 ]
               },
               "type": {
                 "type": "reflection",
                 "declaration": {
-                  "id": 509,
+                  "id": 514,
                   "name": "__type",
                   "variant": "declaration",
                   "kind": 65536,
                   "flags": {},
                   "signatures": [
                     {
-                      "id": 510,
+                      "id": 515,
                       "name": "__type",
                       "variant": "signature",
                       "kind": 4096,
@@ -11834,7 +11792,7 @@
                             "typeArguments": [
                               {
                                 "type": "reference",
-                                "target": 503,
+                                "target": 508,
                                 "name": "Row",
                                 "package": "@neon/realtime-tanstack",
                                 "qualifiedName": "RealtimeCollectionConfig.Row",
@@ -11854,7 +11812,7 @@
               }
             },
             {
-              "id": 517,
+              "id": 522,
               "name": "schema",
               "variant": "declaration",
               "kind": 1024,
@@ -11865,7 +11823,7 @@
               },
               "type": {
                 "type": "reference",
-                "target": 505,
+                "target": 510,
                 "name": "Schema",
                 "package": "@neon/realtime-tanstack",
                 "qualifiedName": "RealtimeCollectionConfig.Schema",
@@ -11879,7 +11837,7 @@
               }
             },
             {
-              "id": 519,
+              "id": 524,
               "name": "startSync",
               "variant": "declaration",
               "kind": 1024,
@@ -11923,27 +11881,27 @@
             {
               "title": "Properties",
               "children": [
-                520,
-                506,
-                522,
-                521,
-                529,
-                518,
+                525,
                 511,
-                515,
-                528,
                 527,
+                526,
+                534,
+                523,
                 516,
-                507,
-                508,
-                517,
-                519
+                520,
+                533,
+                532,
+                521,
+                512,
+                513,
+                522,
+                524
               ]
             }
           ],
           "typeParameters": [
             {
-              "id": 503,
+              "id": 508,
               "name": "Row",
               "variant": "typeParam",
               "kind": 131072,
@@ -11962,7 +11920,7 @@
               }
             },
             {
-              "id": 504,
+              "id": 509,
               "name": "Key",
               "variant": "typeParam",
               "kind": 131072,
@@ -12011,7 +11969,7 @@
               }
             },
             {
-              "id": 505,
+              "id": 510,
               "name": "Schema",
               "variant": "typeParam",
               "kind": 131072,
@@ -12059,7 +12017,7 @@
                   "typeArguments": [
                     {
                       "type": "reference",
-                      "target": 503,
+                      "target": 508,
                       "name": "Row",
                       "package": "@neon/realtime-tanstack",
                       "qualifiedName": "RealtimeCollectionConfig.Row",
@@ -12067,7 +12025,7 @@
                     },
                     {
                       "type": "reference",
-                      "target": 504,
+                      "target": 509,
                       "name": "Key",
                       "package": "@neon/realtime-tanstack",
                       "qualifiedName": "RealtimeCollectionConfig.Key",
@@ -12075,7 +12033,7 @@
                     },
                     {
                       "type": "reference",
-                      "target": 505,
+                      "target": 510,
                       "name": "Schema",
                       "package": "@neon/realtime-tanstack",
                       "qualifiedName": "RealtimeCollectionConfig.Schema",
@@ -12083,13 +12041,9 @@
                     },
                     {
                       "type": "reference",
-                      "target": 536,
+                      "target": 541,
                       "name": "RealtimeCollectionUtils",
                       "package": "@neon/realtime-tanstack"
-                    },
-                    {
-                      "type": "intrinsic",
-                      "name": "void"
                     }
                   ],
                   "name": "BaseCollectionConfig",
@@ -12115,7 +12069,7 @@
           ]
         },
         {
-          "id": 536,
+          "id": 541,
           "name": "RealtimeCollectionUtils",
           "variant": "declaration",
           "kind": 256,
@@ -12130,14 +12084,14 @@
           },
           "children": [
             {
-              "id": 537,
+              "id": 542,
               "name": "awaitTxId",
               "variant": "declaration",
               "kind": 2048,
               "flags": {},
               "signatures": [
                 {
-                  "id": 538,
+                  "id": 543,
                   "name": "awaitTxId",
                   "variant": "signature",
                   "kind": 4096,
@@ -12155,7 +12109,7 @@
                         "content": [
                           {
                             "kind": "text",
-                            "text": "This does not determine whether a transaction committed, so pass only IDs\nfrom transactions known to have committed."
+                            "text": "This does not determine whether a transaction committed, so pass only IDs\nfrom transactions known to have committed.\n\nBefore the collection starts syncing, this waits for it to start. It does\nnot start synchronization itself. Cleanup before synchronization starts\nhas no active run to cancel, so the wait continues into the next run."
                           }
                         ]
                       },
@@ -12164,7 +12118,7 @@
                         "content": [
                           {
                             "kind": "text",
-                            "text": "If a supplied timeout elapses or the collection is cleaned up."
+                            "text": "If the transaction ID or timeout is invalid, a supplied timeout\nelapses, synchronization stops terminally, or an active synchronization\nrun is cleaned up."
                           }
                         ]
                       }
@@ -12172,7 +12126,7 @@
                   },
                   "parameters": [
                     {
-                      "id": 539,
+                      "id": 544,
                       "name": "txid",
                       "variant": "param",
                       "kind": 32768,
@@ -12191,7 +12145,7 @@
                       }
                     },
                     {
-                      "id": 540,
+                      "id": 545,
                       "name": "timeout",
                       "variant": "param",
                       "kind": 32768,
@@ -12202,7 +12156,7 @@
                         "summary": [
                           {
                             "kind": "text",
-                            "text": "Optional maximum wait in milliseconds. By default, the\npromise remains pending until the transaction arrives or the collection is\ncleaned up."
+                            "text": "Optional maximum wait in milliseconds, including any wait\nfor synchronization to start. By default, the promise remains pending\nuntil the transaction arrives, synchronization stops terminally, or an\nactive synchronization run is cleaned up."
                           }
                         ]
                       },
@@ -12236,20 +12190,20 @@
             {
               "title": "Methods",
               "children": [
-                537
+                542
               ]
             }
           ],
           "indexSignatures": [
             {
-              "id": 541,
+              "id": 546,
               "name": "__index",
               "variant": "signature",
               "kind": 8192,
               "flags": {},
               "parameters": [
                 {
-                  "id": 542,
+                  "id": 547,
                   "name": "key",
                   "variant": "param",
                   "kind": 32768,
@@ -12280,7 +12234,7 @@
           ]
         },
         {
-          "id": 530,
+          "id": 535,
           "name": "RealtimeCollectionOptions",
           "variant": "declaration",
           "kind": 2097152,
@@ -12295,7 +12249,7 @@
                 "kind": "inline-tag",
                 "tag": "@link",
                 "text": "realtimeCollectionOptions",
-                "target": 543
+                "target": 548
               },
               {
                 "kind": "text",
@@ -12305,7 +12259,7 @@
           },
           "typeParameters": [
             {
-              "id": 533,
+              "id": 538,
               "name": "Row",
               "variant": "typeParam",
               "kind": 131072,
@@ -12324,7 +12278,7 @@
               }
             },
             {
-              "id": 534,
+              "id": 539,
               "name": "Key",
               "variant": "typeParam",
               "kind": 131072,
@@ -12352,7 +12306,7 @@
               }
             },
             {
-              "id": 535,
+              "id": 540,
               "name": "Schema",
               "variant": "typeParam",
               "kind": 131072,
@@ -12398,28 +12352,28 @@
                     "typeArguments": [
                       {
                         "type": "reference",
-                        "target": 533,
+                        "target": 538,
                         "name": "Row",
                         "package": "@neon/realtime-tanstack",
                         "refersToTypeParameter": true
                       },
                       {
                         "type": "reference",
-                        "target": 534,
+                        "target": 539,
                         "name": "Key",
                         "package": "@neon/realtime-tanstack",
                         "refersToTypeParameter": true
                       },
                       {
                         "type": "reference",
-                        "target": 535,
+                        "target": 540,
                         "name": "Schema",
                         "package": "@neon/realtime-tanstack",
                         "refersToTypeParameter": true
                       },
                       {
                         "type": "reference",
-                        "target": 536,
+                        "target": 541,
                         "name": "RealtimeCollectionUtils",
                         "package": "@neon/realtime-tanstack"
                       }
@@ -12438,14 +12392,14 @@
               {
                 "type": "reflection",
                 "declaration": {
-                  "id": 531,
+                  "id": 536,
                   "name": "__type",
                   "variant": "declaration",
                   "kind": 65536,
                   "flags": {},
                   "children": [
                     {
-                      "id": 532,
+                      "id": 537,
                       "name": "utils",
                       "variant": "declaration",
                       "kind": 1024,
@@ -12462,7 +12416,7 @@
                       },
                       "type": {
                         "type": "reference",
-                        "target": 536,
+                        "target": 541,
                         "name": "RealtimeCollectionUtils",
                         "package": "@neon/realtime-tanstack"
                       }
@@ -12472,7 +12426,7 @@
                     {
                       "title": "Properties",
                       "children": [
-                        532
+                        537
                       ]
                     }
                   ]
@@ -12482,14 +12436,14 @@
           }
         },
         {
-          "id": 543,
+          "id": 548,
           "name": "realtimeCollectionOptions",
           "variant": "declaration",
           "kind": 64,
           "flags": {},
           "signatures": [
             {
-              "id": 544,
+              "id": 549,
               "name": "realtimeCollectionOptions",
               "variant": "signature",
               "kind": 4096,
@@ -12523,7 +12477,7 @@
               },
               "typeParameters": [
                 {
-                  "id": 545,
+                  "id": 550,
                   "name": "Row",
                   "variant": "typeParam",
                   "kind": 131072,
@@ -12542,7 +12496,7 @@
                   }
                 },
                 {
-                  "id": 546,
+                  "id": 551,
                   "name": "Key",
                   "variant": "typeParam",
                   "kind": 131072,
@@ -12591,7 +12545,7 @@
                   }
                 },
                 {
-                  "id": 547,
+                  "id": 552,
                   "name": "Schema",
                   "variant": "typeParam",
                   "kind": 131072,
@@ -12632,7 +12586,7 @@
               ],
               "parameters": [
                 {
-                  "id": 548,
+                  "id": 553,
                   "name": "config",
                   "variant": "param",
                   "kind": 32768,
@@ -12650,7 +12604,7 @@
                     "types": [
                       {
                         "type": "reference",
-                        "target": 502,
+                        "target": 507,
                         "typeArguments": [
                           {
                             "type": "reference",
@@ -12662,7 +12616,7 @@
                             "typeArguments": [
                               {
                                 "type": "reference",
-                                "target": 545,
+                                "target": 550,
                                 "name": "Row",
                                 "package": "@neon/realtime-tanstack",
                                 "refersToTypeParameter": true
@@ -12673,14 +12627,14 @@
                           },
                           {
                             "type": "reference",
-                            "target": 546,
+                            "target": 551,
                             "name": "Key",
                             "package": "@neon/realtime-tanstack",
                             "refersToTypeParameter": true
                           },
                           {
                             "type": "reference",
-                            "target": 547,
+                            "target": 552,
                             "name": "Schema",
                             "package": "@neon/realtime-tanstack",
                             "refersToTypeParameter": true
@@ -12692,14 +12646,14 @@
                       {
                         "type": "reflection",
                         "declaration": {
-                          "id": 549,
+                          "id": 554,
                           "name": "__type",
                           "variant": "declaration",
                           "kind": 65536,
                           "flags": {},
                           "children": [
                             {
-                              "id": 550,
+                              "id": 555,
                               "name": "query",
                               "variant": "declaration",
                               "kind": 1024,
@@ -12712,7 +12666,7 @@
                                 "typeArguments": [
                                   {
                                     "type": "reference",
-                                    "target": 545,
+                                    "target": 550,
                                     "name": "Row",
                                     "package": "@neon/realtime-tanstack",
                                     "refersToTypeParameter": true
@@ -12727,7 +12681,7 @@
                             {
                               "title": "Properties",
                               "children": [
-                                550
+                                555
                               ]
                             }
                           ]
@@ -12739,25 +12693,25 @@
               ],
               "type": {
                 "type": "reference",
-                "target": 530,
+                "target": 535,
                 "typeArguments": [
                   {
                     "type": "reference",
-                    "target": 545,
+                    "target": 550,
                     "name": "Row",
                     "package": "@neon/realtime-tanstack",
                     "refersToTypeParameter": true
                   },
                   {
                     "type": "reference",
-                    "target": 546,
+                    "target": 551,
                     "name": "Key",
                     "package": "@neon/realtime-tanstack",
                     "refersToTypeParameter": true
                   },
                   {
                     "type": "reference",
-                    "target": 547,
+                    "target": 552,
                     "name": "Schema",
                     "package": "@neon/realtime-tanstack",
                     "refersToTypeParameter": true
@@ -12774,20 +12728,20 @@
         {
           "title": "Interfaces",
           "children": [
-            502,
-            536
+            507,
+            541
           ]
         },
         {
           "title": "Type Aliases",
           "children": [
-            530
+            535
           ]
         },
         {
           "title": "Functions",
           "children": [
-            543
+            548
           ]
         }
       ]

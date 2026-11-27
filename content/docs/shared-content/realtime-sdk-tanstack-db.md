@@ -43,7 +43,7 @@ or values and are ignored. Use core materialized subscriptions for server order.
 ### RealtimeCollectionConfig (#tanstack-db-realtimecollectionconfig)
 
 ```ts
-interface RealtimeCollectionConfig<Row extends object, Key extends string | number = string | number, Schema extends StandardSchemaV1 = never> extends Omit<BaseCollectionConfig<Row, Key, Schema, RealtimeCollectionUtils, void>, "syncMode" | "utils">
+interface RealtimeCollectionConfig<Row extends object, Key extends string | number = string | number, Schema extends StandardSchemaV1 = never> extends Omit<BaseCollectionConfig<Row, Key, Schema, RealtimeCollectionUtils>, "syncMode" | "utils">
 ```
 
 Configuration for a Realtime-backed TanStack DB collection.
@@ -53,23 +53,23 @@ collection utilities.
 
 #### Members (#tanstack-db-realtimecollectionconfig-members)
 
-| Name                                                                         | Type                                                        | Description                                                                                                                                                                                                                                                                                                                                                                                                            |
-| ---------------------------------------------------------------------------- | ----------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [`autoIndex?`](#tanstack-db-realtimecollectionconfigautoindex)               | `"off" \| "eager"`                                          | Auto-indexing mode for the collection. When enabled, indexes will be automatically created for simple where expressions.                                                                                                                                                                                                                                                                                               |
-| `client`                                                                     | `readonly RealtimeClient`                                   | Reusable low-level Realtime client.                                                                                                                                                                                                                                                                                                                                                                                    |
-| [`compare?`](#tanstack-db-realtimecollectionconfigcompare)                   | `(x: Row, y: Row) => number`                                | Optional function to compare two items. This is used to order the items in the collection.                                                                                                                                                                                                                                                                                                                             |
-| [`defaultIndexType?`](#tanstack-db-realtimecollectionconfigdefaultindextype) | `IndexConstructor<Key>`                                     | Default index type to use when creating indexes without an explicit type. Required for auto-indexing. Import from '@tanstack/db'.                                                                                                                                                                                                                                                                                      |
-| `defaultStringCollation?`                                                    | `StringCollationConfig`                                     | Specifies how to compare data in the collection. This should be configured to match data ordering on the backend. E.g., when using the Electric DB collection these options should match the database's collation settings.                                                                                                                                                                                            |
-| `gcTime?`                                                                    | `number`                                                    | Time in milliseconds after which the collection will be garbage collected when it has no active subscribers. Defaults to 5 minutes (300000ms).                                                                                                                                                                                                                                                                         |
-| `getKey`                                                                     | `readonly (row: Row) => Key`                                | Derive the stable unique TanStack DB key for a row.                                                                                                                                                                                                                                                                                                                                                                    |
-| `id?`                                                                        | `string`                                                    |                                                                                                                                                                                                                                                                                                                                                                                                                        |
-| [`onDelete?`](#tanstack-db-realtimecollectionconfigondelete)                 | `DeleteMutationFn<Row, Key, RealtimeCollectionUtils, void>` | Optional asynchronous handler function called before a delete operation                                                                                                                                                                                                                                                                                                                                                |
-| [`onInsert?`](#tanstack-db-realtimecollectionconfigoninsert)                 | `InsertMutationFn<Row, Key, RealtimeCollectionUtils, void>` | Optional asynchronous handler function called before an insert operation                                                                                                                                                                                                                                                                                                                                               |
-| [`onUpdate?`](#tanstack-db-realtimecollectionconfigonupdate)                 | `UpdateMutationFn<Row, Key, RealtimeCollectionUtils, void>` | Optional asynchronous handler function called before an update operation                                                                                                                                                                                                                                                                                                                                               |
-| `query`                                                                      | `readonly SealedLiveQuery<Row>`                             | Initial query for the exact query backing this collection.                                                                                                                                                                                                                                                                                                                                                             |
-| `refreshQuery?`                                                              | `readonly () => Promise<SealedLiveQuery<Row>>`              | Obtain a replacement capability for the same exact query before expiry. Transient failures are retried while the current capability remains valid.                                                                                                                                                                                                                                                                     |
-| `schema?`                                                                    | `Schema`                                                    |                                                                                                                                                                                                                                                                                                                                                                                                                        |
-| [`startSync?`](#tanstack-db-realtimecollectionconfigstartsync)               | `boolean`                                                   | Whether to eagerly start syncing on collection creation. When true, syncing begins immediately. When false, syncing starts when the first subscriber attaches. Note: Even with startSync=true, collections will pause syncing when there are no active subscribers (typically when components querying the collection unmount), resuming when new subscribers attach. This preserves normal staleTime/gcTime behavior. |
+| Name                                                                         | Type                                                  | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
+| ---------------------------------------------------------------------------- | ----------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [`autoIndex?`](#tanstack-db-realtimecollectionconfigautoindex)               | `"off" \| "eager"`                                    | Auto-indexing mode for the collection. When enabled, indexes will be automatically created for simple where expressions.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
+| `client`                                                                     | `readonly RealtimeClient`                             | Reusable low-level Realtime client.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
+| [`compare?`](#tanstack-db-realtimecollectionconfigcompare)                   | `(x: Row, y: Row) => number`                          | Optional function to compare two items. This is used to order the items in the collection.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
+| [`defaultIndexType?`](#tanstack-db-realtimecollectionconfigdefaultindextype) | `IndexConstructor<Key>`                               | Default index type to use when creating indexes without an explicit type. Required for auto-indexing. Import from '@tanstack/db'.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+| `defaultStringCollation?`                                                    | `StringCollationConfig`                               | Specifies how to compare data in the collection. This should be configured to match data ordering on the backend. E.g., when using the Electric DB collection these options should match the database's collation settings.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
+| `gcTime?`                                                                    | `number`                                              | Time in milliseconds after which the collection will be garbage collected when it has no active subscribers. Defaults to 5 minutes (300000ms). Sync started without subscribers gets a minimum 50ms handoff grace period until a subscriber attaches. After the last subscriber leaves, gcTime applies without that startup minimum. Pending preloads retain the collection until they settle. Preloading ready data refreshes the retention period. A persisting transaction that touches the collection also retains it, and the period starts again when the last one completes or fails, preserving any remaining startup grace. Pending manual transactions do not retain it; keep a subscription for draft visibility until commit or rollback. Rolling back a manual transaction that stayed pending preserves the existing GC deadline. Cleanup runs at a host idle opportunity after the delay. A non-positive or non-finite value disables automatic garbage collection. |
+| `getKey`                                                                     | `readonly (row: Row) => Key`                          | Derive the stable unique TanStack DB key for a row.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
+| `id?`                                                                        | `string`                                              |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
+| [`onDelete?`](#tanstack-db-realtimecollectionconfigondelete)                 | `DeleteMutationFn<Row, Key, RealtimeCollectionUtils>` | Optional asynchronous handler function called before a delete operation                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
+| [`onInsert?`](#tanstack-db-realtimecollectionconfigoninsert)                 | `InsertMutationFn<Row, Key, RealtimeCollectionUtils>` | Optional asynchronous handler function called before an insert operation                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
+| [`onUpdate?`](#tanstack-db-realtimecollectionconfigonupdate)                 | `UpdateMutationFn<Row, Key, RealtimeCollectionUtils>` | Optional asynchronous handler function called before an update operation                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
+| `query`                                                                      | `readonly SealedLiveQuery<Row>`                       | Initial query for the exact query backing this collection.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
+| `refreshQuery?`                                                              | `readonly () => Promise<SealedLiveQuery<Row>>`        | Obtain a replacement capability for the same exact query before expiry. Transient failures are retried while the current capability remains valid. A collection that restarts or reloads subscribes with the newest capability this returned, and calls it straight away if that one has expired.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+| `schema?`                                                                    | `Schema`                                              |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
+| [`startSync?`](#tanstack-db-realtimecollectionconfigstartsync)               | `boolean`                                             | Whether to eagerly start syncing on collection creation. When true, syncing begins immediately. When false, syncing starts when the first subscriber attaches. Note: Even with startSync=true, collections will pause syncing when there are no active subscribers (typically when components querying the collection unmount), resuming when new subscribers attach. This preserves normal staleTime/gcTime behavior.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
 
 #### RealtimeCollectionConfig.autoIndex (#tanstack-db-realtimecollectionconfigautoindex)
 
@@ -129,14 +129,10 @@ const collection = createCollection({
 #### RealtimeCollectionConfig.onDelete (#tanstack-db-realtimecollectionconfigondelete)
 
 ```ts
-onDelete?: DeleteMutationFn<Row, Key, RealtimeCollectionUtils, void>
+onDelete?: DeleteMutationFn<Row, Key, RealtimeCollectionUtils>
 ```
 
 Optional asynchronous handler function called before a delete operation
-
-**Parameter `params`:** Object containing transaction and collection information
-
-**Returns:** Promise resolving to any value
 
 **Example**
 
@@ -151,10 +147,24 @@ onDelete: async ({ transaction, collection }) => {
 **Example**
 
 ```ts
-// Delete handler with multiple items
+// Delete handler with refetch (Query Collection)
 onDelete: async ({ transaction, collection }) => {
   const keysToDelete = transaction.mutations.map(m => m.key)
   await api.deleteTodos(keysToDelete)
+  // Trigger refetch to sync server state
+  await collection.utils.refetch()
+}
+```
+
+**Example**
+
+```ts
+// Delete handler with sync wait (Electric Collection)
+onDelete: async ({ transaction, collection }) => {
+  const mutation = transaction.mutations[0]
+  const result = await api.deleteTodo(mutation.original.id)
+  // Wait for txid to sync
+  await collection.utils.awaitTxId(result.txid)
 }
 ```
 
@@ -191,14 +201,10 @@ onDelete: async ({ transaction, collection }) => {
 #### RealtimeCollectionConfig.onInsert (#tanstack-db-realtimecollectionconfigoninsert)
 
 ```ts
-onInsert?: InsertMutationFn<Row, Key, RealtimeCollectionUtils, void>
+onInsert?: InsertMutationFn<Row, Key, RealtimeCollectionUtils>
 ```
 
 Optional asynchronous handler function called before an insert operation
-
-**Parameter `params`:** Object containing transaction and collection information
-
-**Returns:** Promise resolving to any value
 
 **Example**
 
@@ -213,10 +219,36 @@ onInsert: async ({ transaction, collection }) => {
 **Example**
 
 ```ts
+// Insert handler with refetch (Query Collection)
+onInsert: async ({ transaction, collection }) => {
+  const newItem = transaction.mutations[0].modified
+  await api.createTodo(newItem)
+  // Trigger refetch to sync server state
+  await collection.utils.refetch()
+}
+```
+
+**Example**
+
+```ts
+// Insert handler with sync wait (Electric Collection)
+onInsert: async ({ transaction, collection }) => {
+  const newItem = transaction.mutations[0].modified
+  const result = await api.createTodo(newItem)
+  // Wait for txid to sync
+  await collection.utils.awaitTxId(result.txid)
+}
+```
+
+**Example**
+
+```ts
 // Insert handler with multiple items
 onInsert: async ({ transaction, collection }) => {
   const items = transaction.mutations.map(m => m.modified)
   await api.createTodos(items)
+  // Refetch to get updated data from server
+  await collection.utils.refetch()
 }
 ```
 
@@ -227,39 +259,21 @@ onInsert: async ({ transaction, collection }) => {
 onInsert: async ({ transaction, collection }) => {
   try {
     const newItem = transaction.mutations[0].modified
-    const result = await api.createTodo(newItem)
-    return result
+    await api.createTodo(newItem)
   } catch (error) {
     console.error('Insert failed:', error)
-    throw error // This will cause the transaction to fail
+    throw error // This will cause the transaction to rollback
   }
-}
-```
-
-**Example**
-
-```ts
-// Insert handler with metadata
-onInsert: async ({ transaction, collection }) => {
-  const mutation = transaction.mutations[0]
-  await api.createTodo(mutation.modified, {
-    source: mutation.metadata?.source,
-    timestamp: mutation.createdAt
-  })
 }
 ```
 
 #### RealtimeCollectionConfig.onUpdate (#tanstack-db-realtimecollectionconfigonupdate)
 
 ```ts
-onUpdate?: UpdateMutationFn<Row, Key, RealtimeCollectionUtils, void>
+onUpdate?: UpdateMutationFn<Row, Key, RealtimeCollectionUtils>
 ```
 
 Optional asynchronous handler function called before an update operation
-
-**Parameter `params`:** Object containing transaction and collection information
-
-**Returns:** Promise resolving to any value
 
 **Example**
 
@@ -274,11 +288,25 @@ onUpdate: async ({ transaction, collection }) => {
 **Example**
 
 ```ts
-// Update handler with partial updates
+// Update handler with refetch (Query Collection)
 onUpdate: async ({ transaction, collection }) => {
   const mutation = transaction.mutations[0]
   const changes = mutation.changes // Only the changed fields
   await api.updateTodo(mutation.original.id, changes)
+  // Trigger refetch to sync server state
+  await collection.utils.refetch()
+}
+```
+
+**Example**
+
+```ts
+// Update handler with sync wait (Electric Collection)
+onUpdate: async ({ transaction, collection }) => {
+  const mutation = transaction.mutations[0]
+  const result = await api.updateTodo(mutation.original.id, mutation.changes)
+  // Wait for txid to sync
+  await collection.utils.awaitTxId(result.txid)
 }
 ```
 
@@ -292,6 +320,7 @@ onUpdate: async ({ transaction, collection }) => {
     changes: m.changes
   }))
   await api.updateTodos(updates)
+  await collection.utils.refetch()
 }
 ```
 
@@ -357,14 +386,20 @@ Covered row changes enter TanStack DB's causal sync queue before this resolves.
 **Remarks:** This does not determine whether a transaction committed, so pass only IDs
 from transactions known to have committed.
 
-**Throws:** If a supplied timeout elapses or the collection is cleaned up.
+Before the collection starts syncing, this waits for it to start. It does
+not start synchronization itself. Cleanup before synchronization starts
+has no active run to cancel, so the wait continues into the next run.
+
+**Throws:** If the transaction ID or timeout is invalid, a supplied timeout
+elapses, synchronization stops terminally, or an active synchronization
+run is cleaned up.
 
 **Parameters**
 
-| Name       | Type     | Description                                                                                                                                   |
-| ---------- | -------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
-| `txid`     | `string` | PostgreSQL transaction ID as a decimal string.                                                                                                |
-| `timeout?` | `number` | Optional maximum wait in milliseconds. By default, the promise remains pending until the transaction arrives or the collection is cleaned up. |
+| Name       | Type     | Description                                                                                                                                                                                                                                      |
+| ---------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `txid`     | `string` | PostgreSQL transaction ID as a decimal string.                                                                                                                                                                                                   |
+| `timeout?` | `number` | Optional maximum wait in milliseconds, including any wait for synchronization to start. By default, the promise remains pending until the transaction arrives, synchronization stops terminally, or an active synchronization run is cleaned up. |
 
 ### RealtimeCollectionOptions (#tanstack-db-realtimecollectionoptions-2)
 

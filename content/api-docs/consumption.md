@@ -5,7 +5,7 @@ The Consumption API returns usage metrics (compute hours, storage, and data tran
 Metrics are available at three levels:
 
 - **Account**: usage across all projects you own.
-- **Organization**: usage across an organization's projects. See [Organization consumption](/docs/manage/orgs-api-consumption).
+- **Organization**: usage across an organization's projects. See [Query consumption metrics](/docs/guides/consumption-metrics).
 - **Project**: per-project metrics on usage-based plans.
 
 > **Note:** Two sets of consumption endpoints exist. `GET /consumption_history/v2/projects` returns usage-based billing metrics (Launch, Scale, Agent, Enterprise plans). `GET /consumption_history/projects` covers legacy plan metrics. See [Query consumption metrics](/docs/guides/consumption-metrics) for endpoint details and when to use each.

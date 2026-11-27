@@ -51,7 +51,11 @@ const renderModelTableRows = (rows) =>
         escapeTableCell(row.releaseLabel),
         row.reasoning ? 'Yes' : '—',
         escapeTableCell(row.costInputLabel),
-        escapeTableCell(row.costOutputLabel),
+        escapeTableCell(
+          row.costOutputImageLabel
+            ? `${row.costOutputLabel} (image ${row.costOutputImageLabel})`
+            : row.costOutputLabel
+        ),
         escapeTableCell(row.endpoints.join(' · ') || '—'),
         row.openWeights ? 'Open weights' : '—',
       ].join(' | ')

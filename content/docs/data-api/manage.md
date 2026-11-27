@@ -8,7 +8,7 @@ summary: >-
   page to switch auth providers, tighten security, or manage the API lifecycle
   programmatically via the Neon REST API.
 enableTableOfContents: true
-updatedOn: '2026-11-13T16:11:35.000Z'
+updatedOn: '2026-11-24T22:51:03.746Z'
 ---
 
 <InfoBlock>
@@ -209,7 +209,7 @@ The empty body enables the Data API without an authentication provider. To confi
 
 Optional fields in the enable request body:
 
-- **`add_default_grants`** (boolean, default `false`): When `true`, grants all permissions on tables in the `public` schema to authenticated users.
+- **`add_default_grants`** (boolean, default `false`): When `true`, grants the `authenticated` role `SELECT`, `INSERT`, `UPDATE`, and `DELETE` on tables in the `public` schema, including tables the database owner creates later. The `anonymous` role gets no grants. Without it, the Data API can't read any table until you grant access yourself.
 - **`settings`**: Include a [settings object](#update-configuration) to configure the Data API in a single request instead of making a separate PATCH call.
 
 ### Get Data API details
