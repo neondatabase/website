@@ -27,13 +27,19 @@ pnpm add -g neon@latest    # pnpm
 
 For full CLI installation options, see https://neon.com/docs/cli/install.md
 
-Immediately after the CLI is installed, launch the sign-in flow by running `neon login` (`neon auth` is an alias) and have the user finish signing in via the browser to ensure the CLI is authenticated.
+Then check whether the CLI is signed in:
+
+```bash
+neon me
+```
+
+If it fails, follow what it prints. Choose `neon login` only when the user is at this machine to finish the browser sign-in. Otherwise, if it offers `neon claim create` and the user's prompt has no project ID, follow the "Claimable Neon project" section below.
 
 ---
 
 ## Run `neon init` to connect your app to Neon, and install Neon skills and the MCP server
 
-`neon init` can create a new Neon project and connect your app to it, or connect your app to an existing Neon project. If the user's prompt includes a project ID and an organization ID, follow the instructions in the "Existing Neon project" section. Otherwise, follow the instructions in the "New Neon project" section.
+`neon init` can create a new Neon project and connect your app to it, or connect your app to an existing Neon project. If the sign-in step sent you to "Claimable Neon project", follow only that section. Otherwise, if the user's prompt includes a project ID and an organization ID, follow the instructions in the "Existing Neon project" section. Otherwise, follow the instructions in the "New Neon project" section.
 
 ### Existing Neon project
 
@@ -120,3 +126,15 @@ Neon Setup Complete
 
 And give them the link to view their new project in the Neon Console. Get `<project-id>` from the `neon init` output or the `.neon` file:
 https://console.neon.tech/app/projects/<project-id>/
+
+### Claimable Neon project
+
+Run these commands in the root directory of the user's source-code repo, using the name of the repo's directory for `<project-name>`:
+
+```bash
+neon config init --services postgres
+neon claim create --project-name <project-name>
+neon skills -y --agent <agent-name>
+```
+
+Tell the user when the project expires. To keep it, run `neon claim accept --no-open` and give them the `Verification URL` it prints.
