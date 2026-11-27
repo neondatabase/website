@@ -8,7 +8,7 @@ summary: >-
 enableTableOfContents: true
 redirectFrom:
   - /docs/ai/mcp
-updatedOn: '2026-11-25T05:19:14.187Z'
+updatedOn: '2026-11-27T09:52:44.407Z'
 ---
 
 The Neon MCP Server implements the Model Context Protocol (MCP), letting AI assistants interact with your Neon projects on your behalf. Your AI agent can interact with Neon via MCP tools or by running [Neon CLI](/docs/cli) commands directly.
@@ -86,6 +86,8 @@ https://mcp.neon.tech/mcp?readonly=true
 
 `SELECT` queries and schema inspection remain available. Write operations (creating branches, running migrations, modifying auth config) are disabled. `run_sql_transaction`, `get_connection_string`, and `call_api` aren't available in read-only mode; use `run_sql` for read queries.
 
+`run_sql` and `explain_sql_statement` keep their `destructiveHint: true` annotation in read-only mode, so a client that prompts on that hint still asks before running them.
+
 With OAuth, you can also choose read-only scope during the authorization flow instead of using the URL parameter.
 
 ### Project-scoped mode
@@ -97,6 +99,8 @@ https://mcp.neon.tech/mcp?projectId=<your-project-id>
 ```
 
 Cross-project search and navigation are disabled in this mode, and project management tools such as `list_projects` and `create_project` are hidden.
+
+Project scoping limits what the agent can reach, but it hides only a few tools. To also shorten the tool list, combine it with [category filtering](#category-filtering).
 
 ### Category filtering
 
@@ -111,6 +115,19 @@ See [Available tools](#available-tools) for the full category list. To verify wh
 ```bash
 curl "https://mcp.neon.tech/api/list-tools?readonly=true&category=querying"
 ```
+
+Category filtering also saves context. Each tool the server exposes adds its name, description, and input and output schemas to your agent's context, and with every category enabled the server exposes well over a hundred tools. That leaves less room for your conversation and code, and gives the agent more tools to choose between. Enable only the categories your work needs:
+
+| Task                                  | Categories                          |
+| ------------------------------------- | ----------------------------------- |
+| Write and run SQL, inspect the schema | `querying`, `schema`                |
+| Develop on branches                   | `branches`, `endpoints`, `querying` |
+| Set up Neon Auth                      | `neon_auth`                         |
+| Look up Neon docs                     | `docs`                              |
+
+The `docs` category also includes `list_incidents` and `send_feedback`.
+
+`neon_auth` has the most tools, so leave it out unless you're working on authentication. Some clients load tool definitions only when the agent needs them. Filtering matters most for clients that load every tool at startup.
 
 ### SQL results
 
@@ -170,7 +187,13 @@ We recommend MCP for **development and testing only**, not production environmen
 - Always review and authorize LLM-requested actions before execution
 - Restrict MCP access to trusted users and regularly audit access
 
-To limit what an agent can do, combine [read-only mode](#read-only-mode), a [Postgres role](#postgres-role) with limited grants, [category filtering](#category-filtering), and [`secrets=none`](#secrets-in-tool-results).
+To limit what an agent can do, combine [read-only mode](#read-only-mode), [project-scoped mode](#project-scoped-mode), a [Postgres role](#postgres-role) with limited grants, [category filtering](#category-filtering), and [`secrets=none`](#secrets-in-tool-results) if the agent needs write access.
+
+### Agents that call tools from code
+
+Some setups don't show you each tool call. An MCP gateway that puts several servers behind one endpoint, or a client that lets the model write code that calls tools (sometimes called code mode or programmatic tool calling), can run many Neon tools in a single step. Approval prompts based on tool annotations such as `destructiveHint` may never appear.
+
+In these setups, limit the connection itself instead of relying on approvals. Use the combination listed in [MCP security guidance](#mcp-security-guidance). In read-only mode, SQL runs in a `READ ONLY` transaction, so Postgres rejects writes even if a script attempts them. Neon applies these limits on the server, so they hold no matter which client or gateway sends the request.
 
 ### Check the authorization page
 
@@ -195,6 +218,15 @@ If [IP Allow](/docs/introduction/ip-allow) is enabled on your project, add these
 When you ask why a branch is slow, large, or behind, the MCP server can run `inspect_database` instead of inventing catalog SQL. It exposes the same 15 read-only checks as [`neon inspect db`](/docs/cli/inspect): table and index sizes, unused indexes, sequential scans, long-running and stalled queries and locks, heavy and frequent statements, cache hit rate and working set, autovacuum and bloat, and replication state. The `stalled-queries` check reports active queries running longer than 30 seconds, with their waits, blockers, parallel workers, query IDs, and query text.
 
 Pick a check with the `check` parameter (for example `table-sizes` or `unused-indexes`). The tool runs inside a read-only transaction, so it works with [`?readonly=true`](#read-only-mode). It belongs to the `querying` category, not `observability`. Some checks need [`pg_stat_statements`](/docs/extensions/pg_stat_statements) or the [`neon`](/docs/extensions/neon) extension; the tool reports that and asks before suggesting installation.
+
+## Questions that span many projects
+
+Each tool call returns its full result to the agent. A question like "which branches across all my projects haven't changed in 30 days?" takes one call per project, and every response lands in the agent's context, even when the answer is a short list.
+
+For questions like this, ask the agent to write a short script instead. The script does the looping and filtering, and the agent reads only the answer:
+
+- With the [Neon Management SDK](/docs/reference/typescript-sdk#scripts-that-span-many-resources), a few lines of TypeScript cover every project and branch.
+- With the [`neon api`](/docs/cli/api#list-and-describe-endpoints) command, an agent with a shell can find any Neon API route, read its fields, and call it, including routes that aren't MCP tools.
 
 <MCPTools />
 

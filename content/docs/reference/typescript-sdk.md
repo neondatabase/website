@@ -10,7 +10,7 @@ summary: >-
   automatic retries, readiness polling, and auto-pagination built in. A raw
   1:1 layer exposes every endpoint and is generated from the Neon OpenAPI spec.
 enableTableOfContents: true
-updatedOn: '2026-11-18T13:58:28.424Z'
+updatedOn: '2026-11-23T12:21:23.032Z'
 ---
 
 <InfoBlock>
@@ -174,6 +174,35 @@ const { connectionString } = data;
 ```
 
 On any other namespaced mutation, pass `{ waitForReadiness: true }` as the trailing options argument to poll before the call resolves. For raw API calls that return an `operations` array, use [`neon.operations.waitFor`](#neonoperations) instead.
+
+## Scripts that span many resources
+
+[Paginated lists](#lazy-auto-paginated-lists) make it easy to answer questions across your whole organization. This script prints the non-default branches that haven't been updated in 30 days:
+
+```ts
+import { createNeonClient } from "@neon/sdk";
+
+const neon = createNeonClient({
+  apiKey: process.env.NEON_API_KEY!,
+  orgId: process.env.NEON_ORG_ID,
+  throwOnError: true,
+});
+
+const cutoff = Date.now() - 30 * 24 * 60 * 60 * 1000;
+const stale = [];
+
+for await (const project of neon.projects.list()) {
+  for await (const branch of neon.branches.list({ projectId: project.id })) {
+    if (!branch.default && Date.parse(branch.updated_at) < cutoff) {
+      stale.push({ project: project.name, branch: branch.name, updated_at: branch.updated_at });
+    }
+  }
+}
+
+console.log(JSON.stringify(stale, null, 2));
+```
+
+This is also a good pattern for AI agents. Instead of calling an [MCP tool](/docs/ai/neon-mcp-server) once per project and reading every response, the agent runs a script like this one and reads only its output.
 
 ## Namespaces
 
