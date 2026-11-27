@@ -10,7 +10,7 @@ summary: >-
   automatic retries, readiness polling, and auto-pagination built in. A raw
   1:1 layer exposes every endpoint and is generated from the Neon OpenAPI spec.
 enableTableOfContents: true
-updatedOn: '2026-11-18T13:58:28.424Z'
+updatedOn: '2026-11-27T09:42:51.264Z'
 ---
 
 <InfoBlock>
@@ -582,6 +582,45 @@ await neon.storage.objects.presign({
 The `{ pooled }` option on `projects.createAndConnect` and `branches.createAndConnect`, and the `operations` argument to `operations.waitFor`, also move into the params object. `postgres.connectionString` and the `consumption.*` methods were already object-shaped and are unchanged.
 
 v6 is the current major. It extends the triggers surface (`storage_object_created` alongside `schedule`) and does not change the named-parameter shape introduced in v5.
+
+## neon.request
+
+`neon.request` calls any Neon API route with the client's auth, deadline, retries, and typed errors. Use it for a route that no namespace on this page wraps, or when you only know the route at runtime. It never polls operations, so it returns as soon as the API responds.
+
+| Method                                     | Returns                                                                                            |
+| ------------------------------------------ | -------------------------------------------------------------------------------------------------- |
+| `request({ method, path, query?, body? })` | The response body as `data`: parsed JSON, the text of a non-JSON body, or `null` for an empty body |
+
+`method` is `GET`, `POST`, `PUT`, `PATCH`, or `DELETE`. `path` is relative to `baseUrl`, with every `{placeholder}` replaced by a real value. Put query parameters in `query`, and `body` is sent as JSON. The SDK refuses a path that keeps a placeholder, contains `?` or `#`, or has an empty, `.`, `..`, or encoded-slash segment. A refused path produces a `NeonClientError` before any request goes out. Errors follow the client's `throwOnError` setting.
+
+```ts
+const { data, error } = await neon.request({
+  method: "GET",
+  path: "/projects/cool-forest-12345678",
+});
+```
+
+The `parseApiPath(path)` export applies the same path check and returns the decoded segments, for callers that add their own rules.
+
+### @neon/sdk/openapi
+
+The `@neon/sdk/openapi` subpath works with the released Neon OpenAPI spec as data. Use it to find a route and check its fields before you send it with `neon.request`. The [`neon api`](/docs/cli/api) command uses the same functions for `--list` and `--describe`.
+
+| Export                                        | Returns                                                                                                                                                           |
+| --------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `fetchOpenApiSpec({ url?, fetch?, signal? })` | The spec from `https://neon.com/api_spec/release/v2.json` by default. Throws on a network error, a 10-second timeout, a non-2xx status, or a body without `paths` |
+| `listEndpoints(spec)`                         | Every route as `{ method, path, summary, operationId, tags }`, sorted by path and then method                                                                     |
+| `searchEndpoints(spec, query, { limit? })`    | Matching routes, best match first. `limit` defaults to 10                                                                                                         |
+| `describeEndpoint(spec, path, method)`        | The route's path, query, header, and body fields. Body fields use dotted names, such as `branch.name`. Throws `EndpointNotFoundError` when no route matches       |
+
+```ts
+import { describeEndpoint, fetchOpenApiSpec } from "@neon/sdk/openapi";
+
+const spec = await fetchOpenApiSpec();
+const { fields } = describeEndpoint(spec, "/projects/cool-forest-12345678/branches", "POST");
+```
+
+A concrete path such as `/projects/cool-forest-12345678/branches` matches the spec's `{project_id}` template.
 
 ## Raw layer
 
