@@ -51,6 +51,14 @@ The supported agents are antigravity, cline, cline-cli, claude-code, claude-desk
 
 An agent that can't install skills is skipped with a warning. Agents that share a target collapse into one: Claude Desktop and Claude Code both write to claude-code, and VS Code and the GitHub Copilot CLI both write to github-copilot.
 
+`neon init` links the project's default branch, which is usually production, and writes that branch's credentials to the app's env file. If the user asks for a separate environment, such as test, development, or preview, create a branch for it right after `neon init`, before any other Neon command:
+
+```bash
+neon checkout <branch-name> --create
+```
+
+Use the branch name the user gives, or a short descriptive one such as `test`. The command creates the branch with the settings in `neon.ts`, pins it in `.neon`, and replaces the default branch's credentials in the app's env file with the new branch's, so `neon deploy` and the app use the new branch. A name that already exists is checked out without creating anything. The default `neon.ts` that `neon init` writes makes new branches expire after 7 days; the `neon checkout` output shows the date. Neon MCP tools use the default branch unless you pass a branch ID, so pass the new branch's ID from the `neon checkout` output to every MCP tool call for this work.
+
 Once done, tell the user:
 
 ```text
@@ -63,6 +71,8 @@ Neon Setup Complete
 
 ⚡ Restart your agent to load the MCP server
 ```
+
+If you created or checked out a separate branch, add `✓ Branch <branch-name> checked out` after the project line, and tell the user the date the branch expires, if it has one.
 
 And give them the link to view their linked project in the Neon Console:
 https://console.neon.tech/app/projects/<project-id>/
