@@ -172,6 +172,20 @@
           "describe": "Services to declare in neon.ts: postgres, auth, data-api, functions, object-storage, ai-gateway, realtime. Repeat the flag or comma-separate. postgres alone writes the starter policy; every branch has Postgres. Implies creating neon.ts. Cannot be combined with --no-config."
         }
       }
+    },
+    "logs": {
+      "commands": {
+        "query": {
+          "options": {
+            "source": { "choices": ["function", "storage", "pg_endpoint", "neon_auth", "functions"] }
+          }
+        },
+        "field-values": {
+          "options": {
+            "source": { "choices": ["function", "storage", "pg_endpoint", "neon_auth", "functions"] }
+          }
+        }
+      }
     }
   }
 }

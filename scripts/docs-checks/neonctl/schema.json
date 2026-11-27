@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "neonctlVersion": "9.9.6",
+  "neonctlVersion": "9.10.0",
   "binaries": [
     "neonctl",
     "neon"
@@ -123,8 +123,8 @@
         },
         "spec-url": {
           "type": "string",
-          "describe": "OpenAPI spec URL used by --list and --describe.",
-          "defaultText": "process.env.NEON_API_SPEC_URL ?? DEFAULT_SPEC_URL",
+          "describe": "OpenAPI spec URL used by --list and --describe. Defaults to the released spec on neon.com.",
+          "defaultText": "process.env.NEON_API_SPEC_URL",
           "hidden": true
         }
       },
@@ -288,8 +288,7 @@
         },
         "install": {
           "type": "boolean",
-          "describe": "Install dependencies after scaffolding. In interactive mode this is offered as a prompt; use --no-install to skip without being asked.",
-          "default": true
+          "describe": "Install dependencies after scaffolding. In interactive mode this is offered as a prompt; use --no-install to skip without being asked. Without a terminal, --install or --default installs."
         },
         "link": {
           "type": "boolean",
@@ -1281,6 +1280,11 @@
               "describe": "Override branch settings that differ from neon.ts without asking",
               "default": false
             },
+            "wait": {
+              "type": "boolean",
+              "describe": "Wait for Function builds to finish. Use --no-wait to return once each deployment is accepted",
+              "default": true
+            },
             "yes": {
               "type": "boolean",
               "describe": "Answer yes to every confirmation: --update-existing and --allow-protected",
@@ -1817,6 +1821,11 @@
           "describe": "Override branch settings that differ from neon.ts without asking",
           "default": false
         },
+        "wait": {
+          "type": "boolean",
+          "describe": "Wait for Function builds to finish. Use --no-wait to return once each deployment is accepted",
+          "default": true
+        },
         "yes": {
           "type": "boolean",
           "describe": "Answer yes to every confirmation: --update-existing and --allow-protected",
@@ -2011,6 +2020,10 @@
               "type": "string",
               "describe": "Target .env file to write, relative to cwd. Defaults to an existing .env, otherwise .env.local, in the project directory (next to .neon, or cwd without one). Only Neon variables are updated; other lines are preserved."
             },
+            "role-name": {
+              "type": "string",
+              "describe": "Role for DATABASE_URL and DATABASE_URL_UNPOOLED. Defaults to the only role, else neondb_owner, else the only role besides the Data API and Neon Auth roles"
+            },
             "service": {
               "type": "array",
               "describe": "Pull only these services' variables: postgres, auth, data-api, functions, object-storage, ai-gateway, realtime. Repeat the flag or comma-separate. Overrides neon.ts, and prunes only within the services you name. Combines with --env as a union.",
@@ -2046,6 +2059,10 @@
             {
               "command": "$0 env pull -s functions",
               "description": "Pull NEON_BRANCH_ID and NEON_FUNCTION_HOST_SUFFIX, which functionBaseUrl(\"<slug>\") from @neon/env reads"
+            },
+            {
+              "command": "$0 env pull --role-name app_owner",
+              "description": "Connect DATABASE_URL as app_owner on a branch with several roles"
             }
           ],
           "usage": "$0 env pull [options]"
@@ -2983,7 +3000,8 @@
                 "function",
                 "storage",
                 "pg_endpoint",
-                "neon_auth"
+                "neon_auth",
+                "functions"
               ]
             },
             "start-time": {
@@ -3090,7 +3108,8 @@
           "options": {
             "body-contains": {
               "type": "string",
-              "describe": "Match the case-sensitive rendered message. Structured bodies are rendered as compact JSON."
+              "describe": "Match the case-sensitive rendered message. Structured bodies are rendered as compact JSON.",
+              "alias": "search"
             },
             "cursor": {
               "type": "string",
@@ -3152,7 +3171,8 @@
                 "function",
                 "storage",
                 "pg_endpoint",
-                "neon_auth"
+                "neon_auth",
+                "functions"
               ]
             },
             "start-time": {
@@ -3427,6 +3447,40 @@
               },
               "describe": "Manage email provider configuration",
               "usage": "$0 neon-auth config email-provider <sub-command> [options]"
+            },
+            "logs-export": {
+              "name": "logs-export",
+              "aliases": [],
+              "positionals": [],
+              "options": {},
+              "commands": {
+                "disable": {
+                  "name": "disable",
+                  "aliases": [],
+                  "positionals": [],
+                  "options": {},
+                  "commands": {},
+                  "describe": "Stop exporting Neon Auth events to Neon logs"
+                },
+                "enable": {
+                  "name": "enable",
+                  "aliases": [],
+                  "positionals": [],
+                  "options": {},
+                  "commands": {},
+                  "describe": "Export Neon Auth events to Neon logs"
+                },
+                "get": {
+                  "name": "get",
+                  "aliases": [],
+                  "positionals": [],
+                  "options": {},
+                  "commands": {},
+                  "describe": "Get the logs export setting"
+                }
+              },
+              "describe": "Manage export of Neon Auth events to Neon logs (beta)",
+              "usage": "$0 neon-auth config logs-export <sub-command> [options]"
             },
             "oauth-server": {
               "name": "oauth-server",
