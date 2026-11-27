@@ -7,7 +7,7 @@ summary: >-
   a Vue meta-framework such as Nuxt, which has a guide linked here, and expose the
   data to your Vue frontend.
 enableTableOfContents: true
-updatedOn: '2026-11-20T21:29:59.067Z'
+updatedOn: '2026-11-27T01:39:33.820Z'
 ---
 
 Vue.js is a progressive JavaScript framework for building user interfaces.
@@ -21,6 +21,10 @@ Connect to Lakebase Postgres from the server side of a Vue.js application, never
 <a href="/docs/guides/nuxt" title="Nuxt" description="Connect a Nuxt app to Lakebase Postgres on Neon" icon="nuxt"></a>
 
 </TechCards>
+
+## Vue apps without a server
+
+A Vue app built with Vite and no meta-framework runs only in the browser. To give it a backend that queries the database, deploy an API on Neon Functions: see [Add a backend API to a frontend app](/docs/compute/functions/frontend-api).
 
 ## Next steps
 
