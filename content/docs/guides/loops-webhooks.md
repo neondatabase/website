@@ -10,7 +10,7 @@ summary: >-
   email, and shows how to test the endpoint on a Neon branch with its own
   function URL, database, and Loops team.
 enableTableOfContents: true
-updatedOn: '2026-11-26T20:10:30.152Z'
+updatedOn: '2026-11-27T17:58:41.410Z'
 ---
 
 [Loops](https://loops.so) can send a [webhook](https://loops.so/docs/webhooks) each time something happens to an email or contact: an email is delivered, bounces, or is reported as spam, or a contact unsubscribes. This guide receives those webhooks in a [Neon Function](/docs/compute/functions/overview) and writes each one to Postgres. With the events in your database, you can join email outcomes with your own users and stop emailing addresses that bounce or complain.
@@ -284,7 +284,7 @@ Send a test event. The row appears in the branch's `loops_events` table, not in 
 
 ---
 
-When you're done, turn off the test team's endpoint in Loops. Then switch back to your production branch and delete the test branch, which also deletes its copy of `loops_events`:
+When you're done, turn off the test team's endpoint in Loops. Then switch back to your production branch and delete the test branch, which also deletes its copy of `loops_events`. If your production branch has another name, such as `main` (the CLI and API default), use it in place of `production`:
 
 ```bash
 neon checkout production

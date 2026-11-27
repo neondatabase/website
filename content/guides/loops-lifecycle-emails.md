@@ -4,7 +4,7 @@ subtitle: Query Lakebase Postgres on a schedule for inactive users and accounts 
 author: rishi-raj-jain
 enableTableOfContents: true
 createdAt: '2026-11-26T00:00:00.000Z'
-updatedOn: '2026-11-26T20:10:30.152Z'
+updatedOn: '2026-11-27T17:58:41.410Z'
 ---
 
 Some emails depend on what's in your database rather than on a user action: a nudge to a user who hasn't been active for a week, or a heads-up to an account that has used most of its plan. [Loops](https://loops.so) sends those emails from [workflows](https://loops.so/docs/workflows) that start when an [event](https://loops.so/docs/events) arrives. Your app still has to notice the condition and send the event.
@@ -328,7 +328,7 @@ The deploy updates the branch's function and leaves the inherited trigger disabl
 
 ---
 
-When you're done, switch back to your production branch and delete the test branch:
+When you're done, switch back to your production branch and delete the test branch. If your production branch has another name, such as `main` (the CLI and API default), use it in place of `production`:
 
 ```bash
 neon checkout production
