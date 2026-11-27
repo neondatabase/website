@@ -8,7 +8,7 @@ summary: >-
   autosend-email Function template, and store AutoSend delivery, bounce, spam,
   and unsubscribe webhooks in Lakebase Postgres on Neon.
 enableTableOfContents: true
-updatedOn: '2026-11-27T05:28:08.327Z'
+updatedOn: '2026-11-27T08:01:51.788Z'
 ---
 
 [AutoSend](https://autosend.com) is an email platform for transactional and marketing email. You design emails as [templates](https://docs.autosend.com/transactional-emails/email-templates), send them through the AutoSend API or SMTP, and start [automations](https://docs.autosend.com/automations): email sequences that run when a contact is added or an event arrives.
@@ -53,7 +53,7 @@ Enter the AutoSend SMTP values for the branch your app uses:
 
 <TabItem>
 
-In the [Neon Console](https://console.neon.tech), open your project and go to **Settings** > **Better Auth**. Select **Custom SMTP provider**, enter the values from the table, and click **Save**.
+In the [Neon Console](https://console.neon.tech), open your project, and go to **Settings** > **Better Auth**. Under **Email provider**, click **Configure email provider**. Select **Custom SMTP provider**, enter the values from the table, and click **Save**.
 
 </TabItem>
 
@@ -71,7 +71,7 @@ neon neon-auth config email-provider update --type standard --host smtp.autosend
 
 ## Send a test email
 
-Send a test email through the saved provider:
+In the Console, click **Send test email** under **Email provider**. With the CLI, run:
 
 ```bash
 neon neon-auth config email-provider test --recipient-email you@example.com
@@ -172,6 +172,10 @@ curl -s https://<function-url>/send-event \
 ```
 
 If no contact has that email yet, AutoSend creates one.
+
+To send an email when the event arrives, open the [**Automations**](https://autosend.com/automations) page and click **New Automation**. Select the **Event received** trigger, choose your event, and add the email to send. AutoSend requires an unsubscribe group before it activates an automation, which you select in the automation's settings. Only events that arrive after you activate the automation start it.
+
+![The Select Trigger panel of an AutoSend automation, with the Event received trigger and the signup_completed event highlighted](/docs/guides/autosend/autosend-automation-trigger.png)
 
 ## Store AutoSend email events in Postgres
 
