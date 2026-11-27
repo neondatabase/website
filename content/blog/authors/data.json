@@ -915,5 +915,12 @@
     "url": "https://randoneering.tech",
     "photo": "https://cdn.neonapi.io/public/images/pages/blog/authors/justin-frye.jpg",
     "photoAlt": "Justin Frye"
+  },
+  "scott-mead": {
+    "name": "Scott Mead",
+    "role": "Databricks",
+    "url": "https://www.linkedin.com/in/scottrmead/",
+    "photo": "https://cdn.neonapi.io/public/images/pages/blog/authors/scott-mead.jpg",
+    "photoAlt": "Scott Mead"
   }
 }
