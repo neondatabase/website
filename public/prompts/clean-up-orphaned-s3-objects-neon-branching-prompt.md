@@ -37,7 +37,7 @@ Before writing code:
 10. After implementation, show me how to:
    - seed demo data with intentional orphans,
    - run the consistency checker,
-   - dry-run the vacuum on a Neon branch using `neon branches create --name <name>` and `neon checkout <name>`,
+   - dry-run the vacuum on a Neon branch created with `neon checkout <name> --create`, which builds it from `neon.ts` so it gets the declared TTL,
    - and promote the verified vacuum to production only after I confirm the bucket and table were untouched.
 
 11. If something fails, explain the likely cause and help me troubleshoot it before making unrelated changes.
