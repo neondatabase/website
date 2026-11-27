@@ -8,7 +8,7 @@ summary: >-
   the server. Managed Better Auth quick starts for Next.js and TanStack Router are
   linked here too.
 enableTableOfContents: true
-updatedOn: '2026-11-20T21:29:59.067Z'
+updatedOn: '2026-11-27T01:39:33.820Z'
 ---
 
 React is an open-source JavaScript library for building component-based user interfaces.
@@ -44,6 +44,10 @@ After you connect your database, add managed authentication with [Managed Better
 </TechCards>
 
 For a client-only React app built with Vite, follow the [React quick start](/docs/auth/quick-start/react).
+
+## Client-only React apps
+
+A React app built with Vite and no server framework runs only in the browser, so it needs a backend to query the database. Deploy one on Neon Functions: see [Add a backend API to a frontend app](/docs/compute/functions/frontend-api).
 
 ## Next steps
 

@@ -959,6 +959,8 @@
               slug: compute/functions/triggers/object-storage
         - section: Use cases
           items:
+            - title: Backend API for a frontend app
+              slug: compute/functions/frontend-api
             - title: AI agents
               slug: compute/functions/agents
             - title: WebSockets and SSE
