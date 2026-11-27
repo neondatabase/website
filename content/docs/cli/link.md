@@ -6,7 +6,7 @@ summary: >-
   directory to a Neon project, including interactive and non-interactive
   workflows for CI, scripts, and AI agents.
 enableTableOfContents: true
-updatedOn: '2026-10-09T12:00:08.310Z'
+updatedOn: '2026-11-23T20:50:51.980Z'
 redirectFrom:
   - /docs/reference/cli-link
 ---
@@ -78,7 +78,7 @@ Agents find the IDs with `neon orgs list --output json` and `neon projects list 
 
 ## The `.neon` context file
 
-`link` is a thin wrapper around [`set-context`](/docs/cli/set-context): both write to the same `.neon` file, so anything `link` can write, `set-context` can write too. `link` writes the file into the current working directory by default. If an existing `.neon` is found in any parent directory, that file is reused, so commands run from a subdirectory of a linked project still pick up the project's context. To pin the location explicitly, pass the global `--context-file <path>` option. See [Using a named context file](/docs/cli/set-context#using-a-named-context-file).
+`link` is a thin wrapper around [`set-context`](/docs/cli/set-context): both write to the same `.neon` file, so anything `link` can write, `set-context` can write too. `link` writes the file into the current working directory by default. If an existing `.neon` is found in any parent directory, that file is reused, so commands run from a subdirectory of a linked project still pick up the project's context. The search stops at a directory that holds both `package.json` and `neon.ts` (or `neon.mts`, `neon.js`, `neon.mjs`) but no `.neon`, so running `link` in an app scaffolded inside a linked folder writes the app's own `.neon` and pulls env vars into the app instead of relinking the folder. To pin the location explicitly, pass the global `--context-file <path>` option. See [Using a named context file](/docs/cli/set-context#using-a-named-context-file).
 
 Example `.neon` file:
 
