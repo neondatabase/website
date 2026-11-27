@@ -11,7 +11,7 @@ redirectFrom:
   - /docs/functions
   - /docs/functions/overview
   - /docs/compute/functions
-updatedOn: '2026-11-27T01:30:45.635Z'
+updatedOn: '2026-11-27T02:52:35.356Z'
 layout: wide
 hideCopyPage: true
 ---
@@ -78,6 +78,17 @@ Functions run on Neon's own compute platform, the same infrastructure that runs 
 Neon Functions currently run JavaScript or TypeScript on the Node.js runtime. Deploy JS/TS handlers, or code that bundles to JS for Node.js 24. Other runtimes and language targets aren't currently supported.
 </Admonition>
 
+## When to use Neon Functions
+
+- **REST APIs and CRUD backends**: request in, JSON out, queries running next to Postgres. See [Quickstart](/docs/compute/functions/get-started).
+- **AI agents**: stream tokens back across multiple model calls and tool invocations without a short execution limit cutting the run off. See [AI agents](/docs/compute/functions/agents).
+- **Real-time apps**: WebSocket servers for chat and presence, or SSE for live updates. See [WebSockets and SSE](/docs/compute/functions/websockets).
+- **MCP servers**: expose database-backed tools to AI clients over a single `fetch` endpoint. See the [with-mcp example](https://github.com/neondatabase/examples/tree/main/with-mcp).
+- **File upload APIs**: receive a file, write it to [Object Storage](/docs/storage/overview), return a result.
+- **Webhook handlers and bots**: receive events and query Postgres in the same region.
+- **Server-side calls for a frontend**: call paid APIs and models from a function so their keys never reach the browser.
+- **Scheduled and event-driven jobs**: run a function on a cron schedule or when a file lands in Object Storage, with no external scheduler. See [Function Triggers](/docs/compute/functions/triggers/overview).
+
 ## Use your other Neon services from a function
 
 A function is where the rest of your Neon backend comes together. Each service you enable on the branch is a few lines of code away, and for most of them Neon injects the credentials into the function at runtime, so there are no keys to copy.
@@ -90,7 +101,18 @@ A function is where the rest of your Neon backend comes together. Each service y
 | [Managed Better Auth](/docs/auth/overview)   | Verifies the signed-in user's JWT before doing any work                                                                                | `NEON_AUTH_JWKS_URL`, injected                                                                                                |
 | [Realtime](/docs/realtime/overview)          | Seals live queries for your frontend; rows the function writes show up live in subscribed clients                                      | Add `NEON_REALTIME_SECRET` as an [environment variable](/docs/compute/functions/environment-variables#user-defined-variables) |
 
-For example, one function can verify the user, save an uploaded image to Object Storage, ask a vision model on AI Gateway to describe it, and store the description in Postgres. Declare the services in [`neon.ts`](/docs/reference/config-runtime), run `neon deploy`, and the function picks up the credentials on every branch. See [Environment variables](/docs/compute/functions/environment-variables) for the full list.
+For example, one function can verify the user, save an uploaded image to Object Storage, ask a vision model on AI Gateway to describe it, and store the description in Postgres. The [image analysis template](/functions/templates/image-analysis) shows the AI Gateway step. Declare the services in [`neon.ts`](/docs/reference/config-runtime), run `neon deploy`, and the function picks up the credentials on every branch. See [Environment variables](/docs/compute/functions/environment-variables) for the full list.
+
+## How Functions fit with your app
+
+Functions are backend primitives, not full-stack app hosting. Host your app on Vercel, Netlify, or another frontend host; reach for a function for the long-running, stateful slice of your backend that belongs next to your data. Two common shapes:
+
+- **Add a function to a full-stack app.** Your Next.js or TanStack Start app owns the UI, auth, and most routes. When one workload outgrows the host's short serverless limit (a WebSocket or SSE server, or a long-running agent), move only that piece onto a function and call it directly from the client. See [Authentication](/docs/compute/functions/authentication) for the direct-call pattern.
+- **Run the backend on functions.** When the frontend is client-only (a React or TanStack SPA), the client calls functions directly: REST APIs, request/response agents, MCP servers, and anything stateful that belongs close to Postgres and Object Storage.
+
+<Admonition type="note">
+Neon Functions do not support hosting websites.
+</Admonition>
 
 ## Request/response, not background jobs
 
@@ -117,27 +139,6 @@ export default async function handler(request: Request) {
 ```
 
 A [Hono](https://hono.dev) app exports the object shape, so `export default app` works directly. Hono is the recommended framework. Other frameworks with a built-in `fetch` method work the same way: see [Run an h3 app on Neon Functions](/guides/h3-neon-functions).
-
-## When to use Neon Functions
-
-- **REST APIs and CRUD backends**: request in, JSON out, queries running next to Postgres. See [Quickstart](/docs/compute/functions/get-started).
-- **AI agents**: stream tokens back across multiple model calls and tool invocations without a short execution limit cutting the run off. See [AI agents](/docs/compute/functions/agents).
-- **Real-time apps**: WebSocket servers for chat and presence, or SSE for live updates. See [WebSockets and SSE](/docs/compute/functions/websockets).
-- **MCP servers**: expose database-backed tools to AI clients over a single `fetch` endpoint. See the [with-mcp example](https://github.com/neondatabase/examples/tree/main/with-mcp).
-- **File upload APIs**: receive a file, write it to [Object Storage](/docs/storage/overview), return a result.
-- **Webhook handlers and bots**: receive events and query Postgres in the same region.
-- **Scheduled and event-driven jobs**: run a function on a cron schedule or when a file lands in Object Storage, with no external scheduler. See [Function Triggers](/docs/compute/functions/triggers/overview).
-
-## How Functions fit with your app
-
-Functions are backend primitives, not full-stack app hosting. Host your app on Vercel, Netlify, or another frontend host; reach for a function for the long-running, stateful slice of your backend that belongs next to your data. Two common shapes:
-
-- **Add a function to a full-stack app.** Your Next.js or TanStack Start app owns the UI, auth, and most routes. When one workload outgrows the host's short serverless limit (a WebSocket or SSE server, or a long-running agent), move only that piece onto a function and call it directly from the client. See [Authentication](/docs/compute/functions/authentication) for the direct-call pattern.
-- **Run the backend on functions.** When the frontend is client-only (a React or TanStack SPA), the client calls functions directly: REST APIs, request/response agents, MCP servers, and anything stateful that belongs close to Postgres and Object Storage.
-
-<Admonition type="note">
-Neon Functions do not support hosting websites.
-</Admonition>
 
 ## Starter templates
 
