@@ -8,7 +8,7 @@ summary: >-
 enableTableOfContents: true
 redirectFrom:
   - /docs/ai/mcp
-updatedOn: '2026-11-27T09:51:52.404Z'
+updatedOn: '2026-11-27T09:52:44.407Z'
 ---
 
 The Neon MCP Server implements the Model Context Protocol (MCP), letting AI assistants interact with your Neon projects on your behalf. Your AI agent can interact with Neon via MCP tools or by running [Neon CLI](/docs/cli) commands directly.
@@ -226,7 +226,7 @@ Each tool call returns its full result to the agent. A question like "which bran
 For questions like this, ask the agent to write a short script instead. The script does the looping and filtering, and the agent reads only the answer:
 
 - With the [Neon Management SDK](/docs/reference/typescript-sdk#scripts-that-span-many-resources), a few lines of TypeScript cover every project and branch.
-- With the [`neon api`](/docs/cli/api#find-an-endpoint) command, an agent with a shell can find any Neon API route, read its fields, and call it, including routes that aren't MCP tools.
+- With the [`neon api`](/docs/cli/api#list-and-describe-endpoints) command, an agent with a shell can find any Neon API route, read its fields, and call it, including routes that aren't MCP tools.
 
 <MCPTools />
 
