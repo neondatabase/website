@@ -421,7 +421,7 @@
     - title: "Remove organization member"
       slug: reference/api/organizations/remove-organization-member
       method: DELETE
-    - title: "Remove organization spending limit"
+    - title: "Remove organization spending notification threshold"
       slug: reference/api/organizations/delete-organization-spending-limit
       method: DELETE
     - title: "Retrieve organization details"
@@ -430,7 +430,7 @@
     - title: "Retrieve organization member details"
       slug: reference/api/organizations/get-organization-member
       method: GET
-    - title: "Retrieve organization spending limit"
+    - title: "Retrieve organization spending notification threshold"
       slug: reference/api/organizations/get-organization-spending-limit
       method: GET
     - title: "Retrieve VPC endpoint details"
@@ -439,7 +439,7 @@
     - title: "Revoke organization API key"
       slug: reference/api/organizations/revoke-org-api-key
       method: DELETE
-    - title: "Set organization spending limit"
+    - title: "Set organization spending notification threshold"
       slug: reference/api/organizations/set-organization-spending-limit
       method: PUT
     - title: "Transfer projects between organizations"
