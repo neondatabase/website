@@ -13,7 +13,7 @@ summary: >-
   phone_number.verified, use EdDSA Ed25519 detached JWS signatures for
   verification, and retry blocking events within a global timeout.
 enableTableOfContents: true
-updatedOn: '2026-11-27T14:33:00.634Z'
+updatedOn: '2026-11-27T14:40:00.210Z'
 ---
 
 Managed Better Auth webhooks send HTTP POST requests to your server when authentication events occur.
@@ -341,7 +341,7 @@ Neon-Better-Auth-Delivery-Attempt: 1
 
 ### Verification steps
 
-1. Fetch your JWKS from `<NEON_AUTH_URL>/.well-known/jwks.json`, where `<NEON_AUTH_URL>` is your Managed Better Auth base URL. Find the key where `kid` matches the `Neon-Better-Auth-Signature-Kid` header.
+1. Fetch your JWKS from `<NEON_AUTH_BASE_URL>/.well-known/jwks.json`, where `<NEON_AUTH_BASE_URL>` is your Managed Better Auth base URL. Find the key where `kid` matches the `Neon-Better-Auth-Signature-Kid` header.
 2. Parse the detached JWS from `Neon-Better-Auth-Signature`. The format is `header..signature` (empty middle section).
 3. Reconstruct the signing input using standard JWS with double base64url encoding, where `timestamp` is the `Neon-Better-Auth-Timestamp` value:
    - `payloadB64 = base64url(rawRequestBody)`
@@ -360,17 +360,19 @@ Consider rejecting requests where `Neon-Better-Auth-Timestamp` is more than 5 mi
 
 ### Node.js example
 
-```javascript
+The helper reads your Managed Better Auth base URL from `NEON_AUTH_BASE_URL`. A [Neon Function](#use-a-neon-function-as-the-receiver) gets this variable injected. On any other host, set it yourself to the same value `neon env pull` writes for your branch.
+
+```javascript filename="verify-webhook.js"
 import crypto from 'node:crypto';
 
-async function verifyWebhook(rawBody, headers) {
+export async function verifyWebhook(rawBody, headers) {
   const signature = headers['neon-better-auth-signature'];
   const kid = headers['neon-better-auth-signature-kid'];
   const timestamp = headers['neon-better-auth-timestamp'];
   if (!signature || !kid || !timestamp) throw new Error('Missing Neon-Better-Auth-* headers');
 
   // 1. Fetch JWKS and find the matching key
-  const res = await fetch(`${process.env.NEON_AUTH_URL}/.well-known/jwks.json`);
+  const res = await fetch(`${process.env.NEON_AUTH_BASE_URL}/.well-known/jwks.json`);
   const jwks = await res.json();
   const jwk = jwks.keys.find((k) => k.kid === kid);
   if (!jwk) throw new Error(`Key ${kid} not found in JWKS`);
@@ -433,9 +435,13 @@ In production, cache the JWKS response and refresh it when you encounter an unkn
 
 A [Neon Function](/docs/compute/functions/overview) on the same branch can receive webhooks. Configure the function's invocation URL (`https://br-<branch>-<slug>.compute.c-<N>.<region>.aws.neon.tech/<path>`, shown by `neon functions get <slug>`) as the webhook URL. It is the only Neon-hosted URL the [URL rules](#webhook-url-requirements) accept.
 
-Neon strips `X-Neon-*` request headers before they reach a function, so the function sees only the `Neon-Better-Auth-*` set. The handler below reuses `verifyWebhook` from the [Node.js example](#nodejs-example), which already reads those names. When Managed Better Auth is enabled on the branch, the function gets `NEON_AUTH_BASE_URL` injected, so use it as the JWKS base URL instead of `NEON_AUTH_URL`.
+Neon strips `X-Neon-*` request headers before they reach a function, so the function sees only the `Neon-Better-Auth-*` set. When Managed Better Auth is enabled on the branch, the function also gets `NEON_AUTH_BASE_URL` injected at runtime (see [Functions environment variables](/docs/compute/functions/environment-variables)), which is the variable `verifyWebhook` reads for the JWKS fetch. Nothing else needs configuring.
+
+Save the [Node.js example](#nodejs-example) as `functions/verify-webhook.js` next to the handler. `neon functions deploy` bundles the import with esbuild.
 
 ```ts filename="functions/neon-auth-webhook.ts"
+import { verifyWebhook } from './verify-webhook';
+
 const handler = {
   async fetch(request: Request) {
     const rawBody = await request.text();
@@ -457,7 +463,12 @@ const handler = {
 export default handler;
 ```
 
-`Object.fromEntries(request.headers)` yields lowercase header names, which is what `verifyWebhook` looks up.
+`Object.fromEntries(request.headers)` yields lowercase header names, which is what `verifyWebhook` looks up. `request.text()` returns the raw body bytes the signature was computed over, so don't parse the body before verifying.
+
+```bash shouldWrap
+neon functions deploy neon-auth-webhook --src functions/neon-auth-webhook.ts
+neon neon-auth config webhook update --enabled --url "$(neon functions get neon-auth-webhook -o json | jq -r .invocation_url)" --enabled-events send.otp
+```
 
 ## Expected responses
 
