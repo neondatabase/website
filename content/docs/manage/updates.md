@@ -12,7 +12,7 @@ summary: >-
   retry logic to handle the brief disruption.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2026-11-27T16:26:47.136Z'
+updatedOn: '2026-11-27T16:58:56.313Z'
 ---
 
 To keep your Neon [computes](/docs/reference/glossary#compute) and Postgres instances up to date with the latest patches and features, Neon applies updates to your project's computes. We notify you of updates in advance so that you can plan for them if necessary. On Neon's paid plans, you can select an update window (a specific day and hour for updates).
@@ -170,6 +170,8 @@ For compute restart instructions, see [Restart a compute](/docs/manage/computes#
 ## Avoid restarts during a critical period
 
 If a brief restart would disrupt an event, such as a product launch or a sales peak, you can keep scheduled updates out of it. Neon applies scheduled updates only in your project's update window, and only after a compute has been active for 28 days. What to do depends on how long the event lasts.
+
+These steps apply to computes up to 16 CU. Larger computes aren't updated automatically, so they restart only when you restart them. See [Updating large computes](#updating-large-computes).
 
 ### Events shorter than a week
 
