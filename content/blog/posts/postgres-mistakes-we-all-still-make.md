@@ -64,7 +64,10 @@ To see how much connecting costs, I ran pgbench on my laptop (10 cores, Postgres
 
 Connecting per transaction topped out at 1,415 transactions per second, about 7 ms per connect. Going through PgBouncer brought that up to 31,524 per second. With persistent connections, the same workload ran at 215,538 per second, about 150 times faster.
 
-**[ADD IMAGE: Throughput with a new connection per transaction, through PgBouncer, and with a persistent pool]**
+<video autoPlay muted loop playsInline width="708" height="475" aria-label="Throughput with a new connection per transaction, through PgBouncer, and with a persistent pool">
+<source src="https://cdn.neonapi.io/public/images/pages/blog/postgres-mistakes-we-all-still-make/throughput.webm" type="video/webm" />
+<source src="https://cdn.neonapi.io/public/images/pages/blog/postgres-mistakes-we-all-still-make/throughput.mp4" type="video/mp4" />
+</video>
 
 ### How to detect connection churn
 
@@ -126,7 +129,10 @@ In this example, Jane signs up and her profile is 110 bytes. A year of new featu
 
 Because Postgres writes a whole new row version on every UPDATE, small changes are expensive. Switching her theme with `profile || '{"theme": "light"}'` changes 17 bytes, but Postgres rewrites all 688.
 
-**[ADD IMAGE: A year of logins on one row: 364 dead versions, 221 pages]**
+<video autoPlay muted loop playsInline width="708" height="360" aria-label="A year of logins on one row: 364 dead versions, 221 pages">
+<source src="https://cdn.neonapi.io/public/images/pages/blog/postgres-mistakes-we-all-still-make/jsonb.webm" type="video/webm" />
+<source src="https://cdn.neonapi.io/public/images/pages/blog/postgres-mistakes-we-all-still-make/jsonb.mp4" type="video/mp4" />
+</video>
 
 With one login a day, Jane's row ends the year as one live version and 364 dead ones, spread over 221 pages. Each version is 24 bytes bigger than the last, so none of them ever fits the space the previous one freed, even with autovacuum keeping up. Across a million users that's 1.8 TB of row versions holding 9.3 GB of live data.
 
@@ -183,7 +189,10 @@ conn.commit()
 
 In psycopg2 and psycopg 3, autocommit is off by default, so the `SELECT` opened a transaction (JDBC and other drivers differ here). That transaction holds the row lock and a transaction ID for as long as the payments API takes to answer. In READ COMMITTED, the default, a transaction ID pins the vacuum horizon the same way a snapshot does: VACUUM can't remove any row version newer than it, in any table.
 
-**[ADD IMAGE: A transaction left open during an API call, before and after]**
+<video autoPlay muted loop playsInline width="708" height="440" aria-label="A transaction left open during an API call, before and after">
+<source src="https://cdn.neonapi.io/public/images/pages/blog/postgres-mistakes-we-all-still-make/api-txn.webm" type="video/webm" />
+<source src="https://cdn.neonapi.io/public/images/pages/blog/postgres-mistakes-we-all-still-make/api-txn.mp4" type="video/mp4" />
+</video>
 
 When the payments API slows from 50 ms to 20 seconds, each request holds its server connection while it waits. The pool opens more connections, and they fill the same way. The pool is exhausted and the database is idle. When the API recovers, every connection is still held and every app instance is still stuck.
 
@@ -270,7 +279,10 @@ DELETE FROM events WHERE created_at < now() - interval '90 days';
 
 On an `events` table with 2 billion rows, 90 days of retention, and six indexes, that DELETE removes about 22 million rows a night. DELETE only marks rows dead, so it leaves 22 million dead tuples in the heap and writes WAL for all of them, which every replica replays. The transaction runs for hours, holding a transaction ID and a snapshot the whole time (Mistake 3). Then VACUUM generates another round of WAL traffic across the heap and all six indexes.
 
-**[ADD IMAGE: Bulk DELETE compared with detaching and dropping a partition]**
+<video autoPlay muted loop playsInline width="708" height="407" aria-label="Bulk DELETE compared with detaching and dropping a partition">
+<source src="https://cdn.neonapi.io/public/images/pages/blog/postgres-mistakes-we-all-still-make/partition.webm" type="video/webm" />
+<source src="https://cdn.neonapi.io/public/images/pages/blog/postgres-mistakes-we-all-still-make/partition.mp4" type="video/mp4" />
+</video>
 
 ### Why it becomes a connection problem
 
@@ -361,7 +373,10 @@ UPDATE pgbench_accounts SET abalance = abalance + 1 WHERE aid = $1;
 CREATE INDEX ON pgbench_accounts (abalance);   -- second run only
 ```
 
-**[ADD IMAGE: One extra index turns off HOT updates]**
+<video autoPlay muted loop playsInline width="708" height="454" aria-label="One extra index turns off HOT updates">
+<source src="https://cdn.neonapi.io/public/images/pages/blog/postgres-mistakes-we-all-still-make/hot.webm" type="video/webm" />
+<source src="https://cdn.neonapi.io/public/images/pages/blog/postgres-mistakes-we-all-still-make/hot.mp4" type="video/mp4" />
+</video>
 
 With autovacuum disabled on the table, the run without the index stayed at 1.9% dead tuples after 64,000 updates (3.5% after 1.5 million updates and 53 minutes). With the index on `abalance`, the table was 38% dead after 61,000 updates.
 
@@ -404,7 +419,10 @@ Save `pg_get_indexdef()` first, then run `DROP INDEX CONCURRENTLY`. To verify, t
 
 For thirty years, the response to connection trouble has been the same: raise `max_connections`. That hides the problem. Each of these mistakes makes every transaction hold its connection longer, and the pool grows to compensate.
 
-**[ADD IMAGE: Summary: what each mistake does to connections and the fix]**
+<video autoPlay muted loop playsInline width="708" height="397" aria-label="Summary: what each mistake does to connections and the fix">
+<source src="https://cdn.neonapi.io/public/images/pages/blog/postgres-mistakes-we-all-still-make/summary.webm" type="video/webm" />
+<source src="https://cdn.neonapi.io/public/images/pages/blog/postgres-mistakes-we-all-still-make/summary.mp4" type="video/mp4" />
+</video>
 
 My recommendation: make every interaction with the database direct, fast, and consistent in latency. Your app depends on external services. Don't force your database to as well. Make each transaction cheaper and the connection count follows.
 
