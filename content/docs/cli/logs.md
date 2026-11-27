@@ -11,7 +11,7 @@ summary: >-
   available in AWS US East (Ohio), US East (N. Virginia), Europe (Frankfurt),
   and Asia Pacific (Singapore).
 enableTableOfContents: true
-updatedOn: '2026-11-26T23:10:36.477Z'
+updatedOn: '2026-11-27T01:32:36.472Z'
 ---
 
 The `logs` command reads the logs a branch's services emit. Today that covers Neon Functions, Object Storage, and Realtime; Postgres compute logs are coming. Query records over a time window, filter by source, severity, or OpenTelemetry attribute, and list which fields and values a branch reports so you can build precise filters. For output in Loki's format, use [`neon logs loki`](#loki).
@@ -34,7 +34,7 @@ Bound the window with `--since` (a duration like `30m` or `1h`, ending at `--end
 
 The structured content filters (`--source`, `--service-name`, `--scope-name`, `--severity-text`, `--body-contains`, and `--trace-id`) combine with each other. Passing `--logql` replaces all of them with a raw [LogQL](https://grafana.com/docs/loki/latest/query/) expression (stream selectors and line filters only); the window, `--limit`, `--sort-order`, and `--cursor` still apply.
 
-`--source` accepts `function`, `storage`, `pg_endpoint`, and `neon_auth`. Realtime records come back under `--source function`, with the service name `neon-function/neonrealtimesocket`. `pg_endpoint` (Postgres compute) is accepted but comes back empty until Postgres logs ship. `--source neon_auth` returns [Managed Better Auth events](/docs/auth/guides/manage-auth-api#export-managed-better-auth-logs), such as sign-ups and sign-ins, for branches that export them. If Managed Better Auth logs aren't available for your project yet, it fails with `neon_auth logs are not enabled for this project`, even when the other sources return logs.
+`--source` accepts `function` (or `functions`), `storage`, `pg_endpoint`, and `neon_auth`. Realtime records come back under `--source function`, with the service name `neon-function/neonrealtimesocket`. `pg_endpoint` (Postgres compute) is accepted but comes back empty until Postgres logs ship. `--source neon_auth` returns [Managed Better Auth events](/docs/auth/guides/manage-auth-api#export-managed-better-auth-logs), such as sign-ups and sign-ins, for branches that export them. If Managed Better Auth logs aren't available for your project yet, it fails with `neon_auth logs are not enabled for this project`, even when the other sources return logs.
 
 Filter by severity with `--severity-text`, which matches the exact, case-sensitive value a record carries (for example `ERROR` or `INFO`, uppercase). Severities vary by source, so a filter can legitimately return nothing. Storage logs take their level from the HTTP status (`WARN` for 4xx, `ERROR` for 5xx, `INFO` otherwise), so `--source storage --severity-text ERROR` returns only server errors. Run `neon logs field-values severity_text` to see the values a branch actually reports before filtering. `--minimum-severity` (match a level and everything above it) is not supported by the branch log backend; use `--severity-text` for an exact match instead.
 

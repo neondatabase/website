@@ -7,7 +7,7 @@ summary: >-
   Also covers deploying a function from a Neon Function Registry template,
   checking status, listing functions, and deleting them.
 enableTableOfContents: true
-updatedOn: '2026-11-09T15:31:27.000Z'
+updatedOn: '2026-11-27T01:32:36.472Z'
 ---
 
 ## Deploy with `neon.ts`
@@ -29,7 +29,7 @@ neon deploy
 | `--allow-protected` | `false`                   | Apply to a branch marked protected on Neon without asking                                            |
 | `--yes`, `-y`       | `false`                   | Answer yes to both confirmations: `--update-existing` and `--allow-protected`                        |
 
-In a terminal, `neon deploy` asks before it overrides branch settings or applies to a protected branch. In CI, or anywhere without a terminal, it stops and names the flag to pass instead. `neon deploy` is an alias for `neon config apply`. To preview what a deploy would change without applying it, run `neon config plan`.
+In a terminal, `neon deploy` asks before it overrides branch settings or applies to a protected branch. In CI, or anywhere without a terminal, it stops and names the flag to pass instead. `neon deploy` waits for each function's build to finish before it returns; pass `--no-wait` to return once each deployment is accepted. `neon deploy` is an alias for `neon config apply`. To preview what a deploy would change without applying it, run `neon config plan`.
 
 You can declare scheduled [Function Triggers](/docs/compute/functions/triggers/schedule) and [custom domains](/docs/compute/functions/custom-domains) in the same `neon.ts` config, so they deploy alongside the function.
 

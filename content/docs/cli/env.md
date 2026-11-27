@@ -9,7 +9,7 @@ summary: >-
   --branch to pull from a specific branch, and --service to pull only selected
   services.
 enableTableOfContents: true
-updatedOn: '2026-11-06T20:35:55.000Z'
+updatedOn: '2026-11-27T01:32:36.472Z'
 ---
 
 The `env` command manages a branch's Neon environment variables locally. [`neon link`](/docs/cli/link) and [`neon checkout`](/docs/cli/checkout) pull env variables automatically by default.
@@ -25,6 +25,12 @@ Writes the branch's Neon environment variables to a local `.env` file.
 It also writes `NEON_FUNCTION_HOST_SUFFIX`. Neon injects it and `NEON_BRANCH_ID` into every deployed [Neon Function](/docs/compute/functions/overview). Together they make up any function's URL on the branch: `https://<NEON_BRANCH_ID>-<slug><NEON_FUNCTION_HOST_SUFFIX>`. To build that URL in code, use [`functionBaseUrl("<slug>")`](/docs/compute/functions/environment-variables#call-another-function) from `@neon/env`. A pull without `--service` writes the suffix whether or not your `neon.ts` declares functions, and the function doesn't have to be deployed yet. `--service functions` writes only `NEON_BRANCH`, `NEON_BRANCH_ID`, and `NEON_FUNCTION_HOST_SUFFIX`.
 
 Neon CLI 9.0.0 replaced the per-function `NEON_FUNCTION_<SLUG>_BASE_URL` variables that earlier releases wrote. A pull without `--service`, or with `--service functions`, removes those old lines, and `--env NEON_FUNCTION_<SLUG>_BASE_URL` fails with an error that points you to `functionBaseUrl`. To update code that read those variables, see [Call another function](/docs/compute/functions/environment-variables#call-another-function).
+
+If `neon.ts` declares a service the branch doesn't have yet, such as a bucket you haven't deployed, the pull writes everything else and adds a `Not deployed` line that names it. Run [`neon deploy`](/docs/cli/deploy) to provision it, which also pulls its variables:
+
+```text
+  Not deployed    bucket uploads, declared in neon.ts. Run `neon deploy` to provision it and pull its variables.
+```
 
 Unset function env vars don't block a pull. If a declared function reads a `process.env.*` value that isn't set, `neon env pull` (and the pull that [`neon link`](/docs/cli/link) and [`neon checkout`](/docs/cli/checkout) run) skips that value and writes everything else instead of failing. The commands that actually build or run your functions still require every declared value: `neon deploy`, `neon dev`, and `neon-env run`.
 
@@ -54,6 +60,12 @@ For [Realtime](/docs/realtime/overview), the pull writes `NEON_REALTIME_URL` and
 
 ```bash
 neon env pull --service postgres --service realtime
+```
+
+`DATABASE_URL` and `DATABASE_URL_UNPOOLED` use the branch's only role, or `neondb_owner` when there are several. The roles that the Data API and Managed Better Auth add don't count. To connect as a different role, pass `--role-name`:
+
+```bash
+neon env pull --role-name app_owner
 ```
 
 Use a specific `neon.ts` policy instead of the one in the project directory (next to the nearest `.neon`, or the current directory when there's no `.neon`):
