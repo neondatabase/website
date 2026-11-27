@@ -10,7 +10,7 @@ summary: >-
 enableTableOfContents: true
 redirectFrom:
   - /docs/manage/orgs-auto-provision-domain
-updatedOn: '2026-11-27T16:09:11.298Z'
+updatedOn: '2026-11-27T16:54:51.982Z'
 ---
 
 Organization admins can add verified email domains so that users whose email matches one of those domains are automatically added as members when they sign up or log in. No manual invite is required for those users.
@@ -68,6 +68,7 @@ Only organization admins can remove a domain. In the **Verified domains** sectio
 ## Behavior details
 
 - **Role:** Users who are automatically added receive the **Editor** role, which gives them access to every project in the organization. The API lists this role as `member`, the legacy name for Editor. Admins can change their role later from the **People** page if needed. See [Organization roles](/docs/manage/user-permissions#organization-roles).
+- **Member limit:** If your organization has a member limit and it's full, matching users aren't added, and they get no error or invite. They are added the next time they log in after a seat frees up. Current [plans](/docs/introduction/plans#organization-members) include unlimited members.
 - **Existing members:** If the user is already a member of the organization, no duplicate is created; they are simply signed in as usual.
 - **Sign up and log in:** Users are automatically added both when they create a new Neon account and when an existing user logs in. So if you add and verify a domain after some colleagues already have Neon accounts, those colleagues will be added to the org the next time they log in (as long as their email domain matches).
 
