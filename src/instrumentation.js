@@ -1,5 +1,3 @@
-const { join } = require('path');
-
 // Next.js calls register() once when the server process starts. We use it to
 // boot the content live-reload watcher in-process during development.
 //
@@ -9,6 +7,6 @@ const { join } = require('path');
 export async function register() {
   if (process.env.NODE_ENV !== 'development') return;
   if (process.env.NEXT_RUNTIME !== 'nodejs') return;
-  const watcherUrl = join(import.meta.url, '..', '..', 'scripts', 'watch-content.mjs');
+  const watcherUrl = new URL('../scripts/watch-content.mjs', import.meta.url).href;
   await import(/* webpackIgnore: true */ /* turbopackIgnore: true */ watcherUrl);
 }

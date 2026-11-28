@@ -17,6 +17,8 @@ const getPostSlugs = async (pathname) => {
 
   const files = glob.sync(`${pathname}/**/*.md`, {
     ignore: ['**/README.md', '**/unused/**', '**/shared-content/**', '**/GUIDE_TEMPLATE.md'],
+    // Always return '/' separators (Windows returns '\'), so the pathname prefix is stripped below
+    posix: true,
   });
   const slugs = files.map((file) => file.replace(pathname, '').replace('.md', ''));
 
