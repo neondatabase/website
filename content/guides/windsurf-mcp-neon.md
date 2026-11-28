@@ -4,7 +4,7 @@ subtitle: 'Make schema changes with natural language using Windsurf and the Neon
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2025-02-22T00:00:00.000Z'
-updatedOn: '2026-11-12T17:34:53.000Z'
+updatedOn: '2026-11-22T09:08:00.969Z'
 ---
 
 This guide shows how to use [Windsurf](https://codeium.com/windsurf) with the [Neon MCP Server](https://github.com/neondatabase/mcp-server-neon) to manage your Neon databases.
@@ -147,7 +147,7 @@ You can verify the changes in your Neon Console or by querying the database dire
 ![Neon Console with added column](/docs/guides/neon-cursor-mcp-added-column.png)
 
 <Admonition type="note">
-The Neon MCP Server covers Neon project management, branching, and schema changes. If you only need to query a database, you can also use a [generic Postgres MCP server](https://github.com/modelcontextprotocol/servers/tree/main/src/postgres) to connect to Neon.
+The Neon MCP Server covers Neon project management, branching, and schema changes. If you only need to query a database, you can also use a [generic Postgres MCP server](https://github.com/modelcontextprotocol/servers-archived/tree/main/src/postgres) to connect to Neon.
 </Admonition>
 
 ## Resources

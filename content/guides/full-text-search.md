@@ -4,7 +4,7 @@ subtitle: A step-by-step guide describing how to implement full text search with
 author: vkarpov15
 enableTableOfContents: true
 createdAt: '2024-09-17T13:24:36.612Z'
-updatedOn: '2026-09-24T17:56:34.189Z'
+updatedOn: '2026-11-22T09:08:00.969Z'
 ---
 
 The `tsvector` type enables you to use full text search on your text content in Postgres. Full text search is more flexible than `LIKE` and supports features like _stemming_, which means searching for the word "run" will match variations like "ran" and "running".
@@ -168,7 +168,7 @@ SELECT
 
 ## Create a GIN index
 
-[GIN indexes](https://www.postgresql.org/docs/current/gin-intro.html) allow you to index your `tsvector` properties, which can make your full text search queries faster as your data grows. Just be careful, [GIN indexes can slow down your updates](https://pganalyze.com/blog/gin-index). Below is how you can create a GIN index on the `searchable` column.
+[GIN indexes](https://www.postgresql.org/docs/current/gin.html#GIN-INTRO) allow you to index your `tsvector` properties, which can make your full text search queries faster as your data grows. Just be careful, [GIN indexes can slow down your updates](https://pganalyze.com/blog/gin-index). Below is how you can create a GIN index on the `searchable` column.
 
 ```sql
 CREATE INDEX searchable_idx ON documents USING GIN(searchable);

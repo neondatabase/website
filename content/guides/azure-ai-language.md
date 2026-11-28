@@ -4,7 +4,7 @@ subtitle: Learn how to analyze customer feedback using Azure AI Language and sto
 author: bobbyiliev
 enableTableOfContents: true
 createdAt: '2024-11-30T00:00:00.000Z'
-updatedOn: '2026-09-24T17:56:34.189Z'
+updatedOn: '2026-11-25T00:40:14.519Z'
 ---
 
 Sentiment analysis shows how satisfied your customers are and where they're running into problems. Azure AI Language provides sentiment analysis, key phrase extraction, and language detection, which you can run over customer feedback.
@@ -423,7 +423,7 @@ One option is to integrate the sentiment analysis code into your application, so
 
 Alternatively, you can use a scheduled task to process feedback at regular intervals. For example, you could create an Azure Function that runs every few hours to analyze the new feedback and generate reports.
 
-1. If you haven't already, follow the [Azure Functions Quickstart guide](https://learn.microsoft.com/azure/azure-functions/functions-create-first-function) to set up your development environment.
+1. If you haven't already, follow the [Azure Functions get-started guide](https://learn.microsoft.com/en-us/azure/azure-functions/functions-get-started) to set up your development environment.
 
 2. Create a new Azure Function with a timer trigger. The schedule expression `0 0 */2 * * *` will run the function every two hours.
 

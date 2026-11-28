@@ -4,7 +4,7 @@ subtitle: 'Make schema changes with natural language using Zed and the Neon MCP 
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2025-04-10T00:00:00.000Z'
-updatedOn: '2026-09-24T17:56:34.189Z'
+updatedOn: '2026-11-22T09:08:00.969Z'
 ---
 
 This guide shows how to use [Zed](https://zed.dev) with the [Neon MCP Server](https://github.com/neondatabase/mcp-server-neon) to manage your Neon databases.
@@ -208,7 +208,7 @@ You can verify the changes in your Neon Console or by querying the database dire
 ![Neon Console with added column](/docs/guides/neon-cursor-mcp-added-column.png)
 
 <Admonition type="note">
-The Neon MCP Server covers project, branch, and schema management as well as queries. If you only need to run SQL, you can also use a [generic Postgres MCP server](https://github.com/modelcontextprotocol/servers/tree/main/src/postgres) to connect to Neon.
+The Neon MCP Server covers project, branch, and schema management as well as queries. If you only need to run SQL, you can also use a [generic Postgres MCP server](https://github.com/modelcontextprotocol/servers-archived/tree/main/src/postgres) to connect to Neon.
 </Admonition>
 
 ## Resources

@@ -4,7 +4,7 @@ subtitle: 'Make schema changes with natural language using Cline and Neon MCP Se
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2025-02-22T00:00:00.000Z'
-updatedOn: '2026-09-24T17:56:34.189Z'
+updatedOn: '2026-11-22T09:08:00.969Z'
 ---
 
 This guide shows how to use [Cline](https://cline.bot) with the [Neon MCP Server](https://github.com/neondatabase/mcp-server-neon) to manage your Neon databases.
@@ -136,7 +136,7 @@ You can verify the changes in your Neon Console or by querying the database dire
 ![Neon Console with added column](/docs/guides/neon-cursor-mcp-added-column.png)
 
 <Admonition type="note">
-The Neon MCP Server exposes Neon-specific tools such as branching and migrations, but you can also use a [generic Postgres MCP server](https://github.com/modelcontextprotocol/servers/tree/main/src/postgres) to connect to Neon.
+The Neon MCP Server exposes Neon-specific tools such as branching and migrations, but you can also use a [generic Postgres MCP server](https://github.com/modelcontextprotocol/servers-archived/tree/main/src/postgres) to connect to Neon.
 </Admonition>
 
 ## Resources
