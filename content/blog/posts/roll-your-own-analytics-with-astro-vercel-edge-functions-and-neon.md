@@ -74,7 +74,7 @@ _This solution isn’t intended to replace Google Analytics but, it is a nice wa
 
 ## Create a Neon serverless Postgres database
 
-To get started, [sign up](https://neon.tech/) to Neon, then follow our [Create your first project guide](https://neon.com/docs/get-started-with-neon/setting-up-a-project). You might also like to look at this guide from our docs: [Query with Neon’s SQL Editor](https://neon.com/docs/get-started-with-neon/query-with-neon-sql-editor).
+To get started, [sign up](https://neon.tech/) to Neon, then follow our [Create your first project guide](https://neon.com/docs/manage/projects#create-a-project). You might also like to look at this guide from our docs: [Query with Neon’s SQL Editor](https://neon.com/docs/get-started-with-neon/query-with-neon-sql-editor).
 
 Once you have a database set up, save the connection string to your `.env` file and name it, `DATABASE_URL`.
 

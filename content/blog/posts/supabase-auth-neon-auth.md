@@ -275,7 +275,7 @@ Here’s more reading on Neon Auth to help you get your bearings:
 
 - [Neon Auth is Here](https://neon.com/blog/neon-auth-is-here-get-authentication-in-a-couple-of-clicks)
 - [About Neon Auth](https://neon.com/docs/guides/neon-auth)
-- [Neon Auth Tutorial](https://neon.com/docs/guides/neon-auth-tutorial)
+- [Neon Auth Tutorial (archived)](https://github.com/neondatabase/website/blob/e1007131033158bdae32e0974ddbdbf77dcc109e/content/docs/guides/neon-auth-tutorial.md)
 - [Manage Neon Auth using the API](https://neon.com/docs/guides/neon-auth-api)
 
 Also, check out the [Stack Auth documentation](https://docs.stack-auth.com/overview) to learn more about building with Stack Auth + Neon. If you are currently on Supabase and want to try Neon, [sign up for a free Neon account](https://console.neon.tech/signup) to see how easy it is to migrate.
