@@ -2,8 +2,9 @@
 title: Manage roles
 summary: >-
   Postgres roles in Neon are branch-scoped, with a limit of 500 roles per
-  branch. Roles created via the Console, CLI, or API automatically receive
-  neon_superuser membership (CREATEDB, CREATEROLE, BYPASSRLS, REPLICATION).
+  branch. Roles created via the Console or API, or with the CLI by default,
+  automatically receive neon_superuser membership (CREATEDB, CREATEROLE,
+  BYPASSRLS, REPLICATION).
   Roles created with SQL receive only basic public schema privileges and must
   be granted permissions explicitly. Use this page to create, delete, list,
   and reset passwords for roles using the Console, CLI, API, or SQL.
@@ -13,7 +14,7 @@ redirectFrom:
   - /docs/manage/users
   - /docs/introduction/roles
   - /docs/postgresql/postgres-roles
-updatedOn: '2026-11-19T00:59:42.125Z'
+updatedOn: '2026-11-27T17:05:15.260Z'
 ---
 
 In Neon, roles are Postgres roles. Each Neon project is created with a Postgres role that is named for your database. For example, if your database is named `neondb`, the project is created with a role named `neondb_owner`. This role owns the database that is created in your Neon project's default branch.
@@ -70,7 +71,7 @@ You may also see internal roles Neon uses to operate your project, such as `neon
 
 ## Manage roles
 
-You can create, list, delete, and reset passwords for roles using the Neon Console, CLI, or API. Roles created through any of these interfaces are granted membership in the [neon_superuser](#the-neonsuperuser-role) role. To create roles with limited privileges, use [SQL](#manage-roles-with-sql).
+You can create, list, delete, and reset passwords for roles using the Neon Console, CLI, or API. Roles created in the Console or API are granted membership in the [neon_superuser](#the-neonsuperuser-role) role, and so are roles from `neon roles create` unless you pass `--access`. To create roles with limited privileges, pass `--access read_only` or `--access read_write` to the CLI, or use [SQL](#manage-roles-with-sql).
 
 ### Create a role
 
@@ -90,7 +91,7 @@ You can create, list, delete, and reset passwords for roles using the Neon Conso
 
 <TabItem>
 
-Create a role with [`neon roles create`](/docs/cli/roles#create). Pass `--no-login` to create a `NOLOGIN` role:
+Create a role with [`neon roles create`](/docs/cli/roles#create). Pass `--no-login` to create a passwordless role:
 
 ```bash
 neon roles create --name alex
@@ -434,7 +435,7 @@ Resetting a password is also how you rotate the credential behind a connection s
 
 ## Manage roles with SQL
 
-Roles created with SQL have the same basic `public` schema privileges as newly created roles in a standalone Postgres installation. These roles are not granted membership in the [neon_superuser](#the-neonsuperuser-role) role like roles created with the Neon Console, CLI, or API. You must grant these roles the privileges you want them to have.
+Roles created with SQL have the same basic `public` schema privileges as newly created roles in a standalone Postgres installation. Unlike roles created in the Neon Console or API, or with `neon roles create` by default, these roles are not granted membership in the [neon_superuser](#the-neonsuperuser-role) role. You must grant these roles the privileges you want them to have.
 
 To create a role with SQL, issue a `CREATE ROLE` statement from a client such as [psql](/docs/connect/query-with-psql-editor), [pgAdmin](https://www.pgadmin.org/), or the [Neon SQL Editor](/docs/get-started/query-with-neon-sql-editor).
 
@@ -488,7 +489,7 @@ CREATE ROLE my_role NOLOGIN;
 
 Roles with `NOLOGIN` are commonly used for permission management. For an example, see [Transfer database table ownership between roles](/docs/manage/databases#transfer-database-table-ownership-between-roles).
 
-The Neon API and CLI also support creating `NOLOGIN` roles:
+The Neon API and CLI can also create passwordless roles. These roles aren't `NOLOGIN` roles in Postgres. Postgres still marks them as able to log in (`rolcanlogin` is `true`), but password authentication always fails for a role with no password, so the role can't connect. If you need the role itself marked as unable to log in, create it with SQL, as shown above.
 
 - The Neon API [Create role](/docs/reference/api/branches/create-project-branch-role) endpoint supports a `no_login` attribute.
 - The Neon CLI [`neon roles create`](/docs/cli/roles#create) command supports a `--no-login` option.
