@@ -9,14 +9,14 @@ summary: >-
   ALTER TABLE ... OWNER TO or REASSIGN OWNED.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2026-11-03T00:39:27.000Z'
+updatedOn: '2026-11-21T12:01:45.827Z'
 ---
 
 A database is a container for SQL objects such as schemas, tables, views, functions, and indexes. In the [Neon object model](/docs/concepts/the-object-model), a database exists within a branch of a project. There is a limit of 500 databases per branch.
 
 If you do not specify your own database name when creating a project, your project's default branch is created with a database called `neondb`, which is owned by your project's default role (see [Manage roles](/docs/manage/roles) for more information). You can create your own databases in a project's default branch or in a child branch.
 
-All databases in Neon are created with a `public` schema. SQL objects are created in the `public` schema, by default. For more information about the `public` schema, refer to [The Public schema](https://www.postgresql.org/docs/current/ddl-schemas.html#DDL-SCHEMAS-PUBLIC), in the _PostgreSQL documentation_.
+All databases in Neon are created with a `public` schema. SQL objects are created in the `public` schema, by default. For more information about the `public` schema, refer to [The Public schema](https://www.postgresql.org/docs/current/ddl-schemas.html#DDL-SCHEMAS-PUBLIC), in the _Postgres documentation_.
 
 <Admonition type="note">
 As of Postgres 15, only a database owner has the `CREATE` privilege on a database's `public` schema. For other users, the `CREATE` privilege must be granted manually via a `GRANT CREATE ON SCHEMA public TO <username>;` statement. For more information, see [Public schema privileges](/docs/manage/database-access#public-schema-privileges).
@@ -382,7 +382,7 @@ The workaround is to introduce a shared group role that both roles belong to. Yo
 In the example below, `current_owner`, `new_owner`, and `table_owners` are placeholder role and group names. Replace them with names from your own environment.
 </Admonition>
 
-1. Connect as the owner of the database (or another role that can create roles) and run:
+1. Connect as the owner of the database and run:
 
    ```sql
    -- Create a group role with no login
