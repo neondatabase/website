@@ -8,7 +8,7 @@ summary: >-
   to choose the right command for each task. Commands are stored in
   .claude/commands/ and their sub-agents in .claude/agents/.
 enableTableOfContents: true
-updatedOn: '2026-11-02T12:50:30.000Z'
+updatedOn: '2026-11-28T12:15:15.795Z'
 ---
 
 The Neon website repo includes Claude commands for common documentation tasks. All changes are reviewed by humans via pull requests.
@@ -34,7 +34,6 @@ Run `/list-doc-tools` in Claude to see the full list with descriptions, or brows
 | -------------------- | ------------------------------------------------------------------------------------------------- |
 | `/validate`          | Pre-commit check: frontmatter, stray h1 headings, navigation entry, image paths, em dashes, lint. |
 | `/check-consistency` | Find other pages that say the same thing; surface duplication and drift.                          |
-| `/update-glossary`   | Find glossary gaps in a doc file (Mode A), or audit the glossary itself (Mode B).                 |
 | `/redirect-update`   | After moving or renaming a file: add `redirectFrom`, update links and navigation.                 |
 
 ## Pull requests
