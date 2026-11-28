@@ -4,13 +4,14 @@ import defaultBlockList from './data/hubspot-blacklist.json';
 
 const checkBlacklistEmails = (field) => {
   const { useDefaultBlockList, data } = field.validation;
-  const emailBlacklist = useDefaultBlockList ? defaultBlockList : [];
+  // Copy the default list so custom domains from one form don't leak into others
+  const emailBlacklist = useDefaultBlockList ? [...defaultBlockList] : [];
 
   if (data) {
     String(data)
       .replace(/\s/g, '')
       .split(',')
-      .forEach((domain) => emailBlacklist.push(domain));
+      .forEach((domain) => emailBlacklist.push(domain.toLowerCase()));
   }
 
   return {
@@ -18,7 +19,8 @@ const checkBlacklistEmails = (field) => {
     exclusive: true,
     message: `Ooops! Only work emails allowed. If this account is for you, <a href="${LINKS.signup}">please sign up to Neon here</a>.`,
     test: (value) => {
-      const domain = value.split('@')[1];
+      // Domains are case-insensitive, so `jane@Gmail.com` must match `gmail.com`
+      const domain = value.split('@')[1]?.toLowerCase();
       return !emailBlacklist.includes(domain);
     },
   };
