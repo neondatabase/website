@@ -222,10 +222,13 @@ Neon limits [concurrently active computes](/docs/reference/glossary#concurrently
 
 ## Remaining connection slots are reserved for roles with the SUPERUSER attribute
 
-This error occurs when the maximum number of simultaneous database connections, defined by the Postgres `max_connections` setting, is reached.
+This error (SQLSTATE `53300`, `too_many_connections`) occurs when the maximum number of simultaneous database connections, defined by the Postgres `max_connections` setting, is reached. The limit depends on your compute size. See [How to size your compute](/docs/manage/computes#how-to-size-your-compute).
 
-To resolve this issue, you have several options:
+When every connection slot is in use, new connections fail on both the direct and the pooled connection string, because the pooler also needs a Postgres connection. You can't connect to close the idle sessions yourself. To get back in, [restart the compute](/docs/manage/computes#restart-a-compute) from the Console or with the API. A restart closes all connections.
 
+To keep the error from coming back, you have several options:
+
+- Set `idle_in_transaction_session_timeout` or `idle_session_timeout` so Postgres closes abandoned sessions. You can set them for a role or database, or for the whole compute with the Neon API. See [Configure Postgres parameters for a compute](/docs/reference/compatibility#configure-postgres-parameters-for-a-compute).
 - Find and remove long-running or idle connections. See [Find long-running or idle connections](/docs/postgresql/query-reference#find-long-running-or-idle-connections).
 - Use a larger compute, with a higher `max_connections` configuration. See [How to size your compute](/docs/manage/computes#how-to-size-your-compute).
 - Enable [connection pooling](/docs/connect/connection-pooling).

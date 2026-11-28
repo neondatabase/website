@@ -47,19 +47,28 @@ updatedOn: '2026-11-24T10:56:47.700Z'
   Plan whether you'll restore in place or from a snapshot, and how your application will switch if needed.
 </CheckItem>
 <CheckItem title="11. Clean up your branches regularly" href="#clean-up-your-branches-regularly">
-  Set branch expiration times and add cleanup logic to automated workflows to avoid unnecessary storage costs.
+  Set branch expiration times and add cleanup logic to automated workflows to avoid unnecessary storage costs and stay under the active compute limit.
 </CheckItem>
 <CheckItem title="12. Use pooled connections where they make sense" href="#use-pooled-connections-where-they-make-sense">
   Connection pooling improves concurrency for web and serverless apps, but may not be appropriate for migrations or long-running tasks.
 </CheckItem>
-<CheckItem title="13. Restrict access to production data" href="#restrict-access-to-production-data">
+<CheckItem title="13. Set session timeouts" href="#set-session-timeouts">
+  Timeouts close abandoned sessions and stop runaway queries before they use up your connection limit.
+</CheckItem>
+<CheckItem title="14. Restrict access to production data" href="#restrict-access-to-production-data">
   Limit database access to trusted sources using IP Allow to reduce the risk of unauthorized changes.
 </CheckItem>
-<CheckItem title="14. Install pg_stat_statements" href="#install-pgstatstatements">
+<CheckItem title="15. Install pg_stat_statements" href="#install-pgstatstatements">
   Query execution times and frequency yourself with SQL or `neon inspect`. The Console's Query performance view works without it.
 </CheckItem>
-<CheckItem title="15. Integrate with your existing observability stack" href="#integrate-with-your-existing-observability-stack">
-  Export Neon metrics to Datadog, Grafana, or any OTEL-compatible platform to monitor usage and capacity alongside your existing systems.
+<CheckItem title="16. Export metrics and logs, and set alerts" href="#export-metrics-and-logs-and-set-alerts">
+  Export Neon metrics and Postgres logs to Datadog, Grafana, or any OTEL-compatible platform, and alert on connection counts before you run out.
+</CheckItem>
+<CheckItem title="17. Monitor replication slots if you use logical replication" href="#monitor-replication-slots-if-you-use-logical-replication">
+  Neon removes inactive replication slots after about 40 hours. Watch slot lag and plan how your CDC tool will resync.
+</CheckItem>
+<CheckItem title="18. Configure read replicas for long-running queries" href="#configure-read-replicas-for-long-running-queries">
+  Set `hot_standby_feedback` or a standby delay on replicas that run long queries, so they aren't canceled by conflicts with recovery.
 </CheckItem>
 
 </CheckList>
@@ -196,6 +205,8 @@ Neon's branching makes it easy to create preview, test, and temporary environmen
 - Add explicit delete steps to automated branching workflows
 - Periodically review and remove branches that are no longer in use
 
+Active computes on non-default branches also count toward your project's [concurrently active compute limit](/docs/manage/computes#concurrently-active-compute-limit). If you create a preview branch per pull request, cleanup keeps new previews from failing when the limit is reached.
+
 Keep reading:
 
 - [Branch expiration](/docs/guides/branch-expiration)
@@ -214,6 +225,28 @@ However, pooled connections are not appropriate for all workloads. Avoid them fo
 - Logical replication (CDC tools like Fivetran, Airbyte)
 
 Keep reading: [Connection pooling](/docs/connect/connection-pooling)
+
+## Set session timeouts
+
+Each compute has a `max_connections` limit based on its size. Sessions that an application opens and never closes, or leaves idle inside a transaction, keep using connection slots. When all slots are in use, new connections fail with `remaining connection slots are reserved` on both direct and pooled connection strings, and you need to restart the compute to get back in.
+
+Set timeouts so Postgres cleans these sessions up for you:
+
+- `idle_in_transaction_session_timeout` closes sessions that sit idle inside an open transaction. Neon sets it to 5 minutes by default.
+- `idle_session_timeout` closes sessions that sit idle outside a transaction. Use it for direct connections from apps that leak connections, not for connection pools that keep connections open on purpose.
+- `statement_timeout` cancels queries that run longer than you expect.
+- `lock_timeout` stops a statement from waiting on a lock indefinitely.
+
+You can set these for a role or database with `ALTER ROLE` or `ALTER DATABASE`, or for the whole compute with the Neon API. For example, to cap queries from your application role at 60 seconds:
+
+```sql
+ALTER ROLE app_user SET statement_timeout = '60s';
+```
+
+Keep reading:
+
+- [Configure Postgres parameters for a compute](/docs/reference/compatibility#configure-postgres-parameters-for-a-compute)
+- [Remaining connection slots are reserved for roles with the SUPERUSER attribute](/docs/connect/connection-errors#remaining-connection-slots-are-reserved-for-roles-with-the-superuser-attribute)
 
 ## Restrict access to production data
 
@@ -246,13 +279,16 @@ Keep reading:
 - [Query performance](/docs/postgresql/query-performance)
 - [Monitoring](/docs/introduction/monitoring)
 
-## Integrate with your existing observability stack
+## Export metrics and logs, and set alerts
 
-If you already operate an observability platform, you can export Neon metrics and logs to monitor database behavior alongside the rest of your system. This helps you:
+On the Scale plan, you can export Neon metrics and Postgres logs to an observability platform to monitor database behavior alongside the rest of your system. Set this up before you need it, because the integration only exports logs from the time you turn it on. Exporting helps you:
 
 - Track connection counts and usage patterns
 - Monitor compute and storage growth over time
 - Correlate database behavior with application-level events
+- Keep a record of who connected. Postgres logs every connection and disconnection by default (`log_connections` and `log_disconnections`), and those lines are exported with your other Postgres logs.
+
+Set an alert on the `neon_connection_counts` metric at a threshold below your compute's `max_connections`, so you hear about connection buildup before your application hits the limit. To also log slow queries, set `log_min_duration_statement` for the compute. See [Log slow queries](/docs/reference/metrics-logs#log-slow-queries).
 
 You can export to any OTLP-compatible platform, Datadog, or Grafana Cloud.
 
@@ -261,6 +297,36 @@ Keep reading:
 - [OpenTelemetry export guide](/docs/guides/opentelemetry)
 - [Datadog export guide](/docs/guides/datadog)
 - [Grafana Cloud export guide](/docs/guides/grafana-cloud)
+- [Metrics and logs reference](/docs/reference/metrics-logs)
+
+## Monitor replication slots if you use logical replication
+
+If you replicate data out of Neon with a CDC tool, such as Fivetran, Airbyte, or Debezium, each subscriber uses a replication slot. To prevent storage bloat, Neon removes replication slots that are inactive for about 40 hours. If your CDC tool is down for longer than that, for example during a vendor outage, its slot is removed and the tool needs a full resync.
+
+To prepare:
+
+- Monitor replication lag and alert when a slot stops making progress, so you can act before it's removed.
+- Remove slots for subscribers you no longer use.
+- Know how your CDC tool runs a full resync, and how long it takes for your data size.
+
+Keep reading:
+
+- [Unused replication slots](/docs/guides/logical-replication-neon#unused-replication-slots)
+- [Manage logical replication](/docs/guides/logical-replication-manage)
+
+## Configure read replicas for long-running queries
+
+A read replica applies changes from the primary compute as they arrive. If a change conflicts with a query that's running on the replica, such as a vacuum removing rows the query still needs, Postgres cancels the query with `canceling statement due to conflict with recovery`.
+
+If you run long analytical or reporting queries on a replica, set one of these parameters on the replica compute with the Neon API:
+
+- `hot_standby_feedback` set to `on` tells the primary not to remove rows the replica's queries still need. This prevents most cancellations, but can increase table bloat on the primary while long queries run.
+- `max_standby_streaming_delay` lets the replica delay applying changes for up to the time you set, so queries can finish first. The replica falls behind the primary during that delay.
+
+Keep reading:
+
+- [Configure Postgres parameters for a compute](/docs/reference/compatibility#configure-postgres-parameters-for-a-compute)
+- [Read replicas](/docs/introduction/read-replicas)
 
 </Steps>
 

@@ -127,6 +127,8 @@ curl --request PATCH \
 Slow-query log lines include the full statement text, including any literal values in the query. If your queries contain sensitive data, consider what you send to your observability platform before you turn this on.
 </Admonition>
 
+The request replaces the compute's whole `pg_settings` object, so include any other compute parameters you've already set, such as timeouts. See [Configure Postgres parameters for a compute](/docs/reference/compatibility#configure-postgres-parameters-for-a-compute).
+
 The other statement logging parameters, such as `log_statement` and `log_lock_waits`, can't be changed. You can't set any of them with `SET` or `ALTER DATABASE`, because they require superuser privileges.
 
 ### Log fields and metadata
