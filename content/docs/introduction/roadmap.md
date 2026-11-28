@@ -13,7 +13,7 @@ redirectFrom:
   - /docs/conceptual-guides/roadmap
   - /docs/reference/roadmap
   - /docs/community/public-preview
-updatedOn: '2026-11-27T16:09:11.298Z'
+updatedOn: '2026-11-28T11:46:33.410Z'
 ---
 
 This page has two lists: [what's coming](#whats-coming) and [what we've shipped recently](#what-weve-shipped-recently). Items in **What's coming** are planned or in progress. They're grouped by product area, not listed in priority order, and don't have committed dates, so plans can change. For release-by-release detail, see the [Changelog](/docs/changelog).
@@ -113,6 +113,8 @@ Want something that isn't listed? Tell us in our Discord feedback channel.
 
 ## What we've shipped recently
 
+- **Logs for Managed Better Auth (beta)**: Export your branch's sign-up and sign-in events, failed attempts included, to your branch logs, then view them on the **Monitoring** page or query them with `neon logs query --source neon_auth`. [Learn more](/docs/auth/guides/manage-auth-api#export-managed-better-auth-logs).
+- **Call any Neon API route from the Neon MCP Server**: Your agent can find and run any [Neon API](/docs/reference/api) route with the `search_api` and `call_api` tools, including routes the built-in tools don't cover. [Learn more](/docs/ai/neon-mcp-server).
 - **Postgres 19 support**: Postgres 19 is now available on Neon. Select it when you create a project. Postgres 18 remains the default. [Learn more](/docs/postgresql/postgres-version-support).
 - **Official Neon Terraform provider (beta)**: The `neondatabase/neon` provider replaces the community provider and manages Postgres along with Functions, Object Storage, Managed Better Auth, Realtime, and the Data API. [Learn more](/docs/reference/terraform).
 - **Fix slow query plans with `pg_stash_advice`**: On Postgres 19, stash planner advice by query ID so Postgres uses a faster plan every time that query runs, without changing your app's SQL. [Learn more](/docs/extensions/pg_stash_advice).
