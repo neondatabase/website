@@ -531,7 +531,6 @@ Use `/simple-content` for edits to existing pages, shorter additions, or when yo
 | `/validate`          | Pre-commit check: frontmatter, h1 headings, navigation entry, image paths, em dashes, lint |
 | `/review-content`    | Deeper style and accuracy review of a finished page                                        |
 | `/check-consistency` | Find other pages that say the same thing; surface duplication and drift                    |
-| `/update-glossary`   | Find glossary gaps in a doc file (Mode A), or audit the glossary itself (Mode B)           |
 | `/redirect-update`   | After moving or renaming a file: add `redirectFrom`, update links and navigation           |
 
 ### Pull requests
